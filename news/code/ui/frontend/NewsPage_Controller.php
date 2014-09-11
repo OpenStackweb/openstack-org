@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * Class NewsPage_Controller
+ */
+final class NewsPage_Controller extends Page_Controller {
+
+	/**
+	 * @var array
+	 */
+	static $allowed_actions = array(
+		'logout',
+	);
+
+    function init() {
+        parent::init();
+
+        Requirements::css('themes/openstack/css/bxslider.css');
+        Requirements::css('themes/openstack/css/case-studies.css');
+        Requirements::css('news/code/ui/frontend/css/news.css');
+        Requirements::javascript('news/code/ui/frontend/js/news.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.bxslider.min.js');
+    }
+
+	public function __construct(){
+		parent::__construct();
+		$this->news_repository = new SapphireNewsRepository();
+	}
+
+	public function logout(){
+		$current_member = Member::currentUser();
+		if($current_member){
+			$current_member->logOut();
+			return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['HTTP_REFERER']));
+		}
+		return Controller::curr()->redirectBack();
+	}
+
+    public function index(){
+
+        $featured_news = $this->news_repository->getFeaturedNews();
+        $recent_news = $this->news_repository->getRecentNews();
+        $slide_news = $this->news_repository->getSlideNews();
+
+        return $this->renderWith(array('NewsPage','Page'), array('FeaturedNews' => new ComponentSet($featured_news),
+                                                                 'RecentNews' => new ComponentSet($recent_news),
+                                                                 'SlideNews' => new ComponentSet($slide_news)));
+    }
+
+    function FutureEvents($num = 4) {
+        return DataObject::get('EventPage', "EventEndDate >= now()", "EventStartDate ASC", "", $num);
+    }
+
+    function RssItems($limit = 10) {
+
+        $feed = new RestfulService('http://pipes.yahoo.com/pipes/pipe.run?_id=7479b77882a68cdf5a7143374b51cf30&_render=rss',7200);
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item ) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+        }
+
+        // Return items up to limit
+        return $result->getRange(0,$limit);
+    }
+
+
+
+} 

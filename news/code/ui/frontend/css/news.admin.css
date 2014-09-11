@@ -1,0 +1,122 @@
+.clear {
+    clear: both;
+}
+
+.placeholder,.placeholder_empty {
+    border: 2px dotted black;
+    text-align: center;
+    color: grey;
+    font-size: 40px;
+}
+
+.newsSlider {
+    width: 100%;
+    height: 330px;
+}
+
+.sliderBox {
+    margin: 0 5px 0 5px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    height: 100%;
+}
+
+.sliderImage {
+}
+
+.sliderText {
+}
+
+.sliderImage img {
+    width: 100%;
+    height: 110px;
+}
+
+#slider_sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; float: left; }
+#slider_sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 180px; height: 260px;}
+#slider_sortable .placeholder_empty {height:267px;}
+#slider_sortable .placeholder {height:267px;}
+
+.newsFeatured {
+    width: 100%;
+    height: 330px;
+}
+
+.featuredBox {
+    margin: 0 5px 0 5px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    height: 100%;
+}
+
+.featuredImage {
+}
+
+.featuredText {
+}
+
+.featuredImage img {
+    width: 100%;
+    height: 110px;
+}
+
+#featured_sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; float: left; }
+#featured_sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 152px; height: 275px;}
+#featured_sortable .placeholder_empty {height:283px;}
+#featured_sortable .placeholder {height:283px;}
+
+
+.newsRecent {
+    width: 100%;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.recentBox {
+    margin: 0 5px 0 5px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    height: 100%;
+}
+
+.recentImage {
+}
+
+.recentText {
+}
+
+.recentImage img {
+    width: 100%;
+    height: 110px;
+}
+
+#recent_sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; float: left; height: 90%}
+#recent_sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 152px; height: 275px;}
+#recent_sortable .placeholder {height:283px;}
+
+
+.newsStandBy {
+    width: 100%;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.standbyBox {
+    margin: 0 5px 0 5px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    height: 100%;
+}
+
+.standbyImage img {
+    width: 100%;
+    height: 110px;
+}
+
+#standby_sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; float: left; height: 90% }
+#standby_sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 152px; height: 275px;}
+#standby_sortable .placeholder {height:283px;}

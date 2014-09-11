@@ -1,0 +1,68 @@
+<% if NewsManagerMember %>
+    <div class="newsSlider">
+        <h3>Banner</h3>
+        <ul id="slider_sortable" class="connected" max-items="5">
+            $getSliderNews
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="newsFeatured">
+        <h3>Featured</h3>
+        <ul id="featured_sortable" class="connected" max-items="6">
+            $getFeaturedNews
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="orderMenu">
+
+    </div>
+    <div class="newsRecent">
+        <h3>Recent News</h3>
+        <ul id="recent_sortable" class="connected">
+            <% control  RecentNews %>
+                <li>
+                    <div class="recentBox">
+                        <input type="hidden" class="article_id" value="$ID" />
+                        <input type="hidden" class="article_rank" value="$Rank" />
+                        <div class="recentImage">
+                            <a href="$Link"><img src="$Image" /></a>
+                        </div>
+                        <div class="recentText">
+                            <p class='largeQuote'>&ldquo;$Headline&rdquo;</p>
+                            <p class='attribution'>&mdash; $Summary</p>
+                        </div>
+                        <div class="newsEdit"><a href=""> Edit </a></div>
+                        <div class="recentRemove"><a href=""> Delete </a></div>
+                    </div>
+                </li>
+            <% end_control %>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="newsStandBy">
+        <h3>Stand By News</h3>
+        <ul id="standby_sortable" class="connected">
+            <% control  StandByNews %>
+                <li>
+                    <div class="standbyBox">
+                        <input type="hidden" class="article_id" value="$ID" />
+                        <input type="hidden" class="article_rank" value="$Rank" />
+                        <div class="standbyImage">
+                            <a href="$Link"><img src="$Image" /></a>
+                        </div>
+                        <div class="standbyText">
+                            <p class='largeQuote'>&ldquo;$Headline&rdquo;</p>
+                            <p class='attribution'>&mdash; $Summary</p>
+                        </div>
+                        <div class="newsEdit"><a href=""> Edit </a></div>
+                        <div class="recentRemove"><a href=""> Delete </a></div>
+                    </div>
+                </li>
+            <% end_control %>
+        </ul>
+    </div>
+    <div class="clear"></div>
+<% else %>
+    <p>In order to edit your community profile, you will first need to <a href="/Security/login/?BackURL=%2Fprofile%2F">login as a member</a>. Don't have an account? <a href="/join/">Join The Foundation</a></p>
+    <p><a class="roundedButton" href="/Security/login/?BackURL=%2Fprofile%2F">Login</a> <a href="/join/" class="roundedButton">Join The Foundation</a></p>
+<% end_if %>
