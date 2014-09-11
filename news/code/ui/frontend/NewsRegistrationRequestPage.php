@@ -46,7 +46,7 @@ final class NewsRegistrationRequestPage_Controller extends Page_Controller {
         Requirements::css('news/code/ui/frontend/css/news.form.css');
         Requirements::javascript("news/code/ui/frontend/js/news.form.js");
         $data = Session::get("FormInfo.Form_NewsRegistrationRequestForm.data");
-        $form = new NewsRegistrationRequestForm($this->owner, 'NewsRegistrationRequestForm',false);
+        $form = new NewsRegistrationRequestForm($this, 'NewsRegistrationRequestForm',false);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);
