@@ -6,22 +6,26 @@
 final class NewsFactory
 	implements INewsFactory {
 
-    /**
-     * @param NewsMainInfo $info
-     * @param string[] $tags
-     * @param $submitter
-     * @return INews
-     */
-	public function buildNews(NewsMainInfo $info, $tags, $submitter) {
+	/**
+	 * @param NewsMainInfo       $info
+	 * @param string[]           $tags
+	 * @param                    $submitter
+	 * @param IFileUploadService $upload_service
+	 * @return INews|News
+	 */
+	public function buildNews(NewsMainInfo $info, $tags, $submitter,  IFileUploadService $upload_service) {
 		$news = new News();
         $news->registerMainInfo($info);
 		$news->registerTags($tags);
         if (get_class($submitter) == 'NewsSubmitter') {
             $news->registerSubmitter($submitter);
         } else {
-            $news->addSubmitter($submitter);
+            $news->setSubmitter($submitter);
         }
-
+		//create image object
+		if($image_info = $info->getImage()){
+			$news->registerImage($upload_service);
+		}
 		return $news;
 	}
 
@@ -32,7 +36,7 @@ final class NewsFactory
 	public function buildNewsMainInfo(array $data)
 	{
         $main_info = new NewsMainInfo(trim($data['headline']),trim($data['summary']), $data['date'],
-                                      trim($data['body']),$data['link'],$data['image'],$data['document'],
+                                      trim($data['body']),$data['link'],$data['Image'],$data['Document'],
                                       $data['date_embargo'],$data['date_expire']);
 		return $main_info;
 	}

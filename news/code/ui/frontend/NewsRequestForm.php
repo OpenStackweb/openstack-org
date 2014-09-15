@@ -21,9 +21,9 @@ final class NewsRequestForm extends SafeXSSForm {
         //optional fields
         $fields->push($body = new TextareaField('body','Body'));
         $fields->push(new TextField('link','Link'));
-        $fields->push(new FileField('document','Document'));
+        $fields->push(new FileField('Document','Document'));
         $fields->push(new LiteralField('break', '<br/>'));
-        $fields->push($image = new FileField('image','Image'));
+        $fields->push($image = new CustomSimpleImageField('Image', 'Image'));
         $fields->push(new LiteralField('break', '<br/>'));
         $fields->push($date_expire = new TextField('date_expire','Date Expire'));
         $date_expire->addExtraClass('date');

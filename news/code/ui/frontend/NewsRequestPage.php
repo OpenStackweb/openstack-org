@@ -24,6 +24,7 @@ final class NewsRequestPage_Controller extends Page_Controller {
             new SapphireSubmitterRepository,
             new NewsFactory,
             new NewsValidationFactory,
+	        new SapphireFileUploadService(),
             SapphireTransactionManager::getInstance()
         );
 	}
@@ -74,12 +75,12 @@ final class NewsRequestPage_Controller extends Page_Controller {
     function saveNewsArticle($data, Form $form){
 
         // Check to make sure image uploaded is not too big
-        if ($data["image"]["size"] > 1000000) {
+        if ($data["Image"]["size"] > 1000000) {
             $form->addErrorMessage("Image", 'The image you have attached is too big. It must be less than 1MB in size.', "bad");
             Session::set("FormInfo.Form_NewsRequestForm.data", $data);
             return Director::redirect('/news-add/?error=1');
         }
-        if ($data["document"]["size"] > 1000000) {
+        if ($data["Document"]["size"] > 1000000) {
             $form->addErrorMessage("Image", 'The image you have attached is too big. It must be less than 1MB in size.', "bad");
             Session::set("FormInfo.Form_NewsRequestForm.data", $data);
             return Director::redirect('/news-add/?error=1');

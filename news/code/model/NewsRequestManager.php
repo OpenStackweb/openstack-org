@@ -27,22 +27,30 @@ final class NewsRequestManager {
     private $submitter_repository;
 
 	/**
+	 * @var IFileUploadService
+	 */
+	private $upload_service;
+
+	/**
 	 * @param IEntityRepository      $news_repository
-     * @param IEntityRepository      $submitter_repository
+	 * @param IEntityRepository      $submitter_repository
 	 * @param INewsFactory           $factory
 	 * @param INewsValidationFactory $validator_factory
+	 * @param IFileUploadService     $upload_service
 	 * @param ITransactionManager    $tx_manager
 	 */
 	public function __construct(IEntityRepository $news_repository,
                                 IEntityRepository $submitter_repository,
 	                            INewsFactory $factory,
 	                            INewsValidationFactory $validator_factory,
+	                            IFileUploadService $upload_service,
 	                            ITransactionManager $tx_manager){
 
 		$this->news_repository         = $news_repository;
         $this->submitter_repository         = $submitter_repository;
 		$this->validator_factory       = $validator_factory;
 		$this->factory                 = $factory;
+		$this->upload_service          = $upload_service;
 		$this->tx_manager              = $tx_manager;
 	}
 	/**
@@ -50,12 +58,13 @@ final class NewsRequestManager {
 	 * @return INews
 	 */
 	public function postNews(array $data){
-		$validator_factory = $this->validator_factory;
-		$factory           = $this->factory;
-		$repository        = $this->news_repository ;
+		$validator_factory    = $this->validator_factory;
+		$factory              = $this->factory;
+		$repository           = $this->news_repository ;
         $submitter_repository = $this->submitter_repository;
+		$upload_service       = $this->upload_service;
 
-		return $this->tx_manager->transaction(function() use($data, $repository, $submitter_repository, $factory, $validator_factory){
+		return $this->tx_manager->transaction(function() use($data, $repository, $submitter_repository, $factory, $validator_factory, $upload_service){
 			$validator = $validator_factory->buildValidatorForNews($data);
 			if ($validator->fails()) {
 					throw new EntityValidationException($validator->messages());
@@ -69,7 +78,8 @@ final class NewsRequestManager {
 			$news = $factory->buildNews(
 				$factory->buildNewsMainInfo($data),
 				$data['tags'],
-                $submitter
+                $submitter,
+				$upload_service
 			);
 
 			$repository->add($news);

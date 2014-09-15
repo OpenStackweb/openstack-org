@@ -10,7 +10,7 @@ interface INews extends IEntity {
      */
     public function getSubmitter();
 
-    public function addSubmitter(ISubmitter $submitter);
+    public function setSubmitter(ISubmitter $submitter);
 
     /**
      * @return ITag[]
@@ -18,4 +18,15 @@ interface INews extends IEntity {
     public function getTags();
 
     public function addTag(ITag $tag);
+
+
+	/**
+	 * @return BetterImage
+	 */
+	public function getImage();
+
+	/**
+	 * @param IFileUploadService $upload_service
+	 */
+	public function registerImage(IFileUploadService $upload_service);
 } 

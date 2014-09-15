@@ -25,11 +25,11 @@ final class NewsMainInfo {
      */
     private $link;
     /**
-     * @var BetterImage
+     * @var array
      */
     private $image;
     /**
-     * @var File
+     * @var array
      */
     private $document;
     /**
@@ -55,12 +55,12 @@ final class NewsMainInfo {
      * @param DateTime $date
      * @param string $body
      * @param string $link
-     * @param string $image
-     * @param string $document
+     * @param array $image
+     * @param array $document
      * @param DateTime $date_embargo
      * @param DateTime $date_expire
      */
-    public function __construct($headline,$summary,$date,$body,$link,$image,$document,$date_embargo,$date_expire){
+    public function __construct($headline,$summary,$date,$body,$link, array $image, array $document,$date_embargo,$date_expire){
         $this->headline     = $headline;
         $this->summary      = $summary;
         $this->date         = $date;

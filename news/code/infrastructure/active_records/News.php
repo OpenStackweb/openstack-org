@@ -89,7 +89,7 @@ final class News extends DataObject implements INews {
         $submitter->Company = $info->getCompany();
         $submitter->Phone = $info->getPhone();
 
-        $this->addSubmitter($submitter);
+        $this->setSubmitter($submitter);
     }
 
     /**
@@ -97,10 +97,10 @@ final class News extends DataObject implements INews {
      */
     public function getSubmitter()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Submitter')->toArray();
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Submitter')->getTarget();
     }
 
-    public function addSubmitter(ISubmitter $submitter)
+    public function setSubmitter(ISubmitter $submitter)
     {
         AssociationFactory::getInstance()->getMany2OneAssociation($this,'Submitter')->setTarget($submitter);
     }
@@ -117,4 +117,22 @@ final class News extends DataObject implements INews {
     {
         AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->add($tag);
     }
+
+	/**
+	 * @return BetterImage
+	 */
+	public function getImage()
+	{
+		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->getTarget();
+	}
+
+	/**
+	 * @param IFileUploadService $upload_service
+	 */
+	public function registerImage(IFileUploadService $upload_service)
+	{
+		$upload_service->setFolderName('news-images');
+		$image = $upload_service->upload('Image', $this);
+		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->setTarget($image);
+	}
 }

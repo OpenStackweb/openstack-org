@@ -2,12 +2,13 @@
 
 interface INewsFactory {
 	/**
-	 * @param NewsMainInfo $info
-	 * @param string[] $tags
-	 * @param $submitter
-	 * @return INews
+	 * @param NewsMainInfo       $info
+	 * @param string[]           $tags
+	 * @param                    $submitter
+	 * @param IFileUploadService $upload_service
+	 * @return INews|News
 	 */
-	public function buildNews(NewsMainInfo $info, $tags, $submitter);
+	public function buildNews(NewsMainInfo $info, $tags, $submitter,  IFileUploadService $upload_service);
 
 	/**
 	 * @param array $data
