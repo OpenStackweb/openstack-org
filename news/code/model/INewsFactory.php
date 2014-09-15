@@ -4,7 +4,7 @@ interface INewsFactory {
 	/**
 	 * @param NewsMainInfo $info
 	 * @param string[] $tags
-	 * @param integer $submitter
+	 * @param $submitter
 	 * @return INews
 	 */
 	public function buildNews(NewsMainInfo $info, $tags, $submitter);
@@ -15,4 +15,10 @@ interface INewsFactory {
 	 */
 	public function buildNewsMainInfo(array $data);
 
+
+    /**
+     * @param array $data
+     * @return NewsSubmitter
+     */
+    public function buildNewsSubmitter(array $data);
 } 

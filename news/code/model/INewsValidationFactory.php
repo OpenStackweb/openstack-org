@@ -7,7 +7,7 @@ interface INewsValidationFactory {
 	 * @param array $data
 	 * @return IValidator
 	 */
-	public function buildValidatorForNewsRegistration(array $data);
+	public function buildValidatorForNews(array $data);
 	/**
 	 * @param array $data
 	 * @return IValidator

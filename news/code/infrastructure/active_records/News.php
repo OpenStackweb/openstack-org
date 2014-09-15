@@ -8,13 +8,11 @@ final class News extends DataObject implements INews {
 	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
 	static $db = array(
-		'DateTime'  => 'Datetime',
+		'Date'  => 'Datetime',
 		'Headline' => 'Text',
         'Summary' => 'Text',
         'Body' => 'Text',
         'Link' => 'Text',
-        'Image' => 'Text',
-        'Document' => 'Text',
         'EmbargoDate' => 'Datetime',
         'ExpireDate' => 'Datetime',
         'Rank' => 'Int',
@@ -25,6 +23,8 @@ final class News extends DataObject implements INews {
 
     static $has_one = array(
         'Submitter' => 'Submitter',
+        'Document' => 'File',
+        'Image' => 'BetterImage',
     );
 
     static $many_many = array(
@@ -52,15 +52,12 @@ final class News extends DataObject implements INews {
         $this->Headline = $info->getHeadline();
         $this->Summary   = $info->getSummary();
         $this->Body = $info->getBody();
-        $this->DateTime = $info->getDatetime();
+        $this->Date = $info->getDate();
         $this->Link   = $info->getLink();
-        $this->Image = $info->getImage();
-        $this->Document = $info->getDocument();
-        $this->EmbargoDate   = $info->getEmbargoDate();
-        $this->Rank = $info->getRank();
-        $this->Slider = $info->getSlider();
-        $this->Featured   = $info->getFeatured();
-        $this->ExpireDate = $info->getExpireDate();
+        $this->Image   = $info->getImage();
+        $this->Document   = $info->getDocument();
+        $this->EmbargoDate   = $info->getDateEmbargo();
+        $this->ExpireDate = $info->getDateExpire();
     }
 
     /**
@@ -69,19 +66,55 @@ final class News extends DataObject implements INews {
      */
     public function registerTags($tags)
     {
+        $tags = explode(',',$tags);
+
         foreach ($tags as $tag_name) {
             $tag = new Tag();
             $tag->Tag = $tag_name;
-            $this->Tags->push($tag);
+            $this->addTag($tag);
         }
     }
 
     /**
-     * @param integer $submitter
+     * @param NewsSubmitter $submitter
      * @return void
      */
-    public function registerSubmitter($submitter)
+    public function registerSubmitter(NewsSubmitter $info)
     {
-        //get submitter by id and add it to the News object
+
+        $submitter = new Submitter();
+        $submitter->FirstName = $info->getFirstName();
+        $submitter->LastName = $info->getLastName();
+        $submitter->Email = $info->getEmail();
+        $submitter->Company = $info->getCompany();
+        $submitter->Phone = $info->getPhone();
+
+        $this->addSubmitter($submitter);
+    }
+
+    /**
+     * @return ISubmitter
+     */
+    public function getSubmitter()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Submitter')->toArray();
+    }
+
+    public function addSubmitter(ISubmitter $submitter)
+    {
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Submitter')->setTarget($submitter);
+    }
+
+    /**
+     * @return ITag[]
+     */
+    public function getTags()
+    {
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->toArray();
+    }
+
+    public function addTag(ITag $tag)
+    {
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->add($tag);
     }
 }

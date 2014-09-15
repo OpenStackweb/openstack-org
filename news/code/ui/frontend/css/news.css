@@ -4,29 +4,33 @@
 
 .newsSlider {
     width: 100%;
+    height: 320px;
 }
 
 .newsBody {
-    width: 80%;
+    width: 70%;
     height: auto;
     float: left;
 }
 
 .newsFeatured {
-    height: 330px;
+    height: 230px;
 }
 
 .newsRecent {
-    
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dedddf;
 }
 
 .newsSidebar {
-    width: 20%;
+    width: 28%;
     float: right;
+    margin-left: 2%;
 }
 
 .featuredBox {
-    width: 200px;
+    width: 25.5%;
     float: left;
     margin: 0 25px 0 25px;
 }
@@ -37,7 +41,7 @@
 }
 
 .recentBox {
-
+    margin: 10px 5px 10px 0;
 }
 
 .sliderImage {
@@ -50,29 +54,52 @@
     width: 60%;
 }
 
-div.featuredUserStory div.wrapper {
-    font-size: 16px;
-    padding: 20px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 5px;
-    text-shadow: 0 1px 0 rgba(255,255,255,.8);
-    background: no-repeat center #E4EFF2;
-    margin-bottom: 10px;
-    border: 1px solid #B6D8E2;
-    height: 10em;
+.featuredEvents {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dedddf;
 }
 
-div.featuredUserStory p, div.otherUsers p {
+.feedItem {
     margin-bottom: 10px;
 }
 
-div.featuredUserStory h2, div.otherUsers h2 {
-    margin-top: 10px;
+.itemTimeStamp {
+    color: #4c99a2;
 }
 
-div.featuredUserStory h2 a, div.otherUsers h2 a {
-    color: black;
-    font-size: 1.2em;
+.postArticle{
+    float:right;
+    margin-bottom: 10px;
+}
+
+.postArticle a {
+    background-color: #E2F4DC;
+    color: #1D6006;
+    display: block;
+    float: right;
+    font-size: 1em;
+    padding: 4px 15px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.manageNews{
+    float:right;
+    margin-bottom: 10px;
+}
+
+.manageNews a {
+    background-color: #e1f9fe;
+    color: #1D6006;
+    display: block;
+    float: right;
+    font-size: 1em;
+    padding: 4px 15px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .user-story-quote a, .user-story-quote a:visited {
@@ -122,61 +149,6 @@ fieldset {
 .listedArea h2 {
     color: black;
 }
-
-/* @group Release Buttons */
-
-.releaseButton {
-    font-family: 'PT Sans', serif;
-    border: 1px solid #e2e2e2;
-    padding: 0px 15px;
-    color: black!important;
-    text-decoration: none!important;
-    font-size: 12.5px;
-    text-transform: ;
-    line-height: 2.5em;
-    background: #FFFFFF; /* old browsers */
-    background: -moz-linear-gradient(top, #FFFFFF 0%, #F3F3F3 50%, #EBEBEB 100%); /* firefox */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(50%,#F3F3F3), color-stop(100%,#EBEBEB)); /* webkit */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#EBEBEB',GradientType=0 ); /* ie */
-    box-shadow: 0px 1px 1px rgba(0,0,0,.5);
-    -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.2);
-    -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.2);
-    text-shadow: #fff 0px 1px 1px;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-bottom-color: #a0a0a0;
-    border-right-color: #bababa;
-    border-left-color: #bababa;
-    display: block;
-    text-align: center;
-}
-
-.releaseButton:first-child {
-    margin-bottom: 10px;
-}
-
-.releaseButton:hover {
-    color: black;
-    -webkit-transition:color 1s ease-out;
-    cursor: pointer;
-}
-
-a.releaseButton:active {
-    background: #ababab;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    border-color: #ababab;
-    border-top-color: #636363;
-    background: -webkit-gradient(linear, left top, left bottom, from(#bebebe), to(#dddddd));
-    background: -moz-linear-gradient(top,  #bebebe,  #eeeeee);
-    -webkit-transition:none;
-    padding: 0px 15px;
-}
-
-/* @end */
-
 
 .automotive a {
     display: block;

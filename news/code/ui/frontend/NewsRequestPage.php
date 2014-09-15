@@ -1,29 +1,29 @@
 <?php
 
 /**
- * Class NewsRegistrationRequestPage_Controller
+ * Class NewsRequestPage_Controller
  */
-final class NewsRegistrationRequestPage_Controller extends Page_Controller {
+final class NewsRequestPage_Controller extends Page_Controller {
 
     //Allow our form as an action
     static $allowed_actions = array(
-        'NewsRegistrationRequestForm',
+        'NewsRequestForm',
         'saveNewsArticle',
     );
 
     /**
-     * @var NewsRegistrationRequestManager
+     * @var NewsRequestManager
      */
     private $manager;
 
 	public function __construct(){
 		parent::__construct();
 		$this->news_repository = new SapphireNewsRepository();
-        $this->manager = new NewsRegistrationRequestManager(
+        $this->manager = new NewsRequestManager(
             new SapphireNewsRepository,
+            new SapphireSubmitterRepository,
             new NewsFactory,
             new NewsValidationFactory,
-            new SapphireNewsPublishingService,
             SapphireTransactionManager::getInstance()
         );
 	}
@@ -38,15 +38,15 @@ final class NewsRegistrationRequestPage_Controller extends Page_Controller {
 	}
 
     public function index(){
-        return $this->renderWith(array('NewsRegistrationRequestPage','Page'));
+        return $this->renderWith(array('NewsRequestPage','Page'));
     }
 
-    public function NewsRegistrationRequestForm() {
+    public function NewsRequestForm() {
         $this->commonScripts();
         Requirements::css('news/code/ui/frontend/css/news.form.css');
         Requirements::javascript("news/code/ui/frontend/js/news.form.js");
-        $data = Session::get("FormInfo.Form_NewsRegistrationRequestForm.data");
-        $form = new NewsRegistrationRequestForm($this, 'NewsRegistrationRequestForm',false);
+        $data = Session::get("FormInfo.Form_NewsRequestForm.data");
+        $form = new NewsRequestForm($this, 'NewsRequestForm',false);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);
@@ -61,7 +61,6 @@ final class NewsRegistrationRequestPage_Controller extends Page_Controller {
     private function commonScripts(){
         Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
         Requirements::css("themes/openstack/javascript/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css");
-        Requirements::css("events/css/sangria.page.view.event.details.css");
         Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
@@ -73,10 +72,23 @@ final class NewsRegistrationRequestPage_Controller extends Page_Controller {
     }
 
     function saveNewsArticle($data, Form $form){
+
+        // Check to make sure image uploaded is not too big
+        if ($data["image"]["size"] > 1000000) {
+            $form->addErrorMessage("Image", 'The image you have attached is too big. It must be less than 1MB in size.', "bad");
+            Session::set("FormInfo.Form_NewsRequestForm.data", $data);
+            return Director::redirect('/news-add/?error=1');
+        }
+        if ($data["document"]["size"] > 1000000) {
+            $form->addErrorMessage("Image", 'The image you have attached is too big. It must be less than 1MB in size.', "bad");
+            Session::set("FormInfo.Form_NewsRequestForm.data", $data);
+            return Director::redirect('/news-add/?error=1');
+        }
+
         try{
-            $this->manager->registerNewsRegistrationRequest($data);
-            Session::clear("FormInfo.Form_NewsRegistrationRequestForm.data");
-            return Director::redirect($this->Link('?saved=1'));
+            $this->manager->postNews($data);
+            Session::clear("FormInfo.Form_NewsRequestForm.data");
+            return Director::redirect('/news-add/?saved=1');
         }
         catch(EntityValidationException $ex1){
             $messages = $ex1->getMessages();
@@ -84,14 +96,14 @@ final class NewsRegistrationRequestPage_Controller extends Page_Controller {
             $form->addErrorMessage('Headline',$msg['message'] ,'bad');
             SS_Log::log($msg['message'] ,SS_Log::ERR);
             // Load errors into session and post back
-            Session::set("FormInfo.Form_NewsRegistrationRequestForm.data", $data);
+            Session::set("FormInfo.Form_NewsRequestForm.data", $data);
             return $this->redirectBack();
         }
         catch(Exception $ex){
             $form->addErrorMessage('Headline','Server Error','bad');
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             // Load errors into session and post back
-            Session::set("FormInfo.Form_NewsRegistrationRequestForm.data", $data);
+            Session::set("FormInfo.Form_NewsRequestForm.data", $data);
             return $this->redirectBack();
         }
     }

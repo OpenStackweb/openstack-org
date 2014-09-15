@@ -15,6 +15,11 @@ final class Submitter extends DataObject implements ISubmitter {
         'Phone' => 'Int',
 	);
 
+    /**
+     * @var string
+     */
+    protected static $unique_identifier_field = 'Email';
+
 	/**
 	 * @return int
 	 */

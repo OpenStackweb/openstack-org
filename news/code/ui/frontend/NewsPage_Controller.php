@@ -67,6 +67,12 @@ final class NewsPage_Controller extends Page_Controller {
         return $result->getRange(0,$limit);
     }
 
+    function NewsManager() {
+        $MemberID = Member::currentUserID();
+        $currentMember = DataObject::get_one("Member", "`ID` = '" . $MemberID . "'");
 
+        // see if the member is in the foundation group
+        if ($currentMember && $currentMember->inGroup('news-manager')) return TRUE;
+    }
 
 } 

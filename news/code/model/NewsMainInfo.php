@@ -15,7 +15,7 @@ final class NewsMainInfo {
     /**
      * @var DateTime
      */
-    private $datetime;
+    private $date;
     /**
      * @var string
      */
@@ -25,21 +25,17 @@ final class NewsMainInfo {
      */
     private $link;
     /**
-     * @var string
+     * @var BetterImage
      */
     private $image;
     /**
-     * @var string
+     * @var File
      */
     private $document;
     /**
      * @var DateTime
      */
-    private $embargo_date;
-    /**
-     * @var Integer
-     */
-    private $rank;
+    private $date_embargo;
     /**
      * @var Integer
      */
@@ -51,43 +47,37 @@ final class NewsMainInfo {
     /**
      * @var DateTime
      */
-    private $expire_date;
+    private $date_expire;
 
     /**
      * @param string $headline
      * @param string $summary
-     * @param Datetime $datetime
+     * @param DateTime $date
      * @param string $body
      * @param string $link
      * @param string $image
      * @param string $document
-     * @param Datetime $embargo_date
-     * @param Integer $rank
-     * @param Integer $slider
-     * @param Integer $featured
-     * @param Datetime $expire_date
+     * @param DateTime $date_embargo
+     * @param DateTime $date_expire
      */
-    public function __construct($headline,$summary,$datetime,$body,$link,$image,$document,$embargo_date,$rank,$slider,$featured,$expire_date){
+    public function __construct($headline,$summary,$date,$body,$link,$image,$document,$date_embargo,$date_expire){
         $this->headline     = $headline;
         $this->summary      = $summary;
-        $this->datetime     = $datetime;
+        $this->date         = $date;
         $this->body         = $body;
         $this->link         = $link;
         $this->image        = $image;
         $this->document     = $document;
-        $this->embargo_date = $embargo_date;
-        $this->rank         = $rank;
-        $this->slider       = $slider;
-        $this->featured     = $featured;
-        $this->expire_date  = $expire_date;
+        $this->date_embargo = $date_embargo;
+        $this->date_expire  = $date_expire;
     }
 
     public function getHeadline(){
         return $this->headline;
     }
 
-    public function getDatetime(){
-        return $this->datetime;
+    public function getDate(){
+        return $this->date;
     }
 
     public function getSummary(){
@@ -110,23 +100,11 @@ final class NewsMainInfo {
         return $this->document;
     }
 
-    public function getEmbargoDate(){
-        return $this->embargo_date;
+    public function getDateEmbargo(){
+        return $this->date_embargo;
     }
 
-    public function getRank(){
-        return $this->rank;
-    }
-
-    public function getSlider(){
-        return $this->slider;
-    }
-
-    public function getFeatured(){
-        return $this->featured;
-    }
-
-    public function getExpireDate(){
-        return $this->expire_date;
+    public function getDateExpire(){
+        return $this->date_expire;
     }
 } 
