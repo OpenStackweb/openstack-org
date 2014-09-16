@@ -39,6 +39,7 @@ final class NewsRequestPage_Controller extends Page_Controller {
 	}
 
     public function index(){
+        Requirements::javascript("news/code/ui/frontend/js/news.request.page.js");
         return $this->renderWith(array('NewsRequestPage','Page'));
     }
 
@@ -47,7 +48,9 @@ final class NewsRequestPage_Controller extends Page_Controller {
         Requirements::css('news/code/ui/frontend/css/news.form.css');
         Requirements::javascript("news/code/ui/frontend/js/news.form.js");
         $data = Session::get("FormInfo.Form_NewsRequestForm.data");
-        $form = new NewsRequestForm($this, 'NewsRequestForm',false);
+        $article_id = '3';//Director::urlParam('article');
+        $article = $this->news_repository->getNewsByID($article_id);
+        $form = new NewsRequestForm($this, 'NewsRequestForm',$article,false);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);

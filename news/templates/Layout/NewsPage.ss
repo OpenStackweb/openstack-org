@@ -14,7 +14,7 @@
                 <div class="sliderImage">
                     <a href="$Link">
                         <% if Image.Exists %>
-                            $Image.SetWidth(100) <p>&nbsp</p>
+                            $Image.CroppedImage(300,200) <p>&nbsp</p>
                         <% else %>
                             <img src="/themes/openstack/images/generic-profile-photo.png"><p>&nbsp;</p>
                         <% end_if %>
@@ -35,12 +35,20 @@
             <li>
                 <% control FeaturedNews %>
                     <div class="featuredBox">
-                        <div class="featuredImage"><a href="$Link"><img src="$Image" /></a></div>
+                        <div class="featuredImage">
+                            <a href="$Link">
+                                <% if Image.Exists %>
+                                    $Image.CroppedImage(300,200) <p>&nbsp</p>
+                                <% else %>
+                                    <img src="/themes/openstack/images/generic-profile-photo.png"><p>&nbsp;</p>
+                                <% end_if %>
+                            </a>
+                        </div>
                         <div class="featuredHeadline"><a href="$Link">$Headline</a></div>
                         <div class="featuredDate">$formatDate</div>
                         <div class="featuredSummary">$Summary</div>
                     </div>
-                    <% if Pos = 3 %>
+                    <% if Pos == 3 %>
                         <div class="clear"></div>
                         </li>
                         <li>

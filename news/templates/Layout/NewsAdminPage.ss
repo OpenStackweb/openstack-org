@@ -25,11 +25,11 @@
                         <input type="hidden" class="article_id" value="$ID" />
                         <input type="hidden" class="article_rank" value="$Rank" />
                         <div class="recentImage">
-                            <a href="$Link"><img src="$Image" /></a>
+                            <a href="$Link">$Image.CroppedImage(200,100)</a>
                         </div>
                         <div class="recentText">
-                            <p class='largeQuote'>&ldquo;$Headline&rdquo;</p>
-                            <p class='attribution'>&mdash; $Summary</p>
+                            <p class="headline">&ldquo;$Headline&rdquo;</p>
+                            <p class="summary">&mdash; $Summary</p>
                         </div>
                         <div class="newsEdit"><a href=""> Edit </a></div>
                         <div class="recentRemove"><a href=""> Delete </a></div>
@@ -48,11 +48,11 @@
                         <input type="hidden" class="article_id" value="$ID" />
                         <input type="hidden" class="article_rank" value="$Rank" />
                         <div class="standbyImage">
-                            <a href="$Link"><img src="$Image" /></a>
+                            <a href="$Link">$Image.CroppedImage(200,100)</a>
                         </div>
                         <div class="standbyText">
-                            <p class='largeQuote'>&ldquo;$Headline&rdquo;</p>
-                            <p class='attribution'>&mdash; $Summary</p>
+                            <p class="headline">&ldquo;$Headline&rdquo;</p>
+                            <p class="summary">&mdash; $Summary</p>
                         </div>
                         <div class="newsEdit"><a href=""> Edit </a></div>
                         <div class="recentRemove"><a href=""> Delete </a></div>

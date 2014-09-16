@@ -3,38 +3,71 @@
 /**
  * Class NewsRequestForm
  */
-final class NewsRequestForm extends SafeXSSForm {
+final class NewsRequestForm extends HoneyPotForm {
 
-	function __construct($controller, $name, $use_actions = true) {
-		$fields = new FieldSet;
+	function __construct($controller, $name, $article = null, $use_actions = true) {
+
 		//madatory fields
-		$fields->push(new TextField('headline','Headline'));
-		$fields->push(new TextareaField('summary','Summary',2,2));
-		$fields->push(new TextField('tags','Tags'));
-		$fields->push($date = new DateField('date','Date'));
-        $date->addExtraClass('date inline');
-        $fields->push($date_embargo = new DateField('date_embargo','Embargo Date'));
-        $date_embargo->addExtraClass('date inline');
-        $fields->push($updated = new DatetimeField_Readonly('date_updated','Last Updated'));
-        $updated->addExtraClass('inline');
-        $fields->push(new LiteralField('clear', '<div class="clear"></div>'));
+		$HeadlineField = new TextField('headline','Headline');
+		$SummaryField = new TextareaField('summary','Summary',2,2);
+		$TagsField = new TextField('tags','Tags');
+		$DateField = new DateField('date','Date');
+        $DateField->addExtraClass('date inline');
+        $DateEmbargoField = new DateField('date_embargo','Embargo Date');
+        $DateEmbargoField->addExtraClass('date inline');
+        $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
+        $UpdatedField->addExtraClass('inline');
         //optional fields
-        $fields->push($body = new TextareaField('body','Body'));
-        $fields->push(new TextField('link','Link'));
-        $fields->push(new FileField('Document','Document'));
-        $fields->push(new LiteralField('break', '<br/>'));
-        $fields->push($image = new CustomSimpleImageField('Image', 'Image'));
-        $fields->push(new LiteralField('break', '<br/>'));
-        $fields->push($date_expire = new TextField('date_expire','Date Expire'));
-        $date_expire->addExtraClass('date');
+        $BodyField = new TextareaField('body','Body');
+        $LinkField = new TextField('link','Link');
+        $DocumentField = new FileField('Document','Document');
+        $ImageField = new CustomSimpleImageField('Image', 'Image');
+        $DateExpireField = new TextField('date_expire','Date Expire');
+        $DateExpireField->addExtraClass('date');
         // submitter fields
-        $fields->push(new LiteralField('break', '<br/><hr/>'));
-        $fields->push(new LiteralField('title', '<h2>Submitter</h2>'));
-        $fields->push(new TextField('submitter_first_name','First Name'));
-        $fields->push(new TextField('submitter_last_name','Last Name'));
-        $fields->push(new TextField('submitter_email','Email'));
-        $fields->push(new TextField('submitter_company','Company'));
-        $fields->push(new TextField('submitter_phone','Phone'));
+        $SubmitterFirstNameField = new TextField('submitter_first_name','First Name');
+        $SubmitterLastNameField = new TextField('submitter_last_name','Last Name');
+        $SubmitterEmailField = new TextField('submitter_email','Email');
+        $SubmitterCompanyField = new TextField('submitter_company','Company');
+        $SubmitterPhoneField = new TextField('submitter_phone','Phone');
+
+        /*if($article) {
+            $FirstNameField->setValue($article->FirstName);
+            $LastNameField->setValue($article->Surname);
+            $BioField->setValue($speaker->Bio);
+            $SpeakerIDField->setValue($speaker->ID);
+            $MemberIDField->setValue($speaker->MemberID);
+            $TitleField->setValue($speaker->Title);
+            $IRCHandleField->setValue($speaker->IRCHandle);
+            $TwiiterNameField->setValue($speaker->TwitterName);
+            $OptInField->setValue($speaker->AviableForBureau);
+            $FundedTravelField->setValue($speaker->FundedTravel);
+            $ExpertiseField->setValue($speaker->Expertise);
+        }*/
+
+        $fields = new FieldSet (
+            $HeadlineField,
+            $SummaryField,
+            $TagsField,
+            $DateField,
+            $DateEmbargoField,
+            $UpdatedField,
+            new LiteralField('clear', '<div class="clear"></div>'),
+            $BodyField,
+            $LinkField,
+            $DocumentField,
+            new LiteralField('break', '<br/>'),
+            $ImageField,
+            new LiteralField('break', '<br/>'),
+            $DateExpireField,
+            new LiteralField('break', '<br/><hr/>'),
+            new LiteralField('title', '<h2>Submitter</h2>'),
+            $SubmitterFirstNameField,
+            $SubmitterLastNameField,
+            $SubmitterEmailField,
+            $SubmitterCompanyField,
+            $SubmitterPhoneField
+        );
 
 		// Create action
 		$actions = new FieldSet();

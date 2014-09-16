@@ -23,9 +23,16 @@ final class NewsFactory
             $news->setSubmitter($submitter);
         }
 		//create image object
-		if($image_info = $info->getImage()){
+        $image_info = $info->getImage();
+		if($image_info['size']){
 			$news->registerImage($upload_service);
 		}
+
+        //create image object
+        $document_info = $info->getDocument();
+        if($document_info['size']){
+            $news->registerDocument($upload_service);
+        }
 		return $news;
 	}
 

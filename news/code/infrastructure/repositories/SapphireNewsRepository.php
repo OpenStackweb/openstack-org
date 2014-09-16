@@ -65,6 +65,17 @@ final class SapphireNewsRepository extends SapphireRepository {
         return $list;
     }
 
+    /**
+     * @return INews[]
+     */
+    public function getNewsByID($articleID)
+    {
+        $query = new QueryObject(new News);
+        $query->addAddCondition(QueryCriteria::equal('ID',$articleID));
+        return $this->getBy($query);
+    }
+
+
     public function setArticle($article_id,$new_rank,$type) {
 
         $slider = $featured = $approved = 0;

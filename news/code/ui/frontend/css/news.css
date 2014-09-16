@@ -14,7 +14,7 @@
 }
 
 .newsFeatured {
-    height: 230px;
+    height: 330px;
 }
 
 .newsRecent {
@@ -38,6 +38,11 @@
 .featuredImage img {
     width: 120px;
     height: 110px;
+}
+
+.featuredSummary {
+    height: 100px;
+    overflow: hidden;
 }
 
 .recentBox {

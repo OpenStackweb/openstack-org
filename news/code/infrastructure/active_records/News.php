@@ -54,8 +54,6 @@ final class News extends DataObject implements INews {
         $this->Body = $info->getBody();
         $this->Date = $info->getDate();
         $this->Link   = $info->getLink();
-        $this->Image   = $info->getImage();
-        $this->Document   = $info->getDocument();
         $this->EmbargoDate   = $info->getDateEmbargo();
         $this->ExpireDate = $info->getDateExpire();
     }
@@ -135,4 +133,22 @@ final class News extends DataObject implements INews {
 		$image = $upload_service->upload('Image', $this);
 		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->setTarget($image);
 	}
+
+    /**
+     * @return File
+     */
+    public function getDocument()
+    {
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Document')->getTarget();
+    }
+
+    /**
+     * @param IFileUploadService $upload_service
+     */
+    public function registerDocument(IFileUploadService $upload_service)
+    {
+        $upload_service->setFolderName('news-documents');
+        $document = $upload_service->upload('Document', $this);
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Document')->setTarget($document);
+    }
 }
