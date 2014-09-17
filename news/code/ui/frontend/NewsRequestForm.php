@@ -6,14 +6,14 @@
 final class NewsRequestForm extends HoneyPotForm {
 
 	function __construct($controller, $name, $article = null, $use_actions = true) {
-
+        $IDField = new HiddenField('newsID');
 		//madatory fields
 		$HeadlineField = new TextField('headline','Headline');
 		$SummaryField = new TextareaField('summary','Summary',2,2);
 		$TagsField = new TextField('tags','Tags');
-		$DateField = new DateField('date','Date');
+		$DateField = new TextField('date','Date');
         $DateField->addExtraClass('date inline');
-        $DateEmbargoField = new DateField('date_embargo','Embargo Date');
+        $DateEmbargoField = new TextField('date_embargo','Embargo Date');
         $DateEmbargoField->addExtraClass('date inline');
         $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
         $UpdatedField->addExtraClass('inline');
@@ -24,28 +24,41 @@ final class NewsRequestForm extends HoneyPotForm {
         $ImageField = new CustomSimpleImageField('Image', 'Image');
         $DateExpireField = new TextField('date_expire','Date Expire');
         $DateExpireField->addExtraClass('date');
-        // submitter fields
-        $SubmitterFirstNameField = new TextField('submitter_first_name','First Name');
-        $SubmitterLastNameField = new TextField('submitter_last_name','Last Name');
-        $SubmitterEmailField = new TextField('submitter_email','Email');
-        $SubmitterCompanyField = new TextField('submitter_company','Company');
-        $SubmitterPhoneField = new TextField('submitter_phone','Phone');
 
-        /*if($article) {
-            $FirstNameField->setValue($article->FirstName);
-            $LastNameField->setValue($article->Surname);
-            $BioField->setValue($speaker->Bio);
-            $SpeakerIDField->setValue($speaker->ID);
-            $MemberIDField->setValue($speaker->MemberID);
-            $TitleField->setValue($speaker->Title);
-            $IRCHandleField->setValue($speaker->IRCHandle);
-            $TwiiterNameField->setValue($speaker->TwitterName);
-            $OptInField->setValue($speaker->AviableForBureau);
-            $FundedTravelField->setValue($speaker->FundedTravel);
-            $ExpertiseField->setValue($speaker->Expertise);
-        }*/
+        if($article) {
+            $IDField->setValue($article->ID);
+            $HeadlineField->setValue($article->Headline);
+            $SummaryField->setValue($article->Summary);
+            $TagsField->setValue($article->getTagsCSV());
+            $DateField->setValue($article->Date);
+            $DateEmbargoField->setValue($article->DateEmbargo);
+            $UpdatedField->setValue($article->LastEdited);
+            $BodyField->setValue($article->Body);
+            $LinkField->setValue($article->Link);
+            $DateExpireField->setValue($article->DateExpire);
+            //submitter read only
+            $SubmitterFirstNameField = new ReadonlyField('submitter_first_name','First Name');
+            $SubmitterLastNameField = new ReadonlyField('submitter_last_name','Last Name');
+            $SubmitterEmailField = new ReadonlyField('submitter_email','Email');
+            $SubmitterCompanyField = new ReadonlyField('submitter_company','Company');
+            $SubmitterPhoneField = new ReadonlyField('submitter_phone','Phone');
+
+            $SubmitterFirstNameField->setValue($article->getSubmitter()->FirstName);
+            $SubmitterLastNameField->setValue($article->getSubmitter()->LastName);
+            $SubmitterEmailField->setValue($article->getSubmitter()->Email);
+            $SubmitterCompanyField->setValue($article->getSubmitter()->Company);
+            $SubmitterPhoneField->setValue($article->getSubmitter()->Phone);
+        } else {
+            // submitter fields
+            $SubmitterFirstNameField = new TextField('submitter_first_name','First Name');
+            $SubmitterLastNameField = new TextField('submitter_last_name','Last Name');
+            $SubmitterEmailField = new TextField('submitter_email','Email');
+            $SubmitterCompanyField = new TextField('submitter_company','Company');
+            $SubmitterPhoneField = new TextField('submitter_phone','Phone');
+        }
 
         $fields = new FieldSet (
+            $IDField,
             $HeadlineField,
             $SummaryField,
             $TagsField,
@@ -55,19 +68,36 @@ final class NewsRequestForm extends HoneyPotForm {
             new LiteralField('clear', '<div class="clear"></div>'),
             $BodyField,
             $LinkField,
-            $DocumentField,
-            new LiteralField('break', '<br/>'),
-            $ImageField,
-            new LiteralField('break', '<br/>'),
-            $DateExpireField,
-            new LiteralField('break', '<br/><hr/>'),
-            new LiteralField('title', '<h2>Submitter</h2>'),
-            $SubmitterFirstNameField,
-            $SubmitterLastNameField,
-            $SubmitterEmailField,
-            $SubmitterCompanyField,
-            $SubmitterPhoneField
+            $DocumentField
         );
+
+        if ($article) {
+            $image = $article->Image();
+            $document = $article->Document();
+            if ($document->exists()) {
+                $fields->push(new LiteralField('image_preview', $document->CMSThumbnail()));
+            }
+            $fields->push(new LiteralField('break', '<br/>'));
+            $fields->push($ImageField);
+            if ($image->exists()) {
+                $fields->push(new LiteralField('break', '<br/>'));
+                $fields->push(new LiteralField('image_preview', $image->getFormattedImage('croppedimage',150,100)));
+            }
+        } else {
+            $fields->push(new LiteralField('break', '<br/>'));
+            $fields->push($ImageField);
+        }
+
+        $fields->push(new LiteralField('break', '<br/>'));
+        $fields->push($DateExpireField);
+        $fields->push(new LiteralField('break', '<br/><hr/>'));
+        $fields->push(new LiteralField('title', '<h2>Submitter</h2>'));
+        $fields->push($SubmitterFirstNameField);
+        $fields->push($SubmitterLastNameField);
+        $fields->push($SubmitterEmailField);
+        $fields->push($SubmitterCompanyField);
+        $fields->push($SubmitterPhoneField);
+
 
 		// Create action
 		$actions = new FieldSet();

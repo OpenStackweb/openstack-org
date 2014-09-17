@@ -10,7 +10,9 @@ final class NewsAdminPage_Controller extends Page_Controller {
 	 */
 	static $allowed_actions = array(
 		'logout',
-        'setArticleRank'
+        'setArticleRank',
+        'deleteArticle',
+        'removeArticle'
 	);
 
 
@@ -120,8 +122,23 @@ final class NewsAdminPage_Controller extends Page_Controller {
             //item removed, reorder
             $this->news_repository->sortArticle($article_id,$new_rank,$old_rank,false,true,$type);
         }
+    }
 
+    public function deleteArticle() {
+        $article_id = intval($this->request->postVar('id'));
 
+        $this->news_repository->deleteArticle($article_id);
+    }
+
+    public function removeArticle() {
+        $article_id = intval($this->request->postVar('id'));
+        $type = $this->request->postVar('type');
+        $old_rank = intval($this->request->postVar('old_rank'));
+
+        /*$this->news_repository->setArticle($article_id,0,'standby');
+        $this->news_repository->sortArticle($article_id,$new_rank,$old_rank,true,false,$target);
+
+        $this->news_repository->deleteArticle($article_id);*/
     }
 
 } 

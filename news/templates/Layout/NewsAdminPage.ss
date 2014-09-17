@@ -24,6 +24,7 @@
                     <div class="recentBox">
                         <input type="hidden" class="article_id" value="$ID" />
                         <input type="hidden" class="article_rank" value="$Rank" />
+                        <input type="hidden" class="article_type" value="recent" />
                         <div class="recentImage">
                             <a href="$Link">$Image.CroppedImage(200,100)</a>
                         </div>
@@ -31,8 +32,8 @@
                             <p class="headline">&ldquo;$Headline&rdquo;</p>
                             <p class="summary">&mdash; $Summary</p>
                         </div>
-                        <div class="newsEdit"><a href=""> Edit </a></div>
-                        <div class="recentRemove"><a href=""> Delete </a></div>
+                        <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
+                        <div class="newsRemove">Remove</div>
                     </div>
                 </li>
             <% end_control %>
@@ -47,6 +48,7 @@
                     <div class="standbyBox">
                         <input type="hidden" class="article_id" value="$ID" />
                         <input type="hidden" class="article_rank" value="$Rank" />
+                        <input type="hidden" class="article_type" value="standby" />
                         <div class="standbyImage">
                             <a href="$Link">$Image.CroppedImage(200,100)</a>
                         </div>
@@ -54,8 +56,8 @@
                             <p class="headline">&ldquo;$Headline&rdquo;</p>
                             <p class="summary">&mdash; $Summary</p>
                         </div>
-                        <div class="newsEdit"><a href=""> Edit </a></div>
-                        <div class="recentRemove"><a href=""> Delete </a></div>
+                        <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
+                        <div class="newsDelete">Delete</div>
                     </div>
                 </li>
             <% end_control %>

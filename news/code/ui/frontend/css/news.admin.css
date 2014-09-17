@@ -118,3 +118,9 @@
     height: 67px;
     overflow: hidden;
 }
+
+.newsDelete, .newsRemove {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}

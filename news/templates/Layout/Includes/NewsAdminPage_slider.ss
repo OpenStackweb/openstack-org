@@ -10,7 +10,7 @@
             <p class="headline">&ldquo;$Headline&rdquo;</p>
             <p class="summary">&mdash; $Summary</p>
         </div>
-        <div class="newsEdit"><a href=""> Edit </a></div>
-        <div class="sliderRemove"><a href=""> Remove </a></div>
+        <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
+        <div class="newsRemove">Remove</div>
     </div>
 </li>

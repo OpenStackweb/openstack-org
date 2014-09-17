@@ -35,14 +35,20 @@ jQuery(document).ready(function($){
         // initialize widgets
 
 
-        var date_picker_start = $('#NewsRequestForm_NewsRequestForm_date',form);
-        date_picker_start.datepicker({
+        var date_picker_date = $('#NewsRequestForm_NewsRequestForm_date',form);
+        date_picker_date.datepicker({
             dateFormat: 'yy-mm-dd',
             minDate: 0
         });
 
-        var date_picker_end = $('#NewsRequestForm_NewsRequestForm_date_embargo',form);
-        date_picker_end.datepicker({
+        var date_picker_emabargo = $('#NewsRequestForm_NewsRequestForm_date_embargo',form);
+        date_picker_emabargo.datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0
+        });
+
+        var date_picker_expire = $('#NewsRequestForm_NewsRequestForm_date_expire',form);
+        date_picker_expire.datepicker({
             dateFormat: 'yy-mm-dd',
             minDate: 0
         });

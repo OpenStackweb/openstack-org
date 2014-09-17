@@ -48,8 +48,13 @@ final class NewsRequestPage_Controller extends Page_Controller {
         Requirements::css('news/code/ui/frontend/css/news.form.css');
         Requirements::javascript("news/code/ui/frontend/js/news.form.js");
         $data = Session::get("FormInfo.Form_NewsRequestForm.data");
-        $article_id = '3';//Director::urlParam('article');
-        $article = $this->news_repository->getNewsByID($article_id);
+        $article = null;
+
+        if (isset($this->requestParams['articleID'])) {
+            $article_id = $this->requestParams['articleID'];
+            $article = $this->news_repository->getNewsByID($article_id);
+        }
+
         $form = new NewsRequestForm($this, 'NewsRequestForm',$article,false);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
@@ -90,7 +95,12 @@ final class NewsRequestPage_Controller extends Page_Controller {
         }
 
         try{
-            $this->manager->postNews($data);
+            if ($data['newsID']) {
+                $this->manager->updateNews($data);
+            } else {
+                $this->manager->postNews($data);
+            }
+
             Session::clear("FormInfo.Form_NewsRequestForm.data");
             return Director::redirect('/news-add/?saved=1');
         }

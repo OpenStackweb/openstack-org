@@ -22,4 +22,6 @@ interface INewsFactory {
      * @return NewsSubmitter
      */
     public function buildNewsSubmitter(array $data);
+
+    public function setNewsID(INews $news, array $data);
 } 

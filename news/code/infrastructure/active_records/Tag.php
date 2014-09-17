@@ -11,6 +11,10 @@ final class Tag extends DataObject implements ITag {
 		'Tag'  => 'Varchar',
 	);
 
+    static $belongs_many_many = array(
+        'News' => 'News'
+    );
+
 	/**
 	 * @return int
 	 */

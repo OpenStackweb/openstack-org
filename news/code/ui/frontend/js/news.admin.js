@@ -38,6 +38,10 @@ jQuery(document).ready(function($){
         }
     }).disableSelection();
 
+    $('.newsDelete').click(function(){
+        deleteArticle($(this).parents('li'));
+    });
+
 });
 
 function saveSortArticle(item,is_new) {
@@ -64,6 +68,40 @@ function saveSortArticle(item,is_new) {
                     $(this).val(index+1);
                 });
             }
+        }
+    });
+}
+
+function deleteArticle(article) {
+    var article_id = $('.article_id',article).val();
+
+    $.ajax({
+        type: "POST",
+        url: 'NewsAdminPage_Controller/deleteArticle',
+        data: { id : article_id},
+        success: function(){
+            $(article).remove();
+        }
+    });
+}
+
+function removeArticle(article) {
+    var article_id = $('.article_id',article).val();
+    var article_type = $('.article_type',article).val();
+
+    $.ajax({
+        type: "POST",
+        url: 'NewsAdminPage_Controller/removeArticle',
+        data: { id : article_id, type : article_type},
+        success: function(){
+
+            $('#standby_sortable').prepend(article);
+            $(article).remove();
+
+            $('.article_type',article).val('standby');
+            $('.article_rank','#'+target+'_sortable').each(function(index){
+                $(this).val(index+1);
+            });
         }
     });
 }

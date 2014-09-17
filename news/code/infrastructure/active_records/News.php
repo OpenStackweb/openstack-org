@@ -13,8 +13,8 @@ final class News extends DataObject implements INews {
         'Summary' => 'Text',
         'Body' => 'Text',
         'Link' => 'Text',
-        'EmbargoDate' => 'Datetime',
-        'ExpireDate' => 'Datetime',
+        'DateEmbargo' => 'Datetime',
+        'DateExpire' => 'Datetime',
         'Rank' => 'Int',
         'Featured' => 'Boolean',
         'Slider' => 'Boolean',
@@ -54,8 +54,8 @@ final class News extends DataObject implements INews {
         $this->Body = $info->getBody();
         $this->Date = $info->getDate();
         $this->Link   = $info->getLink();
-        $this->EmbargoDate   = $info->getDateEmbargo();
-        $this->ExpireDate = $info->getDateExpire();
+        $this->DateEmbargo   = $info->getDateEmbargo();
+        $this->DateExpire = $info->getDateExpire();
     }
 
     /**
@@ -69,6 +69,7 @@ final class News extends DataObject implements INews {
         foreach ($tags as $tag_name) {
             $tag = new Tag();
             $tag->Tag = $tag_name;
+            $tag->write();
             $this->addTag($tag);
         }
     }
@@ -111,18 +112,30 @@ final class News extends DataObject implements INews {
         return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->toArray();
     }
 
+    /**
+     * @return string
+     */
+    public function getTagsCSV()
+    {
+        $tags =  $this->getTags();
+        $tags_csv = '';
+        foreach ($tags as $tag) {
+            $tags_csv .= $tag->Tag.',';
+        }
+
+        return trim($tags_csv, ",");
+    }
+
+
     public function addTag(ITag $tag)
     {
         AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->add($tag);
     }
 
-	/**
-	 * @return BetterImage
-	 */
-	public function getImage()
-	{
-		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->getTarget();
-	}
+    public function clearTags()
+    {
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->removeAll();
+    }
 
 	/**
 	 * @param IFileUploadService $upload_service
@@ -133,14 +146,6 @@ final class News extends DataObject implements INews {
 		$image = $upload_service->upload('Image', $this);
 		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->setTarget($image);
 	}
-
-    /**
-     * @return File
-     */
-    public function getDocument()
-    {
-        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Document')->getTarget();
-    }
 
     /**
      * @param IFileUploadService $upload_service

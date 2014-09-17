@@ -91,27 +91,37 @@ final class NewsRequestManager {
 	 * @return INews
 	 */
 	public function updateNews(array $data){
-		$validator_factory = $this->validator_factory;
-        $factory           = $this->factory;
-        $repository        = $this->news_repository ;
+        $validator_factory    = $this->validator_factory;
+        $factory              = $this->factory;
+        $repository           = $this->news_repository ;
+        $upload_service       = $this->upload_service;
 
-		return $this->tx_manager->transaction(function() use($data, $repository, $validator_factory, $factory){
+		return $this->tx_manager->transaction(function() use($data, $repository, $validator_factory, $factory, $upload_service){
 			$validator = $validator_factory->buildValidatorForNews($data);
 			if ($validator->fails()) {
 				throw new EntityValidationException($validator->messages());
 			}
 
-			$news = $repository->getById(intval($data['id']));
+			$news = $repository->getById(intval($data['newsID']));
 			if(!$news)
 				throw new NotFoundEntityException('News',sprintf('id %s',$data['id'] ));
 
-            $news->registerMainInfo($factory->buildNewsMainInfo($data));
-            $tags = $factory->buildTags($data);
-            $news->clearTags();
-			foreach($tags as $tag)
-                $news->registerTag($tag);
 
-            $news->registerSubmitter($factory->buildSubmitter($data));
+            $news_main_info = $factory->buildNewsMainInfo($data);
+            $news->registerMainInfo($news_main_info);
+            //create image object
+            $image_info = $news_main_info->getImage();
+            if($image_info['size']){
+                $news->registerImage($upload_service);
+            }
+            //create image object
+            $document_info = $news_main_info->getDocument();
+            if($document_info['size']){
+                $news->registerDocument($upload_service);
+            }
+
+            $news->clearTags();
+            $news->registerTags($data['tags']);
 
 			return $news;
 		});

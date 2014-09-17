@@ -27,12 +27,12 @@ final class NewsFactory
 		if($image_info['size']){
 			$news->registerImage($upload_service);
 		}
-
         //create image object
         $document_info = $info->getDocument();
         if($document_info['size']){
             $news->registerDocument($upload_service);
         }
+
 		return $news;
 	}
 
@@ -58,6 +58,10 @@ final class NewsFactory
                                        trim($data['submitter_company']),$data['submitter_phone']);
 
         return $submitter;
+    }
+
+    public function setNewsID(INews $news, array $data) {
+        $news->ID = $data['newsID'];
     }
 
 }
