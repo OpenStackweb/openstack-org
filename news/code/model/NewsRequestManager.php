@@ -127,4 +127,97 @@ final class NewsRequestManager {
 		});
 	}
 
+    /**
+     * @param integer $article_id
+     * @param integer $new_rank
+     * @param string $target
+     * @return INews
+     */
+    public function moveNewsArticle($article_id,$new_rank,$target){
+        $repository           = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository,$article_id,$new_rank,$target){
+
+            $news = $repository->getById(intval($article_id));
+            if(!$news)
+                throw new NotFoundEntityException('News',sprintf('id %s',$article_id ));
+
+            $news->registerSection($target);
+            $news->registerRank($new_rank);
+
+        });
+    }
+
+    /**
+     * @param integer $article_id
+     * @param integer $new_rank
+     * @param string $target
+     * @return INews
+     */
+    public function sortNewsArticles($article_id,$new_rank,$old_rank,$is_new,$is_remove,$type){
+        $repository           = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository,$article_id,$new_rank,$old_rank,$is_new,$is_remove,$type){
+
+            $result_array = $repository->getArticlesToSort($article_id,$new_rank,$old_rank,$is_new,$is_remove,$type);
+            $rank_delta = $result_array[1];
+            $unsorted_news = $result_array[0];
+
+            foreach ($unsorted_news as $article) {
+                $article->Rank = $article->Rank + $rank_delta;
+            }
+
+        });
+    }
+
+    /**
+     * to be called inside a transaction, reorders all articles
+     */
+    private function reorderArticles($section,$repository) {
+        $news = $repository->getArticlesBySection($section);
+
+        foreach ($news as $key => $article) {
+            $article->Rank = $key + 1;
+        }
+    }
+
+    /**
+     * Remove all articles that have expired from published sections .
+     */
+    public function removeExpired(){
+        $repository           = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository){
+            $expired_news = $repository->getExpiredNews();
+
+            foreach ($expired_news as $article) {
+                $article->registerSection('standby');
+            }
+
+            $this->reorderArticles('recent',$repository);
+            $this->reorderArticles('slider',$repository);
+            $this->reorderArticles('featured',$repository);
+
+        });
+    }
+
+    /**
+     * Moves articles from standby to recent when the embargo date is reached .
+     */
+    public function activateNews(){
+        $repository           = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository){
+            $expired_news = $repository->getNewsToActivate();
+
+            foreach ($expired_news as $article) {
+                $article->registerSection('recent');
+                $article->registerRank(1);
+            }
+
+            $this->reorderArticles('recent',$repository);
+        });
+    }
+
+
 } 

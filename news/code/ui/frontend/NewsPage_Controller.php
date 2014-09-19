@@ -10,6 +10,7 @@ final class NewsPage_Controller extends Page_Controller {
 	 */
 	static $allowed_actions = array(
 		'logout',
+        'ViewArticle'
 	);
 
     function init() {
@@ -71,8 +72,16 @@ final class NewsPage_Controller extends Page_Controller {
         $MemberID = Member::currentUserID();
         $currentMember = DataObject::get_one("Member", "`ID` = '" . $MemberID . "'");
 
-        // see if the member is in the foundation group
-        if ($currentMember && $currentMember->inGroup('news-manager')) return TRUE;
+        // see if the member is in the newsmanager group
+        if ($currentMember && $currentMember->inGroup('news-managers')) return TRUE;
+    }
+
+    function ViewArticle() {
+        if (isset($this->requestParams['articleID'])) {
+            $article_id = $this->requestParams['articleID'];
+            $article = $this->news_repository->getNewsByID($article_id);
+        }
+        return $this->renderWith(array('NewsArticlePage','Page'), $article );
     }
 
 } 

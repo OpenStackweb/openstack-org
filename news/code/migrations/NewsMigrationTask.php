@@ -7,7 +7,7 @@ final class NewsMigrationTask extends MigrationTask {
 
 	protected $title = "News Migration";
 
-	protected $description = "Adds current news to news temporal table";
+	protected $description = "Adds current news to news table";
 
 	function up(){
 		echo "Starting Migration Proc ...<BR>";
@@ -16,8 +16,8 @@ final class NewsMigrationTask extends MigrationTask {
 		if (!$migration) {
 
 			$g =  new Group;
-			$g->setTitle('News Manager Members');
-			$g->setDescription('News Manager Members');
+			$g->setTitle('News Manager');
+			$g->setDescription('News Manager');
 			$g->setSlug(INewsManager::NewsManagerGroupSlug);
 			$g->write();
 			$migration = new Migration();

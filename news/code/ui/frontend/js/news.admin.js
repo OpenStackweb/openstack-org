@@ -39,7 +39,13 @@ jQuery(document).ready(function($){
     }).disableSelection();
 
     $('.newsDelete').click(function(){
-        deleteArticle($(this).parents('li'));
+        if (confirm("Do you wish to delete this article?")) {
+            deleteArticle($(this).parents('li'));
+        }
+    });
+
+    $('.newsRemove').click(function(){
+        removeArticle($(this).parents('li'));
     });
 
 });
@@ -88,18 +94,19 @@ function deleteArticle(article) {
 function removeArticle(article) {
     var article_id = $('.article_id',article).val();
     var article_type = $('.article_type',article).val();
+    var old_rank = $('.article_rank',article).val();
+
+    $('#standby_sortable').prepend(article);
+    $(article).remove();
 
     $.ajax({
         type: "POST",
         url: 'NewsAdminPage_Controller/removeArticle',
-        data: { id : article_id, type : article_type},
+        data: { id : article_id, type : article_type, old_rank : old_rank},
         success: function(){
 
-            $('#standby_sortable').prepend(article);
-            $(article).remove();
-
             $('.article_type',article).val('standby');
-            $('.article_rank','#'+target+'_sortable').each(function(index){
+            $('.article_rank','#'+article_type+'_sortable').each(function(index){
                 $(this).val(index+1);
             });
         }

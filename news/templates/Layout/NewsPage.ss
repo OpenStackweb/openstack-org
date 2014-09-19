@@ -3,7 +3,7 @@
 </div>
 <% if NewsManager %>
     <div class="manageNews">
-        <a href="/news-manage">Manage News Article</a>
+        <a href="/news-manage">Manage News</a>
     </div>
 <% end_if %>
 <div class="clear"></div>
@@ -11,20 +11,20 @@
     <ul class='slider'>
         <% control SlideNews %>
             <li data-label='$Pos' class="automotive">
-                <div class="sliderImage">
-                    <a href="$Link">
+                <a href="news/ViewArticle?articleID=$ID">
+                    <div class="sliderImage">
                         <% if Image.Exists %>
                             $Image.CroppedImage(300,200) <p>&nbsp</p>
                         <% else %>
                             <img src="/themes/openstack/images/generic-profile-photo.png"><p>&nbsp;</p>
                         <% end_if %>
-                    </a>
-                </div>
-                <div class="sliderText">
-                    <p class='largeQuote'>&ldquo;$Headline&rdquo;</p>
-                    <p class='attribution'>&mdash; $Summary</p>
-                </div>
-                <div class="clear"></div>
+                    </div>
+                    <div class="sliderText">
+                        <p class='largeQuote'>&ldquo;$Headline&rdquo;</p>
+                        <p class='attribution'>&mdash; $Summary</p>
+                    </div>
+                    <div class="clear"></div>
+                </a>
             </li>
         <% end_control %>
     </ul>
@@ -36,7 +36,7 @@
                 <% control FeaturedNews %>
                     <div class="featuredBox">
                         <div class="featuredImage">
-                            <a href="$Link">
+                            <a href="news/ViewArticle?articleID=$ID">
                                 <% if Image.Exists %>
                                     $Image.CroppedImage(300,200) <p>&nbsp</p>
                                 <% else %>
@@ -44,7 +44,7 @@
                                 <% end_if %>
                             </a>
                         </div>
-                        <div class="featuredHeadline"><a href="$Link">$Headline</a></div>
+                        <div class="featuredHeadline"><a href="news/ViewArticle?articleID=$ID">$Headline</a></div>
                         <div class="featuredDate">$formatDate</div>
                         <div class="featuredSummary">$Summary</div>
                     </div>
@@ -61,7 +61,7 @@
         <h2>Recent News</h2>
         <% control  RecentNews %>
             <div class="recentBox">
-                <div class="recentHeadline"><a href="$Link">$Headline</a> | <span class="itemTimeStamp">$formatDate</span></div>
+                <div class="recentHeadline"><a href="news/ViewArticle?articleID=$ID">$Headline</a> | <span class="itemTimeStamp">$formatDate</span></div>
                 <div class="recentSummary">$Summary</div>
             </div>
         <% end_control %>

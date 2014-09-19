@@ -4,6 +4,22 @@ jQuery(document).ready(function($){
     var form_validator = null;
 
     if(form.length > 0){
+
+        $('#NewsRequestForm_NewsRequestForm_date').datetimepicker({
+            minDate: 0
+        });
+
+        $('#NewsRequestForm_NewsRequestForm_date_embargo').datetimepicker({
+            minDate: 0
+        });
+
+        $('#NewsRequestForm_NewsRequestForm_date_expire').datetimepicker({
+            minDate: 0
+        });
+
+
+        /*
+
         //main form validation
         form_validator = form.validate({
             onfocusout: false,
@@ -34,7 +50,6 @@ jQuery(document).ready(function($){
         });
         // initialize widgets
 
-
         var date_picker_date = $('#NewsRequestForm_NewsRequestForm_date',form);
         date_picker_date.datepicker({
             dateFormat: 'yy-mm-dd',
@@ -51,7 +66,7 @@ jQuery(document).ready(function($){
         date_picker_expire.datepicker({
             dateFormat: 'yy-mm-dd',
             minDate: 0
-        });
+        });*/
     }
 
 });

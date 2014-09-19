@@ -75,29 +75,53 @@ final class SapphireNewsRepository extends SapphireRepository {
         return $this->getBy($query);
     }
 
+    /**
+     * @return INews[]
+     */
+    public function getExpiredNews()
+    {
+        $today = date("Y-m-d");
+        $query = new QueryObject(new News);
+        $query->addAddCondition(QueryCriteria::lower('DateExpire',$today));
+        list($expired_articles,$count) = $this->getAll($query);
 
-    public function setArticle($article_id,$new_rank,$type) {
+        return $expired_articles;
+    }
 
-        $slider = $featured = $approved = 0;
-        if ($type == 'slider') {
+    public function getNewsToActivate()
+    {
+        $today = date("Y-m-d");
+        $query = new QueryObject(new News);
+        $query->addAddCondition(QueryCriteria::lower('DateEmbargo',$today));
+        $query->addAddCondition(QueryCriteria::equal('Approved',1));
+        list($activate_articles,$count) = $this->getAll($query);
+
+        return $activate_articles;
+    }
+
+    public function getArticlesBySection($section) {
+        $approved = $slider = $featured = 0;
+        if ($section == 'recent') {
+            $approved = 1;
+        } elseif ($section == 'slider') {
             $slider = 1;
             $approved = 1;
-        } elseif ($type == 'featured') {
+        } elseif ($section == 'featured') {
             $featured = 1;
-            $approved = 1;
-        } elseif ($type == 'recent') {
             $approved = 1;
         }
 
-        $article = $this->getById($article_id);
-        $article->Slider = $slider;
-        $article->Featured = $featured;
-        $article->Rank = $new_rank;
-        $article->Approved = $approved;
-        $article->write();
+        $query = new QueryObject(new News);
+        $query->addAddCondition(QueryCriteria::equal('Slider',$slider));
+        $query->addAddCondition(QueryCriteria::equal('Approved',$approved));
+        $query->addAddCondition(QueryCriteria::equal('Featured',$featured));
+        $query->addOrder(QueryOrder::asc('Rank'));
+        list($articles,$count) = $this->getAll($query);
+
+        return $articles;
     }
 
-    public function sortArticle($article_id,$new_rank,$old_rank,$is_new,$is_remove,$type) {
+    public function getArticlesToSort($article_id,$new_rank,$old_rank,$is_new,$is_remove,$type) {
 
         $slider = $featured = $approved = 0;
         if ($type == 'slider') {
@@ -136,10 +160,9 @@ final class SapphireNewsRepository extends SapphireRepository {
 
         list($other_articles,$count) = $this->getAll($query);
 
-        foreach ($other_articles as $article) {
-            $article->Rank = $article->Rank + $rank_delta;
-            $article->write();
-        }
+        $return_array = array($other_articles,$rank_delta);
+
+        return $return_array;
     }
 
     public function deleteArticle($article_id) {

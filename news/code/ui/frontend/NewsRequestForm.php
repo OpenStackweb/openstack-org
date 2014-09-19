@@ -5,7 +5,7 @@
  */
 final class NewsRequestForm extends HoneyPotForm {
 
-	function __construct($controller, $name, $article = null, $use_actions = true) {
+	function __construct($controller, $name, $article = null, $is_manager, $use_actions = true) {
         $IDField = new HiddenField('newsID');
 		//madatory fields
 		$HeadlineField = new TextField('headline','Headline');
@@ -13,8 +13,13 @@ final class NewsRequestForm extends HoneyPotForm {
 		$TagsField = new TextField('tags','Tags');
 		$DateField = new TextField('date','Date');
         $DateField->addExtraClass('date inline');
-        $DateEmbargoField = new TextField('date_embargo','Embargo Date');
-        $DateEmbargoField->addExtraClass('date inline');
+        if ($is_manager) {
+            $DateEmbargoField = new TextField('date_embargo','Embargo Date');
+            $DateEmbargoField->addExtraClass('date inline');
+            $DateExpireField = new TextField('date_expire','Expire Date');
+            $DateExpireField->addExtraClass('date');
+        }
+
         $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
         $UpdatedField->addExtraClass('inline');
         //optional fields
@@ -22,8 +27,6 @@ final class NewsRequestForm extends HoneyPotForm {
         $LinkField = new TextField('link','Link');
         $DocumentField = new FileField('Document','Document');
         $ImageField = new CustomSimpleImageField('Image', 'Image');
-        $DateExpireField = new TextField('date_expire','Date Expire');
-        $DateExpireField->addExtraClass('date');
 
         if($article) {
             $IDField->setValue($article->ID);
@@ -62,14 +65,19 @@ final class NewsRequestForm extends HoneyPotForm {
             $HeadlineField,
             $SummaryField,
             $TagsField,
-            $DateField,
-            $DateEmbargoField,
-            $UpdatedField,
-            new LiteralField('clear', '<div class="clear"></div>'),
-            $BodyField,
-            $LinkField,
-            $DocumentField
+            $DateField
         );
+
+        if ($is_manager) {
+            $fields->push($DateEmbargoField);
+            $fields->push($UpdatedField);
+        }
+
+        $fields->push(new LiteralField('clear', '<div class="clear"></div>'));
+        $fields->push($BodyField);
+        $fields->push($LinkField);
+        $fields->push($DocumentField);
+
 
         if ($article) {
             $image = $article->Image();
@@ -88,8 +96,11 @@ final class NewsRequestForm extends HoneyPotForm {
             $fields->push($ImageField);
         }
 
-        $fields->push(new LiteralField('break', '<br/>'));
-        $fields->push($DateExpireField);
+        if ($is_manager) {
+            $fields->push(new LiteralField('break', '<br/>'));
+            $fields->push($DateExpireField);
+        }
+
         $fields->push(new LiteralField('break', '<br/><hr/>'));
         $fields->push(new LiteralField('title', '<h2>Submitter</h2>'));
         $fields->push($SubmitterFirstNameField);

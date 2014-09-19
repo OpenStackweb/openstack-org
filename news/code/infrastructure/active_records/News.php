@@ -156,4 +156,29 @@ final class News extends DataObject implements INews {
         $document = $upload_service->upload('Document', $this);
         AssociationFactory::getInstance()->getMany2OneAssociation($this,'Document')->setTarget($document);
     }
+
+    public function registerSection($section)
+    {
+        $slider = $featured = $approved = 0;
+        if ($section == 'slider') {
+            $slider = 1;
+            $approved = 1;
+        } elseif ($section == 'featured') {
+            $featured = 1;
+            $approved = 1;
+        } elseif ($section == 'recent') {
+            $approved = 1;
+        }
+
+        $this->Featured = $featured;
+        $this->Slider = $slider;
+        $this->Approved = $approved;
+
+    }
+
+    public function registerRank($rank)
+    {
+
+        $this->Rank = $rank;
+    }
 }

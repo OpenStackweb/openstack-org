@@ -1,3 +1,13 @@
+<% if NewsManager %>
+    <div class="newsHome">
+        <a href="/news-manage">Back to Manager</a>
+    </div>
+<% else %>
+    <div class="newsHome">
+        <a href="/news">Back to News</a>
+    </div>
+<% end_if %>
+
 <div>
     <h1>Add New Press Release</h1>
     <p></p>

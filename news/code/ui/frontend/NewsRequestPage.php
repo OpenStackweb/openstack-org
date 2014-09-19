@@ -43,6 +43,14 @@ final class NewsRequestPage_Controller extends Page_Controller {
         return $this->renderWith(array('NewsRequestPage','Page'));
     }
 
+    function NewsManager() {
+        $MemberID = Member::currentUserID();
+        $currentMember = DataObject::get_one("Member", "`ID` = '" . $MemberID . "'");
+
+        // see if the member is in the newsmanager group
+        if ($currentMember && $currentMember->inGroup('news-managers')) return TRUE;
+    }
+
     public function NewsRequestForm() {
         $this->commonScripts();
         Requirements::css('news/code/ui/frontend/css/news.form.css');
@@ -50,12 +58,12 @@ final class NewsRequestPage_Controller extends Page_Controller {
         $data = Session::get("FormInfo.Form_NewsRequestForm.data");
         $article = null;
 
-        if (isset($this->requestParams['articleID'])) {
+        if (isset($this->requestParams['articleID']) && $this->NewsManager()) {
             $article_id = $this->requestParams['articleID'];
             $article = $this->news_repository->getNewsByID($article_id);
         }
 
-        $form = new NewsRequestForm($this, 'NewsRequestForm',$article,false);
+        $form = new NewsRequestForm($this, 'NewsRequestForm',$article, $this->NewsManager(), false);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);
@@ -68,16 +76,14 @@ final class NewsRequestPage_Controller extends Page_Controller {
     }
 
     private function commonScripts(){
-        Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-        Requirements::css("themes/openstack/javascript/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css");
-        Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+        Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+
+        /*Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js");
         Requirements::javascript("themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-        Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
-        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");*/
     }
 
     function saveNewsArticle($data, Form $form){

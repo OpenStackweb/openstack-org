@@ -4,7 +4,7 @@
 
 .newsSlider {
     width: 100%;
-    height: 320px;
+    height: 370px;
 }
 
 .newsBody {
@@ -49,10 +49,6 @@
     margin: 10px 5px 10px 0;
 }
 
-.sliderImage {
-    float: left;
-    width: 40%;
-}
 
 .sliderText {
     float: left;
@@ -79,6 +75,24 @@
 }
 
 .postArticle a {
+    background-color: #E2F4DC;
+    color: #1D6006;
+    display: block;
+    float: right;
+    font-size: 1em;
+    padding: 4px 15px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+
+.newsHome{
+    float:right;
+    margin-bottom: 10px;
+}
+
+.newsHome a {
     background-color: #E2F4DC;
     color: #1D6006;
     display: block;
@@ -155,16 +169,13 @@ fieldset {
     color: black;
 }
 
-.automotive a {
+.sliderImage {
+    float: left;
     display: block;
     background: #b9301d;
-    padding: 10px 20px;
+    padding: 30px 10px 0 10px;
     border-radius: 2px;
-    width: 80%;
-    margin: 10px auto 0;
-    color: #fff!important;
-    font-weight: 600;
-    font-size: 150%
+    margin: 8px 0 10px 5px;
 }
 
 .automotive .largeQuote {
@@ -191,7 +202,7 @@ fieldset {
 .automotive {
     text-align: center;
     color: #f8f8f8;
-    background: url('/themes/openstack/images/landing-pages/auto/hero-bkgd.jpg') no-repeat center center;
+    background: #627783;
     background-size: cover;
     position: relative;
 }

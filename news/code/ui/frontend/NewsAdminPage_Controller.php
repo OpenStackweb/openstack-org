@@ -15,6 +15,16 @@ final class NewsAdminPage_Controller extends Page_Controller {
         'removeArticle'
 	);
 
+    /**
+     * @var ISapphireNewsRepository
+     */
+    private $news_repository;
+
+    /**
+     * @var NewsRequestManager
+     */
+    private $news_manager;
+
 
     function init() {
         parent::init();
@@ -29,6 +39,14 @@ final class NewsAdminPage_Controller extends Page_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->news_repository = new SapphireNewsRepository();
+        $this->news_manager = new NewsRequestManager(
+            new SapphireNewsRepository,
+            new SapphireSubmitterRepository,
+            new NewsFactory,
+            new NewsValidationFactory,
+            new SapphireFileUploadService(),
+            SapphireTransactionManager::getInstance()
+        );
 	}
 
 	public function logout(){
@@ -49,20 +67,12 @@ final class NewsAdminPage_Controller extends Page_Controller {
                                                                       'StandByNews' => new ComponentSet($standby_news)));
     }
 
-    function NewsManagerMember()
-    {
+    function NewsManager() {
         $MemberID = Member::currentUserID();
         $currentMember = DataObject::get_one("Member", "`ID` = '" . $MemberID . "'");
 
-        // see if the member is in the foundation group
-        //if ($currentMember && $currentMember->inGroup('foundation-members')) return TRUE;
-
-        return TRUE;
-    }
-
-    function CompanyAdmin()
-    {
-        return Member::currentUser()->getManagedCompanies();
+        // see if the member is in the newsmanager group
+        if ($currentMember && $currentMember->inGroup('news-managers')) return TRUE;
     }
 
     public function getSliderNews() {
@@ -113,14 +123,14 @@ final class NewsAdminPage_Controller extends Page_Controller {
 
         if ($is_new == 1) {
             // new item coming in, add and reorder
-            $this->news_repository->setArticle($article_id,$new_rank,$target);
-            $this->news_repository->sortArticle($article_id,$new_rank,$old_rank,true,false,$target);
+            $this->news_manager->moveNewsArticle($article_id,$new_rank,$target);
+            $this->news_manager->sortNewsArticles($article_id,$new_rank,$old_rank,true,false,$target);
         } elseif ($type == $target) {
             //sorting within section, reorder
-            $this->news_repository->sortArticle($article_id,$new_rank,$old_rank,false,false,$type);
+            $this->news_manager->sortNewsArticles($article_id,$new_rank,$old_rank,false,false,$type);
         } else {
             //item removed, reorder
-            $this->news_repository->sortArticle($article_id,$new_rank,$old_rank,false,true,$type);
+            $this->news_manager->sortNewsArticles($article_id,$new_rank,$old_rank,false,true,$type);
         }
     }
 
@@ -135,10 +145,8 @@ final class NewsAdminPage_Controller extends Page_Controller {
         $type = $this->request->postVar('type');
         $old_rank = intval($this->request->postVar('old_rank'));
 
-        /*$this->news_repository->setArticle($article_id,0,'standby');
-        $this->news_repository->sortArticle($article_id,$new_rank,$old_rank,true,false,$target);
-
-        $this->news_repository->deleteArticle($article_id);*/
+        $this->news_manager->moveNewsArticle($article_id,0,'standby');
+        $this->news_manager->sortNewsArticles($article_id,0,$old_rank,false,true,$type);
     }
 
 } 
