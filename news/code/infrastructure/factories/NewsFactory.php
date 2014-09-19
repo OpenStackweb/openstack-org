@@ -42,9 +42,12 @@ final class NewsFactory
 	 */
 	public function buildNewsMainInfo(array $data)
 	{
+        $date_embargo = isset($data['date_embargo']) ? $data['date_embargo'] : null;
+        $date_expire = isset($data['date_expire']) ? $data['date_expire'] : null;
+
         $main_info = new NewsMainInfo(trim($data['headline']),trim($data['summary']), $data['date'],
                                       trim($data['body']),$data['link'],$data['Image'],$data['Document'],
-                                      $data['date_embargo'],$data['date_expire']);
+                                      $date_embargo,$date_expire);
 		return $main_info;
 	}
 
