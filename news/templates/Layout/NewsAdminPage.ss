@@ -1,4 +1,4 @@
-<% if NewsManager %>
+<% if CurrentMember.isNewsManager %>
     <div class="newsSlider">
         <h3>Banner</h3>
         <ul id="slider_sortable" class="connected" max-items="5">

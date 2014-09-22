@@ -1,7 +1,7 @@
 <div class="postArticle">
     <a href="/news-add">Post A News Article</a>
 </div>
-<% if NewsManager %>
+<% if CurrentMember.isNewsManager %>
     <div class="manageNews">
         <a href="/news-manage">Manage News</a>
     </div>

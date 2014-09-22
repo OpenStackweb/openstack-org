@@ -43,14 +43,6 @@ final class NewsRequestPage_Controller extends Page_Controller {
         return $this->renderWith(array('NewsRequestPage','Page'));
     }
 
-    function NewsManager() {
-        $MemberID = Member::currentUserID();
-        $currentMember = DataObject::get_one("Member", "`ID` = '" . $MemberID . "'");
-
-        // see if the member is in the newsmanager group
-        if ($currentMember && $currentMember->inGroup('news-managers')) return TRUE;
-    }
-
     public function NewsRequestForm() {
         $this->commonScripts();
         Requirements::css('news/code/ui/frontend/css/news.form.css');
@@ -58,12 +50,12 @@ final class NewsRequestPage_Controller extends Page_Controller {
         $data = Session::get("FormInfo.Form_NewsRequestForm.data");
         $article = null;
 
-        if (isset($this->requestParams['articleID']) && $this->NewsManager()) {
+        if (isset($this->requestParams['articleID']) && Member::currentUser()->isNewsManager()) {
             $article_id = $this->requestParams['articleID'];
             $article = $this->news_repository->getNewsByID($article_id);
         }
 
-        $form = new NewsRequestForm($this, 'NewsRequestForm',$article, $this->NewsManager(), false);
+        $form = new NewsRequestForm($this, 'NewsRequestForm',$article, Member::currentUser()->isNewsManager(), false);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);

@@ -1,4 +1,4 @@
-<% if NewsManager %>
+<% if CurrentMember.isNewsManager %>
     <div class="newsHome">
         <a href="/news-manage">Back to Manager</a>
     </div>

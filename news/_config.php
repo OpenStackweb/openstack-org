@@ -9,3 +9,6 @@ Director::addRules(100, array(
 ));
 
 
+Object::add_extension('Member', 'NewsManager');
+
+

@@ -67,14 +67,6 @@ final class NewsAdminPage_Controller extends Page_Controller {
                                                                       'StandByNews' => new ComponentSet($standby_news)));
     }
 
-    function NewsManager() {
-        $MemberID = Member::currentUserID();
-        $currentMember = DataObject::get_one("Member", "`ID` = '" . $MemberID . "'");
-
-        // see if the member is in the newsmanager group
-        if ($currentMember && $currentMember->inGroup('news-managers')) return TRUE;
-    }
-
     public function getSliderNews() {
         $output = '';
         $counter = 0;

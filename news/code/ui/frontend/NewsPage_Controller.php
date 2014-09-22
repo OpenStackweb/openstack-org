@@ -68,14 +68,6 @@ final class NewsPage_Controller extends Page_Controller {
         return $result->getRange(0,$limit);
     }
 
-    function NewsManager() {
-        $MemberID = Member::currentUserID();
-        $currentMember = DataObject::get_one("Member", "`ID` = '" . $MemberID . "'");
-
-        // see if the member is in the newsmanager group
-        if ($currentMember && $currentMember->inGroup('news-managers')) return TRUE;
-    }
-
     function ViewArticle() {
         if (isset($this->requestParams['articleID'])) {
             $article_id = $this->requestParams['articleID'];
