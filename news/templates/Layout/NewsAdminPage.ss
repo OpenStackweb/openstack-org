@@ -65,5 +65,11 @@
     </div>
     <div class="clear"></div>
 <% else %>
-    <p>In order to edit the news page, you need to be a news manager.</p>
+    <% if CurrentMember %>
+        <p>In order to edit the news page, you need to be a news manager.</p>
+    <% else %>
+        <p>In order to edit your community profile, you will first need to <a href="/Security/login/?BackURL=%2Fprofile%2F">login as a member</a>.
+        Don't have an account? <a href="/join/">Join The Foundation</a></p>
+        <p><a class="roundedButton" href="/Security/login/?BackURL=%2Fprofile%2F">Login</a> <a href="/join/" class="roundedButton">Join The Foundation</a></p>
+    <% end_if %>
 <% end_if %>

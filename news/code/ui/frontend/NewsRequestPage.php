@@ -49,13 +49,14 @@ final class NewsRequestPage_Controller extends Page_Controller {
         Requirements::javascript("news/code/ui/frontend/js/news.form.js");
         $data = Session::get("FormInfo.Form_NewsRequestForm.data");
         $article = null;
+        $is_news_manager = (Member::currentUser() && Member::currentUser()->isNewsManager());
 
-        if (isset($this->requestParams['articleID']) && Member::currentUser()->isNewsManager()) {
+        if (isset($this->requestParams['articleID']) && $is_news_manager) {
             $article_id = $this->requestParams['articleID'];
             $article = $this->news_repository->getNewsByID($article_id);
         }
 
-        $form = new NewsRequestForm($this, 'NewsRequestForm',$article, Member::currentUser()->isNewsManager(), false);
+        $form = new NewsRequestForm($this, 'NewsRequestForm',$article, $is_news_manager, false);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);

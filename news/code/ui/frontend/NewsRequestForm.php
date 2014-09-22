@@ -5,7 +5,7 @@
  */
 final class NewsRequestForm extends HoneyPotForm {
 
-	function __construct($controller, $name, $article = null, $is_manager, $use_actions = true) {
+	function __construct($controller, $name, $article = null, bool $is_manager, $use_actions = true) {
         $IDField = new HiddenField('newsID');
 		//madatory fields
 		$HeadlineField = new TextField('headline','Headline');

@@ -1,10 +1,12 @@
 <div class="postArticle">
     <a href="/news-add">Post A News Article</a>
 </div>
-<% if CurrentMember.isNewsManager %>
-    <div class="manageNews">
-        <a href="/news-manage">Manage News</a>
-    </div>
+<% if CurrentMember %>
+    <% if CurrentMember.isNewsManager %>
+        <div class="manageNews">
+            <a href="/news-manage">Manage News</a>
+        </div>
+    <% end_if %>
 <% end_if %>
 <div class="clear"></div>
 <div class="newsSlider">

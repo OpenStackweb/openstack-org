@@ -1,7 +1,9 @@
-<% if CurrentMember.isNewsManager %>
-    <div class="newsHome">
-        <a href="/news-manage">Back to Manager</a>
-    </div>
+<% if CurrentMember %>
+    <% if CurrentMember.isNewsManager %>
+        <div class="newsHome">
+            <a href="/news-manage">Back to Manager</a>
+        </div>
+    <% end_if %>
 <% else %>
     <div class="newsHome">
         <a href="/news">Back to News</a>
