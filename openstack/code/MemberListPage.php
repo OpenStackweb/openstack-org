@@ -177,11 +177,12 @@ class MemberListPage_Controller extends Page_Controller
 	{
 
 		$CurrentElection = $this->CurrentElection();
-
+		
 		// Look for nominations for this candidate
 		$CandidateNominations = CandidateNomination::get()->where("CandidateID = " . $CandidateID . " AND ElectionID = " . $CurrentElection->ID);
 		$NumberOfNominations = 0;
 		if ($CandidateNominations) $NumberOfNominations = $CandidateNominations->Count();
+
 
 
 		// 1. Check to see if there's a current, active election
