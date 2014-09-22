@@ -19,10 +19,7 @@
 </div>
 <div class="span-20 last">
     <h3>$FullName</h3>
-    <% if Role %>
-    <h4 class="role">$Role</h4>
-    <% end_if %>
-    <div class="span-2"><strong>Company</strong></div>
+     <div class="span-2"><strong>Company</strong></div>
     <div class="span-18 last">$CurrentCompanies&nbsp;</div>
     <div class="span-2"><strong>Bio</strong></div>
     <div class="span-18 last">$Bio&nbsp;</div>
