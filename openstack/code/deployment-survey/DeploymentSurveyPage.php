@@ -197,7 +197,15 @@ class DeploymentSurveyPage_Controller extends Page_Controller
 		        $survey->write();
 	        }
         }
-        $newIndex = array_search($this->CurrentStep(), DeploymentSurvey::$steps) + 1;
+
+	    if($form instanceof DeploymentSurveyOrgInfoForm && isset($data['OpenStackInvolvement']) && is_array($data['OpenStackInvolvement']) && array_key_exists('Cloud Consumer',$data['OpenStackInvolvement']))
+	    {
+			//normal flow - Send them to user-survey/AppDevSurvey as normal
+		    $newIndex = array_search($this->CurrentStep(), DeploymentSurvey::$steps) + 1;
+	    }
+	    else //  Send them to user-survey/Deployments
+		    $newIndex = array_search('Deployments', DeploymentSurvey::$steps);
+
         if ($newIndex > count(DeploymentSurvey::$steps)) $newIndex = count(DeploymentSurvey::$steps);
         $CurrentStep = DeploymentSurvey::$steps[$newIndex];
         Session::set('CurrentStep', $CurrentStep);
