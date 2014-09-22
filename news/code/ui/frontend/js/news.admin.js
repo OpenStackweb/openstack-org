@@ -51,27 +51,27 @@ jQuery(document).ready(function($){
 });
 
 function saveSortArticle(item,is_new) {
-    var old_rank = $('.article_rank',item).val();
+    var old_rank = jQuery('.article_rank',item).val();
     var new_rank = item.index() + 1;
-    var article_id = $('.article_id',item).val();
-    var article_type = $('.article_type',item).val();
-    var target = $(item).parents('ul').attr('id').split('_')[0];
+    var article_id = jQuery('.article_id',item).val();
+    var article_type = jQuery('.article_type',item).val();
+    var target = jQuery(item).parents('ul').attr('id').split('_')[0];
 
     is_new = (is_new) ? 1 : 0;
 
-    $.ajax({
+    jQuery.ajax({
         type: "POST",
         url: 'NewsAdminPage_Controller/setArticleRank',
         data: { id : article_id, old_rank : old_rank, new_rank : new_rank, type : article_type, target: target, is_new : is_new },
         success: function(){ //update ranks
             if (article_type == target) {
-                $('.article_rank','#'+article_type+'_sortable').each(function(index){
-                    $(this).val(index+1);
+                jQuery('.article_rank','#'+article_type+'_sortable').each(function(index){
+                    jQuery(this).val(index+1);
                 });
             } else {
-                $('.article_type',item).val(target);
-                $('.article_rank','#'+target+'_sortable').each(function(index){
-                    $(this).val(index+1);
+                jQuery('.article_type',item).val(target);
+                jQuery('.article_rank','#'+target+'_sortable').each(function(index){
+                    jQuery(this).val(index+1);
                 });
             }
         }
@@ -79,35 +79,35 @@ function saveSortArticle(item,is_new) {
 }
 
 function deleteArticle(article) {
-    var article_id = $('.article_id',article).val();
+    var article_id = jQuery('.article_id',article).val();
 
-    $.ajax({
+    jQuery.ajax({
         type: "POST",
         url: 'NewsAdminPage_Controller/deleteArticle',
         data: { id : article_id},
         success: function(){
-            $(article).remove();
+            jQuery(article).remove();
         }
     });
 }
 
 function removeArticle(article) {
-    var article_id = $('.article_id',article).val();
-    var article_type = $('.article_type',article).val();
-    var old_rank = $('.article_rank',article).val();
+    var article_id = jQuery('.article_id',article).val();
+    var article_type = jQuery('.article_type',article).val();
+    var old_rank = jQuery('.article_rank',article).val();
 
-    $('#standby_sortable').prepend(article);
-    $(article).remove();
+    jQuery('#standby_sortable').prepend(article);
+    jQuery(article).remove();
 
-    $.ajax({
+    jQuery.ajax({
         type: "POST",
         url: 'NewsAdminPage_Controller/removeArticle',
         data: { id : article_id, type : article_type, old_rank : old_rank},
         success: function(){
 
-            $('.article_type',article).val('standby');
-            $('.article_rank','#'+article_type+'_sortable').each(function(index){
-                $(this).val(index+1);
+            jQuery('.article_type',article).val('standby');
+            jQuery('.article_rank','#'+article_type+'_sortable').each(function(index){
+                jQuery(this).val(index+1);
             });
         }
     });
