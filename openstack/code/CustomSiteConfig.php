@@ -16,9 +16,38 @@ class CustomSiteConfig extends DataExtension {
 
     public function getSiteBannerMessage(){
         $current_lang = UserLanguage::getCurrentUserLang();
-        $settings = SiteBannerConfigurationSetting::get()->filter('Language', $current_lang)->first();
-        if(!$settings)
-            $settings = SiteBannerConfigurationSetting::get()->filter('Language', 'English')->first();
+
+        $previous_banner_rank = Session::get('bannerRank');
+
+	    $filters = array('Language' => $current_lang);
+
+        if ($previous_banner_rank) {
+	        $filters['SiteBannerRank:GreaterThan'] = $previous_banner_rank;
+        }
+
+	    $settings = SiteBannerConfigurationSetting::get()->filter($filters)->order('SiteBannerRank','ASC')->first();
+
+        // if there is no banner maybe the previous one was the last one, so we look for the first one
+        if(!$settings && $previous_banner_rank)
+            $settings = SiteBannerConfigurationSetting::get()->filter(array('Language' => $current_lang))->order('SiteBannerRank','ASC')->first();
+
+        //if there is still no banner we fetch the english one
+        if(!$settings) {
+	        $filters = array('Language' => 'English');
+            if ($previous_banner_rank) {
+	            $filters['SiteBannerRank:GreaterThan'] = $previous_banner_rank;
+            }
+
+	        $settings = SiteBannerConfigurationSetting::get()->filter($filters)->order('SiteBannerRank','ASC')->first();
+
+	        // if there is no banner maybe the previous one was the last one, so we look for the first one
+            if(!$settings && $previous_banner_rank)
+	            $settings = SiteBannerConfigurationSetting::get()->filter(array('Language' => 'English'))->order('SiteBannerRank','ASC')->first();
+
+        }
+
+        Session::set('bannerRank',$settings->SiteBannerRank);
+
         return $settings ?$settings->SiteBannerMessage:'';
     }
 

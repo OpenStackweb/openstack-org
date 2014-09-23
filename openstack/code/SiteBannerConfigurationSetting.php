@@ -13,6 +13,7 @@ class SiteBannerConfigurationSetting extends DataObject {
         'SiteBannerMessage' => 'HTMLText',
         'SiteBannerButtonText' => 'Text',
         'SiteBannerButtonLink' => 'Text',
+        'SiteBannerRank' => 'Int',
         'Language'=> "Enum('English, Spanish, Italian, German, Portuguese,Chinese,Japanese,French', 'English')",
     );
 
