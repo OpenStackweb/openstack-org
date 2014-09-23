@@ -128,7 +128,6 @@ class OsLogoProgramForm extends HoneyPotForm {
         }
 
         // Email the logo email list
-
         $Subject = "Contact Form for Commercial Logo Inquiries";
         $email   = EmailFactory::getInstance()->buildEmail($data['Email'], OS_LOGO_PROGRAM_FORM_TO_EMAIL, $Subject);
         $email->setTemplate('OSLogoProgramResponseEmail');
