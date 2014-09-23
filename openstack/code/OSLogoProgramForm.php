@@ -41,7 +41,7 @@ class OsLogoProgramForm extends HoneyPotForm {
         $fields = new FieldList (
             new TextField('FirstName','First Name'),
             new TextField('Surname','Last Name'),
-            new TextField('Email','Email Address'),
+            new EmailField('Email','Email Address'),
             new TextField('Phone','Phone Number'),
             new CheckboxSetField(
                 'Program',
@@ -130,9 +130,8 @@ class OsLogoProgramForm extends HoneyPotForm {
         // Email the logo email list
 
         $Subject = "Contact Form for Commercial Logo Inquiries";
-        $email = EmailFactory::getInstance()->buildEmail(OS_LOGO_PROGRAM_FORM_FROM_EMAIL, OS_LOGO_PROGRAM_FORM_TO_EMAIL, $Subject);
+        $email   = EmailFactory::getInstance()->buildEmail($data['Email'], OS_LOGO_PROGRAM_FORM_TO_EMAIL, $Subject);
         $email->setTemplate('OSLogoProgramResponseEmail');
-
         $email->populateTemplate($response);
         $email->send();
 
