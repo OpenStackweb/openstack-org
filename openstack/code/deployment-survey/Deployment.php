@@ -24,6 +24,7 @@ class Deployment extends DataObject {
 		'NetworkDrivers' => 'Text',
 		'OtherNetworkDriver' => 'Text',
 		'WhyNovaNetwork' => 'Text',
+		'OtherWhyNovaNetwork'  => 'Text',
 		'IdentityDrivers' => 'Text',
 		'OtherIndentityDriver' => 'Text',
 		'SupportedFeatures' => 'Text',
@@ -40,7 +41,17 @@ class Deployment extends DataObject {
 		'NetworkNumIPs' => 'Text',
 		//control fields
 		'SendDigest' => 'Boolean' ,// SendDigest = 1 SENT, SendDigest = 0 to be send
-	    'UpdateDate' => 'SS_Datetime',
+		'UpdateDate' => 'SS_Datetime',
+		'SwiftGlobalDistributionFeatures' => 'Text',
+		'SwiftGlobalDistributionFeaturesUsesCases' => 'Text',
+		'OtherSwiftGlobalDistributionFeaturesUsesCases' => 'Text',
+		'Plans2UseSwiftStoragePolicies' => 'Text',
+		'OtherPlans2UseSwiftStoragePolicies' => 'Text',
+		'UsedDBForOpenStackComponents' => 'Text',
+		'OtherUsedDBForOpenStackComponents' => 'Text',
+		'ToolsUsedForYourUsers' => 'Text',
+		'OtherToolsUsedForYourUsers' => 'Text',
+		'Reason2Move2Ceilometer' => 'Text',
 	);
 
 	private static $has_one = array(
@@ -127,9 +138,12 @@ class Deployment extends DataObject {
 					Deployment::$network_driver_options
 				),
 				new TextField('OtherNetworkDriver','Other Network Driver'),
-				new TextAreaField(
+				new CheckboxSetField(
 					'WhyNovaNetwork',
-					'If you are using nova-network and not OpenStack Networking (Neutron), what would allow you to migrate? (optional)'),
+					'If you are using nova-network and not OpenStack Networking (Neutron), what would allow you to migrate? (optional)',
+					Deployment::$why_nova_network_options),
+				new LiteralField('Break','<br/>'),
+				new TextField('OtherWhyNovaNetwork',''),
 				new CheckboxSetField(
 					'BlockStorageDrivers',
 					'If you are using OpenStack Block Storage, which drivers are you using?',
@@ -195,10 +209,43 @@ class Deployment extends DataObject {
 					Deployment::$stoage_objects_options
 				),
 				new DropdownField(
+					'SwiftGlobalDistributionFeatures',
+					'Are you using Swift\'s global distribution features?',
+					Deployment::$swift_global_distribution_features_options
+				),
+
+				new DropdownField(
+					'SwiftGlobalDistributionFeaturesUsesCases',
+					'If yes, what is your use case?',
+					Deployment::$swift_global_distribution_features_uses_cases_options
+				),
+				new TextField('OtherSwiftGlobalDistributionFeaturesUsesCases',''),
+
+				new DropdownField(
+					'Plans2UseSwiftStoragePolicies',
+					'Do you have plans to use Swift\'s storage policies or erasure codes in the next year?',
+					Deployment::$plans_2_use_swift_storage_policies_options
+				),
+				new TextField('OtherPlans2UseSwiftStoragePolicies',''),
+
+				new DropdownField(
 					'NetworkNumIPs',
 					'If using OpenStack Network, what’s the size of your cloud by number of fixed/floating IPs?',
 					Deployment::$network_ip_options
-				)
+				),
+				new CheckboxSetField(
+					'UsedDBForOpenStackComponents',
+					'What database do you use for the components of your OpenStack cloud?',
+					Deployment::$used_db_for_openstack_components_options
+				),
+				new TextField('OtherUsedDBForOpenStackComponents',''),
+				new CheckboxSetField(
+					'ToolsUsedForYourUsers',
+					'What tools are you using charging or show-back for your users?',
+					Deployment::$tools_used_for_your_users_options
+				),
+				new TextField('OtherToolsUsedForYourUsers',''),
+				new TextareaField('Reason2Move2Ceilometer','If you are not using Ceilometer, what would allow you to move to it (optional free text)?')
 			)
 		);
 		return $fields;
@@ -301,7 +348,7 @@ class Deployment extends DataObject {
 	public static $stage_options = array (
 		'' => '-- Select One --',
 		'Proof of Concept' => 'Proof of Concept',
-		'Dev/QA' => 'Dev/QA',
+		'Under development/in testing' => 'Under development/in testing',
 		'Production' => 'Production'
 	);
 
@@ -356,7 +403,7 @@ class Deployment extends DataObject {
 		'esx' => 'VMware ESX',
 		'lxc' => 'LXC',
 		'QEMU' => 'QEMU',
-		'PowerVM' => 'PowerVM',
+		'PowerKVM' => 'PowerKVM',
 		'Bare Metal' => 'Bare Metal',
 		'OpenVZ' => 'OpenVZ',
 		'Docker' => 'Docker'
@@ -387,7 +434,10 @@ class Deployment extends DataObject {
 		'Windows' => 'Windows Server 2012',
 		'Xenapi' => 'Xenapi NFS',
 		'XenAPI Storage Manager' => 'XenAPI Storage Manager',
-		'Zadara' => 'Zadara'
+		'Zadara' => 'Zadara',
+		'IBM NAS' => 'IBM NAS',
+		'ProphetStor' => 'ProphetStor',
+		'VMWare VMDK' => 'VMWare VMDK',
 	);
 
 	public static $network_driver_options = array (
@@ -408,7 +458,16 @@ class Deployment extends DataObject {
 		'Open vSwitch' => 'Open vSwitch',
 		'PLUMgrid' => 'PLUMgrid',
 		'Ruijie Networks' => 'Ruijie Networks',
-		'Ryu' => 'Ryu OpenFlow Controller'
+		'Ryu' => 'Ryu OpenFlow Controller',
+		'A10 Networks' => 'A10 Networks',
+		'Arista' => 'Arista',
+		'IBM SDN-VE' => 'IBM SDN-VE',
+		'Meta Plugin' => 'Meta Plugin',
+		'Modular Layer 2 Plugin (ML2)' => 'Modular Layer 2 Plugin (ML2)',
+		'Nuage Networks' => 'Nuage Networks',
+		'One Convergence NVSD' => 'One Convergence NVSD',
+		'OpenDaylight' => 'OpenDaylight',
+		'VMWare NSX (formerly Nicira NVP)' => 'VMWare NSX (formerly Nicira NVP)',
 	);
 
 	public static $identity_driver_options = array (
@@ -444,7 +503,10 @@ class Deployment extends DataObject {
 		'Crowbar' => 'Crowbar',
 		'PackStack' => 'PackStack',
 		'Puppet' => 'Puppet',
-		'SaltStack' => 'SaltStack'
+		'SaltStack' => 'SaltStack',
+		'Ansible' => 'Ansible',
+		'CFEngine' => 'CFEngine',
+		'Juju' => 'Juju',
 	);
 
 	public static $operating_systems_options = array (
@@ -454,7 +516,10 @@ class Deployment extends DataObject {
 		'Red Hat Enterprise Linux' => 'Red Hat Enterprise Linux',
 		'SUSE Linux Enterprise' => 'SUSE Linux Enterprise',
 		'Ubuntu' => 'Ubuntu',
-		'Windows' => 'Windows'
+		'Windows' => 'Windows',
+		'Fedora' => 'Fedora',
+		'Scientific Linux' => 'Scientific Linux',
+		'' => '',
 	);
 
 	public static $compute_nodes_options = array (
@@ -495,7 +560,9 @@ class Deployment extends DataObject {
 		'11-100 TB' => '11-100 TB',
 		'100-500 TB' => '100-500 TB',
 		'More than 500 TB' => '501-1,000 TB',
-		'More than 1,000 TB' => 'More than 1,000 TB'
+		'1PB-5PB' => '1PB-5PB',
+		'5PB-20PB' => '5PB-20PB',
+		'over 20PB' => 'over 20PB',
 	);
 
 	public static $stoage_objects_options = array (
@@ -516,4 +583,51 @@ class Deployment extends DataObject {
 		'More than 10,000' => 'More than 10,000'
 	);
 
+
+	public static $why_nova_network_options = array(
+		'Complexity of Neutron' => 'Complexity of Neutron',
+		'Scalability, Performance' => 'Scalability, Performance',
+		'Migration effort' => 'Migration effort',
+		'Other (please specify)'=>'Other (please specify)',
+	);
+
+	public static $swift_global_distribution_features_options = array(
+		'Yes, globally distributed clusters' => 'Yes, globally distributed clusters',
+		'Yes, container sync' => 'Yes, container sync',
+		'No, this Swift cluster is only in a single region' => 'No, this Swift cluster is only in a single region',
+	);
+
+	public static $swift_global_distribution_features_uses_cases_options = array(
+		'Disaster recovery, continuity of business, or regulatory reasons' => 'Disaster recovery, continuity of business, or regulatory reasons',
+		'Locality of access' => 'Locality of access',
+		'Other' => 'Other (specify)',
+	);
+
+	public static $plans_2_use_swift_storage_policies_options = array(
+		'Yes'=>'Yes',
+		'No' => 'No',
+		'Maybe. Please explain' => 'Maybe. Please explain',
+	);
+
+	public static $used_db_for_openstack_components_options = array(
+		'MySQL' => 'MySQL',
+		'Percona Server' => 'Percona Server',
+		'MariaDB' => 'MariaDB',
+		'MySQL with Galera' => 'MySQL with Galera',
+		'MySQL with DRBD' => 'MySQL with DRBD',
+		'Percona XtraDB Cluster' => 'Percona XtraDB Cluster',
+		'MariaDB Galera Cluster' => 'MariaDB Galera Cluster',
+		'PostgreSQL' => 'PostgreSQL',
+		'MongoDB' => 'MongoDB',
+		'SQLite' => 'SQLite',
+		'Other' => 'Other (Specify)',
+	);
+
+	public static $tools_used_for_your_users_options = array(
+		'None' => 'None',
+		'Home grown tools using ceilometer' => 'Home grown tools using ceilometer',
+		'Home grown tools using other OpenStack components than ceilometer' => 'Home grown tools using other OpenStack components than ceilometer',
+		'Cloud Kitty' => 'Cloud Kitty',
+		'Other' => 'Other (Specify)',
+	);
 }

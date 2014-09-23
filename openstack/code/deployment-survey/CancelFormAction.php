@@ -29,24 +29,25 @@ class CancelFormAction extends FormAction {
 		return $this->link;
 	}
 	
-	function Field() {
-		$attributes = array(
-			'class' => 'action cancel ' . ($this->extraClass() ? $this->extraClass() : ''),
-			'id' => $this->id(),
-			'name' => $this->action,
-			'tabindex' => $this->getTabIndex(),
-			'href' => $this->getLink()
+	function Field($properties = array()) {
+
+		$properties = array_merge(
+			$properties,
+			array(
+				'id' => $this->id(),
+				'name' => $this->action,
+				'class' => 'action cancel roundedButton ' . ($this->extraClass() ? $this->extraClass() : ''),
+				'name' => $this->action,
+				'href' => $this->getLink()
+			)
 		);
-		
+
 		if($this->isReadonly()) {
-			$attributes['disabled'] = 'disabled';
-			$attributes['class'] = $attributes['class'] . ' disabled';
+			$properties['disabled'] = 'disabled';
+			$properties['class'] = $properties['class'] . ' disabled';
 		}
-		
-		return $this->createTag(
-			'a', 
-			$attributes, 
-			$this->buttonContent ? $this->buttonContent : $this->Title()
-		);
+
+		return FormField::create_tag('a', $properties, 	$this->buttonContent ? $this->buttonContent : $this->Title());
+
 	}
 }

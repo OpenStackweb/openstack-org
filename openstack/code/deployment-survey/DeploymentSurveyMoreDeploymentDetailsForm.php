@@ -27,10 +27,12 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 				Deployment::$network_driver_options
 			),
 			new TextField('OtherNetworkDriver', 'Other Network Driver'),
-			new TextAreaField(
+			new CheckboxSetField(
 				'WhyNovaNetwork',
-				'If you are using nova-network and not OpenStack Networking (Neutron), what would allow you to migrate? (optional)'),
-
+				'If you are using nova-network and not OpenStack Networking (Neutron), what would allow you to migrate? (optional)',
+				Deployment::$why_nova_network_options),
+			new LiteralField('Break', '<br/>'),
+			new TextField('OtherWhyNovaNetwork', ''),
 			new LiteralField('Break', ColumnFormatter::$right_column_start),
 			new CheckboxSetField(
 				'BlockStorageDrivers',
@@ -115,12 +117,45 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 				'Total objects stored',
 				Deployment::$stoage_objects_options
 			),
+			new LiteralField('Break', ColumnFormatter::$right_column_start),
+			new DropdownField(
+				'SwiftGlobalDistributionFeatures',
+				'Are you using Swift\'s global distribution features?',
+				Deployment::$swift_global_distribution_features_options
+			),
+			new LiteralField('Break', ColumnFormatter::$left_column_start),
+			new DropdownField(
+				'SwiftGlobalDistributionFeaturesUsesCases',
+				'If yes, what is your use case?',
+				Deployment::$swift_global_distribution_features_uses_cases_options
+			),
+			new TextField('OtherSwiftGlobalDistributionFeaturesUsesCases', ''),
+
+			new DropdownField(
+				'Plans2UseSwiftStoragePolicies',
+				'Do you have plans to use Swift\'s storage policies or erasure codes in the next year?',
+				Deployment::$plans_2_use_swift_storage_policies_options
+			),
+			new TextField('OtherPlans2UseSwiftStoragePolicies', ''),
 			new LiteralField('Break', ColumnFormatter::$end_columns),
 			new DropdownField(
 				'NetworkNumIPs',
 				'If using OpenStack Network, what’s the size of your cloud by number of fixed/floating IPs?',
 				Deployment::$network_ip_options
-			)
+			),
+			new CheckboxSetField(
+				'UsedDBForOpenStackComponents',
+				'What database do you use for the components of your OpenStack cloud?',
+				Deployment::$used_db_for_openstack_components_options
+			),
+			new TextField('OtherUsedDBForOpenStackComponents', ''),
+			new CheckboxSetField(
+				'ToolsUsedForYourUsers',
+				'What tools are you using charging or show-back for your users?',
+				Deployment::$tools_used_for_your_users_options
+			),
+			new TextField('OtherToolsUsedForYourUsers', ''),
+			new TextareaField('Reason2Move2Ceilometer', 'If you are not using Ceilometer, what would allow you to move to it (optional free text)?')
 		);
 
 		$saveButton = new FormAction('SaveDeployment', 'Save Deployment');
@@ -168,6 +203,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 		Controller::curr()->redirect($form->controller->Link() . 'Deployments');
 	}
 
+
 	function forTemplate()
 	{
 		return $this->renderWith(array(
@@ -177,3 +213,4 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 	}
 
 }
+

@@ -42,8 +42,12 @@ class DeploymentSurveyAppDevSurveyForm extends Form {
             'What tools are you using or plan on using to deploy/configure your applications?',
             AppDevSurvey::$config_tool_options),
         new TextField('OtherConfigTools','Other configuration/deployment tools'),
-        new LiteralField('Break', ColumnFormatter::$end_columns),
 
+        new CheckboxSetField(
+	        'InteractionWithOtherClouds',
+	        'Are you interacting with other clouds in your IT environment?',
+	        AppDevSurvey::$interaction_with_other_clouds__options),
+        new LiteralField('Break', ColumnFormatter::$end_columns),
         new LiteralField('Break', '<hr/>'),
         new LiteralField('Break', '<p>Please share your thoughts with us on the state of applications on OpenStack. Here are some questions to consider:
         <ol>

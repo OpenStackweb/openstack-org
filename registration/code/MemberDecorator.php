@@ -173,16 +173,15 @@ class MemberDecorator extends DataExtension {
 		$org = Convert::raw2sql($org);
 		if(is_numeric($org)){
 			$org = intval($org);
-			$join = "";
 			$org_filter = " OrganizationID = {$org}";
 		}
 		else{
-			$join = " INNER JOIN Org ON Org.ID = Affiliation.OrganizationID ";
 			$org_filter = " Org.Name = '{$org}' ";
-
 		}
-		$ds = $this->owner->Affiliations("(Current=1 OR EndDate IS NULL ) AND {$org_filter}",'',$join);
-		return $ds?count($ds)>0:false;
+		$res = $this->owner->Affiliations("(Current=1 OR EndDate IS NULL ) AND {$org_filter}");
+		if(!is_numeric($org))
+			$res->leftJoin('Org','Org.ID = Affiliation.OrganizationID');
+		return $res->count() > 0;
 	}
 
 	public function getCurrentOrganization(){
