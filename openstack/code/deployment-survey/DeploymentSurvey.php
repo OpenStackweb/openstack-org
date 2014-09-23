@@ -27,6 +27,11 @@ class DeploymentSurvey extends DataObject {
 		// New Deployment Survey Daily Digest
 		'SendDigest' => 'Boolean', // SendDigest = 1 SENT, SendDigest = 0 to be send
 		'UpdateDate' => 'SS_Datetime',
+		'FirstName' => 'Text',
+		'Surname' => 'Text',
+		'Email' => 'Text',
+		'OpenStackRecommendRate' => 'Text',
+		'OpenStackRecommendation' => 'Text',
 	);
 
 	static $has_one = array(
@@ -93,6 +98,20 @@ class DeploymentSurvey extends DataObject {
 		'More than 10,000 employees' => 'More than 10,000 employees'
 	);
 
+	public static $openstack_recommendation_rate_options = array (
+		'0' => '0',
+		'1' => '1',
+		'2' => '2',
+		'3' => '3',
+		'4' => '4',
+		'5' => '5',
+		'6' => '6',
+		'7' => '7',
+		'8' => '8',
+		'9' => '9',
+		'10' => '10',
+	);
+
 	public static $openstack_involvement_options = array (
 		'Service Provider' => 'OpenStack cloud service provider - provides public or hosted private cloud services for other organizations',
 		'Ecosystem Vendor' => 'Ecosystem vendor - provides software or solutions that enable others to build or run OpenStack clouds',
@@ -101,18 +120,21 @@ class DeploymentSurvey extends DataObject {
 	);
 
 	public static $information_options = array (
-		'ask.openstack.org' => 'ask.openstack.org',
+		'Ask OpenStack (ask.openstack.org)' => 'Ask OpenStack (ask.openstack.org)',
 		'Blogs' => 'Blogs',
 		'docs.openstack.org' => 'docs.openstack.org',
 		'IRC' => 'IRC',
-		'Launchpad Answers' => 'Launchpad Answers',
 		'OpenStack Mailing List' => 'OpenStack Mailing List',
 		'OpenStack Dev Mailing List' => 'OpenStack Dev Mailing List',
 		'The OpenStack Operations Guide' => 'The OpenStack Operations Guide',
 		'Other Online Forums' => 'Online Forums',
 		'OpenStack Planet' => 'OpenStack Planet (planet.openstack.org)',
 		'Source Code' => 'Read the source code',
-		'Other' => 'Other (please specify)'
+		'Other' => 'Other (please specify)',
+		'Local user group' => 'Local user group',
+		'OpenStack Operators Mailing List'=>'OpenStack Operators Mailing List',
+		'Superuser' => 'Superuser',
+		'Vendor documentation' => 'Vendor documentation',
 	);
 
 	public static $business_drivers_options = array (
@@ -146,6 +168,9 @@ class DeploymentSurvey extends DataObject {
 				new DropdownField('OrgID',
 					'Organization',
 					Org::get()->sort('Org.Name','ASC')->map("ID", "Name", "-- Please choose an Organization --")),
+				new TextField('FirstName', 'First Name'),
+				new TextField('Surname', 'Last Name'),
+				new EmailField('Email', 'Email'),
 				new DropdownField(
 					'Industry',
 					'Industry',
@@ -185,7 +210,13 @@ class DeploymentSurvey extends DataObject {
 					'BusinessDrivers',
 					'What are your business drivers for using OpenStack? (optional)',
 					DeploymentSurvey::$business_drivers_options),
-				new TextField('OtherBusinessDrivers','Other business drivers')
+				new TextField('OtherBusinessDrivers','Other business drivers'),
+				new DropdownField(
+					'OpenStackRecommendRate',
+					'How likely is it that you would recommend OpenStack to a friend or colleague?',
+					DeploymentSurvey::$openstack_recommendation_rate_options
+				),
+				new TextareaField('OpenStackRecommendation', 'Are there any additional comments you would pass as part of this recommendation?')
 		));
 		$user_name_txt->setReadonly(true);
 		return $fields;

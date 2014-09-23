@@ -17,7 +17,8 @@ class AppDevSurvey extends DataObject {
 		'ConfigTools' => 'Text',
 		'OtherConfigTools' => 'Text',
 		'StateOfOpenStack' => 'Text',
-		'DocsPriority' => 'Text'
+		'DocsPriority' => 'Text',
+		'InteractionWithOtherClouds'=> 'Text',
 	);
 
 	static $has_one = array(
@@ -65,6 +66,8 @@ class AppDevSurvey extends DataObject {
 		'PHP' => 'PHP',
 		'Python' => 'Python',
 		'Ruby' => 'Ruby',
+		'Go' => 'Go',
+		'Shell Scripts (eg bash with curl)' => 'Shell Scripts (eg bash with curl)',
 		'Other' => 'Other (please specify)'
 	);
 
@@ -86,6 +89,9 @@ class AppDevSurvey extends DataObject {
 		'Sublime' => 'Sublime',
 		'Vim' => 'Vim',
 		'Visual Studio' => 'Visual Studio',
+		'Atom' => 'Atom',
+		'Emacs' => 'Emacs',
+		'Pycharm' => 'Pycharm',
 		'Other' => 'Other (please specify)'
 	);
 
@@ -98,7 +104,16 @@ class AppDevSurvey extends DataObject {
 		'Puppet' => 'Puppet',
 		'SaltStack' => 'SaltStack',
 		'OpenShift' => 'OpenShift',
+		'Juju' => 'Juju',
 		'Other' => 'Other (please specify)'
 	);
 
+	public static $interaction_with_other_clouds__options = array (
+		'Noe' => 'No',
+		'Yes, but only OpenStack ones' => 'Yes, but only OpenStack ones',
+		'Yes, Amazon also' => 'Yes, Amazon also',
+		'Yes, Google Compute Engine also' => 'Yes, Google Compute Engine also',
+		'Yes, Azure also' => 'Yes, Azure also',
+		'Yes, multiple other clouds' => 'Yes, multiple other clouds',
+	);
 }
