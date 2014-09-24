@@ -16,7 +16,8 @@ jQuery(document).ready(function($) {
                 'Title'  : {required: true },
                 'PrimaryCity'  : {required: true },
                 'PrimaryCountry'  : {required: true },
-                'UserGroupMember'  : {required: true }
+                'FirstName'  : {required: true },
+                'Surname'  : {required: true }
             },
             onfocusout: false,
             focusCleanup: true,

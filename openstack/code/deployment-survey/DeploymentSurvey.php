@@ -1,6 +1,7 @@
 <?php
 
-class DeploymentSurvey extends DataObject {
+class DeploymentSurvey extends DataObject
+{
 
 	static $db = array(
 		'Title' => 'Text',
@@ -52,26 +53,25 @@ class DeploymentSurvey extends DataObject {
 	);
 
 	static $searchable_fields = array(
-		'Title'    => 'PartialMatchFilter',
+		'Title' => 'PartialMatchFilter',
 		'Org.Name' => 'PartialMatchFilter',
 	);
 
 
-    static $defaults = array(
-       "CurrentStep" => 'OrgInfo',
-       'HighestStepAllowed' => 'OrgInfo',
-       'OkToContact' => 'True'
-    );
+	static $defaults = array(
+		"CurrentStep" => 'OrgInfo',
+		'HighestStepAllowed' => 'OrgInfo',
+		'OkToContact' => 'True'
+	);
 
 	static $singular_name = 'Deployment Survey';
 	static $plural_name = 'Deployment Surveys';
 
 	public static $steps = array(
-		'Login','OrgInfo','AppDevSurvey','Deployments','DeploymentDetails','MoreDeploymentDetails','ThankYou'
+		'Login', 'OrgInfo', 'AppDevSurvey', 'Deployments', 'DeploymentDetails', 'MoreDeploymentDetails', 'ThankYou'
 	);
 
-	public static $industry_options = array (
-		'unspecified' => '-- Please Select One --',
+	public static $industry_options = array(
 		'Academic / Research' => 'Academic / Research / Education',
 		'Consumer Goods' => 'Consumer Goods',
 		'Energy' => 'Energy',
@@ -85,10 +85,9 @@ class DeploymentSurvey extends DataObject {
 		'Retail' => 'Retail',
 		'Telecommunications' => 'Telecommunications',
 		'Transportation/Shipping' => 'Transportation / Shipping',
-		'Other' => 'Other (please specify)'
 	);
 
-	public static $organization_size_options = array (
+	public static $organization_size_options = array(
 		'1-20 employees' => '1-20 employees',
 		'21-100 employees' => '21-100 employees',
 		'101 to 500 employees' => '101 to 500 employees',
@@ -98,7 +97,7 @@ class DeploymentSurvey extends DataObject {
 		'More than 10,000 employees' => 'More than 10,000 employees'
 	);
 
-	public static $openstack_recommendation_rate_options = array (
+	public static $openstack_recommendation_rate_options = array(
 		'0' => '0',
 		'1' => '1',
 		'2' => '2',
@@ -112,14 +111,14 @@ class DeploymentSurvey extends DataObject {
 		'10' => '10',
 	);
 
-	public static $openstack_involvement_options = array (
+	public static $openstack_involvement_options = array(
 		'Service Provider' => 'OpenStack cloud service provider - provides public or hosted private cloud services for other organizations',
 		'Ecosystem Vendor' => 'Ecosystem vendor - provides software or solutions that enable others to build or run OpenStack clouds',
 		'Cloud operator' => 'Private cloud operator - runs an OpenStack private cloud for their own organization',
 		'Cloud Consumer' => 'Consumer of an OpenStack cloud - has API or dashboard credentials for one or more OpenStack resource pools, including an <strong>Application Developer<strong>'
 	);
 
-	public static $information_options = array (
+	public static $information_options = array(
 		'Ask OpenStack (ask.openstack.org)' => 'Ask OpenStack (ask.openstack.org)',
 		'Blogs' => 'Blogs',
 		'docs.openstack.org' => 'docs.openstack.org',
@@ -130,14 +129,13 @@ class DeploymentSurvey extends DataObject {
 		'Other Online Forums' => 'Online Forums',
 		'OpenStack Planet' => 'OpenStack Planet (planet.openstack.org)',
 		'Source Code' => 'Read the source code',
-		'Other' => 'Other (please specify)',
 		'Local user group' => 'Local user group',
-		'OpenStack Operators Mailing List'=>'OpenStack Operators Mailing List',
+		'OpenStack Operators Mailing List' => 'OpenStack Operators Mailing List',
 		'Superuser' => 'Superuser',
 		'Vendor documentation' => 'Vendor documentation',
 	);
 
-	public static $business_drivers_options = array (
+	public static $business_drivers_options = array(
 		'Cost savings' => 'Cost savings',
 		'Operational efficiency' => 'Operational efficiency',
 		'Time to market' => 'Time to market, ability to deploy applications faster',
@@ -147,15 +145,16 @@ class DeploymentSurvey extends DataObject {
 		'Attracting talent' => 'Building a technology environment that attracts top technical talent',
 		'Open technology' => 'Adopting an open technology platform',
 		'Control' => 'Control of platform to achieve security and privacy goals',
-		'Other' => 'Other (please specify)'
 	);
 
-	protected function onBeforeWrite() {
+	protected function onBeforeWrite()
+	{
 		parent::onBeforeWrite();
 		$this->UpdateDate = SS_Datetime::now()->Rfc2822();
 	}
 
-	function getCMSFields() {
+	function getCMSFields()
+	{
 
 		$fields = new FieldList(array(new TabSet("Root")));
 
@@ -164,77 +163,74 @@ class DeploymentSurvey extends DataObject {
 		$member = $this->Member();
 		$fields->addFieldsToTab('Root.Main',
 			array(
-				$user_name_txt = new ReadonlyField('UserName', 'User',$member->getFullName()),
+				$user_name_txt = new ReadonlyField('UserName', 'User', $member->getFullName()),
+
 				new DropdownField('OrgID',
 					'Organization',
-					Org::get()->sort('Org.Name','ASC')->map("ID", "Name", "-- Please choose an Organization --")),
-				new TextField('FirstName', 'First Name'),
-				new TextField('Surname', 'Last Name'),
-				new EmailField('Email', 'Email'),
+					Org::get()->sort('Org.Name', 'ASC')->map("ID", "Name", "-- Please choose an Organization --")),
+				new ReadonlyField('FirstName', 'First Name'),
+				new ReadonlyField('Surname', 'Last Name'),
+
 				new DropdownField(
 					'Industry',
 					'Industry',
-					DeploymentSurvey::$industry_options
+					ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('unspecified' => '-- Please Select One --'), array('Other' => 'Other (please specify)'))
 				),
-				new TextField('OtherIndustry','Other Industry'),
+				new TextField('OtherIndustry', 'Other Industry'),
 				new DropdownField(
 					'OrgSize',
 					'Organization Size',
 					DeploymentSurvey::$organization_size_options
 				),
-				new LiteralField('Break','<p>Where is the primary location or headquarters of your organization?</p>'),
-				new TextField('PrimaryCity','City'),
-				new TextField('PrimaryState','State/Province'),
+				new LiteralField('Break', '<p>Where is the primary location or headquarters of your organization?</p>'),
+				new TextField('PrimaryCity', 'City'),
+				new TextField('PrimaryState', 'State/Province'),
 				new DropdownField(
 					'PrimaryCountry',
 					'Country',
 					$CountryCodes
 				),
-				new TextField('Title','Your Job Title'),
-				new CheckboxSetField('OpenStackInvolvement','What best describes your involvement with OpenStack?',DeploymentSurvey::$openstack_involvement_options),
-				new CheckboxSetField('InformationSources','Where do you go for information about using OpenStack?',DeploymentSurvey::$information_options),
-				new TextField('OtherInformationSources','Other information sources'),
-				new OptionSetField(
-					'UserGroupMember',
-					'Are you a member of a user group?',
-					array('1' => 'Yes','0' => 'No'),
-					0
-				),
-				new TextField('UserGroupName','If yes, which user group (<a href="http://wiki.openstack.org/OpenStackUserGroups" target="_blank">User Group List</a>)?'),
-				new CheckboxField('OkToContact','The OpenStack Foundation and User Committee can communicate with me in the future about my usage'),
+				new TextField('Title', 'Your Job Title'),
+				new CheckboxSetField('OpenStackInvolvement', 'What best describes your involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options)),
+				new CheckboxSetField('InformationSources', 'Where do you go for information about using OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other (please specify)'))),
+				new TextField('OtherInformationSources', 'Other information sources'),
+				new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee can communicate with me in the future about my usage'),
 				new LiteralField('Break', '<p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights.</p>'),
-				new TextAreaField('FurtherEnhancement','What areas of OpenStack software require further enhancement? (optional)'),
-				new TextAreaField('FoundationUserCommitteePriorities','What should be the priorities for the Foundation and User Committee during the coming year? (optional)'),
-				new TextAreaField('WhatDoYouLikeMost','What do you like most about OpenStack? (optional)'),
+				new TextAreaField('FurtherEnhancement', 'What areas of OpenStack software require further enhancement? (optional)'),
+				new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year? (optional)'),
+				new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack? (optional)'),
 				new CheckboxSetField(
 					'BusinessDrivers',
 					'What are your business drivers for using OpenStack? (optional)',
-					DeploymentSurvey::$business_drivers_options),
-				new TextField('OtherBusinessDrivers','Other business drivers'),
+					ArrayUtils::AlphaSort(DeploymentSurvey::$business_drivers_options, null, array('Other' => 'Other (please specify)'))),
+				new TextField('OtherBusinessDrivers', 'Other business drivers'),
 				new DropdownField(
 					'OpenStackRecommendRate',
-					'How likely is it that you would recommend OpenStack to a friend or colleague?',
+					'How likely is it that you would recommend OpenStack to a friend or colleague? (10 being the best)',
 					DeploymentSurvey::$openstack_recommendation_rate_options
 				),
 				new TextareaField('OpenStackRecommendation', 'Are there any additional comments you would pass as part of this recommendation?')
-		));
+			));
 		$user_name_txt->setReadonly(true);
 		return $fields;
 	}
 
-	public function DisplayOrg() {
-        return Member::currentUser()->getOrgName();
+	public function DisplayOrg()
+	{
+		return Member::currentUser()->getOrgName();
 	}
 
 	/**
 	 * @param int $batch_size
 	 * @return mixed
 	 */
-	public function getNotDigestSent($batch_size){
-		return DeploymentSurvey::get()->filter(array('SendDigest'=> 0))->where("\"Title\" IS NULL ")->sort('Created')->limit($batch_size);
+	public function getNotDigestSent($batch_size)
+	{
+		return DeploymentSurvey::get()->filter(array('SendDigest' => 0))->where("\"Title\" IS NULL ")->sort('Created')->limit($batch_size);
 	}
 }
 
 
-class DeploymentSurveyController extends Page_Controller {
+class DeploymentSurveyController extends Page_Controller
+{
 }

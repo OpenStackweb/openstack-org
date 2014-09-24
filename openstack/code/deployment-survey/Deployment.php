@@ -1,6 +1,7 @@
 <?php
 
-class Deployment extends DataObject {
+class Deployment extends DataObject
+{
 
 	private static $db = array(
 
@@ -24,7 +25,7 @@ class Deployment extends DataObject {
 		'NetworkDrivers' => 'Text',
 		'OtherNetworkDriver' => 'Text',
 		'WhyNovaNetwork' => 'Text',
-		'OtherWhyNovaNetwork'  => 'Text',
+		'OtherWhyNovaNetwork' => 'Text',
 		'IdentityDrivers' => 'Text',
 		'OtherIndentityDriver' => 'Text',
 		'SupportedFeatures' => 'Text',
@@ -40,7 +41,7 @@ class Deployment extends DataObject {
 		'ObjectStorageNumObjects' => 'Text',
 		'NetworkNumIPs' => 'Text',
 		//control fields
-		'SendDigest' => 'Boolean' ,// SendDigest = 1 SENT, SendDigest = 0 to be send
+		'SendDigest' => 'Boolean',// SendDigest = 1 SENT, SendDigest = 0 to be send
 		'UpdateDate' => 'SS_Datetime',
 		'SwiftGlobalDistributionFeatures' => 'Text',
 		'SwiftGlobalDistributionFeaturesUsesCases' => 'Text',
@@ -56,127 +57,122 @@ class Deployment extends DataObject {
 
 	private static $has_one = array(
 		'DeploymentSurvey' => 'DeploymentSurvey',
-		'Org'              => 'Org'
+		'Org' => 'Org'
 	);
 
 	private static $summary_fields = array(
-		'Label'    => 'Label',
+		'Label' => 'Label',
 		'Org.Name' => 'Organization'
 	);
 
-    private static $singular_name = 'Deployment';
+	private static $singular_name = 'Deployment';
 	private static $plural_name = 'Deployments';
 
 
-	protected function onBeforeWrite() {
+	protected function onBeforeWrite()
+	{
 		parent::onBeforeWrite();
 		$this->UpdateDate = SS_Datetime::now()->Rfc2822();
 	}
 
-	function getCMSFields() {
+	function getCMSFields()
+	{
 
-		$fields = new FieldList(array(new TabSet("Root")));
 
-		$fields->addFieldsToTab('Root.Main',
-		array(
-			new TextField('Label','Deployment Name'),
-			new OptionSetField(
-				'IsPublic',
-				'Would you like to keep this information confidential or allow the Foundation to share information about this deployment publicly?',
-				array('1' => '<strong>Willing to share:</strong> The information on this page may be shared for this deployment',
-					'0' => '<strong>Confidential:</strong> All details provided should be kept confidential to the OpenStack Foundation'),
-				1
-			),
-			new DropdownField('OrgID',
-				'Organization',
-				Org::get()->sort('Org.Name','ASC')->map("ID", "Name", "-- Please choose an Organization --")),
-			new DropdownField(
-				'DeploymentType',
-				'Deployment Type',
-				Deployment::$deployment_type_options
-			),
-			new CheckboxSetField(
-				'ProjectsUsed',
-				'Projects Used',
-				Deployment::$projects_used_options
-			),
-			new CheckboxSetField(
-				'CurrentReleases',
-				'What releases are you currently using?',
-				Deployment::$current_release_options
-			),
-			new DropdownField(
-				'DeploymentStage',
-				'In what stage is your OpenStack deployment? (make a new deployment profile for each type of deployment)',
-				Deployment::$stage_options
-			),
-			new DropdownField('NumCloudUsers',
-				'What\'s the size of your cloud by number of users?',
-				Deployment::$num_cloud_users_options),
-			new CheckboxSetField(
-				'WorkloadsDescription',
-				'Describe the workloads or applications running in your Openstack environment. (choose any that apply)',
-				Deployment::$workloads_description_options),
-			new TextAreaField(
-				'OtherWorkloadsDescription',
-				'Other workloads or applications running in your Openstack environment. (optional)'),
-		));
+		$fields = new FieldSet(
+			$rootTab = new TabSet("Root",
+				$tabContent = new TabSet('Content',
+					new Tab('Main'),
+					new Tab('Details')
+				))
+		);
 
-		$fields->addFieldsToTab('Root.Details',
+		$fields->addFieldsToTab('Root.Content.Main',
 			array(
-				new LiteralField('Break','<p>The information below will help us better understand
+				new TextField('Label', 'Deployment Name'),
+				new OptionSetField(
+					'IsPublic',
+					'Would you like to keep this information confidential or allow the Foundation to share information about this deployment publicly?',
+					array('1' => '<strong>Willing to share:</strong> The information on this page may be shared for this deployment',
+						'0' => '<strong>Confidential:</strong> All details provided should be kept confidential to the OpenStack Foundation'),
+					1
+				),
+				new DropdownField('OrgID', 'Organization', DataObject::get('Org', '', 'Org.Name ASC')->map("ID", "Name", "-- Please choose an Organization --")),
+				new DropdownField('DeploymentType', 'Deployment Type', Deployment::$deployment_type_options),
+				new CheckboxSetField('ProjectsUsed', 'Projects Used', Deployment::$projects_used_options),
+				new CheckboxSetField('CurrentReleases', 'What releases are you currently using?', Deployment::$current_release_options),
+				new CheckboxSetField(
+					'DeploymentStage',
+					'In what stage is your OpenStack deployment? (make a new deployment profile for each type of deployment)',
+					Deployment::$stage_options
+				),
+				new TextAreaField('NumCloudUsers',
+					'What\'s the size of your cloud by number of users?'),
+				new CheckboxSetField(
+					'WorkloadsDescription',
+					'Describe the workloads or applications running in your Openstack environment. (choose any that apply)',
+					ArrayUtils::AlphaSort(Deployment::$workloads_description_options, null, array('Other' => 'Other (please specify)'))),
+				new TextAreaField(
+					'OtherWorkloadsDescription',
+					'Other workloads or applications running in your Openstack environment. (optional)'),
+			));
+
+		$fields->addFieldsToTab('Root.Content.Details',
+
+			array(
+				new LiteralField('Break', '<p>The information below will help us better understand
         the most common configuration and component choices OpenStack deployments are using.</p>'),
 				new CheckboxSetField(
 					'Hypervisors',
 					'If you are using OpenStack Compute, which hypervisors are you using?',
-					Deployment::$hypervisors_options
+					ArrayUtils::AlphaSort(Deployment::$hypervisors_options)
 				),
-				new TextField('OtherHypervisor','Other Hypervisor'),
+				new TextField('OtherHypervisor', 'Other Hypervisor'),
 				new CheckboxSetField(
 					'NetworkDrivers',
 					'Do you use nova-network, or OpenStack Network (Neutron)? If you are using OpenStack Network (Neutron), which drivers are you using?',
-					Deployment::$network_driver_options
+					ArrayUtils::AlphaSort(Deployment::$network_driver_options)
 				),
-				new TextField('OtherNetworkDriver','Other Network Driver'),
+				new TextField('OtherNetworkDriver', 'Other Network Driver'),
 				new CheckboxSetField(
 					'WhyNovaNetwork',
 					'If you are using nova-network and not OpenStack Networking (Neutron), what would allow you to migrate? (optional)',
-					Deployment::$why_nova_network_options),
-				new LiteralField('Break','<br/>'),
-				new TextField('OtherWhyNovaNetwork',''),
+					ArrayUtils::AlphaSort(Deployment::$why_nova_network_options, null, array('Other (please specify)' => 'Other (please specify)'))),
+				new LiteralField('Break', '<br/>'),
+				new TextField('OtherWhyNovaNetwork', ''),
 				new CheckboxSetField(
 					'BlockStorageDrivers',
 					'If you are using OpenStack Block Storage, which drivers are you using?',
-					Deployment::$block_storage_divers_options
+					ArrayUtils::AlphaSort(Deployment::$block_storage_divers_options)
 				),
-				new TextField('OtherBlockStorageDriver','Other Block Storage Driver'),
+				new TextField('OtherBlockStorageDriver', 'Other Block Storage Driver'),
 				new CheckboxSetField(
 					'IdentityDrivers',
 					'If you are using OpenStack Identity which OpenStack Identity drivers are you using?',
-					Deployment::$identity_driver_options
+					ArrayUtils::AlphaSort(Deployment::$identity_driver_options)
 				),
-				new TextField('OtherIndentityDriver','Other/Custom Identity Driver'),
+				new TextField('OtherIndentityDriver', 'Other/Custom Identity Driver'),
 				new CheckboxSetField(
 					'SupportedFeatures',
 					'Which of the following compatibility APIs does/will your deployment support?',
-					Deployment::$deployment_features_options_new
+					ArrayUtils::AlphaSort(Deployment::$deployment_features_options_new)
 				),
 				new CheckboxSetField(
 					'DeploymentTools',
 					'What tools are you using to deploy/configure your cluster?',
-					Deployment::$deployment_tools_options
+					ArrayUtils::AlphaSort(Deployment::$deployment_tools_options)
 				),
-				new TextField('OtherDeploymentTools','Other tools'),
+				new TextField('OtherDeploymentTools', 'Other tools'),
 				new CheckboxSetField(
 					'OperatingSystems',
 					'What is the main Operating System you are using to run your OpenStack cloud?',
-					Deployment::$operating_systems_options
+					ArrayUtils::AlphaSort(Deployment::$operating_systems_options)
 				),
-				new TextField('OtherOperatingSystems','Other Operating System'),
-				new LiteralField('Break','<p>Please provide the following information about the
+				new TextField('OtherOperatingSystems', 'Other Operating System'),
+				new LiteralField('Break', '<p>Please provide the following information about the
         size and scale of this OpenStack deployment. This information is optional, but will
         be kept confidential and never published in connection with your organization.</p>'),
-				new LiteralField('Break','<p><strong>If using OpenStack Compute, what’s the size of your cloud?</strong></p>'),
+				new LiteralField('Break', '<p><strong>If using OpenStack Compute, what’s the size of your cloud?</strong></p>'),
 				new DropdownField(
 					'ComputeNodes',
 					'Physical compute nodes',
@@ -197,7 +193,7 @@ class Deployment extends DataObject {
 					'If using OpenStack Block Storage, what’s the size of your cloud by total storage in terabytes?',
 					Deployment::$storage_size_options
 				),
-				new LiteralField('Break','<p><strong>If using OpenStack Object Storage, what’s the size of your cloud?</strong></p>'),
+				new LiteralField('Break', '<p><strong>If using OpenStack Object Storage, what’s the size of your cloud?</strong></p>'),
 				new DropdownField(
 					'ObjectStorageSize',
 					'Total storage in terabytes',
@@ -211,22 +207,22 @@ class Deployment extends DataObject {
 				new DropdownField(
 					'SwiftGlobalDistributionFeatures',
 					'Are you using Swift\'s global distribution features?',
-					Deployment::$swift_global_distribution_features_options
+					ArrayUtils::AlphaSort(Deployment::$swift_global_distribution_features_options, array('unspecified' => '-- Select One --'))
 				),
 
 				new DropdownField(
 					'SwiftGlobalDistributionFeaturesUsesCases',
 					'If yes, what is your use case?',
-					Deployment::$swift_global_distribution_features_uses_cases_options
+					ArrayUtils::AlphaSort(Deployment::$swift_global_distribution_features_uses_cases_options, array('unspecified' => '-- Select One --'))
 				),
-				new TextField('OtherSwiftGlobalDistributionFeaturesUsesCases',''),
+				new TextField('OtherSwiftGlobalDistributionFeaturesUsesCases', ''),
 
 				new DropdownField(
 					'Plans2UseSwiftStoragePolicies',
 					'Do you have plans to use Swift\'s storage policies or erasure codes in the next year?',
-					Deployment::$plans_2_use_swift_storage_policies_options
+					ArrayUtils::AlphaSort(Deployment::$plans_2_use_swift_storage_policies_options, array('unspecified' => '-- Select One --'))
 				),
-				new TextField('OtherPlans2UseSwiftStoragePolicies',''),
+				new TextField('OtherPlans2UseSwiftStoragePolicies', ''),
 
 				new DropdownField(
 					'NetworkNumIPs',
@@ -236,16 +232,16 @@ class Deployment extends DataObject {
 				new CheckboxSetField(
 					'UsedDBForOpenStackComponents',
 					'What database do you use for the components of your OpenStack cloud?',
-					Deployment::$used_db_for_openstack_components_options
+					ArrayUtils::AlphaSort(Deployment::$used_db_for_openstack_components_options, null, array('Other' => 'Other (Specify)'))
 				),
-				new TextField('OtherUsedDBForOpenStackComponents',''),
+				new TextField('OtherUsedDBForOpenStackComponents', ''),
 				new CheckboxSetField(
 					'ToolsUsedForYourUsers',
 					'What tools are you using charging or show-back for your users?',
-					Deployment::$tools_used_for_your_users_options
+					ArrayUtils::AlphaSort(Deployment::$tools_used_for_your_users_options, null, array('Other' => 'Other (Specify)'))
 				),
-				new TextField('OtherToolsUsedForYourUsers',''),
-				new TextareaField('Reason2Move2Ceilometer','If you are not using Ceilometer, what would allow you to move to it (optional free text)?')
+				new TextField('OtherToolsUsedForYourUsers', ''),
+				new TextareaField('Reason2Move2Ceilometer', 'If you are not using Ceilometer, what would allow you to move to it (optional free text)?')
 			)
 		);
 		return $fields;
@@ -269,47 +265,55 @@ class Deployment extends DataObject {
 		return $validator;
 	}
 
-	public function getCountry() {
-        return $this->DeploymentSurvey()->PrimaryCountry;
-    }
+	public function getCountry()
+	{
+		return $this->DeploymentSurvey()->PrimaryCountry;
+	}
 
-	public function getIndustry() {
-        return $this->DeploymentSurvey()->Industry;
-    }
+	public function getIndustry()
+	{
+		return $this->DeploymentSurvey()->Industry;
+	}
 
-	public function getMember() {
-        return $this->DeploymentSurvey()->Member();
-    }
+	public function getMember()
+	{
+		return $this->DeploymentSurvey()->Member();
+	}
 
-	public function getOrg() {
-        return $this->Org()->Name;
-    }
+	public function getOrg()
+	{
+		return $this->Org()->Name;
+	}
 
-    public function OrgAndLabel(){
-    	return $this->getOrg() . ' - ' . $this->Label;
-    }
+	public function OrgAndLabel()
+	{
+		return $this->getOrg() . ' - ' . $this->Label;
+	}
 
-    public function hasUserStory(){
-    	$userStory = UserStory::get()->filter('DeploymentID',$this->ID)->first();
-    	return ($userStory)? true : false;
-    }
+	public function hasUserStory()
+	{
+		$userStory = UserStory::get()->filter('DeploymentID', $this->ID)->first();
+		return ($userStory) ? true : false;
+	}
 
-    public function getUserStory(){
-    	if ( $this->hasUserStory() ){
-			return UserStory::get()->filter('DeploymentID',$this->ID)->first();
-    	}
-    	return false;
-    }
+	public function getUserStory()
+	{
+		if ($this->hasUserStory()) {
+			return UserStory::get()->filter('DeploymentID', $this->ID)->first();
+		}
+		return false;
+	}
 
 	/**
 	 * @param int $batch_size
 	 * @return mixed
 	 */
-	public function getNotDigestSent($batch_size){
-		Deployment::get()->filter('SendDigest', 0)->sort('UpdateDate','ASC')->limit($batch_size);
+	public function getNotDigestSent($batch_size)
+	{
+		Deployment::get()->filter('SendDigest', 0)->sort('UpdateDate', 'ASC')->limit($batch_size);
 	}
 
-	public static $deployment_type_options = array (
+	public static $deployment_type_options = array(
 		'unspecified' => '-- Select One --',
 		'On-Premise Private Cloud' => 'On-Premise Private Cloud',
 		'Hosted Private Cloud' => 'Hosted Private Cloud',
@@ -318,7 +322,7 @@ class Deployment extends DataObject {
 		'Community Cloud' => 'Community Cloud'
 	);
 
-	public static $projects_used_options = array (
+	public static $projects_used_options = array(
 		'Openstack Compute (Nova)' => 'Openstack Compute (Nova)',
 		'Openstack Block Storage (Cinder)' => 'Openstack Block Storage (Cinder)',
 		'Openstack Object Storage (Swift)' => 'Openstack Object Storage (Swift)',
@@ -332,7 +336,7 @@ class Deployment extends DataObject {
 		'OpenStack Database as a Service (Trove)' => 'OpenStack Database as a Service (Trove)'
 	);
 
-	public static $current_release_options = array (
+	public static $current_release_options = array(
 		'Trunk' => 'Trunk / Continuous deployment',
 		'Icehouse (2014.1)' => 'Icehouse (2014.1)',
 		'Havana (2013.2)' => 'Havana (2013.2)',
@@ -345,14 +349,14 @@ class Deployment extends DataObject {
 		'Austin (2010.1)' => 'Austin (2010.1)'
 	);
 
-	public static $stage_options = array (
+	public static $stage_options = array(
 		'' => '-- Select One --',
 		'Proof of Concept' => 'Proof of Concept',
 		'Under development/in testing' => 'Under development/in testing',
 		'Production' => 'Production'
 	);
 
-	public static $num_cloud_users_options = array (
+	public static $num_cloud_users_options = array(
 		'Prefer not to say' => 'Prefer not to say',
 		'1-100 users' => '1-100 users',
 		'101-1,000 users' => '101-1,000 users',
@@ -363,7 +367,7 @@ class Deployment extends DataObject {
 		'More than 100,000 users' => 'More than 100,000 users'
 	);
 
-	public static $workloads_description_options = array (
+	public static $workloads_description_options = array(
 		'Virtual Desktops' => 'Virtual Desktops',
 		'HPC' => 'High Throughput Computing/Batch System/HPC',
 		'Public Hosting' => 'Public Hosting',
@@ -386,16 +390,16 @@ class Deployment extends DataObject {
 		'Management and Monitoring Systems' => 'Management and Monitoring Systems',
 		'Games/Online Games' => 'Games/Online Games',
 		'Up to the user' => 'It’s up to the user',
-		'Other' => 'Other (please specify)'
+
 	);
 
 
-	public static $api_options = array (
+	public static $api_options = array(
 		'XML' => 'XML',
 		'JSON' => 'JSON'
 	);
 
-	public static $hypervisors_options = array (
+	public static $hypervisors_options = array(
 		'kvm' => 'KVM',
 		'xen' => 'Xen / XCP',
 		'xenserver' => 'Citrix XenServer',
@@ -409,7 +413,7 @@ class Deployment extends DataObject {
 		'Docker' => 'Docker'
 	);
 
-	public static $block_storage_divers_options = array (
+	public static $block_storage_divers_options = array(
 		'Ceph RBD' => 'Ceph RBD',
 		'Coraid' => 'Coraid',
 		'Dell EqualLogic' => 'Dell EqualLogic',
@@ -440,7 +444,7 @@ class Deployment extends DataObject {
 		'VMWare VMDK' => 'VMWare VMDK',
 	);
 
-	public static $network_driver_options = array (
+	public static $network_driver_options = array(
 		'nova-network' => 'nova-network',
 		'Big Switch' => 'Big Switch',
 		'Brocade' => 'Brocade',
@@ -470,7 +474,7 @@ class Deployment extends DataObject {
 		'VMWare NSX (formerly Nicira NVP)' => 'VMWare NSX (formerly Nicira NVP)',
 	);
 
-	public static $identity_driver_options = array (
+	public static $identity_driver_options = array(
 		'LDAP' => 'LDAP',
 		'AD' => 'Active Directory',
 		'SQL' => 'SQL',
@@ -479,7 +483,7 @@ class Deployment extends DataObject {
 		'Templated' => 'Templated'
 	);
 
-	public static $deployment_features_options = array (
+	public static $deployment_features_options = array(
 		'Dashboard' => 'Dashboard',
 		'Object storage' => 'Object storage',
 		'Live migration' => 'Live migration',
@@ -490,14 +494,14 @@ class Deployment extends DataObject {
 		'GCE compatibility API' => 'GCE compatibility API'
 	);
 
-	public static $deployment_features_options_new = array (
+	public static $deployment_features_options_new = array(
 		'EC2 compatibility API' => 'EC2 compatibility API',
 		'S3 compatibility API' => 'S3 compatibility API',
 		'OCCI compatibility API' => 'OCCI compatibility API',
 		'GCE compatibility API' => 'GCE compatibility API'
 	);
 
-	public static $deployment_tools_options = array (
+	public static $deployment_tools_options = array(
 		'DevStack' => 'DevStack',
 		'Chef' => 'Chef',
 		'Crowbar' => 'Crowbar',
@@ -509,7 +513,7 @@ class Deployment extends DataObject {
 		'Juju' => 'Juju',
 	);
 
-	public static $operating_systems_options = array (
+	public static $operating_systems_options = array(
 		'CentOS' => 'CentOS',
 		'Debian' => 'Debian',
 		'openSUSE' => 'openSUSE',
@@ -519,10 +523,10 @@ class Deployment extends DataObject {
 		'Windows' => 'Windows',
 		'Fedora' => 'Fedora',
 		'Scientific Linux' => 'Scientific Linux',
-		'' => '',
+
 	);
 
-	public static $compute_nodes_options = array (
+	public static $compute_nodes_options = array(
 		'unspecified' => '-- Select One --',
 		'1-50 nodes' => '1-50 nodes',
 		'51-100 nodes' => '51-100 nodes',
@@ -533,7 +537,7 @@ class Deployment extends DataObject {
 	);
 
 
-	public static $compute_cores_options = array (
+	public static $compute_cores_options = array(
 		'unspecified' => '-- Select One --',
 		'1-100 cores' => '1-100 cores',
 		'101-500 cores' => '101-500 cores',
@@ -544,7 +548,7 @@ class Deployment extends DataObject {
 		'More than 50,000 cores' => 'More than 50,000 cores'
 	);
 
-	public static $compute_instances_options = array (
+	public static $compute_instances_options = array(
 		'unspecified' => '-- Select One --',
 		'1-100 instances' => '1-100 instances',
 		'101-500 instances' => '101-500 instances',
@@ -554,7 +558,7 @@ class Deployment extends DataObject {
 		'More than 10,000 instances' => 'More than 10,000 instances'
 	);
 
-	public static $storage_size_options = array (
+	public static $storage_size_options = array(
 		'unspecified' => '-- Select One --',
 		'0-10 TB' => '0-10 TB',
 		'11-100 TB' => '11-100 TB',
@@ -565,7 +569,7 @@ class Deployment extends DataObject {
 		'over 20PB' => 'over 20PB',
 	);
 
-	public static $stoage_objects_options = array (
+	public static $stoage_objects_options = array(
 		'unspecified' => '-- Select One --',
 		'1-10,000 objects' => '1-10,000 objects',
 		'10,001-100,000 objects' => '10,001-100,000 objects',
@@ -575,7 +579,7 @@ class Deployment extends DataObject {
 		'More than 500 million objects' => 'More than 500 million objects'
 	);
 
-	public static $network_ip_options = array (
+	public static $network_ip_options = array(
 		'unspecified' => '-- Select One --',
 		'less than 100' => 'less than 100',
 		'101 to 1,000' => '101 to 1,000',
@@ -588,7 +592,6 @@ class Deployment extends DataObject {
 		'Complexity of Neutron' => 'Complexity of Neutron',
 		'Scalability, Performance' => 'Scalability, Performance',
 		'Migration effort' => 'Migration effort',
-		'Other (please specify)'=>'Other (please specify)',
 	);
 
 	public static $swift_global_distribution_features_options = array(
@@ -604,7 +607,7 @@ class Deployment extends DataObject {
 	);
 
 	public static $plans_2_use_swift_storage_policies_options = array(
-		'Yes'=>'Yes',
+		'Yes' => 'Yes',
 		'No' => 'No',
 		'Maybe. Please explain' => 'Maybe. Please explain',
 	);
@@ -620,7 +623,7 @@ class Deployment extends DataObject {
 		'PostgreSQL' => 'PostgreSQL',
 		'MongoDB' => 'MongoDB',
 		'SQLite' => 'SQLite',
-		'Other' => 'Other (Specify)',
+
 	);
 
 	public static $tools_used_for_your_users_options = array(
@@ -628,6 +631,6 @@ class Deployment extends DataObject {
 		'Home grown tools using ceilometer' => 'Home grown tools using ceilometer',
 		'Home grown tools using other OpenStack components than ceilometer' => 'Home grown tools using other OpenStack components than ceilometer',
 		'Cloud Kitty' => 'Cloud Kitty',
-		'Other' => 'Other (Specify)',
+
 	);
 }

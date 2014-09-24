@@ -54,7 +54,6 @@ class AppDevSurvey extends DataObject {
 		'php-opencloud' => 'php-opencloud (PHP)',
 		'pkgcloud' => 'pkgcloud (Node.js)',
 		'None' => 'None/Wrote my own',
-		'Other' => 'Other (please specify)'
 	);
 
 	public static $languages_options = array (
@@ -68,7 +67,7 @@ class AppDevSurvey extends DataObject {
 		'Ruby' => 'Ruby',
 		'Go' => 'Go',
 		'Shell Scripts (eg bash with curl)' => 'Shell Scripts (eg bash with curl)',
-		'Other' => 'Other (please specify)'
+
 	);
 
 	public static $api_format_options = array (
@@ -80,7 +79,7 @@ class AppDevSurvey extends DataObject {
 		'Linux' => 'Linux',
 		'Mac OS X' => 'Mac OS X',
 		'Windows' => 'Windows',
-		'Other' => 'Other (please specify)'
+
 	);
 
 	public static $ide_options = array (
@@ -92,7 +91,7 @@ class AppDevSurvey extends DataObject {
 		'Atom' => 'Atom',
 		'Emacs' => 'Emacs',
 		'Pycharm' => 'Pycharm',
-		'Other' => 'Other (please specify)'
+
 	);
 
 	public static $config_tool_options = array (
@@ -105,7 +104,7 @@ class AppDevSurvey extends DataObject {
 		'SaltStack' => 'SaltStack',
 		'OpenShift' => 'OpenShift',
 		'Juju' => 'Juju',
-		'Other' => 'Other (please specify)'
+
 	);
 
 	public static $interaction_with_other_clouds__options = array (

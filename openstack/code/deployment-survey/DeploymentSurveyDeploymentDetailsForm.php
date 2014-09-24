@@ -16,6 +16,7 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
 				wish to allow us to share the basic information on this page. If you
 				select private we will treat all of the profile information you enter as confidential
 				information.</p>'),
+
 			new OptionSetField(
 				'IsPublic',
 				'Would you like to keep this information confidential or allow the Foundation to share information about this deployment publicly?',
@@ -29,26 +30,12 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
 			new LiteralField('Break', '<p>A friendly label like "Production OpenStack Deployment"</p>'),
 
 			new LiteralField('Break', ColumnFormatter::$right_column_start),
-			new DropdownField(
-				'DeploymentType',
-				'Deployment Type',
-				Deployment::$deployment_type_options
-			),
+			new DropdownField('DeploymentType', 'Deployment Type', Deployment::$deployment_type_options),
 			new LiteralField('Break', ColumnFormatter::$end_columns),
-
 			new LiteralField('Break', ColumnFormatter::$left_column_start),
-			new CheckboxSetField(
-				'ProjectsUsed',
-				'Projects Used',
-				Deployment::$projects_used_options
-			),
-
+			new CheckboxSetField('ProjectsUsed', 'Projects Used', Deployment::$projects_used_options),
 			new LiteralField('Break', ColumnFormatter::$right_column_start),
-			new CheckboxSetField(
-				'CurrentReleases',
-				'What releases are you currently using?',
-				Deployment::$current_release_options
-			),
+			new CheckboxSetField('CurrentReleases', 'What releases are you currently using?', Deployment::$current_release_options),
 			new DropdownField(
 				'DeploymentStage',
 				'In what stage is your OpenStack deployment? (make a new deployment profile for each type of deployment)',
@@ -63,7 +50,7 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
 			new CheckboxSetField(
 				'WorkloadsDescription',
 				'Describe the workloads or applications running in your Openstack environment. (choose any that apply)',
-				Deployment::$workloads_description_options),
+				ArrayUtils::AlphaSort(Deployment::$workloads_description_options, null, array('Other' => 'Other (please specify)'))),
 			new TextAreaField(
 				'OtherWorkloadsDescription',
 				'Other workloads or applications running in your Openstack environment. (optional)')
@@ -78,6 +65,7 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
 
 		// Create Validators
 		$validator = new RequiredFields('Label',
+
 			'IsPublic',
 			'ProjectsUsed',
 			'NumCloudUsers',
@@ -117,10 +105,13 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
 
 		$form->saveInto($Deployment);
 
+
 		$survey = $form->controller->GetCurrentSurvey();
 		$Deployment->DeploymentSurveyID = $survey->ID;
 		$Deployment->UpdateDate = SS_Datetime::now()->Rfc2822();
+		$Deployment->OrgID = $survey->OrgID;
 		$Deployment->write();
+		/**/
 
 		$survey->CurrentStep = 'MoreDeploymentDetails';
 		$survey->HighestStepAllowed = 'MoreDeploymentDetails';
