@@ -236,6 +236,8 @@ class Page_Controller extends ContentController {
 			}
 		} */
 
+		Requirements::block(SAPPHIRE_DIR . "/thirdparty/jquery/jquery.js");
+		Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
 
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
