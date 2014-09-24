@@ -36,7 +36,7 @@ class PublicCloudCrudApi extends CompanyServiceCrudApi {
 			new SapphireRegionRepository,
 			new SapphireSupportChannelTypeRepository,
 			new SapphireOpenStackReleaseSupportedApiVersionRepository,
-			new PublicCloudAddPolicy,
+			new PublicCloudAddPolicy($this->public_cloud_repository, $this->marketplace_type_repository),
 			new CompanyServiceCanAddResourcePolicy,
 			new CompanyServiceCanAddVideoPolicy,
 			new PublicCloudFactory,

@@ -26,7 +26,7 @@ final class ApplianceCrudApi extends CompanyServiceCrudApi {
 			new SapphireRegionRepository,
 			new SapphireSupportChannelTypeRepository,
 			new SapphireOpenStackReleaseSupportedApiVersionRepository,
-			new ApplianceAddPolicy,
+			new ApplianceAddPolicy($this->appliance_repository, $this->marketplace_type_repository),
 			new CompanyServiceCanAddResourcePolicy,
 			new CompanyServiceCanAddVideoPolicy,
 			new ApplianceFactory,

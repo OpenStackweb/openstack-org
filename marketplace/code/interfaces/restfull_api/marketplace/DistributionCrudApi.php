@@ -25,7 +25,7 @@ final class DistributionCrudApi extends CompanyServiceCrudApi {
 			new SapphireRegionRepository,
 			new SapphireSupportChannelTypeRepository,
 			new SapphireOpenStackReleaseSupportedApiVersionRepository,
-			new DistributionAddPolicy,
+			new DistributionAddPolicy($this->distribution_repository, $this->marketplace_type_repository),
 			new CompanyServiceCanAddResourcePolicy,
 			new CompanyServiceCanAddVideoPolicy,
 			new DistributionFactory,
@@ -52,9 +52,6 @@ final class DistributionCrudApi extends CompanyServiceCrudApi {
 
 			if(!$current_user->isMarketPlaceAdminOfCompany(IDistribution::MarketPlaceGroupSlug, $company_id))
 				return $this_var->permissionFailure();
-
-			if($repository->countByCompany($company_id)>0)
-				return $this_var->validationError(array(array('message'=> sprintf('You reach the max. amount of %s (%s) per Company',"Distributions",1))));
 		});
 
 		$this->addBeforeFilter('updateCompanyService','check_update_company',function ($request) use($this_var, $current_user){
