@@ -254,7 +254,7 @@ class Page_Controller extends ContentController {
 
 		Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 
-        Requirements::customScript("jq1_10_2(document).ready(function($) {
+        Requirements::customScript("jQuery(document).ready(function($) {
 
 			var d = new Date();
             var user_date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();

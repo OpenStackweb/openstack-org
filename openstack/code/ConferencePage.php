@@ -167,7 +167,7 @@ class ConferencePage_Controller extends Page_Controller
         if ($trackingLink) {
 
             $script = <<< JS
-			      jq1_10_2(document).ready(function($){
+			      jQuery(document).ready(function($){
 			         $("a.tracking-link").attr("href", function(i, h) {
 			  		 return h.replace('summithomepage','$trackingLink');
          			});

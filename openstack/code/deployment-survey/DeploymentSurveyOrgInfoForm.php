@@ -49,13 +49,13 @@ class DeploymentSurveyOrgInfoForm extends Form
 			$org_field,
 			$this->first_name_field = new TextField('FirstName', 'First Name', $current_user->FirstName),
 			$this->last_name_field = new TextField('Surname', 'Last Name', $current_user->Surname),
-			$this->email_field = new EmailField('Email', 'Email', $current_user->Email),
+			$this->email_field = new HiddenField('Email', 'Email', $current_user->Email),
 			new LiteralField('Break', '<p>(Changing information here will also update your OpenStack Foundation profile.)</p>'),
 			new LiteralField('Break', ColumnFormatter::$left_column_start),
 			new DropdownField(
 				'Industry',
 				'Industry',
-				DeploymentSurvey::$industry_options
+				ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('unspecified' => '-- Please Select One --'), array('Other' => 'Other (please specify)') )
 			),
 			new TextField('OtherIndustry', 'Other Industry'),
 			new LiteralField('Break', ColumnFormatter::$right_column_start),
@@ -79,8 +79,8 @@ class DeploymentSurveyOrgInfoForm extends Form
 			),
 			new LiteralField('Break', '<hr/>'),
 			new TextField('Title', 'Your Job Title'),
-			new CheckboxSetField('OpenStackInvolvement', 'What best describes your involvement with OpenStack?', DeploymentSurvey::$openstack_involvement_options),
-			new CheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?', DeploymentSurvey::$information_options),
+			new CheckboxSetField('OpenStackInvolvement', 'What best describes your involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options)),
+			new CheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other (please specify)'))),
 			new TextField('OtherInformationSources', 'Other information sources'),
 			new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee can communicate with me in the future about my usage'),
 			new LiteralField('Break', '<hr/>'),
@@ -91,11 +91,11 @@ class DeploymentSurveyOrgInfoForm extends Form
 			new CheckboxSetField(
 				'BusinessDrivers',
 				'What are your business drivers for using OpenStack? (optional)',
-				DeploymentSurvey::$business_drivers_options),
+				ArrayUtils::AlphaSort(DeploymentSurvey::$business_drivers_options,null, array('Other' => 'Other (please specify)'))),
 			new TextField('OtherBusinessDrivers', 'Other business drivers'),
 			new DropdownField(
 				'OpenStackRecommendRate',
-				'How likely is it that you would recommend OpenStack to a friend or colleague?',
+				'How likely is it that you would recommend OpenStack to a friend or colleague? (10 being the best)',
 				DeploymentSurvey::$openstack_recommendation_rate_options
 			),
 			new TextareaField('OpenStackRecommendation', 'Are there any additional comments you would pass as part of this recommendation?')

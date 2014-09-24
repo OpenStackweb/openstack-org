@@ -11,13 +11,13 @@ class DeploymentSurveyAppDevSurveyForm extends Form {
         new CheckboxSetField(
             'Toolkits',
             'What toolkits do you use or plan to use to interact with the OpenStack API?',
-            AppDevSurvey::$toolkits_options),
+            ArrayUtils::AlphaSort(AppDevSurvey::$toolkits_options,null,array('Other' => 'Other (please specify)'))),
         new TextField('OtherToolkits','Other toolkits'),
 
         new LiteralField('Break', ColumnFormatter::$right_column_start),
         new CheckboxSetField('ProgrammingLanguages',
             'If you wrote your own code for interacting with the OpenStack API, what programming language did you write it in?',
-            AppDevSurvey::$languages_options),
+            ArrayUtils::AlphaSort(AppDevSurvey::$languages_options,null,array('Other' => 'Other (please specify)'))),
         new TextField('OtherProgrammingLanguages','Other programming languages'),
 
         new LiteralField('Break', ColumnFormatter::$end_columns),
@@ -25,28 +25,28 @@ class DeploymentSurveyAppDevSurveyForm extends Form {
         new LiteralField('Break', ColumnFormatter::$left_column_start),
         new CheckboxSetField('APIFormats',
             'If you wrote your own code for interacting with the OpenStack API, what API format are you using?',
-            AppDevSurvey::$api_format_options),
+            ArrayUtils::AlphaSort( AppDevSurvey::$api_format_options)),
         new CheckboxSetField(
             'OperatingSystems',
             'What operating systems are you using or plan on using to develop/deploy your applications?',
-            AppDevSurvey::$opsys_options),
+            ArrayUtils::AlphaSort( AppDevSurvey::$opsys_options, null, array(	'Other' => 'Other (please specify)'))),
         new TextField('OtherOperatingSystems','Other operating systems'),
         new CheckboxSetField('DevelopmentEnvironments',
             'What development environment do you use or plan to use?',
-            AppDevSurvey::$ide_options),
+            ArrayUtils::AlphaSort( AppDevSurvey::$ide_options,null, array('Other' => 'Other (please specify)'))),
         new TextField('OtherDevelopmentEnvironments','Other development environments'),
 
         new LiteralField('Break', ColumnFormatter::$right_column_start),
         new CheckboxSetField(
             'ConfigTools',
             'What tools are you using or plan on using to deploy/configure your applications?',
-            AppDevSurvey::$config_tool_options),
+            ArrayUtils::AlphaSort( AppDevSurvey::$config_tool_options,null, array(	'Other' => 'Other (please specify)'))),
         new TextField('OtherConfigTools','Other configuration/deployment tools'),
 
         new CheckboxSetField(
 	        'InteractionWithOtherClouds',
 	        'Are you interacting with other clouds in your IT environment?',
-	        AppDevSurvey::$interaction_with_other_clouds__options),
+	        ArrayUtils::AlphaSort(AppDevSurvey::$interaction_with_other_clouds__options)),
         new LiteralField('Break', ColumnFormatter::$end_columns),
         new LiteralField('Break', '<hr/>'),
         new LiteralField('Break', '<p>Please share your thoughts with us on the state of applications on OpenStack. Here are some questions to consider:
