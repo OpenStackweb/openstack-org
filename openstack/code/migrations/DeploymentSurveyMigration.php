@@ -3,7 +3,7 @@
 /***
  * Class DeploymentSurveyMigration
  */
-final class DeploymentSurveyMigration {
+final class DeploymentSurveyMigration extends MigrationTask {
 	protected $title = "Deployment Survey Migration";
 
 	protected $description = "Migrates all old user surveys answers to new ones.";
