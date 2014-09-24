@@ -37,7 +37,7 @@
 			$response = new SS_HTTPResponse();
 
 			// If a member was found return status 200 and 'OK'
-			if ($Member) {
+			if ($Member && $Member->isFoundationMember()) {
 				$response->setStatusCode(200);
 				$response->setBody('OK');
 				$response->output();
