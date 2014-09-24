@@ -37,7 +37,7 @@ final class PrivateCloudCrudApi extends CompanyServiceCrudApi {
 			new SapphireRegionRepository,
 			new SapphireSupportChannelTypeRepository,
 			new SapphireOpenStackReleaseSupportedApiVersionRepository,
-			new PrivateCloudAddPolicy,
+			new PrivateCloudAddPolicy($this->private_cloud_repository, $this->marketplace_type_repository),
 			new CompanyServiceCanAddResourcePolicy,
 			new CompanyServiceCanAddVideoPolicy,
 			new PrivateCloudFactory,

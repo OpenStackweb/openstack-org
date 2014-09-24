@@ -5,6 +5,31 @@
  */
 class MarketPlaceCompany extends DataExtension implements ICompany {
 
+
+	//Add extra database fields
+	public function extraStatics()
+	{
+		return array(
+			'db' => array(
+
+			),
+
+			'defaults' => array(
+
+			),
+
+			'has_one'  => array(
+
+			),
+
+			'has_many' => array(
+				'MarketPlaceTypeAllowedInstances' => 'MarketPlaceAllowedInstance',
+			),
+			'belongs_many_many'=> array(),
+
+		);
+	}
+
 	public function getName()
 	{
 		return $this->owner->getField('Name');
@@ -77,5 +102,15 @@ class MarketPlaceCompany extends DataExtension implements ICompany {
 		$query->addAddCondition(QueryCriteria::equal('Active',true));
 		$query = (string)$query;
 		return $this->owner->Services($query);
+	}
+
+	/**
+	 * @param IMarketPlaceType $type
+	 * @return int
+	 */
+	public function getAllowedMarketplaceTypeInstances(IMarketPlaceType $type)
+	{
+		$mkt = $this->owner->MarketPlaceTypeAllowedInstances('MarketPlaceTypeID = '.$type->getIdentifier())->first();
+		return is_null($mkt)?1:$mkt->getMaxInstances();
 	}
 }

@@ -5,7 +5,6 @@
  */
 class TrainingAddPolicy implements IMarketPlaceTypeAddPolicy {
 
-
 	/**
 	 * @param ICompany $company
 	 * @return bool

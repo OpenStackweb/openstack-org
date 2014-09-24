@@ -64,7 +64,7 @@ final class ConsultantsCrudApi extends CompanyServiceCrudApi {
 			$this->languages_repository,
 			new SapphireConfigurationManagementTypeRepository,
 			new SapphireConsultantServiceOfferedTypeRepository,
-			new ConsultantAddPolicy,
+			new ConsultantAddPolicy($this->consultant_repository, $this->marketplace_type_repository),
 			new CompanyServiceCanAddResourcePolicy,
 			new CompanyServiceCanAddVideoPolicy,
 			new ConsultantFactory,
@@ -98,9 +98,6 @@ final class ConsultantsCrudApi extends CompanyServiceCrudApi {
 
 			if(!$current_user->isMarketPlaceAdminOfCompany(IConsultant::MarketPlaceGroupSlug, $company_id))
 				return $this_var->permissionFailure();
-
-			if($repository->countByCompany($company_id)>0)
-				return $this_var->validationError(array(array('message'=> sprintf('You reach the max. amount of %s (%s) per Company',"Consultants",1))));
 		});
 
 		$this->addBeforeFilter('updateCompanyService','check_update_company',function ($request) use($this_var, $current_user){

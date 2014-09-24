@@ -1,7 +1,7 @@
 function ajaxError(jqXHR, textStatus, errorThrown){
     var HTTP_status = jqXHR.status;
     if(HTTP_status==412){
-        response = $.parseJSON(jqXHR.responseText);
+        response = jQuery.parseJSON(jqXHR.responseText);
         if(response.error==='validation'){
             var msg = '';
             for(var i=0;i < response.messages.length ; i++) {
@@ -25,8 +25,8 @@ function ajaxError(jqXHR, textStatus, errorThrown){
 }
 
 function displayErrorMessage(title,message){
-    var $alert = $('<div id="alert" title="'+title+'"><p>'+message+'</p></div>');
-    $('body').append($alert);
+    var $alert = jQuery('<div id="alert" title="'+title+'"><p>'+message+'</p></div>');
+    jQuery('body').append($alert);
     $alert.dialog();
 }
 

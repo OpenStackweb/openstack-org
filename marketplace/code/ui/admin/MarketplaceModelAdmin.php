@@ -20,6 +20,7 @@ class MarketplaceModelAdmin extends ModelAdmin {
 		'MarketPlaceVideoType',
 		'OpenStackComponent',
 		'OpenStackRelease',
+		'MarketPlaceAllowedInstance',
 	);
 
 	public $showImportForm = false;

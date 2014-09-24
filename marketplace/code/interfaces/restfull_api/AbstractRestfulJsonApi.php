@@ -198,6 +198,8 @@ abstract class AbstractRestfulJsonApi extends Controller {
 		$response = new SS_HTTPResponse();
 		$response->setStatusCode(412);
 		$response->addHeader('Content-Type', 'application/json');
+		if(!is_array($messages))
+			$messages = array(array('message'=> $messages));
 		$response->setBody(json_encode(
 			array('error' => 'validation','messages' => $messages)
 		));

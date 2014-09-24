@@ -1,4 +1,7 @@
-jQuery.validator.addMethod("ValidPlainText", function (value, element, arg) {
+(function( $ ){
+
+
+$.validator.addMethod("ValidPlainText", function (value, element, arg) {
     value = value.trim();
     if(value.length == 0)
         return true;
@@ -9,11 +12,11 @@ jQuery.validator.addMethod("ValidPlainText", function (value, element, arg) {
 }, "Field is not valid Text!");
 
 
-jQuery.validator.addMethod("color", function (value, element, arg) {
+$.validator.addMethod("color", function (value, element, arg) {
     return value.match(/^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/g);
 }, "Field is not a valid color value (RGB)!");
 
-jQuery.validator.addMethod("validate_duplicate_field", function (value, element, arg) {
+$.validator.addMethod("validate_duplicate_field", function (value, element, arg) {
     var table     = arg[0];
     var css_class = arg[1];
     var rows  = jQuery("tbody > tr",table);
@@ -40,7 +43,7 @@ jQuery.validator.addMethod("validate_duplicate_field", function (value, element,
 }, "Field already defined.");
 
 
-jQuery.validator.addMethod("rows_max_count", function (value, element, arg) {
+$.validator.addMethod("rows_max_count", function (value, element, arg) {
     var max_count      = arg[0];
     var table          = arg[1];
     var rows           = jQuery("tbody > tr",table);
@@ -48,7 +51,7 @@ jQuery.validator.addMethod("rows_max_count", function (value, element, arg) {
 }, "You reached the maximum allowed number Items.");
 
 
-jQuery.validator.addMethod("complete_url", function(value, element, arg) {
+$.validator.addMethod("complete_url", function(value, element, arg) {
     // if no url, don't do anything
     value = value.trim();
     if (value.length == 0) { return true; }
@@ -62,3 +65,5 @@ jQuery.validator.addMethod("complete_url", function(value, element, arg) {
     // contributed by Scott Gonzalez: http://projects.scottsplayground.com/iri/
     return this.optional(element) || /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(value);
 }, 'You must enter a valid URL');
+
+}( jQuery ));
