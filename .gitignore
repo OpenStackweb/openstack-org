@@ -8,7 +8,7 @@ framework
 colorpicker
 cms
 translatable
-vendor
+vendor/
 
 /openstack-marketing-portal/*
 /blog/*
@@ -40,7 +40,6 @@ composer.phar
 backup_scripts/cron-backup-config.php
 logs
 feeds/cache
-openstack/_config.php
 logs/*
 sapphire/thirdparty/htmlpurifier-4.4.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/
 elections/input
