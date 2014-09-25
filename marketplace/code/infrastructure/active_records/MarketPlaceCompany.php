@@ -5,30 +5,9 @@
  */
 class MarketPlaceCompany extends DataExtension implements ICompany {
 
-
-	//Add extra database fields
-	public function extraStatics()
-	{
-		return array(
-			'db' => array(
-
-			),
-
-			'defaults' => array(
-
-			),
-
-			'has_one'  => array(
-
-			),
-
-			'has_many' => array(
-				'MarketPlaceTypeAllowedInstances' => 'MarketPlaceAllowedInstance',
-			),
-			'belongs_many_many'=> array(),
-
-		);
-	}
+	static $has_many =  array(
+	'MarketPlaceTypeAllowedInstances' => 'MarketPlaceAllowedInstance',
+	);
 
 	public function getName()
 	{

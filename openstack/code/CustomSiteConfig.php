@@ -25,11 +25,11 @@ class CustomSiteConfig extends DataExtension {
 	        $filters['SiteBannerRank:GreaterThan'] = $previous_banner_rank;
         }
 
-	    $settings = SiteBannerConfigurationSetting::get()->filter($filters)->order('SiteBannerRank','ASC')->first();
+	    $settings = SiteBannerConfigurationSetting::get()->filter($filters)->sort('SiteBannerRank','ASC')->first();
 
         // if there is no banner maybe the previous one was the last one, so we look for the first one
         if(!$settings && $previous_banner_rank)
-            $settings = SiteBannerConfigurationSetting::get()->filter(array('Language' => $current_lang))->order('SiteBannerRank','ASC')->first();
+            $settings = SiteBannerConfigurationSetting::get()->filter(array('Language' => $current_lang))->sort('SiteBannerRank','ASC')->first();
 
         //if there is still no banner we fetch the english one
         if(!$settings) {
@@ -42,7 +42,7 @@ class CustomSiteConfig extends DataExtension {
 
 	        // if there is no banner maybe the previous one was the last one, so we look for the first one
             if(!$settings && $previous_banner_rank)
-	            $settings = SiteBannerConfigurationSetting::get()->filter(array('Language' => 'English'))->order('SiteBannerRank','ASC')->first();
+	            $settings = SiteBannerConfigurationSetting::get()->filter(array('Language' => 'English'))->sort('SiteBannerRank','ASC')->first();
 
         }
 

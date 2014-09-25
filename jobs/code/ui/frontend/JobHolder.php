@@ -16,6 +16,10 @@ class JobHolder_Controller extends Page_Controller {
 	 */
 	private $repository;
 
+	static $allowed_actions = array(
+		'AjaxDateSortedJobs',
+	);
+
 	function init(){
 		parent::init();
 		RSSFeed::linkToFeed($this->Link() . "rss");
@@ -43,6 +47,21 @@ class JobHolder_Controller extends Page_Controller {
 		list($jobs,$size) = $this->repository->getAll($query,0,1000);
 		return new ArrayList($jobs);
 	}
+
+    public function getDateSortedJobs() {
+        $output = '';
+        $jobs = $this->DateSortedJobs();
+
+        foreach ($jobs as $job) {
+            $output .= $job->renderWith('JobHolder_job');
+        }
+
+        return $output;
+    }
+
+    function AjaxDateSortedJobs() {
+        return $this->getDateSortedJobs();
+    }
 
 	function PostJobLink(){
 		$page = JobRegistrationRequestPage::get()->first();
