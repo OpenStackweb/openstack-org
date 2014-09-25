@@ -93,9 +93,7 @@ final class ConsultantsCrudApi extends CompanyServiceCrudApi {
 		$this->addBeforeFilter('addCompanyService','check_add_company',function ($request) use($this_var, $current_user, $repository){
 			$data = $this_var->getJsonRequest();
 			if (!$data) return $this->serverError();
-
 			$company_id = intval(@$data['company_id']);
-
 			if(!$current_user->isMarketPlaceAdminOfCompany(IConsultant::MarketPlaceGroupSlug, $company_id))
 				return $this_var->permissionFailure();
 		});

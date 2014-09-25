@@ -66,14 +66,9 @@ final class PrivateCloudCrudApi extends CompanyServiceCrudApi {
 		$this->addBeforeFilter('addCompanyService','check_add_company',function ($request) use($this_var, $current_user, $repository){
 			$data = $this_var->getJsonRequest();
 			if (!$data) return $this_var->serverError();
-
 			$company_id = intval(@$data['company_id']);
-
 			if(!$current_user->isMarketPlaceAdminOfCompany(IPrivateCloudService::MarketPlaceGroupSlug, $company_id))
 				return $this_var->permissionFailure();
-
-			if($repository->countByCompany($company_id)>0)
-				return $this_var->validationError(array(array('message'=> sprintf('You reach the max. amount of %s (%s) per Company',"Private Clouds",1))));
 		});
 
 		$this->addBeforeFilter('updateCompanyService','check_update_company',function ($request) use($this_var, $current_user){
