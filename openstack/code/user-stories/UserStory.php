@@ -272,9 +272,8 @@ class UserStory_Controller extends Page_Controller
 				'errline' => '',
 				'errcontext' => ''
 			);
-			var_dump($message);
 			SS_Log::log($message, SS_Log::ERR);
-			echo "There was an error on PDF generation!";
+			$this->httpError(404,'There was an error on PDF generation!');
 		}
 	}
 
