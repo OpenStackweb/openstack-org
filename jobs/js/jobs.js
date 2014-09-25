@@ -13,4 +13,18 @@ jQuery(document).ready(function($){
         return false;
     });
 
+
+    setInterval(refresh_jobs,120000);
+
 })
+
+function refresh_jobs() {
+    jQuery.ajax({
+        type: "POST",
+        url: 'JobHolder_Controller/AjaxDateSortedJobs',
+        success: function(result){
+            jQuery('.job_list').html(result);
+            jQuery('.jobDescription').hide();
+        }
+    });
+}
