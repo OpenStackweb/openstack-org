@@ -53,9 +53,6 @@ final class ApplianceCrudApi extends CompanyServiceCrudApi {
 
 			if(!$current_user->isMarketPlaceAdminOfCompany(IAppliance::MarketPlaceGroupSlug, $company_id))
 				return $this_var->permissionFailure();
-
-			if($repository->countByCompany($company_id)>0)
-				return $this_var->validationError(array(array('message'=> sprintf('You reach the max. amount of %s (%s) per Company',"Appliances",1))));
 		});
 
 		$this->addBeforeFilter('updateCompanyService','check_update_company',function ($request) use($this_var, $current_user){
