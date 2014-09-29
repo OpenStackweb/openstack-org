@@ -1,7 +1,7 @@
 <div class="loggedInBox">You are logged in as: <strong>$CurrentMember.Name</strong>&nbsp; &nbsp; <a class="roundedButton" href="/revocation-notifications/logout/">Logout</a>
 <br>
 <br>
-<p>Your account is scheduled to be changed from "Foundation Member" to "Community Member" in <% control Notification %>$remainingDays<% end_control %> days. You have two options:</p>
+<p>Your account is scheduled to be changed from "Foundation Member" to "Community Member" in <% with Notification %>$remainingDays<% end_with %> days. You have two options:</p>
 <ol>
 	<li><span class="action-button-container">Request to <a href="/revocation-notifications/{$Token}/renew" class="roundedButton">CONTINUE AS A FOUNDATION MEMBER</a></span></li>
     <!-- <li><span class="action-button-container">Move to <a href="/revocation-notifications/{$Token}/revoke" class="roundedButton">"COMMUNITY MEMBER" ONLY</a></span></li> -->
