@@ -38,9 +38,14 @@
   	<div class="span-8 last">
 	
 	<div id="promo-area">
+		<!-- TO BE SWITCHED BACK AT 5:30pm Eastern - 9/28/14 -->
+		<!-- 
 		<p class="promo-subhead">A major automaker is</p>
 		<p class="promo-main">Turning Big Data in Huge Insights with OpenStack</p>
-		<a class="promo-buttom" href="/enterprise/auto/">Read The Story</a>
+		<a class="promo-buttom" href="/enterprise/auto/">Read The Story</a> -->
+		<p class="promo-subhead">Save $200 on the Summit</p>
+		<p class="promo-main">Register by Oct 1 at 530PM EDT</p>
+		<a class="promo-buttom" href="https://www.eventbrite.com/e/openstack-summit-november-2014-paris-tickets-12051477293?aff=summit11" target="_blank">Register</a>
 	</div>
 
 	</div>
