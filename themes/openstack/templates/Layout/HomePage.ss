@@ -1,156 +1,300 @@
-<% require themedCSS(carousel) %>
+    <div class="intro-header featured">
 
- <div id="midpage-promo" class="span-24 last">
- 	<div class="span-12">
- 		<a href="/marketplace/"><strong>New!</strong> See The OpenStack Marketplace</a>
- 	</div>
- 	<div class="span-12 last">
- 		<a href="http://superuser.openstack.org/"><strong>New!</strong> Check Out SuperUser Magazine</a>
- 	</div>
- </div>
+        <div class="container">
 
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-sm-12">
+                    <div class="intro-message">
+                        <h1>Tickets for the November OpenStack Summit in Paris are going fast!</h1>
+                    </div>
+                    <div class="promo-btn-wrapper">
+                        <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/" class="promo-btn">Book Your Tickets Now <i class="fa fa-chevron-right"></i></a>
+                    </div>
+                    <p class="promo-dates">Summit Dates: Nov 3 - 5, 2014</p>
+                </div>
+            </div>
+            <div class="hero-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i class="fa fa-info-circle"></i></div>
+        </div>
+    </div>
+    <!-- /.intro-header -->
 
- <div class="opener span-24 last">
-  	<h1>Open source software for building<br /> private and public clouds.</h1>  	
-  	<div id="projects" class="span-8">
-  		<h3 class="subhead">Software</h3>
-  		  		<p>OpenStack Software delivers a massively scalable cloud operating system.</p>
-  		
-  		<p><a href="/software/"><img src="/themes/openstack/images/homepage/openstack-mini-homepage-diagram.png"/></a></p>
+    <!-- Page Content -->
 
-  	</div>
-  	<div id="people" class="span-8">
-  		<h3 class="subhead">Community</h3>
-  		Join our global community of technologists, developers, researchers,  corporations and cloud computing experts.
-  		<div class="clear"></div>
-  		<div class="statBlock" id="members">
-  			<p class="number">$MembersCount</p>
-  			<p>People</p>
-  		</div>
-  		<div class="statBlock" id="countries">
-  			<p class="number">$CountryCount</p>
-  			<p>Countries</p>
-  		</div>		
-  		
-  		
-  	</div>
+    <div class="content-section-a">
 
-  	<div class="span-8 last">
-	
-	<div id="promo-area">
-		<!-- TO BE SWITCHED BACK AT 5:30pm Eastern - 10/24/14 -->
-		<!-- 
-		<p class="promo-subhead">A major automaker is</p>
-		<p class="promo-main">Turning Big Data in Huge Insights with OpenStack</p>
-		<a class="promo-buttom" href="/enterprise/auto/">Read The Story</a> -->
-		<p class="promo-subhead">Register online by October 24</p>
-		<p class="promo-main">Attend the OpenStack Summit in Paris November 3-7</p>
-		<a class="promo-buttom" href="https://www.openstack.org/summit/openstack-paris-summit-2014/?source=summit11" target="_blank">Register now</a>
-	</div>
+        <div class="container">
+            <div class="row overview-section">
+                <div class="col-lg-6 col-sm-12 overview-left">
+                    <h2>
+                        Open source software for creating private and public clouds.
+                    </h2>
+                    <p>
+                        OpenStack is the leading cloud platform for controlling large pools of compute, storage, and networking resources throughout a datacenter, all managed through a <a href="http://openstack.org/software/openstack-dashboard/">dashboard</a> or the <a href="http://developer.openstack.org">OpenStack API</a> that gives administrators control while empowering their users to provision resources through a web interface.
+                    </p>
+                    <p>
+                        New versions of the software are designed and built by thousands of open source developers in our <a href="http://openstack.org/community/">thriving community</a>, and <a href="http://openstack.org/user-stories/">used by everyone</a> from startups to the Fortune 100 to move faster. OpenStack is also known for having a very strong <a href="https://www.openstack.org/marketplace/">ecosystem</a>, many of whom offer OpenStack-powered products listed in the <a href="http://openstack.org/marketplace/">OpenStack Marketplace</a>.
+                    </p>
+                    <div class="btn-wrapper">
+                        <a href="http://openstack.org/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
+                        <a href="http://openstack.org/software/start/" class="overview-btn right-btn">Get The Software <i class="fa fa-arrow-circle-o-down"></i></a>
+                    </div>
+                    <div class="release-text">Latest Release: Icehouse (May 2014)</div>
+                </div>
+                <div class="col-lg-6 col-sm-12 overview-right">
+                    <img class="img-responsive control-cloud-graphic" src="/themes/openstack/images/new-site/control-your-cloud.svg" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
+                    <a href="#" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
+                </div>
+            </div>
 
-	</div>
-  	
-  	
-  </div>
+        </div>
+        <!-- /.container -->
 
-<div class="span-8"><a href="/software/" class="roundedButton">About OpenStack Software...</a></div>
-<div class="span-8"><a href="/community/" class="roundedButton">Meet Our Community</a></div>	
-<div class="span-8 last"><div id="sliderPager"></div></div>
+    </div>
+    <!-- /.content-section-a -->
 
+    <div class="customers-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <h2>
+                        The largest companies in the world move faster with OpenStack
+                    </h2>
+                </div>
+                <div class="col-lg-12 col-sm-12 customer-logos-wrapper">
+                    <div class="row">
+                      <div class="col-md-2 customer-logos" id="bloomberg-logo"><img src="/themes/openstack/images/new-site/customer-bloomberg.png" alt="Bloomberg Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos" id="bestbuy-logo"><img src="/themes/openstack/images/new-site/customer-bestbuy.png" alt="Best Buy Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos"id="sony-logo"><img src="/themes/openstack/images/new-site/customer-sony.png" alt="Sony Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos logo-hover"id="comcast-logo"><img src="/themes/openstack/images/new-site/customer-comcast.png" alt="Comcast Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos"id="paypal-logo"><img src="/themes/openstack/images/new-site/customer-paypal.png" alt="PayPal Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos"id="wells-logo"><img src="/themes/openstack/images/new-site/customer-wells.png" alt="Wells Fargo Uses OpenStack"></div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-sm-12">
+                    <div class="customers-description">
+                        <p class="change-description">
+                            <strong>Comcast</strong> is using OpenStack to provide real-time programming guides and fast program search.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-sm-12 customers-action">
+                    <a href="http://openstack.org/user-stories/" class="customer-btn">Read More User Stories</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-section-b -->
 
-<div class="tabSet span-24 last">
-    
-<ul class="tabs">
-	<% if ReturningVisitor %>
-		<li class="active">
-			<a href="#tabActivity">Latest Activity</a>
-		</li>
-		<li>
-			<a href="#tabWhatIs">What is OpenStack?</a>
-		</li>
-	<% else %>
-		<li>
-			<a href="#tabActivity">Latest Activity</a>
-		</li>
-		<li class="active">
-			<a href="#tabWhatIs">What is OpenStack?</a>
-		</li>
-	<% end_if %>
-</ul>
-    
-	    	<div id="tabActivity" class="tabContent">
-	    
-			    <div class="feeds span-15">
-				    <div id="openStackFeed">
-				    	<% loop RssItems %>
-				    			<div class="feedItem Web">
-								<div class="span-14 prepend-1 last">
-									<div class="itemContent">
-										<a href="{$link}">$title <span class="itemTimeStamp">$pubDate</span></a>
-									</div>
-								</div>
-							</div>
-						<% end_loop %>
-				    </div>
-			    </div>
-				
-				<div class="events prepend-1 span-6 last"><!-- Events Container -->
-				
-					<% if UpcomingEvents %>
-				
-						<h2>Come See Us</h2>
-						
-						<% loop UpcomingEvents %>
-						
-						<p><strong>NEXT UP:</strong> <a href="$EventLink">{$Title}</a>, $formatDateRange in {$EventLocation}.</p>
-						
-						<% end_loop %>
-					
-					<% else %>
-						
-						<h2>Did you see us? We just attended...</h2>
-						
-							<% loop PastEvents %>
-							
-							<p><a href="$EventLink">{$Title}</a>, $formatDateRange in {$EventLocation}.</p>
-							
-							<% end_loop %>
-					
-					<% end_if %>
-					
-									
-					
-					
-					<a href="/events/" class="roundedButton">More Events...</a>
-				
-				</div><!-- Events Container -->
-				
-		    
-		    
-		    </div><!-- tabActivity -->
-		    
-	    	<div id="tabWhatIs" class="tabContent"><!-- tabWhatIs -->
-	    	
-	    		<h2 class="prepend-1">OpenStack: The 5-minute Overview</h2>
-	    				    <div class="overview span-10 prepend-1"><!-- overview -->		    
-	    				    <p class="point"><strong>OpenStack</strong> OpenStack is a global collaboration of developers and cloud computing technologists producing the ubiquitous open source cloud computing platform for public and private clouds. The project aims to deliver solutions for all types of clouds by being simple to implement, massively scalable, and feature rich.  The technology consists of a series of <a href="/projects/">interrelated projects</a> delivering various components for a cloud infrastructure solution.
-	    				    </p>
-	    				    
-	    				    
-	    				    <p class="point"><strong>Who's behind OpenStack?</strong> Founded by Rackspace Hosting and NASA, OpenStack has grown to be a <a href="/community/">global software community</a> of developers collaborating on a standard and massively scalable open source cloud operating system. Our mission is to enable any organization to create and offer cloud computing services running on standard hardware.</p>
-	    				    
-	    					 </div>
-	    				    
-	    				    <div class="overview span-10 prepend-1"><!-- overview -->
-	    				    
-	    				    <p class="point"><strong>Who uses OpenStack?</strong> Corporations, service providers,  VARS, SMBs, researchers, and global data centers looking to deploy large-scale cloud deployments for private or public clouds leveraging the support and resulting technology of a global open source community.</p>
-	    				    	    				    		    
-	    				    <p class="point"><strong>Why open matters:</strong> All of the code for OpenStack is freely available under the Apache 2.0 license. Anyone can run it, build on it, or submit changes back to the project. We strongly believe that an open development model is the only way to foster badly-needed cloud standards, remove the fear of proprietary lock-in for cloud customers, and create a large ecosystem that spans cloud providers.</p>
-	    				    
-	    				    <p class="point">For more information, visit the <a href="/projects/openstack-faq/">OpenStack Community Q&amp;A</a>.</p>
-	    				    </div><!-- overview -->
-	    	
-	    	</div><!-- tabWhatIs -->
-    
-    	<p class="clear"></p>
-</div><!-- tabSet -->
+    <!-- Community Section -->
+    <div class="banner community-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <img class="img-responsive community-graphic" src="/themes/openstack/images/new-site/community-graphic.svg" onerror="this.onerror=null; this.src=/images/community-graphic.png" alt="OpenStack Community">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <h2>One of the fastest growing open source communities in the world.</h2>
+                    <p>
+                        The OpenStack project is a global collaboration of developers and cloud computing technologists producing the open standard cloud computing platform for both public and private clouds. Backed by a vibrant community of developers and some of the biggest names in the industry.
+                    </p>
+                    <p>
+                        <a href="http://www.openstack.org/community/" class="community-btn">Get Involved <i class="fa fa-play-circle"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- End Community Section -->
+
+    <!-- News Section -->
+    <div class="news-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 news-wrapper">
+                    <h2>Upcoming Events <a href="http://www.openstack.org/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
+                    <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/"><img class="event-ad" src="/themes/openstack/images/new-site/paris-banner.jpg"></a>
+                    <!-- Event 1 -->
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="date">Sep 11-13</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-name">FossetCon</div>
+                            <div class="location">Orlando, FL, US</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <!-- End Event 1 -->
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="date">Sep 11</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-name">OpenStack Meeting 2014</div>
+                            <div class="location">São Paulo, SP, BR</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="date">Sep 13</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-name">OpenStack India Meetup, Pune</div>
+                            <div class="location">Pune, Maharashtra, IN</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="date">Sep 16</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-name">OpenStack Silicon Valley</div>
+                            <div class="location">Mountain View, CA, US</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="date">Sep 18</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-name">Dell Innovation Day mit teuto.net</div>
+                            <div class="location">Frankfurt (Main), Hessen, DE</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="date">Sep 19</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-name">OpenStack Conference Benelux 2014</div>
+                            <div class="location">Bussum, The Netherlands</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event last">
+                        <div class="left-event">
+                            <div class="date">Sep 24</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-name">Athens OpenStack User Group meeting</div>
+                            <div class="location">Athens, GR</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <div class="see-more-bottom">
+                        <a href="https://www.openstack.org/community/events/">See All Upcoming Events <i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 news-wrapper">
+                    <h2>News <!-- <a href="#">See All <i class="fa fa-caret-right"></i></a> --></h2>
+                    <a href="http://www.openstack.org/enterprise/auto/"><img class="news-ad" src="/themes/openstack/images/new-site/auto-banner.jpg"></a>
+                    <!-- News Item 1 -->
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="news-type">Press</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="news-title">Voice of the User Reflected in New Features of OpenStack Icehouse Release</div>
+                            <div class="news-date">Friday, Aug 22nd, 2014</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <!-- End News Item 1 -->
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="news-type">Press</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="news-title">FossetCon</div>
+                            <div class="news-date">Orlando, FL, US</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="news-type">Press</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="news-title">FossetCon</div>
+                            <div class="news-date">Orlando, FL, US</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="planet-type">Planet</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="news-title">OpenStack Silicon Valley Featured Track: Planning Your Agile Deployment </div>
+                            <div class="news-date">Sep. 8th, 2014</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="planet-type">Planet</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="news-title">RDO Blog roundup, week of September 1</div>
+                            <div class="news-date">Sep. 8th. 2014</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event">
+                        <div class="left-event">
+                            <div class="planet-type">Planet</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="news-title">Deconstructing the open cloud, the OpenStack Trove roadmap, and more</div>
+                            <div class="news-date">Sep. 8th, 2014</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                    <a href="#" class="single-event last">
+                        <div class="left-event">
+                            <div class="planet-type">Planet</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="news-title">OpenStack Resources for the vAdmin</div>
+                            <div class="news-date">Sep. 8th, 2014</div>
+                        </div>
+                        <div class="right-event">
+                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End News Section -->

@@ -197,6 +197,10 @@ class Page_Controller extends ContentController {
         Requirements::javascript("themes/openstack/javascript/jquery.colorbox-min.js");
         Requirements::javascript("themes/openstack/javascript/jcarousellite.min.js");
 
+        Requirements::javascript("themes/openstack/javascript/jcarousellite.min.js");
+        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
+        Requirements::javascript("themes/openstack/javascript/navigation.js");
+
         $filename = 'themes/openstack/javascript/'.$this->URLSegment.'.js';
         if (file_exists(Director::baseFolder().'/'.$filename)) {
             Requirements::javascript($filename);
