@@ -18,15 +18,28 @@ jQuery(document).ready(function($){
         });
 
 
-        /*
+
 
         //main form validation
+
+        jQuery.validator.addMethod("phoneUS", function(phone_number, element) {
+            phone_number = phone_number.replace(/\s+/g, "");
+            return this.optional(element) || phone_number.length > 9 &&
+                phone_number.match(/^(\+?1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
+        }, "Please specify a valid phone number (ie 333-333-4444)");
+
         form_validator = form.validate({
             onfocusout: false,
             focusCleanup: true,
             rules: {
-                date  : {required: true, dpDate: true},
-                date_embargo    : {required: true, dpDate: true, dpCompareDate:'ge #NewsRequestForm_NewsRequestForm_date'}
+                submitter_phone:{required: true, phoneUS:true}
+                //date  : {required: true, dpDate: true},
+                //date_embargo    : {required: true, dpDate: true, dpCompareDate:'ge #NewsRequestForm_NewsRequestForm_date'}
+            },
+            messages: {
+                submitter_phone:{
+                    required:'Phone is required.'
+                }
             },
             focusInvalid: false,
             invalidHandler: function(form, validator) {
@@ -50,7 +63,7 @@ jQuery(document).ready(function($){
         });
         // initialize widgets
 
-        var date_picker_date = $('#NewsRequestForm_NewsRequestForm_date',form);
+        /*var date_picker_date = $('#NewsRequestForm_NewsRequestForm_date',form);
         date_picker_date.datepicker({
             dateFormat: 'yy-mm-dd',
             minDate: 0

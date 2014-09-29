@@ -11,6 +11,9 @@ final class News extends DataObject implements INews {
 		'Date'  => 'Datetime',
 		'Headline' => 'Text',
         'Summary' => 'Text',
+        'City' => 'Text',
+        'State' => 'Text',
+        'Country' => 'Text',
         'Body' => 'Text',
         'Link' => 'Text',
         'DateEmbargo' => 'Datetime',
@@ -51,6 +54,9 @@ final class News extends DataObject implements INews {
     {
         $this->Headline = $info->getHeadline();
         $this->Summary   = $info->getSummary();
+        $this->City   = $info->getCity();
+        $this->State   = $info->getState();
+        $this->Country   = $info->getCountry();
         $this->Body = $info->getBody();
         $this->Date = $info->getDate();
         $this->Link   = $info->getLink();

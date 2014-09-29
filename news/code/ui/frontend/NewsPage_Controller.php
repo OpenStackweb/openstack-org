@@ -17,7 +17,6 @@ final class NewsPage_Controller extends Page_Controller {
         parent::init();
 
         Requirements::css('themes/openstack/css/bxslider.css');
-        Requirements::css('themes/openstack/css/case-studies.css');
         Requirements::css('news/code/ui/frontend/css/news.css');
         Requirements::javascript('news/code/ui/frontend/js/news.js');
         Requirements::javascript('themes/openstack/javascript/jquery.bxslider.min.js');

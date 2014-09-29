@@ -120,6 +120,7 @@ final class NewsAdminPage_Controller extends Page_Controller {
         } elseif ($type == $target) {
             //sorting within section, reorder
             $this->news_manager->sortNewsArticles($article_id,$new_rank,$old_rank,false,false,$type);
+            $this->news_manager->moveNewsArticle($article_id,$new_rank,$target);
         } else {
             //item removed, reorder
             $this->news_manager->sortNewsArticles($article_id,$new_rank,$old_rank,false,true,$type);

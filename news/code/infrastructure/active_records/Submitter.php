@@ -12,7 +12,7 @@ final class Submitter extends DataObject implements ISubmitter {
         'LastName'  => 'Varchar',
 		'Email' => 'Varchar',
         'Company' => 'Varchar',
-        'Phone' => 'Int',
+        'Phone' => 'Varchar',
 	);
 
     /**

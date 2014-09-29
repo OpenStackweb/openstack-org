@@ -21,7 +21,6 @@ final class NewsValidationFactory
             'submitter_last_name'   => 'required|text',
 			'submitter_email'       => 'required|email',
             'submitter_company'     => 'required|htmltext',
-            'submitter_phone'       => 'required|integer',
 		);
 
 		$messages = array(
@@ -43,9 +42,7 @@ final class NewsValidationFactory
             'submitter_email.required'       => ':attribute is required',
             'submitter_email.email'          => ':attribute should be valid email.',
             'submitter_company.required'     => ':attribute is required',
-            'submitter_company.htmltext'        => ':attribute should be valid email.',
-            'submitter_phone.required'       => ':attribute is required',
-            'submitter_phone.integer'        => ':attribute should be valid phone number.',
+            'submitter_company.htmltext'     => ':attribute should be valid text.',
 		);
 
 		return ValidatorService::make($data, $rules, $messages);

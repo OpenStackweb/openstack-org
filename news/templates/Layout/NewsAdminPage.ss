@@ -1,4 +1,10 @@
+<div class="link_button">
+    <a href="/news" id="back_to_news">Back to News</a>
+</div>
 <% if CurrentMember.isNewsManager %>
+    <div class="link_button">
+        <a href="#" id="go_to_recent">Go to Recently Submitted</a>
+    </div>
     <div class="newsSlider">
         <h3>Banner</h3>
         <ul id="slider_sortable" class="connected" max-items="5">
@@ -25,10 +31,10 @@
                         <input type="hidden" class="article_id" value="$ID" />
                         <input type="hidden" class="article_rank" value="$Rank" />
                         <input type="hidden" class="article_type" value="recent" />
-                        <div class="recentImage">
+                        <div class="newsImage">
                             <a href="$Link">$Image.CroppedImage(200,100)</a>
                         </div>
-                        <div class="recentText">
+                        <div class="newsText">
                             <p class="headline">&ldquo;$Headline&rdquo;</p>
                             <p class="summary">&mdash; $Summary</p>
                         </div>
@@ -41,7 +47,7 @@
     </div>
     <div class="clear"></div>
     <div class="newsStandBy">
-        <h3>Stand By News</h3>
+        <h3>Recently Submitted</h3>
         <ul id="standby_sortable" class="connected">
             <% control  StandByNews %>
                 <li>
@@ -49,10 +55,10 @@
                         <input type="hidden" class="article_id" value="$ID" />
                         <input type="hidden" class="article_rank" value="$Rank" />
                         <input type="hidden" class="article_type" value="standby" />
-                        <div class="standbyImage">
+                        <div class="newsImage">
                             <a href="$Link">$Image.CroppedImage(200,100)</a>
                         </div>
-                        <div class="standbyText">
+                        <div class="newsText">
                             <p class="headline">&ldquo;$Headline&rdquo;</p>
                             <p class="summary">&mdash; $Summary</p>
                         </div>

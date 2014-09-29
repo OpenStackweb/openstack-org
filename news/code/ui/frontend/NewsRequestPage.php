@@ -72,11 +72,12 @@ final class NewsRequestPage_Controller extends Page_Controller {
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
 
-        /*Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        /*Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");*/
+        Requirements::javascript("themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js");*/
+
     }
 
     function saveNewsArticle($data, Form $form){
@@ -124,5 +125,9 @@ final class NewsRequestPage_Controller extends Page_Controller {
     //Check for just saved
     function Saved(){
         return $this->request->getVar('saved');
+    }
+
+    function Error(){
+        return $this->request->getVar('error');
     }
 } 

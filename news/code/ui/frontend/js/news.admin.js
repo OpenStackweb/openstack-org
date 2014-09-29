@@ -1,4 +1,14 @@
 jQuery(document).ready(function($){
+
+    $('#back_to_news').click(function(event){
+        window.location = $(this).attr('data-url');
+    });
+
+    $('#go_to_recent').click(function(){
+        $("html, body").animate({ scrollTop: $('.newsStandBy').offset().top}, 1000);
+        return false;
+    });
+
     $( "#slider_sortable, #featured_sortable" ).sortable({
         items: "li:not(.placeholder_empty)",
         connectWith: ".connected",
@@ -96,8 +106,12 @@ function removeArticle(article) {
     var article_type = jQuery('.article_type',article).val();
     var old_rank = jQuery('.article_rank',article).val();
 
+
+    jQuery(article).parents('ul').append('<li class="placeholder_empty">Drop<br> here</li>');
+    jQuery(article).children('div').removeClass().addClass('standbyBox');
+    jQuery('.article_type',article).val('standby');
+    jQuery('.newsRemove',article).html('Delete').removeClass().addClass('newsDelete');
     jQuery('#standby_sortable').prepend(article);
-    jQuery(article).remove();
 
     jQuery.ajax({
         type: "POST",

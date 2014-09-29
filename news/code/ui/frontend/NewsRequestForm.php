@@ -10,28 +10,35 @@ final class NewsRequestForm extends HoneyPotForm {
 		//madatory fields
 		$HeadlineField = new TextField('headline','Headline');
 		$SummaryField = new TextareaField('summary','Summary',2,2);
+        $CityField = new TextField('city','City');
+        $StateField = new TextField('state','State');
+        $CountryField = new TextField('country','Country');
 		$TagsField = new TextField('tags','Tags');
-		$DateField = new TextField('date','Date');
+		$DateField = new TextField('date','Date of Article/Release');
         $DateField->addExtraClass('date inline');
         if ($is_manager) {
-            $DateEmbargoField = new TextField('date_embargo','Embargo Date');
+            $DateEmbargoField = new TextField('date_embargo','Embargo <br> Date');
             $DateEmbargoField->addExtraClass('date inline');
             $DateExpireField = new TextField('date_expire','Expire Date');
             $DateExpireField->addExtraClass('date');
         }
 
-        $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
+        $UpdatedField = new DatetimeField_Readonly('date_updated','Last <br> Updated');
         $UpdatedField->addExtraClass('inline');
         //optional fields
         $BodyField = new TextareaField('body','Body');
         $LinkField = new TextField('link','Link');
         $DocumentField = new FileField('Document','Document');
+        $DocumentField->addExtraClass('hidden');
         $ImageField = new CustomSimpleImageField('Image', 'Image');
 
         if($article) {
             $IDField->setValue($article->ID);
             $HeadlineField->setValue($article->Headline);
             $SummaryField->setValue($article->Summary);
+            $CityField->setValue($article->City);
+            $StateField->setValue($article->State);
+            $CountryField->setValue($article->Country);
             $TagsField->setValue($article->getTagsCSV());
             $DateField->setValue($article->Date);
             $DateEmbargoField->setValue($article->DateEmbargo);
@@ -64,6 +71,9 @@ final class NewsRequestForm extends HoneyPotForm {
             $IDField,
             $HeadlineField,
             $SummaryField,
+            $CityField,
+            $StateField,
+            $CountryField,
             $TagsField,
             $DateField
         );
