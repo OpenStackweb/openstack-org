@@ -1,1 +1,2 @@
-<p>New article submitted: {$ArticleTitle}</p>
+<p>{$ArticleHeadline}:</p>
+<p>{$ArticleSummary}</p>

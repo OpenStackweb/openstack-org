@@ -91,7 +91,8 @@ final class NewsRequestManager {
 
             $email->setTemplate('NewsSubmissionEmail');
             $email->populateTemplate(array(
-                'ArticleTitle'      => $news->Headline
+                'ArticleHeadline'      => $news->Headline,
+                'ArticleSummary'      => $news->Summary
             ));
 
             $email->send();
