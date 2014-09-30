@@ -1,13 +1,11 @@
 
 <% if SiteConfig.DisplaySiteBanner %>
 <!-- Top Site Banner -->
-<div class="topMessage">
+<div class="top-site-banner">
     <div class="container">
-        <div class="span-24 last">
 
-            <p>$SiteConfig.SiteBannerMessage &nbsp; &nbsp;<a href="$SiteConfig.SiteBannerButtonLink" class="roundedButton">$SiteConfig.SiteBannerButtonText</a>
+            <p>$SiteConfig.SiteBannerMessage &nbsp; &nbsp;<a href="$SiteConfig.SiteBannerButtonLink" class="top-site-banner-button">$SiteConfig.SiteBannerButtonText</a>
 
-        </div>
     </div>
 </div>
 <!-- End Site Banner -->

@@ -19,12 +19,18 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- Framework CSS -->
-    <link rel="stylesheet" href="/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <% if BootstrapConverted %>
+    <% else %>    
+      <link rel="stylesheet" href="/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <% end_if %>
     <link rel="stylesheet" href="/themes/openstack/css/bootstrap.min.css" type="text/css" media="screen, projection">
 
 
     <!-- OpenStack Specific CSS -->
-    <link href="/themes/openstack/css/main.css" rel="stylesheet">
+    <% if BootstrapConverted %>
+    <% else %>
+      <link href="/themes/openstack/css/main.css" rel="stylesheet">
+    <% end_if %>
     <link href="/themes/openstack/css/combined.css" rel="stylesheet">
     <link rel="stylesheet" href="/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print">
 
@@ -44,8 +50,14 @@
       <% include Navigation %>
       
       <!-- Page Content -->
-      $Message
-      $Layout
+      <% if BootstrapConverted %>
+        $Message
+        $Layout
+      <% else %>
+        <div class="container">
+          $Layout
+        </div>
+      <% end_if %>
 
 
     <% include Footer %>
