@@ -83,6 +83,18 @@ final class NewsRequestManager {
 			);
 
 			$repository->add($news);
+
+            //send email
+            $email = EmailFactory::getInstance()->buildEmail(NEWS_SUBMISSION_EMAIL_FROM,
+                NEWS_SUBMISSION_EMAIL_ALERT_TO,
+                NEWS_SUBMISSION_EMAIL_SUBJECT);
+
+            $email->setTemplate('NewsSubmissionEmail');
+            $email->populateTemplate(array(
+                'ArticleTitle'      => $news->Headline
+            ));
+
+            $email->send();
 		});
 	}
 

@@ -4,7 +4,7 @@
 
 .newsSlider {
     width: 100%;
-    height: 420px;
+    height: 380px;
 }
 
 .newsBody {
@@ -20,7 +20,6 @@
 .newsRecent {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid #dedddf;
 }
 
 .newsSidebar {
@@ -33,6 +32,10 @@
     width: 25.5%;
     float: left;
     margin: 0 25px 0 25px;
+}
+
+.featured li {
+    padding-top: 10px;
 }
 
 .featuredImage img {
@@ -174,15 +177,12 @@ fieldset {
 .sliderImage {
     float: left;
     display: block;
-    background: #b9301d;
     padding: 30px 10px 0 10px;
     border-radius: 2px;
     margin: 8px 0 10px 5px;
 }
 
-.automotive .largeQuote {
-    margin-top: 140px;
-    color: white;
+.automotive .largeHeadline {
     font-size: 300%;
 }
 
@@ -204,7 +204,6 @@ fieldset {
 .automotive {
     text-align: center;
     color: #f8f8f8;
-    background: #627783;
     background-size: cover;
     position: relative;
 }
@@ -249,27 +248,30 @@ ul#quotes li p {
     line-height: 1.4em; }
 
 /* line 139 */
-.largeQuote {
+.largeHeadline {
     font-size: 30px;
     font-family: 'PT Sans', serif;
     margin: auto;
-    color: black;
+    color: #747474;
     line-height: 1.2em;
     padding: 10px;
     padding-bottom: 0px;
-    margin-top: 50px; }
+    margin-top: 50px;
+    text-align: left;
+}
 
 /* line 151 */
-.attribution {
+.sliderSummary {
     margin-top: 10px;
     font-size: 14px;
-    text-transform: uppercase;
-    color: #9b9b9b;
+    color: #747474;
     text-indent: 0px;
-    margin: auto; }
+    margin: auto;
+    text-align: left;
+}
 
 /* line 161 */
-.attribution strong {
+.sliderSummary strong {
     font-weight: normal;
     color: #494949; }
 

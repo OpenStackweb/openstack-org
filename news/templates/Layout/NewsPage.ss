@@ -22,8 +22,8 @@
                         <% end_if %>
                     </div>
                     <div class="sliderText">
-                        <p class='largeQuote'>&ldquo;$Headline&rdquo;</p>
-                        <p class='attribution'>&mdash; $Summary</p>
+                        <p class='largeHeadline'>&ldquo;$Headline&rdquo;</p>
+                        <p class='sliderSummary'>$Summary</p>
                     </div>
                     <div class="clear"></div>
                 </a>
