@@ -1,50 +1,44 @@
-<% loop RandomEventImage %>
-<div class="eventsBanner" style="background-image: url($URL);">
-<% end_loop %>
-
-<div class="span-16">
-		</div>
-		<div class="span-8 last">
-		<p class="eventsPhotoCaption">
-		This Photo: The OpenStack Design Summit &amp; Conference 2011.
-		</p>
-	</div>
-</div>
-
-
-<div class="span-24 last">
-	<div class="eventTitleArea">
-		<h1>OpenStack Event Listing</h1>
-	</div>
-</div>
-
-<div class="span-6 last postEvent">
-    <a href="$PostEventLink">Post A Event For Free</a>
-</div>
-
-
-<div class="span-11">
-	<h2>Upcoming Events</h2>
-	<div class="eventBlock upcoming future_events">
-			$getEvents(100,future_events)
-			<div class="clear"></div>
-	</div>
-</div>
-
-<div class="prepend-2 span-11 last events-second-column">
-
-    <% if FutureSummits(5) %>
-        <h2>Upcoming Summits</h2>
-        <div class="eventBlock past future_summits">
-            $getEvents(5,future_summits)
-            <div class="clear"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="eventTitleArea">
+                <h1>OpenStack Event Listing</h1>
+            </div>
         </div>
-    <% end_if %>
-    <% if PastSummits(5) %>
-        <h2>Recent OpenStack Summits &amp; Conferences</h2>
-        <div class="eventBlock past past_summits">
-            $getEvents(5,past_summits)
-            <div class="clear"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/">
+                <div class="event-ad-lrg"></div>
+            </a>
         </div>
-    <% end_if %>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="eventBlock upcoming">
+                <h2>Upcoming Events</h2>
+                $getEvents(100,future_events)
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 events-second-column">
+            <% if FutureSummits(5) %>
+            <div class="eventBlock summit">
+                <h2>Upcoming Summits</h2>
+                $getEvents(5,future_summits)
+            </div>
+            <% end_if %>
+            <% if PastSummits(5) %>
+            <div class="eventBlock past">
+                <h2>Recent OpenStack Summits &amp; Conferences</h2>
+                $getEvents(5,past_summits)
+            </div>
+            <% end_if %>
+        </div>
+            <div class="postEvent">
+                <p>
+                    Submit your upcoming OpenStack event here.
+                </p>
+                <a href="http://www.openstack.org/community/events/post-an-event/">Post An Event For Free</a>
+            </div>
+    </div>
 </div>

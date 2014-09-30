@@ -69,3 +69,11 @@ Object::add_extension('HomePage_Controller', 'EntityCounter');
 Object::add_extension('AnniversaryPage_Controller', 'EntityCounter');
 Object::add_extension('Group', 'GroupDecorator');
 Object::add_extension('SecurityAdmin', 'SecurityAdminExtension');
+
+
+//Force cache to flush on page load if in Dev mode (prevents needing ?flush=1 on the end of a URL)
+if (Director::isDev()) {
+	SSViewer::flush_template_cache();
+	//Set default login
+	Security::setDefaultAdmin('admin','pass');
+}
