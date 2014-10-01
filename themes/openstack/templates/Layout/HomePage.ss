@@ -43,7 +43,7 @@
 		<p class="promo-subhead">A major automaker is</p>
 		<p class="promo-main">Turning Big Data in Huge Insights with OpenStack</p>
 		<a class="promo-buttom" href="/enterprise/auto/">Read The Story</a> -->
-		<p class="promo-subhead">Register online by 5:30pm EDT, October 24</p>
+		<p class="promo-subhead">Register online by October 24</p>
 		<p class="promo-main">Attend the OpenStack Summit in Paris November 3-7</p>
 		<a class="promo-buttom" href="https://www.eventbrite.com/e/openstack-summit-november-2014-paris-tickets-12051477293?aff=summit11" target="_blank">Register now</a>
 	</div>
