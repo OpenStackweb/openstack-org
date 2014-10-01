@@ -22,7 +22,7 @@
                         <% end_if %>
                     </div>
                     <div class="sliderText">
-                        <p class='largeHeadline'>&ldquo;$Headline&rdquo;</p>
+                        <p class='largeHeadline'>$Headline</p>
                         <p class='sliderSummary'>$Summary</p>
                     </div>
                     <div class="clear"></div>
