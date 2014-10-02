@@ -94,7 +94,7 @@ class CompanyService
 
 	public function setOverview($overview)
 	{
-		$this->setField('Overview',substr(trim($overview),0,250));
+		$this->setField('Overview',trim($overview));
 	}
 
 	public function getCall2ActionUri()
