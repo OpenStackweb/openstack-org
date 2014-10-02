@@ -109,7 +109,7 @@ final class PrivateCloudsDirectoryPage_Controller extends CloudsDirectoryPage_Co
 	 * @return IMarketPlaceTypeAddPolicy
 	 */
 	function buildCloudAddPolicy(){
-		return new PrivateCloudAddPolicy;
+		return new PrivateCloudAddPolicy(new SapphirePrivateCloudRepository, new SapphireMarketPlaceTypeRepository);
 	}
 
 	/**

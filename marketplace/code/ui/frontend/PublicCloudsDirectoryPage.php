@@ -110,7 +110,7 @@ class PublicCloudsDirectoryPage_Controller extends CloudsDirectoryPage_Controlle
 	 * @return IMarketPlaceTypeAddPolicy
 	 */
 	function buildCloudAddPolicy(){
-		return new PublicCloudAddPolicy;
+		return new PublicCloudAddPolicy(new SapphirePublicCloudRepository, new SapphireMarketPlaceTypeRepository);
 	}
 
 	/**
