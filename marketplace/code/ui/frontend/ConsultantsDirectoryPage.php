@@ -86,7 +86,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			new SapphireSpokenLanguageRepository,
 			new SapphireConfigurationManagementTypeRepository,
 			new SapphireConsultantServiceOfferedTypeRepository,
-			new ConsultantAddPolicy,
+			new ConsultantAddPolicy($this->consultant_repository, new SapphireMarketPlaceTypeRepository()),
 			new CompanyServiceCanAddResourcePolicy,
 			new CompanyServiceCanAddVideoPolicy,
 			new ConsultantFactory,

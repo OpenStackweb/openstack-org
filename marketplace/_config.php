@@ -24,5 +24,6 @@ Object::add_extension('OpenStackComponent', 'OpenStackComponentAdminUI');
 Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
 Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');
 Object::add_extension('OpenStackReleaseSupportedApiVersion', 'OpenStackReleaseSupportedApiVersionAdminUI');
+Object::add_extension('MarketPlaceAllowedInstance', 'MarketPlaceAllowedInstanceAdminUI');
 
 define('GOOGLE_GEO_CODING_API_KEY','AIzaSyBsGLoRoLAerygzBQ4KytbbA3tjZVb4Hws');

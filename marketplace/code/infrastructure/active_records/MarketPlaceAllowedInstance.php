@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class MarketPlaceAllowedInstance
+ */
 final class MarketPlaceAllowedInstance extends DataObject implements  IMarketPlaceAllowedInstance {
 
 	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
@@ -23,7 +26,6 @@ final class MarketPlaceAllowedInstance extends DataObject implements  IMarketPla
 		'MarketPlaceType.Name',
 		'Company.Name',
 	);
-
 
 	/**
 	 * @return int

@@ -147,7 +147,7 @@ class EditProfilePage_Controller extends Page_Controller
                 $CurrentMember->write();
 
 
-                $speaker = Speaker::get('MemberID',$CurrentMember->ID)->first();
+                $speaker = Speaker::get()->filter('MemberID', $CurrentMember->ID)->first();
 
                 if ($speaker) {
                     if ($data['ReplaceName'] == 1) {
@@ -205,7 +205,7 @@ class EditProfilePage_Controller extends Page_Controller
     {
         $CurrentMember   = Member::currentUser();
         $LegalAgreements = LegalAgreement::get()->filter('MemberID', $CurrentMember->ID);
-        if ($LegalAgreements) {
+        if ($LegalAgreements->count() > 0) {
             $LegalAgreements->sort('Created');
             return $LegalAgreements;
 

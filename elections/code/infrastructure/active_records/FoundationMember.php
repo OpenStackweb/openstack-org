@@ -30,7 +30,7 @@ final class FoundationMember
 		$res =  false;
 		$res = $this->owner->inGroup(IFoundationMember::FoundationMemberGroupSlug);
 		$legal_agreements = DataObject::get("LegalAgreement", " LegalDocumentPageID=422 AND MemberID =" . $this->owner->ID);
-		$res = $res && $legal_agreements;
+		$res = $res && $legal_agreements->count() > 0;
 		return $res;
 	}
 
