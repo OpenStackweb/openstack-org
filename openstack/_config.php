@@ -35,8 +35,7 @@ global $email_log;
 
 SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site.log'), SS_Log::ERR);
 
-
-$email_log_writer = new SS_LogGunMailWriter(MAILGUN_DOMAIN, MAILGUN_API_KEY ,$email_log);
+$email_log_writer = new Custom_SS_LogEmailWriter($email_log);
 $email_log_writer->setFormatter(new SS_CustomLogErrorEmailFormatter());
 SS_Log::add_writer($email_log_writer, SS_Log::ERR, '<=');
 
