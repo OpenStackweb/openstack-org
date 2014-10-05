@@ -19,7 +19,7 @@
 
     <div style="width:100%; height: 400px; position: relative;" id="map" tabindex="0">
     </div>
-    <div id="public-clouds-list" class="span-18">
+    <div id="public-clouds-list" class="col-lg-8 col-md-8 col-sm-8">
        <% if Clouds %>
            <% loop Clouds %>
                <% include CloudsDirectoryPage_CloudBox CloudLink=$Top.Link %>
@@ -28,7 +28,7 @@
             &nbsp;
        <% end_if %>
     </div>
-    <div class="span-6 last">
+    <div class="col-lg-4 col-md-4 col-sm-4">
         <h3>OpenStack Online Help</h3>
         <ul class="resource-links">
             <li>
@@ -46,7 +46,7 @@
         </ul>
         <div class="add-your-course">
             <p>
-                Does your company offer training for OpenStack? Be listed here!
+                Does your company offer an OpenStack public cloud? Be listed here!
                 <a href="mailto:info@openstack.org">Email us for details</a>
             </p>
         </div>

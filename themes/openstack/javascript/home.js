@@ -1,31 +1,46 @@
-jQuery(document).ready(function($) {
+// Hero Credit Tooltip
+$('.hero-credit').tooltip()
 
-	//Default Action
-	$(".tabContent").hide(); //Hide all content
-	$("ul.tabs li.active").show(); //Activate first tab
-	var activeTab = $("ul.tabs li.active:first").find("a").attr("href");
-	$(activeTab).show(); //Show first tab content
-
-	//On Click Event
-	$("ul.tabs li").click(function() {
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tabContent").hide(); //Hide all tab content
-		var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active content
-		return false;
-	});
-
-	$('#members').click(function(){
-	  window.location = '/community/';
-	});
-
-	$('#countries').click(function(){
-	  window.location = '/community/';
-	});
-
-	$('#userStory').click(function(){
-	  window.location = '/projects/essex/';
-	});
-
+// Customer Stories, this should be improved
+$(function() {
+    $("#bloomberg-logo").hover(function() {
+        $(".change-description").text("Bloomberg uses OpenStack for some really cool things.");
+        $(".customer-logos.logo-hover").removeClass("logo-hover");
+        $(this).toggleClass("logo-hover");
+    });
+});
+$(function() {
+    $("#bestbuy-logo").hover(function() {
+        $(".change-description").text("BestBuy is pretty awesome and uses OpenStack in their stores.");
+        $(".customer-logos.logo-hover").removeClass("logo-hover");
+        $(this).toggleClass("logo-hover");
+    });
+});
+$(function() {
+    $("#sony-logo").hover(function() {
+        $(".change-description").text("Sony's PS4 online network is run by OpenStack, allowing thousands to connect.");
+        $(".customer-logos.logo-hover").removeClass("logo-hover");
+        $(this).toggleClass("logo-hover");
+    });
+});
+$(function() {
+    $("#comcast-logo").hover(function() {
+        $(".change-description").text("Comcast is using OpenStack to provide real-time programming guides and fast program search.");
+        $(".customer-logos.logo-hover").removeClass("logo-hover");
+        $(this).toggleClass("logo-hover");
+    });
+});
+$(function() {
+    $("#paypal-logo").hover(function() {
+        $(".change-description").text("PayPal uses OpenStack to run thousands of racks and so many other things too.");
+        $(".customer-logos.logo-hover").removeClass("logo-hover");
+        $(this).toggleClass("logo-hover");
+    });
+});
+$(function() {
+    $("#wells-logo").hover(function() {
+        $(".change-description").text("Wells Fargo built online versions of heaven with all of the clouds they connected with OpenStack");
+        $(".customer-logos.logo-hover").removeClass("logo-hover");
+        $(this).toggleClass("logo-hover");
+    });
 });

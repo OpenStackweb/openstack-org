@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="container">
-    <div id="implementation-list" class="span-18">
+    <div id="implementation-list" class="col-lg-8 col-md-8 col-sm-8">
         <% if getImplementations %>
             <% loop getImplementations %>
                 <% include DistributionsDirectoryPage_ImplementationBox ApplianceLink=$Top.Link(appliance),  DistroLink=$Top.Link(distribution) %>
@@ -15,7 +15,7 @@
             &nbsp;
         <% end_if %>
     </div>
-    <div class="span-6 last">
+    <div class="col-lg-4 col-md-4 col-sm-4">
         <h3>OpenStack Online Help</h3>
         <ul class="resource-links">
             <li>
@@ -33,7 +33,7 @@
         </ul>
         <div class="add-your-course">
             <p>
-                Does your company offer training for OpenStack? Be listed here!
+                Does your company offer distrobutions or appliances for OpenStack? Be listed here!
                 <a href="mailto:info@openstack.org">Email us for details</a>
             </p>
         </div>

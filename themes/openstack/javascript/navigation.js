@@ -5,6 +5,7 @@ $(function() {
     $(".search-container").toggleClass("show");
     $(".header-search").focus();
     $(".search-icon").toggleClass("show");
+    $('#gsc-i-id1').focus();
 });
 });
 

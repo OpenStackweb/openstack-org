@@ -17,16 +17,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="search-container tiny">
-               <form class="header-search-form">
-                   <input class="col-lg-3 col-sm-2 header-search fadeInLeft" id="exampleInputEmail1" placeholder="Search OpenStack" type="search">
-               </form>
-               <i class="fa fa-times close-search"></i>
+               <% include GoogleCustomSearch %>
            </div>
            <ul class="nav navbar-nav navbar-main show">
             <li>
-                <form class="mobile-search-form">
-                    <input class="col-lg-3 col-sm-2 header-search" id="exampleInputEmail1" placeholder="Search OpenStack" type="email">
-                </form>
+                <% include GoogleCustomSearchMobile %>
             </li>
             <li>
                 <a href="/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>

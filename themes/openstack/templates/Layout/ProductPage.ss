@@ -1,16 +1,21 @@
-<% if Menu(2) %>
-	<div id="subnav" class="span-5">
-		<% include SubMenu %>
-	</div>
-	<div class="span-19 last">
-<% else %>
-	<div class="span-24 last">
-<% end_if %>
+<div class="container">
+	<% if Menu(2) %>
+		<div class="row">
+			<div class="col-lg-9 col-lg-push-3">
+	<% end_if %>
 
-$Content
+	$Content
 
-<% include FeatureTable %>
+	<% include FeatureTable %>
 
-$Form
+	$Form
 
+	<% if Menu(2) %>
+			</div> <!-- Close content div -->
+			<div class="col-lg-3 col-lg-pull-9">
+				<% include SubMenu %>
+			</div>
+
+		</div> <!-- Close row div -->
+	<% end_if %>
 </div>
