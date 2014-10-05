@@ -9,7 +9,7 @@
 
 <div class="container marketplace-content">
 <% include MarketPlaceCompany %>
-<div class="span-8 colborder">
+<div class="col-lg-6">
     <div class="info-area">
         <% if Capabilities %>
         <h3 style="color: #{$Company.CompanyColor} !important;">OpenStack Services Offered</h3>
@@ -128,7 +128,7 @@
         <% include OpenStackImplementationCapabilities %>
     </div>
 </div>
-<div class="span-7">
+<div class="col-lg-6">
         <% include MarketPlaceDirectoryPage_Rating %>
         <% if Videos %>
             <div id="videos">

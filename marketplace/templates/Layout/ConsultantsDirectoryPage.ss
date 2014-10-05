@@ -17,7 +17,7 @@
     <div style="width: 100%; height: 400px; position: relative;"  id="map" tabindex="0">
     </div>
     <!--end of map-->
-    <div id="consultants-list" class="span-18">
+    <div id="consultants-list" class="col-lg-8 col-md-8 col-sm-8">
         <% if Consultants %>
             <% loop Consultants %>
                 <% include ConsultantsDirectoryPage_CloudBox ConsultantLink=Top.Link %>
@@ -26,7 +26,7 @@
             &nbsp;
         <% end_if %>
     </div>
-    <div class="span-6 last">
+    <div class="col-lg-4 col-md-4 col-sm-4">
         <h3>OpenStack Online Help</h3>
         <ul class="resource-links">
             <li>
@@ -44,7 +44,7 @@
         </ul>
         <div class="add-your-course">
             <p>
-                Does your company offer training for OpenStack? Be listed here!
+                Does your company offer consulting for OpenStack? Be listed here!
                 <a href="mailto:info@openstack.org">Email us for details</a>
             </p>
         </div>

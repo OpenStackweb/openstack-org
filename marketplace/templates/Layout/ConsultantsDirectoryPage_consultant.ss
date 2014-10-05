@@ -9,7 +9,7 @@
 <% loop Consultant %>
 <div class="container marketplace-content">
     <% include MarketPlaceCompany %>
-    <div class="span-8 colborder">
+    <div class="col-lg-6">
         <div class="info-area">
             <% if ExpertiseAreas %>
                 <h3  style="color: #{$Company.CompanyColor} !important;">Areas of OpenStack Expertise</h3>
@@ -98,7 +98,7 @@
             <% end_if %>
         </div>
     </div>
-    <div class="span-7">
+    <div class="col-lg-6">
         <% include MarketPlaceDirectoryPage_Rating %>
         <% if Videos %>
             <div id="videos">

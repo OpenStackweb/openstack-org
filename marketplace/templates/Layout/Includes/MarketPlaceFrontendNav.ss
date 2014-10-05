@@ -1,4 +1,6 @@
-<div class="span-5 header-area">
+<div class="container">
+<div class="row marketplace-top-wrapper">
+<div class="col-lg-2 col-md-12 marketplace-brand">
     <h2 class="marketplace">
         <a href="/marketplace/">OpenStack</a>
     </h2>
@@ -6,7 +8,9 @@
         <a href="/marketplace/">Marketplace</a>
     </h1>
 </div>
-<div class="span-19 header-area last">
+
+<% with Top %>
+<div class="col-lg-9 col-lg-offset-1 col-md-12">
     <ul class="marketplace-nav">
         <% if canViewTab(1) %>
             <li id="training">
@@ -65,4 +69,7 @@
             </li>
         <% end_if %>
     </ul>
+</div>
+<% end_with %>
+    </div>
 </div>
