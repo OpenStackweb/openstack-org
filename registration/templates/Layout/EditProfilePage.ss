@@ -1,3 +1,5 @@
+<div class="container">
+
 $SetCurrentTab(1)
 <% require javascript(framework/thirdparty/tinymce/tiny_mce.js) %>
 <% require javascript(themes/openstack/javascript/simple-tinymce.js) %>
@@ -38,8 +40,10 @@ $SetCurrentTab(1)
                 $AffiliationEditForm
             </div>
 			<% include CompanyAdmin %>
+		</div> <!-- Close logged in box -->
 		<% else %>
 			<p>In order to edit your community profile, you will first need to <a href="/Security/login/?BackURL=%2Fprofile%2F">login as a member</a>. Don't have an account? <a href="/join/">Join The Foundation</a></p>
 			<p><a class="roundedButton" href="/Security/login/?BackURL=%2Fprofile%2F">Login</a> <a href="/join/" class="roundedButton">Join The Foundation</a></p>
 		<% end_if %>
 	<% end_if %>
+</div>
