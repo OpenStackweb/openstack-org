@@ -25,4 +25,17 @@ jQuery(document).ready(function($) {
             timepicker:false
         });
     }
+
+    $('.cvs_download_link').click(function(){
+        var filter_box = $(this).siblings('.export_filters');
+        $('.export_filters').not(filter_box).slideUp(500).addClass('hidden')
+
+        if (filter_box.hasClass('hidden')) {
+            filter_box.slideDown(500).removeClass('hidden');
+        } else {
+            filter_box.slideUp(500).addClass('hidden');
+        }
+
+        return false;
+    })
 });

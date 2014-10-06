@@ -71,13 +71,24 @@
         <li><a href="/sangria/StandardizeOrgNames">Standardize Organizations</a></li>
         <li><a href="/sangria/ViewDeploymentSurveyStatistics">View Deployment Survey Statistics</a></li>
         <li><a href="/sangria/ViewDeploymentStatistics">View Deployment Statistics</a></li>
-        <li><a href="/sangria/ExportSurveyResults">Deployment Survey CSV Download</a></li>
-        <li><a href="/sangria/ExportAppDevSurveyResults">App Dev Survey CSV Download</a></li>
+        <li>
+            <a href="#" class="cvs_download_link">Deployment Survey CSV Download</a>
+            <div class="export_filters hidden">
+                $DeploymentSurveyDeploymentsFilters(ExportSurveyResults)
+            </div>
+        </li>
+        <li>
+            <a href="#" class="cvs_download_link" >App Dev Survey CSV Download</a>
+            <div class="export_filters hidden">
+                $DeploymentSurveyDeploymentsFilters(ExportAppDevSurveyResults)
+            </div>
+        </li>
         <li><a href="$Link(ExportData)">Export Data</a></li>
     </ul>
     <h2>Manage User Stories and Deployments</h2>
     <ul>
-        <li><a href="/sangria/ViewCurrentStories">View Current User Stories</a></li>
+        <li>
+            <a href="/sangria/ViewCurrentStories">View Current User Stories</a></li>
         <li><a href="/sangria/ViewDeploymentDetails">View Deployment Details</a></li>
     </ul>
     $QuickActionsExtensions

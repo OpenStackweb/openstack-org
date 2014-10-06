@@ -35,6 +35,10 @@ input.error{
     clear: both;
 }
 
+.hidden {
+    display: none;
+}
+
 .date{
     width: 150px !important;
     margin-right: 30px;
@@ -42,4 +46,11 @@ input.error{
 
 .submit_filters {
     margin-top: 25px;
+}
+
+.export_filters fieldset{
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 10px;
 }
