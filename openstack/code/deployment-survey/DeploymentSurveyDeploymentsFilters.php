@@ -19,7 +19,7 @@ class DeploymentSurveyDeploymentsFilters extends Form {
             $callerAction,$StartDateTime,$EndDateTime
         );
 
-        $submit_filters = new FormAction('filterResults', 'Go !');
+        $submit_filters = new FormAction('FilterResults', 'Go !');
         $submit_filters->addExtraClass('submit_filters');
         $actions = new FieldSet(
             $submit_filters
@@ -36,13 +36,8 @@ class DeploymentSurveyDeploymentsFilters extends Form {
         ));
     }
 
-    public static function filterResults($data, $form) {
-        //recupero el action que estaba en el hidden, igual aca ni frena el debug...
+    public static function FilterResults($data, $form) {
         $action = $data['caller-action'];
-        $date_from = $data['date-from'];
-        $date_to = $data['date-to'];
-        // redirecciono al controller que lo llama.. no funca
-        //return $form->controller->redirect($action."/".$date_from."/".$date_to);
 	    if($form->controller->hasMethod($action))
 		    return $form->controller->$action($data, $form, $form->controller->request);
 	    return $form->httpError(404);
