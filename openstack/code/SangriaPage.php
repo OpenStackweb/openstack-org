@@ -1,20 +1,23 @@
 <?php
+
 /**
  * Defines Sangria Admin area
  */
-class SangriaPage extends Page {
-    static $db = array(
-    );
+class SangriaPage extends Page
+{
+	static $db = array();
 
-    static $has_one = array(
-    );
+	static $has_one = array();
 }
 
-class SangriaPage_Controller extends Page_Controller {
+class SangriaPage_Controller extends Page_Controller
+{
 
 
-    var $submissionsCount = 0;
-    var $orgs_cached = array();
+	var $submissionsCount = 0;
+	var $orgs_cached = array();
+	var $default_start_date;
+	var $default_end_date;
 
 	static $allowed_actions = array(
 		'AddInvolvementType',
@@ -43,6 +46,7 @@ class SangriaPage_Controller extends Page_Controller {
 		'ExportData',
 		'exportCLAUsers',
 		'exportGerritUsers',
+		'DeploymentSurveyDeploymentsFilters',
 	);
 
 	function init()
@@ -53,6 +57,8 @@ class SangriaPage_Controller extends Page_Controller {
 		Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 		Requirements::javascript('themes/openstack/javascript/querystring.jquery.js');
 		Requirements::javascript('themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js');
+		$this->default_start_date = date('Y/m/d', strtotime('-12 months')) . ' 00:00';
+		$this->default_end_date = date('Y/m/d') . ' 23:59';
 	}
 
 	function providePermissions()
@@ -62,103 +68,133 @@ class SangriaPage_Controller extends Page_Controller {
 		);
 	}
 
+	// Deployment Survey Filters
+
+
+	function DeploymentDateFilters($action)
+	{
+		Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+		Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+		Requirements::css("themes/openstack/css/deployment.survey.page.css");
+		Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
+		$data = Session::get("FormInfo.Form_DeploymentSurveyDeploymentsFilters.data");
+		$form = new DeploymentSurveyDeploymentsFilters($this, 'DeploymentSurveyDeploymentsFilters', $action, $this->default_start_date, $this->default_end_date);
+		// we should also load the data stored in the session. if failed
+		if (is_array($data)) {
+			$form->loadDataFrom($data);
+		}
+	}
+
 	// DASHBOARD METRICS
 
 
-	function IndividualMemberCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('FoundationMember',function (){
-			$query =  new IndividualFoundationMemberCountQuery();
+	function IndividualMemberCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('FoundationMember', function () {
+			$query = new IndividualFoundationMemberCountQuery();
 			$res = $query->handle(null)->getResult();
 			return $res[0];
 		});
 	}
 
-	function NewsletterMemberCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('NewsletterMember',function (){
-			$query =  new FoundationMembersSubscribedToNewsLetterCountQuery();
+	function NewsletterMemberCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('NewsletterMember', function () {
+			$query = new FoundationMembersSubscribedToNewsLetterCountQuery();
 			$res = $query->handle(new FoundationMembersSubscribedToNewsLetterCountQuerySpecification)->getResult();
 			return $res[0];
 		});
 	}
 
-	function NewsletterPercentage() {
-		return number_format(($this->NewsletterMemberCount() / $this->IndividualMemberCount())*100,2);
+	function NewsletterPercentage()
+	{
+		return number_format(($this->NewsletterMemberCount() / $this->IndividualMemberCount()) * 100, 2);
 	}
 
-	function UserStoryCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('UserStory',function (){
-			$query =  new UserStoriesCountQuery();
+	function UserStoryCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('UserStory', function () {
+			$query = new UserStoriesCountQuery();
 			$res = $query->handle(new UserStoriesCountQuerySpecification(true))->getResult();
 			return $res[0];
 		});
 	}
 
-	function UserLogoCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('UserLogo',function (){
-			$query =  new UserStoriesCountQuery();
+	function UserLogoCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('UserLogo', function () {
+			$query = new UserStoriesCountQuery();
 			$res = $query->handle(new UserStoriesCountQuerySpecification(false))->getResult();
 			return $res[0];
 		});
 	}
 
-	function PlatinumMemberCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('PlatinumOrg',function (){
-			$query =  new CompanyCountQuery();
+	function PlatinumMemberCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('PlatinumOrg', function () {
+			$query = new CompanyCountQuery();
 			$res = $query->handle(new CompanyCountQuerySpecification('Platinum'))->getResult();
 			return $res[0];
 		});
 	}
 
-	function GoldMemberCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('GoldOrg',function (){
-			$query =  new CompanyCountQuery();
+	function GoldMemberCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('GoldOrg', function () {
+			$query = new CompanyCountQuery();
 			$res = $query->handle(new CompanyCountQuerySpecification('Gold'))->getResult();
 			return $res[0];
 		});
 	}
 
-	function CorporateSponsorCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('CorporateOrg',function (){
-			$query =  new CompanyCountQuery();
+	function CorporateSponsorCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('CorporateOrg', function () {
+			$query = new CompanyCountQuery();
 			$res = $query->handle(new CompanyCountQuerySpecification('Corporate'))->getResult();
 			return $res[0];
 		});
 	}
 
-	function StartupSponsorCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('StartupOrg',function (){
-			$query =  new CompanyCountQuery();
+	function StartupSponsorCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('StartupOrg', function () {
+			$query = new CompanyCountQuery();
 			$res = $query->handle(new CompanyCountQuerySpecification('Startup'))->getResult();
 			return $res[0];
 		});
 	}
 
-	function SupportingOrganizationCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('MentionOrg',function (){
-			$query =  new CompanyCountQuery();
+	function SupportingOrganizationCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('MentionOrg', function () {
+			$query = new CompanyCountQuery();
 			$res = $query->handle(new CompanyCountQuerySpecification('Mention'))->getResult();
 			return $res[0];
 		});
 	}
 
-	function TotalOrganizationCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('TotalOrgs',function (){
-			$query =  new CompanyCountQuery();
+	function TotalOrganizationCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('TotalOrgs', function () {
+			$query = new CompanyCountQuery();
 			$res = $query->handle(new CompanyCountQuerySpecification())->getResult();
 			return $res[0];
 		});
 	}
 
-	function NewsletterInternationalCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('NewsletterInternationalCount',function (){
-			$query =  new FoundationMembersSubscribedToNewsLetterCountQuery();
+	function NewsletterInternationalCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('NewsletterInternationalCount', function () {
+			$query = new FoundationMembersSubscribedToNewsLetterCountQuery();
 			$res = $query->handle(new FoundationMembersSubscribedToNewsLetterCountQuerySpecification('US'))->getResult();
 			return $res[0];
 		});
 	}
 
-	function NewsletterInternationalPercentage() {
-		return number_format(($this->NewsletterInternationalCount()/$this->NewsletterMemberCount())*100,2);
+	function NewsletterInternationalPercentage()
+	{
+		return number_format(($this->NewsletterInternationalCount() / $this->NewsletterMemberCount()) * 100, 2);
 	}
 
 	function IndividualMemberCountryCount()
@@ -166,16 +202,19 @@ class SangriaPage_Controller extends Page_Controller {
 		$Count = DB::query('select count(distinct(Member.Country)) from Member left join Group_Members on Member.ID = Group_Members.MemberID where Group_Members.GroupID = 5;')->value();
 		return $Count;
 	}
-	function InternationalOrganizationCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('InternationalOrganization',function (){
-			$query =  new CompanyCountQuery();
-			$res = $query->handle(new CompanyCountQuerySpecification(null,'US'))->getResult();
+
+	function InternationalOrganizationCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('InternationalOrganization', function () {
+			$query = new CompanyCountQuery();
+			$res = $query->handle(new CompanyCountQuerySpecification(null, 'US'))->getResult();
 			return $res[0];
 		});
 	}
 
-	function OrgsInternationalPercentage() {
-		return number_format(($this->InternationalOrganizationCount()/$this->TotalOrganizationCount())*100,2);
+	function OrgsInternationalPercentage()
+	{
+		return number_format(($this->InternationalOrganizationCount() / $this->TotalOrganizationCount()) * 100, 2);
 	}
 
 
@@ -198,7 +237,7 @@ class SangriaPage_Controller extends Page_Controller {
 			$startVal = intval($_GET["startID"]);
 		}
 
-		$members = Member::get()->filter(array('SubscribedToNewsletter' => 1, 'ID:GreaterThan' => $startVal))->order('ID')->leftJoin('Group_Members',"`Member`.`ID` = `Group_Members`.`MemberID` AND Group_Members.GroupID = 5 ");
+		$members = Member::get()->filter(array('SubscribedToNewsletter' => 1, 'ID:GreaterThan' => $startVal))->order('ID')->leftJoin('Group_Members', "`Member`.`ID` = `Group_Members`.`MemberID` AND Group_Members.GroupID = 5 ");
 		foreach ($members as $member) {
 			$token = $member->generateAutologinTokenAndStoreHash(14);
 			echo "\"" . $member->ID . "\",\"" . $member->Email . "\",\"" . $member->FirstName . "\",\"" . $member->Surname . "\",\"" . urldecode($token) . "\"<br/>";
@@ -216,7 +255,7 @@ class SangriaPage_Controller extends Page_Controller {
 
 	function SpeakingSubmissions()
 	{
-		$submissions = SpeakerSubmission::get()->filter('Created:GreaterThan','2012-11-01')->sort('Created');
+		$submissions = SpeakerSubmission::get()->filter('Created:GreaterThan', '2012-11-01')->sort('Created');
 		$this->submissionsCount = $submissions->Count();
 		return $submissions;
 	}
@@ -289,7 +328,21 @@ class SangriaPage_Controller extends Page_Controller {
 	// Deployment Survey data
 	function DeploymentSurveysCount()
 	{
-		$DeploymentSurveys = DeploymentSurvey::get()->where("Title IS NOT NULL");
+		$where_query = '';
+		$date_from = Convert::raw2sql(trim($this->request->getVar('date-from')));
+		$date_to = Convert::raw2sql(trim($this->request->getVar('date-to')));
+		if (!empty($date_from) && !empty($date_to)) {
+			$start = new \DateTime($date_from);
+			$start->setTime(00, 00, 00);
+			$end = new \DateTime($date_to);
+			$end->setTime(23, 59, 59);
+			$where_query .= " UpdateDate >= '{$start->format('Y-m-d H:i:s')}' AND UpdateDate <= '{$end->format('Y-m-d H:i:s')}'";
+
+		} else {
+
+			$where_query .= " UpdateDate >= '{$this->default_start_date}' AND UpdateDate <= '{$this->default_end_date}'";
+		}
+		$DeploymentSurveys = DeploymentSurvey::get()->where("Title IS NOT NULL")->where($where_query);
 		$Count = $DeploymentSurveys->Count();
 		return $Count;
 	}
@@ -423,7 +476,7 @@ class SangriaPage_Controller extends Page_Controller {
 	function DeploymentsCount()
 	{
 		$filterWhereClause = $this->generateFilterWhereClause();
-		$Deployments       = Deployment::get()->where(" 1=1 " . $filterWhereClause);
+		$Deployments = Deployment::get()->where(" 1=1 " . $filterWhereClause);
 		$Count = $Deployments->count();
 		return $Count;
 	}
@@ -699,29 +752,29 @@ class SangriaPage_Controller extends Page_Controller {
 		header("Content-Disposition: attachment; filename=survey_results" . $fileDate . ".csv");
 		flush();
 
-		for( $i=0; $i < $results->numRecords(); $i++) {
+		for ($i = 0; $i < $results->numRecords(); $i++) {
 			$record = $results->nextRecord();
 			$fields = array_keys($record);
 
 			$numFields = count($fields);
 
 			// If it's the first time through, put the column headings in
-			if ($i==0) {
-				for( $f=0; $f < $numFields; $f++) {
-					if ($f>0) {
+			if ($i == 0) {
+				for ($f = 0; $f < $numFields; $f++) {
+					if ($f > 0) {
 						echo ",";
 					}
-					echo "\"".$fields[$f]."\"";
+					echo "\"" . $fields[$f] . "\"";
 				}
 				echo "\n";
 			}
 
-			for( $f=0; $f < $numFields; $f++) {
-				if ($f>0) {
+			for ($f = 0; $f < $numFields; $f++) {
+				if ($f > 0) {
 					echo ",";
 				}
 				$cleanValue = str_replace("\"", "'", $record[$fields[$f]]);
-				echo "\"".$cleanValue."\"";
+				echo "\"" . $cleanValue . "\"";
 			}
 			echo "\n";
 			flush();
@@ -760,29 +813,29 @@ class SangriaPage_Controller extends Page_Controller {
 		header("Content-Disposition: attachment; filename=app_dev_surveys" . $fileDate . ".csv");
 		flush();
 
-		for( $i=0; $i < $results->numRecords(); $i++) {
+		for ($i = 0; $i < $results->numRecords(); $i++) {
 			$record = $results->nextRecord();
 			$fields = array_keys($record);
 
 			$numFields = count($fields);
 
 			// If it's the first time through, put the column headings in
-			if ($i==0) {
-				for( $f=0; $f < $numFields; $f++) {
-					if ($f>0) {
+			if ($i == 0) {
+				for ($f = 0; $f < $numFields; $f++) {
+					if ($f > 0) {
 						echo ",";
 					}
-					echo "\"".$fields[$f]."\"";
+					echo "\"" . $fields[$f] . "\"";
 				}
 				echo "\n";
 			}
 
-			for( $f=0; $f < $numFields; $f++) {
-				if ($f>0) {
+			for ($f = 0; $f < $numFields; $f++) {
+				if ($f > 0) {
 					echo ",";
 				}
 				$cleanValue = str_replace("\"", "'", $record[$fields[$f]]);
-				echo "\"".$cleanValue."\"";
+				echo "\"" . $cleanValue . "\"";
 			}
 			echo "\n";
 			flush();
@@ -810,22 +863,21 @@ class SangriaPage_Controller extends Page_Controller {
 
 	function Deployments()
 	{
-		$sort      = $this->request->getVar('sort');
-		$sort_dir  = $this->getSortDir('deployments');
+		$sort = $this->request->getVar('sort');
+		$sort_dir = $this->getSortDir('deployments');
 		$date_from = Convert::raw2sql(trim($this->request->getVar('date-from')));
-		$date_to   = Convert::raw2sql(trim($this->request->getVar('date-to')));
+		$date_to = Convert::raw2sql(trim($this->request->getVar('date-to')));
 
 		$sort_query = '';
-		$sort_dir   = '';
+		$sort_dir = '';
 		if (!empty($sort)) {
 			switch (strtolower(trim($sort))) {
-				case 'date':
-				{
+				case 'date': {
 					$sort_query = "UpdateDate";
-					$sort_dir   = strtoupper($sort_dir);
+					$sort_dir = strtoupper($sort_dir);
 				}
 					break;
-				default:{
+				default: {
 				$sort_query = "ID";
 				$sort_dir = 'DESC';
 				}
@@ -844,7 +896,7 @@ class SangriaPage_Controller extends Page_Controller {
 		}
 
 		$res = Deployment::get()->where($where_query);
-		if(!empty($sort_query) && !empty($sort_dir)){
+		if (!empty($sort_query) && !empty($sort_dir)) {
 			$res->sort($sort_query, $sort_dir);
 		}
 		return $res;
@@ -854,9 +906,9 @@ class SangriaPage_Controller extends Page_Controller {
 	{
 
 		$sqlQuery = new SQLQuery();
-		$sqlQuery->addSelect( array('DeploymentSurvey.*'));
-		$sqlQuery->addFrom( array("DeploymentSurvey, Deployment, Org"));
-		$sqlQuery->addWhere( array("Deployment.DeploymentSurveyID = DeploymentSurvey.ID
+		$sqlQuery->addSelect(array('DeploymentSurvey.*'));
+		$sqlQuery->addFrom(array("DeploymentSurvey, Deployment, Org"));
+		$sqlQuery->addWhere(array("Deployment.DeploymentSurveyID = DeploymentSurvey.ID
                                 AND Deployment.IsPublic = 1
                                 AND Org.ID = DeploymentSurvey.OrgID
                                 AND DeploymentSurvey.Title IS NOT NULL
@@ -867,7 +919,7 @@ class SangriaPage_Controller extends Page_Controller {
 
 		$arrayList = new ArrayList();
 
-		foreach($result as $rowArray) {
+		foreach ($result as $rowArray) {
 			// concept: new Product($rowArray)
 			$arrayList->push(new $rowArray['ClassName']($rowArray));
 		}
@@ -877,13 +929,13 @@ class SangriaPage_Controller extends Page_Controller {
 
 	function UserStoriesIndustries()
 	{
-		return UserStoriesIndustry::get()->filter('Active',1);
+		return UserStoriesIndustry::get()->filter('Active', 1);
 	}
 
 	// Current User Stories
 	function UserStoriesPerIndustry($Industry)
 	{
-		return UserStory::get()->filter('UserStoriesIndustryID',$Industry);
+		return UserStory::get()->filter('UserStoriesIndustryID', $Industry);
 	}
 
 	function SetCaseStudy()
@@ -981,8 +1033,9 @@ class SangriaPage_Controller extends Page_Controller {
 		$this->redirectBack();
 	}
 
-	function CountriesDDL(){
-		return new CountryDropdownField('country','Country');
+	function CountriesDDL()
+	{
+		return new CountryDropdownField('country', 'Country');
 	}
 
 	function ViewDeploymentDetails()
@@ -1023,141 +1076,145 @@ class SangriaPage_Controller extends Page_Controller {
 		return $this->httpError(404, 'Sorry that Deployment Survey could not be found!.');
 	}
 
-	function exportFoundationMembers(){
+	function exportFoundationMembers()
+	{
 		$params = $this->getRequest()->getVars();
-		if(!isset($params['fields']) || empty($params['fields']) )
-			return $this->httpError('412','missing required param fields');
+		if (!isset($params['fields']) || empty($params['fields']))
+			return $this->httpError('412', 'missing required param fields');
 
-		if(!isset($params['ext']) || empty($params['ext']) )
-			return $this->httpError('412','missing required param ext');
+		if (!isset($params['ext']) || empty($params['ext']))
+			return $this->httpError('412', 'missing required param ext');
 
 		$fields = $params['fields'];
-		$ext    = $params['ext'];
+		$ext = $params['ext'];
 
 		$sanitized_fields = array();
 
-		if(!count($fields)){
-			return $this->httpError('412','missing required param fields');
+		if (!count($fields)) {
+			return $this->httpError('412', 'missing required param fields');
 		}
 
-		$allowed_fields = array('ID'=>'ID','FirstName'=>'FirstName','SurName'=>'SurName','Email'=>'Email');
+		$allowed_fields = array('ID' => 'ID', 'FirstName' => 'FirstName', 'SurName' => 'SurName', 'Email' => 'Email');
 
-		for($i=0 ; $i< count($fields);$i++){
-			if(!array_key_exists($fields[$i],$allowed_fields))
-				return $this->httpError('412','invalid field');
-			array_push($sanitized_fields, 'Member.'.$fields[$i]);
+		for ($i = 0; $i < count($fields); $i++) {
+			if (!array_key_exists($fields[$i], $allowed_fields))
+				return $this->httpError('412', 'invalid field');
+			array_push($sanitized_fields, 'Member.' . $fields[$i]);
 		}
 
-		$query  = new SQLQuery();
+		$query = new SQLQuery();
 		$query->addFrom('Member');
 		$query->addSelect($sanitized_fields);
-		$query->addInnerJoin('Group_Members','Group_Members.MemberID = Member.ID');
-		$query->addInnerJoin('Group',"Group.ID = Group_Members.GroupID AND Group.Code='foundation-members'");
+		$query->addInnerJoin('Group_Members', 'Group_Members.MemberID = Member.ID');
+		$query->addInnerJoin('Group', "Group.ID = Group_Members.GroupID AND Group.Code='foundation-members'");
 		$query->setOrderBy('SurName,FirstName');
 		$result = $query->execute();
 
-		$data   = array();
+		$data = array();
 
-		foreach($result as $row){
+		foreach ($result as $row) {
 			$member = array();
-			foreach($fields as $field){
+			foreach ($fields as $field) {
 				$member[$field] = $row[$field];
 			}
-			array_push($data,$member);
+			array_push($data, $member);
 		}
 
-		$filename = "FoundationMembers" . date('Ymd') . ".".$ext;
+		$filename = "FoundationMembers" . date('Ymd') . "." . $ext;
 
 		return CSVExporter::getInstance()->export($filename, $data);
 	}
 
-	function exportCorporateSponsors(){
+	function exportCorporateSponsors()
+	{
 
 		$params = $this->getRequest()->getVars();
 
-		if(!isset($params['levels']) || empty($params['levels']) )
-			return $this->httpError('412','missing required param level');
+		if (!isset($params['levels']) || empty($params['levels']))
+			return $this->httpError('412', 'missing required param level');
 
-		if(!isset($params['fields']) || empty($params['fields']) )
-			return $this->httpError('412','missing required param fields');
+		if (!isset($params['fields']) || empty($params['fields']))
+			return $this->httpError('412', 'missing required param fields');
 
-		if(!isset($params['ext']) || empty($params['ext']) )
-			return $this->httpError('412','missing required param ext');
+		if (!isset($params['ext']) || empty($params['ext']))
+			return $this->httpError('412', 'missing required param ext');
 
-		$level  = $params['levels'];
+		$level = $params['levels'];
 
 		$fields = $params['fields'];
 
-		$ext    = $params['ext'];
+		$ext = $params['ext'];
 
 		$sanitized_fields = array();
 
-		if(!count($fields)){
-			return $this->httpError('412','missing required param fields');
+		if (!count($fields)) {
+			return $this->httpError('412', 'missing required param fields');
 		}
 
-		if(!count($level)){
-			return $this->httpError('412','missing required param $level');
+		if (!count($level)) {
+			return $this->httpError('412', 'missing required param $level');
 		}
 
-		$allowed_fields = array('MemberLevel'=>'MemberLevel','Name'=>'Name','City'=>'City','State'=>'State','Country'=>'Country','Industry'=>'Industry','ContactEmail'=>'ContactEmail','AdminEmail'=>'AdminEmail');
-		$allowed_levels = array('Platinum'=>'Platinum', 'Gold'=>'Gold','Startup'=>'Startup','Mention'=>'Mention');
-		for($i = 0 ; $i< count($fields);$i++){
-			if(!array_key_exists($fields[$i],$allowed_fields))
-				return $this->httpError('412','invalid field');
-			array_push($sanitized_fields, 'Company.'.$fields[$i]);
+		$allowed_fields = array('MemberLevel' => 'MemberLevel', 'Name' => 'Name', 'City' => 'City', 'State' => 'State', 'Country' => 'Country', 'Industry' => 'Industry', 'ContactEmail' => 'ContactEmail', 'AdminEmail' => 'AdminEmail');
+		$allowed_levels = array('Platinum' => 'Platinum', 'Gold' => 'Gold', 'Startup' => 'Startup', 'Mention' => 'Mention');
+		for ($i = 0; $i < count($fields); $i++) {
+			if (!array_key_exists($fields[$i], $allowed_fields))
+				return $this->httpError('412', 'invalid field');
+			array_push($sanitized_fields, 'Company.' . $fields[$i]);
 		}
-		for($i = 0 ; $i< count($level);$i++){
-			if(!array_key_exists($level[$i],$allowed_levels))
-				return $this->httpError('412','invalid level');
+		for ($i = 0; $i < count($level); $i++) {
+			if (!array_key_exists($level[$i], $allowed_levels))
+				return $this->httpError('412', 'invalid level');
 		}
 
-		$query  = new SQLQuery();
+		$query = new SQLQuery();
 
 		$query->addFrom('Company');
 		$query->addSelect($sanitized_fields);
-		$query->addWhere(" MemberLevel IN ('".implode("','",$level) ."')");
+		$query->addWhere(" MemberLevel IN ('" . implode("','", $level) . "')");
 		$query->setOrderBy('MemberLevel');
 
 		$result = $query->execute();
 
-		$data   = array();
+		$data = array();
 
-		foreach($result as $row){
+		foreach ($result as $row) {
 			$company = array();
-			foreach($fields as $field){
+			foreach ($fields as $field) {
 				$company[$field] = $row[$field];
 			}
-			array_push($data,$company);
+			array_push($data, $company);
 		}
 
-		$filename = "Companies" . date('Ymd') . ".".$ext;
+		$filename = "Companies" . date('Ymd') . "." . $ext;
 
 		return CSVExporter::getInstance()->export($filename, $data);
 	}
 
-	function ExportData(){
+	function ExportData()
+	{
 		$this->Title = 'Export Data';
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+		Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+		Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
 		Requirements::javascript("themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js");
 		Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
 		Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
 		return $this->getViewer('ExportData')->process($this);
 	}
 
-	function AddNewDeployment(){
+	function AddNewDeployment()
+	{
 
-		$survey = DataObject::get_one('DeploymentSurvey','ID = ' . $_POST['survey'] );
+		$survey = DataObject::get_one('DeploymentSurvey', 'ID = ' . $_POST['survey']);
 
 		$deployment = new Deployment;
 		$deployment->Label = $_POST['label'];
 		$deployment->DeploymentType = $_POST['type'];
 		$deployment->CountryCode = $_POST['country'];
 		$deployment->DeploymentSurveyID = $_POST['survey'];
-		if($survey){
+		if ($survey) {
 			$deployment->OrgID = $survey->OrgID;
-		}else{
+		} else {
 			$deployment->OrgID = 0;
 		}
 		$deployment->IsPublic = 1;
@@ -1168,41 +1225,42 @@ class SangriaPage_Controller extends Page_Controller {
 		$this->redirectBack();
 	}
 
-	function exportCLAUsers(){
+	function exportCLAUsers()
+	{
 
 		$params = $this->getRequest()->getVars();
-		if(!isset($params['fields']) || empty($params['fields']) )
-			return $this->httpError('412','missing required param fields');
+		if (!isset($params['fields']) || empty($params['fields']))
+			return $this->httpError('412', 'missing required param fields');
 
-		if(!isset($params['ext']) || empty($params['ext']) )
-			return $this->httpError('412','missing required param ext');
+		if (!isset($params['ext']) || empty($params['ext']))
+			return $this->httpError('412', 'missing required param ext');
 
 
-		if(!isset($params['status']) || empty($params['status']) )
-			return $this->httpError('412','missing required param status');
+		if (!isset($params['status']) || empty($params['status']))
+			return $this->httpError('412', 'missing required param status');
 
 		$sanitized_filters = $params['status'];
 		$fields = $params['fields'];
-		$ext    = $params['ext'];
+		$ext = $params['ext'];
 
-		$sanitized_filters = implode("','",$sanitized_filters);
+		$sanitized_filters = implode("','", $sanitized_filters);
 
 		$sanitized_fields = array();
 
-		if(!count($fields)){
-			return $this->httpError('412','missing required param fields');
+		if (!count($fields)) {
+			return $this->httpError('412', 'missing required param fields');
 		}
 
-		$allowed_fields = array('ID'=>'ID','FirstName'=>'FirstName','SurName'=>'SurName','Email'=>'Email');
+		$allowed_fields = array('ID' => 'ID', 'FirstName' => 'FirstName', 'SurName' => 'SurName', 'Email' => 'Email');
 
-		for($i=0 ; $i< count($fields);$i++){
-			if(!array_key_exists($fields[$i],$allowed_fields))
-				return $this->httpError('412','invalid field');
-			array_push($sanitized_fields, 'M.'.$fields[$i]);
+		for ($i = 0; $i < count($fields); $i++) {
+			if (!array_key_exists($fields[$i], $allowed_fields))
+				return $this->httpError('412', 'invalid field');
+			array_push($sanitized_fields, 'M.' . $fields[$i]);
 		}
 
 
-		$sanitized_fields =  implode(',',$sanitized_fields);
+		$sanitized_fields = implode(',', $sanitized_fields);
 
 		$sql = <<< SQL
 		SELECT {$sanitized_fields}
@@ -1217,42 +1275,43 @@ SQL;
 
 
 		$result = DB::query($sql);
-		$data   = array();
-		array_push($fields,'Groups');
-		foreach($result as $row){
+		$data = array();
+		array_push($fields, 'Groups');
+		foreach ($result as $row) {
 			$member = array();
-			foreach($fields as $field){
+			foreach ($fields as $field) {
 				$member[$field] = $row[$field];
 			}
-			array_push($data,$member);
+			array_push($data, $member);
 		}
 
-		$filename = "CLAMembers" . date('Ymd') . ".".$ext;
+		$filename = "CLAMembers" . date('Ymd') . "." . $ext;
 
 		return CSVExporter::getInstance()->export($filename, $data);
 	}
 
 
-	function exportGerritUsers(){
+	function exportGerritUsers()
+	{
 		$params = $this->getRequest()->getVars();
-		if(!isset($params['status']) || empty($params['status']) )
-			return $this->httpError('412','missing required param status');
+		if (!isset($params['status']) || empty($params['status']))
+			return $this->httpError('412', 'missing required param status');
 
-		if(!isset($params['ext']) || empty($params['ext']) )
-			return $this->httpError('412','missing required param ext');
+		if (!isset($params['ext']) || empty($params['ext']))
+			return $this->httpError('412', 'missing required param ext');
 
 		$status = $params['status'];
-		$ext    = $params['ext'];
+		$ext = $params['ext'];
 
 		$sanitized_filters = array();
-		$allowed_filter_values = array('foundation-members'=>'foundation-members','community-members'=>'community-members');
-		for($i=0 ; $i< count($status);$i++){
-			if(!array_key_exists($status[$i],$allowed_filter_values))
-				return $this->httpError('412','invalid filter value');
+		$allowed_filter_values = array('foundation-members' => 'foundation-members', 'community-members' => 'community-members');
+		for ($i = 0; $i < count($status); $i++) {
+			if (!array_key_exists($status[$i], $allowed_filter_values))
+				return $this->httpError('412', 'invalid filter value');
 			array_push($sanitized_filters, $status[$i]);
 		}
 
-		$sanitized_filters = implode("','",$sanitized_filters);
+		$sanitized_filters = implode("','", $sanitized_filters);
 		$sql = <<<SQL
 
 		SELECT M.FirstName,
@@ -1274,34 +1333,35 @@ SQL;
 		GROUP BY M.ID;
 SQL;
 
-		$res    = DB::query($sql);
-		$fields = array('FirstName','Surname','Email','Secondary_Email','GerritID','LastCodeCommitDate','Member_Status', 'FoundationMemberJoinDate', 'DateMemberStatusChanged', 'Company_Affiliations');
-		$data   = array();
+		$res = DB::query($sql);
+		$fields = array('FirstName', 'Surname', 'Email', 'Secondary_Email', 'GerritID', 'LastCodeCommitDate', 'Member_Status', 'FoundationMemberJoinDate', 'DateMemberStatusChanged', 'Company_Affiliations');
+		$data = array();
 
-		foreach($res as $row){
+		foreach ($res as $row) {
 			$member = array();
-			foreach($fields as $field){
+			foreach ($fields as $field) {
 				$member[$field] = $row[$field];
 			}
-			array_push($data,$member);
+			array_push($data, $member);
 		}
 
-		$filename = "GerritUsers" . date('Ymd') . ".".$ext;
+		$filename = "GerritUsers" . date('Ymd') . "." . $ext;
 
 		return CSVExporter::getInstance()->export($filename, $data);
 	}
 
-	public function Groups(){
+	public function Groups()
+	{
 		$sql = <<<SQL
 		SELECT G.Code,G.Title,G.ClassName FROM `Group` G ORDER BY G.Title;
 SQL;
-		$result    = DB::query($sql);
+		$result = DB::query($sql);
 
 		// let Silverstripe work the magic
 
 		$groups = new ArrayList();
 
-		foreach($result as $rowArray) {
+		foreach ($result as $rowArray) {
 			// $res: new Product($rowArray)
 			$groups->push(new $rowArray['ClassName']($rowArray));
 		}
