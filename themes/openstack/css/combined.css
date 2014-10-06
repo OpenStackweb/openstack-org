@@ -2819,3 +2819,6 @@ li#openstack-shared-services {
 
 li#start {
   margin-top: 20px; }
+
+input[type=checkbox], input[type=radio], input.checkbox, input.radio {position:relative;top:.25em; display: inline-block;}
+
