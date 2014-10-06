@@ -1,5 +1,5 @@
 <h2>Deployments Submitted &mdash; $DeploymentsCount total</h2>
-$DeploymentDateFilters(ViewDeploymentStatistics)
+$DeploymentSurveyDeploymentsFilters(ViewDeploymentStatistics)
 <div class="span-8 ">
     <h3>Is deployment Public?</h3>
         <table>

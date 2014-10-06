@@ -47,6 +47,7 @@ class SangriaPage_Controller extends Page_Controller
 		'exportCLAUsers',
 		'exportGerritUsers',
 		'DeploymentSurveyDeploymentsFilters',
+		'filterResults',
 	);
 
 	function init()
@@ -71,7 +72,7 @@ class SangriaPage_Controller extends Page_Controller
 	// Deployment Survey Filters
 
 
-	function DeploymentDateFilters($action)
+	function DeploymentSurveyDeploymentsFilters($action)
 	{
 		Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
 		Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
@@ -1366,6 +1367,14 @@ SQL;
 			$groups->push(new $rowArray['ClassName']($rowArray));
 		}
 		return $groups;
+	}
+
+	function ViewDeploymentStatistics(){
+		$params     = $this->requestParams;
+		if(isset($params['date-from']) && isset($params['date-to'])){
+			//do something
+		}
+		return $this->Customise(array())->renderWith(array('SangriaPage_ViewDeploymentStatistics','SangriaPage','SangriaPage'));
 	}
 
 }

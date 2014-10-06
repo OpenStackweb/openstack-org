@@ -42,8 +42,10 @@ class DeploymentSurveyDeploymentsFilters extends Form {
         $date_from = $data['date-from'];
         $date_to = $data['date-to'];
         // redirecciono al controller que lo llama.. no funca
-        return Controller::curr()->redirect($action."/".$date_from."/".$date_to);
-
+        //return $form->controller->redirect($action."/".$date_from."/".$date_to);
+	    if($form->controller->hasMethod($action))
+		    return $form->controller->$action($data, $form, $form->controller->request);
+	    return $form->httpError(404);
     }
   
 }
