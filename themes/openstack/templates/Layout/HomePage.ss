@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-12 overview-right">
                     <img class="img-responsive control-cloud-graphic" src="/themes/openstack/images/control-your-cloud.svg" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
-                    <a href="#" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
+                    <a rel="shadowbox" href="//www.youtube.com/v/3UINKsGw95A" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
                 </div>
             </div>
 
