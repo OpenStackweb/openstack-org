@@ -41,7 +41,7 @@
                     <div class="release-text">Latest Release: Icehouse (May 2014)</div>
                 </div>
                 <div class="col-lg-6 col-sm-12 overview-right">
-                    <img class="img-responsive control-cloud-graphic" src="/themes/openstack/images/new-site/control-your-cloud.svg" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
+                    <img class="img-responsive control-cloud-graphic" src="/themes/openstack/images/control-your-cloud.svg" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
                     <a href="#" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
                 </div>
             </div>
@@ -62,12 +62,12 @@
                 </div>
                 <div class="col-lg-12 col-sm-12 customer-logos-wrapper">
                     <div class="row">
-                      <div class="col-md-2 customer-logos" id="bloomberg-logo"><img src="/themes/openstack/images/new-site/customer-bloomberg.png" alt="Bloomberg Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos" id="bestbuy-logo"><img src="/themes/openstack/images/new-site/customer-bestbuy.png" alt="Best Buy Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos"id="sony-logo"><img src="/themes/openstack/images/new-site/customer-sony.png" alt="Sony Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos logo-hover"id="comcast-logo"><img src="/themes/openstack/images/new-site/customer-comcast.png" alt="Comcast Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos"id="paypal-logo"><img src="/themes/openstack/images/new-site/customer-paypal.png" alt="PayPal Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos"id="wells-logo"><img src="/themes/openstack/images/new-site/customer-wells.png" alt="Wells Fargo Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos" id="bloomberg-logo"><img src="/themes/openstack/images/customer-bloomberg.png" alt="Bloomberg Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos" id="bestbuy-logo"><img src="/themes/openstack/images/customer-bestbuy.png" alt="Best Buy Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos"id="sony-logo"><img src="/themes/openstack/images/customer-sony.png" alt="Sony Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos logo-hover"id="comcast-logo"><img src="/themes/openstack/images/customer-comcast.png" alt="Comcast Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos"id="paypal-logo"><img src="/themes/openstack/images/customer-paypal.png" alt="PayPal Uses OpenStack"></div>
+                      <div class="col-md-2 customer-logos"id="wells-logo"><img src="/themes/openstack/images/customer-wells.png" alt="Wells Fargo Uses OpenStack"></div>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
@@ -90,7 +90,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
-                    <img class="img-responsive community-graphic" src="/themes/openstack/images/new-site/community-graphic.svg" onerror="this.onerror=null; this.src=/images/community-graphic.png" alt="OpenStack Community">
+                    <img class="img-responsive community-graphic" src="/themes/openstack/images/community-graphic.svg" onerror="this.onerror=null; this.src=/images/community-graphic.png" alt="OpenStack Community">
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <h2>One of the fastest growing open source communities in the world.</h2>
@@ -113,7 +113,7 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>Upcoming Events <a href="http://www.openstack.org/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
-                    <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/"><img class="event-ad" src="/themes/openstack/images/new-site/paris-banner.jpg"></a>
+                    <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/"><img class="event-ad" src="/themes/openstack/images/paris-banner.jpg"></a>
                     <!-- Event 1 -->
                     <a href="#" class="single-event">
                         <div class="left-event">
@@ -206,7 +206,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <!-- <a href="#">See All <i class="fa fa-caret-right"></i></a> --></h2>
-                    <a href="http://www.openstack.org/enterprise/auto/"><img class="news-ad" src="/themes/openstack/images/new-site/auto-banner.jpg"></a>
+                    <a href="http://www.openstack.org/enterprise/auto/"><img class="news-ad" src="/themes/openstack/images/auto-banner.jpg"></a>
                     <!-- News Item 1 -->
                     <a href="#" class="single-event">
                         <div class="left-event">
