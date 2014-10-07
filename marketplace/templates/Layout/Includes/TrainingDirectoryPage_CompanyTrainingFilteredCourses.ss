@@ -1,6 +1,7 @@
 <% if FilteredCourses %>
-<div class="training-program-box">
-    <div class="span-8">
+<div class="training-program-box" style="border-left-color: #{$Company.CompanyColor}">
+<div class="row">
+    <div class="col-lg-6">
         <div class="logo-area">
             <span style="background-color: #{$Company.CompanyColor}" class="color-bar"></span>
             <a href="{$Top.TrainingURL}">
@@ -8,7 +9,7 @@
             </a>
         </div>
     </div>
-    <div class="span-9 last">
+    <div class="col-lg-6">
         <div class="company-details-area">
             <h1>
                 <a href="{$Top.TrainingURL}" style="color: #{$Company.CompanyColor}">
@@ -18,6 +19,7 @@
             <div>$Description</div>
         </div>
     </div>
+</div>
     <div class="span-17 last">
         <div class="course-area">
             <table>

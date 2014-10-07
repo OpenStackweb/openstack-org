@@ -2,20 +2,20 @@
     <div class="col-lg-3 col-md-5 col-sm-6">
         <div class="logo-area">
             <span style="background-color: #{$Company.CompanyColor}" class="color-bar"></span>
-            <a href="$CloudLink{$Company.URLSegment}/{$Slug}">
+            <a href="$Top.Link{$Company.URLSegment}/{$Slug}">
                 $Company.SmallLogoPreview(150)
             </a>
         </div>
     </div>
     <div class="col-lg-8 col-md-7 col-sm-6">
         <div class="company-details-area">
-            <h1>
-                <a style="color: #{$Company.CompanyColor}" href="$CloudLink{$Company.URLSegment}/{$Slug}">
+            <h4>
+                <a style="color: #{$Company.CompanyColor}" href="$Top.Link{$Company.URLSegment}/{$Slug}">
                     $Name
                 </a>
-            </h1>
+            </h4>
             <p>$Overview</p>
-            <a style="background-color: #{$Company.CompanyColor}" href="$CloudLink{$Company.URLSegment}/{$Slug}" class="details-button">Details</a>
+            <a style="background-color: #{$Company.CompanyColor}" href="$Top.Link{$Company.URLSegment}/{$Slug}" class="details-button">Details</a>
         </div>
     </div>
 </div>

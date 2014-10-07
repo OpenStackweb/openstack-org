@@ -18,7 +18,7 @@ a:hover {
 /* @group Navigation */
 #navigation {
   display: block;
-  background: url(/themes/openstack/images/new-site/header-line.gif) repeat-x 0 bottom;
+  background: url('/themes/openstack/images/header-line.gif') repeat-x 0 bottom;
   padding-bottom: 1px; }
 
 #navigation * {
@@ -71,7 +71,7 @@ a:hover {
   display: block;
   margin-top: 8px;
   text-indent: -1000em;
-  background: url(/themes/openstack/images/new-site/open-stack-cloud-computing-logo-2.png) no-repeat left center;
+  background: url('/themes/openstack/images/open-stack-cloud-computing-logo-2.png') no-repeat left center;
   height: 54px;
   width: 177px;
   margin-left: -10px; }
@@ -127,7 +127,7 @@ ul.subsectionNav li.current a {
   margin-top: 30px; }
 
 .overviewNav li.active, .subsectionNav li.active {
-  background: url(/themes/openstack/images/new-site/pointer-arrow.gif) no-repeat right center; }
+  background: url('/themes/openstack/images/pointer-arrow.gif') no-repeat right center; }
 
 #subnav ul li {
   text-align: right; }
@@ -312,7 +312,7 @@ input.action {
 
 .note {
   color: #33730a;
-  background: #e2f4dc url(/themes/openstack/images/new-site/side-note-pointer.gif) no-repeat left center; }
+  background: #e2f4dc url('/themes/openstack/images/side-note-pointer.gif') no-repeat left center; }
 
 .note a {
   color: #33730a;
@@ -327,7 +327,7 @@ input.action {
 a#CitrixVideo {
   display: block;
   padding-top: 93px;
-  background: url(/themes/openstack/images/new-site/citrix-video-thumbnail.jpg) no-repeat;
+  background: url('/themes/openstack/images/citrix-video-thumbnail.jpg') no-repeat;
   color: #aeaeae;
   text-decoration: none;
   margin-top: 3px; }
@@ -419,7 +419,7 @@ a.downloadLink {
 /* @group community page */
 .communityBox {
   height: 213px;
-  background: #f8f8f8 url(/themes/openstack/images/new-site/community-box-headers.png) no-repeat 0 0; }
+  background: #f8f8f8 url('/themes/openstack/images/community-box-headers.png') no-repeat 0 0; }
 
 #userResources {
   background-position: -200px 0; }
@@ -453,7 +453,7 @@ a.downloadLink {
   height: 222px;
   margin-top: -9px;
   margin-bottom: 10px;
-  background: url(/themes/openstack/images/new-site/openstack-design-summit-community.jpg) no-repeat 0 0; }
+  background: url('/themes/openstack/images/openstack-design-summit-community.jpg') no-repeat 0 0; }
 
 #designSummit {
   color: #6b6b6b; }
@@ -580,7 +580,7 @@ ul#quotes p.name strong {
 a.Datasheet {
   padding-top: 110px;
   display: block;
-  background: url(/themes/openstack/images/openstack-product-pdf.jpg) no-repeat center top;
+  background: url('/themes/openstack/images/openstack-product-pdf.jpg') no-repeat center top;
   margin-left: 20px;
   margin-top: 30px; }
 
@@ -592,7 +592,7 @@ a#DemoVideo {
   display: block;
   padding-top: 103px;
   margin-left: 18px;
-  background: url(/themes/openstack/images/demo-video-thumbnail.jpg) no-repeat;
+  background: url('/themes/openstack/images/demo-video-thumbnail.jpg') no-repeat;
   text-decoration: none;
   margin-top: 50px; }
 
@@ -680,7 +680,7 @@ ul.user-project-list li {
 
 .user-links li {
   padding-left: 20px;
-  background: url(/themes/openstack/images/link.png) no-repeat left center;
+  background: url('/themes/openstack/images/link.png') no-repeat left center;
   margin-left: -20px;
   list-style: none; }
 
@@ -823,7 +823,7 @@ a, a:visited {
   min-width: 135px; }
 
 a.navbar-brand {
-  background: url('/themes/openstack/images/new-site/openstack-logo-full.png') left no-repeat;
+  background: url('/themes/openstack/images/openstack-logo-full.png') left no-repeat;
   height: 35px;
   width: 135px; }
 
@@ -833,7 +833,7 @@ a.navbar-brand {
     min-width: 75px;
     margin-top: 0; }
   a.navbar-brand {
-    background: url('/themes/openstack/images/new-site/openstack-logo-vert.png') left no-repeat;
+    background: url('/themes/openstack/images/openstack-logo-vert.png') left no-repeat;
     margin-left: 0px !important;
     height: 54px;
     width: 59px; } }
@@ -1222,7 +1222,7 @@ a.gs-title, a.gs-title b {
   padding-bottom: 0;
   text-align: center;
   color: #f8f8f8;
-  background: url(/themes/openstack/images/new-site/hero-bkgd1.jpg) no-repeat center center;
+  background: url('/themes/openstack/images/hero-bkgd1.jpg') no-repeat center center;
   background-size: cover;
   position: relative; }
 
@@ -1275,7 +1275,7 @@ a.gs-title, a.gs-title b {
 /*Hero Promo, add .featured to .intro-header*/
 .intro-header.featured {
   text-align: center;
-  background: url(/themes/openstack/images/new-site/summit-promo-bkgd1.jpg) no-repeat center center;
+  background: url('/themes/openstack/images/summit-promo-bkgd1.jpg') no-repeat center center;
   min-height: 420px;
   background-size: cover;
   position: relative; }
@@ -1552,12 +1552,12 @@ a.customer-btn:hover {
 /*Community Section*/
 .community-section {
   padding: 75px 0;
-  background: url('/themes/openstack/images/new-site/community-bkgd.jpg') no-repeat center center;
+  background: url('/themes/openstack/images/community-bkgd.jpg') no-repeat center center;
   background-size: cover;
   min-height: 350px; }
 
 .community-section.featured {
-  background: url('/themes/openstack/images/new-site/community-bkgd2.jpg') no-repeat center center;
+  background: url('/themes/openstack/images/community-bkgd2.jpg') no-repeat center center;
   background-size: cover; }
 
 .community-graphic {
@@ -1672,7 +1672,7 @@ a.featured-link:hover {
   max-height: 113px;
   max-width: 1140px;
   margin-bottom: 20px;
-  background-image: url('/themes/openstack/images/new-site/paris-summit-lrg.jpg');
+  background-image: url('/themes/openstack/images/paris-summit-lrg.jpg');
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center center; }
@@ -1680,7 +1680,7 @@ a.featured-link:hover {
 @media (max-width: 767px) {
   .event-ad-lrg {
     max-width: 766px;
-    background-image: url('/themes/openstack/images/new-site/paris-summit-sm.jpg');
+    background-image: url('/themes/openstack/images/paris-summit-sm.jpg');
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center center; } }
@@ -1859,28 +1859,28 @@ footer {
   margin-right: 10px; }
 
 .footer-twitter {
-  background: url('/themes/openstack/images/new-site/footer-twitter.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-twitter.png') no-repeat; }
 
 .footer-twitter:hover {
-  background: url('/themes/openstack/images/new-site/footer-twitter-hover.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-twitter-hover.png') no-repeat; }
 
 .footer-facebook {
-  background: url('/themes/openstack/images/new-site/footer-facebook.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-facebook.png') no-repeat; }
 
 .footer-facebook:hover {
-  background: url('/themes/openstack/images/new-site/footer-facebook-hover.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-facebook-hover.png') no-repeat; }
 
 .footer-linkedin {
-  background: url('/themes/openstack/images/new-site/footer-linkedin.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-linkedin.png') no-repeat; }
 
 .footer-linkedin:hover {
-  background: url('/themes/openstack/images/new-site/footer-linkedin-hover.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-linkedin-hover.png') no-repeat; }
 
 .footer-youtube {
-  background: url('/themes/openstack/images/new-site/footer-youtube.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-youtube.png') no-repeat; }
 
 .footer-youtube:hover {
-  background: url('/themes/openstack/images/new-site/footer-youtube-hover.png') no-repeat; }
+  background: url('/themes/openstack/images/footer-youtube-hover.png') no-repeat; }
 
 .newsletter-form {
   margin: 10px 0 30px;
@@ -2366,7 +2366,7 @@ ul.marketplace-nav .current a {
   border-radius: 4px; }
 
 .filter-label {
-  background: url("/images/marketplace-search-icon.png") no-repeat scroll left 7px rgba(0, 0, 0, 0);
+  background: url("/themes/openstack/images/images/marketplace-search-icon.png") no-repeat scroll left 7px rgba(0, 0, 0, 0);
   color: #30739C;
   float: left;
   margin-bottom: 0;
@@ -2458,7 +2458,7 @@ ul.resource-links li {
   display: block; }
 
 ul.resource-links li a {
-  background-image: url('/themes/openstack/images/new-site/resource-link-icon.png');
+  background-image: url('/themes/openstack/images/resource-link-icon.png');
   background-repeat: no-repeat;
   background-position: 93% 50%;
   background-color: #edf2f7;
@@ -2511,7 +2511,7 @@ ul.resource-links li a:hover {
 /*Blog Page*/
 .blog-title {
   width: 100%;
-  background: url(/themes/openstack/images/new-site/summit-promo-bkgd1.jpg) no-repeat center center;
+  background: url(/themes/openstack/images/images/summit-promo-bkgd1.jpg) no-repeat center center;
   background-size: cover;
   padding: 50px 0;
   text-align: center; }
@@ -2606,7 +2606,7 @@ ul.resource-links li a:hover {
   height: 100%;
   text-align: center;
   padding: 70px 0;
-  background: url('/themes/openstack/images/new-site/summit-vancouver-bkgd.jpg') no-repeat 0 0;
+  background: url('/themes/openstack/images/summit-vancouver-bkgd.jpg') no-repeat 0 0;
   background-size: cover; }
 
 img.summit-landing-logo {
@@ -2695,21 +2695,21 @@ img.summit-landing-logo {
   margin: 0 10px; }
 
 .landing-twitter {
-  background: url('/themes/openstack/images/new-site/landing-twitter.png') no-repeat;
+  background: url('/themes/openstack/images/landing-twitter.png') no-repeat;
   opacity: 0.8; }
 
 .landing-twitter:hover {
   opacity: 1; }
 
 .landing-facebook {
-  background: url('/themes/openstack/images/new-site/landing-facebook.png') no-repeat;
+  background: url('/themes/openstack/images/landing-facebook.png') no-repeat;
   opacity: 0.8; }
 
 .landing-facebook:hover {
   opacity: 1; }
 
 .landing-linkedin {
-  background: url('/themes/openstack/images/new-site/landing-linkedin.png') no-repeat;
+  background: url('/themes/openstack/images/landing-linkedin.png') no-repeat;
   opacity: 0.8; }
 
 .landing-linkedin:hover {
@@ -2820,5 +2820,19 @@ li#openstack-shared-services {
 li#start {
   margin-top: 20px; }
 
-input[type=checkbox], input[type=radio], input.checkbox, input.radio {position:relative;top:.25em; display: inline-block;}
+fieldset {
+  border: 1px solid #CCCCCC;
+  padding: 0px 17px 20px 17px;
+  margin-bottom: 20px; }
 
+fieldset ul {
+  list-style: none; }
+
+input[type="radio"] {
+  margin-left: 0px; }
+
+input[type="checkbox"] {
+  margin-left: 0px !important; }
+
+input[type="checkbox"], input[type="radio"] {
+  display: inline-block; }
