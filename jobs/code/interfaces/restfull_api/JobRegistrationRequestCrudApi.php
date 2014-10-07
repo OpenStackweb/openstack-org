@@ -196,6 +196,10 @@ extends AbstractRestfulJsonApi {
 			SS_Log::log($ex1,SS_Log::ERR);
 			return $this->notFound($ex1->getMessage());
 		}
+		catch(EntityValidationException $ex2){
+			SS_Log::log($ex2,SS_Log::NOTICE);
+			return $this->validationError($ex2->getMessages());
+		}
 		catch(Exception $ex){
 			SS_Log::log($ex,SS_Log::ERR);
 			return $this->serverError();
@@ -217,8 +221,8 @@ extends AbstractRestfulJsonApi {
 			SS_Log::log($ex1,SS_Log::ERR);
 			return $this->notFound($ex1->getMessage());
 		}
-		catch (EntityValidationException $ex2) {
-			SS_Log::log($ex2,SS_Log::ERR);
+		catch(EntityValidationException $ex2){
+			SS_Log::log($ex2,SS_Log::NOTICE);
 			return $this->validationError($ex2->getMessages());
 		}
 		catch(Exception $ex){
