@@ -28,11 +28,11 @@
                     <h2>
                         Open source software for creating private and public clouds.
                     </h2>
-                    <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="//software/openstack-dashboard/">dashboard</a> or via the <a href="http://developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="//marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
+                    <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="//openstack.org/software/openstack-dashboard/">dashboard</a> or via the <a href="http://developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="//openstack.org/marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
 
-					<p><a href="//user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. One strength of OpenStack lies in the breadth of the <a href="//foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="//marketplace/">Marketplace</a>.</p>
+					<p><a href="//openstack.org/user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. One strength of OpenStack lies in the breadth of the <a href="//openstack.org/foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="//openstack.org/marketplace/">Marketplace</a>.</p>
 
-					<p>The software is built by a <a href="//community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our twice-annual <a href="//summit/">Summit</a>.</p>
+					<p>The software is built by a <a href="//openstack.org/community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our twice-annual <a href="//openstack.org/summit/">Summit</a>.</p>
                     
                     <div class="btn-wrapper">
                         <a href="http://openstack.org/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
