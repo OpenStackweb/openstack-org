@@ -106,193 +106,34 @@
         <!-- /.container -->
     </div>
     <!-- End Community Section -->
-
-    <!-- News Section -->
+x    <!-- News Section -->
     <div class="news-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>Upcoming Events <a href="http://www.openstack.org/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
                     <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/"><img class="event-ad" src="/themes/openstack/images/paris-banner.jpg"></a>
-                    <!-- Event 1 -->
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="date">Sep 11-13</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="event-name">FossetCon</div>
-                            <div class="location">Orlando, FL, US</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <!-- End Event 1 -->
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="date">Sep 11</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="event-name">OpenStack Meeting 2014</div>
-                            <div class="location">São Paulo, SP, BR</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="date">Sep 13</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="event-name">OpenStack India Meetup, Pune</div>
-                            <div class="location">Pune, Maharashtra, IN</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="date">Sep 16</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="event-name">OpenStack Silicon Valley</div>
-                            <div class="location">Mountain View, CA, US</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="date">Sep 18</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="event-name">Dell Innovation Day mit teuto.net</div>
-                            <div class="location">Frankfurt (Main), Hessen, DE</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="date">Sep 19</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="event-name">OpenStack Conference Benelux 2014</div>
-                            <div class="location">Bussum, The Netherlands</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event last">
-                        <div class="left-event">
-                            <div class="date">Sep 24</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="event-name">Athens OpenStack User Group meeting</div>
-                            <div class="location">Athens, GR</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <div class="see-more-bottom">
-                        <a href="https://www.openstack.org/community/events/">See All Upcoming Events <i class="fa fa-chevron-right"></i></a>
-                    </div>
+                    $UpcomingEvents(7)
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <!-- <a href="#">See All <i class="fa fa-caret-right"></i></a> --></h2>
                     <a href="http://www.openstack.org/enterprise/auto/"><img class="news-ad" src="/themes/openstack/images/auto-banner.jpg"></a>
-                    <!-- News Item 1 -->
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="news-type">Press</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="news-title">Voice of the User Reflected in New Features of OpenStack Icehouse Release</div>
-                            <div class="news-date">Friday, Aug 22nd, 2014</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <!-- End News Item 1 -->
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="news-type">Press</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="news-title">FossetCon</div>
-                            <div class="news-date">Orlando, FL, US</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="news-type">Press</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="news-title">FossetCon</div>
-                            <div class="news-date">Orlando, FL, US</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="planet-type">Planet</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="news-title">OpenStack Silicon Valley Featured Track: Planning Your Agile Deployment </div>
-                            <div class="news-date">Sep. 8th, 2014</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="planet-type">Planet</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="news-title">RDO Blog roundup, week of September 1</div>
-                            <div class="news-date">Sep. 8th. 2014</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event">
-                        <div class="left-event">
-                            <div class="planet-type">Planet</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="news-title">Deconstructing the open cloud, the OpenStack Trove roadmap, and more</div>
-                            <div class="news-date">Sep. 8th, 2014</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
-                    <a href="#" class="single-event last">
-                        <div class="left-event">
-                            <div class="planet-type">Planet</div>
-                        </div>
-                        <div class="event-details">
-                            <div class="news-title">OpenStack Resources for the vAdmin</div>
-                            <div class="news-date">Sep. 8th, 2014</div>
-                        </div>
-                        <div class="right-event">
-                            <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
-                        </div>
-                    </a>
+                    
+                       <% loop RssItems %>
+                            <!-- News Item -->
+                            <a href="{$link}" class="single-event">
+                                <div class="left-event">
+                                    <div class="planet-type">Planet</div>
+                                </div>
+                                <div class="event-details">
+                                    <div class="news-title">$title</div>
+                                    <div class="news-date">$pubDate</div>
+                                </div>
+                                <div class="right-event">
+                                    <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>
+                                </div>
+                            </a>
+                        <% end_loop %>
                 </div>
             </div>
         </div>

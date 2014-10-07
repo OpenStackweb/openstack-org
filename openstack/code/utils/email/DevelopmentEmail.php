@@ -23,8 +23,6 @@ final class DevelopmentEmail extends Email {
 
 		if(empty($this->from)) $this->from = Email::getAdminEmail();
 
-		$this->setBounceHandlerURL($this->bounceHandlerURL);
-
 		$headers = $this->customHeaders;
 
 		$headers['X-SilverStripeBounceURL'] = $this->bounceHandlerURL;
@@ -60,8 +58,6 @@ final class DevelopmentEmail extends Email {
 		$this->parseVariables();
 
 		if(empty($this->from)) $this->from = Email::getAdminEmail();
-
-		$this->setBounceHandlerURL( $this->bounceHandlerURL );
 
 		$headers = $this->customHeaders;
 

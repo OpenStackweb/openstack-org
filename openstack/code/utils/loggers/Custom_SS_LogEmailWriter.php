@@ -6,6 +6,12 @@
 final class Custom_SS_LogEmailWriter extends SS_LogEmailWriter {
 
 
+	/**
+	 * @config
+	 * @var $send_from Email address to send log information from
+	 */
+	private static $send_from = 'errors@silverstripe.com';
+
 	function __construct($emailAddress, $customSmtpServer = false)
 	{
 		parent::__construct($emailAddress, $customSmtpServer);
