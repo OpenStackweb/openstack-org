@@ -68,26 +68,23 @@ div.deployment a.deployment-name {
 	margin-left: 30px;
 }
 
-div.survey-box {
+div#user, div#time, div#private {
 	border: 2px solid #CCCCCC;
 	padding: 15px;
 	padding-top: 100px;
-	width: 270px;
-	float: left;
-	margin-right: 10px;
-	height: 4em;
+	min-height: 13em;
 	margin-bottom: 20px;
 }
 
-div.survey-box#user {
+div#user {
 	background: url(/themes/openstack/images/user-survey/user-survey.gif) no-repeat center 20px;
 }
 
-div.survey-box#time {
+div#time {
 	background: url(/themes/openstack/images/user-survey/stopwatch.gif) no-repeat center 20px;
 }
 
-div.survey-box#private {
+div#private {
 	background: url(/themes/openstack/images/user-survey/private.gif) no-repeat center 20px;
 }
 
