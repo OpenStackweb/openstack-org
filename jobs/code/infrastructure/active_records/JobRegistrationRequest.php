@@ -65,20 +65,20 @@ implements IJobRegistrationRequest {
 
 	public function markAsPosted() {
 		if($this->isRejected)
-			throw new EntityValidationException(array(array('message'=>'job request already rejected!')));
+			throw new EntityValidationException(array(array('message'=>'This job has already been rejected!.')));
 
 		if($this->isPosted)
-			throw new EntityValidationException(array(array('message'=>'job request already posted!.')));
+			throw new EntityValidationException(array(array('message'=>'This job has already been approved!.')));
 
 		$this->isPosted = true;
 	}
 
 	public function markAsRejected() {
 		if($this->isPosted)
-			throw new EntityValidationException(array(array('message'=>'job request already posted!.')));
+			throw new EntityValidationException(array(array('message'=>'This job has already been approved!.')));
 
 		if($this->isRejected)
-			throw new EntityValidationException(array(array('message'=>'job request already rejected!')));
+			throw new EntityValidationException(array(array('message'=>'This job has already been rejected!.')));
 
 		$this->isRejected = true;
 	}
