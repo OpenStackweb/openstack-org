@@ -5,12 +5,12 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-sm-12">
                     <div class="intro-message">
-                        <h1>Tickets for the November OpenStack Summit in Paris are going fast!</h1>
+                        <h1>Register online by October 24, 5pm EST to attend the OpenStack Summit in Paris</h1>
                     </div>
                     <div class="promo-btn-wrapper">
                         <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/" class="promo-btn">Book Your Tickets Now <i class="fa fa-chevron-right"></i></a>
                     </div>
-                    <p class="promo-dates">Summit Dates: Nov 3 - 5, 2014</p>
+                    <p class="promo-dates">Summit Dates: Nov 3 - 7, 2014</p>
                 </div>
             </div>
             <div class="hero-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i class="fa fa-info-circle"></i></div>
@@ -28,12 +28,12 @@
                     <h2>
                         Open source software for creating private and public clouds.
                     </h2>
-                    <p>
-                        OpenStack is the leading cloud platform for controlling large pools of compute, storage, and networking resources throughout a datacenter, all managed through a <a href="http://openstack.org/software/openstack-dashboard/">dashboard</a> or the <a href="http://developer.openstack.org">OpenStack API</a> that gives administrators control while empowering their users to provision resources through a web interface.
-                    </p>
-                    <p>
-                        New versions of the software are designed and built by thousands of open source developers in our <a href="http://openstack.org/community/">thriving community</a>, and <a href="http://openstack.org/user-stories/">used by everyone</a> from startups to the Fortune 100 to move faster. OpenStack is also known for having a very strong <a href="https://www.openstack.org/marketplace/">ecosystem</a>, many of whom offer OpenStack-powered products listed in the <a href="http://openstack.org/marketplace/">OpenStack Marketplace</a>.
-                    </p>
+                    <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="//software/openstack-dashboard/">dashboard</a> or via the <a href="http://developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="//marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
+
+					<p><a href="//user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. One strength of OpenStack lies in the breadth of the <a href="//foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="//marketplace/">Marketplace</a>.</p>
+
+					<p>The software is built by a <a href="//community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our twice-annual <a href="//summit/">Summit</a>.</p>
+                    
                     <div class="btn-wrapper">
                         <a href="http://openstack.org/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
                         <a href="http://openstack.org/software/start/" class="overview-btn right-btn">Get The Software <i class="fa fa-arrow-circle-o-down"></i></a>
