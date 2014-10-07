@@ -58,7 +58,23 @@ class HomePage_Controller extends Page_Controller {
 	}
 
 	function UpcomingEvents($num=1) {
-		return EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate','ASC')->limit($num);
+
+		$events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate','ASC')->limit($num);
+		$output = '';
+
+        if ($events) {
+            foreach ($events as $key => $event) {
+                $first = ($key == 0);
+                $data = array('IsEmpty'=>0,'IsFirst'=>$first);
+
+                $output .= $event->renderWith('EventHolder_event', $data);
+            }
+        } else {
+            $data = array('IsEmpty'=>1);
+            $output .= Page::renderWith('EventHolder_event', $data);
+        }
+
+        return $output;
 	}
 
 	function DisplayVideo() {
@@ -81,9 +97,10 @@ class HomePage_Controller extends Page_Controller {
 
 	}
 
-	function RssItems($limit = 10) { 
+	function RssItems($limit = 7) { 
 
-		$feed    = new RestfulService('http://pipes.yahoo.com/pipes/pipe.run?_id=7479b77882a68cdf5a7143374b51cf30&_render=rss',7200);
+		$feed = new RestfulService('http://planet.openstack.org/rss20.xml',7200);
+
 		$feedXML = $feed->request()->getBody();
 
 		// Extract items from feed 
@@ -93,9 +110,8 @@ class HomePage_Controller extends Page_Controller {
 			$item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
 		}
 
-		// Return items up to limit
-		return  new ArrayList(array_slice($result->toArray(),0,$limit));
-	}
+		return $result->limit(0,$limit);
+	}	
 
 	function PastEvents($num=1) {
 	  return EventPage::get()->where("EventEndDate <= now()")->sort('EventStartDate')->limit($num);

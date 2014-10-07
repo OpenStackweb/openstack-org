@@ -60,13 +60,7 @@
     </footer>
     <div class="footer-bottom">
         <div class="container">
-            <form class="form-inline">
-              <div class="form-group">
-                <div>
-                  <input class="feedback-input" type="input" placeholder="Give Us Your Feedback On This Page">
-                  <button type="submit" class="feedback-btn">Submit</button>
-                </div>
-              </div>
-            </form>
+            $FeedbackForm
         </div>
     </div>
+
