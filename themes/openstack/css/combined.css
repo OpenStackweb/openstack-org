@@ -2156,8 +2156,97 @@ ul#developerActivity li span {
 .software {
   margin-top: 30px; }
 
+.software-top {
+  text-align: center; }
+
+.software-top h1 {
+  margin: 5px 0 10px; }
+
+p.icon {
+  text-align: center;
+  margin: 40px 0 0; }
+
+p.software-description {
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #777; }
+
 .openstack-diagram {
   margin-bottom: 3em; }
+
+.slideshow {
+  display: inline-block;
+  padding: 30px 0 20px;
+  margin: 30px 0;
+  border-top: 1px solid #edf2f7;
+  border-bottom: 1px solid #edf2f7; }
+
+ul.slides {
+  padding: 0;
+  margin: 0; }
+
+ul.slides li {
+  list-style: none;
+  display: inline-block; }
+
+ul.slides li a img {
+  width: 100%;
+  border: 4px solid #edf2f7; }
+
+ul.slides li a img:hover {
+  border-color: #30739C; }
+
+ul.slides li p {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #30739C;
+  text-align: center; }
+
+.newSubNav li#start a.current.green, .newSubNav li#start a.current.green:hover {
+  color: white;
+  background-color: #75C320; }
+
+.tabSet {
+  background: #edf2f7;
+  border: 1px solid #30739C;
+  margin: 30px 0;
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.tabContent table {
+  width: 100%;
+  margin: 0;
+  table-layout: fixed;
+  word-wrap: break-word; }
+
+.get-started-wrapper h3 {
+  text-align: center;
+  margin: 40px 0; }
+
+a.start-btn {
+  background: #30739C;
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 12px;
+  border-radius: 2px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-style: none;
+  display: inline-block; }
+
+img.deploy-powered {
+  margin-top: 40px; }
+
+@media (max-width: 767px) {
+  img.deploy-powered {
+    margin: 10px 0 30px; } }
+
+img.deploy-compatible {
+  margin-top: 30px; }
+
+@media (max-width: 767px) {
+  img.deploy-compatible {
+    margin: 10px 0 30px; } }
 
 /*End Sofware Page*/
 /*Marketplace Page*/
