@@ -35,7 +35,7 @@
 					<% end_if %>
 					$Thumbnail305
 					</a>
-				<% end_loop %>
+				<% end_loop  %>
 			<% end_if %>
 			</li>
 		<% end_loop %>
@@ -43,12 +43,14 @@
 	</div>
 </div>
 <div class='container'>
-	<div class='span-12'>
-		<h3>OpenStack Users By Industry</h3>
-	</div>
-	<div class='span-12 last add-button'>
-		Would you like to be listed here? &nbsp;
-		<a class='roundedButton' href='/user-survey/'>Add Your Company</a>
+	<div class="row">
+		<div class='col-lg-6'>
+			<h3>OpenStack Users By Industry</h3>
+		</div>
+		<div class='col-lg-6'>
+			Would you like to be listed here? &nbsp;
+			<a class='roundedButton' href='/user-survey/'>Add Your Company</a>
+		</div>
 	</div>
 
 	<div class='span-24 last deploymentTagGroup'>
@@ -105,4 +107,5 @@
 		<% end_loop %>
 	</table>
 
-<% end_loop %>
+<% end_loop  %>
+</div>

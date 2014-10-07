@@ -9,7 +9,7 @@
     };
 
 </script>
-<div class="grey-bar course-filter">
+<div class="grey-bar">
     <div class="container">
         <p class="filter-label">Filter Courses</p>
         <input type="text" id="topic-term" placeholder="ANY TOPIC" name="topic-term">
@@ -18,15 +18,11 @@
     </div>
 </div>
 <div class='container'>
-    <div id="training-list" class='span-18'>
-        <% if Trainings %>
-            <% loop Trainings %>
-                <% include TrainingDirectoryPage_CompanyTraining TrainingLink=$Top.Link%>
-            <% end_loop %>
-        <% end_if %>
+    <div id="training-list" class='col-lg-8 col-md-8 col-sm-8'>
+        <% include TrainingDirectoryPage_CompanyTrainingList %>
         &nbsp;
     </div>
-    <div class="span-6 last">
+    <div class="col-lg-4 col-md-4 col-sm-4">
         <h3>OpenStack Online Help</h3>
         <ul class="resource-links">
             <li>

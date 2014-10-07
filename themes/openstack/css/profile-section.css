@@ -24,10 +24,9 @@ form hr {
 }
 
 .profile-appearance {
-	margin: 0px;
 	border: 1px solid #CCCCCC;
 	padding: 17px 20px;
-	margin-bottom: -1px;
+	padding-bottom: 30px;
 }
 
 h3.section-divider {
@@ -125,4 +124,8 @@ h3.section-divider:first-child {
 
 #Form_AddTrainingCourseForm .note_online{
 	display:none;
+}
+
+h2.profile-tabs a {
+	font-size: 60%;
 }
