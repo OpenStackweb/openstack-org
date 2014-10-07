@@ -1,18 +1,23 @@
 <h1>OpenStack User Survey</h1>
 
-<div class="span-15">
-<ul class="survey-steps">
-	<li><a href="{$Link}OrgInfo">About You</a></li>
-	<li><a href="{$Link}AppDevSurvey">Your OpenStack Usage</a></li>
-	<li><a href="{$Link}Deployments">Your OpenStack Deployments</a></li>
-	<li><a href="{$Link}ThankYou" class="current">Thank You!</a></li>
-</ul>
-</div>
-<div class="span-9 last current-user">
-	Logged in as <strong>$CurrentMember.FirstName</strong>. &nbsp; <a href="{$link}logout" class="roundedButton">Log Out</a>
-</div>
+<div class="container">
+	
+	<div class="row">
+		<div class="col-lg-8">
+		<ul class="survey-steps">
+			<li><a href="{$Link}OrgInfo">About You</a></li>
+			<li><a href="{$Link}AppDevSurvey">Your OpenStack Usage</a></li>
+			<li><a href="{$Link}Deployments">Your OpenStack Deployments</a></li>
+			<li><a href="{$Link}ThankYou" class="current">Thank You!</a></li>
+		</ul>
+		</div>
+		<div class="col-lg-4">
+			Logged in as <strong>$CurrentMember.FirstName</strong>. &nbsp; <a href="{$link}logout" class="roundedButton">Log Out</a>
+		</div>
+	</div>
+	
+	<div class="row">
 
-<div class="span-24 last">
 <h2>Thank You!</h2>
 
 <p>We aggregate data from the survey every six months before the Summit. A video
@@ -31,5 +36,6 @@ find out more about the <a href="/foundation/user-committee">User Committee</a>.
 <% end_if %>
 
 
+</div>
 </div>
 
