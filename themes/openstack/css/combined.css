@@ -1446,7 +1446,8 @@ a.demo-link i {
 
 .customers-row h2 {
   text-transform: capitalize;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  text-align: center; }
 
 .customer-logos-wrapper {
   margin: 15px 0; }
@@ -1834,7 +1835,8 @@ a.featured-link:hover {
 /*Footer*/
 footer {
   background: #333333;
-  padding: 70px 0; }
+  padding: 70px 0;
+  margin-top: 50px; }
 
 .footer-links h3 {
   color: #fff;
@@ -2046,8 +2048,11 @@ footer {
 .navbar-default {
   border-bottom: 1px solid #ddd; }
 
-#home.navbar-default {
+#home .navbar-default {
   border-bottom: none; }
+
+#home .top-site-banner {
+  display: none; }
 
 /*End General Inner Page Styles*/
 /*Events Page*/
@@ -2916,7 +2921,6 @@ img.summit-landing-logo {
   display: none; }
 
 .conference-summary {
-  margin: 40px 0;
   min-height: 90px;
   border-bottom: 1px solid #edf2f7;
   padding-top: 30px;
@@ -3037,6 +3041,9 @@ li#openstack-shared-services {
   border-bottom: 1px solid #E8E8E8; }
 
 li#start {
+  margin-top: 20px; }
+
+fieldset:nth-child(1) {
   margin-top: 20px; }
 
 fieldset {
