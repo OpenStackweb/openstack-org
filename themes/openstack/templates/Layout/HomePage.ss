@@ -8,7 +8,7 @@
                         <h1>Register by October 24, 5pm EST to attend the OpenStack Summit in Paris</h1>
                     </div>
                     <div class="promo-btn-wrapper">
-                        <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/" class="promo-btn">Book Your Tickets Now <i class="fa fa-chevron-right"></i></a>
+                        <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/?source=summit11" class="promo-btn">Book Your Tickets Now <i class="fa fa-chevron-right"></i></a>
                     </div>
                     <p class="promo-dates">Summit Dates: Nov 3 - 7, 2014</p>
                 </div>
