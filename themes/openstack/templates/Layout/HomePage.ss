@@ -61,13 +61,13 @@
                     </h2>
                 </div>
                 <div class="col-lg-12 col-sm-12 customer-logos-wrapper">
-                    <div class="row">
-                      <div class="col-md-2 customer-logos" id="bloomberg-logo"><img src="/themes/openstack/images/customer-bloomberg.png" alt="Bloomberg Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos" id="bestbuy-logo"><img src="/themes/openstack/images/customer-bestbuy.png" alt="Best Buy Uses OpenStack"></div>
-                      <!-- <div class="col-md-2 customer-logos"id="sony-logo"><img src="/themes/openstack/images/customer-sony.png" alt="Sony Uses OpenStack"></div> -->
-                      <div class="col-md-2 customer-logos logo-hover"id="comcast-logo"><img src="/themes/openstack/images/customer-comcast.png" alt="Comcast Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos"id="paypal-logo"><img src="/themes/openstack/images/customer-paypal.png" alt="PayPal Uses OpenStack"></div>
-                      <div class="col-md-2 customer-logos"id="wells-logo"><img src="/themes/openstack/images/customer-wells.png" alt="Wells Fargo Uses OpenStack"></div>
+                    <div class="customer-logos" id="bloomberg-logo"><img src="/themes/openstack/images/customer-bloomberg.png" alt="Bloomberg Uses OpenStack"></div>
+                    <div class="customer-logos" id="bestbuy-logo"><img src="/themes/openstack/images/customer-bestbuy.png" alt="Best Buy Uses OpenStack"></div>
+                    <!-- <div class="col-md-2 customer-logos"id="sony-logo"><img src="/themes/openstack/images/customer-sony.png" alt="Sony Uses OpenStack"></div> -->
+                    <div class="customer-logos logo-hover"id="comcast-logo"><img src="/themes/openstack/images/customer-comcast.png" alt="Comcast Uses OpenStack">
+                    </div>
+                      <div class="customer-logos"id="paypal-logo"><img src="/themes/openstack/images/customer-paypal.png" alt="PayPal Uses OpenStack"></div>
+                      <div class="customer-logos"id="wells-logo"><img src="/themes/openstack/images/customer-wells.png" alt="Wells Fargo Uses OpenStack"></div>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
