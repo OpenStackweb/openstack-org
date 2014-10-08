@@ -2201,7 +2201,7 @@ div.screenshots {
   color: #30739C;
   text-align: center; }
 
-.newSubNav li#start a.current.green, .newSubNav li#start a.current.green:hover {
+.newSubNav li#start a.current, .newSubNav li#start a.current:hover {
   color: white;
   background-color: #75C320; }
 
