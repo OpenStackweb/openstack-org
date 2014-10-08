@@ -9,7 +9,7 @@ form hr {
 	border: 1px solid #CCCCCC;
 	margin-right: -1px;
 	margin-bottom:0px;
-	font-size: 90%;
+	font-size: 18px;
 }
 
 .profile-tabs {
@@ -124,8 +124,4 @@ h3.section-divider:first-child {
 
 #Form_AddTrainingCourseForm .note_online{
 	display:none;
-}
-
-h2.profile-tabs a {
-	font-size: 60%;
 }
