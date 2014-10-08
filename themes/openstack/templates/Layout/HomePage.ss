@@ -73,7 +73,7 @@
                 <div class="col-lg-12 col-sm-12">
                     <div class="customers-description">
                         <p class="change-description">
-                            <strong>Comcast</strong> is using OpenStack to provide real-time programming guides and fast program search.
+                            <strong>Comcast</strong> delivers interactive entertainment to millions of living rooms.
                         </p>
                     </div>
                 </div>
