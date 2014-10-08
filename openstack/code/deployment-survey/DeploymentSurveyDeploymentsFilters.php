@@ -36,11 +36,6 @@ class DeploymentSurveyDeploymentsFilters extends Form {
         ));
     }
 
-    public static function FilterResults($data, $form) {
-        $action = $data['caller-action'];
-	    if($form->controller->hasMethod($action))
-		    return $form->controller->$action($data, $form, $form->controller->request);
-	    return $form->httpError(404);
-    }
+
   
 }

@@ -3,8 +3,8 @@ jQuery(document).ready(function($) {
     var form_validator = null;
 
     if(form.length > 0){
-        var start_date_id = '#DeploymentSurveyDeploymentsFilters_DeploymentSurveyDeploymentsFilters_start_date';
-        var end_date_id = '#DeploymentSurveyDeploymentsFilters_DeploymentSurveyDeploymentsFilters_end_date';
+        var start_date_id = '#DeploymentSurveyDeploymentsFilters_DeploymentSurveyDeploymentsFilters_date-from';
+        var end_date_id = '#DeploymentSurveyDeploymentsFilters_DeploymentSurveyDeploymentsFilters_date-to';
 
         $(start_date_id).datetimepicker({
             format:'Y/m/d H:i',
