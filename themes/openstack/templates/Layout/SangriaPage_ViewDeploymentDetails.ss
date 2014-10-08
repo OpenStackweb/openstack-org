@@ -12,36 +12,6 @@
 }
 </style>
 
-<script type="text/javascript">
-
-$(document).ready(function(){
-
-	$.urlParam = function(name){
-	    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	    if (results==null){
-	       return null;
-	    }
-	    else{
-	       return results[1] || 0;
-	    }
-	}
-
-	if($.urlParam('dep')){
-
-		var anchor = $("#dep" + $.urlParam('dep'));
-
-		$('html, body').animate({
-	        scrollTop: anchor.offset().top - 30
-	    }, 2000);
-
-		anchor.parents('tr').css('background-color','lightyellow');
-	}
-
-});
-
-
-</script>
-
 <div stlye="display:block;clear:both">
 	<h1 style="width:50%;float:left;">Deployment Details List</h1>
 	<a href="/sangria/ViewCurrentStories" class="roundedButton" style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center">View User Stories</a>

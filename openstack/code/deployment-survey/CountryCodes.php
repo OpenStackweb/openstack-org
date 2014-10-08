@@ -255,4 +255,17 @@ class CountryCodes {
 		'ZM' => "Zambia",
 		'ZW' => "Zimbabwe"
 	);
+
+	public static function asObject(){
+		$country_array = CountryCodes::$iso_3166_countryCodes;
+		$list = new DataObjectSet();
+		foreach($country_array as $k => $v){
+			$do = new DataObject();
+			$do->Code = $k;
+			$do->Country = $v;
+			$list->push($do);
+		}
+		return $list;
+	}
+
 }

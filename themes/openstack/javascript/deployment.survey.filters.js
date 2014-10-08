@@ -1,28 +1,56 @@
 jQuery(document).ready(function($) {
-    var form = $("#DeploymentSurveyDeploymentsFilters_DeploymentSurveyDeploymentsFilters");
-    var form_validator = null;
+    var start_date_id = '.date_filter_date-from';
+    var end_date_id = '.date_filter_date-to';
+    var submit_id = '.date_filter_submit';
+    var action_id = '.date_filter_action';
 
-    if(form.length > 0){
-        var start_date_id = '#DeploymentSurveyDeploymentsFilters_DeploymentSurveyDeploymentsFilters_date-from';
-        var end_date_id = '#DeploymentSurveyDeploymentsFilters_DeploymentSurveyDeploymentsFilters_date-to';
+    if($(start_date_id).length > 0 && $(end_date_id).length > 0){
 
         $(start_date_id).datetimepicker({
             format:'Y/m/d H:i',
             onShow:function( ct ){
                 this.setOptions({
-                    maxDate:$(end_date_id).val()?$(end_date_id).val():false
+                    maxDate:$(end_date_id,$(this).parents('fieldset')).val()?$(end_date_id,$(this).parents('fieldset')).val():false
                 })
             },
             timepicker:false
         });
+
         $(end_date_id).datetimepicker({
             format:'Y/m/d H:i',
             onShow:function( ct ){
                 this.setOptions({
-                    minDate:$(start_date_id).val()?$(start_date_id).val():false
+                    minDate:$(start_date_id,$(this).parents('fieldset')).val()?$(start_date_id,$(this).parents('fieldset')).val():false
                 })
             },
             timepicker:false
+        });
+
+        $(submit_id).click(function(){
+            var parent = $(this).parents('fieldset');
+            var from = $(start_date_id,parent).val();
+            var to = $(end_date_id,parent).val();
+            var action = $(action_id,parent).val();
+
+            if (action) {
+                document.location = "/sangria/" + action + "?From="+from+"&To="+to;
+            } else {
+                var queryParameters = {};
+                var queryString = document.location.search.substring(1);
+                var re = /([^&=]+)=([^&]*)/g;
+                var m;
+
+                // Creates a map with the query string parameters
+                while (m = re.exec(queryString)) {
+                    queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+                }
+
+                queryParameters['From'] = from;
+                queryParameters['To'] = to;
+
+                document.location.search = $.param(queryParameters); // Causes page to reload
+            }
+
         });
     }
 

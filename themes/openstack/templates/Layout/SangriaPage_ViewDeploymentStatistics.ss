@@ -1,5 +1,5 @@
 <h2>Deployments Submitted &mdash; $DeploymentsCount total (<a href="/sangria/ViewDeploymentStatistics">clear filters</a>)</h2>
-$DeploymentSurveyDeploymentsFilters(ViewDeploymentStatistics)
+$DateFilters
 <div class="span-8 ">
     <h3>Is deployment Public?</h3>
         <table>

@@ -74,13 +74,13 @@
         <li>
             <a href="#" class="cvs_download_link">Deployment Survey CSV Download</a>
             <div class="export_filters hidden">
-                $DeploymentSurveyDeploymentsFilters(ExportSurveyResults)
+                $DateFilters(ExportSurveyResults)
             </div>
         </li>
         <li>
             <a href="#" class="cvs_download_link" >App Dev Survey CSV Download</a>
             <div class="export_filters hidden">
-                $DeploymentSurveyDeploymentsFilters(ExportAppDevSurveyResults)
+                $DateFilters(ExportAppDevSurveyResults)
             </div>
         </li>
         <li><a href="$Link(ExportData)">Export Data</a></li>

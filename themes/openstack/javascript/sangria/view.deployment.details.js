@@ -8,6 +8,14 @@ jQuery(document).ready(function($){
 
     var form = $('#seach_deployments');
 
+    $('.addDeploymentBtn').click(function(event){
+        $('.addDeploymentForm').fadeIn();
+        $('.addDeploymentForm').find('input[name=label]:first').focus();
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    });
+
     $("#date-from").datepicker({ dateFormat: "yy-mm-dd",autoSize: true  });
     $( "#date-to").datepicker({ dateFormat: "yy-mm-dd",autoSize: true  });
 

@@ -1,5 +1,5 @@
 <h2>Deployment Surveys Submitted &mdash; $DeploymentSurveysCount total</h2>
-$DeploymentSurveyDeploymentsFilters(ViewDeploymentSurveyStatistics)
+$DateFilters
 <div class="span-8 ">
     <h3>Industry</h3>
         <table>
