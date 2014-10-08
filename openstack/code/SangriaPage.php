@@ -694,28 +694,29 @@ class SangriaPage_Controller extends Page_Controller {
 		header("Content-Disposition: attachment; filename=survey_results" . $fileDate . ".csv");
 		flush();
 
-		for ($i = 0; $i < $results->numRecords(); $i++) {
+		for( $i=0; $i < $results->numRecords(); $i++) {
 			$record = $results->nextRecord();
 			$fields = array_keys($record);
 
 			$numFields = count($fields);
 
 			// If it's the first time through, put the column headings in
-			if ($i == 0) {
-				for ($f = 0; $f < $numFields; $f++) {
-					if ($f > 0) {
+			if ($i==0) {
+				for( $f=0; $f < $numFields; $f++) {
+					if ($f>0) {
 						echo ",";
 					}
-					echo "\"" . $fields[$f] . "\"";
+					echo "\"".$fields[$f]."\"";
 				}
 				echo "\n";
 			}
 
-			for ($f = 0; $f < $numFields; $f++) {
-				if ($f > 0) {
+			for( $f=0; $f < $numFields; $f++) {
+				if ($f>0) {
 					echo ",";
 				}
-				echo "\"" . $record[$fields[$f]] . "\"";
+				$cleanValue = str_replace("\"", "'", $record[$fields[$f]]);
+				echo "\"".$cleanValue."\"";
 			}
 			echo "\n";
 			flush();
@@ -754,28 +755,29 @@ class SangriaPage_Controller extends Page_Controller {
 		header("Content-Disposition: attachment; filename=app_dev_surveys" . $fileDate . ".csv");
 		flush();
 
-		for ($i = 0; $i < $results->numRecords(); $i++) {
+		for( $i=0; $i < $results->numRecords(); $i++) {
 			$record = $results->nextRecord();
 			$fields = array_keys($record);
 
 			$numFields = count($fields);
 
 			// If it's the first time through, put the column headings in
-			if ($i == 0) {
-				for ($f = 0; $f < $numFields; $f++) {
-					if ($f > 0) {
+			if ($i==0) {
+				for( $f=0; $f < $numFields; $f++) {
+					if ($f>0) {
 						echo ",";
 					}
-					echo "\"" . $fields[$f] . "\"";
+					echo "\"".$fields[$f]."\"";
 				}
 				echo "\n";
 			}
 
-			for ($f = 0; $f < $numFields; $f++) {
-				if ($f > 0) {
+			for( $f=0; $f < $numFields; $f++) {
+				if ($f>0) {
 					echo ",";
 				}
-				echo "\"" . $record[$fields[$f]] . "\"";
+				$cleanValue = str_replace("\"", "'", $record[$fields[$f]]);
+				echo "\"".$cleanValue."\"";
 			}
 			echo "\n";
 			flush();
