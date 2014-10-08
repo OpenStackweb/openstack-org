@@ -1,44 +1,42 @@
-<% require themedCSS(conference) %>
-
-<% loop Parent %>
-$HeaderArea
-<% end_loop %>
-
-<div class="span-5">
-    <p><strong>The OpenStack Summit</strong><br />$Parent.MenuTitle.XML</p>
-    <ul class="navigation">
-        <% loop Parent %>
-        <li><a href="$Link" title="Go to the $Title.XML page" class="$LinkingMode"><span>Overview</span></a></li>
-        <% end_loop %>
-        <% loop Menu(3) %>
-        <li><a href="$Link" title="Go to the $Title.XML page" class="$LinkingMode"><span>$MenuTitle.XML</span></a></li>
-        <% end_loop %>
-    </ul>
+<% require themedCSS(conference) %> 
 
 
-    <% if HeadlineSponsors %>
-    <div class="headline-sponsors">
-    <hr>
-    <h3>Our Headline Sponsors</h3>
-    <p>
-        <% loop HeadlineSponsors %>
-        <a rel="nofollow" href="{$SubmitLandPageUrl}">
-            $SidebarLogoPreview
-        </a>
-        <% end_loop %>
-     </p>
-     </div>
-    <% end_if %>
 
-</div>
+<div class="container summit">
 
-<!-- Content Area -->
+    <% with Parent %>
+    $HeaderArea
+    <% end_with %>
+    
+  <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <p><strong>The OpenStack Summit</strong><br />$MenuTitle.XML</p>
 
-<div class="prepend-1 span-11" id="news-feed">
+                <div class="newSubNav">
+                    <ul class="overviewNav">
 
-    <div class="span-18 last">
-        <div class="sponsor-logos">
-            <h1>Thank You To The OpenStack Summit Sponsors</h1>
+                        <% loop Parent %>
+                            <li id="$URLSegment"><a href="$Link" title="Go to the $Title.XML page"><span>Overview</span> <i class="fa fa-chevron-right"></i></a></li>
+                        <% end_loop %>
+
+                        <% loop Menu(3) %>
+                            <li id="$URLSegment"><a href="$Link" title="Go to the &quot;{$Title}&quot; page"  class="$LinkingMode">$MenuTitle <i class="fa fa-chevron-right"></i></a></li>
+                        <% end_loop %>
+                    </ul>
+                </div>
+            <% with Parent %>
+                <% include SummitVideos %>
+                <% include HeadlineSponsors %>
+            <% end_with %>
+
+
+        </div> 
+
+        <!-- News Feed -->
+
+        <div class="col-lg-9 col-md-9 col-sm-9" id="news-feed">
+
+                        <h1>Thank You To The OpenStack Summit Sponsors</h1>
             <p>&nbsp;</p>
             <!-- HeadlineSponsors -->
             <% if HeadlineSponsors %>
@@ -121,7 +119,11 @@ $HeaderArea
             </p>
             <p>&nbsp;</p>
             <% end_if %>
+
+
         </div>
+
     </div>
 </div>
 
+$GATrackingCode
