@@ -18,6 +18,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="search-container tiny">
                <% include GoogleCustomSearch %>
+               <i class="fa fa-times close-search"></i>
            </div>
            <ul class="nav navbar-nav navbar-main show">
             <li>
@@ -175,7 +176,7 @@
 
 
             <li>
-                <a href="/Security/login/" class="sign-in-btn">Sign In</a>
+                <a href="/Security/login/?BackURL=%2Fprofile%2F" class="sign-in-btn">Sign In</a>
             </li>
         </ul>
     </div>
