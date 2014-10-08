@@ -1,10 +1,13 @@
 <% require themedCSS(conference) %> 
 
-<% with Parent %>
-$HeaderArea
-<% end_with %>
+
 
 <div class="container summit">
+
+	<% with Parent %>
+	$HeaderArea
+	<% end_with %>
+	
   <div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-3">
 			<p><strong>The OpenStack Summit</strong><br />$MenuTitle.XML</p>
