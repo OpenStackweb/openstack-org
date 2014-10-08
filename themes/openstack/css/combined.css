@@ -1450,11 +1450,14 @@ a.demo-link i {
   text-align: center; }
 
 .customer-logos-wrapper {
-  margin: 15px 0; }
+  margin: 15px 0;
+  text-align: center; }
 
 .customer-logos {
   position: relative;
-  padding: 20px 0; }
+  padding: 20px 0;
+  width: 15%;
+  display: inline-block; }
 
 @media (max-width: 767px) {
   .customer-logos {
