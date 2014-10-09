@@ -43,3 +43,4 @@ feeds/cache
 logs/*
 sapphire/thirdparty/htmlpurifier-4.4.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/
 elections/input
+blog
