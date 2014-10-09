@@ -22,7 +22,7 @@
     <div id="public-clouds-list" class="col-lg-8 col-md-8 col-sm-8">
        <% if Clouds %>
            <% loop Clouds %>
-               <% include CloudsDirectoryPage_CloudBox %>
+               <% include CloudsDirectoryPage_CloudBox CloudLink=$Top.Link %>
            <% end_loop %>
        <% else %>
             &nbsp;

@@ -124,16 +124,13 @@ final class JobRegistrationRequestManager {
 		$repository               = $this->repository;
 		$factory                  = $this->factory;
 		$jobs_repository          = $this->jobs_repository;
-		$jobs_publishing_service  = $this->jobs_publishing_service;
 
-		return  $this->tx_manager->transaction(function() use ($id, $repository, $jobs_repository, $factory, $jobs_publishing_service, $jobs_link){
+		$job =  $this->tx_manager->transaction(function() use ($id, $repository, $jobs_repository, $factory, $jobs_link){
 			$request = $repository->getById($id);
 			if(!$request) throw new NotFoundEntityException('JobRegistrationRequest',sprintf('id %s',$id ));
 			$job = $factory->buildJob($request);
 			$jobs_repository->add($job);
 			$request->markAsPosted();
-			$jobs_publishing_service->publish($job);
-
 			//send Accepted message
 			$point_of_contact = $request->getPointOfContact();
 			$name_to  = $point_of_contact->getName();
@@ -149,6 +146,9 @@ final class JobRegistrationRequestManager {
 
 			return $job;
 		});
+
+		$this->jobs_publishing_service->publish($job);
+		return $job;
 	}
 
 	public function rejectJobRegistration($id, array $data, $jobs_link){
