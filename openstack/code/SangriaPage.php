@@ -672,6 +672,7 @@ class SangriaPage_Controller extends Page_Controller {
                 s.InformationSources, s.OtherInformationSources, s.FurtherEnhancement,
                 s.FoundationUserCommitteePriorities, s.UserGroupMember, s.UserGroupName,
                 s.OkToContact, s.BusinessDrivers, s.OtherBusinessDrivers, s.WhatDoYouLikeMost,
+                s.OpenStackRecommendRate as NetPromoter, s.OpenStackRecommendation,
                 d.Label, d.IsPublic, d.DeploymentType, d.ProjectsUsed, d.CurrentReleases,
                 d.DeploymentStage, d.NumCloudUsers, d.APIFormats, d.Hypervisors, d.OtherHypervisor,
                 d.BlockStorageDrivers, d.OtherBlockStorageDriver, d.NetworkDrivers,
@@ -679,8 +680,12 @@ class SangriaPage_Controller extends Page_Controller {
                 d.SupportedFeatures, d.ComputeNodes, d.ComputeCores, d.ComputeInstances,
                 d.BlockStorageTotalSize, d.ObjectStorageSize, d.ObjectStorageNumObjects,
                 d.NetworkNumIPs, d.WorkloadsDescription, d.OtherWorkloadsDescription,
-                d.WhyNovaNetwork, d.DeploymentTools, d.OtherDeploymentTools, d.OperatingSystems,
-                d.OtherOperatingSystems
+                d.WhyNovaNetwork, d.OtherWhyNovaNetwork, d.DeploymentTools, d.OtherDeploymentTools, d.OperatingSystems,
+                d.OtherOperatingSystems, d.SwiftGlobalDistributionFeatures, d.SwiftGlobalDistributionFeaturesUsesCases,
+                d.OtherSwiftGlobalDistributionFeaturesUsesCases, d.Plans2UseSwiftStoragePolicies,
+                d.OtherPlans2UseSwiftStoragePolicies, d.UsedDBForOpenStackComponents,
+                d.OtherUsedDBForOpenStackComponents, d.ToolsUsedForYourUsers, d.OtherToolsUsedForYourUsers,
+                d.Reason2Move2Ceilometer
             from DeploymentSurvey s
                 left outer join Member m on (s.MemberID = m.ID)
                 left outer join Deployment d on (d.DeploymentSurveyID = s.ID)
@@ -741,7 +746,7 @@ class SangriaPage_Controller extends Page_Controller {
                 a.Toolkits, a.OtherToolkits, a.ProgrammingLanguages, a.OtherProgrammingLanguages,
                 a.APIFormats, a.DevelopmentEnvironments, a.OtherDevelopmentEnvironments,
                 a.OperatingSystems, a.OtherOperatingSystems, a.ConfigTools, a.OtherConfigTools,
-                a.StateOfOpenStack, a.DocsPriority
+                a.StateOfOpenStack, a.DocsPriority, a.InteractionWithOtherClouds
             from DeploymentSurvey s
                 right join AppDevSurvey a on (a.DeploymentSurveyID = s.ID)
                 left outer join Member m on (a.MemberID = m.ID)
