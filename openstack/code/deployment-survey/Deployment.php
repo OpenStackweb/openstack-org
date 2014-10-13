@@ -333,7 +333,8 @@ class Deployment extends DataObject
 		'Heat' => 'OpenStack Orchestration (Heat)',
 		'Ceilometer' => 'OpenStack Telemetry (Ceilometer)',
 		'OpenStack Bare Metal (Ironic)' => 'OpenStack Bare Metal (Ironic)',
-		'OpenStack Database as a Service (Trove)' => 'OpenStack Database as a Service (Trove)'
+		'OpenStack Database as a Service (Trove)' => 'OpenStack Database as a Service (Trove)',
+		'OpenStack Data Processing (Sahara)' => 'OpenStack Data Processing (Sahara)'
 	);
 
 	public static $current_release_options = array(
@@ -632,4 +633,5 @@ class Deployment extends DataObject
 		'Cloud Kitty' => 'Cloud Kitty',
 
 	);
+	
 }
