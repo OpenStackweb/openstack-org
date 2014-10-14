@@ -5,15 +5,101 @@
  */
 class DeploymentSurveyPage extends Page
 {
-	static $db = array();
+	static $db = array(
+		'LoginPageTitle'         => 'HTMLText',
+		'LoginPageContent'       => 'HTMLText',
+		'LoginPageSlide1Content' => 'HTMLText',
+		'LoginPageSlide2Content' => 'HTMLText',
+		'LoginPageSlide3Content' => 'HTMLText',
+		'ThankYouContent'        => 'HTMLText',
+	);
+
 	static $has_one = array();
 
 	function getCMSFields()
 	{
 		$fields = parent::getCMSFields();
-
+		//login page content
+		$fields->addFieldToTab('Root.Content.Login', new HtmlEditorField('LoginPageTitle','Page Main Title',10));
+		$fields->addFieldToTab('Root.Content.Login', new HtmlEditorField('LoginPageContent','Content'));
+		$fields->addFieldToTab('Root.Content.Login', new HtmlEditorField('LoginPageSlide1Content','Slide #1 Content',20));
+		$fields->addFieldToTab('Root.Content.Login', new HtmlEditorField('LoginPageSlide2Content','Slide #2 Content',20));
+		$fields->addFieldToTab('Root.Content.Login', new HtmlEditorField('LoginPageSlide3Content','Slide #3 Content',20));
+		//thank u content
+		$fields->addFieldToTab('Root.Content.Thank You', new HtmlEditorField('ThankYouContent','Content'));
 		return $fields;
 	}
+
+	public function getLoginPageTitle(){
+		$res = (string)$this->getField('LoginPageTitle');
+		if(empty($res)){
+			$res = 'OpenStack User Survey: Welcome!';
+		}
+		return $res;
+	}
+
+	public function getLoginPageContent(){
+		$link = Controller::curr()->Link();
+		$res = (string)$this->getField('tLoginPageContent');
+		if(empty($res)) {
+			$res = <<< HTML
+
+			<p>This survey provides users an opportunity to influence the community and software
+		direction. By sharing information about your configuration and requirements, the OpenStack
+		Foundation User Committee will be able to advocate on your behalf.</p>
+		<p><a href="{$link}faq" class="roundedButton">More Information About The Survey</a></p>
+		<hr/>
+
+		<h1>Get Started</h1>
+HTML;
+		}
+		return $res;
+	}
+
+	public function getLoginPageSlide1Content(){
+		$res = (string)$this->getField('LoginPageSlide1Content');
+		if(empty($res)){
+			$res = 'This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users and operators.';
+		}
+		return $res;
+	}
+
+
+	public function getLoginPageSlide2Content(){
+		$res = (string)$this->getField('LoginPageSlide2Content');
+		if(empty($res)){
+			$res = 'It should only take <strong>10 minutes</strong> to complete.';
+		}
+		return $res;
+	}
+
+	public function getLoginPageSlide3Content(){
+		$res = (string)$this->getField('LoginPageSlide3Content');
+		if(empty($res)){
+			$res = 'All of the information you provide is <strong>confidential</strong> to the Foundation (unless you specify otherwise).';
+		}
+		return $res;
+	}
+	public function getThankYouContent(){
+
+		$res = (string)$this->getField('ThankYouContent');
+		if(empty($res)) {
+			$res = <<< HTML
+		<h2>Thank You!</h2>
+
+<p>We aggregate data from the survey every six months before the Summit. A video
+presentation by the User Committee and slides from November 2013 are available to
+<a href="http://www.slideshare.net/openstack/openstack-user-survey-october-2013">view now</a>.</p>
+
+<p>If you'd like to get involved in working with other OpenStack users,
+find out more about the <a href="/foundation/user-committee">User Committee</a>.</p>
+
+HTML;
+		}
+		return $res;
+
+	}
+
 }
 
 class DeploymentSurveyPage_Controller extends Page_Controller

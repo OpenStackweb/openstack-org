@@ -17,15 +17,7 @@
 	</div>
 	
 	<div class="row">
-
-<h2>Thank You!</h2>
-
-<p>We aggregate data from the survey every six months before the Summit. A video
-presentation by the User Committee and slides from November 2013 are available to
-<a href="http://www.slideshare.net/openstack/openstack-user-survey-october-2013">view now</a>.</p>
-
-<p>If you'd like to get involved in working with other OpenStack users,
-find out more about the <a href="/foundation/user-committee">User Committee</a>.</p>
+    $ThankYouContent
 
 <% if CurrentMember.Password %>
 <% else %>
