@@ -1,38 +1,28 @@
 <div class="container">
-	<h1>OpenStack User Survey: Welcome!</h1>
+	<h1>$LoginPageTitle</h1>
 	
 	<div class="row">
 	
 		<div class="col-lg-4">
 			<div id="user">
-				<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users and operators.</p>
+				<p>$LoginPageSlide1Content</p>
 			</div>
 		</div>
 	
 		<div class="col-lg-4">
 			<div id="time">
-				<p>It should only take <strong>10 minutes</strong> to complete.</p>
+				<p>$LoginPageSlide2Content</p>
 			</div>
 		</div>
 	
 		<div class="survey-box col-lg-4">
 			<div id="private">
-				<p>All of the information you provide is <strong>confidential</strong> to the Foundation (unless you specify otherwise).</p>
+				<p>$LoginPageSlide3Content</p>
 			</div>
 		</div>
 	
 	</div>
-	
-	
-		<p>This survey provides users an opportunity to influence the community and software
-		direction. By sharing information about your configuration and requirements, the OpenStack
-		Foundation User Committee will be able to advocate on your behalf.</p>
-		<p><a href="{$Link}faq" class="roundedButton">More Information About The Survey</a></p>
-		<hr/>
-		
-		<h1>Get Started</h1>
-	
-	
+    $LoginPageContent
 	<div class="row">
 		<div class="col-lg-6">
 		
