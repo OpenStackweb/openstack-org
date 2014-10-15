@@ -17,8 +17,8 @@
 
 .logos span {
 	display: block;
-	width: 140px;
-	height: 93px;
+    width: 150px !important;
+    height: 100px !important;
 	border: 5px solid white;
 	-moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.51);
 	-webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.51);
@@ -39,8 +39,8 @@
 
 .small-logos span {
 	display: block;
-	width: 70px;
-	height: 46px;
+    width: 80px !important;
+    height: 70px !important;
 	border: 5px solid white;
 	-moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.51);
 	-webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.51);
