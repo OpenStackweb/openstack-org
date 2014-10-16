@@ -1,10 +1,19 @@
-.screenshotBoxes, .feature-list, .contributors-list {
-    border-top: 1px solid #d3d3d3;
+.juno-logo {
+    text-align: center;
+    margin: 30px 0px;
+}
+
+.juno-logo img {
+    max-width: 450px;
+    width: 100%;
+}
+
+.juno-logo h1 {
+    display: none;
 }
 
 .screenshotBoxes h3 {
     margin-bottom: 20px;
-    color: black;
 }
 
 .screenshotBoxes img {
@@ -38,62 +47,21 @@
 
 
 .documentation {
-    padding: 12px;
-    color: #1d6006;
-    background-color: #e2f4dc;
-    border: 1px solid #b5c8a8;
     margin-bottom: 30px;
 }
 
-/* @group Rounded Buttons */
-
-.releaseButton {
-    font-family: 'PT Sans', serif;
-    border: 1px solid #e2e2e2;
-    padding: 0px 30px;
-    color: black!important;
-    text-decoration: none!important;
-    font-size: 12.5px;
-    line-height: 2.5em;
-    background: #FFFFFF; /* old browsers */
-    background: -moz-linear-gradient(top, #FFFFFF 0%, #F3F3F3 50%, #EBEBEB 100%); /* firefox */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(50%,#F3F3F3), color-stop(100%,#EBEBEB)); /* webkit */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#EBEBEB',GradientType=0 ); /* ie */
-    box-shadow: 0px 1px 1px rgba(0,0,0,.5);
-    -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.2);
-    -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.2);
-    text-shadow: #fff 0px 1px 1px;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-bottom-color: #a0a0a0;
-    border-right-color: #bababa;
-    border-left-color: #bababa;
-    display: inline-block;
-    text-align: center;
-    margin-right: 10px;
+.documentation a {
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
-.releaseButton:hover {
-    color: black;
-    -webkit-transition:color 1s ease-out;
-    cursor: pointer;
+@media (max-width:767px) {
+    .documentation a {
+        display: block;
+        width: 90%;
+        margin-bottom: 10px;
+    }
 }
-
-a.releaseButton:active {
-    background: #ababab;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    border-color: #ababab;
-    border-top-color: #636363;
-    background: -webkit-gradient(linear, left top, left bottom, from(#bebebe), to(#dddddd));
-    background: -moz-linear-gradient(top,  #bebebe,  #eeeeee);
-    -webkit-transition:none;
-    padding: 0px 30px;
-}
-
-/* @end */
 
 /*
     ColorBox Core Style:
