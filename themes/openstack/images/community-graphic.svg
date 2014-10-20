@@ -3,7 +3,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="544.667px" height="311px" viewBox="0 0 544.667 311" enable-background="new 0 0 544.667 311" xml:space="preserve">
-<text transform="matrix(1 0 0 1 418.8452 249.7441)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757">20M+</text>
+<text transform="matrix(1 0 0 1 418.8452 249.7441)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757" content-value="param(codelines)" >20M+</text>
 <text transform="matrix(1 0 0 1 411.6401 270.667)" fill="#FFFFFF" font-family="'OpenSans-Light'" font-size="17">lines of code</text>
 <g>
 	<g>
@@ -107,11 +107,12 @@
 		<rect x="458.906" y="174.408" fill="#FFFFFF" width="1" height="11.015"/>
 	</g>
 </g>
-<text transform="matrix(1 0 0 1 14.2876 52.332)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757">18,813</text>
+<text transform="matrix(1 0 0 1 14.2876 52.332)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757" content-value="param(people)">18,813</text>
 <text transform="matrix(1 0 0 1 42.5298 73.2559)" fill="#FFFFFF" font-family="'OpenSans-Light'" font-size="17">people</text>
-<text transform="matrix(1 0 0 1 296.7124 36.332)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757">143</text>
+<text transform="matrix(1 0 0 1 296.7124 36.332)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757" content-value="param(countries)">143</text>
 <text transform="matrix(1 0 0 1 291.1343 57.2559)" fill="#FFFFFF" font-family="'OpenSans-Light'" font-size="17">countries</text>
-<text transform="matrix(1 0 0 1 168.6401 256.7441)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757">408</text>
+<text transform="matrix(1 0 0 1 168.6401 256.7441)" fill="#FFFFFF" font-family="'OpenSans'" font-size="35.1757" content-value="param(organizations)">408</text>
 <text transform="matrix(1 0 0 1 157.2017 277.667)" fill="#FFFFFF" font-family="'OpenSans-Light'" font-size="17">supporting</text>
 <text transform="matrix(1 0 0 1 157.1636 298.0664)" fill="#FFFFFF" font-family="'OpenSans-Light'" font-size="17">companies</text>
+<script type="text/ecmascript" xlink:href="/themes/openstack/javascript/svg/param.js"/>
 </svg>

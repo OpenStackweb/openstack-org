@@ -90,7 +90,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
-                    <img class="img-responsive community-graphic" src="/themes/openstack/images/community-graphic.svg" onerror="this.onerror=null; this.src=/images/community-graphic.png" alt="OpenStack Community">
+                    <object type="image/svg+xml" class="img-responsive community-graphic" data="/themes/openstack/images/community-graphic.svg?people=$MembersCount&countries=$CountryCount&organizations=$OrganizationCount&codelines=20M+" onerror="this.onerror=null; this.src=/images/community-graphic.png" alt="OpenStack Community">
+                    </object>
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <h2>One of the fastest growing open source communities in the world.</h2>
