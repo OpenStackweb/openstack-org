@@ -14,21 +14,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="eventBlock upcoming">
+        <div id='upcoming-events-container' class="col-lg-6 col-md-6 col-sm-6">
+            <div id='upcoming-events' class="eventBlock upcoming">
                 <h2>Upcoming Events</h2>
                 $getEvents(100,future_events)
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 events-second-column">
             <% if FutureSummits(5) %>
-            <div class="eventBlock summit">
+            <div id='future-summits' class="eventBlock summit">
                 <h2>Upcoming Summits</h2>
                 $getEvents(5,future_summits)
             </div>
             <% end_if %>
             <% if PastSummits(5) %>
-            <div class="eventBlock past">
+            <div id='past-summits' class="eventBlock past">
                 <h2>Recent OpenStack Summits &amp; Conferences</h2>
                 $getEvents(5,past_summits)
             </div>
