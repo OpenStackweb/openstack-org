@@ -17,6 +17,9 @@ Included in this repository are:
 Third Party:
 - The Silverstripe CMS v 3.1.x (for easy of deployment)
 
+WHAT'S NOT INCLUDED
+- Images - You'll note many missing images throughout the site. This is due to one of the following: copyright restrictions, OpenStack sponsors, file size restrictions.
+
 
 REQUIREMENTS FOR DEPLOYING OPENSTACK.ORG
 
@@ -35,6 +38,9 @@ to install run following commands
 * php composer.phar install
 * php composer.phar dump-autoload --optimize
 * chmod 777 -R  vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
+
+DATABASE
+OpenStack will provide a db dump on a weekly basis, purged of protected data. The dump can be found ******* (to add public Cloud Files location). The database will create one default admin user. All other data will need to be populated by the user.
 
 TODO:
 We need a way to provide a clean and current dump of the database, since a majority of the web content for the site is stored there. Also, we need detailed installation instructions to run the site locally on LAMP or MAMP.
