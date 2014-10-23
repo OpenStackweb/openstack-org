@@ -296,19 +296,18 @@ class SchedToolsPage_Controller extends Page_Controller
 
 		$getVars = $this->request->getVars();
 
+
 		$Speakers = SchedSpeaker::get();
 		foreach ($Speakers as $Speaker) {
 
-			if (!$this->validEmail($Speaker->email)) echo "Speaker email invalid: " . $Speaker->name . '<br/>';
-
-			if ($Speaker->PresentationsForThisSpeaker() &&
+		  if ($Speaker->PresentationsForThisSpeaker() &&
 				!$Speaker->GeneralOrKeynote() &&
 				!SchedSpeakerEmailLog::BeenEmailed($Speaker->email) &&
 				$this->validEmail($Speaker->email)
 			) {
 
 				$To = $Speaker->email;
-				$Subject = "Please Upload Your OpenStack Presentation Slides";
+				$Subject = "Important Speaker Information for OpenStack Summit in Paris";
 
 				$email = EmailFactory::getInstance()->buildEmail(SCHED_TOOLS_EMAIL_FROM, $To, $Subject);
 				$email->setTemplate("UploadPresentationSlidesEmail");

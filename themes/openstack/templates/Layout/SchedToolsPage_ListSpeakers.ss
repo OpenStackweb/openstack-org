@@ -1,3 +1,4 @@
+<div class="container">
 <% loop ShowSchedSpeakers %>
 
 <% if PresentationsForThisSpeaker %>
@@ -17,3 +18,4 @@
 <% end_if %>
 
 <% end_loop %>
+</div>

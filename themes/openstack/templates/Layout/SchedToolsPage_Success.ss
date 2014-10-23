@@ -1,3 +1,4 @@
+<div class="container">
 <% require themedCSS(presentationupload) %>
 
 
@@ -13,3 +14,4 @@
 </div>
 
 <a class="roundedButton" href="{$Top.link}Presentations/">Back To Your Presentations</a>
+</div>

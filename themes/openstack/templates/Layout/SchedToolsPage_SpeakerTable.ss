@@ -1,3 +1,4 @@
+<div class="container">
 <table>
 <tr>
 	<th>Name</th>
@@ -14,3 +15,4 @@
 <% end_loop %>
 
 </table>
+</div>
