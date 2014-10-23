@@ -4,9 +4,9 @@
 
 <div class="container summit">
 
-	<% control Parent %>
+	<% loop Parent %>
 	$HeaderArea
-	<% end_control %>
+	<% end_loop %>
 	
   <div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-3">
@@ -15,19 +15,19 @@
 				<div class="newSubNav">
 				    <ul class="overviewNav">
 
-						<% control Parent %>
+						<% loop Parent %>
 							<li id="$URLSegment"><a href="$Link" title="Go to the $Title.XML page"><span>Overview</span> <i class="fa fa-chevron-right"></i></a></li>
-						<% end_control %>
+						<% end_loop %>
 
-				        <% control Menu(3) %>
+				        <% loop Menu(3) %>
 				            <li id="$URLSegment"><a href="$Link" title="Go to the &quot;{$Title}&quot; page"  class="$LinkingMode">$MenuTitle <i class="fa fa-chevron-right"></i></a></li>
-				        <% end_control %>
+				        <% end_loop %>
 				    </ul>
 				</div>
-			<% control Parent %>
+			<% loop Parent %>
 				<% include SummitVideos %>
 				<% include HeadlineSponsors %>
-			<% end_control %>
+			<% end_loop %>
 
 
 		</div> 

@@ -17,26 +17,24 @@ class SchedToolsPage extends Page
 		$fields = parent::getCMSFields();
 		return $fields;
 	}
-
-
 }
+
 
 class SchedToolsPage_Controller extends Page_Controller
 {
-
-	public static $allowed_actions = array(
-		'ImportSpeakersFromSched' => 'ADMIN',
-		'ImportSessionsFromSched' => 'ADMIN',
-		'ListSpeakers' => 'ADMIN',
-		'SpeakerTable' => 'ADMIN',
-		'Presentations',
-		'Upload',
-		'Form',
-		'Success',
-		'LinkTo',
-		'LinkToForm',
-		'EmailSpeakers'
-	);
+		public static $allowed_actions = array (
+      		'ImportSpeakersFromSched' => 'ADMIN',
+      		'ImportSessionsFromSched' => 'ADMIN',
+      		'ListSpeakers' => 'ADMIN',
+			'SpeakerTable' => 'ADMIN',
+      		'Presentations',
+      		'Upload',
+      		'Form',
+      		'Success',
+      		'LinkTo',
+      		'LinkToForm',
+      		'EmailSpeakers' => 'ADMIN'
+      	);
 
 	function init()
 	{

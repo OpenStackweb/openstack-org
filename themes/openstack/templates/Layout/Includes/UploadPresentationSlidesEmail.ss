@@ -11,7 +11,7 @@
 <p>If you have not already provided your mobile phone number, please do so now by replying to this email so that we may to contact you with questions as well as onsite during the conference.  </p>
  
 <p><strong>SESSION INFORMATION</strong></p>
-<p>Please take a moment to review the Session Schedule for your Session Date, Time and Room Assignment -  http://openstacksummitnovember2014paris.sched.org as well as your speaker information and verify that your name, title and Company are reflected accurately. If your headshot and/or biography do not appear on the schedule or the information is incorrect in any way, you can update your info via the <a href="http://sched.org/">Sched.org</a> tool or send it to your speaker manager and she will post it for you.</p>
+<p>Please take a moment to review the Session Schedule for your Session Date, Time and Room Assignment -  <a href="http://openstacksummitnovember2014paris.sched.org">http://openstacksummitnovember2014paris.sched.org</a> as well as your speaker information and verify that your name, title and Company are reflected accurately. If your headshot and/or biography do not appear on the schedule or the information is incorrect in any way, you can update your info via the <a href="http://sched.org/">Sched.org</a> tool or send it to your speaker manager and she will post it for you.</p>
  
 <p>Most sessions are 40 minutes long, with a 10-minute break between sessions. Please arrive to your session room at least 10 minutes prior to the start of your session and please be considerate of other speakers by ending your session on time.</p>
  
@@ -48,4 +48,8 @@
 <p>Build your Personal Summit Schedule within in our Summit mobile app, Guidebook. If you already downloaded the mobile app for the Atlanta Summit then you just need to install the app update.</p>
 <p>Apple users download here: <a href="https://itunes.apple.com/us/app/openstack-summit/id859699528?mt=8">https://itunes.apple.com/us/app/openstack-summit/id859699528?mt=8</a><br/>
 	Android users download here: <a href="https://play.google.com/store/apps/details?id=com.guidebook.apps.OpenStack.android&hl=en">https://play.google.com/store/apps/details?id=com.guidebook.apps.OpenStack.android&hl=en</a></p>
+
+<p>Thank you speaking at the OpenStack Summit. We look forward to seeing you there!</p>
+<p>The OpenStack Events Team</p>
+
 </body>
