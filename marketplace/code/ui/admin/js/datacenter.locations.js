@@ -362,8 +362,8 @@
                 if(current_region === former_value)
                     current_region = current_value;
             }
-
-            dll_region.find("option[value="+current_region+"]").attr("selected","selected");
+            if(current_region != '')
+                dll_region.find("option[value="+current_region+"]").attr("selected","selected");
             dll_region.trigger("chosen:updated");
         });
     }

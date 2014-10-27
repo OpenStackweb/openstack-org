@@ -244,13 +244,17 @@ class Page_Controller extends ContentController {
 			}
 		} */
 
-		Requirements::block(SAPPHIRE_DIR . "/thirdparty/jquery/jquery.js");
 		Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
-
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
 
-        Requirements::javascript('themes/openstack/javascript/jquery.min.js');
+		if(Director::isLive()) {
+			Requirements::javascript('themes/openstack/javascript/jquery.min.js');
+		}
+		else{
+			Requirements::javascript('themes/openstack/javascript/jquery.js');
+		}
+
         Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
 
         Requirements::javascript("themes/openstack/javascript/jquery.cookie.js");
