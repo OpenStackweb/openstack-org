@@ -59,6 +59,10 @@ class SangriaPage_Controller extends Page_Controller
 		Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 		Requirements::javascript('themes/openstack/javascript/querystring.jquery.js');
 		Requirements::javascript('themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js');
+		Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+		Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+		Requirements::css("themes/openstack/css/deployment.survey.page.css");
+		Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
 		$this->default_start_date = date('Y/m/d', strtotime('-12 months')) . ' 00:00';
 		$this->default_end_date = date('Y/m/d') . ' 23:59';
 	}
@@ -476,188 +480,114 @@ class SangriaPage_Controller extends Page_Controller
 	function DeploymentsCount()
 	{
 		$filterWhereClause = $this->generateFilterWhereClause();
-		$Deployments = Deployment::get()->where(" 1=1 " . $filterWhereClause);
+		$Deployments = Deployment::get()->where(" 1=1 " . $filterWhereClause.' AND '.$this->date_filter_query);
 		$Count = $Deployments->count();
 		return $Count;
 	}
 
-	function generateFilterWhereClause()
-	{
-		$filterWhereClause = "";
 
-		foreach ($_GET as $key => $value) {
-			if (preg_match("/Filter$/", $key)) {
-				$orValues = preg_split("/\|\|/", $value);
-				$andValues = preg_split("/\,\,/", $value);
-
-				if (count($orValues) > 1) {
-					$filterWhereClause .= " and (";
-					for ($i = 0; $i < count($orValues); $i++) {
-						if ($i > 0) {
-							$filterWhereClause .= " OR ";
-						}
-						$filterWhereClause .= preg_replace("/Filter$/", "", $key) . " like '%" . $orValues[$i] . "%'";
-					}
-					$filterWhereClause .= ")";
-				} else if (count($andValues) > 1) {
-					$filterWhereClause .= " and (";
-					for ($i = 0; $i < count($andValues); $i++) {
-						if ($i > 0) {
-							$filterWhereClause .= " AND ";
-						}
-						$filterWhereClause .= preg_replace("/Filter$/", "", $key) . " like '%" . $andValues[$i] . "%'";
-					}
-					$filterWhereClause .= ")";
-				} else {
-					$filterWhereClause .= " and " . preg_replace("/Filter$/", "", $key) . " like '%" . $value . "%'";
-				}
-			}
-		}
-
-
-		return $filterWhereClause;
-	}
 
 	function IsPublicSummary()
 	{
 		$options = array(0 => "No", 1 => "Yes");
-		return $this->generateSelectListSummary("IsPublic",
-			$options);
+		return $this->generateSelectListSummary("IsPublic",	$options, true);
 	}
 
-	function generateSelectListSummary($fieldName, $optionSet)
-	{
-		$list = new ArrayList();
-
-		$urlString = $_SERVER["REDIRECT_URL"] . "?";
-		$keyUrlString = "";
-		$keyValue = "";
-
-		foreach ($_GET as $key => $value) {
-			if (preg_match("/Filter$/", $key)) {
-				if ($key != $fieldName . "Filter") {
-					$urlString .= $key . "=" . $value . "&";
-				} else {
-					$keyUrlString = $key . "=" . $value;
-					$keyValue = $value;
-				}
-			}
-		}
-
-		foreach ($optionSet as $option => $label) {
-			$count = DB::query("select count(*) from Deployment where " . $fieldName . " like '%" . $option . "%'" . $this->generateFilterWhereClause())->value();
-			$do = new DataObject();
-			$do->Value = "<a href='" . $urlString . $fieldName . "Filter=" . $option . "'>" . $label . "</a>";
-			if (!empty($keyUrlString) && $keyValue != $option) {
-				$do->Value .= " (<a href='" . $urlString . $keyUrlString . ",," . $option . "'>+</a>) (<a href='" . $urlString . $keyUrlString . "||" . $option . "'>|</a>)";
-			}
-			$do->Count = $count;
-			$list->push($do);
-		}
-
-		return $list;
-	}
 
 	function DeploymentTypeSummary()
 	{
-		return $this->generateSelectListSummary("DeploymentType",
-			Deployment::$deployment_type_options);
+		return $this->generateSelectListSummary("DeploymentType", Deployment::$deployment_type_options, true);
 	}
 
 	function ProjectsUsedSummary()
 	{
-		return $this->generateSelectListSummary("ProjectsUsed",
-			Deployment::$projects_used_options);
+		return $this->generateSelectListSummary("ProjectsUsed",	Deployment::$projects_used_options, true);
 	}
 
 	function CurrentReleasesSummary()
 	{
-		return $this->generateSelectListSummary("CurrentReleases",
-			Deployment::$current_release_options);
+		return $this->generateSelectListSummary("CurrentReleases",	Deployment::$current_release_options, true);
 	}
 
 	function DeploymentStageSummary()
 	{
-		return $this->generateSelectListSummary("DeploymentStage",
-			Deployment::$stage_options);
+		return $this->generateSelectListSummary("DeploymentStage", Deployment::$stage_options, true);
 	}
 
 	function APIFormatsSummary()
 	{
-		return $this->generateSelectListSummary("APIFormats",
-			Deployment::$api_options);
+		return $this->generateSelectListSummary("APIFormats",	Deployment::$api_options, true);
 	}
 
 	function HypervisorsSummary()
 	{
-		return $this->generateSelectListSummary("Hypervisors",
-			Deployment::$hypervisors_options);
+		return $this->generateSelectListSummary("Hypervisors",Deployment::$hypervisors_options, true);
 	}
 
 	function BlockStorageDriversSummary()
 	{
 		return $this->generateSelectListSummary("BlockStorageDrivers",
-			Deployment::$block_storage_divers_options);
+			Deployment::$block_storage_divers_options,true);
 	}
 
 	function NetworkDriversSummary()
 	{
 		return $this->generateSelectListSummary("NetworkDrivers",
-			Deployment::$network_driver_options);
+			Deployment::$network_driver_options, true);
 	}
 
 	function IdentityDriversSummary()
 	{
 		return $this->generateSelectListSummary("IdentityDrivers",
-			Deployment::$identity_driver_options);
+			Deployment::$identity_driver_options,true);
 	}
 
 	function SupportedFeaturesSummary()
 	{
 		return $this->generateSelectListSummary("SupportedFeatures",
-			Deployment::$deployment_features_options);
+			Deployment::$deployment_features_options,true);
 	}
 
 	function ComputeNodesSummary()
 	{
 		return $this->generateSelectListSummary("ComputeNodes",
-			Deployment::$compute_nodes_options);
+			Deployment::$compute_nodes_options,true);
 	}
 
 	function ComputeCoresSummary()
 	{
 		return $this->generateSelectListSummary("ComputeCores",
-			Deployment::$compute_cores_options);
+			Deployment::$compute_cores_options,true);
 	}
 
 	function ComputeInstancesSummary()
 	{
 		return $this->generateSelectListSummary("ComputeInstances",
-			Deployment::$compute_instances_options);
+			Deployment::$compute_instances_options,true);
 	}
 
 	function BlockStorageTotalSizeSummary()
 	{
 		return $this->generateSelectListSummary("BlockStorageTotalSize",
-			Deployment::$storage_size_options);
+			Deployment::$storage_size_options,true);
 	}
 
 	function ObjectStorageSizeSummary()
 	{
 		return $this->generateSelectListSummary("ObjectStorageSize",
-			Deployment::$storage_size_options);
+			Deployment::$storage_size_options,true);
 	}
 
 	function ObjectStorageNumObjectsSummary()
 	{
 		return $this->generateSelectListSummary("ObjectStorageNumObjects",
-			Deployment::$stoage_objects_options);
+			Deployment::$stoage_objects_options,true);
 	}
 
 	function NetworkNumIPsSummary()
 	{
 		return $this->generateSelectListSummary("NetworkNumIPs",
-			Deployment::$network_ip_options);
+			Deployment::$network_ip_options,true);
 	}
 
 	function NumCloudUsersSummary()
@@ -1368,23 +1298,137 @@ SQL;
 		return $groups;
 	}
 
-	function ViewDeploymentStatistics()
-	{
-		$where_query = '';
-		$params = $this->requestParams;
-		if (isset($params['date-from']) && isset($params['date-to'])) {
-			$date_from = Convert::raw2sql(trim($params['date-from']));
-			$date_to = Convert::raw2sql(trim($params['date-to']));
-			$start = new \DateTime($date_from);
-			$start->setTime(00, 00, 00);
-			$end = new \DateTime($date_to);
-			$end->setTime(23, 59, 59);
-			$where_query .= " UpdateDate >= '{$start->format('Y-m-d H:i:s')}' AND UpdateDate <= '{$end->format('Y-m-d H:i:s')}'";
-		} else {
-			$where_query .= " UpdateDate >= '{$this->default_start_date}' AND UpdateDate <= '{$this->default_end_date}'";
-		}
-		$this->date_filter_query = $where_query;
-		return $this->Customise(array())->renderWith(array('SangriaPage_ViewDeploymentStatistics', 'SangriaPage', 'SangriaPage'));
+	function ViewDeploymentStatistics(){
+		$this->generateDateFilters();
+		Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+		Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+		Requirements::css("themes/openstack/css/deployment.survey.page.css");
+		Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
+		return $this->Customise(array())->renderWith(array('SangriaPage_ViewDeploymentStatistics','SangriaPage','SangriaPage'));
 	}
 
+	function ViewDeploymentSurveyStatistics(){
+		$this->generateDateFilters();
+		Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+		Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+		Requirements::css("themes/openstack/css/deployment.survey.page.css");
+		Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
+		return $this->Customise(array())->renderWith(array('SangriaPage_ViewDeploymentSurveyStatistics','SangriaPage','SangriaPage'));
+	}
+
+
+	function generateSelectListSummary($fieldName, $optionSet,  $applyDateFilters=false)
+	{
+		$list = new ArrayList();
+
+		$urlString = $_SERVER["REDIRECT_URL"] . "?";
+		$keyUrlString = "";
+		$keyValue = "";
+
+		foreach ($_GET as $key => $value) {
+			if (preg_match("/Filter$/", $key)) {
+				if ($key != $fieldName . "Filter") {
+					$urlString .= $key . "=" . $value . "&";
+				} else {
+					$keyUrlString = $key . "=" . $value;
+					$keyValue = $value;
+				}
+			}
+		}
+
+		foreach ($optionSet as $option => $label) {
+
+			$query = "select count(*) from Deployment where ".$fieldName." like '%".$option."%'".$this->generateFilterWhereClause();
+			$query .= ($applyDateFilters) ? ' AND '.$this->date_filter_query : '';
+
+			$count = DB::query($query)->value();
+			$do = new DataObject();
+
+			$href = $urlString.$fieldName."Filter=".$option;
+
+			if ($applyDateFilters) {
+				$start_date = $this->request->getVar('From');
+				$end_date = $this->request->getVar('To');
+				if ($start_date && $end_date)
+					$href .= "&From=".$start_date."&To=".$end_date;
+			}
+
+			$do->Value = "<a href='".$href."'>".$label."</a>";
+			if( !empty($keyUrlString) && $keyValue != $option) {
+				$do->Value .= " (<a href='".$urlString.$keyUrlString.",,".$option."'>+</a>) (<a href='".$urlString.$keyUrlString."||".$option."'>|</a>)";
+			}
+			$do->Count = $count;
+			$list->push($do);
+		}
+
+		return $list;
+	}
+
+
+	function generateFilterWhereClause()
+	{
+		$filterWhereClause = "";
+
+		foreach ($_GET as $key => $value) {
+			if (preg_match("/Filter$/", $key)) {
+				$orValues = preg_split("/\|\|/", $value);
+				$andValues = preg_split("/\,\,/", $value);
+
+				if (count($orValues) > 1) {
+					$filterWhereClause .= " and (";
+					for ($i = 0; $i < count($orValues); $i++) {
+						if ($i > 0) {
+							$filterWhereClause .= " OR ";
+						}
+						$filterWhereClause .= preg_replace("/Filter$/", "", $key) . " like '%" . $orValues[$i] . "%'";
+					}
+					$filterWhereClause .= ")";
+				} else if (count($andValues) > 1) {
+					$filterWhereClause .= " and (";
+					for ($i = 0; $i < count($andValues); $i++) {
+						if ($i > 0) {
+							$filterWhereClause .= " AND ";
+						}
+						$filterWhereClause .= preg_replace("/Filter$/", "", $key) . " like '%" . $andValues[$i] . "%'";
+					}
+					$filterWhereClause .= ")";
+				} else {
+					$filterWhereClause .= " and " . preg_replace("/Filter$/", "", $key) . " like '%" . $value . "%'";
+				}
+			}
+		}
+
+
+		return $filterWhereClause;
+	}
+
+	function generateDateFilters($table_prefix = '' ) {
+		$where_query = '';
+		$start_date = $this->request->getVar('From');
+		$end_date = $this->request->getVar('To');
+		if(!empty($table_prefix))
+			$table_prefix .= '.';
+		if(isset($start_date) && isset($end_date)){
+			$date_from = Convert::raw2sql(trim($start_date));
+			$date_to   = Convert::raw2sql(trim($end_date));
+			$start = new \DateTime($date_from);
+			$start->setTime(00, 00, 00);
+			$end   = new \DateTime($date_to);
+			$end->setTime(23, 59, 59);
+			$where_query .= " ( {$table_prefix}UpdateDate >= '{$start->format('Y-m-d H:i:s')}' AND {$table_prefix}UpdateDate <= '{$end->format('Y-m-d H:i:s')}' ) ";
+		} else {
+			$where_query .= " ( {$table_prefix}UpdateDate >= '{$this->default_start_date}' AND {$table_prefix}UpdateDate <= '{$this->default_end_date}' ) ";
+		}
+
+		$this->date_filter_query = $where_query;
+	}
+
+	//Survey date filters constructor
+	function DateFilters($action='') {
+		$start_date = ($this->request->getVar('From')) ? $this->request->getVar('From') : $this->default_start_date;
+		$end_date = ($this->request->getVar('To')) ? $this->request->getVar('To') : $this->default_end_date;
+
+		$data = array("start_date"=>$start_date, "end_date"=>$end_date, "action"=>$action);
+		return $this->renderWith("SurveyDateFilters",$data);
+	}
 }
