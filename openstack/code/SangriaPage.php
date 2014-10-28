@@ -641,14 +641,13 @@ class SangriaPage_Controller extends Page_Controller
 
 
 	// Export CSV of all Deployment Surveys and Associated Deployments
+	function ExportSurveyResults() {
+		$fileDate = date( 'Ymdhis' );
 
-	function ExportSurveyResults()
-	{
-		$fileDate = date('Ymdhis');
-		header("Pragma:");
+		$this->generateDateFilters('s');
 
 		$surveyQuery = "select s.ID as SurveyID, s.Created as SurveyCreated,
-                s.UpdateDate as SurveyEdited, o.Name, d.ID as DeploymentID,
+                s.UpdateDate as SurveyEdited, o.Name as OrgName, o.ID as OrgID , d.ID as DeploymentID,
                 d.Created as DeploymentCreated, d.UpdateDate as DeploymentEdited, m.FirstName,
                 m.Surname, m.Email, s.Title, s.Industry, s.OtherIndustry, s.PrimaryCity,
                 s.PrimaryState, s.PrimaryCountry, s.OrgSize, s.OpenStackInvolvement,
@@ -672,54 +671,46 @@ class SangriaPage_Controller extends Page_Controller
             from DeploymentSurvey s
                 left outer join Member m on (s.MemberID = m.ID)
                 left outer join Deployment d on (d.DeploymentSurveyID = s.ID)
-                left outer join Org o on (m.OrgID = o.ID)
-            where s.Title is not null
+                left outer join Org o on (s.OrgID = o.ID)
+            where s.Title is not null AND ".$this->date_filter_query."
             order by s.ID;";
 
-		$results = DB::query($surveyQuery);
+		$res = DB::query($surveyQuery);
 
-		header("Content-type: text/csv");
-		header("Content-Disposition: attachment; filename=survey_results" . $fileDate . ".csv");
-		flush();
+		$fields = array('SurveyID','SurveyCreated','SurveyEdited','OrgName','OrgID','DeploymentID','DeploymentCreated', 'DeploymentEdited', 'FirstName',
+			'Surname','Email','Title','Industry','OtherIndustry','PrimaryCity','PrimaryState','PrimaryCountry','OrgSize','OpenStackInvolvement','InformationSources',
+			'OtherInformationSources','FurtherEnhancement','FoundationUserCommitteePriorities','UserGroupMember','UserGroupName','OkToContact','BusinessDrivers',
+			'OtherBusinessDrivers','WhatDoYouLikeMost','NetPromoter','OpenStackRecommendation','Label','IsPublic','DeploymentType','ProjectsUsed',
+			'CurrentReleases','DeploymentStage','NumCloudUsers','APIFormats','Hypervisors','OtherHypervisor','BlockStorageDrivers','OtherBlockStorageDriver',
+			'NetworkDrivers','OtherNetworkDriver','IdentityDrivers','OtherIndentityDriver','SupportedFeatures','ComputeNodes','ComputeCores','ComputeInstances',
+			'BlockStorageTotalSize','ObjectStorageSize','ObjectStorageNumObjects','NetworkNumIPs','WorkloadsDescription','OtherWorkloadsDescription',
+			'WhyNovaNetwork','OtherWhyNovaNetwork','DeploymentTools','OtherDeploymentTools','OperatingSystems','OtherOperatingSystems','SwiftGlobalDistributionFeatures',
+			'SwiftGlobalDistributionFeaturesUsesCases','OtherSwiftGlobalDistributionFeaturesUsesCases','Plans2UseSwiftStoragePolicies','OtherPlans2UseSwiftStoragePolicies',
+			'UsedDBForOpenStackComponents','OtherUsedDBForOpenStackComponents','ToolsUsedForYourUsers','OtherToolsUsedForYourUsers','Reason2Move2Ceilometer');
+		$data   = array();
 
-		for ($i = 0; $i < $results->numRecords(); $i++) {
-			$record = $results->nextRecord();
-			$fields = array_keys($record);
-
-			$numFields = count($fields);
-
-			// If it's the first time through, put the column headings in
-			if ($i == 0) {
-				for ($f = 0; $f < $numFields; $f++) {
-					if ($f > 0) {
-						echo ",";
-					}
-					echo "\"" . $fields[$f] . "\"";
-				}
-				echo "\n";
+		foreach($res as $row){
+			$member = array();
+			foreach($fields as $field){
+				$member[$field] = $row[$field];
 			}
-
-			for ($f = 0; $f < $numFields; $f++) {
-				if ($f > 0) {
-					echo ",";
-				}
-				$cleanValue = str_replace("\"", "'", $record[$fields[$f]]);
-				echo "\"" . $cleanValue . "\"";
-			}
-			echo "\n";
-			flush();
+			array_push($data,$member);
 		}
+
+		$filename = "survey_results" . $fileDate . ".csv";
+
+		return CSVExporter::getInstance()->export($filename, $data, ',');
+
 	}
 
-
 	// Export CSV of all App Dev Surveys
-	function ExportAppDevSurveyResults()
-	{
-		$fileDate = date('Ymdhis');
-		header("Pragma:");
+	function ExportAppDevSurveyResults() {
+		$fileDate = date( 'Ymdhis' );
+
+		$this->generateDateFilters('s');
 
 		$surveyQuery = "select s.ID as SurveyID, s.Created as SurveyCreated,
-                s.LastEdited as SurveyEdited, o.Name, a.ID as AppSurveyID,
+                s.LastEdited as SurveyEdited, o.Name as OrgName, o.ID as OrgID,  a.ID as AppSurveyID,
                 a.Created as AppSurveyCreated, a.LastEdited as AppSurveyEdited, m.FirstName,
                 m.Surname, m.Email, s.Title, s.Industry, s.OtherIndustry, s.PrimaryCity,
                 s.PrimaryState, s.PrimaryCountry, s.OrgSize, s.OpenStackInvolvement,
@@ -733,43 +724,31 @@ class SangriaPage_Controller extends Page_Controller
             from DeploymentSurvey s
                 right join AppDevSurvey a on (a.DeploymentSurveyID = s.ID)
                 left outer join Member m on (a.MemberID = m.ID)
-                left outer join Org o on (m.OrgID = o.ID)
-            where s.Title is not null
+                left outer join Org o on (s.OrgID = o.ID)
+            where s.Title is not null AND ".$this->date_filter_query."
             order by s.ID;";
 
-		$results = DB::query($surveyQuery);
+		$res = DB::query($surveyQuery);
 
-		header("Content-type: text/csv");
-		header("Content-Disposition: attachment; filename=app_dev_surveys" . $fileDate . ".csv");
-		flush();
 
-		for ($i = 0; $i < $results->numRecords(); $i++) {
-			$record = $results->nextRecord();
-			$fields = array_keys($record);
+		$fields = array('SurveyID','SurveyCreated','SurveyEdited','OrgName','OrgID','AppSurveyID','AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
+			'Surname','Email','Title','Industry','OtherIndustry','PrimaryCity','PrimaryState','PrimaryCountry','OrgSize','OpenStackInvolvement','InformationSources',
+			'OtherInformationSources','FurtherEnhancement','FoundationUserCommitteePriorities','UserGroupMember','UserGroupName','OkToContact','BusinessDrivers',
+			'OtherBusinessDrivers','WhatDoYouLikeMost','Toolkits','OtherToolkits','ProgrammingLanguages','OtherProgrammingLanguages','APIFormats','DevelopmentEnvironments','OtherDevelopmentEnvironments',
+			'OperatingSystems','OtherOperatingSystems','ConfigTools','OtherConfigTools','StateOfOpenStack','DocsPriority','InteractionWithOtherClouds');
+		$data   = array();
 
-			$numFields = count($fields);
-
-			// If it's the first time through, put the column headings in
-			if ($i == 0) {
-				for ($f = 0; $f < $numFields; $f++) {
-					if ($f > 0) {
-						echo ",";
-					}
-					echo "\"" . $fields[$f] . "\"";
-				}
-				echo "\n";
+		foreach($res as $row){
+			$member = array();
+			foreach($fields as $field){
+				$member[$field] = $row[$field];
 			}
-
-			for ($f = 0; $f < $numFields; $f++) {
-				if ($f > 0) {
-					echo ",";
-				}
-				$cleanValue = str_replace("\"", "'", $record[$fields[$f]]);
-				echo "\"" . $cleanValue . "\"";
-			}
-			echo "\n";
-			flush();
+			array_push($data,$member);
 		}
+
+		$filename = "app_dev_surveys" . $fileDate . ".csv";
+
+		return CSVExporter::getInstance()->export($filename, $data, '|');
 	}
 
 	function getSortIcon($type)
