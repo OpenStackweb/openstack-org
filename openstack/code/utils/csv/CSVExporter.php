@@ -26,24 +26,25 @@ final class CSVExporter {
 
 
 	/**
-	 * @param string $filename
+	 * @param        $filename
 	 * @param array  $data
+	 * @param string $field_separator
+	 * @param string $mime_type
 	 */
-	public function export($filename, array $data){
-		//clean output buffer
+	public function export($filename, array $data, $field_separator = "\t", $mime_type ='application/vnd.ms-excel'){
 		ob_end_clean();
 		header("Content-Disposition: attachment; filename=\"$filename\"");
-		header("Content-Type: application/vnd.ms-excel");
+		header("Content-Type: ".$mime_type);
 
 		$flag = false;
 		foreach($data as $row) {
 			if(!$flag) {
 				// display field/column names as first row
-				echo implode("\t", array_keys($row)) . "\n";
+				echo implode($field_separator, array_keys($row)) . "\n";
 				$flag = true;
 			}
 			array_walk($row, array($this,'cleanData'));
-			echo implode("\t", array_values($row)) . "\n";
+			echo implode($field_separator, array_values($row)) . "\n";
 		}
 	}
 
