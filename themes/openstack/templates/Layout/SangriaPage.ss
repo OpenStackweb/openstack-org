@@ -8,6 +8,10 @@
 			    <strong>Individual Members:</strong><br/>
 			    $IndividualMemberCount
 			    </div>
+                <div>
+                    <strong>Community Members:</strong><br/>
+                    $CommunityMemberCount
+                </div>
 			    <div>
 			    <strong>Newsletter Subscribers:</strong><br/>
 			    $NewsletterMemberCount ($NewsletterPercentage%)

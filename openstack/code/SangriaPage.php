@@ -80,10 +80,10 @@ class SangriaPage_Controller extends Page_Controller
 		Requirements::css("themes/openstack/css/deployment.survey.page.css");
 		Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
 		$data = Session::get("FormInfo.Form_DeploymentSurveyDeploymentsFilters.data");
-		$params      = $this->requestParams;
-		$start_date  = (isset($params['date-from'])) ? $params['date-from'] : $this->default_start_date;
-		$end_date    = (isset($params['date-to'])) ? $params['date-to'] : $this->default_end_date;
-		$form        = new DeploymentSurveyDeploymentsFilters($this, 'DeploymentSurveyDeploymentsFilters',$action,$start_date,$end_date);
+		$params = $this->requestParams;
+		$start_date = (isset($params['date-from'])) ? $params['date-from'] : $this->default_start_date;
+		$end_date = (isset($params['date-to'])) ? $params['date-to'] : $this->default_end_date;
+		$form = new DeploymentSurveyDeploymentsFilters($this, 'DeploymentSurveyDeploymentsFilters', $action, $start_date, $end_date);
 		// we should also load the data stored in the session. if failed
 		if (is_array($data)) {
 			$form->loadDataFrom($data);
@@ -97,6 +97,15 @@ class SangriaPage_Controller extends Page_Controller
 	{
 		return EntityCounterHelper::getInstance()->EntityCount('FoundationMember', function () {
 			$query = new IndividualFoundationMemberCountQuery();
+			$res = $query->handle(null)->getResult();
+			return $res[0];
+		});
+	}
+
+	function CommunityMemberCount()
+	{
+		return EntityCounterHelper::getInstance()->EntityCount('CommunityMember', function () {
+			$query = new IndividualCommunityMemberCountQuery();
 			$res = $query->handle(null)->getResult();
 			return $res[0];
 		});
@@ -333,7 +342,7 @@ class SangriaPage_Controller extends Page_Controller
 	// Deployment Survey data
 	function DeploymentSurveysCount()
 	{
-		$DeploymentSurveys = DeploymentSurvey::get()->where("Title IS NOT NULL")->where( $this->date_filter_query);
+		$DeploymentSurveys = DeploymentSurvey::get()->where("Title IS NOT NULL")->where($this->date_filter_query);
 		$Count = $DeploymentSurveys->Count();
 		return $Count;
 	}
@@ -345,7 +354,7 @@ class SangriaPage_Controller extends Page_Controller
 		$options = DeploymentSurvey::$industry_options;
 
 		foreach ($options as $option => $label) {
-			$count = DB::query("select count(*) from DeploymentSurvey where Industry like '%" . $option . "%' AND ".$this->date_filter_query)->value();
+			$count = DB::query("select count(*) from DeploymentSurvey where Industry like '%" . $option . "%' AND " . $this->date_filter_query)->value();
 			$do = new DataObject();
 			$do->Value = $label;
 			$do->Count = $count;
@@ -357,7 +366,7 @@ class SangriaPage_Controller extends Page_Controller
 
 	function OtherIndustry()
 	{
-		$list = DeploymentSurvey::get()->where("OtherIndustry IS NOT NULL AND ".$this->date_filter_query)->sort('OtherIndustry');
+		$list = DeploymentSurvey::get()->where("OtherIndustry IS NOT NULL AND " . $this->date_filter_query)->sort('OtherIndustry');
 		return $list;
 	}
 
@@ -368,7 +377,7 @@ class SangriaPage_Controller extends Page_Controller
 		$options = DeploymentSurvey::$organization_size_options;
 
 		foreach ($options as $option => $label) {
-			$count = DB::query("select count(*) from DeploymentSurvey where OrgSize like '%" . $option . "%' AND ".$this->date_filter_query)->value();
+			$count = DB::query("select count(*) from DeploymentSurvey where OrgSize like '%" . $option . "%' AND " . $this->date_filter_query)->value();
 			$do = new DataObject();
 			$do->Value = $label;
 			$do->Count = $count;
@@ -385,7 +394,7 @@ class SangriaPage_Controller extends Page_Controller
 		$options = DeploymentSurvey::$openstack_involvement_options;
 
 		foreach ($options as $option => $label) {
-			$count = DB::query("select count(*) from DeploymentSurvey where OpenStackInvolvement like '%" . $option . "%' AND ".$this->date_filter_query)->value();
+			$count = DB::query("select count(*) from DeploymentSurvey where OpenStackInvolvement like '%" . $option . "%' AND " . $this->date_filter_query)->value();
 			$do = new DataObject();
 			$do->Value = $label;
 			$do->Count = $count;
@@ -402,7 +411,7 @@ class SangriaPage_Controller extends Page_Controller
 		$options = DeploymentSurvey::$information_options;
 
 		foreach ($options as $option => $label) {
-			$count = DB::query("select count(*) from DeploymentSurvey where InformationSources like '%" . $option . "%' AND ".$this->date_filter_query)->value();
+			$count = DB::query("select count(*) from DeploymentSurvey where InformationSources like '%" . $option . "%' AND " . $this->date_filter_query)->value();
 			$do = new DataObject();
 			$do->Value = $label;
 			$do->Count = $count;
@@ -414,19 +423,19 @@ class SangriaPage_Controller extends Page_Controller
 
 	function OtherInformationSources()
 	{
-		$list = DeploymentSurvey::get()->where("OtherInformationSources IS NOT NULL AND ".$this->date_filter_query)->sort('OtherInformationSources');
+		$list = DeploymentSurvey::get()->where("OtherInformationSources IS NOT NULL AND " . $this->date_filter_query)->sort('OtherInformationSources');
 		return $list;
 	}
 
 	function FurtherEnhancement()
 	{
-		$list = DeploymentSurvey::get()->where("FurtherEnhancement IS NOT NULL AND ".$this->date_filter_query)->sort('FurtherEnhancement');
+		$list = DeploymentSurvey::get()->where("FurtherEnhancement IS NOT NULL AND " . $this->date_filter_query)->sort('FurtherEnhancement');
 		return $list;
 	}
 
 	function FoundationUserCommitteePriorities()
 	{
-		$list = DeploymentSurvey::get()->where("FoundationUserCommitteePriorities IS NOT NULL AND ".$this->date_filter_query)->sort('FurtherEnhancement');
+		$list = DeploymentSurvey::get()->where("FoundationUserCommitteePriorities IS NOT NULL AND " . $this->date_filter_query)->sort('FurtherEnhancement');
 		return $list;
 	}
 
@@ -440,7 +449,7 @@ class SangriaPage_Controller extends Page_Controller
 			if ($option == 'Ability to innovate, compete') {
 				$option = 'Ability to innovate{comma} compete';
 			}
-			$count = DB::query("select count(*) from DeploymentSurvey where BusinessDrivers like '%" . $option . "%' AND ".$this->date_filter_query)->value();
+			$count = DB::query("select count(*) from DeploymentSurvey where BusinessDrivers like '%" . $option . "%' AND " . $this->date_filter_query)->value();
 			$do = new DataObject();
 			$do->Value = $label;
 			$do->Count = $count;
@@ -452,13 +461,13 @@ class SangriaPage_Controller extends Page_Controller
 
 	function OtherBusinessDrivers()
 	{
-		$list = DeploymentSurvey::get()->where("OtherBusinessDrivers IS NOT NULL AND ".$this->date_filter_query)->sort("OtherBusinessDrivers");
+		$list = DeploymentSurvey::get()->where("OtherBusinessDrivers IS NOT NULL AND " . $this->date_filter_query)->sort("OtherBusinessDrivers");
 		return $list;
 	}
 
 	function WhatDoYouLikeMost()
 	{
-		$list = DeploymentSurvey::get()->where("WhatDoYouLikeMost IS NOT NULL AND ".$this->date_filter_query)->sort("WhatDoYouLikeMost");
+		$list = DeploymentSurvey::get()->where("WhatDoYouLikeMost IS NOT NULL AND " . $this->date_filter_query)->sort("WhatDoYouLikeMost");
 		return $list;
 	}
 
@@ -1359,23 +1368,23 @@ SQL;
 		return $groups;
 	}
 
-	function ViewDeploymentStatistics(){
+	function ViewDeploymentStatistics()
+	{
 		$where_query = '';
-		$params     = $this->requestParams;
-		if(isset($params['date-from']) && isset($params['date-to'])){
+		$params = $this->requestParams;
+		if (isset($params['date-from']) && isset($params['date-to'])) {
 			$date_from = Convert::raw2sql(trim($params['date-from']));
-			$date_to   = Convert::raw2sql(trim($params['date-to']));
+			$date_to = Convert::raw2sql(trim($params['date-to']));
 			$start = new \DateTime($date_from);
 			$start->setTime(00, 00, 00);
-			$end   = new \DateTime($date_to);
+			$end = new \DateTime($date_to);
 			$end->setTime(23, 59, 59);
 			$where_query .= " UpdateDate >= '{$start->format('Y-m-d H:i:s')}' AND UpdateDate <= '{$end->format('Y-m-d H:i:s')}'";
-		}
-		else{
+		} else {
 			$where_query .= " UpdateDate >= '{$this->default_start_date}' AND UpdateDate <= '{$this->default_end_date}'";
 		}
 		$this->date_filter_query = $where_query;
-		return $this->Customise(array())->renderWith(array('SangriaPage_ViewDeploymentStatistics','SangriaPage','SangriaPage'));
+		return $this->Customise(array())->renderWith(array('SangriaPage_ViewDeploymentStatistics', 'SangriaPage', 'SangriaPage'));
 	}
 
 }
