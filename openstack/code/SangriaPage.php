@@ -748,7 +748,7 @@ class SangriaPage_Controller extends Page_Controller
 
 		$filename = "app_dev_surveys" . $fileDate . ".csv";
 
-		return CSVExporter::getInstance()->export($filename, $data, '|');
+		return CSVExporter::getInstance()->export($filename, $data, ',');
 	}
 
 	function getSortIcon($type)
