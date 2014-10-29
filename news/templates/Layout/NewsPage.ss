@@ -1,85 +1,114 @@
-<div class="postArticle">
-    <a href="/news-add">Post A News Article</a>
-</div>
-<% if CurrentMember %>
-    <% if CurrentMember.isNewsManager %>
-        <div class="manageNews">
-            <a href="/news-manage">Manage News</a>
+<div class="grey-bar news">
+    <div class="container">
+        <div class="row">
+            <% if CurrentMember %>
+                <% if CurrentMember.isNewsManager %>
+                    <a class="manage-news-link" href="/news-manage"><i class="fa fa-cog"></i> Manage News</a>
+                <% end_if %>
+            <% end_if %>
+            <a href="/news-add"><i class="fa fa-plus-circle"></i> Post A News Article</a>
         </div>
-    <% end_if %>
-<% end_if %>
-<div class="clear"></div>
-<div class="newsSlider">
-    <ul class='slider'>
-        <% control SlideNews %>
-            <li data-label='$Pos' class="automotive">
-                <a href="news/ViewArticle?articleID=$ID">
-                    <div class="sliderImage">
-                        <% if Image.Exists %>
-                            $Image.CroppedImage(300,200) <p>&nbsp</p>
-                        <% else %>
-                            <img src="/themes/openstack/images/generic-profile-photo.png"><p>&nbsp;</p>
-                        <% end_if %>
-                    </div>
-                    <div class="sliderText">
-                        <p class='largeHeadline'>$Headline</p>
-                        <p class='sliderSummary'>$Summary</p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-            </li>
-        <% end_control %>
-    </ul>
-</div>
-<div class="newsBody">
-    <div class="newsFeatured">
-        <ul class='featured'>
-            <li>
-                <% control FeaturedNews %>
-                    <div class="featuredBox">
-                        <div class="featuredImage">
-                            <a href="news/ViewArticle?articleID=$ID">
-                                <% if Image.Exists %>
-                                    $Image.CroppedImage(300,200) <p>&nbsp</p>
-                                <% else %>
-                                    <img src="/themes/openstack/images/generic-profile-photo.png"><p>&nbsp;</p>
-                                <% end_if %>
-                            </a>
-                        </div>
-                        <div class="featuredHeadline"><a href="news/ViewArticle?articleID=$ID">$Headline</a></div>
-                        <div class="featuredDate">$formatDate</div>
-                        <div class="featuredSummary">$Summary</div>
-                    </div>
-                    <% if Pos == 3 %>
-                        <div class="clear"></div>
-                        </li>
-                        <li>
-                    <% end_if %>
-                <% end_control %>
-            </li>
-        </ul>
     </div>
-    <div class="newsRecent">
-        <h2>Recent News</h2>
-        <% control  RecentNews %>
-            <div class="recentBox">
-                <div class="recentHeadline"><a href="news/ViewArticle?articleID=$ID">$Headline</a> | <span class="itemTimeStamp">$formatDate</span></div>
-                <div class="recentSummary">$Summary</div>
+</div>
+
+<div id="news-slider" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+
+    <ol class="carousel-indicators">
+        <% control SlideNews %>
+            <li data-target="#news-slider"  <% if First %>class="active" <% end_if %> data-slide-to="$Pos(0)" ></li>
+        <% end_control %>
+
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <% control SlideNews %>
+            <div class="item <% if First %>active<% end_if %>">
+                    <% if Image.Exists %>
+                        $Image.CroppedImage(300,200)
+                    <% else %>
+                        <img src="/themes/openstack/images/generic-profile-photo.png">
+                    <% end_if %>
+                <div class="carousel-caption">
+                    <h3 class='largeHeadline'>$Headline</h3>
+                    <p class='sliderSummary'>$Summary</p>
+                    <a class="more-btn" href="news/ViewArticle?articleID=$ID">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
             </div>
         <% end_control %>
     </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#news-slider" role="button" data-slide="prev">
+        <i class="fa fa-chevron-left"></i>
+    </a>
+    <a class="right carousel-control" href="#news-slider" role="button" data-slide="next">
+        <i class="fa fa-chevron-right"></i>
+    </a>
 </div>
-<div class="newsSidebar">
-    <div class="upcomingEvents">
-        <h2>Upcoming Events</h2>
-        <div class="eventBlock upcoming">
+<div class="container">
+    <div class="row">
+        <div class="newsFeatured">
+            <div class="col-lg-12">
+                <h2>Featured Articles</h2>
+            </div>
+            <ul class="featured">
+                <% control FeaturedNews %>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <li>
+                        <div class="featuredImage">
+                            <a href="news/ViewArticle?articleID=$ID">
+                                <div class="featuredDate">$formatDate</div>
+                                <div class="featuredHeadline">
+                                    $Headline
+                                    <div class="more">Read More <i class="fa fa-chevron-circle-right"></i></div>
+                                </div>
+                                <% if Image.Exists %>
+                                    $Image.CroppedImage(300,200)
+                                <% else %>
+                                    <img src="/themes/openstack/images/generic-profile-photo.png">
+                                <% end_if %>
+                            </a>
+                        </div>
+                        <div class="featuredSummary">$RAW_val(Summary)</div>
+                    </li>
+                </div>
+                <% end_control %>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <h2>Recent News</h2>
+            <% control  RecentNews %>
+                <div class="recentBox">
+                    <div class="recentHeadline">
+                        <a href="news/ViewArticle?articleID=$ID">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
+                    </div>
+                    <div class="recentSummary">$RAW_val(Summary)</div>
+                </div>
+
+            <% end_control %>
+        </div>
+        <div class="news-sidebar col-lg-4 col-md-4 col-sm-12">
+            <div class="upcomingEvents">
+                <h3>
+                    Upcoming Events
+                    <div class="see-all-events">
+                        <a href="/events">All Events <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </h3>
+               <div class="eventBlock upcoming">
                 <% if FutureEvents(100) %>
                     <% control FutureEvents(100) %>
-                            <div class="event<% if First %> top<% end_if %>">
-                                <h3><a rel="nofollow" href="$EventLink" target="_blank">$Title</a></h3>
+
+                            <div class="event <% if First %> top<% end_if %>">
+                                <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
                                 <div class="details">$formatDateRange - $EventLocation</div>
-                                <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">$EventLinkLabel</a></span>
+                                <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
                             </div>
+
                     <% end_control %>
                 <% else %>
                     <div class="event top">
@@ -87,18 +116,10 @@
                         <p class="details">Wow! It really rare that we don't have any upcoming events on display. Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;We probably just need to update this list. Please check back soon for more details.</p>
                     </div>
                 <% end_if %>
-            <div class="clear"></div>
-        </div>
-    </div>
-    <div class="featuredEvents">
-        <h2>Featured Events</h2>
-        <div id="openStackFeed">
-            <% control RssItems %>
-                <div class="feedItem">
-                    <a href="{$link}">$title <span class="itemTimeStamp">$pubDate</span></a>
-                </div>
-            <% end_control %>
+               </div>
+
+            </div>
         </div>
     </div>
 </div>
-<div class="clear"></div>
+<!-- End Page Content -->

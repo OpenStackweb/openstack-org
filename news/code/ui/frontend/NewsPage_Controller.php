@@ -15,12 +15,13 @@ final class NewsPage_Controller extends Page_Controller {
 
     function init() {
         parent::init();
-
-        Requirements::css('themes/openstack/css/bxslider.css');
-        Requirements::css('news/code/ui/frontend/css/news.css');
-        Requirements::javascript('news/code/ui/frontend/js/news.js');
-        Requirements::javascript('themes/openstack/javascript/jquery.bxslider.min.js');
+	    Requirements::css('news/code/ui/frontend/css/news.css');
+        Requirements::css(Director::protocol().'://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
     }
+
+	public function BootstrapConverted(){
+		return true;
+	}
 
 	public function __construct(){
 		parent::__construct();
