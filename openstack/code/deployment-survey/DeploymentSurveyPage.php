@@ -88,8 +88,8 @@ HTML;
 		<h2>Thank You!</h2>
 
 <p>We aggregate data from the survey every six months before the Summit. A video
-presentation by the User Committee and slides from November 2013 are available to
-<a href="http://www.slideshare.net/openstack/openstack-user-survey-october-2013">view now</a>.</p>
+presentation by the User Committee and slides from May 2014 are available to
+<a href="https://www.openstack.org/summit/openstack-summit-atlanta-2014/session-videos/presentation/2014-spring-user-survey-results-and-feedback">view now</a>.</p>
 
 <p>If you'd like to get involved in working with other OpenStack users,
 find out more about the <a href="/foundation/user-committee">User Committee</a>.</p>
