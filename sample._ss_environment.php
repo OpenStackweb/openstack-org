@@ -33,6 +33,7 @@ mysql_close($conn);
 
 //used by openstack/code/utils/email/DevelopmentEmail.php
 define('DEV_EMAIL_TO','');
+
 //used on events module.
 define("EVENT_REGISTRATION_REQUEST_EMAIL_FROM", '');
 // used on elections module.
@@ -71,8 +72,25 @@ define('OS_SUMMIT_PRESENTATION_VOTING_FROM_EMAIL','');
 define('OS_SUMMIT_SPEAKING_SUBMISSION_FROM_EMAIL','');
 //used on openstack/code/summit/PresentationEditorPage.php (AssembleEmail - ln 1138)
 define('OS_PRESENTATION_SUBMISSIONS_FROM_EMAIL','');
+
+// news module settings
+define("NEWS_SUBMISSION_EMAIL_ALERT_TO", '');
+define('NEWS_SUBMISSION_EMAIL_FROM','secretary@openstack.org');
+define('NEWS_SUBMISSION_EMAIL_SUBJECT','New News item on Openstack.org');
+
+//ICLA Module configuration
+define('ICLA_GROUP_ID', '');
+define('GERRIT_BASE_URL', '');
+define('GERRIT_USER', '');
+define('GERRIT_PASSWORD', '');
+define('PULL_ICLA_DATA_FROM_GERRIT_BATCH_SIZE', 1000);
+define('PULL_LAST_COMMITTED_DATA_FROM_GERRIT_BATCH_SIZE', 1000);
+define('CCLA_TEAM_INVITATION_EMAIL_FROM','');
+define('CCLA_DEBUG_EMAIL','');
+
 // here u need to define your hostheader and your local path
 // like $_FILE_TO_URL_MAPPING['/var/www/openstack.org'] = 'http://www..openstack.org';
 // mainly this is used by the cron tasks
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
+

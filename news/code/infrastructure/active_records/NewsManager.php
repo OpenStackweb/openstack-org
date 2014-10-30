@@ -3,7 +3,7 @@
 /**
  * Class NewsManager
  */
-final class NewsManager extends DataObjectDecorator implements INewsManager {
+final class NewsManager extends DataExtension implements INewsManager {
 
     /**
      * @return int

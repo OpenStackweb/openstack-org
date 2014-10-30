@@ -47,7 +47,7 @@ class CustomSiteConfig extends DataExtension {
 	            $filters['SiteBannerRank:GreaterThan'] = (int)$previous_banner_rank;
             }
 
-	        $settings = SiteBannerConfigurationSetting::get()->filter($filters)->order('SiteBannerRank','ASC')->first();
+	        $settings = SiteBannerConfigurationSetting::get()->filter($filters)->sort('SiteBannerRank','ASC')->first();
 
 	        // if there is no banner maybe the previous one was the last one, so we look for the first one
             if(!$settings && is_numeric($previous_banner_rank))

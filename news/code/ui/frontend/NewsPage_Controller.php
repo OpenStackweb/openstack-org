@@ -43,9 +43,9 @@ final class NewsPage_Controller extends Page_Controller {
         $recent_news = $this->news_repository->getRecentNews();
         $slide_news = $this->news_repository->getSlideNews();
 
-        return $this->renderWith(array('NewsPage','Page'), array('FeaturedNews' => new ComponentSet($featured_news),
-                                                                 'RecentNews' => new ComponentSet($recent_news),
-                                                                 'SlideNews' => new ComponentSet($slide_news)));
+        return $this->renderWith(array('NewsPage','Page'), array('FeaturedNews' => new ArrayList($featured_news),
+                                                                 'RecentNews' => new ArrayList($recent_news),
+                                                                 'SlideNews' => new ArrayList($slide_news)));
     }
 
     function FutureEvents($num = 4) {

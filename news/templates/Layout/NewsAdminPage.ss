@@ -25,7 +25,7 @@
     <div class="newsRecent">
         <h3>Recent News</h3>
         <ul id="recent_sortable" class="connected">
-            <% control  RecentNews %>
+            <% loop  RecentNews %>
                 <li>
                     <div class="recentBox">
                         <input type="hidden" class="article_id" value="$ID" />
@@ -42,14 +42,14 @@
                         <div class="newsRemove">Remove</div>
                     </div>
                 </li>
-            <% end_control %>
+            <% end_loop %>
         </ul>
     </div>
     <div class="clear"></div>
     <div class="newsStandBy">
         <h3>Recently Submitted</h3>
         <ul id="standby_sortable" class="connected">
-            <% control  StandByNews %>
+            <% loop  StandByNews %>
                 <li>
                     <div class="standbyBox">
                         <input type="hidden" class="article_id" value="$ID" />
@@ -66,7 +66,7 @@
                         <div class="newsDelete">Delete</div>
                     </div>
                 </li>
-            <% end_control %>
+            <% end_loop %>
         </ul>
     </div>
     <div class="clear"></div>
