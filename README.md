@@ -17,6 +17,11 @@ A REMINDER ON TRADEMARKS:
 
 In light of the trademarks held by the OpenStack Foundation, it is important that you not use the code to build a website or webpage that could be confused with the openstack.org website, including by building a site or page with the same look and feel of the openstack.org site or by using trademarks that are the same as or similar to marks found on the openstack.org site. For the rules regarding other uses of OpenStack trademarks, see the OpenStack Trademark Policy http://www.openstack.org/brand/openstack-trademark-policy/ and the OpenStack Brand Guide http://www.openstack.org/brand/. Please contact logo@openstack.org with any questions.
 
+LICENSE:
+
+Unless otherwise noted, all code is released under the APACHE 2.0 License 
+http://www.apache.org/licenses/LICENSE-2.0.html
+
 WHO DO I CONTACT WITH QUESTIONS?
 For now we will continue to use Lanchpad bugs to track issues: https://bugs.launchpad.net/openstack-org/
 
