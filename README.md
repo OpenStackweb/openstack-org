@@ -54,7 +54,7 @@ to install run following commands
 * chmod 777 -R  vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
 DATABASE
-OpenStack will provide a db dump on a weekly basis, purged of protected data. The dump can be found ******* (to add public Cloud Files location). The database will create one default admin user. All other data will need to be populated by the user.
+OpenStack will provide a db dump on a weekly basis, purged of protected data. The dump can be found https://mycloud.rackspace.com/cloud/920805/files#object-store%2CcloudFiles%2CDFW/www.openstack.org-cron-db-backups-purged/. The database will create one default admin user. All other data will need to be populated by the user.
 
 TODO:
-We need a way to provide a clean and current dump of the database, since a majority of the web content for the site is stored there. Also, we need detailed installation instructions to run the site locally on LAMP or MAMP.
+We need detailed installation instructions to run the site locally on LAMP or MAMP.
