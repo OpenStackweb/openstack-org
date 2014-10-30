@@ -58,3 +58,8 @@ OpenStack will provide a db dump on a weekly basis, purged of protected data. Th
 
 TODO:
 We need detailed installation instructions to run the site locally on LAMP or MAMP.
+
+SUBMITTING PATCHES:
+
+We welcome patches and will be reviewing those as they come in initially, and plan to move to gerrit for reviews in the future. 
+
