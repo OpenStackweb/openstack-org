@@ -88,6 +88,8 @@ define('PULL_LAST_COMMITTED_DATA_FROM_GERRIT_BATCH_SIZE', 1000);
 define('CCLA_TEAM_INVITATION_EMAIL_FROM','');
 define('CCLA_DEBUG_EMAIL','');
 
+
+define('GOOGLE_GEO_CODING_API_KEY','');
 // here u need to define your hostheader and your local path
 // like $_FILE_TO_URL_MAPPING['/var/www/openstack.org'] = 'http://www..openstack.org';
 // mainly this is used by the cron tasks
