@@ -17,7 +17,10 @@
 	}
 
 	class MemberVerifyPage_Controller extends Page_Controller {
-			
+
+			'member',
+		);
+
 		function init() {
 			parent::init();
 		}
