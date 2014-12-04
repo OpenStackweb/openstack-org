@@ -39,9 +39,8 @@ silverstripe-cache
 composer.lock
 composer.phar
 backup_scripts/cron-backup-config.php
-logs
-feeds/cache
 logs/*
+feeds/cache
 sapphire/thirdparty/htmlpurifier-4.4.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/
 elections/input
 blog
