@@ -159,4 +159,13 @@ class JobPage
 	{
 		AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Locations')->removeAll();
 	}
+
+    public function getMoreInfoLink() {
+        if(filter_var($this->JobMoreInfoLink, FILTER_VALIDATE_EMAIL)) {
+            return "mailto:".$this->JobMoreInfoLink;
+        }
+        else {
+            return $this->JobMoreInfoLink;
+        }
+    }
 }

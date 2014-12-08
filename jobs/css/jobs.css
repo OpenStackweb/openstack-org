@@ -109,6 +109,22 @@ div.jobDescription{
     font-weight: normal !important ;
 }
 
+.detail_title {
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 20px;
+    vertical-align: baseline;
+}
 
+.job_title {
+    color: rgb(42, 78, 104);
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 300;
+    height: 34px;
+    letter-spacing: -2.58400011062622px;
+    line-height: 34px;
+}
 
 /* @end */
