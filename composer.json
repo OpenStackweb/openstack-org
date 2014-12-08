@@ -8,7 +8,8 @@
         "silverstripe/translatable": "2.0.3",
         "ezyang/htmlpurifier": "dev-master",
         "undefinedoffset/sortablegridfield":"dev-master",
-        "tractorcow/silverstripe-colorpicker":"3.0.*@dev"
+        "tractorcow/silverstripe-colorpicker":"3.0.*@dev",
+        "knplabs/github-api": "~1.2"
 	},
     "autoload": {
         "classmap": [
