@@ -168,4 +168,10 @@ class JobPage
             return $this->JobMoreInfoLink;
         }
     }
+
+    public function getTitleForUrl() {
+        $lcase_title = strtolower(trim($this->Title));
+        $title_for_url = str_replace(' ','-',$lcase_title);
+        return $title_for_url;
+    }
 }
