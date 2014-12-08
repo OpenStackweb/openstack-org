@@ -2,15 +2,15 @@
 	<div class="detail_title">
 	    <span class="job_title">$Title</span><span class="label">Employer: </span> at <strong>$JobCompany</strong>
 	</div>
-	<div class="col-md-3 postDate">
-        <p>
-            $JobPostedDate.format(F) $JobPostedDate.format(d)
-            <% if FormattedLocation %>
-                - $FormattedLocation
-            <% end_if %>
-        </p>
-    </div>
     <div class="container jobPosting"  id="{$ID}">
+        <div>
+            <p>
+                $JobPostedDate.format(F) $JobPostedDate.format(d)
+                <% if FormattedLocation %>
+                    - $FormattedLocation
+                <% end_if %>
+            </p>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
