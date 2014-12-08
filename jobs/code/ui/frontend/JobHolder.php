@@ -30,7 +30,12 @@ class JobHolder_Controller extends Page_Controller {
 
 	static $allowed_actions = array(
 		'AjaxDateSortedJobs',
+        'StandAloneJob',
 	);
+
+    static $url_handlers = array(
+        'GET view/$JOB_ID'   => 'StandAloneJob',
+    );
 
 	function init(){
 		parent::init();
@@ -82,4 +87,12 @@ class JobHolder_Controller extends Page_Controller {
 		}
 		return '#';
 	}
+
+    function StandAloneJob() {
+        $job_id = intval($this->request->param('JOB_ID'));
+        $job = JobPage::get()->byID($job_id);
+        if($job)
+            return $this->renderWith(array('JobDetail','Page'),$job);
+        return $this->httpError(404, 'Sorry that Job could not be found!.');
+    }
 }

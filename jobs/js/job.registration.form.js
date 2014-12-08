@@ -58,6 +58,16 @@ jQuery(document).ready(function($) {
             return rows.length >= min_count;
         }, "Please Add at least {0} items.");
 
+        jQuery.validator.addMethod("email_or_url", function (value, element, param) {
+            var result = $.validator.methods['email'].call(this, value, element, param);
+            if (!result) {
+                result = $.validator.methods['url'].call(this, value, element, param);
+            }
+
+            return result;
+
+        }, "Please add a valid url (with http://) or email address.");
+
 
         //main form validation
         form_validator = form.validate({
@@ -71,7 +81,7 @@ jQuery(document).ready(function($) {
                 description  : { required: true },
                 instructions : { required: true },
                 company_name : { required: true, ValidPlainText:true },
-                url          : {required: true, complete_url: true, maxlength: 255},
+                url          : {required: true, email_or_url: true, maxlength: 255},
                 location_type  : {required: true,locations_min_count:[1,  $('#locations_table',form)]},
                 city:{required:true}
             },

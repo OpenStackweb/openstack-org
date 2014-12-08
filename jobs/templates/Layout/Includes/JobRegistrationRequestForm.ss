@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="field text " id="url">
-                <label for="$FormName_url" class="left">Link to Job Posting</label>
+                <label for="$FormName_url" class="left">Link or Email for more info</label>
 
                 <div class="middleColumn">
                     $Fields.dataFieldByName(url)

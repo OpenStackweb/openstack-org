@@ -47,9 +47,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-2">
                     <div class="moreInfo">
-                        <span class="label">More information: </span><a rel="nofollow" href="$JobMoreInfoLink">More About This Job</a>
+                        <span class="label">More information: </span><a rel="nofollow" href="$MoreInfoLink" target="_blank">More About This Job</a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="moreInfo">
+                        <span class="label">Job page: </span><a rel="nofollow" target="_blank" href="/community/jobs/view/$ID">Link Directly to This Job</a>
                     </div>
                 </div>
             </div>
