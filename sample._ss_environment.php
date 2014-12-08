@@ -19,14 +19,17 @@ $email_new_deployment = '';
 $conn = mysql_connect(SS_DATABASE_SERVER, SS_DATABASE_USERNAME, SS_DATABASE_PASSWORD, true);
 
 if(!$conn) {
-	ob_end_clean();
-	header("HTTP/1.0 500 Server Error DB");
+	ob_clean();
+	$maintenance_page = file_get_contents(getcwd(). '/../maintenance/index.html');
+	echo $maintenance_page;
+	header("HTTP/1.0 500 Server Error");
 	exit();
 }
 if(!mysql_select_db($database, $conn)){
-	ob_end_clean();
-	mysql_close($conn);
-	header("HTTP/1.0 500 Server Error DB");
+	ob_clean();
+	$maintenance_page = file_get_contents(getcwd(). '/../maintenance/index.html');
+	echo $maintenance_page;
+	header("HTTP/1.0 500 Server Error");
 	exit();
 }
 mysql_close($conn);
