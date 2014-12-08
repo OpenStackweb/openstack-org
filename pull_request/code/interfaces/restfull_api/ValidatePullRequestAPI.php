@@ -12,20 +12,23 @@
  * limitations under the License.
  **/
 
+/**
+ * Class ValidatePullRequestAPI
+ */
 class ValidatePullRequestAPI extends AbstractRestfulJsonApi  {
 
 
 	const ApiPrefix = 'api/v1/pulls';
 
 	/**
-	 * @var GithubPullRequestManager
+	 * @var GitHubPullRequestManager
 	 */
 	private $manager;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->manager = new GithubPullRequestManager();
+		$this->manager = new GitHubPullRequestManager();
 	}
 
 	protected function isApiCall()
@@ -72,23 +75,17 @@ class ValidatePullRequestAPI extends AbstractRestfulJsonApi  {
 		$data = $this->getJsonRequest();
 		try{
 
-			if( $data!=null &&
+			if( $data != null &&
 				isset($data['action']) &&
 				($data['action']=='opened' || $data['action']=='reopened') &&
 				isset($data['pull_request']) &&
-				$pull_request = $data['pull_request'])
-			{
-				$this->manager->validatePullRequest($pull_request);
-
+				$pull_request = $data['pull_request']){
+					$this->manager->validatePullRequest($pull_request);
 			}
 		}
 		catch(NotFoundEntityException $ex1){
 			SS_Log::log($ex1,SS_Log::NOTICE);
 			return $this->notFound($ex1->getMessage());
-		}
-		catch(EntityValidationException $ex2){
-			SS_Log::log($ex2,SS_Log::NOTICE);
-			return $this->validationError($ex2->getMessages());
 		}
 		catch(Exception $ex){
 			SS_Log::log($ex,SS_Log::ERR);
