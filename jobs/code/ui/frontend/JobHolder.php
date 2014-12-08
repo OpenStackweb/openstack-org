@@ -30,11 +30,11 @@ class JobHolder_Controller extends Page_Controller {
 
 	static $allowed_actions = array(
 		'AjaxDateSortedJobs',
-        'StandAloneJob',
+        'JobDetailsPage',
 	);
 
     static $url_handlers = array(
-        'GET view/$JOB_ID'   => 'StandAloneJob',
+        'GET view/$JOB_ID/$JOB_TITLE'   => 'JobDetailsPage',
     );
 
 	function init(){
@@ -88,7 +88,7 @@ class JobHolder_Controller extends Page_Controller {
 		return '#';
 	}
 
-    function StandAloneJob() {
+    function JobDetailsPage() {
         $job_id = intval($this->request->param('JOB_ID'));
         $job = JobPage::get()->byID($job_id);
         if($job)

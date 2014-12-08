@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="moreInfo">
-                        <span class="label">Job page: </span><a rel="nofollow" target="_blank" href="/community/jobs/view/$ID">Link Directly to This Job</a>
+                        <span class="label">Job page: </span><a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl">Link Directly to This Job</a>
                     </div>
                 </div>
             </div>
