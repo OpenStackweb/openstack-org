@@ -51,6 +51,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$size = $sizeMB * 1024 * 1024; // 1 MB in bytes
 		$DocumentField->getValidator()->setAllowedMaxFileSize($size);
 		$DocumentField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
+		$DocumentField->setRecordClass('File');
 
 		$ImageField = new CustomUploadField('Image', 'Image');
 		$ImageField->setCanAttachExisting(false);
@@ -58,6 +59,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$ImageField->setAllowedFileCategories('image');
 		$ImageField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
 		$ImageField->setFolderName('news-images');
+		$ImageField->setRecordClass('BetterImage');
 		$sizeMB = 1; // 1 MB
 		$size = $sizeMB * 1024 * 1024; // 1 MB in bytes
 		$ImageField->getValidator()->setAllowedMaxFileSize($size);
@@ -130,8 +132,7 @@ final class NewsRequestForm extends HoneyPotForm {
             $fields->push(new LiteralField('break', '<br/>'));
             $fields->push($ImageField);
             if ($image->exists()) {
-                $fields->push(new LiteralField('break', '<br/>'));
-                $fields->push(new LiteralField('image_preview', $image->getFormattedImage('croppedimage',150,100)));
+	            $ImageField->setValue(null,$article);
             }
         } else {
             $fields->push(new LiteralField('break', '<br/>'));

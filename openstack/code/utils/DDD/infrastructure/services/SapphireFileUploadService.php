@@ -12,50 +12,22 @@
  * limitations under the License.
  **/
 final class SapphireFileUploadService implements IFileUploadService {
-
 	/**
-	 * Upload object (needed for validation
-	 * and actually moving the temporary file
-	 * created by PHP).
-	 *
-	 * @var Upload
-	 */
-	protected $upload;
-
-	/**
-	 * @var string
-	 */
-	private $folder_name;
-
-
-	public function __construct(){
-		$this->upload = new Upload();
-	}
-
-	/**
-	 * @param string $folder_name
-	 */
-	public function setFolderName($folder_name){
-		$this->folder_name = $folder_name;
-	}
-
-	/**
-	 * @param string  $file_name
+	 * @param array $file_ids
+	 * @param string  $fieldname
 	 * @param IEntity $entity
-	 * @return IEntity
+	 * @return void
 	 */
-	public function upload($file_name, IEntity $entity){
-		if(!isset($_FILES[$file_name])) return false;
+	public function upload(array $file_ids, $fieldname, IEntity $entity){
 		// assume that the file is connected via a has-one
-		$hasOnes = $entity->has_one($file_name);
+		$relation = $entity->hasMethod($fieldname) ? $entity->$fieldname() : null;
 		// try to create a file matching the relation
-		$file = (is_string($hasOnes)) ? Object::create($hasOnes) : new File();
-		$this->upload->loadIntoFile($_FILES[$file_name], $file, $this->folder_name);
-		if($this->upload->isError()) return false;
-		$file = $this->upload->getFile();
-		if(!$hasOnes) return false;
-		// save to record
-		$entity->{$file_name . 'ID'} = $file->ID;
-		return $file;
+		if($relation && ($relation instanceof RelationList || $relation instanceof UnsavedRelationList)) {
+			// has_many or many_many
+			$relation->setByIDList($file_ids);
+		} elseif($entity->has_one($fieldname)) {
+			// has_one
+			$entity->{"{$fieldname}ID"} = $file_ids ? reset($file_ids) : 0;
+		}
 	}
 } 

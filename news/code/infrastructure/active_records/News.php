@@ -37,8 +37,8 @@ final class News extends DataObject implements INews {
 
     static $has_one = array(
         'Submitter' => 'Submitter',
-        'Document' => 'File',
-        'Image' => 'BetterImage',
+        'Document'  => 'File',
+        'Image'     => 'BetterImage',
     );
 
     static $many_many = array(
@@ -155,13 +155,12 @@ final class News extends DataObject implements INews {
     }
 
 	/**
+	 * @param array $file_ids
 	 * @param IFileUploadService $upload_service
 	 */
-	public function registerImage(IFileUploadService $upload_service)
+	public function registerImage(array $file_ids,IFileUploadService $upload_service)
 	{
-		$upload_service->setFolderName('news-images');
-		$image = $upload_service->upload('Image', $this);
-		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->setTarget($image);
+		$upload_service->upload($file_ids,'Image', $this);
 	}
 
     public function getImage()
@@ -170,13 +169,12 @@ final class News extends DataObject implements INews {
     }
 
     /**
+     * @param array $file_ids
      * @param IFileUploadService $upload_service
      */
-    public function registerDocument(IFileUploadService $upload_service)
+    public function registerDocument(array $file_ids, IFileUploadService $upload_service)
     {
-        $upload_service->setFolderName('news-documents');
-        $document = $upload_service->upload('Document', $this);
-        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Document')->setTarget($document);
+        $upload_service->upload($file_ids,'Document', $this);
     }
 
     public function registerSection($section)

@@ -37,6 +37,10 @@ final class CustomUploadField extends UploadField {
 	);
 
 	/**
+	 * @var string
+	 */
+	private $record_class;
+	/**
 	 * Action to handle upload of a single file
 	 *
 	 * @param SS_HTTPRequest $request
@@ -72,4 +76,22 @@ final class CustomUploadField extends UploadField {
 		if (!empty($return['error'])) $response->setStatusCode(200);
 		return $response;
 	}
+
+	/**
+	 * Gets the foreign class that needs to be created, or 'File' as default if there
+	 * is no relationship, or it cannot be determined.
+	 *
+	 * @param $default Default value to return if no value could be calculated
+	 * @return string Foreign class name.
+	 */
+	public function getRelationAutosetClass($default = 'File') {
+		if(empty($this->record_class))
+			return parent::getRelationAutosetClass($default);
+		return $this->record_class;
+	}
+
+	public function setRecordClass($record_class){
+		$this->record_class = $record_class;
+	}
+
 } 

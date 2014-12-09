@@ -15,15 +15,12 @@
  * Interface IFileUploadService
  */
 interface IFileUploadService {
-	/**
-	 * @param string $folder_name
-	 */
-	public function setFolderName($folder_name);
 
 	/**
+	 * @param array $file_ids
 	 * @param string  $file_name
 	 * @param IEntity $entity
-	 * @return IEntity
+	 * @return void
 	 */
-	public function upload($file_name, IEntity $entity);
+	public function upload(array $file_ids, $file_name, IEntity $entity);
 } 
