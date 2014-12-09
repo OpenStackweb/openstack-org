@@ -23,12 +23,12 @@ final class NewsRequestForm extends HoneyPotForm {
 		$SummaryField = new TextareaField('summary','Summary',2,2);
         $CityField = new TextField('city','City');
         $StateField = new TextField('state','State');
-        $CountryField = new TextField('country','Country');
+        $CountryField = new CountryDropdownField('country','Country');
 		$TagsField = new TextField('tags','Tags');
 		$DateField = new TextField('date','Date of Article/Release');
         $DateField->addExtraClass('date inline');
         if ($is_manager) {
-            $DateEmbargoField = new TextField('date_embargo','Embargo <br> Date');
+            $DateEmbargoField = new TextField('date_embargo','Embargo Date');
             $DateEmbargoField->addExtraClass('date inline');
             $DateExpireField = new TextField('date_expire','Expire Date');
             $DateExpireField->addExtraClass('date');
@@ -39,10 +39,12 @@ final class NewsRequestForm extends HoneyPotForm {
         //optional fields
         $BodyField = new TextareaField('body','Body');
         $LinkField = new TextField('link','Link');
-        $DocumentField = new UploadField('Document','Document');
+        $DocumentField = new FileField('Document','Document');
         $DocumentField->addExtraClass('hidden');
-        $ImageField = new UploadField('Image', 'Image');
+        $ImageField = new FileField('Image', 'Image');
         $ImageField->getValidator()->setAllowedExtensions(array('jpg', 'gif', 'png'));
+        //$ImageField->setAllowedFileCategories('image');
+        //$ImageField->setConfig('allowedMaxFileNumber', 1);
 
         if($article) {
             $IDField->setValue($article->ID);

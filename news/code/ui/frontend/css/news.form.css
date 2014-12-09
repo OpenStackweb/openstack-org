@@ -69,3 +69,20 @@ span.message.bad {
     padding-left: 5px;
     padding-top: 10px;
 }
+
+#NewsRequestForm_NewsRequestForm_country {
+    width: 300px;
+    height: 32px;
+    margin-bottom: 8px;
+}
+
+input.date {
+    width: 116px !important;
+    margin: 0 auto;
+    margin-left: 5px;
+}
+
+div.date, #date_updated {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
