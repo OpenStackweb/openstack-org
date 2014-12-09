@@ -1,5 +1,5 @@
 <div class="grey-bar news">
-    <div class="container">
+    <div>
         <div class="row">
             <% if CurrentMember %>
                 <% if CurrentMember.isNewsManager %>
@@ -49,7 +49,7 @@
 </div>
 
 
-<div class="container">
+<div>
     <div class="row">
         <div class="newsFeatured">
             <div class="col-lg-12">
