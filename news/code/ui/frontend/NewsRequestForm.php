@@ -61,6 +61,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$sizeMB = 1; // 1 MB
 		$size = $sizeMB * 1024 * 1024; // 1 MB in bytes
 		$ImageField->getValidator()->setAllowedMaxFileSize($size);
+
 		$ImageField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 
         if($article) {
