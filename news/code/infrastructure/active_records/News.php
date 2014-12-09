@@ -164,6 +164,11 @@ final class News extends DataObject implements INews {
 		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->setTarget($image);
 	}
 
+    public function getImage()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->getTarget();
+    }
+
     /**
      * @param IFileUploadService $upload_service
      */

@@ -47,7 +47,7 @@
 #slider_sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; float: left; }
 #slider_sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 180px; height: 275px;}
 #slider_sortable .placeholder_empty {height:283px;}
-#slider_sortable .placeholder {height:283px;}
+#slider_sortable .placeholder {height:274px;}
 
 .newsFeatured {
     width: 100%;
@@ -65,7 +65,7 @@
 #featured_sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; float: left; }
 #featured_sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 150px; height: 275px;}
 #featured_sortable .placeholder_empty {height:283px;}
-#featured_sortable .placeholder {height:283px;}
+#featured_sortable .placeholder {height:274px;}
 
 
 .newsRecent {

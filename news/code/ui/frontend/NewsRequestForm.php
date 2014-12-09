@@ -39,9 +39,10 @@ final class NewsRequestForm extends HoneyPotForm {
         //optional fields
         $BodyField = new TextareaField('body','Body');
         $LinkField = new TextField('link','Link');
-        $DocumentField = new FileField('Document','Document');
+        $DocumentField = new UploadField('Document','Document');
         $DocumentField->addExtraClass('hidden');
-        $ImageField = new CustomSimpleImageField('Image', 'Image');
+        $ImageField = new UploadField('Image', 'Image');
+        $ImageField->getValidator()->setAllowedExtensions(array('jpg', 'gif', 'png'));
 
         if($article) {
             $IDField->setValue($article->ID);
