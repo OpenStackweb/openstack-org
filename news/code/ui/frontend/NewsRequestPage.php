@@ -72,11 +72,12 @@ final class NewsRequestPage_Controller extends Page_Controller {
         if(is_array($data)) {
             $form->loadDataFrom($data);
         }
-        // Optional spam protection
+	    // Optional spam protection
         if(class_exists('SpamProtectorManager')) {
             SpamProtectorManager::update_form($form);
         }
-        return $form;
+
+	       return $form;
     }
 
     private function commonScripts(){

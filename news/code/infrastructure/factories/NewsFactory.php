@@ -35,15 +35,14 @@ final class NewsFactory
         }
 		//create image object
         $image_info = $info->getImage();
-		if($image_info['size']){
-			$news->registerImage($upload_service);
+		if(!empty($image_info['Files'])){
+			$news->registerImage($image_info['Files'],$upload_service);
 		}
         //create image object
         $document_info = $info->getDocument();
-        if($document_info['size']){
-            $news->registerDocument($upload_service);
-        }
-
+     	if(!empty($document_info['Files'])){
+			$news->registerDocument($document_info['Files'],$upload_service);
+		}
 		return $news;
 	}
 

@@ -33,14 +33,16 @@ interface INews extends IEntity {
     public function clearTags();
 
 	/**
+	 * @param array $file_ids
 	 * @param IFileUploadService $upload_service
 	 */
-	public function registerImage(IFileUploadService $upload_service);
+	public function registerImage(array $file_ids, IFileUploadService $upload_service);
 
     /**
+     * @param array $file_ids
      * @param IFileUploadService $upload_service
      */
-    public function registerDocument(IFileUploadService $upload_service);
+    public function registerDocument(array $file_ids, IFileUploadService $upload_service);
 
     /**
      * @param NewsSubmitter $submitter
