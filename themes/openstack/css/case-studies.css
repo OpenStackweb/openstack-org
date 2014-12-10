@@ -265,3 +265,7 @@ ul#quotes li p {
   font-size: 92%;
   margin: -1.5em 0 0.7em;
 }
+
+.top12 {
+    padding-top: 20px !important;
+}

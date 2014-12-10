@@ -1,4 +1,4 @@
-			<div class="span-12">
+			<div class="span-12 top12">
 			
 				<h1>$Title</h1>
 				$Content
