@@ -162,10 +162,10 @@ class JobPage
 
     public function getMoreInfoLink() {
         if(filter_var($this->JobMoreInfoLink, FILTER_VALIDATE_EMAIL)) {
-            return "mailto:".$this->JobMoreInfoLink;
+            return '<a rel="nofollow" href="mailto:'.$this->JobMoreInfoLink.'" >More About This Job</a>';
         }
         else {
-            return $this->JobMoreInfoLink;
+            return '<a rel="nofollow" href="'.$this->JobMoreInfoLink.'" target="_blank" >More About This Job</a>';
         }
     }
 

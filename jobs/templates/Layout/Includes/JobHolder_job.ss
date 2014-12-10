@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="moreInfo">
-                        <span class="label">More information: </span><a rel="nofollow" href="$MoreInfoLink" target="_blank">More About This Job</a>
+                        <span class="label">More information: </span>$MoreInfoLink
                     </div>
                 </div>
                 <div class="col-md-2">
