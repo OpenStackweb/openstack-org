@@ -94,4 +94,10 @@ final class CustomUploadField extends UploadField {
 		$this->record_class = $record_class;
 	}
 
+	public function Field($properties = array()) {
+		$res = parent::Field($properties);
+		Requirements::css('themes/openstack/css/custom.uploadfield.css');
+		Requirements::javascript('themes/openstack/javascript/custom.uploadfield.js');
+		return $res;
+	}
 } 
