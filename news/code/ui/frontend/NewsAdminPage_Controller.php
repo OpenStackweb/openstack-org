@@ -75,7 +75,9 @@ final class NewsAdminPage_Controller extends Page_Controller {
         $standby_news = $this->news_repository->getStandByNews();
 
         return $this->renderWith(array('NewsAdminPage','Page'), array('RecentNews' => new ArrayList($recent_news),
-                                                                      'StandByNews' => new ArrayList($standby_news)));
+                                                                      'RecentCount' => count($recent_news),
+                                                                      'StandByNews' => new ArrayList($standby_news),
+                                                                      'StandByCount' => count($standby_news)));
     }
 
     public function getSliderNews() {

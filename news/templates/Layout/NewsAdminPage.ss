@@ -25,28 +25,32 @@
     <div class="newsRecent">
         <h3>Recent News</h3>
         <ul id="recent_sortable" class="connected">
-            <% loop  RecentNews %>
-                <li>
-                    <div class="recentBox">
-                        <input type="hidden" class="article_id" value="$ID" />
-                        <input type="hidden" class="article_rank" value="$Rank" />
-                        <input type="hidden" class="article_type" value="recent" />
-                        <div class="newsImage">
-                            <% if Link %>
-                                <a href="$Link">$Image.CroppedImage(200,100)</a>
-                            <% else %>
-                                $Image.CroppedImage(200,100)
-                            <% end_if %>
+            <% if RecentCount %>
+                <% loop  RecentNews %>
+                    <li>
+                        <div class="recentBox">
+                            <input type="hidden" class="article_id" value="$ID" />
+                            <input type="hidden" class="article_rank" value="$Rank" />
+                            <input type="hidden" class="article_type" value="recent" />
+                            <div class="newsImage">
+                                <% if Link %>
+                                    <a href="$Link">$Image.CroppedImage(200,100)</a>
+                                <% else %>
+                                    $Image.CroppedImage(200,100)
+                                <% end_if %>
+                            </div>
+                            <div class="newsText">
+                                <p class="headline">&ldquo;$Headline&rdquo;</p>
+                                <p class="summary">&mdash; $Summary</p>
+                            </div>
+                            <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
+                            <div class="newsRemove">Remove</div>
                         </div>
-                        <div class="newsText">
-                            <p class="headline">&ldquo;$Headline&rdquo;</p>
-                            <p class="summary">&mdash; $Summary</p>
-                        </div>
-                        <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
-                        <div class="newsRemove">Remove</div>
-                    </div>
-                </li>
-            <% end_loop %>
+                    </li>
+                <% end_loop %>
+            <% else %>
+                <li class="placeholder_empty">Drop<br> here</li>
+            <% end_if %>
         </ul>
     </div>
     <div class="clear"></div>
