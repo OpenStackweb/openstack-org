@@ -44,9 +44,11 @@ jQuery(document).ready(function($){
             onfocusout: true,
             focusCleanup: true,
             rules: {
-                submitter_phone:{required: true, phoneUS:true}
-                //date  : {required: true, dpDate: true},
-                //date_embargo    : {required: true, dpDate: true, dpCompareDate:'ge #NewsRequestForm_NewsRequestForm_date'}
+                submitter_phone:{required: true, phoneUS:true},
+                headline:{required: true},
+                summary:{required: true},
+                tags:{required: true},
+                date:{required: true},
             },
             messages: {
                 submitter_phone:{
@@ -73,25 +75,7 @@ jQuery(document).ready(function($){
                 error.insertAfter(element);
             }
         });
-        // initialize widgets
 
-        /*var date_picker_date = $('#NewsRequestForm_NewsRequestForm_date',form);
-        date_picker_date.datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: 0
-        });
-
-        var date_picker_emabargo = $('#NewsRequestForm_NewsRequestForm_date_embargo',form);
-        date_picker_emabargo.datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: 0
-        });
-
-        var date_picker_expire = $('#NewsRequestForm_NewsRequestForm_date_expire',form);
-        date_picker_expire.datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: 0
-        });*/
     }
 
 });
