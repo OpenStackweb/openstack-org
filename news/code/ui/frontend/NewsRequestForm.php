@@ -158,10 +158,8 @@ final class NewsRequestForm extends HoneyPotForm {
 		$actions = new FieldList();
 	    $actions->push(new FormAction('saveNewsArticle', 'Save'));
 
-		// Create validators
-		$validator = new ConditionalAndValidationRule(array(new RequiredFields('headline','summary','tags','date')));
 	    $this->addExtraClass('news-registration-form');
-		parent::__construct($controller, $name, $fields, $actions, $validator);
+		parent::__construct($controller, $name, $fields, $actions, $validator = null);
 	}
 
 	function forTemplate() {

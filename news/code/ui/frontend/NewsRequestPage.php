@@ -89,6 +89,8 @@ final class NewsRequestPage_Controller extends Page_Controller {
     function saveNewsArticle($data, Form $form){
 
         try{
+	        $form->clearMessage();
+	        $form->resetValidation();
             if ($data['newsID']) {
                 $this->manager->updateNews($data);
             } else {
@@ -108,7 +110,7 @@ final class NewsRequestPage_Controller extends Page_Controller {
             return $this->redirectBack();
         }
         catch(Exception $ex){
-            $form->addErrorMessage('Headline','Server Error','bad');
+	        $form->addErrorMessage('Headline','Server Error','bad');
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             // Load errors into session and post back
             Session::set("FormInfo.Form_NewsRequestForm.data", $data);
