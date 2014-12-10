@@ -4,7 +4,11 @@
         <input type="hidden" class="article_rank" value="$Rank" />
         <input type="hidden" class="article_type" value="featured" />
         <div class="newsImage">
-            <a href="$Link">$Image.CroppedImage(200,100)</a>
+            <% if Link %>
+                <a href="$Link">$Image.CroppedImage(200,100)</a>
+            <% else %>
+                $Image.CroppedImage(200,100)
+            <% end_if %>
         </div>
         <div class="newsText">
             <p class="headline">&ldquo;$Headline&rdquo;</p>

@@ -85,7 +85,8 @@ final class NewsAdminPage_Controller extends Page_Controller {
 
         foreach ($slide_news as $slide_article) {
             $counter++;
-            $data = array('Id'=>$slide_article->Id,'Rank'=>$slide_article->Rank,'Link'=>$slide_article->Link,
+            $link = ($slide_article->Link) ? $slide_article->Link : '';
+            $data = array('Id'=>$slide_article->Id,'Rank'=>$slide_article->Rank,'Link'=>$link,
                           'Image'=>$slide_article->getImage(),'Headline'=>$slide_article->Headline,'Summary'=>$slide_article->Summary);
             $output .= $slide_article->renderWith('NewsAdminPage_slider', $data);
         }
@@ -104,7 +105,8 @@ final class NewsAdminPage_Controller extends Page_Controller {
 
         foreach ($featured_news as $featured_article) {
             $counter++;
-            $data = array('Id'=>$featured_article->Id,'Rank'=>$featured_article->Rank,'Link'=>$featured_article->Link,
+            $link = ($featured_article->Link) ? $featured_article->Link : '';
+            $data = array('Id'=>$featured_article->Id,'Rank'=>$featured_article->Rank,'Link'=>$link,
                           'Image'=>$featured_article->getImage(),'Headline'=>$featured_article->Headline,'Summary'=>$featured_article->Summary);
             $output .= $featured_article->renderWith('NewsAdminPage_featured', $data);
         }
