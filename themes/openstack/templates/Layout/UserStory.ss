@@ -1,6 +1,5 @@
 <% require themedCSS(case-studies) %>
-
-			<div class="span-12">
+			<div class="span-12 top12">
 				<p class="breadcrumb"><a href="$Parent.Link">&laquo; Back to $Parent.Title</a></p>
 				<h1>$CaseStudyTitle</h1>
 				$CaseStudyBody

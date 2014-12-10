@@ -35,6 +35,7 @@ final class SangriaPageViewCurrentStoriesExtension extends Extension {
 
 	// Update Stories Industry and Order
 	function UpdateStories(){
+
 		foreach($_POST['industry'] as $story_id => $industry){
 			$story = SiteTree::get_by_id("UserStory",$story_id);
 			$story->UserStoriesIndustryID = $industry;
@@ -43,10 +44,11 @@ final class SangriaPageViewCurrentStoriesExtension extends Extension {
 			$story->Title = $_POST['title'][$story_id];
 			$story->ShowVideo = ($_POST['video'][$story_id])? true : false;
 			$story->write();
-			$story->publish("Live","Stage");
 		}
 
 		$this->owner->setMessage('Success', 'User Stories saved.');
+
+		$this->owner->redirectBack();
 	}
 
 	function SetAdminSS() {
@@ -72,7 +74,7 @@ final class SangriaPageViewCurrentStoriesExtension extends Extension {
 
 		$this->owner->setMessage('Success', '<b>' . $story->Title . '</b> updated.');
 
-		Controller::curr()->redirectBack();
+		$this->owner->redirectBack();
 	}
 
 	function UserStoriesIndustries(){
