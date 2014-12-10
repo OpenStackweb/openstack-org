@@ -41,7 +41,7 @@ jQuery(document).ready(function($){
         }, "Please specify a valid phone number (ie 333-333-4444)");
 
         form_validator = form.validate({
-            onfocusout: false,
+            onfocusout: true,
             focusCleanup: true,
             rules: {
                 submitter_phone:{required: true, phoneUS:true}
