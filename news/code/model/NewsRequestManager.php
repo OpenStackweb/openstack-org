@@ -122,7 +122,7 @@ final class NewsRequestManager {
         $upload_service       = $this->upload_service;
 
 		return $this->tx_manager->transaction(function() use($data, $repository, $validator_factory, $factory, $upload_service){
-			$validator = $validator_factory->buildValidatorForNews($data);
+			$validator = $validator_factory->buildValidatorForNewsUpdate($data);
 			if ($validator->fails()) {
 				throw new EntityValidationException($validator->messages());
 			}
@@ -136,13 +136,13 @@ final class NewsRequestManager {
             $news->registerMainInfo($news_main_info);
             //create image object
             $image_info = $news_main_info->getImage();
-            if($image_info['size']){
-                $news->registerImage($upload_service);
+            if(!empty($image_info['Files'])){
+                $news->registerImage($image_info['Files'],$upload_service);
             }
             //create image object
             $document_info = $news_main_info->getDocument();
-            if($document_info['size']){
-                $news->registerDocument($upload_service);
+            if(!empty($document_info['Files'])){
+                $news->registerDocument($document_info['Files'],$upload_service);
             }
 
             $news->clearTags();

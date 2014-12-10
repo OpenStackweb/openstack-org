@@ -17,6 +17,7 @@
 final class NewsRequestForm extends HoneyPotForm {
 
 	function __construct($controller, $name, $article = null, bool $is_manager, $use_actions = true) {
+
         $IDField = new HiddenField('newsID');
 		//madatory fields
 		$HeadlineField = new TextField('headline','Headline');
@@ -26,15 +27,15 @@ final class NewsRequestForm extends HoneyPotForm {
         $CountryField = new CountryDropdownField('country','Country');
 		$TagsField = new TextField('tags','Tags');
 		$DateField = new TextField('date','Date of Article/Release');
-        $DateField->addExtraClass('date inline');
+        $DateField->addExtraClass('datefield inline');
         if ($is_manager) {
             $DateEmbargoField = new TextField('date_embargo','Embargo Date');
-            $DateEmbargoField->addExtraClass('date inline');
+            $DateEmbargoField->addExtraClass('datefield inline');
             $DateExpireField = new TextField('date_expire','Expire Date');
-            $DateExpireField->addExtraClass('date');
+            $DateExpireField->addExtraClass('datefield');
         }
 
-        $UpdatedField = new DatetimeField_Readonly('date_updated','Last <br> Updated');
+        $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
         $UpdatedField->addExtraClass('inline');
         //optional fields
         $BodyField = new TextareaField('body','Body');
@@ -53,15 +54,15 @@ final class NewsRequestForm extends HoneyPotForm {
 		$DocumentField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 		$DocumentField->setRecordClass('File');
 
-		$ImageField = new CustomUploadField('Image', 'Image');
+		$ImageField = new CustomUploadField('Image', 'Image (max size 2Mb)');
 		$ImageField->setCanAttachExisting(false);
 		$ImageField->setAllowedMaxFileNumber(1);
 		$ImageField->setAllowedFileCategories('image');
 		$ImageField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
 		$ImageField->setFolderName('news-images');
 		$ImageField->setRecordClass('BetterImage');
-		$sizeMB = 1; // 1 MB
-		$size = $sizeMB * 1024 * 1024; // 1 MB in bytes
+		$sizeMB = 2; // 2 MB
+		$size = $sizeMB * 1024 * 1024; // 2 MB in bytes
 		$ImageField->getValidator()->setAllowedMaxFileSize($size);
 
 		$ImageField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field

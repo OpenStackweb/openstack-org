@@ -60,6 +60,35 @@ final class NewsValidationFactory
 		return ValidatorService::make($data, $rules, $messages);
 	}
 
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForNewsUpdate(array $data){
+
+        $rules = array(
+            'headline'              => 'required|text|max:100',
+            'date'                  => 'required|date',
+            'summary'               => 'required|htmltext',
+            'tags'                  => 'required|text',
+        );
+
+        $messages = array(
+            'headline.required'        => ':attribute is required',
+            'headline.text'            => ':attribute should be valid text.',
+            'headline.max'             => ':attribute should have less than 100 chars.',
+            'date.required'            => ':attribute is required',
+            'date.date'                => ':attribute should be a valid date.',
+            'summary.required'         => ':attribute is required',
+            'summary.htmltext'         => ':attribute should be valid text.',
+            'tags.required'            => ':attribute is required',
+            'tags.text'                => ':attribute should be valid text.',
+        );
+
+        return ValidatorService::make($data, $rules, $messages);
+    }
+
+
 	/**
 	 * @param array $data
 	 * @return IValidator

@@ -76,13 +76,12 @@ span.message.bad {
     margin-bottom: 8px;
 }
 
-input.date {
-    width: 116px !important;
+input.datefield {
+    width: 130px !important;
     margin: 0 auto;
     margin-left: 5px;
 }
 
-div.date, #date_updated {
-    margin-bottom: 15px;
-    margin-top: 15px;
+div.datefield, #date_updated {
+    margin: 15px 15px 15px 0;
 }
