@@ -22,14 +22,14 @@ if(!$conn) {
 	ob_clean();
 	$maintenance_page = file_get_contents(getcwd(). '/../maintenance/index.html');
 	echo $maintenance_page;
-	header("HTTP/1.0 500 Server Error");
+	header("HTTP/1.0 502 Bad Gateway");
 	exit();
 }
 if(!mysql_select_db($database, $conn)){
 	ob_clean();
 	$maintenance_page = file_get_contents(getcwd(). '/../maintenance/index.html');
 	echo $maintenance_page;
-	header("HTTP/1.0 500 Server Error");
+	header("HTTP/1.0 502 Bad Gateway");
 	exit();
 }
 mysql_close($conn);
