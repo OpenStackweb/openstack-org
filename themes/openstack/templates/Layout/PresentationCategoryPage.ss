@@ -88,7 +88,7 @@
 				<li role="presentation"><a role="menuitem" tabindex="-1" href="{$Top.Link}#keynotes">Keynote Presentations</a></li>
 
 
-				<% loop  Presentations.GroupedBy(PresentationDay) %>
+				<% loop  GroupedPresentations.GroupedBy(PresentationDay) %>
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="{$Top.Link}#day-{$Pos}">$PresentationDay</a></li>
 				<% end_loop %>
 

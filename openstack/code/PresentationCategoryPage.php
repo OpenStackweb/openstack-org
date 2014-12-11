@@ -188,4 +188,9 @@ class PresentationCategoryPage_Controller extends Page_Controller
 		echo "Presentation URLS updated.";
 	}
 
+    public function GroupedPresentations(){
+
+        return GroupedList::create($this->Presentations()->sort('StartTime'));
+    }
+
 }
