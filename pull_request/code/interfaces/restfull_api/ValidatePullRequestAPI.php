@@ -52,10 +52,16 @@ class ValidatePullRequestAPI extends AbstractRestfulJsonApi  {
 		$git_hub_event_header     = $request->getHeader('X-Github-Event');
 		$git_hub_signature_header = $request->getHeader('X-Hub-Signature');
 		$res = false;
-		if($git_hub_event_header == 'pull_request')
+		if($git_hub_event_header == 'pull_request' || $git_hub_event_header=='ping')
 			$res = true;
 		return $res;
 	}
+
+    protected function isPullRequestEvent(){
+        $request                  = $this->request;
+        $git_hub_event_header     = $request->getHeader('X-Github-Event');
+        return ($git_hub_event_header == 'pull_request');
+    }
 
 	/**
 	 * @var array
@@ -75,7 +81,7 @@ class ValidatePullRequestAPI extends AbstractRestfulJsonApi  {
 		$data = $this->getJsonRequest();
 		try{
 
-			if( $data != null &&
+			if( $this->isPullRequestEvent() && $data != null &&
 				isset($data['action']) &&
 				($data['action']=='opened' || $data['action']=='reopened') &&
 				isset($data['pull_request']) &&
