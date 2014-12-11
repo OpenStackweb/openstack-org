@@ -212,7 +212,9 @@ a.main-video:hover .video-description-wrapper .video-description p {
   float: right;
   font-size: 12px;
   text-transform: uppercase;
-  font-weight: 600; }
+  font-weight: 600;
+  padding-right: 15px;
+}
 
 .sort-right i {
   margin-left: 10px;

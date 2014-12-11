@@ -1,6 +1,6 @@
 <div class="container">
   <!-- Start Videos -->
-      <% loop Presentations.GroupedBy(PresentationDay) %>
+      <% loop GroupedPresentations.GroupedBy(PresentationDay) %>
               <div class="row">
                 <div class="col-lg-12">
                   <h2 id="day-{$Pos}">$PresentationDay</h2>
