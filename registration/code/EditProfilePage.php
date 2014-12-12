@@ -122,11 +122,11 @@ class EditProfilePage_Controller extends Page_Controller
             // check for duplicates
             $dupe_members = Member::get()->filter(array('FirstName'=>$CurrentMember->FirstName,'Surname'=>$CurrentMember->Surname))->exclude(array('Email'=>$CurrentMember->Email));
 
-            if ($dupe_members) {
+            if ($dupe_members->count()) {
                 $message = 'We currently show there are two additional accounts with your First & Last Name. If one of these accounts is yours, please log in to delete the duplicate account:<br>';
                 $members_emails = '';
                 foreach ($dupe_members as $dupe_mem) {
-                    $members_emails .= preg_replace('/(?<=.).(?=.*.@)/u','*',$dupe_mem->Email).', ';
+                    $members_emails .= preg_replace('/(?<=.).(?=.+@)|(?<!@)(?<=.).(?<!@)(?!@)(?=.+\.)/u','*',$dupe_mem->Email).', ';
                 }
                 $members_emails = substr($members_emails, 0, -2);
                 $this->setMessage('Error',$message.$members_emails);

@@ -158,7 +158,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         //Check for existing member name
         $res = false;
         if ($member = Member::get()->filter(array('FirstName'=>$first_name,'Surname'=>$last_name))->first()) {
-            $address = preg_replace('/(?<=.).(?=.*.@)/u','*',$member->Email);
+            $address = preg_replace('/(?<=.).(?=.+@)|(?<!@)(?<=.).(?<!@)(?!@)(?=.+\.)/u','*',$member->Email);
             print '"We already have a user with that name. If your email is '.$address.' log in and update your contact info."';
         } else {
             echo json_encode(true);
