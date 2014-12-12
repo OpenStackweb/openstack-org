@@ -153,14 +153,16 @@ class DeploymentSurveyPage_Controller extends Page_Controller
     public function CheckName()
     {
         $first_name = Convert::raw2sql($this->request->getVar('FirstName'));
-        $last_name = Convert::raw2sql($this->request->getVar('LastName'));
+        $last_name = Convert::raw2sql($this->request->getVar('Surname'));
 
         //Check for existing member name
-        $res = true;
+        $res = false;
         if ($member = Member::get()->filter(array('FirstName'=>$first_name,'Surname'=>$last_name))->first()) {
-            $res = false;
+            $address = preg_replace('/(?<=.).(?=.*.@)/u','*',$member->Email);
+            print '"We already have a user with that name. If your email is '.$address.' log in and update your contact info."';
+        } else {
+            echo json_encode(true);
         }
-        echo json_encode($res);
     }
 
 	function init()

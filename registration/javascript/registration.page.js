@@ -64,15 +64,11 @@ jQuery(document).ready(function($) {
             }
         },'Please specify your gender.');
 
-        jQuery.validator.addMethod(
-            "regex",
-            function(value, element, regexp) {
+        jQuery.validator.addMethod('regex',function(value, element, regexp) {
                 var re = new RegExp(regexp,'g');
                 var res =  re.test(value);
                 return !res;
-            },
-            "Please check your input."
-        );
+            },'Please check your input.');
 
         registration_form.validate({
             onfocusout: false,
@@ -88,8 +84,11 @@ jQuery(document).ready(function($) {
             },
             ignore: [],
             rules: {
-                FirstName:{required: true,regex:'[\"()=<>]+' },
-                Surname:{required: true,regex:'[\"()=<>]+'},
+                FirstName:{required: true,regex:'[\"()=<>]+'},
+                Surname:{required: true,regex:'[\"()=<>]+',remote: {
+                    url: '/DeploymentSurveyPage_Controller/CheckName',
+                    data: {FirstName: function() {return $('input[name=FirstName]').val();} }
+                }},
                 Email: {required: true,email: true, remote: '/DeploymentSurveyPage_Controller/CheckEmail'},
                 StatementOfInterest:{required: true},
                 Address:{required: true},
