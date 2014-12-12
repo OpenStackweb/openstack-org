@@ -159,7 +159,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         $res = false;
         if ($member = Member::get()->filter(array('FirstName'=>$first_name,'Surname'=>$last_name))->first()) {
             $address = preg_replace('/(?<=.).(?=.*.@)/u','*',$member->Email);
-            print '"We already have a user with that name."';
+            print '"We already have a user with that name. If your email is '.$address.' log in and update your contact info."';
         } else {
             echo json_encode(true);
         }
@@ -205,7 +205,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
 		if (!Member::currentUser()) {
 
 			// These are the actions available to non-logged in members
-			$nonLoggedInAvailablActions = array('Login', 'MemberStart', 'StartSurvey', 'DeploymentSurveyRegistrationForm', 'RegisterForm', 'faq', 'CheckEmail');
+			$nonLoggedInAvailablActions = array('Login', 'MemberStart', 'StartSurvey', 'DeploymentSurveyRegistrationForm', 'RegisterForm', 'faq', 'CheckEmail', 'CheckName');
 
 			if (!in_array($this->request->param('Action'), $nonLoggedInAvailablActions)) {
 				$this->redirect($this->Link() . 'Login');
