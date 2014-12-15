@@ -137,6 +137,10 @@ class JobPage
 		$this->Active = 0;
 	}
 
+    public function toggleFoundation() {
+        $this->FoundationJob = !$this->FoundationJob;
+    }
+
 
 	/**
 	 * @return IJobLocation[]

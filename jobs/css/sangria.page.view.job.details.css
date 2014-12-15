@@ -1,4 +1,4 @@
-#job-registration-requests-table{
+#job-registration-requests-table,#posted-jobs-table{
     border: 1px solid #ccc;
     border-collapse:collapse;
     clear:both
@@ -7,4 +7,16 @@
 
 #job-registration-requests-table thead th {
     background: none repeat scroll 0 0 #FFFFFF;
+}
+
+#posted-jobs-table thead th {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+
+#posted-jobs-table .title {
+    max-width: 150px;
+}
+
+#posted-jobs-table .post-date {
+    width: 70px;
 }
