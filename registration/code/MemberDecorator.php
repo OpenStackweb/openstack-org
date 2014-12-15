@@ -198,7 +198,7 @@ class MemberDecorator extends DataExtension {
 		}
 		else{
 
-			$affiliations->innerJoin('Org','Org.ID = Affiliation.OrganizationID','O');
+            $affiliations = $affiliations->innerJoin('Org','O.ID = Affiliation.OrganizationID','O');
 			$affiliations = $affiliations->filter(array(
 				'O.Name' => $org
 			));
