@@ -164,43 +164,24 @@ final class JobRegistrationRequestManager {
 		return $job;
 	}
 
-	public function rejectJobRegistration($id, array $data, $jobs_link){
-		$this_var           = $this;
-		$validator_factory  = $this->validator_factory;
-		$repository         = $this->repository;
+    /**
+     * @param $id
+     * @return IJob
+     */
+    public function toggleFoundationJob($id){
+        $jobs_repository          = $this->jobs_repository;
 
-		return  $this->tx_manager->transaction(function() use ($this_var, $id, $data, $validator_factory, $repository, $jobs_link){
+        $job =  $this->tx_manager->transaction(function() use ($id, $jobs_repository){
+            $job = $jobs_repository->getById($id);
+            if(!$job) throw new NotFoundEntityException('JobPage',sprintf('id %s',$id ));
+            $job->toggleFoundation();
 
-			$validator = $validator_factory->buildValidatorForJobRejection($data);
-			if ($validator->fails()) {
-				throw new EntityValidationException($validator->messages());
-			}
+            return $job;
+        });
 
-			$request = $repository->getById(intval($id));
-			if(!$request)
-				throw new NotFoundEntityException('JobRegistrationRequest',sprintf('id %s',$id ));
 
-			$request->markAsRejected();
-
-			if(@$data['send_rejection_email']){
-				//send rejection message
-				$point_of_contact = $request->getPointOfContact();
-				$name_to  = $point_of_contact->getName();
-				$email_to = $point_of_contact->getEmail();
-				if(empty($name_to)  || empty($email_to ))
-					throw new EntityValidationException(array(array('message'=>'invalid point of contact')));
-
-				$email = EmailFactory::getInstance()->buildEmail(JOB_REGISTRATION_REQUEST_EMAIL_FROM, $email_to, "Your Recent OpenStack Job Submission");
-				$email->setTemplate('JobRegistrationRequestRejectedEmail');
-				$email->populateTemplate(array(
-					'JobLink'         => $jobs_link,
-					'JobEmailFrom'   => JOB_REGISTRATION_REQUEST_EMAIL_FROM,
-					'AdditionalComment' => @$data['custom_reject_message']
-				));
-				$email->send();
-			}
-		});
-	}
+        return $job;
+    }
 
 	/**
 	 * @param int $batch_size

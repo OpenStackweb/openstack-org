@@ -17,15 +17,17 @@
 final class SangriaPageJobsExtension extends Extension {
 
 	private $repository;
+    private $live_repository;
 
 	public function __construct(){
 		$this->repository = new SapphireJobRegistrationRequestRepository;
+        $this->live_repository = new SapphireJobRepository;
 		parent::__construct();
 	}
 
 	public function onBeforeInit(){
-		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewJobsDetails'));
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewJobsDetails'));
+		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewJobsDetails','ViewPostedJobs'));
+		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewJobsDetails','ViewPostedJobs'));
 	}
 
 	public function onAfterInit(){
@@ -57,6 +59,23 @@ final class SangriaPageJobsExtension extends Extension {
 		list($list,$size) = $this->repository->getAllNotPostedAndNotRejected(0,1000);
 		return new ArrayList($list);
 	}
+
+    public function ViewPostedJobs(){
+        $this->commonScripts();
+        Requirements::css("jobs/css/sangria.page.view.job.details.css");
+        Requirements::javascript('jobs/js/admin/sangria.page.job.extension.js');
+        return $this->owner->getViewer('ViewPostedJobs')->process($this->owner);
+    }
+
+    public function getPostedJobs(){
+        list($list,$size) = $this->live_repository->getAllPosted(0,1000);
+        return new ArrayList($list);
+    }
+
+    public function getPostedJobsCount(){
+        list($list,$size) = $this->live_repository->getAllPosted(0,1000);
+        return count($list);
+    }
 
 	public function getQuickActionsExtensions(&$html){
 		$view = new SSViewer('SangriaPage_JobsLinks');

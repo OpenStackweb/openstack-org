@@ -277,6 +277,21 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+    $('.foundation_check').click(function(ev){
+        var job_id  = $(this).attr('job_id');
+        var url = 'api/v1/job-registration-requests/'+job_id+'/toggle_foundation';
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data,textStatus,jqXHR) {
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                ajaxError(jqXHR, textStatus, errorThrown);
+            }
+        });
+    });
 
     $.urlParam = function(name){
         var results = new RegExp("[\\?&]" + name + "=([^&#]*)").exec(window.location.href);
