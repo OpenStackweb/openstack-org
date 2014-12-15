@@ -15,10 +15,10 @@
 			<li><a href="$Link">Election Details</a></li>
 			<li><a href="{$Link}CandidateList">See The Candidates</a></li>
 			<% if NominationsAreOpen %>
-			<li><a href="/community/members/">Nominate A Member</a></li>
+			    <li><a href="/community/members/">Nominate A Member</a></li>
 			<% end_if %>
-			<% if ElectionIsActive %><% else %>
-			<li><a href="/profile/election/">Be A Candidate</a></li>
+			<% if ElectionIsActive %>
+			    <li><a href="/profile/election/">Be A Candidate</a></li>
 			<% end_if %>
 			<li><a href="{$Link}CandidateListGold">Gold Member Election Candidates</a></li>
 			<li><a href="/legal/community-code-of-conduct/">Code of Conduct</a></li>

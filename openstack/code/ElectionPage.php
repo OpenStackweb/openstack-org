@@ -110,7 +110,8 @@ class ElectionPage extends Page {
     function ElectionIsActive() {
         $now = SS_Datetime::now()->value;
         $ElectionsClose = strtotime(date("Y-m-d", strtotime($this->ElectionsClose)) . " +1 day"); # used to keep time of day from being a factor
-        return  strtotime($this->ElectionsOpen) <= strtotime($now) && strtotime($now) <= $ElectionsClose && $this->ElectionActive = TRUE;
+        $res =   strtotime($this->ElectionsOpen) <= strtotime($now) && strtotime($now) <= $ElectionsClose && $this->ElectionActive = TRUE;
+        return $res;
     }
 
     // An election is 'open' if nominations are open or the election is actively being held
