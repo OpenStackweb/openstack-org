@@ -56,7 +56,6 @@ jQuery(document).ready(function($){
         placeholder: "placeholder",
         update: function(event,ui) {
             var is_new = (ui.sender);
-            $(".placeholder_empty",ui.sender).remove();
             saveSortArticle(ui.item,is_new);
         }
     }).disableSelection();
