@@ -61,6 +61,8 @@ final class NewsRequestForm extends HoneyPotForm {
 		$ImageField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
 		$ImageField->setFolderName('news-images');
 		$ImageField->setRecordClass('BetterImage');
+        $ImageField->getUpload()->setReplaceFile(false);
+        $ImageField->setOverwriteWarning(false);
 		$sizeMB = 2; // 2 MB
 		$size = $sizeMB * 1024 * 1024; // 2 MB in bytes
 		$ImageField->getValidator()->setAllowedMaxFileSize($size);
