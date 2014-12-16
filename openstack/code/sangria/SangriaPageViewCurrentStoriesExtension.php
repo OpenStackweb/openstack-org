@@ -13,72 +13,95 @@
  * limitations under the License.
  **/
 
-/***
+/**
  * Class SangriaPageViewCurrentStoriesExtension
  */
-final class SangriaPageViewCurrentStoriesExtension extends Extension {
+final class SangriaPageViewCurrentStoriesExtension extends Extension
+{
 
-	public function onBeforeInit(){
+    public function onBeforeInit()
+    {
 
-		Config::inst()->update(get_class($this), 'allowed_actions',array(
-			'ViewCurrentStories',
-			'UpdateStories',
-			'SetAdminSS',
-		));
+        Config::inst()->update(get_class($this), 'allowed_actions', array(
+            'ViewCurrentStories',
+            'UpdateStories',
+            'SetAdminSS',
+            'RemoveFromUserStories',
+        ));
 
-		Config::inst()->update(get_class($this->owner), 'allowed_actions',array(
-			'ViewCurrentStories',
-			'UpdateStories',
-			'SetAdminSS',
-		));
-	}
+        Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
+            'ViewCurrentStories',
+            'UpdateStories',
+            'SetAdminSS',
+            'RemoveFromUserStories',
+        ));
+    }
 
-	// Update Stories Industry and Order
-	function UpdateStories(){
+    public function ViewCurrentStories(){
+        Requirements::javascript("themes/openstack/javascript/sangria/view.current.stories.js");
+        return $this->owner->Customise(array())->renderWith(array('SangriaPage_ViewCurrentStories','SangriaPage','SangriaPage'));
+    }
 
-		foreach($_POST['industry'] as $story_id => $industry){
-			$story = SiteTree::get_by_id("UserStory",$story_id);
-			$story->UserStoriesIndustryID = $industry;
-			$story->Sort = $_POST['order'][$story_id];
-			$story->Video = $_POST['video'][$story_id];
-			$story->Title = $_POST['title'][$story_id];
-			$story->ShowVideo = ($_POST['video'][$story_id])? true : false;
-			$story->write();
-		}
+    // Update Stories Industry and Order
+    function UpdateStories()
+    {
 
-		$this->owner->setMessage('Success', 'User Stories saved.');
+        foreach ($_POST['industry'] as $story_id => $industry) {
+            $story = SiteTree::get_by_id("UserStory", $story_id);
+            $story->UserStoriesIndustryID = $industry;
+            $story->Sort = $_POST['order'][$story_id];
+            $story->Video = $_POST['video'][$story_id];
+            $story->Title = $_POST['title'][$story_id];
+            $story->ShowVideo = ($_POST['video'][$story_id]) ? true : false;
+            $story->write();
+        }
 
-		$this->owner->redirectBack();
-	}
+        $this->owner->setMessage('Success', 'User Stories saved.');
 
-	function SetAdminSS() {
-		if(isset($_GET['ID']) && is_numeric($_GET['ID'])) {
-			$UserStory = $_GET['ID'];
-		}else{
-			die();
-		}
-		$showinAdmin = ($_GET['Set'] == 1)? 1 : 0;
+        $this->owner->redirectBack();
+    }
 
-		$story = SiteTree::get_by_id("UserStory", $UserStory);
-		$parent = UserStoryHolder::get()->first();
+    function SetAdminSS()
+    {
+        if (isset($_GET['ID']) && is_numeric($_GET['ID'])) {
+            $UserStory = $_GET['ID'];
+        } else {
+            die();
+        }
 
-		if(!$parent){
-			$this->owner->setMessage('Error', 'could not publish user story bc there is not any available parent page(UserStoryHolder).');
-			Controller::curr()->redirectBack();
-		}
+        $showinAdmin = ($_GET['Set'] === 1) ? 1 : 0;
 
-		$story->ShowInAdmin = $showinAdmin;
-		$story->setParent($parent); // Should set the ID once the Holder is created...
-		$story->write();
-		$story->publish("Live","Stage");
+        $story  = SiteTree::get_by_id("UserStory", $UserStory);
+        $parent = UserStoryHolder::get()->first();
 
-		$this->owner->setMessage('Success', '<b>' . $story->Title . '</b> updated.');
+        if (!$parent) {
+            $this->owner->setMessage('Error', 'could not publish user story bc there is not any available parent page(UserStoryHolder).');
+            Controller::curr()->redirectBack();
+        }
 
-		$this->owner->redirectBack();
-	}
+        $story->ShowInAdmin = $showinAdmin;
+        $story->setParent($parent); // Should set the ID once the Holder is created...
+        $story->write();
+        $story->publish("Live", "Stage");
 
-	function UserStoriesIndustries(){
-		return UserStoriesIndustry::get()->filter('Active', 1);
-	}
+        $this->owner->setMessage('Success', '<b>' . $story->Title . '</b> updated.');
+
+        $this->owner->redirectBack();
+    }
+
+    function UserStoriesIndustries()
+    {
+        return UserStoriesIndustry::get()->filter('Active', 1);
+    }
+
+    function RemoveFromUserStories() {
+        if (isset($_GET['ID']) && is_numeric($_GET['ID'])) {
+            $user_story_id = $_GET['ID'];
+            $story         = UserStory::get()->byID($user_story_id);
+            $story->delete();
+            $this->owner->setMessage('Success', '<b>' . $story->Title . '</b> deleted.');
+            $this->owner->redirectBack();
+        }
+    }
 
 } 

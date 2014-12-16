@@ -73,9 +73,11 @@
     <tbody>
 
         <tr>
-            <td>&nbsp;</td>
             <td>
-                <input type="date" value="" name="date-from" id="date-from" style="width: 160px;"">
+                <input type="text" value="" name="free-text" id="free-text" style="width: 160px;">
+            </td>
+            <td>
+                <input type="date" value="" name="date-from" id="date-from" style="width: 160px;">
             </td>
             <td>
                 <input type="date" value="" name="date-to" id="date-to" style="width: 160px;">
