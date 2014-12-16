@@ -11,8 +11,9 @@
  * limitations under the License.
  **/
 jQuery(document).ready(function($){
-    $('.remove_ss').live('click',function(e){
-        if(!window.confirm("Are you sure that you want to delete this user story?")){
+
+    $('.unpublish_ss').live('click',function(e){
+        if(!window.confirm("Are you sure that you want to unpublish this user story?")){
             e.preventDefault();
             e.stopPropagation();
             return false;
