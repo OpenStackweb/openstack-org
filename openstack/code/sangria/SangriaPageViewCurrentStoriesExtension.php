@@ -26,14 +26,14 @@ final class SangriaPageViewCurrentStoriesExtension extends Extension
             'ViewCurrentStories',
             'UpdateStories',
             'SetAdminSS',
-            'RemoveFromUserStories',
+            'UnPublishFromUserStories',
         ));
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
             'ViewCurrentStories',
             'UpdateStories',
             'SetAdminSS',
-            'RemoveFromUserStories',
+            'UnPublishFromUserStories',
         ));
     }
 
@@ -94,12 +94,12 @@ final class SangriaPageViewCurrentStoriesExtension extends Extension
         return UserStoriesIndustry::get()->filter('Active', 1);
     }
 
-    function RemoveFromUserStories() {
+    function UnPublishFromUserStories() {
         if (isset($_GET['ID']) && is_numeric($_GET['ID'])) {
             $user_story_id = $_GET['ID'];
             $story         = UserStory::get()->byID($user_story_id);
-            $story->delete();
-            $this->owner->setMessage('Success', '<b>' . $story->Title . '</b> deleted.');
+            $story->doUnpublish();
+            $this->owner->setMessage('Success', '<b>' . $story->Title . '</b> unpublished.');
             $this->owner->redirectBack();
         }
     }

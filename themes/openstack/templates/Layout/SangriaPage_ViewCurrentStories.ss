@@ -66,7 +66,7 @@
         <% end_if %>
     </td>
     <td style="border: 1px solid #ccc;">
-        <a href="/sangria/RemoveFromUserStories?ID=$ID" class="roundedButton remove_ss" data-id='$ID' style="white-space: nowrap;">Remove</a>
+        <a href="/sangria/UnPublishFromUserStories?ID=$ID" class="roundedButton unpublish_ss" data-id='$ID' style="white-space: nowrap;">UnPublish</a>
     </td>
   </tr>
 <% end_loop %>
