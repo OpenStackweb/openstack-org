@@ -21,10 +21,9 @@
 	 	function getCMSFields() {
 	    	$fields = parent::getCMSFields();
 
-	    	$AttachmentField = new FileIFrameField ('LegalDocumentFile','Attach a PDF or DOC file');
-	    	$AttachmentField->allowedExtensions = array('doc','pdf');
-
-	    	$fields->addFieldToTab('Root.Main', $AttachmentField);
+	        $AttachmentField  = new CustomUploadField('LegalDocumentFile', 'Attach a PDF or DOC file');
+            $AttachmentField->setAllowedExtensions(array('doc','pdf'));
+        	$fields->addFieldToTab('Root.Main', $AttachmentField);
 	    	    	    		    
 	    	return $fields;
 	 	}
