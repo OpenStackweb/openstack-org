@@ -71,4 +71,34 @@ final class JobsValidationFactory
 
 		return ValidatorService::make($data, $rules, $messages);
 	}
+
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForJob(array $data){
+
+        $rules = array(
+            'title'                  => 'required|text|max:100',
+            'url'                    => 'required',
+            'description'            => 'required|htmltext',
+            'instructions'           => 'required|htmltext',
+            'company_name'           => 'required|text',
+        );
+
+        $messages = array(
+            'title.required'                  => ':attribute is required',
+            'title.text'                      => ':attribute should be valid text.',
+            'title.max'                       => ':attribute should have less than 100 chars.',
+            'url.required'                    => ':attribute is required',
+            'description.required'            => ':attribute is required',
+            'description.text'                => ':attribute should be valid text.',
+            'instructions.required'           => ':attribute is required',
+            'instructions.htmltext'           => ':attribute should be valid text.',
+            'company_name.required'           => ':attribute is required',
+            'company_name.htmltext'           => ':attribute should be valid text.',
+        );
+
+        return ValidatorService::make($data, $rules, $messages);
+    }
 }

@@ -164,25 +164,6 @@ final class JobRegistrationRequestManager {
 		return $job;
 	}
 
-    /**
-     * @param $id
-     * @return IJob
-     */
-    public function toggleFoundationJob($id){
-        $jobs_repository          = $this->jobs_repository;
-
-        $job =  $this->tx_manager->transaction(function() use ($id, $jobs_repository){
-            $job = $jobs_repository->getById($id);
-            if(!$job) throw new NotFoundEntityException('JobPage',sprintf('id %s',$id ));
-            $job->toggleFoundation();
-
-            return $job;
-        });
-
-
-        return $job;
-    }
-
 	/**
 	 * @param int $batch_size
 	 * @param string $email_alert_to
