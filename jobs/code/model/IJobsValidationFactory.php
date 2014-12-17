@@ -20,9 +20,16 @@ interface IJobsValidationFactory {
 	 * @return IValidator
 	 */
 	public function buildValidatorForJobRegistration(array $data);
+
 	/**
 	 * @param array $data
 	 * @return IValidator
 	 */
 	public function buildValidatorForJobRejection(array $data);
+
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForJob(array $data);
 } 

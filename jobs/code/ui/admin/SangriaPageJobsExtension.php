@@ -100,4 +100,24 @@ final class SangriaPageJobsExtension extends Extension {
 		}
 		return $form;
 	}
+
+    function JobForm(){
+        $this->commonScripts();
+        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        Requirements::javascript("marketplace/code/ui/admin/js/geocoding.jquery.js");
+        Requirements::css('jobs/css/job.registration.form.css');
+        Requirements::javascript("jobs/js/job.registration.form.js");
+        $data = Session::get("FormInfo.Form_JobForm.data");
+        $form = new JobForm($this->owner, 'JobForm',false);
+        // we should also load the data stored in the session. if failed
+        if(is_array($data)) {
+            $form->loadDataFrom($data);
+        }
+        // Optional spam protection
+        if(class_exists('SpamProtectorManager')) {
+            SpamProtectorManager::update_form($form);
+        }
+        return $form;
+    }
+
 }

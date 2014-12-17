@@ -45,4 +45,32 @@ final class JobsAssembler {
 		$res['locations'] = $locations;
 		return $res;
 	}
+
+    /**
+     * @param IJob $job
+     * @return array
+     */
+    public static function convertJobToArray(IJob $job){
+        $res                           = array();
+        $main_info                     = $job->getMainInfo();
+        $res['title']                  = $main_info->getTitle();
+        $res['url']                    = $main_info->getUrl();
+        $res['description']            = $main_info->getDescription();
+        $res['instructions']           = $main_info->getInstructions();
+        $res['company_name']           = $main_info->getCompany();
+        $res['location_type']          = $main_info->getLocationType();
+        $expiration_date               = $main_info->getExpirationDate();
+        if(!is_null($expiration_date))
+            $res['expiration_date']    = $expiration_date->format('Y-m-d');
+        $locations = array();
+        foreach($job->locations() as $location){
+            $l            = array();
+            $l['city']    = $location->city();
+            $l['state']   = $location->state();
+            $l['country'] = $location->country();
+            array_push($locations,$l);
+        }
+        $res['locations'] = $locations;
+        return $res;
+    }
 } 
