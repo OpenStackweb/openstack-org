@@ -1288,8 +1288,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $html_inner = '';
         $marketplace_type = $this->request->param('MARKETPLACETYPE');
         $instance_id = intval($this->request->param('ID'));
-        $base = Director::baseFolder();
-
+        $base = Director::protocolAndHost();
         $query = new QueryObject();
         $query->addAddCondition(QueryCriteria::equal('ID', $instance_id));
 
@@ -1347,7 +1346,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $file = FileUtils::convertToFileName('preview') . '.pdf';
 
         $html_outer = sprintf("<html><head><style>%s</style></head><body><div class='container'>%s</div></body></html>",
-            str_replace("@host", $base, $css),$html_inner);
+        str_replace("@host", $base, $css), $html_inner);
 
 
         try {
@@ -1361,7 +1360,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
             $message = array(
                 'errno' => '',
                 'errstr' => $e->__toString(),
-                'errfile' => 'UserStory.php',
+                'errfile' => 'MarketPlaceAdminPage.php',
                 'errline' => '',
                 'errcontext' => ''
             );
