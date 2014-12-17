@@ -96,7 +96,7 @@ class RegistrationPage_Controller extends Page_Controller
 			new LiteralField('break', '<hr/>'),
 			$affiliations,
 			new HiddenField("Affiliations", "Affiliations", ""),
-			new LiteralField('instructions', '<p>For our purposes, an affiliation is defined as any company where you are an officer, director or employee, or any person or company that has paid you more than $60,000 USD as an independent contractor in the last 12 months.  Please list all affiliations which meet this criteria.</p>'),
+			new LiteralField('instructions', '<p>For our purposes, an affiliation is defined as any company where you are an officer, director or employee, or any person or company that has paid you more than $60,000 USD as an independent contractor in the last 12 months. Please list all affiliations which meet this criteria. If you\'re not being paid to work on OpenStack please put "Unaffiliated".</p>'),
 			$StatementOfInterestField,
 			new LiteralField('instructions', '<p>Your statement of interest should be a few words describing your objectives or plans for OpenStack.</p>'),
 			new LiteralField('break', '<hr/>'),
