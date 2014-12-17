@@ -24,10 +24,9 @@ class BioPage extends Page {
    );
 
 	function getCMSFields() {
-	   	$fields = parent::getCMSFields();
-
-		$biosTable = new GridField('Bio', 'Bio', $this->Bios());
-	  	   	$fields->addFieldToTab('Root.Bios',$biosTable);
+	   	$fields    = parent::getCMSFields();
+		$biosTable = new GridField('Bio', 'Bio', $this->Bios(),GridFieldConfig_RecordEditor::create());
+  	   	$fields->addFieldToTab('Root.Bios',$biosTable);
 	   	return $fields;
 	}   
  
