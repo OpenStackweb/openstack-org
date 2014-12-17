@@ -34,7 +34,7 @@
 	<div class="assestBox">
 		<h2>One Color Logo (for print or screenprint)</h2>
 		<div class="span-4">
-			<img src="/themes/openstack/images/openstack-logo-preview-one-color-alt.png" width="140px" height="160px"/>
+            <img src="/themes/openstack/images/openstack-logo-preview-one-color.png" width="140px" height="160px"/>
 		</div>
 		<div class="span-9 last">
 			<p>This is a good option for screen printing or other one-color applications.</p>
@@ -47,7 +47,7 @@
 	<div class="assestBox">
 		<h2>One Color Logo #2 (alternate for print or screenprint)</h2>
 		<div class="span-4">
-			<img src="/themes/openstack/images/openstack-logo-preview-one-color.png" width="140px" height="160px"/>
+            <img src="/themes/openstack/images/openstack-logo-preview-one-color-alt.png" width="140px" height="160px"/>
 		</div>
 		<div class="span-9 last">
 			<p>Another good option for screen printing or other one-color applications.</p>
