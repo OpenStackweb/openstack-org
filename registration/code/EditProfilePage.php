@@ -121,9 +121,15 @@ class EditProfilePage_Controller extends Page_Controller
             $EditProfileForm->loadDataFrom($CurrentMember->data());
             // check for duplicates
             $dupe_members = Member::get()->filter(array('FirstName'=>$CurrentMember->FirstName,'Surname'=>$CurrentMember->Surname))->exclude(array('Email'=>$CurrentMember->Email));
+            $dupe_members_count = $dupe_members->count();
+            if ($dupe_members_count) {
+                $count_string = digit_to_word($dupe_members_count);
+                if ($dupe_members_count == 1) {
+                    $message = 'We currently show there is one additional account with your First & Last Name. If this account is yours, please log in to delete the duplicate account:<br>';
+                } else {
+                    $message = 'We currently show there are '.$count_string.' additional accounts with your First & Last Name. If one of these accounts is yours, please log in to delete the duplicates:<br>';
+                }
 
-            if ($dupe_members->count()) {
-                $message = 'We currently show there are two additional accounts with your First & Last Name. If one of these accounts is yours, please log in to delete the duplicate account:<br>';
                 $members_emails = '';
                 foreach ($dupe_members as $dupe_mem) {
                     $members_emails .= preg_replace('/(?<=.).(?=.+@)|(?<!@)(?<=.).(?<!@)(?!@)(?=.+\.)/u','*',$dupe_mem->Email).', ';
