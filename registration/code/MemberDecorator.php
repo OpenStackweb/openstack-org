@@ -37,7 +37,8 @@ class MemberDecorator extends DataExtension {
 		'Postcode'=>'Varchar(64)',
 		'Country'=>'Varchar(2)',
 		'City'=>'Varchar(64)',
-		'Gender'=>'Varchar(32)'
+		'Gender'=>'Varchar(32)',
+        'TypeOfDirector' => 'Text',
 	);
 
 	private static $defaults = array(
@@ -94,6 +95,10 @@ class MemberDecorator extends DataExtension {
 	public function updateCMSFields(FieldList $fields) {
         $fields->removeByName("Bio");
         $fields->addFieldsToTab('Root.Main',new HTMLEditorField('Bio', 'Bio: A Little Bit About You <em>(Optional)</em>'));
+        $fields->removeByName("TypeOfDirector");
+        if($this->owner->inGroup('board-of-directors')){
+            $fields->addFieldsToTab('Root.Main',new TextField('TypeOfDirector', 'Type Of Director: <em>(Optional)</em>'));
+        }
     }
 
 	public function getDDLAdminSecurityGroup(){

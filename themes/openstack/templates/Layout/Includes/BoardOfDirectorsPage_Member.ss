@@ -19,9 +19,13 @@
 </div>
 <div class="span-20 last">
     <h3>$FullName</h3>
-     <div class="span-2"><strong>Company</strong></div>
-    <div class="span-18 last">$CurrentCompanies&nbsp;</div>
-    <div class="span-2"><strong>Bio</strong></div>
-    <div class="span-18 last">$Bio&nbsp;</div>
+    <% if TypeOfDirector %>
+        <div class="span-4"><strong>Type of Director</strong></div>
+        <div class="span-16 last">$TypeOfDirector&nbsp;</div>
+    <% end_if %>
+    <div class="span-4"><strong>Company</strong></div>
+    <div class="span-16 last">$CurrentCompanies&nbsp;</div>
+    <div class="span-4"><strong>Bio</strong></div>
+    <div class="span-16 last">$Bio&nbsp;</div>
 </div>
 <div class="span-24 last"><p>&nbsp;</p></div>
