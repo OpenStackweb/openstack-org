@@ -26,7 +26,7 @@ class ElectionSystem extends Page
 		"ElectionActive" => TRUE, // Turn on an election by default
 	);
 
-	static $allowed_children = array('ElectionPage');
+    static $allowed_children = array('ElectionPage','Page');
 
 	/** static $icon = "icon/path"; */
 
