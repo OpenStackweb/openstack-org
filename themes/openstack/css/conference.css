@@ -26,6 +26,11 @@
 	padding-top: 406px;
 }
 
+.conference-title#vancouver {
+	background-image: url(/themes/openstack/images/conferences/vancouver/vancouver-header.jpg);
+	padding-top: 406px;
+}
+
 .conference-title h2, .conference-title h1 {
 	display: none;
 }
@@ -53,6 +58,10 @@
 
 .conference-calendar#paris-cal {
 		background: url(/themes/openstack/images/conferences/paris/paris-dates.png) no-repeat left center;
+}
+
+.conference-calendar#vancouver-cal {
+		background: url(/themes/openstack/images/conferences/vancouver/timeline.gif) no-repeat left center;
 }
 
 .conference-summary {
@@ -422,6 +431,12 @@ ul.day-picker li a.selected {
 
 .summit-videos#atlanta-experience {
 	background: url(/themes/openstack/images/conferences/paris/atlanta-experience.png) no-repeat top center;
+}
+
+.summit-videos#vancouver-experience {
+	background: url(/themes/openstack/images/conferences/vancouver/paris-video.jpg) no-repeat top center;
+    width: 229px;
+    padding-top: 229px;
 }
 
 .summit-videos#hong-kong-experience {
