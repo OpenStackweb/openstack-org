@@ -359,8 +359,8 @@ function AddUserStory() {
 
     $parent = UserStoryHolder::get()->first();
     if (!$parent) {
-        $this->setMessage('Error', 'could not add an user story bc there is not any available parent page(UserStoryHolder).');
-        $this->redirectBack();
+        $this->owner->setMessage('Error', 'could not add an user story bc there is not any available parent page(UserStoryHolder).');
+        Controller::curr()->redirectBack();
     }
     $userStory = new UserStory;
     $userStory->Title = $_GET['label'];
@@ -373,9 +373,9 @@ function AddUserStory() {
     $userStory->write();
     $userStory->publish("Live", "Stage");
 
-    $this->setMessage('Success', '<b>' . $userStory->Title . '</b> added as User Story.');
+    $this->owner->setMessage('Success', '<b>' . $userStory->Title . '</b> added as User Story.');
 
-    $this->redirectBack();
+    Controller::curr()->redirectBack();
 }
 
 function AddNewDeployment(){
