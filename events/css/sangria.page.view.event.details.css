@@ -8,3 +8,16 @@
 #event-registration-requests-table thead th {
     background: none repeat scroll 0 0 #FFFFFF;
 }
+
+
+.title {
+    max-width: 200px;
+}
+
+.location {
+    max-width: 100px;
+}
+
+.sponsor {
+    max-width: 100px;
+}

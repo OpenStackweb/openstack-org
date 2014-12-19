@@ -17,15 +17,17 @@
 final class SangriaPageEventExtension extends Extension {
 
 	private $repository;
+    private $event_repository;
 
 	public function __construct(){
 		parent::__construct();
 		$this->repository = new SapphireEventRegistrationRequestRepository;
+        $this->event_repository = new SapphireEventRepository;
 	}
 
 	public function onBeforeInit(){
-		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails'));
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails'));
+		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents'));
+		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents'));
 	}
 
 	public function EventRegistrationRequestForm() {
@@ -44,6 +46,23 @@ final class SangriaPageEventExtension extends Extension {
 		}
 		return $form;
 	}
+
+    public function EventForm() {
+        $this->commonScripts();
+        Requirements::css('events/css/event.registration.form.css');
+        Requirements::javascript("events/js/event.registration.form.js");
+        $data = Session::get("FormInfo.Form_EventForm.data");
+        $form = new EventForm($this->owner, 'EventForm',false);
+        // we should also load the data stored in the session. if failed
+        if(is_array($data)) {
+            $form->loadDataFrom($data);
+        }
+        // Optional spam protection
+        if(class_exists('SpamProtectorManager')) {
+            SpamProtectorManager::update_form($form);
+        }
+        return $form;
+    }
 
 	public function onAfterInit(){
 
@@ -69,6 +88,12 @@ final class SangriaPageEventExtension extends Extension {
 		return $this->owner->getViewer('ViewEventDetails')->process($this->owner);
 	}
 
+    public function ViewPostedEvents(){
+        $this->commonScripts();
+        Requirements::javascript('events/js/admin/sangria.page.event.extension.js');
+        return $this->owner->getViewer('ViewPostedEvents')->process($this->owner);
+    }
+
 	public function getQuickActionsExtensions(&$html){
 		$view = new SSViewer('SangriaPage_EventLinks');
 		$html .= $view->process($this->owner);
@@ -78,4 +103,9 @@ final class SangriaPageEventExtension extends Extension {
 		list($list,$size) = $this->repository->getAllNotPostedAndNotRejected(0,1000);
 		return new ArrayList($list);
 	}
+
+    public function getPostedEvents(){
+        list($list,$size) = $this->event_repository->getAllPosted(0,1000);
+        return new ArrayList($list);
+    }
 } 
