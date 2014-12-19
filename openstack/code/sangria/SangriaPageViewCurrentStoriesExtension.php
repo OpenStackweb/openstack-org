@@ -69,7 +69,7 @@ final class SangriaPageViewCurrentStoriesExtension extends Extension
             die();
         }
 
-        $showinAdmin = ($_GET['Set'] === 1) ? 1 : 0;
+        $showinAdmin = ( isset($_GET['Set']) && intval($_GET['Set']) === 1) ? 1 : 0;
 
         $story  = SiteTree::get_by_id("UserStory", $UserStory);
         $parent = UserStoryHolder::get()->first();
