@@ -155,7 +155,7 @@
 
 
 
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/summit/openstack-paris-summit-2014/">The OpenStack Summit</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/summit/">The OpenStack Summit</a></li>
 
 
 
