@@ -19,4 +19,10 @@ final class SapphireEventRepository extends SapphireRepository {
 	public function __construct(){
 		parent::__construct(new EventPage);
 	}
+
+    public function getAllPosted($offset = 0, $limit = 10) {
+        $query = new QueryObject();
+        $query->addOrder(QueryOrder::desc('EventStartDate'));
+        return  $this->getAll($query,$offset,$limit);
+    }
 }

@@ -458,7 +458,7 @@ jQuery(document).ready(function($) {
                 var form_id = form.attr('id');
                 //populate edit form
                 $('#'+form_id+'_title',form).val(data.title);
-                $('#'+form_id+'_url',form).val(data.url);
+                $('#'+form_id+'_url',form).find('a').attr('href',data.url);
                 $('#'+form_id+'_company_name',form).val(data.company_name);
                 $('#'+form_id+'_description',form).val(data.description);
                 $('#'+form_id+'_instructions',form).val(data.instructions);

@@ -37,4 +37,21 @@ final class EventsAssembler {
 		$res['end_date']               = $duration->getEndDate()->format('Y-m-d');
 		return $res;
 	}
+
+    /**
+     * @param IEvent $event
+     * @return array
+     */
+    public static function convertEventToArray(IEvent $event){
+        $res                           = array();
+        $main_info                     = $event->getMainInfo();
+        $res['title']                  = $main_info->getTitle();
+        $res['url']                    = $main_info->getUrl();
+        $res['label']                  = $main_info->getLabel();
+        $res['location']               = $event->getLocation();
+        $duration                      = $event->getDuration();
+        $res['start_date']             = $duration->getStartDate()->format('Y-m-d');
+        $res['end_date']               = $duration->getEndDate()->format('Y-m-d');
+        return $res;
+    }
 }

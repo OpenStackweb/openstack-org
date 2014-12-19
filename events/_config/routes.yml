@@ -5,4 +5,5 @@ After: 'framework/routes#coreroutes'
 Director:
   rules:
     'api/v1/event-registration-requests': 'EventRegistrationRequestCrudApi'
+    'api/v1/events': 'EventCrudApi'
     'event-registration-requests': 'EventRegistrationRequestController'

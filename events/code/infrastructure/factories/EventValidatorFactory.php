@@ -59,6 +59,38 @@ final class EventValidatorFactory
 		return ValidatorService::make($data, $rules, $messages);
 	}
 
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForEvent(array $data)
+    {
+        $rules = array(
+            'title'                  => 'required|text|max:35',
+            'url'                    => 'required|url',
+            'location'               => 'required|text',
+            'start_date'             => 'required|date',
+            'end_date'               => 'required|date|after:start_date',
+        );
+
+        $messages = array(
+            'title.required'                  => ':attribute is required',
+            'title.text'                      => ':attribute should be valid text.',
+            'title.max'                       => ':attribute should have less than 35 chars.',
+            'url.required'                    => ':attribute is required',
+            'url.url'                         => ':attribute should be valid url.',
+            'location.required'               => ':attribute is required',
+            'location.text'                   => ':attribute should be valid text.',
+            'start_date.required'             => ':attribute is required',
+            'start_date.date'                 => ':attribute should be valid date.',
+            'end_date.required'               => ':attribute is required',
+            'end_date.date'                   => ':attribute should be valid date.',
+            'end_date.after'                  => ':attribute should be after than start_date.'
+        );
+
+        return ValidatorService::make($data, $rules, $messages);
+    }
+
 	/**
 	 * @param array $data
 	 * @return IValidator

@@ -20,6 +20,13 @@ interface IEventValidatorFactory {
 	 * @return IValidator
 	 */
 	public function buildValidatorForEventRegistration(array $data);
+
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForEvent(array $data);
+
 	/**
 	 * @param array $data
 	 * @return IValidator

@@ -21,7 +21,7 @@
                 <td class="company-name">$JobCompany</td>
                 <td class="location_type">$JobLocation</td>
                 <td class="is_foundation"><input class="foundation_check" job_id="{$ID}" type="checkbox" <% if FoundationJob == 1 %> checked <% end_if %> /></td>
-                <td width="23%">
+                <td width="17%">
                     <a href="#" data-job-id="{$ID}" class="edit-live-job roundedButton addDeploymentBtn">Edit</a>
                     &nbsp;
                     <a href="#" data-job-id="{$ID}" class="delete-live-job roundedButton addDeploymentBtn">Delete</a>

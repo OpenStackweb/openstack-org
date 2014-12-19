@@ -72,6 +72,60 @@ jQuery(document).ready(function($) {
             }
     });
 
+    var edit_live_dialog = $( "#edit_live_dialog" ).dialog({
+        width: 450,
+        height: 550,
+        modal: true,
+        autoOpen: false,
+        resizable: false,
+        buttons: {
+            "Save": function() {
+
+                var form     = $('form',edit_live_dialog);
+                var is_valid = form.valid();
+                if(!is_valid) return false;
+                var row     = edit_live_dialog.data('row');
+                var id      = parseInt(edit_live_dialog.data('id'));
+                var form_id = form.attr('id');
+                var url     = 'api/v1/events';
+
+                var event = {
+                    id : id,
+                    title      : $('#'+form_id+'_title',form).val(),
+                    url        : $('#'+form_id+'_url',form).val(),
+                    location   : $('#'+form_id+'_location',form).val(),
+                    start_date : $('#'+form_id+'_start_date',form).val(),
+                    end_date   : $('#'+form_id+'_end_date',form).val()
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    data: JSON.stringify(event),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data,textStatus,jqXHR) {
+                        edit_live_dialog.dialog( "close" );
+                        form.cleanForm();
+                        //update row values...
+                        $('.title',row).text(event.title);
+                        $('.url',row).find('a').attr('href',event.url);
+                        $('.location',row).text(event.location);
+                        $('.start-date',row).text(event.start_date);
+                        $('.end-date',row).text(event.end_date);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        ajaxError(jqXHR, textStatus, errorThrown);
+                    }
+                });
+
+            },
+            "Cancel": function() {
+                edit_live_dialog.dialog( "close" );
+            }
+        }
+    });
+
     var confirm_reject_dialog = $('#dialog-reject-post').dialog({
         resizable: false,
         autoOpen: false,
@@ -146,6 +200,39 @@ jQuery(document).ready(function($) {
         }
     });
 
+    var confirm_delete_dialog = $('#dialog-delete-post').dialog({
+        resizable: false,
+        autoOpen: false,
+        height:200,
+        width: 450,
+        modal: true,
+        buttons: {
+            "Delete": function() {
+                var form     = $('form',confirm_delete_dialog);
+                var id  = parseInt(confirm_delete_dialog.data('id'));
+                var row = confirm_delete_dialog.data('row');
+
+                var url = 'api/v1/events/'+id+'/delete';
+                $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data,textStatus,jqXHR) {
+                        row.hide('slow', function(){ row.remove();});
+                        confirm_delete_dialog.dialog( "close" );
+                        form.cleanForm();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        ajaxError(jqXHR, textStatus, errorThrown);
+                    }
+                });
+            },
+            "Cancel": function() {
+                confirm_delete_dialog.dialog( "close" );
+            }
+        }
+    });
 
     $('.edit-event').click(function(event){
         event.preventDefault();
@@ -201,6 +288,61 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+    $('.edit-live-event').click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var id  = $(this).attr('data-event-id');
+        var row = $(this).parent().parent();
+        var url = 'api/v1/events/'+id;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data,textStatus,jqXHR) {
+                var form    = $('form',edit_live_dialog);
+                form.cleanForm();
+                var form_id = form.attr('id');
+                //populate edit form
+                $('#'+form_id+'_title',form).val(data.title);
+                $('#'+form_id+'_url',form).val(data.url);
+                $('#'+form_id+'_location',form).val(data.location);
+                $('#'+form_id+'_start_date',form).val(data.start_date);
+                $('#'+form_id+'_end_date',form).val(data.end_date);
+                edit_live_dialog.data('id',id).data('row',row).dialog( "open");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                ajaxError(jqXHR, textStatus, errorThrown);
+            }
+        });
+
+        return false;
+    });
+
+    $('.delete-live-event').click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var id  = $(this).attr('data-event-id');
+        var row = $(this).parent().parent();
+        confirm_delete_dialog.data('id',id).data('row',row).dialog( "open");
+        return false;
+    });
+
+    $('.summit_check').click(function(ev){
+        var event_id  = $(this).attr('event_id');
+        var url = 'api/v1/events/'+event_id+'/toggle_summit';
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data,textStatus,jqXHR) {
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                ajaxError(jqXHR, textStatus, errorThrown);
+            }
+        });
+    });
 
     $.urlParam = function(name){
         var results = new RegExp("[\\?&]" + name + "=([^&#]*)").exec(window.location.href);
