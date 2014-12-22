@@ -14,7 +14,7 @@
 /**
  * Interface IPrivateCloudService
  */
-interface IPrivateCloudService extends IOpenStackImplementation  {
+interface IPrivateCloudService extends ICloudService  {
 
 	const MarketPlaceType           = 'Private Cloud';
 	const MarketPlaceGroupSlug      = 'marketplace-private-cloud-administrators';

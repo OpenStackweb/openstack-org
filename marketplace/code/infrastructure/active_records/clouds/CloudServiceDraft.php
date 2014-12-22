@@ -3,7 +3,9 @@
 /**
  * Class CloudServiceDraft
  */
-class CloudServiceDraft extends OpenStackImplementationDraft {
+class CloudServiceDraft
+    extends OpenStackImplementationDraft
+    implements ICloudService {
 
 	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
