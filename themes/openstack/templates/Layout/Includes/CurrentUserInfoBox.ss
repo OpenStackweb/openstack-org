@@ -5,7 +5,7 @@
             <a class="roundedButton" href="{$ResignLink}">Resign Membership</a>
             <% if $CurrentMember.isFoundationMember %>
                 <a class="roundedButton downgrade-2-community-member" href="$Top.Link(downgrade2communitymember)">Change to Community Member</a>
-            <% else_if $CurrentMember.isCommunityMember %>
+            <% else %>
                 <a class="roundedButton upgrade-2-foundation-member" href="$Top.Link(upgrade2foundationmember)">Make me a Foundation Member</a>
             <% end_if %>
         </div>
