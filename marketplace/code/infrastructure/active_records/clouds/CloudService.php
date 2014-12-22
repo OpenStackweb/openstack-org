@@ -14,7 +14,10 @@
 /**
  * Class CloudService
  */
-class CloudService extends OpenStackImplementation {
+class CloudService
+    extends OpenStackImplementation
+    implements ICloudService
+{
 
 	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
