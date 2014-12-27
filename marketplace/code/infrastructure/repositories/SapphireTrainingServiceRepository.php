@@ -33,14 +33,14 @@ class SapphireTrainingServiceRepository
 		->innerJoin('TrainingCourseLevel','L.ID = TrainingCourse.LevelID','L')
 		->leftJoin('TrainingCourseSchedule','TS.CourseID = TrainingCourse.ID','TS')
 		->leftJoin('TrainingCourseScheduleTime','TST.LocationID = TS.ID','TST')
-		->sort(array(
+        ->sort(array(
 			'Level.SortOrder'=>'ASC',
-			'Schedules.Times.StartDate'=> 'ASC',
-			'Schedules.Times.EndDate'=>'ASC'
 			)
 		);
 
-		return $res;
+
+
+        return $res;
 	}
 
 

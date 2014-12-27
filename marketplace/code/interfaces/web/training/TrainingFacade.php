@@ -152,7 +152,7 @@ final class TrainingFacade {
 				$locations_vm->push(new CourseLocationViewModel($location_dto));
 			}
 
-			$courses_vm->push(new CourseViewModel($course_dto,$locations_vm, $course->projects()));
+			$courses_vm->push(new CourseViewModel($course_dto, $locations_vm, $course->projects()));
 		}
 
 		$res =  array(
