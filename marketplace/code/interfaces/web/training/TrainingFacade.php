@@ -158,7 +158,8 @@ final class TrainingFacade {
 		$res =  array(
 			'Company'  => $company,
 			'Training' => $training,
-			'Courses'  => $courses_vm
+			'Courses'  => $courses_vm,
+            'Slug' => '3'
 		);
 		return $res;
 	}
