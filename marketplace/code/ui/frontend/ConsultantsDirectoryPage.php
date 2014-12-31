@@ -45,6 +45,10 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 	 * @var IQueryHandler
 	 */
 	private $consultants_service_query;
+	
+	private static $allowed_actions = array(
+		'handleIndex',
+	);
 
 	static $url_handlers = array(
 		'$Company!/$Slug!' => 'handleIndex',
