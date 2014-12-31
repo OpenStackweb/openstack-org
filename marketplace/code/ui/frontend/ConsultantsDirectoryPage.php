@@ -25,7 +25,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 
 
 	static $allowed_actions = array(
-        'getCurrentOfficesLocationsJson',
+        'getCurrentOfficesLocationsJson','handleIndex',
 	);
 	/**
 	 * @var IEntityRepository
