@@ -159,8 +159,8 @@ final class TrainingFacade {
 			'Company'  => $company,
 			'Training' => $training,
 			'Courses'  => $courses_vm,
-            'Slug' => '3'
-		);
+            'Slug'     => $training->getSlug(),
+      	);
 		return $res;
 	}
 
