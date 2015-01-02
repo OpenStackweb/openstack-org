@@ -673,3 +673,8 @@ ul.projects-covered li {
     font-style: normal;
     font-weight: 700;
 }
+
+.marketplace-training-sidebar {
+    border-left: 1px solid #edf2f7;
+    padding: 20px;
+}
