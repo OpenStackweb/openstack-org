@@ -51,7 +51,6 @@ to install run following commands
 * curl -sS https://getcomposer.org/installer | php
 * php composer.phar install
 * php composer.phar dump-autoload --optimize
-* chmod 777 -R  vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
 DATABASE
 OpenStack will provide a db dump on a weekly basis, purged of protected data. The dump can be found https://mycloud.rackspace.com/cloud/920805/files#object-store%2CcloudFiles%2CDFW/www.openstack.org-cron-db-backups-purged/. The database will create one default admin user. All other data will need to be populated by the user.
