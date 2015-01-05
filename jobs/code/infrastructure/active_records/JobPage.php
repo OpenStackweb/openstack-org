@@ -176,6 +176,10 @@ class JobPage
         $this->JobCompany         = $info->getCompany()->Name;
     }
 
+    public function registerPostedDate ($posted_date) {
+        $this->JobPostedDate = $posted_date;
+    }
+
 	/**
 	 * @return void
 	 */

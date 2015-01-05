@@ -67,7 +67,6 @@ final class EventRegistrationRequestFactory
 	 */
 	public function buildEventDuration(array $data)
 	{
-
 		$duration = new EventDuration(
 			DateTime::createFromFormat('Y-m-d', $data['start_date']),
 			DateTime::createFromFormat('Y-m-d', $data['end_date']));

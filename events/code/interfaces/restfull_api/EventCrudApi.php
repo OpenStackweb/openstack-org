@@ -79,6 +79,7 @@ final class EventCrudApi
         'PUT $EVENT_ID/delete'        => 'deleteEvent',
         'GET $EVENT_ID'               => 'getEvent',
         'PUT '                        => 'updateEvent',
+        'POST '                       => 'addEvent',
 	);
 
 	/**
@@ -89,6 +90,7 @@ final class EventCrudApi
 		'deleteEvent',
 		'getEvent',
 		'updateEvent',
+        'addEvent',
 	);
 
     /**
@@ -130,6 +132,27 @@ final class EventCrudApi
 			return $this->serverError();
 		}
 	}
+
+    public function addEvent(){
+        try{
+            $data = $this->getJsonRequest();
+            if (!$data) return $this->serverError();
+            $event_id = $this->event_manager->addEvent($data);
+            return $event_id;
+        }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->notFound($ex1->getMessage());
+        }
+        catch (EntityValidationException $ex2) {
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->validationError($ex2->getMessages());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
 
 	public function updateEvent(){
 		try{

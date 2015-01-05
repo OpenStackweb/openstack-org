@@ -1,4 +1,7 @@
-<h2>Posted Jobs List ($PostedJobsCount)</h2>
+<h2 style="float:left;margin-top:10px;">Posted Jobs List ($PostedJobsCount)</h2>
+<div style="float:right;">
+    <a href="#" class="add-live-job roundedButton addDeploymentBtn">Create Job</a>
+</div>
 <% if PostedJobs %>
     <table id="posted-jobs-table">
         <thead>

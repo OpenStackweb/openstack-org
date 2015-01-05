@@ -115,6 +115,7 @@ extends AbstractRestfulJsonApi {
 		'PUT $JOB_ID/delete'            => 'deleteJob',
 		'GET $JOB_ID'                   => 'getJob',
         'PUT '                          => 'updateJob',
+        'POST '                         => 'addJob',
 	);
 
 	/**
@@ -126,6 +127,7 @@ extends AbstractRestfulJsonApi {
 		'updateJob',
 		'companies',
         'toggleFoundationJob',
+        'addJob',
 	);
 
 
@@ -211,6 +213,27 @@ extends AbstractRestfulJsonApi {
         }
         catch(EntityValidationException $ex2){
             SS_Log::log($ex2,SS_Log::NOTICE);
+            return $this->validationError($ex2->getMessages());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function addJob(){
+        try{
+            $data = $this->getJsonRequest();
+            if (!$data) return $this->serverError();
+            $job_id = $this->manager->addJob($data);
+            return $job_id;
+        }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->notFound($ex1->getMessage());
+        }
+        catch (EntityValidationException $ex2) {
+            SS_Log::log($ex2,SS_Log::WARN);
             return $this->validationError($ex2->getMessages());
         }
         catch(Exception $ex){
