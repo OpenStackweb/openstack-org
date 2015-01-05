@@ -1,4 +1,7 @@
-<h2>Posted Event List</h2>
+<h2 style="float:left;margin-top:10px;">Posted Event List ($PostedEventsCount)</h2>
+<div style="float:right;">
+    <a href="#" class="add-live-event roundedButton addDeploymentBtn">Create Event</a>
+</div>
 <% if PostedEvents %>
     <table id="event-registration-requests-table">
         <thead>
@@ -17,7 +20,7 @@
         <% loop PostedEvents %>
             <tr>
                 <td class="title"><a id="evt{$ID}" href="#"></a>$Title</td>
-                <td class="post-date">$EventStartDate</td>
+                <td class="start-date">$EventStartDate</td>
                 <td class="start-date">$EventEndDate</td>
                 <td class="url"><a href="$EventLink">Link</a></td>
                 <td class="location">$EventLocation</td>

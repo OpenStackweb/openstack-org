@@ -84,13 +84,14 @@ jQuery(document).ready(function($) {
                 var form     = $('form',edit_live_dialog);
                 var is_valid = form.valid();
                 if(!is_valid) return false;
-                var row     = edit_live_dialog.data('row');
-                var id      = parseInt(edit_live_dialog.data('id'));
                 var form_id = form.attr('id');
                 var url     = 'api/v1/events';
+                var ajax_type = 'POST';
+                var row     = edit_live_dialog.data('row');
+                var id      = parseInt(edit_live_dialog.data('id'));
+                var is_new_event = (id) ? false : true ;
 
                 var event = {
-                    id : id,
                     title      : $('#'+form_id+'_title',form).val(),
                     url        : $('#'+form_id+'_url',form).val(),
                     location   : $('#'+form_id+'_location',form).val(),
@@ -98,8 +99,15 @@ jQuery(document).ready(function($) {
                     end_date   : $('#'+form_id+'_end_date',form).val()
                 };
 
+                if (!is_new_event) {
+                    event.id = id;
+                    ajax_type = 'PUT';
+                }
+
+
+
                 $.ajax({
-                    type: 'PUT',
+                    type: ajax_type,
                     url: url,
                     data: JSON.stringify(event),
                     contentType: "application/json; charset=utf-8",
@@ -108,11 +116,25 @@ jQuery(document).ready(function($) {
                         edit_live_dialog.dialog( "close" );
                         form.cleanForm();
                         //update row values...
-                        $('.title',row).text(event.title);
-                        $('.url',row).find('a').attr('href',event.url);
-                        $('.location',row).text(event.location);
-                        $('.start-date',row).text(event.start_date);
-                        $('.end-date',row).text(event.end_date);
+                        if (is_new_event) {
+                            var new_id = data;
+                            var new_row = '<tr><td class="title"><a id="evt'+new_id+'" href="#"></a>'+event.title+'</td>';
+                            new_row += '<td class="start-date">'+event.start_date+'</td><td class="end-date">'+event.end_date+'</td>';
+                            new_row += '<td class="url"><a href="'+event.url+'">Link</a></td><td class="location">'+event.location+'</td>';
+                            new_row += '<td class="sponsor"></td><td class="summit"><input class="summit_check" event_id="'+new_id+'" type="checkbox" /></td>';
+                            new_row += '<td width="17%"><a href="#" data-event-id="'+new_id+'" class="edit-live-event roundedButton addDeploymentBtn">Edit</a>';
+                            new_row += '&nbsp;<a href="#" data-event-id="'+new_id+'" class="delete-live-event roundedButton addDeploymentBtn">Delete</a></td>';
+                            new_row += '</tr>';
+
+                            $('tbody','#event-registration-requests-table').prepend(new_row);
+                        } else {
+                            $('.title',row).text(event.title);
+                            $('.url',row).find('a').attr('href',event.url);
+                            $('.location',row).text(event.location);
+                            $('.start-date',row).text(event.start_date);
+                            $('.end-date',row).text(event.end_date);
+                        }
+
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         ajaxError(jqXHR, textStatus, errorThrown);
@@ -288,6 +310,31 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+    $('.add-live-event').click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+
+        var form    = $('form',edit_live_dialog);
+        form.cleanForm();
+        var form_id = form.attr('id');
+        edit_live_dialog.dialog( "open");
+
+        var date_picker_start = $('#'+form_id+'_start_date',form);
+        date_picker_start.datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0
+        });
+
+        var date_picker_end = $('#'+form_id+'_end_date',form);
+
+        date_picker_end.datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0
+        });
+
+        return false;
+    });
+
     $('.edit-live-event').click(function(event){
         event.preventDefault();
         event.stopPropagation();
@@ -310,6 +357,18 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_start_date',form).val(data.start_date);
                 $('#'+form_id+'_end_date',form).val(data.end_date);
                 edit_live_dialog.data('id',id).data('row',row).dialog( "open");
+
+                var date_picker_start = $('#'+form_id+'_start_date',form);
+                date_picker_start.datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    minDate: 0
+                });
+
+                var date_picker_end = $('#'+form_id+'_end_date',form);
+                date_picker_end.datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    minDate: 0
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 ajaxError(jqXHR, textStatus, errorThrown);

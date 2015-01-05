@@ -83,38 +83,6 @@ final class EventManager {
         return $event;
     }
 
-	/**
-	 * @param array $data
-	 * @return IEventRegistrationRequest
-	 */
-	public function registerEvent(array $data){
-		/*$repository         = $this->event_repository;
-		$factory            = $this->factory;
-		$geo_coding_service = $this->geo_coding_service;
-		$validator_factory  = $this->validator_factory;
-
-		return $this->tx_manager->transaction(function() use ($data, $geo_coding_service, $factory, $repository, $validator_factory){
-			$validator = $validator_factory->buildValidatorForEvent($data);
-			if ($validator->fails()) {
-				throw new EntityValidationException($validator->messages());
-			}
-
-			$info               = $factory->buildEventMainInfo($data);
-			$point_of_contact   = $factory->buildPointOfContact($data);
-			$location           = $factory->buildEventLocation($data);
-			$duration           = $factory->buildEventDuration($data);
-
-			list($lat,$lng) = $geo_coding_service->getCityCoordinates($location->getCity(),$location->getCountry(),$location->getState());
-			$location->setCoordinates($lat,$lng);
-			$current_user             = Member::currentUser();
-			$new_registration_request = $factory->buildEventRegistrationRequest($info,$point_of_contact, $location, $duration,null);
-			if($current_user){
-				$new_registration_request->registerUser($current_user);
-			}
-			$repository->add($new_registration_request);
-		});*/
-	}
-
     /**
      * @param array $data
      * @return IEvent
@@ -140,6 +108,35 @@ final class EventManager {
             $event->registerDuration($factory->buildEventDuration($data));
 		});
 	}
+
+    /**
+     * @param array $data
+     * @return IEvent
+     */
+    public function addEvent(array $data){
+
+        $this_var           = $this;
+        $validator_factory  = $this->validator_factory;
+        $repository         = $this->event_repository;
+        $factory            = $this->factory;
+
+        return  $this->tx_manager->transaction(function() use ($this_var,$factory, $validator_factory, $data, $repository){
+            $validator = $validator_factory->buildValidatorForEvent($data);
+            if ($validator->fails()) {
+                throw new EntityValidationException($validator->messages());
+            }
+
+            $event = new EventPage();
+
+            $event->registerMainInfo($factory->buildEventMainInfo($data));
+            $event->registerLocation($data['location']);
+            $event->registerDuration($factory->buildEventDuration($data));
+
+            $event_id = $repository->add($event);
+
+            return $event_id;
+        });
+    }
 
     /**
      * @param $id

@@ -157,4 +157,36 @@ final class JobManager {
         });
 
     }
+
+    /**
+     * @param array $data
+     * @return IJob
+     */
+    public function addJob(array $data){
+
+        $this_var           = $this;
+        $validator_factory  = $this->validator_factory;
+        $repository         = $this->jobs_repository;
+        $factory            = $this->factory;
+
+        return  $this->tx_manager->transaction(function() use ($this_var,$factory, $validator_factory, $data, $repository){
+            $validator = $validator_factory->buildValidatorForJob($data);
+            if ($validator->fails()) {
+                throw new EntityValidationException($validator->messages());
+            }
+
+            $job = new JobPage();
+
+            $job->registerMainInfo($factory->buildJobMainInfo($data));
+            $job->registerPostedDate($data['posted_date']);
+            $locations = $factory->buildJobLocations($data);
+            $job->clearLocations();
+            foreach($locations as $location)
+                $job->addLocation($location);
+
+            $job_id = $repository->add($job);
+
+            return $job_id;
+        });
+    }
 } 
