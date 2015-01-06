@@ -1,30 +1,43 @@
+
 <% require themedCSS(conference) %> 
 
-<% loop Parent %>
-$HeaderArea
-<% end_loop %>
-
-<div class="span-5">
-		<p><strong>The OpenStack Summit</strong><br />$Parent.MenuTitle.XML</p>
-	<ul class="navigation">
-		<% with Parent %>
-			<li><a href="$Link" title="Go to the $Title.XML page" class="$LinkingMode"><span>Overview</span></a></li>
-		<% end_with %>
-		<% loop Menu(3) %>
-		  		<li><a href="$Link" title="Go to the $Title.XML page" class="$LinkingMode"><span>$MenuTitle.XML</span></a></li>
-	   	<% end_loop %>
-	</ul>
-
-</div> 
-
-<!-- Content Area -->
 
 
-<div class="prepend-1 span-11" id="news-feed">
+<div class="container summit">
 
-	<div class="span-18 last">
+	<% with Parent %>
+	$HeaderArea
+	<% end_with %>
+	
+  <div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-3">
+			<p><strong>The OpenStack Summit</strong><br />$MenuTitle.XML</p>
 
-		<% if DisplayCompletedMessage %>
+				<div class="newSubNav">
+				    <ul class="overviewNav">
+
+						<% loop Parent %>
+							<li id="$URLSegment"><a href="$Link" title="Go to the $Title.XML page"><span>Overview</span> <i class="fa fa-chevron-right"></i></a></li>
+						<% end_loop %>
+
+				        <% loop Menu(3) %>
+				            <li id="$URLSegment"><a href="$Link" title="Go to the &quot;{$Title}&quot; page"  class="$LinkingMode">$MenuTitle <i class="fa fa-chevron-right"></i></a></li>
+				        <% end_loop %>
+				    </ul>
+				</div>
+			<% with Parent %>
+				<% include SummitVideos %>
+				<% include HeadlineSponsors %>
+			<% end_with %>
+
+
+		</div> 
+
+		<!-- News Feed -->
+
+		<div class="col-lg-9 col-md-9 col-sm-9" id="news-feed">
+
+			<% if DisplayCompletedMessage %>
 
 			<div class="siteMessage" id="SuccessMessage">
 	        	<p><strong>You have successfully submitted your presentation for voting and review by our track chairs.</strong></p>
@@ -79,23 +92,25 @@ $HeaderArea
 				<p class="message" id="InfoMessage">The deadline to submit speaking sessions for the $Parent.MenuTitle.XML is <strong>$SubmissionDeadline.Day $SubmissionDeadline.Month {$SubmissionDeadline.DayOfMonth}, {$SubmissionDeadline.Year}</strong>.</p>
 			<% end_if %>
 
-			<div class="span-9">
-			<h3>Have a login for the OpenStack website?</h3>
-			<% include LoginForm %>
-			<p><a href="/Security/lostpassword">I don't think I ever had a password.</a></p>
-			<hr/>
-			<p>If you are having any issues resetting your password, logging in, or updating your presentations, <a href="mailto:events@openstack.org">ask us</a> and we'll be happy to help!</p>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <h3>Have a login for the OpenStack website?</h3>
+                    <% include LoginForm %>
+                    <p><a href="/Security/lostpassword">I don't think I ever had a password.</a></p>
+                    <hr/>
+                    <p>If you are having any issues resetting your password, logging in, or updating your presentations, <a href="mailto:events@openstack.org">ask us</a> and we'll be happy to help!</p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <% if PastSubmissionDeadline %>
+                    <% else %>
+                    <h3>Don't have a login? Start here.</h3>
+                    $RegisterForm
+                    <% end_if %>
+                </div>
+                
 			</div>
 			
-			<div class="span-9 last">
-			<% if PastSubmissionDeadline %>
-			<% else %>
-			<h3>Don't have a login? Start here.</h3>
-			$RegisterForm
-			<% end_if %>
-			</div>
 
-			<div class="span-18 last">
 				<p></p>
 				<hr/>
 				<a name="ProposedTracks"></a>
@@ -108,9 +123,12 @@ $HeaderArea
 					
 				</ul>
 
-			</div>
 
 		<% end_if %>
+
+		</div>
+
 	</div>
-	
 </div>
+
+$GATrackingCode

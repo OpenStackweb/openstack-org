@@ -11,10 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SpeakerDetailsForm extends HoneyPotForm
+class SpeakerDetailsForm extends Form
 {
 
-	function __construct($controller, $name, $talkID = null, $speaker = null, $member = null, $email = null)
+	function __construct($controller, $name)
 	{
 
 		// Fields
@@ -24,7 +24,7 @@ class SpeakerDetailsForm extends HoneyPotForm
 		$BioField = new HTMLEditorField('Bio', "Speaker's Bio");
 
 		// ID Fields
-		$TalkIDField = new HiddenField('TalkID', "TalkID", $talkID);
+		$TalkIDField = new HiddenField('TalkID', "TalkID");
 		$SpeakerIDField = new HiddenField('SpeakerID', 'SpeakerID', "");
 		$MemberIDField = new HiddenField('MemberID', 'MemberID');
 		$EmailField = new HiddenField('Email', 'Email');
@@ -46,34 +46,6 @@ class SpeakerDetailsForm extends HoneyPotForm
 
 		$PhotoField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 
-
-		// Load Existing Data if present
-		if ($speaker) {
-			$FirstNameField->setValue($speaker->FirstName);
-			$LastNameField->setValue($speaker->Surname);
-			$BioField->setValue($speaker->Bio);
-			$SpeakerIDField->setValue($speaker->ID);
-			$MemberIDField->setValue($speaker->MemberID);
-			$TitleField->setValue($speaker->Title);
-
-
-			$IRCHandleField->setValue($speaker->IRCHandle);
-			$TwiiterNameField->setValue($speaker->TwitterName);
-		} elseif ($member) {
-			$FirstNameField->setValue($member->FirstName);
-			$LastNameField->setValue($member->Surname);
-			$BioField->setValue($member->Bio);
-			$BioField->setValue($member->Bio);
-			$MemberIDField->setValue($member->ID);
-
-			$IRCHandleField->setValue($member->IRCHandle);
-			$TwiiterNameField->setValue($member->TwitterName);
-		}
-
-		if ($email) {
-			$EmailField->setValue($email);
-		}
-
 		$fields = new FieldList(
 			$FirstNameField,
 			$LastNameField,
@@ -92,11 +64,8 @@ class SpeakerDetailsForm extends HoneyPotForm
 			new FormAction('addAction', 'Save Speaker Details')
 		);
 
-		$validator = new RequiredFields(
-			'FirstName',
-			'Surname',
-			'Title'
-		);
+        // Create validators
+        $validator = RequiredFields::create(array("FirstName","Surname")); 
 
 		Requirements::customScript('
 	      tinymce.init({
@@ -158,6 +127,8 @@ class SpeakerDetailsForm extends HoneyPotForm
 			$member = new Member();
 			$form->saveInto($member);
 		}
+        
+		$member->write();
 
 
 		//Find or create the 'speaker' group
@@ -190,11 +161,13 @@ class SpeakerDetailsForm extends HoneyPotForm
 		}
 
 		$speaker->write();
-
+        
 		if (isset($Talk)) {
 			$Talk->Speakers()->add($speaker);
 			$Talk->write();
 		}
+        
+        $this->resetValidation();
 
 		// See if speaker should be prompted to join speaker bureau
 		if ($this->ShouldPromptForBureau($speaker)) {
@@ -208,7 +181,13 @@ class SpeakerDetailsForm extends HoneyPotForm
 
 	function ShouldPromptForBureau($speaker)
 	{
-		if (!$speaker->AskedAboutBureau) return TRUE;
+        $Member = Member::currentUser();
+		if (
+            isset($Member) && 
+            $speaker->MemberID == $Member->ID &&
+            !$speaker->AskedAboutBureau
+        ) 
+            return TRUE;
 	}
 
 

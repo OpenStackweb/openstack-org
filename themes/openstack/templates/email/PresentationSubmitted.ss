@@ -10,7 +10,7 @@
 The call for presentations will remain open until {$Summit.AcceptSubmissionsEndDate.Month} {$Summit.AcceptSubmissionsEndDate.DayOfMonth}, {$Summit.AcceptSubmissionsEndDate.Year}. At that point, members of the OpenStack community will be encouraged to review the submissions and rate their interest. Ultimately, the OpenStack Summit Track Chairs will select the presentations that will be included in the final Summit agenda, using the results of the community voting as input. If your presentation is selected, you will be notified by the Summit speaker managers and receive a free registration code to attend the Summit. The speaker managers will be in contact with you via email to help coordinate your presentation and answer any questions you may have.</p>
 
 <p><strong>WHEN WILL I BE NOTIFIED ABOUT MY SELECTION STATUS?</strong><br/>
-Once the track chairs have made final selections for each track, we’ll send you an email with your status (whether you were selected to present, chosen as an alternate, or not included in this Summit). You should receive an email around the last week of August.</p>
+Once the track chairs have made final selections for each track, we’ll send you an email with your status (whether you were selected to present, chosen as an alternate, or not included in this Summit).</p>
 
 <p><strong>CAN I STILL EDIT MY SUBMISSIONS OR ADD NEW ONES?</strong><br/>
 Absolutely. You can continue to edit your submissions or add new ones until {$Summit.AcceptSubmissionsEndDate.Month} {$Summit.AcceptSubmissionsEndDate.DayOfMonth}.</p>
