@@ -160,6 +160,7 @@ class CallForSpeakersForm extends HoneyPotForm {
 			}
 
             $form->saveInto($SpeakerSubmission);
+            $this->resetValidation();
             $SpeakerSubmission->write();
 
             // Mark that a new talk was added (to email admin after complete)

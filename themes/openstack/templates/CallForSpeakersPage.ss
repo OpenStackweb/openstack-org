@@ -4,69 +4,66 @@
 
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="globalsign-domain-verification" content="tWFOHNAA_WMHmHfBMq38uTgupHFugV_dZ2rqyRxNMx" />
     <title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
 
     <% base_tag %>
-    
-    <!-- Google Fonts -->
-	<link href='{$CurrentProtocol}fonts.googleapis.com/css?family=PT+Sans&subset=latin' rel='stylesheet' type='text/css'>
-    
+
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.openstack.org/blog/feed/" />
+
+    <!-- Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+
     <!-- Framework CSS -->
-    <link rel="stylesheet" href="/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="/themes/openstack/css/blueprint/print.css" type="text/css" media="print">
-    
-    <!-- IE CSS -->
-    <!--[if lt IE 8]><link rel="stylesheet" href="/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-    
+    <% if BootstrapConverted %>
+    <% else %>    
+      <link rel="stylesheet" href="/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <% end_if %>
+    <link rel="stylesheet" href="/themes/openstack/css/bootstrap.min.css" type="text/css" media="screen, projection">
+
+
     <!-- OpenStack Specific CSS -->
-    <% require themedCSS(main) %>
+    <% if BootstrapConverted %>
+    <% else %>
+      <link href="/themes/openstack/css/main.css" rel="stylesheet">
+    <% end_if %>
+    <link href="/themes/openstack/css/combined.css" rel="stylesheet">
     <link rel="stylesheet" href="/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print">
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+
+
     <% include Analytics %>
-       
+    $FBTrackingCode
+
   </head>
+
   <body id="$URLSegment">
-  
-
-  <% include SiteBanner %>
-    	  	
-    <div class="container">
-		<div id="header">
-			<div class="span-5">
-				<h1 id="logo"><a href="/">Open Stack</a></h1>
-			</div>
-			<div class="span-19 last blueLine">
-				
-				<div id="navigation" class="span-19">
-					<ul id="Menu1">
-						  <% include Navigation %>
-						  <li><a href="/blog/" title="Go to the OpenStack Blog">Blog</a></li>
-					  	  <li><a href="http://wiki.openstack.org/" title="Go to the OpenStack Wiki">Wiki</a></li>
-					  	  <li><a href="http://docs.openstack.org/" title="Go to OpenStack Documentation">Documentation</a></li>
- 					</ul>
-								
-
-				</div>
-				
-			</div>
-	  	</div>
-	  	<% include GoogleCustomSearch %>
-	</div>
+      <% include SiteBanner %>
+      <% include Navigation %>
+      
+      <!-- Page Content -->
+      <% if BootstrapConverted %>
+        $Message
+        $Layout
+      <% else %>
+        <div class="container">
+          $Layout
+        </div>
+      <% end_if %>
 
 
-	<!-- Page Content -->
+    <% include Footer %>
+    $TrackingLinkScript
+    <% include Quantcast %>
+  </body>
 
-    <div class="container">
-    	$Message
-  		$Layout  	
-	</div>
-
-<% include Footer %>
-
-$TrackingLinkScript
-
-<% include Quantcast %>
-
-</body>
 </html>

@@ -232,7 +232,7 @@ class CallForSpeakersPage_Controller extends Page_Controller {
     return $this;
         
   }
-
+    
   public function SpeakerDetailsForm() {
 
         // New speaker being set up from session date (add mode)
@@ -259,13 +259,21 @@ class CallForSpeakersPage_Controller extends Page_Controller {
         } elseif (!$Talk->CanEdit()) {
           return $this->httpError(500,'You cannot edit this presentation.');
         }
-
-        $SpeakerDetailsForm = New SpeakerDetailsForm($this, 'SpeakerDetailsForm', $TalkID, $speaker, $member, $Email);
+      
+        $SpeakerDetailsForm = SpeakerDetailsForm::create($this, 'SpeakerDetailsForm');
 
         if ($speaker) {
-          $SpeakerDetailsForm->loadDataFrom($speaker, FALSE, array('Photo'));
+          $SpeakerDetailsForm->loadDataFrom($speaker);            
+          $SpeakerDetailsForm->loadDataFrom(array('TalkID'=>$TalkID));
+          $SpeakerDetailsForm->loadDataFrom(array('SpeakerID'=>$speaker->ID));
         } elseif ($member) {
-          $SpeakerDetailsForm->loadDataFrom($member, FALSE, array('Photo'));
+          $SpeakerDetailsForm->loadDataFrom($member);
+          $SpeakerDetailsForm->loadDataFrom(array('TalkID'=>$TalkID));
+          $SpeakerDetailsForm->loadDataFrom(array('MemberID'=>$member->ID)); 
+          $SpeakerDetailsForm->loadDataFrom(array('Title'=>''));                        
+        } else {
+          $SpeakerDetailsForm->loadDataFrom(array('Email'=>$Email));
+          $SpeakerDetailsForm->loadDataFrom(array('TalkID'=>$TalkID));
         }
 
         return $SpeakerDetailsForm;
