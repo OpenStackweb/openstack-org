@@ -22,6 +22,7 @@ final class EditProfilePageICLAExtension extends Extension {
 	private $team_repository;
 
 	public function __construct(){
+        parent::__construct();
 		$this->team_repository = new SapphireTeamRepository;
 	}
 

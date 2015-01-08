@@ -1,0 +1,12 @@
+.dupes-email{
+    padding-right: 15px;
+    min-width: 200px;
+    width:200px;
+    float: left;
+}
+
+
+#dupes-emails-list{
+    list-style: none;
+    padding-left: 0px;
+}

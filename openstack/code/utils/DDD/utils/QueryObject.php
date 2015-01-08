@@ -109,6 +109,7 @@ final class QueryObject {
 
 	public function getAlias(){
 		$join = array();
+
 		foreach($this->alias as $alias){
 			$child            = $alias->getName();
 			$has_many         = Config::inst()->get(get_class($this->base_entity), 'has_many');
@@ -143,11 +144,17 @@ final class QueryObject {
 
 			$has_one   = Config::inst()->get(get_class($this->base_entity), 'has_one');
 			if(!is_null($has_one)){
-				$has_one_classes = array_flip($has_one);
-				if(array_key_exists($child,$has_one_classes)){
+                if(array_key_exists($child, $has_one)) {
+                    $table        = $has_one[$child];
+                    $join[$table] = $has_one[$child] . '.ID = ' . $class_name . '.' . $child . 'ID';
+                }
+                else {
+                    $has_one_classes = array_flip($has_one);
+                    if (array_key_exists($child, $has_one_classes)) {
 
-					$join[$child] = $child.'.ID = '.$class_name.'.'.$has_one_classes[$child].'ID';
-				}
+                        $join[$child] = $child . '.ID = ' . $class_name . '.' . $has_one_classes[$child] . 'ID';
+                    }
+                }
 			}
 
 			$belongs_many_many   = Config::inst()->get(get_class($this->base_entity), 'belongs_many_many');

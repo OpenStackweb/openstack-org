@@ -11,22 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-/**
- * Interface IMemberRepository
- */
-interface IMemberRepository extends IEntityRepository
-{
-    /**
-     * @param string $email
-     * @return ICLAMember
-     */
-    public function findByEmail($email);
-
-    /**
-     * @param string $first_name
-     * @param string $last_name
-     * @return ICommunityMember[]
-     */
-    public function getAllByName($first_name, $last_name);
-} 
+Object::add_extension('EditProfilePage_Controller', 'EditProfileDupesMemberExtension');

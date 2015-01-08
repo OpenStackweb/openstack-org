@@ -84,10 +84,12 @@ class SapphireRepository extends AbstractEntityRepository
 	public function getBy(QueryObject $query)
 	{
 		$filter = (string)$query;
-		$class = $this->entity_class;
-		$do = $class::get()->where($filter);
-		if (count($query->getAlias()))
-			$do = $do->innerJoin($query->getAlias());
+		$class  = $this->entity_class;
+		$do     = $class::get()->where($filter);
+        $joins  = $query->getAlias();
+        foreach($joins as $table => $clause)
+			$do = $do->innerJoin($table, $clause);
+
 		if (count($query->getOrder()))
 			$do = $do->sort($query->getOrder());
 		if (is_null($do)) return false;

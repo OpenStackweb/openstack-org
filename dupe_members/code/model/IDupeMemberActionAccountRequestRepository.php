@@ -13,20 +13,26 @@
  **/
 
 /**
- * Interface IMemberRepository
+ * Interface IDupeMemberActionAccountRequestRepository
  */
-interface IMemberRepository extends IEntityRepository
-{
-    /**
-     * @param string $email
-     * @return ICLAMember
-     */
-    public function findByEmail($email);
+interface IDupeMemberActionAccountRequestRepository
+    extends IEntityRepository {
 
     /**
-     * @param string $first_name
-     * @param string $last_name
-     * @return ICommunityMember[]
+     * @param string $token
+     * @return bool
      */
-    public function getAllByName($first_name, $last_name);
+    public function existsConfirmationToken($token);
+
+    /**
+     * @param string $token
+     * @return IDupeMemberActionAccountRequest
+     */
+    public function findByConfirmationToken($token);
+
+    /**
+     * @param string $dupe_account_email
+     * @return IDupeMemberActionAccountRequest
+     */
+    public function findByDupeAccount($dupe_account_email);
 } 

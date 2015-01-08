@@ -13,20 +13,12 @@
  **/
 
 /**
- * Interface IMemberRepository
+ * Class SapphireDupeMemberDeleteRequestRepository
  */
-interface IMemberRepository extends IEntityRepository
-{
-    /**
-     * @param string $email
-     * @return ICLAMember
-     */
-    public function findByEmail($email);
+final class SapphireDupeMemberDeleteRequestRepository
+    extends SapphireDupeMemberActionAccountRequestRepository {
 
-    /**
-     * @param string $first_name
-     * @param string $last_name
-     * @return ICommunityMember[]
-     */
-    public function getAllByName($first_name, $last_name);
-} 
+    public function __construct(){
+        parent::__construct(new DupeMemberDeleteRequest);
+    }
+}

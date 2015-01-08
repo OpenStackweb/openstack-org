@@ -13,20 +13,14 @@
  **/
 
 /**
- * Interface IMemberRepository
+ * Interface IDupeMemberActionAccountRequestFactory
  */
-interface IMemberRepository extends IEntityRepository
-{
-    /**
-     * @param string $email
-     * @return ICLAMember
-     */
-    public function findByEmail($email);
+interface IDupeMemberActionAccountRequestFactory {
 
     /**
-     * @param string $first_name
-     * @param string $last_name
-     * @return ICommunityMember[]
+     * @param ICommunityMember $primary_account
+     * @param ICommunityMember $dupe_account
+     * @return IDupeMemberActionAccountRequest
      */
-    public function getAllByName($first_name, $last_name);
+    public function build(ICommunityMember $primary_account, ICommunityMember $dupe_account);
 } 
