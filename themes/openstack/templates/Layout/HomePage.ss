@@ -1,4 +1,5 @@
-    <div class="intro-header featured">
+</div>
+            <div class="intro-header featured">
 
         <div class="container">
 
