@@ -13,20 +13,11 @@
  **/
 
 /**
- * Interface IMemberRepository
+ * Interface IDupeMemberActionRequestNotificationSender
  */
-interface IMemberRepository extends IEntityRepository
-{
-    /**
-     * @param string $email
-     * @return ICLAMember
-     */
-    public function findByEmail($email);
+interface IDupeMemberActionRequestNotificationSender {
 
-    /**
-     * @param string $first_name
-     * @param string $last_name
-     * @return ICommunityMember[]
-     */
-    public function getAllByName($first_name, $last_name);
+    public function sendMergeNotification(IDupeMemberMergeRequest $request);
+
+    public function sendDeleteNotification(IDupeMemberDeleteRequest $request);
 } 

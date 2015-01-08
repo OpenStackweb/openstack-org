@@ -13,20 +13,37 @@
  **/
 
 /**
- * Interface IMemberRepository
+ * Class SapphireDupesMemberRepository
  */
-interface IMemberRepository extends IEntityRepository
-{
+class SapphireDupesMemberRepository
+    extends SapphireRepository
+    implements IMemberRepository {
+
+    public function __construct(){
+        $entity = new FoundationMember();
+        $entity->setOwner(new Member());
+        parent::__construct($entity);
+    }
+
     /**
      * @param string $email
      * @return ICLAMember
      */
-    public function findByEmail($email);
+    public function findByEmail($email)
+    {
+        // TODO: Implement findByEmail() method.
+    }
 
     /**
      * @param string $first_name
      * @param string $last_name
      * @return ICommunityMember[]
      */
-    public function getAllByName($first_name, $last_name);
-} 
+    public function getAllByName($first_name, $last_name)
+    {
+        $query = new QueryObject(new Member());
+        $query->addAddCondition(QueryCriteria::equal('FirstName',$first_name));
+        $query->addAddCondition(QueryCriteria::equal('Surname',$last_name));
+        return $this->getAll($query,0,999999);
+    }
+}

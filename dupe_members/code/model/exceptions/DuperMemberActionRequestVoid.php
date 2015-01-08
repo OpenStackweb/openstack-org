@@ -13,20 +13,8 @@
  **/
 
 /**
- * Interface IMemberRepository
+ * Class DuperMemberActionRequestVoid
  */
-interface IMemberRepository extends IEntityRepository
-{
-    /**
-     * @param string $email
-     * @return ICLAMember
-     */
-    public function findByEmail($email);
+final class DuperMemberActionRequestVoid extends Exception {
 
-    /**
-     * @param string $first_name
-     * @param string $last_name
-     * @return ICommunityMember[]
-     */
-    public function getAllByName($first_name, $last_name);
 } 

@@ -13,20 +13,9 @@
  **/
 
 /**
- * Interface IMemberRepository
+ * Class DupeMemberDeleteRequest
  */
-interface IMemberRepository extends IEntityRepository
-{
-    /**
-     * @param string $email
-     * @return ICLAMember
-     */
-    public function findByEmail($email);
-
-    /**
-     * @param string $first_name
-     * @param string $last_name
-     * @return ICommunityMember[]
-     */
-    public function getAllByName($first_name, $last_name);
-} 
+final class DupeMemberDeleteRequest
+    extends DupeMemberActionRequest
+    implements IDupeMemberDeleteRequest {
+}
