@@ -1686,7 +1686,7 @@ a.featured-link:hover {
   max-height: 113px;
   max-width: 1140px;
   margin-bottom: 20px;
-  background-image: url('/themes/openstack/images/paris-summit-lrg.jpg');
+  background-image: url('/themes/openstack/images/conferences/vancouver/vancouver-banner.png');
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center center; }
@@ -1694,7 +1694,7 @@ a.featured-link:hover {
 @media (max-width: 767px) {
   .event-ad-lrg {
     max-width: 766px;
-    background-image: url('/themes/openstack/images/paris-summit-sm.jpg');
+  background-image: url('/themes/openstack/images/conferences/vancouver/vancouver-banner.png');
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center center; } }

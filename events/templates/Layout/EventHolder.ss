@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/">
+            <a href="https://www.openstack.org/summit/vancouver-2015//">
                 <div class="event-ad-lrg"></div>
             </a>
         </div>

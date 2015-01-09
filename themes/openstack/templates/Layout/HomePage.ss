@@ -114,7 +114,7 @@ x    <!-- News Section -->
             <div class="row">
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>Upcoming Events <a href="http://www.openstack.org/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
-                    <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/"><img class="event-ad" src="/themes/openstack/images/paris-banner.jpg"></a>
+                    <a href="/summit/"><img class="event-ad" src="/themes/openstack/images/conferences/vancouver/vancouver-summit-small.jpg"></a>
                     $UpcomingEvents(7)
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
