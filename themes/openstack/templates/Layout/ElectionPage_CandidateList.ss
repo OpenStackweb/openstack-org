@@ -4,7 +4,7 @@
 
 <div class="siteMessage" id="InfoMessage">
 <p><strong>HOW TO VOTE</strong></p>
-<p>If you are an eligible voter, you should have received an email with the subject <strong>"OpenStack Foundation - 2014 Individual Director Election"</strong> from secretary@openstack.org. This email includes your unique voting link. If you did not receive an email, please contact <a href="mailto:secretary@openstack.org">secretary@openstack.org</a>.</p>
+<p>If you are an eligible voter, you should have received an email with the subject <strong>"OpenStack Foundation - 2015 Individual Director Election"</strong> from secretary@openstack.org. This email includes your unique voting link. If you did not receive an email, please contact <a href="mailto:secretary@openstack.org">secretary@openstack.org</a>.</p>
 </div>
 
 <% end_if %>
