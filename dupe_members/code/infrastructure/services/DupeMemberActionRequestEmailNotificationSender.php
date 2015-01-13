@@ -42,12 +42,16 @@ final class DupeMemberActionRequestEmailNotificationSender
     public function sendMergeNotification(IDupeMemberMergeRequest $request)
     {
         $dupe     = $request->getDupeAccount();
+        $primary  = $request->getPrimaryAccount();
         $email_to = $dupe->getEmail();
 
         $email = EmailFactory::getInstance()->buildEmail(DUPE_EMAIL_FROM, $email_to  , "You Have Requested to Merge Openstack Duplicated Account");
 
         $template_data = array(
-
+            'FirstName'      => $dupe->getFirstName(),
+            'LastName'       => $dupe->getLastName(),
+            'DupeAccount'    => $email_to,
+            'PrimaryAccount' => $primary->getEmail()
         );
 
         $email->setTemplate('DupeMembers_MergeAccountEmail');
