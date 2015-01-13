@@ -24,6 +24,11 @@ interface ICLAMember extends IEntity {
 	 */
 	public function getGerritId();
 
+    /**
+     * @return bool
+     */
+    public function isGerritUser();
+
 	/**
 	 * @return DateTime
 	 */

@@ -35,25 +35,51 @@ final class DupesMembers_Controller extends AbstractController {
      */
     private $delete_request_repository;
 
+    /**
+     * @var SapphireDupeMemberDeleteRequestRepository
+     */
+    private $merge_request_repository;
+
 
     /**
-     * @var DupesMembersManager
+     * @var DupesMembersManager 
      */
     private $manager;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->delete_request_repository = new SapphireDupeMemberDeleteRequestRepository;
+        $this->merge_request_repository  = new SapphireDupeMemberMergeRequestRepository;
+
         $this->manager = new DupesMembersManager(new SapphireDupesMemberRepository,
             new DupeMemberMergeRequestFactory,
             new DupeMemberDeleteRequestFactory,
-            new SapphireDupeMemberMergeRequestRepository,
-            new SapphireDupeMemberDeleteRequestRepository,
+            $this->merge_request_repository,
+            $this->delete_request_repository,
+            new SapphireDeletedDupeMemberRepository,
+            new DeletedDupeMemberFactory,
             SapphireTransactionManager::getInstance());
     }
 
 
+    public function init()
+    {
+        parent::init();
+        Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
+        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
+        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
+
+        if (Director::isLive()) {
+            Requirements::javascript('themes/openstack/javascript/jquery.min.js');
+        } else {
+            Requirements::javascript('themes/openstack/javascript/jquery.js');
+        }
+
+        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
+        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
+    }
     /**
      * @return string|void
      */
@@ -64,18 +90,35 @@ final class DupesMembers_Controller extends AbstractController {
             $current_member = Member::currentUser();
             if(is_null($current_member))
                 return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
-            $team = $this->team_manager->confirmInvitation($token, $current_member);
-            return $this->renderWith( array('TeamInvitationConfirmation_successfull','Page') , array('TeamName' => $team->getName() , 'CompanyName' => $team->getCompany()->Name ) );
-        }
-        catch(InvitationBelongsToAnotherMemberException $ex1){
-            SS_Log::log($ex1,SS_Log::ERR);
-            $invitation = $this->invitation_repository->findByConfirmationToken($token);
+            $request = $this->merge_request_repository->findByConfirmationToken($token);
 
-            return $this->renderWith(array('TeamInvitationConfirmation_belongs_2_another_user','Page'), array('UserName' => $invitation->getMember()->Email));
+            if($request->isVoid())
+                throw new DuperMemberActionRequestVoid();
+
+            $dupe_account =  $request->getDupeAccount();
+
+            if($dupe_account->getEmail() != $current_member->getEmail()){
+                throw new AccountActionBelongsToAnotherMemberException;
+            }
+
+            Requirements::javascript('dupe_members/javascript/dupe.members.merge.action.js');
+
+            return $this->renderWith(array('DupesMembers_MergeAccountConfirm', 'Page'), array(
+                'DupeAccount'       => $request->getDupeAccount(),
+                'CurrentAccount'    => $request->getPrimaryAccount(),
+                'ConfirmationToken' => $token,
+            ));
+        }
+        catch(AccountActionBelongsToAnotherMemberException $ex1){
+            SS_Log::log($ex1,SS_Log::ERR);
+            $request = $this->merge_request_repository->findByConfirmationToken($token);
+            return $this->renderWith(array('DupesMembers_belongs_2_another_user','Page'), array(
+                'UserName' => $request->getDupeAccount()->getEmail()
+            ));
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);
-            return $this->renderWith(array('TeamInvitationConfirmation_error','Page'));
+            return $this->renderWith(array('DupesMembers_error','Page'));
         }
     }
 
@@ -90,17 +133,32 @@ final class DupesMembers_Controller extends AbstractController {
             $current_member = Member::currentUser();
             if(is_null($current_member))
                 return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
-            $request = $this->manager->deleteAccount($current_member, $token);
-            return $this->renderWith( array('DupesMembers_DeleteAccount','Page') , array(
-                'DupeAccount' => $request->getDupeAccount()->getEmail()
-                )
-            );
+            $request = $this->delete_request_repository->findByConfirmationToken($token);
+
+            if($request->isVoid())
+                throw new DuperMemberActionRequestVoid();
+
+            $dupe_account =  $request->getDupeAccount();
+
+            if($dupe_account->getEmail() != $current_member->getEmail()){
+                throw new AccountActionBelongsToAnotherMemberException;
+            }
+
+            Requirements::javascript('dupe_members/javascript/dupe.members.delete.action.js');
+
+            return $this->renderWith(array('DupesMembers_DeleteAccountConfirm', 'Page'), array(
+                    'DupeAccount'       => $request->getDupeAccount(),
+                    'CurrentAccount'    => $request->getPrimaryAccount(),
+                    'ConfirmationToken' => $token,
+            ));
+
         }
         catch(AccountActionBelongsToAnotherMemberException $ex1){
             SS_Log::log($ex1,SS_Log::ERR);
             $request = $this->delete_request_repository->findByConfirmationToken($token);
             return $this->renderWith(array('DupesMembers_belongs_2_another_user','Page'), array(
-                'UserName' => $request->getDupeAccount()->getEmail()));
+                'UserName' => $request->getDupeAccount()->getEmail()
+            ));
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);

@@ -41,4 +41,24 @@ interface IFoundationMember extends IEntity {
 
 	public function resign();
 
+    /**
+     * @return bool
+     */
+    public function isCanditate();
+
+    /**
+     * @return bool
+     */
+    public function hasDeploymentSurveys();
+
+    /**
+     * @return bool
+     */
+    public function hasAppDevSurveys();
+
+    /**
+     * @return bool
+     */
+    public function isCompanyAdmin();
+
 } 

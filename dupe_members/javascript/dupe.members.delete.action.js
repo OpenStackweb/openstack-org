@@ -11,17 +11,16 @@
  * limitations under the License.
  **/
 jQuery(document).ready(function($) {
-
-    //delete account
-    $('.dupes-member-delete-account').click(function(e){
+    //keep account
+    $('#btn-keep').click(function(e){
         e.preventDefault();
         var btn = $(this);
         if(window.confirm('Are you sure?')){
-            var member_id = btn.attr('data-id');
+            var token = btn.attr('data-token');
             $.ajax({
                 async:true,
-                type: 'POST',
-                url: 'api/v1/dupes-members/'+member_id+'/delete-request',
+                type: 'PUT',
+                url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
                     btn.parent().fadeOut(500, function(){
@@ -38,16 +37,38 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    //merge
-    $('.dupes-member-merge-account').click(function(e){
+    //merge account
+    $('#btn-merge').click(function(e){
         e.preventDefault();
         var btn = $(this);
         if(window.confirm('Are you sure?')){
-            var member_id = btn.attr('data-id');
+            var token = btn.attr('data-token');
             $.ajax({
                 async:true,
-                type: 'POST',
-                url: 'api/v1/dupes-members/'+member_id+'/merge-request',
+                type: 'PATCH',
+                url: 'api/v1/dupes-members/'+token+'/account',
+                dataType: "json",
+                success: function (data,textStatus,jqXHR) {
+                   alert('An email will be sent to your duplicate account email with the merge instructions, please follow them. Thank you.')
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    ajaxError( jqXHR, textStatus, errorThrown);
+                }
+            });
+        }
+        return false;
+    });
+
+    //delete account
+    $('#btn-delete').click(function(e){
+        e.preventDefault();
+        var btn = $(this);
+        if(window.confirm('Are you sure?')){
+            var token = btn.attr('data-token');
+            $.ajax({
+                async:true,
+                type: 'DELETE',
+                url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
                     btn.parent().fadeOut(500, function(){
@@ -64,13 +85,3 @@ jQuery(document).ready(function($) {
         return false;
     });
 });
-
-function checkEmptyWarning(li){
-    var list  = li.parent();
-    var count = $('li',list).length;
-    if(count == 1){
-        $('#dupes-email-warning-container').fadeOut(300, function(){
-            $(this).remove();
-        })
-    }
-}

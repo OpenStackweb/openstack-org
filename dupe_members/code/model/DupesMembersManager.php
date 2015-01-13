@@ -60,14 +60,18 @@ final class DupesMembersManager {
                                 IDupeMemberActionAccountRequestFactory $delete_request_factory,
                                 IDupeMemberActionAccountRequestRepository $merge_request_repository,
                                 IDupeMemberActionAccountRequestRepository $delete_request_repository,
+                                IEntityRepository $delete_dupe_member_repository,
+                                IDeletedDupeMemberFactory $delete_dupe_member_factory,
                                 ITransactionManager $tx_manager ) {
 
-        $this->member_repository          = $member_repository;
-        $this->merge_request_factory      = $merge_request_factory;
-        $this->delete_request_factory     = $delete_request_factory;
-        $this->merge_request_repository   = $merge_request_repository;
-        $this->delete_request_repository  = $delete_request_repository;
-        $this->tx_manager                 = $tx_manager;
+        $this->member_repository             = $member_repository;
+        $this->merge_request_factory         = $merge_request_factory;
+        $this->delete_request_factory        = $delete_request_factory;
+        $this->merge_request_repository      = $merge_request_repository;
+        $this->delete_request_repository     = $delete_request_repository;
+        $this->delete_dupe_member_repository = $delete_dupe_member_repository;
+        $this->delete_dupe_member_factory    = $delete_dupe_member_factory;
+        $this->tx_manager                    = $tx_manager;
     }
 
     public function HasDupes(ICommunityMember $member) {
@@ -101,7 +105,7 @@ final class DupesMembersManager {
         return $this->tx_manager->transaction(function() use($member, $account_id, $member_repository, $merge_request_factory, $merge_request_repository, $notification_sender){
 
             $dupe_account = $member_repository->getById($account_id);
-            if(!is_null($dupe_account)) throw new NotFoundEntityException('Member' , sprintf("member id %s", $account_id));
+            if(is_null($dupe_account)) throw new NotFoundEntityException('Member' , sprintf("member id %s", $account_id));
 
             $old_request = $merge_request_repository->findByDupeAccount($dupe_account->getEmail());
 
@@ -150,10 +154,12 @@ final class DupesMembersManager {
 
     public function deleteAccount(ICommunityMember $current_member, $token){
 
-        $delete_request_repository = $this->delete_request_repository;
-        $member_repository         = $this->member_repository ;
+        $delete_request_repository     = $this->delete_request_repository;
+        $member_repository             = $this->member_repository ;
+        $delete_dupe_member_factory    = $this->delete_dupe_member_factory;
+        $delete_dupe_member_repository = $this->delete_dupe_member_repository;
 
-        return $this->tx_manager->transaction(function() use($current_member, $token,  $delete_request_repository, $member_repository){
+        return $this->tx_manager->transaction(function() use($current_member, $token,  $delete_request_repository, $member_repository, $delete_dupe_member_factory, $delete_dupe_member_repository){
 
             $request = $delete_request_repository->findByConfirmationToken($token);
 
@@ -172,10 +178,51 @@ final class DupesMembersManager {
 
             $current_member->resign();
             $current_member->logOut();
+            $deleted  = $delete_dupe_member_factory->build($current_member);
+
             $member_repository->delete($current_member);
+
+            $delete_dupe_member_repository->add($deleted);
 
             return $request;
         });
 
+    }
+
+    public function keepAccount(ICommunityMember $current_member, $token){
+
+        $delete_request_repository = $this->delete_request_repository;
+        $member_repository         = $this->member_repository ;
+
+        return $this->tx_manager->transaction(function() use($current_member, $token,  $delete_request_repository, $member_repository){
+
+            $request = $delete_request_repository->findByConfirmationToken($token);
+
+            if(is_null($request)) throw new NotFoundEntityException('DupeMemberDeleteRequest' , sprintf("token %s", $token));
+
+            if($request->isVoid())
+                throw new DuperMemberActionRequestVoid();
+
+            $dupe_account =  $request->getDupeAccount();
+
+            if($dupe_account->getEmail() != $current_member->getEmail()){
+                throw new AccountActionBelongsToAnotherMemberException;
+            }
+
+            $delete_request_repository->delete($request);
+
+            return $request;
+        });
+
+    }
+
+    public function upgradeDeleteRequest2Merge(ICommunityMember $current_member, $token, IDupeMemberActionRequestNotificationSender $notification_sender) {
+        $_this = $this;
+
+        $this->tx_manager->transaction(function() use($_this, $current_member, $token, $notification_sender){
+            $request = $_this->keepAccount($current_member, $token);
+
+            $_this->registerMergeAccountRequest($request->getPrimaryAccount() , $request->getDupeAccount()->getIdentifier(), $notification_sender);
+        });
     }
 } 

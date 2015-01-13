@@ -144,4 +144,47 @@ final class FoundationMember
     {
         return (string)$this->owner->getField('Email');
     }
+
+    /**
+     * @return bool
+     */
+    public function isCanditate()
+    {
+        $res = false;
+        $election = ElectionSystem::get()->first();
+        if ($election && $election->CurrentElectionID != 0){
+            $current_election = $election->CurrentElection();
+            if(!is_null($current_election)){
+                $candidate = Candidate::get()->filter( array(
+                    'MemberID'   => $this->getIdentifier(),
+                    'ElectionID' => $current_election->ID))->first();
+
+                $res = !is_null( $candidate );
+            }
+        }
+        return $res;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasDeploymentSurveys()
+    {
+        return DeploymentSurvey::get()->filter( array( 'MemberID' => $this->getIdentifier()))->count() > 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAppDevSurveys()
+    {
+        return AppDevSurvey::get()->filter( array( 'MemberID' => $this->getIdentifier()))->count() > 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCompanyAdmin(){
+        return count($this->owner->getManagedCompanies()) > 0;
+    }
 }

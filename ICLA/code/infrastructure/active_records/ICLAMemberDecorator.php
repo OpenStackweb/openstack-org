@@ -47,6 +47,10 @@ final class ICLAMemberDecorator
 		return (string)$this->owner->getField('GerritID');
 	}
 
+    public function isGerritUser(){
+        return $this->getGerritId()!='';
+    }
+
 	/**
 	 * @return DateTime
 	 */
