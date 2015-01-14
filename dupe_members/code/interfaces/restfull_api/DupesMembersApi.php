@@ -52,11 +52,12 @@ final class DupesMembersApi
      * @var array
      */
     static $url_handlers = array(
-        'POST $MEMBER_ID/merge-request' => 'mergeAccountRequest',
-        'POST $MEMBER_ID/delete-request' => 'deleteAccountRequest',
+        'POST $CONFIRMATION_TOKEN/merge'     => 'mergeAccount',
+        'POST $MEMBER_ID/merge-request'      => 'mergeAccountRequest',
+        'POST $MEMBER_ID/delete-request'     => 'deleteAccountRequest',
         'DELETE $CONFIRMATION_TOKEN/account' => 'deleteAccount',
-        'PUT $CONFIRMATION_TOKEN/account' => 'keepAccount',
-        'PATCH $CONFIRMATION_TOKEN/account' => 'upgradeDeleteRequest2Merge',
+        'PUT $CONFIRMATION_TOKEN/account'    => 'keepAccount',
+        'PATCH $CONFIRMATION_TOKEN/account'  => 'upgradeDeleteRequest2Merge',
     );
 
     /**
@@ -68,6 +69,7 @@ final class DupesMembersApi
         'deleteAccount',
         'keepAccount',
         'upgradeDeleteRequest2Merge',
+        'mergeAccount',
     );
 
     public function mergeAccountRequest(){
@@ -159,6 +161,28 @@ final class DupesMembersApi
         try{
             $current_member = Member::currentUser();
             $this->manager->upgradeDeleteRequest2Merge($current_member, $token, new DupeMemberActionRequestEmailNotificationSender(new SapphireDupeMemberMergeRequestRepository, new SapphireDupeMemberDeleteRequestRepository));
+            return $this->ok();
+        }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->notFound($ex1->getMessage());
+        }
+        catch(EntityValidationException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->validationError($ex2->getMessages());
+        }
+        catch(Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function mergeAccount(){
+        try{
+            $token = $this->request->param('CONFIRMATION_TOKEN');
+            $data = $this->getJsonRequest();
+            if (!$data) return $this->serverError();
+            $current_member = Member::currentUser();
             return $this->ok();
         }
         catch(NotFoundEntityException $ex1){
