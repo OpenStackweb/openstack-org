@@ -368,7 +368,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 	{
 		$res = array();
 		$query = new QueryObject;
-		list($list, $size) = $this->components_repository->getAll($query);
+		list($list, $size) = $this->components_repository->getAll($query,0,999999);
 		foreach ($list as $component) {
 			$res2 = array();
 			$releases = $component->getSupportedReleases();
