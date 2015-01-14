@@ -23,11 +23,8 @@ jQuery(document).ready(function($) {
                 url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
-                    btn.parent().fadeOut(500, function(){
-                        var li = $(this);
-                        checkEmptyWarning(li);
-                        li.remove();
-                    });
+                    alert('You decided to keep  your duplicate account. Thank you.');
+                    window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);
@@ -49,7 +46,8 @@ jQuery(document).ready(function($) {
                 url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
-                   alert('An email will be sent to your duplicate account email with the merge instructions, please follow them. Thank you.')
+                   alert('An email will be sent to your duplicate account email with the merge instructions, please follow them. Thank you.');
+                   window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);
@@ -71,11 +69,8 @@ jQuery(document).ready(function($) {
                 url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
-                    btn.parent().fadeOut(500, function(){
-                        var li = $(this);
-                        checkEmptyWarning(li);
-                        li.remove();
-                    });
+                    alert('You have been deleted your duplicate account successfully. Thank you.');
+                    window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);

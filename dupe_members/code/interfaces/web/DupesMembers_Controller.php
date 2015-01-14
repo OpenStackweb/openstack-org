@@ -135,7 +135,7 @@ final class DupesMembers_Controller extends AbstractController {
                 return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
             $request = $this->delete_request_repository->findByConfirmationToken($token);
 
-            if($request->isVoid())
+            if(is_null($request) || $request->isVoid())
                 throw new DuperMemberActionRequestVoid();
 
             $dupe_account =  $request->getDupeAccount();

@@ -75,23 +75,26 @@ final class DupesMembersManager {
     }
 
     public function HasDupes(ICommunityMember $member) {
-        $res = $this->member_repository->getAllByName($member->getFirstName(), $member->getLastName());
-        for($i = 0 ; $i < count($res);$i++){
-            if($res[$i]->getIdentifier()==$member->getIdentifier()){
-                unset($res[$i]);
-                break;
-            }
-        }
+        $res = $this->getDupes($member);
         return count($res) > 0;
     }
 
     public function getDupes(ICommunityMember $member){
         list($res,$count) = $this->member_repository->getAllByName($member->getFirstName(), $member->getLastName());
+        $unset  = array();
         for($i = 0 ; $i < count($res);$i++){
-            if($res[$i]->getIdentifier()==$member->getIdentifier()){
-                unset($res[$i]);
-                break;
+            if($res[$i]->getIdentifier() == $member->getIdentifier()){
+                array_push($unset,$i);
+                continue;
             }
+            $merge_request  = $this->merge_request_repository->findByDupeAccount($res[$i]->getEmail());
+            if(!is_null($merge_request))  array_push($unset,$i);;
+            $delete_request = $this->delete_request_repository->findByDupeAccount($res[$i]->getEmail());
+            if(!is_null($delete_request)) array_push($unset,$i);;
+        }
+        for($j = 0; $j < count($unset) ; $j++){
+            $index = $unset[$j];
+            unset($res[$index]);
         }
         return $res;
     }
