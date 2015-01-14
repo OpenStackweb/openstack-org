@@ -172,7 +172,7 @@ class Talk extends DataObject {
 
     function CanEdit($member = null) {
 
-    	if($memberID = Member::currentUser()->ID) {
+    	if(!is_null(Member::currentUser()) && $memberID = Member::currentUser()->ID) {
 	    	$IsSpeaker = $this->Speakers("MemberID = ".$memberID)->Count();
 	    	$IsAdmin = ($this->OwnerID == $memberID || Permission::check("ADMIN"));
 	    	return $IsSpeaker || $IsAdmin;
@@ -180,7 +180,7 @@ class Talk extends DataObject {
     }
 
     function CanAssign($member = null) {
-     	if($memberID = Member::currentUser()->ID) {
+     	if(!is_null(Member::currentUser()) && $memberID = Member::currentUser()->ID) {
 	    	$IsTrackChair = $this->SummitCategory()->SummitTrackChairs('MemberID = '.$memberID);
 	    	if ($IsTrackChair->Count() != 0 || Permission::check("ADMIN")) return TRUE;
     	}   	
