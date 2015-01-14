@@ -181,7 +181,7 @@
 
             <li>
             <% if CurrentMember %>
-                <a class="sign-in-btn" href="/Security/logout/">Log Out</a>
+                <a class="sign-in-btn" href="/Security/logout/<% if Top.BackUrl %>?BackURL=$Top.BackUrl<% end_if %>">Log Out</a>
             <% else %>
                 <a class="sign-in-btn" href="/Security/login/?BackURL=%2Fprofile%2F">Sign In</a>
             <% end_if %>
