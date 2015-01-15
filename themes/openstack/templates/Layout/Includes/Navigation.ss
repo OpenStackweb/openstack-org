@@ -181,7 +181,19 @@
 
             <li>
             <% if CurrentMember %>
-                <a class="sign-in-btn" href="/Security/logout/<% if Top.BackUrl %>?BackURL=$Top.BackUrl<% end_if %>">Log Out</a>
+                <a href="/profile/" class="drop" id="dropdownMenuEvents">My Account <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile/">Edit Profile</a></li>
+
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/community/members/profile/{$CurrentMember.ID}">View Public Profile</a></li>
+
+                    <li role="presentation" class="divider"></li>
+
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/Security/logout/<% if Top.BackUrl %>?BackURL=$Top.BackUrl<% end_if %>">Log Out</a></li>
+
+
+                </ul>
             <% else %>
                 <a class="sign-in-btn" href="/Security/login/?BackURL=%2Fprofile%2F">Sign In</a>
             <% end_if %>
