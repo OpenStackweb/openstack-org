@@ -68,7 +68,12 @@ class CustomSiteConfig extends DataExtension {
 
         Session::set('bannerRank',$settings->SiteBannerRank);
 
-        return $settings ?$settings->SiteBannerMessage:'';
+        return $settings ? $settings->SiteBannerMessage : '';
+    }
+
+    public function getRawSiteBannerMessage() {
+        $message = $this->getSiteBannerMessage();
+        return str_replace(array("<p>","</p>"), array("",""),$message);
     }
 
     public function getSiteBannerButtonText(){
