@@ -3074,3 +3074,13 @@ input[type="checkbox"] {
 
 input[type="checkbox"], input[type="radio"] {
   display: inline-block; }
+
+fieldset.footer-feedback-fieldset {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+.footer-links ul li {
+    list-style: none;
+}
