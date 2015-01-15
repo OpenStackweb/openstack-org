@@ -34,6 +34,7 @@ final class DupesMembersApi
             new SapphireDupeMemberDeleteRequestRepository,
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
+            new SapphireCandidateNominationRepository,
             SapphireTransactionManager::getInstance());
     }
 
@@ -183,6 +184,7 @@ final class DupesMembersApi
             $data = $this->getJsonRequest();
             if (!$data) return $this->serverError();
             $current_member = Member::currentUser();
+            $this->manager->mergeAccount($current_member, $token, $data);
             return $this->ok();
         }
         catch(NotFoundEntityException $ex1){

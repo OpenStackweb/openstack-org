@@ -61,4 +61,12 @@ interface ICLAMember extends IEntity {
 	 * @return bool
 	 */
 	public function hasSignedCLA();
+
+    /**
+     * @param string         $gerrit_id
+     * @param string         $gerrit_user
+     * @param DateTime $last_commited_date
+     * @return void
+     */
+    public function updateGerritUser($gerrit_id, $gerrit_user, DateTime $last_commited_date);
 }

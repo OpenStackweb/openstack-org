@@ -10,6 +10,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+var primary_email_action = false;
+var gerrit_id_action = false;
+
 jQuery(document).ready(function ($) {
 
     var fields = ['gerrit_id', 'first_name', 'surname', 'email', 'second_email', 'third_email', 'shirt_size',
@@ -20,12 +23,44 @@ jQuery(document).ready(function ($) {
     for (var i = 0; i < fields.length; i++) {
         var field = fields[i];
         $("input:radio." + field).click(function (e) {
-            var radio = $(this);
-            var field = radio.attr('name');
+
+            var radio     = $(this);
+            var field     = radio.attr('name');
             var member_id = radio.attr('data-member-id');
-            var span = $('#' + field + '_' + member_id);
-            $('.' + field + '_div').addClass('hidden');
-            span.removeClass('hidden');
+            //gerrit id is tied to primary email account
+            if(field == 'gerrit_id'){
+                if(!primary_email_action) {
+                    if (!window.confirm('If you change your gerrit id, also would change your primary mail address, do you agree with that?')) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    else {
+                        gerrit_id_action = true;
+                        //change primary email address also
+                        var radio_email = $('#email_' + member_id, '#merge_table');
+                        radio_email.prop("checked", true).trigger("click");
+                    }
+                }
+                primary_email_action = false;
+            }
+            if(field == 'email'){
+                if(any_account_has_gerrit) {
+                    if (!gerrit_id_action) {
+                        if (!window.confirm('If you change your primary email address, also would change your gerrit id, do you agree with that?')) {
+                            e.preventDefault();
+                            return false;
+                        }
+                        else {
+                            primary_email_action = true;
+                            //change primary email address also
+                            var radio_gerrit_id = $('#gerrit_id_' + member_id, '#merge_table');
+                            radio_gerrit_id.prop("checked", true).trigger("click");
+                        }
+                    }
+                    gerrit_id_action = false;
+                }
+            }
+            $('.' + field + '_div').toggleClass('hidden');
         });
     }
 

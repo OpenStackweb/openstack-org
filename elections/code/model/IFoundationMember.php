@@ -44,7 +44,7 @@ interface IFoundationMember extends IEntity {
     /**
      * @return bool
      */
-    public function isCanditate();
+    public function isCandidate();
 
     /**
      * @return bool
@@ -61,4 +61,8 @@ interface IFoundationMember extends IEntity {
      */
     public function isCompanyAdmin();
 
+    /**
+     * @return ICandidate|null
+     */
+    public function getCurrentCandidate();
 } 

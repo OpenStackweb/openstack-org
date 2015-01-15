@@ -60,6 +60,7 @@ final class DupesMembers_Controller extends AbstractController {
             $this->delete_request_repository,
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
+            new SapphireCandidateNominationRepository,
             SapphireTransactionManager::getInstance());
     }
 
@@ -92,7 +93,7 @@ final class DupesMembers_Controller extends AbstractController {
                 return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
             $request = $this->merge_request_repository->findByConfirmationToken($token);
 
-            if($request->isVoid())
+            if(is_null($request) ||  $request->isVoid())
                 throw new DuperMemberActionRequestVoid();
 
             $dupe_account =  $request->getDupeAccount();
@@ -101,6 +102,10 @@ final class DupesMembers_Controller extends AbstractController {
                 throw new AccountActionBelongsToAnotherMemberException;
             }
 
+            $any_account_has_gerrit = $request->getDupeAccount()->isGerritUser() || $request->getPrimaryAccount()->isGerritUser();
+            $any_account_has_gerrit = $any_account_has_gerrit?'true':'false';
+
+            Requirements::customScript('var any_account_has_gerrit = '.$any_account_has_gerrit.';');
             Requirements::javascript('dupe_members/javascript/dupe.members.merge.action.js');
 
             return $this->renderWith(array('DupesMembers_MergeAccountConfirm', 'Page'), array(
@@ -120,6 +125,16 @@ final class DupesMembers_Controller extends AbstractController {
             SS_Log::log($ex,SS_Log::ERR);
             return $this->renderWith(array('DupesMembers_error','Page'));
         }
+    }
+
+    public function currentRequestAnyAccountHasGerrit(){
+        $token = $this->request->param('CONFIRMATION_TOKEN');
+        if(empty($token)) return false;
+        $request = $this->merge_request_repository->findByConfirmationToken($token);
+        if(is_null($request) ||  $request->isVoid())
+            return false;
+        $any_account_has_gerrit = $request->getDupeAccount()->isGerritUser() || $request->getPrimaryAccount()->isGerritUser();
+        return $any_account_has_gerrit;
     }
 
     /**

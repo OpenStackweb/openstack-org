@@ -148,9 +148,16 @@ final class FoundationMember
     /**
      * @return bool
      */
-    public function isCanditate()
+    public function isCandidate()
     {
-        $res = false;
+      return !is_null($this->getCandidate());
+    }
+
+    /**
+     * @return ICandidate|null
+     */
+    public function getCurrentCandidate(){
+        $res = null;
         $election = ElectionSystem::get()->first();
         if ($election && $election->CurrentElectionID != 0){
             $current_election = $election->CurrentElection();
@@ -159,7 +166,9 @@ final class FoundationMember
                     'MemberID'   => $this->getIdentifier(),
                     'ElectionID' => $current_election->ID))->first();
 
-                $res = !is_null( $candidate );
+                $res =  $candidate;
+                UnitOfWork::getInstance()->setToCache($candidate);
+                UnitOfWork::getInstance()->scheduleForUpdate($candidate);
             }
         }
         return $res;
@@ -187,4 +196,92 @@ final class FoundationMember
     public function isCompanyAdmin(){
         return count($this->owner->getManagedCompanies()) > 0;
     }
+
+    /**
+     * @param string $first_name
+     * @param string $last_name
+     * @return void
+     */
+    public function updateCompleteName($first_name, $last_name){
+        $this->owner->setField('FirstName', $first_name);
+        $this->owner->setField('Surname', $last_name);
+    }
+
+    /**
+     * @param string $email
+     * @return void
+     */
+    public function updateEmail($email){
+        $this->owner->setField('Email', $email);
+    }
+
+    /**
+     * @param string $email
+     * @return void
+     */
+    public function updateSecondEmail($email){
+        $this->owner->setField('SecondEmail', $email);
+    }
+
+    /**
+     * @param string $email
+     * @return void
+     */
+    public function updateThirdEmail($email){
+        $this->owner->setField('ThirdEmail', $email);
+    }
+
+    /**
+     * @param string $shirt_size
+     * @param string $statement_interest
+     * @param string $bio
+     * @param string $gender
+     * @param string $food_preference
+     * @param string $other_food
+     * @return void
+     */
+    public function updatePersonalInfo($shirt_size, $statement_interest, $bio, $gender, $food_preference, $other_food){
+    }
+
+    /**
+     * @param string $projects
+     * @param string $other_projects
+     * @return void
+     */
+    public function updateProjects($projects, $other_projects){
+
+    }
+
+    /**
+     * @param string $irc_handle
+     * @param string $twitter_name
+     * @param string $linkedin_profile
+     * @return void
+     */
+    public function updateSocialInfo($irc_handle, $twitter_name, $linkedin_profile){
+
+    }
+
+    /**
+     * @param string $address
+     * @param string $suburb
+     * @param string $state
+     * @param string $postcode
+     * @param string $city
+     * @param string $country
+     * @return void
+     */
+    public function updateAddress($address, $suburb, $state, $postcode, $city, $country){
+
+    }
+
+    /**
+     * @param $photo_id
+     * @return mixed
+     */
+    public function updateProfilePhoto($photo_id){
+
+    }
+
+
 }

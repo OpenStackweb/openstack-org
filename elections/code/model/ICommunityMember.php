@@ -32,4 +32,72 @@ interface ICommunityMember extends IEntity {
      * @return string
      */
     public function getEmail();
+
+    /**
+     * @param string $first_name
+     * @param string $last_name
+     * @return void
+     */
+    public function updateCompleteName($first_name, $last_name);
+
+    /**
+     * @param string $email
+     * @return void
+     */
+    public function updateEmail($email);
+
+    /**
+     * @param string $email
+     * @return void
+     */
+    public function updateSecondEmail($email);
+
+    /**
+     * @param string $email
+     * @return void
+     */
+    public function updateThirdEmail($email);
+
+    /**
+     * @param string $shirt_size
+     * @param string $statement_interest
+     * @param string $bio
+     * @param string $gender
+     * @param string $food_preference
+     * @param string $other_food
+     * @return void
+     */
+    public function updatePersonalInfo($shirt_size, $statement_interest, $bio, $gender, $food_preference, $other_food);
+
+    /**
+     * @param string $projects
+     * @param string $other_projects
+     * @return void
+     */
+    public function updateProjects($projects, $other_projects);
+
+    /**
+     * @param string $irc_handle
+     * @param string $twitter_name
+     * @param string $linkedin_profile
+     * @return void
+     */
+    public function updateSocialInfo($irc_handle, $twitter_name, $linkedin_profile);
+
+    /**
+     * @param string $address
+     * @param string $suburb
+     * @param string $state
+     * @param string $postcode
+     * @param string $city
+     * @param string $country
+     * @return void
+     */
+    public function updateAddress($address, $suburb, $state, $postcode, $city, $country);
+
+    /**
+     * @param $photo_id
+     * @return mixed
+     */
+    public function updateProfilePhoto($photo_id);
 }

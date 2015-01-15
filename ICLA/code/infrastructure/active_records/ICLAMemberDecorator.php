@@ -51,6 +51,13 @@ final class ICLAMemberDecorator
         return $this->getGerritId()!='';
     }
 
+    public function updateGerritUser($gerrit_id, $gerrit_user, DateTime $last_commited_date){
+        $this->owner->setField('GerritID',$gerrit_id);
+        $this->owner->setField('Email', $gerrit_user);
+        $this->owner->setField('CLASigned',true);
+        $this->updateLastCommitedDate($last_commited_date);
+    }
+
 	/**
 	 * @return DateTime
 	 */
