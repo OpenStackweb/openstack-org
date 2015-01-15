@@ -193,7 +193,7 @@ JS;
 
     public function NewsItems($num = 5)
     {
-        return ConferenceNewsPage::get()->filter('ParentID',$this->ID)->sort('Created')->limit($num);
+        return ConferenceNewsPage::get()->filter('ParentID',$this->ID)->sort('Created','DESC')->limit($num);
     }
 
     public function SubPages($num = 10)
