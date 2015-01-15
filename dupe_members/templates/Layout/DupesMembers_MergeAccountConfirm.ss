@@ -42,47 +42,49 @@
     <td>Gerrit&nbsp;ID&nbsp;<span style="cursor: pointer" class="glyphicon glyphicon-exclamation-sign"
                                   aria-hidden="true"></span></td>
     <td>
-        <% with CurrentAccount %>
-            <% if isGerritUser %>
+        <% if currentRequestAnyAccountHasGerrit %>
+            <% with CurrentAccount %>
                 <div class="checkbox">
                     <label>
-                        <input type="radio" class="gerrit_id" name="gerrit_id" data-member-id="{$ID}"
-                               value="$getGerritId" checked>$getGerritId
+                        <input id="gerrit_id_{$ID}" type="radio" class="gerrit_id" name="gerrit_id" data-member-id="{$ID}"
+                               value="<% if isGerritUser %>$getGerritId<% else %>0<% end_if %>" checked><% if isGerritUser %>$getGerritId<% else %>NOT SET<% end_if %>
                     </label>
                 </div>
-            <% else %>
-                NOT SET
-            <% end_if %>
-        <% end_with %>
+            <% end_with %>
+        <% else %>
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
+        <% end_if %>
     </td>
     <td>
+        <% if currentRequestAnyAccountHasGerrit %>
         <% with DupeAccount %>
-            <% if isGerritUser %>
                 <div class="checkbox">
                     <label>
-                        <input type="radio" class="gerrit_id" name="gerrit_id" data-member-id="{$ID}"
-                               value="$getGerritId"
-                               <% if not Top.CurrentAccount.isGerritUser %>checked<% end_if%>>$getGerritId
+                        <input id="gerrit_id_{$ID}" type="radio" class="gerrit_id" name="gerrit_id" data-member-id="{$ID}"
+                               value="<% if isGerritUser %>$getGerritId<% else %>0<% end_if %>" ><% if isGerritUser %>$getGerritId<% else %>NOT SET<% end_if %>
                     </label>
                 </div>
-            <% else %>
-                NOT SET
-            <% end_if %> <% end_with %>
+        <% end_with %>
+        <% else %>
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
+        <% end_if %>
     </td>
     <td>
-        <% if CurrentAccount.isGerritUser && DupeAccount.isGerritUser %>
+        <% if currentRequestAnyAccountHasGerrit %>
             <div class="checkbox gerrit_id_div" id="gerrit_id_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.getGerritId</span>
+                <label><% if CurrentAccount.isGerritUser %>$CurrentAccount.getGerritId<% else %>NOT SET<% end_if %></label>
             </div>
             <div class="checkbox hidden gerrit_id_div" id="gerrit_id_{$DupeAccount.ID}">
-                <span>$DupeAccount.getGerritId</span>
+                <label><% if DupeAccount.isGerritUser %>$DupeAccount.getGerritId<% else %>NOT SET<% end_if %></label>
             </div>
-        <% else_if  CurrentAccount.isGerritUser %>
-            $CurrentAccount.getGerritId
-        <% else_if  DupeAccount.isGerritUser %>
-            $DupeAccount.getGerritId
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -98,7 +100,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -112,23 +116,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.FirstName && DupeAccount.FirstName %>
             <div class="checkbox first_name_div" id="first_name_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.FirstName</span>
+                <label>$CurrentAccount.FirstName</label>
             </div>
             <div class="checkbox hidden first_name_div" id="first_name_{$DupeAccount.ID}">
-                <span>$DupeAccount.FirstName</span>
+                <label>$DupeAccount.FirstName</label>
             </div>
         <% else_if  CurrentAccount.FirstName %>
             $CurrentAccount.FirstName
         <% else_if  DupeAccount.FirstName %>
             $DupeAccount.FirstName
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -144,7 +152,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -158,39 +168,45 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Surname && DupeAccount.Surname %>
             <div class="checkbox surname_div" id="surname_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Surname</span>
+                <label>$CurrentAccount.Surname</label>
             </div>
             <div class="checkbox hidden surname_div" id="surname_{$DupeAccount.ID}">
-                <span>$DupeAccount.Surname</span>
+                <label>$DupeAccount.Surname</label>
             </div>
         <% else_if  CurrentAccount.Surname %>
             $CurrentAccount.Surname
         <% else_if  DupeAccount.Surname %>
             $DupeAccount.Surname
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
 <tr class="email_row">
-    <td>Email</td>
+    <td>Primary Email Address</td>
     <td>
         <% with CurrentAccount %>
             <% if Email %>
                 <div class="checkbox">
                     <label>
-                        <input type="radio" class="email" name="email" data-member-id="{$ID}" value="$Email"
+                        <input id="email_{$ID}" type="radio" class="email" name="email" data-member-id="{$ID}" value="$Email"
                                checked>$Email
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -199,28 +215,32 @@
             <% if Email %>
                 <div class="checkbox">
                     <label>
-                        <input type="radio" class="email" name="email" data-member-id="{$ID}" value="$Email"
+                        <input id="email_{$ID}" type="radio" class="email" name="email" data-member-id="{$ID}" value="$Email"
                                <% if not Top.CurrentAccount.Email %>checked<% end_if%>>$Email
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Email && DupeAccount.Email %>
             <div class="checkbox email_div" id="email_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Email</span>
+                <label>$CurrentAccount.Email</label>
             </div>
             <div class="checkbox hidden email_div" id="email_{$DupeAccount.ID}">
-                <span>$DupeAccount.Email</span>
+                <label>$DupeAccount.Email</label>
             </div>
         <% else_if  CurrentAccount.Email %>
             $CurrentAccount.Email
         <% else_if  DupeAccount.Email %>
             $DupeAccount.Email
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -236,7 +256,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -251,23 +273,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.SecondEmail && DupeAccount.SecondEmail %>
             <div class="checkbox second_email_div" id="second_email_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.SecondEmail</span>
+                <label>$CurrentAccount.SecondEmail</label>
             </div>
             <div class="checkbox hidden second_email_div" id="second_email_{$DupeAccount.ID}">
-                <span>$DupeAccount.SecondEmail</span>
+                <label>$DupeAccount.SecondEmail</label>
             </div>
         <% else_if  CurrentAccount.SecondEmail %>
             $CurrentAccount.SecondEmail
         <% else_if  DupeAccount.SecondEmail %>
             $DupeAccount.SecondEmail
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -283,7 +309,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -298,23 +326,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.ThirdEmail && DupeAccount.ThirdEmail %>
             <div class="checkbox third_email_div" id="third_email_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.ThirdEmail</span>
+                <label>$CurrentAccount.ThirdEmail</label>
             </div>
             <div class="checkbox hidden third_email_div" id="third_email_{$DupeAccount.ID}">
-                <span>$DupeAccount.ThirdEmail</span>
+                <label>$DupeAccount.ThirdEmail</label>
             </div>
         <% else_if  CurrentAccount.ThirdEmail %>
             $CurrentAccount.ThirdEmail
         <% else_if  DupeAccount.ThirdEmail %>
             $DupeAccount.ThirdEmail
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -330,7 +362,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -344,23 +378,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.ShirtSize && DupeAccount.ShirtSize %>
             <div class="checkbox shirt_size_div" id="shirt_size_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.ShirtSize</span>
+                <label>$CurrentAccount.ShirtSize</label>
             </div>
             <div class="checkbox hidden shirt_size_div" id="shirt_size_{$DupeAccount.ID}">
-                <span>$DupeAccount.ShirtSize</span>
+                <label>$DupeAccount.ShirtSize</label>
             </div>
         <% else_if  CurrentAccount.ShirtSize %>
             $CurrentAccount.ShirtSize
         <% else_if  DupeAccount.ShirtSize %>
             $DupeAccount.ShirtSize
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -376,7 +414,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -391,23 +431,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.StatementOfInterest && DupeAccount.StatementOfInterest %>
             <div class="checkbox statement_interest_div" id="statement_interest_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.StatementOfInterest</span>
+                <label>$CurrentAccount.StatementOfInterest</label>
             </div>
             <div class="checkbox hidden statement_interest_div" id="statement_interest_{$DupeAccount.ID}">
-                <span>$DupeAccount.StatementOfInterest</span>
+                <label>$DupeAccount.StatementOfInterest</label>
             </div>
         <% else_if  CurrentAccount.StatementOfInterest %>
             $CurrentAccount.StatementOfInterest
         <% else_if  DupeAccount.StatementOfInterest %>
             $DupeAccount.StatementOfInterest
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -422,7 +466,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -436,23 +482,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Bio && DupeAccount.Bio %>
             <div class="checkbox bio_div" id="bio_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Bio</span>
+                <label>$CurrentAccount.Bio</label>
             </div>
             <div class="checkbox hidden bio_div" id="bio_{$DupeAccount.ID}">
-                <span>$DupeAccount.Bio</span>
+                <label>$DupeAccount.Bio</label>
             </div>
         <% else_if  CurrentAccount.Bio %>
             $CurrentAccount.Bio
         <% else_if  DupeAccount.Bio %>
             $DupeAccount.Bio
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -468,7 +518,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -483,23 +535,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.FoodPreference && DupeAccount.FoodPreference %>
             <div class="checkbox food_preference_div" id="food_preference_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.FoodPreference</span>
+                <label>$CurrentAccount.FoodPreference</label>
             </div>
             <div class="checkbox hidden food_preference_div" id="food_preference_{$DupeAccount.ID}">
-                <span>$DupeAccount.FoodPreference</span>
+                <label>$DupeAccount.FoodPreference</label>
             </div>
         <% else_if  CurrentAccount.FoodPreference %>
             $CurrentAccount.FoodPreference
         <% else_if  DupeAccount.FoodPreference %>
             $DupeAccount.FoodPreference
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -515,7 +571,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -529,23 +587,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.OtherFood && DupeAccount.OtherFood %>
             <div class="checkbox other_food_div" id="other_food_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.OtherFood</span>
+                <label>$CurrentAccount.OtherFood</label>
             </div>
             <div class="checkbox hidden other_food_div" id="other_food_{$DupeAccount.ID}">
-                <span>$DupeAccount.OtherFood</span>
+                <label>$DupeAccount.OtherFood</label>
             </div>
         <% else_if  CurrentAccount.OtherFood %>
             $CurrentAccount.OtherFood
         <% else_if  DupeAccount.OtherFood %>
             $DupeAccount.OtherFood
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -561,7 +623,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -575,23 +639,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.IRCHandle && DupeAccount.IRCHandle %>
             <div class="checkbox irc_handle_div" id="irc_handle_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.IRCHandle</span>
+                <label>$CurrentAccount.IRCHandle</label>
             </div>
             <div class="checkbox hidden irc_handle_div" id="irc_handle_{$DupeAccount.ID}">
-                <span>$DupeAccount.IRCHandle</span>
+                <label>$DupeAccount.IRCHandle</label>
             </div>
         <% else_if  CurrentAccount.IRCHandle %>
             $CurrentAccount.IRCHandle
         <% else_if  DupeAccount.IRCHandle %>
             $DupeAccount.IRCHandle
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -607,7 +675,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -622,23 +692,27 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.TwitterName && DupeAccount.TwitterName %>
             <div class="checkbox twitter_name_div" id="twitter_name_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.TwitterName</span>
+                <label>$CurrentAccount.TwitterName</label>
             </div>
             <div class="checkbox hidden twitter_name_div" id="twitter_name_{$DupeAccount.ID}">
-                <span>$DupeAccount.TwitterName</span>
+                <label>$DupeAccount.TwitterName</label>
             </div>
         <% else_if  CurrentAccount.TwitterName %>
             $CurrentAccount.TwitterName
         <% else_if  DupeAccount.TwitterName %>
             $DupeAccount.TwitterName
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -654,7 +728,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -669,27 +745,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.LinkedInProfile && DupeAccount.LinkedInProfile %>
             <div class="checkbox linkedin_profile_div" id="linkedin_profile_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.LinkedInProfile</span>
+                <label>$CurrentAccount.LinkedInProfile</label>
             </div>
             <div class="checkbox hidden linkedin_profile_div" id="linkedin_profile_{$DupeAccount.ID}">
-                <span>$DupeAccount.LinkedInProfile</span>
+                <label>$DupeAccount.LinkedInProfile</label>
             </div>
         <% else_if  CurrentAccount.LinkedInProfile %>
             <div class="checkbox linkedin_profile_div" id="linkedin_profile_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.LinkedInProfile</span>
+                <label>$CurrentAccount.LinkedInProfile</label>
             </div>
         <% else_if  DupeAccount.LinkedInProfile %>
             <div class="checkbox linkedin_profile_div" id="linkedin_profile_{$DupeAccount.ID}">
-                <span>$DupeAccount.LinkedInProfile</span>
+                <label>$DupeAccount.LinkedInProfile</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -705,7 +785,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -719,27 +801,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Projects && DupeAccount.Projects %>
             <div class="checkbox projects_div" id="projects_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Projects</span>
+                <label>$CurrentAccount.Projects</label>
             </div>
             <div class="checkbox hidden projects_div" id="projects_{$DupeAccount.ID}">
-                <span>$DupeAccount.Projects</span>
+                <label>$DupeAccount.Projects</label>
             </div>
         <% else_if  CurrentAccount.Projects %>
             <div class="checkbox projects_div" id="projects_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.ShirtSize</span>
+                <label>$CurrentAccount.ShirtSize</label>
             </div>
         <% else_if  DupeAccount.Projects %>
             <div class="checkbox projects_div" id="projects_{$DupeAccount.ID}">
-                <span>$DupeAccount.Projects</span>
+                <label>$DupeAccount.Projects</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -755,7 +841,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -770,27 +858,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.OtherProject && DupeAccount.OtherProject %>
             <div class="checkbox other_project_div" id="other_project_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.OtherProject</span>
+                <label>$CurrentAccount.OtherProject</label>
             </div>
             <div class="checkbox hidden other_project_div" id="other_project_{$DupeAccount.ID}">
-                <span>$DupeAccount.OtherProject</span>
+                <label>$DupeAccount.OtherProject</label>
             </div>
         <% else_if  CurrentAccount.OtherProject %>
             <div class="checkbox other_project_div" id="other_project_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.OtherProject</span>
+                <label>$CurrentAccount.OtherProject</label>
             </div>
         <% else_if  DupeAccount.OtherProject %>
             <div class="checkbox other_project_div" id="other_project_{$DupeAccount.ID}">
-                <span>$DupeAccount.OtherProject</span>
+                <label>$DupeAccount.OtherProject</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -806,7 +898,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -820,27 +914,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Address && DupeAccount.Address %>
             <div class="checkbox address_div" id="address_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Address</span>
+                <label>$CurrentAccount.Address</label>
             </div>
             <div class="checkbox hidden address_div" id="address_{$DupeAccount.ID}">
-                <span>$DupeAccount.Address</span>
+                <label>$DupeAccount.Address</label>
             </div>
         <% else_if  CurrentAccount.Address %>
             <div class="checkbox address_div" id="address_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Address</span>
+                <label>$CurrentAccount.Address</label>
             </div>
         <% else_if  DupeAccount.Address %>
             <div class="checkbox address_div" id="address_{$DupeAccount.ID}">
-                <span>$DupeAccount.Address</span>
+                <label>$DupeAccount.Address</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -856,7 +954,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -870,27 +970,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Suburb && DupeAccount.Suburb %>
             <div class="checkbox suburb_div" id="suburb_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Suburb</span>
+                <label>$CurrentAccount.Suburb</label>
             </div>
             <div class="checkbox hidden suburb_div" id="suburb_{$DupeAccount.ID}">
-                <span>$DupeAccount.Suburb</span>
+                <label>$DupeAccount.Suburb</label>
             </div>
         <% else_if  CurrentAccount.Suburb %>
             <div class="checkbox suburb_div" id="suburb_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Suburb</span>
+                <label>$CurrentAccount.Suburb</label>
             </div>
         <% else_if  DupeAccount.Suburb %>
             <div class="checkbox suburb_div" id="suburb_{$DupeAccount.ID}">
-                <span>$DupeAccount.Suburb</span>
+                <label>$DupeAccount.Suburb</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -906,7 +1010,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -920,27 +1026,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.State && DupeAccount.State %>
             <div class="checkbox state_div" id="state_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.State</span>
+                <label>$CurrentAccount.State</label>
             </div>
             <div class="checkbox hidden state_div" id="state_{$DupeAccount.ID}">
-                <span>$DupeAccount.State</span>
+                <label>$DupeAccount.State</label>
             </div>
         <% else_if  CurrentAccount.State %>
             <div class="checkbox state_div" id="state_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.State</span>
+                <label>$CurrentAccount.State</label>
             </div>
         <% else_if  DupeAccount.State %>
             <div class="checkbox state_div" id="state_{$DupeAccount.ID}">
-                <span>$DupeAccount.State</span>
+                <label>$DupeAccount.State</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -956,7 +1066,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -970,27 +1082,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Postcode && DupeAccount.Postcode %>
             <div class="checkbox postcode_div" id="postcode_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Postcode</span>
+                <label>$CurrentAccount.Postcode</label>
             </div>
             <div class="checkbox hidden postcode_div" id="postcode_{$DupeAccount.ID}">
-                <span>$DupeAccount.Postcode</span>
+                <label>$DupeAccount.Postcode</label>
             </div>
         <% else_if  CurrentAccount.Postcode %>
             <div class="checkbox postcode_div" id="postcode_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Postcode</span>
+                <label>$CurrentAccount.Postcode</label>
             </div>
         <% else_if  DupeAccount.Postcode %>
             <div class="checkbox postcode_div" id="postcode_{$DupeAccount.ID}">
-                <span>$DupeAccount.Postcode</span>
+                <label>$DupeAccount.Postcode</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1006,7 +1122,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -1020,27 +1138,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Country && DupeAccount.Country %>
             <div class="checkbox country_div" id="country_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Country</span>
+                <label>$CurrentAccount.Country</label>
             </div>
             <div class="checkbox hidden country_div" id="country_{$DupeAccount.ID}">
-                <span>$DupeAccount.Country</span>
+                <label>$DupeAccount.Country</label>
             </div>
         <% else_if  CurrentAccount.Country %>
             <div class="checkbox country_div" id="country_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Country</span>
+                <label>$CurrentAccount.Country</label>
             </div>
         <% else_if  DupeAccount.Country %>
             <div class="checkbox country_div" id="country_{$DupeAccount.ID}">
-                <span>$DupeAccount.Country</span>
+                <label>$DupeAccount.Country</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1055,7 +1177,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>T
             <% end_if %>
         <% end_with %>
     </td>
@@ -1069,27 +1193,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.City && DupeAccount.City %>
             <div class="checkbox city_div" id="city_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.City</span>
+                <label>$CurrentAccount.City</label>
             </div>
             <div class="checkbox hidden city_div" id="city_{$DupeAccount.ID}">
-                <span>$DupeAccount.City</span>
+                <label>$DupeAccount.City</label>
             </div>
         <% else_if  CurrentAccount.City %>
             <div class="checkbox city_div" id="city_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.City</span>
+                <label>$CurrentAccount.City</label>
             </div>
         <% else_if  DupeAccount.City %>
             <div class="checkbox city_div" id="city_{$DupeAccount.ID}">
-                <span>$DupeAccount.City</span>
+                <label>$DupeAccount.City</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1105,7 +1233,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -1119,27 +1249,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Gender && DupeAccount.Gender %>
             <div class="checkbox gender_div" id="gender_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Gender</span>
+                <label>$CurrentAccount.Gender</label>
             </div>
             <div class="checkbox hidden gender_div" id="gender_{$DupeAccount.ID}">
-                <span>$DupeAccount.Gender</span>
+                <label>$DupeAccount.Gender</label>
             </div>
         <% else_if  CurrentAccount.Gender %>
             <div class="checkbox gender_div" id="gender_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.Gender</span>
+                <label>$CurrentAccount.Gender</label>
             </div>
         <% else_if  DupeAccount.Gender %>
             <div class="checkbox gender_div" id="gender_{$DupeAccount.ID}">
-                <span>$DupeAccount.Gender</span>
+                <label>$DupeAccount.Gender</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1155,7 +1289,9 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
@@ -1169,27 +1305,31 @@
                     </label>
                 </div>
             <% else %>
-                NOT SET
+                <div class="checkbox">
+                    <label>NOT SET</label>
+                </div>
             <% end_if %> <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.Photo.exists && DupeAccount.Photo.exists %>
             <div class="checkbox photo_div" id="photo_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.ProfilePhoto</span>
+                <label>$CurrentAccount.ProfilePhoto</label>
             </div>
             <div class="checkbox hidden photo_div" id="photo_{$DupeAccount.ID}">
-                <span>$DupeAccount.ProfilePhoto</span>
+                <label>$DupeAccount.ProfilePhoto</label>
             </div>
         <% else_if  CurrentAccount.Photo.exists %>
             <div class="checkbox photo_div" id="photo_{$CurrentAccount.ID}">
-                <span>$CurrentAccount.ProfilePhoto</span>
+                <label>$CurrentAccount.ProfilePhoto</label>
             </div>
         <% else_if  DupeAccount.Photo.exists %>
             <div class="checkbox photo_div" id="photo_{$DupeAccount.ID}">
-                <span>$DupeAccount.ProfilePhoto</span>
+                <label>$DupeAccount.ProfilePhoto</label>
             </div>
         <% else %>
-            NOT SET
+            <div class="checkbox">
+                <label>NOT SET</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1198,31 +1338,47 @@
                                 title="this merge will be performed automatically"></span></td>
     <td>
         <% with CurrentAccount %>
-            <% if isCanditate %>
-                Yes
+            <% if isCandidate %>
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if isCanditate %>
-                Yes
+            <% if isCandidate %>
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.isCanditate && DupeAccount.isCanditate %>
-            Yes
-        <% else_if  CurrentAccount.isCanditate %>
-            Yes
-        <% else_if  DupeAccount.isCanditate %>
-            Yes
+        <% if CurrentAccount.isCandidate && DupeAccount.isCandidate %>
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
+        <% else_if  CurrentAccount.isCandidate %>
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
+        <% else_if  DupeAccount.isCandidate %>
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else %>
-            No
+            <div class="checkbox">
+                <label>No</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1232,30 +1388,46 @@
     <td>
         <% with CurrentAccount %>
             <% if isSpeaker %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>s
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
             <% if isSpeaker %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.isSpeaker && DupeAccount.isSpeaker %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  CurrentAccount.isSpeaker %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  DupeAccount.isSpeaker %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else %>
-            No
+            <div class="checkbox">
+                <label>No</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1266,30 +1438,46 @@
     <td>
         <% with CurrentAccount %>
             <% if isMarketPlaceAdmin %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
             <% if isMarketPlaceAdmin %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.isMarketPlaceAdmin && DupeAccount.isMarketPlaceAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  CurrentAccount.isMarketPlaceAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  DupeAccount.isMarketPlaceAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else %>
-            No
+            <div class="checkbox">
+                <label>No</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1299,30 +1487,46 @@
     <td>
         <% with CurrentAccount %>
             <% if isCompanyAdmin %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
             <% if isCompanyAdmin %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.isCompanyAdmin && DupeAccount.isCompanyAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  CurrentAccount.isCompanyAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  DupeAccount.isCompanyAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else %>
-            No
+            <div class="checkbox">
+                <label>No</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1332,30 +1536,46 @@
     <td>
         <% with CurrentAccount %>
             <% if isTrainingAdmin %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
             <% if isTrainingAdmin %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.isTrainingAdmin && DupeAccount.isTrainingAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  CurrentAccount.isTrainingAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  DupeAccount.isTrainingAdmin %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else %>
-            No
+            <div class="checkbox">
+                <label>No</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1366,30 +1586,46 @@
     <td>
         <% with CurrentAccount %>
             <% if hasDeploymentSurveys %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
             <% if hasDeploymentSurveys %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.hasDeploymentSurveys && DupeAccount.hasDeploymentSurveys %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  CurrentAccount.hasDeploymentSurveys %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>s
         <% else_if  DupeAccount.hasDeploymentSurveys %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else %>
-            No
+            <div class="checkbox">
+                <label>No</label>
+            </div>
         <% end_if %>
     </td>
 </tr>
@@ -1400,30 +1636,46 @@
     <td>
         <% with CurrentAccount %>
             <% if hasAppDevSurveys %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
             <% if hasAppDevSurveys %>
-                Yes
+                <div class="checkbox">
+                    <label>Yes</label>
+                </div>
             <% else %>
-                No
+                <div class="checkbox">
+                    <label>No</label>
+                </div>
             <% end_if %>
         <% end_with %>
     </td>
     <td>
         <% if CurrentAccount.hasAppDevSurveys && DupeAccount.hasAppDevSurveys %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  CurrentAccount.hasAppDevSurveys %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else_if  DupeAccount.hasAppDevSurveys %>
-            Yes
+            <div class="checkbox">
+                <label>Yes</label>
+            </div>
         <% else %>
-            No
+            <div class="checkbox">
+                <label>No</label>
+            </div>
         <% end_if %>
     </td>
 </tr>

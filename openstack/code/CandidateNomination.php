@@ -11,7 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class CandidateNomination extends DataObject {
+
+/**
+ * Class CandidateNomination
+ */
+class CandidateNomination
+    extends DataObject
+    implements ICandidateNomination {
 
 	static $db = array(
 	);
@@ -28,6 +34,28 @@ class CandidateNomination extends DataObject {
 
 	function getNominee() {
 		return Candidate::get()->filter('MemberID',$this->CandidateID)->first();
-	}
+  	}
+
+    /**
+     * @param ICommunityMember $member
+     * @throws Exception
+     */
+    function updateNominee(ICommunityMember $member){
+        AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Candidate')->setTarget($member);
+    }
+
+    /**
+     * @param ICommunityMember $member
+     * @throws Exception
+     */
+    function updateVotingMember(ICommunityMember $member){
+        AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Member')->setTarget($member);
+    }
+    /**
+     * @return int
+     */
+    public function getIdentifier(){
+        return (int)$this->getField('ID');
+    }
 
 }

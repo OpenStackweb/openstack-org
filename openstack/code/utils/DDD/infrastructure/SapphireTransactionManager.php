@@ -54,6 +54,10 @@ final class SapphireTransactionManager implements ITransactionManager {
 	private function commit(){
 		if ($this->transactions == 1){
 			UnitOfWork::getInstance()->commit();
+            $queries = SapphireBulkQueryRegister::getInstance()->getQueries();
+            foreach($queries as $q){
+                DB::query($q->toSQL());
+            }
 			DB::query("COMMIT;");
 			DB::query("SET AUTOCOMMIT=1;");
 		}

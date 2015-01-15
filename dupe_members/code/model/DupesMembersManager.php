@@ -42,19 +42,17 @@ final class DupesMembersManager {
      */
     private $delete_request_repository;
 
+
+    /**
+     * @var ICandidateNominationRepository
+     */
+    private $nominations_repository;
     /**
      * @var ITransactionManager
      */
     private $tx_manager;
 
-    /**
-     * @param IMemberRepository                         $member_repository
-     * @param IDupeMemberActionAccountRequestFactory    $merge_request_factory
-     * @param IDupeMemberActionAccountRequestFactory    $delete_request_factory
-     * @param IDupeMemberActionAccountRequestRepository $merge_request_repository
-     * @param IDupeMemberActionAccountRequestRepository $delete_request_repository
-     * @param ITransactionManager                       $tx_manager
-     */
+
     public function __construct(IMemberRepository $member_repository,
                                 IDupeMemberActionAccountRequestFactory $merge_request_factory,
                                 IDupeMemberActionAccountRequestFactory $delete_request_factory,
@@ -62,6 +60,7 @@ final class DupesMembersManager {
                                 IDupeMemberActionAccountRequestRepository $delete_request_repository,
                                 IEntityRepository $delete_dupe_member_repository,
                                 IDeletedDupeMemberFactory $delete_dupe_member_factory,
+                                ICandidateNominationRepository $nominations_repository,
                                 ITransactionManager $tx_manager ) {
 
         $this->member_repository             = $member_repository;
@@ -72,6 +71,7 @@ final class DupesMembersManager {
         $this->delete_dupe_member_repository = $delete_dupe_member_repository;
         $this->delete_dupe_member_factory    = $delete_dupe_member_factory;
         $this->tx_manager                    = $tx_manager;
+        $this->nominations_repository        = $nominations_repository;
     }
 
     public function HasDupes(ICommunityMember $member) {
@@ -226,6 +226,137 @@ final class DupesMembersManager {
             $request = $_this->keepAccount($current_member, $token);
 
             $_this->registerMergeAccountRequest($request->getPrimaryAccount() , $request->getDupeAccount()->getIdentifier(), $notification_sender);
+        });
+    }
+
+    /**
+     * @param ICommunityMember $current_member
+     * @param string           $token
+     * @param array            $merge_data
+     * @return IDupeMemberActionAccountRequest
+     */
+    public function mergeAccount(ICommunityMember $current_member, $token, array $merge_data){
+
+        $member_repository             = $this->member_repository;
+        $merge_request_repository      = $this->merge_request_repository;
+        $delete_dupe_member_factory    = $this->delete_dupe_member_factory;
+        $delete_dupe_member_repository = $this->delete_dupe_member_repository;
+        $nominations_repository        = $this->nominations_repository;
+
+        return $this->tx_manager->transaction(function() use( $current_member, $token, $merge_data, $member_repository, $merge_request_repository, $delete_dupe_member_factory, $delete_dupe_member_repository, $nominations_repository){
+
+            $request = $merge_request_repository->findByConfirmationToken($token);
+
+            if(is_null($request)) throw new NotFoundEntityException('DupeMemberMergeRequest' , sprintf("token %s", $token));
+
+            if($request->isVoid())
+                throw new DuperMemberActionRequestVoid();
+
+            $dupe_account    = $request->getDupeAccount();
+            $current_account = $request->getPrimaryAccount();
+
+            if($dupe_account->getEmail() != $current_member->getEmail()){
+                throw new AccountActionBelongsToAnotherMemberException;
+            }
+
+            $request->doConfirmation($token);
+            //merge data
+
+            if(isset($merge_data['gerrit_id'])){
+                $current_account->updateGerritUser($merge_data['gerrit_id'], $merge_data['email'],
+                    ($dupe_account->getGerritId() == $merge_data['gerrit_id'])? $dupe_account->getLastCommitedDate(): $current_account->getLastCommitedDate()
+                );
+            }
+
+            if(isset($merge_data['first_name']) && isset($merge_data['surname']) ){
+                $current_account->updateCompleteName($merge_data['first_name'], $merge_data['surname'] );
+            }
+
+            if(isset($merge_data['email'])){
+                $current_account->updateEmail($merge_data['email']);
+            }
+
+            if(isset($merge_data['second_email'])){
+                $current_account->updateSecondEmail($merge_data['second_email']);
+            }
+
+            if(isset($merge_data['third_email'])){
+                $current_account->updateThirdEmail($merge_data['third_email']);
+            }
+
+            $current_account->updatePersonalInfo($merge_data['shirt_size'],
+                                                $merge_data['statement_interest'],
+                                                $merge_data['bio'],
+                                                $merge_data['gender'],
+                                                $merge_data['food_preference'],
+                                                $merge_data['other_food']);
+
+            $current_account->updateProjects($merge_data['projects'], $merge_data['other_project']);
+
+            $current_account->updateSocialInfo($merge_data['irc_handle'],
+                $merge_data['twitter_name'],
+                $merge_data['linkedin_profile']);
+
+            $current_account->updateAddress($merge_data['address'],
+                $merge_data['suburb'],
+                $merge_data['state'],
+                $merge_data['postcode'],
+                $merge_data['city'],
+                $merge_data['country']);
+
+            $current_account->updateProfilePhoto($merge_data['photo']);
+
+            // candidate
+            if($dupe_account->isCandidate()){
+                $current_candidate = $dupe_account->getCurrentCandidate();
+                $current_candidate->updateMember($current_account);
+                //update candidate nominations
+                list($nominations,$count) = $nominations_repository->getNominationsByNominee($dupe_account->getIdentifier(), 0, 999999);
+                foreach($nominations as $n){
+                    $n->updateNominee($current_account);
+                }
+                // update emitted votes
+                list($nominations,$count) = $nominations_repository->getNominationsByVotingMember($dupe_account->getIdentifier(), 0, 999999);
+                foreach($nominations as $n){
+                    $n->updateVotingMember($current_account);
+                }
+            }
+
+            //speaker
+            if($dupe_account->isSpeaker()){
+
+            }
+
+            if($dupe_account->isMarketPlaceAdmin()){
+
+            }
+
+            if($dupe_account->isCompanyAdmin()){
+
+            }
+
+            if($dupe_account->isTrainingAdmin()){
+
+            }
+
+            if($dupe_account->hasDeploymentSurveys()){
+
+            }
+
+            if($dupe_account->hasAppDevSurveys()){
+
+            }
+
+            $current_member->resign();
+            $current_member->logOut();
+            $deleted  = $delete_dupe_member_factory->build($current_member);
+
+            $member_repository->delete($current_member);
+
+            $delete_dupe_member_repository->add($deleted);
+
+
+            return $request;
         });
     }
 } 

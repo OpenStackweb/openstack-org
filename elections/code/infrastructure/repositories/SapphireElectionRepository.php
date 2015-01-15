@@ -16,7 +16,8 @@
  */
 final class SapphireElectionRepository extends SapphireRepository
 	implements IElectionRepository  {
-	public function __construct(){
+
+    public function __construct(){
 		parent::__construct(new Election());
 	}
 

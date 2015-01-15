@@ -11,7 +11,7 @@
             <a class="roundedButton" id="btn-merge"  data-token="$Top.ConfirmationToken" href="#">No, I want to merge it.</a>
             <a class="roundedButton" id="btn-keep"   data-token="$Top.ConfirmationToken" href="#">No, I want to keep it.</a>
         </p>
-    <% else_if isCanditate %>
+    <% else_if isCandidate %>
         <p>
             Also we detected that this duplicate account has set a valid <b>OpenStack Candidate</b>. Our recommendation is to merge with your current account (<% with Top.CurrentAccount %> <b>$getEmail</b> <% end_with %>).
         </p>

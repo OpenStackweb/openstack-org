@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class Candidate extends DataObject
+class Candidate extends DataObject implements ICandidate
 {
 
 	static $db = array(
@@ -91,4 +91,18 @@ class Candidate extends DataObject
 		return $current_election->CandidateNominations("`CandidateID` = " . $this->MemberID);
 	}
 
+    /**
+     * @param ICommunityMember $member
+     * @return void
+     */
+    public function updateMember(ICommunityMember $member){
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Member')->setTarget($member);
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdentifier(){
+        return (int)$this->getField('ID');
+    }
 }

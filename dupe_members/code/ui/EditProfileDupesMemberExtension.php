@@ -34,6 +34,7 @@ final class EditProfileDupesMemberExtension extends Extension {
             new SapphireDupeMemberDeleteRequestRepository,
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
+            new SapphireCandidateNominationRepository,
             SapphireTransactionManager::getInstance());
     }
 
