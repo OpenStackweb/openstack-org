@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-sm-12">
                     <div class="intro-message">
-                        <h1>Speak At The Vancouver Summmit.</h1>
+                        <h1>Speak At The Vancouver Summit.</h1>
                     </div>
                     <div class="promo-btn-wrapper">
                         <a href="/summit/vancouver-2015/call-for-speakers/" class="promo-btn">Become A Speaker<i class="fa fa-chevron-right"></i></a>
