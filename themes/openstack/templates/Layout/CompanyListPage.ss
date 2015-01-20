@@ -17,7 +17,8 @@
 					<% loop Logo %>
 						<span style="background-image: url({$SetWidth(138).URL});"></span>
 					<% end_loop %>
-					$Name</a>
+					$Name
+				</a>
 			<% end_loop %>
 
 		</div>
