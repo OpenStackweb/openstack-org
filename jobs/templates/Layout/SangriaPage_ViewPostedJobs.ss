@@ -20,7 +20,7 @@
             <tr>
                 <td class="title"><a id="job{$ID}" href="#"></a>$Title</td>
                 <td class="post-date">$JobPostedDate</td>
-                <td class="url"><a href="{$BaseHref}/community/jobs/view/{$ID}/{$TitleForUrl}">Link</a></td>
+                <td class="url"><a href="{$BaseHref}community/jobs/view/{$ID}/{$TitleForUrl}">Link</a></td>
                 <td class="company-name">$JobCompany</td>
                 <td class="location_type">$JobLocation</td>
                 <td class="is_foundation"><input class="foundation_check" job_id="{$ID}" type="checkbox" <% if FoundationJob == 1 %> checked <% end_if %> /></td>
