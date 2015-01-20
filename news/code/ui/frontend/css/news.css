@@ -43,7 +43,8 @@
 }
 
 .carousel, .carousel-inner {
-    height: 350px
+    height: 350px;
+    background: #2A4E68;
 }
 
 .carousel-inner img {
@@ -137,7 +138,7 @@
     height: 180px;
     overflow: hidden;
     margin-bottom: 10px;
-    background: #30739C
+    background: #2A4E68;
 }
 
 .featuredImage img {

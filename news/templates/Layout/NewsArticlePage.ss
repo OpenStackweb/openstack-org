@@ -6,7 +6,7 @@
     <h1>$Headline</h1>
     $Image.CroppedImage(400,300)
     <p class="summary">$Summary</p>
-    <p class="body">$Body</p>
+    <p class="body">$HTMLBody</p>
     <% if Document.exists %>
         <p class="document">Document: <a href="$Document.Link">$Document.getLinkedURL</a></p>
     <% end_if %>

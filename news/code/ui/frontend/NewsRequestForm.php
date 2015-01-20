@@ -20,8 +20,9 @@ final class NewsRequestForm extends HoneyPotForm {
 
         $IDField = new HiddenField('newsID');
 		//madatory fields
-		$HeadlineField = new TextField('headline','Headline');
+		$HeadlineField = new TextField('headline','Headline','',$maxLength = 45);
 		$SummaryField = new TextareaField('summary','Summary');
+        $SummaryField->addExtraClass('summary');
         $CityField = new TextField('city','City');
         $StateField = new TextField('state','State');
         $CountryField = new CountryDropdownField('country','Country');

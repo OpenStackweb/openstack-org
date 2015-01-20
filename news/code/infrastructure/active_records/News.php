@@ -201,4 +201,8 @@ final class News extends DataObject implements INews {
 
         $this->Rank = $rank;
     }
+
+    public function getHTMLBody() {
+        return html_entity_decode(nl2br($this->Body));
+    }
 }
