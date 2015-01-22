@@ -108,11 +108,11 @@
     </td>
     <td>
         <% with DupeAccount %>
-            <% if isGerritUser %>
+            <% if FirstName %>
                 <div class="checkbox">
                     <label>
                         <input type="radio" class="first_name" name="first_name" data-member-id="{$ID}"
-                               value="$FirstName" <% if not Top.CurrentAccount.FirstName %>checked<% end_if%>>$FirstName
+                               value="$FirstName">$FirstName
                     </label>
                 </div>
             <% else %>

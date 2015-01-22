@@ -99,7 +99,9 @@ final class Many2OneAssociation {
 	 * @return DataObject
 	 */
 	public function getTarget(){
-		return $this->target;
+		$target = $this->target;
+        UnitOfWork::getInstance()->scheduleForUpdate($target);
+        return $target;
 	}
 
 	/**

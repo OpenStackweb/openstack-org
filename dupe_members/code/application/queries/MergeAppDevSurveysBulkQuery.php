@@ -13,18 +13,18 @@
  **/
 
 /**
- * Interface IBulkQueryRegister
+ * Class MergeAppDevSurveysBulkQuery
  */
-interface IBulkQueryRegister {
+final class MergeAppDevSurveysBulkQuery extends AbstractMergeBulkQuery {
 
     /**
-     * @param IBulkQuery $query
-     * @return void
+     * @return string[]
      */
-    public function addBulkQuery(IBulkQuery $query);
+    public function toSQL()
+    {
+        $primary_id = $this->primary_id;
+        $dupe_id    = $this->dupe_id;
 
-    /**
-     * @return IBulkQuery[]
-     */
-    public function getQueries();
-} 
+        return array("UPDATE AppDevSurvey SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;");
+    }
+}

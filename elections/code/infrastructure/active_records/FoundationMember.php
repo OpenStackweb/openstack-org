@@ -150,7 +150,7 @@ final class FoundationMember
      */
     public function isCandidate()
     {
-      return !is_null($this->getCandidate());
+      return !is_null($this->getCurrentCandidate());
     }
 
     /**
@@ -167,8 +167,10 @@ final class FoundationMember
                     'ElectionID' => $current_election->ID))->first();
 
                 $res =  $candidate;
-                UnitOfWork::getInstance()->setToCache($candidate);
-                UnitOfWork::getInstance()->scheduleForUpdate($candidate);
+                if(!is_null($candidate)) {
+                    UnitOfWork::getInstance()->setToCache($candidate);
+                    UnitOfWork::getInstance()->scheduleForUpdate($candidate);
+                }
             }
         }
         return $res;
@@ -241,6 +243,12 @@ final class FoundationMember
      * @return void
      */
     public function updatePersonalInfo($shirt_size, $statement_interest, $bio, $gender, $food_preference, $other_food){
+        $this->owner->setField('ShirtSize', $shirt_size);
+        $this->owner->setField('StatementOfInterest', $statement_interest);
+        $this->owner->setField('Bio', $bio);
+        $this->owner->setField('Gender', $gender);
+        $this->owner->setField('FoodPreference', $food_preference);
+        $this->owner->setField('OtherFood', $other_food);
     }
 
     /**
@@ -249,7 +257,8 @@ final class FoundationMember
      * @return void
      */
     public function updateProjects($projects, $other_projects){
-
+        $this->owner->setField('Projects', $projects);
+        $this->owner->setField('OtherProject', $other_projects);
     }
 
     /**
@@ -259,7 +268,9 @@ final class FoundationMember
      * @return void
      */
     public function updateSocialInfo($irc_handle, $twitter_name, $linkedin_profile){
-
+        $this->owner->setField('IRCHandle', $irc_handle);
+        $this->owner->setField('TwitterName', $twitter_name);
+        $this->owner->setField('LinkedInProfile', $linkedin_profile);
     }
 
     /**
@@ -272,7 +283,12 @@ final class FoundationMember
      * @return void
      */
     public function updateAddress($address, $suburb, $state, $postcode, $city, $country){
-
+        $this->owner->setField('Address', $address);
+        $this->owner->setField('Suburb', $suburb);
+        $this->owner->setField('State', $state);
+        $this->owner->setField('Postcode', $postcode);
+        $this->owner->setField('City', $city);
+        $this->owner->setField('Country', $country);
     }
 
     /**
@@ -280,8 +296,6 @@ final class FoundationMember
      * @return mixed
      */
     public function updateProfilePhoto($photo_id){
-
+        $this->owner->setField('PhotoID', $photo_id);
     }
-
-
 }

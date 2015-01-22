@@ -23,6 +23,7 @@ final class DeletedDupeMember
     static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
     private static $db = array(
+        'MemberID' => 'Int',
         'FirstName' => 'Varchar',
         'Surname' => 'Varchar',
         'Email' => 'Varchar(256)', // See RFC 5321, Section 4.5.3.1.3.

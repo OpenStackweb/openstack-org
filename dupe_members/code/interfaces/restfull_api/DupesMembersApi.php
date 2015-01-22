@@ -35,7 +35,8 @@ final class DupesMembersApi
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
             new SapphireCandidateNominationRepository,
-            SapphireTransactionManager::getInstance());
+            SapphireTransactionManager::getInstance(),
+            SapphireBulkQueryRegistry::getInstance());
     }
 
     protected function isApiCall(){
@@ -184,7 +185,7 @@ final class DupesMembersApi
             $data = $this->getJsonRequest();
             if (!$data) return $this->serverError();
             $current_member = Member::currentUser();
-            $this->manager->mergeAccount($current_member, $token, $data);
+            $this->manager->mergeAccount($current_member, $token, $data, new MergeAccountBulkQueryFactory);
             return $this->ok();
         }
         catch(NotFoundEntityException $ex1){
