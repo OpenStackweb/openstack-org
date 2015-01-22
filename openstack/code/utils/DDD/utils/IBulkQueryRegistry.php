@@ -13,17 +13,24 @@
  **/
 
 /**
- * Interface IBulkQuery
+ * Interface IBulkQueryRegistry
  */
-interface IBulkQuery {
+interface IBulkQueryRegistry {
 
     /**
-     * @param array $params
+     * @param IBulkQuery $query
+     * @param string     $stage
      * @return void
      */
-    public function addParams(array $params);
+    public function addBulkQuery(IBulkQuery $query, $stage = 'pre');
+
     /**
-     * @return string[]
+     * @return IBulkQuery[]
      */
-    public function toSQL();
+    public function getPreQueries();
+
+    /**
+     * @return IBulkQuery[]
+     */
+    public function getPostQueries();
 } 

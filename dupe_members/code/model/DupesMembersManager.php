@@ -52,7 +52,23 @@ final class DupesMembersManager {
      */
     private $tx_manager;
 
+    /**
+     * @var IBulkQueryRegistry
+     */
+    private $query_registry;
 
+    /**
+     * @param IMemberRepository                         $member_repository
+     * @param IDupeMemberActionAccountRequestFactory    $merge_request_factory
+     * @param IDupeMemberActionAccountRequestFactory    $delete_request_factory
+     * @param IDupeMemberActionAccountRequestRepository $merge_request_repository
+     * @param IDupeMemberActionAccountRequestRepository $delete_request_repository
+     * @param IEntityRepository                         $delete_dupe_member_repository
+     * @param IDeletedDupeMemberFactory                 $delete_dupe_member_factory
+     * @param ICandidateNominationRepository            $nominations_repository
+     * @param ITransactionManager                       $tx_manager
+     * @param IBulkQueryRegistry                        $query_registry
+     */
     public function __construct(IMemberRepository $member_repository,
                                 IDupeMemberActionAccountRequestFactory $merge_request_factory,
                                 IDupeMemberActionAccountRequestFactory $delete_request_factory,
@@ -61,7 +77,8 @@ final class DupesMembersManager {
                                 IEntityRepository $delete_dupe_member_repository,
                                 IDeletedDupeMemberFactory $delete_dupe_member_factory,
                                 ICandidateNominationRepository $nominations_repository,
-                                ITransactionManager $tx_manager ) {
+                                ITransactionManager $tx_manager,
+                                IBulkQueryRegistry $query_registry) {
 
         $this->member_repository             = $member_repository;
         $this->merge_request_factory         = $merge_request_factory;
@@ -70,8 +87,9 @@ final class DupesMembersManager {
         $this->delete_request_repository     = $delete_request_repository;
         $this->delete_dupe_member_repository = $delete_dupe_member_repository;
         $this->delete_dupe_member_factory    = $delete_dupe_member_factory;
-        $this->tx_manager                    = $tx_manager;
         $this->nominations_repository        = $nominations_repository;
+        $this->tx_manager                    = $tx_manager;
+        $this->query_registry                = $query_registry;
     }
 
     public function HasDupes(ICommunityMember $member) {
@@ -229,21 +247,17 @@ final class DupesMembersManager {
         });
     }
 
-    /**
-     * @param ICommunityMember $current_member
-     * @param string           $token
-     * @param array            $merge_data
-     * @return IDupeMemberActionAccountRequest
-     */
-    public function mergeAccount(ICommunityMember $current_member, $token, array $merge_data){
+
+    public function mergeAccount(ICommunityMember $current_member, $token, array $merge_data, IMergeAccountBulkQueryFactory $query_factory){
 
         $member_repository             = $this->member_repository;
         $merge_request_repository      = $this->merge_request_repository;
         $delete_dupe_member_factory    = $this->delete_dupe_member_factory;
         $delete_dupe_member_repository = $this->delete_dupe_member_repository;
         $nominations_repository        = $this->nominations_repository;
+        $query_registry                = $this->query_registry;
 
-        return $this->tx_manager->transaction(function() use( $current_member, $token, $merge_data, $member_repository, $merge_request_repository, $delete_dupe_member_factory, $delete_dupe_member_repository, $nominations_repository){
+        return $this->tx_manager->transaction(function() use( $current_member, $token, $merge_data, $member_repository, $merge_request_repository, $delete_dupe_member_factory, $delete_dupe_member_repository, $nominations_repository, $query_factory, $query_registry){
 
             $request = $merge_request_repository->findByConfirmationToken($token);
 
@@ -306,48 +320,45 @@ final class DupesMembersManager {
 
             $current_account->updateProfilePhoto($merge_data['photo']);
 
+
+            $query = $query_factory->buildMergeProfileBulkQuery($current_account, $dupe_account);
+            $query_registry->addBulkQuery($query);
+
             // candidate
             if($dupe_account->isCandidate()){
                 $current_candidate = $dupe_account->getCurrentCandidate();
                 $current_candidate->updateMember($current_account);
                 //update candidate nominations
-                list($nominations,$count) = $nominations_repository->getNominationsByNominee($dupe_account->getIdentifier(), 0, 999999);
-                foreach($nominations as $n){
-                    $n->updateNominee($current_account);
-                }
-                // update emitted votes
-                list($nominations,$count) = $nominations_repository->getNominationsByVotingMember($dupe_account->getIdentifier(), 0, 999999);
-                foreach($nominations as $n){
-                    $n->updateVotingMember($current_account);
-                }
+                $query = $query_factory->buildMergeCandidateBulkQuery($current_account, $dupe_account);
+                $query_registry->addBulkQuery($query);
             }
 
             //speaker
             if($dupe_account->isSpeaker()){
-
+                $query = $query_factory->buildMergeSpeakerBulkQuery($current_account, $dupe_account);
+                $query_registry->addBulkQuery($query);
             }
 
             if($dupe_account->isMarketPlaceAdmin()){
-
+                $query = $query_factory->buildMergeMarketPlaceAdminBulkQuery($current_account, $dupe_account);
+                $query_registry->addBulkQuery($query);
             }
 
             if($dupe_account->isCompanyAdmin()){
-
-            }
-
-            if($dupe_account->isTrainingAdmin()){
-
+                $query = $query_factory->buildMergeCompanyAdminBulkQuery($current_account, $dupe_account);
+                $query_registry->addBulkQuery($query);
             }
 
             if($dupe_account->hasDeploymentSurveys()){
-
+                $query = $query_factory->buildMergeDeploymentSurveysBulkQuery($current_account, $dupe_account);
+                $query_registry->addBulkQuery($query);
             }
 
             if($dupe_account->hasAppDevSurveys()){
-
+                $query = $query_factory->buildMergeAppDevSurveysBulkQuery($current_account, $dupe_account);
+                $query_registry->addBulkQuery($query);
             }
 
-            $current_member->resign();
             $current_member->logOut();
             $deleted  = $delete_dupe_member_factory->build($current_member);
 

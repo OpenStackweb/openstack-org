@@ -12,18 +12,28 @@
  * limitations under the License.
  **/
 
-/**
- * Interface IBulkQuery
- */
-interface IBulkQuery {
+abstract class AbstractMergeBulkQuery implements IBulkQuery {
+
+    /**
+     * @var int
+     */
+    protected $primary_id;
+
+    /**
+     * @var int
+     */
+    protected $dupe_id;
 
     /**
      * @param array $params
      * @return void
      */
-    public function addParams(array $params);
-    /**
-     * @return string[]
-     */
-    public function toSQL();
+    public function addParams(array $params)
+    {
+        if(isset($params['primary_id']))
+            $this->primary_id  = $params['primary_id'];
+        if(isset($params['dupe_id']))
+            $this->dupe_id = $params['dupe_id'];
+    }
+
 } 

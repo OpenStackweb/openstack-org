@@ -61,7 +61,8 @@ final class DupesMembers_Controller extends AbstractController {
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
             new SapphireCandidateNominationRepository,
-            SapphireTransactionManager::getInstance());
+            SapphireTransactionManager::getInstance(),
+            SapphireBulkQueryRegistry::getInstance());
     }
 
 
@@ -80,6 +81,8 @@ final class DupesMembers_Controller extends AbstractController {
 
         Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
         Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
+        Requirements::javascript("themes/openstack/javascript/navigation.js");
+        Requirements::javascript(" marketplace/code/ui/admin/js/utils.js");
     }
     /**
      * @return string|void

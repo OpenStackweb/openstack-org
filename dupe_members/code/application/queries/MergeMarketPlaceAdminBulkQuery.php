@@ -13,17 +13,20 @@
  **/
 
 /**
- * Interface IBulkQuery
+ * Class MergeMarketPlaceAdminBulkQuery
  */
-interface IBulkQuery {
+final class MergeMarketPlaceAdminBulkQuery extends AbstractMergeBulkQuery {
 
-    /**
-     * @param array $params
-     * @return void
-     */
-    public function addParams(array $params);
     /**
      * @return string[]
      */
-    public function toSQL();
-} 
+    public function toSQL()
+    {
+        $primary_id = $this->primary_id;
+        $dupe_id    = $this->dupe_id;
+
+        return array(
+            "UPDATE CompanyService SET EditedByID = {$primary_id} WHERE EditedByID = {$dupe_id} ;",
+            "UPDATE CompanyServiceDraft SET EditedByID = {$primary_id} WHERE EditedByID = {$dupe_id} ;");
+    }
+}
