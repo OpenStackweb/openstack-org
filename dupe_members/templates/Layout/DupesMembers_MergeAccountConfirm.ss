@@ -248,1089 +248,940 @@
     <td>Second Email</td>
     <td>
         <% with CurrentAccount %>
+        <div class="checkbox">
+        <label>
+        <input type="radio" class="second_email" name="second_email" data-member-id="{$ID}"
             <% if SecondEmail %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="second_email" name="second_email" data-member-id="{$ID}"
-                               value="$SecondEmail" checked>$SecondEmail
-                    </label>
-                </div>
+                       value="$SecondEmail" checked>$SecondEmail
             <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+                       value="NULL" checked>NOT SET
+             <% end_if %>
+            </label>
+        </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if SecondEmail %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="second_email" name="second_email" data-member-id="{$ID}"
-                               value="$SecondEmail"
-                               <% if not Top.CurrentAccount.SecondEmail %>checked<% end_if%>>$SecondEmail
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="second_email" name="second_email" data-member-id="{$ID}"
+                    <% if SecondEmail %>
+                       value="$SecondEmail">$SecondEmail
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.SecondEmail && DupeAccount.SecondEmail %>
-            <div class="checkbox second_email_div" id="second_email_{$CurrentAccount.ID}">
+        <div class="checkbox second_email_div" id="second_email_{$CurrentAccount.ID}">
+            <% if CurrentAccount.SecondEmail %>
                 <label>$CurrentAccount.SecondEmail</label>
-            </div>
-            <div class="checkbox hidden second_email_div" id="second_email_{$DupeAccount.ID}">
+            <% else %>
+                    <label>NOT SET</label>
+            <% end_if %>
+        </div>
+        <div class="checkbox second_email_div hidden" id="second_email_{$DupeAccount.ID}">
+            <% if DupeAccount.SecondEmail %>
                 <label>$DupeAccount.SecondEmail</label>
-            </div>
-        <% else_if  CurrentAccount.SecondEmail %>
-            $CurrentAccount.SecondEmail
-        <% else_if  DupeAccount.SecondEmail %>
-            $DupeAccount.SecondEmail
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="third_email_row">
     <td>Third Email</td>
     <td>
         <% with CurrentAccount %>
-            <% if ThirdEmail %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="third_email" name="third_email" data-member-id="{$ID}"
-                               value="$ThirdEmail" checked>$ThirdEmail
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="third_email" name="third_email" data-member-id="{$ID}"
+                    <% if ThirdEmail %>
+                       value="$ThirdEmail" checked>$ThirdEmail
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if ThirdEmail %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="third_email" name="third_email" data-member-id="{$ID}"
-                               value="$ThirdEmail"
-                               <% if not Top.CurrentAccount.ThirdEmail %>checked<% end_if%>>$ThirdEmail
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="third_email" name="third_email" data-member-id="{$ID}"
+                    <% if ThirdEmail %>
+                       value="$ThirdEmail">$ThirdEmail
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.ThirdEmail && DupeAccount.ThirdEmail %>
-            <div class="checkbox third_email_div" id="third_email_{$CurrentAccount.ID}">
+        <div class="checkbox third_email_div" id="third_email_{$CurrentAccount.ID}">
+            <% if CurrentAccount.ThirdEmail %>
                 <label>$CurrentAccount.ThirdEmail</label>
-            </div>
-            <div class="checkbox hidden third_email_div" id="third_email_{$DupeAccount.ID}">
-                <label>$DupeAccount.ThirdEmail</label>
-            </div>
-        <% else_if  CurrentAccount.ThirdEmail %>
-            $CurrentAccount.ThirdEmail
-        <% else_if  DupeAccount.ThirdEmail %>
-            $DupeAccount.ThirdEmail
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox third_email_div hidden" id="third_email_{$DupeAccount.ID}">
+            <% if DupeAccount.ThirdEmail %>
+                <label>$DupeAccount.ThirdEmail</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="shirt_size_row">
     <td>Shirt Size</td>
     <td>
         <% with CurrentAccount %>
-            <% if ShirtSize %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="shirt_size" name="shirt_size" data-member-id="{$ID}"
-                               value="$ShirtSize" checked>$ShirtSize
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="shirt_size" name="shirt_size" data-member-id="{$ID}"
+                    <% if ShirtSize %>
+                       value="$ShirtSize" checked>$ShirtSize
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if ShirtSize %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="shirt_size" name="shirt_size" data-member-id="{$ID}"
-                               value="$ShirtSize" <% if not Top.CurrentAccount.ShirtSize %>checked<% end_if%>>$ShirtSize
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="shirt_size" name="shirt_size" data-member-id="{$ID}"
+                    <% if ShirtSize %>
+                       value="$ShirtSize">$ShirtSize
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.ShirtSize && DupeAccount.ShirtSize %>
-            <div class="checkbox shirt_size_div" id="shirt_size_{$CurrentAccount.ID}">
+        <div class="checkbox shirt_size_div" id="shirt_size_{$CurrentAccount.ID}">
+            <% if CurrentAccount.ShirtSize %>
                 <label>$CurrentAccount.ShirtSize</label>
-            </div>
-            <div class="checkbox hidden shirt_size_div" id="shirt_size_{$DupeAccount.ID}">
-                <label>$DupeAccount.ShirtSize</label>
-            </div>
-        <% else_if  CurrentAccount.ShirtSize %>
-            $CurrentAccount.ShirtSize
-        <% else_if  DupeAccount.ShirtSize %>
-            $DupeAccount.ShirtSize
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox shirt_size_div hidden" id="shirt_size_{$DupeAccount.ID}">
+            <% if DupeAccount.ShirtSize %>
+                <label>$DupeAccount.ShirtSize</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="statement_interest_row">
     <td>Statement Of Interest</td>
     <td>
         <% with CurrentAccount %>
-            <% if StatementOfInterest %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="statement_interest" name="statement_interest" data-member-id="{$ID}"
-                               value="$StatementOfInterest" checked>$StatementOfInterest
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="statement_interest" name="statement_interest" data-member-id="{$ID}"
+                    <% if StatementOfInterest %>
+                       value="$StatementOfInterest" checked>$StatementOfInterest
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if StatementOfInterest %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="statement_interest" name="statement_interest" data-member-id="{$ID}"
-                               value="$StatementOfInterest"
-                               <% if not Top.CurrentAccount.StatementOfInterest %>checked<% end_if%>>$StatementOfInterest
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="statement_interest" name="statement_interest" data-member-id="{$ID}"
+                    <% if StatementOfInterest %>
+                       value="$StatementOfInterest">$StatementOfInterest
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.StatementOfInterest && DupeAccount.StatementOfInterest %>
-            <div class="checkbox statement_interest_div" id="statement_interest_{$CurrentAccount.ID}">
+        <div class="checkbox statement_interest_div" id="statement_interest_{$CurrentAccount.ID}">
+            <% if CurrentAccount.StatementOfInterest %>
                 <label>$CurrentAccount.StatementOfInterest</label>
-            </div>
-            <div class="checkbox hidden statement_interest_div" id="statement_interest_{$DupeAccount.ID}">
-                <label>$DupeAccount.StatementOfInterest</label>
-            </div>
-        <% else_if  CurrentAccount.StatementOfInterest %>
-            $CurrentAccount.StatementOfInterest
-        <% else_if  DupeAccount.StatementOfInterest %>
-            $DupeAccount.StatementOfInterest
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox statement_interest_div hidden" id="statement_interest_{$DupeAccount.ID}">
+            <% if DupeAccount.StatementOfInterest %>
+                <label>$DupeAccount.StatementOfInterest</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="bio_row">
     <td>Bio</td>
     <td>
         <% with CurrentAccount %>
-            <% if Bio %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="bio" name="bio" data-member-id="{$ID}" value="$Bio" checked>$Bio
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="bio" name="bio" data-member-id="{$ID}"
+                    <% if Bio %>
+                       value="$Bio" checked>$Bio
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Bio %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="bio" name="bio" data-member-id="{$ID}" value="$Bio"
-                               <% if not Top.CurrentAccount.Bio %>checked<% end_if%>>$Bio
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="bio" name="bio" data-member-id="{$ID}"
+                    <% if Bio %>
+                       value="$Bio">$Bio
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Bio && DupeAccount.Bio %>
-            <div class="checkbox bio_div" id="bio_{$CurrentAccount.ID}">
+        <div class="checkbox bio_div" id="bio_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Bio %>
                 <label>$CurrentAccount.Bio</label>
-            </div>
-            <div class="checkbox hidden bio_div" id="bio_{$DupeAccount.ID}">
-                <label>$DupeAccount.Bio</label>
-            </div>
-        <% else_if  CurrentAccount.Bio %>
-            $CurrentAccount.Bio
-        <% else_if  DupeAccount.Bio %>
-            $DupeAccount.Bio
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox bio_div hidden" id="bio_{$DupeAccount.ID}">
+            <% if DupeAccount.Bio %>
+                <label>$DupeAccount.Bio</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="food_preference_row">
     <td>Food Preference</td>
     <td>
         <% with CurrentAccount %>
-            <% if FoodPreference %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="food_preference" name="food_preference" data-member-id="{$ID}"
-                               value="$FoodPreference" checked>$FoodPreference
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="food_preference" name="food_preference" data-member-id="{$ID}"
+                    <% if FoodPreference %>
+                       value="$FoodPreference" checked>$FoodPreference
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if FoodPreference %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="food_preference" name="food_preference" data-member-id="{$ID}"
-                               value="$FoodPreference"
-                               <% if not Top.CurrentAccount.FoodPreference %>checked<% end_if%>>$FoodPreference
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="food_preference" name="food_preference" data-member-id="{$ID}"
+                    <% if FoodPreference %>
+                       value="$FoodPreference">$FoodPreference
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.FoodPreference && DupeAccount.FoodPreference %>
-            <div class="checkbox food_preference_div" id="food_preference_{$CurrentAccount.ID}">
+        <div class="checkbox food_preference_div" id="food_preference_{$CurrentAccount.ID}">
+            <% if CurrentAccount.FoodPreference %>
                 <label>$CurrentAccount.FoodPreference</label>
-            </div>
-            <div class="checkbox hidden food_preference_div" id="food_preference_{$DupeAccount.ID}">
-                <label>$DupeAccount.FoodPreference</label>
-            </div>
-        <% else_if  CurrentAccount.FoodPreference %>
-            $CurrentAccount.FoodPreference
-        <% else_if  DupeAccount.FoodPreference %>
-            $DupeAccount.FoodPreference
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox food_preference_div hidden" id="food_preference_{$DupeAccount.ID}">
+            <% if DupeAccount.FoodPreference %>
+                <label>$DupeAccount.FoodPreference</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="other_food_row">
     <td>Other Food</td>
     <td>
         <% with CurrentAccount %>
-            <% if OtherFood %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="other_food" name="other_food" data-member-id="{$ID}"
-                               value="$OtherFood" checked>$OtherFood
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="other_food" name="other_food" data-member-id="{$ID}"
+                    <% if OtherFood %>
+                       value="$OtherFood" checked>$OtherFood
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if OtherFood %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="other_food" name="other_food" data-member-id="{$ID}"
-                               value="$OtherFood" <% if not Top.CurrentAccount.OtherFood %>checked<% end_if%>>$OtherFood
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="other_food" name="other_food" data-member-id="{$ID}"
+                    <% if OtherFood %>
+                       value="$OtherFood">$OtherFood
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.OtherFood && DupeAccount.OtherFood %>
-            <div class="checkbox other_food_div" id="other_food_{$CurrentAccount.ID}">
+        <div class="checkbox other_food_div" id="other_food_{$CurrentAccount.ID}">
+            <% if CurrentAccount.OtherFood %>
                 <label>$CurrentAccount.OtherFood</label>
-            </div>
-            <div class="checkbox hidden other_food_div" id="other_food_{$DupeAccount.ID}">
-                <label>$DupeAccount.OtherFood</label>
-            </div>
-        <% else_if  CurrentAccount.OtherFood %>
-            $CurrentAccount.OtherFood
-        <% else_if  DupeAccount.OtherFood %>
-            $DupeAccount.OtherFood
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox other_food_div hidden" id="other_food_{$DupeAccount.ID}">
+            <% if DupeAccount.OtherFood %>
+                <label>$DupeAccount.OtherFood</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="irc_handle_row">
     <td>IRC Handle</td>
     <td>
         <% with CurrentAccount %>
-            <% if IRCHandle %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="irc_handle" name="irc_handle" data-member-id="{$ID}"
-                               value="$IRCHandle" checked>$IRCHandle
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="irc_handle" name="irc_handle" data-member-id="{$ID}"
+                    <% if IRCHandle %>
+                       value="$IRCHandle" checked>$IRCHandle
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if IRCHandle %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="irc_handle" name="irc_handle" data-member-id="{$ID}"
-                               value="$IRCHandle" <% if not Top.CurrentAccount.IRCHandle %>checked<% end_if%>>$IRCHandle
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="irc_handle" name="irc_handle" data-member-id="{$ID}"
+                    <% if IRCHandle %>
+                       value="$IRCHandle">$IRCHandle
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.IRCHandle && DupeAccount.IRCHandle %>
-            <div class="checkbox irc_handle_div" id="irc_handle_{$CurrentAccount.ID}">
+        <div class="checkbox irc_handle_div" id="irc_handle_{$CurrentAccount.ID}">
+            <% if CurrentAccount.IRCHandle %>
                 <label>$CurrentAccount.IRCHandle</label>
-            </div>
-            <div class="checkbox hidden irc_handle_div" id="irc_handle_{$DupeAccount.ID}">
-                <label>$DupeAccount.IRCHandle</label>
-            </div>
-        <% else_if  CurrentAccount.IRCHandle %>
-            $CurrentAccount.IRCHandle
-        <% else_if  DupeAccount.IRCHandle %>
-            $DupeAccount.IRCHandle
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox irc_handle_div hidden" id="irc_handle_{$DupeAccount.ID}">
+            <% if DupeAccount.IRCHandle %>
+                <label>$DupeAccount.IRCHandle</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="twitter_name_row">
     <td>Twitter Name</td>
     <td>
         <% with CurrentAccount %>
-            <% if TwitterName %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="twitter_name" name="twitter_name" data-member-id="{$ID}"
-                               value="$TwitterName" checked>$TwitterName
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="twitter_name" name="twitter_name" data-member-id="{$ID}"
+                    <% if TwitterName %>
+                       value="$TwitterName" checked>$TwitterName
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if TwitterName %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="twitter_name" name="twitter_name" data-member-id="{$ID}"
-                               value="$TwitterName"
-                               <% if not Top.CurrentAccount.TwitterName %>checked<% end_if%>>$TwitterName
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="twitter_name" name="twitter_name" data-member-id="{$ID}"
+                    <% if TwitterName %>
+                       value="$TwitterName">$TwitterName
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.TwitterName && DupeAccount.TwitterName %>
-            <div class="checkbox twitter_name_div" id="twitter_name_{$CurrentAccount.ID}">
+        <div class="checkbox twitter_name_div" id="twitter_name_{$CurrentAccount.ID}">
+            <% if CurrentAccount.TwitterName %>
                 <label>$CurrentAccount.TwitterName</label>
-            </div>
-            <div class="checkbox hidden twitter_name_div" id="twitter_name_{$DupeAccount.ID}">
-                <label>$DupeAccount.TwitterName</label>
-            </div>
-        <% else_if  CurrentAccount.TwitterName %>
-            $CurrentAccount.TwitterName
-        <% else_if  DupeAccount.TwitterName %>
-            $DupeAccount.TwitterName
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox twitter_name_div hidden" id="twitter_name_{$DupeAccount.ID}">
+            <% if DupeAccount.TwitterName %>
+                <label>$DupeAccount.TwitterName</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="linkedin_profile_row">
     <td>LinkedIn Profile</td>
     <td>
         <% with CurrentAccount %>
-            <% if LinkedInProfile %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="linkedin_profile" name="linkedin_profile" data-member-id="{$ID}"
-                               value="$LinkedInProfile" checked>$LinkedInProfile
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="linkedin_profile" name="linkedin_profile" data-member-id="{$ID}"
+                    <% if LinkedInProfile %>
+                       value="$LinkedInProfile" checked>$LinkedInProfile
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if LinkedInProfile %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="linkedin_profile" name="linkedin_profile" data-member-id="{$ID}"
-                               value="$LinkedInProfile"
-                               <% if not Top.CurrentAccount.LinkedInProfile %>checked<% end_if%>>$LinkedInProfile
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="linkedin_profile" name="linkedin_profile" data-member-id="{$ID}"
+                    <% if LinkedInProfile %>
+                       value="$LinkedInProfile">$LinkedInProfile
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.LinkedInProfile && DupeAccount.LinkedInProfile %>
-            <div class="checkbox linkedin_profile_div" id="linkedin_profile_{$CurrentAccount.ID}">
+        <div class="checkbox linkedin_profile_div" id="linkedin_profile_{$CurrentAccount.ID}">
+            <% if CurrentAccount.LinkedInProfile %>
                 <label>$CurrentAccount.LinkedInProfile</label>
-            </div>
-            <div class="checkbox hidden linkedin_profile_div" id="linkedin_profile_{$DupeAccount.ID}">
-                <label>$DupeAccount.LinkedInProfile</label>
-            </div>
-        <% else_if  CurrentAccount.LinkedInProfile %>
-            <div class="checkbox linkedin_profile_div" id="linkedin_profile_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.LinkedInProfile</label>
-            </div>
-        <% else_if  DupeAccount.LinkedInProfile %>
-            <div class="checkbox linkedin_profile_div" id="linkedin_profile_{$DupeAccount.ID}">
-                <label>$DupeAccount.LinkedInProfile</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox linkedin_profile_div hidden" id="linkedin_profile_{$DupeAccount.ID}">
+            <% if DupeAccount.LinkedInProfile %>
+                <label>$DupeAccount.LinkedInProfile</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="projects_row">
     <td>Projects</td>
     <td>
         <% with CurrentAccount %>
-            <% if Projects %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="projects" name="projects" data-member-id="{$ID}" value="$Projects"
-                               checked>$Projects
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="projects" name="projects" data-member-id="{$ID}"
+                    <% if Projects %>
+                       value="$Projects" checked>$Projects
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Projects %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="projects" name="projects" data-member-id="{$ID}" value="$Projects"
-                               <% if not Top.CurrentAccount.Projects %>checked<% end_if%>>$Projects
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="projects" name="projects" data-member-id="{$ID}"
+                    <% if Projects %>
+                       value="$Projects">$Projects
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Projects && DupeAccount.Projects %>
-            <div class="checkbox projects_div" id="projects_{$CurrentAccount.ID}">
+        <div class="checkbox projects_div" id="projects_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Projects %>
                 <label>$CurrentAccount.Projects</label>
-            </div>
-            <div class="checkbox hidden projects_div" id="projects_{$DupeAccount.ID}">
-                <label>$DupeAccount.Projects</label>
-            </div>
-        <% else_if  CurrentAccount.Projects %>
-            <div class="checkbox projects_div" id="projects_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.ShirtSize</label>
-            </div>
-        <% else_if  DupeAccount.Projects %>
-            <div class="checkbox projects_div" id="projects_{$DupeAccount.ID}">
-                <label>$DupeAccount.Projects</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox projects_div hidden" id="projects_{$DupeAccount.ID}">
+            <% if DupeAccount.Projects %>
+                <label>$DupeAccount.Projects</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="other_project_row">
     <td>Other Project</td>
     <td>
         <% with CurrentAccount %>
-            <% if OtherProject %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="other_project" name="other_project" data-member-id="{$ID}"
-                               value="$OtherProject" checked>$OtherProject
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="other_project" name="other_project" data-member-id="{$ID}"
+                    <% if OtherProject %>
+                       value="$OtherProject" checked>$OtherProject
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if OtherProject %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="other_project" name="other_project" data-member-id="{$ID}"
-                               value="$OtherProject"
-                               <% if not Top.CurrentAccount.OtherProject %>checked<% end_if%>>$OtherProject
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="other_project" name="other_project" data-member-id="{$ID}"
+                    <% if OtherProject %>
+                       value="$OtherProject">$OtherProject
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.OtherProject && DupeAccount.OtherProject %>
-            <div class="checkbox other_project_div" id="other_project_{$CurrentAccount.ID}">
+        <div class="checkbox other_project_div" id="other_project_{$CurrentAccount.ID}">
+            <% if CurrentAccount.OtherProject %>
                 <label>$CurrentAccount.OtherProject</label>
-            </div>
-            <div class="checkbox hidden other_project_div" id="other_project_{$DupeAccount.ID}">
-                <label>$DupeAccount.OtherProject</label>
-            </div>
-        <% else_if  CurrentAccount.OtherProject %>
-            <div class="checkbox other_project_div" id="other_project_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.OtherProject</label>
-            </div>
-        <% else_if  DupeAccount.OtherProject %>
-            <div class="checkbox other_project_div" id="other_project_{$DupeAccount.ID}">
-                <label>$DupeAccount.OtherProject</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox other_project_div hidden" id="other_project_{$DupeAccount.ID}">
+            <% if DupeAccount.OtherProject %>
+                <label>$DupeAccount.OtherProject</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="address_row">
     <td>Street Address (Line1)</td>
     <td>
         <% with CurrentAccount %>
-            <% if Address %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="address" name="address" data-member-id="{$ID}" value="$Address"
-                               checked>$Address
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="address" name="address" data-member-id="{$ID}"
+                    <% if Address %>
+                       value="$Address" checked>$Address
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Address %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="address" name="address" data-member-id="{$ID}" value="$ShirtSize"
-                               <% if not Top.CurrentAccount.Address %>checked<% end_if%>>$Address
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="address" name="address" data-member-id="{$ID}"
+                    <% if Address %>
+                       value="$Address">$Address
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Address && DupeAccount.Address %>
-            <div class="checkbox address_div" id="address_{$CurrentAccount.ID}">
+        <div class="checkbox address_div" id="address_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Address %>
                 <label>$CurrentAccount.Address</label>
-            </div>
-            <div class="checkbox hidden address_div" id="address_{$DupeAccount.ID}">
-                <label>$DupeAccount.Address</label>
-            </div>
-        <% else_if  CurrentAccount.Address %>
-            <div class="checkbox address_div" id="address_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.Address</label>
-            </div>
-        <% else_if  DupeAccount.Address %>
-            <div class="checkbox address_div" id="address_{$DupeAccount.ID}">
-                <label>$DupeAccount.Address</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox address_div hidden" id="address_{$DupeAccount.ID}">
+            <% if DupeAccount.Address %>
+                <label>$DupeAccount.Address</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="suburb_row">
     <td>Street Address (Line2)</td>
     <td>
         <% with CurrentAccount %>
-            <% if Suburb %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="suburb" name="suburb" data-member-id="{$ID}" value="$Suburb"
-                               checked>$Suburb
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="suburb" name="suburb" data-member-id="{$ID}"
+                    <% if Suburb %>
+                       value="$Suburb" checked>$Suburb
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Suburb %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="suburb" name="suburb" data-member-id="{$ID}" value="$Suburb"
-                               <% if not Top.CurrentAccount.Suburb %>checked<% end_if%>>$Suburb
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="suburb" name="suburb" data-member-id="{$ID}"
+                    <% if Suburb %>
+                       value="$Suburb">$Suburb
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Suburb && DupeAccount.Suburb %>
-            <div class="checkbox suburb_div" id="suburb_{$CurrentAccount.ID}">
+        <div class="checkbox suburb_div" id="suburb_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Suburb %>
                 <label>$CurrentAccount.Suburb</label>
-            </div>
-            <div class="checkbox hidden suburb_div" id="suburb_{$DupeAccount.ID}">
-                <label>$DupeAccount.Suburb</label>
-            </div>
-        <% else_if  CurrentAccount.Suburb %>
-            <div class="checkbox suburb_div" id="suburb_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.Suburb</label>
-            </div>
-        <% else_if  DupeAccount.Suburb %>
-            <div class="checkbox suburb_div" id="suburb_{$DupeAccount.ID}">
-                <label>$DupeAccount.Suburb</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox suburb_div hidden" id="suburb_{$DupeAccount.ID}">
+            <% if DupeAccount.Suburb %>
+                <label>$DupeAccount.Suburb</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="state_row">
     <td>State</td>
     <td>
         <% with CurrentAccount %>
-            <% if State %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="state" name="state" data-member-id="{$ID}" value="$State"
-                               checked>$State
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="state" name="state" data-member-id="{$ID}"
+                    <% if State %>
+                       value="$State" checked>$State
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if State %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="state" name="state" data-member-id="{$ID}" value="$State"
-                               <% if not Top.CurrentAccount.State %>checked<% end_if%>>$State
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="state" name="state" data-member-id="{$ID}"
+                    <% if State %>
+                       value="$State">$State
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.State && DupeAccount.State %>
-            <div class="checkbox state_div" id="state_{$CurrentAccount.ID}">
+        <div class="checkbox state_div" id="state_{$CurrentAccount.ID}">
+            <% if CurrentAccount.State %>
                 <label>$CurrentAccount.State</label>
-            </div>
-            <div class="checkbox hidden state_div" id="state_{$DupeAccount.ID}">
-                <label>$DupeAccount.State</label>
-            </div>
-        <% else_if  CurrentAccount.State %>
-            <div class="checkbox state_div" id="state_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.State</label>
-            </div>
-        <% else_if  DupeAccount.State %>
-            <div class="checkbox state_div" id="state_{$DupeAccount.ID}">
-                <label>$DupeAccount.State</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox state_div hidden" id="state_{$DupeAccount.ID}">
+            <% if DupeAccount.State %>
+                <label>$DupeAccount.State</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="postcode_row">
     <td>Postcode</td>
     <td>
         <% with CurrentAccount %>
-            <% if Postcode %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="postcode" name="postcode" data-member-id="{$ID}" value="$Postcode"
-                               checked>$Postcode
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="postcode" name="postcode" data-member-id="{$ID}"
+                    <% if Postcode %>
+                       value="$Postcode" checked>$Postcode
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Postcode %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="postcode" name="postcode" data-member-id="{$ID}" value="$Postcode"
-                               <% if not Top.CurrentAccount.Postcode %>checked<% end_if%>>$Postcode
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="postcode" name="postcode" data-member-id="{$ID}"
+                    <% if Postcode %>
+                       value="$Postcode">$Postcode
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Postcode && DupeAccount.Postcode %>
-            <div class="checkbox postcode_div" id="postcode_{$CurrentAccount.ID}">
+        <div class="checkbox postcode_div" id="postcode_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Postcode %>
                 <label>$CurrentAccount.Postcode</label>
-            </div>
-            <div class="checkbox hidden postcode_div" id="postcode_{$DupeAccount.ID}">
-                <label>$DupeAccount.Postcode</label>
-            </div>
-        <% else_if  CurrentAccount.Postcode %>
-            <div class="checkbox postcode_div" id="postcode_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.Postcode</label>
-            </div>
-        <% else_if  DupeAccount.Postcode %>
-            <div class="checkbox postcode_div" id="postcode_{$DupeAccount.ID}">
-                <label>$DupeAccount.Postcode</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox postcode_div hidden" id="postcode_{$DupeAccount.ID}">
+            <% if DupeAccount.Postcode %>
+                <label>$DupeAccount.Postcode</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="country_row">
     <td>Country</td>
     <td>
         <% with CurrentAccount %>
-            <% if Country %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="country" name="country" data-member-id="{$ID}" value="$Country"
-                               checked>$Country
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="country" name="country" data-member-id="{$ID}"
+                    <% if Country %>
+                       value="$Country" checked>$Country
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Country %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="country" name="country" data-member-id="{$ID}" value="$Country"
-                               <% if not Top.CurrentAccount.Country %>checked<% end_if%>>$Country
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="country" name="country" data-member-id="{$ID}"
+                    <% if Country %>
+                       value="$Country">$Country
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Country && DupeAccount.Country %>
-            <div class="checkbox country_div" id="country_{$CurrentAccount.ID}">
+        <div class="checkbox country_div" id="country_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Country %>
                 <label>$CurrentAccount.Country</label>
-            </div>
-            <div class="checkbox hidden country_div" id="country_{$DupeAccount.ID}">
-                <label>$DupeAccount.Country</label>
-            </div>
-        <% else_if  CurrentAccount.Country %>
-            <div class="checkbox country_div" id="country_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.Country</label>
-            </div>
-        <% else_if  DupeAccount.Country %>
-            <div class="checkbox country_div" id="country_{$DupeAccount.ID}">
-                <label>$DupeAccount.Country</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox country_div hidden" id="country_{$DupeAccount.ID}">
+            <% if DupeAccount.Country %>
+                <label>$DupeAccount.Country</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="city_row">
     <td>City</td>
     <td>
         <% with CurrentAccount %>
-            <% if City %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="city" name="city" data-member-id="{$ID}" value="$City" checked>$City
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>T
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="city" name="city" data-member-id="{$ID}"
+                    <% if City %>
+                       value="$City" checked>$City
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if City %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="city" name="city" data-member-id="{$ID}" value="$City"
-                               <% if not Top.CurrentAccount.City %>checked<% end_if%>>$City
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="city" name="city" data-member-id="{$ID}"
+                    <% if City %>
+                       value="$City">$City
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.City && DupeAccount.City %>
-            <div class="checkbox city_div" id="city_{$CurrentAccount.ID}">
+        <div class="checkbox city_div" id="city_{$CurrentAccount.ID}">
+            <% if CurrentAccount.City %>
                 <label>$CurrentAccount.City</label>
-            </div>
-            <div class="checkbox hidden city_div" id="city_{$DupeAccount.ID}">
-                <label>$DupeAccount.City</label>
-            </div>
-        <% else_if  CurrentAccount.City %>
-            <div class="checkbox city_div" id="city_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.City</label>
-            </div>
-        <% else_if  DupeAccount.City %>
-            <div class="checkbox city_div" id="city_{$DupeAccount.ID}">
-                <label>$DupeAccount.City</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox city_div hidden" id="city_{$DupeAccount.ID}">
+            <% if DupeAccount.City %>
+                <label>$DupeAccount.City</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="gender_row">
     <td>Gender</td>
     <td>
         <% with CurrentAccount %>
-            <% if Gender %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="gender" name="gender" data-member-id="{$ID}" value="$Gender"
-                               checked>$Gender
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="gender" name="gender" data-member-id="{$ID}"
+                    <% if Gender %>
+                       value="$Gender" checked>$Gender
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Gender %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="gender" name="gender" data-member-id="{$ID}" value="$Gender"
-                               <% if not Top.CurrentAccount.Gender %>checked<% end_if%>>$Gender
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="gender" name="gender" data-member-id="{$ID}"
+                    <% if Gender %>
+                       value="$Gender">$Gender
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Gender && DupeAccount.Gender %>
-            <div class="checkbox gender_div" id="gender_{$CurrentAccount.ID}">
+        <div class="checkbox gender_div" id="gender_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Gender %>
                 <label>$CurrentAccount.Gender</label>
-            </div>
-            <div class="checkbox hidden gender_div" id="gender_{$DupeAccount.ID}">
-                <label>$DupeAccount.Gender</label>
-            </div>
-        <% else_if  CurrentAccount.Gender %>
-            <div class="checkbox gender_div" id="gender_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.Gender</label>
-            </div>
-        <% else_if  DupeAccount.Gender %>
-            <div class="checkbox gender_div" id="gender_{$DupeAccount.ID}">
-                <label>$DupeAccount.Gender</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox gender_div hidden" id="gender_{$DupeAccount.ID}">
+            <% if DupeAccount.Gender %>
+                <label>$DupeAccount.Gender</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr class="photo_row">
     <td>Photo</td>
     <td>
         <% with CurrentAccount %>
-            <% if Photo.exists %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="photo" name="photo" data-member-id="{$ID}" value="$Photo.ID"
-                               checked>$ProfilePhoto
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="photo" name="photo" data-member-id="{$ID}"
+                    <% if Photo.exists %>
+                       value="$Photo.ID" checked>$ProfilePhoto
+                    <% else %>
+                        value="NULL" checked>NOT SET
+                    <% end_if %>
+                </label>
+            </div>
         <% end_with %>
     </td>
     <td>
         <% with DupeAccount %>
-            <% if Photo.exists %>
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" class="photo" name="photo" data-member-id="{$ID}" value="$Photo.ID"
-                               <% if not Top.CurrentAccount.Photo.exists %>checked<% end_if%>>$ProfilePhoto
-                    </label>
-                </div>
-            <% else %>
-                <div class="checkbox">
-                    <label>NOT SET</label>
-                </div>
-            <% end_if %> <% end_with %>
+            <div class="checkbox">
+                <label>
+                <input type="radio" class="photo" name="photo" data-member-id="{$ID}"
+                    <% if Photo.exists %>
+                       value="$Photo.ID">$ProfilePhoto
+                    <% else %>
+                        value="NULL">NOT SET
+                    <% end_if %>
+                </label>
+            </div>
+        <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.Photo.exists && DupeAccount.Photo.exists %>
-            <div class="checkbox photo_div" id="photo_{$CurrentAccount.ID}">
+        <div class="checkbox photo_div" id="photo_{$CurrentAccount.ID}">
+            <% if CurrentAccount.Photo.exists %>
                 <label>$CurrentAccount.ProfilePhoto</label>
-            </div>
-            <div class="checkbox hidden photo_div" id="photo_{$DupeAccount.ID}">
-                <label>$DupeAccount.ProfilePhoto</label>
-            </div>
-        <% else_if  CurrentAccount.Photo.exists %>
-            <div class="checkbox photo_div" id="photo_{$CurrentAccount.ID}">
-                <label>$CurrentAccount.ProfilePhoto</label>
-            </div>
-        <% else_if  DupeAccount.Photo.exists %>
-            <div class="checkbox photo_div" id="photo_{$DupeAccount.ID}">
-                <label>$DupeAccount.ProfilePhoto</label>
-            </div>
-        <% else %>
-            <div class="checkbox">
+            <% else %>
                 <label>NOT SET</label>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        </div>
+        <div class="checkbox photo_div hidden" id="photo_{$DupeAccount.ID}">
+            <% if DupeAccount.Photo.exists %>
+                <label>$DupeAccount.ProfilePhoto</label>
+            <% else %>
+                <label>NOT SET</label>
+            <% end_if %>
+        </div>
     </td>
 </tr>
 <tr>

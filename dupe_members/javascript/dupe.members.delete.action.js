@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
     $('#btn-delete').click(function(e){
         e.preventDefault();
         var btn = $(this);
-        if(window.confirm('Are you sure?')){
+        if(window.confirm('This will delete your duplicate account and its not a reversible action. Are you sure?')){
             var token = btn.attr('data-token');
             $.ajax({
                 async:true,

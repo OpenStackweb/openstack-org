@@ -100,4 +100,15 @@ interface ICommunityMember extends IEntity {
      * @return mixed
      */
     public function updateProfilePhoto($photo_id);
+
+    /**
+     * @param bool $show
+     * @return void
+     */
+    public function showDupesOnProfile($show);
+
+    /**
+     * @return bool
+     */
+    public function shouldShowDupesOnProfile();
 }

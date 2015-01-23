@@ -27,10 +27,9 @@ final class MergeCompanyAdminBulkQuery extends AbstractMergeBulkQuery {
 
         return array(
             "UPDATE Company SET SubmitterID = {$primary_id} WHERE SubmitterID = {$dupe_id} ;",
-            "CREATE TEMPORARY TABLE IF NOT EXISTS COMPANY_ADMIN_INTERSECTION_{$dupe_id}_{$primary_id} AS
-SELECT ID FROM Company_Administrators WHERE MemberID = {$dupe_id}
-AND CONCAT(CompanyID,'-',GroupID) NOT IN ( SELECT CONCAT(CompanyID,'-',GroupID) FROM Company_Administrators WHERE MemberID = {$primary_id}  );",
+            "CREATE TEMPORARY TABLE IF NOT EXISTS COMPANY_ADMIN_INTERSECTION_{$dupe_id}_{$primary_id} AS SELECT ID FROM Company_Administrators WHERE MemberID = {$dupe_id} AND CONCAT(CompanyID,'-',GroupID) NOT IN ( SELECT CONCAT(CompanyID,'-',GroupID) FROM Company_Administrators WHERE MemberID = {$primary_id}  );",
             "UPDATE Company_Administrators SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} AND ID IN ( SELECT ID FROM COMPANY_ADMIN_INTERSECTION_{$dupe_id}_{$primary_id} ) ;",
+            "DELETE FROM Company_Administrators WHERE MemberID = {$dupe_id} ;",
             "DROP TABLE COMPANY_ADMIN_INTERSECTION_{$dupe_id}_{$primary_id} ;"
         );
 

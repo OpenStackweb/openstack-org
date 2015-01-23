@@ -25,6 +25,46 @@ final class DeletedDupeMemberFactory
     public function build(ICommunityMember $member)
     {
         $deleted = new DeletedDupeMember;
+        $deleted->MemberID = $member->ID;
+        $deleted->FirstName = $member->FirstName;
+        $deleted->Surname = $member->Surname;
+        $deleted->Email = $member->Email;
+        $deleted->Password = $member->Password;
+        $deleted->PasswordEncryption = $member->PasswordEncryption;
+        $deleted->Salt = $member->Salt;
+        $deleted->PasswordExpiry = $member->PasswordExpiry;
+        $deleted->LockedOutUntil = $member->LockedOutUntil;
+        $deleted->Locale = $member->Locale;
+        $deleted->DateFormat = $member->DateFormat;
+        $deleted->TimeFormat = $member->TimeFormat;
+        $deleted->SecondEmail = $member->SecondEmail;
+        $deleted->ThirdEmail = $member->ThirdEmail;
+        $deleted->HasBeenEmailed = $member->HasBeenEmailed;
+        $deleted->ShirtSize = $member->ShirtSize;
+        $deleted->StatementOfInterest = $member->StatementOfInterest;
+        $deleted->Bio = $member->Bio;
+        $deleted->FoodPreference = $member->FoodPreference;
+        $deleted->OtherFood = $member->OtherFood;
+        $deleted->IRCHandle = $member->IRCHandle;
+        $deleted->TwitterName = $member->TwitterName;
+        $deleted->Projects = $member->Projects;
+        $deleted->OtherProject = $member->OtherProject;
+        $deleted->SubscribedToNewsletter = $member->SubscribedToNewsletter;
+        $deleted->JobTitle = $member->JobTitle;
+        $deleted->DisplayOnSite = $member->DisplayOnSite;
+        $deleted->Role = $member->Role;
+        $deleted->LinkedInProfile = $member->LinkedInProfile;
+        $deleted->Address = $member->Address;
+        $deleted->Suburb = $member->Suburb;
+        $deleted->State = $member->State;
+        $deleted->Postcode = $member->Postcode;
+        $deleted->Country = $member->Country;
+        $deleted->City = $member->City;
+        $deleted->Gender = $member->Gender;
+        $deleted->TypeOfDirector = $member->TypeOfDirector;
+        $deleted->CLASigned = $member->CLASigned;
+        $deleted->LastCodeCommit = $member->LastCodeCommit;
+        $deleted->GerritID = $member->GerritID;
         return $deleted;
     }
 }

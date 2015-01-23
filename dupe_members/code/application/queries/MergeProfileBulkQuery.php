@@ -28,23 +28,20 @@ final class MergeProfileBulkQuery
         return array(
             "UPDATE AffiliationUpdate SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;",
             "UPDATE Affiliation SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;",
-            "CREATE TEMPORARY TABLE IF NOT EXISTS GROUPS_INTERSECTION_{$dupe_id}_{$primary_id} AS
-SELECT ID from Group_Members where MemberID = {$dupe_id} AND
-GroupID NOT IN ( SELECT GroupID from Group_Members where MemberID = {$primary_id} ) ;",
+            "CREATE TEMPORARY TABLE IF NOT EXISTS GROUPS_INTERSECTION_{$dupe_id}_{$primary_id} AS SELECT ID from Group_Members where MemberID = {$dupe_id} AND GroupID NOT IN ( SELECT GroupID from Group_Members where MemberID = {$primary_id} ) ;",
             "UPDATE Group_Members SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} AND ID IN ( SELECT ID FROM GROUPS_INTERSECTION_{$dupe_id}_{$primary_id} ) ;",
+            "DELETE FROM Group_Members WHERE MemberID =  {$dupe_id} ",
             "DROP TABLE GROUPS_INTERSECTION_{$dupe_id}_{$primary_id} ;",
-            "CREATE TEMPORARY TABLE IF NOT EXISTS LEGAL_DOCS_INTERSECTION_{$dupe_id}_{$primary_id} AS
-SELECT ID from LegalAgreement where MemberID = {$dupe_id} AND
- LegalDocumentPageID NOT IN ( SELECT LegalDocumentPageID from LegalAgreement  where MemberID = {$primary_id} ) ;",
-            "UPDATE LegalAgreement SET MemberID = {$primary_id}
-WHERE MemberID = {$dupe_id} AND ID IN ( SELECT ID FROM LEGAL_DOCS_INTERSECTION_{$dupe_id}_{$primary_id} ) ;",
+            "CREATE TEMPORARY TABLE IF NOT EXISTS LEGAL_DOCS_INTERSECTION_{$dupe_id}_{$primary_id} AS SELECT ID from LegalAgreement where MemberID = {$dupe_id} AND  LegalDocumentPageID NOT IN ( SELECT LegalDocumentPageID from LegalAgreement  where MemberID = {$primary_id} ) ;",
+            "UPDATE LegalAgreement SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} AND ID IN ( SELECT ID FROM LEGAL_DOCS_INTERSECTION_{$dupe_id}_{$primary_id} ) ;",
+            "DELETE FROM LegalAgreement WHERE MemberID = {$dupe_id};",
             "DROP TABLE LEGAL_DOCS_INTERSECTION_{$dupe_id}_{$primary_id} ;",
             "UPDATE OrganizationRegistrationRequest SET  MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;",
             "CREATE TEMPORARY TABLE IF NOT EXISTS TEAM_MEMBERS_INTERSECTION_{$dupe_id}_{$primary_id} AS
 SELECT ID from Team_Members where MemberID = {$dupe_id} AND
 TeamID NOT IN ( SELECT TeamID from Team_Members  where MemberID = {$primary_id} ) ;",
-            "UPDATE Team_Members SET MemberID = {$primary_id}
-WHERE MemberID = {$dupe_id} AND ID IN ( SELECT ID FROM TEAM_MEMBERS_INTERSECTION_{$dupe_id}_{$primary_id} ) ;",
+            "UPDATE Team_Members SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} AND ID IN ( SELECT ID FROM TEAM_MEMBERS_INTERSECTION_{$dupe_id}_{$primary_id} ) ;",
+            "DELETE FROM Team_Members WHERE MemberID = {$dupe_id} ;",
             "DROP TABLE TEAM_MEMBERS_INTERSECTION_{$dupe_id}_{$primary_id} ;",
             "UPDATE TeamInvitation SET  MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;",
             "UPDATE OrganizationRegistrationRequest SET  MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;",
