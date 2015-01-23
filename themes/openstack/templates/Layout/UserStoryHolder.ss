@@ -47,13 +47,13 @@
 		<div class='col-lg-6'>
 			<h3>OpenStack Users By Industry</h3>
 		</div>
-		<div class='col-lg-6'>
+		<div class='col-lg-6' style="text-align:right">
 			Would you like to be listed here? &nbsp;
 			<a class='roundedButton' href='/user-survey/'>Add Your Company</a>
 		</div>
 	</div>
 
-	<div class='span-24 last deploymentTagGroup'>
+	<div class='last deploymentTagGroup'>
 		<% loop Industries %>
 			<a class='categoryTag' href='{$Top.URLSegment}/#$IndustryName'>
 				$IndustryName ($Stories.Count)
