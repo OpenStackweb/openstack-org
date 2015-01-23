@@ -20,11 +20,18 @@ final class FoundationMember
     implements IFoundationMember, ICommunityMember
 {
 
+    private static $db = array(
+        'ShowDupesOnProfile' => "Boolean"
+    );
+
     private static $has_many = array(
         'RevocationNotifications' => 'FoundationMemberRevocationNotification',
         'Votes' => 'Vote'
     );
 
+    private static $defaults = array(
+        'ShowDupesOnProfile' => TRUE
+    );
     /**
      * @return int
      */
@@ -297,5 +304,22 @@ final class FoundationMember
      */
     public function updateProfilePhoto($photo_id){
         $this->owner->setField('PhotoID', $photo_id);
+    }
+
+    /**
+     * @param bool $show
+     * @return void
+     */
+    public function showDupesOnProfile($show)
+    {
+        $this->owner->setField('ShowDupesOnProfile', $show);
+    }
+
+    /**
+     * @return bool
+     */
+    public function shouldShowDupesOnProfile()
+    {
+        return  $this->owner->getField('ShowDupesOnProfile');
     }
 }

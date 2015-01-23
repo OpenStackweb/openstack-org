@@ -370,4 +370,15 @@ final class DupesMembersManager {
             return $request;
         });
     }
+
+    public function showDupesOnProfile(ICommunityMember $current_member, $show){
+
+        $member_repository = $this->member_repository;
+
+        return $this->tx_manager->transaction(function() use( $current_member, $show, $member_repository) {
+
+            $current_member = $member_repository->getById($current_member->getIdentifier());
+            $current_member->showDupesOnProfile($show);
+        });
+    }
 } 

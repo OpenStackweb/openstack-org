@@ -46,7 +46,9 @@ final class EditProfileDupesMemberExtension extends Extension {
      *
      */
     public function getRenderUITopExtensions(&$html){
-        $dupe_members = $this->manager->getDupes(Member::currentUser());
+        $current_user = Member::currentUser();
+        if(!$current_user->shouldShowDupesOnProfile()) return;
+        $dupe_members = $this->manager->getDupes($current_user);
         $qty          = count($dupe_members);
         if($qty > 0){
 
@@ -55,8 +57,8 @@ final class EditProfileDupesMemberExtension extends Extension {
             Requirements::javascript('dupe_members/javascript/edit.profile.dupes.member.extension.js');
 
             $members_emails_warning  =  "<div id=\"dupes-email-warning-container\" class=\"alert alert-danger alert-dismissible\" role=\"alert\">";
-            $members_emails_warning .= "<button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>";
-            $members_emails_warning .= "<p>We currently show there are {$qty} additional accounts with your First & Last Name:</p>";
+            $members_emails_warning .= "<button id='dupes-dismiss' type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>";
+            $members_emails_warning .= "<p>We currently show there are <span class='span-qty'>{$qty}</span> additional accounts with your First & Last Name:</p>";
             $members_emails_warning .= '<ul id="dupes-emails-list">';
 
             foreach ($dupe_members as $dupe_mem) {

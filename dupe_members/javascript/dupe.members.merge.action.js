@@ -68,7 +68,7 @@ jQuery(document).ready(function ($) {
     $('.merge').click(function (e) {
         e.preventDefault();
         var btn = $(this);
-        if (window.confirm('Are you sure?')) {
+        if (window.confirm('This is not a reversible action. Are you sure?')) {
 
             var merge_result = {};
 
@@ -80,7 +80,8 @@ jQuery(document).ready(function ($) {
                 var radio = $('input:radio:checked', tr);
                 var val = null;
                 if (radio.length > 0) {
-                    val = radio.val();
+                    if(radio.val()!='NULL')
+                        val = radio.val();
                 }
                 merge_result[field] = val;
             }

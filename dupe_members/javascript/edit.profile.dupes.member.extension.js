@@ -63,6 +63,23 @@ jQuery(document).ready(function($) {
         }
         return false;
     });
+
+    $("#dupes-dismiss").click(function(e){
+        if(!window.confirm('Do you want to see this warning again?')){
+            $.ajax({
+                async:true,
+                type: 'PATCH',
+                url: 'api/v1/dupes-members/show/profile/false',
+                dataType: "json",
+                success: function (data,textStatus,jqXHR) {
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    ajaxError( jqXHR, textStatus, errorThrown);
+                }
+            });
+        }
+    });
 });
 
 function checkEmptyWarning(li){
@@ -73,4 +90,5 @@ function checkEmptyWarning(li){
             $(this).remove();
         })
     }
+    $('.span-qty').text(count - 1);
 }
