@@ -660,21 +660,7 @@
                         <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn subscribe-btn">
                     </div>
                 </form>
-            </div>
-            <!-- <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script> -->
-            <!--End mc_embed_signup-->
-
-<!--                 <form role="form">
-                  <div class="form-group">
-                    <h3>Join our mailing list.</h3>
-                    <p>
-                        Get up to date info about OpenStack and future user stories.
-                    </p>
-                    <input type="email" class="newsletter-input" id="NewsletterSignUp" placeholder="your@email.com">
-                    <a href="#" class="btn subscribe-btn">Subscribe <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-                </form> -->
-            </p>
+            </div></p>
           </div>
           <div class="modal-footer">
           </div>
