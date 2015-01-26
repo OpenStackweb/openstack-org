@@ -717,8 +717,8 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		//get distributions
 		$list1 = array();
 		$list2 = array();
-
         $list3 = array();
+        $list4 = array();
 
 		if ($this->canAdmin('distributions')) {
             list($list1, $size1) = $this->distribution_repository->getAll($query, 0, 1000);
