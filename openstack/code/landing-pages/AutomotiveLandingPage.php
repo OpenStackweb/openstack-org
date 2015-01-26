@@ -21,9 +21,8 @@ class AutomotiveLandingPage_Controller extends Page_Controller {
     function init()
     {
         parent::init();
-        Requirements::clear();
 
-	    Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 
 	    Requirements::customScript("jQuery(document).ready(function($) {
 
