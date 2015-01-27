@@ -344,7 +344,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 	{
 		$query = new QueryObject;
 		$query->addOrder(QueryOrder::asc('Name'));
-		list($list,$size) = $this->components_repository->getAll($query);
+		list($list,$size) = $this->components_repository->getAll($query, 0, 1000);
 		return new ArrayList($list);
 	}
 

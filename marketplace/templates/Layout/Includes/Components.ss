@@ -3,9 +3,9 @@
     <form id="components_form" name="components_form">
     <table style="border: 1px solid #ccc; border-collapse:collapse;clear:both;max-width:99%"  width="100%" >
         <tbody><tr>
-            <th style="border: 1px solid #ccc;width:15%;">OpenStack-powered Capabilities Offered</th>
+            <th style="border: 1px solid #ccc;width:9%;">OpenStack-powered Capabilities Offered</th>
             <% loop OpenStackAvailableComponents %>
-                <th style="border: 1px solid #ccc;background:#eaeaea;max-width:100px;" width="10%">
+                <th style="border: 1px solid #ccc;background:#eaeaea;max-width:100px;" width="9%">
                     $Name ($CodeName)
                 </th>
             <% end_loop %>
@@ -19,9 +19,9 @@
             <% end_loop %>
         </tr>
         <tr>
-            <th style="border: 1px solid #ccc;width:20%;">Version of OpenStack used (e..g Grizzly, Havana)</th>
+            <th style="border: 1px solid #ccc;width:9%;">Version of OpenStack used (e..g Grizzly, Havana)</th>
             <% loop OpenStackAvailableComponents %>
-                <th style="border: 1px solid #ccc;background:#fff;width:10%;">
+                <th style="border: 1px solid #ccc;background:#fff;width:9%;">
                     <div style="display:inline-block;max-width:90%;">
                         <select style="width:100%" id="releases_component_{$ID}" name="releases_component_{$ID}" class="component-releases" data-component-id="{$ID}" data-component-supports-versioning="{$SupportsVersioning}" data-component-codename="{$CodeName}">
                         </select>
