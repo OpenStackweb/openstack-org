@@ -30,6 +30,11 @@ class AppDevSurvey extends DataObject {
 		'StateOfOpenStack' => 'Text',
 		'DocsPriority' => 'Text',
 		'InteractionWithOtherClouds'=> 'Text',
+        'OtherAPIFormats' => 'Text',
+        'GuestOperatingSystems' => 'Text',
+        'OtherGuestOperatingSystems' => 'Text',
+        'StruggleDevelopmentDeploying' => 'Text',
+        'OtherDocsPriority' => 'Text',
 	);
 
 	static $has_one = array(
@@ -64,7 +69,8 @@ class AppDevSurvey extends DataObject {
 		'OpenStack clients' => 'OpenStack clients (Python)',
 		'php-opencloud' => 'php-opencloud (PHP)',
 		'pkgcloud' => 'pkgcloud (Node.js)',
-		'None' => 'None/Wrote my own',
+		'Wrote our own' => 'Wrote our own',
+        'Don’t use / plan to use the OpenStack API' => 'Don’t use / plan to use the OpenStack API',
 	);
 
 	public static $languages_options = array (
@@ -126,4 +132,17 @@ class AppDevSurvey extends DataObject {
 		'Yes, Azure also' => 'Yes, Azure also',
 		'Yes, multiple other clouds' => 'Yes, multiple other clouds',
 	);
+
+    public static $docs_priority_options = array(
+        'Clear' => 'Clear',
+        'Concise' => 'Concise',
+        'Complete' => 'Complete',
+        'Accurate' => 'Accurate',
+        'Searchable for direct access to specific content' => 'Searchable for direct access to specific content',
+        'Well organized for browsing by human readers' => 'Well organized for browsing by human readers',
+        'Include more detailed working examples' => 'Include more detailed working examples',
+        'API How to Use – introductory tutorial' => 'API How to Use – introductory tutorial',
+        'API Quick Start – just the essentials for a fast start ' => 'API Quick Start – just the essentials for a fast start',
+        'Other' => 'Other (please specify)'
+    );
 }

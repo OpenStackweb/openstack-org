@@ -97,6 +97,8 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
 			}
 		}
 
+        Requirements::javascript('surveys/js/deployment_survey_deployments_form.js');
+
 	}
 
 	function SaveDeployment($data, $form)

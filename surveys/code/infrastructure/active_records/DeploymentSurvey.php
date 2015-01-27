@@ -44,7 +44,10 @@ class DeploymentSurvey extends DataObject
 		'Email' => 'Text',
 		'OpenStackRecommendRate' => 'Text',
 		'OpenStackRecommendation' => 'Text',
-	);
+        'OpenStackActivity' => 'Text',
+        'OpenStackRelationship' => 'Text',
+        'ITActivity' => 'Text',
+    );
 
 	static $has_one = array(
 		'Member' => 'Member',
@@ -70,8 +73,8 @@ class DeploymentSurvey extends DataObject
 
 
 	static $defaults = array(
-		"CurrentStep" => 'OrgInfo',
-		'HighestStepAllowed' => 'OrgInfo',
+		"CurrentStep" => 'AboutYou',
+		'HighestStepAllowed' => 'AboutYou',
 		'OkToContact' => 'True'
 	);
 
@@ -79,7 +82,7 @@ class DeploymentSurvey extends DataObject
 	static $plural_name = 'Deployment Surveys';
 
 	public static $steps = array(
-		'Login', 'OrgInfo', 'AppDevSurvey', 'Deployments', 'DeploymentDetails', 'MoreDeploymentDetails', 'ThankYou'
+		'Login', 'AboutYou','YourOrganization', 'YourThoughts',  'AppDevSurvey', 'Deployments', 'DeploymentDetails', 'MoreDeploymentDetails', 'ThankYou'
 	);
 
 	public static $industry_options = array(
@@ -95,18 +98,17 @@ class DeploymentSurvey extends DataObject
 		'Manufacturing/Industrial' => 'Manufacturing / Industrial',
 		'Retail' => 'Retail',
 		'Telecommunications' => 'Telecommunications',
-		'Transportation/Shipping' => 'Transportation / Shipping',
 	);
 
 	public static $organization_size_options = array(
-		'1-20 employees' => '1-20 employees',
-		'21-100 employees' => '21-100 employees',
-		'101 to 500 employees' => '101 to 500 employees',
-		'501 to 1,000 employees' => '501 to 1,000 employees',
-		'1,001 to 5,000 employees' => '1,001 to 5,000 employees',
-		'5,001 to 10,000 employees' => '5,001 to 10,000 employees',
-		'More than 10,000 employees' => 'More than 10,000 employees'
-	);
+		'1 to 9 employees' => '1 to 9 employees',
+        '10 to 99 employees' => '10 to 99 employees',
+        '100 to 999 employees' => '100 to 999 employees',
+        '1,000 to 9,999 employees' => '1,000 to 9,999 employees',
+        '10,000 to 99,999 employees' => '10,000 to 99,999 employees',
+        '100,000 employees or more' => '100,000 employees or more',
+        'Don’t know / not sure' => 'Don’t know / not sure',
+ 	);
 
 	public static $openstack_recommendation_rate_options = array(
 		'0' => '0',
@@ -134,29 +136,39 @@ class DeploymentSurvey extends DataObject
 		'Blogs' => 'Blogs',
 		'docs.openstack.org' => 'docs.openstack.org',
 		'IRC' => 'IRC',
-		'OpenStack Mailing List' => 'OpenStack Mailing List',
-		'OpenStack Dev Mailing List' => 'OpenStack Dev Mailing List',
-		'The OpenStack Operations Guide' => 'The OpenStack Operations Guide',
-		'Other Online Forums' => 'Online Forums',
-		'OpenStack Planet' => 'OpenStack Planet (planet.openstack.org)',
-		'Source Code' => 'Read the source code',
 		'Local user group' => 'Local user group',
-		'OpenStack Operators Mailing List' => 'OpenStack Operators Mailing List',
-		'Superuser' => 'Superuser',
-		'Vendor documentation' => 'Vendor documentation',
-	);
+        'OpenStack Mailing List' => 'OpenStack Mailing List',
+        'OpenStack Operators Mailing List' => 'OpenStack Operators Mailing List',
+        'OpenStack Dev Mailing List' => 'OpenStack Dev Mailing List',
+        'The OpenStack Operations Guide' => 'The OpenStack Operations Guide',
+        'Online Forums' => 'Online Forums',
+        'OpenStack Planet (planet.openstack.org)' => 'OpenStack Planet (planet.openstack.org)',
+        'Read the source code' => 'Read the source code',
+        'Superuser' => 'Superuser',
+        'Vendor documentation' => 'Vendor documentation',
+  	);
 
 	public static $business_drivers_options = array(
-		'Cost savings' => 'Cost savings',
-		'Operational efficiency' => 'Operational efficiency',
-		'Time to market' => 'Time to market, ability to deploy applications faster',
-		'Avoiding vendor lock-in' => 'Avoiding vendor lock-in',
-		'Ability to innovate, compete' => 'Ability to innovate, compete',
-		'Flexibility of underlying technology choices' => 'Flexibility of underlying technology choices',
-		'Attracting talent' => 'Building a technology environment that attracts top technical talent',
-		'Open technology' => 'Adopting an open technology platform',
-		'Control' => 'Control of platform to achieve security and privacy goals',
-	);
+		'Save money over alternative infrastructure choices' => 'Save money over alternative infrastructure choices',
+        'Increase operational efficiency' => 'Increase operational efficiency',
+        'Accelerate my organization’s ability to innovate and compete by deploying applications faster' => 'Accelerate my organization’s ability to innovate and compete by deploying applications faster',
+        'Avoid vendor lock-in with an open platform and ecosystem, including flexibility of underlying technology choices' => 'Avoid vendor lock-in with an open platform and ecosystem, including flexibility of underlying technology choices',
+        'Attract top technical talent by participating in an active, global technology community' => 'Attract top technical talent by participating in an active, global technology community',
+        'Achieve security and/or privacy goals with control of platform' => 'Achieve security and/or privacy goals with control of platform',
+        'Standardize on the same open platform and APIs that power a global network of of public and private clouds' => 'Standardize on the same open platform and APIs that power a global network of of public and private clouds',
+   );
+
+    public static $activities_options = array(
+        'Write code that is upstreamed into OpenStack' => 'Write code that is upstreamed into OpenStack' ,
+        'Manage people who write code that is upstreamed into OpenStack' => 'Manage people who write code that is upstreamed into OpenStack',
+        'Write applications that run on OpenStack' => 'Write applications that run on OpenStack',
+        'Manage people who write applications that run on OpenStack' => 'Manage people who write applications that run on OpenStack',
+        'Install / administer / deploy OpenStack' => 'Install / administer / deploy OpenStack',
+        'Install / administer / deploy applications that run on OpenStack' => 'Install / administer / deploy applications that run on OpenStack',
+        'Manage people who install / administer / deploy OpenStack' => 'Manage people who install / administer / deploy OpenStack',
+        'Manage people who install / administer / deploy applications that run on OpenStack' => 'Manage people who install / administer / deploy applications that run on OpenStack',
+        'None of these' => 'None of these',
+    );
 
 	protected function onBeforeWrite()
 	{
