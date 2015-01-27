@@ -56,7 +56,7 @@
 
 			<!-- Be Excellent -->
 			<h3>Reminder: Be Excellent</h3>
-			<p>Be excellent to everyone. If you think someone is not being excellent to you at the OpenStack Summit call 512-827-8633 or email <a href="mailto:events@openstack.org">events@openstack.org.</a></p>
+			<p>Be excellent to everyone. If you think someone is not being excellent to you at the OpenStack Summit call 512-827-8633 or email <a href="mailto:summit@openstack.org">summit@openstack.org.</a></p>
 
 		</div>
 
