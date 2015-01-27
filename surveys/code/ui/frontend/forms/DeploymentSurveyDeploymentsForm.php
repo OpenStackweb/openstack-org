@@ -27,7 +27,6 @@ class DeploymentSurveyDeploymentsForm extends Form {
           $prevButton, $nextButton
       );
 
-   
       parent::__construct($controller, $name, $fields, $actions);
 
    }

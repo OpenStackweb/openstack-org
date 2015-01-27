@@ -1,7 +1,7 @@
 
 .optionset label {
 	position: relative;
-	top: 0.2em;
+	top: -5px;
 }
 
 ul.survey-steps {
@@ -98,4 +98,8 @@ div.current-user {
 
 #DeploymentSurveyMoreDeploymentDetailsForm_Form_WhyNovaNetwork {
 	height: 4em;
+}
+
+input[type="radio"], input[type="checkbox"] {
+   margin-top:0px !important;
 }

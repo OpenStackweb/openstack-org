@@ -42,7 +42,7 @@
 		
 					<div id="Password" class="field password "><label class="left" for="MemberLoginForm_LoginForm_Password">Password</label><div class="middleColumn"><input class="text" type="password" id="MemberLoginForm_LoginForm_Password" name="Password" value=""   /></div></div>
 		
-					<input class="hidden" type="hidden" id="MemberLoginForm_LoginForm_BackURL" name="BackURL" value="{$Link}OrgInfo" />
+					<input class="hidden" type="hidden" id="MemberLoginForm_LoginForm_BackURL" name="BackURL" value="{$Link}AboutYou" />
 		
 				<div class="clear"><!-- --></div>
 		
