@@ -12,7 +12,7 @@
         </div>
         <div class="newsText">
             <p class="headline">&ldquo;$Headline&rdquo;</p>
-            <p class="summary">&mdash; $Summary</p>
+            <div class="summary">&mdash; $RAW_val(Summary)</div>
         </div>
         <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
         <div class="newsRemove">Remove</div>

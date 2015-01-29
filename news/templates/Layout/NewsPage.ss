@@ -69,7 +69,7 @@
                                     <% if Image.Exists %>
                                         $Image.CroppedImage(300,200)
                                     <% else %>
-                                        <img src="/themes/openstack/images/generic-profile-photo.png">
+                                        <div class="no_image_div"></div>
                                     <% end_if %>
                                 </a>
                             </div>

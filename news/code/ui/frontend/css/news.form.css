@@ -85,3 +85,7 @@ input.datefield {
 div.datefield, #date_updated {
     margin: 15px 15px 15px 0;
 }
+
+#summary,#body {
+    margin-bottom: 10px;
+}

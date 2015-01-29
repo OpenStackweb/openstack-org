@@ -20,8 +20,9 @@ final class NewsRequestForm extends HoneyPotForm {
 
         $IDField = new HiddenField('newsID');
 		//madatory fields
-		$HeadlineField = new TextField('headline','Headline');
-		$SummaryField = new TextareaField('summary','Summary');
+		$HeadlineField = new TextField('headline','Headline (50 char max)','',$maxLength = 50);
+		$SummaryField = new HtmlEditorField('summary','Summary (250 char max)','',$maxLength = 250);
+        $SummaryField->addExtraClass('summary');
         $CityField = new TextField('city','City');
         $StateField = new TextField('state','State');
         $CountryField = new CountryDropdownField('country','Country');
@@ -38,7 +39,7 @@ final class NewsRequestForm extends HoneyPotForm {
         $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
         $UpdatedField->addExtraClass('inline');
         //optional fields
-        $BodyField = new TextareaField('body','Body');
+        $BodyField = new HtmlEditorField('body','Body (2000 char max)','',$maxLength = 2000);
         $LinkField = new TextField('link','Link');
 
 		$DocumentField = new CustomUploadField('Document', 'Document');
@@ -54,7 +55,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$DocumentField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 		$DocumentField->setRecordClass('File');
 
-		$ImageField = new CustomUploadField('Image', 'Image (max size 2Mb)');
+		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Recommend size is 293x381px)');
 		$ImageField->setCanAttachExisting(false);
 		$ImageField->setAllowedMaxFileNumber(1);
 		$ImageField->setAllowedFileCategories('image');
