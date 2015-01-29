@@ -86,11 +86,7 @@ div.datefield, #date_updated {
     margin: 15px 15px 15px 0;
 }
 
-.textarea {
-    width: 650px;
-}
-
-.summary textarea {
-    height: 100px;
+#summary,#body {
+    margin-bottom: 10px;
 }
 

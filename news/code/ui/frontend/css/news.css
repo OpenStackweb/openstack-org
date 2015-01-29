@@ -145,6 +145,12 @@
     width: 100%
 }
 
+.no_image_div {
+    width: 293px;
+    height: 381px;
+    background-color:  #274961;
+}
+
 .featuredHeadline {
     position: absolute;
     bottom: 0;
