@@ -28,7 +28,7 @@ class DeploymentSurveyAboutYouForm extends Form {
         $fields = new FieldList (
             $this->first_name_field = new TextField('FirstName', 'First name / Given name', $current_user->FirstName),
             $this->last_name_field  = new TextField('Surname', 'Last name / Family name', $current_user->Surname),
-            $os_activity            = new CheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurvey::$activities_options),
+            $os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurvey::$activities_options),
             $os_relationship        = new TextAreaField('OpenStackRelationship', 'Please describe your relationship with OpenStack'),
             $this->email_field      = new TextField('Email', 'Your Email', $current_user->Email),
             $ok_2_contact           = new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee may communicate with me in the future about my usage.')
@@ -57,4 +57,22 @@ class DeploymentSurveyAboutYouForm extends Form {
             'Form'
         ));
     }
-} 
+
+    function loadDataFrom($data, $clearMissingFields = false, $fieldList = null)
+    {
+        $res = parent::loadDataFrom($data, $clearMissingFields, $fieldList);
+        $current_user = Member::currentUser();
+        if ($data instanceof DeploymentSurvey) {
+            if (empty($data->FirstName)) {
+                $this->first_name_field->setValue($current_user->FirstName);
+            }
+            if (empty($data->Surname)) {
+                $this->last_name_field->setValue($current_user->Surname);
+            }
+            if (empty($data->Email)) {
+                $this->email_field->setValue($current_user->Email);
+            }
+        }
+        return $res;
+    }
+}

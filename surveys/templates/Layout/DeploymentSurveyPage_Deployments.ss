@@ -8,12 +8,15 @@
 
         <h2>Deployments</h2>
 
-        <p>A deployment profile tracks information about an individual OpenStack deployment. An
-            organization may have multiple deployment profiles for each OpenStack deployment they have.
-            Once you have created a deployment profile, you can return to the site to
-            update the data in it. You will be the default administrator for any deployment profiles
-            you create. As always, the information you provide is confidential and will only be presented
-            in aggregate unless you consent to making it public.</p>
+        <p>
+            A deployment profile tracks information about an individual OpenStack deployment.
+            <ul>
+            <li>An organization may have multiple deployment profiles for each OpenStack deployment they have.</li>
+            <li>Once you have created a deployment profile, you can return to the site to update the data in it.</li>
+            <li>You will be the default administrator for any deployment profiles you create.</li>
+            </ul>
+            As always, the information you provide is confidential and will only be presented in aggregate unless you consent to making it public.
+        </p>
         <% if DeploymentList %>
             <% loop DeploymentList %>
                 <div class="deployment">

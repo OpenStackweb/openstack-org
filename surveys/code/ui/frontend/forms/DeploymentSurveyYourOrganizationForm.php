@@ -47,7 +47,7 @@ class DeploymentSurveyYourOrganizationForm extends Form {
             new DropdownField(
                 'Industry',
                 'Your Organization’s Primary Industry',
-                ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('unspecified' => '-- Please Select One --'), array('Other' => 'Other Industry (please specify)') )
+                ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('' => '-- Please Select One --'), array('Other' => 'Other Industry (please specify)') )
             ),
             new TextField('OtherIndustry', 'Other Industry'),
             $org_it_activity = new TextField('ITActivity', 'Your Organization’s Primary IT Activity'),
@@ -65,7 +65,7 @@ class DeploymentSurveyYourOrganizationForm extends Form {
                 'Your Organization Size (All Branches, Locations, Sites)',
                 DeploymentSurvey::$organization_size_options
             ),
-            new CheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options))
+            new CustomCheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options))
         );
 
         $org_it_activity->addExtraClass('hidden');

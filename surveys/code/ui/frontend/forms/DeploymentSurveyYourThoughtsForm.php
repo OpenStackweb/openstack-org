@@ -19,13 +19,13 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         $nextButton = new FormAction('NextStep', '  Next Step  ');
 
         $fields = new FieldList (
-            new CheckboxSetField(
+            new CustomCheckboxSetField(
                 'BusinessDrivers',
                 'What are your top business drivers for using OpenStack?<BR>Please rank up to 5.<BR>1 = top business driver, 2 = next, 3 = third, and so on<BR>Select At Least One',
-                ArrayUtils::AlphaSort(DeploymentSurvey::$business_drivers_options,null, array('Other' => 'Something else not listed here'))),
-            new TextField('OtherBusinessDrivers', 'Other business drivers'),
-            new CheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))),
-            new TextField('OtherInformationSources', 'Other information sources'),
+                ArrayUtils::AlphaSort(DeploymentSurvey::$business_drivers_options,null, array('Other' => 'Something else not listed here (please specify)'))),
+            new TextAreaField('OtherBusinessDrivers', ''),
+            new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))),
+            new TextAreaField('OtherInformationSources', ''),
             new DropdownField(
                 'OpenStackRecommendRate',
                 'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',

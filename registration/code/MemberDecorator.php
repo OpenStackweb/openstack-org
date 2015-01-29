@@ -118,7 +118,7 @@ class MemberDecorator extends DataExtension {
 			'G.Title'));
 		$sql_query_groups->setFrom("`Group` G INNER JOIN  ( SELECT DISTINCT(GroupID) FROM `Permission` WHERE `Code` IN ({$permissions})) PG ON PG.GroupID=G.ID");
 		$company_security_groups = $sql_query_groups->execute()->map();
-		return new MultiDropdownField("AdminSecurityGroup_{$this->owner->ID}[]", "AdminSecurityGroup_{$this->owner->ID}[]", $company_security_groups, $groups);
+		return new MultiDropdownField("AdminSecurityGroup_{$this->owner->ID}", "AdminSecurityGroup_{$this->owner->ID}", $company_security_groups, $groups);
 	}
 
 

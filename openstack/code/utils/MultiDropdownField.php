@@ -60,13 +60,28 @@ final class MultiDropdownField extends FormField {
 		parent::__construct($name, ($title===null) ? $name : $title, null, $form);
 	}
 
+    public function setValue($value, $obj = null) {
+        // If we're not passed a value directly, we can look for it in a relation method on the object passed as a
+        // second arg
+        if(!$value && $obj && $obj instanceof DataObject && $obj->hasMethod($this->name)) {
+            $funcName = $this->name;
+            $value = $obj->$funcName()->getIDList();
+        }
+
+        parent::setValue($value, $obj);
+
+        return $this;
+    }
+
 	/**
 	 * @param array $properties
 	 * @return string
 	 */
 	public function Field($properties = array()) {
 		$options = '';
-
+        if(count($this->selectedValues)== 0 && !empty($this->value)){
+            $this->selectedValues = preg_split("/[\s,]+/", $this->value);
+        }
 		$source = $this->getSource();
 		if($source) {
 			// For SQLMap sources, the empty string needs to be added specially
@@ -100,7 +115,7 @@ final class MultiDropdownField extends FormField {
 		$attributes = array(
 			'class'    => ($this->extraClass() ? $this->extraClass() : ''),
 			'id'       => $this->id(),
-			'name'     => $this->name,
+			'name'     => $this->name.'[]',
 			'multiple' => 'multiple',
 		);
 
@@ -182,4 +197,47 @@ final class MultiDropdownField extends FormField {
 	function setDisabled($disabled = true) {
 		$this->disabled = $disabled;
 	}
+
+    public function saveInto(DataObjectInterface $record) {
+        $fieldname = $this->name;
+        $relation = ($fieldname && $record && $record->hasMethod($fieldname)) ? $record->$fieldname() : null;
+        if($fieldname && $record && $relation &&
+            ($relation instanceof RelationList || $relation instanceof UnsavedRelationList)) {
+            $idList = array();
+            if($this->value) foreach($this->value as $id => $bool) {
+                if($bool) {
+                    $idList[] = $id;
+                }
+            }
+            $relation->setByIDList($idList);
+        } elseif($fieldname && $record) {
+            if($this->value) {
+                $this->value = str_replace(',', '{comma}', $this->value);
+                $record->$fieldname = implode(',', (array) $this->value);
+            } else {
+                $record->$fieldname = '';
+            }
+        }
+    }
+
+    /**
+     * Return the CheckboxSetField value as a string
+     * selected item keys.
+     *
+     * @return string
+     */
+    public function dataValue() {
+        if($this->value && is_array($this->value)) {
+            $filtered = array();
+            foreach($this->value as $item) {
+                if($item) {
+                    $filtered[] = str_replace(",", "{comma}", $item);
+                }
+            }
+
+            return implode(',', $filtered);
+        }
+
+        return '';
+    }
 }

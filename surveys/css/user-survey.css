@@ -41,7 +41,7 @@ form hr {
 }
 
 ul.optionset {
-	padding-left: 15px;
+	padding-left: 0px;
 }
 
 ul.optionset li {
@@ -102,4 +102,33 @@ div.current-user {
 
 input[type="radio"], input[type="checkbox"] {
    margin-top:0px !important;
+}
+
+.clean_text{
+    font-weight: normal !important;
+}
+
+.chosen-choices .search-field input{
+    box-sizing: content-box !important;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    background: url("../../themes/openstack/css/chosen-sprite.png") no-repeat scroll -48px 1px rgba(0, 0, 0, 0) !important;
+}
+
+label.error{
+    color: red;
+    font-style: italic;
+}
+
+input.error{
+    border: solid 1px red;
+}
+
+textarea.error{
+    border: solid 1px red;
+}
+
+select.error{
+    border: solid 1px red;
 }
