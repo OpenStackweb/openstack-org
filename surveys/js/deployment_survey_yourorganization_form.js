@@ -22,4 +22,24 @@ jQuery(document).ready(function($) {
     $('#DeploymentSurveyYourOrganizationForm_Form_PrimaryCountry').chosen();
 
     setStep('yourorganization');
+
+    var form  = $('#DeploymentSurveyYourOrganizationForm_Form');
+    var form_validator = null;
+
+    form_validator = form.validate({
+        rules: {
+            'Organization'  : {required: true },
+            'Industry'  : {required: true },
+            'PrimaryCountry' : {required: true },
+            'PrimaryState' : {required: true },
+            'PrimaryCity': {required: true },
+            'OpenStackInvolvement[]': {required: true }
+        },
+        onfocusout: false,
+        focusCleanup: true,
+        ignore: [],
+        invalidHandler: jqueryValidatorInvalidHandler,
+        errorPlacement: jqueryValidatorErrorPlacement
+    });
+
 });

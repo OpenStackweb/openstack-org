@@ -14,4 +14,24 @@
 jQuery(document).ready(function($) {
 
     setStep('yourthoughts');
+
+    var form  = $('#DeploymentSurveyYourThoughtsForm_Form');
+    var form_validator = null;
+
+    form_validator = form.validate({
+        rules: {
+            'BusinessDrivers[]'  : {required: true },
+            'InformationSources[]'  : {required: true }
+        },
+        onfocusout: false,
+        focusCleanup: true,
+        ignore: [],
+        invalidHandler: jqueryValidatorInvalidHandler,
+        errorPlacement: jqueryValidatorErrorPlacement
+    });
+
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyYourThoughtsForm_Form_BusinessDrivers_Other'), $('#OtherBusinessDrivers'));
+
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyYourThoughtsForm_Form_InformationSources_Other'), $('#OtherInformationSources'));
+
 });

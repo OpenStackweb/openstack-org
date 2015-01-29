@@ -64,7 +64,15 @@ class Deployment extends DataObject
 		'ToolsUsedForYourUsers' => 'Text',
 		'OtherToolsUsedForYourUsers' => 'Text',
 		'Reason2Move2Ceilometer' => 'Text',
-	);
+        'CountriesPhysicalLocation' => 'Text',
+        'CountriesUsersLocation' => 'Text',
+        'ServicesDeploymentsWorkloads' => 'Text',
+        'OtherServicesDeploymentsWorkloads' => 'Text',
+        'EnterpriseDeploymentsWorkloads' => 'Text',
+        'OtherEnterpriseDeploymentsWorkloads' => 'Text',
+        'HorizontalWorkloadFrameworks' => 'Text',
+        'OtherHorizontalWorkloadFrameworks' => 'Text',
+    );
 
 	private static $has_one = array(
 		'DeploymentSurvey' => 'DeploymentSurvey',
@@ -325,40 +333,42 @@ class Deployment extends DataObject
 	}
 
 	public static $deployment_type_options = array(
-		'unspecified' => '-- Select One --',
-		'On-Premise Private Cloud' => 'On-Premise Private Cloud',
-		'Hosted Private Cloud' => 'Hosted Private Cloud',
+		'' => '-- Select One --',
+		'On-Premise Private Cloud (Managed by my organization)' => 'On-Premise Private Cloud (Managed by my organization)',
+		'On-Premise Private Cloud (Managed by someone else)' => 'On-Premise Private Cloud (Managed by someone else)',
 		'Public Cloud' => 'Public Cloud',
-		'Hybrid Cloud' => 'Hybrid Cloud',
+		'Remote Private Cloud (Managed by my organization)' => 'Remote Private Cloud (Managed by my organization)',
+        'Remote Private Cloud (Managed by someone else)' => 'Remote Private Cloud (Managed by someone else)',
 		'Community Cloud' => 'Community Cloud'
 	);
 
 	public static $projects_used_options = array(
-		'Openstack Compute (Nova)' => 'Openstack Compute (Nova)',
-		'Openstack Block Storage (Cinder)' => 'Openstack Block Storage (Cinder)',
-		'Openstack Object Storage (Swift)' => 'Openstack Object Storage (Swift)',
-		'Openstack Network' => 'Openstack Network (Neutron)',
-		'Openstack Dashboard (Horizon)' => 'Openstack Dashboard (Horizon)',
-		'Openstack Identity Service (Keystone)' => 'Openstack Identity Service (Keystone)',
-		'Openstack Image Service (Glance)' => 'Openstack Image Service (Glance)',
-		'Heat' => 'OpenStack Orchestration (Heat)',
-		'Ceilometer' => 'OpenStack Telemetry (Ceilometer)',
-		'OpenStack Bare Metal (Ironic)' => 'OpenStack Bare Metal (Ironic)',
-		'OpenStack Database as a Service (Trove)' => 'OpenStack Database as a Service (Trove)',
-		'OpenStack Data Processing (Sahara)' => 'OpenStack Data Processing (Sahara)'
-	);
+		'Bare Metal (Ironic)' => 'Bare Metal (Ironic)',
+        'Block Storage (Cinder)' => 'Block Storage (Cinder)',
+        'Compute (Nova)' => 'Compute (Nova)',
+        'Dashboard (Horizon)' => 'Dashboard (Horizon)',
+        'Data Processing (Sahara)' => 'Data Processing (Sahara)',
+        'Database Service (Trove)' => 'Database Service (Trove)',
+        'DNS Services (Designate)' => 'DNS Services (Designate)',
+        'Identity (Keystone)' => 'Identity (Keystone)',
+        'Image Service (Glance)' => 'Image Service (Glance)',
+        'Key Management (Barbican)' => 'Key Management (Barbican)',
+        'Networking (Neutron)' => 'Networking (Neutron)',
+        'Object Storage (Swift)' => 'Object Storage (Swift)',
+        'Orchestration (Heat)' => 'Orchestration (Heat)',
+        'Queue Service (Zaqar)' => 'Queue Service (Zaqar)',
+        'Telemetry (Ceilometer)' => 'Telemetry (Ceilometer)',
+ 	);
 
 	public static $current_release_options = array(
-		'Trunk' => 'Trunk / Continuous deployment',
-		'Icehouse (2014.1)' => 'Icehouse (2014.1)',
-		'Havana (2013.2)' => 'Havana (2013.2)',
-		'Grizzly' => 'Grizzly (2013.1)',
-		'Folsom (2012.2)' => 'Folsom (2012.2)',
-		'Essex (2012.1)' => 'Essex (2012.1)',
-		'Diablo (2011.3)' => 'Diablo (2011.3)',
-		'Cactus (2011.2)' => 'Cactus (2011.2)',
-		'Bexar (2011.1)' => 'Bexar (2011.1)',
-		'Austin (2010.1)' => 'Austin (2010.1)'
+		'Trunk / continuous deployment' => 'Trunk / continuous deployment',
+        'Kilo (2015.1)' => 'Kilo (2015.1)',
+        'Juno (2014.2)' => 'Juno (2014.2)',
+        'Icehouse (2014.1)' => 'Icehouse (2014.1)',
+        'Havana (2013.2)' => 'Havana (2013.2)',
+        'Grizzly (2013.1)' => 'Grizzly (2013.1)',
+        'Folsom (2012.2)' => 'Folsom (2012.2)',
+        'Essex (2012.1)' => 'Essex (2012.1)',
 	);
 
 	public static $stage_options = array(
@@ -404,6 +414,53 @@ class Deployment extends DataObject
 		'Up to the user' => 'It’s up to the user',
 
 	);
+
+    public static $services_deployment_workloads_options = array(
+        'Social Media' => 'Social Media',
+        'Content Delivery / CDN - includes streaming and caching' => 'Content Delivery / CDN - includes streaming and caching',
+        'Content Sharing - files of any type' => 'Content Sharing - files of any type',
+        'Commerce' => 'Commerce',
+        'Geographical Information Systems (GIS)' => 'Geographical Information Systems (GIS)',
+        'Online Games' => 'Online Games',
+        'Mobile Apps, Including Mobile Games' => 'Mobile Apps, Including Mobile Games',
+        'Education / MOOC' => 'Education / MOOC',
+        'Business Intelligence and Web analytics' => 'Business Intelligence and Web analytics',
+        'HPC and Other High Performance and High Throughput Computing, Including Research' => 'HPC and Other High Performance and High Throughput Computing, Including Research',
+        'Bio / Medical, Separate from HPC' => 'Bio / Medical, Separate from HPC',
+        'Big Data Analytics / Data Mining / Hadoop, Spark, etc.' => 'Big Data Analytics / Data Mining / Hadoop, Spark, etc.',
+        'Business Process - ERP, CRM, SCM, etc.' => 'Business Process - ERP, CRM, SCM, etc.',
+        'Email' => 'Email',
+        'Application Development' => 'Application Development',
+        'Web Infrastructure' => 'Web Infrastructure',
+        'Public Hosting' => 'Public Hosting',
+        'It’s up to the User' => 'It’s up to the User',
+        'Other' => 'Other'
+    );
+
+    public static $enterprise_deployment_workloads_options = array(
+        'Business Processing: ERP, CRM, OLTP' => 'Business Processing: ERP, CRM, OLTP',
+        'Decision Support: database analysis, business intelligence, and business analytics' => 'Decision Support: database analysis, business intelligence, and business analytics',
+        'Application Development: programming, debug, Q&A' => 'Application Development: programming, debug, Q&A',
+        'Collaborative: email and groupware' => 'Collaborative: email and groupware',
+        'IT Infrastructure: file/print and support for network protocols' => 'IT Infrastructure: file/print and support for network protocols',
+        'Web Infrastructure: Web-serving, proxy and caching' => 'Web Infrastructure: Web-serving, proxy and caching',
+        'Industrial R&D: scientific/technical/engineering' => 'Industrial R&D: scientific/technical/engineering',
+        'Other' => 'Other'
+    );
+
+    public static $horizontal_workload_framework_options = array(
+        'OS: Windows Server, Linux' => 'OS: Windows Server, Linux',
+        'Virtualization: Xen, KVM, Hyper-V, etc.' => 'Virtualization: Xen, KVM, Hyper-V, etc.',
+        'Virtual Desktops / Remote Desktops' => 'Virtual Desktops / Remote Desktops',
+        'Database: mySQL, etc.' => 'Database: mySQL, etc.',
+        'Network Function Virtualization (NFV) – network applications' => 'Network Function Virtualization (NFV) – network applications',
+        'Storage / Backup / Archiving' => 'Storage / Backup / Archiving',
+        'Runtime and Managed Languages: Java, Python, Ruby, etc. (interpreted at runtime or JIT compiled as needed)' => 'Runtime and Managed Languages: Java, Python, Ruby, etc. (interpreted at runtime or JIT compiled as needed)',
+        'Benchmarks / Stress Testing' => 'Benchmarks / Stress Testing',
+        'Management and Monitoring Systems' => 'Management and Monitoring Systems',
+        'QA / Test Environment / Continuous Integration / Automated Testing Workflows' => 'QA / Test Environment / Continuous Integration / Automated Testing Workflows',
+        'Other' => 'Other'
+    );
 
 
 	public static $api_options = array(

@@ -180,7 +180,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         parent::init();
 
         // require custom CSS
-        Requirements::css("themes/openstack/css/user-survey.css");
+        Requirements::css("surveys/css/user-survey.css");
 
         Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
         Requirements::css("themes/openstack/css/jquery.autocomplete.css");
@@ -189,9 +189,12 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/prototype/prototype.js');
         Requirements::block(SAPPHIRE_DIR . '/javascript/prototype_improvements.js');
 
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js");
         Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
         Requirements::javascript('surveys/js/deployment_survey_navigation.js');
+        Requirements::javascript('surveys/js/deployment_survey.js');
 
         // No one is logged in
         if (!Member::currentUser()) {
@@ -238,7 +241,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         // Check the database for a DeploymentSurvey with a current step
         if ($CurrentUserID = Member::currentUserID()) {
             // look for a deployment survey for this user
-            $DeploymentSurvey = dataObject::get_one('DeploymentSurvey', 'MemberID = ' . $CurrentUserID);
+            $DeploymentSurvey = $this->GetCurrentSurvey();
             if ($DeploymentSurvey && $DeploymentSurvey->CurrentStep != NULL) {
                 $CurrentStep = $DeploymentSurvey->CurrentStep;
             } else {
@@ -261,7 +264,8 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         // Look for an existing survey
         if ($CurrentUserID = Member::currentUserID()) {
             // look for a deployment survey for this user
-            $DeploymentSurvey = dataObject::get_one('DeploymentSurvey', 'MemberID = ' . $CurrentUserID);
+            $DeploymentSurvey = DeploymentSurvey::get()->filter(array('MemberID'=>$CurrentUserID, 'Created:GreaterThan' => '2015-01-01 00:00:00' ))->first();
+
             if (!$DeploymentSurvey) {
                 // Create a new deployment survey
                 $DeploymentSurvey = new DeploymentSurvey();

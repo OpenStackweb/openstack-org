@@ -13,20 +13,27 @@
 
 jQuery(document).ready(function($) {
 
-    var li = $('.valNone_of_these', '#DeploymentSurveyAboutYouForm_Form_OpenStackActivity');
-    if(li.length > 0 ){
-        var chk  = $('.checkbox', li);
-        chk.click(function(e){
-           if(chk.is(':checked')){
-               $('#OpenStackRelationship').removeClass('hidden');
-               $('#DeploymentSurveyAboutYouForm_Form_OpenStackRelationship').removeClass('hidden');
-           }
-            else{
-               $('#OpenStackRelationship').addClass('hidden');
-               $('#DeploymentSurveyAboutYouForm_Form_OpenStackRelationship').addClass('hidden');
-           }
-        });
-    }
+
+    var form  = $('#DeploymentSurveyAboutYouForm_Form');
+    var form_validator = null;
+
+    form_validator = form.validate({
+        rules: {
+            'FirstName'  : {required: true },
+            'Surname'  : {required: true },
+            'DeploymentStage' : {required: true },
+            'Email' : {required: true },
+            'OpenStackActivity[]' : {required: true }
+
+        },
+        onfocusout: false,
+        focusCleanup: true,
+        ignore: [],
+        invalidHandler: jqueryValidatorInvalidHandler,
+        errorPlacement: jqueryValidatorErrorPlacement
+    });
+
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyAboutYouForm_Form_OpenStackActivity_Noneofthese'), $('#OpenStackRelationship'));
 
     setStep('aboutyou');
 });
