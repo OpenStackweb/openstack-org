@@ -67,7 +67,7 @@
                             <% if Link %>
                                 <a href="$Link">$Image.CroppedImage(200,100)</a>
                             <% else %>
-                                $Image.CroppedImage(200,100)
+                                $Image.CroppedImage(200,100)  
                             <% end_if %>
                         </div>
                         <div class="newsText">
