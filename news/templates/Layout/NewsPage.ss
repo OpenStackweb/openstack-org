@@ -34,7 +34,7 @@
                 <div class="carousel-caption">
                     <h3 class='largeHeadline'>$Headline</h3>
                     <p class='sliderSummary'>$Summary</p>
-                    <a class="more-btn" href="news/ViewArticle?articleID=$ID">Read More <i class="fa fa-chevron-circle-right"></i></a>
+                    <a class="more-btn" href="news/view/$ID/$HeadlineForUrl">Read More <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
             </div>
         <% end_loop %>
@@ -60,7 +60,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <li>
                             <div class="featuredImage">
-                                <a href="news/ViewArticle?articleID=$ID">
+                                <a href="news/view/$ID/$HeadlineForUrl">
                                     <div class="featuredDate">$formatDate</div>
                                     <div class="featuredHeadline">
                                         $Headline
@@ -86,7 +86,7 @@
             <% loop  RecentNews %>
                 <div class="recentBox">
                     <div class="recentHeadline">
-                        <a href="news/ViewArticle?articleID=$ID">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
+                        <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
                     </div>
                     <div class="recentSummary">$RAW_val(Summary)</div>
                 </div>

@@ -4,7 +4,7 @@
 
 <div>
     <h1>$Headline</h1>
-    $Image.CroppedImage(400,300)
+    $Image.CroppedImage(300,200)
     <p class="summary">$Summary</p>
     <p class="body">$Body</p>
     <% if Document.exists %>

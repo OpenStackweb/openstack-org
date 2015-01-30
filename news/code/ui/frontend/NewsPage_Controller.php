@@ -24,6 +24,10 @@ final class NewsPage_Controller extends Page_Controller {
         'ViewArticle'
 	);
 
+    static $url_handlers = array(
+        'view/$NEWS_ID/$NEWS_TITLE'   => 'ViewArticle',
+    );
+
     function init() {
         parent::init();
 	    Requirements::css('news/code/ui/frontend/css/news.css');
@@ -80,10 +84,9 @@ final class NewsPage_Controller extends Page_Controller {
     }
 
     function ViewArticle() {
-        if (isset($this->requestParams['articleID'])) {
-            $article_id = $this->requestParams['articleID'];
-            $article = $this->news_repository->getNewsByID($article_id);
-        }
+        $article_id = intval($this->request->param('NEWS_ID'));
+        $article = $this->news_repository->getNewsByID($article_id);
+
         return $this->renderWith(array('NewsArticlePage','Page'), $article );
     }
 
