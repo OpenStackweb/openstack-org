@@ -115,17 +115,17 @@ x    <!-- News Section -->
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>Upcoming Events <a href="http://www.openstack.org/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
                     <a href="/summit/"><img class="event-ad" src="/themes/openstack/images/conferences/vancouver/vancouver-summit-small.jpg"></a>
-                    $UpcomingEvents(7)
+                    $UpcomingEvents(20)
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <!-- <a href="#">See All <i class="fa fa-caret-right"></i></a> --></h2>
                     <a href="http://www.openstack.org/enterprise/auto/"><img class="news-ad" src="/themes/openstack/images/auto-banner.jpg"></a>
                     
-                       <% loop RssItems %>
+                       <% loop NewsItems %>
                             <!-- News Item -->
                             <a href="{$link}" class="single-event">
                                 <div class="left-event">
-                                    <div class="planet-type">Planet</div>
+                                    <div class="planet-type">$type</div>
                                 </div>
                                 <div class="event-details">
                                     <div class="news-title">$title</div>
