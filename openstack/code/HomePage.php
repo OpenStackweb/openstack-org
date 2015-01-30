@@ -123,7 +123,29 @@ class HomePage_Controller extends Page_Controller {
 		}
 
 		return $result->limit($limit,0);
-	}	
+	}
+
+    function NewsItems($limit = 20) {
+        $return_array = new ArrayList();
+        $slider_news = DataObject::get('News', "Slider = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
+        $limit = $limit - count($slider_news);
+        $featured_news = DataObject::get('News', "Featured = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
+        $limit = $limit - count($featured_news);
+        $recent_news = DataObject::get('News', "Featured = 0 AND Slider = 0 AND Approved = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
+        $limit = $limit - count($recent_news);
+        $all_news = array_merge($slider_news,$featured_news,$recent_news);
+        // format array
+        foreach ($all_news as $item) {
+            $return_array->push(array('type'=>'Openstack','link'=>$item->Link,'title'=>$item->Headline,'pubdate'=>$item->Date));
+        }
+
+        $rss_news = $this->RssItems($limit)->toArray();
+        foreach ($rss_news as $item) {
+            $return_array->push(array('type'=>'Planet','link'=>$item->link,'title'=>$item->title,'pubdate'=>$item->pubdate));
+        }
+
+        return $return_array;
+    }
 
 	function PastEvents($num=1) {
 	  return EventPage::get()->where("EventEndDate <= now()")->sort('EventStartDate')->limit($num);

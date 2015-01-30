@@ -102,8 +102,8 @@
                     </div>
                 </h3>
                 <div class="eventBlock upcoming">
-                    <% if FutureEvents(100) %>
-                        <% loop FutureEvents(100) %>
+                    <% if FutureEvents(12) %>
+                        <% loop FutureEvents(12) %>
 
                             <div class="event <% if First %> top<% end_if %>">
                                 <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
