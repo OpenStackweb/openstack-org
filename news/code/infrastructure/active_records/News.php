@@ -205,4 +205,10 @@ final class News extends DataObject implements INews {
     public function getHTMLBody() {
         return html_entity_decode(nl2br($this->Body));
     }
+
+    public function getHeadlineForUrl() {
+        $lcase_headline = strtolower(trim($this->Headline));
+        $headline_for_url = str_replace(' ','-',$lcase_headline);
+        return $headline_for_url;
+    }
 }
