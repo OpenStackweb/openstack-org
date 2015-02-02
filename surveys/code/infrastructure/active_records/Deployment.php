@@ -573,15 +573,17 @@ class Deployment extends DataObject
 	);
 
 	public static $deployment_tools_options = array(
-		'DevStack' => 'DevStack',
-		'Chef' => 'Chef',
-		'Crowbar' => 'Crowbar',
-		'PackStack' => 'PackStack',
-		'Puppet' => 'Puppet',
-		'SaltStack' => 'SaltStack',
 		'Ansible' => 'Ansible',
-		'CFEngine' => 'CFEngine',
-		'Juju' => 'Juju',
+        'CFEngine' => 'CFEngine',
+        'Chef' => 'Chef',
+        'Crowbar' => 'Crowbar',
+        'DevStack' => 'DevStack',
+        'Fuel' => 'Fuel',
+        'Juju' => 'Juju',
+        'PackStack' => 'PackStack',
+        'Puppet' => 'Puppet',
+        'SaltStack' => 'SaltStack',
+        'Other Tool' => 'Other Tool',
 	);
 
 	public static $operating_systems_options = array(
@@ -709,6 +711,14 @@ class Deployment extends DataObject
         'Unmodified packages from a non-OS source (e.g. vendor distribution)' => 'Unmodified packages from a non-OS source (e.g. vendor distribution)',
         'Packages you\'ve modified' => 'Packages you\'ve modified',
         'Packages you’ve built yourself' => 'Packages you’ve built yourself',
+    );
+
+    public static $custom_package_reason_options = array(
+        'Need an OpenStack bug fix not in standard packages' => 'Need an OpenStack bug fix not in standard packages',
+        'Need an OpenStack feature not in standard packages' => 'Need an OpenStack feature not in standard packages',
+        'Standard packages have bugs' => 'Standard packages have bugs',
+        'Standard packages aren\'t updated quickly enough' => 'Standard packages aren\'t updated quickly enough',
+        'Other' => 'Other',
     );
 	
 }
