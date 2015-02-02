@@ -22,45 +22,50 @@ class DeploymentSurveyAppDevSurveyForm extends Form
 
         $fields = new FieldList (
             new LiteralField('Break', ColumnFormatter::$left_column_start),
-            new CheckboxSetField(
+            new CustomCheckboxSetField(
                 'Toolkits',
                 'What toolkits do you use or plan to use to interact with the OpenStack API?<BR>Select All That Apply',
                 ArrayUtils::AlphaSort(AppDevSurvey::$toolkits_options, null, array('Other' => 'Other Toolkits (please specify)'))),
-            new TextField('OtherToolkits', 'Other toolkits'),
+            $t1 = new TextareaField('OtherToolkits', ''),
 
             new LiteralField('Break', ColumnFormatter::$right_column_start),
-            new CheckboxSetField('ProgrammingLanguages',
+            new CustomCheckboxSetField('ProgrammingLanguages',
                 'If you wrote your own code for interacting with the OpenStack API, what programming language did you write it in?',
                 ArrayUtils::AlphaSort(AppDevSurvey::$languages_options, null, array('Other' => 'Other (please specify)'))),
-            new TextField('OtherProgrammingLanguages', 'Other programming languages'),
+            $t2 = new TextareaField('OtherProgrammingLanguages', ''),
 
             new LiteralField('Break', ColumnFormatter::$end_columns),
 
             new LiteralField('Break', ColumnFormatter::$left_column_start),
-            new CheckboxSetField('APIFormats',
+            new CustomCheckboxSetField('APIFormats',
                 'If you wrote your own code for interacting with the OpenStack API, what wire format are you using?<BR>Select All That Apply',
-                ArrayUtils::AlphaSort(AppDevSurvey::$api_format_options), null, array('Other' => 'Other Wire Format (please specify)')),
-            new TextField('OtherAPIFormats', 'Other Wire Format'),
-            new CheckboxSetField(
+                ArrayUtils::AlphaSort(AppDevSurvey::$api_format_options, null, array('Other' => 'Other Wire Format (please specify)'))),
+            $t3 = new TextareaField('OtherAPIFormats', ''),
+            new CustomCheckboxSetField(
                 'OperatingSystems',
                 'What operating systems are you using or plan on using to develop your applications?<BR>Select All That Apply',
                 ArrayUtils::AlphaSort(AppDevSurvey::$opsys_options, null, array('Other' => 'Other Development OS (please specify)'))),
-            new TextField('OtherOperatingSystems', 'Other Development OS'),
-            new CheckboxSetField(
+            $t4 = new TextareaField('OtherOperatingSystems', ''),
+            new CustomCheckboxSetField(
                 'GuestOperatingSystems',
                 'What guest operating systems are you using or plan on using to deploy your applications to customers?<BR>Select All That Apply',ArrayUtils::AlphaSort(AppDevSurvey::$opsys_options, null, array('Other' => 'Other Development OS (please specify)'))),
-            new TextField('OtherGuestOperatingSystems', 'Other Development OS'),
+            $t5 = new TextareaField('OtherGuestOperatingSystems', ''),
             new LiteralField('Break', '<hr/>'),
             new LiteralField('Break', '<p>Please share your thoughts with us on the state of applications on OpenStack</p>'),
             new TextAreaField('StruggleDevelopmentDeploying', 'What do you struggle with when developing or deploying applications on OpenStack?'),
             $docs = new DropdownField(
                 'DocsPriority',
                 'What is your top priority in evaluating API and SDK docs?', AppDevSurvey::$docs_priority_options),
-            new TextField('OtherDocsPriority', 'Other')
+            $t6 = new TextareaField('OtherDocsPriority', '')
         );
 
-
-
+        $t1->addExtraClass('hidden');
+        $t2->addExtraClass('hidden');
+        $t3->addExtraClass('hidden');
+        $t4->addExtraClass('hidden');
+        $t5->addExtraClass('hidden');
+        $t6->addExtraClass('hidden');
+        $docs->setEmptyString('-- Select One --');
         // $prevButton = new CancelFormAction($controller->Link().'Login', 'Previous Step');
         $nextButton = new FormAction('SaveAppDevSurvey', '  Next Step  ');
 

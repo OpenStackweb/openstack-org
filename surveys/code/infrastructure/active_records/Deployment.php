@@ -72,6 +72,9 @@ class Deployment extends DataObject
         'OtherEnterpriseDeploymentsWorkloads' => 'Text',
         'HorizontalWorkloadFrameworks' => 'Text',
         'OtherHorizontalWorkloadFrameworks' => 'Text',
+        'UsedPackages' => 'Text',
+        'CustomPackagesReason' => 'Text',
+        'OtherCustomPackagesReason' => 'Text',
     );
 
 	private static $has_one = array(
@@ -584,14 +587,13 @@ class Deployment extends DataObject
 	public static $operating_systems_options = array(
 		'CentOS' => 'CentOS',
 		'Debian' => 'Debian',
-		'openSUSE' => 'openSUSE',
-		'Red Hat Enterprise Linux' => 'Red Hat Enterprise Linux',
-		'SUSE Linux Enterprise' => 'SUSE Linux Enterprise',
-		'Ubuntu' => 'Ubuntu',
-		'Windows' => 'Windows',
-		'Fedora' => 'Fedora',
-		'Scientific Linux' => 'Scientific Linux',
-
+		'Fedora Server' => 'Fedora Server',
+		'Microsoft Windows Server' => 'Microsoft Windows Server',
+        'Red Hat Enterprise Linux (RHEL)' => 'Red Hat Enterprise Linux (RHEL)',
+        'SUSE Linux Enterprise Server (SLES)' => 'SUSE Linux Enterprise Server (SLES)',
+        'Scientific Linux' => 'Scientific Linux',
+        'Ubuntu Server' => 'Ubuntu Server',
+        'openSUSE Server' => 'openSUSE Server',
 	);
 
 	public static $compute_nodes_options = array(
@@ -701,5 +703,12 @@ class Deployment extends DataObject
 		'Cloud Kitty' => 'Cloud Kitty',
 
 	);
+
+    public static $used_packages_options = array(
+        'Unmodified packages from the OS' => 'Unmodified packages from the OS',
+        'Unmodified packages from a non-OS source (e.g. vendor distribution)' => 'Unmodified packages from a non-OS source (e.g. vendor distribution)',
+        'Packages you\'ve modified' => 'Packages you\'ve modified',
+        'Packages you’ve built yourself' => 'Packages you’ve built yourself',
+    );
 	
 }
