@@ -13,5 +13,24 @@
 
 jQuery(document).ready(function($) {
 
+    var form  = $('#DeploymentSurveyAppDevSurveyForm_Form');
+    var form_validator = null;
+
+    form_validator = form.validate({
+        rules: {
+        },
+        onfocusout: false,
+        focusCleanup: true,
+        ignore: [],
+        invalidHandler: jqueryValidatorInvalidHandler,
+        errorPlacement: jqueryValidatorErrorPlacement
+    });
+
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyAppDevSurveyForm_Form_Toolkits_Other'), $('#OtherToolkits'));
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyAppDevSurveyForm_Form_ProgrammingLanguages_Other'), $('#OtherProgrammingLanguages'));
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyAppDevSurveyForm_Form_APIFormats_Other'), $('#OtherAPIFormats'));
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyAppDevSurveyForm_Form_OperatingSystems_Other'), $('#OtherOperatingSystems'));
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyAppDevSurveyForm_Form_GuestOperatingSystems_Other'), $('#OtherGuestOperatingSystems'));
+    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyAppDevSurveyForm_Form_DocsPriority'), $('#OtherDocsPriority'));
     setStep('appdevsurvey');
 });

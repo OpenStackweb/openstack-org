@@ -10,27 +10,65 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-function checkOtherTextVisibility(chk, container){
+function checkOtherTextVisibility(chk, question_container){
     if (chk.is(':checked')) {
-        container.removeClass('hidden');
-        jQuery('.textarea',container).removeClass('hidden');
+        question_container.removeClass('hidden');
+        jQuery('.textarea',question_container).removeClass('hidden');
     }
     else {
-        container.addClass('hidden');
-        jQuery('.textarea',container).addClass('hidden');
+        question_container.addClass('hidden');
+        jQuery('.textarea',question_container).addClass('hidden');
     }
 }
 
-function setCustomValidationRuleForOtherText(chk, text_container){
+function setCustomValidationRuleForOtherText(chk, question_container){
 
     chk.click(function (e) {
-        checkOtherTextVisibility($(this), text_container);
+        checkOtherTextVisibility(jQuery(this), question_container);
     });
-    checkOtherTextVisibility(chk, text_container);
+    checkOtherTextVisibility(chk, question_container);
 
-    jQuery('.textarea', text_container).rules('add', { required: function (element) {
+    jQuery('.textarea', question_container).rules('add', { required: function (element) {
         return chk.is(':checked');
     }});
+}
+
+function checkOtherTextVisibilityDropdown(ddl, question_container){
+    if (ddl.val() == 'Other') {
+        question_container.removeClass('hidden');
+        jQuery('.textarea',question_container).removeClass('hidden');
+    }
+    else {
+        question_container.addClass('hidden');
+        jQuery('.textarea',question_container).addClass('hidden');
+    }
+}
+
+function setCustomValidationRuleForOtherTextDropdown(ddl, question_container){
+    ddl.change(function(e){
+        checkOtherTextVisibilityDropdown(jQuery(this), question_container)
+    });
+    checkOtherTextVisibility(ddl, question_container);
+    jQuery('.textarea', question_container).rules('add', { required: function (element) {
+        return ddl.val() == 'Other';
+    }});
+}
+
+function setCustomValidationRuleForDependantQuestion(chk_group, question_container){
+
+    $.each(chk_group, function(index , chk){
+
+        chk.click(function (e) {
+            checkOtherTextVisibility(jQuery(this), question_container);
+        });
+
+        checkOtherTextVisibility(chk, question_container);
+
+        jQuery('.textarea', question_container).rules('add', { required: function (element) {
+            return chk.is(':checked');
+        }});
+    });
+
 }
 
 function jqueryValidatorErrorPlacement(error, element) {
