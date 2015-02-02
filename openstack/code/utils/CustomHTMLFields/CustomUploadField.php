@@ -100,4 +100,50 @@ final class CustomUploadField extends UploadField {
 		Requirements::javascript('themes/openstack/javascript/custom.uploadfield.js');
 		return $res;
 	}
-} 
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return UploadField_ItemHandler
+     */
+    public function handleSelect(SS_HTTPRequest $request) {
+        return CustomUploadField_SelectHandler::create($this, $this->getFolderName());
+    }
+}
+
+class CustomUploadField_SelectHandler extends UploadField_SelectHandler {
+
+    public function index() {
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-entwine/dist/jquery.entwine-dist.js');
+        return parent::index();
+    }
+
+    /**
+     * Build the file selection form.
+     *
+     * @return Form
+     */
+    public function Form() {
+        // Find out the requested folder ID.
+        $folderID = $this->parent->getRequest()->requestVar('ParentID');
+        if (!isset($folderID)) {
+            $folder = Folder::find_or_make($this->folderName);
+            $folderID = $folder ? $folder->ID : 0;
+        }
+
+        // Construct the form
+        $action = new FormAction('doAttach', _t('UploadField.AttachFile', 'Attach file(s)'));
+        $action->addExtraClass('ss-ui-action-constructive icon-accept');
+        $form = new Form(
+            $this,
+            'Form',
+            new FieldList($this->getListField($folderID)),
+            new FieldList($action)
+        );
+
+        // Add a class so we can reach the form from the frontend.
+        $form->addExtraClass('uploadfield-form');
+
+        return $form;
+    }
+
+}
