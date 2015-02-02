@@ -33,24 +33,28 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
                 'What is the main operating system running this OpenStack cloud deployment?',
                 ArrayUtils::AlphaSort(Deployment::$operating_systems_options, array('' => '-- Select One --'), array('Other' => 'Other (please specify)'))
             ),
-            new TextareaField('OtherOperatingSystems', ''),
+            $other_os = new TextareaField('OtherOperatingSystems', ''),
 
             new CustomCheckboxSetField(
                 'UsedPackages',
                 'What packages does this deployment use…?<BR>Select All That Apply',
                 Deployment::$used_packages_options
             ),
-
-            new FieldGroup(
-                new CustomCheckboxSetField(
-                    'UsedPackages',
-                    ' If you have modified packages or have built your own packages, why?<BR>Select All That Apply', Deployment::$used_packages_options
-                ),
-                new TextareaField('OtherCustomPackagesReason', '')
-            )
-
+            new LiteralField('Container','<div id="custom_package_reason_container" class="hidden">'),
+            new CustomCheckboxSetField(
+                'CustomPackagesReason',
+                ' If you have modified packages or have built your own packages, why?<BR>Select All That Apply', Deployment::$custom_package_reason_options
+            ),
+            $other_custom_reason = new TextareaField('OtherCustomPackagesReason', ''),
+             new LiteralField('Container','</div>'),
+             new CustomCheckboxSetField('DeploymentTools','What tools are you using to deploy / configure this cluster?<BR>Select All That Apply', Deployment::$deployment_tools_options),
+             $other_deployment_tools = new TextareaField('OtherDeploymentTools','')
         );
 
+
+        $other_custom_reason->addExtraClass('hidden');
+        $other_os->addExtraClass('hidden');
+        $other_deployment_tools->addExtraClass('hidden');
         $saveButton = new FormAction('SaveDeployment', 'Save Deployment');
         $cancelButton = new CancelFormAction($controller->Link() . 'Deployments', 'Cancel');
 
@@ -75,6 +79,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         }
 
         Requirements::javascript('surveys/js/deployment_survey_deployments_form.js');
+        Requirements::javascript('surveys/js/deployment_survey_more_deployment_details_form.js');
     }
 
     function SaveDeployment($data, $form)
