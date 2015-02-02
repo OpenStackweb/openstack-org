@@ -16,7 +16,7 @@
             <tr>
                 <td class="title"><a id="job{$ID}" href="#"></a>$Title</td>
                 <td class="post-date">$PostDate</td>
-                <td class="url">$Url</td>
+                <td class="url"><a href="$Url">Link</a></td>
                 <td class="company-name">$CompanyName</td>
                 <td class="location_type">$LocationType</td>
                 <td width="23%">
