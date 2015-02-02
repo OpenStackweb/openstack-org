@@ -20,3 +20,12 @@
 #posted-jobs-table .post-date {
     width: 70px;
 }
+
+#job-registration-requests-table .title {
+    max-width: 150px;
+}
+
+#job-registration-requests-table .post-date {
+    max-width: 150px;
+    min-width: 70px;
+}
