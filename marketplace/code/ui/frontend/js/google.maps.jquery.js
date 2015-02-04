@@ -36,7 +36,7 @@
                     minimumClusterSize: 2
                 }, options );
 
-                var info_window = new InfoBubble({maxWidth: 400,borderRadius:15});
+                var info_window = new InfoBubble({maxWidth: 400,borderRadius:15, minHeight:35, maxHeight:200 });
 
                 var mapOptions = {
                     zoom: 1,
@@ -56,7 +56,7 @@
                     ]
                 };
 
-                map = new google.maps.Map(map_canvas[0],mapOptions);
+                map = new google.maps.Map(map_canvas[0], mapOptions);
 
                 var oms_options = {
                     markersWontMove: true,
@@ -155,6 +155,9 @@
                         map.setZoom(settings.minClusterZoom+1);
                 });
             }
+        },
+        setCenter : function (lat, lng){
+            map.setCenter(new google.maps.LatLng(lat, lng));
         }
     };
 

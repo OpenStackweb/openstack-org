@@ -88,6 +88,7 @@
             </div>
         </li>
         <li><a href="$Link(ExportData)">Export Data</a></li>
+		<li><a href="$Link(ViewDeploymentsPerRegion)">View Deployments Per Region</a></li>
     </ul>
     <h2>Manage User Stories and Deployments</h2>
     <ul>
