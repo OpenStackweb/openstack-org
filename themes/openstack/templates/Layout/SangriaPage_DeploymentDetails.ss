@@ -1,4 +1,5 @@
-<a href="$Top.Link(ViewDeploymentDetails)">Back to list</a>&nbsp;|&nbsp;<a href="javascript:window.print()">Print This Page</a>
+<a href="$BackUrl">Back to list</a>&nbsp;|&nbsp;<a href="javascript:window.print()">Print This Page</a>
+<% with Deployment %>
 <h1>Deployment # {$ID}</h1>
 <h2>$Label</h2>
 <hr>
@@ -37,4 +38,5 @@
 <b>Object Storage Size:</b>&nbsp;$ObjectStorageSize<br>
 <b>Object Storage Num Objects:</b>&nbsp;$ObjectStorageNumObjects<br>
 <b>Network Num IPs:</b>&nbsp;$NetworkNumIPs<br>
+<% end_with %>
 
