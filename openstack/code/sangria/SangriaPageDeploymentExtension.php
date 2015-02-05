@@ -44,8 +44,17 @@ final class SangriaPageDeploymentExtension extends Extension
         $params = $this->owner->request->allParams();
         $deployment_id = intval(Convert::raw2sql($params["ID"]));;
         $deployment = Deployment::get()->byID($deployment_id);
-        if ($deployment)
-            return $this->owner->Customise($deployment)->renderWith(array('SangriaPage_DeploymentDetails', 'SangriaPage', 'SangriaPage'));
+        if ($deployment) {
+            $back_url = $this->owner->request->getVar('BackUrl');
+            if(empty($back_url))
+                $back_url = $this->owner->Link("ViewDeploymentDetails");
+
+            return $this->owner->Customise(
+                array("Deployment" => $deployment,
+                    "BackUrl"      => $back_url
+                )
+            )->renderWith(array('SangriaPage_DeploymentDetails', 'SangriaPage', 'SangriaPage'));
+        }
         return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
     }
 
