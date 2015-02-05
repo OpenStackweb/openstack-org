@@ -37,7 +37,7 @@ Object::add_extension('Org', 'AutocompleteOrgDecorator');
 
 // Enable SSL for specific subdomains
 
-if(Director::isLive()) Director::forceSSL(array('/^Security/','/^profile/','/^join/','/^user-survey/','/^summit/'));
+if(Director::isLive()) Director::forceSSL(array('/^Security/','/^profile/','/^join/','/^user-survey/','/^summit/','/^news-manage/'));
 
 
 // Email errors and warnings
