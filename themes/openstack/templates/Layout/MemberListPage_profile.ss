@@ -37,8 +37,11 @@
             <div class="span-6 last">
                 <p>$StatementOfInterest</p>
             </div>
+            <% if TwitterName || LinkedInProfile || IRCHandle || Bio %>
+                <hr>
+            <% end_if %>
             <% if TwitterName %>
-                <hr><div class="span-4"><strong>Twitter</strong></div>
+                <div class="span-4"><strong>Twitter</strong></div>
                 <div class="span-6 last"><a href="https://twitter.com/{$TwitterName}">@{$TwitterName}</a></div>
             <% end_if %>
             <% if LinkedInProfile %>
