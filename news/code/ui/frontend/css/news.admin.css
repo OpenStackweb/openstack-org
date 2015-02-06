@@ -115,6 +115,11 @@
     overflow: hidden;
 }
 
+.newsText {
+    height: 120px;
+    overflow: hidden;
+}
+
 .newsDelete, .newsRemove {
     cursor: pointer;
     text-decoration: underline;
