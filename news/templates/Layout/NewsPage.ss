@@ -29,11 +29,11 @@
                 <% if Image.Exists %>
                     $Image.CroppedImage(300,200)
                 <% else %>
-                    <img src="/themes/openstack/images/generic-profile-photo.png">
+                    <div class="no_image_div"></div>
                 <% end_if %>
                 <div class="carousel-caption">
                     <h3 class='largeHeadline'>$Headline</h3>
-                    <p class='sliderSummary'>$Summary</p>
+                    <p class='sliderSummary'>$RAW_val(Summary)</p>
                     <a class="more-btn" href="news/view/$ID/$HeadlineForUrl">Read More <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
             </div>
