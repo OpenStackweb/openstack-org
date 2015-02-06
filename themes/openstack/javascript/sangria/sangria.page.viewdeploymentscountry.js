@@ -40,8 +40,8 @@ jQuery(document).ready(function($){
 
     $('.country_link').click(function (e){
         e.stopPropagation();
-        var country = $(this).attr('data-country');
-        var country_data   = countries_data[code];
+        var country        = $(this).attr('data-country');
+        var country_data   = countries_data[country];
         $('#map').google_map('setCenter', country_data.lat, country_data.lng)
         return false;
     });

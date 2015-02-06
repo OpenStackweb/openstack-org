@@ -19,14 +19,14 @@ jQuery(document).ready(function($){
 
     var places = [];
 
-    for(var code in countries_with_deployment){
-        var deployments    = countries_with_deployment[code];
+    for(var code in countries_with_users){
+        var users          = countries_with_users[code];
         var country_data   = countries_data[code];
-        if(country_data != undefined && deployments != undefined) {
-            for(var i = 0 ; i<= deployments.length - 1 ; i++)
+        if(country_data != undefined && users != undefined) {
+            for(var i = 0 ; i<= users.length - 1 ; i++)
             {
-                var deployment = deployments[i];
-                places.push({url: deployment.url, label: deployment.name, lat: country_data.lat, lng: country_data.lng  });
+                var user = users[i];
+                places.push({url: user.url, label: user.name, lat: country_data.lat, lng: country_data.lng  });
             }
         }
     }

@@ -92,6 +92,7 @@ class CountryCodes {
 		'FJ' => "Fiji",
 		'FI' => "Finland",
 		'FR' => "France",
+		'FX' => "France, Metropolitan",
 		'GF' => "French Guiana",
 		'PF' => "French Polynesia",
 		'TF' => "French Southern Territories",
