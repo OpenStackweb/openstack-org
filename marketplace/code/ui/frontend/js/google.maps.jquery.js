@@ -36,7 +36,7 @@
                     minimumClusterSize: 2
                 }, options );
 
-                var info_window = new InfoBubble({maxWidth: 400,borderRadius:15, minHeight:35, maxHeight:200 });
+                var info_window = new InfoBubble({minWidth:200, maxWidth: 600,borderRadius:15, minHeight:50, maxHeight:300 });
 
                 var mapOptions = {
                     zoom: 1,
