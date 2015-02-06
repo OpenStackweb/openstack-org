@@ -136,7 +136,8 @@ class HomePage_Controller extends Page_Controller {
         $all_news = array_merge($slider_news,$featured_news,$recent_news);
         // format array
         foreach ($all_news as $item) {
-            $return_array->push(array('type'=>'Openstack','link'=>$item->Link,'title'=>$item->Headline,'pubdate'=>$item->Date));
+            $art_link = 'news/view/'.$item->ID.'/'.$item->HeadlineForUrl;
+            $return_array->push(array('type'=>'Openstack','link'=>$art_link,'title'=>$item->Headline,'pubdate'=>$item->Date));
         }
 
         $rss_news = $this->RssItems($limit)->toArray();
