@@ -38,6 +38,11 @@
     margin-right: 20px
 }
 
+.grey-bar.news a.review-news-link {
+    color: #249e2e;
+    margin-left: 20px;
+}
+
 .grey-bar.news a.manage-news-link:hover {
     color: #5A6E1D
 }
