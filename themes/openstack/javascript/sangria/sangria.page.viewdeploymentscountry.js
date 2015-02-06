@@ -23,10 +23,11 @@ jQuery(document).ready(function($){
         var deployments    = countries_with_deployment[code];
         var country_data   = countries_data[code];
         if(country_data != undefined && deployments != undefined) {
+            var country_color = Math.floor(Math.random()*16777215).toString(16);
             for(var i = 0 ; i<= deployments.length - 1 ; i++)
             {
                 var deployment = deployments[i];
-                places.push({url: deployment.url, label: deployment.name, lat: country_data.lat, lng: country_data.lng  });
+                places.push({url: deployment.url, label: deployment.name, lat: country_data.lat, lng: country_data.lng, color: country_color  });
             }
         }
     }

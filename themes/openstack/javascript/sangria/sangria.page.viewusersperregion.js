@@ -20,7 +20,9 @@ jQuery(document).ready(function($){
         var country        = countries_with_users[code];
         var country_data   = countries_data[code];
         if(country != undefined && country_data != undefined) {
+            var country_color = Math.floor(Math.random()*16777215).toString(16);
             country_data.label = country.name + ' (' + country.users + ')';
+            country_data.color = country_color;
             places.push(country_data);
         }
     }

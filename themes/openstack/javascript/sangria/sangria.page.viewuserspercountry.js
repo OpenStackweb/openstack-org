@@ -23,10 +23,11 @@ jQuery(document).ready(function($){
         var users    = countries_with_users[code];
         var country_data   = countries_data[code];
         if(country_data != undefined && users != undefined) {
+            var country_color = Math.floor(Math.random()*16777215).toString(16);
             for(var i = 0 ; i<= users.length - 1 ; i++)
             {
                 var user = users[i];
-                places.push({url: user.url, label: user.name, lat: country_data.lat, lng: country_data.lng  });
+                places.push({url: user.url, label: user.name, lat: country_data.lat, lng: country_data.lng, color: country_color  });
             }
         }
     }
