@@ -2,11 +2,11 @@
     <a href="/news">Back to News</a>
 </div>
 
-<div>
+<div style="text-align:justify;">
     <h1>$Headline</h1>
-    $Image.CroppedImage(300,200)
-    <!--<p class="summary">$RAW_val(Summary)</p>-->
-    <div class="body">$HTMLBody</div>
+    $ImageForArticle
+
+    $HTMLBody
     <% if Document.exists %>
         <p class="document">Document: <a href="$Document.Link">$Document.getLinkedURL</a></p>
     <% end_if %>

@@ -29,11 +29,7 @@ jQuery(document).ready(function($){
             minDate: 0
         });
 
-
-
-
         //main form validation
-
         jQuery.validator.addMethod("phoneUS", function(phone_number, element) {
             phone_number = phone_number.replace(/\s+/g, "");
             return this.optional(element) || phone_number.length > 9 &&
@@ -77,5 +73,31 @@ jQuery(document).ready(function($){
         });
 
     }
+
+    tinyMCE.init({
+        theme: "advanced",
+        mode : "textareas",
+        theme_advanced_toolbar_location: "top",
+        theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo",
+        theme_advanced_buttons2: "",
+        theme_advanced_buttons3: "",
+        height: "250px",
+        width: "800px"
+    });
+
+    //build image popup for present image
+    var image_name = $('.name','#Image').html();
+    var image = '<img src="assets/news-images/'+image_name+'">';
+    $('.ss-uploadfield-item-preview.preview','#Image').popover({placement: 'right', content: image, html: true, trigger: 'hover', container: 'body'});
+
+    // rebuild preview popup when image uploaded
+    $('.ss-uploadfield-files.files').on("DOMSubtreeModified",function(){
+        var image_element = $('span','.ss-uploadfield-item-preview.preview').html();
+        if (image_element != '') {
+            var image_name = $('.name','#Image').html();
+            var image = '<img src="assets/news-images/'+image_name+'">';
+            $('.ss-uploadfield-item-preview.preview','#Image').popover({placement: 'right', content: image, html: true, trigger: 'hover', container: 'body'});
+        }
+    });
 
 });

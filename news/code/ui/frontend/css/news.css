@@ -151,8 +151,8 @@
 }
 
 .no_image_div {
-    width: 293px;
-    height: 381px;
+    width: 360px;
+    height: 180px;
     background-color:  #274961;
 }
 
@@ -190,6 +190,10 @@
 
 .featuredImage:hover .featuredHeadline, .open .featuredHeadline {
     top: 0
+}
+
+.featuredImage {
+    background-color: #2A4E68;
 }
 
 .featuredImage:hover .more, .open .more {

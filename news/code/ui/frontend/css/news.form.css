@@ -90,3 +90,10 @@ div.datefield, #date_updated {
     margin-bottom: 10px;
 }
 
+.popover-content {
+    margin: 0;
+    width:auto;
+}
+
+.popover{width:auto!important; max-width: none}
+

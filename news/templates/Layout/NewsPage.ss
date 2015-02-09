@@ -28,9 +28,7 @@
         <% loop SlideNews %>
             <div class="item <% if First %>active<% end_if %>">
                 <% if Image.Exists %>
-                    $Image.CroppedImage(300,200)
-                <% else %>
-                    <div class="no_image_div"></div>
+                    $Image.CroppedImage(1100,350)
                 <% end_if %>
                 <div class="carousel-caption">
                     <h3 class='largeHeadline'>$Headline</h3>
@@ -68,9 +66,7 @@
                                         <div class="more">Read More <i class="fa fa-chevron-circle-right"></i></div>
                                     </div>
                                     <% if Image.Exists %>
-                                        $Image.CroppedImage(300,200)
-                                    <% else %>
-                                        <div class="no_image_div"></div>
+                                        $Image.CroppedImage(360,180)
                                     <% end_if %>
                                 </a>
                             </div>

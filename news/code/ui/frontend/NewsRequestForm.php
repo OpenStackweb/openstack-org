@@ -56,11 +56,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$DocumentField->setRecordClass('File');
 
 		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Recommended size is 293x381px)');
-        if ($is_manager) {
-		    $ImageField->setCanAttachExisting(true);
-        } else {
-            $ImageField->setCanAttachExisting(false);
-        }
+        $ImageField->setCanAttachExisting(false);
 		$ImageField->setAllowedMaxFileNumber(1);
 		$ImageField->setAllowedFileCategories('image');
 		$ImageField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
