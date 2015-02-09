@@ -429,13 +429,18 @@ class MemberListPage_Controller extends Page_Controller
 					'Title' => 'Results',
 					'Results' => $Results
 				));
-
+				if($Results->count() == 0){
+					$message = $this->getViewer('results')->process($this->customise($Output));
+					$this->response->setBody($message);
+					throw new SS_HTTPResponse_Exception($this->response, 404);
+				}
 				return $this->customise($Output);
 			}
 		}
 
 		$this->redirect($this->Link());
 	}
+
 
 	function getSearchQuery()
 	{
