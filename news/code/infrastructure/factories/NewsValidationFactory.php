@@ -24,9 +24,9 @@ final class NewsValidationFactory
 	public function buildValidatorForNews(array $data){
 
 		$rules = array(
-			'headline'              => 'required|text|max:100',
+			'headline'              => 'required|text|max:150',
 			'date'                  => 'required|date',
-			'summary'               => 'required|htmltext',
+			'summary'               => 'required|htmltext|max:250',
 			'tags'                  => 'required|text',
 			//'date_embargo'          => 'required|date',
 			'submitter_first_name'  => 'required|text',
@@ -38,11 +38,12 @@ final class NewsValidationFactory
 		$messages = array(
 			'headline.required'        => ':attribute is required',
 			'headline.text'            => ':attribute should be valid text.',
-			'headline.max'             => ':attribute should have less than 100 chars.',
+			'headline.max'             => ':attribute should have less than 150 chars.',
 			'date.required'            => ':attribute is required',
 			'date.date'                => ':attribute should be a valid date.',
 			'summary.required'         => ':attribute is required',
 			'summary.htmltext'         => ':attribute should be valid text.',
+            'summary.max'             => ':attribute should have less than 250 chars.',
 			'tags.required'            => ':attribute is required',
 			'tags.text'                => ':attribute should be valid text.',
 			//'date_embargo.required'    => ':attribute is required',
@@ -69,7 +70,7 @@ final class NewsValidationFactory
         $rules = array(
             'headline'              => 'required|text|max:100',
             'date'                  => 'required|date',
-            'summary'               => 'required|htmltext',
+            'summary'               => 'required|htmltext|max:250',
             'tags'                  => 'required|text',
         );
 
@@ -81,6 +82,7 @@ final class NewsValidationFactory
             'date.date'                => ':attribute should be a valid date.',
             'summary.required'         => ':attribute is required',
             'summary.htmltext'         => ':attribute should be valid text.',
+            'summary.max'             => ':attribute should have less than 250 chars.',
             'tags.required'            => ':attribute is required',
             'tags.text'                => ':attribute should be valid text.',
         );

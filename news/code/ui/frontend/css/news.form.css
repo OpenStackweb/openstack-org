@@ -41,6 +41,10 @@ label.error{
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
+.headline input{
+    width: 800px;
+}
+
 .date{
     width: 130px !important;
     margin-right: 30px;
