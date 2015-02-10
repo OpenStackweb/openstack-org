@@ -67,7 +67,7 @@ class SapphireTrainingServiceRepository
 	 */
 	public function getActivesByList( $list)
 	{
-		$ds = TrainingService::get()->sort(" FIELD(ID, {$list}) ");
+		$ds = TrainingService::get()->sort(" FIELD(CompanyService.ID, {$list}) ");
 		return is_null($ds)?array():$ds->toArray();
 	}
 

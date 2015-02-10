@@ -1,0 +1,16 @@
+Company:
+  RackSpace:
+    Name: RackSpace
+    URLSegment: rackspace
+
+PublicCloudService:
+  Cloud1:
+    Name: PublicCoud1
+    Slug: publiccloud1
+    Active: 1
+    Company: =>Company.RackSpace
+  Cloud2:
+    Name: PublicCoud2
+    Slug: publiccloud2
+    Active: 1
+    Company: =>Company.RackSpace

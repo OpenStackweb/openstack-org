@@ -85,7 +85,7 @@ final class TrainingManager extends CompanyServiceManager {
 			}
 			else{
 				$ordering_set = true;
-				$trainings = $this->repository->getActivesByList($current_date, $str_order);
+				$trainings = $this->repository->getActivesByList($str_order);
 			}
 		}
 		else{
