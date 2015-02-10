@@ -163,6 +163,10 @@ final class News extends DataObject implements INews {
 		$upload_service->upload($file_ids,'Image', $this);
 	}
 
+    public function removeImage() {
+        $this->Image->deleteDatabaseOnly();
+    }
+
     public function getImage()
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->getTarget();
@@ -175,6 +179,13 @@ final class News extends DataObject implements INews {
     public function registerDocument(array $file_ids, IFileUploadService $upload_service)
     {
         $upload_service->upload($file_ids,'Document', $this);
+    }
+
+    public function removeDocument() {
+        $target = AssociationFactory::getInstance()->getMany2OneAssociation($this,'Document')->getTarget();
+        if ($target->Name) {
+            $target->deleteDatabaseOnly();
+        }
     }
 
     public function registerSection($section)
@@ -213,14 +224,16 @@ final class News extends DataObject implements INews {
     }
 
     public function getImageForArticle() {
-        $image_width = $this->Image->getWidth();
-        $image_html = '';
-        if ($image_width >= 600) {
-            $image_html = '<div style="padding-bottom:20px;text-align:center;">'.$this->Image->getTag().'</div>';
-        } else {
-            $image_html = '<div style="float:right;padding:0 10px 10px 25px;">'.$this->Image->CroppedImage(300,200)->getTag().'</div>';
-        }
+        if ($this->Image->exists()) {
+            $image_width = $this->Image->getWidth();
+            
+            if ($image_width >= 600) {
+                $image_html = '<div style="padding-bottom:20px;text-align:center;">'.$this->Image->getTag().'</div>';
+            } else {
+                $image_html = '<div style="float:right;padding:0 10px 10px 25px;">'.$this->Image->CroppedImage(300,200)->getTag().'</div>';
+            }
 
-        return $image_html;
+            return $image_html;
+        }
     }
 }

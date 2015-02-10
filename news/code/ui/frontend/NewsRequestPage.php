@@ -68,6 +68,7 @@ final class NewsRequestPage_Controller extends Page_Controller {
         }
 
         $form = new NewsRequestForm($this, 'NewsRequestForm',$article, $is_news_manager, false);
+
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);

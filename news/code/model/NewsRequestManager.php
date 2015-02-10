@@ -138,11 +138,15 @@ final class NewsRequestManager {
             $image_info = $news_main_info->getImage();
             if(!empty($image_info['Files'])){
                 $news->registerImage($image_info['Files'],$upload_service);
+            } else {
+                $news->removeImage();
             }
             //create image object
             $document_info = $news_main_info->getDocument();
             if(!empty($document_info['Files'])){
                 $news->registerDocument($document_info['Files'],$upload_service);
+            } else {
+                $news->removeDocument();
             }
 
             $news->clearTags();
