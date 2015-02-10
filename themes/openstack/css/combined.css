@@ -1285,7 +1285,7 @@ a.gs-title, a.gs-title b {
 /*Hero Promo, add .featured to .intro-header*/
 .intro-header.featured {
   text-align: center;
-  background: url('/themes/openstack/images/summit-speaking-promo.jpg') no-repeat center center;
+  background: url('/assets/Uploads/bigmap-darker.png') no-repeat center center;
   min-height: 420px;
   background-size: cover;
   position: relative; }
