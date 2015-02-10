@@ -122,7 +122,8 @@ a.main-video:hover .video-description-wrapper .video-description p {
   font-weight: 400;
   font-size: 12px;
   color: #edf2f7;
-  margin-left: 20px; }
+  margin-left: 20px;
+  letter-spacing: 0;}
 
 .featured-row:after {
   top: 100%;
