@@ -1,17 +1,17 @@
 </div>
-            <div class="intro-header featured">
+    <div class="intro-header featured">
 
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-sm-12">
                     <div class="intro-message">
-                        <h1>Speak At The Vancouver Summit.</h1>
+                        <h1>There are OpenStack powered public clouds all over the world.</h1>
                     </div>
                     <div class="promo-btn-wrapper">
-                        <a href="/summit/vancouver-2015/call-for-speakers/" class="promo-btn">Become A Speaker<i class="fa fa-chevron-right"></i></a>
+                        <a href="/marketplace/" class="promo-btn">Explore the possibilities.<i class="fa fa-chevron-right"></i></a>
                     </div>
-                    <p class="promo-dates">Call For Speakers Open Until February 9th.</p>
+                    <!-- <p class="promo-dates">Call For Speakers Open Until February 9th.</p> -->
                 </div>
             </div>
             <div class="hero-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i class="fa fa-info-circle"></i></div>
