@@ -40,7 +40,7 @@
 
 .grey-bar.news a.review-news-link {
     color: #249e2e;
-    margin-left: 20px;
+    margin: 0 20px 0 20px;
 }
 
 .grey-bar.news a.manage-news-link:hover {

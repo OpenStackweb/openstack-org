@@ -8,6 +8,7 @@
             <% end_if %>
             <a href="/news-add"><i class="fa fa-plus-circle"></i> Post A News Article</a>
             <a class="review-news-link" href="/marketing/make-some-news-with-openstack/"><i class="fa fa-book"></i> Review the Editorial Guidelines</a>
+            <a class="marketing-link" href="/marketing/"><i class="fa fa-cubes"></i> Marketing Portal</a>
         </div>
     </div>
 </div>
