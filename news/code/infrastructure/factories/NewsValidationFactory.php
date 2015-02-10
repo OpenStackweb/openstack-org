@@ -24,9 +24,9 @@ final class NewsValidationFactory
 	public function buildValidatorForNews(array $data){
 
 		$rules = array(
-			'headline'              => 'required|text|max:100',
+			'headline'              => 'required|text|max:150',
 			'date'                  => 'required|date',
-			'summary'               => 'required|htmltext|max:350',
+            'summary'               => 'required|htmltext|max:350',
             'body'                  => 'htmltext|max:3500',
 			'tags'                  => 'required|text',
 			//'date_embargo'        => 'required|date',
