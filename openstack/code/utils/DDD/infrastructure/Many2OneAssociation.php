@@ -100,7 +100,8 @@ final class Many2OneAssociation {
 	 */
 	public function getTarget(){
 		$target = $this->target;
-        UnitOfWork::getInstance()->scheduleForUpdate($target);
+		if($target instanceof IEntity)
+        	UnitOfWork::getInstance()->scheduleForUpdate($target);
         return $target;
 	}
 

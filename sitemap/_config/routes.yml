@@ -1,0 +1,7 @@
+---
+Name: googlesitemaproutes
+After: 'framework/routes#coreroutes'
+---
+Director:
+  rules:
+    'sitemap.xml': 'GoogleSiteMap_Controller'
