@@ -45,34 +45,75 @@ class PresentationVotingPage_Controller extends Page_Controller {
 
     function init() {
       if (!$this->request->param('Action')) $this->redirect($this->Link().'Presentation/');
+
       parent::init();
+        
+      Requirements::clear();
+      Requirements::javascript('themes/openstack/javascript/jquery.min.js');
+      Requirements::javascript('themes/openstack/javascript/bootstrap.min.js');
+      Requirements::javascript('themes/openstack/javascript/bootstrap.min.js');
+      Requirements::javascript('themes/openstack/javascript/presentationeditor/mousetrap.min.js');
+      Requirements::javascript('themes/openstack/javascript/speaker-voting.js');                
+        
     }
 
     function CategoryList() {
       return array(
-          array('ID' => 25, 'Name' => 'Enterprise IT Strategies', 'URLSegment' => 'enterprise-it-strategies'),
-          array('ID' => 26, 'Name' => 'Telco Strategies', 'URLSegment' => 'telco-strategies'),
-          array('ID' => 27, 'Name' => 'How to Contribute', 'URLSegment' => 'how-to-contribute'),
-          array('ID' => 28, 'Name' => 'Planning Your OpenStack Project', 'URLSegment' => 'planning-your-openStack-project'),
-          array('ID' => 29, 'Name' => 'Products Tools Services', 'URLSegment' => 'products-tools-services'),
-          array('ID' => 30, 'Name' => 'User Stories', 'URLSegment' => 'user-stories'),
-          array('ID' => 31, 'Name' => 'Community Building', 'URLSegment' => 'community-building'),
-          array('ID' => 32, 'Name' => 'Related OSS Projects', 'URLSegment' => 'related-oss-projects'),
-          array('ID' => 33, 'Name' => 'Operations', 'URLSegment' => 'operations'),
-          array('ID' => 34, 'Name' => 'Cloud Security', 'URLSegment' => 'cloud-security'),
-          array('ID' => 35, 'Name' => 'Compute', 'URLSegment' => 'compute'),
-          array('ID' => 36, 'Name' => 'Storage', 'URLSegment' => 'storage'),
-          array('ID' => 37, 'Name' => 'Networking', 'URLSegment' => 'networking'),
-          array('ID' => 38, 'Name' => 'Public & Hybrid Clouds', 'URLSegment' => 'public-and-hybrid-clouds'),
-          array('ID' => 39, 'Name' => 'Hands-on Labs', 'URLSegment' => 'hands-on-labs'),
-          array('ID' => 40, 'Name' => 'Targeting OpenStack Clouds', 'URLSegment' => 'targeting-openstack-clouds'),
-          array('ID' => 41, 'Name' => 'Cloudfunding', 'URLSegment' => 'cloudfunding'),
+          array('ID' => 42, 'Name' => 'Enterprise IT Strategies', 'URLSegment' => 'enterprise-it-strategies'),
+          array('ID' => 43, 'Name' => 'Telco Strategies', 'URLSegment' => 'telco-strategies'),
+          array('ID' => 44, 'Name' => 'How to Contribute', 'URLSegment' => 'how-to-contribute'),
+          array('ID' => 45, 'Name' => 'Planning Your OpenStack Project', 'URLSegment' => 'planning-your-openStack-project'),
+          array('ID' => 46, 'Name' => 'Products Tools Services', 'URLSegment' => 'products-tools-services'),
+          array('ID' => 47, 'Name' => 'User Stories', 'URLSegment' => 'user-stories'),
+          array('ID' => 48, 'Name' => 'Community Building', 'URLSegment' => 'community-building'),
+          array('ID' => 49, 'Name' => 'Related OSS Projects', 'URLSegment' => 'related-oss-projects'),
+          array('ID' => 50, 'Name' => 'Operations', 'URLSegment' => 'operations'),
+          array('ID' => 51, 'Name' => 'Cloud Security', 'URLSegment' => 'cloud-security'),
+          array('ID' => 52, 'Name' => 'Compute', 'URLSegment' => 'compute'),
+          array('ID' => 53, 'Name' => 'Storage', 'URLSegment' => 'storage'),
+          array('ID' => 54, 'Name' => 'Networking', 'URLSegment' => 'networking'),
+          array('ID' => 55, 'Name' => 'Public & Hybrid Clouds', 'URLSegment' => 'public-and-hybrid-clouds'),
+          array('ID' => 56, 'Name' => 'Hands-on Labs', 'URLSegment' => 'hands-on-labs'),
+          array('ID' => 57, 'Name' => 'Targeting OpenStack Clouds', 'URLSegment' => 'targeting-openstack-clouds'),
+          array('ID' => 58, 'Name' => 'Cloudfunding', 'URLSegment' => 'cloudfunding')
       );
     }
 
     // Build a page for GCSE
     function FullPresentationList() {
       return Talk::get()->filter('MarkedToDelete',0)->sort('PresentationTitle','ASC');
+    }
+    
+    function LoggedOutPresentationList($catID) {
+        
+        $SummitID = Summit::CurrentSummit()->ID;
+        
+        if ($catID) {
+        
+            $filter = array (
+                'MarkedToDelete' => FALSE,
+                'SummitID' => $SummitID,
+                'SummitCategoryID' => $catID
+            );
+        
+        } else {
+        
+            $filter = array (
+                'MarkedToDelete' => FALSE,
+                'SummitID' => $SummitID
+            );        
+        
+        }
+        
+        
+        return Talk::get()->filter($filter);
+        
+    }
+    
+    function MemberPresentationList() {
+        $member = Member::currentUser();
+        $catID = Session::get('CategoryID');
+        return $member->getRandomisedPresentations($catID);
     }
 
     // Render category buttons
@@ -111,8 +152,17 @@ class PresentationVotingPage_Controller extends Page_Controller {
         $Category = $this->CategoryIDFromURL($URLSegment);
         Session::set('CategoryID',$Category);
       }
-
-      $this->redirect($this->Link().'Presentation/'.$this->RandomPresentationURLSegment($Category));
+        
+      $member = Member::currentUser();
+    
+      if($member) {
+        $url = $member->getRandomisedPresentations($Category)->first()->URLSegment;
+      } else {
+        $url = $this->LoggedOutPresentationList($Category)->first()->URLSegment;
+      }
+        
+          
+      $this->redirect($this->Link().'Presentation/'.$url);
 
     }
 
@@ -134,6 +184,8 @@ class PresentationVotingPage_Controller extends Page_Controller {
     function doSearch($data, $form) {
 
       $Talks = NULL;
+        
+      $SummitID = Summit::CurrentSummit()->ID;
 
       if($data['Search'] && strlen($data['Search']) > 1) {
          $query = Convert::raw2sql($data['Search']);
@@ -152,7 +204,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
             "left join Talk_Speakers on Talk.ID = Talk_Speakers.TalkID left join Speaker on Talk_Speakers.SpeakerID = Speaker.ID"
           ));
           $sqlQuery->setWhere( array(
-            "(Talk.MarkedToDelete IS FALSE) AND (Talk.SummitID = 3) AND ((concat_ws(' ', Speaker.FirstName, Speaker.Surname) like '%$query%') OR (Talk.PresentationTitle like '%$query%') or (Talk.Abstract like '%$query%'))"
+            "(Talk.MarkedToDelete IS FALSE) AND (Talk.SummitID = 4) AND ((concat_ws(' ', Speaker.FirstName, Speaker.Surname) like '%$query%') OR (Talk.PresentationTitle like '%$query%') or (Talk.Abstract like '%$query%'))"
           ));
            
           $result = $sqlQuery->execute();
@@ -172,7 +224,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
       
       // Clear the category if one was set
       Session::set('CategoryID',NULL);
-      $data['SearchMode'] = TRUE;
+      $data["SearchMode"] = TRUE;
       if($Talks) $data["SearchResults"] = $Talks;
 
       return $this->Customise($data);
@@ -206,6 +258,9 @@ class PresentationVotingPage_Controller extends Page_Controller {
       $Talk = NULL;
       $CategoryID = Session::get('CategoryID');
       $currentMemberID = Member::currentUserID();
+        
+      $SummitID = Summit::CurrentSummit()->ID;
+
 
       // Set up a filter to not display any presentations that have already recieved votes for a logged in member
       $CurrentUserJoin = NULL;
@@ -217,11 +272,11 @@ class PresentationVotingPage_Controller extends Page_Controller {
       if(!$CategoryID) {
 
         if($currentMemberID) {
-	      $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => 3))->sort('RAND()')->leftJoin('SpeakerVote',"(Talk.ID = SpeakerVote.TalkID" . $CurrentUserJoin . ")");
+	      $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => $SummitID))->sort('RAND()')->leftJoin('SpeakerVote',"(Talk.ID = SpeakerVote.TalkID" . $CurrentUserJoin . ")");
 	        if(!empty($CurrentUserWhere))
 		        $Talks->where($CurrentUserWhere);
         } else {
-	        $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => 3))->sort('RAND()');
+	        $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => $SummitID))->sort('RAND()');
         }
 
         if($Talks) $Talk = $Talks->first();
@@ -229,11 +284,11 @@ class PresentationVotingPage_Controller extends Page_Controller {
       } else {
 
         if($currentMemberID) {
-	        $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => 3, 'SummitCategoryID'=>$CategoryID))->leftJoin('SpeakerVote',"(Talk.ID = SpeakerVote.TalkID" . $CurrentUserJoin . ")")->sort('RAND()');
+	        $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => $SummitID, 'SummitCategoryID'=>$CategoryID))->leftJoin('SpeakerVote',"(Talk.ID = SpeakerVote.TalkID" . $CurrentUserJoin . ")")->sort('RAND()');
 	        if(!empty($CurrentUserWhere))
 		        $Talks->where($CurrentUserWhere);
         } else {
-	        $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => 3, 'SummitCategoryID'=>$CategoryID))->sort('RAND()');
+	        $Talks = Talk::get()->filter(array('MarkedToDelete'=>0, 'SummitID' => $SummitID, 'SummitCategoryID'=>$CategoryID))->sort('RAND()');
         }
 
         if($Talks) $Talk = $Talks->first();
@@ -246,7 +301,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
       }
 
     }
-
+    
     function Done() {
 
       $Member = Member::currentUser();
@@ -276,10 +331,14 @@ class PresentationVotingPage_Controller extends Page_Controller {
     }    
 
     function PresentationByURLSegment($URLSegment) {
+        
+    
+     $SummitID = Summit::CurrentSummit()->ID;
+    
       // Clean ID to be safe
       $URLSegment = Convert::raw2sql($URLSegment);
       // Look up a specific presentation
-      $Presentation = Talk::get()->filter(array('URLSegment'=>$URLSegment,'SummitID'=>3))->first();
+      $Presentation = Talk::get()->filter(array('URLSegment'=>$URLSegment,'SummitID'=>$SummitID))->first();
       return $Presentation;
     }        
 
@@ -308,7 +367,9 @@ class PresentationVotingPage_Controller extends Page_Controller {
         $data["VoteValue"] = $this->CurrentVote($Talk->ID);
         
         $CategoryID = Session::get('CategoryID');
-        if(is_numeric($CategoryID)) $Category = SummitCategory::get()->byID($CategoryID);
+        $data["CategoryID"] = $CategoryID;
+        
+          if(is_numeric($CategoryID)) $Category = SummitCategory::get()->byID($CategoryID);
         if(isset($Category)) $data["CategoryName"] = $Category->Name;
 
         //return our $Data to use on the page
@@ -330,6 +391,8 @@ class PresentationVotingPage_Controller extends Page_Controller {
     }
 
     function SpeakerVotingLoginForm() {
+      $URLSegment = $this->request->param("ID");    
+      Session::set('BackURL',$this->Link().'/Presentation/'.$URLSegment);
       $SpeakerVotingLoginForm = new SpeakerVotingLoginForm($this, 'SpeakerVotingLoginForm');
       return $SpeakerVotingLoginForm;
     }
@@ -359,6 +422,9 @@ class PresentationVotingPage_Controller extends Page_Controller {
       if($Member && isset($rating) && (in_array((int)$rating, $validRatings, true)) && $TalkID) {
 
         $previousVote = SpeakerVote::get()->filter(array('TalkID'=>$TalkID,'VoterID'=>$Member->ID))->first();
+          
+        $talk = Talk::get()->byID($TalkID);
+        $CategoryID = Session::get('CategoryID');
 
         if(!$previousVote) {
           $speakerVote = new SpeakerVote;
@@ -368,14 +434,14 @@ class PresentationVotingPage_Controller extends Page_Controller {
           $speakerVote->VoterID = $Member->ID;
           $speakerVote->write();
           
-          $this->redirect($this->Link().'Presentation/'.$this->RandomPresentationURLSegment());
+          $this->redirect($this->Link().'Presentation/'.$talk->getNextMemberPresentation($CategoryID)->URLSegment);
     
         } else {
           $previousVote->VoteValue = $rating;
           $previousVote->IP = $this->ClientIP();
           $previousVote->write();
 
-          $this->redirect($this->Link().'Presentation/'.$this->RandomPresentationURLSegment());
+          $this->redirect($this->Link().'Presentation/'.$talk->getNextMemberPresentation($CategoryID)->URLSegment);
 
         }
         
