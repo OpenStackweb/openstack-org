@@ -39,11 +39,9 @@
 <form method="get" id="form-export-cla-users-data" name="form-export-cla-users-data" action="$Link(exportCLAUsers)">
     <% if Groups %>
         <span>Group Filter </span><input id="status_all" class="all_group" checked  name="status_all"  type="checkbox"  value/>Check All<br>
-        <ul style="list-style: none;">
-            <% loop Groups %>
+        <% loop Groups %>
             <li><input id="status[]" name="status[]" class="group"  type="checkbox" checked value="$Code"/>$Title</li>
         <% end_loop %>
-        </ul>
     <% end_if %>
     <span>Fields</span><br>
     <input id="fields[]" name="fields[]"  checked type="checkbox" value="ID"/>ID
@@ -78,7 +76,15 @@
 <br/>
 <h2>Marketplace Admins Report</h2>
 <form method="get" id="form-export-mktplace-admins-data" name="form-export-mktplace-admins-data" action="$Link(exportMarketplaceAdmins)">
-     <button style="padding: 5px" id="btn5_csv">GET</button>
+    <% if MarketplaceTypes %>
+        <span>Marketplace Type Filter </span><br>
+        <% loop MarketplaceTypes %>
+            <input id="marketplace_type[]" name="marketplace_type[]" class="marketplace_type" type="checkbox" checked value="$AdminGroupID"/>$Name
+        <% end_loop %>
+    <% end_if %>
+    <br/>
+    <br/>
+    <button style="padding: 5px" id="btn5_csv">GET</button>
 </form>
 <br/>
 <br/>
