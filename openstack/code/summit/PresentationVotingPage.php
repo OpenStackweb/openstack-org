@@ -315,7 +315,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
           $Subject = 'Voting Event';
 
 
-          if($Category) {
+          if(isset($Category)) {
             $Body = $Member->FirstName . ' ' . $Member->Surname . ' just completed voting for all presentations in the category ' . $Category->Name;
           } else {
             $Body = $Member->FirstName . ' ' . $Member->Surname . ' just completed voting for every single presentation listed!';
