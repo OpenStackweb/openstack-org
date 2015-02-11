@@ -32,7 +32,7 @@
                 <% end_if %>
                 <div class="carousel-caption">
                     <h3 class='largeHeadline'>$Headline</h3>
-                    <p class='sliderSummary'>$RAW_val(Summary)</p>
+                    <div class='sliderSummary'>$RAW_val(Summary)</div>
                     <a class="more-btn" href="news/view/$ID/$HeadlineForUrl">Read More <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
             </div>

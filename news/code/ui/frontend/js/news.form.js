@@ -44,7 +44,7 @@ jQuery(document).ready(function($){
                 headline:{required: true},
                 summary:{required: true},
                 tags:{required: true},
-                date:{required: true},
+                date:{required: true}
             },
             messages: {
                 submitter_phone:{
@@ -78,9 +78,11 @@ jQuery(document).ready(function($){
         theme: "advanced",
         mode : "textareas",
         theme_advanced_toolbar_location: "top",
-        theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo",
+        theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
         theme_advanced_buttons2: "",
         theme_advanced_buttons3: "",
+        force_br_newlines : true,
+        force_p_newlines : false,
         height: "250px",
         width: "800px"
     });

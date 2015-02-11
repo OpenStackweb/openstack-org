@@ -126,6 +126,10 @@
     background: #B92623
 }
 
+.sliderSummary p *{
+    color: white !important;
+}
+
 .newsFeatured {
     margin: 40px 0 60px;
     float: left;
@@ -662,4 +666,20 @@ input[type=checkbox] {
 
 input[type=checkbox], input[type=radio] {
     display: inline-block
+}
+
+/* ARTICLE VIEW PAGE */
+
+.article_full_image {
+    padding-bottom:20px;
+    text-align:center;
+}
+
+.article_full_image img {
+    width: 100%;
+}
+
+.article_cropped_image {
+    float:right;
+    padding:0 10px 10px 25px;
 }
