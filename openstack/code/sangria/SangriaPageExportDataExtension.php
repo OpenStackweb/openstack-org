@@ -30,6 +30,7 @@ final class SangriaPageExportDataExtension extends Extension
 			'exportFoundationMembers',
 			'exportCorporateSponsors',
 			'exportDupUsers',
+            'exportMarketplaceAdmins',
 		));
 
 
@@ -42,6 +43,7 @@ final class SangriaPageExportDataExtension extends Extension
 			'exportFoundationMembers',
 			'exportCorporateSponsors',
 			'exportDupUsers',
+            'exportMarketplaceAdmins',
 		));
 	}
 
@@ -449,5 +451,38 @@ SQL;
 
 		return CSVExporter::getInstance()->export($filename, $data, ',');
 	}
+
+    public function exportMarketplaceAdmins(){
+
+        $fileDate = date('Ymdhis');
+
+        SangriaPage_Controller::generateDateFilters('s');
+
+        $sql = <<< SQL
+SELECT Member.FirstName, Member.Surname, Member.Email, Company.Name AS Company FROM Member
+INNER JOIN Company_Administrators ON Member.ID=Company_Administrators.MemberID
+INNER JOIN Company ON Company.ID = Company_Administrators.CompanyID
+WHERE (Member.ID IN (SELECT MemberID FROM Company_Administrators WHERE Company_Administrators.GroupID=21 OR Company_Administrators.GroupID=25))
+GROUP BY Member.FirstName, Member.Surname, Member.Email, Company.Name
+ORDER BY Company.Name, Member.SurName;
+SQL;
+
+        $res = DB::query($sql);
+
+        $fields = array('FirstName','Surname','Email','Company');
+        $data = array();
+
+        foreach ($res as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = $row[$field];
+            }
+            array_push($data, $member);
+        }
+
+        $filename = "mktplace_admins_report" . $fileDate . ".csv";
+
+        return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
 
 }
