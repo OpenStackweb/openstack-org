@@ -198,7 +198,7 @@
                         </a>
                     </li>
 					<li class="voting-rate-single <% if $Top.VoteValue = -1 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=0" id='vote-0'>
+					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=-1" id='vote-0'>
                             Would Not See
                             <div class="voting-shortcut">0</div>
                         </a>
@@ -272,7 +272,7 @@
                         </a>
                     </li>
 					<li class="voting-rate-single <% if $Top.VoteValue = -1 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=0" id='vote-0'>
+					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=-1" id='vote-0'>
                             Would Not See
                             <div class="voting-shortcut">0</div>
                         </a>

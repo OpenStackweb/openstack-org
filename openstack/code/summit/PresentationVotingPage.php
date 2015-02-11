@@ -307,6 +307,8 @@ class PresentationVotingPage_Controller extends Page_Controller {
       $Member = Member::currentUser();
 
       if($Member) {
+          
+          $data = array();
 
           $CategoryID = Session::get('CategoryID');
           if(is_numeric($CategoryID)) $Category = SummitCategory::get()->byID($CategoryID);

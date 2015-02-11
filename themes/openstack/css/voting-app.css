@@ -1285,7 +1285,9 @@ a.voting-btn {
     transition: none; } }
 
 .presentation-list {
-  overflow-y: scroll; }
+  overflow-y: scroll; 
+  border: 1px solid #D4DCE5;
+}
 
 .voting-search-input {
   border-radius: 4px;
@@ -1375,7 +1377,7 @@ a.voting-btn {
       margin: 0;
       border-collapse: separate;
       margin-right: -1px;
-      margin-bottom: -1px;
+      margin-bottom: 0px;
     }
 
 
@@ -1413,6 +1415,12 @@ img.voting-speaker-pic {
     max-width: 65px;
     max-height: 65px;
     float: right; }
+
+.voting-speaker-row .voting-speaker-name span {
+    height: 1.5em;
+    max-width: 20em;
+    overflow: hidden;
+}
 
 .main-speaker-row {
   display: block;
