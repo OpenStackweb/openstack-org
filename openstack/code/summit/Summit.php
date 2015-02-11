@@ -55,11 +55,11 @@ class Summit extends DataObject {
 
 	public function CurrentSummitID() {
 		// todo: make this a property editable in the CMS
-		return 3;
+		return 4;
 	}
 
-	public function CurrentSummit() {
-		return Summit::get()->byID($this->CurrentSummitID());
+	public static function CurrentSummit() {
+		return Summit::get()->byID(4);
 	}
-
+    
 }

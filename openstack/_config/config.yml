@@ -16,3 +16,7 @@ MySQLDatabase:
 
 SiteTree:
   nested_urls: true
+  
+Member:
+  extensions:
+    - PresentationMemberExtension  

@@ -251,5 +251,60 @@ class Talk extends DataObject {
 		}
 
     }
+    
+    public function getPresentationPriority() {
+        $mid = Member::currentUserID();
+        $Priority = PresentationPriority::get()
+            ->filter(array(
+                'MemberID' => $mid,
+                'TalkID' => $this->ID
+            ))
+            ->first();
+        if($Priority) {
+            return $Priority->Priority;
+        } else {
+            echo 'No Priority!';
+            return 0;
+        }
+    }
+    
+    
+    /**
+     * Gets presentations, ordered in a persistent random fashion
+     *         
+     * @return DataList
+     */
+    public function getNextMemberPresentation($categoryid = null) {
+        $mid = Member::currentUserID();
+                
+        // Set the filter to limit to a category if one is provided
+        $filter = array();
+        $where = '';
+        
+        if ($categoryid) {
+            $where = "PresentationPriority.Priority > ".$this->getPresentationPriority()." AND PresentationPriority.MemberID = ".$mid." AND SummitCategoryID = ".$categoryid;
+        } else {
+            $where = "PresentationPriority.Priority > ".$this->getPresentationPriority()." AND PresentationPriority.MemberID = ".$mid;
+        }
+        
+
+        return Talk::get()
+                ->innerJoin("PresentationPriority", "PresentationPriority.TalkID = Talk.ID")
+                ->where($where)
+                ->sort('Priority ASC')
+                ->limit(1)
+                ->first();
+    } 
+    
+    function memberVoteValue() {
+        $mid = Member::currentUserID();
+        $speakerVote = SpeakerVote::get()
+            ->filter(array(
+                    'VoterID' => $mid,
+                    'TalkID' => $this->ID
+                ))
+            ->first();
+        if ($speakerVote) return $speakerVote->VoteValue;
+    }
 
 }

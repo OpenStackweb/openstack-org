@@ -36,7 +36,7 @@ class SpeakerVotingLoginForm extends MemberLoginForm {
                     )
                 );
             }
-
+        
             parent::__construct($controller, $name, $fields, $actions);
 
     }    
