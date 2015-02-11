@@ -189,7 +189,27 @@ SQL;
 			// $res: new Product($rowArray)
 			$groups->push(new $rowArray['ClassName']($rowArray));
 		}
+
+        return $groups;
 	}
+
+    public function MarketplaceTypes()
+    {
+        $sql = <<<SQL
+		SELECT Name,Slug,AdminGroupID FROM `marketplacetype` WHERE Active = 1 ORDER BY AdminGroupID;
+SQL;
+        $result = DB::query($sql);
+
+        // let Silverstripe work the magic
+
+        $types = new ArrayList();
+
+        foreach ($result as $rowArray) {
+            $types->push($rowArray);
+        }
+
+        return $types;
+    }
 
 	// Export CSV of all Deployment Surveys and Associated Deployments
 	function ExportSurveyResults()
@@ -419,7 +439,6 @@ SQL;
 		return CSVExporter::getInstance()->export($filename, $data);
 	}
 
-
 	public function exportDupUsers(){
 
 		$fileDate = date('Ymdhis');
@@ -454,28 +473,37 @@ SQL;
 
     public function exportMarketplaceAdmins(){
 
+        $params = $this->owner->getRequest()->getVars();
+        if (!isset($params['marketplace_type']) || empty($params['marketplace_type']))
+            return $this->owner->httpError('412', 'missing required param marketplace type');
+
+        $marketplace_type = $params['marketplace_type'];
+
+        $filters_string = implode("','", $marketplace_type);
+
         $fileDate = date('Ymdhis');
 
         SangriaPage_Controller::generateDateFilters('s');
 
         $sql = <<< SQL
-SELECT Member.FirstName, Member.Surname, Member.Email, Company.Name AS Company FROM Member
-INNER JOIN Company_Administrators ON Member.ID=Company_Administrators.MemberID
-INNER JOIN Company ON Company.ID = Company_Administrators.CompanyID
-WHERE (Member.ID IN (SELECT MemberID FROM Company_Administrators WHERE Company_Administrators.GroupID=21 OR Company_Administrators.GroupID=25))
-GROUP BY Member.FirstName, Member.Surname, Member.Email, Company.Name
-ORDER BY Company.Name, Member.SurName;
+SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace FROM Member AS M
+INNER JOIN Company_Administrators AS CA ON M.ID = CA.MemberID
+INNER JOIN Company AS C ON C.ID = CA.CompanyID
+INNER JOIN Marketplacetype AS MT ON MT.AdminGroupID = CA.GroupID
+WHERE (M.ID IN (SELECT MemberID FROM Company_Administrators WHERE Company_Administrators.GroupID IN ('{$filters_string}')))
+GROUP BY M.FirstName, M.Surname, M.Email, C.Name
+ORDER BY C.Name, M.SurName;
 SQL;
 
         $res = DB::query($sql);
 
-        $fields = array('FirstName','Surname','Email','Company');
+        $fields = array('FirstName','Surname','Email','Company','Marketplace');
         $data = array();
 
         foreach ($res as $row) {
             $member = array();
             foreach ($fields as $field) {
-                $member[$field] = $row[$field];
+                $member[$field] = str_replace(',',' ',$row[$field]); //commas tabs cell in excel
             }
             array_push($data, $member);
         }
