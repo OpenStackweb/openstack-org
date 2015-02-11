@@ -42,4 +42,5 @@ jQuery(document).ready(function($) {
         errorPlacement: jqueryValidatorErrorPlacement
     });
 
+    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyYourOrganizationForm_Form_Industry'),$('#OtherIndustry'))
 });

@@ -75,6 +75,11 @@ class Deployment extends DataObject
         'UsedPackages' => 'Text',
         'CustomPackagesReason' => 'Text',
         'OtherCustomPackagesReason' => 'Text',
+		'PaasTools' => 'Text',
+		'OtherPaasTools' => 'Text',
+		'OtherSupportedFeatures' => 'Text',
+		'InteractingClouds' => 'Text',
+		'OtherInteractingClouds' => 'Text',
     );
 
 	private static $has_one = array(
@@ -224,7 +229,7 @@ class Deployment extends DataObject
 				new DropdownField(
 					'ObjectStorageNumObjects',
 					'Total objects stored',
-					Deployment::$stoage_objects_options
+					Deployment::$storage_objects_options
 				),
 				new DropdownField(
 					'SwiftGlobalDistributionFeatures',
@@ -472,17 +477,18 @@ class Deployment extends DataObject
 	);
 
 	public static $hypervisors_options = array(
-		'kvm' => 'KVM',
-		'xen' => 'Xen / XCP',
-		'xenserver' => 'Citrix XenServer',
-		'hyperv' => 'Microsoft HyperV',
-		'esx' => 'VMware ESX',
-		'lxc' => 'LXC',
-		'QEMU' => 'QEMU',
-		'PowerKVM' => 'PowerKVM',
 		'Bare Metal' => 'Bare Metal',
+		'Citrix XenServer' => 'Citrix XenServer',
+		'Docker' => 'Docker',
+		'KVM' => 'KVM',
+		'LXC' => 'LXC',
+		'Microsoft Hyper-V' => 'Microsoft Hyper-V',
 		'OpenVZ' => 'OpenVZ',
-		'Docker' => 'Docker'
+		'PowerKVM' => 'PowerKVM',
+		'QEMU' => 'QEMU',
+		'VMware ESX' => 'VMware ESX',
+		'Xen / XCP' => 'Xen / XCP',
+		'Other Hypervisors' => 'Other Hypervisors',
 	);
 
 	public static $block_storage_divers_options = array(
@@ -495,81 +501,73 @@ class Deployment extends DataObject
 		'HP 3PAR' => 'HP 3PAR',
 		'HP LeftHand' => 'HP LeftHand',
 		'Huawei' => 'Huawei',
-		'Storwize' => 'IBM Storwize',
-		'XIV' => 'IBM XIV/DS8000',
 		'IBM GPFS' => 'IBM GPFS',
-		'LVM' => 'LVM (default)',
+		'IBM NAS' => 'IBM NAS',
+		'IBM Storwize' => 'IBM Storwize',
+		'IBM XIV / DS8000' => 'IBM XIV / DS8000',
+		'LVM (default)' => 'LVM (default)',
 		'Mellanox' => 'Mellanox',
 		'NetApp' => 'NetApp',
 		'Nexenta' => 'Nexenta',
 		'NFS' => 'NFS',
-		'SAN/Solaris' => 'SAN/Solaris',
+		'ProphetStor' => 'ProphetStor',
+		'SAN / Solaris' => 'SAN / Solaris',
 		'Scality' => 'Scality',
 		'Sheepdog' => 'Sheepdog',
 		'SolidFire' => 'SolidFire',
-		'Windows' => 'Windows Server 2012',
-		'Xenapi' => 'Xenapi NFS',
+		'VMWare VMDK' => 'VMWare VMDK',
+		'Windows Server 2012' => 'Windows Server 2012',
+		'Xenapi NFS' => 'Xenapi NFS',
 		'XenAPI Storage Manager' => 'XenAPI Storage Manager',
 		'Zadara' => 'Zadara',
-		'IBM NAS' => 'IBM NAS',
-		'ProphetStor' => 'ProphetStor',
-		'VMWare VMDK' => 'VMWare VMDK',
+		'Other Block Storage Driver' => 'Other Block Storage Driver',
 	);
 
 	public static $network_driver_options = array(
-		'nova-network' => 'nova-network',
+		'A10 Networks' => 'A10 Networks',
+		'Arista' => 'Arista',
 		'Big Switch' => 'Big Switch',
 		'Brocade' => 'Brocade',
-		'Cisco' => 'Cisco UCS/Nexus',
+		'Cisco UCS / Nexus' => 'Cisco UCS / Nexus',
 		'Embrane' => 'Embrane',
 		'Extreme Networks' => 'Extreme Networks',
 		'Hyper-V' => 'Hyper-V',
+		'IBM SDN-VE' => 'IBM SDN-VE',
 		'Juniper' => 'Juniper',
 		'Linux Bridge' => 'Linux Bridge',
 		'Mellanox' => 'Mellanox',
-		'MidoNet' => 'MidoNet',
-		'Modular Layer 2 Plugin' => 'Modular Layer 2 Plugin (ML2)',
-		'NEC' => 'NEC OpenFLow',
-		'Nicira' => 'Nicira NVP',
-		'Open vSwitch' => 'Open vSwitch',
-		'PLUMgrid' => 'PLUMgrid',
-		'Ruijie Networks' => 'Ruijie Networks',
-		'Ryu' => 'Ryu OpenFlow Controller',
-		'A10 Networks' => 'A10 Networks',
-		'Arista' => 'Arista',
-		'IBM SDN-VE' => 'IBM SDN-VE',
 		'Meta Plugin' => 'Meta Plugin',
+		'MidoNet' => 'MidoNet',
+		'Modular Layer 2 Plugin (ML2)' => 'Modular Layer 2 Plugin (ML2)',
+		'NEC OpenFlow' => 'NEC OpenFlow',
 		'Nuage Networks' => 'Nuage Networks',
 		'One Convergence NVSD' => 'One Convergence NVSD',
 		'OpenDaylight' => 'OpenDaylight',
+		'Open vSwitch' => 'Open vSwitch',
+		'PLUMgrid' => 'PLUMgrid',
+		'Ruijie Networks' => 'Ruijie Networks',
+		'Ryu OpenFlow Controller' => 'Ryu OpenFlow Controller',
 		'VMWare NSX (formerly Nicira NVP)' => 'VMWare NSX (formerly Nicira NVP)',
+		'nova-network' => 'nova-network',
+		'Other Network Driver' => 'Other Network Driver',
 	);
 
 	public static $identity_driver_options = array(
-		'LDAP' => 'LDAP',
-		'AD' => 'Active Directory',
-		'SQL' => 'SQL',
-		'PAM' => 'PAM',
+		'Active Directory' => 'Active Directory',
 		'KVS' => 'KVS',
-		'Templated' => 'Templated'
+		'LDAP' => 'LDAP',
+		'PAM' => 'PAM',
+		'SQL (default)' => 'SQL (default)',
+		'Templated' => 'Templated',
+		'Other Identity Driver' => 'Other Identity Driver',
 	);
 
 	public static $deployment_features_options = array(
-		'Dashboard' => 'Dashboard',
-		'Object storage' => 'Object storage',
-		'Live migration' => 'Live migration',
-		'Snapshotting to new images' => 'Snapshotting to new images',
 		'EC2 compatibility API' => 'EC2 compatibility API',
-		'S3 compatibility API' => 'S3 compatibility API',
+		'GCE compatibility API' => 'GCE compatibility API',
 		'OCCI compatibility API' => 'OCCI compatibility API',
-		'GCE compatibility API' => 'GCE compatibility API'
-	);
-
-	public static $deployment_features_options_new = array(
-		'EC2 compatibility API' => 'EC2 compatibility API',
 		'S3 compatibility API' => 'S3 compatibility API',
-		'OCCI compatibility API' => 'OCCI compatibility API',
-		'GCE compatibility API' => 'GCE compatibility API'
+		'Other Compatibility API' => 'Other Compatibility API',
 	);
 
 	public static $deployment_tools_options = array(
@@ -599,83 +597,91 @@ class Deployment extends DataObject
 	);
 
 	public static $compute_nodes_options = array(
-		'unspecified' => '-- Select One --',
-		'1-50 nodes' => '1-50 nodes',
-		'51-100 nodes' => '51-100 nodes',
-		'101-500 nodes' => '101-500 nodes',
-		'501-1,000 nodes' => '501-1,000 nodes',
-		'More than 1,000 nodes' => '1,001-5,000 nodes',
-		'More than 5,000 nodes' => 'More than 5,000 nodes'
+		'1 to 9 nodes' => '1 to 9 nodes',
+		'10 to 99 nodes' => '10 to 99 nodes',
+		'100 to 999 nodes' => '100 to 999 nodes',
+		'1,000 to 9,999 nodes' => '1,000 to 9,999 nodes',
+		'10,000 to 99,999 nodes' => '10,000 to 99,999 nodes',
+		'100,000 to 999,999 nodes' => '100,000 to 999,999 nodes',
+		'1 million or more nodes' => '1 million or more nodes',
 	);
 
-
 	public static $compute_cores_options = array(
-		'unspecified' => '-- Select One --',
-		'1-100 cores' => '1-100 cores',
-		'101-500 cores' => '101-500 cores',
-		'501-1,000 cores' => '501-1,000 cores',
-		'1,001-5,000 cores' => '1,001-5,000 cores',
-		'5,001-10,000 cores' => '5,001-10,000 cores',
-		'More than 10,000 cores' => '10,001-50,000 cores',
-		'More than 50,000 cores' => 'More than 50,000 cores'
+		'1 to 9 cores' => '1 to 9 cores',
+		'10 to 99 cores' => '10 to 99 cores',
+		'100 to 999 cores' => '100 to 999 cores',
+		'1,000 to 9,999 cores' => '1,000 to 9,999 cores',
+		'10,000 to 99,999 cores' => '10,000 to 99,999 cores',
+		'100,000 to 999,999 cores' => '100,000 to 999,999 cores',
+		'1 million or more cores' => '1 million or more cores',
 	);
 
 	public static $compute_instances_options = array(
-		'unspecified' => '-- Select One --',
-		'1-100 instances' => '1-100 instances',
-		'101-500 instances' => '101-500 instances',
-		'501-1,000 instances' => '501-1,000 instances',
-		'1,001-5,000 instances' => '1,001-5,000 instances',
-		'5,000-10,000 instances' => '5,000-10,000 instances',
-		'More than 10,000 instances' => 'More than 10,000 instances'
+		'1 to 9 instances' => '1 to 9 instances',
+		'10 to 99 instances' => '10 to 99 instances',
+		'100 to 999 instances' => '100 to 999 instances',
+		'1,000 to 9,999 instances' => '1,000 to 9,999 instances',
+		'10,000 to 99,999 instances' => '10,000 to 99,999 instances',
+		'100,000 to 999,999 instances' => '100,000 to 999,999 instances',
+		'1 million or more instances' => '1 million or more instances',
 	);
 
 	public static $storage_size_options = array(
-		'unspecified' => '-- Select One --',
-		'0-10 TB' => '0-10 TB',
-		'11-100 TB' => '11-100 TB',
-		'100-500 TB' => '100-500 TB',
-		'More than 500 TB' => '501-1,000 TB',
-		'1PB-5PB' => '1PB-5PB',
-		'5PB-20PB' => '5PB-20PB',
-		'over 20PB' => 'over 20PB',
+		'Less than 1 TB' => 'Less than 1 TB' ,
+		'1 TB to 9 TB' => '1 TB to 9 TB' ,
+		'10 TB to 99 TB' => '10 TB to 99 TB' ,
+		'100 TB to 999 TB' => '100 TB to 999 TB' ,
+		'1 PB to 9 PB' => '1 PB to 9 PB' ,
+		'10 PB to 99 PB' => '10 PB to 99 PB' ,
+		'100 PB to 999 PB' => '100 PB to 999 PB' ,
+		'1 EB to 9 EB' => '1 EB to 9 EB' ,
+		'10 EB to 99 EB' => '10 EB to 99 EB' ,
+		'100 to 999 EB' => '100 to 999 EB' ,
+		'1 ZB to 9 ZB' => '1 ZB to 9 ZB' ,
 	);
 
-	public static $stoage_objects_options = array(
-		'unspecified' => '-- Select One --',
-		'1-10,000 objects' => '1-10,000 objects',
-		'10,001-100,000 objects' => '10,001-100,000 objects',
-		'100,001 to 1 million objects' => '100,001 to 1 million objects',
-		'1 million to 100 million objects' => '1 million to 100 million objects',
-		'100 million to 500 million objects' => '100 million to 500 million objects',
-		'More than 500 million objects' => 'More than 500 million objects'
+	public static $storage_objects_options = array(
+		'Fewer than 1,000 objects' => 'Fewer than 1,000 objects',
+		'1,000 to 9,999 objects' => '1,000 to 9,999 objects',
+		'10,000 to 99,999 objects' => '10,000 to 99,999 objects',
+		'100,000 to 999,999 objects' => '100,000 to 999,999 objects',
+		'1 million to 9 million objects' => '1 million to 9 million objects',
+		'10 million to 999 million objects' => '10 million to 999 million objects',
+		'100 million to 999 million objects' => '100 million to 999 million objects',
+		'1 billion to 9 billion objects' => '1 billion to 9 billion objects',
+		'10 billion to 99 billion objects' => '10 billion to 99 billion objects',
+		'100 billion or more objects' => '100 billion or more objects',
 	);
 
 	public static $network_ip_options = array(
-		'unspecified' => '-- Select One --',
-		'less than 100' => 'less than 100',
-		'101 to 1,000' => '101 to 1,000',
-		'1,001 to 10,000' => '1,001 to 10,000',
-		'More than 10,000' => 'More than 10,000'
+		'1 to 9 IPs' => '1 to 9 IPs',
+		'10 to 99 IPs' => '10 to 99 IPs',
+		'100 to 999 IPs' => '100 to 999 IPs',
+		'1,000 to 9,999 IPs' => '1,000 to 9,999 IPs',
+		'10,000 to 99,999 IPs' => '10,000 to 99,999 IPs',
+		'100,000 or more IPs ' => '100,000 or more IPs ',
 	);
 
-
 	public static $why_nova_network_options = array(
-		'Complexity of Neutron' => 'Complexity of Neutron',
-		'Scalability, Performance' => 'Scalability, Performance',
-		'Migration effort' => 'Migration effort',
+		'Simplification of Neutron' => 'Simplification of Neutron',
+		'Migration ease from nova-network to Neutron' => 'Migration ease from nova-network to Neutron',
+		'Scalability' => 'Scalability',
+		'Performance' => 'Performance',
+		'Other Reason' => 'Other Reason',
 	);
 
 	public static $swift_global_distribution_features_options = array(
-		'Yes, globally distributed clusters' => 'Yes, globally distributed clusters',
-		'Yes, container sync' => 'Yes, container sync',
 		'No, this Swift cluster is only in a single region' => 'No, this Swift cluster is only in a single region',
+		'Yes, container sync' => 'Yes, container sync',
+		'Yes, globally distributed clusters' => 'Yes, globally distributed clusters',
 	);
 
 	public static $swift_global_distribution_features_uses_cases_options = array(
-		'Disaster recovery, continuity of business, or regulatory reasons' => 'Disaster recovery, continuity of business, or regulatory reasons',
+		'Disaster recovery' => 'Disaster recovery',
+		'Continuity of business' => 'Continuity of business',
+		'Regulatory reasons' => 'Regulatory reasons',
 		'Locality of access' => 'Locality of access',
-		'Other' => 'Other (specify)',
+		'Other' => 'Other Swift Use Case'
 	);
 
 	public static $plans_2_use_swift_storage_policies_options = array(
@@ -685,25 +691,25 @@ class Deployment extends DataObject
 	);
 
 	public static $used_db_for_openstack_components_options = array(
-		'MySQL' => 'MySQL',
-		'Percona Server' => 'Percona Server',
 		'MariaDB' => 'MariaDB',
-		'MySQL with Galera' => 'MySQL with Galera',
-		'MySQL with DRBD' => 'MySQL with DRBD',
-		'Percona XtraDB Cluster' => 'Percona XtraDB Cluster',
 		'MariaDB Galera Cluster' => 'MariaDB Galera Cluster',
-		'PostgreSQL' => 'PostgreSQL',
 		'MongoDB' => 'MongoDB',
+		'MySQL' => 'MySQL',
+		'MySQL with DRBD' => 'MySQL with DRBD',
+		'MySQL with Galera' => 'MySQL with Galera',
+		'Percona Server' => 'Percona Server',
+		'Percona XtraDB Cluster' => 'Percona XtraDB Cluster',
+		'PostgreSQL' => 'PostgreSQL',
 		'SQLite' => 'SQLite',
-
+		'Other Database' => 'Other Database',
 	);
 
 	public static $tools_used_for_your_users_options = array(
-		'None' => 'None',
 		'Home grown tools using ceilometer' => 'Home grown tools using ceilometer',
 		'Home grown tools using other OpenStack components than ceilometer' => 'Home grown tools using other OpenStack components than ceilometer',
 		'Cloud Kitty' => 'Cloud Kitty',
-
+		'None' => 'None',
+		'Other' => 'Other'
 	);
 
     public static $used_packages_options = array(
@@ -720,5 +726,33 @@ class Deployment extends DataObject
         'Standard packages aren\'t updated quickly enough' => 'Standard packages aren\'t updated quickly enough',
         'Other' => 'Other',
     );
+
+	public static $paas_tools_options = array(
+		'CloudFoundry' => 'CloudFoundry',
+		'OpenShift' => 'OpenShift',
+		'OpenStack Orchestration (Heat)' => 'OpenStack Orchestration (Heat)',
+		'None' => 'None',
+	);
+
+	public static $interacting_clouds_options = array(
+		'Amazon' => 'Amazon',
+		'Azure' => 'Azure',
+		'Google Compute Engine' => 'Google Compute Engine',
+		'Other OpenStack clouds' => 'Other OpenStack clouds',
+		'None' => 'None',
+		'Other Clouds ' => 'Other Clouds ',
+	);
+
+	public static $cloud_users_options = array(
+		'1 to 9 users' => '1 to 9 users',
+		'10 to 99 users' => '10 to 99 users',
+		'100 to 999 users' => '100 to 999 users',
+		'1,000 to 9,999 users' => '1,000 to 9,999 users',
+		'10,000 to 99,999 users' => '10,000 to 99,999 users',
+		'100,000 to 999,999 users' => '100,000 to 999,999 users',
+		'1,000,000 to 9,999,999 users' => '1,000,000 to 9,999,999 users',
+		'10,000,000 to 999,999,999 users' => '10,000,000 to 999,999,999 users',
+		'100,000,000 or more users ' => '100,000,000 or more users',
+	);
 	
 }

@@ -45,8 +45,8 @@ function setCustomValidationRuleForOtherText(chk, question_container){
     }});
 }
 
-function checkOtherTextVisibilityDropdown(ddl, question_container){
-    if (ddl.val() == 'Other') {
+function checkOtherTextVisibilityDropdown(ddl, question_container, label){
+    if (ddl.val() == label) {
         question_container.removeClass('hidden');
         jQuery('.textarea',question_container).removeClass('hidden');
     }
@@ -56,13 +56,16 @@ function checkOtherTextVisibilityDropdown(ddl, question_container){
     }
 }
 
-function setCustomValidationRuleForOtherTextDropdown(ddl, question_container){
+function setCustomValidationRuleForOtherTextDropdown(ddl, question_container, label){
+
+    label = typeof label !== 'undefined' ? label : 'Other';
+
     ddl.change(function(e){
-        checkOtherTextVisibilityDropdown(jQuery(this), question_container)
+        checkOtherTextVisibilityDropdown(jQuery(this), question_container, label)
     });
-    checkOtherTextVisibility(ddl, question_container);
+    checkOtherTextVisibilityDropdown(ddl, question_container, label);
     jQuery('.textarea', question_container).rules('add', { required: function (element) {
-        return ddl.val() == 'Other';
+        return ddl.val() == label;
     }});
 }
 
