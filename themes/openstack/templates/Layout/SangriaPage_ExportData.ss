@@ -74,6 +74,12 @@
 <form method="get" id="form-export-dup-users-data" name="form-export-dup-users-data" action="$Link(exportDupUsers)">
      <button style="padding: 5px" id="btn5_csv">GET</button>
 </form>
+<br/>
+<br/>
+<h2>Marketplace Admins Report</h2>
+<form method="get" id="form-export-mktplace-admins-data" name="form-export-mktplace-admins-data" action="$Link(exportMarketplaceAdmins)">
+     <button style="padding: 5px" id="btn5_csv">GET</button>
+</form>
 
 
 
