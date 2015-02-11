@@ -196,7 +196,7 @@ SQL;
     public function MarketplaceTypes()
     {
         $sql = <<<SQL
-		SELECT Name,Slug,AdminGroupID FROM `marketplacetype` WHERE Active = 1 ORDER BY AdminGroupID;
+		SELECT Name,Slug,AdminGroupID FROM MarketPlaceType WHERE Active = 1 ORDER BY AdminGroupID;
 SQL;
         $result = DB::query($sql);
 
@@ -489,7 +489,7 @@ SQL;
 SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace FROM Member AS M
 INNER JOIN Company_Administrators AS CA ON M.ID = CA.MemberID
 INNER JOIN Company AS C ON C.ID = CA.CompanyID
-INNER JOIN Marketplacetype AS MT ON MT.AdminGroupID = CA.GroupID
+INNER JOIN MarketPlaceType AS MT ON MT.AdminGroupID = CA.GroupID
 WHERE (M.ID IN (SELECT MemberID FROM Company_Administrators WHERE Company_Administrators.GroupID IN ('{$filters_string}')))
 GROUP BY M.FirstName, M.Surname, M.Email, C.Name
 ORDER BY C.Name, M.SurName;
