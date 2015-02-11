@@ -92,19 +92,11 @@ div.current-user {
 	text-align: right;
 }
 
-#DeploymentSurveyDeploymentDetailsForm_Form_OtherWorkloadsDescription {
-	height: 4em;
-}
-
-#DeploymentSurveyMoreDeploymentDetailsForm_Form_WhyNovaNetwork {
-	height: 4em;
-}
-
 input[type="radio"], input[type="checkbox"] {
    margin-top:0px !important;
 }
 
-.clean_text{
+label.left{
     font-weight: normal !important;
 }
 

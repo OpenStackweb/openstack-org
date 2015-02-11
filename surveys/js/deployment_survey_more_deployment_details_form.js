@@ -20,7 +20,21 @@ jQuery(document).ready(function($) {
         rules: {
             'OperatingSystems': {required : true},
             'UsedPackages[]':  {required : true},
-            'DeploymentTools[]':{required : true}
+            'DeploymentTools[]':{required : true},
+            'PaasTools': {required : true},
+            'SupportedFeatures[]': {required : true},
+            'UsedDBForOpenStackComponents[]': {required : true},
+            'InteractingClouds[]': {required : true},
+            'NumCloudUsers': {required : true},
+            'ComputeNodes': {required : true},
+            'ComputeCores': {required : true},
+            'ComputeInstances': {required : true},
+            'NetworkNumIPs': {required : true},
+            'BlockStorageTotalSize': {required : true},
+            'ObjectStorageSize': {required : true},
+            'ObjectStorageNumObjects': {required : true},
+            'SwiftGlobalDistributionFeatures': {required : true},
+            'ToolsUsedForYourUsers': {required : true}
         },
         onfocusout: false,
         focusCleanup: true,
@@ -45,5 +59,50 @@ jQuery(document).ready(function($) {
     setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_CustomPackagesReason_Other'), $('#OtherCustomPackagesReason'));
     setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_OperatingSystems'),$('#OtherOperatingSystems'));
     setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_DeploymentTools_OtherTool'), $('#OtherDeploymentTools'));
+
+    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_PaasTools'), $('#OtherPaasTools'));
+
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_SupportedFeatures_OtherCompatibilityAPI'), $('#OtherSupportedFeatures'));
+
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_UsedDBForOpenStackComponents_OtherDatabase'), $('#OtherUsedDBForOpenStackComponents'));
+
+    if($('#Hypervisors').length > 0) {
+        $('.checkbox', $('#Hypervisors')).rules('add', { required: true} );
+        setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_Hypervisors_OtherHypervisors'), $('#OtherHypervisor'));
+    }
+
+    if($('#NetworkDrivers').length > 0) {
+        $('.checkbox', $('#NetworkDrivers')).rules('add', { required: true} );
+        setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_NetworkDrivers_OtherNetworkDriver'), $('#OtherNetworkDriver'));
+    }
+
+    if($('#IdentityDrivers').length > 0) {
+        $('.checkbox', $('#IdentityDrivers')).rules('add', { required: true} );
+        setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_IdentityDrivers_OtherIdentityDriver'), $('#OtherIndentityDriver'));
+    }
+
+    if($('#BlockStorageDrivers').length > 0) {
+        $('.checkbox', $('#BlockStorageDrivers')).rules('add', { required: true} );
+        setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_BlockStorageDrivers_OtherBlockStorageDriver'), $('#OtherBlockStorageDriver'));
+    }
+
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_InteractingClouds_OtherClouds'), $('#OtherInteractingClouds'));
+
+    if($('#WhyNovaNetwork').length > 0) {
+        $('.checkbox', $('#WhyNovaNetwork')).rules('add', { required: true} );
+        setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_WhyNovaNetwork_OtherReason'), $('#OtherWhyNovaNetwork'));
+    }
+
+    if($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_SwiftGlobalDistributionFeatures').length > 0){
+        $('#DeploymentSurveyMoreDeploymentDetailsForm_Form_SwiftGlobalDistributionFeatures').rules('add', { required: true} );
+        $('#DeploymentSurveyMoreDeploymentDetailsForm_Form_Plans2UseSwiftStoragePolicies').rules('add', { required: true} );
+        $('#DeploymentSurveyMoreDeploymentDetailsForm_Form_SwiftGlobalDistributionFeaturesUsesCases').rules('add', { required: true} );
+
+        setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_Plans2UseSwiftStoragePolicies'), $('#OtherPlans2UseSwiftStoragePolicies'), 'Maybe. Please explain');
+        setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_SwiftGlobalDistributionFeaturesUsesCases'), $('#OtherSwiftGlobalDistributionFeaturesUsesCases'));
+    }
+
+    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_ToolsUsedForYourUsers'), $('#OtherToolsUsedForYourUsers'));
+
     setStep('deployments');
 });
