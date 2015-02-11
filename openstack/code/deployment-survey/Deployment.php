@@ -350,6 +350,8 @@ class Deployment extends DataObject
 
 	public static $current_release_options = array(
 		'Trunk' => 'Trunk / Continuous deployment',
+		'Kilo (2015.1)' => 'Kilo (2015.1)',
+		'Juno (2014.2)' => 'Juno (2014.2)',
 		'Icehouse (2014.1)' => 'Icehouse (2014.1)',
 		'Havana (2013.2)' => 'Havana (2013.2)',
 		'Grizzly' => 'Grizzly (2013.1)',
