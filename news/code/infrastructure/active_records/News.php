@@ -228,9 +228,9 @@ final class News extends DataObject implements INews {
             $image_width = $this->Image->getWidth();
             
             if ($image_width >= 600) {
-                $image_html = '<div style="padding-bottom:20px;text-align:center;">'.$this->Image->getTag().'</div>';
+                $image_html = '<div class="article_full_image">'.$this->Image->getTag().'</div>';
             } else {
-                $image_html = '<div style="float:right;padding:0 10px 10px 25px;">'.$this->Image->CroppedImage(300,200)->getTag().'</div>';
+                $image_html = '<div class="article_cropped_image">'.$this->Image->CroppedImage(300,200)->getTag().'</div>';
             }
 
             return $image_html;
