@@ -170,6 +170,11 @@ final class GoogleSiteMapGenerator
 
     public function Entries()
     {
+        $member = Member::currentUser();
+        if($member){
+            $member->logOut();
+        }
+
         $list = new ArrayList();
         //first check registered_data objects
         if (class_exists('Translatable')) {
