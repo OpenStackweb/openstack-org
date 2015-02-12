@@ -2633,7 +2633,7 @@ li.voting-rate-single {
     border-right: 1px solid #D4DCE5;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px; }
-  li.voting-rate-single:hover {
+  li.voting-rate-single:hover, li.current-vote {
     background: #29abe2; }
   li.voting-rate-single a {
     text-transform: uppercase;
@@ -2644,7 +2644,7 @@ li.voting-rate-single {
     position: relative;
     padding: 10px 0;
     width: 100%; }
-    li.voting-rate-single a:hover {
+    li.voting-rate-single a:hover, li.current-vote a, li.current-vote .voting-shortcut {
       color: white;
       text-decoration: none;
       font-weight: 600; }
