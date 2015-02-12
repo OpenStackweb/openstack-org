@@ -42,5 +42,7 @@ jQuery(document).ready(function($) {
         errorPlacement: jqueryValidatorErrorPlacement
     });
 
-    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyYourOrganizationForm_Form_Industry'),$('#OtherIndustry'))
+    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyYourOrganizationForm_Form_Industry'), $('#OtherIndustry'));
+
+    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyYourOrganizationForm_Form_Industry'), $('#ITActivity'), 'Information Technology');
 });

@@ -264,7 +264,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         // Look for an existing survey
         if ($CurrentUserID = Member::currentUserID()) {
             // look for a deployment survey for this user
-            $DeploymentSurvey = DeploymentSurvey::get()->filter(array('MemberID'=>$CurrentUserID, 'Created:GreaterThan' => '2015-01-01 00:00:00' ))->first();
+            $DeploymentSurvey = DeploymentSurvey::get()->filter(array('MemberID' => $CurrentUserID, 'Created:GreaterThanOrEqual' => SURVEY_START_DATE ))->first();
 
             if (!$DeploymentSurvey) {
                 // Create a new deployment survey

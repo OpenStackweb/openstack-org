@@ -69,7 +69,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 
             );
             $fields->add($other_hyper = new TextareaField('OtherHypervisor', ''));
-           $other_hyper->addExtraClass('hidden');
+            $other_hyper->addExtraClass('hidden');
         }
 
         $fields->add(

@@ -33,14 +33,14 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
             ),
             new LiteralField('Break', '<hr/>'),
             new TextField('Label', 'Deployment Name<BR><p class="clean_text">Please create a friendly label, like “Production OpenStack Deployment”. This name is for your deployment in our survey tool. If several people at your organization work on one deployment, we would <b>really appreciate</b> you all referring to the same deployment by the same name!</p>'),
-            new DropdownField(
+            $ddl_stage = new DropdownField(
                 'DeploymentStage',
                 'In what stage is your OpenStack deployment? (make a new deployment profile for each type of deployment)',
                 Deployment::$stage_options
             ),
             new MultiDropdownField('CountriesPhysicalLocation','In which country / countries is this OpenStack deployment physically located?',$CountryCodes),
             new MultiDropdownField('CountriesUsersLocation','In which country / countries are the users / customers for this deployment physically located?',$CountryCodes),
-            new DropdownField('DeploymentType', 'Deployment Type', Deployment::$deployment_type_options),
+            $ddl_type = new DropdownField('DeploymentType', 'Deployment Type', Deployment::$deployment_type_options),
             new CustomCheckboxSetField('ProjectsUsed', 'Projects Used', Deployment::$projects_used_options),
             new CustomCheckboxSetField('CurrentReleases', 'What releases are you currently using?', Deployment::$current_release_options),
             new LiteralField('Break','Describe the workloads and frameworks running in this OpenStack environment.<BR>Select All That Apply'),
@@ -59,8 +59,8 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
         $other_service_workload->addExtraClass('hidden');
         $other_enterprise_workload->addExtraClass('hidden');
         $other_horizontal_workload->addExtraClass('hidden');
-
-
+        $ddl_type->setEmptyString('-- Select One --');
+        $ddl_stage->setEmptyString('-- Select One --');
 
         $actions = new FieldList(
             $saveButton, $nextButton

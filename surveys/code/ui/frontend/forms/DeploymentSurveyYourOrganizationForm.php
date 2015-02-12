@@ -50,7 +50,7 @@ class DeploymentSurveyYourOrganizationForm extends Form {
                 ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('' => '-- Please Select One --'), array('Other' => 'Other Industry (please specify)') )
             ),
             new TextareaField('OtherIndustry', 'Other Industry'),
-            $org_it_activity = new TextField('ITActivity', 'Your Organization’s Primary IT Activity'),
+            $org_it_activity = new TextareaField('ITActivity', 'Your Organization’s Primary IT Activity'),
             new LiteralField('Break', '<hr/>'),
             new LiteralField('Break', '<p>Your Organization’s Primary Location or Headquarters</p>'),
             new DropdownField(
