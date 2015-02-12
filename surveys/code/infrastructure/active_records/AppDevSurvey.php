@@ -45,6 +45,18 @@ class AppDevSurvey extends DataObject {
 	static $singular_name = 'App Development Survey';
 	static $plural_name = 'App Development Surveys';
 
+	static $summary_fields = array(
+		'Member.FirstName' => 'Member First Name',
+		'Member.Surname' => 'Member Surname',
+		'Member.Email' => 'Email',
+	);
+
+	static $searchable_fields = array(
+		'Member.FirstName'=> 'PartialMatchFilter',
+		'Member.Surname'=> 'PartialMatchFilter',
+		'Member.Email'=> 'PartialMatchFilter',
+	);
+
 	public function getCountry() {
         return $this->DeploymentSurvey()->PrimaryCountry;
     }
@@ -145,4 +157,56 @@ class AppDevSurvey extends DataObject {
         'API Quick Start – just the essentials for a fast start ' => 'API Quick Start – just the essentials for a fast start',
         'Other' => 'Other (please specify)'
     );
+
+
+
+	function getCMSFields()
+	{
+		$fields = new FieldList(
+			$rootTab = new TabSet("Root")
+		);
+
+		$fields->addFieldsToTab('Root.Main', array(
+			new LiteralField('Break', ColumnFormatter::$left_column_start),
+			new CustomCheckboxSetField(
+				'Toolkits',
+				'What toolkits do you use or plan to use to interact with the OpenStack API?<BR>Select All That Apply',
+				ArrayUtils::AlphaSort(AppDevSurvey::$toolkits_options, null, array('Other' => 'Other Toolkits (please specify)'))),
+			$t1 = new TextareaField('OtherToolkits', ''),
+
+			new LiteralField('Break', ColumnFormatter::$right_column_start),
+			new CustomCheckboxSetField('ProgrammingLanguages',
+				'If you wrote your own code for interacting with the OpenStack API, what programming language did you write it in?',
+				ArrayUtils::AlphaSort(AppDevSurvey::$languages_options, null, array('Other' => 'Other (please specify)'))),
+			$t2 = new TextareaField('OtherProgrammingLanguages', ''),
+
+			new LiteralField('Break', ColumnFormatter::$end_columns),
+
+			new LiteralField('Break', ColumnFormatter::$left_column_start),
+			new CustomCheckboxSetField('APIFormats',
+				'If you wrote your own code for interacting with the OpenStack API, what wire format are you using?<BR>Select All That Apply',
+				ArrayUtils::AlphaSort(AppDevSurvey::$api_format_options, null, array('Other' => 'Other Wire Format (please specify)'))),
+			$t3 = new TextareaField('OtherAPIFormats', ''),
+			new CustomCheckboxSetField(
+				'OperatingSystems',
+				'What operating systems are you using or plan on using to develop your applications?<BR>Select All That Apply',
+				ArrayUtils::AlphaSort(AppDevSurvey::$opsys_options, null, array('Other' => 'Other Development OS (please specify)'))),
+			$t4 = new TextareaField('OtherOperatingSystems', ''),
+			new CustomCheckboxSetField(
+				'GuestOperatingSystems',
+				'What guest operating systems are you using or plan on using to deploy your applications to customers?<BR>Select All That Apply',ArrayUtils::AlphaSort(AppDevSurvey::$opsys_options, null, array('Other' => 'Other Development OS (please specify)'))),
+			$t5 = new TextareaField('OtherGuestOperatingSystems', ''),
+			new LiteralField('Break', '<hr/>'),
+			new LiteralField('Break', '<p>Please share your thoughts with us on the state of applications on OpenStack</p>'),
+			new TextAreaField('StruggleDevelopmentDeploying', 'What do you struggle with when developing or deploying applications on OpenStack?'),
+			$docs = new DropdownField(
+				'DocsPriority',
+				'What is your top priority in evaluating API and SDK docs?', AppDevSurvey::$docs_priority_options),
+			$t6 = new TextareaField('OtherDocsPriority', '')
+		));
+
+		$docs->setEmptyString('-- Select One --');
+
+		return $fields;
+	}
 }

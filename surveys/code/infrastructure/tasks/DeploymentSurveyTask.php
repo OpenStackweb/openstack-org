@@ -86,7 +86,7 @@ final class DeploymentSurveyTask extends CliController {
 		if($send == true){
 			//echo $body;
 			global $email_new_deployment;
-			$email = EmailFactory::getInstance()->getInstance()->buildEmail($email_new_deployment, $email_new_deployment, 'New Deployments and Surveys', $body);
+			$email = EmailFactory::getInstance()->buildEmail($email_new_deployment, $email_new_deployment, 'New Deployments and Surveys', $body);
 			$email->send();
 		}
 	}

@@ -60,17 +60,21 @@ class DeploymentSurvey extends DataObject
 	);
 
 	static $summary_fields = array(
-		'Title' => 'Title',
+		'Created' => 'Created Date',
 		'Member.FirstName' => 'Member First Name',
 		'Member.Surname' => 'Member Surname',
+		'Member.Email' => 'Email',
 		'Org.Name' => 'Organization'
+
 	);
 
 	static $searchable_fields = array(
-		'Title' => 'PartialMatchFilter',
+		'Created' => 'ExactMatchFilter',
 		'Org.Name' => 'PartialMatchFilter',
+		'Member.FirstName'=> 'PartialMatchFilter',
+		'Member.Surname'=> 'PartialMatchFilter',
+		'Member.Email'=> 'PartialMatchFilter',
 	);
-
 
 	static $defaults = array(
 		"CurrentStep" => 'AboutYou',
@@ -183,58 +187,84 @@ class DeploymentSurvey extends DataObject
 
 		$CountryCodes = CountryCodes::$iso_3166_countryCodes;
 
-		$member = $this->Member();
-		$fields->addFieldsToTab('Root.Main',
+
+		$fields->addFieldsToTab('Root.About You',
 			array(
-				$user_name_txt = new ReadonlyField('UserName', 'User', $member->getFullName()),
-
-				new DropdownField('OrgID',
-					'Organization',
-					Org::get()->sort('Org.Name', 'ASC')->map("ID", "Name", "-- Please choose an Organization --")),
-				new ReadonlyField('FirstName', 'First Name'),
-				new ReadonlyField('Surname', 'Last Name'),
-
-				new DropdownField(
-					'Industry',
-					'Industry',
-					ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('unspecified' => '-- Please Select One --'), array('Other' => 'Other (please specify)'))
-				),
-				new TextField('OtherIndustry', 'Other Industry'),
-				new DropdownField(
-					'OrgSize',
-					'Organization Size',
-					DeploymentSurvey::$organization_size_options
-				),
-				new LiteralField('Break', '<p>Where is the primary location or headquarters of your organization?</p>'),
-				new TextField('PrimaryCity', 'City'),
-				new TextField('PrimaryState', 'State/Province'),
-				new DropdownField(
-					'PrimaryCountry',
-					'Country',
-					$CountryCodes
-				),
-				new TextField('Title', 'Your Job Title'),
-				new CheckboxSetField('OpenStackInvolvement', 'What best describes your involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options)),
-				new CheckboxSetField('InformationSources', 'Where do you go for information about using OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other (please specify)'))),
-				new TextField('OtherInformationSources', 'Other information sources'),
-				new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee can communicate with me in the future about my usage'),
-				new LiteralField('Break', '<p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights.</p>'),
-				new TextAreaField('FurtherEnhancement', 'What areas of OpenStack software require further enhancement? (optional)'),
-				new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year? (optional)'),
-				new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack? (optional)'),
-				new CheckboxSetField(
-					'BusinessDrivers',
-					'What are your business drivers for using OpenStack? (optional)',
-					ArrayUtils::AlphaSort(DeploymentSurvey::$business_drivers_options, null, array('Other' => 'Other (please specify)'))),
-				new TextField('OtherBusinessDrivers', 'Other business drivers'),
-				new DropdownField(
-					'OpenStackRecommendRate',
-					'How likely is it that you would recommend OpenStack to a friend or colleague? (10 being the best)',
-					DeploymentSurvey::$openstack_recommendation_rate_options
-				),
-				new TextareaField('OpenStackRecommendation', 'Are there any additional comments you would pass as part of this recommendation?')
+				$first_name_field = new ReadonlyField('FirstName', 'First name / Given name'),
+				$last_name_field  = new ReadonlyField('Surname', 'Last name / Family name'),
+				$os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurvey::$activities_options),
+				$os_relationship        = new TextAreaField('OpenStackRelationship', 'Please describe your relationship with OpenStack'),
+				$email_field      = new ReadonlyField('Email', 'Your Email'),
+				$ok_2_contact           = new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee may communicate with me in the future about my usage.')
 			));
-		$user_name_txt->setReadonly(true);
+
+		$fields->addFieldsToTab('Root.Your Organization', array(
+			new ReadonlyField('Org.Name', 'Organization', $this->Org()->Name),
+			new DropdownField(
+				'Industry',
+				'Your Organization’s Primary Industry',
+				ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('' => '-- Please Select One --'), array('Other' => 'Other Industry (please specify)') )
+			),
+			new TextareaField('OtherIndustry', 'Other Industry'),
+			$org_it_activity = new TextField('ITActivity', 'Your Organization’s Primary IT Activity'),
+			new LiteralField('Break', '<p>Your Organization’s Primary Location or Headquarters</p>'),
+			new DropdownField(
+				'PrimaryCountry',
+				'Country',
+				$CountryCodes
+			),
+			new TextField('PrimaryState', 'State / Province / Region'),
+			new TextField('PrimaryCity', 'City'),
+			new DropdownField(
+				'OrgSize',
+				'Your Organization Size (All Branches, Locations, Sites)',
+				DeploymentSurvey::$organization_size_options
+			),
+			new CustomCheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options))
+		));
+
+
+		$fields->addFieldsToTab('Root.Your Thoughts', array(
+			new CustomCheckboxSetField(
+				'BusinessDrivers',
+				'What are your top business drivers for using OpenStack?<BR>Please rank up to 5.<BR>1 = top business driver, 2 = next, 3 = third, and so on<BR>Select At Least One',
+				ArrayUtils::AlphaSort(DeploymentSurvey::$business_drivers_options,null, array('Other' => 'Something else not listed here (please specify)'))),
+			new TextAreaField('OtherBusinessDrivers', ''),
+			new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))),
+			new TextAreaField('OtherInformationSources', ''),
+			new DropdownField(
+				'OpenStackRecommendRate',
+				'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',
+				DeploymentSurvey::$openstack_recommendation_rate_options),
+			new LiteralField('Break', '<hr/>'),
+			new LiteralField('Break', '<p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights.</p>'),
+			new LiteralField('Break', '<p>Your responses are anonymous, and each of these text fields is independent, so we cannot “See previous answer”. We would really appreciate a separate answer to each question.</p>'),
+			new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack, besides “free” and “open”?'),
+			new TextAreaField('FurtherEnhancement', 'What areas of OpenStack require further enhancement? '),
+			new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?')
+		));
+
+
+		$app_config = new GridFieldConfig_RecordEditor();
+
+		$apps = new GridField("AppDevSurveys", "AppDevSurveys", $this->AppDevSurveys(), $app_config);
+		$fields->addFieldsToTab('Root.Application Development', array(
+			$apps
+		));
+
+		$deployments_config = new GridFieldConfig_RecordEditor();
+
+		$deployments = new GridField("Deployments", "Deployments", $this->Deployments(), $deployments_config);
+
+		$fields->addFieldsToTab('Root.Deployments', array(
+			$deployments
+		));
+
+		$first_name_field->setReadonly(true);
+		$last_name_field->setReadonly(true);
+		$email_field->setReadonly(true);
+
+
 		return $fields;
 	}
 
