@@ -19,7 +19,10 @@ window.onresize = function(event) {
 
 function resizeDiv() {
 	vph = $('.voting-content-body-wrapper').height()-80;
-	$(".presentation-list").css({"height": vph + "px"});
+    
+    if(vph > 0) {
+	   $(".presentation-list").css({"height": vph + "px"});
+    }
 }
 
 
