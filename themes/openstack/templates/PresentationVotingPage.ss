@@ -171,7 +171,7 @@
 				<h5>Login to vote</h5>
                 <div class="login-to-vote">
                     <h3>Help this presentation get to the OpenStack Summit!</h3>
-                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit, November 3-7, in Paris, France. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
+                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit, May 18-22, in Vancouver, Canada. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
                     $Top.SpeakerVotingLoginForm
                 </div>
 			
