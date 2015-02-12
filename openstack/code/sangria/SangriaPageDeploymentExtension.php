@@ -28,6 +28,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
+            'ViewDeploymentSurveysPerRegion',
             'ViewUsersPerRegion'));
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
@@ -38,6 +39,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
+            'ViewDeploymentSurveysPerRegion',
             'ViewUsersPerRegion'));
     }
 
@@ -626,6 +628,112 @@ WHERE CC.ContinentID =  {$continent_id} GROUP BY CC.CountryCode; ");
 SELECT COUNT(*) from Deployment D
 INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID
 INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry")->value();
+    }
+
+    // deployment surveys per region
+    function ViewDeploymentSurveysPerRegion(){
+
+        $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
+        $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
+        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
+
+        if(!empty($continent)){
+            $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();
+            $result = array(
+                'continent' => $continent ,
+                'continent_name' => $continent_name
+            );
+            Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.viewdeploymentscontinent.js');
+            return $this->owner->getViewer('ViewDeploymentSurveysPerContinent')->process($this->owner->customise($result));
+        }
+
+        if(!empty($country)){
+            $continent = DB::query("SELECT ContinentID from Continent_Countries where CountryCode = '{$country}';")->value();
+            $count     = DB::query("SELECT COUNT(*) FROM DeploymentSurvey DS WHERE DS.PrimaryCountry = '{$country}';")->value();
+            $result = array(
+                'country'      => $country ,
+                'country_name' => CountryCodes::$iso_3166_countryCodes[$country],
+                'continent'    => $continent,
+                'count'        => $count
+            );
+            Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.viewdeploymentscountry.js');
+            return $this->owner->getViewer('ViewDeploymentSurveysPerCountry')->process($this->owner->customise($result));
+        }
+
+        Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.viewdeploymentsregion.js');
+        return $this->owner->getViewer('ViewDeploymentSurveysPerRegion')->process($this->owner);
+    }
+
+    function DeploymentSurveysPerContinent(){
+        $list = new ArrayList();
+        $records = DB::query('SELECT COUNT(DS.ID) AS DeploymentsQty, C.ID AS ContinentID, C.Name AS Continent FROM DeploymentSurvey DS
+INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry
+INNER JOIN Continent C ON C.ID = CC.ContinentID
+GROUP BY C.Name, C.ID;');
+        foreach($records as $record){
+            $count            = $record['DeploymentsQty'];
+            $continent        = $record['Continent'];
+            $continent_id     = $record['ContinentID'];
+            $do = new DataObject();
+            $do->count        = $count;
+            $do->continent    = $continent;
+            $do->continent_id = $continent_id;
+            $list->push($do);
+        }
+        return $list;
+    }
+
+    function DeploymentSurveysPerCountry($country){
+        $list = new ArrayList();
+        $deployments = DB::query("SELECT DS.* from DeploymentSurvey DS WHERE DS.PrimaryCountry = '{$country}' ; ");
+        foreach($deployments as $deployment) {
+            // concept: new Deployment($deployment)
+            $list->push(new $deployment['ClassName']($deployment));
+        }
+        return $list;
+    }
+
+    function DeploymentSurveysPerContinentCountry($continent_id){
+
+        $list = new ArrayList();
+        $countries = DB::query("SELECT COUNT(DS.ID) AS Qty, DS.PrimaryCountry FROM DeploymentSurvey DS WHERE PrimaryCountry
+IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_id}) group BY PrimaryCountry;");
+        foreach($countries as $country) {
+            $count = $country['Qty'];
+            $country = $country['PrimaryCountry'];
+            if(isset(CountryCodes::$iso_3166_countryCodes[$country])) {
+                $do = new DataObject();
+                $do->count = $count;
+                $do->country = $country;
+                $do->country_name = CountryCodes::$iso_3166_countryCodes[$country];
+                $list->push($do);
+            }
+        }
+        return $list;
+    }
+
+    function CountriesWithDeploymentSurveys($continent_id){
+        $list = new ArrayList();
+        $countries = DB::query("SELECT  CC.CountryCode, COUNT(CC.CountryCode) AS Qty from Continent_Countries CC INNER JOIN DeploymentSurvey DS ON DS.PrimaryCountry = CC.CountryCode
+        WHERE CC.ContinentID =  {$continent_id} GROUP BY CC.CountryCode; ");
+        foreach($countries as $country) {
+            // concept: new Deployment($deployment)
+            $do = new DataObject();
+            $do->country        = $country['CountryCode'];
+            $do->country_name   = CountryCodes::$iso_3166_countryCodes[$do->country];
+            $do->count          = $country['Qty'];
+            $list->push($do);
+        }
+        return $list;
+    }
+
+    function DeploymentSurveyCount(){
+        return DB::query("SELECT COUNT(*) FROM DeploymentSurvey DS INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry")->value();
     }
 
     // user per region
