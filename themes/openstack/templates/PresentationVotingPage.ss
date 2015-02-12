@@ -222,7 +222,7 @@
                                     <img class="voting-speaker-pic" src="{$Photo.SetRatioSize(80,80).URL}" />
                                     <div class="voting-speaker-name">
                                         $FirstName $Surname
-                                        <span>$Title</span>
+                                        <% if $Title %><span>$Title</span><% else %><span>&nbsp;</span><% end_if %>
                                     </div>
                                 </li>                              
                               <% end_loop %>
