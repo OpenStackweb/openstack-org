@@ -40,7 +40,7 @@ final class NewsRequestForm extends HoneyPotForm {
         $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
         $UpdatedField->addExtraClass('inline');
         //optional fields
-        $BodyField = new HtmlEditorField('body','Body (3500 character max)','',$maxLength = 3500);
+        $BodyField = new HtmlEditorField('body','Body');
         $LinkField = new TextField('link','Link');
 
 		$DocumentField = new CustomUploadField('Document', 'Document');
