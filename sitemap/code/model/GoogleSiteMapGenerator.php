@@ -193,6 +193,7 @@ final class GoogleSiteMapGenerator
                 if ($obj instanceof ErrorPage) continue;
                 if ($obj instanceof SiteTree && (!$obj->canIncludeInGoogleSiteMap() || !$obj->canView())) continue;
                 $url = $template->buildUrl($obj);
+                if(!$url) continue;
                 $change_freq = $obj->hasMethod('getChangeFrequency')? $obj->getChangeFrequency() : false;
                 if (!$change_freq) $change_freq = $template->change_freq;
                 $priority = $obj->hasMethod('getGooglePriority')? $obj->getGooglePriority() : false;
