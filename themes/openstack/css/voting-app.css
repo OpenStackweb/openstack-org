@@ -2585,6 +2585,7 @@ img.voting-speaker-pic {
   border-bottom: 1px solid #D4DCE5;
   margin: 40px 0;
   padding: 20px 0;
+  width: 100%;
   float: left; }
   .main-speaker-wrapper .voting-speaker-name {
     font-size: 20px; }

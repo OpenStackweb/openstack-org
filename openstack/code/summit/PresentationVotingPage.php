@@ -346,7 +346,11 @@ class PresentationVotingPage_Controller extends Page_Controller {
 
     // Used as a URL action to display a presentation
     function Presentation() {
+
       $URLSegment = $this->request->param("ID");
+
+      //set headers to NOT cache a page
+      header("Cache-Control: no-cache, max-age=0, must-revalidate, no-store"); //HTTP 1.1
 
       if($URLSegment == 'none') {
         $this->redirect($this->Link().'Done');
