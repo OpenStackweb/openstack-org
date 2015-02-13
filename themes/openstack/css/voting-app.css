@@ -2625,6 +2625,7 @@ li.voting-rate-single {
   -webkit-font-smoothing: subpixel-antialiased;
   border: 1px solid #D4DCE5;
   border-right: 0;
+  float:left;
   position: relative; }
   li.voting-rate-single:first-child {
     border-top-left-radius: 4px;
