@@ -131,7 +131,7 @@ class DeploymentSurvey extends DataObject
 	public static $openstack_involvement_options = array(
 		'Service Provider' => 'OpenStack cloud service provider - provides public or hosted private cloud services for other organizations',
 		'Ecosystem Vendor' => 'Ecosystem vendor - provides software or solutions that enable others to build or run OpenStack clouds',
-		'Cloud operator' => 'Private cloud operator - runs an OpenStack private cloud for their own organization',
+		'Cloud operator' => 'Private cloud operator - Runs an OpenStack private cloud for your own organization',
 		'Cloud Consumer' => 'Consumer of an OpenStack cloud - has API or dashboard credentials for one or more OpenStack resource pools, including an <strong>Application Developer<strong>'
 	);
 

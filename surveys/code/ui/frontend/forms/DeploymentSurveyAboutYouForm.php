@@ -26,18 +26,18 @@ class DeploymentSurveyAboutYouForm extends Form {
         $current_user = Member::currentUser();
 
         $fields = new FieldList (
-            $this->first_name_field = new ReadonlyField('FirstName', 'First name / Given name', $current_user->FirstName),
-            $this->last_name_field  = new ReadonlyField('Surname', 'Last name / Family name', $current_user->Surname),
+            $this->first_name_field = new TextField('FirstName', 'First name / Given name', $current_user->FirstName),
+            $this->last_name_field  = new TextField('Surname', 'Last name / Family name', $current_user->Surname),
             $os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurvey::$activities_options),
             $os_relationship        = new TextAreaField('OpenStackRelationship', 'Please describe your relationship with OpenStack'),
-            $this->email_field      = new ReadonlyField('Email', 'Your Email', $current_user->Email),
+            $this->email_field      = new TextField('Email', 'Your Email', $current_user->Email),
             $ok_2_contact           = new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee may communicate with me in the future about my usage.')
         );
 
         $os_relationship->addExtraClass('hidden');
         $os_relationship->setColumns(30);
         $ok_2_contact->setValue(0);
-
+        $this->email_field->setDisabled(true);
         $nextButton = new FormAction('NextStep', '  Next Step  ');
 
         $actions = new FieldList(
