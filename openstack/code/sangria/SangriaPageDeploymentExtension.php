@@ -25,6 +25,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'DeploymentDetails',
+            'DeploymentSurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -36,6 +37,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'DeploymentDetails',
+            'DeploymentSurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -58,6 +60,23 @@ final class SangriaPageDeploymentExtension extends Extension
                     "BackUrl"      => $back_url
                 )
             )->renderWith(array('SangriaPage_DeploymentDetails', 'SangriaPage', 'SangriaPage'));
+        }
+        return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
+    }
+
+    function DeploymentSurveyDetails()
+    {
+        $params = $this->owner->request->allParams();
+        $deployment_id = intval(Convert::raw2sql($params["ID"]));;
+        $deployment = DeploymentSurvey::get()->byID($deployment_id);
+        if ($deployment) {
+            $back_url = $this->owner->request->getVar('BackUrl');
+
+            return $this->owner->Customise(
+                array("Deployment" => $deployment,
+                    "BackUrl"      => $back_url
+                )
+            )->renderWith(array('SangriaPage_DeploymentSurveyDetails', 'SangriaPage', 'SangriaPage'));
         }
         return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
     }
@@ -692,7 +711,7 @@ GROUP BY C.Name, C.ID;');
         $list = new ArrayList();
         $deployments = DB::query("SELECT DS.* from DeploymentSurvey DS WHERE DS.PrimaryCountry = '{$country}' ; ");
         foreach($deployments as $deployment) {
-            // concept: new Deployment($deployment)
+            // concept: new DeploymentSurvey($deployment)
             $list->push(new $deployment['ClassName']($deployment));
         }
         return $list;
