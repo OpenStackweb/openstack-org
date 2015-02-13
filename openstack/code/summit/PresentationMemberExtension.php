@@ -20,7 +20,7 @@ class PresentationMemberExtension extends DataExtension
     private static $has_many = array (
         'Presentations' => 'Presentation',
         'PresentationPriorities' => 'PresentationPriority',
-        'SummitStates' => 'SpeakerSummitState'        
+       // 'SummitStates' => 'SpeakerSummitState'
     );
 
 
