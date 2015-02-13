@@ -96,3 +96,29 @@ GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'News', 
         return array_merge($featured_news, $recent_news, $slide_news);
     });
 
+GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'FeaturedVideo', $change_freq = GoogleSitemapGenerator::CHANGE_FREQ_MONTHLY, $priority = GoogleSitemapGenerator::PRIORITY_0_5, $get_url_function = function($video){
+    $page         = PresentationCategoryPage::get()->filter('ID',$video->PresentationCategoryPageID)->first();
+    if(!$page) return false;
+    $page_url     = $page->Link('featured');
+    $url          = sprintf('%s/%s', $page_url, $video->URLSegment);
+    $url          = Director::absoluteURL($url);
+    return $url;
+},
+
+    function(){
+        $videos = DataObject::get('FeaturedVideo', '`YouTubeID` IS NOT NULL');
+        return $videos;
+    });
+
+GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'Presentation', $change_freq = GoogleSitemapGenerator::CHANGE_FREQ_MONTHLY, $priority = GoogleSitemapGenerator::PRIORITY_0_5, $get_url_function = function($video){
+    $page         = PresentationCategoryPage::get()->filter('ID',$video->PresentationCategoryPageID)->first();
+    if(!$page) return false;
+    $page_url     = $page->Link('presentation');
+    $url          = sprintf('%s/%s', $page_url, $video->URLSegment);
+    $url          = Director::absoluteURL($url);
+    return $url;
+},
+function(){
+    $videos = DataObject::get('Presentation', '`YouTubeID` IS NOT NULL', 'StartTime DESC');
+    return $videos;
+});
