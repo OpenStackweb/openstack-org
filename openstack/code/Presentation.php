@@ -40,7 +40,8 @@ class Presentation extends DataObject
 
 	static $has_one = array(
 		'PresentationCategoryPage' => 'PresentationCategoryPage',
-		'Summit' => 'Summit'
+		'Summit' => 'Summit',
+		'Member' => 'Member',
 	);
 
 	static $has_many = array(
