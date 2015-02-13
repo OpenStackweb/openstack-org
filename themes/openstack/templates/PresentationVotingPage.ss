@@ -219,7 +219,7 @@
 						<ul>
                               <% loop Speakers %>
                                 <li>
-                                    <img class="voting-speaker-pic" src="{$Photo.SetRatioSize(80,80).URL}" />
+                                    <img class="voting-speaker-pic" src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>" />
                                     <div class="voting-speaker-name">
                                         $FirstName $Surname
                                         <% if $Title %><span>$Title</span><% else %><span>&nbsp;</span><% end_if %>
@@ -243,7 +243,7 @@
 								$FirstName $Surname
 								<span>$Title</span>
 							</div>
-							<img class="voting-speaker-pic" src="{$Photo.SetRatioSize(80,80).URL}" />
+                            <img class="voting-speaker-pic" src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>" />
 						</div>
 						<div class="main-speaker-description">
 							$Bio
