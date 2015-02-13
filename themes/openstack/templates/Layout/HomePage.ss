@@ -118,7 +118,7 @@ x    <!-- News Section -->
                     $UpcomingEvents(20)
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
-                    <h2>News <!-- <a href="#">See All <i class="fa fa-caret-right"></i></a> --></h2>
+                    <h2>News <a href="/news">See More News <i class="fa fa-caret-right"></i></h2>
                     <a href="http://www.openstack.org/enterprise/auto/"><img class="news-ad" src="/themes/openstack/images/auto-banner.jpg"></a>
                     
                        <% loop NewsItems %>
@@ -129,7 +129,7 @@ x    <!-- News Section -->
                                 </div>
                                 <div class="event-details">
                                     <div class="news-title">$title</div>
-                                    <div class="news-date">$pubDate</div>
+                                    <div class="news-date">$pubdate</div>
                                 </div>
                                 <div class="right-event">
                                     <div class="right-arrow"><i class="fa fa-chevron-right"></i></div>

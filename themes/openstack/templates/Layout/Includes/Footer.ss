@@ -8,6 +8,7 @@
                         <li><a href="http://openstack.org/projects/openstack-security/">OpenStack Security</a></li>
                         <li><a href="http://openstack.org/projects/openstack-faq/">Common Questions</a></li>
                         <li><a href="http://openstack.org/blog/">Blog</a></li>
+                        <li><a href="http://openstack.org/news/">News</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-sm-2">
