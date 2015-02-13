@@ -15,7 +15,6 @@
 class CountryCodes {
 
 	public static $iso_3166_countryCodes = array(
-		'unspecified' => "-- Please Select --",
 		'AF' => "Afghanistan",
 		'AX' => "Aland Islands",
 		'AL' => "Albania",

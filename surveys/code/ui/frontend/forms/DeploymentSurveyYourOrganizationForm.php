@@ -40,7 +40,6 @@ class DeploymentSurveyYourOrganizationForm extends Form {
                 $org_field = new TextField('Organization', 'Your Organization Name', $current_user->getOrgName());
             }
         }
-        $CountryCodes = CountryCodes::$iso_3166_countryCodes;
 
         $fields = new FieldList (
             $org_field,
@@ -53,10 +52,11 @@ class DeploymentSurveyYourOrganizationForm extends Form {
             $org_it_activity = new TextareaField('ITActivity', 'Your Organization’s Primary IT Activity'),
             new LiteralField('Break', '<hr/>'),
             new LiteralField('Break', '<p>Your Organization’s Primary Location or Headquarters</p>'),
-            new DropdownField(
+            $country = new DropdownField(
                 'PrimaryCountry',
                 'Country',
-                $CountryCodes
+                CountryCodes::$iso_3166_countryCodes
+                
             ),
             new TextField('PrimaryState', 'State / Province / Region'),
             new TextField('PrimaryCity', 'City'),
@@ -69,6 +69,7 @@ class DeploymentSurveyYourOrganizationForm extends Form {
         );
 
         $org_it_activity->addExtraClass('hidden');
+        $country->setEmptyString('-- Select One --');
 
         $nextButton = new FormAction('NextStep', '  Next Step  ');
 

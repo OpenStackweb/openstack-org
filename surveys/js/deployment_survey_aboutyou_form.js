@@ -26,8 +26,6 @@ jQuery(document).ready(function($) {
             'OpenStackActivity[]' : {required: true }
 
         },
-        onfocusout: false,
-        focusCleanup: true,
         ignore: [],
         invalidHandler: jqueryValidatorInvalidHandler,
         errorPlacement: jqueryValidatorErrorPlacement

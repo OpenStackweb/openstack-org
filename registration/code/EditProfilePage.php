@@ -500,6 +500,7 @@ class EditProfilePage_Controller extends Page_Controller
                 $State[$i]->addExtraClass('state');
 
                 $Country[$i] = new DropdownField('Country[' . $i . ']', $dto->getCountry(), CountryCodes::$iso_3166_countryCodes, $dto->getCountry());
+                $Country[$i]->setEmptyString('-- Select One --');
                 $Country[$i]->addExtraClass('country');
 
                 $LinkS[$i] = new TextField('LinkS[' . $i . ']', "Link", $dto->getLink());
@@ -521,6 +522,7 @@ class EditProfilePage_Controller extends Page_Controller
             $State->addExtraClass('state');
 
             $Country = new DropdownField('Country[]', 'Country', CountryCodes::$iso_3166_countryCodes);
+            $Country->setEmptyString('-- Select One --');
             $Country->addExtraClass('country');
 
             $StartDate = new TextField('StartDate[]', "Start Date");

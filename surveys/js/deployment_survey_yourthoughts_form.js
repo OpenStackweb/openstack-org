@@ -23,8 +23,6 @@ jQuery(document).ready(function($) {
             'BusinessDrivers[]'  : {required: true },
             'InformationSources[]'  : {required: true }
         },
-        onfocusout: false,
-        focusCleanup: true,
         ignore: [],
         invalidHandler: jqueryValidatorInvalidHandler,
         errorPlacement: jqueryValidatorErrorPlacement

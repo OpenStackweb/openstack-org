@@ -208,7 +208,7 @@ class DeploymentSurvey extends DataObject
 			new TextareaField('OtherIndustry', 'Other Industry'),
 			$org_it_activity = new TextField('ITActivity', 'Your Organization’s Primary IT Activity'),
 			new LiteralField('Break', '<p>Your Organization’s Primary Location or Headquarters</p>'),
-			new DropdownField(
+			$ddl_country = new DropdownField(
 				'PrimaryCountry',
 				'Country',
 				$CountryCodes
@@ -223,6 +223,7 @@ class DeploymentSurvey extends DataObject
 			new CustomCheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options))
 		));
 
+		$ddl_country->setEmptyString('-- Select One --');
 
 		$fields->addFieldsToTab('Root.Your Thoughts', array(
 			new CustomCheckboxSetField(

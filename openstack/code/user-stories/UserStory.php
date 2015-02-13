@@ -77,13 +77,15 @@ class UserStory extends Page
 					'Deployment Type',
 					Deployment::$deployment_type_options
 				),
-				new DropdownField(
+				$ddl_country = new DropdownField(
 					'PrimaryCountry',
 					'Country',
 					$CountryCodes
 				),
 			)
 		);
+
+		$ddl_country->setEmptyString('-- Select One --');
 
 		$fields->addFieldsToTab('Root.CaseStudy',
 
