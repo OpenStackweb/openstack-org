@@ -22,7 +22,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		//madatory fields
 		$HeadlineField = new TextField('headline','Headline (150 character max)','',$maxLength = 150);
         $HeadlineField->addExtraClass('headline');
-		$SummaryField = new HtmlEditorField('summary','Summary (350 character max)','',$maxLength = 350);
+		$SummaryField = new HtmlEditorField('summary','Summary (350 character max)');
         $SummaryField->addExtraClass('summary');
         $CityField = new TextField('city','City');
         $StateField = new TextField('state','State');
