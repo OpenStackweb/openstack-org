@@ -26,8 +26,7 @@ final class NewsValidationFactory
 		$rules = array(
 			'headline'              => 'required|text|max:150',
 			'date'                  => 'required|date',
-            'summary'               => 'required|htmltext|max:350',
-            'body'                  => 'htmltext|max:3500',
+			'summary'               => 'required|htmltext|max:350',
 			'tags'                  => 'required|text',
 			//'date_embargo'        => 'required|date',
 			'submitter_first_name'  => 'required|text',
@@ -45,8 +44,6 @@ final class NewsValidationFactory
 			'summary.required'              => ':attribute is required',
 			'summary.htmltext'              => ':attribute should be valid text.',
             'summary.max'                   => ':attribute should have less than 350 chars.',
-            'body.htmltext'                 => ':attribute should be valid text.',
-            'body.max'                      => ':attribute should have less than 3500 chars.',
 			'tags.required'                 => ':attribute is required',
 			'tags.text'                     => ':attribute should be valid text.',
 			//'date_embargo.required'       => ':attribute is required',
@@ -87,8 +84,6 @@ final class NewsValidationFactory
             'summary.required'         => ':attribute is required',
             'summary.htmltext'         => ':attribute should be valid text.',
             'summary.max'              => ':attribute should have less than 350 chars.',
-            'body.htmltext'            => ':attribute should be valid text.',
-            'body.max'                 => ':attribute should have less than 3500 chars.',
             'tags.required'            => ':attribute is required',
             'tags.text'                => ':attribute should be valid text.',
         );
