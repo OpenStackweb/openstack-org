@@ -19,6 +19,8 @@ jQuery(document).ready(function($) {
         autoFill: true
     });
 
+    $.validator.setDefaults({ ignore: ":hidden:not(select)" })
+
     $('#DeploymentSurveyYourOrganizationForm_Form_PrimaryCountry').chosen();
 
     setStep('yourorganization');
@@ -35,8 +37,6 @@ jQuery(document).ready(function($) {
             'PrimaryCity': {required: true },
             'OpenStackInvolvement[]': {required: true }
         },
-        onfocusout: false,
-        focusCleanup: true,
         ignore: [],
         invalidHandler: jqueryValidatorInvalidHandler,
         errorPlacement: jqueryValidatorErrorPlacement

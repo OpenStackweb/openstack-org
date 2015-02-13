@@ -19,8 +19,6 @@ jQuery(document).ready(function($) {
     form_validator = form.validate({
         rules: {
         },
-        onfocusout: false,
-        focusCleanup: true,
         ignore: [],
         invalidHandler: jqueryValidatorInvalidHandler,
         errorPlacement: jqueryValidatorErrorPlacement

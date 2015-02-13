@@ -30,8 +30,6 @@
                 'CountriesPhysicalLocation': {required: true },
                 'CountriesUsersLocation': {required: true }
             },
-            onfocusout: false,
-            focusCleanup: true,
             ignore: [],
             invalidHandler: jqueryValidatorInvalidHandler,
             errorPlacement: jqueryValidatorErrorPlacement

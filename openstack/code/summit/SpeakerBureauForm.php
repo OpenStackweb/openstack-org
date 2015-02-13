@@ -34,6 +34,7 @@ class SpeakerBureauForm extends HoneyPotForm {
       // Country Field
       $CountryCodes = CountryCodes::$iso_3166_countryCodes;
       $CountryField = new DropdownField('Country', 'Country', $CountryCodes);
+      $CountryField->setEmptyString('-- Select One --');
       $CountryField->setValue($country);
 
       $ExpertiseField = new TextareaField('Expertise', 'My Areas of Expertise (one per line)');

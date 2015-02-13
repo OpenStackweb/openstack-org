@@ -189,8 +189,8 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/prototype/prototype.js');
         Requirements::block(SAPPHIRE_DIR . '/javascript/prototype_improvements.js');
 
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
         Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
         Requirements::javascript('surveys/js/deployment_survey_navigation.js');

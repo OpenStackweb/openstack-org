@@ -36,8 +36,6 @@ jQuery(document).ready(function($) {
             'SwiftGlobalDistributionFeatures': {required : true},
             'ToolsUsedForYourUsers': {required : true}
         },
-        onfocusout: false,
-        focusCleanup: true,
         ignore: [],
         invalidHandler: jqueryValidatorInvalidHandler,
         errorPlacement: jqueryValidatorErrorPlacement

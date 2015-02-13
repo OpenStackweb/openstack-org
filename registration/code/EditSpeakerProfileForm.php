@@ -63,6 +63,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         // Country Field
         $CountryCodes = CountryCodes::$iso_3166_countryCodes;
         $CountryField = new DropdownField('Country', 'Country', $CountryCodes);
+        $CountryField->setEmptyString('-- Select One --');
         $CountryField->setValue($country);
 
         $ExpertiseField = new TextareaField('Expertise', 'Topics of interest (one per line)');
