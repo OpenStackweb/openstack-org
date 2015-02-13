@@ -137,15 +137,18 @@ class HomePage_Controller extends Page_Controller {
         // format array
         foreach ($all_news as $item) {
             $art_link = 'news/view/'.$item->ID.'/'.$item->HeadlineForUrl;
-            $return_array->push(array('type'=>'Openstack','link'=>$art_link,'title'=>$item->Headline,'pubdate'=>$item->Date));
+            $return_array->push(array('type'=>'News','link'=>$art_link,'title'=>$item->Headline,
+                                      'pubdate'=>date('D, M jS Y',strtotime($item->Date)),'timestamp'=>strtotime($item->Date)));
         }
 
         $rss_news = $this->RssItems($limit)->toArray();
         foreach ($rss_news as $item) {
-            $return_array->push(array('type'=>'Planet','link'=>$item->link,'title'=>$item->title,'pubdate'=>$item->pubdate));
+            $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
+            $return_array->push(array('type'=>'Planet','link'=>$item->link,'title'=>$item->title,
+                                      'pubdate'=>$item->pubDate, 'timestamp'=>$date_obj->getTimestamp()));
         }
 
-        return $return_array;
+        return $return_array->sort('timestamp','DESC');
     }
 
 	function PastEvents($num=1) {
