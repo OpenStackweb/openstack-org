@@ -50,7 +50,8 @@ class SummitPage_Controller extends Page_Controller {
 
 
 	public function CurrentSummit() {
-		$summit = Summit::get_active();        
+		$summit = Summit::get_active();
+
 		return $summit->isInDB() ? $summit : false;
 	}
 
@@ -71,8 +72,10 @@ class SummitPage_Controller extends Page_Controller {
 		if($date->InPast()) {
 			return;
 		}
-
-		$days = str_pad(explode(' ',$date->TimeDiffIn('days'))[0], 3, '0', STR_PAD_LEFT);
+        
+        $exploded_date = explode(' ',$date->TimeDiffIn('days'),3);
+        
+		$days = str_pad($exploded_date[0], 3, '0', STR_PAD_LEFT);
 		$list = ArrayList::create();
 
 		foreach(str_split($days) as $digit) {
