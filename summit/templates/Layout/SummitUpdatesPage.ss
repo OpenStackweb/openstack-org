@@ -43,7 +43,7 @@
 				<% end_if %>
 				<div class="section">
 					<h5 class="section-title">Code of Conduct</h5>
-					Please review the <a href="/code-of-conduct">OpenStack Code of Conduct</a>, which applies to all events and community forums, including the OpenStack Summit.
+					Please review the <a href="{$Parent.Link}code-of-conduct">OpenStack Code of Conduct</a>, which applies to all events and community forums, including the OpenStack Summit.
 				</div>
 			</div>
 

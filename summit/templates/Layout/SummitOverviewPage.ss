@@ -105,7 +105,7 @@
                 <div class="growth-text-top">
                     <h2>Join The Movement</h2>
                     <p>
-                        In 2010, 75 people met in Austin, Texas for the very first OpenStack summit. Four years later, almost 5,000 attendees joined us in Paris for our second international summit and the first OpenStack Summit held in Europe.
+                        In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Four years later, almost 5,000 attendees joined us in Paris for our second international summit and the first OpenStack Summit held in Europe.
                     </p>
                     <img class="growth-chart-legend" src="/summit/images//line-growth-legend.svg" onerror="this.onerror=null; this.src=/images/line-growth-legend.png" alt="OpenStack Summit Growth Legend">
                 </div>
@@ -117,7 +117,7 @@
                         The OpenStack summit is a unique opportunity for the developers and users of OpenStack software to meet and exchange ideas. Hundreds of the core developers will be on site to discuss all things OpenStack. Summits include in-depth technical discussions, hands-on workshops, and the full presence of almost every player in the OpenStack Ecosystem. If you are deploying OpenStack—or considering how it can help your enterprise—there’s no better way to connect with the community than the OpenStack Summit.
                     </p>
                     <p>
-                        <a href="https://www.eventbrite.com/e/openstack-summit-may-2015-vancouver-tickets-14992221137">Register For Summit Vancouver ></a>
+                        <a href="https://www.eventbrite.com/e/openstack-summit-may-2015-vancouver-tickets-14992221137">Register For The Vancouver Summit ></a>
                     </p>
                 </div>
             </div>

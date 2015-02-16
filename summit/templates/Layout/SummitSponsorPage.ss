@@ -206,7 +206,7 @@
 			<div class="col-lg-8 col-lg-push-2">
 				<h1>Audience</h1>
 				<p class="audience-intro">
-					The Summit has experienced tremendous growth since it's inception, we're most proud of the diverse audience reached at each one. Here's a quick look at the audience who attended Paris Summit in November 2014.
+					The Summit has experienced tremendous growth since its inception, and we're proud of the diverse audience reached at each one. Here's a quick look at the audience who attended Paris Summit in November 2014.
 				</p>
 			</div>
 		</div>
