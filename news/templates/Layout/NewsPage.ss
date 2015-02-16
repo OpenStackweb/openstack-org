@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-12">
             <h2>Recent News</h2>
-            <% loop  RecentNews %>
+            <% loop RecentNews %>
                 <div class="recentBox">
                     <div class="recentHeadline">
                         <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>

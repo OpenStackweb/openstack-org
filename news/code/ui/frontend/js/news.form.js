@@ -18,15 +18,12 @@ jQuery(document).ready(function($){
     if(form.length > 0){
 
         $('#NewsRequestForm_NewsRequestForm_date').datetimepicker({
-            minDate: 0
         });
 
         $('#NewsRequestForm_NewsRequestForm_date_embargo').datetimepicker({
-            minDate: 0
         });
 
         $('#NewsRequestForm_NewsRequestForm_date_expire').datetimepicker({
-            minDate: 0
         });
 
         //main form validation
