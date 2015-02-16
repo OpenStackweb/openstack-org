@@ -55,8 +55,8 @@ final class NewsPage_Controller extends Page_Controller {
     public function index(){
 
         $featured_news = $this->news_repository->getFeaturedNews();
-        $recent_news = $this->news_repository->getRecentNews();
-        $slide_news = $this->news_repository->getSlideNews();
+        $recent_news   = $this->news_repository->getRecentNews();
+        $slide_news    = $this->news_repository->getSlideNews();
 
         return $this->renderWith(array('NewsPage','Page'), array('FeaturedNews' => new ArrayList($featured_news),
                                                                  'RecentNews' => new ArrayList($recent_news),
