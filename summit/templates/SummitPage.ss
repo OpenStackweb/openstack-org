@@ -139,47 +139,7 @@
                 <ul class="sidebar-menu">
                     <!-- Microsite Navigation -->
 
-<ul class="nav nav-tabs">
-
-    
-    
-    <li class="">
-        <a href="/about-the-summit/">About The Summit</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/details-and-updates/">Details & Updates</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/about-vancouver/">About Vancouver</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/sponsors/">Sponsoring</a>
-    </li>
-
-    
-    
-        
-    
-    <li class="">
-        <a href="/speakers/">Speakers</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/faq/">FAQ</a>
-    </li>
-
-</ul>
+                <% include SummitNav %>
 
 <!-- End Microsite Navigation -->
                 </ul>
