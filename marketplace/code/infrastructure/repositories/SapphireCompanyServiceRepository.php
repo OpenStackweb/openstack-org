@@ -70,7 +70,7 @@ abstract class SapphireCompanyServiceRepository
 	public function getActivesByList($list)	{
 		$order = "'".implode( "' , '", explode(', ',$list)). "'";
 		$class = $this->entity_class;
-		$ds           = $class::get()->filter('Active',1)->where("ID IN ({$list})")->sort("FIELD(ID, {$order})");
+		$ds           = $class::get()->filter('Active',1)->where("CompanyService.ID IN ({$list})")->sort("FIELD(CompanyService.ID, {$order})");
 		$res          = is_null($ds)?array():$ds->toArray();
 		return $res;
 	}
