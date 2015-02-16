@@ -3,7 +3,7 @@
     	<div class="row">
     		<div class="col-lg-12 col-md-12 col-sm-12">
                 <a href="/">
-                    <img class="tokyo-landing-logo" src="/images/summit-logo.svg" onerror="this.onerror=null; this.src=/images/summit-logo.png" alt="OpenStack Summit Tokyo Fall 2015">
+                    <img class="tokyo-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png" alt="OpenStack Summit Tokyo Fall 2015">
                 </a>
                 <div class="save-the-date">
                     Save The Date!
@@ -29,7 +29,7 @@
                     <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://openstack.org/summit/tokyo2015&title=OpenStack Summit Tokyo Fall 2015&summary=The Fall 2015 OpenStack Summit will be in Tokyo, Japan" target="_blank" class="social-icons landing-linkedin"></a>
                 </div>
                 <div>
-                    <a href="/" class="btn register-btn-lrg">Go To Main Summit Site</a>
+                    <a href="/summit/" class="btn register-btn-lrg">Go To Main Summit Site</a>
                 </div>
             </div>
         </div>
