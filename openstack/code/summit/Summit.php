@@ -18,10 +18,17 @@ class Summit extends DataObject {
 		'Location' => 'Varchar(255)',
 		'StartDate' => 'Date',
 		'EndDate' => 'Date',
+		'SummitBeginDate' => 'Date',
+		'SummitEndDate' => 'Date',        
 		'AcceptSubmissionsStartDate' => 'Date',
 		'AcceptSubmissionsEndDate' => 'Date',
 		'VoteForSubmissionsStartDate' => 'Date',
 		'VoteForSubmissionsEndDate' => 'Date',
+		'DateLabel' => 'Varchar',
+        'Link' => 'Varchar',
+        'RegistrationLink' => 'Text',
+
+		'Active' => 'Boolean'        
 	);
 	
 	static $has_many = array(
@@ -31,6 +38,31 @@ class Summit extends DataObject {
 		'TimeSlots' => 'SummitTimeSlot',
 		'SummitCategories' => 'SummitCategory'
 	);
+    
+	public static function get_active() {
+		$summit = Summit::get()->filter(array(
+			'Active' => true
+		))->first();
+
+		return $summit ?: Summit::create();
+	}
+
+	public function checkRange($key) {
+		$beginField = "{$key}BeginDate";
+		$endField = "{$key}EndDate";
+
+		if(!$this->hasField($beginField) || !$this->hasField($endField)) return false;
+
+		return (time() > $this->obj($beginField)->format('U')) && (time() < $this->obj($endField)->format('U'));
+	}
+
+
+	public function getStatus() {
+		if(!$this->Active) return "INACTIVE";
+
+		return "DRAFT";
+	}
+    
 
 	function TalksByMemberID($memberID) {
 

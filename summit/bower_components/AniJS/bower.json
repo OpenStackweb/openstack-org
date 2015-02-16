@@ -1,0 +1,23 @@
+{
+  "name": "AniJS",
+  "version": "0.8.1",
+  "homepage": "http://anijs.github.io/",
+  "description": "UI interaction Library for Web Designers in plain English.",
+  "main": "dist/anijs-min.js",
+  "keywords": [
+    "declarative",
+    "animation",
+    "css",
+    "javascript"
+  ],
+  "authors": [
+    "Dariel Noel <darielnoel@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
