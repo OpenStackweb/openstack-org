@@ -66,7 +66,7 @@
             
             <% with $NextSummit %>
             <div class="col-lg-3 col-md-3 col-sm-3 small-single-summit">
-                <a href="//www.openstack.org/summit/tokyo-2015" class="single-summit future-summit">
+                <a href="/summit/tokyo-2015/" class="single-summit future-summit">
                     <h2>Tokyo</h2>
                     <h4>Get Ready</h4>
                 </a>
