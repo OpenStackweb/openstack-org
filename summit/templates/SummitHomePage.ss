@@ -71,7 +71,7 @@
                     <h4>Get Ready</h4>
                 </a>
                 <div class="single-summit-date future">
-                    Fall 2015
+                    October 2015
                     <div class="date-circle"></div>
                 </div>
             </div>
