@@ -20,16 +20,16 @@
                     <li><a href="https://www.eventbrite.com/e/openstack-summit-may-2015-vancouver-tickets-14992221137"><i class="fa fa-shopping-cart"></i>Register for the Summit</a>
                     </li>
                     <% end_if %>
-                    <li><a href="/about-vancouver/#hotels"><i class="fa fa-h-square"></i>Find a Hotel</a>
+                    <li><a href="{$Link}about-vancouver/#hotels"><i class="fa fa-h-square"></i>Find a Hotel</a>
                     </li>
-                    <li><a href="/details-and-updates/"><i class="fa fa-plane"></i>Plan Travel Dates</a>
+                    <li><a href="{$Link}details-and-updates/"><i class="fa fa-plane"></i>Plan Travel Dates</a>
                     </li>
                     <hr>
-                    <li><a href="/sponsors/"><i class="fa fa-tag"></i>Become a Sponsor</a>
+                    <li><a href="{$Link}sponsors/"><i class="fa fa-tag"></i>Become a Sponsor</a>
                     </li>
-                    <li><a href="/speakers/"><i class="fa fa-comment"></i>Vote For Speakers</a>
+                    <li><a href="{$Link}speakers/"><i class="fa fa-comment"></i>Vote For Speakers</a>
                     </li>
-                    <li><a href="/faq/"><i class="fa fa-question"></i>Frequently Asked Questions</a>
+                    <li><a href="{$Link}faq/"><i class="fa fa-question"></i>Frequently Asked Questions</a>
                     </li>
                 </ul>
                 <div class="schedule-square">
