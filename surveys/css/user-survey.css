@@ -124,3 +124,8 @@ textarea.error{
 select.error{
     border: solid 1px red;
 }
+
+.answer_option {
+	cursor: pointer;
+	list-style: circle;
+}

@@ -20,7 +20,7 @@ class EmailValidator {
 		address format and the domain exists.
 		*/
 
-		public function validEmail($email)
+		public static function validEmail($email)
 		{
 		   $isValid = true;
 		   $atIndex = strrpos($email, "@");
