@@ -102,3 +102,7 @@ function jqueryValidatorInvalidHandler(form, validator) {
         validator.errorList[0].element.focus();
     }
 }
+
+jQuery(document).ready(function($) {
+
+});

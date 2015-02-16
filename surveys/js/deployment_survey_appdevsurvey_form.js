@@ -30,5 +30,22 @@ jQuery(document).ready(function($) {
     setCustomValidationRuleForOtherText($('#DeploymentSurveyAppDevSurveyForm_Form_OperatingSystems_Other'), $('#OtherOperatingSystems'));
     setCustomValidationRuleForOtherText($('#DeploymentSurveyAppDevSurveyForm_Form_GuestOperatingSystems_Other'), $('#OtherGuestOperatingSystems'));
     setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyAppDevSurveyForm_Form_DocsPriority'), $('#OtherDocsPriority'));
+
+    var fields = [];
+    fields.push($('#DeploymentSurveyAppDevSurveyForm_Form_Toolkits_Wroteourown'));
+
+    setCustomValidationRuleForDependantQuestion(fields, $('#wrote_your_own_container'), function(chk){
+        if(chk.is(':checked')){
+            $('input[type="checkbox"]','#DeploymentSurveyAppDevSurveyForm_Form_ProgrammingLanguages').rules('add', { required:true});
+            $('input[type="checkbox"]','#DeploymentSurveyAppDevSurveyForm_Form_APIFormats').rules('add', { required:true});
+        }
+        else{
+            $('input[type="checkbox"]','#DeploymentSurveyAppDevSurveyForm_Form_ProgrammingLanguages').rules('remove', 'required');
+            $('input[type="checkbox"]','#DeploymentSurveyAppDevSurveyForm_Form_APIFormats').rules('remove', 'required');
+            $('input[type="checkbox"]','#DeploymentSurveyAppDevSurveyForm_Form_ProgrammingLanguages').attr('checked', false);
+            $('input[type="checkbox"]','#DeploymentSurveyAppDevSurveyForm_Form_APIFormats').attr('checked', false);
+        }
+    });
+
     setStep('appdevsurvey');
 });

@@ -17,6 +17,12 @@
         var form  = $('#DeploymentSurveyDeploymentDetailsForm_Form');
         var form_validator = null;
 
+        $.validator.addMethod("multiselect_chosen", function (value, element) {
+            $(element).trigger("chosen:updated");
+            var count = $(element).find('option:selected').length;
+            return count > 0;
+        },'You must select at least one country.');
+
         form_validator = form.validate({
             rules: {
                 'Label'  : {required: true },
@@ -27,8 +33,8 @@
                 'ServicesDeploymentsWorkloads[]': {required: true },
                 'EnterpriseDeploymentsWorkloads[]': {required: true },
                 'HorizontalWorkloadFrameworks[]': {required: true },
-                'CountriesPhysicalLocation': {required: true },
-                'CountriesUsersLocation': {required: true }
+                'CountriesPhysicalLocation[]': {multiselect_chosen : true},
+                'CountriesUsersLocation[]': {multiselect_chosen : true}
             },
             ignore: [],
             invalidHandler: jqueryValidatorInvalidHandler,
