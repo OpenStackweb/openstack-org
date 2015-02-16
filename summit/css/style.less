@@ -1,0 +1,30 @@
+@import "../bower_components/bootstrap/less/bootstrap.less";
+.presentation-scroll-panel {overflow:auto;border:1px solid red;}
+.row.presentation-list {margin:0;}
+.presentation-list-item {padding: 4px;border-bottom:1px solid #ddd;}
+.presentation-list-item.active {background:#eee;}
+.presentation-list-item.hasVoted {opacity: 0.5}
+
+.speaker-preview {border:1px solid #ddd;}
+.voting-bar {
+	position:fixed; bottom:0px; left: 550px;
+}
+.loading {position:fixed;left:50%;top: 50px;}
+
+.category-select {
+	.btn-group {
+		display:block;
+		> button.btn {width:100%;float:none;}
+	}
+	.dropdown-menu {width:100%;}
+}
+
+.voted-filter {
+	margin:12px 0;
+	.btn-group {
+		width:100%;
+		.btn {
+			width:33%;
+		}		
+	}	
+}

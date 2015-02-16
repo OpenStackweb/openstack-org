@@ -1,0 +1,18 @@
+{
+  "name": "anijs",
+  "version": "0.8.1",
+  "main": "dist/anijs.js",
+  "scripts": [
+    "dist/anijs.js"
+  ],
+  "homepage": "https://github.com/anijs/anijs",
+  "description": "UI interaction Library for Web Designers in plain English.",
+  "authors": [
+    "Dariel Noel Vila Plagado <darielnoel@gmail.com>"
+  ],
+  "keywords": [
+    "animations",
+    "css"
+  ],
+  "license": "MIT"
+}
