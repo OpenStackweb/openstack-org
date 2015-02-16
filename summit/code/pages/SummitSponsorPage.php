@@ -5,17 +5,14 @@ class SummitSponsorPage extends SummitPage {
     private static $db = array (
         'SponsorAlert' => 'HTMLText',
         'SponsorSteps' => 'HTMLText',
-		'SponsorContract' => 'Text'        
+		'SponsorContract' => 'Text',
+		'SponsorProspectus' => 'Text'        
     );    
     
 	private static $has_many = array (
 		'SummitPackages' => 'SummitPackage',
         'SummitAddOns'   => 'SummitAddOn'
 	);    
-
-    private static $has_one = array (
-		'SponsorProspectus' => 'File'
-	);
 
     public function getCMSFields() {
         $fields = parent::getCMSFields();
@@ -47,7 +44,7 @@ class SummitSponsorPage extends SummitPage {
             $gridField = new GridField('SummitAddOn', 'Sponsor Add Ons', $this->SummitAddOns(), $config);
             $fields->addFieldToTab('Root.AddOns',$gridField);
             
-            $prospectusField = new UploadField('SponsorProspectus');
+            $prospectusField = new TextField('SponsorProspectus');
             $fields->addFieldToTab('Root.ProspectusAndContract',$prospectusField);
 
             $contractField = new TextField('SponsorContract');
@@ -84,7 +81,7 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
 	}
     
     public function prospectus() {
-        $ProspectusURL = $this->SponsorProspectus()->Link();
+        $ProspectusURL = $this->SponsorProspectus;
         return Controller::redirect($ProspectusURL);
     }
 
