@@ -35,7 +35,7 @@
 <p>If you don't remember your password, you can have it reset:<br/>
 <a href="https://www.openstack.org/Security/lostpassword">https://www.openstack.org/Security/lostpassword</a></p>
 
-<p>Community voting ends Monday, February 23 at 5pm CT. After the voting concludes, the OpenStack Summit Track Chairs will review all the submissions and make final selections. Then, we’ll send you an email with your status (whether you were selected to present, chosen as an alternate, or not included in this Summit).</p>
+<p><strong>Community voting ends Monday, February 23 at 5pm CT</strong>. After the voting concludes, the OpenStack Summit Track Chairs will review all the submissions and make final selections. Then, we’ll send you an email with your status (whether you were selected to present, chosen as an alternate, or not included in this Summit).</p>
 
 <p>Continue to check <a href="http://www.openstack.org/summit/">http://www.openstack.org/summit/</a> for updates.</p>
 
