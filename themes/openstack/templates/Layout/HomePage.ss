@@ -9,7 +9,7 @@
                         <h1>Help us pick the presentations for the Vancouver Summit</h1>
                     </div>
                     <div class="promo-btn-wrapper">
-                        <a href="/marketplace/" class="promo-btn">Vote for presentations<i class="fa fa-chevron-right"></i></a>
+                        <a href="//www.openstack.org/vote-vancouver/" class="promo-btn">Vote for presentations<i class="fa fa-chevron-right"></i></a>
                     </div>
                     <p class="promo-dates">Session voting ends Monday, February 23 at 5pm CT.</p>
                 </div>
