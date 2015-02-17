@@ -33,6 +33,21 @@ function checkOtherContainerVisibility(chk, question_container, callback){
     }
 }
 
+function checkGroupOtherContainerVisibility(chk_group, question_container, callback){
+    var show = false;
+    $.each(chk_group, function(index , chk){
+        show = show || chk.is(':checked');
+        callback(chk);
+    });
+
+    if (show) {
+        question_container.removeClass('hidden');
+    }
+    else {
+        question_container.addClass('hidden');
+    }
+}
+
 function setCustomValidationRuleForOtherText(chk, question_container){
 
     chk.click(function (e) {
@@ -72,14 +87,12 @@ function setCustomValidationRuleForOtherTextDropdown(ddl, question_container, la
 function setCustomValidationRuleForDependantQuestion(chk_group, question_container, callback){
 
     $.each(chk_group, function(index , chk){
-
         chk.click(function (e) {
-            checkOtherContainerVisibility(jQuery(this), question_container, callback);
+            checkGroupOtherContainerVisibility(chk_group, question_container, callback);
         });
-
-        checkOtherContainerVisibility(chk, question_container, callback);
-
     });
+
+    checkGroupOtherContainerVisibility(chk_group, question_container, callback);
 
 }
 
