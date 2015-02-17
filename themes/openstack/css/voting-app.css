@@ -2758,7 +2758,7 @@ li.voting-rate-single a:hover .voting-shortcut {
   margin-top: 0; }
 
 #SpeakerVotingLoginForm_SpeakerVotingLoginForm fieldset #Remember input.checkbox {
-  margin-left: 0; }
+  /*margin-left: 0;*/ }
 
 #SpeakerVotingLoginForm_SpeakerVotingLoginForm fieldset label {
   padding-top: 0;
