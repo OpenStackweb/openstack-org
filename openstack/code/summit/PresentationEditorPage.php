@@ -545,7 +545,7 @@ class PresentationEditorPage_Controller extends Page_Controller
 				$email = EmailFactory::getInstance()->buildEmail(OS_SUMMIT_PRESENTATION_VOTING_FROM_EMAIL, $To, $Subject);
 				$email->setTemplate("VotingLiveToAdmins");
 				$email->populateTemplate($Talk);
-				$email->send();
+				// $email->send();
 
 				echo 'Email sent to ' . $Talk->Owner()->Email . '<br/>';
 			}
@@ -584,7 +584,7 @@ class PresentationEditorPage_Controller extends Page_Controller
 						$email = EmailFactory::getInstance()->buildEmail(OS_SUMMIT_SPEAKING_SUBMISSION_FROM_EMAIL, $To, $Subject);
 						$email->setTemplate("VotingAnnounceEmail");
 						$email->populateTemplate($Talk);
-						$email->send();
+						// $email->send();
 
 						echo 'Email sent to ' . $Speaker->Member()->Email . '<br/>';
 					}
@@ -601,7 +601,7 @@ class PresentationEditorPage_Controller extends Page_Controller
 					$email = EmailFactory::getInstance()->buildEmail(OS_SUMMIT_SPEAKING_SUBMISSION_FROM_EMAIL, $To, $Subject);
 					$email->setTemplate("VotingAnnounceEmail");
 					$email->populateTemplate($Talk);
-					$email->send();
+					// $email->send();
 
 					$Talk->BeenEmailed = TRUE;
 					$Talk->write();
@@ -1090,7 +1090,20 @@ class PresentationEditorPage_Controller extends Page_Controller
 	function SendFirstEmail()
 	{
 
-		$Talks = Talk::get()->filter(array('SummitID' => 3, 'MarkedToDelete' => 0));
+        $getVars = $this->request->getVars();
+        
+        $talkID = 0;
+		if(isset($getVars["talkid"])) $talkID = intval($getVars["talkid"]);
+        
+		if($talkID != 0) {
+            $Talks = Talk::get()->filter(array('SummitID' => 4, 'MarkedToDelete' => 0, 'ID' => $talkID));
+        } else {
+            $Talks = Talk::get()->filter(array('SummitID' => 4, 'MarkedToDelete' => 0));
+        }
+                        
+        $sendEmail = FALSE;
+		if(isset($getVars["send"])) $sendEmail = intval($getVars["send"]);
+
 
 		echo 'Talks Found: ' . $Talks->count() . '<br/>';
 
@@ -1099,13 +1112,19 @@ class PresentationEditorPage_Controller extends Page_Controller
 			echo 'TALK: ' . $Talk->PresentationTitle . '<br/>';
 
 			$Admin = Member::get()->filter('ID', $Talk->OwnerID)->first();
+            
+			echo 'ADMIN: ' . $Admin->Surname . '<br/>';            
 
 			// Look again at the data object to make sure it wasn't emailed in this loop
 			$AdminNeedsEmailSent = Talk::get()->filter(array('ID' => $Talk->ID, 'BeenEmailed' => 0))->first();
+            
 
 			if ($AdminNeedsEmailSent) {
-				$this->AssembleEmail($Admin);
-			}
+                echo 'ADMIN NEEDS EMAIL SENT: <br/>';            
+				$this->AssembleEmail($Admin, $sendEmail);
+			} else {
+                echo 'NO ADMIN EMAIL NEEDED <br/>';                        
+            }
 
 			$Speakers = $Talk->Speakers('BeenEmailed = FALSE');
 
@@ -1114,8 +1133,8 @@ class PresentationEditorPage_Controller extends Page_Controller
 					// only the speakers who are not also the presentation owner
 					if ($Speaker->MemberID != $Talk->OwnerID) {
 						$Member = $Speaker->Member();
-						echo 'sending a speaker email to ' . $Member->FirstName . ' ' . $Member->Surname . '<br/>';
-						$this->AssembleEmail($Member);
+						echo 'SENDING SPEAKER EMAIL TO ' . $Member->FirstName . ' ' . $Member->Surname . '<br/>';
+						$this->AssembleEmail($Member, $sendEmail);
 					}
 				}
 			}
@@ -1123,14 +1142,14 @@ class PresentationEditorPage_Controller extends Page_Controller
 		}
 	}
 
-	function AssembleEmail($Member)
+	function AssembleEmail($Member, $sendEmail)
 	{
 
 		$SpeakerTalks = NULL;
 
-		$AdminTalks = Talk::get()->filter(array('SummitID' => 3, 'MarkedToDelete' => 0, 'OwnerID' => $Member->ID));
+		$AdminTalks = Talk::get()->filter(array('SummitID' => 4, 'MarkedToDelete' => 0, 'OwnerID' => $Member->ID));
 		$Speaker = Speaker::get()->filter('MemberID', $Member->ID)->first();
-		if ($Speaker) $SpeakerTalks = $Speaker->Talks('SummitID = 3 AND OwnerID !=' . $Member->ID);
+		if ($Speaker) $SpeakerTalks = $Speaker->Talks('SummitID = 4 AND OwnerID !=' . $Member->ID);
 
 		if ($AdminTalks || $SpeakerTalks) {
 			$data['Recipient'] = $Member;
@@ -1152,8 +1171,12 @@ class PresentationEditorPage_Controller extends Page_Controller
 
 			if ($this->validEmail($Member->Email)) {
 				echo $email->debug();
-				$email->send();
-				echo $To . " emailed successfully. <br/>";
+				if ($sendEmail) {
+                    $email->send();
+                    echo $To . " emailed successfully. <br/>";
+                } else {
+				    echo $To . " not emailed in without send paramater set in URL. <br/>";
+                }
 
 				// Set all the admin talks as emailed
 				if ($AdminTalks) {
