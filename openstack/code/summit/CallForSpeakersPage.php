@@ -77,7 +77,7 @@ class CallForSpeakersPage_Controller extends Page_Controller
 
     public function CurrentSummit()
     {
-        return $this->parent()->Summit();
+        return Summit::get()->byID(4);
     }
 
     public function SubmissionDeadline()
@@ -92,7 +92,7 @@ class CallForSpeakersPage_Controller extends Page_Controller
     {
         if ($MemberID = Member::currentUserID()) {
             $this->EmailOnNewTalk();
-            return $this->Parent()->Summit()->TalksByMemberID($MemberID);
+            return Summit::CurrentSummit()->TalksByMemberID($MemberID);
         }
     }
 
