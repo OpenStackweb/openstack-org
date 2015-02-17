@@ -47,12 +47,10 @@ class SapphireRepository extends AbstractEntityRepository
 	 * @param int $id
 	 * @return IEntity
 	 */
-	public function getById($id)
-	{
-
-		$class = $this->entity_class;
+	public function getById($id){
+		$class  = $this->entity_class;
 		$entity = $class::get()->byId($id);
-		if ($entity) {
+		if ($entity instanceof IEntity) {
 			UnitOfWork::getInstance()->setToCache($entity);
 			UnitOfWork::getInstance()->scheduleForUpdate($entity);
 		}
@@ -92,7 +90,7 @@ class SapphireRepository extends AbstractEntityRepository
 			$do = $do->sort($query->getOrder());
 		if (is_null($do)) return false;
 		$entity = $do->first();
-		if ($entity) {
+		if ($entity instanceof IEntity) {
 			UnitOfWork::getInstance()->setToCache($entity);
 			UnitOfWork::getInstance()->scheduleForUpdate($entity);
 		}

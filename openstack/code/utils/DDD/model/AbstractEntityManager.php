@@ -44,9 +44,7 @@ abstract class AbstractEntityManager {
 	}
 
 	public function getById($id){
-		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('ID',(int)$id));
-		return $this->repository->get($query);
+		return $this->repository->getById($id);
 	}
 
 	/**

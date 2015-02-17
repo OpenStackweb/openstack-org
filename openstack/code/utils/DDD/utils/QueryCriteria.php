@@ -20,18 +20,21 @@ final class QueryCriteria {
 	private $operator;
 	private $value;
 	private $quoted;
+	private $is_explicit_id;
 
 	/**
-	 * @param string $field
-	 * @param string $operator
-	 * @param object $value
+	 * @param      $field
+	 * @param      $operator
+	 * @param      $value
 	 * @param bool $quoted
+	 * @param bool $is_explicit_id
 	 */
-	private function __construct($field,$operator,$value, $quoted = true){
-		$this->field    = $field;
-		$this->operator = $operator;
-		$this->value    = $value;
-		$this->quoted   = $quoted;
+	private function __construct($field,$operator,$value, $quoted = true, $is_explicit_id = false){
+		$this->field          = $field;
+		$this->operator       = $operator;
+		$this->value          = $value;
+		$this->quoted         = $quoted;
+		$this->is_explicit_id = $is_explicit_id;
 	}
 
 	public function getField(){
@@ -48,6 +51,10 @@ final class QueryCriteria {
 
 	public static function equal($field,$value,$quoted = true){
 		return new QueryCriteria($field,'=',$value,$quoted);
+	}
+
+	public static function id($field, $value){
+		return new QueryCriteria($field,'=',$value, true, true);
 	}
 
 	public static function notEqual($field,$value,$quoted = true){
@@ -82,7 +89,7 @@ final class QueryCriteria {
 	{
 		$field = $this->field;
 
-		if(strpos($field,'ID')>0)
+		if(!$this->is_explicit_id && strpos($field,'ID') > 0 )
 			$field = str_replace('.','',$field);
 
 		if(strpos($field,'.')){
