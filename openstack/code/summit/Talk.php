@@ -127,7 +127,7 @@ class Talk extends DataObject {
 	//Test whether the URLSegment exists already on another Video
     function LookForExistingURLSegment($URLSegment)
     {
-        return Company::get()->filter(array('URLSegment' => $URLSegment,'ID:not' => $this->ID))->first();
+        return Talk::get()->filter(array('URLSegment' => $URLSegment,'ID:not' => $this->ID))->first();
     }
 
     // Pull video thumbnail from YouTube API
