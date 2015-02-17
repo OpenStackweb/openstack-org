@@ -15,7 +15,7 @@ class CallForSpeakersForm extends HoneyPotForm {
  
    function __construct($controller, $name) {
 
-      $CurrentSummitID = $controller->parent()->Summit()->ID;
+      $CurrentSummitID = Summit::CurrentSummit()->ID;
       $SummitCategories = SummitCategory::get()->filter('SummitID', $CurrentSummitID);
 
       $SummitCategoriesMap = NULL;
@@ -142,7 +142,7 @@ class CallForSpeakersForm extends HoneyPotForm {
                {
                   $SpeakerSubmission = new Talk();
                   $SpeakerSubmission->OwnerID = Member::currentUser()->ID;
-                  $SpeakerSubmission->SummitID = $this->controller()->parent()->Summit()->ID;
+                  $SpeakerSubmission->SummitID = Summit::CurrentSummit()->ID;
 
                   // Hide talks if requested in the URL
                   if(Session::get('HiddenTalk') == 1) $SpeakerSubmission->MarkedToDelete = TRUE;
@@ -154,7 +154,7 @@ class CallForSpeakersForm extends HoneyPotForm {
             }
 
 			if(isset($data['Topic'])){
-				$category = SummitCategory::get()->filter( array( 'SummitID' => $this->controller()->parent()->Summit()->ID, 'Name'=>$data['Topic']))->first();
+				$category = SummitCategory::get()->filter( array( 'SummitID' => Summit::CurrentSummit()->ID, 'Name'=>$data['Topic']))->first();
 				if($category)
 					$SpeakerSubmission->SummitCategoryID = $category->ID;
 			}
