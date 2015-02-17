@@ -2499,12 +2499,16 @@ a.voting-btn {
   background: #E0E8F2;
   padding: 30px;
   margin-bottom: 110px;
-  float: left; }
+  float: left; 
+}
 
 @media (max-width: 767px) {
   .voting-content-body-wrapper {
-    margin: 0 20px 120px 20px;
-    padding: 10px; } }
+    margin: 0 1% 120px 1%;
+    padding: 10px; 
+    max-width: 98%;
+  } 
+}
 
 .voting-content-body {
   background: white;
