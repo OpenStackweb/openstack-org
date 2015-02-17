@@ -2535,14 +2535,12 @@ a.voting-btn {
   margin: 10px 0 30px;
   padding: 0; 
   max-width: 100%;
-  float: left;
 }
   .voting-speaker-row ul {
     margin: 0;
     padding: 0;
     font-size: 0; 
     max-width: 100%;
-    float: left;
   }
     .voting-speaker-row ul li {
       list-style: none;
@@ -2556,7 +2554,6 @@ a.voting-btn {
       padding: 20px 10px;
       margin: 0 -1px -1px 0;
       border-collapse: separate; 
-      float: left;
     }
 
 .speaker-wrapper {
