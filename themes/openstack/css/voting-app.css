@@ -2513,7 +2513,9 @@ a.voting-btn {
   border: 1px solid #D4DCE5;
   border-radius: 4px;
   float: left;
-  position: relative; }
+  position: relative; 
+  max-width: 100%;
+}
   .voting-content-body h5 {
     color: #9DA2A9;
     text-transform: uppercase;
