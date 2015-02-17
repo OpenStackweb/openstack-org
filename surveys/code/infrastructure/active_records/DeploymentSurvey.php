@@ -155,9 +155,9 @@ class DeploymentSurvey extends DataObject
 	public static $business_drivers_options = array(
 		'Save money over alternative infrastructure choices' => 'Save money over alternative infrastructure choices',
         'Increase operational efficiency' => 'Increase operational efficiency',
-        'Accelerate my organization’s ability to innovate and compete by deploying applications faster' => 'Accelerate my organization’s ability to innovate and compete by deploying applications faster',
-        'Avoid vendor lock-in with an open platform and ecosystem, including flexibility of underlying technology choices' => 'Avoid vendor lock-in with an open platform and ecosystem, including flexibility of underlying technology choices',
-        'Attract top technical talent by participating in an active, global technology community' => 'Attract top technical talent by participating in an active, global technology community',
+        'Accelerate my organization\’s ability to innovate and compete by deploying applications faster' => 'Accelerate my organization’s ability to innovate and compete by deploying applications faster',
+        'Avoid vendor lock-in with an open platform and ecosystem including flexibility of underlying technology choices' => 'Avoid vendor lock-in with an open platform and ecosystem, including flexibility of underlying technology choices',
+        'Attract top technical talent by participating in an active global technology community' => 'Attract top technical talent by participating in an active, global technology community',
         'Achieve security and/or privacy goals with control of platform' => 'Achieve security and/or privacy goals with control of platform',
         'Standardize on the same open platform and APIs that power a global network of of public and private clouds' => 'Standardize on the same open platform and APIs that power a global network of of public and private clouds',
    );

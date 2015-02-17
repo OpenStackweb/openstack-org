@@ -129,3 +129,33 @@ select.error{
 	cursor: pointer;
 	list-style: circle;
 }
+
+.placeholder{
+	border-radius: 4px;
+	border: 1px solid #d3d3d3;
+	color: #555555;
+	background-color: #d3d3d3;
+	height: 50px;
+}
+
+.ui-sortable-handle {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 45px;
+	padding-top:6px;
+	width: 99%;
+}
+
+.handle { cursor:move; }
+
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+
+ol.ui-sortable li span { position: absolute; margin-left: -1.3em; margin-top: 4px }
+
+ol.ui-sortable li {
+	padding-left: 25px;
+	font-size: 1.2em;
+	padding-top: 10px !important;
+	text-align: left;
+	vertical-align: middle;
+}
