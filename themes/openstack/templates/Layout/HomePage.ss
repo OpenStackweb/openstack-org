@@ -6,12 +6,12 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-sm-12">
                     <div class="intro-message">
-                        <h1>Help us pick the presentations for the Vancouver Summit</h1>
+                        <h1>OpenStack has a true community around it.</h1>
                     </div>
                     <div class="promo-btn-wrapper">
-                        <a href="//www.openstack.org/vote-vancouver/" class="promo-btn">Vote for presentations<i class="fa fa-chevron-right"></i></a>
+                        <a href="/marketplace/" class="promo-btn">See how @WalmartLabs puts 100,000 cores to work <i class="fa fa-chevron-right"></i></a>
                     </div>
-                    <p class="promo-dates">Session voting ends Monday, February 23 at 5pm CT.</p>
+                    <!-- <p class="promo-dates">...we plan to contribute aggressively to the open source community.</p> -->
                 </div>
             </div>
             <div class="hero-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i class="fa fa-info-circle"></i></div>
