@@ -55,7 +55,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
                 }
             }
         }
-        array_push($custom_field, new LiteralField('options','</ol></div></div>'));
+        array_push($custom_field, new LiteralField('options','</ol></div></div></div>'));
         array_push($custom_field, new HiddenField('BusinessDrivers'));
         array_push($custom_field, new HiddenField('OtherBusinessDrivers'));
         $fields = new FieldList (

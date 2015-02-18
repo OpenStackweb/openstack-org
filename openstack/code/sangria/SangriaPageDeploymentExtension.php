@@ -333,7 +333,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function ObjectStorageNumObjectsSummary()
     {
-        return SangriaPage_Controller::generateSelectListSummary("ObjectStorageNumObjects", Deployment::$stoage_objects_options, true);
+        return SangriaPage_Controller::generateSelectListSummary("ObjectStorageNumObjects", Deployment::$storage_objects_options, true);
     }
 
 // Deployment Details

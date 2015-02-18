@@ -146,6 +146,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         'AboutYou',
         'YourOrganization',
         'YourThoughts',
+        'SkipAppDevSurvey',
     );
 
 
@@ -481,6 +482,16 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         $survey->UpdateDate = SS_Datetime::now()->Rfc2822();
         $survey->write();
         $this->redirect($this->Link() . 'ThankYou');
+    }
+
+    function SkipAppDevSurvey()
+    {
+        $survey = $this->GetCurrentSurvey();
+        $survey->CurrentStep = 'Deployments';
+        $survey->HighestStepAllowed = 'Deployments';
+        $survey->UpdateDate = SS_Datetime::now()->Rfc2822();
+        $survey->write();
+        $this->redirect($this->Link() . 'Deployments');
     }
 
     function logout()
