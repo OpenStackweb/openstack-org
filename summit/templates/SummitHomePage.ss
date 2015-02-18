@@ -3,6 +3,7 @@
 
 <head>
     <% include Head %>
+    <% include Analytics %>
 </head>
 
 <body class="summit-landing-body">
@@ -81,6 +82,7 @@
     <hr>
 </div>
     <% include JS %>
+    <% include Quantcast %>
 </body>
 
 </html>

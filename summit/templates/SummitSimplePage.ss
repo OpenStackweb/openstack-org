@@ -3,6 +3,7 @@
 
 <head>
     <% include Head %>    
+    <% include Analytics %>
 </head>
 
 <body>
@@ -148,6 +149,7 @@
             </nav>
         </div>
     </div>
+    <% include Quantcast %>
 </body>
 
 </html>

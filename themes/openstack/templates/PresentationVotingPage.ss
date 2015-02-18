@@ -31,6 +31,7 @@
 
     <!-- Page-specific CSS -->
     
+    <% include Analytics %>
 
 </head>
 
@@ -340,6 +341,7 @@
 
         </div>
     </div>
+    <% include Quantcast %>
 </body>
 
 </html>

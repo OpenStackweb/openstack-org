@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <% include Head %>    
+    <% include Head %>
+    <% include Analytics %>
 </head>
 
 <body>
@@ -153,6 +154,7 @@
             </nav>
         </div>
     </div>
+    <% include Quantcast %>
 </body>
 
 </html>
