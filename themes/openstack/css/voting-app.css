@@ -1592,7 +1592,13 @@ ul.city-nav-list li i {
     display: block;
     margin-top: 5px;
     font-size: 0.8em; }
-
+p.sold-out-hotel {
+    color: $red;
+    font-weight: 700;
+    margin-top: 17px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
 .hotel-block a {
   display: inline-block;
   margin: 10px 12px 0; }
@@ -2482,15 +2488,28 @@ a.voting-btn {
     padding: 10px;
     width: 100%;
     text-transform: uppercase;
-    font-size: 13px; }
+    font-size: 13px; 
+    border: 0;
+  }
     .voting-dropdown .btn:hover {
       background: #A51B1B; }
     .voting-dropdown .btn span.caret {
       margin-left: 30px; }
   .voting-dropdown ul.dropdown-menu {
     right: 0; }
-
-@media (max-width: 980px) {
+@media (min-width: 990px) and (max-width: 1190px) {
+    .voting-dropdown ul.dropdown-menu {
+        width: 125%;
+    }
+}
+@media (min-width: 768px) and (max-width: 989px) {
+    .voting-dropdown ul.dropdown-menu {
+        width: 150%;
+    }
+    .voting-dropdown .btn span.caret {
+        margin-left: 0px; }
+    }
+@media (max-width: 767px) {
   .voting-dropdown .btn span.caret {
     margin-left: 10px; } }
 
@@ -2536,6 +2555,11 @@ a.voting-btn {
   float: left;
   padding-top: 20px;
   width: 100%; }
+.voting-presentation-track {
+    margin-bottom: 10px;
+  float: left;
+  width: 100%; }
+}
 
 .voting-speaker-row {
   margin: 10px 0 30px;
@@ -2570,7 +2594,6 @@ a.voting-btn {
 img.voting-speaker-pic {
   float: left;
   margin-right: 10px;
-  width: 35px;
   max-height: 35px;
   max-width: 25%; }
 
