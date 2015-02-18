@@ -14,4 +14,11 @@ class PresentationPriority extends DataObject
 	);
 
 
+	private static $indexes = array(
+		'Member_Priority' => array(
+			'type' => 'index',
+			'value' => '"MemberID","Priority"'
+		),
+	);
+
 }
