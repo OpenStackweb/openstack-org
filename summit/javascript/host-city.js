@@ -104,31 +104,6 @@ $(window).bind('scroll', function () {
     
     var iconCounter = 0;
     
-    // Add the markers and infowindows to the map
-    for (var i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map,
-        icon : icons[iconCounter],
-        shadow: shadow
-      });
-
-      markers.push(marker);
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-      
-      iconCounter++;
-      // We only have a limited number of possible icon colors, so we may have to restart the counter
-      if(iconCounter >= icons_length){
-        iconCounter = 0;
-      }
-    }
-
     function AutoCenter() {
       //  Create a new viewpoint bound
       var bounds = new google.maps.LatLngBounds();
