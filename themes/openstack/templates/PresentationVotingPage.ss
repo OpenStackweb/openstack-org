@@ -213,6 +213,10 @@
 					<h5>Title</h5>
 					<h3>$PresentationTitle</h3>
 				</div>
+				<div class="voting-presentation-track">
+				    <h5>Track</h5>
+				    <p>$SummitCategory.Name</p>
+				</div>
 				<div class="voting-presentation-body">
 					<h5>Speakers</h5>
                     <% if Speakers %>
