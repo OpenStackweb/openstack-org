@@ -9,7 +9,7 @@
                         <h1>OpenStack has a true community around it.</h1>
                     </div>
                     <div class="promo-btn-wrapper">
-                        <a href="/marketplace/" class="promo-btn">See how @WalmartLabs puts 100,000 cores to work <i class="fa fa-chevron-right"></i></a>
+                        <a href="http://awe.sm/jM31y" class="promo-btn">See how @WalmartLabs puts 100,000 cores to work <i class="fa fa-chevron-right"></i></a>
                     </div>
                     <p class="promo-dates">...we plan to contribute aggressively to the open source community.</p>
                 </div>
