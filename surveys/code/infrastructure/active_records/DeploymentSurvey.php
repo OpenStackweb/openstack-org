@@ -180,6 +180,10 @@ class DeploymentSurvey extends DataObject
 		$this->UpdateDate = SS_Datetime::now()->Rfc2822();
 	}
 
+	function hasAppDevSurveys(){
+		return $this->AppDevSurveys()->count() > 0;
+	}
+
 	function getCMSFields()
 	{
 
@@ -194,7 +198,7 @@ class DeploymentSurvey extends DataObject
 				$last_name_field  = new ReadonlyField('Surname', 'Last name / Family name'),
 				$os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurvey::$activities_options),
 				$os_relationship        = new TextAreaField('OpenStackRelationship', 'Please describe your relationship with OpenStack'),
-				$email_field      = new ReadonlyField('Email', 'Your Email'),
+				$email_field            = new ReadonlyField('Member.Email', 'Your Email', $this->Member()->Email),
 				$ok_2_contact           = new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee may communicate with me in the future about my usage.')
 			));
 

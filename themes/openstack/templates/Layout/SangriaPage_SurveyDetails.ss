@@ -3,29 +3,49 @@
 
 <hr>
 <b>Last Updated:</b>&nbsp;$UpdateDate<br>
+<h2>About You</h2>
 <b>Member:</b>&nbsp;$Member.FirstName, $Member.Surname<br>
 <b>Email:</b>&nbsp;<a href="mailto:$Member.Email">$Member.Email</a><br>
-<b>Title:</b>&nbsp;$Title<br>
-<b>Organization:</b>&nbsp;$Org.Name<br>
-<b>Industry:</b>&nbsp;$Industry<br>
-<b>Other Industry:</b>&nbsp;$OtherIndustry<br>
-<b>Primary City:</b>&nbsp;$PrimaryCity<br>
-<b>Primary State:</b>&nbsp;$PrimaryState<br>
-<b>Primary Country:</b>&nbsp;$PrimaryCountry<br>
-<b>Org. Size:</b>&nbsp;$OrgSize<br>
-<b>OpenStack Involvement:</b>&nbsp;$OpenStackInvolvement<br>
-<b>Information Sources:</b>&nbsp;$InformationSources<br>
-<b>Other Information Sources:</b>&nbsp;$OtherInformationSources<br>
-<b>Further Enhancement:</b>&nbsp;$FurtherEnhancement<br>
-<b>Foundation User Committee Priorities:</b>&nbsp;$FoundationUserCommitteePriorities<br>
-<b>Business Drivers:</b>&nbsp;$BusinessDrivers<br>
-<b>Other Business Drivers:</b>&nbsp;$OtherBusinessDrivers<br>
-<b>What Do You Like Most?:</b>&nbsp;$WhatDoYouLikeMost<br>
+<b>Which of the following do you yourself personally do?</b>&nbsp;$OpenStackActivity<br>
+<b>Your relationship with OpenStack</b>&nbsp;$OpenStackRelationship<br>
+<b>Is Ok To Contact?:</b>&nbsp;<% if OkToContact %>Yes<% else %> No <% end_if %><br>
+<h2>Your Organization</h2>
+<b>Organization</b>&nbsp;$Org.Name<br>
+<b>Your Organization’s Primary Industry</b>&nbsp;$Industry $OtherIndustry<br>
+<% if Industry == 'Information Technology' %>
+<b>Your Organization’s Primary IT Activity</b>&nbsp;$ITActivity<br>
+<% end_if %>
+<b>Your Organization’s Primary Location or Headquarters</b>&nbsp;$PrimaryCountry<br>
+<b>State / Province / Region</b>&nbsp;$PrimaryState<br>
+<b>City</b>&nbsp;$PrimaryCity<br>
+<b>Your Organization Size (All Branches, Locations, Sites)</b>&nbsp;$OrgSize<br>
+<b>What best describes your Organization’s involvement with OpenStack?</b>&nbsp;$OpenStackInvolvement<br><br>
+<h2>Your Thoughts</h2>
+<b>What are your top business drivers for using OpenStack?<BR>Please rank up to 5.<BR>1 = top business driver, 2 = next, 3 = third, and so on</b>&nbsp;$BusinessDrivers $OtherBusinessDrivers<br>
+<b>Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?</b>&nbsp;$InformationSources $OtherInformationSources<br>
+<b>How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)</b>&nbsp;$OpenStackRecommendRate<br>
+<b>What do you like most about OpenStack, besides “free” and “open”?</b>&nbsp;$WhatDoYouLikeMost<br>
+<b>What areas of OpenStack require further enhancement?</b>&nbsp;$FurtherEnhancement<br>
+<b>What should be the priorities for the Foundation and User Committee during the coming year?</b>&nbsp;$FoundationUserCommitteePriorities<br>
+<% if hasAppDevSurveys %>
+<h2>Application Development</h2>
+<% loop AppDevSurveys %>
+<b>What toolkits do you use or plan to use to interact with the OpenStack API?</b>&nbsp;$Toolkits $OtherToolkits<br>
+<b>If you wrote your own code for interacting with the OpenStack API, what programming language did you write it in?</b>&nbsp;$ProgrammingLanguages $OtherProgrammingLanguages<br>
+<b>If you wrote your own code for interacting with the OpenStack API, what wire format are you using?</b>&nbsp;$APIFormats $OtherAPIFormats<br>
+<b>What operating systems are you using or plan on using to develop your applications?</b>&nbsp;$OperatingSystems $OtherOperatingSystems<br>
+<b>What guest operating systems are you using or plan on using to deploy your applications to customers?</b>&nbsp;$GuestOperatingSystems $OtherGuestOperatingSystems<br>
+<b>What do you struggle with when developing or deploying applications on OpenStack?</b>&nbsp;$StruggleDevelopmentDeploying<br>
+<b>What is your top priority in evaluating API and SDK docs?</b>&nbsp;$DocsPriority<br>
+<% end_loop %>
+<% end_if %>
+<br>
+<br>
 <b>Is User Group Member?:</b>&nbsp;<% if UserGroupMember %>True<% else %> False <% end_if %> <br>
 <% if UserGroupMember %>
 <b>User Group Name:</b>&nbsp;$UserGroupName<br>
 <% end_if %>
-<b>Is Ok To Contact?:</b>&nbsp;<% if OkToContact %>Yes<% else %> No <% end_if %> <br>
+
 <% if Deployments %>
 <h3>Deployments</h3>
 <hr>

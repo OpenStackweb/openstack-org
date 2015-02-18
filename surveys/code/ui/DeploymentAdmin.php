@@ -17,27 +17,21 @@
 final class DeploymentAdmin extends ModelAdmin {
     
     public static $managed_models = array(
-        'Deployment',
-        'DeploymentSurvey'
+        'DeploymentSurvey',
+		'Deployment',
     );
 
 	public $showImportForm = false;
     private static $url_segment    = 'deployments';
     private static $menu_title     = 'Deployments';
 
-	/**
-	 * @param string $collection_controller_class Override for controller class
-	 */
-	//public static $collection_controller_class = "DeploymentAdmin_CollectionController";
-}
+	public function getList() {
+		$context = $this->getSearchContext();
+		$params = $this->request->requestVar('q');
+		$list = $context->getResults($params, $sort = array('Created' => 'DESC'));
 
-/**
- * Class DeploymentAdmin_CollectionController
- */
-/*final class DeploymentAdmin_CollectionController extends ModelAdmin_CollectionController{
-	public function CreateForm() {
-		if($this->modelClass==='DeploymentSurvey')
-			return false;
-		return parent::CreateForm();
+		$this->extend('updateList', $list);
+
+		return $list;
 	}
-}*/
+}

@@ -51,7 +51,7 @@ final class SangriaPage_Controller extends Page_Controller {
         Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
 
         self::$default_start_date = date('Y/m/d',strtotime('-1 months')).' 00:00';
-        self::$default_end_date  = date('Y/m/d').' 23:59';
+        self::$default_end_date   = date('Y/m/d').' 23:59';
     }
 
     function providePermissions() {
