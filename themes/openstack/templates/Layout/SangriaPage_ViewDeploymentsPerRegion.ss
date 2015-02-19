@@ -3,7 +3,7 @@
    var countries_with_deployment = [];
 </script>
 <link rel="stylesheet" href="/themes/openstack/css/bootstrap.min.css" type="text/css" media="screen, projection">
-<h2>Deployment Surveys Submitted &mdash; $DeploymentCount total</h2>
+<h2>Deployment Submitted &mdash; $DeploymentCount total</h2>
 <% if DeploymentsPerContinent %>
     <div class="container-fluid">
         <div class="row">

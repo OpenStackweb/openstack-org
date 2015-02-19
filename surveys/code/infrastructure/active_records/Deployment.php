@@ -569,13 +569,13 @@ class Deployment extends DataObject
                 'What packages does this deployment use…?<BR>Select All That Apply',
                 Deployment::$used_packages_options
             ),
-            new LiteralField('Container','<div id="custom_package_reason_container" class="hidden">'),
+
             new CustomCheckboxSetField(
                 'CustomPackagesReason',
-                ' If you have modified packages or have built your own packages, why?<BR>Select All That Apply', Deployment::$custom_package_reason_options
+                'If you have modified packages or have built your own packages, why?<BR>Select All That Apply', Deployment::$custom_package_reason_options
             ),
             $other_custom_reason = new TextareaField('OtherCustomPackagesReason', ''),
-            new LiteralField('Container','</div>'),
+
             new CustomCheckboxSetField('DeploymentTools','What tools are you using to deploy / configure this cluster?<BR>Select All That Apply', Deployment::$deployment_tools_options),
             $other_deployment_tools = new TextareaField('OtherDeploymentTools',''),
             new DropdownField(
@@ -651,12 +651,12 @@ class Deployment extends DataObject
             ),
             $ddl_block_size = new DropdownField(
                 'BlockStorageTotalSize',
-                'f this deployment uses <b>OpenStack Block Storage (Cinder)</b>, what is the size of its block storage?',
+                'If this deployment uses <b>OpenStack Block Storage (Cinder)</b>, what is the size of its block storage?',
                 Deployment::$storage_size_options
             ),
             $ddl_block_size = new DropdownField(
                 'ObjectStorageSize',
-                'f this deployment uses <b>OpenStack Object Storage (Swift)</b>, what is the size of its block storage?',
+                'If this deployment uses <b>OpenStack Object Storage (Swift)</b>, what is the size of its block storage?',
                 Deployment::$storage_size_options
             ),
             $ddl_objects_size = new DropdownField(

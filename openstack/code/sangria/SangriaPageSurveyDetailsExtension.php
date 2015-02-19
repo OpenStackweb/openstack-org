@@ -54,9 +54,17 @@ final class SangriaPageSurveyDetailsExtension  extends Extension {
 		$params     = $this->owner->request->allParams();
 		$survey_id  = intval(Convert::raw2sql($params["ID"]));;
 		$survey = DeploymentSurvey::get()->byID($survey_id);
-		if($survey)
-			return $this->owner->Customise($survey)->renderWith(array('SangriaPage_SurveyDetails','SangriaPage','SangriaPage'));
-		return $this->owner->httpError(404, 'Sorry that Deployment Survey could not be found!.');
+		if($survey) {
+			$back_url = $this->owner->request->getVar('BackUrl');
+			if(empty($back_url))
+				$back_url = '#';
+			return $this->owner->Customise(
+				array("Survey" => $survey,
+					"BackUrl" => $back_url
+				)
+			)->renderWith(array('SangriaPage_SurveyDetails', 'SangriaPage', 'SangriaPage'));
+		}
+		return $this->owner->httpError(404, 'Sorry that survey could not be found!.');
 	}
 
 } 
