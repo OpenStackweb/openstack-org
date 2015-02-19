@@ -13,13 +13,16 @@
 
 jQuery(document).ready(function($) {
 
-    $('#DeploymentSurveyYourOrganizationForm_Form_Organization').autocomplete('/join/register/results', {
-        minChars: 3,
-        selectFirst: true,
-        autoFill: true
-    });
 
-    $.validator.setDefaults({ ignore: ":hidden:not(select)" })
+
+    $.validator.addMethod("ValidNewOrgName", function (value, element, arg) {
+        value = value.trim();
+        var field = arg[0];
+        if(value=='0' && field.val().trim()==='')
+            return false;
+        return true;
+    }, "You Must Specify a New Organization Name!.");
+
 
     $('#DeploymentSurveyYourOrganizationForm_Form_PrimaryCountry').chosen();
 
@@ -45,4 +48,36 @@ jQuery(document).ready(function($) {
     setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyYourOrganizationForm_Form_Industry'), $('#OtherIndustry'));
 
     setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyYourOrganizationForm_Form_Industry'), $('#ITActivity'), 'Information Technology');
+
+
+    var ddl   = $('#DeploymentSurveyYourOrganizationForm_Form_OrgID',form);
+    var input = $('#DeploymentSurveyYourOrganizationForm_Form_Organization',form);
+
+    input.autocomplete('/join/register/results', {
+        minChars: 3,
+        selectFirst: true,
+        autoFill: true
+    });
+
+    if(ddl.length > 0) {
+        var new_org_name = $('.new-org-name',form);
+        new_org_name.hide();
+        ddl.rules('add',{
+            required:true,
+            ValidNewOrgName:[new_org_name]
+        });
+        ddl.change(function(event){
+            var ddl = $(this);
+            if(ddl.val()=='0'){
+                new_org_name.show();
+                form_validator.resetForm();
+            }
+            else{
+                new_org_name.hide();
+            }
+        });
+    }
+    else if(input.length > 0) {
+        input.rules('add',{required:true});
+    }
 });

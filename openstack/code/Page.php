@@ -346,4 +346,11 @@ class Page_Controller extends ContentController {
 	public function EncodedLink() {
 		return urlencode($this->link());
 	}
+
+	public function CurrentUrl(){
+		// Manipulate the URL So we can maintain GET Params from the Search Form
+		$req = Controller::curr()->getRequest(); // get the current http request object
+		$url = $req->getURL(TRUE); // get the url back but with querystr intact.
+		return $url ;
+	}
 }

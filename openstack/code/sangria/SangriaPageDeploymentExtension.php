@@ -25,7 +25,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'DeploymentDetails',
-            'DeploymentSurveyDetails',
+            'SurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -37,7 +37,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'DeploymentDetails',
-            'DeploymentSurveyDetails',
+            'SurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -64,21 +64,22 @@ final class SangriaPageDeploymentExtension extends Extension
         return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
     }
 
-    function DeploymentSurveyDetails()
+    function SurveyDetails()
     {
         $params = $this->owner->request->allParams();
         $deployment_id = intval(Convert::raw2sql($params["ID"]));;
-        $deployment = DeploymentSurvey::get()->byID($deployment_id);
-        if ($deployment) {
+        $survey = DeploymentSurvey::get()->byID($deployment_id);
+        if ($survey) {
             $back_url = $this->owner->request->getVar('BackUrl');
-
+            if(empty($back_url))
+                $back_url = "#";
             return $this->owner->Customise(
-                array("Deployment" => $deployment,
+                array("Survey" => $survey,
                     "BackUrl"      => $back_url
                 )
-            )->renderWith(array('SangriaPage_DeploymentSurveyDetails', 'SangriaPage', 'SangriaPage'));
+            )->renderWith(array('SangriaPage_SurveyDetails', 'SangriaPage', 'SangriaPage'));
         }
-        return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
+        return $this->owner->httpError(404, 'Sorry that Survey could not be found!.');
     }
 
 // Deployment Survey data

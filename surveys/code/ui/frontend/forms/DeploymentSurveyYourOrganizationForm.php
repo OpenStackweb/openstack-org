@@ -18,7 +18,7 @@ class DeploymentSurveyYourOrganizationForm extends Form {
         $org_field = null;
         $current_user = Member::currentUser();
         $current_affiliations = $current_user->getCurrentAffiliations();
-        $org_field_name = 'Organization';
+
         if (!$current_affiliations)
             $org_field = new TextField('Organization', 'Your Organization Name');
         else {
@@ -29,7 +29,6 @@ class DeploymentSurveyYourOrganizationForm extends Form {
                     $source[$org->ID] = $org->Name;
                 }
                 $source['0'] = "-- New One --";
-                $org_field_name = 'OrgID';
                 $ddl = new DropdownField('OrgID', 'Your Organization', $source);
                 $ddl->setEmptyString('-- Select Your Organization --');
                 $org_field = new FieldGroup();

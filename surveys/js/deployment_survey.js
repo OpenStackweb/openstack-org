@@ -97,22 +97,29 @@ function setCustomValidationRuleForDependantQuestion(chk_group, question_contain
 }
 
 function jqueryValidatorErrorPlacement(error, element) {
+    var error_container = null;
     if(element.hasClass('checkbox'))
-        error.appendTo( element.parents('div[class*="checkboxset"]'));
+       error_container = element.parents('div[class*="checkboxset"]');
     if(element.hasClass('text'))
-        error.appendTo(element.parents('div[class*="text"]'));
+        error_container = element.parents('div[class*="text"]');
     if(element.hasClass('dropdown'))
-        error.appendTo(element.parents('div[class*="dropdown"]'));
+        error_container = element.parents('div[class*="dropdown"]');
     if(element.hasClass('textarea'))
-        error.appendTo(element.parents('div[class*="textarea"]'));
+       error_container = element.parents('div[class*="textarea"]');
     if(element.hasClass('multidropdown'))
-        error.appendTo(element.parents('div[class*="multidropdown"]'));
+        error_container = element.parents('div[class*="multidropdown"]');
+    if(error_container.length == 0)
+        error_container = element;
+    error.appendTo(error_container);
 }
 
 function jqueryValidatorInvalidHandler(form, validator) {
     var errors = validator.numberOfInvalids();
     if (errors) {
-        validator.errorList[0].element.focus();
+        var first_error  = $(validator.errorList[0].element);
+        $('html, body').animate({
+            scrollTop: first_error.offset().top
+        }, 2000);
     }
 }
 

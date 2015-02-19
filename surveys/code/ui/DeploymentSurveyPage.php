@@ -331,8 +331,13 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         if ($newIndex > count(DeploymentSurvey::$steps)) $newIndex = count(DeploymentSurvey::$steps);
         $CurrentStep = DeploymentSurvey::$steps[$newIndex];
         Session::set('CurrentStep', $CurrentStep);
-        $survey->CurrentStep = $CurrentStep;
-        $survey->HighestStepAllowed = $CurrentStep;
+        $survey->CurrentStep       = $CurrentStep;
+
+        $DesiredHighestStepIndex    = array_search($survey->CurrentStep, DeploymentSurvey::$steps); // The index of this step in the list
+        $HighestStepAllowedIndex    = array_search($survey->HighestStepAllowed, DeploymentSurvey::$steps); // The index of the highest allowed step in the list
+        if($DesiredHighestStepIndex > $HighestStepAllowedIndex)
+            $survey->HighestStepAllowed = $CurrentStep;
+
         $survey->UpdateDate = SS_Datetime::now()->Rfc2822();
         $survey->write();
         $this->redirect($this->Link() . $CurrentStep);
