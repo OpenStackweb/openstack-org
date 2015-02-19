@@ -130,7 +130,5 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         return $MapScript;
     
     }
->>>>>>> 71ae636... Turned hotels into data objects with sold out option
-
 	
 }
