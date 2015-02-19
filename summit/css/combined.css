@@ -1597,6 +1597,7 @@ ul.city-nav-list li i {
     display: block;
     margin-top: 5px;
     font-size: 0.8em; }
+
 p.sold-out-hotel {
     color: #DA422F;
     font-weight: 700;
@@ -1604,6 +1605,7 @@ p.sold-out-hotel {
     font-size: 1.2em;
     text-transform: uppercase;
 }
+
 .hotel-block a {
   display: inline-block;
   margin: 10px 12px 0; }
