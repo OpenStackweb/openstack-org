@@ -927,7 +927,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		$instance_id = intval($this->request->param('ID'));
 
 		$query = new QueryObject();
-		$query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+		$query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 		Requirements::block("marketplace/code/ui/admin/css/marketplace.admin.css");
 
 		Requirements::block(Director::protocol() . "code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css");
@@ -985,7 +985,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $instance_id = intval($this->request->param('ID'));
 
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
         Requirements::block("marketplace/code/ui/admin/css/marketplace.admin.css");
 
         Requirements::block(Director::protocol() . "code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css");
@@ -1044,7 +1044,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		$instance_id = intval($this->request->param('ID'));
 		$marketplace_type = $this->request->param('MARKETPLACETYPE');
 		$query = new QueryObject();
-		$query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+		$query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 		switch (strtolower($marketplace_type)) {
 			case 'public_cloud': {
 				$cloud = $this->public_clouds_repository->getBy($query);
@@ -1066,7 +1066,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $instance_id = intval($this->request->param('ID'));
         $marketplace_type = $this->request->param('MARKETPLACETYPE');
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
         switch (strtolower($marketplace_type)) {
             case 'public_cloud': {
                 $cloud = $this->public_clouds_draft_repository->getBy($query);
@@ -1089,7 +1089,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $instance_id = intval($this->request->param('ID'));
         $marketplace_type = $this->request->param('MARKETPLACETYPE');
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
         switch (strtolower($marketplace_type)) {
             case 'public_cloud': {
                 $cloud = $this->public_clouds_repository->getBy($query);
@@ -1118,7 +1118,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $instance_id = intval($this->request->param('ID'));
         $marketplace_type = $this->request->param('MARKETPLACETYPE');
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
         switch (strtolower($marketplace_type)) {
             case 'public_cloud': {
                 $cloud = $this->public_clouds_draft_repository->getBy($query);
@@ -1185,7 +1185,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $instance_id = intval($this->request->param('ID'));
         $marketplace_type = $this->request->param('MARKETPLACETYPE');
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
         switch (strtolower($marketplace_type)) {
             case 'public_cloud': {
                 $cloud = $this->public_clouds_repository->getBy($query);
@@ -1206,7 +1206,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		$instance_id = intval($this->request->param('ID'));
 		$marketplace_type = $this->request->param('MARKETPLACETYPE');
 		$query = new QueryObject();
-		$query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+		$query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 		switch (strtolower($marketplace_type)) {
 			case 'public_cloud': {
 				$cloud = $this->public_clouds_draft_repository->getBy($query);
@@ -1226,7 +1226,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
     {
         $instance_id = intval($this->request->param('ID'));
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 
         $consultant = $this->consultant_repository->getBy($query);
 
@@ -1238,7 +1238,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
     {
         $instance_id = intval($this->request->param('ID'));
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 
         $consultant = $this->consultant_draft_repository->getBy($query);
 
@@ -1251,7 +1251,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $static_map_url = "http://maps.googleapis.com/maps/api/staticmap?zoom=1&size=300x200&maptype=roadmap";
         $instance_id = intval($this->request->param('ID'));
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 
         $consultant = $this->consultant_repository->getBy($query);
 
@@ -1270,7 +1270,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $static_map_url = "http://maps.googleapis.com/maps/api/staticmap?zoom=1&size=300x200&maptype=roadmap";
         $instance_id = intval($this->request->param('ID'));
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 
         $consultant = $this->consultant_draft_repository->getBy($query);
 
@@ -1290,7 +1290,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $instance_id = intval($this->request->param('ID'));
         $base = Director::protocolAndHost();
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 
         switch (strtolower($marketplace_type)) {
             case 'distribution': {
@@ -1376,7 +1376,7 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
         $base = Director::baseFolder();
 
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::id('CompanyService.ID', $instance_id));
+        $query->addAddCondition(QueryCriteria::id('ID', $instance_id));
 
         switch (strtolower($marketplace_type)) {
             case 'distribution': {

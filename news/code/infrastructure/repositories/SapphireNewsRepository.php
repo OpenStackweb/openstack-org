@@ -82,7 +82,7 @@ final class SapphireNewsRepository extends SapphireRepository {
     public function getNewsByID($articleID)
     {
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::id('News.ID',$articleID));
+        $query->addAddCondition(QueryCriteria::id('ID',$articleID));
         return $this->getBy($query);
     }
 
