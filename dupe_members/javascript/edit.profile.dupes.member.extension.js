@@ -28,6 +28,7 @@ jQuery(document).ready(function($) {
                         var li = $(this);
                         checkEmptyWarning(li);
                         li.remove();
+                        window.alert('Your request to delete the duplicate account has been sent to the email address on file for that account. If we do not receive a response for the delete request within 48 hours, we will restore the alert until it is dismissed from your account');
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -54,6 +55,7 @@ jQuery(document).ready(function($) {
                         var li = $(this);
                         checkEmptyWarning(li);
                         li.remove();
+                        window.alert('Your request to merge the duplicate account has been sent to the email address on file for that account. If we do not receive a response for the merge request within 48 hours, we will restore the alert until it is dismissed from your account');
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
