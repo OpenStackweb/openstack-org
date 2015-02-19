@@ -4,6 +4,7 @@
 <head>
     <% include Head %>
     <% include Analytics %>
+    $FBTrackingCode
 </head>
 
 <body>
