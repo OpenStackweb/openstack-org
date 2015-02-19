@@ -72,7 +72,7 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         
         // Loop Through All The Locations and add them to the array
         
-        $Locations = $this->Locations();
+        $Locations = $this->Locations()->sort('Order');
         
         foreach ($Locations as $Location) {
             
