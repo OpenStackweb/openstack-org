@@ -23,7 +23,7 @@
 					</p>
 					<p>
 						<a href="#" class="pass-timeline-wrapper" data-toggle="modal" data-target="#passModal">
-							<img class="pass-timeline" src="/summit/images/pass-timeline-small.svg" onerror="this.onerror=null; this.src=/summit/images/pass-timeline-small.png" alt="Vancouver Summit Pass Timeline">
+							<img class="pass-timeline" src="/summit/images/pass-timeline-small2.svg" onerror="this.onerror=null; this.src=/summit/images/pass-timeline-small2.png" alt="Vancouver Summit Pass Timeline">
 						</a>
 					</p>
 				</div>				
@@ -109,7 +109,7 @@
             </p>
             <hr>
             <p>
-            	<img class="pass-timeline-large" src="/summit/images/pass-timeline.svg" onerror="this.onerror=null; this.src=/summit/images/pass-timeline.png" alt="Vancouver Summit Pass Timeline"
+            	<img class="pass-timeline-large" src="/summit/images/pass-timeline2.svg" onerror="this.onerror=null; this.src=/summit/images/pass-timeline2.png" alt="Vancouver Summit Pass Timeline"
             </p>
             <hr>
             <p>
