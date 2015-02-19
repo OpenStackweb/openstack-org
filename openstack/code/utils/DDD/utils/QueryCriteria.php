@@ -20,21 +20,27 @@ final class QueryCriteria {
 	private $operator;
 	private $value;
 	private $quoted;
-	private $is_explicit_id;
+	private $is_id;
+	private $base_entity;
+
 
 	/**
 	 * @param      $field
 	 * @param      $operator
 	 * @param      $value
 	 * @param bool $quoted
-	 * @param bool $is_explicit_id
+	 * @param bool $is_id
 	 */
-	private function __construct($field,$operator,$value, $quoted = true, $is_explicit_id = false){
+	private function __construct($field,$operator,$value, $quoted = true, $is_id = false){
 		$this->field          = $field;
 		$this->operator       = $operator;
 		$this->value          = $value;
 		$this->quoted         = $quoted;
-		$this->is_explicit_id = $is_explicit_id;
+		$this->is_id 		  = $is_id;
+	}
+
+	public function setBaseEntity(IEntity $base_entity){
+		$this->base_entity = $base_entity;
 	}
 
 	public function getField(){
@@ -55,6 +61,10 @@ final class QueryCriteria {
 
 	public static function id($field, $value){
 		return new QueryCriteria($field,'=',$value, true, true);
+	}
+
+	public static function notId($field, $value){
+		return new QueryCriteria($field,'<>',$value, true, true);
 	}
 
 	public static function notEqual($field,$value,$quoted = true){
@@ -89,9 +99,12 @@ final class QueryCriteria {
 	{
 		$field = $this->field;
 
-		if(!$this->is_explicit_id && strpos($field,'ID') > 0 )
+		if(!$this->is_id && strpos($field,'ID') > 0 )
 			$field = str_replace('.','',$field);
-
+		if($this->is_id && strtoupper($field) === 'ID'){
+			$class_name = ClassInfo::baseDataClass($this->base_entity);
+			$field = sprintf('%s.%s',$class_name, 'ID');
+		}
 		if(strpos($field,'.')){
 			$parts = explode('.',$field);
 			$parsed_field = '';

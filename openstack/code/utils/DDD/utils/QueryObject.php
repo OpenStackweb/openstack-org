@@ -26,6 +26,10 @@ final class QueryObject {
 		$this->base_entity = $base_entity;
 	}
 
+	public function setBaseEntity(IEntity $base_entity){
+		$this->base_entity = $base_entity;
+	}
+
 	/**
 	 * @param QueryCriteria $condition
 	 * @return QueryObject
@@ -65,6 +69,7 @@ final class QueryObject {
 		$query = '';
 
 		foreach($this->and_conditions as $condition){
+			$condition->setBaseEntity($this->base_entity);
 			if(!empty($query))
 				$query.= 'AND';
 			if(!is_array($condition))
@@ -87,6 +92,7 @@ final class QueryObject {
 		}
 
 		foreach($this->or_conditions as $condition){
+			$condition->setBaseEntity($this->base_entity);
 			if(!empty($query))
 				$query.= 'OR';
 			$query .= (string)$condition;

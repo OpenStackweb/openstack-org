@@ -82,9 +82,9 @@ class MarketPlaceAdminMember extends DataExtension
 			$groups = $company->getAdminGroupsByMember($this->getIdentifier());
 			if(is_null($groups) || count($groups)==0) continue;
 			if(array_key_exists(ITraining::MarketPlaceGroupSlug, $groups)){
-				$query = new QueryObject;
+				$query = new QueryObject(new TrainingService);
 				$query->addAddCondition(QueryCriteria::equal('ClassName','TrainingService'));
-				$query->addAddCondition(QueryCriteria::id('CompanyService.ID',(int)$training_id));
+				$query->addAddCondition(QueryCriteria::id('ID',(int)$training_id));
 				$training = $company->Services((string)$query);
 				if($training && count($training)>0)
 					return true;

@@ -245,7 +245,7 @@ abstract class CompanyServiceManager {
 		$company_service = $this->tx_manager->transaction(function() use(&$company_service, $this_var, $marketplace_factory, $data, $validator_factory,$repository){
 			$validator = $validator_factory->buildValidatorForCompanyService($data);
 			if ($validator->fails()) {
-				return $this->validationError($validator->messages());
+				return $this_var->validationError($validator->messages());
 			}
 			$id      = intval($data['id']);
 			$company_service = $repository->getById($id);
@@ -261,7 +261,7 @@ abstract class CompanyServiceManager {
 			$query = new QueryObject($company_service);
 			$query->addAddCondition(QueryCriteria::equal('Name',$company_service->getName()));
 			$query->addAddCondition(QueryCriteria::equal('Company.ID',$company_service->getCompany()->getIdentifier()));
-			$query->addAddCondition(QueryCriteria::notEqual('ID',$id));
+			$query->addAddCondition(QueryCriteria::notId('ID',$id));
 
 			$res = $repository->getBy($query);
 			if($res)
