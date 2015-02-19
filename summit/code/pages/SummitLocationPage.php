@@ -41,10 +41,6 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         
 		parent::init();
         Requirements::javascript('https://maps.googleapis.com/maps/api/js?v=3.exp');
-<<<<<<< HEAD
-		Requirements::javascript("summit/javascript/host-city.js");		         
-	}    
-=======
 		Requirements::javascript("summit/javascript/host-city.js");
         Requirements::customScript($this->MapScript());
         
