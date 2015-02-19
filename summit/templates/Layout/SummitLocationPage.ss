@@ -51,19 +51,20 @@
 		</ul>
 	</div>
 </div>
+<% with $Venue %>
 <div id="venue">
 	<div class="venue-row">
 		<div class="container">
 			<h1>The Venue</h1>
 			<p>
-				<strong>Vancouver Convention Centre</strong>
-				1055 Canada Pl, Vancouver, BC <br>
-				V6C 0C3, Canada
+				<strong>$Name</strong>
+				$Address
 			</p>
 		</div>
 		<a href="https://flic.kr/p/8rYHEd" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Nick Sinclair" target="_blank"><i class="fa fa-info-circle"></i></a>
 	</div>
 </div>
+<% end_with %>
 <div class="white hotels-row" id="hotels">
 	<div class="venue-map" id="map-canvas"></div>
 	<div class="container">
@@ -80,108 +81,57 @@
 				</p>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>1. Pan Pacific Vancouver Hotel</h3>
-				<p>
-					300-999 Canada Place Way | Suite 300<br>Vancouver, British Columbia V6C3B5, Canada
-				</p>
-				<p>
-					<a href="#hotels" onclick="myClick(1);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="https://resweb.passkey.com/go/OpenStackSummit2015" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Bookings</a>
-				</p>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>2. Fairmont Waterfront</h3>
-				<p>
-					900 Canada Place Way<br>Vancouver, British Columbia V6C 3L5, Canada
-				</p>
-				<p class="sold-out-hotel">
-					SOLD OUT
-				</p>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>3. Fairmont Pacific Rim</h3>
-				<p>
-					1038 Canada Place<br>Vancouver, British Columbia V6C 0B9, Canada
-				</p>
-				<p>
-					<a href="#hotels" onclick="myClick(3);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="https://resweb.passkey.com/go/pacificrimopenstack2015" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Bookings</a>
-				</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>4. Pinnacle Vancouver Harbourfront Hotel <span>formerly Renaissance Vancouver Harbourside</span></h3>
-				<p>
-					1133 West Hastings Street<br>Vancouver, British Columbia V6E3T3, Canada
-				</p>
-				<p>
-					<a href="#hotels" onclick="myClick(4);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="https://resweb.passkey.com/go/OpenStackPinnacle" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Bookings</a>
-				</p>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>5. Vancouver Marriott Downtown</h3>
-				<p>
-					1128 West Hastings Street<br>Vancouver, British Columbia V6E 4R5, Canada
-				</p>
-				<p>
-					<a href="#hotels" onclick="myClick(5);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="https://resweb.passkey.com/go/OpenstackVancouver" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Bookings</a>
-				</p>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>6. Fairmont Hotel Vancouver</h3>
-				<p>
-					900 West Georgia Street<br>Vancouver, British Columbia V6C 2W6, Canada
-				</p>
-				<p>
-					<a href="#hotels" onclick="myClick(6);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="https://resweb.passkey.com/go/openstackhvc2015" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Bookings</a>
-				</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>7. Hyatt Regency Vancouver</h3>
-				<p>
-					655 Burrard Street<br>Vancouver, British Columbia V6C 2R7, Canada
-				</p>
-				<p>
-					<a href="#hotels" onclick="myClick(7);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="https://resweb.passkey.com/go/openstack2015" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Bookings</a>
-				</p>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-				<h3>8. Four Seasons Hotel Vancouver</h3>
-				<p>
-					791 West Georgia Street<br>Vancouver, British Columbia V6C 2T4, Canada
-				</p>
-				<p>
-					<a href="#hotels" onclick="myClick(8);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="http://www.fourseasons.com/vancouver/landing_pages/events/openstack_summit/" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Bookings</a>
-				</p>
-			</div>
-		</div>
+        <% loop Hotels %>
+           <% if $First || $MultipleOf(3) %>
+            <div class="row">
+            <% end_if %>
+                <div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
+                    <h3>{$Pos}. $Name</h3>
+                    <p>
+                        $Address
+                    </p>
+                    
+                    <p<% if $IsSoldOut %> class="sold-out-hotel" <% end_if%>>
+                        
+                        <% if $IsSoldOut %>
+                            SOLD OUT
+                        <% else %>
+                            <a href="#hotels" onclick="myClick({$Pos});" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>                       
+                            <% if $BookingLink %>
+                            <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i> Bookings</a>
+                            <% else %>
+                            <a href="{$Website}"><i class="fa fa-home"></i> Website</a>                        
+                            <% end_if %>
+                        <% end_if %>
+                    </p>
+                </div>
+           <% if $MultipleOf(3) || $Last %>                
+            </div>
+            <% end_if %>
+		<% end_loop %>
+		
+		<% if $Airport %>
+		<% with Airport %>
 		<div class="row">
 			<div class="col-lg-8 col-lg-push-2 hotel-block">
-				<h5 class="section-title">Vancouver International Airport - YVR</h5>
+				<h5 class="section-title">$Name</h5>
 				<p>
-					Vancouver International Airport is located on Sea Island in Richmond, British Columbia, Canada, about 12 km (7.45 miles) from Downtown Vancouver.
+					$Description
 				</p>
-				<h3>Vancouver International Airport</h3>
+				<h3>$Name</h3>
 				<p>
-					3211 Grant McConachie Way<br>
-					Richmond, BC V7B 0A4, Canada
+					$Address
 				</p>
 				<p>
 					<a href="#map-canvas" onclick="myClick(9);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-					<a href="http://www.yvr.ca/en/default.aspx" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Website</a>
+					<a href="{$Website}" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Website</a>
 				</p>
 			</div>
 		</div>
+		<% end_with %>
+		<% end_if %>
+		
+		
 		<div class="row">
 			<div class="col-lg-8 col-lg-push-2 other-hotel-options">
 				<h5 class="section-title">House Sharing</h5>
