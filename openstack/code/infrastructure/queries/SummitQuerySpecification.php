@@ -12,23 +12,25 @@
  * limitations under the License.
  **/
 
-final class SpeakerVotersCountQuery implements IQueryHandler {
+final class SummitQuerySpecification implements IQuerySpecification {
 
     /**
-     * @param IQuerySpecification $specification
-     * @return IQueryResult
+     * @var int
      */
-    public function handle(IQuerySpecification $specification)
-    {
-        $res = 0;
-        $sql = <<< SQL
-			select COUNT(VoterID) FROM (
-select count(ID), VoterID from SpeakerVote
-GROUP BY VoterID ) AS Voters;
+    private $submmit_id;
 
-SQL;
-        $res = (int)DB::query($sql)->value();
-
-        return new AbstractQueryResult(array($res));
+    /**
+     * @param int $submmit_id
+     */
+    public function __construct($submmit_id){
+        $this->submmit_id = $submmit_id;
     }
+    /**
+     * @return array
+     */
+    public function getSpecificationParams()
+    {
+        return array($this->submmit_id);
+    }
+
 }

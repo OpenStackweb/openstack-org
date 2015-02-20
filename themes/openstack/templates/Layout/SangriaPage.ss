@@ -21,12 +21,12 @@
 			    $UserStoryCount / $UserLogoCount
 			    </div>
                 <div>
-                    <strong>Speaker Votes:</strong><br/>
+                    <strong># Total Votes</strong><br/>
 					$SpeakerVotesCount
                 </div>
                 <div>
-                    <strong>Speaker Voters:</strong><br/>
-					$SpeakerVotersCount
+                    <strong>Average # of votes per submission:</strong><br/>
+					$AverageVotesPerSubmmit
                 </div>
 			</div>
 		</div>

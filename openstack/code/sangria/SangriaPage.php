@@ -184,18 +184,18 @@ final class SangriaPage_Controller extends Page_Controller {
     }
 
 	function SpeakerVotesCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('SpeakerVotes',function (){
-			$query =  new SpeakerVoteCountQuery();
-			$res = $query->handle(null)->getResult();
+		return EntityCounterHelper::getInstance()->EntityCount('Votes_For_Summit_4',function (){
+			$query =  new SpeakerVotesCountQuery();
+			$res = $query->handle(new SummitQuerySpecification(4))->getResult();
 			return $res[0];
 		});
 	}
 
-	function SpeakerVotersCount() {
-		return EntityCounterHelper::getInstance()->EntityCount('SpeakerVoters',function (){
-			$query =  new SpeakerVotersCountQuery();
-			$res = $query->handle(null)->getResult();
-			return $res[0];
+	function AverageVotesPerSubmmit() {
+		return EntityCounterHelper::getInstance()->EntityCount('AVG_Votes_For_Summit_4',function (){
+			$query =  new AverageVotesPerSubmmitQuery();
+			$res = $query->handle(new SummitQuerySpecification(4))->getResult();
+			return number_format(floor($res[0]),0);
 		});
 	}
     //Survey date filters constructor
