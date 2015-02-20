@@ -183,6 +183,21 @@ final class SangriaPage_Controller extends Page_Controller {
         return number_format(($this->InternationalOrganizationCount()/$this->TotalOrganizationCount())*100,2);
     }
 
+	function SpeakerVotesCount() {
+		return EntityCounterHelper::getInstance()->EntityCount('SpeakerVotes',function (){
+			$query =  new SpeakerVoteCountQuery();
+			$res = $query->handle(null)->getResult();
+			return $res[0];
+		});
+	}
+
+	function SpeakerVotersCount() {
+		return EntityCounterHelper::getInstance()->EntityCount('SpeakerVoters',function (){
+			$query =  new SpeakerVotersCountQuery();
+			$res = $query->handle(null)->getResult();
+			return $res[0];
+		});
+	}
     //Survey date filters constructor
 
     function DateFilters($action='') {

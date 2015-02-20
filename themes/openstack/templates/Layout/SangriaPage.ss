@@ -20,6 +20,14 @@
 			    <strong>User Stories / Logos:</strong><br/>
 			    $UserStoryCount / $UserLogoCount
 			    </div>
+                <div>
+                    <strong>Speaker Votes:</strong><br/>
+					$SpeakerVotesCount
+                </div>
+                <div>
+                    <strong>Speaker Voters:</strong><br/>
+					$SpeakerVotersCount
+                </div>
 			</div>
 		</div>
 		<div class="span-8 featuredUserStory">
@@ -50,7 +58,7 @@
 			    </div>
 			</div>
 		</div>
-		<div class="span-8 featuredUserStory last">
+ 		<div class="span-8 featuredUserStory last">
 			<div class="wrapper">
 			    <div>
 			    <strong>Non-US Newsletter Subscribers:</strong><br/>
