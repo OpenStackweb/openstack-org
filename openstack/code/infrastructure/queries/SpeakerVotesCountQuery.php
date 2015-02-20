@@ -12,7 +12,7 @@
  * limitations under the License.
  **/
 
-final class SpeakerVoteCountQuery implements IQueryHandler {
+final class SpeakerVotesCountQuery implements IQueryHandler {
 
     /**
      * @param IQuerySpecification $specification
@@ -21,11 +21,17 @@ final class SpeakerVoteCountQuery implements IQueryHandler {
     public function handle(IQuerySpecification $specification)
     {
         $res = 0;
-        $sql = <<< SQL
-			select count(ID) from SpeakerVote;
+        if($specification instanceof SummitQuerySpecification) {
+
+            $params  = $specification->getSpecificationParams();
+            $summit_id = $params[0];
+            $sql = <<< SQL
+			SELECT COUNT(V.ID) FROM SpeakerVote V INNER JOIN Talk T ON T.ID = V.TalkID
+WHERE T.SummitID = $summit_id;
 
 SQL;
-        $res = (int)DB::query($sql)->value();
+            $res = (int)DB::query($sql)->value();
+        }
 
         return new AbstractQueryResult(array($res));
     }
