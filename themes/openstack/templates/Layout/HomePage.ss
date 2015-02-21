@@ -11,7 +11,7 @@
                     <div class="promo-btn-wrapper">
                         <a href="/vote-vancouver/Presentation/" class="promo-btn">Vote for presentations <i class="fa fa-chevron-right"></i></a>
                     </div>
-                    <!-- <p class="promo-dates">...we plan to contribute aggressively to the open source community.</p> -->
+                    <p class="promo-dates">Voting ends Monday February 23 at 5PM CT.</p>
                 </div>
             </div>
             <div class="hero-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i class="fa fa-info-circle"></i></div>
