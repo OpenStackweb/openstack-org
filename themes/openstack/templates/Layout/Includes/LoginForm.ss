@@ -25,7 +25,7 @@
 
 			<input class="action " id="MemberLoginForm_LoginForm_action_dologin" type="submit" name="action_dologin" value="Log in" title="Log in" />
 
-			<p id="ForgotPassword"><a href="Security/lostpassword">I've lost my password</a></p>
+			<p id="ForgotPassword"><a href="Security/lostpassword">I've lost my password</a> | <a href="/join/register">Register now</a></p>
 
 	</div>
 
