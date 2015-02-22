@@ -32,7 +32,7 @@ class SpeakerVotingLoginForm extends MemberLoginForm {
                     new FormAction('dologin', _t('Member.BUTTONLOGIN', "Log in")),
                     new LiteralField(
                         'forgotPassword',
-                        '<p id="ForgotPassword"><a href="/Security/lostpassword">' . _t('Member.BUTTONLOSTPASSWORD', "I've lost my password") . '</a> | <a href="/join/register">' . _t('Member.BUTTONREGISTERNOW', "Register now.") . '</a></p>'
+                        '<p id="ForgotPassword"><a href="/Security/lostpassword">' . _t('Member.BUTTONLOSTPASSWORD', "I've lost my password") . '</a> | <a href="/join/register">' . _t('Member.BUTTONREGISTERNOW', "Register now") . '</a></p>'
                     )
                 );
             }
