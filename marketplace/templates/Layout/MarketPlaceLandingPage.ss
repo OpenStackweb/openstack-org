@@ -20,7 +20,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="build-use-box">
                 <h3>Using a cloud</h3>
-                <p>There are OpenStack powered public clouds all over the world. Explore the possibilites.</p>
+                <p>There are OpenStack powered public clouds all over the world. Explore the possibilities.</p>
                 <script type="application/javascript">
                     var dc_locations = $DataCenterLocationsJson;
                 </script>
