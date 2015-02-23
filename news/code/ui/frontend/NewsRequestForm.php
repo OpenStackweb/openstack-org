@@ -22,7 +22,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		//madatory fields
 		$HeadlineField = new TextField('headline','Headline (150 character max)','',$maxLength = 150);
         $HeadlineField->addExtraClass('headline');
-		$SummaryField = new HtmlEditorField('summary','Summary (350 character max)');
+		$SummaryField = new HtmlEditorField('summary','Summary (300 character max)');
         $SummaryField->addExtraClass('summary');
         $CityField = new TextField('city','City');
         $StateField = new TextField('state','State');
@@ -56,7 +56,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$DocumentField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 		$DocumentField->setRecordClass('File');
 
-		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Recommended size is 293x381px)');
+		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Suggested size 360x180px)');
         $ImageField->setCanAttachExisting(false);
 		$ImageField->setAllowedMaxFileNumber(1);
 		$ImageField->setAllowedFileCategories('image');

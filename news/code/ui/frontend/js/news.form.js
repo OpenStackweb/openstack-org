@@ -78,6 +78,13 @@ jQuery(document).ready(function($){
         theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
         theme_advanced_buttons2: "",
         theme_advanced_buttons3: "",
+        plugins : "paste",
+        paste_text_sticky : true,
+        setup : function(ed) {
+            ed.onInit.add(function(ed) {
+                ed.pasteAsPlainText = true;
+            });
+        },
         force_br_newlines : true,
         force_p_newlines : false,
         height: "250px",
