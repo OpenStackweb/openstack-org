@@ -74,6 +74,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 			$this->redirect($this->Link() . 'Category/' . $CategoryID);
 		}
 		parent::init();
+        Requirements::Clear();
 
 	}
 
@@ -282,7 +283,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		$categoryClause = "";
 		if ($categoryID) $categoryClause = " AND SummitCategoryID = '" . $categoryID . "'";
 
-		$Talks = Talk::get()->where("MarkedToDelete = FALSE" . $categoryClause);
+		$Talks = Talk::get()->where("SummitID = 4 AND MarkedToDelete = FALSE" . $categoryClause);
 		if ($sortBy && $order) {
 			$Talks->sort($sortBy, $order);
 		} else {
@@ -374,7 +375,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 	function CategoryList()
 	{
-		return SummitCategory::get()->filter('SummitID',3);
+		return SummitCategory::get()->filter('SummitID',4);
 	}
 
 	function Delete()
@@ -408,46 +409,46 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		return $SearchForm;
 	}
 
-	function doSearch($data, $form)
-	{
+    function doSearch($data, $form) {
 
-		$Talks = NULL;
+      $Talks = NULL;
+        
+      $SummitID = Summit::CurrentSummit()->ID;
 
-		if ($data['Search'] && strlen($data['Search']) > 1) {
-			$query = Convert::raw2sql($data['Search']);
+      if($data['Search'] && strlen($data['Search']) > 1) {
+         $query = Convert::raw2sql($data['Search']);
 
-			$sqlQuery = new SQLQuery();
-			$sqlQuery->addSelect(array(
-				'DISTINCT Talk.URLSegment AS URLSegment',
-				'Talk.PresentationTitle AS PresentationTitle',
-				'Talk.SummitID AS SummitID',
-				// IMPORTANT: Needs to be set after other selects to avoid overlays
-				'Talk.ClassName AS ClassName',
-				'Talk.ClassName AS RecordClassName',
-				'Talk.ID AS ID'
-			));
-			$sqlQuery->addFrom(array(
-				"Talk",
-				"left join Talk_Speakers on Talk.ID = Talk_Speakers.TalkID left join Speaker on Talk_Speakers.SpeakerID = Speaker.ID"
-			));
-			$sqlQuery->addWhere( array(
-				"(Talk.MarkedToDelete IS FALSE) AND ((concat_ws(' ', Speaker.FirstName, Speaker.Surname) like '%$query%') OR (Talk.PresentationTitle like '%$query%') or (Talk.Abstract like '%$query%'))"
-			));
+          $sqlQuery = new SQLQuery();
+          $sqlQuery->setSelect( array(
+            'DISTINCT Talk.URLSegment',
+            'Talk.PresentationTitle',
+            // IMPORTANT: Needs to be set after other selects to avoid overlays
+            'Talk.ClassName',
+            'Talk.ClassName',
+            'Talk.ID'
+          ));
+          $sqlQuery->setFrom( array(
+            "Talk",
+            "left join Talk_Speakers on Talk.ID = Talk_Speakers.TalkID left join Speaker on Talk_Speakers.SpeakerID = Speaker.ID"
+          ));
+          $sqlQuery->setWhere( array(
+            "(Talk.MarkedToDelete IS FALSE) AND (Talk.SummitID = 4) AND ((concat_ws(' ', Speaker.FirstName, Speaker.Surname) like '%$query%') OR (Talk.PresentationTitle like '%$query%') or (Talk.Abstract like '%$query%'))"
+          ));
+           
+          $result = $sqlQuery->execute();
+           
+          // let Silverstripe work the magic
 
-			$result = $sqlQuery->execute();
+	      $arrayList = new ArrayList();
 
-			// let Silverstripe work the magic
+	      foreach($result as $rowArray) {
+		      // concept: new Product($rowArray)
+		      $arrayList->push(new $rowArray['ClassName']($rowArray));
+	      }
 
-			$arrayList = new ArrayList();
+	      $Talks = $arrayList;
 
-			foreach($result as $rowArray) {
-				// concept: new Product($rowArray)
-				$arrayList->push(new $rowArray['ClassName']($rowArray));
-			}
-
-			$Talks = $arrayList;
-
-		}
+      }
 
 		$data['SearchMode'] = TRUE;
 		if ($Talks) $data["SearchResults"] = $Talks;
@@ -580,7 +581,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 
 			} else {
-				echo "You do not have permission to select this presentation.";
+				echo "You do not have permission to unselect this presentation.";
 			}
 
 		}
