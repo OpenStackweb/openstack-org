@@ -14,13 +14,13 @@
         </div>
     </div>
     <div class="row">
-        <div id='upcoming-events-container' class="col-lg-6 col-md-6 col-sm-6">
+        <div id='upcoming-events-container' class="col-lg-6 col-md-6 col-sm-6" style="min-height:200px">
             <div id='upcoming-events' class="eventBlock upcoming">
                 <h2>Upcoming Events</h2>
                 $getEvents(100,future_events)
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 events-second-column">
+        <div class="col-lg-6 col-md-6 col-sm-6 events-second-column" style="min-height:200px">
             <% if FutureSummits(5) %>
             <div id='future-summits' class="eventBlock summit">
                 <h2>Upcoming Summits</h2>
