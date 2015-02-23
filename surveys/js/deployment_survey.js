@@ -110,6 +110,9 @@ function jqueryValidatorErrorPlacement(error, element) {
         error_container = element.parents('div[class*="multidropdown"]');
     if(error_container.length == 0)
         error_container = element;
+    if(!$(error_container).is(':visible')){
+        error_container = error_container.next();
+    }
     error.appendTo(error_container);
 }
 
@@ -117,6 +120,11 @@ function jqueryValidatorInvalidHandler(form, validator) {
     var errors = validator.numberOfInvalids();
     if (errors) {
         var first_error  = $(validator.errorList[0].element);
+        if(!$(first_error).is(':visible')){
+            do {
+                first_error = (first_error.attr('type') == 'hidden' )?first_error.prev(): first_error.next();
+            } while(!$(first_error).is(':visible'));
+        }
         $('html, body').animate({
             scrollTop: first_error.offset().top
         }, 2000);
