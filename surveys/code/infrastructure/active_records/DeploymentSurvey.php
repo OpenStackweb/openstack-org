@@ -65,7 +65,6 @@ class DeploymentSurvey extends DataObject
 		'Member.Surname' => 'Member Surname',
 		'Member.Email' => 'Email',
 		'Org.Name' => 'Organization'
-
 	);
 
 	static $searchable_fields = array(
@@ -285,6 +284,41 @@ class DeploymentSurvey extends DataObject
 	public function getNotDigestSent($batch_size)
 	{
 		return DeploymentSurvey::get()->filter(array('SendDigest' => 0))->where("\"Title\" IS NULL ")->sort('Created')->limit($batch_size);
+	}
+
+
+	public function copyFrom(DeploymentSurvey $oldSurvey){
+		// copy properties
+
+		foreach(DeploymentSurvey::$db as $field => $type){
+			$value = $oldSurvey->getField($field);
+			$this->setField($field, $value);
+		}
+
+		$this->OrgID = $oldSurvey->OrgID;
+
+		foreach($oldSurvey->Deployments() as $oldDeployment){
+			$newDeployment = new Deployment();
+			$newDeployment->copyFrom($oldDeployment);
+			$newDeployment->write();
+			$this->Deployments()->add($newDeployment);
+		}
+
+		foreach($oldSurvey->AppDevSurveys() as $oldAppDev){
+			$newAppDev = new AppDevSurvey();
+			$newAppDev->copyFrom($oldAppDev);
+			$newAppDev->write();
+			$this->AppDevSurveys()->add($newAppDev);
+		}
+	}
+
+	public function getSurveyType(){
+		$start_date = new DateTime(SURVEY_START_DATE);
+		$created    = new DateTime($this->Created);
+		if($created >= $start_date)
+			return SurveyType::MARCH_2015;
+		else
+			return SurveyType::OLD;
 	}
 }
 

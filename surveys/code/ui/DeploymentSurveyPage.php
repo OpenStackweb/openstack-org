@@ -269,10 +269,15 @@ class DeploymentSurveyPage_Controller extends Page_Controller
 
             if (!$DeploymentSurvey) {
                 // Create a new deployment survey
-                $DeploymentSurvey = new DeploymentSurvey();
-                $DeploymentSurvey->MemberID = $CurrentUserID;
+                $DeploymentSurvey              = new DeploymentSurvey();
+                $DeploymentSurvey->MemberID    = $CurrentUserID;
+                //check if we have an older survey and prepopulate
+                $oldSurvey = DeploymentSurvey::get()->filter(array('MemberID' => $CurrentUserID))->first();
+                if($oldSurvey){
+                    $DeploymentSurvey->copyFrom($oldSurvey);
+                }
                 $DeploymentSurvey->CurrentStep = 'AboutYou';
-                $DeploymentSurvey->UpdateDate = SS_Datetime::now()->Rfc2822();
+                $DeploymentSurvey->UpdateDate  = SS_Datetime::now()->Rfc2822();
                 $DeploymentSurvey->Write();
             }
             return $DeploymentSurvey;

@@ -25,25 +25,25 @@ class Deployment extends DataObject
     );
 
     public static $projects_used_options = array(
-        'Bare Metal (Ironic)' => 'Bare Metal (Ironic)',
-        'Block Storage (Cinder)' => 'Block Storage (Cinder)',
-        'Compute (Nova)' => 'Compute (Nova)',
-        'Dashboard (Horizon)' => 'Dashboard (Horizon)',
-        'Data Processing (Sahara)' => 'Data Processing (Sahara)',
-        'Database Service (Trove)' => 'Database Service (Trove)',
+        'OpenStack Bare Metal (Ironic)' => 'Bare Metal (Ironic)',
+        'Openstack Block Storage (Cinder)' => 'Block Storage (Cinder)',
+        'Openstack Compute (Nova)' => 'Compute (Nova)',
+        'Openstack Dashboard (Horizon)' => 'Dashboard (Horizon)',
+        'OpenStack Data Processing (Sahara)' => 'Data Processing (Sahara)',
+        'OpenStack Database as a Service (Trove)' => 'Database Service (Trove)',
         'DNS Services (Designate)' => 'DNS Services (Designate)',
-        'Identity (Keystone)' => 'Identity (Keystone)',
-        'Image Service (Glance)' => 'Image Service (Glance)',
+        'Openstack Identity Service (Keystone)' => 'Identity (Keystone)',
+        'Openstack Image Service (Glance)'  => 'Image Service (Glance)',
         'Key Management (Barbican)' => 'Key Management (Barbican)',
-        'Networking (Neutron)' => 'Networking (Neutron)',
-        'Object Storage (Swift)' => 'Object Storage (Swift)',
-        'Orchestration (Heat)' => 'Orchestration (Heat)',
+        'Openstack Network'  => 'Networking (Neutron)',
+        'Openstack Object Storage (Swift)' => 'Object Storage (Swift)',
+        'Heat' => 'Orchestration (Heat)',
         'Queue Service (Zaqar)' => 'Queue Service (Zaqar)',
-        'Telemetry (Ceilometer)' => 'Telemetry (Ceilometer)',
+        'Ceilometer' => 'Telemetry (Ceilometer)',
     );
 
     public static $current_release_options = array(
-        'Trunk / continuous deployment' => 'Trunk / continuous deployment',
+        'Trunk' => 'Trunk / continuous deployment',
         'Kilo (2015.1)' => 'Kilo (2015.1)',
         'Juno (2014.2)' => 'Juno (2014.2)',
         'Icehouse (2014.1)' => 'Icehouse (2014.1)',
@@ -148,16 +148,16 @@ class Deployment extends DataObject
 
     public static $hypervisors_options = array(
         'Bare Metal' => 'Bare Metal',
-        'Citrix XenServer' => 'Citrix XenServer',
+        'xenserver' => 'Citrix XenServer',
         'Docker' => 'Docker',
-        'KVM' => 'KVM',
-        'LXC' => 'LXC',
-        'Microsoft Hyper-V' => 'Microsoft Hyper-V',
+        'kvm' => 'KVM',
+        'lxc' => 'LXC',
+        'hyperv' => 'Microsoft Hyper-V',
         'OpenVZ' => 'OpenVZ',
         'PowerKVM' => 'PowerKVM',
         'QEMU' => 'QEMU',
-        'VMware ESX' => 'VMware ESX',
-        'Xen / XCP' => 'Xen / XCP',
+        'esx' => 'VMware ESX',
+        'xen' => 'Xen / XCP',
         'Other Hypervisors' => 'Other Hypervisors',
     );
 
@@ -223,11 +223,11 @@ class Deployment extends DataObject
     );
 
     public static $identity_driver_options = array(
-        'Active Directory' => 'Active Directory',
+        'AD' => 'Active Directory',
         'KVS' => 'KVS',
         'LDAP' => 'LDAP',
         'PAM' => 'PAM',
-        'SQL (default)' => 'SQL (default)',
+        'SQL' => 'SQL (default)',
         'Templated' => 'Templated',
         'Other Identity Driver' => 'Other Identity Driver',
     );
@@ -793,6 +793,23 @@ class Deployment extends DataObject
     {
         parent::onBeforeWrite();
         $this->UpdateDate = SS_Datetime::now()->Rfc2822();
+    }
+
+    public function copyFrom(Deployment $oldDeployment){
+
+        foreach(Deployment::$db as $field => $type){
+            $value = $oldDeployment->getField($field);
+            $this->setField($field, $value);
+        }
+    }
+
+    public function getSurveyType(){
+        $start_date = new DateTime(SURVEY_START_DATE);
+        $created    = new DateTime($this->Created);
+        if($created >= $start_date)
+            return SurveyType::MARCH_2015;
+        else
+            return SurveyType::OLD;
     }
 
 }

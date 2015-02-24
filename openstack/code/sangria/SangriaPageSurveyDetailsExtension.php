@@ -58,11 +58,12 @@ final class SangriaPageSurveyDetailsExtension  extends Extension {
 			$back_url = $this->owner->request->getVar('BackUrl');
 			if(empty($back_url))
 				$back_url = '#';
+			$details_template = $survey->getSurveyType() == SurveyType::OLD ? "SangriaPage_SurveyDetailsOld":"SangriaPage_SurveyDetails";
 			return $this->owner->Customise(
 				array("Survey" => $survey,
 					"BackUrl" => $back_url
 				)
-			)->renderWith(array('SangriaPage_SurveyDetails', 'SangriaPage', 'SangriaPage'));
+			)->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
 		}
 		return $this->owner->httpError(404, 'Sorry that survey could not be found!.');
 	}

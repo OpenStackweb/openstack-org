@@ -60,7 +60,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 
         $projects_used = $deployment->ProjectsUsed;
 
-        if(strpos($projects_used, 'Compute (Nova)') !== false ){
+        if(strpos($projects_used, 'Openstack Compute (Nova)') !== false ){
             $fields->add(
                 new CustomCheckboxSetField(
                     'Hypervisors',
@@ -90,7 +90,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         );
         $fields->add($other_db = new TextareaField('OtherUsedDBForOpenStackComponents', ''));
 
-        if(strpos($projects_used, 'Networking (Neutron)') !== false ){
+        if(strpos($projects_used, 'Openstack Network') !== false ){
             $fields->add(
                 new CustomCheckboxSetField(
                     'NetworkDrivers',
@@ -102,7 +102,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
             $other_driver->addExtraClass('hidden');
         }
 
-        if(strpos($projects_used, 'Identity (Keystone)') !== false ){
+        if(strpos($projects_used, 'Openstack Identity Service (Keystone)') !== false ){
             $fields->add(new CustomCheckboxSetField(
                 'IdentityDrivers',
                 'If you are using <b>OpenStack Identity Service (Keystone)</b> which OpenStack identity drivers are you using?<BR>Select All That Apply',
@@ -112,7 +112,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
             $other_driver->addExtraClass('hidden');
         }
 
-        if(strpos($projects_used, 'Block Storage (Cinder)') !== false){
+        if(strpos($projects_used, 'Openstack Block Storage (Cinder)') !== false){
             $fields->add(new CustomCheckboxSetField(
                 'BlockStorageDrivers',
                 'If this deployment uses <b>OpenStack Block Storage (Cinder)</b>, which drivers are <BR>Select All That Apply',
@@ -184,7 +184,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         $ddl_ips->setEmptyString('-- Select One --');
 
 
-        if(strpos($projects_used, 'Block Storage (Cinder)') !== false){
+        if(strpos($projects_used, 'Openstack Block Storage (Cinder)') !== false){
             $fields->add($ddl_block_size = new DropdownField(
                 'BlockStorageTotalSize',
                 'f this deployment uses <b>OpenStack Block Storage (Cinder)</b>, what is the size of its block storage?',
@@ -196,7 +196,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         }
 
 
-        if(strpos($projects_used, 'Object Storage (Swift)') !== false ){
+        if(strpos($projects_used, 'Openstack Object Storage (Swift)') !== false ){
             $fields->add($ddl_block_size = new DropdownField(
                 'ObjectStorageSize',
                 'f this deployment uses <b>OpenStack Object Storage (Swift)</b>, what is the size of its block storage?',
@@ -219,7 +219,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         $fields->add(new LiteralField('Break', '<h3>Spotlight</h3>'));
         $fields->add(new LiteralField('Break', '<hr/>'));
 
-        if(strpos($projects_used, 'Networking (Neutron)') === false){
+        if(strpos($projects_used, 'Openstack Network') === false){
             $fields->add(
                 new CustomCheckboxSetField(
                     'WhyNovaNetwork',
@@ -231,7 +231,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         }
 
 
-        if(strpos($projects_used, 'Object Storage (Swift)') !== false){
+        if(strpos($projects_used, 'Openstack Object Storage (Swift)') !== false){
             $fields->add($ddl_swift_dist_feat = new DropdownField(
                 'SwiftGlobalDistributionFeatures',
                 'Are you using Swift\'s global distribution features?',
@@ -315,7 +315,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         $deployment = $form->controller->LoadDeployment($id);
 
         $projects_used = $deployment->ProjectsUsed;
-        if(strpos($projects_used, 'Networking (Neutron)') === false){
+        if(strpos($projects_used, 'Openstack Network') === false){
             /*
              * [IF ABOVE <> “OPENSTACK NETWORK (NEUTRON)”, THEN DO NOT SHOW THIS QUESTION AND AUTOPOPULATE DATA WITH “nova-network”]
              */

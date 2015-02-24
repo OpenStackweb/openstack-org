@@ -12,4 +12,8 @@
  * limitations under the License.
  **/
 
-define('SURVEY_START_DATE','2015-02-24 00:00:00');
+class SurveyType {
+
+    const OLD = 'OLD';
+    const MARCH_2015 = 'MARCH_2015';
+}

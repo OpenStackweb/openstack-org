@@ -1,3 +1,12 @@
+<form id="range_form" action="$Top.Link(ViewDeploymentsPerRegion)?country={$country}" method="POST">
+    <label for="range">Deployment Date Range</label>
+    <select id="range">
+        <option selected value="OLD">OLD</option>
+        <option value="MARCH_2015">MARCH 2015</option>
+    </select>
+    <input type="hidden" id="survey_range" name="survey_range" value="{$Top.getSurveyRange(DeploymentsPerRegion)}" />
+</form>
+
 <script type="application/javascript">
         $LoadJsonCountriesCoordinates
     var countries_with_deployment = [];
@@ -8,6 +17,7 @@
     <div class="row">
         <div class="col-lg-4">
             <h2><a href="#" class="country_link" data-country="{$country}">Deployments in $country_name ($count)</a></h2>
+            <% if DeploymentsPerCountry($country) %>
             <ul style="list-style: none">
                 <% loop DeploymentsPerCountry($country) %>
                     <li>
@@ -21,6 +31,9 @@
                     </li>
                 <% end_loop %>
             </ul>
+            <% else %>
+                * There are not Deployments.
+            <% end_if %>
         </div>
         <div class="col-lg-8">
             <div style="width:100%; height: 650px; position: relative;" id="map" tabindex="0">
