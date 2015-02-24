@@ -502,23 +502,25 @@ class Company extends DataObject implements PermissionProvider {
 
 	function onAfterWrite() {
 		parent::onAfterWrite();
-		//update all relationships with Administrators
-		foreach($this->Administrators() as $member){
-			if(isset($_REQUEST["AdminSecurityGroup_{$member->ID}"])){
-				$groups_ids = $_REQUEST["AdminSecurityGroup_{$member->ID}"];
-				if(is_array($groups_ids) && count($groups_ids)>0){
-					DB::query("DELETE FROM Company_Administrators WHERE CompanyID={$this->ID} AND MemberID={$member->ID};");
-					foreach($groups_ids as $group_id){
-						$group_id = intval(Convert::raw2sql($group_id));
-						DB::query("INSERT INTO Company_Administrators (GroupID,CompanyID,MemberID) VALUES ({$group_id},{$this->ID},{$member->ID});");
-					}
-				}
-			}
-			else{
-				DB::query("DELETE FROM Company_Administrators WHERE CompanyID={$this->ID} AND MemberID={$member->ID};");
-				DB::query("INSERT INTO Company_Administrators (GroupID,CompanyID,MemberID) VALUES (0,{$this->ID},{$member->ID});");
-			}
-		}
+
+        if (is_subclass_of(Controller::curr(), "LeftAndMain")) { // check if we are on admin (CMS side)
+            //update all relationships with Administrators
+            foreach ($this->Administrators() as $member) {
+                if (isset($_REQUEST["AdminSecurityGroup_{$member->ID}"])) {
+                    $groups_ids = $_REQUEST["AdminSecurityGroup_{$member->ID}"];
+                    if (is_array($groups_ids) && count($groups_ids) > 0) {
+                        DB::query("DELETE FROM Company_Administrators WHERE CompanyID={$this->ID} AND MemberID={$member->ID};");
+                        foreach ($groups_ids as $group_id) {
+                            $group_id = intval(Convert::raw2sql($group_id));
+                            DB::query("INSERT INTO Company_Administrators (GroupID,CompanyID,MemberID) VALUES ({$group_id},{$this->ID},{$member->ID});");
+                        }
+                    }
+                } else {
+                    DB::query("DELETE FROM Company_Administrators WHERE CompanyID={$this->ID} AND MemberID={$member->ID};");
+                    DB::query("INSERT INTO Company_Administrators (GroupID,CompanyID,MemberID) VALUES (0,{$this->ID},{$member->ID});");
+                }
+            }
+        }
 	}
 
     //Security checks
