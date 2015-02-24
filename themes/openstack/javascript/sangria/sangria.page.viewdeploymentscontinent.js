@@ -49,6 +49,15 @@ jQuery(document).ready(function($){
 
     $('.country_link:first').trigger('click');
 
+    var range = $('#survey_range').val();
+    $('#range').val(range);
+    $('#range').change(function(event){
+        var range = $(this).val();
+        $('#survey_range').val(range);
+        $("#range_form").submit();
+    });
+
+
 });
 
 

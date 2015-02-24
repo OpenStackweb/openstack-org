@@ -54,12 +54,12 @@ final class SangriaPageDeploymentExtension extends Extension
             $back_url = $this->owner->request->getVar('BackUrl');
             if(empty($back_url))
                 $back_url = $this->owner->Link("ViewDeploymentDetails");
-
+            $details_template = $deployment->getSurveyType() == SurveyType::OLD ? "SangriaPage_DeploymentDetailsOld":"SangriaPage_DeploymentDetails";
             return $this->owner->Customise(
                 array("Deployment" => $deployment,
                     "BackUrl"      => $back_url
                 )
-            )->renderWith(array('SangriaPage_DeploymentDetails', 'SangriaPage', 'SangriaPage'));
+            )->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
         }
         return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
     }
@@ -71,13 +71,14 @@ final class SangriaPageDeploymentExtension extends Extension
         $survey = DeploymentSurvey::get()->byID($deployment_id);
         if ($survey) {
             $back_url = $this->owner->request->getVar('BackUrl');
+            $details_template = $survey->getSurveyType() == SurveyType::OLD ? "SangriaPage_SurveyDetailsOld":"SangriaPage_SurveyDetails";
             if(empty($back_url))
                 $back_url = "#";
             return $this->owner->Customise(
                 array("Survey" => $survey,
                     "BackUrl"      => $back_url
                 )
-            )->renderWith(array('SangriaPage_SurveyDetails', 'SangriaPage', 'SangriaPage'));
+            )->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
         }
         return $this->owner->httpError(404, 'Sorry that Survey could not be found!.');
     }
@@ -520,7 +521,7 @@ final class SangriaPageDeploymentExtension extends Extension
         if(!empty($continent)){
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();
             $result = array(
-                'continent' => $continent ,
+                'continent'      => $continent ,
                 'continent_name' => $continent_name
             );
             Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.viewdeploymentscontinent.js');
@@ -528,8 +529,15 @@ final class SangriaPageDeploymentExtension extends Extension
         }
 
         if(!empty($country)){
+            $range = $this->getSurveyRange('DeploymentsPerRegion');
+
+            if($range == SurveyType::MARCH_2015)
+                $range_filter = "AND D.Created >= '".SURVEY_START_DATE."'";
+            else
+                $range_filter = "AND D.Created < '".SURVEY_START_DATE."'";
+
             $continent = DB::query("SELECT ContinentID from Continent_Countries where CountryCode = '{$country}';")->value();
-            $count     = DB::query("SELECT COUNT(*) FROM Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}';")->value();
+            $count     = DB::query("SELECT COUNT(*) FROM Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}' {$range_filter};")->value();
             $result = array(
                 'country'      => $country ,
                 'country_name' => CountryCodes::$iso_3166_countryCodes[$country],
@@ -578,11 +586,19 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function DeploymentsPerContinent(){
         $list = new ArrayList();
-        $records = DB::query('SELECT COUNT(D.ID) AS DeploymentsQty, C.ID AS ContinentID, C.Name AS Continent FROM Deployment D
+        $range = $this->getSurveyRange('DeploymentsPerRegion');
+
+        if($range == SurveyType::MARCH_2015)
+            $range_filter = "WHERE D.Created >= '".SURVEY_START_DATE."'";
+        else
+            $range_filter = "WHERE D.Created < '".SURVEY_START_DATE."'";
+
+
+        $records = DB::query("SELECT COUNT(D.ID) AS DeploymentsQty, C.ID AS ContinentID, C.Name AS Continent FROM Deployment D
 INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID
 INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry
-INNER JOIN Continent C ON C.ID = CC.ContinentID
-GROUP BY C.Name, C.ID;');
+INNER JOIN Continent C ON C.ID = CC.ContinentID {$range_filter}
+GROUP BY C.Name, C.ID;");
         foreach($records as $record){
             $count            = $record['DeploymentsQty'];
             $continent        = $record['Continent'];
@@ -598,7 +614,12 @@ GROUP BY C.Name, C.ID;');
 
     function DeploymentsPerCountry($country){
         $list = new ArrayList();
-        $deployments = DB::query("SELECT D.* from Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}' ; ");
+        $range = $this->getSurveyRange('DeploymentsPerRegion');
+        if($range == SurveyType::MARCH_2015)
+            $range_filter = "AND D.Created >= '".SURVEY_START_DATE."'";
+        else
+            $range_filter = "AND D.Created < '".SURVEY_START_DATE."'";
+        $deployments = DB::query("SELECT D.* from Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}' {$range_filter}; ");
         foreach($deployments as $deployment) {
             // concept: new Deployment($deployment)
             $list->push(new $deployment['ClassName']($deployment));
@@ -609,10 +630,16 @@ GROUP BY C.Name, C.ID;');
     function DeploymentsPerContinentCountry($continent_id){
 
         $list = new ArrayList();
+        $range = $this->getSurveyRange('DeploymentsPerRegion');
+        if($range == SurveyType::MARCH_2015)
+            $range_filter = "AND D.Created >= '" . SURVEY_START_DATE . "'";
+        else
+            $range_filter = "AND D.Created < '" . SURVEY_START_DATE . "'";
+
         $countries = DB::query("SELECT COUNT(D.ID) AS Qty, DS.PrimaryCountry FROM Deployment D
 INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID
 WHERE PrimaryCountry
-IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_id}) group BY PrimaryCountry;");
+IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_id}) {$range_filter} group BY PrimaryCountry;");
         foreach($countries as $country) {
             $count = $country['Qty'];
             $country = $country['PrimaryCountry'];
@@ -629,9 +656,16 @@ IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_
 
     function CountriesWithDeployments($continent_id){
         $list = new ArrayList();
+        $range = $this->getSurveyRange('DeploymentsPerRegion');
+
+        if($range == SurveyType::MARCH_2015)
+            $range_filter = "AND D.Created >= '".SURVEY_START_DATE."'";
+        else
+            $range_filter = "AND D.Created < '".SURVEY_START_DATE."'";
+
         $countries = DB::query("SELECT  CC.CountryCode, COUNT(CC.CountryCode) AS Qty from Continent_Countries CC INNER JOIN DeploymentSurvey DS ON DS.PrimaryCountry = CC.CountryCode
 INNER JOIN  Deployment D ON DS.ID = D.DeploymentSurveyID
-WHERE CC.ContinentID =  {$continent_id} GROUP BY CC.CountryCode; ");
+WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode; ");
         foreach($countries as $country) {
             // concept: new Deployment($deployment)
             $do = new DataObject();
@@ -644,10 +678,17 @@ WHERE CC.ContinentID =  {$continent_id} GROUP BY CC.CountryCode; ");
     }
 
     function DeploymentCount(){
+
+        $range = $this->getSurveyRange('DeploymentsPerRegion');
+        if($range == SurveyType::MARCH_2015)
+            $range_filter = "WHERE D.Created >= '".SURVEY_START_DATE."'";
+        else
+            $range_filter = "WHERE D.Created < '".SURVEY_START_DATE."'";
+
         return DB::query("
 SELECT COUNT(*) from Deployment D
 INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID
-INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry")->value();
+INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry ".$range_filter)->value();
     }
 
     // deployment surveys per region
@@ -876,6 +917,18 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
             $cache->save(serialize($list), 'var_sangria_users_per'.$country);
         }
         return $list;
+    }
+
+
+    function getSurveyRange($page){
+        $params       = $this->owner->request->postVars();
+        if(isset($params["survey_range"])) {
+            $range  = Convert::raw2sql($params["survey_range"]);
+            Session::set($page."_survey_range",$range);
+            return $range;
+        }
+        $range = Session::get($page."_survey_range");
+        return is_null($range)?SurveyType::OLD:$range;
     }
 
 }

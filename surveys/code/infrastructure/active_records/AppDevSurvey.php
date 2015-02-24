@@ -209,4 +209,20 @@ class AppDevSurvey extends DataObject {
 
 		return $fields;
 	}
+
+	public function copyFrom(AppDevSurvey $oldAppDev){
+		foreach(AppDevSurvey::$db as $field => $type){
+			$value = $oldAppDev->getField($field);
+			$this->setField($field, $value);
+		}
+	}
+
+	public function getSurveyType(){
+		$start_date = new DateTime(SURVEY_START_DATE);
+		$created    = new DateTime($this->Created);
+		if($created >= $start_date)
+			return SurveyType::MARCH_2015;
+		else
+			return SurveyType::OLD;
+	}
 }
