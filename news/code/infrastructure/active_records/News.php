@@ -33,6 +33,7 @@ final class News extends DataObject implements INews {
         'Featured' => 'Boolean',
         'Slider' => 'Boolean',
         'Approved' => 'Boolean',
+        'IsLandscape' => 'Boolean',
 	);
 
     static $has_one = array(
@@ -73,6 +74,7 @@ final class News extends DataObject implements INews {
         $this->Link   = $info->getLink();
         $this->DateEmbargo   = $info->getDateEmbargo();
         $this->DateExpire = $info->getDateExpire();
+        $this->IsLandscape = $info->getIsLandscape();
     }
 
     /**
@@ -225,12 +227,10 @@ final class News extends DataObject implements INews {
 
     public function getImageForArticle() {
         if ($this->Image->exists()) {
-            $image_width = $this->Image->getWidth();
-            
-            if ($image_width >= 600) {
+            if ($this->IsLandscape) {
                 $image_html = '<div class="article_full_image">'.$this->Image->getTag().'</div>';
             } else {
-                $cropped = $this->Image->SetRatioSize(360,180);
+                $cropped = $this->Image->SetWidth(360);
                 if($cropped)
                     $image_html = '<div class="article_cropped_image">'.$cropped->getTag().'</div>';
                 else
