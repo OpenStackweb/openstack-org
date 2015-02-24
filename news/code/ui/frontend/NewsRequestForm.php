@@ -70,8 +70,12 @@ final class NewsRequestForm extends HoneyPotForm {
 		$sizeMB = 2; // 2 MB
 		$size = $sizeMB * 1024 * 1024; // 2 MB in bytes
 		$ImageField->getValidator()->setAllowedMaxFileSize($size);
-
 		$ImageField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
+
+        if ($is_manager) {
+            $IsLandscapeField = new CheckboxField('is_landscape','Is Banner? (landscape image)');
+            $IsLandscapeField->addExtraClass('is_landscape');
+        }
 
         if($article) {
             $IDField->setValue($article->ID);
@@ -87,6 +91,7 @@ final class NewsRequestForm extends HoneyPotForm {
             $BodyField->setValue($article->Body);
             $LinkField->setValue($article->Link);
             $DateExpireField->setValue($article->DateExpire);
+            $IsLandscapeField->setValue($article->IsLandscape);
             //submitter read only
             $SubmitterFirstNameField = new ReadonlyField('submitter_first_name','First Name');
             $SubmitterLastNameField = new ReadonlyField('submitter_last_name','Last Name');
@@ -147,6 +152,7 @@ final class NewsRequestForm extends HoneyPotForm {
         }
 
         if ($is_manager) {
+            $fields->push($IsLandscapeField);
             $fields->push(new LiteralField('break', '<br/>'));
             $fields->push($DateExpireField);
         }

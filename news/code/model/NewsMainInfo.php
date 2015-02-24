@@ -52,6 +52,10 @@ final class NewsMainInfo {
      */
     private $image;
     /**
+     * @var Integer
+     */
+    private $is_landscape;
+    /**
      * @var array
      */
     private $document;
@@ -86,7 +90,7 @@ final class NewsMainInfo {
      * @param DateTime $date_embargo
      * @param DateTime $date_expire
      */
-    public function __construct($headline,$summary,$city,$state,$country,$date,$body,$link, array $image, array $document,$date_embargo,$date_expire){
+    public function __construct($headline,$summary,$city,$state,$country,$date,$body,$link, array $image, $is_landscape, array $document,$date_embargo,$date_expire){
         $this->headline     = $headline;
         $this->summary      = $summary;
         $this->city         = $city;
@@ -96,6 +100,7 @@ final class NewsMainInfo {
         $this->body         = $body;
         $this->link         = $link;
         $this->image        = $image;
+        $this->is_landscape = $is_landscape;
         $this->document     = $document;
         $this->date_embargo = $date_embargo;
         $this->date_expire  = $date_expire;
@@ -135,6 +140,10 @@ final class NewsMainInfo {
 
     public function getImage(){
         return $this->image;
+    }
+
+    public function getIsLandscape(){
+        return $this->is_landscape;
     }
 
     public function getDocument(){

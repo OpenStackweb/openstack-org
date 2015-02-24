@@ -29,7 +29,7 @@
         <% loop SlideNews %>
             <div class="item <% if First %>active<% end_if %>">
                 <% if Image.Exists %>
-                    $Image.SetRatioSize(1100,350)
+                    $Image.SetWidth(1100)
                 <% end_if %>
                 <div class="carousel-caption">
                     <h3 class='largeHeadline'>$Headline</h3>
@@ -67,7 +67,7 @@
                                         <div class="more">Read More <i class="fa fa-chevron-circle-right"></i></div>
                                     </div>
                                     <% if Image.Exists %>
-                                        $Image.SetRatioSize(360,180)
+                                        $Image.SetWidth(360)
                                     <% end_if %>
                                 </a>
                             </div>
