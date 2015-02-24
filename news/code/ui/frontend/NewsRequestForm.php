@@ -24,6 +24,7 @@ final class NewsRequestForm extends HoneyPotForm {
         $HeadlineField->addExtraClass('headline');
 		$SummaryField = new HtmlEditorField('summary','Summary (300 character max)');
         $SummaryField->addExtraClass('summary');
+        $SummaryField->setAttribute('max_chars',300);
         $CityField = new TextField('city','City');
         $StateField = new TextField('state','State');
         $CountryField = new CountryDropdownField('country','Country');

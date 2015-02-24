@@ -71,6 +71,8 @@ jQuery(document).ready(function($){
 
     }
 
+    var allowed_keys = [8, 13, 16, 17, 18, 20, 33, 34, 35,36, 37, 38, 39, 40, 46];
+
     tinyMCE.init({
         theme: "advanced",
         mode : "textareas",
@@ -83,6 +85,19 @@ jQuery(document).ready(function($){
         setup : function(ed) {
             ed.onInit.add(function(ed) {
                 ed.pasteAsPlainText = true;
+            });
+            ed.onKeyDown.add(function(ed, evt) {
+                var key = evt.keyCode;
+                if(allowed_keys.indexOf(key) == -1){
+                    if ( $(ed.getBody()).text().length+1 > $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars')){
+                        evt.preventDefault();
+                        evt.stopPropagation();
+                        return false;
+                    }
+                }
+            });
+            ed.onPaste.add(function(ed, evt) {
+                $(ed.getBody()).text($(ed.getBody()).text().substr(0,300));
             });
         },
         force_br_newlines : true,
