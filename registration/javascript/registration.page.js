@@ -85,10 +85,7 @@ jQuery(document).ready(function($) {
             ignore: [],
             rules: {
                 FirstName:{required: true,regex:'[\"()=<>]+'},
-                Surname:{required: true,regex:'[\"()=<>]+',remote: {
-                    url: '/DeploymentSurveyPage_Controller/CheckName',
-                    data: {FirstName: function() {return $('input[name=FirstName]').val();} }
-                }},
+                Surname:{required: true,regex:'[\"()=<>]+'},
                 Email: {required: true,email: true, remote: '/DeploymentSurveyPage_Controller/CheckEmail'},
                 StatementOfInterest:{required: true},
                 Address:{required: true},
