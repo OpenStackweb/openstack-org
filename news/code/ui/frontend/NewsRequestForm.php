@@ -57,7 +57,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$DocumentField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 		$DocumentField->setRecordClass('File');
 
-		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Suggested size 360x180px)');
+		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Suggested size 300x250px)');
         $ImageField->setCanAttachExisting(false);
 		$ImageField->setAllowedMaxFileNumber(1);
 		$ImageField->setAllowedFileCategories('image');
