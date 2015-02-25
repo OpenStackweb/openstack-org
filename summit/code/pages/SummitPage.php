@@ -20,6 +20,9 @@ class SummitPage extends Page {
 		'FBPixelId'        => 'Text',
 		'FBValue'          => 'Text',
 		'FBCurrency'       => 'Text',
+		// Twitter Conversion tracking for websites
+		//https://support.twitter.com/articles/20170807-conversion-tracking-for-websites#
+		'TwitterPixelId'        => 'Text',
 	);
 
 	static $defaults = array(
@@ -35,6 +38,8 @@ class SummitPage extends Page {
 		'FBPixelId'        => '6013247449963',
 		'FBValue'          => '0.00',
 		'FBCurrency'       => 'USD',
+		//Twitter
+		'TwitterPixelId' => 'l5lav',
 	);
 
 
@@ -73,6 +78,8 @@ class SummitPage extends Page {
 		$fields->addFieldToTab("Root.FacebookConversionTracking",new TextField("FBPixelId","Pixel Id","6013247449963"));
 		$fields->addFieldToTab("Root.FacebookConversionTracking",new TextField("FBValue","Value","0.00"));
 		$fields->addFieldToTab("Root.FacebookConversionTracking",new TextField("FBCurrency","Currency","USD"));
+		//Twitter
+		$fields->addFieldToTab("Root.TwitterConversionTracking",new TextField("TwitterPixelId","Pixel Id","l5lav"));
         return $fields;
     }
 
@@ -81,16 +88,12 @@ class SummitPage extends Page {
 
 class SummitPage_Controller extends Page_Controller {
 
-
 	public function init() {
 		parent::init();
-	    Requirements::javascript("summit/javascript/jquery-1.11.0.js");
-	    Requirements::javascript("summit/javascript/bootstrap.min.js");
 	    Requirements::javascript("summit/bower_components/sweetalert/lib/sweet-alert.js");
 	    Requirements::css("summit/bower_components/sweetalert/lib/sweet-alert.css");
 		Requirements::javascript("summit/javascript/summit.js");
 	}
-
 
 	public function CurrentSummit() {
 		$summit = Summit::get_active();
@@ -149,7 +152,7 @@ class SummitPage_Controller extends Page_Controller {
 		$tracking_code = '';
 		if(isset($order) && $order=="complete"){
 			//add GA tracking script
-			$page = SummitOverviewPage::get()->byID($this->ID);
+			$page = SummitPage::get()->byID($this->ID);
 			if($page && !empty($page->GAConversionId)
 				&& !empty($page->GAConversionLanguage)
 				&& !empty($page->GAConversionFormat)
@@ -177,7 +180,7 @@ class SummitPage_Controller extends Page_Controller {
 		$tracking_code = '';
 		if(isset($order) && $order=="complete"){
 			//add FB tracking script
-			$page = ConferencePage::get()->byID($this->ID);
+			$page = SummitPage::get()->byID($this->ID);
 			if($page && !empty($page->FBPixelId)
 				&& !empty($page->FBValue)
 				&& !empty($page->FBCurrency)
@@ -187,6 +190,25 @@ class SummitPage_Controller extends Page_Controller {
 						"FBPixelId"  => $page->FBPixelId,
 						"FBValue"    => $page->FBValue,
 						"FBCurrency" => $page->FBCurrency,
+					))
+				));
+			}
+		}
+		return $tracking_code;
+	}
+
+	function TwitterTrackingCode(){
+		$request = $this->request;
+		$order = $request->requestVar("order");
+		$tracking_code = '';
+		if(isset($order) && $order=="complete"){
+			//add FB tracking script
+			$page = SummitPage::get()->byID($this->ID);
+			if($page && !empty($page->TwitterPixelId)
+			){
+				$tracking_code = $this->renderWith("SummitPage_Twitter",array(
+					"Twitter_Data"=> new ArrayData(array(
+						"TwitterPixelId"  => $page->TwitterPixelId,
 					))
 				));
 			}
