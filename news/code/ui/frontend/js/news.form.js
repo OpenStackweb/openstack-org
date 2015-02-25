@@ -88,8 +88,10 @@ jQuery(document).ready(function($){
             });
             ed.onKeyDown.add(function(ed, evt) {
                 var key = evt.keyCode;
-                if(allowed_keys.indexOf(key) == -1){
-                    if ( $(ed.getBody()).text().length+1 > $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars')){
+                var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
+                if(allowed_keys.indexOf(key) == -1 && max_chars){
+                    var text_length = ed.getContent({ 'format' : 'text' }).length;
+                    if ( text_length+1 > max_chars){
                         evt.preventDefault();
                         evt.stopPropagation();
                         return false;
@@ -97,7 +99,11 @@ jQuery(document).ready(function($){
                 }
             });
             ed.onPaste.add(function(ed, evt) {
-                $(ed.getBody()).text($(ed.getBody()).text().substr(0,300));
+                var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
+                if (max_chars) {
+                    $(ed.getBody()).text(ed.getContent({ 'format' : 'text' }).substr(0,max_chars));
+                }
+
             });
         },
         force_br_newlines : true,
