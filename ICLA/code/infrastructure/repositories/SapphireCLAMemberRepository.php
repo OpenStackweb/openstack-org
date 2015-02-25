@@ -100,4 +100,14 @@ final class SapphireCLAMemberRepository
 		$query->addAddCondition(QueryCriteria::like('Surname',$last_name));
 		return $this->getAll($query, $offset, $limit);
 	}
+
+	/**
+	 * @param string $first_name
+	 * @param string $last_name
+	 * @return ICommunityMember[]
+	 */
+	public function getAllByName($first_name, $last_name)
+	{
+		throw new Exception('not implemente!');
+	}
 }
