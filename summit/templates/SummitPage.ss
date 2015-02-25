@@ -5,6 +5,7 @@
     <% include Head %>
     <% include Analytics %>
     $FBTrackingCode
+    $TwitterTrackingCode
 </head>
 
 <body>

@@ -259,6 +259,7 @@ class Page_Controller extends ContentController {
 		Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
+		Requirements::block(THIRDPARTY_DIR . '/jquery-cookie/jquery.cookie.js');
 
 		if(Director::isLive()) {
 			Requirements::javascript('themes/openstack/javascript/jquery.min.js');
@@ -280,7 +281,9 @@ class Page_Controller extends ContentController {
 
 		Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 
-        Requirements::customScript("jQuery(document).ready(function($) {
+        $this->CustomScripts();
+
+		Requirements::customScript("jQuery(document).ready(function($) {
 
 			var d = new Date();
             var user_date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
@@ -296,8 +299,6 @@ class Page_Controller extends ContentController {
                 return false;
             });
         });");
-
-        $this->CustomScripts();
 
 	}
 
