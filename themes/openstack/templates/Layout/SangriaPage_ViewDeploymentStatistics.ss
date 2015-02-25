@@ -1,4 +1,6 @@
-<h2>Deployments Submitted &mdash; $DeploymentsCount total (<a href="/sangria/ViewDeploymentStatistics">clear filters</a>)</h2>
+<% include SangriaPage_SurveyRangeSelector Label='Deployments Subset', FormAction=$Top.Link(ViewDeploymentStatistics), FromPage=ViewDeploymentStatistics %>
+
+<h2>Deployments Submitted &mdash; {$Top.DeploymentsCount(ViewDeploymentStatistics)} total (<a href="/sangria/ViewDeploymentStatistics">clear filters</a>)</h2>
 $DateFilters
 <div class="span-8 ">
     <h3>Is deployment Public?</h3>
@@ -249,7 +251,7 @@ $DateFilters
     <h3>Matching Organzations</h3>
     <div style="overflow:scroll; height:600px;">
         <% loop DeploymentMatchingOrgs %>
-          $OrgName<br/>
+          $Name <br/>
           <hr/>
         <% end_loop %>
     </div>

@@ -75,7 +75,7 @@ class UserStory extends Page
 				new DropdownField(
 					'DeploymentType',
 					'Deployment Type',
-					Deployment::$deployment_type_options
+					DeploymentOptions::$deployment_type_options
 				),
 				$ddl_country = new DropdownField(
 					'PrimaryCountry',

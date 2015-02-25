@@ -36,20 +36,20 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
             $ddl_stage = new DropdownField(
                 'DeploymentStage',
                 'In what stage is your OpenStack deployment? (make a new deployment profile for each type of deployment)',
-                Deployment::$stage_options
+                DeploymentOptions::$stage_options
             ),
             new MultiDropdownField('CountriesPhysicalLocation','In which country / countries is this OpenStack deployment physically located?',$CountryCodes),
             new MultiDropdownField('CountriesUsersLocation','In which country / countries are the users / customers for this deployment physically located?',$CountryCodes),
-            $ddl_type = new DropdownField('DeploymentType', 'Deployment Type', Deployment::$deployment_type_options),
-            new CustomCheckboxSetField('ProjectsUsed', 'What projects does this deployment use?<BR>Select All That Apply', Deployment::$projects_used_options),
-            new CustomCheckboxSetField('CurrentReleases', 'What releases does this deployment currently use?<BR>Select All That Apply', Deployment::$current_release_options),
+            $ddl_type = new DropdownField('DeploymentType', 'Deployment Type', DeploymentOptions::$deployment_type_options),
+            new CustomCheckboxSetField('ProjectsUsed', 'What projects does this deployment use?<BR>Select All That Apply', DeploymentOptions::$projects_used_options),
+            new CustomCheckboxSetField('CurrentReleases', 'What releases does this deployment currently use?<BR>Select All That Apply', DeploymentOptions::$current_release_options),
             new LiteralField('Break','Describe the workloads and frameworks running in this OpenStack environment.<BR>Select All That Apply'),
             new LiteralField('Break','<hr/>'),
-            new CustomCheckboxSetField('ServicesDeploymentsWorkloads','<b>Services Deployments - workloads designed to be accessible for external users / customers</b>',Deployment::$services_deployment_workloads_options),
+            new CustomCheckboxSetField('ServicesDeploymentsWorkloads','<b>Services Deployments - workloads designed to be accessible for external users / customers</b>',DeploymentOptions::$services_deployment_workloads_options),
             $other_service_workload = new TextAreaField('OtherServicesDeploymentsWorkloads',''),
-            new CustomCheckboxSetField('EnterpriseDeploymentsWorkloads','<b>Enterprise Deployments - workloads designed to be run internally to support business</b>', Deployment::$enterprise_deployment_workloads_options),
+            new CustomCheckboxSetField('EnterpriseDeploymentsWorkloads','<b>Enterprise Deployments - workloads designed to be run internally to support business</b>', DeploymentOptions::$enterprise_deployment_workloads_options),
             $other_enterprise_workload = new TextAreaField('OtherEnterpriseDeploymentsWorkloads',''),
-            new CustomCheckboxSetField('HorizontalWorkloadFrameworks','<b>Horizontal Workload Frameworks</b>', Deployment::$horizontal_workload_framework_options),
+            new CustomCheckboxSetField('HorizontalWorkloadFrameworks','<b>Horizontal Workload Frameworks</b>', DeploymentOptions::$horizontal_workload_framework_options),
             $other_horizontal_workload = new TextAreaField('OtherHorizontalWorkloadFrameworks','')
         );
 

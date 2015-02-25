@@ -1,4 +1,5 @@
-<h2>Deployment Surveys Submitted &mdash; $DeploymentSurveysCount total</h2>
+<% include SangriaPage_SurveyRangeSelector Label='Surveys Subset', FormAction=$Top.Link(ViewDeploymentSurveyStatistics), FromPage=ViewDeploymentSurveyStatistics %>
+<h2>Deployment Surveys Submitted &mdash; {$Top.DeploymentSurveysCount(ViewDeploymentSurveyStatistics)} total</h2>
 $DateFilters
 <div class="span-8 ">
     <h3>Industry</h3>

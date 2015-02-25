@@ -1,12 +1,4 @@
-<form id="range_form" action="$Top.Link(ViewDeploymentsPerRegion)?country={$country}" method="POST">
-    <label for="range">Deployment Date Range</label>
-    <select id="range">
-        <option selected value="OLD">OLD</option>
-        <option value="MARCH_2015">MARCH 2015</option>
-    </select>
-    <input type="hidden" id="survey_range" name="survey_range" value="{$Top.getSurveyRange(DeploymentsPerRegion)}" />
-</form>
-
+<% include SangriaPage_SurveyRangeSelector Label='Deployments Subset', FormAction=$Top.GetLinkForDeploymentsPerCountry($country), FromPage=ViewDeploymentsPerRegion %>
 <script type="application/javascript">
         $LoadJsonCountriesCoordinates
     var countries_with_deployment = [];

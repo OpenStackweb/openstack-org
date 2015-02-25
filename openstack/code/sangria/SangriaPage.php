@@ -239,74 +239,15 @@ final class SangriaPage_Controller extends Page_Controller {
 		return $html;
 	}
 
-	public function DeploymentMatchingOrgs() {
-		$filterWhereClause = self::generateFilterWhereClause();
-
-		$results = DB::query("select o.Name from Deployment d join DeploymentSurvey s on (d.DeploymentSurveyID = s.ID) join Org o on (s.OrgID = o.ID) where 1=1".$filterWhereClause);
-		$list = new ArrayList();
-
-		for( $i=0; $i < $results->numRecords(); $i++) {
-			$record = $results->nextRecord();
-			$do = new ArrayList();
-			$do->OrgName = $record["Name"];
-			$list->push($do);
-		}
-		return $list;
-	}
-
-	public static function generateSelectListSummary($fieldName, $optionSet, $applyDateFilters=false) {
-		$list = new ArrayList();
-
-		$urlString = $_SERVER["REDIRECT_URL"]."?";
-		$keyUrlString = "";
-		$keyValue = "";
-
-		foreach($_GET as $key=>$value) {
-			if (preg_match("/Filter$/",$key)) {
-				if ($key != $fieldName."Filter") {
-					$urlString .= $key."=".$value."&";
-				} else {
-					$keyUrlString = $key."=".$value;
-					$keyValue = $value;
-				}
-			}
-		}
-
-		foreach( $optionSet as $option => $label ) {
-
-            $query = "select count(*) from Deployment where ".$fieldName." like '%".$option."%'".self::generateFilterWhereClause();
-            $query .= ($applyDateFilters) ? ' AND '.self::$date_filter_query : '';
-
-			$count = DB::query($query)->value();
-			$do = new DataObject();
-
-			$href = $urlString.$fieldName."Filter=".$option;
-
-			if ($applyDateFilters) {
-				$start_date = Controller::curr()->request->getVar('From');
-				$end_date = Controller::curr()->request->getVar('To');
-				if ($start_date && $end_date)
-					$href .= "&From=".$start_date."&To=".$end_date;
-			}
-
-			$do->Value = "<a href='".$href."'>".$label."</a>";
-			if( !empty($keyUrlString) && $keyValue != $option) {
-				$do->Value .= " (<a href='".$urlString.$keyUrlString.",,".$option."'>+</a>) (<a href='".$urlString.$keyUrlString."||".$option."'>|</a>)";
-			}
-			$do->Count = $count;
-			$list->push($do);
-		}
-
-		return $list;
-	}
 
 	public static function generateFilterWhereClause() {
 		$filterWhereClause = "";
 
-		foreach($_GET as $key=>$value) {
-			if (preg_match("/Filter$/",$key)) {
-				$orValues = split("\|\|", $value);
-				$andValues = split("\,\,", $value);
+		foreach($_GET as $key => $value) {
+			if (preg_match("/Filter$/", $key)) {
+				$key = preg_replace('/_/','.',$key);
+				$orValues = preg_split("/\|\|/", $value);
+				$andValues = preg_split("/\,\,/", $value);
 
 				if (count($orValues) > 1) {
 					$filterWhereClause .= " and (";
