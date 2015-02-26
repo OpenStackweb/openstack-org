@@ -433,11 +433,18 @@ final class SangriaPageDeploymentExtension extends Extension
         $date_to = Convert::raw2sql(trim($this->owner->request->getVar('date-to')));
         $free_text = Convert::raw2sql(trim($this->owner->request->getVar('free-text')));
 
+        $range = self::getSurveyRange('ViewDeploymentDetails');
+
+        if ($range == SurveyType::MARCH_2015)
+            $range_filter = "AND Deployment.Created >= '" . SURVEY_START_DATE . "'";
+        else
+            $range_filter = "AND Deployment.Created < '" . SURVEY_START_DATE . "'";
+
         $sort_query = '';
         if (!empty($sort)) {
             switch (strtolower(trim($sort))) {
                 case 'date': {
-                    $sort_query = "UpdateDate";
+                    $sort_query = "Deployment.UpdateDate";
                     $sort_dir = strtoupper($sort_dir);
                 }
                     break;
@@ -449,14 +456,14 @@ final class SangriaPageDeploymentExtension extends Extension
             }
         }
 
-        $where_query = "IsPublic = 1";
+        $where_query = "IsPublic = 1 ".$range_filter;
         $res = Deployment::get();
         if (!empty($date_from) && !empty($date_to)) {
             $start = new \DateTime($date_from);
             $start->setTime(00, 00, 00);
             $end = new \DateTime($date_to);
             $end->setTime(23, 59, 59);
-            $where_query .= " AND ( UpdateDate >= '{$start->format('Y-m-d H:i:s')}' AND UpdateDate <= '{$end->format('Y-m-d H:i:s')}')";
+            $where_query .= " AND ( Deployment.UpdateDate >= '{$start->format('Y-m-d H:i:s')}' AND Deployment.UpdateDate <= '{$end->format('Y-m-d H:i:s')}')";
         }
 
         if (!empty($free_text)) {
@@ -471,19 +478,30 @@ final class SangriaPageDeploymentExtension extends Extension
         return $res;
     }
 
-// Add User Story from Deployment
+    // Add User Story from Deployment
+
+    public function getCountriesDDL(){
+        $ddl = new CountryDropdownField('country','country');
+        $ddl->setEmptyString('-- select a country --');
+        $ddl->addExtraClass('add-control');
+        $ddl->addExtraClass('countries-ddl');
+        return $ddl;
+    }
 
     function DeploymentsSurvey()
     {
 
+        $range_filter = "AND DeploymentSurvey.Created >= '" . SURVEY_START_DATE . "'";
+
         $sqlQuery = new SQLQuery();
-        $sqlQuery->setSelect(array('DeploymentSurvey.*'));
+        $sqlQuery->setSelect(array('DISTINCT DeploymentSurvey.*'));
         $sqlQuery->setFrom(array("DeploymentSurvey, Deployment, Org"));
         $sqlQuery->setWhere(array("Deployment.DeploymentSurveyID = DeploymentSurvey.ID
                             AND Deployment.IsPublic = 1
                             AND Org.ID = DeploymentSurvey.OrgID
                             AND DeploymentSurvey.Title IS NOT NULL
-                            "));
+                            ".$range_filter));
+
         $sqlQuery->setOrderBy('Org.Name');
 
         $result = $sqlQuery->execute();
@@ -521,8 +539,8 @@ final class SangriaPageDeploymentExtension extends Extension
         $userStory->ShowInAdmin = 1;
         $userStory->setParent($parent); // Should set the ID once the Holder is created...
         $userStory->write();
-        $userStory->publish("Live", "Stage");
-
+        //$userStory->publish("Live", "Stage");
+        $userStory->flushCache();
         $this->owner->setMessage('Success', '<b>' . $userStory->Title . '</b> added as User Story.');
 
         Controller::curr()->redirectBack();
@@ -534,10 +552,12 @@ final class SangriaPageDeploymentExtension extends Extension
         $survey = DataObject::get_one('DeploymentSurvey', 'ID = ' . $_POST['survey']);
 
         $deployment = new Deployment;
-        $deployment->Label = $_POST['label'];
-        $deployment->DeploymentType = $_POST['type'];
-        $deployment->CountryCode = $_POST['country'];
-        $deployment->DeploymentSurveyID = $_POST['survey'];
+
+        $deployment->Label                       = $_POST['label'];
+        $deployment->DeploymentType              = $_POST['type'];
+        $deployment->CountriesPhysicalLocation   = $_POST['country'];
+        $deployment->CountriesUsersLocation      = $_POST['country'];
+
         if ($survey) {
             $deployment->OrgID = $survey->OrgID;
         } else {
@@ -545,7 +565,8 @@ final class SangriaPageDeploymentExtension extends Extension
         }
         $deployment->IsPublic = 1;
         $deployment->write();
-
+        if($survey)
+            $survey->Deployments()->add($deployment);
         $this->owner->setMessage('Success', '<b>' . $_POST['label'] . '</b> added as a new Deployment.');
 
         Controller::curr()->redirectBack();
@@ -1058,5 +1079,11 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         return $list;
     }
 
-
+    public function getDeploymentTypeOptions(){
+        $options = '';
+        foreach(DeploymentOptions::$deployment_type_options as $key => $val){
+            $options .= sprintf('<option value="%s">%s</option>', $key, $val);
+        }
+        return $options;
+    }
 }
