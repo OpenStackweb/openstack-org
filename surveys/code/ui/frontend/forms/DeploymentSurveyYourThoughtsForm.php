@@ -19,6 +19,13 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
+        if(Director::isLive()) {
+            Requirements::javascript("themes/openstack/javascript/jquery.ui.touch-punch.min.js");
+        }
+        else{
+            Requirements::javascript("themes/openstack/javascript/jquery.ui.touch-punch.js");
+        }
+
         $survey = Controller::curr()->GetCurrentSurvey();
 
         $nextButton = new FormAction('NextStep', '  Next Step  ');
