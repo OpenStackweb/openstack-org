@@ -358,6 +358,16 @@ a.side-nav.side-nav-selected {
   border: 1px solid #D6C58F;
 }
 
+.staff-note .commenter {
+    font-size: 80%;
+    color: #6A6E6F;
+}
+
+#PresentationCommentForm_CommentForm_Body {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
 table.track-chairs-selections {
     background-color: #d4ebf1;
 }
