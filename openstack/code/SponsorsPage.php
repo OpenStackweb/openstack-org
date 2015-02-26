@@ -44,13 +44,20 @@ class SponsorsPage extends Page {
 	    $config = GridFieldConfig_RelationEditor::create();
 
 	    $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(array(
-		    array( 'Name'            => 'Name',
-			    "DDLSponsorshipType" => "Sponsorship Type",
-			    "DDLLogoSize"        => "Logo Size",
-			    "InputSubmitPageUrl" => "Sponsor Link"),
+
 	    ));
 
-	    $companies = new GridField('Companies','Companies',$this->Companies(),$config);
+        $companies = new GridField('Companies','Sponsors', $this->Companies(), GridFieldConfig_RelationEditor::create(10));
+
+        $companies->getConfig()->removeComponentsByType('GridFieldEditButton');
+        $companies->getConfig()->removeComponentsByType('GridFieldAddNewButton');
+
+        $companies->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
+            array( 'Name'            => 'Name',
+                "DDLSponsorshipType" => "Sponsorship Type",
+                "DDLLogoSize"        => "Logo Size",
+                "InputSubmitPageUrl" => "Sponsor Link")
+        );
 
 	    $fields->addFieldToTab('Root.SponsorCompanies',$companies);
 
