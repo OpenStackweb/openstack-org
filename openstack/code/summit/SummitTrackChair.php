@@ -18,5 +18,13 @@ class SummitTrackChair extends DataObject {
 		'Category' => 'SummitCategory',
 		'HasBeenEmailed' => 'Boolean'
 	);
+    
+    function SelectedTalkList() {
+        return SummitSelectedTalkList::get()->filter(array(
+            'SummitCategoryID' => $this->CategoryID,
+            'MemberID' => $this->MemberID,
+            'ListType' => 'Individual'
+        ));
+    }
 
 }

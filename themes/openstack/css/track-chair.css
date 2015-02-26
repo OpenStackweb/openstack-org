@@ -256,12 +256,12 @@ li.track-chair a {
       margin-top: -25px;
     }
 
-#sort-list {
+#member-list, #group-list, .team-member-selections {
   list-style: none;
     padding-left: 0px;  
 }
 
-#sort-list li {
+#member-list li, #group-list li, .team-member-selections li {
   display: block;
   padding: 20px 10px; margin-bottom: 3px;
   border: 1px solid #9BBBC3;
@@ -271,18 +271,18 @@ li.track-chair a {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
-#sort-list li img.handle {
+#member-list li img.handle, #group-list li img.handle {
   margin-right: 20px;
   cursor: move;
 }
 
-#sort-list li.alternate {
+#member-list li.alternate, #group-list li.alternate, .team-member-selections li.alternate {
   background-color: #ECECEC;
   box-shadow: none;
   border-color: #D0D0D0;
 }
 
-#sort-list li.unused-position {
+#member-list li.unused-position, #group-list li.unused-position, .team-member-selections li.unused-position {
   background: none;
   box-shadow: none;
   border: 1px dotted #9BBBC3;
@@ -290,6 +290,14 @@ li.track-chair a {
   font-style: italic;
   color: #86A3AA;
 }
+
+.team-member-selections li {
+    background-image: none;
+    background-color: #E6EFF2;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
 
 a.side-nav {
   display: block;
@@ -348,4 +356,19 @@ a.side-nav.side-nav-selected {
   background-color: #F6EDD0;
   margin: 10px 0px;
   border: 1px solid #D6C58F;
+}
+
+table.track-chairs-selections {
+    background-color: #d4ebf1;
+}
+
+table.track-chairs-selections td {
+    width: 130px;
+    padding-right: 10px;
+    vertical-align: top;
+}
+
+hr {
+    color: #789DA6;
+    border-color: #789DA6;
 }
