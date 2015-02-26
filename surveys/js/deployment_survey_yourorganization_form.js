@@ -33,7 +33,6 @@ jQuery(document).ready(function($) {
 
     form_validator = form.validate({
         rules: {
-            'Organization'  : {required: true },
             'Industry'  : {required: true },
             'PrimaryCountry' : {required: true },
             'PrimaryState' : {required: true },
