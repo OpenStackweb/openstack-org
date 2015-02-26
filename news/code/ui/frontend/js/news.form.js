@@ -106,7 +106,7 @@ jQuery(document).ready(function($){
 
             });
         },
-        forced_root_block : false,
+        forced_root_block : true,
         height: "250px",
         width: "800px"
     });
