@@ -23,6 +23,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         // Define fields //////////////////////////////////////
 
         $fields = new FieldList (
+            new LiteralField('Break', '<p>The questions on this page are optional, but will help us better understand the details of how the OpenStack software is being used. Any information you provide on this step will be treated as private and confidential and only used in aggregate reporting.</p><hr>'),
             new LiteralField('Break', '<p>The information below will help us better understand the most common configuration and component choices OpenStack deployments are using.</p>'),
             new LiteralField('Break', '<h3>Telemetry</h3>'),
             new LiteralField('Break', '<hr/>'),

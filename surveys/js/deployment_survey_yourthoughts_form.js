@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
                     $("<input type='text' id='other_txt'>").appendTo(answer);
                 }
                 answer.attr('data-key', key);
-                $("&nbsp;<a href='#' class='remove_answer' title='remove it'>[x]</a>").appendTo(answer);
+                $("&nbsp;<a href='#' class='remove_answer' title='remove it'>X</a>").appendTo(answer);
                 answer.appendTo(this);
                 draggable.addClass('hidden');
             }
