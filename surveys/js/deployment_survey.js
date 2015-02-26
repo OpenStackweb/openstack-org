@@ -108,22 +108,21 @@ function jqueryValidatorErrorPlacement(error, element) {
        error_container = element.parents('div[class*="textarea"]');
     if(element.hasClass('multidropdown'))
         error_container = element.parents('div[class*="multidropdown"]');
-    if(error_container.length == 0)
-        error_container = element;
-    if(!$(error_container).is(':visible')){
-        error_container = error_container.next();
+    if(error_container.length == 0 || !error_container.is(':visible')){
+        error_container = element.closest(":visible");
+        error_container.after(error);
     }
-    error.appendTo(error_container);
+    else
+        error.appendTo(error_container);
+    error.show();
 }
 
 function jqueryValidatorInvalidHandler(form, validator) {
     var errors = validator.numberOfInvalids();
     if (errors) {
         var first_error  = $(validator.errorList[0].element);
-        if(!$(first_error).is(':visible')){
-            do {
-                first_error = (first_error.attr('type') == 'hidden' )?first_error.prev(): first_error.next();
-            } while(!$(first_error).is(':visible'));
+        if(!first_error.is(':visible')){
+            first_error = first_error.closest(":visible" );
         }
         $('html, body').animate({
             scrollTop: first_error.offset().top

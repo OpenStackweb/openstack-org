@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 
         var count  = sorted.length;
         for(var i = 0; i < count; i++){
-            if(sorted[i] == 'Other' && $('#other_txt',  $("#options ol")).val()==='' ){
+            if(sorted[i] == '6311ae17c1ee52b36e68aaf4ad066387_answer' && $('#other_txt',  $("#options ol")).val()==='' ){
                 $.validator.messages.sortable_drivers = 'You must specify you custom business driver.';
                 return false;
             }
