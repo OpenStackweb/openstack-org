@@ -200,10 +200,13 @@ final class SangriaPage_Controller extends Page_Controller {
 	}
     //Survey date filters constructor
 
-    function DateFilters($action='') {
+    function DateFilters($action='', $use_subset = false) {
         $start_date = ($this->request->getVar('From')) ? $this->request->getVar('From') : self::$default_start_date;
         $end_date = ($this->request->getVar('To')) ? $this->request->getVar('To') : self::$default_end_date;
-        $data = array("start_date"=>$start_date, "end_date"=>$end_date, "action"=>$action);
+        $data = array( "start_date" => $start_date,
+			           "end_date"   =>  $end_date,
+			           "action"     => $action,
+					   "use_subset" => $use_subset);
         return $this->renderWith("SurveyDateFilters",$data);
     }
 

@@ -131,7 +131,7 @@ class DeploymentSurvey extends DataObject
 		'Service Provider' => 'OpenStack cloud service provider - provides public or hosted private cloud services for other organizations',
 		'Ecosystem Vendor' => 'Ecosystem vendor - provides software or solutions that enable others to build or run OpenStack clouds',
 		'Cloud operator' => 'Private cloud operator - Runs an OpenStack private cloud for your own organization',
-		'Cloud Consumer' => 'Consumer of an OpenStack cloud - has API or dashboard credentials for one or more OpenStack resource pools, including an <strong>Application Developer<strong>'
+		'Cloud Consumer' => 'Consumer of an OpenStack cloud - has API or dashboard credentials for one or more OpenStack resource pools, including an Application Developer'
 	);
 
 	public static $information_options = array(
@@ -185,23 +185,22 @@ class DeploymentSurvey extends DataObject
 
 	function getCMSFields()
 	{
-
-		$fields = new FieldList(array(new TabSet("Root")));
+		$fields = new FieldList();
+		$fields->push(new TabSet("Root"));
 
 		$CountryCodes = CountryCodes::$iso_3166_countryCodes;
 
-
 		$fields->addFieldsToTab('Root.About You',
 			array(
-				$first_name_field = new ReadonlyField('FirstName', 'First name / Given name'),
-				$last_name_field  = new ReadonlyField('Surname', 'Last name / Family name'),
+				$first_name_field 		= new ReadonlyField('FirstName', 'First name / Given name'),
+				$last_name_field  		= new ReadonlyField('Surname', 'Last name / Family name'),
 				$os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurvey::$activities_options),
 				$os_relationship        = new TextAreaField('OpenStackRelationship', 'Please describe your relationship with OpenStack'),
 				$email_field            = new ReadonlyField('Member.Email', 'Your Email', $this->Member()->Email),
 				$ok_2_contact           = new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee may communicate with me in the future about my usage.')
 			));
 
-		$fields->addFieldsToTab('Root.Your Organization', array(
+		$fields->addFieldsToTab('Root.YourOrganization', array(
 			new ReadonlyField('Org.Name', 'Organization', $this->Org()->Name),
 			new DropdownField(
 				'Industry',
@@ -223,7 +222,7 @@ class DeploymentSurvey extends DataObject
 				'Your Organization Size (All Branches, Locations, Sites)',
 				DeploymentSurvey::$organization_size_options
 			),
-			new CustomCheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options))
+			new CheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options))
 		));
 
 		$ddl_country->setEmptyString('-- Select One --');
@@ -270,6 +269,7 @@ class DeploymentSurvey extends DataObject
 
 
 		return $fields;
+		//return parent::getCMSFields();
 	}
 
 	public function DisplayOrg()
@@ -319,6 +319,14 @@ class DeploymentSurvey extends DataObject
 			return SurveyType::MARCH_2015;
 		else
 			return SurveyType::OLD;
+	}
+
+	public function canEdit($member = null) {
+		return $this->getSurveyType() == SurveyType::MARCH_2015;
+	}
+
+	public function canDelete($member = null) {
+		return $this->getSurveyType() == SurveyType::MARCH_2015;
 	}
 }
 

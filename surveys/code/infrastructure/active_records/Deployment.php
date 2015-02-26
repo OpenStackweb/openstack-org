@@ -131,7 +131,7 @@ class Deployment extends DataObject
                 new CustomCheckboxSetField('CurrentReleases', 'What releases are you currently using?', DeploymentOptions::$current_release_options),
                 new LiteralField('Break','Describe the workloads and frameworks running in this OpenStack environment.<BR>Select All That Apply'),
                 new LiteralField('Break','<hr/>'),
-                new CustomCheckboxSetField('ServicesDeploymentsWorkloads','<b>Services Deployments - workloads designed to be accessible for external users / customers</b>',DeploymentOptionst::$services_deployment_workloads_options),
+                new CustomCheckboxSetField('ServicesDeploymentsWorkloads','<b>Services Deployments - workloads designed to be accessible for external users / customers</b>',DeploymentOptions::$services_deployment_workloads_options),
                 $other_service_workload = new TextAreaField('OtherServicesDeploymentsWorkloads',''),
                 new CustomCheckboxSetField('EnterpriseDeploymentsWorkloads','<b>Enterprise Deployments - workloads designed to be run internally to support business</b>', DeploymentOptions::$enterprise_deployment_workloads_options),
                 $other_enterprise_workload = new TextAreaField('OtherEnterpriseDeploymentsWorkloads',''),
@@ -162,7 +162,7 @@ class Deployment extends DataObject
 
             new CustomCheckboxSetField(
                 'CustomPackagesReason',
-                'If you have modified packages or have built your own packages, why?<BR>Select All That Apply', DeploymentOptionst::$custom_package_reason_options
+                'If you have modified packages or have built your own packages, why?<BR>Select All That Apply', DeploymentOptions::$custom_package_reason_options
             ),
             $other_custom_reason = new TextareaField('OtherCustomPackagesReason', ''),
 
@@ -400,6 +400,14 @@ class Deployment extends DataObject
             return SurveyType::MARCH_2015;
         else
             return SurveyType::OLD;
+    }
+
+    public function canEdit($member = null) {
+        return $this->getSurveyType() == SurveyType::MARCH_2015;
+    }
+
+    public function canDelete($member = null) {
+        return $this->getSurveyType() == SurveyType::MARCH_2015;
     }
 
 }

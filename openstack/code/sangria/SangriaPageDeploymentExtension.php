@@ -96,8 +96,9 @@ final class SangriaPageDeploymentExtension extends Extension
         return $this->owner->Customise(array())->renderWith(array('SangriaPage_ViewDeploymentSurveyStatistics', 'SangriaPage', 'SangriaPage'));
     }
 
-    private static function boolval($var) {
-        if (!is_string($var)) return (bool) $var;
+    private static function boolval($var)
+    {
+        if (!is_string($var)) return (bool)$var;
         switch (strtolower($var)) {
             case '1':
             case 'true':
@@ -138,7 +139,8 @@ final class SangriaPageDeploymentExtension extends Extension
         return is_null($range) ? SurveyType::OLD : $range;
     }
 
-    private static function generateDeploymentSurveysSummaryOptions($options, $field){
+    private static function generateDeploymentSurveysSummaryOptions($options, $field)
+    {
         $list = new ArrayList();
         $range = self::getSurveyRange('ViewDeploymentSurveyStatistics');
 
@@ -181,7 +183,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function IndustrySummary()
     {
-       return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$industry_options, 'DS.Industry');
+        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$industry_options, 'DS.Industry');
     }
 
     function OtherIndustry()
@@ -191,7 +193,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function OrganizationSizeSummary()
     {
-       return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$organization_size_options, 'DS.OrgSize');
+        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$organization_size_options, 'DS.OrgSize');
     }
 
     function InvolvementSummary()
@@ -456,7 +458,7 @@ final class SangriaPageDeploymentExtension extends Extension
             }
         }
 
-        $where_query = "IsPublic = 1 ".$range_filter;
+        $where_query = "IsPublic = 1 " . $range_filter;
         $res = Deployment::get();
         if (!empty($date_from) && !empty($date_to)) {
             $start = new \DateTime($date_from);
@@ -480,8 +482,9 @@ final class SangriaPageDeploymentExtension extends Extension
 
     // Add User Story from Deployment
 
-    public function getCountriesDDL(){
-        $ddl = new CountryDropdownField('country','country');
+    public function getCountriesDDL()
+    {
+        $ddl = new CountryDropdownField('country', 'country');
         $ddl->setEmptyString('-- select a country --');
         $ddl->addExtraClass('add-control');
         $ddl->addExtraClass('countries-ddl');
@@ -500,7 +503,7 @@ final class SangriaPageDeploymentExtension extends Extension
                             AND Deployment.IsPublic = 1
                             AND Org.ID = DeploymentSurvey.OrgID
                             AND DeploymentSurvey.Title IS NOT NULL
-                            ".$range_filter));
+                            " . $range_filter));
 
         $sqlQuery->setOrderBy('Org.Name');
 
@@ -553,10 +556,10 @@ final class SangriaPageDeploymentExtension extends Extension
 
         $deployment = new Deployment;
 
-        $deployment->Label                       = $_POST['label'];
-        $deployment->DeploymentType              = $_POST['type'];
-        $deployment->CountriesPhysicalLocation   = $_POST['country'];
-        $deployment->CountriesUsersLocation      = $_POST['country'];
+        $deployment->Label = $_POST['label'];
+        $deployment->DeploymentType = $_POST['type'];
+        $deployment->CountriesPhysicalLocation = $_POST['country'];
+        $deployment->CountriesUsersLocation = $_POST['country'];
 
         if ($survey) {
             $deployment->OrgID = $survey->OrgID;
@@ -565,7 +568,7 @@ final class SangriaPageDeploymentExtension extends Extension
         }
         $deployment->IsPublic = 1;
         $deployment->write();
-        if($survey)
+        if ($survey)
             $survey->Deployments()->add($deployment);
         $this->owner->setMessage('Success', '<b>' . $_POST['label'] . '</b> added as a new Deployment.');
 
@@ -796,12 +799,14 @@ WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode;
         return $list;
     }
 
-    public function GetLinkForDeploymentsPerCountry($country){
-        return $this->owner->Link('ViewDeploymentsPerRegion').'?country='.$country;
+    public function GetLinkForDeploymentsPerCountry($country)
+    {
+        return $this->owner->Link('ViewDeploymentsPerRegion') . '?country=' . $country;
     }
 
-    public function GetLinkForDeploymentsPerContinent($continent){
-        return $this->owner->Link('ViewDeploymentsPerRegion').'?continent='.$continent;
+    public function GetLinkForDeploymentsPerContinent($continent)
+    {
+        return $this->owner->Link('ViewDeploymentsPerRegion') . '?continent=' . $continent;
     }
 
     // deployment surveys per region
@@ -834,6 +839,12 @@ WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode;
         Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
         Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
 
+        $range = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
+        if ($range == SurveyType::MARCH_2015)
+            $range_filter = " AND DS.Created >= '" . SURVEY_START_DATE . "'";
+        else
+            $range_filter = " AND DS.Created < '" . SURVEY_START_DATE . "'";
+
         if (!empty($continent)) {
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();
             $result = array(
@@ -846,7 +857,7 @@ WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode;
 
         if (!empty($country)) {
             $continent = DB::query("SELECT ContinentID from Continent_Countries where CountryCode = '{$country}';")->value();
-            $count = DB::query("SELECT COUNT(*) FROM DeploymentSurvey DS WHERE DS.PrimaryCountry = '{$country}';")->value();
+            $count = DB::query("SELECT COUNT(*) FROM DeploymentSurvey DS WHERE DS.PrimaryCountry = '{$country}' {$range_filter};")->value();
             $result = array(
                 'country' => $country,
                 'country_name' => CountryCodes::$iso_3166_countryCodes[$country],
@@ -863,11 +874,18 @@ WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode;
 
     function DeploymentSurveysPerContinent()
     {
+
+        $range = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
+        if ($range == SurveyType::MARCH_2015)
+            $range_filter = " WHERE DS.Created >= '" . SURVEY_START_DATE . "'";
+        else
+            $range_filter = " WHERE DS.Created < '" . SURVEY_START_DATE . "'";
+
         $list = new ArrayList();
-        $records = DB::query('SELECT COUNT(DS.ID) AS DeploymentsQty, C.ID AS ContinentID, C.Name AS Continent FROM DeploymentSurvey DS
+        $records = DB::query("SELECT COUNT(DS.ID) AS DeploymentsQty, C.ID AS ContinentID, C.Name AS Continent FROM DeploymentSurvey DS
 INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry
-INNER JOIN Continent C ON C.ID = CC.ContinentID
-GROUP BY C.Name, C.ID;');
+INNER JOIN Continent C ON C.ID = CC.ContinentID {$range_filter}
+GROUP BY C.Name, C.ID;");
         foreach ($records as $record) {
             $count = $record['DeploymentsQty'];
             $continent = $record['Continent'];
@@ -883,8 +901,14 @@ GROUP BY C.Name, C.ID;');
 
     function DeploymentSurveysPerCountry($country)
     {
+        $range = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
+        if ($range == SurveyType::MARCH_2015)
+            $range_filter = " AND DS.Created >= '" . SURVEY_START_DATE . "'";
+        else
+            $range_filter = " AND DS.Created < '" . SURVEY_START_DATE . "'";
+
         $list = new ArrayList();
-        $deployments = DB::query("SELECT DS.* from DeploymentSurvey DS WHERE DS.PrimaryCountry = '{$country}' ; ");
+        $deployments = DB::query("SELECT DS.* from DeploymentSurvey DS WHERE DS.PrimaryCountry = '{$country}' {$range_filter}; ");
         foreach ($deployments as $deployment) {
             // concept: new DeploymentSurvey($deployment)
             $list->push(new $deployment['ClassName']($deployment));
@@ -894,10 +918,16 @@ GROUP BY C.Name, C.ID;');
 
     function DeploymentSurveysPerContinentCountry($continent_id)
     {
+        $range = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
+        if ($range == SurveyType::MARCH_2015)
+            $range_filter = " AND DS.Created >= '" . SURVEY_START_DATE . "'";
+        else
+            $range_filter = " AND DS.Created < '" . SURVEY_START_DATE . "'";
+
 
         $list = new ArrayList();
         $countries = DB::query("SELECT COUNT(DS.ID) AS Qty, DS.PrimaryCountry FROM DeploymentSurvey DS WHERE PrimaryCountry
-IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_id}) group BY PrimaryCountry;");
+IN (SELECT CountryCode FROM Continent_Countries WHERE ContinentID = {$continent_id}) {$range_filter} GROUP BY PrimaryCountry;");
         foreach ($countries as $country) {
             $count = $country['Qty'];
             $country = $country['PrimaryCountry'];
@@ -912,14 +942,27 @@ IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_
         return $list;
     }
 
+    public function GetLinkForDeploymentSurveysPerContinent($continent){
+        return $this->owner->Link('ViewDeploymentSurveysPerRegion').'?continent='.$continent;
+    }
+
+    public function GetLinkForDeploymentSurveysPerCountry($country){
+        return $this->owner->Link('ViewDeploymentSurveysPerRegion').'?country='.$country;
+    }
 
     // user per region
 
     function CountriesWithDeploymentSurveys($continent_id)
     {
+        $range = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
+        if ($range == SurveyType::MARCH_2015)
+            $range_filter = " AND DS.Created >= '" . SURVEY_START_DATE . "'";
+        else
+            $range_filter = " AND DS.Created < '" . SURVEY_START_DATE . "'";
+
         $list = new ArrayList();
         $countries = DB::query("SELECT  CC.CountryCode, COUNT(CC.CountryCode) AS Qty from Continent_Countries CC INNER JOIN DeploymentSurvey DS ON DS.PrimaryCountry = CC.CountryCode
-        WHERE CC.ContinentID =  {$continent_id} GROUP BY CC.CountryCode; ");
+        WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode; ");
         foreach ($countries as $country) {
             // concept: new Deployment($deployment)
             $do = new DataObject();
@@ -1079,9 +1122,10 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         return $list;
     }
 
-    public function getDeploymentTypeOptions(){
+    public function getDeploymentTypeOptions()
+    {
         $options = '';
-        foreach(DeploymentOptions::$deployment_type_options as $key => $val){
+        foreach (DeploymentOptions::$deployment_type_options as $key => $val) {
             $options .= sprintf('<option value="%s">%s</option>', $key, $val);
         }
         return $options;
