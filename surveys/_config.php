@@ -12,4 +12,4 @@
  * limitations under the License.
  **/
 
-define('SURVEY_START_DATE','2015-02-24 00:00:00');
+define('SURVEY_START_DATE','2015-02-26 00:00:00');

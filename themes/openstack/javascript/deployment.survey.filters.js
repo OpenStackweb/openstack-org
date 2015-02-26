@@ -40,12 +40,16 @@ jQuery(document).ready(function($) {
 
         $(submit_id).click(function(){
             var parent = $(this).parents('fieldset');
-            var from = $(start_date_id,parent).val();
-            var to = $(end_date_id,parent).val();
-            var action = $(action_id,parent).val();
+            var from   = $(start_date_id, parent).val();
+            var to     = $(end_date_id, parent).val();
+            var action = $(action_id, parent).val();
 
             if (action) {
-                document.location = "/sangria/" + action + "?From="+from+"&To="+to;
+                var subset_filter = '';
+                if($('#range',parent).length > 0){
+                    subset_filter = '&Range='+$('#range',parent).val();
+                }
+                document.location = "/sangria/" + action + "?From="+from+"&To="+to+subset_filter;
             } else {
                 var queryParameters = {};
                 var queryString = document.location.search.substring(1);

@@ -1,3 +1,4 @@
+<% include SangriaPage_SurveyRangeSelector Label='Surveys Subset', FormAction=$Top.GetLinkForDeploymentSurveysPerCountry($country), FromPage=ViewDeploymentSurveysPerRegion %>
 <script type="application/javascript">
         $LoadJsonCountriesCoordinates('ViewDeploymentSurveysPerRegion')
     var countries_with_deployment = [];
@@ -12,10 +13,10 @@
                 <% loop DeploymentSurveysPerCountry($country) %>
                     <li>
                         <script type="application/javascript">
-                            if(!countries_with_deployment.hasOwnProperty("{$country}") )
-                                countries_with_deployment["{$country}"] = new Array();
-                            var deployments = countries_with_deployment["{$country}"];
-                            deployments.push({code:"{$country}" , name : "{$Label} - {$DeploymentType}", url: "{$Top.Link(SurveyDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentSurveysPerRegion)}%3Fcountry%3D{$Top.country}" });
+                            if(!countries_with_deployment.hasOwnProperty("{$PrimaryCountry}") )
+                                countries_with_deployment["{$PrimaryCountry}"] = new Array();
+                            var deployments = countries_with_deployment["{$PrimaryCountry}"];
+                            deployments.push({code:"{$PrimaryCountry}" , name : "{$Email} - {$Industry}", url: "{$Top.Link(SurveyDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentSurveysPerRegion)}%3Fcountry%3D{$Top.country}" });
                         </script>
                         <a href="{$Top.Link(SurveyDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentSurveysPerRegion)}%3Fcountry%3D{$Top.country}">$Org.Name</a>
                     </li>
