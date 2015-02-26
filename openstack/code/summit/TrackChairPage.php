@@ -867,7 +867,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		//Add member to the group
 		$Member->Groups()->add($Group);
 		$Member->write();
-		$ExistingTrackChair = SummitTrackChair::get()->filter(array('MemberID'=>$MemberID,'CategoryID'=>$CategoryID));
+		$ExistingTrackChair = SummitTrackChair::get()->filter(array('MemberID'=>$MemberID,'CategoryID'=>$CategoryID))->first();
 		if (!$ExistingTrackChair) {
 			$TrackChair = new SummitTrackChair();
 			$TrackChair->MemberID = $MemberID;
