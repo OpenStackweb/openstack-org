@@ -26,7 +26,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
         $custom_field = array(
             new LiteralField('header','<div id="catalog">'),
-            new LiteralField('custom_question', 'What are your top business drivers for using OpenStack?<BR>Please rank up to 5.<BR>1 = top business driver, 2 = next, 3 = third, and so on<BR>Select At Least One'),
+            new LiteralField('custom_question', '<p>What are your top business drivers for using OpenStack?</p><p>Please rank up to 5.</p><p>1 = top business driver, 2 = next, 3 = third, and so on</p><p><strong>Select At Least One</strong></p>'),
             new LiteralField('ul_begin','<ul id="answers">'),
         );
 
@@ -41,7 +41,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
         array_push($custom_field, new LiteralField('options','<div id="options"><div class="ui-widget-content"><ol>'));
         if(empty($survey->BusinessDrivers)) {
-            array_push($custom_field, new LiteralField('placeholder', '<li class="ui-sortable-handle placeholder">Add your answers here</li>'));
+            array_push($custom_field, new LiteralField('placeholder', '<div class="placeholder">Drag and drop your answers here</div>'));
         }
         else{
             $drivers = explode(',',$survey->BusinessDrivers);
@@ -51,7 +51,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
                     $input = $driver === 'Other' ? "<input type='text' id='other_txt' value='{$survey->OtherBusinessDrivers}'>":'';
                     $text  = $driver === 'Other' ? 'Something else not listed here (please specify)': @DeploymentSurvey::$business_drivers_options[$driver];
                     if(!empty($text))
-                          array_push($custom_field, new LiteralField('answer', '<li class="ui-state-default ui-sortable-handle" id="'.md5($driver).'_answer" data-key="'.md5($driver).'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.$text.$input.'&nbsp;<a href="#" class="remove_answer" title="remove it">[x]</a></li>'));
+                          array_push($custom_field, new LiteralField('answer', '<li class="ui-state-default ui-sortable-handle" id="'.md5($driver).'_answer" data-key="'.md5($driver).'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.$text.$input.'&nbsp;<a href="#" class="remove_answer" title="remove it">X</a></li>'));
                 }
             }
         }

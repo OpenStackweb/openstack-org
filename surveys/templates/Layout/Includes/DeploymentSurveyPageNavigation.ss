@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-md-12" style="padding-left: 0 !important;padding-right: 0 !important;">
-        Logged in as <strong>$CurrentMember.FirstName</strong>. &nbsp; <a href="{$link}logout" class="roundedButton">Log Out</a>
+    <div class="col-sm-12 survey-top" style="padding-left: 0 !important;padding-right: 0 !important;">
+        Logged in as <strong>$CurrentMember.FirstName</strong>. &nbsp; <a href="{$link}logout" class="survey-logout">Log Out</a>
     </div>
 </div>
 <div class="row">

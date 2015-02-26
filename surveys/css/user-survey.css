@@ -164,3 +164,242 @@ ol.ui-sortable li {
 #catalog{
 	margin-bottom: 1em !important;
 }
+
+
+/*Wes Adjustments - Need to move*/
+.answer_option {
+    cursor: move;
+    background: #edf2f7;
+    border: 1px solid #D4DCE5;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    list-style: none;
+}
+
+ul#answers {
+    margin: 40px 0 30px 0;
+    padding: 0;
+}
+
+ul#DeploymentSurveyYourThoughtsForm_Form_InformationSources li label {
+    margin-top: 0;
+}
+
+div#user, div#time, div#private {
+border: 1px solid #D4DCE5;
+padding: 15px;
+padding-top: 100px;
+min-height: 13em;
+margin-bottom: 20px;
+border-radius: 4px;
+text-align: center;
+}
+
+fieldset.fake {
+    border: 1px solid #CCCCCC;
+    padding: 20px 17px 20px 17px;
+    margin: 0 0 20px 0; 
+}
+.survey-login-wrapper {
+border: 1px solid #D4DCE5;
+padding: 20px 17px 20px 17px;
+margin-bottom: 20px;
+border-radius: 4px;
+background: white;
+}
+.survey-login-wrapper fieldset {
+    border: none;
+    padding: 0;
+}
+.survey-login-wrapper fieldset label {
+    padding-top: 0;
+    color: #a9a9a9;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-align: left;
+}
+.survey-login-wrapper fieldset input[type="password"], .survey-login-wrapper fieldset input[type="text"] {
+  border: 2px solid #D4DCE5;
+  box-shadow: none;
+  color: #2A4E68;
+  font-size: 1.1em;
+  border-radius: 4px;
+  width: 100%;
+  padding: 10px; 
+}
+.survey-login-wrapper fieldset input[type="password"]:focus, .survey-login-wrapper fieldset input[type="text"]:focus {
+    outline: none;
+}
+input#MemberLoginForm_LoginForm_action_dologin, input#DeploymentSurveyRegistrationForm_RegisterForm_action_StartSurvey {
+    display: block;
+    background: #30739C;
+    padding: 10px 20px;
+    border: none;
+    text-shadow: none;
+    border-radius: 4px;
+    margin: 10px 0;
+    color: white !important;
+    font-weight: 600;
+    box-shadow: none;
+}
+input#MemberLoginForm_LoginForm_action_dologin:hover, input#DeploymentSurveyRegistrationForm_RegisterForm_action_StartSurvey:hover {
+    background: #2A4E68;
+}
+ul.survey-steps li {
+    margin-bottom: -1px;
+}
+ul.survey-steps li a.future:hover {
+    cursor: default;
+    text-decoration: none;
+}
+input.action, input.action:focus, input.action:active {
+    display: block;
+    outline: none;
+    background: #30739C;
+    padding: 10px 20px;
+    border: none;
+    text-shadow: none;
+    border-radius: 4px;
+    margin: 10px 0;
+    color: white !important;
+    font-weight: 600;
+    box-shadow: none;
+}
+input.action:hover {
+    background: #2A4E68;
+}
+ul.checkboxset input[type="checkbox"] {
+    margin: 0 10px 0 0;
+    display: inline-block;
+    border: 2px solid #D4DCE5;
+    box-shadow: none;
+    color: #2A4E68;
+    font-size: 1.1em;
+    border-radius: 4px;
+    padding: 10px; 
+}
+.optionset label {
+    top: 0;
+}
+ul#answers {
+    width: 49%;
+    float: left;
+}
+#options {
+    width: 49%;
+    float: right;
+    margin: 25px 0 30px 0;
+}
+.ui-widget-content {
+    border: none !important;
+    background: #ffffff !important;
+    border-radius: 4px !important;
+}
+.ui-widget-content ol li.ui-sortable-handle.placeholder {
+    border: none !important;
+    color: #555555 !important;
+    height: 50px !important;
+    background: transparent !important;
+    text-align: center !important;
+    margin: 0 !important;
+}
+ol.ui-droppable, .ui-state-default {
+    border: 2px dashed #D4DCE5;
+    background: white;
+    font-weight: normal;
+    color: #555555;
+    padding: 30px;
+}
+.ui-state-default {
+    border: 2px dashed #30739C !important;
+    background: #f9f9f9 !important;
+    padding: 10px;
+    margin: 0;
+}
+ol.ui-sortable li {
+    position: relative;
+    font-size: 1em;
+    padding: 20px 40px !important;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid #D4DCE5 !important;
+    border-radius: 4px;
+    background: #edf2f7 !important;
+    list-style: none;
+    margin-bottom: 10px;
+}
+ol.ui-sortable li:last-child {
+    margin-bottom: 0;
+}
+.ui-sortable-handle {
+    height: auto;
+    cursor: grab;
+}
+.ui-state-default a.remove_answer {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -7px;
+    background: #C0C5C9;
+    padding: 3px 4px;
+    line-height: 1;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.8em;
+    font-weight: 700;
+    display: block;
+}
+.ui-state-default a.remove_answer:hover {
+    background: #A51B1B;
+    color: white;
+}
+.ui-state-default .ui-icon {
+    background-image: url(images/ui-icons_888888_256x240.png); 
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 25px;
+    cursor: move;
+}
+textarea {
+    min-width: 450px;
+}
+a.blue-button, a.roundedButton {
+    display: inline-block;
+    outline: none;
+    background: #30739C;
+    padding: 10px 20px;
+    border: none;
+    text-shadow: none;
+    border-radius: 4px;
+    margin: 10px 0;
+    color: white !important;
+    font-weight: 600;
+    box-shadow: none;
+}
+a.blue-button:hover, a.roundedButton:hover, a.roundedButton:active {
+    background: #2A4E68;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+a.cancel, a.cancel:hover, a.cancel:active, a.cancel:focus {
+    background: none;
+    border: none;
+    box-shadow: none;
+    text-decoration: underline !important;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+.survey-top {
+    margin-bottom: 20px;
+}
+div.deployment {
+    background: #edf2f7 url(/themes/openstack/images/user-survey/cloud.png) no-repeat 20px center;
+    margin-top: -1px;
+    border-radius: 4px;
+    border: 1px solid #D4DCE5;
+    padding: 10px 20px;
+}
