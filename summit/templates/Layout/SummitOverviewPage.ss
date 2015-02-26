@@ -22,6 +22,8 @@
                     <% end_if %>
                     <li><a href="{$Link}about-vancouver/#hotels"><i class="fa fa-h-square"></i>Find a Hotel</a>
                     </li>
+                    <li><a href="{$Link}about-vancouver/#visa"><i class="fa fa-globe"></i>Visa Information</a>
+                    </li>
                     <li><a href="{$Link}details-and-updates/"><i class="fa fa-plane"></i>Plan Travel Dates</a>
                     </li>
                     <hr>
