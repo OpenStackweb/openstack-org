@@ -36,7 +36,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		'Next',
 		'Previous',
 		'SearchForm',
-		'FlagForm',
+		'CommentForm',
 		'SubcategoryForm',
 		'CleanTalks',
 		'CleanSpeakers',
@@ -466,25 +466,26 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 	}
 
-	function FlagForm()
+	function CommentForm()
 	{
-		$FlagForm = new PresentationFlagForm($this, 'FlagForm');
-		$FlagForm->disableSecurityToken();
-		$Talk = $this->findTalk();
-		if ($Talk) $FlagForm->loadDataFrom($Talk->data());
-		return $FlagForm;
+		$CommentForm = new PresentationCommentForm($this, 'CommentForm');
+		$CommentForm->disableSecurityToken();
+		return $CommentForm;
 	}
 
-	function doFlag($data, $form)
+	function doComment($data, $form)
 	{
 		$Talk = $this->findTalk();
-		if ($data['FlagComment'] && $Talk) {
-			$Talk->FlagComment = $data['FlagComment'];
-		} elseif ($Talk) {
-			$Talk->FlagComment = NULL;
-		}
-		$Talk->write();
-		$this->redirectBack();
+		if ($data['Body'] && $Talk) {
+            $Comment = new SummitTalkComment();
+			$Comment->Body = $data['Body'];
+            $Comment->CommenterID = Member::currentUserID();
+            $Comment->TalkID = $Talk->ID;
+            $Comment->Write();
+		} 
+        
+        $this->redirectBack();
+        
 	}
 
 	function SubcategoryForm()

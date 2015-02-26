@@ -53,6 +53,7 @@ class Talk extends DataObject {
 
 	static $has_many = array(
 		'SpeakerVotes' => 'SpeakerVote',
+        'Comments' => 'SummitTalkComment'
 	);
 
 	static $many_many = array(

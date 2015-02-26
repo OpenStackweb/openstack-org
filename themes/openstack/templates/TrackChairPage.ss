@@ -204,10 +204,10 @@
           <div class='modal-content'>
             <div class='modal-header'>
               <button class='close' data-dismiss='modal' type='button'>&times;</button>
-              <h4>Flag Presentation</h4>
+              <h4>Comment On This Presentation</h4>
             </div>
             <div class='modal-body'>
-              {$Top.FlagForm}
+              {$Top.CommentForm}
             </div>
           </div>
         </div>
@@ -231,8 +231,13 @@
 
       <div class='row'>
         <div class='col-lg-12' id='presentation-area'>
-          <% if StaffNote %>
-            <div class="staff-note"><strong>Note:</strong> $StaffNote</div>
+          <% if Comments %>
+            <% loop Comments %>
+                <div class="staff-note">
+                    $Body
+                    <div class="commenter">by $Commenter.FirstName $Commenter.Surname</div>
+                </div>
+            <% end_loop %>
           <% end_if %>
           <ul class='nav nav-tabs' id='presentation-tabs'>
             <li class='active'>
