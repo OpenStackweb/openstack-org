@@ -106,8 +106,7 @@ jQuery(document).ready(function($){
 
             });
         },
-        force_br_newlines : true,
-        force_p_newlines : false,
+        forced_root_block : false,
         height: "250px",
         width: "800px"
     });
