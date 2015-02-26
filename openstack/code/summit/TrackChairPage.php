@@ -857,7 +857,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		$Category = SummitCategory::get()->byID($CategoryID);
 
 		//Find or create the 'track-chairs' group
-		if (!$Group = Group::filter('Code', 'track-chairs')->first()) {
+		if (!$Group = Group::get()->filter('Code', 'track-chairs')->first()) {
 			$Group = new Group();
 			$Group->Code = "track-chairs";
 			$Group->Title = "Track Chairs";
