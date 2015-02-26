@@ -33,11 +33,7 @@
                             <input type="hidden" class="article_rank" value="$Rank" />
                             <input type="hidden" class="article_type" value="recent" />
                             <div class="newsImage">
-                                <% if Link %>
-                                    <a href="$Link">$Image.CroppedImage(200,100)</a>
-                                <% else %>
-                                    $Image.CroppedImage(200,100)
-                                <% end_if %>
+                                <a href="news/view/$ID/$HeadlineForUrl">$Image.CroppedImage(200,100)</a>
                             </div>
                             <div class="newsText">
                                 <p class="headline">&ldquo;$Headline&rdquo;</p>
@@ -64,11 +60,7 @@
                         <input type="hidden" class="article_rank" value="$Rank" />
                         <input type="hidden" class="article_type" value="standby" />
                         <div class="newsImage">
-                            <% if Link %>
-                                <a href="$Link">$Image.CroppedImage(200,100)</a>
-                            <% else %>
-                                $Image.CroppedImage(200,100)
-                            <% end_if %>
+                            <a href="news/view/$ID/$HeadlineForUrl">$Image.CroppedImage(200,100)</a>
                         </div>
                         <div class="newsText">
                             <p class="headline">&ldquo;$Headline&rdquo;</p>

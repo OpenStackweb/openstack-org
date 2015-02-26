@@ -33,7 +33,7 @@
                 <% end_if %>
                 <div class="carousel-caption">
                     <h3 class='largeHeadline'>$Headline</h3>
-                    <div class='sliderSummary'>$RAW_val(Summary)</div>
+                    <div class='sliderSummary'>$HTMLSummary</div>
                     <a class="more-btn" href="news/view/$ID/$HeadlineForUrl">Read More <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                                     <% end_if %>
                                 </a>
                             </div>
-                            <div class="featuredSummary">$RAW_val(Summary)</div>
+                            <div class="featuredSummary">$HTMLSummary</div>
                         </li>
                     </div>
                 <% end_loop %>
@@ -86,7 +86,7 @@
                     <div class="recentHeadline">
                         <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
                     </div>
-                    <div class="recentSummary">$RAW_val(Summary)</div>
+                    <div class="recentSummary">$HTMLSummary</div>
                 </div>
 
             <% end_loop %>
