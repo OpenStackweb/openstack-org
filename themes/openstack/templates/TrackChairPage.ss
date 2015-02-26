@@ -111,7 +111,7 @@
               <% loop PresentationList %>
 
               <tr id="$ID">
-                <td class = "title-column <% if IsSelected %>selected-presentation<% end_if %>">
+                <td class = "title-column <% if IsMemberSelected %>selected-presentation<% end_if %>">
                     <a href="{$Top.Link}Show/{$ID}">$PresentationTitle</a>
                 </td>
                 <td>$VoteCount</td>
@@ -152,33 +152,52 @@
           <h4>$PresentationTitle</h4>
             <div class="row">
               <% if CanAssign %>
-              <div class="col-lg-8">
+              <div class="col-lg-12">
               <div class='btn-group'>
-                <% if IsSelected %>
-                  <a class='btn btn-default' href='{$Top.Link}UnselectTalk/{$ID}' type='button'>Unselect</a>
+                <% if IsMemberSelected %>
+                  <a class='btn btn-default' href='{$Top.Link}UnselectMemberTalk/{$ID}' type='button'>Remove From My List</a>
                 <% else %>                  
-                  <a class='btn btn-default' href='{$Top.Link}SelectTalk/{$ID}' type='button'>Select</a>
+                  <a class='btn btn-default' href='{$Top.Link}SelectMemberTalk/{$ID}'>Add To My List</a>
                 <% end_if %>
-                <a class='btn btn-default' data-toggle='modal' href='#add-note' type='button'>
-                  Flag
-                </a>
-                <a class='btn btn-default' data-toggle='modal' href='#subcategories' type='button'>
-                  Subcategories
-                </a>
+                <% if IsGroupSelected %>
+                  <a class='btn btn-default' href='{$Top.Link}UnselectGroupTalk/{$ID}' type='button'>Remove From Group List</a>
+                <% else %>                  
+                  <a class='btn btn-default' href='{$Top.Link}SelectGroupTalk/{$ID}'>Add To Group List</a>
+                <% end_if %>                
+                
                 <% if IsAdmin %>
                   <a class='btn btn-default' href='/speaker-editor/Show/{$ID}' target="_blank" type='button'>
                     Edit
                   </a>
                 <% end_if %>
               </div>
+                <a class='btn btn-default' data-toggle='modal' href='#add-note' type='button'>Comment</a>
+
               </div>
               <% end_if %>
-              <div class="col-lg-4">
-              <% if FlagComment %><p class="flag-comment">$FlagComment</p><% end_if %>
-              </div>
           </div>
         </div>
       </div>
+      
+      <!-- ========== Flag Modal ========== -->
+      <div class='modal fade' id='select-modal'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button class='close' data-dismiss='modal' type='button'>&times;</button>
+              <h4>Select Presentation</h4>
+            </div>
+            <div class='modal-body'>
+              <p>Would you like to select this presentation for your personal list or for the team list?</p>
+              <p>
+                  <a class='btn btn-default' href='{$Top.Link}SelectMemberTalk/{$ID}'>Personal List</a>&nbsp;
+                  <a class='btn btn-default' href='{$Top.Link}SelectGroupTalk/{$ID}'>Team List</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>      
+      
       <!-- ========== Flag Modal ========== -->
       <div class='modal fade' id='add-note'>
         <div class='modal-dialog'>

@@ -14,11 +14,13 @@
 class SummitSelectedTalkList extends DataObject {
 
 	static $db = array(
-		'Name' => 'Text'
+		'Name' => 'Text',
+        'ListType' => "Enum('Individual,Group','Individual')"
 	);
 	
 	static $has_one = array(
-		'SummitCategory' => 'SummitCategory'
+		'SummitCategory' => 'SummitCategory',
+        'Member' => 'Member'
 	);
 
 	static $has_many = array(

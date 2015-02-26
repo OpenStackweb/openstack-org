@@ -44,8 +44,10 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		'EmailSubmitters',
 		'FlaggedTalks',
 		'setSortOrder',
-		'SelectTalk',
-		'UnselectTalk',
+		'SelectGroupTalk',
+        'SelectMemberTalk',
+		'UnselectMemberTalk',
+        'UnselectGroupTalk',
 		'SelectionList',
 		'SaveSortOrder',
 		'SuggestCategoryChange',
@@ -139,7 +141,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 		$SideNavArray["SelectionList"] = array(
 			'URLSegment' => 'SelectionList',
-			'Name' => 'Team Selections',
+			'Name' => 'Selected Presentations',
 			'Icon' => 'team-selections'
 		);
 
@@ -273,24 +275,22 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 	function PresentationList($categoryID = NULL, $sortBy = NULL, $order = NULL)
 	{
-
+        
 		// Set some defaults for sorting
 		if ($sortBy == NULL) $sortBy = 'VoteAverage';
 		if ($order == NULL) $order = 'DESC';
 
 		$Results = new ArrayList();
 
-		$categoryClause = "";
-		if ($categoryID) $categoryClause = " AND SummitCategoryID = '" . $categoryID . "'";
+		$filterArray = array(
+                "SummitID" => 4,
+                "MarkedToDelete" => FALSE
+            );
+        
+        if ($categoryID) $filterArray['SummitCategoryID'] = $categoryID;
 
-		$Talks = Talk::get()->where("SummitID = 4 AND MarkedToDelete = FALSE" . $categoryClause);
-		if ($sortBy && $order) {
-			$Talks->sort($sortBy, $order);
-		} else {
-			// default sort
-			$Talks->sort('PresentationTitle', 'ASC');
-		}
-
+		$Talks = Talk::get()->filter($filterArray);
+        
 		if ($Talks) {
 			foreach ($Talks as $Talk) {
 				$Talk->TotalPoints = $Talk->CalcTotalPoints();
@@ -301,10 +301,13 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 				$Results->push($Talk);
 			}
 		}
-
-
-
-		return $Results;
+        
+        if ($sortBy && $order) {
+            return $Results->sort($sortBy, $order);
+        } else {
+            return $Results->sort('PresentationTitle', 'DESC');
+        }
+        
 	}
 
 	function PresentationsByCategory()
@@ -317,7 +320,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 			$data["PresentationList"] = $Talks;
 
 		} else {
-
+            
 			$Talks = $this->PresentationList('', Session::get('SortColumn'), Session::get('SortOrder'));
 			if ($Talks) $data["Presentations"] = True;
 			$data["PresentationList"] = $Talks;
@@ -519,7 +522,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		}
 	}
 
-	function SelectTalk()
+	function SelectMemberTalk()
 	{
 
 		//  Look for talk
@@ -529,11 +532,63 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 			// Check permissions of user on talk
 			if ($Talk->CanAssign()) {
 
-				$SummitSelectedTalkList = SummitSelectedTalkList::get()->filter('SummitCategoryID',$Talk->SummitCategoryID)->first();;
+				$SummitSelectedTalkList = SummitSelectedTalkList::get()->filter(array(
+                        'SummitCategoryID' => $Talk->SummitCategoryID,
+                        'ListType' => 'Individual',
+                        'MemberID' => Member::currentUser()->ID
+                    ))->first();;
 
 				// if a summit talk list doens't exist for this category, create it
 				if (!$SummitSelectedTalkList) {
 					$SummitSelectedTalkList = new SummitSelectedTalkList();
+                    $SummitSelectedTalkList->ListType = 'Individual';
+					$SummitSelectedTalkList->SummitCategoryID = $Talk->SummitCategoryID;
+					$SummitSelectedTalkList->MemberID = Member::currentUser()->ID;
+                    $SummitSelectedTalkList->write();
+				}
+
+				$AlreadyAssigned = $SummitSelectedTalkList->SummitSelectedTalks('TalkID = ' . $Talk->ID);
+
+				if ($AlreadyAssigned->count() == 0) {
+					$SelectedTalk = new SummitSelectedTalk();
+					$SelectedTalk->SummitSelectedTalkListID = $SummitSelectedTalkList->ID;
+					$SelectedTalk->TalkID = $Talk->ID;
+					$SelectedTalk->MemberID = Member::currentUser()->ID;
+					$SelectedTalk->write();
+				}
+
+				$this->redirectBack();
+
+
+			} else {
+				echo "You do not have permission to select this presentation.";
+			}
+
+		}
+
+	}
+    
+    
+    
+	function SelectGroupTalk()
+	{
+
+		//  Look for talk
+		$TalkID = Convert::raw2sql($this->request->param("ID"));
+		if (is_numeric($TalkID) && $Talk = Talk::get()->byID($TalkID)) {
+
+			// Check permissions of user on talk
+			if ($Talk->CanAssign()) {
+
+				$SummitSelectedTalkList = SummitSelectedTalkList::get()->filter(array(
+                        'SummitCategoryID' => $Talk->SummitCategoryID,
+                        'ListType' => 'Group'
+                    ))->first();;
+
+				// if a summit talk list doens't exist for this category, create it
+				if (!$SummitSelectedTalkList) {
+					$SummitSelectedTalkList = new SummitSelectedTalkList();
+                    $SummitSelectedTalkList->ListType = 'Group';
 					$SummitSelectedTalkList->SummitCategoryID = $Talk->SummitCategoryID;
 					$SummitSelectedTalkList->write();
 				}
@@ -558,8 +613,12 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		}
 
 	}
+    
+    function FellowTrackChairs($categoryID) {
+        return SummitTrackChair::get()->filter(array('MemberID:not' => Member::currentUser()->ID, 'CategoryID' => $categoryID));
+    }
 
-	function UnselectTalk()
+	function UnselectMemberTalk()
 	{
 
 		//  Look for talk
@@ -568,8 +627,11 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 			// Check permissions of user on talk
 			if ($Talk->CanAssign()) {
-
-				$AssignedTalks = SummitSelectedTalk::get()->filter('TalkID',$Talk->ID);
+                
+                $memberID = Member::currentUserID();
+                $PersonalTalkList = SummitSelectedTalkList::get()->filter(array('MemberID'=>$memberID, 'ListType' => 'Individual', 'SummitCategoryID' => $Talk->SummitCategoryID))->first();
+                                
+				$AssignedTalks = $PersonalTalkList->SummitSelectedTalks()->filter('TalkID',$Talk->ID);
 
 				if ($AssignedTalks) {
 					foreach ($AssignedTalks as $TalkToRemove) {
@@ -588,9 +650,43 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 	}
 
+	function UnselectGroupTalk()
+	{
+
+		//  Look for talk
+		$TalkID = Convert::raw2sql($this->request->param("ID"));
+		if (is_numeric($TalkID) && $Talk = Talk::get()->byID($TalkID)) {
+
+			// Check permissions of user on talk
+			if ($Talk->CanAssign()) {
+                
+                $memberID = Member::currentUserID();
+                $GroupTalkList = SummitSelectedTalkList::get()->filter(array('ListType' => 'Group', 'SummitCategoryID' => $Talk->SummitCategoryID))->first();
+                                
+				$AssignedTalks = $GroupTalkList->SummitSelectedTalks()->filter('TalkID',$Talk->ID);
+
+				if ($AssignedTalks) {
+					foreach ($AssignedTalks as $TalkToRemove) {
+						$TalkToRemove->delete();
+					}
+				}
+
+				$this->redirectBack();
+
+
+			} else {
+				echo "You do not have permission to unselect this presentation.";
+			}
+
+		}
+
+	}
+    
+    
 	function SelectedTalkList()
 	{
 
+        
 		//Set the category is one is defined
 		$CategoryID = $this->request->param('ID');
 		if (is_numeric($CategoryID) && SummitCategory::get()->byID($CategoryID)) Session::set('CategoryID', $CategoryID);
@@ -608,15 +704,56 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 				} else {
 					$categoryID = $SummitTrackChair->first()->CategoryID;
 				}
+                
+                // MEMBER LIST
+                
+                // Set up a filter to pull either a group or individual member list, depending on what's in session
+                $filterArray = array(
+                        'SummitCategoryID' => $categoryID,
+                        'ListType' => 'Individual',
+                        'MemberID' => $memberID
+                    );
+                                
+                // Look to see if the list already exits
+                $MemberList = SummitSelectedTalkList::get()->filter($filterArray)->first();
+                
 
 				// a selected talks list hasn't been created yet, so start a new empty list
-				if (!$SummitSelectedTalkList = SummitSelectedTalkList::get()->filter('SummitCategoryID',$categoryID)->first()) {
-					$SummitSelectedTalkList = new SummitSelectedTalkList();
-					$SummitSelectedTalkList->SummitCategoryID = $categoryID;
-					$SummitSelectedTalkList->write();
+				if (!$MemberList) {
+					$MemberList = new SummitSelectedTalkList();
+					$MemberList->SummitCategoryID = $categoryID;
+                    $MemberList->ListType = 'Individual';
+                    $MemberList->MemberID = $memberID;
+					$MemberList->write();
 				}
+                
+                // GROUP LIST
+                
+                
+                // Set up a filter to pull either a group or individual member list, depending on what's in session
+                $filterArray = array(
+                        'SummitCategoryID' => $categoryID,
+                        'ListType' => 'Group'
+                    );
+                                
+                // Look to see if the list already exits
+                $GroupList = SummitSelectedTalkList::get()->filter($filterArray)->first();
+                
 
-				return $SummitSelectedTalkList;
+				// a selected talks list hasn't been created yet, so start a new empty list
+				if (!$GroupList) {
+					$GroupList = new SummitSelectedTalkList();
+					$GroupList->SummitCategoryID = $categoryID;
+                    $GroupList->ListType = 'Group';
+                    $GroupList->MemberID = $memberID;
+					$GroupList->write();
+				}
+                
+                return new ArrayData(array(
+                        'MemberList' => $MemberList,
+                        'GroupList' => $GroupList
+                    ));
+                
 			}
 
 		}

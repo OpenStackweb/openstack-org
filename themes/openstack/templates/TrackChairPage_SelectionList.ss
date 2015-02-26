@@ -13,12 +13,12 @@
     <link type="text/css" href="/{$ThemeDir}/css/bootstrap3.css" media="screen" rel="stylesheet" />
     <link type="text/css" href="/{$ThemeDir}/css/track-chair.css" media="screen" rel="stylesheet" />
 
-	<% loop SelectedTalkList %>
+	<% with SelectedTalkList.MemberList %>
     <script type="text/javascript">
       var selectedTalkListID = {$ID};
       var processingLink = "{$Top.Link}SaveSortOrder/{$ID}/?";
     </script>
-    <% end_loop %>
+    <% end_with %>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -33,7 +33,7 @@
   <div class="row">
   <div class='col-lg-1'></div>
   <div class='col-lg-11'>
-  <h2 class='title'>Your Track Chair Team Selections</h2>
+  <h2 class='title'>Selected Presentations</h2>
   <div id="info" style="display:none;"></div>
   </div>
   <div>
@@ -44,8 +44,6 @@
 
     </div>
     <div class='col-lg-11'>
-      <div class='row'>
-  <div class='col-lg-8'>
 
             <div class='btn-toolbar'>
           <div class='btn-group'>
@@ -66,12 +64,18 @@
             </ul>
           </div>
         </div>
+        <hr>
         <p></p>
 
+ <div class='row'><!-- Selected Talks Row -->
+  <table class="track-chairs-selections"><tr>
 
-<% loop SelectedTalkList %>
+  <td>
 
-  <ul id="sort-list">
+<h4>Your Selections</h4>
+<% loop SelectedTalkList.MemberList %>
+
+  <ul id="member-list">
   <% if SortedTalks %>
   <% loop SortedTalks %>
     <li id="listItem_{$ID}" <% if IsAlternate %> class="alternate" <% end_if %> > <% if IsAlternate %>Alternate: <% end_if %><a href="{$Top.Link}Show/{$Talk.ID}">$Talk.PresentationTitle</a> </li>
@@ -92,17 +96,79 @@
   </ul>
 
 <% end_loop %>
-</div>
-<div class='col-lg-4'>
-<h4>Ordering Your Presentations</h4>
-<p>Please drag your presentations to order them with your team's favorite selection at the top, second favorite next, and so on.</p>
 
-<p>Selected presentations are listed in white. Alternate presentations are in grey at the bottom. An alternate presentation may be used if one of your selected presentations turns out to be unavailable.</p>
-</div>
+</td>
+            
+    <% loop FellowTrackChairs($SelectedTalkList.GroupList.SummitCategoryID) %>
+        <td>
+        <h4>$Member.FirstName $Member.Surname</h4>
+        <% if SelectedTalkList %>
+            <% loop SelectedTalkList %>
+                    <ul class="team-member-selections">
+                  <% if SortedTalks %>
+                  <% loop SortedTalks %>
+                    <li id="listItem_{$ID}" <% if IsAlternate %> class="alternate" <% end_if %> > <% if IsAlternate %>Alternate: <% end_if %><a href="{$Top.Link}Show/{$Talk.ID}">$Talk.PresentationTitle</a> </li>
+                  <% end_loop %>
+                  <% end_if %>
+                  <% if UnsortedTalks %>
+                  <% loop UnsortedTalks %>
+                    <li id="listItem_{$ID}" <% if IsAlternate %> class="alternate" <% end_if %> > <% if IsAlternate %>Alternate: <% end_if %> <a href="{$Top.Link}Show/{$Talk.ID}">$Talk.PresentationTitle</a> </li>
+                  <% end_loop %>
+                  <% end_if %>
 
-</div>
+                  <% if UnusedPostions %>
+                  <% loop UnusedPostions %>
+                  <li class="unused-position">$Name</li>
+                  <% end_loop %>
+                  <% end_if %>
 
-    </div>
+                  </ul>
+                <% end_loop %>
+
+        <% else %>
+        
+            <p>This track chair hasn't made any selections yet.</p>
+        
+        <% end_if %>
+        </td>
+        <% end_loop %>
+        
+<td>
+
+
+<h4>Team Selections</h4>
+<% loop SelectedTalkList.GroupList %>
+
+  <ul id="group-list">
+  <% if SortedTalks %>
+  <% loop SortedTalks %>
+    <li id="listItem_{$ID}" <% if IsAlternate %> class="alternate" <% end_if %> > <% if IsAlternate %>Alternate: <% end_if %><a href="{$Top.Link}Show/{$Talk.ID}">$Talk.PresentationTitle</a> </li>
+  <% end_loop %>
+  <% end_if %>
+  <% if UnsortedTalks %>
+  <% loop UnsortedTalks %>
+    <li id="listItem_{$ID}" <% if IsAlternate %> class="alternate" <% end_if %> > <% if IsAlternate %>Alternate: <% end_if %> <a href="{$Top.Link}Show/{$Talk.ID}">$Talk.PresentationTitle</a> </li>
+  <% end_loop %>
+  <% end_if %>
+
+  <% if UnusedPostions %>
+  <% loop UnusedPostions %>
+  <li class="unused-position">$Name</li>
+  <% end_loop %>
+  <% end_if %>
+
+  </ul>
+
+<% end_loop %>
+
+</td>        
+        
+      </tr></table>
+
+        
+    
+
+    </div><!-- End Selected Talks Row -->
   </div>
 
 

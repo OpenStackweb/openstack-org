@@ -194,6 +194,33 @@ class Talk extends DataObject {
 	  	if ($selected = SummitSelectedTalk::get()->filter('TalkID',$this->ID)->first()) return TRUE;
     }
 
+    function IsMemberSelected() {
+        $categoryid = $this->SummitCategory()->ID;
+        $memberID = Member::currentUser()->ID;
+        $SummitSelectedTalkList = SummitSelectedTalkList::get()->filter(array(
+                'MemberID' => $memberID,
+                'SummitCategoryID' => $categoryid,
+                'ListType' => 'Individual'
+            ))->first();
+        if($SummitSelectedTalkList) {
+            $TalkSelected = $SummitSelectedTalkList->SummitSelectedTalks()->filter('TalkID', $this->ID);
+            return $TalkSelected->count();
+        }
+    }
+    
+    function IsGroupSelected() {
+        $categoryid = $this->SummitCategory()->ID;
+        $SummitSelectedTalkList = SummitSelectedTalkList::get()->filter(array(
+                'SummitCategoryID' => $categoryid,
+                'ListType' => 'Group'
+            ))->first();
+        if($SummitSelectedTalkList) {
+            $TalkSelected = $SummitSelectedTalkList->SummitSelectedTalks()->filter('TalkID', $this->ID);
+            return $TalkSelected->count();
+        }
+    }
+    
+    
     function HasSpeaker() {
     	if ($this->Speakers()->Count()) return TRUE;
     }
