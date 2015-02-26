@@ -355,9 +355,9 @@ class Company extends DataObject implements PermissionProvider {
 
         if(isset($pageId)){
             $sqlQuery = new SQLQuery();
-            $sqlQuery->ssetSelect("SponsorshipType");
+            $sqlQuery->setSelect("SponsorshipType");
             $sqlQuery->setFrom("SponsorsPage_Companies");
-            $sqlQuery->ssetWhere("CompanyID={$this->ID} AND SponsorsPageID={$pageId}");
+            $sqlQuery->setWhere("CompanyID={$this->ID} AND SponsorsPageID={$pageId}");
             $type = $sqlQuery->execute()->value();
         }
         return new DropdownField("SponsorshipType_{$this->ID}", "SponsorshipType_{$this->ID}", array(
