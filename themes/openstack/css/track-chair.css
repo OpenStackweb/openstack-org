@@ -353,9 +353,9 @@ a.side-nav.side-nav-selected {
 
 .staff-note {
   padding: 10px;
-  background-color: #F6EDD0;
+  background-color: #FFF9E3;
   margin: 10px 0px;
-  border: 1px solid #D6C58F;
+  border-left: 3px solid #F8ECB6;
 }
 
 .staff-note .commenter {
@@ -363,7 +363,7 @@ a.side-nav.side-nav-selected {
     color: #6A6E6F;
 }
 
-#PresentationCommentForm_CommentForm_Body {
+#PresentationCommentForm_CommentForm_Body, #CategoryChangeForm_CategoryChangeForm_CategoryID {
     width: 100%;
     margin-bottom: 10px;
 }

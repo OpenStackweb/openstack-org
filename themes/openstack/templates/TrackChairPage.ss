@@ -179,24 +179,6 @@
         </div>
       </div>
       
-      <!-- ========== Flag Modal ========== -->
-      <div class='modal fade' id='select-modal'>
-        <div class='modal-dialog'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <button class='close' data-dismiss='modal' type='button'>&times;</button>
-              <h4>Select Presentation</h4>
-            </div>
-            <div class='modal-body'>
-              <p>Would you like to select this presentation for your personal list or for the team list?</p>
-              <p>
-                  <a class='btn btn-default' href='{$Top.Link}SelectMemberTalk/{$ID}'>Personal List</a>&nbsp;
-                  <a class='btn btn-default' href='{$Top.Link}SelectGroupTalk/{$ID}'>Team List</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>      
       
       <!-- ========== Flag Modal ========== -->
       <div class='modal fade' id='add-note'>
@@ -213,6 +195,24 @@
         </div>
       </div>
 
+      <!-- ========== Category Modal ========== -->
+      <div class='modal fade' id='suggest-category'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button class='close' data-dismiss='modal' type='button'>&times;</button>
+              <h4>Suggest A Category Change</h4>
+            </div>
+            <div class='modal-body'>
+                           <p>If you think this presentation belongs in a different category, you can suggest that it be moved by indicating the new category bellow. The admins will review the request and potentially make the move.</p>
+
+              {$Top.CategoryChangeForm}
+            </div>
+          </div>
+        </div>
+      </div>
+     
+     
       <!-- ========== Subcategories Modal ========== -->
       <div class='modal fade' id='subcategories'>
         <div class='modal-dialog'>
@@ -231,6 +231,8 @@
 
       <div class='row'>
         <div class='col-lg-12' id='presentation-area'>
+          <a data-toggle='modal' href='#suggest-category'>Suggest Category Change...</a>
+
           <% if Comments %>
             <% loop Comments %>
                 <div class="staff-note">
