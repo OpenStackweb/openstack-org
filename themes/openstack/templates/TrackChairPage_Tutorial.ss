@@ -45,11 +45,15 @@
       <div class='row'>
   <div class='col-lg-8'>
 
-<iframe width="640" height="480" src="//www.youtube.com/embed/pJe8SYDR_ac?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="480" src="//www.youtube.com/embed/kBs6D4e1_XI?rel=0" frameborder="0" allowfullscreen></iframe>
+
 </div>
 <div class='col-lg-4'>
 <h4>Tutorial</h4>
 <p>A quick (5-minute) overview for using the Track Chair tool.</p>
+<h4>More Helpful Information</h4>
+    <p><strong>Summit Schedule:</strong> You can use this <a href="https://docs.google.com/spreadsheets/d/1VHeTsRIEPv14OWf29m3EjeeK3ZM5hiIQc2GRf0wAsKE/edit?usp=sharing">Draft Session Schedule</a> to help understand where their sessions will fall on the 4 day main conference schedule. </p>
+    <p><strong>Email List:</strong> The group alias for track chairs is <a href="mailto:openstack-track-chairs@lists.openstack.org">openstack-track-chairs@lists.openstack.org</a>.</p>
 </div>
 
 </div>

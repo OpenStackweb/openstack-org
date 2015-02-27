@@ -33,6 +33,7 @@
   <div class='col-lg-1'></div>
   <div class='col-lg-11'>
   <h2 class='title'>Track Chair Directory</h2>
+  <p><strong>The group alias for all track chairs is <a href="mailto:openstack-track-chairs@lists.openstack.org">openstack-track-chairs@lists.openstack.org</a>.</strong></p>
   <div id="info" style="display:none;"></div>
   </div>
   <div>
@@ -59,6 +60,7 @@
 
 </div>
 <div class='col-lg-4'>
+
 <h4>Track Chairs</h4>
 <p>Click on the name of any track chair to contact that person via email.</p>
 </div>
