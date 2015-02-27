@@ -9,7 +9,13 @@
         <h3>Banner (max 5)</h3>
         <table>
             <thead>
-                <tr><th>Release</th><th>Title</th><th>Summary</th><th style="text-align:center;">Image</th><th>&nbsp;</th></tr>
+                <tr>
+                    <th style="padding-left:5px;">Release</th>
+                    <th>Title</th>
+                    <th>Summary</th>
+                    <th style="text-align:center;">Image</th>
+                    <th>&nbsp;</th>
+                </tr>
             </thead>
             <tbody id="slider_sortable" class="connected">
                 $getSliderNews
