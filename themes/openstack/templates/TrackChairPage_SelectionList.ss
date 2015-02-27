@@ -33,7 +33,7 @@
   <div class="row">
   <div class='col-lg-1'></div>
   <div class='col-lg-11'>
-  <h2 class='title'>Selected Presentations</h2>
+  <h2 class='title'>Selected Presentations For $CurrentCategory.Name</h2>
   <div id="info" style="display:none;"></div>
   </div>
   <div>
@@ -47,11 +47,8 @@
 
             <div class='btn-toolbar'>
           <div class='btn-group'>
-            Track: &nbsp;
-            <a data-toggle='dropdown' href='#'>
-              <span>$CurrentCategory.Name </span>
-              <span class='carrot'></span>
-            </a>
+            Track: &nbsp; $CurrentCategory.Name
+
             &nbsp; <% if CurrentCategory.MemberIsTrackChair %>(You Are A Track Chair)<% end_if %>
             <ul class='dropdown-menu'>
               <% loop CategoryButtons %>

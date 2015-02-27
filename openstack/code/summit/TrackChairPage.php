@@ -38,6 +38,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		'SearchForm',
 		'CommentForm',
 		'SubcategoryForm',
+        'CategoryChangeForm',
 		'CleanTalks',
 		'CleanSpeakers',
 		'EmailSpeakers',
@@ -53,6 +54,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		'SuggestCategoryChange',
 		'AcceptCategoryChange',
 		'SetUpTrackChair' => 'ADMIN',
+        'ChangeCategory' => 'ADMIN',
 		'TrackChairs',
 		'EmailTrackChairs',
 		'Tutorial'
@@ -466,6 +468,18 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 	}
 
+    function CategoryChangeForm()
+	{
+        
+		$CategoryChangeForm = new CategoryChangeForm($this, 'CategoryChangeForm');
+		$CategoryChangeForm->disableSecurityToken();
+        
+        $Talk = $this->findTalk();
+		if ($Talk) $CategoryChangeForm->loadDataFrom($Talk->data());        
+        
+		return $CategoryChangeForm;
+	}
+    
 	function CommentForm()
 	{
 		$CommentForm = new PresentationCommentForm($this, 'CommentForm');
@@ -812,6 +826,64 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 			}
 		}
 	}
+    
+	function ChangeCategory() {
+		$TalkID = Convert::raw2sql($this->request->param("ID"));
+		$NewCategoryID = Convert::raw2sql($this->request->param("OtherID"));
+        
+        if ($TalkID && $NewCategoryID) {
+            $Talk = Talk::get()->byID($TalkID);
+            $Talk->SummitCategoryID = $NewCategoryID;
+            $Talk->write();
+            
+            $AssignedTalks = SummitSelectedTalk::get()->filter('TalkID',$Talk->ID);
+
+            if ($AssignedTalks) {
+                foreach ($AssignedTalks as $TalkToRemove) {
+                    $TalkToRemove->delete();
+                }
+            }
+            
+            $Note = new SummitTalkComment;
+            $Note->Body = 'Admins moved this presentation to the new category '.$Talk->SummitCategory()->Name.'.';
+            $Note->TalkID = $Talk->ID;
+            $Note->CommenterID = 1;
+            $Note->write();
+            
+            echo 'The Presentation "' . $Talk->PresentationTitle . '" was changed to the ' . $Talk->SummitCategory()->Name . " track.";
+        }
+        
+    }
+    
+	function doSubmitChange($data, $form)
+	{   
+        $Talk = Talk::get()->byID(intval($data["ID"]));
+        $Category = SummitCategory::get()->byID(intval($data['CategoryID']));
+        $Member = Member::currentUser();
+        
+        $data['Member'] = $Member;
+        $data['Talk'] = $Talk;
+        $data['SummitCategory'] = $Category;
+        
+        $To = 'summit@openstack.org';
+        $Subject = "Openstack Track Chairs - Rank Your Sessions by Sept 9";
+
+        $email = EmailFactory::getInstance()->buildEmail($To, $To, $Subject);
+        $email->setTemplate("SuggestCategoryChangeEmail");
+        $email->populateTemplate($data);
+        
+        $Note = new SummitTalkComment;
+        $Note->Body = 'It was suggested that this presentation be changed to the category '.$Category->Name.'. Waiting for response from admins...';
+        $Note->TalkID = $Talk->ID;
+        $Note->CommenterID = $Member->ID;
+        $Note->write();
+    
+        $email->send();
+        $this->redirectBack();
+        
+	}
+    
+    
 
 	function AcceptCategoryChange()
 	{
