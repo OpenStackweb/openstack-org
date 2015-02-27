@@ -160,9 +160,9 @@
                   <a class='btn btn-default' href='{$Top.Link}SelectMemberTalk/{$ID}'>Add To My List</a>
                 <% end_if %>
                 <% if IsGroupSelected %>
-                  <a class='btn btn-default' href='{$Top.Link}UnselectGroupTalk/{$ID}' type='button'>Remove From Group List</a>
+                  <a class='btn btn-default' href='{$Top.Link}UnselectGroupTalk/{$ID}' type='button'>Remove From Team List</a>
                 <% else %>                  
-                  <a class='btn btn-default' href='{$Top.Link}SelectGroupTalk/{$ID}'>Add To Group List</a>
+                  <a class='btn btn-default' href='{$Top.Link}SelectGroupTalk/{$ID}'>Add To Team List</a>
                 <% end_if %>                
                 
                 <% if IsAdmin %>

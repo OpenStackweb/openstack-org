@@ -866,7 +866,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
         $data['SummitCategory'] = $Category;
         
         $To = 'summit@openstack.org';
-        $Subject = "Openstack Track Chairs - Rank Your Sessions by Sept 9";
+        $Subject = "Category Change Suggestion";
 
         $email = EmailFactory::getInstance()->buildEmail($To, $To, $Subject);
         $email->setTemplate("SuggestCategoryChangeEmail");
