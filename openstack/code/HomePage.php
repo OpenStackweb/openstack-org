@@ -11,121 +11,168 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Defines the HomePage page type
  */
- 
-class HomePage extends Page {
-   static $db = array(
-		'FeedData' => 'HTMLText',
-		'EventDate' => 'Date',
-		'VideoCurrentlyPlaying' => 'Text'
-   );
+class HomePage extends Page
+{
 
-   static $has_one = array(
-   );
+    static $db = array(
+        'FeedData' => 'HTMLText',
+        'EventDate' => 'Date',
+        'VideoCurrentlyPlaying' => 'Text',
+        'PromoIntroMessage' => 'Text',
+        'PromoButtonText' => 'Text',
+        'PromoButtonUrl' => 'Text',
+        "PromoDatesText" => 'Text',
+        "PromoHeroCredit" => 'Text',
+    );
 
-	function getCMSFields() {
-		$fields = parent::getCMSFields();
+    private static $has_one  = array(
+        'PromoImage' => 'BetterImage',
+    );
 
-		// Summit Video Stream
-      	$VideoLiveField = new OptionSetField('VideoCurrentlyPlaying', 'Is the video live streaming at the moment?', array(
+    function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        // Summit Video Stream
+        $VideoLiveField = new OptionSetField('VideoCurrentlyPlaying', 'Is the video live streaming at the moment?', array(
             'Yes' => 'Video is being streamed.',
             'No' => 'No video playing.'
         ));
 
-		$fields->addFieldToTab("Root.Main", $VideoLiveField, 'Content');
+        $fields->addFieldToTab("Root.Main", $VideoLiveField, 'Content');
 
-		// Countdown Date
-		$EventStartDate = new DateField('EventDate','First Day of Event (for counting down)');
-		$EventStartDate->setConfig('showcalendar', true);
-		$EventStartDate->setConfig('showdropdown', true);
-		$fields->addFieldToTab('Root.Main', $EventStartDate, 'Content');
+        // Countdown Date
+        $EventStartDate = new DateField('EventDate', 'First Day of Event (for counting down)');
+        $EventStartDate->setConfig('showcalendar', true);
+        $EventStartDate->setConfig('showdropdown', true);
+        $fields->addFieldToTab('Root.Main', $EventStartDate, 'Content');
 
-		// remove unneeded fields 
-		$fields->removeFieldFromTab("Root.Main","Content");
+        // remove unneeded fields
+        $fields->removeFieldFromTab("Root.Main", "Content");
 
-		return $fields;
-	}   
+        $promo_hero_image  = new CustomUploadField('PromoImage', 'Promo Hero Image');
+        $promo_hero_image->setFolderName('homepage');
+        $promo_hero_image->setAllowedFileCategories('image');
+
+        $fields->addFieldToTab("Root.IntroHeader", $promo_hero_image);
+        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoIntroMessage', 'Promo Intro Message'));
+        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoButtonText', 'Promo Button Text'));
+        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoButtonUrl', 'Promo Button Url'));
+        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoDatesText', 'Promo Dates Text'));
+        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCredit', 'Hero Credit'));
+        return $fields;
+    }
+
+    public function getHeroImageUrl(){
+        $image = $this->PromoImage();
+        if(!is_null($image) && $image->exists())
+            return $image->Link();
+        return '/assets/homepage/homepage-parissummit.png';
+    }
+
+    public function getPromoIntroMessage(){
+        $value = $this->getField('PromoIntroMessage');
+        return !empty($value)? $value : self::PromoIntroMessageDefault;
+    }
+
+    public function getPromoButtonText(){
+        $value = $this->getField('PromoButtonText');
+        return !empty($value)? $value : self::PromoButtonTextDefault;
+    }
+
+    public function getPromoButtonUrl(){
+        $value = $this->getField('PromoButtonUrl');
+        return !empty($value)? $value : self::PromoButtonUrlDefault;
+    }
+
+    public function getPromoDatesText(){
+        $value = $this->getField('PromoDatesText');
+        return !empty($value)? $value : self::PromoDatesTextDefault;
+    }
+
+    public function getPromoHeroCredit(){
+        $value = $this->getField('PromoHeroCredit');
+        return !empty($value)? $value : self::PromoHeroCreditDefault;
+    }
+
+    const PromoIntroMessageDefault = '"OpenStack has a true community around it."';
+    const PromoButtonTextDefault   = 'See how @WalmartLabs puts 100,000 cores to work';
+    const PromoButtonUrlDefault = 'http://awe.sm/jM31y';
+    const PromoDatesTextDefault = '...we plan to contribute aggressively to the open source community.';
+    const PromoHeroCreditDefault = 'Photo by Claire Massey';
 }
- 
-class HomePage_Controller extends Page_Controller {
 
-	static $allowed_actions = array(
-		'Video',
-		'LatestNews'
-	);	
-			
-	function init() { 
-	   parent::init(); 
-	       	       
-		//	Set default currency unless this is a returning visitor 
-	   $VisitorCookie = new Cookie; 
-	   if(!$VisitorCookie->get('ReturningVisitor')) { 
-	         $VisitorCookie->set('ReturningVisitor', TRUE); 
-	   }
+class HomePage_Controller extends Page_Controller
+{
 
-	    Requirements::customScript("Shadowbox.init();");
+    static $allowed_actions = array(
+        'Video',
+        'LatestNews'
+    );
 
-	}
+    function init()
+    {
+        parent::init();
 
-	function UpcomingEvents($num=1) {
+        //	Set default currency unless this is a returning visitor
+        $VisitorCookie = new Cookie;
+        if (!$VisitorCookie->get('ReturningVisitor')) {
+            $VisitorCookie->set('ReturningVisitor', TRUE);
+        }
 
-		$events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate','ASC')->limit($num);
-		$output = '';
+        Requirements::customScript("Shadowbox.init();");
+
+    }
+
+    function UpcomingEvents($num = 1)
+    {
+
+        $events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($num);
+        $output = '';
 
         if ($events) {
             foreach ($events as $key => $event) {
                 $first = ($key == 0);
-                $data = array('IsEmpty'=>0,'IsFirst'=>$first);
+                $data = array('IsEmpty' => 0, 'IsFirst' => $first);
 
                 $output .= $event->renderWith('EventHolder_event', $data);
             }
         } else {
-            $data = array('IsEmpty'=>1);
+            $data = array('IsEmpty' => 1);
             $output .= Page::renderWith('EventHolder_event', $data);
         }
 
         return $output;
-	}
+    }
 
-	function DisplayVideo() {
-		$getVars = $this->request->getVars();
-		return ($this->VideoCurrentlyPlaying == 'Yes' || isset($getVars['video']));
-	}
+    function DisplayVideo()
+    {
+        $getVars = $this->request->getVars();
+        return ($this->VideoCurrentlyPlaying == 'Yes' || isset($getVars['video']));
+    }
 
-	function Video() {
-		//Detect special conditions devices
-		$iPod = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-		$iPhone = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-		$iPad = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+    function Video()
+    {
+        //Detect special conditions devices
+        $iPod = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
+        $iPhone = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+        $iPad = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
 
-		//do something with this information
-		if( $iPod || $iPhone ||  $iPad ){
-		    $this->redirect('http://itechsherpalive2.live-s.cdn.bitgravity.com/cdn-live-s1/_definst_/itechsherpalive2/live/OSS13/playlist.m3u8');
-		} else {
-			return $this->renderWith(array('HomePage_Video','HomePage','Page'));
-		}
+        //do something with this information
+        if ($iPod || $iPhone || $iPad) {
+            $this->redirect('http://itechsherpalive2.live-s.cdn.bitgravity.com/cdn-live-s1/_definst_/itechsherpalive2/live/OSS13/playlist.m3u8');
+        } else {
+            return $this->renderWith(array('HomePage_Video', 'HomePage', 'Page'));
+        }
 
-	}
+    }
 
-	function RssItems($limit = 7) { 
-
-		$feed = new RestfulService('http://planet.openstack.org/rss20.xml',7200);
-
-		$feedXML = $feed->request()->getBody();
-
-		// Extract items from feed 
-		$result = $feed->getValues($feedXML, 'channel', 'item'); 
-
-		foreach ($result as $item ) {
-			$item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
-		}
-
-		return $result->limit($limit,0);
-	}
-
-    function NewsItems($limit = 20) {
+    function NewsItems($limit = 20)
+    {
         $return_array = new ArrayList();
         $slider_news = DataObject::get('News', "Slider = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
         $limit = $limit - count($slider_news);
@@ -133,41 +180,62 @@ class HomePage_Controller extends Page_Controller {
         $limit = $limit - count($featured_news);
         $recent_news = DataObject::get('News', "Featured = 0 AND Slider = 0 AND Approved = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
         $limit = $limit - count($recent_news);
-        $all_news = array_merge($slider_news,$featured_news,$recent_news);
+        $all_news = array_merge($slider_news, $featured_news, $recent_news);
         // format array
         foreach ($all_news as $item) {
-            $art_link = 'news/view/'.$item->ID.'/'.$item->HeadlineForUrl;
-            $return_array->push(array('type'=>'News','link'=>$art_link,'title'=>$item->Headline,
-                                      'pubdate'=>date('D, M jS Y',strtotime($item->Date)),'timestamp'=>strtotime($item->Date)));
+            $art_link = 'news/view/' . $item->ID . '/' . $item->HeadlineForUrl;
+            $return_array->push(array('type' => 'News', 'link' => $art_link, 'title' => $item->Headline,
+                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'timestamp' => strtotime($item->Date)));
         }
 
         $rss_news = $this->RssItems($limit)->toArray();
         foreach ($rss_news as $item) {
             $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
-            $return_array->push(array('type'=>'Planet','link'=>$item->link,'title'=>$item->title,
-                                      'pubdate'=>$item->pubDate, 'timestamp'=>$date_obj->getTimestamp()));
+            $return_array->push(array('type' => 'Planet', 'link' => $item->link, 'title' => $item->title,
+                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }
 
-        return $return_array->sort('timestamp','DESC');
+        return $return_array->sort('timestamp', 'DESC');
     }
 
-	function PastEvents($num=1) {
-	  return EventPage::get()->where("EventEndDate <= now()")->sort('EventStartDate')->limit($num);
-	}
-		
-	function ReturningVisitor() {
-		$VisitorCookie = new Cookie;
-		return ($VisitorCookie->get('ReturningVisitor')==TRUE);
-	}
-	
-	function CompanyCount() {
-		$DisplayedCompanies = Company::get()->filter('DisplayOnSite',1);
-		$Count = $DisplayedCompanies->Count();
-		return $Count;
-	}
+    function RssItems($limit = 7)
+    {
 
-	function DaysUntil() {
-		$date = $this->EventDate;
-		return (isset($date)) ? floor((strtotime($date) - time())/60/60/24) : FALSE;
-	}
+        $feed = new RestfulService('http://planet.openstack.org/rss20.xml', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function PastEvents($num = 1)
+    {
+        return EventPage::get()->where("EventEndDate <= now()")->sort('EventStartDate')->limit($num);
+    }
+
+    function ReturningVisitor()
+    {
+        $VisitorCookie = new Cookie;
+        return ($VisitorCookie->get('ReturningVisitor') == TRUE);
+    }
+
+    function CompanyCount()
+    {
+        $DisplayedCompanies = Company::get()->filter('DisplayOnSite', 1);
+        $Count = $DisplayedCompanies->Count();
+        return $Count;
+    }
+
+    function DaysUntil()
+    {
+        $date = $this->EventDate;
+        return (isset($date)) ? floor((strtotime($date) - time()) / 60 / 60 / 24) : FALSE;
+    }
 }
