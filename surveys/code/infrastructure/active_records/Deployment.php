@@ -92,8 +92,16 @@ class Deployment extends DataObject
     );
 
     private static $summary_fields = array(
+        'Created' => 'Created',
         'Label' => 'Label',
-        'Org.Name' => 'Organization'
+        'Org.Name' => 'Organization',
+        'DeploymentSurvey.Member.Email' => 'Creator',
+    );
+
+    static $searchable_fields = array(
+        'Created' => 'ExactMatchFilter',
+        'Org.Name' => 'PartialMatchFilter',
+        'DeploymentSurvey.Member.Email'=> 'PartialMatchFilter',
     );
 
     private static $singular_name = 'Deployment';
