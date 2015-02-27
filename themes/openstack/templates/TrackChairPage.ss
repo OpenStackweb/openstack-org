@@ -201,10 +201,10 @@
           <div class='modal-content'>
             <div class='modal-header'>
               <button class='close' data-dismiss='modal' type='button'>&times;</button>
-              <h4>Suggest A Category Change</h4>
+              <h4>Suggest A Track Change</h4>
             </div>
             <div class='modal-body'>
-                           <p>If you think this presentation belongs in a different category, you can suggest that it be moved by indicating the new category bellow. The admins will review the request and potentially make the move.</p>
+                           <p>If you think this presentation belongs in a different track, you can suggest that it be moved by indicating the new track bellow. The admins will review the request and potentially make the move.</p>
 
               {$Top.CategoryChangeForm}
             </div>
@@ -231,7 +231,7 @@
 
       <div class='row'>
         <div class='col-lg-12' id='presentation-area'>
-          <a data-toggle='modal' href='#suggest-category'>Suggest Category Change...</a>
+          <a data-toggle='modal' href='#suggest-category'>Suggest Track Change...</a>
 
           <% if Comments %>
             <% loop Comments %>

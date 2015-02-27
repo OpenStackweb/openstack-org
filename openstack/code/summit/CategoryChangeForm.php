@@ -18,7 +18,7 @@ class CategoryChangeForm extends Form
 	{
 
         $SummitCategories = SummitCategory::get()->filter('SummitID',4);
-        $SummitCategoriesField = new DropdownField("CategoryID", "New Category", $SummitCategories->map("ID", "Name"));
+        $SummitCategoriesField = new DropdownField("CategoryID", "New Track", $SummitCategories->map("ID", "Name"));
         $TalkIDField = new HiddenField("ID","ID");
 
 		$fields = new FieldList(
