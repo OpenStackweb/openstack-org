@@ -211,7 +211,6 @@ final class News extends DataObject implements INews {
 
     public function registerRank($rank)
     {
-
         $this->Rank = $rank;
     }
 
@@ -244,4 +243,20 @@ final class News extends DataObject implements INews {
             return $image_html;
         }
     }
+
+    public function formattedDate() {
+        return date('M jS Y',strtotime($this->Date));
+    }
+
+    public function shortenText($text,$chars) {
+        if (strlen($text) > $chars) {
+            $maxLength = $chars-3;
+            $text = substr($text, 0, $maxLength);
+            $text.='...';
+        }
+
+        return $text;
+    }
+
+
 }

@@ -6,10 +6,15 @@
         <a href="#" id="go_to_recent">Go to Recently Submitted</a>
     </div>
     <div class="newsSlider">
-        <h3>Banner</h3>
-        <ul id="slider_sortable" class="connected" max-items="5">
-            $getSliderNews
-        </ul>
+        <h3>Banner (max 5)</h3>
+        <table>
+            <thead>
+                <tr><th>Release</th><th>Title</th><th>Summary</th><th style="text-align:center;">Image</th><th>&nbsp;</th></tr>
+            </thead>
+            <tbody id="slider_sortable" class="connected">
+                $getSliderNews
+            </tbody>
+        </table>
     </div>
     <div class="clear"></div>
     <div class="newsFeatured">
