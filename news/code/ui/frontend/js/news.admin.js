@@ -22,7 +22,7 @@ jQuery(document).ready(function($){
     });
 
     $( "#slider_sortable, #featured_sortable" ).sortable({
-        items: "li:not(.placeholder_empty)",
+        items: "tr:not(.placeholder_empty)",
         connectWith: ".connected",
         revert: false,
         placeholder: "placeholder",
@@ -69,6 +69,17 @@ jQuery(document).ready(function($){
     $('.newsRemove').click(function(){
         removeArticle($(this).parents('li'));
     });
+
+    $('.image','.article_row').popover({
+        placement: 'left',
+        content: function(){
+            return $('.image_html',this).html();
+        },
+        html: true,
+        trigger: 'hover',
+        container: 'body'}
+    );
+
 
 });
 

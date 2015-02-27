@@ -93,9 +93,9 @@ final class NewsAdminPage_Controller extends Page_Controller {
             $output .= $slide_article->renderWith('NewsAdminPage_slider', $data);
         }
 
-        for ($i=0;$i<(5-$counter);$i++) {
-            $output .= '<li class="placeholder_empty">Drop<br> here</li>';
-        }
+        /*for ($i=0;$i<(5-$counter);$i++) {
+            $output .= '<tr class="placeholder_empty"><td colspan="5">Drop here</td></tr>';
+        }*/
 
         return $output;
     }
