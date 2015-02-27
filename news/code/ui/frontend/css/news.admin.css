@@ -24,10 +24,16 @@
     text-align: center;
     color: grey;
     padding: 5px 0 5px 0;
+    height: 30px;
 }
 
 .placeholder_empty td {
     text-align: center;
+}
+
+.article_row {
+    cursor: move;
+    border: 1px solid;
 }
 
 .article_row td {
@@ -36,6 +42,7 @@
 
 .article_row .date_release {
     width:10%;
+    padding-left:5px;
 }
 
 .article_row .title {
