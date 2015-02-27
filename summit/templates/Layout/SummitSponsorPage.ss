@@ -33,6 +33,12 @@
 	<div class="container">
 		<ul class="city-nav-list">
 			<li>
+				<a href="#sponsors">
+					<i class="fa fa-heart"></i>
+					Sponsors
+				</a>
+			</li>
+			<li>
 				<a href="#packages">
 					<i class="fa fa-tags"></i>
 					Packages
@@ -57,6 +63,132 @@
 				</a>
 			</li>
 		</ul>
+	</div>
+</div>
+<div class="white sponsor-list" id="sponsors">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Thank You To The OpenStack Summit Sponsors</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 col-lg-push-2">
+				<h5 class="section-title">
+					Headline Sponsors
+				</h5>
+			</div>
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://intel.com"><img src="/summit/images/sponsors/intel2.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.ericsson.com/spotlight/cloud-evolution"><img src="/summit/images/sponsors/ericsson.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.huawei.com/en/"><img src="/summit/images/sponsors/huawei.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.redhat.com/en"><img src="/summit/images/sponsors/redhat-enovance2.png" class="sponsor-logo"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 col-lg-push-2">
+				<h5 class="section-title">
+					Premier Sponsors 
+				</h5>
+			</div>
+			<div class="col-lg-8 col-lg-push-2">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.rackspace.com/cloud/openstack/"><img src="/summit/images/sponsors/SetWidth300-rackspac-lg.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.ubuntu.com/cloud"><img src="/summit/images/sponsors/SetWidth300-ubuntu.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.cisco.com/"><img src="/summit/images/sponsors/SetWidth300-0000CiscoLogoRGB2color2.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.hpcloud.com/"><img src="/summit/images/sponsors/SetWidth300-hp.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.juniper.net/us/en/"><img src="/summit/images/sponsors/juniper-opencontrail.jpg" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.ibm.com/cloud-computing/us/en/"><img src="/summit/images/sponsors/SetWidth300-ibm.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.vmware.com/"><img src="/summit/images/sponsors/SetWidth300-vmware5.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a href="http://www.fujitsu.com/global/"><img src="/summit/images/sponsors/SetWidth300-fujitsu.png" class="sponsor-logo"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 col-lg-push-2">
+				<h5 class="section-title">
+					Spotlight Sponsors 
+				</h5>
+			</div>
+			<div class="col-lg-8 col-lg-push-2">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.rackspace.com/cloud/openstack/"><img src="/summit/images/sponsors/SetWidth300-rackspac-lg.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.ubuntu.com/cloud"><img src="/summit/images/sponsors/SetWidth300-ubuntu.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.cisco.com/"><img src="/summit/images/sponsors/SetWidth300-0000CiscoLogoRGB2color2.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.hpcloud.com/"><img src="/summit/images/sponsors/SetWidth300-hp.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.juniper.net/us/en/"><img src="/summit/images/sponsors/juniper-opencontrail.jpg" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.ibm.com/cloud-computing/us/en/"><img src="/summit/images/sponsors/SetWidth300-ibm.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.vmware.com/"><img src="/summit/images/sponsors/SetWidth300-vmware5.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.fujitsu.com/global/"><img src="/summit/images/sponsors/SetWidth300-fujitsu.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.rackspace.com/cloud/openstack/"><img src="/summit/images/sponsors/SetWidth300-rackspac-lg.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.ubuntu.com/cloud"><img src="/summit/images/sponsors/SetWidth300-ubuntu.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.cisco.com/"><img src="/summit/images/sponsors/SetWidth300-0000CiscoLogoRGB2color2.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.hpcloud.com/"><img src="/summit/images/sponsors/SetWidth300-hp.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.juniper.net/us/en/"><img src="/summit/images/sponsors/juniper-opencontrail.jpg" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.ibm.com/cloud-computing/us/en/"><img src="/summit/images/sponsors/SetWidth300-ibm.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.vmware.com/"><img src="/summit/images/sponsors/SetWidth300-vmware5.png" class="sponsor-logo"></a>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<a href="http://www.fujitsu.com/global/"><img src="/summit/images/sponsors/SetWidth300-fujitsu.png" class="sponsor-logo"></a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="light" id="packages">
