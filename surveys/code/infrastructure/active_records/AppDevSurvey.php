@@ -215,6 +215,8 @@ class AppDevSurvey extends DataObject {
 			$value = $oldAppDev->getField($field);
 			$this->setField($field, $value);
 		}
+		$this->setField('DeploymentSurveyID',$oldAppDev->getField('DeploymentSurveyID'));
+		$this->setField('MemberID',$oldAppDev->getField('MemberID'));
 	}
 
 	public function getSurveyType(){

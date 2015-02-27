@@ -399,6 +399,9 @@ class Deployment extends DataObject
             $value = $oldDeployment->getField($field);
             $this->setField($field, $value);
         }
+
+        $this->setField('OrgID',$oldDeployment->getField('OrgID'));
+        $this->setField('DeploymentSurveyID',$oldDeployment->getField('DeploymentSurveyID'));
     }
 
     public function getSurveyType(){

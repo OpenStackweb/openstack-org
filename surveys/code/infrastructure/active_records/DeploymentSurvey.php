@@ -295,7 +295,9 @@ class DeploymentSurvey extends DataObject
 			$this->setField($field, $value);
 		}
 
-		$this->OrgID = $oldSurvey->OrgID;
+
+		$this->setField('OrgID',$oldSurvey->getField('OrgID'));
+		$this->setField('MemberID',$oldSurvey->getField('MemberID'));
 
 		foreach($oldSurvey->Deployments() as $oldDeployment){
 			$newDeployment = new Deployment();
