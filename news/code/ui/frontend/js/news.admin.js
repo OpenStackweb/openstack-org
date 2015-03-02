@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
         placeholder: "placeholder",
         update: function(event,ui) {
             if (ui.sender) {
-                if ($(this).children().length > 5) {
+                if ($(this).children().length > 5 && $(this).attr('id') == 'slider_sortable') {
                     $(ui.sender).sortable('cancel');
                 } else {
                     saveSortArticle(ui.item,true);
@@ -70,7 +70,25 @@ jQuery(document).ready(function($){
     );
 
     // level columns heights
-    $('.right-col').height($('.left-col').height());
+    //$('.right-col').height($('.left-col').height()/2);
+    var left_col_top = $('.left-col').offset().top;
+    $('.right-col').css('top',left_col_top+'px');
+
+    $( window ).scroll(function() {
+        var left_col = $('.left-col').offset().top + $('.left-col').outerHeight();
+        var right_col = $('.right-col').offset().top + $('.right-col').outerHeight();
+        var right_col_height = $('.right-col').height();
+        if (right_col > left_col) {
+            var right_col_top = $('.right-col').position().top;
+            var delta = right_col - left_col;
+            $('.right-col').css('top',(right_col_top-delta)+'px');
+        } else {
+            $('.right-col').css('top',left_col_top+'px');
+        }
+
+        $('.right-col').height(right_col_height);
+
+    });
 
 });
 
