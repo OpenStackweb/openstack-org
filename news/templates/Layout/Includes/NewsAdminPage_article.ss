@@ -3,7 +3,7 @@
     <% if $Type == standby %>
         <td class="title">$shortenText($Headline,29)</td>
     <% else %>
-        <td class="title">$shortenText($Headline,60)</td>
+        <td class="title">$shortenText($Headline,57)</td>
     <% end_if %>
     <td class="image" data-toggle="popover">
         <% if Image.Exists %>
