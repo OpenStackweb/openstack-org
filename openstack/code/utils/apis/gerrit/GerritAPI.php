@@ -81,4 +81,20 @@ final class GerritAPI
 		$json = str_replace(")]}'",'',$json);
 		return $json;
 	}
+
+	/**
+	 * @param string $gerrit_user_id
+	 * @param string $status
+	 * @return array
+	 */
+	public function getUserCommits($gerrit_user_id, $status)
+	{
+		$url  = sprintf("%s/changes/?q=status:%s+owner:%s", $this->domain,$status, $gerrit_user_id);
+		$json = $this->fixGerritJsonResponse($this->doRequest($url));
+		$response = json_decode($json, true);
+		if(is_array($response) && count($response) > 0){
+			return $response;
+		}
+		return null;
+	}
 }
