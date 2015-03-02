@@ -116,9 +116,9 @@ final class SangriaPageDeploymentExtension extends Extension
         $useDateFilter = self::boolval($useDateFilter);
         $range = self::getSurveyRange($page);
         if ($range == SurveyType::MARCH_2015)
-            $range_filter = " AND DS.Created >= '" . SURVEY_START_DATE . "'";
+            $range_filter = " DS.Created >= '" . SURVEY_START_DATE . "'";
         else
-            $range_filter = " AND DS.Created < '" . SURVEY_START_DATE . "'";
+            $range_filter = " DS.Created < '" . SURVEY_START_DATE . "'";
         $date_filter = '';
         if ($useDateFilter)
             $date_filter = " AND " . SangriaPage_Controller::$date_filter_query;
