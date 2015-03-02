@@ -87,9 +87,10 @@ final class GerritAPI
 	 * @param string $status
 	 * @return array
 	 */
-	public function getUserCommits($gerrit_user_id, $status)
+	public function getUserCommits($gerrit_user_id, $status, $batch_size = 500, $sort_key_after = null)
 	{
-		$url  = sprintf("%s/changes/?q=status:%s+owner:%s", $this->domain,$status, $gerrit_user_id);
+		$start_from    = (!is_null($sort_key_after))?'&N='.$sort_key_after:'';
+		$url  = sprintf("%s/changes/?q=status:%s+owner:%s&n=%s%s", $this->domain,$status, $gerrit_user_id,  $batch_size, $start_from);
 		$json = $this->fixGerritJsonResponse($this->doRequest($url));
 		$response = json_decode($json, true);
 		if(is_array($response) && count($response) > 0){

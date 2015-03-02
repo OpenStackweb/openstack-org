@@ -32,5 +32,5 @@ interface IGerritAPI {
 	 * @param string $status
 	 * @return array
 	 */
-	public function getUserCommits($gerrit_user_id, $status);
+	public function getUserCommits($gerrit_user_id, $status, $batch_size = 500, $sort_key_after = null);
 } 
