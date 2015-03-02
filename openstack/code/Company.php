@@ -341,8 +341,8 @@ class Company extends DataObject implements PermissionProvider {
         if(isset($pageId)){
             $sqlQuery = new SQLQuery();
             $sqlQuery->setSelect("SubmitPageUrl");
-            $sqlQuery->setFrom("SponsorsPage_Companies");
-            $sqlQuery->setWhere("CompanyID={$this->ID} AND SponsorsPageID={$pageId}");
+            $sqlQuery->setFrom("SummitSponsorPage_Companies");
+            $sqlQuery->setWhere("CompanyID={$this->ID} AND SummitSponsorPageID={$pageId}");
             $type = $sqlQuery->execute()->value();
         }
         return new TextField("SubmitPageUrl_{$this->ID}","SubmitPageUrl_{$this->ID}",$type,255);
@@ -356,8 +356,8 @@ class Company extends DataObject implements PermissionProvider {
         if(isset($pageId)){
             $sqlQuery = new SQLQuery();
             $sqlQuery->setSelect("SponsorshipType");
-            $sqlQuery->setFrom("SponsorsPage_Companies");
-            $sqlQuery->setWhere("CompanyID={$this->ID} AND SponsorsPageID={$pageId}");
+            $sqlQuery->setFrom("SummitSponsorPage_Companies");
+            $sqlQuery->setWhere("CompanyID={$this->ID} AND SummitSponsorPageID={$pageId}");
             $type = $sqlQuery->execute()->value();
         }
         return new DropdownField("SponsorshipType_{$this->ID}", "SponsorshipType_{$this->ID}", array(
@@ -378,8 +378,8 @@ class Company extends DataObject implements PermissionProvider {
         if(isset($pageId)){
             $sqlQuery = new SQLQuery();
             $sqlQuery->setSelect("LogoSize");
-            $sqlQuery->setFrom("SponsorsPage_Companies");
-            $sqlQuery->setWhere("CompanyID={$this->ID} AND SponsorsPageID={$pageId}");
+            $sqlQuery->setFrom("SummitSponsorPage_Companies");
+            $sqlQuery->setWhere("CompanyID={$this->ID} AND SummitSponsorPageID={$pageId}");
             $size = $sqlQuery->execute()->value();
             if(is_null($size))
                 $size='None';
@@ -401,7 +401,7 @@ class Company extends DataObject implements PermissionProvider {
         $img = $img->exists()?$img:$this->Logo();
         if(isset($img)  && Director::fileExists($img->Filename) && $img->exists()){
             $img = $img->SetWidth(100);
-            return "<img alt='{$this->Name}_sidebar_logo' src='{$img->getURL()}' class='sidebar-logo-company'/>";
+            return "<img alt='{$this->Name}_sidebar_logo' src='{$img->getURL()}' class='sidebar-logo-company sponsor-logo'/>";
         }
         return 'missing';
     }
@@ -411,7 +411,7 @@ class Company extends DataObject implements PermissionProvider {
         $img = $this->Logo();
         $img=$img->SetWidth($width);
         if(isset($img) && Director::fileExists($img->Filename) && $img->exists()){
-            return "<img alt='{$this->Name}_small_logo' src='{$img->getURL()}' class='small-logo-company'/>";
+            return "<img alt='{$this->Name}_small_logo' src='{$img->getURL()}' class='small-logo-company sponsor-logo'/>";
         }
         return 'missing';
     }
@@ -421,7 +421,7 @@ class Company extends DataObject implements PermissionProvider {
         $img = $img->exists()?$img:$this->Logo();
         if(isset($img)  && Director::fileExists($img->Filename) && $img->exists()){
             $img= $img->SetWidth(210);
-            return "<img alt='{$this->Name}_medium_logo' src='{$img->getURL()}' class='medium-logo-company'/>";
+            return "<img alt='{$this->Name}_medium_logo' src='{$img->getURL()}' class='medium-logo-company sponsor-logo'/>";
         }
         return 'missing';
     }
@@ -431,7 +431,7 @@ class Company extends DataObject implements PermissionProvider {
         $img = $img->exists()?$img:$this->Logo();
         if(isset($img)  && Director::fileExists($img->Filename) && $img->exists()){
             $img= $img->SetWidth(300);
-            return "<img alt='{$this->Name}_large_logo' src='{$img->getURL()}' class='large-logo-company'/>";
+            return "<img alt='{$this->Name}_large_logo' src='{$img->getURL()}' class='large-logo-company sponsor-logo'/>";
         }
         return 'missing';
     }
@@ -440,7 +440,7 @@ class Company extends DataObject implements PermissionProvider {
         $img = $this->BigLogo();
         if(isset($img) && Director::fileExists($img->Filename) && $img->exists()){
             $img=$img->SetWidth(300);
-            return "<img alt='{$this->Name}_big_logo' src='{$img->getURL()}' class='big-logo-company'/>";
+            return "<img alt='{$this->Name}_big_logo' src='{$img->getURL()}' class='big-logo-company sponsor-logo'/>";
         }
         return 'missing';
     }
@@ -461,7 +461,7 @@ class Company extends DataObject implements PermissionProvider {
         $sponsor_type = $res->SponsorshipType;
         switch($logo_size){
             case 'Small':
-                    return $this->SmallLogoPreview();
+                   return $this->SmallLogoPreview();
                 break;
             case 'Medium':
                     return $this->MediumLogoPreview();

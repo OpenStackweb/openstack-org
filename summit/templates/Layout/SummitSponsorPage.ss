@@ -72,6 +72,7 @@
 				<h1>Thank You To The OpenStack Summit Sponsors</h1>
 			</div>
 		</div>
+		<% if HeadlineSponsors %>
 		<div class="row">
 			<div class="col-lg-8 col-lg-push-2">
 				<h5 class="section-title">
@@ -80,21 +81,16 @@
 			</div>
 			<div class="col-lg-12">
 				<div class="row">
+					<% loop HeadlineSponsors %>
 					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://intel.com"><img src="/summit/images/sponsors/intel2.png" class="sponsor-logo"></a>
+						<a rel="nofollow" href="{$SubmitLandPageUrl}">$SubmitLogo</a>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.ericsson.com/spotlight/cloud-evolution"><img src="/summit/images/sponsors/ericsson.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.huawei.com/en/"><img src="/summit/images/sponsors/huawei.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.redhat.com/en"><img src="/summit/images/sponsors/redhat-enovance2.png" class="sponsor-logo"></a>
-					</div>
+					<% end_loop %>
 				</div>
 			</div>
 		</div>
+		<% end_if %>
+		<% if PremierSponsors %>
 		<div class="row">
 			<div class="col-lg-8 col-lg-push-2">
 				<h5 class="section-title">
@@ -103,33 +99,18 @@
 			</div>
 			<div class="col-lg-8 col-lg-push-2">
 				<div class="row">
+					<% loop PremierSponsors %>
 					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.rackspace.com/cloud/openstack/"><img src="/summit/images/sponsors/SetWidth300-rackspac-lg.png" class="sponsor-logo"></a>
+                        <a rel="nofollow" href="{$SubmitLandPageUrl}">
+							$SubmitLogo
+                        </a>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.ubuntu.com/cloud"><img src="/summit/images/sponsors/SetWidth300-ubuntu.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.cisco.com/"><img src="/summit/images/sponsors/SetWidth300-0000CiscoLogoRGB2color2.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.hpcloud.com/"><img src="/summit/images/sponsors/SetWidth300-hp.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.juniper.net/us/en/"><img src="/summit/images/sponsors/juniper-opencontrail.jpg" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.ibm.com/cloud-computing/us/en/"><img src="/summit/images/sponsors/SetWidth300-ibm.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.vmware.com/"><img src="/summit/images/sponsors/SetWidth300-vmware5.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3">
-						<a href="http://www.fujitsu.com/global/"><img src="/summit/images/sponsors/SetWidth300-fujitsu.png" class="sponsor-logo"></a>
-					</div>
+					<% end_loop %>
 				</div>
 			</div>
 		</div>
+		<% end_if %>
+		<% if SpotlightSponsors %>
 		<div class="row">
 			<div class="col-lg-8 col-lg-push-2">
 				<h5 class="section-title">
@@ -138,57 +119,69 @@
 			</div>
 			<div class="col-lg-8 col-lg-push-2">
 				<div class="row">
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.rackspace.com/cloud/openstack/"><img src="/summit/images/sponsors/SetWidth300-rackspac-lg.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.ubuntu.com/cloud"><img src="/summit/images/sponsors/SetWidth300-ubuntu.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.cisco.com/"><img src="/summit/images/sponsors/SetWidth300-0000CiscoLogoRGB2color2.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.hpcloud.com/"><img src="/summit/images/sponsors/SetWidth300-hp.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.juniper.net/us/en/"><img src="/summit/images/sponsors/juniper-opencontrail.jpg" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.ibm.com/cloud-computing/us/en/"><img src="/summit/images/sponsors/SetWidth300-ibm.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.vmware.com/"><img src="/summit/images/sponsors/SetWidth300-vmware5.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.fujitsu.com/global/"><img src="/summit/images/sponsors/SetWidth300-fujitsu.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.rackspace.com/cloud/openstack/"><img src="/summit/images/sponsors/SetWidth300-rackspac-lg.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.ubuntu.com/cloud"><img src="/summit/images/sponsors/SetWidth300-ubuntu.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.cisco.com/"><img src="/summit/images/sponsors/SetWidth300-0000CiscoLogoRGB2color2.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.hpcloud.com/"><img src="/summit/images/sponsors/SetWidth300-hp.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.juniper.net/us/en/"><img src="/summit/images/sponsors/juniper-opencontrail.jpg" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.ibm.com/cloud-computing/us/en/"><img src="/summit/images/sponsors/SetWidth300-ibm.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.vmware.com/"><img src="/summit/images/sponsors/SetWidth300-vmware5.png" class="sponsor-logo"></a>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<a href="http://www.fujitsu.com/global/"><img src="/summit/images/sponsors/SetWidth300-fujitsu.png" class="sponsor-logo"></a>
-					</div>
+					<% loop SpotlightSponsors %>
+                        <a rel="nofollow" href="{$SubmitLandPageUrl}">
+							$SubmitLogo
+                        </a>
+					<% end_loop %>
 				</div>
 			</div>
 		</div>
+		<% end_if %>
+		<% if EventSponsors %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">
+                        Event Sponsors
+                    </h5>
+                </div>
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="row">
+						<% loop EventSponsors %>
+                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
+								$SubmitLogo
+                            </a>
+						<% end_loop %>
+                    </div>
+                </div>
+            </div>
+		<% end_if %>
+		<% if StartupSponsors %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">
+                        Startup Sponsors
+                    </h5>
+                </div>
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="row">
+						<% loop StartupSponsors %>
+                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
+								$SubmitLogo
+                            </a>
+						<% end_loop %>
+                    </div>
+                </div>
+            </div>
+		<% end_if %>
+		<% if InKindSponsors %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">
+                        Community Partners
+                    </h5>
+                </div>
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="row">
+						<% loop InKindSponsors %>
+                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
+								$SubmitLogo
+                            </a>
+						<% end_loop %>
+                    </div>
+                </div>
+            </div>
+		<% end_if %>
 	</div>
 </div>
 <div class="light" id="packages">
