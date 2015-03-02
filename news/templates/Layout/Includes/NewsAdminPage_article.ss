@@ -1,9 +1,9 @@
 <tr class="article_row" height="5px">
     <td class="date_release" >$formattedDate</td>
     <% if $Type == standby %>
-        <td class="title">$shortenText($Headline,29)</td>
+        <td class="title">$shortenText($Headline,20)</td>
     <% else %>
-        <td class="title">$shortenText($Headline,57)</td>
+        <td class="title">$shortenText($Headline,50)</td>
     <% end_if %>
     <td class="image" data-toggle="popover">
         <% if Image.Exists %>
