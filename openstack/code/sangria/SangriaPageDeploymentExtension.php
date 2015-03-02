@@ -123,7 +123,7 @@ final class SangriaPageDeploymentExtension extends Extension
         if ($useDateFilter)
             $date_filter = " AND " . SangriaPage_Controller::$date_filter_query;
 
-        $query = "SELECT COUNT(*) FROM DeploymentSurvey DS INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry WHERE Title IS NOT NULL" . $range_filter . $date_filter;
+        $query = "SELECT COUNT(*) FROM DeploymentSurvey DS INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry WHERE " . $range_filter . $date_filter;
         return DB::query($query)->value();
     }
 

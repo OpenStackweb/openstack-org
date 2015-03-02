@@ -3,14 +3,9 @@
 <div class="container">
 
     <% include DeploymentSurveyPageNavigation %>
-	
 	<div class="row">
-       
-        <form>
             <fieldset class="fake">
-            
                 $ThankYouContent
-
                 <% if CurrentMember.Password %>
                 <% else %>
                     <h2>Create A Password For Return Visits</h2>
@@ -19,7 +14,6 @@
                     $SavePasswordForm
                 <% end_if %>
             </fieldset>
-        </form>
     </div>
 </div>
 

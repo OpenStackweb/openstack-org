@@ -1,4 +1,4 @@
-<% include SangriaPage_SurveyRangeSelector Label='Deployments Subset', FormAction=$Top.GetLinkForDeploymentsPerContinent($continent), FromPage=DeploymentsPerRegion %>
+<% include SangriaPage_SurveyRangeSelector Label='Deployments Subset', FormAction=$Top.GetLinkForDeploymentsPerContinent($continent), FromPage=ViewDeploymentsPerRegion %>
 <script type="application/javascript">
         $LoadJsonCountriesCoordinates
     var countries_with_deployment = [];
