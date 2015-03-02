@@ -69,6 +69,8 @@ jQuery(document).ready(function($){
         container: 'body'}
     );
 
+    // level columns heights
+    $('.right-col').height($('.left-col').height());
 
 });
 

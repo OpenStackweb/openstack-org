@@ -1,7 +1,7 @@
 <tr class="article_row" height="5px">
     <td class="date_release" >$formattedDate</td>
     <% if $Type == standby %>
-        <td class="title">$shortenText($Headline,30)</td>
+        <td class="title">$shortenText($Headline,29)</td>
     <% else %>
         <td class="title">$shortenText($Headline,60)</td>
     <% end_if %>
