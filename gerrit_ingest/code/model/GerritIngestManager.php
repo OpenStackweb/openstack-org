@@ -91,36 +91,42 @@ final class GerritIngestManager {
             }
 
             foreach($members as $member){
-                $changes = $gerrit_api->getUserCommits($member->getGerritId(), GerritChangeStatus::_MERGED);
-                if(!is_null($changes) && is_array($changes) && count($changes) > 0){
-                    foreach($changes as $change){
-                        $db_change = GerritChangeInfo::get()->filter(array('ChangeId' => $change['change_id']))->first();
-                        if(!$db_change){
-                            $db_change = new GerritChangeInfo();
-                            $db_change->kind = @$change['kind'];
-                            $db_change->FormattedChangeId = @$change['id'];
-                            $db_change->ProjectName = @$change['project'];
-                            $db_change->Branch = @$change['branch'];
-                            $db_change->Topic = @$change['topic'];
-                            $db_change->ChangeId = @$change['change_id'];
-                            $db_change->Subject = @$change['subject'];
-                            $db_change->Status = @$change['status'];
-                            $created_date = explode('.',@$change['created']);
-                            $updated_date = explode('.',@$change['updated']);
-                            $db_change->CreatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $created_date[0])->getTimestamp();
-                            $db_change->UpdatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $updated_date[0])->getTimestamp();
-                            $db_change->MemberID  = $member->getIdentifier();
-                            $db_change->write();
+                $more_changes = false;
+                $start_point  = null;
+                do {
+                    $changes = $gerrit_api->getUserCommits($member->getGerritId(), GerritChangeStatus::_MERGED, 250, $start_point);
+                    if (!is_null($changes) && is_array($changes) && count($changes) > 0) {
+                        $count = count($changes);
+                        $last  = $changes[$count - 1];
+                        $more_changes = isset($last['_more_changes'])?$last['_more_changes']:false;
+                        $start_point = ($more_changes)?$last['_sortkey']:null;
+
+                        foreach($changes as $change){
+                            $db_change = GerritChangeInfo::get()->filter(array('ChangeId' => $change['change_id']))->first();
+                            if(!$db_change){
+                                $db_change = new GerritChangeInfo();
+                                $db_change->kind = @$change['kind'];
+                                $db_change->FormattedChangeId = @$change['id'];
+                                $db_change->ProjectName = @$change['project'];
+                                $db_change->Branch = @$change['branch'];
+                                $db_change->Topic = @$change['topic'];
+                                $db_change->ChangeId = @$change['change_id'];
+                                $db_change->Subject = @$change['subject'];
+                                $db_change->Status = @$change['status'];
+                                $created_date = explode('.',@$change['created']);
+                                $updated_date = explode('.',@$change['updated']);
+                                $db_change->CreatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $created_date[0])->getTimestamp();
+                                $db_change->UpdatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $updated_date[0])->getTimestamp();
+                                $db_change->MemberID  = $member->getIdentifier();
+                                $db_change->write();
+                            }
                         }
                     }
-
-                    ++$updated_members;
-                }
+                }while($more_changes);
+                ++$updated_members;
                 $task->updateLastRecord();
             }
-
             return $updated_members;
         });
     }
-
 }
