@@ -112,9 +112,6 @@ jQuery(document).ready(function($){
         }
     })
 
-
-    var range = $('#survey_range').val();
-    $('#range').val(range);
     $('#range').change(function(event){
         var range = $(this).val();
         $('#survey_range').val(range);
