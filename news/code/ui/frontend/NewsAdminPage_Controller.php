@@ -80,41 +80,30 @@ final class NewsAdminPage_Controller extends Page_Controller {
                                                                       'StandByCount' => count($standby_news)));
     }
 
-    public function getSliderNews() {
+    public function getArticles($type) {
         $output = '';
         $counter = 0;
-        $slide_news = $this->news_repository->getSlideNews();
-
-        foreach ($slide_news as $slide_article) {
-            $counter++;
-            $link = ($slide_article->Link) ? $slide_article->Link : '';
-            $data = array('Id'=>$slide_article->Id,'Rank'=>$slide_article->Rank,'Link'=>$link,
-                          'Image'=>$slide_article->getImage(),'Headline'=>$slide_article->Headline,'Summary'=>$slide_article->Summary);
-            $output .= $slide_article->renderWith('NewsAdminPage_slider', $data);
+        switch ($type) {
+            case 'slider' :
+                $articles = $this->news_repository->getSlideNews();
+                break;
+            case 'featured' :
+                $articles = $this->news_repository->getFeaturedNews();
+                break;
+            case 'recent' :
+                $articles = $this->news_repository->getRecentNews();
+                break;
+            case 'standby' :
+                $articles = $this->news_repository->getStandByNews();
+                break;
         }
 
-        /*for ($i=0;$i<(5-$counter);$i++) {
-            $output .= '<tr class="placeholder_empty"><td colspan="5">Drop here</td></tr>';
-        }*/
-
-        return $output;
-    }
-
-    public function getFeaturedNews() {
-        $output = '';
-        $counter = 0;
-        $featured_news = $this->news_repository->getFeaturedNews();
-
-        foreach ($featured_news as $featured_article) {
+        foreach ($articles as $article) {
             $counter++;
-            $link = ($featured_article->Link) ? $featured_article->Link : '';
-            $data = array('Id'=>$featured_article->Id,'Rank'=>$featured_article->Rank,'Link'=>$link,
-                          'Image'=>$featured_article->getImage(),'Headline'=>$featured_article->Headline,'Summary'=>$featured_article->Summary);
-            $output .= $featured_article->renderWith('NewsAdminPage_featured', $data);
-        }
-
-        for ($i=0;$i<(6-$counter);$i++) {
-            $output .= '<li class="placeholder_empty">Drop<br> here</li>';
+            $link = ($article->Link) ? $article->Link : '';
+            $data = array('Id'=>$article->Id,'Rank'=>$article->Rank,'Link'=>$link,
+                'Image'=>$article->getImage(),'Headline'=>$article->Headline,'Type'=>$type);
+            $output .= $article->renderWith('NewsAdminPage_article', $data);
         }
 
         return $output;

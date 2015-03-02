@@ -5,84 +5,77 @@
     <div class="link_button">
         <a href="#" id="go_to_recent">Go to Recently Submitted</a>
     </div>
-    <div class="newsSlider">
-        <h3>Banner (max 5)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th style="padding-left:5px;">Release</th>
-                    <th>Title</th>
-                    <th>Summary</th>
-                    <th style="text-align:center;">Image</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody id="slider_sortable" class="connected">
-                $getSliderNews
-            </tbody>
-        </table>
+    <div class="left-col">
+        <div class="newsSlider">
+            <h3>Banner (max 5)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="padding-left:5px;">Release</th>
+                        <th>Title</th>
+                        <th style="text-align:center;">Image</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody id="slider_sortable" class="connected">
+                    $getArticles(slider)
+                </tbody>
+            </table>
+        </div>
+        <div class="newsFeatured">
+            <h3>Featured</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="padding-left:5px;">Release</th>
+                        <th>Title</th>
+                        <th style="text-align:center;">Image</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody id="featured_sortable" class="connected">
+                    $getArticles(featured)
+                </tbody>
+            </table>
+        </div>
+        <div class="newsRecent">
+            <h3>Recent News</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="padding-left:5px;">Release</th>
+                        <th>Title</th>
+                        <th style="text-align:center;">Image</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody id="recent_sortable" class="connected">
+                    $getArticles(recent)
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="clear"></div>
-    <div class="newsFeatured">
-        <h3>Featured</h3>
-        <ul id="featured_sortable" class="connected" max-items="6">
-            $getFeaturedNews
-        </ul>
-    </div>
-    <div class="clear"></div>
-    <div class="orderMenu">
-
-    </div>
-    <div class="newsRecent">
-        <h3>Recent News</h3>
-        <ul id="recent_sortable" class="connected">
-            <% if RecentCount %>
-                <% loop  RecentNews %>
-                    <li>
-                        <div class="recentBox">
-                            <input type="hidden" class="article_id" value="$ID" />
-                            <input type="hidden" class="article_rank" value="$Rank" />
-                            <input type="hidden" class="article_type" value="recent" />
-                            <div class="newsImage">
-                                <a href="news/view/$ID/$HeadlineForUrl">$Image.CroppedImage(200,100)</a>
-                            </div>
-                            <div class="newsText">
-                                <p class="headline">&ldquo;$Headline&rdquo;</p>
-                                <!-- <p class="summary">&mdash; $RAW_val(Summary)</p> -->
-                            </div>
-                            <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
-                            <div class="newsRemove">Remove</div>
-                        </div>
-                    </li>
-                <% end_loop %>
-            <% else %>
-                <li class="placeholder_empty">Drop<br> here</li>
-            <% end_if %>
-        </ul>
-    </div>
-    <div class="clear"></div>
-    <div class="newsStandBy">
-        <h3>Recently Submitted</h3>
-        <ul id="standby_sortable" class="connected">
-            <% loop  StandByNews %>
-                <li>
-                    <div class="standbyBox">
-                        <input type="hidden" class="article_id" value="$ID" />
-                        <input type="hidden" class="article_rank" value="$Rank" />
-                        <input type="hidden" class="article_type" value="standby" />
-                        <div class="newsImage">
-                            <a href="news/view/$ID/$HeadlineForUrl">$Image.CroppedImage(200,100)</a>
-                        </div>
-                        <div class="newsText">
-                            <p class="headline">&ldquo;$Headline&rdquo;</p>
-                            <!-- <p class="summary">&mdash; $RAW_val(Summary)</p> -->
-                        </div>
-                        <div class="newsEdit"><a href="news-add?articleID=$ID"> Edit </a></div>
-                        <div class="newsDelete">Delete</div>
-                    </div>
-                </li>
-            <% end_loop %>
-        </ul>
+    <div class="right-col">
+        <div class="newsStandBy">
+            <h3>Recently Submitted</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="padding-left:5px;">Release</th>
+                        <th>Title</th>
+                        <th style="text-align:center;">Image</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody id="standby_sortable" class="connected">
+                    $getArticles(standby)
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="clear"></div>
 <% else %>

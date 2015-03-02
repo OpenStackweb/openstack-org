@@ -145,7 +145,6 @@ final class News extends DataObject implements INews {
         return trim($tags_csv, ",");
     }
 
-
     public function addTag(ITag $tag)
     {
         AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->add($tag);
