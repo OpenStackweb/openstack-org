@@ -68,10 +68,10 @@ class SapphireRepository extends AbstractEntityRepository
 		if (count($query->getOrder()))
 			$do = $do->sort($query->getOrder());
 
-		$do = $do->limit($limit, $offset);
+		$do_limit = $do->limit($limit, $offset);
 
-		if (is_null($do)) return array(array(), 0);
-		$res = $do->toArray();
+		if (is_null($do_limit)) return array(array(), 0);
+		$res = $do_limit->toArray();
 		foreach ($res as $entity) {
 			UnitOfWork::getInstance()->setToCache($entity);
 			UnitOfWork::getInstance()->scheduleForUpdate($entity);

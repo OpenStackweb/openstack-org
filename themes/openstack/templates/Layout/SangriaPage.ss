@@ -99,6 +99,7 @@
 		<li><a href="$Link(ViewDeploymentsPerRegion)">View Deployments Per Region</a></li>
 		<li><a href="$Link(ViewDeploymentSurveysPerRegion)">View Deployment Surveys Per Region</a></li>
         <li><a href="$Link(ViewUsersPerRegion)">View Users Per Region</a></li>
+        <li><a href="$Link(GerritStatisticsReport)">Gerrit Statistics Report</a></li>
     </ul>
     <h2>Manage User Stories and Deployments</h2>
     <ul>
