@@ -33,6 +33,12 @@
 	<div class="container">
 		<ul class="city-nav-list">
 			<li>
+				<a href="#sponsors">
+					<i class="fa fa-heart"></i>
+					Sponsors
+				</a>
+			</li>
+			<li>
 				<a href="#packages">
 					<i class="fa fa-tags"></i>
 					Packages
@@ -57,6 +63,125 @@
 				</a>
 			</li>
 		</ul>
+	</div>
+</div>
+<div class="white sponsor-list" id="sponsors">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>Thank You To The OpenStack Summit Sponsors</h1>
+			</div>
+		</div>
+		<% if HeadlineSponsors %>
+		<div class="row">
+			<div class="col-lg-8 col-lg-push-2">
+				<h5 class="section-title">
+					Headline Sponsors
+				</h5>
+			</div>
+			<div class="col-lg-12">
+				<div class="row">
+					<% loop HeadlineSponsors %>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<a rel="nofollow" href="{$SubmitLandPageUrl}">$SubmitLogo</a>
+					</div>
+					<% end_loop %>
+				</div>
+			</div>
+		</div>
+		<% end_if %>
+		<% if PremierSponsors %>
+		<div class="row">
+			<div class="col-lg-8 col-lg-push-2">
+				<h5 class="section-title">
+					Premier Sponsors 
+				</h5>
+			</div>
+			<div class="col-lg-8 col-lg-push-2">
+				<div class="row">
+					<% loop PremierSponsors %>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+                        <a rel="nofollow" href="{$SubmitLandPageUrl}">
+							$SubmitLogo
+                        </a>
+					</div>
+					<% end_loop %>
+				</div>
+			</div>
+		</div>
+		<% end_if %>
+		<% if SpotlightSponsors %>
+		<div class="row">
+			<div class="col-lg-8 col-lg-push-2">
+				<h5 class="section-title">
+					Spotlight Sponsors 
+				</h5>
+			</div>
+			<div class="col-lg-8 col-lg-push-2">
+				<div class="row">
+					<% loop SpotlightSponsors %>
+                        <a rel="nofollow" href="{$SubmitLandPageUrl}">
+							$SubmitLogo
+                        </a>
+					<% end_loop %>
+				</div>
+			</div>
+		</div>
+		<% end_if %>
+		<% if EventSponsors %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">
+                        Event Sponsors
+                    </h5>
+                </div>
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="row">
+						<% loop EventSponsors %>
+                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
+								$SubmitLogo
+                            </a>
+						<% end_loop %>
+                    </div>
+                </div>
+            </div>
+		<% end_if %>
+		<% if StartupSponsors %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">
+                        Startup Sponsors
+                    </h5>
+                </div>
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="row">
+						<% loop StartupSponsors %>
+                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
+								$SubmitLogo
+                            </a>
+						<% end_loop %>
+                    </div>
+                </div>
+            </div>
+		<% end_if %>
+		<% if InKindSponsors %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">
+                        Community Partners
+                    </h5>
+                </div>
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="row">
+						<% loop InKindSponsors %>
+                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
+								$SubmitLogo
+                            </a>
+						<% end_loop %>
+                    </div>
+                </div>
+            </div>
+		<% end_if %>
 	</div>
 </div>
 <div class="light" id="packages">
