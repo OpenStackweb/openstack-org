@@ -58,7 +58,7 @@ final class SapphireNewsRepository extends SapphireRepository {
         $query->addAddCondition(QueryCriteria::equal('Slider','0'));
         $query->addAddCondition(QueryCriteria::equal('Approved','0'));
         $query->addOrder(QueryOrder::desc('Date'));
-        $query->addOrder(QueryOrder::asc('Rank'));
+        //$query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);
         return $list;
     }
