@@ -21,6 +21,9 @@ class DeploymentSurveyDeploymentDetailsForm extends Form
 
         $CurrentDeploymentID = Session::get('CurrentDeploymentID');
         $CountryCodes = CountryCodes::$iso_3166_countryCodes;
+        $CountryCodes['Worldwide'] = 'Worldwide';
+        $CountryCodes['Prefer not to say'] = 'Prefer not to say';
+        $CountryCodes['Too many to list'] = 'Too many to list';
         $fields = new FieldList (
             new HiddenField('DeploymentID', 'DeploymentID', $CurrentDeploymentID),
             new LiteralField('Break', '<p>Each deployment profile can be marked public if you wish for the basic information on this page to appear on openstack.org. If you select private we will treat all of the profile information as confidential information.</p>'),

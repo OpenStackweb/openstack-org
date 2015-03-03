@@ -58,7 +58,7 @@ jQuery(document).ready(function($) {
     setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_OperatingSystems'),$('#OtherOperatingSystems'));
     setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_DeploymentTools_OtherTool'), $('#OtherDeploymentTools'));
 
-    setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_PaasTools'), $('#OtherPaasTools'));
+    setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_PaasTools_Other'), $('#OtherPaasTools'));
 
     setCustomValidationRuleForOtherText($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_SupportedFeatures_OtherCompatibilityAPI'), $('#OtherSupportedFeatures'));
 

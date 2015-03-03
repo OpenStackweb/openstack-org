@@ -123,7 +123,8 @@ final class DeploymentOptions {
         'IT Infrastructure: file/print and support for network protocols' => 'IT Infrastructure: file/print and support for network protocols',
         'Web Infrastructure: Web-serving, proxy and caching' => 'Web Infrastructure: Web-serving, proxy and caching',
         'Industrial R&D: scientific/technical/engineering' => 'Industrial R&D: scientific/technical/engineering',
-        'Other' => 'Other'
+        'None' => 'None',
+        'Other' => 'Other',
     );
 
     public static $horizontal_workload_framework_options = array(
@@ -137,7 +138,9 @@ final class DeploymentOptions {
         'Benchmarks / Stress Testing' => 'Benchmarks / Stress Testing',
         'Management and Monitoring Systems' => 'Management and Monitoring Systems',
         'QA / Test Environment / Continuous Integration / Automated Testing Workflows' => 'QA / Test Environment / Continuous Integration / Automated Testing Workflows',
-        'Other' => 'Other'
+        'None' => 'None',
+        'Other' => 'Other',
+
     );
 
     public static $api_options = array(

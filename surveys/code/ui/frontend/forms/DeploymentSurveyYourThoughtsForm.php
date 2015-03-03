@@ -82,7 +82,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
         $fields->add(new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))));
         $fields->add(new TextAreaField('OtherInformationSources', ''));
-        $fields->add(new DropdownField(
+        $fields->add($ddl_rate = new DropdownField(
             'OpenStackRecommendRate',
             'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',
             DeploymentSurvey::$openstack_recommendation_rate_options));
@@ -92,13 +92,12 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         $fields->add(new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack, besides “free” and “open”?'));
         $fields->add(new TextAreaField('FurtherEnhancement', 'What areas of OpenStack require further enhancement? '));
         $fields->add(new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?'));
-
+        $ddl_rate->setEmptyString('Neutral');
         $actions = new FieldList(
             $nextButton
         );
 
         $validator = new RequiredFields();
-
         Requirements::javascript('surveys/js/deployment_survey_yourthoughts_form.js');
 
         parent::__construct($controller, $name, $fields, $actions, $validator);

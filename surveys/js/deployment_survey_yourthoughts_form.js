@@ -52,62 +52,6 @@ jQuery(document).ready(function($) {
 
     setCustomValidationRuleForOtherText($('#DeploymentSurveyYourThoughtsForm_Form_InformationSources_Other'), $('#OtherInformationSources'));
 
-    $("#answers li").draggable({
-        appendTo: "body",
-        helper:   "clone",
-        cursor :  "move",
-        revert: true
-    });
-
-    $('.remove_answer').live('click', function(evt){
-        var answers   = $( "#options ol" );
-        evt.preventDefault();
-        var li = $(this).parent();
-        var id = li.attr('data-key');
-        li.remove();
-        if($('li',answers).length == 0){
-            $('<li class="ui-sortable-handle placeholder">Add your answers here</li>').appendTo(answers);
-        }
-        var draggable = $('#'+id, $("#answers"));
-        draggable.removeClass('hidden');
-        return false;
-    });
-
-    $("#options ol").droppable({
-        activeClass: "ui-state-default",
-        hoverClass: "ui-state-hover",
-        accept: ":not(.ui-sortable-handle)",
-        drop: function( event, ui ) {
-            $(this).find(".placeholder").remove();
-
-            if($('li',$(this)).length < 5) {
-                var answers   = $(this);
-                var draggable = ui.draggable;
-                var key       = draggable.attr('data-key');
-                var answer    = $("<li class='ui-state-default ui-sortable-handle' id='"+key+"_answer'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>"+ draggable.text()+"</li>");
-                if(key == '6311ae17c1ee52b36e68aaf4ad066387'){
-                    //add input text
-                    $("<input type='text' id='other_txt'>").appendTo(answer);
-                }
-                answer.attr('data-key', key);
-                $("&nbsp;<a href='#' class='remove_answer' title='remove it'>X</a>").appendTo(answer);
-                answer.appendTo(this);
-                draggable.addClass('hidden');
-            }
-        }
-    }).sortable({
-        cursor: 'move',
-        items: "li:not(.placeholder)",
-        sort: function() {
-        // gets added unintentionally by droppable interacting with sortable
-        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-            $( this ).removeClass( "ui-state-default" );
-        },
-        placeholder: "ui-state-highlight"
-    });
-
-    //$("#options ol").disableSelection();
-
     form.submit(function( event ) {
         var valid = form.valid();
         var sorted = $("#options ol").sortable("toArray");

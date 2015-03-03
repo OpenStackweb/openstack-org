@@ -49,7 +49,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
              new LiteralField('Container','</div>'),
              new CustomCheckboxSetField('DeploymentTools','What tools are you using to deploy / configure this cluster?<BR>Select All That Apply', DeploymentOptions::$deployment_tools_options),
              $other_deployment_tools = new TextareaField('OtherDeploymentTools',''),
-            new DropdownField(
+            new CustomCheckboxSetField(
                 'PaasTools',
                 'What Platform-as-a-Service (PaaS) tools are you using to manage applications on this OpenStack deployment?',
                 ArrayUtils::AlphaSort(DeploymentOptions::$paas_tools_options, array('' => '-- Select One --'), array('Other' => 'Other Tool (please specify)'))
@@ -65,7 +65,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
             $fields->add(
                 new CustomCheckboxSetField(
                     'Hypervisors',
-                    'If this deployment uses <b>OpenStack Compute (Nova)</b>, which hypervisors are you using?<BR>Select All That Apply', DeploymentOptions::$hypervisors_options
+                    'Which <b>OpenStack Compute (Nova)</b> hypervisors are you using?<BR>Select All That Apply', DeploymentOptions::$hypervisors_options
                 )
 
             );
@@ -95,7 +95,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
             $fields->add(
                 new CustomCheckboxSetField(
                     'NetworkDrivers',
-                    ' If this deployment uses <b>OpenStack Network (Neutron)</b>, which drivers are you using?<BR>Select All That Apply', DeploymentOptions::$network_driver_options
+                    ' Which <b>OpenStack Network (Neutron)</b> drivers are you using?<BR>Select All That Apply', DeploymentOptions::$network_driver_options
                 )
 
             );
@@ -106,7 +106,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         if(strpos($projects_used, 'Openstack Identity Service (Keystone)') !== false ){
             $fields->add(new CustomCheckboxSetField(
                 'IdentityDrivers',
-                'If you are using <b>OpenStack Identity Service (Keystone)</b> which OpenStack identity drivers are you using?<BR>Select All That Apply',
+                'Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you using?<BR>Select All That Apply',
                 DeploymentOptions::$identity_driver_options
             ));
             $fields->add($other_driver = new TextareaField('OtherIndentityDriver', ''));
@@ -116,7 +116,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         if(strpos($projects_used, 'Openstack Block Storage (Cinder)') !== false){
             $fields->add(new CustomCheckboxSetField(
                 'BlockStorageDrivers',
-                'If this deployment uses <b>OpenStack Block Storage (Cinder)</b>, which drivers are <BR>Select All That Apply',
+                'Which <b>OpenStack Block Storage (Cinder)</b> drivers are you using?<BR>Select All That Apply',
                 DeploymentOptions::$block_storage_divers_options
             ));
             $fields->add($other_driver= new TextareaField('OtherBlockStorageDriver', ''));
@@ -188,7 +188,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         if(strpos($projects_used, 'Openstack Block Storage (Cinder)') !== false){
             $fields->add($ddl_block_size = new DropdownField(
                 'BlockStorageTotalSize',
-                'f this deployment uses <b>OpenStack Block Storage (Cinder)</b>, what is the size of its block storage?',
+                'Which <b>OpenStack Block Storage (Cinder)</b> size are you using?',
                 DeploymentOptions::$storage_size_options
             ));
 
@@ -200,7 +200,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
         if(strpos($projects_used, 'Openstack Object Storage (Swift)') !== false ){
             $fields->add($ddl_block_size = new DropdownField(
                 'ObjectStorageSize',
-                'f this deployment uses <b>OpenStack Object Storage (Swift)</b>, what is the size of its block storage?',
+                'Which <b>OpenStack Object Storage (Swift)</b> size are you using?',
                 DeploymentOptions::$storage_size_options
             ));
 
@@ -208,7 +208,7 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 
             $fields->add($ddl_objects_size = new DropdownField(
                 'ObjectStorageNumObjects',
-                'If this deployment uses <b>OpenStack Object Storage (Swift)</b>, how many total objects are stored?',
+                'How many <b>OpenStack Object Storage (Swift)</b> objects are stored?',
                 DeploymentOptions::$storage_objects_options
             ));
 
