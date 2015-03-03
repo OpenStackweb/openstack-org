@@ -20,11 +20,11 @@ jQuery(document).ready(function($) {
 
     $.validator.addMethod("sortable_drivers", function (value, element) {
         $.validator.messages.sortable_drivers = 'You must select at least one business driver.';
-        var sorted = $("#options ol").sortable( "toArray");
-
-        var count  = sorted.length;
+        var sorted  = $('.selected-rank', $('#catalog'));
+        var count   = sorted.length;
         for(var i = 0; i < count; i++){
-            if(sorted[i] == '6311ae17c1ee52b36e68aaf4ad066387_answer' && $('#other_txt',  $("#options ol")).val()==='' ){
+            var element = $(sorted[i]);
+            if(element.attr('data-answer') == '6311ae17c1ee52b36e68aaf4ad066387_answer' && $('#business_drivers_other_text', element.parent() ).val()==='' ){
                 $.validator.messages.sortable_drivers = 'You must specify you custom business driver.';
                 return false;
             }
@@ -42,7 +42,7 @@ jQuery(document).ready(function($) {
         errorPlacement: function (error, element) {
             if(element.hasClass('hidden'))
             {
-                error.appendTo($('#options'));
+                error.appendTo($('#catalog'));
             }
             else
                 jqueryValidatorErrorPlacement(error, element);
@@ -53,17 +53,25 @@ jQuery(document).ready(function($) {
     setCustomValidationRuleForOtherText($('#DeploymentSurveyYourThoughtsForm_Form_InformationSources_Other'), $('#OtherInformationSources'));
 
     form.submit(function( event ) {
-        var valid = form.valid();
-        var sorted = $("#options ol").sortable("toArray");
-        var count  = sorted.length;
+        var valid   = form.valid();
+        var sorted  = $('.selected-rank', $('#catalog'));
+        var count   = sorted.length;
         var drivers = '';
+        var current_answers = [];
         for(var i = 0; i < count; i++){
-            var key   = sorted[i];
-            var value = answer_table[key];
-            if(key == '6311ae17c1ee52b36e68aaf4ad066387_answer'){
-                $('#DeploymentSurveyYourThoughtsForm_Form_OtherBusinessDrivers').val($('#other_txt',  $("#options ol")).val());
+            var element = $( sorted[i]);
+            var answer = element.attr('data-answer');
+            var sort   = element.attr('data-sort');
+            if(answer == '6311ae17c1ee52b36e68aaf4ad066387_answer'){
+                var other_value = $('#business_drivers_other_text', element.parent() ).val();
+                $('#DeploymentSurveyYourThoughtsForm_Form_OtherBusinessDrivers').val(other_value);
             }
-            drivers += value +',';
+            current_answers[sort] = answer;
+        }
+        for(var j = 1 ;j <= count; j++ ){
+           var answer =  current_answers[j];
+           drivers += answer_table[answer] + ',';
+
         }
         //remove last ,
         drivers = drivers.substring(0, drivers.length - 1);
@@ -74,6 +82,38 @@ jQuery(document).ready(function($) {
             return false;
         }
 
+    });
+
+    // rank widget
+    var rank_order = 0;
+
+    $('.rank-text').live('click', function(evt){
+        if(rank_order < 5) {
+            var rank = $('.rank-wrapper', $(this).parent());
+            if(rank.hasClass('selected-rank')) return;
+            ++rank_order
+            rank.text(rank_order);
+            rank.attr('data-sort',rank_order);
+            rank.addClass('selected-rank');
+        }
+    });
+
+    $('#clear_all_business_drivers').click(function(evt){
+        evt.preventDefault();
+        if(window.confirm('Are you sure?')) {
+            rank_order = 0;
+            var sorted = $('.selected-rank', $('#catalog'));
+            for (var i = 0; i < sorted.length; i++) {
+                var element = $(sorted[i]);
+                if (element.attr('data-answer') == '6311ae17c1ee52b36e68aaf4ad066387_answer') {
+                    $('#business_drivers_other_text', element.parent()).val('');
+                }
+                element.removeClass('selected-rank');
+                element.text('');
+                element.attr('data-sort', '');
+            }
+        }
+        return false;
     });
 
 });

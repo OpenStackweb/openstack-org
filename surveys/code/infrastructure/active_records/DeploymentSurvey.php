@@ -159,6 +159,7 @@ class DeploymentSurvey extends DataObject
         'Attract top technical talent by participating in an active global technology community' => 'Attract top technical talent by participating in an active, global technology community',
         'Achieve security and/or privacy goals with control of platform' => 'Achieve security and/or privacy goals with control of platform',
         'Standardize on the same open platform and APIs that power a global network of of public and private clouds' => 'Standardize on the same open platform and APIs that power a global network of of public and private clouds',
+		'Other' => 'Something else not listed here',
    );
 
     public static $activities_options = array(
@@ -235,7 +236,7 @@ class DeploymentSurvey extends DataObject
 			new TextAreaField('OtherBusinessDrivers', ''),
 			new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))),
 			new TextAreaField('OtherInformationSources', ''),
-			new DropdownField(
+			$ddl_rate = new DropdownField(
 				'OpenStackRecommendRate',
 				'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',
 				DeploymentSurvey::$openstack_recommendation_rate_options),
@@ -247,6 +248,7 @@ class DeploymentSurvey extends DataObject
 			new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?')
 		));
 
+		$ddl_rate->setEmptyString('Neutral');
 
 		$app_config = new GridFieldConfig_RecordEditor();
 

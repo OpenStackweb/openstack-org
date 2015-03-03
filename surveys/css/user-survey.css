@@ -433,3 +433,7 @@ div.deployment {
     border: 1px solid #D4DCE5;
     padding: 10px 20px;
 }
+
+#business_drivers_other_text{
+    width:75%;
+}
