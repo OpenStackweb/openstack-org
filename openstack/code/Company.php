@@ -455,49 +455,7 @@ class Company extends DataObject implements PermissionProvider {
     }
 
     public function SubmitLogo(){
-        $page = Director::get_current_page();
-        $res  = $page->getManyManyComponents("Companies","CompanyID={$this->ID}","ID")->First();
-        $logo_size    = $res->LogoSize;
-        $sponsor_type = $res->SponsorshipType;
-        switch($logo_size){
-            case 'Small':
-                   return $this->SmallLogoPreview();
-                break;
-            case 'Medium':
-                    return $this->MediumLogoPreview();
-                break;
-            case 'Large':
-                return $this->LargeLogoPreview();
-                break;
-            case 'Big':
-                    return $this->BigLogoPreview();
-                break;
-        }
-        //if we dont have set the logo_size yet
-        //then we use the default
-
-        switch($sponsor_type){
-            case 'Headline':
-                return $this->BigLogoPreview();
-                break;
-            case 'Premier':
-                return $this->LargeLogoPreview();
-                break;
-            case 'Event':
-                return $this->SmallLogoPreview();
-                break;
-            case 'Startup':
-                return $this->SmallLogoPreview();
-                break;
-            case 'InKind':
-                return $this->SmallLogoPreview();
-                break;
-            case 'Spotlight':
-                return $this->SmallLogoPreview();
-                break;
-        }
-
-        return $this->SmallLogoPreview();
+        return $this->BigLogoPreview();
     }
 
 	function onAfterWrite() {
