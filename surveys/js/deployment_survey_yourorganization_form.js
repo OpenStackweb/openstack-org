@@ -35,8 +35,6 @@ jQuery(document).ready(function($) {
         rules: {
             'Industry'  : {required: true },
             'PrimaryCountry' : {required: true },
-            'PrimaryState' : {required: true },
-            'PrimaryCity': {required: true },
             'OpenStackInvolvement[]': {required: true }
         },
         ignore: [],

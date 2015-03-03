@@ -74,7 +74,7 @@ class AppDevSurvey extends DataObject {
     }
 
 	public static $toolkits_options = array (
-		'Deltacloud' => 'Deltacloud (HTTP API)',
+		'Deltacloud' => 'Deltacloud',
 		'FOG' => 'FOG (Ruby)',
 		'jclouds' => 'jclouds (Java)',
 		'OpenStack.net' => 'OpenStack.net (C#)',
@@ -83,6 +83,7 @@ class AppDevSurvey extends DataObject {
 		'pkgcloud' => 'pkgcloud (Node.js)',
 		'Wrote our own' => 'Wrote our own',
         'Don’t use / plan to use the OpenStack API' => 'Don’t use / plan to use the OpenStack API',
+		'libcloud (Python)' => 'libcloud (Python)',
 	);
 
 	public static $languages_options = array (

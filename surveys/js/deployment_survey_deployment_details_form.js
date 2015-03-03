@@ -32,9 +32,7 @@
                 'CurrentReleases[]': {required: true },
                 'ServicesDeploymentsWorkloads[]': {required: true },
                 'EnterpriseDeploymentsWorkloads[]': {required: true },
-                'HorizontalWorkloadFrameworks[]': {required: true },
-                'CountriesPhysicalLocation[]': {multiselect_chosen : true},
-                'CountriesUsersLocation[]': {multiselect_chosen : true}
+                'HorizontalWorkloadFrameworks[]': {required: true }
             },
             ignore: [],
             invalidHandler: jqueryValidatorInvalidHandler,
