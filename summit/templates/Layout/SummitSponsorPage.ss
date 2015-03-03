@@ -120,9 +120,11 @@
 			<div class="col-lg-8 col-lg-push-2">
 				<div class="row">
 					<% loop SpotlightSponsors %>
-                        <a rel="nofollow" href="{$SubmitLandPageUrl}">
-							$SubmitLogo
-                        </a>
+					<div class="col-lg-2 col-md-2 col-sm-2">
+			                        <a rel="nofollow" href="{$SubmitLandPageUrl}">
+										$SubmitLogo
+			                        </a>
+			                </div>
 					<% end_loop %>
 				</div>
 			</div>
@@ -137,11 +139,13 @@
                 </div>
                 <div class="col-lg-8 col-lg-push-2">
                     <div class="row">
-						<% loop EventSponsors %>
-                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
-								$SubmitLogo
-                            </a>
-						<% end_loop %>
+				<% loop EventSponsors %>
+				<div class="col-lg-2 col-md-2 col-sm-2">
+		                            <a rel="nofollow" href="{$SubmitLandPageUrl}">
+										$SubmitLogo
+		                            </a>
+		                </div>
+				<% end_loop %>
                     </div>
                 </div>
             </div>
@@ -155,11 +159,13 @@
                 </div>
                 <div class="col-lg-8 col-lg-push-2">
                     <div class="row">
-						<% loop StartupSponsors %>
+		    	<% loop StartupSponsors %> 
+			<div class="col-lg-2 col-md-2 col-sm-2">
                             <a rel="nofollow" href="{$SubmitLandPageUrl}">
 								$SubmitLogo
                             </a>
-						<% end_loop %>
+                        </div>
+			<% end_loop %>
                     </div>
                 </div>
             </div>
@@ -173,11 +179,13 @@
                 </div>
                 <div class="col-lg-8 col-lg-push-2">
                     <div class="row">
-						<% loop InKindSponsors %>
+			<% loop InKindSponsors %>
+			<div class="col-lg-2 col-md-2 col-sm-2">
                             <a rel="nofollow" href="{$SubmitLandPageUrl}">
 								$SubmitLogo
                             </a>
-						<% end_loop %>
+                        </div>
+			<% end_loop %>
                     </div>
                 </div>
             </div>
