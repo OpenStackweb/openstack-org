@@ -33,48 +33,57 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
         $custom_field = array(
             new LiteralField('header','<div id="catalog">'),
-            new LiteralField('custom_question', '<p>What are your top business drivers for using OpenStack?</p><p>Please rank up to 5.</p><p>1 = top business driver, 2 = next, 3 = third, and so on</p><p><strong>Select At Least One</strong></p>'),
-            new LiteralField('ul_begin','<ul id="answers">'),
+            new LiteralField('p1','<p>What are your top business drivers for using OpenStack?</p>'),
+            new LiteralField('p2','<p>Please rank up to 5.</p>'),
+            new LiteralField('p3','<p>1 = top business driver, 2 = next, 3 = third, and so on</p>'),
+            new LiteralField('p3','<p><strong>Click your options to rank them. Select at least one.</strong>&nbsp;&nbsp;<a title="clear all options." href="#" id="clear_all_business_drivers">clear all</a></p>'),
+            new LiteralField('table_begin','<table class="your-thoughts-table"><tbody>'),
         );
 
+        $business_drivers = explode(',',$survey->BusinessDrivers);
+        $business_drivers = array_combine($business_drivers,$business_drivers);
+
         foreach(DeploymentSurvey::$business_drivers_options as $key => $value){
-            $hidden = strpos($survey->BusinessDrivers, $key) !== false?' hidden':'';
-            array_push($custom_field,new LiteralField('li_option','<li data-key="'.md5($key).'" class="answer_option'.$hidden.'" id="'.md5($key).'">'.$value.'</li>'));
-        }
-        $hidden = strpos($survey->BusinessDrivers,'Other') !== false?' hidden':'';
+            $hash = md5($key);
+            $input = '';
 
-        array_push($custom_field, new LiteralField('li_option','<li data-key="6311ae17c1ee52b36e68aaf4ad066387" class="answer_option'.$hidden.'" id="6311ae17c1ee52b36e68aaf4ad066387">Something else not listed here (please specify)</li>'));
-        array_push($custom_field, new LiteralField('ul_end','</ul>'));
+            if($key == 'Other'){
+                $val = '';
+                if(isset($business_drivers[$key]))
+                    $val = $survey->OtherBusinessDrivers;
 
-        array_push($custom_field, new LiteralField('options','<div id="options"><div class="ui-widget-content"><ol>'));
-        if(empty($survey->BusinessDrivers)) {
-            array_push($custom_field, new LiteralField('placeholder', '<div class="placeholder">Drag and drop your answers here</div>'));
-        }
-        else{
-            $drivers = explode(',',$survey->BusinessDrivers);
-            foreach($drivers as $driver){
-                $driver = trim($driver);
-                if(!empty($driver)){
-                    $input = $driver === 'Other' ? "<input type='text' id='other_txt' value='{$survey->OtherBusinessDrivers}'>":'';
-                    $text  = $driver === 'Other' ? 'Something else not listed here (please specify)': @DeploymentSurvey::$business_drivers_options[$driver];
-                    if(!empty($text))
-                          array_push($custom_field, new LiteralField('answer', '<li class="ui-state-default ui-sortable-handle" id="'.md5($driver).'_answer" data-key="'.md5($driver).'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.$text.$input.'&nbsp;<a href="#" class="remove_answer" title="remove it">X</a></li>'));
-                }
+                $input = sprintf('&nbsp;<input type="text" id="business_drivers_other_text" value="%s"/>',$val);
             }
+            $index = false;
+            if(isset($business_drivers[$key])){
+                $index = array_search($key,array_keys($business_drivers));
+            }
+
+            if($index === false){
+                $row_html = sprintf('<tr><td class="rank-wrapper" data-answer="%s_answer"></td><td class="rank-text">%s%s</td></tr>', $hash, $value, $input);
+            }
+            else {
+
+                ++$index;
+                $row_html = sprintf('<tr><td class="rank-wrapper selected-rank" data-answer="%s_answer" data-sort="%s">%s</td><td class="rank-text">%s%s</td></tr>', $hash, $index, $index, $value, $input);
+            }
+            array_push($custom_field,new LiteralField('row',$row_html));
+            array_push($custom_field,new LiteralField('spacer','<tr class="spacer"></tr>'));
         }
-        array_push($custom_field, new LiteralField('options','</ol></div></div></div>'));
+        array_push($custom_field,new LiteralField('end_table','</tbody></table>'));
         array_push($custom_field, new HiddenField('BusinessDrivers'));
         array_push($custom_field, new HiddenField('OtherBusinessDrivers'));
+        array_push($custom_field,new LiteralField('footer','</div>'));
         $fields = new FieldList (
             $custom_field
        );
+
 
         $answer_table = array();
         foreach(DeploymentSurvey::$business_drivers_options as $key => $value) {
             $hash = md5($key);
             $answer_table[$hash.'_answer'] = $key;
         }
-        $answer_table['6311ae17c1ee52b36e68aaf4ad066387_answer'] = 'Other';
         $answer_table = json_encode($answer_table);
 
 

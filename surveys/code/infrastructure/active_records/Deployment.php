@@ -110,6 +110,9 @@ class Deployment extends DataObject
     function getCMSFields()
     {
         $CountryCodes = CountryCodes::$iso_3166_countryCodes;
+        $CountryCodes['Worldwide'] = 'Worldwide';
+        $CountryCodes['Prefer not to say'] = 'Prefer not to say';
+        $CountryCodes['Too many to list'] = 'Too many to list';
 
         $fields = new FieldList(
             $rootTab = new TabSet("Root")
@@ -176,7 +179,7 @@ class Deployment extends DataObject
 
             new CustomCheckboxSetField('DeploymentTools','What tools are you using to deploy / configure this cluster?<BR>Select All That Apply', DeploymentOptions::$deployment_tools_options),
             $other_deployment_tools = new TextareaField('OtherDeploymentTools',''),
-            new DropdownField(
+            new CustomCheckboxSetField(
                 'PaasTools',
                 'What Platform-as-a-Service (PaaS) tools are you using to manage applications on this OpenStack deployment?',
                 ArrayUtils::AlphaSort(DeploymentOptions::$paas_tools_options, array('' => '-- Select One --'), array('Other' => 'Other Tool (please specify)'))
