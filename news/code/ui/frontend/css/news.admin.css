@@ -30,12 +30,14 @@
 }
 
 .right-col {
-    width: 27%;
-    max-height: 50%;
-    position: fixed;
-    left: 59%;
-    top: 190px;
+    width: 40%;
+    margin-top: 25% !important;
     overflow-y: auto;
+    margin-top: 50px;
+}
+
+.right_col_buffer {
+    height: 200px;
 }
 
 thead {
@@ -98,11 +100,11 @@ thead {
 }
 
 #standby_sortable .title{
-    width: 50% !important;
+    width: 48% !important;
 }
 
 #standby_sortable .edit{
-    width: 13% !important;
+    width: 15% !important;
 }
 
 .newsDelete, .newsRemove {
