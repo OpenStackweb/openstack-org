@@ -24,7 +24,6 @@ class SummitSponsorPage extends SummitPage {
         'Companies' => array(
             'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight', 'Startup')",
             'SubmitPageUrl'=>'Text',
-            'LogoSize' => "Enum('None, Small, Medium, Large, Big', 'None')",
         ),
     );
 
@@ -76,7 +75,6 @@ class SummitSponsorPage extends SummitPage {
             $companies->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
                 array( 'Name'            => 'Name',
                     "DDLSponsorshipType" => "Sponsorship Type",
-                    "DDLLogoSize"        => "Logo Size",
                     "InputSubmitPageUrl" => "Sponsor Link")
             );
 
@@ -110,11 +108,6 @@ class SummitSponsorPage extends SummitPage {
                 DB::query($sql);
             }
 
-            if(isset($_REQUEST["LogoSize_{$company->ID}"])){
-                $logo_size = $_REQUEST["LogoSize_{$company->ID}"];
-                $sql = "UPDATE SummitSponsorPage_Companies SET LogoSize ='{$logo_size}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
-                DB::query($sql);
-            }
         }
     }
 
