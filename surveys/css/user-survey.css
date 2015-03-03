@@ -168,18 +168,53 @@ ol.ui-sortable li {
 
 /*Wes Adjustments - Need to move*/
 .answer_option {
-    cursor: move;
     background: #edf2f7;
-    border: 1px solid #D4DCE5;
+    border: none;
     margin: 5px 0;
-    padding: 10px;
+    padding: 0;
     border-radius: 4px;
     list-style: none;
+    display: table-row;
+    width: 100%;
+    border: 1px solid #D4DCE5;
 }
-
+table.your-thoughts-table {
+    width: 100%;
+}
+table.your-thoughts-table td {
+    border: 1px solid #D4DCE5;
+    padding: 10px 30px;
+    vertical-align: middle;
+    height: 50px;
+}
+table.your-thoughts-table tr {
+    margin-bottom: 10px;
+}
+table.your-thoughts-table tr.spacer {
+    height: 10px;
+}
+table.your-thoughts-table tr.spacer td {
+    border: none;
+}
+td.rank-wrapper {
+    width: 100px;
+    text-align: center;
+    border-right: 1px solid #D4DCE5;
+    padding: 10px;
+    font-size: 1.5em;
+    line-height: 1;
+}
+td.rank-text {
+    text-align: left;
+}
+td.rank-text:hover {
+    cursor: pointer;
+    background: #edf2f7;
+}
 ul#answers {
     margin: 40px 0 30px 0;
     padding: 0;
+    display: table;
 }
 
 ul#DeploymentSurveyYourThoughtsForm_Form_InformationSources li label {
@@ -284,13 +319,8 @@ ul.checkboxset input[type="checkbox"] {
     top: 0;
 }
 ul#answers {
-    width: 49%;
+    width: 100%;
     float: left;
-}
-#options {
-    width: 49%;
-    float: right;
-    margin: 25px 0 30px 0;
 }
 .ui-widget-content {
     border: none !important;
