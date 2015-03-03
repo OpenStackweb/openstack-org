@@ -59,6 +59,7 @@
         </div>
     </div>
     <div class="right-col">
+        <div class="right_col_buffer"></div>
         <div class="newsStandBy">
             <h3>Recently Submitted</h3>
             <table>
@@ -76,6 +77,7 @@
                 </tbody>
             </table>
         </div>
+        <div class="right_col_buffer"></div>
     </div>
     <div class="clear"></div>
 <% else %>
