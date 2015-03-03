@@ -63,9 +63,7 @@
                 <p><strong>Held Monday - Thursday</strong><br/>
                     Classic track with speakers and sessions. The perfect place for developers, users, and administrators of OpenStack Cloud Software. This is great for those looking for the best way to get started.
                 </p>
-                <p>
-                    <img class="design-info-img" src="/summit/images//summit-main-info.svg" nerror="this.onerror=null; this.src=/images/summit-main-info.png" alt="OpenStack Summit Info">
-                </p>
+
             </div>
             <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
                 <img class="summit-type-icon" src="/summit/images//grey-summit-logo.svg" onerror="this.onerror=null; this.src=/images/grey-summit-logo.png" alt="The OpenStack Conference" style="max-width: 150px;">
@@ -76,9 +74,7 @@
                 <p><strong>Held Tuesday - Friday</strong><br/>
                     Collaborative working sessions where OpenStack developers come together twice annually to discuss the requirements for the next software release and connect with other community members.
                 </p>
-                <p>
-                    <img class="design-info-img" src="/summit/images//summit-design-info.svg" nerror="this.onerror=null; this.src=/images/summit-design-info.png" alt="OpenStack Design Info">
-                </p>
+
             </div>
         </div>
     </div>
