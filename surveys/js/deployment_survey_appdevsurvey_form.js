@@ -46,6 +46,4 @@ jQuery(document).ready(function($) {
             $('input[type="checkbox"]','#DeploymentSurveyAppDevSurveyForm_Form_APIFormats').attr('checked', false);
         }
     });
-
-    setStep('appdevsurvey');
 });

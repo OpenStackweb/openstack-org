@@ -49,8 +49,6 @@
         $("#DeploymentSurveyDeploymentDetailsForm_Form_CountriesPhysicalLocation").chosen();
         $("#DeploymentSurveyDeploymentDetailsForm_Form_CountriesUsersLocation").chosen();
 
-        setStep('deployments');
-
         form.submit(function( event ) {
             var valid = form.valid();
             if(!valid){

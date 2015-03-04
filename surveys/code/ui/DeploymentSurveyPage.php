@@ -237,7 +237,7 @@ class DeploymentSurveyPage_Controller extends Page_Controller
         }
     }
 
-    function CurrentStep()
+    public function CurrentStep()
     {
         // Check the database for a DeploymentSurvey with a current step
         if ($CurrentUserID = Member::currentUserID()) {
@@ -535,4 +535,23 @@ class DeploymentSurveyPage_Controller extends Page_Controller
 
     }
 
+    public function SurveyStepClass($step){
+        $css_step_class = '';
+        $current_step = $this->CurrentStep();
+        if($current_step == $step)
+            $css_step_class = 'current';
+        else{
+            //check if future or complete
+            $survey = $this->GetCurrentSurvey();
+            $step_index = array_search($step, DeploymentSurvey::$steps); // The index of this step in the list
+            $high_index = array_search($survey->HighestStepAllowed, DeploymentSurvey::$steps); //
+            if($step_index <= $high_index){
+                $css_step_class = 'completed';
+            }
+            else{
+                $css_step_class = 'future';
+            }
+        }
+        return $css_step_class;
+    }
 }

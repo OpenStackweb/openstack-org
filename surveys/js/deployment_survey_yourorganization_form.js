@@ -26,8 +26,6 @@ jQuery(document).ready(function($) {
 
     $('#DeploymentSurveyYourOrganizationForm_Form_PrimaryCountry').chosen();
 
-    setStep('yourorganization');
-
     var form  = $('#DeploymentSurveyYourOrganizationForm_Form');
     var form_validator = null;
 

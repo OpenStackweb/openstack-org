@@ -35,6 +35,11 @@ ul.survey-steps li a.future {
 	color: #7E7E7E;
 }
 
+ul.survey-steps li a.completed {
+    font-weight: bold;
+    background-color: #F2F0F4;
+}
+
 form hr {
 	margin-top: 15px;
 	margin-bottom: 20px;

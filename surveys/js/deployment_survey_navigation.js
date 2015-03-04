@@ -13,12 +13,3 @@
 jQuery(document).ready(function($) {
 
 });
-
-function setStep(step_id){
-    var step_option = $('#'+step_id);
-    if(step_option.length > 0){
-        var current_step = $('.survey-step.current');
-        current_step.removeClass('current').addClass('future');
-        step_option.removeClass('future').addClass('current');
-    }
-}

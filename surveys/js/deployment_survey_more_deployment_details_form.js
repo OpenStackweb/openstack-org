@@ -102,5 +102,4 @@ jQuery(document).ready(function($) {
 
     setCustomValidationRuleForOtherTextDropdown($('#DeploymentSurveyMoreDeploymentDetailsForm_Form_ToolsUsedForYourUsers'), $('#OtherToolsUsedForYourUsers'));
 
-    setStep('deployments');
 });

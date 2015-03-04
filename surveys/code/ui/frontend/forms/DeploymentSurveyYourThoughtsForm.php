@@ -88,6 +88,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
 
         Requirements::customScript('var answer_table = '.$answer_table.';');
+        Requirements::customScript('rank_order = '.count($business_drivers).';');
 
         $fields->add(new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))));
         $fields->add(new TextAreaField('OtherInformationSources', ''));
