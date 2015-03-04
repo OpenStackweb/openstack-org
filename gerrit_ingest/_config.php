@@ -12,3 +12,4 @@
  * limitations under the License.
  **/
 define ('PullCommitsFromGerritTaskBatchSize', 1000);
+Object::add_extension('SangriaPage_Controller', 'SangriaPageGerritStatisticsExtension');

@@ -31,7 +31,6 @@ final class SangriaPageExportDataExtension extends Extension
 			'exportCorporateSponsors',
 			'exportDupUsers',
             'exportMarketplaceAdmins',
-			'GerritStatisticsReport',
 		));
 
 
@@ -45,7 +44,6 @@ final class SangriaPageExportDataExtension extends Extension
 			'exportCorporateSponsors',
 			'exportDupUsers',
             'exportMarketplaceAdmins',
-			'GerritStatisticsReport',
 		));
 	}
 
@@ -630,21 +628,21 @@ SQL;
 		return CSVExporter::getInstance()->export($filename, $data, ',');
 	}
 
-    public function exportMarketplaceAdmins(){
+	public function exportMarketplaceAdmins(){
 
-        $params = $this->owner->getRequest()->getVars();
-        if (!isset($params['marketplace_type']) || empty($params['marketplace_type']))
-            return $this->owner->httpError('412', 'missing required param marketplace type');
+		$params = $this->owner->getRequest()->getVars();
+		if (!isset($params['marketplace_type']) || empty($params['marketplace_type']))
+			return $this->owner->httpError('412', 'missing required param marketplace type');
 
-        $marketplace_type = $params['marketplace_type'];
+		$marketplace_type = $params['marketplace_type'];
 
-        $filters_string = implode("','", $marketplace_type);
+		$filters_string = implode("','", $marketplace_type);
 
-        $fileDate = date('Ymdhis');
+		$fileDate = date('Ymdhis');
 
-        SangriaPage_Controller::generateDateFilters('s');
+		SangriaPage_Controller::generateDateFilters('s');
 
-        $sql = <<< SQL
+		$sql = <<< SQL
 SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace FROM Member AS M
 INNER JOIN Company_Administrators AS CA ON M.ID = CA.MemberID
 INNER JOIN Company AS C ON C.ID = CA.CompanyID
@@ -654,75 +652,21 @@ GROUP BY M.FirstName, M.Surname, M.Email, C.Name
 ORDER BY C.Name, M.SurName;
 SQL;
 
-        $res = DB::query($sql);
-
-        $fields = array('FirstName','Surname','Email','Company','Marketplace');
-        $data = array();
-
-        foreach ($res as $row) {
-            $member = array();
-            foreach ($fields as $field) {
-                $member[$field] = str_replace(',',' ',$row[$field]); //commas tabs cell in excel
-            }
-            array_push($data, $member);
-        }
-
-        $filename = "mktplace_admins_report" . $fileDate . ".csv";
-
-        return CSVExporter::getInstance()->export($filename, $data, ',');
-    }
-
-
-	public function CommitsPerUser(){
-		$sql = <<< SQL
-SELECT C.Commits, M.Email
-FROM (SELECT COUNT(ID) Commits , MemberId FROM GerritChangeInfo GROUP BY MemberID) AS C
-INNER JOIN Member M on M.ID = C.MemberId ORDER BY C.Commits DESC
-SQL;
-
 		$res = DB::query($sql);
 
-		$list = new ArrayList();
-		foreach($res as $row){
-			$list->add(new ArrayData($row));
+		$fields = array('FirstName','Surname','Email','Company','Marketplace');
+		$data = array();
+
+		foreach ($res as $row) {
+			$member = array();
+			foreach ($fields as $field) {
+				$member[$field] = str_replace(',',' ',$row[$field]); //commas tabs cell in excel
+			}
+			array_push($data, $member);
 		}
-		return $list;
+
+		$filename = "mktplace_admins_report" . $fileDate . ".csv";
+
+		return CSVExporter::getInstance()->export($filename, $data, ',');
 	}
-
-	public function CommitsPerCountry(){
-		$sql = <<< SQL
-SELECT COUNT(C.ID) AS Commits ,  M.Country  FROM GerritChangeInfo C INNER JOIN Member M on M.ID = C.MemberId GROUP BY M.Country ORDER BY Commits DESC;
-SQL;
-
-		$res = DB::query($sql);
-
-		$list = new ArrayList();
-		foreach($res as $row){
-			$country_name = $row['Country'];
-			$country_name = isset(CountryCodes::$iso_3166_countryCodes[$country_name])?CountryCodes::$iso_3166_countryCodes[$country_name]:'NOT SET';
-			$list->add(new ArrayData( array('Commits'=>$row['Commits'],'CountryName'=>$country_name)));
-		}
-		return $list;
-	}
-
-	public function TotalCommits(){
-		$sql = <<< SQL
-SELECT COUNT(C.ID) AS Commits FROM GerritChangeInfo C;
-SQL;
-
-		$res = DB::query($sql);
-		return $res->value();
-	}
-
-	public function UsersWithCommits(){
-		$sql = <<< SQL
-SELECT COUNT(M.ID)
-FROM (SELECT COUNT(ID) Commits , MemberId FROM GerritChangeInfo GROUP BY MemberID) AS C
-INNER JOIN Member M on M.ID = C.MemberId;
-SQL;
-
-		$res = DB::query($sql);
-		return $res->value();
-	}
-
 }
