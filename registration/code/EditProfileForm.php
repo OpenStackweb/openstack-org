@@ -204,9 +204,13 @@ class EditProfileForm extends SafeXSSForm {
 
         $label = _t('Addressable.COUNTRY', 'Country');
         if (is_array($this->allowedCountries)) {
-            $fields->push(new DropdownField('Country', $label, $this->allowedCountries));
+            $countryField = new DropdownField('Country', $label, $this->allowedCountries);
+            $countryField->setEmptyString('-- Select One --');
+            $fields->push($countryField);
         } elseif (!is_string($this->allowedCountries)) {
-            $fields->push(new CountryDropdownField('Country', $label));
+            $countryField = new CountryDropdownField('Country', $label);
+            $countryField->setEmptyString('-- Select One --');
+            $fields->push($countryField);
         }
 
         $fields->push(new LiteralField('break', '<hr/>'));

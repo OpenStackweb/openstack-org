@@ -123,9 +123,11 @@ class RegistrationPage_Controller extends Page_Controller
 		if (is_array($this->allowedCountries)) {
 			$countryField = new DropdownField('Country', $label, $this->allowedCountries);
 			$countryField->addExtraClass('chzn-select');
+            $countryField->setEmptyString('-- Select One --');
 			$fields->push($countryField);
 		} elseif (!is_string($this->allowedCountries)) {
 			$countryField = new CountryDropdownField('Country', $label);
+            $countryField->setEmptyString('-- Select One --');
 			$countryField->addExtraClass('chzn-select');
 			$fields->push($countryField);
 		}
