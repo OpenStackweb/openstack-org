@@ -12,6 +12,4 @@
  **/
 
 jQuery(document).ready(function($) {
-
-    setStep('deployments');
 });

@@ -32,6 +32,4 @@ jQuery(document).ready(function($) {
     });
 
     setCustomValidationRuleForOtherText($('#DeploymentSurveyAboutYouForm_Form_OpenStackActivity_Noneofthese'), $('#OpenStackRelationship'));
-
-    setStep('aboutyou');
 });

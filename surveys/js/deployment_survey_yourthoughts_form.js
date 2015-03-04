@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+// rank widget
+var rank_order = 0;
 
 jQuery(document).ready(function($) {
-
-    setStep('yourthoughts');
 
     var form  = $('#DeploymentSurveyYourThoughtsForm_Form');
     var form_validator = null;
@@ -84,13 +84,24 @@ jQuery(document).ready(function($) {
 
     });
 
-    // rank widget
-    var rank_order = 0;
+
 
     $('.rank-text').live('click', function(evt){
-        if(rank_order < 5) {
-            var rank = $('.rank-wrapper', $(this).parent());
-            if(rank.hasClass('selected-rank')) return;
+
+        var rank = $('.rank-wrapper', $(this).parent());
+
+        if(rank.hasClass('selected-rank')){
+            //undo this rank
+            console.log(rank_order);
+            --rank_order;
+            var current_rank =  rank.attr('data-sort');
+            clearRankElement(rank);
+            var sorted = $('.selected-rank', $('#catalog'));
+            for (var i = 0; i < sorted.length; i++) {
+                recalculateRankElement($(sorted[i]), current_rank);
+            }
+        }
+        else if(rank_order < 5) {
             ++rank_order
             rank.text(rank_order);
             rank.attr('data-sort',rank_order);
@@ -104,16 +115,26 @@ jQuery(document).ready(function($) {
             rank_order = 0;
             var sorted = $('.selected-rank', $('#catalog'));
             for (var i = 0; i < sorted.length; i++) {
-                var element = $(sorted[i]);
-                if (element.attr('data-answer') == '6311ae17c1ee52b36e68aaf4ad066387_answer') {
-                    $('#business_drivers_other_text', element.parent()).val('');
-                }
-                element.removeClass('selected-rank');
-                element.text('');
-                element.attr('data-sort', '');
+                clearRankElement($(sorted[i]));
             }
         }
         return false;
     });
-
 });
+
+function clearRankElement($element){
+    if ($element.attr('data-answer') == '6311ae17c1ee52b36e68aaf4ad066387_answer') {
+        jQuery('#business_drivers_other_text', $element.parent()).val('');
+    }
+    $element.removeClass('selected-rank');
+    $element.text('');
+    $element.attr('data-sort', '');
+}
+
+function recalculateRankElement($element, old_rank){
+    var current_rank = parseInt($element.attr('data-sort'));
+    if(current_rank > old_rank && current_rank > 1)
+        --current_rank;
+    $element.text(current_rank);
+    $element.attr('data-sort', current_rank);
+}
