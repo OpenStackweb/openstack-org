@@ -1,5 +1,15 @@
 <a href="$Top.Link">Back</a>&nbsp;|&nbsp;<a href="javascript:window.print()">Print This Page</a>
 <script type="application/javascript">
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.round(Math.random() * 10)];
+        }
+        return color;
+    }
+
     var countries_with_commits = [];
     var countries_names = [];
     var data_countries_with_commits = [];
@@ -24,7 +34,7 @@ $UsersWithCommits
                         code: "{$Country}",
                         name: "{$CountryName}",
                         commits: {$Commits},
-                        color: Math.floor(Math.random() * 16777215).toString(16)
+                        color: getRandomColor()
                     };
                     countries_with_commits["{$Country}"] = country;
                     countries_names['{$CountryName}'] = '{$Country}';
@@ -38,7 +48,9 @@ $UsersWithCommits
 
             <% end_loop %>
             <canvas id="myChart" width="350" height="400"></canvas>
-            <div id="legend"></div>
+            <div style="height: 300px;overflow-x: hidden;overflow-y: auto">
+                <div id="legend"></div>
+            </div>
         </div>
         <div class="col-lg-8">
             <div style="width:100%; height: 650px; position: relative;" id="map" tabindex="0">
@@ -54,7 +66,7 @@ $UsersWithCommits
         <div class="col-lg-8">
             <% loop CommitsPerUser %>
                 <script type="application/javascript">
-                    var user_color = Math.floor(Math.random() * 16777215).toString(16);
+                    var user_color = getRandomColor();
                     data_users_with_commits.push({
                         value: {$Commits},
                         color: '#' + user_color,
@@ -65,7 +77,7 @@ $UsersWithCommits
             <% end_loop %>
             <canvas id="myChart2" width="850" height="550"></canvas>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" style="height: 550px;overflow-x: hidden;overflow-y: auto">
             <div id="legend2"></div>
         </div>
     </div>
