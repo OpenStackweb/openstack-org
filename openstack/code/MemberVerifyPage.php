@@ -27,12 +27,11 @@
 
 		public function member() {
 
-
-			// Make sure the access is POST, not GET
+					// Make sure the access is POST, not GET
 			if(!$this->request->isPOST())  return $this->httpError(403, 'Access Denied.'); 
 
 			// Make sure the APPSEC shared secret matches
-			if($this->request->postVar('APPSEC') != $APPSEC)  return $this->httpError(403, 'Access Denied.');
+			if($this->request->postVar('APPSEC') != APPSEC)  return $this->httpError(403, 'Access Denied.');
 
 			// Pull email address from POST variables
 			// Sanitize the input
