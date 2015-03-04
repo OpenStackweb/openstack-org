@@ -42,14 +42,15 @@ jQuery(document).ready(function($){
     var options = {
         segmentShowStroke : true,
         segmentStrokeColor : "#fff",
-        segmentStrokeWidth : 2,
+        segmentStrokeWidth : 1,
         animationSteps : 100,
         animationEasing : "easeOutBounce",
         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%>&nbsp;(<%if(segments[i].value){%><%=segments[i].value%><%}%>)</li><%}%></ul>"
     }
 
     var myPieChart = new Chart(ctx1).Pie(data_countries_with_commits, options);
-    var myPieChart2 = new Chart(ctx2).Pie(data_users_with_commits, options);
+
+    var myPieChart2 = new Chart(ctx2).Doughnut(data_users_with_commits, options);
 
     $("#myChart").click(
         function(evt){

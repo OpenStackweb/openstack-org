@@ -8,6 +8,16 @@
 .pie-legend {
     list-style: none;
 }
+.doughnut-legend li span {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.doughnut-legend {
+    list-style: none;
+}
 
 .Actions {
     padding-top: 10px;
