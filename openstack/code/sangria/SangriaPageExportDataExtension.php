@@ -31,7 +31,6 @@ final class SangriaPageExportDataExtension extends Extension
 			'exportCorporateSponsors',
 			'exportDupUsers',
             'exportMarketplaceAdmins',
-			'GerritStatisticsReport',
 		));
 
 
@@ -45,7 +44,6 @@ final class SangriaPageExportDataExtension extends Extension
 			'exportCorporateSponsors',
 			'exportDupUsers',
             'exportMarketplaceAdmins',
-			'GerritStatisticsReport',
 		));
 	}
 
@@ -219,48 +217,200 @@ SQL;
 		$fileDate = date('Ymdhis');
 
 		SangriaPage_Controller::generateDateFilters('s');
-
-		$surveyQuery = "select s.ID as SurveyID, s.Created as SurveyCreated,
-                s.UpdateDate as SurveyEdited, o.Name as OrgName, o.ID as OrgID , d.ID as DeploymentID,
-                d.Created as DeploymentCreated, d.UpdateDate as DeploymentEdited, m.FirstName,
-                m.Surname, m.Email, s.Title, s.Industry, s.OtherIndustry, s.PrimaryCity,
-                s.PrimaryState, s.PrimaryCountry, s.OrgSize, s.OpenStackInvolvement,
-                s.InformationSources, s.OtherInformationSources, s.FurtherEnhancement,
-                s.FoundationUserCommitteePriorities, s.UserGroupMember, s.UserGroupName,
-                s.OkToContact, s.BusinessDrivers, s.OtherBusinessDrivers, s.WhatDoYouLikeMost,
-                s.OpenStackRecommendRate as NetPromoter, s.OpenStackRecommendation,
-                d.Label, d.IsPublic, d.DeploymentType, d.ProjectsUsed, d.CurrentReleases,
-                d.DeploymentStage, d.NumCloudUsers, d.APIFormats, d.Hypervisors, d.OtherHypervisor,
-                d.BlockStorageDrivers, d.OtherBlockStorageDriver, d.NetworkDrivers,
-                d.OtherNetworkDriver, d.IdentityDrivers, d.OtherIndentityDriver,
-                d.SupportedFeatures, d.ComputeNodes, d.ComputeCores, d.ComputeInstances,
-                d.BlockStorageTotalSize, d.ObjectStorageSize, d.ObjectStorageNumObjects,
-                d.NetworkNumIPs, d.WorkloadsDescription, d.OtherWorkloadsDescription,
-                d.WhyNovaNetwork, d.OtherWhyNovaNetwork, d.DeploymentTools, d.OtherDeploymentTools, d.OperatingSystems,
-                d.OtherOperatingSystems, d.SwiftGlobalDistributionFeatures, d.SwiftGlobalDistributionFeaturesUsesCases,
-                d.OtherSwiftGlobalDistributionFeaturesUsesCases, d.Plans2UseSwiftStoragePolicies,
-                d.OtherPlans2UseSwiftStoragePolicies, d.UsedDBForOpenStackComponents,
-                d.OtherUsedDBForOpenStackComponents, d.ToolsUsedForYourUsers, d.OtherToolsUsedForYourUsers,
-                d.Reason2Move2Ceilometer
+		$range = Controller::curr()->getRequest()->getVar('Range');
+		$range_filter = '';
+		if(!empty($range)){
+			$range_filter = ($range == SurveyType::MARCH_2015)? "AND s.Created >= '" . SURVEY_START_DATE . "'":"AND s.Created < '" . SURVEY_START_DATE . "'";
+		}
+		$surveyQuery = "SELECT
+				s.ID as SurveyID,
+				s.Created as SurveyCreated,
+                s.UpdateDate as SurveyEdited,
+                o.Name as OrgName,
+                o.ID as OrgID ,
+                d.ID as DeploymentID,
+                d.Created as DeploymentCreated,
+                d.UpdateDate as DeploymentEdited,
+				m.FirstName,
+                m.Surname,
+                m.Email,
+                s.Title,
+                s.Industry,
+                s.OtherIndustry,
+                s.PrimaryCity,
+                s.PrimaryState,
+                s.PrimaryCountry,
+                s.OrgSize,
+                s.OpenStackInvolvement,
+                s.InformationSources,
+                s.OtherInformationSources,
+                s.FurtherEnhancement,
+                s.FoundationUserCommitteePriorities,
+                s.UserGroupMember,
+                s.UserGroupName,
+                s.OkToContact,
+                s.BusinessDrivers,
+                s.OtherBusinessDrivers,
+                s.WhatDoYouLikeMost,
+                s.OpenStackRecommendRate as NetPromoter,
+                s.OpenStackRecommendation,
+                d.Label,
+                d.IsPublic,
+                d.DeploymentType,
+                d.ProjectsUsed,
+                d.CurrentReleases,
+                d.DeploymentStage,
+				d.NumCloudUsers,
+				d.APIFormats,
+				d.Hypervisors,
+				d.OtherHypervisor,
+                d.BlockStorageDrivers,
+                d.OtherBlockStorageDriver,
+                d.NetworkDrivers,
+                d.OtherNetworkDriver,
+				d.IdentityDrivers,
+				d.OtherIndentityDriver,
+                d.SupportedFeatures,
+                d.ComputeNodes,
+                d.ComputeCores,
+                d.ComputeInstances,
+                d.BlockStorageTotalSize,
+                d.ObjectStorageSize,
+                d.ObjectStorageNumObjects,
+                d.NetworkNumIPs,
+                d.WorkloadsDescription,
+                d.OtherWorkloadsDescription,
+                d.WhyNovaNetwork,
+                d.OtherWhyNovaNetwork,
+                d.DeploymentTools,
+                d.OtherDeploymentTools,
+                d.OperatingSystems,
+                d.OtherOperatingSystems,
+                d.SwiftGlobalDistributionFeatures,
+                d.SwiftGlobalDistributionFeaturesUsesCases,
+                d.OtherSwiftGlobalDistributionFeaturesUsesCases,
+                d.Plans2UseSwiftStoragePolicies,
+                d.OtherPlans2UseSwiftStoragePolicies,
+                d.UsedDBForOpenStackComponents,
+                d.OtherUsedDBForOpenStackComponents,
+                d.ToolsUsedForYourUsers,
+                d.OtherToolsUsedForYourUsers,
+                d.Reason2Move2Ceilometer,
+                d.CountriesPhysicalLocation,
+				d.CountriesUsersLocation,
+				d.ServicesDeploymentsWorkloads,
+				d.OtherServicesDeploymentsWorkloads,
+				d.EnterpriseDeploymentsWorkloads,
+				d.OtherEnterpriseDeploymentsWorkloads,
+				d.HorizontalWorkloadFrameworks,
+				d.OtherHorizontalWorkloadFrameworks,
+				d.UsedPackages,
+				d.CustomPackagesReason,
+				d.OtherCustomPackagesReason,
+				d.PaasTools,
+				d.OtherPaasTools,
+				d.OtherSupportedFeatures,
+				d.InteractingClouds,
+				d.OtherInteractingClouds
             from DeploymentSurvey s
                 left outer join Member m on (s.MemberID = m.ID)
                 left outer join Deployment d on (d.DeploymentSurveyID = s.ID)
                 left outer join Org o on (s.OrgID = o.ID)
-            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query . "
-            order by s.ID;";
+            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query .$range_filter. " order by s.ID;";
 
 		$res = DB::query($surveyQuery);
 
-		$fields = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'DeploymentID', 'DeploymentCreated', 'DeploymentEdited', 'FirstName',
-			'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
-			'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'UserGroupMember', 'UserGroupName', 'OkToContact', 'BusinessDrivers',
-			'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'NetPromoter', 'OpenStackRecommendation', 'Label', 'IsPublic', 'DeploymentType', 'ProjectsUsed',
-			'CurrentReleases', 'DeploymentStage', 'NumCloudUsers', 'APIFormats', 'Hypervisors', 'OtherHypervisor', 'BlockStorageDrivers', 'OtherBlockStorageDriver',
-			'NetworkDrivers', 'OtherNetworkDriver', 'IdentityDrivers', 'OtherIndentityDriver', 'SupportedFeatures', 'ComputeNodes', 'ComputeCores', 'ComputeInstances',
-			'BlockStorageTotalSize', 'ObjectStorageSize', 'ObjectStorageNumObjects', 'NetworkNumIPs', 'WorkloadsDescription', 'OtherWorkloadsDescription',
-			'WhyNovaNetwork', 'OtherWhyNovaNetwork', 'DeploymentTools', 'OtherDeploymentTools', 'OperatingSystems', 'OtherOperatingSystems', 'SwiftGlobalDistributionFeatures',
-			'SwiftGlobalDistributionFeaturesUsesCases', 'OtherSwiftGlobalDistributionFeaturesUsesCases', 'Plans2UseSwiftStoragePolicies', 'OtherPlans2UseSwiftStoragePolicies',
-			'UsedDBForOpenStackComponents', 'OtherUsedDBForOpenStackComponents', 'ToolsUsedForYourUsers', 'OtherToolsUsedForYourUsers', 'Reason2Move2Ceilometer');
+		$fields = array(
+				'SurveyID',
+				'SurveyCreated',
+                'SurveyEdited',
+                'OrgName',
+                'OrgID',
+                'DeploymentID',
+                'DeploymentCreated',
+                'DeploymentEdited',
+				'FirstName',
+				'Surname',
+                'Email',
+				'Title',
+                'Industry',
+                'OtherIndustry',
+                'PrimaryCity',
+                'PrimaryState',
+                'PrimaryCountry',
+                'OrgSize',
+                'OpenStackInvolvement',
+                'InformationSources',
+                'OtherInformationSources',
+                'FurtherEnhancement',
+                'FoundationUserCommitteePriorities',
+                'UserGroupMember',
+                'UserGroupName',
+                'OkToContact',
+                'BusinessDrivers',
+                'OtherBusinessDrivers',
+                'WhatDoYouLikeMost',
+                'NetPromoter',
+                'OpenStackRecommendation',
+                'Label',
+                'IsPublic',
+                'DeploymentType',
+                'ProjectsUsed',
+                'CurrentReleases',
+                'DeploymentStage',
+				'NumCloudUsers',
+				'APIFormats',
+				'Hypervisors',
+				'OtherHypervisor',
+                'BlockStorageDrivers',
+                'OtherBlockStorageDriver',
+                'NetworkDrivers',
+                'OtherNetworkDriver',
+				'IdentityDrivers',
+				'OtherIndentityDriver',
+                'SupportedFeatures',
+                'ComputeNodes',
+                'ComputeCores',
+                'ComputeInstances',
+                'BlockStorageTotalSize',
+                'ObjectStorageSize',
+                'ObjectStorageNumObjects',
+                'NetworkNumIPs',
+                'WorkloadsDescription',
+                'OtherWorkloadsDescription',
+                'WhyNovaNetwork',
+                'OtherWhyNovaNetwork',
+                'DeploymentTools',
+                'OtherDeploymentTools',
+                'OperatingSystems',
+                'OtherOperatingSystems',
+                'SwiftGlobalDistributionFeatures',
+                'SwiftGlobalDistributionFeaturesUsesCases',
+                'OtherSwiftGlobalDistributionFeaturesUsesCases',
+                'Plans2UseSwiftStoragePolicies',
+                'OtherPlans2UseSwiftStoragePolicies',
+                'UsedDBForOpenStackComponents',
+                'OtherUsedDBForOpenStackComponents',
+                'ToolsUsedForYourUsers',
+                'OtherToolsUsedForYourUsers',
+                'Reason2Move2Ceilometer',
+				'CountriesPhysicalLocation',
+				'CountriesUsersLocation',
+				'ServicesDeploymentsWorkloads',
+				'OtherServicesDeploymentsWorkloads',
+				'EnterpriseDeploymentsWorkloads',
+				'OtherEnterpriseDeploymentsWorkloads',
+				'HorizontalWorkloadFrameworks',
+				'OtherHorizontalWorkloadFrameworks',
+				'UsedPackages',
+				'CustomPackagesReason',
+				'OtherCustomPackagesReason',
+				'PaasTools',
+				'OtherPaasTools',
+				'OtherSupportedFeatures',
+				'InteractingClouds',
+				'OtherInteractingClouds'
+		);
 		$data = array();
 
 		foreach ($res as $row) {
@@ -283,6 +433,11 @@ SQL;
 		$fileDate = date('Ymdhis');
 
 		SangriaPage_Controller::generateDateFilters('s');
+		$range = Controller::curr()->getRequest()->getVar('Range');
+		$range_filter = '';
+		if(!empty($range)){
+			$range_filter = ($range == SurveyType::MARCH_2015)? "AND s.Created >= '" . SURVEY_START_DATE . "'":"AND s.Created < '" . SURVEY_START_DATE . "'";
+		}
 
 		$surveyQuery = "select s.ID as SurveyID, s.Created as SurveyCreated,
                 s.LastEdited as SurveyEdited, o.Name as OrgName, o.ID as OrgID,  a.ID as AppSurveyID,
@@ -300,7 +455,7 @@ SQL;
                 right join AppDevSurvey a on (a.DeploymentSurveyID = s.ID)
                 left outer join Member m on (a.MemberID = m.ID)
                 left outer join Org o on (s.OrgID = o.ID)
-            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query . "
+            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query .$range_filter. "
             order by s.ID;";
 
 		$res = DB::query($surveyQuery);
@@ -473,21 +628,21 @@ SQL;
 		return CSVExporter::getInstance()->export($filename, $data, ',');
 	}
 
-    public function exportMarketplaceAdmins(){
+	public function exportMarketplaceAdmins(){
 
-        $params = $this->owner->getRequest()->getVars();
-        if (!isset($params['marketplace_type']) || empty($params['marketplace_type']))
-            return $this->owner->httpError('412', 'missing required param marketplace type');
+		$params = $this->owner->getRequest()->getVars();
+		if (!isset($params['marketplace_type']) || empty($params['marketplace_type']))
+			return $this->owner->httpError('412', 'missing required param marketplace type');
 
-        $marketplace_type = $params['marketplace_type'];
+		$marketplace_type = $params['marketplace_type'];
 
-        $filters_string = implode("','", $marketplace_type);
+		$filters_string = implode("','", $marketplace_type);
 
-        $fileDate = date('Ymdhis');
+		$fileDate = date('Ymdhis');
 
-        SangriaPage_Controller::generateDateFilters('s');
+		SangriaPage_Controller::generateDateFilters('s');
 
-        $sql = <<< SQL
+		$sql = <<< SQL
 SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace FROM Member AS M
 INNER JOIN Company_Administrators AS CA ON M.ID = CA.MemberID
 INNER JOIN Company AS C ON C.ID = CA.CompanyID
@@ -497,75 +652,21 @@ GROUP BY M.FirstName, M.Surname, M.Email, C.Name
 ORDER BY C.Name, M.SurName;
 SQL;
 
-        $res = DB::query($sql);
-
-        $fields = array('FirstName','Surname','Email','Company','Marketplace');
-        $data = array();
-
-        foreach ($res as $row) {
-            $member = array();
-            foreach ($fields as $field) {
-                $member[$field] = str_replace(',',' ',$row[$field]); //commas tabs cell in excel
-            }
-            array_push($data, $member);
-        }
-
-        $filename = "mktplace_admins_report" . $fileDate . ".csv";
-
-        return CSVExporter::getInstance()->export($filename, $data, ',');
-    }
-
-
-	public function CommitsPerUser(){
-		$sql = <<< SQL
-SELECT C.Commits, M.Email
-FROM (SELECT COUNT(ID) Commits , MemberId FROM GerritChangeInfo GROUP BY MemberID) AS C
-INNER JOIN Member M on M.ID = C.MemberId ORDER BY C.Commits DESC
-SQL;
-
 		$res = DB::query($sql);
 
-		$list = new ArrayList();
-		foreach($res as $row){
-			$list->add(new ArrayData($row));
+		$fields = array('FirstName','Surname','Email','Company','Marketplace');
+		$data = array();
+
+		foreach ($res as $row) {
+			$member = array();
+			foreach ($fields as $field) {
+				$member[$field] = str_replace(',',' ',$row[$field]); //commas tabs cell in excel
+			}
+			array_push($data, $member);
 		}
-		return $list;
+
+		$filename = "mktplace_admins_report" . $fileDate . ".csv";
+
+		return CSVExporter::getInstance()->export($filename, $data, ',');
 	}
-
-	public function CommitsPerCountry(){
-		$sql = <<< SQL
-SELECT COUNT(C.ID) AS Commits ,  M.Country  FROM GerritChangeInfo C INNER JOIN Member M on M.ID = C.MemberId GROUP BY M.Country ORDER BY Commits DESC;
-SQL;
-
-		$res = DB::query($sql);
-
-		$list = new ArrayList();
-		foreach($res as $row){
-			$country_name = $row['Country'];
-			$country_name = isset(CountryCodes::$iso_3166_countryCodes[$country_name])?CountryCodes::$iso_3166_countryCodes[$country_name]:'NOT SET';
-			$list->add(new ArrayData( array('Commits'=>$row['Commits'],'CountryName'=>$country_name)));
-		}
-		return $list;
-	}
-
-	public function TotalCommits(){
-		$sql = <<< SQL
-SELECT COUNT(C.ID) AS Commits FROM GerritChangeInfo C;
-SQL;
-
-		$res = DB::query($sql);
-		return $res->value();
-	}
-
-	public function UsersWithCommits(){
-		$sql = <<< SQL
-SELECT COUNT(M.ID)
-FROM (SELECT COUNT(ID) Commits , MemberId FROM GerritChangeInfo GROUP BY MemberID) AS C
-INNER JOIN Member M on M.ID = C.MemberId;
-SQL;
-
-		$res = DB::query($sql);
-		return $res->value();
-	}
-
 }

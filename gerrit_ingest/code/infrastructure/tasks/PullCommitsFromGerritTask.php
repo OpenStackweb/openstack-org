@@ -12,11 +12,20 @@
  * limitations under the License.
  **/
 
-class PullCommitsFromGerritTask extends CliController  {
+/**
+ * Class PullCommitsFromGerritTask
+ */
+final class PullCommitsFromGerritTask extends CliController  {
 
     function process(){
 
         set_time_limit(0);
+
+        $batch_size = PullCommitsFromGerritTaskBatchSize;
+        if(isset($_GET['batch_size'])){
+            $batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
+            echo sprintf('batch_size set to %s', $batch_size);
+        }
 
         $manager = new GerritIngestManager (
             new GerritAPI(GERRIT_BASE_URL, GERRIT_USER, GERRIT_PASSWORD),
@@ -26,7 +35,7 @@ class PullCommitsFromGerritTask extends CliController  {
             SapphireTransactionManager::getInstance()
         );
 
-        $members_updated = $manager->processCommits(PullCommitsFromGerritTaskBatchSize);
+        $members_updated = $manager->processCommits($batch_size);
 
         echo $members_updated;
     }

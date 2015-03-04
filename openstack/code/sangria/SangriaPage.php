@@ -336,7 +336,7 @@ final class SangriaPage_Controller extends Page_Controller {
 		return $filterWhereClause;
 	}
 
-    public static function generateDateFilters($table_prefix = '' ) {
+    public static function generateDateFilters($table_prefix = '' , $date_field = 'UpdateDate') {
 		$where_query = '';
 		$start_date = Controller::curr()->request->getVar('From');
 		$end_date = Controller::curr()->request->getVar('To');
@@ -349,11 +349,11 @@ final class SangriaPage_Controller extends Page_Controller {
 			$start->setTime(00, 00, 00);
 			$end   = new \DateTime($date_to);
 			$end->setTime(23, 59, 59);
-			$where_query .= " ( {$table_prefix}UpdateDate >= '{$start->format('Y-m-d H:i:s')}' AND {$table_prefix}UpdateDate <= '{$end->format('Y-m-d H:i:s')}' ) ";
+			$where_query .= " ( {$table_prefix}{$date_field} >= '{$start->format('Y-m-d H:i:s')}' AND {$table_prefix}{$date_field} <= '{$end->format('Y-m-d H:i:s')}' ) ";
 		} else {
 			$start_date = self::$default_start_date;
 			$end_date   = self::$default_end_date;
-			$where_query .= " ( {$table_prefix}UpdateDate >= '{$start_date}' AND {$table_prefix}UpdateDate <= '{$end_date}' ) ";
+			$where_query .= " ( {$table_prefix}{$date_field} >= '{$start_date}' AND {$table_prefix}{$date_field} <= '{$end_date}' ) ";
 		}
 
 		self::$date_filter_query = $where_query;
