@@ -1,0 +1,3 @@
+[submodule "private-assets"]
+	path = private-assets
+	url = git@github.com:OpenStackweb/openstackwebsite-assets.git
