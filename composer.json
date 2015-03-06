@@ -11,7 +11,8 @@
         "tractorcow/silverstripe-colorpicker":"3.0.*@dev",
         "knplabs/github-api": "~1.2",
         "rackspace/php-opencloud": "dev-master",
-        "nnnick/chartjs": "1.0.1.*@dev"
+        "nnnick/chartjs": "1.0.1.*@dev",
+        "openid/php-openid": "dev-master"
 	},
    "require-dev": {
     "squizlabs/php_codesniffer": "2.*"
