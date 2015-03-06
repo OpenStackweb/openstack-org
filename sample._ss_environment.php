@@ -102,6 +102,12 @@ define('APPSEC', ''); # openstack/code/MemberVerifyPage.php
 // here u need to define your hostheader and your local path
 // like $_FILE_TO_URL_MAPPING['/var/www/openstack.org'] = 'http://www..openstack.org';
 // mainly this is used by the cron tasks
+
+define('IDP_OPENSTACKID_URL','https://dev.openstackid.com');
+//set true on production mode, otherwise false
+define('Auth_OpenID_VERIFY_HOST',false);
+define('Auth_OpenID_Realm','https://devbranch.openstack.org');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 

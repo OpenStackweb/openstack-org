@@ -11,8 +11,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-define('IDP_OPENSTACKID_URL','https://dev.openstackid.com');
-//set true on production mode, otherwise false
-define('Auth_OpenID_VERIFY_HOST',false);
-define('Auth_OpenID_Realm','https://local.ss3.openstack.org');
