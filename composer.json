@@ -13,6 +13,9 @@
         "rackspace/php-opencloud": "dev-master",
         "nnnick/chartjs": "1.0.1.*@dev"
 	},
+   "require-dev": {
+    "squizlabs/php_codesniffer": "2.*"
+    },
     "autoload": {
         "classmap": [
             "geoip/code",
