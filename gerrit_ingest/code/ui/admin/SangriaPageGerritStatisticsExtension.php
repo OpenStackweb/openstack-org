@@ -17,6 +17,9 @@ class SangriaPageGerritStatisticsExtension extends Extension {
     public function onBeforeInit(){
         Config::inst()->update(get_class($this), 'allowed_actions', array('GerritStatisticsReport'));
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array('GerritStatisticsReport'));
+    }
+
+    public function GerritStatisticsReport(){
 
         Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
         Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
@@ -44,7 +47,10 @@ class SangriaPageGerritStatisticsExtension extends Extension {
         Requirements::javascript('themes/openstack/javascript/Chart.js');
         Requirements::javascript("gerrit_ingest/js/sangria.page.gerrit.statistics.report.js");
         Requirements::css('gerrit_ingest/css/sangria.page.gerrit.statistics.report.css');
+
+        return $this->owner->getViewer('GerritStatisticsReport')->process($this->owner);
     }
+
 
     public function CommitsPerUser(){
         SangriaPage_Controller::generateDateFilters('', 'CreatedDate');
