@@ -38,6 +38,9 @@ class OpenStackIdSecurityController extends Security
      */
     public function login()
     {
+        if(!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
+            return parent::login();
+
         if(!Director::is_https()){
             OpenStackIdCommon::redirectToSSL( $_SERVER['REQUEST_URI']);
         }
@@ -124,6 +127,9 @@ class OpenStackIdSecurityController extends Security
      */
     public function logout($redirect = true)
     {
+        if(!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
+            return parent::logout();
+
         $member = Member::currentUser();
         if ($member) $member->logOut();
 

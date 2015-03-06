@@ -107,6 +107,7 @@ define('IDP_OPENSTACKID_URL','https://dev.openstackid.com');
 //set true on production mode, otherwise false
 define('Auth_OpenID_VERIFY_HOST',false);
 define('Auth_OpenID_Realm','https://devbranch.openstack.org');
+define('OPENSTACKID_ENABLED',true);
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
