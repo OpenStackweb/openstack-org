@@ -38,7 +38,7 @@ SQL;
 SQL;
             $talks = (int)DB::query($sql2)->value();
 
-            $res = $votes / $talks;
+            $res = ($talks != 0) ? $votes / $talks : 0;
         }
 
         return new AbstractQueryResult(array($res));
