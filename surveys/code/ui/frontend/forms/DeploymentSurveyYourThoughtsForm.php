@@ -40,8 +40,8 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
             new LiteralField('table_begin','<table class="your-thoughts-table"><tbody>'),
         );
 
-        $business_drivers = explode(',',$survey->BusinessDrivers);
-        $business_drivers = array_combine($business_drivers,$business_drivers);
+        $business_drivers = (empty($survey->BusinessDrivers))? array():explode(',',$survey->BusinessDrivers);
+        $business_drivers = (count($business_drivers) > 0) ? array_combine($business_drivers,$business_drivers): array();
 
         foreach(DeploymentSurvey::$business_drivers_options as $key => $value){
             $hash = md5($key);
