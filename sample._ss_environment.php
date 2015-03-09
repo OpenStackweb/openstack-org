@@ -99,9 +99,15 @@ define('GOOGLE_GEO_CODING_API_KEY','');
 define('GITHUB_API_OAUTH2TOKEN','');
 
 define('APPSEC', ''); # openstack/code/MemberVerifyPage.php
+
+//survey module
+define('SURVEY_START_DATE','2015-03-09 00:00:00');
+
 // here u need to define your hostheader and your local path
 // like $_FILE_TO_URL_MAPPING['/var/www/openstack.org'] = 'http://www..openstack.org';
 // mainly this is used by the cron tasks
+
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 
