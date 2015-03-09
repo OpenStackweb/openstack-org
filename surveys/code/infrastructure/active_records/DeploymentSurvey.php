@@ -47,6 +47,8 @@ class DeploymentSurvey extends DataObject
         'OpenStackActivity' => 'Text',
         'OpenStackRelationship' => 'Text',
         'ITActivity' => 'Text',
+		'InterestedUsingContainerTechnology' => 'Boolean',
+		'ContainerRelatedTechnologies' => 'Text',
     );
 
 	static $has_one = array(
@@ -174,6 +176,17 @@ class DeploymentSurvey extends DataObject
         'None of these' => 'None of these',
     );
 
+	public static $container_related_technologies = array(
+		'Docker' => 'Docker',
+		'Rocket' => 'Rocket',
+		'LXC' => 'LXC',
+		'LXD' => 'LXD',
+		'OpenVZ' => 'OpenVZ',
+		'Warden' => 'Warden',
+		'Kubernetes' => 'Kubernetes',
+		'Mesos' => 'Mesos',
+	);
+
 	protected function onBeforeWrite()
 	{
 		parent::onBeforeWrite();
@@ -245,7 +258,9 @@ class DeploymentSurvey extends DataObject
 			new LiteralField('Break', '<p>Your responses are anonymous, and each of these text fields is independent, so we cannot “See previous answer”. We would really appreciate a separate answer to each question.</p>'),
 			new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack, besides “free” and “open”?'),
 			new TextAreaField('FurtherEnhancement', 'What areas of OpenStack require further enhancement? '),
-			new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?')
+			new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?'),
+			new CheckboxField('InterestedUsingContainerTechnology','Are you interested in using container technology with OpenStack?'),
+			new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Please select all that apply', DeploymentSurvey::$container_related_technologies)
 		));
 
 		$ddl_rate->setEmptyString('Neutral');

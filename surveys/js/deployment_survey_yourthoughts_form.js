@@ -52,6 +52,15 @@ jQuery(document).ready(function($) {
 
     setCustomValidationRuleForOtherText($('#DeploymentSurveyYourThoughtsForm_Form_InformationSources_Other'), $('#OtherInformationSources'));
 
+    setCustomValidationRuleForDependantQuestion([$('#DeploymentSurveyYourThoughtsForm_Form_InterestedUsingContainerTechnology')], $('#container_related_tech'), function(chk){
+        if(chk.is(':checked')){
+            $('input[type="checkbox"]','#DeploymentSurveyYourThoughtsForm_Form_ContainerRelatedTechnologies').rules('add', { required:true});
+        }
+        else{
+            $('input[type="checkbox"]','#DeploymentSurveyYourThoughtsForm_Form_ContainerRelatedTechnologies').rules('remove', 'required');
+        }
+    });
+
     form.submit(function( event ) {
         var valid   = form.valid();
         var sorted  = $('.selected-rank', $('#catalog'));

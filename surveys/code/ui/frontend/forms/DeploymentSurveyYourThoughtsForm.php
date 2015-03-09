@@ -102,6 +102,11 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         $fields->add(new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack, besides “free” and “open”?'));
         $fields->add(new TextAreaField('FurtherEnhancement', 'What areas of OpenStack require further enhancement? '));
         $fields->add(new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?'));
+        $fields->add(new CheckboxField('InterestedUsingContainerTechnology','Are you interested in using container technology with OpenStack?'));
+        $fields->add(new LiteralField('Break', '<div id="container_related_tech" class="hidden">'));
+        $fields->add(new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Select All That Apply', DeploymentSurvey::$container_related_technologies));
+        $fields->add(new LiteralField('Break', '</div>'));
+
         $ddl_rate->setEmptyString('Neutral');
         $actions = new FieldList(
             $nextButton
