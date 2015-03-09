@@ -103,10 +103,7 @@ class EventHolder_Controller extends Page_Controller {
             $events_array->push($event);
         }
 
-        $events_array->sort('EventStartDate', 'ASC');
-        $events_array->limit($num,0);
-
-		return $events_array;
+		return $events_array->sort('EventStartDate', 'ASC')->limit($num,0)->toArray();
 	}
 
     function PastSummits($num) {
