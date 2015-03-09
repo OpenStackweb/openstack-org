@@ -11,5 +11,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-define('SURVEY_START_DATE','2015-03-01 00:00:00');
