@@ -69,13 +69,64 @@ class HomePage_Controller extends Page_Controller {
 
 	}
 
-	function UpcomingEvents($num=1) {
+    function RssEvents($limit = 7)
+    {
 
-		$events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate','ASC')->limit($num);
-		$output = '';
+        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
 
-        if ($events) {
-            foreach ($events as $key => $event) {
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+            $DOM = new DOMDocument;
+            $DOM->loadHTML(html_entity_decode($item->description));
+            $span_tags = $DOM->getElementsByTagName('span');
+            foreach ($span_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:startDate') {
+                    $item->startDate = $tag->getAttribute('content');
+                } else if ($tag->getAttribute('property') == 'schema:endDate') {
+                    $item->endDate = $tag->getAttribute('content');
+                }
+            }
+            $div_tags = $DOM->getElementsByTagName('div');
+            foreach ($div_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:location') {
+                    $item->location = $tag->nodeValue;
+                }
+            }
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function UpcomingEvents($limit = 1)
+    {
+        $rss_events = $this->RssEvents($limit);
+        $events_array = new ArrayList();
+        $pulled_events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
+        $events_array->merge($pulled_events);
+        $output = '';
+
+        foreach ($rss_events as $item) {
+            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details');
+            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
+            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
+            $event_duration = new EventDuration($event_start_date,$event_end_date);
+            $event = new EventPage();
+            $event->registerMainInfo($event_main_info);
+            $event->registerDuration($event_duration);
+            $event->registerLocation($item->location);
+            $events_array->push($event);
+        }
+
+        $events_array->sort('EventStartDate', 'ASC');
+        $events_array->limit($limit,0);
+
+        if ($events_array) {
+            foreach ($events_array as $key => $event) {
                 $first = ($key == 0);
                 $data = array('IsEmpty'=>0,'IsFirst'=>$first);
 
@@ -109,22 +160,6 @@ class HomePage_Controller extends Page_Controller {
 
 	}
 
-	function RssItems($limit = 7) { 
-
-		$feed = new RestfulService('http://planet.openstack.org/rss20.xml',7200);
-
-		$feedXML = $feed->request()->getBody();
-
-		// Extract items from feed 
-		$result = $feed->getValues($feedXML, 'channel', 'item'); 
-
-		foreach ($result as $item ) {
-			$item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
-		}
-
-		return $result->limit($limit,0);
-	}
-
     function NewsItems($limit = 20) {
         $return_array = new ArrayList();
         $slider_news = DataObject::get('News', "Slider = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
@@ -143,31 +178,101 @@ class HomePage_Controller extends Page_Controller {
 
         $rss_news = $this->RssItems($limit)->toArray();
         foreach ($rss_news as $item) {
-            $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
-            $return_array->push(array('type'=>'Planet','link'=>$item->link,'title'=>$item->title,
-                                      'pubdate'=>$item->pubDate, 'timestamp'=>$date_obj->getTimestamp()));
+            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
+            $return_array->push(array('type' => 'Planet', 'link' => $item->link, 'title' => $item->title,
+                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }
 
-        return $return_array->sort('timestamp','DESC');
+        $blog_news = $this->RssItems($limit)->toArray();
+        foreach ($blog_news as $item) {
+            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
+            $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
+                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
+        }
+
+        $superuser_news = $this->SuperUserItems($limit)->toArray();
+        foreach ($superuser_news as $item) {
+            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
+            $return_array->push(array('type' => 'SuperUser', 'link' => $item->link, 'title' => $item->title,
+                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
+        }
+
+        $return_array = $return_array->sort('timestamp', 'DESC');
+        return $return_array->limit($limit,0);
     }
 
-	function PastEvents($num=1) {
-	  return EventPage::get()->where("EventEndDate <= now()")->sort('EventStartDate')->limit($num);
-	}
-		
-	function ReturningVisitor() {
-		$VisitorCookie = new Cookie;
-		return ($VisitorCookie->get('ReturningVisitor')==TRUE);
-	}
-	
-	function CompanyCount() {
-		$DisplayedCompanies = Company::get()->filter('DisplayOnSite',1);
-		$Count = $DisplayedCompanies->Count();
-		return $Count;
-	}
+    function RssItems($limit = 7)
+    {
 
-	function DaysUntil() {
-		$date = $this->EventDate;
-		return (isset($date)) ? floor((strtotime($date) - time())/60/60/24) : FALSE;
-	}
+        $feed = new RestfulService('http://planet.openstack.org/rss20.xml', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function BlogItems($limit = 7)
+    {
+
+        $feed = new RestfulService('https://www.openstack.org/blog/feed/', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function SuperUserItems($limit = 7)
+    {
+
+        $feed = new RestfulService('http://superuser.openstack.org/articles/feed/', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'entry');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->published));
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function PastEvents($num = 1)
+    {
+        return EventPage::get()->where("EventEndDate <= now()")->sort('EventStartDate')->limit($num);
+    }
+
+    function ReturningVisitor()
+    {
+        $VisitorCookie = new Cookie;
+        return ($VisitorCookie->get('ReturningVisitor') == TRUE);
+    }
+
+    function CompanyCount()
+    {
+        $DisplayedCompanies = Company::get()->filter('DisplayOnSite', 1);
+        $Count = $DisplayedCompanies->Count();
+        return $Count;
+    }
+
+    function DaysUntil()
+    {
+        $date = $this->EventDate;
+        return (isset($date)) ? floor((strtotime($date) - time()) / 60 / 60 / 24) : FALSE;
+    }
 }
