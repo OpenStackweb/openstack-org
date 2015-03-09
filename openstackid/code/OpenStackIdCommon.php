@@ -23,8 +23,11 @@ final class OpenStackIdCommon {
 
     public static function getReturnTo()
     {
-        $trust_root = self::getTrustRoot();
+        $trust_root    = self::getTrustRoot();
         $return_to_url = $trust_root . '/OpenStackIdAuthenticator?url=/OpenStackIdAuthenticator';
+        if(Controller::curr()->getRequest()->getVar('BackURL')){
+            $return_to_url .= '&BackURL='.Controller::curr()->getRequest()->getVar('BackURL');
+        }
         return $return_to_url;
     }
 
@@ -36,6 +39,4 @@ final class OpenStackIdCommon {
     public static function escape($thing) {
         return htmlentities($thing);
     }
-
-
 }

@@ -54,12 +54,16 @@ class OpenStackIdAuthenticator extends Controller
                 if ($response->endpoint->canonicalID) {
                     $openid = escape($response->endpoint->canonicalID);
                 }
-
+                //get user info from openid response
                 list($email, $full_name) = $this->getUserProfileInfo($response);
-
-
+                //try to get user by email
                 $member = $this->member_repository->findByEmail($email);
+                if(!$member){// or by openid
+                    $member = Member::get()->filter('IdentityURL', $openid)->first();
+                }
                 if ($member) {
+                    $member->setIdentityUrl($openid);
+                    $member->write();
                     $member->LogIn(true);
                     if ($backURL = Session::get("BackURL")) {
                         Session::clear("BackURL");
@@ -68,7 +72,6 @@ class OpenStackIdAuthenticator extends Controller
                         return $this->redirectBack();
                     }
                 }
-
                 throw new Exception("The OpenID authentication failed.");
             }
         } catch (Exception $ex) {

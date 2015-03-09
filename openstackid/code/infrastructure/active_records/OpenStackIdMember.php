@@ -20,4 +20,12 @@ class OpenStackIdMember extends DataExtension {
     private static $db = array(
         'IdentityURL' => 'Varchar(255)'
     );
+
+    public function setIdentityUrl($url){
+        $this->owner->setField('IdentityURL',$url);
+    }
+
+    public function getIdentityUrl(){
+        return $this->owner->getField('IdentityURL');
+    }
 }
