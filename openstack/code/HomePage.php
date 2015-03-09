@@ -202,7 +202,7 @@ class HomePage_Controller extends Page_Controller
         $superuser_news = $this->SuperUserItems($limit)->toArray();
         foreach ($superuser_news as $item) {
             $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
-            $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
+            $return_array->push(array('type' => 'SuperUser', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }
 
