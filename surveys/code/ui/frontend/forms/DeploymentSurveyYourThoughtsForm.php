@@ -90,8 +90,13 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         Requirements::customScript('var answer_table = '.$answer_table.';');
         Requirements::customScript('rank_order = '.count($business_drivers).';');
 
-        $fields->add(new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))));
+        $fields->add(new CustomCheckboxSetField('InformationSources', 'Where do you end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))));
         $fields->add(new TextAreaField('OtherInformationSources', ''));
+        $fields->add(new CheckboxField('InterestedUsingContainerTechnology','Are you interested in using container technology with OpenStack?'));
+        $fields->add(new LiteralField('Break', '<div id="container_related_tech" class="hidden">'));
+        $fields->add(new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Select All That Apply', DeploymentSurvey::$container_related_technologies));
+        $fields->add(new LiteralField('Break', '</div>'));
+
         $fields->add($ddl_rate = new DropdownField(
             'OpenStackRecommendRate',
             'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',
@@ -102,10 +107,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         $fields->add(new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack, besides “free” and “open”?'));
         $fields->add(new TextAreaField('FurtherEnhancement', 'What areas of OpenStack require further enhancement? '));
         $fields->add(new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?'));
-        $fields->add(new CheckboxField('InterestedUsingContainerTechnology','Are you interested in using container technology with OpenStack?'));
-        $fields->add(new LiteralField('Break', '<div id="container_related_tech" class="hidden">'));
-        $fields->add(new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Select All That Apply', DeploymentSurvey::$container_related_technologies));
-        $fields->add(new LiteralField('Break', '</div>'));
+
 
         $ddl_rate->setEmptyString('Neutral');
         $actions = new FieldList(
