@@ -181,11 +181,10 @@ class HomePage_Controller extends Page_Controller
             $events_array->push($event);
         }
 
-        $events_array->sort('EventStartDate', 'ASC');
-        $events_array->limit($limit,0);
+        $events = $events_array->sort('EventStartDate', 'ASC')->limit($limit,0)->toArray();
 
-        if ($events_array) {
-            foreach ($events_array as $key => $event) {
+        if ($events) {
+            foreach ($events as $key => $event) {
                 $first = ($key == 0);
                 $data = array('IsEmpty' => 0, 'IsFirst' => $first);
 
