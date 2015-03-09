@@ -1,6 +1,7 @@
 <?php
 define('__ROOT__', dirname(dirname(dirname(dirname(__FILE__)))));
-require_once __ROOT__.'/vendor/openid/php-openid/Auth/OpenID/SReg.php';
+require_once __ROOT__ . '/vendor/openid/php-openid/Auth/OpenID/SReg.php';
+
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,82 +39,90 @@ class OpenStackIdSecurityController extends Security
      */
     public function login()
     {
-        if(!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
-            return parent::login();
+        try {
 
-        if(!Director::is_https()){
-            OpenStackIdCommon::redirectToSSL( $_SERVER['REQUEST_URI']);
-        }
+            if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
+                return parent::login();
 
-        // Begin the OpenID authentication process.
-        $auth_request = $this->consumer->begin(IDP_OPENSTACKID_URL);
-
-        // No auth request means we can't begin OpenID.
-        if (!$auth_request) {
-            echo ("Authentication error: not a valid OpenID.");
-            exit;
-        }
-
-        if(Auth_OpenID_supportsSReg($auth_request->endpoint)){
-            //SREG
-            $sreg_request = Auth_OpenID_SRegRequest::build(array('email','fullname'),array('country','language'));
-            if ($sreg_request) {
-                $auth_request->addExtension($sreg_request);
+            if (!Director::is_https()) {
+                OpenStackIdCommon::redirectToSSL($_SERVER['REQUEST_URI']);
             }
-        }
-        else{
-            //AX
-            // Create attribute request object
-            // See http://code.google.com/apis/accounts/docs/OpenID.html#Parameters for parameters
-            // Usage: make($type_uri, $count=1, $required=false, $alias=null)
-            $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/contact/email',1,1, 'email');
-            $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/namePerson/first',1,1, 'firstname');
-            $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/namePerson/last',1,1, 'lastname');
-            $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/namePerson',1,1, 'fullname');
-            // Create AX fetch request
-            $ax = new Auth_OpenID_AX_FetchRequest();
+            if ($this->getRequest()->getVar('BackURL')) {
+                Session::set("BackURL", $this->getRequest()->getVar('BackURL'));
+            }
+            // Begin the OpenID authentication process.
+            $auth_request = $this->consumer->begin(IDP_OPENSTACKID_URL);
 
-            // Add attributes to AX fetch request
-            foreach($attribute as $attr){
-                $ax->add($attr);
+            // No auth request means we can't begin OpenID.
+            if (!$auth_request) {
+                throw new Exception("The OpenID authentication failed.");
             }
 
-            // Add AX fetch request to authentication request
-            $auth_request->addExtension($ax);
-        }
-
-        //Redirect the user to the OpenID server for authentication .
-        // Store the token for this authentication so we can verify the
-        // response.
-
-        // For OpenID 1, send a redirect.  For OpenID 2, use a Javascript
-        // form to send a POST request to the server.
-        if ($auth_request->shouldSendRedirect()) {
-            $redirect_url = $auth_request->redirectURL($this->getTrustRoot(), $this->getReturnTo());
-
-            // If the redirect URL can't be built, display an error
-            // message.
-            if (Auth_OpenID::isFailure($redirect_url)) {
-                echo("Could not redirect to server: " . $redirect_url->message);
+            if (Auth_OpenID_supportsSReg($auth_request->endpoint)) {
+                //SREG
+                $sreg_request = Auth_OpenID_SRegRequest::build(array('email', 'fullname'), array('country', 'language'));
+                if ($sreg_request) {
+                    $auth_request->addExtension($sreg_request);
+                }
             } else {
-                // Send redirect.
-                header("Location: " . $redirect_url);
-            }
-        } else {
-            // Generate form markup and render it.
-            $form_id = 'openid_message';
-            $form_html = $auth_request->htmlMarkup(OpenStackIdCommon::getTrustRoot(), OpenStackIdCommon::getReturnTo(), false, array('id' => $form_id));
+                //AX
+                // Create attribute request object
+                // See http://code.google.com/apis/accounts/docs/OpenID.html#Parameters for parameters
+                // Usage: make($type_uri, $count=1, $required=false, $alias=null)
+                $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/contact/email', 1, 1, 'email');
+                $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/namePerson/first', 1, 1, 'firstname');
+                $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/namePerson/last', 1, 1, 'lastname');
+                $attribute[] = Auth_OpenID_AX_AttrInfo::make('http://axschema.org/namePerson', 1, 1, 'fullname');
+                // Create AX fetch request
+                $ax = new Auth_OpenID_AX_FetchRequest();
 
-            // Display an error if the form markup couldn't be generated;
-            // otherwise, render the HTML.
-            if (Auth_OpenID::isFailure($form_html)) {
-                echo("Could not redirect to server: " . $form_html->message);
+                // Add attributes to AX fetch request
+                foreach ($attribute as $attr) {
+                    $ax->add($attr);
+                }
+
+                // Add AX fetch request to authentication request
+                $auth_request->addExtension($ax);
+            }
+
+            //Redirect the user to the OpenID server for authentication .
+            // Store the token for this authentication so we can verify the
+            // response.
+
+            // For OpenID 1, send a redirect.  For OpenID 2, use a Javascript
+            // form to send a POST request to the server.
+            if ($auth_request->shouldSendRedirect()) {
+                $redirect_url = $auth_request->redirectURL($this->getTrustRoot(), $this->getReturnTo());
+
+                // If the redirect URL can't be built, display an error
+                // message.
+                if (Auth_OpenID::isFailure($redirect_url)) {
+                    echo("Could not redirect to server: " . $redirect_url->message);
+                } else {
+                    // Send redirect.
+                    header("Location: " . $redirect_url);
+                }
             } else {
-                print $form_html;
-            }
-        }
+                // Generate form markup and render it.
+                $form_id = 'openid_message';
+                $form_html = $auth_request->htmlMarkup(OpenStackIdCommon::getTrustRoot(), OpenStackIdCommon::getReturnTo(), false, array('id' => $form_id));
 
-        exit();
+                // Display an error if the form markup couldn't be generated;
+                // otherwise, render the HTML.
+                if (Auth_OpenID::isFailure($form_html)) {
+                    echo("Could not redirect to server: " . $form_html->message);
+                } else {
+                    print $form_html;
+                }
+            }
+
+            exit();
+
+        } catch (Exception $ex) {
+            Session::set("Security.Message.message", $ex->getMessage());
+            Session::set("Security.Message.type", "bad");
+            return $this->redirect("Security/badlogin");
+        }
     }
 
 
@@ -127,18 +136,22 @@ class OpenStackIdSecurityController extends Security
      */
     public function logout($redirect = true)
     {
-        if(!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
+        if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
             return parent::logout();
 
         $member = Member::currentUser();
         if ($member) $member->logOut();
 
         if ($redirect && (!$this->response || !$this->response->isFinished())) {
-            $this->redirect(IDP_OPENSTACKID_URL."/accounts/user/logout");
+            $this->redirect(IDP_OPENSTACKID_URL . "/accounts/user/logout");
         }
     }
 
-    public function badlogin(){
+    public function badlogin()
+    {
+        return $this->renderWith(
+            array('OpenStackIdSecurityController_badlogin', 'Page')
+        );
 
     }
 
