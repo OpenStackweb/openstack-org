@@ -175,11 +175,8 @@ class HomePage_Controller extends Page_Controller
     {
         $return_array = new ArrayList();
         $slider_news = DataObject::get('News', "Slider = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
-        $limit = $limit - count($slider_news);
         $featured_news = DataObject::get('News', "Featured = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
-        $limit = $limit - count($featured_news);
         $recent_news = DataObject::get('News', "Featured = 0 AND Slider = 0 AND Approved = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
-        $limit = $limit - count($recent_news);
         $all_news = array_merge($slider_news, $featured_news, $recent_news);
         // format array
         foreach ($all_news as $item) {
@@ -195,7 +192,22 @@ class HomePage_Controller extends Page_Controller
                 'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }
 
-        return $return_array->sort('timestamp', 'DESC');
+        $blog_news = $this->RssItems($limit)->toArray();
+        foreach ($blog_news as $item) {
+            $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
+            $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
+                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
+        }
+
+        $superuser_news = $this->SuperUserItems($limit)->toArray();
+        foreach ($superuser_news as $item) {
+            $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
+            $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
+                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
+        }
+
+        $return_array = $return_array->sort('timestamp', 'DESC');
+        return $return_array->limit($limit,0);
     }
 
     function RssItems($limit = 7)
@@ -210,6 +222,40 @@ class HomePage_Controller extends Page_Controller
 
         foreach ($result as $item) {
             $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function BlogItems($limit = 7)
+    {
+
+        $feed = new RestfulService('https://www.openstack.org/blog/feed/', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function SuperUserItems($limit = 7)
+    {
+
+        $feed = new RestfulService('http://superuser.openstack.org/articles/feed/', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'entry');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->published));
         }
 
         return $result->limit($limit, 0);
