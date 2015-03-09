@@ -128,14 +128,64 @@ class HomePage_Controller extends Page_Controller
 
     }
 
-    function UpcomingEvents($num = 1)
+    function RssEvents($limit = 7)
     {
 
-        $events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($num);
+        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+            $DOM = new DOMDocument;
+            $DOM->loadHTML(html_entity_decode($item->description));
+            $span_tags = $DOM->getElementsByTagName('span');
+            foreach ($span_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:startDate') {
+                    $item->startDate = $tag->getAttribute('content');
+                } else if ($tag->getAttribute('property') == 'schema:endDate') {
+                    $item->endDate = $tag->getAttribute('content');
+                }
+            }
+            $div_tags = $DOM->getElementsByTagName('div');
+            foreach ($div_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:location') {
+                    $item->location = $tag->nodeValue;
+                }
+            }
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function UpcomingEvents($limit = 1)
+    {
+        $rss_events = $this->RssEvents($limit);
+        $events_array = new ArrayList();
+        $pulled_events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
+        $events_array->merge($pulled_events);
         $output = '';
 
-        if ($events) {
-            foreach ($events as $key => $event) {
+        foreach ($rss_events as $item) {
+            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details');
+            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
+            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
+            $event_duration = new EventDuration($event_start_date,$event_end_date);
+            $event = new EventPage();
+            $event->registerMainInfo($event_main_info);
+            $event->registerDuration($event_duration);
+            $event->registerLocation($item->location);
+            $events_array->push($event);
+        }
+
+        $events_array->sort('EventStartDate', 'ASC');
+        $events_array->limit($limit,0);
+
+        if ($events_array) {
+            foreach ($events_array as $key => $event) {
                 $first = ($key == 0);
                 $data = array('IsEmpty' => 0, 'IsFirst' => $first);
 
@@ -187,21 +237,21 @@ class HomePage_Controller extends Page_Controller
 
         $rss_news = $this->RssItems($limit)->toArray();
         foreach ($rss_news as $item) {
-            $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
+            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
             $return_array->push(array('type' => 'Planet', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }
 
         $blog_news = $this->RssItems($limit)->toArray();
         foreach ($blog_news as $item) {
-            $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
+            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
             $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }
 
         $superuser_news = $this->SuperUserItems($limit)->toArray();
         foreach ($superuser_news as $item) {
-            $date_obj = date_create_from_format('D, M jS Y', $item->pubDate);
+            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
             $return_array->push(array('type' => 'SuperUser', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }

@@ -48,20 +48,70 @@ class EventHolder_Controller extends Page_Controller {
 		AND Name = 'EventImages')")->sort('RAND()')->first();
 		return $image;
 	}
+
+    function RssEvents($limit = 7)
+    {
+        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+            $DOM = new DOMDocument;
+            $DOM->loadHTML(html_entity_decode($item->description));
+            $span_tags = $DOM->getElementsByTagName('span');
+            foreach ($span_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:startDate') {
+                    $item->startDate = $tag->getAttribute('content');
+                } else if ($tag->getAttribute('property') == 'schema:endDate') {
+                    $item->endDate = $tag->getAttribute('content');
+                }
+            }
+            $div_tags = $DOM->getElementsByTagName('div');
+            foreach ($div_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:location') {
+                    $item->location = $tag->nodeValue;
+                }
+            }
+        }
+
+        return $result->limit($limit, 0);
+    }
 	
 	function PastEvents($num = 4) {
 		return EventPage::get()->filter(array('EventEndDate:LessThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventEndDate')->limit($num);
 	}
-	
 
 	function FutureEvents($num) {
-		return EventPage::get()->filter(array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d') ))->sort('EventStartDate','ASC')->limit($num);
+        $rss_events = $this->RssEvents($num);
+        $events_array = new ArrayList();
+        $pulled_events = EventPage::get()->filter(array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d') ))->sort('EventStartDate','ASC')->limit($num)->toArray();
+        $events_array->merge($pulled_events);
+
+        foreach ($rss_events as $item) {
+            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details');
+            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
+            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
+            $event_duration = new EventDuration($event_start_date,$event_end_date);
+            $event = new EventPage();
+            $event->registerMainInfo($event_main_info);
+            $event->registerDuration($event_duration);
+            $event->registerLocation($item->location);
+            $events_array->push($event);
+        }
+
+        $events_array->sort('EventStartDate', 'ASC');
+        $events_array->limit($num,0);
+
+		return $events_array;
 	}
 
     function PastSummits($num) {
 	    return EventPage::get()->filter(array('EventEndDate:LessThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventEndDate','DESC')->limit($num);
     }
-
 
     function FutureSummits($num) {
 	    return EventPage::get()->filter(array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventStartDate','ASC')->limit($num);
