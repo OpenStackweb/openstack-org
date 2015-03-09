@@ -42,9 +42,11 @@ function checkGroupOtherContainerVisibility(chk_group, question_container, callb
 
     if (show) {
         question_container.removeClass('hidden');
+        question_container.children().removeClass('hidden');
     }
     else {
         question_container.addClass('hidden');
+        question_container.children().addClass('hidden');
     }
 }
 

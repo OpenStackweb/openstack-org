@@ -32,6 +32,8 @@
 <b>What do you like most about OpenStack, besides “free” and “open”?</b>&nbsp;$WhatDoYouLikeMost<br>
 <b>What areas of OpenStack require further enhancement?</b>&nbsp;$FurtherEnhancement<br>
 <b>What should be the priorities for the Foundation and User Committee during the coming year?</b>&nbsp;$FoundationUserCommitteePriorities<br><br>
+<b>Are you interested in using container technology with OpenStack?</b>&nbsp;<% if InterestedUsingContainerTechnology %>Yes<% else %>No<% end_if %><br>
+<b>Which of the following container related technologies are you interested in using?</b>&nbsp;$ContainerRelatedTechnologies<br><br>
 <% if hasAppDevSurveys %>
 <h2>Application Development</h2>
 <hr>
