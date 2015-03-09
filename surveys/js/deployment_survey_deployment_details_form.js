@@ -29,10 +29,7 @@
                 'DeploymentType'  : {required: true },
                 'DeploymentStage' : {required: true },
                 'ProjectsUsed[]' : {required: true },
-                'CurrentReleases[]': {required: true },
-                'ServicesDeploymentsWorkloads[]': {required: true },
-                'EnterpriseDeploymentsWorkloads[]': {required: true },
-                'HorizontalWorkloadFrameworks[]': {required: true }
+                'CurrentReleases[]': {required: true }
             },
             ignore: [],
             invalidHandler: jqueryValidatorInvalidHandler,

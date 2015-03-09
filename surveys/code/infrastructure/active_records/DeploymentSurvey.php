@@ -147,7 +147,7 @@ class DeploymentSurvey extends DataObject
         'Online Forums' => 'Online Forums',
         'OpenStack Planet (planet.openstack.org)' => 'OpenStack Planet (planet.openstack.org)',
         'Read the source code' => 'Read the source code',
-        'Superuser' => 'Superuser',
+        'Superuser' => 'Superuser.openstack.org',
         'Vendor documentation' => 'Vendor documentation',
   	);
 
