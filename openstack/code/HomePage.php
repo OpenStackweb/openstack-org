@@ -258,12 +258,11 @@ class HomePage_Controller extends Page_Controller
         $superuser_news = $this->SuperUserItems($limit)->toArray();
         foreach ($superuser_news as $item) {
             $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
-            $return_array->push(array('type' => 'SuperUser', 'link' => $item->link, 'title' => $item->title,
+            $return_array->push(array('type' => 'Superuser', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
         }
 
-        $return_array = $return_array->sort('timestamp', 'DESC');
-        return $return_array->limit($limit, 0);
+        return $return_array->sort('timestamp', 'DESC')->limit($limit,0);
     }
 
     function RssItems($limit = 7)
