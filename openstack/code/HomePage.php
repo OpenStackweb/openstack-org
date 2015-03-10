@@ -226,7 +226,6 @@ class HomePage_Controller extends Page_Controller
 
     function NewsItems($limit = 20)
     {
-
         $return_array = new ArrayList();
         $slider_news = DataObject::get('News', "Slider = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
         $featured_news = DataObject::get('News', "Featured = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
@@ -242,32 +241,28 @@ class HomePage_Controller extends Page_Controller
 
         $rss_news = $this->RssItems($limit)->toArray();
         foreach ($rss_news as $item) {
-            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
-
             $return_array->push(array('type' => 'Planet', 'link' => $item->link, 'title' => $item->title,
-                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
+                'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
         }
 
-        $blog_news = $this->RssItems($limit)->toArray();
+        $blog_news = $this->BlogItems($limit)->toArray();
         foreach ($blog_news as $item) {
-            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
             $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
-                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
+                'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
         }
 
         $superuser_news = $this->SuperUserItems($limit)->toArray();
         foreach ($superuser_news as $item) {
-            $date_obj = DateTime::createFromFormat('D, M jS Y', $item->pubDate);
             $return_array->push(array('type' => 'Superuser', 'link' => $item->link, 'title' => $item->title,
-                'pubdate' => $item->pubDate, 'timestamp' => $date_obj->getTimestamp()));
+                'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
         }
 
-        return $return_array->sort('timestamp', 'DESC')->limit($limit,0);
+        $last_Array = $return_array->sort('timestamp', 'DESC')->limit($limit,0);
+        return $last_Array;
     }
 
     function RssItems($limit = 7)
     {
-
         $feed = new RestfulService('http://planet.openstack.org/rss20.xml', 7200);
 
         $feedXML = $feed->request()->getBody();
@@ -276,7 +271,8 @@ class HomePage_Controller extends Page_Controller
         $result = $feed->getValues($feedXML, 'channel', 'item');
 
         foreach ($result as $item) {
-            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
+            $item->timestamp = strtotime($item->pubDate);
         }
 
         return $result->limit($limit, 0);
@@ -284,7 +280,6 @@ class HomePage_Controller extends Page_Controller
 
     function SuperUserItems($limit = 7)
     {
-
         $feed = new RestfulService('http://superuser.openstack.org/articles/feed/', 7200);
 
         $feedXML = $feed->request()->getBody();
@@ -293,14 +288,14 @@ class HomePage_Controller extends Page_Controller
         $result = $feed->getValues($feedXML, 'entry');
 
         foreach ($result as $item) {
-            $item->pubDate = date("D, M jS Y", strtotime($item->published));
+            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
+            $item->timestamp = strtotime($item->pubDate);
         }
         return $result->limit($limit, 0);
     }
 
     function BlogItems($limit = 7)
     {
-
         $feed = new RestfulService('https://www.openstack.org/blog/feed/', 7200);
 
         $feedXML = $feed->request()->getBody();
@@ -309,7 +304,8 @@ class HomePage_Controller extends Page_Controller
         $result = $feed->getValues($feedXML, 'channel', 'item');
 
         foreach ($result as $item) {
-            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+            $item->date_display = date("D, M jS Y", strtotime($item->published));
+            $item->timestamp = strtotime($item->published);
         }
 
         return $result->limit($limit, 0);
