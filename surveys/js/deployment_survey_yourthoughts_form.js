@@ -93,15 +93,14 @@ jQuery(document).ready(function($) {
 
     });
 
-
-
     $('.rank-text').live('click', function(evt){
 
         var rank = $('.rank-wrapper', $(this).parent());
+        if($(evt.target).attr('id') == 'business_drivers_other_text') return;
 
         if(rank.hasClass('selected-rank')){
             //undo this rank
-            console.log(rank_order);
+            //console.log(rank_order);
             --rank_order;
             var current_rank =  rank.attr('data-sort');
             clearRankElement(rank);
