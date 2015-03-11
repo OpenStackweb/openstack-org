@@ -223,12 +223,10 @@ class HomePage_Controller extends Page_Controller
     function NewsItems($limit = 20)
     {
         $return_array = new ArrayList();
-        $slider_news = DataObject::get('News', "Slider = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
-        $featured_news = DataObject::get('News', "Featured = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
-        $recent_news = DataObject::get('News', "Featured = 0 AND Slider = 0 AND Approved = 1", "Rank ASC,Date DESC", "", $limit)->toArray();
-        $all_news = array_merge($slider_news, $featured_news, $recent_news);
+        $openstack_news = DataObject::get('News', "Approved = 1", "Date DESC", "", $limit)->toArray();
+
         // format array
-        foreach ($all_news as $item) {
+        foreach ($openstack_news as $item) {
             $art_link = 'news/view/' . $item->ID . '/' . $item->HeadlineForUrl;
             $return_array->push(array('type' => 'News', 'link' => $art_link, 'title' => $item->Headline,
                 'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'timestamp' => strtotime($item->Date)));
@@ -252,8 +250,7 @@ class HomePage_Controller extends Page_Controller
                 'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
         }
 
-        $last_Array = $return_array->sort('timestamp', 'DESC')->limit($limit,0);
-        return $last_Array;
+        return $return_array->sort('timestamp', 'DESC')->limit($limit,0);
     }
 
     function RssItems($limit = 7)
