@@ -350,6 +350,8 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 	{
 
 		$CategoryID = Convert::raw2sql($this->request->param("ID"));
+        $Talk = $this->findTalk();
+        $data["Presentation"] = $Talk;
 
 		if ($CategoryID == 'All') {
 
