@@ -223,31 +223,34 @@ class HomePage_Controller extends Page_Controller
     function NewsItems($limit = 20)
     {
         $return_array = new ArrayList();
-        $openstack_news = DataObject::get('News', "Approved = 1", "Date DESC", "", $limit)->toArray();
+        $outsourced_limit = 5;
+        $local_limit = $limit - $outsourced_limit;
 
-        // format array
-        foreach ($openstack_news as $item) {
-            $art_link = 'news/view/' . $item->ID . '/' . $item->HeadlineForUrl;
-            $return_array->push(array('type' => 'News', 'link' => $art_link, 'title' => $item->Headline,
-                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'timestamp' => strtotime($item->Date)));
-        }
-
-        $rss_news = $this->RssItems($limit)->toArray();
+        $rss_news = $this->RssItems($outsourced_limit)->toArray();
         foreach ($rss_news as $item) {
             $return_array->push(array('type' => 'Planet', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
         }
 
-        $blog_news = $this->BlogItems($limit)->toArray();
+        $blog_news = $this->BlogItems($outsourced_limit)->toArray();
         foreach ($blog_news as $item) {
             $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
         }
 
-        $superuser_news = $this->SuperUserItems($limit)->toArray();
+        $superuser_news = $this->SuperUserItems($outsourced_limit)->toArray();
         foreach ($superuser_news as $item) {
             $return_array->push(array('type' => 'Superuser', 'link' => $item->link, 'title' => $item->title,
                 'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
+        }
+
+        $return_array = $return_array->sort('timestamp', 'DESC')->limit($outsourced_limit,0);
+
+        $openstack_news = DataObject::get('News', "Approved = 1", "Date DESC", "", $local_limit)->toArray();
+        foreach ($openstack_news as $item) {
+            $art_link = 'news/view/' . $item->ID . '/' . $item->HeadlineForUrl;
+            $return_array->push(array('type' => 'News', 'link' => $art_link, 'title' => $item->Headline,
+                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'timestamp' => strtotime($item->Date)));
         }
 
         return $return_array->sort('timestamp', 'DESC')->limit($limit,0);
