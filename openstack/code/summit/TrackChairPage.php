@@ -250,7 +250,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 
 	}
 
-	function FindTalk()
+	function FindTalk($CategoryID = null)
 	{
 
 		$TalkId = NULL;
@@ -267,7 +267,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 			Session::set('TalkID', $TalkId);
 			return $Talk = Talk::get()->byID($TalkId);
 		} else {
-			return $Talk = $this->PresentationList()->first();
+			return $Talk = $this->PresentationList($CategoryID,Session::get('SortColumn'),Session::get('SortOrder'))->first();
 		}
 
 	}
