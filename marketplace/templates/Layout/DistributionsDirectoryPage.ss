@@ -25,7 +25,7 @@
                 <a href="http://docs.openstack.org/">Operations Guide</a>
             </li>
             <li>
-                <a href="http://docs.openstack.org/">Security Guide</a>
+                <a href="http://docs.openstack.org/sec">Security Guide</a>
             </li>
             <li>
                 <a href="http://docs.openstack.org/">Getting Started</a>

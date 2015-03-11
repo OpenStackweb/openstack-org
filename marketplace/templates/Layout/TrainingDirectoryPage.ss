@@ -35,7 +35,7 @@
                 <a href="http://docs.openstack.org/ops/" class="outbound-link">Operations Guide</a>
             </li>
             <li>
-                <a href="http://www.openstack.org/blog/2013/07/openstack-security-guide-now-available/" class="outbound-link">Security Guide</a>
+                <a href="http://docs.openstack.org/sec/" class="outbound-link">Security Guide</a>
             </li>
             <li>
                 <a href="http://www.openstack.org/software/start/" class="outbound-link">Getting Started</a>
