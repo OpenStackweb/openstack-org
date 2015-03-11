@@ -93,29 +93,8 @@ jQuery(document).ready(function($) {
 
     });
 
-    $('.rank-text').live('click', function(evt){
-
-        var rank = $('.rank-wrapper', $(this).parent());
-        if($(evt.target).attr('id') == 'business_drivers_other_text') return;
-
-        if(rank.hasClass('selected-rank')){
-            //undo this rank
-            //console.log(rank_order);
-            --rank_order;
-            var current_rank =  rank.attr('data-sort');
-            clearRankElement(rank);
-            var sorted = $('.selected-rank', $('#catalog'));
-            for (var i = 0; i < sorted.length; i++) {
-                recalculateRankElement($(sorted[i]), current_rank);
-            }
-        }
-        else if(rank_order < 5) {
-            ++rank_order
-            rank.text(rank_order);
-            rank.attr('data-sort',rank_order);
-            rank.addClass('selected-rank');
-        }
-    });
+    $('.rank-wrapper').live('click', clickRank );
+    $('.rank-text').live('click', clickRank );
 
     $('#clear_all_business_drivers').click(function(evt){
         evt.preventDefault();
@@ -129,6 +108,27 @@ jQuery(document).ready(function($) {
         return false;
     });
 });
+
+function clickRank(evt){
+
+    var rank = $('.rank-wrapper', $(this).parent());
+    if($(evt.target).attr('id') == 'business_drivers_other_text') return;
+    if(rank.hasClass('selected-rank')){
+        --rank_order;
+        var current_rank =  rank.attr('data-sort');
+        clearRankElement(rank);
+        var sorted = $('.selected-rank', $('#catalog'));
+        for (var i = 0; i < sorted.length; i++) {
+            recalculateRankElement($(sorted[i]), current_rank);
+        }
+    }
+    else if(rank_order < 5) {
+        ++rank_order
+        rank.text(rank_order);
+        rank.attr('data-sort',rank_order);
+        rank.addClass('selected-rank');
+    }
+}
 
 function clearRankElement($element){
     if ($element.attr('data-answer') == '6311ae17c1ee52b36e68aaf4ad066387_answer') {

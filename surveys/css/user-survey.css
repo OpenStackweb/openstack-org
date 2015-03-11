@@ -216,6 +216,12 @@ td.rank-text:hover {
     cursor: pointer;
     background: #edf2f7;
 }
+
+td.rank-wrapper:hover {
+    cursor: pointer;
+    background: #edf2f7;
+}
+
 ul#answers {
     margin: 40px 0 30px 0;
     padding: 0;
