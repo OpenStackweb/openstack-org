@@ -350,19 +350,21 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 	{
 
 		$CategoryID = Convert::raw2sql($this->request->param("ID"));
-        $Talk = $this->findTalk();
-        $data["Presentation"] = $Talk;
 
 		if ($CategoryID == 'All') {
 
 			Session::clear('CategoryID');
 			$data = $this->PresentationsByCategory();
+            $Talk = $this->findTalk();
+            $data["Presentation"] = $Talk;
 			return $this->Customise($data);
 
 			// if it's numberic and a category by that number exists
 		} elseif (is_numeric($CategoryID) && SummitCategory::get()->byID($CategoryID)) {
 			Session::set('CategoryID', $CategoryID);
 			$data = $this->PresentationsByCategory();
+            $Talk = $this->findTalk();
+            $data["Presentation"] = $Talk;
 			return $this->Customise($data);
 		}
 
