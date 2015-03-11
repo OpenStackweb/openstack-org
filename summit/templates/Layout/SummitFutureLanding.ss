@@ -36,5 +36,5 @@
             </div>
         </div>
     </div>
-    <a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="" target="_blank"><i class="fa fa-info-circle"></i></a>
+    <a href="https://www.flickr.com/photos/stuckincustoms/9097171697/" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Trey Ratcliff" target="_blank"><i class="fa fa-info-circle"></i></a>
 </div>
