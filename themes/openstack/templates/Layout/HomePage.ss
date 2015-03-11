@@ -1,3 +1,4 @@
+</div>
 <div class="intro-header featured" style="background-image: url({$HeroImageUrl})">
 
     <div class="container">
