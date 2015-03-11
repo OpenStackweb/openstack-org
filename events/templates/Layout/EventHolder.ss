@@ -16,7 +16,7 @@
     <div class="row">
         <div id='upcoming-events-container' class="col-lg-6 col-md-6 col-sm-6" style="min-height:500px">
             <div style="float:left;"><h2>Upcoming Events</h2></div>
-            <div style="float:left; margin:20px 0 0 50px">
+            <div style="float:left; margin:28px 0 0 50px">
                 <select id="upcoming_events_filter">
                     <option value="all">All</option>
                     <option value="openstack">OpenStack</option>
