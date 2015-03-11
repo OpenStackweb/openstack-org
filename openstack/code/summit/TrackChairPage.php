@@ -363,7 +363,7 @@ class TrackChairPage_Controller extends Page_Controller implements PermissionPro
 		} elseif (is_numeric($CategoryID) && SummitCategory::get()->byID($CategoryID)) {
 			Session::set('CategoryID', $CategoryID);
 			$data = $this->PresentationsByCategory();
-            $Talk = $this->findTalk();
+            $Talk = $this->findTalk($CategoryID);
             $data["Presentation"] = $Talk;
 			return $this->Customise($data);
 		}
