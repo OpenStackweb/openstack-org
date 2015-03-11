@@ -231,8 +231,10 @@
 
       <div class='row'>
         <div class='col-lg-12' id='presentation-area'>
+          <% if IsAdmin %>
           <a data-toggle='modal' href='#suggest-category'>Suggest Category Change...</a>
-
+          <% end_if %>    
+            
           <% if Comments %>
             <% loop Comments %>
                 <div class="staff-note">
