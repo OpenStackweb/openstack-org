@@ -284,8 +284,8 @@ class HomePage_Controller extends Page_Controller
         $result = $feed->getValues($feedXML, 'entry');
 
         foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
-            $item->timestamp = strtotime($item->pubDate);
+            $item->date_display = date("D, M jS Y", strtotime($item->published));
+            $item->timestamp = strtotime($item->published);
         }
         return $result->limit($limit, 0);
     }
@@ -300,8 +300,8 @@ class HomePage_Controller extends Page_Controller
         $result = $feed->getValues($feedXML, 'channel', 'item');
 
         foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->published));
-            $item->timestamp = strtotime($item->published);
+            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
+            $item->timestamp = strtotime($item->pubDate);
         }
 
         return $result->limit($limit, 0);
