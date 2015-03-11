@@ -13,6 +13,10 @@
 jQuery(document).ready(function($){
     refresh_future_events_scroll();
     setInterval(refresh_page,60000);
+
+    jQuery('#upcoming_events_filter').change(function(){
+        refresh_future_events();
+    });
 });
 
 function refresh_page() {
@@ -24,7 +28,7 @@ function refresh_page() {
 function refresh_future_events_scroll(){
     var second_column = jQuery('div.events-second-column');
     if(second_column.length>0){
-        var upcoming_events_container = jQuery('#upcoming-events-container');
+        var upcoming_events_container = jQuery('#upcoming-events');
         if(upcoming_events_container.length>0){
             upcoming_events_container.css('max-height', ( second_column.height() ) +'px');
             upcoming_events_container.css('overflow-y','auto');
@@ -34,12 +38,14 @@ function refresh_future_events_scroll(){
 }
 
 function refresh_future_events() {
+    var filter = jQuery('#upcoming_events_filter').val();
     jQuery.ajax({
         type: "POST",
         url: 'EventHolder_Controller/AjaxFutureEvents',
+        data: {filter:filter},
         success: function(result){
-           jQuery('.single-event','#upcoming-events').remove();
-           jQuery('#upcoming-events'). append(result);
+           jQuery('#upcoming-events').html('<div></div>');
+           jQuery('div','#upcoming-events'). append(result);
            refresh_future_events_scroll();
         }
     });

@@ -15,21 +15,31 @@
     </div>
     <div class="row">
         <div id='upcoming-events-container' class="col-lg-6 col-md-6 col-sm-6" style="min-height:500px">
+            <div style="float:left;"><h2>Upcoming Events</h2></div>
+            <div style="float:left; margin:20px 0 0 50px">
+                <select id="upcoming_events_filter">
+                    <option value="all">All</option>
+                    <option value="openstack">OpenStack</option>
+                    <option value="groups">Groups</option>
+                </select>
+            </div>
+            <div style="clear:both"></div>
             <div id='upcoming-events' class="eventBlock upcoming">
-                <h2>Upcoming Events</h2>
-                $getEvents(100,future_events)
+                <div>
+                    $getEvents(100,future_events)
+                </div>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 events-second-column" style="min-height:500px">
             <% if FutureSummits(5) %>
+            <h2>Upcoming Summits</h2>
             <div id='future-summits' class="eventBlock summit">
-                <h2>Upcoming Summits</h2>
                 $getEvents(5,future_summits)
             </div>
             <% end_if %>
             <% if PastSummits(5) %>
+            <h2>Recent OpenStack Summits &amp; Conferences</h2>
             <div id='past-summits' class="eventBlock past">
-                <h2>Recent OpenStack Summits &amp; Conferences</h2>
                 $getEvents(5,past_summits)
             </div>
             <% end_if %>

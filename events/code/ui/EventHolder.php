@@ -85,22 +85,27 @@ class EventHolder_Controller extends Page_Controller {
 		return EventPage::get()->filter(array('EventEndDate:LessThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventEndDate')->limit($num);
 	}
 
-	function FutureEvents($num) {
+	function FutureEvents($num, $filter = '') {
         $rss_events = $this->RssEvents($num);
         $events_array = new ArrayList();
-        $pulled_events = EventPage::get()->filter(array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d') ))->sort('EventStartDate','ASC')->limit($num)->toArray();
-        $events_array->merge($pulled_events);
 
-        foreach ($rss_events as $item) {
-            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details');
-            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
-            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
-            $event_duration = new EventDuration($event_start_date,$event_end_date);
-            $event = new EventPage();
-            $event->registerMainInfo($event_main_info);
-            $event->registerDuration($event_duration);
-            $event->registerLocation($item->location);
-            $events_array->push($event);
+        if ($filter == 'openstack' || $filter == 'all' || $filter == '') {
+            $pulled_events = EventPage::get()->filter(array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d') ))->sort('EventStartDate','ASC')->limit($num)->toArray();
+            $events_array->merge($pulled_events);
+        }
+
+        if ($filter == 'groups' || $filter == 'all' || $filter == '') {
+            foreach ($rss_events as $item) {
+                $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details');
+                $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
+                $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
+                $event_duration = new EventDuration($event_start_date,$event_end_date);
+                $event = new EventPage();
+                $event->registerMainInfo($event_main_info);
+                $event->registerDuration($event_duration);
+                $event->registerLocation($item->location);
+                $events_array->push($event);
+            }
         }
 
 		return $events_array->sort('EventStartDate', 'ASC')->limit($num,0)->toArray();
@@ -114,12 +119,12 @@ class EventHolder_Controller extends Page_Controller {
 	    return EventPage::get()->filter(array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventStartDate','ASC')->limit($num);
     }
 
-    public function getEvents($num = 4, $type) {
+    public function getEvents($num = 4, $type, $filter = '') {
         $output = '';
 
         switch ($type) {
             case 'future_events':
-                $events = $this->FutureEvents($num);
+                $events = $this->FutureEvents($num,$filter);
                 break;
             case 'future_summits':
                 $events = $this->FutureSummits($num);
@@ -138,14 +143,17 @@ class EventHolder_Controller extends Page_Controller {
             }
         } else {
             $data = array('IsEmpty'=>1);
-            $output .= Page::renderWith('EventHolder_event', $data);
+            $event = new EventPage();
+            $output .= $event->renderWith('EventHolder_event', $data);
         }
 
         return $output;
     }
 
     function AjaxFutureEvents() {
-        return $this->getEvents(100,'future_events');
+        $filter = $_POST['filter'];
+        $event_controller = new EventHolder_Controller();
+        return $event_controller->getEvents(100,'future_events',$filter);
     }
 
     function AjaxFutureSummits() {
