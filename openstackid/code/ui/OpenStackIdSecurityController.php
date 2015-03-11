@@ -142,9 +142,42 @@ class OpenStackIdSecurityController extends Security
         $member = Member::currentUser();
         if ($member) $member->logOut();
 
-        if ($redirect && (!$this->response || !$this->response->isFinished())) {
-            $this->redirect(IDP_OPENSTACKID_URL . "/accounts/user/logout");
+        // Don't cache the redirect back ever
+        HTTP::set_cache_age(0);
+
+        $url = null;
+
+        // In edge-cases, this will be called outside of a handleRequest() context; in that case,
+        // redirect to the homepage - don't break into the global state at this stage because we'll
+        // be calling from a test context or something else where the global state is inappropraite
+        if($this->request) {
+            if($this->request->requestVar('BackURL')) {
+                $url = $this->request->requestVar('BackURL');
+            } else if($this->request->isAjax() && $this->request->getHeader('X-Backurl')) {
+                $url = $this->request->getHeader('X-Backurl');
+            } else if($this->request->getHeader('Referer')) {
+                $url = $this->request->getHeader('Referer');
+            }
         }
+
+        if(!$url) $url = Director::baseURL();
+
+        $idp= IDP_OPENSTACKID_URL . "/accounts/user/logout";
+ $script =       <<<SCRIPT
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <img alt="logout" width="0" height="0" src="{$idp}" id="logout_image" />
+  <p>Performing logout...</p>
+  <script>
+        jQuery(document).ready(function($){
+            $("#logout_image").ready(function() {
+                window.location ="{$url}";
+            });
+        });
+  </script>
+SCRIPT;
+
+        echo $script;
+
     }
 
     public function badlogin()
