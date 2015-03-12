@@ -65,12 +65,7 @@ class OpenStackIdAuthenticator extends Controller
                     $member->setIdentityUrl($openid);
                     $member->write();
                     $member->LogIn(true);
-                    if ($backURL = Session::get("BackURL")) {
-                        Session::clear("BackURL");
-                        return $this->redirect($backURL);
-                    } else {
-                        return $this->redirectBack();
-                    }
+                    return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());
                 }
                 throw new Exception("The OpenID authentication failed.");
             }
@@ -80,6 +75,8 @@ class OpenStackIdAuthenticator extends Controller
             return $this->redirect("Security/badlogin");
         }
     }
+
+
 
     private function getUserProfileInfo($response)
     {

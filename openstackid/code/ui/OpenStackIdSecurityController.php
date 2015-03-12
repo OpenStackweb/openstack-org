@@ -21,6 +21,7 @@ class OpenStackIdSecurityController extends Security
         'login',
         'logout',
         'badlogin',
+        'ping',
     );
 
     private $consumer;
@@ -142,25 +143,7 @@ class OpenStackIdSecurityController extends Security
         $member = Member::currentUser();
         if ($member) $member->logOut();
 
-        // Don't cache the redirect back ever
-        HTTP::set_cache_age(0);
-
-        $url = null;
-
-        // In edge-cases, this will be called outside of a handleRequest() context; in that case,
-        // redirect to the homepage - don't break into the global state at this stage because we'll
-        // be calling from a test context or something else where the global state is inappropraite
-        if($this->request) {
-            if($this->request->requestVar('BackURL')) {
-                $url = $this->request->requestVar('BackURL');
-            } else if($this->request->isAjax() && $this->request->getHeader('X-Backurl')) {
-                $url = $this->request->getHeader('X-Backurl');
-            } else if($this->request->getHeader('Referer')) {
-                $url = $this->request->getHeader('Referer');
-            }
-        }
-
-        if(!$url) $url = Director::baseURL();
+        $url = OpenStackIdCommon::getRedirectBackUrl();
 
         $idp= IDP_OPENSTACKID_URL . "/accounts/user/logout";
  $script =       <<<SCRIPT
@@ -185,7 +168,16 @@ SCRIPT;
         return $this->renderWith(
             array('OpenStackIdSecurityController_badlogin', 'Page')
         );
+    }
 
+    /**
+     * This action is available as a keep alive, so user
+     * sessions don't timeout. A common use is in the admin.
+     */
+    public function ping() {
+        $member = Member::currentUser();
+        if($member) return 1;
+        return $this->logout();
     }
 
 }
