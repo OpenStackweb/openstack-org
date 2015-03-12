@@ -39,4 +39,32 @@ final class OpenStackIdCommon {
     public static function escape($thing) {
         return htmlentities($thing);
     }
+
+    public static function getRedirectBackUrl(){
+        $url = null;
+
+        if ($url = Session::get("BackURL"))
+            return $url;
+
+        // Don't cache the redirect back ever
+        HTTP::set_cache_age(0);
+        // In edge-cases, this will be called outside of a handleRequest() context; in that case,
+        // redirect to the homepage - don't break into the global state at this stage because we'll
+        // be calling from a test context or something else where the global state is inappropraite
+        if($request = Controller::curr()->getRequest()) {
+            if($request->requestVar('BackURL')) {
+                $url = $request->requestVar('BackURL');
+            } else if($request->isAjax() && $request->getHeader('X-Backurl')) {
+                $url = $request->getHeader('X-Backurl');
+            } else if($request->getHeader('Referer')) {
+                $url = $request->getHeader('Referer');
+            }
+        }
+
+        if(!$url) $url = Director::baseURL();
+        error_log('getRedirectBackUrl '.$url);
+        if(strpos($url,'/Security/login')) $url = Director::baseURL();
+        error_log('getRedirectBackUrl final '.$url);
+        return $url;
+    }
 }
