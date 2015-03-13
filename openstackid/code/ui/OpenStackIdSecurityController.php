@@ -144,7 +144,7 @@ class OpenStackIdSecurityController extends Security
         if ($member) $member->logOut();
 
         $url = OpenStackIdCommon::getRedirectBackUrl();
-        if(strpos($url,'/admin/pages') >=0)
+        if(strpos($url,'/admin/pages') !== false)
             $url = Director::baseURL();
         $idp= IDP_OPENSTACKID_URL . "/accounts/user/logout";
  $script =       <<<SCRIPT

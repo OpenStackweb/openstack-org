@@ -62,7 +62,7 @@ final class OpenStackIdCommon {
         }
 
         if(!$url) $url = Director::baseURL();
-        if(strpos($url,'/Security/login') >=0 ) $url = Director::baseURL();
+        if(strpos($url,'/Security/login') !== false ) $url = Director::baseURL();
         return $url;
     }
 }
