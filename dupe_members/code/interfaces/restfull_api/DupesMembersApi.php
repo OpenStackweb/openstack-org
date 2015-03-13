@@ -209,7 +209,7 @@ final class DupesMembersApi
             $show =  $this->request->param('SHOW');
             $show = filter_var($show, FILTER_VALIDATE_BOOLEAN);
             $current_member = Member::currentUser();
-            $this->manager->showDupesOnProfile($current_member, $show);
+            $this->manager->showDupesOnProfile($current_member->ID, $show);
             return $this->ok();
         }
         catch(NotFoundEntityException $ex1){

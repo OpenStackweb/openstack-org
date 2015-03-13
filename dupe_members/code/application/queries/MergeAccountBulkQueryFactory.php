@@ -16,7 +16,8 @@
  * Class MergeAccountBulkQueryFactory
  */
 final class MergeAccountBulkQueryFactory
-    implements IMergeAccountBulkQueryFactory {
+    implements IMergeAccountBulkQueryFactory
+{
 
     /**
      * @param ICommunityMember $primary_account Primary Account
@@ -25,14 +26,14 @@ final class MergeAccountBulkQueryFactory
      */
     public function buildMergeCandidateBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account)
     {
-       $query = new MergeCandidateBulkQuery();
+        $query = new MergeCandidateBulkQuery();
 
-       $query->addParams(array(
-           'primary_id' => $primary_account->getIdentifier(),
-           'dupe_id'    => $dupe_account->getIdentifier()
-       ));
+        $query->addParams(array(
+            'primary_id' => $primary_account->getIdentifier(),
+            'dupe_id' => $dupe_account->getIdentifier()
+        ));
 
-       return $query;
+        return $query;
     }
 
     /**
@@ -46,7 +47,7 @@ final class MergeAccountBulkQueryFactory
 
         $query->addParams(array(
             'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id'    => $dupe_account->getIdentifier()
+            'dupe_id' => $dupe_account->getIdentifier()
         ));
 
         return $query;
@@ -64,7 +65,7 @@ final class MergeAccountBulkQueryFactory
 
         $query->addParams(array(
             'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id'    => $dupe_account->getIdentifier()
+            'dupe_id' => $dupe_account->getIdentifier()
         ));
 
         return $query;
@@ -82,7 +83,7 @@ final class MergeAccountBulkQueryFactory
 
         $query->addParams(array(
             'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id'    => $dupe_account->getIdentifier()
+            'dupe_id' => $dupe_account->getIdentifier()
         ));
 
         return $query;
@@ -99,7 +100,7 @@ final class MergeAccountBulkQueryFactory
 
         $query->addParams(array(
             'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id'    => $dupe_account->getIdentifier()
+            'dupe_id' => $dupe_account->getIdentifier()
         ));
 
         return $query;
@@ -116,7 +117,7 @@ final class MergeAccountBulkQueryFactory
 
         $query->addParams(array(
             'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id'    => $dupe_account->getIdentifier()
+            'dupe_id' => $dupe_account->getIdentifier()
         ));
 
         return $query;
@@ -127,15 +128,31 @@ final class MergeAccountBulkQueryFactory
      * @param ICommunityMember $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeProfileBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account){
+    public function buildMergeProfileBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account)
+    {
 
         $query = new MergeProfileBulkQuery();
 
         $query->addParams(array(
             'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id'    => $dupe_account->getIdentifier()
+            'dupe_id' => $dupe_account->getIdentifier()
         ));
 
+        return $query;
+    }
+
+    /**
+     * @param ICommunityMember $primary_account
+     * @param  string          $newEmail
+     * @return IBulkQuery
+     */
+    public function buildMergeEmail(ICommunityMember $primary_account, $newEmail)
+    {
+        $query = new MergeEmailBulkQuery();
+        $query->addParams(array(
+            'primary_id' => $primary_account->getIdentifier(),
+            'email' => $newEmail
+        ));
         return $query;
     }
 }
