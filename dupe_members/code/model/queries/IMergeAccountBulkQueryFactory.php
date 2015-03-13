@@ -67,4 +67,11 @@ interface IMergeAccountBulkQueryFactory {
      */
     public function buildMergeProfileBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
 
+    /**
+     * @param ICommunityMember $primary_account
+     * @param  string      $newEmail
+     * @return IBulkQuery
+     */
+    public function buildMergeEmail(ICommunityMember $primary_account, $newEmail);
+
 } 

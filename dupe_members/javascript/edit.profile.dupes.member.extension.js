@@ -67,7 +67,7 @@ jQuery(document).ready(function($) {
     });
 
     $("#dupes-dismiss").click(function(e){
-        if(!window.confirm('Do you want to see this warning again?')){
+        if(window.confirm('Do you want to dismiss this warning?')){
             $.ajax({
                 async:true,
                 type: 'PATCH',

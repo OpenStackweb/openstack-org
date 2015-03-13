@@ -52,8 +52,8 @@ class SapphireRepository extends AbstractEntityRepository
 		$entity = $class::get()->byId($id);
 		if ($entity instanceof IEntity) {
 			UnitOfWork::getInstance()->setToCache($entity);
-			UnitOfWork::getInstance()->scheduleForUpdate($entity);
 		}
+		UnitOfWork::getInstance()->scheduleForUpdate($entity);
 		return $entity;
 	}
 

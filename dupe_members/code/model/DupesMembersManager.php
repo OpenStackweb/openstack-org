@@ -267,7 +267,7 @@ final class DupesMembersManager {
                 throw new DuperMemberActionRequestVoid();
 
             $dupe_account    = $request->getDupeAccount();
-            $current_account = $request->getPrimaryAccount();
+            $current_account = $member_repository->getById($request->getPrimaryAccount()->getIdentifier());
 
             if($dupe_account->getEmail() != $current_member->getEmail()){
                 throw new AccountActionBelongsToAnotherMemberException;
@@ -275,19 +275,15 @@ final class DupesMembersManager {
 
             $request->doConfirmation($token);
             //merge data
-
+            //we cant change email at this stage, we need to delete the dup account first...
             if(isset($merge_data['gerrit_id'])){
-                $current_account->updateGerritUser($merge_data['gerrit_id'], $merge_data['email'],
+                $current_account->updateGerritUser($merge_data['gerrit_id'], $current_account->getEmail(),
                     ($dupe_account->getGerritId() == $merge_data['gerrit_id'])? $dupe_account->getLastCommitedDate(): $current_account->getLastCommitedDate()
                 );
             }
 
             if(isset($merge_data['first_name']) && isset($merge_data['surname']) ){
                 $current_account->updateCompleteName($merge_data['first_name'], $merge_data['surname'] );
-            }
-
-            if(isset($merge_data['email'])){
-                $current_account->updateEmail($merge_data['email']);
             }
 
             if(isset($merge_data['second_email'])){
@@ -366,18 +362,21 @@ final class DupesMembersManager {
 
             $delete_dupe_member_repository->add($deleted);
 
-
+            if(isset($merge_data['email'])){
+                $query = $query_factory->buildMergeEmail($current_account, $merge_data['email']);
+                $query_registry->addBulkQuery($query, 'post');
+            }
             return $request;
         });
     }
 
-    public function showDupesOnProfile(ICommunityMember $current_member, $show){
+    public function showDupesOnProfile($member_id, $show){
 
         $member_repository = $this->member_repository;
 
-        return $this->tx_manager->transaction(function() use( $current_member, $show, $member_repository) {
+        return $this->tx_manager->transaction(function() use( $member_id, $show, $member_repository) {
 
-            $current_member = $member_repository->getById($current_member->getIdentifier());
+            $current_member = $member_repository->getById($member_id);
             $current_member->showDupesOnProfile($show);
         });
     }
