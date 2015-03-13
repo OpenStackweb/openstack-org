@@ -35,19 +35,28 @@ class OpenStackIdAuthenticator extends Controller
 
             $consumer = Injector::inst()->get('MyOpenIDConsumer');
 
+            $query       = Auth_OpenID::getQuery();
+            $message     = Auth_OpenID_Message::fromPostArgs($query);
+            $nonce       = $message->getArg(Auth_OpenID_OPENID2_NS,'response_nonce');
+            list($timestamp, $salt) = Auth_OpenID_splitNonce($nonce);
+            $claimed_id  = $message->getArg(Auth_OpenID_OPENID2_NS,'claimed_id');
+
+            error_log(sprintf('OpenStackIdAuthenticator : id %s - salt %s - timestamp %s',$claimed_id,$salt,$timestamp));
+
+
             // Complete the authentication process using the server's response.
             $response = $consumer->complete(OpenStackIdCommon::getReturnTo());
 
             if ($response->status == Auth_OpenID_CANCEL) {
-
+                error_log('OpenStackIdAuthenticator : Auth_OpenID_CANCEL');
                 throw new Exception('The verification was cancelled. Please try again.');
 
             } else if ($response->status == Auth_OpenID_FAILURE) {
-
+                error_log('OpenStackIdAuthenticator : Auth_OpenID_FAILURE');
                 throw new Exception("The OpenID authentication failed.");
 
             } else if ($response->status == Auth_OpenID_SUCCESS) {
-
+                error_log('OpenStackIdAuthenticator : Auth_OpenID_SUCCESS');
                 $openid = $response->getDisplayIdentifier();
                 $openid = OpenStackIdCommon::escape($openid);
 

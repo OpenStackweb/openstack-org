@@ -144,7 +144,8 @@ class OpenStackIdSecurityController extends Security
         if ($member) $member->logOut();
 
         $url = OpenStackIdCommon::getRedirectBackUrl();
-
+        if(strpos($url,'/admin/pages') >=0)
+            $url = Director::baseURL();
         $idp= IDP_OPENSTACKID_URL . "/accounts/user/logout";
  $script =       <<<SCRIPT
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -175,9 +176,7 @@ SCRIPT;
      * sessions don't timeout. A common use is in the admin.
      */
     public function ping() {
-        $member = Member::currentUser();
-        if($member) return 1;
-        return $this->logout();
+       return parent::ping();
     }
 
 }
