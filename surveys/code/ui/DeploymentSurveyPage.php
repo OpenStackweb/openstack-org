@@ -222,9 +222,9 @@ class DeploymentSurveyPage_Controller extends Page_Controller
 
                 $survey = $this->GetCurrentSurvey(); // the current survey
 
-                $DesiredStepIndex = array_search($DesiredStep, DeploymentSurvey::$steps); // The index of this step in the list
+                $DesiredStepIndex        = array_search($DesiredStep, DeploymentSurvey::$steps); // The index of this step in the list
                 $HighestStepAllowedIndex = array_search($survey->HighestStepAllowed, DeploymentSurvey::$steps); // The index of the highest allowed step in the list
-
+                if(!$HighestStepAllowedIndex) $HighestStepAllowedIndex = 1;
                 // Set the current step to the new desired step as long as the previous step was completed.
                 if ($DesiredStepIndex !== FALSE && $DesiredStepIndex <= ($HighestStepAllowedIndex)) {
                     $survey->CurrentStep = $DesiredStep;
@@ -271,12 +271,15 @@ class DeploymentSurveyPage_Controller extends Page_Controller
                 // Create a new deployment survey
                 $DeploymentSurvey              = new DeploymentSurvey();
                 $DeploymentSurvey->MemberID    = $CurrentUserID;
-                //check if we have an older survey and prepopulate
+                //check if we have an older survey and pre-populate
                 $oldSurvey = DeploymentSurvey::get()->filter(array('MemberID' => $CurrentUserID))->first();
                 if($oldSurvey){
                     $DeploymentSurvey->copyFrom($oldSurvey);
                 }
-                $DeploymentSurvey->CurrentStep = 'AboutYou';
+
+                $DeploymentSurvey->CurrentStep        = 'AboutYou';
+                $DeploymentSurvey->HighestStepAllowed = 'AboutYou';
+
                 $DeploymentSurvey->UpdateDate  = SS_Datetime::now()->Rfc2822();
                 $DeploymentSurvey->Write();
             }
