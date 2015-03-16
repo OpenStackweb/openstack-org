@@ -45,6 +45,13 @@ class OpenStackIdSecurityController extends Security
             if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
                 return parent::login();
 
+            $member = Member::currentUser();
+
+            if ($member){
+                // user is already logged in
+                return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());
+            }
+
             if (!Director::is_https()) {
                 OpenStackIdCommon::redirectToSSL($_SERVER['REQUEST_URI']);
             }
