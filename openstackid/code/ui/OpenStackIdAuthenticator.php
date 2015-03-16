@@ -33,6 +33,13 @@ class OpenStackIdAuthenticator extends Controller
 
         try {
 
+            $member = Member::currentUser();
+            
+            if ($member){
+                // user is already logged in
+                return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());
+            }
+
             $consumer = Injector::inst()->get('MyOpenIDConsumer');
 
             $query       = Auth_OpenID::getQuery();
