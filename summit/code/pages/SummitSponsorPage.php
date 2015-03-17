@@ -56,6 +56,11 @@ class SummitSponsorPage extends SummitPage {
             $config = GridFieldConfig_RelationEditor::create();
             $config->getComponentByType('GridFieldDetailForm')->setFields($addOnsFields);
             $config->addComponent(new GridFieldSortableRows('Order'));
+            
+            // Remove pagination so that you can sort all add-ons collectively
+            $config->removeComponentsByType('GridFieldPaginator');
+            $config->removeComponentsByType('GridFieldPageCount');
+            
             $gridField = new GridField('SummitAddOn', 'Sponsor Add Ons', $this->SummitAddOns(), $config);
             $fields->addFieldToTab('Root.AddOns',$gridField);
             
