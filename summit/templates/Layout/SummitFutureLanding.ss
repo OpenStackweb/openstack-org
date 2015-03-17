@@ -13,7 +13,7 @@
                 </h1>
                 <div class="summit-location">Tokyo, Japan</div>
                     <div class="summit-date">
-                       October 26 - 30, 2015
+                       October 27 - 30, 2015
                        <br>
                         Get Excited!
                         <span>Stay tuned for details</span>
