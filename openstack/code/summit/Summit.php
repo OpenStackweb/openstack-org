@@ -85,7 +85,7 @@ class Summit extends DataObject {
 		return $SpeakerList;
 	}
 
-	public function CurrentSummitID() {
+	public static function CurrentSummitID() {
 		// todo: make this a property editable in the CMS
 		return 4;
 	}

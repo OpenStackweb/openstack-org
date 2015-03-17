@@ -1040,9 +1040,9 @@ class PresentationEditorPage_Controller extends Page_Controller
 
 			// Set the from email depending on whether they have selected talks
 			if($AcceptedTalks->count() || $AlternateTalks->count()) {
-				$data['SpeakerManagerEmail'] = 'speakersupport@fntech.com';
+				$data['SpeakerManagerEmail'] = 'speakersupport@openstack.org';
 			} else {
-				$data['SpeakerManagerEmail'] = 'events@openstack.org';
+				$data['SpeakerManagerEmail'] = 'summit@openstack.org';
 			}
 
 			$data['Speaker'] = $Speaker;
