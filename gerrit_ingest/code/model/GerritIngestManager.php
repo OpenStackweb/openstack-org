@@ -81,8 +81,8 @@ final class GerritIngestManager {
 
             if($task){
                 $last_index = $task->lastRecordProcessed();
-                list($members,$total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
-                if($task->lastRecordProcessed() == $task->totalRecords()) $task->initialize($total_size);
+                list($members, $total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
+                if($task->lastRecordProcessed() >= $total_size) $task->initialize($total_size);
             }
             else{
                 list($members,$total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
