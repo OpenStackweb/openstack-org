@@ -18,7 +18,7 @@ final class ICLAManager {
 
 	const ICLAGroupTaskName = 'ICLAGroupTask';
 
-	const UpdateLastCommittedDateTaskName = 'UpdateLastCommittedDateTaskName ';
+	const UpdateLastCommittedDateTaskName = 'UpdateLastCommittedDateTask';
 
 	/**
 	 * @var IGerritAPI
@@ -81,21 +81,19 @@ final class ICLAManager {
 
 			$task                = $batch_repository->findByName(ICLAManager::ICLAGroupTaskName);
 			$members_ids_on_icla = $member_repository->getAllGerritIds();
+			// query gerrit service
+			$icla_members_response = $gerrit_api->listAllMembersFromGroup($icla_group_id);
+			$icla_members_count    = count($icla_members_response);
 
 			if(!$task){
-				// query gerrit service
-				$icla_members_response = $gerrit_api->listAllMembersFromGroup($icla_group_id);
-
-				$task = $batch_task_factory->buildBatchTask(ICLAManager::ICLAGroupTaskName, count($icla_members_response));
+				$task = $batch_task_factory->buildBatchTask(ICLAManager::ICLAGroupTaskName, $icla_members_count);
 				$batch_repository->add($task);
-
 				$task->updateResponse(json_encode($icla_members_response));
 			}
-			else if($task->lastRecordProcessed() == $task->totalRecords()){
+			else if($task->lastRecordProcessed() >= $icla_members_count){
 
-				$icla_members_response = $gerrit_api->listAllMembersFromGroup($icla_group_id);
-				if(count($icla_members_response) == count(json_decode($task->lastResponse(), true))) return;//nothing to process..
-				$task->initialize(count($icla_members_response));
+				if($icla_members_count == count(json_decode($task->lastResponse(), true))) return;//nothing to process..
+				$task->initialize($icla_members_count);
 				$task->updateResponse(json_encode($icla_members_response));
 			}
 
@@ -145,7 +143,7 @@ final class ICLAManager {
 			if($task){
 				$last_index = $task->lastRecordProcessed();
 				list($members,$total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
-				if($task->lastRecordProcessed() == $task->totalRecords()) $task->initialize($total_size);
+				if($task->lastRecordProcessed() >= $total_size) $task->initialize($total_size);
 			}
 			else{
 				list($members,$total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
