@@ -254,7 +254,12 @@ class Talk extends DataObject {
     }
 
     function Status() {
-    	$Selections = SummitSelectedTalk::get()->filter('TalkID',$this->ID);
+                
+        $GroupTalkList = SummitSelectedTalkList::get()->filter(array('SummitCategoryID' => $this->SummitCategoryID, 'ListType' => 'Group'))->first();
+
+        $Selections = SummitSelectedTalk::get()->filter(
+            array('TalkID' => $this->ID, 'SummitSelectedTalkListID' => $GroupTalkList->ID)
+        );
 
     	// Error out if a talk has more than one selection
     	if($Selections && $Selections->count() > 1) user_error('There cannot be more than one instance of this talk selected. Talk ID '.$this->ID);
