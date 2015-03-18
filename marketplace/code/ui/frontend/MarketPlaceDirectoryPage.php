@@ -86,22 +86,6 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
 		return $tracking_code;
 	}
 
-
-	function init() 	{
-		//redirect always to HTTP bc review widget
-		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
-			$destURL = str_replace('https:', 'http:', Director::absoluteURL($_SERVER['REQUEST_URI']));
-			// This coupling to SapphireTest is necessary to test the destination URL and to not interfere with tests
-			if(class_exists('SapphireTest', false) && SapphireTest::is_running_test()) {
-				return $destURL;
-			} else {
-				if(!headers_sent()) header("Location: $destURL");
-				die("<h1>Your browser is not accepting header redirects</h1><p>Please <a href=\"$destURL\">click here</a>");
-			}
-		}
-		parent::init();
-	}
-
 	public function getRatingSystemCompanyId(){
 		$page = $this->data();
 		return intval($page->RatingCompanyID);
