@@ -39,7 +39,7 @@ Object::add_extension('Org', 'AutocompleteOrgDecorator');
 
 if(Director::isLive()) Director::forceSSL(array('/^Security/','/^profile/',
 	'/^join/','/^user-survey/','/^summit/','/^news-manage/',
-	'/^vote-vancouver/','/^marketplace/'));
+	'/^vote-vancouver/'));
 
 
 // Email errors and warnings
