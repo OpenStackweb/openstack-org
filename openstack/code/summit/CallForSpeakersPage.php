@@ -17,8 +17,25 @@
  */
 class CallForSpeakersPage extends Page
 {
-    static $db = array();
+    static $db = array(
+        'VideoTerms' => 'HTMLText'
+    );
     static $has_one = array();
+    
+    public function getCMSFields() {
+        $fields = parent::getCMSFields();
+        if($this->ID) {
+            //set current page id
+            $_REQUEST["PageId"] = $this->ID;
+
+            // Optional Sponsor Alert
+            $sponsorAlertField = new HTMLEditorField('VideoTerms','Video Agreement Terms');
+            $fields->addFieldToTab('Root.Main', $sponsorAlertField);
+                        
+        }
+        return $fields;    
+
+    }        
 
 }
 

@@ -14,19 +14,32 @@
 class OnsitePhoneForm extends Form {
  
    function __construct($controller, $name, $speakerHash) {
-   
-
-		$PhoneField = new TextField('PhoneNumber', 'Your Onsite Phone Number in Hong Kong');
-
+       
+    $CompanyField = new TextField('Company','Name of Your Company');
+    $PhoneField = new TextField('PhoneNumber', 'Your Onsite Phone Number in Vancouver');
+    $VideoAgreementField = new OptionsetField(
+        'AgreedToVideo',
+        'Do you agree to the terms above?',
+        array(
+            "0" => "No, I do not wish to be on video.",
+            "1" => "Yes, I agree. It's okay to record my session." 
+        ),
+        1
+    );       
+       
     // Speaker Hash Field
     $SpeakerHashField = new HiddenField('speakerHash', "speakerHash", $speakerHash); 
    
-		$fields = new FieldList(
-		     $PhoneField,
-         $SpeakerHashField
-		);
+        $fields = new FieldList(
+            $VideoAgreementField,
+            new LiteralField('hr','<hr/>'),
+            new LiteralField('step','<strong>Last thing:</strong> To help ensure great communication and coordination, please provide your company and a phone number that we can reach you at while onsite at the Vancouver Summit.'),
+            $CompanyField,
+            $PhoneField,
+            $SpeakerHashField
+        );
 
-      $submitButton = new FormAction('doSavePhoneNumber', 'Save');
+      $submitButton = new FormAction('doSavePhoneNumber', 'Confirm My Speaking Invitation');
 	 
        $actions = new FieldList(
           $submitButton
@@ -52,7 +65,10 @@ class OnsitePhoneForm extends Form {
 
       if(isset($speakerID) &&  is_numeric($speakerID) && isset($data['PhoneNumber']) && $data['PhoneNumber'] != '' && $Speaker = Speaker::get()->byID($speakerID))
       {
-        $Speaker->OnsiteNumber = Convert::raw2sql($data['PhoneNumber']);
+        $Speaker->OnsiteNumber = $data['PhoneNumber'];
+        $Speaker->Company = $data['Company'];
+        $Speaker->AgreedToVideo = $data['AgreedToVideo'];          
+        
         $Speaker->write();
         Controller::curr()->redirect(Controller::curr()->Link().'PhoneNumberSaved/');
       }
