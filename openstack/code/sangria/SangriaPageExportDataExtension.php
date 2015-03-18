@@ -460,7 +460,8 @@ SQL;
                 a.Toolkits, a.OtherToolkits, a.ProgrammingLanguages, a.OtherProgrammingLanguages,
                 a.APIFormats, a.DevelopmentEnvironments, a.OtherDevelopmentEnvironments,
                 a.OperatingSystems, a.OtherOperatingSystems, a.ConfigTools, a.OtherConfigTools,
-                a.StateOfOpenStack, a.DocsPriority, a.InteractionWithOtherClouds
+                a.StateOfOpenStack, a.DocsPriority, a.InteractionWithOtherClouds, a.OtherAPIFormats, a.GuestOperatingSystems,
+                a.OtherGuestOperatingSystems, a.StruggleDevelopmentDeploying, a.OtherDocsPriority
             from DeploymentSurvey s
                 right join AppDevSurvey a on (a.DeploymentSurveyID = s.ID)
                 left outer join Member m on (a.MemberID = m.ID)
@@ -475,7 +476,7 @@ SQL;
 			'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
 			'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'UserGroupMember', 'UserGroupName', 'OkToContact', 'BusinessDrivers',
 			'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'APIFormats', 'DevelopmentEnvironments', 'OtherDevelopmentEnvironments',
-			'OperatingSystems', 'OtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds');
+			'OperatingSystems', 'OtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds', 'OtherAPIFormats', 'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
 		$data = array();
 
 		foreach ($res as $row) {
