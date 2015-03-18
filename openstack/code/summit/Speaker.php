@@ -27,7 +27,9 @@ class Speaker extends DataObject {
         'AskedAboutBureau' => 'Boolean',
         'AviableForBureau' => 'Boolean',
         'FundedTravel' => 'Boolean',
-        'Expertise' => 'Text'
+        'Expertise' => 'Text',
+        'AgreedToVideo' => 'Boolean',
+        'Company' => 'Text'
 	);
 	
 	static $has_one = array(

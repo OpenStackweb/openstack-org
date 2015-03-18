@@ -791,64 +791,109 @@ class PresentationEditorPage_Controller extends Page_Controller
 		return Talk::get()->filter('SummitCategoryID', 29);
 	}
 
-	function SpeakersForSched()
-	{
+    function ScheduleForSched() {
+        
+        
+      $filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/schedule-import.csv';
+      $fp = fopen($filepath, 'w');
 
-		$Speakers = Speaker::get();
+      // Setup file to be UTF8
+      fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+
+      $SummitCategories = DataObject::get('SummitCategory','SummitID = 4');
+
+      foreach ($SummitCategories as $Category) {
+        // Grab the track chairs selections for the category
+                  
+        $SelectedTalkList = SummitSelectedTalkList::get()
+                            ->filter(array('SummitCategoryID' => $Category->ID, 'ListType' => 'Group'))
+                            ->first();
+                
+          
+        // Loop through each selected talk to output the details
+        // Note that a SummitSelectedTalk is really just a cross-link table that also contains the priority the talk was given
+        foreach ($SelectedTalkList->SortedTalks() as $Selection) {
+
+            $Talk = $Selection->Talk();
+
+            if($Talk->Status() == 'accepted') {
+
+                  // Build speaker column
+                  $Speakers = '';
+
+                  foreach ($Talk->Speakers() as $Speaker) {
+                    $Speakers = $Speakers . $Speaker->FirstName . " ";
+                    $Speakers = $Speakers . $Speaker->Surname . ",";
+                  }
+
+                  // Output presentation row
+                  $fields = array($Talk->ID, $Talk->PresentationTitle, $Talk->SummitCategory()->Name, $Talk->Abstract, $Speakers);
+
+                  fputcsv($fp, $fields);
+            }
+        }
+      }
+
+      fclose($fp);
+        
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        header("Content-disposition: attachment; filename=\"schedule-import.csv\"");
+        header("Content-Length: ".filesize($filepath));
+        readfile($filepath);        
+
+        
+    }
+
+    function SpeakersForSched() {
+        
+        $filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/speaker-import.csv';
+
+        $fp = fopen($filepath, 'w');
+
+        // Setup file to be UTF8
+        fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
 
 
-		foreach ($Speakers as $Speaker) {
+        $Speakers = DataObject::get('Speaker');
 
-			$AcceptedTalks = $Speaker->AcceptedTalks();
-			$AlternateTalks = $Speaker->AlternateTalks();
 
-			$PhotoURL = "";
+        foreach ($Speakers as $Speaker) {
 
-			if ($Speaker->PhotoID != 0) $PhotoURL = 'http://www.openstack.org' . $Speaker->Photo()->getURL();
+            $AcceptedTalks = $Speaker->AcceptedTalks();
+            $AlternateTalks = $Speaker->AlternateTalks();
 
-			if ($Speaker->Bio == NULL) {
-				$SpeakerWithBio = Speaker::get()->filter('MemberID', $Speaker->MemberID)->where('BIO IS NOT NULL');
-				if ($SpeakerWithBio->count()) $Speaker->Bio = $SpeakerWithBio->first()->Bio;
-			}
+            $PhotoURL = "";
 
-			if ($AcceptedTalks->count()) {
-				echo '"' . $Speaker->ID . '"|"' . utf8_decode($Speaker->FirstName) . ' ' . utf8_decode($Speaker->Surname) . '"|"' . utf8_decode($Speaker->Title) . '"|"' . $Speaker->Member()->Email . '"|"' . $PhotoURL . '"|"' . htmlspecialchars(utf8_decode($Speaker->Bio)) . '" <br/>';
-			}
+            if($Speaker->PhotoID != 0) $PhotoURL = 'http://www.openstack.org'.$Speaker->Photo()->getURL();
 
-		}
+            if($Speaker->Bio == NULL) {
+              $SpeakerWithBio = DataObject::get('Speaker',"MemberID = ".$Speaker->MemberID." AND BIO IS NOT NULL");
+              if($SpeakerWithBio) $Speaker->Bio = $SpeakerWithBio->first()->Bio;
+            }
 
-	}
+            if($AcceptedTalks->count()) {
+                $fullName = $Speaker->FirstName . ' ' . $Speaker->Surname;
+                $fields = array($fullName, $Speaker->Member()->Email, ' ', ' ', $Speaker->Title, ' ', $Speaker->Bio, ' ', $PhotoURL);
+                fputcsv($fp, $fields);
+            }
 
-	function ScheduleForSched()
-	{
+      }
 
-		$SummitCategories = SummitCategory::get()->filter('SummitID', 3);
+      fclose($fp);
+        
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        header("Content-disposition: attachment; filename=\"speaker-import.csv\"");
+        header("Content-Length: ".filesize($filepath));
+        readfile($filepath);
+        
+    }
 
-		foreach ($SummitCategories as $Category) {
-			// Grab the track chairs selections for the category
-			$SelectedTalkList = SummitSelectedTalkList::get()->filter('SummitCategoryID', $Category->ID)->first();
-			// Loop through each selected talk to output the details
-			// Note that a SummitSelectedTalk is really just a cross-link table that also contains the priority the talk was given
-			foreach ($SelectedTalkList->SortedTalks() as $Selection) {
-				$Talk = $Selection->Talk();
-				echo '"' . $Talk->ID . '"|"' . utf8_decode($Talk->PresentationTitle) . '"|"' . $Talk->SummitCategory()->Name . '"|"' . htmlspecialchars(utf8_decode($Talk->Abstract)) . '"|';
-
-				// Speaker column
-
-				echo '"';
-
-				foreach ($Talk->Speakers() as $Speaker) {
-					echo utf8_decode($Speaker->FirstName);
-					echo " ";
-					echo utf8_decode($Speaker->Surname);
-					echo ',';
-				}
-				echo '" <br/>';
-			}
-		}
-
-	}
-
+    
+    
 	function SpeakersWithUnassignedTalks()
 	{
 		$Speakers = Speaker::get();

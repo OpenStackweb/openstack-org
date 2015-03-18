@@ -9,43 +9,23 @@
 	<% end_with %>
 	
   <div class="row">
-		<div class="col-lg-3 col-md-3 col-sm-3">
-			<p><strong>The OpenStack Summit</strong><br />$MenuTitle.XML</p>
-
-				<div class="newSubNav">
-				    <ul class="overviewNav">
-
-						<% loop Parent %>
-							<li id="$URLSegment"><a href="$Link" title="Go to the $Title.XML page"><span>Overview</span> <i class="fa fa-chevron-right"></i></a></li>
-						<% end_loop %>
-
-				        <% loop Menu(3) %>
-				            <li id="$URLSegment"><a href="$Link" title="Go to the &quot;{$Title}&quot; page"  class="$LinkingMode">$MenuTitle <i class="fa fa-chevron-right"></i></a></li>
-				        <% end_loop %>
-				    </ul>
-				</div>
-			<% with Parent %>
-				<% include SummitVideos %>
-				<% include HeadlineSponsors %>
-			<% end_with %>
-
-
-		</div> 
 
 		<!-- News Feed -->
 
-		<div class="col-lg-9 col-md-9 col-sm-9" id="news-feed">
+                        <h1>Confrim Yourself as a Speaker</h1>
+                        
+        <p><strong>Hello $ConfirmedSpeaker.FirstName $ConfirmedSpeaker.Surname!</strong> Let's confirm you as a speaker at the OpenStack Summit. In order to present at the Summit, you need to agree to be recorded during your presentation.<br/><br/></p>
+        <p></p>
 
-                        <h2>Hello $ConfirmedSpeaker.FirstName $ConfirmedSpeaker.Surname! Thanks for confirming your availability to speak at the Paris Summit.</h2>
+        <p><strong>Please read the terms below and complete the short form.</strong></p>
 
-		<p><strong>ONE MORE STEP: To help ensure great communication and coordination, please provide a phone number that we can reach you at while onsite at the Summit.</strong></p>
+		<div class="termsBox">
+		    $VideoTerms
+		</div>
 
 		$OnsitePhoneForm
                 
 
-		</div>
-
-	</div>
-</div>
+    </div></div>
 
 $GATrackingCode
