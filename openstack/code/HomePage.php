@@ -170,7 +170,7 @@ class HomePage_Controller extends Page_Controller
         $output = '';
 
         foreach ($rss_events as $item) {
-            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details');
+            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
             $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
             $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
             $event_duration = new EventDuration($event_start_date,$event_end_date);
@@ -192,7 +192,8 @@ class HomePage_Controller extends Page_Controller
             }
         } else {
             $data = array('IsEmpty' => 1);
-            $output .= Page::renderWith('EventHolder_event', $data);
+            $event = new EventPage();
+            $output .= $event->renderWith('EventHolder_event', $data);
         }
 
         return $output;

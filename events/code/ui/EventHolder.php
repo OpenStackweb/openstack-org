@@ -89,14 +89,16 @@ class EventHolder_Controller extends Page_Controller {
         $rss_events = $this->RssEvents($num);
         $events_array = new ArrayList();
 
-        if ($filter == 'openstack' || $filter == 'all' || $filter == '') {
-            $pulled_events = EventPage::get()->filter(array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d') ))->sort('EventStartDate','ASC')->limit($num)->toArray();
-            $events_array->merge($pulled_events);
+        $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
+        if ($filter != 'all' && $filter != '') {
+            $filter_array['EventCategory'] = $filter;
         }
+        $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num)->toArray();
+        $events_array->merge($pulled_events);
 
-        if ($filter == 'groups' || $filter == 'all' || $filter == '') {
+        if ($filter == 'Meetups' || $filter == 'all' || $filter == '') {
             foreach ($rss_events as $item) {
-                $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details');
+                $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
                 $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
                 $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
                 $event_duration = new EventDuration($event_start_date,$event_end_date);

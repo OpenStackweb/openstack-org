@@ -23,6 +23,10 @@ final class EventMainInfo {
 	 * @var string
 	 */
 	private $url;
+    /**
+     * @var string
+     */
+    private $category;
 	/**
 	 * @var string
 	 */
@@ -33,9 +37,10 @@ final class EventMainInfo {
 	 * @param string $url
 	 * @param string $label
 	 */
-	public function __construct($title,$url,$label){
+	public function __construct($title,$url,$label,$category){
 		$this->title = $title;
 		$this->url   = $url;
+        $this->category = $category;
 		$this->label = $label;
 	}
 
@@ -46,6 +51,10 @@ final class EventMainInfo {
 	public function getUrl(){
 		return $this->url;
 	}
+
+    public function getCategory(){
+        return $this->category;
+    }
 
 	public function getLabel(){
 		return $this->label;

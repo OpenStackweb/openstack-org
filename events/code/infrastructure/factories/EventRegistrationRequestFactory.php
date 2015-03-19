@@ -47,7 +47,7 @@ final class EventRegistrationRequestFactory
 	 */
 	public function buildEventMainInfo(array $data)
 	{
-		$main_info = new EventMainInfo(trim($data['title']) ,trim($data['url']), 'Details');
+		$main_info = new EventMainInfo(trim($data['title']) ,trim($data['url']), 'Details', trim($data['category']));
 		return $main_info;
 	}
 
@@ -92,6 +92,7 @@ final class EventRegistrationRequestFactory
 		$event->ClassName           = 'EventPage';
 		$event->EventLink           = $request->Url;
 		$event->EventLinkLabel      = $request->Label;
+        $event->EventCategory       = $request->Category;
 		$event->EventStartDate      = $request->StartDate;
 		$event->EventEndDate        = $request->EndDate;
 		$event->EventLocation       = (!empty($request->State))?sprintf("%s, %s, %s",$request->City,$request->State,$request->Country):sprintf("%s, %s",$request->City,$request->Country);

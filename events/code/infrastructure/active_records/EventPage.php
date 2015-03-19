@@ -23,6 +23,7 @@ class EventPage
         'EventEndDate'        => 'Date',
         'EventLink'           => 'Text',
         'EventLinkLabel'      => 'Text',
+        'EventCategory'       => 'Text',
         'EventLocation'       => 'Text',
         'EventSponsor'        => 'Text',
         'EventSponsorLogoUrl' => 'Text',
@@ -108,7 +109,7 @@ class EventPage
      */
     function getMainInfo()
     {
-        return new EventMainInfo($this->Title, $this->EventLink,$this->EventLinkLabel);
+        return new EventMainInfo($this->Title, $this->EventLink,$this->EventLinkLabel, $this->EventCategory);
     }
 
     /**
@@ -136,6 +137,7 @@ class EventPage
         $this->Title = $info->getTitle();
         $this->EventLink = $info->getUrl();
         $this->EventLinkLabel = $info->getLabel();
+        $this->EventCategory = $info->getCategory();
     }
 
     /**

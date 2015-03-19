@@ -23,10 +23,17 @@
                 </div>
             </div>
             <div class="field text " id="url">
-                <label for="$FormName_url" class="left">url</label>
+                <label for="$FormName_url" class="left">Url</label>
 
                 <div class="middleColumn">
                     $Fields.dataFieldByName(url)
+                </div>
+            </div>
+            <div class="field text " id="category">
+                <label for="$FormName_category" class="left">Category</label>
+
+                <div class="middleColumn">
+                    $Fields.dataFieldByName(category)
                 </div>
             </div>
         </div>

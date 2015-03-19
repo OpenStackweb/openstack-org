@@ -24,10 +24,15 @@ final class EventRegistrationRequestForm extends SafeXSSForm {
 		//main info
 		$fields->push(new TextField('title','Title'));
 		$fields->push(new TextField('url','Url'));
+        $categoryField = new DropdownField('category','Category',array('Industry'=>'Industry Events','Meetups'=>'Meetups'));
+        $categoryField->setEmptyString('-- select a category --');
+        $fields->push($categoryField);
 		//location
 		$fields->push(new TextField('city','City'));
 		$fields->push(new TextField('state','State'));
-		$fields->push(new CountryDropdownField('country','Country'));
+        $countryField = new CountryDropdownField('country','Country');
+        $countryField->setEmptyString('-- select a country --');
+		$fields->push($countryField);
 		//duration
 		$fields->push($start_date = new TextField('start_date','Start Date'));
 		$fields->push($end_date   = new TextField('end_date','End Date'));
