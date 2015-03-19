@@ -21,6 +21,9 @@ final class EventForm extends SafeXSSForm {
 		//main info
 		$fields->push(new TextField('title','Title'));
 		$fields->push(new TextField('url','Url'));
+        $categoryField = new DropdownField('category','Category',array('Industry'=>'Industry Events','Meetups'=>'Meetups'));
+        $categoryField->setEmptyString('-- select a category --');
+        $fields->push($categoryField);
 		//location
 		$fields->push(new TextField('location','Location'));
 		//duration

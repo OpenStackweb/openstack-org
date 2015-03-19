@@ -13,7 +13,9 @@
 jQuery(document).ready(function($) {
 
     var form = $("#EventRegistrationRequestForm_EventRegistrationRequestForm");
+    var live_form = $("#EventForm_EventForm");
     var form_validator = null;
+    var live_form_validator = null;
 
     if(form.length > 0){
 
@@ -26,6 +28,7 @@ jQuery(document).ready(function($) {
                 point_of_contact_email   : { required: true , email:true, maxlength: 100 },
                 title      : { required: true , ValidPlainText:true, maxlength: 35 },
                 url        : {required: true, url: true, maxlength: 255},
+                category   : {required: true},
                 city       : {required: true, ValidPlainText: true, maxlength: 255},
                 country    : {required: true},
                 start_date  : {required: true, dpDate: true},
@@ -51,7 +54,16 @@ jQuery(document).ready(function($) {
                 error.insertAfter(element);
             }
         });
+
         // initialize widgets
+
+        $('#EventRegistrationRequestForm_EventRegistrationRequestForm_category',form).chosen({
+            disable_search_threshold: 10,
+            width: '315px'
+        });
+        $('#EventRegistrationRequestForm_EventRegistrationRequestForm_category',form).change(function () {
+            form_validator.resetForm();
+        });
 
         var date_picker_start = $('#EventRegistrationRequestForm_EventRegistrationRequestForm_start_date',form);
         date_picker_start.datepicker({
@@ -73,4 +85,39 @@ jQuery(document).ready(function($) {
             form_validator.resetForm();
         });
     }
+
+
+    if(live_form.length > 0){
+
+        live_form_validator = live_form.validate({
+            onfocusout: false,
+            focusCleanup: true,
+            rules: {
+                title      : { required: true , ValidPlainText:true, maxlength: 35 },
+                url        : {required: true, url: true, maxlength: 255},
+                category   : {required: true},
+                location   : {required: true, ValidPlainText: true, maxlength: 255},
+                start_date : {required: true, dpDate: true},
+                end_date   : {required: true, dpDate: true, dpCompareDate:'ge #EventForm_EventForm_start_date'}
+            },
+            focusInvalid: false,
+            invalidHandler: function(form, validator) {
+                if (!validator.numberOfInvalids())
+                    return;
+                var element = $(validator.errorList[0].element);
+                if(!element.is(":visible")){
+                    element = element.parent();
+                }
+            },
+            errorPlacement: function(error, element) {
+                if(!element.is(":visible")){
+                    element = element.parent();
+                }
+                error.insertAfter(element);
+            }
+        });
+
+    }
+
+
 });

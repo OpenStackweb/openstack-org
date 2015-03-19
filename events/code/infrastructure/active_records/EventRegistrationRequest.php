@@ -40,7 +40,10 @@ final class EventRegistrationRequest
 		'PointOfContactName'  => 'Varchar(100)',
 		'PointOfContactEmail' => 'Varchar(100)',
 		'isRejected'          => 'Boolean',
+        'Category'            => 'Varchar(100)',
 	);
+
+    static $defaults = array('Category' => 'Industry Events');
 
 	static $has_one = array(
 		'Member' => 'Member',
@@ -67,9 +70,10 @@ final class EventRegistrationRequest
 	 */
 	function registerMainInfo(EventMainInfo $info)
 	{
-		$this->Title = $info->getTitle();
-		$this->Url   = $info->getUrl();
-		$this->Label = $info->getLabel();
+		$this->Title    = $info->getTitle();
+		$this->Url      = $info->getUrl();
+        $this->Category = $info->getCategory();
+		$this->Label    = $info->getLabel();
 	}
 
 	/**
@@ -183,7 +187,7 @@ final class EventRegistrationRequest
 	 */
 	function getMainInfo()
 	{
-		return new EventMainInfo($this->Title, $this->Url, $this->Label);
+		return new EventMainInfo($this->Title, $this->Url, $this->Label, $this->Category);
 	}
 
 	/**

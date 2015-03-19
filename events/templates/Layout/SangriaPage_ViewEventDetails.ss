@@ -8,6 +8,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Url</th>
+                <th>Category</th>
                 <th>City</th>
                 <th>State</th>
                 <th>Country</th>
@@ -22,6 +23,7 @@
                 <td class="start-date">$StartDate</td>
                 <td class="end-date">$EndDate</td>
                 <td class="url">$Url</td>
+                <td class="category">$Category</td>
                 <td class="city">$City</td>
                 <td class="state">$State</td>
                 <td class="country">$Country</td>

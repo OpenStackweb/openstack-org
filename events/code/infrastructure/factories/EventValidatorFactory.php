@@ -25,6 +25,7 @@ final class EventValidatorFactory
 		$rules = array(
 			'title'                  => 'required|text|max:35',
 			'url'                    => 'required|url',
+            'category'               => 'required|text',
 			'city'                   => 'required|text',
 			'state'                  => 'sometimes|text',
 			'country'                => 'required|text',
@@ -40,6 +41,8 @@ final class EventValidatorFactory
 			'title.max'                       => ':attribute should have less than 35 chars.',
 			'url.required'                    => ':attribute is required',
 			'url.url'                         => ':attribute should be valid url.',
+            'category.required'               => ':attribute is required',
+            'category.text'                   => ':attribute should be valid text.',
 			'city.required'                   => ':attribute is required',
 			'city.text'                       => ':attribute should be valid text.',
 			'state.text'                      => ':attribute should be valid text.',
@@ -68,6 +71,7 @@ final class EventValidatorFactory
         $rules = array(
             'title'                  => 'required|text|max:35',
             'url'                    => 'required|url',
+            'category'               => 'required|text',
             'location'               => 'required|text',
             'start_date'             => 'required|date',
             'end_date'               => 'required|date|after:start_date',
@@ -79,6 +83,8 @@ final class EventValidatorFactory
             'title.max'                       => ':attribute should have less than 35 chars.',
             'url.required'                    => ':attribute is required',
             'url.url'                         => ':attribute should be valid url.',
+            'category.required'               => ':attribute is required',
+            'category.text'                   => ':attribute should be valid text.',
             'location.required'               => ':attribute is required',
             'location.text'                   => ':attribute should be valid text.',
             'start_date.required'             => ':attribute is required',

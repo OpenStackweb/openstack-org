@@ -10,6 +10,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Url</th>
+                <th>Category</th>
                 <th>Location</th>
                 <th>Sponsor</th>
                 <th>Is Summit</th>
@@ -23,6 +24,7 @@
                 <td class="start-date">$EventStartDate</td>
                 <td class="start-date">$EventEndDate</td>
                 <td class="url"><a href="$EventLink">Link</a></td>
+                <td class="category">$EventCategory</td>
                 <td class="location">$EventLocation</td>
                 <td class="sponsor">$EventSponsor</td>
                 <td class="summit"><input class="summit_check" event_id="{$ID}" type="checkbox" <% if IsSummit == 1 %> checked <% end_if %> /></td>

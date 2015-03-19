@@ -19,8 +19,8 @@
             <div style="float:left; margin:28px 0 0 50px">
                 <select id="upcoming_events_filter">
                     <option value="all">All</option>
-                    <option value="openstack">OpenStack</option>
-                    <option value="groups">Groups</option>
+                    <option value="Industry">Industry Events</option>
+                    <option value="Meetups">Meetups</option>
                 </select>
             </div>
             <div style="clear:both"></div>
