@@ -27,6 +27,8 @@
                     <li><a href="{$Link}details-and-updates/"><i class="fa fa-plane"></i>Plan Travel Dates</a>
                     </li>
                     <hr>
+                    <li><a href="{$Link}open-cloud-ecosystem/"><i class="fa fa-users"></i>Open Cloud EcoSystem</a>
+                    </li>
                     <li><a href="{$Link}sponsors/"><i class="fa fa-tag"></i>Become a Sponsor</a>
                     </li>
                     <li><a href="{$Link}speakers/"><i class="fa fa-comment"></i>Vote For Speakers</a>
