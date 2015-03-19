@@ -146,10 +146,10 @@ class PublicCloudsDirectoryPage_Controller extends CloudsDirectoryPage_Controlle
 			$slug                = Convert::raw2sql($params["Slug"]);
 			$query               = new QueryObject();
 			$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
-			$public_cloud       = $this->cloud_repository->getBy($query);
-			if(!$public_cloud) throw new NotFoundEntityException('','');
-			if($public_cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
-			$render             = new PublicCloudSapphireRender($public_cloud);
+			$this->current_cloud = $this->cloud_repository->getBy($query);
+			if(!$this->current_cloud) throw new NotFoundEntityException('','');
+			if($this->current_cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
+			$render             = new PublicCloudSapphireRender($this->current_cloud);
 			return $render->draw();
 		}
 		catch (Exception $ex) {

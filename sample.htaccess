@@ -68,3 +68,36 @@ php_flag display_errors off
 php_flag html_errors off
 php_flag log_errors off
 php_value error_reporting 30711
+
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/gif "access plus 7 day"
+  ExpiresByType image/png "access plus 7 day"
+  ExpiresByType image/jpg "access plus 7 day"
+  ExpiresByType image/jpeg "access plus 7 day"
+  ExpiresByType image/ico "access plus 7 day"
+  ExpiresByType text/css "access plus 1 minutes"
+  ExpiresByType text/javascript "access plus 7 day"
+  ExpiresByType application/x-javascript "access plus 7 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header unset X-Powered-By
+</IfModule>
+
+
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  # Don't compress images, movies or zip files
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+  SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
+  SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|swf|mp?g)$ no-gzip dont-vary
+  <IfModule mod_headers.c>
+    # properly handle requests coming from behind proxies
+    Header append Vary User-Agent
+  </IfModule>
+</IfModule>

@@ -1,0 +1,20 @@
+---
+Name: controllerpolicy
+---
+Injector:
+  RequestProcessor:
+    properties:
+      filters:
+        - '%$ControllerPolicyRequestFilter'
+ControllerPolicyApplicator:
+  dependencies:
+    RequestFilter: '%$ControllerPolicyRequestFilter'
+Controller:
+  extensions:
+    - ControllerPolicyApplicator
+Page:
+  extensions:
+    - HTTPCacheableDataObject
+CompanyService:
+  extensions:
+    - HTTPCacheableDataObject

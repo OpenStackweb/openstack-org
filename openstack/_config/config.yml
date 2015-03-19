@@ -20,3 +20,12 @@ SiteTree:
 Member:
   extensions:
     - PresentationMemberExtension  
+
+Injector:
+  GeneralCachingPolicy:
+    class: CustomHTTPCachingPolicy
+    properties:
+      cacheAge: 900
+Page_Controller:
+  dependencies:
+    Policies: '%$GeneralCachingPolicy'

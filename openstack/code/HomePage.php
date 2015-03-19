@@ -333,4 +333,5 @@ class HomePage_Controller extends Page_Controller
         $date = $this->EventDate;
         return (isset($date)) ? floor((strtotime($date) - time()) / 60 / 60 / 24) : FALSE;
     }
+
 }
