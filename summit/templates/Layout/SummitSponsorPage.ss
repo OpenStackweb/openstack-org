@@ -11,7 +11,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-push-2 sponsor-intro">
-				<h1>Interested being a Vancouver Summit Sponsor?</h1>
+				<h1>Interested in being a Vancouver Summit Sponsor?</h1>
 				<p>
 					Having a presence at the OpenStack Summit is a great way to get your company in front of the OpenStack community. There are five available levels of sponsorship: Headline, Premier, Spotlight, Event and Startup and a number of add-on opportunities.  You can read about the various options in the Sponsorship Prospectus.
 				</p>
