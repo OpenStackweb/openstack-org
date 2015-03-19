@@ -856,11 +856,11 @@ class PresentationEditorPage_Controller extends Page_Controller
         fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
 
 
-        $Speakers = DataObject::get('Speaker');
+        $Speakers = Speaker::get();
 
 
         foreach ($Speakers as $Speaker) {
-
+            
             $AcceptedTalks = $Speaker->AcceptedTalks();
             $AlternateTalks = $Speaker->AlternateTalks();
 
@@ -869,8 +869,12 @@ class PresentationEditorPage_Controller extends Page_Controller
             if($Speaker->PhotoID != 0) $PhotoURL = 'http://www.openstack.org'.$Speaker->Photo()->getURL();
 
             if($Speaker->Bio == NULL) {
-              $SpeakerWithBio = DataObject::get('Speaker',"MemberID = ".$Speaker->MemberID." AND BIO IS NOT NULL");
-              if($SpeakerWithBio) $Speaker->Bio = $SpeakerWithBio->first()->Bio;
+              //$SpeakerWithBio = DataObject::get('Speaker',"MemberID = ".$Speaker->MemberID." AND BIO IS NOT NULL");
+              $SpeakerWithBio = Speaker::get()->filter(array(
+                  'MemberID' => $Speaker->MemberID,
+                  'Bio:not' => NULL
+              ))->first();
+              if($SpeakerWithBio && $SpeakerWithBio->Bio) $Speaker->Bio = $SpeakerWithBio->Bio;
             }
 
             if($AcceptedTalks->count()) {
@@ -1031,6 +1035,9 @@ class PresentationEditorPage_Controller extends Page_Controller
 
 	function SendSpeakerEmails()
 	{
+        
+        $sendEmail = FALSE;
+		if(isset($getVars["send"])) $sendEmail = intval($getVars["send"]);        
 
 		echo '<!doctype html><head><meta charset="utf-8"></head><body>';
 
@@ -1058,30 +1065,6 @@ class PresentationEditorPage_Controller extends Page_Controller
 			} elseif (!$AcceptedTalks->count() && $AlternateTalks->count()) {
 				$data['RegistrationCode'] = $this->getRegistrationCode($Speaker->MemberID,"Alternate");
 			}
-
-			// Assign the speaker to speaker manager
-
-			/* $data['SpeakerManagerName'] = '';
-
-			// These are the SummitCategoryIDs that Beth will be managing
-			$TamaraTracks = array(12,18,24,14);
-
-			if($AcceptedTalks) {
-			  foreach ($AcceptedTalks as $Talk) {
-				if (in_array($Talk->SummitCategoryID, $TamaraTracks)) {
-				  $data['SpeakerManagerName'] = 'Beth Nowak';
-				  $data['SpeakerManagerEmail'] = 'beth@fntech.com';
-				  $data['SpeakerManagerPhone'] = '415.994.8059';
-				}
-			  }
-
-			  // If the speaker hasn't been assigned to Tamara, assign to Beth
-			  if($data['SpeakerManagerName'] == '') {
-				  $data['SpeakerManagerName'] = 'Tamara Pennington';
-				  $data['SpeakerManagerEmail'] = 'tamara@fntech.com';
-				  $data['SpeakerManagerPhone'] = '323.691.8222';
-			  }
-			} */
 
 			// Set the from email depending on whether they have selected talks
 			if($AcceptedTalks->count() || $AlternateTalks->count()) {
@@ -1114,9 +1097,13 @@ class PresentationEditorPage_Controller extends Page_Controller
 					$email->setTemplate("SelectionAnnouncementEmail");
 					$email->populateTemplate($data);
 
-					// $email->send();
-					echo $email->debug();
-					echo 'Speaker '.$Speaker->FirstName.' '.$Speaker->Surname.' ('.$Speaker->ID.') was emailed successfully. <br/>';
+                    if($sendEmail == 1) {
+                        $email->send();
+                    } else {
+                        echo $email->debug();   
+                    }
+					
+                    echo 'Speaker '.$Speaker->FirstName.' '.$Speaker->Surname.' ('.$Speaker->ID.') was emailed successfully. <br/>';
 
 				}
 			}
