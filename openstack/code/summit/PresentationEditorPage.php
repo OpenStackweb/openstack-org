@@ -477,15 +477,22 @@ class PresentationEditorPage_Controller extends Page_Controller
 		$config->set('HTML.AllowedAttributes', 'a.href,img.src');
 		$config->set('HTML.Allowed', 'br,b,strong,li,ol,ul,a,p,img');
 		$purifier = new HTMLPurifier($config);
-
-		$Talks = Talk::get();
-
+        
+		$Talks = Talk::get()->filter('SummitID',4);
+        
+        echo 'Talk count: ' . $Talks->count() . '<br/>';
+        
 		foreach ($Talks as $Talk) {
+            echo 'Cleaning talk ' . $Talk->PresentationTitle . '<br/>';
 			if ($Talk->Abstract) {
 				$Talk->Abstract = $purifier->purify($Talk->Abstract);
+                $Talk->BeenEmailed = TRUE;
 				$Talk->write();
 			}
 		}
+        
+        echo 'Done cleaning talks.';
+        
 	}
 
 	function CleanSpeakers()
