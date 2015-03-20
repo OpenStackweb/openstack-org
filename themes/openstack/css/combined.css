@@ -1241,7 +1241,7 @@ a.gs-title, a.gs-title b {
 
 .intro-message {
   position: relative;
-  padding-top: 110px;
+  padding-top: 80px;
   padding-bottom: 110px; }
 
 @media (max-width: 1199px) {
@@ -1294,17 +1294,17 @@ a.gs-title, a.gs-title b {
   padding-bottom: 50px; }
 
 a.promo-btn {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 300;
-  background: transparent;
-  border: 2px solid #fff;
-  border-radius: 4px;
-  padding: 20px 35px;
-  margin: 0 auto;
-  text-align: center;
-  min-width: 370px;
-  display: inline-block; }
+    color: #fff;
+    font-size: 22px;
+    font-weight: 300;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin: 0 auto;
+    text-align: center;
+    min-width: 300px;
+    display: inline-block; }
 
 a.promo-btn:hover {
   text-decoration: none;
