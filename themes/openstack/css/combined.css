@@ -1251,7 +1251,7 @@ a.gs-title, a.gs-title b {
 .intro-message > h1 {
   margin: 0;
   font-size: 3em;
-  font-weight: 300;
+  font-weight: 400;
   text-align: center;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   width: 100%; }
@@ -1324,7 +1324,7 @@ a.promo-btn i.fa-chevron-right {
 p.promo-dates {
   display: inline-block;
   margin-top: 10px;
-  font-weight: 400; }
+  font-weight: 600; }
 
 /*End Hero*/
 /*Overview Section*/
