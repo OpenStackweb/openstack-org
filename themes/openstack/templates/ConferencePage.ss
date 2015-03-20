@@ -29,10 +29,10 @@
     <!-- OpenStack Specific CSS -->
     <% if BootstrapConverted %>
     <% else %>
-      <link href="/themes/openstack/css/main.css" rel="stylesheet">
+      <% require css("themes/openstack/css/main.css") %>
     <% end_if %>
-    <link href="/themes/openstack/css/combined.css" rel="stylesheet">
-    <link rel="stylesheet" href="/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print">
+    <% require css("themes/openstack/css/combined.css") %>
+    <% require css("themes/openstack/css/dropdown.css","screen, projection, print") %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

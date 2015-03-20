@@ -19,13 +19,12 @@
 
     <!-- Framework CSS -->
 
-    <link rel="stylesheet" href="/themes/openstack/css/bootstrap.min.css" type="text/css" media="screen, projection">
-
+    <% require css("themes/openstack/css/bootstrap.min.css","screen, projection") %>
 
     <!-- OpenStack Specific CSS -->
 
-    <link href="/themes/openstack/css/combined.css" rel="stylesheet">
-    <link rel="stylesheet" href="/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print">
+    <% require css("themes/openstack/css/combined.css") %>
+    <% require css("themes/openstack/css/dropdown.css","screen, projection, print") %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

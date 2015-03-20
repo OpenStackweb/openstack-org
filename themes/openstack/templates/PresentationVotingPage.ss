@@ -12,14 +12,12 @@
     <title>Vote For Vancouver Summit Presentations | OpenStack Open Source Cloud Computing Software</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/themes/openstack/css/bootstrap3.css" rel="stylesheet">
-
+    <% require css("themes/openstack/css/bootstrap3.css") %>
     <!-- Custom CSS -->
-    <link href="/themes/openstack/css/voting-app.css" rel="stylesheet">
-
+    <% require css("themes/openstack/css/voting-app.css") %>
 
     <!-- Fonts -->
-    <link href="/themes/openstack/css/font-awesome.min.css" rel="stylesheet">
+    <% require css("themes/openstack/css/font-awesome.min.css") %>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

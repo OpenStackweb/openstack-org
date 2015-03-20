@@ -15,6 +15,3 @@ Controller:
 Page:
   extensions:
     - HTTPCacheableDataObject
-CompanyService:
-  extensions:
-    - HTTPCacheableDataObject

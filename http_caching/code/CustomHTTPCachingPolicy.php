@@ -46,7 +46,7 @@ class CustomHTTPCachingPolicy extends HTTP implements ControllerPolicy
         // Allow overriding max-age from the object hooked up to the policed controller.
         if ($originator->hasMethod('getCacheAge')) {
             $extendedCacheAge = $originator->getCacheAge($cacheAge);
-            if ($extendedCacheAge !== null && $extendedCacheAge > 0) $cacheAge = $extendedCacheAge;
+            if ($extendedCacheAge !== null) $cacheAge = $extendedCacheAge;
         }
 
         // Same for vary, but probably less useful.
@@ -94,7 +94,7 @@ class CustomHTTPCachingPolicy extends HTTP implements ControllerPolicy
 
         // custom calculation os ETag
         if ($originator->hasMethod('getEtag')) {
-            $extendedEtag = $originator->getEtag($etag);
+            $extendedEtag = $originator->getEtag($response->getBody());
             if ($extendedEtag !== null) {
                 $etag = $extendedEtag;
                 $responseHeaders["ETag"] = $etag;
@@ -123,8 +123,7 @@ class CustomHTTPCachingPolicy extends HTTP implements ControllerPolicy
                 $response->setBody('');
             }
         }
-        else
-        if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag) {
+        else if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag) {
             ob_clean();
             $response->setStatusCode(304);
             $response->setBody('');
