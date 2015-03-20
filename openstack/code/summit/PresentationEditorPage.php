@@ -1043,15 +1043,18 @@ class PresentationEditorPage_Controller extends Page_Controller
 	function SendSpeakerEmails()
 	{
         
+		$getVars = $this->request->getVars();        
         $sendEmail = FALSE;
 		if(isset($getVars["send"])) $sendEmail = intval($getVars["send"]);        
 
 		echo '<!doctype html><head><meta charset="utf-8"></head><body>';
 
-		$getVars = $this->request->getVars();
-
-		if(!$getVars || !$getVars['limit']) user_error('The parameter limit is expected.');
-		$limit = Convert::raw2sql($getVars['limit']);
+		if(!$getVars || !isset($getVars['limit'])) {
+            user_error('The parameter limit is expected.');
+            return;
+        }
+            
+        $limit = Convert::raw2sql($getVars['limit']);
 
 		$Speakers = Speaker::get()->filter(array('Confirmed'=>false,'BeenEmailed'=>false))->limit($limit);
 
@@ -1106,11 +1109,13 @@ class PresentationEditorPage_Controller extends Page_Controller
 
                     if($sendEmail == 1) {
                         $email->send();
+                        echo 'Speaker '.$Speaker->FirstName.' '.$Speaker->Surname.' ('.$Speaker->ID.') was emailed successfully. <br/>';
                     } else {
-                        echo $email->debug();   
+                        echo $email->debug();
+                        echo 'Speaker '.$Speaker->FirstName.' '.$Speaker->Surname.' ('.$Speaker->ID.') was tested successfully. <br/>';
                     }
 					
-                    echo 'Speaker '.$Speaker->FirstName.' '.$Speaker->Surname.' ('.$Speaker->ID.') was emailed successfully. <br/>';
+                    
 
 				}
 			}

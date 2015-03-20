@@ -38,9 +38,19 @@
 <%-- Accepted talks --%>
 <% if AcceptedTalks %>
 
-<p><strong>IMPORTANT: PLEASE REGISTER FOR THE SUMMIT WITH THE CODE $RegistrationCode.</strong><br/>See below for instructions.</p>
+<p>Congratulations! Your <% if AcceptedTalksCount == 1 %>submission has<% else %>submissions have<% end_if %> been accepted for inclusion in the May OpenStack Summit in Vancouver.</p>
 
-<p>Congratulations! Your <% if AcceptedTalksCount == 1 %>submission has<% else %>submissions have<% end_if %> been accepted for inclusion in the May OpenStack Summit in Vancouver.</p> 
+<p><strong>PLEASE FOLLOW BOTH STEPS BELOW:</strong></p>
+
+<p><strong>STEP ONE:</strong> Register for the summit</p>
+
+    <p><strong>FREE REGISTRATION CODE (IT'S UNIQUE &amp; SINGLE-USE): <span style="color: #8A0006;">$RegistrationCode</span></strong></p>
+
+<p>If you have not already registered for the Summit, please register at <a href=" https://openstacksummit2015vancouver.eventbrite.com/"> https://openstacksummit2015vancouver.eventbrite.com/</a> by using the complimentary Full Access level registration code provided above. In order to register for FREE you must use the code no later than May 13, 2015.</p>
+  
+<p>In Eventbrite there is a blue "Enter Promotional Code" option just above the Order Now button, where you may redeem the code for a free registration pass. Please reference this image for clarity: <a href=" https://www.dropbox.com/s/yoenlan5erf04bk/HowToEnterRegCodeImageVancouver.png?dl=0"> https://www.dropbox.com/s/yoenlan5erf04bk/HowToEnterRegCodeImageVancouver.png?dl=0</a></p>
+
+<p><strong>STEP TWO:</strong> CONFIRM YOURSELF AS A SPEAKER</p>
 
 <p><strong>Please click this link to confirm your attendance as a speaker: <a href="https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key={$ConfirmationHash}" />https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key={$ConfirmationHash}</a></strong></p>
 
@@ -83,13 +93,7 @@
  
 <p><strong><i>If for any reason you are unable to attend the Summit or cannot attend for the entire duration (Monday - Thursday) please reply to this email immediately to inform us.</i></strong></p>
 
-<p>In the coming days we will be in touch again with your session day/time and presentation details. Going forward your main contact will be {$SpeakerManagerName}. She can be reached by emailing speakersupport@fntech.com. They will be able to help you with all your conference needs.</p>
-
-<p>If you have not already registered for the Summit, please register at <a href=" https://openstacksummit2015vancouver.eventbrite.com/"> https://openstacksummit2015vancouver.eventbrite.com/</a> by using the complimentary Full Access level registration code provided below. In order to register for FREE you must use the below code no later than October 3, 2014.</p>
- 
-<p><strong>FREE REGISTRATION CODE (IT'S UNIQUE &amp; SINGLE-USE): $RegistrationCode</strong></p>
- 
-<p>In Eventbrite there is a blue "Enter Promotional Code" option just above the Order Now button, where you may redeem the code for a free registration pass. Please reference this image for clarity: <a href="https://www.dropbox.com/s/kfs3hijyq1g9aq5/HowToEnterRegCodeImage.png">https://www.dropbox.com/s/kfs3hijyq1g9aq5/HowToEnterRegCodeImage.png</a></p>
+<p>You can view your session date/time here: <a href="https://openstacksummitmay2015vancouver.sched.org">https://openstacksummitmay2015vancouver.sched.org</a><br/> The friendly OpenStack Summit speaker managers can be reached by emailing <a href="mailto:speakersupport@openstack.org">speakersupport@openstack.org</a>. They will be able to help you with all your conference needs.</p>
 
 <% end_if %>
 <%-- end accepted talks --%>
@@ -99,11 +103,21 @@
 <% if AlternateTalks %>
 	<% if AcceptedTalks %><% else %>
         
-        <p><strong>IMPORTANT: PLEASE REGISTER FOR THE SUMMIT WITH THE CODE $RegistrationCode.</strong><br/>See below for instructions.</p>
+		<p>Thank you for submitting a speaking proposal for the May OpenStack Summit in Vancouver. We received an incredible 1,100+ submissions for the Vancouver Summit, and had to make some tough decisions for the schedule. <% if AlternateTalksCount == 1 %>Your presentation has<% else %>Some of your presentations have<% end_if %> been approved as an Alternate Session for potential inclusion in the OpenStack Summit in Vancouver. If, for various reasons, other chosen speakers cannot attend the Summit and a slot becomes available on the agenda for your session to be included - then we will reach out to you at that time. Please be patient.</p>
+		
+		<p><strong>PLEASE FOLLOW BOTH STEPS BELOW:</strong></p>
+		
+		<p><strong>STEP ONE:</strong> Register for the summit</p>
+		
+		<p><strong>FREE REGISTRATION CODE: $RegistrationCode</strong></p>		
+		
+		<p>If you have not already registered for the Summit, please register at <a href="http://openstacksummitmay2014.eventbrite.co.uk/">http://openstacksummitmay2014.eventbrite.co.uk/</a> by using the complimentary Full Access level registration code above. In order to register for FREE you must use the code no later than May 13, 2015.</p>
+		 		 
+		<p>In Eventbrite there is a blue "Enter Promotional Code" option just above the Order Now button, where you may redeem the code for a free registration pass. Please reference this image for clarity: <a href="  https://www.dropbox.com/s/yoenlan5erf04bk/HowToEnterRegCodeImageVancouver.png?dl=0">  https://www.dropbox.com/s/yoenlan5erf04bk/HowToEnterRegCodeImageVancouver.png?dl=0</a></p>
+		
+		<p><strong>STEP TWO:</strong> CONFIRM YOURSELF AS A SPEAKER</p>
 
-		<p>Thank you for submitting a speaking proposal for the May OpenStack Summit in Vancouver. We received an incredible 1,100+ submissions for the Vancouver Summit, and had to make some tough decisions for the schedule. <% if AlternateTalksCount == 1 %>Your presentation has<% else %>Some of your presentations have<% end_if %> been approved as an Alternate Session for potential inclusion in the OpenStack Summit in Vancouver. If, for various reasons, other chosen speakers cannot attend the Summit and a slot becomes available on the agenda for your session to be included - then we will reach out to you at that time. Please be patient.</p> 
-
-		<p><strong>Meanwhile, please click this link to confirm your attendance as a speaker: <a href="https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key={$ConfirmationHash}" />https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key={$ConfirmationHash}</a></strong></p>
+		<p><strong>Next, please click this link to confirm your attendance as a speaker: <a href="https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key={$ConfirmationHash}" />https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key={$ConfirmationHash}</a></strong></p>
 
 		<p><% if AlternateTalksCount == 1 %>Selected As An Alternate:<% else %>Selected As Alternates:<% end_if %></p>
 
@@ -130,12 +144,6 @@
 		<% end_if %>
  
 		<p><strong><i>If for any reason you are unable to attend the Summit or cannot attend for the entire duration (Monday - Thursday) please reply to this email immediately to inform us.</i></strong></p>
-
-		<p>If you have not already registered for the Summit, please register at <a href="http://openstacksummitmay2014.eventbrite.co.uk/">http://openstacksummitmay2014.eventbrite.co.uk/</a> by using the complimentary Full Access level registration code provided below. In order to register for FREE you must use the below code no later than October 3, 2014.</p>
-		 
-		<p><strong>FREE REGISTRATION CODE: $RegistrationCode</strong></p>
-		 
-		<p>In Eventbrite there is a blue "Enter Promotional Code" option just above the Order Now button, where you may redeem the code for a free registration pass. Please reference this image for clarity: <a href="https://www.dropbox.com/s/kfs3hijyq1g9aq5/HowToEnterRegCodeImage.png">https://www.dropbox.com/s/kfs3hijyq1g9aq5/HowToEnterRegCodeImage.png</a></p>
 
 
 	<% end_if %>
