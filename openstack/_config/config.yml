@@ -25,7 +25,7 @@ Injector:
   GeneralCachingPolicy:
     class: CustomHTTPCachingPolicy
     properties:
-      cacheAge: 900
+      cacheAge: 10800
 Page_Controller:
   dependencies:
     Policies: '%$GeneralCachingPolicy'

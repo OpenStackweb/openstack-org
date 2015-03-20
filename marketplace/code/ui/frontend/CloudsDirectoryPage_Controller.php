@@ -222,20 +222,6 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 		return new ArrayList($this->manager->getActives());
 	}
 
-	public function getEtag(){
-		$etag = false;
-		if(!is_null($this->current_cloud))
-			return $this->current_cloud->getEtag();
-		$res  = null;
-		foreach($this->getClouds() as $cloud){
-			$res .= $cloud->getEtag();
-		}
-		if(!is_null($res)){
-			$etag = md5($res);
-		}
-		return $etag;
-	}
-
 	public function getDataCenterLocationsJson(){
 		$locations = array();
 		$query = new QueryObject;

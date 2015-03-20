@@ -18,7 +18,7 @@
 class HTTPCacheableDataObject extends DataExtension {
 
     private static $db = array(
-        'MaxAge' => 'Int'
+        'MaxAge' => 'Varchar(10)'
     );
 
     /**
@@ -26,7 +26,8 @@ class HTTPCacheableDataObject extends DataExtension {
      */
     public function getCacheAge($cacheAge) {
         if (!is_null($this->owner->MaxAge)) {
-            return (int)($this->owner->MaxAge*60);
+            $max = intval($this->owner->MaxAge);
+            return (int)($max*60);
         }
     }
 

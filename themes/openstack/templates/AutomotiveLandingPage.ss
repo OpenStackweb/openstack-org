@@ -14,11 +14,9 @@
     <title>OpenStack | Enterprise Solutions | Top 10 Auto Manufacturer</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/themes/openstack/css/landing-pages/auto/bootstrap.min.css" rel="stylesheet">
-
+    <% require css("themes/openstack/css/landing-pages/auto/bootstrap.min.css") %>
     <!-- Custom CSS -->
-    <link href="/themes/openstack/css/landing-pages/auto/styles.css" rel="stylesheet">
-
+    <% require css("themes/openstack/css/landing-pages/auto/styles.css") %>
     <!-- Fonts -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>

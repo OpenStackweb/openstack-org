@@ -69,21 +69,31 @@ php_flag html_errors off
 php_flag log_errors off
 php_value error_reporting 30711
 
-
+### http://httpd.apache.org/docs/2.2/mod/mod_expires.html
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/gif "access plus 7 day"
-  ExpiresByType image/png "access plus 7 day"
-  ExpiresByType image/jpg "access plus 7 day"
-  ExpiresByType image/jpeg "access plus 7 day"
-  ExpiresByType image/ico "access plus 7 day"
-  ExpiresByType text/css "access plus 1 minutes"
-  ExpiresByType text/javascript "access plus 7 day"
-  ExpiresByType application/x-javascript "access plus 7 day"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/ico "access plus 1 year"
+  ExpiresByType text/css "access plus 24 hours"
+  ExpiresByType text/javascript "access plus 24 hours"
+  ExpiresByType application/x-javascript "access plus 24 hours"
+  ExpiresByType application/pdf "access plus 1 year"
+  ExpiresByType application/x-shockwave-flash "access plus 1 year"
+  ExpiresByType audio/x-wav "access plus 1 year"
+  ExpiresByType audio/mpeg "access plus 1 year"
+  ExpiresByType video/mpeg "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/quicktime "access plus 1 year"
+  ExpiresByType video/x-ms-wmv "access plus 1 year"
 </IfModule>
 
+## dont send server info
 <IfModule mod_headers.c>
-  Header unset X-Powered-By
+    Header unset Server
+    Header unset X-Powered-By
 </IfModule>
 
 
@@ -93,9 +103,14 @@ php_value error_reporting 30711
   BrowserMatch ^Mozilla/4\.0[678] no-gzip
   BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
   # Don't compress images, movies or zip files
-  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
-  SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
-  SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|swf|mp?g)$ no-gzip dont-vary
+  ## images
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|svg|ico|bmp|pcx|tif|alpha|als|cel|icon|ps)$ no-gzip dont-vary
+  ## zip
+  SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar|arc|tar|dmg|jar|ace|arj|cab)$ no-gzip dont-vary
+  ## movies
+  SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|swf|mp?g|mpeg|m1v|mp2|mpa|mpe|ifo|vob|wmv|asf|m2v|qt|ogv|webm)$ no-gzip dont-vary
+  ## docs
+  SetEnvIfNoCase Request_URI \.(?:pdf|doc|docx|xls|xlsx|csv|key|ppt|pptx|ai|txt|rtf|pages|pps)$ no-gzip dont-vary
   <IfModule mod_headers.c>
     # properly handle requests coming from behind proxies
     Header append Vary User-Agent
