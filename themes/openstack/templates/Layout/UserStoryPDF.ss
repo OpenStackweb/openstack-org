@@ -1,7 +1,7 @@
 <% require themedCSS(case-studies) %>
 
 			<div class="span-12">
-				<img class="logo" src="{$BASEURL}/themes/openstack/images/open-stack-cloud-computing-logo-2.png" width="167" height="56"/>
+				<img class="logo" src="{$BASEURL}/private-assets/themes/openstack/images/open-stack-cloud-computing-logo-2.png" width="167" height="56"/>
 				<h1>$CaseStudyTitle</h1>
 				$CaseStudyBody
 				<% if ObjectivesTitle %>

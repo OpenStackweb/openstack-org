@@ -689,7 +689,7 @@ ul.user-project-list li {
 
 .user-links li {
   padding-left: 20px;
-  background: url('/themes/openstack/images/link.png') no-repeat left center;
+  background: url('/private-assets/themes/openstack/images/link.png') no-repeat left center;
   margin-left: -20px;
   list-style: none; }
 
