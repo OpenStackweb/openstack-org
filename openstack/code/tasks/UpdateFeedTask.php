@@ -14,11 +14,9 @@
 /**
  * Class UpdateFeedTask
  */
-final class UpdateFeedTask extends CliController {
+final class UpdateFeedTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		try{
 			$home = DataObject::get_one('HomePage');

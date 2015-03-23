@@ -79,32 +79,31 @@ final class ICLAManager {
 
 		return $this->tx_manager->transaction(function() use($icla_group_id, $batch_size, $member_repository, $batch_repository, $gerrit_api, $batch_task_factory) {
 
-			$task                = $batch_repository->findByName(ICLAManager::ICLAGroupTaskName);
-			$members_ids_on_icla = $member_repository->getAllGerritIds();
+			$task                  = $batch_repository->findByName(ICLAManager::ICLAGroupTaskName);
+			$members_ids_on_icla   = $member_repository->getAllGerritIds();
 			// query gerrit service
 			$icla_members_response = $gerrit_api->listAllMembersFromGroup($icla_group_id);
 			$icla_members_count    = count($icla_members_response);
+
+			if($icla_members_count === 0) return; //nothing to process...
 
 			if(!$task){
 				$task = $batch_task_factory->buildBatchTask(ICLAManager::ICLAGroupTaskName, $icla_members_count);
 				$batch_repository->add($task);
 				$task->updateResponse(json_encode($icla_members_response));
 			}
-			else if($task->lastRecordProcessed() >= $icla_members_count){
-
+			else {
 				if($icla_members_count == count(json_decode($task->lastResponse(), true))) return;//nothing to process..
 				$task->initialize($icla_members_count);
 				$task->updateResponse(json_encode($icla_members_response));
 			}
-
-			$members = json_decode($task->lastResponse(), true);
 
 			$updated_members = 0;
 
 			for($i = 0; $i < $batch_size && ( ($task->lastRecordProcessed()) < $task->totalRecords() ); $i++){
 
 				$index       = $task->lastRecordProcessed();
-				$gerrit_info = $members[$index];
+				$gerrit_info = $icla_members_response[$index];
 				$email       = @$gerrit_info['email'];
 				$gerrit_id   = @$gerrit_info['_account_id'];
 

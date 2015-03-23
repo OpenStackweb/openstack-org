@@ -15,11 +15,9 @@
  * Class VotersDataIngestionTask
  * Ingest Voter Data only if they are Foundation Members and Exists on DB
  */
-final class VotersDataIngestionTask extends CliController {
+final class VotersDataIngestionTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		try{
 

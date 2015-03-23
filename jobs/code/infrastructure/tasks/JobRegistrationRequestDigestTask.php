@@ -14,11 +14,9 @@
 /**
  * Class JobRegistrationRequestDigestTask
  */
-final class JobRegistrationRequestDigestTask extends CliController {
+final class JobRegistrationRequestDigestTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		try{
 

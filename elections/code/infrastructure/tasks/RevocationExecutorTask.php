@@ -14,11 +14,9 @@
 /**
  * Class RevocationExecutorTask
  */
-final class RevocationExecutorTask extends CliController {
+final class RevocationExecutorTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		try{
 
