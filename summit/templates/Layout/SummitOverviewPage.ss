@@ -41,7 +41,7 @@
                     <p>
                         Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Vancouver.
                     </p>
-                    <a class="btn outline-btn inactive">Coming Soon</a>
+                    <a href="/summit/vancouver-2015/schedule/" class="btn outline-btn">View The Schdule</a>
                 </div>
             </div>            
 
@@ -133,7 +133,7 @@
                     Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Vancouver.
                 </p>
                 <p>
-                    <a class="btn outline-btn inactive">Coming Soon</a>
+                    <a href="/summit/vancouver-2015/schedule/" class="btn outline-btn">View The Schedule</a>
                 </p>
             </div>
         </div>
