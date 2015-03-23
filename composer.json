@@ -12,7 +12,8 @@
         "knplabs/github-api": "1.4.4",
         "rackspace/php-opencloud": "dev-master",
         "nnnick/chartjs": "1.0.1.*@dev",
-        "openid/php-openid": "dev-master"
+        "openid/php-openid": "dev-master",
+        "silverstripe/geoip": "dev-master"
 	},
    "require-dev": {
     "squizlabs/php_codesniffer": "2.*"
