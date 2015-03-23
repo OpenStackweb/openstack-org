@@ -14,11 +14,9 @@
 /**
  * Class RevocationNotificationSenderTask
  */
-final class RevocationNotificationSenderTask extends CliController {
+final class RevocationNotificationSenderTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		try{
 

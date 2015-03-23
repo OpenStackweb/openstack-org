@@ -15,11 +15,9 @@
 /**
  * Class PullCommitsFromGerritTask
  */
-final class PullCommitsFromGerritTask extends CliController  {
+final class PullCommitsFromGerritTask extends CronTask  {
 
-    function process(){
-
-        set_time_limit(0);
+    function run(){
 
         $batch_size = PullCommitsFromGerritTaskBatchSize;
         if(isset($_GET['batch_size'])){

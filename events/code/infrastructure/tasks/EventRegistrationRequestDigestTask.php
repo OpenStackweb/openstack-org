@@ -14,11 +14,9 @@
 /**
  * Class EventRegistrationRequestDigestTask
  */
-final class EventRegistrationRequestDigestTask extends CliController {
+final class EventRegistrationRequestDigestTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		try{
 

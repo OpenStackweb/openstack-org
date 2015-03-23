@@ -14,11 +14,9 @@
 /**
  * Class JobRegistrationRequestPurgeTask
  */
-final class JobRegistrationRequestPurgeTask extends CliController {
+final class JobRegistrationRequestPurgeTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		try{
 			$manager  = new JobRegistrationRequestManager(

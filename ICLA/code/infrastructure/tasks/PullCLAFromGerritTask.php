@@ -14,11 +14,9 @@
 /**
  * Class PullCLAFromGerritTask
  */
-final class PullCLAFromGerritTask extends CliController {
+final class PullCLAFromGerritTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		$manager = new ICLAManager (
 			new GerritAPI(GERRIT_BASE_URL, GERRIT_USER, GERRIT_PASSWORD),

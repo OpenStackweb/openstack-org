@@ -14,11 +14,9 @@
 /**
  * Class DeploymentSurveyTask
  */
-final class DeploymentSurveyTask extends CliController {
+final class DeploymentSurveyTask extends CronTask {
 
-	function process(){
-
-		set_time_limit(0);
+	function run(){
 
 		$batch_size = 15;
 
