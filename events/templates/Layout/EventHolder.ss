@@ -21,6 +21,7 @@
                     <option value="all">All</option>
                     <option value="Industry">Industry Events</option>
                     <option value="Meetups">Meetups</option>
+                    <option value="OpenStack Days">OpenStack Days</option>
                 </select>
             </div>
             <div style="clear:both"></div>
