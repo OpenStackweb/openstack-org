@@ -95,6 +95,18 @@
                 $DateFilters(ExportAppDevSurveyResults,true)
             </div>
         </li>
+        <li>
+            <a href="#" class="cvs_download_link">Deployment Survey CSV Download (Flat Format)</a>
+            <div class="export_filters hidden">
+				$DateFilters(ExportSurveyResultsFlat,true)
+            </div>
+        </li>
+        <li>
+            <a href="#" class="cvs_download_link" >App Dev Survey CSV Download (Flat Format)</a>
+            <div class="export_filters hidden">
+				$DateFilters(ExportAppDevSurveyResultsFlat,true)
+            </div>
+        </li>
         <li><a href="$Link(ExportData)">Export Data</a></li>
 		<li><a href="$Link(ViewDeploymentsPerRegion)">View Deployments Per Region</a></li>
 		<li><a href="$Link(ViewDeploymentSurveysPerRegion)">View Deployment Surveys Per Region</a></li>

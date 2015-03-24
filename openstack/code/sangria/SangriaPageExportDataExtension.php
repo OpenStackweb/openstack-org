@@ -19,76 +19,80 @@
 final class SangriaPageExportDataExtension extends Extension
 {
 
-	public function onBeforeInit()
-	{
-		Config::inst()->update(get_class($this), 'allowed_actions', array(
-			'ExportData',
-			'exportCLAUsers',
-			'exportGerritUsers',
-			'ExportSurveyResults',
-			'ExportAppDevSurveyResults',
-			'exportFoundationMembers',
-			'exportCorporateSponsors',
-			'exportDupUsers',
+    public function onBeforeInit()
+    {
+        Config::inst()->update(get_class($this), 'allowed_actions', array(
+            'ExportData',
+            'exportCLAUsers',
+            'exportGerritUsers',
+            'ExportSurveyResults',
+            'ExportAppDevSurveyResults',
+            'exportFoundationMembers',
+            'exportCorporateSponsors',
+            'exportDupUsers',
             'exportMarketplaceAdmins',
-		));
+            'ExportAppDevSurveyResultsFlat',
+            'ExportSurveyResultsFlat',
+        ));
 
 
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
-			'ExportData',
-			'exportCLAUsers',
-			'exportGerritUsers',
-			'ExportSurveyResults',
-			'ExportAppDevSurveyResults',
-			'exportFoundationMembers',
-			'exportCorporateSponsors',
-			'exportDupUsers',
+        Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
+            'ExportData',
+            'exportCLAUsers',
+            'exportGerritUsers',
+            'ExportSurveyResults',
+            'ExportAppDevSurveyResults',
+            'exportFoundationMembers',
+            'exportCorporateSponsors',
+            'exportDupUsers',
             'exportMarketplaceAdmins',
-		));
-	}
+            'ExportAppDevSurveyResultsFlat',
+            'ExportSurveyResultsFlat',
+        ));
+    }
 
-	function ExportData()
-	{
-		$this->Title = 'Export Data';
-		Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-		Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
-		Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-		Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
-		return $this->owner->getViewer('ExportData')->process($this->owner);
-	}
+    function ExportData()
+    {
+        $this->Title = 'Export Data';
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
+        Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
+        return $this->owner->getViewer('ExportData')->process($this->owner);
+    }
 
-	function exportCLAUsers()
-	{
+    function exportCLAUsers()
+    {
 
-		$params = $this->owner->getRequest()->getVars();
-		if (!isset($params['fields']) || empty($params['fields']))
-			return $this->owner->httpError('412', 'missing required param fields');
+        $params = $this->owner->getRequest()->getVars();
+        if (!isset($params['fields']) || empty($params['fields']))
+            return $this->owner->httpError('412', 'missing required param fields');
 
-		if (!isset($params['ext']) || empty($params['ext']))
-			return $this->owner->httpError('412', 'missing required param ext');
+        if (!isset($params['ext']) || empty($params['ext']))
+            return $this->owner->httpError('412', 'missing required param ext');
 
-		$fields = $params['fields'];
-		$ext = $params['ext'];
+        $fields = $params['fields'];
+        $ext = $params['ext'];
 
-		$sanitized_fields = array();
+        $sanitized_fields = array();
 
-		if (!count($fields)) {
-			return $this->httpError('412', 'missing required param fields');
-		}
+        if (!count($fields)) {
+            return $this->httpError('412', 'missing required param fields');
+        }
 
-		$allowed_fields = array('ID' => 'ID', 'FirstName' => 'FirstName', 'SurName' => 'SurName', 'Email' => 'Email');
+        $allowed_fields = array('ID' => 'ID', 'FirstName' => 'FirstName', 'SurName' => 'SurName', 'Email' => 'Email');
 
-		for ($i = 0; $i < count($fields); $i++) {
-			if (!array_key_exists($fields[$i], $allowed_fields))
-				return $this->httpError('412', 'invalid field');
-			array_push($sanitized_fields, 'M.' . $fields[$i]);
-		}
+        for ($i = 0; $i < count($fields); $i++) {
+            if (!array_key_exists($fields[$i], $allowed_fields))
+                return $this->httpError('412', 'invalid field');
+            array_push($sanitized_fields, 'M.' . $fields[$i]);
+        }
 
-		$sanitized_fields = implode(',', $sanitized_fields);
+        $sanitized_fields = implode(',', $sanitized_fields);
 
-		$sql = <<< SQL
+        $sql = <<< SQL
 		SELECT {$sanitized_fields}
 		, GROUP_CONCAT(G.Code, ' | ') AS Groups
 		FROM Member M
@@ -99,44 +103,44 @@ final class SangriaPageExportDataExtension extends Extension
 		ORDER BY M.SurName, M.FirstName;
 SQL;
 
-		$result = DB::query($sql);
-		$data = array();
-		array_push($fields, 'Groups');
-		foreach ($result as $row) {
-			$member = array();
-			foreach ($fields as $field) {
-				$member[$field] = $row[$field];
-			}
-			array_push($data, $member);
-		}
+        $result = DB::query($sql);
+        $data = array();
+        array_push($fields, 'Groups');
+        foreach ($result as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = $row[$field];
+            }
+            array_push($data, $member);
+        }
 
-		$filename = "CLAMembers" . date('Ymd') . "." . $ext;
+        $filename = "CLAMembers" . date('Ymd') . "." . $ext;
 
-		return CSVExporter::getInstance()->export($filename, $data);
-	}
+        return CSVExporter::getInstance()->export($filename, $data);
+    }
 
-	function exportGerritUsers()
-	{
-		$params = $this->owner->getRequest()->getVars();
-		if (!isset($params['status']) || empty($params['status']))
-			return $this->owner->httpError('412', 'missing required param status');
+    function exportGerritUsers()
+    {
+        $params = $this->owner->getRequest()->getVars();
+        if (!isset($params['status']) || empty($params['status']))
+            return $this->owner->httpError('412', 'missing required param status');
 
-		if (!isset($params['ext']) || empty($params['ext']))
-			return $this->owner->httpError('412', 'missing required param ext');
+        if (!isset($params['ext']) || empty($params['ext']))
+            return $this->owner->httpError('412', 'missing required param ext');
 
-		$status = $params['status'];
-		$ext = $params['ext'];
+        $status = $params['status'];
+        $ext = $params['ext'];
 
-		$sanitized_filters = array();
-		$allowed_filter_values = array('foundation-members' => 'foundation-members', 'community-members' => 'community-members');
-		for ($i = 0; $i < count($status); $i++) {
-			if (!array_key_exists($status[$i], $allowed_filter_values))
-				return $this->httpError('412', 'invalid filter value');
-			array_push($sanitized_filters, $status[$i]);
-		}
+        $sanitized_filters = array();
+        $allowed_filter_values = array('foundation-members' => 'foundation-members', 'community-members' => 'community-members');
+        for ($i = 0; $i < count($status); $i++) {
+            if (!array_key_exists($status[$i], $allowed_filter_values))
+                return $this->httpError('412', 'invalid filter value');
+            array_push($sanitized_filters, $status[$i]);
+        }
 
-		$sanitized_filters = implode("','", $sanitized_filters);
-		$sql = <<<SQL
+        $sanitized_filters = implode("','", $sanitized_filters);
+        $sql = <<<SQL
 
 		SELECT M.FirstName,
 		   M.Surname,
@@ -157,41 +161,41 @@ SQL;
 		GROUP BY M.ID;
 SQL;
 
-		$res = DB::query($sql);
-		$fields = array('FirstName', 'Surname', 'Email', 'Secondary_Email', 'GerritID', 'LastCodeCommitDate', 'Member_Status', 'FoundationMemberJoinDate', 'DateMemberStatusChanged', 'Company_Affiliations');
-		$data = array();
+        $res = DB::query($sql);
+        $fields = array('FirstName', 'Surname', 'Email', 'Secondary_Email', 'GerritID', 'LastCodeCommitDate', 'Member_Status', 'FoundationMemberJoinDate', 'DateMemberStatusChanged', 'Company_Affiliations');
+        $data = array();
 
-		foreach ($res as $row) {
-			$member = array();
-			foreach ($fields as $field) {
-				$member[$field] = $row[$field];
-			}
-			array_push($data, $member);
-		}
+        foreach ($res as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = $row[$field];
+            }
+            array_push($data, $member);
+        }
 
-		$filename = "GerritUsers" . date('Ymd') . "." . $ext;
+        $filename = "GerritUsers" . date('Ymd') . "." . $ext;
 
-		return CSVExporter::getInstance()->export($filename, $data);
-	}
+        return CSVExporter::getInstance()->export($filename, $data);
+    }
 
-	public function Groups()
-	{
-		$sql = <<<SQL
+    public function Groups()
+    {
+        $sql = <<<SQL
 		SELECT G.Code,G.Title,G.ClassName FROM `Group` G ORDER BY G.Title;
 SQL;
-		$result = DB::query($sql);
+        $result = DB::query($sql);
 
-		// let Silverstripe work the magic
+        // let Silverstripe work the magic
 
-		$groups = new ArrayList();
+        $groups = new ArrayList();
 
-		foreach ($result as $rowArray) {
-			// $res: new Product($rowArray)
-			$groups->push(new $rowArray['ClassName']($rowArray));
-		}
+        foreach ($result as $rowArray) {
+            // $res: new Product($rowArray)
+            $groups->push(new $rowArray['ClassName']($rowArray));
+        }
 
         return $groups;
-	}
+    }
 
     public function MarketplaceTypes()
     {
@@ -211,18 +215,16 @@ SQL;
         return $types;
     }
 
-	// Export CSV of all Deployment Surveys and Associated Deployments
-	function ExportSurveyResults()
-	{
-		$fileDate = date('Ymdhis');
+    // Export CSV of all Deployment Surveys and Associated Deployments
 
-		SangriaPage_Controller::generateDateFilters('s');
-		$range = Controller::curr()->getRequest()->getVar('Range');
-		$range_filter = '';
-		if(!empty($range)){
-			$range_filter = ($range == SurveyType::MARCH_2015)? "AND s.Created >= '" . SURVEY_START_DATE . "'":"AND s.Created < '" . SURVEY_START_DATE . "'";
-		}
-		$surveyQuery = "SELECT
+    private function ExportSurveyResultsData(){
+        SangriaPage_Controller::generateDateFilters('s');
+        $range = Controller::curr()->getRequest()->getVar('Range');
+        $range_filter = '';
+        if (!empty($range)) {
+            $range_filter = ($range == SurveyType::MARCH_2015) ? "AND s.Created >= '" . SURVEY_START_DATE . "'" : "AND s.Created < '" . SURVEY_START_DATE . "'";
+        }
+        $surveyQuery = "SELECT
 				s.ID as SurveyID,
 				s.Created as SurveyCreated,
                 s.UpdateDate as SurveyEdited,
@@ -321,135 +323,302 @@ SQL;
                 left outer join Member m on (s.MemberID = m.ID)
                 left outer join Deployment d on (d.DeploymentSurveyID = s.ID)
                 left outer join Org o on (s.OrgID = o.ID)
-            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query .$range_filter. " order by s.ID;";
+            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query . $range_filter . " order by s.ID;";
 
-		$res = DB::query($surveyQuery);
+        $res = DB::query($surveyQuery);
 
-		$fields = array(
-				'SurveyID',
-				'SurveyCreated',
-                'SurveyEdited',
-                'OrgName',
-                'OrgID',
-                'DeploymentID',
-                'DeploymentCreated',
-                'DeploymentEdited',
-				'FirstName',
-				'Surname',
-                'Email',
-				'Title',
-                'Industry',
-                'OtherIndustry',
-                'PrimaryCity',
-                'PrimaryState',
-                'PrimaryCountry',
-                'OrgSize',
-                'OpenStackInvolvement',
-                'InformationSources',
-                'OtherInformationSources',
-                'FurtherEnhancement',
-                'FoundationUserCommitteePriorities',
-                'UserGroupMember',
-                'UserGroupName',
-                'OkToContact',
-                'BusinessDrivers',
-                'OtherBusinessDrivers',
-                'WhatDoYouLikeMost',
-                'NetPromoter',
-                'OpenStackRecommendation',
-				'OpenStackActivity',
-				'OpenStackRelationship',
-				'ITActivity',
-				'InterestedUsingContainerTechnology',
-				'ContainerRelatedTechnologies',
-                'Label',
-                'IsPublic',
-                'DeploymentType',
-                'ProjectsUsed',
-                'CurrentReleases',
-                'DeploymentStage',
-				'NumCloudUsers',
-				'APIFormats',
-				'Hypervisors',
-				'OtherHypervisor',
-                'BlockStorageDrivers',
-                'OtherBlockStorageDriver',
-                'NetworkDrivers',
-                'OtherNetworkDriver',
-				'IdentityDrivers',
-				'OtherIndentityDriver',
-                'SupportedFeatures',
-                'ComputeNodes',
-                'ComputeCores',
-                'ComputeInstances',
-                'BlockStorageTotalSize',
-                'ObjectStorageSize',
-                'ObjectStorageNumObjects',
-                'NetworkNumIPs',
-                'WorkloadsDescription',
-                'OtherWorkloadsDescription',
-                'WhyNovaNetwork',
-                'OtherWhyNovaNetwork',
-                'DeploymentTools',
-                'OtherDeploymentTools',
-                'OperatingSystems',
-                'OtherOperatingSystems',
-                'SwiftGlobalDistributionFeatures',
-                'SwiftGlobalDistributionFeaturesUsesCases',
-                'OtherSwiftGlobalDistributionFeaturesUsesCases',
-                'Plans2UseSwiftStoragePolicies',
-                'OtherPlans2UseSwiftStoragePolicies',
-                'UsedDBForOpenStackComponents',
-                'OtherUsedDBForOpenStackComponents',
-                'ToolsUsedForYourUsers',
-                'OtherToolsUsedForYourUsers',
-                'Reason2Move2Ceilometer',
-				'CountriesPhysicalLocation',
-				'CountriesUsersLocation',
-				'ServicesDeploymentsWorkloads',
-				'OtherServicesDeploymentsWorkloads',
-				'EnterpriseDeploymentsWorkloads',
-				'OtherEnterpriseDeploymentsWorkloads',
-				'HorizontalWorkloadFrameworks',
-				'OtherHorizontalWorkloadFrameworks',
-				'UsedPackages',
-				'CustomPackagesReason',
-				'OtherCustomPackagesReason',
-				'PaasTools',
-				'OtherPaasTools',
-				'OtherSupportedFeatures',
-				'InteractingClouds',
-				'OtherInteractingClouds'
-		);
-		$data = array();
+        return $res;
+    }
 
-		foreach ($res as $row) {
-			$member = array();
-			foreach ($fields as $field) {
-				$member[$field] = $row[$field];
-			}
-			array_push($data, $member);
-		}
+    function ExportSurveyResults()
+    {
+        $fileDate = date('Ymdhis');
 
-		$filename = "survey_results" . $fileDate . ".csv";
+        $res = $this->ExportSurveyResultsData();
 
-		return CSVExporter::getInstance()->export($filename, $data, ',');
-	}
+        $fields = array(
+            'SurveyID',
+            'SurveyCreated',
+            'SurveyEdited',
+            'OrgName',
+            'OrgID',
+            'DeploymentID',
+            'DeploymentCreated',
+            'DeploymentEdited',
+            'FirstName',
+            'Surname',
+            'Email',
+            'Title',
+            'Industry',
+            'OtherIndustry',
+            'PrimaryCity',
+            'PrimaryState',
+            'PrimaryCountry',
+            'OrgSize',
+            'OpenStackInvolvement',
+            'InformationSources',
+            'OtherInformationSources',
+            'FurtherEnhancement',
+            'FoundationUserCommitteePriorities',
+            'UserGroupMember',
+            'UserGroupName',
+            'OkToContact',
+            'BusinessDrivers',
+            'OtherBusinessDrivers',
+            'WhatDoYouLikeMost',
+            'NetPromoter',
+            'OpenStackRecommendation',
+            'OpenStackActivity',
+            'OpenStackRelationship',
+            'ITActivity',
+            'InterestedUsingContainerTechnology',
+            'ContainerRelatedTechnologies',
+            'Label',
+            'IsPublic',
+            'DeploymentType',
+            'ProjectsUsed',
+            'CurrentReleases',
+            'DeploymentStage',
+            'NumCloudUsers',
+            'APIFormats',
+            'Hypervisors',
+            'OtherHypervisor',
+            'BlockStorageDrivers',
+            'OtherBlockStorageDriver',
+            'NetworkDrivers',
+            'OtherNetworkDriver',
+            'IdentityDrivers',
+            'OtherIndentityDriver',
+            'SupportedFeatures',
+            'ComputeNodes',
+            'ComputeCores',
+            'ComputeInstances',
+            'BlockStorageTotalSize',
+            'ObjectStorageSize',
+            'ObjectStorageNumObjects',
+            'NetworkNumIPs',
+            'WorkloadsDescription',
+            'OtherWorkloadsDescription',
+            'WhyNovaNetwork',
+            'OtherWhyNovaNetwork',
+            'DeploymentTools',
+            'OtherDeploymentTools',
+            'OperatingSystems',
+            'OtherOperatingSystems',
+            'SwiftGlobalDistributionFeatures',
+            'SwiftGlobalDistributionFeaturesUsesCases',
+            'OtherSwiftGlobalDistributionFeaturesUsesCases',
+            'Plans2UseSwiftStoragePolicies',
+            'OtherPlans2UseSwiftStoragePolicies',
+            'UsedDBForOpenStackComponents',
+            'OtherUsedDBForOpenStackComponents',
+            'ToolsUsedForYourUsers',
+            'OtherToolsUsedForYourUsers',
+            'Reason2Move2Ceilometer',
+            'CountriesPhysicalLocation',
+            'CountriesUsersLocation',
+            'ServicesDeploymentsWorkloads',
+            'OtherServicesDeploymentsWorkloads',
+            'EnterpriseDeploymentsWorkloads',
+            'OtherEnterpriseDeploymentsWorkloads',
+            'HorizontalWorkloadFrameworks',
+            'OtherHorizontalWorkloadFrameworks',
+            'UsedPackages',
+            'CustomPackagesReason',
+            'OtherCustomPackagesReason',
+            'PaasTools',
+            'OtherPaasTools',
+            'OtherSupportedFeatures',
+            'InteractingClouds',
+            'OtherInteractingClouds'
+        );
+        $data = array();
 
-	// Export CSV of all App Dev Surveys
-	function ExportAppDevSurveyResults()
-	{
+        foreach ($res as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = $row[$field];
+            }
+            array_push($data, $member);
+        }
 
-		$fileDate = date('Ymdhis');
+        $filename = "survey_results" . $fileDate . ".csv";
 
-		SangriaPage_Controller::generateDateFilters('s');
-		$range = Controller::curr()->getRequest()->getVar('Range');
-		$range_filter = '';
-		if(!empty($range)){
-			$range_filter = ($range == SurveyType::MARCH_2015)? "AND s.Created >= '" . SURVEY_START_DATE . "'":"AND s.Created < '" . SURVEY_START_DATE . "'";
-		}
+        return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
 
-		$surveyQuery = "select s.ID as SurveyID, s.Created as SurveyCreated,
+    function ExportSurveyResultsFlat()
+    {
+        $fileDate = date('Ymdhis');
+
+        $res = $this->ExportSurveyResultsData();
+
+        $fields = array(
+            'SurveyID',
+            'SurveyCreated',
+            'SurveyEdited',
+            'OrgName',
+            'OrgID',
+            'DeploymentID',
+            'DeploymentCreated',
+            'DeploymentEdited',
+            'FirstName',
+            'Surname',
+            'Email',
+            'Title',
+            'Industry',
+            'OtherIndustry',
+            'PrimaryCity',
+            'PrimaryState',
+            'PrimaryCountry',
+            'OrgSize',
+            'OpenStackInvolvement',
+            'InformationSources',
+            'OtherInformationSources',
+            'FurtherEnhancement',
+            'FoundationUserCommitteePriorities',
+            'UserGroupMember',
+            'UserGroupName',
+            'OkToContact',
+            'BusinessDrivers',
+            'OtherBusinessDrivers',
+            'WhatDoYouLikeMost',
+            'NetPromoter',
+            'OpenStackRecommendation',
+            'OpenStackActivity',
+            'OpenStackRelationship',
+            'ITActivity',
+            'InterestedUsingContainerTechnology',
+            'ContainerRelatedTechnologies',
+            'Label',
+            'IsPublic',
+            'DeploymentType',
+            'ProjectsUsed',
+            'CurrentReleases',
+            'DeploymentStage',
+            'NumCloudUsers',
+            'APIFormats',
+            'Hypervisors',
+            'OtherHypervisor',
+            'BlockStorageDrivers',
+            'OtherBlockStorageDriver',
+            'NetworkDrivers',
+            'OtherNetworkDriver',
+            'IdentityDrivers',
+            'OtherIndentityDriver',
+            'SupportedFeatures',
+            'ComputeNodes',
+            'ComputeCores',
+            'ComputeInstances',
+            'BlockStorageTotalSize',
+            'ObjectStorageSize',
+            'ObjectStorageNumObjects',
+            'NetworkNumIPs',
+            'WorkloadsDescription',
+            'OtherWorkloadsDescription',
+            'WhyNovaNetwork',
+            'OtherWhyNovaNetwork',
+            'DeploymentTools',
+            'OtherDeploymentTools',
+            'OperatingSystems',
+            'OtherOperatingSystems',
+            'SwiftGlobalDistributionFeatures',
+            'SwiftGlobalDistributionFeaturesUsesCases',
+            'OtherSwiftGlobalDistributionFeaturesUsesCases',
+            'Plans2UseSwiftStoragePolicies',
+            'OtherPlans2UseSwiftStoragePolicies',
+            'UsedDBForOpenStackComponents',
+            'OtherUsedDBForOpenStackComponents',
+            'ToolsUsedForYourUsers',
+            'OtherToolsUsedForYourUsers',
+            'Reason2Move2Ceilometer',
+            'CountriesPhysicalLocation',
+            'CountriesUsersLocation',
+            'ServicesDeploymentsWorkloads',
+            'OtherServicesDeploymentsWorkloads',
+            'EnterpriseDeploymentsWorkloads',
+            'OtherEnterpriseDeploymentsWorkloads',
+            'HorizontalWorkloadFrameworks',
+            'OtherHorizontalWorkloadFrameworks',
+            'UsedPackages',
+            'CustomPackagesReason',
+            'OtherCustomPackagesReason',
+            'PaasTools',
+            'OtherPaasTools',
+            'OtherSupportedFeatures',
+            'InteractingClouds',
+            'OtherInteractingClouds'
+        );
+
+        $flat_fields = array(
+            //survey
+            'Industry' => DeploymentSurvey::$industry_options,
+            'OpenStackInvolvement' => DeploymentSurvey::$openstack_involvement_options,
+            'BusinessDrivers' => DeploymentSurvey::$business_drivers_options,
+            'InformationSources' => DeploymentSurvey::$information_options,
+            'ContainerRelatedTechnologies' => DeploymentSurvey::$container_related_technologies,
+            //app dev survey
+            'Toolkits' => AppDevSurvey::$toolkits_options,
+            'ProgrammingLanguages' => AppDevSurvey::$languages_options,
+            'APIFormats' => AppDevSurvey::$api_format_options,
+            'OperatingSystems' => AppDevSurvey::$opsys_options,
+            'GuestOperatingSystems' => AppDevSurvey::$opsys_options,
+            //deployment
+            'ProjectsUsed' => DeploymentOptions::$projects_used_options,
+            'CurrentReleases' => DeploymentOptions::$current_release_options,
+            'ServicesDeploymentsWorkloads' => DeploymentOptions::$services_deployment_workloads_options,
+            'EnterpriseDeploymentsWorkloads' => DeploymentOptions::$enterprise_deployment_workloads_options,
+            'HorizontalWorkloadFrameworks' => DeploymentOptions::$horizontal_workload_framework_options,
+            'UsedPackages' => DeploymentOptions::$used_packages_options,
+            'CustomPackagesReason' => DeploymentOptions::$custom_package_reason_options,
+            'DeploymentTools' => DeploymentOptions::$deployment_tools_options,
+            'PaasTools' => DeploymentOptions::$paas_tools_options,
+            'Hypervisors' => DeploymentOptions::$hypervisors_options,
+            'SupportedFeatures' => DeploymentOptions::$deployment_features_options,
+            'UsedDBForOpenStackComponents' => DeploymentOptions::$used_db_for_openstack_components_options,
+            'NetworkDrivers' => DeploymentOptions::$network_driver_options,
+            'IdentityDrivers' => DeploymentOptions::$identity_driver_options,
+            'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
+            'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
+            'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
+
+        );
+
+        $file_data = array();
+
+        foreach ($res as $row) {
+            $line = array();
+            foreach ($fields as $field) {
+                if (isset($flat_fields[$field])) {
+                    $options = $flat_fields[$field];
+                    $values = $row[$field];
+                    foreach ($options as $k => $v) {
+                        $line[$field . ' - ' . $k] = strpos($values, $k) !== false ? '1' : '0';
+                    }
+                } else {
+                    $line[$field] = $row[$field];
+                }
+            }
+            array_push($file_data, $line);
+        }
+
+        $filename = "survey_results_flat_" . $fileDate . ".csv";
+
+        return CSVExporter::getInstance()->export($filename, $file_data, ',');
+    }
+
+    // Export CSV of all App Dev Surveys
+
+    private function ExportAppDevSurveyData()
+    {
+        SangriaPage_Controller::generateDateFilters('s');
+        $range = Controller::curr()->getRequest()->getVar('Range');
+        $range_filter = '';
+        if (!empty($range)) {
+            $range_filter = ($range == SurveyType::MARCH_2015) ? "AND s.Created >= '" . SURVEY_START_DATE . "'" : "AND s.Created < '" . SURVEY_START_DATE . "'";
+        }
+
+        $surveyQuery = "select s.ID as SurveyID, s.Created as SurveyCreated,
                 s.LastEdited as SurveyEdited, o.Name as OrgName, o.ID as OrgID,  a.ID as AppSurveyID,
                 a.Created as AppSurveyCreated, a.LastEdited as AppSurveyEdited, m.FirstName,
                 m.Surname, m.Email, s.Title, s.Industry, s.OtherIndustry, s.PrimaryCity,
@@ -466,154 +635,231 @@ SQL;
                 right join AppDevSurvey a on (a.DeploymentSurveyID = s.ID)
                 left outer join Member m on (a.MemberID = m.ID)
                 left outer join Org o on (s.OrgID = o.ID)
-            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query .$range_filter. "
+            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query . $range_filter . "
             order by s.ID;";
 
-		$res = DB::query($surveyQuery);
+        return DB::query($surveyQuery);
+    }
 
+    function ExportAppDevSurveyResults()
+    {
+        $fileDate = date('Ymdhis');
+        $res = $this->ExportAppDevSurveyData();
+        $fields = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
+            'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
+            'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'UserGroupMember', 'UserGroupName', 'OkToContact', 'BusinessDrivers',
+            'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'APIFormats', 'DevelopmentEnvironments', 'OtherDevelopmentEnvironments',
+            'OperatingSystems', 'OtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds', 'OtherAPIFormats', 'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
 
-		$fields = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
-			'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
-			'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'UserGroupMember', 'UserGroupName', 'OkToContact', 'BusinessDrivers',
-			'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'APIFormats', 'DevelopmentEnvironments', 'OtherDevelopmentEnvironments',
-			'OperatingSystems', 'OtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds', 'OtherAPIFormats', 'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
-		$data = array();
+        $data = array();
 
-		foreach ($res as $row) {
-			$member = array();
-			foreach ($fields as $field) {
-				$member[$field] = $row[$field];
-			}
-			array_push($data, $member);
-		}
+        foreach ($res as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = $row[$field];
+            }
+            array_push($data, $member);
+        }
 
-		$filename = "app_dev_surveys" . $fileDate . ".csv";
+        $filename = "app_dev_surveys" . $fileDate . ".csv";
 
-		return CSVExporter::getInstance()->export($filename, $data, ',');
-	}
+        return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
 
-	function exportFoundationMembers(){
-		$params = $this->owner->getRequest()->getVars();
-		if(!isset($params['fields']) || empty($params['fields']) )
-			return $this->owner->httpError('412','missing required param fields');
+    function ExportAppDevSurveyResultsFlat()
+    {
 
-		if(!isset($params['ext']) || empty($params['ext']) )
-			return $this->owner->httpError('412','missing required param ext');
+        $fileDate = date('Ymdhis');
+        $res = $this->ExportAppDevSurveyData();
 
-		$fields = $params['fields'];
-		$ext    = $params['ext'];
+        $flat_fields = array(
+            //survey
+            'Industry' => DeploymentSurvey::$industry_options,
+            'OpenStackInvolvement' => DeploymentSurvey::$openstack_involvement_options,
+            'BusinessDrivers' => DeploymentSurvey::$business_drivers_options,
+            'InformationSources' => DeploymentSurvey::$information_options,
+            'ContainerRelatedTechnologies' => DeploymentSurvey::$container_related_technologies,
+            //app dev survey
+            'Toolkits' => AppDevSurvey::$toolkits_options,
+            'ProgrammingLanguages' => AppDevSurvey::$languages_options,
+            'APIFormats' => AppDevSurvey::$api_format_options,
+            'OperatingSystems' => AppDevSurvey::$opsys_options,
+            'GuestOperatingSystems' => AppDevSurvey::$opsys_options,
+            //deployment
+            'ProjectsUsed' => DeploymentOptions::$projects_used_options,
+            'CurrentReleases' => DeploymentOptions::$current_release_options,
+            'ServicesDeploymentsWorkloads' => DeploymentOptions::$services_deployment_workloads_options,
+            'EnterpriseDeploymentsWorkloads' => DeploymentOptions::$enterprise_deployment_workloads_options,
+            'HorizontalWorkloadFrameworks' => DeploymentOptions::$horizontal_workload_framework_options,
+            'UsedPackages' => DeploymentOptions::$used_packages_options,
+            'CustomPackagesReason' => DeploymentOptions::$custom_package_reason_options,
+            'DeploymentTools' => DeploymentOptions::$deployment_tools_options,
+            'PaasTools' => DeploymentOptions::$paas_tools_options,
+            'Hypervisors' => DeploymentOptions::$hypervisors_options,
+            'SupportedFeatures' => DeploymentOptions::$deployment_features_options,
+            'UsedDBForOpenStackComponents' => DeploymentOptions::$used_db_for_openstack_components_options,
+            'NetworkDrivers' => DeploymentOptions::$network_driver_options,
+            'IdentityDrivers' => DeploymentOptions::$identity_driver_options,
+            'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
+            'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
+            'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
 
-		$sanitized_fields = array();
+        );
 
-		if(!count($fields)){
-			return $this->owner->httpError('412','missing required param fields');
-		}
+        $fields = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
+            'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
+            'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'UserGroupMember', 'UserGroupName', 'OkToContact', 'BusinessDrivers',
+            'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'APIFormats', 'DevelopmentEnvironments', 'OtherDevelopmentEnvironments',
+            'OperatingSystems', 'OtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds', 'OtherAPIFormats', 'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
 
-		$allowed_fields = array('ID'=>'ID','FirstName'=>'FirstName','SurName'=>'SurName','Email'=>'Email');
+        $file_data = array();
 
-		for($i=0 ; $i< count($fields);$i++){
-			if(!array_key_exists($fields[$i],$allowed_fields))
-				return $this->httpError('412','invalid field');
-			array_push($sanitized_fields, 'Member.'.$fields[$i]);
-		}
+        foreach ($res as $row) {
+            $line = array();
+            foreach ($fields as $field) {
+                if (isset($flat_fields[$field])) {
+                    $options = $flat_fields[$field];
+                    $values = $row[$field];
+                    foreach ($options as $k => $v) {
+                        $line[$field . ' - ' . $k] = strpos($values, $k) !== false ?  '1' : '0';
+                    }
+                } else {
+                    $line[$field] = $row[$field];
+                }
+            }
+            array_push($file_data, $line);
+        }
 
-		$query  = new SQLQuery();
+        $filename = "app_dev_surveys_flat_" . $fileDate . ".csv";
 
-		$query->setFrom('Member');
-		$query->setSelect($sanitized_fields);
-		$query->addInnerJoin('Group_Members','Group_Members.MemberID = Member.ID');
-		$query->addInnerJoin('Group',"Group.ID = Group_Members.GroupID AND Group.Code='foundation-members'");
-		$query->setOrderBy('SurName,FirstName');
+        return CSVExporter::getInstance()->export($filename, $file_data, ',');
+    }
 
-		$result = $query->execute();
+    function exportFoundationMembers()
+    {
+        $params = $this->owner->getRequest()->getVars();
+        if (!isset($params['fields']) || empty($params['fields']))
+            return $this->owner->httpError('412', 'missing required param fields');
 
-		$data   = array();
+        if (!isset($params['ext']) || empty($params['ext']))
+            return $this->owner->httpError('412', 'missing required param ext');
 
-		foreach($result as $row){
-			$member = array();
-			foreach($fields as $field){
-				$member[$field] = $row[$field];
-			}
-			array_push($data,$member);
-		}
+        $fields = $params['fields'];
+        $ext = $params['ext'];
 
-		$filename = "FoundationMembers" . date('Ymd') . ".".$ext;
+        $sanitized_fields = array();
 
-		return CSVExporter::getInstance()->export($filename, $data);
-	}
+        if (!count($fields)) {
+            return $this->owner->httpError('412', 'missing required param fields');
+        }
 
-	function exportCorporateSponsors(){
+        $allowed_fields = array('ID' => 'ID', 'FirstName' => 'FirstName', 'SurName' => 'SurName', 'Email' => 'Email');
 
-		$params = $this->owner->getRequest()->getVars();
+        for ($i = 0; $i < count($fields); $i++) {
+            if (!array_key_exists($fields[$i], $allowed_fields))
+                return $this->httpError('412', 'invalid field');
+            array_push($sanitized_fields, 'Member.' . $fields[$i]);
+        }
 
-		if(!isset($params['levels']) || empty($params['levels']) )
-			return $this->owner->httpError('412','missing required param level');
+        $query = new SQLQuery();
 
-		if(!isset($params['fields']) || empty($params['fields']) )
-			return $this->owner->httpError('412','missing required param fields');
+        $query->setFrom('Member');
+        $query->setSelect($sanitized_fields);
+        $query->addInnerJoin('Group_Members', 'Group_Members.MemberID = Member.ID');
+        $query->addInnerJoin('Group', "Group.ID = Group_Members.GroupID AND Group.Code='foundation-members'");
+        $query->setOrderBy('SurName,FirstName');
 
-		if(!isset($params['ext']) || empty($params['ext']) )
-			return $this->owner->httpError('412','missing required param ext');
+        $result = $query->execute();
 
-		$level  = $params['levels'];
+        $data = array();
 
-		$fields = $params['fields'];
+        foreach ($result as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = $row[$field];
+            }
+            array_push($data, $member);
+        }
 
-		$ext    = $params['ext'];
+        $filename = "FoundationMembers" . date('Ymd') . "." . $ext;
 
-		$sanitized_fields = array();
+        return CSVExporter::getInstance()->export($filename, $data);
+    }
 
-		if(!count($fields)){
-			return $this->owner->httpError('412','missing required param fields');
-		}
+    function exportCorporateSponsors()
+    {
 
-		if(!count($level)){
-			return $this->owner->httpError('412','missing required param $level');
-		}
+        $params = $this->owner->getRequest()->getVars();
 
-		$allowed_fields = array('MemberLevel'=>'MemberLevel','Name'=>'Name','City'=>'City','State'=>'State','Country'=>'Country','Industry'=>'Industry','ContactEmail'=>'ContactEmail','AdminEmail'=>'AdminEmail');
-		$allowed_levels = array('Platinum'=>'Platinum', 'Gold'=>'Gold','Startup'=>'Startup','Mention'=>'Mention');
-		for($i = 0 ; $i< count($fields);$i++){
-			if(!array_key_exists($fields[$i],$allowed_fields))
-				return $this->httpError('412','invalid field');
-			array_push($sanitized_fields, 'Company.'.$fields[$i]);
-		}
-		for($i = 0 ; $i< count($level);$i++){
-			if(!array_key_exists($level[$i],$allowed_levels))
-				return $this->httpError('412','invalid level');
-		}
+        if (!isset($params['levels']) || empty($params['levels']))
+            return $this->owner->httpError('412', 'missing required param level');
 
-		$query  = new SQLQuery();
+        if (!isset($params['fields']) || empty($params['fields']))
+            return $this->owner->httpError('412', 'missing required param fields');
 
-		$query->setFrom('Company');
-		$query->setSelect($sanitized_fields);
-		$query->setWhere(" MemberLevel IN ('".implode("','",$level) ."')");
-		$query->setOrderBy('MemberLevel');
+        if (!isset($params['ext']) || empty($params['ext']))
+            return $this->owner->httpError('412', 'missing required param ext');
 
-		$result = $query->execute();
+        $level = $params['levels'];
 
-		$data   = array();
+        $fields = $params['fields'];
 
-		foreach($result as $row){
-			$company = array();
-			foreach($fields as $field){
-				$company[$field] = $row[$field];
-			}
-			array_push($data,$company);
-		}
+        $ext = $params['ext'];
 
-		$filename = "Companies" . date('Ymd') . ".".$ext;
+        $sanitized_fields = array();
 
-		return CSVExporter::getInstance()->export($filename, $data);
-	}
+        if (!count($fields)) {
+            return $this->owner->httpError('412', 'missing required param fields');
+        }
 
-	public function exportDupUsers(){
+        if (!count($level)) {
+            return $this->owner->httpError('412', 'missing required param $level');
+        }
 
-		$fileDate = date('Ymdhis');
+        $allowed_fields = array('MemberLevel' => 'MemberLevel', 'Name' => 'Name', 'City' => 'City', 'State' => 'State', 'Country' => 'Country', 'Industry' => 'Industry', 'ContactEmail' => 'ContactEmail', 'AdminEmail' => 'AdminEmail');
+        $allowed_levels = array('Platinum' => 'Platinum', 'Gold' => 'Gold', 'Startup' => 'Startup', 'Mention' => 'Mention');
+        for ($i = 0; $i < count($fields); $i++) {
+            if (!array_key_exists($fields[$i], $allowed_fields))
+                return $this->httpError('412', 'invalid field');
+            array_push($sanitized_fields, 'Company.' . $fields[$i]);
+        }
+        for ($i = 0; $i < count($level); $i++) {
+            if (!array_key_exists($level[$i], $allowed_levels))
+                return $this->httpError('412', 'invalid level');
+        }
 
-		SangriaPage_Controller::generateDateFilters('s');
+        $query = new SQLQuery();
 
-		$sql = <<< SQL
+        $query->setFrom('Company');
+        $query->setSelect($sanitized_fields);
+        $query->setWhere(" MemberLevel IN ('" . implode("','", $level) . "')");
+        $query->setOrderBy('MemberLevel');
+
+        $result = $query->execute();
+
+        $data = array();
+
+        foreach ($result as $row) {
+            $company = array();
+            foreach ($fields as $field) {
+                $company[$field] = $row[$field];
+            }
+            array_push($data, $company);
+        }
+
+        $filename = "Companies" . date('Ymd') . "." . $ext;
+
+        return CSVExporter::getInstance()->export($filename, $data);
+    }
+
+    public function exportDupUsers()
+    {
+
+        $fileDate = date('Ymdhis');
+
+        SangriaPage_Controller::generateDateFilters('s');
+
+        $sql = <<< SQL
 select FirstName, Surname, count(FirstName) AS Qty , group_concat(Email SEPARATOR '|') AS Emails,group_concat(ID SEPARATOR '|') AS MemberIds
 from Member
 group by FirstName, Surname
@@ -621,39 +867,40 @@ having count(FirstName) > 1
 order by FirstName, Surname;
 SQL;
 
-		$res = DB::query($sql);
+        $res = DB::query($sql);
 
-		$fields = array('FirstName','Surname','Qty','Emails','MemberIds');
-		$data = array();
+        $fields = array('FirstName', 'Surname', 'Qty', 'Emails', 'MemberIds');
+        $data = array();
 
-		foreach ($res as $row) {
-			$member = array();
-			foreach ($fields as $field) {
-				$member[$field] = $row[$field];
-			}
-			array_push($data, $member);
-		}
+        foreach ($res as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = $row[$field];
+            }
+            array_push($data, $member);
+        }
 
-		$filename = "dup_users_report" . $fileDate . ".csv";
+        $filename = "dup_users_report" . $fileDate . ".csv";
 
-		return CSVExporter::getInstance()->export($filename, $data, ',');
-	}
+        return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
 
-	public function exportMarketplaceAdmins(){
+    public function exportMarketplaceAdmins()
+    {
 
-		$params = $this->owner->getRequest()->getVars();
-		if (!isset($params['marketplace_type']) || empty($params['marketplace_type']))
-			return $this->owner->httpError('412', 'missing required param marketplace type');
+        $params = $this->owner->getRequest()->getVars();
+        if (!isset($params['marketplace_type']) || empty($params['marketplace_type']))
+            return $this->owner->httpError('412', 'missing required param marketplace type');
 
-		$marketplace_type = $params['marketplace_type'];
+        $marketplace_type = $params['marketplace_type'];
 
-		$filters_string = implode("','", $marketplace_type);
+        $filters_string = implode("','", $marketplace_type);
 
-		$fileDate = date('Ymdhis');
+        $fileDate = date('Ymdhis');
 
-		SangriaPage_Controller::generateDateFilters('s');
+        SangriaPage_Controller::generateDateFilters('s');
 
-		$sql = <<< SQL
+        $sql = <<< SQL
 SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace FROM Member AS M
 INNER JOIN Company_Administrators AS CA ON M.ID = CA.MemberID
 INNER JOIN Company AS C ON C.ID = CA.CompanyID
@@ -663,21 +910,21 @@ GROUP BY M.FirstName, M.Surname, M.Email, C.Name
 ORDER BY C.Name, M.SurName;
 SQL;
 
-		$res = DB::query($sql);
+        $res = DB::query($sql);
 
-		$fields = array('FirstName','Surname','Email','Company','Marketplace');
-		$data = array();
+        $fields = array('FirstName', 'Surname', 'Email', 'Company', 'Marketplace');
+        $data = array();
 
-		foreach ($res as $row) {
-			$member = array();
-			foreach ($fields as $field) {
-				$member[$field] = str_replace(',',' ',$row[$field]); //commas tabs cell in excel
-			}
-			array_push($data, $member);
-		}
+        foreach ($res as $row) {
+            $member = array();
+            foreach ($fields as $field) {
+                $member[$field] = str_replace(',', ' ', $row[$field]); //commas tabs cell in excel
+            }
+            array_push($data, $member);
+        }
 
-		$filename = "mktplace_admins_report" . $fileDate . ".csv";
+        $filename = "mktplace_admins_report" . $fileDate . ".csv";
 
-		return CSVExporter::getInstance()->export($filename, $data, ',');
-	}
+        return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
 }
