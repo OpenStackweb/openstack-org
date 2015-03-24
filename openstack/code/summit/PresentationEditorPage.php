@@ -971,56 +971,98 @@ class PresentationEditorPage_Controller extends Page_Controller
 
 	function SpeakerSpreadsheetExport()
 	{
+
+      $filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/speaker-spreadsheet.csv';
+      $fp = fopen($filepath, 'w');
+
+      // Setup file to be UTF8
+      fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+
+        $fields = array(
+        	'ID',
+        	'First Name', 
+        	'Last Name', 
+        	'Email',
+        	'Reg Code',        	
+        	'Company',
+        	'Onsite Number',
+        	'Presentations',
+        	'Confirmed?',
+        	'Agreed To Video?',
+        	'Sched Link'
+        );
+
+		fputcsv($fp, $fields);        
+
 		$Speakers = Speaker::get();
 
-		echo '<!doctype html><head><meta charset="utf-8"></head><body>';
+        foreach ($Speakers as $Speaker) {
+            
+            $AcceptedTalks = $Speaker->AcceptedTalks();
+            $AlternateTalks = $Speaker->AlternateTalks();
 
-		foreach ($Speakers as $Speaker) {
+            $SchedLink = "https://openstacksummitmay2015vancouver.sched.org/?s=".$Speaker->FirstName.'+'.$Speaker->Surname;
 
-			$AcceptedTalks = $Speaker->AcceptedTalks();
-			$UnacceptedTalks = $Speaker->UnacceptedTalks();
-			$AlternateTalks = $Speaker->AlternateTalks();
-
-			// Assign Registration Codes
-
-			// If the speaker has any accepted talks, they get a speaker-level code
-			if($AcceptedTalks->count()) {
-				$data['RegistrationCode'] = $this->getRegistrationCode($Speaker->MemberID,"Speaker");
-				// If the speaker has no accepted talks, they get an alternate-level code
-			} elseif (!$AcceptedTalks->count() && $AlternateTalks->count()) {
-				$data['RegistrationCode'] = $this->getRegistrationCode($Speaker->MemberID,"Alternate");
+			if($Speaker->Confirmed) {
+				$Confirmed = 'YES';
+			} else {
+				$Confirmed = 'NO';
 			}
 
-			if($AcceptedTalks->count() || $AlternateTalks->count()) {
+			if($Speaker->AgreedToVideo) {
+				$AgreedToVideo = 'YES';
+			} else {
+				$AgreedToVideo = 'NO';
+			}
 
-				echo $this->EscapeForCSV($Speaker->ID) . ',' . $this->EscapeForCSV($Speaker->FirstName) . ',' . $this->EscapeForCSV($Speaker->Surname) . ',' . $this->EscapeForCSV($data['RegistrationCode']) . ',' . $this->EscapeForCSV($Speaker->OnsiteNumber) . ',"' . $Speaker->Member()->Email . '","';
+
+            if($AcceptedTalks->count() || $AlternateTalks->count()) {
+
+            	$RegCode = SummitRegCode::get()->filter('MemberID',$Speaker->MemberID)->first()->Code;
+
+            	$Presentations = "";
+
 				if($AcceptedTalks->count()) {
 					foreach ($AcceptedTalks as $Talk) {
-						echo $Talk->PresentationTitle . ' (Accepted); ';
+						$Presentations =  $Presentations . $Talk->PresentationTitle . ' (Accepted)<br/>';
 					}
 				}
 
 				if($AlternateTalks->count()) {
 					foreach ($AlternateTalks as $Talk) {
-						echo $Talk->PresentationTitle . ' (Alternate); ';
+						$Presentations =  $Presentations . $Talk->PresentationTitle . ' (Alternate)<br/>';
 					}
 				}
 
-				echo '","';
+                $fields = array(
+                	$Speaker->ID,
+                	$Speaker->FirstName, 
+                	$Speaker->Surname, 
+                	$Speaker->Member()->Email,
+                	$RegCode,                	
+                	$Speaker->Company,
+                	$Speaker->OnsiteNumber,
+                	$Presentations,
+                	$Confirmed,
+                	$AgreedToVideo,
+                	$SchedLink
+                );
 
-				if($Speaker->Confirmed) {
-					echo 'YES';
-				} else {
-					echo 'NO';
-				}
+                fputcsv($fp, $fields);
+            }
 
-				echo '"<br/>';
+      }		
 
-			}
+        fclose($fp);
+        
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        header("Content-disposition: attachment; filename=\"schedule-import.csv\"");
+        header("Content-Length: ".filesize($filepath));
+        readfile($filepath);        
 
-		}
 
-		echo "</body>";
 	}
 
 	function getRegistrationCode($MemberID, $Type)
@@ -1256,7 +1298,7 @@ class PresentationEditorPage_Controller extends Page_Controller
 			$Unconfirmed = new ArrayList();
 
 			// Look to see if this admin has any unemailed presentations
-			$UnemailedTalk = Talk::get()->filter(array('BeenEmailed' => 0, 'MarkedToDelete' => 0, 'OwnerID' => $Talk->Owner()->ID));;
+			$UnemailedTalk = Talk::get()->filter(array('BeenEmailed' => 0, 'MarkedToDelete' => 0, 'OwnerID' => $Talk->Owner()->ID));
 
 			// There is a talk that needs to be emailed
 			if ($UnemailedTalk) {
