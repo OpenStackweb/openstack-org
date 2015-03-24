@@ -178,7 +178,7 @@ class MemberDecorator extends DataExtension {
 
 	public function getCurrentAffiliation(){
 		$current_affiliation =  $this->getCurrentAffiliations();
-		return $current_affiliation?$current_affiliation->first():null;
+		return $current_affiliation->first();
 	}
 
 	public function getCurrentAffiliations(){
@@ -213,10 +213,7 @@ class MemberDecorator extends DataExtension {
 
 	public function getCurrentOrganization(){
 		$current_affiliation =  $this->getCurrentAffiliation();
-		if(!is_null($current_affiliation)){
-			return $current_affiliation->Organization();
-		}
-		return $this->owner->Org();
+		return $current_affiliation ? $current_affiliation->Organization() : $this->owner->Org();
 	}
 
 	public function getOrgName(){
