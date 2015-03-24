@@ -8,11 +8,11 @@
 	<div class="assestBox">
 		<h2>Full Color Logo (RGB version for digital media)</h2>
 		<div class="span-4">
-			<img src="/themes/openstack/images/openstack-logo-preview-full-color.png" width="140px" height="160px"/>
+			<img src="/assets/openstack-logo/R/openstack-cloud-software-vertical-web.png" style="width:140px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Use this logo web content or slides.</p>
-			<a href="/assets/openstack-logo/openstack-cloud-software-vertical-small.png" class="button">Small PNG File</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/openstack-cloud-software-vertical-large.png" class="button">Large PNG File</a>
+			<a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-web.png" class="button">Small PNG File</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-large.png" class="button">Large PNG File</a>
 		</div>
 	</div>
 	
@@ -21,11 +21,11 @@
 	<div class="assestBox">
 		<h2>Full Color Logo (CMYK version for print)</h2>
 		<div class="span-4">
-			<img src="/themes/openstack/images/openstack-logo-preview-full-color.png" width="140px" height="160px"/>
+			<img src="/assets/openstack-logo/R/openstack-cloud-software-vertical-web.png" style="width:140px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Use this version for items to be printed.</p>
-			<a href="/assets/openstack-logo/openstack-cloud-software-vertical-cmyk.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/openstack-cloud-software-vertical-cmyk.eps.zip" class="button">EPS Version</a>
+			<a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-cmyk.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-cmyk.eps.zip" class="button">EPS Version</a>
 		</div>
 	</div>
 	
@@ -34,11 +34,11 @@
 	<div class="assestBox">
 		<h2>One Color Logo (for print or screenprint)</h2>
 		<div class="span-4">
-            <img src="/themes/openstack/images/openstack-logo-preview-one-color.png" width="140px" height="160px"/>
+            <img src="/assets/openstack-logo/R/openstack-one-color.png" style="width:140px;" />
 		</div>
 		<div class="span-9 last">
 			<p>This is a good option for screen printing or other one-color applications.</p>
-			<a href="/assets/openstack-logo/openstack-one-color.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/openstack-one-color.eps.zip" class="button">EPS Version</a>
+			<a href="/assets/openstack-logo/R/openstack-one-color.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-one-color.eps.zip" class="button">EPS Version</a>
 		</div>
 	</div>
 	
@@ -47,11 +47,11 @@
 	<div class="assestBox">
 		<h2>One Color Logo #2 (alternate for print or screenprint)</h2>
 		<div class="span-4">
-            <img src="/themes/openstack/images/openstack-logo-preview-one-color-alt.png" width="140px" height="160px"/>
+            <img src="/assets/openstack-logo/R/openstack-one-color-alt.png" style="width:140px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Another good option for screen printing or other one-color applications.</p>
-			<a href="/assets/openstack-logo/openstack-one-color-alt.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/openstack-one-color-alt.eps.zip" class="button">EPS Version</a>
+			<a href="/assets/openstack-logo/R/openstack-one-color-alt.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-one-color-alt.eps.zip" class="button">EPS Version</a>
 		</div>
 	</div>	
 				
