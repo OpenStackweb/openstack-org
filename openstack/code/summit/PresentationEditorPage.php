@@ -988,6 +988,7 @@ class PresentationEditorPage_Controller extends Page_Controller
         	'Onsite Number',
         	'Presentations',
         	'Confirmed?',
+        	'Confirmation Link',
         	'Agreed To Video?',
         	'Sched Link'
         );
@@ -1019,6 +1020,7 @@ class PresentationEditorPage_Controller extends Page_Controller
             if($AcceptedTalks->count() || $AlternateTalks->count()) {
 
             	$RegCode = SummitRegCode::get()->filter('MemberID',$Speaker->MemberID)->first()->Code;
+            	$ConfirmationLink = 'https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key=' . $Speaker->SpeakerConfirmHash();
 
             	$Presentations = "";
 
@@ -1034,6 +1036,7 @@ class PresentationEditorPage_Controller extends Page_Controller
 					}
 				}
 
+
                 $fields = array(
                 	$Speaker->ID,
                 	$Speaker->FirstName, 
@@ -1044,6 +1047,7 @@ class PresentationEditorPage_Controller extends Page_Controller
                 	$Speaker->OnsiteNumber,
                 	$Presentations,
                 	$Confirmed,
+                	$ConfirmationLink,
                 	$AgreedToVideo,
                 	$SchedLink
                 );
