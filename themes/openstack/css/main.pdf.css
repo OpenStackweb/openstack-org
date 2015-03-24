@@ -141,7 +141,7 @@ hr {
 	padding-left: 5px;
 }
 .user-links li {
-    background: url(@host/private-assets/themes/openstack/images/link.png) no-repeat scroll left center transparent;
+    background: url(@host/themes/openstack/images/link.png) no-repeat scroll left center transparent;
     list-style: none outside none;
     padding-left:20px;
     margin-left: -20px;
