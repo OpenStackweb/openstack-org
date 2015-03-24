@@ -22,7 +22,6 @@ jQuery(document).ready(function($) {
             'UsedPackages[]':  {required : true},
             'DeploymentTools[]':{required : true},
             'PaasTools': {required : true},
-            'SupportedFeatures[]': {required : true},
             'UsedDBForOpenStackComponents[]': {required : true},
             'InteractingClouds[]': {required : true},
             'NumCloudUsers': {required : true},
