@@ -979,14 +979,16 @@ class PresentationEditorPage_Controller extends Page_Controller
       fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
 
         $fields = array(
-        	'ID',
+        	'Speaker ID',
         	'First Name', 
         	'Last Name', 
         	'Email',
+        	'Status',
         	'Reg Code',        	
         	'Company',
         	'Onsite Number',
-        	'Presentations',
+        	'Pres ID',
+        	'Presentation Title',
         	'Confirmed?',
         	'Confirmation Link',
         	'Agreed To Video?',
@@ -1021,38 +1023,45 @@ class PresentationEditorPage_Controller extends Page_Controller
 
             	$RegCode = SummitRegCode::get()->filter('MemberID',$Speaker->MemberID)->first()->Code;
             	$ConfirmationLink = 'https://www.openstack.org/summit/vancouver-2015/call-for-speakers/ConfirmSpeaker/?key=' . $Speaker->SpeakerConfirmHash();
+            	if ($AcceptedTalks->count()) {
+            		$SpeakerType = 'Accepted';
+            	} else {
+            		$SpeakerType = 'Alternate';
+            	}
 
-            	$Presentations = "";
+            	$fields = array(
+                	'SpeakerID' => $Speaker->ID,
+                	'FirstName' => $Speaker->FirstName, 
+                	'Surname' => $Speaker->Surname, 
+                	'Email' => $Speaker->Member()->Email,
+                	'SpeakerType' => $SpeakerType,
+                	'RegCode' => $RegCode,                	
+                	'Company' => $Speaker->Company,
+                	'OnsiteNumber' => $Speaker->OnsiteNumber,
+                	'PresentationID' => 0,
+                	'PresentationTitle' => '',
+                	'Confirmed' => $Confirmed,
+                	'ConfirmationLink' => $ConfirmationLink,
+                	'AgreedToVideo' => $AgreedToVideo,
+                	'SchedLink' => $SchedLink
+                );
 
 				if($AcceptedTalks->count()) {
 					foreach ($AcceptedTalks as $Talk) {
-						$Presentations =  $Presentations . $Talk->PresentationTitle . ' (Accepted)<br/>';
+						$fields['PresentationTitle'] = $Talk->PresentationTitle . ' (Accepted)';
+						$fields['PresentationID'] = $Talk->ID;
+						fputcsv($fp, $fields);
 					}
 				}
 
 				if($AlternateTalks->count()) {
 					foreach ($AlternateTalks as $Talk) {
-						$Presentations =  $Presentations . $Talk->PresentationTitle . ' (Alternate)<br/>';
+						$fields['PresentationTitle'] = $Talk->PresentationTitle . ' (Alternate)';
+						$fields['PresentationID'] = $Talk->ID;
+						fputcsv($fp, $fields);
 					}
 				}
 
-
-                $fields = array(
-                	$Speaker->ID,
-                	$Speaker->FirstName, 
-                	$Speaker->Surname, 
-                	$Speaker->Member()->Email,
-                	$RegCode,                	
-                	$Speaker->Company,
-                	$Speaker->OnsiteNumber,
-                	$Presentations,
-                	$Confirmed,
-                	$ConfirmationLink,
-                	$AgreedToVideo,
-                	$SchedLink
-                );
-
-                fputcsv($fp, $fields);
             }
 
       }		
@@ -1062,7 +1071,7 @@ class PresentationEditorPage_Controller extends Page_Controller
         header("Cache-control: private");
         header("Content-type: application/force-download");
         header("Content-transfer-encoding: binary\n");
-        header("Content-disposition: attachment; filename=\"schedule-import.csv\"");
+        header("Content-disposition: attachment; filename=\"speaker-spreadsheet.csv\"");
         header("Content-Length: ".filesize($filepath));
         readfile($filepath);        
 
