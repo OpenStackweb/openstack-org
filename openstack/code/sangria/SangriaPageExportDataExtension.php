@@ -291,8 +291,8 @@ SQL;
                 d.OtherWhyNovaNetwork,
                 d.DeploymentTools,
                 d.OtherDeploymentTools,
-                d.OperatingSystems,
-                d.OtherOperatingSystems,
+                d.OperatingSystems as DeploymentOperatingSystems,
+                d.OtherOperatingSystems DeploymentOtherOperatingSystems,
                 d.SwiftGlobalDistributionFeatures,
                 d.SwiftGlobalDistributionFeaturesUsesCases,
                 d.OtherSwiftGlobalDistributionFeaturesUsesCases,
@@ -403,8 +403,8 @@ SQL;
             'OtherWhyNovaNetwork',
             'DeploymentTools',
             'OtherDeploymentTools',
-            'OperatingSystems',
-            'OtherOperatingSystems',
+            'DeploymentOperatingSystems',
+            'DeploymentOtherOperatingSystems',
             'SwiftGlobalDistributionFeatures',
             'SwiftGlobalDistributionFeaturesUsesCases',
             'OtherSwiftGlobalDistributionFeaturesUsesCases',
@@ -477,14 +477,11 @@ SQL;
             'OtherInformationSources',
             'FurtherEnhancement',
             'FoundationUserCommitteePriorities',
-            'UserGroupMember',
-            'UserGroupName',
             'OkToContact',
             'BusinessDrivers',
             'OtherBusinessDrivers',
             'WhatDoYouLikeMost',
             'NetPromoter',
-            'OpenStackRecommendation',
             'OpenStackActivity',
             'OpenStackRelationship',
             'ITActivity',
@@ -497,7 +494,6 @@ SQL;
             'CurrentReleases',
             'DeploymentStage',
             'NumCloudUsers',
-            'APIFormats',
             'Hypervisors',
             'OtherHypervisor',
             'BlockStorageDrivers',
@@ -506,7 +502,6 @@ SQL;
             'OtherNetworkDriver',
             'IdentityDrivers',
             'OtherIndentityDriver',
-            'SupportedFeatures',
             'ComputeNodes',
             'ComputeCores',
             'ComputeInstances',
@@ -514,14 +509,12 @@ SQL;
             'ObjectStorageSize',
             'ObjectStorageNumObjects',
             'NetworkNumIPs',
-            'WorkloadsDescription',
-            'OtherWorkloadsDescription',
             'WhyNovaNetwork',
             'OtherWhyNovaNetwork',
             'DeploymentTools',
             'OtherDeploymentTools',
-            'OperatingSystems',
-            'OtherOperatingSystems',
+            'DeploymentOperatingSystems',
+            'DeploymentOtherOperatingSystems',
             'SwiftGlobalDistributionFeatures',
             'SwiftGlobalDistributionFeaturesUsesCases',
             'OtherSwiftGlobalDistributionFeaturesUsesCases',
@@ -545,7 +538,6 @@ SQL;
             'OtherCustomPackagesReason',
             'PaasTools',
             'OtherPaasTools',
-            'OtherSupportedFeatures',
             'InteractingClouds',
             'OtherInteractingClouds'
         );
@@ -561,7 +553,7 @@ SQL;
             'Toolkits' => AppDevSurvey::$toolkits_options,
             'ProgrammingLanguages' => AppDevSurvey::$languages_options,
             'APIFormats' => AppDevSurvey::$api_format_options,
-            'OperatingSystems' => AppDevSurvey::$opsys_options,
+            'DeploymentOperatingSystems' => AppDevSurvey::$opsys_options,
             'GuestOperatingSystems' => AppDevSurvey::$opsys_options,
             //deployment
             'ProjectsUsed' => DeploymentOptions::$projects_used_options,
@@ -628,7 +620,7 @@ SQL;
                 s.OkToContact, s.BusinessDrivers, s.OtherBusinessDrivers, s.WhatDoYouLikeMost,
                 a.Toolkits, a.OtherToolkits, a.ProgrammingLanguages, a.OtherProgrammingLanguages,
                 a.APIFormats, a.DevelopmentEnvironments, a.OtherDevelopmentEnvironments,
-                a.OperatingSystems, a.OtherOperatingSystems, a.ConfigTools, a.OtherConfigTools,
+                a.OperatingSystems as ApplicationDevelopmentOperatingSystems, a.OtherOperatingSystems as ApplicationDevelopmentOtherOperatingSystems , a.ConfigTools, a.OtherConfigTools,
                 a.StateOfOpenStack, a.DocsPriority, a.InteractionWithOtherClouds, a.OtherAPIFormats, a.GuestOperatingSystems,
                 a.OtherGuestOperatingSystems, a.StruggleDevelopmentDeploying, a.OtherDocsPriority
             from DeploymentSurvey s
@@ -649,7 +641,7 @@ SQL;
             'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
             'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'UserGroupMember', 'UserGroupName', 'OkToContact', 'BusinessDrivers',
             'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'APIFormats', 'DevelopmentEnvironments', 'OtherDevelopmentEnvironments',
-            'OperatingSystems', 'OtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds', 'OtherAPIFormats', 'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
+            'ApplicationDevelopmentOperatingSystems', 'ApplicationDevelopmentOtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds', 'OtherAPIFormats', 'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
 
         $data = array();
 
@@ -683,7 +675,7 @@ SQL;
             'Toolkits' => AppDevSurvey::$toolkits_options,
             'ProgrammingLanguages' => AppDevSurvey::$languages_options,
             'APIFormats' => AppDevSurvey::$api_format_options,
-            'OperatingSystems' => AppDevSurvey::$opsys_options,
+            'ApplicationDevelopmentOperatingSystems' => AppDevSurvey::$opsys_options,
             'GuestOperatingSystems' => AppDevSurvey::$opsys_options,
             //deployment
             'ProjectsUsed' => DeploymentOptions::$projects_used_options,
@@ -708,9 +700,10 @@ SQL;
 
         $fields = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
             'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
-            'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'UserGroupMember', 'UserGroupName', 'OkToContact', 'BusinessDrivers',
-            'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'APIFormats', 'DevelopmentEnvironments', 'OtherDevelopmentEnvironments',
-            'OperatingSystems', 'OtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds', 'OtherAPIFormats', 'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
+            'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'OkToContact', 'BusinessDrivers',
+            'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'DevelopmentEnvironments',
+            'OtherDevelopmentEnvironments', 'ApplicationDevelopmentOperatingSystems', 'ApplicationDevelopmentOtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds',
+            'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
 
         $file_data = array();
 
@@ -719,9 +712,20 @@ SQL;
             foreach ($fields as $field) {
                 if (isset($flat_fields[$field])) {
                     $options = $flat_fields[$field];
-                    $values = $row[$field];
+                    $values  = $row[$field];
                     foreach ($options as $k => $v) {
-                        $line[$field . ' - ' . $k] = strpos($values, $k) !== false ?  '1' : '0';
+                        if($field === 'BusinessDrivers'){
+                            $business_drivers = (empty($values))? array():explode(',',$values);
+                            $business_drivers = (count($business_drivers) > 0) ? array_combine($business_drivers,$business_drivers): array();
+                            $index = false;
+                            if(isset($business_drivers[$k])){
+                                $index = array_search($k,array_keys($business_drivers));
+                            }
+
+                            $line[$field . ' - ' . $k] = $index === false ? '0': ($index+1);
+                        }
+                        else
+                            $line[$field . ' - ' . $k] = strpos($values, $k) !== false ?  '1' : '0';
                     }
                 } else {
                     $line[$field] = $row[$field];
