@@ -42,6 +42,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
         $business_drivers = (empty($survey->BusinessDrivers))? array():explode(',',$survey->BusinessDrivers);
         $business_drivers = (count($business_drivers) > 0) ? array_combine($business_drivers,$business_drivers): array();
+        $answer_count     = 0;
 
         foreach(DeploymentSurvey::$business_drivers_options as $key => $value){
             $hash = md5($key);
@@ -63,7 +64,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
                 $row_html = sprintf('<tr><td class="rank-wrapper" data-answer="%s_answer"></td><td class="rank-text">%s%s</td></tr>', $hash, $value, $input);
             }
             else {
-
+                ++$answer_count;
                 ++$index;
                 $row_html = sprintf('<tr><td class="rank-wrapper selected-rank" data-answer="%s_answer" data-sort="%s">%s</td><td class="rank-text">%s%s</td></tr>', $hash, $index, $index, $value, $input);
             }
@@ -88,7 +89,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
 
         Requirements::customScript('var answer_table = '.$answer_table.';');
-        Requirements::customScript('rank_order = '.count($business_drivers).';');
+        Requirements::customScript('rank_order = '.$answer_count.';');
 
         $fields->add(new CustomCheckboxSetField('InformationSources', 'Where do you end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))));
         $fields->add(new TextAreaField('OtherInformationSources', ''));
