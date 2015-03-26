@@ -1,0 +1,178 @@
+To: santipalenque@gmail.com
+Subject: =?UTF-8?B?TmV3IERlcGxveW1lbnRzIGFuZCBTdXJ2ZXlz?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="----=_NextPart_2228114"
+Content-Transfer-Encoding: 7bit
+From: noreply@openstack.org
+X-Mailer: SilverStripe Mailer - version 2006.06.21
+X-Priority: 3
+X-SilverStripeBounceURL:
+
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_2228114
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+User Surveys completed
+
+*Org: OpenStack Foundation*
+Updated: 2014-05-08 05:46:33
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-09 06:30:50
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-10 03:44:59
+View Details
+
+
+
+*Org: ISP RAS*
+Updated: 2014-05-10 17:31:18
+View Details
+
+
+
+*Org: StackStorm Inc*
+Updated: 2014-05-11 22:08:54
+View Details
+
+
+
+*Org: IPnett AB*
+Updated: 2014-05-12 09:51:44
+View Details
+
+
+
+*Org: EMC*
+Updated: 2014-05-12 09:55:09
+View Details
+
+
+
+*Org: Cisco*
+Updated: 2014-05-12 10:01:18
+View Details
+
+
+
+*Org: Koch Business Solutions, L.P.*
+Updated: 2014-05-12 10:03:01
+View Details
+
+
+
+*Org: Koch Industries*
+Updated: 2014-05-12 10:05:27
+View Details
+
+
+
+*Org: Cisco System*
+Updated: 2014-05-12 10:06:08
+View Details
+
+
+
+*Org: Illumina*
+Updated: 2014-05-12 10:07:45
+View Details
+
+
+
+*Org: VMware *
+Updated: 2014-05-12 10:32:16
+View Details
+
+
+
+*Org: OpenStack Foundation*
+Updated: 2014-05-12 10:33:43
+View Details
+
+
+
+*Org: OpenStack Foundation*
+Updated: 2014-05-12 10:35:43
+View Details
+
+
+
+Deployment profiles completed
+
+------=_NextPart_2228114
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+=09<base href=3D"./././" />
+</head>
+<body>
+
+<div class=3D"body">
+=09<style>*{ font-family: sans-serif;} p {font-size: 11px}</style><h2>User
+Surveys completed</h2><p><b>Org: OpenStack Foundation</b><br>Updated:
+2014-05-08 05:46:33<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1825/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-09 06:30:50<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1826/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-10 03:44:59<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1827/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: ISP RAS</b><br>Updated:
+2014-05-10 17:31:18<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1828/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: StackStorm
+Inc</b><br>Updated: 2014-05-11 22:08:54<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1829/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: IPnett AB</b><br>Updated:
+2014-05-12 09:51:44<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1830/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: EMC</b><br>Updated:
+2014-05-12 09:55:09<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1831/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Cisco</b><br>Updated:
+2014-05-12 10:01:18<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1832/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Koch Business Solutions,
+L.P.</b><br>Updated: 2014-05-12 10:03:01<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1833/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Koch
+Industries</b><br>Updated: 2014-05-12 10:05:27<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1834/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Cisco
+System</b><br>Updated: 2014-05-12 10:06:08<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1835/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Illumina</b><br>Updated:
+2014-05-12 10:07:45<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1836/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: VMware </b><br>Updated:
+2014-05-12 10:32:16<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1837/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: OpenStack
+Foundation</b><br>Updated: 2014-05-12 10:33:43<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1838/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: OpenStack
+Foundation</b><br>Updated: 2014-05-12 10:35:43<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1839/edit"
+target=3D"_blank">View Details</a></p><h2>Deployment profiles
+completed</h2>
+</div>
+
+</body>
+</html>
+
+------=_NextPart_2228114--

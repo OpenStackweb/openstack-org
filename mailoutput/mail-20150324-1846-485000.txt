@@ -1,0 +1,132 @@
+To: santipalenque@gmail.com
+Subject: =?UTF-8?B?TmV3IERlcGxveW1lbnRzIGFuZCBTdXJ2ZXlz?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="----=_NextPart_1468114"
+Content-Transfer-Encoding: 7bit
+From: noreply@openstack.org
+X-Mailer: SilverStripe Mailer - version 2006.06.21
+X-Priority: 3
+X-SilverStripeBounceURL:
+
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_1468114
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+User Surveys completed
+
+*Org: *
+Updated: 2014-08-06 06:28:49
+View Details
+
+
+
+*Org: *
+Updated: 2014-08-06 09:00:30
+View Details
+
+
+
+*Org: *
+Updated: 2014-08-06 10:44:32
+View Details
+
+
+
+*Org: Hewlett-Packard*
+Updated: 2014-08-06 13:54:06
+View Details
+
+
+
+*Org: *
+Updated: 2014-08-06 15:41:58
+View Details
+
+
+
+*Org: DEK Technologies*
+Updated: 2014-08-06 17:09:29
+View Details
+
+
+
+*Org: *
+Updated: 2014-08-07 07:36:34
+View Details
+
+
+
+*Org: *
+Updated: 2014-12-04 18:40:29
+View Details
+
+
+
+*Org: *
+Updated: 2014-12-04 18:45:14
+View Details
+
+
+
+*Org: *
+Updated: 2014-12-11 22:19:12
+View Details
+
+
+
+Deployment profiles completed
+
+------=_NextPart_1468114
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+=09<base href=3D"./././" />
+</head>
+<body>
+
+<div class=3D"body">
+=09<style>*{ font-family: sans-serif;} p {font-size: 11px}</style><h2>User
+Surveys completed</h2><p><b>Org: </b><br>Updated: 2014-08-06 06:28:49<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2096/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-08-06 09:00:30<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2097/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-08-06 10:44:32<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2098/edit"
+target=3D"_blank">View Details</a></p><p><b>Org:
+Hewlett-Packard</b><br>Updated: 2014-08-06 13:54:06<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2099/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-08-06 15:41:58<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2100/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: DEK
+Technologies</b><br>Updated: 2014-08-06 17:09:29<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2101/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-08-07 07:36:34<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2103/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-12-04 18:40:29<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2104/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-12-04 18:45:14<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2105/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-12-11 22:19:12<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2106/edit"
+target=3D"_blank">View Details</a></p><h2>Deployment profiles
+completed</h2>
+</div>
+
+</body>
+</html>
+
+------=_NextPart_1468114--

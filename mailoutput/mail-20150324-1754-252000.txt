@@ -1,0 +1,177 @@
+To: santipalenque@gmail.com
+Subject: =?UTF-8?B?TmV3IERlcGxveW1lbnRzIGFuZCBTdXJ2ZXlz?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="----=_NextPart_1223614"
+Content-Transfer-Encoding: 7bit
+From: noreply@openstack.org
+X-Mailer: SilverStripe Mailer - version 2006.06.21
+X-Priority: 3
+X-SilverStripeBounceURL:
+
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_1223614
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+User Surveys completed
+
+*Org: nokia*
+Updated: 2014-05-12 10:47:15
+View Details
+
+
+
+*Org: WALMART*
+Updated: 2014-05-12 11:59:39
+View Details
+
+
+
+*Org: WALMART*
+Updated: 2014-05-12 12:03:21
+View Details
+
+
+
+*Org: Internap*
+Updated: 2014-05-12 12:36:38
+View Details
+
+
+
+*Org: PDF Complete, Inc*
+Updated: 2014-05-12 14:28:11
+View Details
+
+
+
+*Org: Ericsson*
+Updated: 2014-05-12 15:31:06
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-12 15:36:35
+View Details
+
+
+
+*Org: IBM Deutschland Research & Development GmbH*
+Updated: 2014-05-13 02:09:18
+View Details
+
+
+
+*Org: Deutsche Telekom AG*
+Updated: 2014-05-13 07:58:29
+View Details
+
+
+
+*Org: Travelers Insurance*
+Updated: 2014-05-13 12:28:32
+View Details
+
+
+
+*Org: F5 Networks*
+Updated: 2014-05-13 12:55:36
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-13 13:09:46
+View Details
+
+
+
+*Org: CSC*
+Updated: 2014-05-13 13:10:39
+View Details
+
+
+
+*Org: Rackspace Hosting*
+Updated: 2014-05-13 13:36:25
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-13 14:48:28
+View Details
+
+
+
+Deployment profiles completed
+
+------=_NextPart_1223614
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+=09<base href=3D"./././" />
+</head>
+<body>
+
+<div class=3D"body">
+=09<style>*{ font-family: sans-serif;} p {font-size: 11px}</style><h2>User
+Surveys completed</h2><p><b>Org: nokia</b><br>Updated: 2014-05-12
+10:47:15<br><a href=3D"././admin/deployments/DeploymentSurvey/1840/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: WALMART</b><br>Updated:
+2014-05-12 11:59:39<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1843/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: WALMART</b><br>Updated:
+2014-05-12 12:03:21<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1845/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Internap</b><br>Updated:
+2014-05-12 12:36:38<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1854/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: PDF Complete,
+Inc</b><br>Updated: 2014-05-12 14:28:11<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1872/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Ericsson</b><br>Updated:
+2014-05-12 15:31:06<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1897/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-12 15:36:35<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1902/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: IBM Deutschland Research &
+Development GmbH</b><br>Updated: 2014-05-13 02:09:18<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1924/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Deutsche Telekom
+AG</b><br>Updated: 2014-05-13 07:58:29<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1926/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Travelers
+Insurance</b><br>Updated: 2014-05-13 12:28:32<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1937/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: F5
+Networks</b><br>Updated: 2014-05-13 12:55:36<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1946/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-13 13:09:46<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1951/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: CSC</b><br>Updated:
+2014-05-13 13:10:39<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1953/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Rackspace
+Hosting</b><br>Updated: 2014-05-13 13:36:25<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1958/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-13 14:48:28<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1962/edit"
+target=3D"_blank">View Details</a></p><h2>Deployment profiles
+completed</h2>
+</div>
+
+</body>
+</html>
+
+------=_NextPart_1223614--

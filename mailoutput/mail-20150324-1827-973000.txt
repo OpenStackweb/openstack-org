@@ -1,0 +1,177 @@
+To: santipalenque@gmail.com
+Subject: =?UTF-8?B?TmV3IERlcGxveW1lbnRzIGFuZCBTdXJ2ZXlz?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="----=_NextPart_1613914"
+Content-Transfer-Encoding: 7bit
+From: noreply@openstack.org
+X-Mailer: SilverStripe Mailer - version 2006.06.21
+X-Priority: 3
+X-SilverStripeBounceURL:
+
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_1613914
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+User Surveys completed
+
+*Org: *
+Updated: 2014-06-28 09:46:50
+View Details
+
+
+
+*Org: *
+Updated: 2014-07-02 03:42:22
+View Details
+
+
+
+*Org: Huawei*
+Updated: 2014-07-02 22:21:55
+View Details
+
+
+
+*Org: *
+Updated: 2014-07-03 03:00:51
+View Details
+
+
+
+*Org: asdas*
+Updated: 2014-07-07 01:41:15
+View Details
+
+
+
+*Org: fjh*
+Updated: 2014-07-07 07:31:00
+View Details
+
+
+
+*Org: *
+Updated: 2014-07-08 04:07:37
+View Details
+
+
+
+*Org: 123*
+Updated: 2014-07-08 04:10:39
+View Details
+
+
+
+*Org: *
+Updated: 2014-07-08 08:40:32
+View Details
+
+
+
+*Org: DEK Technologies*
+Updated: 2014-07-08 11:04:50
+View Details
+
+
+
+*Org: 99cloud*
+Updated: 2014-07-08 20:40:23
+View Details
+
+
+
+*Org: *
+Updated: 2014-07-10 12:07:45
+View Details
+
+
+
+*Org: vignesh*
+Updated: 2014-07-11 16:28:40
+View Details
+
+
+
+*Org: *
+Updated: 2014-07-15 16:15:39
+View Details
+
+
+
+*Org: *
+Updated: 2014-07-15 19:29:50
+View Details
+
+
+
+Deployment profiles completed
+
+------=_NextPart_1613914
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+=09<base href=3D"./././" />
+</head>
+<body>
+
+<div class=3D"body">
+=09<style>*{ font-family: sans-serif;} p {font-size: 11px}</style><h2>User
+Surveys completed</h2><p><b>Org: </b><br>Updated: 2014-06-28 09:46:50<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2037/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-07-02 03:42:22<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2038/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Huawei</b><br>Updated:
+2014-07-02 22:21:55<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2041/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-07-03 03:00:51<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2042/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: asdas</b><br>Updated:
+2014-07-07 01:41:15<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2043/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: fjh</b><br>Updated:
+2014-07-07 07:31:00<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2044/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-07-08 04:07:37<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2045/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: 123</b><br>Updated:
+2014-07-08 04:10:39<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2047/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-07-08 08:40:32<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2049/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: DEK
+Technologies</b><br>Updated: 2014-07-08 11:04:50<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2051/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: 99cloud</b><br>Updated:
+2014-07-08 20:40:23<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2052/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-07-10 12:07:45<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2054/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: vignesh</b><br>Updated:
+2014-07-11 16:28:40<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2056/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-07-15 16:15:39<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2058/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-07-15 19:29:50<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2059/edit"
+target=3D"_blank">View Details</a></p><h2>Deployment profiles
+completed</h2>
+</div>
+
+</body>
+</html>
+
+------=_NextPart_1613914--

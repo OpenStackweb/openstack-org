@@ -1,0 +1,177 @@
+To: santipalenque@gmail.com
+Subject: =?UTF-8?B?TmV3IERlcGxveW1lbnRzIGFuZCBTdXJ2ZXlz?=
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="----=_NextPart_2420514"
+Content-Transfer-Encoding: 7bit
+From: noreply@openstack.org
+X-Mailer: SilverStripe Mailer - version 2006.06.21
+X-Priority: 3
+X-SilverStripeBounceURL:
+
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_2420514
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+User Surveys completed
+
+*Org: *
+Updated: 2014-05-14 08:49:26
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-15 12:34:48
+View Details
+
+
+
+*Org: Red Hat*
+Updated: 2014-05-18 12:28:23
+View Details
+
+
+
+*Org: IBM*
+Updated: 2014-05-21 00:45:46
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-21 03:44:04
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-23 00:25:29
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-23 00:37:47
+View Details
+
+
+
+*Org: Center for Development of Advance computing*
+Updated: 2014-05-23 06:31:43
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-25 15:40:00
+View Details
+
+
+
+*Org: IBM*
+Updated: 2014-05-25 23:39:26
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-26 23:43:21
+View Details
+
+
+
+*Org: IBM*
+Updated: 2014-05-27 11:19:42
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-28 07:58:14
+View Details
+
+
+
+*Org: *
+Updated: 2014-05-28 12:29:26
+View Details
+
+
+
+*Org: IBM*
+Updated: 2014-05-29 21:26:40
+View Details
+
+
+
+Deployment profiles completed
+
+------=_NextPart_2420514
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+=09<base href=3D"./././" />
+</head>
+<body>
+
+<div class=3D"body">
+=09<style>*{ font-family: sans-serif;} p {font-size: 11px}</style><h2>User
+Surveys completed</h2><p><b>Org: </b><br>Updated: 2014-05-14 08:49:26<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1975/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-15 12:34:48<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1991/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Red Hat</b><br>Updated:
+2014-05-18 12:28:23<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1994/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: IBM</b><br>Updated:
+2014-05-21 00:45:46<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1998/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-21 03:44:04<br><a
+href=3D"././admin/deployments/DeploymentSurvey/1999/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-23 00:25:29<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2000/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-23 00:37:47<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2001/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: Center for Development of
+Advance computing</b><br>Updated: 2014-05-23 06:31:43<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2002/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-25 15:40:00<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2005/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: IBM</b><br>Updated:
+2014-05-25 23:39:26<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2006/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-26 23:43:21<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2008/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: IBM</b><br>Updated:
+2014-05-27 11:19:42<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2009/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-28 07:58:14<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2010/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: </b><br>Updated:
+2014-05-28 12:29:26<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2011/edit"
+target=3D"_blank">View Details</a></p><p><b>Org: IBM</b><br>Updated:
+2014-05-29 21:26:40<br><a
+href=3D"././admin/deployments/DeploymentSurvey/2012/edit"
+target=3D"_blank">View Details</a></p><h2>Deployment profiles
+completed</h2>
+</div>
+
+</body>
+</html>
+
+------=_NextPart_2420514--
