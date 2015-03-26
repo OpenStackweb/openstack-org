@@ -583,9 +583,20 @@ SQL;
             foreach ($fields as $field) {
                 if (isset($flat_fields[$field])) {
                     $options = $flat_fields[$field];
-                    $values = $row[$field];
+                    $values  = $row[$field];
                     foreach ($options as $k => $v) {
-                        $line[$field . ' - ' . $k] = strpos($values, $k) !== false ? '1' : '0';
+                        if($field === 'BusinessDrivers'){
+                            $business_drivers = (empty($values))? array():explode(',',$values);
+                            $business_drivers = (count($business_drivers) > 0) ? array_combine($business_drivers,$business_drivers): array();
+                            $index = false;
+                            if(isset($business_drivers[$k])){
+                                $index = array_search($k,array_keys($business_drivers));
+                            }
+
+                            $line[$field . ' - ' . $k] = $index === false ? '0': ($index+1);
+                        }
+                        else
+                            $line[$field . ' - ' . $k] = strpos($values, $k) !== false ?  '1' : '0';
                     }
                 } else {
                     $line[$field] = $row[$field];
