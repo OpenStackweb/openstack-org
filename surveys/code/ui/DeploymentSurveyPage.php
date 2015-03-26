@@ -280,7 +280,9 @@ class DeploymentSurveyPage_Controller extends Page_Controller
                 $DeploymentSurvey->CurrentStep        = 'AboutYou';
                 $DeploymentSurvey->HighestStepAllowed = 'AboutYou';
 
-                $DeploymentSurvey->UpdateDate  = SS_Datetime::now()->Rfc2822();
+                $DeploymentSurvey->UpdateDate         = SS_Datetime::now()->Rfc2822();
+                //old business drivers does not match with current answers
+                $DeploymentSurvey->BusinessDrivers    = '';
                 $DeploymentSurvey->Write();
             }
             return $DeploymentSurvey;
