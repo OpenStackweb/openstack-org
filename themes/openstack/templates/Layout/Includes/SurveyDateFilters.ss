@@ -5,8 +5,8 @@
         <label for="range">Subset</label>
         <div class="middleColumn">
             <select id="range">
-                <option selected value="OLD">ARCHIVE</option>
-                <option value="MARCH_2015">MARCH 2015</option>
+                <option selected value="OLD">V1</option>
+                <option value="MARCH_2015">V2 (March 2015)</option>
             </select>
         </div>
     </div>
