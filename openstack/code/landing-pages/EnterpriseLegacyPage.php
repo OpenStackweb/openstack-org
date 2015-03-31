@@ -11,17 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class AutomotiveLandingPage extends Page {
+class EnterpriseLegacyPage extends Page {
    static $db = array(
 	);
 }
  
-class AutomotiveLandingPage_Controller extends Page_Controller {
+class EnterpriseLegacyPage_Controller extends Page_Controller {
 
     function init()
     {
         parent::init();
 
+        Requirements::CSS('themes/openstack/css/enterprise.css');
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 

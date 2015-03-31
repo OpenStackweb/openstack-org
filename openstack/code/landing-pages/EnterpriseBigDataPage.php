@@ -22,8 +22,7 @@ class EnterpriseBigDataPage_Controller extends Page_Controller {
     {
         parent::init();
 
-        Requirements::CSS('themes/openstack/javascript/enterprise.css');
-        Requirements::CSS('themes/openstack/css/landing-pages/auto/styles.css');
+        Requirements::CSS('themes/openstack/css/enterprise.css');
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 
