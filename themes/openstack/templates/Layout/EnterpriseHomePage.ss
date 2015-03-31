@@ -194,14 +194,14 @@
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
-                    <img class="testimonial-author-img" src="/themes/openstack/images/enterprise/saran-photo.jpg">
+                    <img class="testimonial-author-img" src="/themes/openstack/images/enterprise/sri-paypal.jpg">
                     <blockquote>
-                        We are moving to the cloud powered by OpenStack to enable agility, availability and the innovation necessary to get the best products to our customers, faster than our competitors.
+                        Our private cloud [based on OpenStack,] provides us with the agility, availability, manageability, efficiency and the foundation for innovation necessary to deliver the best products and services.
                     </blockquote>
                     <div class="testimonial-attribute">
                         <img src="/themes/openstack/images/enterprise/paypal.png">
-                        <div class="testimonial-name">Saran Mandair</div>
-                        <div class="testimonial-title">VP Infrastructure Engineering, PayPal</div>
+                        <div class="testimonial-name">Sri Shivananda</div>
+                        <div class="testimonial-title">Vice President, Global Platform and Infrastructure, PayPal</div>
                     </div>
                 </div>
             </div>

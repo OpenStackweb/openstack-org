@@ -1025,6 +1025,9 @@ a.enterprise-bar-right {
   text-align: center; }
 .featured-use-cases img {
   max-width: 100%; }
+.featured-use-cases a.blue-btn:visited {
+	color: white;
+}
 
 .more-use-cases h3 {
   margin-top: 0; }
@@ -1063,7 +1066,8 @@ a.rounded-wrapper {
 .testimonial-author-img {
   margin: 0 0 30px;
   border: 4px solid #edf2f7;
-  border-radius: 100px; }
+	border-radius: 100%; 
+	max-width: 130px; }
 
 .testimonial-row blockquote {
   font-family: Georgia, serif;
