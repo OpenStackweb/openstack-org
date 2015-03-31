@@ -124,7 +124,7 @@ class HomePage_Controller extends Page_Controller
         $getVars = $this->request->getVars(); 
 
         // turn the video on if set in a URL parameter
-        if(isset($getVars['summit'])) $this->VideoCurrentlyPlaying = 'Yes';
+        if(isset($getVars['video'])) $this->VideoCurrentlyPlaying = 'Yes';
 
         if ($this->SummitMode == 'Yes' || isset($getVars['summit'])) {
             return $this->renderWith(array('HomePage_Summit', 'HomePage', 'Page'));
