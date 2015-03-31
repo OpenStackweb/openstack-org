@@ -2,7 +2,7 @@
 
     <div class="enterprise-bar">
        <div class="container">
-          <a href="/" class="enterprise-bar-left">OpenStack In The Enterprise</a>
+          <a href="/enterprise/" class="enterprise-bar-left">OpenStack In The Enterprise</a>
           <a href="#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
@@ -80,7 +80,7 @@
             </div>
            <div class="row featured-use-cases">
                <div class="col-sm-6">
-                    <a href="/virtualization-integration/">
+                    <a href="/enterprise/virtualization-integration/">
                         <img src="/themes/openstack/images/enterprise/legacy-thumb.jpg" alt="">
                     </a>
                    <h3>Modernizing Virtualization Infrastructure</h3>
@@ -88,11 +88,11 @@
                        Many enterprises operate large VMware-based virtualized infrastructures to support a legacy of mission-critical applications. With OpenStack, they can combine the agility offered by cloud computing while maintaining the stability and resiliency of their traditional environment.
                    </p>
                    <p>
-                       <a href="/virtualization-integration/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
+                       <a href="/enterprise/virtualization-integration/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
                    </p>
                </div>
                <div class="col-sm-6">
-                    <a href="/automotive/">
+                    <a href="/enterprise/big-data/">
                         <img src="/themes/openstack/images/enterprise/bigdata-thumb.jpg" alt="">
                     </a>
                    <h3>Big Data Analytics</h3>
@@ -100,7 +100,7 @@
                        The auto industry is projected to be the second largest generator of data by next year. One innovative manufacturer saw the opportunity to leverage massive amounts of data telematics produced by cars and drivers to plan new features and gain competitive advantage.
                    </p>
                    <p>
-                       <a href="/automotive/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
+                       <a href="/enterprise/big-data/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
                    </p>
                </div>
            </div>
