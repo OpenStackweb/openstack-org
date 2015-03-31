@@ -111,8 +111,27 @@ class HomePage_Controller extends Page_Controller
 
     static $allowed_actions = array(
         'Video',
-        'LatestNews'
+        'LatestNews',
+        'handleIndex'
     );
+
+    static $url_handlers = array(
+        '' => 'handleIndex',
+    );
+
+    // checks to see if the hompeage is in summit mode (if so, changes template used)
+    public function handleIndex(){
+        $getVars = $this->request->getVars(); 
+
+        // turn the video on if set in a URL parameter
+        if(isset($getVars['summit'])) $this->VideoCurrentlyPlaying = 'Yes';
+
+        if ($this->SummitMode == 'Yes' || isset($getVars['summit'])) {
+            return $this->renderWith(array('HomePage_Summit', 'HomePage', 'Page'));
+        } else {
+            return $this;
+        }
+    }
 
     function init()
     {
