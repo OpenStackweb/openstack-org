@@ -25,6 +25,7 @@ class EnterpriseHomePage_Controller extends Page_Controller {
         Requirements::CSS('themes/openstack/javascript/enterprise.css');
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/enterprise.js');        
 
 	    Requirements::customScript("jQuery(document).ready(function($) {
 
