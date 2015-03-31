@@ -916,13 +916,13 @@ SQL;
         SangriaPage_Controller::generateDateFilters('s');
 
         $sql = <<< SQL
-SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace FROM Member AS M
-INNER JOIN Company_Administrators AS CA ON M.ID = CA.MemberID
+SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace
+FROM Member AS M
+INNER JOIN ( SELECT MemberID, CompanyID, GroupID FROM Company_Administrators WHERE Company_Administrators.GroupID IN ('{$filters_string}') ) AS CA ON CA.MemberID = M.ID
 INNER JOIN Company AS C ON C.ID = CA.CompanyID
 INNER JOIN MarketPlaceType AS MT ON MT.AdminGroupID = CA.GroupID
-WHERE (M.ID IN (SELECT MemberID FROM Company_Administrators WHERE Company_Administrators.GroupID IN ('{$filters_string}')))
 GROUP BY M.FirstName, M.Surname, M.Email, C.Name
-ORDER BY C.Name, M.SurName;
+ORDER BY M.Email, C.Name ;
 SQL;
 
         $res = DB::query($sql);
