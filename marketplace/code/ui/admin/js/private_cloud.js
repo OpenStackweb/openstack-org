@@ -15,10 +15,12 @@ jQuery(document).ready(function($){
     var form = $("#private_cloud_form");
 
     if(form.length > 0){
+
         //main form validation
 
         //main form
         form.marketplace_type_header();
+        form.implementation_openstack_powered();
 
         $("#components_form").components();
         $("#hypervisors_form").hypervisors();
@@ -52,7 +54,7 @@ jQuery(document).ready(function($){
                 $("#live_id",form).val(private_cloud.id);
                 $('.publish-private-cloud').prop('disabled',true);
             }
-
+            form.implementation_openstack_powered('load', private_cloud);
             //reload widgets
             $("#components_form").components('load',private_cloud.capabilities);
             if(private_cloud.capabilities.length>0){
@@ -67,6 +69,7 @@ jQuery(document).ready(function($){
         }
 
         $('.save-private-cloud').click(function(event){
+            tinyMCE.triggerSave();
             var button =  $(this);
             if(button.prop('disabled')){
                 return false;
@@ -79,49 +82,11 @@ jQuery(document).ready(function($){
             if(!is_valid) return false;
             form_validator.resetForm();
 
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
-            var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
+            var private_cloud = serializePrivateCloud(form, false);
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hyper_visors        !== false &&
-                videos              !== false &&
-                data_centers        !== false &&
-                pricing_schemas     !== false
-                ){
+            if(private_cloud !== false) {
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create private_cloud object and POST it
-                var private_cloud = {};
-                private_cloud.id                      = parseInt($("#id",form).val());
-                private_cloud.live_service_id         = parseInt($("#live_id",form).val());
-                private_cloud.company_id              = parseInt($("#company_id",form).val());
-                private_cloud.name                    = $("#name",form).val();
-                private_cloud.overview                = $("#overview",form).val();
-                private_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                private_cloud.active                  = $('#active',form).is(":checked");
-                private_cloud.videos                  = videos;
-                private_cloud.hypervisors             = hyper_visors;
-                private_cloud.guest_os                = guest_os;
-                private_cloud.capabilities            = capabilities;
-                for(var i in private_cloud.capabilities){
-                    var c = private_cloud.capabilities[i];
-                    c.pricing_schemas = pricing_schemas;
-                }
-                private_cloud.regional_support        = regional_support;
-                private_cloud.additional_resources    = additional_resources;
-                private_cloud.data_centers            = data_centers;
-                private_cloud.published               = 0;
-
                 var type   = private_cloud.id > 0 ?'PUT':'POST';
 
                 $('.save-private-cloud').prop('disabled',true);
@@ -171,13 +136,13 @@ jQuery(document).ready(function($){
                         return 'data center location: address ( city:'+location.city+',state: '+location.state+', country:'+location.country+' )';
                     }
                 });
-
-
             }
+
             return false;
         });
 
         $('.preview-private_cloud').click(function(event){
+            tinyMCE.triggerSave();
             var button =  $(this);
             if(button.prop('disabled')){
                 return false;
@@ -190,49 +155,13 @@ jQuery(document).ready(function($){
             if(!is_valid) return false;
             form_validator.resetForm();
 
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
-            var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
-            var is_pdf               = $(this).hasClass('pdf');
+            var private_cloud = serializePrivateCloud(form, false);
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hyper_visors        !== false &&
-                videos              !== false &&
-                data_centers        !== false &&
-                pricing_schemas     !== false
-                ){
+            var is_pdf        = $(this).hasClass('pdf');
+
+            if(private_cloud !== false) {
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create private_cloud object and POST it
-                var private_cloud = {};
-                private_cloud.id                      = parseInt($("#id",form).val());
-                private_cloud.live_service_id         = parseInt($("#live_id",form).val());
-                private_cloud.company_id              = parseInt($("#company_id",form).val());
-                private_cloud.name                    = $("#name",form).val();
-                private_cloud.overview                = $("#overview",form).val();
-                private_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                private_cloud.active                  = $('#active',form).is(":checked");
-                private_cloud.videos                  = videos;
-                private_cloud.hypervisors             = hyper_visors;
-                private_cloud.guest_os                = guest_os;
-                private_cloud.capabilities            = capabilities;
-                for(var i in private_cloud.capabilities){
-                    var c = private_cloud.capabilities[i];
-                    c.pricing_schemas = pricing_schemas;
-                }
-                private_cloud.regional_support        = regional_support;
-                private_cloud.additional_resources    = additional_resources;
-                private_cloud.data_centers            = data_centers;
-                private_cloud.published               = 0;
 
                 var type   = private_cloud.id > 0 ?'PUT':'POST';
 
@@ -290,13 +219,13 @@ jQuery(document).ready(function($){
                         return 'data center location: address ( city:'+location.city+',state: '+location.state+', country:'+location.country+' )';
                     }
                 });
-
-
             }
+
             return false;
         });
 
         $('.publish-private-cloud').click(function(event){
+            tinyMCE.triggerSave();
             var button =  $(this);
             if(button.prop('disabled')){
                 return false;
@@ -309,48 +238,11 @@ jQuery(document).ready(function($){
             if(!is_valid) return false;
             form_validator.resetForm();
 
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
-            var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
+            var private_cloud = serializePrivateCloud(form, true);
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hyper_visors        !== false &&
-                videos              !== false &&
-                data_centers        !== false &&
-                pricing_schemas     !== false
-                ){
+            if(private_cloud !== false){
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create private_cloud object and POST it
-                var private_cloud = {};
-                private_cloud.id                      = parseInt($("#id",form).val());
-                private_cloud.live_service_id         = parseInt($("#live_id",form).val());
-                private_cloud.company_id              = parseInt($("#company_id",form).val());
-                private_cloud.name                    = $("#name",form).val();
-                private_cloud.overview                = $("#overview",form).val();
-                private_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                private_cloud.active                  = $('#active',form).is(":checked");
-                private_cloud.videos                  = videos;
-                private_cloud.hypervisors             = hyper_visors;
-                private_cloud.guest_os                = guest_os;
-                private_cloud.capabilities            = capabilities;
-                for(var i in private_cloud.capabilities){
-                    var c = private_cloud.capabilities[i];
-                    c.pricing_schemas = pricing_schemas;
-                }
-                private_cloud.regional_support        = regional_support;
-                private_cloud.additional_resources    = additional_resources;
-                private_cloud.data_centers            = data_centers;
-                private_cloud.published               = 1;
 
                 var url  = 'api/v1/marketplace/private-clouds/'+private_cloud.live_service_id;
 
@@ -399,11 +291,62 @@ jQuery(document).ready(function($){
                         return 'data center location: address ( city:'+location.city+',state: '+location.state+', country:'+location.country+' )';
                     }
                 });
-
-
             }
+
             return false;
         });
-
     }
 });
+
+/**
+ *
+ * @param form
+ * @param publish
+ * @returns {*}
+ */
+function serializePrivateCloud(form, publish){
+
+    var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var regional_support     = $("#support-channels-form").support_channels('serialize');
+    var capabilities         = $("#components_form").components('serialize');
+    var guest_os             = $("#guest_os_form").guest_os('serialize');
+    var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
+    var videos               = $("#videos-form").videos('serialize');
+    var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
+    var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
+
+    if(additional_resources !== false &&
+        regional_support    !== false &&
+        capabilities        !== false &&
+        guest_os            !== false &&
+        hyper_visors        !== false &&
+        videos              !== false &&
+        data_centers        !== false &&
+        pricing_schemas     !== false
+    ) {
+        var private_cloud = {};
+        private_cloud.id                      = parseInt($("#id",form).val());
+        private_cloud.live_service_id         = parseInt($("#live_id",form).val());
+        private_cloud.company_id              = parseInt($("#company_id",form).val());
+        private_cloud.name                    = $("#name",form).val();
+        private_cloud.overview                = $("#overview",form).val();
+        private_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
+        private_cloud.active                  = $('#active',form).is(":checked");
+        private_cloud.videos                  = videos;
+        private_cloud.hypervisors             = hyper_visors;
+        private_cloud.guest_os                = guest_os;
+        private_cloud.capabilities            = capabilities;
+        for(var i in private_cloud.capabilities){
+            var c = private_cloud.capabilities[i];
+            c.pricing_schemas = pricing_schemas;
+        }
+        private_cloud.regional_support        = regional_support;
+        private_cloud.additional_resources    = additional_resources;
+        private_cloud.data_centers            = data_centers;
+        private_cloud                         = form.implementation_openstack_powered('serialize', private_cloud);
+        private_cloud.published               = publish?1:0;
+        return private_cloud;
+    }
+
+    return false;
+}

@@ -17,6 +17,7 @@ jQuery(document).ready(function($){
     if(form.length > 0){
 
         form.marketplace_type_header();
+        form.implementation_openstack_powered();
 
         $("#components_form").components();
         $("#hypervisors_form").hypervisors();
@@ -48,7 +49,7 @@ jQuery(document).ready(function($){
                 $("#live_id",form).val(distribution.id);
                 $('.publish-distribution').prop('disabled',true);
             }
-
+            form.implementation_openstack_powered('load', distribution);
             //reload widgets
             $("#components_form").components('load',distribution.capabilities);
             $("#hypervisors_form").hypervisors('load',distribution.hypervisors);
@@ -59,49 +60,25 @@ jQuery(document).ready(function($){
         }
 
         $('.save-distribution').click(function(event){
+
+            tinyMCE.triggerSave();
             event.preventDefault();
             event.stopPropagation();
             var button =  $(this);
             if(button.prop('disabled')){
                 return false;
             }
+
             var form_validator = form.marketplace_type_header('getFormValidator');
             form_validator.settings.ignore = ".add-comtrol";
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hypervisors         !== false &&
-                videos              !== false){
+            var distribution = serializeDistribution(form, false);
 
+            if(distribution !== false) {
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create distribution object and POST it
-                var distribution = {};
-                distribution.id                      = parseInt($("#id",form).val());
-                distribution.live_service_id         = parseInt($("#live_id",form).val());
-                distribution.company_id              = parseInt($("#company_id",form).val());
-                distribution.name                    = $("#name",form).val();
-                distribution.overview                = $("#overview",form).val();
-                distribution.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                distribution.active                  = $('#active',form).is(":checked");
-                distribution.videos                  = videos;
-                distribution.hypervisors             = hypervisors;
-                distribution.guest_os                = guest_os;
-                distribution.capabilities            = capabilities;
-                distribution.regional_support        = regional_support;
-                distribution.additional_resources    = additional_resources;
-                distribution.published               = 0;
 
                 var type = distribution.id > 0 ?'PUT':'POST';
 
@@ -129,6 +106,7 @@ jQuery(document).ready(function($){
         });
 
         $('.preview-distribution').click(function(event){
+            tinyMCE.triggerSave();
             event.preventDefault();
             event.stopPropagation();
             var button =  $(this);
@@ -140,43 +118,18 @@ jQuery(document).ready(function($){
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var is_pdf               = $(this).hasClass('pdf');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hypervisors         !== false &&
-                videos              !== false){
+            var is_pdf      = $(this).hasClass('pdf');
+            var distribution = serializeDistribution(form, false);
+
+            if(distribution !== false) {
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create distribution object and POST it
-                var distribution = {};
-                distribution.id                      = parseInt($("#id",form).val());
-                distribution.live_service_id         = parseInt($("#live_id",form).val());
-                distribution.company_id              = parseInt($("#company_id",form).val());
-                distribution.name                    = $("#name",form).val();
-                distribution.overview                = $("#overview",form).val();
-                distribution.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                distribution.active                  = $('#active',form).is(":checked");
-                distribution.videos                  = videos;
-                distribution.hypervisors             = hypervisors;
-                distribution.guest_os                = guest_os;
-                distribution.capabilities            = capabilities;
-                distribution.regional_support        = regional_support;
-                distribution.additional_resources    = additional_resources;
-                distribution.published               = 0;
 
                 var type = distribution.id > 0 ?'PUT':'POST';
 
                 $('.save-distribution').prop('disabled',true);
+
                 $.ajax({
                     type: type,
                     url: 'api/v1/marketplace/distributions',
@@ -203,10 +156,12 @@ jQuery(document).ready(function($){
                     }
                 });
             }
+
             return false;
         });
 
         $('.publish-distribution').click(function(event){
+            tinyMCE.triggerSave();
             event.preventDefault();
             event.stopPropagation();
             var button =  $(this);
@@ -218,38 +173,12 @@ jQuery(document).ready(function($){
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hypervisors         !== false &&
-                videos              !== false){
+            var distribution = serializeDistribution(form, true);
+
+            if(distribution !== false){
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create distribution object and POST it
-                var distribution = {};
-                distribution.id                      = parseInt($("#id",form).val());
-                distribution.live_service_id         = parseInt($("#live_id",form).val());
-                distribution.company_id              = parseInt($("#company_id",form).val());
-                distribution.name                    = $("#name",form).val();
-                distribution.overview                = $("#overview",form).val();
-                distribution.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                distribution.active                  = $('#active',form).is(":checked");
-                distribution.videos                  = videos;
-                distribution.hypervisors             = hypervisors;
-                distribution.guest_os                = guest_os;
-                distribution.capabilities            = capabilities;
-                distribution.regional_support        = regional_support;
-                distribution.additional_resources    = additional_resources;
-                distribution.published               = 1;
 
                 var url  = 'api/v1/marketplace/distributions/'+distribution.live_service_id;
 
@@ -277,3 +206,48 @@ jQuery(document).ready(function($){
         });
     }
 });
+
+/**
+ *
+ * @param form
+ * @param publish
+ */
+function serializeDistribution(form, publish){
+
+    var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var regional_support     = $("#support-channels-form").support_channels('serialize');
+    var capabilities         = $("#components_form").components('serialize');
+    var guest_os             = $("#guest_os_form").guest_os('serialize');
+    var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
+    var videos               = $("#videos-form").videos('serialize');
+
+    if(additional_resources !== false &&
+        regional_support    !== false &&
+        capabilities        !== false &&
+        guest_os            !== false &&
+        hypervisors         !== false &&
+        videos              !== false){
+
+        var distribution = {};
+
+        distribution.id                      = parseInt($("#id",form).val());
+        distribution.live_service_id         = parseInt($("#live_id",form).val());
+        distribution.company_id              = parseInt($("#company_id",form).val());
+        distribution.name                    = $("#name",form).val();
+        distribution.overview                = $("#overview",form).val();
+        distribution.call_2_action_uri       = $("#call_2_action_uri",form).val();
+        distribution.active                  = $('#active',form).is(":checked");
+        distribution.videos                  = videos;
+        distribution.hypervisors             = hypervisors;
+        distribution.guest_os                = guest_os;
+        distribution.capabilities            = capabilities;
+        distribution.regional_support        = regional_support;
+        distribution.additional_resources    = additional_resources;
+        distribution                         = form.implementation_openstack_powered('serialize', distribution);
+        distribution.published               = publish? 1:0;
+
+        return distribution;
+    }
+
+    return false;
+}

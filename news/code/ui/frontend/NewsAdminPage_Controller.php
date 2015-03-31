@@ -14,7 +14,7 @@
 /**
  * Class NewsPage_Controller
  */
-final class NewsAdminPage_Controller extends Page_Controller {
+final class NewsAdminPage_Controller extends AdminController {
 
 	/**
 	 * @var array

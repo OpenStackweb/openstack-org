@@ -20,7 +20,8 @@
     <div style="clear:both">
         <fieldset>
         <form id="distribution_form" name="distribution_form">
-         <% include MarketPlaceAdminPage_CompanyServiceHeader %>
+            <% include MarketPlaceAdminPage_CompanyServiceHeader %><BR>
+            <% include MarketPlaceAdminPage_OpenStackPowered %>
          </form>
         <% include Components %>
         <% include Hypervisors %>

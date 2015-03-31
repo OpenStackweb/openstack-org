@@ -23,4 +23,11 @@ interface IOpenStackImplementationFactory extends ICompanyServiceFactory {
 	 */
 	public function buildCapability($coverage_percent, IReleaseSupportedApiVersion $release_supported_api_version, IOpenStackImplementation $implementation);
 
+	/**
+	 * @param IOpenStackImplementation $implementation
+	 * @param $data
+	 * @return void
+	 */
+	public function buildOpenStackPowered(IOpenStackImplementation $implementation, $data);
+
 }

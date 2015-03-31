@@ -14,7 +14,7 @@
 /**
  * Class ValidatorFactory
  */
-final class ValidatorFactory
+class ValidatorFactory
 	implements IValidatorFactory {
 
 	/**

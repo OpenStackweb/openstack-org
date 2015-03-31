@@ -33,7 +33,7 @@ class MarketPlaceAdminPage extends Page implements PermissionProvider
 /**
  * Class MarketPlaceAdminPage_Controller
  */
-class MarketPlaceAdminPage_Controller extends Page_Controller
+class MarketPlaceAdminPage_Controller extends AdminController
 {
 	/**
 	 * @var IMarketplaceTypeRepository
@@ -119,6 +119,8 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
      * @var IEntityRepository
      */
     private $consultant_draft_repository;
+
+
 
 	function init()
 	{
@@ -451,7 +453,10 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
+		Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
+		HtmlEditorField::include_js();
 		Requirements::javascript('marketplace/code/ui/admin/js/distribution.js');
+
 		return $this->getViewer('distribution')->process($this);
 	}
 
@@ -466,7 +471,10 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
+		Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
+		HtmlEditorField::include_js();
 		Requirements::javascript('marketplace/code/ui/admin/js/appliance.js');
+
 		return $this->getViewer('appliance')->process($this);
 	}
 
@@ -483,9 +491,12 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
+		Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
 		Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
 		Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
+		HtmlEditorField::include_js();
 		Requirements::javascript('marketplace/code/ui/admin/js/public_cloud.js');
+
 		return $this->getViewer('public_cloud')->process($this);
 	}
 
@@ -502,8 +513,10 @@ class MarketPlaceAdminPage_Controller extends Page_Controller
 		Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
 		Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
+		Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
 		Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
 		Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
+		HtmlEditorField::include_js();
 		Requirements::javascript('marketplace/code/ui/admin/js/private_cloud.js');
 		return $this->getViewer('private_cloud')->process($this);
 	}
