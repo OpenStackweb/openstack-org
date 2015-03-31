@@ -11,6 +11,7 @@
  * limitations under the License.
  **/
 jQuery(document).ready(function($){
+
     var form = $("#appliance_form");
 
     if(form.length > 0){
@@ -18,12 +19,15 @@ jQuery(document).ready(function($){
         //main form
         form.marketplace_type_header();
 
+        form.implementation_openstack_powered();
+
         $("#videos-form").videos();
         $("#guest_os_form").guest_os();
         $("#hypervisors_form").hypervisors();
         $("#components_form").components();
         $("#additional-resources-form").additional_resources();
         $("#support-channels-form").support_channels();
+
         //if we are editing data, load it ...
         if(typeof(appliance)!=='undefined'){
             //populate form and widgets
@@ -48,6 +52,7 @@ jQuery(document).ready(function($){
                 $('.publish-appliance').prop('disabled',true);
             }
 
+            form.implementation_openstack_powered('load', appliance);
             //reload widgets
             $("#guest_os_form").guest_os('load',appliance.guest_os);
             $("#hypervisors_form").hypervisors('load',appliance.hypervisors);
@@ -58,6 +63,7 @@ jQuery(document).ready(function($){
         }
 
         $('.save-appliance').click(function(event){
+            tinyMCE.triggerSave();
             event.preventDefault();
             event.stopPropagation();
             var button =  $(this);
@@ -69,38 +75,12 @@ jQuery(document).ready(function($){
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hypervisors         !== false &&
-                videos              !== false){
+            var appliance = serializeAppliance(form, false);
+
+            if(appliance !== false){
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create distribution object and POST it
-                var appliance = {};
-                appliance.id                      = parseInt($("#id",form).val());
-                appliance.live_service_id         = parseInt($("#live_id",form).val());
-                appliance.company_id              = parseInt($("#company_id",form).val());
-                appliance.name                    = $("#name",form).val();
-                appliance.overview                = $("#overview",form).val();
-                appliance.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                appliance.active                  = $('#active',form).is(":checked");;
-                appliance.videos                  = videos;
-                appliance.hypervisors             = hypervisors;
-                appliance.guest_os                = guest_os;
-                appliance.capabilities            = capabilities;
-                appliance.regional_support        = regional_support;
-                appliance.additional_resources    = additional_resources;
-                appliance.published               = 0;
 
                 var type = appliance.id > 0 ?'PUT':'POST';
                 $('.save-appliance').prop('disabled',true);
@@ -127,6 +107,7 @@ jQuery(document).ready(function($){
         });
 
         $('.preview-appliance').click(function(event){
+            tinyMCE.triggerSave();
             event.preventDefault();
             event.stopPropagation();
             var button =  $(this);
@@ -138,39 +119,13 @@ jQuery(document).ready(function($){
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var is_pdf               = $(this).hasClass('pdf');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hypervisors         !== false &&
-                videos              !== false){
+            var appliance = serializeAppliance(form, false);
+            var is_pdf    = $(this).hasClass('pdf');
+
+            if(appliance !== false) {
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create distribution object and POST it
-                var appliance = {};
-                appliance.id                      = parseInt($("#id",form).val());
-                appliance.live_service_id         = parseInt($("#live_id",form).val());
-                appliance.company_id              = parseInt($("#company_id",form).val());
-                appliance.name                    = $("#name",form).val();
-                appliance.overview                = $("#overview",form).val();
-                appliance.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                appliance.active                  = $('#active',form).is(":checked");;
-                appliance.videos                  = videos;
-                appliance.hypervisors             = hypervisors;
-                appliance.guest_os                = guest_os;
-                appliance.capabilities            = capabilities;
-                appliance.regional_support        = regional_support;
-                appliance.additional_resources    = additional_resources;
-                appliance.published               = 0;
 
                 var type = appliance.id > 0 ?'PUT':'POST';
                 $('.save-appliance').prop('disabled',true);
@@ -200,10 +155,12 @@ jQuery(document).ready(function($){
                     }
                 });
             }
+
             return false;
         });
 
         $('.publish-appliance').click(function(event){
+            tinyMCE.triggerSave();
             event.preventDefault();
             event.stopPropagation();
             var button =  $(this);
@@ -215,38 +172,12 @@ jQuery(document).ready(function($){
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hypervisors         !== false &&
-                videos              !== false){
+            var appliance = serializeAppliance(form, true);
+
+            if(appliance !== false) {
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create distribution object and POST it
-                var appliance = {};
-                appliance.id                      = parseInt($("#id",form).val());
-                appliance.live_service_id         = parseInt($("#live_id",form).val());
-                appliance.company_id              = parseInt($("#company_id",form).val());
-                appliance.name                    = $("#name",form).val();
-                appliance.overview                = $("#overview",form).val();
-                appliance.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                appliance.active                  = $('#active',form).is(":checked");;
-                appliance.videos                  = videos;
-                appliance.hypervisors             = hypervisors;
-                appliance.guest_os                = guest_os;
-                appliance.capabilities            = capabilities;
-                appliance.regional_support        = regional_support;
-                appliance.additional_resources    = additional_resources;
-                appliance.published               = 1;
 
                 var url  = 'api/v1/marketplace/appliances/'+appliance.live_service_id;
 
@@ -268,8 +199,53 @@ jQuery(document).ready(function($){
                     }
                 });
             }
+
             return false;
         });
     }
 });
+
+/**
+ *
+ * @param form
+ * @param publish
+ * @returns {*}
+ */
+function serializeAppliance(form, publish){
+
+    var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var regional_support     = $("#support-channels-form").support_channels('serialize');
+    var capabilities         = $("#components_form").components('serialize');
+    var guest_os             = $("#guest_os_form").guest_os('serialize');
+    var hypervisors          = $("#hypervisors_form").hypervisors('serialize');
+    var videos               = $("#videos-form").videos('serialize');
+
+    if(additional_resources !== false &&
+        regional_support    !== false &&
+        capabilities        !== false &&
+        guest_os            !== false &&
+        hypervisors         !== false &&
+        videos              !== false){
+
+        var appliance = {};
+        appliance.id                      = parseInt($("#id",form).val());
+        appliance.live_service_id         = parseInt($("#live_id",form).val());
+        appliance.company_id              = parseInt($("#company_id",form).val());
+        appliance.name                    = $("#name",form).val();
+        appliance.overview                = $("#overview",form).val();
+        appliance.call_2_action_uri       = $("#call_2_action_uri",form).val();
+        appliance.active                  = $('#active',form).is(":checked");;
+        appliance.videos                  = videos;
+        appliance.hypervisors             = hypervisors;
+        appliance.guest_os                = guest_os;
+        appliance.capabilities            = capabilities;
+        appliance.regional_support        = regional_support;
+        appliance.additional_resources    = additional_resources;
+        appliance                         = form.implementation_openstack_powered('serialize', appliance);
+        appliance.published               = publish ? 1 : 0;
+
+        return appliance;
+    }
+    return false
+}
 

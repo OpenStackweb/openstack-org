@@ -18,5 +18,30 @@ abstract class OpenStackImplementationDraftFactory
         return $capability;
     }
 
+    /**
+     * @param IOpenStackImplementation $implementation
+     * @param                          $data
+     */
+    public function buildOpenStackPowered(IOpenStackImplementation $implementation, $data)
+    {
+
+        $implementation->setCompatibleWithCompute($data['compatible_compute']);
+        $implementation->setCompatibleWithStorage($data['compatible_storage']);
+        $implementation->setCompatibleWithPlatform($data['compatible_platform']);
+        $implementation->setCompatibleWithFederatedIdentity($data['compatible_federated_identity']);
+
+        if ($implementation->isCompatibleWithCompute()) {
+            $implementation->setComputeCapabilities($data['compute_capabilities']);
+        }
+
+        if ($implementation->isCompatibleWithStorage()) {
+            $implementation->setComputeCapabilities($data['storage_capabilities']);
+        }
+
+        if ($implementation->isCompatibleWithPlatform()) {
+            $implementation->setComputeCapabilities($data['platform_capabilities']);
+        }
+    }
+
 
 } 

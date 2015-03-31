@@ -15,11 +15,10 @@ jQuery(document).ready(function($){
     var form = $("#public_cloud_form");
 
     if(form.length > 0){
-        //main form validation
 
         //main form
         form.marketplace_type_header();
-
+        form.implementation_openstack_powered();
         $("#components_form").components();
         $("#hypervisors_form").hypervisors();
         $("#guest_os_form").guest_os();
@@ -52,7 +51,7 @@ jQuery(document).ready(function($){
                 $("#live_id",form).val(public_cloud.id);
                 $('.publish-public-cloud').prop('disabled',true);
             }
-
+            form.implementation_openstack_powered('load', public_cloud);
             //reload widgets
             $("#components_form").components('load',public_cloud.capabilities);
             if(public_cloud.capabilities.length>0){
@@ -68,66 +67,26 @@ jQuery(document).ready(function($){
         }
 
         $('.save-public-cloud').click(function(event){
+            tinyMCE.triggerSave();
             var button =  $(this);
             if(button.prop('disabled')){
                 return false;
             }
             event.preventDefault();
             event.stopPropagation();
+
             var form_validator = form.marketplace_type_header('getFormValidator');
             form_validator.settings.ignore = ".add-comtrol";
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
-            var pricing_schemas       = $("#pricing_schema_form").pricing_schemas('serialize');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hyper_visors        !== false &&
-                videos              !== false &&
-                data_centers        !== false &&
-                pricing_schemas     !== false
-                ){
+            var public_cloud = serializePublicCloud(form, false);
 
+            if(public_cloud !== false){
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create public_cloud object and POST it
-                var public_cloud = {};
-                public_cloud.id                      = parseInt($("#id",form).val());
-                public_cloud.live_service_id         = parseInt($("#live_id",form).val());
-                public_cloud.company_id              = parseInt($("#company_id",form).val());
-                public_cloud.name                    = $("#name",form).val();
-                public_cloud.overview                = $("#overview",form).val();
-                public_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                public_cloud.active                  = $('#active',form).is(":checked");
-                public_cloud.videos                  = videos;
-                public_cloud.hypervisors             = hyper_visors;
-                public_cloud.guest_os                = guest_os;
-                public_cloud.capabilities            = capabilities;
-                for(var i in public_cloud.capabilities){
-                    var c = public_cloud.capabilities[i];
-                    c.pricing_schemas = pricing_schemas;
-                }
-                public_cloud.regional_support        = regional_support;
-                public_cloud.additional_resources    = additional_resources;
-                public_cloud.data_centers            = data_centers;
-                public_cloud.published               = 0;
-
-
                 var type   = public_cloud.id > 0 ?'PUT':'POST';
-
                 $('.save-public-cloud').prop('disabled',true);
-
-
                 $(this).geocoding({
                     requests:public_cloud.data_centers.locations,
                     buildGeoRequest:function(location){
@@ -173,14 +132,13 @@ jQuery(document).ready(function($){
                         return 'data center location: address ( city:'+location.city+',state: '+location.state+', country:'+location.country+' )';
                     }
                 });
-
-
             }
-
             return false;
         });
 
         $('.preview-public_cloud').click(function(event){
+
+            tinyMCE.triggerSave();
             var button =  $(this);
             if(button.prop('disabled')){
                 return false;
@@ -192,55 +150,17 @@ jQuery(document).ready(function($){
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
-            var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
-            var is_pdf               = $(this).hasClass('pdf');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hyper_visors        !== false &&
-                videos              !== false &&
-                data_centers        !== false &&
-                pricing_schemas     !== false
-                ){
+            var is_pdf       = $(this).hasClass('pdf');
+            var public_cloud = serializePublicCloud(form, false);
+
+            if(public_cloud !== false){
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create public_cloud object and POST it
-                var public_cloud = {};
-                public_cloud.id                      = parseInt($("#id",form).val());
-                public_cloud.live_service_id         = parseInt($("#live_id",form).val());
-                public_cloud.company_id              = parseInt($("#company_id",form).val());
-                public_cloud.name                    = $("#name",form).val();
-                public_cloud.overview                = $("#overview",form).val();
-                public_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                public_cloud.active                  = $('#active',form).is(":checked");
-                public_cloud.videos                  = videos;
-                public_cloud.hypervisors             = hyper_visors;
-                public_cloud.guest_os                = guest_os;
-                public_cloud.capabilities            = capabilities;
-                for(var i in public_cloud.capabilities){
-                    var c = public_cloud.capabilities[i];
-                    c.pricing_schemas = pricing_schemas;
-                }
-                public_cloud.regional_support        = regional_support;
-                public_cloud.additional_resources    = additional_resources;
-                public_cloud.data_centers            = data_centers;
-                public_cloud.published               = 0;
-
 
                 var type   = public_cloud.id > 0 ?'PUT':'POST';
 
                 $('.save-public-cloud').prop('disabled',true);
-
 
                 $(this).geocoding({
                     requests:public_cloud.data_centers.locations,
@@ -294,18 +214,18 @@ jQuery(document).ready(function($){
                         return 'data center location: address ( city:'+location.city+',state: '+location.state+', country:'+location.country+' )';
                     }
                 });
-
-
             }
-
             return false;
         });
 
         $('.publish-public-cloud').click(function(event){
+            tinyMCE.triggerSave();
+
             var button =  $(this);
             if(button.prop('disabled')){
                 return false;
             }
+
             event.preventDefault();
             event.stopPropagation();
             var form_validator = form.marketplace_type_header('getFormValidator');
@@ -313,54 +233,16 @@ jQuery(document).ready(function($){
             var is_valid = form.valid();
             if(!is_valid) return false;
             form_validator.resetForm();
-            var additional_resources = $("#additional-resources-form").additional_resources('serialize');
-            var regional_support     = $("#support-channels-form").support_channels('serialize');
-            var capabilities         = $("#components_form").components('serialize');
-            var guest_os             = $("#guest_os_form").guest_os('serialize');
-            var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
-            var videos               = $("#videos-form").videos('serialize');
-            var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
-            var pricing_schemas       = $("#pricing_schema_form").pricing_schemas('serialize');
 
-            if(additional_resources !== false &&
-                regional_support    !== false &&
-                capabilities        !== false &&
-                guest_os            !== false &&
-                hyper_visors        !== false &&
-                videos              !== false &&
-                data_centers        !== false &&
-                pricing_schemas     !== false
-                ){
+            var public_cloud = serializePublicCloud(form, true);
+
+            if(public_cloud !== false){
 
                 ajaxIndicatorStart('saving data.. please wait..');
-
-                //create public_cloud object and POST it
-                var public_cloud = {};
-                public_cloud.id                      = parseInt($("#id",form).val());
-                public_cloud.live_service_id         = parseInt($("#live_id",form).val());
-                public_cloud.company_id              = parseInt($("#company_id",form).val());
-                public_cloud.name                    = $("#name",form).val();
-                public_cloud.overview                = $("#overview",form).val();
-                public_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
-                public_cloud.active                  = $('#active',form).is(":checked");
-                public_cloud.videos                  = videos;
-                public_cloud.hypervisors             = hyper_visors;
-                public_cloud.guest_os                = guest_os;
-                public_cloud.capabilities            = capabilities;
-                for(var i in public_cloud.capabilities){
-                    var c = public_cloud.capabilities[i];
-                    c.pricing_schemas = pricing_schemas;
-                }
-                public_cloud.regional_support        = regional_support;
-                public_cloud.additional_resources    = additional_resources;
-                public_cloud.data_centers            = data_centers;
-                public_cloud.published               = 0;
-
 
                 var url  = 'api/v1/marketplace/public-clouds/'+public_cloud.live_service_id;
 
                 $('.publish-public-cloud').prop('disabled',true);
-
 
                 $(this).geocoding({
                     requests:public_cloud.data_centers.locations,
@@ -405,12 +287,61 @@ jQuery(document).ready(function($){
                         return 'data center location: address ( city:'+location.city+',state: '+location.state+', country:'+location.country+' )';
                     }
                 });
-
-
             }
-
             return false;
         });
-
     }
 });
+
+/**
+ *
+ * @param form
+ * @param publish
+ * @returns {*}
+ */
+function serializePublicCloud(form, publish){
+
+    var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var regional_support     = $("#support-channels-form").support_channels('serialize');
+    var capabilities         = $("#components_form").components('serialize');
+    var guest_os             = $("#guest_os_form").guest_os('serialize');
+    var hyper_visors         = $("#hypervisors_form").hypervisors('serialize');
+    var videos               = $("#videos-form").videos('serialize');
+    var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
+    var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
+
+    if( additional_resources !== false &&
+        regional_support    !== false &&
+        capabilities        !== false &&
+        guest_os            !== false &&
+        hyper_visors        !== false &&
+        videos              !== false &&
+        data_centers        !== false &&
+        pricing_schemas     !== false
+    ){
+        //create public_cloud object and POST it
+        var public_cloud = {};
+        public_cloud.id                      = parseInt($("#id",form).val());
+        public_cloud.live_service_id         = parseInt($("#live_id",form).val());
+        public_cloud.company_id              = parseInt($("#company_id",form).val());
+        public_cloud.name                    = $("#name",form).val();
+        public_cloud.overview                = $("#overview",form).val();
+        public_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
+        public_cloud.active                  = $('#active',form).is(":checked");
+        public_cloud.videos                  = videos;
+        public_cloud.hypervisors             = hyper_visors;
+        public_cloud.guest_os                = guest_os;
+        public_cloud.capabilities            = capabilities;
+        for(var i in public_cloud.capabilities){
+            var c = public_cloud.capabilities[i];
+            c.pricing_schemas = pricing_schemas;
+        }
+        public_cloud.regional_support        = regional_support;
+        public_cloud.additional_resources    = additional_resources;
+        public_cloud.data_centers            = data_centers;
+        public_cloud                         = form.implementation_openstack_powered('serialize', public_cloud);
+        public_cloud.published               = publish? 1:0;
+        return public_cloud;
+    }
+    return false;
+}

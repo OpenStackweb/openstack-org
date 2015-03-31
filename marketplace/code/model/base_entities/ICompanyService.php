@@ -11,73 +11,83 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Interface ICompanyService
  */
-interface ICompanyService extends IManipulableEntity {
+interface ICompanyService extends IManipulableEntity
+{
 
     public function isDraft();
-	/**
-	 * @param ICompany $company
-	 * @return void
-	 */
-	public function setCompany(ICompany $company);
 
-	/**
-	 * @return ICompany
-	 */
-	public function getCompany();
+    /**
+     * @param ICompany $company
+     * @return void
+     */
+    public function setCompany(ICompany $company);
 
-	/**
-	 * @param IMarketPlaceType $marketplace
-	 * @return void
-	 */
-	public function setMarketplace(IMarketPlaceType $marketplace);
+    /**
+     * @return ICompany
+     */
+    public function getCompany();
 
-	/**
-	 * @return IMarketPlaceType
-	 */
-	public function getMarketplace();
+    /**
+     * @param IMarketPlaceType $marketplace
+     * @return void
+     */
+    public function setMarketplace(IMarketPlaceType $marketplace);
+
+    /**
+     * @return IMarketPlaceType
+     */
+    public function getMarketplace();
 
 
-	public function getName();
-	public function setName($name);
+    public function getName();
 
-	/**
-	 * @return string
-	 */
-	public function getSlug();
+    public function setName($name);
 
-	public function getOverview();
-	public function setOverview($overview);
+    /**
+     * @return string
+     */
+    public function getSlug();
 
-	public function getCall2ActionUri();
-	public function setCall2ActionUri($call_2_action_uri);
+    public function getOverview();
 
-	/**
-	 * @param ICompanyServiceResource $resource
-	 * @return void
-	 */
-	public function addResource(ICompanyServiceResource $resource);
+    public function setOverview($overview);
 
-	/**
-	 * @return ICompanyServiceResource[]
-	 */
-	public function getResources();
+    public function getCall2ActionUri();
 
-	public function sortResources(array $new_sort);
+    public function setCall2ActionUri($call_2_action_uri);
 
-	/**
-	 * @param IMarketPlaceVideo $video
-	 * @return void
-	 */
-	public function addVideo(IMarketPlaceVideo $video);
+    /**
+     * @param ICompanyServiceResource $resource
+     * @return void
+     */
+    public function addResource(ICompanyServiceResource $resource);
 
-	/**
-	 * @return IMarketPlaceVideo[]
-	 */
-	public function getVideos();
+    /**
+     * @return ICompanyServiceResource[]
+     */
+    public function getResources();
 
-	public function clearVideos();
-	public function clearResources();
+    public function sortResources(array $new_sort);
+
+    /**
+     * @param IMarketPlaceVideo $video
+     * @return void
+     */
+    public function addVideo(IMarketPlaceVideo $video);
+
+    /**
+     * @return IMarketPlaceVideo[]
+     */
+    public function getVideos();
+
+    public function clearVideos();
+
+    public function clearResources();
+
+
+
 }

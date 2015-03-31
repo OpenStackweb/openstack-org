@@ -31,7 +31,7 @@
     </div>
 </div>
 <div class="field text " id="ProductActive">
-    <label class="left">Active</label>
+    <label class="left" for="active">Active</label>
     <div class="middleColumn">
         <input type="checkbox" name="active" checked id="active">
     </div>

@@ -55,4 +55,83 @@ interface IOpenStackImplementation extends IRegionalSupportedCompanyService {
 	public function clearCapabilities();
 	public function clearHypervisors();
 	public function clearGuests();
+
+	/***
+	 * @return bool
+	 */
+	public function isCompatibleWithCompute();
+
+	/**
+	 * @param bool $compatible
+	 * @return void
+	 */
+	public function setCompatibleWithCompute($compatible);
+
+	/***
+	 * @return bool
+	 */
+	public function isCompatibleWithStorage();
+
+	/**
+	 * @param bool $compatible
+	 * @return void
+	 */
+	public function setCompatibleWithStorage($compatible);
+
+	/***
+	 * @return bool
+	 */
+	public function isCompatibleWithPlatform();
+
+	/**
+	 * @param bool $compatible
+	 * @return void
+	 */
+	public function setCompatibleWithPlatform($compatible);
+
+	/***
+	 * @return bool
+	 */
+	public function isCompatibleWithFederatedIdentity();
+
+	/**
+	 * @param string $compatible
+	 * @return void
+	 */
+	public function setCompatibleWithFederatedIdentity($compatible);
+
+	/**
+	 * @return string
+	 */
+	public function getComputeCapabilities();
+
+
+	/**
+	 * @param string $capabilities
+	 * @return void
+	 */
+	public function setComputeCapabilities($capabilities);
+
+	/**
+	 * @return string
+	 */
+	public function getStorageCapabilities();
+
+
+	/**
+	 * @param string $capabilities
+	 * @return void
+	 */
+	public function setStorageCapabilities($capabilities);
+	/**
+	 * @return string
+	 */
+	public function getPlatformCapabilities();
+
+
+	/**
+	 * @param string $capabilities
+	 * @return void
+	 */
+	public function setPlatformCapabilities($capabilities);
 }

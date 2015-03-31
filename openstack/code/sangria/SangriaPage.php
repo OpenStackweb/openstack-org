@@ -25,7 +25,7 @@ class SangriaPage extends Page {
 /**
  * Class SangriaPage_Controller
  */
-final class SangriaPage_Controller extends Page_Controller {
+final class SangriaPage_Controller extends AdminController {
 
 	public static $submissionsCount = 0;
 	public static $default_start_date;

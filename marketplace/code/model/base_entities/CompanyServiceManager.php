@@ -186,17 +186,7 @@ abstract class CompanyServiceManager {
 			$getMarketPlaceType->setAccessible(true);
 			$company = $marketplace_factory->buildCompanyById(intval($data['company_id']));
             $live_service_id = (isset($data['live_service_id'])) ? $data['live_service_id'] : null;
-
-			$company_service = $factory->buildCompanyService(
-				$data['name'],
-				$data['overview'],
-				$company,
-				$data['active'],
-				$getMarketPlaceType->invoke($this_var),
-				$data['call_2_action_uri'],
-                $live_service_id,
-                $data['published']);
-
+			$company_service =   $this_var->buildCompanyService($data,$company,$getMarketPlaceType, $live_service_id);
             $this_var->register($company_service);
 
 			$updateCollections = new ReflectionMethod(get_class($this_var),'updateCollections');
@@ -204,6 +194,19 @@ abstract class CompanyServiceManager {
 			$updateCollections->invoke($this_var, $company_service, $data);
 			return $company_service;
 		});
+		return $company_service;
+	}
+
+	public function buildCompanyService($data, $company, $getMarketPlaceType, $live_service_id){
+		$company_service = $this->factory->buildCompanyService(
+			$data['name'],
+			$data['overview'],
+			$company,
+			$data['active'],
+			$getMarketPlaceType->invoke($this),
+			$data['call_2_action_uri'],
+			$live_service_id,
+			$data['published']);
 		return $company_service;
 	}
 
@@ -267,13 +270,8 @@ abstract class CompanyServiceManager {
 			if($res)
 				throw new EntityAlreadyExistsException('CompanyService',sprintf('name %s',$company_service->getName()));
 
-			$company_service->setOverview($data['overview']);
-			if($data['active'])
-				$company_service->activate();
-			else
-				$company_service->deactivate();
-			$company_service->setCall2ActionUri($data['call_2_action_uri']);
-			$company_service->setCompany($marketplace_factory->buildCompanyById(intval($data['company_id'])));
+
+			$this_var->update($company_service, $data);
 
 			$clearCollections = new ReflectionMethod(get_class($this_var),'clearCollections');
 			$clearCollections->setAccessible(true);
@@ -285,6 +283,17 @@ abstract class CompanyServiceManager {
 
 			return $company_service;
 		});
+		return $company_service;
+	}
+
+	public function update($company_service, $data){
+		$company_service->setOverview($data['overview']);
+		if($data['active'])
+			$company_service->activate();
+		else
+			$company_service->deactivate();
+		$company_service->setCall2ActionUri($data['call_2_action_uri']);
+		$company_service->setCompany($this->marketplace_factory->buildCompanyById(intval($data['company_id'])));
 		return $company_service;
 	}
 
