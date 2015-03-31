@@ -57,7 +57,7 @@
     </form>
 </div>
 
-<% include SangriaPage_SurveyRangeSelector Label='Deployments Subset', FormAction=$Top.Link(ViewDeploymentDetails), FromPage=ViewDeploymentDetails %>
+<% include SangriaPage_SurveyRangeSelector Label='Select version of deployment', FormAction=$Top.Link(ViewDeploymentDetails), FromPage=ViewDeploymentDetails %>
 
 <form id="seach_deployments" name="seach_deployments" method="GET" action="$Top.Link(ViewDeploymentDetails)">
     <table id="filter" style="border: 1px solid #ccc; border-collapse:collapse;clear:both;">

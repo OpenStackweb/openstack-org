@@ -2,7 +2,7 @@
     <input type="hidden" class="date_filter_action" value="$action" />
     <% if use_subset %>
     <div id="subset" class="field text date inline">
-        <label for="range">Subset</label>
+        <label for="range">Select version of survey</label>
         <div class="middleColumn">
             <select id="range">
                 <option selected value="OLD">V1</option>

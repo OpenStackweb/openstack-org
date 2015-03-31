@@ -3,7 +3,7 @@
    var countries_with_deployment = [];
 </script>
 <link rel="stylesheet" href="/themes/openstack/css/bootstrap.min.css" type="text/css" media="screen, projection">
-<% include SangriaPage_SurveyRangeSelector Label='Deployments Subset', FormAction=$Top.Link(ViewDeploymentsPerRegion), FromPage=ViewDeploymentsPerRegion %>
+<% include SangriaPage_SurveyRangeSelector Label='Select version of deployment', FormAction=$Top.Link(ViewDeploymentsPerRegion), FromPage=ViewDeploymentsPerRegion %>
 <h2>Deployment Submitted &mdash; {$Top.DeploymentsCount(ViewDeploymentsPerRegion,false)} total</h2>
 <% if DeploymentsPerContinent %>
     <div class="container-fluid">
