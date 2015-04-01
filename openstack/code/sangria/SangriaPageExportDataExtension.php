@@ -539,7 +539,9 @@ SQL;
             'PaasTools',
             'OtherPaasTools',
             'InteractingClouds',
-            'OtherInteractingClouds'
+            'OtherInteractingClouds',
+            'SupportedFeatures',
+            'OtherSupportedFeatures',
         );
 
         $flat_fields = array(
@@ -573,7 +575,7 @@ SQL;
             'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
             'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
             'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
-
+            'OpenStackActivity' => DeploymentSurvey::$activities_options,
         );
 
         $file_data = array();
@@ -706,7 +708,7 @@ SQL;
             'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
             'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
             'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
-
+            'OpenStackActivity' => DeploymentSurvey::$activities_options,
         );
 
         $fields = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
@@ -714,7 +716,7 @@ SQL;
             'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'OkToContact', 'BusinessDrivers',
             'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'DevelopmentEnvironments',
             'OtherDevelopmentEnvironments', 'ApplicationDevelopmentOperatingSystems', 'ApplicationDevelopmentOtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds',
-            'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority');
+            'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority', 'APIFormats', 'OtherAPIFormats');
 
         $file_data = array();
 

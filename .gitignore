@@ -46,6 +46,8 @@ elections/input
 blog
 themes/openstack/images
 tmp/*
+geoip
 geoip/*
 mailoutput/*
 private-assets/*
+private-assets
