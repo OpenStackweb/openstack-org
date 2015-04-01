@@ -260,9 +260,9 @@ class Page_Controller extends ContentController {
 		/** CSS REQUIREMENTS **/
 		if(!$this->BootstrapConverted) {
 			Requirements::css("themes/openstack/css/blueprint/screen.css");
+			Requirements::css("themes/openstack/css/main.css");	
 		}
 		Requirements::css("themes/openstack/css/bootstrap.min.css");
-		Requirements::css("themes/openstack/css/main.css");
 		Requirements::css("themes/openstack/css/combined.css");
 		Requirements::css("themes/openstack/css/dropdown.css");
 
