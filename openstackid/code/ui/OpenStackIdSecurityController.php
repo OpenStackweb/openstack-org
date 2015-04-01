@@ -1,6 +1,10 @@
 <?php
+
 define('__ROOT__', dirname(dirname(dirname(dirname(__FILE__)))));
-require_once __ROOT__ . '/vendor/openid/php-openid/Auth/OpenID/SReg.php';
+if(defined('OPENSTACKID_ENABLED')) {
+    require_once __ROOT__ . '/vendor/openid/php-openid/Auth/OpenID/SReg.php';
+}
+
 
 /**
  * Copyright 2014 Openstack Foundation

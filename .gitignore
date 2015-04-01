@@ -49,3 +49,6 @@ tmp/*
 geoip/*
 mailoutput/*
 private-assets/*
+zen_fields/*
+geoip
+zen_fields
