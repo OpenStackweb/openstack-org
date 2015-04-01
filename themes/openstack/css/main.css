@@ -989,3 +989,8 @@ a.gs-title, a.gs-title b {
 .roundedButton-margin{
 	margin-left:5px; 
 }
+
+.alert{
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
