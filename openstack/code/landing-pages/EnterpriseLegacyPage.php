@@ -22,6 +22,7 @@ class EnterpriseLegacyPage_Controller extends Page_Controller {
     {
         parent::init();
 
+        Requirements::CSS('themes/openstack/css/font-awesome.min.css');
         Requirements::CSS('themes/openstack/css/enterprise.css');
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
