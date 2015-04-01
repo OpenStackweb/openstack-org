@@ -149,7 +149,7 @@
                         Adobe Digital Marketing decided to modernize their VMware-based infrastructure for customer-facing applications. They turned to VMware Integrated OpenStack (VIO) to support the high levels of resiliency required while leveraging their existing VMware administrators and expertise. Adobe DM extensively tested the beta VIO product and plans to have the system in production by the end of 2015. 
                     </p>
                     <p>
-                        <a href="https://www.openstack.org/assets/pdf-downloads/adobe-dm-case-study.pdf">Read the Adobe Digital Marketing case study.</a>
+                        <a href="//www.openstack.org/assets/pdf-downloads/adobe-dm-case-study.pdf">Read the Adobe Digital Marketing case study.</a>
                     </p>
                 </div>
                 <div class="col-sm-6">
@@ -371,7 +371,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Download the new OpenStack white paper, detailing three approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices.
             </p>
-                <a href="https://www.openstack.org/assets/pdf-downloads/virtualization-Integration-whitepaper-2015.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
+                <a href="//www.openstack.org/assets/pdf-downloads/virtualization-Integration-whitepaper-2015.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>
             <p>
 

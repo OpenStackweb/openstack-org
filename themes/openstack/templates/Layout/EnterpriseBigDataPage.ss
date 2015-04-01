@@ -523,7 +523,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Read the complete white paper that details the success this enterprise company saw when implementing OpenStack with Hadoop, including their phased rollout and insights to achieving adoption.
             </p>
-                <a href="#" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
+                <a href="//openstack.org/assets/pdf-downloads/openstack-automotive-case-study.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>
             <p>
 
