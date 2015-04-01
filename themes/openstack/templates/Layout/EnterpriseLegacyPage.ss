@@ -46,13 +46,13 @@
     <div class="content-section-a">
         <div class="container">
             <div class="row story-steps">
-                <div class="col-sm-6">
-                    <img src="/themes/openstack/images/enterprise//legacy/legacy-placeholder.jpg" alt="">
-                </div>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <p>
-                        Major Enterprises are combining their existing legacy data center virtualization technologies with the OpenStack cloud to speed new applications to market and help compete in today’s fast moving economy. Download the new <a href="#">OpenStack white paper</a>, detailing three approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices. 
+                        <strong>Major Enterprises</strong> are combining their existing legacy data center virtualization technologies with the OpenStack cloud to speed new applications to market and help compete in today’s fast moving economy. Download the new <a href="#">OpenStack white paper</a>, detailing three approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices. 
                     </p>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive server-row" src="/themes/openstack/images/enterprise/server-row.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/enterprise/server-row.png" alt="">
                 </div>
             </div>
         </div>
