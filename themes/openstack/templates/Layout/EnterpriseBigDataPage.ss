@@ -328,7 +328,7 @@
                             Read the complete white paper that details the success this enterprise company saw when implementing OpenStack with Hadoop, including their phased rollout and insights to achieving adoption.
                         </p>
                         <p class="file-info">
-                            <a href="#" data-toggle="modal" data-target="#downloadModal">Top10AutoWhitePaper.PDF | 1.4MB</a>
+                            <a href="#" data-toggle="modal" data-target="#downloadModal">openstack-automotive-case-study.pdf | 612KB</a>
                         </p>
                         <a href="#" class="btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download</a>
                     </div>
@@ -380,7 +380,7 @@
                 <div class="col-lg-12">
                     <h2>Featured Enterprise Content</h2>
                     <p>
-                        Disney, PayPal, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
+                        Disney, IIIS, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
                     </p>
                 </div>
             </div>
@@ -425,17 +425,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalBloomberg">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/enterprise//play-button.png">
+                            <img src="/themes/openstack/images/enterprise/play-button.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise//play-button.png">
+                                <img src="/themes/openstack/images/enterprise/play-button.png">
                             </div>
                             <p>
                                 We review how Bloomberg designed our stack to be fully active-active highly available and share some of our experiences operating our clouds.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise//video-bloomberg.jpg" alt="Bloomberg Talking About OpenStack">
+                        <img class="video-image" src="/themes/openstack/images/enterprise/video-bloomberg.jpg" alt="Bloomberg Talking About OpenStack">
                     </div>
                     </a>
                 </div>
@@ -475,15 +475,19 @@
                         </div>
                         <div class="row events">
                             <div class="col-lg-6">
-                                <img class="event-logo" src="/themes/openstack/images/enterprise//cloud-connect-logo.png" alt="OpenStack at Cloud Connect">
-                                <span>OpenStack: Enterprise Boot Camp</span>
-                                <span>September 30, 2014 in New York</span>
+                               <a href="http://openstack.org/summit/" class="featured-event-link">
+                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise//legacy/summit-event-logo.png" alt="OpenStack Summit in Vancouver">
+                                    <span>OpenStack Summit</span>
+                                    <span>May 18-22, 2015 in Vancouver</span>
+                                </a>
                             </div>
                             <div class="vert-line"></div>
                             <div class="col-lg-6">
-                                <img class="event-logo paris" src="/themes/openstack/images/enterprise//paris-logo.png" alt="OpenStack Summit in Paris">
-                                <span>OpenStack Summit</span>
-                                <span>November 3 - 7, 2014 in Paris</span>
+                                <a href="http://openstack.org/summit/" class="featured-event-link">
+                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise//legacy/summit-event-logo.png" alt="OpenStack Summit in Tokyo">
+                                    <span>OpenStack Summit</span>
+                                    <span>October 26-30, 2015 in Tokyo</span>
+                                </a>
                             </div>
                         </div>
                         <div class="row more-events">
@@ -493,9 +497,9 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <ul>
-                                        <li><a href="http://www.gartner.com/technology/symposium/orlando/">Gartner Symposium/ITExpo</a>, October 5-9 in Orlando, FL</li>
-                                        <li><a href="http://en.futurecom.com.br/index.php">Futurecom</a>, October 13-16 in Sao Paolo, Brasil</li>
-                                        <li><a href="http://www.gartner.com/technology/summits/na/data-center/">Gartner Data Center Conference</a>, December 2-5, 2014 in Las Vegas, NV</li>
+                                        <li><a href="http://www.con-nect.com.au/cloudandbigdata.html">Connect2015</a>, April 21-22, 2015 in Melborne, Australia</li>
+                                        <li><a href="http://www.gartner.com/technology/summits/na/catalyst/">Gartner Catalyst</a>, August 10-13, 2015 in San Diego, California</li>
+                                        <li><a href="http://www.gartner.com/technology/symposium/orlando/">Gartner ITxpo</a>, October 4-8, 2015 in Orlando, Florida</li>
                                     </ul>
                                 </div>
                             </row>
