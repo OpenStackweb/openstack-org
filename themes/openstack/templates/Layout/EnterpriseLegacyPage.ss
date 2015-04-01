@@ -23,7 +23,7 @@
                             <div class="container">
                                 <div class="row">
                                    <div class="col-sm-7 link-back">
-                                        <a href="/">< Back to Enterprise Homepage</a>
+                                        <a href="/enterprise/">< Back to Enterprise Homepage</a>
                                    </div>
                                     <div class="col-sm-5">
                                         <ul class="list-inline filters">
@@ -119,7 +119,7 @@
                         OpenStack distributions from joint OpenStack ecosystem and VMware partnerships are enabled to support the VMware ESXi hypervisor, in addition to others, to easily deploy OpenStack clouds.  Each offers value-added services and support that complement and enhance OpenStack to meet differing enterprise needs.
                     </p>
                     <p>
-                        Wells Fargo is successfully using VMware technologies in its OpenStack deployment using a popular commercial distribution.  The company is leveraging vSphere for thousands of internal production applications across four datacenters, with three clouds each – Development, Testing and Production.  With HA and vMotion enabled, Wells Fargo has experienced an extra level of built-in resiliency. 
+                        A multinational banking and financial services company is successfully using VMware technologies in its OpenStack deployment using one popular distribution. The company has the capacity for thousands of applications leveraging vSphere across four datacenters, with three clouds each – Development, Testing and Production. With HA and vMotion enabled, the bank has experienced an extra level of built-in resiliency. Their teams have started to migrate to and deploy new applications with the OpenStack cloud. 
                     </p>
                 </div>
                 <div class="col-sm-6 col-sm-pull-6">
@@ -164,32 +164,7 @@
 
     <!-- End Steps Section -->
 
-    <!-- Hands-on Lab -->
-
-    <div class="content-section-b hands-on-row">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3>
-                        Hands-on Lab: VMware Integrated OpenStack and NSX
-                    </h3>
-                    <h5>See OpenStack and NSX together in action, right inside your browser with no installation required.</h5>
-                </div>
-                <div class="col-sm-4">
-                    <a href="http://www.vmware.com/go/openstacklab" class="marketplace-btn">Try The Hands-on Lab</a>
-                </div>
-                <div class="col-sm-8">
-                    <p>
-                    You can also learn more about OpenStack and vSphere integration through a hands-on lab by VMware. It provides a remote Windows desktop wttithin an OpenStack on vSphere cloud lab within 30 seconds with step-by-step instructions to learn about OpenStack on vSphere (Nova + Cinder) and NSX (Neutron). To learn more, go to: <a href="http://www.vmware.com/go/openstacklab">http://www.vmware.com/go/openstacklab</a>.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- End Hands-on Lab -->
-
-    
+    <hr>    
 
     <!-- Download and Newsletter -->
 
@@ -243,7 +218,7 @@
                 <div class="col-lg-12">
                     <h2>Featured Integration Content</h2>
                     <p>
-                        Cox Automotive is also using VIO to gain the benefits of OpenStack while preserving their existing VMware-based infrastructure.  Listen to VMware telling the story directly as well.
+                        These helpful videos outline additional information for enterprises evaluating OpenStack to add more agility and efficiency to their current virtualized infrastructures.
                     </p>
                 </div>
             </div>
@@ -295,7 +270,7 @@
                                 <img src="/themes/openstack/images/enterprise//play-button.png">
                             </div>
                             <p>
-                                Dan Florea of VMware discusses how OpenStack and VMware work together.
+                                Dan Florea presents an OpenStack primer for VMware adminstrators.
                             </p>
                         </div>
                         <img class="video-image" src="/themes/openstack/images/enterprise//legacy/video-vmware.jpg" alt="VmWare Working with OpenStack">
