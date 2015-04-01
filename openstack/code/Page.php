@@ -331,7 +331,24 @@ class Page_Controller extends ContentController {
 	}
 
 	// Simple methods used to get & set messages that display on the page.
-	public function setMessage($type, $message) {   
+	public function setMessage($type, $message) {
+		switch(strtolower($type)){
+			case 'error':
+				$type ='danger';
+					break;
+			case 'success':
+				$type ='success';
+				break;
+			case 'warning':
+				$type ='warning';
+				break;
+			case 'info':
+				$type ='info';
+				break;
+			default:
+				$type ='success';
+				break;
+		}
 		Session::set('Message', array(
 		    'MessageType' => $type,
 		    'Message' => $message

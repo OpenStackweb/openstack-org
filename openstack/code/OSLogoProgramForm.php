@@ -35,13 +35,6 @@ class OsLogoProgramForm extends HoneyPotForm {
                     $('#openstack-companies').toggle();
                     $('#non-sponsor-company').toggle();
                 });
-
-                $('#OsLogoProgramForm_Form').submit(function(evt){
-                    if($('#OsLogoProgramForm_Form_Program_Powered').is(':checked')){
-                        window.alert('Thanks for your interest in licensing the OpenStack Powered logo. Please review the interoperability standards at openstack.org/interop page and submit test results according to the instructions.');
-                    }
-                });
-
             });
         ");
 
@@ -151,8 +144,10 @@ class OsLogoProgramForm extends HoneyPotForm {
         $email->setTemplate('OSLogoProgramResponseEmail');
         $email->populateTemplate($response);
         $email->send();
-
-        return Controller::curr()->redirect(Controller::curr()->Link()."thanks");
+        if($response->Program === 'Powered'){
+            Controller::curr()->setMessage('success', 'Thanks for your interest in licensing the OpenStack Powered logo. Please review the interoperability standards at  <a href="http://www.openstack.org/interop" class="alert-link">openstack.org/interop</a> page and submit test results according to the instructions.');
+        }
+        return Controller::curr()->redirect(Controller::curr()->Link("thanks"));
     }
 
 }
