@@ -25,23 +25,7 @@ class EnterpriseLegacyPage_Controller extends Page_Controller {
         Requirements::CSS('themes/openstack/css/font-awesome.min.css');
         Requirements::CSS('themes/openstack/css/enterprise.css');
 
-        Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
-        Requirements::javascript('themes/openstack/javascript/bootstrap.lightbox.js');
         Requirements::javascript('themes/openstack/javascript/enterprise.js');
-
-	    Requirements::customScript("jQuery(document).ready(function($) {
-
-
-            $('body').filetracking();
-
-            $('.outbound-link').live('click',function(event){
-                var href = $(this).attr('href');
-                recordOutboundLink(this,'Outbound Links',href);
-                event.preventDefault();
-                event.stopPropagation()
-                return false;
-            });
-        });");
 
     } 
 }
