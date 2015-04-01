@@ -256,6 +256,17 @@ class Page_Controller extends ContentController {
 			}
 		} */
 
+
+		/** CSS REQUIREMENTS **/
+		if(!$this->BootstrapConverted) {
+			Requirements::css("themes/openstack/css/blueprint/screen.css");
+		}
+		Requirements::css("themes/openstack/css/bootstrap.min.css");
+		Requirements::css("themes/openstack/css/main.css");
+		Requirements::css("themes/openstack/css/combined.css");
+		Requirements::css("themes/openstack/css/dropdown.css");
+
+
 		Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
 		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
@@ -272,10 +283,9 @@ class Page_Controller extends ContentController {
 
         Requirements::javascript("themes/openstack/javascript/jquery.cookie.js");
 
-        Requirements::css("themes/openstack/javascript/shadowbox/shadowbox.css");
-        Requirements::javascript("themes/openstack/javascript/shadowbox/shadowbox.js");
-
         if(Director::get_current_page()->IncludeShadowBox){
+        	Requirements::css("themes/openstack/javascript/shadowbox/shadowbox.css");
+        	Requirements::javascript("themes/openstack/javascript/shadowbox/shadowbox.js");        	
             Requirements::customScript("Shadowbox.init();");
         }
 
