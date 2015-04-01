@@ -2,7 +2,7 @@
 
     <div class="enterprise-bar">
        <div class="container">
-          <a href="/" class="enterprise-bar-left">OpenStack In The Enterprise</a>
+          <a href="/enterprise/" class="enterprise-bar-left">OpenStack In The Enterprise</a>
           <a href="#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>

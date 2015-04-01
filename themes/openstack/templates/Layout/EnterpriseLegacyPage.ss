@@ -1,4 +1,10 @@
 </div>
+    <div class="enterprise-bar">
+       <div class="container">
+          <a href="/enterprise/" class="enterprise-bar-left">OpenStack In The Enterprise</a>
+          <a href="#top" class="enterprise-bar-right">Back to Top</a>
+       </div>
+    </div>
 <div class="intro-header legacy">
         <div class="container">
 
@@ -6,7 +12,7 @@
                 <div class="col-lg-8 col-sm-8">
                     <div class="intro-message">
                         <h1>Adding Speed &amp; Agility to Enterprise Virtualization</h1>
-                        <h3>Modernizing Virtualization Infrastructures with the OpenStack Cloud Management Platform</h3>
+                        <h3>Modernizing Virtualized Infrastructures with the OpenStack Cloud Management Platform</h3>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-4">
@@ -140,7 +146,7 @@
                         VMware Integrated OpenStack (VIO) offers VMware users an alternative that combines the benefits of OpenStack with those of VMware in a single stack.  This architecture uses VMware’s Software Defined Datacenter infrastructure products such as ESXi, VSAN, NSX and vCenter. VIO can make it easier for IT to run a production-grade OpenStack deployment on top of their existing VMware infrastructure, gaining new cloud capabilities with the VMware interfaces with which they’re familiar, as well as managed services and support.
                     </p>
                     <p>
-                        Adobe Digital Marketing decided to modernize their VMware-based infrastructure for customer-facing applications. They turned to VMware Integrated OpenStack (VIO) to support the high levels of resiliency required while leveraging their existing VMware administrators and expertise. Adobe DM extensively tested the beta VIO product and plans to have the system in production by the end of 2014. 
+                        Adobe Digital Marketing decided to modernize their VMware-based infrastructure for customer-facing applications. They turned to VMware Integrated OpenStack (VIO) to support the high levels of resiliency required while leveraging their existing VMware administrators and expertise. Adobe DM extensively tested the beta VIO product and plans to have the system in production by the end of 2015. 
                     </p>
                     <p>
                         <a href="#">Read the Adobe Digital Marketing case study.</a>
