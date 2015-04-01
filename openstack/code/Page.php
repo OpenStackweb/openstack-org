@@ -263,6 +263,7 @@ class Page_Controller extends ContentController {
 			Requirements::css("themes/openstack/css/main.css");	
 		}
 		Requirements::css("themes/openstack/css/bootstrap.min.css");
+	    Requirements::CSS('themes/openstack/css/font-awesome.min.css');	
 		Requirements::css("themes/openstack/css/combined.css");
 		Requirements::css("themes/openstack/css/dropdown.css");
 
