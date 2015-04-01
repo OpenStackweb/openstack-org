@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-sm-6">
                     <p>
-                        Major Enterprises are combining their existing legacy data center virtualization technologies with the OpenStack cloud to speed new applications to market and help compete in today’s fast moving economy. Download the new <a href="#">OpenStack white paper</a>, detailing three approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices. 
+                        Major Enterprises are combining their existing legacy data center virtualization technologies with the OpenStack cloud to speed new applications to market and help compete in today’s fast moving economy. Download the new <a href="#" data-toggle="modal" data-target="#downloadModal">OpenStack white paper</a>, detailing three approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices. 
                     </p>
                 </div>
             </div>
@@ -149,7 +149,7 @@
                         Adobe Digital Marketing decided to modernize their VMware-based infrastructure for customer-facing applications. They turned to VMware Integrated OpenStack (VIO) to support the high levels of resiliency required while leveraging their existing VMware administrators and expertise. Adobe DM extensively tested the beta VIO product and plans to have the system in production by the end of 2015. 
                     </p>
                     <p>
-                        <a href="#">Read the Adobe Digital Marketing case study.</a>
+                        <a href="https://www.openstack.org/assets/pdf-downloads/adobe-dm-case-study.pdf">Read the Adobe Digital Marketing case study.</a>
                     </p>
                 </div>
                 <div class="col-sm-6">
@@ -184,7 +184,7 @@
                             Read the complete white paper that the differences between legacy infrastructures and cloud computing, as well as, explains the three ways to architect VMWare using OpenStack to create next-generation, large-scale environments.
                         </p>
                         <p class="file-info">
-                            <a href="#" data-toggle="modal" data-target="#downloadModal">LegacyIntegrationWhitePaper.PDF | 1.4MB</a>
+                            <a href="#" data-toggle="modal" data-target="#downloadModal">virtualization-Integration-whitepaper-2015.pdf | 728KB</a>
                         </p>
                         <a href="#" class="btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download</a>
                     </div>
@@ -371,7 +371,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Download the new OpenStack white paper, detailing three approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices.
             </p>
-                <a href="#" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
+                <a href="https://www.openstack.org/assets/pdf-downloads/virtualization-Integration-whitepaper-2015.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>
             <p>
 
