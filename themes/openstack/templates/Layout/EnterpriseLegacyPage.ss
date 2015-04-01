@@ -143,7 +143,7 @@
                         Adobe Digital Marketing decided to modernize their VMware-based infrastructure for customer-facing applications. They turned to VMware Integrated OpenStack (VIO) to support the high levels of resiliency required while leveraging their existing VMware administrators and expertise. Adobe DM extensively tested the beta VIO product and plans to have the system in production by the end of 2014. 
                     </p>
                     <p>
-                        <a href="#">Read the Adobe Digital Marketing white paper.</a>
+                        <a href="#">Read the Adobe Digital Marketing case study.</a>
                     </p>
                 </div>
                 <div class="col-sm-6">
@@ -175,7 +175,7 @@
                     <div class="download-wrapper">
                         <h3>Download the white paper.</h3>
                         <p>
-                            Read the complete white paper that the differences between legacy infrastructures and cloud computing, as well as, explains the four ways to architect VMWare using OpenStack to create next-generation, large-scale environments.
+                            Read the complete white paper that the differences between legacy infrastructures and cloud computing, as well as, explains the three ways to architect VMWare using OpenStack to create next-generation, large-scale environments.
                         </p>
                         <p class="file-info">
                             <a href="#" data-toggle="modal" data-target="#downloadModal">LegacyIntegrationWhitePaper.PDF | 1.4MB</a>
@@ -363,7 +363,7 @@
           <div class="modal-body">
             <p class="download-text">
                 <i class="fa fa-file-pdf-o fa-4x"></i>
-                Download the new OpenStack white paper, detailing four approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices.
+                Download the new OpenStack white paper, detailing three approaches to using VMware technology with OpenStack, including example enterprises with their architectural choices.
             </p>
                 <a href="#" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>

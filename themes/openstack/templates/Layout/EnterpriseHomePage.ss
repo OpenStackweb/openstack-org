@@ -83,7 +83,7 @@
                     <a href="/enterprise/virtualization-integration/">
                         <img src="/themes/openstack/images/enterprise/legacy-thumb.jpg" alt="">
                     </a>
-                   <h3>Modernizing Virtualization Infrastructure</h3>
+                   <h3>Modernizing Virtualized Infrastructure</h3>
                    <p>
                        Many enterprises operate large VMware-based virtualized infrastructures to support a legacy of mission-critical applications. With OpenStack, they can combine the agility offered by cloud computing while maintaining the stability and resiliency of their traditional environment.
                    </p>
