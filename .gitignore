@@ -48,3 +48,4 @@ themes/openstack/images
 tmp/*
 geoip/*
 mailoutput/*
+private-assets/*

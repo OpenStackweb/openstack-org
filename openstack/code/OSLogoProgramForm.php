@@ -34,7 +34,13 @@ class OsLogoProgramForm extends HoneyPotForm {
                 $('#OsLogoProgramForm_Form_CurrentSponsor').click(function () {                
                     $('#openstack-companies').toggle();
                     $('#non-sponsor-company').toggle();
-                });      
+                });
+
+                $('#OsLogoProgramForm_Form').submit(function(evt){
+                    if($('#OsLogoProgramForm_Form_Program_Powered').is(':checked')){
+                        window.alert('Thanks for your interest in licensing the OpenStack Powered logo. Please review the interoperability standards at openstack.org/interop page and submit test results according to the instructions.');
+                    }
+                });
 
             });
         ");
