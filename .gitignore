@@ -45,3 +45,7 @@ sapphire/thirdparty/htmlpurifier-4.4.0/library/HTMLPurifier/DefinitionCache/Seri
 elections/input
 blog
 themes/openstack/images
+tmp/*
+geoip/*
+mailoutput/*
+private-assets/*
