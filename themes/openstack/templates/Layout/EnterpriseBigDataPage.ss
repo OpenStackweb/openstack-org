@@ -380,7 +380,7 @@
                 <div class="col-lg-12">
                     <h2>Featured Enterprise Content</h2>
                     <p>
-                        Disney, Wells Fargo, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
+                        Disney, PayPal, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
                     </p>
                 </div>
             </div>
@@ -404,20 +404,20 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <a href="#" data-toggle="modal" data-target="#VideoModalWellsFargo">
+                    <a href="#" data-toggle="modal" data-target="#VideoModalBigData">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/enterprise//play-button.png">
+                            <img src="/themes/openstack/images/enterprise/play-button.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise//play-button.png">
+                                <img src="/themes/openstack/images/enterprise/play-button.png">
                             </div>
                             <p>
-                                Glenn Ferguson of Wells Fargo joins Jonathan to discuss their relationship with OpenStack.
+                                Toward a Self-Driving Infrastructure – Experience of Running a 200 Physical Server BigData Cloud.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise//video-wellsfargo.jpg" alt="Wells Fargo Talking About OpenStack">
+                        <img class="video-image" src="/themes/openstack/images/enterprise/video-bigdata.jpg" alt="OpenStack Big Data">
                     </div>
                     </a>
                 </div>
@@ -592,7 +592,7 @@
     <!-- End Video 1 Modal -->
 
     <!-- Video 2 Modal -->
-    <div class="modal fade" id="VideoModalWellsFargo">
+    <div class="modal fade" id="VideoModalBigData">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -601,9 +601,9 @@
           </div>
           <div class="modal-body">
             <p class="download-text">
-                OpenStack User Case Study: Wells Fargo
+                Toward a Self-Driving Infrastructure – Experience of Running a 200 Physical Server BigData Cloud
             </p>
-                <iframe width="560" height="315" src="http://www.youtube.com/embed/SKsZGHZio9M" frameborder="0" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="http://www.youtube.com/embed/M8P6ectwlMc" frameborder="0" allowfullscreen></iframe>
           </div>
           <div class="modal-footer">
           </div>

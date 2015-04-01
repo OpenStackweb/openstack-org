@@ -216,7 +216,7 @@
                 <div class="col-lg-12">
                     <h2>Featured Enterprise Content</h2>
                     <p>
-                        Disney, Wells Fargo, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
+                        Disney, PayPal, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
                     </p>
                 </div>
             </div>
@@ -240,7 +240,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <a href="#" data-toggle="modal" data-target="#VideoModalWellsFargo">
+                    <a href="#" data-toggle="modal" data-target="#VideoModalYearThree">
                     <div class="video-wrapper">
                         <div class="play-button">
                             <img src="/themes/openstack/images/enterprise/play-button.png">
@@ -250,10 +250,10 @@
                                 <img src="/themes/openstack/images/enterprise/play-button.png">
                             </div>
                             <p>
-                                Glenn Ferguson of Wells Fargo joins Jonathan to discuss their relationship with OpenStack.
+                                Das Kamhout of Intel discusses their 3rd year of OpenStack in a Large Scale Enterprise. 
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise/video-wellsfargo.jpg" alt="Wells Fargo Talking About OpenStack">
+                        <img class="video-image" src="/themes/openstack/images/enterprise/video-year3.jpg" alt="Year 3 of OpenStack">
                     </div>
                     </a>
                 </div>
@@ -394,7 +394,7 @@
     <!-- End Video 1 Modal -->
 
     <!-- Video 2 Modal -->
-    <div class="modal fade" id="VideoModalWellsFargo">
+    <div class="modal fade" id="VideoModalYearThree">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -403,9 +403,9 @@
           </div>
           <div class="modal-body">
             <p class="download-text">
-                OpenStack User Case Study: Wells Fargo
+                Year 3 - OpenStack in a Large Scale Enterprise
             </p>
-                <iframe width="560" height="315" src="//www.youtube.com/embed/SKsZGHZio9M" frameborder="0" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="//www.youtube.com/embed/Yev6IU9EItM" frameborder="0" allowfullscreen></iframe>
           </div>
           <div class="modal-footer">
           </div>
