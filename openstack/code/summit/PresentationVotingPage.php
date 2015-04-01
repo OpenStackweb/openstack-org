@@ -407,7 +407,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
     function SaveRating() {
 
       if(!Member::currentUserID()) {
-        return $this->httpError(403, 'You need to be logged in to perform this action.');
+          return Security::permissionFailure($this);
       }
 
       $rating = '';
