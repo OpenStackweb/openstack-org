@@ -216,7 +216,7 @@
                 <div class="col-lg-12">
                     <h2>Featured Enterprise Content</h2>
                     <p>
-                        Disney, PayPal, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
+                        Disney, Intel IT, Bloomberg and so many other enterprise companies are already using OpenStack. Here are a few of them explaining why they chose OpenStack and how it’s benefiting them.
                     </p>
                 </div>
             </div>
