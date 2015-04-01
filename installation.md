@@ -12,6 +12,8 @@ The following base components are required to run the application:
 * PHP 5.2.0 or greater
 * PHP_Curl package
 * PHP_GD package
+* PHP_gmp package
+* PHP_dom package
 
 
 ## Installation Procedure
