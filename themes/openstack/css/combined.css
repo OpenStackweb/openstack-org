@@ -1254,7 +1254,8 @@ a.gs-title, a.gs-title b {
   font-weight: 400;
   text-align: center;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  width: 100%; }
+  width: 100%;
+	letter-spacing: -0.4px;}
 
 @media (max-width: 767px) {
   .intro-message > h1 {
