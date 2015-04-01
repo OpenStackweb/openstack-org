@@ -73,13 +73,10 @@
 
                     <li role="presentation" class="divider"></li>
 
-
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://www.openstack.org/enterprise/">OpenStack in the Enterprise</a></li>
 
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org/">Superuser Magazine</a></li>
 
-
-
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://www.openstack.org/enterprise/auto/">Featured:  Top 10 Automaker</a></li>
 
 
                 </ul>
