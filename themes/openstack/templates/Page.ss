@@ -14,24 +14,6 @@
 
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.openstack.org/blog/feed/" />
 
-    <!-- Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
-
-    <!-- Framework CSS -->
-    <% if BootstrapConverted %>
-    <% else %>    
-      <% require css("themes/openstack/css/blueprint/screen.css","screen, projection") %>
-    <% end_if %>
-    <% require css("themes/openstack/css/bootstrap.min.css","screen, projection") %>
-
-    <!-- OpenStack Specific CSS -->
-    <% if BootstrapConverted %>
-    <% else %>
-      <% require css("themes/openstack/css/main.css") %>
-    <% end_if %>
-    <% require css("themes/openstack/css/combined.css") %>
-    <% require css("themes/openstack/css/dropdown.css","screen, projection, print") %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
