@@ -25,7 +25,7 @@
                 <% include GoogleCustomSearchMobile %>
             </li>
             <li>
-                <a href="/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a>
+                <a href="/software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                 <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuSoftware">
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/software/">Overview</a></li>
                     <li role="presentation" class="divider"></li>
@@ -63,7 +63,7 @@
 
             <li>
 
-                <a href="/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a>
+                <a href="/user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                 <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuUsers">
 
 
@@ -85,7 +85,7 @@
 
             <li>
 
-                <a href="/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a>
+                <a href="/community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                 <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuCommunity">
 
 
@@ -144,7 +144,7 @@
 
             <li>
 
-                <a href="/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a>
+                <a href="/events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                 <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
 
 
@@ -178,7 +178,7 @@
 
             <li>
             <% if CurrentMember %>
-                <a href="/profile/" class="drop" id="dropdownMenuEvents">My Account <i class="fa fa-caret-down"></i></a>
+                <a href="/profile/" class="drop" id="dropdownMenuEvents">My Account <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                 <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
 
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile/">Edit Profile</a></li>

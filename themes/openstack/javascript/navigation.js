@@ -66,4 +66,25 @@ jQuery(document).ready(function($){
     } else {
         $('#search-label').text('Search');
     }
+	
+// Toggle mobile header nav dropdowns
+        $("i.mobile-expand").click(function () {
+					console.log('js is here');
+					if ($(this).closest('li').hasClass("open")) {
+						$('li').removeClass('open');
+					} else {
+						$('li').not(this).closest('li').removeClass('open');
+						$(this).closest('li').toggleClass('open');	
+					}
+					event.preventDefault();
+			});
+});
+
+// Remove open class when window is resized
+jQuery(window).resize(function () {
+    if (jQuery(window).width() > 767) {
+        $('li').removeClass('open');
+    } else {
+        
+    }
 });

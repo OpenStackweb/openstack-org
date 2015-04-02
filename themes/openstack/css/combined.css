@@ -3085,3 +3085,82 @@ fieldset.footer-feedback-fieldset {
 .footer-links ul li {
     list-style: none;
 }
+/*New responsive nav*/
+i.mobile-expand {
+	display: none;
+}
+@media (max-width: 767px) {
+	.navbar-default ul.navbar-main > li > a {
+		width: auto;
+		display: inline-block;
+	}
+	i.mobile-expand {
+		position: relative;
+		display: inline-block;
+		float: right;
+		cursor: pointer;
+	}
+	i.mobile-expand:after {
+		position: absolute;
+		padding: 10px 15px;
+		line-height: 20px;
+		color: #8a959e;
+		top: 50%;
+		margin-top: 0;
+		right: 0px;
+		content: "+";
+		font-size: 1.7em; 
+		font-style: normal;
+	}
+	.navbar-nav > li.open i.mobile-expand {
+		position: relative;
+		display: inline-block;
+		float: right;
+		cursor: pointer;
+	}
+	.navbar-nav > li.open i.mobile-expand:after {
+				position: absolute;
+				padding: 10px 15px;
+				line-height: 20px;
+				color: #aaa;
+				top: 50%;
+				margin-top: 0;
+				right: 0px;
+				content: "-";
+				font-size: 3em;
+				font-style: normal; 
+				font-weight: 300;
+    }
+
+	
+	.navbar-nav > li > ul.dropdown-menu {
+		display: block;
+		max-height: 0;
+		height: 0;
+		position: relative;
+		overflow: hidden;
+		border: 0;
+		box-shadow: none;
+		width: 100%;
+		padding: 0;
+		background: #edf2f7;
+		margin: 0;
+   -moz-transition: max-height 2s ease;
+    -webkit-transition: max-height 2s ease;
+    -o-transition: max-height 2s ease;
+    transition: max-height 2s ease;
+	}
+	.navbar-nav > li.open > ul.dropdown-menu {
+		display: block;
+		position: relative;
+		border: 0;
+		box-shadow: none;
+		height: auto;
+		max-height: 700px;
+		width: 100%;
+		padding: 10px 5%;
+		background: #edf2f7;
+	}
+	
+}
+/*End New responsive nav*/
