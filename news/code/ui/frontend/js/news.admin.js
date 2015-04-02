@@ -51,12 +51,12 @@ jQuery(document).ready(function($){
 
     $('.newsDelete').click(function(){
         if (confirm("Do you wish to delete this article?")) {
-            deleteArticle($(this).parents('li'));
+            deleteArticle($(this).parents('.article_row'));
         }
     });
 
     $('.newsRemove').click(function(){
-        removeArticle($(this).parents('li'));
+        removeArticle($(this).parents('.article_row'));
     });
 
     $('.image','.article_row').popover({
@@ -123,8 +123,14 @@ function removeArticle(article) {
     var old_rank = jQuery('.article_rank',article).val();
 
     jQuery('.article_type',article).val('standby');
-    jQuery('.newsRemove',article).html('Delete').removeClass().addClass('newsDelete');
+    jQuery('.newsRemove',article).removeClass().addClass('newsDelete');
     jQuery('#standby_sortable').prepend(article);
+
+    jQuery('.newsDelete',article).click(function(){
+        if (confirm("Do you wish to delete this article?")) {
+            deleteArticle(article);
+        }
+    });
 
     jQuery.ajax({
         type: "POST",
