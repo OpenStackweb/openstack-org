@@ -10,7 +10,7 @@
         "undefinedoffset/sortablegridfield":"dev-master",
         "tractorcow/silverstripe-colorpicker":"3.0.*@dev",
         "knplabs/github-api": "1.4.4",
-        "rackspace/php-opencloud": "dev-master",
+        "rackspace/php-opencloud": "1.12.2",
         "nnnick/chartjs": "1.0.1.*@dev",
         "openid/php-openid": "dev-master",
         "silverstripe/geoip": "dev-master",
