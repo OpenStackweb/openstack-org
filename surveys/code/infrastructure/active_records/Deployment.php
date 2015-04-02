@@ -385,7 +385,7 @@ class Deployment extends DataObject
      * @param int $batch_size
      * @return mixed
      */
-    public function getNotDigestSent($batch_size)
+    public static function getNotDigestSent($batch_size)
     {
         Deployment::get()->filter('SendDigest', 0)->sort('UpdateDate', 'ASC')->limit($batch_size);
     }
@@ -424,4 +424,7 @@ class Deployment extends DataObject
         return $this->getSurveyType() == SurveyType::MARCH_2015;
     }
 
+    public function getOrgName(){
+        return intval($this->OrgID) > 0 ?  $this->Org()->Name:$this->DeploymentSurvey()->Member()->getOrgName();
+    }
 }

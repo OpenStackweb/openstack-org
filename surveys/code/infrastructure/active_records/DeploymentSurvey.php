@@ -298,7 +298,7 @@ class DeploymentSurvey extends DataObject
 	 * @param int $batch_size
 	 * @return mixed
 	 */
-	public function getNotDigestSent($batch_size)
+	public static function getNotDigestSent($batch_size)
 	{
 		return DeploymentSurvey::get()->filter(array('SendDigest' => 0))->where("\"Title\" IS NULL ")->sort('Created')->limit($batch_size);
 	}
@@ -346,6 +346,10 @@ class DeploymentSurvey extends DataObject
 
 	public function canDelete($member = null) {
 		return $this->getSurveyType() == SurveyType::MARCH_2015;
+	}
+
+	public function getOrgName(){
+		return intval($this->OrgID) > 0 ?  $this->Org()->Name : $this->Member()->getOrgName();
 	}
 }
 
