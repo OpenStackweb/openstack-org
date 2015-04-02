@@ -16,7 +16,11 @@
     <td class="edit">
         <span class="newsPreview"><a target="_blank" href="news/view/$ID/$HeadlineForUrl"><i class="fa fa-file-image-o"></i></a></span>
         <span class="newsEdit"><a href="news-add?articleID=$ID"><i class="fa fa-pencil-square-o"></i></a></span>
-        <span class="newsRemove"><i class="fa fa-times"></i></span>
+        <% if $Type == standby %>
+            <span class="newsDelete"><i class="fa fa-times"></i></span>
+        <% else %>
+            <span class="newsRemove"><i class="fa fa-times"></i></span>
+        <% end_if %>
     </td>
     <td>
         <input type="hidden" class="article_id" value="$ID" />
