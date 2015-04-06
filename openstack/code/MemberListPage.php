@@ -45,17 +45,6 @@ class MemberListPage_Controller extends Page_Controller
 					
 			
 			");
-
-		// If we're in HTTPS mode, reset to HTTP for this page
-		if (isset($_SERVER['HTTPS'])) {
-			$destURL = str_replace('https:', 'http:', Director::absoluteURL($_SERVER['REQUEST_URI']));
-
-			// check to make sure we're not already there to prevent redirect loop
-			if ($destURL != Director::absoluteURL($_SERVER['REQUEST_URI'])) {
-				$this->redirect($destURL);
-			}
-		}
-
 	}
 
 	static $allowed_actions = array(
