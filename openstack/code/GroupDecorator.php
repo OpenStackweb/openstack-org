@@ -29,6 +29,16 @@ class GroupDecorator extends DataExtension {
             'Surname' => 'Last Name'
         );
 
+        $password = new ConfirmedPasswordField(
+            'Password',
+            null,
+            null,
+            null,
+            true // showOnClick
+        );
+        $password->setCanBeEmpty(true);
+
+
         $detailFormFields = new FieldList(
             new TabSet("Root",
                 new Tab('Main', 'Main',
@@ -36,13 +46,7 @@ class GroupDecorator extends DataExtension {
                     new TextField("FirstName","First Name"),
                     new TextField("Surname","Last Name"),
                     new HeaderField('MemberUserDetailsHeader',"User Details"),
-                    new ConfirmedPasswordField(
-                        'Password',
-                        null,
-                        null,
-                        null,
-                        false // showOnClick
-                    ),
+                    $password,
                     new TextField("Email","Email"),
                     new TextField("SecondEmail","Second Email"),
                     new TextField("Third Email","Third Email"),
