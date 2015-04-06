@@ -21,7 +21,8 @@ final class NewsPage_Controller extends Page_Controller {
 	 */
 	static $allowed_actions = array(
 		'logout',
-        'ViewArticle'
+        'ViewArticle',
+        'signup',
 	);
 
     static $url_handlers = array(
@@ -88,6 +89,10 @@ final class NewsPage_Controller extends Page_Controller {
         $article = $this->news_repository->getNewsByID($article_id);
 
         return $this->renderWith(array('NewsArticlePage','Page'), $article );
+    }
+
+    public function signup(){
+        return $this->render();
     }
 
 } 
