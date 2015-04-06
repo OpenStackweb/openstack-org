@@ -16,6 +16,7 @@
  */
 final class NewsPage_Controller extends Page_Controller {
 
+
 	/**
 	 * @var array
 	 */
@@ -23,7 +24,13 @@ final class NewsPage_Controller extends Page_Controller {
 		'logout',
         'ViewArticle',
         'signup',
+        'sendSignupConfirmation',
 	);
+
+    /**
+     * @var SecurityToken
+     */
+    private $securityToken;
 
     static $url_handlers = array(
         'view/$NEWS_ID/$NEWS_TITLE'   => 'ViewArticle',
@@ -31,7 +38,8 @@ final class NewsPage_Controller extends Page_Controller {
 
     function init() {
         parent::init();
-	    Requirements::css('news/code/ui/frontend/css/news.css');
+        $this->securityToken = new SecurityToken();
+        Requirements::css('news/code/ui/frontend/css/news.css');
         Requirements::css(Director::protocol().'://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
     }
 
@@ -92,7 +100,25 @@ final class NewsPage_Controller extends Page_Controller {
     }
 
     public function signup(){
-        return $this->render();
+        Requirements::javascript('news/code/ui/frontend/js/news.signup.js');
+        return $this->render(array('SecurityID' => SecurityToken::getSecurityID()));
     }
 
+    public function sendSignupConfirmation($request){
+
+        $body = $this->request->getBody();
+        $json = json_decode($body,true);
+
+        if(!$this->securityToken->checkRequest($request)) return;
+        $to = $json['email'];
+        $news_update_email_from = 'info@openstack.org';
+        $user_name = sprintf('%s %s', $json['first_name'], $json['last_name']);
+
+        $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', $to, 'Thank you for subscribing to OpenStack Foundation News updates');
+        $email->setTemplate('NewsPageSignupConfirmationEMail');
+
+        $email->populateTemplate(array('UserName' => $user_name, 'NewsUpdateEmailFrom' => $news_update_email_from));
+        $email->send();
+        return 'OK';
+    }
 } 
