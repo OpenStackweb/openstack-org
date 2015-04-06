@@ -1,5 +1,5 @@
 <div class="sendgrid-subscription-widget"
-     data-token="z7Bo65p1qIrv%2B9x5PV%2Fagp9u2%2F1Opqdkq3OJnsj135omQIg2ZQ2XeKh4pO5H8beGaolG7VFWtOFJvtqbdljOaw%3D%3D">
+     data-token="z7Bo65p1qIrv%2B9x5PV%2FagmERQbiTGcVClLUVHuIjwh9em8fE1wRZ9ycWSkqvv1fK">
     <label><span>Organization</span><input type="text" name="c"></label><label><label><span>First Name</span><input
         type="text" name="a"></label><span>Surname</span><input type="text"
                                                                 name="b"></label>
