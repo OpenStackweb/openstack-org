@@ -109,10 +109,19 @@ final class NewsPage_Controller extends Page_Controller {
         $body = $this->request->getBody();
         $json = json_decode($body,true);
 
-        if(!$this->securityToken->checkRequest($request)) return;
-        $to = $json['email'];
-        $news_update_email_from = 'info@openstack.org';
-        $user_name = sprintf('%s %s', $json['first_name'], $json['last_name']);
+        if(!$this->securityToken->checkRequest($request)) {
+            $response = new SS_HTTPResponse();
+            $response->setStatusCode(403);
+            $response->addHeader('Content-Type', 'application/json');
+            $response->setBody(json_encode("Error"));
+            return $response;
+        }
+
+        $this->securityToken->reset();
+
+        $to                     = $json['email'];
+        $news_update_email_from = defined('NEWS_UPDATE_EMAIL_FROM')?NEWS_UPDATE_EMAIL_FROM : 'openstacknews@openstack.org';
+        $user_name              = sprintf('%s %s', $json['first_name'], $json['last_name']);
 
         $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', $to, 'Thank you for subscribing to OpenStack Foundation News updates');
         $email->setTemplate('NewsPageSignupConfirmationEMail');

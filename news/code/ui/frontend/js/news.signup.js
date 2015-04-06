@@ -15,7 +15,7 @@ jQuery(document).ready(function($){
     $(".sendgrid-subscription-widget").on("success", function () {
         var form = $('form','.sendgrid-subscription-widget');
         var info = { first_name : $('#a',form).val(), last_name: $('#b',form).val(), email: $('input[type=email]', form).val()};
-        var security_id = $('#SecurityID', form);
+        var security_id = $('#SecurityID', form).val();
         $.ajax({
             type: "POST",
             url: 'NewsPage_Controller/sendSignupConfirmation?SecurityID='+security_id,
