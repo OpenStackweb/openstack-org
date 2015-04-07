@@ -380,4 +380,28 @@ final class DupesMembersManager {
             $current_member->showDupesOnProfile($show);
         });
     }
+
+    public function purgeActionRequests($batch_size, $older_than_x_hours = 48){
+
+        $merge_request_repository  = $this->merge_request_repository;
+        $delete_request_repository = $this->delete_request_repository;
+
+        return $this->tx_manager->transaction(function() use( $merge_request_repository, $delete_request_repository, $batch_size, $older_than_x_hours) {
+
+            $query1 = new QueryObject();
+            $query1->addAddCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
+            list($list1,$size)  = $merge_request_repository->getAll($query1, 0, $batch_size);
+            foreach($list1 as $res){
+                $merge_request_repository->delete($res);
+            }
+
+            $query2 = new QueryObject();
+            $query2->addAddCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
+            list($list2,$size) = $delete_request_repository->getAll($query2, 0, $batch_size);
+            foreach($list2 as $res){
+                $delete_request_repository->delete($res);
+            }
+
+        });
+    }
 } 
