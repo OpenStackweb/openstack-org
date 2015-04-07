@@ -2,6 +2,7 @@
     <h1>New Deployment - $Label (#$ID)</h1>
     <ul>
         <li><b>Deployment Name:</b> $Label</li>
+        <li><b>Organization:</b> $Org.Name</li>
         <li><b>Would you like to keep this information confidential or allow the Foundation to share information about this deployment publicly?:</b> $IsPublic</li>
         <li><b>In what stage is your OpenStack deployment?:</b> $DeploymentStage</li>
         <li><b>In which country / countries is this OpenStack deployment physically located?:</b> $CountriesPhysicalLocation</li>
