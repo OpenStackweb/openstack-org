@@ -1,3 +1,4 @@
+<h1>OpenStack Foundation News - Subscribe</h1>
 <div style="margin-top: 15px">
 <p>Thank you for your interest in receiving occasional email news updates from the OpenStack Foundation. We simply need your name, organization and email:</p>
 <div class="sendgrid-subscription-widget"
@@ -9,9 +10,10 @@
         <span>Surname</span><input type="text" id="b" name="b"></label>
     <input type="hidden" id="SecurityID" name="SecurityID" value="{$SecurityID}">
 </div>
+<p>&nbsp;</p>
 <p>Thank you for your interest in OpenStack.</p>
-<div>Robert Cathey | <a href="mailto:robert@cathey.co">robert@cathey.co</a> | m +1 865-386-6118<div>
-<div>Jennifer Fowler | <a href="mailto:jennifer@cathey.co">jennifer@cathey.co</a> | m +1 865-405-6380<div>
+<p><div>Robert Cathey | <a href="mailto:robert@cathey.co">robert@cathey.co</a> | m +1 865-386-6118<div>
+<div>Jennifer Fowler | <a href="mailto:jennifer@cathey.co">jennifer@cathey.co</a> | m +1 865-405-6380<div></p>
 <p>Cathey Communications for the OpenStack Foundation</p>
 </div>
 <script type="application/javascript">!function (d, s, id) {
