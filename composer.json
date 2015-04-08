@@ -14,7 +14,8 @@
         "nnnick/chartjs": "1.0.1.*@dev",
         "openid/php-openid": "dev-master",
         "silverstripe/geoip": "dev-master",
-        "unclecheese/zen-fields": "dev-master"
+        "unclecheese/zen-fields": "dev-master",
+        "sendgrid/sendgrid": "2.2.1"
 	},
    "require-dev": {
     "squizlabs/php_codesniffer": "2.*"
