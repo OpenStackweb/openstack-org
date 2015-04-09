@@ -53,7 +53,30 @@ class MarketPlaceDirectoryPage extends MarketPlacePage
 
 class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
 
+    /**
+     * @var IEntityRepository
+     */
+    private $review_repository;
+
+    /**
+     * @var ReviewManager
+     */
+    private $review_manager;
+
 	private static $allowed_actions = array();
+
+    function init(){
+        parent::init();
+
+        $this->review_repository = new SapphireReviewRepository;
+
+        $this->review_manager = new ReviewManager(
+            new SapphireReviewRepository,
+            new SapphireJobAlertEmailRepository,
+            new ReviewFactory,
+            SapphireTransactionManager::getInstance()
+        );
+    }
 
 	/**
 	 * @return string
@@ -95,4 +118,80 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
 		$page = $this->data();
 		return intval($page->RatingBoxID);
 	}
+
+    public function MarketPlaceReviewForm(){
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
+        Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/star-rating.min.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/marketplace.review.js");
+        Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
+        Requirements::css("marketplace/code/ui/frontend/css/marketplace-review.css");
+
+        $params          = $this->request->allParams();
+        $productID       = Convert::raw2sql(@$params["Slug"]);
+        $this->productID = $productID;
+        $currentUserID   = Member::CurrentUserID();
+        $form            = new MarketPlaceReviewForm($this, 'MarketPlaceReviewForm');
+
+        $data            = Session::get("FormInfo.Form_MarketPlaceReviewForm.data");
+        $review          = $this->review_repository->getReview($productID,$currentUserID);
+
+        if(is_array($data)) { //get data from cache
+            $form->loadDataFrom($data);
+        } elseif ($review) { // get submitted review
+            $form->loadDataFrom($review);
+        }
+
+        // Optional spam protection
+        if(class_exists('SpamProtectorManager')) {
+            SpamProtectorManager::update_form($form);
+        }
+        return $form;
+    }
+
+    public function MarketPlaceReviews(){
+        $output = '';
+        $reviews = $this->ProductReviews();
+
+        foreach ($reviews as $review) {
+            $output .= $review->renderWith('MarketPlaceReviews_review');
+        }
+
+        return $output;
+    }
+
+    public function ProductReviews(){
+        $params              = $this->request->allParams();
+        $company_url_segment = Convert::raw2sql($params["Company"]);
+        $productID           = Convert::raw2sql(@$params["Slug"]);
+
+        list($reviews,$size) = $this->review_repository->getAllApprovedByProduct($productID);
+        return new ArrayList($reviews);
+    }
+
+    /*public function saveReview() {
+        try{
+            $this->manager->registerJobRegistrationRequest($data);
+            Session::clear("FormInfo.Form_JobRegistrationRequestForm.data");
+            return $this->redirect($this->Link('?saved=1'));
+        }
+        catch(EntityValidationException $ex1){
+            $messages = $ex1->getMessages();
+            $msg = $messages[0];
+            $form->addErrorMessage('Title',$msg['message'] ,'bad');
+            SS_Log::log($msg['message'] ,SS_Log::ERR);
+            // Load errors into session and post back
+            Session::set("FormInfo.Form_JobRegistrationRequestForm.data", $data);
+            return $this->redirectBack();
+        }
+        catch(Exception $ex){
+            $form->addErrorMessage('Title','Server Error','bad');
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            // Load errors into session and post back
+            Session::set("FormInfo.Form_JobRegistrationRequestForm.data", $data);
+            return $this->redirectBack();
+        }
+    }*/
 }

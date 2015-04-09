@@ -139,9 +139,9 @@
 </div>
 <div class="col-lg-6">
         <% if IsPreview  %>
-            <% include MarketPlaceDirectoryPage_Rating_Placeholder %>
+            <% include MarketPlaceReviews_Placeholder %>
         <% else %>
-            <% include MarketPlaceDirectoryPage_Rating %>
+            <% include MarketPlaceReviews %>
         <% end_if %>
         <% if Videos %>
             <div id="videos">

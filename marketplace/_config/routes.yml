@@ -16,3 +16,4 @@ Director:
     'api/v1/marketplace/public-clouds': 'PublicCloudCrudApi'
     'api/v1/marketplace/private-clouds': 'PrivateCloudCrudApi'
     'api/v1/marketplace/consultants': 'ConsultantsCrudApi'
+    'api/v1/marketplace/reviews': 'ReviewCrudApi'

@@ -44,7 +44,7 @@ final class ConsultantSapphireRender {
 			array(
 				'Consultant' => $this->consultant,
 				'Services' => new ArrayList(array_values($unique_services)),
-				'Regions' => new ArrayList(array_values($unique_regions)),
+				'Regions' => new ArrayList(array_values($unique_regions))
 			)
 		)->renderWith(array('ConsultantsDirectoryPage_consultant', 'ConsultantsDirectoryPage', 'MarketPlacePage'));
 	}

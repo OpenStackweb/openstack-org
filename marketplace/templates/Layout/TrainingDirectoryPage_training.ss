@@ -34,7 +34,7 @@
             $Company.MediumLogoPreview
             <p>$Training.RAW_val(Description)</p>
             <div class="span-7 last training-rating">
-               <% include MarketPlaceDirectoryPage_Rating %>
+               <% include MarketPlaceReviews %>
             </div>
         </div>
     </div>

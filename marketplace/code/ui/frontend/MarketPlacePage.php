@@ -23,7 +23,7 @@ class MarketPlacePage_Controller extends Page_Controller {
 
 	function init(){
 		parent::init();
-		Requirements::css("marketplace/code/ui/frontend/css/marketplace.css");
+        Requirements::css("marketplace/code/ui/frontend/css/marketplace.css");
 	}
 
 	public function getDirectoryPages(){
