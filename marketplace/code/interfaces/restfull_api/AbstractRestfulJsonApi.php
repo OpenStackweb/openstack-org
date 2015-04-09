@@ -213,6 +213,14 @@ abstract class AbstractRestfulJsonApi extends Controller {
 		return $response;
 	}
 
+    public function forbiddenError(){
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(403);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode("Security Error"));
+        return $response;
+    }
+
 	public function validationError($messages){
 		$response = new SS_HTTPResponse();
 		$response->setStatusCode(412);

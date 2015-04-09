@@ -37,3 +37,6 @@ Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
 Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');
 Object::add_extension('OpenStackReleaseSupportedApiVersion', 'OpenStackReleaseSupportedApiVersionAdminUI');
 Object::add_extension('MarketPlaceAllowedInstance', 'MarketPlaceAllowedInstanceAdminUI');
+
+//Sangria
+Object::add_extension('SangriaPage_Controller', 'SangriaPageMarketPlaceExtension');

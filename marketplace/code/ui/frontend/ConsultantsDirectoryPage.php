@@ -148,7 +148,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
 
 			$render = new ConsultantSapphireRender($consultant);
-			return $render->draw($consultant);
+			return $render->draw();
 		}
 		catch (Exception $ex) {
 			return $this->httpError(404, 'Sorry that Consultant could not be found!.');

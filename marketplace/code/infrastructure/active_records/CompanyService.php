@@ -42,6 +42,7 @@ class CompanyService
 	static $has_many = array(
 		'Resources'  => 'CompanyServiceResource',
 		'Videos'     => 'MarketPlaceVideo',
+        'Reviews'    => 'MarketPlaceReview'
 	);
 
 	protected function onBeforeWrite() {
@@ -204,6 +205,23 @@ class CompanyService
 
 		AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Videos')->removeAll();
 	}
+
+    /**
+     * @return IMarketPlaceReview[]
+     */
+    public function getReviews()
+    {
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Reviews')->toArray();
+    }
+
+    /**
+     * @param IMarketPlaceReview $review
+     * @return void
+     */
+    public function addReview(IMarketPlaceReview $review)
+    {
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Reviews')->add($review);
+    }
 
 	public function clearResources()
 	{
