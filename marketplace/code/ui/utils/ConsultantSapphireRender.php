@@ -40,13 +40,9 @@ final class ConsultantSapphireRender {
 				$unique_regions[$service->getRegionID()] = $region;
 			}
 		}
-		return Controller::curr()->Customise(
-			array(
-				'Consultant' => $this->consultant,
-				'Services' => new ArrayList(array_values($unique_services)),
-				'Regions' => new ArrayList(array_values($unique_regions))
-			)
-		)->renderWith(array('ConsultantsDirectoryPage_consultant', 'ConsultantsDirectoryPage', 'MarketPlacePage'));
+        $this->consultant->Services = new ArrayList(array_values($unique_services));
+        $this->consultant->Regions  =  new ArrayList(array_values($unique_regions));
+        return Controller::curr()->Customise($this->consultant)->renderWith(array('ConsultantsDirectoryPage_consultant', 'ConsultantsDirectoryPage', 'MarketPlacePage'));
 	}
 
     public function pdf(){
