@@ -202,6 +202,26 @@ final class Consultant
 		return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'ServicesOffered')->toArray();
 	}
 
+    /**
+     * @return void
+     */
+    public function setServicesAndRegions(SapphireRegionRepository $region_repository)
+    {
+        $services = $this->getServicesOffered();
+        $unique_services = array();
+        $unique_regions = array();
+        foreach ($services as $service) {
+            if (!array_key_exists($service->getType(), $unique_services))
+                $unique_services[$service->getType()] = $service;
+            if (!array_key_exists($service->getRegionID(), $unique_regions)) {
+                $region = $region_repository->getById($service->getRegionID());
+                $unique_regions[$service->getRegionID()] = $region;
+            }
+        }
+        $this->Services = new ArrayList(array_values($unique_services));
+        $this->Regions  =  new ArrayList(array_values($unique_regions));
+    }
+
 	/**
 	 * @param IConsultantServiceOfferedType $service
 	 * @param IRegion                       $region

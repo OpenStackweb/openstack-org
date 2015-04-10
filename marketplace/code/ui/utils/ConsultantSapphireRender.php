@@ -29,19 +29,9 @@ final class ConsultantSapphireRender {
         Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
         Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
 		Requirements::javascript("marketplace/code/ui/frontend/js/consultant.page.js");
-		$services = $this->consultant->getServicesOffered();
-		$unique_services = array();
-		$unique_regions = array();
-		foreach ($services as $service) {
-			if (!array_key_exists($service->getType(), $unique_services))
-				$unique_services[$service->getType()] = $service;
-			if (!array_key_exists($service->getRegionID(), $unique_regions)) {
-				$region = $this->region_repository->getById($service->getRegionID());
-				$unique_regions[$service->getRegionID()] = $region;
-			}
-		}
-        $this->consultant->Services = new ArrayList(array_values($unique_services));
-        $this->consultant->Regions  =  new ArrayList(array_values($unique_regions));
+
+        $this->consultant->setServicesAndRegions($this->region_repository);
+
         return Controller::curr()->Customise($this->consultant)->renderWith(array('ConsultantsDirectoryPage_consultant', 'ConsultantsDirectoryPage', 'MarketPlacePage'));
 	}
 
