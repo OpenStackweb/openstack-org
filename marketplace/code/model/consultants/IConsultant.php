@@ -93,6 +93,11 @@ interface IConsultant extends IRegionalSupportedCompanyService {
 	 */
 	public function getServicesOffered();
 
+    /**
+     * @return void
+     */
+    public function setServicesAndRegions(SapphireRegionRepository $region_repository);
+
 	/**
 	 * @param IConsultantServiceOfferedType $service
 	 * @param IRegion $region
