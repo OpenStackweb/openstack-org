@@ -29,8 +29,8 @@ final class ReviewFactory implements IReviewFactory {
      * @return ICompanyService
      */
     public function buildProduct(array $data) {
-        $company = new CompanyService();
-        return $company->get()->byId($data['product_id']);
+        $company = CompanyService::get()->byId($data['company_service_ID']);
+        return $company;
     }
 
 	/**

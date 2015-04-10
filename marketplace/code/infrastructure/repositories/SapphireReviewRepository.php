@@ -29,26 +29,27 @@ final class SapphireReviewRepository extends SapphireRepository {
 	}
 
     /**
-     * @param int $productID
+     * @param int $company_service_ID
      * @param int $userID
      * @return array
      */
-    public function getReview($productID, $userID)	{
+    public function getReview($company_service_ID, $userID)	{
         $query = new QueryObject(new MarketPlaceReview);
         $query->addAddCondition(QueryCriteria::equal('MemberID',$userID));
-        $query->addAddCondition(QueryCriteria::equal('CompanyServiceID',$productID));
+        $query->addAddCondition(QueryCriteria::equal('CompanyServiceID',$company_service_ID));
         return  $this->getBy($query);
     }
 
     /**
-     * @param int $offset
+     * @param int $company_service_ID
+     * @param int offset
      * @param int $limit
      * @return array
      */
-    public function getAllApprovedByProduct($productID, $offset = 0, $limit = 100)	{
+    public function getAllApprovedByProduct($company_service_ID, $offset = 0, $limit = 100)	{
         $query = new QueryObject(new MarketPlaceReview);
         $query->addAddCondition(QueryCriteria::equal('Approved',1));
-        $query->addAddCondition(QueryCriteria::equal('CompanyServiceID',$productID));
+        $query->addAddCondition(QueryCriteria::equal('CompanyServiceID',$company_service_ID));
         $query->addOrder(QueryOrder::desc('Created'));
         return  $this->getAll($query,$offset,$limit);
     }

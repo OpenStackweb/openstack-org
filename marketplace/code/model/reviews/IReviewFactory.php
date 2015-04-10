@@ -22,6 +22,12 @@ interface IReviewFactory {
 	 */
 	public function buildReviewMainInfo(array $data);
 
+    /**
+     * @param array $data
+     * @return ICompanyService
+     */
+    public function buildProduct(array $data);
+
 	/**
 	 * @param IMarketPlaceReview $review
 	 * @return IReviewAlertEmail

@@ -101,6 +101,8 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 	        $company_url_segment = Convert::raw2sql($params["Company"]);
 	        $training_id         = Convert::raw2sql(@$params["Slug"]);
 	        $training            = $this->training_facade->getCompanyTraining($training_id,$company_url_segment);
+            // we need this for reviews.
+            $this->company_service_ID = $training['Training']->getIdentifier();
             return $this->Customise($training)->renderWith(array('TrainingDirectoryPage_training','TrainingDirectoryPage','MarketPlacePage'));;
 
         } catch (Exception $ex) {

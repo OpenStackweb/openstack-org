@@ -21,7 +21,7 @@ class MarketPlaceReview extends DataObject implements IMarketPlaceReview {
 	static $db = array(
 		'Title'     => 'Varchar',
         'Comment'   => 'Varchar',
-        'Rating'    => 'Int',
+        'Rating'    => 'Float',
         'Approved'  => 'Boolean'
 	);
 
@@ -74,11 +74,11 @@ class MarketPlaceReview extends DataObject implements IMarketPlaceReview {
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getRating()
     {
-        return (int)$this->getField('Rating');
+        return (float)$this->getField('Rating');
     }
 
     /**
@@ -86,7 +86,7 @@ class MarketPlaceReview extends DataObject implements IMarketPlaceReview {
      */
     public function getRatingAsWidth()
     {
-        return (int)$this->getField('Rating')*20;
+        return (float)$this->getField('Rating')*20;
     }
 
     /**

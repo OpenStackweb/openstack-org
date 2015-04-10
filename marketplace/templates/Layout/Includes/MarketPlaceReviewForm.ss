@@ -34,9 +34,9 @@
             <div class="middleColumn">
                 $Fields.dataFieldByName(comment)
             </div>
-            <p> Char limit 2000 </p>
+            <p> Char limit 500 </p>
         </div>
-        $Fields.dataFieldByName(product)
+        $Fields.dataFieldByName(company_service_ID)
         $Fields.dataFieldByName(logged_in)
         <div class="honey field text" id="field_98438688">
             <label for="$FormName_field_98438688">Don't enter anything here</label>

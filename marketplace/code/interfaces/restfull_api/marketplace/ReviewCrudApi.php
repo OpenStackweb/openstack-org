@@ -106,7 +106,7 @@ final class ReviewCrudApi extends AbstractRestfulJsonApi {
             $data = $this->getJsonRequest();
             if (!$data) return $this->serverError();
 
-            $review = $this->review_repository->getReview($data['product_id'],Member::CurrentUserID());
+            $review = $this->review_repository->getReview($this->review_factory->buildProduct($data)->getIdentifier(),Member::CurrentUserID());
             if ($review) {
                 $this->review_manager->updateReview($data,$review);
                 return $this->updated();

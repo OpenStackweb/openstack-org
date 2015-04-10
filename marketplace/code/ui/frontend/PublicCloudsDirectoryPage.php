@@ -149,6 +149,8 @@ class PublicCloudsDirectoryPage_Controller extends CloudsDirectoryPage_Controlle
 			$this->current_cloud = $this->cloud_repository->getBy($query);
 			if(!$this->current_cloud) throw new NotFoundEntityException('','');
 			if($this->current_cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
+            // we need this for reviews.
+            $this->company_service_ID = $this->current_cloud->getIdentifier();
 			$render             = new PublicCloudSapphireRender($this->current_cloud);
 			return $render->draw();
 		}
