@@ -44,7 +44,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         $business_drivers = (count($business_drivers) > 0) ? array_combine($business_drivers,$business_drivers): array();
         $answer_count     = 0;
 
-        foreach(DeploymentSurvey::$business_drivers_options as $key => $value){
+        foreach(DeploymentSurveyOptions::$business_drivers_options as $key => $value){
             $hash = md5($key);
             $input = '';
 
@@ -81,7 +81,7 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
 
 
         $answer_table = array();
-        foreach(DeploymentSurvey::$business_drivers_options as $key => $value) {
+        foreach(DeploymentSurveyOptions::$business_drivers_options as $key => $value) {
             $hash = md5($key);
             $answer_table[$hash.'_answer'] = $key;
         }
@@ -91,15 +91,15 @@ class DeploymentSurveyYourThoughtsForm  extends Form {
         Requirements::customScript('var answer_table = '.$answer_table.';');
         Requirements::customScript('rank_order = '.$answer_count.';');
 
-        $fields->add(new CustomCheckboxSetField('InformationSources', 'Where do you end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))));
+        $fields->add(new CustomCheckboxSetField('InformationSources', 'Where do you end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurveyOptions::$information_options, null, array('Other' => 'Other Sources (please specify)'))));
         $fields->add(new TextAreaField('OtherInformationSources', ''));
          $fields->add($ddl_rate = new DropdownField(
             'OpenStackRecommendRate',
             'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',
-            DeploymentSurvey::$openstack_recommendation_rate_options));
+             DeploymentSurveyOptions::$openstack_recommendation_rate_options));
         $fields->add(new CheckboxField('InterestedUsingContainerTechnology','Are you interested in using container technology with OpenStack?'));
         $fields->add(new LiteralField('Break', '<div id="container_related_tech" class="hidden">'));
-        $fields->add(new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Select All That Apply', DeploymentSurvey::$container_related_technologies));
+        $fields->add(new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Select All That Apply', DeploymentSurveyOptions::$container_related_technologies));
         $fields->add(new LiteralField('Break', '</div>'));
         $fields->add(new LiteralField('Break', '<hr/>'));
         $fields->add(new LiteralField('Break', '<p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights.</p>'));

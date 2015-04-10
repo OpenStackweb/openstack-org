@@ -18,7 +18,7 @@
         </div>
     </div>
     <div id="date-to" class="field text date inline">
-        <label class="left" for="SurveyDateFilters_date-to">Start Date</label>
+        <label class="left" for="SurveyDateFilters_date-to">End Date</label>
         <div class="middleColumn">
             <input type="text" class="text date inline date_filter_date-to" id="SurveyDateFilters_date-to" value="$end_date">
         </div>

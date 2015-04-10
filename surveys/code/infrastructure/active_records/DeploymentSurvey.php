@@ -90,102 +90,6 @@ class DeploymentSurvey extends DataObject
 		'Login', 'AboutYou','YourOrganization', 'YourThoughts',  'AppDevSurvey', 'Deployments', 'DeploymentDetails', 'MoreDeploymentDetails', 'ThankYou'
 	);
 
-	public static $industry_options = array(
-		'Academic / Research' => 'Academic / Research / Education',
-		'Consumer Goods' => 'Consumer Goods',
-		'Energy' => 'Energy',
-		'Film/Media' => 'Film / Media / Entertainment',
-		'Finance' => 'Finance & Investment',
-		'Government / Defense' => 'Government / Defense',
-		'Healthcare' => 'Healthcare',
-		'Information Technology' => 'Information Technology',
-		'Insurance' => 'Insurance',
-		'Manufacturing/Industrial' => 'Manufacturing / Industrial',
-		'Retail' => 'Retail',
-		'Telecommunications' => 'Telecommunications',
-	);
-
-	public static $organization_size_options = array(
-		'1 to 9 employees' => '1 to 9 employees',
-        '10 to 99 employees' => '10 to 99 employees',
-        '100 to 999 employees' => '100 to 999 employees',
-        '1,000 to 9,999 employees' => '1,000 to 9,999 employees',
-        '10,000 to 99,999 employees' => '10,000 to 99,999 employees',
-        '100,000 employees or more' => '100,000 employees or more',
-        'Don’t know / not sure' => 'Don’t know / not sure',
- 	);
-
-	public static $openstack_recommendation_rate_options = array(
-		'0' => '0',
-		'1' => '1',
-		'2' => '2',
-		'3' => '3',
-		'4' => '4',
-		'5' => '5',
-		'6' => '6',
-		'7' => '7',
-		'8' => '8',
-		'9' => '9',
-		'10' => '10',
-	);
-
-	public static $openstack_involvement_options = array(
-		'Service Provider' => 'OpenStack cloud service provider - provides public or hosted private cloud services for other organizations',
-		'Ecosystem Vendor' => 'Ecosystem vendor - provides software or solutions that enable others to build or run OpenStack clouds',
-		'Cloud operator' => 'Private cloud operator - Runs an OpenStack private cloud for your own organization',
-		'Cloud Consumer' => 'Consumer of an OpenStack cloud - has API or dashboard credentials for one or more OpenStack resource pools, including an Application Developer'
-	);
-
-	public static $information_options = array(
-		'Ask OpenStack (ask.openstack.org)' => 'Ask OpenStack (ask.openstack.org)',
-		'Blogs' => 'Blogs',
-		'docs.openstack.org' => 'docs.openstack.org',
-		'IRC' => 'IRC',
-		'Local user group' => 'Local user group',
-        'OpenStack Mailing List' => 'OpenStack Mailing List',
-        'OpenStack Operators Mailing List' => 'OpenStack Operators Mailing List',
-        'OpenStack Dev Mailing List' => 'OpenStack Dev Mailing List',
-        'The OpenStack Operations Guide' => 'The OpenStack Operations Guide',
-        'Online Forums' => 'Online Forums',
-        'OpenStack Planet (planet.openstack.org)' => 'OpenStack Planet (planet.openstack.org)',
-        'Read the source code' => 'Read the source code',
-        'Superuser' => 'Superuser.openstack.org',
-        'Vendor documentation' => 'Vendor documentation',
-  	);
-
-	public static $business_drivers_options = array(
-		'Save money over alternative infrastructure choices' => 'Save money over alternative infrastructure choices',
-        'Increase operational efficiency' => 'Increase operational efficiency',
-        'Accelerate my organization\’s ability to innovate and compete by deploying applications faster' => 'Accelerate my organization’s ability to innovate and compete by deploying applications faster',
-        'Avoid vendor lock-in with an open platform and ecosystem including flexibility of underlying technology choices' => 'Avoid vendor lock-in with an open platform and ecosystem, including flexibility of underlying technology choices',
-        'Attract top technical talent by participating in an active global technology community' => 'Attract top technical talent by participating in an active, global technology community',
-        'Achieve security and/or privacy goals with control of platform' => 'Achieve security and/or privacy goals with control of platform',
-        'Standardize on the same open platform and APIs that power a global network of of public and private clouds' => 'Standardize on the same open platform and APIs that power a global network of of public and private clouds',
-		'Other' => 'Something else not listed here',
-   );
-
-    public static $activities_options = array(
-        'Write code that is upstreamed into OpenStack' => 'Write code that is upstreamed into OpenStack' ,
-        'Manage people who write code that is upstreamed into OpenStack' => 'Manage people who write code that is upstreamed into OpenStack',
-        'Write applications that run on OpenStack' => 'Write applications that run on OpenStack',
-        'Manage people who write applications that run on OpenStack' => 'Manage people who write applications that run on OpenStack',
-        'Install / administer / deploy OpenStack' => 'Install / administer / deploy OpenStack',
-        'Install / administer / deploy applications that run on OpenStack' => 'Install / administer / deploy applications that run on OpenStack',
-        'Manage people who install / administer / deploy OpenStack' => 'Manage people who install / administer / deploy OpenStack',
-        'Manage people who install / administer / deploy applications that run on OpenStack' => 'Manage people who install / administer / deploy applications that run on OpenStack',
-        'None of these' => 'None of these',
-    );
-
-	public static $container_related_technologies = array(
-		'Docker' => 'Docker',
-		'Rocket' => 'Rocket',
-		'LXC' => 'LXC',
-		'LXD' => 'LXD',
-		'OpenVZ' => 'OpenVZ',
-		'Warden' => 'Warden',
-		'Kubernetes' => 'Kubernetes',
-		'Mesos' => 'Mesos',
-	);
 
 	protected function onBeforeWrite()
 	{
@@ -208,7 +112,7 @@ class DeploymentSurvey extends DataObject
 			array(
 				$first_name_field 		= new ReadonlyField('FirstName', 'First name / Given name'),
 				$last_name_field  		= new ReadonlyField('Surname', 'Last name / Family name'),
-				$os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurvey::$activities_options),
+				$os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurveyOptions::$activities_options),
 				$os_relationship        = new TextAreaField('OpenStackRelationship', 'Please describe your relationship with OpenStack'),
 				$email_field            = new ReadonlyField('Member.Email', 'Your Email', $this->Member()->Email),
 				$ok_2_contact           = new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee may communicate with me in the future about my usage.')
@@ -219,7 +123,7 @@ class DeploymentSurvey extends DataObject
 			new DropdownField(
 				'Industry',
 				'Your Organization’s Primary Industry',
-				ArrayUtils::AlphaSort(DeploymentSurvey::$industry_options, array('' => '-- Please Select One --'), array('Other' => 'Other Industry (please specify)') )
+				ArrayUtils::AlphaSort(DeploymentSurveyOptions::$industry_options, array('' => '-- Please Select One --'), array('Other' => 'Other Industry (please specify)') )
 			),
 			new TextareaField('OtherIndustry', 'Other Industry'),
 			$org_it_activity = new TextField('ITActivity', 'Your Organization’s Primary IT Activity'),
@@ -234,9 +138,9 @@ class DeploymentSurvey extends DataObject
 			new DropdownField(
 				'OrgSize',
 				'Your Organization Size (All Branches, Locations, Sites)',
-				DeploymentSurvey::$organization_size_options
+                DeploymentSurveyOptions::$organization_size_options
 			),
-			new CheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurvey::$openstack_involvement_options))
+			new CheckboxSetField('OpenStackInvolvement', 'What best describes your Organization’s involvement with OpenStack?', ArrayUtils::AlphaSort(DeploymentSurveyOptions::$openstack_involvement_options))
 		));
 
 		$ddl_country->setEmptyString('-- Select One --');
@@ -245,14 +149,14 @@ class DeploymentSurvey extends DataObject
 			new CustomCheckboxSetField(
 				'BusinessDrivers',
 				'What are your top business drivers for using OpenStack?<BR>Please rank up to 5.<BR>1 = top business driver, 2 = next, 3 = third, and so on<BR>Select At Least One',
-				ArrayUtils::AlphaSort(DeploymentSurvey::$business_drivers_options,null, array('Other' => 'Something else not listed here (please specify)'))),
+				ArrayUtils::AlphaSort(DeploymentSurveyOptions::$business_drivers_options,null, array('Other' => 'Something else not listed here (please specify)'))),
 			new TextAreaField('OtherBusinessDrivers', ''),
-			new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurvey::$information_options, null, array('Other' => 'Other Sources (please specify)'))),
+			new CustomCheckboxSetField('InformationSources', 'Where do end up finding information about using OpenStack, after using search engines and talking to your colleagues?<BR>Select All That Apply', ArrayUtils::AlphaSort(DeploymentSurveyOptions::$information_options, null, array('Other' => 'Other Sources (please specify)'))),
 			new TextAreaField('OtherInformationSources', ''),
 			$ddl_rate = new DropdownField(
 				'OpenStackRecommendRate',
 				'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',
-				DeploymentSurvey::$openstack_recommendation_rate_options),
+                DeploymentSurveyOptions::$openstack_recommendation_rate_options),
 			new LiteralField('Break', '<hr/>'),
 			new LiteralField('Break', '<p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights.</p>'),
 			new LiteralField('Break', '<p>Your responses are anonymous, and each of these text fields is independent, so we cannot “See previous answer”. We would really appreciate a separate answer to each question.</p>'),
@@ -260,7 +164,7 @@ class DeploymentSurvey extends DataObject
 			new TextAreaField('FurtherEnhancement', 'What areas of OpenStack require further enhancement? '),
 			new TextAreaField('FoundationUserCommitteePriorities', 'What should be the priorities for the Foundation and User Committee during the coming year?'),
 			new CheckboxField('InterestedUsingContainerTechnology','Are you interested in using container technology with OpenStack?'),
-			new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Please select all that apply', DeploymentSurvey::$container_related_technologies)
+			new CustomCheckboxSetField('ContainerRelatedTechnologies','Which of the following container related technologies are you interested in using?<BR>Please select all that apply', DeploymentSurveyOptions::$container_related_technologies)
 		));
 
 		$ddl_rate->setEmptyString('Neutral');
