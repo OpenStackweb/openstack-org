@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="/themes/openstack/css/bootstrap.min.css" type="text/css" media="screen, projection">
-
 <style>
     input[type="radio"], input[type="checkbox"] {
         line-height: normal !important;

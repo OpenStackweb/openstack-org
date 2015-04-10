@@ -15,7 +15,7 @@
 /**
  * Class DupesMembers_Controller
  */
-final class DupesMembers_Controller extends AbstractController {
+final class DupesMembers_Controller extends Page_Controller {
 
     static $url_handlers = array(
         'GET $CONFIRMATION_TOKEN/merge'  => 'mergeAccount',
@@ -72,16 +72,6 @@ final class DupesMembers_Controller extends AbstractController {
         Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
         Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
         Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
-
-        if (Director::isLive()) {
-            Requirements::javascript('themes/openstack/javascript/jquery.min.js');
-        } else {
-            Requirements::javascript('themes/openstack/javascript/jquery.js');
-        }
-
-        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
-        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
-        Requirements::javascript("themes/openstack/javascript/navigation.js");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
     }
     /**
