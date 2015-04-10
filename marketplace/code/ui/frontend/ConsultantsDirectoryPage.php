@@ -143,10 +143,11 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			$slug                = Convert::raw2sql($params["Slug"]);
 			$query               = new QueryObject();
 			$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
-			$consultant       = $this->consultant_repository->getBy($query);
+			$consultant          = $this->consultant_repository->getBy($query);
 			if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
 			if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
-
+            // we need this for reviews.
+            $this->company_service_ID = $consultant->getIdentifier();
 			$render = new ConsultantSapphireRender($consultant);
 			return $render->draw();
 		}

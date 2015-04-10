@@ -44,3 +44,15 @@ input.text {
     top: 42%;
     position: relative;
 }
+
+label.error {
+    border: none !important;
+    margin: 0;
+    position:relative;
+    background: none;
+    padding: 0;
+}
+
+.error {
+    margin-bottom: 0;
+}

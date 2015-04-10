@@ -23,8 +23,8 @@ final class MarketPlaceReviewForm extends HoneyPotForm {
         $TitleField = new TextField('title','Title');
         $CommentField = new HtmlEditorField('comment','Comment');
         $CommentField->setRows(8);
-        $ProductField = new HiddenField('product','');
-        $ProductField->setValue($controller->productID);
+        $CompanyServiceIDField = new HiddenField('company_service_ID','');
+        $CompanyServiceIDField->setValue($controller->company_service_ID);
         $LoggedInField = new HiddenField('logged_in','');
         if (Member::CurrentUser()) {
             $LoggedInField->setValue(1);
@@ -35,7 +35,7 @@ final class MarketPlaceReviewForm extends HoneyPotForm {
             $RatingField,
             $TitleField,
             $CommentField,
-            $ProductField,
+            $CompanyServiceIDField,
             $LoggedInField
         );
 

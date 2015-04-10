@@ -10,7 +10,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+var form_validator = null;
+
 jQuery(document).ready(function($){
+
+    var valid_review = false;
+    var form_id  = 'MarketPlaceReviewForm_MarketPlaceReviewForm';
+    var form     = $('#'+form_id);
+
+    var form_id = form.attr('id');
+
+    //validation
+    form_validator = form.validate({
+        onfocusout: false,
+        focusCleanup: true,
+        ignore: [],
+        rules: {
+            title   : { required: true , ValidPlainText:true, maxlength: 100 },
+            comment : { required: true , ValidPlainText:true, maxlength: 500 },
+            rating  : { required: true , number:true}
+        },
+        focusInvalid: false,
+        invalidHandler: function(form, validator) {
+            if (!validator.numberOfInvalids())
+                return;
+            var element = $(validator.errorList[0].element);
+            if(!element.is(":visible")){
+                element = element.parent();
+            }
+        },
+        errorPlacement: function(error, element) {
+            if(!element.is(":visible")){
+                element = element.parent();
+            }
+            error.insertAfter(element);
+        }
+    });
 
     $("#MarketPlaceReviewForm_MarketPlaceReviewForm_rating").rating({size:'xs',showCaption:false,showClear:false});
 
@@ -34,8 +70,6 @@ jQuery(document).ready(function($){
 
 
     // SAVE REVIEW
-    var form_id  = 'MarketPlaceReviewForm_MarketPlaceReviewForm';
-    var form     = $('#'+form_id);
 
     form.submit(function( event ) {
         event.preventDefault();
@@ -44,7 +78,7 @@ jQuery(document).ready(function($){
         var security_id = $('#'+form_id+'_SecurityID',form).val();
         var url     = 'api/v1/marketplace/reviews?SecurityID='+security_id;
         var request = {
-            product_id : $('#'+form_id+'_product',form).val(),
+            company_service_ID : $('#'+form_id+'_company_service_ID',form).val(),
             title   :  $('#'+form_id+'_title',form).val(),
             rating  :  $('#'+form_id+'_rating',form).val(),
             comment : $('#'+form_id+'_comment',form).val(),

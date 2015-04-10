@@ -156,6 +156,8 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 			$distribution        = $this->distribution_repository->getBy($query);
 			if(!$distribution) throw new NotFoundEntityException('','');
 			if($distribution->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
+            // we need this for reviews.
+            $this->company_service_ID = $distribution->getIdentifier();
 			$render = new DistributionSapphireRender($distribution);
 			return $render->draw();
 		}
