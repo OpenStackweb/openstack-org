@@ -453,7 +453,9 @@ SQL;
 
         $res = $this->ExportSurveyResultsData();
 
-        $fields = array(
+        $range = Controller::curr()->getRequest()->getVar('Range');
+
+        $fields_V2 = array(
             'SurveyID',
             'SurveyCreated',
             'SurveyEdited',
@@ -544,19 +546,90 @@ SQL;
             'OtherSupportedFeatures',
         );
 
-        $flat_fields = array(
+        $fields_V1 = array(
+            'SurveyID',
+            'SurveyCreated',
+            'SurveyEdited',
+            'OrgName',
+            'OrgID',
+            'DeploymentID',
+            'DeploymentCreated',
+            'DeploymentEdited',
+            'FirstName',
+            'Surname',
+            'Email',
+            'Title',
+            'Industry',
+            'OtherIndustry',
+            'PrimaryCity',
+            'PrimaryState',
+            'PrimaryCountry',
+            'OrgSize',
+            'OpenStackInvolvement',
+            'InformationSources',
+            'OtherInformationSources',
+            'FurtherEnhancement',
+            'FoundationUserCommitteePriorities',
+            'OkToContact',
+            'BusinessDrivers',
+            'OtherBusinessDrivers',
+            'WhatDoYouLikeMost',
+            'Label',
+            'IsPublic',
+            'DeploymentType',
+            'ProjectsUsed',
+            'CurrentReleases',
+            'DeploymentStage',
+            'NumCloudUsers',
+            'Hypervisors',
+            'OtherHypervisor',
+            'BlockStorageDrivers',
+            'OtherBlockStorageDriver',
+            'NetworkDrivers',
+            'OtherNetworkDriver',
+            'IdentityDrivers',
+            'OtherIndentityDriver',
+            'ComputeNodes',
+            'ComputeCores',
+            'ComputeInstances',
+            'BlockStorageTotalSize',
+            'ObjectStorageSize',
+            'ObjectStorageNumObjects',
+            'NetworkNumIPs',
+            'WhyNovaNetwork',
+            'OtherWhyNovaNetwork',
+            'DeploymentTools',
+            'OtherDeploymentTools',
+            'DeploymentOperatingSystems',
+            'DeploymentOtherOperatingSystems',
+            'SwiftGlobalDistributionFeatures',
+            'SwiftGlobalDistributionFeaturesUsesCases',
+            'OtherSwiftGlobalDistributionFeaturesUsesCases',
+            'Plans2UseSwiftStoragePolicies',
+            'OtherPlans2UseSwiftStoragePolicies',
+            'UsedDBForOpenStackComponents',
+            'OtherUsedDBForOpenStackComponents',
+            'ToolsUsedForYourUsers',
+            'OtherToolsUsedForYourUsers',
+            'Reason2Move2Ceilometer',
+            'SupportedFeatures',
+        );
+
+        $fields = ($range == SurveyType::MARCH_2015)?$fields_V2:$fields_V1;
+
+        $flat_fields_V2 = array(
             //survey
-            'Industry' => DeploymentSurvey::$industry_options,
-            'OpenStackInvolvement' => DeploymentSurvey::$openstack_involvement_options,
-            'BusinessDrivers' => DeploymentSurvey::$business_drivers_options,
-            'InformationSources' => DeploymentSurvey::$information_options,
-            'ContainerRelatedTechnologies' => DeploymentSurvey::$container_related_technologies,
+            'Industry' => DeploymentSurveyOptions::$industry_options,
+            'OpenStackInvolvement' => DeploymentSurveyOptions::$openstack_involvement_options,
+            'BusinessDrivers' => DeploymentSurveyOptions::$business_drivers_options,
+            'InformationSources' => DeploymentSurveyOptions::$information_options,
+            'ContainerRelatedTechnologies' => DeploymentSurveyOptions::$container_related_technologies,
             //app dev survey
-            'Toolkits' => AppDevSurvey::$toolkits_options,
-            'ProgrammingLanguages' => AppDevSurvey::$languages_options,
-            'APIFormats' => AppDevSurvey::$api_format_options,
-            'DeploymentOperatingSystems' => AppDevSurvey::$opsys_options,
-            'GuestOperatingSystems' => AppDevSurvey::$opsys_options,
+            'Toolkits' => AppDevSurveyOptions::$toolkits_options,
+            'ProgrammingLanguages' => AppDevSurveyOptions::$languages_options,
+            'APIFormats' => AppDevSurveyOptions::$api_format_options,
+            'DeploymentOperatingSystems' => AppDevSurveyOptions::$opsys_options,
+            'GuestOperatingSystems' => AppDevSurveyOptions::$opsys_options,
             //deployment
             'ProjectsUsed' => DeploymentOptions::$projects_used_options,
             'CurrentReleases' => DeploymentOptions::$current_release_options,
@@ -575,8 +648,34 @@ SQL;
             'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
             'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
             'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
-            'OpenStackActivity' => DeploymentSurvey::$activities_options,
+            'OpenStackActivity' => DeploymentSurveyOptions::$activities_options,
         );
+
+        $flat_fields_V1 = array(
+            //survey
+            'Industry' => DeploymentSurveyArchiveOptions::$industry_options,
+            'OpenStackInvolvement' => DeploymentSurveyArchiveOptions::$openstack_involvement_options,
+            'BusinessDrivers' => DeploymentSurveyArchiveOptions::$business_drivers_options,
+            'InformationSources' => DeploymentSurveyArchiveOptions::$information_options,
+            //app dev survey
+            'Toolkits' => AppDevSurveyArchiveOptions::$toolkits_options,
+            'ProgrammingLanguages' => AppDevSurveyArchiveOptions::$languages_options,
+            'APIFormats' => AppDevSurveyArchiveOptions::$api_format_options,
+            'DeploymentOperatingSystems' => AppDevSurveyArchiveOptions::$opsys_options,
+            //deployment
+            'ProjectsUsed' => DeploymentArchiveOptions::$projects_used_options,
+            'CurrentReleases' => DeploymentArchiveOptions::$current_release_options,
+            'DeploymentTools' => DeploymentArchiveOptions::$deployment_tools_options,
+            'Hypervisors' => DeploymentArchiveOptions::$hypervisors_options,
+            'SupportedFeatures' => DeploymentArchiveOptions::$deployment_features_options,
+            'UsedDBForOpenStackComponents' => DeploymentArchiveOptions::$used_db_for_openstack_components_options,
+            'NetworkDrivers' => DeploymentArchiveOptions::$network_driver_options,
+            'IdentityDrivers' => DeploymentArchiveOptions::$identity_driver_options,
+            'BlockStorageDrivers' => DeploymentArchiveOptions::$block_storage_divers_options,
+            'WhyNovaNetwork' => DeploymentArchiveOptions::$why_nova_network_options,
+        );
+
+        $flat_fields = ($range == SurveyType::MARCH_2015)?$flat_fields_V2:$flat_fields_V1;
 
         $file_data = array();
 
@@ -677,19 +776,21 @@ SQL;
         $fileDate = date('Ymdhis');
         $res = $this->ExportAppDevSurveyData();
 
-        $flat_fields = array(
+        $range = Controller::curr()->getRequest()->getVar('Range');
+
+        $flat_fields_V2 = array(
             //survey
-            'Industry' => DeploymentSurvey::$industry_options,
-            'OpenStackInvolvement' => DeploymentSurvey::$openstack_involvement_options,
-            'BusinessDrivers' => DeploymentSurvey::$business_drivers_options,
-            'InformationSources' => DeploymentSurvey::$information_options,
-            'ContainerRelatedTechnologies' => DeploymentSurvey::$container_related_technologies,
+            'Industry' => DeploymentSurveyOptions::$industry_options,
+            'OpenStackInvolvement' => DeploymentSurveyOptions::$openstack_involvement_options,
+            'BusinessDrivers' => DeploymentSurveyOptions::$business_drivers_options,
+            'InformationSources' => DeploymentSurveyOptions::$information_options,
+            'ContainerRelatedTechnologies' => DeploymentSurveyOptions::$container_related_technologies,
             //app dev survey
-            'Toolkits' => AppDevSurvey::$toolkits_options,
-            'ProgrammingLanguages' => AppDevSurvey::$languages_options,
-            'APIFormats' => AppDevSurvey::$api_format_options,
-            'ApplicationDevelopmentOperatingSystems' => AppDevSurvey::$opsys_options,
-            'GuestOperatingSystems' => AppDevSurvey::$opsys_options,
+            'Toolkits' => AppDevSurveyOptions::$toolkits_options,
+            'ProgrammingLanguages' => AppDevSurveyOptions::$languages_options,
+            'APIFormats' => AppDevSurveyOptions::$api_format_options,
+            'ApplicationDevelopmentOperatingSystems' => AppDevSurveyOptions::$opsys_options,
+            'GuestOperatingSystems' => AppDevSurveyOptions::$opsys_options,
             //deployment
             'ProjectsUsed' => DeploymentOptions::$projects_used_options,
             'CurrentReleases' => DeploymentOptions::$current_release_options,
@@ -708,15 +809,49 @@ SQL;
             'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
             'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
             'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
-            'OpenStackActivity' => DeploymentSurvey::$activities_options,
+            'OpenStackActivity' => DeploymentSurveyOptions::$activities_options,
         );
 
-        $fields = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
+        $flat_fields_V1 = array(
+            //survey
+            'Industry' => DeploymentSurveyArchiveOptions::$industry_options,
+            'OpenStackInvolvement' => DeploymentSurveyArchiveOptions::$openstack_involvement_options,
+            'BusinessDrivers' => DeploymentSurveyArchiveOptions::$business_drivers_options,
+            'InformationSources' => DeploymentSurveyArchiveOptions::$information_options,
+            //app dev survey
+            'Toolkits' => AppDevSurveyArchiveOptions::$toolkits_options,
+            'ProgrammingLanguages' => AppDevSurveyArchiveOptions::$languages_options,
+            'APIFormats' => AppDevSurveyArchiveOptions::$api_format_options,
+            //deployment
+            'ProjectsUsed' => DeploymentArchiveOptions::$projects_used_options,
+            'CurrentReleases' => DeploymentArchiveOptions::$current_release_options,
+            'Hypervisors' => DeploymentArchiveOptions::$hypervisors_options,
+            'SupportedFeatures' => DeploymentArchiveOptions::$deployment_features_options,
+            'UsedDBForOpenStackComponents' => DeploymentArchiveOptions::$used_db_for_openstack_components_options,
+            'NetworkDrivers' => DeploymentArchiveOptions::$network_driver_options,
+            'IdentityDrivers' => DeploymentArchiveOptions::$identity_driver_options,
+            'BlockStorageDrivers' => DeploymentArchiveOptions::$block_storage_divers_options,
+            'WhyNovaNetwork' => DeploymentArchiveOptions::$why_nova_network_options,
+        );
+
+        $flat_fields = ($range == SurveyType::MARCH_2015)?$flat_fields_V2:$flat_fields_V1;
+
+        $fields_V2 = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
             'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
             'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'OkToContact', 'BusinessDrivers',
             'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'DevelopmentEnvironments',
             'OtherDevelopmentEnvironments', 'ApplicationDevelopmentOperatingSystems', 'ApplicationDevelopmentOtherOperatingSystems', 'ConfigTools', 'OtherConfigTools', 'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds',
             'GuestOperatingSystems', 'OtherGuestOperatingSystems', 'StruggleDevelopmentDeploying', 'OtherDocsPriority', 'APIFormats', 'OtherAPIFormats');
+
+        $fields_V1 = array('SurveyID', 'SurveyCreated', 'SurveyEdited', 'OrgName', 'OrgID', 'AppSurveyID', 'AppSurveyCreated', 'AppSurveyEdited', 'FirstName',
+            'Surname', 'Email', 'Title', 'Industry', 'OtherIndustry', 'PrimaryCity', 'PrimaryState', 'PrimaryCountry', 'OrgSize', 'OpenStackInvolvement', 'InformationSources',
+            'OtherInformationSources', 'FurtherEnhancement', 'FoundationUserCommitteePriorities', 'OkToContact', 'BusinessDrivers',
+            'OtherBusinessDrivers', 'WhatDoYouLikeMost', 'Toolkits', 'OtherToolkits', 'ProgrammingLanguages', 'OtherProgrammingLanguages', 'DevelopmentEnvironments',
+            'OtherDevelopmentEnvironments',  'ConfigTools', 'OtherConfigTools',
+            'StateOfOpenStack', 'DocsPriority', 'InteractionWithOtherClouds',
+             'APIFormats');
+
+        $fields = ($range == SurveyType::MARCH_2015)?$fields_V2:$fields_V1;
 
         $file_data = array();
 

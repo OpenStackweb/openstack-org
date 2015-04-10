@@ -183,7 +183,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function IndustrySummary()
     {
-        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$industry_options, 'DS.Industry');
+        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurveyOptions::$industry_options, 'DS.Industry');
     }
 
     function OtherIndustry()
@@ -193,22 +193,22 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function OrganizationSizeSummary()
     {
-        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$organization_size_options, 'DS.OrgSize');
+        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurveyOptions::$organization_size_options, 'DS.OrgSize');
     }
 
     function InvolvementSummary()
     {
-        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$openstack_involvement_options, 'DS.OpenStackInvolvement');
+        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurveyOptions::$openstack_involvement_options, 'DS.OpenStackInvolvement');
     }
 
     function InformationSourcesSummary()
     {
-        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$information_options, 'DS.InformationSources');
+        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurveyOptions::$information_options, 'DS.InformationSources');
     }
 
     function BusinessDriversSummary()
     {
-        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurvey::$business_drivers_options, 'DS.BusinessDrivers');
+        return self::generateDeploymentSurveysSummaryOptions(DeploymentSurveyOptions::$business_drivers_options, 'DS.BusinessDrivers');
     }
 
     function OtherInformationSources()
