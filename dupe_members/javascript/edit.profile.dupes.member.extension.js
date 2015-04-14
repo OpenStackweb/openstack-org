@@ -82,6 +82,32 @@ jQuery(document).ready(function($) {
             });
         }
     });
+
+    // not my account
+    $('.dupes-member-not-my-account').click(function(e){
+        e.preventDefault();
+        var btn = $(this);
+        if(window.confirm('Are you sure?')){
+            var foreign_id = btn.attr('data-id');
+            $.ajax({
+                async:true,
+                type: 'PATCH',
+                url: 'api/v1/dupes-members/foreign-account/'+foreign_id,
+                dataType: "json",
+                success: function (data,textStatus,jqXHR) {
+                    btn.parent().fadeOut(500, function(){
+                        var li = $(this);
+                        checkEmptyWarning(li);
+                        li.remove();
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    ajaxError( jqXHR, textStatus, errorThrown);
+                }
+            });
+        }
+        return false;
+    });
 });
 
 function checkEmptyWarning(li){

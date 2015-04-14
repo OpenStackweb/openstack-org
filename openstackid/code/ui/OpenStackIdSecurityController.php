@@ -42,7 +42,7 @@ class OpenStackIdSecurityController extends CustomPasswordController
             Page_Controller::AddRequirements();
         }
     }
-    
+
     /**
      * Show the "login" page
      *

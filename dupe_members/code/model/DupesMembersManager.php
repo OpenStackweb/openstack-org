@@ -57,18 +57,17 @@ final class DupesMembersManager {
      */
     private $query_registry;
 
+
     /**
-     * @param IMemberRepository                         $member_repository
-     * @param IDupeMemberActionAccountRequestFactory    $merge_request_factory
-     * @param IDupeMemberActionAccountRequestFactory    $delete_request_factory
-     * @param IDupeMemberActionAccountRequestRepository $merge_request_repository
-     * @param IDupeMemberActionAccountRequestRepository $delete_request_repository
-     * @param IEntityRepository                         $delete_dupe_member_repository
-     * @param IDeletedDupeMemberFactory                 $delete_dupe_member_factory
-     * @param ICandidateNominationRepository            $nominations_repository
-     * @param ITransactionManager                       $tx_manager
-     * @param IBulkQueryRegistry                        $query_registry
+     * @var INotMyAccountActionRepository
      */
+    private $not_my_account_repository;
+
+    /**
+     * @var INotMyAccountActionFactory
+     */
+    private $not_my_account_factory;
+
     public function __construct(IMemberRepository $member_repository,
                                 IDupeMemberActionAccountRequestFactory $merge_request_factory,
                                 IDupeMemberActionAccountRequestFactory $delete_request_factory,
@@ -77,6 +76,8 @@ final class DupesMembersManager {
                                 IEntityRepository $delete_dupe_member_repository,
                                 IDeletedDupeMemberFactory $delete_dupe_member_factory,
                                 ICandidateNominationRepository $nominations_repository,
+                                INotMyAccountActionRepository $not_my_account_repository,
+                                INotMyAccountActionFactory $not_my_account_factory,
                                 ITransactionManager $tx_manager,
                                 IBulkQueryRegistry $query_registry) {
 
@@ -88,6 +89,8 @@ final class DupesMembersManager {
         $this->delete_dupe_member_repository = $delete_dupe_member_repository;
         $this->delete_dupe_member_factory    = $delete_dupe_member_factory;
         $this->nominations_repository        = $nominations_repository;
+        $this->not_my_account_repository     = $not_my_account_repository;
+        $this->not_my_account_factory        = $not_my_account_factory;
         $this->tx_manager                    = $tx_manager;
         $this->query_registry                = $query_registry;
     }
@@ -98,6 +101,7 @@ final class DupesMembersManager {
     }
 
     public function getDupes(ICommunityMember $member){
+
         list($res,$count) = $this->member_repository->getAllByName($member->getFirstName(), $member->getLastName());
         $unset  = array();
         for($i = 0 ; $i < count($res);$i++){
@@ -105,10 +109,18 @@ final class DupesMembersManager {
                 array_push($unset,$i);
                 continue;
             }
+            //check merge request
             $merge_request  = $this->merge_request_repository->findByDupeAccount($res[$i]->getEmail());
             if(!is_null($merge_request))  array_push($unset,$i);;
+            // check delete request
             $delete_request = $this->delete_request_repository->findByDupeAccount($res[$i]->getEmail());
             if(!is_null($delete_request)) array_push($unset,$i);;
+            // check not my account action
+            $query = new QueryObject();
+            $query->addAddCondition(QueryCriteria::equal('PrimaryAccountID', $member->getIdentifier()));
+            $query->addAddCondition(QueryCriteria::equal('ForeignAccountID', $res[$i]->getIdentifier()));
+            $action = $this->not_my_account_repository->getBy($query);
+            if(!is_null($action)) array_push($unset,$i);;
         }
         for($j = 0; $j < count($unset) ; $j++){
             $index = $unset[$j];
@@ -378,6 +390,53 @@ final class DupesMembersManager {
 
             $current_member = $member_repository->getById($member_id);
             $current_member->showDupesOnProfile($show);
+        });
+    }
+
+    public function purgeActionRequests($batch_size, $older_than_x_hours = 48){
+
+        $merge_request_repository  = $this->merge_request_repository;
+        $delete_request_repository = $this->delete_request_repository;
+
+        return $this->tx_manager->transaction(function() use( $merge_request_repository, $delete_request_repository, $batch_size, $older_than_x_hours) {
+
+            $query1 = new QueryObject();
+            $query1->addAddCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
+            list($list1,$size)  = $merge_request_repository->getAll($query1, 0, $batch_size);
+            foreach($list1 as $res){
+                $merge_request_repository->delete($res);
+            }
+
+            $query2 = new QueryObject();
+            $query2->addAddCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
+            list($list2,$size) = $delete_request_repository->getAll($query2, 0, $batch_size);
+            foreach($list2 as $res){
+                $delete_request_repository->delete($res);
+            }
+
+        });
+    }
+
+    /**
+     * @param int $member_id
+     * @param int $foreign_id
+     * @return void
+     */
+    public function markAsNotMyAccount($member_id, $foreign_id){
+
+        $member_repository  = $this->member_repository;
+        $factory            = $this->not_my_account_factory;
+        $foreign_repository = $this->not_my_account_repository;
+
+        return $this->tx_manager->transaction(function() use( $member_id, $foreign_id, $member_repository, $factory, $foreign_repository) {
+
+            $current_member = $member_repository->getById($member_id);
+            $foreign_member = $member_repository->getById($foreign_id);
+
+            if(!is_null($current_member) && !is_null($foreign_member)) {
+                $action = $factory->build($current_member, $foreign_member);
+                $foreign_repository->add($action);
+            }
         });
     }
 } 

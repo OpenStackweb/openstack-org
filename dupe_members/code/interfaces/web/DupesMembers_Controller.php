@@ -15,7 +15,7 @@
 /**
  * Class DupesMembers_Controller
  */
-final class DupesMembers_Controller extends Page_Controller {
+final class DupesMembers_Controller extends AbstractController {
 
     static $url_handlers = array(
         'GET $CONFIRMATION_TOKEN/merge'  => 'mergeAccount',
@@ -61,6 +61,8 @@ final class DupesMembers_Controller extends Page_Controller {
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
             new SapphireCandidateNominationRepository,
+            new SapphireNotMyAccountActionRepository,
+            new NotMyAccountActionFactory,
             SapphireTransactionManager::getInstance(),
             SapphireBulkQueryRegistry::getInstance());
     }
@@ -69,9 +71,7 @@ final class DupesMembers_Controller extends Page_Controller {
     public function init()
     {
         parent::init();
-        Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
+        Page_Controller::AddRequirements();
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
     }
     /**

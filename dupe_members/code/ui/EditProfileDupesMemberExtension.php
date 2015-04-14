@@ -35,6 +35,8 @@ final class EditProfileDupesMemberExtension extends Extension {
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
             new SapphireCandidateNominationRepository,
+            new SapphireNotMyAccountActionRepository,
+            new NotMyAccountActionFactory,
             SapphireTransactionManager::getInstance(),
             SapphireBulkQueryRegistry::getInstance());
     }
@@ -46,9 +48,12 @@ final class EditProfileDupesMemberExtension extends Extension {
      *
      */
     public function getRenderUITopExtensions(&$html){
+
         $current_user = Member::currentUser();
         if(!$current_user->shouldShowDupesOnProfile()) return;
+
         $dupe_members = $this->manager->getDupes($current_user);
+
         $qty          = count($dupe_members);
         if($qty > 0){
 
@@ -63,9 +68,10 @@ final class EditProfileDupesMemberExtension extends Extension {
 
             foreach ($dupe_members as $dupe_mem) {
                 $id                      = $dupe_mem->getIdentifier();
-                $delete_btn_html         = '<a class="roundedButton dupes-member-delete-account" data-id="'.$id.'" href="#" title="Delete Account">Delete</a>';
-                $merge_btn_html          = '<a class="roundedButton dupes-member-merge-account"  data-id="'.$id.'" href="#" title="Merge Account">Merge</a>';
-                $members_emails_warning .= '<li><span class="dupes-email">'.preg_replace('/(?<=.).(?=.*.@)/u','*',$dupe_mem->getEmail()).'</span>'.$merge_btn_html.'&nbsp;'.$delete_btn_html.'</li>';
+                $delete_btn_html         = '<a class="roundedButton dupes-member-delete-account" data-id="'.$id.'" href="#" title="Delete account">Delete</a>';
+                $merge_btn_html          = '<a class="roundedButton dupes-member-merge-account"  data-id="'.$id.'" href="#" title="Merge account">Merge</a>';
+                $not_my_btn_html          = '<a class="roundedButton dupes-member-not-my-account"  data-id="'.$id.'" href="#" title="This is not my account">This is not my account</a>';
+                $members_emails_warning .= '<li><span class="dupes-email">'.preg_replace('/(?<=.).(?=.*.@)/u','*',$dupe_mem->getEmail()).'</span>'.$merge_btn_html.'&nbsp;'.$delete_btn_html.'&nbsp;'.$not_my_btn_html.'</li>';
             }
             $members_emails_warning .= '</ul></div>';
             $html .= $members_emails_warning;

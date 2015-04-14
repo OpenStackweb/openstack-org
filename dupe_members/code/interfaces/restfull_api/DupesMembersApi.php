@@ -35,6 +35,8 @@ final class DupesMembersApi
             new SapphireDeletedDupeMemberRepository,
             new DeletedDupeMemberFactory,
             new SapphireCandidateNominationRepository,
+            new SapphireNotMyAccountActionRepository,
+            new NotMyAccountActionFactory,
             SapphireTransactionManager::getInstance(),
             SapphireBulkQueryRegistry::getInstance());
     }
@@ -54,13 +56,14 @@ final class DupesMembersApi
      * @var array
      */
     static $url_handlers = array(
-        'POST $CONFIRMATION_TOKEN/merge'     => 'mergeAccount',
-        'POST $MEMBER_ID/merge-request'      => 'mergeAccountRequest',
-        'POST $MEMBER_ID/delete-request'     => 'deleteAccountRequest',
-        'DELETE $CONFIRMATION_TOKEN/account' => 'deleteAccount',
-        'PUT $CONFIRMATION_TOKEN/account'    => 'keepAccount',
-        'PATCH $CONFIRMATION_TOKEN/account'  => 'upgradeDeleteRequest2Merge',
-        'PATCH show/profile/$SHOW'           => 'showDupesOnProfile',
+        'POST $CONFIRMATION_TOKEN/merge'           => 'mergeAccount',
+        'POST $MEMBER_ID/merge-request'            => 'mergeAccountRequest',
+        'POST $MEMBER_ID/delete-request'           => 'deleteAccountRequest',
+        'DELETE $CONFIRMATION_TOKEN/account'       => 'deleteAccount',
+        'PUT $CONFIRMATION_TOKEN/account'          => 'keepAccount',
+        'PATCH $CONFIRMATION_TOKEN/account'        => 'upgradeDeleteRequest2Merge',
+        'PATCH show/profile/$SHOW'                 => 'showDupesOnProfile',
+        'PATCH foreign-account/$FOREIGN_MEMBER_ID' => 'markForeignAccount',
     );
 
     /**
@@ -74,6 +77,7 @@ final class DupesMembersApi
         'upgradeDeleteRequest2Merge',
         'mergeAccount',
         'showDupesOnProfile',
+        'markForeignAccount',
     );
 
     public function mergeAccountRequest(){
@@ -210,6 +214,29 @@ final class DupesMembersApi
             $show = filter_var($show, FILTER_VALIDATE_BOOLEAN);
             $current_member = Member::currentUser();
             $this->manager->showDupesOnProfile($current_member->ID, $show);
+            return $this->ok();
+        }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->notFound($ex1->getMessage());
+        }
+        catch(EntityValidationException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->validationError($ex2->getMessages());
+        }
+        catch(Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function markForeignAccount(){
+
+
+        try{
+            $foreign_id     = intval(Convert::raw2sq($this->request->param('FOREIGN_MEMBER_ID')));
+            $current_member = Member::currentUser();
+            $this->manager->markAsNotMyAccount($current_member->ID, $foreign_id);
             return $this->ok();
         }
         catch(NotFoundEntityException $ex1){
