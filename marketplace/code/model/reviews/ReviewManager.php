@@ -27,24 +27,17 @@ final class ReviewManager {
 	 * @var IReviewFactory
 	 */
 	private $review_factory;
-	/**
-	 * @var IAlertEmailRepository
-	 */
-	private $email_repository;
 
 	/**
 	 * @param IEntityRepository      $review_repository
-	 * @param IAlertEmailRepository  $email_repository
 	 * @param IReviewFactory         $factory
 	 * @param ITransactionManager    $tx_manager
 	 */
 	public function __construct(IEntityRepository $review_repository,
-	                            IAlertEmailRepository $email_repository,
 	                            IReviewFactory $review_factory,
 	                            ITransactionManager $tx_manager){
 
 		$this->review_repository = $review_repository;
-		$this->email_repository  = $email_repository;
 		$this->review_factory    = $review_factory;
 		$this->tx_manager        = $tx_manager;
 	}
@@ -82,6 +75,11 @@ final class ReviewManager {
 
             $review->registerReviewMainInfo($factory->buildReviewMainInfo($data));
 
+            $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', MARKETPLACE_REVIEWS_EMAIL_TO, "New review submitted for ".$review->getCompanySevice()->Name);
+            $email->setTemplate('MarketPlaceReviewsEmail');
+            $email->populateTemplate($review);
+            $email->send();
+
             return $review;
         });
     }
@@ -116,6 +114,11 @@ final class ReviewManager {
             $review->registerReviewMainInfo($factory->buildReviewMainInfo($data));
             $review->registerReviewProduct($factory->buildProduct($data));
             $review_id = $repository->add($review);
+
+            $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', MARKETPLACE_REVIEWS_EMAIL_TO, "New review submitted for ".$review->getCompanyService()->Name);
+            $email->setTemplate('MarketPlaceReviewsEmail');
+            $email->populateTemplate($review);
+            $email->send();
 
             return $review_id;
         });
