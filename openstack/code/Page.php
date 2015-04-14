@@ -237,6 +237,32 @@ class Page_Controller extends ContentController {
 	    }
     }
 
+
+    public static function AddRequirements(){
+
+        Requirements::css("themes/openstack/css/bootstrap.min.css");
+        Requirements::CSS('themes/openstack/css/font-awesome.min.css');
+        Requirements::css("themes/openstack/css/combined.css");
+        Requirements::css("themes/openstack/css/dropdown.css");
+
+
+        Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
+        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
+        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
+        Requirements::block(THIRDPARTY_DIR . '/jquery-cookie/jquery.cookie.js');
+
+        if(Director::isLive()) {
+            Requirements::javascript('themes/openstack/javascript/jquery.min.js');
+        }
+        else{
+            Requirements::javascript('themes/openstack/javascript/jquery.js');
+        }
+
+        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
+
+        Requirements::javascript("themes/openstack/javascript/jquery.cookie.js");
+    }
+
 	public function init() {
 		parent::init();
 
@@ -256,33 +282,13 @@ class Page_Controller extends ContentController {
 			}
 		} */
 
-
+        self::AddRequirements();
 		/** CSS REQUIREMENTS **/
 		if(!$this->BootstrapConverted) {
 			Requirements::css("themes/openstack/css/blueprint/screen.css");
 			Requirements::css("themes/openstack/css/main.css");	
 		}
-		Requirements::css("themes/openstack/css/bootstrap.min.css");
-	    Requirements::CSS('themes/openstack/css/font-awesome.min.css');	
-		Requirements::css("themes/openstack/css/combined.css");
-		Requirements::css("themes/openstack/css/dropdown.css");
 
-
-		Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
-		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
-		Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
-		Requirements::block(THIRDPARTY_DIR . '/jquery-cookie/jquery.cookie.js');
-
-		if(Director::isLive()) {
-			Requirements::javascript('themes/openstack/javascript/jquery.min.js');
-		}
-		else{
-			Requirements::javascript('themes/openstack/javascript/jquery.js');
-		}
-
-        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
-
-        Requirements::javascript("themes/openstack/javascript/jquery.cookie.js");
 
         if(Director::get_current_page()->IncludeShadowBox){
         	Requirements::css("themes/openstack/javascript/shadowbox/shadowbox.css");
