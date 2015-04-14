@@ -35,6 +35,8 @@ final class DupeMemberActionRequestPurgeTask extends CronTask{
                 new SapphireDeletedDupeMemberRepository,
                 new DeletedDupeMemberFactory,
                 new SapphireCandidateNominationRepository,
+                new SapphireNotMyAccountActionRepository,
+                new NotMyAccountActionFactory,
                 SapphireTransactionManager::getInstance(),
                 SapphireBulkQueryRegistry::getInstance());
 

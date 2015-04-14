@@ -42,7 +42,7 @@ class OpenStackIdSecurityController extends Security
         parent::init();
         Page_Controller::AddRequirements();
     }
-    
+
     /**
      * Show the "login" page
      *
