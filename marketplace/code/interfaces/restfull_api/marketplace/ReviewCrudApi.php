@@ -64,8 +64,7 @@ final class ReviewCrudApi extends AbstractRestfulJsonApi {
         $this->review_repository = new SapphireReviewRepository();
         $this->review_factory    = new ReviewFactory();
 
-        $this->review_manager = new ReviewManager ($this->review_repository, new ReviewAlertEmail,
-                                                   $this->review_factory, SapphireTransactionManager::getInstance());
+        $this->review_manager = new ReviewManager ($this->review_repository, $this->review_factory, SapphireTransactionManager::getInstance());
 
         // filters ...
         $this_var           = $this;
