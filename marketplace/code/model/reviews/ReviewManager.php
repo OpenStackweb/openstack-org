@@ -75,7 +75,7 @@ final class ReviewManager {
 
             $review->registerReviewMainInfo($factory->buildReviewMainInfo($data));
 
-            $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', MARKETPLACE_REVIEWS_EMAIL_TO, "New review submitted for ".$review->getCompanySevice()->Name);
+            $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', MARKETPLACE_REVIEWS_EMAIL_TO, "New review submitted for ".$review->getCompanyService()->Name);
             $email->setTemplate('MarketPlaceReviewsEmail');
             $email->populateTemplate($review);
             $email->send();
