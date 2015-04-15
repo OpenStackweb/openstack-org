@@ -46,6 +46,34 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 		return $this->owner->getViewer('ViewReviews')->process($this->owner);
 	}
 
+    public function getMarketPlaceTypeLink($type){
+        $class = '';
+        $link = '#';
+        switch($type){
+            case 'TrainingService':
+                $class = 'TrainingDirectoryPage';
+                break;
+            case 'Distribution':
+                $class = 'DistributionsDirectoryPage';
+                break;
+            case 'PublicCloudService':
+                $class = 'PublicCloudsDirectoryPage';
+                break;
+            case 'Consultant':
+                $class = 'ConsultantsDirectoryPage';
+                break;
+            case 'PrivateCloudService':
+                $class = 'PrivateCloudsDirectoryPage';
+                break;
+        }
+        if(!empty($class)){
+            $page  = $class::get()->first();
+            if($page)
+                $link  = $page->Link();
+        }
+        return $link;
+    }
+
 	public function getApprovedReviews(){
 		list($list,$size) = $this->repository->getAllApproved(0,1000);
 		return new ArrayList($list);

@@ -126,7 +126,7 @@ class MarketPlaceReview extends DataObject implements IMarketPlaceReview {
     /**
      * @return Member
      */
-    public function getUser()
+    public function getMember()
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Member')->getTarget();
     }
