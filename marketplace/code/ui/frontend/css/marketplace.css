@@ -21,14 +21,6 @@ ul.marketplace-nav{
   padding:0;
 }
 
-ul.marketplace-nav li{
-  border-right:1px solid #e8e8e8;
-  display:inline-block;
-  padding-left:15px;
-  padding-right:15px;
-  text-transform:uppercase;
-}
-
 ul.marketplace-nav li:first-child{
   padding-left:0;
 }
@@ -38,7 +30,7 @@ ul.marketplace-nav a span{
   display:block;
   height:50px;
   margin:auto;
-  width:50px;
+  width:40px;
 }
 
 ul.marketplace-nav #training a span{
@@ -101,11 +93,10 @@ ul.marketplace-nav a:active,ul.marketplace-nav a:hover{
 }
 
 .grey-bar .back-label,.grey-bar .filter-label{
-  background:url("/marketplace/code/ui/frontend/images/search-icon.png") no-repeat scroll left 8px rgba(0,0,0,0);
   float:left;
   margin-bottom:0;
   margin-top:5px;
-  padding-left:20px;
+  padding-left: 0px;
   padding-right:20px;
   padding-top:8px;
   text-transform:uppercase;
@@ -512,7 +503,6 @@ td.releases a:hover{
 }
 
 #service_term_chosen,#location_term_chosen,#level_term_chosen{
-  padding-top:2px!important;
   padding-bottom:5px!important;
   padding-left:15px!important;
 }
@@ -538,6 +528,22 @@ td.releases a:hover{
 
 #service_term_chosen{
   max-width:260px!important;
+height: 40px;
+width: 200px;
+padding: 5px 10px;
+position: relative;
+border-radius: 4px;
+color: #30739C;
+background: #fff;
+border: 1px solid #e8e8e8;
+box-sizing: border-box;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+display: inline-block;
+cursor: pointer;
+font-size: 12px;
+font-weight: 400; 
 }
 
 .driver-table{
@@ -587,7 +593,8 @@ input#name-term, input#topic-term {
   padding: 5px 10px;
   border: 1px solid #e8e8e8;
   color: #30739C;
-  border-radius: 4px; }
+  border-radius: 4px;
+  margin-right: 5px; }
 
 .training-program-box {
   border: 1px solid #E8E8E8;
@@ -677,4 +684,50 @@ ul.projects-covered li {
 .marketplace-training-sidebar {
     border-left: 1px solid #edf2f7;
     padding: 5px;
+}
+.chosen-container-single .chosen-single {
+  box-shadow: none !important;
+  border: 0 !important;
+  color: #30739c !important;
+}
+.chosen-container-single .chosen-single:before {
+  content: '';
+  right: 6px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  pointer-events: none;
+  display: block; 
+}
+.chosen-container-single .chosen-single:after {
+  content: '>';
+  color: #30739C;
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 14px;
+  top: -1px;
+  padding: 0 0 6px;
+  border-bottom: 1px solid #e8e8e8;
+  position: absolute;
+  pointer-events: none;
+  font-size: 14px;
+  font-weight: 400; 
+}
+.chosen-container-single .chosen-drop {
+  margin-top: 1px !important;
+  border-radius: 4px !important;
+  border: 1px solid #e8e8e8 !important;
+}
+.chosen-container .chosen-results li.highlighted {
+  background-color: #2A4E68 !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2A4E68', endColorstr='#2A4E68', GradientType=0 ) !important;  
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #2A4E68), color-stop(90%, #2A4E68)) !important;
+  background-image: -webkit-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: -moz-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: -o-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: -ms-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  color: #fff;
 }
