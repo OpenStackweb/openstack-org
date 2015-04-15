@@ -26,7 +26,7 @@
             <tr>
                 <td class="review_date">$Created.Format(M jS Y)</td>
                 <td class="product">
-                    <a href="/marketplace/{CompanyService.MarketPlaceType.Slug}/{CompanyService.Company.URLSegment}/{CompanyService.ID}">
+                    <a href="$Top.getMarketPlaceTypeLink($CompanyService.ClassName){$CompanyService.Company.URLSegment}/{$CompanyService.ID}">
                         $CompanyService.Name
                     </a>
                 </td>
@@ -70,7 +70,7 @@
             <tr>
                 <td class="review_date">$Created.Format(M jS Y)</td>
                 <td class="product">
-                    <a href="/marketplace/{CompanyService.MarketPlaceType.Slug}/{CompanyService.Company.URLSegment}/{CompanyService.ID}">
+                    <a href="$Top.getMarketPlaceTypeLink($CompanyService.ClassName){$CompanyService.Company.URLSegment}/{$CompanyService.ID}">
                         $CompanyService.Name
                     </a>
                 </td>
