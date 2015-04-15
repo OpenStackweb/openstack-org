@@ -2359,7 +2359,7 @@ h2.marketplace-header {
   border-left: 1px solid #eee; }
 
 .marketplace-top-wrapper {
-  padding: 20px 0 0; }
+  padding: 20px 0 20px; }
 
 .marketplace-brand {
   margin-top: 20px;
@@ -2619,14 +2619,19 @@ ul.resource-links li {
   display: block; }
 
 ul.resource-links li a {
-  background-image: url('/themes/openstack/images/resource-link-icon.png');
-  background-repeat: no-repeat;
-  background-position: 93% 50%;
   background-color: #edf2f7;
   padding: 15px 15px;
   margin: 0 0 5px;
   display: block;
   border-radius: 4px; }
+ul.resource-links > li > a:after {
+  position: absolute;
+  font-family: FontAwesome;
+  margin-top: 0px;
+  right: 35px;
+  content: "\f138";
+  font-size: 1.2em;
+}
 
 ul.resource-links li a:hover {
   text-decoration: none;
