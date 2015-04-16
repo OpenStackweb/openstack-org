@@ -323,7 +323,7 @@ SQL;
                 left outer join Member m on (s.MemberID = m.ID)
                 left outer join Deployment d on (d.DeploymentSurveyID = s.ID)
                 left outer join Org o on (s.OrgID = o.ID)
-            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query . $range_filter . " order by s.ID;";
+            where " . SangriaPage_Controller::$date_filter_query . $range_filter . " order by s.ID;";
 
         $res = DB::query($surveyQuery);
 
@@ -680,7 +680,7 @@ SQL;
                 right join AppDevSurvey a on (a.DeploymentSurveyID = s.ID)
                 left outer join Member m on (a.MemberID = m.ID)
                 left outer join Org o on (s.OrgID = o.ID)
-            where s.Title is not null AND " . SangriaPage_Controller::$date_filter_query . $range_filter . "
+            where " . SangriaPage_Controller::$date_filter_query . $range_filter . "
             order by s.ID;";
 
         return DB::query($surveyQuery);
@@ -715,6 +715,7 @@ SQL;
     {
 
         $fileDate = date('Ymdhis');
+
         $res = $this->ExportAppDevSurveyData();
 
         $range = Controller::curr()->getRequest()->getVar('Range');
