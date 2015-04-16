@@ -70,10 +70,12 @@
 					<!--break line for list item -->
 					<% if MultipleOf(4) %>
 				</div>
-				<div class="col-sm-12">
-					<% end_if %>
-					<!--end break line for list item -->
-					<% if Last %>
+				<div class="row">
+					<div class="">
+						<% end_if %>
+						<!--end break line for list item -->
+						<% if Last %>
+					</div>
 				</div>
 				<% end_if %> <% end_loop %>
 			</div>

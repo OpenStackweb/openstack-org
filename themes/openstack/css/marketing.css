@@ -66,21 +66,27 @@
 }
 
 .feed {
-	border: 1px solid #B6D8E2;
-	background: #E4EFF2;
-	padding: 10px 10px 0 10px;
+	border: 1px solid #D4DCE5;
+	background: #edf2f7;
+	padding: 0px 20px;
+	border-radius: 4px;
 }
 
 .feed h2 {
-	line-height: 2;
+	line-height: 1;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+	padding-bottom: 10px;
 }
 
 .feed dt {
 	line-height: 1;
 	border-top: 1px dotted #787878;
-	padding-top: 6px;
+	padding-top: 8px;
 	font-weight: normal;
+	font-size: 0.9em;
+	margin-bottom: 3px;
+	font-style: italic;
+	color: #30739C;
 }
 
 .feed dt.first {
@@ -90,15 +96,15 @@
 .feed dd {
 	margin-left: 0;
 	margin-bottom: 5px;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 .feed a {
-	color: #282828;
+	color: #2A4E68;
 }
 
 .feed a:hover {
-	color: #000;
+	color: #0C1722;
 }
 
 .graphics .title{
@@ -234,12 +240,21 @@
 }
 
 .collateral .item,.events .item {
-	padding-top: 5px;
+	padding: 5px 0;
 	border-bottom: 1px dotted #B6D8E2;
+	float: left;
+	width: 100%;
+}
+.collateral .item .icon, .events .item .icon {
+	float: left;
 }
 
 .collateral .item:last-child,.events .item:last-child {
 	border-bottom: none;
+}
+.collateral .item-content {
+	float: left;
+	margin-left: 3px;
 }
 
 .case-studies .item {
@@ -261,16 +276,17 @@
 }
 
 .announcements {
-	border: 1px solid Silver;
-	background: #EBEBEB;
-	padding: 10px 10px 0 10px;
+	border: 1px solid #ccc;
+	background: #f1f1f1;
+	padding: 0 20px;
+	border-radius: 4px;
 }
 
 
 .announcements h2 {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    line-height: 2;
-    color:gray;
+	line-height: 1;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+	padding-bottom: 10px;
 }
 
 .announcements dt {
@@ -287,11 +303,11 @@
 .announcements dd {
 	margin-left: 0;
 	margin-bottom: 5px;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 .announcements a {
-	color: #282828;
+	color: #29abe2;
 }
 
 
