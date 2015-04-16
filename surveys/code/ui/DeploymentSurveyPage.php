@@ -244,7 +244,14 @@ class DeploymentSurveyPage_Controller extends Page_Controller
             // look for a deployment survey for this user
             $DeploymentSurvey = $this->GetCurrentSurvey();
             if ($DeploymentSurvey && $DeploymentSurvey->CurrentStep != NULL) {
-                $CurrentStep = $DeploymentSurvey->CurrentStep;
+                $CurrentStep      = $DeploymentSurvey->CurrentStep;
+                $DesiredStepIndex = array_search($CurrentStep, DeploymentSurvey::$steps); // The index of this step in the list
+                if(!$DesiredStepIndex){
+                    //default one
+                    $CurrentStep                   = 'AboutYou';
+                    $DeploymentSurvey->CurrentStep = $CurrentStep;
+                    $DeploymentSurvey->write();
+                }
             } else {
                 // member is logged in, but has no current step in a deployment survey
                 $CurrentStep = 'AboutYou'; // 1st Step of survey
