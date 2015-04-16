@@ -264,6 +264,7 @@
 .case-studies .item img {
 	border: 4px solid white;
 	box-shadow: 0 0 4px #999;
+	max-width: 100%;
 }
 
 .case-studies .item-content {
