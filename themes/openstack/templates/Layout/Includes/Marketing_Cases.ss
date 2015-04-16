@@ -2,11 +2,11 @@
 <hr>
 <div class="item-list">
 	<% loop LatestCases %>
-	<div class="item span-7">
-		<div class="span-2">
+	<div class="item row">
+		<div class="col-sm-4">
 			$Preview
 		</div>
-		<div class="span-5 item-content last">
+		<div class="col-sm-8 item-content">
 			<a rel="nofollow" href="$Link">$Name</a>
 			<p>$Tagline</p>
 		</div>

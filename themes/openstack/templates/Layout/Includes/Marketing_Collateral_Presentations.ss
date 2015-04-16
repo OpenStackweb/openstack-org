@@ -7,7 +7,7 @@
 			<% end_if %>
 			
 			<div class="item" title="$Name">
-				<div class="">
+				<div class="icon">
 					<a href="$FileURL" target="_blank">
 						<img width="22" height="22" src="$Icon" alt="$Name">
 					</a>
