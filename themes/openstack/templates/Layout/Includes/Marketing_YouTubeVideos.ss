@@ -1,21 +1,21 @@
 <h2>Videos</h2>
 <hr>
-<div class="item-list">
+<div class="row">
     <% loop LatestYouTubeVideos %>
         <% if First %>
-            <div class="span-16">
+            <div class="col-sm-12">
         <% end_if %>
-        <div class="item span-8<% if MultipleOf(2)  %> last<% end_if %>">
+        <div class="item col-sm-6<% if MultipleOf(2)  %> last<% end_if %>">
             <div class="video">
                 <a href="$Url" rel="shadowbox">
                     $Preview
-                <span class="caption">Get this Video</span>
+                    <span class="caption">Get this Video</span>
                 </a>
-                </div>
+            </div>
         </div>
         <% if MultipleOf(2)  %>
             </div>
-            <div class="span-16">
+            <div class="col-sm-12">
         <% end_if %>
         <% if Last %>
             </div>

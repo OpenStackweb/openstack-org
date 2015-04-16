@@ -3,17 +3,17 @@
 <span class="title">$GraphicsNotes</span> 
 <div class="item-list">
 	<% loop LatestGraphics %> <% if First %>
-	<div class="span-16">
+	<div class="row">
 		<% end_if %>
 		<!--item header -->
 		<% if MoreThanValidFiles(1) %> <% if MultipleOf(4) %>
-		<div class="item span-4 folder last">
+		<div class="item col-sm-3 folder">
 			<% else %>
-			<div class="item span-4 folder">
+			<div class="item col-sm-3 folder">
 				<% end_if %> <% else %> <% if MultipleOf(4) %>
-				<div class="item span-4 last">
+				<div class="item col-sm-3">
 					<% else %>
-					<div class="item span-4">
+					<div class="item col-sm-3">
 						<% end_if %> <% end_if %>
 						<!-- Main Picture -->
 						<div class="picture" title="$Name">
@@ -34,7 +34,7 @@
 
 						<% if MoreThanValidFiles(1) %>
 						<!--Folder Content-->
-						<div class="folder-contents span-16">
+						<div class="folder-contents col-sm-12">
 							<div class="arrow"></div>
 							<div class="header">
 								<h3>$Name</h3>
@@ -43,7 +43,7 @@
 							</div>
 
 							<% loop ValidFiles %> <% if First %>
-							<div class="span-16">
+							<div class="col-sm-12">
 								<% end_if %>
 
 								<div class="item span-4 <% if MultipleOf(4) %>last<% end_if %>">
@@ -58,7 +58,7 @@
 								<!--break line for list item -->
 								<% if MultipleOf(4) %>
 							</div>
-							<div class="span-16"><% end_if %> <% if Last %></div>
+							<div class="col-sm-12"><% end_if %> <% if Last %></div>
 							<% end_if %> <% end_loop %>
 
 						</div>
@@ -70,7 +70,7 @@
 					<!--break line for list item -->
 					<% if MultipleOf(4) %>
 				</div>
-				<div class="span-16">
+				<div class="col-sm-12">
 					<% end_if %>
 					<!--end break line for list item -->
 					<% if Last %>
