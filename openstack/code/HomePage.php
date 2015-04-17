@@ -18,11 +18,6 @@
 class HomePage extends Page
 {
 
-    const PromoIntroMessageDefault = '"OpenStack has a true community around it."';
-    const PromoButtonTextDefault = 'See how @WalmartLabs puts 100,000 cores to work';
-    const PromoButtonUrlDefault = 'http://awe.sm/jM31y';
-    const PromoDatesTextDefault = '...we plan to contribute aggressively to the open source community.';
-    const PromoHeroCreditDefault = 'Photo by Claire Massey';
     static $db = array(
         'FeedData' => 'HTMLText',
         'EventDate' => 'Date',
@@ -33,7 +28,8 @@ class HomePage extends Page
         "PromoDatesText" => 'Text',
         "PromoHeroCredit" => 'Text',
     );
-    private static $has_one = array(
+
+    private static $has_one  = array(
         'PromoImage' => 'BetterImage',
     );
 
@@ -58,7 +54,7 @@ class HomePage extends Page
         // remove unneeded fields
         $fields->removeFieldFromTab("Root.Main", "Content");
 
-        $promo_hero_image = new CustomUploadField('PromoImage', 'Promo Hero Image');
+        $promo_hero_image  = new CustomUploadField('PromoImage', 'Promo Hero Image');
         $promo_hero_image->setFolderName('homepage');
         $promo_hero_image->setAllowedFileCategories('image');
 
@@ -71,43 +67,43 @@ class HomePage extends Page
         return $fields;
     }
 
-    public function getHeroImageUrl()
-    {
+    public function getHeroImageUrl(){
         $image = $this->PromoImage();
-        if (!is_null($image) && $image->exists())
+        if(!is_null($image) && $image->exists())
             return $image->Link();
         return '/assets/homepage/homepage-parissummit.png';
     }
 
-    public function getPromoIntroMessage()
-    {
+    public function getPromoIntroMessage(){
         $value = $this->getField('PromoIntroMessage');
-        return !empty($value) ? $value : self::PromoIntroMessageDefault;
+        return !empty($value)? $value : self::PromoIntroMessageDefault;
     }
 
-    public function getPromoButtonText()
-    {
+    public function getPromoButtonText(){
         $value = $this->getField('PromoButtonText');
-        return !empty($value) ? $value : self::PromoButtonTextDefault;
+        return !empty($value)? $value : self::PromoButtonTextDefault;
     }
 
-    public function getPromoButtonUrl()
-    {
+    public function getPromoButtonUrl(){
         $value = $this->getField('PromoButtonUrl');
-        return !empty($value) ? $value : self::PromoButtonUrlDefault;
+        return !empty($value)? $value : self::PromoButtonUrlDefault;
     }
 
-    public function getPromoDatesText()
-    {
+    public function getPromoDatesText(){
         $value = $this->getField('PromoDatesText');
-        return !empty($value) ? $value : self::PromoDatesTextDefault;
+        return !empty($value)? $value : self::PromoDatesTextDefault;
     }
 
-    public function getPromoHeroCredit()
-    {
+    public function getPromoHeroCredit(){
         $value = $this->getField('PromoHeroCredit');
-        return !empty($value) ? $value : self::PromoHeroCreditDefault;
+        return !empty($value)? $value : self::PromoHeroCreditDefault;
     }
+
+    const PromoIntroMessageDefault = '"OpenStack has a true community around it."';
+    const PromoButtonTextDefault   = 'See how @WalmartLabs puts 100,000 cores to work';
+    const PromoButtonUrlDefault = 'http://awe.sm/jM31y';
+    const PromoDatesTextDefault = '...we plan to contribute aggressively to the open source community.';
+    const PromoHeroCreditDefault = 'Photo by Claire Massey';
 }
 
 class HomePage_Controller extends Page_Controller
@@ -115,8 +111,27 @@ class HomePage_Controller extends Page_Controller
 
     static $allowed_actions = array(
         'Video',
-        'LatestNews'
+        'LatestNews',
+        'handleIndex'
     );
+
+    static $url_handlers = array(
+        '' => 'handleIndex',
+    );
+
+    // checks to see if the hompeage is in summit mode (if so, changes template used)
+    public function handleIndex(){
+        $getVars = $this->request->getVars(); 
+
+        // turn the video on if set in a URL parameter
+        if(isset($getVars['video'])) $this->VideoCurrentlyPlaying = 'Yes';
+
+        if ($this->SummitMode == 'Yes' || isset($getVars['summit'])) {
+            return $this->renderWith(array('HomePage_Summit', 'HomePage', 'Page'));
+        } else {
+            return $this;
+        }
+    }
 
     function init()
     {
@@ -132,53 +147,35 @@ class HomePage_Controller extends Page_Controller
 
     }
 
-    function UpcomingEvents($limit = 1)
-    {
-        $rss_events = $this->RssEvents($limit);
-        $events_array = new ArrayList();
-        $pulled_events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
-        $events_array->merge($pulled_events);
-        $output = '';
 
-        foreach ($rss_events as $item) {
-            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
-            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
-            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
-            $event_duration = new EventDuration($event_start_date, $event_end_date);
-            $event = new EventPage();
-            $event->registerMainInfo($event_main_info);
-            $event->registerDuration($event_duration);
-            $event->registerLocation($item->location);
-            $events_array->push($event);
-        }
-
-        $events = $events_array->sort('EventStartDate', 'ASC')->limit($limit, 0)->toArray();
-
-        if ($events) {
-            foreach ($events as $key => $event) {
-                $first = ($key == 0);
-                $data = array('IsEmpty' => 0, 'IsFirst' => $first);
-
-                $output .= $event->renderWith('EventHolder_event', $data);
+    /**
+     * @param string $url
+     * @param int  $expiry
+     * @param null $collection
+     * @param null $element
+     * @return ArrayList
+     */
+    private function queryExternalSource($url, $expiry=3600, $collection = NULL, $element = NULL){
+        $output = new ArrayList();
+        try {
+            $feed     = new RestfulService($url, $expiry);
+            $response = $feed->request();
+            if ($response->getStatusCode() == 200) {
+                $body = $response->getBody();
+                $output = $feed->getValues($body, $collection, $element);
             }
-        } else {
-            $data = array('IsEmpty' => 1);
-            $event = new EventPage();
-            $output .= $event->renderWith('EventHolder_event', $data);
         }
-
+        catch(Exception $ex){
+            SS_Log::log($ex, SS_Log::ERR);
+        }
         return $output;
     }
 
     function RssEvents($limit = 7)
     {
 
-        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
-
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
+        $result = $this->queryExternalSource('https://groups.openstack.org/events-upcoming.xml', 7200, 'channel', 'item');
+        if(!$result->count()) return $result;
 
         foreach ($result as $item) {
             $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
@@ -201,6 +198,44 @@ class HomePage_Controller extends Page_Controller
         }
 
         return $result->limit($limit, 0);
+    }
+
+    function UpcomingEvents($limit = 1)
+    {
+        $rss_events = $this->RssEvents($limit);
+        $events_array = new ArrayList();
+        $pulled_events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
+        $events_array->merge($pulled_events);
+        $output = '';
+
+        foreach ($rss_events as $item) {
+            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
+            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
+            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
+            $event_duration = new EventDuration($event_start_date,$event_end_date);
+            $event = new EventPage();
+            $event->registerMainInfo($event_main_info);
+            $event->registerDuration($event_duration);
+            $event->registerLocation($item->location);
+            $events_array->push($event);
+        }
+
+        $events = $events_array->sort('EventStartDate', 'ASC')->limit($limit,0)->toArray();
+
+        if ($events) {
+            foreach ($events as $key => $event) {
+                $first = ($key == 0);
+                $data = array('IsEmpty' => 0, 'IsFirst' => $first);
+
+                $output .= $event->renderWith('EventHolder_event', $data);
+            }
+        } else {
+            $data = array('IsEmpty' => 1);
+            $event = new EventPage();
+            $output .= $event->renderWith('EventHolder_event', $data);
+        }
+
+        return $output;
     }
 
     function DisplayVideo()
@@ -263,12 +298,23 @@ class HomePage_Controller extends Page_Controller
 
     function RssItems($limit = 7)
     {
-        $feed = new RestfulService('http://planet.openstack.org/rss20.xml', 7200);
 
-        $feedXML = $feed->request()->getBody();
+        $result = $this->queryExternalSource('http://planet.openstack.org/rss20.xml', 7200, 'channel', 'item');
+        if(!$result->count()) return $result;
 
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
+        foreach ($result as $item) {
+            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
+            $item->timestamp = strtotime($item->pubDate);
+        }
+
+        return $result->limit($limit, 0);
+    }
+
+    function BlogItems($limit = 7)
+    {
+
+        $result = $this->queryExternalSource('https://www.openstack.org/blog/feed/', 7200, 'channel', 'item');
+        if(!$result->count()) return $result;
 
         foreach ($result as $item) {
             $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
@@ -280,32 +326,13 @@ class HomePage_Controller extends Page_Controller
 
     function SuperUserItems($limit = 7)
     {
-        $feed = new RestfulService('http://superuser.openstack.org/articles/feed/', 7200);
 
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'entry');
+        $result = $this->queryExternalSource('http://superuser.openstack.org/articles/feed/', 7200, 'entry');
+        if(!$result->count()) return $result;
 
         foreach ($result as $item) {
             $item->date_display = date("D, M jS Y", strtotime($item->published));
             $item->timestamp = strtotime($item->published);
-        }
-        return $result->limit($limit, 0);
-    }
-
-    function BlogItems($limit = 7)
-    {
-        $feed = new RestfulService('https://www.openstack.org/blog/feed/', 7200);
-
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
-
-        foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
-            $item->timestamp = strtotime($item->pubDate);
         }
 
         return $result->limit($limit, 0);
