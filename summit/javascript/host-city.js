@@ -64,6 +64,7 @@ $(window).bind('scroll', function () {
     
     var icons = [
       iconURLPrefix + 'venue.png',
+      iconURLPrefix + 'airport.png'
       iconURLPrefix + '1.png',
       iconURLPrefix + '2.png',
       iconURLPrefix + '3.png',
@@ -72,7 +73,18 @@ $(window).bind('scroll', function () {
       iconURLPrefix + '6.png',
       iconURLPrefix + '7.png',
       iconURLPrefix + '8.png',
-      iconURLPrefix + 'airport.png'
+      iconURLPrefix + '9.png',
+      iconURLPrefix + '10.png',
+      iconURLPrefix + '11.png',
+      iconURLPrefix + '12.png',
+      iconURLPrefix + '13.png',
+      iconURLPrefix + '14.png',
+      iconURLPrefix + '15.png',
+      iconURLPrefix + '16.png',
+      iconURLPrefix + '17.png',
+      iconURLPrefix + '18.png',
+      iconURLPrefix + '19.png',
+      iconURLPrefix + '20.png',
     ]
     var icons_length = icons.length;
     
