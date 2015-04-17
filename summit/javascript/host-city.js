@@ -130,5 +130,6 @@ $(window).bind('scroll', function () {
 
     // The function to trigger the marker click, 'id' is the reference index to the 'markers' array.
     function myClick(id){
+        id = id + 1; // hack that allows for summit venue and airport to be ahaed of hotels
         google.maps.event.trigger(markers[id], 'click');
     }
