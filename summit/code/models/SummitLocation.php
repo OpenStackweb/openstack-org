@@ -18,7 +18,8 @@ class SummitLocation extends DataObject
         'Longitude' => 'Text',
         'IsSoldOut' => 'Boolean',
         'Website' => 'Text',
-        'BookingLink' => 'Text'
+        'BookingLink' => 'Text',
+        'DisplayOnSite' => 'Boolean'
     );
 
     private static $has_one = array (
@@ -35,8 +36,9 @@ class SummitLocation extends DataObject
             ->text('Longitude')
             ->text('Website')
             ->text('BookingLink')
-            ->checkbox('IsSoldOut','This location is <strong>sold out</strong> (applies to hotels only)');
+            ->checkbox('IsSoldOut','This location is <strong>sold out</strong> (applies to hotels only)')
+            ->checkbox('DisplayOnSite','Show this location on the website. Will be hidden if unchecked.');
 
-    }     
+    }
             
 }

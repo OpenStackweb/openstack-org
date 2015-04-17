@@ -14,6 +14,7 @@
 			</div>
 		</div>
 	</div>
+	
 </div>
 <div class="light city-nav city" id="nav-bar">
 	<div class="container">

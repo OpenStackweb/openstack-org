@@ -47,7 +47,13 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
 	}
     
     public function Hotels() {
-        return $this->Locations()->filter(array('Type' => 'Hotel'))->sort('Order');
+        $getVars = $this->request->getVars();
+        if(isset($getVars['showHidden'])) {
+            $hotels = $this->Locations()->filter(array('Type' => 'Hotel'))->sort('Order');
+        } else {
+            $hotels = $this->Locations()->filter(array('Type' => 'Hotel','DisplayOnSite' => TRUE))->sort('Order');
+        }
+        return $hotels;
     }
     
     public function Airport() {
@@ -57,7 +63,6 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
     public function Venue() {
         return $this->Locations()->filter(array('Type' => 'Venue'))->sort('Order')->first();
     }
-
     
     public function MapScript() {
         
@@ -70,8 +75,13 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         ";
         
         // Loop Through All The Locations and add them to the array
-        
-        $Locations = $this->Locations()->sort('Order');
+
+        $getVars = $this->request->getVars();
+        if(isset($getVars['showHidden'])) {
+            $Locations = $this->Locations()->sort('Order');
+        } else {
+            $Locations = $this->Locations()->filter('DisplayOnSite',TRUE)->sort('Order');
+        }
         
         foreach ($Locations as $Location) {
             
