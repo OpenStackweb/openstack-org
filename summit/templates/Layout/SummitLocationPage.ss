@@ -123,7 +123,7 @@
 					$Address
 				</p>
 				<p>
-					<a href="#map-canvas" onclick="myClick(9);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
+					<a href="#map-canvas" onclick="myClick(2);" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
 					<a href="{$Website}" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Website</a>
 				</p>
 			</div>
