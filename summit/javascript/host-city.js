@@ -60,7 +60,7 @@ $(window).bind('scroll', function () {
 });
     
     // Setup the different icons and shadows
-    var iconURLPrefix = 'http://iamweswilson.com/mapicons/';
+    var iconURLPrefix = 'http://openstack.org/summit/images/mapicons/';
     
     var icons = [
       iconURLPrefix + 'venue.png',
