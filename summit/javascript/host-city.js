@@ -64,7 +64,7 @@ $(window).bind('scroll', function () {
     
     var icons = [
       iconURLPrefix + 'venue.png',
-      iconURLPrefix + 'airport.png'
+      iconURLPrefix + 'airport.png',
       iconURLPrefix + '1.png',
       iconURLPrefix + '2.png',
       iconURLPrefix + '3.png',
