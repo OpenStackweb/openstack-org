@@ -84,7 +84,7 @@ $(window).bind('scroll', function () {
       iconURLPrefix + '17.png',
       iconURLPrefix + '18.png',
       iconURLPrefix + '19.png',
-      iconURLPrefix + '20.png',
+      iconURLPrefix + '20.png'
     ]
     var icons_length = icons.length;
     
