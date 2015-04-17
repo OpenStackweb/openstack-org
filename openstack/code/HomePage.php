@@ -147,15 +147,35 @@ class HomePage_Controller extends Page_Controller
 
     }
 
+
+    /**
+     * @param string $url
+     * @param int  $expiry
+     * @param null $collection
+     * @param null $element
+     * @return ArrayList
+     */
+    private function queryExternalSource($url, $expiry=3600, $collection = NULL, $element = NULL){
+        $output = new ArrayList();
+        try {
+            $feed     = new RestfulService($url, $expiry);
+            $response = $feed->request();
+            if ($response->getStatusCode() == 200) {
+                $body = $response->getBody();
+                $output = $feed->getValues($body, $collection, $element);
+            }
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex, SS_Log::ERR);
+        }
+        return $output;
+    }
+
     function RssEvents($limit = 7)
     {
 
-        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
-
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
+        $result = $this->queryExternalSource('https://groups.openstack.org/events-upcoming.xml', 7200, 'channel', 'item');
+        if(!$result->count()) return $result;
 
         foreach ($result as $item) {
             $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
@@ -279,12 +299,8 @@ class HomePage_Controller extends Page_Controller
     function RssItems($limit = 7)
     {
 
-        $feed = new RestfulService('http://planet.openstack.org/rss20.xml', 7200);
-
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
+        $result = $this->queryExternalSource('http://planet.openstack.org/rss20.xml', 7200, 'channel', 'item');
+        if(!$result->count()) return $result;
 
         foreach ($result as $item) {
             $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
@@ -297,12 +313,8 @@ class HomePage_Controller extends Page_Controller
     function BlogItems($limit = 7)
     {
 
-        $feed = new RestfulService('https://www.openstack.org/blog/feed/', 7200);
-
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
+        $result = $this->queryExternalSource('https://www.openstack.org/blog/feed/', 7200, 'channel', 'item');
+        if(!$result->count()) return $result;
 
         foreach ($result as $item) {
             $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
@@ -315,12 +327,8 @@ class HomePage_Controller extends Page_Controller
     function SuperUserItems($limit = 7)
     {
 
-        $feed = new RestfulService('http://superuser.openstack.org/articles/feed/', 7200);
-
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'entry');
+        $result = $this->queryExternalSource('http://superuser.openstack.org/articles/feed/', 7200, 'entry');
+        if(!$result->count()) return $result;
 
         foreach ($result as $item) {
             $item->date_display = date("D, M jS Y", strtotime($item->published));
