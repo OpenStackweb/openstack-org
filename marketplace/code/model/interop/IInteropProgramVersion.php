@@ -12,20 +12,18 @@
  * limitations under the License.
  **/
 
-class InteropAdmin extends ModelAdmin {
+/**
+ * Interface IInteropProgramVersion
+ */
+interface IInteropProgramVersion extends IEntity {
+    /**
+     * @return string
+     */
+    public function getName();
 
-    public static $managed_models = array(
-        'InteropProgramType',
-        'InteropProgramVersion',
-    );
-
-    public $showImportForm = false;
-    private static $url_segment = 'interoperability';
-    private static $menu_title  = 'Interoperability';
-
-    public function init()
-    {
-        parent::init();
-    }
-
+    /**
+     * @param string $version_name
+     * @return void
+     */
+    public function setName($version_name);
 }

@@ -12,15 +12,30 @@
  * limitations under the License.
  **/
 
-class InteropProgramType extends DataObject {
+class InteropProgramType extends DataObject
+{
 
     static $db = array(
-        'Name'  => 'Varchar',
-        'Order' => 'Int',
-        'ProductExamples' => 'HTMLText',
-        'RequiredCode' => 'HTMLText',
+        'Name' => 'Varchar',
         'ShortName' => 'Varchar',
+        'Order' => 'Int',
+        'RequiredCode' => 'HTMLText',
+        'ProductExamples' => 'HTMLText',
         'TrademarkUse' => 'HTMLText',
+        'HasCapabilities' => 'Boolean',
     );
+
+    function getCMSFields()
+    {
+        $fields =  new FieldList();
+        $fields->add(new TextField('Name','Name'));
+        $fields->add(new TextField('ShortName','Short Name'));
+        $fields->add(new CheckboxField('HasCapabilities','Has Capabilities?'));
+        $fields->add(new HtmlEditorField('RequiredCode','Required Code'));
+        $fields->add(new HtmlEditorField('ProductExamples','Product Examples'));
+        $fields->add(new HtmlEditorField('TrademarkUse','Trademark Use'));
+        return $fields;
+    }
+
 
 }

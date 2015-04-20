@@ -12,20 +12,14 @@
  * limitations under the License.
  **/
 
-class InteropAdmin extends ModelAdmin {
+/**
+ * Class SapphireInteropProgramVersion
+ */
+class SapphireInteropProgramVersion extends SapphireRepository {
 
-    public static $managed_models = array(
-        'InteropProgramType',
-        'InteropProgramVersion',
-    );
-
-    public $showImportForm = false;
-    private static $url_segment = 'interoperability';
-    private static $menu_title  = 'Interoperability';
-
-    public function init()
-    {
-        parent::init();
+    public function __construct($draft_entity=false){
+        $entity = new InteropProgramVersion;
+        parent::__construct($entity);
     }
 
 }

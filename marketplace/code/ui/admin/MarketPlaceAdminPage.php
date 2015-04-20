@@ -121,6 +121,10 @@ class MarketPlaceAdminPage_Controller extends AdminController
     private $consultant_draft_repository;
 
 
+    /**
+     * @var IEntityRepository
+     */
+    private $interop_program_repository;
 
 	function init()
 	{
@@ -134,7 +138,10 @@ class MarketPlaceAdminPage_Controller extends AdminController
 		Requirements::css("marketplace/code/ui/admin/css/colorpicker.css", "screen,projection");
 		Requirements::css(Director::protocol() . "code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css");
 		//js
-		Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        if(Director::isDev())
+            Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js");
+        else
+		    Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
 		Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
 		Requirements::javascript(Director::protocol() . "code.jquery.com/ui/1.10.4/jquery-ui.min.js");
 		Requirements::javascript("themes/openstack/javascript/jquery.jsonp-2.4.0.min.js");
@@ -173,6 +180,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
 		$this->consultant_service_offered_type_repository = new SapphireConsultantServiceOfferedTypeRepository;
 		$this->consultant_repository = new SapphireConsultantRepository;
         $this->consultant_draft_repository = new SapphireConsultantRepository(true);
+        $this->interop_program_repository = new SapphireInteropProgramVersion();
 	}
 
 
@@ -1468,6 +1476,16 @@ class MarketPlaceAdminPage_Controller extends AdminController
             SS_Log::log($message, SS_Log::ERR);
             $this->httpError(404,'There was an error on PDF generation!');
         }
+    }
+
+    /**
+     *  interop
+     */
+
+
+    public function getInteropProgramVersions(){
+        list($res,$size) = $this->interop_program_repository->getAll(new QueryObject());
+        return new ArrayList($res);
     }
 
 }

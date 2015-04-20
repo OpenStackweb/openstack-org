@@ -24,7 +24,6 @@ class ImplementationValidatorFactory extends ValidatorFactory {
             'call_2_action_uri' => 'required|url',
             'compatible_compute'            => 'required|boolean',
             'compatible_storage'            => 'required|boolean',
-            'compatible_platform'           => 'required|boolean',
             'compatible_federated_identity' => 'required|boolean',
         );
 

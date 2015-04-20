@@ -12,14 +12,60 @@
  * limitations under the License.
  **/
 
-class InteropProgramVersion extends DataObject {
+/**
+ * Class InteropProgramVersion
+ */
+class InteropProgramVersion extends DataObject implements IInteropProgramVersion {
 
     static $db = array(
         'Name'  => 'Varchar',
     );
 
     private static $has_many = array(
-        'Capabilities' => 'InteropCapability',
+        'Capabilities'       => 'InteropCapability',
         'DesignatedSections' => 'InteropDesignatedSection',
     );
+
+    function getCMSFields()
+    {
+        $fields =  new FieldList();
+        $fields->add(new TextField('Name','Name'));
+        if($this->ID){
+            $config = GridFieldConfig_RelationEditor::create();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+            $gridField = new GridField('Capabilities', 'Capabilities', $this->Capabilities(), $config);
+            $fields->add($gridField);
+
+            $config = GridFieldConfig_RelationEditor::create();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+            $gridField = new GridField('DesignatedSections', 'Designated Sections', $this->DesignatedSections(), $config);
+            $fields->add($gridField);
+        }
+        return $fields;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+       return (int)$this->getField('ID');
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return (string)$this->getField('Name');
+    }
+
+    /**
+     * @param string $version_name
+     * @return void
+     */
+    public function setName($version_name)
+    {
+       $this->setField('Name', $version_name);
+    }
 }
