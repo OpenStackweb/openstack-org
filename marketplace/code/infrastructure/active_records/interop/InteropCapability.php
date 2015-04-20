@@ -17,7 +17,7 @@ class InteropCapability extends DataObject {
     static $db = array(
         'Name'  => 'Varchar',
         'Order' => 'Int',
-        'Description' => 'Text',
+        'Description' => 'HTMLText',
         'Status' =>  "Enum('Required, Advisory','Required')",
     );
 
@@ -25,4 +25,15 @@ class InteropCapability extends DataObject {
         "Program" => "InteropProgramType",
         "Version" => "InteropProgramVersion",
     );
+
+    function getCMSFields()
+    {
+        $fields =  new FieldList();
+        $fields->add(new TextField('Name','Name'));
+        $fields->add(new HtmlEditorField('Description','Description'));
+        $fields->add(new DropdownField('Status','Status', $this->dbObject('Status')->enumValues()));
+        $fields->add(new DropdownField('Program','Program',   InteropProgramType::get()->filter('HasCapabilities', true)->map("ID", "Name", "Please Select")));
+        $fields->add(new DropdownField('Version','Program Version', Dataobject::get("InteropProgramVersion")->map("ID", "Name", "Please Select")));
+        return $fields;
+    }
 }

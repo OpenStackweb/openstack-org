@@ -21,17 +21,16 @@ class OpenStackImplementation
 {
 
     static $db = array(
-        'CompatibleWithCompute' => 'Boolean',
-        'CompatibleWithStorage' => 'Boolean',
-        'CompatibleWithPlatform' => 'Boolean',
+        'CompatibleWithCompute'           => 'Boolean',
+        'CompatibleWithStorage'           => 'Boolean',
         'CompatibleWithFederatedIdentity' => 'Boolean',
-        'ComputeCapabilities' => 'HTMLText',
-        'StorageCapabilities' => 'HTMLText',
-        'PlatformCapabilities' => 'HTMLText');
+    );
+
+    static $has_one = array('ProgramVersion' => 'InteropProgramVersion');
 
     static $many_many = array(
         'HyperVisors' => 'HyperVisorType',
-        'Guests' => 'GuestOSType',
+        'Guests'      => 'GuestOSType',
     );
 
     static $has_many = array(
@@ -41,7 +40,6 @@ class OpenStackImplementation
     private static $defaults = array(
         'CompatibleWithCompute' => false,
         'CompatibleWithStorage' => false,
-        'CompatibleWithPlatform' => false,
         'CompatibleWithFederatedIdentity' => false,
     );
 
@@ -151,16 +149,7 @@ class OpenStackImplementation
      */
     public function isCompatibleWithPlatform()
     {
-        return (bool)$this->getField('CompatibleWithPlatform');
-    }
-
-    /**
-     * @param bool $compatible
-     * @return void
-     */
-    public function setCompatibleWithPlatform($compatible)
-    {
-        $this->setField('CompatibleWithPlatform', $compatible);
+        return $this->isCompatibleWithStorage() && $this->isCompatibleWithCompute();
     }
 
     /***
@@ -229,5 +218,24 @@ class OpenStackImplementation
     public function setPlatformCapabilities($capabilities)
     {
         $this->setField('PlatformCapabilities', $capabilities);
+    }
+
+    /**
+     * @param IInteropProgramVersion $program_version
+     * @return void
+     */
+    public function setProgramVersion(IInteropProgramVersion $program_version)
+    {
+       $this->ProgramVersionID = $program_version->getIdentifier();
+    }
+
+    /**
+     * @return IInteropProgramVersion
+     */
+    public function getProgramVersion()
+    {
+       $program_version =  $this->ProgramVersion();
+       UnitOfWork::getInstance()->scheduleForUpdate($program_version);
+       return $program_version;
     }
 }

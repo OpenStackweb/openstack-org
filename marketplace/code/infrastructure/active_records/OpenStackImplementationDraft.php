@@ -13,9 +13,9 @@ class OpenStackImplementationDraft
         'CompatibleWithStorage' => 'Boolean',
         'CompatibleWithPlatform' => 'Boolean',
         'CompatibleWithFederatedIdentity' => 'Boolean',
-        'ComputeCapabilities' => 'HTMLText',
-        'StorageCapabilities' => 'HTMLText',
-        'PlatformCapabilities' => 'HTMLText');
+      );
+
+    static $has_one = array('ProgramVersion' => 'InteropProgramVersion');
 
     static $many_many = array(
         'HyperVisors' => 'HyperVisorType',
@@ -138,17 +138,9 @@ class OpenStackImplementationDraft
      */
     public function isCompatibleWithPlatform()
     {
-        return (bool)$this->getField('CompatibleWithPlatform');
+        return $this->isCompatibleWithStorage() && $this->isCompatibleWithCompute();
     }
 
-    /**
-     * @param bool $compatible
-     * @return void
-     */
-    public function setCompatibleWithPlatform($compatible)
-    {
-        $this->setField('CompatibleWithPlatform', $compatible);
-    }
 
     /***
      * @return bool
@@ -168,53 +160,21 @@ class OpenStackImplementationDraft
     }
 
     /**
-     * @return string
-     */
-    public function getComputeCapabilities()
-    {
-        return (string)$this->getField('ComputeCapabilities');
-    }
-
-    /**
-     * @param string $capabilities
+     * @param IInteropProgramVersion $program_version
      * @return void
      */
-    public function setComputeCapabilities($capabilities)
+    public function setProgramVersion(IInteropProgramVersion $program_version)
     {
-        $this->setField('ComputeCapabilities', $capabilities);
+        $this->ProgramVersionID = $program_version->getIdentifier();
     }
 
     /**
-     * @return string
+     * @return IInteropProgramVersion
      */
-    public function getStorageCapabilities()
+    public function getProgramVersion()
     {
-        return (string)$this->getField('StorageCapabilities');
-    }
-
-    /**
-     * @param string $capabilities
-     * @return void
-     */
-    public function setStorageCapabilities($capabilities)
-    {
-        $this->setField('StorageCapabilities', $capabilities);
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlatformCapabilities()
-    {
-        return (string)$this->getField('PlatformCapabilities');
-    }
-
-    /**
-     * @param string $capabilities
-     * @return void
-     */
-    public function setPlatformCapabilities($capabilities)
-    {
-        $this->setField('PlatformCapabilities', $capabilities);
+        $program_version =  $this->ProgramVersion();
+        UnitOfWork::getInstance()->scheduleForUpdate($program_version);
+        return $program_version;
     }
 }

@@ -37,22 +37,13 @@ abstract class OpenStackImplementationFactory
      */
     public function buildOpenStackPowered(IOpenStackImplementation $implementation, $data)
     {
-
         $implementation->setCompatibleWithCompute($data['compatible_compute']);
         $implementation->setCompatibleWithStorage($data['compatible_storage']);
-        $implementation->setCompatibleWithPlatform($data['compatible_platform']);
         $implementation->setCompatibleWithFederatedIdentity($data['compatible_federated_identity']);
-
-        if ($implementation->isCompatibleWithCompute()) {
-            $implementation->setComputeCapabilities($data['compute_capabilities']);
-        }
-
-        if ($implementation->isCompatibleWithStorage()) {
-            $implementation->setComputeCapabilities($data['storage_capabilities']);
-        }
-
-        if ($implementation->isCompatibleWithPlatform()) {
-            $implementation->setComputeCapabilities($data['platform_capabilities']);
+        if(isset($data['interop_program_version_id'])) {
+            $program_version = new InteropProgramVersion();
+            $program_version->ID = (int)$data['interop_program_version_id'];
+            $implementation->setProgramVersion($program_version);
         }
     }
 }

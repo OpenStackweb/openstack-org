@@ -309,7 +309,8 @@ function serializePublicCloud(form, publish){
     var videos               = $("#videos-form").videos('serialize');
     var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
     var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
-
+    var public_cloud = {};
+    public_cloud             = form.implementation_openstack_powered('serialize', public_cloud);
     if( additional_resources !== false &&
         regional_support    !== false &&
         capabilities        !== false &&
@@ -317,10 +318,10 @@ function serializePublicCloud(form, publish){
         hyper_visors        !== false &&
         videos              !== false &&
         data_centers        !== false &&
-        pricing_schemas     !== false
+        pricing_schemas     !== false &&
+        public_cloud        !== false
     ){
         //create public_cloud object and POST it
-        var public_cloud = {};
         public_cloud.id                      = parseInt($("#id",form).val());
         public_cloud.live_service_id         = parseInt($("#live_id",form).val());
         public_cloud.company_id              = parseInt($("#company_id",form).val());
@@ -339,7 +340,6 @@ function serializePublicCloud(form, publish){
         public_cloud.regional_support        = regional_support;
         public_cloud.additional_resources    = additional_resources;
         public_cloud.data_centers            = data_centers;
-        public_cloud                         = form.implementation_openstack_powered('serialize', public_cloud);
         public_cloud.published               = publish? 1:0;
         return public_cloud;
     }

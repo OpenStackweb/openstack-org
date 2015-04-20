@@ -24,15 +24,13 @@ final class OpenStackImplementationAssembler {
 		$res = RegionalSupportedCompanyServiceAssembler::convertRegionalSupportedCompanyServiceToArray($implementation);
 
 		$res['compatible_compute'] = $implementation->isCompatibleWithCompute();
-		$res['compute_capabilities'] = ($res['compatible_compute'])?$implementation->getComputeCapabilities():'';
 
 		$res['compatible_storage'] = $implementation->isCompatibleWithStorage();
-		$res['storage_capabilities'] = ($res['compatible_storage'])?$implementation->getStorageCapabilities():'';
 
-		$res['compatible_platform'] = $implementation->isCompatibleWithPlatform();
-		$res['platform_capabilities'] = ($res['compatible_platform'])?$implementation->getPlatformCapabilities():'';
+        $res['interop_program_version_id'] = $implementation->getProgramVersion()->getIdentifier();
 
 		$res['compatible_federated_identity'] = $implementation->isCompatibleWithFederatedIdentity();
+
 		//capabilities
 		$capabilities = array();
 		foreach($implementation->getCapabilities() as $capability){

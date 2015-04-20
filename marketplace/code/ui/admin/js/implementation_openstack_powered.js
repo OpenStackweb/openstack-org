@@ -17,77 +17,41 @@
         init : function(options) {
             form = $(this);
 
-            $('#compute_capabilities', form).rules('add', { required: function (element) {
-                return $('#compatible_compute', form).is(':checked');
+            $('.interop-program-version', form).rules('add', { required: function (element) {
+                if($('#compatible_compute', form).is(':checked') || $('#compatible_storage', form).is(':checked'))
+                    return true;
+                return false;
             }});
 
-            $('#storage_capabilities', form).rules('add', { required: function (element) {
-                return $('#compatible_storage', form).is(':checked');
-            }});
-
-            $('#platform_capabilities', form).rules('add', { required: function (element) {
-                return $('#compatible_platform', form).is(':checked');
-            }});
-
-            if((typeof tinyMCE != 'undefined')) {
-                tinyMCE.init({
-                    theme : "advanced",
-                    mode: "exact",
-                    elements : "compute_capabilities, storage_capabilities, platform_capabilities",
-                    theme_advanced_toolbar_location: "top",
-                    theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
-                    theme_advanced_buttons2 : "",
-                    theme_advanced_buttons3 : "",
-                    height:"250px",
-                    width:"600px"
-                });
-            }
-
+            $('.interop-program-version', form).change(function (evt){
+                var state = $(this).attr('checked');
+                $('.interop-program-version:checked', form).prop('checked',false);
+                $(this).prop('checked', state);
+            });
         },
         getFormValidator:function(){
             return form_validator;
         },
         load: function(implementation) {
-
             $('#compatible_compute',form).prop('checked',implementation.compatible_compute);
             $('#compatible_storage',form).prop('checked',implementation.compatible_storage);
-            $('#compatible_platform',form).prop('checked',implementation.compatible_platform);
             $('#compatible_federated_identity',form).prop('checked',implementation.compatible_federated_identity);
 
-            $('#compute_capabilities', form).val(implementation.compute_capabilities);
-            $('#storage_capabilities', form).val(implementation.storage_capabilities);
-            $('#platform_capabilities', form).val(implementation.platform_capabilities);
+            if(implementation.interop_program_version_id > 0)
+                $('#interop_program_version_' + implementation.interop_program_version_id, form).prop('checked', true);
 
         },
-
         serialize: function(implementation) {
-
+            var is_valid = form.valid();
+            if(!is_valid){
+                return false;
+            }
             implementation.compatible_compute            = $('#compatible_compute', form).is(':checked');
             implementation.compatible_storage            = $('#compatible_storage', form).is(':checked');
-            implementation.compatible_platform           = $('#compatible_platform', form).is(':checked');
             implementation.compatible_federated_identity = $('#compatible_federated_identity', form).is(':checked');
+            var version = $('.interop-program-version:checked', form);
 
-            if(implementation.compatible_compute){
-                implementation.compute_capabilities = tinymce.get('compute_capabilities').getContent();
-            }
-            else{
-                implementation.compute_capabilities = '';
-            }
-
-            if(implementation.compatible_storage){
-                implementation.storage_capabilities = tinymce.get('storage_capabilities').getContent();
-            }
-            else{
-                implementation.storage_capabilities = '';
-            }
-
-            if(implementation.compatible_platform){
-                implementation.platform_capabilities = tinymce.get('platform_capabilities').getContent();
-            }
-            else{
-                implementation.platform_capabilities = '';
-            }
-
+            implementation.interop_program_version_id    = version.length > 0? version.attr('data-version-id'):0;
             return implementation;
         }
     }

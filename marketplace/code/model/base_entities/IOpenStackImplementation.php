@@ -83,12 +83,6 @@ interface IOpenStackImplementation extends IRegionalSupportedCompanyService {
 	 */
 	public function isCompatibleWithPlatform();
 
-	/**
-	 * @param bool $compatible
-	 * @return void
-	 */
-	public function setCompatibleWithPlatform($compatible);
-
 	/***
 	 * @return bool
 	 */
@@ -100,38 +94,16 @@ interface IOpenStackImplementation extends IRegionalSupportedCompanyService {
 	 */
 	public function setCompatibleWithFederatedIdentity($compatible);
 
-	/**
-	 * @return string
-	 */
-	public function getComputeCapabilities();
 
+    /**
+     * @param IInteropProgramVersion $program_version
+     * @return void
+     */
+    public function setProgramVersion(IInteropProgramVersion $program_version);
 
-	/**
-	 * @param string $capabilities
-	 * @return void
-	 */
-	public function setComputeCapabilities($capabilities);
+    /**
+     * @return IInteropProgramVersion
+     */
+    public function getProgramVersion();
 
-	/**
-	 * @return string
-	 */
-	public function getStorageCapabilities();
-
-
-	/**
-	 * @param string $capabilities
-	 * @return void
-	 */
-	public function setStorageCapabilities($capabilities);
-	/**
-	 * @return string
-	 */
-	public function getPlatformCapabilities();
-
-
-	/**
-	 * @param string $capabilities
-	 * @return void
-	 */
-	public function setPlatformCapabilities($capabilities);
 }

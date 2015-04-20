@@ -20,7 +20,7 @@
     <div style="clear:both">
         <fieldset>
         <form id="public_cloud_form" name="public_cloud_form">
-            <% include MarketPlaceAdminPage_CompanyServiceHeader %>><BR>
+            <% include MarketPlaceAdminPage_CompanyServiceHeader %><BR>
             <% include MarketPlaceAdminPage_OpenStackPowered %>
         </form>
         <% include Components %>

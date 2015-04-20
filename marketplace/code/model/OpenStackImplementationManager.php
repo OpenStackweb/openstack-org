@@ -213,29 +213,14 @@ abstract class OpenStackImplementationManager
     public function update($company_service, $data)
     {
         $company_service = parent::update($company_service, $data);
-
         $company_service->setCompatibleWithCompute($data['compatible_compute']);
-        if ($company_service->isCompatibleWithCompute()) {
-            $company_service->setComputeCapabilities($data['compute_capabilities']);
-        } else {
-            $company_service->setComputeCapabilities('');
-        }
-
         $company_service->setCompatibleWithStorage($data['compatible_storage']);
-        if ($company_service->isCompatibleWithStorage()) {
-            $company_service->setStorageCapabilities($data['storage_capabilities']);
-        } else {
-            $company_service->setStorageCapabilities('');
-        }
-
-        $company_service->setCompatibleWithPlatform($data['compatible_platform']);
-        if ($company_service->isCompatibleWithPlatform()) {
-            $company_service->setPlatformCapabilities($data['platform_capabilities']);
-        } else {
-            $company_service->setPlatformCapabilities('');
-        }
-
         $company_service->setCompatibleWithFederatedIdentity($data['compatible_federated_identity']);
+        if(isset($data['interop_program_version_id'])) {
+            $program_version = new InteropProgramVersion();
+            $program_version->ID = (int)$data['interop_program_version_id'];
+            $company_service->setProgramVersion($program_version);
+        }
         return $company_service;
     }
 }
