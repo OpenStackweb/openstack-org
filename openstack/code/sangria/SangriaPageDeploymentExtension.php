@@ -259,8 +259,8 @@ final class SangriaPageDeploymentExtension extends Extension
     public static function generateSelectListSummary($fieldName, $optionSet, $applyDateFilters = false)
     {
         $list = new ArrayList();
-
-        $urlString = $_SERVER["REDIRECT_URL"] . "?";
+        $urlString = preg_replace('/\?.*$/', '', $_SERVER["REQUEST_URI"]);
+        $urlString = $urlString . "?";
         $keyUrlString = "";
         $keyValue = "";
 
