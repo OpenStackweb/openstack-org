@@ -31,7 +31,10 @@
                     <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://openstack.org/summit/tokyo-2015/&title=OpenStack Summit Tokyo 2015&summary=The October 2015 OpenStack Summit will be in Tokyo, Japan" target="_blank" class="social-icons landing-linkedin"></a>
                 </div>
                 <div>
-                    <a href="/summit/" class="btn register-btn-lrg">Go To Main Summit Site</a>
+                    <a href="https://www.openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">Download The Sponsor Prospectus</a>
+                </div>
+                <div>
+                  <a href="/summit/vancouver-2015/" class="white-link">View The Current Summit</a>
                 </div>
             </div>
         </div>
