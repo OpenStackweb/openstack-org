@@ -2151,8 +2151,12 @@ img.tokyo-landing-logo {
   font-weight: 300;
   font-size: 20px;
   margin: 8px 0 10px;
-  text-transform: uppercase; }
-
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+a.white-link {
+  color: white;
+}
 .tokyo-landing-wrapper p {
   color: white; }
 
