@@ -1372,6 +1372,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
 
         try {
             $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));
+            $html2pdf->setTestIsImage(false);
             //$html2pdf->addFont('Open Sans', '', $base.'/themes/openstack/assets/fonts/PT-Sans/PTC75F-webfont.ttf');
             $html2pdf->WriteHTML($html_outer);
             //clean output buffer
@@ -1459,6 +1460,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         try {
             $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));
             //$html2pdf->addFont('Open Sans', '', $base.'/themes/openstack/assets/fonts/PT-Sans/PTC75F-webfont.ttf');
+            $html2pdf->setTestIsImage(false);
             $html2pdf->WriteHTML($html_outer);
             //clean output buffer
             ob_end_clean();
