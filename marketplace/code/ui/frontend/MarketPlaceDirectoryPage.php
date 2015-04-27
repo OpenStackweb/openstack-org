@@ -67,6 +67,7 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
 
     function init(){
         parent::init();
+        Requirements::javascript("marketplace/code/ui/frontend/js/marketplace.common.js");
 
         $this->review_repository = new SapphireReviewRepository;
 

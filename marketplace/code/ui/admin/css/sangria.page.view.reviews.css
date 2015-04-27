@@ -18,5 +18,33 @@
 }
 
 .review_date {
-    width: 90px;
+    width: 100px;
+}
+
+.actions {
+    width: 60px;
+}
+
+.reject_review {
+    font-size: 15px;
+    color: grey !important;
+    text-shadow: 0 1px 0 #ffffff;
+    text-decoration: none;
+}
+.reject_review:hover {
+    color: #bc1518 !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.approve_review {
+    font-size: 15px;
+    color: grey !important;
+    text-shadow: 0 1px 0 #ffffff;
+    text-decoration: none;
+}
+.approve_review:hover {
+    color: green !important;
+    text-decoration: none;
+    cursor: pointer;
 }

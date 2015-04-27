@@ -6,10 +6,9 @@
 </div>
 <div class="course-filter grey-bar">
     <div class="container">
-        <p class="back-label">
+        <div class="back-label">
             <a href="$Top.Link">Back To Course List</a>
-        </p>
-
+        </div>
     </div>
 </div>
 <div class="container">

@@ -1,10 +1,8 @@
 <div class="grey-bar">
     <div class="container">
-        <p class="back-label">
+        <div class="back-label">
             <a href="$Top.Link">All Providers</a>
-        </p>
-
-        <h1>$Name</h1>
+        </div>
     </div>
 </div>
 <div class="container marketplace-content">
