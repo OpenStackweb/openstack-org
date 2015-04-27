@@ -32,8 +32,14 @@ class InteropCapability extends DataObject {
         $fields->add(new TextField('Name','Name'));
         $fields->add(new HtmlEditorField('Description','Description'));
         $fields->add(new DropdownField('Status','Status', $this->dbObject('Status')->enumValues()));
-        $fields->add(new DropdownField('Program','Program',   InteropProgramType::get()->filter('HasCapabilities', true)->map("ID", "Name", "Please Select")));
-        $fields->add(new DropdownField('Version','Program Version', Dataobject::get("InteropProgramVersion")->map("ID", "Name", "Please Select")));
+        $fields->add($ddl_program = new DropdownField('Program','Program',   InteropProgramType::get()->filter('HasCapabilities', true)->map("ID", "Name", "Please Select")));
+        $fields->add($ddl_version = new DropdownField('Version','Program Version', Dataobject::get("InteropProgramVersion")->map("ID", "Name", "Please Select")));
+
+        if($this->ID > 0){
+            $ddl_program->setValue($this->ProgramID);
+            $ddl_version->setValue($this->VersionID);
+        }
+
         return $fields;
     }
 }
