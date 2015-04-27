@@ -42,4 +42,5 @@ class InteropCapability extends DataObject {
 
         return $fields;
     }
+
 }

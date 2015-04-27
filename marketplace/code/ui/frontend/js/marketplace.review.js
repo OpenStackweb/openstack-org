@@ -51,11 +51,15 @@ jQuery(document).ready(function($){
     $("#MarketPlaceReviewForm_MarketPlaceReviewForm_rating").rating({size:'xs',showCaption:false,showClear:false});
 
     $("#write_review").click(function(){
+        $('.tab_selected').removeClass('tab_selected');
+        $(this).addClass('tab_selected');
         $(".review_form_div").show();
         $(".review_list_div").hide();
     });
 
     $("#read_reviews").click(function(){
+        $('.tab_selected').removeClass('tab_selected');
+        $(this).addClass('tab_selected');
         $(".review_form_div").hide();
         $(".review_list_div").show();
     });

@@ -58,7 +58,7 @@
             <th>Date</th>
             <th>Product</th>
             <th>Author</th>
-            <th>Company Affiliation</th>
+            <th>C. Affiliation</th>
             <th>Rating</th>
             <th>Title</th>
             <th>Comment</th>
@@ -83,10 +83,14 @@
                 </td>
                 <td class="title">$Title</td>
                 <td class="comment">$Comment</td>
-                <td width="15%">
-                    <a href="#" data-request-id="{$ID}" class="reject_review roundedButton addDeploymentBtn">Reject</a>
+                <td class="actions">
+                    <a href="#" data-request-id="{$ID}" class="reject_review">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
                     &nbsp;
-                    <a href="#" data-request-id="{$ID}" class="approve_review roundedButton addDeploymentBtn">Approve</a>
+                    <a href="#" data-request-id="{$ID}" class="approve_review">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </a>
                 </td>
             </tr>
             <% end_loop %>

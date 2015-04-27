@@ -17,17 +17,19 @@
         init : function(options) {
             form = $(this);
 
-            $('.interop-program-version', form).rules('add', { required: function (element) {
-                if($('#compatible_compute', form).is(':checked') || $('#compatible_storage', form).is(':checked'))
-                    return true;
-                return false;
-            }});
+            if ($('.interop-program-version', form).length > 0) {
+                $('.interop-program-version', form).rules('add', { required: function (element) {
+                    if($('#compatible_compute', form).is(':checked') || $('#compatible_storage', form).is(':checked'))
+                        return true;
+                    return false;
+                }});
 
-            $('.interop-program-version', form).change(function (evt){
-                var state = $(this).attr('checked');
-                $('.interop-program-version:checked', form).prop('checked',false);
-                $(this).prop('checked', state);
-            });
+                $('.interop-program-version', form).change(function (evt){
+                    var state = $(this).attr('checked');
+                    $('.interop-program-version:checked', form).prop('checked',false);
+                    $(this).prop('checked', state);
+                });
+            }
         },
         getFormValidator:function(){
             return form_validator;
