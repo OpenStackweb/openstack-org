@@ -43,18 +43,18 @@
                                     Tested
                                 </div>
                             </div>
-                            <div class="tested-description">OpenStack Powered Platform $ProgramVersion.Name .
+                            <div class="tested-description">OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name .
                             <a href="#" id="see-results-link">See full results [+]</a>.</div>
                         </div>
                     </p>
                 </div>
                 <div class="test-details-list">
-                    <h4>OpenStack Powered Platform $ProgramVersion.Name</h4>
+                    <h4>OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</h4>
                     <table>
                         <tbody>
                             <thead>
                                 <tr>
-                                    <th>$TestedCapabilityTypeLabel</th>
+                                    <th>$TestedCapabilityTypeLabel Capabilities</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
