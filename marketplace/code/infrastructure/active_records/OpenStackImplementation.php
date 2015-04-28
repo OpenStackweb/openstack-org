@@ -179,11 +179,11 @@ class OpenStackImplementation
     public function getTestedCapabilityTypeLabel()
     {
         if ($this->isCompatibleWithPlatform()) {
-            return 'Platform Capabilities';
+            return 'Platform';
         } else if ($this->isCompatibleWithCompute()) {
-            return 'Compute Capabilities';
+            return 'Compute';
         } else if ($this->isCompatibleWithStorage()) {
-            return 'Storage Capabilities';
+            return 'Storage';
         }
     }
 
