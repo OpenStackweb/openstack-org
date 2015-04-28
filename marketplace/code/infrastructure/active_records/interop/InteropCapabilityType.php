@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 Openstack Foundation
+ * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,24 +12,24 @@
  * limitations under the License.
  **/
 
-/**
- * Class InteropAdmin
- */
-class InteropAdmin extends ModelAdmin {
+class InteropCapabilityType  extends DataObject {
 
-    public static $managed_models = array(
-        'InteropProgramType',
-        'InteropProgramVersion',
-        'InteropCapabilityType',
+    static $db = array(
+        'Name'  => 'Varchar',
     );
 
-    public $showImportForm = false;
-    private static $url_segment = 'interoperability';
-    private static $menu_title  = 'Interoperability';
+    private static $has_one = array(
+    );
 
-    public function init()
+    private static $has_many = array(
+        'Capabilities' => 'InteropCapability',
+    );
+
+
+    function getCMSFields()
     {
-        parent::init();
+        $fields =  new FieldList();
+        $fields->add(new TextField('Name','Name'));
+        return $fields;
     }
-
 }

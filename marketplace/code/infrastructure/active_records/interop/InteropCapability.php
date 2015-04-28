@@ -24,6 +24,7 @@ class InteropCapability extends DataObject {
     private static $has_one = array(
         "Program" => "InteropProgramType",
         "Version" => "InteropProgramVersion",
+        "Type"    => 'InteropCapabilityType',
     );
 
     function getCMSFields()
@@ -34,10 +35,12 @@ class InteropCapability extends DataObject {
         $fields->add(new DropdownField('Status','Status', $this->dbObject('Status')->enumValues()));
         $fields->add($ddl_program = new DropdownField('ProgramID','Program',   InteropProgramType::get()->filter('HasCapabilities', true)->map("ID", "Name", "Please Select")));
         $fields->add($ddl_version = new DropdownField('VersionID','Program Version', Dataobject::get("InteropProgramVersion")->map("ID", "Name", "Please Select")));
+        $fields->add($ddl_type    = new DropdownField('TypeID','Type', Dataobject::get("InteropCapabilityType")->map("ID", "Name", "Please Select")));
 
         if($this->ID > 0){
             $ddl_program->setValue($this->ProgramID);
             $ddl_version->setValue($this->VersionID);
+            $ddl_type->setValue($this->TypeID);
         }
 
         return $fields;
