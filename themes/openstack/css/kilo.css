@@ -1,3 +1,99 @@
+
+
+.dedication-wrapper {
+  height: 210px;
+  margin: 30px 0 0;
+  color: #2A4E68;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s;
+  z-index: 500; }
+  .dedication-wrapper i.fa-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    cursor: pointer; }
+    .dedication-wrapper i.fa-close:hover {
+      color: #0C1722; }
+  .dedication-wrapper .text {
+    width: 60%;
+    padding: 30px 0 0 40px; }
+  .dedication-wrapper h3 {
+    text-transform: uppercase;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 5px; }
+  .dedication-wrapper p {
+    font-size: 0.9em; }
+  .dedication-wrapper a {
+    color: #2A4E68;
+    display: block;
+    margin-top: 20px; }
+  .dedication-wrapper.dedication-close {
+    height: 0;
+    margin-bottom: 0;
+    transition: all 0.5s; }
+  .dedication-wrapper:after {
+    content: "";
+    background-image: url("../images/software/kilo/chris-yeoh-bkgd.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;
+    opacity: 1;
+    border-radius: 4px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; }
+
+@media (max-width: 767px) {
+  .dedication-wrapper {
+    margin: 30px 20px; }
+    .dedication-wrapper h3 {
+      font-size: 1.2em; }
+    .dedication-wrapper .text {
+      width: 100%; }
+    .dedication-wrapper:after {
+      opacity: 0.5; } }
+
+@media (max-width: 480px) {
+  .dedication-wrapper .text {
+    width: 100%; }
+  .dedication-wrapper:after {
+    opacity: 0.5; } }
+
+a.dedication-tab {
+  float: right;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  display: none;
+  background-image: url("../images/software/kilo/dedication-tab.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #2A4E68;
+  z-index: 450; }
+  a.dedication-tab i.fa-chevron-down {
+    margin-left: 3px;
+    font-size: 0.7em; }
+  a.dedication-tab:hover {
+    text-decoration: none;
+    color: #0C1722; }
+  a.dedication-tab.opened {
+    display: block; }
+
+@media (max-width: 767px) {
+  a.dedication-tab {
+    right: 20px; } }
+
+
 .kilo-logo {
     text-align: center;
     margin: 30px 0px;
