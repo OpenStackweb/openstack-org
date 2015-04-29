@@ -35,7 +35,7 @@
     transition: all 0.5s; }
   .dedication-wrapper:after {
     content: "";
-    background-image: url("../images/software/kilo/chris-yeoh-bkgd.jpg");
+    background-image: url("/assets/software/kilo/chris-yeoh-bkgd.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right top;
@@ -70,7 +70,7 @@ a.dedication-tab {
   right: 0;
   top: 30px;
   display: none;
-  background-image: url("../images/software/kilo/dedication-tab.jpg");
+  background-image: url("/assets/software/kilo/dedication-tab.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   padding: 8px 10px;
