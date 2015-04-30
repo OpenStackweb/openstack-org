@@ -246,6 +246,8 @@ class Page_Controller extends ContentController {
         Requirements::css("themes/openstack/css/dropdown.css");
 
 
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700','stylesheet');
+
         Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
         Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
         Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
