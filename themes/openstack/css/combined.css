@@ -2889,7 +2889,9 @@ ul.documents li a, ul.documents li a:visited {
   padding-top: 30px; }
 
 .newSubNav li {
-  list-style: none; }
+  list-style: none; 
+  position: relative;
+}
 
 .newSubNav a {
   color: #8A959E;
@@ -2908,9 +2910,12 @@ ul.documents li a, ul.documents li a:visited {
   color: black; }
 
 .newSubNav .fa-chevron-right {
-  float: right;
-  margin-top: 2px;
-  color: #C6D8E4; }
+  color: #C6D8E4; 
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -6px;
+}
 
 li#start a {
   color: #75C320; }
