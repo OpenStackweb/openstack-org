@@ -68,8 +68,6 @@ jQuery(document).ready(function($){
         $('.login_overlay').hide();
     } else {
         $('.login_overlay').show();
-        $(".review_form_div").hide();
-        $(".review_list_div").show();
     }
 
 
