@@ -367,6 +367,7 @@ class Company extends DataObject implements PermissionProvider {
             'Startup'   => 'Startup',
             'InKind'    => 'In Kind',
             'Spotlight' => 'Spotlight',
+            'Media'     => 'Media',
             ''          => '--NONE--'),$type);
     }
 

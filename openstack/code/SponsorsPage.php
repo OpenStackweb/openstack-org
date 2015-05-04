@@ -20,7 +20,7 @@ class SponsorsPage extends Page {
     //sponsor type
     static $many_many_extraFields = array(
         'Companies' => array(
-            'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight', 'Startup')",
+            'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight,Media', 'Startup')",
             'SubmitPageUrl'=>'Text',
             'LogoSize' => "Enum('None, Small, Medium, Large, Big', 'None')",
         ),
