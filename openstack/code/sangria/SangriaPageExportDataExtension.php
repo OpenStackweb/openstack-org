@@ -558,7 +558,6 @@ SQL;
             'Toolkits' => AppDevSurveyOptions::$toolkits_options,
             'ProgrammingLanguages' => AppDevSurveyOptions::$languages_options,
             'APIFormats' => AppDevSurveyOptions::$api_format_options,
-            'DeploymentOperatingSystems' => AppDevSurveyOptions::$opsys_options,
             'GuestOperatingSystems' => AppDevSurveyOptions::$opsys_options,
             //deployment
             'ProjectsUsed' => DeploymentOptions::$projects_used_options,
@@ -579,6 +578,7 @@ SQL;
             'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
             'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
             'OpenStackActivity' => DeploymentSurveyOptions::$activities_options,
+            'DeploymentOperatingSystems' => DeploymentOptions::$operating_systems_options,
         );
 
         $flat_fields_V1 = array(
