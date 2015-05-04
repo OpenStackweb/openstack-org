@@ -59,6 +59,8 @@ class DeploymentSurveyMoreDeploymentDetailsForm extends Form
 
         $deployment = Controller::curr()->LoadDeployment($CurrentDeploymentID);
 
+        if(is_null($deployment))  Controller::curr()->redirect(Controller::curr()->Link() . 'Deployments');
+
         $projects_used = $deployment->ProjectsUsed;
 
         if(strpos($projects_used, 'Openstack Compute (Nova)') !== false ){
