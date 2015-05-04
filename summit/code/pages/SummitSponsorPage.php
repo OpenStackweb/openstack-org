@@ -22,7 +22,7 @@ class SummitSponsorPage extends SummitPage {
     //sponsor type
     private static $many_many_extraFields = array(
         'Companies' => array(
-            'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight', 'Startup')",
+            'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight, Media', 'Startup')",
             'SubmitPageUrl'=>'Text',
         ),
     );
@@ -171,6 +171,10 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
 
     public function SpotlightSponsors(){
         return $this->Sponsors("Spotlight");
+    }
+
+    public function MediaSponsors(){
+        return $this->Sponsors("Media");
     }
     
 	

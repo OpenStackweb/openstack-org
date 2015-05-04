@@ -163,6 +163,26 @@
                 </div>
             </div>
 		<% end_if %>
+        <% if MediaSponsors %>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">
+                        Media Sponsors
+                    </h5>
+                </div>
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="row">
+                        <% loop MediaSponsors %>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
+                                    $SubmitLogo
+                                </a>
+                            </div>
+                        <% end_loop %>
+                    </div>
+                </div>
+            </div>
+        <% end_if %>
 	</div>
 </div>
 <div class="sponsor-bkgd">
