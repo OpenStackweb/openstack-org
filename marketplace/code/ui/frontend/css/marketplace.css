@@ -361,8 +361,88 @@ table.marketplace-services-table td:last-child i.none {
 .rating-gly-star .rating-stars:before {
     padding-left: 2px; }
 
+input#name-term, input#topic-term {
+  height: 40px;
+  width: 250px;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid #e8e8e8;
+  color: #30739C;
+  border-radius: 4px;
+  margin-right: 5px; }
+
+.training-program-box {
+  border: 1px solid #E8E8E8;
+  margin-bottom: 30px;
+  padding: 30px 20px;
+  border-radius: 4px;
+  min-height: 200px;
+  border-left: 3px solid #DA422F; }
+ul.training-updates {
+  margin: 0;
+  padding: 0;
+}
+ul.training-updates li {
+  list-style: none;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf2f7;
+  margin-bottom: 10px;
+}
+ul.training-updates li:last-child {
+  border-bottom: none;
+}
+ul.training-updates li p.date-block {
+  font-style: italic;
+  margin-bottom: 2px;
+}
+.course-area table {
+  text-align: left;
+  width: 100%;
+  font-size: 90%;
+}
+table.course-schedule {
+  margin: 20px 0;
+  background: #edf2f7;
+}
+table.course-schedule tr th, table.course-schedule tr td{
+  padding: 5px 10px;
+}
+table.course-schedule tr:last-child td {
+  padding-bottom: 20px;
+}
+.training-course-table table {
+  width: 100%;
+}
+.training-course-table a.outbound-link {
+  color: white;
+  padding: 2px 3px;
+  border-radius: 4px;
+  display: block;
+  text-align: center;
+  margin-bottom: 3px;
+}
+.training-course-table table .location {
+  font-style: normal;
+  font-weight: bold;
+}
+.course-description span.beginner, .course-description span.intermediate, .course-description span.advanced {
+  text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+}
+.course-description span.beginner {
+  color: #89B54C;
+}
+.course-description span.intermediate {
+  color: #F07E46;
+}
+.course-description span.advanced {
+  color: #B92B27;
+}
 .rating-lg .rating-gly-star, .rating-lg .rating-gly-star .rating-stars:before {
     padding-left: 4px; }
+
 
 .rating-xl .rating-gly-star, .rating-xl .rating-gly-star .rating-stars:before {
     padding-left: 2px; }
@@ -472,4 +552,61 @@ table.marketplace-services-table td:last-child i.none {
 .star-rating-rtl .caption {
     padding-right: 5px; }
 
+.marketplace-training-sidebar {
+    border-left: 1px solid #edf2f7;
+    padding: 5px;
+}
+
+.chosen-container-single .chosen-single {
+    box-shadow: none !important;
+    color: #30739c !important;
+    height: 40px !important;
+    padding: 8px 10px !important;
+    background: white !important;
+    border: 1px solid #e1e1e1 !important;
+    border-radius: 4px !important;
+}
+.chosen-container-single .chosen-single:before {
+  content: '';
+  right: 6px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  pointer-events: none;
+  display: block; 
+}
+.chosen-container-single .chosen-single:after {
+    content: '>';
+    color: #30739C;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 20px;
+    top: 5px;
+    padding: 0 0 6px;
+    border-bottom: 1px solid #e8e8e8;
+    position: absolute;
+    pointer-events: none;
+    font-size: 14px;
+    font-weight: 400; 
+}
+.chosen-container-single .chosen-drop {
+  margin-top: 1px !important;
+  border-radius: 4px !important;
+  border: 1px solid #e8e8e8 !important;
+}
+.chosen-container .chosen-results li.highlighted {
+  background-color: #2A4E68 !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2A4E68', endColorstr='#2A4E68', GradientType=0 ) !important;  
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #2A4E68), color-stop(90%, #2A4E68)) !important;
+  background-image: -webkit-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: -moz-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: -o-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: -ms-linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  background-image: linear-gradient(top, #2A4E68 20%, #2A4E68 90%) !important;
+  color: #fff;
+}
+
 /*End New review widget*/
+

@@ -17,7 +17,7 @@
         var dc_locations = $DataCenterLocationsJson;
     </script>
 
-    <div style="width:100%; height: 400px; position: relative;" id="map" tabindex="0">
+    <div style="width:100%; height: 400px; position: relative; margin-bottom: 20px;" id="map" tabindex="0">
     </div>
     <div id="public-clouds-list" class="col-lg-8 col-md-8 col-sm-8">
        <% if Clouds %>

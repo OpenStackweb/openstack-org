@@ -8,7 +8,7 @@
                     $CourseName
                 </h3>
             </div>
-            <div class="span-4 last">
+            <div>
                 <span class="{$LwrLevel}">$Level Level</span>
             </div>
         </div>
@@ -23,8 +23,8 @@
         </ul>
 
 
-        <div class="span-16 last">
-            <table classs="table table-striped">
+        <div class="training-course-table">
+            <table classs="table">
                 <tbody>
                 <tr>
                     <th class="location">Location</th>
