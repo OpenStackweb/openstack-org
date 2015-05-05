@@ -173,7 +173,7 @@
                 <div class="col-lg-8 col-lg-push-2">
                     <div class="row">
                         <% loop MediaSponsors %>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
+                            <div class="col-lg-3 col-md-. col-sm-3">
                                 <a rel="nofollow" href="{$SubmitLandPageUrl}">
                                     $SubmitLogo
                                 </a>
