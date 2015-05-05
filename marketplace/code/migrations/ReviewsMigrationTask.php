@@ -25,12 +25,12 @@ class ReviewsMigrationTask extends MigrationTask
         //check if migration already had ran ...
         $migration = Migration::get()->filter('Name', $this->title)->First();
         $reviews_migrated = 0;
-        if (true) {
+        if (!$migration) {
             //if not create migration and run it...
-            /*$migration = new Migration();
+            $migration = new Migration();
             $migration->Name = $this->title;
             $migration->Description = $this->description;
-            $migration->Write();*/
+            $migration->Write();
             //run migration proc
 
             //get migration data from cvs file,
