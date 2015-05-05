@@ -72,8 +72,8 @@ class ReviewsMigrationTask extends MigrationTask
             echo 'Procesing .... </BR>';
 
             foreach($split_reviews as $review) {
-                $member = DB::query("SELECT * FROM member WHERE Email = '".$review['Email']."' LIMIT 1;");
-                $product = DB::query("SELECT * FROM companyservice WHERE Name = '".$review['ProductName']."' LIMIT 1;");
+                $member = DB::query("SELECT * FROM Member WHERE Email = '".$review['Email']."' LIMIT 1;");
+                $product = DB::query("SELECT * FROM CompanyService WHERE Name = '".$review['ProductName']."' LIMIT 1;");
 
                 //echo "'".$review['Email']."',";
                 $reviews_migrated = 0;
@@ -104,7 +104,7 @@ class ReviewsMigrationTask extends MigrationTask
         $title = Convert::raw2sql($review['Title']);
         $comment = Convert::raw2sql($review['Comment']);
         $created = date('Y-m-d H:i:s',strtotime($review['Created']));
-        $query = "INSERT INTO  `marketplacereview` (`ClassName`,`Created`,`LastEdited`,`Title`,`Comment`,`Rating`,`Approved`,`MemberID`,`CompanyServiceID`)";
+        $query = "INSERT INTO  `MarketPlaceReview` (`ClassName`,`Created`,`LastEdited`,`Title`,`Comment`,`Rating`,`Approved`,`MemberID`,`CompanyServiceID`)";
         $query .=" VALUES('MarketPlaceReview','".$created."',now(),'".$title."','".$comment."',".$review['Rating'].",1,".$member_id.",".$product_id.")";
         DB::query($query);
     }
