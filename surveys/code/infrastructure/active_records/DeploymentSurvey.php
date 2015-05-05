@@ -211,11 +211,24 @@ class DeploymentSurvey extends DataObject
 	public function copyFrom(DeploymentSurvey $oldSurvey){
 		// copy properties
 
-		foreach(DeploymentSurvey::$db as $field => $type){
-			$value = $oldSurvey->getField($field);
-			$this->setField($field, $value);
-		}
+        foreach(DeploymentSurvey::$db as $field => $type){
 
+            if(in_array($field, DeploymentSurveyMigrationOptions::$blank_fields)) continue;
+            $new_value = '';
+            if(array_key_exists($field, DeploymentSurveyMigrationOptions::$migration_fields)){
+                $new_value = $oldSurvey->getField($field);
+                if(empty($new_value)) continue;
+                $table     = DeploymentSurveyMigrationOptions::$migration_fields[$field];
+                foreach($table as $old => $new){
+                    $new_value = str_replace( $old, $new, $new_value);
+                }
+            }
+            else {
+                $new_value = $oldSurvey->getField($field);
+            }
+            $this->setField($field, $new_value);
+
+        }
 
 		$this->setField('OrgID',$oldSurvey->getField('OrgID'));
 		$this->setField('MemberID',$oldSurvey->getField('MemberID'));

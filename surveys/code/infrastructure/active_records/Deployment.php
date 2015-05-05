@@ -399,8 +399,22 @@ class Deployment extends DataObject
     public function copyFrom(Deployment $oldDeployment){
 
         foreach(Deployment::$db as $field => $type){
-            $value = $oldDeployment->getField($field);
-            $this->setField($field, $value);
+            if(in_array($field, DeploymentMigrationOptions::$blank_fields)) continue;
+            $new_value = '';
+            if(array_key_exists($field, DeploymentMigrationOptions::$migration_fields)){
+                $new_value = $oldDeployment->getField($field);
+                if(empty($new_value)) continue;
+
+                $table     = DeploymentMigrationOptions::$migration_fields[$field];
+                foreach($table as $old => $new){
+                    $new_value = str_replace( $old, $new, $new_value);
+                }
+            }
+            else {
+                $new_value = $oldDeployment->getField($field);
+            }
+            $this->setField($field, $new_value);
+
         }
 
         $this->setField('OrgID',$oldDeployment->getField('OrgID'));

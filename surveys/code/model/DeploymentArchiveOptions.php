@@ -92,7 +92,6 @@ final class DeploymentArchiveOptions {
         'Management and Monitoring Systems' => 'Management and Monitoring Systems',
         'Games/Online Games' => 'Games/Online Games',
         'Up to the user' => 'It’s up to the user',
-
     );
 
 
@@ -189,13 +188,6 @@ final class DeploymentArchiveOptions {
         'Object storage' => 'Object storage',
         'Live migration' => 'Live migration',
         'Snapshotting to new images' => 'Snapshotting to new images',
-        'EC2 compatibility API' => 'EC2 compatibility API',
-        'S3 compatibility API' => 'S3 compatibility API',
-        'OCCI compatibility API' => 'OCCI compatibility API',
-        'GCE compatibility API' => 'GCE compatibility API'
-    );
-
-    public static $deployment_features_options_new = array(
         'EC2 compatibility API' => 'EC2 compatibility API',
         'S3 compatibility API' => 'S3 compatibility API',
         'OCCI compatibility API' => 'OCCI compatibility API',

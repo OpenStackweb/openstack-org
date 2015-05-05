@@ -134,6 +134,26 @@ class AppDevSurvey extends DataObject
             $value = $oldAppDev->getField($field);
             $this->setField($field, $value);
         }
+
+        foreach(AppDevSurvey::$db as $field => $type){
+            if(in_array($field, AppDevSurveyMigrationOptions::$blank_fields)) continue;
+            $new_value = '';
+            if(array_key_exists($field, AppDevSurveyMigrationOptions::$migration_fields)){
+                $new_value = $oldAppDev->getField($field);
+                if(empty($new_value)) continue;
+                $table     = AppDevSurveyMigrationOptions::$migration_fields[$field];
+                $new_value = $oldAppDev->getField($field);
+                foreach($table as $old => $new){
+                    $new_value = str_replace( $old, $new, $new_value);
+                }
+            }
+            else {
+                $$new_value = $oldAppDev->getField($field);
+            }
+            $this->setField($field, $new_value);
+
+        }
+
         $this->setField('DeploymentSurveyID', $oldAppDev->getField('DeploymentSurveyID'));
         $this->setField('MemberID', $oldAppDev->getField('MemberID'));
     }
