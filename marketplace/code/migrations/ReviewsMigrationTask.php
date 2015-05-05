@@ -24,12 +24,13 @@ class ReviewsMigrationTask extends MigrationTask
         echo "Starting Migration Proc ...<BR>";
         //check if migration already had ran ...
         $migration = Migration::get()->filter('Name', $this->title)->First();
-        if (!$migration) {
+        $reviews_migrated = 0;
+        if (true) {
             //if not create migration and run it...
-            $migration = new Migration();
+            /*$migration = new Migration();
             $migration->Name = $this->title;
             $migration->Description = $this->description;
-            $migration->Write();
+            $migration->Write();*/
             //run migration proc
 
             //get migration data from cvs file,
@@ -76,7 +77,7 @@ class ReviewsMigrationTask extends MigrationTask
                 $product = DB::query("SELECT * FROM CompanyService WHERE Name = '".$review['ProductName']."' LIMIT 1;");
 
                 //echo "'".$review['Email']."',";
-                $reviews_migrated = 0;
+
                 if ($member->numRecords()) {
                     if ($product->numRecords()) {
                         $member_rec = $member->first();
