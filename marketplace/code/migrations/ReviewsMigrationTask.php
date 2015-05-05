@@ -79,7 +79,9 @@ class ReviewsMigrationTask extends MigrationTask
                 $reviews_migrated = 0;
                 if ($member->numRecords()) {
                     if ($product->numRecords()) {
-                        $this->writeReview($review,$member->first()['ID'],$product->first()['ID']);
+                        $member_rec = $member->first();
+                        $product_rec = $product->first();
+                        $this->writeReview($review,$member_rec['ID'],$product_rec['ID']);
                         $reviews_migrated++;
                     } else {
                         echo 'Product not found for : '.$review['ProductName'].'<br>';
