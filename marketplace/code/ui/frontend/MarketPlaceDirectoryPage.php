@@ -149,7 +149,6 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
     }
 
     public function ProductReviews(){
-
         list($reviews,$size) = $this->review_repository->getAllApprovedByProduct($this->company_service_ID);
         return new ArrayList($reviews);
     }

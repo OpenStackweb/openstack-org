@@ -175,6 +175,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 			$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
 			$appliance  = $this->appliance_repository->getBy($query);
 			if(!$appliance) throw new NotFoundEntityException('','');
+            $this->company_service_ID = $appliance->getIdentifier();
 			if($appliance->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
 			$render = new ApplianceSapphireRender($appliance);
 			return $render->draw();
