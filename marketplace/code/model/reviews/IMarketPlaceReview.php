@@ -14,6 +14,6 @@
 /**
  * Interface IMarketPlaceReview
  */
-interface IMarketPlaceReview {
+interface IMarketPlaceReview extends IEntity {
 
 } 
