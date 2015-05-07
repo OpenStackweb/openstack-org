@@ -166,7 +166,7 @@ class HomePage_Controller extends Page_Controller
             }
         }
         catch(Exception $ex){
-            SS_Log::log($ex, SS_Log::ERR);
+            SS_Log::log($ex, SS_Log::WARN);
         }
         return $output;
     }
