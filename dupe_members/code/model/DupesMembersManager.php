@@ -315,7 +315,8 @@ final class DupesMembersManager {
 
             $current_account->updateProjects($merge_data['projects'], $merge_data['other_project']);
 
-            $current_account->updateSocialInfo($merge_data['irc_handle'],
+            $current_account->updateSocialInfo(
+                $merge_data['irc_handle'],
                 $merge_data['twitter_name'],
                 $merge_data['linkedin_profile']);
 
