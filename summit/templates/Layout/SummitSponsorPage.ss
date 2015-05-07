@@ -185,9 +185,112 @@
         <% end_if %>
 	</div>
 </div>
+            <div class="light" id="packages">
+                <div class="container sponsor-wrapper">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-push-2">
+                            <h1>Packages</h1>
+                            <h5 class="section-title">
+                                Sponsorships Packages Available <span>(prices in USD)</span>
+                            </h5>
+                            <div class="row">
+
+                                <% loop $SortedPackages %>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <div class="sponsor-spots <% if $SoldOut %>sold-out<% end_if %>">
+                                            <h3>$Title <span>$SubTitle</span></h3>
+                                            <div class="sponsor-cost">
+                                                $Cost.Nice
+                                            </div>
+                                            <div class="sponsor-count">
+                                                <% if $SoldOut %>
+                                                    Sold Out
+                                                <% else %>
+                                                    <% if $ShowQuantity %>
+                                                        <td>Available: $CurrentlyAvailable of $MaxAvailable</td>
+                                                    <% else %>
+                                                        <td>Still Available</td>
+                                                    <% end_if %>
+                                                <% end_if %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end_loop %>
+
+                            </div>
+                            <div class="sponsor-note">
+                                * In order to qualify for a Startup sponsorship a company must be in business for less than 3 years and have less than $5 million USD in revenue.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-8 col-lg-push-2">
+                                    <h5 class="section-title">Sponsorship Add-Ons Available <span>(prices in USD)</span></h5>
+                                </div>
+                            </div>
+                            <div class="table-responsive sponsor-table">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Add-On Package</th>
+                                        <th>Cost</th>
+                                        <th>Available</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <% loop $SortedAddOns %>
+                                        <tr <% if $SoldOut %>class="sold-out"<% end_if %>>
+                                            <td>$Title</td>
+                                            <td>$Cost</td>
+                                            <% if $SoldOut %>
+                                                <td>Sold Out</td>
+                                            <% else %>
+                                                <% if $ShowQuantity %>
+                                                    <td>$CurrentlyAvailable of $MaxAvailable</td>
+                                                <% else %>
+                                                    <td>Available</td>
+                                                <% end_if %>
+                                            <% end_if %>
+                                        </tr>
+                                        <% end_loop %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 <div class="sponsor-bkgd">
 	<div class="fixed-image exhibit"></div>
 </div>
+            <div class="light sponsor-instructions" id="how-to-sponsor">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1>
+                                Steps to Becoming a Sponsor
+                                <span>Please Read Completely</span>
+                            </h1>
+
+                            $SponsorSteps
+
+                        </div>
+                        <% if $AttachedFile %>
+                            <div class="col-lg-12 prospectus-wrapper">
+                                <a class="btn register-btn-lrg sponsor" href="{$Link}download">Download Sponsor Prospectus</a>
+                                <a class="btn register-btn-lrg contract" href="{$Link}downloadContract">Download Sponsor Contract</a>
+                                <a href="mailto:events@openstack.org" class="contact-link">Contact us with any questions</a>
+                            </div>
+                        <% end_if %>
+
+                    </div>
+                </div>
+            </div>
+
 <div class="white" id="venue-map"> 
 	<div class="container">
 		<div class="col-lg-12">
