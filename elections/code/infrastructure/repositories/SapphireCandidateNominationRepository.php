@@ -26,14 +26,14 @@ final class SapphireCandidateNominationRepository
     public function getNominationsByVotingMember($member_id,  $offset = 0, $limit = 10) {
         $query = new QueryObject(new CandidateNomination);
         $query->addAlias(QueryAlias::create('Member'));
-        $query->addAddCondition(QueryCriteria::equal('Member.ID', $member_id));
+        $query->addAndCondition(QueryCriteria::equal('Member.ID', $member_id));
         return $this->getAll($query,$offset,$limit);
     }
 
     public function getNominationsByNominee($member_id,  $offset = 0, $limit = 10) {
         $query = new QueryObject(new CandidateNomination);
         $query->addAlias(QueryAlias::create('Candidate'));
-        $query->addAddCondition(QueryCriteria::equal('Member.ID', $member_id));
+        $query->addAndCondition(QueryCriteria::equal('Member.ID', $member_id));
         return $this->getAll($query,$offset,$limit);
     }
 }

@@ -83,7 +83,7 @@ final class DupesMembers_Controller extends AbstractController {
         try{
             $current_member = Member::currentUser();
             if(is_null($current_member))
-                return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
+                return Controller::curr()->redirect("/Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
             $request = $this->merge_request_repository->findByConfirmationToken($token);
 
             if(is_null($request) ||  $request->isVoid())

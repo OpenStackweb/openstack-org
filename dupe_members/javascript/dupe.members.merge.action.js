@@ -95,7 +95,7 @@ jQuery(document).ready(function ($) {
                 contentType: "application/json; charset=utf-8",
                 success: function (data, textStatus, jqXHR) {
                     alert('You have been merged your duplicate account successfully. Thank you.');
-                    window.location = '/';
+                    window.location = '/Security/logout';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError(jqXHR, textStatus, errorThrown);

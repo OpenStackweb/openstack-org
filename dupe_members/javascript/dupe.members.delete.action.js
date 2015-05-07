@@ -70,7 +70,7 @@ jQuery(document).ready(function($) {
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
                     alert('You have been deleted your duplicate account successfully. Thank you.');
-                    window.location = '/';
+                    window.location = '/Security/logout';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);

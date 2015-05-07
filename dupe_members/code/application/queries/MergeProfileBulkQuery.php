@@ -27,7 +27,8 @@ final class MergeProfileBulkQuery
 
         return array(
             "UPDATE AffiliationUpdate SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;",
-            "UPDATE Affiliation SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;",
+            "UPDATE Affiliation SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} AND OrganizationID NOT IN ( SELECT * FROM ( SELECT A2.OrganizationID FROM Affiliation A2 where A2.MemberID = {$primary_id} ) T2 ) ;",
+            "DELETE FROM Affiliation WHERE MemberID = {$dupe_id};",
             "CREATE TEMPORARY TABLE IF NOT EXISTS GROUPS_INTERSECTION_{$dupe_id}_{$primary_id} AS SELECT ID from Group_Members where MemberID = {$dupe_id} AND GroupID NOT IN ( SELECT GroupID from Group_Members where MemberID = {$primary_id} ) ;",
             "UPDATE Group_Members SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} AND ID IN ( SELECT ID FROM GROUPS_INTERSECTION_{$dupe_id}_{$primary_id} ) ;",
             "DELETE FROM Group_Members WHERE MemberID =  {$dupe_id} ",

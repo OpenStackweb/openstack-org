@@ -117,8 +117,8 @@ final class DupesMembersManager {
             if(!is_null($delete_request)) array_push($unset,$i);;
             // check not my account action
             $query = new QueryObject();
-            $query->addAddCondition(QueryCriteria::equal('PrimaryAccountID', $member->getIdentifier()));
-            $query->addAddCondition(QueryCriteria::equal('ForeignAccountID', $res[$i]->getIdentifier()));
+            $query->addAndCondition(QueryCriteria::equal('PrimaryAccountID', $member->getIdentifier()));
+            $query->addAndCondition(QueryCriteria::equal('ForeignAccountID', $res[$i]->getIdentifier()));
             $action = $this->not_my_account_repository->getBy($query);
             if(!is_null($action)) array_push($unset,$i);;
         }
@@ -315,7 +315,8 @@ final class DupesMembersManager {
 
             $current_account->updateProjects($merge_data['projects'], $merge_data['other_project']);
 
-            $current_account->updateSocialInfo($merge_data['irc_handle'],
+            $current_account->updateSocialInfo(
+                $merge_data['irc_handle'],
                 $merge_data['twitter_name'],
                 $merge_data['linkedin_profile']);
 
@@ -401,14 +402,14 @@ final class DupesMembersManager {
         return $this->tx_manager->transaction(function() use( $merge_request_repository, $delete_request_repository, $batch_size, $older_than_x_hours) {
 
             $query1 = new QueryObject();
-            $query1->addAddCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
+            $query1->addAndCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
             list($list1,$size)  = $merge_request_repository->getAll($query1, 0, $batch_size);
             foreach($list1 as $res){
                 $merge_request_repository->delete($res);
             }
 
             $query2 = new QueryObject();
-            $query2->addAddCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
+            $query2->addAndCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
             list($list2,$size) = $delete_request_repository->getAll($query2, 0, $batch_size);
             foreach($list2 as $res){
                 $delete_request_repository->delete($res);

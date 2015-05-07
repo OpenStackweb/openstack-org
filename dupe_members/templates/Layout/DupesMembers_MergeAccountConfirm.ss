@@ -21,10 +21,9 @@
 </style>
 
 <div class="container">
-<a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center"
-   class="roundedButton merge" href="#" id="merge">Merge Account</a>
+<a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-top:1em;" class="roundedButton merge" href="#" id="merge">Merge Account</a>
 <table id="merge_table" class="table table-condensed" data-confirmation-token="$ConfirmationToken">
-<caption>Merge Account</caption>
+<caption style="padding: 1em;">Merge Account</caption>
 <thead>
 <tr>
     <th>#</th>
@@ -1239,7 +1238,7 @@
             <% if isSpeaker %>
                 <div class="checkbox">
                     <label>Yes</label>
-                </div>s
+                </div>
             <% else %>
                 <div class="checkbox">
                     <label>No</label>
@@ -1466,7 +1465,7 @@
         <% else_if  CurrentAccount.hasDeploymentSurveys %>
             <div class="checkbox">
                 <label>Yes</label>
-            </div>s
+            </div>
         <% else_if  DupeAccount.hasDeploymentSurveys %>
             <div class="checkbox">
                 <label>Yes</label>
