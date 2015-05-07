@@ -20,6 +20,8 @@
                     <li><a href="https://www.eventbrite.com/e/openstack-summit-may-2015-vancouver-tickets-14992221137"><i class="fa fa-shopping-cart"></i>Register for the Summit</a>
                     </li>
                     <% end_if %>
+                    <li><a href="{$Link}download-the-summit-app/"><i class="fa fa-mobile-phone"></i>Download The App</a>
+                    </li>
                     <li><a href="{$Link}venue-maps/"><i class="fa fa-building"></i>Venue Maps</a>
                     </li>
                     <li><a href="{$Link}lunch-menus/"><i class="fa fa-spoon"></i>Lunch Menus</a>
