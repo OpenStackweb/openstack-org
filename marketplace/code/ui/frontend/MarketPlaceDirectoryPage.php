@@ -140,9 +140,43 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
     public function MarketPlaceReviews(){
         $output = '';
         $reviews = $this->ProductReviews();
+        $old_reviews = array();
+
+        $ds = new CvsDataSourceReader("\t");
+        $cur_path = Director::baseFolder();
+        $ds->Open($cur_path . "/marketplace/code/migrations/data/reviews.csv");
+        $headers = $ds->getFieldsInfo();
+
+        while (($row = $ds->getNextRow()) !== FALSE) {
+            $review = explode(',',$row[0]);
+            $created = date('M jS Y',strtotime($review[1]));
+            $title = $review[5];
+            $comment = $review[3];
+            $rating = $review[0];
+            $user_name = $review[6];
+            $product_id = $review[2];
+            if ($this->company_service_ID == $product_id) {
+                $old_reviews[] = new ArrayData(array(
+                    "IsImported" => 1,
+                    "Created" => $created,
+                    "Title" => $title,
+                    "Comment" => $comment,
+                    "Rating" => $rating*20,
+                    "UserName" => $user_name
+                ));
+            }
+        }
+
+        $reviews = array_merge($old_reviews,$reviews->toArray());
+        usort($reviews,array($this, 'sort_reviews'));
+
 
         foreach ($reviews as $review) {
-            $output .= $review->renderWith('MarketPlaceReviews_review');
+            if ($review->IsImported) {
+                $output .= $review->renderWith('MarketPlaceReviews_review_import');
+            } else {
+                $output .= $review->renderWith('MarketPlaceReviews_review');
+            }
         }
 
         return $output;
@@ -151,5 +185,11 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
     public function ProductReviews(){
         list($reviews,$size) = $this->review_repository->getAllApprovedByProduct($this->company_service_ID);
         return new ArrayList($reviews);
+    }
+
+    private function sort_reviews($a,$b)
+    {
+        if ($a->Created==$b->Created) return 0;
+        return ($a->Created<$b->Created)?-1:1;
     }
 }
