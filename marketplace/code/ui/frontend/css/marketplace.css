@@ -277,6 +277,11 @@ table.marketplace-services-table td:last-child i.none {
     border-radius: 4px;
     padding: 20px 20px 40px; }
 
+.review_list_div {
+    height: 360px;
+    overflow-y: auto;
+}
+
 .review_top_buttons input[type="button"] {
     background: white;
     -webkit-appearance: none;
