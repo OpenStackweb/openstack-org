@@ -584,6 +584,7 @@
                    .addClass('add-location-control')
                    .addClass('location-comtrol')
                    .css('width','100%');
+               select.children().removeAttr("selected");
 
                var option_val = arg.context.country;
                select.find("option[value="+option_val+"]").attr("selected","selected");

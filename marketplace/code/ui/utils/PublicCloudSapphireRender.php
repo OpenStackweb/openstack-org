@@ -24,6 +24,7 @@ final class PublicCloudSapphireRender {
 		Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
 
 		Requirements::javascript("marketplace/code/ui/frontend/js/openstack.implementation.capabilities.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/marketplace.common.js");
 		Requirements::javascript("marketplace/code/ui/frontend/js/cloud.page.js");
 		return Controller::curr()->Customise($this->cloud)->renderWith(array('CloudsDirectoryPage_cloud', 'PublicCloudsDirectoryPage', 'MarketPlacePage'));
 	}
