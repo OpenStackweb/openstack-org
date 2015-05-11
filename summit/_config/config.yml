@@ -1,0 +1,35 @@
+---
+Name: summitapi
+---
+Injector:
+  SummitAddOnRepository:
+    class: SapphireSummitAddOnRepository
+  SummitPackageRepository:
+    class: SapphireSummitPackageRepository
+  PackagePurchaseOrderRepository:
+    class: SapphirePackagePurchaseOrderRepository
+  SummitPackagePurchaseOrderFactory:
+    class: SapphireSummitPackagePurchaseOrderFactory
+  SummitAddOnApi:
+    constructor:
+      0: '%$SummitAddOnRepository'
+  SummitPackageApi:
+    constructor:
+      0: '%$SummitPackageRepository'
+  SummitPackagePurchaseOrderManager:
+    constructor:
+      0: '%$PackagePurchaseOrderRepository'
+      1: '%$SummitPackagePurchaseOrderFactory'
+      2: '%$TransactionManager'
+
+SummitSponsorPage_Controller:
+  dependencies:
+    PackagePurchaseOrderManager: '%$SummitPackagePurchaseOrderManager'
+
+SangriaPageSummitSponsorshipPurchaseOrderExtension:
+  dependencies:
+    PackagesRepository: "%$PackagePurchaseOrderRepository"
+
+SangriaPage_Controller:
+  extensions:
+    - SangriaPageSummitSponsorshipPurchaseOrderExtension

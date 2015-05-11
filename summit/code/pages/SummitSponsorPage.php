@@ -1,17 +1,35 @@
 <?php
+/**
+ * Copyright 2015 OpenStack Foundation
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
+/**
+ * Class SummitSponsorPage
+ */
 class SummitSponsorPage extends SummitPage {
     
     private static $db = array (
-        'SponsorAlert' => 'HTMLText',
-        'SponsorSteps' => 'HTMLText',
-		'SponsorContract' => 'Text',
-		'SponsorProspectus' => 'Text'        
+        'SponsorAlert'                => 'HTMLText',
+        'SponsorSteps'                => 'HTMLText',
+		'SponsorContract'             => 'Text',
+		'SponsorProspectus'           => 'Text',
+        'SponsorProspectus'           => 'Text',
+        'CallForSponsorShipStartDate' => 'SS_Datetime',
+        'CallForSponsorShipEndDate'   => 'SS_Datetime',
     );    
     
 	private static $has_many = array (
 		'SummitPackages' => 'SummitPackage',
-        'SummitAddOns'   => 'SummitAddOn'
+        'SummitAddOns'   => 'SummitAddOn',
 	);
 
 
@@ -41,20 +59,26 @@ class SummitSponsorPage extends SummitPage {
             // Sponsor Steps Editor
             $sponsorStepsField = new HTMLEditorField('SponsorSteps','Steps To Become A Sponsor');
             $fields->addFieldToTab('Root.Main', $sponsorStepsField, 'Content');
-            
+            //call for sponsorship dates
+
+            $start_date =  new DatetimeField('CallForSponsorShipStartDate','Call For SponsorShip - Start Date');
+            $end_date   =  new DatetimeField('CallForSponsorShipEndDate','Call For SponsorShip - End Date');
+            $start_date->getDateField()->setConfig('showcalendar', true);
+            $start_date->setConfig('dateformat', 'dd/MM/yyyy');
+            $end_date->getDateField()->setConfig('showcalendar', true);
+            $end_date->setConfig('dateformat', 'dd/MM/yyyy');
+            $fields->addFieldToTab('Root.Main',$start_date);
+            $fields->addFieldToTab('Root.Main', $end_date);
             
             // Summit Packages
-            $questionFields = singleton('SummitPackage')->getCMSFields();
             $config = GridFieldConfig_RelationEditor::create();
-            $config->getComponentByType('GridFieldDetailForm')->setFields($questionFields);
             $config->addComponent(new GridFieldSortableRows('Order'));
             $gridField = new GridField('SummitPackages', 'Sponsor Packages', $this->SummitPackages(), $config);
             $fields->addFieldToTab('Root.Packages',$gridField);
             
             // Summit Add Ons
-            $addOnsFields = singleton('SummitAddOn')->getCMSFields();
+
             $config = GridFieldConfig_RelationEditor::create();
-            $config->getComponentByType('GridFieldDetailForm')->setFields($addOnsFields);
             $config->addComponent(new GridFieldSortableRows('Order'));
             
             // Remove pagination so that you can sort all add-ons collectively
@@ -118,18 +142,49 @@ class SummitSponsorPage extends SummitPage {
 
 }
 
-
+/**
+ * Class SummitSponsorPage_Controller
+ */
 class SummitSponsorPage_Controller extends SummitPage_Controller {
-    
+    /**
+     * @var ISummitPackagePurchaseOrderManager
+     */
+    private $package_purchase_order_manager;
+
+    /**
+     * @return ISummitPackagePurchaseOrderManager
+     */
+    public function getPackagePurchaseOrderManager(){
+        return $this->package_purchase_order_manager;
+    }
+
+    public function setPackagePurchaseOrderManager(ISummitPackagePurchaseOrderManager $package_purchase_order_manager){
+        $this->package_purchase_order_manager = $package_purchase_order_manager;
+    }
+
+    /**
+     * @var SecurityToken
+     */
+    private $packagePurchaseOrderSecurityToken;
+
 	private static $allowed_actions = array (
 		'prospectus',
-        'contract'
+        'contract',
+        'emitPackagePurchaseOrder',
+        'searchOrg',
 	);    
 
     public function init() {
 		parent::init();
-		Requirements::javascript("summit/javascript/Chart.min.js");		         
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
+        Requirements::javascript('themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js');
+        Requirements::javascript('themes/openstack/javascript/pure.min.js');
+		Requirements::javascript("summit/javascript/Chart.min.js");
         Requirements::javascript("summit/javascript/sponsor.js");
+        Requirements::javascript('summit/javascript/sponsor.sponsorships.js');
+
+        $this->packagePurchaseOrderSecurityToken = new SecurityToken('packagePurchaseOrderSecurityToken');
 	}
     
     public function prospectus() {
@@ -176,6 +231,80 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
     public function MediaSponsors(){
         return $this->Sponsors("Media");
     }
-    
+
+    public function ShowSponsorShipPackages(){
+        $now        = new \DateTime('now', new DateTimeZone('UTC'));
+        $start_date = new \DateTime($this->CallForSponsorShipStartDate, new DateTimeZone('UTC'));
+        $end_date   = new \DateTime($this->CallForSponsorShipEndDate, new DateTimeZone('UTC'));
+        return $now >= $start_date && $now <= $end_date;
+    }
+
+    public function getPackagePurchaseOrderSecurityID(){
+        return new HiddenField($this->packagePurchaseOrderSecurityToken->getName() , $this->packagePurchaseOrderSecurityToken->getName(), $this->packagePurchaseOrderSecurityToken->getValue());
+    }
+
+    /**
+     * @param $request
+     * @return SS_HTTPResponse|string
+     */
+    public function emitPackagePurchaseOrder($request){
+
+        if (!Director::is_ajax()){
+            return $this->forbiddenError();
+        }
+
+        if(!$this->packagePurchaseOrderSecurityToken->checkRequest($request)) {
+            return $this->forbiddenError();
+        }
+
+        $body = $this->request->getBody();
+        $json = json_decode($body,true);
+
+        $this->packagePurchaseOrderSecurityToken->reset();
+
+        try {
+            $this->getPackagePurchaseOrderManager()->registerPurchaseOrder($json, new NewPurchaseOrderEmailMessageSender);
+        }
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+        return 'OK';
+    }
+
+    /**
+     * @param $request
+     * @return SS_HTTPResponse
+     */
+    public function searchOrg($request){
+
+        if (!Director::is_ajax()){
+           return $this->forbiddenError();
+        }
+
+        $term  = $request->getVar('term');
+        $term  = Convert::raw2sql($term);
+
+        $organizations = Org::get()->filter('Name:PartialMatch', $term)->limit(10);
+
+        if($organizations) {
+
+            $suggestions   = array();
+
+            foreach ($organizations as $org) {
+                array_push($suggestions, array('id' => $org->ID, 'label' => $org->Name, 'value' => $org->Name));
+            }
+
+            $response = new SS_HTTPResponse();
+            $response->setStatusCode(200);
+            $response->addHeader('Content-Type', 'application/json');
+            $response->setBody(json_encode($suggestions));
+            return $response;
+        }
+    }
 	
 }
