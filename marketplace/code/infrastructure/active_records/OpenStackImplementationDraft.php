@@ -177,4 +177,57 @@ class OpenStackImplementationDraft
         UnitOfWork::getInstance()->scheduleForUpdate($program_version);
         return $program_version;
     }
+
+    /***
+     * @return bool
+     */
+    public function isOpenStackTested()
+    {
+        $storage = $this->isCompatibleWithStorage();
+        $compute = $this->isCompatibleWithCompute();
+        $platform = $this->isCompatibleWithPlatform();
+        $identity = $this->isCompatibleWithFederatedIdentity();
+
+        return $storage || $compute || $platform || $identity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTestedCapabilityTypeLabel()
+    {
+        if ($this->isCompatibleWithPlatform()) {
+            return 'Platform';
+        } else if ($this->isCompatibleWithCompute()) {
+            return 'Compute';
+        } else if ($this->isCompatibleWithStorage()) {
+            return 'Storage';
+        }
+    }
+
+    public function getTestedCapabilities() {
+        $program_type = '';
+        if ($this->isCompatibleWithPlatform()) {
+            $program_type = '';
+        } else if ($this->isCompatibleWithCompute()) {
+            $program_type = 'OpenStack Powered Compute';
+        } else if ($this->isCompatibleWithStorage()) {
+            $program_type = 'OpenStack Powered Object Storage';
+        }
+
+        return $this->getProgramVersion()->getCapabilitiesByType($program_type);
+    }
+
+    public function getDesignatedSections() {
+        $program_type = '';
+        if ($this->isCompatibleWithPlatform()) {
+            $program_type = '';
+        } else if ($this->isCompatibleWithCompute()) {
+            $program_type = 'OpenStack Powered Compute';
+        } else if ($this->isCompatibleWithStorage()) {
+            $program_type = 'OpenStack Powered Object Storage';
+        }
+
+        return $this->getProgramVersion()->getDesignatedSectionsByType($program_type);
+    }
 }
