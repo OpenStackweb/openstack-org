@@ -1926,7 +1926,7 @@ a.close-modal-btn {
   padding-top: 5px; }
 
 .sponsor-spots {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   background: white;
   width: 100%;
   text-align: center;
@@ -2016,10 +2016,8 @@ a.close-modal-btn {
   font-size: 1.3em;
 }
 
-.package-actions{
-    min-height: 30px;
-    max-height: 30px;
-    margin-bottom: 15px;
+.sponsor_package{
+    cursor: pointer;
 }
 
 .fixed-image {
@@ -2591,12 +2589,4 @@ body.modal-open {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     background-image: none;
-}
-.download-prospectus-title {
-  font-size: 20px;
-  color: white;
-  font-weight: 600;
-  margin: 40px 0 10px;
-  padding-top: 30px;
-  border-top: 1px solid #aaa;
 }

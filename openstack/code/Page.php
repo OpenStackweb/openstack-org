@@ -393,4 +393,33 @@ class Page_Controller extends ContentController {
 	function getEtag($body){
 		return md5($body);
 	}
+
+    public function validationError($messages){
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(412);
+        $response->addHeader('Content-Type', 'application/json');
+        if(!is_array($messages))
+            $messages = array(array('message'=> $messages));
+        $response->setBody(json_encode(
+            array('error' => 'validation','messages' => $messages)
+        ));
+        return $response;
+    }
+
+    public function serverError(){
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(500);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode("Server Error"));
+        return $response;
+    }
+
+    public function forbiddenError(){
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(403);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode("Security Error"));
+        return $response;
+    }
+
 }

@@ -1,17 +1,17 @@
 <?php
 
 
-class SummitPackage extends DataObject
+class SummitPackage extends DataObject implements ISummitPackage
 {
 
     private static $db = array (
-        'Title' => 'Text',
-        'SubTitle' => 'Text',        
-        'Cost' => 'Currency',
-        'MaxAvailable' => 'Int',
+        'Title'              => 'Text',
+        'SubTitle'           => 'Text',
+        'Cost'               => 'Currency',
+        'MaxAvailable'       => 'Int',
         'CurrentlyAvailable' => 'Int',
-        'Order' => 'Int',
-        'ShowQuantity' => 'Boolean'
+        'Order'              => 'Int',
+        'ShowQuantity'       => 'Boolean'
     );
 
     private static $defaults = array(
@@ -30,17 +30,25 @@ class SummitPackage extends DataObject
     );
     
     public function getCMSFields() {
-        return FieldList::create(TabSet::create('Root'))
-            ->text('Title')
-            ->text('SubTitle')
-            ->text('Cost')
-            ->checkbox('ShowQuantity','Show Quantities')
-            ->text('MaxAvailable')
-            ->text('CurrentlyAvailable');
+        $fields = new FieldList();
+        $fields->add(new TextField('Title','Title'));
+        $fields->add(new TextField('SubTitle','SubTitle'));
+        $fields->add(new CurrencyField('Cost','Cost'));
+        $fields->add(new NumericField('MaxAvailable','Max. Available'));
+        $fields->add(new NumericField('CurrentlyAvailable','Currently Available'));
+        $fields->add(new CheckboxField('ShowQuantity','Show Quantities'));
+        return $fields;
     } 
     
     public function SoldOut() {
         return $this->CurrentlyAvailable == 0;
     }
 
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
 }
