@@ -3,6 +3,7 @@
         emitPackagePurchaseOrder: '{$Top.Link(emitPackagePurchaseOrder)}',
         searchOrg               : '{$Top.Link(searchOrg)}'
     };
+    var page_id = $Top.ID ;
 </script>
 <div class="white sponsor-page-wrapper">
     <div class="container">

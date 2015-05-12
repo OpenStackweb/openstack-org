@@ -20,6 +20,7 @@ abstract class AbstractRestfulJsonApi extends Controller {
 	private $json;
 	protected $current_user;
 
+
 	public function __construct(){
 		parent::__construct();
 		$this->current_user = Member::currentUser();
@@ -27,7 +28,6 @@ abstract class AbstractRestfulJsonApi extends Controller {
 	}
 
 	abstract protected function isApiCall();
-
 
 	protected function unauthorizedHttpBasicAuth($realm){
 		$response = new SS_HTTPResponse();

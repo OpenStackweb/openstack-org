@@ -65,21 +65,21 @@ final class SummitPackagePurchaseOrderManager
             );
 
             $messages = array(
-                'first_name.required'              => ':attribute is required',
-                'first_name.text'                  => ':attribute should be valid text.',
-                'first_name.max'               => ':attribute should have less than 250 chars.',
-                'last_name.required'          => ':attribute is required',
-                'last_name.text'              => ':attribute should be valid text.',
-                'last_name.max'               => ':attribute should have less than 250 chars.',
-                'email.required' => ':attribute is required',
+                'first_name.required'     => ':attribute is required',
+                'first_name.text'         => ':attribute should be valid text.',
+                'first_name.max'          => ':attribute should have less than 250 chars.',
+                'last_name.required'      => ':attribute is required',
+                'last_name.text'          => ':attribute should be valid text.',
+                'last_name.max'           => ':attribute should have less than 250 chars.',
+                'email.required'          => ':attribute is required',
                 'email.text'              => ':attribute should be valid text.',
                 'email.max'               => ':attribute should have less than 250 chars.',
-                'email.email'              => ':attribute should be valid email.',
-                'organization.required'          => ':attribute is required',
-                'organization.text'              => ':attribute should be valid text.',
-                'package_id.required'              => ':attribute is required',
-                'package_id.integer'              => ':attribute should be valid integer.',
-                'organization_id.integer'              => ':attribute should be valid integer.',
+                'email.email'             => ':attribute should be valid email.',
+                'organization.required'   => ':attribute is required',
+                'organization.text'       => ':attribute should be valid text.',
+                'package_id.required'     => ':attribute is required',
+                'package_id.integer'      => ':attribute should be valid integer.',
+                'organization_id.integer' => ':attribute should be valid integer.',
             );
 
             $validator = ValidatorService::make($data, $rules, $messages);
@@ -93,6 +93,70 @@ final class SummitPackagePurchaseOrderManager
             $repository->add($purchase_order);
 
             $new_purchase_order_message_sender->send($purchase_order);
+        });
+    }
+
+    /**
+     * @param $purchase_order_id
+     * @param IMessageSenderService $approved_purchase_order_message_sender
+     * @throws EntityValidationException
+     * @throws NotFoundEntityException
+     * @return void
+     */
+    public function approvePurchaseOrder($purchase_order_id, IMessageSenderService $approved_purchase_order_message_sender)
+    {
+        $repository = $this->repository;
+        $this->tx_manager->transaction(function() use($purchase_order_id, $repository, $approved_purchase_order_message_sender){
+
+            $purchase_order = $repository->getById($purchase_order_id);
+
+            if(is_null($purchase_order))
+                throw new NotFoundEntityException('SummitPackagePurchaseOrder', sprintf('id %d', $purchase_order_id));
+
+            if($purchase_order->isApproved())
+                throw new EntityValidationException( EntityValidationException::buildMessage(sprintf('order id %s is already approved!', $purchase_order_id)));
+
+            if($purchase_order->isRejected())
+                throw new EntityValidationException( EntityValidationException::buildMessage(sprintf('order id %s is already rejected!', $purchase_order_id)));
+
+            $package =  $purchase_order->package();
+
+            if($package->SoldOut()){
+                throw new EntityValidationException( EntityValidationException::buildMessage(sprintf('package id %s is Sold Out!', $package->getIdentifier())));
+            }
+
+            $purchase_order->approve($approved_purchase_order_message_sender);
+
+            //decrement package availability
+            $package->sell();
+        });
+    }
+
+    /**
+     * @param $purchase_order_id
+     * @param IMessageSenderService $rejected_purchase_order_message_sender
+     * @throws EntityValidationException
+     * @throws NotFoundEntityException
+     * @return void
+     */
+    public function rejectPurchaseOrder($purchase_order_id, IMessageSenderService $rejected_purchase_order_message_sender)
+    {
+        $repository = $this->repository;
+
+        $this->tx_manager->transaction(function() use($purchase_order_id, $repository, $rejected_purchase_order_message_sender){
+
+            $purchase_order = $repository->getById($purchase_order_id);
+
+            if(is_null($purchase_order))
+                throw new NotFoundEntityException('SummitPackagePurchaseOrder', sprintf('id %d', $purchase_order_id));
+
+            if($purchase_order->isApproved())
+                throw new EntityValidationException( EntityValidationException::buildMessage(sprintf('order id %s is already approved!', $purchase_order_id)));
+
+            if($purchase_order->isRejected())
+                throw new EntityValidationException( EntityValidationException::buildMessage(sprintf('order id %s is already rejected!', $purchase_order_id)));
+
+            $purchase_order->reject($rejected_purchase_order_message_sender);
         });
     }
 }

@@ -4,6 +4,4 @@ After: 'framework/routes#coreroutes'
 ---
 Director:
   rules:
-    'api/v1/summits/add-ons': 'SummitAddOnApi'
-    'api/v1/summits/packages': 'SummitPackageApi'
-    'api/v1/summits/packages/purchase-orders': 'SummitPackagePurchaseOrderApi'
+    'api/v1/summits': 'SummitsApi'

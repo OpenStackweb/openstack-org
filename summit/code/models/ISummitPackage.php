@@ -17,4 +17,10 @@ interface ISummitPackage extends IEntity {
      * @return bool
      */
     public function SoldOut();
+
+    /**
+     * @throws EntityValidationException
+     * @return void
+     */
+    public function sell();
 }

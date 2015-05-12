@@ -39,6 +39,7 @@ class SummitPackagePurchaseOrder
 
         'RegisteredOrganization' => 'Org',
         'ApprovedBy'             => 'Member',
+        'RejectedBy'             => 'Member',
         'Package'                => 'SummitPackage',
     );
 
@@ -47,7 +48,9 @@ class SummitPackagePurchaseOrder
 
     public function onBeforeWrite() {
         parent::onBeforeWrite();
-        $this->Created = MySQLDatabase56::nowRfc2822();
+        if($this->getIdentifier() === 0) {
+            $this->Created = MySQLDatabase56::nowRfc2822();
+        }
     }
 
     /**
@@ -67,6 +70,7 @@ class SummitPackagePurchaseOrder
         if(!is_null($sender_service)) $sender_service->send($this);
         $this->Approved     = true;
         $this->ApprovedDate = MySQLDatabase56::nowRfc2822();
+        $this->ApprovedByID = Member::currentUserID();
     }
 
     /**
@@ -78,5 +82,30 @@ class SummitPackagePurchaseOrder
         if(!is_null($sender_service)) $sender_service->send($this);
         $this->Rejected     = true;
         $this->RejectedDate = MySQLDatabase56::nowRfc2822();
+        $this->RejectedByID = Member::currentUserID();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isApproved()
+    {
+        return (bool)$this->Approved;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRejected()
+    {
+       return (bool)$this->Rejected;
+    }
+
+    /**
+     * @return ISummitPackage
+     */
+    public function package()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Package')->getTarget();
     }
 }

@@ -28,4 +28,19 @@ interface ISummitPackagePurchaseOrder extends IEntity {
      * @return void
      */
     public function reject(IMessageSenderService $sender_service = null);
+
+    /**
+     * @return bool
+     */
+    public function isApproved();
+
+    /**
+     * @return bool
+     */
+    public function isRejected();
+
+    /**
+     * @return ISummitPackage
+     */
+    public function package();
 }

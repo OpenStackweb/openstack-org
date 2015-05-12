@@ -1,3 +1,9 @@
+<script type="application/javascript">
+    var urls = {
+        approvePackagePurchaseOrder: 'api/v1/summits/packages/purchase-orders/%ID%/approve',
+        rejectPackagePurchaseOrder: 'api/v1/summits/packages/purchase-orders/%ID%/reject'
+    };
+</script>
 <h2>Summit Sponsorship Package Purchase Orders List</h2>
 <% if PendingApprovalPackagesPurchaseOrder %>
     <table id="packages-purchare-orders-table">
@@ -24,7 +30,7 @@
             <td width="23%">
                 <a href="#" data-purchase-order-id="{$ID}" class="reject-purchase-order roundedButton">Reject</a>
                 &nbsp;
-                <a href="#" data-purchase-order-id="{$ID}" class="approve-purchase-order roundedButton">Post</a>
+                <a href="#" data-purchase-order-id="{$ID}" class="approve-purchase-order roundedButton">Approve</a>
             </td>
         </tr>
         <% end_loop %>

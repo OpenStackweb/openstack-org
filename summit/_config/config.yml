@@ -10,17 +10,16 @@ Injector:
     class: SapphirePackagePurchaseOrderRepository
   SummitPackagePurchaseOrderFactory:
     class: SapphireSummitPackagePurchaseOrderFactory
-  SummitAddOnApi:
-    constructor:
-      0: '%$SummitAddOnRepository'
-  SummitPackageApi:
-    constructor:
-      0: '%$SummitPackageRepository'
   SummitPackagePurchaseOrderManager:
     constructor:
       0: '%$PackagePurchaseOrderRepository'
       1: '%$SummitPackagePurchaseOrderFactory'
       2: '%$TransactionManager'
+  SummitsApi:
+    constructor:
+      0: '%$SummitPackageRepository'
+      1: '%$SummitAddOnRepository'
+      2: '%$SummitPackagePurchaseOrderManager'
 
 SummitSponsorPage_Controller:
   dependencies:

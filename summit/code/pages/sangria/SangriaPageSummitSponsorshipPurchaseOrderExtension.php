@@ -45,6 +45,8 @@ class SangriaPageSummitSponsorshipPurchaseOrderExtension extends Extension {
     }
 
     public function ViewPackagePurchaseOrderDetails(){
+        Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
+        Requirements::javascript('summit/javascript/sangria.page.view.package.purchase.order.details.js');
         return $this->owner->getViewer('ViewPackagePurchaseOrderDetails')->process($this->owner);
     }
 
