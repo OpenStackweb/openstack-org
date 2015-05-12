@@ -12,13 +12,34 @@
  * limitations under the License.
  **/
 
+/**
+ * Interface ISummitPackagePurchaseOrderManager
+ */
 interface ISummitPackagePurchaseOrderManager {
 
     /**
      * @param array $data
      * @param IMessageSenderService $new_purchase_order_message_sender
      * @throws EntityValidationException
-     * @return mixed
+     * @return void
      */
     public function registerPurchaseOrder(array $data, IMessageSenderService $new_purchase_order_message_sender);
+
+    /**
+     * @param $purchase_order_id
+     * @param IMessageSenderService $approved_purchase_order_message_sender
+     * @throws EntityValidationException
+     * @throws NotFoundEntityException
+     * @return void
+     */
+    public function approvePurchaseOrder($purchase_order_id, IMessageSenderService $approved_purchase_order_message_sender);
+
+    /**
+     * @param $purchase_order_id
+     * @param IMessageSenderService $rejected_purchase_order_message_sender
+     * @throws EntityValidationException
+     * @throws NotFoundEntityException
+     * @return void
+     */
+    public function rejectPurchaseOrder($purchase_order_id, IMessageSenderService $rejected_purchase_order_message_sender);
 }

@@ -98,7 +98,8 @@
                         last_name       : $('#summit_package_purchase_order_lname', form).val(),
                         email           : $('#summit_package_purchase_order_email', form).val(),
                         organization    : $('#summit_package_purchase_order_org', form).val(),
-                        organization_id : parseInt($('#summit_package_purchase_order_org_id', form).val())
+                        organization_id : parseInt($('#summit_package_purchase_order_org_id', form).val()),
+                        summit_page_id  : page_id
                     }
 
                     var token = $('#packagePurchaseOrderSecurityToken', form).val();
@@ -109,12 +110,13 @@
                         data: JSON.stringify(purchase_order),
                         contentType: "application/json; charset=utf-8",
                         success: function (data,textStatus,jqXHR) {
-                            packages_ordered.push(package_id);
+                            packages_ordered.push(purchase_order.package_id);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert(errors.generic);
                         }
                     });
+
                     current_package_id = null;
                     form_validator.resetForm();
 
@@ -184,7 +186,7 @@
 
         setInterval(function(){
             if(jqxhr_packages === null) {
-                jqxhr_packages = $.get("/api/v1/summits/packages", function (data) {
+                jqxhr_packages = $.get("/api/v1/summits/"+page_id+"/packages", function (data) {
 
                     var container = $('#packages_container');
 
@@ -214,7 +216,7 @@
 
         setInterval(function(){
             if(jqxhr_add_ons === null) {
-                jqxhr_add_ons = $.get("/api/v1/summits/add-ons", function (data) {
+                jqxhr_add_ons = $.get("/api/v1/summits/"+page_id+"/add-ons", function (data) {
 
                     var container = $('#add_ons');
 

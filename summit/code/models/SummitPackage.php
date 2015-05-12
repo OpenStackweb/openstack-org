@@ -1,7 +1,11 @@
 <?php
 
-
-class SummitPackage extends DataObject implements ISummitPackage
+/**
+ * Class SummitPackage
+ */
+class SummitPackage
+    extends DataObject
+    implements ISummitPackage
 {
 
     private static $db = array (
@@ -50,5 +54,16 @@ class SummitPackage extends DataObject implements ISummitPackage
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
+    }
+
+    /**
+     * @throws EntityValidationException
+     * @return void
+     */
+    public function sell()
+    {
+        if($this->SoldOut())
+            throw new EntityValidationException(EntityValidationException::buildMessage('Sold Out'));
+        $this->CurrentlyAvailable -= 1;
     }
 }

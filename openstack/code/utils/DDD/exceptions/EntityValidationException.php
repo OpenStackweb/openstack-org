@@ -32,4 +32,10 @@ class EntityValidationException extends Exception {
 	public function getMessages(){
 		return $this->messages;
 	}
+
+    public static function buildMessage($message){
+        return array(
+            array('message' => $message)
+        );
+    }
 }
