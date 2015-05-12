@@ -1926,7 +1926,7 @@ a.close-modal-btn {
   padding-top: 5px; }
 
 .sponsor-spots {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   background: white;
   width: 100%;
   text-align: center;
@@ -2016,8 +2016,10 @@ a.close-modal-btn {
   font-size: 1.3em;
 }
 
-.sponsor_package{
-    cursor: pointer;
+.package-actions{
+    min-height: 30px;
+    max-height: 30px;
+    margin-bottom: 15px;
 }
 
 .fixed-image {

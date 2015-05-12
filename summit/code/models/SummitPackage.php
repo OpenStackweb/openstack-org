@@ -66,4 +66,13 @@ class SummitPackage
             throw new EntityValidationException(EntityValidationException::buildMessage('Sold Out'));
         $this->CurrentlyAvailable -= 1;
     }
+
+    /**
+     * @param int $page_id
+     * @return bool
+     */
+    public function isParentPage($page_id)
+    {
+       return intval($page_id) === intval($this->SummitSponsorPageID);
+    }
 }

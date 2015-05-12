@@ -1,6 +1,15 @@
 /**
- * Created by smarcet on 5/8/15.
- */
+ * Copyright 2015 OpenStack Foundation
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 (function( $ ){
 
@@ -12,8 +21,8 @@
 
     var packages_ordered = [];
     var jqxhr_packages = null;
-    var packages_pull_interval = 10000;//10s
-    var package_html_template = $('<div class="sponsor_package col-lg-4 col-md-4 col-sm-4"><div class="sponsor-spots"><h3 class="package-title"><span class="package-sub-title"></span></h3><div class="sponsor-cost"></div><div class="sponsor-count"></div></div></div>');
+    var packages_pull_interval = 20000;//20s
+    var package_html_template = $('<div class="sponsor_package col-lg-4 col-md-4 col-sm-4"><div class="sponsor-spots"><h3 class="package-title"><span class="package-sub-title"></span></h3><div class="sponsor-cost"></div><div class="sponsor-count"></div></div><div class="package-actions"><button type="button" class="btn btn-primary buy-package">Buy Me</button></div></div>');
     var package_directives = {
         '.package-title' : 'title',
         '.sponsor-cost'  : 'cost',
@@ -31,13 +40,13 @@
                 return '<td>Still Available</td>';
             }
         },
-        "@data-id":'id',
-        "@data-available":'available',
-        "@data-title":'title'
+        ".buy-package@data-id":'id',
+        ".buy-package@data-available":'available',
+        ".buy-package@data-title":'title'
     };
 
     var jqxhr_add_ons = null;
-    var add_ons_pull_interval = 10000;//10s
+    var add_ons_pull_interval = 20000;//20s
     var add_on_html_template = $('<tr class="sponsor_add_on"><td class="add_on_title"></td><td class="add_on_cost"></td><td class="add_on_status"></td></tr>');
     var add_on_directives = {
         '.add_on_title' : 'title',
@@ -56,12 +65,12 @@
 
     var current_package_id = null;
 
-    function buySponsorPage(evt){
+    function buySponsorPackage(evt){
 
         current_package_id = parseInt($(this).attr('data-id'));
         var available      = parseInt($(this).attr('data-available'));
         var title          = $(this).attr('data-title');
-        var already_bought = $.inArray(current_package_id, packages_ordered) > 0;
+        var already_bought = $.inArray(current_package_id, packages_ordered) >= 0;
 
         if(available <= 0) {
             alert(errors.package_not_run_out);
@@ -78,7 +87,7 @@
         $('#summit_package_purchase_order_modal').modal('show');
     }
 
-    function performBuySponsorPage(evt){
+    function performBuySponsorPackage(evt){
 
         if(current_package_id !== null && current_package_id > 0){
 
@@ -110,7 +119,10 @@
                         data: JSON.stringify(purchase_order),
                         contentType: "application/json; charset=utf-8",
                         success: function (data,textStatus,jqXHR) {
-                            packages_ordered.push(purchase_order.package_id);
+                            packages_ordered.push( parseInt(purchase_order.package_id));
+                            if(data === null) return;
+                            //update security token for next purchase
+                            $('#packagePurchaseOrderSecurityToken', form).val(data.token);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert(errors.generic);
@@ -169,7 +181,7 @@
             show:false
         })
 
-        $('#summit_package_purchase_order_buy_btn').click(performBuySponsorPage);
+        $('#summit_package_purchase_order_buy_btn').click(performBuySponsorPackage);
 
         var input = $('#summit_package_purchase_order_org', form);
 
@@ -182,29 +194,38 @@
             }
         });
 
-        $(".sponsor_package").live('click', buySponsorPage);
+        $('.buy-package').live('click', buySponsorPackage);
 
         setInterval(function(){
             if(jqxhr_packages === null) {
                 jqxhr_packages = $.get("/api/v1/summits/"+page_id+"/packages", function (data) {
 
+                    if(data === null || !$.isArray(data) || data.length == 0) return;
+
                     var container = $('#packages_container');
 
-                    $( ".sponsor_package" ).die();
+
+                    $('.buy-package').die();
 
                     container.empty();
 
                     data.forEach(function (summit_package)
                     {
                         var summit_package_html = package_html_template.render(summit_package, package_directives);
-                        summit_package_html.attr('id',"package_"+summit_package.id);
+                        var buy_button          = $('.buy-package', summit_package_html);
+
+                        buy_button.attr('id',"package_"+summit_package.id);
                         if(summit_package.available > 0){
                             summit_package_html.attr('title',"Buy me");
+                            buy_button.show();
+                        }
+                        else{
+                            buy_button.hide();
                         }
                         container.append(summit_package_html);
                     });
 
-                    $(".sponsor_package").live('click', buySponsorPage);
+                    $('.buy-package').live('click', buySponsorPackage);
 
                 }).fail(function () {
 
@@ -217,6 +238,8 @@
         setInterval(function(){
             if(jqxhr_add_ons === null) {
                 jqxhr_add_ons = $.get("/api/v1/summits/"+page_id+"/add-ons", function (data) {
+
+                    if(data === null || !$.isArray(data) || data.length == 0) return;
 
                     var container = $('#add_ons');
 

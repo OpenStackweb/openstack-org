@@ -36,6 +36,7 @@
         <% end_loop %>
         </tbody>
         </table>
+        <p id="empty-message" style="display: none;">* There are not any Package Purchase Orders yet.</p>
 <% else %>
     <p>* There are not any Package Purchase Orders yet.</p>
 <% end_if %>
