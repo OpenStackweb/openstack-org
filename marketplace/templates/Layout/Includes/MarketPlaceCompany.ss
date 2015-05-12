@@ -33,7 +33,7 @@
                 </div>
                 <div class="powered-description">
                     <p>
-                        This product is OpenStack Powered. It contains OpenStack software and has been validated through testing to provide full API compatibility for OpenStack core services. <a href="/brand/interop/">Learn more about the testing criteria and core services here</a>.
+                        This product is OpenStack Powered. It contains OpenStack software and has been validated through testing to provide API compatibility for OpenStack core services. <a href="/brand/interop/">Learn more about the testing criteria and core services here</a>.
                         <div class="tested-badge-wrapper">
                             <div class="tested-badge">
                                 <div class="tested-icon">
