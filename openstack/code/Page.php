@@ -422,4 +422,28 @@ class Page_Controller extends ContentController {
         return $response;
     }
 
+    protected function ok(array $res = null){
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(200);
+        $response->addHeader('Content-Type', 'application/json');
+        if(is_null($res)) $res = array();
+        $response->setBody(json_encode($res));
+
+        //conditional get Request (etags)
+        $request = Controller::curr()->getRequest();
+        if($request->isGET()) {
+            $etag = md5($response->getBody());
+            $requestETag = $request->getHeader('If-None-Match');
+            if (!empty($requestETag) && $requestETag == $etag) {
+                $response->setStatusCode(304);
+                foreach (array('Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified') as $header) {
+                    $response->removeHeader($header);
+                }
+                $response->setBody(null);
+            } else
+                $response->addHeader('ETag', $etag);
+        }
+
+        return $response;
+    }
 }

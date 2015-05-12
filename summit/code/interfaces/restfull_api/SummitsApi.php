@@ -80,7 +80,7 @@ final class SummitsApi extends AbstractRestfulJsonApi {
     }
 
     public function checkAdminPermissions($request){
-        return true;
+        return Permission::check("SANGRIA_ACCESS");
     }
 
     protected function isApiCall(){

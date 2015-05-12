@@ -31,14 +31,27 @@ final class SummitPackagePurchaseOrderManager
      */
     private $factory;
 
+    /**
+     * @var IEntityRepository
+     */
+    private $summit_packages_repository;
 
+
+    /**
+     * @param IEntityRepository $repository
+     * @param IEntityRepository $summit_packages_repository
+     * @param ISummitPackagePurchaseOrderFactory $factory
+     * @param ITransactionManager $tx_manager
+     */
     public function __construct(IEntityRepository $repository,
+                                IEntityRepository $summit_packages_repository,
                                 ISummitPackagePurchaseOrderFactory $factory,
                                 ITransactionManager $tx_manager){
 
-        $this->repository = $repository;
-        $this->factory    = $factory;
-        $this->tx_manager = $tx_manager;
+        $this->repository                 = $repository;
+        $this->summit_packages_repository = $summit_packages_repository;
+        $this->factory                    = $factory;
+        $this->tx_manager                 = $tx_manager;
     }
 
 
@@ -50,13 +63,15 @@ final class SummitPackagePurchaseOrderManager
      */
     public function registerPurchaseOrder(array $data, IMessageSenderService $new_purchase_order_message_sender)
     {
-        $repository = $this->repository;
-        $factory    = $this->factory;
+        $repository                 = $this->repository;
+        $factory                    = $this->factory;
+        $summit_packages_repository = $this->summit_packages_repository ;
 
-        $this->tx_manager->transaction(function() use($data, $repository, $factory, $new_purchase_order_message_sender){
+        $this->tx_manager->transaction(function() use($data, $repository, $summit_packages_repository,  $factory, $new_purchase_order_message_sender){
 
             $rules = array(
                 'package_id'        => 'required|integer',
+                'summit_page_id'    => 'required|integer',
                 'first_name'        => 'required|text|max:250',
                 'last_name'         => 'required|text|max:250',
                 'email'             => 'required|text|max:250|email',
@@ -79,6 +94,8 @@ final class SummitPackagePurchaseOrderManager
                 'organization.text'       => ':attribute should be valid text.',
                 'package_id.required'     => ':attribute is required',
                 'package_id.integer'      => ':attribute should be valid integer.',
+                'summit_page_id.required' => ':attribute is required',
+                'summit_page_id.integer'  => ':attribute should be valid integer.',
                 'organization_id.integer' => ':attribute should be valid integer.',
             );
 
@@ -87,6 +104,17 @@ final class SummitPackagePurchaseOrderManager
             if ($validator->fails()) {
                 throw new EntityValidationException($messages);
             }
+
+            $package = $summit_packages_repository->getById($data['package_id']);
+
+            if(is_null($package))
+                throw new EntityValidationException (EntityValidationException::buildMessage(sprintf('package id %s does not exists!', $data['package_id'])));
+
+            if($package->SoldOut())
+                throw new EntityValidationException (EntityValidationException::buildMessage(sprintf('package id %s sold out!', $data['package_id'])));
+
+            if(!$package->isParentPage($data['summit_page_id']))
+                throw new EntityValidationException (EntityValidationException::buildMessage(sprintf('package id %s does not belong to page id %s!', $data['package_id'], $data['summit_page_id'])));
 
             $purchase_order = $factory->build($data);
 

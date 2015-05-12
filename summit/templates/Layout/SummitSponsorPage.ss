@@ -210,8 +210,7 @@
                     <div class="row" id="packages_container">
 
                         <% loop $SortedPackages %>
-                            <div class="sponsor_package col-lg-4 col-md-4 col-sm-4" data-id="{$ID}" data-title="{$Title}" id="package_{$ID}"
-                                 data-available="{$CurrentlyAvailable}" <% if not $SoldOut %>title="Buy me"<% end_if %>>
+                            <div class="sponsor_package col-lg-4 col-md-4 col-sm-4" <% if not $SoldOut %>title="Buy me"<% end_if %>>
                                 <div class="sponsor-spots <% if $SoldOut %>sold-out<% end_if %>">
                                     <h3>$Title <span>$SubTitle</span></h3>
 
@@ -229,6 +228,10 @@
                                             <% end_if %>
                                         <% end_if %>
                                     </div>
+
+                                </div>
+                                <div class="package-actions">
+                                    <button type="button" id="package_{$ID}" data-title="{$Title}" data-id="{$ID}" class="btn btn-primary buy-package<% if $SoldOut %> hide<% end_if %>"  data-available="{$CurrentlyAvailable}">Buy Me</button>
                                 </div>
                             </div>
                         <% end_loop %>

@@ -273,7 +273,7 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
             SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
-        return 'OK';
+        return $this->ok(array('token' => $this->packagePurchaseOrderSecurityToken->getValue()));
     }
 
     /**

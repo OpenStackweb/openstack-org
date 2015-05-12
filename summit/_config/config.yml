@@ -13,8 +13,9 @@ Injector:
   SummitPackagePurchaseOrderManager:
     constructor:
       0: '%$PackagePurchaseOrderRepository'
-      1: '%$SummitPackagePurchaseOrderFactory'
-      2: '%$TransactionManager'
+      1: '%$SummitPackageRepository'
+      2: '%$SummitPackagePurchaseOrderFactory'
+      3: '%$TransactionManager'
   SummitsApi:
     constructor:
       0: '%$SummitPackageRepository'

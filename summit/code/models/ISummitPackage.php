@@ -23,4 +23,10 @@ interface ISummitPackage extends IEntity {
      * @return void
      */
     public function sell();
+
+    /**
+     * @param int $page_id
+     * @return bool
+     */
+    public function isParentPage($page_id);
 }
