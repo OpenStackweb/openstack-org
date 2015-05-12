@@ -1,0 +1,82 @@
+.hoi-hero {
+    padding: 0;
+    height: 320px;
+    background: url('//openstack.org/assets/vancouver-summit/hoi-hero.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+.hoi-intro {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hoi-intro p {
+    text-align: center;
+    color: #30739C;
+}
+
+.hoi-single {
+    background: #edf2f7;
+    border-radius: 4px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    min-height: 265px;
+}
+
+.hoi-single p {
+    color: #2A4E68;
+    font-size: 0.9em;
+}
+
+.hoi-single.contribute {
+    background: #DA422F;
+    color: white;
+}
+
+.hoi-single.contribute h3 {
+    color: white;
+}
+
+.hoi-single.contribute p {
+    color: white;
+}
+
+.hoi-single.contribute a.hoi-button {
+    background: #A51B1B;
+}
+
+@media (max-width: 1200px) {
+    .hoi-single {
+        min-height: 295px;
+    }
+}
+
+@media (max-width: 990px) {
+    .hoi-single {
+        min-height: 335px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hoi-single {
+        min-height: 0;
+    }
+}
+
+a.hoi-button {
+    display: block;
+    width: 125px;
+    color: white;
+    background: #29abe2;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin: 20px auto;
+    padding: 5px 10px;
+}
+
+a.hoi-button:hover {
+    background: #2A4E68;
+    text-decoration: none;
+}
