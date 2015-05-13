@@ -81,9 +81,10 @@ class SummitPackage
      */
     public function getName()
     {
-        $res = $this->getField('Title');
-        if(!empty($this->getField('SubTitle'))){
-            $res .= ' - '.$this->getField('SubTitle');
+        $res      = $this->getField('Title');
+        $subtitle = $this->getField('SubTitle');
+        if(!empty($subtitle)){
+            $res .= ' - '.$subtitle;
         }
         return $res;
     }
