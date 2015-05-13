@@ -79,7 +79,19 @@
                 </div>
             </div>
            <div class="row featured-use-cases">
-               <div class="col-sm-6">
+               <div class="col-sm-4">
+                    <a href="/enterprise/workload-portability/">
+                        <img src="/themes/openstack/images/enterprise/unreal-thumb.jpg" alt="">
+                    </a>
+                   <h3>Expediting Digital Workflow</h3>
+                   <p>
+                       In the software-defined economy, the delivery of an application or service often depends on many contributors, possibly in multiple companies, working collaboratively to deliver results. Read on to learn how OpenStack gives enterprises the ability to seamlessly move workloads from one cloud to another, whether private or public.
+                   </p>
+                   <p>
+                       <a href="/workload-portability/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
+                   </p>
+               </div>
+               <div class="col-sm-4">
                     <a href="/enterprise/virtualization-integration/">
                         <img src="/themes/openstack/images/enterprise/legacy-thumb.jpg" alt="">
                     </a>
@@ -91,7 +103,7 @@
                        <a href="/enterprise/virtualization-integration/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
                    </p>
                </div>
-               <div class="col-sm-6">
+               <div class="col-sm-4">
                     <a href="/enterprise/big-data/">
                         <img src="/themes/openstack/images/enterprise/bigdata-thumb.jpg" alt="">
                     </a>
