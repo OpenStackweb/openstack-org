@@ -39,7 +39,7 @@
                 <%if $Top.FilterParamStatus == "pending" %>$Created<% end_if %>
             </td>
             <td width="23%">
-                <%if FilterParamStatus == "pending" %>
+                <%if $Top.FilterParamStatus == "pending" %>
                     <a href="#" data-purchase-order-id="{$ID}" class="reject-purchase-order roundedButton">Reject</a>
                     &nbsp;
                     <a href="#" data-purchase-order-id="{$ID}" class="approve-purchase-order roundedButton">Approve</a>
