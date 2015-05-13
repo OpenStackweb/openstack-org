@@ -14,6 +14,9 @@ h5 {
   font-size: 18px;
   font-weight: 400; }
 
+.center {
+  text-align: center; }
+
 /*Hero*/
 .intro-header {
   padding-top: 0px;
@@ -26,6 +29,11 @@ h5 {
 
 .intro-header.legacy {
   background: url(/themes/openstack/images/enterprise/hero-bkgd-legacy.jpg) no-repeat center center;
+  background-size: cover;
+  position: relative; }
+
+.intro-header.unreal {
+  background: url(/themes/openstack/images/enterprise/hero-bkgd-unreal.jpg) no-repeat center center;
   background-size: cover;
   position: relative; }
 
@@ -1026,7 +1034,7 @@ a.enterprise-bar-right {
 .featured-use-cases img {
   max-width: 100%; }
 .featured-use-cases a.blue-btn:visited {
-	color: white;
+  color: white;
 }
 
 .more-use-cases h3 {
@@ -1066,8 +1074,8 @@ a.rounded-wrapper {
 .testimonial-author-img {
   margin: 0 0 30px;
   border: 4px solid #edf2f7;
-	border-radius: 100%; 
-	max-width: 130px; }
+  border-radius: 100%; 
+  max-width: 130px; }
 
 .testimonial-row blockquote {
   font-family: Georgia, serif;
@@ -1125,3 +1133,18 @@ a.blue-btn {
     margin-left: 10px; }
 
 /*End General Styles*/
+/*Digital Workflow Page*/
+.federated-benefits {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+  .federated-benefits i {
+    color: #30739C;
+    margin-bottom: 10px;
+    font-size: 3.5em; }
+  .federated-benefits h4 {
+    color: #2A4E68;
+    /*font-weight: 600;*/ }
+  .federated-benefits p {
+    font-size: 0.9em; }
+
+/*End Digital Workflow Page*/
