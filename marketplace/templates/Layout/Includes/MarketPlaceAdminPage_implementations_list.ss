@@ -106,7 +106,7 @@
                         </td>
                         <% end_if %>
                         <td style="min-width: 200px" width="30%">
-                            <a class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>?id=$ID&is_draft=$isDraft">Edit Product Details</a>
+                            <a class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>?id=$ID&is_draft=$isDraft">Edit</a>
                             <% if isDraft() %>
                                 <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/draft_preview">Preview Draft</a>
                                 <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/draft_pdf">PDF</a>
@@ -118,7 +118,7 @@
                             <a class="roundedButton delete-implementation product-button addDeploymentBtn" href="#"
                                data-id="{$ID}"
                                data-is_draft="{$isDraft}"
-                               data-class="<% with MarketPlace  %><% if Name == "Appliance"  %>appliance<% end_if %><% if Name == "Distribution"  %>distribution<% end_if %><% end_with %>">Delete Product</a>
+                               data-class="<% with MarketPlace  %><% if Name == "Appliance"  %>appliance<% end_if %><% if Name == "Distribution"  %>distribution<% end_if %><% end_with %>">Delete</a>
                         </td>
                     </tr>
                     <% end_loop %>
