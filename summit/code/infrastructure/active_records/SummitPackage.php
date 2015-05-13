@@ -75,4 +75,26 @@ class SummitPackage
     {
        return intval($page_id) === intval($this->SummitSponsorPageID);
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        $res = $this->getField('Title');
+        if(!empty($this->getField('SubTitle'))){
+            $res .= ' - '.$this->getField('SubTitle');
+        }
+        return $res;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSummitName()
+    {
+        $summit = $this->SummitSponsorPage();
+        $summit = $summit->Parent();
+        return $summit->Title;
+    }
 }

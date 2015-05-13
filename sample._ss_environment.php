@@ -112,6 +112,16 @@ define('Auth_OpenID_VERIFY_HOST',false);
 define('Auth_OpenID_Realm','https://devbranch.openstack.org');
 define('OPENSTACKID_ENABLED',true);
 
+//summit purchase orders settings
+
+define('APPROVED_PURCHASE_ORDER_EMAIL_FROM','');
+define('APPROVED_PURCHASE_ORDER_EMAIL_SUBJECT','Your OpenStack Sponsorship Package Purchase Order was approved');
+define('NEW_PURCHASE_ORDER_EMAIL_FROM','');
+define('NEW_PURCHASE_ORDER_EMAIL_TO','');
+define('NEW_PURCHASE_ORDER_EMAIL_SUBJECT','New Sponsorship Package Purchase Order');
+define('REJECTED_PURCHASE_ORDER_EMAIL_FROM','');
+define('REJECTED_PURCHASE_ORDER_EMAIL_SUBJECT','Your OpenStack Sponsorship Package Purchase Order was rejected');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 

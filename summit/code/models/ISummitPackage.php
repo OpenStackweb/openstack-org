@@ -29,4 +29,15 @@ interface ISummitPackage extends IEntity {
      * @return bool
      */
     public function isParentPage($page_id);
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @return string
+     */
+    public function getSummitName();
+
 }
