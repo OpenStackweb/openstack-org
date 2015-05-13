@@ -3,7 +3,7 @@
 class SummitUpdatesPage extends SummitPage {
     
 	private static $has_many = array (
-		'SummitUpdates' => 'SummitUpdate',
+		'SummitUpdates'  => 'SummitUpdate',
         'ImportantDates' => 'SummitActivityDate'
 	);
     
@@ -14,7 +14,7 @@ class SummitUpdatesPage extends SummitPage {
             // Summit Updates
             $updateFields = singleton('SummitUpdate')->getCMSFields();
             $config = GridFieldConfig_RelationEditor::create();
-            $config->getComponentByType('GridFieldDetailForm')->setFields($updateFields);
+            $config->addComponent(new GridFieldSortableRows('Order'));
             $gridField = new GridField('Updates', 'Updates', $this->SummitUpdates(), $config);
             $fields->addFieldToTab('Root.Updates',$gridField);
             
@@ -40,7 +40,7 @@ class SummitUpdatesPage_Controller extends SummitPage_Controller {
 	}        
 
     function sortedSummitUpdates() {
-        return $this->SummitUpdates()->sort('Created','DESC');
+        return $this->SummitUpdates()->sort('Order');
     }
     
 }
