@@ -42,6 +42,7 @@
                     <th><a href="$Top.Link(consultants)?sort=company">Company ^</a></th>
                     <th><a href="$Top.Link(consultants)?sort=name">Service Name ^</a></th>
                     <th>Published</th>
+                    <th>Draft</th>
                     <th><a href="$Top.Link(consultants)?sort=status">Status ^</a></th>
                     <th><a href="$Top.Link(consultants)?sort=updated">Last Update ^</a></th>
                     <% if Top.isSuperAdmin %>
@@ -61,7 +62,18 @@
                             $Name
                         </td>
                         <td>
-                            <% if LiveServiceID == 0 %>Draft<% else %>Published<% end_if %>
+                            <% if isDraft() == 1 %>
+                                <div style="text-align:center"> - </div>
+                            <% else %>
+                                Published
+                            <% end_if %>
+                        </td>
+                        <td>
+                            <% if isDraft() == 1 || hasPublishedDraft() == 0 %>
+                                Pending
+                            <% else %>
+                                <div style="text-align:center"> - </div>
+                            <% end_if %>
                         </td>
                         <td>
                             <% if Active %>Active<% else %>Deactivated<% end_if %>
@@ -79,10 +91,15 @@
                             </td>
                         <% end_if %>
                         <td style="min-width: 200px" width="30%">
-                            <a class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)?id=$ID&is_draft=$isDraft">Edit Product Details</a>
-                            <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)/$ID/<% if isDraft  %>draft_<% end_if %>preview">Preview Product</a>
-                            <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)/$ID/<% if isDraft  %>draft_<% end_if %>pdf">PDF</a>
-                            <a class="roundedButton delete-consultant product-button addDeploymentBtn" href="#" data-id="{$ID}" data-is_draft="{$isDraft}">Delete Product</a>
+                            <a class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)?id=$ID&is_draft=$isDraft">Edit</a>
+                            <% if isDraft() %>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)/$ID/draft_preview">Preview Draft</a>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)/$ID/draft_pdf">PDF</a>
+                            <% else %>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)/$ID/preview">Preview Live</a>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="$Top.Link(consultant)/$ID/pdf">PDF</a>
+                            <% end_if %>
+                            <a class="roundedButton delete-consultant product-button addDeploymentBtn" href="#" data-id="{$ID}" data-is_draft="{$isDraft}">Delete</a>
                         </td>
                     </tr>
                     <% end_loop %>

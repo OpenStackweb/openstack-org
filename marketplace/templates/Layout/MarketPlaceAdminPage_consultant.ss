@@ -12,7 +12,7 @@
         <% end_if %>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn" href="$Top.Link(consultants)">&lt;&lt; Back to Products</a>
     </div>
-    <% if CurrentConsultant.isNotPublished %>
+    <% if CurrentConsultant.Published == 0 %>
         <div style="clear:both; color:red">
         THIS VERSION IS NOT CURRENTLY PUBLISHED
         </div>
@@ -35,6 +35,13 @@
     </div>
     <div style="clear:both">
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center" class="roundedButton save-consultant" href="#" id="save-consultant">Save</a>
+        <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton publish-consultant" href="#" id="publish-consultant">Publish</a>
+        <% if CurrentConsultant %>
+            <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-consultant" href="#" >Preview</a>
+        <% end_if %>
+        <% if CurrentConsultant %>
+            <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-consultant pdf" href="#" >Download PDF</a>
+        <% end_if %>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:50px;" class="roundedButton addDeploymentBtn" href="$Top.Link(consultants)">&lt;&lt; Back to Products</a>
     </div>
     <script type="text/javascript">

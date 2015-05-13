@@ -12,7 +12,7 @@
             <% end_if %>
             <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn" href="$Top.Link(private_clouds)">&lt;&lt; Back to Products</a>
         </div>
-        <% if CurrentPrivateCloud.isNotPublished %>
+        <% if CurrentPrivateCloud.Published == 0 %>
             <div style="clear:both; color:red">
             THIS VERSION IS NOT CURRENTLY PUBLISHED
             </div>
@@ -35,6 +35,13 @@
         </div>
         <div style="clear:both">
             <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center" class="roundedButton save-private-cloud" href="#" id="save-private-cloud2">Save</a>
+            <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton publish-private-cloud" href="#" id="publish-private-cloud1">Publish</a>
+            <% if CurrentPrivateCloud %>
+                <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-private_cloud" href="#" >Preview</a>
+            <% end_if %>
+            <% if CurrentPrivateCloud %>
+                <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-private_cloud pdf" href="#" >Download PDF</a>
+            <% end_if %>
             <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:50px;" class="roundedButton addDeploymentBtn" href="$Top.Link(private_clouds)">&lt;&lt; Back to Products</a>
         </div>
         <script type="text/javascript">
