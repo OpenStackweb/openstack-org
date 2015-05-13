@@ -19,6 +19,13 @@ class SummitPackagePurchaseOrder
     extends DataObject
     implements ISummitPackagePurchaseOrder {
 
+    public function __construct($record = null, $isSingleton = false, $model = null) {
+        parent::__construct($record, $isSingleton, $model);
+        if($this->getIdentifier() === 0) {
+            $this->Created = MySQLDatabase56::nowRfc2822();
+        }
+    }
+
     private static $db = array (
         'FirstName'    => 'Varchar',
         'Surname'      => 'Varchar',
@@ -46,12 +53,6 @@ class SummitPackagePurchaseOrder
     private static $summary_fields = array(
     );
 
-    public function onBeforeWrite() {
-        parent::onBeforeWrite();
-        if($this->getIdentifier() === 0) {
-            $this->Created = MySQLDatabase56::nowRfc2822();
-        }
-    }
 
     /**
      * @return int
@@ -107,5 +108,35 @@ class SummitPackagePurchaseOrder
     public function package()
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Package')->getTarget();
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getField('Email');
+    }
+
+    public function getFullName()
+    {
+        return $this->getField('FirstName').' '.$this->getField('Surname');
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrganization()
+    {
+        return $this->getField('Organization');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedDate()
+    {
+        $res =  $this->getField('Created');
+        return $res;
     }
 }

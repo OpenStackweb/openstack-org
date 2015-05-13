@@ -21,6 +21,20 @@ class ApprovedPurchaseOrderEmailMessageSender implements IMessageSenderService {
     public function send(IEntity $subject)
     {
         if(is_null($subject)) throw new InvalidArgumentException('$subject cant be null');
-        //todo : implement
+
+        $email = EmailFactory::getInstance()->buildEmail(APPROVED_PURCHASE_ORDER_EMAIL_FROM,
+            $subject->getEmail(),
+            APPROVED_PURCHASE_ORDER_EMAIL_SUBJECT);
+
+        $email->setTemplate('ApprovedSummitSponsorshipPackagePurchaseOrderEmail');
+
+
+        $email->populateTemplate(array(
+            'RecipientFullName' => $subject->getFullName(),
+            'PackageName'       => $subject->package()->getName(),
+            'SummitName'        => $subject->package()->getSummitName()
+        ));
+
+        $email->send();
     }
 }

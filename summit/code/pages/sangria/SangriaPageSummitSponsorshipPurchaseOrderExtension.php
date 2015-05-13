@@ -50,12 +50,38 @@ class SangriaPageSummitSponsorshipPurchaseOrderExtension extends Extension {
         return $this->owner->getViewer('ViewPackagePurchaseOrderDetails')->process($this->owner);
     }
 
-    public function getPendingApprovalPackagesPurchaseOrder(){
+    public function getPackagesPurchaseOrder(){
+
         $query = new QueryObject(new SummitPackagePurchaseOrder);
-        $query->addAddCondition(QueryCriteria::equal('Approved',0));
-        $query->addAddCondition(QueryCriteria::equal('Rejected',0));
+
+        $status = $this->getFilterParamStatus();
+
+        switch($status){
+            case 'pending':{
+                $query->addAddCondition(QueryCriteria::equal('Approved',0));
+                $query->addAddCondition(QueryCriteria::equal('Rejected',0));
+            }
+            break;
+            case 'approved':{
+                $query->addAddCondition(QueryCriteria::equal('Approved',1));
+                $query->addAddCondition(QueryCriteria::equal('Rejected',0));
+            }
+            break;
+            case 'rejected':{
+                $query->addAddCondition(QueryCriteria::equal('Approved',0));
+                $query->addAddCondition(QueryCriteria::equal('Rejected',1));
+            }
+            break;
+        }
+
         $query->addOrder(QueryOrder::asc('Created'));
         list($list, $count) = $this->packages_repository->getAll($query, 0 , 999999);
         return new ArrayList($list);
+    }
+
+    public function getFilterParamStatus(){
+        $request = Controller::curr()->getRequest();
+        $status  = $request->postVar('status');
+        return empty($status)?'pending':$status;
     }
 }

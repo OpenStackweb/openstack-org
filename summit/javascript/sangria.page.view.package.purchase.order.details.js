@@ -74,4 +74,8 @@ $(document).ready(function ($) {
         }
         return false;
     });
+
+    $('#purchase_order_status').change(function(evt){
+        $('#purchase_order_filters').submit();
+    });
 });

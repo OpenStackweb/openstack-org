@@ -43,4 +43,24 @@ interface ISummitPackagePurchaseOrder extends IEntity {
      * @return ISummitPackage
      */
     public function package();
+
+    /**
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * @return string
+     */
+    public function getFullName();
+
+    /**
+     * @return string
+     */
+    public function getOrganization();
+
+    /**
+     * @return string
+     */
+    public function getCreatedDate();
 }

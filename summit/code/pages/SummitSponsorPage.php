@@ -15,22 +15,23 @@
 /**
  * Class SummitSponsorPage
  */
-class SummitSponsorPage extends SummitPage {
-    
-    private static $db = array (
-        'SponsorAlert'                => 'HTMLText',
-        'SponsorSteps'                => 'HTMLText',
-		'SponsorContract'             => 'Text',
-		'SponsorProspectus'           => 'Text',
-        'SponsorProspectus'           => 'Text',
+class SummitSponsorPage extends SummitPage
+{
+
+    private static $db = array(
+        'SponsorAlert' => 'HTMLText',
+        'SponsorSteps' => 'HTMLText',
+        'SponsorContract' => 'Text',
+        'SponsorProspectus' => 'Text',
+        'SponsorProspectus' => 'Text',
         'CallForSponsorShipStartDate' => 'SS_Datetime',
-        'CallForSponsorShipEndDate'   => 'SS_Datetime',
-    );    
-    
-	private static $has_many = array (
-		'SummitPackages' => 'SummitPackage',
-        'SummitAddOns'   => 'SummitAddOn',
-	);
+        'CallForSponsorShipEndDate' => 'SS_Datetime',
+    );
+
+    private static $has_many = array(
+        'SummitPackages' => 'SummitPackage',
+        'SummitAddOns' => 'SummitAddOn',
+    );
 
 
     private static $many_many = array(
@@ -41,97 +42,101 @@ class SummitSponsorPage extends SummitPage {
     private static $many_many_extraFields = array(
         'Companies' => array(
             'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight, Media', 'Startup')",
-            'SubmitPageUrl'=>'Text',
+            'SubmitPageUrl' => 'Text',
         ),
     );
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
-        if($this->ID) {
+        if ($this->ID) {
             //set current page id
             $_REQUEST["PageId"] = $this->ID;
 
             // Optional Sponsor Alert
-            $sponsorAlertField = new TextField('SponsorAlert','Sponsor Alert');
+            $sponsorAlertField = new TextField('SponsorAlert', 'Sponsor Alert');
             $fields->addFieldToTab('Root.Main', $sponsorAlertField);
 
-            
+
             // Sponsor Steps Editor
-            $sponsorStepsField = new HTMLEditorField('SponsorSteps','Steps To Become A Sponsor');
+            $sponsorStepsField = new HTMLEditorField('SponsorSteps', 'Steps To Become A Sponsor');
             $fields->addFieldToTab('Root.Main', $sponsorStepsField, 'Content');
             //call for sponsorship dates
 
-            $start_date =  new DatetimeField('CallForSponsorShipStartDate','Call For SponsorShip - Start Date');
-            $end_date   =  new DatetimeField('CallForSponsorShipEndDate','Call For SponsorShip - End Date');
+            $start_date = new DatetimeField('CallForSponsorShipStartDate', 'Call For SponsorShip - Start Date');
+            $end_date = new DatetimeField('CallForSponsorShipEndDate', 'Call For SponsorShip - End Date');
             $start_date->getDateField()->setConfig('showcalendar', true);
             $start_date->setConfig('dateformat', 'dd/MM/yyyy');
             $end_date->getDateField()->setConfig('showcalendar', true);
             $end_date->setConfig('dateformat', 'dd/MM/yyyy');
-            $fields->addFieldToTab('Root.Main',$start_date);
+            $fields->addFieldToTab('Root.Main', $start_date);
             $fields->addFieldToTab('Root.Main', $end_date);
-            
+
             // Summit Packages
             $config = GridFieldConfig_RelationEditor::create();
             $config->addComponent(new GridFieldSortableRows('Order'));
             $gridField = new GridField('SummitPackages', 'Sponsor Packages', $this->SummitPackages(), $config);
-            $fields->addFieldToTab('Root.Packages',$gridField);
-            
+            $fields->addFieldToTab('Root.Packages', $gridField);
+
             // Summit Add Ons
 
             $config = GridFieldConfig_RelationEditor::create();
             $config->addComponent(new GridFieldSortableRows('Order'));
-            
+
             // Remove pagination so that you can sort all add-ons collectively
             $config->removeComponentsByType('GridFieldPaginator');
             $config->removeComponentsByType('GridFieldPageCount');
-            
+
             $gridField = new GridField('SummitAddOn', 'Sponsor Add Ons', $this->SummitAddOns(), $config);
-            $fields->addFieldToTab('Root.AddOns',$gridField);
-            
+            $fields->addFieldToTab('Root.AddOns', $gridField);
+
             $prospectusField = new TextField('SponsorProspectus');
-            $fields->addFieldToTab('Root.ProspectusAndContract',$prospectusField);
+            $fields->addFieldToTab('Root.ProspectusAndContract', $prospectusField);
 
             $contractField = new TextField('SponsorContract');
-            $fields->addFieldToTab('Root.ProspectusAndContract',$contractField);
+            $fields->addFieldToTab('Root.ProspectusAndContract', $contractField);
 
             // sponsors
 
-            $companies = new GridField('Companies','Sponsors', $this->Companies(), GridFieldConfig_RelationEditor::create(10));
+            $companies = new GridField('Companies', 'Sponsors', $this->Companies(), GridFieldConfig_RelationEditor::create(10));
 
             $companies->getConfig()->removeComponentsByType('GridFieldEditButton');
             $companies->getConfig()->removeComponentsByType('GridFieldAddNewButton');
 
             $companies->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-                array( 'Name'            => 'Name',
+                array('Name' => 'Name',
                     "DDLSponsorshipType" => "Sponsorship Type",
                     "InputSubmitPageUrl" => "Sponsor Link")
             );
 
-            $fields->addFieldToTab('Root.SponsorCompanies',$companies);
-                        
+            $fields->addFieldToTab('Root.SponsorCompanies', $companies);
+
         }
-        return $fields;    
+        return $fields;
 
-    }    
-    
-    public function getSortedPackages() {
+    }
+
+    public function getSortedPackages()
+    {
         return $this->SummitPackages()->sort('Order');
-    }    
+    }
 
-    public function getSortedAddOns() {
+    public function getSortedAddOns()
+    {
         return $this->SummitAddOns()->sort('Order');
     }
 
-    function onAfterWrite() {
+    function onAfterWrite()
+    {
         parent::onAfterWrite();
         //update all relationships with sponsors
-        foreach($this->Companies() as $company){
-            if(isset($_REQUEST["SponsorshipType_{$company->ID}"])){
+        foreach ($this->Companies() as $company) {
+            if (isset($_REQUEST["SponsorshipType_{$company->ID}"])) {
                 $type = $_REQUEST["SponsorshipType_{$company->ID}"];
                 $sql = "UPDATE SummitSponsorPage_Companies SET SponsorshipType ='{$type}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
                 DB::query($sql);
             }
-            if(isset($_REQUEST["SubmitPageUrl_{$company->ID}"])){
+            if (isset($_REQUEST["SubmitPageUrl_{$company->ID}"])) {
                 $page_url = $_REQUEST["SubmitPageUrl_{$company->ID}"];
                 $sql = "UPDATE SummitSponsorPage_Companies SET SubmitPageUrl ='{$page_url}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
                 DB::query($sql);
@@ -145,7 +150,8 @@ class SummitSponsorPage extends SummitPage {
 /**
  * Class SummitSponsorPage_Controller
  */
-class SummitSponsorPage_Controller extends SummitPage_Controller {
+class SummitSponsorPage_Controller extends SummitPage_Controller
+{
     /**
      * @var ISummitPackagePurchaseOrderManager
      */
@@ -154,11 +160,13 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
     /**
      * @return ISummitPackagePurchaseOrderManager
      */
-    public function getPackagePurchaseOrderManager(){
+    public function getPackagePurchaseOrderManager()
+    {
         return $this->package_purchase_order_manager;
     }
 
-    public function setPackagePurchaseOrderManager(ISummitPackagePurchaseOrderManager $package_purchase_order_manager){
+    public function setPackagePurchaseOrderManager(ISummitPackagePurchaseOrderManager $package_purchase_order_manager)
+    {
         $this->package_purchase_order_manager = $package_purchase_order_manager;
     }
 
@@ -167,109 +175,122 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
      */
     private $packagePurchaseOrderSecurityToken;
 
-	private static $allowed_actions = array (
-		'prospectus',
+    private static $allowed_actions = array(
+        'prospectus',
         'contract',
         'emitPackagePurchaseOrder',
         'searchOrg',
-	);    
+    );
 
-    public function init() {
-		parent::init();
+    public function init()
+    {
+        parent::init();
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js');
         Requirements::javascript('themes/openstack/javascript/pure.min.js');
-		Requirements::javascript("summit/javascript/Chart.min.js");
+        Requirements::javascript("summit/javascript/Chart.min.js");
         Requirements::javascript("summit/javascript/sponsor.js");
         Requirements::javascript('summit/javascript/sponsor.sponsorships.js');
 
         $this->packagePurchaseOrderSecurityToken = new SecurityToken('packagePurchaseOrderSecurityToken');
-	}
-    
-    public function prospectus() {
+    }
+
+    public function prospectus()
+    {
         $ProspectusURL = $this->SponsorProspectus;
         return Controller::redirect($ProspectusURL);
     }
 
-    public function contract() {
+    public function contract()
+    {
         $contractURL = $this->SponsorContract;
         return Controller::redirect($contractURL);
     }
 
-    private function Sponsors($type){
+    private function Sponsors($type)
+    {
         $page_id = $this->ID;
-        $page    = SummitSponsorPage::get()->byID($page_id);
-        $res     = $page->getManyManyComponents("Companies","SponsorshipType='{$type}'","ID");
+        $page = SummitSponsorPage::get()->byID($page_id);
+        $res = $page->getManyManyComponents("Companies", "SponsorshipType='{$type}'", "ID");
         return $res;
     }
 
-    public function StartupSponsors(){
+    public function StartupSponsors()
+    {
         return $this->Sponsors("Startup");
     }
 
-    public function HeadlineSponsors(){
+    public function HeadlineSponsors()
+    {
         return $this->Sponsors("Headline");
     }
 
-    public function PremierSponsors(){
+    public function PremierSponsors()
+    {
         return $this->Sponsors("Premier");
     }
 
-    public function EventSponsors(){
+    public function EventSponsors()
+    {
         return $this->Sponsors("Event");
     }
 
-    public function InKindSponsors(){
+    public function InKindSponsors()
+    {
         return $this->Sponsors("InKind");
     }
 
-    public function SpotlightSponsors(){
+    public function SpotlightSponsors()
+    {
         return $this->Sponsors("Spotlight");
     }
 
-    public function MediaSponsors(){
+    public function MediaSponsors()
+    {
         return $this->Sponsors("Media");
     }
 
-    public function ShowSponsorShipPackages(){
-        $now        = new \DateTime('now', new DateTimeZone('UTC'));
+    public function ShowSponsorShipPackages()
+    {
+        $now = new \DateTime('now', new DateTimeZone('UTC'));
         $start_date = new \DateTime($this->CallForSponsorShipStartDate, new DateTimeZone('UTC'));
-        $end_date   = new \DateTime($this->CallForSponsorShipEndDate, new DateTimeZone('UTC'));
+        $end_date = new \DateTime($this->CallForSponsorShipEndDate, new DateTimeZone('UTC'));
         return $now >= $start_date && $now <= $end_date;
     }
 
-    public function getPackagePurchaseOrderSecurityID(){
-        return new HiddenField($this->packagePurchaseOrderSecurityToken->getName() , $this->packagePurchaseOrderSecurityToken->getName(), $this->packagePurchaseOrderSecurityToken->getValue());
+    public function getPackagePurchaseOrderSecurityID()
+    {
+        return new HiddenField($this->packagePurchaseOrderSecurityToken->getName(), $this->packagePurchaseOrderSecurityToken->getName(), $this->packagePurchaseOrderSecurityToken->getValue());
     }
 
     /**
      * @param $request
      * @return SS_HTTPResponse|string
      */
-    public function emitPackagePurchaseOrder($request){
+    public function emitPackagePurchaseOrder($request)
+    {
 
-        if (!Director::is_ajax()){
+        if (!Director::is_ajax()) {
             return $this->forbiddenError();
         }
 
-        if(!$this->packagePurchaseOrderSecurityToken->checkRequest($request)) {
+        if (!$this->packagePurchaseOrderSecurityToken->checkRequest($request)) {
             return $this->forbiddenError();
         }
 
         $body = $this->request->getBody();
-        $json = json_decode($body,true);
+        $json = json_decode($body, true);
 
         $this->packagePurchaseOrderSecurityToken->reset();
 
         try {
             $this->getPackagePurchaseOrderManager()->registerPurchaseOrder($json, new NewPurchaseOrderEmailMessageSender);
-        }
-        catch(EntityValidationException $ex1){
+        } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(Exception $ex){
+        } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
@@ -280,20 +301,21 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
      * @param $request
      * @return SS_HTTPResponse
      */
-    public function searchOrg($request){
+    public function searchOrg($request)
+    {
 
-        if (!Director::is_ajax()){
-           return $this->forbiddenError();
+        if (!Director::is_ajax()) {
+            return $this->forbiddenError();
         }
 
-        $term  = $request->getVar('term');
-        $term  = Convert::raw2sql($term);
+        $term = $request->getVar('term');
+        $term = Convert::raw2sql($term);
 
         $organizations = Org::get()->filter('Name:PartialMatch', $term)->limit(10);
 
-        if($organizations) {
+        if ($organizations) {
 
-            $suggestions   = array();
+            $suggestions = array();
 
             foreach ($organizations as $org) {
                 array_push($suggestions, array('id' => $org->ID, 'label' => $org->Name, 'value' => $org->Name));
@@ -306,5 +328,5 @@ class SummitSponsorPage_Controller extends SummitPage_Controller {
             return $response;
         }
     }
-	
+
 }

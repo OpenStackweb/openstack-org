@@ -131,7 +131,7 @@
 
                     current_package_id = null;
                     form_validator.resetForm();
-
+                    form.cleanForm();
                 }
             }
             else{
