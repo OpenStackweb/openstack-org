@@ -54,6 +54,7 @@
                     <th><a href="$Top.Link?sort=name">Product Name ^</a></th>
                     <th>Product Type</th>
                     <th>Published</th>
+                    <th>Draft</th>
                     <th><a href="$Top.Link?sort=status">Status ^</a></th>
                     <th><a href="$Top.Link?sort=updated">Last Update ^</a></th>
                     <% if Top.isSuperAdmin %>
@@ -76,7 +77,18 @@
                             $MarketPlace.Name
                         </td>
                         <td>
-                            <% if LiveServiceID == 0 %>Draft<% else %>Published<% end_if %>
+                            <% if isDraft() == 1 %>
+                                <div style="text-align:center"> - </div>
+                            <% else %>
+                                Published
+                            <% end_if %>
+                        </td>
+                        <td>
+                            <% if isDraft() == 1 || hasPublishedDraft() == 0 %>
+                                Pending
+                            <% else %>
+                                <div style="text-align:center"> - </div>
+                            <% end_if %>
                         </td>
                         <td>
                             <% if Active %>Active<% else %>Deactivated<% end_if %>
@@ -95,8 +107,14 @@
                         <% end_if %>
                         <td style="min-width: 200px" width="30%">
                             <a class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>?id=$ID&is_draft=$isDraft">Edit Product Details</a>
-                            <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/<% if isDraft  %>draft_<% end_if %>preview">Preview Product</a>
-                            <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/<% if isDraft  %>draft_<% end_if %>pdf">PDF</a>
+                            <% if isDraft() %>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/draft_preview">Preview Draft</a>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/draft_pdf">PDF</a>
+                            <% else %>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/preview">Preview Live</a>
+                                <a target="_blank" class="product-button roundedButton addDeploymentBtn" href="<% with MarketPlace  %><% if Name == "Appliance"  %>$Top.Link(appliance)<% end_if %><% if Name == "Distribution"  %>$Top.Link(distribution)<% end_if %><% end_with %>/$ID/pdf">PDF</a>
+                            <% end_if %>
+
                             <a class="roundedButton delete-implementation product-button addDeploymentBtn" href="#"
                                data-id="{$ID}"
                                data-is_draft="{$isDraft}"

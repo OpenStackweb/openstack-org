@@ -35,6 +35,10 @@ class CompanyService
 		'EditedBy'         => 'Member',
 	);
 
+    static $belongs_to = array (
+        'DraftService' => 'CompanyServiceDraft.LiveService'
+    );
+
 	private static $indexes = array(
 		'Company_Name_Class' => array('type'=>'unique', 'value'=>'Name,CompanyID,ClassName')
 	);
@@ -67,9 +71,13 @@ class CompanyService
         return 0;
     }
 
-    public function isNotPublished()
+    public function Published() //this is the live version, always published
     {
-        return 0;
+        return 1;
+    }
+
+    public function hasPublishedDraft() {
+        return $this->DraftService()->Published;
     }
 
 	public function setCompany(ICompany $company)

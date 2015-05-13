@@ -57,11 +57,6 @@ class CompanyServiceDraft
         return 1;
     }
 
-    public function isNotPublished()
-    {
-        return !$this->getField('Published');
-    }
-
     public function setPublished($published)
     {
         $this->setField('Published',$published);

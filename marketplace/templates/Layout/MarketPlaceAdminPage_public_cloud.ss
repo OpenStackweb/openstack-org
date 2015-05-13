@@ -12,7 +12,7 @@
         <% end_if %>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn" href="$Top.Link(public_clouds)">&lt;&lt; Back to Products</a>
     </div>
-    <% if CurrentPublicCloud.isNotPublished %>
+    <% if CurrentPublicCloud.Published == 0 %>
         <div style="clear:both; color:red">
         THIS VERSION IS NOT CURRENTLY PUBLISHED
         </div>
@@ -35,6 +35,13 @@
     </div>
     <div style="clear:both">
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center" class="roundedButton save-public-cloud" href="#" id="save-public-cloud2">Save</a>
+        <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton publish-public-cloud" href="#" id="publish-public-cloud1">Publish</a>
+        <% if CurrentPublicCloud %>
+            <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-public_cloud" href="#" >Preview</a>
+        <% end_if %>
+        <% if CurrentPublicCloud %>
+            <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-public_cloud pdf" href="#" >Download PDF</a>
+        <% end_if %>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:50px;" class="roundedButton addDeploymentBtn" href="$Top.Link(public_clouds)">&lt;&lt; Back to Products</a>
     </div>
     <script type="text/javascript">

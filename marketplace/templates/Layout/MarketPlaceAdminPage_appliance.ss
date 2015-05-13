@@ -12,7 +12,7 @@
         <% end_if %>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn" href="$Top.Link">&lt;&lt; Back to Products</a>
     </div>
-    <% if CurrentAppliance.isNotPublished %>
+    <% if CurrentAppliance.Published == 0 %>
         <div style="clear:both; color:red">
         THIS VERSION IS NOT CURRENTLY PUBLISHED
         </div>
@@ -33,6 +33,13 @@
     </div>
     <div style="clear:both">
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center" class="roundedButton save-appliance" href="#" id="save-appliance2">Save</a>
+        <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton publish-appliance" href="#" id="publish-appliance">Publish</a>
+        <% if CurrentAppliance %>
+            <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-appliance" href="#" >Preview</a>
+        <% end_if %>
+        <% if CurrentAppliance %>
+            <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton addDeploymentBtn preview-appliance pdf" href="#" >Download PDF</a>
+        <% end_if %>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:50px;" class="roundedButton addDeploymentBtn" href="$Top.Link">&lt;&lt; Back to Products</a>
     </div>
     <script type="text/javascript">
