@@ -37,11 +37,6 @@ h5 {
   background-size: cover;
   position: relative; }
 
-.intro-header.unreal {
-  background: url(//openstack.org/assets/enterprise/hero-bkgd-unreal.jpg) no-repeat center center;
-  background-size: cover;
-  position: relative; }
-
 .intro-message {
   position: relative;
   padding-top: 70px;

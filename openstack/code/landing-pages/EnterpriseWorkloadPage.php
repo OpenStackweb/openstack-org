@@ -26,10 +26,6 @@ class EnterpriseWorkloadPage_Controller extends Page_Controller {
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
         Requirements::javascript('themes/openstack/javascript/enterprise.js');   
-<<<<<<< HEAD
-=======
-        Requirements::javascript('themes/openstack/javascript/bootstrap.lightbox.js');        
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
 
         Requirements::customScript("jQuery(document).ready(function($) {
 
