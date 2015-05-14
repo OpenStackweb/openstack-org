@@ -1,10 +1,10 @@
 <% require themedCSS(videos) %>
-
+</div>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12">
 			<div class="eventTitleArea">
-				<h1>Paris Summit 2014: Videos</h1>
+				<h1>$Title</h1>
 			</div>
 		</div>
 	</div>
@@ -100,6 +100,7 @@
 
 <div class="container">
 
+<% if Keynotes %>
 <div class="row">
 	<div class="col-lg-12" id="keynotes">
 		<h2 id="keynotes">Keynotes</h2>
@@ -107,194 +108,38 @@
 </div>
 
 <div class="row">
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/openstack-foundation-keynote">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/QOhK0qfiw98/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	OpenStack Foundation Keynote
-	</p>
-	<p class="video-thumb-speaker">
-	Jonathan Bryce
-	</p>
-	</a>
-	</div>
 
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/managing-r-and-38-d-externally">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/5BbNwVpi2fY/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Managing R&amp;D Externally
-	</p>
-	<p class="video-thumb-speaker">
-	Jim Zemlin
-	</p>
-	</a>
-	</div>
+<% loop Keynotes %>
 
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/bbva-bank-on-openstack">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/PESWFDPbexs/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	BBVA Bank on OpenStack
-	</p>
-	<p class="video-thumb-speaker">
-	Jose Maria San Jose Juarez
-	</p>
-	</a>
-	</div>
+      <!-- Video Block -->
+      <% if YouTubeID %>
+        <div class="col-lg-3 col-md-3 col-sm-3 video-block">
+          <a href="{$Top.Link}presentation/{$URLSegment}">
+            <div class="video-thumb">
+              <div class="thumb-play"></div>
+              <img class="video-thumb-img" src="//img.youtube.com/vi/{$YouTubeID}/0.jpg">
+            </div>
+            <p class="video-thumb-title">
+              $Name
+            </p>
+            <p class="video-thumb-speaker">
+              $Speakers
+            </p>
+          </a>
+        </div>
+      <% end_if %>
+  <% if MultipleOf(4) %>
+      </div>
+      <div class="row">
+  <% end_if %>
 
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/private-cloud-openstack-and-the-bmw-datacenter">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/Hk3VNbeftks/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Private Cloud, OpenStack, and the BMW Datacenter
-	</p>
-	<p class="video-thumb-speaker">
-	Dr. Stefan Lenz
-	</p>
-	</a>
-	</div>
+  <% if Last %>
+      </div>
+  <% end_if %>
+
+<% end_loop %>
 
 </div>
-<div class="row">
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/standing-up-openstack-at-time-warner-cable">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/gqRkDVOslZ8/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Standing Up OpenStack at Time Warner Cable
-	</p>
-	<p class="video-thumb-speaker">
-	Matt Haines
-	</p>
-	</a>
-	</div>
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/superuser-awards">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/_YS5gzWrqnw/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Superuser Awards!
-	</p>
-	<p class="video-thumb-speaker">
-	</p>
-	</a>
-	</div>
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/headline-panel-global-enterprise-it-companies-supporting-openstack">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/rQgQoOVbOR4/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Headline Panel: Global Enterprise IT Companies Supporting OpenStack
-	</p>
-	<p class="video-thumb-speaker">
-	Mark McLoughlin,Haiying Wang,Ruchi Bhargava,Mats Karlsson
-	</p>
-	</a>
-	</div>
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/openstack-in-a-hybrid-world">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/flUicBD0peI/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	OpenStack Keynote: "Distributed"
-	</p>
-	<p class="video-thumb-speaker">
-	Mark Collier
-	</p>
-	</a>
-	</div>
-
-</div>
-<div class="row">
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/cern-openstack-user-story">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/7k3VnWXOjP4/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	CERN OpenStack User Story
-	</p>
-	<p class="video-thumb-speaker">
-	Tim Bell
-	</p>
-	</a>
-	</div>
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/accelerating-innovation-at-expedia-with-openstack">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/6ylRJGQwA3Y/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Accelerating Innovation at Expedia with OpenStack
-	</p>
-	<p class="video-thumb-speaker">
-	Rajeev Khanna
-	</p>
-	</a>
-	</div>
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/why-diversity-matters-musings-on-tapjoy-and-39-s-first-year-on-openstack">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/sudJIemM_N8/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Why Diversity Matters: Musings on Tapjoy's First Year on OpenStack
-	</p>
-	<p class="video-thumb-speaker">
-	Weston Jossey
-	</p>
-	</a>
-	</div>
-
-
-	<div class="col-lg-3 col-md-3 col-sm-3 video-block">
-	<a href="/summit/openstack-paris-summit-2014/session-videos/presentation/cloud-control-to-major-telco">
-	<div class="video-thumb">
-	<div class="thumb-play"></div>
-	<img class="video-thumb-img" src="//img.youtube.com/vi/uBlE9GatNz4/0.jpg">
-	</div>
-	<p class="video-thumb-title">
-	Cloud Control to Major Telco
-	</p>
-	<p class="video-thumb-speaker">
-	Tobias Ford,Markus Brunner,Xiaolong Kong
-	</p>
-	</a>
-	</div>
-
-</div>
-
-</div>
+<% end_if %>
 
 <% include VideoThumbnails %>

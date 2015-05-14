@@ -12,9 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 class SchedToolsPage extends Page
 {
-	static $db = array();
+	static $db = array(
+		'SchedEventLink' => 'Text',
+		'SchedEventAPIKey' => 'Text',
+		'SummitID' => 'Int',
+		'PresentationCategoryPageID' => 'Int'
+	);
 	static $has_one = array();
 	static $has_many = array();
 
@@ -23,12 +29,20 @@ class SchedToolsPage extends Page
 		'ShowInSearch' => false
 	);
 
+    function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
 
-	function getCMSFields()
-	{
-		$fields = parent::getCMSFields();
-		return $fields;
-	}
+        $fields->addFieldToTab("Root.SchedSettings", new TextField('SchedEventLink', 'Sched Event Link'));
+        $fields->addFieldToTab("Root.SchedSettings", new TextField('SchedEventAPIKey', 'Sched API Key'));
+        $fields->addFieldToTab("Root.SchedSettings", new TextField('SummitID', 'ID of Summit For Importing'));
+        $fields->addFieldToTab("Root.SchedSettings", new TextField('PresentationCategoryPageID', 'ID of parent video page'));
+
+
+        return $fields;
+    }
+
+
 }
 
 
@@ -114,6 +128,7 @@ class SchedToolsPage_Controller extends Page_Controller
 					$Presentation->PopulateFromSchedEvent($SchedEvent->ID);
 					$Presentation->YouTubeID = $CleanedYoutubeID;
 					$Presentation->sched_key = $SchedEvent->sched_key;
+					$Presentation->PresentationCategoryPageID = $this->PresentationCategoryPageID;
 					$Presentation->write();
 				}
 
@@ -157,7 +172,7 @@ class SchedToolsPage_Controller extends Page_Controller
 
 	function ImportSessionsFromSched()
 	{
-		$feed = new RestfulService('http://openstacksummitmay2014atlanta.sched.org/api/session/export?api_key=26b0159814359e6527005e347742f287&format=xml', 7200);
+		$feed = new RestfulService('http://'.$this->SchedEventLink.'/api/session/export?api_key='.$this->SchedEventAPIKey.'&format=xml', 7200);
 		$feedXML = $feed->request()->getBody();
 
 		// This transformation keeps the parser from tripping over the XMLbody
@@ -189,7 +204,52 @@ class SchedToolsPage_Controller extends Page_Controller
 		}
 
 		echo "Sessions imported successfully.";
+		$this->SchedEventsToPresentations($this->SummitID);
+		echo "<br/>Sessions converted to Presentations Successfully.";
 
+
+	}
+
+	function SchedEventsToPresentations($SummitID)
+	{
+		$Events = SchedEvent::get();
+		foreach ($Events as $Event) {
+			
+			// Look for an existing presentaiton
+			$Presentation = Presentation::get()
+				->filter(array(
+						'event_key' => $Event->event_key,
+						'SummitID' => $SummitID
+					))
+				->first();
+
+			// If one is not found, create a new presentation object
+			if(!$Presentation) $Presentation = new Presentation();
+
+			// Bring over existing data
+			$Presentation->Name = $Event->eventtitle;
+			$Presentation->DisplayOnSite = TRUE;
+			$Presentation->Description = $Event->description;
+			$Presentation->StartTime = $Event->event_start;
+			$Presentation->EndTime = $Event->event_end;
+			$Presentation->Type = $Event->event_type;
+			$Presentation->Speakers = $Event->speakers;
+			$Presentation->event_key = $Event->event_key;
+			$Presentation->PresentationCategoryPageID = $this->PresentationCategoryPageID;
+
+			// Assign summit
+			$Presentation->SummitID = $SummitID;
+			$Presentation->write();
+
+			if ($Event->UploadedMedia()) {
+				$Presentation->SlidesLink = $Event->UploadedMedia()->link();
+			} elseif ($Event->HostedMediaURL()) {
+				$Presentation->SlidesLink = $Event->HostedMediaURL();
+			}
+
+			$Presentation->write();
+
+		}
 	}
 
 	function ShowSchedSpeakers()

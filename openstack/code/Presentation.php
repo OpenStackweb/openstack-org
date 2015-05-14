@@ -30,7 +30,8 @@ class Presentation extends DataObject
 		'Day' => 'Int',
 		'Speakers' => 'Text',
 		'SlidesLink' => 'Varchar(255)',
-		'event_key' => 'Varchar(255)'
+		'event_key' => 'Varchar(255)',
+		'IsKeynote' => 'Boolean'
 	);
 
 	Static $defaults = array(
@@ -68,7 +69,8 @@ class Presentation extends DataObject
 			new TextField('SlidesLink', 'Link To Slides (if available)'),
 			new TextField('StartTime', 'Video Start Time'),
 			new TextField('EndTime', 'Video End Time'),
-			new HTMLEditorField('Description', 'Description')
+			new HTMLEditorField('Description', 'Description'),
+			new CheckboxField('IsKeynote','Keynote Presenation')
 		);
 		return $fields;
 	}
@@ -96,6 +98,16 @@ class Presentation extends DataObject
 		return 'N/A';
 	}
 
+	private function generateURLSegment($title){
+		$filter = URLSegmentFilter::create();
+		$t = $filter->filter($title);
+
+		// Fallback to generic page name if path is empty (= no valid, convertable characters)
+		if(!$t || $t == '-' || $t == '-1') $t = "page-$this->ID";
+
+		return $t;
+	}	
+
 	function onBeforeWrite()
 	{
 		parent::onBeforeWrite();
@@ -103,7 +115,7 @@ class Presentation extends DataObject
 
 		// If there is no URLSegment set, generate one from Title
 		if ((!$this->URLSegment || $this->URLSegment == 'new-presentation') && $this->Title != 'New Presentation') {
-			$this->URLSegment = SiteTree::generateURLSegment($this->Title);
+			$this->URLSegment = $this->generateURLSegment($this->Title);
 		} else if ($this->isChanged('URLSegment')) {
 			// Make sure the URLSegment is valid for use in a URL
 			$segment = preg_replace('/[^A-Za-z0-9]+/', '-', $this->URLSegment);
@@ -121,19 +133,6 @@ class Presentation extends DataObject
 		while ($this->LookForExistingURLSegment($this->URLSegment)) {
 			$this->URLSegment = preg_replace('/-[0-9]+$/', null, $this->URLSegment) . '-' . $count;
 			$count++;
-		}
-
-		// If there's no PresentationCategoryPage, add the current summit
-
-		if (!$this->PresentationCategoryPageID) {
-			$SummitPageID = 0;
-			$SummitRedirector = RedirectorPage::get()->byID(154);
-			If ($SummitRedirector) {
-				$SummitPageID = $SummitRedirector->LinkToID;
-				$VideoPage = DataObject::get_one('PresentationCategoryPage', '`ParentID` = ' . $SummitPageID);
-			}
-
-			if ($VideoPage) $this->PresentationCategoryPageID = $VideoPage->ID;
 		}
 
 	}
@@ -194,33 +193,4 @@ class Presentation extends DataObject
 		$this->write();
 	}
 
-	function SchedEventImport($ParentPageID)
-	{
-		$Events = DataObject::get_one('SchedEvent', '');
-		foreach ($Events as $Event) {
-			$Presentation = new Presentation();
-
-			// Bring over existing data
-			$Presentation->Name = $Event->eventtitle;
-			$Presentation->DisplayOnSite = TRUE;
-			$Presentation->Description = $Event->description;
-			$Presentation->StartTime = $Event->event_start;
-			$Presentation->EndTime = $Event->event_end;
-			$Presentation->Type = $Event->event_type;
-			$Presentation->Speakers = $Event->speakers;
-
-			// Assign parent page
-			$Presentation->PresentationCategoryPageID = $ParentPageID;
-			$Presentation->write();
-
-			if ($Event->UploadedMedia()) {
-				$Presentation->SlidesLink = $Event->UploadedMedia()->link();
-			} elseif ($Event->HostedMediaURL()) {
-				$Presentation->SlidesLink = $Event->HostedMediaURL();
-			}
-
-			$Presentation->write();
-
-		}
-	}
 }
