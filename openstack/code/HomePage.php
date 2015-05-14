@@ -27,6 +27,7 @@ class HomePage extends Page
         'PromoButtonUrl' => 'Text',
         "PromoDatesText" => 'Text',
         "PromoHeroCredit" => 'Text',
+        "SummitMode" => 'Boolean'
     );
 
     private static $has_one  = array(
@@ -43,7 +44,14 @@ class HomePage extends Page
             'No' => 'No video playing.'
         ));
 
+        $SummitModeField = new OptionSetField('SummitMode', 'Homepage mode:', array(
+            0 => 'Normal Mode',
+            1 => 'Summit Mode'
+        ));
+
+
         $fields->addFieldToTab("Root.Main", $VideoLiveField, 'Content');
+        $fields->addFieldToTab("Root.Main", $SummitModeField, 'Content');
 
         // Countdown Date
         $EventStartDate = new DateField('EventDate', 'First Day of Event (for counting down)');
@@ -126,7 +134,7 @@ class HomePage_Controller extends Page_Controller
         // turn the video on if set in a URL parameter
         if(isset($getVars['video'])) $this->VideoCurrentlyPlaying = 'Yes';
 
-        if ($this->SummitMode == 'Yes' || isset($getVars['summit'])) {
+        if ($this->SummitMode == TRUE || isset($getVars['summit'])) {
             return $this->renderWith(array('HomePage_Summit', 'HomePage', 'Page'));
         } else {
             return $this;
