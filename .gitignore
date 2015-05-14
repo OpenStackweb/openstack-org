@@ -46,8 +46,10 @@ elections/input
 blog
 themes/openstack/images
 tmp/*
-geoip
 geoip/*
 mailoutput/*
 private-assets/*
-private-assets
+zen_fields/*
+geoip
+zen_fields
+*.css.map
