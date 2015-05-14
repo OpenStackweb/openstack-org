@@ -17,11 +17,7 @@
                 <div class="col-lg-8 col-sm-8">
                     <div class="intro-message">
                         <h1>Expediting Digital Workflow with OpenStack</h1>
-<<<<<<< HEAD
                         <h3>DigitalFilm Tree funnels thousands of hours of video footage to make a 1 hour TV show using a mix of private and public OpenStack clouds.</h3>
-=======
-                        <h3>DigitalFilm Tree funnels thousands of hours of video footage to a 1 hour TV show using a mix of private and public OpenStack clouds.</h3>
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-4">
@@ -102,11 +98,7 @@
         <div class="container">
             <div class="row section-title-center">
                 <h4 class="above">From Camera to Couch</h4>
-<<<<<<< HEAD
-                <h1>How A Leading Production Firm Created Adaptable Workflows with OpenStack</h1>
-=======
-                <h1>How a leading firm innovatives on the fly using OpenStack</h1>
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
+                <h1>How A Leading Production Firm Created Adaptable Workflow with OpenStack</h1>
             </div>
             <!--Method 1-->
             <div class="row">
@@ -122,11 +114,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="thumbnails">
-<<<<<<< HEAD
                         <img src="//openstack.org/assets/enterprise/digital-workflow/video-soon.svg" onerror="//openstack.orgassets/enterprise/digital-workflow/video-soon.jpg" alt="Video coming soon"/>
-=======
-                        <img src="/themes/openstack/images/enterprise/digital-workflow/video-soon.svg" onerror="themes/openstack/images/enterprise/digital-workflow/video-soon.svg" alt="Video coming soon"/>
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                     </div>
                 </div>
             </div>
@@ -134,33 +122,19 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
-<<<<<<< HEAD
                         <a href="//openstack.org/assets/enterprise/digital-workflow/dft-workflow-diagram.svg" class="thumbnail">
                             <img src="//openstack.org/assets/enterprise/digital-workflow/dft-workflow-diagram.svg" onerror="///openstack.org/assets/enterprise/digital-workflow/dft-workflow-diagram.jpg" alt="Digital FilmTree OpenStack workflow"/>
-=======
-                        <a href="themes/openstack/images/enterprise/digital-workflow/dft-workflow-diagram.svg" class="thumbnail">
-                            <img src="/themes/openstack/images/enterprise/digital-workflow/dft-workflow-diagram.svg" onerror="/themes/openstack/images/enterprise/digital-workflow/dft-workflow-diagram.jpg" alt="Digital FilmTree OpenStack workflow"/>
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                         </a>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <h2 class="section-heading">The Process</h2>
-<<<<<<< HEAD
-                    <p class="lead">DigitalFilm Tree's Workflow Explained</p>
-                    <p>
-                        To develop films and television shows such as UnREAL, DigitalFilm Tree's workflow run through multiple OpenStack clouds. As shown in this diagram, their workflow is as follows:
-                        <ol>
-                            <li>
-                                Directors shoot raw footage for UnREAL (and other TV shows) on digital video in Vancouver.  Filmmakers upload video to temporary storage in the HP Public Cloud and hosted private cloud by Blue Box.
-=======
                     <p class="lead">Digital Film Tree's Workflow Explained</p>
                     <p>
                         To develop "UnREAL" Television Show, DigitalFilm Tree's workflow run through multiple OpenStack clouds. As shown in this diagram, their workflow is as follows:
                         <ol>
                             <li>
                                 Directors shoot raw footage for UnREAL (and other TV shows) on digital video in Vancouver.  Filmmakers upload video to temporary storage in the HP Public Cloud and Blue Box hybrid clouds.
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                             </li>
                             <li>
                                 Raw footage is transcoded from high resolution to proxy resolution on the external clouds, moved to Swift object storage and transported between Vancouver and Los Angeles.
@@ -172,11 +146,7 @@
                                 Final video footage is assembled. Director/producer feedback is incorporated, outsourced special effects are rendered and added. 
                             </li>
                             <li>
-<<<<<<< HEAD
-                                The show or movie is transferred from DigitalFilm Tree's cloud to Comcast or other cable providers.
-=======
                                 The show or movie is transferred from the DigitalFilm Tree cloud to a Comcast or other cable providers’ OpenStack cloud.
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                             </li>
                         </ol>
                     </p>
@@ -242,13 +212,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
-<<<<<<< HEAD
-                        <a href="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" class="thumbnail">
-                            <img src="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" onerror="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.jpg" alt="Digital FilmTree OpenStack Federated Identity"/>
-=======
-                        <a href="themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" class="thumbnail">
-                            <img src="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" onerror="themes/openstack/images/enterprise/digital-workflow/federation-workflow.jpg" alt="Digital FilmTree OpenStack Federated Identity"/>
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
+                        <a href="//openstack.org/assets/enterprise/digital-workflow/federation-workflow.svg" class="thumbnail">
+                            <img src="//openstack.org/assets/enterprise/digital-workflow/federation-workflow.svg" onerror="//openstack.orgassets/enterprise/digital-workflow/federation-workflow.jpg" alt="Digital FilmTree OpenStack Federated Identity"/>
                         </a>
                     </div>
                 </div>
@@ -332,11 +297,7 @@
                             Read the white paper for the complete DigitalFilm Tree story and how the technologies used apply to other enterprises and digital workflows in the software-defined economy.  Like DigitalFilm Tree, today's savvy businesses know how to leverage cloud capabilities and economics to achieve leadership in their fields.
                         </p>
                         <p class="file-info">
-<<<<<<< HEAD
-                            <a href="#" data-toggle="modal" data-target="#downloadModal">WorkloadPortabilityWhitePaper.PDF | 995kb</a>
-=======
                             <a href="#" data-toggle="modal" data-target="#downloadModal">WorkflowPortabilityWhitePaper.PDF | 1.4MB</a>
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                         </p>
                         <a href="#" class="btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download</a>
                     </div>
@@ -376,82 +337,44 @@
                 <div class="col-lg-12">
                     <h2>Featured Workflow Content</h2>
                     <p>
-<<<<<<< HEAD
                         OpenStack Powered clouds - private, public and hosted private - offer unmatched interoperability and identity security for effectively servicing unpredictable workload needs. These resources delve into the value of - and technology behind - an interoperating network of compatible clouds.
-=======
-                        OpenStack Powered clouds - private, public and hosted private - offer unmatched interoperability and identity security for effectively servicing unpredictable workload needs. These resources delve into the value of OpenStack Powered branded offerings and federated identity.
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-sm-4">
-<<<<<<< HEAD
                     <a href="http://superuser.openstack.org/articles/lew-tucker-a-world-of-many-openstack-clouds">
                     <div class="video-wrapper">
                          <div class="play-button">
-                            <img src="//openstack.org/assets/enterprise/read-dark.png">
+                            <img src="//openstack.org/assets/enterprise/play-button-dark.png">
                         </div>
                         <div class="video-overlay">
                              <div class="small-play-button">
-                                <img src="//openstack.org/assets/enterprise/read.png">
+                                <img src="//openstack.org/assets/enterprise/play-button.png">
                             </div>
                             <p>
                                 Lew Tucker: A World of Many (OpenStack) Clouds
                             </p>
                         </div>
                         <img class="video-image" src="//openstack.org/assets/enterprise/digital-workflow/feature1.jpg" alt="Lew Tucker: A World of Many (OpenStack) Clouds">
-=======
-                    <a href="#" data-toggle="modal" data-target="#VideoModalDF1">
-                    <div class="video-wrapper">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/enterprise/play-button-dark.png">
-                        </div>
-                        <div class="video-overlay">
-                            <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise/play-button.png">
-                            </div>
-                            <p>
-                                Learn more about the OpenStack Powered program and requirements from the Foundation's Lauren Sell and Mark Collier.
-                            </p>
-                        </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise/digital-workflow/video-1.jpg" alt="April 2015 Marketing Meeting: OpenStack Powered">
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                     </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-<<<<<<< HEAD
                     <a href="http://superuser.openstack.org/articles/case-study-intel-uses-openstack">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/assets/enterprise/read-dark.png">
+                            <img src="//openstack.org/assets/enterprise/play-button-dark.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/assets/enterprise/read.png">
+                                <img src="//openstack.org/assets/enterprise/play-button.png">
                             </div>
                             <p>
                                Case Study: Intel Uses OpenStack
                             </p>
                         </div>
                         <img class="video-image" src="//openstack.org/assets/enterprise/digital-workflow/feature2.jpg" alt="Case Study: Intel Uses OpenStack">
-=======
-                    <a href="#" data-toggle="modal" data-target="#VideoModalDF2">
-                    <div class="video-wrapper">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/enterprise/play-button-dark.png">
-                        </div>
-                        <div class="video-overlay">
-                            <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise/play-button.png">
-                            </div>
-                            <p>
-                                This presentation describes the federated identity enhancements added to support Keystone to Keystone federation for enabling hybrid cloud functionality.
-                            </p>
-                        </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise/digital-workflow/video-2.jpg" alt="Keystone to Keystone Federation">
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                     </div>
                     </a>
                 </div>
@@ -459,29 +382,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalDF3">
                     <div class="video-wrapper">
                         <div class="play-button">
-<<<<<<< HEAD
                             <img src="//openstack.org/assets/enterprise/play-button.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
                                 <img src="//openstack.org/assets/enterprise/play-button.png">
-=======
-                            <img src="/themes/openstack/images/enterprise/play-button.png">
-                        </div>
-                        <div class="video-overlay">
-                            <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise/play-button.png">
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                             </div>
                             <p>
                                 Federated Identity & Federated Service Provider Support for OpenStack Clouds.
                             </p>
                         </div>
-<<<<<<< HEAD
                         <img class="video-image" src="//openstack.org/assets/enterprise/digital-workflow/video-3.jpg" alt="Federated Identity and Federated Service Provider Support for OpenStack Clouds">
-=======
-                        <img class="video-image" src="/themes/openstack/images/enterprise/digital-workflow/video-3.jpg" alt="Federated Identity and Federated Service Provider Support for OpenStack Clouds">
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                     </div>
                     </a>
                 </div>
@@ -522,11 +433,7 @@
                         <div class="row events">
                             <div class="col-lg-6">
                                <a href="http://openstack.org/summit/" class="featured-event-link">
-<<<<<<< HEAD
                                     <img class="event-logo paris" src="//openstack.org/assets/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Vancouver">
-=======
-                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Vancouver">
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                                     <span>OpenStack Summit</span>
                                     <span>May 18-22, 2015 in Vancouver</span>
                                 </a>
@@ -534,11 +441,7 @@
                             <div class="vert-line"></div>
                             <div class="col-lg-6">
                                 <a href="http://openstack.org/summit/" class="featured-event-link">
-<<<<<<< HEAD
                                     <img class="event-logo paris" src="//openstack.org/assets/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Tokyo">
-=======
-                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Tokyo">
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
                                     <span>OpenStack Summit</span>
                                     <span>October 26-30, 2015 in Tokyo</span>
                                 </a>
@@ -581,11 +484,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                  Download the new OpenStack white paper to learn more about digital workflow with OpenStack and how an enterprise like DigitalFilm Tree can maximize business benefit with their innovative post-production process.
             </p>
-<<<<<<< HEAD
-                <a href="//openstack.org/assets/pdf-downloads/OpenStack-Workflow-White-Paper-Letter-Final.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
-=======
                 <a href="#" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
             <hr>
             <p>
 
@@ -621,28 +520,6 @@
     </div><!-- /.modal -->
     <!-- End Download Modal -->
 
-<<<<<<< HEAD
-=======
-    <!-- Video 1 Modal -->
-    <div class="modal fade" id="VideoModalDF11">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">Featured Video</h4>
-          </div>
-          <div class="modal-body">
-            <p class="download-text">
-                April 2015 Marketing Meeting: OpenStack Powered
-            </p>
-                <iframe width="100%" height="315" src="//www.youtube.com/embed/8VBPtHzIZnk?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <div class="modal-footer">
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!-- End Video 1 Modal -->
 
     <!-- Video 2 Modal -->
     <div class="modal fade" id="VideoModalDF2">
@@ -665,7 +542,6 @@
     </div><!-- /.modal -->
     <!-- End Video 2 Modal -->
 
->>>>>>> 9154668... Digital Workflow landing page added - need to fix lightbox
     <!-- Video 3 Modal -->
     <div class="modal fade" id="VideoModalDF3">
       <div class="modal-dialog">
