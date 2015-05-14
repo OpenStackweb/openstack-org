@@ -149,8 +149,8 @@ jQuery(document).ready(function($) {
     }
 
     $('.foundation-member').click(function(evt){
-        $(this).toggleClass('active');
-        $('.community-member').toggleClass('active');
+        $('.foundation-member').addClass('active');
+        $('.community-member').removeClass('active');
         $('.termsBox').show();
         $('#terms-title').show();
         $('#member-application-title').text('2. Complete The Individual Member Application.');
@@ -159,8 +159,8 @@ jQuery(document).ready(function($) {
     });
 
     $('.community-member').click(function(evt){
-        $(this).toggleClass('active');
-        $('.foundation-member').toggleClass('active');
+        $('.community-member').addClass('active');
+        $('.foundation-member').removeClass('active');
         $('.termsBox').hide();
         $('#terms-title').hide();
         $('#member-application-title').text('Complete The Individual Member Application.');
