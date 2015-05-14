@@ -1,0 +1,8 @@
+---
+Name: fileextesions
+---
+File:
+  allowed_extensions:
+    - svg
+    - ai
+    - key
