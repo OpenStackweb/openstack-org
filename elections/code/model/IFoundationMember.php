@@ -39,7 +39,11 @@ interface IFoundationMember extends IEntity {
 	 */
 	public function hasPendingRevocationNotifications($latest_election_id);
 
-	public function resign();
+    /**
+     * @param bool $remove_affiliation_data
+     * @return void
+     */
+	public function resign($remove_affiliation_data = true);
 
     /**
      * @return bool

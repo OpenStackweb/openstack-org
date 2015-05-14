@@ -32,6 +32,7 @@ final class FoundationMember
     private static $defaults = array(
         'ShowDupesOnProfile' => TRUE
     );
+
     /**
      * @return int
      */
@@ -43,21 +44,22 @@ final class FoundationMember
 
     public function convert2SiteUser()
     {
-        $this->resign();
+        $this->resign(false);
         $this->owner->addToGroupByCode(IFoundationMember::CommunityMemberGroupSlug);
     }
 
     /**
-     *
+     * @param bool $remove_affiliation_data
+     * @return void
      */
-    public function resign()
+    public function resign($remove_affiliation_data = true)
     {
         // Remove member from Foundation group
         foreach ($this->owner->Groups() as $g) {
             $this->owner->Groups()->remove($g);
         }
 
-        // Remove member mamaged companies
+        // Remove member managed companies
         foreach ($this->owner->ManagedCompanies() as $c) {
             $this->owner->ManagedCompanies()->remove($c);
         }
@@ -69,11 +71,13 @@ final class FoundationMember
             }
 
         // Remove Member's Affiliations
-        $affiliations = $this->owner->Affiliations();
-        if ($legal_agreements)
-            foreach ($affiliations as $affiliation) {
-                $affiliation->delete();
-            }
+        if ($remove_affiliation_data) {
+            $affiliations = $this->owner->Affiliations();
+            if ($affiliations)
+                foreach ($affiliations as $affiliation) {
+                    $affiliation->delete();
+                }
+        }
     }
 
     public function upgradeToFoundationMember()
@@ -157,24 +161,25 @@ final class FoundationMember
      */
     public function isCandidate()
     {
-      return !is_null($this->getCurrentCandidate());
+        return !is_null($this->getCurrentCandidate());
     }
 
     /**
      * @return ICandidate|null
      */
-    public function getCurrentCandidate(){
+    public function getCurrentCandidate()
+    {
         $res = null;
         $election = ElectionSystem::get()->first();
-        if ($election && $election->CurrentElectionID != 0){
+        if ($election && $election->CurrentElectionID != 0) {
             $current_election = $election->CurrentElection();
-            if(!is_null($current_election)){
-                $candidate = Candidate::get()->filter( array(
-                    'MemberID'   => $this->getIdentifier(),
+            if (!is_null($current_election)) {
+                $candidate = Candidate::get()->filter(array(
+                    'MemberID' => $this->getIdentifier(),
                     'ElectionID' => $current_election->ID))->first();
 
-                $res =  $candidate;
-                if(!is_null($candidate)) {
+                $res = $candidate;
+                if (!is_null($candidate)) {
                     UnitOfWork::getInstance()->setToCache($candidate);
                     UnitOfWork::getInstance()->scheduleForUpdate($candidate);
                 }
@@ -188,7 +193,7 @@ final class FoundationMember
      */
     public function hasDeploymentSurveys()
     {
-        return DeploymentSurvey::get()->filter( array( 'MemberID' => $this->getIdentifier()))->count() > 0;
+        return DeploymentSurvey::get()->filter(array('MemberID' => $this->getIdentifier()))->count() > 0;
     }
 
     /**
@@ -196,13 +201,14 @@ final class FoundationMember
      */
     public function hasAppDevSurveys()
     {
-        return AppDevSurvey::get()->filter( array( 'MemberID' => $this->getIdentifier()))->count() > 0;
+        return AppDevSurvey::get()->filter(array('MemberID' => $this->getIdentifier()))->count() > 0;
     }
 
     /**
      * @return bool
      */
-    public function isCompanyAdmin(){
+    public function isCompanyAdmin()
+    {
         return count($this->owner->getManagedCompanies()) > 0;
     }
 
@@ -211,7 +217,8 @@ final class FoundationMember
      * @param string $last_name
      * @return void
      */
-    public function updateCompleteName($first_name, $last_name){
+    public function updateCompleteName($first_name, $last_name)
+    {
         $this->owner->setField('FirstName', $first_name);
         $this->owner->setField('Surname', $last_name);
     }
@@ -220,7 +227,8 @@ final class FoundationMember
      * @param string $email
      * @return void
      */
-    public function updateEmail($email){
+    public function updateEmail($email)
+    {
         $this->owner->setField('Email', $email);
     }
 
@@ -228,7 +236,8 @@ final class FoundationMember
      * @param string $email
      * @return void
      */
-    public function updateSecondEmail($email){
+    public function updateSecondEmail($email)
+    {
         $this->owner->setField('SecondEmail', $email);
     }
 
@@ -236,7 +245,8 @@ final class FoundationMember
      * @param string $email
      * @return void
      */
-    public function updateThirdEmail($email){
+    public function updateThirdEmail($email)
+    {
         $this->owner->setField('ThirdEmail', $email);
     }
 
@@ -249,7 +259,8 @@ final class FoundationMember
      * @param string $other_food
      * @return void
      */
-    public function updatePersonalInfo($shirt_size, $statement_interest, $bio, $gender, $food_preference, $other_food){
+    public function updatePersonalInfo($shirt_size, $statement_interest, $bio, $gender, $food_preference, $other_food)
+    {
         $this->owner->setField('ShirtSize', $shirt_size);
         $this->owner->setField('StatementOfInterest', $statement_interest);
         $this->owner->setField('Bio', $bio);
@@ -263,7 +274,8 @@ final class FoundationMember
      * @param string $other_projects
      * @return void
      */
-    public function updateProjects($projects, $other_projects){
+    public function updateProjects($projects, $other_projects)
+    {
         $this->owner->setField('Projects', $projects);
         $this->owner->setField('OtherProject', $other_projects);
     }
@@ -274,7 +286,8 @@ final class FoundationMember
      * @param string $linkedin_profile
      * @return void
      */
-    public function updateSocialInfo($irc_handle, $twitter_name, $linkedin_profile){
+    public function updateSocialInfo($irc_handle, $twitter_name, $linkedin_profile)
+    {
         $this->owner->setField('IRCHandle', $irc_handle);
         $this->owner->setField('TwitterName', $twitter_name);
         $this->owner->setField('LinkedInProfile', $linkedin_profile);
@@ -289,7 +302,8 @@ final class FoundationMember
      * @param string $country
      * @return void
      */
-    public function updateAddress($address, $suburb, $state, $postcode, $city, $country){
+    public function updateAddress($address, $suburb, $state, $postcode, $city, $country)
+    {
         $this->owner->setField('Address', $address);
         $this->owner->setField('Suburb', $suburb);
         $this->owner->setField('State', $state);
@@ -302,7 +316,8 @@ final class FoundationMember
      * @param $photo_id
      * @return mixed
      */
-    public function updateProfilePhoto($photo_id){
+    public function updateProfilePhoto($photo_id)
+    {
         $this->owner->setField('PhotoID', $photo_id);
     }
 
@@ -320,6 +335,6 @@ final class FoundationMember
      */
     public function shouldShowDupesOnProfile()
     {
-        return  $this->owner->getField('ShowDupesOnProfile');
+        return $this->owner->getField('ShowDupesOnProfile');
     }
 }

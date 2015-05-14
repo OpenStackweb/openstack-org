@@ -148,4 +148,37 @@ jQuery(document).ready(function($) {
         state_input.rules( "remove", "required" );
     }
 
+    $('.foundation-member').click(function(evt){
+        $(this).toggleClass('active');
+        $('.community-member').toggleClass('active');
+        $('.termsBox').show();
+        $('#terms-title').show();
+        $('#member-application-title').text('2. Complete The Individual Member Application.');
+        $('#foundation-disclaimer').show();
+        $('#HoneyPotForm_RegistrationForm_MembershipType').val('foundation');
+    });
+
+    $('.community-member').click(function(evt){
+        $(this).toggleClass('active');
+        $('.foundation-member').toggleClass('active');
+        $('.termsBox').hide();
+        $('#terms-title').hide();
+        $('#member-application-title').text('Complete The Individual Member Application.');
+        $('#foundation-disclaimer').hide();
+        $('#HoneyPotForm_RegistrationForm_MembershipType').val('community');
+    });
+
+    var membership = $.QueryString["membership-type"];
+    switch(membership)
+    {
+        case 'foundation':
+            $('.foundation-member').trigger('click');
+            break;
+        case 'community':
+            $('.community-member').trigger('click');
+            break;
+        default:
+            $('.foundation-member').trigger('click');
+            break;
+    }
 });
