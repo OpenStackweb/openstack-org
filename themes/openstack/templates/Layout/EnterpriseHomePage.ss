@@ -81,7 +81,7 @@
            <div class="row featured-use-cases">
                <div class="col-sm-4">
                     <a href="/enterprise/workload-portability/">
-                        <img src="/themes/openstack/images/enterprise/unreal-thumb.jpg" alt="">
+                        <img src="//openstack.org/assets//enterprise/unreal-thumb.jpg" alt="">
                     </a>
                    <h3>Expediting Digital Workflow</h3>
                    <p>
