@@ -33,7 +33,7 @@ h5 {
   position: relative; }
 
 .intro-header.unreal {
-  background: url(/themes/openstack/images/enterprise/hero-bkgd-unreal.jpg) no-repeat center center;
+  background: url(//openstack.org/assets/enterprise/hero-bkgd-unreal.jpg) no-repeat center center;
   background-size: cover;
   position: relative; }
 
