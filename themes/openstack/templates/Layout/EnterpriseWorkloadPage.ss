@@ -346,11 +346,11 @@
                     <a href="http://superuser.openstack.org/articles/lew-tucker-a-world-of-many-openstack-clouds">
                     <div class="video-wrapper">
                          <div class="play-button">
-                            <img src="//openstack.org/assets/enterprise/play-button-dark.png">
+                            <img src="//openstack.org/assets/enterprise/read-dark.png">
                         </div>
                         <div class="video-overlay">
                              <div class="small-play-button">
-                                <img src="//openstack.org/assets/enterprise/play-button.png">
+                                <img src="//openstack.org/assets/enterprise/read.png">
                             </div>
                             <p>
                                 Lew Tucker: A World of Many (OpenStack) Clouds
@@ -364,11 +364,11 @@
                     <a href="http://superuser.openstack.org/articles/case-study-intel-uses-openstack">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/assets/enterprise/play-button-dark.png">
+                            <img src="//openstack.org/assets/enterprise/read-dark.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/assets/enterprise/play-button.png">
+                                <img src="//openstack.org/assets/enterprise/read.png">
                             </div>
                             <p>
                                Case Study: Intel Uses OpenStack
@@ -519,28 +519,6 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <!-- End Download Modal -->
-
-
-    <!-- Video 2 Modal -->
-    <div class="modal fade" id="VideoModalDF2">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">Featured Video</h4>
-          </div>
-          <div class="modal-body">
-            <p class="download-text">
-                Keystone to Keystone Federation
-            </p>
-                <iframe width="560" height="315" src="//www.youtube.com/embed/Bg5kixKBjU4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <div class="modal-footer">
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!-- End Video 2 Modal -->
 
     <!-- Video 3 Modal -->
     <div class="modal fade" id="VideoModalDF3">
