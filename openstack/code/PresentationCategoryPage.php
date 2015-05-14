@@ -130,6 +130,11 @@ class PresentationCategoryPage_Controller extends Page_Controller
 		}
 	}
 
+	function Keynotes()
+	{
+		return $this->Presentations()->filter('IsKeynote',TRUE);
+	}
+
 	function PresentationDayID($PresentationDay)
 	{
 		return trim($PresentationDay, ' ');
