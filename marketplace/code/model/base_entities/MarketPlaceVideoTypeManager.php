@@ -42,7 +42,7 @@ final class MarketPlaceVideoTypeManager extends AbstractEntityManager {
 		$this->tx_manager->transaction(function() use(&$res, &$entity, $repository){
 
 			$query = new QueryObject;
-			$query->addAddCondition(QueryCriteria::equal('Type', $entity->getType()));
+			$query->addAndCondition(QueryCriteria::equal('Type', $entity->getType()));
 			$old_one = $repository->get($query);
 			if($old_one)
 				throw new EntityAlreadyExistsException('MarketplaceVideoType',sprintf('type  %s',$entity->getType()));
@@ -61,8 +61,8 @@ final class MarketPlaceVideoTypeManager extends AbstractEntityManager {
 	{
 		if(@$params['type']){
 			$query = new QueryObject;
-			$query->addAddCondition(QueryCriteria::equal('Type',$params['type']));
-			$query->addAddCondition(QueryCriteria::notEqual('ID',$id));
+			$query->addAndCondition(QueryCriteria::equal('Type',$params['type']));
+			$query->addAndCondition(QueryCriteria::notEqual('ID',$id));
 			$old_one = $this->repository->get($query);
 			if($old_one)
 				throw new EntityAlreadyExistsException($this->entity_class, sprintf('%s  %s','type',  $params['type']));

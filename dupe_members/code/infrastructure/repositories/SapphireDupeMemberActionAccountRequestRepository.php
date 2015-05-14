@@ -32,7 +32,7 @@ class SapphireDupeMemberActionAccountRequestRepository
     public function existsConfirmationToken($token)
     {
         $query = new QueryObject;
-        $query->addAddCondition(QueryCriteria::equal('ConfirmationHash', DupeMemberActionRequest::HashConfirmationToken($token)));
+        $query->addAndCondition(QueryCriteria::equal('ConfirmationHash', DupeMemberActionRequest::HashConfirmationToken($token)));
         return  !is_null( $this->getBy($query));
     }
 
@@ -43,7 +43,7 @@ class SapphireDupeMemberActionAccountRequestRepository
     public function findByConfirmationToken($token)
     {
         $query = new QueryObject;
-        $query->addAddCondition(QueryCriteria::equal('ConfirmationHash', DupeMemberActionRequest::HashConfirmationToken($token)));
+        $query->addAndCondition(QueryCriteria::equal('ConfirmationHash', DupeMemberActionRequest::HashConfirmationToken($token)));
         return $this->getBy($query);
     }
 
@@ -55,7 +55,7 @@ class SapphireDupeMemberActionAccountRequestRepository
     {
         $query = new QueryObject(new $this->entity_class);
         $query->addAlias(QueryAlias::create('DupeAccount'));
-        $query->addAddCondition(QueryCriteria::equal('Member.Email', $dupe_account_email));
+        $query->addAndCondition(QueryCriteria::equal('Member.Email', $dupe_account_email));
         return $this->getBy($query);
     }
 }

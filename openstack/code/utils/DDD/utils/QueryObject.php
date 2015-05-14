@@ -45,14 +45,14 @@ final class QueryObject
         return $this;
     }
 
-    public function addOrCompound(QueryCriteria $condition1, QueryCriteria $condition2, QueryCriteria $condition3 = null)
+    /**
+     * @param QueryCriteria $condition
+     * @return QueryObject
+     */
+    public function addAndCondition(QueryCriteria $condition)
     {
-        if (!is_null($condition1) && !is_null($condition2)) {
-            $compound = array($condition1, $condition2);
-            if (!is_null($condition3))
-                array_push($compound, $condition3);
-            array_push($this->and_conditions, array('op' => 'OR', 'conditions' => $compound));
-        }
+        if (!is_null($condition))
+            array_push($this->and_conditions, $condition);
         return $this;
     }
 
@@ -67,41 +67,7 @@ final class QueryObject
         return $this;
     }
 
-    public function __toString()
-    {
-        $query = '';
 
-        foreach ($this->and_conditions as $condition) {
-            $condition->setBaseEntity($this->base_entity);
-            if (!empty($query))
-                $query .= 'AND';
-            if (!is_array($condition))
-                $query .= (string)$condition;
-            else {
-                $op = @$condition['op'];
-                switch ($op) {
-                    case 'OR': {
-                        $query .= ' (';
-                        $sub_conditions = @$condition['conditions'];
-                        foreach ($sub_conditions as $cnd) {
-                            $query .= (string)$cnd . ' OR';
-                        }
-                        $query = trim($query, 'OR');
-                        $query .= ') ';
-                    }
-                        break;
-                }
-            }
-        }
-
-        foreach ($this->or_conditions as $condition) {
-            $condition->setBaseEntity($this->base_entity);
-            if (!empty($query))
-                $query .= 'OR';
-            $query .= (string)$condition;
-        }
-        return $query;
-    }
 
     public function addAlias(QueryAlias $alias)
     {
@@ -135,7 +101,7 @@ final class QueryObject
                     $baseClass = array_shift($tableClasses);
                     $joinField = $this->base_entity->getRemoteJoinField($has_many_classes[$child], 'has_many');
                     $join[$baseClass] = $baseClass . '.' . $joinField . ' = ' . $class_name . '.ID';
-                    $this->addAddCondition(QueryCriteria::equal("{$baseClass}.ClassName", $child));
+                    $this->addAndCondition(QueryCriteria::equal("{$baseClass}.ClassName", $child));
                 }
             }
 
@@ -189,17 +155,6 @@ final class QueryObject
     }
 
     /**
-     * @param QueryCriteria $condition
-     * @return QueryObject
-     */
-    public function addAddCondition(QueryCriteria $condition)
-    {
-        if (!is_null($condition))
-            array_push($this->and_conditions, $condition);
-        return $this;
-    }
-
-    /**
      * Clear conditions
      */
     public function clear()
@@ -208,5 +163,25 @@ final class QueryObject
         $this->or_conditions = array();
         $this->order_conditions = array();
         $this->alias = array();
+    }
+
+    public function __toString()
+    {
+        $query = '';
+
+        foreach ($this->and_conditions as $condition) {
+            $condition->setBaseEntity($this->base_entity);
+            if (!empty($query))
+                $query .= 'AND';
+            $query .= (string)$condition;
+        }
+
+        foreach ($this->or_conditions as $condition) {
+            $condition->setBaseEntity($this->base_entity);
+            if (!empty($query))
+                $query .= 'OR';
+            $query .= (string)$condition;
+        }
+        return $query;
     }
 } 

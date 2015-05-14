@@ -88,8 +88,8 @@ class MarketPlaceCompany extends DataExtension implements ICompany {
 	public function getTrainings(){
 
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('ClassName','TrainingService'));
-		$query->addAddCondition(QueryCriteria::equal('Active',true));
+		$query->addAndCondition(QueryCriteria::equal('ClassName','TrainingService'));
+		$query->addAndCondition(QueryCriteria::equal('Active',true));
 		$query = (string)$query;
 		return $this->owner->Services($query);
 	}

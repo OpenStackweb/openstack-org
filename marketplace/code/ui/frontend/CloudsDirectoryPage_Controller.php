@@ -225,7 +225,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 	public function getDataCenterLocationsJson(){
 		$locations = array();
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal("Active",true));
+		$query->addAndCondition(QueryCriteria::equal("Active",true));
 		list($list,$size) = $this->cloud_repository->getAll($query,0,1000);
 
 		foreach($list as $cloud){
@@ -250,7 +250,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 		$company_url_segment = Convert::raw2sql($params["Company"]);
 		$slug                = Convert::raw2sql($params["Slug"]);
 		$query               = new QueryObject();
-		$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+		$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 		$cloud       = $this->cloud_repository->getBy($query);
 		if(!$cloud) throw new NotFoundEntityException('','');
 		if($cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
@@ -266,7 +266,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 		$company_url_segment = Convert::raw2sql($params["Company"]);
 		$slug                = Convert::raw2sql($params["Slug"]);
 		$query               = new QueryObject();
-		$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+		$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 		$cloud       = $this->cloud_repository->getBy($query);
 		if(!$cloud) throw new NotFoundEntityException('','');
 		if($cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');

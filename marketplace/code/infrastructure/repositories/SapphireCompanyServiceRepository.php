@@ -82,7 +82,7 @@ abstract class SapphireCompanyServiceRepository
     public function getByLiveServiceId($id)
     {
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::equal('LiveServiceID',$id));
+        $query->addAndCondition(QueryCriteria::equal('LiveServiceID',$id));
         return $this->getBy($query);
     }
 

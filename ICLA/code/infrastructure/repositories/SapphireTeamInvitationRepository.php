@@ -30,7 +30,7 @@ final class SapphireTeamInvitationRepository
 	public function existsConfirmationToken($token)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('ConfirmationHash',TeamInvitation::HashConfirmationToken($token)));
+		$query->addAndCondition(QueryCriteria::equal('ConfirmationHash',TeamInvitation::HashConfirmationToken($token)));
 		return  !is_null( $this->getBy($query));
 	}
 
@@ -41,7 +41,7 @@ final class SapphireTeamInvitationRepository
 	public function findByConfirmationToken($token)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('ConfirmationHash',TeamInvitation::HashConfirmationToken($token)));
+		$query->addAndCondition(QueryCriteria::equal('ConfirmationHash',TeamInvitation::HashConfirmationToken($token)));
 		return $this->getBy($query);
 	}
 
@@ -53,9 +53,9 @@ final class SapphireTeamInvitationRepository
 	public function findByInviteEmail($email, $all = false)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('Email',$email));
+		$query->addAndCondition(QueryCriteria::equal('Email',$email));
 		if(!$all)
-		$query->addAddCondition(QueryCriteria::isNull('ConfirmationHash'));
+		$query->addAndCondition(QueryCriteria::isNull('ConfirmationHash'));
 		list($res, $size) =  $this->getAll($query,0,1000);
 		return $res;
 	}
@@ -68,8 +68,8 @@ final class SapphireTeamInvitationRepository
 	public function findByInviteEmailAndTeam($email, ITeam $team){
 
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('Email',$email));
-		$query->addAddCondition(QueryCriteria::equal('TeamID',$team->getIdentifier()));
+		$query->addAndCondition(QueryCriteria::equal('Email',$email));
+		$query->addAndCondition(QueryCriteria::equal('TeamID',$team->getIdentifier()));
 		return $this->getBy($query);
 	}
 }

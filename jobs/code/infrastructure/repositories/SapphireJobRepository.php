@@ -32,7 +32,7 @@ final class SapphireJobRepository extends SapphireRepository {
      */
     public function getAllPosted($offset = 0, $limit = 10)	{
         $query = new QueryObject();
-        $query->addAddCondition(QueryCriteria::equal('Active', 1));
+        $query->addAndCondition(QueryCriteria::equal('Active', 1));
         $query->addOrder(QueryOrder::desc('JobPostedDate'));
         return  $this->getAll($query,$offset,$limit);
     }

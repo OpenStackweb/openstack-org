@@ -35,8 +35,8 @@ final class SapphireReviewRepository extends SapphireRepository {
      */
     public function getReview($company_service_ID, $userID)	{
         $query = new QueryObject(new MarketPlaceReview);
-        $query->addAddCondition(QueryCriteria::equal('MemberID',$userID));
-        $query->addAddCondition(QueryCriteria::equal('CompanyServiceID',$company_service_ID));
+        $query->addAndCondition(QueryCriteria::equal('MemberID',$userID));
+        $query->addAndCondition(QueryCriteria::equal('CompanyServiceID',$company_service_ID));
         return  $this->getBy($query);
     }
 
@@ -48,8 +48,8 @@ final class SapphireReviewRepository extends SapphireRepository {
      */
     public function getAllApprovedByProduct($company_service_ID, $offset = 0, $limit = 100)	{
         $query = new QueryObject(new MarketPlaceReview);
-        $query->addAddCondition(QueryCriteria::equal('Approved',1));
-        $query->addAddCondition(QueryCriteria::equal('CompanyServiceID',$company_service_ID));
+        $query->addAndCondition(QueryCriteria::equal('Approved',1));
+        $query->addAndCondition(QueryCriteria::equal('CompanyServiceID',$company_service_ID));
         $query->addOrder(QueryOrder::desc('Created'));
         return  $this->getAll($query,$offset,$limit);
     }
@@ -61,7 +61,7 @@ final class SapphireReviewRepository extends SapphireRepository {
      */
     public function getAllNotApproved($offset = 0, $limit = 100)	{
         $query = new QueryObject(new MarketPlaceReview);
-        $query->addAddCondition(QueryCriteria::equal('Approved',0));
+        $query->addAndCondition(QueryCriteria::equal('Approved',0));
         $query->addOrder(QueryOrder::desc('Created'));
         return  $this->getAll($query,$offset,$limit);
     }
@@ -73,7 +73,7 @@ final class SapphireReviewRepository extends SapphireRepository {
      */
     public function getAllApproved($offset = 0, $limit = 100)	{
         $query = new QueryObject(new MarketPlaceReview);
-        $query->addAddCondition(QueryCriteria::equal('Approved',1));
+        $query->addAndCondition(QueryCriteria::equal('Approved',1));
         $query->addOrder(QueryOrder::desc('Created'));
         return  $this->getAll($query,$offset,$limit);
     }

@@ -26,7 +26,7 @@ final class SapphireBatchTaskRepository
 	public function findByName($name)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('Name',$name));
+		$query->addAndCondition(QueryCriteria::equal('Name',$name));
 		return $this->getBy($query);
 	}
 }

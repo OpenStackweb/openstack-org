@@ -56,10 +56,10 @@ final class EventAlertEmailManager {
 		$this->tx_manager->transaction(function() use($batch_size, $email_alert_to, $details_url, $repository , $email_repository, $factory){
 			$last_email =  $email_repository->getLastOne();
 			$query      = new QueryObject();
-			$query->addAddCondition(QueryCriteria::equal('isPosted', 0));
-			$query->addAddCondition(QueryCriteria::equal('isRejected', 0));
+			$query->addAndCondition(QueryCriteria::equal('isPosted', 0));
+			$query->addAndCondition(QueryCriteria::equal('isRejected', 0));
 			if($last_email){
-				$query->addAddCondition(QueryCriteria::greater('ID',$last_email->getLastEventRegistrationRequest()->getIdentifier() ));
+				$query->addAndCondition(QueryCriteria::greater('ID',$last_email->getLastEventRegistrationRequest()->getIdentifier() ));
 			}
 			$query->addOrder(QueryOrder::asc('PostDate'));
 			list($list,$size) = $repository->getAll($query,0,$batch_size);

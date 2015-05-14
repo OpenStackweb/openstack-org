@@ -42,7 +42,7 @@ final class MarketPlaceLandingPage_Controller extends MarketPlacePage_Controller
 	public function getDataCenterLocationsJson(){
 		$locations = array();
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal("Active",true));
+		$query->addAndCondition(QueryCriteria::equal("Active",true));
 		list($list,$size) = $this->public_cloud_repository->getAll($query,0,1000);
 		foreach($list as $public_cloud){
 			foreach($public_cloud->getDataCentersLocations() as $location){

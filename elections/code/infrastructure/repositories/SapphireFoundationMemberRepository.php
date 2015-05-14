@@ -52,8 +52,8 @@ final class SapphireFoundationMemberRepository
 	public function getByCompleteName($first_name, $last_name)
 	{
 		$query = new QueryObject(new Member());
-		$query->addAddCondition(QueryCriteria::equal('FirstName',$first_name));
-		$query->addAddCondition(QueryCriteria::equal('Surname',$last_name));
+		$query->addAndCondition(QueryCriteria::equal('FirstName',$first_name));
+		$query->addAndCondition(QueryCriteria::equal('Surname',$last_name));
 		return $this->getBy($query);
 	}
 }
