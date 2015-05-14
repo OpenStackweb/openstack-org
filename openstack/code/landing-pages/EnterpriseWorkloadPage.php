@@ -26,7 +26,6 @@ class EnterpriseWorkloadPage_Controller extends Page_Controller {
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
         Requirements::javascript('themes/openstack/javascript/enterprise.js');   
-        Requirements::javascript('themes/openstack/javascript/bootstrap.lightbox.js');        
 
         Requirements::customScript("jQuery(document).ready(function($) {
 
