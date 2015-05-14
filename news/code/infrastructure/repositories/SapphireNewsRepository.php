@@ -91,10 +91,12 @@ final class SapphireNewsRepository extends SapphireRepository {
      */
     public function getExpiredNews()
     {
-        $today = date("Y-m-d");
+        $today = date("Y-m-d H:i:s");
         $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::lower('DateExpire',$today));
-        list($expired_articles,$count) = $this->getAll($query);
+        $query->addAddCondition(QueryCriteria::lower('DateExpire',$today));
+        $query->addAddCondition(QueryCriteria::equal('Approved',1));
+        list($expired_articles,$count) = $this->getAll($query,0,1000);
+
 
         return $expired_articles;
     }
@@ -103,9 +105,10 @@ final class SapphireNewsRepository extends SapphireRepository {
     {
         $today = date("Y-m-d");
         $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::lower('DateEmbargo',$today));
-        $query->addAndCondition(QueryCriteria::equal('Approved',1));
-        list($activate_articles,$count) = $this->getAll($query);
+        $query->addAddCondition(QueryCriteria::lower('DateEmbargo',$today));
+        $query->addAddCondition(QueryCriteria::greater('DateExpire',$today));
+        $query->addAddCondition(QueryCriteria::equal('Approved',0));
+        list($activate_articles,$count) = $this->getAll($query,0,1000);
 
         return $activate_articles;
     }

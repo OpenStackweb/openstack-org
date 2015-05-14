@@ -237,9 +237,9 @@ final class NewsRequestManager {
         $repository           = $this->news_repository ;
 
         return $this->tx_manager->transaction(function() use($repository){
-            $expired_news = $repository->getNewsToActivate();
+            $activate_news = $repository->getNewsToActivate();
 
-            foreach ($expired_news as $article) {
+            foreach ($activate_news as $article) {
                 $article->registerSection('recent');
                 $article->registerRank(1);
             }

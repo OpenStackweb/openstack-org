@@ -14,9 +14,9 @@
 /**
  * Class ExpirationRemovalTask
  */
-final class NewsArticlesUpdateTask extends ScheduledTask {
+final class NewsArticlesUpdateTask extends CronTask {
 
-	function process(){
+	function run(){
 
 		set_time_limit(0);
 
@@ -30,8 +30,8 @@ final class NewsArticlesUpdateTask extends ScheduledTask {
                 SapphireTransactionManager::getInstance()
             );
 
+            $manager->activateNews();
             $manager->removeExpired();
-            $manager->activateArticles();
 
 			return 'OK';
 		}
