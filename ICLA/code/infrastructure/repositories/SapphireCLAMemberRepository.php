@@ -45,7 +45,7 @@ final class SapphireCLAMemberRepository
 	function getAllICLAMembers($offset, $limit)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('CLASigned',true));
+		$query->addAndCondition(QueryCriteria::equal('CLASigned',true));
 		return $this->getAll($query, $offset, $limit);
 	}
 
@@ -55,7 +55,7 @@ final class SapphireCLAMemberRepository
 	 */
 	public function findByEmail($email){
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('Email',$email));
+		$query->addAndCondition(QueryCriteria::equal('Email',$email));
 		return $this->getBy($query);
 	}
 
@@ -68,8 +68,8 @@ final class SapphireCLAMemberRepository
 	function getAllIClaMembersByEmail($email, $offset, $limit)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('CLASigned',true));
-		$query->addAddCondition(QueryCriteria::like('Email',$email));
+		$query->addAndCondition(QueryCriteria::equal('CLASigned',true));
+		$query->addAndCondition(QueryCriteria::like('Email',$email));
 		return $this->getAll($query, $offset, $limit);
 	}
 
@@ -82,8 +82,8 @@ final class SapphireCLAMemberRepository
 	function getAllIClaMembersByFirstName($first_name, $offset, $limit)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('CLASigned',true));
-		$query->addAddCondition(QueryCriteria::like('FirstName',$first_name));
+		$query->addAndCondition(QueryCriteria::equal('CLASigned',true));
+		$query->addAndCondition(QueryCriteria::like('FirstName',$first_name));
 		return $this->getAll($query, $offset, $limit);
 	}
 
@@ -96,8 +96,8 @@ final class SapphireCLAMemberRepository
 	function getAllIClaMembersByLastName($last_name, $offset, $limit)
 	{
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal('CLASigned',true));
-		$query->addAddCondition(QueryCriteria::like('Surname',$last_name));
+		$query->addAndCondition(QueryCriteria::equal('CLASigned',true));
+		$query->addAndCondition(QueryCriteria::like('Surname',$last_name));
 		return $this->getAll($query, $offset, $limit);
 	}
 

@@ -177,8 +177,8 @@ class OpenStackComponentsCrudApi extends  MarketPlaceRestfulApi {
 	public function getVersionList(){
 		$component_id  = (int)$this->request->param('COMPONENT_ID');
 		$query = new QueryObject;
-		//$query->addAddCondition(QueryCriteria::equal());
-		$query->addAddCondition(QueryCriteria::equal('Component.ID',$component_id));
+		//$query->addAndCondition(QueryCriteria::equal());
+		$query->addAndCondition(QueryCriteria::equal('Component.ID',$component_id));
 		return $this->getAll($query,array( $this->version_repository, 'getAll'),array('self', 'convertApiVersionToArray'));
 	}
 

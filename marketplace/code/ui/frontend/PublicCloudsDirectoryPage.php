@@ -145,7 +145,7 @@ class PublicCloudsDirectoryPage_Controller extends CloudsDirectoryPage_Controlle
 			$company_url_segment = Convert::raw2sql($params["Company"]);
 			$slug                = Convert::raw2sql($params["Slug"]);
 			$query               = new QueryObject();
-			$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 			$this->current_cloud = $this->cloud_repository->getBy($query);
 			if(!$this->current_cloud) throw new NotFoundEntityException('','');
 			if($this->current_cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');

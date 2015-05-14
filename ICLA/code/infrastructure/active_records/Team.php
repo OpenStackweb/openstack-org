@@ -105,7 +105,7 @@ final class Team
 	public function getUnconfirmedInvitations()
 	{
 		$query = new QueryObject();
-		$query->addAddCondition(QueryCriteria::equal('IsConfirmed', 0));
+		$query->addAndCondition(QueryCriteria::equal('IsConfirmed', 0));
 		return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Invitations' , $query)->toArray();
 	}
 

@@ -182,7 +182,7 @@ final class ConsultantsCrudApi extends CompanyServiceCrudApi {
 	public function getLanguages(){
 		$term  = Convert::raw2sql ($this->request->getVar('term'));
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::like('Name',$term));
+		$query->addAndCondition(QueryCriteria::like('Name',$term));
 		list($list, $size) = $this->languages_repository->getAll($query,0,20);
 		$res = array();
 		foreach($list as $lang){

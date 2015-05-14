@@ -48,9 +48,9 @@ final class MarketplaceTypeManager  extends AbstractEntityManager {
 		$this->tx_manager->transaction(function() use(&$res,&$marketplace_type,$repository,$group_repository){
 
 			$query = new QueryObject;
-			$query->addAddCondition(QueryCriteria::equal('Name',$marketplace_type->getName()));
-			$query->addAddCondition(QueryCriteria::equal('Slug',$marketplace_type->getSlug()));
-			$query->addAddCondition(QueryCriteria::notEqual('ID',$marketplace_type->getIdentifier()));
+			$query->addAndCondition(QueryCriteria::equal('Name',$marketplace_type->getName()));
+			$query->addAndCondition(QueryCriteria::equal('Slug',$marketplace_type->getSlug()));
+			$query->addAndCondition(QueryCriteria::notEqual('ID',$marketplace_type->getIdentifier()));
 
 			$old = $repository->getBy($query);
 
@@ -93,8 +93,8 @@ final class MarketplaceTypeManager  extends AbstractEntityManager {
 	{
 		if(@$params['name']){
 			$query = new QueryObject;
-			$query->addAddCondition(QueryCriteria::equal('Name',$params['name']));
-			$query->addAddCondition(QueryCriteria::notEqual('ID',$id));
+			$query->addAndCondition(QueryCriteria::equal('Name',$params['name']));
+			$query->addAndCondition(QueryCriteria::notEqual('ID',$id));
 			$old_one = $this->repository->get($query);
 			if($old_one)
 				throw new EntityAlreadyExistsException($this->entity_class, sprintf('%s  %s','name',  $params['name']));

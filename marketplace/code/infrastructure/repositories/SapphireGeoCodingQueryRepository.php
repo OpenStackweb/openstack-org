@@ -28,7 +28,7 @@ implements IGeoCodingQueryRepository {
 	 */
 	public function getByGeoQuery($query) {
 		$qo = new QueryObject;
-		$qo->addAddCondition(QueryCriteria::equal('Query',$query));
+		$qo->addAndCondition(QueryCriteria::equal('Query',$query));
 		$res = GeoCodingQuery::get()->where((string)$qo)->first();
 		if(!$res) return false;
 		return new GeoCodingQueryResult((float)$res->Lat, (float)$res->Lng);

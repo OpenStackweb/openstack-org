@@ -145,8 +145,8 @@ abstract class CompanyServiceManager {
 			$this->add_policy->canAdd($company_service->getCompany());
 
 		$query = new QueryObject($company_service);
-		$query->addAddCondition(QueryCriteria::equal('Name',$company_service->getName()));
-		$query->addAddCondition(QueryCriteria::equal('Company.ID',$company_service->getCompany()->getIdentifier()));
+		$query->addAndCondition(QueryCriteria::equal('Name',$company_service->getName()));
+		$query->addAndCondition(QueryCriteria::equal('Company.ID',$company_service->getCompany()->getIdentifier()));
 		$res = $repository->getBy($query);
 		if($res)
 			throw new EntityAlreadyExistsException('CompanyService',sprintf('name %s',$company_service->getName()));
@@ -262,9 +262,9 @@ abstract class CompanyServiceManager {
             }
 
 			$query = new QueryObject($company_service);
-			$query->addAddCondition(QueryCriteria::equal('Name',$company_service->getName()));
-			$query->addAddCondition(QueryCriteria::equal('Company.ID',$company_service->getCompany()->getIdentifier()));
-			$query->addAddCondition(QueryCriteria::notId('ID',$id));
+			$query->addAndCondition(QueryCriteria::equal('Name',$company_service->getName()));
+			$query->addAndCondition(QueryCriteria::equal('Company.ID',$company_service->getCompany()->getIdentifier()));
+			$query->addAndCondition(QueryCriteria::notId('ID',$id));
 
 			$res = $repository->getBy($query);
 			if($res)

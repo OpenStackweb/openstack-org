@@ -176,10 +176,10 @@ final class JobRegistrationRequestManager {
 		$this->tx_manager->transaction(function() use($batch_size, $email_alert_to, $details_url, $repository , $email_repository, $factory){
 			$last_email =  $email_repository->getLastOne();
 			$query      = new QueryObject();
-			$query->addAddCondition(QueryCriteria::equal('isPosted', 0));
-			$query->addAddCondition(QueryCriteria::equal('isRejected', 0));
+			$query->addAndCondition(QueryCriteria::equal('isPosted', 0));
+			$query->addAndCondition(QueryCriteria::equal('isRejected', 0));
 			if($last_email){
-				$query->addAddCondition(QueryCriteria::greater('ID',$last_email->getLastJobRegistrationRequest()->getIdentifier() ));
+				$query->addAndCondition(QueryCriteria::greater('ID',$last_email->getLastJobRegistrationRequest()->getIdentifier() ));
 			}
 			$query->addOrder(QueryOrder::asc('PostDate'));
 			list($list,$size) = $repository->getAll($query,0,$batch_size);
@@ -208,7 +208,7 @@ final class JobRegistrationRequestManager {
 			$query = new QueryObject;
 			$now   = new DateTime();
 			$now   = $now->sub(new DateInterval($period));
-			$query->addAddCondition(QueryCriteria::lower('JobPostedDate',$now->format('Y-m-d')));
+			$query->addAndCondition(QueryCriteria::lower('JobPostedDate',$now->format('Y-m-d')));
 			list($res,$count) = $repository->getAll($query,0,50);
 			foreach($res as $job){
 				$repository->delete($job);

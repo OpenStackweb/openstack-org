@@ -26,8 +26,8 @@ final class SapphireNewsRepository extends SapphireRepository {
     public function getFeaturedNews()
     {
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::equal('Featured','1'));
-        $query->addAddCondition(QueryCriteria::equal('Approved','1'));
+        $query->addAndCondition(QueryCriteria::equal('Featured','1'));
+        $query->addAndCondition(QueryCriteria::equal('Approved','1'));
         $query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);
         return $list;
@@ -39,9 +39,9 @@ final class SapphireNewsRepository extends SapphireRepository {
     public function getRecentNews()
     {
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::equal('Featured','0'));
-        $query->addAddCondition(QueryCriteria::equal('Slider','0'));
-        $query->addAddCondition(QueryCriteria::equal('Approved','1'));
+        $query->addAndCondition(QueryCriteria::equal('Featured','0'));
+        $query->addAndCondition(QueryCriteria::equal('Slider','0'));
+        $query->addAndCondition(QueryCriteria::equal('Approved','1'));
         $query->addOrder(QueryOrder::desc('Date'));
         $query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);
@@ -54,9 +54,9 @@ final class SapphireNewsRepository extends SapphireRepository {
     public function getStandByNews()
     {
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::equal('Featured','0'));
-        $query->addAddCondition(QueryCriteria::equal('Slider','0'));
-        $query->addAddCondition(QueryCriteria::equal('Approved','0'));
+        $query->addAndCondition(QueryCriteria::equal('Featured','0'));
+        $query->addAndCondition(QueryCriteria::equal('Slider','0'));
+        $query->addAndCondition(QueryCriteria::equal('Approved','0'));
         $query->addOrder(QueryOrder::desc('Date'));
         //$query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);
@@ -69,8 +69,8 @@ final class SapphireNewsRepository extends SapphireRepository {
     public function getSlideNews()
     {
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::equal('Slider','1'));
-        $query->addAddCondition(QueryCriteria::equal('Approved','1'));
+        $query->addAndCondition(QueryCriteria::equal('Slider','1'));
+        $query->addAndCondition(QueryCriteria::equal('Approved','1'));
         $query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);
         return $list;
@@ -82,7 +82,7 @@ final class SapphireNewsRepository extends SapphireRepository {
     public function getNewsByID($articleID)
     {
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::id('ID',$articleID));
+        $query->addAndCondition(QueryCriteria::id('ID',$articleID));
         return $this->getBy($query);
     }
 
@@ -93,7 +93,7 @@ final class SapphireNewsRepository extends SapphireRepository {
     {
         $today = date("Y-m-d");
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::lower('DateExpire',$today));
+        $query->addAndCondition(QueryCriteria::lower('DateExpire',$today));
         list($expired_articles,$count) = $this->getAll($query);
 
         return $expired_articles;
@@ -103,8 +103,8 @@ final class SapphireNewsRepository extends SapphireRepository {
     {
         $today = date("Y-m-d");
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::lower('DateEmbargo',$today));
-        $query->addAddCondition(QueryCriteria::equal('Approved',1));
+        $query->addAndCondition(QueryCriteria::lower('DateEmbargo',$today));
+        $query->addAndCondition(QueryCriteria::equal('Approved',1));
         list($activate_articles,$count) = $this->getAll($query);
 
         return $activate_articles;
@@ -123,9 +123,9 @@ final class SapphireNewsRepository extends SapphireRepository {
         }
 
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::equal('Slider',$slider));
-        $query->addAddCondition(QueryCriteria::equal('Approved',$approved));
-        $query->addAddCondition(QueryCriteria::equal('Featured',$featured));
+        $query->addAndCondition(QueryCriteria::equal('Slider',$slider));
+        $query->addAndCondition(QueryCriteria::equal('Approved',$approved));
+        $query->addAndCondition(QueryCriteria::equal('Featured',$featured));
         $query->addOrder(QueryOrder::asc('Rank'));
         list($articles,$count) = $this->getAll($query);
 
@@ -146,25 +146,25 @@ final class SapphireNewsRepository extends SapphireRepository {
         }
 
         $query = new QueryObject(new News);
-        $query->addAddCondition(QueryCriteria::notEqual('ID',$article_id));
-        $query->addAddCondition(QueryCriteria::equal('Slider',$slider));
-        $query->addAddCondition(QueryCriteria::equal('Featured',$featured));
-        $query->addAddCondition(QueryCriteria::equal('Approved',$approved));
+        $query->addAndCondition(QueryCriteria::notEqual('ID',$article_id));
+        $query->addAndCondition(QueryCriteria::equal('Slider',$slider));
+        $query->addAndCondition(QueryCriteria::equal('Featured',$featured));
+        $query->addAndCondition(QueryCriteria::equal('Approved',$approved));
 
         if ($is_new) {
-            $query->addAddCondition(QueryCriteria::greaterOrEqual('Rank',$new_rank));
+            $query->addAndCondition(QueryCriteria::greaterOrEqual('Rank',$new_rank));
             $rank_delta = 1;
         } elseif ($is_remove) {
-            $query->addAddCondition(QueryCriteria::greaterOrEqual('Rank',$old_rank));
+            $query->addAndCondition(QueryCriteria::greaterOrEqual('Rank',$old_rank));
             $rank_delta = -1;
         } else {
             if ($old_rank < $new_rank) {
-                $query->addAddCondition(QueryCriteria::greaterOrEqual('Rank',$old_rank));
-                $query->addAddCondition(QueryCriteria::lowerOrEqual('Rank',$new_rank));
+                $query->addAndCondition(QueryCriteria::greaterOrEqual('Rank',$old_rank));
+                $query->addAndCondition(QueryCriteria::lowerOrEqual('Rank',$new_rank));
                 $rank_delta = -1;
             } else {
-                $query->addAddCondition(QueryCriteria::greaterOrEqual('Rank',$new_rank));
-                $query->addAddCondition(QueryCriteria::lowerOrEqual('Rank',$old_rank));
+                $query->addAndCondition(QueryCriteria::greaterOrEqual('Rank',$new_rank));
+                $query->addAndCondition(QueryCriteria::lowerOrEqual('Rank',$old_rank));
                 $rank_delta = 1;
             }
         }

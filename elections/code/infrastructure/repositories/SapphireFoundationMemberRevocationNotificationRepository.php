@@ -29,7 +29,7 @@ extends SapphireRepository implements IFoundationMemberRevocationNotificationRep
 	public function getByFoundationMember($foundation_member_id)
 	{
 		$query = new QueryObject(new FoundationMemberRevocationNotification);
-		$query->addAddCondition(QueryCriteria::equal('Member.ID',$foundation_member_id));
+		$query->addAndCondition(QueryCriteria::equal('Member.ID',$foundation_member_id));
 		return $this->getBy($query);
 	}
 
@@ -41,9 +41,9 @@ extends SapphireRepository implements IFoundationMemberRevocationNotificationRep
 	public function getNotificationsSentXDaysAgo($days, $batch_size)
 	{
 		$query = new QueryObject(new FoundationMemberRevocationNotification);
-		$query->addAddCondition(QueryCriteria::equal('Action','None'));
+		$query->addAndCondition(QueryCriteria::equal('Action','None'));
 		$today = new DateTime('now',new DateTimeZone("UTC"));
-		$query->addAddCondition(QueryCriteria::lowerOrEqual('ADDDATE(SentDate, INTERVAL '.$days.' DAY)', $today->format('Y-m-d H:i:s'),false));
+		$query->addAndCondition(QueryCriteria::lowerOrEqual('ADDDATE(SentDate, INTERVAL '.$days.' DAY)', $today->format('Y-m-d H:i:s'),false));
 		list($res,$size) = $this->getAll($query,0, $batch_size);
 		return $res;
 	}
@@ -55,7 +55,7 @@ extends SapphireRepository implements IFoundationMemberRevocationNotificationRep
 	public function existsHash($hash)
 	{
 		$query = new QueryObject(new FoundationMemberRevocationNotification);
-		$query->addAddCondition(QueryCriteria::equal('Hash', $hash));
+		$query->addAndCondition(QueryCriteria::equal('Hash', $hash));
 		return $this->getBy($query) != null;
 	}
 
@@ -66,7 +66,7 @@ extends SapphireRepository implements IFoundationMemberRevocationNotificationRep
 	public function getByHash($hash)
 	{
 		$query = new QueryObject(new FoundationMemberRevocationNotification);
-		$query->addAddCondition(QueryCriteria::equal('Hash',FoundationMemberRevocationNotification::HashConfirmationToken($hash)));
+		$query->addAndCondition(QueryCriteria::equal('Hash',FoundationMemberRevocationNotification::HashConfirmationToken($hash)));
 		return $this->getBy($query);
 	}
 }

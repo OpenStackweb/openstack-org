@@ -27,7 +27,7 @@ implements ITeamRepository
 	 */
 	public function getByCompany($company_id) {
 		$query = new QueryObject(new Team);
-		$query->addAddCondition(QueryCriteria::equal('CompanyID', $company_id));
+		$query->addAndCondition(QueryCriteria::equal('CompanyID', $company_id));
 		list($list, $size) = $this->getAll($query, 0, 1000);
 		return $list;
 	}
@@ -41,8 +41,8 @@ implements ITeamRepository
 	{
 		$query = new QueryObject(new Team);
 
-		$query->addAddCondition(QueryCriteria::equal('CompanyID', $company_id));
-		$query->addAddCondition(QueryCriteria::equal('Name', $name));
+		$query->addAndCondition(QueryCriteria::equal('CompanyID', $company_id));
+		$query->addAndCondition(QueryCriteria::equal('Name', $name));
 
 		return $this->getBy($query);
 	}

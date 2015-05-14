@@ -142,7 +142,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			$company_url_segment = Convert::raw2sql($params["Company"]);
 			$slug                = Convert::raw2sql($params["Slug"]);
 			$query               = new QueryObject();
-			$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 			$consultant          = $this->consultant_repository->getBy($query);
 			if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
 			if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
@@ -158,7 +158,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 
 	public function getAllOfficesLocationsJson(){
 		$query = new QueryObject;
-		$query->addAddCondition(QueryCriteria::equal("Active",true));
+		$query->addAndCondition(QueryCriteria::equal("Active",true));
 		list($list,$size) = $this->consultant_repository->getAll($query,0,100);
 		$res = array();
 		foreach($list as $consultant){
@@ -194,7 +194,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 		$company_url_segment = Convert::raw2sql($params["Company"]);
 		$slug                = Convert::raw2sql($params["Slug"]);
 		$query               = new QueryObject();
-		$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+		$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 		$consultant       = $this->consultant_repository->getBy($query);
 		if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
 		if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
@@ -231,7 +231,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
         $company_url_segment = Convert::raw2sql($params["Company"]);
         $slug                = Convert::raw2sql($params["Slug"]);
         $query               = new QueryObject();
-        $query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+        $query->addAndCondition(QueryCriteria::equal('Slug',$slug));
         $consultant       = $this->consultant_repository->getBy($query);
         if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
         if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');

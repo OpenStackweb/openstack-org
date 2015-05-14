@@ -53,12 +53,12 @@ class JobHolder_Controller extends Page_Controller {
 	public function DateSortedJobs(){
 		$query = new QueryObject(new JobPage);
 		if(isset($_GET['foundation']))
-			$query->addAddCondition(QueryCriteria::equal('FoundationJob',1));
+			$query->addAndCondition(QueryCriteria::equal('FoundationJob',1));
 		$now      = new DateTime();
-		$query->addAddCondition(QueryCriteria::equal('Active',1));
+		$query->addAndCondition(QueryCriteria::equal('Active',1));
 		$post_date = $now->sub(new DateInterval('P6M'));
-		$query->addAddCondition(QueryCriteria::greaterOrEqual('JobPostedDate',$post_date->format('Y-m-d')));
-		$query->addAddCondition(QueryCriteria::greaterOrEqual('ExpirationDate',$now->format('Y-m-d')));
+		$query->addAndCondition(QueryCriteria::greaterOrEqual('JobPostedDate',$post_date->format('Y-m-d')));
+		$query->addAndCondition(QueryCriteria::greaterOrEqual('ExpirationDate',$now->format('Y-m-d')));
 		$query->addOrder(QueryOrder::desc('JobPostedDate'));
 		$query->addOrder(QueryOrder::desc('ID'));
 		list($jobs,$size) = $this->repository->getAll($query,0,1000);

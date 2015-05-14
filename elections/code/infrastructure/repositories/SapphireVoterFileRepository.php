@@ -27,7 +27,7 @@ final class SapphireVoterFileRepository extends SapphireRepository implements IV
 	public function getByFileName($filename)
 	{
 		$query = new QueryObject(new VoterFile);
-		$query->addAddCondition(QueryCriteria::equal('FileName',$filename));
+		$query->addAndCondition(QueryCriteria::equal('FileName',$filename));
 		return $this->getBy($query);
 	}
 }

@@ -152,7 +152,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 			$company_url_segment = Convert::raw2sql($params["Company"]);
 			$slug                = Convert::raw2sql($params["Slug"]);
 			$query               = new QueryObject();
-			$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 			$distribution        = $this->distribution_repository->getBy($query);
 			if(!$distribution) throw new NotFoundEntityException('','');
 			if($distribution->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
@@ -172,7 +172,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 			$company_url_segment = Convert::raw2sql($params["ID"]);
 			$slug                = Convert::raw2sql($params["Slug"]);
 			$query               = new QueryObject();
-			$query->addAddCondition(QueryCriteria::equal('Slug',$slug));
+			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 			$appliance  = $this->appliance_repository->getBy($query);
 			if(!$appliance) throw new NotFoundEntityException('','');
             $this->company_service_ID = $appliance->getIdentifier();

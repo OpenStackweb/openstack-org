@@ -30,8 +30,8 @@ implements IJobRegistrationRequestRepository
 	 */
 	public function getAllNotPostedAndNotRejected($offset = 0, $limit = 10)	{
 		$query = new QueryObject();
-		$query->addAddCondition(QueryCriteria::equal('isPosted', 0));
-		$query->addAddCondition(QueryCriteria::equal('isRejected', 0));
+		$query->addAndCondition(QueryCriteria::equal('isPosted', 0));
+		$query->addAndCondition(QueryCriteria::equal('isRejected', 0));
 		return  $this->getAll($query,$offset,$limit);
 	}
 }
