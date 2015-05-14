@@ -1,0 +1,8 @@
+---
+Name: errorspolicy
+---
+Injector:
+  RequestProcessor:
+    properties:
+      filters:
+        - '%$HttpErrorRequestFilter'
