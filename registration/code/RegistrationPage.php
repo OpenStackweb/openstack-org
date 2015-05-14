@@ -242,7 +242,7 @@ class RegistrationPage_Controller extends Page_Controller
 
                 $registration_email = new CustomEmail($config->RegistrationFromMessage,
                     $Member->Email,
-                    $config->RegistrationSubjectMessage,
+                    $data['MembershipType'] == 'foundation' ? 'Thank you for becoming an OpenStack Foundation Member' : 'Thank you for becoming an OpenStack Community Member',
                     $config->RegistrationHTMLMessage,
                     $config->RegistrationPlainTextMessage);
                 $registration_email->send();
