@@ -23,12 +23,12 @@ h5 {
   padding-bottom: 50px;
   text-align: center;
   color: #f8f8f8;
-  background: url(/themes/openstack/images/enterprise/hero-bkgd.jpg) no-repeat center center;
+  background: url(//openstack.org/themes/openstack/images/enterprise/hero-bkgd.jpg) no-repeat center center;
   background-size: cover;
   position: relative; }
 
 .intro-header.legacy {
-  background: url(/themes/openstack/images/enterprise/hero-bkgd-legacy.jpg) no-repeat center center;
+  background: url(//openstack.org/themes/openstack/images/enterprise/hero-bkgd-legacy.jpg) no-repeat center center;
   background-size: cover;
   position: relative; }
 
@@ -220,7 +220,7 @@ a.marketplace-btn {
   font-size: 18px;
   font-weight: 400;
   font-family: 'PT Sans', sans-serif;
-  background: #b9301d url('/themes/openstack/images/enterprise/marketplace-arrow.png') 90% 50% no-repeat;
+  background: #b9301d url('//openstack.org/themes/openstack/images/enterprise/marketplace-arrow.png') 90% 50% no-repeat;
   border-radius: 3px;
   padding: 15px 22% 15px 8%;
   float: left; }
@@ -234,7 +234,7 @@ a.marketplace-btn {
 
 a.marketplace-btn:hover {
   text-decoration: none;
-  background: #831917 url('/themes/openstack/images/enterprise/marketplace-arrow-hover.png') 90% 50% no-repeat; }
+  background: #831917 url('//openstack.org/themes/openstack/images/enterprise/marketplace-arrow-hover.png') 90% 50% no-repeat; }
 
 /*End Marketplace Row*/
 /*Steps Section*/
@@ -550,7 +550,7 @@ p.file-info a:hover {
 /*Marketplace and Events*/
 .banner {
   padding: 0;
-  background: url('/themes/openstack/images/enterprise/banner-bg.jpg') no-repeat center center;
+  background: url('//openstack.org/assets/enterprise/banner-bg.jpg') no-repeat center center;
   background-size: cover;
   min-height: 350px; }
 
@@ -607,36 +607,36 @@ p.file-info a:hover {
   padding: 15px 2% 15px 50px; }
 
 li.training {
-  background: url('/themes/openstack/images/enterprise/training-icon.png') 0% 50% no-repeat; }
+  background: url('//openstack.org/assets/enterprise/training-icon.png') 0% 50% no-repeat; }
 
 li.distros {
-  background: url('/themes/openstack/images/enterprise/distros-icon.png') 0% 50% no-repeat; }
+  background: url('//openstack.org/assets/enterprise/distros-icon.png') 0% 50% no-repeat; }
 
 li.consulting {
-  background: url('/themes/openstack/images/enterprise/consulting-icon.png') 0% 50% no-repeat; }
+  background: url('//openstack.org/assets/enterprise/consulting-icon.png') 0% 50% no-repeat; }
 
 li.public-cloud {
-  background: url('/themes/openstack/images/enterprise/public-cloud-icon.png') 0% 50% no-repeat; }
+  background: url('//openstack.org/assets/enterprise/public-cloud-icon.png') 0% 50% no-repeat; }
 
 li.drivers {
-  background: url('/themes/openstack/images/enterprise/drivers-icon.png') 0% 50% no-repeat; }
+  background: url('//openstack.org/assets/enterprise/drivers-icon.png') 0% 50% no-repeat; }
 
 .marketplace-column ul li.hosted-cloud {
   padding: 5px 2% 15px 50px; }
 
 li.hosted-cloud {
-  background: url('/themes/openstack/images/enterprise/hosted-cloud-icon.png') 0% 30% no-repeat; }
+  background: url('//openstack.org/assets/enterprise/hosted-cloud-icon.png') 0% 30% no-repeat; }
 
 .marketplace-btn.blue {
   width: 100%;
   padding: 20px 22% 20px 8%;
   font-size: 20px;
   text-align: center;
-  background: #284d68 url('/themes/openstack/images/enterprise/blue-arrow.png') 90% 50% no-repeat;
+  background: #284d68 url('//openstack.org/assets/enterprise/blue-arrow.png') 90% 50% no-repeat;
   float: right; }
 
 .marketplace-btn.blue:hover {
-  background: #132F45 url('/themes/openstack/images/enterprise/blue-arrow-hover.png') 90% 50% no-repeat; }
+  background: #132F45 url('//openstack.org/assets/enterprise/blue-arrow-hover.png') 90% 50% no-repeat; }
 
 @media (max-width: 767px) {
   .marketplace-btn.blue {
@@ -904,9 +904,9 @@ a.thumbnail {
   .hands-on-row a.marketplace-btn {
     margin-top: 5px;
     float: right;
-    background: #2A4E68 url('/themes/openstack/images/enterprise/blue-arrow.png') 90% 50% no-repeat; }
+    background: #2A4E68 url('//openstack.org/themes/openstack/images/enterprise/blue-arrow.png') 90% 50% no-repeat; }
     .hands-on-row a.marketplace-btn:hover {
-      background: #0C1722 url('/themes/openstack/images/enterprise/blue-arrow-hover.png') 90% 50% no-repeat; }
+      background: #0C1722 url('//openstack.org/themes/openstack/images/enterprise/blue-arrow-hover.png') 90% 50% no-repeat; }
 
 @media (max-width: 767px) {
   .hands-on-row a.marketplace-btn {
@@ -979,7 +979,7 @@ a.enterprise-bar-right {
   display: inline-block; }
 
 .intro-header.crowd {
-  background: url(/themes/openstack/images/enterprise/crowd-bkgd.jpg) no-repeat center center;
+  background: url(//openstack.org/themes/openstack/images/enterprise/crowd-bkgd.jpg) no-repeat center center;
   background-size: cover;
   position: relative;
   padding: 40px 0; }
@@ -1065,7 +1065,7 @@ a.rounded-wrapper {
   height: 100%; }
 
 .fixed-image.server {
-  background-image: url('/themes/openstack/images/enterprise/server-fixed-bkgd.jpg'); }
+  background-image: url('//openstack.org/themes/openstack/images/enterprise/server-fixed-bkgd.jpg'); }
 
 .testimonial-row {
   padding: 90px 0;

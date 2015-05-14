@@ -69,7 +69,7 @@
                 <div class="col-lg-4 col-sm-4">
                     <div class="row">
                         <div class="col-lg-12 story-img">
-                            <img class="img-responsive" src="/themes/openstack/images/enterprise//story-car-2x.png" alt="A Huge Need">
+                            <img class="img-responsive" src="//openstack.org/themes/openstack/images/enterprise//story-car-2x.png" alt="A Huge Need">
                         </div>
                         <div class="col-lg-10">
                             <h2>A Huge Need</h2>
@@ -82,7 +82,7 @@
                 <div class="col-lg-4 col-sm-4 ">
                     <div class="row">
                         <div class="col-lg-12 story-img">
-                            <img class="img-responsive" src="/themes/openstack/images/enterprise//story-appliance-2x.png" alt="A First Attempt">
+                            <img class="img-responsive" src="//openstack.org/themes/openstack/images/enterprise//story-appliance-2x.png" alt="A First Attempt">
                         </div>
                         <div class="col-lg-10">
                             <h2>A First Attempt</h2>
@@ -95,7 +95,7 @@
                 <div class="col-lg-4 col-sm-4 ">
                     <div class="row">
                         <div class="col-lg-12 story-img">
-                            <img class="img-responsive" src="/themes/openstack/images/enterprise//story-solution-2x.png" alt="The Solution">
+                            <img class="img-responsive" src="//openstack.org/themes/openstack/images/enterprise//story-solution-2x.png" alt="The Solution">
                         </div>
                         <div class="col-lg-10">
                             <h2>The Solution</h2>
@@ -154,7 +154,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-5">
-                    <img class="img-responsive cost-savings-img" src="/themes/openstack/images/enterprise//cost-savings.svg" onerror="this.onerror=null; this.src=img/cost-savings.png" alt="OpenStack Cost Savings">
+                    <img class="img-responsive cost-savings-img" src="//openstack.org/themes/openstack/images/enterprise//cost-savings.svg" onerror="this.onerror=null; this.src=img/cost-savings.png" alt="OpenStack Cost Savings">
                 </div>
             </div>
             <!-- End POC Section -->
@@ -171,7 +171,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-5 bake-off-img-wrapper">
-                    <img class="img-responsive bake-off-img" src="/themes/openstack/images/enterprise//bake-off.svg" onerror="this.onerror=null; this.src=img/bake-off.png" alt="OpenStack vs Legacy Appliance">
+                    <img class="img-responsive bake-off-img" src="//openstack.org/themes/openstack/images/enterprise//bake-off.svg" onerror="this.onerror=null; this.src=img/bake-off.png" alt="OpenStack vs Legacy Appliance">
                 </div>
             </div>
             <!-- End Bake Off Section -->
@@ -194,7 +194,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-5">
-                    <img class="img-responsive phases-img" src="/themes/openstack/images/enterprise//three-phases.svg" onerror="this.onerror=null; this.src=img/three-phases.png" alt="OpenStack Deployment">
+                    <img class="img-responsive phases-img" src="//openstack.org/themes/openstack/images/enterprise//three-phases.svg" onerror="this.onerror=null; this.src=img/three-phases.png" alt="OpenStack Deployment">
                 </div>
             </div>
             <!-- End Final Deployment Section -->
@@ -216,8 +216,8 @@
                     <h4 class="above">The Resulting Platform</h4>
                     <h1>Car Cloud Turns Big Data Into Smart Insights</h1>
                     <p>
-                        <img class="platform img-responsive" src="/themes/openstack/images/enterprise//platform.svg" onerror="this.onerror=null; this.src=img/platform.png" alt="OpenStack Car Cloud Platform">
-                        <img class="platform-vertical img-responsive" src="/themes/openstack/images/enterprise//platform-vertical.svg" onerror="this.onerror=null; this.src=img/platform-vertical.png" alt="OpenStack Car Cloud Platform">
+                        <img class="platform img-responsive" src="//openstack.org/themes/openstack/images/enterprise//platform.svg" onerror="this.onerror=null; this.src=img/platform.png" alt="OpenStack Car Cloud Platform">
+                        <img class="platform-vertical img-responsive" src="//openstack.org/themes/openstack/images/enterprise//platform-vertical.svg" onerror="this.onerror=null; this.src=img/platform-vertical.png" alt="OpenStack Car Cloud Platform">
                     </p>
                 </div>
             </div>
@@ -240,7 +240,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="http://www.openstack.org/software/openstack-compute/" class="component-icon">
-                                    <img src="/themes/openstack/images/enterprise//compute-icon.svg" onerror="this.onerror=null; this.src=img/compute-icon.png" alt="OpenStack Compute"/>
+                                    <img src="//openstack.org/themes/openstack/images/enterprise//compute-icon.svg" onerror="this.onerror=null; this.src=img/compute-icon.png" alt="OpenStack Compute"/>
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -258,7 +258,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="http://www.openstack.org/software/openstack-storage/" class="component-icon">
-                                    <img src="/themes/openstack/images/enterprise//object-storage-icon.svg" onerror="this.onerror=null; this.src=img/object-storage-icon.png" alt="OpenStack Object Storage">
+                                    <img src="//openstack.org/themes/openstack/images/enterprise//object-storage-icon.svg" onerror="this.onerror=null; this.src=img/object-storage-icon.png" alt="OpenStack Object Storage">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -278,7 +278,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="http://www.openstack.org/software/openstack-shared-services/" class="component-icon">
-                                    <img src="/themes/openstack/images/enterprise//shared-services-icon.svg" onerror="this.onerror=null; this.src=img/shared-services-icon.png" alt="OpenStack Shared Services">
+                                    <img src="//openstack.org/themes/openstack/images/enterprise//shared-services-icon.svg" onerror="this.onerror=null; this.src=img/shared-services-icon.png" alt="OpenStack Shared Services">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -296,7 +296,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="http://www.openstack.org/software/openstack-storage/" class="component-icon">
-                                    <img src="/themes/openstack/images/enterprise//block-storage-icon.svg" onerror="this.onerror=null; this.src=img/block-storage-icon.png" alt="OpenStack Block Storage">
+                                    <img src="//openstack.org/themes/openstack/images/enterprise//block-storage-icon.svg" onerror="this.onerror=null; this.src=img/block-storage-icon.png" alt="OpenStack Block Storage">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -389,17 +389,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalDisney">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/enterprise//play-button.png">
+                            <img src="//openstack.org/themes/openstack/images/enterprise//play-button.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise//play-button.png">
+                                <img src="//openstack.org/themes/openstack/images/enterprise//play-button.png">
                             </div>
                             <p>
                                 Chris Launey of Walt Disney speaks with Jonathan about how he is using OpenStack to help empower technology in the workplace. 
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise//video-disney.jpg" alt="Disney Talking About OpenStack">
+                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise//video-disney.jpg" alt="Disney Talking About OpenStack">
                     </div>
                     </a>
                 </div>
@@ -407,17 +407,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalBigData">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/enterprise/play-button.png">
+                            <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise/play-button.png">
+                                <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
                             </div>
                             <p>
                                 Toward a Self-Driving Infrastructure – Experience of Running a 200 Physical Server BigData Cloud.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise/video-bigdata.jpg" alt="OpenStack Big Data">
+                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise/video-bigdata.jpg" alt="OpenStack Big Data">
                     </div>
                     </a>
                 </div>
@@ -425,17 +425,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalBloomberg">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/enterprise/play-button.png">
+                            <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/enterprise/play-button.png">
+                                <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
                             </div>
                             <p>
                                 We review how Bloomberg designed our stack to be fully active-active highly available and share some of our experiences operating our clouds.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/enterprise/video-bloomberg.jpg" alt="Bloomberg Talking About OpenStack">
+                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise/video-bloomberg.jpg" alt="Bloomberg Talking About OpenStack">
                     </div>
                     </a>
                 </div>
@@ -476,7 +476,7 @@
                         <div class="row events">
                             <div class="col-lg-6">
                                <a href="http://openstack.org/summit/" class="featured-event-link">
-                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise//legacy/summit-event-logo.png" alt="OpenStack Summit in Vancouver">
+                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise//legacy/summit-event-logo.png" alt="OpenStack Summit in Vancouver">
                                     <span>OpenStack Summit</span>
                                     <span>May 18-22, 2015 in Vancouver</span>
                                 </a>
@@ -484,7 +484,7 @@
                             <div class="vert-line"></div>
                             <div class="col-lg-6">
                                 <a href="http://openstack.org/summit/" class="featured-event-link">
-                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise//legacy/summit-event-logo.png" alt="OpenStack Summit in Tokyo">
+                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise//legacy/summit-event-logo.png" alt="OpenStack Summit in Tokyo">
                                     <span>OpenStack Summit</span>
                                     <span>October 26-30, 2015 in Tokyo</span>
                                 </a>
