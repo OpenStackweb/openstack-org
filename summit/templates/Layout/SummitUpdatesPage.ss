@@ -1,6 +1,7 @@
             <div class="white about-summit">
 	<div class="container">
 		<div class="row">
+        <div id="kiosk"></div>
 
         <h1>Details & Updates</h1>
 			
