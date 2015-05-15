@@ -568,3 +568,123 @@ a.pager-active {
 	text-decoration: none;
 }
 
+.intro-header.featured.livestream, .intro-header.featured.livestream-watch-wrapper {
+  height: auto;
+  min-height: 300px; }
+
+.intro-header.featured.livestream {
+    text-align: center;
+    background: url(/themes/openstack/images/homepage/summit-promo-bkgd1.jpg) no-repeat center center;
+    min-height: 420px;
+    background-size: cover;
+    position: relative;
+}  
+
+.livestream-container {
+  background: #e83641;
+  max-width: 960px;
+  height: auto; }
+  .livestream-container .intro-message {
+    padding-top: 60px; }
+
+.livestream-date {
+  margin-top: 10px; }
+  .livestream-date p {
+    font-size: 1.2em;
+    font-weight: 300;
+    text-transform: uppercase; }
+  .livestream-date h4 {
+    font-size: 4.5em;
+    font-weight: 600; }
+    .livestream-date h4 span {
+      font-size: 0.6em;
+      margin-left: 5px;
+      font-weight: 400; }
+  .livestream-date h5 {
+    color: white;
+    font-size: 1.8em; }
+
+.livestream-sponsor {
+  margin: 40px 0; 
+}
+  .livestream-sponsor a {
+    color: white; }
+  .livestream-sponsor img {
+    margin-left: 10px; }
+
+.livestream-links {
+  width: 100%;
+  background: #333;
+  color: white;
+  text-align: center; }
+  .livestream-links ul {
+    padding: 0;
+    margin: 0;
+    text-align: center; }
+    .livestream-links ul li {
+      list-style: none;
+      display: inline-block; }
+      .livestream-links ul li a {
+        color: white;
+        display: inline-block;
+        padding: 20px 30px;
+        text-transform: uppercase;
+        font-weight: 300; }
+        .livestream-links ul li a:hover {
+          text-decoration: none;
+          background: #222; }
+  .livestream-links .livestream-sponsor {
+    margin: 0; }
+
+@media (max-width: 767px) {
+  .livestream-links ul li a {
+    font-size: 0.9em;
+    padding: 10px; } }
+
+.livestream-watch {
+  margin: 50px 0 90px; }
+  .livestream-watch a.promo-btn {
+    padding: 10px 30px;
+    min-width: 0; }
+    .livestream-watch a.promo-btn i.fa-play-circle {
+      margin-left: 10px; }
+
+.intro-header.featured.livestream-watch-wrapper {
+  background: black; }
+  .intro-header.featured.livestream-watch-wrapper .livestream-container {
+    max-width: 100%;
+    background: black; }
+    .intro-header.featured.livestream-watch-wrapper .livestream-container iframe {
+      margin-bottom: -5px; }
+
+.livestream-links.watch {
+  float: left; }
+  .livestream-links.watch a {
+    margin: 0; }
+  .livestream-links.watch .livestream-sponsor {
+    float: left;
+    margin-left: 30px;
+    padding: 10px; }
+    .livestream-links.watch .livestream-sponsor img {
+      max-height: 40px; }
+  .livestream-links.watch ul {
+    float: right; }
+    .livestream-links.watch ul li a {
+      padding: 20px; }
+
+@media (max-width: 767px) {
+  .livestream-links.watch .livestream-sponsor {
+    display: block;
+    text-align: center;
+    float: none;
+    margin: 10px 0; }
+  .livestream-links.watch ul {
+    display: block;
+    float: none;
+    margin-bottom: 20px; }
+    .livestream-links.watch ul li a {
+      font-size: 0.9em;
+      padding: 10px; } }
+
+
+
