@@ -41,6 +41,7 @@ class JobHolder_Controller extends Page_Controller {
 		parent::init();
 		RSSFeed::linkToFeed($this->Link() . "rss");
 		Requirements::css('jobs/css/jobs.css');
+        Requirements::javascript('themes/openstack/javascript/querystring.jquery.js');
 		Requirements::javascript('jobs/js/jobs.js');
 		$this->repository = new SapphireJobRepository;
 	}
@@ -51,9 +52,11 @@ class JobHolder_Controller extends Page_Controller {
 	}
 
 	public function DateSortedJobs(){
-		$query = new QueryObject(new JobPage);
-		if(isset($_GET['foundation']))
+		$query   = new QueryObject(new JobPage);
+		$request = Controller::curr()->getRequest();
+        if($request->requestVar('foundation'))
 			$query->addAndCondition(QueryCriteria::equal('FoundationJob',1));
+
 		$now      = new DateTime();
 		$query->addAndCondition(QueryCriteria::equal('Active',1));
 		$post_date = $now->sub(new DateInterval('P6M'));
