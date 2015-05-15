@@ -1,7 +1,7 @@
 /*Videos Home Page*/
 .intro-header.featured.videos {
     position: relative;
-    background: url('//openstack.org/assets/vancouver-summit/videos-hero-bkgd.png') center center no-repeat;
+    background: url('/themes/openstack/images/videos-hero-bkgd.jpg') center center no-repeat;
     background-size: cover;
 }
 .main-video-wrapper {
@@ -150,11 +150,11 @@ a.main-video .video-description-wrapper p.latest-video {
 .still-uploading-row {
   text-align: center;
   width: 100%;
-  background: #B20C29;
+  background: #23A6E2;
   padding: 15px 0;
   position: relative;
   display: block;
-  color: #FFD3D4;
+  color: white;
 }
 .daily-recap-wrapper .video-thumb-title {
   text-align: center; }
@@ -294,6 +294,18 @@ a.main-video .video-description-wrapper p.latest-video {
 
 .video-dropdown > .dropdown-menu li a:focus {
   outline: none; }
+a.videos-back-summit {
+  color: white;
+  text-transform: uppercase;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+a.videos-back-summit i {
+  margin-right: 5px;
+}
 
 /*End Videos Home Page*/
 
