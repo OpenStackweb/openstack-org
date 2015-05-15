@@ -1,5 +1,13 @@
 <% require themedCSS(videos) %>
 </div>
+		<% if $StillUploading %>
+			<div class="still-uploading-row">
+				<div class="container">
+				<i class="fa fa-refresh fa-spin"></i>
+				 Check back again soon! We're still uploading videos from The OpenStack Summit in Vancouver...
+				</div>
+			</div>	
+		<% end_if %>
        <div class="intro-header featured videos">
 					<% loop LatestPresentation %>
 						<a href="{$Top.Link}presentation/{$URLSegment}" class="main-video">
@@ -13,24 +21,16 @@
 						</a>
 					<% end_loop %>
 	        <div class="container">
+	        <a href="/summit/" class="videos-back-summit"><i class="fa fa-chevron-left"></i> Back to the Summit Site</a>
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 col-sm-12">
 	                    <div class="intro-message">
-	                        <h1>Vancouver Summit Videos</h1>
+	                        <h1>$Title</h1>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
     	</div>
-
-<% if $StillUploading %>
-	<div class="still-uploading-row">
-		<div class="container">
-		<i class="fa fa-refresh fa-spin"></i>
-		 Check back again soon! We're still uploading videos from The OpenStack Summit in Vancouver...
-		</div>
-	</div>	
-<% end_if %>
 
 <div class="featured-row">
 	<div class="container">

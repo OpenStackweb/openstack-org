@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container video-gallery">
   <!-- Start Videos -->
       <% loop GroupedPresentations.GroupedBy(PresentationDay) %>
               <div class="row">
