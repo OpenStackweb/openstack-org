@@ -353,6 +353,14 @@ a.videos-back-summit i {
 
 /* End Change Video Gallery View */
 /*Video Inner Page*/
+.single-video-wrapper {
+  width: 100%;
+  background: #222;
+  height: auto;
+  margin: 0 0 30px;
+  text-align: center;
+  box-sizing: border-box;
+}
 .single-video-details {
   margin: 60px auto; }
 
@@ -392,7 +400,8 @@ a.videos-back-summit i {
   margin-bottom: -1px; }
 
 p.single-video-description {
-  margin: 10px 0 40px; }
+  margin: 10px 0 10px; 
+}
 
 .video-categories a {
   margin-left: 10px;
