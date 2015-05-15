@@ -140,7 +140,7 @@ class Presentation extends DataObject
 //Test whether the URLSegment exists already on another Video
 	function LookForExistingURLSegment($URLSegment)
 	{
-		return (DataObject::get_one('Company', "URLSegment = '" . $URLSegment . "' AND ID != " . $this->ID));
+		return (DataObject::get_one('Presentation', "URLSegment = '" . $URLSegment . "' AND ID != " . $this->ID));
 	}
 
 // Pull video thumbnail from YouTube API
