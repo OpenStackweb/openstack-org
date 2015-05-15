@@ -1,3 +1,5 @@
+</div>
+
 <% require themedCSS(videos) %>
 
 <% loop Presentation %>

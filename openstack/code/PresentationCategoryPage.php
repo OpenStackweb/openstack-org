@@ -198,4 +198,10 @@ class PresentationCategoryPage_Controller extends Page_Controller
         return GroupedList::create($this->Presentations()->sort('StartTime'));
     }
 
+    protected function CustomScripts(){
+
+        Requirements::javascript("themes/openstack/javascript/videos.js");
+
+    }
+
 }

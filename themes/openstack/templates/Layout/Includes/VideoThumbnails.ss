@@ -13,18 +13,20 @@
 
                   <!-- Video Block -->
                   <% if YouTubeID %>
-                    <div class="col-lg-3 col-md-3 col-sm-3 video-block">
+                    <div class="col-sm-3 video-block">
                       <a href="{$Top.Link}presentation/{$URLSegment}">
                         <div class="video-thumb">
                           <div class="thumb-play"></div>
                           <img class="video-thumb-img" src="//img.youtube.com/vi/{$YouTubeID}/0.jpg">
                         </div>
-                        <p class="video-thumb-title">
-                          $Name
-                        </p>
-                        <p class="video-thumb-speaker">
-                          $Speakers
-                        </p>
+                        <div class="video-details">
+                          <p class="video-thumb-title">
+                            $Name
+                          </p>
+                          <p class="video-thumb-speaker">
+                            $Speakers
+                          </p>
+                        </div>
                       </a>
                     </div>
                   <% end_if %>
