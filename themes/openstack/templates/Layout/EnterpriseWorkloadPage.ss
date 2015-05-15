@@ -98,7 +98,7 @@
         <div class="container">
             <div class="row section-title-center">
                 <h4 class="above">From Camera to Couch</h4>
-                <h1>How A Leading Production Firm Created Adaptable Workflow with OpenStack</h1>
+                <h1>How A Leading Production Firm Created Adaptable Workflows with OpenStack</h1>
             </div>
             <!--Method 1-->
             <div class="row">
@@ -129,12 +129,12 @@
                 </div>
                 <div class="col-sm-6">
                     <h2 class="section-heading">The Process</h2>
-                    <p class="lead">Digital Film Tree's Workflow Explained</p>
+                    <p class="lead">DigitalFilm Tree's Workflow Explained</p>
                     <p>
-                        To develop "UnREAL" Television Show, DigitalFilm Tree's workflow run through multiple OpenStack clouds. As shown in this diagram, their workflow is as follows:
+                        To develop films and television shows such as UnREAL, DigitalFilm Tree's workflow run through multiple OpenStack clouds. As shown in this diagram, their workflow is as follows:
                         <ol>
                             <li>
-                                Directors shoot raw footage for UnREAL (and other TV shows) on digital video in Vancouver.  Filmmakers upload video to temporary storage in the HP Public Cloud and Blue Box hybrid clouds.
+                                Directors shoot raw footage for UnREAL (and other TV shows) on digital video in Vancouver.  Filmmakers upload video to temporary storage in the HP Public Cloud and hosted private cloud by Blue Box.
                             </li>
                             <li>
                                 Raw footage is transcoded from high resolution to proxy resolution on the external clouds, moved to Swift object storage and transported between Vancouver and Los Angeles.
@@ -146,7 +146,7 @@
                                 Final video footage is assembled. Director/producer feedback is incorporated, outsourced special effects are rendered and added. 
                             </li>
                             <li>
-                                The show or movie is transferred from the DigitalFilm Tree cloud to a Comcast or other cable providers’ OpenStack cloud.
+                                The show or movie is transferred from DigitalFilm Tree's cloud to Comcast or other cable providers.
                             </li>
                         </ol>
                     </p>
@@ -212,8 +212,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
-                        <a href="//openstack.org/assets/enterprise/digital-workflow/federation-workflow.svg" class="thumbnail">
-                            <img src="//openstack.org/assets/enterprise/digital-workflow/federation-workflow.svg" onerror="//openstack.orgassets/enterprise/digital-workflow/federation-workflow.jpg" alt="Digital FilmTree OpenStack Federated Identity"/>
+                        <a href="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" class="thumbnail">
+                            <img src="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" onerror="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.jpg" alt="Digital FilmTree OpenStack Federated Identity"/>
                         </a>
                     </div>
                 </div>
@@ -297,7 +297,7 @@
                             Read the white paper for the complete DigitalFilm Tree story and how the technologies used apply to other enterprises and digital workflows in the software-defined economy.  Like DigitalFilm Tree, today's savvy businesses know how to leverage cloud capabilities and economics to achieve leadership in their fields.
                         </p>
                         <p class="file-info">
-                            <a href="#" data-toggle="modal" data-target="#downloadModal">WorkflowPortabilityWhitePaper.PDF | 1.4MB</a>
+                            <a href="#" data-toggle="modal" data-target="#downloadModal">WorkloadPortabilityWhitePaper.PDF | 1.4MB</a>
                         </p>
                         <a href="#" class="btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download</a>
                     </div>
