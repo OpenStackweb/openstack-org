@@ -200,7 +200,6 @@ class PresentationCategoryPage_Controller extends Page_Controller
 
     protected function CustomScripts(){
 
-        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
         Requirements::javascript("themes/openstack/javascript/videos.js");
 
     }

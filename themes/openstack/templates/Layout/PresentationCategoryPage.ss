@@ -1,37 +1,42 @@
 <% require themedCSS(videos) %>
 </div>
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12">
-			<div class="eventTitleArea">
-				<h1>$Title</h1>
-			</div>
+       <div class="intro-header featured videos">
+					<% loop LatestPresentation %>
+						<a href="{$Top.Link}presentation/{$URLSegment}" class="main-video">
+							<div class="video-description-wrapper">
+								<p class="latest-video">Latest Video Added</p>
+								<h3>$Name</h3>
+							</div>
+							<div class="latest-video-img">
+								<img src="//img.youtube.com/vi/{$YouTubeID}/0.jpg">
+							</div>
+						</a>
+					<% end_loop %>
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-8 col-lg-offset-2 col-sm-12">
+	                    <div class="intro-message">
+	                        <h1>Vancouver Summit Videos</h1>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+    	</div>
+
+<% if $StillUploading %>
+	<div class="still-uploading-row">
+		<div class="container">
+		<i class="fa fa-refresh fa-spin"></i>
+		 Check back again soon! We're still uploading videos from The OpenStack Summit in Vancouver...
 		</div>
-	</div>
-</div>
-<% loop LatestPresentation %>
-<div class="main-video-wrapper">
-	<a href="{$Top.Link}presentation/{$URLSegment}" class="main-video">
-		<div class="video-description-wrapper">
-			<div class="video-description">
-				<p class="latest-video">Latest Video</p>
-				<h3>$Name</h3>
-				<p>$FormattedStartTime GMT<p>
-				<p>$Description</p>
-			</div>
-			<div class="play-btn">
-				<img id="play" src="//www.openstack.org/themes/openstack/images/landing-pages/auto/play-button.png">
-			</div>
-		</div>
-		<img src="//img.youtube.com/vi/{$YouTubeID}/0.jpg">
-	</a>
-</div>
-<% end_loop %>
+	</div>	
+<% end_if %>
+
 <div class="featured-row">
 	<div class="container">
 		<h2>
 			Daily Recaps
-			<span>Highlights from the OpenStack Summit in Paris</span>
+			<span>Highlights from the OpenStack Summit in Vancouver</span>
 		</h2>
 	</div>
 </div>
@@ -43,7 +48,7 @@
 
 		<% if YouTubeID %>
 
-			<div class="col-lg-3 col-md-3 col-sm-3 video-block">
+			<div class="col-sm-3 video-block">
 				<a href="{$Top.Link}featured/{$URLSegment}">
 					<div class="video-thumb">
 						<div class="thumb-play"></div>
@@ -58,7 +63,7 @@
 		<% else %>
 
 
-			<div class="col-lg-3 col-md-3 col-sm-3">
+			<div class="col-sm-3">
 				<div class="video-thumb">
 					<img class="video-thumb-img" src="/themes/openstack/images/no-video.jpg">
 				</div>
@@ -98,7 +103,7 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container video-gallery">
 
 <% if Keynotes %>
 <div class="row">
@@ -113,18 +118,20 @@
 
       <!-- Video Block -->
       <% if YouTubeID %>
-        <div class="col-lg-3 col-md-3 col-sm-3 video-block">
+        <div class="col-sm-3 video-block">
           <a href="{$Top.Link}presentation/{$URLSegment}">
             <div class="video-thumb">
               <div class="thumb-play"></div>
               <img class="video-thumb-img" src="//img.youtube.com/vi/{$YouTubeID}/0.jpg">
             </div>
-            <p class="video-thumb-title">
-              $Name
-            </p>
-            <p class="video-thumb-speaker">
-              $Speakers
-            </p>
+            <div class="video-details">
+	            <p class="video-thumb-title">
+	              $Name
+	            </p>
+	            <p class="video-thumb-speaker">
+	              $Speakers
+	            </p>
+	        </div>
           </a>
         </div>
       <% end_if %>
