@@ -605,7 +605,8 @@ a.pager-active {
     font-size: 1.8em; }
 
 .livestream-sponsor {
-  margin: 70px 0 50px; }
+  margin: 40px 0; 
+}
   .livestream-sponsor a {
     color: white; }
   .livestream-sponsor img {

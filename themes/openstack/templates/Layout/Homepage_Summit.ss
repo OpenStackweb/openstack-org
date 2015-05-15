@@ -13,9 +13,8 @@
                         <a href="/home/video/" class="promo-btn">Watch It Now <i class="fa fa-play-circle"></i></a>
                     </div>
                     <div class="livestream-sponsor">
-                        <a href="#">
-                            Brought to you by
-                            <img src="/themes/openstack/images/homepage/intel.png" alt="">
+                        <a href="/summit">
+                            <img src="/themes/openstack/images/summit-event-logo.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -36,9 +35,8 @@
                         <h5>$NextPresentationStartDate</h5>
                     </div>
                     <div class="livestream-sponsor">
-                        <a href="#">
-                            Brought to you by
-                            <img src="/themes/openstack/images/homepage/intel.png" alt="">
+                        <a href="/summit">
+                            <img src="/themes/openstack/images/summit-event-logo.png" alt="">
                         </a>
                     </div>
                 </div>
