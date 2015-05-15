@@ -32,8 +32,8 @@
                     </div>
                     <div class="livestream-date">
                         <p>Live Stream Starting Right Here At</p>
-                        <h4>9:00<span>AM PT</span></h4>
-                        <h5>05/18/15</h5>
+                        <h4>$NextPresentationStartTime</h4>
+                        <h5>$NextPresentationStartDate</h5>
                     </div>
                     <div class="livestream-sponsor">
                         <a href="#">

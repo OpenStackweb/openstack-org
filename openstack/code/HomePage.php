@@ -27,7 +27,10 @@ class HomePage extends Page
         'PromoButtonUrl' => 'Text',
         "PromoDatesText" => 'Text',
         "PromoHeroCredit" => 'Text',
-        "SummitMode" => 'Boolean'
+        "SummitMode" => 'Boolean',
+        "NextPresentationStartTime" => 'HTMLText',
+        "NextPresentationStartDate" => 'Text',
+        "LiveStreamURL" => 'Text'
     );
 
     private static $has_one  = array(
@@ -44,11 +47,15 @@ class HomePage extends Page
             'No' => 'No video playing.'
         ));
 
+        $fields->addFieldToTab("Root.Main", new TextField('LiveStreamURL', 'URL of Live Stream Feed'));
+
         $SummitModeField = new OptionSetField('SummitMode', 'Homepage mode:', array(
             0 => 'Normal Mode',
             1 => 'Summit Mode'
         ));
 
+        $fields->addFieldToTab("Root.Main", new TextField('NextPresentationStartTime', 'Next Presentation Start Time'));
+        $fields->addFieldToTab("Root.Main", new TextField('NextPresentationStartDate', 'Next Presentation Start Date'));        
 
         $fields->addFieldToTab("Root.Main", $VideoLiveField, 'Content');
         $fields->addFieldToTab("Root.Main", $SummitModeField, 'Content');
