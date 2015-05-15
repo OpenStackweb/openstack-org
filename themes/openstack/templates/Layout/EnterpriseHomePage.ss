@@ -88,7 +88,7 @@
                        In the software-defined economy, the delivery of an application or service often depends on many contributors, possibly in multiple companies, working collaboratively to deliver results. Read on to learn how OpenStack gives enterprises the ability to seamlessly move workloads from one cloud to another, whether private or public.
                    </p>
                    <p>
-                       <a href="/workload-portability/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
+                       <a href="/enterprise/workload-portability/" class="blue-btn">Read More <i class="fa fa-chevron-right"></i></a>
                    </p>
                </div>
                <div class="col-sm-4">
