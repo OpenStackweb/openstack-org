@@ -297,7 +297,7 @@
                             Read the white paper for the complete DigitalFilm Tree story and how the technologies used apply to other enterprises and digital workflows in the software-defined economy.  Like DigitalFilm Tree, today's savvy businesses know how to leverage cloud capabilities and economics to achieve leadership in their fields.
                         </p>
                         <p class="file-info">
-                            <a href="#" data-toggle="modal" data-target="#downloadModal">WorkloadPortabilityWhitePaper.PDF | 1.4MB</a>
+                            <a href="#" data-toggle="modal" data-target="#downloadModal">WorkloadPortabilityWhitePaper.PDF | 995kb</a>
                         </p>
                         <a href="#" class="btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download</a>
                     </div>
@@ -484,7 +484,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                  Download the new OpenStack white paper to learn more about digital workflow with OpenStack and how an enterprise like DigitalFilm Tree can maximize business benefit with their innovative post-production process.
             </p>
-                <a href="#" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
+                <a href="//openstack.org/assets/pdf-downloads/OpenStack-Workflow-White-Paper-Letter-Final.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>
             <p>
 
