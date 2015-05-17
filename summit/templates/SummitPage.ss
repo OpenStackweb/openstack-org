@@ -28,13 +28,13 @@
                             <h1>
                                 $Title
                             </h1>
-                            <div class="landing-action">
+                            <!-- <div class="landing-action">
                                 <% if $RegistrationLink %>
                                     <a href="$RegistrationLink" class="btn register-btn-lrg">Join Us</a>
                                 <% else %>
                                     <a href="#" class="btn register-btn-lrg inactive" data-toggle="modal" data-target="#registrationModal">Registration Opening Soon</a>
                                 <% end_if %>
-                            </div>
+                            </div> -->
                             <div class="inner-countdown-wrapper">
                                 <div class="countdown">
                                     <% loop $Up.CountdownDigits %>
