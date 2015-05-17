@@ -28,12 +28,12 @@
                             </div>
                             <div class="inner-countdown-wrapper">
                                 <div class="countdown">
-                                    <% loop $Up.CountdownDigits %>
-                                        <span>$Digit</span>
-                                    <% end_loop %>
+                                        <span>N</span>
+                                        <span>O</span>
+                                        <span>W</span>
                                 </div>
                                 <div class="countdown-text">
-                                    Days until $Title
+                                    The Summit is Happening Now!
                                 </div>
                             </div>
                         </div>
