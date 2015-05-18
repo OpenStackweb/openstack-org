@@ -14,7 +14,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-8 col-sm-8">
+                <div class="col-lg-8 col-sm-8"> 
                     <div class="intro-message">
                         <h1>Expediting Digital Workflow with OpenStack</h1>
                         <h3>DigitalFilm Tree funnels thousands of hours of video footage to make a 1 hour TV show using a mix of private and public OpenStack clouds.</h3>
