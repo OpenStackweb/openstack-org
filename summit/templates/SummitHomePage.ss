@@ -30,7 +30,7 @@
                     The Summit is Happening Now!
                 </div>
                 <div class="landing-action">
-                    <a href="$CurrentSummit.Link" class="btn register-btn-lrg">Upcoming Summit <i class="fa fa-chevron-right"></i></a>
+                    <a href="$CurrentSummit.Link" class="btn register-btn-lrg">Get the Details <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
