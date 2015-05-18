@@ -116,7 +116,7 @@ a.main-video .video-description-wrapper p.latest-video {
 .featured-row {
   width: 100%;
   background: #2A4E68;
-  padding: 0;
+  padding: 20px 0 5px;
   position: relative;
   display: block;
   margin-bottom: 50px; }
