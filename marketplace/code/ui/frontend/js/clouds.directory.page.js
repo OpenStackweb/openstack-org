@@ -16,6 +16,7 @@ jQuery(document).ready(function($){
             source: cloud_type+'/names',
             minLength: 2,
             select: function (event, ui) {
+                if(ui.item) $('#name-term').val(ui.item.value);
                 $('.filter-label').trigger("click");
             }
     })
@@ -61,6 +62,7 @@ jQuery(document).ready(function($){
                     last_filter_request = null;
                 },
                 error: function (jqXHR,  textStatus,  errorThrown) {
+                    if(errorThrown === 'abort') return;
                     $('#public-clouds-list').html('<div>There are no Clouds matching your criteria.</div>');
                     last_filter_request = null;
                 }
