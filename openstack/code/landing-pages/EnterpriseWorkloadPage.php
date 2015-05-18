@@ -15,7 +15,7 @@ class EnterpriseWorkloadPage extends Page {
    static $db = array(
     );
 }
-
+ 
 class EnterpriseWorkloadPage_Controller extends Page_Controller {
 
     function init()
