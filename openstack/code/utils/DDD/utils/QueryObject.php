@@ -85,13 +85,15 @@ final class QueryObject
         return $res;
     }
 
-    public function getAlias()
+    public function getAlias($join_type = QueryAlias::INNER)
     {
         $join = array();
 
         foreach ($this->alias as $alias) {
-            $child = $alias->getName();
-            $has_many = Config::inst()->get(get_class($this->base_entity), 'has_many');
+            if($alias->getJoinType() !== $join_type) continue;
+
+            $child      = $alias->getName();
+            $has_many   = Config::inst()->get(get_class($this->base_entity), 'has_many');
             $class_name = ClassInfo::baseDataClass($this->base_entity);
 
             if (!is_null($has_many)) {
@@ -148,7 +150,7 @@ final class QueryObject
                 }
             }
             if ($alias->hasSubAlias()) {
-                $join = array_merge($join, $alias->subAlias());
+                $join = array_merge($join, $alias->subAlias($join_type));
             }
         }
         return $join;
