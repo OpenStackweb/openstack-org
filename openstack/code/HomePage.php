@@ -262,17 +262,7 @@ class HomePage_Controller extends Page_Controller
 
     function Video()
     {
-        //Detect special conditions devices
-        $iPod = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
-        $iPhone = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
-        $iPad = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
-
-        //do something with this information
-        if ($iPod || $iPhone || $iPad) {
-            $this->redirect('http://itechsherpalive2.live-s.cdn.bitgravity.com/cdn-live-s1/_definst_/itechsherpalive2/live/OSS13/playlist.m3u8');
-        } else {
-            return $this->renderWith(array('HomePage_Video', 'HomePage', 'Page'));
-        }
+        return $this->renderWith(array('HomePage_Video', 'HomePage', 'Page'));
 
     }
 
