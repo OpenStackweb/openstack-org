@@ -17,7 +17,7 @@ jQuery(document).ready(function($){
     $('.services-table-wrapper i').tooltip();
 
     // Toggle test result list
-    $("#see-results-link").click(function() {
+    $("#see-results-link").click(function(evt) {
         if ($(".test-details-list").hasClass('open')) {
             $(this).text("Show Full Results [+]")
             $(".test-details-list").removeClass("open");
@@ -25,6 +25,7 @@ jQuery(document).ready(function($){
             $(this).text("Hide Full Results [-]")
             $(".test-details-list").addClass("open");
         }
-        event.preventDefault();
+        evt.preventDefault();
+        return false
     });
 });

@@ -39,7 +39,7 @@ class HttpErrorRequestFilter implements RequestFilter {
     {
         $code = $response->getStatusCode();
         $error_page_path = Director::baseFolder()."/errors_pages/ui/{$code}/index.html";
-        if(file_exists($error_page_path)){
+        if(!$request->isAjax() && file_exists($error_page_path)){
             $page_file   = fopen($error_page_path, "r") or die("Unable to open file!");
             $body        = fread($page_file,filesize($error_page_path));
             fclose($page_file);

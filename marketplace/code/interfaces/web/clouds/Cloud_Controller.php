@@ -117,7 +117,7 @@ abstract class Cloud_Controller extends AbstractController
                     )
                 );
             }
-            $query->addAlias(QueryAlias::create('DataCenterLocation'));
+            $query->addAlias(QueryAlias::create('DataCenterLocation', null, QueryAlias::LEFT ));
             if (is_array($location) && !empty($location[0]))
                 $query->addAndCondition(QueryCriteria::like("DataCenterLocation.City", trim($location[0])));
 
