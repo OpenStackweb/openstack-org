@@ -113,9 +113,7 @@
                     </p>
                 </div>
                 <div class="col-sm-6">
-                    <div class="thumbnails">
-                        <img src="//openstack.org/assets/enterprise/digital-workflow/video-soon.svg" onerror="//openstack.orgassets/enterprise/digital-workflow/video-soon.jpg" alt="Video coming soon"/>
-                    </div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/xgj9BA6qfIs?rel=0&amp;showinfo=0&amp;start=464" frameborder="0" allowfullscreen=""></iframe>
                 </div>
             </div>
             <hr>
