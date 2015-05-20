@@ -48,3 +48,4 @@ zen_fields/
 *.css.map
 openstackwebsite-assets/
 openstackwebsite-assets
+bin

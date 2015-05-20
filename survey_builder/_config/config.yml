@@ -1,0 +1,23 @@
+---
+Name: surveybuilderapi
+---
+Injector:
+  SurveyRepository:
+    class: SapphireSurveyRepository
+  TemplateRepository:
+    class: SapphireSurveyTemplateRepository
+  FoundationMemberRepository:
+    class: SapphireFoundationMemberRepository
+  SurveyBuilder:
+    class: SurveyBuilder
+  SurveyManager:
+    constructor:
+      0: '%$SurveyRepository'
+      1: '%$TemplateRepository'
+      2: '%$FoundationMemberRepository'
+      3: '%$SurveyBuilder'
+      4: '%$TransactionManager'
+
+Survey_Controller:
+  dependencies:
+    SurveyManager: '%$SurveyManager'

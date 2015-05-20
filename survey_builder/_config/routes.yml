@@ -1,0 +1,7 @@
+---
+Name: surveybuilderroutes
+After: 'framework/routes#coreroutes'
+---
+Director:
+  rules:
+    'surveys': 'Survey_Controller'
