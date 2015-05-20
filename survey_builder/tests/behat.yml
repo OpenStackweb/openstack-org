@@ -1,0 +1,10 @@
+default:
+  suites:
+    web_features:
+      paths:    [ %paths.base%/features/web ]
+      contexts: [ WebContext ]
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://en.wikipedia.org
+      goutte: ~
+      selenium2: ~
