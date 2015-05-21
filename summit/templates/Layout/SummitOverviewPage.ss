@@ -118,9 +118,6 @@
                     <p>
                         The OpenStack summit is a unique opportunity for the developers and users of OpenStack software to meet and exchange ideas. Hundreds of the core developers will be on site to discuss all things OpenStack. Summits include in-depth technical discussions, hands-on workshops, and the full presence of almost every player in the OpenStack Ecosystem. If you are deploying OpenStack—or considering how it can help your enterprise—there’s no better way to connect with the community than the OpenStack Summit.
                     </p>
-                    <p>
-                        <a href="https://www.eventbrite.com/e/openstack-summit-may-2015-vancouver-tickets-14992221137">Register For The Vancouver Summit ></a>
-                    </p>
                 </div>
             </div>
         </div>
