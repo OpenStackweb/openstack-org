@@ -18,6 +18,15 @@
                         Get Excited!
                         <span>Stay tuned for details</span>
                     </div>
+                <div class="row">
+                  <div class="col-sm-12 download-prospectus-title">
+                    Download the Sponsor Prospectus
+                  </div>
+                  <div class="col-sm-8 col-sm-push-2">
+                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">English</a>
+                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-JP-0515.pdf" target="_blank" class="btn register-btn-lrg">日本人 (Japanese)</a>
+                  </div>
+                </div>
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text=The October 2015 OpenStack Summit will be in Tokyo, Japan&url=http://openstack.org/summit/tokyo-2015/"></a>
                     <a target="_blank" class="social-icons landing-facebook" onclick="return windowpop(this.href, 545, 433)" 
@@ -29,9 +38,6 @@
                               &link=http://openstack.org/summit/tokyo-2015/
                               &redirect_uri=https://facebook.com" ></a>
                     <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://openstack.org/summit/tokyo-2015/&title=OpenStack Summit Tokyo 2015&summary=The October 2015 OpenStack Summit will be in Tokyo, Japan" target="_blank" class="social-icons landing-linkedin"></a>
-                </div>
-                <div>
-                    <a href="https://www.openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">Download The Sponsor Prospectus</a>
                 </div>
                 <div>
                   <a href="/summit/vancouver-2015/" class="white-link">View The Current Summit</a>
