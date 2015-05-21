@@ -2592,3 +2592,9 @@ body.modal-open {
     -moz-border-radius: 0px;
     background-image: none;
 }
+.download-prospectus-title {
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
