@@ -30,7 +30,7 @@
                             </h1>
                             <div class="landing-action">
                                 <% if $RegistrationLink %>
-                                    <a href="$RegistrationLink" class="btn register-btn-lrg">Join Us</a>
+                                    
                                 <% else %>
                                     <!-- <a href="#" class="btn register-btn-lrg inactive" data-toggle="modal" data-target="#registrationModal">Registration Opening Soon</a> -->
                                 <% end_if %>
