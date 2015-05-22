@@ -10,8 +10,8 @@
 
                 <div class="about-video-wrapper">
 
-                    <iframe width="560" height="315" src="//www.youtube.com/embed/_zgbXbnuRNM?showinfo=0" frameborder="0" allowfullscreen></iframe>
-                    <p class='video-catpion'>Video: See a recap of our November 2014 summit in Paris, France.</p>
+                    <iframe width="560" height="315" src="//www.youtube.com/embed/iZdEwQ-76P4?showinfo=0" frameborder="0" allowfullscreen></iframe>
+                    <p class='video-catpion'>Video: See a recap of our May 2015 summit in Vancouver, BC.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4">
