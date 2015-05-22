@@ -35,16 +35,6 @@
                                     <a href="#" class="btn register-btn-lrg inactive" data-toggle="modal" data-target="#registrationModal">Registration Opening Soon</a>
                                 <% end_if %>
                             </div>
-                            <div class="inner-countdown-wrapper">
-                                <div class="countdown">
-                                        <span>N</span>
-                                        <span>O</span>
-                                        <span>W</span>
-                                </div>
-                                <div class="countdown-text">
-                                    The Summit is Happening Now!
-                                </div>
-                            </div>
                         </div>
                         <% end_with %>
                     </div>
