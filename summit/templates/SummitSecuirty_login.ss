@@ -26,16 +26,6 @@
                             <div class="landing-action">
                                 <button href="#" class="btn register-btn-lrg">Join Us</button>
                             </div>
-                            <div class="inner-countdown-wrapper">
-                                <div class="countdown">
-                                        <span>N</span>
-                                        <span>O</span>
-                                        <span>W</span>
-                                </div>
-                                <div class="countdown-text">
-                                    The Summit is Happening Now!
-                                </div>
-                            </div>
                         </div>
                         <% end_with %>
                     </div>
