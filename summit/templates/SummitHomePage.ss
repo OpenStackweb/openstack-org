@@ -21,7 +21,7 @@
                     </p>
                 </div>
                 <div class="landing-action">
-                    <a href="$CurrentSummit.Link" class="btn register-btn-lrg">Upcoming Summit <i class="fa fa-chevron-right"></i></a>
+                    <a href="$CurrentSummit.Link" class="btn register-btn-lrg">Get The Details <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <a href="$Link" class="single-summit current-summit">
                     <h3>$DateLabel</h3>
                     <h2>$Title</h2>
-                    <div class="btn register-btn-lrg skinny">Join Us</div>
+                    <div class="btn register-btn-lrg skinny">Get The Details</div>
                 </a>
                 <div class="single-summit-date current">
                     $DateLabel
