@@ -20,15 +20,6 @@
                         $IntroText
                     </p>
                 </div>
-                <div class="countdown">
-                        <span>N</span>
-                        <span>O</span>
-                        <span>W</span>
-                </div>
-                <div class="countdown-text">
-                    <!-- Days until $CurrentSummit.Title -->
-                    The Summit is Happening Now!
-                </div>
                 <div class="landing-action">
                     <a href="$CurrentSummit.Link" class="btn register-btn-lrg">Upcoming Summit <i class="fa fa-chevron-right"></i></a>
                 </div>
