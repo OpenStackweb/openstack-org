@@ -1701,15 +1701,17 @@ a.featured-link:hover {
   max-height: 113px;
   max-width: 1140px;
   margin-bottom: 20px;
-  background-image: url('/themes/openstack/images/conferences/vancouver/vancouver-banner.png');
+  background-image: url('/themes/openstack/images/conferences/tokyo/tokyo-banner-events.jpg');
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-position: center center; }
+  background-position: center center;
+  image-rendering: optimizeQuality;
+ }
 
 @media (max-width: 767px) {
   .event-ad-lrg {
-    max-width: 766px;
-  background-image: url('/themes/openstack/images/conferences/vancouver/vancouver-banner.png');
+    max-width: 767px;
+    background-image: url('/themes/openstack/images/conferences/tokyo/tokyo-banner-events-small.jpg');
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center center; } }
