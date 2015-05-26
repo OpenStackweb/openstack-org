@@ -8,26 +8,14 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 timeline-wrapper">
             <div class="section dates-section">
 					<h5 class="section-title">Dates &amp; Events</h5>
-					<p>Over the week of May 18 to May 22, two events happen together: </p>
+					<p>Over the week of May 18 to May 22, two events happened together: </p>
 					<div>
 					    <div class="left">The OpenStack Conference <span>(Monday - Thursday)</span></div>
 					    <div class="right">This is a great place for attendees of all levels to learn about OpenStack through keynotes, speaking sessions, hands-on labs, and our ecosystem marketplace.</div>
 					    <div class="left">The OpenStack Design Summit <span>(Tuesday - Friday)</span></div>
 					    <div class="right">These are dedicated working sessions where OpenStack developers and operators plan the roadmap for the next software release.</div>
 					</div>
-				</div>
-				
-<div class="section">
-                    <h5 class="section-title">Available Passes</h5>
-					<p>
-						Most attendees wil opt for a <strong>Full-Access</strong> pass, which includes access to everything. However, if you are only interested in attending the keynotes and visiting the expo floor, we have a second pass just fot you, appropiately called the <strong>Keynote + Marketplace Pass</strong>. Below you can see what's included in each: 
-					</p>
-					<p>
-						<a href="#" class="pass-timeline-wrapper" data-toggle="modal" data-target="#passModal">
-							<img class="pass-timeline" src="/summit/images/pass-timeline-small2.svg" onerror="this.onerror=null; this.src=/summit/images/pass-timeline-small2.png" alt="Vancouver Summit Pass Timeline">
-						</a>
-					</p>
-				</div>				
+				</div>			
 				
 				<% if ImportantDates %>
 				<div class="section">
