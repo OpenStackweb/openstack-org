@@ -22,16 +22,6 @@
                     <% end_if %>
                     <li><a href="{$Link}download-the-summit-app/"><i class="fa fa-mobile" style="font-size:2em;"></i>Download The App</a>
                     </li>
-                    <li><a href="{$Link}venue-maps/"><i class="fa fa-building"></i>Venue Maps</a>
-                    </li>
-                    <li><a href="{$Link}lunch-menus/"><i class="fa fa-spoon"></i>Lunch Menus</a>
-                    </li>
-                    <li><a href="{$Link}about-vancouver/#hotels"><i class="fa fa-h-square"></i>Find a Hotel</a>
-                    </li>
-                    <li><a href="{$Link}about-vancouver/#visa"><i class="fa fa-globe"></i>Visa Information</a>
-                    </li>
-                    <li><a href="{$Link}details-and-updates/"><i class="fa fa-plane"></i>Plan Travel Dates</a>
-                    </li>
                     <hr>
                     <li><a href="{$Link}open-cloud-ecosystem/"><i class="fa fa-users"></i>Open Cloud EcoSystem</a>
                     </li>

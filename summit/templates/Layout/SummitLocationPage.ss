@@ -252,7 +252,7 @@
 	<p>
 		Mountains, ocean, culture, nightlife all rolled into one beautiful city...
 	</p>
-	<h1>Come Join Us In Vancouver</h1>
+	<h1>Thank you Vancouver!</h1>
 	<p>
 		<% if $CurrentSummit.RegistrationLink %>
 		<a href="$CurrentSummit.RegistrationLink" class="btn orange-btn">Register Now</a>
