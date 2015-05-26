@@ -104,8 +104,6 @@
             <p>
                 <% if $CurrentSummit.RegistrationLink %>
                     <a href="$RegistrationLink" class="modal-contact-btn"><i class="fa fa-tag"></i> Purchase Your Summit Pass</a>
-                <% else %>
-                    <p>Registration opening soon.</p?>    
                 <% end_if %>
             </p>
           </div>
