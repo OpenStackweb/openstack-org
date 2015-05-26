@@ -5,7 +5,7 @@
                 <h1>OpenStack Event Listing</h1>
             </div>
         </div>
-    </div>
+    </div> 
     <div class="row">
         <div class="col-lg-12">
             <a href="https://www.openstack.org/summit/tokyo-2015/">
