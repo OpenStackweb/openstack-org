@@ -68,8 +68,8 @@ class SurveySingleValueValidationRule
      */
     public function hasCustomMessage()
     {
-        $res = empty($this->getField('Message'));
-        return $res;
+        $message  = $this->getField('Message');
+        return !empty($message);
     }
 
     /**
