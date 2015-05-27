@@ -74,7 +74,7 @@ class EntitySurveyTemplate
             $multi_class_selector = new GridFieldAddNewMultiClass();
 
             $multi_class_selector->setClasses( array(
-                    'SurveyStepTemplate'              => 'Normal Step' ,
+                    'SurveyRegularStepTemplate' => 'Regular Step' ,
                 )
             );
 

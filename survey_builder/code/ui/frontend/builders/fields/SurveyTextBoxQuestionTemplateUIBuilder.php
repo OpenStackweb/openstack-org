@@ -12,9 +12,21 @@
  * limitations under the License.
  **/
 
-class SurveyTextAreaQuestionTemplate extends SurveySingleValueTemplateQuestion {
+class SurveyTextBoxQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder {
 
-    public function Type(){
-        return 'TextArea';
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return FormField
+     */
+    public function build(ISurveyQuestionTemplate $question)
+    {
+        $field = new TextField($question->name(), $question->label());
+        $field->setValue($question->initialValue());
+        if($question->isReadOnly()) $field->setDisabled(true);
+        if($question->isMandatory())
+        {
+            $field->setAttribute('data-rule-required','true');
+        }
+        return $field;
     }
 }

@@ -30,4 +30,10 @@ interface ISurveyRegularStep extends ISurveyStep {
      */
     public function getAnswerByTemplateId($answer_template_id);
 
+    /**
+     * @param string $name
+     * @return ISurveyAnswer
+     */
+    public function getAnswerByName($name);
+
 }

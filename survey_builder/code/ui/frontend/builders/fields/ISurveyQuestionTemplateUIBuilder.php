@@ -12,9 +12,11 @@
  * limitations under the License.
  **/
 
-class SurveyTextAreaQuestionTemplate extends SurveySingleValueTemplateQuestion {
+interface ISurveyQuestionTemplateUIBuilder {
 
-    public function Type(){
-        return 'TextArea';
-    }
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return FormField
+     */
+    public function build(ISurveyQuestionTemplate $question);
 }

@@ -49,7 +49,7 @@ final class AssociationFactory  {
 		if(!$child_class) throw new Exception(sprintf("entity %s has not an one-to-many association called %s",get_class($entity),$association_name));
 		$old = UnitOfWork::getInstance()->getCollection($entity,$child_class,$query,'1-to-many');
 		if($old) return $old;
-		$component = $entity->getComponents($association_name, (string)$query, $query->getOrder(true), $query->getAlias(),"");
+		$component = $entity->getComponents($association_name, (string)$query, $query->getOrder(true))->innerJoin('', $query->getAlias());
 		return new PersistentCollection($entity, $component, $query,'1-to-many',$association_name);
 	}
 

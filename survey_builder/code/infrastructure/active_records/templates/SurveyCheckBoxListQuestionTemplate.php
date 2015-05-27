@@ -15,21 +15,6 @@
 class SurveyCheckBoxListQuestionTemplate
     extends SurveyMultiValueQuestionTemplate {
 
-    /**
-     * @return FormField
-     */
-    public function createAssociatedFormField()
-    {
-        $values = $this->Values()->map('Label','Value');
-        $field  = new CustomCheckboxSetField($this->name(), $this->label(), $values);
-        $field->setDisabled($this->isReadOnly());
-        if($this->isMandatory())
-        {
-            $field->setAttribute('data-rule-required','true');
-        }
-        return $field;
-    }
-
     public function Type(){
         return 'CheckBoxList';
     }

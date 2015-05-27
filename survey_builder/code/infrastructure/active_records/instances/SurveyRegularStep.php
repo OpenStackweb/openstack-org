@@ -50,4 +50,13 @@ class SurveyRegularStep
     {
         return null;
     }
+
+    /**
+     * @param string $name
+     * @return ISurveyAnswer
+     */
+    public function getAnswerByName($name)
+    {
+        // TODO: Implement getAnswerByName() method.
+    }
 }

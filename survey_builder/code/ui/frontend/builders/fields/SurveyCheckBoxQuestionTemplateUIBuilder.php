@@ -12,9 +12,21 @@
  * limitations under the License.
  **/
 
-class SurveyTextAreaQuestionTemplate extends SurveySingleValueTemplateQuestion {
+class SurveyCheckBoxQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder {
 
-    public function Type(){
-        return 'TextArea';
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return FormField
+     */
+    public function build(ISurveyQuestionTemplate $question)
+    {
+        $field = new CheckboxField($question->name(), $question->label());
+        $field->setValue($question->initialValue());
+        if($question->isReadOnly()) $field->setDisabled(true);
+        if($question->isMandatory())
+        {
+            $field->setAttribute('data-rule-required','true');
+        }
+        return $field;
     }
 }

@@ -15,6 +15,6 @@
     </div>
 </div>
     <div class="row">
-        $Top.RenderStep()
+        $Top.SurveyStepForm
     </div>
 </div>

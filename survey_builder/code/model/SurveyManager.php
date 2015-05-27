@@ -90,4 +90,27 @@ class SurveyManager implements ISurveyManager {
 
         });
     }
+
+    /**
+     * @return ISurveyTemplate
+     */
+    public function getCurrentSurveyTemplate()
+    {
+        $query = New QueryObject();
+        $now   = new \DateTime('now', new DateTimeZone('UTC'));
+        $query->addAndCondition(QueryCriteria::lowerOrEqual('StartDate', $now->format('Y-m-d H:i:s')));
+        $query->addAndCondition(QueryCriteria::greaterOrEqual('EndDate', $now->format('Y-m-d H:i:s')));
+        $query->addAndCondition(QueryCriteria::equal('Enabled', 1));
+        return $this->template_repository->getBy($query);
+    }
+
+    /**
+     * @param array $data
+     * @param ISurveyStep $current_step
+     * @return ISurveyStep
+     */
+    public function saveCurrentStep(ISurveyStep $current_step, array $data)
+    {
+        // TODO: Implement saveCurrentStep() method.
+    }
 }

@@ -21,3 +21,16 @@ Injector:
 Survey_Controller:
   dependencies:
     SurveyManager: '%$SurveyManager'
+    SurveyRepository: '%$SurveyRepository'
+---
+Name: surveybuilderui
+---
+Injector:
+  TextBoxUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  TextAreaUIBuilder:
+      class: SurveyTextAreaQuestionTemplateUIBuilder
+  CheckBoxUIBuilder:
+      class: SurveyCheckBoxQuestionTemplateUIBuilder
+  CheckBoxListUIBuilder:
+      class: SurveyCheckBoxListQuestionTemplateUIBuilder
