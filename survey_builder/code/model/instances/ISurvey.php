@@ -56,4 +56,10 @@ interface ISurvey extends IEntity {
      * @return ICommunityMember
      */
     public function createdBy();
+
+    /**
+     * @param string $step_name
+     * @return bool
+     */
+    public function isAllowedStep($step_name);
 }

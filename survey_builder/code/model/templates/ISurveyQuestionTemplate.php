@@ -54,7 +54,7 @@ interface ISurveyQuestionTemplate extends IEntity {
     public function dependsOn();
 
     /**
-     * @return FormField
+     * @return string
      */
-    public function createAssociatedFormField();
+    public function Type();
 }

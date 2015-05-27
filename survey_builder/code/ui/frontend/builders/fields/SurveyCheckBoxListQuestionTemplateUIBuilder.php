@@ -12,27 +12,21 @@
  * limitations under the License.
  **/
 
-/**
- * Interface ISurveyManager
- */
-interface ISurveyManager {
-    /**
-     * @param int $template_id
-     * @param int $creator_id
-     * @return ISurvey
-     */
-    public function getSurveyByTemplateAndCreator($template_id, $creator_id);
-
+class SurveyCheckBoxListQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder {
 
     /**
-     * @return ISurveyTemplate
+     * @param ISurveyQuestionTemplate $question
+     * @return FormField
      */
-    public function getCurrentSurveyTemplate();
-
-    /**
-     * @param array $data
-     * @param ISurveyStep $current_step
-     * @return ISurveyStep
-     */
-    public function saveCurrentStep(ISurveyStep $current_step, array $data);
+    public function build(ISurveyQuestionTemplate $question)
+    {
+        $values = $question->Values()->map('Label','Value');
+        $field  = new CustomCheckboxSetField($question->name(), $question->label(), $values);
+        if($question->isReadOnly()) $field->setDisabled(true);
+        if($question->isMandatory())
+        {
+            $field->setAttribute('data-rule-required','true');
+        }
+        return $field;
+    }
 }

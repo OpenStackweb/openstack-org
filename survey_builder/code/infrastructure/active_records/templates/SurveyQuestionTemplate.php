@@ -133,12 +133,4 @@ class SurveyQuestionTemplate
     {
         // TODO: Implement dependsOn() method.
     }
-
-    /**
-     * @return FormField
-     */
-    public function createAssociatedFormField()
-    {
-       throw new DomainException('Abstract Method!');
-    }
 }

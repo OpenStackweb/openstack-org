@@ -12,9 +12,23 @@
  * limitations under the License.
  **/
 
-class SurveyTextAreaQuestionTemplate extends SurveySingleValueTemplateQuestion {
+class SurveyDynamicEntityStepTemplateUIBuilder implements ISurveyStepUIBuilder {
 
-    public function Type(){
-        return 'TextArea';
+    /**
+     * @param ISurveyStep $step
+     * @param string $action
+     * @return Form
+     */
+    public function build(ISurveyStep $step, $action)
+    {
+        $fields    = null;
+        $validator = null;
+        $actions   = new FieldList(
+            FormAction::create($action)->setTitle("Next")
+        );
+
+        $form =  new HoneyPotForm(Controller::curr(), 'SurveyStepForm', $fields, $actions, $validator);
+        $form->setTemplate('DynamicEntityStepForm');
+        return $form;
     }
 }

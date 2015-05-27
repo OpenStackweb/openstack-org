@@ -73,7 +73,10 @@ class Survey
      */
     public function getSteps()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->toArray();
+        $query = new QueryObject(new SurveyStep);
+        $query->addAlias(QueryAlias::create('Template'));
+        $query->addOrder(QueryOrder::desc('SurveyStepTemplate.Order'));
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->toArray();
     }
 
     /**
@@ -117,5 +120,25 @@ class Survey
     public function addStep(ISurveyStep $step)
     {
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->add($step);
+    }
+
+    /**
+     * @param string $step_name
+     * @return bool
+     */
+    public function isAllowedStep($step_name)
+    {
+        $steps = $this->getSteps();
+        $d     = array();
+
+        foreach($steps as $s){
+            array_push($d, $s->template()->title());
+        }
+
+        $desired_index = array_search($step_name, $d);
+        if($desired_index === false) return false;
+        $max_allowed_index = array_search($this->allowedMaxStep()->template()->title(), $d);
+
+        return $desired_index <= $max_allowed_index;
     }
 }

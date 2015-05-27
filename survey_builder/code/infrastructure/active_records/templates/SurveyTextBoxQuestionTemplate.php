@@ -14,21 +14,6 @@
 
 class SurveyTextBoxQuestionTemplate extends SurveySingleValueTemplateQuestion {
 
-    /**
-     * @return FormField
-     */
-    public function createAssociatedFormField()
-    {
-        $field = new TextField($this->name(), $this->label());
-        $field->setValue($this->initialValue());
-        $field->setDisabled($this->isReadOnly());
-        if($this->isMandatory())
-        {
-            $field->setAttribute('data-rule-required','true');
-        }
-        return $field;
-    }
-
     public function Type(){
         return 'TextBox';
     }

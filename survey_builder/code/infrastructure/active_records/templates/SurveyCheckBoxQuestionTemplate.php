@@ -15,20 +15,6 @@
 class SurveyCheckBoxQuestionTemplate
     extends SurveySingleValueTemplateQuestion {
 
-    /**
-     * @return FormField
-     */
-    public function createAssociatedFormField()
-    {
-       $field = new CheckboxField($this->name(), $this->label());
-       $field->setValue($this->initialValue());
-       if($this->isMandatory())
-       {
-           $field->setAttribute('data-rule-required','true');
-       }
-       return $field;
-    }
-
     public function Type(){
         return 'CheckBox';
     }

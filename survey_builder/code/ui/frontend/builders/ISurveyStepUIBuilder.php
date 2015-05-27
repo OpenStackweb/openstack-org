@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +13,15 @@
  * limitations under the License.
  **/
 
-class SurveyTextAreaQuestionTemplate extends SurveySingleValueTemplateQuestion {
-
-    public function Type(){
-        return 'TextArea';
-    }
+/**
+ * Interface ISurveyStepUIBuilder
+ */
+interface ISurveyStepUIBuilder
+{
+    /**
+     * @param ISurveyStep $step
+     * @param string $action
+     * @return Form
+     */
+    public function build(ISurveyStep $step, $action);
 }
