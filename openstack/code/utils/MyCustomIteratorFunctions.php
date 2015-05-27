@@ -22,7 +22,7 @@ final class MyCustomIteratorFunctions implements TemplateIteratorProvider
 
 	public static function get_template_iterator_variables()
 	{
-		return array('Mid','IsFourth','MultipleOf');
+		return array('Mid','IsFourth');
 	}
 
 	public function iteratorProperties($pos, $totalItems)
@@ -42,10 +42,5 @@ final class MyCustomIteratorFunctions implements TemplateIteratorProvider
 
 	public function IsFourth(){
 		return ($this->iteratorPos % 4) == 0;
-	}
-
-	public function MultipleOf($mul){
-		$mul = (int)$mul;
-		return ($this->iteratorPos + 1) % $mul == 0;
 	}
 }

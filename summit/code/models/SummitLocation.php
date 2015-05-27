@@ -27,18 +27,19 @@ class SummitLocation extends DataObject
     );
     
     public function getCMSFields() {
-        return FieldList::create(TabSet::create('Root'))
-            ->dropdown('Type','Type', $this->dbObject('Type')->enumValues())            
-            ->text('Name')
-            ->textArea('Description')            
-            ->textArea('Address')
-            ->text('Latitude')
-            ->text('Longitude')
-            ->text('Website')
-            ->text('BookingLink')
-            ->checkbox('IsSoldOut','This location is <strong>sold out</strong> (applies to hotels only)')
-            ->checkbox('DisplayOnSite','Show this location on the website. Will be hidden if unchecked.');
 
+        $fields =  FieldList::create(TabSet::create('Root'));
+        $fields->addFieldToTab('Root.Main', new DropdownField('Type','Type', $this->dbObject('Type')->enumValues()));
+        $fields->addFieldToTab('Root.Main', new TextField('Name','Name'));
+        $fields->addFieldToTab('Root.Main', new TextareaField('Description','Description'));
+        $fields->addFieldToTab('Root.Main', new TextareaField('Address','Address'));
+        $fields->addFieldToTab('Root.Main', new TextField('Latitude','Latitude'));
+        $fields->addFieldToTab('Root.Main', new TextField('Longitude','Longitude'));
+        $fields->addFieldToTab('Root.Main', new TextField('Website','Website'));
+        $fields->addFieldToTab('Root.Main', new TextField('BookingLink','BookingLink'));
+        $fields->addFieldToTab('Root.Main', new CheckboxField('IsSoldOut','This location is <strong>sold out</strong> (applies to hotels only)'));
+        $fields->addFieldToTab('Root.Main', new CheckboxField('DisplayOnSite','Show this location on the website. Will be hidden if unchecked.'));
+        return $fields;
     }
             
 }

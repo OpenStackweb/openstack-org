@@ -82,34 +82,36 @@
 			</div>
 		</div>
         <% loop Hotels %>
-           <% if $First || $MultipleOf(3) %>
-            <div class="row">
-            <% end_if %>
+           <% if $First() %>
+                <div class="row">
+           <% end_if %>
                 <div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
                     <h3>{$Pos}. $Name</h3>
                     <p>
                         $Address
                     </p>
-                    
+
                     <p<% if $IsSoldOut %> class="sold-out-hotel" <% end_if%>>
-                        
+
                         <% if $IsSoldOut %>
                             SOLD OUT
                         <% else %>
-                            <a href="#hotels" onclick="myClick({$Pos});" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>                       
+                            <a href="#hotels" onclick="myClick({$Pos});" target="_blank" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
                             <% if $BookingLink %>
                             <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i> Bookings</a>
                             <% else %>
-                            <a href="{$Website}"><i class="fa fa-home"></i> Website</a>                        
+                            <a href="{$Website}"><i class="fa fa-home"></i> Website</a>
                             <% end_if %>
                         <% end_if %>
                     </p>
                 </div>
-           <% if $MultipleOf(3) || $Last %>                
-            </div>
+            <% if Last() %>
+                </div>
+            <% else_if $MultipleOf(3) %>
+            </div><div class="row">
             <% end_if %>
 		<% end_loop %>
-		
+
 		<% if $Airport %>
 		<% with Airport %>
 		<div class="row">
@@ -130,8 +132,8 @@
 		</div>
 		<% end_with %>
 		<% end_if %>
-		
-		
+
+
 		<div class="row">
 			<div class="col-lg-8 col-lg-push-2 other-hotel-options">
 				<h5 class="section-title">House Sharing</h5>
