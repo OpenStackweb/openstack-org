@@ -14,4 +14,8 @@
 
 interface IEntitySurvey extends ISurvey {
 
+    /**
+     * @return ISurvey
+     */
+    public function parent();
 }

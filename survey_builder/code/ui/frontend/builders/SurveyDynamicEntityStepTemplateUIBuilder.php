@@ -21,14 +21,21 @@ class SurveyDynamicEntityStepTemplateUIBuilder implements ISurveyStepUIBuilder {
      */
     public function build(ISurveyStep $step, $action)
     {
-        $fields    = null;
+        $fields    = new FieldList();
+
+        $fields->add(new HiddenField('survey_id', 'survey_id', $step->survey()->getIdentifier()));
+        $fields->add(new HiddenField('step_id', 'step_id', $step->getIdentifier()));
+
+        $fields->add(new LiteralField('content', $step->template()->content()));
         $validator = null;
         $actions   = new FieldList(
-            FormAction::create($action)->setTitle("Next")
+            FormAction::create('AddEntity')->setTitle("Add")->setUseButtonTag(true),
+            FormAction::create('Done')->setTitle("Done")->setUseButtonTag(true)
         );
 
-        $form =  new HoneyPotForm(Controller::curr(), 'SurveyStepForm', $fields, $actions, $validator);
+        $form =  new DynamicStepForm(Controller::curr(), 'SurveyStepForm', $fields, $actions, $step, $validator);
         $form->setTemplate('DynamicEntityStepForm');
+        $form->setAttribute('class','survey_step_form');
         return $form;
     }
 }

@@ -17,7 +17,8 @@
  */
 class SurveyRegularStep
     extends SurveyStep
-    implements ISurveyRegularStep {
+    implements ISurveyRegularStep
+{
 
 
     static $has_many = array(
@@ -48,6 +49,10 @@ class SurveyRegularStep
      */
     public function getAnswerByTemplateId($answer_template_id)
     {
+        foreach ($this->getAnswers() as $a) {
+            if($a->question()->getIdentifier() === $answer_template_id)
+                return $a;
+        }
         return null;
     }
 
@@ -57,6 +62,18 @@ class SurveyRegularStep
      */
     public function getAnswerByName($name)
     {
-        // TODO: Implement getAnswerByName() method.
+        foreach ($this->getAnswers() as $a) {
+            if($a->question()->name() === $name)
+                return $a;
+        }
+        return null;
+    }
+
+    /**
+     * @return void
+     */
+    public function clearAnswers()
+    {
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Answers')->removeAll();
     }
 }

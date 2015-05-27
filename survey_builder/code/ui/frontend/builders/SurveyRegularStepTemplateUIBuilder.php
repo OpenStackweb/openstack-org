@@ -27,27 +27,35 @@ class SurveyRegularStepTemplateUIBuilder
     public function build(ISurveyStep $step, $action)
     {
         Requirements::customScript('jQuery(document).ready(function($) {
-            var form = $("#HoneyPotForm_SurveyStepForm");
+            var form = $(".survey_step_form");
             form.validate();
         });');
 
         $fields = new FieldList();
+
+        $fields->add(new LiteralField('content', $step->template()->content()));
+
         foreach ($step->template()->getQuestions() as $q) {
+
             $type          = $q->Type();
             $builder_class = $type.'UIBuilder';
             // @ISurveyQuestionTemplateUIBuilder
             $builder = Injector::inst()->create($builder_class);
-            $field   = $builder->build($q);
+            $field   = $builder->build($q, $step->getAnswerByTemplateId($q->getIdentifier()));
             $fields->add($field);
         }
 
-        $validator      = null;
+        $validator = null;
+
+        $fields->add(new HiddenField('survey_id', 'survey_id', $step->survey()->getIdentifier()));
+        $fields->add(new HiddenField('step_id', 'step_id', $step->getIdentifier()));
 
         $actions   = new FieldList(
             FormAction::create($action)->setTitle("Next")
         );
 
-        $form =  new HoneyPotForm(Controller::curr(), 'SurveyStepForm', $fields, $actions, $validator);
+        $form =  new RegularStepForm(Controller::curr(), 'SurveyStepForm', $fields, $actions, $step, $validator);
+        $form->setAttribute('class','survey_step_form');
         return $form;
     }
 }

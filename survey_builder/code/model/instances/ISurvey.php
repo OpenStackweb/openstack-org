@@ -31,6 +31,11 @@ interface ISurvey extends IEntity {
     public function currentStep();
 
     /**
+     * @return bool
+     */
+    public function isLastStep();
+
+    /**
      * @param ISurveyStep $current_step
      * @return void
      */
@@ -62,4 +67,15 @@ interface ISurvey extends IEntity {
      * @return bool
      */
     public function isAllowedStep($step_name);
+
+    /**
+     * @return ISurveyStep
+     */
+    public function completeCurrentStep();
+
+    /**
+     * @param string $step_name
+     * @return ISurveyStep|null
+     */
+    public function getStep($step_name);
 }

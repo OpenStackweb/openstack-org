@@ -132,7 +132,7 @@ class SurveyDynamicEntityStepTemplate
     }
 
     /**
-     * @return mixed
+     * @return IEntitySurveyTemplate
      */
     public function getEntity()
     {

@@ -16,9 +16,10 @@ class SurveyCheckBoxQuestionTemplateUIBuilder implements ISurveyQuestionTemplate
 
     /**
      * @param ISurveyQuestionTemplate $question
+     * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyQuestionTemplate $question)
+    public function build(ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
         $field = new CheckboxField($question->name(), $question->label());
         $field->setValue($question->initialValue());
@@ -26,6 +27,9 @@ class SurveyCheckBoxQuestionTemplateUIBuilder implements ISurveyQuestionTemplate
         if($question->isMandatory())
         {
             $field->setAttribute('data-rule-required','true');
+        }
+        if(!is_null($answer)){
+            $field->setValue($answer->value());
         }
         return $field;
     }

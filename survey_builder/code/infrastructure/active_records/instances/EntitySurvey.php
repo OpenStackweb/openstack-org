@@ -27,7 +27,7 @@ class EntitySurvey
 
     static $has_one = array(
         'Template'  => 'EntitySurveyTemplate',
-        'Container' => 'Member',
+        'Parent'    => 'Survey',
     );
 
     static $many_many = array(
@@ -39,4 +39,11 @@ class EntitySurvey
     private static $defaults = array(
     );
 
+    /**
+     * @return ISurvey
+     */
+    public function parent()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Parent')->getTarget();
+    }
 }
