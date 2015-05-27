@@ -103,7 +103,7 @@
                             <a href="{$Website}"><i class="fa fa-home"></i> Website</a>
                             <% end_if %>
                         <% end_if %>
-                    </p>git s
+                    </p>q
                 </div>
             <% if Last() %>
                 </div>
