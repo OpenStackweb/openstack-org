@@ -12,31 +12,28 @@
  * limitations under the License.
  **/
 
-/**
- * Interface ISurveyDynamicEntityStep
- */
-interface ISurveyDynamicEntityStep extends ISurveyStep {
+class SurveyCheckboxSetField extends CustomCheckboxSetField {
 
     /**
-     * @return ISurveyDynamicEntityStepTemplate
+     * @var bool
      */
-    public function template();
+    private $required;
 
     /**
-     * @return IEntitySurvey[]
+     * @var IMultiValueQuestionTemplate
      */
-    public function getEntitySurveys();
+    private $question;
 
-    /**
-     * @param IEntitySurvey $entity_survey
-     * @return void
-     */
-    public function addEntitySurvey(IEntitySurvey $entity_survey);
+    public function setRequired(){
+        $this->required = true;
+    }
 
-    /**
-     * @param int $entity_survey_id
-     * @return null|IEntitySurvey
-     */
-    public function getEntitySurvey($entity_survey_id);
+    public function isRequired(){
+        return  $this->required;
+    }
 
+    public function __construct($name, $title=null, $source=array(), $value='', $form=null, $emptyString=null, IMultiValueQuestionTemplate $question) {
+        parent::__construct($name, $title, $source, $value, $form, $emptyString);
+        $this->question = $question;
+    }
 }

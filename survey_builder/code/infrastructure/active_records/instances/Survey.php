@@ -75,8 +75,8 @@ class Survey
     {
         $query = new QueryObject(new SurveyStep);
         $query->addAlias(QueryAlias::create('Template'));
-        $query->addOrder(QueryOrder::desc('SurveyStepTemplate.Order'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->toArray();
+        $query->addOrder(QueryOrder::asc('Template.Order'));
+        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->toArray());
     }
 
     /**
@@ -140,5 +140,50 @@ class Survey
         $max_allowed_index = array_search($this->allowedMaxStep()->template()->title(), $d);
 
         return $desired_index <= $max_allowed_index;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLastStep()
+    {
+        $last_step = $this->getSteps()->last();
+        return $last_step->getIdentifier() === $this->currentStep()->getIdentifier();
+    }
+
+    /**
+     * @return ISurveyStep
+     */
+    public function completeCurrentStep(){
+
+        $steps = $this->getSteps();
+        $d     = array();
+
+        foreach($steps as $s){
+            array_push($d, $s->template()->title());
+        }
+
+        $current_step_index = array_search($this->currentStep()->template()->title(), $d);
+        if(($current_step_index+1) === count($d)) return $this->currentStep();
+
+        $new_step = $this->getStep($d[$current_step_index+1]);
+
+        $this->registerAllowedMaxStep($new_step);
+        $this->registerCurrentStep($new_step);
+        return $new_step;
+    }
+
+
+    /**
+     * @param string $step_name
+     * @return ISurveyStep|null
+     */
+    public function getStep($step_name){
+        foreach($this->getSteps() as $s){
+            if($s->template()->title() === $step_name) {
+              return $s;
+            }
+        }
+        return null;
     }
 }

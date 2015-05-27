@@ -20,4 +20,19 @@ interface ISurveyBuilder {
      * @return ISurvey
      */
     public function build(ISurveyTemplate $template, $owner);
+
+    /**
+     * @param ISurvey $parent
+     * @param IEntitySurveyTemplate $template
+     * @param $owner
+     * @return IEntitySurvey
+     */
+    public function buildEntitySurvey(ISurvey $parent,IEntitySurveyTemplate $template, $owner);
+
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @param string $answer_value
+     * @return ISurveyAnswer
+     */
+    public function buildAnswer(ISurveyQuestionTemplate $question, $answer_value);
 }

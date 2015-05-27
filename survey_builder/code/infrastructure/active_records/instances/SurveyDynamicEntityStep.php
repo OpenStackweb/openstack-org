@@ -71,4 +71,19 @@ class SurveyDynamicEntityStep
     {
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->add($entity_survey);
     }
+
+    /**
+     * @param int $entity_survey_id
+     * @return null|IEntitySurvey
+     */
+    public function getEntitySurvey($entity_survey_id)
+    {
+        $entities = $this->getEntitySurveys();
+        foreach($entities as $e){
+            if($e->getIdentifier() === $entity_survey_id){
+                return $e;
+            }
+        }
+        return null;
+    }
 }

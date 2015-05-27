@@ -16,13 +16,20 @@
  * Interface ISurveyManager
  */
 interface ISurveyManager {
+
     /**
      * @param int $template_id
      * @param int $creator_id
      * @return ISurvey
      */
-    public function getSurveyByTemplateAndCreator($template_id, $creator_id);
+    public function buildSurvey($template_id, $creator_id);
 
+    /**
+     * @param ISurveyDynamicEntityStep $step
+     * @param int $creator_id
+     * @return IEntitySurvey
+     */
+    public function buildEntitySurvey(ISurveyDynamicEntityStep $step, $creator_id);
 
     /**
      * @return ISurveyTemplate
@@ -34,5 +41,12 @@ interface ISurveyManager {
      * @param ISurveyStep $current_step
      * @return ISurveyStep
      */
-    public function saveCurrentStep(ISurveyStep $current_step, array $data);
+    public function completeStep(ISurveyRegularStep $current_step, array $data);
+
+    /**
+     * @param ISurvey $survey
+     * @param string $step_name
+     * @return void
+     */
+    public function registerCurrentStep(ISurvey $survey, $step_name);
 }

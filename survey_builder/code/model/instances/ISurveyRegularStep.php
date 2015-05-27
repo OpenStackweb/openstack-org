@@ -25,6 +25,11 @@ interface ISurveyRegularStep extends ISurveyStep {
     public function addAnswer(ISurveyAnswer $new_answer);
 
     /**
+     * @return void
+     */
+    public function clearAnswers();
+
+    /**
      * @param int $answer_template_id
      * @return ISurveyAnswer
      */

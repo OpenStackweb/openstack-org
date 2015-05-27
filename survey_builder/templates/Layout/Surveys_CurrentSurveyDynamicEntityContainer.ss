@@ -2,6 +2,6 @@
 <div class="container">
     <% include Surveys_Header %>
     <div class="row">
-        $Top.SurveyStepForm
+        $Top.SurveyDynamicEntityStepForm
     </div>
 </div>

@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Interface ISurveyDynamicEntityStepTemplate
+ */
 interface ISurveyDynamicEntityStepTemplate extends ISurveyStepTemplate {
 
     /**
@@ -30,7 +33,7 @@ interface ISurveyDynamicEntityStepTemplate extends ISurveyStepTemplate {
     public function getEditEntityText();
 
     /**
-     * @return mixed
+     * @return IEntitySurveyTemplate
      */
     public function getEntity();
 }

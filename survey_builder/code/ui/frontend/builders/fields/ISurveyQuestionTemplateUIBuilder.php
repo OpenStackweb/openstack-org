@@ -16,7 +16,8 @@ interface ISurveyQuestionTemplateUIBuilder {
 
     /**
      * @param ISurveyQuestionTemplate $question
+     * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyQuestionTemplate $question);
+    public function build(ISurveyQuestionTemplate $question, ISurveyAnswer $answer);
 }

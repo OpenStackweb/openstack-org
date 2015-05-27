@@ -16,16 +16,20 @@ class SurveyCheckBoxListQuestionTemplateUIBuilder implements ISurveyQuestionTemp
 
     /**
      * @param ISurveyQuestionTemplate $question
+     * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyQuestionTemplate $question)
+    public function build(ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
         $values = $question->Values()->map('Label','Value');
-        $field  = new CustomCheckboxSetField($question->name(), $question->label(), $values);
+        $field  = new SurveyCheckboxSetField($question->name(), $question->label(), $values,  $value='', $form=null, $emptyString=null, $question);
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {
-            $field->setAttribute('data-rule-required','true');
+            $field->setRequired();
+        }
+        if(!is_null($answer)){
+            $field->setValue($answer->value());
         }
         return $field;
     }

@@ -47,4 +47,55 @@ class SurveyBuilder implements ISurveyBuilder {
        }
        return $survey;
     }
+
+    /**
+     * @param ISurvey $parent
+     * @param IEntitySurveyTemplate $template
+     * @param $owner
+     * @return EntitySurvey
+     */
+    public function buildEntitySurvey(ISurvey $parent, IEntitySurveyTemplate $template, $owner)
+    {
+        $survey              = new EntitySurvey();
+        $survey->TemplateID  = $template->getIdentifier();
+        $survey->CreatedByID = $owner->getIdentifier();
+        $survey->ParentID    = $parent->getIdentifier();
+        $i = 0;
+        foreach($template->getSteps() as $step_template){
+            ++$i;
+            $new_step = null;
+            if($step_template instanceof SurveyRegularStepTemplate){
+                $new_step = new SurveyRegularStep();
+            }
+            else{
+                $new_step = new SurveyStep;
+            }
+            $new_step->TemplateID = $step_template->getIdentifier();
+            $survey->addStep($new_step);
+            if($i == 1) {
+                $survey->registerCurrentStep($new_step);
+                $survey->registerAllowedMaxStep($new_step);
+            }
+        }
+        return $survey;
+    }
+
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @param mixed $answer_value
+     * @return ISurveyAnswer
+     */
+    public function buildAnswer(ISurveyQuestionTemplate $question, $answer_value)
+    {
+        $answer = new SurveyAnswer();
+        if(is_array($answer_value) ){
+            $answer_value = str_replace('{comma}', ',', $answer_value);
+            $answer->Value = implode(',', $answer_value);
+        }
+        else{
+            $answer->Value = $answer_value;
+        }
+        $answer->QuestionID = $question->getIdentifier();
+        return $answer;
+    }
 }

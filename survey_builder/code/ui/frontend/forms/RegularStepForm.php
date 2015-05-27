@@ -12,31 +12,30 @@
  * limitations under the License.
  **/
 
-/**
- * Interface ISurveyDynamicEntityStep
- */
-interface ISurveyDynamicEntityStep extends ISurveyStep {
+class RegularStepForm extends HoneyPotForm {
 
     /**
-     * @return ISurveyDynamicEntityStepTemplate
+     * @var ISurveyRegularStep
      */
-    public function template();
+    private $step;
 
     /**
-     * @return IEntitySurvey[]
+     * @param Controller $controller
+     * @param String $name
+     * @param FieldList $fields
+     * @param FieldList $actions
+     * @param ISurveyRegularStep $step
+     * @param null $validator
      */
-    public function getEntitySurveys();
+    function __construct($controller, $name, FieldList $fields, FieldList $actions, ISurveyRegularStep $step, $validator = null) {
+        parent::__construct($controller, $name, $fields, $actions, $validator);
+        $this->step = $step;
+    }
 
     /**
-     * @param IEntitySurvey $entity_survey
-     * @return void
+     * @return ISurveyRegularStep
      */
-    public function addEntitySurvey(IEntitySurvey $entity_survey);
-
-    /**
-     * @param int $entity_survey_id
-     * @return null|IEntitySurvey
-     */
-    public function getEntitySurvey($entity_survey_id);
-
+    public function CurrentStep(){
+        return $this->step;
+    }
 }
