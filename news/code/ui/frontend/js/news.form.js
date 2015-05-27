@@ -34,7 +34,7 @@ jQuery(document).ready(function($){
         }, "Please specify a valid phone number (ie 333-333-4444)");
 
         form_validator = form.validate({
-            onfocusout: true,
+            onfocusout: function(element) {$(element).valid()},
             focusCleanup: true,
             rules: {
                 submitter_phone:{required: true, phoneUS:true},
@@ -42,6 +42,7 @@ jQuery(document).ready(function($){
                 summary:{required: true},
                 tags:{required: true},
                 date:{required: true},
+                link:{url:true}
             },
             messages: {
                 submitter_phone:{
@@ -62,10 +63,10 @@ jQuery(document).ready(function($){
                 }, 2000);
             },
             errorPlacement: function(error, element) {
-                if(!element.is(":visible")){
+                /*if(!element.is(":visible")){
                     element = element.parent();
                 }
-                error.insertAfter(element);
+                error.insertAfter(element);*/
             }
         });
 

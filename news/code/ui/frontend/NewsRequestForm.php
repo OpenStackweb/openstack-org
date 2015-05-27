@@ -110,6 +110,7 @@ final class NewsRequestForm extends HoneyPotForm {
             $SubmitterEmailField = new TextField('submitter_email','Email');
             $SubmitterCompanyField = new TextField('submitter_company','Company');
             $SubmitterPhoneField = new TextField('submitter_phone','Phone');
+            $LinkField->setValue('http://');
         }
 
         $fields = new FieldList (
