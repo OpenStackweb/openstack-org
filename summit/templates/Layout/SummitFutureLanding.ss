@@ -1,8 +1,8 @@
 <div class="tokyo-landing-wrapper">
     <div class="container">
     	<div class="row">
-    		<div class="col-lg-12 col-md-12 col-sm-12">
-                <a href="/">
+    		<div class="col-sm-12">
+                <a href="/summit/">
                     <img class="tokyo-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png" alt="OpenStack Summit Tokyo October 2015">
                 </a>
                 <div class="save-the-date">
@@ -15,11 +15,10 @@
                     <div class="summit-date">
                        October 27 - 30, 2015
                        <br>
-                        Get Excited!
-                        <span>Stay tuned for details</span>
+                       Grand Prince International Convention Center & Hotels
                     </div>
                 <div class="row">
-                  <div class="col-sm-12 download-prospectus-title">
+                  <div class="col-sm-8 col-sm-push-2 download-prospectus-title">
                     Download the Sponsor Prospectus
                   </div>
                   <div class="col-sm-8 col-sm-push-2">
@@ -38,9 +37,6 @@
                               &link=http://openstack.org/summit/tokyo-2015/
                               &redirect_uri=https://facebook.com" ></a>
                     <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://openstack.org/summit/tokyo-2015/&title=OpenStack Summit Tokyo 2015&summary=The October 2015 OpenStack Summit will be in Tokyo, Japan" target="_blank" class="social-icons landing-linkedin"></a>
-                </div>
-                <div>
-                  <a href="/summit/vancouver-2015/" class="white-link">View The Current Summit</a>
                 </div>
             </div>
         </div>
