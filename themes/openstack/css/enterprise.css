@@ -552,7 +552,9 @@ p.file-info a:hover {
   padding: 0;
   background: url('//openstack.org/assets/enterprise/banner-bg.jpg') no-repeat center center;
   background-size: cover;
-  min-height: 350px; }
+  min-height: 350px; 
+  margin-bottom: -50px;
+}
 
 .marketplace-column {
   background: #2e729a;
@@ -565,7 +567,13 @@ p.file-info a:hover {
 
 @media (max-width: 1199px) {
   .marketplace-column {
-    min-height: 110%; } }
+    min-height: 110%; } 
+}
+@media (max-width: 767px) {
+  .marketplace-column {
+    margin-bottom: 20px;
+  }
+}
 
 .marketplace-column h2 {
   text-shadow: none;
@@ -1035,6 +1043,11 @@ a.enterprise-bar-right {
   max-width: 100%; }
 .featured-use-cases a.blue-btn:visited {
   color: white;
+}
+@media (max-width: 767px) {
+  .featured-use-cases .col-sm-4 {
+    margin-bottom: 20px;
+  }
 }
 
 .more-use-cases h3 {
