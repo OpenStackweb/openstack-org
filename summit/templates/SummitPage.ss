@@ -30,8 +30,9 @@
                             </h1>
                             <div class="landing-action">
                                 <% if $RegistrationLink %>
-                                    <a href="$CurrentSummit.RegistrationLink" class="btn orange-btn">Register Now</a>
                                     
+                                <% else %>
+                                    <a href="#" class="btn register-btn-lrg inactive" data-toggle="modal" data-target="#registrationModal">Tickets on Sale July 15</a>
                                 <% end_if %>
                             </div>
                         </div>
@@ -138,6 +139,8 @@
 
                 <% if $CurrentSummit.RegistrationLink %>
                     <a href="$CurrentSummit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
+                <% else %>
+                    <a href="#" class="btn register-btn-lrg inactive" data-toggle="modal" data-target="#registrationModal">Registration Opening Soon</a>
                 <% end_if %>
 
             </nav>

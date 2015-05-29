@@ -18,13 +18,17 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-push-2 sponsor-intro">
-                <h1>Thank You To The OpenStack Summit Sponsors</h1>
-
+                <h1>Interested being a Tokyo Summit Sponsor?</h1>
                 <p>
-                    The generous support of our sponsors makes it possible for our community to gather, learn and build
-                    the future of cloud computing. A warm thank you to all of our sponsors for the May 2015 OpenStack
-                    Summit.
+                    Having a presence at the OpenStack Summit is a great way to get your company in front of the OpenStack community. There are five available levels of sponsorship: Headline, Premier, Spotlight, Event and Startup and a number of add-on opportunities. You can read about the various options in the Sponsorship Prospectus.
                 </p>
+                <div class="row">
+                  <div class="col-sm-8 col-sm-push-2 center">
+                    <h4>Download The Sponsor Prospectus</h4>
+                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">English</a>
+                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-JP-0515.pdf" target="_blank" class="btn register-btn-lrg">日本人 (Japanese)</a>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
