@@ -298,31 +298,31 @@
     </div>
 <% end_if %>
 <!-- end sponsorship packages -->
-<div class="sponsor-bkgd">
+<!-- <div class="sponsor-bkgd">
     <div class="fixed-image exhibit"></div>
 </div>
-<!-- <div class="white" id="venue-map">
+<div class="white" id="venue-map">
     <div class="container">
         <div class="col-lg-12">
             <h1>Venue Maps</h1>
 
             <div class="row">
                 <div class="col-sm-4 venue-map-link">
-                    <a href="https://www.openstack.org/assets/vancouver-summit/openstack-vancouver-venue-maps-draft.pdf"
+                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
                        target="_blank">
                         <img src="/summit/images/map-exhibition-level.png" class="sponsor-logo">
                         <h4>Exhibition Level</h4>
                     </a>
                 </div>
                 <div class="col-sm-4 venue-map-link">
-                    <a href="https://www.openstack.org/assets/vancouver-summit/openstack-vancouver-venue-maps-draft.pdf"
+                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
                        target="_blank">
                         <img src="/summit/images/map-sponsored.png" class="sponsor-logo">
                         <h4>Sponsored Lounge</h4>
                     </a>
                 </div>
                 <div class="col-sm-4 venue-map-link">
-                    <a href="https://www.openstack.org/assets/vancouver-summit/openstack-vancouver-venue-maps-draft.pdf"
+                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
                        target="_blank">
                         <img src="/summit/images/map-sponsored-design.png" class="sponsor-logo">
                         <h4>Sponsored Lounge in Design Summit</h4>
@@ -331,7 +331,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 venue-map-download">
-                    <a href="https://www.openstack.org/assets/vancouver-summit/openstack-vancouver-venue-maps-draft.pdf"
+                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
                        target="_blank">
                         <p><i class="fa fa-cloud-download"></i>Download All Maps</p>
                     </a>
@@ -359,15 +359,15 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <h5 class="section-title">November 2014 Paris OpenStack Summit Metrics:</h5>
+                <h5 class="section-title">November 2015 Vancouver OpenStack Summit Metrics:</h5>
 
                 <div class="row">
                     <div class="col-lg-8 col-lg-push-2 stats-highlight">
-                        <h3>4,600+<span>Total Summit Attendees</span></h3>
+                        <h3>6,000+<span>Total Summit Attendees</span></h3>
 
-                        <h3>876<span>Companies Represented</span></h3>
+                        <h3>967<span>Companies Represented</span></h3>
 
-                        <h3>62<span>Countries Represented</span></h3>
+                        <h3>55<span>Countries Represented</span></h3>
                     </div>
                 </div>
                 <div class="row">
