@@ -36,7 +36,20 @@
 <div class="light city-nav sponsor">
     <div class="container">
         <ul class="city-nav-list">
+            
             <li>
+                <a href="#packages">
+                    <i class="fa fa-tags"></i>
+                    Packages
+                </a>
+            </li>
+            <li>
+                <a href="#how-to-sponsor">
+                    <i class="fa fa-question-circle"></i>
+                    How To Sponsor
+                </a>
+            </li>
+            <!-- <li>
                 <a href="#sponsors">
                     <i class="fa fa-heart"></i>
                     Sponsors
@@ -47,7 +60,7 @@
                     <i class="fa fa-map-marker"></i>
                     Venue Maps
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="#audience">
                     <i class="fa fa-group"></i>
@@ -292,7 +305,7 @@
 <div class="sponsor-bkgd">
     <div class="fixed-image exhibit"></div>
 </div>
-<div class="white" id="venue-map">
+<!-- <div class="white" id="venue-map">
     <div class="container">
         <div class="col-lg-12">
             <h1>Venue Maps</h1>
@@ -331,6 +344,7 @@
         </div>
     </div>
 </div>
+-->
 <div class="sponsor-bkgd">
     <div class="fixed-image crowd"></div>
 </div>
@@ -342,8 +356,8 @@
 
                 <p class="audience-intro">
                     The Summit has experienced tremendous growth since its inception, and we're proud of the diverse
-                    audience reached at each one. Here's a quick look at the audience who attended Paris Summit in
-                    November 2014.
+                    audience reached at each one. Here's a quick look at the audience who attended the Vancouver Summit in
+                    May 2015.
                 </p>
             </div>
         </div>
@@ -379,6 +393,33 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="sponsor-bkgd">
+    <div class="fixed-image exhibit"></div>
+</div>
+<div class="light sponsor-instructions negative-bottom" id="how-to-sponsor">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>
+                    Download the Sponsor Propsectus
+                </h1>
+            </div>
+                <div class="row">
+                  <div class="col-sm-8 col-sm-push-2 center">
+                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">English</a>
+                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-JP-0515.pdf" target="_blank" class="btn register-btn-lrg">日本人 (Japanese)</a>
+                  </div>
+                </div>
+            <div class="col-lg-12 prospectus-wrapper">
+                <p class="center">
+                    More Details On Becoming a Sponsor Coming Soon.
+                </p>
+                <a href="mailto:events@openstack.org" class="contact-link">Contact us with any questions.</a>
+            </div>
+
         </div>
     </div>
 </div>
