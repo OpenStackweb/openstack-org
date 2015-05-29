@@ -35,7 +35,7 @@
                 <a href="$Link" class="single-summit current-summit">
                     <h3>$DateLabel</h3>
                     <h2>$Title</h2>
-                    <div class="btn register-btn-lrg skinny">See The Recap</div>
+                    <div class="btn register-btn-lrg skinny">Join Us</div>
                 </a>
                 <div class="single-summit-date current">
                     $DateLabel
@@ -46,12 +46,12 @@
 
             <% with $PreviousSummit %>
             <div class="col-lg-3 col-lg-pull-6 col-md-3 col-md-pull-6 col-sm-3 col-sm-pull-6 small-single-summit">
-                <a href="//www.openstack.org/summit/openstack-paris-summit-2014" class="single-summit past-summit">
-                    <h2>Paris</h2>
+                <a href="//openstack.org/summit/vancouver-2015/" class="single-summit past-summit">
+                    <h2>Vancouver</h2>
                     <h4>Thanks for coming!</h4>
                 </a>
                 <div class="single-summit-date past">
-                    Nov 3-7, 2014
+                    May 2015
                     <div class="date-circle"></div>
                 </div>
             </div>
@@ -59,12 +59,12 @@
             
             <% with $NextSummit %>
             <div class="col-lg-3 col-md-3 col-sm-3 small-single-summit">
-                <a href="/summit/tokyo-2015/" class="single-summit future-summit">
-                    <h2>Tokyo</h2>
+                <a href="//openstack.org/summit/austin-2016/" class="single-summit future-summit">
+                    <h2>Austin</h2>
                     <h4>Get Ready</h4>
                 </a>
                 <div class="single-summit-date future">
-                    October 2015
+                    April 2015
                     <div class="date-circle"></div>
                 </div>
             </div>
