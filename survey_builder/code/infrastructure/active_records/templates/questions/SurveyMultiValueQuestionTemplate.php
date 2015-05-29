@@ -12,10 +12,11 @@
  * limitations under the License.
  **/
 
-class SurveyMultiValueQuestionTemplate extends SurveyQuestionTemplate {
+class SurveyMultiValueQuestionTemplate
+    extends SurveyQuestionTemplate
+    implements IMultiValueQuestionTemplate {
 
     static $db = array(
-
     );
 
     static $has_one = array(
@@ -23,11 +24,9 @@ class SurveyMultiValueQuestionTemplate extends SurveyQuestionTemplate {
     );
 
     static $indexes = array(
-
     );
 
     static $belongs_to = array(
-
     );
 
     static $many_many = array(
@@ -38,17 +37,11 @@ class SurveyMultiValueQuestionTemplate extends SurveyQuestionTemplate {
     );
 
     private static $defaults = array(
-
     );
 
     public function getCMSFields() {
 
-        $fields = new FieldList();
-
-        $fields->add(new TextField('Name','Name'));
-        $fields->add(new TextField('Label','Label'));
-        $fields->add(new CheckboxField('Mandatory','Is Mandatory?'));
-        $fields->add(new CheckboxField('ReadOnly','Is Read Only?'));
+        $fields = parent::getCMSFields();
 
         if($this->ID > 0 ){
             //validation rules
@@ -67,9 +60,51 @@ class SurveyMultiValueQuestionTemplate extends SurveyQuestionTemplate {
             }
         }
 
-
         return $fields;
     }
 
+    public function DDLValues(){
+        $selected_values = array();
 
+        $owner = $_REQUEST["SurveyQuestionTemplateID"];
+
+        if(isset($owner)){
+            $sqlQuery = new SQLQuery();
+            $sqlQuery->setSelect("ValueID");
+            $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+            $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+            $selected_values = $sqlQuery->execute()->keyedColumn();
+        }
+
+        return new MultiDropdownField("Values_{$this->ID}", "Values_{$this->ID}",  $this->Values()->map("ID", "Label"), $selected_values);
+    }
+
+    /**
+     * @return IQuestionValueTemplate[]
+     */
+    public function getValues()
+    {
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values')->toArray();
+    }
+
+    /**
+     * @return IQuestionValueTemplate
+     */
+    public function defaultValue()
+    {
+        // TODO: Implement defaultValue() method.
+    }
+
+    /**
+     * @param int $id
+     * @return IQuestionValueTemplate
+     */
+    public function getValueById($id)
+    {
+        foreach($this->values() as $v){
+            if( $v->getIdentifier() === $id)
+                return $v;
+        }
+        return null;
+    }
 }

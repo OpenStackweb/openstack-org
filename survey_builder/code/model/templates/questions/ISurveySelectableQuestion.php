@@ -12,27 +12,6 @@
  * limitations under the License.
  **/
 
-/**
- * Interface IQuestionValueTemplate
- */
-interface IQuestionValueTemplate {
-    /**
-     * @return string
-     */
-    public function label();
+interface ISurveySelectableQuestion {
 
-    /**
-     * @return string
-     */
-    public function value();
-
-    /**
-     * @return int
-     */
-    public function order();
-
-    /**
-     * @return IMultiValueQuestionTemplate
-     */
-    public function owner();
 }

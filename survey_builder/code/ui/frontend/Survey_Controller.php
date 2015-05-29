@@ -106,6 +106,8 @@ class Survey_Controller extends Page_Controller {
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
         Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
+        Requirements::javascript('survey_builder/js/survey.validation.rules.jquery.js');
+        Requirements::javascript('survey_builder/js/survey.controller.js');
     }
 
     public function BootstrapConverted()
@@ -115,11 +117,12 @@ class Survey_Controller extends Page_Controller {
 
     public function renderSurvey($request)
     {
-        $step     = $request->param('STEP_SLUG');
         //check if user is logged in
         if (!Member::currentUser()) {
             return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
         }
+
+        $step     = $request->param('STEP_SLUG');
 
         $current_survey = $this->getCurrentSurveyInstance();
 
@@ -132,6 +135,29 @@ class Survey_Controller extends Page_Controller {
         return $this->customise(array(
             'Survey' => $current_survey,
         ))->renderWith(array('Surveys_CurrentSurveyContainer', 'Page'));
+    }
+
+    /**
+     * @param $step_name
+     * @return string
+     * @throws NotFoundEntityException
+     */
+    public function SurveyStepClass($step_name){
+        $css_step_class = '';
+        $current_survey = $this->getCurrentSurveyInstance();
+        $current_step = $current_survey->currentStep();
+        if($current_step->template()->title() == $step_name)
+            $css_step_class = 'current';
+        else{
+            //check if future or complete
+            if($current_survey->isAllowedStep($step_name)){
+                $css_step_class = 'completed';
+            }
+            else{
+                $css_step_class = 'future';
+            }
+        }
+        return $css_step_class;
     }
 
     public function landing()
@@ -206,10 +232,12 @@ class Survey_Controller extends Page_Controller {
     // Dynamic Entities
 
     public function EditEntity($request){
+
         $step                 = $request->param('STEP_SLUG');
         $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
         $this->current_survey = $this->getCurrentSurveyInstance();
         $current_step         = $this->current_survey->currentStep();
+
         if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
 
         $this->current_entity_survey  = $current_step->getEntitySurvey($entity_survey_id);
@@ -230,6 +258,11 @@ class Survey_Controller extends Page_Controller {
     }
 
     public function AddEntity($request){
+        //check if user is logged in
+        if (!Member::currentUser()) {
+            return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
+        }
+
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
         if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
@@ -242,6 +275,11 @@ class Survey_Controller extends Page_Controller {
 
     public function NextDynamicEntityStep($data, $form)
     {
+        //check if user is logged in
+        if (!Member::currentUser()) {
+            return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
+        }
+
         $entity_survey = $this->getCurrentEntitySurveyInstance(intval($data['survey_id']));
         $current_step  = $entity_survey->currentStep();
         $next_step     = $this->survey_manager->completeStep($current_step, $data);
@@ -254,6 +292,11 @@ class Survey_Controller extends Page_Controller {
     }
 
     public function DeleteEntity($request){
+        //check if user is logged in
+        if (!Member::currentUser()) {
+            return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
+        }
+
         $step                 = $request->param('STEP_SLUG');
         $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
     }

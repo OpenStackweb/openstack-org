@@ -33,14 +33,10 @@ class SurveySingleValueTemplateQuestion
 
     public function getCMSFields() {
 
-        $fields = new FieldList();
+        $fields = parent::getCMSFields();
 
-        $fields->add(new TextField('Name','Name'));
-        $fields->add(new TextField('Label','Label'));
         $fields->add(new TextField('InitialValue','Initial Value'));
         $fields->add(new CheckboxField('PHPExpression','Is PHP Expression?'));
-        $fields->add(new CheckboxField('Mandatory','Is Mandatory?'));
-        $fields->add(new CheckboxField('ReadOnly','Is Read Only?'));
 
         if($this->ID > 0 ){
             //validation rules

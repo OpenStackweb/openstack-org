@@ -34,3 +34,5 @@ Injector:
       class: SurveyCheckBoxQuestionTemplateUIBuilder
   CheckBoxListUIBuilder:
       class: SurveyCheckBoxListQuestionTemplateUIBuilder
+  ComboBoxUIBuilder:
+      class: SurveyDropDownQuestionTemplateUIBuilder

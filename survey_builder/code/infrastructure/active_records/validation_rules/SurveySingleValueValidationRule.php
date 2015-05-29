@@ -106,10 +106,12 @@ class SurveySingleValueValidationRule
 
     protected function validate() {
         $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
         $class = get_class($this);
         $res = $class::get()->filter( array('Name' => $this->Name ))->count();
         if($res > 0 ){
-            $valid->error('There is already another validation rule with that name!');
+            return $valid->error('There is already another validation rule with that name!');
         }
         return $valid;
     }

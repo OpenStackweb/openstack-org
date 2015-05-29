@@ -13,12 +13,26 @@
  **/
 
 /**
- * Interface ISurveyDependantMultiValueQuestionTemplate
+ * Interface IQuestionValueTemplate
  */
-interface ISurveyDependantMultiValueQuestionTemplate extends ISurveyDependantQuestionTemplate {
+interface IQuestionValueTemplate extends IEntity {
+    /**
+     * @return string
+     */
+    public function label();
 
     /**
-     * @return IQuestionValueTemplate[]
+     * @return string
      */
-    public function values();
+    public function value();
+
+    /**
+     * @return int
+     */
+    public function order();
+
+    /**
+     * @return IMultiValueQuestionTemplate
+     */
+    public function owner();
 }

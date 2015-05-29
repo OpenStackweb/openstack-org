@@ -12,7 +12,11 @@
  * limitations under the License.
  **/
 
-class SurveyCheckBoxQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder {
+/**
+ * Class SurveyCheckBoxQuestionTemplateUIBuilder
+ */
+class SurveyCheckBoxQuestionTemplateUIBuilder
+    extends AbstractSurveyQuestionTemplateUIBuilder {
 
     /**
      * @param ISurveyQuestionTemplate $question
@@ -31,6 +35,7 @@ class SurveyCheckBoxQuestionTemplateUIBuilder implements ISurveyQuestionTemplate
         if(!is_null($answer)){
             $field->setValue($answer->value());
         }
+        $this->buildDependantJS($question, $field);
         return $field;
     }
 }
