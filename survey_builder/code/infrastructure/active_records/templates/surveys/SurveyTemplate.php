@@ -157,7 +157,9 @@ class SurveyTemplate
      */
     public function getSteps()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->toArray();
+        $query = new QueryObject();
+        $query->addOrder(QueryOrder::asc('Order'));
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->toArray();
     }
 
     /**
@@ -166,7 +168,9 @@ class SurveyTemplate
      */
     public function addStep(ISurveyStepTemplate $step)
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->add($step);
+        $query = new QueryObject();
+        $query->addOrder(QueryOrder::asc('Order'));
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->add($step);
     }
 
     /**

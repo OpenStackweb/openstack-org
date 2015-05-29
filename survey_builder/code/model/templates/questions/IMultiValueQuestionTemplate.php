@@ -13,48 +13,23 @@
  **/
 
 /**
- * Interface SurveyQuestionTemplate
+ * Interface IMultiValueQuestionTemplate
  */
-interface ISurveyQuestionTemplate extends IEntity {
+interface IMultiValueQuestionTemplate extends ISurveyQuestionTemplate {
 
     /**
-     * @return string
+     * @return IQuestionValueTemplate[]
      */
-    public function label();
+    public function getValues();
 
     /**
-     * @return string
+     * @return IQuestionValueTemplate
      */
-    public function name();
+    public function defaultValue();
 
     /**
-     * @return int
+     * @param int $id
+     * @return IQuestionValueTemplate
      */
-    public function order();
-
-    /**
-     * @return bool
-     */
-    public function isMandatory();
-
-    /**
-     * @return bool
-     */
-    public function isReadOnly();
-
-    /**
-     * @return bool
-     */
-    public function isVisible();
-
-
-    /**
-     * @return ISurveyDependantQuestionTemplate[]
-     */
-    public function dependsOn();
-
-    /**
-     * @return string
-     */
-    public function Type();
+    public function getValueById($id);
 }

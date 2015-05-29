@@ -12,13 +12,11 @@
  * limitations under the License.
  **/
 
-class SurveyQuestionValueTemplate extends DataObject {
+class SurveyQuestionValueTemplate extends DataObject implements IQuestionValueTemplate {
 
     static $db = array(
         'Label'          => 'Varchar(255)',
         'Value'          => 'Varchar(255)',
-        'IsOther'        => 'Boolean',
-        'OtherSubtitle'  => 'Varchar(255)',
     );
 
     static $has_one = array(
@@ -40,7 +38,6 @@ class SurveyQuestionValueTemplate extends DataObject {
     );
 
     private static $defaults = array(
-        'IsOther' => false,
     );
 
 
@@ -48,4 +45,44 @@ class SurveyQuestionValueTemplate extends DataObject {
         'Label',
         'Value',
     );
+
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
+
+    /**
+     * @return string
+     */
+    public function label()
+    {
+        return $this->getField('Label');
+    }
+
+    /**
+     * @return string
+     */
+    public function value()
+    {
+        return $this->getField('Value');
+    }
+
+    /**
+     * @return int
+     */
+    public function order()
+    {
+        return (int)$this->getField('Order');
+    }
+
+    /**
+     * @return IMultiValueQuestionTemplate
+     */
+    public function owner()
+    {
+        // TODO: Implement owner() method.
+    }
 }

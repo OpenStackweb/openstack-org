@@ -13,7 +13,8 @@
  **/
 
 class SurveyCheckBoxListQuestionTemplate
-    extends SurveyMultiValueQuestionTemplate {
+    extends SurveyMultiValueQuestionTemplate
+    implements ISurveyClickableQuestion {
 
     public function Type(){
         return 'CheckBoxList';

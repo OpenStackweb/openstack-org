@@ -13,7 +13,30 @@
  **/
 
 class SurveyCheckBoxQuestionTemplate
-    extends SurveySingleValueTemplateQuestion {
+    extends SurveySingleValueTemplateQuestion implements ISurveyClickableQuestion {
+
+    static $db = array(
+    );
+
+    static $has_one = array(
+    );
+
+    static $indexes = array(
+    );
+
+    static $belongs_to = array(
+
+    );
+
+    static $many_many = array(
+    );
+
+    static $has_many = array(
+
+    );
+
+    private static $defaults = array(
+    );
 
     public function Type(){
         return 'CheckBox';

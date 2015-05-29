@@ -12,7 +12,11 @@
  * limitations under the License.
  **/
 
-class SurveyTextAreaQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder {
+/**
+ * Class SurveyTextAreaQuestionTemplateUIBuilder
+ */
+class SurveyTextAreaQuestionTemplateUIBuilder
+    extends AbstractSurveyQuestionTemplateUIBuilder {
 
     /**
      * @param ISurveyQuestionTemplate $question
@@ -32,6 +36,7 @@ class SurveyTextAreaQuestionTemplateUIBuilder implements ISurveyQuestionTemplate
         if(!is_null($answer)){
             $field->setValue($answer->value());
         }
+        $this->buildDependantJS($question, $field);
         return $field;
     }
 }

@@ -134,15 +134,17 @@ class SurveyStepTemplate
 
     protected function validate() {
         $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
         if(empty($this->FriendlyName)){
-            $valid->error('Friendly Name is empty!');
+            return $valid->error('Friendly Name is empty!');
         }
         $slug = $this->getSlug();
         $id   = $this->ID;
 
         $res = DB::query("SELECT COUNT(ID) FROM SurveyStepTemplate WHERE Name = '{$slug}' AND ID <> {$id}")->value();
         if(intval($res) > 0 ){
-            $valid->error('There is already another step with that name!');
+            return $valid->error('There is already another step with that name!');
         }
         return $valid;
     }

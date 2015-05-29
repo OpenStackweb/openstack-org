@@ -12,18 +12,6 @@
  * limitations under the License.
  **/
 
-/**
- * Interface IMultiValueQuestionTemplate
- */
-interface IMultiValueQuestionTemplate extends ISurveyQuestionTemplate {
+interface ISurveyClickableQuestion {
 
-    /**
-     * @return IQuestionValueTemplate[]
-     */
-    public function values();
-
-    /**
-     * @return IQuestionValueTemplate
-     */
-    public function defaultValue();
 }

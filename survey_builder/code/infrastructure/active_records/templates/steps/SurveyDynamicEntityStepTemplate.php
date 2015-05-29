@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,51 +12,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 class SurveyDynamicEntityStepTemplate
     extends SurveyStepTemplate
-    implements ISurveyDynamicEntityStepTemplate {
+    implements ISurveyDynamicEntityStepTemplate
+{
 
     static $db = array(
-        'AddEntityText'    => 'VarChar(255)',
+        'AddEntityText' => 'VarChar(255)',
         'DeleteEntityText' => 'VarChar(255)',
-        'EditEntityText'   => 'VarChar(255)',
+        'EditEntityText' => 'VarChar(255)',
     );
 
-    static $indexes = array(
-
-    );
+    static $indexes = array();
 
     static $has_one = array(
         'EntityIcon' => 'BetterImage',
-        'Entity'     => 'EntitySurveyTemplate',
+        'Entity' => 'EntitySurveyTemplate',
     );
 
-    static $belongs_to = array(
-    );
+    static $belongs_to = array();
 
-    static $many_many = array(
-    );
+    static $many_many = array();
 
-    static $has_many = array(
-    );
+    static $has_many = array();
 
     private static $defaults = array(
-        'AddEntityText'    => 'Add',
+        'AddEntityText' => 'Add',
         'DeleteEntityText' => 'Delete',
-        'EditEntityText'   => 'Edit',
+        'EditEntityText' => 'Edit',
     );
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
 
         $fields = new FieldList();
 
-        $fields->add(new TextField('FriendlyName','Friendly Name'));
-        $fields->add(new HtmlEditorField('Content','Content'));
-        $fields->add(new CheckboxField('SkipStep','Allow To Skip'));
-        $fields->add(new TextField('AddEntityText','Add Text'));
-        $fields->add(new TextField('DeleteEntityText','Delete Text'));
-        $fields->add(new TextField('EditEntityText','Edit Text'));
+        $fields->add(new TextField('FriendlyName', 'Friendly Name'));
+        $fields->add(new HtmlEditorField('Content', 'Content'));
+        $fields->add(new CheckboxField('SkipStep', 'Allow To Skip'));
+        $fields->add(new TextField('AddEntityText', 'Add Text'));
+        $fields->add(new TextField('DeleteEntityText', 'Delete Text'));
+        $fields->add(new TextField('EditEntityText', 'Edit Text'));
 
         $icon = new UploadField('EntityIcon', 'Upload Entity Icon');
         $icon->setCanAttachExisting(false);
@@ -64,7 +61,7 @@ class SurveyDynamicEntityStepTemplate
         $icon->setFolderName('survey-builder');
 
 
-        if($this->ID > 0) {
+        if ($this->ID > 0) {
             $fields->add($icon);
             $id = $this->ID;
             $fields->add($ddl_entity = new DropdownField(
@@ -79,7 +76,8 @@ class SurveyDynamicEntityStepTemplate
         return $fields;
     }
 
-    protected function onBeforeWrite() {
+    protected function onBeforeWrite()
+    {
         parent::onBeforeWrite();
     }
 
@@ -91,28 +89,41 @@ class SurveyDynamicEntityStepTemplate
     function getValidator()
     {
         $fields = array('FriendlyName');
-        if($this->ID > 0) array_push($fields, 'EntityID');
-        $validator_fields  = new RequiredFields($fields);
+        if ($this->ID > 0) array_push($fields, 'EntityID');
+        $validator_fields = new RequiredFields($fields);
         return $validator_fields;
     }
 
-    protected function onAfterWrite() {
+    protected function onAfterWrite()
+    {
         parent::onAfterWrite();
 
-        $id        = $this->ID;
+        $id = $this->ID;
         $entity_id = $this->EntityID;
-        if($id === 0 || is_null($id) ) return;
+        if ($id === 0 || is_null($id)) return;
         DB::query("UPDATE EntitySurveyTemplate SET `OwnerID` = 0 WHERE OwnerID = {$id}; ");
-        if($entity_id === 0 || is_null($entity_id )) return;
+        if ($entity_id === 0 || is_null($entity_id)) return;
         DB::query("UPDATE EntitySurveyTemplate SET `OwnerID` = {$id} WHERE ID = {$entity_id}; ");
     }
+
+    protected function validate()
+    {
+        $valid = parent::validate();
+        if (!$valid->valid()) return $valid;
+        $count = EntitySurveyTemplate::get()->where(" (OwnerID = 0 OR OwnerID = {$this->ID} ) ")->count();
+        if (intval($count) === 0) {
+            return $valid->error('You need to create a valid Entity Survey Template First !');
+        }
+        return $valid;
+    }
+
 
     /**
      * @return string
      */
     public function getAddEntityText()
     {
-       return $this->getField('AddEntityText');
+        return $this->getField('AddEntityText');
     }
 
     /**

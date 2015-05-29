@@ -62,11 +62,13 @@ class SurveyRegularStepTemplate
             $config = GridFieldConfig_RecordEditor::create();
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
-            $multi_class_selector->setClasses( array(
+            $multi_class_selector->setClasses(
+                array(
                     'SurveyTextBoxQuestionTemplate'      => 'TextBox' ,
                     'SurveyTextAreaQuestionTemplate'     => 'TextArea',
                     'SurveyCheckBoxQuestionTemplate'     => 'CheckBox',
                     'SurveyCheckBoxListQuestionTemplate' => 'CheckBoxList',
+                    'SurveyDropDownQuestionTemplate'     => 'ComboBox',
                 )
             );
             $config->addComponent($multi_class_selector);
