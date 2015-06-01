@@ -892,7 +892,7 @@ footer {
   margin-top: 20px; }
 
 .summit-types {
-  margin-top: 60px; }
+  }
 
 .summit-types h3 {
   font-weight: 300; }
@@ -1034,7 +1034,8 @@ a.outline-btn {
     width: 100%; }
   .growth-chart {
     margin-left: 0;
-    margin-top: 0; }
+    margin-top: 0;
+    min-width:0px; }
   .growth-text-bottom {
     width: 100%;
     margin-top: 20px; } }
@@ -1297,6 +1298,9 @@ a.photo-credit {
 
 .summit-hero-wrapper.condensed a.photo-credit {
   display: none; }
+
+div.summit-hero-wrapper.condensed.tokyo {
+   background: rgba(0, 0, 0, 0) url('/assets/Uploads/tokyo-bkgd-lrg.jpg') no-repeat scroll center center / cover ; }
 
 .about-city-row p {
   font-weight: 400;
