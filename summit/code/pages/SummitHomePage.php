@@ -3,21 +3,20 @@
 
 class SummitHomePage extends SummitPage {
 
-	private static $db = array (
-		'IntroText' => 'Varchar(255)'
-	);
+    private static $db = array (
+        'IntroText' => 'Varchar(255)'
+    );
 
 
-	private static $hide_ancestor = 'SummitPage';
+    private static $hide_ancestor = 'SummitPage';
 
 
-	public function getCMSFields() {
-		$f = parent::getCMSFields();
-		return $f
-			->text('IntroText')
-		;
-	}
-    
+    public function getCMSFields() {
+        $fields = parent::getCMSFields();
+        $fields->add(new TextField('IntroText', 'Intro Text'));
+        return $fields;
+    }
+
 }
 
 

@@ -9,60 +9,67 @@
 </head>
 
 <body>
-    <div class="main-body">
-        <div id="wrap">
-            <div 
-                  class="summit-hero-wrapper <% if $top_section != 'full' %>condensed<% end_if %>"
-                  <% if $SummitImage %>style="background: url('{$SummitImage.Image.link}');"<% end_if %>
-            >
-                <div class="container">
-                    <div class="row">
-                        <% with $CurrentSummit %>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <a href="/">
-                                <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'" alt="OpenStack Summit">
-                            </a>
-                            <h2>
-                                $DateLabel
-                            </h2>
-                            <h1>
-                                $Title
-                            </h1>
-                            <div class="landing-action">
-                                <% if $RegistrationLink %>
-                                    <a href="$CurrentSummit.RegistrationLink" class="btn orange-btn">Register Now</a>
-                                    
-                                <% end_if %>
-                            </div>
+<div class="main-body">
+    <div  class="summit-hero-wrapper<% if $top_section != 'full' %> condensed<% end_if %><% if HeroCSSClass %> $HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: rgba(0, 0, 0, 0) url('{$SummitImage.Image.link}') no-repeat scroll center bottom / cover ;"<% end_if %> >
+        <div class="container">
+            <div class="row">
+                <% with $Summit %>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <a href="/">
+                            <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'" alt="OpenStack Summit">
+                        </a>
+                        <h2>
+                            $DateLabel
+                        </h2>
+                        <h1>
+                            $Title
+                        </h1>
+                        <div class="landing-action">
+                            <% if $RegistrationLink %>
+                                <a href="{$RegistrationLink}" class="btn orange-btn">Register Now</a>
+                            <% end_if %>
+                            <% if $ComingSoonBtnText %>
+                                <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
+                            <% end_if %>
                         </div>
-                        <% end_with %>
+                        <% if Active %>
+                            <div class="inner-countdown-wrapper">
+                                <div class="countdown">
+                                    $Top.CountdownDigits
+                                </div>
+                                <div class="countdown-text">
+                                    Days until $Name
+                                </div>
+                            </div>
+                        <% end_if %>
                     </div>
-                    <a href="#" class="open-panel"><i class="fa fa-bars fa-2x collapse-nav"></i></a>
-                </div>
-                <div class="hero-tab-wrapper">
-                    <!-- Microsite Navigation -->
-
-<% include SummitNav %>
-
-<!-- End Microsite Navigation -->
-                </div>
-                <% if $SummitImage %><a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$SummitImage.Attribution}"><i class="fa fa-info-circle"></i></a><% end_if %>
+                <% end_with %>
             </div>
-
-            <!-- Begin Page Content -->
-            $Layout
-            <!-- End Page Content -->
-            <div id="push"></div>
+            <a href="#" class="open-panel"><i class="fa fa-bars fa-2x collapse-nav"></i></a>
         </div>
-        
-        <% if not CurrentSummit.RegistrationLink %>
-            
-            <% include RegistrationModal %>
-        
-        <% end_if %>
-        
-        <!-- Footer -->
-            <footer>
+        <div class="hero-tab-wrapper">
+            <!-- Microsite Navigation -->
+            <% include SummitNav %>
+            <!-- End Microsite Navigation -->
+        </div>
+        <% if $SummitImage %><a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$SummitImage.Attribution}"><i class="fa fa-info-circle"></i></a><% end_if %>
+    </div>
+    <div id="wrap">
+
+        <!-- Begin Page Content -->
+        $Layout
+        <!-- End Page Content -->
+        <div id="push"></div>
+    </div>
+
+    <% if not Summit.RegistrationLink %>
+
+        <% include RegistrationModal %>
+
+    <% end_if %>
+
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row footer-links">
                 <div class="col-lg-2 col-sm-2">
@@ -124,25 +131,25 @@
         </div>
     </footer>
 
-        <!-- Hidden Sidebar Nav -->
-        <div class="sidebar-nav">
-            <nav>
-                <a href="#" class="close-panel"><i class="icon-remove-sign icon-large"></i></a>
-                <ul class="sidebar-menu">
-                    <!-- Microsite Navigation -->
+    <!-- Hidden Sidebar Nav -->
+    <div class="sidebar-nav">
+        <nav>
+            <a href="#" class="close-panel"><i class="icon-remove-sign icon-large"></i></a>
+            <ul class="sidebar-menu">
+                <!-- Microsite Navigation -->
 
                 <% include SummitNav %>
 
-<!-- End Microsite Navigation -->
-                </ul>
+                <!-- End Microsite Navigation -->
+            </ul>
 
-                <% if $CurrentSummit.RegistrationLink %>
-                    <a href="$CurrentSummit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
-                <% end_if %>
+            <% if $Summit.RegistrationLink %>
+                <a href="$Summit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
+            <% end_if %>
 
-            </nav>
-        </div>
+        </nav>
     </div>
+</div>
     <% include Quantcast %>
 </body>
 
