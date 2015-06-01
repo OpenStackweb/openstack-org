@@ -107,7 +107,7 @@ jQuery(document).ready(function($){
 
             });
         },
-        forced_root_block : "p",
+        forced_root_block : "p", 
         height: "250px",
         width: "800px"
     });
