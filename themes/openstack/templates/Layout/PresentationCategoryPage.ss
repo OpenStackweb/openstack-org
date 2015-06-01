@@ -134,10 +134,8 @@
                 </div>
             </a>
         </div>
-    <% end_if %>
-
     <!-- Slide Block -->
-    <% if SlidesLink %>
+    <% else_if SlidesLink %>
         <div class="col-sm-3 video-block">
             <a href="{$Top.Link}presentation/{$URLSegment}">
                 <div class="video-thumb">
