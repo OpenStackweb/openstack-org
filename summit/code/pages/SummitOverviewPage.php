@@ -90,7 +90,7 @@ class SummitOverviewPage extends SummitPage {
 
     public function getGrowthBoxTextBottom(){
         $res = $this->getField('GrowthBoxTextBottom');
-        if(!empty($this->getField('GrowthBoxTextBottom')))
+        if(!empty($res))
             return ' <p>The OpenStack summit is a unique opportunity for the developers and users of OpenStack software to meet and exchange ideas. Hundreds of the core developers will be on site to discuss all things OpenStack. Summits include in-depth technical discussions, hands-on workshops, and the full presence of almost every player in the OpenStack Ecosystem. If you are deploying OpenStack—or considering how it can help your enterprise—there’s no better way to connect with the community than the OpenStack Summit.</p>';
         return $res;
     }
