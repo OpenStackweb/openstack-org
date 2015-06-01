@@ -1010,7 +1010,7 @@ a.outline-btn {
 .growth-chart {
   float: left;
   max-width: 100%;
-  margin-left: -20%;
+  margin-top: -60px;
   min-width: 800px;
 }
 
