@@ -30,6 +30,25 @@
                       </a>
                     </div>
                   <% end_if %>
+                  <!-- Slides Block -->
+                    <% if SlidesLink %>
+                      <div class="col-sm-3 video-block">
+                        <a href="{$Top.Link}presentation/{$URLSegment}">
+                          <div class="video-thumb">
+                            <div class="thumb-play"></div>
+                            <img class="video-thumb-img" src="/themes/openstack/images/no-video.jpg">
+                          </div>
+                          <div class="video-details">
+                            <p class="video-thumb-title">
+                              $Name
+                            </p>
+                            <p class="video-thumb-speaker">
+                              $Speakers
+                            </p>
+                          </div>
+                        </a>
+                      </div>
+                    <% end_if %>
               <% if MultipleOf(4) %>
                   </div>
                   <div class="row">
