@@ -23,7 +23,7 @@
                   </div>
                   <div class="col-sm-8 col-sm-push-2">
                       <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">English</a>
-                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-JP-0515.pdf" target="_blank" class="btn register-btn-lrg">日本人 (Japanese)</a>
+                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-JP-0515.pdf" target="_blank" class="btn register-btn-lrg">日本語 (Japanese)</a>
                   </div>
                 </div>
                 <div class="landing-social">
