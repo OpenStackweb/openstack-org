@@ -18,13 +18,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-push-2 sponsor-intro">
-                <h1>Thank You To The OpenStack Summit Sponsors</h1>
-
-                <p>
-                    The generous support of our sponsors makes it possible for our community to gather, learn and build
-                    the future of cloud computing. A warm thank you to all of our sponsors for the May 2015 OpenStack
-                    Summit.
-                </p>
+              $SponsorIntro
             </div>
         </div>
     </div>
@@ -32,37 +26,46 @@
 <div class="light city-nav sponsor">
     <div class="container">
         <ul class="city-nav-list">
-            
-            <li>
-                <a href="#packages">
-                    <i class="fa fa-tags"></i>
-                    Packages
-                </a>
-            </li>
+            <% if ShowSponsorShipPackages %>
+                <li>
+                    <a href="#packages">
+                        <i class="fa fa-tags"></i>
+                        Packages
+                    </a>
+                </li>
+            <% end_if %>
+            <% if HowToSponsorContent %>
             <li>
                 <a href="#how-to-sponsor">
                     <i class="fa fa-question-circle"></i>
                     How To Sponsor
                 </a>
             </li>
-            <!-- <li>
+            <% end_if %>
+            <% if HasSponsors %>
+            <li>
                 <a href="#sponsors">
                     <i class="fa fa-heart"></i>
                     Sponsors
                 </a>
             </li>
+            <% end_if %>
+            <% if VenueMapContent %>
             <li>
                 <a href="#venue-map">
                     <i class="fa fa-map-marker"></i>
                     Venue Maps
                 </a>
-            </li> -->
+            </li>
+            <% end_if %>
+            <% if ShowAudience %>
             <li>
                 <a href="#audience">
                     <i class="fa fa-group"></i>
                     Audience
                 </a>
             </li>
+            <% end_if %>
         </ul>
     </div>
 </div>
@@ -210,7 +213,6 @@
 </div>
 <!-- sponsorship packages -->
 <% if ShowSponsorShipPackages %>
-
     <div class="light" id="packages">
         <div class="container sponsor-wrapper">
             <div class="row">
@@ -219,14 +221,11 @@
                     <h5 class="section-title">
                         Sponsorships Packages Available <span>(prices in USD)</span>
                     </h5>
-
                     <div class="row" id="packages_container">
-
-                        <% loop $SortedPackages %>
+                       <% loop $SortedPackages %>
                             <div class="sponsor_package col-lg-4 col-md-4 col-sm-4" <% if not $SoldOut %>title="Buy me"<% end_if %>>
                                 <div class="sponsor-spots <% if $SoldOut %>sold-out<% end_if %>">
                                     <h3>$Title <span>$SubTitle</span></h3>
-
                                     <div class="sponsor-cost">
                                         $Cost.Nice
                                     </div>
@@ -241,11 +240,12 @@
                                             <% end_if %>
                                         <% end_if %>
                                     </div>
-
                                 </div>
+                                <!--
                                 <div class="package-actions">
                                     <button type="button" id="package_{$ID}" data-title="{$Title}" data-id="{$ID}" class="btn btn-primary buy-package<% if $SoldOut %> hide<% end_if %>"  data-available="{$CurrentlyAvailable}">Buy Me</button>
                                 </div>
+                                -->
                             </div>
                         <% end_loop %>
 
@@ -298,76 +298,39 @@
     </div>
 <% end_if %>
 <!-- end sponsorship packages -->
-<!-- <div class="sponsor-bkgd">
-    <div class="fixed-image exhibit"></div>
+<% if VenueMapContent %>
+<div class="sponsor-bkgd">
+    <div class="fixed-image exhibit" style="background-image: url('{$ExhibitImageUrl}');"></div>
 </div>
 <div class="white" id="venue-map">
     <div class="container">
-        <div class="col-lg-12">
-            <h1>Venue Maps</h1>
-
-            <div class="row">
-                <div class="col-sm-4 venue-map-link">
-                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
-                       target="_blank">
-                        <img src="/summit/images/map-exhibition-level.png" class="sponsor-logo">
-                        <h4>Exhibition Level</h4>
-                    </a>
-                </div>
-                <div class="col-sm-4 venue-map-link">
-                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
-                       target="_blank">
-                        <img src="/summit/images/map-sponsored.png" class="sponsor-logo">
-                        <h4>Sponsored Lounge</h4>
-                    </a>
-                </div>
-                <div class="col-sm-4 venue-map-link">
-                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
-                       target="_blank">
-                        <img src="/summit/images/map-sponsored-design.png" class="sponsor-logo">
-                        <h4>Sponsored Lounge in Design Summit</h4>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 venue-map-download">
-                    <a href="https://www.openstack.org/assets/tokyo-summit/openstack-tokyo-venue-maps-draft.pdf"
-                       target="_blank">
-                        <p><i class="fa fa-cloud-download"></i>Download All Maps</p>
-                    </a>
-                </div>
-            </div>
-        </div>
+       $VenueMapContent
     </div>
 </div>
--->
+<% end_if %>
+<% if ShowAudience %>
 <div class="sponsor-bkgd">
-    <div class="fixed-image crowd"></div>
+        <div class="fixed-image crowd" style="background-image: url('{$CrowdImageUrl}');"></div>
 </div>
 <div class="white" id="audience">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
                 <h1>Audience</h1>
-
                 <p class="audience-intro">
-                    The Summit has experienced tremendous growth since its inception, and we're proud of the diverse
-                    audience reached at each one. Here's a quick look at the audience who attended the Vancouver Summit in
-                    May 2015.
+                    $AudienceIntro
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <h5 class="section-title">November 2015 Vancouver OpenStack Summit Metrics:</h5>
-
+                <h5 class="section-title"></h5>
+                $AudienceMetricsTitle
                 <div class="row">
                     <div class="col-lg-8 col-lg-push-2 stats-highlight">
-                        <h3>6,000+<span>Total Summit Attendees</span></h3>
-
-                        <h3>967<span>Companies Represented</span></h3>
-
-                        <h3>55<span>Countries Represented</span></h3>
+                        <h3>$AudienceTotalSummitAttendees<span>Total Summit Attendees</span></h3>
+                        <h3>$AudienceCompaniesRepresented<span>Companies Represented</span></h3>
+                        <h3>$AudienceCountriesRepresented<span>Countries Represented</span></h3>
                     </div>
                 </div>
                 <div class="row">
@@ -392,34 +355,16 @@
         </div>
     </div>
 </div>
+<% end_if %>
+<% if HowToSponsorContent %>
 <div class="sponsor-bkgd">
-    <div class="fixed-image exhibit"></div>
+    <div class="fixed-image exhibit" style="background-image: url('{$ExhibitImageUrl}');"></div>
 </div>
 <div class="light sponsor-instructions negative-bottom" id="how-to-sponsor">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>
-                    Download the Sponsor Propsectus
-                </h1>
-            </div>
-                <div class="row">
-                  <div class="col-sm-8 col-sm-push-2 center">
-                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">English</a>
-                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-JP-0515.pdf" target="_blank" class="btn register-btn-lrg">日本人 (Japanese)</a>
-                  </div>
-                </div>
-            <div class="col-lg-12 prospectus-wrapper">
-                <p class="center">
-                    More Details On Becoming a Sponsor Coming Soon.
-                </p>
-                <a href="mailto:events@openstack.org" class="contact-link">Contact us with any questions.</a>
-            </div>
-
-        </div>
-    </div>
+    $HowToSponsorContent
 </div>
-
+<% end_if %>
+<% if ShowSponsorShipPackages %>
 <!-- Modal -->
 <div class="modal fade" id="summit_package_purchase_order_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -463,3 +408,4 @@
         </div>
     </div>
 </div>
+<% end_if %>

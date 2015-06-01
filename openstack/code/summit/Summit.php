@@ -91,15 +91,52 @@ class Summit extends DataObject
         return $SpeakerList;
     }
 
+    /*
+     * @return int
+     */
     public static function CurrentSummitID()
     {
-        // todo: make this a property editable in the CMS
-        return 4;
+       $current = self::CurrentSummit();
+       return is_null($current)?0:$current->ID;
     }
 
+    /**
+     * @return DataObject
+     */
     public static function CurrentSummit()
     {
-        return Summit::get()->byID(4);
+        $now   = new \DateTime('now', new DateTimeZone('UTC'));
+        return Summit::get()->filter(array(
+            'StartDate:LessThanOrEqual'  =>  $now->format('Y-m-d H:i:s'),
+            'EndDate:GreaterThanOrEqual' =>  $now->format('Y-m-d H:i:s'),
+            'Active'  => 1
+        ))->first();
+    }
+
+    /**
+     * @return bool
+     */
+    public function IsCurrent(){
+        $now   = new \DateTime('now', new DateTimeZone('UTC'));
+        $start = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
+        $end   = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
+        return $this->Active && $start <= $now && $end >= $now;
+    }
+
+    public function IsUpComing(){
+        $now   = new \DateTime('now', new DateTimeZone('UTC'));
+        $start = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
+        $end   = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
+        return $this->Active && $start >= $now && $end >= $now;
+    }
+
+    public static function GetUpcoming(){
+        $now   = new \DateTime('now', new DateTimeZone('UTC'));
+        return Summit::get()->filter(array(
+            'StartDate:GreaterThanOrEqual'  =>  $now->format('Y-m-d H:i:s'),
+            'EndDate:GreaterThanOrEqual' =>  $now->format('Y-m-d H:i:s'),
+            'Active'  => 1
+        ))->first();
     }
 
 }
