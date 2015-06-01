@@ -22,7 +22,8 @@
     var packages_ordered = [];
     var jqxhr_packages = null;
     var packages_pull_interval = 20000;//20s
-    var package_html_template = $('<div class="sponsor_package col-lg-4 col-md-4 col-sm-4"><div class="sponsor-spots"><h3 class="package-title"><span class="package-sub-title"></span></h3><div class="sponsor-cost"></div><div class="sponsor-count"></div></div><div class="package-actions"><button type="button" class="btn btn-primary buy-package">Buy Me</button></div></div>');
+    // var package_html_template = $('<div class="sponsor_package col-lg-4 col-md-4 col-sm-4"><div class="sponsor-spots"><h3 class="package-title"><span class="package-sub-title"></span></h3><div class="sponsor-cost"></div><div class="sponsor-count"></div></div><div class="package-actions"><button type="button" class="btn btn-primary buy-package">Buy Me</button></div></div>');
+    var package_html_template = $('<div class="sponsor_package col-lg-4 col-md-4 col-sm-4"><div class="sponsor-spots"><h3 class="package-title"><span class="package-sub-title"></span></h3><div class="sponsor-cost"></div><div class="sponsor-count"></div></div></div>');
     var package_directives = {
         '.package-title' : 'title',
         '.sponsor-cost'  : 'cost',
@@ -39,10 +40,10 @@
             else{
                 return '<td>Still Available</td>';
             }
-        },
-        ".buy-package@data-id":'id',
-        ".buy-package@data-available":'available',
-        ".buy-package@data-title":'title'
+        }//,
+        //".buy-package@data-id":'id',
+        //".buy-package@data-available":'available',
+        //".buy-package@data-title":'title'
     };
 
     var jqxhr_add_ons = null;
@@ -181,7 +182,7 @@
             show:false
         })
 
-        $('#summit_package_purchase_order_buy_btn').click(performBuySponsorPackage);
+        //$('#summit_package_purchase_order_buy_btn').click(performBuySponsorPackage);
 
         var input = $('#summit_package_purchase_order_org', form);
 
@@ -194,7 +195,7 @@
             }
         });
 
-        $('.buy-package').live('click', buySponsorPackage);
+        //$('.buy-package').live('click', buySponsorPackage);
 
         setInterval(function(){
             if(jqxhr_packages === null) {

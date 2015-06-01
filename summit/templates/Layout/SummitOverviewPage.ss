@@ -17,23 +17,25 @@
             <div class="col-lg-3 col-md-4 col-sm-4">
                 <ul class="help-me-menu">
                     <% if Summit.RegistrationLink %>
-                        <li>
-                            <a href="{$Summit.RegistrationLink}"><i class="fa fa-shopping-cart"></i>Register for the Summit</a>
-                        </li>
+                        <li><a href="{$Summit.RegistrationLink}"><i class="fa fa-shopping-cart"></i>Register for the Summit</a></li>
                     <% end_if %>
-                    <li><a href="{$Link}download-the-summit-app/"><i class="fa fa-mobile" style="font-size:2em;"></i>Download
-                        The App</a>
-                    </li>
-                    <hr>
-                    <li><a href="{$Link}open-cloud-ecosystem/"><i class="fa fa-users"></i>Open Cloud EcoSystem</a>
-                    </li>
-                    <li><a href="{$Link}faq/"><i class="fa fa-question"></i>Frequently Asked Questions</a>
-                    </li>
+
+                    <% if OrderedHelpMenuItems %>
+                        <% loop OrderedHelpMenuItems %>
+                            <li><a href="{$Url}"><i class="fa {$FAIcon}"></i>$Label</a></li>
+                        <% end_loop %>
+                    <% else %>
+                        <li><a href="{$Link}download-the-summit-app/"><i class="fa fa-mobile" style="font-size:2em;"></i>Download The App</a></li>
+                        <hr>
+                        <li><a href="{$Link}open-cloud-ecosystem/"><i class="fa fa-users"></i>Open Cloud EcoSystem</a></li>
+                        <li><a href="{$Link}faq/"><i class="fa fa-question"></i>Frequently Asked Questions</a></li>
+                    <% end_if %>
+
                 </ul>
                 <div class="schedule-square">
                     <h3><i class="fa fa-calendar"></i>$ScheduleTitle</h3>
                     $ScheduleText
-                    <a href="$ScheduleUrl" class="btn outline-btn">View The Schedule</a>
+                    <a href="$ScheduleUrl" class="btn outline-btn">$ScheduleBtnText</a>
                 </div>
             </div>
 
@@ -44,42 +46,29 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
-                <h1>One Week, Two Main Events</h1>
+                <h1>$TwoMainEventsTitle</h1>
             </div>
         </div>
         <div class="row summit-types">
             <div class="col-lg-5 col-md-5 col-sm-6">
-                <img class="summit-type-icon" src="/summit/images//grey-conference-logo.svg"
-                     onerror="this.onerror=null; this.src=/images/grey-conference-logo.png"
-                     alt="The OpenStack Conference" style="max-width: 150px;">
-
-                <h3>The OpenStack Conference</h3>
-
+                <img class="summit-type-icon" src="{$EventOneLogoUrl}"
+                     onerror="this.onerror=null; this.src={$EventOneLogoPngUrl}"
+                     alt="{$EventOneTitle}" style="max-width: 150px;">
+                <h3>$EventOneTitle</h3>
                 <div class="sub-h3">
-                    For Everyone
+                    $EventOneSubTitle
                 </div>
-                <p><strong>Held Monday - Thursday</strong><br/>
-                    Classic track with speakers and sessions. The perfect place for developers, users, and
-                    administrators of OpenStack Cloud Software. This is great for those looking for the best way to get
-                    started.
-                </p>
-
+                $EventOneContent
             </div>
             <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
-                <img class="summit-type-icon" src="/summit/images//grey-summit-logo.svg"
-                     onerror="this.onerror=null; this.src=/images/grey-summit-logo.png" alt="The OpenStack Conference"
+                <img class="summit-type-icon" src="{$EventTwoLogoUrl}"
+                     onerror="this.onerror=null; this.src={$EventTwoLogoPngUrl}" alt="{$EventTwoTitle}"
                      style="max-width: 150px;">
-
-                <h3>The OpenStack Design Summit</h3>
-
+                <h3>$EventTwoTitle</h3>
                 <div class="sub-h3">
-                    For Contributors
+                    $EventTwoSubTitle
                 </div>
-                <p><strong>Held Tuesday - Friday</strong><br/>
-                    Collaborative working sessions where OpenStack developers come together twice annually to discuss
-                    the requirements for the next software release and connect with other community members.
-                </p>
-
+                $EventTwoContent
             </div>
         </div>
     </div>
@@ -131,15 +120,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
-                <h1>Schedule</h1>
-
+                <h1>$ScheduleTitle</h1>
+                $ScheduleText
                 <p>
-                    Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit
-                    Vancouver.
-                </p>
-
-                <p>
-                    <a href="{$ScheduleUrl}" class="btn outline-btn">View The Schedule</a>
+                    <a href="{$ScheduleUrl}" class="btn outline-btn">$ScheduleBtnText</a>
                 </p>
             </div>
         </div>

@@ -51,57 +51,7 @@ function onScroll(event){
     });
 }
 
-// Audience Chart - Attendees by Region
 
-var pieDataRegion = [{
-    value: 47,
-    color: "#cf3427",
-    label: "Europe"
-}, {
-    value: 35,
-    color: "#29abe2",
-    label: "North America"
-}, {
-    value: 15,
-    color: "#2A4E68",
-    label: "APAC"
-}, {
-    value: 2,
-    color: "#5BB6A7",
-    label: "Middle East"
-}, {
-    value: 1,
-    color: "#faaf3c",
-    label: "Latin America"
-}];
-
-// Audience Chart - Attendees by Roles
-
-var pieDataRole = [{
-    value: 33,
-    color: "#cf3427",
-    label: "Prdt Strgy, Mgt, Archt"
-}, {
-    value: 26,
-    color: "#29abe2",
-    label: "Developer"
-}, {
-    value: 16,
-    color: "#2A4E68",
-    label: "User, Sys Admin"
-}, {
-    value: 10,
-    color: "#5BB6A7",
-    label: "Bus Dev, Mrkt"
-}, {
-    value: 9,
-    color: "#faaf3c",
-    label: "CEO, CIO, IT Mgr"
-}, {
-    value: 6,
-    color: "#000000",
-    label: "Other"
-}];
 
 window.onload = function(){
     var helpers = Chart.helpers;

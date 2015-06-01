@@ -32,7 +32,7 @@
                                 <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
                             <% end_if %>
                         </div>
-                        <% if Active %>
+                        <% if IsUpComing %>
                             <div class="inner-countdown-wrapper">
                                 <div class="countdown">
                                     $Top.CountdownDigits
