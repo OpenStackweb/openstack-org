@@ -75,7 +75,8 @@ class SummitLocationPage extends SummitPage {
     }
 
     public function getCityIntro(){
-        if(empty($this->getField('CityIntro')))
+        $res = $this->getField('CityIntro');
+        if(empty($res))
         return '<blockquote>
 					<strong>You’re gorgeous, baby, you’re sophisticated, you live well...</strong>
 					Vancouver is Manhattan with mountains. It’s a liquid city, a tomorrow city, equal parts India, China, England, France and the Pacific Northwest. It’s the cool North American sibling.
@@ -84,7 +85,7 @@ class SummitLocationPage extends SummitPage {
 					<img src="/summit/images/nytimes.png">
 					<p>New York Times on Vancouver</p>
 				</div>';
-        return $this->getField('CityIntro');
+        return $res;
     }
 
     public function VenueBackgroundImageUrl(){
@@ -95,26 +96,30 @@ class SummitLocationPage extends SummitPage {
     }
 
     public function getVenueBackgroundImageHero(){
-        if(empty($this->getField('VenueBackgroundImageHero')))
+        $res = $this->getField('VenueBackgroundImageHero');
+        if(empty($res))
             return 'Photo by Nick Sinclair';
-        return $this->getField('VenueBackgroundImageHero');
+        return $res;
     }
 
     public function getVenueBackgroundImageHeroSource(){
-        if(empty($this->getField('VenueBackgroundImageHeroSource')))
+        $res = $this->getField('VenueBackgroundImageHeroSource');
+        if(empty($res))
             return 'https://flic.kr/p/8rYHEd';
-        return $this->getField('VenueBackgroundImageHeroSource');
+        return $res;
     }
 
     public function getLocationsTextHeader(){
-        if(empty($this->getField('LocationsTextHeader')))
+        $res = $this->getField('LocationsTextHeader');
+        if(empty($res))
         return '<p>We\'ve negotiated discount rates with six hotels adjacent to the Vancouver Convention Centre (Summit
                 venue). Please move quickly to reserve a room before they sell out!</p>';
-        return $this->getField('LocationsTextHeader');
+        return $res;
     }
 
     public function getOtherLocations(){
-        if(empty($this->getField('OtherLocations')))
+        $res = $this->getField('OtherLocations');
+        if(empty($res))
         return ' <p>
                 If you plan to bring your family with you to Vancouver or if you would like to have more space than a
                 hotel room offers then you may want to rent an apartment or condo during your stay. The following sites
@@ -135,11 +140,12 @@ class SummitLocationPage extends SummitPage {
                 </div>
             </div>
             ';
-        return $this->getField('OtherLocations');
+        return $res;
     }
 
     public function getGettingAround(){
-        if(empty($this->getField('GettingAround')))
+        $res = $this->getField('GettingAround');
+        if(empty($res))
         return '  <div class="row">
             <div class="col-lg-8 col-lg-push-2">
                 <h1>Getting Around In Vancouver</h1>
@@ -175,18 +181,20 @@ class SummitLocationPage extends SummitPage {
                 </div>
             </div>
         </div>';
-        return $this->getField('GettingAround');
+        return $res;
     }
 
     public function getAboutTheCity(){
-        if(empty($this->getField('AboutTheCity')))
+        $res = $this->getField('AboutTheCity');
+        if(empty($res))
         return '<p>Mountains, ocean, culture, nightlife all rolled into one beautiful city...</p>
         <h1>Thank you Vancouver!</h1>';
-        return $this->getField('AboutTheCity');
+        return $res;
     }
 
     public function getLocals(){
-        if(empty($this->getField('Locals')))
+        $res = $this->getField('Locals');
+        if(empty($res))
         return '<div class="row">
             <div class="col-lg-8 col-lg-push-2">
                 <h1>In The Words Of The Locals</h1>
@@ -256,7 +264,7 @@ class SummitLocationPage extends SummitPage {
                 </p>
             </div>
         </div>';
-        return $this->getField('Locals');
+        return $res;
     }
 
     public function getAboutTheCityBackgroundImageUrl(){
@@ -267,15 +275,17 @@ class SummitLocationPage extends SummitPage {
     }
 
     public function getAboutTheCityBackgroundImageHero(){
-        if(empty($this->getField('AboutTheCityBackgroundImageHero')))
+        $res = $this->getField('AboutTheCityBackgroundImageHero');
+        if(empty($res))
         return 'Photo by Magnus Larsson';
-        return $this->getField('AboutTheCityBackgroundImageHero');
+        return $res;
     }
 
     public function getAboutTheCityBackgroundImageHeroSource(){
-        if(empty($this->getField('AboutTheCityBackgroundImageHeroSource')))
+        $res = $this->getField('AboutTheCityBackgroundImageHeroSource');
+        if(empty($res))
         return 'https://flic.kr/p/adaKoH';
-        return $this->getField('AboutTheCityBackgroundImageHeroSource');
+        return $res;
     }
 
 }

@@ -82,15 +82,17 @@ class SummitOverviewPage extends SummitPage {
     }
 
     public function getGrowthBoxTextTop(){
-        if(empty($this->getField('GrowthBoxTextTop')))
+        $res = $this->getField('GrowthBoxTextTop');
+        if(empty($res))
             return '<h2>Join The Movement</h2><p>In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Four years later, almost 5,000 attendees joined us in Paris for our second international summit and the first OpenStack Summit held in Europe.</p>';
-        return $this->getField('GrowthBoxTextTop');
+        return $res;
     }
 
     public function getGrowthBoxTextBottom(){
+        $res = $this->getField('GrowthBoxTextBottom');
         if(!empty($this->getField('GrowthBoxTextBottom')))
             return ' <p>The OpenStack summit is a unique opportunity for the developers and users of OpenStack software to meet and exchange ideas. Hundreds of the core developers will be on site to discuss all things OpenStack. Summits include in-depth technical discussions, hands-on workshops, and the full presence of almost every player in the OpenStack Ecosystem. If you are deploying OpenStack—or considering how it can help your enterprise—there’s no better way to connect with the community than the OpenStack Summit.</p>';
-        return $this->getField('GrowthBoxTextBottom');
+        return $res;
     }
 
     public function BoxChartLegendImageUrl(){
@@ -130,43 +132,49 @@ class SummitOverviewPage extends SummitPage {
 
     public function getVideoRecapCaption(){
 
-        if(empty($this->getField('VideoRecapCaption')))
+        $res = $this->getField('VideoRecapCaption');
+        if(empty($res))
             return 'Video: See a recap of our May 2015 summit in Vancouver, BC.';
-        return $this->getField('VideoRecapCaption');
+        return $res;
     }
 
     public function getVideoRecapYouTubeID(){
-        if(empty($this->getField('VideoRecapYouTubeID')))
+        $res = $this->getField('VideoRecapYouTubeID');
+        if(empty($res))
             return 'iZdEwQ-76P4';
-        return $this->getField('VideoRecapYouTubeID');
+        return $res;
     }
 
     public function getScheduleText(){
-        if(empty($this->getField('ScheduleText')))
+        $res = $this->getField('ScheduleText');
+        if(empty($res))
         return '<p>Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Vancouver.</p>';
-        return $this->getField('ScheduleText');
+        return $res;
     }
 
     public function getScheduleUrl(){
-        if(empty($this->getField('ScheduleUrl')))
+        $res = $this->getField('ScheduleUrl');
+        if(empty($res))
         return '/summit/vancouver-2015/schedule/';
-        return $this->getField('ScheduleUrl');
+        return $res;
     }
 
     public function getScheduleTitle(){
-        if(empty($this->getField('ScheduleTitle')))
+        $res = $this->getField('ScheduleTitle');
+        if(empty($res))
         return 'Schedule';
-        return $this->getField('ScheduleTitle');
+        return $res;
     }
 
     public function getNetworkingContent(){
-        if(empty($this->getField('NetworkingContent')))
+        $res = $this->getField('NetworkingContent');
+        if(empty($res))
         return '<h1>Knowledge, Nightlife, &amp; New Friends.</h1>
                 <p>
                     The Summit is about more than great sessions and speakers. Join the OpenStack community with
                     networking events and fantastic nightlife.
                 </p>';
-        return $this->getField('NetworkingContent');
+        return $res;
     }
 }
 
