@@ -30,6 +30,7 @@
                       </a>
                     </div>
                   <% end_if %>
+                  test
                   <!-- Slides Block -->
                     <% if SlidesLink %>
                       <div class="col-sm-3 video-block">

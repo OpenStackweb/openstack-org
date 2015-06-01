@@ -135,7 +135,7 @@
             </a>
         </div>
     <% end_if %>
-    test
+
     <!-- Slide Block -->
     <% if SlidesLink %>
         <div class="col-sm-3 video-block">
