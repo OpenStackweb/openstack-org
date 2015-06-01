@@ -111,6 +111,10 @@ a.register-btn-lrg, .register-btn-lrg {
   a.register-btn-lrg:focus, .register-btn-lrg:focus {
     outline: none;
     color: white; }
+a.register-btn-lrg.soon, .register-btn-lrg.soon {
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid white;
+}
   a.register-btn-lrg.contract {
     background: #2A4E68;
   }
@@ -1006,7 +1010,9 @@ a.outline-btn {
 .growth-chart {
   float: left;
   max-width: 100%;
-  margin-left: -20%; }
+  margin-left: -20%;
+  min-width: 800px;
+}
 
 .growth-text-bottom {
   width: 40%;
