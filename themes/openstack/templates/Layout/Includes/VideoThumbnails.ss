@@ -1,18 +1,18 @@
 <div class="container video-gallery">
-  <!-- Start Videos -->
-      <% loop GroupedPresentations.GroupedBy(PresentationDay) %>
-              <div class="row">
+    <!-- Start Videos -->
+        <% loop GroupedPresentations.GroupedBy(PresentationDay) %>
+            <div class="row">
                 <div class="col-lg-12">
-                  <h2 id="day-{$Pos}">$PresentationDay</h2>
+                    <h2 id="day-{$Pos}">$PresentationDay</h2>
                 </div>
-              </div>
+            </div>
 
-              <div class="row">
+            <div class="row">
 
-              <% loop Children %>
+            <% loop Children %>
 
-                  <!-- Video Block -->
-                  <% if YouTubeID %>
+                <!-- Video Block -->
+                <% if YouTubeID %>
                     <div class="col-sm-3 video-block">
                       <a href="{$Top.Link}presentation/{$URLSegment}">
                         <div class="video-thumb">
@@ -29,27 +29,25 @@
                         </div>
                       </a>
                     </div>
-                  <% end_if %>
-                  test
-                  <!-- Slides Block -->
-                    <% if SlidesLink %>
-                      <div class="col-sm-3 video-block">
-                        <a href="{$Top.Link}presentation/{$URLSegment}">
-                          <div class="video-thumb">
-                            <div class="thumb-play"></div>
-                            <img class="video-thumb-img" src="/themes/openstack/images/no-video.jpg">
-                          </div>
-                          <div class="video-details">
-                            <p class="video-thumb-title">
-                              $Name
-                            </p>
-                            <p class="video-thumb-speaker">
-                              $Speakers
-                            </p>
-                          </div>
-                        </a>
+                <!-- Slides Block -->
+                <% else_if SlidesLink %>
+                  <div class="col-sm-3 video-block">
+                    <a href="{$Top.Link}presentation/{$URLSegment}">
+                      <div class="video-thumb">
+                        <div class="thumb-play"></div>
+                        <img class="video-thumb-img" src="/themes/openstack/images/no-video.jpg">
                       </div>
-                    <% end_if %>
+                      <div class="video-details">
+                        <p class="video-thumb-title">
+                          $Name
+                        </p>
+                        <p class="video-thumb-speaker">
+                          $Speakers
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                <% end_if %>
               <% if MultipleOf(4) %>
                   </div>
                   <div class="row">
