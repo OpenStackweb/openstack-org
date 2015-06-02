@@ -4,7 +4,7 @@
     	<div class="row">
     		<div class="col-sm-12">
                 <a href="/summit/">
-                    <img class="tokyo-landing-logo" src="/images/summit-logo.svg" onerror="this.onerror=null; this.src=/images/summit-logo.png" alt="OpenStack Summit Austin April 2016">
+                    <img class="tokyo-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png" alt="OpenStack Summit Austin April 2016">
                 </a>
                 <div class="save-the-date"> 
                     Save The Date!
