@@ -31,7 +31,7 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
             $values['Too many to list']  = 'Too many to list';
         }
         else
-            $values = $question->Values()->map('Label','Value');
+            $values = $question->Values()->sort('Order')->map('ID','Value');
 
         $field  = ($question->IsMultiSelect) ? new MultiDropdownField($question->name(), $question->label(), $values) : new DropdownField($question->name(), $question->label(), $values);
         if($question->isReadOnly()) $field->setDisabled(true);

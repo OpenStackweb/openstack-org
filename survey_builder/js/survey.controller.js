@@ -11,7 +11,6 @@
  * limitations under the License.
  **/
 jQuery(document).ready(function($) {
-
     $.validator.setDefaults({
         ignore: ":hidden:not(.chosen-visible)"
     });

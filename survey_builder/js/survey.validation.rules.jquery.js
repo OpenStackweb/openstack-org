@@ -27,6 +27,14 @@
         setQuestionVisibility(show, question_container)
     }
 
+    function checkOtherTextVisibilityRanking(ranking_group, question_container){
+        var show = false;
+        $.each(ranking_group, function(index , ranking){
+            show = show || ranking.hasClass('selected-rank');
+        });
+        setQuestionVisibility(show , question_container)
+    }
+
     function setQuestionVisibility(show, question_container){
         if (show) {
             question_container.removeClass('hidden');
@@ -68,7 +76,22 @@
                 });
                 checkOtherTextVisibilityDropDown(select, txt_container, label);
             });
-        }
+        },
+
+        addRequiredAnswer4RankingGroup: function(ranking_group, txt_container){
+
+            $('body').on('rank', function(evt, selected){
+                var current = $(evt.target);
+                $.each(ranking_group, function(index , ranking){
+                    if($(ranking).attr('id') === current.attr('id')){
+                        checkOtherTextVisibilityRanking(ranking_group, txt_container);
+                    }
+                });
+            });
+
+            checkOtherTextVisibilityRanking(ranking_group, txt_container);
+            
+         }
     };
 
     $.fn.survey_validation_rules = function(methodOrOptions) {

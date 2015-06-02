@@ -12,11 +12,7 @@
  * limitations under the License.
  **/
 
-/**
- * Class SurveyCheckBoxListQuestionTemplateUIBuilder
- */
-class SurveyCheckBoxListQuestionTemplateUIBuilder
-    extends AbstractSurveyQuestionTemplateUIBuilder {
+class SurveyRankingQuestionTemplateUIBuilder extends AbstractSurveyQuestionTemplateUIBuilder {
 
     /**
      * @param ISurveyQuestionTemplate $question
@@ -26,7 +22,9 @@ class SurveyCheckBoxListQuestionTemplateUIBuilder
     public function build(ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
         $values = $question->Values()->sort('Order')->map('ID','Value');
-        $field  = new SurveyCheckboxSetField($question->name(), $question->label(), $values,  $value='', $form=null, $emptyString=null, $question);
+
+        $field  = new SurveyRankingField($question->name(), $question->label(), $values,  $value = '' , $form=null, $emptyString=null, $question);
+
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {

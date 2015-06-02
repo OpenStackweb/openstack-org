@@ -15,7 +15,8 @@
 /**
  * Interface IMultiValueQuestionTemplate
  */
-interface IMultiValueQuestionTemplate extends ISurveyQuestionTemplate {
+interface IMultiValueQuestionTemplate
+    extends ISurveyQuestionTemplate {
 
     /**
      * @return IQuestionValueTemplate[]
