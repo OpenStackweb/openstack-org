@@ -16,11 +16,7 @@
  * Interface IQuestionValueTemplate
  */
 interface IQuestionValueTemplate extends IEntity {
-    /**
-     * @return string
-     */
-    public function label();
-
+   
     /**
      * @return string
      */
@@ -35,4 +31,5 @@ interface IQuestionValueTemplate extends IEntity {
      * @return IMultiValueQuestionTemplate
      */
     public function owner();
+
 }

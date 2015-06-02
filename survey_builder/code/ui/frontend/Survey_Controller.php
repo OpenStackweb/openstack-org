@@ -92,7 +92,9 @@ class Survey_Controller extends Page_Controller {
     {
         $this->current_survey = $this->current_entity_survey = null;
         $this->BootstrapConverted = true;
+
         parent::init();
+
         Requirements::css(Director::protocol() . '://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
         Requirements::css('survey_builder/css/user-survey.css');
         Requirements::css("themes/openstack/css/chosen.css", "screen,projection");

@@ -12,11 +12,16 @@
  * limitations under the License.
  **/
 
-class SurveyQuestionValueTemplate extends DataObject implements IQuestionValueTemplate {
+/**
+ * Class SurveyQuestionValueTemplate
+ */
+class SurveyQuestionValueTemplate
+    extends DataObject
+    implements IQuestionValueTemplate {
 
     static $db = array(
-        'Label'          => 'Varchar(255)',
-        'Value'          => 'Varchar(255)',
+        'Value' => 'Varchar(255)',
+        'Order' => 'Int',
     );
 
     static $has_one = array(
@@ -42,7 +47,6 @@ class SurveyQuestionValueTemplate extends DataObject implements IQuestionValueTe
 
 
     private static $summary_fields = array(
-        'Label',
         'Value',
     );
 
@@ -54,15 +58,7 @@ class SurveyQuestionValueTemplate extends DataObject implements IQuestionValueTe
         return (int)$this->getField('ID');
     }
 
-    /**
-     * @return string
-     */
-    public function label()
-    {
-        return $this->getField('Label');
-    }
-
-    /**
+     /**
      * @return string
      */
     public function value()
@@ -83,6 +79,29 @@ class SurveyQuestionValueTemplate extends DataObject implements IQuestionValueTe
      */
     public function owner()
     {
-        // TODO: Implement owner() method.
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
+    }
+
+    protected function onBeforeWrite() {
+        parent::onBeforeWrite();
+        $this->Value = trim($this->Value);
+    }
+
+    protected function validate() {
+        $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
+        if(empty($this->Value)){
+            return $valid->error('Value is empty!');
+        }
+
+        return $valid;
+    }
+
+    public function getCMSFields() {
+        $fields = new FieldList();
+        $fields->add(new TextField('Value', 'Value'));
+        $fields->add(new HiddenField('OwnerID', 'OwnerID'));
+        return $fields;
     }
 }

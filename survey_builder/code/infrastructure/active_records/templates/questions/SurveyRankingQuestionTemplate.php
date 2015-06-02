@@ -12,34 +12,34 @@
  * limitations under the License.
  **/
 
-class SurveyCheckBoxQuestionTemplate
-    extends SurveySingleValueTemplateQuestion
-    implements ISurveyClickableQuestion {
+/**
+ * Class SurveyRankingQuestionTemplate
+ */
+class SurveyRankingQuestionTemplate
+    extends SurveyMultiValueQuestionTemplate
+    implements ISurveyRankableQuestion {
 
     static $db = array(
-    );
-
-    static $has_one = array(
-    );
-
-    static $indexes = array(
-    );
-
-    static $belongs_to = array(
-
-    );
-
-    static $many_many = array(
-    );
-
-    static $has_many = array(
-
+        'MaxItemsToRank' => 'Int',
+        'Intro'          => 'HTMLText',
     );
 
     private static $defaults = array(
+        'MaxItemsToRank' => 5,
     );
 
     public function Type(){
-        return 'CheckBox';
+        return 'Ranking';
+    }
+
+    public function getCMSFields() {
+
+        $fields = parent::getCMSFields();
+
+        $fields->add(new NumericField('MaxItemsToRank', 'Max. Items To Rank'));
+        $fields->add(new HtmlEditorField('Intro', 'Intro Text'));
+
+        return $fields;
     }
 }
+

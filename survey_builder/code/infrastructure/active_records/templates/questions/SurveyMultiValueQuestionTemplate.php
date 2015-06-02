@@ -46,9 +46,9 @@ class SurveyMultiValueQuestionTemplate
         if($this->ID > 0 ){
             //validation rules
             $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent(new GridFieldSortableRows('Order'));
             $gridField = new GridField('Values', 'Values', $this->Values(), $config);
             $fields->add($gridField);
-
             if($this->Values()->count() > 0){
 
                 $fields->add($ddl_default = new DropdownField(
@@ -76,7 +76,7 @@ class SurveyMultiValueQuestionTemplate
             $selected_values = $sqlQuery->execute()->keyedColumn();
         }
 
-        return new MultiDropdownField("Values_{$this->ID}", "Values_{$this->ID}",  $this->Values()->map("ID", "Label"), $selected_values);
+        return new MultiDropdownField("Values_{$this->ID}", "Values_{$this->ID}",  $this->Values()->map("ID", "Value"), $selected_values);
     }
 
     /**
@@ -84,7 +84,9 @@ class SurveyMultiValueQuestionTemplate
      */
     public function getValues()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values')->toArray();
+        $query = new QueryObject();
+        $query->addOrder(QueryOrder::asc('Order'));
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values', $query)->toArray();
     }
 
     /**

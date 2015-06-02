@@ -33,6 +33,7 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
                     var form_id           = form.attr('id');
                     var clickable_fields  = [];
                     var selectable_fields = [];
+                    var rankable_fields = [];
                     ";
 
             foreach($depends as $d) {
@@ -41,8 +42,8 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
 
                 if($d instanceof ISurveyClickableQuestion) {
                     if ($d instanceof IMultiValueQuestionTemplate && intval($d->ValueID) > 0) {
-                        $value = $d->getValueById(intval($d->ValueID));
-                        $option_id .= '_' . str_replace(' ', '', $value->Label);
+                        //$value = $d->getValueById(intval($d->ValueID));
+                        $option_id .= '_' . str_replace(' ', '', intval($d->ValueID));
                     }
                     $js .= " clickable_fields.push($('#'+form_id+'_{$option_id}'));";
                 }
@@ -50,8 +51,20 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
                 if($d instanceof ISurveySelectableQuestion) {
 
                     if ($d instanceof IMultiValueQuestionTemplate && intval($d->ValueID) > 0) {
-                        $value = $d->getValueById(intval($d->ValueID));
-                        $js .= " selectable_fields.push({ddl : $('#'+form_id+'_{$option_id}'), label: '{$value->Label}' });";
+                        // $value = $d->getValueById(intval($d->ValueID));
+                        $js .= " selectable_fields.push({ddl : $('#'+form_id+'_{$option_id}'), label: '{$d->ValueID}' });";
+                    }
+
+                }
+
+                if($d instanceof ISurveyRankableQuestion) {
+
+                    if ($d instanceof IMultiValueQuestionTemplate && intval($d->ValueID) > 0) {
+                        if ($d instanceof IMultiValueQuestionTemplate && intval($d->ValueID) > 0) {
+                            //$value = $d->getValueById(intval($d->ValueID));
+                            $option_id .= '_' . str_replace(' ', '', intval($d->ValueID));
+                        }
+                        $js .= " rankable_fields.push( $('#'+form_id+'_{$option_id}') );";
                     }
 
                 }
@@ -60,7 +73,14 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
             $js .= "for(var i = 0 ; i < selectable_fields.length; i++ ){
                 form.survey_validation_rules('addRequiredAnswer4SelectableGroup', [ selectable_fields[i].ddl ], $('#{$question_id}'), selectable_fields[i].label );
             }";
-            $js .= "if(clickable_fields.length > 0 ) form.survey_validation_rules('addRequiredAnswer4ClickableGroup', clickable_fields, $('#{$question_id}') ); });";
+            $js .= "if(clickable_fields.length > 0 )
+             form.survey_validation_rules('addRequiredAnswer4ClickableGroup', clickable_fields, $('#{$question_id}') ); ";
+
+            $js .= "if(rankable_fields.length > 0 )
+                form.survey_validation_rules('addRequiredAnswer4RankingGroup', rankable_fields, $('#{$question_id}') );
+
+            });";
+
             Requirements::customScript($js);
         }
     }

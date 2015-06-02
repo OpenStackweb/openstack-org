@@ -1,0 +1,44 @@
+.ranking_container{
+    margin-bottom: 1em !important;
+}
+
+table.ranking-table {
+    width: 100%;
+}
+
+table.ranking-table td {
+    border: 1px solid #D4DCE5 !important;
+    padding: 10px 30px;
+    vertical-align: middle;
+    height: 60px;
+}
+
+table.ranking-table tr {
+    margin-bottom: 10px;
+}
+
+table.ranking-table tr.spacer {
+    height: 10px;
+}
+
+td.rank-wrapper {
+    width: 100px;
+    text-align: center;
+    border-right: 1px solid #D4DCE5 !important;
+    padding: 10px;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+td.rank-text {
+    text-align: left;
+}
+td.rank-text:hover {
+    cursor: pointer;
+    background: #edf2f7;
+}
+
+td.rank-wrapper:hover {
+    cursor: pointer;
+    background: #edf2f7;
+}
