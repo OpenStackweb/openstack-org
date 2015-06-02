@@ -5,17 +5,19 @@
     };
     var page_id = $Top.ID ;
 </script>
-<div class="whitecity-nav">
+<div class="white sponsor-page-wrapper">
     <div class="container">
+        <% if $SponsorAlert %>
         <div class="row">
             <div class="col-lg-12">
-                <% if $SponsorAlert %>
+
                     <div class="alert alert-info sponsor-alert">
                         $SponsorAlert
                     </div>
-                <% end_if %>
+
             </div>
         </div>
+        <% end_if %>
         <div class="row">
             <div class="col-lg-8 col-lg-push-2 sponsor-intro">
               $SponsorIntro
@@ -23,6 +25,7 @@
         </div>
     </div>
 </div>
+
 <div class="light city-nav sponsor">
     <div class="container">
         <ul class="city-nav-list">

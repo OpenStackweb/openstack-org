@@ -777,7 +777,7 @@ footer {
 .white {
   width: 100%;
   padding: 90px 0;
-  background: white; }
+  background: #fff none repeat scroll 0 0; }
 
 .light {
   width: 100%;
@@ -1892,7 +1892,9 @@ a.close-modal-btn {
 /*End FAQ Page*/
 /*Sponsor Page*/
 .sponsor-page-wrapper {
-  text-align: center; }
+  text-align: center;
+    padding-top: 0;
+}
 
 .sponsor-wrapper {
   text-align: center;
