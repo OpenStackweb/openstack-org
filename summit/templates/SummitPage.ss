@@ -15,7 +15,7 @@
             <div class="row">
                 <% with $Summit %>
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <a href="/">
+                        <a href="/summit">
                             <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'" alt="OpenStack Summit">
                         </a>
                         <h2>
