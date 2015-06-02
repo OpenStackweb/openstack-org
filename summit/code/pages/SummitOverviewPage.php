@@ -71,7 +71,6 @@ class SummitOverviewPage extends SummitPage {
         $fields->addFieldsToTab('Root.Schedule', new TextField('ScheduleUrl','Url'));
         $fields->addFieldsToTab('Root.Schedule', new TextField('ScheduleBtnText','Button Caption'));
 
-
         // GrowthBox
         $fields->addFieldsToTab('Root.VideoRecap', new TextField('VideoRecapCaption','Caption Text'));
         $fields->addFieldsToTab('Root.VideoRecap', new TextField('VideoRecapYouTubeID','YouTubeID'));
@@ -88,22 +87,32 @@ class SummitOverviewPage extends SummitPage {
         $upload_0->setFolderName('summits/overview');
         $upload_0->setAllowedMaxFileNumber(1);
         $upload_0->setAllowedFileCategories('image');
+        $upload_0->setOverwriteWarning(false);
+        $upload_0->getUpload()->setReplaceFile(true);
 
         $upload_1->setFolderName('summits/overview');
         $upload_1->setAllowedMaxFileNumber(1);
         $upload_1->setAllowedExtensions(array('svg'));
+        $upload_1->setOverwriteWarning(false);
+        $upload_1->getUpload()->setReplaceFile(true);
 
         $upload_2->setFolderName('summits/overview');
         $upload_2->setAllowedMaxFileNumber(1);
-        $upload_3->setAllowedExtensions(array('png'));
+        $upload_2->setAllowedExtensions(array('png'));
+        $upload_2->setOverwriteWarning(false);
+        $upload_2->getUpload()->setReplaceFile(true);
 
         $upload_3->setFolderName('summits/overview');
         $upload_3->setAllowedMaxFileNumber(1);
         $upload_3->setAllowedExtensions(array('svg'));
+        $upload_3->setOverwriteWarning(false);
+        $upload_3->getUpload()->setReplaceFile(true);
 
         $upload_4->setFolderName('summits/overview');
         $upload_4->setAllowedMaxFileNumber(1);
         $upload_4->setAllowedExtensions(array('png'));
+        $upload_4->setOverwriteWarning(false);
+        $upload_4->getUpload()->setReplaceFile(true);
 
         //two main events
 
@@ -115,26 +124,34 @@ class SummitOverviewPage extends SummitPage {
         $fields->addFieldsToTab('Root.TwoMainEvents', new TextField('EventTwoSubTitle','Event Two - SubTitle'));
         $fields->addFieldsToTab('Root.TwoMainEvents', new HtmlEditorField('EventTwoContent','Event Two - Content'));
 
-        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_5 = new UploadField('EventOneLogo','Event One Logo (SVG)'));
-        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_6 = new UploadField('EventOneLogoPng','Event One Logo (PNG)'));
-        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_7 = new UploadField('EventTwoLogo','Event One Logo (SVG)'));
+        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_5 = new UploadField('EventOneLogo','Event Two Logo (SVG)'));
+        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_6 = new UploadField('EventOneLogoPng','Event Two Logo (PNG)'));
+        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_7 = new UploadField('EventTwoLogo','Event Two Logo (SVG)'));
         $fields->addFieldsToTab("Root.TwoMainEvents", $upload_8 = new UploadField('EventTwoLogoPng','Event Two Logo (PNG)'));
 
         $upload_5->setFolderName('summits/overview/events');
         $upload_5->setAllowedMaxFileNumber(1);
         $upload_5->setAllowedExtensions(array('svg'));
+        $upload_5->setOverwriteWarning(false);
+        $upload_5->getUpload()->setReplaceFile(true);
 
         $upload_6->setFolderName('summits/overview/events');
         $upload_6->setAllowedMaxFileNumber(1);
         $upload_6->setAllowedExtensions(array('png'));
+        $upload_6->setOverwriteWarning(false);
+        $upload_6->getUpload()->setReplaceFile(true);
 
         $upload_7->setFolderName('summits/overview/events');
         $upload_7->setAllowedMaxFileNumber(1);
         $upload_7->setAllowedExtensions(array('svg'));
+        $upload_7->setOverwriteWarning(false);
+        $upload_7->getUpload()->setReplaceFile(true);
 
         $upload_8->setFolderName('summits/overview/events');
         $upload_8->setAllowedMaxFileNumber(1);
         $upload_8->setAllowedExtensions(array('png'));
+        $upload_8->setOverwriteWarning(false);
+        $upload_8->getUpload()->setReplaceFile(true);
 
         return $fields;
     }
@@ -349,7 +366,7 @@ class SummitOverviewPage extends SummitPage {
     }
 
     public function getOrderedHelpMenuItems(){
-        return $this->HelpMenuItems()->sort('Order');
+        return $this->HelpMenuItems()->sort('Label');
     }
 
 }
