@@ -18,6 +18,7 @@ class SummitOverviewPage extends SummitPage {
     );
 
     private static $db = array(
+        'OverviewIntro'       => 'HTMLText',
         'GrowthBoxTextTop'    => 'HTMLText',
         'GrowthBoxTextBottom' => 'HTMLText',
         'VideoRecapCaption'   => 'Text',
@@ -49,6 +50,8 @@ class SummitOverviewPage extends SummitPage {
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('OverviewIntro','Overview Intro'));
 
         if($this->ID > 0){
             $fields->addFieldToTab('Root.Networking', new HtmlEditorField('NetworkingContent', 'Content'));
@@ -160,6 +163,14 @@ class SummitOverviewPage extends SummitPage {
         $res = $this->getField('GrowthBoxTextTop');
         if(empty($res))
             return '<h2>Join The Movement</h2><p>In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Four years later, almost 5,000 attendees joined us in Paris for our second international summit and the first OpenStack Summit held in Europe.</p>';
+        return $res;
+    }
+
+    public function getOverviewIntro(){
+        $res = $this->getField('OverviewIntro');
+        if(empty($res))
+            return '<p><strong>The OpenStack Summit</strong> is a five-day conference for developers, users, and
+                    administrators of OpenStack Cloud Software. It’s a great place to get started with OpenStack.</p>';
         return $res;
     }
 
