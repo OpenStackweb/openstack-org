@@ -12,16 +12,17 @@
  * limitations under the License.
  **/
 
-class SummitAddOnAssembler {
+class SummitOverviewPageHelpMenuItem extends DataObject {
 
-    public static function toArray(ISummitAddOn $add_on){
-        $res = array();
-        $res['id']                = (int)$add_on->getIdentifier();
-        $res['title']             = $add_on->Title;
-        $res['cost']              = $add_on->Cost;
-        $res['max_available']     = (int)$add_on->MaxAvailable;
-        $res['available']         = (int)$add_on->CurrentlyAvailable;
-        $res['show_availability'] = (bool)$add_on->ShowQuantity;
-        return $res;
-    }
+    private static $db = array(
+      'Label'  => 'Text',
+      'Url'    => 'Text',
+      //http://fortawesome.github.io/Font-Awesome/icons/
+      'FAIcon' => "Enum('fa-h-square, fa-comment, fa-tag, fa-question, fa-users, fa-mobile, none','none')",
+      'Order'  => "Int",
+    );
+
+    private static $has_one = array(
+        'Owner'     => 'SummitOverviewPage',
+    );
 }

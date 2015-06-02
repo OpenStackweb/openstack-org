@@ -1,45 +1,43 @@
-<div class="tokyo-landing-wrapper">
+
+                <div class="tokyo-landing-wrapper austin"> 
     <div class="container">
     	<div class="row">
     		<div class="col-sm-12">
                 <a href="/summit/">
-                    <img class="tokyo-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png" alt="OpenStack Summit Tokyo October 2015">
+                    <img class="tokyo-landing-logo" src="/images/summit-logo.svg" onerror="this.onerror=null; this.src=/images/summit-logo.png" alt="OpenStack Summit Austin April 2016">
                 </a>
-                <div class="save-the-date">
+                <div class="save-the-date"> 
                     Save The Date!
-                </div> 
+                </div>
     			<h1>
-                    The October 2015 OpenStack Summit will be in
+                    The April 2016 OpenStack Summit will be in
                 </h1>
-                <div class="summit-location">Tokyo, Japan</div>
+                <div class="summit-location">Austin, Texas</div>
                     <div class="summit-date">
-                       October 27 - 30, 2015
+                       April, 2016
                        <br>
-                       Grand Prince International Convention Center & Hotels
+                       <span>Get Excited!</span>
                     </div>
                 <div class="row">
-                  <div class="col-sm-8 col-sm-push-2 download-prospectus-title">
-                    Download the Sponsor Prospectus
-                  </div>
-                  <div class="col-sm-8 col-sm-push-2">
-                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-EN-v2-3.pdf" target="_blank" class="btn register-btn-lrg">English</a>
-                      <a href="//openstack.org/assets/tokyo-summit/OpenStack-Tokyo-Prospectus-2015-JP-0515.pdf" target="_blank" class="btn register-btn-lrg">日本語 (Japanese)</a>
-                  </div>
+                  <a href="/summit/" class="btn register-btn-lrg">Go To Main Summit Site</a>
+                </div>
+                <div>
+                  <a href="/summit/tokyo-2015/" class="white-link current-summit-link">View The Current Summit</a>
                 </div>
                 <div class="landing-social">
-                    <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text=The October 2015 OpenStack Summit will be in Tokyo, Japan&url=http://openstack.org/summit/tokyo-2015/"></a>
+                    <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text=The April 2016 OpenStack Summit will be in Austin, Texas&url=http://openstack.org/summit/austin-2016/"></a>
                     <a target="_blank" class="social-icons landing-facebook" onclick="return windowpop(this.href, 545, 433)" 
                      href="https://www.facebook.com/dialog/feed?
                               app_id=145634995501895
                               &display=popup&
                               caption=OpenStack
-                              &description=The October 2015 OpenStack Summit will be in Tokyo, Japan
-                              &link=http://openstack.org/summit/tokyo-2015/
+                              &description=The April 2016 OpenStack Summit will be in Austin, Texas
+                              &link=http://openstack.org/summit/austin-2016/
                               &redirect_uri=https://facebook.com" ></a>
-                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://openstack.org/summit/tokyo-2015/&title=OpenStack Summit Tokyo 2015&summary=The October 2015 OpenStack Summit will be in Tokyo, Japan" target="_blank" class="social-icons landing-linkedin"></a>
+                    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://openstack.org/summit/austin-2016/&title=OpenStack Summit Austin 2016&summary=The April 2015 OpenStack Summit will be in Austin, Texas" target="_blank" class="social-icons landing-linkedin"></a>
                 </div>
             </div>
         </div>
     </div>
-    <a href="https://www.flickr.com/photos/stuckincustoms/9097171697/" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Trey Ratcliff" target="_blank"><i class="fa fa-info-circle"></i></a>
+    <a href="https://flic.kr/p/bNRbZB" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Katie Haugland" target="_blank"><i class="fa fa-info-circle"></i></a>
 </div>

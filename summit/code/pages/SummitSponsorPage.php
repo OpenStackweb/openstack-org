@@ -19,6 +19,7 @@ class SummitSponsorPage extends SummitPage
 {
 
     private static $db = array(
+        'SponsorIntro' => 'HTMLText',
         'SponsorAlert' => 'HTMLText',
         'SponsorSteps' => 'HTMLText',
         'SponsorContract' => 'Text',
@@ -26,13 +27,27 @@ class SummitSponsorPage extends SummitPage
         'SponsorProspectus' => 'Text',
         'CallForSponsorShipStartDate' => 'SS_Datetime',
         'CallForSponsorShipEndDate' => 'SS_Datetime',
+        'AudienceIntro' => 'HTMLText',
+        'ShowAudience' => 'Boolean',
+        'AudienceMetricsTitle' => 'Text',
+        'AudienceTotalSummitAttendees' => 'Text',
+        'AudienceCompaniesRepresented' => 'Text',
+        'AudienceCountriesRepresented' => 'Text',
+        'HowToSponsorContent' => 'HTMLText',
+        'VenueMapContent' => 'HTMLText',
     );
 
     private static $has_many = array(
-        'SummitPackages' => 'SummitPackage',
-        'SummitAddOns' => 'SummitAddOn',
+        'SummitPackages'    => 'SummitPackage',
+        'SummitAddOns'      => 'SummitAddOn',
+        'AttendeesByRegion' => 'SummitPieDataItemRegion',
+        'AttendeesByRoles'  => 'SummitPieDataItemRole',
     );
 
+    private static $has_one = array(
+        'CrowdImage'   => 'BetterImage',
+        'ExhibitImage' => 'BetterImage',
+    );
 
     private static $many_many = array(
         'Companies' => 'Company'
@@ -49,28 +64,35 @@ class SummitSponsorPage extends SummitPage
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+
+        // Optional Sponsor Alert
+        $sponsorAlertField = new TextField('SponsorAlert', 'Sponsor Alert');
+
+        $fields->addFieldToTab('Root.Main', $sponsorAlertField);
+
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('SponsorIntro', 'Sponsor Intro Text'));
+
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('HowToSponsorContent', 'How To Sponsor (Bottom)'));
+
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('VenueMapContent', 'Venue Map Content'));
+
+        // Sponsor Steps Editor
+        $sponsorStepsField = new HTMLEditorField('SponsorSteps', 'Steps To Become A Sponsor');
+        $fields->addFieldToTab('Root.Main', $sponsorStepsField, 'Content');
+        //call for sponsorship dates
+
+        $start_date = new DatetimeField('CallForSponsorShipStartDate', 'Call For SponsorShip - Start Date');
+        $end_date = new DatetimeField('CallForSponsorShipEndDate', 'Call For SponsorShip - End Date');
+        $start_date->getDateField()->setConfig('showcalendar', true);
+        $start_date->setConfig('dateformat', 'dd/MM/yyyy');
+        $end_date->getDateField()->setConfig('showcalendar', true);
+        $end_date->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $start_date);
+        $fields->addFieldToTab('Root.Main', $end_date);
+
         if ($this->ID) {
             //set current page id
             $_REQUEST["PageId"] = $this->ID;
-
-            // Optional Sponsor Alert
-            $sponsorAlertField = new TextField('SponsorAlert', 'Sponsor Alert');
-            $fields->addFieldToTab('Root.Main', $sponsorAlertField);
-
-
-            // Sponsor Steps Editor
-            $sponsorStepsField = new HTMLEditorField('SponsorSteps', 'Steps To Become A Sponsor');
-            $fields->addFieldToTab('Root.Main', $sponsorStepsField, 'Content');
-            //call for sponsorship dates
-
-            $start_date = new DatetimeField('CallForSponsorShipStartDate', 'Call For SponsorShip - Start Date');
-            $end_date = new DatetimeField('CallForSponsorShipEndDate', 'Call For SponsorShip - End Date');
-            $start_date->getDateField()->setConfig('showcalendar', true);
-            $start_date->setConfig('dateformat', 'dd/MM/yyyy');
-            $end_date->getDateField()->setConfig('showcalendar', true);
-            $end_date->setConfig('dateformat', 'dd/MM/yyyy');
-            $fields->addFieldToTab('Root.Main', $start_date);
-            $fields->addFieldToTab('Root.Main', $end_date);
 
             // Summit Packages
             $config = GridFieldConfig_RelationEditor::create();
@@ -111,7 +133,37 @@ class SummitSponsorPage extends SummitPage
 
             $fields->addFieldToTab('Root.SponsorCompanies', $companies);
 
+            $fields->addFieldsToTab("Root.Main", $upload_0 = new UploadField('CrowdImage','Crowd Image'));
+            $fields->addFieldsToTab("Root.Main", $upload_1 = new UploadField('ExhibitImage','Exhibit Image'));
+
+            $upload_0->setFolderName('summits/sponsorship/backgroun');
+            $upload_0->setAllowedMaxFileNumber(1);
+            $upload_0->setAllowedFileCategories('image');
+
+            $upload_1->setFolderName('summits/sponsorship/background');
+            $upload_1->setAllowedMaxFileNumber(1);
+            $upload_1->setAllowedFileCategories('image');
+
+            //audience
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $gridField = new GridField('AttendeesByRegion', 'Attendees By Region', $this->AttendeesByRegion(), $config);
+            $fields->add( $gridField);
+
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $gridField = new GridField('AttendeesByRoles', 'Attendees By Roles', $this->AttendeesByRoles(), $config);
+            $fields->add( $gridField);
+
+
         }
+
+        $fields->addFieldsToTab('Root.Audience', new CheckboxField('ShowAudience', 'Show Audience'));
+        $fields->addFieldsToTab('Root.Audience', new HtmlEditorField('AudienceIntro', 'Intro'));
+        $fields->addFieldsToTab('Root.Audience', new TextField('AudienceMetricsTitle', 'Metrics Title'));
+        $fields->addFieldsToTab('Root.Audience', new TextField('AudienceTotalSummitAttendees', 'Total Summit Attendees'));
+        $fields->addFieldsToTab('Root.Audience', new TextField('AudienceCompaniesRepresented', 'Companies Represented'));
+        $fields->addFieldsToTab('Root.Audience', new TextField('AudienceCountriesRepresented', 'Countries Represented'));
         return $fields;
 
     }
@@ -145,6 +197,135 @@ class SummitSponsorPage extends SummitPage
         }
     }
 
+    public function getSponsorIntro()
+    {
+
+        $res = $this->getField('SponsorIntro');
+        if (empty($res))
+            $res = '<h1>Thank You To The OpenStack Summit Sponsors</h1><p> The generous support of our sponsors makes it possible for our community to gather, learn and build the future of cloud computing. A warm thank you to all of our sponsors for the May 2015 OpenStack Summit. </p>';
+        return $res;
+    }
+
+    public function getAudienceIntro()
+    {
+
+        $res = $this->getField('AudienceIntro');
+        if (empty($res))
+            $res = 'The Summit has experienced tremendous growth since its inception, and we\'re proud of the diverse
+                    audience reached at each one. Here\'s a quick look at the audience who attended the Vancouver Summit in
+                    May 2015.';
+        return $res;
+    }
+
+    public function getAudienceMetricsTitle()
+    {
+
+        $res = $this->getField('AudienceMetricsTitle');
+        if (empty($res))
+            $res = 'November 2015 Vancouver OpenStack Summit Metrics:';
+        return $res;
+    }
+
+    public function getAudienceTotalSummitAttendees()
+    {
+
+        $res = $this->getField('AudienceTotalSummitAttendees');
+        if (empty($res))
+            $res = '6,000+';
+        return $res;
+    }
+
+    public function getAudienceCompaniesRepresented()
+    {
+
+        $res = $this->getField('AudienceCompaniesRepresented');
+        if (empty($res))
+            $res = '967';
+        return $res;
+    }
+
+    public function getAudienceCountriesRepresented()
+    {
+        $res = $this->getField('AudienceCountriesRepresented');
+        if (empty($res))
+            $res = '55';
+        return $res;
+    }
+
+    /**
+     * @return bool
+     */
+    public function HasSponsors(){
+        return $this->StartupSponsors()->Count() > 0 || $this->HeadlineSponsors()->Count() > 0
+        || $this->PremierSponsors()->Count() > 0 || $this->EventSponsors()->Count() > 0
+        || $this->InKindSponsors()->Count() > 0 || $this->SpotlightSponsors()->Count() > 0
+        || $this->MediaSponsors()->Count() > 0;
+    }
+
+    private function Sponsors($type)
+    {
+        $page_id = $this->ID;
+        $page = SummitSponsorPage::get()->byID($page_id);
+        $res = $page->getManyManyComponents("Companies", "SponsorshipType='{$type}'", "ID");
+        return $res;
+    }
+
+    public function StartupSponsors()
+    {
+        return $this->Sponsors("Startup");
+    }
+
+    public function HeadlineSponsors()
+    {
+        return $this->Sponsors("Headline");
+    }
+
+    public function PremierSponsors()
+    {
+        return $this->Sponsors("Premier");
+    }
+
+    public function EventSponsors()
+    {
+        return $this->Sponsors("Event");
+    }
+
+    public function InKindSponsors()
+    {
+        return $this->Sponsors("InKind");
+    }
+
+    public function SpotlightSponsors()
+    {
+        return $this->Sponsors("Spotlight");
+    }
+
+    public function MediaSponsors()
+    {
+        return $this->Sponsors("Media");
+    }
+
+    public function CrowdImageUrl(){
+        if($this->CrowdImage()->exists()){
+            return $this->CrowdImage()->getURL();
+        }
+        return '/summit/images/sponsors-bkgd.jpg';
+    }
+
+    public function ExhibitImageUrl(){
+        if($this->ExhibitImage()->exists()){
+            return $this->ExhibitImage()->getURL();
+        }
+        return '/summit/images/sponsor-bkgd-exhibit.jpg';
+    }
+
+    public function getOrderedAttendeesByRegion(){
+        return $this->AttendeesByRegion()->sort('Order');
+    }
+
+    public function getOrderedAttendeesByRoles(){
+        return $this->AttendeesByRoles()->sort('Order');
+    }
 }
 
 /**
@@ -191,6 +372,85 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js');
         Requirements::javascript('themes/openstack/javascript/pure.min.js');
         Requirements::javascript("summit/javascript/Chart.min.js");
+
+        if($this->getOrderedAttendeesByRegion()->count() > 0){
+            $script = '// Audience Chart - Attendees by Region
+             var pieDataRegion = [];';
+            foreach($this->getOrderedAttendeesByRegion() as $data){
+                $script .= sprintf('pieDataRegion.push({
+                value: %s,
+                color: "#%s",
+                label: "%s"
+            });',$data->Value, $data->Color, $data->Label);
+            }
+            Requirements::customScript($script);
+        }
+        else{
+            Requirements::customScript('// Audience Chart - Attendees by Region
+            var pieDataRegion = [{
+                value: 47,
+                color: "#cf3427",
+                label: "Europe"
+            }, {
+                value: 35,
+                color: "#29abe2",
+                label: "North America"
+            }, {
+                value: 15,
+                color: "#2A4E68",
+                label: "APAC"
+            }, {
+                value: 2,
+                color: "#5BB6A7",
+                label: "Middle East"
+            }, {
+                value: 1,
+                color: "#faaf3c",
+                label: "Latin America"
+            }];');
+        }
+
+        if($this->getOrderedAttendeesByRoles()->count() > 0){
+            $script = '// Audience Chart - Attendees by Region
+             var pieDataRole = [];';
+            foreach($this->getOrderedAttendeesByRoles() as $data){
+                $script .= sprintf('pieDataRole.push({
+                value: %s,
+                color: "#%s",
+                label: "%s"
+            });',$data->Value, $data->Color, $data->Label);
+            }
+            Requirements::customScript($script);
+        }
+        else{
+            Requirements::customScript('// Audience Chart - Attendees by Roles
+            var pieDataRole = [{
+                value: 33,
+                color: "#cf3427",
+                label: "Prdt Strgy, Mgt, Archt"
+            }, {
+                value: 26,
+                color: "#29abe2",
+                label: "Developer"
+            }, {
+                value: 16,
+                color: "#2A4E68",
+                label: "User, Sys Admin"
+            }, {
+                value: 10,
+                color: "#5BB6A7",
+                label: "Bus Dev, Mrkt"
+            }, {
+                value: 9,
+                color: "#faaf3c",
+                label: "CEO, CIO, IT Mgr"
+            }, {
+                value: 6,
+                color: "#000000",
+                label: "Other"
+            }];');
+        }
+
         Requirements::javascript("summit/javascript/sponsor.js");
         Requirements::javascript('summit/javascript/sponsor.sponsorships.js');
 
@@ -209,51 +469,10 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
         return Controller::redirect($contractURL);
     }
 
-    private function Sponsors($type)
-    {
-        $page_id = $this->ID;
-        $page = SummitSponsorPage::get()->byID($page_id);
-        $res = $page->getManyManyComponents("Companies", "SponsorshipType='{$type}'", "ID");
-        return $res;
-    }
-
-    public function StartupSponsors()
-    {
-        return $this->Sponsors("Startup");
-    }
-
-    public function HeadlineSponsors()
-    {
-        return $this->Sponsors("Headline");
-    }
-
-    public function PremierSponsors()
-    {
-        return $this->Sponsors("Premier");
-    }
-
-    public function EventSponsors()
-    {
-        return $this->Sponsors("Event");
-    }
-
-    public function InKindSponsors()
-    {
-        return $this->Sponsors("InKind");
-    }
-
-    public function SpotlightSponsors()
-    {
-        return $this->Sponsors("Spotlight");
-    }
-
-    public function MediaSponsors()
-    {
-        return $this->Sponsors("Media");
-    }
 
     public function ShowSponsorShipPackages()
     {
+        if(is_null($this->CallForSponsorShipStartDate) || is_null($this->CallForSponsorShipEndDate)) return false;
         $now = new \DateTime('now', new DateTimeZone('UTC'));
         $start_date = new \DateTime($this->CallForSponsorShipStartDate, new DateTimeZone('UTC'));
         $end_date = new \DateTime($this->CallForSponsorShipEndDate, new DateTimeZone('UTC'));

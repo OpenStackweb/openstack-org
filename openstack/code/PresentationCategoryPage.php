@@ -69,7 +69,7 @@ class PresentationCategoryPage_Controller extends Page_Controller
 
 	public function Presentations()
 	{
-		$sessions = dataobject::get('Presentation', '`YouTubeID` IS NOT NULL AND PresentationCategoryPageID = ' . $this->ID, 'StartTime DESC');
+		$sessions = dataobject::get('Presentation', '(`YouTubeID` IS NOT NULL OR `SlidesLink` IS NOT NULL) AND PresentationCategoryPageID = ' . $this->ID, 'StartTime DESC');
 		return $sessions;
 	}
 

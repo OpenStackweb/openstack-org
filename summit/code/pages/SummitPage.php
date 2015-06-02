@@ -92,6 +92,14 @@ class SummitPage extends Page
         return $fields;
     }
 
+    public function onBeforeWrite() {
+        parent::onBeforeWrite();
+        $parent = $this->Parent();
+        if($parent && $parent instanceof SummitOverviewPage){
+            $this->SummitID = $parent->SummitID;
+        }
+    }
+
 }
 
 
@@ -123,11 +131,12 @@ class SummitPage_Controller extends Page_Controller
     }
 
 
-    public function CountdownDigits()
+    public function CountdownDigits($current_submit_id = 0)
     {
-        if (!$this->Summit()) return null;
+        $summit  = $current_submit_id  > 0 ? Summit::get()->byId($current_submit_id):$this->Summit();
+        if (is_null($summit)) return null;
 
-        $date = $this->Summit()->obj('StartDate');
+        $date = $summit->obj('StartDate');
 
         if ($date->InPast()) {
             return;
@@ -150,14 +159,6 @@ class SummitPage_Controller extends Page_Controller
         return $this->Link();
     }
 
-    public function MainNavClass(){
-        if($this->ClassName === 'SummitOverviewPage')
-            return 'current';
-        else{
-            //childs page
-            return 'link';
-        }
-    }
 
     public function IsWelcome()
     {
@@ -248,6 +249,15 @@ class SummitPage_Controller extends Page_Controller
         else{
             //childs page
             return $this->Parent()->Link();
+        }
+    }
+
+    public function MainNavClass(){
+        if($this->ClassName === 'SummitOverviewPage')
+            return 'current';
+        else{
+            //childs page
+            return 'link';
         }
     }
 }

@@ -5,26 +5,31 @@
     <% include Head %>
     <% include Analytics %>
 </head>
-
 <body class="summit-landing-body">
-
-
     <!-- Begin Page Content -->
     <div class="summit-landing-wrapper">
-    <div class="container">
-    	<div class="row">
-    		<div class="col-lg-12 col-md-12 col-sm-12">
-                <img class="summit-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo.png'" alt="OpenStack Summit">
-                <div>
-                    <p>
-                        $IntroText
-                    </p>
-                </div>
-                <div class="landing-action">
-                    <a href="$CurrentSummit.Link" class="btn register-btn-lrg">See The Recap <i class="fa fa-chevron-right"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <img class="summit-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo.png'" alt="OpenStack Summit">
+                    <div>
+                        <p>
+                            $IntroText
+                        </p>
+                    </div>
+                    <% if $CurrentSummit.IsUpComing %>
+                            <div class="countdown">
+                                $Top.CountdownDigits($CurrentSummit.ID)
+                            </div>
+                            <div class="countdown-text">
+                                Days until $CurrentSummit.Name
+                            </div>
+                    <% end_if %>
+                    <div class="landing-action">
+                        <a href="$CurrentSummit.Link" class="btn register-btn-lrg">JOIN US IN TOKYO <i class="fa fa-chevron-right"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 <div class="summit-landing-bottom">

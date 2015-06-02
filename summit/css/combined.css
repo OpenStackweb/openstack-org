@@ -326,7 +326,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
       background: #cf3427; }
 
 .summit-hero-wrapper.condensed .register-btn-lrg {
-  width: 130px; }
+  width: 100%; }
 
 .inner-countdown-wrapper {
   position: absolute;
@@ -777,7 +777,7 @@ footer {
 .white {
   width: 100%;
   padding: 90px 0;
-  background: white; }
+  background: #fff none repeat scroll 0 0; }
 
 .light {
   width: 100%;
@@ -892,7 +892,7 @@ footer {
   margin-top: 20px; }
 
 .summit-types {
-  margin-top: 60px; }
+  }
 
 .summit-types h3 {
   font-weight: 300; }
@@ -1010,8 +1010,9 @@ a.outline-btn {
 .growth-chart {
   float: left;
   max-width: 100%;
-  margin-left: -20%;
+  margin-top: -60px;
   min-width: 800px;
+  max-height: 800px;
 }
 
 .growth-text-bottom {
@@ -1034,7 +1035,8 @@ a.outline-btn {
     width: 100%; }
   .growth-chart {
     margin-left: 0;
-    margin-top: 0; }
+    margin-top: 0;
+    min-width:0px; }
   .growth-text-bottom {
     width: 100%;
     margin-top: 20px; } }
@@ -1297,6 +1299,9 @@ a.photo-credit {
 
 .summit-hero-wrapper.condensed a.photo-credit {
   display: none; }
+
+div.summit-hero-wrapper.condensed.tokyo {
+   background: rgba(0, 0, 0, 0) url('/assets/Uploads/tokyo-bkgd-lrg.jpg') no-repeat scroll center center / cover ; }
 
 .about-city-row p {
   font-weight: 400;
@@ -1887,7 +1892,9 @@ a.close-modal-btn {
 /*End FAQ Page*/
 /*Sponsor Page*/
 .sponsor-page-wrapper {
-  text-align: center; }
+  text-align: center;
+    padding-top: 0;
+}
 
 .sponsor-wrapper {
   text-align: center;
@@ -2136,6 +2143,16 @@ i.checkbox {
   height: 20px;
   width: 20px;
   margin-right: 20px; }
+  
+/*Austin Landing*/
+.tokyo-landing-wrapper.austin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 70px 0;
+  background: url('/summit/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
+  background-size: cover; }
 
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
