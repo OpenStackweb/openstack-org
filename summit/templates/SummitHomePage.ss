@@ -26,7 +26,7 @@
                             </div>
                     <% end_if %>
                     <div class="landing-action">
-                        <a href="$CurrentSummit.Link" class="btn register-btn-lrg">See The Recap <i class="fa fa-chevron-right"></i></a>
+                        <a href="$CurrentSummit.Link" class="btn register-btn-lrg">JOIN US IN TOKYO <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
