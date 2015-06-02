@@ -285,7 +285,7 @@
                                 <% loop $SortedAddOns %>
                                 <tr id="addon_{$ID}" class="sponsor_add_on <% if $SoldOut %>sold-out<% end_if %>">
                                     <td>$Title</td>
-                                    <td>$Cost.Nice</td>
+                                    <td>$Cost</td>
                                     <% if $SoldOut %>
                                         <td>Sold Out</td>
                                     <% else %>

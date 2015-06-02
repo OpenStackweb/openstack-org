@@ -16,11 +16,11 @@ class SummitAddOnAssembler {
 
     public static function toArray(ISummitAddOn $add_on){
         $res = array();
-        $res['id']        = (int)$add_on->getIdentifier();
-        $res['title']     = $add_on->Title;
-        $res['cost']    =  DBField::create_field('Currency', $add_on->Cost)->Nice();
-        $res['max_available'] = (int)$add_on->MaxAvailable;
-        $res['available'] = (int)$add_on->CurrentlyAvailable;
+        $res['id']                = (int)$add_on->getIdentifier();
+        $res['title']             = $add_on->Title;
+        $res['cost']              = $add_on->Cost;
+        $res['max_available']     = (int)$add_on->MaxAvailable;
+        $res['available']         = (int)$add_on->CurrentlyAvailable;
         $res['show_availability'] = (bool)$add_on->ShowQuantity;
         return $res;
     }
