@@ -381,7 +381,7 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
                 value: %s,
                 color: "#%s",
                 label: "%s"
-            })',$data->Value, $data->Color, $data->Label);
+            });',$data->Value, $data->Color, $data->Label);
             }
             Requirements::customScript($script);
         }
@@ -418,7 +418,7 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
                 value: %s,
                 color: "#%s",
                 label: "%s"
-            })',$data->Value, $data->Color, $data->Label);
+            });',$data->Value, $data->Color, $data->Label);
             }
             Requirements::customScript($script);
         }
