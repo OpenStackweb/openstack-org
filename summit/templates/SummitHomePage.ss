@@ -17,21 +17,19 @@
                             $IntroText
                         </p>
                     </div>
+                    <% if $CurrentSummit.IsUpComing %>
+                            <div class="countdown">
+                                $Top.CountdownDigits($CurrentSummit.ID)
+                            </div>
+                            <div class="countdown-text">
+                                Days until $CurrentSummit.Name
+                            </div>
+                    <% end_if %>
                     <div class="landing-action">
                         <a href="$CurrentSummit.Link" class="btn register-btn-lrg">See The Recap <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
-            <% if $CurrentSummit.IsUpComing %>
-                <div class="inner-countdown-wrapper" style="left:150px;position: absolute;">
-                    <div class="countdown">
-                        $Top.CountdownDigits($CurrentSummit.ID)
-                    </div>
-                    <div class="countdown-text">
-                        Days until $CurrentSummit.Name
-                    </div>
-                </div>
-            <% end_if %>
     </div>
 </div>
 <div class="summit-landing-bottom">
