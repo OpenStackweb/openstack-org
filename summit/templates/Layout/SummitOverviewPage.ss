@@ -5,10 +5,7 @@
 
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-8">
-                <p><strong>The OpenStack Summit</strong> is a five-day conference for developers, users, and
-                    administrators of OpenStack Cloud Software. It’s a great place to get started with OpenStack.
-                </p>
-
+                $OverviewIntro
                 <div class="about-video-wrapper">
                     <iframe width="560" height="315" src="//www.youtube.com/embed/{$VideoRecapYouTubeID}?showinfo=0" frameborder="0" allowfullscreen></iframe>
                     <p class='video-caption'>$VideoRecapCaption</p>
