@@ -24,4 +24,18 @@ class SummitPieDataItem extends DataObject {
     private static $has_one = array(
         'Owner' => 'SummitSponsorPage'
     );
+
+    private static $summary_fields = array(
+        'Value',
+        'Label',
+    );
+
+    public function getCMSFields() {
+        $fields = new FieldList();
+        $fields->add(new TextField('Value','Value'));
+        $fields->add(new TextField('Label','Label'));
+        $fields->add(new ColorField("Color","Color"));
+        $fields->add(new HiddenField('OwnerID','OwnerID'));
+        return $fields;
+    }
 }

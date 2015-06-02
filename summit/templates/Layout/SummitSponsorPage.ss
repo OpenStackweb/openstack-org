@@ -5,7 +5,7 @@
     };
     var page_id = $Top.ID ;
 </script>
-<div class="white sponsor-page-wrapper">
+<div class="whitecity-nav">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -69,6 +69,7 @@
         </ul>
     </div>
 </div>
+<% if HasSponsors %>
 <div class="white sponsor-list" id="sponsors">
     <div class="container">
         <% if HeadlineSponsors %>
@@ -211,10 +212,12 @@
         <% end_if %>
     </div>
 </div>
+<% end_if %>
 <!-- sponsorship packages -->
 <% if ShowSponsorShipPackages %>
     <div class="light" id="packages">
         <div class="container sponsor-wrapper">
+            <% if $SortedPackages %>
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
                     <h1>Packages</h1>
@@ -256,6 +259,8 @@
                     </div>
                 </div>
             </div>
+            <% end_if %>
+            <% if $SortedAddOns %>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
@@ -294,6 +299,7 @@
                     </div>
                 </div>
             </div>
+            <% end_if %>
         </div>
     </div>
 <% end_if %>

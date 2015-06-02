@@ -326,7 +326,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
       background: #cf3427; }
 
 .summit-hero-wrapper.condensed .register-btn-lrg {
-  width: 130px; }
+  width: 100%; }
 
 .inner-countdown-wrapper {
   position: absolute;
