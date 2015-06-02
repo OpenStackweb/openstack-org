@@ -342,9 +342,9 @@ class SummitOverviewPage extends SummitPage {
         $valid = parent::validate();
         if(!$valid->valid()) return $valid;
 
-        if(empty($this->SummitID)){
+        /*if(empty($this->SummitID)){
             return $valid->error('You must select a valid Summit!');
-        }
+        }*/
         return $valid;
     }
 
