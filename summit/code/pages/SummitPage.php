@@ -92,6 +92,14 @@ class SummitPage extends Page
         return $fields;
     }
 
+    public function onBeforeWrite() {
+        parent::onBeforeWrite();
+        $parent = $this->Parent();
+        if($parent && $parent instanceof SummitOverviewPage){
+            $this->SummitID = $parent->SummitID;
+        }
+    }
+
 }
 
 
