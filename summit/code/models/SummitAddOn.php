@@ -20,7 +20,7 @@ class SummitAddOn extends DataObject implements ISummitAddOn
 
     private static $db = array (
         'Title'              => 'Text',
-        'Cost'               => 'Currency',
+        'Cost'               => 'Text',
         'MaxAvailable'       => 'Int',
         'CurrentlyAvailable' => 'Int',
         'Order'              => 'Int',
@@ -46,7 +46,7 @@ class SummitAddOn extends DataObject implements ISummitAddOn
         $fields = new FieldList();
         $fields->add(new TextField('Title','Title'));
         $fields->add(new CheckboxField('ShowQuantity','Show Quantities'));
-        $fields->add(new CurrencyField('Cost','Cost'));
+        $fields->add(new TextField('Cost','Cost'));
         $fields->add(new NumericField('MaxAvailable','Max. Available'));
         $fields->add(new NumericField('CurrentlyAvailable','Currently Available'));
         return $fields;
