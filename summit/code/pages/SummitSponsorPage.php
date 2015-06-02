@@ -252,6 +252,9 @@ class SummitSponsorPage extends SummitPage
         return $res;
     }
 
+    /**
+     * @return bool
+     */
     public function HasSponsors(){
         return $this->StartupSponsors()->Count() > 0 || $this->HeadlineSponsors()->Count() > 0
         || $this->PremierSponsors()->Count() > 0 || $this->EventSponsors()->Count() > 0
@@ -371,8 +374,16 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
         Requirements::javascript("summit/javascript/Chart.min.js");
 
         if($this->getOrderedAttendeesByRegion()->count() > 0){
-            Requirements::customScript('// Audience Chart - Attendees by Region
-             var pieDataRegion = [];');
+            $script = '// Audience Chart - Attendees by Region
+             var pieDataRegion = [];';
+            foreach($this->getOrderedAttendeesByRegion() as $data){
+                $script .= sprintf('pieDataRegion.push({
+                value: %s,
+                color: "#%s",
+                label: "%s"
+            })',$data->Value, $data->Color, $data->Label);
+            }
+            Requirements::customScript($script);
         }
         else{
             Requirements::customScript('// Audience Chart - Attendees by Region
@@ -400,8 +411,16 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
         }
 
         if($this->getOrderedAttendeesByRoles()->count() > 0){
-            Requirements::customScript('// Audience Chart - Attendees by Roles
-             var pieDataRole = [];');
+            $script = '// Audience Chart - Attendees by Region
+             var pieDataRole = [];';
+            foreach($this->getOrderedAttendeesByRoles() as $data){
+                $script .= sprintf('pieDataRole.push({
+                value: %s,
+                color: "#%s",
+                label: "%s"
+            })',$data->Value, $data->Color, $data->Label);
+            }
+            Requirements::customScript($script);
         }
         else{
             Requirements::customScript('// Audience Chart - Attendees by Roles
