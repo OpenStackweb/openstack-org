@@ -5,7 +5,7 @@
     };
     var page_id = $Top.ID ;
 </script>
-<div class="white sponsor-page-wrapper">
+<div class="white">
     <div class="container">
         <% if $SponsorAlert %>
         <div class="row">
