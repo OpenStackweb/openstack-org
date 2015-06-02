@@ -2143,6 +2143,16 @@ i.checkbox {
   height: 20px;
   width: 20px;
   margin-right: 20px; }
+  
+/*Austin Landing*/
+.tokyo-landing-wrapper.austin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 70px 0;
+  background: url('/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
+  background-size: cover; }
 
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
