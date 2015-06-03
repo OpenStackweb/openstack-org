@@ -106,6 +106,9 @@
                     <p>
                         By the end of 2015, Intel IT hosting plans to complete the migration to this environment, with OpenStack controlling both ESXi and KVM virtual machines. Today, this environment is fully exercised servicing the create/use/destroy lifecycles of 7,000+ KVM VMs and 10,000+ ESXi VMs. They foresee eliminating an estimated 85% of IT tickets and 190,000 hours of wait time, based on 2014 requests alone.  By 2016, 90% of all service requests will be fulfilled instantaneously via self-service.
                     </p>
+                    <p>
+                        <a href="//openstack.org/assets/pdf-downloads/intel-it-hosting-reference-architecture.pd">Read the details in Intel IT's Reference Architecture</a>
+                    </p>
                 </div>
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
