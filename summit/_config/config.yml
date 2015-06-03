@@ -1,5 +1,6 @@
 ---
 Name: summitapi
+After: 'framework/*','cms/*', 'mysite/*'
 ---
 Injector:
   SummitAddOnRepository:
@@ -33,3 +34,44 @@ SangriaPageSummitSponsorshipPurchaseOrderExtension:
 SangriaPage_Controller:
   extensions:
     - SangriaPageSummitSponsorshipPurchaseOrderExtension
+
+Member:
+  extensions:
+    - PresentationMemberExtension
+    - MemberTokenProvider
+MemberTokenProvider:
+  token_expire: 3600
+Director:
+  rules:
+    'presentations/api/v1': 'PresentationAPI'
+    'presentations/authenticate': 'PresentationAPITokenGenerator'
+    'summit-login': 'SummitSecurity'
+PresentationCategory:
+  extensions:
+    - JSONable
+PresentationSpeaker:
+  extensions:
+    - JSONable
+PresentationTopic:
+  extensions:
+    - JSONable
+Summit:
+  extensions:
+    - JSONable
+Presentation:
+  extensions:
+    - Sluggable
+    - JSONable
+  status_options:
+    - Received
+    - In community voting
+    - Being reviewed by track chairs
+    - accepted
+    - not accepted
+    - accepted as an alternate
+SchedPresentation:
+  extensions:
+    - Sluggable
+BootstrapMemberLoginForm:
+  extensions:
+    - BootstrapLoginFormExtension
