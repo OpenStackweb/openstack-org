@@ -20,7 +20,7 @@ class Survey
     implements ISurvey {
 
     static $db = array(
-
+        'BeenEmailed' => 'Boolean',
     );
 
     static $indexes = array(
@@ -42,6 +42,7 @@ class Survey
     );
 
     private static $defaults = array(
+        'BeenEmailed' => false,
     );
 
     /**
@@ -185,5 +186,13 @@ class Survey
             }
         }
         return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmailSent()
+    {
+        // TODO: Implement isEmailSent() method.
     }
 }

@@ -23,12 +23,13 @@ class SurveyRankingQuestionTemplateUIBuilder extends AbstractSurveyQuestionTempl
     {
         $values = $question->Values()->sort('Order')->map('ID','Value');
 
-        $field  = new SurveyRankingField($question->name(), $question->label(), $values,  $value = '' , $form=null, $emptyString=null, $question);
+        $field  = new SurveyRankingField($question->name().'Container', $question->label(), $values,  $value = '' , $form=null, $emptyString=null, $question);
 
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {
-            $field->setRequired();
+           $field->setValidationAttribute('data-rule-ranking_required', $field->ID());
+           $field->setValidationAttribute('data-msg-ranking_required', sprintf('you must select at least one item (%s)', $question->name()));
         }
         if(!is_null($answer)){
             $field->setValue($answer->value());

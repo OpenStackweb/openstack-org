@@ -78,4 +78,9 @@ interface ISurvey extends IEntity {
      * @return ISurveyStep|null
      */
     public function getStep($step_name);
+
+    /**
+     * @return bool
+     */
+    public function isEmailSent();
 }
