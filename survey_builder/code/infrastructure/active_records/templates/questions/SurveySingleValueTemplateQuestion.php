@@ -18,14 +18,13 @@ class SurveySingleValueTemplateQuestion
 
     static $db = array(
         'InitialValue' => 'Text',
-        'PHPExpression' => 'Boolean',
+
     );
 
     private static $defaults = array(
         'InitialValue' => null,
-        'PHPExpression' => false,
-    );
 
+    );
 
     static $many_many = array(
         'ValidationRules' => 'SurveySingleValueValidationRule'
@@ -36,7 +35,6 @@ class SurveySingleValueTemplateQuestion
         $fields = parent::getCMSFields();
 
         $fields->add(new TextField('InitialValue','Initial Value'));
-        $fields->add(new CheckboxField('PHPExpression','Is PHP Expression?'));
 
         if($this->ID > 0 ){
             //validation rules

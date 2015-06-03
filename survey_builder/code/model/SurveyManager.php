@@ -140,10 +140,10 @@ class SurveyManager implements ISurveyManager {
 
     /**
      * @param array $data
-     * @param ISurveyRegularStep $current_step
+     * @param ISurveyStep $current_step
      * @return ISurveyStep
      */
-    public function completeStep(ISurveyRegularStep $current_step, array $data)
+    public function completeStep(ISurveyStep $current_step, array $data)
     {
 
         $template_repository = $this->template_repository;
@@ -155,14 +155,15 @@ class SurveyManager implements ISurveyManager {
 
             $current_survey = $current_step->survey();
 
-            $current_step->clearAnswers();
-            foreach($current_step->template()->getQuestions() as $q){
-                if(isset($data[$q->name()])){
-                    // its has an answer set
-                    $current_step->addAnswer( $survey_builder->buildAnswer($q, $data[$q->name()]) );
+            if($current_step instanceof ISurveyRegularStep) {
+                $current_step->clearAnswers();
+                foreach ($current_step->template()->getQuestions() as $q) {
+                    if (isset($data[$q->name()])) {
+                        // its has an answer set
+                        $current_step->addAnswer($survey_builder->buildAnswer($q, $data[$q->name()]));
+                    }
                 }
             }
-
             return $current_survey->completeCurrentStep();
         });
     }

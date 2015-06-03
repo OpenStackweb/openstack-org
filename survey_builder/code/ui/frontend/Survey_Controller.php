@@ -17,23 +17,36 @@
  */
 class Survey_Controller extends Page_Controller {
 
+    const RoutePrefix  = 'surveys';
+
+    static $allowed_actions_without_auth = array(
+        'LandingPage',
+        'RegisterForm',
+        'MemberStart',
+        'StartSurvey'
+    );
+
     static $allowed_actions = array(
-        'landing',
-        'renderSurvey',
+        'LandingPage',
+        'RenderSurvey',
         'SurveyStepForm',
         'AddEntity',
         'SkipStep',
         'EditEntity',
         'NextDynamicEntityStep',
+        'RegisterForm',
+        'MemberStart',
+        'StartSurvey',
     );
 
     static $url_handlers = array(
-        'landing'                                     => 'landing',
+        'landing'                                     => 'LandingPage',
         'current/$STEP_SLUG/add-entity'               => 'AddEntity',
         'current/$STEP_SLUG/skip-step'                => 'SkipStep',
         'current/$STEP_SLUG/edit/$ENTITY_SURVEY_ID'   => 'EditEntity',
         'current/$STEP_SLUG/delete/$ENTITY_SURVEY_ID' => 'DeleteEntity',
-        'current//$STEP_SLUG'                         => 'renderSurvey',
+        'current//$STEP_SLUG'                         => 'RenderSurvey',
+        '$Action//$ID/$OtherID'                       => 'handleAction',
     );
 
     /**
@@ -112,17 +125,24 @@ class Survey_Controller extends Page_Controller {
         Requirements::javascript('survey_builder/js/survey.controller.js');
     }
 
+    protected function handleAction($request, $action) {
+        if (!Member::currentUser()) {
+            if (!in_array($action, self::$allowed_actions_without_auth)) {
+                return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
+            }
+        }
+        if(strtolower($action) === 'index') return $this->redirect(self::RoutePrefix.'/current');
+        return parent::handleAction($request, $action);
+    }
+
     public function BootstrapConverted()
     {
         return true;
     }
 
-    public function renderSurvey($request)
+    public function RenderSurvey($request)
     {
         //check if user is logged in
-        if (!Member::currentUser()) {
-            return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
-        }
 
         $step     = $request->param('STEP_SLUG');
 
@@ -134,9 +154,19 @@ class Survey_Controller extends Page_Controller {
         }
 
         $this->survey_manager->registerCurrentStep($this->current_survey, $step);
+
+        if($current_survey->isLastStep()){
+
+        }
+
         return $this->customise(array(
             'Survey' => $current_survey,
         ))->renderWith(array('Surveys_CurrentSurveyContainer', 'Page'));
+    }
+
+    public function LandingPage()
+    {
+        return $this->customise(array('BackURL' => $this->request->requestVar('BackURL')))->renderWith(array('Surveys_LandingPage', 'Page'));
     }
 
     /**
@@ -147,7 +177,7 @@ class Survey_Controller extends Page_Controller {
     public function SurveyStepClass($step_name){
         $css_step_class = '';
         $current_survey = $this->getCurrentSurveyInstance();
-        $current_step = $current_survey->currentStep();
+        $current_step   = $current_survey->currentStep();
         if($current_step->template()->title() == $step_name)
             $css_step_class = 'current';
         else{
@@ -160,11 +190,6 @@ class Survey_Controller extends Page_Controller {
             }
         }
         return $css_step_class;
-    }
-
-    public function landing()
-    {
-        return $this->customise(array('BackURL' => $this->request->requestVar('BackURL')))->renderWith(array('Surveys_LandingPage', 'Page'));
     }
 
     /**
@@ -208,7 +233,6 @@ class Survey_Controller extends Page_Controller {
     {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-
         $builder        = SurveyStepUIBuilderFactory::getInstance()->build($current_step);
         $form           = $builder->build($current_step, 'NextStep');
         return $form;
@@ -218,7 +242,7 @@ class Survey_Controller extends Page_Controller {
     {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-        if(!($current_step instanceof ISurveyRegularStep))throw new LogicException();
+        if(!($current_step instanceof ISurveyRegularStep)) throw new LogicException();
 
         $next_step = $this->survey_manager->completeStep($current_step, $data);
         return $this->redirect('/surveys/current/'.$next_step->template()->title());
@@ -227,8 +251,16 @@ class Survey_Controller extends Page_Controller {
     public function SkipStep($request){
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-        if(!$current_step->template()->canSkip()) throw new LogicException();
+        $can_skip       = false;
+        if($current_step instanceof ISurveyDynamicEntityStep && count($current_step->getEntitySurveys()) > 0 ){
+            $can_skip = true;
+        }
+        if($current_step->template()->canSkip()) $can_skip = true;
+        if(!$can_skip)  $this->redirectBack();
         $step = $request->param('STEP_SLUG');
+
+        $next_step = $this->survey_manager->completeStep($current_step, $data = array());
+        return $this->redirect('/surveys/current/'.$next_step->template()->title());
     }
 
     // Dynamic Entities
@@ -260,10 +292,6 @@ class Survey_Controller extends Page_Controller {
     }
 
     public function AddEntity($request){
-        //check if user is logged in
-        if (!Member::currentUser()) {
-            return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
-        }
 
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
@@ -277,11 +305,6 @@ class Survey_Controller extends Page_Controller {
 
     public function NextDynamicEntityStep($data, $form)
     {
-        //check if user is logged in
-        if (!Member::currentUser()) {
-            return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
-        }
-
         $entity_survey = $this->getCurrentEntitySurveyInstance(intval($data['survey_id']));
         $current_step  = $entity_survey->currentStep();
         $next_step     = $this->survey_manager->completeStep($current_step, $data);
@@ -294,12 +317,89 @@ class Survey_Controller extends Page_Controller {
     }
 
     public function DeleteEntity($request){
-        //check if user is logged in
-        if (!Member::currentUser()) {
-            return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
-        }
 
         $step                 = $request->param('STEP_SLUG');
         $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
     }
+
+    // landing page
+
+    public function getLoginPageTitle()
+    {
+        $res = '';
+        if (empty($res)) {
+            $res = 'OpenStack User Survey: Welcome!';
+        }
+        return $res;
+    }
+
+    public function getLoginPageContent()
+    {
+        $link = Controller::curr()->Link();
+        $res = '';
+        if (empty($res)) {
+            $res = <<< HTML
+
+			<p>This survey provides users an opportunity to influence the community and software
+		direction. By sharing information about your configuration and requirements, the OpenStack
+		Foundation User Committee will be able to advocate on your behalf.</p>
+		<p><a href="{$link}faq" class="roundedButton">More Information About The Survey</a></p>
+		<hr/>
+
+		<h1>Get Started</h1>
+HTML;
+        }
+        return $res;
+    }
+
+    public function getLoginPageSlide1Content()
+    {
+        $res = '';
+        if (empty($res)) {
+            $res = 'This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users and operators.';
+        }
+        return $res;
+    }
+
+
+    public function getLoginPageSlide2Content()
+    {
+        $res = '';
+        if (empty($res)) {
+            $res = 'It should only take <strong>10 minutes</strong> to complete.';
+        }
+        return $res;
+    }
+
+    public function getLoginPageSlide3Content()
+    {
+        $res = '';
+        if (empty($res)) {
+            $res = 'All of the information you provide is <strong>confidential</strong> to the Foundation (unless you specify otherwise).';
+        }
+        return $res;
+    }
+
+    public function RegisterForm()
+    {
+        return new SurveyRegistrationForm($this, 'RegisterForm');
+    }
+
+    public function MemberStart()
+    {
+        $member = null;
+        if (isset($_REQUEST['m'])) {
+            $member = Member::get()->byID((int)$_REQUEST['m']);
+        }
+        // Check whether we are merely changin password, or resetting.
+        if (isset($_REQUEST['t']) && $member && $member->validateAutoLoginToken($_REQUEST['t'])) {
+            $member->logIn();
+            return $this->redirect(self::RoutePrefix.'/current');
+        } elseif (Member::currentUser()) {
+            return $this->redirect(self::RoutePrefix.'/current');
+        } else {
+            return $this->redirect(self::RoutePrefix.'/current');
+        }
+    }
+
 }

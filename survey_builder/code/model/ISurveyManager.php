@@ -41,7 +41,7 @@ interface ISurveyManager {
      * @param ISurveyStep $current_step
      * @return ISurveyStep
      */
-    public function completeStep(ISurveyRegularStep $current_step, array $data);
+    public function completeStep(ISurveyStep $current_step, array $data);
 
     /**
      * @param ISurvey $survey

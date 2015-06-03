@@ -91,4 +91,45 @@ class SurveyRankingField extends OptionsetField {
         return count($values);
     }
 
+    protected $validation_attributes = array();
+
+    public function setValidationAttribute($name, $value) {
+        $this->validation_attributes[$name] = $value;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getValidationAttributes() {
+       return  $this->validation_attributes;
+    }
+
+    /**
+     * @param Array Custom attributes to process. Falls back to {@link getAttributes()}.
+     * If at least one argument is passed as a string, all arguments act as excludes by name.
+     * @return string HTML attributes, ready for insertion into an HTML tag
+     */
+    public function getValidationAttributesHTML($attrs = null) {
+        $exclude = (is_string($attrs)) ? func_get_args() : null;
+
+        if(!$attrs || is_string($attrs)) $attrs = $this->getValidationAttributes();
+
+        // Remove empty
+        $attrs = array_filter((array)$attrs, function($v) {
+            return ($v || $v === 0 || $v === '0');
+        });
+
+        // Remove excluded
+        if($exclude) $attrs = array_diff_key($attrs, array_flip($exclude));
+
+        // Create markkup
+        $parts = array();
+        foreach($attrs as $name => $value) {
+            $parts[] = ($value === true) ? "{$name}=\"{$name}\"" : "{$name}=\"" . Convert::raw2att($value) . "\"";
+        }
+
+        return implode(' ', $parts);
+    }
+
 }

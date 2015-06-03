@@ -12,7 +12,10 @@
  * limitations under the License.
  **/
 
-class SurveyThankYouStepTemplate extends SurveyStepTemplate {
+class SurveyThankYouStepTemplate
+    extends SurveyStepTemplate
+    implements ISurveyThankYouStepTemplate
+{
 
     static $db = array(
         'EmailBodyPlainText' => 'Text',
@@ -37,7 +40,6 @@ class SurveyThankYouStepTemplate extends SurveyStepTemplate {
 
     public function __construct($record = null, $isSingleton = false, $model = null){
         parent::__construct($record, $isSingleton, $model);
-        $this->Name     = 'thankyou';
         $this->SkipStep = false;
     }
 
@@ -71,5 +73,29 @@ class SurveyThankYouStepTemplate extends SurveyStepTemplate {
 
     protected function onBeforeWrite() {
         parent::onBeforeWrite();
+    }
+
+    /**
+     * @return string
+     */
+    public function emailPlainBody()
+    {
+        return $this->getField('EmailBodyPlainText');
+    }
+
+    /**
+     * @return string
+     */
+    public function emailPlainHtml()
+    {
+        return $this->getField('EmailBodyHTML');
+    }
+
+    /**
+     * @return string
+     */
+    public function emailSubject()
+    {
+        return $this->getField('EmailSubject');
     }
 }

@@ -73,8 +73,8 @@ class SurveyTemplate
                 'SurveyRegularStepTemplate'       => 'Regular Step' ,
                 'SurveyDynamicEntityStepTemplate' => 'Entities Holder Step',
             );
-
-            if(intval($this->Steps()->filter('Name', 'thankyou')->count()) === 0){
+            $count = $this->Steps()->filter('ClassName', 'SurveyThankYouStepTemplate')->count();
+            if(intval($count) === 0){
                 $step_types['SurveyThankYouStepTemplate'] ='Thank You (Final)';
             }
 
