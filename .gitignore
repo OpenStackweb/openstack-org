@@ -49,3 +49,13 @@ zen_fields/
 openstackwebsite-assets/
 openstackwebsite-assets
 bin
+betterbuttons/
+cache/
+bootstrap-forms/
+tagfield/
+bootstrap-tagfield/
+mandrill/
+dropzone/
+display_logic/
+reflection-templates/
+silverstripe-permamail/

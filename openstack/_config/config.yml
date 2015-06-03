@@ -32,3 +32,8 @@ Injector:
 Page_Controller:
   dependencies:
     Policies: '%$GeneralCachingPolicy'
+
+BootstrapForm:
+  bootstrap_included: true
+  jquery_included: true
+  bootstrap_form_included: true
