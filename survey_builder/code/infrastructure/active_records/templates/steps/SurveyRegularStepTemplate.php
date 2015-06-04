@@ -64,6 +64,11 @@ class SurveyRegularStepTemplate
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses(
                 array(
+                    'SurveyTextBoxQuestionTemplate'         => 'TextBox' ,
+                    'SurveyMemberEmailQuestionTemplate'     => 'Current Member Email' ,
+                    'SurveyMemberFirstNameQuestionTemplate' => 'Current Member FirstName' ,
+                    'SurveyMemberLastNameQuestionTemplate'  => 'Current Member LastName' ,
+                    'SurveyTextBoxQuestionTemplate'      => 'TextBox' ,
                     'SurveyTextBoxQuestionTemplate'      => 'TextBox' ,
                     'SurveyTextAreaQuestionTemplate'     => 'TextArea',
                     'SurveyCheckBoxQuestionTemplate'     => 'CheckBox',

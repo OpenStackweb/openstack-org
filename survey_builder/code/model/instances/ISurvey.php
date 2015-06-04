@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Interface ISurvey
+ */
 interface ISurvey extends IEntity {
 
     /**
@@ -83,4 +86,10 @@ interface ISurvey extends IEntity {
      * @return bool
      */
     public function isEmailSent();
+
+    /**
+     * @param IMessageSenderService $service
+     * @throws EntityValidationException
+     */
+    public function sentEmail(IMessageSenderService $service);
 }
