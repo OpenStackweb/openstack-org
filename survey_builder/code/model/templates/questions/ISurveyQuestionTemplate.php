@@ -57,4 +57,9 @@ interface ISurveyQuestionTemplate extends IEntity {
      * @return string
      */
     public function Type();
+
+    /**
+     * @return ISurveyStepTemplate
+     */
+    public function step();
 }

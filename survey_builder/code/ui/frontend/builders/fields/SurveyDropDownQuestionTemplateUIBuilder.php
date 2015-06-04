@@ -16,11 +16,12 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
 {
 
     /**
+     * @param ISurveyStep $current_step
      * @param ISurveyQuestionTemplate $question
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
         $values = array();
 
@@ -45,7 +46,7 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
 
         $field->setEmptyString('-- Select --');
 
-        $this->buildDependantJS($question, $field);
+        $this->buildDependantRules($current_step, $question, $field);
 
         if($question->UseChosenPlugin){
 

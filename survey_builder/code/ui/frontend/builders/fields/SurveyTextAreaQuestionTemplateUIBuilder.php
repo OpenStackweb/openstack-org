@@ -19,11 +19,12 @@ class SurveyTextAreaQuestionTemplateUIBuilder
     extends AbstractSurveyQuestionTemplateUIBuilder {
 
     /**
+     * @param ISurveyStep $current_step
      * @param ISurveyQuestionTemplate $question
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
         $field = new TextareaField($question->name(), $question->label());
         $field->setValue($question->initialValue());
@@ -36,7 +37,7 @@ class SurveyTextAreaQuestionTemplateUIBuilder
         if(!is_null($answer)){
             $field->setValue($answer->value());
         }
-        $this->buildDependantJS($question, $field);
+        $this->buildDependantRules($current_step, $question, $field);
         return $field;
     }
 }

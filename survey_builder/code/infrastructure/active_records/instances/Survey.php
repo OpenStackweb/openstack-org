@@ -208,4 +208,18 @@ class Survey
         $this->BeenEmailed = true;
         $service->send($this);
     }
+
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return ISurveyAnswer
+     */
+    public function findAnswerByQuestion(ISurveyQuestionTemplate $question)
+    {
+        foreach($this->getSteps() as $step){
+            if($step instanceof SurveyRegularStep){
+                return $step->getAnswerByTemplateId($question->getIdentifier());
+            }
+        }
+        return null;
+    }
 }

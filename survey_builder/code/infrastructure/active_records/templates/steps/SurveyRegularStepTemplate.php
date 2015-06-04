@@ -86,5 +86,16 @@ class SurveyRegularStepTemplate
         return $fields;
     }
 
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return bool
+     */
+    public function belongsTo(ISurveyQuestionTemplate $question)
+    {
+        foreach($this->getQuestions() as $q){
+            if($q->getIdentifier() === $question->getIdentifier()) return true;
+        }
+        return false;
+    }
 
 }
