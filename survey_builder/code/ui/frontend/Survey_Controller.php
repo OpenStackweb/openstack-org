@@ -144,24 +144,30 @@ class Survey_Controller extends Page_Controller {
     {
         //check if user is logged in
 
-        $step     = $request->param('STEP_SLUG');
+        try {
+            $step = $request->param('STEP_SLUG');
 
-        $current_survey = $this->getCurrentSurveyInstance();
+            $current_survey = $this->getCurrentSurveyInstance();
 
-        if(!empty($step) && !$current_survey->isAllowedStep($step)){
-            // redirect
-            return $this->redirect('/surveys/current/'.$current_survey->currentStep()->template()->title());
+            if (!empty($step) && !$current_survey->isAllowedStep($step)) {
+                // redirect
+                return $this->redirect('/surveys/current/' . $current_survey->currentStep()->template()->title());
+            }
+
+            $this->survey_manager->registerCurrentStep($this->current_survey, $step);
+
+            if ($current_survey->isLastStep() && !$current_survey->isEmailSent()) {
+                $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
+            }
+
+            return $this->customise(array(
+                'Survey' => $current_survey,
+            ))->renderWith(array('Surveys_CurrentSurveyContainer', 'Page'));
         }
-
-        $this->survey_manager->registerCurrentStep($this->current_survey, $step);
-
-        if($current_survey->isLastStep() && !$current_survey->isEmailSent()){
-            $this->survey_manager->sendFinalStepEmail( new SurveyThankYouEmailSenderService, $current_survey);
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::WARN);
+            return $this->httpError(404, "Survey not found!");
         }
-
-        return $this->customise(array(
-            'Survey' => $current_survey,
-        ))->renderWith(array('Surveys_CurrentSurveyContainer', 'Page'));
     }
 
     public function LandingPage()
