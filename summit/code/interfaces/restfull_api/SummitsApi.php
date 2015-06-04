@@ -118,7 +118,7 @@ final class SummitsApi extends AbstractRestfulJsonApi {
         try {
             $summit_id = (int)$this->request->param('SUMMIT_ID');
             $query = new QueryObject(new SummitAddOn);
-            $query->addAddCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
+            $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
             list($list, $count) = $this->sponsorship_add_on_repository->getAll($query, 0, 999999);
             $res = array();
@@ -137,7 +137,7 @@ final class SummitsApi extends AbstractRestfulJsonApi {
         try {
             $query = new QueryObject(new SummitPackage());
             $summit_id = (int)$this->request->param('SUMMIT_ID');
-            $query->addAddCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
+            $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
             list($list, $count) = $this->sponsorship_package_repository->getAll($query, 0, 999999);
             $res = array();

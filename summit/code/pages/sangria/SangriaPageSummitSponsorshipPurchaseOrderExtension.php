@@ -58,18 +58,18 @@ class SangriaPageSummitSponsorshipPurchaseOrderExtension extends Extension {
 
         switch($status){
             case 'pending':{
-                $query->addAddCondition(QueryCriteria::equal('Approved',0));
-                $query->addAddCondition(QueryCriteria::equal('Rejected',0));
+                $query->addAndCondition(QueryCriteria::equal('Approved',0));
+                $query->addAndCondition(QueryCriteria::equal('Rejected',0));
             }
             break;
             case 'approved':{
-                $query->addAddCondition(QueryCriteria::equal('Approved',1));
-                $query->addAddCondition(QueryCriteria::equal('Rejected',0));
+                $query->addAndCondition(QueryCriteria::equal('Approved',1));
+                $query->addAndCondition(QueryCriteria::equal('Rejected',0));
             }
             break;
             case 'rejected':{
-                $query->addAddCondition(QueryCriteria::equal('Approved',0));
-                $query->addAddCondition(QueryCriteria::equal('Rejected',1));
+                $query->addAndCondition(QueryCriteria::equal('Approved',0));
+                $query->addAndCondition(QueryCriteria::equal('Rejected',1));
             }
             break;
         }
