@@ -51,6 +51,7 @@ class MemberDecorator extends DataExtension {
 		'Org' => 'Org'
 	);
 
+
 	private static $has_many =  array(
 		'LegalAgreements' => 'LegalAgreement',
 		'Affiliations'=>'Affiliation'
@@ -59,6 +60,18 @@ class MemberDecorator extends DataExtension {
 	private static $belongs_many_many =  array(
 		'ManagedCompanies'=>'Company'
 	);
+
+    public function setOwner($owner, $ownerBaseClass = null) {
+        parent::setOwner($owner, $ownerBaseClass);
+        if($owner) {
+            Config::inst()->remove(get_class($owner), 'searchable_fields');
+            Config::inst()->update(get_class($owner), 'searchable_fields', array(
+            'FirstName' => 'PartialMatchFilter',
+            'Surname'   => 'PartialMatchFilter',
+            'Email'     => 'PartialMatchFilter'));
+        }
+    }
+
 	// Link to the edit profile page
 	function Link()
 	{
