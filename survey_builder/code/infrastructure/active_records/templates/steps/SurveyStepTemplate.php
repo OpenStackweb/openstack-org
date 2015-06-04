@@ -40,7 +40,7 @@ class SurveyStepTemplate
     );
 
     static $has_many = array(
-        'Questions' => 'SurveyQuestionTemplate',
+
     );
 
     private static $defaults = array(
@@ -148,4 +148,5 @@ class SurveyStepTemplate
         }
         return $valid;
     }
+
 }

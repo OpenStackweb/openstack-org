@@ -15,9 +15,10 @@
 interface ISurveyQuestionTemplateUIBuilder {
 
     /**
+     * @param ISurveyStep $current_step
      * @param ISurveyQuestionTemplate $question
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyQuestionTemplate $question, ISurveyAnswer $answer);
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer);
 }

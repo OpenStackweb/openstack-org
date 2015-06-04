@@ -92,4 +92,10 @@ interface ISurvey extends IEntity {
      * @throws EntityValidationException
      */
     public function sentEmail(IMessageSenderService $service);
+
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return ISurveyAnswer
+     */
+    public function findAnswerByQuestion(ISurveyQuestionTemplate $question);
 }

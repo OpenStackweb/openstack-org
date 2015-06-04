@@ -193,12 +193,15 @@ class SurveyQuestionTemplate
             $config->removeComponentsByType('GridFieldEditButton');
             $config->removeComponentsByType('GridFieldAddNewButton');
 
+
+            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->getAllowedDependants());
+
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
                 array(
                     'Type'          => 'Type',
                     'Name'          => 'Name',
                     'DDLOperator'   => 'Operator',
-                    'DDLValues'     => 'Values',
+                    'DDLValues'     => 'Values ( on which depends)',
                     'DDLVisibility' => 'Visibility',
                     'TxtValue'      => 'Default Value',
                 ));
@@ -214,6 +217,20 @@ class SurveyQuestionTemplate
         }
 
         return $fields;
+    }
+
+    /**
+     * @return DataList
+     */
+    private function getAllowedDependants(){
+        $steps_query = new SQLQuery();
+        $steps_query->setSelect("ID");
+        $steps_query->setFrom("SurveyStepTemplate");
+        $current_survey_id = $this->Step()->SurveyTemplateID;
+        $steps_query->setWhere("SurveyTemplateID = {$current_survey_id}");
+        $current_step_ids = $steps_query->execute()->keyedColumn();
+        // todo: check that question belongs to former steps and that we dont use this question either
+        return SurveyQuestionTemplate::get()->filter(array ('StepID'=> $current_step_ids ) );
     }
 
     public function DDLValues(){
@@ -260,5 +277,13 @@ class SurveyQuestionTemplate
                 }
             }
         }
+    }
+
+    /**
+     * @return ISurveyStepTemplate
+     */
+    public function step()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Step')->getTarget();
     }
 }

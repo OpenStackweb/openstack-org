@@ -41,7 +41,7 @@ class SurveyRegularStepTemplateUIBuilder
             $builder_class = $type.'UIBuilder';
             // @ISurveyQuestionTemplateUIBuilder
             $builder = Injector::inst()->create($builder_class);
-            $field   = $builder->build($q, $step->getAnswerByTemplateId($q->getIdentifier()));
+            $field   = $builder->build($step, $q, $step->getAnswerByTemplateId($q->getIdentifier()));
             $fields->add($field);
         }
 
