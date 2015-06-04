@@ -138,16 +138,17 @@ class Company extends DataObject implements PermissionProvider {
 	    'Name'        => 'Company',
 	    'MemberLevel' => 'MemberLevel'
 	);
-	
+
+
 	function getCMSFields() {
 
         $_REQUEST["CompanyId"] = $this->ID;
 
-        $large_logo  = new CustomUploadField('BigLogo', 'Large Company Logo');
+        $large_logo  = new UploadField('BigLogo', 'Large Company Logo');
 		$large_logo->setFolderName('companies/main_logo');
 		$large_logo->setAllowedFileCategories('image');
 
-        $small_logo  = new CustomUploadField('Logo', 'Small Company Logo');
+        $small_logo  = new UploadField('Logo', 'Small Company Logo');
 		$small_logo->setAllowedFileCategories('image');
         //logo validation rules
         $large_logo_validator = new Upload_Image_Validator();
@@ -203,20 +204,21 @@ class Company extends DataObject implements PermissionProvider {
 
 			$admin_list = $admin_list->setDataQuery($query);
 
-			$admins = new GridField('Administrators', 'Company Administrators',
-				$admin_list,
-				GridFieldConfig_RelationEditor::create(10)
-			);
-			$admins->getConfig()->removeComponentsByType('GridFieldEditButton');
-			$admins->getConfig()->removeComponentsByType('GridFieldAddNewButton');
+            $config = GridFieldConfig_RelationEditor::create();
 
-			$admins->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-				array(
-					'FirstName'             => 'First Name',
-					'Surname'               => 'Last Name',
-					'Email'                 => 'Email',
-					'DDLAdminSecurityGroup' => 'Security Group'
-				));
+            $config->removeComponentsByType('GridFieldEditButton');
+            $config->removeComponentsByType('GridFieldAddNewButton');
+
+
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
+                array(
+                    'FirstName'             => 'First Name',
+                    'Surname'               => 'Last Name',
+                    'Email'                 => 'Email',
+                    'DDLAdminSecurityGroup' => 'Security Group'
+                ));
+
+            $admins    = new GridField('Administrators', 'Company Administrators', $admin_list, $config);
 
 			$contracts = new GridField("Contracts", "Contracts", $this->Contracts(), GridFieldConfig_RecordEditor::create(10));
 
@@ -248,7 +250,7 @@ class Company extends DataObject implements PermissionProvider {
 		if(isset($_REQUEST["action_doDelete"]))
 			return new RequiredFields();
 
-		$validator_fields  = new RequiredFields(array('Name','URLSegment','URL','Overview','Commitment','Logo'));
+		$validator_fields  = new RequiredFields(array('Name','URLSegment','URL','Logo'));
 
 		return $validator_fields;
 	}
