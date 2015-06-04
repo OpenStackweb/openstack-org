@@ -19,10 +19,27 @@ h2{
 ul.marketplace-nav{
   margin:0;
   padding:0;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 ul.marketplace-nav li:first-child{
   padding-left:0;
+}
+@media (max-width: 680px) {
+  ul.marketplace-nav li:first-child{
+    padding-left:0.5em;
+  }
+}
+@media (max-width: 1000px) {
+  ul.marketplace-nav li a {
+    width: auto;
+  }
+}
+@media (max-width: 680px) {
+  ul.marketplace-nav li a {
+    width: 100%;
+  }
 }
 
 ul.marketplace-nav a span{
@@ -614,4 +631,28 @@ table.course-schedule tr:last-child td {
 }
 
 /*End New review widget*/
+
+/*App Promo Banner*/
+a.app-promo-banner {
+  background: url('/themes/openstack/images/marketplace/apps-promo-banner.jpg') center center no-repeat;
+  display: block;
+  width: 100%;
+  height: 50px;
+}
+@media (max-width: 1200px) {
+  a.app-promo-banner {
+    background: url('/themes/openstack/images/marketplace/apps-promo-banner-940.jpg') center center no-repeat;
+  }  
+}
+@media (max-width: 990px) {
+  a.app-promo-banner {
+    background: url('/themes/openstack/images/marketplace/apps-promo-banner-720.jpg') center center no-repeat;
+  }  
+}
+@media (max-width: 767px) {
+  a.app-promo-banner {
+    background: url('/themes/openstack/images/marketplace/apps-promo-banner-474.jpg') center center no-repeat;
+  }  
+}
+/*End App Promo Banner*/
 
