@@ -15,7 +15,7 @@
 /**
  * Class SurveyManager
  */
-class SurveyManager implements ISurveyManager {
+final class SurveyManager implements ISurveyManager {
 
     /**
      * @var ISurveyRepository
@@ -184,6 +184,18 @@ class SurveyManager implements ISurveyManager {
             if($survey->isAllowedStep($step_name)){
                 $survey->registerCurrentStep($survey->getStep($step_name));
             }
+        });
+    }
+
+    /**
+     * @param IMessageSenderService $sender_service
+     * @param ISurvey $survey
+     * @return void
+     */
+    public function sendFinalStepEmail(IMessageSenderService $sender_service, ISurvey $survey)
+    {
+        return $this->tx_manager->transaction(function() use($sender_service, $survey){
+            $survey->sentEmail($sender_service);
         });
     }
 }

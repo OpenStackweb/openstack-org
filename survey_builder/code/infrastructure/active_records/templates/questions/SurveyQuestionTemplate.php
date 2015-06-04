@@ -46,7 +46,10 @@ class SurveyQuestionTemplate
     //Administrators Security Groups
     static $many_many_extraFields = array(
         'DependsOn' => array(
-            'ValueID' => "Int",
+            'ValueID'      => "Int",
+            'Operator'     => "Enum('Equal, Not-Equal','Equal')",
+            'Visibility'   => "Enum('Visible, Not-Visible','Visible')",
+            'DefaultValue' => 'Varchar(254)',
         ),
     );
 
@@ -192,9 +195,12 @@ class SurveyQuestionTemplate
 
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
                 array(
-                    'Type'      => 'Type',
-                    'Name'      => 'Name',
-                    'DDLValues' => 'Values'
+                    'Type'          => 'Type',
+                    'Name'          => 'Name',
+                    'DDLOperator'   => 'Operator',
+                    'DDLValues'     => 'Values',
+                    'DDLVisibility' => 'Visibility',
+                    'TxtValue'      => 'Default Value',
                 ));
 
             $depends = $this->DependsOn()->sort('ID');
@@ -214,23 +220,43 @@ class SurveyQuestionTemplate
        return new LiteralField('Empty','&nbsp;N/A&nbsp;');
     }
 
+    public function TxtValue(){
+        return new LiteralField('Empty','&nbsp;N/A&nbsp;');
+    }
+
+    public function DDLVisibility(){
+        return new LiteralField('Empty','&nbsp;N/A&nbsp;');
+    }
+
+    public function DDLOperator(){
+        return new LiteralField('Empty','&nbsp;N/A&nbsp;');
+    }
+
     function onAfterWrite() {
         parent::onAfterWrite();
         if (is_subclass_of(Controller::curr(), "LeftAndMain")) { // check if we are on admin (CMS side)
             //update all relationships with dependants
             foreach ($this->DependsOn() as $question) {
-                if (isset($_REQUEST["Values_{$question->ID}"])) {
-                    $value_ids = $_REQUEST["Values_{$question->ID}"];
+                if (isset($_REQUEST["Values_{$question->ID}"]) &&
+                    isset($_REQUEST["Visibility_{$question->ID}"]) &&
+                    isset($_REQUEST["DefaultValue_{$question->ID}"]) &&
+                    isset($_REQUEST["Operator_{$question->ID}"])) {
+
+                    $value_ids     = $_REQUEST["Values_{$question->ID}"];
+                    $operator      = $_REQUEST["Operator_{$question->ID}"];
+                    $visibility    = $_REQUEST["Visibility_{$question->ID}"];
+                    $initial_value = $_REQUEST["DefaultValue_{$question->ID}"];
+
                     if (is_array($value_ids) && count($value_ids) > 0) {
                         DB::query("DELETE FROM SurveyQuestionTemplate_DependsOn WHERE SurveyQuestionTemplateID = {$this->ID} AND ChildID = {$question->ID};");
                         foreach ($value_ids as $value_id) {
                             $value_id = intval(Convert::raw2sql($value_id));
-                            DB::query("INSERT INTO SurveyQuestionTemplate_DependsOn (SurveyQuestionTemplateID,ChildID,ValueID) VALUES ({$this->ID},{$question->ID},$value_id);");
+                            DB::query("INSERT INTO SurveyQuestionTemplate_DependsOn (SurveyQuestionTemplateID, ChildID , ValueID,Operator, Visibility, DefaultValue) VALUES ({$this->ID}, {$question->ID}, $value_id,'{$operator}','{$visibility}','{$initial_value}');");
                         }
                     }
                 } else {
                     DB::query("DELETE FROM SurveyQuestionTemplate_DependsOn WHERE SurveyQuestionTemplateID = {$this->ID} AND ChildID = {$question->ID};");
-                    DB::query("INSERT INTO SurveyQuestionTemplate_DependsOn (SurveyQuestionTemplateID,ChildID,ValueID) VALUES ({$this->ID},{$question->ID},0);");
+                    DB::query("INSERT INTO SurveyQuestionTemplate_DependsOn (SurveyQuestionTemplateID,ChildID,ValueID,Operator, Visibility,DefaultValue) VALUES ({$this->ID},{$question->ID},0,'Equal','Visible','');");
                 }
             }
         }

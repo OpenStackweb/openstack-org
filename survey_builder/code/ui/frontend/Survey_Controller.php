@@ -155,8 +155,8 @@ class Survey_Controller extends Page_Controller {
 
         $this->survey_manager->registerCurrentStep($this->current_survey, $step);
 
-        if($current_survey->isLastStep()){
-
+        if($current_survey->isLastStep() && !$current_survey->isEmailSent()){
+            $this->survey_manager->sendFinalStepEmail( new SurveyThankYouEmailSenderService, $current_survey);
         }
 
         return $this->customise(array(

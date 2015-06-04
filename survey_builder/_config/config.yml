@@ -28,6 +28,12 @@ Name: surveybuilderui
 Injector:
   TextBoxUIBuilder:
     class: SurveyTextBoxQuestionTemplateUIBuilder
+  MemberEmailUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  MemberFirstNameUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  MemberLastNameUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
   TextAreaUIBuilder:
       class: SurveyTextAreaQuestionTemplateUIBuilder
   CheckBoxUIBuilder:

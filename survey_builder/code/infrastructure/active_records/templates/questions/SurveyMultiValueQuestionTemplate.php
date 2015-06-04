@@ -79,6 +79,56 @@ class SurveyMultiValueQuestionTemplate
         return new MultiDropdownField("Values_{$this->ID}", "Values_{$this->ID}",  $this->Values()->map("ID", "Value"), $selected_values);
     }
 
+    public function TxtValue(){
+        $value = '';
+
+        $owner = $_REQUEST["SurveyQuestionTemplateID"];
+
+        if(isset($owner)){
+            $sqlQuery = new SQLQuery();
+            $sqlQuery->setSelect("DefaultValue");
+            $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+            $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+            $value = current($sqlQuery->execute()->keyedColumn());
+        }
+
+       return new TextField("DefaultValue_{$this->ID}", "DefaultValue_{$this->ID}", $value, 254);
+    }
+
+    public function DDLOperator(){
+
+        $values = array('Equal' => 'Equal', 'Not-Equal' => 'Not-Equal');
+        $selected_value = '';
+        $owner = $_REQUEST["SurveyQuestionTemplateID"];
+
+        if(isset($owner)){
+            $sqlQuery = new SQLQuery();
+            $sqlQuery->setSelect("Operator");
+            $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+            $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+            $selected_value = current($sqlQuery->execute()->keyedColumn());
+        }
+
+        return new DropdownField("Operator_{$this->ID}", "Operator_{$this->ID}", $values, $selected_value);
+    }
+
+    public function DDLVisibility(){
+
+        $values = array('Visible' => 'Visible', 'Not-Visible' => 'Not-Visible');
+        $selected_value = '';
+        $owner = $_REQUEST["SurveyQuestionTemplateID"];
+
+        if(isset($owner)){
+            $sqlQuery = new SQLQuery();
+            $sqlQuery->setSelect("Visibility");
+            $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+            $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+            $selected_value = current($sqlQuery->execute()->keyedColumn());
+        }
+
+        return new DropdownField("Visibility_{$this->ID}", "Visibility_{$this->ID}", $values, $selected_value);
+    }
+
     /**
      * @return IQuestionValueTemplate[]
      */

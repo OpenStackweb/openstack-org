@@ -49,4 +49,11 @@ interface ISurveyManager {
      * @return void
      */
     public function registerCurrentStep(ISurvey $survey, $step_name);
+
+    /**
+     * @param IMessageSenderService $sender_service
+     * @param ISurvey $survey
+     * @return void
+     */
+    public function sendFinalStepEmail(IMessageSenderService $sender_service, ISurvey $survey);
 }

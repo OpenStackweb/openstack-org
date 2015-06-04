@@ -12,15 +12,20 @@
  * limitations under the License.
  **/
 
-interface ISurveyThankYouStepTemplate extends ISurveyStepTemplate {
+class SurveyMemberFirstNameQuestionTemplate extends SurveyTextBoxQuestionTemplate {
+
+    public function Type(){
+        return 'MemberFirstName';
+    }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function emailHtmlBody();
-
-    /**
-     * @return string
-     */
-    public function emailSubject();
+    public function initialValue()
+    {
+        if(Member::currentUser()){
+            return Member::currentUser()->FirstName;
+        }
+        return '';
+    }
 }

@@ -12,13 +12,15 @@
  * limitations under the License.
  **/
 
+/**
+ * Class SurveyThankYouStepTemplate
+ */
 class SurveyThankYouStepTemplate
     extends SurveyStepTemplate
     implements ISurveyThankYouStepTemplate
 {
 
     static $db = array(
-        'EmailBodyPlainText' => 'Text',
         'EmailBodyHTML'      => 'HTMLText',
         'EmailSubject'       => 'Text',
     );
@@ -78,15 +80,7 @@ class SurveyThankYouStepTemplate
     /**
      * @return string
      */
-    public function emailPlainBody()
-    {
-        return $this->getField('EmailBodyPlainText');
-    }
-
-    /**
-     * @return string
-     */
-    public function emailPlainHtml()
+    public function emailHtmlBody()
     {
         return $this->getField('EmailBodyHTML');
     }
