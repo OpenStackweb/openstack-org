@@ -4,10 +4,11 @@
 
 <% loop Presentation %>
 
+<% if $YouTubeID %>
 <div class="single-video-wrapper">
 	<iframe width="853" height="480" src="//www.youtube.com/embed/{$YouTubeID}?rel=0<% if Top.Autoplay %>&autoplay=1<% end_if %>" frameborder="0" allowfullscreen></iframe>
 </div>
-
+<% end_if %>
 <div class="container single-video-details">
 	<div class="row">
 		<div class="col-sm-3 video-share">
@@ -37,7 +38,7 @@
 								<strong>Related Media:</strong>
 							</p>
 							<p class="video-media-title">
-								superuser-slides.zip
+                                $Top.PresentationFileName($SlidesLink)
 							</p>
 							<div class="media-btn-wrapper">
 								<a href="{$SlidesLink}" class="media-btn"><i class="fa fa-cloud-download"></i> Download</a>
