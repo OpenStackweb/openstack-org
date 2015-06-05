@@ -205,4 +205,9 @@ class PresentationCategoryPage_Controller extends Page_Controller
 
     }
 
+    public function PresentationFileName($media_link){
+        $res = parse_url($media_link);
+        return basename($res['path']);
+    }
+
 }
