@@ -22,25 +22,23 @@ ErrorDocument 500 /assets/error-500.html
 ErrorDocument 400 /assets/error-400.html
 
 <IfModule mod_rewrite.c>
-	        SetEnv HTTP_MOD_REWRITE On
-            RewriteEngine On
+	    RewriteEngine On
             RewriteBase '/'
 
             RewriteRule ^vendor(/|$) - [F,L,NC]
             RewriteRule silverstripe-cache(/|$) - [F,L,NC]
             RewriteRule composer\.(json|lock) - [F,L,NC]
-
              # custom rules
             ### These two rules added to make www canonical ###
-            RewriteCond %{HTTP_HOST} !^www\.openstack\.org$ [NC]
-            RewriteCond %{HTTP_HOST} !^direct\.openstack\.org$ [NC]
-            RewriteRule ^(.*)$ http://www.openstack.org/$1 [R=301,L]
+            # RewriteCond %{HTTP_HOST} !^www\.openstack\.org$ [NC]
+            # RewriteCond %{HTTP_HOST} !^direct\.openstack\.org$ [NC]
+            # RewriteRule ^(.*)$ http://www.openstack.org/$1 [R=301,L]
 
             # Hide robots.txt for the www domain, but show it otherwise
             # (so that crawlers don't index our subdomain which bypasses the CDN).
-            RewriteCond %{HTTP_HOST} !^www\.openstack\.org$ [NC]
-            RewriteCond %{REQUEST_URI} ^/robots.txt$ [NC]
-            RewriteRule robots.txt robots_for_direct.txt [L]
+            # RewriteCond %{HTTP_HOST} !^www\.openstack\.org$ [NC]
+            # RewriteCond %{REQUEST_URI} ^/robots.txt$ [NC]
+            # RewriteRule robots.txt robots_for_direct.txt [L]
 
             RewriteRule ^(blog) - [L]
             RewriteRule ^(chat) - [L]
