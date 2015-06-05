@@ -14,7 +14,7 @@
 
     //private methods
 
-    function checkGroupOtherContainerVisibility(chk_group, question_container){
+    function checkQuestionVisibilityCheckBox(chk_group, question_container){
         var show = false;
         $.each(chk_group, function(index , chk){
             show = show || chk.is(':checked');
@@ -22,12 +22,12 @@
         setQuestionVisibility(show, question_container)
     }
 
-    function checkOtherTextVisibilityDropDown(ddl, question_container, label){
+    function checkQuestionVisibilityDropDown(ddl, question_container, label){
         var show = ddl.val() == label;
         setQuestionVisibility(show, question_container)
     }
 
-    function checkOtherTextVisibilityRanking(ranking_group, question_container){
+    function checkQuestionVisibilityRanking(ranking_group, question_container){
         var show = false;
         $.each(ranking_group, function(index , ranking){
             show = show || ranking.hasClass('selected-rank');
@@ -45,6 +45,7 @@
         else {
             question_container.addClass('hidden');
             question_container.find('*').addClass('hidden');
+            //clean controls
             question_container.find('input').val('');
             question_container.find('select').val('');
             question_container.find('textarea').val('');
@@ -58,40 +59,38 @@
 
         },
 
-        addRequiredAnswer4ClickableGroup: function(chk_group, txt_container){
+        addRequiredAnswer4CheckAbleGroup: function(chk_group, question_container){
 
             $.each(chk_group, function(index , chk){
                 chk.click(function (e) {
-                    checkGroupOtherContainerVisibility(chk_group, txt_container);
+                    checkQuestionVisibilityCheckBox(chk_group, question_container);
                 });
             });
 
-            checkGroupOtherContainerVisibility(chk_group, txt_container);
+            checkQuestionVisibilityCheckBox(chk_group, question_container);
         },
 
-        addRequiredAnswer4SelectableGroup : function(select_group, txt_container, label){
+        addRequiredAnswer4SelectAbleGroup : function(select_group, question_container, label){
 
             $.each(select_group, function(index , select){
                 select.change(function (e) {
-                    checkOtherTextVisibilityDropDown(select, txt_container, label);
+                    checkQuestionVisibilityDropDown(select, question_container, label);
                 });
-                checkOtherTextVisibilityDropDown(select, txt_container, label);
+                checkQuestionVisibilityDropDown(select, question_container, label);
             });
         },
 
-        addRequiredAnswer4RankingGroup: function(ranking_group, txt_container){
+        addRequiredAnswer4RankAbleGroup: function(ranking_group, question_container){
 
             $('body').on('rank', function(evt, selected){
                 var current = $(evt.target);
                 $.each(ranking_group, function(index , ranking){
                     if($(ranking).attr('id') === current.attr('id')){
-                        checkOtherTextVisibilityRanking(ranking_group, txt_container);
+                        checkQuestionVisibilityRanking(ranking_group, question_container);
                     }
                 });
             });
-
-            checkOtherTextVisibilityRanking(ranking_group, txt_container);
-
+            checkQuestionVisibilityRanking(ranking_group, question_container);
          }
     };
 

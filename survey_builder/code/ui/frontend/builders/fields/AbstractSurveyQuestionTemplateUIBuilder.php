@@ -215,10 +215,10 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
                 form.survey_validation_rules('addRequiredAnswer4SelectableGroup', [ selectable_fields[i].ddl ], $('#{$question_id}'), selectable_fields[i].label );
                 }";
             $js .= "if(clickable_fields.length > 0 )
-                form.survey_validation_rules('addRequiredAnswer4ClickableGroup', clickable_fields, $('#{$question_id}') ); ";
+                form.survey_validation_rules('addRequiredAnswer4CheckAbleGroup', clickable_fields, $('#{$question_id}') ); ";
 
             $js .= "if(rankable_fields.length > 0 )
-                form.survey_validation_rules('addRequiredAnswer4RankingGroup', rankable_fields, $('#{$question_id}') );
+                form.survey_validation_rules('addRequiredAnswer4RankAbleGroup', rankable_fields, $('#{$question_id}') );
                 });";
 
             Requirements::customScript($js);
