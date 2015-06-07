@@ -366,7 +366,7 @@ class PresentationPage_ManageRequest extends RequestHandler
      * @return  boolean
      */
     public function isCreating() {
-        return !$this->presentation->isInDB();
+        return $this->presentation->isNew();
     }
 
 
@@ -546,8 +546,8 @@ class PresentationPage_ManageRequest extends RequestHandler
             ))
             ->send();
         
-        if($this->presentation->Progress < 3) {
-            $this->presentation->Progress = 3;
+        if($this->presentation->Progress < Presentation::PHASE_COMPLETE) {
+            $this->presentation->Progress = Presentation::PHASE_COMPLETE;
             $this->presentation->write();
         }
 
@@ -570,15 +570,16 @@ class PresentationPage_ManageRequest extends RequestHandler
             )
         );
         
-        if($this->presentation->isInDB()) {
-            return $form->loadDataFrom($this->presentation);
-        }
         if($data = Session::get("FormInfo.{$form->FormName()}.data")) {            
             return $form->loadDataFrom($data);
         }
 
+        // ugh...
+        if($this->presentation->OtherTopic && !$this->presentation->CategoryID) {
+        	$this->presentation->CategoryID = 'other';
+        }
 
-        return $form;
+        return $form->loadDataFrom($this->presentation);
         
     }
 
@@ -664,7 +665,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             return $this->redirectBack();
         }
 
-        $new = !$this->presentation->isInDB();
+        $new = $this->presentation->isNew();
         $form->saveInto($this->presentation);
 
         if($new) {
@@ -676,10 +677,10 @@ class PresentationPage_ManageRequest extends RequestHandler
         if($currentSummit) {
             $this->presentation->SummitID = $currentSummit->ID;
         }
-        if($this->presentation->Progress < 1) {
-            $this->presentation->Progress = 1;
-            $this->presentation->write();
-        }
+
+        $this->presentation->Progress = Presentation::PHASE_SUMMARY;
+        $this->presentation->write();
+
         Session::clear("FormInfo.{$form->FormName()}.data");
         
         if($new) {
@@ -752,11 +753,11 @@ class PresentationPage_ManageRequest extends RequestHandler
      * @param   $form Form
      */
     public function doFinishSpeaker($data, $form) {
-        if($this->presentation->Progress < 1) {
+        if($this->presentation->Progress < Presentation::PHASE_SUMMARY) {
             return $this->parent->redirect($this->Link());
         }
-        else if($this->presentation->Progress < 2) {
-            $this->presentation->Progress = 2;
+        else if($this->presentation->Progress < Presentation::PHASE_SPEAKERS) {
+            $this->presentation->Progress = Presentation::PHASE_SPEAKERS;
             $this->presentation->write();
         }
         
@@ -925,9 +926,10 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
      * @return SSViewer
      */
     public function legal(SS_HTTPRequest $r) {
-        return $this->customise(array(
-            'LegalAgreement' => $this->parent->getParent()->LegalAgreement
-        ))->renderWith(array('PresentationPage_legal','PresentationPage'), $this->parent->getParent());
+        return $this->renderWith(array(
+    		'PresentationPage_legal',
+    		'PresentationPage'
+        ), $this->parent->getParent());
     }
 
 
@@ -988,13 +990,8 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $this,
             "LegalForm",
             FieldList::create()
-                ->optionset('VideoAgreement','Do you agree to the terms above?')
-                    ->configure()
-                        ->setSource(array(
-                            '0' => 'No, I do not wish to be on video.',
-                            '1' => 'Yes, I agree. It\'s okay to record my session.'
-                        ))
-                    ->end()            
+            	->literal('termbox','<div class="termbox">'.$this->parent->getParent()->LegalAgreement.'</div>')
+            	->checkbox('VideoAgreement','I agree to the terms above')
             , FieldList::create(
                 FormAction::create('doSaveLegal','Continue')
             )
@@ -1051,12 +1048,12 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
      */
     public function doSaveLegal($data, $form) {
         $form->saveInto($this->speaker);
-        if($data['VideoAgreement'] == 1) {
-            $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_AGREED', $this->parent->getParent()->LegalAgreement);            
-        }   
-        else {
-            $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_DECLINED');
-        }     
+        if(!$data['VideoAgreement']) {
+        	$form->sessionMessage('You must agree to the terms','bad');
+        	return $this->redirectBack();
+        }
+        
+        $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_AGREED', $this->parent->getParent()->LegalAgreement);            
 
         return $this->parent->getParent()->redirect($this->parent->Link('speakers'));        
     }

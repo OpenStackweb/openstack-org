@@ -1,3 +1,4 @@
+    <% base_tag %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,14 +8,16 @@
     <title>OpenStack Summit | $Title</title>
 
     <!-- Bootstrap Core CSS -->
-    <% require css("summit/css/bootstrap.min.css") %>
-    <!-- Custom CSS -->
-    <% require css("summit/bower_components/animate.css/animate.min.css") %>
-    <% require css("summit/css/combined.css") %>
-    <!-- Fonts -->
-    <% require css("summit/css/font-awesome.min.css") %>
+    <link href="/summit/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link href="/summit/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/summit/css/combined.css" rel="stylesheet">
+
+
+    <!-- Fonts -->
+    <link href="/summit/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
