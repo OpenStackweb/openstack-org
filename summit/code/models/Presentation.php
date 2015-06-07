@@ -4,6 +4,32 @@
 class Presentation extends DataObject
 {
 
+	/**
+	 * Defines the phase that a presentation has been created, but
+	 * no information has been saved to it.
+	 */
+	const PHASE_NEW = 0;
+
+
+	/**
+	 * Defines the phase where a presenation has been given a summary,
+	 * but no speakers have been added
+	 */
+	const PHASE_SUMMARY = 1;
+
+
+	/**
+	 * Deinfes a phase where a presentation has a summary and speakers
+	 */
+	const PHASE_SPEAKERS = 2;
+
+
+	/**
+	 * Defines a phase where a presentation has been submitted successfully
+	 */
+	const PHASE_COMPLETE = 3;
+
+
     private static $db = array (
         'Title' => 'Text',
         'Level' => "Enum('Beginner,Intermediate,Advanced')",
@@ -207,5 +233,16 @@ class Presentation extends DataObject
         ))->first();
     }
 
+
+    /**
+     * Determines if the presentation is "new." Since presentations are
+     * optimistically written to the database, a simple isInDB() check
+     * is not sufficient
+     * 	
+     * @return boolean
+     */
+    public function isNew() {
+    	return $this->Progress == self::PHASE_NEW;
+    }
 
 }

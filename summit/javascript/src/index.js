@@ -1,24 +1,34 @@
 /**
  * @jsx React.DOM
  */
-// Stylesheet
-require('../../css/style.less');
-
 var React = require('react');
-var PresentationApp = require('./app');
-var PresentationBrowse = require('./pages/PresentationBrowse');
+var VotingApp = require('./app');
+var Main = require('./pages/Main');
+var Detail = require('./pages/Detail');
+var DefaultDetail = require('./pages/DefaultDetail');
 var Router = require('react-router');
 var Route = Router.Route;
 var Routes = Router.Routes;
 var DefaultRoute = Router.DefaultRoute;
+var Cortex = require('./store/Cortex');
 
-
-var routes = (
-	<Routes>
-	    <Route name="app" path="/" handler={PresentationApp}>	      
-	      <Route name="browse" handler={PresentationBrowse} />
-	      <Route name="detail" path="/browse/:presentationid" handler={PresentationBrowse} />
-	    </Route>
-	</Routes>
+var routes = (	
+	<Route path="/summit/vancouver-2015/speakers" handler={VotingApp}>	    
+	      <Route name="home" path="module" handler={Main}>
+	      	<DefaultRoute handler={DefaultDetail} />
+	      	<Route name="detail" path="show/:presentationID" handler={Detail} />    
+	      </Route>
+    </Route>
 );
-React.renderComponent(routes, document.body);
+
+
+var RootComponent;
+Router.run(routes, Router.HistoryLocation, function (Handler) {
+  RootComponent = React.render(<Handler store={Cortex} />, document.getElementById('wrap'));
+});
+
+Cortex.on('update', function (updatedData) {
+	RootComponent.setProps({
+		store: updatedData
+	});
+});

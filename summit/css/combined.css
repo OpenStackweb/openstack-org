@@ -33,7 +33,7 @@ h3 {
   color: #2A4E68; }
 
 h5 {
-  color: #cf3427;
+  color: #DA422F;
   margin-bottom: 0; }
 
 a, a:visited {
@@ -97,30 +97,18 @@ body.summit-landing-body {
 
 a.register-btn-lrg, .register-btn-lrg {
   border-radius: 2px;
-  background: #cf3427;
+  background: #DA422F;
   color: white;
   text-transform: uppercase;
   font-size: 1.1em;
   font-weight: 400;
-  padding: 12px 30px; 
-  margin: 10px;
-}
+  padding: 12px 30px; }
   a.register-btn-lrg:hover, .register-btn-lrg:hover {
     background: #A51B1B;
     color: white; }
   a.register-btn-lrg:focus, .register-btn-lrg:focus {
     outline: none;
     color: white; }
-a.register-btn-lrg.soon, .register-btn-lrg.soon {
-    background: transparent none repeat scroll 0 0;
-    border: 1px solid white;
-}
-  a.register-btn-lrg.contract {
-    background: #2A4E68;
-  }
-  a.register-btn-lrg.contract:hover {
-    background: #0C1722;
-  }
 
 a.register-btn-lrg i, .register-btn-lrg i {
   margin-left: 20px; }
@@ -171,7 +159,7 @@ a.single-summit:hover {
   text-decoration: none; }
 
 a.past-summit::after {
-  background: url('/summit/images/vancouver-square.jpg') no-repeat center center;
+  background: url('/summit/images/paris-bkgd.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -185,7 +173,7 @@ a.current-summit {
   padding-top: 10px; }
 
 a.current-summit::after {
-  background: url('/summit/images/tokyo-wide.jpg') no-repeat center center;
+  background: url('/summit/images/vancouver-bkgd.jpg') no-repeat center center;
   content: "";
   opacity: 0.8;
   top: 0;
@@ -199,7 +187,7 @@ a.current-summit:hover:after {
   opacity: 1; }
 
 a.future-summit::after {
-  background: url('/summit/images/austin-square.jpg') no-repeat center center;
+  background: url('/summit/images/tokyo-bkgd.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -238,7 +226,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   position: relative; }
 
 .single-summit-date.current {
-  color: #cf3427; }
+  color: #DA422F; }
 
 .single-summit-date.future {
   color: #29abe2; }
@@ -259,7 +247,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   -webkit-border-radius: 75px; }
 
 .single-summit-date.current .date-circle {
-  border-color: #cf3427; }
+  border-color: #DA422F; }
 
 @media (max-width: 767px) {
   .single-summit-date.current {
@@ -286,7 +274,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   overflow: hidden; }
 
 .summit-hero-wrapper.condensed {
-  background: #0F1321; }
+  background: url('/summit/images/summit-vancouver-bkgd.jpg') no-repeat center center; }
 
 .summit-hero-wrapper h1 {
   color: white;
@@ -317,16 +305,17 @@ a.past-summit:hover:after, a.future-summit:hover:after {
 
 .summit-hero-wrapper .landing-action .register-btn-lrg {
   width: 270px;
-  padding: 10px;
+  height: 38px;
+  padding: 0;
   margin: 0; }
   .summit-hero-wrapper .landing-action .register-btn-lrg.inactive {
     width: 325px; }
     .summit-hero-wrapper .landing-action .register-btn-lrg.inactive:hover {
       cursor: default;
-      background: #cf3427; }
+      background: #DA422F; }
 
 .summit-hero-wrapper.condensed .register-btn-lrg {
-  width: 100%; }
+  width: 130px; }
 
 .inner-countdown-wrapper {
   position: absolute;
@@ -540,7 +529,7 @@ ul.sidebar-menu {
   margin-left: 10%;
   width: 80%;
   font-size: 1em;
-  padding: 10px;
+  padding: 0;
   height: 40px; }
   .sidebar-nav .register-btn-lrg.inactive:hover {
     cursor: default; }
@@ -777,7 +766,7 @@ footer {
 .white {
   width: 100%;
   padding: 90px 0;
-  background: #fff none repeat scroll 0 0; }
+  background: white; }
 
 .light {
   width: 100%;
@@ -892,7 +881,7 @@ footer {
   margin-top: 20px; }
 
 .summit-types {
-  }
+  margin-top: 60px; }
 
 .summit-types h3 {
   font-weight: 300; }
@@ -1010,10 +999,7 @@ a.outline-btn {
 .growth-chart {
   float: left;
   max-width: 100%;
-  margin-top: -60px;
-  min-width: 800px;
-  max-height: 800px;
-}
+  margin-left: -20%; }
 
 .growth-text-bottom {
   width: 40%;
@@ -1035,8 +1021,7 @@ a.outline-btn {
     width: 100%; }
   .growth-chart {
     margin-left: 0;
-    margin-top: 0;
-    min-width:0px; }
+    margin-top: 0; }
   .growth-text-bottom {
     width: 100%;
     margin-top: 20px; } }
@@ -1300,9 +1285,6 @@ a.photo-credit {
 .summit-hero-wrapper.condensed a.photo-credit {
   display: none; }
 
-div.summit-hero-wrapper.condensed.tokyo {
-   background: rgba(0, 0, 0, 0) url('/assets/Uploads/tokyo-bkgd-lrg.jpg') no-repeat scroll center center / cover ; }
-
 .about-city-row p {
   font-weight: 400;
   font-size: 1.3em;
@@ -1323,7 +1305,7 @@ a.orange-btn:hover {
   color: white;
   background: #CE390B; }
 
-.news-story {
+a.news-story {
   background: white;
   padding: 3% 5% 5%;
   display: block;
@@ -1333,8 +1315,10 @@ a.orange-btn:hover {
   position: relative;
   margin-bottom: 30px;
   border: 2px solid #edf2f7; }
+  a.news-story:hover {
+    border-color: #29abe2; }
 
-.news-story p {
+a.news-story p {
   font-size: 0.9em;
   color: #30739C; }
 
@@ -1357,10 +1341,10 @@ a.orange-btn:hover {
   margin-bottom: -3%;
   float: right; }
 
-.news-story.no-pic .news-left {
+a.news-story.no-pic .news-left {
   display: none; }
 
-.news-story.no-pic .news-right {
+a.news-story.no-pic .news-right {
   width: 100%; }
 
 .news-story .news-title {
@@ -1609,14 +1593,6 @@ ul.city-nav-list li i {
     margin-top: 5px;
     font-size: 0.8em; }
 
-p.sold-out-hotel {
-    color: #DA422F;
-    font-weight: 700;
-    margin-top: 17px;
-    font-size: 1.2em;
-    text-transform: uppercase;
-}
-
 .hotel-block a {
   display: inline-block;
   margin: 10px 12px 0; }
@@ -1850,7 +1826,7 @@ a.modal-contact-btn {
 
 a.close-modal-btn {
   display: block;
-  background: #cf3427;
+  background: #DA422F;
   padding: 10px 20px;
   border-radius: 2px;
   max-width: 350px;
@@ -1892,9 +1868,8 @@ a.close-modal-btn {
 /*End FAQ Page*/
 /*Sponsor Page*/
 .sponsor-page-wrapper {
-  text-align: center;
-    padding-top: 0;
-}
+  padding-top: 0;
+  text-align: center; }
 
 .sponsor-wrapper {
   text-align: center;
@@ -1939,7 +1914,7 @@ a.close-modal-btn {
   padding-top: 5px; }
 
 .sponsor-spots {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   background: white;
   width: 100%;
   text-align: center;
@@ -1957,14 +1932,14 @@ a.close-modal-btn {
     .sponsor-spots h3 span {
       font-size: 0.7em; }
   .sponsor-spots.sold-out {
-    border-color: #cf3427;
-    color: #cf3427; }
+    border-color: #DA422F;
+    color: #DA422F; }
   .sponsor-spots.sold-out h3 {
-    color: #cf3427; }
+    color: #DA422F; }
   .sponsor-spots.sold-out .sponsor-cost {
-    background: #cf3427; }
+    background: #DA422F; }
   .sponsor-spots.sold-out .sponsor-count {
-    color: #cf3427;
+    color: #DA422F;
     font-weight: 700; }
 
 .sponsor-cost {
@@ -2011,29 +1986,9 @@ a.close-modal-btn {
 .sponsor-table {
   background: white;
   text-align: left; }
-.sponsor-table tr.sold-out td {
-  background: white;
-  color: #cf3427;
-  position: relative;
-}
-.sponsor-table tr.sold-out td:first-child {
-  padding-left: 30px;
-}
-.sponsor-table tr.sold-out td:first-child:before {
-  position: absolute;
-  font-family: FontAwesome;
-  top: 50%;
-  margin-top: -12px;
-  left: 10px;
-  content: "\f00d";
-  font-size: 1.3em;
-}
-
-.package-actions{
-    min-height: 30px;
-    max-height: 30px;
-    margin-bottom: 15px;
-}
+  .sponsor-table tr.sold-out td {
+    background: #f2dede;
+    color: #DA422F; }
 
 .fixed-image {
   background-attachment: fixed;
@@ -2143,16 +2098,6 @@ i.checkbox {
   height: 20px;
   width: 20px;
   margin-right: 20px; }
-  
-/*Austin Landing*/
-.tokyo-landing-wrapper.austin {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: 70px 0;
-  background: url('/summit/images/austin-bkgd-lrg.jpg') no-repeat right top;
-  background-size: cover; }
 
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
@@ -2180,12 +2125,8 @@ img.tokyo-landing-logo {
   font-weight: 300;
   font-size: 20px;
   margin: 8px 0 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-a.white-link {
-  color: white;
-}
+  text-transform: uppercase; }
+
 .tokyo-landing-wrapper p {
   color: white; }
 
@@ -2290,7 +2231,7 @@ a.white-link {
   width: 150px;
   padding: 5px 0 0;
   display: inline-block;
-  background: #cf3427;
+  background: #DA422F;
   text-align: center;
   color: white;
   border-top-left-radius: 2px;
@@ -2314,8 +2255,7 @@ a.white-link {
 /*End Tokyo Summit Landing Page*/
 /* Presentation App */
 .presentation-app-header {
-  border-bottom: 1px solid #CCCCCC;
-  background-color: white; }
+  border-bottom: 1px solid #CCCCCC; }
   .presentation-app-header h2 {
     text-align: left;
     margin: 20px 0px 5px 0px;
@@ -2324,9 +2264,6 @@ a.white-link {
     text-transform: uppercase;
     padding-bottom: 10px;
     padding-top: 20px; }
-
-body.presentation-page {
-  background-color: #F6F7F9 !important; }
 
 .presentation-app-body {
   padding-top: 20px;
@@ -2405,19 +2342,10 @@ body.presentation-page {
   padding: 0px 20px;
   border-bottom: 1px solid #CCCCCC; }
 
-.main-panel-divider-label {
-  margin-left: -20px;
-  margin-right: -20px;
-  padding: 5px 20px;
-  background: #E9EFF3; }
-
 .panel-note {
   padding: 0px 10px;
   border-left: 3px solid #1E99DF;
   margin: 20px 0px; }
-
-.panel-buttons {
-  padding-top: 20px; }
 
 .add-presentation-button {
   width: 100%; }
@@ -2489,27 +2417,6 @@ h3.user-name {
   margin-top: 0px;
   margin-bottom: 20px; }
 
-h4.category-label {
-  font-size: 100%;
-  margin-top: 3px;
-  font-weight: bold; }
-
-/* confirmation screen */
-.confirm-block {
-  padding-top: 20px;
-  padding-bottom: 20px; }
-
-.confirm-item + .confirm-label, .confirm-title + .confirm-label {
-  margin-top: 20px; }
-
-.confirm-title {
-  font-size: 140%; }
-
-.confirm-label {
-  text-transform: uppercase;
-  color: #C1C1C1; }
-
-/* end confirmation screen */
 /* review presentation */
 .review-presentation h3 {
   background-color: #F8F9FD;
@@ -2519,32 +2426,97 @@ h4.category-label {
 .review-presentation {
   padding-bottom: 40px; }
 
-h3.more-speakers {
-  border-bottom: 1px solid #D5D5D5;
-  padding-top: 10px;
-  padding-bottom: 10px; }
+/*Voting For Presentations*/
+.outer-wrap {
+  position: relative;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch; }
 
-.fa-end {
-  border-left: 1px solid white;
-  border-left-color: rgba(255, 255, 255, 0.3);
-  padding-left: 8px;
-  margin-left: 6px; }
+i.collapse-voting-nav {
+  color: #4279B0;
+  position: absolute;
+  left: 5%;
+  top: 30px;
+  display: none;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  z-index: 900; }
 
-.fa-start {
-  border-right: 1px solid white;
-  border-right-color: rgba(255, 255, 255, 0.3);
-  padding-right: 8px;
-  margin-right: 6px; }
+@media (max-width: 767px) {
+  i.collapse-voting-nav {
+    display: block; } }
 
-.bootstrap-tagsinput {
-  display: block;
-  width: 100%; }
+.voting-open-panel.text {
+  display: none;
+  margin-bottom: 20px;
+  font-size: 12px;
+  text-transform: uppercase; }
+  .voting-open-panel.text i {
+    margin-right: 10px; }
 
-.termbox {
-  max-height: 300px;
-  overflow-y: scroll;
-  padding: 15px;
-  border: 1px solid #9FB8CE; }
+@media (max-width: 767px) {
+  .voting-open-panel.text {
+    display: block; } }
+
+.openVotingNav .main-body {
+  left: 50%;
+  right: -50%; }
+
+.openVotingNav .voting-sidebar {
+  border-right: 1px solid #D4DCE5;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+  padding: 40px; }
+
+.openVotingNav .voting-sidebar {
+  left: 0; }
+
+@media (min-width: 981px) {
+  .openVotingNav .voting-sidebar {
+    left: 0%; }
+  .openVotingNav .main-body {
+    left: 0;
+    right: 0; } }
+
+@media (min-width: 768px) {
+  .voting-app-details-link {
+    display: none; } }
+
+@media (max-width: 767px) {
+  .voting-sidebar {
+    width: 70%;
+    left: -70%;
+    top: 0;
+    position: fixed;
+    padding: 10px; }
+  .openVotingNav .main-body {
+    left: 70%;
+    right: -70%; }
+  .voting-app-details-link {
+    display: block;
+    width: 100%;
+    clear: both;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #D4DCE5;
+    text-align: center; }
+    .voting-app-details-link a {
+      width: 100%; } }
+
+@media (max-width: 600px) {
+  .openVotingNav .voting-sidebar {
+    padding: 10px; } }
+
+.voting-body {
+  background: #edf2f7;
+  overflow-x: hidden; }
 
 a.voting-btn {
   display: block;
@@ -2553,73 +2525,436 @@ a.voting-btn {
   margin: 30px auto;
   color: white;
   padding: 10px; }
-
-a.voting-btn:hover {
+  a.voting-btn:hover {
     text-decoration: none;
     background: #30739C; }
 
-body.modal-open {
-    overflow: visible;
-}
+.voting-header {
+  background: #edf2f7;
+  height: 120px;
+  padding-top: 20px; }
 
-/* autocomplete */
+.voting-app-logo {
+  text-align: center; }
+  .voting-app-logo .summit-hero-logo {
+    margin: 0;
+    float: none; }
 
-.ui-menu .ui-menu-item a {
-    font-size: 12px;
-}
-.ui-autocomplete {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1510 !important;
-    float: left;
-    display: none;
-    min-width: 160px;
-    width: 160px;
-    padding: 4px 0;
-    margin: 2px 0 0 0;
-    list-style: none;
-    background-color: #ffffff;
-    border-color: #ccc;
-    border-color: rgba(0, 0, 0, 0.2);
-    border-style: solid;
-    border-width: 1px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-    *border-right-width: 2px;
-    *border-bottom-width: 2px;
-}
-.ui-menu-item > a.ui-corner-all {
-    display: block;
-    padding: 3px 15px;
-    clear: both;
-    font-weight: normal;
-    line-height: 18px;
-    color: #555555;
-    white-space: nowrap;
-    text-decoration: none;
-}
-.ui-state-hover, .ui-state-active {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #0088cc;
-    border-radius: 0px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    background-image: none;
-}
-.download-prospectus-title {
-  font-size: 20px;
-  color: white;
+.voting-app-title {
+  float: left; }
+  .voting-app-title h1 {
+    font-size: 25px;
+    margin: 5px 0 0 0;
+    text-align: left;
+    text-transform: uppercase; }
+    .voting-app-title h1 span {
+      display: block;
+      font-size: 15px;
+      color: #9DA2A9; }
+
+@media (max-width: 767px) {
+  .voting-app-title {
+    margin: 20px 0;
+    text-align: center;
+    width: 100%; }
+    .voting-app-title h1 {
+      text-align: center;
+      margin-bottom: 20px; } }
+
+.voting-app-details {
+  float: right; }
+  .voting-app-details a.btn {
+    margin-top: 10px;
+    background: #29abe2;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: white;
+    text-transform: uppercase;
+    max-width: 100%; }
+
+@media (max-width: 767px) {
+  .voting-app-details {
+    display: none; } }
+
+.voting-sidebar {
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
+  .voting-sidebar h5 {
+    color: #9DA2A9;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin: 0; }
+  .voting-sidebar > ul {
+    margin: 5px 0 0;
+    padding: 0;
+    background: white; }
+    .voting-sidebar > ul li {
+      list-style: none;
+      border-bottom: 1px solid #D4DCE5;
+      position: relative;
+      padding: 5px; }
+      .voting-sidebar > ul li a {
+        padding: 20px 40px 20px 0;
+        display: block;
+        color: #9DA2A9; }
+        .voting-sidebar > ul li a:hover {
+          text-decoration: none; }
+      .voting-sidebar > ul li.active a {
+        color: #29abe2; }
+        .voting-sidebar > ul li.active a:after {
+          position: absolute;
+          font-family: FontAwesome;
+          top: 50%;
+          margin-top: -15px;
+          right: 10px;
+          content: "\f0da";
+          font-size: 1.5em; }
+        .voting-sidebar > ul li.active a:hover {
+          cursor: default; }
+      .voting-sidebar > ul li.completed a {
+        opacity: 0.6; }
+        .voting-sidebar > ul li.completed a:after {
+          position: absolute;
+          font-family: FontAwesome;
+          top: 50%;
+          margin-top: -15px;
+          right: 10px;
+          content: "\f00c";
+          font-size: 1.2em; }
+        .voting-sidebar > ul li.completed a:hover {
+          opacity: 1; }
+      .voting-sidebar > ul li.upcoming a:hover {
+        color: #666; }
+
+@media (min-width: 768px) {
+  .voting-sidebar {
+    -webkit-transition: none;
+    transition: none; } }
+
+.presentation-list {
+  overflow-y: scroll; }
+
+.voting-search-input {
+  border-radius: 4px;
+  background: white;
+  border: 1px solid #D4DCE5;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 5px; }
+
+.voting-dropdown {
+  width: 100%;
+  margin-bottom: 30px; }
+  .voting-dropdown .btn {
+    background: #DA422F;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 13px; }
+    .voting-dropdown .btn:hover {
+      background: #A51B1B; }
+    .voting-dropdown .btn span.caret {
+      margin-left: 30px; }
+  .voting-dropdown ul.dropdown-menu {
+    right: 0; }
+
+@media (max-width: 980px) {
+  .voting-dropdown .btn span.caret {
+    margin-left: 10px; } }
+
+.voting-content-body-wrapper {
+  border: 1px solid #D4DCE5;
+  background: #E0E8F2;
+  padding: 30px;
+  margin-bottom: 110px;
+  float: left; }
+
+@media (max-width: 767px) {
+  .voting-content-body-wrapper {
+    margin: 0 20px 120px 20px;
+    padding: 10px; } }
+
+.voting-content-body {
+  background: white;
+  min-height: 600px;
+  padding: 30px 40px;
+  border: 1px solid #D4DCE5;
+  border-radius: 4px;
+  float: left;
+  position: relative; }
+  .voting-content-body h5 {
+    color: #9DA2A9;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin: 0; }
+  .voting-content-body h3 {
+    margin-top: 5px;
+    font-size: 25px;
+    font-weight: 400; }
+
+.voting-presentation-title {
+  margin-bottom: 30px;
+  border-top: 1px solid #D4DCE5;
+  float: left;
+  padding-top: 20px;
+  width: 100%; }
+
+.voting-speaker-row {
+  margin: 10px 0 30px;
+  padding: 0; }
+  .voting-speaker-row ul {
+    margin: 0;
+    padding: 0;
+    font-size: 0; }
+    .voting-speaker-row ul li {
+      list-style: none;
+      display: inline-block;
+      font-size: 12px;
+      border-right: 1px solid #D4DCE5;
+      border-bottom: 1px solid #D4DCE5;
+      width: 33.33333%;
+      height: auto;
+      padding: 20px 10px;
+      margin: 0 -1px -1px 0;
+      border-collapse: separate; }
+      .voting-speaker-row ul li:last-child {
+        border-right: 0; }
+      .voting-speaker-row ul li:nth-child(3n-3) {
+        border-right: 0; }
+      .voting-speaker-row ul li:nth-child(-n+3) {
+        border-top: 1px solid #D4DCE5; }
+
+.speaker-wrapper {
+  text-align: left;
+  width: auto;
+  margin: auto; }
+
+img.voting-speaker-pic {
+  float: left;
+  margin-right: 10px;
+  width: 35px;
+  max-height: 35px;
+  max-width: 25%; }
+
+.voting-speaker-name {
+  font-size: 14px;
+  float: left;
   font-weight: 600;
-  margin: 40px 0 10px;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  .voting-speaker-name span {
+    font-size: 0.8em;
+    font-weight: 400;
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+
+.main-speaker-wrapper {
+  display: block;
+  border-top: 1px solid #D4DCE5;
+  border-bottom: 1px solid #D4DCE5;
+  margin: 40px 0;
+  padding: 20px 0;
+  float: left; }
+  .main-speaker-wrapper .voting-speaker-name {
+    font-size: 20px; }
+  .main-speaker-wrapper img.voting-speaker-pic {
+    max-width: 65px;
+    max-height: 65px;
+    float: right; }
+
+.main-speaker-row {
+  display: block;
+  width: 100%;
+  float: left; }
+
+.main-speaker-description {
+  display: block;
+  width: 100%;
+  float: left;
+  margin: 20px 0 40px; }
+
+ul.voting-rate-wrapper {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin: 8px 0 30px;
+  padding: 0;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  z-index: 1000;
+  font-size: 0; }
+
+li.voting-rate-single {
+  width: 25%;
+  font-size: 13px;
+  margin: 0;
+  text-align: center;
+  display: inline-block;
+  -webkit-font-smoothing: subpixel-antialiased;
+  border: 1px solid #D4DCE5;
+  border-right: 0;
+  position: relative; }
+  li.voting-rate-single:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+  li.voting-rate-single:last-child {
+    border-right: 1px solid #D4DCE5;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px; }
+  li.voting-rate-single:hover {
+    background: #29abe2; }
+  li.voting-rate-single a {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    display: inline-block;
+    color: #2A4E68;
+    position: relative;
+    padding: 10px 0;
+    width: 100%; }
+    li.voting-rate-single a:hover {
+      color: white;
+      text-decoration: none;
+      font-weight: 600; }
+
+@media (max-width: 767px) {
+  .voting-rate-single a {
+    font-size: 11px; }
+    .voting-rate-single a:hover:before {
+      display: none; } }
+
+@media (max-width: 767px) {
+  li.voting-rate-single {
+    display: block;
+    width: 100%;
+    border-bottom: 0;
+    border-right: 1px solid #D4DCE5;
+    border-radius: 0; }
+    li.voting-rate-single:first-child {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-left-radius: 0; }
+    li.voting-rate-single:last-child {
+      border-bottom: 1px solid #D4DCE5;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 0; }
+    li.voting-rate-single a {
+      padding: 20px 0; } }
+
+.voting-shortcut {
+  color: #2A4E68;
+  border-radius: 2px;
+  padding: 1px 5px;
+  border: 1px solid #D4DCE5;
+  font-weight: 400;
+  font-size: 10px;
+  width: 20px;
+  margin: 5px auto 0;
+  display: block; }
+
+@media (max-width: 767px) {
+  .voting-shortcut {
+    display: none; } }
+
+li.voting-rate-single a:hover .voting-shortcut {
+  color: white; }
+
+.voting-tip {
+  float: left;
+  font-size: 12px;
+  height: 25px;
+  padding: 5px 0;
+  color: #2A4E68;
+  width: 100%;
+  text-align: center;
+  z-index: 1001;
+  display: block;
+  margin: -20px 0 40px; }
+
+@media (max-width: 767px) {
+  .voting-tip {
+    display: none; } }
+
+.mobile-voting-details-btn {
+  display: none; }
+
+@media (max-width: 767px) {
+  .mobile-voting-details-btn {
+    display: block; } }
+
+.voting-share-wrapper {
+  border-top: 1px solid #D4DCE5;
+  float: left;
+  width: 100%;
   padding-top: 30px;
-  border-top: 1px solid #aaa;
-}
+  display: table-row; }
+  .voting-share-wrapper h5 {
+    margin-bottom: 20px; }
+
+.single-voting-share {
+  display: table-cell;
+  padding-right: 20px;
+  vertical-align: middle; }
+  .single-voting-share.fb-share {
+    margin-top: -5px; }
+
+.login-to-vote {
+  background: #edf2f7;
+  border: 1px solid #D4DCE5;
+  border-radius: 4px;
+  padding: 30px;
+  margin-top: 5px; }
+
+#SpeakerVotingLoginForm_SpeakerVotingLoginForm fieldset #Remember {
+  margin-top: 0; }
+
+#SpeakerVotingLoginForm_SpeakerVotingLoginForm fieldset #Remember input.checkbox {
+  margin-left: 0; }
+
+#SpeakerVotingLoginForm_SpeakerVotingLoginForm fieldset label {
+  padding-top: 0;
+  color: #a9a9a9;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-align: right;
+  display: inline-block; }
+
+.middleColumn {
+  width: 80%; }
+
+input#SpeakerVotingLoginForm_SpeakerVotingLoginForm_Email, input#SpeakerVotingLoginForm_SpeakerVotingLoginForm_Password {
+  border: 2px solid #D4DCE5;
+  box-shadow: none;
+  color: #2A4E68;
+  font-size: 1.1em;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 5px; }
+  input#SpeakerVotingLoginForm_SpeakerVotingLoginForm_Email:focus, input#SpeakerVotingLoginForm_SpeakerVotingLoginForm_Password:focus {
+    outline: none; }
+
+input#SpeakerVotingLoginForm_SpeakerVotingLoginForm_action_dologin {
+  background: #30739C;
+  color: white;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  padding: 10px 30px; }
+
+p#ForgotPassword {
+  margin-top: 5px;
+  font-size: 0.9em; }
+
+/*End Voting For Presentations*/

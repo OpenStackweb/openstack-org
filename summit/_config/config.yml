@@ -1,40 +1,7 @@
 ---
-Name: summitapi
+Name: mysite
 After: 'framework/*','cms/*', 'mysite/*'
 ---
-Injector:
-  SummitAddOnRepository:
-    class: SapphireSummitAddOnRepository
-  SummitPackageRepository:
-    class: SapphireSummitPackageRepository
-  PackagePurchaseOrderRepository:
-    class: SapphirePackagePurchaseOrderRepository
-  SummitPackagePurchaseOrderFactory:
-    class: SapphireSummitPackagePurchaseOrderFactory
-  SummitPackagePurchaseOrderManager:
-    constructor:
-      0: '%$PackagePurchaseOrderRepository'
-      1: '%$SummitPackageRepository'
-      2: '%$SummitPackagePurchaseOrderFactory'
-      3: '%$TransactionManager'
-  SummitsApi:
-    constructor:
-      0: '%$SummitPackageRepository'
-      1: '%$SummitAddOnRepository'
-      2: '%$SummitPackagePurchaseOrderManager'
-
-SummitSponsorPage_Controller:
-  dependencies:
-    PackagePurchaseOrderManager: '%$SummitPackagePurchaseOrderManager'
-
-SangriaPageSummitSponsorshipPurchaseOrderExtension:
-  dependencies:
-    PackagesRepository: "%$PackagePurchaseOrderRepository"
-
-SangriaPage_Controller:
-  extensions:
-    - SangriaPageSummitSponsorshipPurchaseOrderExtension
-
 Member:
   extensions:
     - PresentationMemberExtension
