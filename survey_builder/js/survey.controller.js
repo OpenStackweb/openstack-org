@@ -57,10 +57,6 @@ jQuery(document).ready(function($) {
 
     $.validator.addMethod("ranking_required", function (value, element, container_id) {
         var sorted  = $('.selected-rank','#'+container_id);
-        var count   = sorted.length;
-        for(var i = 0; i < count; i++){
-            var element = $(sorted[i]);
-        }
-        return count > 0;
+        return sorted.length > 0;
     });
 });
