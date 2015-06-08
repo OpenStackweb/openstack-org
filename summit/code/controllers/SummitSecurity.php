@@ -71,7 +71,7 @@ class SummitSecurity extends Controller {
      * @return SS_HTTPResponse
      */
     public function index() {
-        return $this->redirect('login');
+        return $this->redirect($this->Link('login'));
     }
 
     /**
@@ -246,7 +246,13 @@ class SummitSecurity extends Controller {
      * @return  MemberLoginForm
      */
     public function LoginForm() {
-        $form = MemberAuthenticator::get_login_form($this);
+
+        $back_url = $this->request->getVar('BackURL');
+        if(empty($back_url))
+            $back_url = $this->join_links(Director::baseURL(), $this->Link());
+
+        $form =  OpenStackIdFormsFactory::buildLoginForm($this, $back_url);
+
         $form->setActions(FieldList::create(
             new FormAction('dologin', _t('Member.BUTTONLOGIN', "Log in")),
             new LiteralField(
@@ -255,7 +261,6 @@ class SummitSecurity extends Controller {
                 . _t('Member.BUTTONLOSTPASSWORD', "I've lost my password") . '</a></p>'
             )
         ));
-
         return $form;
     }
 

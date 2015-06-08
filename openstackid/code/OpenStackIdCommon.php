@@ -42,10 +42,6 @@ final class OpenStackIdCommon {
 
     public static function getRedirectBackUrl(){
         $url = null;
-
-        if ($url = Session::get("BackURL"))
-            return $url;
-
         // Don't cache the redirect back ever
         HTTP::set_cache_age(0);
         // In edge-cases, this will be called outside of a handleRequest() context; in that case,

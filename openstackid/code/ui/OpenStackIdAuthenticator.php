@@ -48,7 +48,7 @@ class OpenStackIdAuthenticator extends Controller
             list($timestamp, $salt) = Auth_OpenID_splitNonce($nonce);
             $claimed_id  = $message->getArg(Auth_OpenID_OPENID2_NS,'claimed_id');
 
-            error_log(sprintf('OpenStackIdAuthenticator : id %s - salt %s - timestamp %s',$claimed_id,$salt,$timestamp));
+            error_log(sprintf('OpenStackIdAuthenticator : id %s - salt %s - timestamp %s',$claimed_id, $salt, $timestamp));
 
 
             // Complete the authentication process using the server's response.
