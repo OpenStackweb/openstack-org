@@ -1,0 +1,8 @@
+name: BootstrapFormOverride
+After:
+  - 'bootstrap-forms/*'
+---
+BootstrapForm:
+  bootstrap_included: true
+  jquery_included: true
+  bootstrap_form_included: true
