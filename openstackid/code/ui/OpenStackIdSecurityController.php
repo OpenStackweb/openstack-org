@@ -65,9 +65,7 @@ class OpenStackIdSecurityController extends Security
             if (!Director::is_https()) {
                 OpenStackIdCommon::redirectToSSL($_SERVER['REQUEST_URI']);
             }
-            if ($this->getRequest()->getVar('BackURL')) {
-                Session::set("BackURL", $this->getRequest()->getVar('BackURL'));
-            }
+
             // Begin the OpenID authentication process.
             $auth_request = $this->consumer->begin(IDP_OPENSTACKID_URL);
 
