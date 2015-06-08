@@ -1159,5 +1159,15 @@ a.blue-btn {
     /*font-weight: 600;*/ }
   .federated-benefits p {
     font-size: 0.9em; }
+img.production-funnel {
+  max-height: 380px;
+  margin-top: -40px;
+}
+@media (max-width: 1000px) {
+  img.production-funnel {
+    max-height: 380px;
+    margin-top: 20px;
+  }
+}
 
 /*End Digital Workflow Page*/

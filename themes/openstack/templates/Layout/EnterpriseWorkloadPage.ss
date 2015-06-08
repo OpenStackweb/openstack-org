@@ -56,14 +56,17 @@
 
     <div class="content-section-a">
         <div class="container">
-            <div class="row story-steps center">
-                <div class="col-sm-8 col-sm-push-2">
+            <div class="row story-steps">
+                <div class="col-sm-6">
                     <p> 
                         In today's software-defined economy, supply chains develop digital assets and applications that involve not only an enterprise's employees but also a mix of vendors, contractors and even clients.
                     </p>
                     <p>
                         DigitalFilm Tree, a leading post-production company for TV and film, illustrates innovation at work by moving raw footage through a workflow involving stakeholders worldwide. Producers, directors, editors, and video effects companies examine and process footage on mobile devices the same day it was shot - with extremely tight turnarounds and can’t-miss deadlines. It’s a compute and storage intensive mission-critical workflow powered by OpenStack using a careful orchestration of multiple public and private clouds.
                     </p>
+                </div>
+                <div class="col-sm-6">
+                    <img class="production-funnel" src="/themes/openstack/images/enterprise/digital-workflow/production-funnel.svg" onerror="/themes/openstack/images/enterprise/digital-workflow/production-funnel.jpg" alt="Digital FilmTree OpenStack workflow"/>
                 </div>
             </div>
         </div>
