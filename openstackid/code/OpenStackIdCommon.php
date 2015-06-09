@@ -26,7 +26,7 @@ final class OpenStackIdCommon {
         $trust_root    = self::getTrustRoot();
         $return_to_url = $trust_root . '/OpenStackIdAuthenticator?url=/OpenStackIdAuthenticator';
         if(Controller::curr()->getRequest()->getVar('BackURL')){
-            $back_url = Controller::curr()->join_links(Director::baseURL(), Controller::curr()->getRequest()->getVar('BackURL'));
+            $back_url = Controller::curr()->join_links('/', Controller::curr()->getRequest()->getVar('BackURL'));
             $return_to_url .= '&BackURL='.urlencode($back_url);
         }
         return $return_to_url;
