@@ -90,6 +90,7 @@ class PresentationPage_Controller extends SummitPage_Controller
     public function handleManage(SS_HTTPRequest $r) {        
         if($r->param('PresentationID') === 'new') {
             $presentation = Presentation::create();
+            $presentation->CreatorID = Member::currentUserID();
             $presentation->write();
 
             return $this->redirect($presentation->EditLink());
