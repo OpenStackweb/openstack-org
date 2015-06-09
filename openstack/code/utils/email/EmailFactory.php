@@ -44,12 +44,31 @@ final class EmailFactory {
 	 * @param null $bounceHandlerURL
 	 * @param null $cc
 	 * @param null $bcc
-	 * @return DevelopmentEmail|Email
+	 * @return Email
 	 */
 	public function buildEmail($from = null, $to = null, $subject = null, $body = null, $bounceHandlerURL = null, $cc = null, $bcc = null){
 		$env = 'dev';
 		if(defined('SS_ENVIRONMENT_TYPE'))
 			$env = SS_ENVIRONMENT_TYPE;
-		return $env == 'dev'? new DevelopmentEmail($from, $to, $subject, $body, $bounceHandlerURL, $cc, $bcc) : new Email($from, $to, $subject, $body, $bounceHandlerURL, $cc, $bcc);
+
+        $email = Email::create();
+        if($env == 'dev'){
+            $to = defined('DEV_EMAIL_TO')? DEV_EMAIL_TO : Config::inst()->get('Email', 'admin_email');
+        }
+
+        if(!is_null($from))
+            $email->setFrom($from);
+        if(!is_null($to))
+            $email->setTo($to);
+        if(!is_null($subject))
+            $email->setSubject($subject);
+        if(!is_null($body))
+            $email->setBody($body);
+        if(!is_null($cc))
+            $email->setCc($cc);
+        if(!is_null($bcc))
+            $email->setBcc($bcc);
+
+		return $email;
 	}
 } 
