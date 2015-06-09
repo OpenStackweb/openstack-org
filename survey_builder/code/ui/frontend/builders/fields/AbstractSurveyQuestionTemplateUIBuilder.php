@@ -67,7 +67,7 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
             $dynamic_strategy = new JSRulesStrategy;
 
             $static_strategy->apply($current_step, $question, $static_rules, $field);
-            $dynamic_strategy->apply($current_step, $question,$static_rules, $field);
+            $dynamic_strategy->apply($current_step, $question, $js_rules, $field);
 
         }
     }
