@@ -160,6 +160,10 @@ final class SurveyManager implements ISurveyManager {
                 foreach ($current_step->template()->getQuestions() as $q) {
                     if (isset($data[$q->name()])) {
                         // its has an answer set
+                        if($q->name() === SurveyOrganizationQuestionTemplate::FieldName){
+                            //publish event
+                            PublisherSubscriberManager::getInstance()->publish('survey_organization_selected', array( $current_survey->createdBy(), $data[$q->name()]));
+                        }
                         $current_step->addAnswer($survey_builder->buildAnswer($q, $data[$q->name()]));
                     }
                 }

@@ -18,7 +18,6 @@ class SurveySingleValueTemplateQuestion
 
     static $db = array(
         'InitialValue' => 'Text',
-
     );
 
     private static $defaults = array(

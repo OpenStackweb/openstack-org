@@ -226,10 +226,14 @@ class SurveyQuestionTemplate
         $steps_query = new SQLQuery();
         $steps_query->setSelect("ID");
         $steps_query->setFrom("SurveyStepTemplate");
+
+        $high_order        = $this->Step()->order();
         $current_survey_id = $this->Step()->SurveyTemplateID;
-        $steps_query->setWhere("SurveyTemplateID = {$current_survey_id}");
+
+        $steps_query->setWhere("SurveyTemplateID = {$current_survey_id} AND `Order` < {$high_order} ");
+        $steps_query->setOrderBy('`Order`','ASC');
         $current_step_ids = $steps_query->execute()->keyedColumn();
-        // todo: check that question belongs to former steps and that we dont use this question either
+
         return SurveyQuestionTemplate::get()->filter(array ('StepID'=> $current_step_ids ) );
     }
 
