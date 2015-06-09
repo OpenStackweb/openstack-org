@@ -203,8 +203,6 @@ class RegistrationPage_Controller extends Page_Controller
             $Member->convert2SiteUser();
         }
 
-        $Member->login();
-
         //Find or create the 'user' group
         if (!$userGroup = Group::get()->filter('Code', 'users')->first()) {
             $userGroup = new Group();
@@ -248,7 +246,7 @@ class RegistrationPage_Controller extends Page_Controller
                 $registration_email->send();
             }
             //Redirect to profile page with success message
-            return $this->redirect($ProfilePage->Link('?success=1'));
+            return OpenStackIdCommon::loginMember($member, $ProfilePage->Link('?success=1'));
         }
     }
 

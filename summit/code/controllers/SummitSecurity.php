@@ -166,7 +166,7 @@ class SummitSecurity extends Controller {
     /**
      * Creates the registration form
      *
-     * @return  BoostrapForm
+     * @return  BootstrapForm
      */
     public function RegistrationForm() {
         $url = Controller::curr()->getRequest()->requestVar('BackURL');
@@ -175,6 +175,8 @@ class SummitSecurity extends Controller {
             $this,
             'RegistrationForm',
             FieldList::create(
+                TextField::create('FirstName','Your First Name'),
+                TextField::create('Surname','Your Last Name'),
                 EmailField::create('Email','Your email address'),
                 PasswordField::create('Password','Password'),
                 PasswordField::create('Password_confirm','Confirm your password'),
@@ -183,7 +185,7 @@ class SummitSecurity extends Controller {
             FieldList::create(
                 FormAction::create('doRegister','Register now')
             ),
-            RequiredFields::create('Email','Password','Password_confirm')
+            RequiredFields::create('FirstName','Surname','Email','Password','Password_confirm')
         );
 
         $data = Session::get("FormInfo.{$form->getName()}.data");
@@ -214,24 +216,27 @@ class SummitSecurity extends Controller {
         }
 
         $member = Member::create(array(
+            'FirstName' => $data['FirstName'],
+            'Surname' => $data['Surname'],
             'Email' => $data['Email'],
             'Password' => $data['Password']
         ));
         $member->write();
         $member->addToGroupByCode('speakers');
         $member->sendWelcomeEmail();
-        $member->login();
 
         Session::clear("FormInfo.{$form->getName()}.data");
 
         if($data['BackURL']) {
             $redirect = HTTP::setGetVar('welcome', 1, $data['BackURL']);
-            return $this->redirect($redirect);
+            return OpenStackIdCommon::loginMember($member, $redirect);
         }
 
         $form->sessionMessage('Awesome! You should receive an email shortly.','good');
-        return $this->redirectBack();
-    }    
+        return OpenStackIdCommon::loginMember($member, $this->redirectBackUrl());
+    }
+
+
 
     /**
      * Factory method for the lost password form
@@ -289,6 +294,37 @@ class SummitSecurity extends Controller {
         return ModelAsController::controller_for(
             SummitOverviewPage::get()->first()
         )->customise($data);
+    }
+
+
+    public function redirectBackUrl() {
+        // Don't cache the redirect back ever
+        HTTP::set_cache_age(0);
+
+        $url = null;
+
+        // In edge-cases, this will be called outside of a handleRequest() context; in that case,
+        // redirect to the homepage - don't break into the global state at this stage because we'll
+        // be calling from a test context or something else where the global state is inappropraite
+        if($this->request) {
+            if($this->request->requestVar('BackURL')) {
+                $url = $this->request->requestVar('BackURL');
+            } else if($this->request->isAjax() && $this->request->getHeader('X-Backurl')) {
+                $url = $this->request->getHeader('X-Backurl');
+            } else if($this->request->getHeader('Referer')) {
+                $url = $this->request->getHeader('Referer');
+            }
+        }
+
+        if(!$url) $url = Director::baseURL();
+
+        // absolute redirection URLs not located on this site may cause phishing
+        if(Director::is_site_url($url)) {
+           return $url;
+        } else {
+            return false;
+        }
+
     }
 
 }
