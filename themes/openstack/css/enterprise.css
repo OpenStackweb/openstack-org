@@ -1325,3 +1325,43 @@ img.forrester-chart {
   font-size: 0.9em; }
 
 /*End Forrester Report Page*/
+
+/*Forrester promo on Enterprise home page*/
+.forrester-promo-row {
+  background: #29abe2;
+  padding: 60px 0 40px;
+}
+.forrester-promo-row a.marketplace-btn {
+  background: #31739c;
+  padding: 15px 5%;
+}
+.forrester-promo-row a.marketplace-btn:hover {
+  background: #20547D;
+}
+.forrester-promo-row a.marketplace-btn i {
+  margin-left: 10px;
+}
+.forrester-promo-row h3 {
+  font-size: 1.3em;
+  color: white;
+  text-align: right;
+  margin-top: 10px;
+}
+.forrester-promo-row p {
+  color: white;
+  border-left: 1px solid white;
+  padding-left: 40px;
+}
+@media (max-width: 767px) {
+  .forrester-promo-row h3 {
+    text-align: center;
+  }
+  .forrester-promo-row p {
+    border-left: 0;
+    text-align: center;
+  }
+  .forrester-promo-row a.marketplace-btn {
+    text-align: center;
+  }
+}
+/*End Forrester promo on Enterprise home page*/
