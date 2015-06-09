@@ -1,1 +1,1 @@
-<p>OpenStackID login attempt failed. please try it <a href="/Security/login">again</a></p>
+<p>OpenStackID login attempt failed. please try it <a href="/Security/login?BackURL={$Top.BackUrl}">again</a></p>

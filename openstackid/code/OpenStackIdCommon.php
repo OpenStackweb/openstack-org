@@ -26,7 +26,8 @@ final class OpenStackIdCommon {
         $trust_root    = self::getTrustRoot();
         $return_to_url = $trust_root . '/OpenStackIdAuthenticator?url=/OpenStackIdAuthenticator';
         if(Controller::curr()->getRequest()->getVar('BackURL')){
-            $return_to_url .= '&BackURL='.Controller::curr()->getRequest()->getVar('BackURL');
+            $back_url = Controller::curr()->join_links(Director::baseURL(), Controller::curr()->getRequest()->getVar('BackURL'));
+            $return_to_url .= '&BackURL='.urlencode($back_url);
         }
         return $return_to_url;
     }
@@ -52,13 +53,21 @@ final class OpenStackIdCommon {
                 $url = $request->requestVar('BackURL');
             } else if($request->isAjax() && $request->getHeader('X-Backurl')) {
                 $url = $request->getHeader('X-Backurl');
-            } else if($request->getHeader('Referer')) {
-                $url = $request->getHeader('Referer');
             }
         }
 
         if(!$url) $url = Director::baseURL();
         if(strpos($url,'/Security/login') !== false ) $url = Director::baseURL();
         return $url;
+    }
+
+    public static function loginMember($member, $back_url){
+        if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false){
+            $member->login();
+            return Controller::curr()->redirect($back_url);
+        }
+        else{
+            return Controller::curr()->redirect('/Security/login?BackURL='.$back_url);
+        }
     }
 }

@@ -64,6 +64,8 @@ class OpenStackIdSecurityController extends Security
 
             // Begin the OpenID authentication process.
             $auth_request = $this->consumer->begin(IDP_OPENSTACKID_URL);
+            //remove jainrain nonce
+            unset($auth_request->return_to_args['janrain_nonce']);
 
             // No auth request means we can't begin OpenID.
             if (!$auth_request) {
@@ -131,6 +133,7 @@ class OpenStackIdSecurityController extends Security
             exit();
 
         } catch (Exception $ex) {
+            SS_Log ::log($ex, SS_Log::WARN);
             Session::set("Security.Message.message", $ex->getMessage());
             Session::set("Security.Message.type", "bad");
             return $this->redirect("Security/badlogin");
@@ -192,6 +195,10 @@ SCRIPT;
      */
     public function ping() {
        return parent::ping();
+    }
+
+    public function BackUrl(){
+        return OpenStackIdCommon::getReturnTo();
     }
 
 }
