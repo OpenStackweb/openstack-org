@@ -118,9 +118,8 @@ final class FoundationMember
     public function isCommunityMember()
     {
         $group = $this->owner->inGroup(IFoundationMember::CommunityMemberGroupSlug);
-        $is_speaker = DataObject::get_one('Speaker', 'MemberID = ' . $this->owner->ID);
         $is_foundation_member = $this->isFoundationMember();
-        return $group || $is_speaker || $is_foundation_member;
+        return $group || $this->isSpeaker() || $is_foundation_member;
     }
 
     /**
@@ -128,7 +127,7 @@ final class FoundationMember
      */
     public function isSpeaker()
     {
-        $is_speaker = DataObject::get_one('Speaker', 'MemberID = ' . $this->owner->ID);
+        $is_speaker = $this->owner->inGroup('speakers');
         return $is_speaker;
     }
 
