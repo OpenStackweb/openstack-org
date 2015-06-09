@@ -86,7 +86,7 @@
                     </p>
                 </div>
                 <div class="col-sm-4">
-                    <a href="/enterprise/forrester/" class="marketplace-btn">Read The Forrester Report <i class="fa fa-chevron-right"></i></a>
+                    <a href="/enterprise/forrester-report/" class="marketplace-btn">Read The Forrester Report <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
