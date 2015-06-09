@@ -46,6 +46,16 @@ class SummitSecurity extends Controller {
 
     }
 
+    public function CurrentCallForSpeakersPageUrl(){
+        $current_summit = Summit::get_active();
+        if(!$current_summit) return null;
+        $current_summit_page = SummitOverviewPage::get()->filter('SummitID', $current_summit->ID)->first();
+        if(!$current_summit_page) return null;
+        $presentation_page = PresentationPage::get()->filter('ParentID',$current_summit_page->ID)->first();
+        if(!$presentation_page) return null;
+        return $presentation_page->Link();
+    }
+
     /**
      * Generate a link to this controller
      * @param string $action
@@ -71,6 +81,10 @@ class SummitSecurity extends Controller {
      * @return SS_HTTPResponse
      */
     public function index() {
+        $back_url = $this->CurrentCallForSpeakersPageUrl();
+        if(is_null($back_url))  return $this->httpError(404, "Summit Speakers Not Found!");
+        if(Member::currentUser())
+            return $this->redirect($back_url);
         return $this->redirect($this->Link('login'));
     }
 
@@ -186,6 +200,7 @@ class SummitSecurity extends Controller {
      * @return SSViewer
      */
     public function doRegister($data, $form) {
+
         Session::set("FormInfo.{$form->getName()}.data", $data);
         $member = Member::get()->filter('Email', $data['Email'])->first();
         if($member) {
@@ -247,9 +262,8 @@ class SummitSecurity extends Controller {
      */
     public function LoginForm() {
 
-        $back_url = $this->request->getVar('BackURL');
-        if(empty($back_url))
-            $back_url = $this->join_links(Director::baseURL(), $this->Link());
+        $back_url = $this->CurrentCallForSpeakersPageUrl();
+        if(is_null($back_url))  return $this->httpError(404, "Summit Speakers Not Found!");
 
         $form =  OpenStackIdFormsFactory::buildLoginForm($this, $back_url);
 
