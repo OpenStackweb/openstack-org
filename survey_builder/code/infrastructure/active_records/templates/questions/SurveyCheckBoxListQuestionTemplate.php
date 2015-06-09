@@ -19,4 +19,19 @@ class SurveyCheckBoxListQuestionTemplate
     public function Type(){
         return 'CheckBoxList';
     }
+
+    public function getCMSFields() {
+
+        $fields = parent::getCMSFields();
+
+        if($this->ID > 0 ){
+            //validation rules
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+            $gridField = new GridField('Values', 'Values', $this->Values(), $config);
+            $fields->add($gridField);
+        }
+
+        return $fields;
+    }
 }

@@ -230,7 +230,7 @@ class SurveyQuestionTemplate
         $high_order        = $this->Step()->order();
         $current_survey_id = $this->Step()->SurveyTemplateID;
 
-        $steps_query->setWhere("SurveyTemplateID = {$current_survey_id} AND `Order` < {$high_order} ");
+        $steps_query->setWhere("SurveyTemplateID = {$current_survey_id} AND `Order` <= {$high_order} ");
         $steps_query->setOrderBy('`Order`','ASC');
         $current_step_ids = $steps_query->execute()->keyedColumn();
 
