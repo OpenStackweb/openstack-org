@@ -60,7 +60,8 @@ jQuery(document).ready(function($) {
         return sorted.length > 0;
     });
 
-    $('.action').click(function(evt){
-       $(this).prop('disabled', true);
+    $('.survey_step_form').submit(function (evt){
+        if($(this).valid())
+            $('.action').prop('disabled', true);
     });
 });
