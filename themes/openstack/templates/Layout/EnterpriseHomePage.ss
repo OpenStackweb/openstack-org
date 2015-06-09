@@ -71,6 +71,26 @@
             </div>
         </div>
     </div>
+    <!-- Forrester promo -->
+    <div class="content-section-b forrester-promo-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3>
+                        OPENSTACK IS READY<br/>ARE YOU?
+                    </h3>
+                </div>
+                <div class="col-sm-5">
+                    <p>
+                    “Notable Fortune 100 enterprises like BMW, Disney, and Walmart have irrefutably proven that OpenStack is viable for production environments.“
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <a href="/enterprise/forrester/" class="marketplace-btn">Read The Forrester Report <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="featured-use-case-wrapper light-blue">
        <div class="container">
             <div class="row section-title-center">
