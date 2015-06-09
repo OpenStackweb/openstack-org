@@ -198,7 +198,7 @@ SCRIPT;
     }
 
     public function BackUrl(){
-        return OpenStackIdCommon::getReturnTo();
+        return OpenStackIdCommon::getRedirectBackUrl();
     }
 
 }
