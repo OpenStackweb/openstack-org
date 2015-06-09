@@ -29,18 +29,9 @@ class SurveyMemberFirstNameQuestionTemplate extends SurveyTextBoxQuestionTemplat
         return '';
     }
 
-
     public function getCMSFields() {
-
         $fields = parent::getCMSFields();
-
-        if($this->ID > 0 ){
-            //validation rules
-            $config = GridFieldConfig_RelationEditor::create();
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $gridField = new GridField('ValidationRules', 'ValidationRules', $this->ValidationRules(), $config);
-            $fields->add($gridField);
-        }
+        $fields->removeByName('InitialValue');
         return $fields;
     }
 }
