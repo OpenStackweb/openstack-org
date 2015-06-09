@@ -59,4 +59,8 @@ jQuery(document).ready(function($) {
         var sorted  = $('.selected-rank','#'+container_id);
         return sorted.length > 0;
     });
+
+    $('.action').click(function(evt){
+       $(this).prop('disabled', true);
+    });
 });

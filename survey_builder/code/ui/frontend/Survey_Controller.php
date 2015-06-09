@@ -37,6 +37,7 @@ class Survey_Controller extends Page_Controller {
         'RegisterForm',
         'MemberStart',
         'StartSurvey',
+        'NextStep',
     );
 
     static $url_handlers = array(

@@ -44,3 +44,5 @@ Injector:
       class: SurveyDropDownQuestionTemplateUIBuilder
   RankingUIBuilder:
         class: SurveyRankingQuestionTemplateUIBuilder
+  OrganizationUIBuilder:
+        class: SurveyOrganizationQuestionTemplateUIBuilder

@@ -75,6 +75,7 @@ class SurveyRegularStepTemplate
                     'SurveyCheckBoxListQuestionTemplate' => 'CheckBoxList',
                     'SurveyDropDownQuestionTemplate'     => 'ComboBox',
                     'SurveyRankingQuestionTemplate'      => 'Ranking',
+                    'SurveyOrganizationQuestionTemplate' => 'Organization',
                 )
             );
             $config->addComponent($multi_class_selector);

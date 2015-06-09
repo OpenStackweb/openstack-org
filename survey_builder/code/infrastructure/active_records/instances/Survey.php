@@ -93,7 +93,7 @@ class Survey
      */
     public function createdBy()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'CreatedBy')->getTarget();
     }
 
     /**
