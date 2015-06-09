@@ -192,7 +192,7 @@
 
                 </ul>
             <% else %>
-                <a class="sign-in-btn" href="/Security/login/?BackURL=%2Fprofile%2F">Sign In</a>
+                <a class="sign-in-btn" href="/Security/login/?BackURL={$Top.Link}">Sign In</a>
             <% end_if %>
             </li>
         </ul>
