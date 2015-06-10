@@ -9,6 +9,46 @@
 class SummitSecurity extends Controller {
 
     /**
+     * @var ISpeakerRegistrationRequestRepository
+     */
+    private $speaker_registration_request_repository;
+
+    /**
+     * @return ISpeakerRegistrationRequestRepository
+     */
+    public function getSpeakerRegistrationRequestRepository(){
+        return $this->speaker_registration_request_repository;
+    }
+
+    /**
+     * @param ISpeakerRegistrationRequestRepository $speaker_registration_request_repository
+     * @return void
+     */
+    public function setSpeakerRegistrationRequestRepository(ISpeakerRegistrationRequestRepository $speaker_registration_request_repository){
+        $this->speaker_registration_request_repository = $speaker_registration_request_repository;;
+    }
+
+    /**
+     * @var ISpeakerRegistrationRequestManager
+     */
+    private $speaker_registration_request_manager;
+
+    /**
+     * @return ISpeakerRegistrationRequestManager
+     */
+    public function getSpeakerRegistrationRequestManager(){
+        return $this->speaker_registration_request_manager;
+    }
+
+    /**
+     * @param ISpeakerRegistrationRequestManager $speaker_registration_request_manager
+     * @return void
+     */
+    public function setSpeakerRegistrationRequestManager(ISpeakerRegistrationRequestManager $speaker_registration_request_manager){
+        $this->speaker_registration_request_manager = $speaker_registration_request_manager;;
+    }
+
+    /**
      * The URL segment of this controller
      * @var string
      */
@@ -25,7 +65,8 @@ class SummitSecurity extends Controller {
         'LostPasswordForm',
         'RegistrationForm',
         'LoginForm',
-        'doRegister'        
+        'doRegister',
+        'registration',
     );
 
     /**
@@ -43,8 +84,8 @@ class SummitSecurity extends Controller {
                 'login'
             )
         ), 403);
-
     }
+
 
     public function CurrentCallForSpeakersPageUrl(){
         $current_summit = Summit::get_active();
@@ -169,19 +210,34 @@ class SummitSecurity extends Controller {
      * @return  BootstrapForm
      */
     public function RegistrationForm() {
-        $url = Controller::curr()->getRequest()->requestVar('BackURL');
+        $url                        = Controller::curr()->getRequest()->requestVar('BackURL');
+        $speaker_registration_token = Controller::curr()->getRequest()->requestVar(SpeakerRegistrationRequest::ConfirmationTokenParamName);
+
+        $fields =   FieldList::create(
+            $first_name = TextField::create('FirstName','Your First Name'),
+            $last_name  = TextField::create('Surname','Your Last Name'),
+            $email      = EmailField::create('Email','Your email address'),
+            PasswordField::create('Password','Password'),
+            PasswordField::create('Password_confirm','Confirm your password'),
+            HiddenField::create('BackURL','', $url)
+        );
+
+        if(!empty($speaker_registration_token)){
+            $request = $this->speaker_registration_request_repository->getByConfirmationToken($speaker_registration_token);
+
+            if(is_null($request) || $request->alreadyConfirmed() )
+                return $this->httpError(404, 'speaker registration request not found!');
+            // auto-populate fields
+            $fields->add(HiddenField::create(SpeakerRegistrationRequest::ConfirmationTokenParamName,'', $speaker_registration_token));
+            $first_name->setValue($request->proposedSpeakerFirstName());
+            $last_name->setValue($request->proposedSpeakerLastName());
+            $email->setValue($request->proposedSpeakerEmail());
+        }
 
         $form = BootstrapForm::create(
             $this,
             'RegistrationForm',
-            FieldList::create(
-                TextField::create('FirstName','Your First Name'),
-                TextField::create('Surname','Your Last Name'),
-                EmailField::create('Email','Your email address'),
-                PasswordField::create('Password','Password'),
-                PasswordField::create('Password_confirm','Confirm your password'),
-                HiddenField::create('BackURL','', $url)
-            ),
+            $fields,
             FieldList::create(
                 FormAction::create('doRegister','Register now')
             ),
@@ -202,38 +258,56 @@ class SummitSecurity extends Controller {
      * @return SSViewer
      */
     public function doRegister($data, $form) {
+        try {
 
-        Session::set("FormInfo.{$form->getName()}.data", $data);
-        $member = Member::get()->filter('Email', $data['Email'])->first();
-        if($member) {
-            $form->sessionMessage('Bah! We\'ve already got a user with that email.','bad');
-            return $this->redirectBack();
+            Session::set("FormInfo.{$form->getName()}.data", $data);
+
+            $member = Member::get()->filter('Email', $data['Email'])->first();
+
+            if ($member) {
+                $form->sessionMessage('Bah! We\'ve already got a user with that email.', 'bad');
+                return $this->redirectBack();
+            }
+
+            if ($data['Password'] != $data['Password_confirm']) {
+                $form->sessionMessage('Passwords do not match.', 'bad');
+                return $this->redirectBack();
+            }
+
+            $member = Member::create(array(
+                'FirstName' => $data['FirstName'],
+                'Surname' => $data['Surname'],
+                'Email' => $data['Email'],
+                'Password' => $data['Password']
+            ));
+
+            $member->write();
+
+            if (!empty($data[SpeakerRegistrationRequest::ConfirmationTokenParamName])) {
+
+                $speaker_registration_token = $data[SpeakerRegistrationRequest::ConfirmationTokenParamName];
+
+                $this->speaker_registration_request_manager->confirm($speaker_registration_token, $member);
+
+            }
+
+            $member->addToGroupByCode('speakers');
+            $member->sendWelcomeEmail();
+
+            Session::clear("FormInfo.{$form->getName()}.data");
+
+            if ($data['BackURL']) {
+                $redirect = HTTP::setGetVar('welcome', 1, $data['BackURL']);
+                return OpenStackIdCommon::loginMember($member, $redirect);
+            }
+
+            $form->sessionMessage('Awesome! You should receive an email shortly.', 'good');
+            return OpenStackIdCommon::loginMember($member, $this->redirectBackUrl());
         }
-
-        if($data['Password'] != $data['Password_confirm']) {
-            $form->sessionMessage('Passwords do not match.','bad');
-            return $this->redirectBack();
+        catch(Exception $ex){
+            SS_Log::log($ex, SS_Log::WARN);
+            return $this->httpError(404, $ex->getMessage());
         }
-
-        $member = Member::create(array(
-            'FirstName' => $data['FirstName'],
-            'Surname' => $data['Surname'],
-            'Email' => $data['Email'],
-            'Password' => $data['Password']
-        ));
-        $member->write();
-        $member->addToGroupByCode('speakers');
-        $member->sendWelcomeEmail();
-
-        Session::clear("FormInfo.{$form->getName()}.data");
-
-        if($data['BackURL']) {
-            $redirect = HTTP::setGetVar('welcome', 1, $data['BackURL']);
-            return OpenStackIdCommon::loginMember($member, $redirect);
-        }
-
-        $form->sessionMessage('Awesome! You should receive an email shortly.','good');
-        return OpenStackIdCommon::loginMember($member, $this->redirectBackUrl());
     }
 
 
@@ -325,6 +399,25 @@ class SummitSecurity extends Controller {
             return false;
         }
 
+    }
+
+    public function registration(){
+        $speaker_registration_token = Controller::curr()->getRequest()->requestVar(SpeakerRegistrationRequest::ConfirmationTokenParamName);
+
+        if(!empty($speaker_registration_token)){
+            $request = $this->speaker_registration_request_repository->getByConfirmationToken($speaker_registration_token);
+
+            if(is_null($request) || $request->alreadyConfirmed() )
+                return $this->httpError(404, 'speaker registration request not found!');
+        }
+
+        return $this->customiseSummitPage(array())->renderWith(
+            array(
+                'SummitSecurity_registration',
+                'SummitPage'
+            ),
+            $this
+        );
     }
 
 }
