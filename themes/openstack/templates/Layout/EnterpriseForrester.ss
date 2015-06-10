@@ -111,7 +111,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>Related Articles From SuperUser</h3>
+                    <h3>Related Articles From Superuser</h3>
                 </div>
             </div>
             <div class="row">
