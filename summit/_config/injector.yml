@@ -1,6 +1,15 @@
 ---
 Name: 'presentations-injection'
 ---
+PresentationPage_Controller:
+  dependencies:
+    SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
+    SpeakerRegistrationRequestManager: '%$SpeakerRegistrationRequestManager'
+SummitSecurity:
+  dependencies:
+    SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
+    SpeakerRegistrationRequestManager: '%$SpeakerRegistrationRequestManager'
+
 Injector:
   SchedRestfulService:
     class: RestfulService
@@ -11,3 +20,15 @@ Injector:
     constructor:
       0: %$SchedRestfulService
       1: 41caf3c5cafc24e286ade21926eaeb41
+  SpeakerRegistrationRequestRepository:
+    class: SapphireSpeakerRegistrationRequestRepository
+  SpeakerRegistrationRequestFactory:
+    class: SapphireSpeakerRegistrationRequestFactory
+    constructor:
+      0: %$SpeakerRegistrationRequestRepository
+  SpeakerRegistrationRequestManager:
+    class: SpeakerRegistrationRequestManager
+    constructor:
+      0: %$SpeakerRegistrationRequestRepository
+      1: %$SpeakerRegistrationRequestFactory
+      2: %$TransactionManager

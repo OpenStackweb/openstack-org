@@ -48,6 +48,45 @@ class PresentationPage_Controller extends SummitPage_Controller
         'MemberTokenAuthenticator'
     );
 
+    /**
+     * @var ISpeakerRegistrationRequestManager
+     */
+    private $speaker_registration_request_manager;
+
+    /**
+     * @return ISpeakerRegistrationRequestManager
+     */
+    public function getSpeakerRegistrationRequestManager(){
+        return $this->speaker_registration_request_manager;
+    }
+
+    /**
+     * @param ISpeakerRegistrationRequestManager $speaker_registration_request_manager
+     * @return void
+     */
+    public function setSpeakerRegistrationRequestManager(ISpeakerRegistrationRequestManager $speaker_registration_request_manager){
+        $this->speaker_registration_request_manager = $speaker_registration_request_manager;;
+    }
+
+    /**
+     * @var ISpeakerRegistrationRequestRepository
+     */
+    private $speaker_registration_request_repository;
+
+    /**
+     * @return ISpeakerRegistrationRequestRepository
+     */
+    public function getSpeakerRegistrationRequestRepository(){
+        return $this->speaker_registration_request_repository;
+    }
+
+    /**
+     * @param ISpeakerRegistrationRequestRepository $speaker_registration_request_repository
+     * @return void
+     */
+    public function setSpeakerRegistrationRequestRepository(ISpeakerRegistrationRequestRepository $speaker_registration_request_repository){
+        $this->speaker_registration_request_repository = $speaker_registration_request_repository;;
+    }
 
     /**
      * Check for auth tokens
@@ -60,9 +99,31 @@ class PresentationPage_Controller extends SummitPage_Controller
             return $this->httpError(404,'There is no active summit');
         }
 
+        /**
+         * On the existing tokenauthentication system, this is a fairly trivialmatter, and I'm not so sure it's anything to navigate right now.
+         * Thiswas implemented to provide the video upload people a simple API foradding videos. It's a very specific use c
+         * ase, and general users shouldnot be using it. If they can and they are, then that needs to bechanged.
+         */
         $result = $this->checkAuthenticationToken();
 
-        if(!$result && !Member::currentUser()) {
+        if(!$result &&!Member::currentUser()) {
+            //check if speaker registration token is present..
+            $speaker_registration_token = $this->request->getVar(SpeakerRegistrationRequest::ConfirmationTokenParamName);
+
+            if(!is_null($speaker_registration_token))
+            {
+                $request = $this->speaker_registration_request_repository->getByConfirmationToken($speaker_registration_token);
+
+                if(is_null($request) || $request->alreadyConfirmed()){
+                    return SummitSecurity::permission_failure($this);
+                }
+
+                // redirect to register member speaker
+                $url = Controller::join_links(Director::baseURL(),'summit-login','registration');
+
+                $this->redirect($url.'?BackURL='. urlencode( $this->request->getURL() ).'&'.SpeakerRegistrationRequest::ConfirmationTokenParamName.'='.$speaker_registration_token);
+            }
+
             return SummitSecurity::permission_failure($this);
         }
 
@@ -519,18 +580,15 @@ class PresentationPage_ManageRequest extends RequestHandler
         $this->presentation->write();
 
         foreach($speakers as $speaker) {
-            $m = $speaker->Member();
-            $m->setTokenExpiry(86400*30); // 30 days
-            $m->write();
-            
+
             $e = Email::create()
-                ->setTo($m->Email)
+                ->setTo($speaker->getEmail())
                 ->setUserTemplate('presentation-speaker-notification')
                 ->populateTemplate(array(
-                    'RecipientMember' => $m,
-                    'Presentation' => $this->presentation,
-                    'Speaker' => $speaker,
-                    'ReviewLink' => Director::makeRelative($speaker->ReviewLink($this->presentation->ID))
+                    'RecipientMember' => $speaker->Member(),
+                    'Presentation'    => $this->presentation,
+                    'Speaker'         => $speaker,
+                    'ReviewLink'      => Director::makeRelative($speaker->ReviewLink($this->presentation->ID))
                 ))
                 ->send();        
         }
@@ -694,6 +752,22 @@ class PresentationPage_ManageRequest extends RequestHandler
     }
 
 
+    private function getSpeaker($email){
+        $speaker = PresentationSpeaker::get()
+            ->filter(array(
+                'Member.Email' => $email,
+                'SummitID' => Summit::get_active()->ID
+            ))->first();
+        if(is_null($speaker)){
+            $speaker = PresentationSpeaker::get()
+                ->filter(array(
+                    'RegistrationRequest.Email' => $email,
+                    'RegistrationRequest.IsConfirmed' => false,
+                    'SummitID' => Summit::get_active()->ID
+                ))->first();
+        }
+        return $speaker;
+    }
     /**
      * Handles the form submission that creates a new speaker.
      * Checks for existence, and uses existing if found
@@ -711,29 +785,33 @@ class PresentationPage_ManageRequest extends RequestHandler
             return $this->redirectBack();
         }
 
-        $speaker = PresentationSpeaker::get()
-            ->filter(array(
-                'Member.Email' => $email,
-                'SummitID' => Summit::get_active()->ID
-            ))
-            ->first();
+        $speaker = $this->getSpeaker($email);
 
         if(!$speaker) {
-            if($me) {
-                $member = Member::currentUser();
-            }
-            else {
-                $member = Member::get()->filter('Email', $email)->first();
-                if(!$member) {
-                    $member = Member::create(array('Email' => $email));
-                }
-                $member->write();
-                $member->addToGroupByCode('speakers');
-            }
+
             $speaker = PresentationSpeaker::create(array(
-                'MemberID' => $member->ID,
                 'SummitID' => Summit::get_active()->ID
             ));
+
+            if($me) {
+                $member = Member::currentUser();
+                $speaker->MemberID = $member->ID;
+            }
+            else {
+                // look for the member..
+                $member = Member::get()->filter('Email', $email)->first();
+                if(!$member) {
+                    $speaker->MemberID = 0;
+                    $speaker->write();
+                    $request = $this->getParent()->getSpeakerRegistrationRequestManager()->register($speaker, $email);
+                    $speaker->RegistrationRequestID = $request->getIdentifier();
+                }
+                else {
+                    $member->addToGroupByCode('speakers');
+                    $speaker->MemberID = $member->ID;
+                    $member->write();
+                }
+            }
         }
 
         $speaker->Presentations()->add($this->presentation->ID);
@@ -764,8 +842,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         
         return $this->parent->redirect($this->Link('confirm'));
     }
-
-
 }
 
 
@@ -1069,9 +1145,9 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
      */
     public function doSaveSpeaker($data, $form) {
         $form->saveInto($this->speaker);
-        $this->speaker->write();        
-
-        if($this->speaker->Member()->getSummitState('BUREAU_SEEN') || !$this->isMe()) {
+        $this->speaker->write();
+        $member = $this->speaker->Member();
+        if( ($member->ID > 0 && $member->getSummitState('BUREAU_SEEN')) || !$this->isMe()) {
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));        
         }
 

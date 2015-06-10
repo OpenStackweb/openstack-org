@@ -125,7 +125,7 @@ class EditProfilePage_Controller extends Page_Controller
     public function EditSpeakerProfileForm()
     {
         if ($CurrentMember = Member::currentUser()) {
-            $speaker = Speaker::get()->filter('MemberID', $CurrentMember->ID)->first();;
+            $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();;
             $SpeakerProfileForm = New EditSpeakerProfileForm($this, 'EditSpeakerProfileForm', $speaker, $CurrentMember, null);
             return $SpeakerProfileForm;
         }
@@ -160,7 +160,7 @@ class EditProfilePage_Controller extends Page_Controller
                 $CurrentMember->write();
 
 
-                $speaker = Speaker::get()->filter('MemberID', $CurrentMember->ID)->first();
+                $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
 
                 if ($speaker) {
                     if ($data['ReplaceName'] == 1) {

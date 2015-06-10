@@ -24,7 +24,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
         // Fields
         $FirstNameField = new TextField('FirstName', "Speaker's First Name");
-        $LastNameField = new TextField('Surname', "Speaker's Last Name");
+        $LastNameField = new TextField('LastName', "Speaker's Last Name");
         $TitleField = new TextField('Title',"Speaker's Title");
         $BioField = new TextAreaField('Bio',"Speaker's Bio");
 
@@ -53,7 +53,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 	    $PhotoField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 
         // Opt In Field
-        $OptInField = new CheckboxField ('AviableForBureau',"I'd like to be in the speaker bureau.");
+        $OptInField = new CheckboxField ('AvailableForBureau',"I'd like to be in the speaker bureau.");
 
         $Divider = new LiteralField ('hr','<hr/>');
 
@@ -72,20 +72,20 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         if($speaker) {
 	        $this->record = $speaker;
             $FirstNameField->setValue($speaker->FirstName);
-            $LastNameField->setValue($speaker->Surname);
+            $LastNameField->setValue($speaker->LastName);
             $BioField->setValue($speaker->Bio);
             $SpeakerIDField->setValue($speaker->ID);
             $MemberIDField->setValue($speaker->MemberID);
             $TitleField->setValue($speaker->Title);
             $IRCHandleField->setValue($speaker->IRCHandle);
             $TwiiterNameField->setValue($speaker->TwitterName);
-            $OptInField->setValue($speaker->AviableForBureau);
+            $OptInField->setValue($speaker->AvailableForBureau);
             $FundedTravelField->setValue($speaker->FundedTravel);
             $ExpertiseField->setValue($speaker->Expertise);
 	        $PhotoField->setValue(null, $speaker);
         } elseif($member) {
             $FirstNameField->setValue($member->FirstName);
-            $LastNameField->setValue($member->Surname);
+            $LastNameField->setValue($member->LastName);
             $BioField->setValue($member->Bio);
             $MemberIDField->setValue($member->ID);
             $IRCHandleField->setValue($member->IRCHandle);
@@ -119,7 +119,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
         $validator = new RequiredFields(
             'FirstName',
-            'Surname',
+            'LastName',
             'Title'
         );
 
@@ -164,7 +164,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
                 $member->FirstName = $data['FirstName'];
             }
             if ($data['ReplaceSurname'] == 1) {
-                $member->LastName = $data['LastName'];
+                $member->Surname = $data['LastName'];
             }
             if ($data['ReplaceBio'] == 1) {
                 $member->Bio = $data['Bio'];

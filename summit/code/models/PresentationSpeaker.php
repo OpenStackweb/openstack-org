@@ -1,7 +1,10 @@
 <?php
 
-
+/**
+ * Class PresentationSpeaker
+ */
 class PresentationSpeaker extends DataObject
+implements IPresentationSpeaker
 {
 
     private static $db = array (
@@ -19,14 +22,19 @@ class PresentationSpeaker extends DataObject
 
 
     private static $has_one = array (
-        'Photo' => 'Image',        
-        'Member' => 'Member',
-        'Summit' => 'Summit'
+        'Photo'               => 'Image',
+        'Member'              => 'Member',
+        'Summit'              => 'Summit',
+        'RegistrationRequest' => 'SpeakerRegistrationRequest',
     );
 
 
     private static $indexes = array (
         //'EmailAddress' => true
+    );
+
+    private static $defaults = array(
+        'MemberID' => 0,
     );
 
 
@@ -91,7 +99,11 @@ class PresentationSpeaker extends DataObject
      * @param Int $presentationID
      */
     public function ReviewLink($presentationID) {
-        return $this->linkTo($presentationID, 'review?token='.$this->Member()->AuthenticationToken);
+        $action = 'review';
+        if($this->isPendingOfRegistration()){
+            $action .= '?'.SpeakerRegistrationRequest::ConfirmationTokenParamName.'='.$this->RegistrationRequest()->getToken();
+        }
+        return $this->linkTo($presentationID, $action);
     }
 
 
@@ -129,5 +141,39 @@ class PresentationSpeaker extends DataObject
         return $this->Presentations()->exclude(array(
             'CreatorID' => $this->MemberID
         ));        
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPendingOfRegistration()
+    {
+        return $this->MemberID == 0 ;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+       return $this->MemberID > 0 ? $this->Member()->Email : $this->RegistrationRequest()->Email;
+    }
+
+    /**
+     * @param ICommunityMember $member
+     * @return void
+     */
+    public function associateMember(ICommunityMember $member)
+    {
+        $this->MemberID              = $member->getIdentifier();
+        //$this->RegistrationRequestID = 0;
     }
 }
