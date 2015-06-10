@@ -28,7 +28,7 @@
 								<td class="item-name"><i class="fa fa-user"></i><a href="$EditLink($Top.Presentation.ID)">$Name</a></td>
 									<td class="action">
 										<% if $Top.Presentation.CanRemoveSpeakers %>
-											<a href="$DeleteLink($Top.Presentation.ID)">Remove</a>
+											<a class='delete-speaker' href="$DeleteLink($Top.Presentation.ID)">Remove</a>
 										<% end_if %>
 									</td>
 							</tr>

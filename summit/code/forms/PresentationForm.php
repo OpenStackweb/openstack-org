@@ -38,6 +38,7 @@ class PresentationForm extends BootstrapForm
             ->tinyMCEEditor('ShortDescription','Short Description (200 Word Max)')
                 ->configure()
                     ->setRows(7)
+                    ->setWordCount(200)
                 ->end()
             ->literal('HR','<hr/>')            
             ->optionset(
@@ -54,6 +55,7 @@ class PresentationForm extends BootstrapForm
             ->literal('TagHelp','<p>You can optionally add tags help attendees find presentations that interest them. Examples: <i>nova, ubuntu, ldap.</i></p>')
             ->bootstrapTag('Tags','Presentation Tags (Optional)')
                 ->configure()
+                    ->setLabelField('Tag')
                     ->setSource(Tag::get())
                     ->setPrefetch(
                         Tag::get()

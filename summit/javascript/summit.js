@@ -64,6 +64,14 @@ $(function() {
 				);
 		},500);
 	}
+
+    $('.delete-speaker').click(function(event){
+        if(!confirm('are you sure?')){
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    });
 });
 
 function debounce(func, wait, immediate) {

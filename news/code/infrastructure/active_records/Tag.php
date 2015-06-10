@@ -23,7 +23,8 @@ final class Tag extends DataObject implements ITag {
 	);
 
     static $belongs_many_many = array(
-        'News' => 'News'
+        'News'          => 'News',
+        'Presentations' => 'Presentation',
     );
 
 	/**
