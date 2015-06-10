@@ -24,10 +24,16 @@ class SpeakerForm extends BootstrapForm
             ->text('Title', "Speaker's title")
             ->tinyMCEEditor('Bio',"Speaker's Bio")
                 ->configure()
-                    ->setRows(20)
+                    ->setRows(25)
                 ->end()
             ->text('IRCHandle','IRC Handle (optional)')
+             ->configure()
+                ->setMaxLength(25)
+            ->end()
             ->text('TwitterHandle','Twitter Handle (optional)')
+            ->configure()
+                ->setMaxLength(50)
+            ->end()
             ->fileAttachment('Photo','Upload a speaker photo')
                 ->configure()
                     ->setPermission('delete', false)
@@ -37,8 +43,7 @@ class SpeakerForm extends BootstrapForm
                     // ->setThumbnailHeight(100)
                     ->setMaxFilesize(1)
                 ->end()
-            ->bootstrapIgnore('Photo')
-            ;
+            ->bootstrapIgnore('Photo');
     }
 
 

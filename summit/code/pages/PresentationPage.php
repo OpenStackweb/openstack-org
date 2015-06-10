@@ -708,6 +708,7 @@ class PresentationPage_ManageRequest extends RequestHandler
      * @return  SSViewer
      */
     public function savePresentationSummary($data, $form) {
+
         Session::set("FormInfo.{$form->FormName()}.data", $data); 
         
         // This should never happen
