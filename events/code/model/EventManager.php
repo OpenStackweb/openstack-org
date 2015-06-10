@@ -66,7 +66,9 @@ final class EventManager {
 	}
 
     /**
-     * @param $id
+     * @param $id.event-type-link {
+
+}
      * @return IEvent
      */
     public function toggleSummitEvent($id){
@@ -153,4 +155,65 @@ final class EventManager {
 
     }
 
+    /**
+     * @return EventTypeSummary
+     */
+    public function getCountByType() {
+        $countByEventType = new stdclass;
+
+        $rssEventsCount = $this->rssEvents(1000)->count();
+
+        $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
+        $countByEventType->all = EventPage::get()->filter($filter_array)->Count() + $rssEventsCount;
+
+        $filter_array['EventCategory'] = 'Meetups';
+        $countByEventType->meetup = EventPage::get()->filter($filter_array)->Count();
+        $countByEventType->meetup += $rssEventsCount;
+
+        $filter_array['EventCategory'] = 'Industry';
+        $countByEventType->industry = EventPage::get()->filter($filter_array)->Count();
+
+        $filter_array['EventCategory'] = 'OpenStack Days';
+        $countByEventType->openStackDays = EventPage::get()->filter($filter_array)->Count();
+
+        $countByEventType->other = EventPage::get()->where("EventCategory is null and EventEndDate >= CURDATE()")->Count();
+
+        return $countByEventType;
+    }
+
+    /**
+     * @param int $limit
+     * @return ArrayList
+     */
+    function rssEvents($limit = 7)
+    {
+        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
+
+        $feedXML = $feed->request()->getBody();
+
+        // Extract items from feed
+        $result = $feed->getValues($feedXML, 'channel', 'item');
+
+        foreach ($result as $item) {
+            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
+            $DOM = new DOMDocument;
+            $DOM->loadHTML(html_entity_decode($item->description));
+            $span_tags = $DOM->getElementsByTagName('span');
+            foreach ($span_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:startDate') {
+                    $item->startDate = $tag->getAttribute('content');
+                } else if ($tag->getAttribute('property') == 'schema:endDate') {
+                    $item->endDate = $tag->getAttribute('content');
+                }
+            }
+            $div_tags = $DOM->getElementsByTagName('div');
+            foreach ($div_tags as $tag) {
+                if ($tag->getAttribute('property') == 'schema:location') {
+                    $item->location = $tag->nodeValue;
+                }
+            }
+        }
+
+        return $result->limit($limit, 0);
+    }
 } 

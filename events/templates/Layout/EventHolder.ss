@@ -16,13 +16,13 @@
     <div class="row">
         <div id='upcoming-events-container' class="col-sm-6" style="min-height:500px">
             <div style="float:left;"><h2>Upcoming Events</h2></div>
-            <div style="float:left; margin:28px 0 0 50px">
-                <select id="upcoming_events_filter">
-                    <option value="all">All</option>
-                    <option value="Industry">Industry Events</option>
-                    <option value="Meetups">Meetups</option>
-                    <option value="OpenStack Days">OpenStack Days</option>
-                </select>
+            <div style="float:left; margin:5px 0 10px 12px">
+                <a href="#" class="event-type-link event-type-selected" data-type="All">All (<span class="event-type-count">$AllEventCount</span>)</a>
+                <a href="#" class="event-type-link" data-type="Industry">Industry (<span class="event-type-count">$IndustryEventCount</span>)</a>
+                <a href="#" class="event-type-link" data-type="Meetups">Meetups (<span class="event-type-count">$MeetupEventCount</span>)</a>
+                <a href="#" class="event-type-link" data-type="OpenStack Days">OpenStack Days (<span class="event-type-count">$OpenStackDaysEventCount</span>)</a>
+                <a href="#" class="event-type-link" data-type="Other">Other (<span class="event-type-count">$OtherEventCount</span>)</a>
+                <span class="events-loading hidden">&nbsp;</span>
             </div>
             <div style="clear:both"></div>
             <div id='upcoming-events' class="eventBlock upcoming">

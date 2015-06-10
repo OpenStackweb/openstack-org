@@ -1,0 +1,13 @@
+.event-type-link {
+    margin-right: 7px;
+}
+
+.event-type-selected {
+    font-weight: bold;
+}
+
+.events-loading {
+    background: url("../../framework/images/network-save.gif") no-repeat;
+    padding: 0 0 0 20px;
+    color: gray;
+}
