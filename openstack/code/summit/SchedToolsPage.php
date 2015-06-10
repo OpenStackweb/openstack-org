@@ -141,7 +141,7 @@ class SchedToolsPage_Controller extends Page_Controller
 	function ImportSpeakersFromSched()
 	{
 
-		$feed = new RestfulService('http://openstacksummitnovember2014paris.sched.org/api/role/export?api_key=41caf3c5cafc24e286ade21926eaeb41&role=speaker&format=xml&fields=username,name,email', 7200);
+		$feed = new RestfulService('http://'.$this->SchedEventLink.'/api/session/export?api_key='.$this->SchedEventAPIKey.'&role=speaker&format=xml&fields=username,name,email', 7200);
 
 		$feedXML = $feed->request()->getBody();
 
@@ -415,7 +415,7 @@ class SchedToolsPage_Controller extends Page_Controller
 			) {
 
 				$To = $Speaker->email;
-				$Subject = "Important Speaker Information for OpenStack Summit in Paris";
+				$Subject = "Please give us your Vancouver Slides!";
 
 				$email = EmailFactory::getInstance()->buildEmail(SCHED_TOOLS_EMAIL_FROM, $To, $Subject);
 				$email->setTemplate("UploadPresentationSlidesEmail");
