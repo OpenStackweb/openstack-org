@@ -30,73 +30,79 @@ class EventHolder extends Page {
  */
 class EventHolder_Controller extends Page_Controller {
 
+    private $countsByEventType = null;
+    private $event_manager;
+
 	private static $allowed_actions = array (
 		'AjaxFutureEvents',
 		'AjaxFutureSummits',
 		'AjaxPastSummits',
 	);
 
+    /*public function __construct()   {
+        $this->event_manager = new EventManager(
+            $this->repository,
+            new EventRegistrationRequestFactory,
+            null,
+            new SapphireEventPublishingService,
+            new EventValidatorFactory,
+            SapphireTransactionManager::getInstance()
+        );
+
+        parent::__construct();
+    }*/
 
 	function init() {
 	    parent::init();
 		Requirements::css('events/css/events.css');
+        Requirements::css('events/css/events.list.css');
 		Requirements::javascript('events/js/events.js');
+        $this->buildEventManager();
 	}
-	
+
+    function buildEventManager() {
+        $this->event_manager = new EventManager(
+            $this->repository,
+            new EventRegistrationRequestFactory,
+            null,
+            new SapphireEventPublishingService,
+            new EventValidatorFactory,
+            SapphireTransactionManager::getInstance()
+        );
+    }
+
 	function RandomEventImage(){ 
 		$image = Image::get()->filter(array('ClassName:not' => 'Folder'))->where("ParentID = (SELECT ID FROM File WHERE ClassName = 'Folder'
 		AND Name = 'EventImages')")->sort('RAND()')->first();
 		return $image;
 	}
-
-    function RssEvents($limit = 7)
-    {
-        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
-
-        $feedXML = $feed->request()->getBody();
-
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
-
-        foreach ($result as $item) {
-            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
-            $DOM = new DOMDocument;
-            $DOM->loadHTML(html_entity_decode($item->description));
-            $span_tags = $DOM->getElementsByTagName('span');
-            foreach ($span_tags as $tag) {
-                if ($tag->getAttribute('property') == 'schema:startDate') {
-                    $item->startDate = $tag->getAttribute('content');
-                } else if ($tag->getAttribute('property') == 'schema:endDate') {
-                    $item->endDate = $tag->getAttribute('content');
-                }
-            }
-            $div_tags = $DOM->getElementsByTagName('div');
-            foreach ($div_tags as $tag) {
-                if ($tag->getAttribute('property') == 'schema:location') {
-                    $item->location = $tag->nodeValue;
-                }
-            }
-        }
-
-        return $result->limit($limit, 0);
-    }
 	
 	function PastEvents($num = 4) {
 		return EventPage::get()->filter(array('EventEndDate:LessThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventEndDate')->limit($num);
 	}
 
 	function FutureEvents($num, $filter = '') {
-        $rss_events = $this->RssEvents($num);
+        if ($this->event_manager == null) {
+            $this->buildEventManager();
+        }
+
+        $rss_events = $this->event_manager->rssEvents($num);
         $events_array = new ArrayList();
 
-        $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-        if ($filter != 'all' && $filter != '') {
-            $filter_array['EventCategory'] = $filter;
+        if ($filter != 'Other') {
+            $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
+            if ($filter != 'all' && $filter != '') {
+                $filter_array['EventCategory'] = $filter;
+            }
+            $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num)->toArray();
         }
-        $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num)->toArray();
+        else {
+            $pulled_events = EventPage::get()->where("EventCategory is null and EventEndDate >= CURDATE()")->sort('EventStartDate','ASC')->limit($num)->toArray();
+        }
+
         $events_array->merge($pulled_events);
 
-        if ($filter == 'Meetups' || $filter == 'all' || $filter == '') {
+        if ($filter == 'Meetups' || $filter == 'All' || $filter == '') {
             foreach ($rss_events as $item) {
                 $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
                 $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
@@ -173,4 +179,39 @@ class EventHolder_Controller extends Page_Controller {
 		}
 		return '#';
 	}
+
+    function AllEventCount() {
+        if ($this->countsByEventType == null) {
+            $this->countsByEventType = $this->event_manager->getCountByType();;
+        }
+        return $this->countsByEventType->all;
+    }
+
+    function MeetupEventCount() {
+        if ($this->countsByEventType == null) {
+            $this->countsByEventType = $this->event_manager->getCountByType();;
+        }
+        return $this->countsByEventType->meetup;
+    }
+
+    function IndustryEventCount() {
+        if ($this->countsByEventType == null) {
+            $this->countsByEventType = $this->event_manager->getCountByType();;
+        }
+        return $this->countsByEventType->industry;
+    }
+
+    function OpenStackDaysEventCount() {
+        if ($this->countsByEventType == null) {
+            $this->countsByEventType = $this->event_manager->getCountByType();;
+        }
+        return $this->countsByEventType->openStackDays;
+    }
+
+    function OtherEventCount() {
+        if ($this->countsByEventType == null) {
+            $this->countsByEventType = $this->event_manager->getCountByType();;
+        }
+        return $this->countsByEventType->other;
+    }
 }

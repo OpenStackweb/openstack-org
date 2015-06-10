@@ -17,6 +17,11 @@ jQuery(document).ready(function($){
     jQuery('#upcoming_events_filter').change(function(){
         refresh_future_events();
     });
+
+    $('.event-type-link').on('click', function(e) {
+        e.preventDefault();
+        refresh_future_events($(this));
+    })
 });
 
 function refresh_page() {
@@ -37,18 +42,53 @@ function refresh_future_events_scroll(){
     }
 }
 
-function refresh_future_events() {
-    var filter = jQuery('#upcoming_events_filter').val();
-    jQuery.ajax({
+function refresh_future_events($eventLink) {
+    var $loadingIndicator = $('.events-loading');
+    $loadingIndicator.removeClass('hidden');
+
+    var filter = 'all';
+    if ($eventLink) {
+        filter = $eventLink.data('type');
+
+        if ($eventLink.hasClass('event-type-selected')) {
+            return;
+        }
+    }
+
+    var eventsAjaxCall = $.ajax({
         type: "POST",
         url: 'EventHolder_Controller/AjaxFutureEvents',
-        data: {filter:filter},
-        success: function(result){
-           jQuery('#upcoming-events').html('<div></div>');
-           jQuery('div','#upcoming-events'). append(result);
-           refresh_future_events_scroll();
-        }
+        data: {filter:filter}
     });
+
+    var counAjaxCall = $.ajax({
+        type: "GET",
+        url: 'api/v1/events-types/count-by-type'
+    });
+
+    $.when(eventsAjaxCall, counAjaxCall)
+        .done(function() {
+
+            $('#upcoming-events').html('<div></div>');
+            $('div','#upcoming-events'). append(arguments[0][0]);
+            refresh_future_events_scroll();
+
+            var countsByEventType = arguments[1][0];
+            $('.event-type-link[data-type="All"] span').text(countsByEventType.all);
+            $('.event-type-link[data-type="Industry"] span').text(countsByEventType.industry);
+            $('.event-type-link[data-type="Meetups"] span').text(countsByEventType.meetups);
+            $('.event-type-link[data-type="OpenStack Days"] span').text(countsByEventType.openStackDays);
+            $('.event-type-link[data-type="Other"] span').text(countsByEventType.other);
+
+        })
+        .always(function(){
+            $loadingIndicator.addClass('hidden');
+        });
+
+    if ($eventLink != null) {
+        $('.event-type-link').removeClass('event-type-selected');
+        $eventLink.addClass('event-type-selected')
+    }
 }
 
 function refresh_future_summits() {
