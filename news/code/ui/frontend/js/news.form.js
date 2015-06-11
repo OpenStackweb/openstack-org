@@ -37,7 +37,7 @@ jQuery(document).ready(function($){
             onfocusout: function(element) {$(element).valid()},
             focusCleanup: true,
             rules: {
-                submitter_phone:{required: true, phoneUS:true},
+                submitter_phone:{required: true},
                 headline:{required: true},
                 summary:{required: true},
                 tags:{required: true},
