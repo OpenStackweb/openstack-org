@@ -34,34 +34,17 @@ $('a[data-confirm]').on('click', function (e) {
     });
 });
 
+var MAX_WORDS = 200;
+var WARNING_THRESHOLD = 150;
+
 $(function() {
 	if($('#PresentationForm_PresentationForm_ShortDescription').length) {
-		var MAX_WORDS = 200;
-		var WARNING_THRESHOLD = 150;
+
 
 		setTimeout(function() {		
 			tinyMCE.get('PresentationForm_PresentationForm_ShortDescription')
-				   .on('keyup', debounce(function(e) {				   	
-					    var body = this.getBody();
-					    var text = tinyMCE.trim(body.innerText || body.textContent);
-					    var words = text.split(/[\w\u2019\'-]+/).length-1;					    
-					    var diff = MAX_WORDS - words;
-					    var klass = '';
-					 	if(diff > 0) {
-							$('#word-count').text(diff + ' words remaining');
-							if(diff < WARNING_THRESHOLD) {
-								klass = 'warning';
-							}
-					 	}
-					 	else  {
-					 		$('#word-count').text('0 words remaining. Your content will be truncated!');
-					 		klass = 'danger';
-					 	}
-
-					 	$('#word-count').attr('class', klass);
-
-				   }, 250)
-				);
+				   .on('keyup', debounce(textEvent, 250))
+                   .on('paste', textEvent);
 		},500);
 	}
 
@@ -73,6 +56,27 @@ $(function() {
         }
     });
 });
+
+function textEvent(editor, event) {
+    var body = this.getBody();
+    var text = tinyMCE.trim(body.innerText || body.textContent);
+    var words = text.split(/[\w\u2019\'-]+/).length-1;
+    var diff = MAX_WORDS - words;
+    var klass = '';
+    if(diff > 0) {
+        $('#word-count').text(diff + ' words remaining');
+        if(diff < WARNING_THRESHOLD) {
+            klass = 'warning';
+        }
+    }
+    else  {
+        $('#word-count').text('0 words remaining. Your content will be truncated!');
+        klass = 'danger';
+    }
+
+    $('#word-count').attr('class', klass);
+
+}
 
 function debounce(func, wait, immediate) {
 	var timeout;

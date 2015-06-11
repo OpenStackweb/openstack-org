@@ -2958,3 +2958,9 @@ p#ForgotPassword {
   font-size: 0.9em; }
 
 /*End Voting For Presentations*/
+
+
+p.danger {
+    color: red;
+    font-weight: bold;
+}
