@@ -43,7 +43,8 @@ tinymce.init({
     paste_remove_styles_if_webkit: true,
     paste_strip_class_attributes: true,
     paste_retain_style_properties: 'font-size, font-style, color',
-    toolbar: 'bold italic | alignleft aligncenter | bullist numlist | paste'
+    toolbar: 'bold italic | alignleft aligncenter | bullist numlist | paste',
+    statusbar : false
     {$extra_options}
 });
 SCRIPT;
