@@ -49,10 +49,12 @@ function refresh_future_events($eventLink) {
     var filter = 'all';
     if ($eventLink) {
         filter = $eventLink.data('type');
-
         if ($eventLink.hasClass('event-type-selected')) {
             return;
         }
+    }
+    else {
+        filter = $('.event-type-selected').data('type');;
     }
 
     var eventsAjaxCall = $.ajax({
