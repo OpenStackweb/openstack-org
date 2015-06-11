@@ -86,12 +86,13 @@ class EventHolder_Controller extends Page_Controller {
             $this->buildEventManager();
         }
 
+        $filterLowerCase = strtolower($filter);
         $rss_events = $this->event_manager->rssEvents($num);
         $events_array = new ArrayList();
 
-        if ($filter != 'Other') {
+        if ($filterLowerCase != 'other') {
             $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-            if ($filter != 'All' && $filter != '') {
+            if (strtolower($filter) != 'all' && $filter != '') {
                 $filter_array['EventCategory'] = $filter;
             }
             $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num)->toArray();
@@ -102,7 +103,7 @@ class EventHolder_Controller extends Page_Controller {
 
         $events_array->merge($pulled_events);
 
-        if ($filter == 'Meetups' || $filter == 'All' || $filter == '') {
+        if ($filterLowerCase == 'meetups' || $filterLowerCase == 'all' || $filter == '') {
             foreach ($rss_events as $item) {
                 $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
                 $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
