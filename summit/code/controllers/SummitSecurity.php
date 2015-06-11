@@ -123,6 +123,9 @@ class SummitSecurity extends Controller {
      */
     public function index() {
         $back_url = $this->CurrentCallForSpeakersPageUrl();
+        if($this->request->getVar('BackURL')){
+            $back_url = $this->request->getVar('BackURL');
+        }
         if(is_null($back_url))  return $this->httpError(404, "Summit Speakers Not Found!");
         if(Member::currentUser())
             return $this->redirect($back_url);

@@ -18,7 +18,6 @@ implements IPresentationSpeaker
         'FundedTravel' => 'Boolean',
         'Expertise' => 'Text',
         'Country' => 'Varchar(2)',
-        'RecordingAndPublishingLegalAgreement'=> 'Boolean',
     );
 
 
