@@ -58,12 +58,13 @@ $(function() {
 
 
     $('#BootstrapForm_AddSpeakerForm_action_doAddSpeaker').click(function(evt){
+
         if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').length > 0 && $('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').is(':checked') && !$('#chk-legal-me').is(':checked')) {
             alert('Confirm that you agree to the legal terms.');
             evt.preventDefault();
             return false;
         }
-        if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Else').length > 0 && $('#BootstrapForm_AddSpeakerForm_SpeakerType_Else').is(':checked')) {
+        else if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Else').length > 0 && $('#BootstrapForm_AddSpeakerForm_SpeakerType_Else').is(':checked')) {
             if (!$('#chk-legal-other').is(':checked')) {
                 alert('Confirm that you agree to the legal terms.');
                 evt.preventDefault();
@@ -75,7 +76,7 @@ $(function() {
                 return false;
             }
         }
-        else {
+        else if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').length == 0 ){
             // other email
             if (!$('#chk-legal-other').is(':checked')) {
                 alert('Confirm that you agree to the legal terms.');
