@@ -32,3 +32,22 @@ Injector:
       0: %$SpeakerRegistrationRequestRepository
       1: %$SpeakerRegistrationRequestFactory
       2: %$TransactionManager
+  SummitAddOnRepository:
+    class: SapphireSummitAddOnRepository
+  SummitPackageRepository:
+    class: SapphireSummitPackageRepository
+  PackagePurchaseOrderRepository:
+    class: SapphirePackagePurchaseOrderRepository
+  SummitPackagePurchaseOrderFactory:
+    class: SapphireSummitPackagePurchaseOrderFactory
+  SummitPackagePurchaseOrderManager:
+    constructor:
+      0: '%$PackagePurchaseOrderRepository'
+      1: '%$SummitPackageRepository'
+      2: '%$SummitPackagePurchaseOrderFactory'
+      3: '%$TransactionManager'
+  SummitsApi:
+    constructor:
+      0: '%$SummitPackageRepository'
+      1: '%$SummitAddOnRepository'
+      2: '%$SummitPackagePurchaseOrderManager'

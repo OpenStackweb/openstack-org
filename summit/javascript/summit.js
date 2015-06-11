@@ -34,7 +34,7 @@ $('a[data-confirm]').on('click', function (e) {
     });
 });
 
-var MAX_WORDS = 200;
+var MAX_WORDS = 450;
 var WARNING_THRESHOLD = 150;
 
 $(function() {
@@ -53,6 +53,64 @@ $(function() {
             event.preventDefault();
             event.stopPropagation();
             return false;
+        }
+    });
+
+
+    $('#BootstrapForm_AddSpeakerForm_action_doAddSpeaker').click(function(evt){
+        if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').length > 0 && $('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').is(':checked') && !$('#chk-legal-me').is(':checked')) {
+            alert('Confirm that you agree to the legal terms.');
+            evt.preventDefault();
+            return false;
+        }
+        if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Else').length > 0 && $('#BootstrapForm_AddSpeakerForm_SpeakerType_Else').is(':checked')) {
+            if (!$('#chk-legal-other').is(':checked')) {
+                alert('Confirm that you agree to the legal terms.');
+                evt.preventDefault();
+                return false;
+            }
+            else if($('#BootstrapForm_AddSpeakerForm_EmailAddress').val() == ''){
+                alert('You must enter a valid email!');
+                evt.preventDefault();
+                return false;
+            }
+        }
+        else {
+            // other email
+            if (!$('#chk-legal-other').is(':checked')) {
+                alert('Confirm that you agree to the legal terms.');
+                evt.preventDefault();
+                return false;
+            }
+
+            else if($('#BootstrapForm_AddSpeakerForm_EmailAddress').val() == ''){
+                alert('You must enter a valid email!');
+                evt.preventDefault();
+                return false;
+            }
+        }
+    });
+
+    if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').length == 0){
+        $('#legal-other').show();
+        $('#legal-me').hide();
+    }
+    else if($('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').is(':checked') ){
+        $('#legal-other').hide();
+        $('#legal-me').show();
+    }
+
+    $('#BootstrapForm_AddSpeakerForm_SpeakerType_Else').click(function(evt){
+       if($(this).is(':checked')){
+           $('#legal-other').show();
+           $('#legal-me').hide();
+       }
+    });
+
+    $('#BootstrapForm_AddSpeakerForm_SpeakerType_Me').click(function(evt){
+        if($(this).is(':checked')){
+            $('#legal-other').hide();
+            $('#legal-me').show();
         }
     });
 });
