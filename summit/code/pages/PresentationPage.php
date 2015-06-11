@@ -659,7 +659,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             LiteralField::create('LegalMe','
             <div id="legal-me" style="display: none;">
              <label>
-                <input id="chk-legal-me" type="checkbox"> Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
             </label>
             </div>'),
             EmailField::create('EmailAddress',"To add another person as a speaker, you will need their email adddress. (*)")
@@ -669,7 +669,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             LiteralField::create('LegalOther','
             <div id="legal-other" style="display: none;">
              <label>
-                <input id="chk-legal-other" type="checkbox"> Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
             </label>
             </div>')
 

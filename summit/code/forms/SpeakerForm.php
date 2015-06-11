@@ -44,7 +44,7 @@ class SpeakerForm extends BootstrapForm
                     ->setMaxFilesize(1)
                 ->end()
             ->bootstrapIgnore('Photo')
-            ->checkbox('RecordingAndPublishingLegalAgreement','Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.')
+            ->literal('RecordingAndPublishingLegalAgreement','Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.')
             ;
     }
 
