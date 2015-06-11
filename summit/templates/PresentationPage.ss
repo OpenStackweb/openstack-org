@@ -8,7 +8,7 @@
 <body class="presentation-page">
     <div class="main-body">
         <div id="wrap">
-            <div class="summit-hero-wrapper condensed">
+            <div  class="summit-hero-wrapper<% if $top_section != 'full' %> condensed<% end_if %><% if HeroCSSClass %> $HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: rgba(0, 0, 0, 0) url('{$SummitImage.Image.link}') no-repeat scroll center bottom / cover ;"<% end_if %> >
                 <div class="container">
                     <div class="row">
                         <% with $CurrentSummit %>
@@ -23,18 +23,34 @@
                                 $Title
                             </h1>
                             <div class="landing-action">
-                                <a href="#" class="btn register-btn-lrg">Join Us</a>
+                                <% if $RegistrationLink %>
+                                    <a href="{$RegistrationLink}" class="btn orange-btn">Register Now</a>
+                                <% end_if %>
+                                <% if $ComingSoonBtnText %>
+                                    <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
+                                <% end_if %>
                             </div>
-                            <div class="inner-countdown-wrapper">
-                                <div class="countdown">
+                            <% if IsUpComing %>
+                                <div class="inner-countdown-wrapper">
+                                    <div class="countdown">
+                                        $Top.CountdownDigits
+                                    </div>
+                                    <div class="countdown-text">
+                                        Days until $Name
+                                    </div>
+                                </div>
+                            <% else_if IsCurrent %>
+                                <div class="inner-countdown-wrapper">
+                                    <div class="countdown">
                                         <span>N</span>
                                         <span>O</span>
                                         <span>W</span>
+                                    </div>
+                                    <div class="countdown-text">
+                                        The Summit is Happening Now!
+                                    </div>
                                 </div>
-                                <div class="countdown-text">
-                                    The Summit is Happening Now!
-                                </div>
-                            </div>
+                            <% end_if %>
                         </div>
                         <% end_with %>
                     </div>
@@ -60,7 +76,7 @@
             <% end_if %>            
             <div class="presentation-app-header">
                 <div class="container">
-                    <p class="status"><i class="fa fa-calendar"></i>&nbsp;Currently accepting presentation submissions until <strong>$CurrentSummit.SubmissionEndDate.Format('F jS, Y')</strong>.</p>
+                    <p class="status"><i class="fa fa-calendar"></i>&nbsp;Currently accepting presentation submissions until <strong>$CurrentSummit.SubmissionEndDate.Format('F jS, Y, h:i A') <PDT></PDT></strong>.</p>
                 </div>
             </div>
             

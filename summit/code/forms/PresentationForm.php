@@ -35,10 +35,10 @@ class PresentationForm extends BootstrapForm
                 ->end()
             ->literal('ShortDescriptionHelp','<hr/><p>YouTube and other services limit the length of your presentation\'s description. Please provide a shorter, YouTube-friendly summary below.</p>')
             ->literal('ShortDescriptionWordCount','<p id="word-count"></p>')
-            ->tinyMCEEditor('ShortDescription','Short Description (200 Word Max)')
+            ->tinyMCEEditor('ShortDescription','Short Description (450 Word Max)')
                 ->configure()
                     ->setRows(7)
-                    ->setWordCount(200)
+                    ->setWordCount(450)
                 ->end()
             ->literal('HR','<hr/>')            
             ->optionset(

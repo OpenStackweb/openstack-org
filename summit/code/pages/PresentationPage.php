@@ -121,7 +121,7 @@ class PresentationPage_Controller extends SummitPage_Controller
                 // redirect to register member speaker
                 $url = Controller::join_links(Director::baseURL(),'summit-login','registration');
 
-                $this->redirect($url.'?BackURL='. urlencode( $this->request->getURL() ).'&'.SpeakerRegistrationRequest::ConfirmationTokenParamName.'='.$speaker_registration_token);
+                return $this->redirect($url.'?BackURL='. urlencode( $this->request->getURL() ).'&'.SpeakerRegistrationRequest::ConfirmationTokenParamName.'='.$speaker_registration_token);
             }
 
             return SummitSecurity::permission_failure($this);
@@ -649,16 +649,30 @@ class PresentationPage_ManageRequest extends RequestHandler
      * @return  Form
      */
     public function AddSpeakerForm() {
+
         $fields = FieldList::create (
             LiteralField::create('SpeakerNote','<p class="at-least-one">Each presentation needs at least one speaker.</p>'),
             OptionsetField::create('SpeakerType','', array(
-                'Me' => 'Add yourself as a speaker to this presentation',
-                'Else' => 'Add someone else'
+                    'Me'   => 'Add yourself as a speaker to this presentation',
+                    'Else' => 'Add someone else'
             ))->setValue('Me'),
-            EmailField::create('EmailAddress',"To add another person as a speaker, you will need their email adddress.")
+            LiteralField::create('LegalMe','
+            <div id="legal-me" style="display: none;">
+             <label>
+                <input id="chk-legal-me" type="checkbox"> Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+            </label>
+            </div>'),
+            EmailField::create('EmailAddress',"To add another person as a speaker, you will need their email adddress. (*)")
                 ->displayIf('SpeakerType')
                     ->isEqualTo('Else')
-                ->end()
+                ->end(),
+            LiteralField::create('LegalOther','
+            <div id="legal-other" style="display: none;">
+             <label>
+                <input id="chk-legal-other" type="checkbox"> Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+            </label>
+            </div>')
+
         );
 
         $validator = RequiredFields::create();
@@ -676,7 +690,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             if(Member::currentUser()->IsSpeaker($this->presentation)) {
                 $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType','', 'Else'));
                 $fields->field('EmailAddress')
-                    ->setTitle('Enter the email address of your next speaker')
+                    ->setTitle('Enter the email address of your next speaker (*)')
                     ->setDisplayLogicCriteria(null);
 
             }
@@ -1046,7 +1060,13 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             "BureauForm",
             FieldList::create()
                 ->checkbox('AvailableForBureau',"I'd like to be in the speaker bureau")
+                ->configure()
+                    ->addExtraClass('bureau-checkbox')
+                ->end()
                 ->checkbox('FundedTravel','My company would be willing to fund my travel to events')
+                ->configure()
+                    ->addExtraClass('bureau-checkbox')
+                ->end()
                 ->countryDropdown('Country')
                 ->textarea('Expertise', 'My areas of expertise (one per line)')                
             ,

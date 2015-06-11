@@ -41,6 +41,17 @@
                                     Days until $Name
                                 </div>
                             </div>
+                        <% else_if IsCurrent %>
+                            <div class="inner-countdown-wrapper">
+                                <div class="countdown">
+                                    <span>N</span>
+                                    <span>O</span>
+                                    <span>W</span>
+                                </div>
+                                <div class="countdown-text">
+                                    The Summit is Happening Now!
+                                </div>
+                            </div>
                         <% end_if %>
                     </div>
                 <% end_with %>

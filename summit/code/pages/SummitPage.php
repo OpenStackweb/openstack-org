@@ -133,10 +133,10 @@ class SummitPage_Controller extends Page_Controller
 
     public function CountdownDigits($current_submit_id = 0)
     {
-        $summit  = $current_submit_id  > 0 ? Summit::get()->byId($current_submit_id):$this->Summit();
+        $summit  = $current_submit_id  > 0 ? Summit::get()->byId($current_submit_id): $this->Summit();
         if (is_null($summit)) return null;
 
-        $date = $summit->obj('StartDate');
+        $date = $summit->obj('SummitBeginDate');
 
         if ($date->InPast()) {
             return;

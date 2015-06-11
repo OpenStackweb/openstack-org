@@ -304,7 +304,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
     display: none; } }
 
 .summit-hero-wrapper .landing-action .register-btn-lrg {
-  width: 270px;
+  width: 270px !important;
   height: 38px;
   padding: 0;
   margin: 0; }
@@ -2963,4 +2963,8 @@ p#ForgotPassword {
 p.danger {
     color: red;
     font-weight: bold;
+}
+
+.bureau-checkbox {
+    margin-left: -20px !important;
 }

@@ -88,7 +88,7 @@ class SpeakerRegistrationRequest
         $this->token = $generator->randomToken();
         $hash      = self::HashConfirmationToken($this->token);
         $this->setField('ConfirmationHash',$hash);
-        Session::set(self::SpeakerRegistrationRequest.'_'. $this->Speaker()->ID, $this->token);
+        Session::set(self::ConfirmationTokenParamName.'_'. $this->Speaker()->ID, $this->token);
         return $this->token;
     }
 
@@ -102,7 +102,7 @@ class SpeakerRegistrationRequest
     public function getToken()
     {
         if(empty($this->token)){
-            $this->token = Session::get(self::SpeakerRegistrationRequest.'_'. $this->Speaker()->ID);
+            $this->token = Session::get(self::ConfirmationTokenParamName.'_'. $this->Speaker()->ID);
         }
         return $this->token;
     }
