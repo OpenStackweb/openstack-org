@@ -91,7 +91,7 @@ class EventHolder_Controller extends Page_Controller {
 
         if ($filter != 'Other') {
             $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-            if ($filter != 'all' && $filter != '') {
+            if ($filter != 'All' && $filter != '') {
                 $filter_array['EventCategory'] = $filter;
             }
             $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num)->toArray();
