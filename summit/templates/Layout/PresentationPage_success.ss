@@ -14,9 +14,8 @@
 					</div>
 					<div class="main-panel-section">
 					    <p class="panel-note">Your presentation has been carefully saved and is ready for review by the community and the track chairs.</p>
+                        <p class="panel-note">Once you've completed adding in the details of your talk a confirmation email will be sent to you and all speakers on this talk. Check inbox and junk folders for an email sent from speakersupport@openstack.org.</p>
 					</div>
-
-
 
 				    <h3>What happens next</h3>
 				    <ol>
