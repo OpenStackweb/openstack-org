@@ -6,7 +6,7 @@
  *
  * @author  Uncle Cheese <aaron@unclecheeseproductions.com>
  */
-class SummitSecurity extends Controller {
+class SummitSecurity extends SummitPage_Controller {
 
     /**
      * @var ISpeakerRegistrationRequestRepository
