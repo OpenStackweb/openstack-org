@@ -25,7 +25,7 @@ class PresentationCategoryPage extends Page
 	private static $has_one = array();
 
 	private static $has_many = array(
-		'Presentations'  => 'Presentation',
+		'Presentations'  => 'VideoPresentation',
 		'FeaturedVideos' => 'FeaturedVideo'
 	);
 
@@ -69,7 +69,7 @@ class PresentationCategoryPage_Controller extends Page_Controller
 
 	public function Presentations()
 	{
-		$sessions = dataobject::get('Presentation', '(`YouTubeID` IS NOT NULL OR `SlidesLink` IS NOT NULL) AND PresentationCategoryPageID = ' . $this->ID, 'StartTime DESC');
+		$sessions = dataobject::get('VideoPresentation', '(`YouTubeID` IS NOT NULL OR `SlidesLink` IS NOT NULL) AND PresentationCategoryPageID = ' . $this->ID, 'StartTime DESC');
 		return $sessions;
 	}
 
@@ -166,7 +166,7 @@ class PresentationCategoryPage_Controller extends Page_Controller
 		$Params = $this->getURLParams();
 		$Segment = convert::raw2sql($Params['ID']);
 
-		if ($featured == FALSE && $Params['ID'] && $Presentation = DataObject::get_one('Presentation', "`URLSegment` = '" . $Segment . "' AND `PresentationCategoryPageID` = " . $this->ID)) {
+		if ($featured == FALSE && $Params['ID'] && $Presentation = DataObject::get_one('VideoPresentation', "`URLSegment` = '" . $Segment . "' AND `PresentationCategoryPageID` = " . $this->ID)) {
 			return $Presentation;
 		} elseif ($featured == TRUE && $Params['ID'] && $FeaturedVideo = DataObject::get_one('FeaturedVideo', "`URLSegment` = '" . $Segment . "'")) {
 			return $FeaturedVideo;
@@ -184,7 +184,7 @@ class PresentationCategoryPage_Controller extends Page_Controller
 
 	function updateURLS()
 	{
-		$presentations = dataobject::get('Presentation', 'PresentationCategoryPageID = ' . $this->ID, 'StartTime ASC');
+		$presentations = dataobject::get('VideoPresentation', 'PresentationCategoryPageID = ' . $this->ID, 'StartTime ASC');
 		foreach ($presentations as $presentation) {
 			if ($presentation->URLSegment == NULL) {
 				$presentation->write();
