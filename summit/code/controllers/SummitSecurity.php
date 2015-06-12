@@ -6,7 +6,7 @@
  *
  * @author  Uncle Cheese <aaron@unclecheeseproductions.com>
  */
-class SummitSecurity extends Controller {
+class SummitSecurity extends SummitPage_Controller {
 
     /**
      * @var ISpeakerRegistrationRequestRepository
@@ -103,6 +103,10 @@ class SummitSecurity extends Controller {
      */
     public function Link($action = null) {
         return Controller::join_links($this->config()->url_segment, $action);
+    }
+
+    public function Summit(){
+        return Summit::get_active();
     }
 
     /**
@@ -422,6 +426,23 @@ class SummitSecurity extends Controller {
             ),
             $this
         );
+    }
+
+    public function CurrentSummitPage(){
+        $summit = Summit::get_active();
+        $page = SummitOverviewPage::get()->filter('SummitID', $summit->ID)->first();
+        return $page;
+    }
+
+    /**
+     * Returns the associated database record
+     */
+    public function data() {
+        return $this->CurrentSummitPage();
+    }
+
+    public function SummitRoot(){
+        return $this->CurrentSummitPage()->Link();
     }
 
 }

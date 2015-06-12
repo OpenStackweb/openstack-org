@@ -33,37 +33,8 @@
                 </div>
                 <div class="hero-tab-wrapper">
                     <!-- Microsite Navigation -->
-
-<ul class="nav nav-tabs">
-    
-        <li class="section">
-            <a href="/summit/vancouver-2015/">About The Summit</a>
-        </li>
-    
-    
-        <li class="link">
-            <a href="/summit/vancouver-2015/about-vancouver/">About Vancouver</a>
-        </li>
-    
-        <li class="link">
-            <a href="/summit/vancouver-2015/details-and-updates/">Details &amp; Updates</a>
-        </li>
-    
-        <li class="link">
-            <a href="/summit/vancouver-2015/sponsors/">Sponsoring</a>
-        </li>
-    
-        <li class="current">
-            <a href="/summit/vancouver-2015/speakers/">Speakers</a>
-        </li>
-    
-        <li class="link">
-            <a href="/summit/vancouver-2015/faq/">FAQ</a>
-        </li>
-    
-</ul>
-
-<!-- End Microsite Navigation -->
+                    <% include SummitNav %>
+                    <!-- End Microsite Navigation -->
                 </div>
                 <a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i class="fa fa-info-circle"></i></a>
             </div>
