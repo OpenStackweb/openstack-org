@@ -11,7 +11,7 @@
 						<p class="panel-note">Look over everything below to make sure it's to your liking, and then click <strong>Confirm My Submission</strong>.</p>
 					</div>
 									
-             <% include PresentationPreview Presentation=$Presentation %>
+                    <% include PresentationPreview Presentation=$Presentation %>
 										
 					<div class="panel-buttons">
 					    <a class="btn btn-primary" href="$SuccessLink">Confirm my submission <i class="fa fa-arrow-right fa-end"></i></a>
