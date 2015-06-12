@@ -119,17 +119,17 @@ class SpeakerVotingRegistrationPage_Controller extends Page_Controller
 		//Add member to user group
 		$Member->Groups()->add($userGroup);
 
-		$Member->login();
 
 		//Get current voting page and redirect there
 		if ($VotingPage = PresentationVotingPage::get()->first()) {
 			$BackURL = Session::get('BackURL');
 			if ($BackURL) {
-				return $this->redirect($VotingPage->Link() . 'Presentation/' . $BackURL);
+                $BackURL = $VotingPage->Link() . 'Presentation/' . $BackURL;
 			} else {
-				return $this->redirect($VotingPage);
+                $BackURL = $VotingPage->Link();
 			}
 		}
 
+        return OpenStackIdCommon::loginMember($Member, $BackURL);
 	}
 }
