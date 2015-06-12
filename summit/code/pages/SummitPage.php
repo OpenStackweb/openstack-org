@@ -112,6 +112,8 @@ class SummitPage_Controller extends Page_Controller
         Requirements::javascript("summit/bower_components/sweetalert/lib/sweet-alert.js");
         Requirements::css("summit/bower_components/sweetalert/lib/sweet-alert.css");
         Requirements::javascript("summit/javascript/summit.js");
+        // Summit pages are so different visually we don't pull in the main css file
+        Requirements::block("themes/openstack/css/combined.css");
     }
 
     public function CurrentSummit()
