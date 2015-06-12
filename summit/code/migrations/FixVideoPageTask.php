@@ -12,6 +12,81 @@
  * limitations under the License.
  **/
 
-class FixVideoPageTask {
+final class FixVideoPageTask extends MigrationTask {
+
+    protected $title = "Fix Video Page";
+
+    protected $description = "Fix Video Page";
+
+    function up()
+    {
+        echo "Starting Migration Proc ...<BR>";
+        //check if migration already had ran ...
+        $migration = Migration::get()->filter('Name', $this->title)->first();
+
+        if (!$migration) {
+
+$SQL = <<<SQL
+INSERT INTO `VideoPresentation`
+(
+`ClassName`,
+`Created`,
+`LastEdited`,
+`Name`,
+`DisplayOnSite`,
+`Featured`,
+`City`,
+`Country`,
+`Description`,
+`YouTubeID`,
+`URLSegment`,
+`StartTime`,
+`EndTime`,
+`Location`,
+`Type`,
+`Day`,
+`Speakers`,
+`SlidesLink`,
+`event_key`,
+`IsKeynote`,
+`PresentationCategoryPageID`,
+`SummitID`,
+`MemberID`)
+SELECT 'VideoPresentation', NOW(),NOW(),Name, `DisplayOnSite`,
+`Featured`,
+`City`,
+`Country`,
+`Description`,
+`YouTubeID`,
+`URLSegment`,
+`StartTime`,
+`EndTime`,
+`Location`,
+`Type`,
+`Day`,
+`Speakers`,
+`SlidesLink`,
+`event_key`,
+`IsKeynote`,
+`PresentationCategoryPageID`,
+`SummitID`,
+`MemberID` FROM Presentation;
+SQL;
+
+
+            DB::query($SQL);
+
+            $migration = new Migration();
+            $migration->Name = $this->title;
+            $migration->Description = $this->description;
+            $migration->Write();
+        }
+        echo "Ending  Migration Proc ...<BR>";
+    }
+
+    function down()
+    {
+
+    }
 
 }
