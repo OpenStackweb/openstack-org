@@ -81,7 +81,9 @@ class Summit extends DataObject
 
 
     public function getTitle(){
-        return empty($this->Title)?$this->Name:$this->Title;
+        $title = $this->getField('Title');
+        $name = $this->getField('Name');
+        return empty($title)? $name : $title;
     }
 
     function TalksByMemberID($memberID)
