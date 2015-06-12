@@ -26,9 +26,11 @@
 			</p>
 			<div class="row">
 				<div class="col-lg-7 col-md-5 col-sm-7">
+                    <%if Speakers %>
 					<div class="video-speakers">
-						<strong>Speakers:</strong> $Speakers
+						<strong>Speakers:</strong><ul><% loop Speakers %><li>{$Name}</li><% end_loop %></ul>
 					</div>
+                    <% end_if %>
 				</div>
 				<div class="col-sm-5">
 					<!-- Slides -->
