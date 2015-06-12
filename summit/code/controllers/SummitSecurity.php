@@ -105,6 +105,10 @@ class SummitSecurity extends SummitPage_Controller {
         return Controller::join_links($this->config()->url_segment, $action);
     }
 
+    public function Summit(){
+        return Summit::get_active();
+    }
+
     /**
      * Overload the redirect method so we can replace all references to Security
      * with its summit counterpart
@@ -422,6 +426,23 @@ class SummitSecurity extends SummitPage_Controller {
             ),
             $this
         );
+    }
+
+    public function CurrentSummitPage(){
+        $summit = Summit::get_active();
+        $page = SummitOverviewPage::get()->filter('SummitID', $summit->ID)->first();
+        return $page;
+    }
+
+    /**
+     * Returns the associated database record
+     */
+    public function data() {
+        return $this->CurrentSummitPage();
+    }
+
+    public function SummitRoot(){
+        return $this->CurrentSummitPage()->Link();
     }
 
 }

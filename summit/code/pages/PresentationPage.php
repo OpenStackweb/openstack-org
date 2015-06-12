@@ -598,7 +598,9 @@ class PresentationPage_ManageRequest extends RequestHandler
                     'RecipientMember' => $speaker->Member(),
                     'Presentation'    => $this->presentation,
                     'Speaker'         => $speaker,
-                    'ReviewLink'      => Director::makeRelative($speaker->ReviewLink($this->presentation->ID))
+                    'Creator' => $this->presentation->Creator(),
+                    'ReviewLink'      => Director::makeRelative($speaker->ReviewLink($this->presentation->ID)),
+                    'PasswordLink' => Director::absoluteBaseURL().'summit-login/lostpassword'
                 ))
                 ->send();        
         }
