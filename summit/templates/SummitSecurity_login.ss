@@ -6,7 +6,6 @@
 </head>
 
 <body class="presentation-page">
-   <h1>Summit Security Template</h1>
     <div class="main-body">
         <div id="wrap">
             <div class="summit-hero-wrapper condensed">
