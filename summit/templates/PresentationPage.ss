@@ -76,7 +76,7 @@
             <% end_if %>            
             <div class="presentation-app-header">
                 <div class="container">
-                    <p class="status"><i class="fa fa-calendar"></i>&nbsp;Currently accepting presentation submissions until <strong>$CurrentSummit.SubmissionEndDate.Format('F jS, Y, h:i A') <PDT></PDT></strong>.</p>
+                    <p class="status"><i class="fa fa-calendar"></i>&nbsp;{$Top.PresentationDeadlineText}</p>
                 </div>
             </div>
             

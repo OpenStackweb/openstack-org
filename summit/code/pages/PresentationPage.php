@@ -4,17 +4,27 @@ class PresentationPage extends SummitPage
 {
 
     private static $db = array (
-        'LegalAgreement' => 'HTMLText'
+        'LegalAgreement' => 'HTMLText',
+        'PresentationDeadlineText' => 'HTMLText',
     );
 
 
     public function getCMSFields() {
-        $f = parent::getCMSFields();
-
-        return $f
+        $fields = parent::getCMSFields();
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('PresentationDeadlineText', 'Presentation Deadline Text'));
+        return $fields
             ->tab('LegalAgreement')
                 ->htmlEditor('LegalAgreement')
         ;
+    }
+
+    public function getPresentationDeadlineText(){
+        $value = $this->getField('PresentationDeadlineText');
+        if(!empty($value)){
+            $value = str_replace('<p>','',$value);
+            $value = str_replace('</p>','',$value);
+        }
+        return $value;
     }
 }
 
