@@ -54,14 +54,14 @@ body.summit-landing-body {
   background: #040508; }
 
 .summit-landing-wrapper {
-  background: url('/images/landing-hero-bkgd.jpg') no-repeat left top;
+  background: url('/summit/images/landing-hero-bkgd.jpg') no-repeat left top;
   min-height: 610px;
   background-size: cover;
   position: relative;
   border-bottom: 1px solid #243440; }
 
 .summit-landing-wrapper.tokyo {
-  background: url('/images/landing-hero-bkgd-v.jpg') no-repeat left center;
+  background: url('/summit/images/landing-hero-bkgd-v.jpg') no-repeat left center;
   background-size: cover; }
 
 .summit-landing-logo {
@@ -185,7 +185,7 @@ a.single-summit:hover {
   text-decoration: none; }
 
 a.past-summit::after {
-  background: url('/images/home/vancouver-square.jpg') no-repeat center center;
+  background: url('/summit/images/home/vancouver-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -199,7 +199,7 @@ a.current-summit {
   padding-top: 10px; }
 
 a.current-summit::after {
-  background: url('/images/home/tokyo-wide.jpg') no-repeat center center;
+  background: url('/summit/images/home/tokyo-wide.jpg') no-repeat center center;
   content: "";
   opacity: 0.8;
   top: 0;
@@ -213,7 +213,7 @@ a.current-summit:hover:after {
   opacity: 1; }
 
 a.future-summit::after {
-  background: url('/images/home/austin-square.jpg') no-repeat center center;
+  background: url('/summit/images/home/austin-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -292,7 +292,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
 /*End Summit Landing*/
 /*Summit Inner Layout*/
 .summit-hero-wrapper {
-  background: url('/images/summit-vancouver-bkgd.jpg') no-repeat center bottom;
+  background: url('/summit/images/summit-vancouver-bkgd.jpg') no-repeat center bottom;
   background-size: cover;
   position: relative;
   text-align: center;
@@ -300,11 +300,11 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   overflow: hidden; }
 
 .summit-hero-wrapper.condensed {
-  background: url('/images/summit-vancouver-bkgd.jpg') no-repeat center center; }
+  background: url('/summit/images/summit-vancouver-bkgd.jpg') no-repeat center center; }
 
 @media (max-width: 767px) {
   .summit-hero-wrapper {
-    background: url('/images/summit-vancouver-bkgd.jpg') no-repeat center center; } }
+    background: url('/summit/images/summit-vancouver-bkgd.jpg') no-repeat center center; } }
 
 .summit-hero-wrapper h1 {
   color: white;
@@ -658,28 +658,28 @@ footer {
   margin-right: 10px; }
 
 .footer-twitter {
-  background: url('/images/footer-twitter.png') no-repeat; }
+  background: url('/summit/images/footer-twitter.png') no-repeat; }
 
 .footer-twitter:hover {
-  background: url('/images/footer-twitter-hover.png') no-repeat; }
+  background: url('/summit/images/footer-twitter-hover.png') no-repeat; }
 
 .footer-facebook {
-  background: url('/images/footer-facebook.png') no-repeat; }
+  background: url('/summit/images/footer-facebook.png') no-repeat; }
 
 .footer-facebook:hover {
-  background: url('/images/footer-facebook-hover.png') no-repeat; }
+  background: url('/summit/images/footer-facebook-hover.png') no-repeat; }
 
 .footer-linkedin {
-  background: url('/images/footer-linkedin.png') no-repeat; }
+  background: url('/summit/images/footer-linkedin.png') no-repeat; }
 
 .footer-linkedin:hover {
-  background: url('/images/footer-linkedin-hover.png') no-repeat; }
+  background: url('/summit/images/footer-linkedin-hover.png') no-repeat; }
 
 .footer-youtube {
-  background: url('/images/footer-youtube.png') no-repeat; }
+  background: url('/summit/images/footer-youtube.png') no-repeat; }
 
 .footer-youtube:hover {
-  background: url('/images/footer-youtube-hover.png') no-repeat; }
+  background: url('/summit/images/footer-youtube-hover.png') no-repeat; }
 
 .newsletter-form {
   margin: 10px 0 30px;
@@ -887,7 +887,7 @@ footer {
 /*End Photo Row*/
 /*Tokyo Specific Styles*/
 .summit-hero-wrapper.tokyo {
-  background: url('/images/tokyo/tokyo-bkgd-lrg.jpg') no-repeat center bottom;
+  background: url('/summit/images/tokyo/tokyo-bkgd-lrg.jpg') no-repeat center bottom;
   background-size: cover;
   position: relative;
   text-align: center;
@@ -895,22 +895,22 @@ footer {
   overflow: hidden; }
 
 .summit-hero-wrapper.tokyo.condensed {
-  background: url('/images/tokyo/tokyo-bkgd-lrg.jpg') no-repeat center center; }
+  background: url('/summit/images/tokyo/tokyo-bkgd-lrg.jpg') no-repeat center center; }
 
 @media (max-width: 767px) {
   .summit-hero-wrapper.tokyo {
-    background: url('/images/tokyo/tokyo-bkgd-lrg.jpg') no-repeat center center; } }
+    background: url('/summit/images/tokyo/tokyo-bkgd-lrg.jpg') no-repeat center center; } }
 
 .venue-row.tokyo {
   padding: 140px 0;
   text-align: center;
   color: white;
-  background: url('/images/tokyo/tokyo-venue-bkgd.jpg') no-repeat left top;
+  background: url('/summit/images/tokyo/tokyo-venue-bkgd.jpg') no-repeat left top;
   background-size: cover;
   position: relative; }
 
 .about-city-row.tokyo {
-  background: url('/images/tokyo/tokyo-bkgd-city.jpg') no-repeat left top;
+  background: url('/summit/images/tokyo/tokyo-bkgd-city.jpg') no-repeat left top;
   min-height: 610px;
   background-size: cover;
   position: relative;
@@ -942,7 +942,7 @@ footer {
   height: 100%;
   text-align: center;
   padding: 70px 0;
-  background: url('/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
+  background: url('/summit/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
   background-size: cover; }
 
 /*Tokyo Summit Landing Page*/
@@ -952,7 +952,7 @@ footer {
   height: 100%;
   text-align: center;
   padding: 70px 0;
-  background: url('/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
+  background: url('/summit/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
   background-size: cover; }
 
 img.tokyo-landing-logo {
@@ -1046,21 +1046,21 @@ a.white-link {
   margin: 0 10px; }
 
 .landing-twitter {
-  background: url('/images/landing-twitter.png') no-repeat;
+  background: url('/summit/images/landing-twitter.png') no-repeat;
   opacity: 0.8; }
 
 .landing-twitter:hover {
   opacity: 1; }
 
 .landing-facebook {
-  background: url('/images/landing-facebook.png') no-repeat;
+  background: url('/summit/images/landing-facebook.png') no-repeat;
   opacity: 0.8; }
 
 .landing-facebook:hover {
   opacity: 1; }
 
 .landing-linkedin {
-  background: url('/images/landing-linkedin.png') no-repeat;
+  background: url('/summit/images/landing-linkedin.png') no-repeat;
   opacity: 0.8; }
 
 .landing-linkedin:hover {
@@ -1985,10 +1985,10 @@ p#ForgotPassword {
   height: 100%; }
 
 .fixed-image.crowd {
-  background-image: url('/images/sponsors-bkgd.jpg'); }
+  background-image: url('/summit/images/sponsors-bkgd.jpg'); }
 
 .fixed-image.exhibit {
-  background-image: url('/images/sponsor-bkgd-exhibit.jpg'); }
+  background-image: url('/summit/images/sponsor-bkgd-exhibit.jpg'); }
 
 .prospectus-wrapper {
   text-align: center;
@@ -2357,7 +2357,7 @@ ul.city-nav-list li i {
   padding: 140px 0;
   text-align: center;
   color: white;
-  background: url('/images/venue-bkgd.jpg') no-repeat left top;
+  background: url('/summit/images/venue-bkgd.jpg') no-repeat left top;
   background-size: cover;
   background-color: #000;
   position: relative;
@@ -2574,7 +2574,7 @@ img.pass-timeline-large {
 .info-promo {
   margin: 60px 0;
   padding: 43px 30px;
-  background: url('/images/info-promo-bkgd.jpg') no-repeat;
+  background: url('/summit/images/info-promo-bkgd.jpg') no-repeat;
   background-size: cover;
   width: 100%;
   height: 143px;
@@ -2725,7 +2725,7 @@ ul.help-me-menu li a i {
     font-size: 1em; } }
 
 .about-city-row {
-  background: url('/images/vancouver-bkgd-orange.jpg') no-repeat left top;
+  background: url('/summit/images/vancouver-bkgd-orange.jpg') no-repeat left top;
   min-height: 610px;
   background-size: cover;
   position: relative;
@@ -3071,14 +3071,14 @@ a.outline-btn.inactive:hover {
   color: white; }
 
 .growth {
-  background: url('/images/growth-bkgd.jpg') no-repeat center center;
+  background: url('/summit/images/growth-bkgd.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
   padding: 90px 0;
   width: 100%; }
 
 .growth.tokyo {
-  background: url('/images/growth-bkgd-v.jpg') no-repeat center center;
+  background: url('/summit/images/growth-bkgd-v.jpg') no-repeat center center;
   background-size: cover; }
 
 .growth h2 {
