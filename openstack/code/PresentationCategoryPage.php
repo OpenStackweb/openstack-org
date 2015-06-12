@@ -51,6 +51,9 @@ class PresentationCategoryPage extends Page
 		$featuredVideos = new GridField('FeaturedVideos', 'FeaturedVideos', $this->FeaturedVideos(),GridFieldConfig_RecordEditor::create(10));
 		$fields->addFieldToTab('Root.FeaturedVideos', $featuredVideos);
 
+        $presentations = new GridField('Presentations', 'Presentations', $this->Presentations(), GridFieldConfig_RecordEditor::create(10));
+        $fields->addFieldToTab('Root.Presentations', $presentations);
+
 
 		return $fields;
 	}

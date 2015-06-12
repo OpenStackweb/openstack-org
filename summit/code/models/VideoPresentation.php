@@ -70,7 +70,10 @@ class VideoPresentation extends DataObject
 			new TextField('StartTime', 'Video Start Time'),
 			new TextField('EndTime', 'Video End Time'),
 			new HTMLEditorField('Description', 'Description'),
-			new CheckboxField('IsKeynote','Keynote Presenation')
+			new CheckboxField('IsKeynote','Keynote Presentation'),
+            new HiddenField('PresentationCategoryPageID','PresentationCategoryPageID'),
+            new HiddenField('MemberID','MemberID'),
+            new HiddenField('SummitID','SummitID')
 		);
 		return $fields;
 	}
