@@ -1,4 +1,3 @@
-<% include SideBar %>
 <div class="content-container unit size3of4 lastUnit">
 	<article>
 		<h2>My Presentations</h2>
