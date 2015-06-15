@@ -115,6 +115,10 @@ class CompanyListPage_Controller extends Page_Controller
         if(!$current_company){
             $current_company = $this->CurrentCompany();
         }
+
+        if(is_null($current_company))
+            return $this->httpError(404, 'Sorry that company could not be found');
+
         $CompanyEditForm = new CompanyEditForm($this, 'CompanyEditForm',$current_company);
         $CompanyEditForm->disableSecurityToken();
         // Fill in the form
@@ -245,6 +249,6 @@ class CompanyListPage_Controller extends Page_Controller
             $Company = Company::get()->byID((int)$CompanyID);
             return $Company;
         }
-        return false;
+        return null;
     }
 }
