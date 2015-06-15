@@ -28,7 +28,7 @@
 				<div class="col-lg-7 col-md-5 col-sm-7">
                     <%if Speakers %>
 					<div class="video-speakers">
-						<strong>Speakers:</strong><ul><% loop Speakers %><li>{$Name}</li><% end_loop %></ul>
+						<strong>Speakers:</strong>&nbsp;$Speakers
 					</div>
                     <% end_if %>
 				</div>
