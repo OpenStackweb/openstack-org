@@ -3096,16 +3096,10 @@ a.outline-btn.inactive:hover {
   float: left; }
 
 .growth-chart {
-  float: left;
-  max-width: 100%;
-  margin-left: -20%; }
-
-.growth-chart.tokyo {
-  float: left;
-  max-width: 100%;
-  margin-left: 0;
-  margin-top: -230px;
-  max-height: 800px; }
+    float: left;
+    max-width: 100%;
+    margin-top: -100px;
+}
 
 .growth-text-bottom {
   width: 40%;
