@@ -56,7 +56,7 @@
                     </div>
                 <% end_with %>
             </div>
-            <a href="#" class="open-panel"><i class="fa fa-bars fa-2x collapse-nav"></i></a>
+            <a href="{$Link}/#" class="open-panel"><i class="fa fa-bars fa-2x collapse-nav"></i></a>
         </div>
         <div class="hero-tab-wrapper">
             <!-- Microsite Navigation -->
