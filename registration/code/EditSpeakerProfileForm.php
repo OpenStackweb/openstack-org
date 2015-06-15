@@ -135,13 +135,13 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $member = DataObject::get_by_id("Member", $id);
 
             if ($data['SpeakerID'] && is_numeric($data['SpeakerID'])) {
-                $speaker = DataObject::get_by_id("Speaker", $data['SpeakerID']);
+                $speaker = PresentationSpeaker::get()->byID(intval($data['SpeakerID']));
             } elseif ($member) {
-                $speaker = DataObject::get_one("Speaker", "`MemberID` = ".$member->ID);
+                $speaker = PresentationSpeaker::get()->filter('MemberID', $member->ID)->first();
             }
 
             if (!$speaker) {
-                $speaker = new Speaker();
+                $speaker = new PresentationSpeaker();
             }
 
             //Find or create the 'speaker' group
