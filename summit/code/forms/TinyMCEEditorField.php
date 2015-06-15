@@ -33,7 +33,7 @@ class TinyMCEEditorField extends TextareaField
         $script = <<<SCRIPT
 tinymce.init({
     menubar: false,
-    content_css: document.querySelector('base').href + 'summit/css/tinymce.css',
+    content_css: '//www.openstack.org/summit/css/tinymce.css',
     selector: 'textarea.tinymceeditor',
     plugins: [
         {$plugins}
