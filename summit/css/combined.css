@@ -125,7 +125,9 @@ a.register-btn-lrg:focus, .register-btn-lrg:focus {
 
 a.register-btn-lrg.soon, .register-btn-lrg.soon {
   background: transparent;
-  border: 1px solid white; }
+  border: 1px solid white;
+  width: auto !important;
+  padding: 5px !important; }
 
 a.register-btn-lrg i, .register-btn-lrg i {
   margin-left: 20px; }
@@ -855,6 +857,8 @@ footer {
   width: 100%;
   background: #30739C;
   color: white; }
+  .blue h1 {
+    color: white; }
 
 /*End General Inner Page Styles*/
 #registrationModal strong {
@@ -2489,8 +2493,7 @@ ul.city-nav-list li i {
   text-align: center;
   padding: 90px 0 110px; }
   #getting-around h1 {
-    margin-top: 0;
-    color: white; }
+    margin-top: 0; }
 
 .getting-options {
   text-align: center;
@@ -2544,6 +2547,9 @@ i.zipcar-icon {
 
 /*End About Host City Page*/
 /*Info and News Page*/
+.info-summit {
+  padding: 0; }
+
 a.pass-timeline-wrapper {
   text-align: center;
   display: block; }
@@ -2769,7 +2775,74 @@ a.orange-btn:hover {
   color: white;
   background: #CE390B; }
 
-a.news-story {
+/*a.news-story {
+    background: white;
+    padding: 3% 5% 5%;
+    display: block;
+    float: left;
+    color: #30739C;
+    width: 100%;
+    position: relative;
+    margin-bottom: 30px;
+    border: 2px solid #edf2f7; 
+    &:hover {
+        border-color: #29abe2; 
+    }
+    p {
+        font-size: 0.9em;
+        color: $bluetext;
+    }
+}
+.news-left {
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 70%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    float: left;
+}
+.news-right {
+    width: 68%;
+    margin-bottom: -3%;
+    float: right;
+}
+a.news-story.no-pic .news-left {
+    display: none;
+}
+a.news-story.no-pic .news-right {
+    width: 100%;
+}
+.news-story .news-title {
+    font-size: 1.3em;
+    line-height: 1.1em;
+    font-weight: 300;
+}
+.news-byline {
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #9eb5c3;
+    border-top: 1px solid #dae5ee;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+.news-byline .posted {
+    float: left;
+}
+.news-byline .type {
+    float: right;
+}
+.news-byline .type i {
+    margin-right: 5px;
+    font-size: 1em;
+}*/
+.news-story {
   background: white;
   padding: 3% 5% 5%;
   display: block;
@@ -2779,11 +2852,13 @@ a.news-story {
   position: relative;
   margin-bottom: 30px;
   border: 2px solid #edf2f7; }
-  a.news-story:hover {
-    border-color: #29abe2; }
-  a.news-story p {
-    font-size: 0.9em;
-    color: #213c55; }
+
+a.news-story:hover {
+  border-color: #29abe2; }
+
+.news-story p {
+  font-size: 0.9em;
+  color: #30739C; }
 
 .news-left {
   width: 30%;
@@ -2804,10 +2879,10 @@ a.news-story {
   margin-bottom: -3%;
   float: right; }
 
-a.news-story.no-pic .news-left {
+.news-story.no-pic .news-left {
   display: none; }
 
-a.news-story.no-pic .news-right {
+.news-story.no-pic .news-right {
   width: 100%; }
 
 .news-story .news-title {
@@ -2835,7 +2910,8 @@ a.news-story.no-pic .news-right {
   font-size: 1em; }
 
 .timeline-wrapper .section {
-  margin-bottom: 40px; }
+  margin-bottom: 40px;
+  float: left; }
 .timeline-wrapper ul {
   padding: 0;
   margin: 0;
@@ -2876,7 +2952,7 @@ a.news-story.no-pic .news-right {
 /*About The Summit Page*/
 .about-summit {
   text-align: left;
-  padding-top: 0px; }
+  padding-top: 60px; }
 
 .about-summit blockquote {
   font-family: Georgia, serif;
@@ -3096,10 +3172,9 @@ a.outline-btn.inactive:hover {
   float: left; }
 
 .growth-chart {
-    float: left;
-    max-width: 100%;
-    margin-top: -100px;
-}
+  float: left;
+  max-width: 100%;
+  margin-top: -100px; }
 
 .growth-text-bottom {
   width: 40%;
