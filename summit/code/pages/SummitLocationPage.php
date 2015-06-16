@@ -17,6 +17,9 @@ class SummitLocationPage extends SummitPage {
         'AboutTheCityBackgroundImageHeroSource' => 'Text',
         'HostCityLat' => 'Text',
         'HostCityLng' => 'Text',
+        'VenueTitleText' => 'Text',
+        'AirportsTitle' => 'Text',
+        'AirportsSubTitle' => 'Text',
      );
 
     private static $has_one = array(
@@ -42,6 +45,7 @@ class SummitLocationPage extends SummitPage {
 
         $fields->addFieldToTab('Root.MapLocations', new HTMLEditorField('LocationsTextHeader','Intro Text'));
         $fields->addFieldToTab('Root.MapLocations', new HTMLEditorField('OtherLocations','Other Locations'));
+
 
 
         if($this->ID) {
@@ -70,14 +74,19 @@ class SummitLocationPage extends SummitPage {
             $fields->addFieldsToTab('Root.CityInfo',new TextField('AboutTheCityBackgroundImageHero', 'About The City Background Image Author'));
             $fields->addFieldsToTab('Root.CityInfo',new TextField('AboutTheCityBackgroundImageHeroSource', 'About The City Background Image Author Source Url'));
         }
+
+        $fields->addFieldToTab('Root.Main', new TextField('VenueTitleText', 'Venue Title Text'));
+        $fields->addFieldToTab('Root.Main', new TextField('AirportsTitle', 'Airports Title'));
+        $fields->addFieldToTab('Root.Main', new TextField('AirportsSubTitle', 'Airports SubTitle'));
+
         return $fields;    
 
     }
 
     public function getCityIntro(){
         $res = $this->getField('CityIntro');
-        if(empty($res))
-        return '<blockquote>
+        if(empty($res) && $this->SummitID == 4)
+            $res = '<blockquote>
 					<strong>You’re gorgeous, baby, you’re sophisticated, you live well...</strong>
 					Vancouver is Manhattan with mountains. It’s a liquid city, a tomorrow city, equal parts India, China, England, France and the Pacific Northwest. It’s the cool North American sibling.
 				</blockquote>
@@ -93,6 +102,12 @@ class SummitLocationPage extends SummitPage {
             return $this->VenueBackgroundImage()->getURL();
         }
         return '/summit/images/venue-bkgd.jpg';
+    }
+
+    public function getVenueTitleText(){
+        $text = $this->getField('VenueTitleText');
+        if(empty($text)) $text ='The Venue';
+        return $text;
     }
 
     public function getVenueBackgroundImageHero(){
@@ -111,16 +126,16 @@ class SummitLocationPage extends SummitPage {
 
     public function getLocationsTextHeader(){
         $res = $this->getField('LocationsTextHeader');
-        if(empty($res))
-        return '<p>We\'ve negotiated discount rates with six hotels adjacent to the Vancouver Convention Centre (Summit
+        if(empty($res) && $this->SummitID == 4)
+            $res = '<p>We\'ve negotiated discount rates with six hotels adjacent to the Vancouver Convention Centre (Summit
                 venue). Please move quickly to reserve a room before they sell out!</p>';
         return $res;
     }
 
     public function getOtherLocations(){
         $res = $this->getField('OtherLocations');
-        if(empty($res))
-        return ' <p>
+        if(empty($res) && $this->SummitID == 4)
+            $res = ' <p>
                 If you plan to bring your family with you to Vancouver or if you would like to have more space than a
                 hotel room offers then you may want to rent an apartment or condo during your stay. The following sites
                 are recommended for short-term property rentals.
@@ -145,8 +160,8 @@ class SummitLocationPage extends SummitPage {
 
     public function getGettingAround(){
         $res = $this->getField('GettingAround');
-        if(empty($res))
-        return '  <div class="row">
+        if(empty($res) && $this->SummitID == 4)
+            $res=  '  <div class="row">
             <div class="col-lg-8 col-lg-push-2">
                 <h1>Getting Around In Vancouver</h1>
 
@@ -186,16 +201,15 @@ class SummitLocationPage extends SummitPage {
 
     public function getAboutTheCity(){
         $res = $this->getField('AboutTheCity');
-        if(empty($res))
-        return '<p>Mountains, ocean, culture, nightlife all rolled into one beautiful city...</p>
-        <h1>Thank you Vancouver!</h1>';
+        if(empty($res) && $this->SummitID == 4)
+            $res = '<p>Mountains, ocean, culture, nightlife all rolled into one beautiful city...</p><h1>Thank you Vancouver!</h1>';
         return $res;
     }
 
     public function getLocals(){
         $res = $this->getField('Locals');
-        if(empty($res))
-        return '<div class="row">
+        if(empty($res) && $this->SummitID == 4)
+            $res = '<div class="row">
             <div class="col-lg-8 col-lg-push-2">
                 <h1>In The Words Of The Locals</h1>
             </div>
@@ -327,8 +341,8 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         return $hotels;
     }
     
-    public function Airport() {
-        return $this->Locations()->filter(array('Type' => 'Airport'))->sort('Order')->first();
+    public function Airports() {
+        return $this->Locations()->filter(array('Type' => 'Airport'))->sort('Order');
     }
 
     public function Venue() {
@@ -365,16 +379,14 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
             if($Location->IsSoldOut) {
                 $BookingBlock = '<p class="sold-out-hotel">SOLD OUT</p>';
             } else {
-                $BookingBlock = '<br><a href=\"".$Link."\" target=\"_blank\" alt=\"Visit Website\">Visit Website</a></p>';
+                $BookingBlock = "<br><a href=\"{$Link}\" target=\"_blank\" alt=\"Visit Website\">Visit Website</a></p>";
             }
-            
-            $MapScript = $MapScript . "
-            
-                ['<h5>".$Location->Name."<span>".$Location->Description."</span></h5><p>".$Location->Address.$BookingBlock."', ".$Location->Latitude.", ".$Location->Longitude."],
-            
-            ";
-            
+            $lat = empty($Location->Latitude)? 0 : $Location->Latitude;
+            $lng = empty($Location->Longitude)? 0 : $Location->Longitude;
+            $description = empty($Location->Description)? "" : "<span>".$Location->Description."</span>";
+            $MapScript = $MapScript . "['<h5>".$Location->Name."</h5>".$description."<p>". str_replace('\r\n','',$Location->Address).$BookingBlock."', ".$lat.", ".$lng."],";
         }
+        $MapScript = rtrim($MapScript, ',');
     
         $MapScript = $MapScript .
            "
