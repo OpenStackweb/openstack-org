@@ -10,6 +10,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+(function() {
+    var hash = window.location.hash;
+    if (hash != '') {
+        var filter = hash.substring(1).toLowerCase().replace(/_/g, ' ');;
+        var $evenstLink = $('.event-type-link').filter(function() {
+            if ($(this).data('type').toLowerCase() == filter) {
+                return true;
+            }
+            return false;
+        });
+        showUpcomingEvents($evenstLink);
+    }
+    $('#upcoming-events, #future-summits, #past-summits').removeClass('hidden')
+})();
+
 jQuery(document).ready(function($){
     refresh_future_events_scroll();
     setInterval(refresh_page,60000);
@@ -20,9 +35,34 @@ jQuery(document).ready(function($){
 
     $('.event-type-link').on('click', function(e) {
         e.preventDefault();
-        refresh_future_events($(this));
+
+        var $this = $(this);
+
+        showUpcomingEvents($this);
     })
 });
+
+function showUpcomingEvents($evenstLink) {
+    var filter = $evenstLink.data('type');
+
+    $('.event-type-link').removeClass('event-type-selected');
+    $evenstLink.addClass('event-type-selected')
+
+    if (filter.toLowerCase() == 'all') {
+        $('#upcoming-events .single-event').show();
+    }
+    else if (filter.toLowerCase() == 'other') {
+        $('#upcoming-events .single-event').hide();
+        $('#upcoming-events .single-event[data-type=""]').show();
+    }
+    else  {
+        $('#upcoming-events .single-event').hide();
+        $('#upcoming-events .single-event[data-type="' + filter + '"]').show();
+    }
+
+    window.location.hash = filter.toLowerCase().replace(/ /g, '_');
+
+}
 
 function refresh_page() {
     refresh_future_events();
@@ -42,20 +82,12 @@ function refresh_future_events_scroll(){
     }
 }
 
-function refresh_future_events($eventLink) {
+function refresh_future_events() {
     var $loadingIndicator = $('.events-loading');
     $loadingIndicator.removeClass('hidden');
 
     var filter = 'all';
-    if ($eventLink) {
-        filter = $eventLink.data('type');
-        if ($eventLink.hasClass('event-type-selected')) {
-            return;
-        }
-    }
-    else {
-        filter = $('.event-type-selected').data('type');;
-    }
+    var $eventLink = $('event-type-selected')
 
     var eventsAjaxCall = $.ajax({
         type: "POST",
@@ -86,11 +118,6 @@ function refresh_future_events($eventLink) {
         .always(function(){
             $loadingIndicator.addClass('hidden');
         });
-
-    if ($eventLink != null) {
-        $('.event-type-link').removeClass('event-type-selected');
-        $eventLink.addClass('event-type-selected')
-    }
 }
 
 function refresh_future_summits() {
