@@ -600,7 +600,7 @@ class PresentationPage_ManageRequest extends RequestHandler
                     'Speaker'         => $speaker,
                     'Creator' => $this->presentation->Creator(),
                     'ReviewLink'      => Director::makeRelative($speaker->ReviewLink($this->presentation->ID)),
-                    'PasswordLink' => Director::absoluteBaseURL().'summit-login/lostpassword',
+                    'PasswordLink' => Director::absoluteBaseURL().'/lostpassword',
                     'Link' => Director::absoluteBaseURL().Director::makeRelative($this->presentation->EditLink()),
                 ))
                 ->send();        
@@ -614,7 +614,7 @@ class PresentationPage_ManageRequest extends RequestHandler
                 'Creator' => $this->presentation->Creator(),
                 'Summit' => $this->presentation->Summit(),
                 'Link' => Director::absoluteBaseURL().Director::makeRelative($this->presentation->EditLink()),
-                'PasswordLink' => Director::absoluteBaseURL().'summit-login/lostpassword'
+                'PasswordLink' => Director::absoluteBaseURL().'/lostpassword'
             ))
             ->send();
         
