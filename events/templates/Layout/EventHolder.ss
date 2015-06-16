@@ -25,7 +25,7 @@
                 <span class="events-loading hidden">&nbsp;</span>
             </div>
             <div style="clear:both"></div>
-            <div id='upcoming-events' class="eventBlock upcoming">
+            <div id='upcoming-events' class="eventBlock upcoming hidden">
                 <div>
                     $getEvents(100,future_events)
                 </div>
@@ -34,13 +34,13 @@
         <div class="col-sm-6 events-second-column" style="min-height:500px">
             <% if FutureSummits(5) %>
             <h2>Upcoming Summits</h2>
-            <div id='future-summits' class="eventBlock summit">
+            <div id='future-summits' class="eventBlock summit hidden">
                 $getEvents(5,future_summits)
             </div>
             <% end_if %>
             <% if PastSummits(5) %>
             <h2>Recent OpenStack Summits &amp; Conferences</h2>
-            <div id='past-summits' class="eventBlock past">
+            <div id='past-summits' class="eventBlock past hidden">
                 $getEvents(5,past_summits)
             </div>
             <% end_if %>

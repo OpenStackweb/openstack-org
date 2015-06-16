@@ -39,23 +39,11 @@ class EventHolder_Controller extends Page_Controller {
 		'AjaxPastSummits',
 	);
 
-    /*public function __construct()   {
-        $this->event_manager = new EventManager(
-            $this->repository,
-            new EventRegistrationRequestFactory,
-            null,
-            new SapphireEventPublishingService,
-            new EventValidatorFactory,
-            SapphireTransactionManager::getInstance()
-        );
-
-        parent::__construct();
-    }*/
-
 	function init() {
 	    parent::init();
 		Requirements::css('events/css/events.css');
         Requirements::css('events/css/events.list.css');
+        Requirements::set_force_js_to_bottom(true);
 		Requirements::javascript('events/js/events.js');
         $this->buildEventManager();
 	}
