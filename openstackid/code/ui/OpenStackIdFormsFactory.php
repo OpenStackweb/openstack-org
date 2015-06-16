@@ -23,16 +23,17 @@ class OpenStackIdFormsFactory {
 
         if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false){
             $form = MemberAuthenticator::get_login_form($controller);
-
             return $form;
         }
         else{
-            $form = new Form($controller, 'OpenStackIdLoginForm',new FieldList(), $actions = new FieldList(
+            $back_url = OpenStackIdCommon::cleanBackUrl($back_url);
+            $form = new Form($controller, 'OpenStackIdLoginForm',$fields = new FieldList(), $actions = new FieldList(
                 array(
                     new FormAction('dologin', _t('Member.BUTTONLOGIN', "Log in")),
                 )
             ));
-            $form->setFormAction("Security/login?BackURL={$back_url}");
+            $form->addExtraClass('form-fieldless');
+            $form->setFormAction("/Security/login?BackURL={$back_url}");
             $form->setFormMethod('post');
             return $form;
         }

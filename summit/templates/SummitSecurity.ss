@@ -15,7 +15,7 @@
                         <% with $CurrentSummit %>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <a href="/">
-                                <img class="summit-hero-logo" src="summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='summit/images/summit-logo-small.png'" alt="OpenStack Summit">
+                                <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'" alt="OpenStack Summit">
                             </a>
                             <h2>
                                 $DateLabel

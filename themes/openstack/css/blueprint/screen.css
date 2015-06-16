@@ -266,3 +266,8 @@ label.error{
     position: absolute;
     z-index: 999;
 }
+
+
+form.form-fieldless fieldset {
+    display: none !important;
+}
