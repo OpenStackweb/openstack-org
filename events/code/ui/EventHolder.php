@@ -87,7 +87,6 @@ class EventHolder_Controller extends Page_Controller {
         }
 
         $filterLowerCase = strtolower($filter);
-        $rss_events = $this->event_manager->rssEvents($num);
         $events_array = new ArrayList();
 
         if ($filterLowerCase != 'other') {
@@ -102,20 +101,6 @@ class EventHolder_Controller extends Page_Controller {
         }
 
         $events_array->merge($pulled_events);
-
-        if ($filterLowerCase == 'meetups' || $filterLowerCase == 'all' || $filter == '') {
-            foreach ($rss_events as $item) {
-                $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
-                $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
-                $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
-                $event_duration = new EventDuration($event_start_date,$event_end_date);
-                $event = new EventPage();
-                $event->registerMainInfo($event_main_info);
-                $event->registerDuration($event_duration);
-                $event->registerLocation($item->location);
-                $events_array->push($event);
-            }
-        }
 
 		return $events_array->sort('EventStartDate', 'ASC')->limit($num,0)->toArray();
 	}

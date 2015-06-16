@@ -20,7 +20,12 @@
         <tbody>
         <% loop PostedEvents %>
             <tr>
-                <td class="title"><a id="evt{$ID}" href="#"></a>$Title</td>
+                <td class="title"><a id="evt{$ID}" href="#"></a>
+                    <% if $ExternalSourceId %>
+                        <span class="rss-event">RSS</span>
+                    <% end_if %>
+                    $Title
+                </td>
                 <td class="start-date">$EventStartDate</td>
                 <td class="start-date">$EventEndDate</td>
                 <td class="url"><a href="$EventLink">Link</a></td>

@@ -160,7 +160,6 @@ class HomePage_Controller extends Page_Controller
         }
 
         Requirements::customScript("Shadowbox.init();");
-
     }
 
 
@@ -187,55 +186,12 @@ class HomePage_Controller extends Page_Controller
         return $output;
     }
 
-    function RssEvents($limit = 7)
-    {
-
-        $result = $this->queryExternalSource('https://groups.openstack.org/events-upcoming.xml', 7200, 'channel', 'item');
-        if(!$result->count()) return $result;
-
-        foreach ($result as $item) {
-            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
-            $DOM = new DOMDocument;
-            $DOM->loadHTML(html_entity_decode($item->description));
-            $span_tags = $DOM->getElementsByTagName('span');
-            foreach ($span_tags as $tag) {
-                if ($tag->getAttribute('property') == 'schema:startDate') {
-                    $item->startDate = $tag->getAttribute('content');
-                } else if ($tag->getAttribute('property') == 'schema:endDate') {
-                    $item->endDate = $tag->getAttribute('content');
-                }
-            }
-            $div_tags = $DOM->getElementsByTagName('div');
-            foreach ($div_tags as $tag) {
-                if ($tag->getAttribute('property') == 'schema:location') {
-                    $item->location = $tag->nodeValue;
-                }
-            }
-        }
-
-        return $result->limit($limit, 0);
-    }
-
     function UpcomingEvents($limit = 1)
     {
-        $rss_events = $this->RssEvents($limit);
         $events_array = new ArrayList();
         $pulled_events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
         $events_array->merge($pulled_events);
         $output = '';
-
-        foreach ($rss_events as $item) {
-            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
-            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
-            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
-            $event_duration = new EventDuration($event_start_date,$event_end_date);
-            $event = new EventPage();
-            $event->registerMainInfo($event_main_info);
-            $event->registerDuration($event_duration);
-            $event->registerLocation($item->location);
-            $events_array->push($event);
-        }
-
         $events = $events_array->sort('EventStartDate', 'ASC')->limit($limit,0)->toArray();
 
         if ($events) {
@@ -279,25 +235,14 @@ class HomePage_Controller extends Page_Controller
     function NewsItems($limit = 20)
     {
         $return_array = new ArrayList();
+
         $outsourced_limit = 5;
         $local_limit = $limit - $outsourced_limit;
+        $rss_news = RssNews::get()->sort('Date', 'DESC')->limit($outsourced_limit);
 
-        $rss_news = $this->RssItems($outsourced_limit)->toArray();
         foreach ($rss_news as $item) {
-            $return_array->push(array('type' => 'Planet', 'link' => $item->link, 'title' => $item->title,
-                'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
-        }
-
-        $blog_news = $this->BlogItems($outsourced_limit)->toArray();
-        foreach ($blog_news as $item) {
-            $return_array->push(array('type' => 'Blog', 'link' => $item->link, 'title' => $item->title,
-                'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
-        }
-
-        $superuser_news = $this->SuperUserItems($outsourced_limit)->toArray();
-        foreach ($superuser_news as $item) {
-            $return_array->push(array('type' => 'Superuser', 'link' => $item->link, 'title' => $item->title,
-                'pubdate' => $item->date_display, 'timestamp' => $item->timestamp));
+            $return_array->push(array('type' => $item->Category, 'link' => $item->Link, 'title' => $item->Headline,
+                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'timestamp' => strtotime($item->Date)));
         }
 
         $return_array = $return_array->sort('timestamp', 'DESC')->limit($outsourced_limit,0);
@@ -310,48 +255,6 @@ class HomePage_Controller extends Page_Controller
         }
 
         return $return_array->sort('timestamp', 'DESC')->limit($limit,0);
-    }
-
-    function RssItems($limit = 7)
-    {
-
-        $result = $this->queryExternalSource('http://planet.openstack.org/rss20.xml', 7200, 'channel', 'item');
-        if(!$result->count()) return $result;
-
-        foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
-            $item->timestamp = strtotime($item->pubDate);
-        }
-
-        return $result->limit($limit, 0);
-    }
-
-    function BlogItems($limit = 7)
-    {
-
-        $result = $this->queryExternalSource('https://www.openstack.org/blog/feed/', 7200, 'channel', 'item');
-        if(!$result->count()) return $result;
-
-        foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
-            $item->timestamp = strtotime($item->pubDate);
-        }
-
-        return $result->limit($limit, 0);
-    }
-
-    function SuperUserItems($limit = 7)
-    {
-
-        $result = $this->queryExternalSource('http://superuser.openstack.org/articles/feed/', 7200, 'entry');
-        if(!$result->count()) return $result;
-
-        foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->published));
-            $item->timestamp = strtotime($item->published);
-        }
-
-        return $result->limit($limit, 0);
     }
 
     function PastEvents($num = 1)

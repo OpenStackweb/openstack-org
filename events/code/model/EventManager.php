@@ -161,14 +161,11 @@ final class EventManager {
     public function getCountByType() {
         $countByEventType = new stdclass;
 
-        $rssEventsCount = $this->rssEvents(1000)->count();
-
         $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-        $countByEventType->all = EventPage::get()->filter($filter_array)->Count() + $rssEventsCount;
+        $countByEventType->all = EventPage::get()->filter($filter_array)->Count();
 
         $filter_array['EventCategory'] = 'Meetups';
         $countByEventType->meetup = EventPage::get()->filter($filter_array)->Count();
-        $countByEventType->meetup += $rssEventsCount;
 
         $filter_array['EventCategory'] = 'Industry';
         $countByEventType->industry = EventPage::get()->filter($filter_array)->Count();
@@ -215,5 +212,45 @@ final class EventManager {
         }
 
         return $result->limit($limit, 0);
+    }
+
+    /**
+     * @param array $rss_events
+     */
+    function rss2events($rss_events) {
+        $events_array = new ArrayList();
+        foreach ($rss_events as $item) {
+            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
+            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
+            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
+            $event_duration = new EventDuration($event_start_date,$event_end_date);
+            $event = new EventPage();
+            $event->registerMainInfo($event_main_info);
+            $event->registerDuration($event_duration);
+            $event->registerLocation($item->location);
+            $event->ExternalSourceId = explode(' ', $item->guid)[0];
+            $events_array->push($event);
+        }
+
+        return $events_array;
+    }
+
+    function saveRssEvents($events_array) {
+        foreach ($events_array as $event) {
+
+            $filter_array = array();
+            $filter_array["EventEndDate"] = $event->EventEndDate;
+            $filter_array["ExternalSourceId"] = $event->ExternalSourceId;
+
+            $count = EventPage::get()->filter($filter_array)->Count();
+
+            $event_repository = $this->event_repository;
+
+            if ($count == 0) {
+                $this->tx_manager->transaction(function() use ($event_repository, $event){
+                    $event_repository->add($event);
+                });
+            }
+        }
     }
 } 

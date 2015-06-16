@@ -21,3 +21,12 @@
 .sponsor {
     max-width: 100px;
 }
+
+.rss-event {
+    font-weight: bold;
+    font-size: 10px;
+    padding: 4px;
+    background-color: #FF9966;
+    color: white;
+    margin-right: 3px;
+}
