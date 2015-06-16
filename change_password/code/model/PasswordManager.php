@@ -59,7 +59,7 @@ final class PasswordManager {
 		$isValid = $member->changePassword($password);
 		if(!$isValid->valid()) throw new InvalidPasswordException($isValid->starredList());
 
-		$member->logIn();
+
 		//invalidate former auto login token
 		$member->generateAutologinTokenAndStoreHash();
 
