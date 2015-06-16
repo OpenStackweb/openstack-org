@@ -1,13 +1,15 @@
 
 // Toggle sidebar nav
-$(".open-panel").click(function(){
-  $("body").toggleClass("openNav");
+$(".open-panel").click(function(event){
+   $("body").toggleClass("openNav");
+    event.preventDefault();
+    return false;
 });
 
 // Smooth scroll
-$('a[href^=#]').click(function(){
+$('a[href^=#]').click(function(){git 
     $('html, body').animate({
-        scrollTop: $( $.attr(this, 'href') ).offset().top
+        scrollTop: $( $.attr($(this), 'href') ).offset().top
     }, 500);
     return false;
 });

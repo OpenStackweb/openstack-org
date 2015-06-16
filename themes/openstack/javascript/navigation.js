@@ -68,7 +68,7 @@ jQuery(document).ready(function($){
     }
 	
 // Toggle mobile header nav dropdowns
-        $("i.mobile-expand").click(function () {
+        $("i.mobile-expand").click(function (event) {
 					console.log('js is here');
 					if ($(this).closest('li').hasClass("open")) {
 						$('li').removeClass('open');

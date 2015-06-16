@@ -2,26 +2,32 @@
 <html lang="en">
 
 <head>
-    <% include Head %>    
+    <% include Head %>
 </head>
 
 <body class="presentation-page">
-    <div class="main-body">
-        <div id="wrap">
-            <div  class="summit-hero-wrapper<% if $top_section != 'full' %> condensed<% end_if %><% if HeroCSSClass %> $HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: rgba(0, 0, 0, 0) url('{$SummitImage.Image.link}') no-repeat scroll center bottom / cover ;"<% end_if %> >
-                <div class="container">
-                    <div class="row">
-                        <% with $CurrentSummit %>
+<div class="main-body">
+    <div id="wrap">
+        <div class="summit-hero-wrapper<% if $top_section != 'full' %> condensed<% end_if %><% if HeroCSSClass %> $HeroCSSClass<% end_if %>"
+             <% if $SummitImage %>style="background: rgba(0, 0, 0, 0) url('{$SummitImage.Image.link}') no-repeat scroll center bottom / cover ;"<% end_if %> >
+            <div class="container">
+                <div class="row">
+                    <% with $CurrentSummit %>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <a href="/">
-                                <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'" alt="OpenStack Summit">
+                                <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg"
+                                     onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'"
+                                     alt="OpenStack Summit">
                             </a>
+
                             <h2>
                                 $DateLabel
                             </h2>
+
                             <h1>
                                 $Title
                             </h1>
+
                             <div class="landing-action">
                                 <% if $RegistrationLink %>
                                     <a href="{$RegistrationLink}" class="btn orange-btn">Register Now</a>
@@ -52,40 +58,41 @@
                                 </div>
                             <% end_if %>
                         </div>
-                        <% end_with %>
-                    </div>
-                    <a href="#" class="open-panel"><i class="fa fa-bars fa-2x collapse-nav"></i></a>
+                    <% end_with %>
                 </div>
-                <div class="hero-tab-wrapper">
-                    <!-- Microsite Navigation -->
-
-<% include SummitNav %>
-
-<!-- End Microsite Navigation -->
-                </div>
-                <a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i class="fa fa-info-circle"></i></a>
+                <a href="#" class="open-panel"><i class="fa fa-bars fa-2x collapse-nav"></i></a>
             </div>
+            <div class="hero-tab-wrapper">
+                <!-- Microsite Navigation -->
 
-            <!-- Begin Page Content -->
-            <% if $IsWelcome %>
+                <% include SummitNav %>
+
+                <!-- End Microsite Navigation -->
+            </div>
+            <a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Claire Massey"><i
+                    class="fa fa-info-circle"></i></a>
+        </div>
+
+        <!-- Begin Page Content -->
+        <% if $IsWelcome %>
             <div class="presentation-app-header success">
                 <div class="container">
                     <p class="status">Welcome to OpenStack!</p>
                 </div>
             </div>
-            <% end_if %>            
-            <div class="presentation-app-header">
-                <div class="container">
-                    <p class="status"><i class="fa fa-calendar"></i>&nbsp;{$Top.PresentationDeadlineText}</p>
-                </div>
+        <% end_if %>
+        <div class="presentation-app-header">
+            <div class="container">
+                <p class="status"><i class="fa fa-calendar"></i>&nbsp;{$Top.PresentationDeadlineText}</p>
             </div>
-            
-            $Layout
-            <!-- End Page Content -->
-            <div id="push"></div>
         </div>
-        <!-- Footer -->
-            <footer>
+
+        $Layout
+        <!-- End Page Content -->
+        <div id="push"></div>
+    </div>
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row footer-links">
                 <div class="col-lg-2 col-sm-2">
@@ -123,15 +130,19 @@
                         <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
                         <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
                         <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
-                        <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributors_License_Agreement">OpenStack CLA</a></li>
+                        <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributors_License_Agreement">OpenStack
+                            CLA</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-sm-4">
                     <h3>Stay In Touch</h3>
                     <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
-                    <a href="https://www.facebook.com/openstack" target="_blank" class="social-icons footer-facebook"></a>
-                    <a href="https://www.linkedin.com/company/openstack" target="_blank" class="social-icons footer-linkedin"></a>
-                    <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+                    <a href="https://www.facebook.com/openstack" target="_blank"
+                       class="social-icons footer-facebook"></a>
+                    <a href="https://www.linkedin.com/company/openstack" target="_blank"
+                       class="social-icons footer-linkedin"></a>
+                    <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank"
+                       class="social-icons footer-youtube"></a>
                     <!-- <form class="form-inline">
                         <div class="form-group newsletter-form">
                             <label>Join Our Newsletter</label>
@@ -140,70 +151,32 @@
                         </div>
                     </form> -->
                     <p class="fine-print">
-                        The OpenStack project is provided under the Apache 2.0 license. Openstack.org is powered by <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+                        The OpenStack project is provided under the Apache 2.0 license. Openstack.org is powered by <a
+                            href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
                     </p>
                 </div>
             </div>
         </div>
     </footer>
 
-        <!-- Hidden Sidebar Nav -->
-        <div class="sidebar-nav">
-            <nav>
-                <a href="#" class="close-panel"><i class="icon-remove-sign icon-large"></i></a>
-                <ul class="sidebar-menu">
-                    <!-- Microsite Navigation -->
+    <!-- Hidden Sidebar Nav -->
+    <div class="sidebar-nav">
+        <nav>
+            <a href="#" class="close-panel"><i class="icon-remove-sign icon-large"></i></a>
+            <ul class="sidebar-menu">
+                <!-- Microsite Navigation -->
 
-<ul class="nav nav-tabs">
+                <% include SummitNav %>
 
-    
-    
-    <li class="">
-        <a href="/about-the-summit/">About The Summit</a>
-    </li>
+                <!-- End Microsite Navigation -->
+            </ul>
 
-    
-    
-    <li class="">
-        <a href="/details-and-updates/">Details & Updates</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/about-vancouver/">About Vancouver</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/sponsors/">Sponsoring</a>
-    </li>
-
-    
-    
-        
-    
-    <li class="">
-        <a href="/speakers/">Speakers</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/faq/">FAQ</a>
-    </li>
-
-</ul>
-
-<!-- End Microsite Navigation -->
-                </ul>
-                <% if $CurrentSummit.RegistrationLink %>
-                    <a href="$CurrentSummit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
-                <% end_if %>
-            </nav>
-        </div>
+            <% if $CurrentSummit.RegistrationLink %>
+                <a href="$CurrentSummit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
+            <% end_if %>
+        </nav>
     </div>
+</div>
 </body>
 
 </html>

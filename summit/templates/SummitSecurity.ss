@@ -114,50 +114,11 @@
                 <ul class="sidebar-menu">
                     <!-- Microsite Navigation -->
 
-<ul class="nav nav-tabs">
+                    <% include SummitNav %>
 
-    
-    
-    <li class="">
-        <a href="/about-the-summit/">About The Summit</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/details-and-updates/">Details & Updates</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/about-vancouver/">About Vancouver</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/sponsors/">Sponsoring</a>
-    </li>
-
-    
-    
-        
-    
-    <li class="">
-        <a href="/speakers/">Speakers</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/faq/">FAQ</a>
-    </li>
-
-</ul>
-
-<!-- End Microsite Navigation -->
+                    <!-- End Microsite Navigation -->
                 </ul>
+
                 <% if $CurrentSummit.RegistrationLink %>
                     <a href="$CurrentSummit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
                 <% end_if %>
