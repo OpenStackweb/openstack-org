@@ -18,7 +18,7 @@ if(defined('OPENSTACKID_ENABLED')) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class OpenStackIdSecurityController extends Security
+class OpenStackIdSecurityController extends CustomPasswordController
 {
 
     private static $allowed_actions = array(
@@ -26,6 +26,8 @@ class OpenStackIdSecurityController extends Security
         'logout',
         'badlogin',
         'ping',
+        'changepassword',
+        'ChangePasswordForm',
     );
 
     private $consumer;

@@ -62,9 +62,13 @@ final class OpenStackIdCommon {
     }
 
     public static function loginMember($member, $back_url){
+        if(!empty($back_url) && !Director::is_site_url($back_url)){
+            return Controller::curr()->httpError(403);
+        }
+
         if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false){
             $member->login();
-            return Controller::curr()->redirect($back_url);
+                 return Controller::curr()->redirect($back_url);
         }
         else{
             return Controller::curr()->redirect('/Security/login?BackURL='.$back_url);

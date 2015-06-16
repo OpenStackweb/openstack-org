@@ -1,0 +1,16 @@
+---
+Name: change_password_security
+After: 'framework/*'
+---
+Injector:
+  Security:
+    class: CustomPasswordController
+---
+Name: change_password_emails
+After: 'silverstripe-permamail/injector#permamail'
+---
+Injector:
+  Member_ForgotPasswordEmail:
+    class: CustomMember_ForgotPasswordEmail
+  Member_ChangePasswordEmail:
+    class: CustomMember_ChangePasswordEmail

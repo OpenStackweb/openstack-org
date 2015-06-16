@@ -15,7 +15,7 @@
 /**
  * Class CustomMember_ForgotPasswordEmail
  */
-final class CustomMember_ForgotPasswordEmail extends Member_ForgotPasswordEmail {
+final class CustomMember_ForgotPasswordEmail extends Email {
 	protected $from = '';  // setting a blank from address uses the site's default administrator email
 	protected $subject = '';
 	protected $ss_template = 'CustomForgotPasswordEmail';

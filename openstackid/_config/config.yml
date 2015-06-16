@@ -1,12 +1,3 @@
-Member:
-  extensions:
-    - OpenStackIdMember
-Injector:
-  OpenStackIdMySQLStore:
-    constructor:
-      0: %$OpenStackIdDatabaseConnection
-  MyOpenIDConsumer:
-    class: Auth_OpenID_Consumer
-    constructor:
-          0: %$OpenStackIdMySQLStore
-          1: %$SilverStripeSessionWrapper
+---
+Name: openstackid
+---
