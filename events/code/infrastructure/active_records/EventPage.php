@@ -19,15 +19,20 @@ class EventPage
     implements IEvent {
 
     private static $db = array(
-        'EventStartDate'      => 'Date',
-        'EventEndDate'        => 'Date',
-        'EventLink'           => 'Text',
-        'EventLinkLabel'      => 'Text',
-        'EventCategory'       => 'Text',
-        'EventLocation'       => 'Text',
-        'EventSponsor'        => 'Text',
-        'EventSponsorLogoUrl' => 'Text',
-        'IsSummit'            => 'Boolean'
+        'EventStartDate'       => 'Date',
+        'EventEndDate'         => 'Date',
+        'EventLink'            => 'Text',
+        'EventLinkLabel'       => 'Text',
+        'EventCategory'        => 'Text',
+        'EventLocation'        => 'Text',
+        'EventSponsor'         => 'Text',
+        'EventSponsorLogoUrl'  => 'Text',
+        'IsSummit'             => 'Boolean',
+        'ExternalSourceId'     => 'Varchar(255)',
+    );
+
+    private static $defaults = array(
+        'ExternalSourceId' => null,
     );
 
     private static $has_one = array();
