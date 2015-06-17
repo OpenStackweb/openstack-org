@@ -187,7 +187,7 @@
 
                     <li role="presentation" class="divider"></li>
 
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/Security/logout/<% if Top.BackUrl %>?BackURL=$Top.BackUrl<% end_if %>">Log Out</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/Security/logout/?BackURL={$Top.Link}">Log Out</a></li>
 
 
                 </ul>

@@ -127,7 +127,7 @@ final class Consultants_Controller extends AbstractController
             list($list, $size) = $this->consultants_repository->getAll($query, 0, 1000);
 
             foreach ($list as $public_cloud) {
-                $output .= $public_cloud->renderWith('ConsultantsDirectoryPage_CloudBox', array('Link' => $this->Link()));
+                $output .= $public_cloud->renderWith('ConsultantsDirectoryPage_CloudBox', array('ConsultantLink' => $this->Link()));
             }
         } catch (Exception $ex) {
             return $this->httpError(500, 'Server Error');

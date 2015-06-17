@@ -48,14 +48,18 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
 	function init(){
         parent::init();
-        //JS
 
-		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
-		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-		Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/training.directory.page.js");
-	    Requirements::customScript("jQuery(document).ready(function($) {
+        Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
+        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+    	Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+
+        Requirements::combine_files('marketplace_training_landing.js',
+            array(
+                "themes/openstack/javascript/chosen.jquery.min.js",
+                "marketplace/code/ui/frontend/js/training.directory.page.js"
+        ));
+
+		 Requirements::customScript("jQuery(document).ready(function($) {
             $('#training','.marketplace-nav').addClass('current');
         });");
 

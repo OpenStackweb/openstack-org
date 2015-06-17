@@ -159,7 +159,6 @@ class HomePage_Controller extends Page_Controller
             $VisitorCookie->set('ReturningVisitor', TRUE);
         }
 
-        Requirements::customScript("Shadowbox.init();");
     }
 
 

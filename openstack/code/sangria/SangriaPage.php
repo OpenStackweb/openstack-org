@@ -44,7 +44,6 @@ final class SangriaPage_Controller extends AdminController {
 	    Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
 	    Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 	    Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
-	    Requirements::javascript('themes/openstack/javascript/querystring.jquery.js');
 	    Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
         Requirements::css("themes/openstack/css/deployment.survey.page.css");

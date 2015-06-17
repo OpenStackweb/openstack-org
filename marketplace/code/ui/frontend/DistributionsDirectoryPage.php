@@ -67,8 +67,12 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
         });");
 		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
 
-		Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-		Requirements::javascript("marketplace/code/ui/frontend/js/implementation.directory.page.js");
+        Requirements::combine_files('marketplace_distros_landing.js',
+            array(
+                "themes/openstack/javascript/chosen.jquery.min.js",
+                "marketplace/code/ui/frontend/js/implementation.directory.page.js"
+            ));
+
 		Requirements::customScript($this->GATrackingCode());
 
 		$this->distribution_repository = new SapphireDistributionRepository;

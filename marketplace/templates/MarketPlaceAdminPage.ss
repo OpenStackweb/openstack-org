@@ -7,21 +7,6 @@
     <title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
 
     <% base_tag %>
-
-    <!-- Google Fonts -->
-    <link href='{$CurrentProtocol}fonts.googleapis.com/css?family=PT+Sans&subset=latin' rel='stylesheet' type='text/css'>
-
-    <!-- Framework CSS -->
-    <link rel="stylesheet" href="/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="/themes/openstack/css/blueprint/print.css" type="text/css" media="print">
-
-    <!-- IE CSS -->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-    <link rel="stylesheet" type="text/css" href="themes/openstack/css/sangria.css" />
-    <!-- OpenStack Specific CSS -->
-    <% require themedCSS(main) %>
-    <link rel="stylesheet" href="/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print">
 </head>
 <body id="$URLSegment">
 

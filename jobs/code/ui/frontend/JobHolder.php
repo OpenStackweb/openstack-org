@@ -40,9 +40,10 @@ class JobHolder_Controller extends Page_Controller {
 	function init(){
 		parent::init();
 		RSSFeed::linkToFeed($this->Link() . "rss");
+
 		Requirements::css('jobs/css/jobs.css');
-        Requirements::javascript('themes/openstack/javascript/querystring.jquery.js');
-		Requirements::javascript('jobs/js/jobs.js');
+  		Requirements::javascript('jobs/js/jobs.js');
+
 		$this->repository = new SapphireJobRepository;
 	}
 
