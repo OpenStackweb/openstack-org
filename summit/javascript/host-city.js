@@ -34,7 +34,7 @@ var icons_length = icons.length;
 
 
 var shadow = {
-    anchor: new google.maps.Point(15,33),
+    anchor: new google.maps.Point(15, 33),
     url: iconURLPrefix + 'shadow50.png'
 };
 
@@ -46,11 +46,12 @@ var infowindow = new google.maps.InfoWindow({
 
 var marker;
 var markers = new Array();
-
+var location_markers = [];
 var iconCounter = 0;
 $(document).ready(function () {
-    $(document).on("scroll", onScroll);
-    
+
+    //$(document).on("scroll", onScroll);
+
     //smoothscroll
     $('a[href^="#"]').on('click', function (e) {
         e.preventDefault();
@@ -59,20 +60,20 @@ $(document).ready(function () {
             $(this).removeClass('active');
         })
         $(this).addClass('active');
-      
+
         var target = this.hash,
             menu = target;
         $target = $(target);
-        
+
         var detla = 0;
-        
+
         // figure out how much room to allow for nav bar
-        if ($( '#nav-bar' ).hasClass( 'fixed' )) {
+        if ($('#nav-bar').hasClass('fixed')) {
             detla = 60;
         } else {
             detla = 170;
         }
-        
+
         $('html, body').stop().animate({
             'scrollTop': $target.offset().top - detla
         }, 500, 'swing', function () {
@@ -93,9 +94,60 @@ $(document).ready(function () {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         }
     });
+
+    $('.marker-link').click(function (event) {
+        //event.preventDefault();
+        // The function to trigger the marker click, 'id' is the reference index to the 'markers' array.
+        var id = parseInt($(this).attr('data-location-id'));
+        var marker_pos = location_markers[id];
+        console.log(marker_pos);
+        google.maps.event.trigger(markers[marker_pos], 'click');
+        //return false;
+    });
+
+    // Add the markers and infowindows to the map
+    for (var i = 0; i < locations.length; i++) {
+        var type = locations[i][4];
+        if(type =='Airport'){
+            iconCounter = 1;
+        }
+        else if(type == 'Venue'){
+            iconCounter = 0;
+        }
+        else {
+            var min = 2;
+            var max = icons.lenght;
+            iconCounter = Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map,
+            icon : icons[iconCounter],
+            shadow: shadow
+        });
+        location_markers[locations[i][3]] = i;
+        markers.push(marker);
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+
+    }
+
+    $(window).bind('scroll', function () {
+        if ($(window).scrollTop() > num) {
+            $('.city-nav.city').addClass('fixed');
+        } else {
+            $('.city-nav.city').removeClass('fixed');
+        }
+    });
 });
 
-function onScroll(event){
+function onScroll(event) {
     var scrollPos = $(document).scrollTop();
     $('.city-nav a').each(function () {
         var currLink = $(this);
@@ -104,37 +156,24 @@ function onScroll(event){
             $('.city-nav ul li a').removeClass("active");
             currLink.addClass("active");
         }
-        else{
+        else {
             currLink.removeClass("active");
         }
     });
 }
 
 
+// AutoCenter();
 
-$(window).bind('scroll', function () {
-    if ($(window).scrollTop() > num) {
-        $('.city-nav.city').addClass('fixed');
-    } else {
-        $('.city-nav.city').removeClass('fixed');
-    }
-});
-
-    
-    function AutoCenter() {
-      //  Create a new viewpoint bound
-      var bounds = new google.maps.LatLngBounds();
-      //  Go through each...
-      $.each(markers, function (index, marker) {
+function AutoCenter() {
+    //  Create a new viewpoint bound
+    var bounds = new google.maps.LatLngBounds();
+    //  Go through each...
+    $.each(markers, function (index, marker) {
         bounds.extend(marker.position);
-      });
-      //  Fit these bounds to the map
-      map.fitBounds(bounds);
-    }
-    // AutoCenter();
+    });
+    //  Fit these bounds to the map
+    map.fitBounds(bounds);
+}
 
-    // The function to trigger the marker click, 'id' is the reference index to the 'markers' array.
-    function myClick(id){
-        id = id + 1; // hack that allows for summit venue and airport to be ahaed of hotels
-        google.maps.event.trigger(markers[id], 'click');
-    }
+
