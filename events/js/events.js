@@ -33,9 +33,8 @@ jQuery(document).ready(function($){
         refresh_future_events();
     });
 
-    $('.event-type-link').on('click', function(e) {
+    $('#upcoming-events-container').on('click', '.event-type-link', function(e) {
         e.preventDefault();
-
         var $this = $(this);
 
         showUpcomingEvents($this);
@@ -87,7 +86,7 @@ function refresh_future_events() {
     $loadingIndicator.removeClass('hidden');
 
     var filter = 'all';
-    var $eventLink = $('event-type-selected')
+    var selectedEventType = $('.event-type-selected').data('type');
 
     var eventsAjaxCall = $.ajax({
         type: "POST",
@@ -108,12 +107,21 @@ function refresh_future_events() {
             refresh_future_events_scroll();
 
             var countsByEventType = arguments[1][0];
-            $('.event-type-link[data-type="All"] span').text(countsByEventType.all);
-            $('.event-type-link[data-type="Industry"] span').text(countsByEventType.industry);
-            $('.event-type-link[data-type="Meetups"] span').text(countsByEventType.meetups);
-            $('.event-type-link[data-type="OpenStack Days"] span').text(countsByEventType.openStackDays);
-            $('.event-type-link[data-type="Other"] span').text(countsByEventType.other);
+            var $eventTypeLinks = $('.event-type-links');
+            $eventTypeLinks.empty();
+            $.each(countsByEventType, function(k, v) {
+                var link = '<a href="#' + k + '" class="event-type-link" data-type="' + k + '">' + k + ' (' + v + ')</a>';
+                var $link = $("<a/>",
+                    {
+                        href:"#",
+                        "class": "event-type-link",
+                        "data-type": k
+                    }
+                ).text(k + ' (' + v + ')');
 
+                $eventTypeLinks.append($link);
+            });
+            $eventTypeLinks.find('[data-type="' + selectedEventType + '"]').addClass('event-type-selected');
         })
         .always(function(){
             $loadingIndicator.addClass('hidden');

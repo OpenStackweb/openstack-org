@@ -1,5 +1,11 @@
 .event-type-link {
-    margin-right: 7px;
+    margin-right: 5px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.event-type-links {
+    float: left;
 }
 
 .event-type-selected {
@@ -10,4 +16,8 @@
     background: url("../../framework/images/network-save.gif") no-repeat;
     padding: 0 0 0 20px;
     color: gray;
+}
+
+.event-type-links {
+
 }

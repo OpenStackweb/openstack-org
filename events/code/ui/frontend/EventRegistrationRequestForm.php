@@ -17,6 +17,15 @@
 final class EventRegistrationRequestForm extends SafeXSSForm {
 
 	function __construct($controller, $name, $use_actions = true) {
+        $event_manager = new EventManager(
+            $this->repository,
+            new EventRegistrationRequestFactory,
+            null,
+            new SapphireEventPublishingService,
+            new EventValidatorFactory,
+            SapphireTransactionManager::getInstance()
+        );
+
 		$fields = new FieldList;
 		//point of contact
 		$fields->push(new TextField('point_of_contact_name','Name'));
@@ -24,7 +33,7 @@ final class EventRegistrationRequestForm extends SafeXSSForm {
 		//main info
 		$fields->push(new TextField('title','Title'));
 		$fields->push(new TextField('url','Url'));
-        $categoryField = new DropdownField('category','Category',array('Industry'=>'Industry Events','Meetups'=>'Meetups','OpenStack Days'=>'OpenStack Days'));
+        $categoryField = new DropdownField('category','Category', $event_manager->getAllTypes());
         $categoryField->setEmptyString('-- select a category --');
         $fields->push($categoryField);
 		//location

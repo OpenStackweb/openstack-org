@@ -159,23 +159,26 @@ final class EventManager {
      * @return EventTypeSummary
      */
     public function getCountByType() {
-        $countByEventType = new stdclass;
 
-        $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-        $countByEventType->all = EventPage::get()->filter($filter_array)->Count();
+        $count_by_event_type = array();
 
-        $filter_array['EventCategory'] = 'Meetups';
-        $countByEventType->meetup = EventPage::get()->filter($filter_array)->Count();
+        $result = DB::query("
+            SELECT EventCategory, COUNT(*) AS EventCategoryCount FROM EventPage_Live where EventEndDate >= CURDATE() group by EventCategory
+            order by (CASE WHEN EventCategory IS NULL then 1 ELSE 0 END), EventCategory
+          ");
 
-        $filter_array['EventCategory'] = 'Industry';
-        $countByEventType->industry = EventPage::get()->filter($filter_array)->Count();
 
-        $filter_array['EventCategory'] = 'OpenStack Days';
-        $countByEventType->openStackDays = EventPage::get()->filter($filter_array)->Count();
+        $count_by_event_type = array("All" => 0);
+        $all_count = 0;
+        $event_type = new stdClass;
+        foreach($result as $record) {
+            $event_category = $record["EventCategory"] != null ? $record["EventCategory"] : "Other";
+            $count_by_event_type[$event_category] = $record["EventCategoryCount"];
+            $all_count += $record["EventCategoryCount"];
+        }
 
-        $countByEventType->other = EventPage::get()->where("EventCategory is null and EventEndDate >= CURDATE()")->Count();
-
-        return $countByEventType;
+        $count_by_event_type["All"] = $all_count;
+        return $count_by_event_type;
     }
 
     /**
@@ -252,5 +255,18 @@ final class EventManager {
                 });
             }
         }
+    }
+
+
+    /**
+     * @return array
+     */
+    function getAllTypes() {
+        $array = array();
+        $event_types = DB::query("SELECT DISTINCT EventCategory FROM EventPage_Live where EventCategory is not null ORDER BY EventCategory");
+        foreach ($event_types as $event_type) {
+            $array[] = $event_type["EventCategory"];
+        }
+        return $array;
     }
 } 

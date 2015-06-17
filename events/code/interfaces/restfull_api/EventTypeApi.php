@@ -59,7 +59,8 @@ class EventTypeApi
      * @var array
      */
     static $url_handlers = array(
-        'GET count-by-type' => 'countByType'
+        'GET count-by-type' => 'countByType',
+        'GET ' => 'getAll',
     );
 
     /**
@@ -67,10 +68,16 @@ class EventTypeApi
      */
     static $allowed_actions = array(
         'countByType',
+        'getAll',
     );
 
     public function countByType() {
         $countByEventType = $this->event_manager->getCountByType();
         return $this->ok($countByEventType);
+    }
+
+    public function getAll() {
+        $event_types = $this->event_manager->getAllTypes();
+        return $this->ok($event_types);
     }
 }
