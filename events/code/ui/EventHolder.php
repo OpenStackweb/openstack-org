@@ -40,8 +40,12 @@ class EventHolder_Controller extends Page_Controller {
 
 	function init() {
 	    parent::init();
-		Requirements::css('events/css/events.css');
-        Requirements::css('events/css/events.list.css');
+
+        Requirements::combine_files('events_holder.css', array(
+            'events/css/events.css',
+            'events/css/events.list.css'
+        ));
+
         Requirements::set_force_js_to_bottom(true);
 		Requirements::javascript('events/js/events.js');
         $this->buildEventManager();
