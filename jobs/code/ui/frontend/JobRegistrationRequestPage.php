@@ -32,19 +32,29 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
 
 	function init()	{
 		parent::init();
-		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
-		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-		Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-		Requirements::javascript("themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js");
-		Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-		Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
-		Requirements::javascript("marketplace/code/ui/admin/js/geocoding.jquery.js");
-		Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-		Requirements::javascript('themes/openstack/javascript/pure.min.js');
-		Requirements::javascript("jobs/js/job.registration.request.page.js");
+
+        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+
+        Requirements::combine_files('jobs_registration.css', array(
+            "themes/openstack/css/chosen.css",
+            'jobs/css/job.registration.form.css',
+        ));
+
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+
+        Requirements::combine_files('jobs_registration.js', array(
+            "themes/openstack/javascript/chosen.jquery.min.js",
+            "themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js",
+            "themes/openstack/javascript/jquery.validate.custom.methods.js",
+            "marketplace/code/ui/admin/js/geocoding.jquery.js",
+            "marketplace/code/ui/admin/js/utils.js",
+            'themes/openstack/javascript/pure.min.js',
+            "jobs/js/job.registration.request.page.js",
+            "jobs/js/job.registration.form.js"
+        ));
 
 		$this->manager = new JobRegistrationRequestManager(
 			new SapphireJobRegistrationRequestRepository,
@@ -59,8 +69,7 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
 
 	function JobRegistrationRequestForm(){
 		$data = Session::get("FormInfo.Form_JobRegistrationRequestForm.data");
-		Requirements::css('jobs/css/job.registration.form.css');
-		Requirements::javascript("jobs/js/job.registration.form.js");
+
 		$form = new JobRegistrationRequestForm($this, 'JobRegistrationRequestForm');
 		// we should also load the data stored in the session. if failed
 		if(is_array($data)) {

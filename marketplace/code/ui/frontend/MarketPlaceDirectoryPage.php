@@ -67,6 +67,7 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
 
     function init(){
         parent::init();
+
         Requirements::javascript("marketplace/code/ui/frontend/js/marketplace.common.js");
 
         $this->review_repository = new SapphireReviewRepository;
@@ -113,12 +114,19 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
     public function MarketPlaceReviewForm(){
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-        Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/star-rating.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/marketplace.review.js");
-        Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
-        Requirements::css("marketplace/code/ui/frontend/css/marketplace-review.css");
+
+        Requirements::combine_files('marketplace_review_form.js', array(
+                "themes/openstack/javascript/jquery.validate.custom.methods.js",
+                "marketplace/code/ui/frontend/js/star-rating.min.js",
+                "marketplace/code/ui/frontend/js/marketplace.review.js"
+            )
+        );
+
+        Requirements::combine_files('marketplace_review_form.css', array(
+                "marketplace/code/ui/frontend/css/star-rating.min.css",
+                "marketplace/code/ui/frontend/css/marketplace-review.css"
+            )
+        );
 
         $form            = new MarketPlaceReviewForm($this, 'MarketPlaceReviewForm');
         $data            = Session::get("FormInfo.Form_MarketPlaceReviewForm.data");

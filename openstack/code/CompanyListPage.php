@@ -46,17 +46,21 @@ class CompanyListPage_Controller extends Page_Controller
 
         // require custom CSS
 
-        Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-        Requirements::css("themes/openstack/css/jquery.autocomplete.css");
+        Requirements::combine_files('company_list.css', array(
+            "themes/openstack/css/chosen.css",
+            "themes/openstack/css/jquery.autocomplete.css",
+        ));
 
 	    Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
 	    Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
-        Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
 
-	    Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-	    Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::combine_files('company_list.js', array(
+            "themes/openstack/javascript/chosen.jquery.min.js",
+            "themes/openstack/javascript/jquery.autocomplete.min.js",
+        ));
 
     }
 
@@ -133,8 +137,6 @@ class CompanyListPage_Controller extends Page_Controller
             // Attempted to load the edit form, but the id was missing or didn't match an id in the database
             return $this->httpError(404, 'Sorry that company could not be found');
         }
-
-
     }
 
     // Save an edited company

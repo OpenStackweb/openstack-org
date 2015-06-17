@@ -1,5 +1,3 @@
-<% require themedCSS(conference) %>
-<% require javascript(themes/openstack/javascript/tag-it.js) %>
 $Content
 <div class="membership-level-container">
     <button type="button" class="btn btn-primary foundation-member active">Foundation Member</button>

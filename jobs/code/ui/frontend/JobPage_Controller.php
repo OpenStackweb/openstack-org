@@ -28,15 +28,18 @@ class JobPage_Controller extends Page_Controller {
 
     function init()	{
         parent::init();
+
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-        Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
+
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+
+        Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js");
         Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript("marketplace/code/ui/admin/js/geocoding.jquery.js");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         Requirements::javascript('themes/openstack/javascript/pure.min.js');

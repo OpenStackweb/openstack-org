@@ -57,6 +57,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 
 	function init()	{
 		parent::init();
+
 		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
@@ -64,14 +65,18 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
             $('#consulting','.marketplace-nav').addClass('current');
         });");
 		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
+
 		Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
-		Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-		Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-		Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-		Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-		Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
-		Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-		Requirements::javascript("marketplace/code/ui/frontend/js/consultants.directory.page.js");
+
+        Requirements::combine_files('marketplace_consultants_directory_page.js', array(
+            "marketplace/code/ui/frontend/js/markerclusterer.js",
+            "marketplace/code/ui/frontend/js/oms.min.js",
+            "marketplace/code/ui/frontend/js/infobubble-compiled.js",
+            "marketplace/code/ui/frontend/js/google.maps.jquery.js",
+            "themes/openstack/javascript/chosen.jquery.min.js",
+            "marketplace/code/ui/frontend/js/consultants.directory.page.js"
+        ));
+
 		Requirements::customScript($this->GATrackingCode());
 
 		$this->consultant_repository       = new SapphireConsultantRepository;
