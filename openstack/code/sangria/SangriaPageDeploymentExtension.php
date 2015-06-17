@@ -30,7 +30,8 @@ final class SangriaPageDeploymentExtension extends Extension
             'AddUserStory',
             'ViewDeploymentsPerRegion',
             'ViewDeploymentSurveysPerRegion',
-            'ViewUsersPerRegion'));
+            'ViewUsersPerRegion',
+            'exportUsersPerRegion'));
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
             'ViewDeploymentStatistics',
@@ -42,7 +43,8 @@ final class SangriaPageDeploymentExtension extends Extension
             'AddUserStory',
             'ViewDeploymentsPerRegion',
             'ViewDeploymentSurveysPerRegion',
-            'ViewUsersPerRegion'));
+            'ViewUsersPerRegion',
+            'exportUsersPerRegion'));
     }
 
     function DeploymentDetails()
@@ -986,6 +988,7 @@ IN (SELECT CountryCode FROM Continent_Countries WHERE ContinentID = {$continent_
         Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
         Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
         Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
 
 
         if (!empty($continent)) {
@@ -1129,5 +1132,62 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
             $options .= sprintf('<option value="%s">%s</option>', $key, $val);
         }
         return $options;
+    }
+
+    function exportUsersPerRegion()
+    {
+        $params = $this->owner->getRequest()->getVars();
+        if (!isset($params['countries']) || empty($params['countries']))
+            return $this->owner->httpError('412', 'missing required param countries');
+
+        if (!isset($params['members']) || empty($params['members']))
+            return $this->owner->httpError('412', 'missing required param members');
+
+        $countries = $params['countries'];
+        $members = $params['members'];
+        $join_members = '';
+        $join_countries = '';
+
+        if (!count($countries)) {
+            return $this->owner->httpError('412', 'missing required param countries');
+        } else {
+            foreach ($countries as $country) {
+                $join_countries .= "'".$country."',";
+            }
+        }
+        $join_countries = rtrim($join_countries, ",");
+
+        if (!count($members)) {
+            return $this->owner->httpError('412', 'missing required param members');
+        } else {
+            foreach ($members as $member) {
+                $join_members .= "'".$member."',";
+            }
+        }
+        $join_members = rtrim($join_members, ",");
+
+
+        $query = new SQLQuery();
+        $select_fields = array('Member.FirstName','Member.Surname','Member.Email','Member.City','Member.State','Member.Country');
+        $query->setFrom('Member');
+        $query->setSelect($select_fields);
+        $query->addInnerJoin('Group_Members', 'Group_Members.MemberID = Member.ID');
+        $query->addInnerJoin('Group', "Group.ID = Group_Members.GroupID AND Group.Code IN (".$join_members.")");
+        $query->setWhere("Member.Country IN (".$join_countries.")");
+        $query->setOrderBy('SurName,FirstName');
+
+        $result = $query->execute();
+
+        $data = array();
+        foreach ($result as $row) {
+            $member = array('FirstName'=>$row['FirstName'],'Surname'=>$row['Surname'],'Email'=>$row['Email'],
+                            'City'=>$row['City'],'State'=>$row['State'],'Country'=>CountryCodes::$iso_3166_countryCodes[$row['Country']]);
+
+            array_push($data, $member);
+        }
+
+        $filename = "UsersPerCountry" . date('Ymd') . ".csv";
+
+        return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 }

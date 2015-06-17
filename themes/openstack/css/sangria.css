@@ -123,4 +123,15 @@ a.releaseButton:active {
     padding: 0px 15px;
 }
 
+
+.export_cb {
+    position: relative;
+    top: 2px;
+}
+
+.export_cb_all {
+    margin-left: 46px !important;
+    margin-right: 5px !important;
+}
+
 /* @end */
