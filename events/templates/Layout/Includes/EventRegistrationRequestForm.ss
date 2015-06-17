@@ -7,7 +7,7 @@
         <p id="{$FormName}_error" class="message $MessageType" style="display: none"></p>
 <% end_if %>
 
-    <fieldset>
+    <fieldset class="event-request-form">
         <% if Legend %>
             <legend>$Legend</legend>
         <% end_if %>

@@ -34,3 +34,7 @@ span.message.bad {
     width: auto;
     float: left;
 }
+
+.event-request-form .form-group{
+    margin-top: 15px;
+}
