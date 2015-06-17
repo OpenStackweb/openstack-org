@@ -352,12 +352,9 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
     public function MapScript() {
         
         $MapScript = "
-        
-           // Google Maps
+            // Google Maps
             // Define locations: HTML content for the info window, latitude, longitude
-                var locations = [
-        
-        ";
+            var locations = [";
         
         // Loop Through All The Locations and add them to the array
 
@@ -381,44 +378,16 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
             } else {
                 $BookingBlock = "<br><a href=\"{$Link}\" target=\"_blank\" alt=\"Visit Website\">Visit Website</a></p>";
             }
+
             $lat = empty($Location->Latitude)? 0 : $Location->Latitude;
             $lng = empty($Location->Longitude)? 0 : $Location->Longitude;
             $description = empty($Location->Description)? "" : "<span>".$Location->Description."</span>";
-            $MapScript = $MapScript . "['<h5>".$Location->Name."</h5>".$description."<p>". str_replace('\r\n','',$Location->Address).$BookingBlock."', ".$lat.", ".$lng."],";
+            $MapScript = $MapScript . "['<h5>".$Location->Name."</h5>".$description."<p>". str_replace('\r\n','',$Location->Address).$BookingBlock."', ".$lat.", ".$lng.",".$Location->ID.",'".$Location->Type."'],";
         }
         $MapScript = rtrim($MapScript, ',');
     
         $MapScript = $MapScript .
-           "
-
-                                ];
-
-                // Add the markers and infowindows to the map
-                for (var i = 0; i < locations.length; i++) {  
-                  marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map,
-                    icon : icons[iconCounter],
-                    shadow: shadow
-                  });
-
-                  markers.push(marker);
-
-                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                      infowindow.setContent(locations[i][0]);
-                      infowindow.open(map, marker);
-                    }
-                  })(marker, i));
-
-                  iconCounter++;
-                  // We only have a limited number of possible icon colors, so we may have to restart the counter
-                  if(iconCounter >= icons_length){
-                    iconCounter = 0;
-                  }
-                }
-
-            ";
+           "];";
         
         return $MapScript;
     

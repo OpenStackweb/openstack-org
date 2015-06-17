@@ -68,7 +68,7 @@
     </div>
 <% end_with %>
 <div class="white hotels-row" id="hotels">
-    <div class="venue-map" id="map-canvas"></div>
+<div class="venue-map" id="map-canvas"></div>
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-push-2">
@@ -97,7 +97,7 @@
                 <% if $IsSoldOut %>
                     SOLD OUT
                 <% else %>
-                    <a href="#hotels" onclick="myClick({$Pos});" target="_blank" alt="View On Map"><i
+                    <a href="$Top.Link#map-canvas" class="marker-link"  data-location-id="{$ID}"  alt="View On Map"><i
                             class="fa fa-map-marker"></i> Map</a>
                     <% if $BookingLink %>
                         <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i>
@@ -136,7 +136,7 @@
                         $Address
                     </p>
                     <p>
-                        <a href="#map-canvas" onclick="myClick(1);" target="_blank" alt="View On Map"><i
+                        <a class="marker-link" href="$Top.Link#map-canvas" data-location-id="{$ID}" alt="View On Map"><i
                                 class="fa fa-map-marker"></i> Map</a>
                         <a href="{$Website}" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Website</a>
                     </p>
