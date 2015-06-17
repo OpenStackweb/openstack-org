@@ -16,15 +16,13 @@
     <div class="row">
         <div id='upcoming-events-container' class="col-sm-6" style="min-height:500px">
             <div style="float:left;"><h2>Upcoming Events</h2></div>
-            <div style="float:left; margin:5px 0 10px 12px">
-                <a href="#" class="event-type-link event-type-selected" data-type="All">All (<span class="event-type-count">$AllEventCount</span>)</a>
-                <a href="#" class="event-type-link" data-type="Industry">Industry (<span class="event-type-count">$IndustryEventCount</span>)</a>
-                <a href="#" class="event-type-link" data-type="Meetups">Meetups (<span class="event-type-count">$MeetupEventCount</span>)</a>
-                <a href="#" class="event-type-link" data-type="OpenStack Days">OpenStack Days (<span class="event-type-count">$OpenStackDaysEventCount</span>)</a>
-                <a href="#" class="event-type-link" data-type="Other">Other (<span class="event-type-count">$OtherEventCount</span>)</a>
+            <div style="clear: both; margin:5px 0 10px 0px">
+                <div class="event-type-links">
+                    $EventTypes
+                </div>
                 <span class="events-loading hidden">&nbsp;</span>
+                <div style="clear:both"></div>
             </div>
-            <div style="clear:both"></div>
             <div id='upcoming-events' class="eventBlock upcoming hidden">
                 <div>
                     $getEvents(100,future_events)

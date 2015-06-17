@@ -93,12 +93,12 @@ jQuery(document).ready(function($) {
             onfocusout: false,
             focusCleanup: true,
             rules: {
-                title      : { required: true , ValidPlainText:true, maxlength: 35 },
-                url        : {required: true, url: true, maxlength: 255},
-                category   : {required: true},
-                location   : {required: true, ValidPlainText: true, maxlength: 255},
-                start_date : {required: true, dpDate: true},
-                end_date   : {required: true, dpDate: true, dpCompareDate:'ge #EventForm_EventForm_start_date'}
+                title           : { required: true , ValidPlainText:true, maxlength: 35 },
+                url             : {required: true, url: true, maxlength: 255},
+                event_category  : {required: true},
+                location        : {required: true, ValidPlainText: true, maxlength: 255},
+                start_date      : {required: true, dpDate: true},
+                end_date        : {required: true, dpDate: true, dpCompareDate:'ge #EventForm_EventForm_start_date'}
             },
             focusInvalid: false,
             invalidHandler: function(form, validator) {

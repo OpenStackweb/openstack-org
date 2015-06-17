@@ -30,7 +30,6 @@ class EventHolder extends Page {
  */
 class EventHolder_Controller extends Page_Controller {
 
-    private $countsByEventType = null;
     private $event_manager;
 
 	private static $allowed_actions = array (
@@ -154,38 +153,29 @@ class EventHolder_Controller extends Page_Controller {
 		return '#';
 	}
 
-    function AllEventCount() {
-        if ($this->countsByEventType == null) {
-            $this->countsByEventType = $this->event_manager->getCountByType();;
-        }
-        return $this->countsByEventType->all;
-    }
+    /**
+     * @return string
+     */
+    function EventTypes() {
+        $count_by_event_type= $this->event_manager->getCountByType();
 
-    function MeetupEventCount() {
-        if ($this->countsByEventType == null) {
-            $this->countsByEventType = $this->event_manager->getCountByType();;
-        }
-        return $this->countsByEventType->meetup;
-    }
+        $selected_class = " event-type-selected";
 
-    function IndustryEventCount() {
-        if ($this->countsByEventType == null) {
-            $this->countsByEventType = $this->event_manager->getCountByType();;
-        }
-        return $this->countsByEventType->industry;
-    }
+        $event_types = array_keys($count_by_event_type);
+        $event_types_count = array_values($count_by_event_type);
 
-    function OpenStackDaysEventCount() {
-        if ($this->countsByEventType == null) {
-            $this->countsByEventType = $this->event_manager->getCountByType();;
-        }
-        return $this->countsByEventType->openStackDays;
-    }
+        $event_type_links = "";
+        for($i = 0; $i < count($event_types_count); $i++) {
 
-    function OtherEventCount() {
-        if ($this->countsByEventType == null) {
-            $this->countsByEventType = $this->event_manager->getCountByType();;
+            $event_type_links .= sprintf('<a href="#" class="event-type-link%s" data-type="%s">%s (%s)</a>',
+                $selected_class,
+                $event_types[$i],
+                $event_types[$i],
+                $event_types_count[$i]
+            );
+            $selected_class = "";
         }
-        return $this->countsByEventType->other;
+
+        return $event_type_links;
     }
 }

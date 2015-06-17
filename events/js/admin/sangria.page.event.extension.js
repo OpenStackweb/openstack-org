@@ -12,6 +12,29 @@
  **/
 jQuery(document).ready(function($) {
 
+    buildAutocompleteCategory = function (isFistTime) {
+        var $eventCategoryAutocomplete = $( ".event-category-autocomplete" );
+
+        if ($eventCategoryAutocomplete.length > 0) {
+            $.getJSON('api/v1/events-types')
+                .done(function(data) {
+                    if (isFistTime) {
+                        $eventCategoryAutocomplete.autocomplete({ source: data, minLength: 0 });
+                    }
+                    else {
+                        $eventCategoryAutocomplete.autocomplete("option", { source: data });
+                    }
+
+                });
+
+            $eventCategoryAutocomplete.on('focus', function() {
+                $(this).autocomplete("search","");
+            })
+        }
+    }
+
+    buildAutocompleteCategory(true);
+
     var edit_dialog = $( "#edit_dialog" ).dialog({
             width: 450,
             height: 900,
@@ -66,7 +89,6 @@ jQuery(document).ready(function($) {
                             ajaxError(jqXHR, textStatus, errorThrown);
                         }
                     });
-
                 },
                 "Cancel": function() {
                     edit_dialog.dialog( "close" );
@@ -96,7 +118,7 @@ jQuery(document).ready(function($) {
                 var event = {
                     title      : $('#'+form_id+'_title',form).val(),
                     url        : $('#'+form_id+'_url',form).val(),
-                    category   : $('#'+form_id+'_category',form).val(),
+                    category   : $('#'+form_id+'_event_category',form).val(),
                     location   : $('#'+form_id+'_location',form).val(),
                     start_date : $('#'+form_id+'_start_date',form).val(),
                     end_date   : $('#'+form_id+'_end_date',form).val()
@@ -139,6 +161,7 @@ jQuery(document).ready(function($) {
                             $('.end-date',row).text(event.end_date);
                         }
 
+                        buildAutocompleteCategory(false);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         ajaxError(jqXHR, textStatus, errorThrown);
@@ -248,6 +271,7 @@ jQuery(document).ready(function($) {
                         row.hide('slow', function(){ row.remove();});
                         confirm_delete_dialog.dialog( "close" );
                         form.cleanForm();
+                        buildAutocompleteCategory(false);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         ajaxError(jqXHR, textStatus, errorThrown);

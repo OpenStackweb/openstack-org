@@ -30,10 +30,10 @@
                 </div>
             </div>
             <div class="field text " id="category">
-                <label for="$FormName_category" class="left">Category</label>
+                <label for="$FormName_event_category" class="left">Category</label>
 
                 <div class="middleColumn">
-                    $Fields.dataFieldByName(category)
+                    $Fields.dataFieldByName(event_category)
                 </div>
             </div>
         </div>
