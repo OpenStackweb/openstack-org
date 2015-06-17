@@ -46,6 +46,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 	    $PhotoField->setCanAttachExisting(false);
 	    $PhotoField->setAllowedMaxFileNumber(1);
 	    $PhotoField->setAllowedFileCategories('image');
+        $PhotoField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
 	    $PhotoField->setFolderName('profile-images');
 	    $sizeMB = 2; // 1 MB
 	    $size = $sizeMB * 1024 * 1024; // 1 MB in bytes
