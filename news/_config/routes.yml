@@ -8,3 +8,4 @@ Director:
     'news-add': 'NewsRequestPage_Controller'
     'news-edit': 'NewsRequestPage_Controller'
     'news-manage': 'NewsAdminPage_Controller'
+    'news-archived': 'NewsArchivedPage_Controller'

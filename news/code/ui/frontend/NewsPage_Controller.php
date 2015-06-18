@@ -63,13 +63,14 @@ final class NewsPage_Controller extends Page_Controller {
 
     public function index(){
 
-        $featured_news = $this->news_repository->getFeaturedNews();
-        $recent_news   = $this->news_repository->getRecentNews();
-        $slide_news    = $this->news_repository->getSlideNews();
+        $featured_news = new ArrayList($this->news_repository->getFeaturedNews());
+        $recent_news   = new ArrayList($this->news_repository->getRecentNews());
+        $slide_news    = new ArrayList($this->news_repository->getSlideNews());
 
-        return $this->renderWith(array('NewsPage','Page'), array('FeaturedNews' => new ArrayList($featured_news),
-                                                                 'RecentNews' => new ArrayList($recent_news),
-                                                                 'SlideNews' => new ArrayList($slide_news)));
+        return $this->renderWith(array('NewsPage','Page'), array('FeaturedNews' => $featured_news,
+                                                                 'RecentNews' => $recent_news,
+                                                                 'SlideNews' => $slide_news,
+                                                                 'SlideNewsCount' => $slide_news->count()));
     }
 
     function FutureEvents($num = 4) {

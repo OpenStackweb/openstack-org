@@ -14,15 +14,18 @@
     </div>
 </div>
 
+$SlideNews.TotalItems
 <div id="news-slider" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
 
+    <% if $SlideNewsCount > 1 %>
     <ol class="carousel-indicators">
         <% loop SlideNews %>
             <li data-target="#news-slider"  <% if First %>class="active" <% end_if %> data-slide-to="$Pos(0)" ></li>
         <% end_loop %>
 
     </ol>
+    <% end_if %>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
@@ -40,6 +43,8 @@
             </div>
         <% end_loop %>
     </div>
+
+    <% if $SlideNewsCount > 1 %>
     <!-- Controls -->
     <a class="left carousel-control" href="#news-slider" role="button" data-slide="prev">
         <i class="fa fa-chevron-left"></i>
@@ -47,18 +52,34 @@
     <a class="right carousel-control" href="#news-slider" role="button" data-slide="next">
         <i class="fa fa-chevron-right"></i>
     </a>
+    <% end_if %>
 </div>
 
 
-<div class="container">
+<div class="container news-container">
     <div class="row">
-        <div class="newsFeatured">
-            <div class="col-lg-12">
-                <h2>Featured Articles</h2>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <h2>OpenStack Community</h2>
+            <% loop RecentNews %>
+                <div class="recentBox">
+                    <div class="recentHeadline">
+                        <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
+                    </div>
+                    <div class="recentSummary">$HTMLSummary</div>
+                </div>
+
+            <% end_loop %>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div>
+                <h2>Foundation News</h2>
+                <div class="featured-links">
+                    <a href="http://superuser.openstack.org">SuperUser</a> | <a href="news-archived">Archived News</a>
+
+                </div>
             </div>
             <ul class="featured">
                 <% loop FeaturedNews %>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
                         <li>
                             <div class="featuredImage">
                                 <a href="news/view/$ID/$HeadlineForUrl">
@@ -74,23 +95,8 @@
                             </div>
                             <div class="featuredSummary">$HTMLSummary</div>
                         </li>
-                    </div>
                 <% end_loop %>
             </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-12">
-            <h2>Recent News</h2>
-            <% loop RecentNews %>
-                <div class="recentBox">
-                    <div class="recentHeadline">
-                        <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
-                    </div>
-                    <div class="recentSummary">$HTMLSummary</div>
-                </div>
-
-            <% end_loop %>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="news-sidebar">
@@ -104,13 +110,11 @@
                     <div class="eventBlock upcoming">
                         <% if FutureEvents(22) %>
                             <% loop FutureEvents(22) %>
-
                                 <div class="event <% if First %> top<% end_if %>">
                                     <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
                                     <div class="details">$formatDateRange - $EventLocation</div>
                                     <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
                                 </div>
-
                             <% end_loop %>
                         <% else %>
                             <div class="event top">
