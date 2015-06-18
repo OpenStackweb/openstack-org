@@ -42,7 +42,9 @@ class OpenStackIdSecurityController extends CustomPasswordController
     public function init()
     {
         parent::init();
-        Page_Controller::AddRequirements();
+        if (strpos('/Security/ping',$this->request->getURL()) === false) {
+            Page_Controller::AddRequirements();
+        }
     }
 
     /**
@@ -198,5 +200,4 @@ SCRIPT;
     public function BackUrl(){
         return OpenStackIdCommon::getRedirectBackUrl();
     }
-
 }
