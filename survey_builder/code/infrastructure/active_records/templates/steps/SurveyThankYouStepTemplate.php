@@ -54,7 +54,7 @@ class SurveyThankYouStepTemplate
         $fields->add(new TextField('EmailSubject','Email Subject'));
         $fields->add(new HtmlEditorField('EmailBodyHTML','Email Body (HTML)'));
         $fields->add($plain_body = new TextareaField('EmailBodyPlainText','Email Body (Plain)'));
-
+        $fields->add(new HiddenField('SurveyStepTemplateID','SurveyStepTemplateID'));
         $plain_body->setColumns(40);
         return $fields;
     }

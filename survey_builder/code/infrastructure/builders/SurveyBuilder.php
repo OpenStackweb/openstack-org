@@ -12,7 +12,10 @@
  * limitations under the License.
  **/
 
-class SurveyBuilder implements ISurveyBuilder {
+/**
+ * Class SurveyBuilder
+ */
+final class SurveyBuilder implements ISurveyBuilder {
 
     /**
      * @param ISurveyTemplate $template
@@ -63,14 +66,7 @@ class SurveyBuilder implements ISurveyBuilder {
         $i = 0;
         foreach($template->getSteps() as $step_template){
             ++$i;
-            $new_step = null;
-            if($step_template instanceof SurveyRegularStepTemplate){
-                $new_step = new SurveyRegularStep();
-            }
-            else{
-                $new_step = new SurveyStep;
-            }
-            $new_step->TemplateID = $step_template->getIdentifier();
+            $new_step = $this->buildStep($step_template);
             $survey->addStep($new_step);
             if($i == 1) {
                 $survey->registerCurrentStep($new_step);
@@ -97,5 +93,28 @@ class SurveyBuilder implements ISurveyBuilder {
         }
         $answer->QuestionID = $question->getIdentifier();
         return $answer;
+    }
+
+    /**
+     * @param ISurveyStepTemplate $step_template
+     * @return ISurveyStep
+     */
+    public function buildStep(ISurveyStepTemplate $step_template)
+    {
+        $new_step = null;
+
+        if($step_template instanceof SurveyDynamicEntityStepTemplate){
+            $new_step = new SurveyDynamicEntityStep;
+        }
+        else if($step_template instanceof SurveyRegularStepTemplate){
+            $new_step = new SurveyRegularStep();
+        }
+        else{
+            $new_step = new SurveyStep;
+        }
+
+        $new_step->TemplateID = $step_template->getIdentifier();
+
+        return $new_step;
     }
 }

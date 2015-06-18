@@ -52,4 +52,9 @@ interface ISurveyTemplate extends IEntity {
      * @return ISurveyStepTemplate
      */
     public function getDefaultStep();
+
+    /**
+     * @return ISurveyStepTemplate
+     */
+    public function getLastStep();
 }

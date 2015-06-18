@@ -56,4 +56,11 @@ interface ISurveyManager {
      * @return void
      */
     public function sendFinalStepEmail(IMessageSenderService $sender_service, ISurvey $survey);
+
+    /**
+     * @param ISurvey $survey
+     * @param ISurveyTemplate $template
+     * @return ISurvey
+     */
+    public function updateSurveyWithTemplate(ISurvey $survey, ISurveyTemplate $template);
 }

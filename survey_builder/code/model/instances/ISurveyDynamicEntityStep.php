@@ -34,6 +34,11 @@ interface ISurveyDynamicEntityStep extends ISurveyStep {
     public function addEntitySurvey(IEntitySurvey $entity_survey);
 
     /**
+     * @return void
+     */
+    public function clearEntitiesSurvey();
+
+    /**
      * @param int $entity_survey_id
      * @return null|IEntitySurvey
      */

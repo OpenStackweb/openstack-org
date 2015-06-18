@@ -76,4 +76,12 @@ class SurveyRegularStep
     {
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Answers')->removeAll();
     }
+
+    /**
+     * @return void
+     */
+    public function clear()
+    {
+        $this->clearAnswers();
+    }
 }

@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Interface ISurveyStep
+ */
 interface ISurveyStep extends IEntity {
 
     /**
@@ -23,4 +26,14 @@ interface ISurveyStep extends IEntity {
      * @return ISurvey
      */
     public function survey();
+
+    /**
+     * @return bool
+     */
+    public function canSkip();
+
+    /**
+     * @return void
+     */
+    public function clear();
 }
