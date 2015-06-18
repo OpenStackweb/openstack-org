@@ -1974,11 +1974,11 @@ p#ForgotPassword {
       padding-left: 30px; }
 
 .sponsor-table tr.sold-out td:first-child:before {
-  position: absolute;
+  position: relative;
   font-family: FontAwesome;
   top: 50%;
-  margin-top: -12px;
-  left: 10px;
+  margin-top: -10px;
+  left: -10px;
   content: "\f00d";
   font-size: 1.3em; }
 
