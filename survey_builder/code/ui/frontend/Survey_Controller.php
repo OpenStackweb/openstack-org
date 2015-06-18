@@ -279,7 +279,8 @@ class Survey_Controller extends Page_Controller {
         if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
 
         $this->current_entity_survey  = $current_step->getEntitySurvey($entity_survey_id);
-
+        $this->survey_manager->updateSurveyWithTemplate($this->current_entity_survey, $this->current_entity_survey->template());
+        
         return $this->customise(array(
             'Survey'       => $this->current_survey,
             'EntitySurvey' => $this->current_entity_survey
