@@ -58,42 +58,25 @@
                         var validator = this;
                         this.startRequest(element);
 
-                        $.jsonp({
-                            url: '//gdata.youtube.com/feeds/api/videos/' + encodeURIComponent(youtube_id),
-                            callbackParameter: "callback",
-                            data:
-                            {
-                                alt: "jsonc-in-script",
-                                v: "2"
-                            },
-                            success: function(json, textStatus){
+                        $.getJSON('https://www.googleapis.com/youtube/v3/videos?id=' + youtube_id + '&part=contentDetails,snippet&key=AIzaSyBUteMGkhfkT51jz3YHjr-o__hKlf17s8g')
+                            .done(function(data) {
                                 //check duration (in seconds)
                                 var valid = false;
-                                //if(json.data.duration <= max_length_in_seconds){
-                                    $(element).attr('data-youtube-id',youtube_id);
-                                    $(element).attr('data-length',json.data.duration);
-                                    $(element).attr('data-description',json.data.description);
-                                    $(element).attr('data-title',json.data.title);
+                                //TODO: we should we using data() method and not attr()
+                                $(element).attr('data-youtube-id',youtube_id);
+                                $(element).attr('data-length',data.items[0].contentDetails.duration);
+                                $(element).attr('data-description',data.items[0].snippet.localized.description);
+                                $(element).attr('data-title',data.items[0].snippet.localized.title);
 
-                                    var submitted = validator.formSubmitted;
-                                    validator.prepareElement(element);
-                                    validator.formSubmitted = submitted;
-                                    validator.successList.push(element);
-                                    validator.showErrors();
-                                    valid = true;
-                               /* }
-                                else{
-                                    var errors = {};
-                                    var message =  validator.defaultMessage( element, "validate_youtube_video_length");
-                                    errors[element.name] =  $.isFunction(message) ? message(max_length_in_seconds) : message;
-                                    validator.invalid[element.name] = true;
-                                    validator.showErrors(errors);
-                                    valid = false;
-                                }*/
+                                var submitted = validator.formSubmitted;
+                                validator.prepareElement(element);
+                                validator.formSubmitted = submitted;
+                                validator.successList.push(element);
+                                validator.showErrors();
+                                valid = true;
                                 previous.valid = valid;
                                 validator.stopRequest(element, valid);
-                            },
-                            error: function(xOptions, textStatus){
+                            }).fail(function() {
                                 //most likely error 404 (video not found!!!)
                                 var errors = {};
                                 var message =  "Your YouTube Video is not valid!";
@@ -101,8 +84,7 @@
                                 validator.invalid[element.name] = true;
                                 validator.showErrors(errors);
                                 validator.stopRequest(element, false);
-                            }
-                        });
+                            })
                         return "pending";
                     }
                     else if( this.pending[element.name] ) {
