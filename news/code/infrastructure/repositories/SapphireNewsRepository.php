@@ -23,13 +23,13 @@ final class SapphireNewsRepository extends SapphireRepository {
     /**
      * @return INews[]
      */
-    public function getFeaturedNews()
+    public function getFeaturedNews($limit = 1000)
     {
         $query = new QueryObject(new News);
         $query->addAndCondition(QueryCriteria::equal('Featured','1'));
         $query->addAndCondition(QueryCriteria::equal('Approved','1'));
         $query->addOrder(QueryOrder::asc('Rank'));
-        list($list,$count) = $this->getAll($query,0,1000);
+        list($list,$count) = $this->getAll($query,0,$limit);
         return $list;
     }
 
