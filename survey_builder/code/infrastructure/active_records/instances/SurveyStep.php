@@ -65,4 +65,24 @@ class SurveyStep
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Survey')->getTarget();
     }
 
+    /**
+     * @return bool
+     */
+    public function canSkip()
+    {
+        if($this->template()->canSkip())
+            return true;
+        if($this instanceof ISurveyDynamicEntityStep && count($this->getEntitySurveys()) > 0 ){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @throws AbstractMethodException
+     */
+    public function clear()
+    {
+        throw new AbstractMethodException('getAnswers');
+    }
 }

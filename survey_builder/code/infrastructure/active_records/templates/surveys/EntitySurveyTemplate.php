@@ -62,10 +62,10 @@ class EntitySurveyTemplate
 
         $fields = new FieldList();
 
-        $fields->add(new TextField('EntityName','Entity Name'));
+        $fields->add(new TextField('EntityName','Entity Name (Without Spaces)'));
         $fields->add(new CheckboxField('Enabled','Is Enabled'));
         $fields->add(new HiddenField('CreatedByID','CreatedByID', Member::currentUserID()));
-
+        $fields->add(new HiddenField('ParentID','ParentID'));
         //steps
         if($this->ID > 0) {
             // steps
@@ -97,5 +97,26 @@ class EntitySurveyTemplate
     public function getEntityName()
     {
         return $this->getField('EntityName');
+    }
+
+    protected function validate() {
+        $valid = ValidationResult::create();
+        if(empty($this->EntityName)){
+            return $valid->error('Entity Name is empty!');
+        }
+
+        if(!preg_match('/^[a-z_091A-Z]*$/',$this->EntityName)){
+            return  $valid->error('Entity Name has an Invalid Format!');
+        }
+
+        $title    = $this->EntityName;
+        $id       = $this->ID;
+        $owner_id = $this->ParentID;
+
+        $res   = DB::query("SELECT COUNT(ID) FROM EntitySurveyTemplate WHERE EntityName = '{$title}' AND ID <> {$id} AND ParentID = {$owner_id}")->value();
+        if(intval($res) > 0 ){
+            return $valid->error('There is already another entity survey with that name!');
+        }
+        return $valid;
     }
 }

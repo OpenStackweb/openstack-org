@@ -109,10 +109,14 @@ class SurveyTemplate
 
     protected function onAfterWrite() {
         parent::onAfterWrite();
-        if($this->Steps()->filter('Name', 'thankyou')->count() > 0) {
-            $order = count($this->getSteps()) + 1;
-            $id    = $this->Steps()->filter('Name', 'thankyou')->first()->ID;
-            DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$order} WHERE ID = {$id} ");
+        // fix for order
+        $max_order = count($this->getSteps());
+        foreach($this->Steps() as $st){
+            if($st instanceof ISurveyThankYouStepTemplate){
+                $id = $st->getIdentifier();
+                DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$max_order} WHERE ID = {$id} ");
+                break;
+            }
         }
     }
 
@@ -178,7 +182,7 @@ class SurveyTemplate
      */
     public function getDefaultStep()
     {
-        return $this->Steps()->first();
+        return $this->Steps()->sort('Order','ASC')->first();
     }
 
     /**
@@ -187,5 +191,47 @@ class SurveyTemplate
      */
     public function getStepBySlug($step){
         return $this->Steps()->filter('Name', $step)->first();
+    }
+
+    /**
+     * @return ISurveyStepTemplate
+     */
+    public function getLastStep()
+    {
+        return $this->Steps()->sort('Order','ASC')->last();
+    }
+
+    protected function validate() {
+        $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
+        if(empty($this->Title)){
+            return $valid->error('Friendly Name is empty!');
+        }
+        $title = $this->Title;
+        $id    = $this->ID;
+
+        $res = DB::query("SELECT COUNT(ID) FROM SurveyTemplate WHERE Title = '{$title}' AND ClassName = 'SurveyTemplate' AND ID <> {$id}")->value();
+        if(intval($res) > 0 ){
+            return $valid->error('There is already another survey template with that name!');
+        }
+
+        //check dates ranges
+
+        $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
+        $end_date = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
+
+        if($start_date >= $end_date){
+            return $valid->error('selected date range is invalid!');
+        }
+
+        $start_date = $this->StartDate;
+        $end_date   = $this->EndDate;
+
+        $res = DB::query("SELECT COUNT(ID) FROM SurveyTemplate WHERE ClassName = 'SurveyTemplate' AND ID <> {$id} AND ( (StartDate <= '{$end_date}')  AND  (EndDate >= '{$start_date}')) ;")->value();
+        if(intval($res) > 0 ){
+            return $valid->error('There is already another valid survey template under that date range!');
+        }
+        return $valid;
     }
 }

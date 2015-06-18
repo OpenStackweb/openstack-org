@@ -195,14 +195,6 @@ SCRIPT;
         );
     }
 
-    /**
-     * This action is available as a keep alive, so user
-     * sessions don't timeout. A common use is in the admin.
-     */
-    public function ping() {
-       return parent::ping();
-    }
-
     public function BackUrl(){
         return OpenStackIdCommon::getRedirectBackUrl();
     }

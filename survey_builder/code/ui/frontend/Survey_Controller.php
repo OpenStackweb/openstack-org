@@ -205,6 +205,11 @@ class Survey_Controller extends Page_Controller {
      */
     private function getCurrentSurveyInstance()
     {
+        $current_template = $this->survey_manager->getCurrentSurveyTemplate();
+
+        if (is_null($current_template))
+            throw new NotFoundEntityException('SurveyTemplate', 'current template not set');
+
         if(!is_null($this->current_survey)) return $this->current_survey;
         $current_survey_id = Session::get('CURRENT_SURVEY_ID');
         if (!empty($current_survey_id)){
@@ -212,14 +217,12 @@ class Survey_Controller extends Page_Controller {
 
         }
         if(is_null($this->current_survey)){
-            $current_template = $this->survey_manager->getCurrentSurveyTemplate();
-
-            if (is_null($current_template))
-                throw new NotFoundEntityException('SurveyTemplate', 'current template not set');
 
             $this->current_survey     = $this->survey_manager->buildSurvey($current_template->getIdentifier(), Member::currentUserID());
             Session::set('CURRENT_SURVEY_ID', $this->current_survey->getIdentifier());
         }
+
+        $this->current_survey = $this->survey_manager->updateSurveyWithTemplate($this->current_survey, $current_template);
 
         return $this->current_survey;
     }
@@ -258,14 +261,8 @@ class Survey_Controller extends Page_Controller {
     public function SkipStep($request){
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-        $can_skip       = false;
-        if($current_step instanceof ISurveyDynamicEntityStep && count($current_step->getEntitySurveys()) > 0 ){
-            $can_skip = true;
-        }
-        if($current_step->template()->canSkip()) $can_skip = true;
+        $can_skip       = $current_step->canSkip();
         if(!$can_skip)  $this->redirectBack();
-        $step = $request->param('STEP_SLUG');
-
         $next_step = $this->survey_manager->completeStep($current_step, $data = array());
         return $this->redirect('/surveys/current/'.$next_step->template()->title());
     }

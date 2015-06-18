@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Class SurveyThankYouEmailSenderService
+ */
 final class SurveyThankYouEmailSenderService implements IMessageSenderService {
 
     /**
@@ -27,7 +30,7 @@ final class SurveyThankYouEmailSenderService implements IMessageSenderService {
        if(! ($template instanceof ISurveyThankYouStepTemplate )) return;
 
        $to    = $subject->createdBy()->getEmail();
-       $from  = SURVEY_THANK_U_FROM_EMAIL;
+       $from  = defined('SURVEY_THANK_U_FROM_EMAIL') ? SURVEY_THANK_U_FROM_EMAIL : Config::inst()->get('Email', 'admin_email');
        $email = EmailFactory::getInstance()->buildEmail($from, $to, $template->emailSubject(), $template->emailHtmlBody());
        $email->send();
     }

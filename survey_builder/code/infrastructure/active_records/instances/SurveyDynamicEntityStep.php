@@ -86,4 +86,20 @@ class SurveyDynamicEntityStep
         }
         return null;
     }
+
+    /**
+     * @return void
+     */
+    public function clear()
+    {
+        $this->clearEntitiesSurvey();
+    }
+
+    /**
+     * @return void
+     */
+    public function clearEntitiesSurvey()
+    {
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->removeAll();
+    }
 }

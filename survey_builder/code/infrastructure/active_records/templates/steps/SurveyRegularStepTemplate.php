@@ -56,7 +56,7 @@ class SurveyRegularStepTemplate
         $fields->add(new TextField('FriendlyName','Friendly Name'));
         $fields->add(new HtmlEditorField('Content','Content'));
         $fields->add(new CheckboxField('SkipStep','Allow To Skip'));
-
+        $fields->add(new HiddenField('SurveyStepTemplateID','SurveyStepTemplateID'));
         if($this->ID > 0) {
             //questions
             $config = GridFieldConfig_RecordEditor::create();
@@ -97,6 +97,15 @@ class SurveyRegularStepTemplate
             if($q->getIdentifier() === $question->getIdentifier()) return true;
         }
         return false;
+    }
+
+    // add to end, but before thank you
+    protected function onAfterWrite() {
+        parent::onAfterWrite();
+        $id         = $this->ID;
+        if ($id === 0 || is_null($id)) return;
+
+        $this->fixOrder();
     }
 
 }

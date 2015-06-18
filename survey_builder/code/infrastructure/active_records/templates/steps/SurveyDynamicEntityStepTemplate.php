@@ -53,6 +53,7 @@ class SurveyDynamicEntityStepTemplate
         $fields->add(new TextField('AddEntityText', 'Add Text'));
         $fields->add(new TextField('DeleteEntityText', 'Delete Text'));
         $fields->add(new TextField('EditEntityText', 'Edit Text'));
+        $fields->add(new HiddenField('SurveyStepTemplateID','SurveyStepTemplateID'));
 
         $icon = new UploadField('EntityIcon', 'Upload Entity Icon');
         $icon->setCanAttachExisting(false);
@@ -101,6 +102,7 @@ class SurveyDynamicEntityStepTemplate
         $id = $this->ID;
         $entity_id = $this->EntityID;
         if ($id === 0 || is_null($id)) return;
+        $this->fixOrder();
         DB::query("UPDATE EntitySurveyTemplate SET `OwnerID` = 0 WHERE OwnerID = {$id}; ");
         if ($entity_id === 0 || is_null($entity_id)) return;
         DB::query("UPDATE EntitySurveyTemplate SET `OwnerID` = {$id} WHERE ID = {$entity_id}; ");

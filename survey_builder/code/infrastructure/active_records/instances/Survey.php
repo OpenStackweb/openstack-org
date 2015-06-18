@@ -222,4 +222,14 @@ class Survey
         }
         return null;
     }
+
+    /**
+     * @param ISurveyStep $step
+     * @return void
+     */
+    public function removeStep(ISurveyStep $step)
+    {
+        $step->clear();
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->remove($step);
+    }
 }

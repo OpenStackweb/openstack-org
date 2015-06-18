@@ -139,14 +139,30 @@ class SurveyStepTemplate
         if(empty($this->FriendlyName)){
             return $valid->error('Friendly Name is empty!');
         }
-        $slug = $this->getSlug();
-        $id   = $this->ID;
+        $slug     = $this->getSlug();
+        $id       = $this->ID;
+        $owner_id = $this->SurveyTemplateID;
 
-        $res = DB::query("SELECT COUNT(ID) FROM SurveyStepTemplate WHERE Name = '{$slug}' AND ID <> {$id}")->value();
+        $res = DB::query("SELECT COUNT(ID) FROM SurveyStepTemplate WHERE Name = '{$slug}' AND ID <> {$id} AND SurveyTemplateID = {$owner_id};")->value();
         if(intval($res) > 0 ){
             return $valid->error('There is already another step with that name!');
         }
         return $valid;
     }
 
+    protected function fixOrder(){
+
+        $id = $this->ID;
+        // fix for thank u step
+        $last_step  = $this->survey()->getLastStep();
+        $new_order = $order = count($this->survey()->getSteps());
+        $last_id   = $last_step->getIdentifier();
+        if($last_step instanceof ISurveyThankYouStepTemplate){
+            $order = $order - 1;
+            DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$new_order} WHERE ID = {$last_id} ");
+        }
+
+        DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$order} WHERE ID = {$id} ");
+
+    }
 }

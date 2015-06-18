@@ -202,4 +202,52 @@ final class SurveyManager implements ISurveyManager {
             $survey->sentEmail($sender_service);
         });
     }
+
+    /**
+     * @param ISurvey $survey
+     * @param ISurveyTemplate $template
+     * @return ISurvey
+     */
+    public function updateSurveyWithTemplate(ISurvey $survey, ISurveyTemplate $template)
+    {
+        if(is_null($survey))
+            throw new InvalidArgumentException('$survey is null!');
+        if(is_null($template))
+            throw new InvalidArgumentException('$template is null!');
+
+        $survey_builder      = $this->survey_builder;
+
+        return $this->tx_manager->transaction(function() use($survey, $template, $survey_builder){
+
+            $step_templates = $template->getSteps();
+            $steps          = $survey->getSteps();
+
+            foreach($step_templates as $st){
+                $found  = false;
+                foreach($steps as $s){
+                    $found = $s->template()->getIdentifier() === $st->getIdentifier();
+                    if($found) break;
+                }
+                if(!$found){
+                    //must add this step
+                    $survey->addStep( $survey_builder->buildStep($st) );
+                }
+            }
+
+            //remove steps that are not valid
+            foreach($steps as $s){
+                $found  = false;
+                foreach($step_templates as $st){
+                    $found = $s->template()->getIdentifier() === $st->getIdentifier();
+                    if($found) break;
+                }
+                if(!$found){
+                    //must remove this step from survey
+                    $survey->removeStep($s);
+                }
+            }
+
+            return $survey;
+        });
+    }
 }

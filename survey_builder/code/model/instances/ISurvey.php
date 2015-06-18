@@ -56,6 +56,12 @@ interface ISurvey extends IEntity {
     public function addStep(ISurveyStep $step);
 
     /**
+     * @param ISurveyStep $step
+     * @return void
+     */
+    public function removeStep(ISurveyStep $step);
+
+    /**
      * @return ISurveyTemplate
      */
     public function template();
@@ -98,4 +104,5 @@ interface ISurvey extends IEntity {
      * @return ISurveyAnswer
      */
     public function findAnswerByQuestion(ISurveyQuestionTemplate $question);
+
 }

@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Interface ISurveyBuilder
+ */
 interface ISurveyBuilder {
 
     /**
@@ -27,7 +30,7 @@ interface ISurveyBuilder {
      * @param $owner
      * @return IEntitySurvey
      */
-    public function buildEntitySurvey(ISurvey $parent,IEntitySurveyTemplate $template, $owner);
+    public function buildEntitySurvey(ISurvey $parent, IEntitySurveyTemplate $template, $owner);
 
     /**
      * @param ISurveyQuestionTemplate $question
@@ -35,4 +38,10 @@ interface ISurveyBuilder {
      * @return ISurveyAnswer
      */
     public function buildAnswer(ISurveyQuestionTemplate $question, $answer_value);
+
+    /**
+     * @param ISurveyStepTemplate $step_template
+     * @return ISurveyStep
+     */
+    public function buildStep(ISurveyStepTemplate $step_template);
 }
