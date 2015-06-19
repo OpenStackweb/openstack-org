@@ -35,6 +35,64 @@
                     return true;
                 }, "Your YouTube Video is not valid!");
 
+                //custom remote method to check duration against youtube api using jsonp
+                $.validator.addMethod("validate_youtube_video_length", function (value, element, options) {
+                    var max_length_in_seconds = parseInt(options);
+                    var validator             = this;
+                    var youtube_id            = value;
+                    if(youtube_id==='') return true;
+
+                    var m;
+                    if (m = youtube_id.match(/^(http|https):\/\/www\.youtube\.com\/.*[?&]v=([^&]+)/i) || youtube_id.match(/^(http|https):\/\/youtu\.be\/([^?]+)/i)) {
+                        youtube_id = m[2];
+                    }
+
+
+                    if ( this.optional(element) )
+                        return "dependency-mismatch";
+
+                    var previous = this.previousValue(element);
+
+                    if ( previous.old !== value ) {
+                        previous.old = value;
+                        var validator = this;
+                        this.startRequest(element);
+
+                        $.getJSON('https://www.googleapis.com/youtube/v3/videos?id=' + youtube_id + '&part=contentDetails,snippet&key=AIzaSyBUteMGkhfkT51jz3YHjr-o__hKlf17s8g')
+                            .done(function(data) {
+                                //check duration (in seconds)
+                                var valid = false;
+                                //TODO: we should we using data() method and not attr()
+                                $(element).attr('data-youtube-id',youtube_id);
+                                $(element).attr('data-length',convertDuration(data.items[0].contentDetails.duration));
+                                $(element).attr('data-description',data.items[0].snippet.localized.description);
+                                $(element).attr('data-title',data.items[0].snippet.localized.title);
+
+                                var submitted = validator.formSubmitted;
+                                validator.prepareElement(element);
+                                validator.formSubmitted = submitted;
+                                validator.successList.push(element);
+                                validator.showErrors();
+                                valid = true;
+                                previous.valid = valid;
+                                validator.stopRequest(element, valid);
+                            }).fail(function() {
+                                //most likely error 404 (video not found!!!)
+                                var errors = {};
+                                var message =  "Your YouTube Video is not valid!";
+                                errors[element.name] =  $.isFunction(message) ? message(value) : message;
+                                validator.invalid[element.name] = true;
+                                validator.showErrors(errors);
+                                validator.stopRequest(element, false);
+                            })
+                        return "pending";
+                    }
+                    else if( this.pending[element.name] ) {
+                        return "pending";
+                    }
+                    return previous.valid;
+                }, jQuery.format("Your YouTube Video must be {0} seconds or less."));
+
                 var form_validator = form.validate({
                     focusCleanup: true,
                     onkeyup: false
@@ -44,7 +102,8 @@
                     var video            = $(this);
                     var video_max_length = video.attr("data-max-length");
                     $(this).rules('add',{
-                        validate_youtube_video:true
+                        validate_youtube_video:true,
+                        validate_youtube_video_length: video_max_length
                     });
                 });
             }
@@ -98,6 +157,73 @@
         var description = data.entry.media$group.media$description.$t;
         var viewcount = data.entry.yt$statistics.viewCount;
         var author = data.entry.author[0].name.$t;
+    }
+
+    function convertDuration(dateString){
+        //dividing period from time
+        var x = dateString.split('T'),
+            duration = '',
+            time = {},
+            period = {},
+        //just shortcuts
+            s = 'string',
+            v = 'variables',
+            l = 'letters',
+        // store the information about ISO8601 duration format and the divided strings
+            d = {
+                period: {
+                    string: x[0].substring(1,x[0].length),
+                    len: 4,
+                    // years, months, weeks, days
+                    letters: ['Y', 'M', 'W', 'D'],
+                    variables: {}
+                },
+                time: {
+                    string: x[1],
+                    len: 3,
+                    // hours, minutes, seconds
+                    letters: ['H', 'M', 'S'],
+                    variables: {}
+                }
+            };
+        //in case the duration is a multiple of one day
+        if (!d.time.string) {
+            d.time.string = '';
+        }
+
+        for (var i in d) {
+            var len = d[i].len;
+            for (var j = 0; j < len; j++) {
+                d[i][s] = d[i][s].split(d[i][l][j]);
+                if (d[i][s].length>1) {
+                    d[i][v][d[i][l][j]] = parseInt(d[i][s][0], 10);
+                    d[i][s] = d[i][s][1];
+                } else {
+                    d[i][v][d[i][l][j]] = 0;
+                    d[i][s] = d[i][s][0];
+                }
+            }
+        }
+        period = d.period.variables;
+        time = d.time.variables;
+        time.H +=   24 * period.D +
+        24 * 7 * period.W +
+        24 * 7 * 4 * period.M +
+        24 * 7 * 4 * 12 * period.Y;
+
+        if (time.H) {
+            duration = time.H * 3600;
+            if (time.M < 10) {
+                time.M = '0' + time.M;
+            }
+        }
+
+        if (time.S < 10) {
+            time.S = '0' + time.S;
+        }
+
+        duration += time.M * 60 + time.S;
+        return duration;
     }
 // End of closure.
 }( jQuery ));
