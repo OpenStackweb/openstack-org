@@ -95,7 +95,14 @@ final class SapphireTransactionManager implements ITransactionManager {
 		$result = null;
 		try{
 			$this->beginTransaction();
-			$result = $callback($this);
+            $r = new ReflectionFunction($callback);
+            // reload on UOW entities that could not being on the update context
+            foreach($r->getStaticVariables() as $var){
+                if($var instanceof IEntity && $var->getIdentifier() > 0){
+                    UnitOfWork::getInstance()->scheduleForUpdate($var);
+                }
+            }
+          	$result = $callback($this);
 			$this->commit();
 		}
 		catch(Exception $ex){
