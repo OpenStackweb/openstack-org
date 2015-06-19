@@ -35,64 +35,6 @@
                     return true;
                 }, "Your YouTube Video is not valid!");
 
-                //custom remote method to check duration against youtube api using jsonp
-                $.validator.addMethod("validate_youtube_video_length", function (value, element, options) {
-                    var max_length_in_seconds = parseInt(options);
-                    var validator             = this;
-                    var youtube_id            = value;
-                    if(youtube_id==='') return true;
-
-                    var m;
-                    if (m = youtube_id.match(/^(http|https):\/\/www\.youtube\.com\/.*[?&]v=([^&]+)/i) || youtube_id.match(/^(http|https):\/\/youtu\.be\/([^?]+)/i)) {
-                        youtube_id = m[2];
-                    }
-
-
-                    if ( this.optional(element) )
-                        return "dependency-mismatch";
-
-                    var previous = this.previousValue(element);
-
-                    if ( previous.old !== value ) {
-                        previous.old = value;
-                        var validator = this;
-                        this.startRequest(element);
-
-                        $.getJSON('https://www.googleapis.com/youtube/v3/videos?id=' + youtube_id + '&part=contentDetails,snippet&key=AIzaSyBUteMGkhfkT51jz3YHjr-o__hKlf17s8g')
-                            .done(function(data) {
-                                //check duration (in seconds)
-                                var valid = false;
-                                //TODO: we should we using data() method and not attr()
-                                $(element).attr('data-youtube-id',youtube_id);
-                                $(element).attr('data-length',data.items[0].contentDetails.duration);
-                                $(element).attr('data-description',data.items[0].snippet.localized.description);
-                                $(element).attr('data-title',data.items[0].snippet.localized.title);
-
-                                var submitted = validator.formSubmitted;
-                                validator.prepareElement(element);
-                                validator.formSubmitted = submitted;
-                                validator.successList.push(element);
-                                validator.showErrors();
-                                valid = true;
-                                previous.valid = valid;
-                                validator.stopRequest(element, valid);
-                            }).fail(function() {
-                                //most likely error 404 (video not found!!!)
-                                var errors = {};
-                                var message =  "Your YouTube Video is not valid!";
-                                errors[element.name] =  $.isFunction(message) ? message(value) : message;
-                                validator.invalid[element.name] = true;
-                                validator.showErrors(errors);
-                                validator.stopRequest(element, false);
-                            })
-                        return "pending";
-                    }
-                    else if( this.pending[element.name] ) {
-                        return "pending";
-                    }
-                    return previous.valid;
-                }, jQuery.format("Your YouTube Video must be {0} seconds or less."));
-
                 var form_validator = form.validate({
                     focusCleanup: true,
                     onkeyup: false
@@ -102,8 +44,7 @@
                     var video            = $(this);
                     var video_max_length = video.attr("data-max-length");
                     $(this).rules('add',{
-                        validate_youtube_video:true,
-                        validate_youtube_video_length: video_max_length
+                        validate_youtube_video:true
                     });
                 });
             }
