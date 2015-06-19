@@ -60,7 +60,7 @@
                         Notable Fortune 100 enterprises like BMW, Disney, and Walmart have irrefutably proven that OpenStack is viable for production environments. 
                     </blockquote>
                     <p class="forrester-attribute">
-                        Laura E. Nelson, Senior Analyst, Forrester Research <sup>1</sup>
+                        Lauren E. Nelson, Senior Analyst, Forrester Research <sup>1</sup>
                     </p>
                 </div>
             </div>
