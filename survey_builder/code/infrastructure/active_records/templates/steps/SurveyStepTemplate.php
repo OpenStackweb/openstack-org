@@ -117,7 +117,8 @@ class SurveyStepTemplate
 
 
     protected function getSlug(){
-        $this->Name = str_replace(' ','-',strtolower($this->FriendlyName));
+        // normalize to be url friendly
+        $this->Name = UrlUtils::getSlug($this->FriendlyName);
         return $this->Name;
     }
 
