@@ -278,7 +278,8 @@ ul.featured li {
 
 .eventBlock {
     padding-left: 15px;
-    font-size: 12px
+    font-size: 12px;
+    float: none;
 }
 
 .eventBlock h3 {
