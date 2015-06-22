@@ -24,7 +24,7 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         'ViewArticle',
         'signup',
         'sendSignupConfirmation',
-        'page'
+        'newsPage'
     );
 
     /**
@@ -56,16 +56,16 @@ final class NewsArchivedPage_Controller extends Page_Controller {
     }
 
     public function index(){
-        $searchTerm = $_GET["searchTerm"];
+        $searchTerm = isset($_GET["searchTerm"]) ? $_GET["searchTerm"] : '';
         $archived_news = new ArrayList($this->news_repository->getArchivedNews(0, $this->news_per_page,$searchTerm));
         $archived_news_pages = ceil($this->news_repository->getArchivedNewsCount($searchTerm) / $this->news_per_page);
 
         return $this->renderWith(array('NewsArchivePage','Page'), array('ArchivedNews' => $archived_news, 'ArchivedNewsPages' => $archived_news_pages));
     }
 
-    public function page() {
-        $number = intval($_GET["number"]);
-        $searchTerm = $_GET["searchTerm"];
+    public function newsPage() {
+        $number = isset($_GET["number"]) ? intval($_GET["number"]) : 0;
+        $searchTerm = isset($_GET["searchTerm"]) ? $_GET["searchTerm"] : '';
         $archived_news = new ArrayList($this->news_repository->getArchivedNews(($number - 1)* $this->news_per_page , $this->news_per_page, $searchTerm));
         return $this->renderWith(array('NewsArchivePage_Articles'), array('ArchivedNews' => $archived_news));
     }
