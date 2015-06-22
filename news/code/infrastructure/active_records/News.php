@@ -22,10 +22,12 @@ final class News extends DataObject implements INews {
 		'Date'  => 'Datetime',
 		'Headline' => 'Text',
         'Summary' => 'Text',
+        'SummaryHtmlFree' => 'Text',
         'City' => 'Text',
         'State' => 'Text',
         'Country' => 'Text',
         'Body' => 'Text',
+        'BodyHtmlFree' => 'Text',
         'Link' => 'Text',
         'DateEmbargo' => 'Datetime',
         'DateExpire' => 'Datetime',
@@ -34,6 +36,7 @@ final class News extends DataObject implements INews {
         'Slider' => 'Boolean',
         'Approved' => 'Boolean',
         'IsLandscape' => 'Boolean',
+        'Archived' => 'Boolean',
 	);
 
     static $has_one = array(
@@ -44,6 +47,10 @@ final class News extends DataObject implements INews {
 
     static $many_many = array(
         'Tags' => 'Tag',
+    );
+
+    public static $indexes = array(
+        'Headline_SummaryHtmlFree_BodyHtmlFree' => array('type'=>'fulltext', 'value'=>'Headline,SummaryHtmlFree,BodyHtmlFree')
     );
 
 	/**
@@ -66,10 +73,12 @@ final class News extends DataObject implements INews {
     {
         $this->Headline = $info->getHeadline();
         $this->Summary   = $info->getSummary();
+        $this->SummaryHtmlFree   = strip_tags($info->getSummary());
         $this->City   = $info->getCity();
         $this->State   = $info->getState();
         $this->Country   = $info->getCountry();
         $this->Body = $info->getBody();
+        $this->BodyHtmlFree = strip_tags($info->getBody());
         $this->Date = $info->getDate();
         $this->Link   = $info->getLink();
         $this->DateEmbargo   = $info->getDateEmbargo();
@@ -191,7 +200,7 @@ final class News extends DataObject implements INews {
 
     public function registerSection($section)
     {
-        $slider = $featured = $approved = 0;
+        $slider = $featured = $approved = $archived = 0 ;
         if ($section == 'slider') {
             $slider = 1;
             $approved = 1;
@@ -200,11 +209,14 @@ final class News extends DataObject implements INews {
             $approved = 1;
         } elseif ($section == 'recent') {
             $approved = 1;
+        } elseif ($section == 'archive') {
+            $archived = 1;
         }
 
         $this->Featured = $featured;
         $this->Slider = $slider;
         $this->Approved = $approved;
+        $this->Archived = $archived;
 
     }
 

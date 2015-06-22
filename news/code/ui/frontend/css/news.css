@@ -700,3 +700,30 @@ input[type=checkbox], input[type=radio] {
 .featured-links {
     margin-bottom: 10px;
 }
+
+.stylish-input-group {
+    margin-bottom: 20px;
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+    border-right:0;
+    box-shadow:0 0 0;
+    border-color:#ccc;
+    margin: 0;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.stylish-input-group .form-control:focus {
+    border-color:#ccc;
+}
+
+.pagination a {
+    cursor: pointer;
+    
+}

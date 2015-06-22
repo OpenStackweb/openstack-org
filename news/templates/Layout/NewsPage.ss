@@ -74,7 +74,7 @@ $SlideNews.TotalItems
             <div>
                 <h2>Foundation News</h2>
                 <div class="featured-links">
-                    <a href="http://superuser.openstack.org">SuperUser</a> | <a href="news-archived">Archived News</a>
+                    <a href="http://superuser.openstack.org">SuperUser</a> | <a href="news/archived">Archived News</a>
 
                 </div>
             </div>
