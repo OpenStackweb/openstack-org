@@ -61,10 +61,10 @@ ErrorDocument 400 /assets/error-400.html
 ### SILVERSTRIPE END ###
 
 php_value memory_limit 512M
-php_flag display_startup_errors off
-php_flag display_errors off
-php_flag html_errors off
-php_flag log_errors off
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
+php_flag log_errors on
 php_value error_reporting 30711
 
 ### http://httpd.apache.org/docs/2.2/mod/mod_expires.html

@@ -107,7 +107,7 @@ final class NewsRequestManager {
                 'ArticleSummary'      => $news->Summary
             ));
 
-            $email->send();
+            //$email->send();
 		});
 	}
 
@@ -163,7 +163,7 @@ final class NewsRequestManager {
      * @return INews
      */
     public function moveNewsArticle($article_id,$new_rank,$target){
-        $repository           = $this->news_repository ;
+        $repository = $this->news_repository ;
 
         return $this->tx_manager->transaction(function() use($repository,$article_id,$new_rank,$target){
 
@@ -220,7 +220,7 @@ final class NewsRequestManager {
             $expired_news = $repository->getExpiredNews();
 
             foreach ($expired_news as $article) {
-                $article->registerSection('standby');
+                $article->registerSection('archive');
             }
 
             $this->reorderArticles('recent',$repository);

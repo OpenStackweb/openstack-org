@@ -4,8 +4,8 @@ After: 'framework/routes#coreroutes'
 ---
 Director:
   rules:
+    'news/archived': 'NewsArchivedPage_Controller'
     'news': 'NewsPage_Controller'
     'news-add': 'NewsRequestPage_Controller'
     'news-edit': 'NewsRequestPage_Controller'
     'news-manage': 'NewsAdminPage_Controller'
-    'news-archived': 'NewsArchivedPage_Controller'

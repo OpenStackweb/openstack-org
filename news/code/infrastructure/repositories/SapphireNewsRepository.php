@@ -48,6 +48,44 @@ final class SapphireNewsRepository extends SapphireRepository {
         return $list;
     }
 
+    public function getArchivedNews($offset = 0, $limit = 1000, $searchTerm)
+    {
+        if (isset($searchTerm) && trim($searchTerm)!=='') {
+            $archivedNewsQuery = $this->buildGeArchivedNewsQuery($searchTerm);
+            $list = $archivedNewsQuery->sort('Date DESC')->limit($limit, $offset)->toArray();
+        }
+        else {
+            $query = new QueryObject(new News);
+            $query->addAndCondition(QueryCriteria::equal('Approved','1'));
+            $query->addOrder(QueryOrder::desc('Date'));
+            list($list,$count) = $this->getAll($query,$offset,$limit);
+        }
+        return $list;
+    }
+
+    public function getArchivedNewsCount($searchTerm)
+    {
+        if (isset($searchTerm) && trim($searchTerm)!=='') {
+            $archivedNewsQuery = $this->buildGeArchivedNewsQuery($searchTerm);
+            $count = $archivedNewsQuery->count();
+        }
+        else {
+            $count = DataList::create("News")->where("Archived = 0 && Approved = 1")->Count();
+        }
+
+        return $count;
+    }
+
+    function buildGeArchivedNewsQuery($searchTerm) {
+        $searchTerm = trim($searchTerm, '"'); // remove double quotes
+        $searchTerm = trim($searchTerm, "'"); // remove single quotes
+        $sqlSearchTerm = Convert::raw2sql($searchTerm);
+
+        return DataList::create("News")->where("Approved = 1 AND
+                MATCH ( Headline, SummaryHtmlFree, BodyHtmlFree )
+                AGAINST ('\"{$sqlSearchTerm}\"' IN BOOLEAN MODE)");
+    }
+
     /**
      * @return INews[]
      */
