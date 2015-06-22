@@ -92,33 +92,39 @@
 
             <% end_loop %>
         </div>
-        <div class="news-sidebar col-lg-4 col-md-4 col-sm-12">
-            <div class="upcomingEvents">
-                <h3>
-                    Upcoming Events
-                    <div class="see-all-events">
-                        <a href="/events">All Events <i class="fa fa-angle-right"></i></a>
-                    </div>
-                </h3>
-                <div class="eventBlock upcoming">
-                    <% if FutureEvents(22) %>
-                        <% loop FutureEvents(22) %>
-
-                            <div class="event <% if First %> top<% end_if %>">
-                                <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
-                                <div class="details">$formatDateRange - $EventLocation</div>
-                                <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
-                            </div>
-
-                        <% end_loop %>
-                    <% else %>
-                        <div class="event top">
-                            <h3>Sorry, there are no upcoming events listed at the moment.</h3>
-                            <p class="details">Wow! It really rare that we don't have any upcoming events on display. Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;We probably just need to update this list. Please check back soon for more details.</p>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="news-sidebar">
+                <div class="upcomingEvents">
+                    <h3>
+                        Upcoming Events
+                        <div class="see-all-events">
+                            <a href="/events">All Events <i class="fa fa-angle-right"></i></a>
                         </div>
-                    <% end_if %>
-                </div>
+                    </h3>
+                    <div class="eventBlock upcoming">
+                        <% if FutureEvents(22) %>
+                            <% loop FutureEvents(22) %>
 
+                                <div class="event <% if First %> top<% end_if %>">
+                                    <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
+                                    <div class="details">$formatDateRange - $EventLocation</div>
+                                    <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
+                                </div>
+
+                            <% end_loop %>
+                        <% else %>
+                            <div class="event top">
+                                <h3>Sorry, there are no upcoming events listed at the moment.</h3>
+                                <p class="details">Wow! It really rare that we don't have any upcoming events on display. Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;We probably just need to update this list. Please check back soon for more details.</p>
+                            </div>
+                        <% end_if %>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:15px;">
+                <h3>Suscribe to our News Feed</h3>
+                <div class="sendgrid-subscription-widget" data-token="tKWLGalJp7SuomZ06awtOEUDVCRyJIzHw6y5mNMWa0Qp7GmM2v7jRcBRkxGCR0oI1XxQh1qSfv1CFfzbMoIFHg%3D%3D"></div>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "sendgrid-subscription-widget-js");</script>
             </div>
         </div>
     </div>
