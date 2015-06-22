@@ -82,8 +82,7 @@ jQuery(function($) {
     });
 
     $('.news-archived-search input').keyup(function(e){
-        if(e.keyCode == 13)
-        {
+        if(e.keyCode == 13) {
             search();
         }
     });
@@ -101,7 +100,7 @@ jQuery(function($) {
 
     function getArchivedNews(pageNumber, searchTerm) {
         $.ajax({
-            url: 'news/archived/page',
+            url: 'news/archived/newspage',
             data: { number: pageNumber, searchTerm: searchTerm }
         }).done(function(result) {
             $('.news-archived-articles').empty().html(result);
