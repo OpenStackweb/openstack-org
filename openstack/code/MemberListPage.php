@@ -378,10 +378,8 @@ class MemberListPage_Controller extends Page_Controller
 				->where($filter)
 				->leftJoin("Group_Members", "Member.ID = Group_Members.MemberID");
 			// No Member was found
-			if (!isset($Results)) {
-				$this->setMessage("Error", "No member by that name could be found.");
-				$this->redirectBack();
-				return;
+			if (!isset($Results) || $Results->count() == 0) {
+				return $this->customise($Results);
 			}
 
 			// For AutoComplete
