@@ -352,9 +352,9 @@ class MemberListPage_Controller extends Page_Controller
 
 	public function MemberSearchForm()
 	{
-		$fields = new FieldList(
-			new TextField('mq', 'Search Member name', $this->getSearchQuery())
-		);
+        $searchField = new TextField('mq', 'Search Member', $this->getSearchQuery());
+        $searchField->setAttribute("placeholder","first name, last name or irc nickname");
+		$fields = new FieldList($searchField);
 
 		$form = new SearchForm($this, 'MemberSearchForm', $fields);
 
@@ -371,7 +371,8 @@ class MemberListPage_Controller extends Page_Controller
 
 			$filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
 					OR FirstName LIKE '%{$query}%'
-					OR Surname LIKE '%{$query}%') AND Group_Members.GroupID=5";
+					OR Surname LIKE '%{$query}%'
+					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5";
 
 			$Results = Member::get()
 				->where($filter)
@@ -398,11 +399,15 @@ class MemberListPage_Controller extends Page_Controller
 			else {
 
 
-				$filter = "(CONCAT(FirstName, ' ', Surname) LIKE '%$query%') AND Group_Members.GroupID=5";
+				$filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
+					OR FirstName LIKE '%{$query}%'
+					OR Surname LIKE '%{$query}%'
+					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5";
 
 				$OneMember = Member::get()
 					->where($filter)
 					->leftJoin("Group_Members", "Member.ID = Group_Members.MemberID");
+
 				// see if one member exactly matches the search term
 
 				if ($OneMember) {
