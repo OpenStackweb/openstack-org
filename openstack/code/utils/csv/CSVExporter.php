@@ -52,8 +52,8 @@ final class CSVExporter
     public function export($filename, array $data, $field_separator = "\t", $mime_type = 'application/vnd.ms-excel')
     {
         ob_end_clean();
-        header("Content-Disposition: attachment; filename=\"$filename\"");
-        header("Content-Type: " . $mime_type);
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        header('Content-Type: ' . $mime_type);
 
         $flag = false;
         foreach ($data as $row) {
@@ -69,6 +69,7 @@ final class CSVExporter
             $line = implode($field_separator, array_values($row)) . "\n";
             echo $line;
         }
+        exit;
     }
 
     function cleanData(&$str)

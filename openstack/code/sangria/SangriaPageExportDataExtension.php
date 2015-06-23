@@ -881,7 +881,7 @@ SQL;
 
         $filename = "FoundationMembers" . date('Ymd') . "." . $ext;
 
-        return CSVExporter::getInstance()->export($filename, $data);
+        return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 
     function exportCorporateSponsors()
@@ -947,7 +947,7 @@ SQL;
 
         $filename = "Companies" . date('Ymd') . "." . $ext;
 
-        return CSVExporter::getInstance()->export($filename, $data);
+        return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 
     public function exportDupUsers()
