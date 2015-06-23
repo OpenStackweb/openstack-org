@@ -260,12 +260,21 @@ ul.featured li {
     border-left: 1px solid #aaa
 }
 
-.news-sidebar {
+.news-sidebar, .rss-sidebar {
     background: #edf2f7;
     padding: 15px;
     border-radius: 4px;
     margin-top: 0
 }
+
+.rss-sidebar {
+    margin-bottom: 20px;
+}
+
+/*.rss-sidebar input {
+    float: left;
+    margin-right: 13px;
+}*/
 
 .see-all-events {
     float: right
