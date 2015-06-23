@@ -46,4 +46,8 @@ class EntitySurvey
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Parent')->getTarget();
     }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+    }
 }

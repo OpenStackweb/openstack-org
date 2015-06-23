@@ -85,4 +85,8 @@ class SurveyStep
     {
         throw new AbstractMethodException('getAnswers');
     }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+    }
 }

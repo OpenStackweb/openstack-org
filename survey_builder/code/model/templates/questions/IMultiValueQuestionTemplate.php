@@ -26,7 +26,7 @@ interface IMultiValueQuestionTemplate
     /**
      * @return IQuestionValueTemplate
      */
-    public function defaultValue();
+    public function getDefaultValue();
 
     /**
      * @param int $id

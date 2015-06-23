@@ -102,4 +102,22 @@ class SurveyDynamicEntityStep
     {
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->removeAll();
     }
+
+    /**
+     * @param int $entity_survey_id
+     * @return void
+     */
+    public function removeEntitySurveyById($entity_survey_id)
+    {
+        $entity_survey = $this->getEntitySurvey($entity_survey_id);
+        if($entity_survey)
+            AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->remove($entity_survey);
+    }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->EntitySurveys() as $entities){
+            $entities->delete();
+        }
+    }
 }

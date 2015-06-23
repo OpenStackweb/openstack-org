@@ -119,4 +119,9 @@ class EntitySurveyTemplate
         }
         return $valid;
     }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+    }
+
 }

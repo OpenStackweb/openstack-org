@@ -84,4 +84,11 @@ class SurveyRegularStep
     {
         $this->clearAnswers();
     }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->Answers() as $answer){
+            $answer->delete();
+        }
+    }
 }

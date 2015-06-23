@@ -26,12 +26,15 @@ class SurveyOrganizationQuestionTemplate
         $_REQUEST["SurveyQuestionTemplateID"] = $this->ID;
 
         $fields = new FieldList();
-        $fields->add($name = new TextField('Name','Name (Without Spaces)'));
-        $name->setValue(SurveyOrganizationQuestionTemplate::FieldName);
-        $name->setReadonly(true);
         $fields->add(new TextField('Label','Label'));
         $fields->add(new CheckboxField('Mandatory','Is Mandatory?'));
+        $fields->add(new HiddenField('Name','Name',SurveyOrganizationQuestionTemplate::FieldName));
 
         return $fields;
+    }
+
+    protected function onBeforeWrite() {
+        parent::onBeforeWrite();
+        $this->Name = SurveyOrganizationQuestionTemplate::FieldName;
     }
 }

@@ -120,6 +120,15 @@ class SurveyTemplate
         }
     }
 
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->Steps() as $s){
+            $s->delete();
+        }
+        foreach($this->EntitySurveys() as $e){
+            $e->delete();
+        }
+    }
 
     /**
      * @return int

@@ -8,7 +8,7 @@
                 <div class="deployment">
                     <a href="/surveys/current/{$Top.CurrentStep.Template.Title}/edit/{$ID}"
                        class="deployment-name">$Top.CurrentStep.Template.getEditEntityText</a>&nbsp;
-                    <a href="/surveys/current/{$Top.CurrentStep.Template.Title}/delete/{$ID}">$Top.CurrentStep.Template.getDeleteEntityText</a>
+                    <a class="delete-entity" href="/surveys/current/{$Top.CurrentStep.Template.Title}/delete/{$ID}">$Top.CurrentStep.Template.getDeleteEntityText</a>
                 </div>
             <% end_loop %>
         <% end_if %>

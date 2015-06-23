@@ -43,8 +43,8 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
         if(!is_null($answer)){
             $field->setValue($answer->value());
         }
-
-        $field->setEmptyString('-- Select --');
+        if(!$question->IsCountrySelector)
+            $field->setEmptyString('-- Select --');
 
         $this->buildDependantRules($current_step, $question, $field);
 

@@ -101,7 +101,7 @@
             // Default to "init"
             return methods.init.apply( this, arguments );
         } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.survey_validation_rules' );
+            $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.survey_validation_rules' );
         }
     };
 

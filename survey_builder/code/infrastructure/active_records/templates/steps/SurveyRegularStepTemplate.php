@@ -73,6 +73,7 @@ class SurveyRegularStepTemplate
                     'SurveyTextAreaQuestionTemplate'     => 'TextArea',
                     'SurveyCheckBoxQuestionTemplate'     => 'CheckBox',
                     'SurveyCheckBoxListQuestionTemplate' => 'CheckBoxList',
+                    'SurveyRadioButtonListQuestionTemplate' => 'RadioButtonList',
                     'SurveyDropDownQuestionTemplate'     => 'ComboBox',
                     'SurveyRankingQuestionTemplate'      => 'Ranking',
                     'SurveyOrganizationQuestionTemplate' => 'Organization',
@@ -106,6 +107,13 @@ class SurveyRegularStepTemplate
         if ($id === 0 || is_null($id)) return;
 
         $this->fixOrder();
+    }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->Questions() as $q){
+            $q->delete();
+        }
     }
 
 }

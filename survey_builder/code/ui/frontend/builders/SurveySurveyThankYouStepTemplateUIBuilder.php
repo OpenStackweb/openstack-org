@@ -19,12 +19,13 @@ class SurveySurveyThankYouStepTemplateUIBuilder
     /**
      * @param ISurveyStep $step
      * @param string $action
+     * @param string $form_name
      * @return Form
      */
-    public function build(ISurveyStep $step, $action)
+    public function build(ISurveyStep $step, $action, $form_name ='SurveyStepForm')
     {
         $fields = new FieldList();
-        $form =  new ThankYouStepForm(Controller::curr(), 'SurveyStepForm', $fields, $actions = new FieldList(), $step, $validator = array());
+        $form =  new ThankYouStepForm(Controller::curr(), $form_name, $fields, $actions = new FieldList(), $step, $validator = array());
         $form->setAttribute('class','survey_step_form');
         return $form;
     }

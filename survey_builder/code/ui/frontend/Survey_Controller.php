@@ -30,15 +30,17 @@ class Survey_Controller extends Page_Controller {
         'LandingPage',
         'RenderSurvey',
         'SurveyStepForm',
-        'AddEntity',
         'SkipStep',
-        'EditEntity',
-        'NextDynamicEntityStep',
         'RegisterForm',
         'MemberStart',
         'StartSurvey',
         'NextStep',
-    );
+        'SurveyDynamicEntityStepForm',
+        'NextDynamicEntityStep',
+        'AddEntity',
+        'EditEntity',
+        'DeleteEntity',
+  );
 
     static $url_handlers = array(
         'landing'                                     => 'LandingPage',
@@ -244,6 +246,7 @@ class Survey_Controller extends Page_Controller {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
         $builder        = SurveyStepUIBuilderFactory::getInstance()->build($current_step);
+        if(is_null($builder)) return '<p>There is not set any form yet!</p>';
         $form           = $builder->build($current_step, 'NextStep');
         return $form;
     }
@@ -279,7 +282,9 @@ class Survey_Controller extends Page_Controller {
         if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
 
         $this->current_entity_survey  = $current_step->getEntitySurvey($entity_survey_id);
-        $this->survey_manager->updateSurveyWithTemplate($this->current_entity_survey, $this->current_entity_survey->template());
+        if(is_null($this->current_entity_survey))
+            return $this->httpError(404, 'entity not found!');
+        $this->current_entity_survey =  $this->survey_manager->updateSurveyWithTemplate($this->current_entity_survey, $this->current_entity_survey->template());
         
         return $this->customise(array(
             'Survey'       => $this->current_survey,
@@ -287,13 +292,15 @@ class Survey_Controller extends Page_Controller {
         ))->renderWith(array('Surveys_CurrentSurveyDynamicEntityContainer', 'Page'));
     }
 
-    public function SurveyDynamicEntityStepForm(){
-        $this->current_survey = $this->getCurrentSurveyInstance();
-        $current_step        =  $this->current_survey->currentStep();
-        if(is_null($this->current_entity_survey)) throw new LogicException();
-        $builder        = SurveyStepUIBuilderFactory::getInstance()->build($this->current_entity_survey->currentStep());
-        $form           = $builder->build($this->current_entity_survey->currentStep(), 'NextDynamicEntityStep');
-        return $form;
+    public function DeleteEntity($request){
+
+        $step                 = $request->param('STEP_SLUG');
+        $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
+        $current_survey       = $this->getCurrentSurveyInstance();
+        $current_step          = $current_survey->currentStep();
+        $this->survey_manager->deleteEntitySurvey($current_step, $entity_survey_id);
+
+        return $this->redirect('/surveys/current/'.$step);
     }
 
     public function AddEntity($request){
@@ -308,24 +315,34 @@ class Survey_Controller extends Page_Controller {
         $this->redirect($url);
     }
 
+    public function SurveyDynamicEntityStepForm(){
+        $this->current_survey = $this->getCurrentSurveyInstance();
+        $current_step        =  $this->current_survey->currentStep();
+        if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
+        $entity_survey_id     = intval($this->request->param('ENTITY_SURVEY_ID'));
+        if($entity_survey_id == 0) $entity_survey_id = intval($this->request->postVar('ENTITY_SURVEY_ID'));
+        $this->current_entity_survey  = $current_step->getEntitySurvey($entity_survey_id);
+        if(is_null($this->current_entity_survey)) throw new LogicException();
+        $builder        = SurveyStepUIBuilderFactory::getInstance()->build($this->current_entity_survey->currentStep());
+        if(is_null($builder)) return '<p>There is not set any form yet!</p>';
+        $form           = $builder->build($this->current_entity_survey->currentStep(), 'NextDynamicEntityStep', 'SurveyDynamicEntityStepForm');
+        $form->Fields()->add(new HiddenField('ENTITY_SURVEY_ID','ENTITY_SURVEY_ID',$entity_survey_id));
+        return $form;
+    }
+
     public function NextDynamicEntityStep($data, $form)
     {
         $entity_survey = $this->getCurrentEntitySurveyInstance(intval($data['survey_id']));
         $current_step  = $entity_survey->currentStep();
         $next_step     = $this->survey_manager->completeStep($current_step, $data);
         if($entity_survey->isLastStep()){
-            return $this->redirect('surveys/current/'.$this->current_survey->currentStep()->template()->title());
+            return $this->redirect('/surveys/current/'.$this->current_survey->currentStep()->template()->title());
         }
         else{
             return $this->redirect('/surveys/current/'.$next_step->template()->title());
         }
     }
 
-    public function DeleteEntity($request){
-
-        $step                 = $request->param('STEP_SLUG');
-        $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
-    }
 
     // landing page
 

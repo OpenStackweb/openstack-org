@@ -64,4 +64,12 @@ jQuery(document).ready(function($) {
         if($(this).valid())
             $('.action').prop('disabled', true);
     });
+
+    $('.delete-entity').click(function(event){
+        var res = window.confirm('are you sure?')
+        if(!res){
+            event.preventDefault();
+            return false;
+        }
+    });
 });
