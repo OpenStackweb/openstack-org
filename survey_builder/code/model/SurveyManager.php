@@ -246,8 +246,28 @@ final class SurveyManager implements ISurveyManager {
                     $survey->removeStep($s);
                 }
             }
-
+            $current_step = $survey->currentStep();
+            if($current_step->getIdentifier() === 0 && count($steps) > 0){
+                //set the current step
+                $survey->registerCurrentStep($steps[0]);
+                $survey->registerAllowedMaxStep($steps[0]);
+            }
             return $survey;
+        });
+    }
+
+    /**
+     * @param int $entity_id
+     * @param ISurveyDynamicEntityStep $current_step
+     * @return void
+     */
+    public function deleteEntitySurvey(ISurveyDynamicEntityStep $current_step, $entity_id)
+    {
+
+        return $this->tx_manager->transaction(function() use($current_step, $entity_id){
+
+            $current_step->removeEntitySurveyById($entity_id);
+
         });
     }
 }

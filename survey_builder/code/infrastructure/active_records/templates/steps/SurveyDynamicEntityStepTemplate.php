@@ -64,11 +64,12 @@ class SurveyDynamicEntityStepTemplate
 
         if ($this->ID > 0) {
             $fields->add($icon);
-            $id = $this->ID;
+            $id        = (int)$this->ID;
+            $parent_id = (int)$this->SurveyTemplateID;
             $fields->add($ddl_entity = new DropdownField(
                 'EntityID',
                 'Please choose an entity to hold',
-                EntitySurveyTemplate::get()->where(" (OwnerID = 0 OR OwnerID = {$id} ) ")->map("ID", "EntityName")
+                EntitySurveyTemplate::get()->where(" (OwnerID = 0 OR OwnerID = {$id} ) AND ParentID = {$parent_id} ")->map("ID", "EntityName")
             ));
 
             $ddl_entity->setEmptyString('-- Please Select --');
@@ -150,5 +151,9 @@ class SurveyDynamicEntityStepTemplate
     public function getEntity()
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Entity')->getTarget();
+    }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
     }
 }

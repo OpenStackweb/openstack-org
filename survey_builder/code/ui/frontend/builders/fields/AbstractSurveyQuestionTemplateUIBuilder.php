@@ -212,7 +212,7 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
             }
 
             $js .= "for(var i = 0 ; i < selectable_fields.length; i++ ){
-                form.survey_validation_rules('addRequiredAnswer4SelectableGroup', [ selectable_fields[i].ddl ], $('#{$question_id}'), selectable_fields[i].label );
+                form.survey_validation_rules('addRequiredAnswer4SelectAbleGroup', [ selectable_fields[i].ddl ], $('#{$question_id}'), selectable_fields[i].label );
                 }";
             $js .= "if(clickable_fields.length > 0 )
                 form.survey_validation_rules('addRequiredAnswer4CheckAbleGroup', clickable_fields, $('#{$question_id}') ); ";

@@ -56,7 +56,7 @@ class SurveyMultiValueQuestionTemplate
                 $fields->add($ddl_default = new DropdownField(
                     'DefaultValueID',
                     'Please choose an default value',
-                    $this->Values()->map("ID", "Label")
+                    $this->Values()->map("ID", "Value")
                 ));
                 $ddl_default->setEmptyString('-- select --');
             }
@@ -144,9 +144,9 @@ class SurveyMultiValueQuestionTemplate
     /**
      * @return IQuestionValueTemplate
      */
-    public function defaultValue()
+    public function getDefaultValue()
     {
-        // TODO: Implement defaultValue() method.
+        return $this->DefaultValue();
     }
 
     /**
@@ -160,5 +160,12 @@ class SurveyMultiValueQuestionTemplate
                 return $v;
         }
         return null;
+    }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->Values() as $v){
+            $v->delete();
+        }
     }
 }

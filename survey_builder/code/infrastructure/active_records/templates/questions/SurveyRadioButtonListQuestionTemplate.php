@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +13,20 @@
  **/
 
 /**
- * Interface ISurveyStepUIBuilder
+ * Class SurveyRadioButtonListQuestionTemplate
  */
-interface ISurveyStepUIBuilder
-{
-    /**
-     * @param ISurveyStep $step
-     * @param string $action
-     * @param string $form_name
-     * @return Form
-     */
-    public function build(ISurveyStep $step, $action, $form_name ='SurveyStepForm');
+class SurveyRadioButtonListQuestionTemplate
+    extends SurveyMultiValueQuestionTemplate
+    implements ISurveyClickableQuestion {
+
+    public function Type(){
+        return 'RadioButtonList';
+    }
+
+    public function getCMSFields() {
+
+        $fields = parent::getCMSFields();
+        return $fields;
+    }
+
 }

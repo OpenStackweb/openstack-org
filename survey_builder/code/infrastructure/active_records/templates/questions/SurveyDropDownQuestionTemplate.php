@@ -43,7 +43,7 @@ class SurveyDropDownQuestionTemplate
 
     private static $defaults = array(
         'IsMultiSelect'     => false,
-        'UseChosenPlugin'   => false,
+        'UseChosenPlugin'   => true,
         'IsCountrySelector' => false
     );
 

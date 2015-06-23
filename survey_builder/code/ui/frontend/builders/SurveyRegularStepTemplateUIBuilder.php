@@ -22,9 +22,10 @@ class SurveyRegularStepTemplateUIBuilder
     /**
      * @param ISurveyStep $step
      * @param string $action
+     * @param string $form_name
      * @return Form
      */
-    public function build(ISurveyStep $step, $action)
+    public function build(ISurveyStep $step, $action, $form_name ='SurveyStepForm')
     {
         Requirements::customScript('jQuery(document).ready(function($) {
             var form = $(".survey_step_form");
@@ -33,7 +34,18 @@ class SurveyRegularStepTemplateUIBuilder
 
         $fields = new FieldList();
 
-        $fields->add(new LiteralField('content', $step->template()->content()));
+        $content = $step->template()->content();
+        if(!empty($content))
+            $fields->add(new LiteralField('content', $content));
+
+        if($step->template()->canSkip()){
+            $fields->add(
+                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you make <a href="/surveys/current/%s/skip-step">skip to the next section</a>.</strong></p>', $step->template()->title()))
+            );
+        }
+
+        if(!empty($content) || $step->template()->canSkip())
+            $fields->add(new LiteralField('hr', '<hr/>'));
 
         foreach ($step->template()->getQuestions() as $q) {
 
@@ -49,12 +61,19 @@ class SurveyRegularStepTemplateUIBuilder
 
         $fields->add(new HiddenField('survey_id', 'survey_id', $step->survey()->getIdentifier()));
         $fields->add(new HiddenField('step_id', 'step_id', $step->getIdentifier()));
-
+        $survey = $step->survey();
+        $next_btn_title = 'Next';
+        if($survey->isLastStep()){
+            $next_btn_title = 'Done';
+            if($survey->template() instanceof IEntitySurveyTemplate){
+                $next_btn_title = 'Save '.$survey->template()->getEntityName();
+            }
+        }
         $actions   = new FieldList(
-            FormAction::create($action)->setTitle("Next")
+            FormAction::create($action)->setTitle($next_btn_title)
         );
 
-        $form =  new RegularStepForm(Controller::curr(), 'SurveyStepForm', $fields, $actions, $step, $validator);
+        $form =  new RegularStepForm(Controller::curr(), $form_name, $fields, $actions, $step, $validator);
         $form->setAttribute('class','survey_step_form');
         return $form;
     }

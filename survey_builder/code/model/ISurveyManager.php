@@ -63,4 +63,11 @@ interface ISurveyManager {
      * @return ISurvey
      */
     public function updateSurveyWithTemplate(ISurvey $survey, ISurveyTemplate $template);
+
+    /**
+     * @param int $entity_id
+     * @param ISurveyDynamicEntityStep $current_step
+     * @return void
+     */
+    public function deleteEntitySurvey(ISurveyDynamicEntityStep $current_step, $entity_id);
 }

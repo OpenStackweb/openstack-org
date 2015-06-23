@@ -323,6 +323,7 @@ class Page_Controller extends ContentController
         }
 
         $use_shadow_box = Director::get_current_page()->IncludeShadowBox;
+        if(is_null($use_shadow_box)) $use_shadow_box = 0;
 
         $this->CustomScripts();
 

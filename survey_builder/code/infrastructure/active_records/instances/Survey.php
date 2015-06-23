@@ -232,4 +232,12 @@ class Survey
         $step->clear();
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->remove($step);
     }
+
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->Steps() as $step){
+            $step->delete();
+        }
+    }
 }

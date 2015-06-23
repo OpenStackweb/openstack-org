@@ -166,4 +166,8 @@ class SurveyStepTemplate
         DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$order} WHERE ID = {$id} ");
 
     }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+    }
 }
