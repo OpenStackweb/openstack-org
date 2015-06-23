@@ -80,10 +80,12 @@ final class SapphireNewsRepository extends SapphireRepository {
         $searchTerm = trim($searchTerm, '"'); // remove double quotes
         $searchTerm = trim($searchTerm, "'"); // remove single quotes
         $sqlSearchTerm = Convert::raw2sql($searchTerm);
+        $sqlSearchTerm = preg_replace("/\s+/", " +", $sqlSearchTerm);
+        $sqlSearchTerm = "+".$sqlSearchTerm;
 
         return DataList::create("News")->where("Approved = 1 AND
                 MATCH ( Headline, SummaryHtmlFree, BodyHtmlFree )
-                AGAINST ('\"{$sqlSearchTerm}\"' IN BOOLEAN MODE)");
+                AGAINST ('{$sqlSearchTerm}' IN BOOLEAN MODE)");
     }
 
     /**

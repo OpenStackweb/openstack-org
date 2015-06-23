@@ -1,5 +1,5 @@
 .news-container{
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 950px) {
@@ -724,5 +724,8 @@ input[type=checkbox], input[type=radio] {
 
 .pagination a {
     cursor: pointer;
-    
+}
+
+.newsHome {
+    margin-top: 10px;
 }
