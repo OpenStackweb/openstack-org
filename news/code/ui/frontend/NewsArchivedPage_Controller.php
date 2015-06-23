@@ -63,10 +63,11 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         return $this->renderWith(array('NewsArchivePage','Page'), array('ArchivedNews' => $archived_news, 'ArchivedNewsPages' => $archived_news_pages));
     }
 
-    public function newsPage() {
+    public function newsPage()
+    {
         $number = isset($_GET["number"]) ? intval($_GET["number"]) : 0;
         $searchTerm = isset($_GET["searchTerm"]) ? $_GET["searchTerm"] : '';
-        $archived_news = new ArrayList($this->news_repository->getArchivedNews(($number - 1)* $this->news_per_page , $this->news_per_page, $searchTerm));
+        $archived_news = new ArrayList($this->news_repository->getArchivedNews(($number - 1) * $this->news_per_page, $this->news_per_page, $searchTerm));
         return $this->renderWith(array('NewsArchivePage_Articles'), array('ArchivedNews' => $archived_news));
     }
 }

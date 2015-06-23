@@ -1,16 +1,16 @@
 <div class="newsHome">
-    <a href="/news">Back to News</a>
+    <a href="/news<% if $IsArchivedNews %>/archived<% end_if %>">< Back to <% if $IsArchivedNews %>Archived<% end_if %> News</a>
 </div>
 
 <div style="text-align:justify;">
-    <h1>$Headline</h1>
-    $ImageForArticle
+    <h1>$Article.Headline</h1>
+    $Article.ImageForArticle
 
-    $HTMLBody
+    $Article.HTMLBody
     <% if Document.exists %>
-        <p class="document">Document: <a href="$Document.Link">$Document.getLinkedURL</a></p>
+        <p class="document">Document: <a href="$Article.Document.Link">$Article.Document.getLinkedURL</a></p>
     <% end_if %>
-    <p class="link"><a href="$Link">$Link</a></p>
-    <p class="date">$Date</p>
+    <p class="link"><a href="$Article.Link">$Article.Link</a></p>
+    <p class="date">$Article.Date</p>
     <p></p>
 </div>

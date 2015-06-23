@@ -1,4 +1,9 @@
+<div class="newsHome">
+    <a href="/news">< Back to News</a>
+</div>
+
 <div class="news-container">
+    <span>$Query</span>
 
     <div class="row news-archived-search">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

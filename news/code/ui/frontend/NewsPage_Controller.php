@@ -63,7 +63,7 @@ final class NewsPage_Controller extends Page_Controller {
 
     public function index(){
 
-        $featured_news = new ArrayList($this->news_repository->getFeaturedNews());
+        $featured_news = new ArrayList($this->news_repository->getFeaturedNews(3));
         $recent_news   = new ArrayList($this->news_repository->getRecentNews());
         $slide_news    = new ArrayList($this->news_repository->getSlideNews());
 
@@ -97,7 +97,11 @@ final class NewsPage_Controller extends Page_Controller {
         $article_id = intval($this->request->param('NEWS_ID'));
         $article = $this->news_repository->getNewsByID($article_id);
 
-        return $this->renderWith(array('NewsArticlePage','Page'), $article );
+        return $this->renderWith(array('NewsArticlePage','Page'), array('Article' => $article, 'IsArchivedNews' => $this->isArchivedNews()) );
+    }
+
+    function isArchivedNews() {
+        return $this->getRequest()->getVar("ar") != null;
     }
 
     public function signup(){
