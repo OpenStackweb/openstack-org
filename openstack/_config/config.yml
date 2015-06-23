@@ -22,16 +22,8 @@ Member:
     - PresentationMemberExtension  
 
 Injector:
-  GeneralCachingPolicy:
-    class: CustomHTTPCachingPolicy
-    properties:
-      cacheAge: 10800
   TransactionManager:
     factory: SapphireTransactionManagerFactory
-
-Page_Controller:
-  dependencies:
-    Policies: '%$GeneralCachingPolicy'
 
 BootstrapForm:
   bootstrap_included: true
