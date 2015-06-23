@@ -63,7 +63,6 @@ ul.optionset li label {
 
 div.deployment {
 	border: 1px solid #DDDDDD;
-	background: url(/themes/openstack/images/user-survey/cloud.png) no-repeat 5px 10px;
 	margin-top: -1px;
 }
 

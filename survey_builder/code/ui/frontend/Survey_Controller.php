@@ -343,7 +343,6 @@ class Survey_Controller extends Page_Controller {
         }
     }
 
-
     // landing page
 
     public function getLoginPageTitle()
@@ -423,5 +422,6 @@ HTML;
             return $this->redirect(self::RoutePrefix.'/current');
         }
     }
+
 
 }
