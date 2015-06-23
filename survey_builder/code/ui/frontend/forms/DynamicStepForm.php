@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Class DynamicStepForm
+ */
 class DynamicStepForm extends HoneyPotForm {
 
     /**
@@ -42,4 +45,17 @@ class DynamicStepForm extends HoneyPotForm {
     public function EntitiesSurveys(){
         return new ArrayList($this->step->getEntitySurveys());
     }
+
+    /**
+     * @return string
+     */
+    public function EntityIconUrl(){
+        $icon = $this->step->template()->EntityIcon();
+        $icon_url = '/themes/openstack/images/user-survey/cloud.png';
+        if($icon->ID > 0){
+            $icon_url = $icon->Link();
+        }
+        return $icon_url;
+    }
+
 }
