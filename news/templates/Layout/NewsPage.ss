@@ -1,20 +1,17 @@
 </div>
 <div class="grey-bar news">
-    <div class="container">
-        <div class="row">
-            <% if CurrentMember %>
-                <% if CurrentMember.isNewsManager %>
-                    <a class="manage-news-link" href="/news-manage"><i class="fa fa-cog"></i> Manage News</a>
-                <% end_if %>
+    <div class="row">
+        <% if CurrentMember %>
+            <% if CurrentMember.isNewsManager %>
+                <a class="manage-news-link" href="/news-manage"><i class="fa fa-cog"></i> Manage News</a>
             <% end_if %>
-            <a href="/news-add"><i class="fa fa-plus-circle"></i> Post A News Article</a>
-            <a class="review-news-link" href="/marketing/make-some-news-with-openstack/news-page-editorial-guidelines/"><i class="fa fa-book"></i> Review the Editorial Guidelines</a>
-            <a class="marketing-link" href="/marketing/"><i class="fa fa-cubes"></i> Marketing Portal</a>
-        </div>
+        <% end_if %>
+        <a href="/news-add"><i class="fa fa-plus-circle"></i> Post A News Article</a>
+        <a class="review-news-link" href="/marketing/make-some-news-with-openstack/news-page-editorial-guidelines/"><i class="fa fa-book"></i> Review the Editorial Guidelines</a>
+        <a class="marketing-link" href="/marketing/"><i class="fa fa-cubes"></i> Marketing Portal</a>
     </div>
 </div>
 
-$SlideNews.TotalItems
 <div id="news-slider" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
 
@@ -104,7 +101,7 @@ $SlideNews.TotalItems
                 <% end_loop %>
             </ul>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="news-sidebar">
                 <div class="upcomingEvents">
                     <h3>
