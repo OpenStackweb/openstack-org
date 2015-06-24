@@ -25,7 +25,8 @@
 .grey-bar.news {
     margin-bottom: 0;
     padding: 20px;
-    text-align: right
+    text-align: right;
+    width: 100%;
 }
 
 .grey-bar.news a {
@@ -55,6 +56,11 @@
 
 .grey-bar.news a.manage-news-link:hover {
     color: #5A6E1D
+}
+
+.grey-bar.news .row {
+    width: 40%;
+    margin: auto;
 }
 
 .carousel, .carousel-inner {
