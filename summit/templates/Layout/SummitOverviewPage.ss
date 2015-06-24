@@ -101,7 +101,7 @@
                          onerror="this.onerror=null; this.src={$BoxChartLegendImagePngUrl}"
                          alt="OpenStack Summit Growth Legend">
                 </div>
-                <div class="growth-chart">
+                <div>
                     <img class="growth-chart" src="{$BoxChartImageUrl}"
                          onerror="this.onerror=null; this.src={$BoxChartImagePngUrl}"
                          alt="OpenStack Summit Growth Chart">
