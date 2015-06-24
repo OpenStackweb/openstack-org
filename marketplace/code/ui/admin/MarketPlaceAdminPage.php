@@ -140,7 +140,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::combine_files('marketplace_admin.css',
             array(
                 "marketplace/code/ui/admin/css/marketplace.admin.css",
-                "themes/openstack/css/chosen.css", "screen,projection",
+                "themes/openstack/css/chosen.css",
                 "themes/openstack/css/colorpicker.css",
             )
         );
