@@ -47,7 +47,6 @@
                     <div class="customer-logos logo-hover"id="comcast-logo"><img src="/themes/openstack/images/customer-comcast.png" alt="Comcast Uses OpenStack">
                     </div>
                       <div class="customer-logos"id="paypal-logo"><img src="/themes/openstack/images/customer-paypal.png" alt="PayPal Uses OpenStack"></div>
-                      <div class="customer-logos"id="wells-logo"><img src="/themes/openstack/images/customer-wells.png" alt="Wells Fargo Uses OpenStack"></div>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
