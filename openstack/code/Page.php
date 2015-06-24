@@ -23,6 +23,8 @@ class Page extends SiteTree
         'BootstrapConverted' => 'Boolean'
     );
 
+    private static $defaults = array ('BootstrapConverted'=> true);
+
     private static $has_one = array();
 
     public function InPast($fieldname)
