@@ -27,7 +27,7 @@
 
 jQuery(document).ready(function($){
     refresh_future_events_scroll();
-    setInterval(refresh_page,60000);
+    setInterval(refresh_page,300000);
 
     jQuery('#upcoming_events_filter').change(function(){
         refresh_future_events();
