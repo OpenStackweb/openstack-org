@@ -58,9 +58,29 @@
     color: #5A6E1D
 }
 
-.grey-bar.news .row {
-    width: 40%;
-    margin: auto;
+@media (min-width: 730px) {
+    .grey-bar.news .row {
+        width: 730px;
+        margin: auto;
+    }
+}
+
+@media (max-width: 730px) {
+    .grey-bar.news .row {
+        width: 100%;
+        margin: 0;
+        text-align: left;
+    }
+
+    .grey-bar.news a {
+        margin-top: 10px;
+        display: block;
+    }
+
+    .grey-bar.news a.review-news-link {
+        margin-top: 10px;
+        margin-left: 0;
+    }
 }
 
 .carousel, .carousel-inner {
