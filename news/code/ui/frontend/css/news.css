@@ -62,6 +62,7 @@
     .grey-bar.news .row {
         width: 730px;
         margin: auto;
+        text-align: center;
     }
 }
 
