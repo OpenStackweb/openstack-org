@@ -43,13 +43,13 @@ class Survey_Controller extends Page_Controller {
   );
 
     static $url_handlers = array(
-        'landing'                                     => 'LandingPage',
-        'current/$STEP_SLUG/add-entity'               => 'AddEntity',
-        'current/$STEP_SLUG/skip-step'                => 'SkipStep',
-        'current/$STEP_SLUG/edit/$ENTITY_SURVEY_ID'   => 'EditEntity',
-        'current/$STEP_SLUG/delete/$ENTITY_SURVEY_ID' => 'DeleteEntity',
-        'current//$STEP_SLUG'                         => 'RenderSurvey',
-        '$Action//$ID/$OtherID'                       => 'handleAction',
+        'landing'                                                    => 'LandingPage',
+        'current/$STEP_SLUG/add-entity'                              => 'AddEntity',
+        'current/$STEP_SLUG/skip-step'                               => 'SkipStep',
+        'current/$STEP_SLUG/edit/$ENTITY_SURVEY_ID//$SUB_STEP_SLUG'  => 'EditEntity',
+        'current/$STEP_SLUG/delete/$ENTITY_SURVEY_ID'                => 'DeleteEntity',
+        'current//$STEP_SLUG'                                        => 'RenderSurvey',
+        '$Action//$ID/$OtherID'                                      => 'handleAction',
     );
 
     /**
@@ -128,21 +128,29 @@ class Survey_Controller extends Page_Controller {
         Requirements::javascript('survey_builder/js/survey.controller.js');
     }
 
+    /**
+     * @param $request
+     * @param $action
+     * @return HTMLText|SS_HTTPResponse
+     */
     protected function handleAction($request, $action) {
         if (!Member::currentUser()) {
             if (!in_array($action, self::$allowed_actions_without_auth)) {
-                return $this->redirect("surveys/landing?BackURL=" . urlencode('/surveys/current'));
+                return $this->redirect("/surveys/landing?BackURL=" . urlencode('/surveys/current'));
             }
         }
         if(strtolower($action) === 'index') return $this->redirect(self::RoutePrefix.'/current');
         return parent::handleAction($request, $action);
     }
 
-    public function BootstrapConverted()
-    {
+    public function BootstrapConverted(){
         return true;
     }
 
+    /**
+     * @param $request
+     * @return HTMLText|SS_HTTPResponse|void
+     */
     public function RenderSurvey($request)
     {
         //check if user is logged in
@@ -173,6 +181,9 @@ class Survey_Controller extends Page_Controller {
         }
     }
 
+    /**
+     * @return HTMLText
+     */
     public function LandingPage()
     {
         return $this->customise(array('BackURL' => $this->request->requestVar('BackURL')))->renderWith(array('Surveys_LandingPage', 'Page'));
@@ -241,6 +252,10 @@ class Survey_Controller extends Page_Controller {
         return $this->current_entity_survey;
     }
 
+    /**
+     * @return Form|string
+     * @throws NotFoundEntityException
+     */
     public function SurveyStepForm()
     {
         $current_survey = $this->getCurrentSurveyInstance();
@@ -251,6 +266,12 @@ class Survey_Controller extends Page_Controller {
         return $form;
     }
 
+    /**
+     * @param $data
+     * @param $form
+     * @return SS_HTTPResponse
+     * @throws NotFoundEntityException
+     */
     public function NextStep($data, $form)
     {
         $current_survey = $this->getCurrentSurveyInstance();
@@ -261,6 +282,11 @@ class Survey_Controller extends Page_Controller {
         return $this->redirect('/surveys/current/'.$next_step->template()->title());
     }
 
+    /**
+     * @param $request
+     * @return SS_HTTPResponse
+     * @throws NotFoundEntityException
+     */
     public function SkipStep($request){
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
@@ -272,9 +298,15 @@ class Survey_Controller extends Page_Controller {
 
     // Dynamic Entities
 
+    /**
+     * @param $request
+     * @return HTMLText|SS_HTTPResponse|void
+     * @throws NotFoundEntityException
+     */
     public function EditEntity($request){
 
         $step                 = $request->param('STEP_SLUG');
+        $sub_step             = $request->param('SUB_STEP_SLUG');
         $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
         $this->current_survey = $this->getCurrentSurveyInstance();
         $current_step         = $this->current_survey->currentStep();
@@ -285,15 +317,24 @@ class Survey_Controller extends Page_Controller {
         if(is_null($this->current_entity_survey))
             return $this->httpError(404, 'entity not found!');
         $this->current_entity_survey =  $this->survey_manager->updateSurveyWithTemplate($this->current_entity_survey, $this->current_entity_survey->template());
-        
+
+        if($sub_step === 'skip-step' && $this->current_entity_survey->currentStep()->canSkip()){
+            $next_step = $this->survey_manager->completeStep($this->current_entity_survey->currentStep(), $data = array());
+            return $this->go2DynEntityStep($this->current_entity_survey, $next_step);
+        }
+
         return $this->customise(array(
             'Survey'       => $this->current_survey,
             'EntitySurvey' => $this->current_entity_survey
         ))->renderWith(array('Surveys_CurrentSurveyDynamicEntityContainer', 'Page'));
     }
 
+    /**
+     * @param $request
+     * @return SS_HTTPResponse
+     * @throws NotFoundEntityException
+     */
     public function DeleteEntity($request){
-
         $step                 = $request->param('STEP_SLUG');
         $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
         $current_survey       = $this->getCurrentSurveyInstance();
@@ -303,6 +344,10 @@ class Survey_Controller extends Page_Controller {
         return $this->redirect('/surveys/current/'.$step);
     }
 
+    /**
+     * @param $request
+     * @throws NotFoundEntityException
+     */
     public function AddEntity($request){
 
         $current_survey = $this->getCurrentSurveyInstance();
@@ -315,6 +360,10 @@ class Survey_Controller extends Page_Controller {
         $this->redirect($url);
     }
 
+    /**
+     * @return Form|string
+     * @throws NotFoundEntityException
+     */
     public function SurveyDynamicEntityStepForm(){
         $this->current_survey = $this->getCurrentSurveyInstance();
         $current_step        =  $this->current_survey->currentStep();
@@ -330,17 +379,34 @@ class Survey_Controller extends Page_Controller {
         return $form;
     }
 
+    /**
+     * @param $data
+     * @param $form
+     * @return SS_HTTPResponse
+     */
     public function NextDynamicEntityStep($data, $form)
     {
         $entity_survey = $this->getCurrentEntitySurveyInstance(intval($data['survey_id']));
         $current_step  = $entity_survey->currentStep();
         $next_step     = $this->survey_manager->completeStep($current_step, $data);
         if($entity_survey->isLastStep()){
+            $this->survey_manager->resetSteps($entity_survey);
             return $this->redirect('/surveys/current/'.$this->current_survey->currentStep()->template()->title());
         }
         else{
-            return $this->redirect('/surveys/current/'.$next_step->template()->title());
+            return $this->go2DynEntityStep($entity_survey, $next_step);
         }
+    }
+
+    /**
+     * @param IEntitySurvey $entity
+     * @param ISurveyStep $next_step
+     * @return SS_HTTPResponse
+     */
+    private function go2DynEntityStep(IEntitySurvey $entity,ISurveyStep $next_step){
+        $dyn_step_holder_title = $this->current_survey->currentStep()->template()->title();
+        $next_step_title       = $next_step->template()->title();
+        return $this->redirect(sprintf('/surveys/current/%s/edit/%s/%s',$dyn_step_holder_title, $entity->getIdentifier(),$next_step_title));
     }
 
     // landing page

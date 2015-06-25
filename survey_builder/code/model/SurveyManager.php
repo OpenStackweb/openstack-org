@@ -270,4 +270,20 @@ final class SurveyManager implements ISurveyManager {
 
         });
     }
+
+    /**
+     * @param ISurvey $survey
+     * @return void
+     */
+    public function resetSteps(ISurvey $survey)
+    {
+        return $this->tx_manager->transaction(function() use($survey){
+
+            if($survey->isLastStep()){
+                $steps = $survey->getSteps();
+                // reset to first step
+                $survey->registerCurrentStep($steps[0]);
+            }
+        });
+    }
 }

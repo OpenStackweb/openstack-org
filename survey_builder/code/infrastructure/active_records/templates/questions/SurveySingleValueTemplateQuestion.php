@@ -22,7 +22,6 @@ class SurveySingleValueTemplateQuestion
 
     private static $defaults = array(
         'InitialValue' => null,
-
     );
 
     static $many_many = array(

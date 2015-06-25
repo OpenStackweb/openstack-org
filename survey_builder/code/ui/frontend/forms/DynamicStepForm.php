@@ -58,4 +58,9 @@ class DynamicStepForm extends HoneyPotForm {
         return $icon_url;
     }
 
+    public function EntityFriendlyName($id){
+        $entity = $this->step->getEntitySurvey(intval($id));
+        return !is_null($entity)? $entity->getFriendlyName(): $id;
+    }
+
 }

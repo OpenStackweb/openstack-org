@@ -28,6 +28,7 @@ class EntitySurvey
     static $has_one = array(
         'Template'  => 'EntitySurveyTemplate',
         'Parent'    => 'Survey',
+        'Owner'     => 'SurveyDynamicEntityStep',
     );
 
     static $many_many = array(
@@ -47,7 +48,32 @@ class EntitySurvey
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Parent')->getTarget();
     }
 
+    /**
+     * @return ISurveyDynamicEntityStep
+     */
+    public function owner()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
+    }
+
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
+    }
+
+    /**
+     * @return string
+     */
+    public function getFriendlyName()
+    {
+        $steps = $this->getSteps();
+        foreach($steps as $step){
+           if($step instanceof ISurveyRegularStep ){
+               foreach($step->getAnswers() as $a){
+                   if($a->question()->Type() === 'TextBox' && !empty($a->value()))
+                       return $a->value();
+               }
+           }
+        }
+        return $this->ID;
     }
 }

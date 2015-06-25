@@ -12,23 +12,17 @@
  * limitations under the License.
  **/
 
-/**
- * Interface IEntitySurvey
- */
-interface IEntitySurvey extends ISurvey {
+final class SurveyLiteralQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder{
 
     /**
-     * @return ISurvey
+     * @param ISurveyStep $current_step
+     * @param ISurveyQuestionTemplate $question
+     * @param ISurveyAnswer $answer
+     * @return FormField
      */
-    public function parent();
-
-    /**
-     * @return ISurveyDynamicEntityStep
-     */
-    public function owner();
-
-    /**
-     * @return string
-     */
-    public function getFriendlyName();
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    {
+        $field = new LiteralField($question->name(), $question->Content);
+        return $field;
+    }
 }

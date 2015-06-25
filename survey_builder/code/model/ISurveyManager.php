@@ -70,4 +70,10 @@ interface ISurveyManager {
      * @return void
      */
     public function deleteEntitySurvey(ISurveyDynamicEntityStep $current_step, $entity_id);
+
+    /**
+     * @param ISurvey $survey
+     * @return void
+     */
+    public function resetSteps(ISurvey $survey);
 }
