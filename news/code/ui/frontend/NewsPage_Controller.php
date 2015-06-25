@@ -97,6 +97,10 @@ final class NewsPage_Controller extends Page_Controller {
         $article_id = intval($this->request->param('NEWS_ID'));
         $article = $this->news_repository->getNewsByID($article_id);
 
+        if (!isset($article)) {
+            return $this->httpError(404, 'Sorry that article could not be found');
+        }
+
         return $this->renderWith(array('NewsArticlePage','Page'), array('Article' => $article, 'IsArchivedNews' => $this->isArchivedNews()) );
     }
 
