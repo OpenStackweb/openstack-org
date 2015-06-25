@@ -38,9 +38,15 @@ class SurveyRegularStepTemplateUIBuilder
         if(!empty($content))
             $fields->add(new LiteralField('content', $content));
 
-        if($step->template()->canSkip()){
+        if($step->template()->canSkip() && !$step->survey()->isLastStep()){
+            $next_step_url = sprintf("/surveys/current/%s/skip-step", $step->template()->title());
+            if( $step->survey() instanceof EntitySurvey){
+                $dyn_step_holder = $step->survey()->owner()->template()->title();
+                $id = $step->survey()->getIdentifier();
+                $next_step_url = sprintf("/surveys/current/%s/edit/%s/skip-step", $dyn_step_holder, $id);
+            }
             $fields->add(
-                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you make <a href="/surveys/current/%s/skip-step">skip to the next section</a>.</strong></p>', $step->template()->title()))
+                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you make <a href="%s">skip to the next section</a>.</strong></p>', $next_step_url))
             );
         }
 

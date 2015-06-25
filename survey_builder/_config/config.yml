@@ -48,3 +48,5 @@ Injector:
         class: SurveyRankingQuestionTemplateUIBuilder
   OrganizationUIBuilder:
         class: SurveyOrganizationQuestionTemplateUIBuilder
+  LiteralUIBuilder:
+    class: SurveyLiteralQuestionTemplateUIBuilder
