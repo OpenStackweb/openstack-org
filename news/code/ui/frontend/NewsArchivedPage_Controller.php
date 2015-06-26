@@ -46,10 +46,6 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         Requirements::javascript("news/code/ui/frontend/js/news.archived.js");
     }
 
-    public function BootstrapConverted(){
-        return true;
-    }
-
     public function __construct(){
         parent::__construct();
         $this->news_repository = new SapphireNewsRepository();

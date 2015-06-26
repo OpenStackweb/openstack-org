@@ -21,18 +21,6 @@
         <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- hack for h1 titles until bootstrap conversion - issue #8841 -->
-    <% if $BootstrapConverted == 0 %>
-        <style type="text/css">
-            h1 {
-                text-align: center !important;
-                margin: 40px 0 !important;
-            }
-        </style>
-    <% end_if %>
-    <!-- end hack - issue #8841 -->
-
-
     <% include Analytics %>
 
   </head>

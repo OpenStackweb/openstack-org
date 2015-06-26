@@ -19,11 +19,8 @@ class Page extends SiteTree
         'IncludeJquery' => 'Boolean',
         'PageJavaScript' => 'Text',
         'PageCSS' => 'Text',
-        'IncludeShadowBox' => 'Boolean',
-        'BootstrapConverted' => 'Boolean'
+        'IncludeShadowBox' => 'Boolean'
     );
-
-    private static $defaults = array ('BootstrapConverted'=> true);
 
     private static $has_one = array();
 
@@ -54,8 +51,6 @@ class Page extends SiteTree
         $fields->addFieldToTab('Root.Settings', new CheckboxField ('IncludeShadowBox', 'Include ShadowBox Javascript and CSS'));
 
         $fields->addFieldToTab('Root.Settings', new TextareaField ('PageJavaScript', 'Custom JavaScript For This Page'));
-
-        $fields->addFieldToTab('Root.Settings', new CheckboxField ('BootstrapConverted', 'Converted To Bootstrap'));
 
         return $fields;
     }
@@ -315,14 +310,6 @@ class Page_Controller extends ContentController
         $chineseLangCampaigns = array("o2", "o4", "o6", "o8", "o17", "o18", "o22");
 
         self::AddRequirements();
-
-        if (!$this->BootstrapConverted) {
-
-            Requirements::combine_files('old.css', array(
-                "themes/openstack/css/blueprint/screen.css",
-                "themes/openstack/css/main.css",
-            ));
-        }
 
         $use_shadow_box = Director::get_current_page()->IncludeShadowBox;
 
