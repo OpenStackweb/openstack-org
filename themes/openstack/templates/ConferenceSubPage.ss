@@ -19,18 +19,10 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- Framework CSS -->
-    <% if BootstrapConverted %>
-    <% else %>    
-      <link rel="stylesheet" href="/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <% end_if %>
     <link rel="stylesheet" href="/themes/openstack/css/bootstrap.min.css" type="text/css" media="screen, projection">
 
 
     <!-- OpenStack Specific CSS -->
-    <% if BootstrapConverted %>
-    <% else %>
-      <% require css("themes/openstack/css/main.css") %>
-    <% end_if %>
     <% require css("themes/openstack/css/combined.css") %>
     <% require css("themes/openstack/css/dropdown.css","screen, projection, print") %>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,14 +41,8 @@
       <% include Navigation %>
       
       <!-- Page Content -->
-      <% if BootstrapConverted %>
-        $Message
-        $Layout
-      <% else %>
-        <div class="container">
-          $Layout
-        </div>
-      <% end_if %>
+      $Message
+      $Layout
 
 
     <% include Footer %>

@@ -107,7 +107,6 @@ class Survey_Controller extends Page_Controller {
     function init()
     {
         $this->current_survey = $this->current_entity_survey = null;
-        $this->BootstrapConverted = true;
 
         parent::init();
 
@@ -141,10 +140,6 @@ class Survey_Controller extends Page_Controller {
         }
         if(strtolower($action) === 'index') return $this->redirect(self::RoutePrefix.'/current');
         return parent::handleAction($request, $action);
-    }
-
-    public function BootstrapConverted(){
-        return true;
     }
 
     /**

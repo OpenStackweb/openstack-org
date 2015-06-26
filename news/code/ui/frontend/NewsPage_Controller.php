@@ -43,10 +43,6 @@ final class NewsPage_Controller extends Page_Controller {
         Requirements::css(Director::protocol().'://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
     }
 
-	public function BootstrapConverted(){
-		return true;
-	}
-
 	public function __construct(){
 		parent::__construct();
 		$this->news_repository = new SapphireNewsRepository();
