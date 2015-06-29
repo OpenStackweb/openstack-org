@@ -233,27 +233,50 @@ class HomePage_Controller extends Page_Controller
 
     function NewsItems($limit = 20)
     {
+        $RssNewsDigestTask = new RssNewsDigestTask();
+        $RssNewsDigestTask->run();
+
+        $repository = new SapphireRssNewsRepository();
+        $tx_manager = SapphireTransactionManager::getInstance();
+        $rss_news_manager = new RssNewsManager(
+            $repository,
+            $tx_manager
+        );
+
         $return_array = new ArrayList();
 
-        $outsourced_limit = 5;
-        $local_limit = $limit - $outsourced_limit;
-        $rss_news = RssNews::get()->sort('Date', 'DESC')->limit($outsourced_limit);
+        $group_array = $rss_news_manager->getNewsItemsFromDatabaseGroupedByCategory();
 
-        foreach ($rss_news as $item) {
+        for ($i = 0; $i < 7 && $i < count($group_array[RssNews::SuperUser]); $i++ ) {
+            $item = $group_array[RssNews::SuperUser][$i];
             $return_array->push(array('type' => $item->Category, 'link' => $item->Link, 'title' => $item->Headline,
-                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'timestamp' => strtotime($item->Date)));
+                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
         }
 
-        $return_array = $return_array->sort('timestamp', 'DESC')->limit($outsourced_limit,0);
+        for ($i = 0; $i < 3 && $i < count($group_array[RssNews::Planet]); $i++ ) {
+            $item = $group_array[RssNews::Planet][$i];
 
-        $openstack_news = DataObject::get('News', "Approved = 1", "Date DESC", "", $local_limit)->toArray();
+            $return_array->push(array('type' => $item->Category, 'link' => $item->Link, 'title' => $item->Headline,
+                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
+        }
+
+        for ($i = 0; $i < 3 && $i < count($group_array[RssNews::Blog]); $i++ ) {
+            $item = $group_array[RssNews::Blog][$i];
+
+            $return_array->push(array('type' => $item->Category, 'link' => $item->Link, 'title' => $item->Headline,
+                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
+        }
+
+        $rss_count = $return_array->count();
+
+        $openstack_news = DataObject::get('News', "Approved = 1", "Date DESC", "", $limit - $rss_count)->toArray();
         foreach ($openstack_news as $item) {
             $art_link = 'news/view/' . $item->ID . '/' . $item->HeadlineForUrl;
             $return_array->push(array('type' => 'News', 'link' => $art_link, 'title' => $item->Headline,
-                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'timestamp' => strtotime($item->Date)));
+                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
         }
 
-        return $return_array->sort('timestamp', 'DESC')->limit($limit,0);
+        return $return_array->sort('rawpubdate', 'DESC')->limit($limit,0);
     }
 
     function PastEvents($num = 1)
