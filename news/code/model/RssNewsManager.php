@@ -49,15 +49,19 @@ final class RssNewsManager
      * @param int $limit
      * @return DataList
      */
-    function getNewsItems($limit = 20) {
+    function getNewsItemsFromSource($limit = 20) {
         $rss_news = null;
         $return_array = new ArrayList();
-        $outsourced_limit = 5;
+        $outsourced_limit = 10;
 
         $rss_news = $this->getRssItems($outsourced_limit)->toArray();
         foreach ($rss_news as $item) {
+            $pubDate = DateTime::createFromFormat("D, j M Y H:i:s O", $item->pubDate)->setTimezone(new DateTimeZone("UTC"));
+            $ss_pubDate = new SS_Datetime();
+            $ss_pubDate->setValue($pubDate->format("Y-m-d H:i:s"));
+
             $rss_news = new RssNews();
-            $rss_news->Date = $item->date_display;
+            $rss_news->Date = $ss_pubDate;
             $rss_news->Headline = $item->title;
             $rss_news->Link = $item->link;
             $rss_news->Category = 'Planet';
@@ -67,8 +71,12 @@ final class RssNewsManager
 
         $blog_news = $this->getBlogItems($outsourced_limit)->toArray();
         foreach ($blog_news as $item) {
+            $pubDate = DateTime::createFromFormat("D, j M Y H:i:s O", $item->pubDate)->setTimezone(new DateTimeZone("UTC"));
+            $ss_pubDate = new SS_Datetime();
+            $ss_pubDate->setValue($pubDate->format("Y-m-d H:i:s"));
+
             $rss_news = new RssNews();
-            $rss_news->Date = $item->date_display;
+            $rss_news->Date = $ss_pubDate;
             $rss_news->Headline = $item->title;
             $rss_news->Link = $item->link;
             $rss_news->Category = 'Blog';
@@ -78,8 +86,12 @@ final class RssNewsManager
 
         $superuser_news = $this->getSuperUserItems($outsourced_limit)->toArray();
         foreach ($superuser_news as $item) {
+            $pubDate = DateTime::createFromFormat("Y-m-j\TH:i:sO", $item->pubDate)->setTimezone(new DateTimeZone("UTC"));
+            $ss_pubDate = new SS_Datetime();
+            $ss_pubDate->setValue($pubDate->format("Y-m-d H:i:s"));
+
             $rss_news = new RssNews();
-            $rss_news->Date = $item->date_display;
+            $rss_news->Date = $ss_pubDate;
             $rss_news->Headline = $item->title;
             $rss_news->Link = $item->link;
             $rss_news->Category = 'Superuser';
@@ -87,7 +99,23 @@ final class RssNewsManager
             $return_array->push($rss_news);
         }
 
-        return $return_array->sort('timestamp', 'DESC')->limit($limit,0);
+        return $return_array->sort('Date', 'DESC')->limit($limit,0);
+    }
+
+    /**
+     * @param int $limit
+     * @return DataList
+     */
+    function getNewsItemsFromDatabaseGroupedByCategory($limit = 20) {
+        $rss_news = null;
+        $group_array = array();
+
+        $rss_news_list = RssNews::get()->sort('Date', 'DESC')->toArray();
+        foreach($rss_news_list as $rss_news) {
+            $group_array[$rss_news->Category][] = $rss_news;
+        }
+
+        return $group_array;
     }
 
     /**
@@ -99,7 +127,6 @@ final class RssNewsManager
         if(!$result->count()) return $result;
 
         foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
             $item->timestamp = strtotime($item->pubDate);
         }
 
@@ -116,7 +143,6 @@ final class RssNewsManager
         if(!$result->count()) return $result;
 
         foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->pubDate));
             $item->timestamp = strtotime($item->pubDate);
         }
 
@@ -133,7 +159,8 @@ final class RssNewsManager
         if(!$result->count()) return $result;
 
         foreach ($result as $item) {
-            $item->date_display = date("D, M jS Y", strtotime($item->published));
+            $item->pubDate = $item->published;
+            $item->link = $item->url;
             $item->timestamp = strtotime($item->published);
         }
 

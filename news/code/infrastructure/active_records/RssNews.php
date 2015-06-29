@@ -20,10 +20,14 @@ final class RssNews
     implements IEntity
 {
 
+    const Blog = "Blog";
+    const SuperUser = "Superuser";
+    const Planet = "Planet";
+
     static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
     static $db = array(
-        'Date'  => 'Datetime',
+        'Date'  => 'SS_Datetime',
         'Headline' => 'Varchar(512)',
         'Link' => 'Varchar(255)',
         'Category' => 'Varchar(255)',

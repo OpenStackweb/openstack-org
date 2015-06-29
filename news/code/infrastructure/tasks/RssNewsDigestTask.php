@@ -27,7 +27,7 @@ final class RssNewsDigestTask extends CronTask {
                 $tx_manager
             );
 
-            $rss_news = $rss_news_manager->getNewsItems();
+            $rss_news = $rss_news_manager->getNewsItemsFromSource();
             $rss_news_manager->deleteAllNewsItems();
             $rss_news_manager->saveNewsItems($rss_news);
 
