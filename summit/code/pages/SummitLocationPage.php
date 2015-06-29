@@ -13,6 +13,7 @@ class SummitLocationPage extends SummitPage {
         'GettingAround' => 'HTMLText',
         'AboutTheCity' => 'HTMLText',
         'Locals'       => 'HTMLText',
+        'TravelSupport' => 'HTMLText',
         'AboutTheCityBackgroundImageHero' => 'Text',
         'AboutTheCityBackgroundImageHeroSource' => 'Text',
         'HostCityLat' => 'Text',
@@ -35,6 +36,7 @@ class SummitLocationPage extends SummitPage {
         $fields = parent::getCMSFields();
                 
         $fields->addFieldToTab('Root.Main', new HTMLEditorField('VisaInformation', 'Visa Information'));
+        $fields->addFieldToTab('Root.Main', new HTMLEditorField('TravelSupport','Travel Support'));
         $fields->addFieldToTab('Root.CityInfo', new HTMLEditorField('CityIntro','City Intro'));
         $fields->addFieldToTab('Root.CityInfo', new HTMLEditorField('AboutTheCity','About The City'));
         $fields->addFieldToTab('Root.CityInfo', new HTMLEditorField('Locals','In The Words Of The Locals'));

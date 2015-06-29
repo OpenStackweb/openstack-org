@@ -32,6 +32,14 @@
                 </a>
             </li>
             <% end_if %>
+            <% if TravelSupport  %>
+                <li>
+                    <a href="$Top.Link#travel-support">
+                        <i class="fa fa-globe"></i>
+                        Travel Support Program
+                    </a>
+                </li>
+            <% end_if %>
             <% if VisaInformation  %>
             <li>
                 <a href="$Top.Link#visa">
@@ -161,6 +169,17 @@
         $GettingAround
     </div>
 </div>
+<% end_if %>
+<% if TravelSupport  %>
+    <div class="light" id="travel-support">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    $TravelSupport
+                </div>
+            </div>
+        </div>
+    </div>
 <% end_if %>
 <% if VisaInformation  %>
 <div class="light visa-row" id="visa">
