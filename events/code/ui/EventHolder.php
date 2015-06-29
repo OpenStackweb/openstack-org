@@ -76,16 +76,27 @@ class EventHolder_Controller extends Page_Controller {
 
         $filterLowerCase = strtolower($filter);
         $events_array = new ArrayList();
+        $oldMode = Versioned::get_reading_mode();  //hack chili #9049
+        try {
+            Versioned::reading_stage('Live');
 
-        if ($filterLowerCase != 'other') {
-            $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-            if (strtolower($filter) != 'all' && $filter != '') {
-                $filter_array['EventCategory'] = $filter;
+            if ($filterLowerCase != 'other') {
+                $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
+                if (strtolower($filter) != 'all' && $filter != '') {
+                    $filter_array['EventCategory'] = $filter;
+                }
+                $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num)->toArray();
             }
-            $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num)->toArray();
+            else {
+                $pulled_events = EventPage::get()->where("EventCategory is null and EventEndDate >= CURDATE()")->sort('EventStartDate','ASC')->limit($num)->toArray();
+            }
+
         }
-        else {
-            $pulled_events = EventPage::get()->where("EventCategory is null and EventEndDate >= CURDATE()")->sort('EventStartDate','ASC')->limit($num)->toArray();
+        catch (Exception $ex) {
+            throw $ex;
+        }
+        finally {
+            Versioned::set_reading_mode($oldMode);
         }
 
         $events_array->merge($pulled_events);
