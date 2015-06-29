@@ -21,7 +21,6 @@
 </div>
 <script type="application/javascript">
     jQuery(document).ready(function($) {
-
         $('#'+'{$ID}').survey_ranking_field({ max_rank_items : $Question.MaxItemsToRank, rank_order : $AnswerCount });
     });
 </script>

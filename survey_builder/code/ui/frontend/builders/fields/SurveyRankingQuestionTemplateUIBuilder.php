@@ -24,7 +24,7 @@ class SurveyRankingQuestionTemplateUIBuilder extends AbstractSurveyQuestionTempl
     {
         $values = $question->Values()->sort('Order')->map('ID','Value');
 
-        $field  = new SurveyRankingField($question->name().'Container', $question->label(), $values,  $value = '' , $form=null, $emptyString=null, $question);
+        $field  = new SurveyRankingField($question->name(), $question->label(), $values,  $value = '' , $form=null, $emptyString=null, $question);
 
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
