@@ -113,28 +113,41 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
                 if(!$q instanceof IMultiValueQuestionTemplate) continue;
                 $answer = $current_step->survey()->findAnswerByQuestion($q);
                 if(is_null($answer)) continue;
-                $res  = true;
+                $condition  = true;
                 //checks the condition
                 switch($operator){
                     case 'Equal':{
                         foreach($values as $vid) {
-                            $res &= (strpos($answer->value(), $vid) !== false);
+                            $condition &= (strpos($answer->value(), $vid) !== false);
                         }
                     }
-                        break;
+                    break;
                     case 'Not-Equal':{
                         foreach($values as $vid) {
-                            $res &= (strpos($answer->value(), $vid) === false);
+                            $condition &= (strpos($answer->value(), $vid) === false);
                         }
                     }
-                        break;
+                    break;
                 }
-
-                if($res){
-                    if($visibility === 'Not-Visible'){
-                        $field->addExtraClass('hidden');
+                //visibility
+                switch($visibility){
+                    case 'Visible':{
+                        if(!$condition){
+                            $field->addExtraClass('hidden');
+                            $field->setValue(''); // clear answer
+                        }
+                        if($condition){
+                            if($default->ID > 0) $field->setValue($default->Value);
+                        }
                     }
-                    $field->setValue($default);
+                    break;
+                    case 'Not-Visible':{
+                        if($condition) {
+                            $field->addExtraClass('hidden');
+                            if($default->ID > 0) $field->setValue($default->Value);
+                        }
+                    }
+                    break;
                 }
             }
         }

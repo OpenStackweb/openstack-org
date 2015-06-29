@@ -217,7 +217,8 @@ class Survey
     {
         foreach($this->getSteps() as $step){
             if($step instanceof SurveyRegularStep){
-                return $step->getAnswerByTemplateId($question->getIdentifier());
+                $answer = $step->getAnswerByTemplateId($question->getIdentifier());
+                if(!is_null($answer)) return $answer;
             }
         }
         return null;
