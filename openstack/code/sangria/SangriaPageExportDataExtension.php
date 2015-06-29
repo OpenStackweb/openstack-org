@@ -19,12 +19,24 @@
 final class SangriaPageExportDataExtension extends Extension
 {
 
+    function init() {
+        parent::init();
+
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
+        Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
+    }
+
     public function onBeforeInit()
     {
         Config::inst()->update(get_class($this), 'allowed_actions', array(
-            'ExportData',
+            'ExportDataUsersByRole',
             'exportCLAUsers',
             'exportGerritUsers',
+            'ExportDataCompanyData',
             'ExportSurveyResults',
             'ExportAppDevSurveyResults',
             'exportFoundationMembers',
@@ -35,11 +47,11 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportSurveyResultsFlat',
         ));
 
-
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
-            'ExportData',
+            'ExportDataUsersByRole',
             'exportCLAUsers',
             'exportGerritUsers',
+            'ExportDataCompanyData',
             'ExportSurveyResults',
             'ExportAppDevSurveyResults',
             'exportFoundationMembers',
@@ -51,16 +63,22 @@ final class SangriaPageExportDataExtension extends Extension
         ));
     }
 
-    function ExportData()
+    function ExportDataUsersByRole()
     {
-        $this->Title = 'Export Data';
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
-        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-        Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
-        return $this->owner->getViewer('ExportData')->process($this->owner);
+        $this->Title = 'Export Users By Role';
+        return $this->owner->getViewer('ExportUsersByRole')->process($this->owner);
+    }
+
+    function ExportDataGerritUsers()
+    {
+        $this->Title = 'Export Gerrit Users';
+        return $this->owner->getViewer('ExportGerritUsers')->process($this->owner);
+    }
+
+    function ExportDataCompanyData()
+    {
+        $this->Title = 'Export Company Data';
+        return $this->owner->getViewer('ExportCompanyData')->process($this->owner);
     }
 
     function exportCLAUsers()

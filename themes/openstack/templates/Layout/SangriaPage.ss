@@ -77,46 +77,103 @@
 </div>
 <hr class="space" />
 <div class="span-24 last">
-    <h2>Quick Actions</h2>
+    <h2>User Data</h2>
+    <ul>
+        <li>Export Data</li>
+            <ul>
+                <li><a href="$Link(ExportDataUsersByRole)">Users by Role</a></li>
+                <li><a href="$Link(ExportDataGerritUsers)">Gerrit Users</a></li>
+                <li><a href="$Link(exportDupUsers)">Duplicated Users</a></li>
+            </ul>
+        <li>Statistics</li>
+            <ul>
+                <li><a href="$Top.Link(GerritStatisticsReport)">Gerrit Statistics Report</a></li>
+            </ul>
+        <li>Regional Data</li>
+            <ul>
+                <li><a href="$Link(ViewUsersPerRegion)">Users Per Region</a></li>
+            </ul>
+    </ul>
+
+    <h2>Company Data</h2>
+    <ul>
+        <li>Export Data</li>
+            <ul>
+                <li><a href="$Link(ExportDataCompanyData)">Company Data</a></li>
+            </ul>
+        <li><a href="$Top.Link(ViewICLACompanies)">CLA/ICLA Status</a></li>
+    </ul>
+
+    <h2>Deployments / Deployment Survey</h2>
+    <ul>
+        <li>Statistics</li>
+            <ul>
+                <li><a href="/sangria/ViewDeploymentSurveyStatistics">Deployment Survey Stats</a></li>
+                <li><a href="/sangria/ViewDeploymentStatistics">Deployment Stats</a></li>
+            </ul>
+        <li>Export Data</li>
+            <ul>
+                <li>
+                    <a href="#" class="cvs_download_link">Deployment Survey CSV Download</a>
+                    <div class="export_filters hidden">
+                        $DateFilters(ExportSurveyResults,true)
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="cvs_download_link" >App Dev Survey CSV Download</a>
+                    <div class="export_filters hidden">
+                        $DateFilters(ExportAppDevSurveyResults,true)
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="cvs_download_link">Deployment Survey CSV Download (Flat Format)</a>
+                    <div class="export_filters hidden">
+                        $DateFilters(ExportSurveyResultsFlat,true)
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="cvs_download_link" >App Dev Survey CSV Download (Flat Format)</a>
+                    <div class="export_filters hidden">
+                        $DateFilters(ExportAppDevSurveyResultsFlat,true)
+                    </div>
+                </li>
+            </ul>
+        <li>Regional Data</li>
+            <ul>
+                <li><a href="$Link(ViewDeploymentsPerRegion)">Deployments Per Region</a></li>
+                <li><a href="$Link(ViewDeploymentSurveysPerRegion)">Deployment Surveys Per Region</a></li>
+            </ul>
+        <li>User Stories / Deployment Details</li>
+            <ul>
+                <li><a href="/sangria/ViewCurrentStories">Manage User Stories</a></li>
+                <li><a href="/sangria/ViewDeploymentDetails">Manage Deployment Details</a></li>
+            </ul>
+    </ul>
+
+    <h2>Events</h2>
+    <ul>
+        <li><a href="$Top.Link(ViewEventDetails)">New Event Submissions</a></li>
+        <li><a href="$Top.Link(ViewPostedEvents)">Edit Posted Events</a></li>
+    </ul>
+
+    <h2>Jobs</h2>
+    <ul>
+        <li><a href="$Top.Link(ViewJobsDetails)">New Job Submissions</a></li>
+        <li><a href="$Top.Link(ViewPostedJobs)">Edit Posted Jobs</a></li>
+    </ul>
+
+    <h2>Marketplace</h2>
+    <ul>
+        <li><a href="$Top.Link(ViewReviews)">Approve Product Reviews</a></li>
+    </ul>
+
+    <h2>Speakers</h2>
     <ul>
         <li><a href="/sangria/ViewSpeakingSubmissions">View Speaking Submissions</a></li>
-        <li><a href="/sangria/StandardizeOrgNames">Standardize Organizations</a></li>
-        <li><a href="/sangria/ViewDeploymentSurveyStatistics">View Deployment Survey Statistics</a></li>
-        <li><a href="/sangria/ViewDeploymentStatistics">View Deployment Statistics</a></li>
-        <li>
-            <a href="#" class="cvs_download_link">Deployment Survey CSV Download</a>
-            <div class="export_filters hidden">
-                $DateFilters(ExportSurveyResults,true)
-            </div>
-        </li>
-        <li>
-            <a href="#" class="cvs_download_link" >App Dev Survey CSV Download</a>
-            <div class="export_filters hidden">
-                $DateFilters(ExportAppDevSurveyResults,true)
-            </div>
-        </li>
-        <li>
-            <a href="#" class="cvs_download_link">Deployment Survey CSV Download (Flat Format)</a>
-            <div class="export_filters hidden">
-				$DateFilters(ExportSurveyResultsFlat,true)
-            </div>
-        </li>
-        <li>
-            <a href="#" class="cvs_download_link" >App Dev Survey CSV Download (Flat Format)</a>
-            <div class="export_filters hidden">
-				$DateFilters(ExportAppDevSurveyResultsFlat,true)
-            </div>
-        </li>
-        <li><a href="$Link(ExportData)">Export Data</a></li>
-		<li><a href="$Link(ViewDeploymentsPerRegion)">View Deployments Per Region</a></li>
-		<li><a href="$Link(ViewDeploymentSurveysPerRegion)">View Deployment Surveys Per Region</a></li>
-        <li><a href="$Link(ViewUsersPerRegion)">View Users Per Region</a></li>
     </ul>
-    <h2>Manage User Stories and Deployments</h2>
+
+    <h2>DB Cleanup</h2>
     <ul>
-        <li>
-            <a href="/sangria/ViewCurrentStories">View Current User Stories</a></li>
-        <li><a href="/sangria/ViewDeploymentDetails">View Deployment Details</a></li>
+        <li><a href="/sangria/StandardizeOrgNames">Standardize Organizations</a></li>
     </ul>
-    $QuickActionsExtensions
 </div>
