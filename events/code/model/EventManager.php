@@ -187,7 +187,13 @@ final class EventManager {
      */
     function rssEvents($limit = 7)
     {
-        $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
+        try {
+            $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
+        }
+        catch(Exception $ex){
+            SS_Log::log("It wasn't possible to get rss content from source. Isolated occurrences of this error can be ignored since temporary glitches accessing url could be the cause. Information will be ingested on next run if that's the case",SS_Log::ERR);
+            echo $ex->getMessage();
+        }
 
         $feedXML = $feed->request()->getBody();
 
@@ -239,22 +245,34 @@ final class EventManager {
     }
 
     function saveRssEvents($events_array) {
-        foreach ($events_array as $event) {
+        $oldMode = Versioned::get_reading_mode();  //hack chili #9049
+        try {
+            Versioned::reading_stage('Live');
 
-            $filter_array = array();
-            $filter_array["EventEndDate"] = $event->EventEndDate;
-            $filter_array["ExternalSourceId"] = $event->ExternalSourceId;
+            foreach ($events_array as $event) {
 
-            $count = EventPage::get()->filter($filter_array)->Count();
+                $filter_array = array();
+                $filter_array["EventEndDate"] = $event->EventEndDate;
+                $filter_array["ExternalSourceId"] = $event->ExternalSourceId;
 
-            $event_repository = $this->event_repository;
+                $count = EventPage::get()->filter($filter_array)->Count();
 
-            if ($count == 0) {
-                $this->tx_manager->transaction(function() use ($event_repository, $event){
-                    $event_repository->add($event);
-                });
+                $event_repository = $this->event_repository;
+
+                if ($count == 0) {
+                    $this->tx_manager->transaction(function() use ($event_repository, $event){
+                        $event_repository->add($event);
+                    });
+                }
             }
         }
+        catch (Exception $ex) {
+            throw $ex;
+        }
+        finally {
+            Versioned::set_reading_mode($oldMode);
+        }
+
     }
 
 
