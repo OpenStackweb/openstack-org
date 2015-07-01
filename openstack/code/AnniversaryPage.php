@@ -11,14 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class AnniversaryPage
  */
-class AnniversaryPage  extends Page {
-    function getCMSFields() {
+class AnniversaryPage extends Page
+{
+    function getCMSFields()
+    {
         $fields = parent::getCMSFields();
         // remove unneeded fields
-        $fields->removeFieldFromTab("Root.Main","Content");
+        $fields->removeFieldFromTab("Root.Main", "Content");
+
         return $fields;
     }
 
@@ -30,59 +34,86 @@ class AnniversaryPage  extends Page {
 /**
  * Class AnniversaryPage_Controller
  */
-class AnniversaryPage_Controller extends Page_Controller {
+class AnniversaryPage_Controller extends ContentController
+{
 
-	static $allowed_actions = array(
-		'third',
-		'fourth',
-		'handleIndex',
-	);
+    static $allowed_actions = array(
+        'third',
+        'fourth',
+        'fifth',
+        'handleIndex',
 
-	static $url_handlers = array(
-		'' => 'handleIndex',
-	);
+    );
+
+    static $url_handlers = array(
+        '' => 'handleIndex',
+    );
 
 
-	public function third(){
-		Requirements::css($this->ThemeDir().'/css/anniversary/3/bootstrap.anniversary.css');
-		Requirements::css($this->ThemeDir().'/css/anniversary/3/styles.css');
-		Requirements::javascript($this->ThemeDir().'/javascript/anniversary.3.js');
-		//FB page properties
-		$this->Title    = 'The OpenStack Third Anniversary';
-		$this->FBImage  = 'http://97ddcca80f76c4bfffa8-fba9438aa8767b03b10d7d590f8ffd05.r77.cf1.rackcdn.com/openstack-3rd-anniversary.png';
-		$this->FBImageW = '173';
-		$this->FBImageH = '245';
-		$this->FBDesc      	 = 'Happy 3th OpenStack! Come celebrate at one of 51 global events.';
-		$this->CurrentDomain = Director::protocolAndHost();
-		$this->FBUrl         = Director::protocolAndHost().$this->Link('third');
-		
-		return $this->getViewer('third')->process($this);
-	}
+    public function third()
+    {
+        Requirements::css($this->ThemeDir() . '/css/anniversary/3/bootstrap.anniversary.css');
+        Requirements::css($this->ThemeDir() . '/css/anniversary/3/styles.css');
+        Requirements::javascript($this->ThemeDir() . '/javascript/anniversary.3.js');
+        //FB page properties
+        $this->Title = 'The OpenStack Third Anniversary';
+        $this->FBImage = 'http://97ddcca80f76c4bfffa8-fba9438aa8767b03b10d7d590f8ffd05.r77.cf1.rackcdn.com/openstack-3rd-anniversary.png';
+        $this->FBImageW = '173';
+        $this->FBImageH = '245';
+        $this->FBDesc = 'Happy 3th OpenStack! Come celebrate at one of 51 global events.';
+        $this->CurrentDomain = Director::protocolAndHost();
+        $this->FBUrl = Director::protocolAndHost() . $this->Link('third');
 
-	public function fourth(){
-		Requirements::css($this->ThemeDir().'/css/anniversary/4/bootstrap.css');
-		Requirements::css($this->ThemeDir().'/css/anniversary/4/styles.css');
-		Requirements::javascript($this->ThemeDir().'/javascript/anniversary.4.js');
-		//FB page properties
-		$this->Title         = 'The OpenStack Fourth Anniversary';
-		$this->FBImage       = Director::protocolAndHost().'/themes/openstack/images/anniversary/4/bot-big.png';
-		$this->FBImageW      = '200';
-		$this->FBImageH 	 = '284';
-		$this->FBDesc      	 = 'Happy 4th OpenStack! Come celebrate at one of 51 global events.';
-		$this->FBUrl         = Director::protocolAndHost().$this->Link('fourth');
-		$this->CurrentDomain = Director::protocolAndHost();
+        return $this->getViewer('third')->process($this);
+    }
 
-		return $this->getViewer('fourth')->process($this);
-	}
+    public function fourth()
+    {
+        Requirements::css($this->ThemeDir() . '/css/anniversary/4/bootstrap.css');
+        Requirements::css($this->ThemeDir() . '/css/anniversary/4/styles.css');
+        Requirements::javascript($this->ThemeDir() . '/javascript/anniversary.4.js');
+        //FB page properties
+        $this->Title = 'The OpenStack Fourth Anniversary';
+        $this->FBImage = Director::protocolAndHost() . '/themes/openstack/images/anniversary/4/bot-big.png';
+        $this->FBImageW = '200';
+        $this->FBImageH = '284';
+        $this->FBDesc = 'Happy 4th OpenStack! Come celebrate at one of 51 global events.';
+        $this->FBUrl = Director::protocolAndHost() . $this->Link('fourth');
+        $this->CurrentDomain = Director::protocolAndHost();
 
-	public function handleIndex(){
-		return $this->fourth();
-	}
+        return $this->getViewer('fourth')->process($this);
+    }
 
-    public function init() {
-	    parent::init();
-	    Requirements::javascript(Director::protocol()."platform.twitter.com/widgets.js");
-        Requirements::javascript(Director::protocol()."cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js");
+    public function fifth()
+    {
+        Requirements::css($this->ThemeDir() . '/images/anniversary/5/css/bootstrap.css');
+        Requirements::css($this->ThemeDir() . '/images/anniversary/5/css/styles.css');
+
+        Requirements::javascript($this->ThemeDir() . '/images/anniversary/5/js/jquery.js');
+        Requirements::javascript($this->ThemeDir() . '/images/anniversary/5/js/scripts.js');
+        Requirements::javascript($this->ThemeDir() . '/images/anniversary/5/js/jquery.easing.min.js');
+        //FB page properties
+        $this->Title = 'Then OpenStack Fifth Anniversary';
+        $this->FBImage = Director::protocolAndHost() . '/images/anniversary/5/img/bot-facebook.jpg';
+        $this->FBImageW = '200';
+        $this->FBImageH = '284';
+        $this->FBDesc = 'Happy 5th OpenStack! Come celebrate at one of 35 global events.';
+        $this->FBUrl = Director::protocolAndHost() . $this->Link('fifth');
+        $this->CurrentDomain = Director::protocolAndHost();
+
+        return $this->getViewer('fifth')->process($this);
+    }
+
+    public function handleIndex()
+    {
+        return $this->fifth();
+    }
+
+    public function init()
+    {
+        parent::init();
+        Requirements::javascript(Director::protocol() . "platform.twitter.com/widgets.js");
+        Requirements::javascript(Director::protocol() . "cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js");
     }
 
 }
