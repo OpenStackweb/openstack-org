@@ -2280,7 +2280,7 @@ ul.city-nav-list li {
   list-style: none;
   text-align: center;
   display: inline-block;
-  margin: 0 5%; }
+  margin: 0 2%; }
 
 @media (max-width: 767px) {
   ul.city-nav-list li {
@@ -2348,9 +2348,9 @@ ul.city-nav-list li i {
   border-width: 16px;
   margin-left: -16px; }
 
-@media (max-width: 767px) {
-  .city-nav.fixed ul.city-nav-list li a.active:after, .city-nav.fixed ul.city-nav-list li a.active:before {
-    display: none; } }
+@media (max-width: 990px) {
+  .city-nav.fixed ul.city-nav-list li a.active:after,
+  .city-nav.fixed ul.city-nav-list li a.active:before { display: none; } }
 
 .city-nav.fixed ul.city-nav-list li i {
   display: inline-block;
