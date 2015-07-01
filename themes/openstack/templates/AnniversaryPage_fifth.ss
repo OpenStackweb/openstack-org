@@ -11,7 +11,7 @@
     <meta property="og:title" content="$Title" />
     <meta property="og:description" content="$FBDesc" />
     <title>$Title</title>
-    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <link rel="stylesheet" href="/themes/openstack/images/anniversary/5/css/bootstrap.css">
     <link rel="stylesheet" href="/themes/openstack/images/anniversary/5/css/styles.css">
     <script type="text/javascript" src="/themes/openstack/images/anniversary/5/js/jquery.js"></script>

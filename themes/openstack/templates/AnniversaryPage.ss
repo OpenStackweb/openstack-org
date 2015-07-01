@@ -12,6 +12,7 @@
     <meta property="og:description" content="$FBDesc" />
     <title>$Title</title>
     <!--[if IE]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script type="text/javascript" src="/themes/openstack/images/anniversary/5/js/jquery.js"></script>
     <!--[if gte IE 9]>
     <style type="text/css">
         .gradient {
