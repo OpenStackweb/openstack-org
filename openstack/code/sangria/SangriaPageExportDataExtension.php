@@ -19,15 +19,18 @@
 final class SangriaPageExportDataExtension extends Extension
 {
 
-    function init() {
-        parent::init();
+    public function __construct() {
 
+        Requirements::javascript('themes/openstack/javascript/jquery.min.js');
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
         Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
+
+        parent::__construct();
+
     }
 
     public function onBeforeInit()
@@ -40,7 +43,7 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportSurveyResults',
             'ExportAppDevSurveyResults',
             'exportFoundationMembers',
-            'exportCorporateSponsors',
+            'exportCompanyData',
             'exportDupUsers',
             'exportMarketplaceAdmins',
             'ExportAppDevSurveyResultsFlat',
@@ -56,7 +59,7 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportSurveyResults',
             'ExportAppDevSurveyResults',
             'exportFoundationMembers',
-            'exportCorporateSponsors',
+            'exportCompanyData',
             'exportDupUsers',
             'exportMarketplaceAdmins',
             'ExportAppDevSurveyResultsFlat',
@@ -1014,9 +1017,9 @@ SQL;
                 case 'deployments' :
                     $query->setFrom('Org');
                     $query->addLeftJoin('Deployment', 'Deployment.OrgID = Org.ID');
-
                     $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Creation'=>'Deployment.Created',
                         'Edited'=>'Deployment.LastEdited','Label'=>'Deployment.Label','Is Public'=>'Deployment.IsPublic');
+
                     $query->setSelect($org_fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/DeploymentDetails/',Deployment.ID)","Link");
                     break;
@@ -1031,6 +1034,7 @@ SQL;
                         'Is Group Member'=>'DeploymentSurvey.UserGroupMember','Group Name'=>'DeploymentSurvey.UserGroupName',
                         'Ok to Contact'=>'DeploymentSurvey.OkToContact','Member Id'=>'Member.ID',
                         'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname');
+
                     $query->setSelect($org_fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/SurveyDetails/',DeploymentSurvey.ID)","Link");
                     break;
@@ -1046,7 +1050,6 @@ SQL;
             }
         }
 
-        //die($query->sql());
         $result = $query->execute();
 
         $filename = "Companies" . date('Ymd') . "." . $ext;

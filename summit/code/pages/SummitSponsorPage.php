@@ -46,7 +46,7 @@ class SummitSponsorPage extends SummitPage
 
     private static $has_one = array(
         'CrowdImage'   => 'BetterImage',
-        'ExhibitImage' => 'BetterImage',
+        'ExhibitImage' => 'BetterImage'
     );
 
     private static $many_many = array(
@@ -57,7 +57,8 @@ class SummitSponsorPage extends SummitPage
     private static $many_many_extraFields = array(
         'Companies' => array(
             'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight, Media', 'Startup')",
-            'SubmitPageUrl' => 'Text',
+            'SubmitPageUrl'   => 'Text',
+            'SummitID'        => 'Int'
         ),
     );
 
@@ -181,16 +182,17 @@ class SummitSponsorPage extends SummitPage
     function onAfterWrite()
     {
         parent::onAfterWrite();
+        $summit = Summit::get_active();
         //update all relationships with sponsors
         foreach ($this->Companies() as $company) {
             if (isset($_REQUEST["SponsorshipType_{$company->ID}"])) {
                 $type = $_REQUEST["SponsorshipType_{$company->ID}"];
-                $sql = "UPDATE SummitSponsorPage_Companies SET SponsorshipType ='{$type}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
+                $sql = "UPDATE SummitSponsorPage_Companies SET SponsorshipType ='{$type}', SummitID = '{$summit->ID}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
                 DB::query($sql);
             }
             if (isset($_REQUEST["SubmitPageUrl_{$company->ID}"])) {
                 $page_url = $_REQUEST["SubmitPageUrl_{$company->ID}"];
-                $sql = "UPDATE SummitSponsorPage_Companies SET SubmitPageUrl ='{$page_url}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
+                $sql = "UPDATE SummitSponsorPage_Companies SET SubmitPageUrl ='{$page_url}', SummitID = '{$summit->ID}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
                 DB::query($sql);
             }
 
