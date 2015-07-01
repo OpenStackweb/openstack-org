@@ -33,7 +33,7 @@
                 </div>
                 <div class="statics-txt">
                     <p>$MembersCount</p>
-                    <p class="misce">Openstack Members</p>
+                    <p class="misce">OpenStack Members</p>
                 </div>
             </div>
             <div class="span4 countries">
@@ -100,8 +100,8 @@
     <div class="container">
         <div class="row-fluid">
             <div class="span10 offset1">
-                <h2>35 global events</h2>
-                <h3>Come celebrate with us at any of our 5th anniversary summits</h3>
+                <h2>40 global events</h2>
+                <h3>Come celebrate with us at any of our 5th anniversary celebrations</h3>
                 <ul>
                     <li><a target="_blank" href="//www.openstack.org/blog/2015/06/openstack-turns-5-its-time-to-celebrate-the-community/" class="btn">Find your local event</a></li>
                     <li><a target="_blank" href="//www.openstack.org/summit/tokyo-2015/" class="btn btn-summit">Tokyo Summit - Oct 2015</a></li>
@@ -118,7 +118,7 @@
             <div class="span12">
                 <h2>Join the party on twitter</h2>
                 <div class="widget-twitter open3">
-                    <a class="twitter-timeline" width="435" height="350"  href="https://twitter.com/search?q=%23openstack5bday" data-widget-id="356790893145120768">Tweets about "#openstack5bday"</a>
+                   <a class="twitter-timeline" width="435" height="350" href="https://twitter.com/hashtag/openstack5bday" data-widget-id="616344210187223040">#openstack5bday Tweets</a>
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                 </div>
                 <div class="widget-twitter openmin" style="display: none;">
