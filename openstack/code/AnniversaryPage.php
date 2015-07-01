@@ -90,7 +90,7 @@ class AnniversaryPage_Controller extends ContentController
         $this->FBImage = Director::protocolAndHost() . '/images/anniversary/5/img/bot-facebook.jpg';
         $this->FBImageW = '200';
         $this->FBImageH = '284';
-        $this->FBDesc = 'Happy 5th OpenStack! Come celebrate at one of 35 global events.';
+        $this->FBDesc = 'Happy 5th OpenStack! Come celebrate at one of 40 global events.';
         $this->FBUrl = Director::protocolAndHost() . $this->Link('fifth');
         $this->CurrentDomain = Director::protocolAndHost();
         return $this->getViewer('fifth')->process($this);
