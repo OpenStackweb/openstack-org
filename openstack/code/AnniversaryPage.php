@@ -86,13 +86,6 @@ class AnniversaryPage_Controller extends ContentController
 
     public function fifth()
     {
-        Requirements::css($this->ThemeDir() . '/images/anniversary/5/css/bootstrap.css');
-        Requirements::css($this->ThemeDir() . '/images/anniversary/5/css/styles.css');
-
-        Requirements::javascript($this->ThemeDir() . '/images/anniversary/5/js/jquery.js');
-        Requirements::javascript($this->ThemeDir() . '/images/anniversary/5/js/scripts.js');
-        Requirements::javascript($this->ThemeDir() . '/images/anniversary/5/js/jquery.easing.min.js');
-        //FB page properties
         $this->Title = 'Then OpenStack Fifth Anniversary';
         $this->FBImage = Director::protocolAndHost() . '/images/anniversary/5/img/bot-facebook.jpg';
         $this->FBImageW = '200';
@@ -100,7 +93,6 @@ class AnniversaryPage_Controller extends ContentController
         $this->FBDesc = 'Happy 5th OpenStack! Come celebrate at one of 35 global events.';
         $this->FBUrl = Director::protocolAndHost() . $this->Link('fifth');
         $this->CurrentDomain = Director::protocolAndHost();
-
         return $this->getViewer('fifth')->process($this);
     }
 
