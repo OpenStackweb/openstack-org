@@ -12,7 +12,6 @@
     <meta property="og:description" content="$FBDesc" />
     <title>$Title</title>
     <!--[if IE]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-   <link href='//fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
     <!--[if gte IE 9]>
     <style type="text/css">
         .gradient {
