@@ -104,7 +104,7 @@
                 <h3>Come celebrate with us at any of our 5th anniversary summits</h3>
                 <ul>
                     <li><a target="_blank" href="//www.openstack.org/blog/2015/06/openstack-turns-5-its-time-to-celebrate-the-community/" class="btn">Find your local event</a></li>
-                    <li><a target="_blank" href="#" class="btn btn-summit">Paris Summit - Nov 2015</a></li>
+                    <li><a target="_blank" href="//www.openstack.org/summit/tokyo-2015/" class="btn btn-summit">Tokyo Summit - Oct 2015</a></li>
                 </ul>
             </div>
         </div>
