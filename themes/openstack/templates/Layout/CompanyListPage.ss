@@ -50,8 +50,6 @@
 
 		<!-- Corporate & Startup Members -->
 		<% if DisplayedCompanies(Combined) %>
-		
-		<div style="clear:both;" />
 		<hr/>
 		<div class="span-24 last">
 			<h2>Corporate Sponsors</h2>
@@ -72,8 +70,6 @@
 
 		</div>
 		<% end_if %>
-		
-		<div style="clear:both;" />
 
 
 		<!-- Mention Members -->
