@@ -25,6 +25,8 @@
 
 		<!-- Gold Members -->
 		<% if DisplayedCompanies(Gold) %>
+		
+		<div style="clear:both;" />
 		<hr/>
 		<div class="span-24 last">
 			<h2>Gold Members</h2>
@@ -48,6 +50,8 @@
 
 		<!-- Corporate & Startup Members -->
 		<% if DisplayedCompanies(Combined) %>
+		
+		<div style="clear:both;" />
 		<hr/>
 		<div class="span-24 last">
 			<h2>Corporate Sponsors</h2>
@@ -72,6 +76,8 @@
 
 		<!-- Mention Members -->
 		<% if DisplayedCompanies(Mention) %>
+		
+		<div style="clear:both;" />
 		<hr/>
 		<div class="span-24 last">
 			<h2>Supporting Organizations</h2>
