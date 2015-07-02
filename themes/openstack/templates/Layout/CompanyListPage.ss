@@ -76,8 +76,6 @@
 
 		<!-- Mention Members -->
 		<% if DisplayedCompanies(Mention) %>
-		
-		<div style="clear:both;" />
 		<hr/>
 		<div class="span-24 last">
 			<h2>Supporting Organizations</h2>
