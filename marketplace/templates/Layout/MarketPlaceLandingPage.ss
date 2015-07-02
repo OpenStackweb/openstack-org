@@ -39,7 +39,7 @@
         <div class="col-lg-8 col-md-8 col-sm-8">
             <h1>Why a marketplace?</h1>
             <p>A key part of the OpenStack Foundation mission is to inform, and with the ever expanding ecosystem, we felt it was a good time to cut through the noise to give our members the facts needed to make sound decisions.</p>
-            <p>We break it down for you with the OpenStack details like <em>which components are included</em>, the <em>versions used</em>, and the <em>APIs exposed</em>. We're also implementing <strong>testing</strong> requirements to validate OpenStack technical capabilites, and will be publishig the results of those tests here on the Marketplace later this year.</p>
+            <p>We break it down for you with the OpenStack details like <em>which components are included</em>, the <em>versions used</em>, and the <em>APIs exposed</em>. We've also implemented <a href="/interop">interoperability testing</a> to validate OpenStack Powered products,and the results are now available in the Marketplace for public clouds, hosted private clouds, distributions &amp; appliances.</p>
         </div>
     </div>
     <div class="row">
