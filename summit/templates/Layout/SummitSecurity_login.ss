@@ -7,8 +7,9 @@
 <div class="presentation-app-body">
 	<div class="container">
            <h1>Would you like to speak at the OpenStack Summit?</h1>
-           <p><a href="#" data-toggle="modal" data-target="#speakerModal">Learn About the Selection Process & Track Chairs</a></p>
             <div class="row">
+            <p><a href="#" data-toggle="modal" data-target="#speakerModal">Learn About the Selection Process & Track Chairs</a></p>
+           
             	<div class="col-lg-6 col-md-12 col-sm-12">
 	                <div class="presentation-app-login-panel">
 	                	<h3>Already a member? Log in here</h3>
@@ -24,7 +25,7 @@
 	            </div>
 
     </div>
-    <div class="modal fade" id="speakerModal">
+    <div class="modal" id="speakerModal">
 
     <hr/>
 
