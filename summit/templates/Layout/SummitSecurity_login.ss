@@ -25,7 +25,7 @@
 	            </div>
 
     </div>
-    <div class="modal" id="speakerModal">
+    <div class="registrationModal" id="speakerModal">
 
     <hr/>
 
