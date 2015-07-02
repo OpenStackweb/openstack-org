@@ -1,5 +1,8 @@
 <h1>Dashboard</h1>
 <hr />
+<div style="margin:20px;text-align:center;color:red;font-size:20px;">
+    PLEASE USE CAUTION. SOME OF THE DATA CONTAINED HEREIN MAY BE CONFIDENTIAL
+</div>
 <div class="span-24 last">
     <h2>Live Metrics</h2>
 		<div class="span-8 featuredUserStory">
