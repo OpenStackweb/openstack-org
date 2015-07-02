@@ -23,4 +23,21 @@
 	            </div>
 
     </div>
+    <div class="container">
+
+    <hr/>
+
+    <h2>Selection Process</h2>
+
+    <p>On average, we receive more than 1,000 speaking submissions for each Summit and are able to select 1/4 to 1/3 depending on the event. To decide which talks are accepted, we rely on Track Chairs, as well as community input through an open voting process.</p>
+
+    <p>Track Chairs are subject matter experts who review submissions to their particular track, for example "storage" or "cloud applications." There are typically 3-4 chairs per track who review and collaboratively decide which presentations are accepted. The Foundation strives to recruit Track Chairs from a diverse set of companies, regions, roles in the community (ie contributing developers, users, business leaders) and areas of expertise.</p>
+
+    <p>After the <strong>call for speakers deadline July 15, 2015</strong>, all submissions will be made available for community vote and input. After community voting wraps up, Track Chairs will receive a slate of presentations to review and make decisions on the final schedule. Community votes are meant to help inform the decision, but are not the only guide. Track chairs are expected to exercise judgment in their area of expertise and help ensure diversity. Real-world user stories and in-the-trenches experiences are favored over sales pitches.</p>
+
+    <p>After track chairs make their decisions, <strong>speakers will be informed by early September 2015</strong>. If you are selected as a speaker or alternate, you will receive a free code to register for the Tokyo Summit, as well as a set of deadlines and deliverables leading up to the event.</p>
+
+    <p>If you are interested in becoming a Track Chair for the Tokyo Summit or future OpenStack Summits, please contact <a href="mailto:events@openstack.org">events@openstack.org</a> and share your area of expertise. Please provide a short summary of your relevant experience and any helpful links, such as blog posts, relevant/insightful mailing list emails, case studies, presentation videos, etc. Track Chairs for the Tokyo Summit will be confirmed by July 15 at the latest.</p>
+
+    </div>
 </div>
