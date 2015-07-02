@@ -72,6 +72,8 @@
 
 		</div>
 		<% end_if %>
+		
+		<div style="clear:both;" />
 
 
 		<!-- Mention Members -->
