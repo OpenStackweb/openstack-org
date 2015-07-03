@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
-<head>
+<!--[if lt IE 9]> <html class="lt-ie9"> <![endif]-->
+<!--[if gte IE 9]><!--> <html> <!--<![endif]-->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta property="og:url" content="$FBUrl" />
     <meta property="og:image" content="$FBImage" />
