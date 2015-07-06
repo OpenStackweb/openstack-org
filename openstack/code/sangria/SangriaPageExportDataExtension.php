@@ -886,36 +886,22 @@ SQL;
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 
-    function exportCorporateSponsors()
+    function exportCompanyData  ()
     {
-
         $params = $this->owner->getRequest()->getVars();
 
-        if (!isset($params['levels']) || empty($params['levels']))
-            return $this->owner->httpError('412', 'missing required param level');
-
-        if (!isset($params['fields']) || empty($params['fields']))
+        if (!isset($params['fields']) || empty($params['fields']) || !count($params['fields']))
             return $this->owner->httpError('412', 'missing required param fields');
 
-        if (!isset($params['ext']) || empty($params['ext']))
-            return $this->owner->httpError('412', 'missing required param ext');
+        if (!isset($params['extension']) || empty($params['extension']))
+            return $this->owner->httpError('412', 'missing required param extension');
 
-        $extra_data = $params['extra_data'];
-
+        $extra_data = (isset($params['extra_data'])) ? $params['extra_data'] : '';
         $fields = $params['fields'];
-
-        $ext = $params['ext'];
-
+        $ext = $params['extension'];
         $company_fields = array();
 
-        if (!count($fields)) {
-            return $this->owner->httpError('412', 'missing required param fields');
-        }
-
-        $allowed_fields = array('MemberLevel' => 'MemberLevel', 'Name' => 'Name', 'City' => 'City', 'State' => 'State', 'Country' => 'Country', 'Industry' => 'Industry', 'ContactEmail' => 'ContactEmail', 'AdminEmail' => 'AdminEmail');
         for ($i = 0; $i < count($fields); $i++) {
-            if (!array_key_exists($fields[$i], $allowed_fields))
-                return $this->httpError('412', 'invalid field');
             array_push($company_fields, 'Company.' . $fields[$i]);
         }
 
@@ -973,12 +959,12 @@ SQL;
                     $query->addLeftJoin('DeploymentSurvey', 'DeploymentSurvey.OrgID = Org.ID');
                     $query->addLeftJoin('Member', 'DeploymentSurvey.MemberID = Member.ID');
                     $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Creation'=>'DeploymentSurvey.Created',
-                                        'Edited'=>'DeploymentSurvey.LastEdited','Title'=>'DeploymentSurvey.Title',
-                                        'City'=>'DeploymentSurvey.PrimaryCity','State'=>'DeploymentSurvey.PrimaryState',
-                                        'Country'=>'DeploymentSurvey.PrimaryCountry','Org Size'=>'DeploymentSurvey.OrgSize',
-                                        'Is Group Member'=>'DeploymentSurvey.UserGroupMember','Group Name'=>'DeploymentSurvey.UserGroupName',
-                                        'Ok to Contact'=>'DeploymentSurvey.OkToContact','Member Id'=>'Member.ID',
-                                        'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname');
+                        'Edited'=>'DeploymentSurvey.LastEdited','Title'=>'DeploymentSurvey.Title',
+                        'City'=>'DeploymentSurvey.PrimaryCity','State'=>'DeploymentSurvey.PrimaryState',
+                        'Country'=>'DeploymentSurvey.PrimaryCountry','Org Size'=>'DeploymentSurvey.OrgSize',
+                        'Is Group Member'=>'DeploymentSurvey.UserGroupMember','Group Name'=>'DeploymentSurvey.UserGroupName',
+                        'Ok to Contact'=>'DeploymentSurvey.OkToContact','Member Id'=>'Member.ID',
+                        'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname');
                     $query->setSelect($org_fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/SurveyDetails/',DeploymentSurvey.ID)","Link");
                     break;
@@ -988,7 +974,7 @@ SQL;
                     $query->addLeftJoin('Org', 'Affiliation.OrganizationID = Org.ID');
                     $query->addLeftJoin('Summit', 'Summit.ID = PresentationSpeaker.SummitID');
                     $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Speaker Name'=>'PresentationSpeaker.FirstName',
-                                        'Speaker Surname'=>'PresentationSpeaker.LastName','Summit'=>'Summit.Name');
+                        'Speaker Surname'=>'PresentationSpeaker.LastName','Summit'=>'Summit.Name');
                     $query->setSelect($org_fields);
                     break;
             }
@@ -996,16 +982,6 @@ SQL;
 
         //die($query->sql());
         $result = $query->execute();
-
-        $data = array();
-
-        foreach ($result as $row) {
-            $company = array();
-            foreach ($fields as $field) {
-                $company[$field] = $row[$field];
-            }
-            array_push($data, $company);
-        }
 
         $filename = "Companies" . date('Ymd') . "." . $ext;
         $delimiter = ($ext == 'xls') ? "\t" : "," ;
