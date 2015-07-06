@@ -898,40 +898,88 @@ SQL;
         if (!isset($params['ext']) || empty($params['ext']))
             return $this->owner->httpError('412', 'missing required param ext');
 
-        $level = $params['levels'];
+        $extra_data = $params['extra_data'];
 
         $fields = $params['fields'];
 
         $ext = $params['ext'];
 
-        $sanitized_fields = array();
+        $company_fields = array();
 
         if (!count($fields)) {
             return $this->owner->httpError('412', 'missing required param fields');
         }
 
-        if (!count($level)) {
-            return $this->owner->httpError('412', 'missing required param $level');
-        }
-
         $allowed_fields = array('MemberLevel' => 'MemberLevel', 'Name' => 'Name', 'City' => 'City', 'State' => 'State', 'Country' => 'Country', 'Industry' => 'Industry', 'ContactEmail' => 'ContactEmail', 'AdminEmail' => 'AdminEmail');
-        $allowed_levels = array('Platinum' => 'Platinum', 'Gold' => 'Gold', 'Startup' => 'Startup', 'Mention' => 'Mention');
         for ($i = 0; $i < count($fields); $i++) {
             if (!array_key_exists($fields[$i], $allowed_fields))
                 return $this->httpError('412', 'invalid field');
-            array_push($sanitized_fields, 'Company.' . $fields[$i]);
-        }
-        for ($i = 0; $i < count($level); $i++) {
-            if (!array_key_exists($level[$i], $allowed_levels))
-                return $this->httpError('412', 'invalid level');
+            array_push($company_fields, 'Company.' . $fields[$i]);
         }
 
         $query = new SQLQuery();
 
-        $query->setFrom('Company');
-        $query->setSelect($sanitized_fields);
-        $query->setWhere(" MemberLevel IN ('" . implode("','", $level) . "')");
-        $query->setOrderBy('MemberLevel');
+        if($extra_data) {
+            switch($extra_data) {
+                case 'sponsorship_type' :
+                    $query->setFrom('Company');
+                    $query->addLeftJoin('SummitSponsorPage_Companies', 'SummitSponsorPage_Companies.CompanyID = Company.ID');
+                    array_push($company_fields, 'SummitSponsorPage_Companies.SponsorshipType');
+                    $query->setSelect($company_fields);
+                    break;
+                case 'member_level' :
+                    $query->setFrom('Company');
+                    array_push($company_fields, 'Company.MemberLevel');
+                    $query->setSelect($company_fields);
+                    break;
+                case 'users_roles' :
+                    $query->setFrom('Company');
+                    $query->addLeftJoin('Company_Administrators', 'Company_Administrators.CompanyID = Company.ID');
+                    $query->addLeftJoin('Member', 'Member.ID = Company_Administrators.MemberID');
+                    $query->addLeftJoin('Group', 'Group.ID = Company_Administrators.GroupID');
+                    $company_fields = array_merge($company_fields, array('Member.FirstName','Member.Surname','Member.Email','Group.Title'));
+                    $query->setSelect($company_fields);
+                    break;
+                case 'affiliates' :
+                    $query->setFrom('Org');
+                    $query->addLeftJoin('Affiliation', 'Affiliation.OrganizationID = Org.ID');
+                    $query->addLeftJoin('Member', 'Member.ID = Affiliation.MemberID');
+                    $query->selectField("Org.ID","Org ID");
+                    $org_fields = array('Org.Name','Member.ID','Member.FirstName','Member.Surname','Affiliation.Current','Affiliation.JobTitle');
+                    $query->setSelect($org_fields);
+                    break;
+                case 'deployments' :
+                    $query->setFrom('Org');
+                    $query->addLeftJoin('Deployment', 'Deployment.OrgID = Org.ID');
+                    $query->selectField("Org.ID","Org ID");
+                    $org_fields = array('Org.Name','Deployment.Created','Deployment.LastEdited','Deployment.Label','Deployment.IsPublic');
+                    $query->setSelect($org_fields);
+                    $query->selectField("CONCAT('http://openstack.org/sangria/DeploymentDetails/',Deployment.ID)","Link");
+                    break;
+                case 'deployment_surveys' :
+                    $query->setFrom('Org');
+                    $query->addLeftJoin('DeploymentSurvey', 'DeploymentSurvey.OrgID = Org.ID');
+                    $query->addLeftJoin('Member', 'DeploymentSurvey.MemberID = Member.ID');
+                    $query->selectField("Org.ID","Org ID");
+                    $org_fields = array('Org.Name','DeploymentSurvey.Created','DeploymentSurvey.LastEdited','DeploymentSurvey.Title');
+                    $org_fields = array_merge($org_fields,array('DeploymentSurvey.PrimaryCity','DeploymentSurvey.PrimaryState','DeploymentSurvey.PrimaryCountry'));
+                    $org_fields = array_merge($org_fields,array('DeploymentSurvey.OrgSize','DeploymentSurvey.UserGroupMember','DeploymentSurvey.UserGroupName'));
+                    $org_fields = array_merge($org_fields,array('DeploymentSurvey.OkToContact','DeploymentSurvey.UserGroupName'));
+                    $org_fields = array_merge($org_fields,array('Member.FirstName','Member.Surname','Member.Email'));
+                    $query->setSelect($org_fields);
+                    $query->selectField("CONCAT('http://openstack.org/sangria/SurveyDetails/',DeploymentSurvey.ID)","Link");
+                    break;
+                case 'speakers' :
+                    $query->setFrom('PresentationSpeaker');
+                    $query->addLeftJoin('Affiliation', 'Affiliation.MemberID = PresentationSpeaker.MemberID');
+                    $query->addLeftJoin('Org', 'Affiliation.OrganizationID = Org.ID');
+                    $query->addLeftJoin('Summit', 'Summit.ID = PresentationSpeaker.SummitID');
+                    $query->selectField("Org.ID","Org ID");
+                    $org_fields = array('Org.Name','PresentationSpeaker.FirstName','PresentationSpeaker.LastName','Summit.Name');
+                    $query->setSelect($org_fields);
+                    break;
+            }
+        }
 
         $result = $query->execute();
 

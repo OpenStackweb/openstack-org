@@ -52,7 +52,7 @@ final class CSVExporter
     public function export($filename, array $data, $field_separator = "\t", $mime_type = 'application/vnd.ms-excel')
     {
         ob_end_clean();
-        header("Content-Disposition: attachment; filename='".$filename."'");
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
         header('Content-Type: ' . $mime_type);
         header('Content-Transfer-Encoding: binary');
         header('Accept-Ranges: bytes');
