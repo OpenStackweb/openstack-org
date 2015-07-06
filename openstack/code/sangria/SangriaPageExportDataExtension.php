@@ -987,7 +987,7 @@ SQL;
                     $query->selectField('DeploymentSurvey.UserGroupName','Name');
                     $query->selectField('DeploymentSurvey.OkToContact','OkToContact');
                     $query->selectField('Member.FirstName','Member Name');
-                    $query->selectField('Member.Name','Member Surname');
+                    $query->selectField('Member.LastName','Member Surname');
                     $query->selectField('Member.ID','Member Id');
                     $query->selectField("CONCAT('http://openstack.org/sangria/SurveyDetails/',DeploymentSurvey.ID)","Link");
                     break;
