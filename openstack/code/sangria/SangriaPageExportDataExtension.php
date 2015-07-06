@@ -1004,7 +1004,7 @@ SQL;
 
         $filename = "Companies" . date('Ymd') . "." . $ext;
 
-        return CSVExporter::getInstance()->export($filename, $result, ',');
+        return CSVExporter::getInstance()->export($filename, $result);
     }
 
     public function exportDupUsers()
