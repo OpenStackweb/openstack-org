@@ -15,7 +15,7 @@
         <% if Role %>
             <h4 class="role">$Role</h4>
         <% end_if %>
-        <h5>Company</h5>>
+        <h5>Company</h5>
         <div>$CurrentCompanies&nbsp;</div>
         <h5>Bio</h5>
         <div>
