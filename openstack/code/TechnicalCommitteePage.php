@@ -38,5 +38,6 @@ class TechnicalCommitteePage_Controller extends Page_Controller{
     public function init() {
         parent::init();
         Requirements::css(THEMES_DIR ."/openstack/css/bio.css");
+        Requirements::css(THEMES_DIR ."/openstack/css/staff.css");
     }
 }

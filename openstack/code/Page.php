@@ -18,7 +18,6 @@ class Page extends SiteTree
     private static $db = array(
         'IncludeJquery' => 'Boolean',
         'PageJavaScript' => 'Text',
-        'PageCSS' => 'Text',
         'IncludeShadowBox' => 'Boolean'
     );
 
@@ -243,16 +242,6 @@ class Page_Controller extends ContentController
         $filename = 'themes/openstack/css/' . $this->URLSegment . '.css';
         if (file_exists(Director::baseFolder() . '/' . $filename)) {
             Requirements::css($filename);
-        }
-
-        $page_id = $this->ID;
-        if (!is_null($page_id)) {
-            $page = Page::get()->byID($page_id);
-            if ($page && !empty($page->PageCSS)) {
-                $custom_css_file = THEMES_DIR . "/openstack/css/{$page->PageCSS}";
-                if (@file_exists(Director::baseFolder() . '/'.$custom_css_file))
-                    Requirements::css($custom_css_file);
-            }
         }
     }
 
