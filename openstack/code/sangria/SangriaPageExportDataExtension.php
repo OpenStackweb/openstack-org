@@ -975,7 +975,7 @@ SQL;
                     $query->addLeftJoin('Org', 'Affiliation.OrganizationID = Org.ID');
                     $query->addLeftJoin('Summit', 'Summit.ID = PresentationSpeaker.SummitID');
                     $query->selectField("Org.ID","Org ID");
-                    $org_fields = array('Org.Name','PresentationSpeaker.FirstName','PresentationSpeaker.LastName','Summit.Name');
+                    $org_fields = array('Org.Name','PresentationSpeaker.FirstName','PresentationSpeaker.LastName','Summit.Name'); 
                     $query->setSelect($org_fields);
                     break;
             }
