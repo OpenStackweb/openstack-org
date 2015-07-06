@@ -52,8 +52,14 @@ final class CSVExporter
     public function export($filename, array $data, $field_separator = "\t", $mime_type = 'application/vnd.ms-excel')
     {
         ob_end_clean();
-        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        header("Content-Disposition: attachment; filename='".$filename."'");
         header('Content-Type: ' . $mime_type);
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        header('Cache-control: no-cache, pre-check=0, post-check=0');
+        header('Cache-control: private');
+        header('Pragma: private');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // any date in the past
 
         $flag = false;
         foreach ($data as $row) {
