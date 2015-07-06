@@ -136,8 +136,9 @@ SQL;
         }
 
         $filename = "CLAMembers" . date('Ymd') . "." . $ext;
+        $delimiter = ($ext == 'xls') ? "\t" : "," ;
 
-        return CSVExporter::getInstance()->export($filename, $data);
+        return CSVExporter::getInstance()->export($filename, $data, $delimiter);
     }
 
     function exportGerritUsers()
@@ -195,8 +196,9 @@ SQL;
         }
 
         $filename = "GerritUsers" . date('Ymd') . "." . $ext;
+        $delimiter = ($ext == 'xls') ? "\t" : "," ;
 
-        return CSVExporter::getInstance()->export($filename, $data);
+        return CSVExporter::getInstance()->export($filename, $data, $delimiter);
     }
 
     public function Groups()
@@ -1003,8 +1005,9 @@ SQL;
         $result = $query->execute();
 
         $filename = "Companies" . date('Ymd') . "." . $ext;
+        $delimiter = ($ext == 'xls') ? "\t" : "," ;
 
-        return CSVExporter::getInstance()->export($filename, $result);
+        return CSVExporter::getInstance()->export($filename, $result, $delimiter);
     }
 
     public function exportDupUsers()
