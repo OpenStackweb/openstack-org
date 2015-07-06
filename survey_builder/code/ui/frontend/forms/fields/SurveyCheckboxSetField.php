@@ -20,6 +20,11 @@ class SurveyCheckboxSetField extends CustomCheckboxSetField {
     private $required;
 
     /**
+     * @var bool
+     */
+    private $visible;
+
+    /**
      * @var IMultiValueQuestionTemplate
      */
     private $question;
@@ -32,8 +37,24 @@ class SurveyCheckboxSetField extends CustomCheckboxSetField {
         return  $this->required;
     }
 
+
+    public function setVisible($visible){
+        $this->visible = $visible;
+    }
+
+    public function isVisible(){
+        return  $this->visible;
+    }
+
+
     public function __construct($name, $title=null, $source=array(), $value='', $form=null, $emptyString=null, IMultiValueQuestionTemplate $question) {
         parent::__construct($name, $title, $source, $value, $form, $emptyString);
+        $this->visible  = true;
         $this->question = $question;
+    }
+
+    public function addExtraClass($class) {
+        if($class === 'hidden') $this->setVisible(false);
+        return parent::addExtraClass($class);
     }
 }

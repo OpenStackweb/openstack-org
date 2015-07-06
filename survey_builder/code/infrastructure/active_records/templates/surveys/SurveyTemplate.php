@@ -110,14 +110,6 @@ class SurveyTemplate
     protected function onAfterWrite() {
         parent::onAfterWrite();
         // fix for order
-        $max_order = count($this->getSteps());
-        foreach($this->Steps() as $st){
-            if($st instanceof ISurveyThankYouStepTemplate){
-                $id = $st->getIdentifier();
-                DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$max_order} WHERE ID = {$id} ");
-                break;
-            }
-        }
     }
 
     protected function onBeforeDelete() {

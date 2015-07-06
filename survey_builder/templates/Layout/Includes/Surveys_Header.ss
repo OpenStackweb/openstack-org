@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12 survey-top" style="padding-left: 0 !important;padding-right: 0 !important;">
-        Logged in as <strong>$CurrentMember.FirstName</strong>. &nbsp; <a href="$Top.Link(logout)" class="survey-logout">Log Out</a>
+        Logged in as <strong>$CurrentMember.FirstName</strong>. &nbsp; <a href="/Security/logout?BackURL={$Top.Link}" class="survey-logout">Log Out</a>
     </div>
 </div>
 <div class="row">
