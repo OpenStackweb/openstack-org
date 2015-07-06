@@ -250,7 +250,7 @@ class Page_Controller extends ContentController
             $page = Page::get()->byID($page_id);
             if ($page && !empty($page->PageCSS)) {
                 $custom_css_file = THEMES_DIR . "/openstack/css/{$page->PageCSS}";
-                if (@file_exists($custom_css_file))
+                if (@file_exists(Director::baseFolder() . '/'.$custom_css_file))
                     Requirements::css($custom_css_file);
             }
         }
