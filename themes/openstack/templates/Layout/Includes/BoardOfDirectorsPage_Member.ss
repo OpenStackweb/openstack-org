@@ -1,31 +1,26 @@
 <hr>
-<div class="span-4">
-    <div class="photo">
-        $ProfilePhoto
+<div class="row">
+    <div class="col-sm-2 staff-photo-wrapper">
+        <div class="photo">
+            $ProfilePhoto
+        </div>
+        <% if TwitterName %>
+        <a class="staff-twitter" target="_blank" href="https://twitter.com/{$TwitterName}"></a>
+        <% end_if %>
+        <% if LinkedInProfile %>
+        <a class="staff-linkedin" href="http://linkedin.com/in/{$LinkedInProfile}"></a>
+        <% end_if %>
+        <a class="staff-openstack" href="/community/members{$Link}{$ID}"></a>
     </div>
-    <% if TwitterName %>
-    <a target="_blank" href="https://twitter.com/{$TwitterName}">
-        <img width="25" height="25" src="/themes/openstack/images/icons/icon_twitter.png">
-    </a>
-    <% end_if %>
-    <% if LinkedInProfile %>
-    <a href="http://linkedin.com/in/{$LinkedInProfile}">
-        <img width="25" height="25" src="/themes/openstack/images/icons/icon_linkedin.png">
-    </a>
-    <% end_if %>
-    <a href="/community/members{$Link}{$ID}">
-        <img width="25" height="25" src="/themes/openstack/images/icons/icon_openstack.png">
-    </a>
+    <div class="col-sm-10 staff-text-wrapper">
+        <h3>$FullName</h3>
+        <% if TypeOfDirector %>
+            <h5>Type of Director</h5>
+            <div>$TypeOfDirector&nbsp;</div>
+        <% end_if %>
+            <h5>Company</h5>
+            <div>$CurrentCompanies&nbsp;</div>
+            <h5>Bio</h5>
+            <div>$Bio&nbsp;</div>
+    </div>
 </div>
-<div class="span-20 last">
-    <h3>$FullName</h3>
-    <% if TypeOfDirector %>
-        <div class="span-4"><strong>Type of Director</strong></div>
-        <div class="span-16 last">$TypeOfDirector&nbsp;</div>
-    <% end_if %>
-    <div class="span-4"><strong>Company</strong></div>
-    <div class="span-16 last">$CurrentCompanies&nbsp;</div>
-    <div class="span-4"><strong>Bio</strong></div>
-    <div class="span-16 last">$Bio&nbsp;</div>
-</div>
-<div class="span-24 last"><p>&nbsp;</p></div>
