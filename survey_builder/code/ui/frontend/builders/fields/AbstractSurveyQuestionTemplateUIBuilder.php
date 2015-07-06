@@ -98,7 +98,7 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
      * @param array $static_rules
      * @param FormField $field
      */
-    public function apply( ISurveyStep $current_step ,ISurveyQuestionTemplate $question, array $static_rules, FormField $field ){
+    public function apply(ISurveyStep $current_step ,ISurveyQuestionTemplate $question, array $static_rules, FormField $field ){
 
         if(count($static_rules)){
 
@@ -134,6 +134,7 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
                     case 'Visible':{
                         if(!$condition){
                             $field->addExtraClass('hidden');
+
                             $field->setValue(''); // clear answer
                         }
                         if($condition){
