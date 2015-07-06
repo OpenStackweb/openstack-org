@@ -947,41 +947,37 @@ SQL;
                     $query->selectField('Org.ID','Org Id');
                     $query->selectField('Org.Name','Organization');
                     $query->selectField('Member.ID','Member Id');
-                    $query->selectField('Member.FirstName','Name');
-                    $query->selectField('Member.LastName','Surname');
+                    $query->selectField('Member.FirstName','Member Name');
+                    $query->selectField('Member.Surname','Member Surname');
                     $query->selectField('Affiliation.Current','Is Current');
                     $query->selectField('Affiliation.JobTitle','Job Title');
+
+                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Member Id'=>'Member.ID',
+                        'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname',
+                        'Is Current'=>'Affiliation.Current','Job Title'=>'Affiliation.JobTitle');
+                    $query->setSelect($org_fields);
                     break;
                 case 'deployments' :
                     $query->setFrom('Org');
                     $query->addLeftJoin('Deployment', 'Deployment.OrgID = Org.ID');
-                    $query->selectField('Org.ID','Org Id');
-                    $query->selectField('Org.Name','Organization');
-                    $query->selectField('Deployment.Created','Creation');
-                    $query->selectField('Deployment.LastEdited','Edited');
-                    $query->selectField('Deployment.Label','Label');
-                    $query->selectField('Deployment.IsPublic','Is Public');
+
+                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Creation'=>'Deployment.Created',
+                        'Edited'=>'Deployment.LastEdited','Label'=>'Deployment.Label','Is Public'=>'Deployment.IsPublic');
+                    $query->setSelect($org_fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/DeploymentDetails/',Deployment.ID)","Link");
                     break;
                 case 'deployment_surveys' :
                     $query->setFrom('Org');
                     $query->addLeftJoin('DeploymentSurvey', 'DeploymentSurvey.OrgID = Org.ID');
                     $query->addLeftJoin('Member', 'DeploymentSurvey.MemberID = Member.ID');
-                    $query->selectField('Org.ID','Org Id');
-                    $query->selectField('Org.Name','Organization');
-                    $query->selectField('DeploymentSurvey.Created','Creation');
-                    $query->selectField('DeploymentSurvey.LastEdited','Edited');
-                    $query->selectField('DeploymentSurvey.Title','Title');
-                    $query->selectField('DeploymentSurvey.PrimaryCity','City');
-                    $query->selectField('DeploymentSurvey.PrimaryState','State');
-                    $query->selectField('DeploymentSurvey.PrimaryCountry','Country');
-                    $query->selectField('DeploymentSurvey.OrgSize','Org Size');
-                    $query->selectField('DeploymentSurvey.UserGroupMember','Member');
-                    $query->selectField('DeploymentSurvey.UserGroupName','Name');
-                    $query->selectField('DeploymentSurvey.OkToContact','OkToContact');
-                    $query->selectField('Member.FirstName','Member Name');
-                    $query->selectField('Member.LastName','Member Surname');
-                    $query->selectField('Member.ID','Member Id');
+                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Creation'=>'DeploymentSurvey.Created',
+                                        'Edited'=>'DeploymentSurvey.LastEdited','Title'=>'DeploymentSurvey.Title',
+                                        'City'=>'DeploymentSurvey.PrimaryCity','State'=>'DeploymentSurvey.PrimaryState',
+                                        'Country'=>'DeploymentSurvey.PrimaryCountry','Org Size'=>'DeploymentSurvey.OrgSize',
+                                        'Is Group Member'=>'DeploymentSurvey.UserGroupMember','Group Name'=>'DeploymentSurvey.UserGroupName',
+                                        'Ok to Contact'=>'DeploymentSurvey.OkToContact','Member Id'=>'Member.ID',
+                                        'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname');
+                    $query->setSelect($org_fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/SurveyDetails/',DeploymentSurvey.ID)","Link");
                     break;
                 case 'speakers' :
@@ -989,15 +985,14 @@ SQL;
                     $query->addLeftJoin('Affiliation', 'Affiliation.MemberID = PresentationSpeaker.MemberID');
                     $query->addLeftJoin('Org', 'Affiliation.OrganizationID = Org.ID');
                     $query->addLeftJoin('Summit', 'Summit.ID = PresentationSpeaker.SummitID');
-                    $query->selectField('Org.ID','Org Id');
-                    $query->selectField('Org.Name','Organization');
-                    $query->selectField('PresentationSpeaker.FirstName','Name');
-                    $query->selectField('PresentationSpeaker.LastName','Surname');
-                    $query->selectField('Summit.Name','Summit');
+                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Speaker Name'=>'PresentationSpeaker.FirstName',
+                                        'Speaker Surname'=>'PresentationSpeaker.LastName','Summit'=>'Summit.Name');
+                    $query->setSelect($org_fields);
                     break;
             }
         }
 
+        //die($query->sql());
         $result = $query->execute();
 
         $data = array();
