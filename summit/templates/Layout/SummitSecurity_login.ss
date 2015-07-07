@@ -13,7 +13,7 @@
 	                	<h3>Already a member? Log in here</h3>
 	                    $Form
 	                </div>
-                    <div class="presentation-app-login-pane">
+                    <div class="presentation-app-login-panel">
                         <a href="#" data-toggle="modal" data-target="#speakerModal">Learn About the Selection Process & Track Chairs</a>
                     </div>
 	            </div>
