@@ -40,7 +40,7 @@ class SummitPageSectionSettings extends DataObject{
         }
         $fields->addFieldsToTab('Root.Main', new LiteralField('BackgroundColorClear2', "<div style='clear:both'></div>"));
 
-        $fields->addFieldsToTab('Root.Main', $backgroundColor = new DropdownField('BackgroundColorID', 'BackgroundColor', $colors));
+        $fields->addFieldsToTab('Root.Main', $backgroundColor = new DropdownField('BackgroundColorID', '', $colors));
         $backgroundColor->setHasEmptyDefault(true);
         $fields->addFieldsToTab('Root.Main', new LiteralField('BackgroundColorSectionClose', "</div>"));
 
