@@ -90,65 +90,6 @@
         </div>
     </footer>
 
-        <!-- Hidden Sidebar Nav -->
-        <div class="sidebar-nav">
-            <nav>
-                <a href="#" class="close-panel"><i class="icon-remove-sign icon-large"></i></a>
-                <ul class="sidebar-menu">
-                    <!-- Microsite Navigation -->
-
-<ul class="nav nav-tabs">
-
-    
-    
-    <li class="">
-        <a href="/about-the-summit/">About The Summit</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/details-and-updates/">Details & Updates</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/about-vancouver/">About Vancouver</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/sponsors/">Sponsoring</a>
-    </li>
-
-    
-    
-        
-    
-    <li class="">
-        <a href="/speakers/">Speakers</a>
-    </li>
-
-    
-    
-    <li class="">
-        <a href="/faq/">FAQ</a>
-    </li>
-
-</ul>
-
-<!-- End Microsite Navigation -->
-                </ul>
-                <% if $CurrentSummit.RegistrationLink %>
-                    <a href="$CurrentSummit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
-                <% else %>
-                    <a href="#" class="btn register-btn-lrg inactive" data-toggle="modal" data-target="#registrationModal">Registration Opening Soon</a>
-                <% end_if %>
-            </nav>
-        </div>
-    </div>
     <% include Quantcast %>
 </body>
 
