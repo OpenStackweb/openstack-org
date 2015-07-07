@@ -16,7 +16,7 @@ class SummitSimplePage_Controller extends Page_Controller {
 	);    
     
     public function back() {
-        return Controller::redirect('/summit/vancouver-2015/details-and-updates/');
+        return Controller::redirect($this->Parent()->Link());
     }
 
 }
