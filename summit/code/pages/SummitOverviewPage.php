@@ -156,6 +156,18 @@ class SummitOverviewPage extends SummitPage {
         $upload_8->setOverwriteWarning(false);
         $upload_8->getUpload()->setReplaceFile(true);
 
+        $colors_config = GridFieldConfig::create()
+        ->addComponent(new GridFieldButtonRow('before'))
+        ->addComponent(new GridFieldToolbarHeader())
+        ->addComponent(new GridFieldTitleHeader())
+        ->addComponent(new GridFieldEditableColumns())
+        ->addComponent(new GridFieldDeleteAction())
+        ->addComponent(new GridFieldAddNewInlineButton())
+        ->removeComponentsByType('GridFieldToolbarHeader');
+
+        $colors = new GridField('Colors','Colors',$this->Summit()->Colors(), $colors_config);
+        $fields->addFieldToTab('Root.Colors',$colors);
+
         return $fields;
     }
 

@@ -45,9 +45,16 @@ class SummitPage extends Page
         'TwitterPixelId' => 'l5lav',
     );
 
+    private static $has_many = array (
+        'SectionsSettings' => 'SummitPageSectionSettings'
+    );
+
+    public $template_sections = array();
 
     public function getCMSFields()
     {
+        Requirements::css("summit/css/admin.submit.css");
+
         $fields = parent::getCMSFields();
         if ($this->ID) {
 
@@ -89,6 +96,25 @@ class SummitPage extends Page
         $fields->addFieldToTab("Root.FacebookConversionTracking", new TextField("FBCurrency", "Currency", "USD"));
         //Twitter
         $fields->addFieldToTab("Root.TwitterConversionTracking", new TextField("TwitterPixelId", "Pixel Id", "l5lav"));
+
+        if ($this->SectionsSettings()->Count()) {
+
+            $fields->addFieldsToTab('Root.SectionsSettings', new LiteralField('BackgroundMessage', "<span>Drag & drop sections on list below to change order</span>"));
+
+            $sections_config = GridFieldConfig_RecordEditor::create();
+            $sections_config->addComponent(new GridFieldSortableRows('Order'));
+            $sections_config->removeComponentsByType('GridFieldDeleteAction');
+            $sections_config->removeComponentsByType('GridFieldAddNewButton');
+            $sections_config->removeComponentsByType('GridFieldFilterHeader');
+            $sections_config->removeComponentsByType('GridFieldPageCount');
+            $sections_config->removeComponentsByType('GridFieldPaginator');
+
+            $sections = new GridField('SectionsSettings','Sections',$this->SectionsSettings(), $sections_config);
+
+            $sections->State->GridFieldSortableRows->sortableToggle = true;
+            $fields->addFieldToTab('Root.SectionsSettings', $sections);
+        }
+
         return $fields;
     }
 
@@ -98,8 +124,27 @@ class SummitPage extends Page
         if($parent && $parent instanceof SummitOverviewPage){
             $this->SummitID = $parent->SummitID;
         }
+
+        if ($this->sectionsRequireBuilding()) {
+            $this->buildSections();
+        }
     }
 
+    function sectionsRequireBuilding() {
+        $require_building = (count($this->template_sections) > 0) && ($this->SectionsSettings()->Count() == 0);
+        return $require_building;
+    }
+
+    function buildSections() {
+        $order = 0;
+        foreach($this->template_sections as $section_name) {
+            $sectionSettings = new SummitPageSectionSettings();
+            $sectionSettings->Name = $section_name;
+            $sectionSettings->Order = $order;
+            $this->Sections()->add($sectionSettings);
+            $order++;
+        }
+    }
 }
 
 

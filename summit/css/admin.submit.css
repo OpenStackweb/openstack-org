@@ -1,0 +1,19 @@
+.color-preview {
+    float: left;
+}
+
+.color-preview span {
+    float: left;
+}
+
+.color-preview div{
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 5px;
+    margin-left: 15px;
+}
+
+#Root_SectionsSettings .sortablerowsheading {
+    display: none;
+}

@@ -30,25 +30,31 @@ class SummitLocationPage extends SummitPage {
     
 	private static $has_many = array (
 		'Locations' => 'SummitLocation'
-	);    
+	);
+
+    public function __construct($record = null, $isSingleton = false, $model = null) {
+        parent::__construct($record, $isSingleton, $model);
+        $this->template_sections = array("Visa Information", "Getting Around", "Venue", "Hotels & Airports", "Travel Support");
+    }
     
     public function getCMSFields() {
         $fields = parent::getCMSFields();
-                
-        $fields->addFieldToTab('Root.Main', new HTMLEditorField('VisaInformation', 'Visa Information'));
-        $fields->addFieldToTab('Root.Main', new HTMLEditorField('TravelSupport','Travel Support'));
+
         $fields->addFieldToTab('Root.CityInfo', new HTMLEditorField('CityIntro','City Intro'));
         $fields->addFieldToTab('Root.CityInfo', new HTMLEditorField('AboutTheCity','About The City'));
         $fields->addFieldToTab('Root.CityInfo', new HTMLEditorField('Locals','In The Words Of The Locals'));
-        $fields->addFieldToTab('Root.CityInfo', new HTMLEditorField('GettingAround','Getting Around'));
-
         $fields->addFieldsToTab('Root.CityInfo',new TextField('HostCityLat', 'City Latitude (Map Center)'));
         $fields->addFieldsToTab('Root.CityInfo',new TextField('HostCityLng', 'City Longitude (Map Center)'));
 
-        $fields->addFieldToTab('Root.MapLocations', new HTMLEditorField('LocationsTextHeader','Intro Text'));
-        $fields->addFieldToTab('Root.MapLocations', new HTMLEditorField('OtherLocations','Other Locations'));
+        $fields->addFieldToTab('Root.VisaInformation', new HTMLEditorField('VisaInformation', 'Content'));
+        $fields->addFieldToTab('Root.GettingAround', new HTMLEditorField('GettingAround','Content'));
+        $fields->addFieldToTab('Root.TravelSupport', new HTMLEditorField('TravelSupport','Content'));
 
 
+        $fields->addFieldToTab('Root.HotelsAndAirports', new HTMLEditorField('LocationsTextHeader','Official Summit Hotels'));
+        $fields->addFieldToTab('Root.HotelsAndAirports', new HTMLEditorField('OtherLocations','House Sharing'));
+        $fields->addFieldToTab('Root.HotelsAndAirports', new TextField('AirportsTitle', 'Airports Title'));
+        $fields->addFieldToTab('Root.HotelsAndAirports', new TextField('AirportsSubTitle', 'Airports SubTitle'));
 
         if($this->ID) {
                         
@@ -56,17 +62,16 @@ class SummitLocationPage extends SummitPage {
             $LocationFields = singleton('SummitLocation')->getCMSFields();
             $config = GridFieldConfig_RelationEditor::create();
             $config->getComponentByType('GridFieldDetailForm')->setFields($LocationFields);
-            $config->addComponent(new GridFieldSortableRows('Order'));            
             $gridField = new GridField('Locations', 'Locations', $this->Locations(), $config);
             $fields->addFieldToTab('Root.MapLocations',$gridField);
 
-            $fields->addFieldsToTab('Root.Main', $venue_back = new UploadField('VenueBackgroundImage', 'Venue Background Image'));
+            $fields->addFieldsToTab('Root.Venue', $venue_back = new UploadField('VenueBackgroundImage', 'Venue Background Image'));
             $venue_back->setFolderName('summits/locations');
             $venue_back->setAllowedMaxFileNumber(1);
             $venue_back->setAllowedFileCategories('image');
 
-            $fields->addFieldsToTab('Root.Main',new TextField('VenueBackgroundImageHero', 'Venue Background Image Author'));
-            $fields->addFieldsToTab('Root.Main',new TextField('VenueBackgroundImageHeroSource', 'Venue Background Image Author Url'));
+            $fields->addFieldsToTab('Root.Venue',new TextField('VenueBackgroundImageHero', 'Venue Background Image Author'));
+            $fields->addFieldsToTab('Root.Venue',new TextField('VenueBackgroundImageHeroSource', 'Venue Background Image Author Url'));
 
             $fields->addFieldsToTab('Root.CityInfo', $about_back = new UploadField('AboutTheCityBackgroundImage', 'About The City Background Image'));
             $about_back->setFolderName('summits/location/about');
@@ -77,9 +82,7 @@ class SummitLocationPage extends SummitPage {
             $fields->addFieldsToTab('Root.CityInfo',new TextField('AboutTheCityBackgroundImageHeroSource', 'About The City Background Image Author Source Url'));
         }
 
-        $fields->addFieldToTab('Root.Main', new TextField('VenueTitleText', 'Venue Title Text'));
-        $fields->addFieldToTab('Root.Main', new TextField('AirportsTitle', 'Airports Title'));
-        $fields->addFieldToTab('Root.Main', new TextField('AirportsSubTitle', 'Airports SubTitle'));
+        $fields->addFieldToTab('Root.Venue', new TextField('VenueTitleText', 'Venue Title Text'));
 
         return $fields;    
 
