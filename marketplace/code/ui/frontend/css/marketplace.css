@@ -656,3 +656,12 @@ a.app-promo-banner {
 }
 /*End App Promo Banner*/
 
+#releaseTable tr td:nth-child(3) {
+  width: 55%;
+}
+@media (max-width: 767px) {
+  #releaseTable tr td:nth-child(3) {
+    width: auto;
+  }
+}
+
