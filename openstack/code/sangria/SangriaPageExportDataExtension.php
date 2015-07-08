@@ -20,17 +20,7 @@ final class SangriaPageExportDataExtension extends Extension
 {
 
     public function __construct() {
-
-        Requirements::javascript('themes/openstack/javascript/jquery.min.js');
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
-        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-        Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
-
         parent::__construct();
-
     }
 
     public function onBeforeInit()
@@ -64,6 +54,15 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportAppDevSurveyResultsFlat',
             'ExportSurveyResultsFlat',
         ));
+    }
+
+    function onAfterInit() {
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
+        Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.export.data.js');
     }
 
     function ExportDataUsersByRole()
