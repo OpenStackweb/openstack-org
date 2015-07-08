@@ -33,7 +33,13 @@ final class EventRegistrationRequestForm extends SafeXSSForm {
 		//main info
 		$fields->push(new TextField('title','Title'));
 		$fields->push(new TextField('url','Url'));
-        $categoryField = new DropdownField('category','Category', $event_manager->getAllTypes());
+
+        $types = $event_manager->getAllTypes();
+        foreach($types as $type) {
+            $options[$type] = $type;
+        }
+
+        $categoryField = new DropdownField('category','Category', $options);
         $categoryField->setEmptyString('-- select a category --');
         $fields->push($categoryField);
 		//location

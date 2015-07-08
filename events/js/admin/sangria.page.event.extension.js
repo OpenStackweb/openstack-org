@@ -43,7 +43,6 @@ jQuery(document).ready(function($) {
             resizable: false,
             buttons: {
                 "Save": function() {
-
                     var form     = $('form',edit_dialog);
                     var is_valid = form.valid();
                     if(!is_valid) return false;
@@ -78,7 +77,7 @@ jQuery(document).ready(function($) {
                             //update row values...
                             $('.title',row).text(request.title);
                             $('.url',row).text(request.url);
-                            $('.category',row).text(request.category);
+                            $('.event-category-autocomplete text',row).text(request.category);
                             $('.city',row).text(request.city);
                             $('.state',row).text(request.state);
                             $('.country',row).text(request.country);
@@ -102,6 +101,10 @@ jQuery(document).ready(function($) {
         modal: true,
         autoOpen: false,
         resizable: false,
+        open: function() {
+            var $validator = $("#EventForm_EventForm").data("validator");
+            $validator.resetForm();
+        },
         buttons: {
             "Save": function() {
 
@@ -304,8 +307,7 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_point_of_contact_email',form).val(data.point_of_contact_email);
                 $('#'+form_id+'_title',form).val(data.title);
                 $('#'+form_id+'_url',form).val(data.url);
-                $('#'+form_id+'_category',form).val(data.category);
-                $('#'+form_id+'_category',form).trigger("chosen:updated");
+                $('#'+form_id+'_event_category',form).val(data.category);
                 $('#'+form_id+'_city',form).val(data.city);
                 $('#'+form_id+'_state',form).val(data.state);
                 $('#'+form_id+'_country',form).val(data.country);
@@ -349,16 +351,6 @@ jQuery(document).ready(function($) {
         var form_id = form.attr('id');
         edit_live_dialog.data('id',0).data('row',0).dialog( "open");
 
-        $('#'+form_id+'_category',form).chosen({
-            disable_search_threshold: 10,
-            width: '315px'
-        });
-        $('#'+form_id+'_category',form).trigger("chosen:updated");
-
-        /*$('#'+form_id+'_category',form).change(function () {
-            form_validator.resetForm();
-        });*/
-
         var date_picker_start = $('#'+form_id+'_start_date',form);
         date_picker_start.datepicker({
             dateFormat: 'yy-mm-dd',
@@ -393,21 +385,11 @@ jQuery(document).ready(function($) {
                 //populate edit form
                 $('#'+form_id+'_title',form).val(data.title);
                 $('#'+form_id+'_url',form).val(data.url);
-                $('#'+form_id+'_category',form).val(data.category);
-                $('#'+form_id+'_category',form).trigger("chosen:updated");
+                $('#'+form_id+'_event_category',form).val(data.category);
                 $('#'+form_id+'_location',form).val(data.location);
                 $('#'+form_id+'_start_date',form).val(data.start_date);
                 $('#'+form_id+'_end_date',form).val(data.end_date);
                 edit_live_dialog.data('id',id).data('row',row).dialog( "open");
-
-                $('#'+form_id+'_category',form).chosen({
-                    disable_search_threshold: 10,
-                    width: '315px'
-                });
-
-                /*$('#'+form_id+'_category',form).change(function () {
-                    form_validator.resetForm();
-                });*/
 
                 var date_picker_start = $('#'+form_id+'_start_date',form);
                 date_picker_start.datepicker({
