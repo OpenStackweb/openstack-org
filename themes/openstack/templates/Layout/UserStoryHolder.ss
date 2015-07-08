@@ -11,11 +11,11 @@
 <div class='case-studies-hero'>
 	<div class='container'>
 		<ul class='rotator_new rotator'>
-		<li data-label = 'Virtualization integration' class = 'automotive'>
+		<li data-label = 'Virtualization integration' class = 'virtualization'>
 			<p class='largeQuote'>Modernizing Virtualized Infrastructures with the OpenStack Cloud Management Platform</p>
 			<a href="/enterprise/virtualization-integration/">Read The Case Study</a>
 		</li>
-		<li data-label = 'Workload portability' class = 'automotive'>
+		<li data-label = 'Workload portability' class = 'workload'>
 			<p class='largeQuote'>Expediting Digital Workflow with OpenStack</p>
 			<a href="/enterprise/workload-portability/">Read The Case Study</a>
 		</li>
