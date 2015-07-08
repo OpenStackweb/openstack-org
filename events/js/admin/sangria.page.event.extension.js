@@ -367,7 +367,7 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    $('.edit-live-event').click(function(event){
+    $('#event-registration-requests-table').on('click', '.edit-live-event', function(event){
         event.preventDefault();
         event.stopPropagation();
         var id  = $(this).attr('data-event-id');
@@ -411,7 +411,7 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    $('.delete-live-event').click(function(event){
+    $('#event-registration-requests-table').on('click', '.delete-live-event', function(event){
         event.preventDefault();
         event.stopPropagation();
         var id  = $(this).attr('data-event-id');

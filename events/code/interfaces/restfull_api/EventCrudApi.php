@@ -137,8 +137,8 @@ final class EventCrudApi
         try{
             $data = $this->getJsonRequest();
             if (!$data) return $this->serverError();
-            $event_id = $this->event_manager->addEvent($data);
-            return $event_id;
+            $event = $this->event_manager->addEvent($data);
+            return $event->ID;
         }
         catch(NotFoundEntityException $ex1){
             SS_Log::log($ex1,SS_Log::WARN);

@@ -134,9 +134,9 @@ final class EventManager {
             $event->registerLocation($data['location']);
             $event->registerDuration($factory->buildEventDuration($data));
 
-            $event_id = $repository->add($event);
+            $repository->add($event);
 
-            return $event_id;
+            return $event;
         });
     }
 
