@@ -54,6 +54,8 @@ class AnniversaryPage_Controller extends ContentController
     {
         Requirements::css($this->ThemeDir() . '/css/anniversary/3/bootstrap.anniversary.css');
         Requirements::css($this->ThemeDir() . '/css/anniversary/3/styles.css');
+        Requirements::javascript(Director::protocol() . "platform.twitter.com/widgets.js");
+        Requirements::javascript(Director::protocol() . "cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js");
         Requirements::javascript($this->ThemeDir() . '/javascript/anniversary.3.js');
         //FB page properties
         $this->Title = 'The OpenStack Third Anniversary';
@@ -71,6 +73,8 @@ class AnniversaryPage_Controller extends ContentController
     {
         Requirements::css($this->ThemeDir() . '/css/anniversary/4/bootstrap.css');
         Requirements::css($this->ThemeDir() . '/css/anniversary/4/styles.css');
+        Requirements::javascript(Director::protocol() . "platform.twitter.com/widgets.js");
+        Requirements::javascript(Director::protocol() . "cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js");
         Requirements::javascript($this->ThemeDir() . '/javascript/anniversary.4.js');
         //FB page properties
         $this->Title = 'The OpenStack Fourth Anniversary';
@@ -93,7 +97,31 @@ class AnniversaryPage_Controller extends ContentController
         $this->FBDesc = 'Happy 5th OpenStack! Come celebrate at one of 40 global events.';
         $this->FBUrl = Director::protocolAndHost() . $this->Link('fifth');
         $this->CurrentDomain = Director::protocolAndHost();
-        return $this->getViewer('fifth')->process($this);
+
+        Requirements::set_write_js_to_body(false);
+
+        Requirements::combine_files('5.css', array(
+            $this->ThemeDir() . '/images/anniversary/5/css/bootstrap.css',
+            $this->ThemeDir() . '/images/anniversary/5/css/styles.css'
+        ));
+
+        Requirements::combine_files('5.js', array(
+            $this->ThemeDir() . '/images/anniversary/5/js/jquery.js',
+            $this->ThemeDir() . '/images/anniversary/5/js/scripts.js',
+            $this->ThemeDir() . '/images/anniversary/5/js/jquery.easing.min.js'
+        ));
+
+        return $this->getViewer('fifth')->process($this, array
+        (
+            'ImgPath' => '/themes/openstack/images/anniversary/5/img',
+            'BadgeImgUrl' => 'http://841038e5aa7ad2e38487-650bfe6158d7143a3437ef4c83572bc4.r48.cf1.rackcdn.com/5/openstack-5th-anniversary.png',
+            'SlideDeckUrl' => '//www.dropbox.com/s/8bvbo2dzp9jd61o/OpenStack%205th%20Birthday%20slide%20deck.pptx?dl=0',
+            'LocalEventUrl' => '//www.openstack.org/blog/2015/06/openstack-turns-5-its-time-to-celebrate-the-community/',
+            'SummitUrl' => '//www.openstack.org/summit/tokyo-2015/',
+            'FBSharerUrl' => 'http://www.openstack.org/birthday/fifth',
+            'FBSharerImg' => 'http://www.openstack.org/themes/openstack/images/anniversary/5/img/bot-facebook.jpg',
+        ));
+
     }
 
     public function handleIndex()
@@ -104,8 +132,7 @@ class AnniversaryPage_Controller extends ContentController
     public function init()
     {
         parent::init();
-        Requirements::javascript(Director::protocol() . "platform.twitter.com/widgets.js");
-        Requirements::javascript(Director::protocol() . "cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js");
+        Requirements::set_combined_files_folder('themes/openstack/_combinedfiles');
     }
 
 }

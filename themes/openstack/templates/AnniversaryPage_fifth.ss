@@ -13,12 +13,6 @@
     <meta property="og:description" content="$FBDesc" />
     <title>$Title</title>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <link rel="stylesheet" href="/themes/openstack/images/anniversary/5/css/bootstrap.css">
-    <link rel="stylesheet" href="/themes/openstack/images/anniversary/5/css/styles.css">
-    <script type="text/javascript" src="/themes/openstack/images/anniversary/5/js/jquery.js"></script>
-    <script type="text/javascript" src="/themes/openstack/images/anniversary/5/js/scripts.js"></script>
-    <script type="text/javascript" src="/themes/openstack/images/anniversary/5/js/jquery.easing.min.js"></script>
-
     <!--[if gte IE 9]>
     <style type="text/css">
         .gradient {
