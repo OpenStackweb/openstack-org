@@ -1007,6 +1007,22 @@ i.fa-caret-right {
   height: 3px;
   border-radius: 3px; }
 
+.navbar-default ul.navbar-main>li.join-nav-section>a {
+    border-left: 1px solid #eee;
+    color: #2A4E68;
+    font-weight: 600;
+    margin: 10px 15px 0 10px;
+    padding: 5px 0 5px 20px;
+}
+
+.navbar-default ul.navbar-main>li>a.sign-in-btn {
+    background: #2A4E68;
+    padding: 3px 25px;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 12px;
+}
+
 .search-container {
   position: relative;
   display: none;

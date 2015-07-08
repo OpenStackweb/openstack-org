@@ -192,7 +192,17 @@
 
                 </ul>
             <% else %>
-                <a class="sign-in-btn" href="/Security/login/?BackURL={$Top.Link}">Sign In</a>
+                <li class="join-nav-section">
+                    <a href="#" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/join/#sponsor">Sponsor the Foundation</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/foundation">More about the Foundation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Security/login/?BackURL={$Top.Link}" class="sign-in-btn">Log In</a>
+                </li>
             <% end_if %>
             </li>
         </ul>
