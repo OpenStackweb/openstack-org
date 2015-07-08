@@ -138,20 +138,20 @@ a.releaseButton:active {
     font-size: 150%
 }
 
-.enterprise .largeQuote {
+.virtualization .largeQuote {
     margin-top: 140px;
     color: white;
     font-size: 300%;
 }
 
-.enterprise a {
+.virtualization a {
     text-decoration: none;
     background: #B73124;
     color: white;
     max-width: 200px;
 }
 
-.enterprise a:hover {
+.virtualization a:hover {
     text-decoration: none;
     background: #831917;      
     color: white;
@@ -162,16 +162,36 @@ a.releaseButton:active {
 .virtualization {
     text-align: center;
     color: #f8f8f8;
-    background: url('/themes/openstack/images/landing-pages/auto/hero-bkgd.jpg') no-repeat center center;
+    background: url('/assets/user-stories/vmware-wp.jpg') no-repeat center center;
     background-size: cover;
     position: relative;
+}
+
+.workload .largeQuote {
+    margin-top: 140px;
+    color: white;
+    font-size: 300%;
+}
+
+.workload a {
+    text-decoration: none;
+    background: #B73124;
+    color: white;
+    max-width: 200px;
+}
+
+.workload a:hover {
+    text-decoration: none;
+    background: #831917;      
+    color: white;
+    max-width: 200px;
 }
 
 
 .workload {
     text-align: center;
     color: #f8f8f8;
-    background: url('/themes/openstack/images/landing-pages/auto/hero-bkgd.jpg') no-repeat center center;
+    background: url('/assets/user-stories/workload-portability.jpg') no-repeat center center;
     background-size: cover;
     position: relative;
 }
