@@ -91,7 +91,7 @@ class AnniversaryPage_Controller extends ContentController
     public function fifth()
     {
         $this->Title = 'The OpenStack Fifth Anniversary';
-        $this->FBImage = Director::protocolAndHost() . '/images/anniversary/5/img/bot-facebook.jpg';
+        $this->FBImage = 'http://www.openstack.org/themes/openstack/images/anniversary/5/img/bot-facebook.jpg';
         $this->FBImageW = '200';
         $this->FBImageH = '284';
         $this->FBDesc = 'Happy 5th OpenStack! Come celebrate at one of 40 global events.';
