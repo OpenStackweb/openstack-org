@@ -132,7 +132,6 @@ class AnniversaryPage_Controller extends ContentController
     public function init()
     {
         parent::init();
-        Requirements::set_combined_files_folder('themes/openstack/_combinedfiles');
     }
 
 }
