@@ -126,7 +126,7 @@ a.releaseButton:active {
 /* @end */
 
 
-.enterprise a {
+.virtualization a {
     display: block;
     background: #b9301d;
     padding: 10px 20px;
@@ -165,6 +165,19 @@ a.releaseButton:active {
     background: url('/assets/user-stories/vmware-wp.jpg') no-repeat center center;
     background-size: cover;
     position: relative;
+}
+
+
+.workload a {
+    display: block;
+    background: #b9301d;
+    padding: 10px 20px;
+    border-radius: 2px;
+    width: 80%;
+    margin: 10px auto 0;
+    color: #fff!important;
+    font-weight: 600;
+    font-size: 150%
 }
 
 .workload .largeQuote {
