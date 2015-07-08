@@ -249,8 +249,6 @@ class Page_Controller extends ContentController
     public static function AddRequirements()
     {
 
-        Requirements::set_combined_files_folder('themes/openstack/_combinedfiles');
-
         $css_files = array(
             "themes/openstack/css/bootstrap.min.css",
             'themes/openstack/css/font-awesome.min.css',
