@@ -15,10 +15,11 @@
  * Class EventPage
  */
 class EventPage
-    extends Page
+    extends DataObject
     implements IEvent {
 
     private static $db = array(
+        'Title'                => 'Varchar(255)',
         'EventStartDate'       => 'Date',
         'EventEndDate'         => 'Date',
         'EventLink'            => 'Text',
