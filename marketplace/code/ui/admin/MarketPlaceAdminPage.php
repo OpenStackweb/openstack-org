@@ -1505,7 +1505,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
 
     public function getInteropProgramVersions()
     {
-        list($res, $size) = $this->interop_program_repository->getAll(new QueryObject());
+        list($res, $size) = $this->interop_program_repository->getAllOrdered();
         return new ArrayList($res);
     }
 

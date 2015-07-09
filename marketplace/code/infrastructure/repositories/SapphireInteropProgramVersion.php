@@ -22,4 +22,10 @@ class SapphireInteropProgramVersion extends SapphireRepository {
         parent::__construct($entity);
     }
 
+    public function getAllOrdered() {
+        $query = new QueryObject();
+        $query->addOrder(QueryOrder::asc('Name'));
+        return parent::getAll($query);
+    }
+
 }
