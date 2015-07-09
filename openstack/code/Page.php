@@ -240,6 +240,7 @@ class Page_Controller extends ContentController
         );
 
         $filename = 'themes/openstack/css/' . $this->URLSegment . '.css';
+
         if (file_exists(Director::baseFolder() . '/' . $filename)) {
             Requirements::css($filename);
         }
@@ -260,7 +261,8 @@ class Page_Controller extends ContentController
             array_push($css_files, "themes/openstack/javascript/shadowbox/shadowbox.css");
         }
 
-        Requirements::combine_files('base_theme.css', $css_files);
+        foreach($css_files as $css_file)
+            Requirements::css($css_file);
 
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700', 'stylesheet');
 
@@ -275,15 +277,16 @@ class Page_Controller extends ContentController
             $jquery_version = 'themes/openstack/javascript/jquery.min.js';
         }
 
-        Requirements::combine_files('jquery_base.js',
-            array(
-                $jquery_version,
-                'themes/openstack/javascript/jquery-migrate-1.2.1.min.js',
-                "themes/openstack/javascript/jquery.cookie.js",
-                'themes/openstack/javascript/querystring.jquery.js',
-            )
+        $js_files =  array(
+            $jquery_version,
+            'themes/openstack/javascript/jquery-migrate-1.2.1.min.js',
+            "themes/openstack/javascript/jquery.cookie.js",
+            'themes/openstack/javascript/querystring.jquery.js',
+            'themes/openstack/javascript/shadowbox/shadowbox.js',
         );
 
+        foreach($js_files as $js_file)
+            Requirements::javascript($js_file);
     }
 
     public function init()

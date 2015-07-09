@@ -31,11 +31,14 @@ class SpeakerVotingRegistrationPage_Controller extends Page_Controller
 		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
-        Requirements::combine_files('speaker_voting_registration_page.css', array(
-            "themes/openstack/css/chosen.css",
-            "registration/css/affiliations.css",
-            'registration/css/registration.page.css'
-        ));
+   		$css_files = array(
+			"themes/openstack/css/chosen.css",
+			"registration/css/affiliations.css",
+			'registration/css/registration.page.css'
+		);
+
+		foreach($css_files as $css_file)
+			Requirements::css($css_file);
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");

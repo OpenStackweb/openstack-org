@@ -101,9 +101,11 @@ class AnniversaryPage_Controller extends ContentController
         Requirements::set_write_js_to_body(false);
 
         Requirements::combine_files('5.css', array(
-            $this->ThemeDir() . '/images/anniversary/5/css/bootstrap.css',
-            $this->ThemeDir() . '/images/anniversary/5/css/styles.css'
+
         ));
+
+        Requirements::css($this->ThemeDir() . '/images/anniversary/5/css/bootstrap.css');
+        Requirements::css($this->ThemeDir() . '/images/anniversary/5/css/styles.css');
 
         Requirements::combine_files('5.js', array(
             $this->ThemeDir() . '/images/anniversary/5/js/jquery.js',

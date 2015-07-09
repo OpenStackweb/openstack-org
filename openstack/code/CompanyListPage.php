@@ -46,11 +46,8 @@ class CompanyListPage_Controller extends Page_Controller
 
         // require custom CSS
 
-        Requirements::combine_files('company_list.css', array(
-            "themes/openstack/css/chosen.css",
-            "themes/openstack/css/jquery.autocomplete.css",
-        ));
-
+        Requirements::css("themes/openstack/css/chosen.css");
+        Requirements::css("themes/openstack/css/jquery.autocomplete.css");
 	    Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
 	    Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 

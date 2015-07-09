@@ -81,7 +81,6 @@ final class EventRegistrationRequestPage_Controller extends Page_Controller {
             "themes/openstack/javascript/jquery.validate.custom.methods.js",
             'events/js/event.registration.request.page.js'
         ));
-
 	}
 
 	public function EventRegistrationRequestForm() {
