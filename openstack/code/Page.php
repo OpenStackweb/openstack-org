@@ -302,7 +302,7 @@ class Page_Controller extends ContentController
         self::AddRequirements();
 
         $use_shadow_box = Director::get_current_page()->IncludeShadowBox;
-
+        $use_shadow_box = empty($use_shadow_box) || intval($use_shadow_box) == 0 ? 'false':'true';
         $this->CustomScripts();
 
         //this will be include inline on body after requirements
