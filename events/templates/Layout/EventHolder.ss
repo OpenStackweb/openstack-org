@@ -23,7 +23,7 @@
                 <span class="events-loading hidden">&nbsp;</span>
                 <div style="clear:both"></div>
             </div>
-            <div id='upcoming-events' class="eventBlock upcoming hidden">
+            <div id='upcoming-events' class="upcoming hidden">
                 <div>
                     $getEvents(100,future_events)
                 </div>

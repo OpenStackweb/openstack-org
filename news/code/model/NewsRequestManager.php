@@ -107,7 +107,7 @@ final class NewsRequestManager {
                 'ArticleSummary'      => $news->Summary
             ));
 
-            //$email->send();
+            $email->send();
 		});
 	}
 

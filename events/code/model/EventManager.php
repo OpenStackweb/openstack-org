@@ -163,7 +163,7 @@ final class EventManager {
         $count_by_event_type = array();
 
         $result = DB::query("
-            SELECT EventCategory, COUNT(*) AS EventCategoryCount FROM EventPage_Live where EventEndDate >= CURDATE() group by EventCategory
+            SELECT EventCategory, COUNT(*) AS EventCategoryCount FROM EventPage where EventEndDate >= CURDATE() group by EventCategory
             order by (CASE WHEN EventCategory IS NULL then 1 ELSE 0 END), EventCategory
           ");
 
@@ -281,7 +281,7 @@ final class EventManager {
      */
     function getAllTypes() {
         $array = array();
-        $event_types = DB::query("SELECT DISTINCT EventCategory FROM EventPage_Live where EventCategory is not null ORDER BY EventCategory");
+        $event_types = DB::query("SELECT DISTINCT EventCategory FROM EventPage where EventCategory is not null ORDER BY EventCategory");
         foreach ($event_types as $event_type) {
             $array[] = $event_type["EventCategory"];
         }
