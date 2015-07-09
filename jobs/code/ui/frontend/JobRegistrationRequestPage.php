@@ -36,25 +36,26 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
-        Requirements::combine_files('jobs_registration.css', array(
-            "themes/openstack/css/chosen.css",
-            'jobs/css/job.registration.form.css',
-        ));
+  		Requirements::css("themes/openstack/css/chosen.css");
+		Requirements::css('jobs/css/job.registration.form.css');
 
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
 
-        Requirements::combine_files('jobs_registration.js', array(
-            "themes/openstack/javascript/chosen.jquery.min.js",
-            "themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js",
-            "themes/openstack/javascript/jquery.validate.custom.methods.js",
-            "marketplace/code/ui/admin/js/geocoding.jquery.js",
-            "marketplace/code/ui/admin/js/utils.js",
-            'themes/openstack/javascript/pure.min.js',
-            "jobs/js/job.registration.request.page.js",
-            "jobs/js/job.registration.form.js"
-        ));
+		$js_files = array(
+			"themes/openstack/javascript/chosen.jquery.min.js",
+			"themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js",
+			"themes/openstack/javascript/jquery.validate.custom.methods.js",
+			"marketplace/code/ui/admin/js/geocoding.jquery.js",
+			"marketplace/code/ui/admin/js/utils.js",
+			'themes/openstack/javascript/pure.min.js',
+			"jobs/js/job.registration.request.page.js",
+			"jobs/js/job.registration.form.js"
+		);
+
+		foreach($js_files as $js_file)
+			Requirements::javascript($js_file);
 
 		$this->manager = new JobRegistrationRequestManager(
 			new SapphireJobRegistrationRequestRepository,

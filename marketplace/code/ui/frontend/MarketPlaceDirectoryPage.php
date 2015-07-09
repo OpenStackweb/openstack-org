@@ -122,11 +122,13 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
             )
         );
 
-        Requirements::combine_files('marketplace_review_form.css', array(
-                "marketplace/code/ui/frontend/css/star-rating.min.css",
-                "marketplace/code/ui/frontend/css/marketplace-review.css"
-            )
+        $css_files =  array(
+            "marketplace/code/ui/frontend/css/star-rating.min.css",
+            "marketplace/code/ui/frontend/css/marketplace-review.css"
         );
+
+        foreach($css_files as $css_file)
+            Requirements::css($css_file);
 
         $form            = new MarketPlaceReviewForm($this, 'MarketPlaceReviewForm');
         $data            = Session::get("FormInfo.Form_MarketPlaceReviewForm.data");

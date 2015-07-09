@@ -70,11 +70,13 @@ class EditProfilePage_Controller extends Page_Controller
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
-        Requirements::combine_files('edit_profile_page.css', array(
+        $css_files =  array(
             "themes/openstack/css/chosen.css",
             'registration/css/edit.profile.page.css',
-            "registration/css/affiliations.css"
-        ));
+            "registration/css/affiliations.css");
+
+        foreach($css_files as $css_file)
+            Requirements::css($css_file);
 
         Requirements::combine_files('edit_profile_page.js', array(
             "themes/openstack/javascript/chosen.jquery.min.js",

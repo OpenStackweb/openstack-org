@@ -137,13 +137,14 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::css(Director::protocol() . "code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css");
         Requirements::css(Director::protocol() . "fonts.googleapis.com/css?family=PT+Sans&subset=latin");
 
-        Requirements::combine_files('marketplace_admin.css',
-            array(
-                "marketplace/code/ui/admin/css/marketplace.admin.css",
-                "themes/openstack/css/chosen.css",
-                "themes/openstack/css/colorpicker.css",
-            )
+        $css_files =  array(
+            "marketplace/code/ui/admin/css/marketplace.admin.css",
+            "themes/openstack/css/chosen.css",
+            "themes/openstack/css/colorpicker.css",
         );
+
+        foreach($css_files as $css_file)
+            Requirements::css($css_file);
 
         if (Director::isDev())
             Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js");
@@ -153,23 +154,24 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript(Director::protocol() . "code.jquery.com/ui/1.10.4/jquery-ui.min.js");
 
-        Requirements::combine_files('marketplace_admin.js',
-            array(
-                "themes/openstack/javascript/chosen.jquery.min.js",
-                "themes/openstack/javascript/jquery.jsonp-2.4.0.min.js",
-                "themes/openstack/javascript/jquery.validate.custom.methods.js",
-                "themes/openstack/javascript/pure.min.js",
-                "themes/openstack/javascript/jquery.serialize.js",
-                "themes/openstack/javascript/jquery.cleanform.js",
-                'marketplace/code/ui/admin/js/utils.js',
-                "marketplace/code/ui/admin/js/marketplaceadmin.js",
-                "marketplace/code/ui/admin/js/implementations.js",
-                'marketplace/code/ui/admin/js/public_clouds.js',
-                'marketplace/code/ui/admin/js/private_clouds.js',
-                'marketplace/code/ui/admin/js/consultants.js',
-                "themes/openstack/javascript/colorpicker.js"
-            )
+        $js_files =  array(
+            "themes/openstack/javascript/chosen.jquery.min.js",
+            "themes/openstack/javascript/jquery.jsonp-2.4.0.min.js",
+            "themes/openstack/javascript/jquery.validate.custom.methods.js",
+            "themes/openstack/javascript/pure.min.js",
+            "themes/openstack/javascript/jquery.serialize.js",
+            "themes/openstack/javascript/jquery.cleanform.js",
+            'marketplace/code/ui/admin/js/utils.js',
+            "marketplace/code/ui/admin/js/marketplaceadmin.js",
+            "marketplace/code/ui/admin/js/implementations.js",
+            'marketplace/code/ui/admin/js/public_clouds.js',
+            'marketplace/code/ui/admin/js/private_clouds.js',
+            'marketplace/code/ui/admin/js/consultants.js',
+            "themes/openstack/javascript/colorpicker.js"
         );
+
+        foreach($js_files as $js_file)
+            Requirements::javascript($js_file);
 
         // model
         $this->marketplace_repository = new SapphireMarketPlaceTypeRepository;
