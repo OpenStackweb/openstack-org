@@ -12,14 +12,13 @@
  * limitations under the License.
  **/
 /**
- * Class Live2StageEventMigrationTask
+ * Class RemoveSiteTreeForEventPageMigrationTask
  */
+class RemoveSiteTreeForEventPageMigrationTask extends MigrationTask {
 
-final class Live2StageEventMigrationTask extends MigrationTask {
+    protected $title = "Remove cms records for EventPage";
 
-    protected $title = "EventPage_Live 2 EventPage records migration";
-
-    protected $description = "EventPage_Live 2 EventPage records migration";
+    protected $description = "Remove records from table SiteTree, SiteTree_Live, Page and Page_Live related to EventPage";
 
     function up(){
         echo "Starting Migration Proc ...<BR>";
@@ -29,45 +28,10 @@ final class Live2StageEventMigrationTask extends MigrationTask {
 
             DB::getConn()->transactionStart();
             try{
-
-                DB::query("DELETE FROM EventPage");
-                DB::query("
-INSERT INTO EventPage
-		(ID,
-		EventStartDate,
-		EventEndDate,
-		EventLink,
-		EventLinkLabel,
-		EventLocation,
-		EventSponsor,
-		EventSponsorLogoUrl,
-		IsSummit,
-		EventCategory,
-		ExternalSourceId,
-		ClassName,
-		Created,
-		LastEdited,
-		Title)
-SELECT 	EventPage_Live.ID,
-		EventStartDate,
-		EventEndDate,
-		EventLink,
-		EventLinkLabel,
-		EventLocation,
-		EventSponsor,
-		EventSponsorLogoUrl,
-		IsSummit,
-		EventCategory,
-		ExternalSourceId,
-		ClassName,
-		Created,
-		LastEdited,
-		Title
-FROM  	EventPage_Live
-INNER JOIN Page_Live on Page_Live.Id = EventPage_Live.Id
-INNER JOIN SiteTree_Live on SiteTree_Live.Id = EventPage_Live.Id
-                ");
-                DB::query("DROP TABLE EventPage_Live");
+                DB::query("delete from Page where Id in (select Id from SiteTree where ClassName = 'EventPage')");
+                DB::query("delete from SiteTree where ClassName = 'EventPage'");
+                DB::query("delete from Page_Live where Id in (select Id from SiteTree_Live where ClassName = 'EventPage')");
+                DB::query("delete from SiteTree_Live where ClassName = 'EventPage'");
                 DB::getConn()->transactionEnd();
             }catch(Exception $e){
                 DB::getConn()->transactionRollback();

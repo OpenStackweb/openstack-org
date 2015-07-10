@@ -20,9 +20,8 @@ class EventHolder extends Page {
 
    private static $has_one = array(
    );
- 
-   static $allowed_children = array('EventPage');
-   /** static $icon = "icon/path"; */
+
+    /** static $icon = "icon/path"; */
       
 }
 /**
