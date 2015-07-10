@@ -245,34 +245,22 @@ final class EventManager {
     }
 
     function saveRssEvents($events_array) {
-        $oldMode = Versioned::get_reading_mode();  //hack chili #9049
-        try {
-            Versioned::reading_stage('Live');
+        foreach ($events_array as $event) {
 
-            foreach ($events_array as $event) {
+            $filter_array = array();
+            $filter_array["EventEndDate"] = $event->EventEndDate;
+            $filter_array["ExternalSourceId"] = $event->ExternalSourceId;
 
-                $filter_array = array();
-                $filter_array["EventEndDate"] = $event->EventEndDate;
-                $filter_array["ExternalSourceId"] = $event->ExternalSourceId;
+            $count = EventPage::get()->filter($filter_array)->Count();
 
-                $count = EventPage::get()->filter($filter_array)->Count();
+            $event_repository = $this->event_repository;
 
-                $event_repository = $this->event_repository;
-
-                if ($count == 0) {
-                    $this->tx_manager->transaction(function() use ($event_repository, $event){
-                        $event_repository->add($event);
-                    });
-                }
+            if ($count == 0) {
+                $this->tx_manager->transaction(function() use ($event_repository, $event){
+                    $event_repository->add($event);
+                });
             }
         }
-        catch (Exception $ex) {
-            throw $ex;
-        }
-        finally {
-            Versioned::set_reading_mode($oldMode);
-        }
-
     }
 
 

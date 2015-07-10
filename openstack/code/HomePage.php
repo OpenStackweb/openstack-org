@@ -189,17 +189,8 @@ class HomePage_Controller extends Page_Controller
     {
 
         $events_array = new ArrayList();
-        $oldMode = Versioned::get_reading_mode(); //hack chili #9049
-        try {
-            Versioned::reading_stage('Live');
-            $pulled_events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
-        }
-        catch (Exception $ex) {
-            throw $ex;
-        }
-        finally {
-            Versioned::set_reading_mode($oldMode);
-        }
+        Versioned::reading_stage('Live');
+        $pulled_events = EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
         $events_array->merge($pulled_events);
         $output = '';
         $events = $events_array->sort('EventStartDate', 'ASC')->limit($limit,0)->toArray();
