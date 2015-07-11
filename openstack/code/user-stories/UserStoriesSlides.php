@@ -18,7 +18,9 @@ class UserStoriesSlides extends DataObject {
 		'Quote' => 'Text',
 		'Author' => 'Text',
 		'SlideLabel' => 'Text',
-		'SortOrder' => 'Int'
+		'SortOrder' => 'Int',
+        'ButtonText' => 'Varchar(255)',
+        'ButtonLink' => 'Varchar(500)',
 	);
 
 	static $has_one = array(
@@ -52,6 +54,8 @@ class UserStoriesSlides extends DataObject {
 		$fields->addFieldstoTab('Root.Main', 
 			array(
 				new DropdownField('Type', 'Type',$types),
+                new TextField('ButtonText','Button Text'),
+                new TextField('ButtonLink','Button Link'),
 				new HiddenField('SortOrder')
 			)
 		);

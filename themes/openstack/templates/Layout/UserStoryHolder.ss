@@ -41,7 +41,10 @@
 					</a>
 				<% end_loop  %>
 			<% end_if %>
-			</li>
+                <% if ButtonText && ButtonLink %>
+                <a class="slide-button" href="$ButtonLink">$ButtonText</a>
+			    <% end_if %>
+            </li>
 		<% end_loop %>
 		</ul>
 	</div>
