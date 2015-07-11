@@ -167,6 +167,30 @@ a.releaseButton:active {
     position: relative;
 }
 
+.slide-button {
+    display: block;
+    background: #b9301d;
+    padding: 10px 20px;
+    border-radius: 2px;
+    width: 80%;
+    margin: 10px auto 0;
+    color: #fff!important;
+    font-weight: 600;
+    font-size: 150%;
+    text-decoration: none;
+    background: #B73124;
+    color: white;
+    max-width: 200px;
+    text-align: center;
+}
+
+.slide-button:hover {
+    text-decoration: none;
+    background: #831917;
+    color: white;
+    max-width: 200px;
+}
+
 
 .workload a {
     display: block;
