@@ -99,7 +99,7 @@ implements IPresentationSpeaker
      * @param Int $presentationID
      */
     public function ReviewLink($presentationID) {
-        $action = 'review';
+        $action = 'edit';
         if($this->isPendingOfRegistration()){
             $action .= '?'.SpeakerRegistrationRequest::ConfirmationTokenParamName.'='.$this->RegistrationRequest()->getToken();
         }
