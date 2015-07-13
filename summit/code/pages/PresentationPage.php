@@ -42,7 +42,7 @@ class PresentationPage_Controller extends SummitPage_Controller
         'mypresentations',
         'VoteForm',
         'handleManage',
-        'module',
+        'vote',
         'setpassword',
         'bio',
         'BioForm',
@@ -182,7 +182,7 @@ class PresentationPage_Controller extends SummitPage_Controller
     }
 
 
-    public function module(SS_HTTPRequest $r) {
+    public function vote(SS_HTTPRequest $r) {
         Requirements::clear();
         return $this;
     }

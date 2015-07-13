@@ -17,19 +17,19 @@ module.exports = React.createClass({displayName: 'VotingApp',
 
   _registerErrorHandlers: function () {
     API.registerErrorHandler('404', function (res) {
-      alert("Whoa, that's a 404");
+      alert("404 error");
     });
 
     API.registerErrorHandler('403', function (res) {
-      alert("You sure you got access, bro?");
+      alert("It seems you might have been logged out. Try logging in again.");
     })
 
     API.registerErrorHandler('TIMEOUT', function (res) {
-      alert("That's a timeout.");
+      alert("The application has timed out.");
     });
 
     API.registerErrorHandler('ERROR', function(res){
-      alert("Sum-ting-wong");
+      alert("An error was returned from the server.");
     });
   },
 
@@ -52,7 +52,7 @@ module.exports = React.createClass({displayName: 'VotingApp',
                   <h1>
                     Vote For Presentations
                     <span className="subheading">
-                      Help us pick the presentations for The Vancouver Summit
+                      Help us pick the presentations for The Tokyo Summit
                     </span>
                   </h1>
                 </div>

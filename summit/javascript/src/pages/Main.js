@@ -165,7 +165,7 @@ module.exports = React.createClass({displayName:'Main',
         <div className="col-lg-3 col-md-3 col-sm-3 voting-sidebar">
           <div className="voting-app-details-link">
             <a href="#">
-              More About The Vancouver Summit
+              More About The Toyko Summit
             </a>
           </div>
           <SearchBar className="text voting-search-input" placeholder="Search" id="filter-field" onUpdate={this._handleSearch} initialText={keyword} />

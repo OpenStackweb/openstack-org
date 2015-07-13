@@ -130,6 +130,18 @@ var Api = {
                 { vote: v}
             )
         );          
+    },
+
+    addPresentationView (presID) {
+    	const url = makeUrl(`/presentation/${presID}/view`);
+    	const key = 'VIEW';
+    	abortPendingRequests(key);
+
+    	return _pendingRequests[key] = finalise(put(url));
+    },
+
+    ping () {    	
+    	return finalise(get('Security/ping'));
     }
 
 };
