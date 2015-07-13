@@ -108,7 +108,7 @@ final class DupesMembers_Controller extends AbstractController {
             ));
         }
         catch(AccountActionBelongsToAnotherMemberException $ex1){
-            SS_Log::log($ex1,SS_Log::ERR);
+            SS_Log::log($ex1,SS_Log::WARN);
             $request = $this->merge_request_repository->findByConfirmationToken($token);
             return $this->renderWith(array('DupesMembers_belongs_2_another_user','Page'), array(
                 'UserName' => $request->getDupeAccount()->getEmail()
@@ -162,7 +162,7 @@ final class DupesMembers_Controller extends AbstractController {
 
         }
         catch(AccountActionBelongsToAnotherMemberException $ex1){
-            SS_Log::log($ex1,SS_Log::ERR);
+            SS_Log::log($ex1,SS_Log::WARN);
             $request = $this->delete_request_repository->findByConfirmationToken($token);
             return $this->renderWith(array('DupesMembers_belongs_2_another_user','Page'), array(
                 'UserName' => $request->getDupeAccount()->getEmail()
