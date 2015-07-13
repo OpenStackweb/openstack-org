@@ -599,6 +599,7 @@ class PresentationPage_ManageRequest extends RequestHandler
                     'Presentation'    => $this->presentation,
                     'Speaker'         => $speaker,
                     'Creator' => $this->presentation->Creator(),
+                    'EditLink'      => Director::makeRelative($speaker->EditLink($this->presentation->ID)),
                     'ReviewLink'      => Director::makeRelative($speaker->ReviewLink($this->presentation->ID)),
                     'PasswordLink' => Director::absoluteBaseURL().'/lostpassword',
                     'Link' => Director::absoluteBaseURL().Director::makeRelative($this->presentation->EditLink()),
