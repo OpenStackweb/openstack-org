@@ -16,26 +16,16 @@ $email_from = '';
 $email_log = '';
 $email_new_deployment = '';
 
-// DB connection checking code
-$conn =  new mysqli(SS_DATABASE_SERVER, SS_DATABASE_USERNAME, SS_DATABASE_PASSWORD);
-
-if(!$conn->connect_errno) {
+$mysqli = @new mysqli(SS_DATABASE_SERVER, SS_DATABASE_USERNAME, SS_DATABASE_PASSWORD, $database);
+if ($mysqli->connect_errno) {
+	mysqli_close($mysqli);
 	ob_clean();
 	$maintenance_page = file_get_contents(getcwd(). '/../maintenance/index.html');
 	echo $maintenance_page;
 	header("HTTP/1.0 502 Bad Gateway");
 	exit();
 }
-
-if(!$conn->select_db($database)){
-	ob_clean();
-	$maintenance_page = file_get_contents(getcwd(). '/../maintenance/index.html');
-	echo $maintenance_page;
-	header("HTTP/1.0 502 Bad Gateway");
-	exit();
-}
-
-$conn->close();
+mysqli_close($mysqli);
 
 //used by openstack/code/utils/email/DevelopmentEmail.php
 define('DEV_EMAIL_TO','');
