@@ -54,8 +54,6 @@ class UserStoriesSlides extends DataObject {
 		$fields->addFieldstoTab('Root.Main', 
 			array(
 				new DropdownField('Type', 'Type',$types),
-                new TextField('ButtonText','Button Text'),
-                new TextField('ButtonLink','Button Link'),
 				new HiddenField('SortOrder')
 			)
 		);
@@ -64,7 +62,9 @@ class UserStoriesSlides extends DataObject {
 			array(
 				new TextField('Quote','Quote'),
 				new TextField('Author','Quote Author'),
-				new TextField('SlideLabel','Label for Slider')
+				new TextField('SlideLabel','Label for Slider'),
+                new TextField('ButtonText','Button Text'),
+                new TextField('ButtonLink','Button Link')
 			)
 		);
 
