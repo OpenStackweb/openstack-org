@@ -77,6 +77,10 @@ var Backend = {
 			Cortex.activePresentation.set(response.body);			
 		});
 
+	},
+
+	viewPresentation: function (presID) {
+		API.addPresentationView(presID);
 	}
 
 };

@@ -27,6 +27,7 @@ var Detail = React.createClass({displayName: 'Detail',
 		var store = this.props.store;
 
 		if(!store.activePresentation.getValue() || presID != store.activePresentation.id.getValue()) {			
+			Backend.viewPresentation(presID);
 			Backend.setPresentationActive(presID);
 		}
 	},
@@ -89,9 +90,11 @@ var Detail = React.createClass({displayName: 'Detail',
                   );
                 })}
                 </ul>
-              </div>              
-              <h5>Abstract</h5>              
-              <div dangerouslySetInnerHTML={{__html: pres.short_description}} />
+              </div>
+              <div className="abstract">        
+              <h5 className="abstract">Abstract</h5>           
+              	<div dangerouslySetInnerHTML={{__html: pres.short_description}} />
+              </div>
               <div className="main-speaker-wrapper">
               {pres.speakers && pres.speakers.map(function (speaker) {
               	return (
@@ -107,9 +110,6 @@ var Detail = React.createClass({displayName: 'Detail',
 		                </div>
 		                <div className="main-speaker-description">
 		                  <div dangerouslySetInnerHTML={{__html: speaker.bio}} />
-		                  <p>
-		                    Linked in?
-		                  </p>
 		                </div>
 	                </div>
 	            );
@@ -128,7 +128,7 @@ var Detail = React.createClass({displayName: 'Detail',
               <h5>
                 Share This Presentation
               </h5>
-              <div className="sharing-section" dangerouslySetInnerHTML={{__html: share}} />
+              
              </div>
           </div>
         </div>

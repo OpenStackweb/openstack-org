@@ -69,6 +69,7 @@ class PresentationAPI extends Controller {
 							Member::currentUser()->getRandomisedPresentations() : 
 							Summit::get_active()
                         		->Presentations()
+                        		->filter('Status','Received')
                         		->sort("RAND()");
 
 		if($r->getVar('category')) {
@@ -76,7 +77,13 @@ class PresentationAPI extends Controller {
 		}
 		if($r->getVar('keyword')) {
 			$k = Convert::raw2sql($r->getVar('keyword'));
-			$presentations = $presentations->where("Title LIKE '%{$k}%' OR Description LIKE '%{$k}%'");
+			$presentations = $presentations->where
+			(	"Presentation.Title LIKE '%{$k}%' 
+				OR Description LIKE '%{$k}%' 
+				OR FirstName LIKE '%{$k}%' 
+				OR LastName LIKE '%{$k}%'"	)
+								->leftJoin("Presentation_Speakers", "Presentation_Speakers.PresentationID = Presentation.ID")
+								->leftJoin("PresentationSpeaker", "Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID");
 		}
 		if($r->getVar('voted') == "true") {
 			$presentations = $presentations
@@ -164,12 +171,14 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 	
 	private static $url_handlers = array (
 		'GET ' => 'index',
-		'POST vote' => 'handleVote'
+		'POST vote' => 'handleVote',
+		'PUT view' => 'handleView',
 	);
 
 
 	private static $allowed_actions = array (
-		'handleVote'
+		'handleVote',
+		'handleView'
 	);
 
 
@@ -229,5 +238,17 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 		}
 
 		return $this->httpError(400, "Invalid vote");
+	}
+
+
+	public function handleView(SS_HTTPRequest $r) {
+		if(!Member::currentUser()) {
+			return $this->httpError(403);
+		}
+
+		$this->presentation->Views++;
+		$this->presentation->write();
+		
+		return new SS_HTTPResponse(null, 200);
 	}
 }

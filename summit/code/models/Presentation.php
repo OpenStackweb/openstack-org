@@ -37,7 +37,8 @@ class Presentation extends DataObject
         'OtherTopic' => 'Varchar',
         'Description' => 'HTMLText',
         'ShortDescription' => 'HTMLText',
-        'Progress' => 'Int'
+        'Progress' => 'Int',
+        'Views' => 'Int'
     );
 
 

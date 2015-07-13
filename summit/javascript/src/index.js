@@ -13,8 +13,8 @@ var DefaultRoute = Router.DefaultRoute;
 var Cortex = require('./store/Cortex');
 
 var routes = (	
-	<Route path="/summit/vancouver-2015/speakers" handler={VotingApp}>	    
-	      <Route name="home" path="module" handler={Main}>
+	<Route path="/summit/tokyo-2015/call-for-speakers" handler={VotingApp}>	    
+	      <Route name="home" path="vote" handler={Main}>
 	      	<DefaultRoute handler={DefaultDetail} />
 	      	<Route name="detail" path="show/:presentationID" handler={Detail} />    
 	      </Route>
