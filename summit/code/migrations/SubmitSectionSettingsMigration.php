@@ -21,7 +21,7 @@ class SubmitSectionSettingsMigration extends MigrationTask
 
         if (!$migration) {
 
-            $template_sections = array("Visa Information", "Getting Around", "Venue", "Hotels & Airports", "Travel Support");
+            $template_sections = array("Visa Info", "Getting Around", "Venue", "Hotels & Airport", "Travel Support Program", "Locals");
             $submitLocationPages = SummitLocationPage::get();
 
             foreach ($submitLocationPages as $submitLocationPage) {

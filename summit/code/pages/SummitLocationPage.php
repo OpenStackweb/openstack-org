@@ -88,6 +88,11 @@ class SummitLocationPage extends SummitPage {
 
     }
 
+    public function getNavigationLinks(){
+        $summitPageSectionService = new SapphireSummitPageSectionService();
+        return $summitPageSectionService->getSummitSectionService($this->ID);
+    }
+
     public function getCityIntro(){
         $res = $this->getField('CityIntro');
         if(empty($res) && $this->SummitID == 4)
@@ -335,7 +340,37 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         Requirements::customScript($this->MapScript());
         
 	}
-    
+
+    public function NavigationLinks() {
+        return $this->getNavigationLinks();
+    }
+
+    public function SectionInclude($name, $style) {
+
+        if ($name == 'Venue') {
+            $output = $this->renderWith("SummitLocationVenue", array($this->Venue(), "Style" => $style));
+        }
+        else if ($name == 'Hotels & Airport') {
+            $output = $this->renderWith("SummitLocationAirportsAndHotels",
+                array("Hotels" => $this->Hotels(), "Airports" => $this->Airports(), "OtherLocations" => $this->OtherLocations, "Style" => $style)
+            );
+        }
+        else if ($name == 'Getting Around') {
+            $output = $this->renderWith("SummitLocationGettingAround", array($this->GettingAround, "Style" => $style));
+        }
+        else if ($name == 'Travel Support Program') {
+            $output = $this->renderWith("SummitLocationTravelSupport", array($this->TravelSupport, "Style" => $style));
+        }
+        else if ($name == 'Visa Info') {
+            $output = $this->renderWith("SummitLocationVisaInformaton", array($this->VisaInformation, "Style" => $style));
+        }
+        else if ($name == 'Locals') {
+            $output = $this->renderWith("SummitLocationLocals", array($this->Locals, "Style" => $style));
+        }
+
+        return $output;
+    }
+
     public function Hotels() {
         $getVars = $this->request->getVars();
         if(isset($getVars['showHidden'])) {
