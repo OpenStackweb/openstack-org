@@ -351,21 +351,19 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
             $output = $this->renderWith("SummitLocationVenue", array($this->Venue(), "Style" => $style));
         }
         else if ($name == 'Hotels & Airport') {
-            $output = $this->renderWith("SummitLocationAirportsAndHotels",
-                array("Hotels" => $this->Hotels(), "Airports" => $this->Airports(), "OtherLocations" => $this->OtherLocations, "Style" => $style)
-            );
+            $output = $this->renderWith("SummitLocationAirportsAndHotels", array("Style" => $style));
         }
         else if ($name == 'Getting Around') {
-            $output = $this->renderWith("SummitLocationGettingAround", array($this->GettingAround, "Style" => $style));
+            $output = $this->renderWith("SummitLocationGettingAround", array("Style" => $style));
         }
         else if ($name == 'Travel Support Program') {
-            $output = $this->renderWith("SummitLocationTravelSupport", array($this->TravelSupport, "Style" => $style));
+            $output = $this->renderWith("SummitLocationTravelSupport", array("Style" => $style));
         }
         else if ($name == 'Visa Info') {
-            $output = $this->renderWith("SummitLocationVisaInformaton", array($this->VisaInformation, "Style" => $style));
+            $output = $this->renderWith("SummitLocationVisaInformaton", array("Style" => $style));
         }
         else if ($name == 'Locals') {
-            $output = $this->renderWith("SummitLocationLocals", array($this->Locals, "Style" => $style));
+            $output = $this->renderWith("SummitLocationLocals", array("Style" => $style));
         }
 
         return $output;

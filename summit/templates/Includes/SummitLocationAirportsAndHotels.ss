@@ -76,7 +76,7 @@
             <% end_loop %>
         </div>
     <% end_if %>
-    <% if OtherLocations  %>
+    <% if $OtherLocations  %>
         <div class="row">
             <div class="col-lg-8 col-lg-push-2 other-hotel-options">
                 <h5 class="section-title">House Sharing</h5>
