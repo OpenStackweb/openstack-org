@@ -609,7 +609,7 @@ ul.sidebar-menu {
   margin-left: 10%;
   width: 80%;
   font-size: 1em;
-  padding: 0;
+  padding: 9px;
   height: 40px; }
   .sidebar-nav .register-btn-lrg.inactive:hover {
     cursor: default; }
