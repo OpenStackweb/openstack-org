@@ -1004,8 +1004,9 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
      * @return SSViewer
      */
     public function review(SS_HTTPRequest $r) {
+
         if(Member::currentUserID() != $this->speaker->MemberID) {
-            return $this->httpError(403, 'You do not have access to this page.');
+            return $this->httpError(403, sprintf('You are logged as Member %s, but this belongs to another speaker, please log out, and try it again.', Member::currentUser()->Email));
         }
 
         return $this->customise(array(
@@ -1052,7 +1053,20 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $this->speaker->Surname = $this->speaker->Member()->Surname;
         }
 
-        return SpeakerForm::create(
+        $fields = FieldList::create();
+        if($this->speaker->MemberID > 0) {
+            if (!$this->speaker->Member()->getSummitState('VIDEO_AGREEMENT_SEEN')) {
+                $fields->push(HeaderField::create('Do you agree to be video recorded?'));
+                $fields->push(LiteralField::create('legal', $this->parent->getParent()->LegalAgreement));
+                $fields->merge($this->LegalForm()->Fields());
+            }
+            if (!$this->speaker->Member()->getSummitState('BUREAU_SEEN')) {
+                $fields->push(HeaderField::create('Want to be in the Speakers\' Bureau?'));
+                $fields->merge($this->BureauForm()->Fields());
+            }
+        }
+
+        $speaker_form =  SpeakerForm::create(
             $this,
             "EditSpeakerForm",
             FieldList::create (
@@ -1060,6 +1074,12 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             )
         )
         ->loadDataFrom($this->speaker);
+        if($fields->count() > 0){
+            $old_fields = $speaker_form->Fields();
+            $old_fields->merge($fields);
+            $speaker_form->setFields($old_fields);
+        }
+        return $speaker_form;
     }
 
 
@@ -1121,7 +1141,7 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         if(!$this->isMe()) return $this->httpError(403);
 
         $fields = FieldList::create(HeaderField::create('Your details'));
-        $dummy = SpeakerForm::create($this, "EditSpeakerForm", FieldList::create());
+        $dummy  = SpeakerForm::create($this, "EditSpeakerForm", FieldList::create());
         $fields->merge(
             $dummy->Fields()
         );
