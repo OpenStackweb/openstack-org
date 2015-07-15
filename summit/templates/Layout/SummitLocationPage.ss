@@ -33,7 +33,7 @@
     $AboutTheCity
     <p>
         <% if $Summit.RegistrationLink %>
-            <a href="$Summit.RegistrationLink" class="btn orange-btn">Register Now</a>
+            <a href="$Summit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
         <% end_if %>
     </p>
     <a href="{$AboutTheCityBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$AboutTheCityBackgroundImageHero}" target="_blank"><i class="fa fa-info-circle"></i></a>
