@@ -21,8 +21,12 @@ final class SapphireEventRepository extends SapphireRepository {
 	}
 
     public function getAllPosted($offset = 0, $limit = 10) {
-        $query = new QueryObject();
-        $query->addOrder(QueryOrder::desc('EventStartDate'));
-        return  $this->getAll($query,$offset,$limit);
+
+        return EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->limit($limit)->toArray();
+    }
+
+    public function countAllPosted() {
+
+        return EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->count();
     }
 }

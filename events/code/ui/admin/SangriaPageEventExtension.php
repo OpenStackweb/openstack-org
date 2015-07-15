@@ -105,12 +105,12 @@ final class SangriaPageEventExtension extends Extension {
 	}
 
     public function getPostedEvents(){
-        list($list,$size) = $this->event_repository->getAllPosted(0,1000);
+        $list = $this->event_repository->getAllPosted(0,1000);
         return new ArrayList($list);
     }
 
     public function getPostedEventsCount(){
-        list($list,$size) = $this->event_repository->getAllPosted(0,1000);
-        return count($list);
+        $count = $this->event_repository->countAllPosted();
+        return $count;
     }
 } 
