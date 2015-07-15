@@ -26,7 +26,7 @@
                         </h1>
                         <div class="landing-action">
                             <% if $RegistrationLink %>
-                                <a href="{$RegistrationLink}" class="btn orange-btn">Register Now</a>
+                                <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
                             <% end_if %>
                             <% if $ComingSoonBtnText %>
                                 <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
