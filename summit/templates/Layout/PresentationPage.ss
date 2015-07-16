@@ -12,7 +12,7 @@
 								<h2>Presentations</h2>
 							</div>
 							<div class="col-lg-4 col-md-4">
-								<a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New Presentation</a>
+								&nsbp;
 							</div>
 						</div>
 					</div>
