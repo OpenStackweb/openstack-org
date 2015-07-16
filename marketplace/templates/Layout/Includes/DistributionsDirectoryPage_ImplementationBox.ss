@@ -15,6 +15,13 @@
                 </a>
             </h4>
             <p>$Overview</p>
+            <% if isOpenStackTested %>
+                <div class="tested-listing">
+                    <i class="fa fa-check-square"></i>
+                    <div class="tested-listing-title">Tested</div>
+                    <div class="tested-listing-description">OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</div>
+                </div>
+            <% end_if %>
             <a style="background-color: #{$Company.CompanyColor}" href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$ApplianceLink<% end_if %><% if Name == "Distribution"  %>$DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}" class="details-button">Details</a>
         </div>
     </div>
