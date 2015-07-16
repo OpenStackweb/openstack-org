@@ -14,7 +14,7 @@
         <ul class="city-nav-list">
             <% loop $NavigationLinks %>
             <li>
-                <a href="$Top.Link#$Hash">
+                <a href="#$Hash">
                     <i class="$CssClass"></i>
                     $Text
                 </a>

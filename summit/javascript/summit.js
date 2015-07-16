@@ -7,11 +7,12 @@ $(".open-panel").click(function(event){
 });
 
 // Smooth scroll
-$('a[href^=#]').click(function(){git 
+$('a[href^=#]').click(function(e){
+    var $this = $(this);
+    e.preventDefault();
     $('html, body').animate({
-        scrollTop: $( $.attr($(this), 'href') ).offset().top
+        scrollTop: $($this.attr('href')).offset().top
     }, 500);
-    return false;
 });
 
 // Photo Credit Tooltip
