@@ -12,7 +12,7 @@
 								<h2>Presentations</h2>
 							</div>
 							<div class="col-lg-4 col-md-4">
-								&nsbp;
+								&nbsp;
 							</div>
 						</div>
 					</div>
