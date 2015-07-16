@@ -177,6 +177,6 @@
 
     <h2>DB Cleanup</h2>
     <ul>
-        <li><a href="/sangria/StandardizeOrgNames">Standardize Organizations</a></li>
+        <li><a href="/sangria/StandardizeOrgNames" id="stand_orgs">Standardize Organizations</a></li>
     </ul>
 </div>

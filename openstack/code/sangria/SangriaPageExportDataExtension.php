@@ -29,6 +29,7 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportDataUsersByRole',
             'exportCLAUsers',
             'exportGerritUsers',
+            'ExportDataGerritUsers',
             'ExportDataCompanyData',
             'ExportSurveyResults',
             'ExportAppDevSurveyResults',
@@ -44,6 +45,7 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportDataUsersByRole',
             'exportCLAUsers',
             'exportGerritUsers',
+            'ExportDataGerritUsers',
             'ExportDataCompanyData',
             'ExportSurveyResults',
             'ExportAppDevSurveyResults',
@@ -134,7 +136,7 @@ SQL;
             array_push($data, $member);
         }
 
-        $filename = "CLAMembers" . date('Ymd') . "." . $ext;
+        $filename = "CLAMembers_" . date('Ymd') . "." . $ext;
         $delimiter = ($ext == 'xls') ? "\t" : "," ;
 
         return CSVExporter::getInstance()->export($filename, $data, $delimiter);
@@ -194,7 +196,7 @@ SQL;
             array_push($data, $member);
         }
 
-        $filename = "GerritUsers" . date('Ymd') . "." . $ext;
+        $filename = "Gerrit_Users_" . date('Ymd') . "." . $ext;
         $delimiter = ($ext == 'xls') ? "\t" : "," ;
 
         return CSVExporter::getInstance()->export($filename, $data, $delimiter);
@@ -464,7 +466,7 @@ SQL;
             array_push($data, $member);
         }
 
-        $filename = "survey_results" . $fileDate . ".csv";
+        $filename = "Survey_" . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
@@ -669,7 +671,7 @@ SQL;
         }
 
         $version  = $range == SurveyType::MARCH_2015 ? 'v2':'v1';
-        $filename = "survey_results_flat_" . $version. '_' . $fileDate . ".csv";
+        $filename = "Survey_Flat_" . $version. '_' . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $file_data, ',');
     }
@@ -728,7 +730,7 @@ SQL;
             array_push($data, $member);
         }
 
-        $filename = "app_dev_surveys" . $fileDate . ".csv";
+        $filename = "App_Dev_Surveys_" . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
@@ -850,7 +852,7 @@ SQL;
         }
 
         $version  = $range == SurveyType::MARCH_2015 ? 'v2':'v1';
-        $filename = "app_dev_surveys_flat_" .$version.'_'. $fileDate . ".csv";
+        $filename = "App_Dev_Surveys_Flat_" .$version.'_'. $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $file_data, ',');
     }
@@ -901,7 +903,7 @@ SQL;
             array_push($data, $member);
         }
 
-        $filename = "FoundationMembers" . date('Ymd') . "." . $ext;
+        $filename = "Foundation_Members_" . date('Ymd') . "." . $ext;
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
@@ -934,11 +936,15 @@ SQL;
                     $query->addLeftJoin('SummitSponsorPage_Companies', 'SummitSponsorPage_Companies.CompanyID = Company.ID');
                     array_push($company_fields, 'SummitSponsorPage_Companies.SponsorshipType');
                     $query->setSelect($company_fields);
+
+                    $filename = "Sponsorship_Levels_" . date('Ymd') . "." . $ext;
                     break;
                 case 'member_level' :
                     $query->setFrom('Company');
                     array_push($company_fields, 'Company.MemberLevel');
                     $query->setSelect($company_fields);
+
+                    $filename = "Foundation_Levels_" . date('Ymd') . "." . $ext;
                     break;
                 case 'users_roles' :
                     $query->setFrom('Company');
@@ -947,6 +953,8 @@ SQL;
                     $query->addLeftJoin('Group', 'Group.ID = Company_Administrators.GroupID');
                     $company_fields = array_merge($company_fields, array('Member.FirstName','Member.Surname','Member.Email','Group.Title'));
                     $query->setSelect($company_fields);
+
+                    $filename = "User_Roles_" . date('Ymd') . "." . $ext;
                     break;
                 case 'affiliates' :
                     $query->setFrom('Org');
@@ -964,6 +972,8 @@ SQL;
                         'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname',
                         'Is Current'=>'Affiliation.Current','Job Title'=>'Affiliation.JobTitle');
                     $query->setSelect($org_fields);
+
+                    $filename = "Employees_Affiliates_" . date('Ymd') . "." . $ext;
                     break;
                 case 'deployments' :
                     $query->setFrom('Org');
@@ -973,6 +983,8 @@ SQL;
                         'Edited'=>'Deployment.LastEdited','Label'=>'Deployment.Label','Is Public'=>'Deployment.IsPublic');
                     $query->setSelect($org_fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/DeploymentDetails/',Deployment.ID)","Link");
+
+                    $filename = "Deployments_" . date('Ymd') . "." . $ext;
                     break;
                 case 'deployment_surveys' :
                     $query->setFrom('Org');
@@ -987,6 +999,8 @@ SQL;
                                         'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname');
                     $query->setSelect($org_fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/SurveyDetails/',DeploymentSurvey.ID)","Link");
+
+                    $filename = "Deployment_Surveys" . date('Ymd') . "." . $ext;
                     break;
                 case 'speakers' :
                     $query->setFrom('PresentationSpeaker');
@@ -996,14 +1010,14 @@ SQL;
                     $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Speaker Name'=>'PresentationSpeaker.FirstName',
                                         'Speaker Surname'=>'PresentationSpeaker.LastName','Summit'=>'Summit.Name');
                     $query->setSelect($org_fields);
+
+                    $filename = "Speakers_" . date('Ymd') . "." . $ext;
                     break;
             }
         }
 
         //die($query->sql());
         $result = $query->execute();
-
-        $filename = "Companies" . date('Ymd') . "." . $ext;
         $delimiter = ($ext == 'xls') ? "\t" : "," ;
 
         return CSVExporter::getInstance()->export($filename, $result, $delimiter);
@@ -1037,7 +1051,7 @@ SQL;
             array_push($data, $member);
         }
 
-        $filename = "dup_users_report" . $fileDate . ".csv";
+        $filename = "Duplicate_Users_" . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
@@ -1080,7 +1094,7 @@ SQL;
             array_push($data, $member);
         }
 
-        $filename = "mktplace_admins_report" . $fileDate . ".csv";
+        $filename = "Marketplace_Admins_" . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }

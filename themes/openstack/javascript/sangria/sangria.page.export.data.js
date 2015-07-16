@@ -218,4 +218,12 @@ jQuery(document).ready(function($){
         $('.group').prop('checked', is_checked);
     });
 
+    $("#stand_orgs").click(function(e) {
+        if (confirm("Are you sure you want to standarize ALL organizations?")) {
+            window.location = "/sangria/StandardizeOrgNames";
+        } else {
+            e.stopPropagation();
+            return false;
+        }
+    });
 });
