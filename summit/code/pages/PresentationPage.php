@@ -1055,11 +1055,11 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
 
         $fields = FieldList::create();
         if($this->speaker->MemberID > 0) {
-            if (!$this->speaker->Member()->getSummitState('VIDEO_AGREEMENT_SEEN')) {
+            /*if (!$this->speaker->Member()->getSummitState('VIDEO_AGREEMENT_SEEN')) {
                 $fields->push(HeaderField::create('Do you agree to be video recorded?'));
                 $fields->push(LiteralField::create('legal', $this->parent->getParent()->LegalAgreement));
                 $fields->merge($this->LegalForm()->Fields());
-            }
+            }*/
             if (!$this->speaker->Member()->getSummitState('BUREAU_SEEN')) {
                 $fields->push(HeaderField::create('Want to be in the Speakers\' Bureau?'));
                 $fields->merge($this->BureauForm()->Fields());
@@ -1146,11 +1146,11 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $dummy->Fields()
         );
         $fields->bootstrapIgnore('Photo');
-        if(!$this->speaker->Member()->getSummitState('VIDEO_AGREEMENT_SEEN')) {
+        /*if(!$this->speaker->Member()->getSummitState('VIDEO_AGREEMENT_SEEN')) {
             $fields->push(HeaderField::create('Do you agree to be video recorded?'));
             $fields->push(LiteralField::create('legal', $this->parent->getParent()->LegalAgreement));
             $fields->merge($this->LegalForm()->Fields());
-        }
+        }*/
         if(!$this->speaker->Member()->getSummitState('BUREAU_SEEN')) {
             $fields->push(HeaderField::create('Want to be in the Speakers\' Bureau?'));
             $fields->merge($this->BureauForm()->Fields());            
