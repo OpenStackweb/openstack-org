@@ -82,7 +82,7 @@ class Presentation extends DataObject
                 ->configure()
                     ->setMultiple(true)
                 ->end()
-            ->tag('Tags', 'Tags', null, 'Presentation')
+            ->tag('Tags', 'Tags', Tag::get(), $this->Tags() )
             ->text('OtherTopic','Other topic')
             ->htmlEditor('Description')
             ->htmlEditor('ShortDescription')

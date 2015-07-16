@@ -81,7 +81,7 @@ class SchedPresentation extends DataObject {
 					
 					->imageUpload('VideoThumbnail')
 					->upload('RelatedMedia')
-					->tag('Tags','Tags', null, 'SchedPresentation')
+					->tag('Tags','Tags', Tag::get(), $this->Tags())
 			;
 		}
 
@@ -89,7 +89,7 @@ class SchedPresentation extends DataObject {
 			return $fields	
 				->text('Title')
 				->dropdown('CategoryID','Category', PresentationCategory::get()->map('ID','Title'))
-				->tag('Tags','Tags', null, 'SchedPresentation')
+				->tag('Tags','Tags', Tag::get(), $this->Tags())
 				->date('EventStart')
 					->configure()
 						->setConfig('showcalendar', true)
