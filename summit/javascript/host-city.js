@@ -1,8 +1,5 @@
 // City nav active on scroll
 
-// City Nav Affix
-var num = 1070; //number of pixels before modifying styles
-
 // Setup the different icons and shadows
 var iconURLPrefix = 'http://openstack.org/summit/images/mapicons/';
 
@@ -49,7 +46,7 @@ var markers = new Array();
 var location_markers = [];
 var iconCounter = 0;
 $(document).ready(function () {
-
+    var num = $('#nav-bar').offset().top;
     //$(document).on("scroll", onScroll);
 
     //smoothscroll
@@ -109,7 +106,7 @@ $(document).ready(function () {
     for (var i = 0; i < locations.length; i++) {
         var type = locations[i][4];
         if(type =='Airport'){
-            iconCounter = 1;
+            iconCounter = 1;travel-support
         }
         else if(type == 'Venue'){
             iconCounter = 0;
