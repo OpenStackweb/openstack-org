@@ -262,4 +262,5 @@ jQuery(document).ready(function($){
 
         $('#speakersExportAlert').addClass('hidden');
     });
+    
 });
