@@ -78,9 +78,9 @@ $(document).ready(function () {
             'scrollTop': $target.offset().top - detla
         }, 500, 'swing', function () {
             window.location.hash = target;
-            $(document).on("scroll", onScroll);
         });
     });
+    $(document).on("scroll", onScroll);
 
     map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 16,
