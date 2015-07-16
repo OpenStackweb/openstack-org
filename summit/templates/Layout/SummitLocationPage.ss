@@ -13,20 +13,20 @@
     <div class="container">
         <ul class="city-nav-list">
             <li>
-                <a href="$Top.Link#venue">
+                <a href="#venue">
                     <i class="fa fa-map-marker"></i>
                     Venue
                 </a>
             </li>
             <li>
-                <a href="$Top.Link#hotels">
+                <a href="#hotels">
                     <i class="fa fa-h-square"></i>
                     Hotels &amp; Airport
                 </a>
             </li>
             <% if GettingAround  %>
             <li>
-                <a href="$Top.Link#getting-around">
+                <a href="#getting-around">
                     <i class="fa fa-road"></i>
                     Getting Around
                 </a>
@@ -34,7 +34,7 @@
             <% end_if %>
             <% if TravelSupport  %>
                 <li>
-                    <a href="$Top.Link#travel-support">
+                    <a href="#travel-support">
                         <i class="fa fa-globe"></i>
                         Travel Support Program
                     </a>
@@ -42,7 +42,7 @@
             <% end_if %>
             <% if VisaInformation  %>
             <li>
-                <a href="$Top.Link#visa">
+                <a href="#visa">
                     <i class="fa fa-plane"></i>
                     Visa Info
                 </a>
@@ -50,7 +50,7 @@
             <% end_if %>
             <% if Locals  %>
             <li>
-                <a href="$Top.Link#locals">
+                <a href="#locals">
                     <i class="fa fa-heart"></i>
                     Locals
                 </a>

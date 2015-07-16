@@ -373,6 +373,7 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/javascript/pure.min.js');
         Requirements::javascript("summit/javascript/Chart.min.js");
 
+
         if($this->getOrderedAttendeesByRegion()->count() > 0){
             $script = '// Audience Chart - Attendees by Region
              var pieDataRegion = [];';
