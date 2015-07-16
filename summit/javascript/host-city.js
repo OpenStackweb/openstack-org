@@ -106,7 +106,7 @@ $(document).ready(function () {
     for (var i = 0; i < locations.length; i++) {
         var type = locations[i][4];
         if(type =='Airport'){
-            iconCounter = 1;travel-support
+            iconCounter = 1;
         }
         else if(type == 'Venue'){
             iconCounter = 0;
