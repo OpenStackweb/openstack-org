@@ -282,8 +282,10 @@ ul.featured li {
 
 .recent_image {
     margin-right: 10px;
-    float: left;
-    width: 100px;
+    float: right;
+    padding: 5px;
+    width: 110px;
+    border: 1px solid black;
 }
 
 .recent_text {
