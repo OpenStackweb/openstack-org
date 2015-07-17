@@ -284,7 +284,7 @@ ul.featured li {
     float: right;
     padding: 5px;
     width: 112px;
-    border: 1px solid black;
+    border: 1px solid #eaeaea;
 }
 
 .recent_text {
