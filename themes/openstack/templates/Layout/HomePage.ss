@@ -16,7 +16,11 @@
                     <% end_if %>
                 </div>
             </div>
-            <% if PromoHeroCredit %>
+            <% if PromoHeroCredit && PromoHeroCreditUrl %>
+            <div class="hero-credit" data-toggle="tooltip" data-placement="left" title="{$PromoHeroCredit}">
+                <a href="{$PromoHeroCreditUrl}" target="_blank"><i class="fa fa-info-circle"></i></a>
+            </div>
+            <% else_if PromoHeroCredit %>
             <div class="hero-credit" data-toggle="tooltip" data-placement="left" title="{$PromoHeroCredit}"><i class="fa fa-info-circle"></i></div>
             <% end_if %>
         </div>
