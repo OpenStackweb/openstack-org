@@ -66,6 +66,7 @@
                         </div>
                         <div class="recentSummary">$HTMLSummary</div>
                     </div>
+                    <div style="clear:both"></div>
                 </div>
             <% end_loop %>
         </div>
