@@ -280,8 +280,12 @@ ul.featured li {
 }
 
 .recent_image {
-    float: left;
     margin-right: 10px;
+    float: left;
+    width: 100px;
+}
+
+.recent_text {
 }
 
 .itemTimeStamp {
