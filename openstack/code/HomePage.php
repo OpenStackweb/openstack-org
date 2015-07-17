@@ -28,6 +28,7 @@ class HomePage extends Page
         'PromoButtonUrl' => 'Text',
         "PromoDatesText" => 'Text',
         "PromoHeroCredit" => 'Text',
+        "PromoHeroCreditUrl" => 'Text',
         "SummitMode" => 'Boolean',
         "NextPresentationStartTime" => 'HTMLText',
         "NextPresentationStartDate" => 'Text',
@@ -80,6 +81,7 @@ class HomePage extends Page
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoButtonUrl', 'Promo Button Url'));
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoDatesText', 'Promo Dates Text'));
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCredit', 'Hero Credit'));
+        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCreditUrl', 'Hero Credit Url'));
         return $fields;
     }
 
@@ -115,11 +117,17 @@ class HomePage extends Page
         return !empty($value)? $value : self::PromoHeroCreditDefault;
     }
 
+    public function getPromoHeroCreditUrl(){
+        $value = $this->getField('PromoHeroCreditUrl');
+        return !empty($value)? $value : self::PromoHeroCreditUrlDefault;
+    }
+
     const PromoIntroMessageDefault = '"OpenStack has a true community around it."';
     const PromoButtonTextDefault   = 'See how @WalmartLabs puts 100,000 cores to work';
     const PromoButtonUrlDefault = 'http://awe.sm/jM31y';
     const PromoDatesTextDefault = '...we plan to contribute aggressively to the open source community.';
     const PromoHeroCreditDefault = 'Photo by Claire Massey';
+    const PromoHeroCreditUrlDefault = 'https://www.flickr.com/groups/1574695@N22/';
 }
 
 class HomePage_Controller extends Page_Controller

@@ -1313,6 +1313,9 @@ a.gs-title, a.gs-title b {
 .hero-credit:hover {
   opacity: 1; }
 
+.hero-credit a, .hero-credit a:hover {
+    color: #fff; }
+
 /*Hero Promo, add .featured to .intro-header*/
 .intro-header.featured {
   text-align: center;
