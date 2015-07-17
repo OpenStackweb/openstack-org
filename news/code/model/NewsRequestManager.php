@@ -219,14 +219,36 @@ final class NewsRequestManager {
         return $this->tx_manager->transaction(function() use($repository){
             $expired_news = $repository->getExpiredNews();
 
-            foreach ($expired_news as $article) {
-                $article->registerSection('archive');
+            if ($expired_news) {
+                foreach ($expired_news as $article) {
+                    $article->registerSection('archive');
+                }
+
+                $this->reorderArticles('recent',$repository);
+                $this->reorderArticles('slider',$repository);
+                $this->reorderArticles('featured',$repository);
             }
+        });
+    }
 
-            $this->reorderArticles('recent',$repository);
-            $this->reorderArticles('slider',$repository);
-            $this->reorderArticles('featured',$repository);
+    /**
+     * Archive articles after 30 days live.
+     */
+    public function archiveOld(){
+        $repository           = $this->news_repository ;
 
+        return $this->tx_manager->transaction(function() use($repository){
+            $old_news = $repository->getOldNews();
+
+            if ($old_news) {
+                foreach ($old_news as $article) {
+                    $article->registerSection('archive');
+                }
+
+                $this->reorderArticles('recent',$repository);
+                $this->reorderArticles('slider',$repository);
+                $this->reorderArticles('featured',$repository);
+            }
         });
     }
 
@@ -239,12 +261,14 @@ final class NewsRequestManager {
         return $this->tx_manager->transaction(function() use($repository){
             $activate_news = $repository->getNewsToActivate();
 
-            foreach ($activate_news as $article) {
-                $article->registerSection('recent');
-                $article->registerRank(1);
-            }
+            if ($activate_news) {
+                foreach ($activate_news as $article) {
+                    $article->registerSection('recent');
+                    $article->registerRank(1);
+                }
 
-            $this->reorderArticles('recent',$repository);
+                $this->reorderArticles('recent',$repository);
+            }
         });
     }
 

@@ -255,6 +255,16 @@ final class News extends DataObject implements INews {
         }
     }
 
+    public function getImageThumb() {
+        if ($this->Image->exists()) {
+            $thumb = $this->Image->SetWidth(100);
+            if($thumb) {
+                $image_html = '<div class="recent_image">'.$thumb->getTag().'</div>';
+                return $image_html;
+            }
+        }
+    }
+
     public function formattedDate() {
         return date('M jS Y',strtotime($this->Date));
     }

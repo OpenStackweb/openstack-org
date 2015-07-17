@@ -48,6 +48,18 @@ final class SapphireNewsRepository extends SapphireRepository {
         return $list;
     }
 
+    /**
+     * @return INews[]
+     */
+    public function getOldNews()
+    {
+        $thirty_days_ago = date('Y-m-d H:i:s',strtotime('-30 days'));
+        $query = new QueryObject(new News);
+        $query->addAndCondition(QueryCriteria::lower('Created',$thirty_days_ago));
+        list($list,$count) = $this->getAll($query,0,1000);
+        return $list;
+    }
+
     public function getArchivedNews($offset = 0, $limit = 1000, $searchTerm)
     {
         if (isset($searchTerm) && trim($searchTerm)!=='') {

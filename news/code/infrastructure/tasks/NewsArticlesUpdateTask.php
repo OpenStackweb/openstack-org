@@ -32,6 +32,7 @@ final class NewsArticlesUpdateTask extends CronTask {
 
             $manager->activateNews();
             $manager->removeExpired();
+            $manager->archiveOld();
 
 			return 'OK';
 		}

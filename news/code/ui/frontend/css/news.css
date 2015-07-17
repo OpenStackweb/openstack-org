@@ -280,6 +280,11 @@ ul.featured li {
     margin-bottom: 30px
 }
 
+.recent_image {
+    float: left;
+    margin-right: 10px;
+}
+
 .itemTimeStamp {
     font-size: 12px;
     color: #999;
