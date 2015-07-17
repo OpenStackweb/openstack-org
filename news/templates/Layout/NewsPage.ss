@@ -59,12 +59,14 @@
             <h2>OpenStack Community News</h2>
             <% loop RecentNews %>
                 <div class="recentBox">
-                    <div class="recentHeadline">
-                        <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
+                    $ImageThumb
+                    <div class="recent_text">
+                        <div class="recentHeadline">
+                            <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
+                        </div>
+                        <div class="recentSummary">$HTMLSummary</div>
                     </div>
-                    <div class="recentSummary">$HTMLSummary</div>
                 </div>
-
             <% end_loop %>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
