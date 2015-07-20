@@ -230,3 +230,47 @@ a.releaseButton:active {
     background-size: cover;
     position: relative;
 }
+
+
+
+
+.automotive a {
+    display: block;
+    background: #b9301d;
+    padding: 10px 20px;
+    border-radius: 2px;
+    width: 80%;
+    margin: 10px auto 0;
+    color: #fff!important;
+    font-weight: 600;
+    font-size: 150%
+}
+
+.automotive .largeQuote {
+    margin-top: 140px;
+    color: white;
+    font-size: 300%;
+}
+
+.automotive a {
+    text-decoration: none;
+    background: #B73124;
+    color: white;
+    max-width: 300px;
+}
+
+.automotive a:hover {
+    text-decoration: none;
+    background: #831917;      
+    color: white;
+    max-width: 300px;
+}
+
+
+.automotive {
+    text-align: center;
+    color: #f8f8f8;
+    background: url('/themes/openstack/images/landing-pages/auto/hero-bkgd.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
