@@ -24,7 +24,11 @@ final class ConsultantSapphireRender
 
     public function draw()
     {
-
+        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
         Requirements::css("marketplace/code/ui/frontend/css/marketplace.css");
         Requirements::javascript("marketplace/code/ui/frontend/js/consultant.page.js");
 

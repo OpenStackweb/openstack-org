@@ -54,5 +54,5 @@
     </script>
 </div>
 <% else %>
-    <p>You are not allowed to administer Consultans.</p>
+    <p>You are not allowed to administer Consultants.</p>
 <% end_if %>

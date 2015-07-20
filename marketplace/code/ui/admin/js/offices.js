@@ -253,6 +253,8 @@
                     .addClass('office-country-select')
                     .addClass('countries-ddl');
                 var option_val = arg.context.country;
+
+                select.find(":selected").removeAttr("selected");
                 select.find("option[value="+option_val+"]").attr("selected","selected");
                 return select[0].outerHTML;
             }
