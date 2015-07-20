@@ -148,14 +148,14 @@ a.releaseButton:active {
     text-decoration: none;
     background: #B73124;
     color: white;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 .virtualization a:hover {
     text-decoration: none;
     background: #831917;      
     color: white;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 
@@ -180,7 +180,6 @@ a.releaseButton:active {
     text-decoration: none;
     background: #B73124;
     color: white;
-    max-width: 200px;
     text-align: center;
 }
 
@@ -188,7 +187,6 @@ a.releaseButton:active {
     text-decoration: none;
     background: #831917;
     color: white;
-    max-width: 200px;
 }
 
 
@@ -214,14 +212,14 @@ a.releaseButton:active {
     text-decoration: none;
     background: #B73124;
     color: white;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 .workload a:hover {
     text-decoration: none;
     background: #831917;      
     color: white;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 
