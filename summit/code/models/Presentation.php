@@ -4,30 +4,30 @@
 class Presentation extends DataObject
 {
 
-	/**
-	 * Defines the phase that a presentation has been created, but
-	 * no information has been saved to it.
-	 */
-	const PHASE_NEW = 0;
+    /**
+     * Defines the phase that a presentation has been created, but
+     * no information has been saved to it.
+     */
+    const PHASE_NEW = 0;
 
 
-	/**
-	 * Defines the phase where a presenation has been given a summary,
-	 * but no speakers have been added
-	 */
-	const PHASE_SUMMARY = 1;
+    /**
+     * Defines the phase where a presenation has been given a summary,
+     * but no speakers have been added
+     */
+    const PHASE_SUMMARY = 1;
 
 
-	/**
-	 * Deinfes a phase where a presentation has a summary and speakers
-	 */
-	const PHASE_SPEAKERS = 2;
+    /**
+     * Deinfes a phase where a presentation has a summary and speakers
+     */
+    const PHASE_SPEAKERS = 2;
 
 
-	/**
-	 * Defines a phase where a presentation has been submitted successfully
-	 */
-	const PHASE_COMPLETE = 3;
+    /**
+     * Defines a phase where a presentation has been submitted successfully
+     */
+    const PHASE_COMPLETE = 3;
 
 
     private static $db = array (
@@ -38,12 +38,13 @@ class Presentation extends DataObject
         'Description' => 'HTMLText',
         'ShortDescription' => 'HTMLText',
         'Progress' => 'Int',
-        'Views' => 'Int'
+        'Views' => 'Int'        
     );
 
 
     private static $has_many = array (
         'Votes' => 'PresentationVote',
+        'Comments' => 'SummitPresentationComment'
     );
 
 
@@ -82,7 +83,7 @@ class Presentation extends DataObject
                 ->configure()
                     ->setMultiple(true)
                 ->end()
-            ->tag('Tags', 'Tags', Tag::get(), $this->Tags() )
+            ->tag('Tags', 'Tags', null, 'Presentation')
             ->text('OtherTopic','Other topic')
             ->htmlEditor('Description')
             ->htmlEditor('ShortDescription')
@@ -179,6 +180,23 @@ class Presentation extends DataObject
                 Member::currentUserID() == $this->CreatorID;
     }
 
+    /**
+     * Determines if a track chair can assign this presentation to a seleciton list
+     *
+     * @return boolean
+     */
+    public function canAssign($member = null) {
+
+        return true;
+
+        // see if they have either of the appropiate permissions
+        if(!(Permission::check('TRACK-CHAIR') || Permission::check('ADMIN'))) return false;
+
+        // see if they are a chair of this particular track
+        $IsTrackChair = $this->Category()->TrackChairs('MemberID = '.Member::currentUser()->ID);
+        if ($IsTrackChair->Count() != 0) return TRUE;
+
+    }
 
     /**
      * Determines if the user can create a presentation
@@ -191,7 +209,7 @@ class Presentation extends DataObject
 
 
     /**
-     * Determines if the user can create a presentation
+     * Determines if the user can delete a presentation
      *
      * @return  boolean
      */
@@ -239,11 +257,67 @@ class Presentation extends DataObject
      * Determines if the presentation is "new." Since presentations are
      * optimistically written to the database, a simple isInDB() check
      * is not sufficient
-     * 	
+     *  
      * @return boolean
      */
     public function isNew() {
-    	return $this->Progress == self::PHASE_NEW;
+        return $this->Progress == self::PHASE_NEW;
     }
+
+    /**
+     * Used by the track chair app to allow comments on presentations.
+     * Comments are only displayed in the track chair interface.
+     **/
+
+    public function addComment($commentBody, $MemberID) {
+        $comment = new SummitPresentationComment();
+        $comment->Body = $commentBody;
+        $comment->CommenterID = $MemberID;
+        $comment->PresentationID = $this->ID;
+        $comment->write();
+    }
+
+    /**
+     * Used by the track chair app to allow chairs to add a presentation to a personal list.
+     **/
+
+    public function assignToIndividualList() {
+
+
+        // Check permissions of user on talk
+        if ($this->CanAssign()) {
+
+            $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
+
+            // See if the presentation has already been assigned
+            $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID);
+
+            if ($AlreadyAssigned->count() == 0) {
+                $SelectedPresentation = new SummitSelectedPresentation();
+                $SelectedPresentation->SummitSelectedPresentationListID = $MySelections->ID;
+                $SelectedPresentation->PresentationID = $this->ID;
+                $SelectedPresentation->MemberID = Member::currentUser()->ID;
+                $SelectedPresentation->write();
+            }
+        }
+    }
+
+    /**
+     * Used by the track chair app see if the presentaiton has been selected by currently logged in member.
+     **/
+
+    public function isSelected() {
+
+        $memID = Member::currentUserID();
+
+        // return "PresentationID = {$this->ID} and MemberID = {$memID}";
+
+        $selected = SummitSelectedPresentation::get()
+            ->where("PresentationID={$this->ID} and MemberID={$memID}");
+
+        if ($selected->count()) return true;
+
+    }
+
 
 }

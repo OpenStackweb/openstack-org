@@ -50,6 +50,8 @@ var Detail = React.createClass({displayName: 'Detail',
 
 		pres = this.props.store.activePresentation.getValue();
 
+		console.log("pres object", pres);
+
 		votingBar = (
             <HotkeyBar onChange={this._handleVote} selection={pres.user_vote}>
             	<HotkeyButton hotkeys={[51,99]} hotkeyDescription={3} val={3}>Would Love to See!</HotkeyButton>
@@ -66,8 +68,19 @@ var Detail = React.createClass({displayName: 'Detail',
             All Submissions
           </a>
           <div className="voting-content-body">
-            <h5>Cast Your Vote</h5>
-            {votingBar}
+            {pres.can_vote && 
+            	<div>
+		            <h5>Cast Your Vote</h5>
+		            {votingBar}
+	            </div>
+        	}
+        	{!pres.can_vote &&
+        		<div style={{clear:'both'}} className="vote-login">
+        			<h5>Cast Your Vote</h5>
+        			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
+        			<a href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a> | <a href="#">Sign up now</a>
+        		</div>
+        	}
             <div className="voting-presentation-title">
               <h5>Title</h5>
               <h3>{pres.title}</h3>
@@ -90,11 +103,9 @@ var Detail = React.createClass({displayName: 'Detail',
                   );
                 })}
                 </ul>
-              </div>
-              <div className="abstract">        
-              <h5 className="abstract">Abstract</h5>           
-              	<div dangerouslySetInnerHTML={{__html: pres.short_description}} />
-              </div>
+              </div>              
+              <h5>Abstract</h5>              
+              <div dangerouslySetInnerHTML={{__html: pres.short_description}} />
               <div className="main-speaker-wrapper">
               {pres.speakers && pres.speakers.map(function (speaker) {
               	return (
@@ -116,8 +127,19 @@ var Detail = React.createClass({displayName: 'Detail',
               })}
               </div>
             </div>
-            <h5>Cast Your Vote</h5>
-            {votingBar}
+            {pres.can_vote && 
+            	<div>
+		            <h5>Cast Your Vote</h5>
+		            {votingBar}
+	            </div>
+        	}
+        	{!pres.can_vote &&
+        		<div style={{clear:'both'}} className="vote-login">
+        			<h5>Cast Your Vote</h5>
+        			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
+        			<a href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a> | <a href="#">Sign up now</a>
+        		</div>
+        	}
             <div className="voting-tip">
               <strong>
                 {"TIP: "}

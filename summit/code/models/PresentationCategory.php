@@ -11,17 +11,17 @@ class PresentationCategory extends DataObject
 		'AlternateCount' => 'Int'
 	);
 
-
 	private static $has_one = array (
-		'Summit' => 'Summit',
-		'TrackChair' => 'Member'
+		'Summit' => 'Summit'
 	);
 
+    private static $belongs_many_many = array (
+    	'TrackChairs' => 'SummitTrackChair',
+    );	
 
 	private static $summary_fields = array (
 		'Title' => 'Title'
 	);
-
 
 	private static $searchable_fields = array (
 		'Title'
