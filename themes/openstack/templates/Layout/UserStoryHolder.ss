@@ -11,6 +11,10 @@
 <div class='case-studies-hero'>
 	<div class='container'>
 		<ul class='rotator_new rotator'>
+		<li data-label = 'Automotive' class = 'automotive'>
+			<p class='largeQuote'>Top 10 Automaker Turning Customer Insights Into Action with OpenStack</p>
+			<a href="/enterprise/auto/">Read The Case Study</a>
+		</li>
 		<li data-label = 'Virtualization integration' class = 'virtualization'>
 			<p class='largeQuote'>Modernizing Virtualized Infrastructures with the OpenStack Cloud Management Platform</p>
 			<a href="/enterprise/virtualization-integration/">Read The Case Study</a>
