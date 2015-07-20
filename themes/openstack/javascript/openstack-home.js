@@ -11,7 +11,9 @@
  * limitations under the License.
  **/
 // Hero Credit Tooltip
-$('.hero-credit').tooltip()
+$(function() {
+    $('.hero-credit').tooltip();
+});
 
 // Customer Stories, this should be improved
 $(function() {
