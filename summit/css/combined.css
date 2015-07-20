@@ -946,7 +946,7 @@ footer {
   height: 100%;
   text-align: center;
   padding: 70px 0;
-  background: url('/summit/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
+  background: url('/assets/summits/overview/austin-bkgd-lrg.jpg') no-repeat right top;
   background-size: cover; }
 
 /*Tokyo Summit Landing Page*/
@@ -956,7 +956,7 @@ footer {
   height: 100%;
   text-align: center;
   padding: 70px 0;
-  background: url('/summit/images/austin/austin-bkgd-lrg.jpg') no-repeat right top;
+  background: url('/assets/summits/overview/austin-bkgd-lrg.jpg') no-repeat right top;
   background-size: cover; }
 
 img.tokyo-landing-logo {
