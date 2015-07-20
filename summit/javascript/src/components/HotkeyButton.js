@@ -13,7 +13,6 @@ var HotkeyButton = React.createClass({
 	},
 
 
-
 	componentDidMount: function() {
 		document.addEventListener('keyup', this._keyListener);
 	},

@@ -12,24 +12,28 @@ module.exports = React.createClass({displayName: 'VotingApp',
   componentWillMount: function () {
     this._registerErrorHandlers();
     Backend.getSummitData('active');
+
+    API.ping();
+
+    window.setInterval(API.ping, 30000);
   },
 
 
   _registerErrorHandlers: function () {
     API.registerErrorHandler('404', function (res) {
-      alert("404 error");
+      alert("404 Error: The presentation could not be found.");
     });
 
     API.registerErrorHandler('403', function (res) {
-      alert("It seems you might have been logged out. Try logging in again.");
+      alert("Access was denied. You may need to log in again.");
     })
 
     API.registerErrorHandler('TIMEOUT', function (res) {
-      alert("The application has timed out.");
+      alert("The applicaiton timed out waiting on a response from the server.");
     });
 
     API.registerErrorHandler('ERROR', function(res){
-      alert("An error was returned from the server.");
+      alert("An error has occured.");
     });
   },
 
@@ -52,7 +56,7 @@ module.exports = React.createClass({displayName: 'VotingApp',
                   <h1>
                     Vote For Presentations
                     <span className="subheading">
-                      Help us pick the presentations for The Tokyo Summit
+                      Help us pick the presentations for The Vancouver Summit
                     </span>
                   </h1>
                 </div>

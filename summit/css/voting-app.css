@@ -2640,6 +2640,10 @@ img.voting-speaker-pic {
   float: left;
   margin: 20px 0 40px; }
 
+.vote-login {
+  min-height: 8em;
+}  
+
 ul.voting-rate-wrapper {
   position: relative;
   float: left;
@@ -2650,7 +2654,9 @@ ul.voting-rate-wrapper {
   color: white;
   text-align: center;
   z-index: 1000;
-  font-size: 0; }
+  font-size: 0; 
+  min-height: 8em;
+}
 
 li.voting-rate-single {
   width: 25%;

@@ -67,23 +67,21 @@ class PresentationAPI extends Controller {
 
 		$presentations = Member::currentUser() ? 
 							Member::currentUser()->getRandomisedPresentations() : 
-							Summit::get_active()
-                        		->Presentations()
-                        		->filter('Status','Received')
-                        		->sort("RAND()");
-
+							Presentation::get()->filter(array(
+								'Presentation.SummitID' => Summit::get_active()->ID
+							));
+							
 		if($r->getVar('category')) {
 			$presentations = $presentations->filter('CategoryID',(int) $r->getVar('category'));
 		}
 		if($r->getVar('keyword')) {
-			$k = Convert::raw2sql($r->getVar('keyword'));
-			$presentations = $presentations->where
-			(	"Presentation.Title LIKE '%{$k}%' 
-				OR Description LIKE '%{$k}%' 
-				OR FirstName LIKE '%{$k}%' 
-				OR LastName LIKE '%{$k}%'"	)
-								->leftJoin("Presentation_Speakers", "Presentation_Speakers.PresentationID = Presentation.ID")
-								->leftJoin("PresentationSpeaker", "Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID");
+			$k = $r->getVar('keyword');
+			$presentations = $presentations->filterAny(array(
+				'Title:PartialMatch' => $k,
+				'Description:PartialMatch' => $k,
+				'Speakers.FirstName:PartialMatch' => $k,
+				'Speakers.LastName:PartialMatch' => $k
+			));
 		}
 		if($r->getVar('voted') == "true") {
 			$presentations = $presentations
@@ -121,10 +119,6 @@ class PresentationAPI extends Controller {
 
 
 	public function handleManagePresentation(SS_HTTPRequest $r) {
-
-		if(!Member::currentUser()) {
-			return $this->httpError(403);
-		}
 
 		if($presentation = Presentation::get()->byID($r->param('ID'))) {
 			$request = PresentationAPI_PresentationRequest::create($presentation, $this);
@@ -217,6 +211,7 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
         $data['average_vote'] = (int) $p->Votes()->avg('Vote');
         $data['creator'] = $p->Creator()->getName();
         $data['user_vote'] = $p->getUserVote() ? $p->getUserVote()->Vote : null;
+        $data['can_vote'] = !!Member::currentUser();
 
     	return (new SS_HTTPResponse(
     		Convert::array2json($data), 200
@@ -242,10 +237,6 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 
 
 	public function handleView(SS_HTTPRequest $r) {
-		if(!Member::currentUser()) {
-			return $this->httpError(403);
-		}
-
 		$this->presentation->Views++;
 		$this->presentation->write();
 		

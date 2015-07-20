@@ -11,10 +11,11 @@ var Route = Router.Route;
 var Routes = Router.Routes;
 var DefaultRoute = Router.DefaultRoute;
 var Cortex = require('./store/Cortex');
+var Config = window.VotingAppConfig;
 
 var routes = (	
-	<Route path="/summit/tokyo-2015/call-for-speakers" handler={VotingApp}>	    
-	      <Route name="home" path="vote" handler={Main}>
+	<Route path={Config.baseUrl} handler={VotingApp}>	    
+	      <Route name="home" path={Config.appPath} handler={Main}>
 	      	<DefaultRoute handler={DefaultDetail} />
 	      	<Route name="detail" path="show/:presentationID" handler={Detail} />    
 	      </Route>

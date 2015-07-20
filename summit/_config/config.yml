@@ -11,8 +11,10 @@ MemberTokenProvider:
 Director:
   rules:
     'presentations/api/v1': 'PresentationAPI'
+    'trackchairs/api/v1': 'TrackChairAPI'
     'presentations/authenticate': 'PresentationAPITokenGenerator'
     'summit-login': 'SummitSecurity'
+    'vote-for-speakers': 'VotingApp'    
 PresentationCategory:
   extensions:
     - JSONable
@@ -22,7 +24,13 @@ PresentationSpeaker:
 PresentationTopic:
   extensions:
     - JSONable
+SummitPresentationComment:
+  extensions:
+    - JSONable
 Summit:
+  extensions:
+    - JSONable
+SummitTrackChair:
   extensions:
     - JSONable
 Presentation:
