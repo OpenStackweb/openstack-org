@@ -912,47 +912,47 @@ SQL;
     {
         $params = $this->owner->getRequest()->getVars();
 
-        if (!isset($params['fields']) || empty($params['fields']) || !count($params['fields']))
-            return $this->owner->httpError('412', 'missing required param fields');
+        if (!isset($params['report_name']) || empty($params['report_name']) || !count($params['report_name']))
+            return $this->owner->httpError('412', 'missing required param report_name');
 
         if (!isset($params['extension']) || empty($params['extension']))
             return $this->owner->httpError('412', 'missing required param extension');
 
-        $extra_data = (isset($params['extra_data'])) ? $params['extra_data'] : '';
-        $fields = $params['fields'];
+        $report_name = (isset($params['report_name'])) ? $params['report_name'] : '';
+        $fields = (isset($params['fields'])) ? $params['fields'] : array();
         $ext = $params['extension'];
-        $company_fields = array();
-
-        for ($i = 0; $i < count($fields); $i++) {
-            array_push($company_fields, 'Company.' . $fields[$i]);
-        }
 
         $query = new SQLQuery();
 
-        if($extra_data) {
-            switch($extra_data) {
+        if($report_name) {
+            switch($report_name) {
                 case 'sponsorship_type' :
                     $query->setFrom('Company');
                     $query->addLeftJoin('SummitSponsorPage_Companies', 'SummitSponsorPage_Companies.CompanyID = Company.ID');
-                    array_push($company_fields, 'SummitSponsorPage_Companies.SponsorshipType');
-                    $query->setSelect($company_fields);
+                    $query->addLeftJoin('Summit', 'Summit.ID = SummitSponsorPage_Companies.SummitID');
+                    $query->addWhere('Summit.Active','1');
+                    $fields = array_merge($fields,array('Sponsorship'=>'SummitSponsorPage_Companies.SponsorshipType','Summit ID'=>'Summit.ID'));
+
+                    $query->setSelect($fields);
+                    $query->addOrderBy('SummitSponsorPage_Companies.SponsorshipType');
 
                     $filename = "Sponsorship_Levels_" . date('Ymd') . "." . $ext;
                     break;
                 case 'member_level' :
                     $query->setFrom('Company');
-                    array_push($company_fields, 'Company.MemberLevel');
-                    $query->setSelect($company_fields);
+                    array_push($fields, 'Company.MemberLevel');
+                    $query->setSelect($fields);
 
                     $filename = "Foundation_Levels_" . date('Ymd') . "." . $ext;
                     break;
                 case 'users_roles' :
                     $query->setFrom('Company');
-                    $query->addLeftJoin('Company_Administrators', 'Company_Administrators.CompanyID = Company.ID');
+                    $query->addInnerJoin('Company_Administrators', 'Company_Administrators.CompanyID = Company.ID');
                     $query->addLeftJoin('Member', 'Member.ID = Company_Administrators.MemberID');
                     $query->addLeftJoin('Group', 'Group.ID = Company_Administrators.GroupID');
-                    $company_fields = array_merge($company_fields, array('Member.FirstName','Member.Surname','Member.Email','Group.Title'));
-                    $query->setSelect($company_fields);
+                    array_push($fields, 'Group.Title');
+                    $query->setSelect($fields);
+                    $query->addOrderBy('Company.Name');
 
                     $filename = "User_Roles_" . date('Ymd') . "." . $ext;
                     break;
@@ -960,29 +960,21 @@ SQL;
                     $query->setFrom('Org');
                     $query->addLeftJoin('Affiliation', 'Affiliation.OrganizationID = Org.ID');
                     $query->addLeftJoin('Member', 'Member.ID = Affiliation.MemberID');
-                    $query->selectField('Org.ID','Org Id');
-                    $query->selectField('Org.Name','Organization');
-                    $query->selectField('Member.ID','Member Id');
-                    $query->selectField('Member.FirstName','Member Name');
-                    $query->selectField('Member.Surname','Member Surname');
-                    $query->selectField('Affiliation.Current','Is Current');
-                    $query->selectField('Affiliation.JobTitle','Job Title');
-
-                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Member Id'=>'Member.ID',
-                        'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname',
-                        'Is Current'=>'Affiliation.Current','Job Title'=>'Affiliation.JobTitle');
-                    $query->setSelect($org_fields);
+                    $fields = array_merge($fields,array('Is Current'=>'Affiliation.Current','Job Title'=>'Affiliation.JobTitle'));
+                    $query->setSelect($fields);
+                    $query->addOrderBy('Org.Name');
 
                     $filename = "Employees_Affiliates_" . date('Ymd') . "." . $ext;
                     break;
                 case 'deployments' :
                     $query->setFrom('Org');
-                    $query->addLeftJoin('Deployment', 'Deployment.OrgID = Org.ID');
-
-                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Creation'=>'Deployment.Created',
-                        'Edited'=>'Deployment.LastEdited','Label'=>'Deployment.Label','Is Public'=>'Deployment.IsPublic');
-                    $query->setSelect($org_fields);
+                    $query->addInnerJoin('Deployment', 'Deployment.OrgID = Org.ID');
+                    $custom_fields = array('Creation'=>'Deployment.Created','Edited'=>'Deployment.LastEdited',
+                                           'Label'=>'Deployment.Label','Is Public'=>'Deployment.IsPublic');
+                    $fields = array_merge($fields,$custom_fields);
+                    $query->setSelect($fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/DeploymentDetails/',Deployment.ID)","Link");
+                    $query->addOrderBy('Org.Name');
 
                     $filename = "Deployments_" . date('Ymd') . "." . $ext;
                     break;
@@ -990,14 +982,24 @@ SQL;
                     $query->setFrom('Org');
                     $query->addLeftJoin('DeploymentSurvey', 'DeploymentSurvey.OrgID = Org.ID');
                     $query->addLeftJoin('Member', 'DeploymentSurvey.MemberID = Member.ID');
-                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Creation'=>'DeploymentSurvey.Created',
-                                        'Edited'=>'DeploymentSurvey.LastEdited','Title'=>'DeploymentSurvey.Title',
-                                        'City'=>'DeploymentSurvey.PrimaryCity','State'=>'DeploymentSurvey.PrimaryState',
-                                        'Country'=>'DeploymentSurvey.PrimaryCountry','Org Size'=>'DeploymentSurvey.OrgSize',
-                                        'Is Group Member'=>'DeploymentSurvey.UserGroupMember','Group Name'=>'DeploymentSurvey.UserGroupName',
-                                        'Ok to Contact'=>'DeploymentSurvey.OkToContact','Member Id'=>'Member.ID',
-                                        'Member Name'=>'Member.FirstName','Member Surname'=>'Member.Surname');
-                    $query->setSelect($org_fields);
+                    $custom_fields = array('Creation'=>'DeploymentSurvey.Created','Edited'=>'DeploymentSurvey.LastEdited',
+                                        'Title'=>'DeploymentSurvey.Title','City'=>'DeploymentSurvey.PrimaryCity',
+                                        'State'=>'DeploymentSurvey.PrimaryState','Country'=>'DeploymentSurvey.PrimaryCountry',
+                                        'Org Size'=>'DeploymentSurvey.OrgSize','Is Group Member'=>'DeploymentSurvey.UserGroupMember',
+                                        'Group Name'=>'DeploymentSurvey.UserGroupName','Ok to Contact'=>'DeploymentSurvey.OkToContact');
+
+                    //insert custom fields after org fields
+                    $pos = -1;
+                    foreach ($fields as $field) {
+                        $pos++;
+                        if (strpos($field,'Org') !== false) continue;
+                        else {
+                            array_splice($fields,$pos,0,$custom_fields);
+                            break;
+                        }
+                    }
+
+                    $query->setSelect($fields);
                     $query->selectField("CONCAT('http://openstack.org/sangria/SurveyDetails/',DeploymentSurvey.ID)","Link");
 
                     $filename = "Deployment_Surveys" . date('Ymd') . "." . $ext;
@@ -1007,9 +1009,10 @@ SQL;
                     $query->addLeftJoin('Affiliation', 'Affiliation.MemberID = PresentationSpeaker.MemberID');
                     $query->addLeftJoin('Org', 'Affiliation.OrganizationID = Org.ID');
                     $query->addLeftJoin('Summit', 'Summit.ID = PresentationSpeaker.SummitID');
-                    $org_fields = array('Org Id'=>'Org.ID','Organization'=>'Org.Name','Speaker Name'=>'PresentationSpeaker.FirstName',
+                    $custom_fields = array('Speaker Name'=>'PresentationSpeaker.FirstName',
                                         'Speaker Surname'=>'PresentationSpeaker.LastName','Summit'=>'Summit.Name');
-                    $query->setSelect($org_fields);
+                    $fields = array_merge($fields,$custom_fields);
+                    $query->setSelect($fields);
 
                     $filename = "Speakers_" . date('Ymd') . "." . $ext;
                     break;

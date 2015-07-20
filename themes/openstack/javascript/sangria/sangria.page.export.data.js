@@ -226,4 +226,26 @@ jQuery(document).ready(function($){
             return false;
         }
     });
+
+    // Export Company Data
+    $('.company_report').change(function(){
+        $('input','.cb_field').removeAttr('checked');
+        $('.cb_field').hide();
+
+        if ($.inArray($(this).val(),['sponsorship_type','member_level','users_roles']) !== -1) {
+            $('input','.company').prop('checked',true);
+            $('.company').show();
+        }
+
+        if ($.inArray($(this).val(),['affiliates','deployments','deployment_surveys','speakers']) !== -1) {
+            $('input','.org').prop('checked',true);
+            $('.org').show();
+        }
+
+        if ($.inArray($(this).val(),['users_roles','affiliates','deployment_surveys']) !== -1) {
+            $('input','.member').prop('checked',true);
+            $('.member').show();
+        }
+
+    });
 });
