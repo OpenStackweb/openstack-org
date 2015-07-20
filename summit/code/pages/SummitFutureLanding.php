@@ -4,11 +4,11 @@
    Splash page for future summits
 */
 
-class SummitFutureLanding extends Page {
+class SummitFutureLanding extends SummitPage {
 
 }
 
 
-class SummitFutureLanding_Controller extends Page_Controller {
+class SummitFutureLanding_Controller extends SummitPage_Controller {
 
 }
