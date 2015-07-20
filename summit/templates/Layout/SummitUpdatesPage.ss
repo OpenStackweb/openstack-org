@@ -93,7 +93,7 @@
 	<p>
 		<a href="/summit/tokyo-2015/tokyo-and-travel/" class="btn orange-btn">More About The Host City</a>
 	</p>
-	<a href="https://flic.kr/p/adaKoH" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Magnus Larsson" target="_blank"><i class="fa fa-info-circle"></i></a>
+	<a href="/assets/summits/locations/tokyo-venue-bkgd.jpg" class="photo-credit" target="_blank"></a>
 </div>
 
     <!-- Pass Modal -->
