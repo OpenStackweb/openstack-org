@@ -6,7 +6,7 @@
         <h1>Details & Updates</h1>
 			
 			<div class="col-lg-6 col-md-6 col-sm-6 timeline-wrapper">
-            <div class="section dates-section">
+            		<div class="section dates-section">
 					<h5 class="section-title">Dates &amp; Events</h5>
 					<p>Over the week of October 27 to October 30, two events happened together: </p>
 					<div>
@@ -30,12 +30,23 @@
 					</ul>
 				</div>
 				<% end_if %>
+				
+				<div class="section">
+					<h5 class="section-title">Summit Timeline</h5>
+					<p>
+						Soon you will be able to purchase the Full Access Pass for the Tokyo Summit, giving you access to every speaker and activity.
+					</p>
+					<p>
+						<a href="#" data-toggle="modal" data-target="#passModal">
+							<img class="pass-timeline" src="http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/images/2cc1307702c5a6a166f21e85333d7b27e640a3ee/tokyo-pass-timeline.svg" onerror="this.onerror=null; this.src=http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/images/4abaa28e852f01a6e85ea47a214ad51ad953a0f9/tokyo-pass-timeline.png" alt="Tokyo Summit Pass Timeline">
+						</a>
+					</p>
+				</div>
 				<div class="section">
 					<h5 class="section-title">Code of Conduct</h5>
 					Please review the <a href="{$Parent.Link}code-of-conduct">OpenStack Code of Conduct</a>, which applies to all events and community forums, including the OpenStack Summit.
 				</div>
 			</div>
-			
 
 			<div class="col-lg-6 col-md-6 col-sm-6">
 				<h5 class="section-title">Summit News & Updates</h5>
