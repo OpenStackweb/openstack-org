@@ -2566,6 +2566,12 @@ a.voting-btn {
   padding: 0; 
   max-width: 100%;
 }
+
+.voting-abstract {
+  margin-top: 20px;
+}
+
+
   .voting-speaker-row ul {
     margin: 0;
     padding: 0;

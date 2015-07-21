@@ -15,7 +15,7 @@ var Config = window.VotingAppConfig;
 
 var routes = (	
 	<Route path={Config.baseUrl} handler={VotingApp}>	    
-	      <Route name="home" path={Config.appPath} handler={Main}>
+	      <Route name="home" path={Config.appPath + '/?'} handler={Main}>
 	      	<DefaultRoute handler={DefaultDetail} />
 	      	<Route name="detail" path="show/:presentationID" handler={Detail} />    
 	      </Route>
