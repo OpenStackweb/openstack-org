@@ -26653,7 +26653,7 @@
 	          '  ',
 	          React.createElement(
 	            'a',
-	            { href: '/summit/tokyo-2015/call-for-speakers/?backURL=/call-for-speakers/', className: 'btn btn-default' },
+	            { href: '/summit-login/login?BackURL=/vote-for-speakers/', className: 'btn btn-default' },
 	            'Sign up now'
 	          )
 	        ),
@@ -26768,7 +26768,7 @@
 	          '  ',
 	          React.createElement(
 	            'a',
-	            { href: '/summit/tokyo-2015/call-for-speakers/?backURL=/vote-for-speakers/', className: 'btn btn-default' },
+	            { href: '/summit-login/login?BackURL=/vote-for-speakers/', className: 'btn btn-default' },
 	            'Sign up now'
 	          )
 	        ),
