@@ -77,7 +77,7 @@ var Detail = React.createClass({displayName: 'Detail',
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
         			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
-        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/summit-login/login?BackURL=/vote-for-speakers/show/" + pres.id className="btn btn-default">Sign up now</a>
+        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href={ "/summit-login/login?BackURL=/vote-for-speakers/show/" + pres.id } className="btn btn-default">Sign up now</a>
         		</div>
         	}
             <div className="voting-presentation-title">
@@ -137,20 +137,17 @@ var Detail = React.createClass({displayName: 'Detail',
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
         			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
-        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/summit-login/login?BackURL=/vote-for-speakers/show/" + pres.id className="btn btn-default">Sign up now</a>
+        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href={ "/summit-login/login?BackURL=/vote-for-speakers/show/" + pres.id } className="btn btn-default">Sign up now</a>
         		</div>
         	}
-            <div className="voting-tip">
-              <strong>
-                {"TIP: "}
-              </strong>
-              You can vote quickly with your keyboard using the numbers below each option.
-            </div>
             <div className="voting-share-wrapper">
               <h5>
                 Share This Presentation
               </h5>
-              
+              	<a className="btn btn-default" href={ "https://www.facebook.com/sharer/sharer.php?u=http://www.openstack.org/vote-for-speakers/show/" + pres.id }>facebook</a> &nbsp;
+              	<a className="btn btn-default" href={ "https://twitter.com/intent/tweet?&url=http://www.openstack.org/vote-for-speakers/show/" + pres.id }>Twitter</a> &nbsp;
+              	<a className="btn btn-default" href={ "https://www.linkedin.com/cws/share?url=http://www.openstack.org/vote-for-speakers/show/" + pres.id }>LinkedIn</a> &nbsp;
+
              </div>
           </div>
         </div>
