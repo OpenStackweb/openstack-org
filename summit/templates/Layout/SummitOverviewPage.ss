@@ -142,6 +142,9 @@
         </div>
     </div>
 </div>
+
+<% if $GrowthBoxTextTop || $GrowthBoxTextBottom || $BoxChartLegendImageUrl || $BoxChartLegendImagePngUrl %>
+
 <div class="growth"
      style="background: rgba(0, 0, 0, 0) url('{$BoxChartBackgroundImageUrl}') no-repeat scroll center center / cover;">
     <div class="container">
@@ -171,6 +174,9 @@
         </div>
     </div>
 </div>
+
+<% end_if %>
+
 <div class="blue schedule-row">
     <div class="container">
         <div class="row">
