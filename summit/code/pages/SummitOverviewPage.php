@@ -161,8 +161,6 @@ class SummitOverviewPage extends SummitPage {
 
     public function getGrowthBoxTextTop(){
         $res = $this->getField('GrowthBoxTextTop');
-        if(empty($res))
-            return '<h2>Join The Movement</h2><p>In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Four years later, almost 5,000 attendees joined us in Paris for our second international summit and the first OpenStack Summit held in Europe.</p>';
         return $res;
     }
 
@@ -176,44 +174,27 @@ class SummitOverviewPage extends SummitPage {
 
     public function getGrowthBoxTextBottom(){
         $res = $this->getField('GrowthBoxTextBottom');
-        if(!empty($res))
-            return '<p>The OpenStack summit is a unique opportunity for the developers and users of OpenStack software to meet and exchange ideas. Hundreds of the core developers will be on site to discuss all things OpenStack. Summits include in-depth technical discussions, hands-on workshops, and the full presence of almost every player in the OpenStack Ecosystem. If you are deploying OpenStack—or considering how it can help your enterprise—there’s no better way to connect with the community than the OpenStack Summit.</p>';
         return $res;
     }
 
     public function BoxChartLegendImageUrl(){
-        if($this->GrowthBoxChartLegend()->exists()){
-            return $this->GrowthBoxChartLegend()->getURL();
-        }
-        return '/summit/images//line-growth-legend.svg';
+        return $this->GrowthBoxChartLegend()->exists() ? $this->GrowthBoxChartLegend()->getURL() : null;
     }
 
     public function BoxChartLegendImagePngUrl(){
-        if($this->GrowthBoxChartLegendPng()->exists()){
-            return $this->GrowthBoxChartLegendPng()->getURL();
-        }
-        return '/summit/images//line-growth-legend.png';
+        return $this->GrowthBoxChartLegendPng()->exists() ? $this->GrowthBoxChartLegendPng()->getURL() : null;
     }
 
     public function BoxChartImageUrl(){
-        if($this->GrowthBoxChart()->exists()){
-            return $this->GrowthBoxChart()->getURL();
-        }
-        return '/summit/images/line-growth-chart.svg';
+        return $this->GrowthBoxChart()->exists() ?  $this->GrowthBoxChart()->getURL() : null;
     }
 
     public function BoxChartImagePngUrl(){
-        if($this->GrowthBoxChartPng()->exists()){
-            return $this->GrowthBoxChartPng()->getURL();
-        }
-        return '/summit/images/line-growth-chart.png';
+        return $this->GrowthBoxChartPng()->exists() ? $this->GrowthBoxChartPng()->getURL() : null;
     }
 
     public function BoxChartBackgroundImageUrl(){
-        if($this->GrowthBoxBackground()->exists()){
-            return $this->GrowthBoxBackground()->getURL();
-        }
-        return '/summit/images/growth-bkgd.jpg';
+        return $this->GrowthBoxBackground()->exists() ? $this->GrowthBoxBackground()->getURL() : null;
     }
 
     public function getVideoRecapCaption(){
