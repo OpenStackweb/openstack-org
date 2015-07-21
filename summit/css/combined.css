@@ -2280,7 +2280,7 @@ ul.city-nav-list li {
   list-style: none;
   text-align: center;
   display: inline-block;
-  margin: 0 5%; }
+  margin: 0 2%; }
 
 @media (max-width: 767px) {
   ul.city-nav-list li {
