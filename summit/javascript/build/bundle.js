@@ -26551,249 +26551,257 @@
 
 	var Detail = React.createClass({ displayName: 'Detail',
 
-	  mixins: [Router.State],
+		mixins: [Router.State],
 
-	  _presentation: null,
+		_presentation: null,
 
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    this._selectPresentation();
-	  },
+		componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+			this._selectPresentation();
+		},
 
-	  componentWillMount: function componentWillMount() {
-	    this._selectPresentation();
-	  },
+		componentWillMount: function componentWillMount() {
+			this._selectPresentation();
+		},
 
-	  _selectPresentation: function _selectPresentation() {
-	    var presID = this.getParams().presentationID;
-	    var store = this.props.store;
+		_selectPresentation: function _selectPresentation() {
+			var presID = this.getParams().presentationID;
+			var store = this.props.store;
 
-	    if (!store.activePresentation.getValue() || presID != store.activePresentation.id.getValue()) {
-	      Backend.viewPresentation(presID);
-	      Backend.setPresentationActive(presID);
-	    }
-	  },
+			if (!store.activePresentation.getValue() || presID != store.activePresentation.id.getValue()) {
+				Backend.viewPresentation(presID);
+				Backend.setPresentationActive(presID);
+			}
+		},
 
-	  _handleVote: function _handleVote(vote) {
-	    Backend.setPresentationVote(this.props.store.activePresentation.id.getValue(), vote);
-	  },
+		_handleVote: function _handleVote(vote) {
+			Backend.setPresentationVote(this.props.store.activePresentation.id.getValue(), vote);
+		},
 
-	  render: function render() {
-	    var pres;
-	    var votingBar;
+		render: function render() {
+			var pres;
+			var votingBar;
 
-	    if (!this.props.store.activePresentation.getValue()) {
-	      return React.createElement(
-	        'div',
-	        { className: 'loading' },
-	        'Loading...'
-	      );
-	    }
+			if (!this.props.store.activePresentation.getValue()) {
+				return React.createElement(
+					'div',
+					{ className: 'loading' },
+					'Loading...'
+				);
+			}
 
-	    pres = this.props.store.activePresentation.getValue();
+			pres = this.props.store.activePresentation.getValue();
 
-	    console.log('pres object', pres);
+			console.log('pres object', pres);
 
-	    votingBar = React.createElement(
-	      HotkeyBar,
-	      { onChange: this._handleVote, selection: pres.user_vote },
-	      React.createElement(
-	        HotkeyButton,
-	        { hotkeys: [51, 99], hotkeyDescription: 3, val: 3 },
-	        'Would Love to See!'
-	      ),
-	      React.createElement(
-	        HotkeyButton,
-	        { hotkeys: [50, 98], hotkeyDescription: 2, val: 2 },
-	        'Would Try to See'
-	      ),
-	      React.createElement(
-	        HotkeyButton,
-	        { hotkeys: [49, 97], hotkeyDescription: 1, val: 1 },
-	        'Might See'
-	      ),
-	      React.createElement(
-	        HotkeyButton,
-	        { hotkeys: [48, 96], hotkeyDescription: 0, val: 0 },
-	        'Would Not See'
-	      )
-	    );
+			votingBar = React.createElement(
+				HotkeyBar,
+				{ onChange: this._handleVote, selection: pres.user_vote },
+				React.createElement(
+					HotkeyButton,
+					{ hotkeys: [51, 99], hotkeyDescription: 3, val: 3 },
+					'Would Love to See!'
+				),
+				React.createElement(
+					HotkeyButton,
+					{ hotkeys: [50, 98], hotkeyDescription: 2, val: 2 },
+					'Would Try to See'
+				),
+				React.createElement(
+					HotkeyButton,
+					{ hotkeys: [49, 97], hotkeyDescription: 1, val: 1 },
+					'Might See'
+				),
+				React.createElement(
+					HotkeyButton,
+					{ hotkeys: [48, 96], hotkeyDescription: 0, val: 0 },
+					'Would Not See'
+				)
+			);
 
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'a',
-	        { href: '#', className: 'voting-open-panel text' },
-	        React.createElement('i', { className: 'fa fa-chevron-left' }),
-	        'All Submissions'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'voting-content-body' },
-	        pres.can_vote && React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'h5',
-	            null,
-	            'Cast Your Vote'
-	          ),
-	          votingBar
-	        ),
-	        !pres.can_vote && React.createElement(
-	          'div',
-	          { style: { clear: 'both' }, className: 'vote-login' },
-	          'Think this presentation should be included in the Tokyo Summit? Login to vote.',
-	          React.createElement('br', null),
-	          React.createElement(
-	            'a',
-	            { className: 'btn btn-default', href: '/Security/login?BackURL=/vote-for-speakers/show/' + pres.id },
-	            'I already have an account'
-	          ),
-	          '  ',
-	          React.createElement(
-	            'a',
-	            { href: '/summit-login/login?BackURL=/vote-for-speakers/', className: 'btn btn-default' },
-	            'Sign up now'
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'voting-presentation-title' },
-	          React.createElement(
-	            'h5',
-	            null,
-	            'Title'
-	          ),
-	          React.createElement(
-	            'h3',
-	            null,
-	            pres.title
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'voting-presentation-body' },
-	          React.createElement(
-	            'h5',
-	            null,
-	            'Speakers'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'voting-speaker-row' },
-	            React.createElement(
-	              'ul',
-	              null,
-	              pres.speakers && pres.speakers.map(function (speaker) {
-	                return React.createElement(
-	                  'li',
-	                  { key: speaker.id },
-	                  React.createElement('img', { className: 'voting-speaker-pic', src: speaker.photo_url }),
-	                  React.createElement(
-	                    'div',
-	                    { className: 'voting-speaker-name' },
-	                    speaker.first_name + ' ' + speaker.last_name,
-	                    React.createElement(
-	                      'span',
-	                      null,
-	                      speaker.title
-	                    )
-	                  )
-	                );
-	              })
-	            )
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'voting-abstract' },
-	            React.createElement(
-	              'h5',
-	              null,
-	              'Abstract'
-	            ),
-	            React.createElement('div', { dangerouslySetInnerHTML: { __html: pres.short_description } })
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'main-speaker-wrapper' },
-	            pres.speakers && pres.speakers.map(function (speaker) {
-	              return React.createElement(
-	                'div',
-	                { key: speaker.id },
-	                React.createElement(
-	                  'div',
-	                  { className: 'main-speaker-row' },
-	                  React.createElement(
-	                    'div',
-	                    { className: 'voting-speaker-name' },
-	                    speaker.first_name + ' ' + speaker.last_name,
-	                    React.createElement(
-	                      'span',
-	                      null,
-	                      speaker.title
-	                    )
-	                  ),
-	                  React.createElement('img', { className: 'voting-speaker-pic', src: speaker.photo_url })
-	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'main-speaker-description' },
-	                  React.createElement('div', { dangerouslySetInnerHTML: { __html: speaker.bio } })
-	                )
-	              );
-	            })
-	          )
-	        ),
-	        pres.can_vote && React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'h5',
-	            null,
-	            'Cast Your Vote'
-	          ),
-	          votingBar
-	        ),
-	        !pres.can_vote && React.createElement(
-	          'div',
-	          { style: { clear: 'both' }, className: 'vote-login' },
-	          'Think this presentation should be included in the Tokyo Summit? Login to vote.',
-	          React.createElement('br', null),
-	          React.createElement(
-	            'a',
-	            { className: 'btn btn-default', href: '/Security/login?BackURL=/vote-for-speakers/show/' + pres.id },
-	            'I already have an account'
-	          ),
-	          '  ',
-	          React.createElement(
-	            'a',
-	            { href: '/summit-login/login?BackURL=/vote-for-speakers/', className: 'btn btn-default' },
-	            'Sign up now'
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'voting-tip' },
-	          React.createElement(
-	            'strong',
-	            null,
-	            'TIP: '
-	          ),
-	          'You can vote quickly with your keyboard using the numbers below each option.'
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'voting-share-wrapper' },
-	          React.createElement(
-	            'h5',
-	            null,
-	            'Share This Presentation'
-	          )
-	        )
-	      )
-	    );
-	  }
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'a',
+					{ href: '#', className: 'voting-open-panel text' },
+					React.createElement('i', { className: 'fa fa-chevron-left' }),
+					'All Submissions'
+				),
+				React.createElement(
+					'div',
+					{ className: 'voting-content-body' },
+					pres.can_vote && React.createElement(
+						'div',
+						null,
+						React.createElement(
+							'h5',
+							null,
+							'Cast Your Vote'
+						),
+						votingBar
+					),
+					!pres.can_vote && React.createElement(
+						'div',
+						{ style: { clear: 'both' }, className: 'vote-login' },
+						'Think this presentation should be included in the Tokyo Summit? Login to vote.',
+						React.createElement('br', null),
+						React.createElement(
+							'a',
+							{ className: 'btn btn-default', href: '/Security/login?BackURL=/vote-for-speakers/show/' + pres.id },
+							'I already have an account'
+						),
+						'  ',
+						React.createElement(
+							'a',
+							{ href: '/summit-login/login?BackURL=/vote-for-speakers/show/' + pres.id, className: 'btn btn-default' },
+							'Sign up now'
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'voting-presentation-title' },
+						React.createElement(
+							'h5',
+							null,
+							'Title'
+						),
+						React.createElement(
+							'h3',
+							null,
+							pres.title
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'voting-presentation-body' },
+						React.createElement(
+							'h5',
+							null,
+							'Speakers'
+						),
+						React.createElement(
+							'div',
+							{ className: 'voting-speaker-row' },
+							React.createElement(
+								'ul',
+								null,
+								pres.speakers && pres.speakers.map(function (speaker) {
+									return React.createElement(
+										'li',
+										{ key: speaker.id },
+										React.createElement('img', { className: 'voting-speaker-pic', src: speaker.photo_url }),
+										React.createElement(
+											'div',
+											{ className: 'voting-speaker-name' },
+											speaker.first_name + ' ' + speaker.last_name,
+											React.createElement(
+												'span',
+												null,
+												speaker.title
+											)
+										)
+									);
+								})
+							)
+						),
+						React.createElement(
+							'div',
+							{ className: 'voting-abstract' },
+							React.createElement(
+								'h5',
+								null,
+								'Abstract'
+							),
+							React.createElement('div', { dangerouslySetInnerHTML: { __html: pres.short_description } })
+						),
+						React.createElement(
+							'div',
+							{ className: 'main-speaker-wrapper' },
+							pres.speakers && pres.speakers.map(function (speaker) {
+								return React.createElement(
+									'div',
+									{ key: speaker.id },
+									React.createElement(
+										'div',
+										{ className: 'main-speaker-row' },
+										React.createElement(
+											'div',
+											{ className: 'voting-speaker-name' },
+											speaker.first_name + ' ' + speaker.last_name,
+											React.createElement(
+												'span',
+												null,
+												speaker.title
+											)
+										),
+										React.createElement('img', { className: 'voting-speaker-pic', src: speaker.photo_url })
+									),
+									React.createElement(
+										'div',
+										{ className: 'main-speaker-description' },
+										React.createElement('div', { dangerouslySetInnerHTML: { __html: speaker.bio } })
+									)
+								);
+							})
+						)
+					),
+					pres.can_vote && React.createElement(
+						'div',
+						null,
+						React.createElement(
+							'h5',
+							null,
+							'Cast Your Vote'
+						),
+						votingBar
+					),
+					!pres.can_vote && React.createElement(
+						'div',
+						{ style: { clear: 'both' }, className: 'vote-login' },
+						'Think this presentation should be included in the Tokyo Summit? Login to vote.',
+						React.createElement('br', null),
+						React.createElement(
+							'a',
+							{ className: 'btn btn-default', href: '/Security/login?BackURL=/vote-for-speakers/show/' + pres.id },
+							'I already have an account'
+						),
+						'  ',
+						React.createElement(
+							'a',
+							{ href: '/summit-login/login?BackURL=/vote-for-speakers/show/' + pres.id, className: 'btn btn-default' },
+							'Sign up now'
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'voting-share-wrapper' },
+						React.createElement(
+							'h5',
+							null,
+							'Share This Presentation'
+						),
+						React.createElement(
+							'a',
+							{ className: 'btn btn-default', href: 'https://www.facebook.com/sharer/sharer.php?u=http://www.openstack.org/vote-for-speakers/show/' + pres.id },
+							'facebook'
+						),
+						'  ',
+						React.createElement(
+							'a',
+							{ className: 'btn btn-default', href: 'https://twitter.com/intent/tweet?&url=http://www.openstack.org/vote-for-speakers/show/' + pres.id },
+							'Twitter'
+						),
+						'  ',
+						React.createElement(
+							'a',
+							{ className: 'btn btn-default', href: 'https://www.linkedin.com/cws/share?url=http://www.openstack.org/vote-for-speakers/show/' + pres.id },
+							'LinkedIn'
+						),
+						'  '
+					)
+				)
+			);
+		}
 
 	});
 
