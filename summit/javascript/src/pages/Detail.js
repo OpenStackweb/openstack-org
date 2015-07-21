@@ -77,7 +77,7 @@ var Detail = React.createClass({displayName: 'Detail',
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
         			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
-        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/summit/tokyo-2015/call-for-speakers/?backURL=/vote-for-speakers/" className="btn btn-default">Sign up now</a>
+        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/summit-login/login?BackURL=/vote-for-speakers/" className="btn btn-default">Sign up now</a>
         		</div>
         	}
             <div className="voting-presentation-title">
@@ -137,7 +137,7 @@ var Detail = React.createClass({displayName: 'Detail',
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
         			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
-        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/summit/tokyo-2015/call-for-speakers/?backURL=/vote-for-speakers/" className="btn btn-default">Sign up now</a>
+        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/summit-login/login?BackURL=/vote-for-speakers/" className="btn btn-default">Sign up now</a>
         		</div>
         	}
             <div className="voting-tip">
