@@ -182,7 +182,7 @@
     </div>
 <% end_if %>
 <% if VisaInformation  %>
-<div class="light visa-row" id="visa">
+<div class="white visa-row" id="visa">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
