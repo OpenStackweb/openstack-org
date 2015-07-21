@@ -56,7 +56,7 @@ module.exports = React.createClass({displayName: 'VotingApp',
                   <h1>
                     Vote For Presentations
                     <span className="subheading">
-                      Help us pick the presentations for The Vancouver Summit
+                      Help us pick the presentations for The Tokyo Summit
                     </span>
                   </h1>
                 </div>

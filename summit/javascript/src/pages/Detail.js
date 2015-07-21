@@ -76,9 +76,8 @@ var Detail = React.createClass({displayName: 'Detail',
         	}
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
-        			<h5>Cast Your Vote</h5>
         			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
-        			<a href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a> | <a href="#">Sign up now</a>
+        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/join/register" className="btn btn-default">Sign up now</a>
         		</div>
         	}
             <div className="voting-presentation-title">
@@ -103,9 +102,11 @@ var Detail = React.createClass({displayName: 'Detail',
                   );
                 })}
                 </ul>
-              </div>              
-              <h5>Abstract</h5>              
-              <div dangerouslySetInnerHTML={{__html: pres.short_description}} />
+              </div>
+              <div className="voting-abstract">
+              	<h5>Abstract</h5>              
+              	<div dangerouslySetInnerHTML={{__html: pres.short_description}} />
+              </div>
               <div className="main-speaker-wrapper">
               {pres.speakers && pres.speakers.map(function (speaker) {
               	return (
@@ -135,9 +136,8 @@ var Detail = React.createClass({displayName: 'Detail',
         	}
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
-        			<h5>Cast Your Vote</h5>
         			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
-        			<a href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a> | <a href="#">Sign up now</a>
+        			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href="/join/register" className="btn btn-default">Sign up now</a>
         		</div>
         	}
             <div className="voting-tip">
