@@ -38,7 +38,7 @@ var Backend = {
 	},
 
 	resetPresentations: function () {
-		Cortex.presentations.remove();
+		// /Cortex.presentations.remove();
 		Cortex.presentations.set([]);
 	},
 

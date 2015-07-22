@@ -35,7 +35,6 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin("[name].css"),
-    new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"]),
-    new webpack.optimize.UglifyJsPlugin({minimize: true})         
+    new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
   ]  
 };
