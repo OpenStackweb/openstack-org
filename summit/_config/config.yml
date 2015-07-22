@@ -14,7 +14,6 @@ Director:
     'trackchairs/api/v1': 'TrackChairAPI'
     'presentations/authenticate': 'PresentationAPITokenGenerator'
     'summit-login': 'SummitSecurity'
-    'vote-for-speakers': 'VotingApp'    
 PresentationCategory:
   extensions:
     - JSONable
