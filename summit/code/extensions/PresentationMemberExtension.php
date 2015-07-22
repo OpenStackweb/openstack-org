@@ -29,7 +29,7 @@ class PresentationMemberExtension extends DataExtension
      *         
      * @return DataList
      */
-    public function getRandomisedPresentations() {
+    public function getRandomisedPresentations($cat) {
         // $mid = Member::currentUserID();
         // if($this->owner->PresentationPriorities()->count() != Summit::get_active()->Presentations()->count()) {            
         //     DB::query("DELETE FROM PresentationPriority WHERE MemberID = {$mid}");
@@ -52,9 +52,16 @@ class PresentationMemberExtension extends DataExtension
         //         ->filter('PresentationPriority.MemberID', $mid)
         //         ->sort('PresentationPriority.Priority ASC');
         
-        return Presentation::get()
+        $results = Presentation::get()
                 ->filter('Status','Received')
         		->sort('Views ASC, RAND()');
+
+        if($cat) $results = $results->filter(
+                'CategoryID', $cat
+            );
+
+        return $results;
+
     }
 
 

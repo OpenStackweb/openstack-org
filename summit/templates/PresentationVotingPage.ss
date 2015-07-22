@@ -9,19 +9,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Vote For Vancouver Summit Presentations | OpenStack Open Source Cloud Computing Software</title>
+    <title>Vote For Tokyo Summit Presentations | OpenStack Open Source Cloud Computing Software</title>
 
     <!-- Bootstrap Core CSS -->
     <% require css("themes/openstack/css/bootstrap3.css") %>
     <!-- Custom CSS -->
-    <% require css("themes/openstack/css/voting-app.css") %>
+    <% require css("summit/css/voting-app.css") %>
 
     <!-- Fonts -->
     <% require css("themes/openstack/css/font-awesome.min.css") %>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -61,7 +61,7 @@
 		<div class="voting-header">
 			<div class="col-lg-3 col-md-3 col-sm-3">
 				<div class="voting-app-logo">
-					<img class="summit-hero-logo" src="/themes/openstack/images/voting/voting-logo.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/voting/voting-logo.png" alt="OpenStack Summit" />
+					<img class="summit-hero-logo" src="/summit/images/voting-logo.png" alt="OpenStack Summit" />
 				</div>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6">
@@ -69,7 +69,7 @@
 					<h1>
 						Vote For Presentations
 						<span>
-							Help us pick the presentations for The Vancouver Summit
+							Help us pick the presentations for The Tokyo Summit
 						</span>
 					</h1>
 				</div>
@@ -86,7 +86,7 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-3 voting-sidebar">
 		    <div class="voting-app-details-link">
-                <a href="#">More About The Vancouver Summit</a>
+                <a href="#">More About The Tokyo Summit</a>
             </div>
             $SearchForm
 
@@ -114,7 +114,7 @@
 
         <% loop CategoryLinks %>
         <li>
-          <a href='{$Top.Link}Category/{$URLSegment}'>$Name</a>
+          <a href='{$Top.Link}Category/{$ID}'>$Name</a>
         </li>
         <% end_loop %>
     </ul>
@@ -139,7 +139,7 @@
               class="completed"
           <% end_if %>
       
-      ><a href="{$Top.Link}presentation/{$URLSegment}">$PresentationTitle</a></li>
+      ><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
   <% end_loop %>
   <% else %>
   
@@ -150,7 +150,7 @@
               class="active"
           <% end_if %>
       
-      ><a href="{$Top.Link}presentation/{$URLSegment}">$PresentationTitle</a></li>
+      ><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
   <% end_loop %>
   
   
@@ -170,7 +170,7 @@
 				<h5>Login to vote</h5>
                 <div class="login-to-vote">
                     <h3>Help this presentation get to the OpenStack Summit!</h3>
-                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit, May 18-22, in Vancouver, Canada. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
+                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit in Tokyo, Japan. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
                     $Top.SpeakerVotingLoginForm
                 </div>
 			
@@ -209,11 +209,11 @@
 				
 				<div class="voting-presentation-title">
 					<h5>Title</h5>
-					<h3>$PresentationTitle</h3>
+					<h3>$Title</h3>
 				</div>
 				<div class="voting-presentation-track">
 				    <h5>Track</h5>
-				    <p>$SummitCategory.Name</p>
+				    <p>$Category.Title</p>
 				</div>
 				<div class="voting-presentation-body">
 					<h5>Speakers</h5>
@@ -237,7 +237,7 @@
 						<h5>Abstract</h5>
 					</p>
 					
-					<div>$Abstract</div>
+					<div>$Description</div>
 					
 					<div class="main-speaker-wrapper">
 					<% loop Speakers %>					
@@ -315,7 +315,7 @@
  <ul class="presentation-list">
   <% loop $SearchResults %>
          
-      <li><a href="{$Top.Link}presentation/{$URLSegment}">$PresentationTitle</a></li>
+      <li><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
   <% end_loop %>
 </ul></div>
 
