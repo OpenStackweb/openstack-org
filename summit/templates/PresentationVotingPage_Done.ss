@@ -23,48 +23,6 @@
   <body class="voting voting_index">
 
     <!-- ---------- Title Bar ---------- -->
-<div class='container'>
-  <div class='row'>
-    <div class='col-lg-12'>  
-      <h2 class='title'>OpenStack Presentation Voting</h2>
-    </div>
-  </div>
-</div>
-<div class='container'>
-
-  <div class='navbar'>
-    <button class='navbar-toggle' data-target='.navbar-responsive-collapse' data-toggle='collapse' type='button'>
-      <span class='icon-bar'></span>
-      <span class='icon-bar'></span>
-      <span class='icon-bar'></span>
-    </button>
-    <div class='nav-collapse collapse navbar-responsive-collapse'>
-      $SearchForm
-      <ul class='nav navbar-nav pull-right'>
-        <li class='dropdown'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-            Select Category
-            <b class='caret'></b>
-          </a>
-          <ul class='dropdown-menu'>
-            <li>
-              <a href='#'>All Categories</a>
-            </li>
-            <li class='divider'></li>
-
-            <% loop CategoryLinks %>
-            <li>
-              <a href='{$Top.Link}Category/{$URLSegment}'>$Name</a>
-            </li>
-            <% end_loop %>
-
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
 
 <div class='container' id='presentation-background'>
   <div class='row'>
