@@ -10,7 +10,7 @@
       <meta name="author" content="">
       
       <title>
-        Vote For Vancouver Summit Presentations | OpenStack Open Source Cloud Computing Software
+        Vote For Tokyo Summit Presentations | OpenStack Open Source Cloud Computing Software
       </title>
       
       <!-- Bootstrap Core CSS -->
@@ -32,7 +32,22 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	  <![endif]-->
       	
-      <!-- Page-specific CSS -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17511903-1']);
+      _gaq.push(['_setDomainName', '.openstack.org']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();  
+
+    </script>
+
+
     </head>
     
     <body class="voting-body">
