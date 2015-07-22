@@ -135,7 +135,7 @@
       <li 
           <% if $Top.Presentation.ID == $ID %>
               class="active"
-          <% else_if $MemberVoteValue %>
+          <% else_if $UserVote %>
               class="completed"
           <% end_if %>
       
@@ -171,7 +171,8 @@
                 <div class="login-to-vote">
                     <h3>Help this presentation get to the OpenStack Summit!</h3>
                     <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit in Tokyo, Japan. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
-                    $Top.SpeakerVotingLoginForm
+                    <a className="btn" href="/Security/login?BackURL={$Top.Link}presentation/{$ID}">I already have an account</a>&nbsp; | &nbsp;
+                    <a href="/summit-login/login?BackURL={$Top.Link}presentation/{$ID}" className="btn">Sign up now</a>
                 </div>
 			
 			<% else %>
@@ -254,6 +255,7 @@
 					<% end_loop %>
                     </div>
 				</div>
+        <% if $CurrentMember %>
 				<h5>Cast Your Vote</h5>
 				<ul class="voting-rate-wrapper">
 					<li class="voting-rate-single <% if $Top.VoteValue = 3 %>current-vote<% end_if %>">
@@ -284,6 +286,7 @@
 					<div class="voting-tip">
 						<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
 					</div>
+        <% end_if %>
 				<div class="voting-share-wrapper">
 						<h5>Share This Presentation</h5>
 						<div class="sharing-section">
