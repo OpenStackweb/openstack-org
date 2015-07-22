@@ -2566,12 +2566,6 @@ a.voting-btn {
   padding: 0; 
   max-width: 100%;
 }
-
-.voting-abstract {
-  margin-top: 20px;
-}
-
-
   .voting-speaker-row ul {
     margin: 0;
     padding: 0;
@@ -2646,10 +2640,6 @@ img.voting-speaker-pic {
   float: left;
   margin: 20px 0 40px; }
 
-.vote-login {
-  min-height: 8em;
-}  
-
 ul.voting-rate-wrapper {
   position: relative;
   float: left;
@@ -2660,9 +2650,7 @@ ul.voting-rate-wrapper {
   color: white;
   text-align: center;
   z-index: 1000;
-  font-size: 0; 
-  min-height: 8em;
-}
+  font-size: 0; }
 
 li.voting-rate-single {
   width: 25%;
@@ -2682,7 +2670,7 @@ li.voting-rate-single {
     border-right: 1px solid #D4DCE5;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px; }
-  li.voting-rate-single:hover, li.voting-rate-single.active {
+  li.voting-rate-single:hover, li.current-vote {
     background: #29abe2; }
   li.voting-rate-single a {
     text-transform: uppercase;
@@ -2693,7 +2681,7 @@ li.voting-rate-single {
     position: relative;
     padding: 10px 0;
     width: 100%; }
-    li.voting-rate-single.active a, li.voting-rate-single a:hover, li.current-vote a, li.voting-rate-single.active .voting-shortcut {
+    li.voting-rate-single a:hover, li.current-vote a, li.current-vote .voting-shortcut {
       color: white;
       text-decoration: none;
       font-weight: 600; }
@@ -2832,10 +2820,5 @@ input#SpeakerVotingLoginForm_SpeakerVotingLoginForm_action_dologin {
 p#ForgotPassword {
   margin-top: 5px;
   font-size: 0.9em; }
-
-
-.abstract {
-  margin-top: 20px;
-}
 
 /*End Voting For Presentations*/
