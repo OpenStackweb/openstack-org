@@ -38,7 +38,8 @@ class Presentation extends DataObject
         'Description' => 'HTMLText',
         'ShortDescription' => 'HTMLText',
         'Progress' => 'Int',
-        'Views' => 'Int'        
+        'Views' => 'Int',
+        'BeenEmailed' => 'Boolean'
     );
 
 
@@ -263,6 +264,22 @@ class Presentation extends DataObject
     public function isNew() {
         return $this->Progress == self::PHASE_NEW;
     }
+
+    public function creatorIsSpeaker() {
+        $c = $this->Speakers()->filter(array(
+            'MemberID' => $this->CreatorID
+        ));
+        if ($c->count()) return true;
+    }
+
+    public function creatorBeenEmailed() {
+        return $this->BeenEmailed;
+    }
+
+    public function clearBeenEmailed() {
+        $this->BeenEmailed = false;
+        $this->write();
+    }    
 
     /**
      * Used by the track chair app to allow comments on presentations.

@@ -18,6 +18,7 @@ implements IPresentationSpeaker
         'FundedTravel' => 'Boolean',
         'Expertise' => 'Text',
         'Country' => 'Varchar(2)',
+        'BeenEmailed' => 'Boolean'
     );
 
 
@@ -128,6 +129,11 @@ implements IPresentationSpeaker
             ->imageUpload('Photo','Upload a speaker photo');
     }
 
+    public function AllPresentations() {
+        return $this->Presentations()->filter(array(
+            'Status' => 'Received'
+        ));    
+    }
 
 
     public function MyPresentations() {
@@ -176,4 +182,11 @@ implements IPresentationSpeaker
         $this->MemberID              = $member->getIdentifier();
         //$this->RegistrationRequestID = 0;
     }
+
+    public function clearBeenEmailed() {
+        $this->BeenEmailed = false;
+        $this->write();
+    }
+
+
 }
