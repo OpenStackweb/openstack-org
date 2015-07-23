@@ -225,10 +225,11 @@ class PresentationVotingPage_Controller extends Page_Controller {
         ->where("Presentation.SummitID = {$summitID}");
 
       if($CategoryID) $presentations = $presentations->filter('CategoryID', $CategoryID);
-      if($currentMemberID) {
+      if($currentMemberID)
+      {
           $presentations = $presentations
-                          ->leftJoin("PresentationVote", "PresentationVote.PresentationID = Presentation.ID")
-                          ->where("IFNULL(PresentationVote.MemberID,0) = " . Member::currentUserID());              
+                          ->leftJoin("PresentationVote", "PresentationVote.PresentationID = Presentation.ID AND PresentationVote.MemberID = ".Member::currentUserID())
+                          ->where("PresentationVote.ID IS NULL");
       }
 
       if($presentations->count()) $Result = $presentations->first();
