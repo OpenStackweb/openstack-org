@@ -1,8 +1,5 @@
 <?php
 
-/*  Used to load the Javascript app that runs the track chairs process
-*/
-
 class EmailUtilsPage extends Page {
 
 }
@@ -39,11 +36,14 @@ class EmailUtilsPage_Controller extends Page_Controller {
     	$speakerPresentationList = '';
 
     	foreach ($presentations as $presentation) {
-    		$speakerPresentationList = $speakerPresentationList . $presentation->Title . '<br/>';
+
+    		$speakerPresentationList = $speakerPresentationList . 
+                $presentation->Title . '<br/>' .
+                '<a href="https://www.openstack.org/vote-for-speakers/Presentation/'.$presentation->ID.'">https://www.openstack.org/vote-for-speakers/Presentation/' . $presentation->ID . '</a><br/><br/>';
     	}
 
 		// Output speaker row
-		$fields = array('speaker', $speaker->ID, $speaker->MemberID, $speaker->Member()->Email, $speakerPresentationList);
+		$fields = array('speaker', $speaker->FirstName, $speaker->LastName, $speaker->ID, $speaker->MemberID, $speaker->Member()->Email, $speakerPresentationList);
 		fputcsv($fp, $fields);
 
     }
@@ -60,7 +60,7 @@ class EmailUtilsPage_Controller extends Page_Controller {
     	}
 
 		// Output speaker row
-		$fields = array('creator','',$member->ID, $member->Email, $creatorPresentationList);
+		$fields = array('creator',$member->FirstName, $member->Surname,'',$member->ID, $member->Email, $creatorPresentationList);
 		fputcsv($fp, $fields);
 
     }
@@ -73,7 +73,7 @@ class EmailUtilsPage_Controller extends Page_Controller {
 		$filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/speaker-notifications.csv';
 		$fp = fopen($filepath, 'w');    	
 
-		$fields = array('Type', 'Speaker ID', 'Member ID', 'Email', 'Presentations');
+		$fields = array('Type', 'Firs_tName', 'Last_Name', 'Speaker ID', 'Member ID', 'Email', 'Presentations');
 		fputcsv($fp, $fields);
 
     	foreach ($presentations as $presentation) {
