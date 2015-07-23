@@ -30,37 +30,27 @@ class PresentationMemberExtension extends DataExtension
      * @return DataList
      */
     public function getRandomisedPresentations($cat) {
-        // $mid = Member::currentUserID();
-        // if($this->owner->PresentationPriorities()->count() != Summit::get_active()->Presentations()->count()) {            
-        //     DB::query("DELETE FROM PresentationPriority WHERE MemberID = {$mid}");
-        //     $list = Summit::get_active()
-        //                 ->Presentations()
-        //                 ->sort("RAND()")
-        //                 ->column('ID');
+        $mid = Member::currentUserID();
+        if($this->owner->PresentationPriorities()->count() != Summit::get_active()->Presentations()->count()) {            
+            DB::query("DELETE FROM PresentationPriority WHERE MemberID = {$mid}");
+            $list = Summit::get_active()
+                        ->Presentations()
+                        ->sort('Views ASC, RAND()');
+                        ->column('ID');
             
-        //     foreach($list as $priority => $id) {
-        //         PresentationPriority::create(array(
-        //             'PresentationID' => $id,
-        //             'MemberID' => $this->owner->ID,
-        //             'Priority' => $priority
-        //         ))->write();
-        //     }            
-        // }
+            foreach($list as $priority => $id) {
+                PresentationPriority::create(array(
+                    'PresentationID' => $id,
+                    'MemberID' => $this->owner->ID,
+                    'Priority' => $priority
+                ))->write();
+            }            
+        }
 
-        // return Presentation::get()
-        //         ->innerJoin("PresentationPriority", "PresentationPriority.PresentationID = Presentation.ID")
-        //         ->filter('PresentationPriority.MemberID', $mid)
-        //         ->sort('PresentationPriority.Priority ASC');
-        
-        $results = Presentation::get()
-                ->filter('Status','Received')
-        		->sort('Views ASC, RAND()');
-
-        if($cat) $results = $results->filter(
-                'CategoryID', $cat
-            );
-
-        return $results;
+        return Presentation::get()
+                ->innerJoin("PresentationPriority", "PresentationPriority.PresentationID = Presentation.ID")
+                ->filter('PresentationPriority.MemberID', $mid)
+                ->sort('PresentationPriority.Priority ASC');
 
     }
 
