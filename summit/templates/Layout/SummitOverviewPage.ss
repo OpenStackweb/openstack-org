@@ -1,14 +1,57 @@
 <div class="white about-summit">
     <div class="container">
-        <h1>The Must-Attend OpenStack Event</h1>
-        <hr/>
-
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-8">
+                <h2 style="text-align:center;">The Must-Attend OpenStack Event</h2>
+                <hr/>
                 $OverviewIntro
+                <div class="atendees-charts-wrapper">
+                    <h3 class="recap-title">Attendees From Around The World</h3>
+                    <div class="atendees-charts">
+                        <% if Atendees1ChartImageUrl %>
+                            <div class="single-summit-stats right">
+                                <h4>$Atendees1Label</h4>
+                                <img class="atendees-chart" src="{$Atendees1ChartImageUrl}"
+                                onerror="this.onerror=null; this.src={$Atendees1ChartImagePngUrl}" alt="OpenStack Summit Atendees">
+                            </div>
+                        <% end_if %>
+                        <% if Atendees2ChartImageUrl %>
+                            <div class="single-summit-stats right">
+                                <h4>$Atendees2Label</h4>
+                                <img class="atendees-chart" src="{$Atendees2ChartImageUrl}"
+                                onerror="this.onerror=null; this.src={$Atendees2ChartImagePngUrl}" alt="OpenStack Summit Atendees">
+                            </div>
+                        <% end_if %>
+                        <% if Atendees3ChartImageUrl %>
+                            <div class="single-summit-stats right">
+                                <h4>$Atendees3Label</h4>
+                                <img class="atendees-chart" src="{$Atendees3ChartImageUrl}"
+                                 onerror="this.onerror=null; this.src={$Atendees3ChartImagePngUrl}" alt="OpenStack Summit Atendees">
+                            </div>
+                        <% end_if %>
+                        <% if Atendees4ChartImageUrl %>
+                            <div class="single-summit-stats right">
+                                <h4>$Atendees4Label</h4>
+                                <img class="atendees-chart" src="{$Atendees4ChartImageUrl}"
+                                onerror="this.onerror=null; this.src={$Atendees4ChartImagePngUrl}" alt="OpenStack Summit Atendees">
+                            </div>
+                        <% end_if %>
+                    </div>
+                    <div class="atendees-chart-ref-wrapper">
+                        <img class="atendees-chart-ref" src="{$AtendeesChartRefImageUrl}"
+                        onerror="this.onerror=null; this.src={$AtendeesChartRefImagePngUrl}" alt="OpenStack Summit Atendees Ref">
+                        <a href="/sponsors/#audience">See Full Stats from Vancouver &amp; Paris</a>
+                    </div>
+                </div>
+                <hr>
+                <h3 class="recap-title">$RecapTitle</h3>
                 <div class="about-video-wrapper">
-                    <iframe width="560" height="315" src="//www.youtube.com/embed/{$VideoRecapYouTubeID}?showinfo=0" frameborder="0" allowfullscreen></iframe>
-                    <p class='video-caption'>$VideoRecapCaption</p>
+                    <iframe width="360" height="225" src="//www.youtube.com/embed/{$VideoRecapYouTubeID1}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+                    <p class='video-caption'>$VideoRecapCaption1</p>
+                </div>
+                <div class="about-video-wrapper">
+                    <iframe width="360" height="225" src="//www.youtube.com/embed/{$VideoRecapYouTubeID2}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+                    <p class='video-caption'>$VideoRecapCaption2</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4">
@@ -68,6 +111,15 @@
                 $EventTwoContent
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-push-2">
+                <div class="about-timeline-wrapper">
+                    <h3>Summit Timeline</h3>
+                    <p>$TimelineCaption</p>
+                    <img class="summit-type-icon" src="{$TimelineImageUrl}" onerror="this.onerror=null; this.src={$TimelineImagePngUrl}" alt="Summit Timeline">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="white testimonial-row">
@@ -95,19 +147,23 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="growth-text-top">
+                <div class="growth-text-top map">
                     $GrowthBoxTextTop
-                    <img class="growth-chart-legend" src="{$BoxChartLegendImageUrl}"
+                </div>
+                <div class="growth-map-wrapper">
+                    <img class="growth-map tokyo" src="{$BoxChartImageUrl}"
+                         onerror="this.onerror=null; this.src={$BoxChartImagePngUrl}"
+                         alt="OpenStack Summit Growth Chart">
+
+                    <img class="growth-chart-legend map" src="{$BoxChartLegendImageUrl}"
                          onerror="this.onerror=null; this.src={$BoxChartLegendImagePngUrl}"
                          alt="OpenStack Summit Growth Legend">
                 </div>
-                <div>
-                    <img class="growth-chart" src="{$BoxChartImageUrl}"
-                         onerror="this.onerror=null; this.src={$BoxChartImagePngUrl}"
-                         alt="OpenStack Summit Growth Chart">
-                </div>
-                <div class="growth-text-bottom">
+                <div class="growth-text-bottom map">
                     $GrowthBoxTextBottom
+                    <p>
+                        <a href="#">Registration Opening Soon</a>
+                    </p>
                 </div>
             </div>
         </div>

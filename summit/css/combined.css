@@ -2991,6 +2991,42 @@ a.news-story:hover {
     right: 0px;
     top: 20px; } }
 
+.atendees-charts-wrapper{
+    margin: 50px 0 60px;
+}
+
+.single-summit-stats {
+    max-width: 45%;
+    display: inline-block;
+}
+
+.single-summit-stats.right {
+    margin-left: 3%;
+}
+
+.single-summit-stats h4 {
+    text-align: center;
+    font-size: 1em;
+    font-weight: 300;
+    margin: 15px 0 5px;
+}
+
+.atendees-chart-ref-wrapper {
+    text-align: center;
+}
+
+img.atendees-chart-ref {
+    width: 350px;
+    max-width: 100%;
+    margin: 20px auto 0;
+}
+
+.atendees-chart-ref-wrapper a {
+    display: block;
+    margin-top: 20px;
+    font-size: .9em;
+}
+
 .about-summit .testimonial-attribute {
   font-family: Georgia, serif;
   text-align: center;
@@ -3005,12 +3041,25 @@ a.news-story:hover {
   .about-summit-action {
     text-align: center; } }
 
+
+h3.recap-title {
+    text-align: center;
+    font-weight: 300;
+    margin: 30px auto 10px;
+}
+
 .about-video-wrapper {
-  text-align: center; }
+    text-align: center;
+    display: inline-block;
+    width: 45%;
+    margin: 10px 2%;
+}
 
 .about-summit iframe {
-  margin-top: 30px;
-  max-width: 100%; }
+    margin-top: 30px;
+    width: 100%;
+    min-height: 225px;
+}
 
 @media (max-width: 990px) {
   .about-summit iframe {
@@ -3053,8 +3102,13 @@ a.news-story:hover {
 .summit-types {
   margin-top: 60px; }
 
-.summit-types h3 {
-  font-weight: 300; }
+.about-timeline-wrapper {
+    margin-top: 80px;
+}
+
+.about-timeline-wrapper h3, .summit-types h3 {
+    font-weight: 300;
+}
 
 .sub-h3 {
   margin: -5px 0 40px;
@@ -3171,15 +3225,31 @@ a.outline-btn.inactive:hover {
   width: 40%;
   float: left; }
 
-.growth-chart {
-  float: left;
-  max-width: 100%;
-  margin-top: -100px; }
+.growth-text-bottom.map p, .growth-text-top.map p {
+    color: #999;
+}
+
+.growth-map-wrapper {
+    position: relative;
+}
+
+.growth-map {
+    margin-top: -10px;
+    max-width: 100%;
+}
 
 .growth-text-bottom {
-  width: 40%;
-  float: right;
-  margin-top: -9em; }
+    width: 40%;
+    float: right;
+    margin-top: 0;
+}
+
+.growth-chart-legend.map {
+    max-width: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
 @media (max-width: 1200px) {
   .growth-text-top {
