@@ -136,17 +136,21 @@ implements IPresentationSpeaker
     }
 
 
-    public function MyPresentations() {
-        return Summit::get_active()->Presentations()->filter(array(
+    public function MyPresentations($status = null) {
+        $p = Summit::get_active()->Presentations()->filter(array(
             'CreatorID' => $this->MemberID
         ));
+        if($status) $p->filter('Status',$status);
+        return $p;
     }
 
 
-    public function OtherPresentations() {
-        return $this->Presentations()->exclude(array(
+    public function OtherPresentations($status = null) {
+        $p = $this->Presentations()->exclude(array(
             'CreatorID' => $this->MemberID
-        ));        
+        ));
+        if($status) $p->filter('Status',$status);
+        return $p;         
     }
 
     /**

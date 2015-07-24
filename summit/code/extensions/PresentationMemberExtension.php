@@ -34,8 +34,7 @@ class PresentationMemberExtension extends DataExtension
         $mid = Member::currentUserID();
         if($this->owner->PresentationPriorities()->count() != Summit::get_active()->Presentations()->count()) {            
             DB::query("DELETE FROM PresentationPriority WHERE MemberID = {$mid}");
-            $list = Summit::get_active()
-                        ->Presentations()
+            $list = Summit::get_active()->Presentations()
                         ->sort('Views ASC, RAND()')
                         ->column('ID');
             
@@ -49,7 +48,10 @@ class PresentationMemberExtension extends DataExtension
         }
         $query = Presentation::get()
             ->innerJoin("PresentationPriority", "PresentationPriority.PresentationID = Presentation.ID")
-            ->filter('PresentationPriority.MemberID', $mid);
+            ->filter(array(
+                        'PresentationPriority.MemberID' => $mid,
+                        'Status' => 'Received'
+                    ));
         if($cat) $query = $query->filter('CategoryID', $cat);
         return $query->sort('PresentationPriority.Priority ASC');
     }

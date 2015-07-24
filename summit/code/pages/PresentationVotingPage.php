@@ -164,6 +164,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
       $summitID = Summit::get_active()->ID;
 
       $presentations = Presentation::get()
+        ->filter('Status','Received')
         ->where("Presentation.SummitID = {$summitID}");
 
       if($data['Search'] && strlen($data['Search']) > 1) {
@@ -227,6 +228,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
       if($currentMemberID)
       {
           $presentations = $presentations
+                          ->filter('Status','Received')
                           ->leftJoin("PresentationVote", "PresentationVote.PresentationID = Presentation.ID AND PresentationVote.MemberID = ".Member::currentUserID())
                           ->where("PresentationVote.ID IS NULL");
       }
