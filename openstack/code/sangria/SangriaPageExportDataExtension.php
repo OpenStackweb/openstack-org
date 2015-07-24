@@ -27,7 +27,7 @@ final class SangriaPageExportDataExtension extends Extension
     {
         Config::inst()->update(get_class($this), 'allowed_actions', array(
             'ExportDataUsersByRole',
-            'exportCLAUsers',
+            'exportConditionrs',
             'exportGerritUsers',
             'ExportDataGerritUsers',
             'ExportDataCompanyData',
@@ -39,11 +39,12 @@ final class SangriaPageExportDataExtension extends Extension
             'exportMarketplaceAdmins',
             'ExportAppDevSurveyResultsFlat',
             'ExportSurveyResultsFlat',
+            'ExportSpeakersData'
         ));
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
             'ExportDataUsersByRole',
-            'exportCLAUsers',
+            'exportConditionrs',
             'exportGerritUsers',
             'ExportDataGerritUsers',
             'ExportDataCompanyData',
@@ -55,6 +56,7 @@ final class SangriaPageExportDataExtension extends Extension
             'exportMarketplaceAdmins',
             'ExportAppDevSurveyResultsFlat',
             'ExportSurveyResultsFlat',
+            'ExportSpeakersData'
         ));
     }
 
@@ -85,7 +87,44 @@ final class SangriaPageExportDataExtension extends Extension
         return $this->owner->getViewer('ExportCompanyData')->process($this->owner);
     }
 
-    function exportCLAUsers()
+    function ExportSpeakersData()
+    {
+        $this->Title = 'Export Speakers Data';
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $summits = Summit::get();
+
+            return $this->owner->getViewer('ExportSpeakersData')->process($this->owner->Customise(array("Summits" => $summits)));
+        }
+        else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $summits = Summit::get();
+            $selectedSummits = array();
+            foreach($summits as $summit) {
+                if (isset($_POST["summit_".$summit->ID])) {
+                    $selectedSummits[] = $summit->ID;
+                }
+            }
+
+            $onlyApprovedSpeakers = isset($_POST["onlyApprovedSpeakers"]);
+            $affiliation = $_POST["affiliation"];
+
+            $speakersExportQuerySpecification = new SpeakersExportQuerySpecification($selectedSummits, $onlyApprovedSpeakers, $affiliation);
+            $speakersExportQuery = new SpeakersExportQuery();
+            $res = $speakersExportQuery->handle($speakersExportQuerySpecification);
+
+
+            $ext = $_POST['ext'];
+            $filename = "PresentationSpeakers_" . date('Ymd') . "." . $ext;
+            $delimiter = ",";
+
+            return CSVExporter::getInstance()->export($filename, $res->getResult()[0], $delimiter);
+        }
+    }
+
+    function GetSpeakersData($sort=SangriaPageExportDataExtension::SpeakersSortSummit) {
+
+    }
+
+    function exportConditionrs()
     {
 
         $params = $this->owner->getRequest()->getVars();

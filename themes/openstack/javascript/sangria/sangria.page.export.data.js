@@ -248,4 +248,18 @@ jQuery(document).ready(function($){
         }
 
     });
+
+    // Export Speakers Data
+    $('#speakersExport').submit(function() {
+        var ext = $(document.activeElement).data('ext');
+        $('#ext').val(ext);
+
+        if ($('.submit-filter:checked').length == 0) {
+            $('#speakersExportAlert').removeClass('hidden');
+            $(window).scrollTop(0);
+            return false;
+        }
+
+        $('#speakersExportAlert').addClass('hidden');
+    });
 });
