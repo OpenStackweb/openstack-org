@@ -176,8 +176,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
               ->where("
                   Presentation.Title LIKE '%{$k}%' 
                   OR Presentation.Description LIKE '%{$k}%'
-                  OR PresentationSpeaker.FirstName LIKE '%{$k}%'
-                  OR PresentationSpeaker.LastName LIKE '%{$k}%'
+                  OR (concat_ws(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'
             ");
         }   
 
