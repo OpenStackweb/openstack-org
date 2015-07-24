@@ -34,7 +34,8 @@ class EmailUtilsPage_Controller extends Page_Controller {
         $otherPresentations = $speaker->OtherPresentations();
 
         // Build a list of the presentations this person owns for export
-        $myPresentationList = '<ul>';
+        $myPresentationList = '';
+        if($myPresentations->count()) $myPresentationList = '<strong>Presentations You Submitted</strong>  <ul>';
 
     	foreach ($myPresentations as $presentation) {
 
@@ -44,10 +45,11 @@ class EmailUtilsPage_Controller extends Page_Controller {
                 '<a href="' . $votingURL . $presentation->ID . '">' . $votingURL . $presentation->ID . '</a></li>';
     	}
 
-        $myPresentationList = $myPresentationList . '</ul>';
+        if($myPresentations->count()) $myPresentationList = $myPresentationList . '</ul>';
 
         // Build a list of presentaitons created by others that feature this person as a speaker
-        $otherPresentationList = '<ul>';
+        $otherPresentationList = '';
+        if($otherPresentations->count()) $otherPresentationList = '<strong>Presentations Others Submitted With You As A Speaker</strong> <ul>';
 
         foreach ($otherPresentations as $presentation) {
 
@@ -57,10 +59,12 @@ class EmailUtilsPage_Controller extends Page_Controller {
                 '<a href="' . $votingURL . $presentation->ID . '">' . $votingURL . $presentation->ID . '</a></li>';
         }
 
-        $otherPresentationList = $otherPresentationList . '</ul>';
+        if($otherPresentations->count()) $otherPresentationList = $otherPresentationList . '</ul>';
+
+        $fullPresentationList = $myPresentationList . $otherPresentationList;
 
 		// Output speaker row
-		$fields = array($speaker->FirstName, $speaker->LastName, $speaker->ID, $speaker->MemberID, $speaker->Member()->Email, $myPresentationList, $otherPresentationList);
+		$fields = array($speaker->FirstName, $speaker->LastName, $speaker->ID, $speaker->MemberID, $speaker->Member()->Email, $fullPresentationList);
 		fputcsv($fp, $fields);
 
     }
@@ -72,11 +76,11 @@ class EmailUtilsPage_Controller extends Page_Controller {
 		$filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/speaker-notifications.csv';
 		$fp = fopen($filepath, 'w');    	
 
-		$fields = array('Type', 'First_Name', 'Last_Name', 'Speaker ID', 'Member ID', 'Email', 'My_Presentations', 'Other_Presentations');
+		$fields = array('First_Name', 'Last_Name', 'Speaker_ID', 'Member_ID', 'Email', 'Presentation_List');
 		fputcsv($fp, $fields);
 
         foreach ($speakers as $speaker) {
-            AssembleEmail($speaker, $fp);
+            $this->AssembleEmail($speaker, $fp);
         }
 
     	fclose($fp);
