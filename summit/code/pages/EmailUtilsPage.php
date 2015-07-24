@@ -20,85 +20,64 @@ class EmailUtilsPage_Controller extends Page_Controller {
 		'ClearMailingList'
 	);	
 
-    private function CurrentPresentations() {
+    private function CurrentSpeakers() {
 
     	$summit = Summit::get_active();
-    	$presentations = Presentation::get()->filter(array(
-    			'Status' => 'Received',
-    			'SummitID' => $summit->ID
-    		));
-    	return $presentations;
+    	return $summit->Speakers(); 
     }
 
-    private function AssembleSpeakerEmail($speaker, $fp) {
-    	$presentations = $speaker->AllPresentations();
+    private function AssembleEmail($speaker, $fp) {
 
-    	$speakerPresentationList = '';
+        $votingURL = "https://www.openstack.org/summit/tokyo-2015/vote-for-speakers/Presentation/";
+    	
+        $myPresentations = $speaker->MyPresentations();
+        $otherPresentations = $speaker->OtherPresentations();
 
-    	foreach ($presentations as $presentation) {
+        // Build a list of the presentations this person owns for export
+        $myPresentationList = '<ul>';
 
-    		$speakerPresentationList = $speakerPresentationList . 
+    	foreach ($myPresentations as $presentation) {
+
+    		$myPresentationList = $myPresentationList . 
+                '<li>'.
                 $presentation->Title . '<br/>' .
-                '<a href="https://www.openstack.org/vote-for-speakers/Presentation/'.$presentation->ID.'">https://www.openstack.org/vote-for-speakers/Presentation/' . $presentation->ID . '</a><br/><br/>';
+                '<a href="' . $votingURL . $presentation->ID . '">' . $votingURL . $presentation->ID . '</a></li>';
     	}
 
+        $myPresentationList = $myPresentationList . '</ul>';
+
+        // Build a list of presentaitons created by others that feature this person as a speaker
+        $otherPresentationList = '<ul>';
+
+        foreach ($otherPresentations as $presentation) {
+
+            $otherPresentationList = $otherPresentationList . 
+                '<li>'.
+                $presentation->Title . '<br/>' .
+                '<a href="' . $votingURL . $presentation->ID . '">' . $votingURL . $presentation->ID . '</a></li>';
+        }
+
+        $otherPresentationList = $otherPresentationList . '</ul>';
+
 		// Output speaker row
-		$fields = array('speaker', $speaker->FirstName, $speaker->LastName, $speaker->ID, $speaker->MemberID, $speaker->Member()->Email, $speakerPresentationList);
+		$fields = array($speaker->FirstName, $speaker->LastName, $speaker->ID, $speaker->MemberID, $speaker->Member()->Email, $myPresentationList, $otherPresentationList);
 		fputcsv($fp, $fields);
 
     }
-
-    private function AssembleCreatorEmail($member, $fp) {
-    	$presentations = $this->CurrentPresentations()->filter(
-    		'CreatorID', $member->ID
-    	);
-
-    	$creatorPresentationList = '';
-
-    	foreach ($presentations as $presentation) {
-    		$creatorPresentationList = $creatorPresentationList . $presentation->Title . '<br/>';
-    	}
-
-		// Output speaker row
-		$fields = array('creator',$member->FirstName, $member->Surname,'',$member->ID, $member->Email, $creatorPresentationList);
-		fputcsv($fp, $fields);
-
-    }
-
 
     public function ExportNoticeEmails() {
 
-    	$presentations = $this->CurrentPresentations();
+    	$speakers = Summit::get_active()->Speakers();
 
 		$filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/speaker-notifications.csv';
 		$fp = fopen($filepath, 'w');    	
 
-		$fields = array('Type', 'Firs_tName', 'Last_Name', 'Speaker ID', 'Member ID', 'Email', 'Presentations');
+		$fields = array('Type', 'First_Name', 'Last_Name', 'Speaker ID', 'Member ID', 'Email', 'My_Presentations', 'Other_Presentations');
 		fputcsv($fp, $fields);
 
-    	foreach ($presentations as $presentation) {
-
-    		// Email speakers first
-    		$speakers = $presentation->Speakers();
-    		foreach ($speakers as $speaker) {
-    			if(!$speaker->BeenEmailed) {
-    				$this->AssembleSpeakerEmail($speaker, $fp);
-    			}
-
-    			$speaker->BeenEmailed = true;
-    			$speaker->write();
-
-    		}
-
-    		// Email creator if need be
-    		if(!$presentation->creatorIsSpeaker()) {
-    			$this->AssembleCreatorEmail($presentation->Creator(), $fp);
-    		}
-
-    		$presentation->BeenEmailed = true;
-    		$presentation->write();   		
-
-    	}
+        foreach ($speakers as $speaker) {
+            AssembleEmail($speaker, $fp);
+        }
 
     	fclose($fp);
         
@@ -108,7 +87,6 @@ class EmailUtilsPage_Controller extends Page_Controller {
         header("Content-disposition: attachment; filename=\"speaker-notifications.csv\"");
         header("Content-Length: ".filesize($filepath));
         readfile($filepath);
-
 
     }
 
