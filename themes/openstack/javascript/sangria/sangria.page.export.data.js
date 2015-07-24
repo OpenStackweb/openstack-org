@@ -218,4 +218,48 @@ jQuery(document).ready(function($){
         $('.group').prop('checked', is_checked);
     });
 
+    $("#stand_orgs").click(function(e) {
+        if (confirm("Are you sure you want to standarize ALL organizations?")) {
+            window.location = "/sangria/StandardizeOrgNames";
+        } else {
+            e.stopPropagation();
+            return false;
+        }
+    });
+
+    // Export Company Data
+    $('.company_report').change(function(){
+        $('input','.cb_field').removeAttr('checked');
+        $('.cb_field').hide();
+
+        if ($.inArray($(this).val(),['sponsorship_type','member_level','users_roles']) !== -1) {
+            $('input','.company').prop('checked',true);
+            $('.company').show();
+        }
+
+        if ($.inArray($(this).val(),['affiliates','deployments','deployment_surveys','speakers']) !== -1) {
+            $('input','.org').prop('checked',true);
+            $('.org').show();
+        }
+
+        if ($.inArray($(this).val(),['users_roles','affiliates','deployment_surveys']) !== -1) {
+            $('input','.member').prop('checked',true);
+            $('.member').show();
+        }
+
+    });
+
+    // Export Speakers Data
+    $('#speakersExport').submit(function() {
+        var ext = $(document.activeElement).data('ext');
+        $('#ext').val(ext);
+
+        if ($('.submit-filter:checked').length == 0) {
+            $('#speakersExportAlert').removeClass('hidden');
+            $(window).scrollTop(0);
+            return false;
+        }
+
+        $('#speakersExportAlert').addClass('hidden');
+    });
 });

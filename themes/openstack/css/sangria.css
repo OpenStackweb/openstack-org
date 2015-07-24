@@ -134,4 +134,8 @@ a.releaseButton:active {
     margin-right: 5px !important;
 }
 
+#sangria .checkbox input{
+    margin-top: 0;
+}
+
 /* @end */
