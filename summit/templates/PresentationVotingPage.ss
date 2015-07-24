@@ -225,7 +225,7 @@
                                 <li>
                                     <img class="voting-speaker-pic" src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>" />
                                     <div class="voting-speaker-name">
-                                        $FirstName $Surname
+                                        $FirstName $LastName
                                         <% if $Title %><span>$Title</span><% else %><span>&nbsp;</span><% end_if %>
                                     </div>
                                 </li>                              
