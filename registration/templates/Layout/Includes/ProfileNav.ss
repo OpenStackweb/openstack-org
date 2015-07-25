@@ -1,3 +1,4 @@
+$NavMessageExtensions
 <h2 class="profile-tabs">
 <a href="{$Link}" <% if CurrentTab=1 %>class="active"<% end_if %> >Your Details</a>
 <% if CurrentMember.isFoundationMember %>

@@ -26,9 +26,9 @@ var icons = [
     iconURLPrefix + '18.png',
     iconURLPrefix + '19.png',
     iconURLPrefix + '20.png'
-]
-var icons_length = icons.length;
+];
 
+var icons_length = icons.length;
 
 var shadow = {
     anchor: new google.maps.Point(15, 33),
@@ -72,8 +72,8 @@ $(document).ready(function () {
 
     // Add the markers and infowindows to the map
     for (var i = 0; i < locations.length; i++) {
-        var type = locations[i][4];
-        if(type =='Airport'){
+        var location = locations[i];
+        if(location.type =='Airport'){
             iconCounter = 1;
         }
         else if(type == 'Venue'){
@@ -86,17 +86,17 @@ $(document).ready(function () {
         }
 
         marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            position: new google.maps.LatLng(location.lat, location.lng),
             map: map,
             icon : icons[iconCounter],
             shadow: shadow
         });
-        location_markers[locations[i][3]] = i;
+        location_markers[location.id] = i;
         markers.push(marker);
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-                infowindow.setContent(locations[i][0]);
+                infowindow.setContent(location.name+' '+location.description+' '+location.address);
                 infowindow.open(map, marker);
             }
         })(marker, i));
@@ -118,5 +118,3 @@ function AutoCenter() {
     //  Fit these bounds to the map
     map.fitBounds(bounds);
 }
-
-

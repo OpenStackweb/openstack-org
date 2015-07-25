@@ -6,6 +6,10 @@ Member:
   extensions:
     - PresentationMemberExtension
     - MemberTokenProvider
+    - AttendeeMember
+EditProfilePage_Controller:
+  extensions:
+    - EditProfilePageSummitAttendeeExtension
 MemberTokenProvider:
   token_expire: 500000
 Director:
@@ -14,24 +18,30 @@ Director:
     'trackchairs/api/v1': 'TrackChairAPI'
     'presentations/authenticate': 'PresentationAPITokenGenerator'
     'summit-login': 'SummitSecurity'
+    'summit-admin': 'SummitAppAdminController'
 PresentationCategory:
   extensions:
     - JSONable
+    - SummitEntity
 PresentationSpeaker:
   extensions:
     - JSONable
+    - SummitEntity
 PresentationTopic:
   extensions:
     - JSONable
+    - SummitEntity
 SummitPresentationComment:
   extensions:
     - JSONable
 Summit:
   extensions:
     - JSONable
+    - SummitEntity
 SummitTrackChair:
   extensions:
     - JSONable
+    - SummitEntity
 SummitCategoryChange:
   extensions:
     - JSONable    
@@ -39,6 +49,7 @@ Presentation:
   extensions:
     - Sluggable
     - JSONable
+    - SummitEntity
   status_options:
     - Received
     - In community voting
@@ -46,9 +57,30 @@ Presentation:
     - accepted
     - not accepted
     - accepted as an alternate
-SchedPresentation:
-  extensions:
-    - Sluggable
 BootstrapMemberLoginForm:
   extensions:
     - BootstrapLoginFormExtension
+SummitAttendee:
+  extensions:
+    - SummitEntity
+SummitEvent:
+  extensions:
+    - SummitEntity
+SummitEventFeedback:
+  extensions:
+    - SummitEntity
+SummitEventType:
+  extensions:
+    - SummitEntity
+PresentationMaterial:
+  extensions:
+    - SummitEntity
+SummitAbstractLocation:
+  extensions:
+    - SummitEntity
+SummitType:
+  extensions:
+    - SummitEntity
+SummitTicketType:
+  extensions:
+    - SummitEntity

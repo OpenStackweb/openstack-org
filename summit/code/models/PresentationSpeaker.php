@@ -36,8 +36,21 @@ implements IPresentationSpeaker
         'SummitRegistrationPromoCode' => 'SpeakerSummitRegistrationPromoCode'
     );
 
+    private static $has_many = array
+    (
+        'Feedback' => 'PresentationSpeakerFeedback',
+    );
 
-    private static $indexes = array (
+    private static $searchable_fields = array
+    (
+        'Member.Email',
+        'FirstName',
+        'LastName',
+        'AnnouncementEmailTypeSent'
+    );
+
+    private static $indexes = array
+    (
         //'EmailAddress' => true
     );
 
@@ -45,12 +58,18 @@ implements IPresentationSpeaker
         'MemberID' => 0,
     );
 
-
-    private static $belongs_many_many = array (
-        'SchedPresentations' => 'SchedPresentation',
+    private static $belongs_many_many = array
+    (
         'Presentations'      => 'Presentation',
     );
 
+    private static $summary_fields = array
+    (
+        'FirstName'  => 'LastName',
+        'LastName' => 'LastName',
+        'Member.Email' => 'Email',
+        'AnnouncementEmailTypeSent' => 'Announcement Email Sent',
+    );
 
     /**
      * Gets a readable label for the speaker
@@ -61,6 +80,10 @@ implements IPresentationSpeaker
         return "{$this->FirstName} {$this->LastName}";
     }
 
+    public function getTitle()
+    {
+        return sprintf('%s (%s)', $this->getName(), $this->Member()->Email);
+    }
 
     /**
      * Helper method to link to this speaker, given an action
@@ -81,7 +104,6 @@ implements IPresentationSpeaker
         }
     }
 
-
     /**
      * Gets a link to edit this record
      * 
@@ -91,7 +113,6 @@ implements IPresentationSpeaker
         return $this->linkTo($presentationID, 'edit');
     }
 
-
     /**
      * Gets a link to delete this presentation
      * 
@@ -100,7 +121,6 @@ implements IPresentationSpeaker
     public function DeleteLink($presentationID) {
         return $this->linkTo($presentationID, 'delete?t='.SecurityToken::inst()->getValue());
     }
-
 
     /**
      * Gets a link to the speaker's review page, as seen in the email. Auto authenticates.
@@ -115,25 +135,34 @@ implements IPresentationSpeaker
     }
 
 
-    /**
-     * Determines if the user can edit this speaker
-     * 
-     * @return  boolean
-     */
-    public function canEdit($member = null) {
-        return $this->Presentation()->canEdit($member);
-    }
-
-
-    public function getCMSFields() {
-        return FieldList::create(TabSet::create("Root"))
+     public function getCMSFields() {
+        $fields =  FieldList::create(TabSet::create("Root"))
             ->text('FirstName',"Speaker's first name")
             ->text('LastName', "Speaker's last name")
             ->text('Title', "Speaker's title")
             ->tinyMCEEditor('Bio',"Speaker's Bio")
             ->text('IRCHandle','IRC Handle (optional)')
             ->text('TwitterHandle','Twitter Handle (optional)')
-            ->imageUpload('Photo','Upload a speaker photo');
+            ->imageUpload('Photo','Upload a speaker photo')
+            ->memberAutoComplete('Member', 'Member');
+
+         if($this->ID > 0)
+         {
+             // presentations
+             $config = GridFieldConfig_RelationEditor::create();
+             $config->removeComponentsByType('GridFieldAddNewButton');
+             $gridField = new GridField('Presentations', 'Presentations', $this->Presentations(), $config);
+             $fields->addFieldToTab('Root.Presentations', $gridField);
+
+             //speaker feedback
+
+             $config = GridFieldConfig_RecordEditor::create();
+             $config->removeComponentsByType('GridFieldAddNewButton');
+             $gridField = new GridField('Feedback', 'Feedback', $this->Feedback(), $config);
+             $fields->addFieldToTab('Root.Feedback', $gridField);
+         }
+
+         return $fields;
     }
 
     public function AllPresentations() {
@@ -141,7 +170,6 @@ implements IPresentationSpeaker
             'Status' => 'Received'
         ));    
     }
-
 
     public function MyPresentations() {
         return Summit::get_active()->Presentations()->filter(array(
@@ -323,5 +351,42 @@ implements IPresentationSpeaker
     public function getSummitPromoCode()
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this,'SummitRegistrationPromoCode')->getTarget();
+    }
+
+    function ProfilePhoto($width=100){
+        $img = $this->Photo();
+        $twitter_name = $this->TwitterHandle;
+        if(!is_null($img)  && $img->exists() && Director::fileExists($img->Filename)){
+            $img = $img->SetWidth($width);
+            return "<img alt='{$this->ID}_profile_photo' src='{$img->getURL()}' class='member-profile-photo'/>";
+        } elseif (!empty($twitter_name)) {
+            if ($width < 100) {
+                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=normal" />';
+            } else {
+                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=bigger" />';
+            }
+        } else {
+            if ($width < 100) {
+                return "<img src='themes/openstack/images/generic-profile-photo-small.png'/>";
+            } else {
+                return "<img src='themes/openstack/images/generic-profile-photo.png'/>";
+            }
+        }
+    }
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canView($member = null) {
+        return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
+    }
+
+    /**
+     * @param Member $member
+     * @return boolean
+     */
+    public function canEdit($member = null) {
+        return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 }

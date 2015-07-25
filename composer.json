@@ -11,7 +11,7 @@
     "tractorcow/silverstripe-colorpicker": "3.0.*@dev",
     "knplabs/github-api": "1.4.4",
     "rackspace/php-opencloud": "1.12.2",
-    "nnnick/chartjs": "1.0.1.*@dev",
+    "nnnick/chartjs": "dev-master",
     "openid/php-openid": "dev-master",
     "silverstripe/geoip": "dev-master",
     "unclecheese/zen-fields": "dev-master",
@@ -21,11 +21,13 @@
     "unclecheese/zen-fields": "1.0.*",
     "unclecheese/betterbuttons": "1.2.*",
     "silverstripe/tagfield": "dev-master",
-    "smarcet/silverstripe-permamail": "dev-master",
+    "unclecheese/silverstripe-permamail": "1.1.*",
     "undefinedoffset/sortablegridfield": "dev-master",
     "unclecheese/bootstrap-forms": "1.1.*",
     "unclecheese/dropzone": "dev-master",
-    "unclecheese/bootstrap-tagfield": "dev-master"
+    "unclecheese/bootstrap-tagfield": "dev-master",
+    "guzzlehttp/guzzle": "5.3.0",
+    "silverstripe/gridfieldajaxrefresh":"dev-master"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",

@@ -9,7 +9,12 @@ SummitSecurity:
   dependencies:
     SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
     SpeakerRegistrationRequestManager: '%$SpeakerRegistrationRequestManager'
-
+EventbriteOrderPlacedEndpoint:
+  dependencies:
+    EventbriteEventManager: '%$EventbriteEventManager'
+EditProfilePageSummitAttendeeExtension:
+  dependencies:
+    EventbriteEventManager: '%$EventbriteEventManager'
 Injector:
   SchedRestfulService:
     class: RestfulService
@@ -69,3 +74,27 @@ Injector:
       3: '%$SpeakerSelectionAnnouncementSenderFactory'
       4: '%$SpeakerSummitRegistrationPromoCodeRepository'
       5: '%$TransactionManager'
+  EventbriteEventRepository:
+    class: SapphireEventbriteEventRepository
+  EventbriteEventFactory:
+    class: EventbriteEventFactory
+  EventbriteRestApi:
+    class: EventbriteRestApi
+  SummitRepository:
+    class: SapphireSummitRepository
+  SummitAttendeeFactory:
+    class: SummitAttendeeFactory
+  SummitAttendeeRepository:
+    class: SapphireSummitAttendeeRepository
+  MemberRepository:
+    class: SapphireDupesMemberRepository
+  EventbriteEventManager:
+    constructor:
+      0: '%$EventbriteEventRepository'
+      1: '%$EventbriteEventFactory'
+      2: '%$EventbriteRestApi'
+      3: '%$MemberRepository'
+      4: '%$SummitAttendeeFactory'
+      5: '%$SummitAttendeeRepository'
+      6: '%$SummitRepository'
+      7: '%$TransactionManager'

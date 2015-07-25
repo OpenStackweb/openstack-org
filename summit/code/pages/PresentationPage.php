@@ -9,13 +9,12 @@ class PresentationPage extends SummitPage
     );
 
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
         $fields->addFieldsToTab('Root.Main', new HtmlEditorField('PresentationDeadlineText', 'Presentation Deadline Text'));
-        return $fields
-            ->tab('LegalAgreement')
-                ->htmlEditor('LegalAgreement')
-        ;
+        $fields->addFieldsToTab('Root.LegalAgreement', new HtmlEditorField('LegalAgreement', 'Legal Agreement'));
+        return $fields;
     }
 
     public function getPresentationDeadlineText(){
@@ -160,7 +159,8 @@ class PresentationPage_Controller extends SummitPage_Controller
      */
     public function handleManage(SS_HTTPRequest $r) {        
         if($r->param('PresentationID') === 'new') {
-            $presentation = Presentation::create();
+            $presentation            = Presentation::create();
+            $presentation->SummitID  = Summit::CurrentSummit()->ID;
             $presentation->CreatorID = Member::currentUserID();
             $presentation->write();
 

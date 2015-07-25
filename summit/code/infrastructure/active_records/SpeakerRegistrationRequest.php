@@ -38,7 +38,7 @@ class SpeakerRegistrationRequest
      */
     private $token;
 
-    private static $has_many_many = array (
+    private static $many_many = array (
 
     );
 

@@ -15,7 +15,8 @@
 /**
  * Class SummitsApi
  */
-final class SummitsApi extends AbstractRestfulJsonApi {
+final class SummitsApi extends AbstractRestfulJsonApi
+{
 
     const ApiPrefix = 'api/v1/summits';
 
@@ -39,72 +40,94 @@ final class SummitsApi extends AbstractRestfulJsonApi {
      * @param IEntityRepository $sponsorship_add_on_repository
      * @param ISummitPackagePurchaseOrderManager $package_purchase_order_manager
      */
-    public function __construct(IEntityRepository $sponsorship_package_repository,
-                                IEntityRepository $sponsorship_add_on_repository,
-                                ISummitPackagePurchaseOrderManager $package_purchase_order_manager){
+    public function __construct(
+        IEntityRepository $sponsorship_package_repository,
+        IEntityRepository $sponsorship_add_on_repository,
+        ISummitPackagePurchaseOrderManager $package_purchase_order_manager
+    ) {
         parent::__construct();
-        $this->sponsorship_add_on_repository  = $sponsorship_add_on_repository;
+        $this->sponsorship_add_on_repository = $sponsorship_add_on_repository;
         $this->sponsorship_package_repository = $sponsorship_package_repository;
         $this->package_purchase_order_manager = $package_purchase_order_manager;
 
         $this_var = $this;
 
-        $this->addBeforeFilter('getAllSponsorshipAddOnsBySummit','check_own_request',function ($request) use($this_var){
-            if(!$this_var->checkOwnAjaxRequest($request))
+        $this->addBeforeFilter('getAllSponsorshipAddOnsBySummit', 'check_own_request',
+            function ($request) use ($this_var) {
+                if (!$this_var->checkOwnAjaxRequest($request)) {
+                    return $this_var->permissionFailure();
+                }
+            });
+
+        $this->addBeforeFilter('getAllSponsorshipAddOnsBySummit', 'check_own_request2',
+            function ($request) use ($this_var) {
+                if (!$this_var->checkOwnAjaxRequest($request)) {
+                    return $this_var->permissionFailure();
+                }
+            });
+
+        $this->addBeforeFilter('approvePurchaseOrder', 'check_approve', function ($request) use ($this_var) {
+            if (!$this_var->checkAdminPermissions($request)) {
                 return $this_var->permissionFailure();
+            }
         });
 
-        $this->addBeforeFilter('getAllSponsorshipAddOnsBySummit','check_own_request2',function ($request) use($this_var){
-            if(!$this_var->checkOwnAjaxRequest($request))
+        $this->addBeforeFilter('rejectPurchaseOrder', 'check_reject', function ($request) use ($this_var) {
+            if (!$this_var->checkAdminPermissions($request)) {
                 return $this_var->permissionFailure();
-        });
-
-        $this->addBeforeFilter('approvePurchaseOrder','check_approve',function ($request) use($this_var){
-            if(!$this_var->checkAdminPermissions($request))
-                return $this_var->permissionFailure();
-        });
-
-        $this->addBeforeFilter('rejectPurchaseOrder','check_reject',function ($request) use($this_var){
-            if(!$this_var->checkAdminPermissions($request))
-                return $this_var->permissionFailure();
+            }
         });
 
     }
 
-    public function checkOwnAjaxRequest($request){
+    public function checkOwnAjaxRequest($request)
+    {
         $referer = @$_SERVER['HTTP_REFERER'];
-        if(empty($referer)) return false;
+        if (empty($referer)) {
+            return false;
+        }
         //validate
-        if (!Director::is_ajax()) return false;
+        if (!Director::is_ajax()) {
+            return false;
+        }
+
         return Director::is_site_url($referer);
     }
 
-    public function checkAdminPermissions($request){
+    public function checkAdminPermissions($request)
+    {
         return Permission::check("SANGRIA_ACCESS");
     }
 
-    protected function isApiCall(){
+    protected function isApiCall()
+    {
         $request = $this->getRequest();
-        if(is_null($request)) return false;
-        return  strpos(strtolower($request->getURL()),self::ApiPrefix) !== false;
+        if (is_null($request)) {
+            return false;
+        }
+
+        return strpos(strtolower($request->getURL()), self::ApiPrefix) !== false;
     }
 
     /**
      * @return bool
      */
-    protected function authorize(){
+    protected function authorize()
+    {
         return true;
     }
 
-    protected function authenticate() {
+    protected function authenticate()
+    {
         return true;
     }
 
     static $url_handlers = array(
-        'GET $SUMMIT_ID/add-ons'                                  => 'getAllSponsorshipAddOnsBySummit',
-        'GET $SUMMIT_ID/packages'                                 => 'getAllSponsorshipPackagesBySummit',
+        'GET $SUMMIT_ID/add-ons' => 'getAllSponsorshipAddOnsBySummit',
+        'GET $SUMMIT_ID/packages' => 'getAllSponsorshipPackagesBySummit',
+        '$SUMMIT_ID/schedule'           => 'handleSchedule',
         'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/approve' => 'approvePurchaseOrder',
-        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject'  => 'rejectPurchaseOrder',
+        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject' => 'rejectPurchaseOrder',
     );
 
     static $allowed_actions = array(
@@ -112,9 +135,11 @@ final class SummitsApi extends AbstractRestfulJsonApi {
         'getAllSponsorshipPackagesBySummit',
         'approvePurchaseOrder',
         'rejectPurchaseOrder',
+        'handleSchedule',
     );
 
-    public function getAllSponsorshipAddOnsBySummit(){
+    public function getAllSponsorshipAddOnsBySummit()
+    {
         try {
             $summit_id = (int)$this->request->param('SUMMIT_ID');
             $query = new QueryObject(new SummitAddOn);
@@ -125,15 +150,17 @@ final class SummitsApi extends AbstractRestfulJsonApi {
             foreach ($list as $add_on) {
                 array_push($res, SummitAddOnAssembler::toArray($add_on));
             }
+
             return $this->ok($res);
-        }
-        catch(Exception $ex) {
+        } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
+
             return $this->serverError();
         }
     }
 
-    public function getAllSponsorshipPackagesBySummit(){
+    public function getAllSponsorshipPackagesBySummit()
+    {
         try {
             $query = new QueryObject(new SummitPackage());
             $summit_id = (int)$this->request->param('SUMMIT_ID');
@@ -144,51 +171,64 @@ final class SummitsApi extends AbstractRestfulJsonApi {
             foreach ($list as $package) {
                 array_push($res, SummitPackageAssembler::toArray($package));
             }
+
             return $this->ok($res);
-        }
-        catch(Exception $ex) {
+        } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
+
             return $this->serverError();
         }
     }
 
-    public function approvePurchaseOrder(){
-        try{
+    public function approvePurchaseOrder()
+    {
+        try {
             $order_id = (int)$this->request->param('PURCHASE_ORDER_ID');
-            $this->package_purchase_order_manager->approvePurchaseOrder($order_id, new ApprovedPurchaseOrderEmailMessageSender);
+            $this->package_purchase_order_manager->approvePurchaseOrder($order_id,
+                new ApprovedPurchaseOrderEmailMessageSender);
+
             return $this->updated();
-        }
-        catch(NotFoundEntityException $ex1){
-            SS_Log::log($ex1,SS_Log::ERR);
+        } catch (NotFoundEntityException $ex1) {
+            SS_Log::log($ex1, SS_Log::ERR);
+
             return $this->notFound($ex1->getMessage());
-        }
-        catch(EntityValidationException $ex2){
-            SS_Log::log($ex2,SS_Log::NOTICE);
+        } catch (EntityValidationException $ex2) {
+            SS_Log::log($ex2, SS_Log::NOTICE);
+
             return $this->validationError($ex2->getMessages());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+
             return $this->serverError();
         }
     }
 
-    public function rejectPurchaseOrder(){
-        try{
+    public function rejectPurchaseOrder()
+    {
+        try {
             $order_id = (int)$this->request->param('PURCHASE_ORDER_ID');
-            $this->package_purchase_order_manager->rejectPurchaseOrder($order_id, new RejectedPurchaseOrderEmailMessageSender);
+            $this->package_purchase_order_manager->rejectPurchaseOrder($order_id,
+                new RejectedPurchaseOrderEmailMessageSender);
+
             return $this->updated();
-        }
-        catch(NotFoundEntityException $ex1){
-            SS_Log::log($ex1,SS_Log::ERR);
+        } catch (NotFoundEntityException $ex1) {
+            SS_Log::log($ex1, SS_Log::ERR);
+
             return $this->notFound($ex1->getMessage());
-        }
-        catch(EntityValidationException $ex2){
-            SS_Log::log($ex2,SS_Log::NOTICE);
+        } catch (EntityValidationException $ex2) {
+            SS_Log::log($ex2, SS_Log::NOTICE);
+
             return $this->validationError($ex2->getMessages());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+
             return $this->serverError();
         }
+    }
+
+    public function handleSchedule(SS_HTTPRequest $request)
+    {
+        $api = SummitAppScheduleApi::create($this);
+        return $api->handleRequest($request, DataModel::inst());
     }
 }

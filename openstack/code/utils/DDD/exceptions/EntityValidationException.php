@@ -11,31 +11,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class EntityValidationException
  */
-class EntityValidationException extends Exception {
+class EntityValidationException extends Exception
+{
 
-	/**
-	 * @var array
-	 */
-	private $messages;
+    /**
+     * @var array
+     */
+    private $messages;
 
-	public function __construct(array $messages){
-		parent::__construct();
-		$this->messages = $messages;
-	}
+    public function __construct(array $messages)
+    {
+        parent::__construct();
+        $this->messages = $messages;
+        $this->message = implode(', ', $this->messages);
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getMessages(){
-		return $this->messages;
-	}
+    /**
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
 
-    public static function buildMessage($message){
+    public static function buildMessage($message)
+    {
         return array(
             array('message' => $message)
         );
     }
+
 }

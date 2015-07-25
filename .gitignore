@@ -72,3 +72,6 @@ gridfieldajaxrefresh
 summit/javascript/new-trackchairs-app/app/index.bundle.js
 reports/
 siteconfig/
+gridfieldextensions/*
+gridfieldajaxrefresh/*
+gridfieldajaxrefresh

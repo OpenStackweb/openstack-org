@@ -18,7 +18,8 @@ class EditProfilePage extends Page
 
 class EditProfilePage_Controller extends Page_Controller
 {
-    static $allowed_actions = array(
+    static $allowed_actions = array
+    (
         'EditProfileForm',
         'LoginForm',
         'election',
@@ -39,6 +40,8 @@ class EditProfilePage_Controller extends Page_Controller
         'EditSpeakerProfileForm',
         'downgrade2communitymember',
         'upgrade2foundationmember',
+        'SummitAttendeeInfoForm',
+        'saveSummitAttendeeInfo',
     );
 
     /**
@@ -280,7 +283,6 @@ class EditProfilePage_Controller extends Page_Controller
             return NULL;
         }
     }
-
 
     // look up the current election if there is one
 
@@ -684,6 +686,13 @@ class EditProfilePage_Controller extends Page_Controller
     {
         $html = '';
         $this->extend('getNavActionsExtensions', $html);
+        return $html;
+    }
+
+    function getNavMessageExtensions()
+    {
+        $html = '';
+        $this->extend('getNavMessageExtensions', $html);
         return $html;
     }
 

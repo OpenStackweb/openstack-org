@@ -1,0 +1,56 @@
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    width: 20px !important;
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"]{
+    height: 30px !important;
+}
+
+.error {
+    border: 1px solid red;
+    background-color: rgba(255,0,0,0.1);
+}
+
+.valid {
+    border: 1px solid green;
+    background-color: rgba(0,255,0,0.1);
+}
+
+.center_text {
+    text-align: center;
+}
+
+/* DIRECTORY */
+
+#create_summit .form-group {
+    margin-right: 35px;
+}
+
+/* EDIT SUMMIT */
+
+#SummitForm_SummitForm .bootstrap-tagsinput {
+    margin-bottom: 0;
+    display: block;
+}
+
+#SummitForm_SummitForm .bootstrap-tagsinput input{
+    width: 10em;
+}
+
+#SummitForm_SummitForm .edit,.delete,.save,.update{
+    cursor: pointer;
+}
+
+#SummitForm_SummitForm .edit:hover {
+    color:deepskyblue;
+}
+
+#SummitForm_SummitForm .delete:hover {
+    color:red;
+}
+
+#SummitForm_SummitForm .save:hover,.update:hover {
+    color:green;
+}
+
+

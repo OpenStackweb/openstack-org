@@ -1,4 +1,7 @@
 ---
-Name: openstack_main
+Name: openstack_ioc
 After: 'framework/*'
 ---
+Injector:
+  ManyManyList:
+    class: ObservableManyManyList

@@ -45,7 +45,6 @@ class SummitPage extends Page
         'TwitterPixelId' => 'l5lav',
     );
 
-
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();

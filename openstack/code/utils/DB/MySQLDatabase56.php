@@ -99,6 +99,6 @@ class MySQLDatabase56 extends CustomMySQLDatabase {
     public static function nowRfc2822(){
         list($usec, $sec) = explode(' ', microtime());
         $usec             = substr($usec, 2, self::MicrosecondsPrecision);
-        return date('Y-m-d H:i:s', $sec).'.'.$usec;
+        return gmdate('Y-m-d H:i:s', $sec).'.'.$usec;
     }
 }

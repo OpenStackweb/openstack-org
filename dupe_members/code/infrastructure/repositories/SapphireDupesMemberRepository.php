@@ -31,7 +31,7 @@ class SapphireDupesMemberRepository
      */
     public function findByEmail($email)
     {
-        // TODO: Implement findByEmail() method.
+       return Member::get()->filter('Email', $email )->first();
     }
 
     /**

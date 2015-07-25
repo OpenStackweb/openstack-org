@@ -11,64 +11,74 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /***
  * Class CCLACompanyService
  */
-final class CCLACompanyService {
+final class CCLACompanyService
+{
 
-	/**
-	 * @var ICLACompanyRepository
-	 */
-	private $company_repository;
+    /**
+     * @var ICLACompanyRepository
+     */
+    private $company_repository;
 
-	/**
-	 * @var ITransactionManager
-	 */
-	private $tx_manager;
+    /**
+     * @var ITransactionManager
+     */
+    private $tx_manager;
 
-	public function __construct(ICLACompanyRepository $company_repository, ITransactionManager $tx_manager){
-		$this->company_repository = $company_repository;
-		$this->tx_manager         = $tx_manager;
-	}
+    public function __construct(ICLACompanyRepository $company_repository, ITransactionManager $tx_manager)
+    {
+        $this->company_repository = $company_repository;
+        $this->tx_manager = $tx_manager;
+    }
 
-	/**
-	 * @param int $company_id
-	 * @return DateTime
-	 */
-	public function signCCLA($company_id){
+    /**
+     * @param int $company_id
+     * @return DateTime
+     */
+    public function signCCLA($company_id)
+    {
 
-		$company_repository = $this->company_repository;
+        $company_repository = $this->company_repository;
 
-		return $this->tx_manager->transaction(function() use($company_id, $company_repository){
-			$company = $company_repository->getById($company_id);
+        return $this->tx_manager->transaction(function () use ($company_id, $company_repository) {
 
-			if(!$company)
-				throw new NotFoundEntityException('Company',sprintf(' id %s',$company_id));
+            $company = $company_repository->getById($company_id);
 
-			if(!$company->isICLASigned())
-				$company->signICLA();
+            if (!$company) {
+                throw new NotFoundEntityException('Company', sprintf(' id %s', $company_id));
+            }
 
-			return $company->ICLASignedDate();
-		});
-	}
+            if (!$company->isICLASigned()) {
+                $company->signICLA();
+            }
 
-	/**
-	 * @param int $company_id
-	 * @return void
-	 */
-	public function unsignCCLA($company_id){
+            return $company->ICLASignedDate();
+        });
+    }
 
-		$company_repository = $this->company_repository;
+    /**
+     * @param int $company_id
+     * @return void
+     */
+    public function unsignCCLA($company_id)
+    {
 
-		return $this->tx_manager->transaction(function() use($company_id, $company_repository){
-			$company = $company_repository->getById($company_id);
+        $company_repository = $this->company_repository;
 
-			if(!$company)
-				throw new NotFoundEntityException('Company',sprintf(' id %s',$company_id));
+        return $this->tx_manager->transaction(function () use ($company_id, $company_repository) {
+            $company = $company_repository->getById($company_id);
 
-			if($company->isICLASigned())
-				$company->unsignICLA();
+            if (!$company) {
+                throw new NotFoundEntityException('Company', sprintf(' id %s', $company_id));
+            }
 
-		});
-	}
+            if ($company->isICLASigned()) {
+                $company->unsignICLA();
+            }
+
+        });
+    }
 } 
