@@ -35,7 +35,7 @@ class PresentationMemberExtension extends DataExtension
             DB::query("DELETE FROM PresentationPriority WHERE MemberID = {$mid}");
             $list = Summit::get_active()
                         ->Presentations()
-                        ->sort('Views ASC, RAND()');
+                        ->sort('Views ASC, RAND()')
                         ->column('ID');
             
             foreach($list as $priority => $id) {
