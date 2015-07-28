@@ -92,9 +92,9 @@
 
 <!-------------------------------------------------->	
 <!-- NORMAL MODE ----------------------------------->
-<!-------------------------------------------------->	
+<!-------------------------------------------------->
 
-<% if SearchMode != TRUE %>	
+<% if SearchMode != TRUE %>
 			
 <!-- DROP DOWN FOR CATEGORIES ----------------------------------->
 <div class="btn-group voting-dropdown">
@@ -106,7 +106,7 @@
         <% end_if %>
        <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" role="menu">
+  <ul class="dropdown-menu" role="menu">SearchForm
         <li>
           <a href='{$Top.Link}Category/All'>All Categories</a>
         </li>
@@ -157,156 +157,7 @@
   <% end_if %>
 </ul>
 		</div>
-		
-		<!-- PRESENTATION DISPLAY ----------------------------------->
-		<div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
-			<a href="#" class="voting-open-panel text"><i class="fa fa-chevron-left"></i>All Submissions</a>
-			<% loop Presentation %>
-			
-           	<div class="voting-content-body">
 
-           <% if not $CurrentMember %>
-            <!-- LOG IN TO VOTE  ----------------------------------->
-				<h5>Login to vote</h5>
-                <div class="login-to-vote">
-                    <h3>Help this presentation get to the OpenStack Summit!</h3>
-                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit in Tokyo, Japan. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
-                    <a className="btn" href="/Security/login?BackURL={$Top.Link}presentation/{$ID}">I already have an account</a>&nbsp; | &nbsp;
-                    <a href="/summit-login/login?BackURL={$Top.Link}presentation/{$ID}" className="btn">Sign up now</a>
-                </div>
-			
-			<% else %>
-			<!-- CAST YOUR VOTE  ----------------------------------->
-				<h5>Cast Your Vote</h5>
-				<ul class="voting-rate-wrapper">
-					<li class="voting-rate-single <% if $Top.VoteValue = 3 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=3" id='vote-3'>
-                            Would Love To See!
-                            <div class="voting-shortcut">3</div>
-                        </a>
-					</li>
-					<li class="voting-rate-single <% if $Top.VoteValue = 2 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=2" id='vote-2'>
-                            Would Try To See
-                            <div class="voting-shortcut">2</div>
-                        </a>
-                    </li>
-					<li class="voting-rate-single <% if $Top.VoteValue = 1 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=1" id='vote-1'>
-                            Might See
-                            <div class="voting-shortcut">1</div>
-                        </a>
-                    </li>
-					<li class="voting-rate-single <% if $Top.VoteValue = -1 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=-1" id='vote-0'>
-                            Would Not See
-                            <div class="voting-shortcut">0</div>
-                        </a>
-                    </li>                                        
-				</ul>
-				<% end_if %>
-				
-				
-				
-				<div class="voting-presentation-title">
-					<h5>Title</h5>
-					<h3>$Title</h3>
-				</div>
-				<div class="voting-presentation-track">
-				    <h5>Track</h5>
-				    <p>$Category.Title</p>
-				</div>
-				<div class="voting-presentation-body">
-					<h5>Speakers</h5>
-                    <% if Speakers %>
-					<div class="voting-speaker-row">
-						<ul>
-                              <% loop Speakers %>
-                                <li>
-                                    <img class="voting-speaker-pic" src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>" />
-                                    <div class="voting-speaker-name">
-                                        $FirstName $Surname
-                                        <% if $Title %><span>$Title</span><% else %><span>&nbsp;</span><% end_if %>
-                                    </div>
-                                </li>                              
-                              <% end_loop %>
-						</ul>
-					</div>
-                    <% end_if %>						
-
-					<p>
-						<h5>Abstract</h5>
-					</p>
-					
-					<div>$Description</div>
-					
-					<div class="main-speaker-wrapper">
-					<% loop Speakers %>					
-						<div class="main-speaker-row">
-							<div class="voting-speaker-name">
-								$FirstName $Surname
-								<span>$Title</span>
-							</div>
-                            <img class="voting-speaker-pic" src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>" />
-						</div>
-						<div class="main-speaker-description">
-							$Bio
-						</div>
-					<% end_loop %>
-                    </div>
-				</div>
-        <% if $CurrentMember %>
-				<h5>Cast Your Vote</h5>
-				<ul class="voting-rate-wrapper">
-					<li class="voting-rate-single <% if $Top.VoteValue = 3 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=3" id='vote-3'>
-                            Would Love To See!
-                            <div class="voting-shortcut">3</div>
-                        </a>
-					</li>
-					<li class="voting-rate-single <% if $Top.VoteValue = 2 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=2" id='vote-2'>
-                            Would Try To See
-                            <div class="voting-shortcut">2</div>
-                        </a>
-                    </li>
-					<li class="voting-rate-single <% if $Top.VoteValue = 1 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=1" id='vote-1'>
-                            Might See
-                            <div class="voting-shortcut">1</div>
-                        </a>
-                    </li>
-					<li class="voting-rate-single <% if $Top.VoteValue = -1 %>current-vote<% end_if %>">
-					   <a href="{$Top.Link}SaveRating/?id={$ID}&rating=-1" id='vote-0'>
-                            Would Not See
-                            <div class="voting-shortcut">0</div>
-                        </a>
-                    </li>                                        
-				</ul>
-					<div class="voting-tip">
-						<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
-					</div>
-        <% end_if %>
-				<div class="voting-share-wrapper">
-						<h5>Share This Presentation</h5>
-						<div class="sharing-section">
-							<div class="single-voting-share">
-								<a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-							</div>
-							<div class="single-voting-share">
-								<div class="g-plus" data-action="share" data-annotation="none"></div>
-							</div>
-							<div class="single-voting-share fb-share">
-								<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
-							</div>
-
-                    		
-						</div>
-				</div>
-			</div>
-			<% end_loop %>
-		</div>
-		
 <!-------------------------------------------------->	
 <!-- SEARCH MODE ----------------------------------->
 <!-------------------------------------------------->	
@@ -318,20 +169,167 @@
  <ul class="presentation-list">
   <% loop $SearchResults %>
          
-      <li><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
+      <li><a href="{$Top.Link}presentation/{$ID}?s={$Top.Search}">$Title</a></li>
   <% end_loop %>
 </ul></div>
-
-		<div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
-			<a href="#" class="voting-open-panel text"><i class="fa fa-chevron-left"></i>Search Results</a>
-            <p>Select an entry on the left to see the details here.</p>
-        </div>
-
 <% end_if %>
 
-		
-		
-	</div>
+    <% if SearchMode != TRUE || PresentationWithSearch = TRUE %>
+    <!-- PRESENTATION DISPLAY ----------------------------------->
+    <div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
+        <a href="#" class="voting-open-panel text"><i class="fa fa-chevron-left"></i>All Submissions</a>
+        <% loop Presentation %>
+
+        <div class="voting-content-body">
+
+            <% if not $CurrentMember %>
+                <!-- LOG IN TO VOTE  ----------------------------------->
+                <h5>Login to vote</h5>
+                <div class="login-to-vote">
+                    <h3>Help this presentation get to the OpenStack Summit!</h3>
+                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit in Tokyo, Japan. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
+                    <a className="btn" href="/Security/login?BackURL={$Top.Link}presentation/{$ID}">I already have an account</a>&nbsp; | &nbsp;
+                    <a href="/summit-login/login?BackURL={$Top.Link}presentation/{$ID}" className="btn">Sign up now</a>
+                </div>
+
+            <% else %>
+                <!-- CAST YOUR VOTE  ----------------------------------->
+                <h5>Cast Your Vote</h5>
+            <ul class="voting-rate-wrapper">
+                <li class="voting-rate-single <% if $Top.VoteValue = 3 %>current-vote<% end_if %>">
+                    <a href="{$Top.Link}SaveRating/?id={$ID}&rating=3" id='vote-3'>
+                        Would Love To See!
+                        <div class="voting-shortcut">3</div>
+                    </a>
+                </li>
+                <li class="voting-rate-single <% if $Top.VoteValue = 2 %>current-vote<% end_if %>">
+                    <a href="{$Top.Link}SaveRating/?id={$ID}&rating=2" id='vote-2'>
+                        Would Try To See
+                        <div class="voting-shortcut">2</div>
+                    </a>
+                </li>
+                <li class="voting-rate-single <% if $Top.VoteValue = 1 %>current-vote<% end_if %>">
+                    <a href="{$Top.Link}SaveRating/?id={$ID}&rating=1" id='vote-1'>
+                        Might See
+                        <div class="voting-shortcut">1</div>
+                    </a>
+                </li>
+                    <li class="voting-rate-single <% if $Top.VoteValue = -1 %>current-vote<% end_if %>">
+            <a href="{$Top.Link}SaveRating/?id={$ID}&rating=-1" id='vote-0'>
+                Would Not See
+                <div class="voting-shortcut">0</div>
+            </a>
+        </li>
+        </ul>
+            <% end_if %>
+
+
+
+            <div class="voting-presentation-title">
+                <h5>Title</h5>
+                <h3>$Title</h3>
+            </div>
+            <div class="voting-presentation-track">
+                <h5>Track</h5>
+                <p>$Category.Title</p>SearchForm
+            </div>
+            <div class="voting-presentation-body">
+                <h5>Speakers</h5>
+                <% if Speakers %>
+                    <div class="voting-speaker-row">
+                        <ul>
+                            <% loop Speakers %>
+                                <li>
+                                    <img class="voting-speaker-pic" src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>" />
+                                    <div class="voting-speaker-name">
+                                        $FirstName $Surname
+                                        <% if $Title %><span>$Title</span><% else %><span>&nbsp;</span><% end_if %>
+                                    </div>
+                                </li>
+                            <% end_loop %>
+                        </ul>
+                    </div>
+                <% end_if %>
+
+                <p>
+                <h5>Abstract</h5>
+                </p>
+
+                <div>$Description</div>
+
+                <div class="main-speaker-wrapper">
+                    <% loop Speakers %>			SearchForm
+                        <div class="main-speaker-row">
+                            <div class="voting-speaker-name">
+                                $FirstName $Surname
+                                <span>$Title</span>
+                            </div>
+                            <img class="voting-speaker-pic" src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>" />
+                        </div>
+                        <div class="main-speaker-description">
+                            $Bio
+                        </div>
+                    <% end_loop %>
+                </div>
+            </div>
+            <% if $CurrentMember %>
+                <h5>Cast Your Vote</h5>
+            <ul class="voting-rate-wrapper">
+                <li class="voting-rate-single <% if $Top.VoteValue = 3 %>current-vote<% end_if %>">
+                    <a href="{$Top.Link}SaveRating/?id={$ID}&rating=3" id='vote-3'>
+                        Would Love To See!
+                        <div class="voting-shortcut">3</div>
+                    </a>
+                </li>
+                <li class="voting-rate-single <% if $Top.VoteValue = 2 %>current-vote<% end_if %>">
+                    <a href="{$Top.Link}SaveRating/?id={$ID}&rating=2" id='vote-2'>
+                        Would Try To See
+                        <div class="voting-shortcut">2</div>
+                    </a>
+                </li>
+                <li class="voting-rate-single <% if $Top.VoteValue = 1 %>current-vote<% end_if %>">
+                    <a href="{$Top.Link}SaveRating/?id={$ID}&rating=1" id='vote-1'>
+                        Might See
+                        <div class="voting-shortcut">1</div>
+                    </a>
+                </li>
+                    <li class="voting-rate-single <% if $Top.VoteValue = -1 %>current-vote<% end_if %>">
+            <a href="{$Top.Link}SaveRating/?id={$ID}&rating=-1" id='vote-0'>
+                Would Not See
+                <div class="voting-shortcut">0</div>
+            </a>
+        </li>
+        </ul>
+            <div class="voting-tip">
+                <strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
+            </div>
+            <% end_if %>
+            <div class="voting-share-wrapper">
+                <h5>Share This Presentation</h5>
+                <div class="sharing-section">
+                    <div class="single-voting-share">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </div>
+                    <div class="single-voting-share">
+                        <div class="g-plus" data-action="share" data-annotation="none"></div>
+                    </div>
+                    <div class="single-voting-share fb-share">
+                        <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <% end_loop %>
+    </div>
+    <% else %>
+    <div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
+        <a href="#" class="voting-open-panel text"><i class="fa fa-chevron-left"></i>Search Results</a>
+        <p>Select an entry on the left to see the details here.</p>
+    </div>
+    <% end_if %>
+</div>
 </div>
 
                 <!-- End Page Content -->

@@ -77,26 +77,26 @@ class PresentationVotingPage_Controller extends Page_Controller {
 
 
     function LoggedOutPresentationList($catID) {
-        
+
         $summit = Summit::get_active();
-        
+
         if ($catID) {
-        
+
             $filter = array (
                 'CategoryID' => $catID,
                 'Status' => 'Received'
             );
-        
+
         } else {
-        
+
             $filter = array (
                 'Status' => 'Received'
-            );        
-        
+            );
+
         }
-        
+
         return Summit::get_active()->Presentations()->filter($filter);
-        
+
     }
     
     function MemberPresentationList() {
@@ -303,8 +303,15 @@ class PresentationVotingPage_Controller extends Page_Controller {
         if(is_numeric($CategoryID)) $Category = PresentationCategory::get()->byID($CategoryID);
         if(isset($Category)) $data["CategoryName"] = $Category->Title;
 
-        //return our $Data to use on the page
-        return $this->Customise($data);
+        $data["Search"] = isset($_GET['s']) ? $_GET['s'] : null;
+        if(isset($data['Search']) && strlen($data['Search']) > 1) {
+            $data["PresentationWithSearch"] = TRUE;
+            return $this->doSearch($data, null);
+        }
+        else {
+            //return our $Data to use on the page
+            return $this->Customise($data);
+        }
       } else {
         //Talk not found
         return $this->httpError(404, 'Sorry that talk could not be found');
