@@ -28,7 +28,7 @@ final class RssNewsManager
     }
 
     function deleteAllNewsItems() {
-        DB::query("DELETE FROM RssNews");
+        DB::query("TRUNCATE RssNews");
     }
 
     /**
