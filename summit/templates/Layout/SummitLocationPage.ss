@@ -90,6 +90,11 @@
                 <i class="fa fa-hotel fa-4x"></i>
             </p>
             $LocationsTextHeader
+
+            <div class="alert alert-danger" role="alert">
+                IMPORTANT: You must use the following promo code to receive the Summit discounted rate.<br>
+                Please <a href="#">Read these instructions</a> for more details.<br><strong>Promo Code: OST2015</strong>
+            </div>
         </div>
     </div>
     <% loop Hotels %>
