@@ -1,7 +1,7 @@
 // City nav active on scroll
 
 // Setup the different icons and shadows
-var iconURLPrefix = 'http://openstack.org/summit/images/mapicons/';
+var iconURLPrefix = '//openstack.org/summit/images/mapicons/';
 
 var icons = [
     iconURLPrefix + 'venue.png',
