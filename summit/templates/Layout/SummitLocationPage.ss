@@ -139,7 +139,7 @@
                 </p>
                 <p>
                     <a href="/summit/images/tokyo/hotel-discount-chart.png" target="_blank">
-                        <img class="hotel-discount-chart" src="/summit/images/tokyo/hotel-discount-chart.png" alt="OpenStack Summit Tokyo Hotel Discounts">
+                        <img class="hotel-discount-chart" src="/summit/images/tokyo/hotel-discount-chart.svg" onerror="this.onerror=null; this.src=/summit/images/tokyo/hotel-discount-chart.png" alt="OpenStack Summit Tokyo Hotel Discounts">
                     </a>
                 </p>
                 <hr>
@@ -147,7 +147,10 @@
                     <i class="fa fa-users fa-2x"></i>
                 </p>
                 <p>
-                    Booking for 10 or more? Contact <a href="mailto:sarah@fntech.com">sarah@fntech.com</a>.
+                    Booking for 10 or more rooms for the Summit?
+                </p>
+                <p>
+                    Contact <a href="mailto:sarah@fntech.com">sarah@fntech.com</a>
                 </p>
                 <hr>
                 <p>
