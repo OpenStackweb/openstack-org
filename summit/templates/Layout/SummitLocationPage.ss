@@ -115,7 +115,7 @@
                         <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i>
                             Bookings</a>
                     <% else %>
-                        <a href="{$Website}"><i class="fa fa-home"></i> Website</a>
+                        <a href="#" data-toggle="modal" data-target="#Hotel{$ID}"><i class="fa fa-home"></i> Website</a>
                     <% end_if %>
                 <% end_if %>
             </p>
@@ -126,6 +126,37 @@
         </div>
         <div class="row">
         <% end_if %>
+
+    <!-- Hotel Website Modal -->
+    <div class="modal fade" id="Hotel{$ID}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Important</h4>
+            </div>
+            <div class="modal-body">
+                <p class="center">
+                    <i class="fa fa-exclamation-triangle fa-4x" style="color:#DA422F;"></i>
+                </p>
+                <p>
+                    You must use the following promo code to receive the Summit discounted rate.
+                    Please <a href="//openstack.org/assets/pdf-downloads/OS-Tokyo-Hotel-Info-Packet.pdf" target="_blank">read these instructions</a> for room info and additional details.
+                </p>
+                <p>
+                    <strong style="font-size:1.5em;">Promo Code: OST2015</strong>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p style="text-align: center;">
+                    <a href="{$Website}" class="hotel-alert-btn" target="_blank">Book your hotel room(s)</a>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Hotel Website Modal -->
+
     <% end_loop %>
     <div class="row">
         <div class="col-sm-10 col-sm-push-1">

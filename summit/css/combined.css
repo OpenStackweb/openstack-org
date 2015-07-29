@@ -2417,7 +2417,21 @@ ul.city-nav-list li i {
 img.hotel-discount-chart {
   max-width: 100%;
 }
-
+a.hotel-alert-btn {
+  background: #30739C;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 15px 25px;
+  text-decoration: none;
+  border-style: none; 
+  margin: 0 auto 40px;
+  display: block;
+  max-width: 80%;
+}
+a.hotel-alert-btn:hover {
+  background: #2A4E68;
+}
 .venue-map {
   height: 600px; }
 
