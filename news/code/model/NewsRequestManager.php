@@ -69,46 +69,47 @@ final class NewsRequestManager {
 	 * @param array $data
 	 * @return INews
 	 */
-	public function postNews(array $data){
-		$validator_factory    = $this->validator_factory;
-		$factory              = $this->factory;
+    public function postNews(array $data){
+        $validator_factory    = $this->validator_factory;
+        $factory              = $this->factory;
+        $repository           = $this->news_repository ;
         $submitter_repository = $this->submitter_repository;
-		$upload_service       = $this->upload_service;
+        $upload_service       = $this->upload_service;
 
-        $validator = $validator_factory->buildValidatorForNews($data);
-        if ($validator->fails()) {
+        return $this->tx_manager->transaction(function() use($data, $repository, $submitter_repository, $factory, $validator_factory, $upload_service){
+            $validator = $validator_factory->buildValidatorForNews($data);
+            if ($validator->fails()) {
                 throw new EntityValidationException($validator->messages());
-        }
+            }
 
-        $submitter = $submitter_repository->getSubmitterByEmail($data['submitter_email']);
-        if (!$submitter) {
-            $submitter = $factory->buildNewsSubmitter($data);
-        }
+            $submitter = $submitter_repository->getSubmitterByEmail($data['submitter_email']);
+            if (!$submitter) {
+                $submitter = $factory->buildNewsSubmitter($data);
+            }
 
-        $news = $factory->buildNews(
-            $factory->buildNewsMainInfo($data),
-            $data['tags'],
-            $submitter,
-            $upload_service
-        );
+            $news = $factory->buildNews(
+                $factory->buildNewsMainInfo($data),
+                $data['tags'],
+                $submitter,
+                $upload_service
+            );
 
-        $news->write();
+            $repository->add($news);
 
-        //send email
-        $email = EmailFactory::getInstance()->buildEmail(NEWS_SUBMISSION_EMAIL_FROM,
-            NEWS_SUBMISSION_EMAIL_ALERT_TO,
-            NEWS_SUBMISSION_EMAIL_SUBJECT);
+            //send email
+            $email = EmailFactory::getInstance()->buildEmail(NEWS_SUBMISSION_EMAIL_FROM,
+                NEWS_SUBMISSION_EMAIL_ALERT_TO,
+                NEWS_SUBMISSION_EMAIL_SUBJECT);
 
-        $email->setTemplate('NewsSubmissionEmail');
-        $email->populateTemplate(array(
-            'ArticleHeadline'      => $news->Headline,
-            'ArticleSummary'      => $news->Summary
-        ));
+            $email->setTemplate('NewsSubmissionEmail');
+            $email->populateTemplate(array(
+                'ArticleHeadline'      => $news->Headline,
+                'ArticleSummary'      => $news->Summary
+            ));
 
-        $email->send();
-
-        return $news;
-	}
+            $email->send();
+        });
+    }
 
 	/**
 	 * @param array $data
