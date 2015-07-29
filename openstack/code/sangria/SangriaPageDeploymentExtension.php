@@ -87,7 +87,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
     // Deployment Survey data
 
-    public function ViewDeploymentSurveyStatistics()
+    public function ViewDeploymentSurveyStatistics() 
     {
         SangriaPage_Controller::generateDateFilters('DS');
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
