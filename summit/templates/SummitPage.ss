@@ -65,6 +65,19 @@
         </div>
         <% if $SummitImage %><a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$SummitImage.Attribution}"><i class="fa fa-info-circle"></i></a><% end_if %>
     </div>
+    <div class="mobile-city-date">
+        <% with $Summit %>
+            <h2>$DateLabel</h2>
+            <h1>$Title</h1>
+
+            <% if $RegistrationLink %>
+                <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
+            <% end_if %>
+            <% if $ComingSoonBtnText %>
+                <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
+            <% end_if %>
+        <% end_with %>
+    </div>
     <div id="wrap">
 
         <!-- Begin Page Content -->
