@@ -217,7 +217,7 @@ class Page_Controller extends ContentController
         $js_files = array(
             "themes/openstack/javascript/jquery.ticker.js",
             "themes/openstack/javascript/jquery.tools.min.js",
-            //"themes/openstack/javascript/jquery.colorbox-min.js",
+            "themes/openstack/javascript/jquery.colorbox-min.js",
             "themes/openstack/javascript/jcarousellite.min.js",
             "themes/openstack/javascript/bootstrap.min.js",
             "themes/openstack/javascript/navigation.js",
