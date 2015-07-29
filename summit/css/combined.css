@@ -3299,14 +3299,14 @@ a.outline-btn.inactive:hover {
     padding-bottom: 30px;
 }
 
-h1 {
+.mobile-city-date h1 {
     margin: 5px 0 20px;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 3em;
 }
 
-h2 {
+.mobile-city-date h2 {
     margin-bottom: 0;
     font-size: 1.5em;
     text-align: center;
