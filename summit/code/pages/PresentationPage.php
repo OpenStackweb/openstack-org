@@ -787,6 +787,23 @@ class PresentationPage_ManageRequest extends RequestHandler
                 'Member.Email' => $email,
                 'SummitID' => Summit::get_active()->ID
             ))->first();
+
+        if(is_null($speaker)){
+            $speaker = PresentationSpeaker::get()
+                ->filter(array(
+                    'Member.SecondEmail' => $email,
+                    'SummitID' => Summit::get_active()->ID
+                ))->first();
+        }
+
+        if(is_null($speaker)){
+            $speaker = PresentationSpeaker::get()
+                ->filter(array(
+                    'Member.ThirdEmail' => $email,
+                    'SummitID' => Summit::get_active()->ID
+                ))->first();
+        }
+
         if(is_null($speaker)){
             $speaker = PresentationSpeaker::get()
                 ->filter(array(
@@ -797,6 +814,7 @@ class PresentationPage_ManageRequest extends RequestHandler
         }
         return $speaker;
     }
+
     /**
      * Handles the form submission that creates a new speaker.
      * Checks for existence, and uses existing if found
