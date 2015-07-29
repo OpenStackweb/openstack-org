@@ -31,8 +31,8 @@ jQuery(document).ready(function($) {
 
 	$('.slideshow').jCarouselLite(carouselOptions);
 
-  $('a.screenshots').colorbox();
-  $("a.vimeo").colorbox({iframe:true, innerWidth:800, innerHeight:530});
+//    $('a.screenshots').colorbox();
+//    $("a.vimeo").colorbox({iframe:true, innerWidth:800, innerHeight:530});
 	
 	
 });
