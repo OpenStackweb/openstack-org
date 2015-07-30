@@ -101,8 +101,10 @@ final class NewsAdminPage_Controller extends AdminController {
         foreach ($articles as $article) {
             $counter++;
             $link = ($article->Link) ? $article->Link : '';
+            $headline = $article->Headline;
+            if(empty($headline)) continue;
             $data = array('Id'=>$article->Id,'Rank'=>$article->Rank,'Link'=>$link,
-                'Image'=>$article->getImage(),'Headline'=>$article->Headline,'Type'=>$type);
+                'Image'=>$article->getImage(),'Headline' => $article->Headline,'Type'=>$type);
             $output .= $article->renderWith('NewsAdminPage_article', $data);
         }
 

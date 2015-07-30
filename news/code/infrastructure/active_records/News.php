@@ -11,16 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class News
  */
-final class News extends DataObject implements INews {
+final class News extends DataObject implements INews
+{
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-	static $db = array(
-		'Date'  => 'Datetime',
-		'Headline' => 'Text',
+    static $db = array(
+        'Date' => 'Datetime',
+        'Headline' => 'Text',
         'Summary' => 'Text',
         'SummaryHtmlFree' => 'Text',
         'City' => 'Text',
@@ -37,12 +39,18 @@ final class News extends DataObject implements INews {
         'Approved' => 'Boolean',
         'IsLandscape' => 'Boolean',
         'Archived' => 'Boolean',
-	);
+    );
+
+    private static $defaults = array
+    (
+        'Headline' => '',
+        'Summary'  => '',
+    );
 
     static $has_one = array(
         'Submitter' => 'Submitter',
-        'Document'  => 'File',
-        'Image'     => 'BetterImage',
+        'Document' => 'File',
+        'Image' => 'BetterImage',
     );
 
     static $many_many = array(
@@ -50,19 +58,23 @@ final class News extends DataObject implements INews {
     );
 
     public static $indexes = array(
-        'Headline_SummaryHtmlFree_BodyHtmlFree' => array('type'=>'fulltext', 'value'=>'Headline,SummaryHtmlFree,BodyHtmlFree')
+        'Headline_SummaryHtmlFree_BodyHtmlFree' => array(
+            'type' => 'fulltext',
+            'value' => 'Headline,SummaryHtmlFree,BodyHtmlFree'
+        )
     );
 
-	/**
-	 * @return int
-	 */
-	public function getIdentifier()
-	{
-		return (int)$this->getField('ID');
-	}
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
 
-    public function formatDate() {
-        return date('M d, g:i a',strtotime($this->Date));
+    public function formatDate()
+    {
+        return date('M d, g:i a', strtotime($this->Date));
     }
 
     /**
@@ -72,16 +84,16 @@ final class News extends DataObject implements INews {
     function registerMainInfo(NewsMainInfo $info)
     {
         $this->Headline = $info->getHeadline();
-        $this->Summary   = $info->getSummary();
-        $this->SummaryHtmlFree   = strip_tags($info->getSummary());
-        $this->City   = $info->getCity();
-        $this->State   = $info->getState();
-        $this->Country   = $info->getCountry();
+        $this->Summary = $info->getSummary();
+        $this->SummaryHtmlFree = strip_tags($info->getSummary());
+        $this->City = $info->getCity();
+        $this->State = $info->getState();
+        $this->Country = $info->getCountry();
         $this->Body = $info->getBody();
         $this->BodyHtmlFree = strip_tags($info->getBody());
         $this->Date = $info->getDate();
-        $this->Link   = $info->getLink();
-        $this->DateEmbargo   = $info->getDateEmbargo();
+        $this->Link = $info->getLink();
+        $this->DateEmbargo = $info->getDateEmbargo();
         $this->DateExpire = $info->getDateExpire();
         $this->IsLandscape = $info->getIsLandscape();
     }
@@ -92,7 +104,7 @@ final class News extends DataObject implements INews {
      */
     public function registerTags($tags)
     {
-        $tags = explode(',',$tags);
+        $tags = explode(',', $tags);
 
         foreach ($tags as $tag_name) {
             $tag = new Tag();
@@ -124,12 +136,12 @@ final class News extends DataObject implements INews {
      */
     public function getSubmitter()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Submitter')->getTarget();
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Submitter')->getTarget();
     }
 
     public function setSubmitter(ISubmitter $submitter)
     {
-        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Submitter')->setTarget($submitter);
+        AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Submitter')->setTarget($submitter);
     }
 
     /**
@@ -137,7 +149,7 @@ final class News extends DataObject implements INews {
      */
     public function getTags()
     {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->toArray();
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Tags')->toArray();
     }
 
     /**
@@ -145,10 +157,10 @@ final class News extends DataObject implements INews {
      */
     public function getTagsCSV()
     {
-        $tags =  $this->getTags();
+        $tags = $this->getTags();
         $tags_csv = '';
         foreach ($tags as $tag) {
-            $tags_csv .= $tag->Tag.',';
+            $tags_csv .= $tag->Tag . ',';
         }
 
         return trim($tags_csv, ",");
@@ -156,30 +168,31 @@ final class News extends DataObject implements INews {
 
     public function addTag(ITag $tag)
     {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->add($tag);
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Tags')->add($tag);
     }
 
     public function clearTags()
     {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Tags')->removeAll();
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Tags')->removeAll();
     }
 
-	/**
-	 * @param array $file_ids
-	 * @param IFileUploadService $upload_service
-	 */
-	public function registerImage(array $file_ids,IFileUploadService $upload_service)
-	{
-		$upload_service->upload($file_ids,'Image', $this);
-	}
+    /**
+     * @param array $file_ids
+     * @param IFileUploadService $upload_service
+     */
+    public function registerImage(array $file_ids, IFileUploadService $upload_service)
+    {
+        $upload_service->upload($file_ids, 'Image', $this);
+    }
 
-    public function removeImage() {
+    public function removeImage()
+    {
         $this->Image->deleteDatabaseOnly();
     }
 
     public function getImage()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Image')->getTarget();
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Image')->getTarget();
     }
 
     /**
@@ -188,11 +201,12 @@ final class News extends DataObject implements INews {
      */
     public function registerDocument(array $file_ids, IFileUploadService $upload_service)
     {
-        $upload_service->upload($file_ids,'Document', $this);
+        $upload_service->upload($file_ids, 'Document', $this);
     }
 
-    public function removeDocument() {
-        $target = AssociationFactory::getInstance()->getMany2OneAssociation($this,'Document')->getTarget();
+    public function removeDocument()
+    {
+        $target = AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Document')->getTarget();
         if ($target->Name) {
             $target->deleteDatabaseOnly();
         }
@@ -200,7 +214,7 @@ final class News extends DataObject implements INews {
 
     public function registerSection($section)
     {
-        $slider = $featured = $approved = $archived = 0 ;
+        $slider = $featured = $approved = $archived = 0;
         if ($section == 'slider') {
             $slider = 1;
             $approved = 1;
@@ -225,55 +239,65 @@ final class News extends DataObject implements INews {
         $this->Rank = $rank;
     }
 
-    public function getHTMLBody() {
+    public function getHTMLBody()
+    {
         return html_entity_decode($this->Body);
     }
 
-    public function getHTMLSummary() {
+    public function getHTMLSummary()
+    {
         return html_entity_decode($this->Summary);
     }
 
-    public function getHeadlineForUrl() {
+    public function getHeadlineForUrl()
+    {
         $lcase_headline = strtolower(trim($this->Headline));
-        $headline_for_url = str_replace(array(' ','/'),'-',$lcase_headline);
+        $headline_for_url = str_replace(array(' ', '/'), '-', $lcase_headline);
+
         return $headline_for_url;
     }
 
-    public function getImageForArticle() {
+    public function getImageForArticle()
+    {
         if ($this->Image->exists()) {
             if ($this->IsLandscape) {
-                $image_html = '<div class="article_full_image">'.$this->Image->getTag().'</div>';
+                $image_html = '<div class="article_full_image">' . $this->Image->getTag() . '</div>';
             } else {
                 $cropped = $this->Image->SetWidth(360);
-                if($cropped)
-                    $image_html = '<div class="article_cropped_image">'.$cropped->getTag().'</div>';
-                else
+                if ($cropped) {
+                    $image_html = '<div class="article_cropped_image">' . $cropped->getTag() . '</div>';
+                } else {
                     $image_html = '<div class="article_cropped_image">N/A</div>';
+                }
             }
 
             return $image_html;
         }
     }
 
-    public function getImageThumb() {
+    public function getImageThumb()
+    {
         if ($this->Image->exists()) {
             $thumb = $this->Image->SetWidth(100);
-            if($thumb) {
-                $image_html = '<div class="recent_image">'.$thumb->getTag().'</div>';
+            if ($thumb) {
+                $image_html = '<div class="recent_image">' . $thumb->getTag() . '</div>';
+
                 return $image_html;
             }
         }
     }
 
-    public function formattedDate() {
-        return date('M jS Y',strtotime($this->Date));
+    public function formattedDate()
+    {
+        return date('M jS Y', strtotime($this->Date));
     }
 
-    public function shortenText($text,$chars) {
+    public function shortenText($text, $chars)
+    {
         if (strlen($text) > $chars) {
-            $maxLength = $chars-3;
+            $maxLength = $chars - 3;
             $text = substr($text, 0, $maxLength);
-            $text.='...';
+            $text .= '...';
         }
 
         return $text;
