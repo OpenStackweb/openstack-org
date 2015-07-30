@@ -130,3 +130,12 @@ thead {
 
 #slider_sortable,#featured_sortable,#recent_sortable,#standby_sortable { list-style-type: none; margin: 0; padding: 0; width: 100%;}
 
+.newsSlider table,.newsFeatured table,.newsRecent table,.newsStandBy table{
+    width: 100%;
+}
+
+.placeholder_empty {
+    height: 10px;
+    width: 100%;
+}
+
