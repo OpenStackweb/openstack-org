@@ -54,3 +54,15 @@ input.error{
     margin: 0;
     padding: 10px;
 }
+
+.cb_wrapper {
+    display:inline-block;
+    width:200px;
+    margin:5px 0;
+    vertical-align:top;
+}
+
+.cb_wrapper input {
+    margin:0 3px;
+    vertical-align: top;
+}

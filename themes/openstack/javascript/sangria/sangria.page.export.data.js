@@ -218,6 +218,11 @@ jQuery(document).ready(function($){
         $('.group').prop('checked', is_checked);
     });
 
+    $('#fields_all').click(function(evt){
+        var is_checked = $(this).is(':checked');
+        $('.field_cb').prop('checked', is_checked);
+    });
+
     $("#stand_orgs").click(function(e) {
         if (confirm("Are you sure you want to standarize ALL organizations?")) {
             window.location = "/sangria/StandardizeOrgNames";
