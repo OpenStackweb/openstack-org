@@ -57,7 +57,7 @@
             <div class="col-lg-3 col-md-4 col-sm-4">
                 <ul class="help-me-menu">
                     <% if Summit.RegistrationLink %>
-                        <li><a href="{$Summit.RegistrationLink}"><i class="fa fa-shopping-cart"></i>Register for the Summit</a></li>
+                        <li><a href="{$Summit.RegistrationLink}" target="_blank"><i class="fa fa-shopping-cart"></i>Register for the Summit</a></li>
                     <% end_if %>
 
                     <% if OrderedHelpMenuItems %>
@@ -164,9 +164,11 @@
                 </div>
                 <div class="growth-text-bottom map">
                     $GrowthBoxTextBottom
-                    <p>
-                        <a href="#">Registration Opening Soon</a>
-                    </p>
+                    <% if Summit.RegistrationLink %>
+                        <p>
+                            <a href="{$Summit.RegistrationLink}" target="_blank">Register Now</a>
+                        </p>
+                    <% end_if %>
                 </div>
             </div>
         </div>
@@ -195,7 +197,7 @@
                $NetworkingContent
                 <% if Summit.RegistrationLink %>
                     <p>
-                        <a href="{$Summit.RegistrationLink}">Register Now</a>
+                        <a href="{$Summit.RegistrationLink}" target="_blank">Register Now</a>
                     </p>
                 <% end_if %>
             </div>
