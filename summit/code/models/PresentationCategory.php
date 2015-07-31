@@ -8,8 +8,15 @@ class PresentationCategory extends DataObject
 		'Title' => 'Varchar',
         'Description' => 'Text',
 		'SessionCount' => 'Int',
-		'AlternateCount' => 'Int'
+		'AlternateCount' => 'Int',
+		'VotingVisible' => 'Boolean',
+		'ChairVisible' => 'Boolean'		
 	);
+
+	private static $defaults = array(
+		'VotingVisible' => TRUE,
+		'ChairVisible' => TRUE
+	);	
 
 	private static $has_one = array (
 		'Summit' => 'Summit'
@@ -32,7 +39,9 @@ class PresentationCategory extends DataObject
 			->text('Title')
             ->textarea('Description')
 			->numeric('SessionCount','Number of sessions')
-			->numeric('AlternateCount','Number of alternates');
+			->numeric('AlternateCount','Number of alternates')
+			->checkbox('VotingVisible',"This category is visible to voters")
+			->checkbox('ChairVisible',"This category is visible to track chairs");			
 	}
     
     public function getFormattedTitleAndDescription() {
