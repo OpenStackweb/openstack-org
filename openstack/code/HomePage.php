@@ -243,9 +243,6 @@ class HomePage_Controller extends Page_Controller
 
     function NewsItems($limit = 20)
     {
-        $RssNewsDigestTask = new RssNewsDigestTask();
-        $RssNewsDigestTask->run();
-
         $repository = new SapphireRssNewsRepository();
         $tx_manager = SapphireTransactionManager::getInstance();
         $rss_news_manager = new RssNewsManager(
