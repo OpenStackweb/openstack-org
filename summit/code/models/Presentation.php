@@ -254,6 +254,33 @@ class Presentation extends DataObject
     }
 
 
+    public function CalcTotalPoints() {
+        $sqlQuery = new SQLQuery( 
+           "SUM(Vote)", 
+           "PresentationVote",
+           "PresentationID = ".$this->ID
+        ); 
+        return $sqlQuery->execute()->value();
+    }
+
+    public function CalcVoteCount() {
+        $sqlQuery = new SQLQuery( 
+           "COUNT(ID)",
+           "PresentationVote",
+           "PresentationID = ".$this->ID 
+        ); 
+        return $sqlQuery->execute()->value();
+    }    
+
+    public function CalcVoteAverage() {
+        $sqlQuery = new SQLQuery( 
+           "AVG(Vote)",
+           "PresentationVote",
+           "PresentationID = ".$this->ID
+        ); 
+        return round($sqlQuery->execute()->value(), 2);
+    }
+
     /**
      * Determines if the presentation is "new." Since presentations are
      * optimistically written to the database, a simple isInDB() check
