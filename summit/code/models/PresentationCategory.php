@@ -22,6 +22,10 @@ class PresentationCategory extends DataObject
 		'Summit' => 'Summit'
 	);
 
+	private static $has_many = array (
+		'ChangeRequests' => 'SummitCategoryChange'
+	);
+
     private static $belongs_many_many = array (
     	'TrackChairs' => 'SummitTrackChair',
     );	
