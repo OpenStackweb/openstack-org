@@ -3010,6 +3010,9 @@ a.news-story:hover {
     font-weight: 300;
     margin: 15px 0 5px;
 }
+.single-summit-stats img {
+  max-width: 100%;
+}
 
 .atendees-chart-ref-wrapper {
     text-align: center;
