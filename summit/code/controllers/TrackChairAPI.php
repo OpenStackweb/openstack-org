@@ -324,6 +324,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 		'POST vote' => 'handleVote',
 		'POST comment' => 'handleAddComment',
 		'GET select' => 'handleSelect',
+		'GET unselect' => 'handleUnselect',
 		'GET category_change/new' => 'handleCategoryChangeRequest',
 		'GET category_change/accept' => 'handleAcceptCategoryChange'
 	);
@@ -333,6 +334,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 		'handleVote',
 		'handleAddComment',
 		'handleSelect',
+		'handleUnselect',
 		'handleCategoryChangeRequest',
 		'handleAcceptCategoryChange'
 	);
@@ -437,6 +439,17 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 
 	}
 
+	public function handleUnselect(SS_HTTPResponse $r) {
+		if(!Member::currentUser()) {
+			return $this->httpError(403);
+		}
+
+		$this->presentation->removeFromIndividualList();
+
+		return new SS_HTTPResponse("Presentation unseleted.", 200);
+
+	}
+
 	public function handleCategoryChangeRequest(SS_HTTPResponse $r) {
 
 		if(!Member::currentUser()) {
@@ -451,9 +464,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 		$request->ReqesterID = Member::currentUserID();
 		$request->write();
 
-    	return (new SS_HTTPResponse(
-    		"{ success: true }", 200
-    	))->addHeader('Content-Type', 'application/json');		
+    	return new SS_HTTPResponse("change request made.", 200);		
 
 	}
 
@@ -493,9 +504,8 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 
 			$request->write();			
 
-	    	return (new SS_HTTPResponse(
-	    		"{ success: true }", 200
-	    	))->addHeader('Content-Type', 'application/json');	
+    		return new SS_HTTPResponse("change request accepted.", 200);		
+
 
 		}
 	
