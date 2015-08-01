@@ -8,8 +8,12 @@ require('./forms/addcommentform.tag')
 require('./comment.tag')
 require('./selectionmanager.tag')
 require('riotgear-toast')
+require('riotgear-modal')
+require('./modal.tag')
 
 <app>
+
+	<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }" />
 
 	<navbar/>
     <div class="container-fluid">
@@ -68,8 +72,9 @@ require('riotgear-toast')
 						<h3 class="panel-title">Presentation Details <a href="#" onclick={ closeDetails }><i class="fa fa-times"></i></a></h3>
 					</div>
 					<div class="panel-body">
-						<button if="{ currentPresentation.selected }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Unselect</button>
+						<button if="{ currentPresentation.selected }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button>
 						<button if="{ !currentPresentation.selected }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button>
+						&nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a>
 						<hr/>
 						<h2>{ currentPresentation.title } ({ currentPresentation.id })</h2>
 						<h4>{ currentPresentation.level }</h4>
@@ -126,6 +131,15 @@ require('riotgear-toast')
 		})		
 
 		opts.on('presentations-loaded', function(result){
+
+			console.log('unsorted results', result)
+
+			result.sort(function(a,b) {
+					return b.vote_average - a.vote_average
+				})
+
+			console.log('sorted results', result)
+
 			self.presentations = result
 			self.quantity = self.presentations.length
 			self.details = true
@@ -178,6 +192,11 @@ require('riotgear-toast')
 			opts.trigger('select-presentation', self.currentPresentation.id)
 		}
 
+		unselectPresentation(e){
+			console.log('1. app is firing select-presentaiton')
+			opts.trigger('unselect-presentation', self.currentPresentation.id)
+		}
+
 		opts.on('presentation-selected', function(){
 			console.log('3a. app heard presentation-selected.');
 			self.currentPresentation.selected = true;
@@ -191,6 +210,18 @@ require('riotgear-toast')
 			)
 			self.update();							
 		})
+
+		opts.on('presentation-unselected', function(){
+			self.currentPresentation.selected = false;
+			self.opts.trigger('load-selections',self.currentPresentation.category_id)				
+			self.toasts.push(
+				{
+				  text: 'The presentation was removed from your selection list.',
+				  timeout: 6000
+				}
+			)
+			self.update();							
+		})		
 
 		clearSearch() {
 			document.getElementById('app-search').value='';

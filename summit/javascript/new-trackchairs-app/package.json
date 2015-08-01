@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "riotgear-alert": "^1.1.0",
+    "riotgear-modal": "^1.1.3",
     "riotgear-toast": "^1.1.0"
   }
 }

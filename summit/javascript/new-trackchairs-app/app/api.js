@@ -90,7 +90,7 @@ api.on('add-comment', function(id, comment){
 
 })
 
-// Add a comment to the current presentation
+// Select a presentation for a personal list
 api.on('select-presentation', function(id){
 
 	console.log('2a. API heard select presentation ' + id);
@@ -106,6 +106,22 @@ api.on('select-presentation', function(id){
 
 })
 
+// Unselect (remove presentation from personal list)
+api.on('unselect-presentation', function(id){
+
+	console.log('unselecting presentation: ' + url + 'presentation/' + id + '/unselect')
+
+	reqwest({
+	    url: url + 'presentation/' + id + '/unselect'
+	  , method: 'get'
+	  , success: function (resp) {
+			api.trigger('presentation-unselected', resp)
+	    }
+	})
+
+})
+
+
 api.on('save-sort-order', function(list_id, sort_order){
 
 
@@ -120,5 +136,18 @@ api.on('save-sort-order', function(list_id, sort_order){
 
 })
 
+api.on('suggest-category-change', function(suggestedChange){
+
+	console.log(url + 'presentation/' + suggestedChange.presentation_id + '/category_change/new/?new_cat=' + suggestedChange.new_category)
+
+	reqwest({
+	    url: url + 'presentation/' + suggestedChange.presentation_id + '/category_change/new/?new_cat=' + suggestedChange.new_category
+	  , method: 'get'
+	  , success: function (resp) {
+	  		api.trigger('category-change-suggested', resp)
+	    }
+	})	
+
+})
 
 module.exports = api;

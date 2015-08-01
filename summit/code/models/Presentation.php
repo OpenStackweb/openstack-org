@@ -347,6 +347,28 @@ class Presentation extends DataObject
     }
 
     /**
+     * Used by the track chair app to allow chairs to remove a presentation from a personal list.
+     **/
+
+    public function removeFromIndividualList() {
+
+
+        // Check permissions of user on talk
+        if ($this->CanAssign()) {
+
+            $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
+
+            // See if the presentation has already been assigned
+            $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID)->first();
+
+            if ($AlreadyAssigned->exists()) {
+                $AlreadyAssigned->delete();
+            }
+        }
+    }
+
+
+    /**
      * Used by the track chair app see if the presentaiton has been selected by currently logged in member.
      **/
 
@@ -354,7 +376,6 @@ class Presentation extends DataObject
 
         $memID = Member::currentUserID();
 
-        // return "PresentationID = {$this->ID} and MemberID = {$memID}";
 
         $selected = SummitSelectedPresentation::get()
             ->where("PresentationID={$this->ID} and MemberID={$memID}");
