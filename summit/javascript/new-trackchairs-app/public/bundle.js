@@ -1446,17 +1446,40 @@
 	__webpack_require__(15)
 	__webpack_require__(16)
 
-	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="col-lg-12" show="{ !details }"> <div class="row"> <div class="col-lg-9"> &nbsp; </div> <div class="col-lg-1" > Ave </div> <div class="col-lg-1"> Count </div> <div class="col-lg-1"> Total </div> </div> </div> <presentationitem each="{ presentation, i in presentations }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times"></i></a></h3> </div> <div class="panel-body"> <button if="{ currentPresentation.selected }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button> <button if="{ !currentPresentation.selected }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button> &nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> <hr> <h2>{ currentPresentation.title } ({ currentPresentation.id })</h2> <h4>{ currentPresentation.level }</h4> <raw content="{ currentPresentation.description }"></raw> <div> <span class="label label-info">Comments: { currentPresentation.comments.length }</span> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
+	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="col-lg-12" show="{ !details }"> <div class="row"> <div class="col-lg-9"> &nbsp; </div> <div class="col-lg-1" > Ave </div> <div class="col-lg-1"> Count </div> <div class="col-lg-1"> Total </div> </div> </div> <presentationitem each="{ presentation, i in presentations }" activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times"></i></a></h3> </div> <div class="panel-body"> <button if="{ currentPresentation.selected }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button> <button if="{ !currentPresentation.selected }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button> &nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> <hr> <h2>{ currentPresentation.title } ({ currentPresentation.id })</h2> <h4>{ currentPresentation.level }</h4> <raw content="{ currentPresentation.description }"></raw> <div> <span class="label label-info">Comments: { currentPresentation.comments.length }</span> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
 
 			var self = this
 			this.sortitems = []
-			this.DisplayMode = 'selections'
+			this.DisplayMode = 'browse'
 
-			this.toasts = [];		
+			this.toasts = [];
 
-			this.on('mount', function(){
-				opts.trigger('load-summit-details')
-			})
+			this.indexOf = function(id) {
+	            var i = -1, index = -1
+
+	            for(i = 0; i < self.presentations.length; i++) {
+	                if(self.presentations[i].id == id) {
+	                    index = i
+	                    break
+	                }
+	            }
+
+	            return index
+	        }
+
+			this.categoryIndex = function(id) {
+	            var i = -1, index = -1
+
+	            for(i = 0; i < self.summit.categories.length; i++) {
+	                if(self.summit.categories[i].id == id) {
+	                    index = i
+	                    break
+	                }
+	            }
+
+	            return index
+	        }
+
 
 			this.setActiveKey = function(key) {
 				self.activekey = key
@@ -1466,44 +1489,76 @@
 			}.bind(this);
 
 			this.setCategory = function(category) {
+				self.activekey = null
 				self.activeCategory = category
 				var id
 				if(category) id = category.id
 				opts.trigger('load-presentations',null,id)
-				opts.trigger('load-selections',category.id)
 			}.bind(this);
+
+
+			riot.route(function(mode, action, id) {
+				if (mode === 'presentations') {
+
+					self.DisplayMode = 'browse'
+
+					if(action === 'show' && id) {
+						opts.trigger('load-presentation-details', id)
+						self.showDetails()
+					}
+
+					self.update()
+				}
+
+				if (mode === 'selections') {
+					self.DisplayMode = 'selections'
+					self.update()				
+				}
+			})				
+
+			this.on('mount', function(){
+				opts.trigger('load-summit-details')
+				riot.route.exec(function(mode, action, id) {
+					if (mode === 'presentations') { 
+						self.DisplayMode = 'browse'
+						self.update()
+					}
+
+					if (mode === 'selections') {
+						self.DisplayMode = 'selections'
+						self.update()
+					}
+				})			
+			})
 
 			opts.on('summit-details-loaded', function(result){
 				self.summit = result
-				opts.trigger('load-presentations')
-			})		
+				self.setCategory(self.summit.categories[0])
+			})
+
+			self.sortPresentations = function(set, sortBy, order) {
+				
+				if(order === 'desc') {
+					set.sort(function(a,b) {
+						return b[sortBy] - a[sortBy]
+					})
+				} else {
+					set.sort(function(a,b) {
+						return a[sortBy] - b[sortBy]
+					})				
+				}
+
+				return set
+			}		
 
 			opts.on('presentations-loaded', function(result){
 
-				console.log('unsorted results', result)
-
-				result.sort(function(a,b) {
-						return b.vote_average - a.vote_average
-					})
-
-				console.log('sorted results', result)
-
-				self.presentations = result
+				self.presentations = self.sortPresentations(result, 'vote_average', 'asc')
 				self.quantity = self.presentations.length
-				self.details = true
 
-
-				if( self.presentations[0] ) {
-					self.results = true
-					id = self.presentations[0].id
-					opts.trigger('load-presentation-details', id)
-					self.activekey = 0
-					self.update()
-				} else {
-					self.results = false
-				}
 				self.update()
 			})
+
 
 			opts.on('presentation-details-loaded', function(result){
 
@@ -1514,7 +1569,15 @@
 				 }
 
 				self.currentPresentation = result
-				console.log('currentPresentation ', self.currentPresentation)
+
+				if(!self.searchmode) {
+
+					cat_index = self.categoryIndex(result.category_id)
+					self.activeCategory = self.summit.categories[cat_index]
+					opts.trigger('load-presentations',null,result.category_id)
+
+				}
+
 				self.update()
 			})
 
@@ -1528,6 +1591,8 @@
 			}.bind(this);
 
 			this.search = function(e) {
+				self.activekey = null
+				self.details = false
 
 				self.quantity = 0
 				self.searchmode = true
@@ -1574,7 +1639,8 @@
 				document.getElementById('app-search').value='';
 				self.quantity = 0
 				self.searchmode = false
-				opts.trigger('load-presentations')			
+				opts.trigger('load-presentations', null, this.activeCategory.id)
+				self.activekey = null			
 				self.update()
 			}.bind(this);
 
@@ -2741,11 +2807,11 @@
 
 		this.setSelected = function(e) {
 			this.parent.setActiveKey(this.opts.key)
-			this.parent.showDetails()
+			riot.route('presentations/show/' + this.opts.data.id)
 		}.bind(this);
 		
 		this.isSelected = function() {
-			return this.parent.activekey === this.opts.key
+			return this.parent.activekey == this.opts.key
 		}.bind(this);
 
 
@@ -2758,14 +2824,13 @@
 
 	var riot = __webpack_require__(1);
 
-	riot.tag('navbar', '<nav class="navbar navbar-default"> <div class="container-fluid">  <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">OpenStack Track Chairs App</a> </div>  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> <ul class="nav navbar-nav"> <li class="{ active: self.parent.DisplayMode === \'browse\' }"><a href="#" onclick="{ setMode(\'browse\') }">Browse Presentations <span class="sr-only">(current)</span></a></li> <li class="{ active: self.parent.DisplayMode === \'selections\' }"><a href="#" onclick="{ setMode(\'selections\') }">Your Selections</a></li> </ul> <ul class="nav navbar-nav navbar-right"> <li><a href="#">Link</a></li> <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a> <ul class="dropdown-menu"> <li><a href="#">Action</a></li> <li><a href="#">Another action</a></li> <li><a href="#">Something else here</a></li> <li role="separator" class="divider"></li> <li><a href="#">Separated link</a></li> </ul> </li> </ul> </div> </div> </nav>', function(opts) {
+	riot.tag('navbar', '<nav class="navbar navbar-default"> <div class="container-fluid">  <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">OpenStack Track Chairs App </a> </div>  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> <ul class="nav navbar-nav"> <li class="{ active: self.parent.DisplayMode === \'browse\' }"><a href="#" onclick="{ setMode(\'presentations\') }">Browse Presentations <span class="sr-only">(current)</span></a></li> <li class="{ active: self.parent.DisplayMode === \'selections\' }"><a href="#" onclick="{ setMode(\'selections\') }">Your Selections</a></li> </ul> <ul class="nav navbar-nav navbar-right"> <li><a href="#">Link</a></li> <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a> <ul class="dropdown-menu"> <li><a href="#">Action</a></li> <li><a href="#">Another action</a></li> <li><a href="#">Something else here</a></li> <li role="separator" class="divider"></li> <li><a href="#">Separated link</a></li> </ul> </li> </ul> </div> </div> </nav>', function(opts) {
 		
 		self = this;
 
 		this.setMode = function(mode) {
 			return function(e) {
-				self.parent.DisplayMode = mode
-				self.parent.update()
+				riot.route(mode)
 			}
 		}.bind(this);
 
@@ -2795,7 +2860,7 @@
 
 	var riot = __webpack_require__(1);
 
-	riot.tag('categorymenu', '<div class="btn-group"> <button if="{ opts.active }" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> { opts.active.title } <span class="caret"></span> </button> <button if="{ !opts.active }" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" if="{ opts.active }"> All Categories <span class="caret"></span> </button> <ul class="dropdown-menu"> <li><a href="#" onclick="{ allCategories }">All Categories</a></li> <li role="separator" class="divider"></li> <li each="{category in opts.categories}"><a href="#" onclick="{ parent.setCategory }">{ category.title }</a></li> </ul> </div>', function(opts) {
+	riot.tag('categorymenu', '<div class="btn-group"> <button if="{ opts.active }" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> { opts.active.title } <span class="caret"></span> </button> <button if="{ !opts.active }" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" if="{ opts.active }"> All Categories <span class="caret"></span> </button> <ul class="dropdown-menu"> <li each="{category in opts.categories}"><a href="#" onclick="{ parent.setCategory }">{ category.title }</a></li> <li role="separator" class="divider"></li> <li><a href="#" onclick="{ allCategories }">All Categories</a></li> </ul> </div>', function(opts) {
 
 		this.setCategory = function(e) {
 			this.parent.setCategory(e.item.category)
@@ -3931,6 +3996,20 @@
 				self.update()
 			}.bind(this);
 
+			self.indexOf = function(needle) {
+	            var i = -1, index = -1
+
+	            for(i = 0; i < self.opts.selections.length; i++) {
+	            	console.log(self.opts.selections[i].id)
+	                if(self.opts.selections[i].id == needle) {
+	                    index = i
+	                    break
+	                }
+	            }
+
+	            return index
+	        }
+
 			api.on('selections-ready', function(result){			
 
 				console.log('6a. selection list hears selections-ready.')
@@ -3951,6 +4030,7 @@
 							self.update()
 						},
 						onAdd: function(evt){
+							if (self.indexOf(evt.item.dataset.id) > -1) alert('already here!')
 							self.sendUpdatedSort(sortable.toArray())
 							self.update()
 						}
@@ -3988,7 +4068,7 @@
 	var riot = __webpack_require__(1);
 
 	<!-- Modal -->
-	riot.tag('modal', '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h4 class="modal-title" id="myModalLabel">Suggest a category change</h4> </div> <div class="modal-body"> <div show="{ !finished }"> <p>I\'d like to suggest that this presentation:</p> <p><strong>{ opts.presentation.title }</strong></p> <p>Be moved to this category: <select name="catMoveSelector"> <option each="{ category in opts.categories }" value="{category.id}">{category.title}</option> </select></p> <p></p> <div class="well"> <p>You can suggest that a presentation be moved between categories as long as you chair at least one of the categories.</p> </div> </div> <div show="{ finished }"> <p>Ok, thanks! We’ll notify the chairs of the other category that you’d like to make the switch. If the one of the chairs of the other category agrees to the change, the presentation will be moved.</p> </div> </div> <div class="modal-footer" show="{ !finished }"> <button type="button" class="btn btn-default" data-dismiss="modal" onclick="{ closeModal }">Close</button> <button type="button" class="btn btn-primary" onclick="{ suggestChange }">Suggest Change</button> </div> <div class="modal-footer" show="{ finished }"> <button type="button" class="btn btn-primary" onclick="{ closeModal }" data-dismiss="modal">Sounds Good</button> </div> </div> </div> </div>', function(opts) {
+	riot.tag('modal', '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h4 class="modal-title" id="myModalLabel">Suggest a category change</h4> </div> <div class="modal-body"> <div show="{ !finished }"> <p>I\'d like to suggest that this presentation:</p> <p><strong>{ opts.presentation.title }</strong></p> <p>Be moved to this category: <select name="catMoveSelector"> <option each="{ category in opts.categories }" value="{category.id}">{category.title}</option> </select></p> <p></p> <div class="well"> <p>You can suggest that a presentation be moved between categories as long as you chair at least one of the categories.</p> </div> </div> <div show="{ finished }"> <p>Ok, thanks! We’ll notify the chairs of the other category that you’d like to make the switch. If the one of the chairs of the other category agrees to the change, the presentation will be moved.</p> </div> </div> <div class="modal-footer" show="{ !finished }"> <button type="button" class="btn btn-default" data-dismiss="modal" onclick="{ closeModal }">Close</button> <button type="button" class="btn btn-primary" onclick="{ suggestChange }">Suggest Change</button> </div> <div class="modal-footer" show="{ finished }"> <button type="button" class="btn btn-primary" onclick="{ closeModal }" data-dismiss="modal">OK</button> </div> </div> </div> </div>', function(opts) {
 
 	    var self = this
 

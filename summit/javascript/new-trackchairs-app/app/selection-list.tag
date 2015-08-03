@@ -93,6 +93,22 @@ var Sortable = require('sortablejs')
 			self.update()
 		}
 
+
+		// helper function to see if the list already contains an item
+		self.indexOf = function(needle) {
+            var i = -1, index = -1
+
+            for(i = 0; i < self.opts.selections.length; i++) {
+            	console.log(self.opts.selections[i].id)
+                if(self.opts.selections[i].id == needle) {
+                    index = i
+                    break
+                }
+            }
+
+            return index
+        }
+
 		api.on('selections-ready', function(result){			
 
 			console.log('6a. selection list hears selections-ready.')
@@ -113,6 +129,7 @@ var Sortable = require('sortablejs')
 						self.update()
 					},
 					onAdd: function(evt){
+						if (self.indexOf(evt.item.dataset.id) > -1) alert('already here!')
 						self.sendUpdatedSort(sortable.toArray())
 						self.update()
 					}
