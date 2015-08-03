@@ -1446,7 +1446,7 @@
 	__webpack_require__(15)
 	__webpack_require__(16)
 
-	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="col-lg-12" show="{ !details }"> <div class="row"> <div class="col-lg-9"> &nbsp; </div> <div class="col-lg-1" > Ave </div> <div class="col-lg-1"> Count </div> <div class="col-lg-1"> Total </div> </div> </div> <presentationitem each="{ presentation, i in presentations }" activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times"></i></a></h3> </div> <div class="panel-body"> <button if="{ currentPresentation.selected }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button> <button if="{ !currentPresentation.selected }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button> &nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> <hr> <h2>{ currentPresentation.title } ({ currentPresentation.id })</h2> <h4>{ currentPresentation.level }</h4> <raw content="{ currentPresentation.description }"></raw> <div> <span class="label label-info">Comments: { currentPresentation.comments.length }</span> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
+	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="col-lg-12" show="{ !details }"> <div class="row"> <div class="col-lg-9"> &nbsp; </div> <div class="col-lg-1" > Ave </div> <div class="col-lg-1"> Count </div> <div class="col-lg-1"> Total </div> </div> </div> <presentationitem each="{ presentation, i in presentations }" activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times"></i></a></h3> </div> <div class="panel-body"> <button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button> <button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button> &nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> <hr> <h2>{ currentPresentation.title } ({ currentPresentation.id })</h2> <h4>{ currentPresentation.level }</h4> <raw content="{ currentPresentation.description }"></raw> <div> <span class="label label-info">Comments: { currentPresentation.comments.length }</span> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
 
 			var self = this
 			this.sortitems = []
@@ -1556,7 +1556,10 @@
 				self.presentations = self.sortPresentations(result, 'vote_average', 'asc')
 				self.quantity = self.presentations.length
 
+				if(self.currentPresentation) self.activekey = self.indexOf(self.currentPresentation.id)
+
 				self.update()
+
 			})
 
 
@@ -1573,8 +1576,13 @@
 				if(!self.searchmode) {
 
 					cat_index = self.categoryIndex(result.category_id)
-					self.activeCategory = self.summit.categories[cat_index]
-					opts.trigger('load-presentations',null,result.category_id)
+					
+					if(self.activeCategory != self.summit.categories[cat_index]) {
+						self.activeCategory = self.summit.categories[cat_index]
+						opts.trigger('load-presentations',null,result.category_id)
+					} else {
+						if(self.currentPresentation) self.activekey = self.indexOf(self.currentPresentation.id)
+					}
 
 				}
 
@@ -1605,7 +1613,7 @@
 			}.bind(this);
 
 			this.unselectPresentation = function(e) {
-				console.log('1. app is firing select-presentaiton')
+				console.log('1. app is firing unselect-presentaiton')
 				opts.trigger('unselect-presentation', self.currentPresentation.id)
 			}.bind(this);
 
@@ -1620,12 +1628,22 @@
 					  timeout: 6000
 					}
 				)
-				self.update();							
+
+				presIndex = self.indexOf(self.currentPresentation.id)
+				self.presentations[presIndex].selected = true
+
+				self.update();
+
 			})
 
 			opts.on('presentation-unselected', function(){
-				self.currentPresentation.selected = false;
-				self.opts.trigger('load-selections',self.currentPresentation.category_id)				
+				self.currentPresentation.selected = false
+
+				presIndex = self.indexOf(self.currentPresentation.id)
+
+				self.presentations[presIndex].selected = false
+
+				self.opts.trigger('load-selections',self.currentPresentation.category_id)
 				self.toasts.push(
 					{
 					  text: 'The presentation was removed from your selection list.',
@@ -2803,14 +2821,14 @@
 
 	var riot = __webpack_require__(1);
 
-	riot.tag('presentationitem', '<div class="col-lg-12 presentation-row {active: isSelected()}" onclick="{ setSelected }"> <div class="col-lg-12 "> <div class="row"> <div class="col-lg-9"> { opts.data.title } </div> <div class="col-lg-1" show="{ !opts.details }" > { opts.data.vote_average } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.vote_count } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.total_points } </div> </div> </div> </div>', '.presentation-row { border: 1px solid #D5D5D5; padding: 5px; margin-bottom: -1px; cursor: pointer; font-size: 1.3em; } .presentation-row a { text-decoration: none; } .presentation-row.active, .presentation-row.active a { background-color: #4CB3D6; color: white; }', function(opts) {
+	riot.tag('presentationitem', '<div class="col-lg-12 presentation-row {active: isActive()} { selected: opts.data.selected }" onclick="{ setActive }"> <div class="col-lg-12 "> <div class="row"> <div class="col-lg-9"> { opts.data.title } </div> <div class="col-lg-1" show="{ !opts.details }" > { opts.data.vote_average } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.vote_count } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.total_points } </div> </div> </div> </div>', '.presentation-row { border: 1px solid #D5D5D5; padding: 5px; margin-bottom: -1px; cursor: pointer; font-size: 1.3em; } .presentation-row.selected { background-color: rgba(190, 222, 244, 0.44); } .presentation-row a { text-decoration: none; } .presentation-row.active, .presentation-row.active a { background-color: #4CB3D6; color: white; }', function(opts) {
 
-		this.setSelected = function(e) {
+		this.setActive = function(e) {
 			this.parent.setActiveKey(this.opts.key)
 			riot.route('presentations/show/' + this.opts.data.id)
 		}.bind(this);
 		
-		this.isSelected = function() {
+		this.isActive = function() {
 			return this.parent.activekey == this.opts.key
 		}.bind(this);
 
@@ -3938,8 +3956,7 @@
 	var riot = __webpack_require__(1);
 
 	__webpack_require__(13)
-	riot.tag('selection-manager', '<div class="row"> <div class="col-lg-12"> <categorymenu categories="{ summit.track_chair.categories }" active="{ activeCategory }"></categorymenu> <hr> </div> </div> <selection-list each="{ lists }" name="List" listname="{ list_name }" selections="{ selections }" listid="{ \'list\' + list_id }" selectionlist="{ list_id }"></selection-list>', function(opts) {
-			var selections = null
+	riot.tag('selection-manager', '<div class="row"> <div class="col-lg-12"> <categorymenu categories="{ summit.track_chair.categories }" active="{ activeCategory }"></categorymenu> <hr> </div> </div> <selection-list each="{ lists }" name="List" listname="{ list_name }" selections="{ selections }" listid="{ \'list\' + list_id }" selectionlist="{ list_id }" mine="{ mine }" listtype="{ list_type }" slots="{ slots }"></selection-list>', function(opts) {
 			var self = this
 
 			opts.api.on('summit-details-loaded', function(result){
@@ -3957,14 +3974,17 @@
 			}.bind(this);
 
 			opts.api.on('selections-loaded', function(result){
-				console.log('5a. selectionmanager hears selections-loaded.')
-				self.listsLoaded = true
-				self.lists = []
-				self.update()
-				self.lists = result
-				self.update()
-				console.log('5b. selectionmanager fires selections-ready.')			
-				opts.api.trigger('selections-ready')
+
+				if(result.category_id == self.activeCategory.id) {
+
+					self.lists = []
+					self.update()
+					self.lists = result.lists
+					self.update()
+					opts.api.trigger('selections-ready')
+
+				}
+
 			})
 
 		
@@ -3978,29 +3998,24 @@
 
 	var Sortable = __webpack_require__(4)
 
-	riot.tag('selection-list', '<div class="col-lg-3"> <h3>{ opts.listname }</h3> <div if="{!opts.selections}"><i>This person has yet to make any selections.</i></div> <ul id="{ opts.listid }" class="list-group {empty: !opts.selections}"> <li each="{ item, i in opts.selections }" class="list-group-item { alternate: i >= soltsAvailble } animated" data-id="{ item.id }" data-order="{ item.order }" > <div class="selection-front" onclick="{ flip }">{ item.title }</div> <div class="selection-back" onclick="{ flip }">Other Side</div> </li> </ul> </div>', '.list-group-item { overflow: hidden; cursor: arrow; } .sortable-ghost, .sortable-ghost .selection-front, .sortable-ghost .selection-back { background-color: #E6E6E6; color: #E6E6E6!important; } .alternate { background-color: rgba(184, 220, 253, 0.25); } .list-group.empty { min-height: 30px; border: 1px dotted grey; } .selection-front, .selection-back { display: block; padding: 5px; min-height: 3em; } .selection-front { width: 100%; } .selection-back { background-color: #D5D5D5; width: 6em; position: absolute; top: 0px; right: -6em; bottom: 0px; } .selection-back.slide { right: -6em; -webkit-animation: slide 0.2s forwards; animation: slide 0.2s forwards; } @-webkit-keyframes slide { 100% { right: 0; } } @keyframes slide { 100% { right: 0; } }', function(opts) {
+	riot.tag('selection-list', '<div class="col-lg-3"> <h3>{ opts.listname }</h3> <div if="{!opts.selections && opts.listtype != \'Group\'}"><i>This person has not made any selections yet.</i></div> <div if="{!opts.selections && opts.listtype == \'Group\'}"><i>There are no group selections yet. Drag one into here to create one.</i></div> <ul id="{ opts.listid }" class="list-group {empty: !opts.selections}"> <li each="{ item, i in opts.selections }" class="list-group-item { alternate: i >= soltsAvailble }" data-id="{ item.id }" data-order="{ item.order }" onclick="{ loadPresentation }" > { item.title } </ul> </div>', '.list-group-item { overflow: hidden; cursor: arrow; } .sortable-ghost, .sortable-ghost .selection-front, .sortable-ghost .selection-back { background-color: #E6E6E6; color: #E6E6E6!important; } .alternate { background-color: rgba(184, 220, 253, 0.25); } .list-group.empty { min-height: 100px; } .selection-front, .selection-back { display: block; padding: 5px; min-height: 3em; } .selection-front { width: 100%; } .selection-back { background-color: #D5D5D5; width: 6em; position: absolute; top: 0px; right: -6em; bottom: 0px; } .selection-back.slide { right: -6em; -webkit-animation: slide 0.2s forwards; animation: slide 0.2s forwards; } @-webkit-keyframes slide { 100% { right: 0; } } @keyframes slide { 100% { right: 0; } }', function(opts) {
 
 			var self = this
 			var api = self.parent.parent.opts.api
 
-			self.soltsAvailble = 10
+			self.soltsAvailble = opts.slots
 
 
 			this.sendUpdatedSort = function(new_sort) {
 				api.trigger('save-sort-order', self.opts.selectionlist, new_sort)
 			}.bind(this);
 
-			this.flip = function(e) {
-				console.log(e)
-				e.target.nextElementSibling.classList.toggle('slide')
-				self.update()
-			}.bind(this);
-
 			self.indexOf = function(needle) {
 	            var i = -1, index = -1
 
+	            if (!self.opts.selections) return index
+
 	            for(i = 0; i < self.opts.selections.length; i++) {
-	            	console.log(self.opts.selections[i].id)
 	                if(self.opts.selections[i].id == needle) {
 	                    index = i
 	                    break
@@ -4010,12 +4025,13 @@
 	            return index
 	        }
 
+
 			api.on('selections-ready', function(result){			
 
 				console.log('6a. selection list hears selections-ready.')
 
 				var simpleList = document.getElementById(self.opts.listid)
-
+				
 				if(simpleList) {
 					var sortable = Sortable.create(simpleList,{
 						group: { name: "selection-list-group", pull: "clone", put: true },
@@ -4030,7 +4046,31 @@
 							self.update()
 						},
 						onAdd: function(evt){
-							if (self.indexOf(evt.item.dataset.id) > -1) alert('already here!')
+							if (self.indexOf(evt.item.dataset.id) > -1) {
+								evt.item.parentNode.removeChild(evt.item)
+
+								self.parent.parent.parent.toasts.push(
+									{
+									  text: 'This presentation is already in this list.',
+									  timeout: 4000
+									}
+								)
+								self.parent.parent.parent.update()
+
+							}
+
+							if(!self.opts.mine && !(self.opts.listtype == 'Group')) {
+								evt.item.parentNode.removeChild(evt.item)
+
+								self.parent.parent.parent.toasts.push(
+									{
+									  text: 'Oops! You can\'t add a presentation to another chair\'s list .',
+									  timeout: 4000
+									}
+								)
+								self.parent.parent.parent.update()							
+							}
+
 							self.sendUpdatedSort(sortable.toArray())
 							self.update()
 						}
@@ -4041,6 +4081,11 @@
 				self.update()
 
 			})
+
+			this.loadPresentation = function(e) {
+				self.parent.parent.parent.clearSearch()
+				riot.route('presentations/show/' + e.item.item.id)
+			}.bind(this);
 
 
 		

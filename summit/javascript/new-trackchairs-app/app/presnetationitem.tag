@@ -1,5 +1,5 @@
 <presentationitem>
-	<div class="col-lg-12 presentation-row {active: isSelected()}" onclick={ setSelected }>
+	<div class="col-lg-12 presentation-row {active: isActive()} { selected: opts.data.selected }" onclick={ setActive }>
 		<div class="col-lg-12 ">
 			<div class="row">
 				<div class="col-lg-9">
@@ -27,6 +27,10 @@
 			font-size: 1.3em;
 		}
 
+		.presentation-row.selected {
+			background-color: rgba(190, 222, 244, 0.44);
+		}
+
 		.presentation-row a {
 			text-decoration: none;
 		}
@@ -38,12 +42,12 @@
 
 	</style>
 
-	setSelected(e){
+	setActive(e){
 		this.parent.setActiveKey(this.opts.key)
 		riot.route('presentations/show/' + this.opts.data.id)
 	}
 	
-	isSelected(){
+	isActive(){
 		return this.parent.activekey == this.opts.key
 	}
 

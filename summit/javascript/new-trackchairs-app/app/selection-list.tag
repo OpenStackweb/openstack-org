@@ -5,16 +5,17 @@ var Sortable = require('sortablejs')
 
 	<div class="col-lg-3">
 		<h3>{ opts.listname }</h3>
-		<div if={!opts.selections}><i>This person has yet to make any selections.</i></div>
+		<div if={!opts.selections && opts.listtype != 'Group'}><i>This person has not made any selections yet.</i></div>
+		<div if={!opts.selections && opts.listtype == 'Group'}><i>There are no group selections yet. Drag one into here to create one.</i></div>
+
 		<ul id="{ opts.listid }" class="list-group {empty: !opts.selections}">
 			<li each="{ item, i in opts.selections }" 
-				class="list-group-item { alternate: i >= soltsAvailble } animated" 
+				class="list-group-item { alternate: i >= soltsAvailble }" 
 				data-id="{ item.id }" 
-				data-order="{ item.order }" 
+				data-order="{ item.order }"
+				onclick="{ loadPresentation }" 
 				>
-					<div class="selection-front" onclick="{ flip }">{ item.title }</div>
-					<div class="selection-back" onclick="{ flip }">Other Side</div>
-			</li>
+					{ item.title }
 		</ul>
 	</div>
 
@@ -35,8 +36,7 @@ var Sortable = require('sortablejs')
 		}
 
 		.list-group.empty {
-			min-height: 30px;
-			border: 1px dotted grey;
+			min-height: 100px;
 		}
 
 		.selection-front, .selection-back {
@@ -80,17 +80,11 @@ var Sortable = require('sortablejs')
 		var self = this
 		var api = self.parent.parent.opts.api
 
-		self.soltsAvailble = 10
+		self.soltsAvailble = opts.slots
 
 
 		sendUpdatedSort(new_sort) {
 			api.trigger('save-sort-order', self.opts.selectionlist, new_sort)
-		}
-
-		flip(e) {
-			console.log(e)
-			e.target.nextElementSibling.classList.toggle('slide')
-			self.update()
 		}
 
 
@@ -98,8 +92,9 @@ var Sortable = require('sortablejs')
 		self.indexOf = function(needle) {
             var i = -1, index = -1
 
+            if (!self.opts.selections) return index
+
             for(i = 0; i < self.opts.selections.length; i++) {
-            	console.log(self.opts.selections[i].id)
                 if(self.opts.selections[i].id == needle) {
                     index = i
                     break
@@ -109,12 +104,13 @@ var Sortable = require('sortablejs')
             return index
         }
 
+
 		api.on('selections-ready', function(result){			
 
 			console.log('6a. selection list hears selections-ready.')
 
 			var simpleList = document.getElementById(self.opts.listid)
-
+			
 			if(simpleList) {
 				var sortable = Sortable.create(simpleList,{
 					group: { name: "selection-list-group", pull: "clone", put: true },
@@ -129,7 +125,33 @@ var Sortable = require('sortablejs')
 						self.update()
 					},
 					onAdd: function(evt){
-						if (self.indexOf(evt.item.dataset.id) > -1) alert('already here!')
+						if (self.indexOf(evt.item.dataset.id) > -1) {
+							evt.item.parentNode.removeChild(evt.item)
+
+							// This is horribly ugly and will be replaced with an API call instead
+							self.parent.parent.parent.toasts.push(
+								{
+								  text: 'This presentation is already in this list.',
+								  timeout: 4000
+								}
+							)
+							self.parent.parent.parent.update()
+
+						}
+
+						if(!self.opts.mine && !(self.opts.listtype == 'Group')) {
+							evt.item.parentNode.removeChild(evt.item)
+
+							// This is horribly ugly and will be replaced with an API call instead
+							self.parent.parent.parent.toasts.push(
+								{
+								  text: 'Oops! You can\'t add a presentation to another chair\'s list .',
+								  timeout: 4000
+								}
+							)
+							self.parent.parent.parent.update()							
+						}
+
 						self.sendUpdatedSort(sortable.toArray())
 						self.update()
 					}
@@ -140,6 +162,11 @@ var Sortable = require('sortablejs')
 			self.update()
 
 		})
+
+		loadPresentation(e) {
+			self.parent.parent.parent.clearSearch()
+			riot.route('presentations/show/' + e.item.item.id)
+		}
 
 
 	</script>
