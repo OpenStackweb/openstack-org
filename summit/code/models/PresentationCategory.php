@@ -91,7 +91,7 @@ class PresentationCategory extends DataObject
           if (!$GroupList->exists()) {
               $GroupList = new SummitSelectedPresentationList();
               $GroupList->ListType = 'Group';
-              $GroupList->CategoryID = $SummitCategoryID;
+              $GroupList->CategoryID = $this->ID;
               $GroupList->write();
           }
 
