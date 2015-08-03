@@ -88,7 +88,7 @@ class PresentationCategory extends DataObject
           ))->first();
 
           // if a group selection list doesn't exist for this category, create it
-          if (!$GroupList->exists()) {
+          if (!$GroupList) {
               $GroupList = new SummitSelectedPresentationList();
               $GroupList->ListType = 'Group';
               $GroupList->CategoryID = $this->ID;
