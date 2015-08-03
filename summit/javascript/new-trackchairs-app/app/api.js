@@ -6,7 +6,7 @@
 // Requirements and globals
 reqwest = require('reqwest')
 var api = riot.observable()
-var url = 'http://openstack.dev/trackchairs/api/v1/'
+var url = '/trackchairs/api/v1/'
 
 /*
 *	Listeners

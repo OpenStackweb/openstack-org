@@ -85,7 +85,7 @@ class PresentationCategory extends DataObject
           $GroupList = SummitSelectedPresentationList::get()->filter(array(
               'ListType' => 'Group',
               'CategoryID' => $this->ID
-          ));
+          ))->first();
 
           // if a group selection list doesn't exist for this category, create it
           if (!$GroupList->exists()) {
@@ -95,7 +95,7 @@ class PresentationCategory extends DataObject
               $GroupList->write();
           }
 
-          return $GroupList->first();
+          return $GroupList;
 
     }
 
