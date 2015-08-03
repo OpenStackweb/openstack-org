@@ -1446,7 +1446,7 @@
 	__webpack_require__(15)
 	__webpack_require__(16)
 
-	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="col-lg-12" show="{ !details }"> <div class="row"> <div class="col-lg-9"> &nbsp; </div> <div class="col-lg-1" > Ave </div> <div class="col-lg-1"> Count </div> <div class="col-lg-1"> Total </div> </div> </div> <presentationitem each="{ presentation, i in presentations }" activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times"></i></a></h3> </div> <div class="panel-body"> <button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button> <button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button> &nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> <hr> <h2>{ currentPresentation.title } ({ currentPresentation.id })</h2> <h4>{ currentPresentation.level }</h4> <raw content="{ currentPresentation.description }"></raw> <div> <span class="label label-info">Comments: { currentPresentation.comments.length }</span> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
+	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="col-lg-12" show="{ !details }"> <div class="row"> <div class="col-lg-9"> &nbsp; </div> <div class="col-lg-1" > Ave </div> <div class="col-lg-1"> Count </div> <div class="col-lg-1"> Total </div> </div> </div> <presentationitem each="{ presentation, i in presentations }" activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times"></i></a></h3> </div> <div class="panel-body"> <button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button> <button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button> &nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> <hr> <h2>{ currentPresentation.title }</h2> <h4>{ currentPresentation.level }</h4> <raw content="{ currentPresentation.description }"></raw> <div each="{ currentPresentation.speakers }"> <hr> <h4>{ first_name }&nbsp;{ last_name }</h5> <p>{ title }</p> <raw content="{ bio }"></raw> </div> <div> <span class="label label-info">Comments: { currentPresentation.comments.length }</span> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
 
 			var self = this
 			this.sortitems = []
@@ -1571,6 +1571,7 @@
 				    }
 				 }
 
+				console.log('currentPresentation', result)
 				self.currentPresentation = result
 
 				if(!self.searchmode) {
@@ -1662,10 +1663,28 @@
 				self.update()
 			}.bind(this);
 
-			Mousetrap.bind('down', function() { 
-				self.setActiveKey(self.activekey + 1)
+			Mousetrap.bind('n', function() {
+				nextPresKey = self.activekey + 1
+				if(nextPresKey + 1 > self.presentations.length) nextPresKey = 0
+				self.setActiveKey(nextPresKey)
 			})
 
+			Mousetrap.bind('p', function() {
+				nextPresKey = self.activekey - 1
+				if(nextPresKey === -1) nextPresKey = self.presentations.length - 1
+				self.setActiveKey(nextPresKey)
+			})
+
+
+			Mousetrap.bind('s', function() {
+				if(
+					self.currentPresentation.can_assign &&
+					!self.currentPresentation.selected
+				) 
+				{
+					self.selectPresentation()
+				 }
+			})		
 
 		
 	});
@@ -2821,7 +2840,7 @@
 
 	var riot = __webpack_require__(1);
 
-	riot.tag('presentationitem', '<div class="col-lg-12 presentation-row {active: isActive()} { selected: opts.data.selected }" onclick="{ setActive }"> <div class="col-lg-12 "> <div class="row"> <div class="col-lg-9"> { opts.data.title } </div> <div class="col-lg-1" show="{ !opts.details }" > { opts.data.vote_average } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.vote_count } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.total_points } </div> </div> </div> </div>', '.presentation-row { border: 1px solid #D5D5D5; padding: 5px; margin-bottom: -1px; cursor: pointer; font-size: 1.3em; } .presentation-row.selected { background-color: rgba(190, 222, 244, 0.44); } .presentation-row a { text-decoration: none; } .presentation-row.active, .presentation-row.active a { background-color: #4CB3D6; color: white; }', function(opts) {
+	riot.tag('presentationitem', '<div class="col-lg-12 presentation-row {active: isActive()} { selected: opts.data.selected }" onclick="{ setActive }"> <div class="col-lg-12 "> <div class="row"> <div class="col-lg-9"> { opts.data.title } </div> <div class="col-lg-1" show="{ !opts.details }" > { opts.data.vote_average } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.vote_count } </div> <div class="col-lg-1" show="{ !opts.details }"> { opts.data.total_points } </div> </div> </div> </div>', '.presentation-row { border: 1px solid #D5D5D5; padding: 5px; margin-bottom: -1px; cursor: pointer; font-size: 1.3em; } .presentation-row.selected { background-color: rgba(190, 222, 244, 0.44); } .presentation-row a { text-decoration: none; } .presentation-row.active, .presentation-row.active a { background-color: #3A89D3; color: white; }', function(opts) {
 
 		this.setActive = function(e) {
 			this.parent.setActiveKey(this.opts.key)
@@ -2842,7 +2861,7 @@
 
 	var riot = __webpack_require__(1);
 
-	riot.tag('navbar', '<nav class="navbar navbar-default"> <div class="container-fluid">  <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">OpenStack Track Chairs App </a> </div>  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> <ul class="nav navbar-nav"> <li class="{ active: self.parent.DisplayMode === \'browse\' }"><a href="#" onclick="{ setMode(\'presentations\') }">Browse Presentations <span class="sr-only">(current)</span></a></li> <li class="{ active: self.parent.DisplayMode === \'selections\' }"><a href="#" onclick="{ setMode(\'selections\') }">Your Selections</a></li> </ul> <ul class="nav navbar-nav navbar-right"> <li><a href="#">Link</a></li> <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a> <ul class="dropdown-menu"> <li><a href="#">Action</a></li> <li><a href="#">Another action</a></li> <li><a href="#">Something else here</a></li> <li role="separator" class="divider"></li> <li><a href="#">Separated link</a></li> </ul> </li> </ul> </div> </div> </nav>', function(opts) {
+	riot.tag('navbar', '<nav class="navbar navbar-default"> <div class="container-fluid">  <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">OpenStack Track Chairs App </a> </div>  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> <ul class="nav navbar-nav"> <li class="{ active: self.parent.DisplayMode === \'browse\' }"><a href="#" onclick="{ setMode(\'presentations\') }">Browse Presentations <span class="sr-only">(current)</span></a></li> <li class="{ active: self.parent.DisplayMode === \'selections\' }"><a href="#" onclick="{ setMode(\'selections\') }">Your Selections</a></li> </ul> </div> </div> </nav>', function(opts) {
 		
 		self = this;
 
@@ -4046,18 +4065,6 @@
 							self.update()
 						},
 						onAdd: function(evt){
-							if (self.indexOf(evt.item.dataset.id) > -1) {
-								evt.item.parentNode.removeChild(evt.item)
-
-								self.parent.parent.parent.toasts.push(
-									{
-									  text: 'This presentation is already in this list.',
-									  timeout: 4000
-									}
-								)
-								self.parent.parent.parent.update()
-
-							}
 
 							if(!self.opts.mine && !(self.opts.listtype == 'Group')) {
 								evt.item.parentNode.removeChild(evt.item)
@@ -4069,6 +4076,19 @@
 									}
 								)
 								self.parent.parent.parent.update()							
+							}
+
+							else if (self.indexOf(evt.item.dataset.id) > -1) {
+								evt.item.parentNode.removeChild(evt.item)
+
+								self.parent.parent.parent.toasts.push(
+									{
+									  text: 'This presentation is already in this list.',
+									  timeout: 4000
+									}
+								)
+								self.parent.parent.parent.update()
+
 							}
 
 							self.sendUpdatedSort(sortable.toArray())

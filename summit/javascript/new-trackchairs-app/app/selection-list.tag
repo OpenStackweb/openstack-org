@@ -125,19 +125,6 @@ var Sortable = require('sortablejs')
 						self.update()
 					},
 					onAdd: function(evt){
-						if (self.indexOf(evt.item.dataset.id) > -1) {
-							evt.item.parentNode.removeChild(evt.item)
-
-							// This is horribly ugly and will be replaced with an API call instead
-							self.parent.parent.parent.toasts.push(
-								{
-								  text: 'This presentation is already in this list.',
-								  timeout: 4000
-								}
-							)
-							self.parent.parent.parent.update()
-
-						}
 
 						if(!self.opts.mine && !(self.opts.listtype == 'Group')) {
 							evt.item.parentNode.removeChild(evt.item)
@@ -150,6 +137,20 @@ var Sortable = require('sortablejs')
 								}
 							)
 							self.parent.parent.parent.update()							
+						}
+
+						else if (self.indexOf(evt.item.dataset.id) > -1) {
+							evt.item.parentNode.removeChild(evt.item)
+
+							// This is horribly ugly and will be replaced with an API call instead
+							self.parent.parent.parent.toasts.push(
+								{
+								  text: 'This presentation is already in this list.',
+								  timeout: 4000
+								}
+							)
+							self.parent.parent.parent.update()
+
 						}
 
 						self.sendUpdatedSort(sortable.toArray())

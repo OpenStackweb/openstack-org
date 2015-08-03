@@ -27,14 +27,15 @@ class SummitTrackChair extends DataObject {
     	$priorChair = SummitTrackChair::get()->filter('MemberID',$member->ID)->first();
 	    $category = PresentationCategory::get()->byID($catgoryID);    	
 
-    	if(!$priorChair->exists()) {
+    	if(!$priorChair) {
 	    	$chair = new self();
 	    	$chair->MemberID = $member->ID;
+	    	$chair->SummitID = Summit::get_active()->ID;
 	    	$chair->write();
 	    	$chair->Categories()->add($category);
 
 			//Find or create the 'track-chairs' group
-			if (!$Group = Group::filter('Code', 'track-chairs')->first()) {
+			if (!$Group = Group::get()->filter('Code', 'track-chairs')->first()) {
 				$Group = new Group();
 				$Group->Code = "track-chairs";
 				$Group->Title = "Track Chairs";

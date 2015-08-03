@@ -58,6 +58,8 @@ class SummitSelectedPresentationList extends DataObject {
 
     public static function getAllListsByCategory($SummitCategoryID) {
 
+          $category = PresentationCategory::get()->byID($SummitCategoryID);
+
           // An empty array list that we'll use to return results
           $results = ArrayList::create();
 
@@ -73,38 +75,14 @@ class SummitSelectedPresentationList extends DataObject {
               'MemberID', Member::currentUser()->ID
             );  
 
-          // See if there's a list for the current member
-          $MemberList = $AllLists->filter(
-              'MemberID', Member::currentUser()->ID
-          );
+          $MemberList = $category->MemberList(Member::currentUser()->ID);
+          $GroupList = $category->GroupList();
 
-          // See if there's a list for the group
-          $GroupList = $AllLists->filter(
-              'ListType', 'Group'
-          );
-
-          // if a selection list doesn't exist for this member and category, create it
-          if (!$MemberList->exists()) {
-              $MemberList = new SummitSelectedPresentationList();
-              $MemberList->ListType = 'Individual';
-              $MemberList->CategoryID = $SummitCategoryID;
-              $MemberList->MemberID = Member::currentUser()->ID;
-              $MemberList->write();
-          }
-
-          // if a group selection list doesn't exist for this category, create it
-          if (!$GroupList->exists()) {
-              $GroupList = new SummitSelectedPresentationList();
-              $GroupList->ListType = 'Group';
-              $GroupList->CategoryID = $SummitCategoryID;
-              $GroupList->write();
-          }
-
-          $results->push($MemberList->first());
+          $results->push($MemberList);
           foreach ($OtherTrackChairLists as $list) {
             $results->push($list);
           }
-          $results->push($GroupList->first());
+          $results->push($GroupList);
 
           // Add each of those lists to our results
           foreach ($results as $list) {
