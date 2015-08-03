@@ -4176,7 +4176,7 @@
 	// Requirements and globals
 	reqwest = __webpack_require__(18)
 	var api = riot.observable()
-	var url = 'http://openstack.dev/trackchairs/api/v1/'
+	var url = '/trackchairs/api/v1/'
 
 	/*
 	*	Listeners
