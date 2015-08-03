@@ -36,7 +36,7 @@
 		}
 
 		.presentation-row.active, .presentation-row.active a {
-			background-color: #4CB3D6;
+			background-color: #3A89D3;
 			color: white;
 		}
 

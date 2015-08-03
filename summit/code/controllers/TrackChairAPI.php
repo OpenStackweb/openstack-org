@@ -23,7 +23,7 @@ class TrackChairAPI extends Controller {
 		'handleGetMemberSelections',
 		'handleReorderList',
 		'handleChangeRequests',
-		'handleAddChair'
+		'handleAddChair' => 'ADMIN'
 	);
 
 
@@ -288,8 +288,12 @@ class TrackChairAPI extends Controller {
 	public function handleAddChair(SS_HTTPRequest $r) {
 		$email = $r->getVar('email');
 		$catid = $r->getVar('cat_id');
+		$category = PresentationCategory::get()->byID($catid);
 		$member = Member::get()->filter('Email', $email)->first();
+
 		SummitTrackChair::addChair($member, $catid);
+		$category->MemberList($member->ID);
+		$category->GroupList();
 	}
 
 }
@@ -342,6 +346,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
     	$speakers = array ();
 
     	foreach($p->Speakers() as $s) {
+    		$s->Bio = str_replace(array("\r", "\n"), "", $s->Bio);
     		$photo_url = null;
     		if($s->Photo()->exists() && $s->Photo()->croppedImage(100,100)) {
     			$photo_url = $s->Photo()->croppedImage(100,100)->URL;

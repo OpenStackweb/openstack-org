@@ -76,9 +76,15 @@ require('./modal.tag')
 						<button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button>
 						&nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a>
 						<hr/>
-						<h2>{ currentPresentation.title } ({ currentPresentation.id })</h2>
+						<h2>{ currentPresentation.title }</h2>
 						<h4>{ currentPresentation.level }</h4>
 						<raw content="{ currentPresentation.description }"/>
+						<div each="{ currentPresentation.speakers }">
+							<hr/>
+							<h4>{ first_name }&nbsp;{ last_name }</h5>
+							<p>{ title }</p>
+							<raw content="{ bio }"/>
+						</div>
 						<div>
 							<span class="label label-info">Comments: { currentPresentation.comments.length }</span>
 						</div>
@@ -227,6 +233,7 @@ require('./modal.tag')
 			    }
 			 }
 
+			console.log('currentPresentation', result)
 			self.currentPresentation = result
 
 			if(!self.searchmode) {
@@ -318,10 +325,28 @@ require('./modal.tag')
 			self.update()
 		}
 
-		Mousetrap.bind('down', function() { 
-			self.setActiveKey(self.activekey + 1)
+		Mousetrap.bind('n', function() {
+			nextPresKey = self.activekey + 1
+			if(nextPresKey + 1 > self.presentations.length) nextPresKey = 0
+			self.setActiveKey(nextPresKey)
 		})
 
+		Mousetrap.bind('p', function() {
+			nextPresKey = self.activekey - 1
+			if(nextPresKey === -1) nextPresKey = self.presentations.length - 1
+			self.setActiveKey(nextPresKey)
+		})
+
+
+		Mousetrap.bind('s', function() {
+			if(
+				self.currentPresentation.can_assign &&
+				!self.currentPresentation.selected
+			) 
+			{
+				self.selectPresentation()
+			 }
+		})		
 
 	</script>
 
