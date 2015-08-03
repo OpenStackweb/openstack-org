@@ -7,9 +7,9 @@
 			All Categories <span class="caret"></span>
 		</button>		
 		<ul class="dropdown-menu">
-			<li><a href="#" onclick="{ allCategories }">All Categories</a></li>
-			<li role="separator" class="divider"></li>
 			<li each={category in opts.categories}><a href="#" onclick="{ parent.setCategory }">{ category.title }</a></li>
+			<li role="separator" class="divider"></li>
+			<li><a href="#" onclick="{ allCategories }">All Categories</a></li>			
 		</ul>
 	</div>
 

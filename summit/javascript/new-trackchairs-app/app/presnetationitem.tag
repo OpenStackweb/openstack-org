@@ -40,11 +40,11 @@
 
 	setSelected(e){
 		this.parent.setActiveKey(this.opts.key)
-		this.parent.showDetails()
+		riot.route('presentations/show/' + this.opts.data.id)
 	}
 	
 	isSelected(){
-		return this.parent.activekey === this.opts.key
+		return this.parent.activekey == this.opts.key
 	}
 
 

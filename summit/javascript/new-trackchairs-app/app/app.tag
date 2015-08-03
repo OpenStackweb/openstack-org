@@ -62,7 +62,7 @@ require('./modal.tag')
 							</div>
 						</div>
 					</div>				
-					<presentationitem each={ presentation, i in presentations } key="{ i }" data="{ presentation }" details="{details}" />
+					<presentationitem each={ presentation, i in presentations } activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}" />
 				</div>
 				<div if="{ !quantity && searchmode }">No results were found</div>
 	        </div>
@@ -102,13 +102,39 @@ require('./modal.tag')
 
 		var self = this
 		this.sortitems = []
-		this.DisplayMode = 'selections'
+		this.DisplayMode = 'browse'
 
-		this.toasts = [];		
+		this.toasts = [];
 
-		this.on('mount', function(){
-			opts.trigger('load-summit-details')
-		})
+
+		// helper function to find the index of a given presentation id
+		indexOf(id) {
+            var i = -1, index = -1
+
+            for(i = 0; i < self.presentations.length; i++) {
+                if(self.presentations[i].id == id) {
+                    index = i
+                    break
+                }
+            }
+
+            return index
+        }
+
+		// helper function to find a category
+		categoryIndex(id) {
+            var i = -1, index = -1
+
+            for(i = 0; i < self.summit.categories.length; i++) {
+                if(self.summit.categories[i].id == id) {
+                    index = i
+                    break
+                }
+            }
+
+            return index
+        }
+
 
 		setActiveKey(key) {
 			self.activekey = key
@@ -118,45 +144,77 @@ require('./modal.tag')
 		}
 
 		setCategory(category) {
+			self.activekey = null
 			self.activeCategory = category
 			var id
 			if(category) id = category.id
 			opts.trigger('load-presentations',null,id)
-			opts.trigger('load-selections',category.id)
 		}
+
+
+		riot.route(function(mode, action, id) {
+			if (mode === 'presentations') {
+
+				self.DisplayMode = 'browse'
+
+				if(action === 'show' && id) {
+					opts.trigger('load-presentation-details', id)
+					self.showDetails()
+				}
+
+				self.update()
+			}
+
+			if (mode === 'selections') {
+				self.DisplayMode = 'selections'
+				self.update()				
+			}
+		})				
+
+		this.on('mount', function(){
+			opts.trigger('load-summit-details')
+			riot.route.exec(function(mode, action, id) {
+				if (mode === 'presentations') { 
+					self.DisplayMode = 'browse'
+					self.update()
+				}
+
+				if (mode === 'selections') {
+					self.DisplayMode = 'selections'
+					self.update()
+				}
+			})			
+		})
 
 		opts.on('summit-details-loaded', function(result){
 			self.summit = result
-			opts.trigger('load-presentations')
-		})		
+			self.setCategory(self.summit.categories[0])
+		})
+
+		self.sortPresentations = function(set, sortBy, order) {
+			
+			if(order === 'desc') {
+				set.sort(function(a,b) {
+					return b[sortBy] - a[sortBy]
+				})
+			} else {
+				set.sort(function(a,b) {
+					return a[sortBy] - b[sortBy]
+				})				
+			}
+
+			return set
+		}		
 
 		opts.on('presentations-loaded', function(result){
 
-			console.log('unsorted results', result)
-
-			result.sort(function(a,b) {
-					return b.vote_average - a.vote_average
-				})
-
-			console.log('sorted results', result)
-
-			self.presentations = result
+			// default sort order
+			self.presentations = self.sortPresentations(result, 'vote_average', 'asc')
 			self.quantity = self.presentations.length
-			self.details = true
 
-			// if there are results 
-
-			if( self.presentations[0] ) {
-				self.results = true
-				id = self.presentations[0].id
-				opts.trigger('load-presentation-details', id)
-				self.activekey = 0
-				self.update()
-			} else {
-				self.results = false
-			}
 			self.update()
 		})
+
 
 		opts.on('presentation-details-loaded', function(result){
 
@@ -167,7 +225,15 @@ require('./modal.tag')
 			 }
 
 			self.currentPresentation = result
-			console.log('currentPresentation ', self.currentPresentation)
+
+			if(!self.searchmode) {
+
+				cat_index = self.categoryIndex(result.category_id)
+				self.activeCategory = self.summit.categories[cat_index]
+				opts.trigger('load-presentations',null,result.category_id)
+
+			}
+
 			self.update()
 		})
 
@@ -181,6 +247,8 @@ require('./modal.tag')
 		}
 
 		search(e){
+			self.activekey = null
+			self.details = false
 			// prevents flash of wrong value
 			self.quantity = 0
 			self.searchmode = true
@@ -227,7 +295,8 @@ require('./modal.tag')
 			document.getElementById('app-search').value='';
 			self.quantity = 0
 			self.searchmode = false
-			opts.trigger('load-presentations')			
+			opts.trigger('load-presentations', null, this.activeCategory.id)
+			self.activekey = null			
 			self.update()
 		}
 

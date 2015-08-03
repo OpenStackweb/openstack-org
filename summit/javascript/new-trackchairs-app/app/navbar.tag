@@ -9,13 +9,13 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#">OpenStack Track Chairs App</a>
+	      <a class="navbar-brand" href="#">OpenStack Track Chairs App </a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li class="{ active: self.parent.DisplayMode === 'browse' }"><a href="#" onclick="{ setMode('browse') }">Browse Presentations <span class="sr-only">(current)</span></a></li>
+	        <li class="{ active: self.parent.DisplayMode === 'browse' }"><a href="#" onclick="{ setMode('presentations') }">Browse Presentations <span class="sr-only">(current)</span></a></li>
 	        <li class="{ active: self.parent.DisplayMode === 'selections' }"><a href="#" onclick="{ setMode('selections') }">Your Selections</a></li>
 	      </ul>
 	      
@@ -40,8 +40,7 @@
 
 	setMode(mode) {
 		return function(e) {
-			self.parent.DisplayMode = mode
-			self.parent.update()
+			riot.route(mode)
 		}
 	}
 

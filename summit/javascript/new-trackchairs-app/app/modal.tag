@@ -35,7 +35,7 @@
           <button type="button" class="btn btn-primary" onclick="{ suggestChange }">Suggest Change</button>
         </div>
         <div class="modal-footer" show="{ finished }">
-          <button type="button" class="btn btn-primary" onclick="{ closeModal }" data-dismiss="modal">Sounds Good</button>
+          <button type="button" class="btn btn-primary" onclick="{ closeModal }" data-dismiss="modal">OK</button>
         </div>        
       </div>
     </div>
