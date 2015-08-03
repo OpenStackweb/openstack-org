@@ -11,7 +11,7 @@ class TrackChairsPage extends Page {
 class TrackChairsPage_Controller extends Page_Controller {
 
   public function init() {
-  		if(!$this->trackChairCheck()) Security::permissionFailure($this, $body);
+  		  if(!$this->trackChairCheck()) Security::permissionFailure($this);
         parent::init();
         Requirements::clear();
   }	
