@@ -15,7 +15,7 @@ class SummitSelectedPresentationList extends DataObject {
 
 	static $db = array(
 		'Name' => 'Text',
-        'ListType' => "Enum('Individual,Group','Individual')"
+    'ListType' => "Enum('Individual,Group','Individual')"
 	);
 	
 	static $has_one = array(
@@ -62,18 +62,16 @@ class SummitSelectedPresentationList extends DataObject {
           $results = ArrayList::create();
 
           // Get any existing lists made for this category
-          $AllLists = SummitSelectedPresentationList::get()->filter(
-              'CategoryID', $SummitCategoryID
-          );
+          $AllLists = SummitSelectedPresentationList::get()
+            ->filter('CategoryID', $SummitCategoryID )
+            ->sort('ListType','ASC');
 
-          // Add each of those lists to our results
-          foreach ($AllLists as $list) {
-
-            if($list->ListType == "Individual") $list->name = $list->Member()->FirstName . ' ' . $list->Member()->Surname;
-            if($list->ListType == "Group") $list->name = 'Group Selections';
-            $results->push($list);
-
-          }          
+          // Filter to lists of any other track chairs
+          $OtherTrackChairLists = $AllLists
+            ->filter('ListType','Individual')
+            ->exclude(
+              'MemberID', Member::currentUser()->ID
+            );  
 
           // See if there's a list for the current member
           $MemberList = $AllLists->filter(
@@ -92,7 +90,6 @@ class SummitSelectedPresentationList extends DataObject {
               $MemberList->CategoryID = $SummitCategoryID;
               $MemberList->MemberID = Member::currentUser()->ID;
               $MemberList->write();
-              $results->push($MemberList);
           }
 
           // if a group selection list doesn't exist for this category, create it
@@ -101,12 +98,31 @@ class SummitSelectedPresentationList extends DataObject {
               $GroupList->ListType = 'Group';
               $GroupList->CategoryID = $SummitCategoryID;
               $GroupList->write();
-              $results->push($GroupList);              
           }
 
-          return $results;   
+          $results->push($MemberList->first());
+          foreach ($OtherTrackChairLists as $list) {
+            $results->push($list);
+          }
+          $results->push($GroupList->first());
+
+          // Add each of those lists to our results
+          foreach ($results as $list) {
+
+            if($list->ListType == "Individual") $list->name = $list->Member()->FirstName . ' ' . $list->Member()->Surname;
+            if($list->ListType == "Group") $list->name = 'Group Selections';
+
+          }          
+
+
+          return $results;
 
     }
+
+    public function maxPresentations() {
+      return $this->Category()->SessionCount;
+    }
+
 
     public function memberCanEdit() {
 
@@ -114,10 +130,14 @@ class SummitSelectedPresentationList extends DataObject {
         return false;
       }
 
-      if($this->MemberID == Member::currentUser()->ID || $this->ListType = 'Group') {
+      if($this->MemberID == Member::currentUser()->ID || $this->ListType == 'Group') {
         return true;
       }
 
+    }
+
+    public function mine() {
+      return $this->MemberID == Member::currentUser()->ID;
     }
 
 

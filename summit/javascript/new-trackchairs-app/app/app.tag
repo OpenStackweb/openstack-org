@@ -72,8 +72,8 @@ require('./modal.tag')
 						<h3 class="panel-title">Presentation Details <a href="#" onclick={ closeDetails }><i class="fa fa-times"></i></a></h3>
 					</div>
 					<div class="panel-body">
-						<button if="{ currentPresentation.selected }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button>
-						<button if="{ !currentPresentation.selected }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button>
+						<button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button>
+						<button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button>
 						&nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a>
 						<hr/>
 						<h2>{ currentPresentation.title } ({ currentPresentation.id })</h2>
@@ -212,7 +212,10 @@ require('./modal.tag')
 			self.presentations = self.sortPresentations(result, 'vote_average', 'asc')
 			self.quantity = self.presentations.length
 
+			if(self.currentPresentation) self.activekey = self.indexOf(self.currentPresentation.id)
+
 			self.update()
+
 		})
 
 
@@ -229,8 +232,13 @@ require('./modal.tag')
 			if(!self.searchmode) {
 
 				cat_index = self.categoryIndex(result.category_id)
-				self.activeCategory = self.summit.categories[cat_index]
-				opts.trigger('load-presentations',null,result.category_id)
+				
+				if(self.activeCategory != self.summit.categories[cat_index]) {
+					self.activeCategory = self.summit.categories[cat_index]
+					opts.trigger('load-presentations',null,result.category_id)
+				} else {
+					if(self.currentPresentation) self.activekey = self.indexOf(self.currentPresentation.id)
+				}
 
 			}
 
@@ -261,7 +269,7 @@ require('./modal.tag')
 		}
 
 		unselectPresentation(e){
-			console.log('1. app is firing select-presentaiton')
+			console.log('1. app is firing unselect-presentaiton')
 			opts.trigger('unselect-presentation', self.currentPresentation.id)
 		}
 
@@ -276,12 +284,22 @@ require('./modal.tag')
 				  timeout: 6000
 				}
 			)
-			self.update();							
+
+			presIndex = self.indexOf(self.currentPresentation.id)
+			self.presentations[presIndex].selected = true
+
+			self.update();
+
 		})
 
 		opts.on('presentation-unselected', function(){
-			self.currentPresentation.selected = false;
-			self.opts.trigger('load-selections',self.currentPresentation.category_id)				
+			self.currentPresentation.selected = false
+
+			presIndex = self.indexOf(self.currentPresentation.id)
+
+			self.presentations[presIndex].selected = false
+
+			self.opts.trigger('load-selections',self.currentPresentation.category_id)
 			self.toasts.push(
 				{
 				  text: 'The presentation was removed from your selection list.',

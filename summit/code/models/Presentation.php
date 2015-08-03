@@ -186,9 +186,7 @@ class Presentation extends DataObject
      *
      * @return boolean
      */
-    public function canAssign($member = null) {
-
-        return true;
+    public function canAssign() {
 
         // see if they have either of the appropiate permissions
         if(!(Permission::check('TRACK-CHAIR') || Permission::check('ADMIN'))) return false;
@@ -333,14 +331,26 @@ class Presentation extends DataObject
 
             $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
 
+
             // See if the presentation has already been assigned
             $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID);
+            
 
             if ($AlreadyAssigned->count() == 0) {
+
+                // Find the higest order value assigned up to this point
+                $HighestOrderInList =  $MySelections
+                                            ->SummitSelectedPresentations()
+                                            ->sort('Order DESC')
+                                            ->first()
+                                            ->Order;
+
                 $SelectedPresentation = new SummitSelectedPresentation();
                 $SelectedPresentation->SummitSelectedPresentationListID = $MySelections->ID;
                 $SelectedPresentation->PresentationID = $this->ID;
                 $SelectedPresentation->MemberID = Member::currentUser()->ID;
+                // Place at bottom of list
+                $SelectedPresentation->Order = $HighestOrderInList + 1;
                 $SelectedPresentation->write();
             }
         }
@@ -378,7 +388,9 @@ class Presentation extends DataObject
 
 
         $selected = SummitSelectedPresentation::get()
-            ->where("PresentationID={$this->ID} and MemberID={$memID}");
+            ->leftJoin("SummitSelectedPresentationList", "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")        
+            ->where("PresentationID={$this->ID} and SummitSelectedPresentation.MemberID={$memID} 
+                     AND ListType='Individual'");
 
         if ($selected->count()) return true;
 

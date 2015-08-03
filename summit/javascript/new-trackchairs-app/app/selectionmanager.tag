@@ -8,10 +8,16 @@ require('./selection-list.tag')
 		</div>
 	</div>
 
-	<selection-list each="{ lists }" name="List" listname="{ list_name }" selections={ selections } listid="{ 'list' + list_id }" selectionlist="{ list_id }" />
+	<selection-list each="{ lists }" 
+		name="List" listname="{ list_name }" 
+		selections={ selections } 
+		listid="{ 'list' + list_id }" 
+		selectionlist="{ list_id }" 
+		mine="{ mine }"
+		listtype="{ list_type }"
+		slots="{ slots }" />
 
 	<script>
-		var selections = null
 		var self = this
 
 		opts.api.on('summit-details-loaded', function(result){
@@ -29,14 +35,18 @@ require('./selection-list.tag')
 		}
 
 		opts.api.on('selections-loaded', function(result){
-			console.log('5a. selectionmanager hears selections-loaded.')
-			self.listsLoaded = true
-			self.lists = []
-			self.update()
-			self.lists = result
-			self.update()
-			console.log('5b. selectionmanager fires selections-ready.')			
-			opts.api.trigger('selections-ready')
+
+			// see if we need to update the selections we are looking at
+			if(result.category_id == self.activeCategory.id) {
+
+				self.lists = []
+				self.update()
+				self.lists = result.lists
+				self.update()
+				opts.api.trigger('selections-ready')
+
+			}
+
 		})
 
 	</script>

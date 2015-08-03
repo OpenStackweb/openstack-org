@@ -82,7 +82,7 @@ class TrackChairAPI extends Controller {
 		$data['categories'] = array ();
 		$data['track_chair'] = $this->trackChairDetails();
 
-		foreach($summit->Categories() as $c) {
+		foreach($summit->Categories()->filter('ChairVisible', TRUE) as $c) {
 			$data['categories'][] = $c->toJSON();
 		}
 		
@@ -103,8 +103,10 @@ class TrackChairAPI extends Controller {
 
 		$summitID = Summit::get_active()->ID;
 
+		// Get a collection of chair-visible presentation categories
 		$presentations = Presentation::get()
-			->where("Presentation.SummitID = {$summitID}");
+			->leftJoin("PresentationCategory", "PresentationCategory.ID = Presentation.CategoryID")
+			->where("Presentation.SummitID = {$summitID} AND PresentationCategory.ChairVisible = 1");
 
 		if($r->getVar('category')) {
 			$presentations = $presentations->filter('CategoryID',(int) $r->getVar('category'));
@@ -166,33 +168,6 @@ class TrackChairAPI extends Controller {
 
 
 
-	public function handleSchedUpdate(SS_HTTPRequest $r) {		
-
-		if(!Member::currentUser()) {
-			return $this->httpError(403);
-		}
-
-		$schedID = $r->param('SchedID');
-		$presentation = SchedPresentation::get_by_sched_id($schedID);
-
-		if(!$presentation) {
-			$presentation = SchedPresentation::create(array(
-				'SchedID' => $schedID
-			));
-
-		}
-
-		// Only allow one writeable property here
-		if($youTube = $r->postVar('youtubeid')) {
-			$presentation->YouTubeID = $youTube;
-			$presentation->write();
-
-			return new SS_HTTPResponse("OK", 200);			
-		}
-
-		return $this->httpError(400, "You must provide a youtubeid parameter in the POST request");
-	}
-
 	public function handleGetMemberSelections(SS_HTTPRequest $r) {
 
 		if(!Member::currentUser()) {
@@ -201,23 +176,25 @@ class TrackChairAPI extends Controller {
 
 		$results = [];
 		$categoryID = (int) $r->param('categoryID');
+		$results['category_id'] = $categoryID;
+
 		$lists = SummitSelectedPresentationList::getAllListsByCategory($categoryID);
 
 
 		foreach ($lists as $key => $list) {
 
 				$selections = $list->SummitSelectedPresentations()->sort('Order ASC');
-
 				$count = $selections->count();
-
 				$listID = $list->ID;
 
 				$data = array (
 					'list_name' => $list->name,
+					'list_type' => $list->ListType,
 					'list_id' => $listID,
-					'results' => array (),
 					'total' => $count,
-					'can_edit' => $list->memberCanEdit()
+					'can_edit' => $list->memberCanEdit(),
+					'slots' => $list->maxPresentations(),
+					'mine' => $list->mine()
 				);
 
 				foreach($selections as $s) {			
@@ -228,7 +205,7 @@ class TrackChairAPI extends Controller {
 		    		);
 				}
 
-				$results[] = $data;
+				$results['lists'][] = $data;
 
 		}
 
@@ -246,6 +223,8 @@ class TrackChairAPI extends Controller {
 		$listID = $r->postVar('list_id');
 		$list = SummitSelectedPresentationList::get()->byId($listID);
     	
+		if(!$list->memberCanEdit()) return new SS_HTTPResponse(null, 403); 
+
     	if(is_array($sortOrder)) {
     		foreach ($sortOrder as $key=>$id) {
     			$selection = SummitSelectedPresentation::get()->filter(array(
@@ -260,7 +239,7 @@ class TrackChairAPI extends Controller {
     					$s = new SummitSelectedPresentation();
     					$s->SummitSelectedPresentationListID = $listID;
     					$s->PresentationID = $presentation->ID;
-    					$S->MemberID = Member::currentUserID();
+    					$s->MemberID = Member::currentUserID();
     					$s->Order = $key + 1;
     					$s->write();
     				}
