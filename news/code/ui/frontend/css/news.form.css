@@ -19,9 +19,7 @@
 label.error{
     padding: 5px !important;
     position: relative;
-    top: -40px;
-    left: 331px;
-    width: 320px;
+    color:red;
 }
 
 .newsHome{

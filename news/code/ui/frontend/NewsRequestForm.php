@@ -182,6 +182,7 @@ final class NewsRequestForm extends HoneyPotForm {
 	}
 
 	function submit($data, $form) {
+        $this->clearMessage();
 		// do stuff here
 	}
 }

@@ -26,7 +26,51 @@ jQuery(document).ready(function($){
         $('#NewsRequestForm_NewsRequestForm_date_expire').datetimepicker({
         });
 
+        var allowed_keys = [8, 13, 16, 17, 18, 20, 33, 34, 35,36, 37, 38, 39, 40, 46];
+
+        tinyMCE.init({
+            theme: "advanced",
+            mode : "textareas",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
+            theme_advanced_buttons2: "",
+            theme_advanced_buttons3: "",
+            plugins : "paste",
+            paste_text_sticky : true,
+            setup : function(ed) {
+                ed.onInit.add(function(ed) {
+                    ed.pasteAsPlainText = true;
+                });
+                ed.onKeyDown.add(function(ed, evt) {
+                    var key = evt.keyCode;
+                    var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
+                    if(allowed_keys.indexOf(key) == -1 && max_chars){
+                        var text_length = ed.getContent({ 'format' : 'text' }).length;
+                        if ( text_length+1 > max_chars){
+                            evt.preventDefault();
+                            evt.stopPropagation();
+                            return false;
+                        }
+                    }
+                });
+                ed.onPaste.add(function(ed, evt) {
+                    var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
+                    if (max_chars) {
+                        $(ed.getBody()).text(ed.getContent({ 'format' : 'text' }).substr(0,max_chars));
+                    }
+                });
+            },
+            forced_root_block : "p",
+            height: "250px",
+            width: "800px"
+        });
+
         //main form validation
+
+        jQuery.validator.setDefaults({
+            ignore: ''
+        });
+
         jQuery.validator.addMethod("phoneUS", function(phone_number, element) {
             phone_number = phone_number.replace(/\s+/g, "");
             return this.optional(element) || phone_number.length > 9 &&
@@ -34,15 +78,25 @@ jQuery(document).ready(function($){
         }, "Please specify a valid phone number (ie 333-333-4444)");
 
         form_validator = form.validate({
-            onfocusout: function(element) {$(element).valid()},
+            onfocusout: function(element) {
+                $(element).valid()
+            },
             focusCleanup: true,
             rules: {
                 submitter_phone:{required: true},
                 headline:{required: true},
                 summary:{required: true},
+                city:{required: true},
+                state:{required: true},
+                country:{required: true},
+                body:{required: true},
                 tags:{required: true},
                 date:{required: true},
-                link:{url:true}
+                link:{url:true},
+                submitter_first_name:{required: true},
+                submitter_last_name:{required: true},
+                //submitter_company:{required: true},
+                submitter_email:{required: true}
             },
             messages: {
                 submitter_phone:{
@@ -59,58 +113,29 @@ jQuery(document).ready(function($){
                 }
 
                 $('html, body').animate({
-                    scrollTop: element.offset().top
+                    scrollTop: element.offset().top - 40
                 }, 2000);
             },
             errorPlacement: function(error, element) {
-                /*if(!element.is(":visible")){
+                if(!element.is(":visible")){
                     element = element.parent();
                 }
-                error.insertAfter(element);*/
+                error.insertAfter(element);
+            }
+        });
+
+        $("#NewsRequestForm_NewsRequestForm_action_saveNewsArticle").click(function(evt) {
+            tinyMCE.triggerSave();
+            if($("#myform").valid()) {
+                //Carry on
+            } else {
+                evt.preventDefault();
+                evt.stopPropagation();
+                return false;
             }
         });
 
     }
-
-    var allowed_keys = [8, 13, 16, 17, 18, 20, 33, 34, 35,36, 37, 38, 39, 40, 46];
-
-    tinyMCE.init({
-        theme: "advanced",
-        mode : "textareas",
-        theme_advanced_toolbar_location: "top",
-        theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
-        theme_advanced_buttons2: "",
-        theme_advanced_buttons3: "",
-        plugins : "paste",
-        paste_text_sticky : true,
-        setup : function(ed) {
-            ed.onInit.add(function(ed) {
-                ed.pasteAsPlainText = true;
-            });
-            ed.onKeyDown.add(function(ed, evt) {
-                var key = evt.keyCode;
-                var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
-                if(allowed_keys.indexOf(key) == -1 && max_chars){
-                    var text_length = ed.getContent({ 'format' : 'text' }).length;
-                    if ( text_length+1 > max_chars){
-                        evt.preventDefault();
-                        evt.stopPropagation();
-                        return false;
-                    }
-                }
-            });
-            ed.onPaste.add(function(ed, evt) {
-                var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
-                if (max_chars) {
-                    $(ed.getBody()).text(ed.getContent({ 'format' : 'text' }).substr(0,max_chars));
-                }
-
-            });
-        },
-        forced_root_block : "p", 
-        height: "250px",
-        width: "800px"
-    });
 
     //build image popup for present image
     var image_name = $('.name','#Image').html();
