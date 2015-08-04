@@ -17,7 +17,9 @@
 	      <ul class="nav navbar-nav">
 	        <li class="{ active: self.parent.DisplayMode === 'browse' }"><a href="#" onclick="{ setMode('presentations') }">Browse Presentations <span class="sr-only">(current)</span></a></li>
 	        <li class="{ active: self.parent.DisplayMode === 'selections' }"><a href="#" onclick="{ setMode('selections') }">Your Selections</a></li>
+	        <li class="{ active: self.parent.DisplayMode === 'directory' }"><a href="#" onclick="{ setMode('directory') }">Chair Directory</a></li>	      
 	      </ul>
+
 	      
 
 	    </div><!-- /.navbar-collapse -->

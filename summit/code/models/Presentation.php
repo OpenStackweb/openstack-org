@@ -378,6 +378,74 @@ class Presentation extends DataObject
     }
 
 
+   /**
+     * Used by the track chair app to allow chairs to add a presentation to a group list.
+     **/
+
+    public function assignToGroupList() {
+
+
+        // Check permissions of user on talk
+        if ($this->CanAssign()) {
+
+            $GroupList = SummitSelectedPresentationList::get()
+                ->filter(array(
+                        'CategoryID' => $this->CategoryID,
+                        'ListType' => 'Group'
+                  ))
+                ->first();
+
+            // See if the presentation has already been assigned
+            $AlreadyAssigned = $GroupList->SummitSelectedPresentations('PresentationID = ' . $this->ID);
+            
+
+            if ($AlreadyAssigned->count() == 0) {
+
+                // Find the higest order value assigned up to this point
+                $HighestOrderInList =  $GroupList
+                                            ->SummitSelectedPresentations()
+                                            ->sort('Order DESC')
+                                            ->first()
+                                            ->Order;
+
+                $SelectedPresentation = new SummitSelectedPresentation();
+                $SelectedPresentation->SummitSelectedPresentationListID = $GroupList->ID;
+                $SelectedPresentation->PresentationID = $this->ID;
+                $SelectedPresentation->MemberID = Member::currentUser()->ID;
+                // Place at bottom of list
+                $SelectedPresentation->Order = $HighestOrderInList + 1;
+                $SelectedPresentation->write();
+            }
+        }
+    }
+
+    /**
+     * Used by the track chair app to allow chairs to remove a presentation from a group list.
+     **/
+
+    public function removeFromGroupList() {
+
+
+        // Check permissions of user on talk
+        if ($this->CanAssign()) {
+
+            $GroupList = SummitSelectedPresentationList::get()
+                ->filter(array(
+                        'CategoryID' => $this->CategoryID,
+                        'ListType' => 'Group'
+                  ))
+                ->first();
+
+
+            // See if the presentation has already been assigned
+            $AlreadyAssigned = $GroupList->SummitSelectedPresentations('PresentationID = ' . $this->ID)->first();
+
+            if ($AlreadyAssigned->exists()) {
+                $AlreadyAssigned->delete();
+            }
+        }
+    }
+
     /**
      * Used by the track chair app see if the presentaiton has been selected by currently logged in member.
      **/
@@ -391,6 +459,23 @@ class Presentation extends DataObject
             ->leftJoin("SummitSelectedPresentationList", "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")        
             ->where("PresentationID={$this->ID} and SummitSelectedPresentation.MemberID={$memID} 
                      AND ListType='Individual'");
+
+        if ($selected->count()) return true;
+
+    }
+
+    /**
+     * Used by the track chair app see if the presentaiton has been selected by the group.
+     **/
+
+    public function isGroupSelected() {
+
+        $memID = Member::currentUserID();
+
+
+        $selected = SummitSelectedPresentation::get()
+            ->leftJoin("SummitSelectedPresentationList", "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")        
+            ->where("PresentationID={$this->ID} AND ListType='Group'");
 
         if ($selected->count()) return true;
 

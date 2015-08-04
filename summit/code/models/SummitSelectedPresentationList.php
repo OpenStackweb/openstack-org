@@ -88,7 +88,7 @@ class SummitSelectedPresentationList extends DataObject {
           foreach ($results as $list) {
 
             if($list->ListType == "Individual") $list->name = $list->Member()->FirstName . ' ' . $list->Member()->Surname;
-            if($list->ListType == "Group") $list->name = 'Group Selections';
+            if($list->ListType == "Group") $list->name = 'Team Selections';
 
           }          
 

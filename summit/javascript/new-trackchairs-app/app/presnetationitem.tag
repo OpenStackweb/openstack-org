@@ -1,9 +1,9 @@
 <presentationitem>
-	<div class="col-lg-12 presentation-row {active: isActive()} { selected: opts.data.selected }" onclick={ setActive }>
-		<div class="col-lg-12 ">
-			<div class="row">
-				<div class="col-lg-9">
-					{ opts.data.title }
+	<div class="presentation-row {active: isActive()} { selected: opts.data.selected }" onclick={ setActive }>
+			<div class="row">		
+				<div class="{ col-lg-9: !opts.details } { col-lg-11: opts.details }">
+					<span class="pull-left presentation-row-icon"><i class="fa fa-check-circle-o" show={ opts.data.selected }></i>&nbsp;</span>
+					<div class="presentation-title">{ opts.data.title }</div>
 				</div>
 				<div class="col-lg-1" show={ !opts.details } >
 					{ opts.data.vote_average }
@@ -14,8 +14,8 @@
 				<div class="col-lg-1" show={ !opts.details }>
 					{ opts.data.total_points }
 				</div>
+		
 			</div>
-		</div>		
 	</div>
 
 	<style>
@@ -28,7 +28,7 @@
 		}
 
 		.presentation-row.selected {
-			background-color: rgba(190, 222, 244, 0.44);
+			background-color: rgba(221, 239, 255, 0.50);
 		}
 
 		.presentation-row a {
@@ -38,6 +38,25 @@
 		.presentation-row.active, .presentation-row.active a {
 			background-color: #3A89D3;
 			color: white;
+		}
+
+		.presentation-row .fa {
+			padding-top: 0.2em;
+			color: #0078AE;
+		}
+
+		.presentation-row.active .fa {
+			color: white;
+		}
+
+		.presentation-row-icon {
+			display: block;
+			width: 30px;
+			padding-left: 4px;
+		}
+
+		.presentation-title {
+			margin-left: 30px;
 		}
 
 	</style>

@@ -6,7 +6,7 @@ class PresentationCategory extends DataObject
 
 	private static $db = array (
 		'Title' => 'Varchar',
-        'Description' => 'Text',
+    'Description' => 'Text',
 		'SessionCount' => 'Int',
 		'AlternateCount' => 'Int',
 		'VotingVisible' => 'Boolean',
