@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,23 +14,23 @@
  **/
 class MemberListPage extends Page
 {
-	static $db = array();
-	static $has_one = array();
-	static $has_many = array();
+    static $db = array();
+    static $has_one = array();
+    static $has_many = array();
 }
 
 class MemberListPage_Controller extends Page_Controller
 {
 
-	function init()
-	{
-		parent::init();
+    function init()
+    {
+        parent::init();
 
-		//CSS
-		Requirements::css("themes/openstack/css/jquery.autocomplete.css");
+        //CSS
+        Requirements::css("themes/openstack/css/jquery.autocomplete.css");
 
-		Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
-		Requirements::CustomScript("
+        Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
+        Requirements::CustomScript("
 							
 					jQuery(function(){
 
@@ -45,502 +46,534 @@ class MemberListPage_Controller extends Page_Controller
 					
 			
 			");
-	}
-
-	static $allowed_actions = array(
-		'confirmNomination',
-		'CurrentElection',
-		'saveNomination',
-		'profile',
-		'results',
-		'MemberSearchForm',
-		'candidateStats',
-		'CandidateApplication',
-		'idList' => 'ADMIN',
-		'assignGroup' => 'ADMIN',
-		'ListExport',
-		'CSVExport' => 'ADMIN'
-	);
+    }
+
+    static $allowed_actions = array(
+        'confirmNomination',
+        'CurrentElection',
+        'saveNomination',
+        'profile',
+        'results',
+        'MemberSearchForm',
+        'candidateStats',
+        'CandidateApplication',
+        'idList' => 'ADMIN',
+        'assignGroup' => 'ADMIN',
+        'ListExport',
+        'CSVExport' => 'ADMIN'
+    );
+
+    function MemberList()
+    {
+
+        if (isset($_GET['letter'])) {
+
+            $requestedLetter = Convert::raw2xml($_GET['letter']);
+
+            if ($requestedLetter == 'intl') {
+                $likeString = "NOT Surname REGEXP '[A-Za-z0-9]'";
+            } elseif (ctype_alpha($requestedLetter)) {
+                $likeString = "Surname LIKE '" . substr($requestedLetter, 0, 1) . "%'";
+            } else {
+                $likeString = "Surname LIKE 'a%'";
+            }
+
+        } else {
+            $likeString = "Surname LIKE 'a%'";
+        }
 
-	function MemberList()
-	{
 
-		if (isset($_GET['letter'])) {
+        $list = Member::get()
+            ->where("Group_Members.GroupID = 5 AND " . $likeString)
+            ->leftJoin('Group_Members', 'Member.ID = Group_Members.MemberID')
+            ->sort('Surname');
 
-			$requestedLetter = Convert::raw2xml($_GET['letter']);
+        return GroupedList::create($list);
+    }
 
-			if ($requestedLetter == 'intl') {
-				$likeString = "NOT Surname REGEXP '[A-Za-z0-9]'";
-			} elseif (ctype_alpha($requestedLetter)) {
-				$likeString = "Surname LIKE '" . substr($requestedLetter, 0, 1) . "%'";
-			} else {
-				$likeString = "Surname LIKE 'a%'";
-			}
 
-		} else {
-			$likeString = "Surname LIKE 'a%'";
-		}
+    // Return the currently running election
+    // This simple function primarily exists to be used in the template
+    function CurrentElection()
+    {
+        // Load the election system
+        $Elections = ElectionSystem::get()->first();
+        if ($Elections && $Elections->CurrentElectionID != 0) {
+            return $Elections->CurrentElection();
+        }
+    }
 
+    function alreadyNominated($candidateID, $CurrentElection)
+    {
 
-		$list = Member::get()
-			->where("Group_Members.GroupID = 5 AND " . $likeString)
-			->leftJoin('Group_Members', 'Member.ID = Group_Members.MemberID')
-			->sort('Surname');
-		return GroupedList::create($list);
-	}
+        $memberID = Member::currentUserID();
+        $NominationsForThisCandidate = $CurrentElection->CandidateNominations("`MemberID` = " . $memberID . " AND `CandidateID` = " . $candidateID);
 
+        if ($NominationsForThisCandidate->Count() >= 1) {
+            return true;
+        }
+    }
 
-	// Return the currently running election
-	// This simple function primarily exists to be used in the template
-	function CurrentElection()
-	{
-		// Load the election system
-		$Elections = ElectionSystem::get()->first();
-		if ($Elections && $Elections->CurrentElectionID != 0) return $Elections->CurrentElection();
-	}
+    function findMember($CandidateID)
+    {
+        $CandidateID = intval($CandidateID);
+        $query       = Member::get()->where(" ID = {$CandidateID}" )->sql();
+        $res         = DB::query($query.' LOCK IN SHARE MODE');
+        if($res->numRecords() > 0)
+        {
+            $Candidate = new Member($res->first());
+            // Check to make sure they are in the foundation membership group
+            If ($Candidate && $Candidate->inGroup(5, true))
+            {
+                return $Candidate;
+            }
+        }
+    }
 
-	function alreadyNominated($candidateID, $CurrentElection)
-	{
+    function confirmNomination()
+    {
 
-		$memberID = Member::currentUserID();
-		$NominationsForThisCandidate = $CurrentElection->CandidateNominations("`MemberID` = " . $memberID . " AND `CandidateID` = " . $candidateID);
+        $results = array();
 
-		if ($NominationsForThisCandidate->Count() >= 1) {
-			return TRUE;
-		}
-	}
+        $results["Success"] = false;
 
-	function findMember($CandidateID)
-	{
-		$Candidate = Member::get()->byID($CandidateID);
-		// Check to make sure they are in the foundation membership group
-		If ($Candidate && $Candidate->inGroup(5, TRUE)) return $Candidate;
-	}
+        // Grab candidate ID from the URL
+        $CandidateID = $this->request->param("ID");
 
-	function confirmNomination()
-	{
+        // Check to see if the candidate ID is numeric and if the person is logged in
+        if ($this->validateNomation($CandidateID) == 'VALID') {
 
-		$results = array();
+            $Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
+            $results["Success"] = true;
+            $results["Candidate"] = $Nominee;
+            $results["NominateLink"] = $this->Link() . "saveNomination/" . $CandidateID;
+            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
 
-		$results["Success"] = FALSE;
+        } elseif ($this->validateNomation($CandidateID) == 'ALREADY NOMINATED') {
 
-		// Grab candidate ID from the URL
-		$CandidateID = $this->request->param("ID");
+            $Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
 
-		// Check to see if the candidate ID is numeric and if the person is logged in
-		if ($this->validateNomation($CandidateID) == 'VALID') {
+            $CurrentElection = $this->CurrentElection();
 
-			$Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
-			$results["Success"] = TRUE;
-			$results["Candidate"] = $Nominee;
-			$results["NominateLink"] = $this->Link() . "saveNomination/" . $CandidateID;
-			$results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
+            $results["Election"] = $CurrentElection;
+            $results["Success"] = false;
+            $results["NominatedByMe"] = true;
+            $results["Candidate"] = $Nominee;
+            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
 
-		} elseif ($this->validateNomation($CandidateID) == 'ALREADY NOMINATED') {
 
-			$Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
+        } elseif ($this->validateNomation($CandidateID) == 'LIMIT EXCEEDED') {
 
-			$CurrentElection = $this->CurrentElection();
+            $Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
 
-			$results["Election"] = $CurrentElection;
-			$results["Success"] = FALSE;
-			$results["NominatedByMe"] = TRUE;
-			$results["Candidate"] = $Nominee;
-			$results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
+            $results["Success"] = false;
+            $results["LimitExceeded"] = true;
+            $results["Candidate"] = $Nominee;
+            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
 
 
-		} elseif ($this->validateNomation($CandidateID) == 'LIMIT EXCEEDED') {
+        } else {
+            $results["Success"] = false;
+            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
 
-			$Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
+        }
 
-			$results["Success"] = FALSE;
-			$results["LimitExceeded"] = TRUE;
-			$results["Candidate"] = $Nominee;
-			$results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
 
+        return $results;
 
-		} else {
-			$results["Success"] = FALSE;
-			$results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
+    }
 
-		}
 
+    // Checks whether a nomination is valid:
+    // Requires there to be a current election, the member to be logged in, and the ID of a member that hasn't been nominated yet.
+    function validateNomation($CandidateID)
+    {
 
-		return $results;
+        $CurrentElection = $this->CurrentElection();
 
-	}
+        // Look for nominations for this candidate
+        $CandidateNominations = CandidateNomination::get()->where("CandidateID = " . $CandidateID . " AND ElectionID = " . $CurrentElection->ID);
+        $NumberOfNominations = 0;
+        if ($CandidateNominations) {
+            $NumberOfNominations = $CandidateNominations->Count();
+        }
 
 
-	// Checks whether a nomination is valid:
-	// Requires there to be a current election, the member to be logged in, and the ID of a member that hasn't been nominated yet.
-	function validateNomation($CandidateID)
-	{
+        // 1. Check to see if there's a current, active election
+        if (!$CurrentElection || !$CurrentElection->NominationsAreOpen()) {
+            return 'NO ACTIVE NOMINATIONS';
+        }
 
-		$CurrentElection = $this->CurrentElection();
+        // 2. Check to see if a member is logged in
+        if (!Member::currentUserID()) {
+            return 'NOT LOGGED IN';
+        }
 
-		// Look for nominations for this candidate
-		$CandidateNominations = CandidateNomination::get()->where("CandidateID = " . $CandidateID . " AND ElectionID = " . $CurrentElection->ID);
-		$NumberOfNominations = 0;
-		if ($CandidateNominations) $NumberOfNominations = $CandidateNominations->Count();
+        // 3. Check to make sure there's a valid Candidate ID
+        if (!is_numeric($CandidateID) || !$this->findMember($CandidateID)) {
+            return 'INVALID CANDIDATE';
+        }
 
+        // 4. Check to see if the member has already nominated this person
+        if ($this->alreadyNominated($CandidateID, $CurrentElection)) {
+            return 'ALREADY NOMINATED';
+        }
 
+        // 5. Check to see if this person already has 10 nominations
+        if ($NumberOfNominations >= 10) {
+            return 'LIMIT EXCEEDED';
+        }
 
-		// 1. Check to see if there's a current, active election
-		if (!$CurrentElection || !$CurrentElection->NominationsAreOpen()) {
-			return 'NO ACTIVE NOMINATIONS';
-		}
+        // 6. Make sure that the person nominating is a foundation member
+        $CurrentMember = Member::currentUser();
+        If (!$CurrentMember->isFoundationMember()) {
+            return 'INVALID VOTER';
+        }
 
-		// 2. Check to see if a member is logged in
-		if (!Member::currentUserID()) {
-			return 'NOT LOGGED IN';
-		}
+        // If all of the above tests pass, this is a valid nomination
+        return 'VALID';
 
-		// 3. Check to make sure there's a valid Candidate ID
-		if (!is_numeric($CandidateID) || !$this->findMember($CandidateID)) {
-			return 'INVALID CANDIDATE';
-		}
+    }
 
-		// 4. Check to see if the member has already nominated this person
-		if ($this->alreadyNominated($CandidateID, $CurrentElection)) {
-			return 'ALREADY NOMINATED';
-		}
 
-		// 5. Check to see if this person already has 10 nominations
-		if ($NumberOfNominations >= 10) {
-			return 'LIMIT EXCEEDED';
-		}
+    function saveNomination()
+    {
+        // Grab candidate ID from the URL
+        $CandidateID = $this->request->param("ID");
+        $NominationStatus = $this->validateNomation($CandidateID);
 
-		// 6. Make sure that the person nominating is a foundation member
-		$CurrentMember = Member::currentUser();
-		If (!$CurrentMember->isFoundationMember()) {
-			return 'INVALID VOTER';
-		}
+        // Check to see if this is a valid nomination
+        if ($NominationStatus == 'VALID') {
 
-		// If all of the above tests pass, this is a valid nomination
-		return 'VALID';
+            // Grab the currently logged in member
+            $currentMember = Member::currentUser();
 
-	}
+            $CurrentElection = $this->CurrentElection();
 
+            // Record the nomination
+            $CandidateNomination = new CandidateNomination();
+            $CandidateNomination->MemberID = Member::currentUserID();
+            $CandidateNomination->CandidateID = $CandidateID;
+            $CandidateNomination->ElectionID = $CurrentElection->ID;
+            $CandidateNomination->write();
 
-	function saveNomination()
-	{
-		// Grab candidate ID from the URL
-		$CandidateID = $this->request->param("ID");
-		$NominationStatus = $this->validateNomation($CandidateID);
+            // Create a candidate record for the nominations page if one does not exist
+            $Candidate = Candidate::get()->filter(array(
+                'MemberID' => $CandidateID,
+                'ElectionID' => $CurrentElection->ID
+            ))->first();
+            if (!$Candidate) {
 
-		// Check to see if this is a valid nomination
-		if ($NominationStatus == 'VALID') {
+                // Create a new candidate entry
+                $Candidate = new Candidate();
 
-			// Grab the currently logged in member
-			$currentMember = Member::currentUser();
+                $Candidate->MemberID = $CandidateID;
+                $Candidate->ElectionID = $CurrentElection->ID;
 
-			$CurrentElection = $this->CurrentElection();
+                $Candidate->write();
 
-			// Record the nomination
-			$CandidateNomination = new CandidateNomination();
-			$CandidateNomination->MemberID = Member::currentUserID();
-			$CandidateNomination->CandidateID = $CandidateID;
-			$CandidateNomination->ElectionID = $CurrentElection->ID;
-			$CandidateNomination->write();
 
-			// Create a candidate record for the nominations page if one does not exist
-			$Candidate = Candidate::get()->filter(array('MemberID'=>$CandidateID,'ElectionID'=>$CurrentElection->ID))->first();
-			if (!$Candidate) {
+            }
 
-				// Create a new candidate entry
-				$Candidate = new Candidate();
+            // Log this new candidate
+            $logLine = $currentMember->FirstName . " " . $currentMember->Surname . " nominated " . $Candidate->Member()->FirstName . " " . $Candidate->Member()->Surname . " (ID " . $Candidate->Member()->ID . ") on " . $CandidateNomination->Created . " \n";
+            $file = fopen(ASSETS_PATH . '/candidate-nomination-log.txt', 'a');
+            fwrite($file, $logLine);
+            fclose($file);
 
-				$Candidate->MemberID = $CandidateID;
-				$Candidate->ElectionID = $CurrentElection->ID;
+            // Email the member
+            // In dev and testing, send the nomination emails to the person who did the nomination
+            $To = $currentMember->Email;
+            // In live mode, send the email to the candidate
+            if (Director::isLive()) {
+                $To = $Candidate->Member()->Email;
+            }
+            $Subject = "You have been nominated in the " . $CurrentElection->Title;
+            $email = EmailFactory::getInstance()->buildEmail(CANDIDATE_NOMINATION_FROM_EMAIL, $To, $Subject);
+            $email->setTemplate('NominationEmail');
+            // Gather Data to send to template
+            $data["Candidate"] = $Candidate;
+            $data["Election"] = $CurrentElection;
+            $email->populateTemplate($data);
+            $email->send();
+            $this->setMessage('Success',
+                "You've just nominated " . $Candidate->Member()->FirstName . ' for the OpenStack Board.');
+            $this->redirect($this->Link('candidateStats/' . $Candidate->Member()->ID));
+        } elseif ($NominationStatus = 'ALREADY NOMINATED') {
 
-				$Candidate->write();
+            $this->setMessage('Error', "Oops, you have already nominated this person.");
+            $this->redirect($this->Link());
 
+        } elseif ($NominationStatus = 'INVALID CANDIDATE') {
+            $this->setMessage('Error', "Oops, no candidate was selected.");
+            $this->redirect($this->Link());
+        } else {
+            $this->setMessage('Error', "There was an error logging your nomination.");
+            $this->redirect($this->Link());
+        }
+    }
 
-			}
+    //Show the profile of the member using the MemberListPage_profile.ss template
+    function profile()
+    {
 
-			// Log this new candidate
-			$logLine = $currentMember->FirstName . " " . $currentMember->Surname . " nominated " . $Candidate->Member()->FirstName . " " . $Candidate->Member()->Surname . " (ID " . $Candidate->Member()->ID . ") on " . $CandidateNomination->Created . " \n";
-			$file = fopen(ASSETS_PATH . '/candidate-nomination-log.txt', 'a');
-			fwrite($file, $logLine);
-			fclose($file);
+        // Grab member ID from the URL
+        $MemberID = Convert::raw2sql($this->request->param("ID"));
 
-			// Email the member
-			// In dev and testing, send the nomination emails to the person who did the nomination
-			$To = $currentMember->Email;
-			// In live mode, send the email to the candidate
-			if (Director::isLive()) $To = $Candidate->Member()->Email;
-			$Subject = "You have been nominated in the " . $CurrentElection->Title;
-			$email = EmailFactory::getInstance()->buildEmail(CANDIDATE_NOMINATION_FROM_EMAIL, $To, $Subject);
-			$email->setTemplate('NominationEmail');
-			// Gather Data to send to template
-			$data["Candidate"] = $Candidate;
-			$data["Election"] = $CurrentElection;
-			$email->populateTemplate($data);
-			$email->send();
-			$this->setMessage('Success', "You've just nominated " . $Candidate->Member()->FirstName . ' for the OpenStack Board.');
-			$this->redirect($this->Link('candidateStats/' . $Candidate->Member()->ID));
-		} elseif ($NominationStatus = 'ALREADY NOMINATED') {
+        // Check to see if the ID is numeric
+        if (is_numeric($MemberID)) {
 
-			$this->setMessage('Error', "Oops, you have already nominated this person.");
-			$this->redirect($this->Link());
+            // Check to make sure there's a member with the current id
+            if ($Profile = $this->findMember($MemberID)) {
 
-		} elseif ($NominationStatus = 'INVALID CANDIDATE') {
-			$this->setMessage('Error', "Oops, no candidate was selected.");
-			$this->redirect($this->Link());
-		} else {
-			$this->setMessage('Error', "There was an error logging your nomination.");
-			$this->redirect($this->Link());
-		}
-	}
+                $CurrentElection = $this->CurrentElection();
 
-	//Show the profile of the member using the MemberListPage_profile.ss template
-	function profile()
-	{
+                if ($CurrentElection) {
+                    $Candidate = Candidate::get()->filter(array(
+                        'MemberID' => $MemberID,
+                        'ElectionID' => $CurrentElection->ID
+                    ))->first();
+                    $data["Candidate"] = $Candidate;
+                    $data["CurrentElection"] = $CurrentElection;
+                }
 
-		// Grab member ID from the URL
-		$MemberID = Convert::raw2sql($this->request->param("ID"));
+                $data["Profile"] = $Profile;
 
-		// Check to see if the ID is numeric
-		if (is_numeric($MemberID)) {
+                // A member is looking at own profile
+                if (Member::currentUserID() == $MemberID) {
+                    $data["OwnProfile"] = true;
+                }
 
-			// Check to make sure there's a member with the current id
-			if ($Profile = $this->findMember($MemberID)) {
+                //return our $Data to use on the page
+                return $this->Customise($data);
+            }
+        }
 
-				$CurrentElection = $this->CurrentElection();
+        return $this->httpError(404, 'Sorry that member could not be found');
+    }
 
-				if ($CurrentElection) {
-					$Candidate = Candidate::get()->filter(array('MemberID'=>$MemberID,'ElectionID'=>$CurrentElection->ID))->first();
-					$data["Candidate"] = $Candidate;
-					$data["CurrentElection"] = $CurrentElection;
-				}
+    function candidateStats()
+    {
 
-				$data["Profile"] = $Profile;
+        // Grab candidate ID from the URL
+        $CandidateID = $this->request->param("ID");
 
-				// A member is looking at own profile
-				if (Member::currentUserID() == $MemberID) $data["OwnProfile"] = TRUE;
+        // Check to see if the candidate is valid
+        if (is_numeric($CandidateID) && $this->findMember($CandidateID)) {
 
-				//return our $Data to use on the page
-				return $this->Customise($data);
-			}
-		}
-		return $this->httpError(404, 'Sorry that member could not be found');
-	}
+            $CurrentElection = $this->CurrentElection();
+            $Candidate = $CurrentElection->Candidates("MemberID = " . $CandidateID);
 
-	function candidateStats()
-	{
+            $results["Success"] = true;
+            $results["Candidate"] = $Candidate;
 
-		// Grab candidate ID from the URL
-		$CandidateID = $this->request->param("ID");
+            return $results;
 
-		// Check to see if the candidate is valid
-		if (is_numeric($CandidateID) && $this->findMember($CandidateID)) {
+        } else {
 
-			$CurrentElection = $this->CurrentElection();
-			$Candidate = $CurrentElection->Candidates("MemberID = " . $CandidateID);
+            //Member not found
+            return $this->httpError(404, 'Sorry that candidate could not be found');
+        }
+    }
 
-			$results["Success"] = TRUE;
-			$results["Candidate"] = $Candidate;
-
-			return $results;
-
-		} else {
-
-			//Member not found
-			return $this->httpError(404, 'Sorry that candidate could not be found');
-		}
-	}
-
-	public function MemberSearchForm()
-	{
+    public function MemberSearchForm()
+    {
         $searchField = new TextField('mq', 'Search Member', $this->getSearchQuery());
-        $searchField->setAttribute("placeholder","first name, last name or irc nickname");
-		$fields = new FieldList($searchField);
+        $searchField->setAttribute("placeholder", "first name, last name or irc nickname");
+        $fields = new FieldList($searchField);
 
-		$form = new SearchForm($this, 'MemberSearchForm', $fields);
+        $form = new SearchForm($this, 'MemberSearchForm', $fields);
 
-		$form->setFormAction($this->Link('results'));
+        $form->setFormAction($this->Link('results'));
 
-		return $form;
-	}
+        return $form;
+    }
 
-	public function results()
-	{
-		if ($query = $this->getSearchQuery()) {
+    public function results()
+    {
+        if ($query = $this->getSearchQuery()) {
 
-			// Search for only foundation members (Group 5) against the query.
+            // Search for only foundation members (Group 5) against the query.
 
-			$filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
+            $filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
 					OR FirstName LIKE '%{$query}%'
 					OR Surname LIKE '%{$query}%'
 					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5";
 
-			$Results = Member::get()
-				->where($filter)
-				->leftJoin("Group_Members", "Member.ID = Group_Members.MemberID");
-			// No Member was found
-			if (!isset($Results) || $Results->count() == 0) {
-				return $this->customise($Results);
-			}
+            $Results = Member::get()
+                ->where($filter)
+                ->leftJoin("Group_Members", "Member.ID = Group_Members.MemberID");
+            // No Member was found
+            if (!isset($Results) || $Results->count() == 0) {
+                return $this->customise($Results);
+            }
 
-			// For AutoComplete
-			if (Director::is_ajax()) {
+            // For AutoComplete
+            if (Director::is_ajax()) {
 
-				$Members = $Results->map('ID', 'Name');
-				$Suggestions = '';
+                $Members = $Results->map('ID', 'Name');
+                $Suggestions = '';
 
-				foreach ($Members as $Member) {
-					$Suggestions = $Suggestions . $Member . '|' . '1' . "\n";
-				}
+                foreach ($Members as $Member) {
+                    $Suggestions = $Suggestions . $Member . '|' . '1' . "\n";
+                }
 
-				return $Suggestions;
-			} // For Results Template
-			else {
+                return $Suggestions;
+            } // For Results Template
+            else {
 
 
-				$filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
+                $filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
 					OR FirstName LIKE '%{$query}%'
 					OR Surname LIKE '%{$query}%'
 					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5";
 
-				$OneMember = Member::get()
-					->where($filter)
-					->leftJoin("Group_Members", "Member.ID = Group_Members.MemberID");
+                $OneMember = Member::get()
+                    ->where($filter)
+                    ->leftJoin("Group_Members", "Member.ID = Group_Members.MemberID");
 
-				// see if one member exactly matches the search term
+                // see if one member exactly matches the search term
 
-				if ($OneMember) {
-					$Results = $OneMember;
-				}
+                if ($OneMember) {
+                    $Results = $OneMember;
+                }
 
-				// If there is only one person with this name, go straight to the resulting profile page
-				if ($OneMember && $OneMember->Count() == 1) {
-					$this->redirect($this->Link() . 'profile/' . $OneMember->First()->ID);
-				}
+                // If there is only one person with this name, go straight to the resulting profile page
+                if ($OneMember && $OneMember->Count() == 1) {
+                    $this->redirect($this->Link() . 'profile/' . $OneMember->First()->ID);
+                }
 
-				$Output = new ArrayData(array(
-					'Title' => 'Results',
-					'Results' => $Results
-				));
-				if($Results->count() == 0){
-					$message = $this->getViewer('results')->process($this->customise($Output));
-					$this->response->setBody($message);
-					throw new SS_HTTPResponse_Exception($this->response, 404);
-				}
-				return $this->customise($Output);
-			}
-		}
+                $Output = new ArrayData(array(
+                    'Title' => 'Results',
+                    'Results' => $Results
+                ));
+                if ($Results->count() == 0) {
+                    $message = $this->getViewer('results')->process($this->customise($Output));
+                    $this->response->setBody($message);
+                    throw new SS_HTTPResponse_Exception($this->response, 404);
+                }
 
-		$this->redirect($this->Link());
-	}
+                return $this->customise($Output);
+            }
+        }
+
+        $this->redirect($this->Link());
+    }
 
 
-	function getSearchQuery()
-	{
-		if ($this->request){
-			$query = $this->request->getVar("mq");
-			if(!empty($query))
-				return Convert::raw2sql($query);
-			return false;
-		}
-	}
+    function getSearchQuery()
+    {
+        if ($this->request) {
+            $query = $this->request->getVar("mq");
+            if (!empty($query)) {
+                return Convert::raw2sql($query);
+            }
 
-	private function GetMembersInDateRange($StartTime = NULL, $EndTime = NULL)
-	{
+            return false;
+        }
+    }
 
-		$DateRange = "";
+    private function GetMembersInDateRange($StartTime = null, $EndTime = null)
+    {
 
-		if ($StartTime && $EndTime) {
-			$DateRange = " AND (LastEdited BETWEEN '" . $StartTime . "' AND '" . $EndTime . "')";
+        $DateRange = "";
 
-		} elseif ($EndTime) {
-			$DateRange = " AND (LastEdited <= '" . $EndTime . "')";
+        if ($StartTime && $EndTime) {
+            $DateRange = " AND (LastEdited BETWEEN '" . $StartTime . "' AND '" . $EndTime . "')";
 
-		} elseif ($StartTime) {
-			$DateRange = " AND (LastEdited >= '" . $StartTime . "')";
+        } elseif ($EndTime) {
+            $DateRange = " AND (LastEdited <= '" . $EndTime . "')";
 
-		} else {
-			$DateRange = "";
-		}
+        } elseif ($StartTime) {
+            $DateRange = " AND (LastEdited >= '" . $StartTime . "')";
 
-		// Pull Members using a custom db query. This returns a MySQLQuery object
-		$MemberList = DB::query("
+        } else {
+            $DateRange = "";
+        }
+
+        // Pull Members using a custom db query. This returns a MySQLQuery object
+        $MemberList = DB::query("
 
 				SELECT Member.ID, `FirstName`, `Surname`, `IRCHandle`, `TwitterName`, `Email`, `SecondEmail`, `ThirdEmail`
 				FROM `Member`
 				LEFT JOIN `Group_Members` ON `Member`.`ID` = `Group_Members`.`MemberID`
 				WHERE `Group_Members`.`GroupID`= 5" . $DateRange
 
-		);
+        );
 
 
-		return $MemberList;
+        return $MemberList;
 
-	}
+    }
 
-	function ListExport()
-	{
+    function ListExport()
+    {
 
-		if (isset($_GET['token']) && $_GET['token'] == "fcv4x7Nl8v") {
+        if (isset($_GET['token']) && $_GET['token'] == "fcv4x7Nl8v") {
 
-			// Check URL parameters for start and end times
-			$Start = isset($_GET['start']) ? $_GET['start'] : NULL;
-			$End = isset($_GET['end']) ? $_GET['end'] : NULL;
+            // Check URL parameters for start and end times
+            $Start = isset($_GET['start']) ? $_GET['start'] : null;
+            $End = isset($_GET['end']) ? $_GET['end'] : null;
 
-			$StartTime = $Start ? date("Y-m-d H:i:s", strtotime($Start)) : NULL;
-			$EndTime = $End ? date("Y-m-d H:i:s", strtotime($End)) : NULL;
-
-
-			$MemberList = $this->GetMembersInDateRange($StartTime, $EndTime);
+            $StartTime = $Start ? date("Y-m-d H:i:s", strtotime($Start)) : null;
+            $EndTime = $End ? date("Y-m-d H:i:s", strtotime($End)) : null;
 
 
-			$results = array();
+            $MemberList = $this->GetMembersInDateRange($StartTime, $EndTime);
 
 
-			// Transform the MySQLQuery object created above into an ArrayData object
-
-			if ($MemberList) {
-				foreach ($MemberList as $Member) {
-
-					$dbMember = Member::get()->byID($Member['ID']);
-
-					if (!is_null($dbMember)) {
-
-						$AffiliationList = $dbMember->OrderedAffiliations();
-
-						// If there are Affiliation updates, push a new copy of the member to the results array filled in with the org and date from the update
-						if ($AffiliationList && $AffiliationList->Count() > 0) {
-
-							foreach ($AffiliationList as $a) {
-								$currentMemberOrg = $a->Organization();
-								$Member['OrgAffiliations'] = $currentMemberOrg->Name;
-								if ($a->Current)
-									$Member['untilDate'] = NULL;
-								else
-									$Member['untilDate'] = $a->EndDate;
-
-								// Push the member to the results
-								array_push($results, $Member);
-							}
-						} else {
-							//no affiliations
-							$Member['OrgAffiliations'] = NULL;
-							$Member['untilDate'] = NULL;
-							array_push($results, $Member);
-						}
-					}
-
-				}
-			}
+            $results = array();
 
 
-			// Finally, convert the array from the ArrayData object to JSON
-			$json = Convert::Array2JSON($results);
-			return $json;
-		}
+            // Transform the MySQLQuery object created above into an ArrayData object
 
-	}
+            if ($MemberList) {
+                foreach ($MemberList as $Member) {
 
-	function FullMemberList(){
-		return Member::get()->leftJoin('Group_Members','`Member`.`ID` = `Group_Members`.`MemberID` AND Group_Members.GroupID=5');
-	}
+                    $dbMember = Member::get()->byID($Member['ID']);
+
+                    if (!is_null($dbMember)) {
+
+                        $AffiliationList = $dbMember->OrderedAffiliations();
+
+                        // If there are Affiliation updates, push a new copy of the member to the results array filled in with the org and date from the update
+                        if ($AffiliationList && $AffiliationList->Count() > 0) {
+
+                            foreach ($AffiliationList as $a) {
+                                $currentMemberOrg = $a->Organization();
+                                $Member['OrgAffiliations'] = $currentMemberOrg->Name;
+                                if ($a->Current) {
+                                    $Member['untilDate'] = null;
+                                } else {
+                                    $Member['untilDate'] = $a->EndDate;
+                                }
+
+                                // Push the member to the results
+                                array_push($results, $Member);
+                            }
+                        } else {
+                            //no affiliations
+                            $Member['OrgAffiliations'] = null;
+                            $Member['untilDate'] = null;
+                            array_push($results, $Member);
+                        }
+                    }
+
+                }
+            }
+
+
+            // Finally, convert the array from the ArrayData object to JSON
+            $json = Convert::Array2JSON($results);
+
+            return $json;
+        }
+
+    }
+
+    function FullMemberList()
+    {
+        return Member::get()->leftJoin('Group_Members',
+            '`Member`.`ID` = `Group_Members`.`MemberID` AND Group_Members.GroupID=5');
+    }
 }
