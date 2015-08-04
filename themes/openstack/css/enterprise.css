@@ -840,6 +840,14 @@ a .video-overlay p {
   margin: 20px auto;
   text-align: center;
   vertical-align: middle; }
+  .modal-body a.download-btn.half {
+    padding: 20px 10px;
+    width: 49.54%;
+    display: inline-block;
+    text-align: center;
+    min-height: 130px; }
+    .modal-body a.download-btn.half i {
+      display: block; }
 
 .modal-body i {
   vertical-align: middle;
@@ -1174,7 +1182,7 @@ img.production-funnel {
 
 /*Forrester Report Page*/
 .intro-header.forrester {
-  background: url('/themes/openstack/images/enterprise/forrester/forrester-home-bkgd.jpg') no-repeat center center;
+  background: url(../images/enterprise/forrester/forrester-home-bkgd.jpg) no-repeat center center;
   background-size: cover;
   position: relative;
   padding: 90px 0; }
@@ -1323,6 +1331,54 @@ img.forrester-chart {
 .forrester-footnote {
   color: #2A4E68;
   font-size: 0.9em; }
+
+.forrester-tei-highlight {
+  background: #30739C;
+  padding: 60px 0; }
+  .forrester-tei-highlight h2 {
+    color: white;
+    margin: 0 0 10px; 
+    text-align: left;
+  }
+  .forrester-tei-highlight h4 {
+    color: white;
+    margin: 0 0 20px;
+    font-style: italic; 
+    text-align: left;
+  }
+  .forrester-tei-highlight p {
+    color: white; 
+    text-align: left;
+  }
+
+a.highligh-btn {
+  background: #2A4E68;
+  padding: 15px 20px;
+  color: white;
+  margin: 20px 0 0;
+  display: block;
+  max-width: 300px;
+  text-align: center; }
+  a.highligh-btn i {
+    margin-left: 10px; }
+  a.highligh-btn:hover {
+    background: #0C1722;
+    text-decoration: none; }
+
+img.global-figures-chart {
+  width: 352px;
+  max-width: 100%; 
+  margin-top: -50px;
+}
+@media (max-width: 990px) {
+  img.global-figures-chart {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  img.global-figures-chart {
+    margin-bottom: 20px; } }
 
 /*End Forrester Report Page*/
 
