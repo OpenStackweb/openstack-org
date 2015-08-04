@@ -233,11 +233,6 @@ require('./chairdirectory.tag')
 
 					self.DisplayMode = 'browse'
 
-					if(action === 'show' && id) {
-						opts.trigger('load-presentation-details', id)
-						self.showDetails()
-					}
-
 					self.update()
 				}
 
