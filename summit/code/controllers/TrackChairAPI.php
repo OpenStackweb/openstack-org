@@ -304,11 +304,17 @@ class TrackChairAPI extends Controller {
 		$email = $r->getVar('email');
 		$catid = $r->getVar('cat_id');
 		$category = PresentationCategory::get()->byID($catid);
+		if(!$category) return 'category not found';
+
 		$member = Member::get()->filter('Email', $email)->first();
+		if(!$member) return 'member not found';
 
 		SummitTrackChair::addChair($member, $catid);
 		$category->MemberList($member->ID);
 		$category->GroupList();
+	
+		return $member->FirstName . ' ' . $member->Surname . ' added as a chair to category ' . $category->Title;
+
 	}
 
 }
