@@ -260,18 +260,20 @@ final class News extends DataObject implements INews
     public function getImageForArticle()
     {
         if ($this->Image->exists()) {
-            if ($this->IsLandscape) {
-                $image_html = '<div class="article_full_image">' . $this->Image->getTag() . '</div>';
-            } else {
-                $cropped = $this->Image->SetWidth(360);
-                if ($cropped) {
-                    $image_html = '<div class="article_cropped_image">' . $cropped->getTag() . '</div>';
+            if (!$this->Slider) {
+                if ($this->IsLandscape) {
+                    $image_html = '<div class="article_full_image">' . $this->Image->getTag() . '</div>';
                 } else {
-                    $image_html = '<div class="article_cropped_image">N/A</div>';
+                    $cropped = $this->Image->SetWidth(360);
+                    if ($cropped) {
+                        $image_html = '<div class="article_cropped_image">' . $cropped->getTag() . '</div>';
+                    } else {
+                        $image_html = '<div class="article_cropped_image">N/A</div>';
+                    }
                 }
-            }
 
-            return $image_html;
+                return $image_html;
+            }
         }
     }
 
