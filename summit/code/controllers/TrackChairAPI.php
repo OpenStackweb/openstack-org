@@ -82,15 +82,27 @@ class TrackChairAPI extends Controller {
 		$data['categories'] = array ();
 		$data['track_chair'] = $this->trackChairDetails();
 
+
+		$chairlist = array();
+
 		foreach($summit->Categories()->filter('ChairVisible', TRUE) as $c) {
 			$data['categories'][] = $c->toJSON();
+			$chairs = $c->TrackChairs();
+			foreach ($chairs as $chair) {
+				$chairdata = array();
+				$chairdata['first_name'] = $chair->Member()->FirstName;
+				$chairdata['last_name'] = $chair->Member()->Surname;
+				$chairdata['email'] = $chair->Member()->Email;
+				$chairdata['category'] = $c->Title;
+				$chairlist[] = $chairdata;
+			}
 		}
+
+		$data['chair_list'] = $chairlist;
 		
     	return (new SS_HTTPResponse(
     		Convert::array2json($data), 200
     	))->addHeader('Content-Type', 'application/json');
-
-
 
 	}
 
@@ -106,7 +118,11 @@ class TrackChairAPI extends Controller {
 		// Get a collection of chair-visible presentation categories
 		$presentations = Presentation::get()
 			->leftJoin("PresentationCategory", "PresentationCategory.ID = Presentation.CategoryID")
-			->where("Presentation.SummitID = {$summitID} AND PresentationCategory.ChairVisible = 1");
+			->where("
+				Presentation.SummitID = {$summitID} 
+				AND PresentationCategory.ChairVisible = 1
+				AND Presentation.Status = 'Received'
+				");
 
 		if($r->getVar('category')) {
 			$presentations = $presentations->filter('CategoryID',(int) $r->getVar('category'));
@@ -119,8 +135,7 @@ class TrackChairAPI extends Controller {
 								->where("
 									Presentation.Title LIKE '%{$k}%' 
 									OR Presentation.Description LIKE '%{$k}%'
-									OR PresentationSpeaker.FirstName LIKE '%{$k}%'
-									OR PresentationSpeaker.LastName LIKE '%{$k}%'
+									OR (concat_ws(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'
 								");
 		}
 
@@ -308,6 +323,8 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 		'POST comment' => 'handleAddComment',
 		'GET select' => 'handleSelect',
 		'GET unselect' => 'handleUnselect',
+		'GET group/select' => 'handleGroupSelect',
+		'GET group/unselect' => 'handleGroupUnselect',		
 		'GET category_change/new' => 'handleCategoryChangeRequest',
 		'GET category_change/accept' => 'handleAcceptCategoryChange'
 	);
@@ -319,7 +336,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 		'handleSelect',
 		'handleUnselect',
 		'handleCategoryChangeRequest',
-		'handleAcceptCategoryChange'
+		'handleAcceptCategoryChange',
+		'handleGroupSelect',
+		'handleGroupUnselect'
 	);
 
 
@@ -368,15 +387,20 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 
     	$p->Description = str_replace(array("\r", "\n"), "", $p->Description);
 
-        $data = $p->toJSON();        
+        $data = $p->toJSON();
+        $data['category_name'] = $p->Category()->Title;
         $data['speakers'] = $speakers;
         $data['total_votes'] = $p->Votes()->count();
-        $data['average_vote'] = (int) $p->Votes()->avg('Vote');
+		$data['vote_count'] = $p->CalcVoteCount();
+        $data['vote_average'] = $p->CalcVoteAverage();
+        $data['total_points'] = $p->CalcTotalPoints();
         $data['creator'] = $p->Creator()->getName();
         $data['user_vote'] = $p->getUserVote() ? $p->getUserVote()->Vote : null;
         $data['comments'] = $comments ? $comments : null;
         $data['can_assign'] = $p->canAssign(1) ? $p->canAssign(1) : null;
         $data['selected'] = $p->isSelected();
+        $data['group_selected'] = $p->isGroupSelected();
+
     	return (new SS_HTTPResponse(
     		Convert::array2json($data), 200
     	))->addHeader('Content-Type', 'application/json');
@@ -429,6 +453,26 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 		}
 
 		$this->presentation->removeFromIndividualList();
+
+		return new SS_HTTPResponse("Presentation unseleted.", 200);
+
+	}
+
+	public function handleGroupSelect(SS_HTTPResponse $r) {
+		if(!Member::currentUser()) {
+			return $this->httpError(403);
+		}
+
+		$this->presentation->assignToGroupList();
+
+	}
+
+	public function handleGroupUnselect(SS_HTTPResponse $r) {
+		if(!Member::currentUser()) {
+			return $this->httpError(403);
+		}
+
+		$this->presentation->removeFromGroupList();
 
 		return new SS_HTTPResponse("Presentation unseleted.", 200);
 

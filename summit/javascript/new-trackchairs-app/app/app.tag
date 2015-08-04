@@ -10,6 +10,7 @@ require('./selectionmanager.tag')
 require('riotgear-toast')
 require('riotgear-modal')
 require('./modal.tag')
+require('./chairdirectory.tag')
 
 <app>
 
@@ -19,6 +20,11 @@ require('./modal.tag')
     <div class="container-fluid">
 
     	<rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>
+
+    	<!-- Chair Directory -->
+     	<div show={ DisplayMode === 'directory' }>
+    		<chairdirectory chairs="{ summit.chair_list }" />
+    	</div>
 
     	<!-- Chair Selections -->
     	<div show={ DisplayMode === 'selections' }>
@@ -46,8 +52,7 @@ require('./modal.tag')
 				<categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"/>
 				<div if="{ searchmode && quantity }">Showing { quantity } results</div>
 				<div if="{ quantity }" class="list-group" id="presentation-list">
-					<div class="col-lg-12" show={ !details }>
-						<div class="row">
+						<div class="row" show={ !details }>
 							<div class="col-lg-9">
 								&nbsp;
 							</div>
@@ -61,24 +66,57 @@ require('./modal.tag')
 								Total
 							</div>
 						</div>
-					</div>				
-					<presentationitem each={ presentation, i in presentations } activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}" />
+
+					<!-- Presentation List -->
+					<div class="presentation-list" id="presentation-list">
+						<presentationitem each={ presentation, i in presentations } activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}" />
+					</div>
+
 				</div>
 				<div if="{ !quantity && searchmode }">No results were found</div>
 	        </div>
 	        <div class="col-lg-8" show={ details }>
 				<div class="panel panel-default" name="presentation-details">
 					<div class="panel-heading">
-						<h3 class="panel-title">Presentation Details <a href="#" onclick={ closeDetails }><i class="fa fa-times"></i></a></h3>
+						<h3 class="panel-title">Presentation Details <a href="#" onclick={ closeDetails }><i class="fa fa-times pull-right"></i></a></h3>
 					</div>
 					<div class="panel-body">
-						<button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-default">Unselect</button>
-						<button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default">Select</button>
-						&nbsp;<a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a>
+
+						<!-- Button Row -->
+						<div class="row">
+							<div class="col-lg-6">
+								<strong>Category:</strong> { currentPresentation.category_name }
+								<br/><a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a>
+							</div>
+
+							<div class="col-lg-6">
+								<div class="btn-group pull-right" role="group" >
+
+									<!-- My list button -->
+									<button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> My List</button>
+									<button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> My List</button>
+
+									<!-- Group List button -->
+									<button if="{ currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupUnselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> Team List</button>
+									<button if="{ !currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupSelectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> Team List</button>
+
+								</div>
+
+							</div>
+
+						</div>
+
 						<hr/>
 						<h2>{ currentPresentation.title }</h2>
 						<h4>{ currentPresentation.level }</h4>
+						<hr/>
+						<span class="label label-primary">Vote Count <span class="badge">{ currentPresentation.vote_count }</span></span>
+						<span class="label label-primary">Vote Ave <span class="badge">{ currentPresentation.vote_average }</span></span>
+						<span class="label label-primary">Vote Total <span class="badge">{ currentPresentation.total_points }</span></span>
+						<span class="label label-info" show="{currentPresentation.comments.length}">Chair Comments: { currentPresentation.comments.length }</span>
+						<hr/>
 						<raw content="{ currentPresentation.description }"/>
+
 						<div each="{ currentPresentation.speakers }">
 							<hr/>
 							<h4>{ first_name }&nbsp;{ last_name }</h5>
@@ -86,7 +124,7 @@ require('./modal.tag')
 							<raw content="{ bio }"/>
 						</div>
 						<div>
-							<span class="label label-info">Comments: { currentPresentation.comments.length }</span>
+			
 						</div>
 						<div if="{ currentPresentation.comments[0] }">
 							<hr/>
@@ -103,6 +141,7 @@ require('./modal.tag')
     	<!-- End Presntation Browser -->
          
     </div>
+
 
     <script>
 
@@ -175,13 +214,30 @@ require('./modal.tag')
 				self.DisplayMode = 'selections'
 				self.update()				
 			}
+
+			if (mode === 'directory') {
+				self.DisplayMode = 'directory'
+				self.update()				
+			}
+
 		})				
 
 		this.on('mount', function(){
+
+			console.log('window height', window.innerHeight)
+
 			opts.trigger('load-summit-details')
+
 			riot.route.exec(function(mode, action, id) {
-				if (mode === 'presentations') { 
+				if (mode === 'presentations') {
+
 					self.DisplayMode = 'browse'
+
+					if(action === 'show' && id) {
+						opts.trigger('load-presentation-details', id)
+						self.showDetails()
+					}
+
 					self.update()
 				}
 
@@ -271,19 +327,23 @@ require('./modal.tag')
 		}
 
 		selectPresentation(e){
-			console.log('1. app is firing select-presentaiton')
 			opts.trigger('select-presentation', self.currentPresentation.id)
 		}
 
 		unselectPresentation(e){
-			console.log('1. app is firing unselect-presentaiton')
 			opts.trigger('unselect-presentation', self.currentPresentation.id)
 		}
 
+		groupSelectPresentation(e){
+			opts.trigger('group-select-presentation', self.currentPresentation.id)
+		}
+
+		groupUnselectPresentation(e){
+			opts.trigger('group-unselect-presentation', self.currentPresentation.id)
+		}
+
 		opts.on('presentation-selected', function(){
-			console.log('3a. app heard presentation-selected.');
 			self.currentPresentation.selected = true;
-			console.log('3b. app is firing load presentations for cat ' + self.currentPresentation.category_id);	
 			self.opts.trigger('load-selections',self.currentPresentation.category_id)				
 			self.toasts.push(
 				{
@@ -315,6 +375,33 @@ require('./modal.tag')
 			)
 			self.update();							
 		})		
+
+		opts.on('presentation-group-selected', function(){
+			self.currentPresentation.group_selected = true;
+			self.opts.trigger('load-selections',self.currentPresentation.category_id)				
+			self.toasts.push(
+				{
+				  text: 'The presentation was added to the team selection list.',
+				  timeout: 6000
+				}
+			)
+
+			self.update();
+
+		})
+
+		opts.on('presentation-group-unselected', function(){
+			self.currentPresentation.group_selected = false
+
+			self.opts.trigger('load-selections',self.currentPresentation.category_id)
+			self.toasts.push(
+				{
+				  text: 'The presentation was removed from the team selection list.',
+				  timeout: 6000
+				}
+			)
+			self.update();							
+		})	
 
 		clearSearch() {
 			document.getElementById('app-search').value='';

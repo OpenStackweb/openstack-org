@@ -12,6 +12,7 @@ var url = '/trackchairs/api/v1/'
 *	Listeners
 */
 
+
 api.on('load-summit-details', function(id){
 
 	var append = 'summit/'
@@ -93,8 +94,6 @@ api.on('add-comment', function(id, comment){
 // Select a presentation for a personal list
 api.on('select-presentation', function(id){
 
-	console.log('2a. API heard select presentation ' + id);
-
 	reqwest({
 	    url: url + 'presentation/' + id + '/select'
 	  , method: 'get'
@@ -109,8 +108,6 @@ api.on('select-presentation', function(id){
 // Unselect (remove presentation from personal list)
 api.on('unselect-presentation', function(id){
 
-	console.log('unselecting presentation: ' + url + 'presentation/' + id + '/unselect')
-
 	reqwest({
 	    url: url + 'presentation/' + id + '/unselect'
 	  , method: 'get'
@@ -121,6 +118,32 @@ api.on('unselect-presentation', function(id){
 
 })
 
+// Select a presentation for a personal list
+api.on('group-select-presentation', function(id){
+
+	reqwest({
+	    url: url + 'presentation/' + id + '/group/select'
+	  , method: 'get'
+	  , success: function (resp) {
+			api.trigger('presentation-group-selected', resp)
+	    }
+	})
+
+})
+
+// Unselect (remove presentation from personal list)
+api.on('group-unselect-presentation', function(id){
+
+
+	reqwest({
+	    url: url + 'presentation/' + id + '/group/unselect'
+	  , method: 'get'
+	  , success: function (resp) {
+			api.trigger('presentation-group-unselected', resp)
+	    }
+	})
+
+})
 
 api.on('save-sort-order', function(list_id, sort_order){
 
