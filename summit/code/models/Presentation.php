@@ -189,7 +189,7 @@ class Presentation extends DataObject
     public function canAssign() {
 
         // see if they have either of the appropiate permissions
-        if(!(Permission::check('TRACK-CHAIR') || Permission::check('ADMIN'))) return false;
+        if(!Permission::check('TRACK_CHAIR')) return false;
 
         // see if they are a chair of this particular track
         $IsTrackChair = $this->Category()->TrackChairs('MemberID = '.Member::currentUser()->ID);
