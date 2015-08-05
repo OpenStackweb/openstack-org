@@ -15,9 +15,12 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
+
+	        <li class="{ active: self.parent.DisplayMode === 'tutorial' }"><a href="#" onclick="{ setMode('tutorial') }">Tutorial</a></li>		      
 	        <li class="{ active: self.parent.DisplayMode === 'browse' }"><a href="#" onclick="{ setMode('presentations') }">Browse Presentations <span class="sr-only">(current)</span></a></li>
 	        <li class="{ active: self.parent.DisplayMode === 'selections' }"><a href="#" onclick="{ setMode('selections') }">Your Selections</a></li>
-	        <li class="{ active: self.parent.DisplayMode === 'directory' }"><a href="#" onclick="{ setMode('directory') }">Chair Directory</a></li>	      
+	        <li class="{ active: self.parent.DisplayMode === 'directory' }"><a href="#" onclick="{ setMode('directory') }">Chair Directory</a></li>	       
+
 	      </ul>
 
 	      

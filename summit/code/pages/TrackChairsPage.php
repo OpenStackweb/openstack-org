@@ -28,7 +28,7 @@ class TrackChairsPage_Controller extends Page_Controller {
   		));
   	}
 
-  	if($chair->exists()) return true;
+  	if($chair->exists() || Permission::check('ADMIN')) return true;
 
   }
 

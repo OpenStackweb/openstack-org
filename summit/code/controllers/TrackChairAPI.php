@@ -84,9 +84,30 @@ class TrackChairAPI extends Controller {
 
 
 		$chairlist = array();
+		$categoriesIsChair = array();
+		$categoriesNotChair = array();
+
 
 		foreach($summit->Categories()->filter('ChairVisible', TRUE) as $c) {
-			$data['categories'][] = $c->toJSON();
+
+			$isChair = ($c->isTrackChair(Member::currentUserID()) == 1);
+			
+			$categoryDetials = array(
+				'id' => $c->ID,
+				'title' => $c->Title,
+				'description' => $c->Description,
+				'session_count' => $c->SessionCount,
+				'alternate_count' => $c->AlternateCount,
+				'summit_id' => $c->SummitID,
+				'user_is_chair' => $isChair
+			);
+
+			if($isChair) {
+				$categoriesIsChair[] = $categoryDetials;
+			} else {
+				$categoriesNotChair[] = $categoryDetials;
+			}
+
 			$chairs = $c->TrackChairs();
 			foreach ($chairs as $chair) {
 				$chairdata = array();
@@ -97,6 +118,8 @@ class TrackChairAPI extends Controller {
 				$chairlist[] = $chairdata;
 			}
 		}
+
+		$data['categories'] = array_merge($categoriesIsChair, $categoriesNotChair);
 
 		$data['chair_list'] = $chairlist;
 		
