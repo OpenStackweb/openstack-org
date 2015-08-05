@@ -1,17 +1,17 @@
 <presentationitem>
 	<div class="presentation-row {active: isActive()} { selected: opts.data.selected }" onclick={ setActive }>
 			<div class="row">		
-				<div class="{ col-lg-9: !opts.details } { col-lg-11: opts.details }">
+				<div class="{ col-lg-9: !opts.details } { col-lg-11: opts.details } { col-md-9: !opts.details } { col-md-11: opts.details }" onclick={ setActive }>
 					<span class="pull-left presentation-row-icon"><i class="fa fa-check-circle-o" show={ opts.data.selected }></i>&nbsp;</span>
 					<div class="presentation-title">{ opts.data.title }</div>
 				</div>
-				<div class="col-lg-1" show={ !opts.details } >
+				<div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show={ !opts.details } >
 					{ opts.data.vote_average }
 				</div>
-				<div class="col-lg-1" show={ !opts.details }>
+				<div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show={ !opts.details }>
 					{ opts.data.vote_count }
 				</div>
-				<div class="col-lg-1" show={ !opts.details }>
+				<div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show={ !opts.details }>
 					{ opts.data.total_points }
 				</div>
 		
