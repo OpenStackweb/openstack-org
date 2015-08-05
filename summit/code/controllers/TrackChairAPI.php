@@ -515,13 +515,24 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 
 		if(!is_numeric($r->getVar('new_cat'))) return $this->httpError(500, "Invalid category id");
 
-		$request = new SummitCategoryChange();
-		$request->PresentationID = $this->presentation->ID;
-		$request->NewCategoryID = $r->getVar('new_cat');
-		$request->ReqesterID = Member::currentUserID();
-		$request->write();
+		$c = PresentationCategory::get()->byID((int) $r->getVar('new_cat'));
 
-    	return new SS_HTTPResponse("change request made.", 200);		
+		if($c) {
+
+			$request = new SummitCategoryChange();
+			$request->PresentationID = $this->presentation->ID;
+			$request->NewCategoryID = $r->getVar('new_cat');
+			$request->ReqesterID = Member::currentUserID();
+			$request->write();
+
+			$m = Member::currentUser();
+			$comment = $m->FirstName . ' ' . $m->Surname . ' suggested that this presentation be moved to the category ' . $c->Title . '.';
+
+			$this->presentation->addComment($comment,Member::currentUserID());
+	    	return new SS_HTTPResponse("change request made.", 200);
+
+		}
+		
 
 	}
 

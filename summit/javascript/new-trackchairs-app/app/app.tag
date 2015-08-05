@@ -60,16 +60,16 @@ require('./tutorial.tag')
 				<div if="{ searchmode && quantity }">Showing { quantity } results</div>
 				<div if="{ quantity }" class="list-group" id="presentation-list">
 						<div class="row" show={ !details }>
-							<div class="col-lg-9">
+							<div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
 								&nbsp;
 							</div>
-							<div class="col-lg-1" >
+							<div class="col-lg-1 col-md-1 hidden-sm hidden-xs" >
 								Ave
 							</div>
-							<div class="col-lg-1">
+							<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
 								Count
 							</div>
-							<div class="col-lg-1">
+							<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
 								Total
 							</div>
 						</div>
@@ -290,8 +290,7 @@ require('./tutorial.tag')
 
 		opts.on('presentations-loaded', function(result){
 
-			// default sort order
-			self.presentations = self.sortPresentations(result, 'vote_average', 'asc')
+			self.presentations = result
 			self.quantity = self.presentations.length
 
 			if(self.currentPresentation) self.activekey = self.indexOf(self.currentPresentation.id)

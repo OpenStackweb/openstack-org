@@ -22,7 +22,10 @@ var Sortable = require('sortablejs')
 					</div>
 			</li>
 		</ul>
-
+		<p if="{ selections.length > 0 }">{selections.length} of { slots } selected.
+			<span if="{ (selections.length - soltsAvailble) > 0 }" >{selections.length - soltsAvailble } Alternates.</span>
+			<span if="{ !((selections.length - soltsAvailble) > 0) }" >No alternates yet.</span>
+		</p>
 	</div>
 
 	<style>

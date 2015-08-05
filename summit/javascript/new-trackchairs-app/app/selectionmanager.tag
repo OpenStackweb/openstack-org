@@ -8,6 +8,7 @@ require('./selectionmenu.tag')
 		{ activeCategory.title } Track
 		<selectionmenu categories="{ summit.track_chair.categories }" if="{ summit.track_chair.categories.length > 1 }" active="{ activeCategory }" />
 	</h2>
+	<p>For this track, you should select <strong>{activeCategory.session_count} presentations</strong> plus at least two alternates.</p>
 
 	<hr/>
 

@@ -18,11 +18,6 @@
               <option each="{ category in opts.categories }" value="{category.id}">{category.title}</option>
             </select></p>
 
-            <p></p>
-
-            <div class="well">
-              <p>You can suggest that a presentation be moved between categories as long as you chair at least one of the categories.</p>
-            </div>
           </div>
 
           <div show="{ finished }">
