@@ -7,7 +7,10 @@
 			All Categories <span class="caret"></span>
 		</button>		
 		<ul class="dropdown-menu">
-			<li each={category in opts.categories}><a href="#" onclick="{ parent.setCategory }">{ category.title }</a></li>
+			<li each={category in opts.categories}>
+				<a href="#" if="{category.user_is_chair}" onclick="{ parent.setCategory }"><strong>{ category.title } (Chair)</strong></a>
+				<a href="#" if="{!category.user_is_chair}" onclick="{ parent.setCategory }">{ category.title }</a>
+			</li>
 			<li role="separator" class="divider"></li>
 			<li><a href="#" onclick="{ allCategories }">All Categories</a></li>			
 		</ul>

@@ -11,6 +11,8 @@ require('riotgear-toast')
 require('riotgear-modal')
 require('./modal.tag')
 require('./chairdirectory.tag')
+require('./tutorial.tag')
+
 
 <app>
 
@@ -20,6 +22,11 @@ require('./chairdirectory.tag')
     <div class="container-fluid">
 
     	<rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>
+
+    	<!-- Tutorial -->
+     	<div show={ DisplayMode === 'tutorial' }>
+    		<tutorial/>
+    	</div>
 
     	<!-- Chair Directory -->
      	<div show={ DisplayMode === 'directory' }>
@@ -220,6 +227,12 @@ require('./chairdirectory.tag')
 				self.update()				
 			}
 
+			if (mode === 'tutorial') {
+				self.DisplayMode = 'tutorial'
+				self.update()				
+			}
+
+
 		})				
 
 		this.on('mount', function(){
@@ -240,6 +253,18 @@ require('./chairdirectory.tag')
 					self.DisplayMode = 'selections'
 					self.update()
 				}
+				
+				if (mode === 'directory') {
+					self.DisplayMode = 'directory'
+					self.update()				
+				}
+
+				if (mode === 'tutorial') {
+					self.DisplayMode = 'tutorial'
+					self.update()				
+				}
+
+
 			})			
 		})
 
