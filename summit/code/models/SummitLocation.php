@@ -19,7 +19,12 @@ class SummitLocation extends DataObject
         'IsSoldOut' => 'Boolean',
         'Website' => 'Text',
         'BookingLink' => 'Text',
-        'DisplayOnSite' => 'Boolean'
+        'DisplayOnSite' => 'Boolean',
+        'BookingStartDate' => 'SS_DateTime',
+        'BookingEndDate' => 'SS_DateTime',
+        'InRangeBookingGraphic' => 'Text',
+        'OutOfRangeBookingGraphic' => 'Text',
+        'DetailsPage' => 'Boolean'
     );
 
     private static $has_one = array (
@@ -37,8 +42,23 @@ class SummitLocation extends DataObject
         $fields->addFieldToTab('Root.Main', new TextField('Longitude','Longitude'));
         $fields->addFieldToTab('Root.Main', new TextField('Website','Website'));
         $fields->addFieldToTab('Root.Main', new TextField('BookingLink','BookingLink'));
+
+        $start_date = new DatetimeField('BookingStartDate', 'Booking Block - Start Date');
+        $start_date->getDateField()->setConfig('showcalendar', true);
+        $start_date->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $start_date);
+
+        $end_date = new DatetimeField('BookingEndDate', 'Booking Block - End Date');
+        $end_date->getDateField()->setConfig('showcalendar', true);
+        $end_date->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $end_date);
+
+        $fields->addFieldToTab('Root.Main', new TextField('InRangeBookingGraphic','URL of graphic of an in range stay'));
+        $fields->addFieldToTab('Root.Main', new TextField('OutOfRangeBookingGraphic','URL of graphic of an out of range stay'));
         $fields->addFieldToTab('Root.Main', new CheckboxField('IsSoldOut','This location is <strong>sold out</strong> (applies to hotels only)'));
         $fields->addFieldToTab('Root.Main', new CheckboxField('DisplayOnSite','Show this location on the website. Will be hidden if unchecked.'));
+        $fields->addFieldToTab('Root.Main', new CheckboxField('DetailsPage','Send people to a details page first?'));
+
         return $fields;
     }
             

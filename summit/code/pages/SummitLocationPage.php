@@ -21,6 +21,7 @@ class SummitLocationPage extends SummitPage {
         'VenueTitleText' => 'Text',
         'AirportsTitle' => 'Text',
         'AirportsSubTitle' => 'Text',
+        'CampusGraphic' => 'Text',        
      );
 
     private static $has_one = array(
@@ -80,6 +81,8 @@ class SummitLocationPage extends SummitPage {
         $fields->addFieldToTab('Root.Main', new TextField('VenueTitleText', 'Venue Title Text'));
         $fields->addFieldToTab('Root.Main', new TextField('AirportsTitle', 'Airports Title'));
         $fields->addFieldToTab('Root.Main', new TextField('AirportsSubTitle', 'Airports SubTitle'));
+        $fields->addFieldToTab('Root.Main', new TextField('CampusGraphic', 'URL of image of campus graphic'));
+
 
         return $fields;    
 
@@ -309,6 +312,11 @@ class SummitLocationPage extends SummitPage {
 
 class SummitLocationPage_Controller extends SummitPage_Controller {
 
+    private static $allowed_actions = array (
+        'details'
+    );
+
+
     public function init() {
         
         $this->top_section = 'full';
@@ -332,6 +340,16 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         Requirements::customScript($this->MapScript());
         
 	}
+
+    public function details(SS_HTTPRequest $r) {
+        $location = SummitLocation::get()->byID((int) $r->param('ID'));
+
+        if(!$location) return $this->httpError(404);
+
+        return array (
+            'Location' => $location
+        );
+    }    
     
     public function Hotels() {
         $getVars = $this->request->getVars();

@@ -76,7 +76,18 @@
     </div>
 <% end_with %>
 <div class="white hotels-row" id="hotels">
-<div class="venue-map" id="map-canvas"></div>
+
+<% if $CampusGraphic %>
+
+    <h3>Show the Campus Graphic Here</h3>
+
+<% else %>
+
+    <div class="venue-map" id="map-canvas"></div>
+
+<% end_if %>
+
+
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-push-2">
@@ -109,9 +120,16 @@
             <p<% if $IsSoldOut %> class="sold-out-hotel" <% end_if%>>
                 <% if $IsSoldOut %>
                     SOLD OUT
-                <% else %>
-                    <a href="$Top.Link#map-canvas" class="marker-link"  data-location-id="{$ID}"  alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-                    <% if $BookingLink %>
+                <% else %> 
+
+                    <% if not $Top.CampusGraphic %>
+                        <a href="$Top.Link#map-canvas" class="marker-link"  data-location-id="{$ID}"  alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
+                    <% end_if %>
+
+                    <% if $DetailsPage %>
+                        <a href="{$Top.Link}details/$ID" alt="Visit Bookings Site"><i class="fa fa-home"></i>
+                            Booking Info</a>
+                    <% else_if $BookingLink %>
                         <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i>
                             Bookings</a>
                     <% else %>
