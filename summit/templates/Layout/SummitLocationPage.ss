@@ -79,7 +79,16 @@
 
 <% if $CampusGraphic %>
 
-    <h3>Show the Campus Graphic Here</h3>
+    <div class="venue-map-drawn">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-push-2">
+                    <h5 class="section-title">Summit Campus</h5>
+                </div>
+            </div>
+        </div>
+        <img class="" src="{$CampusGraphic}.svg" onerror="this.onerror=null; this.src={$CampusGraphic}.png" alt="OpenStack Summit Tokyo Hotels">
+    </div>
 
 <% else %>
 

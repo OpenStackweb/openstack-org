@@ -1,21 +1,245 @@
+<div class="hotel-landing-header">
+    <a href="/">
+        <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo-small.png" alt="OpenStack Summit">
+    </a>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 hotel-landing-intro">
+            <h1>Please Read Before Booking Your Hotel Room</h1>
+            <h4>How To Book Yout Reservation At <strong>$Location.Name</strong>.</h4>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-sm-8 col-sm-push-2">
+    		<div class="hotel-landing-select">
+    			Select one of the following options that correspond with your dates.
+    			<h5>Important: The dates you will be staying at the hotel impact how you will book your reservation.</h5>
+    		</div>
+    	</div> 
+    </div>
+    <div class="row">
+		<div class="col-sm-12">
+			<div class="hotel-landing-choice in">
+				<h4>Book a stay for dates <strong>between $Location.BookingStartDate.Month $Location.BookingStartDate.DayOfMonth and $Location.BookingEndDate.Month $Location.BookingEndDate.DayOfMonth</strong></h4>
+				<p>
+					<em>Select this option if you are checking in no earlier than $Location.BookingStartDate.Month $Location.BookingStartDate.DayOfMonth and checking out no later than $Location.BookingEndDate.Month $Location.BookingEndDate.DayOfMonth. You are staying within our hotel block window</em>
+				</p>
+				<p>
+					<img src="/themes/openstack/images/summit/tokyo/{$Location.InRangeBookingGraphic}.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/summit/tokyo/{$Location.InRangeBookingGraphic}.png" alt="">
+				</p>
+				<p>
+					<a href="#" class="hotel-landing-select-btn" id="in-block-btn">Select this option</a>
+				</p>
+			</div>
+			<div class="hotel-landing-choice out">
+				<h4>Book a stay inlcuding dates <strong>before $Location.BookingStartDate.Month $Location.BookingStartDate.DayOfMonth or after $Location.BookingEndDate.Month $Location.BookingEndDate.DayOfMonth</strong></h4>
+				<p>
+					<em>Select this option if you are planning to stay for any nights earlier than $Location.BookingStartDate.Month $Location.BookingStartDate.DayOfMonth or later than $Location.BookingEndDate.Month $Location.BookingEndDate.DayOfMonth. You are staying partially outside of our block window.</em>
+				</p>
+				<p>
+					<img src="/themes/openstack/images/summit/tokyo/{$Location.OutOfRangeBookingGraphic}.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/summit/tokyo/{$Location.OutOfRangeBookingGraphic}.png" alt="">
+				</p>
+				<p>
+					<a href="#" class="hotel-landing-select-btn" id="out-block-btn">Select this option</a>
+				</p>
+			</div>
+		</div>
+    </div>
+    <div class="row">
+    	<div class="col-sm-12">
+			<div class="inside-block">
+				<h3>All days within our hotel block</h3>
+				<p>
+		    		If you are checking in no earlier than $Location.BookingStartDate.Month $Location.BookingStartDate.DayOfMonth and checking out no later than $Location.BookingEndDate.Month $Location.BookingEndDate.DayOfMonth, you are staying within our hotel block window and can register online using this promo code:
+		    	</p>
+		    	<p>
+		    		Go here to book your room:<br/>
+		    		<a href="#">$Location.BookingLink</a>
+		    	</p>
+		    	<hr>
+		    	<p class="hotel-alert">
+		    		IMPORTANT: You must enter the following promo code to receive the OpenStack Summit discount!
+		    	</p>
+		    	<p class="hotel-promo">
+		    		Promo/Access Code: OST2015
+		    	</p>
+		    	<hr>
+		    	<p class="center">
+		    		<img src="/themes/openstack/images/summit/tokyo/hotel-promo-pic.png" alt="">
+		    	</p>
+		    </div>
+		    <div class="outside-block">
+		    	<h3>Some days outside of our hotel block</h3>
+		    	<p>
+		    		If you are planning to stay at <strong>$Location.Name</strong> for any nights earlier than $Location.BookingStartDate.Month $Location.BookingStartDate.DayOfMonth or later than $Location.BookingEndDate.Month $Location.BookingEndDate.DayOfMonth, you are staying partially outside of our block window. The only way we can guarantee our special discounted rate is if you book with the hotel via email. To make it as simple as possible, we’ve provided the following template below that you can use for your email:
+		    	</p>
+		    	<hr> 
+		    	<div class="row">
+		    		<div class="col-sm-12">
+		    			<h3>Email Template to Copy/Paste</h3>
+			    		<p>
+			    			<strong>To:</strong> <a href="mailto:ph-ptmc@princehotels.co.jp">ph-ptmc@princehotels.co.jp</a>
+			    		</p>
+			    		<p>
+			    			<strong>Subject:</strong> [YOUR NAME] - OpenStack Summit Hotel Reservation
+			    		</p>
+		    			<p>
+		    				<strong>Template Email To Copy/Paste:</strong><br>
+		    				<em style="color:red;">Modify the appropriate details, then copy & paste the template below to the body of your email. Feel free to adjust items as necessary, this is provided only for your reference.</em>
+		    			</p>
+		    			<textarea class="form-control" rows="18">
+Hello,
 
-<h1>Here are the details</h1>
+I will be attending the OpenStack Summit in October.
 
-<ul>
-	<li>Hotel name: $Location.Name </li>
-	<li>Booking Start Date: $Location.BookingStartDate.Month $Location.BookingStartDate.DayOfMonth</li>
-	<li>Booking End Date: $Location.BookingEndDate.Month $Location.BookingEndDate.DayOfMonth</li>
-	<li>Booking Link: <a href="{$Location.BookingLink}">$Location.BookingLink</a> </li>
+This email serves as an official request for a hotel room reservation. Please respond to this email within 24 hours to confirm the reservation. The guest information and other reservation details are provided below.
 
-	<% if $Location.InRangeBookingGraphic %>
-		<h4>In range booking graphic:</h4>
-		<img src="{$Location.InRangeBookingGraphic}.png" alt="">
-	<% end_if %>
-
-	<% if $Location.OutOfRangeBookingGraphic %>
-		<h4>Out of range booking graphic:</h4>
-		<img src="{$Location.OutOfRangeBookingGraphic}.png" alt="">
-	<% end_if %>
+Thank you,
+[YOUR NAME]
 
 
-</ul>
+HOTEL ROOM RESERVATION DETAILS:
+
+Preferred Hotel [select one]
+- Grand Prince Hotel New Takanawa (closest to main conference sessions and the marketplace expo hall)
+- The Prince Sakura Tokyo Tower
+- Grand Prince Hotel Takanawa (closest to the design summit sessions)
+- Shinagawa Prince Hotel
+
+Arrival Date (Check-in):
+[Day / Month / Year]
+
+Departure Date (Check-out):
+[Day / Month / Year]
+
+Quantity of Rooms:
+[#]
+(If booking 10 or more rooms please contact Sarah@FNtech.com)
+
+Your Contact Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Your email address
+- Your direct phone number (including country code)
+
+Type of Room:
+  - King
+  - Double
+
+Smoking preference:
+  - Non smoking
+  - Smoking
+
+Do You Require Handicap Accessible Room?
+  - No
+  - Yes
+
+Do you with to include breakfast in the package (for additional charge)?
+  - No
+  - Yes
+
+Request early check-In time:
+  - No
+  - Yes
+
+Please provide the following Guest Information for each hotel room:
+
+Room 1, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 2, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 3, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 4, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 5, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 6, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 7, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 8, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+
+Room 9, Guest Information:
+- Title
+- First Name
+- Last Name
+- Company Name
+- Email
+</textarea>
+		    		</div> 
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-sm-12">
+		    			<p>
+		    				&nbsp;
+		    			</p>
+		    			<h3>Do not email credit card details</h3>
+		    			<p>
+		    				 Credit card details are NOT required to place a room reservation if you are booking outside the contracted dates. And we highly discourage you from emailing your credit card details.
+		    			</p>
+		    			<hr>
+		    			<h3>Booking of 10 rooms or more</h3>
+		    			<p>If booking 10 or more rooms please contact <a href="mailto:sarah@fntech,com">Sarah@FNtech.com</a>.</p>
+		    			<hr>
+		    			<h3>Cancellation Policy</h3>
+		    			<ul>
+		    				<li>No penalty for a cancellation received up to 2 days prior to arrival</li>
+		    				<li>20% penalty on the first night stay for a cancellation received 1 day prior ot arrival</li>
+		    				<li>80% penalty on the first night stay for a cancellation received on the day of arrival</li>
+		    				<li>100% penalty for no shows In case of a no show, one night's charge per room will be automatically charged to the credit card used by the attendee who requested the reservation.</li>
+		    			</ul>
+		    			<hr>
+		    			<h3>When you know your reservation is received</h3>
+		    			<p>
+		    				The hotels will respond to all emails sent to ph-ptmc@princehotels.co.jp within 24 hours including weekends and holidays. The reply will contain a confirmation number for your reservation.
+		    			</p>
+		    		</div>
+		    	</div>
+		    </div>
+    	</div>
+    </div>
+</div>
