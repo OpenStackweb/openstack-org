@@ -334,10 +334,10 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
 
         parent::init();
                             
-        Requirements::javascript('https://maps.googleapis.com/maps/api/js?v=3.exp');
-
-		Requirements::javascript("summit/javascript/host-city.js");
-        Requirements::customScript($this->MapScript());
+        if(!$this->CampusGraphic) Requirements::javascript('https://maps.googleapis.com/maps/api/js?v=3.exp');
+        Requirements::javascript("summit/javascript/host-city.js");
+		if(!$this->CampusGraphic) Requirements::javascript("summit/javascript/host-city-map.js");
+        if(!$this->CampusGraphic) Requirements::customScript($this->MapScript());
         
 	}
 
