@@ -2573,6 +2573,17 @@ i.zipcar-icon {
 .affix-top {
   top: 0; }
 
+  /*Temp illustrated hotel map*/
+.venue-map-drawn {
+  background: #edf2f7;
+  border-bottom: 1px solid #D4DCE5;
+  text-align: center;
+  padding: 30px; }
+  .venue-map-drawn img {
+    max-height: 600px; }
+
+/*End Temp illustrated hotel map*/
+
 /*End About Host City Page*/
 /*Info and News Page*/
 .info-summit {
@@ -3335,3 +3346,94 @@ a.outline-btn.inactive:hover {
     }
 }
 /*End Show City and Date on Mobile*/
+/*Hotel Landing Page*/
+.hotel-landing-header {
+  background: #0F1017;
+  text-align: center; }
+  .hotel-landing-header img.summit-hero-logo {
+    margin: 10px auto; }
+
+.hotel-landing-intro {
+  text-align: center; }
+  .hotel-landing-intro h1 {
+    margin: 40px 0 30px; }
+  .hotel-landing-intro h4 {
+    padding: 20px 0;
+    border-top: 1px solid #D4DCE5;
+    border-bottom: 1px solid #D4DCE5;
+    font-size: 1.1em; }
+  .hotel-landing-intro .alert {
+    margin: 30px 0; }
+
+.hotel-landing-select {
+  font-size: 1.4em;
+  text-align: center;
+  margin: 40px 0 50px; }
+
+.hotel-landing-choice {
+  width: 48.6%;
+  margin: 0 0.5%;
+  background: #edf2f7;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  display: inline-block;
+  position: relative; }
+  .hotel-landing-choice strong {
+    display: block;
+    margin: 5px 0 10px; }
+  .hotel-landing-choice.active:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-top-color: #edf2f7;
+    border-width: 20px;
+    margin-left: -20px; }
+  .hotel-landing-choice img {
+    max-width: 100%; }
+
+a.hotel-landing-select-btn {
+  display: block;
+  text-align: center;
+  max-width: 200px;
+  background: #30739C;
+  color: white;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin: 20px auto 0;
+  padding: 10px 20px; }
+  a.hotel-landing-select-btn:hover {
+    background: #2A4E68;
+    text-decoration: none; }
+
+.inside-block, .outside-block {
+  display: none;
+  width: 100%;
+  margin: 30px 0;
+  padding: 30px;
+  border: 2px solid #D4DCE5;
+  background: #edf2f7; }
+  .inside-block.active, .outside-block.active {
+    display: block; }
+  .inside-block hr, .outside-block hr {
+    border-color: #D4DCE5; }
+  .inside-block h3, .outside-block h3 {
+    margin-top: 0; }
+  .inside-block p.hotel-alert, .outside-block p.hotel-alert {
+    color: #DA422F; }
+  .inside-block p.hotel-promo, .outside-block p.hotel-promo {
+    color: #DA422F;
+    font-size: 1.5em; }
+  .inside-block img, .outside-block img {
+    max-width: 100%; }
+
+#paymentEmail, #paymentPhone {
+  display: none; }
+
+/*End Hotel Landing Page*/
