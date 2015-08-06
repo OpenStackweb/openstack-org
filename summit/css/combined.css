@@ -2403,20 +2403,6 @@ ul.city-nav-list li i {
 
 .hotel-block a i {
   margin-right: 5px; }
-
-.more-hotel-details {
-  background: #edf2f7;
-  padding: 30px 20px;
-  margin: 30px 0;
-}
-
-.more-hotel-details hr {
-  border-color: #D4DCE5;
-}
-
-img.hotel-discount-chart {
-  max-width: 100%;
-}
 a.hotel-alert-btn {
   background: #30739C;
   color: #fff;
@@ -2431,6 +2417,17 @@ a.hotel-alert-btn {
 }
 a.hotel-alert-btn:hover {
   background: #2A4E68;
+}
+.more-hotel-details {
+  background: #edf2f7;
+  padding: 30px 20px;
+  margin: 30px 0;
+}
+.more-hotel-details hr {
+  border-color: #D4DCE5;
+}
+img.hotel-discount-chart {
+  max-width: 100%;
 }
 .venue-map {
   height: 600px; }
