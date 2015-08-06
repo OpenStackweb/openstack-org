@@ -42,7 +42,7 @@
 
 <div class="hotel-landing-header">
     <a href="/">
-        <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo-small.png" alt="OpenStack Summit">
+        <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'" alt="OpenStack Summit">
     </a>
 </div>
 <div class="container">
