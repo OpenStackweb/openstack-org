@@ -191,8 +191,8 @@
                     Hotel discounted rates are limited and vary depending on location and dates. See the following chart for more details.
                 </p>
                 <p>
-                    <a href="/summit/images/tokyo/hotel-discount-chart.png" target="_blank">
-                        <img class="hotel-discount-chart" src="/summit/images/tokyo/hotel-discount-chart.svg" onerror="this.onerror=null; this.src=/summit/images/tokyo/hotel-discount-chart.png" alt="OpenStack Summit Tokyo Hotel Discounts">
+                    <a href="/summit/images/tokyo/hotel-discount-chart1.png" target="_blank">
+                <img class="hotel-discount-chart" src="/summit/images/tokyo/hotel-discount-chart1.svg" onerror="this.onerror=null; this.src=/summit/images/tokyo/hotel-discount-chart1.png" alt="OpenStack Summit Tokyo Hotel Discounts">
                     </a>
                 </p>
                 <hr>

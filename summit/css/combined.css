@@ -2348,9 +2348,9 @@ ul.city-nav-list li i {
   border-width: 16px;
   margin-left: -16px; }
 
-@media (max-width: 767px) {
-  .city-nav.fixed ul.city-nav-list li a.active:after, .city-nav.fixed ul.city-nav-list li a.active:before {
-    display: none; } }
+@media (max-width: 990px) {
+  .city-nav.fixed ul.city-nav-list li a.active:after,
+  .city-nav.fixed ul.city-nav-list li a.active:before { display: none; } }
 
 .city-nav.fixed ul.city-nav-list li i {
   display: inline-block;
@@ -2403,7 +2403,32 @@ ul.city-nav-list li i {
 
 .hotel-block a i {
   margin-right: 5px; }
-
+a.hotel-alert-btn {
+  background: #30739C;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 15px 25px;
+  text-decoration: none;
+  border-style: none; 
+  margin: 0 auto 40px;
+  display: block;
+  max-width: 80%;
+}
+a.hotel-alert-btn:hover {
+  background: #2A4E68;
+}
+.more-hotel-details {
+  background: #edf2f7;
+  padding: 30px 20px;
+  margin: 30px 0;
+}
+.more-hotel-details hr {
+  border-color: #D4DCE5;
+}
+img.hotel-discount-chart {
+  max-width: 100%;
+}
 .venue-map {
   height: 600px; }
 
