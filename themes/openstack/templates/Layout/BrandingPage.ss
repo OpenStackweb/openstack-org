@@ -180,8 +180,24 @@
                             <tr style="border: solid 1px #ccc;">
                                 <td>$Name</td>
                                 <td style="text-align: center;">Advisory</td>
-                                <td style="text-align: center;">Advisory</td>
-                                <td>&nbsp;</td>
+                                <% if Program.ShortName == 'Compute' %>
+                                    <% if Status == 'Required' %>
+                                        <td style="text-align: center;">✓</td>
+                                    <% else %>
+                                        <td style="text-align: center;">$Status</td>
+                                    <% end_if %>
+                                <% else %>
+                                    <td>&nbsp;</td>
+                                <% end_if %>
+                                <% if Program.ShortName == 'Storage' %>
+                                    <% if Status == 'Required' %>
+                                        <td style="text-align: center;">✓</td>
+                                    <% else %>
+                                        <td style="text-align: center;">$Status</td>
+                                    <% end_if %>
+                                <% else %>
+                                    <td>&nbsp;</td>
+                                <% end_if %>
                             </tr>
                         <% end_loop %>
                     <% end_if %>
