@@ -69,7 +69,7 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
        $this->setField('Name', $version_name);
     }
 
-    public function getCapabilitiesByType($program_type) {
+    public function getCapabilitiesByProgramType($program_type) {
         if ($program_type) {
             $program_type = InteropProgramType::get('InteropProgramType')->filter('Name',$program_type);
             return $this->Capabilities()->filter('ProgramID', $program_type->First()->ID);
@@ -78,7 +78,7 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
         }
     }
 
-    public function getDesignatedSectionsByType($program_type) {
+    public function getDesignatedSectionsByProgramType($program_type) {
         if ($program_type) {
             $program_type = InteropProgramType::get('InteropProgramType')->filter('Name',$program_type);
             return $this->DesignatedSections()->filter('ProgramID', $program_type->First()->ID);
@@ -87,4 +87,12 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
         }
     }
 
+    public function getCapabilitiesByType($type) {
+        if ($type) {
+            $type = InteropCapabilityType::get('InteropCapabilityType')->filter('Name',$type);
+            return $this->Capabilities()->filter('TypeID', $type->First()->ID);
+        } else {
+            return $this->Capabilities();
+        }
+    }
 }
