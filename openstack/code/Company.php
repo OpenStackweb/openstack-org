@@ -14,7 +14,11 @@
 /**
  * Class Company
  */
-class Company extends DataObject implements PermissionProvider {
+class Company extends DataObject implements PermissionProvider,IEntity {
+
+    public function getIdentifier() {
+        return $this->ID;
+    }
 
     function providePermissions() {
         return array(
