@@ -28,13 +28,13 @@
     <div class="cb_field company"><input name="fields[Contact Email]" checked type="checkbox" value="Company.ContactEmail"/>Contact Email</div>
     <div class="cb_field company"><input name="fields[Admin Email]" checked type="checkbox" value="Company.AdminEmail"/>Admin Email</div>
 
-    <div class="cb_field org" style="display:none"><input name="fields[Organization Id]" checked type="checkbox" value="Org.ID"/>Organization Id</div>
-    <div class="cb_field org" style="display:none"><input name="fields[Organization]" checked type="checkbox" value="Org.Name"/>Organization Name</div>
+    <div class="cb_field org" style="display:none"><input name="fields[Organization Id]" type="checkbox" value="Org.ID"/>Organization Id</div>
+    <div class="cb_field org" style="display:none"><input name="fields[Organization]" type="checkbox" value="Org.Name"/>Organization Name</div>
 
-    <div class="cb_field member" style="display:none"><input name="fields[Member Id]" checked type="checkbox" value="Member.ID"/>Member Id</div>
-    <div class="cb_field member" style="display:none"><input name="fields[Member Name]" checked type="checkbox" value="Member.FirstName"/>Member First Name</div>
-    <div class="cb_field member" style="display:none"><input name="fields[Member Surname]" checked type="checkbox" value="Member.Surname"/>Member Last Name</div>
-    <div class="cb_field member" style="display:none"><input name="fields[Member Email]" checked type="checkbox" value="Member.Email"/>Member Email</div>
+    <div class="cb_field member" style="display:none"><input name="fields[Member Id]" type="checkbox" value="Member.ID"/>Member Id</div>
+    <div class="cb_field member" style="display:none"><input name="fields[Member Name]" type="checkbox" value="Member.FirstName"/>Member First Name</div>
+    <div class="cb_field member" style="display:none"><input name="fields[Member Surname]" type="checkbox" value="Member.Surname"/>Member Last Name</div>
+    <div class="cb_field member" style="display:none"><input name="fields[Member Email]" type="checkbox" value="Member.Email"/>Member Email</div>
 
     <div style="clear:both"></div>
     <br><hr>
