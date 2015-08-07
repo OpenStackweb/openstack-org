@@ -215,7 +215,7 @@ class OpenStackImplementationDraft
             $program_type = 'OpenStack Powered Object Storage';
         }
 
-        return $this->getProgramVersion()->getCapabilitiesByType($program_type);
+        return $this->getProgramVersion()->getCapabilitiesByProgramType($program_type);
     }
 
     public function getDesignatedSections() {
@@ -228,6 +228,6 @@ class OpenStackImplementationDraft
             $program_type = 'OpenStack Powered Object Storage';
         }
 
-        return $this->getProgramVersion()->getDesignatedSectionsByType($program_type);
+        return $this->getProgramVersion()->getDesignatedSectionsByProgramType($program_type);
     }
 }
