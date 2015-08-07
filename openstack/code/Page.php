@@ -103,6 +103,24 @@ class Page extends SiteTree
         return $template->process(new ArrayData($customise));
     }
 
+    public static function IconShortCodeHandler($arguments, $caption = null, $parser = null)
+    {
+
+        $customise = array();
+        /*** SET DEFAULTS ***/
+        $customise['type'] = 'fa-check';
+
+        //overide the defaults with the arguments supplied
+        $customise = array_merge($customise, $arguments);
+
+        //get our Sched template
+        $template = new SSViewer('Icon');
+
+        //return the customized template
+        return $template->process(new ArrayData($customise));
+
+    }    
+
 
     function requireDefaultRecords()
     {
