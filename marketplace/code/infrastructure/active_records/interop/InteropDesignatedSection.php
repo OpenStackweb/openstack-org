@@ -23,8 +23,11 @@ class InteropDesignatedSection extends DataObject {
     );
 
     private static $has_one = array(
-        "Program" => "InteropProgramType",
-        "Version" => "InteropProgramVersion",
+        "Version" => "InteropProgramVersion"
+    );
+
+    private static $many_many = array(
+        "Program" => "InteropProgramType"
     );
 
 
@@ -35,14 +38,41 @@ class InteropDesignatedSection extends DataObject {
         $fields->add(new HtmlEditorField('Comment','Comment'));
         $fields->add(new HtmlEditorField('Guidance','Guidance'));
         $fields->add(new DropdownField('Status','Status', $this->dbObject('Status')->enumValues()));
-        $fields->add($ddl_program = new DropdownField('ProgramID','Program',   InteropProgramType::get()->filter('HasCapabilities', true)->map("ID", "Name", "Please Select")));
+        $fields->add($ddl_program = new CheckboxsetField('Program','Program', InteropProgramType::get()->filter('HasCapabilities', true)->sort('Order')->map("ID", "ShortName")));
         $fields->add($ddl_version = new DropdownField('VersionID','Program Version', Dataobject::get("InteropProgramVersion")->map("ID", "Name", "Please Select")));
 
         if($this->ID > 0){
-            $ddl_program->setValue($this->ProgramID);
+            $ddl_program->setValue('ID',$this->Program());
             $ddl_version->setValue($this->VersionID);
         }
 
         return $fields;
+    }
+
+    function isCompute() {
+        $programs = $this->Program();
+        foreach ($programs as $program) {
+            if ($program->ShortName == 'Compute') return true;
+        }
+
+        return false;
+    }
+
+    function isStorage() {
+        $programs = $this->Program();
+        foreach ($programs as $program) {
+            if ($program->ShortName == 'Storage') return true;
+        }
+
+        return false;
+    }
+
+    function isPlatform() {
+        $programs = $this->Program();
+        foreach ($programs as $program) {
+            if ($program->ShortName == 'Platform') return true;
+        }
+
+        return false;
     }
 }

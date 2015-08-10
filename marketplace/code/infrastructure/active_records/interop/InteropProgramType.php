@@ -25,15 +25,23 @@ class InteropProgramType extends DataObject
         'HasCapabilities' => 'Boolean',
     );
 
+    static $summary_fields = array (
+        'Name' => 'Name',
+        'ShortName' => 'Short Name',
+        'Order' => 'Order'
+    );
+
     function getCMSFields()
     {
         $fields =  new FieldList();
         $fields->add(new TextField('Name','Name'));
         $fields->add(new TextField('ShortName','Short Name'));
         $fields->add(new CheckboxField('HasCapabilities','Has Capabilities?'));
+        $fields->add(new TextField('Order','Order'));
         $fields->add(new HtmlEditorField('RequiredCode','Required Code'));
         $fields->add(new HtmlEditorField('ProductExamples','Product Examples'));
         $fields->add(new HtmlEditorField('TrademarkUse','Trademark Use'));
+
         return $fields;
     }
 
