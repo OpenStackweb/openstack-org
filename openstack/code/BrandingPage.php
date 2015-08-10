@@ -36,7 +36,6 @@ class BrandingPage_Controller extends Page_Controller
 	{
 		parent::init();
 
-		Requirements::javascript('themes/openstack/javascript/branding.interop.js');
         Requirements::javascript("http://assets.zendesk.com/external/zenbox/v2.5/zenbox.js");
 		Requirements::css("http://assets.zendesk.com/external/zenbox/v2.5/zenbox.css");
 		Requirements::customScript('
@@ -59,10 +58,5 @@ class BrandingPage_Controller extends Page_Controller
 	{
 		return TRUE;
 	}
-
-    function getVersions() {
-        return DataObject::get('InteropProgramVersion', '', 'Created DESC');
-    }
-
 
 }

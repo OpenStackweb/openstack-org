@@ -24,7 +24,7 @@ class SapphireInteropProgramVersion extends SapphireRepository {
 
     public function getAllOrdered() {
         $query = new QueryObject();
-        $query->addOrder(QueryOrder::asc('Name'));
+        $query->addOrder(QueryOrder::desc('Created'));
         return parent::getAll($query);
     }
 
