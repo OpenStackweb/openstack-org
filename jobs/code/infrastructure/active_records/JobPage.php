@@ -15,11 +15,13 @@
  * Class JobPage
  */
 class JobPage
-	extends Page
+	extends DataObject
 	implements IJob {
 
 
 	static $db = array(
+        'Title'                 => 'Varchar(255)',
+        "Content"               => "HTMLText",
 		'JobPostedDate'         => 'Date',
 		'ExpirationDate'        => 'Date',
 		'JobCompany'            => 'Text',
