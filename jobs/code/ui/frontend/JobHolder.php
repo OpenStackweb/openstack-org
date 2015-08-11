@@ -17,7 +17,6 @@
 class JobHolder extends Page {
 	private static $db = array();
 	private static $has_one = array();
-	private static $allowed_children = array('JobPage');
 }
 /**
  * Class JobHolder_Controller
@@ -48,7 +47,8 @@ class JobHolder_Controller extends Page_Controller {
 	}
 
 	function rss() {
-		$rss = new RSSFeed($this->Children(), $this->Link(), "OpenStack Jobs Feed");
+        $jobs = $this->DateSortedJobs();
+		$rss = new RSSFeed($jobs, $this->Link(), "OpenStack Jobs Feed");
 		$rss->outputToBrowser();
 	}
 

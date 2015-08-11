@@ -24,18 +24,10 @@ final class JobUpdateTask  extends MigrationTask {
 		$migration = Migration::get()->filter('Name', $this->title)->first();
 		if (!$migration) {
 
-			DB::query("update JobPage_Live set active =1;");
 			DB::query("update JobPage set active =1;");
-			DB::query("update JobPage_versions set active =1;");
 
 			DB::query("update JobPage set ExpirationDate = DATE_ADD(JobPostedDate, INTERVAL 2 MONTH)
 where JobPage.JobPostedDate IS NOT NULL;");
-
-			DB::query("update JobPage_Live set ExpirationDate = DATE_ADD(JobPostedDate, INTERVAL 2 MONTH)
-where JobPage_Live.JobPostedDate IS NOT NULL;");
-
-			DB::query("update JobPage_versions set ExpirationDate = DATE_ADD(JobPostedDate, INTERVAL 2 MONTH)
-where JobPage_versions.JobPostedDate IS NOT NULL;");
 
 			$migration = new Migration();
 			$migration->Name = $this->title;
