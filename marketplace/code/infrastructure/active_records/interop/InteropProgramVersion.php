@@ -21,7 +21,7 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
         'Name'  => 'Varchar',
     );
 
-    private static $has_many = array(
+    private static $many_many = array(
         'Capabilities'       => 'InteropCapability',
         'DesignatedSections' => 'InteropDesignatedSection',
     );
@@ -102,17 +102,5 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
             return $this->DesignatedSections();
         }
     }
-
-    public function getCapabilitiesByType($type) {
-        if ($type) {
-            $type = InteropCapabilityType::get('InteropCapabilityType')->filter('Name',$type);
-            return $this->Capabilities()->filter('TypeID', $type->First()->ID);
-        } else {
-            return $this->Capabilities();
-        }
-    }
-
-    function forTemplate(){}
-
 
 }

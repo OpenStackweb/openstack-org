@@ -43,35 +43,43 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
 
 
             //then migrate the old InteropProgramType relations with capability and designated sections
-            $relations = DB::query('SELECT cap.ID AS capID, pt.ID AS ptID
+            $relations = DB::query('SELECT cap.ID AS capID, pt.ID AS ptID, pv.ID AS pvID
                                     FROM InteropCapability AS cap
-                                    LEFT JOIN InteropProgramType AS pt ON cap.ProgramID = pt.ID');
+                                    LEFT JOIN InteropProgramType AS pt ON cap.ProgramID = pt.ID
+                                    LEFT JOIN InteropProgramVersion AS pv ON cap.VersionID = pv.ID');
 
             foreach ($relations as $relation) {
                 $capability = InteropCapability::get_by_id('InteropCapability',$relation['capID']);
                 $program = InteropProgramType::get_by_id('InteropProgramType',$relation['ptID']);
+                $version = InteropProgramVersion::get_by_id('InteropProgramVersion',$relation['pvID']);
                 $capability->Program()->add($program);
                 $capability->Program()->add($platform);
+                $capability->Version()->add($version);
 
                 $capability->write();
             }
 
-            $relations = DB::query('SELECT ds.ID AS dsID, pt.ID AS ptID
+            $relations = DB::query('SELECT ds.ID AS dsID, pt.ID AS ptID, pv.ID AS pvID
                                     FROM InteropDesignatedSection AS ds
-                                    LEFT JOIN InteropProgramType AS pt ON ds.ProgramID = pt.ID');
+                                    LEFT JOIN InteropProgramType AS pt ON ds.ProgramID = pt.ID
+                                    LEFT JOIN InteropProgramVersion AS pv ON ds.VersionID = pv.ID');
 
             foreach ($relations as $relation) {
                 $dsection = InteropDesignatedSection::get_by_id('InteropDesignatedSection',$relation['dsID']);
                 $program = InteropProgramType::get_by_id('InteropProgramType',$relation['ptID']);
+                $version = InteropProgramVersion::get_by_id('InteropProgramVersion',$relation['pvID']);
                 $dsection->Program()->add($program);
                 $dsection->Program()->add($platform);
+                $dsection->Version()->add($version);
 
                 $dsection->write();
             }
 
-            //finally remove ProgramID column from capability and designatedsection
+            //finally remove ProgramID and VersionID column from capability and designatedsection
             DB::query('ALTER TABLE InteropCapability DROP COLUMN ProgramID');
             DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN ProgramID');
+            DB::query('ALTER TABLE InteropCapability DROP COLUMN VersionID');
+            DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN VersionID');
 
 			$migration = new Migration();
 			$migration->Name = $this->title;

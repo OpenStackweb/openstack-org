@@ -22,11 +22,8 @@ class InteropDesignatedSection extends DataObject {
         'Status' =>  "Enum('Required, Advisory, Deprecated, Removed, Informational','Required')",
     );
 
-    private static $has_one = array(
-        "Version" => "InteropProgramVersion"
-    );
-
-    private static $many_many = array(
+    private static $belongs_many_many = array(
+        "Version" => "InteropProgramVersion",
         "Program" => "InteropProgramType"
     );
 
