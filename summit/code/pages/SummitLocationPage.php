@@ -21,7 +21,9 @@ class SummitLocationPage extends SummitPage {
         'VenueTitleText' => 'Text',
         'AirportsTitle' => 'Text',
         'AirportsSubTitle' => 'Text',
-        'CampusGraphic' => 'Text',        
+        'CampusGraphic' => 'Text',
+        'VenueBackgroundImageHero' => 'varchar(255)',
+        'VenueBackgroundImageHeroSource' => 'varchar(510)'
      );
 
     private static $has_one = array(
