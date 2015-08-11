@@ -144,7 +144,6 @@ final class JobRegistrationRequestManager {
 			$job = $factory->buildJob($request);
 			$jobs_repository->add($job);
 			$request->markAsPosted();
-			$jobs_publishing_service->publish($job);
 			//send Accepted message
 			$point_of_contact = $request->getPointOfContact();
 			$name_to  = $point_of_contact->getName();

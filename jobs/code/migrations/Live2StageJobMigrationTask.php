@@ -71,7 +71,8 @@ INNER JOIN SiteTree_Live on SiteTree_Live.Id = JobPage_Live.Id");
                 DB::query("delete from Page_Live where Id in (select Id from SiteTree_Live where ClassName = 'JobPage')");
                 DB::query("delete from SiteTree_Live where ClassName = 'JobPage'");
                 DB::query("delete from Page_versions where Id in (select Id from SiteTree_versions where ClassName = 'JobPage')");
-                DB::query("delete from SiteTree_versions where ClassName = 'JobPage'");                DB::getConn()->transactionEnd();
+                DB::query("delete from SiteTree_versions where ClassName = 'JobPage'");
+                DB::getConn()->transactionEnd();
             }catch(Exception $e){
                 DB::getConn()->transactionRollback();
                 return;
