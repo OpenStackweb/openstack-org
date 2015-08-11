@@ -16,7 +16,6 @@ class InteropDesignatedSection extends DataObject {
 
     static $db = array(
         'Name'  => 'Varchar',
-        'Order' => 'Int',
         'Comment' => 'HTMLText',
         'Guidance' => 'HTMLText',
         'Status' =>  "Enum('Required, Advisory, Deprecated, Removed, Informational','Required')",
@@ -36,11 +35,11 @@ class InteropDesignatedSection extends DataObject {
         $fields->add(new HtmlEditorField('Guidance','Guidance'));
         $fields->add(new DropdownField('Status','Status', $this->dbObject('Status')->enumValues()));
         $fields->add($ddl_program = new CheckboxsetField('Program','Program', InteropProgramType::get()->filter('HasCapabilities', true)->sort('Order')->map("ID", "ShortName")));
-        $fields->add($ddl_version = new DropdownField('VersionID','Program Version', Dataobject::get("InteropProgramVersion")->map("ID", "Name", "Please Select")));
+        $fields->add($ddl_version = new CheckboxsetField('Version','Version', InteropProgramVersion::get()->map("ID", "Name")));
 
         if($this->ID > 0){
             $ddl_program->setValue('ID',$this->Program());
-            $ddl_version->setValue($this->VersionID);
+            $ddl_version->setValue('ID',$this->Version());
         }
 
         return $fields;
