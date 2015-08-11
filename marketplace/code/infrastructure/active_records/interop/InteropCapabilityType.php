@@ -18,9 +18,6 @@ class InteropCapabilityType  extends DataObject {
         'Name'  => 'Varchar',
     );
 
-    private static $has_one = array(
-    );
-
     private static $has_many = array(
         'Capabilities' => 'InteropCapability',
     );

@@ -22,11 +22,11 @@ class InteropCapability extends DataObject {
     );
 
     private static $has_one = array(
-        "Version" => "InteropProgramVersion",
         "Type"    => 'InteropCapabilityType',
     );
 
-    private static $many_many = array(
+    private static $belongs_many_many = array(
+        "Version" => "InteropProgramVersion",
         "Program" => "InteropProgramType"
     );
 

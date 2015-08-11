@@ -25,6 +25,11 @@ class InteropProgramType extends DataObject
         'HasCapabilities' => 'Boolean',
     );
 
+    private static $many_many = array(
+        'Capabilities'       => 'InteropCapability',
+        'DesignatedSections' => 'InteropDesignatedSection',
+    );
+
     static $summary_fields = array (
         'Name' => 'Name',
         'ShortName' => 'Short Name',
