@@ -22,10 +22,11 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
 	This migration removes the deprecated ProgramID column from these tables and sets the new relations based on the old ones.";
 
 	function up(){
-		echo "Starting Migration Proc ...<BR>";
-		//check if migration already had ran ...
-            DB::query('ALTER TABLE InteropCapability DROP COLUMN Order');
-            DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN Order');
+		echo "Starting Migration Proc bis...<BR>";
+
+            DB::query('ALTER TABLE InteropCapability DROP COLUMN `Order`');
+            DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN `Order`');
+
 
 		echo "Ending  Migration Proc ...<BR>";
 	}
