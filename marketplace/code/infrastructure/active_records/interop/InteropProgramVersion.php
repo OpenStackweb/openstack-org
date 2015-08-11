@@ -26,6 +26,11 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
         'DesignatedSections' => 'InteropDesignatedSection',
     );
 
+    public static $many_many_extraFields = array(
+        'Capabilities' => array('Order' => 'Int'),
+        'DesignatedSections' => array('Order' => 'Int')
+    );
+
     function getCMSFields()
     {
         $fields =  new FieldList();
@@ -88,18 +93,18 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
     public function getCapabilitiesByProgramType($program_type) {
         if ($program_type) {
             $program_type = InteropProgramType::get('InteropProgramType')->filter('Name',$program_type);
-            return $this->Capabilities()->filter('Program.ID', $program_type->First()->ID);
+            return $this->Capabilities()->filter('Program.ID', $program_type->First()->ID)->sort('Order');
         } else {
-            return $this->Capabilities();
+            return $this->Capabilities()->sort('Order');
         }
     }
 
     public function getDesignatedSectionsByProgramType($program_type) {
         if ($program_type) {
             $program_type = InteropProgramType::get('InteropProgramType')->filter('Name',$program_type);
-            return $this->DesignatedSections()->filter('Program.ID', $program_type->First()->ID);
+            return $this->DesignatedSections()->filter('Program.ID', $program_type->First()->ID)->sort('Order');
         } else {
-            return $this->DesignatedSections();
+            return $this->DesignatedSections()->sort('Order');
         }
     }
 

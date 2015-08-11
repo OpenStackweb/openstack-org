@@ -43,7 +43,7 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
 
 
             //then migrate the old InteropProgramType relations with capability and designated sections
-            $relations = DB::query('SELECT cap.ID AS capID, pt.ID AS ptID, pv.ID AS pvID
+            $relations = DB::query('SELECT cap.ID AS capID, pt.ID AS ptID, pv.ID AS pvID, cap.Order AS capOrder
                                     FROM InteropCapability AS cap
                                     LEFT JOIN InteropProgramType AS pt ON cap.ProgramID = pt.ID
                                     LEFT JOIN InteropProgramVersion AS pv ON cap.VersionID = pv.ID');
@@ -54,12 +54,12 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
                 $version = InteropProgramVersion::get_by_id('InteropProgramVersion',$relation['pvID']);
                 $capability->Program()->add($program);
                 $capability->Program()->add($platform);
-                $capability->Version()->add($version);
+                $capability->Version()->add($version,array('Order'=>$relation['capOrder']));
 
                 $capability->write();
             }
 
-            $relations = DB::query('SELECT ds.ID AS dsID, pt.ID AS ptID, pv.ID AS pvID
+            $relations = DB::query('SELECT ds.ID AS dsID, pt.ID AS ptID, pv.ID AS pvID, ds.Order AS dsOrder
                                     FROM InteropDesignatedSection AS ds
                                     LEFT JOIN InteropProgramType AS pt ON ds.ProgramID = pt.ID
                                     LEFT JOIN InteropProgramVersion AS pv ON ds.VersionID = pv.ID');
@@ -70,7 +70,7 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
                 $version = InteropProgramVersion::get_by_id('InteropProgramVersion',$relation['pvID']);
                 $dsection->Program()->add($program);
                 $dsection->Program()->add($platform);
-                $dsection->Version()->add($version);
+                $dsection->Version()->add($version,array('Order'=>$relation['dsOrder']));
 
                 $dsection->write();
             }
@@ -80,6 +80,8 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
             DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN ProgramID');
             DB::query('ALTER TABLE InteropCapability DROP COLUMN VersionID');
             DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN VersionID');
+            DB::query('ALTER TABLE InteropCapability DROP COLUMN Order');
+            DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN Order');
 
 			$migration = new Migration();
 			$migration->Name = $this->title;

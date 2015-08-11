@@ -16,7 +16,6 @@ class InteropCapability extends DataObject {
 
     static $db = array(
         'Name'  => 'Varchar',
-        'Order' => 'Int',
         'Description' => 'HTMLText',
         'Status' =>  "Enum('Required, Advisory','Required')",
     );
@@ -37,12 +36,12 @@ class InteropCapability extends DataObject {
         $fields->add(new HtmlEditorField('Description','Description'));
         $fields->add(new DropdownField('Status','Status', $this->dbObject('Status')->enumValues()));
         $fields->add($ddl_program = new CheckboxsetField('Program','Program', InteropProgramType::get()->filter('HasCapabilities', true)->sort('Order')->map("ID", "ShortName")));
-        $fields->add($ddl_version = new DropdownField('VersionID','Program Version', Dataobject::get("InteropProgramVersion")->map("ID", "Name", "Please Select")));
+        $fields->add($ddl_version = new CheckboxsetField('Version','Version', InteropProgramVersion::get()->map("ID", "Name")));
         $fields->add($ddl_type    = new DropdownField('TypeID','Type', Dataobject::get("InteropCapabilityType")->map("ID", "Name", "Please Select")));
 
         if($this->ID > 0){
             $ddl_program->setValue('ID',$this->Program());
-            $ddl_version->setValue($this->VersionID);
+            $ddl_version->setValue('ID',$this->Version());
             $ddl_type->setValue($this->TypeID);
         }
 
