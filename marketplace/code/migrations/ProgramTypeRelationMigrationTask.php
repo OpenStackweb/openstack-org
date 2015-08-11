@@ -44,8 +44,8 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
 
             //then migrate the old InteropProgramType relations with capability and designated sections
             $relations = DB::query('SELECT cap.ID AS capID, pt.ID AS ptID
-                                    FROM interopcapability AS cap
-                                    LEFT JOIN interopprogramtype AS pt ON cap.ProgramID = pt.ID');
+                                    FROM InteropCapability AS cap
+                                    LEFT JOIN InteropProgramType AS pt ON cap.ProgramID = pt.ID');
 
             foreach ($relations as $relation) {
                 $capability = InteropCapability::get_by_id('InteropCapability',$relation['capID']);
@@ -57,8 +57,8 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
             }
 
             $relations = DB::query('SELECT ds.ID AS dsID, pt.ID AS ptID
-                                    FROM interopdesignatedsection AS ds
-                                    LEFT JOIN interopprogramtype AS pt ON ds.ProgramID = pt.ID');
+                                    FROM InteropDesignatedSection AS ds
+                                    LEFT JOIN InteropProgramType AS pt ON ds.ProgramID = pt.ID');
 
             foreach ($relations as $relation) {
                 $dsection = InteropDesignatedSection::get_by_id('InteropDesignatedSection',$relation['dsID']);
@@ -70,8 +70,8 @@ final class ProgramTypeRelationMigrationTask extends MigrationTask {
             }
 
             //finally remove ProgramID column from capability and designatedsection
-            DB::query('ALTER TABLE interopcapability DROP COLUMN ProgramID');
-            DB::query('ALTER TABLE interopdesignatedsection DROP COLUMN ProgramID');
+            DB::query('ALTER TABLE InteropCapability DROP COLUMN ProgramID');
+            DB::query('ALTER TABLE InteropDesignatedSection DROP COLUMN ProgramID');
 
 			$migration = new Migration();
 			$migration->Name = $this->title;
