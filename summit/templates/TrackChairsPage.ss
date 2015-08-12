@@ -30,7 +30,7 @@
     <script src="/summit/javascript/bootstrap.min.js"></script>
 
     <!-- App -->
-    <script src="/summit/javascript/new-trackchairs-app/public/bundle.js"></script>
+    <script src="/summit/javascript/new-trackchairs-app/public/bundle081201.js"></script>
 
 </body>
 

@@ -302,11 +302,9 @@ require('./tutorial.tag')
 
 		opts.on('presentation-details-loaded', function(result){
 
-			for(var key in result) {
-			    if(result[key] === ""){
-			      result[key] = " "
-			    }
-			 }
+			// Entirely clear out any previous display elements
+			self.currentPresentation = []
+			self.update()
 
 			console.log('currentPresentation', result)
 			self.currentPresentation = result
@@ -326,6 +324,7 @@ require('./tutorial.tag')
 
 			self.update()
 		})
+
 
 		showDetails(){
 			self.details = true
