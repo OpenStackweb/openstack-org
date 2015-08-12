@@ -69,10 +69,10 @@
                     $Address
                 </p>
             </div>
+            <a href="{$Top.VenueBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$Top.VenueBackgroundImageHero}" target="_blank">
+                <i class="fa fa-info-circle"></i>
+            </a>
         </div>
-        <a href="{$Top.VenueBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$Top.VenueBackgroundImageHero}" target="_blank">
-            <i class="fa fa-info-circle"></i>
-        </a>
     </div>
 <% end_with %>
 <div class="white hotels-row" id="hotels">
