@@ -107,9 +107,14 @@ final class News extends DataObject implements INews
         $tags = explode(',', $tags);
 
         foreach ($tags as $tag_name) {
-            $tag = new Tag();
-            $tag->Tag = $tag_name;
-            $tag->write();
+            $tag = Tag::get("Tag","Tag = '".$tag_name."'")->first();
+
+            if (!$tag) {
+                $tag = new Tag();
+                $tag->Tag = $tag_name;
+                $tag->write();
+            }
+
             $this->addTag($tag);
         }
     }
