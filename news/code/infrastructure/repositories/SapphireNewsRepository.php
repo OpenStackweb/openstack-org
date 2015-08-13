@@ -42,6 +42,7 @@ final class SapphireNewsRepository extends SapphireRepository {
         $query->addAndCondition(QueryCriteria::equal('Featured','0'));
         $query->addAndCondition(QueryCriteria::equal('Slider','0'));
         $query->addAndCondition(QueryCriteria::equal('Approved','1'));
+        $query->addAndCondition(QueryCriteria::equal('Archived','0'));
         $query->addOrder(QueryOrder::desc('Date'));
         $query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);
@@ -55,7 +56,12 @@ final class SapphireNewsRepository extends SapphireRepository {
     {
         $thirty_days_ago = date('Y-m-d H:i:s',strtotime('-30 days'));
         $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::lower('Created',$thirty_days_ago));
+        $query->addAndCondition(QueryCriteria::lower('Date',$thirty_days_ago));
+        $query->addAndCondition(QueryCriteria::equal('Featured','0'));
+        $query->addAndCondition(QueryCriteria::equal('Slider','0'));
+        $query->addAndCondition(QueryCriteria::equal('Approved','1'));
+        $query->addAndCondition(QueryCriteria::equal('Archived','0'));
+        $query->addAndCondition(QueryCriteria::equal('Restored','0'));
         list($list,$count) = $this->getAll($query,0,1000);
         return $list;
     }
@@ -68,7 +74,7 @@ final class SapphireNewsRepository extends SapphireRepository {
         }
         else {
             $query = new QueryObject(new News);
-            $query->addAndCondition(QueryCriteria::equal('Approved','1'));
+            $query->addAndCondition(QueryCriteria::equal('Archived','1'));
             $query->addOrder(QueryOrder::desc('Date'));
             list($list,$count) = $this->getAll($query,$offset,$limit);
         }
@@ -82,7 +88,7 @@ final class SapphireNewsRepository extends SapphireRepository {
             $count = $archivedNewsQuery->count();
         }
         else {
-            $count = DataList::create("News")->where("Archived = 0 && Approved = 1")->Count();
+            $count = DataList::create("News")->where("Archived = 1")->Count();
         }
 
         return $count;
@@ -94,7 +100,7 @@ final class SapphireNewsRepository extends SapphireRepository {
         $sqlSearchTerm = preg_replace("/\s+/", " +", $sqlSearchTerm);
         $sqlSearchTerm = "+".$sqlSearchTerm;
 
-        return DataList::create("News")->where("Approved = 1 AND
+        return DataList::create("News")->where("Archived = 1 AND
                 MATCH ( Headline, SummaryHtmlFree, BodyHtmlFree )
                 AGAINST ('{$sqlSearchTerm}' IN BOOLEAN MODE)");
     }
@@ -108,6 +114,7 @@ final class SapphireNewsRepository extends SapphireRepository {
         $query->addAndCondition(QueryCriteria::equal('Featured','0'));
         $query->addAndCondition(QueryCriteria::equal('Slider','0'));
         $query->addAndCondition(QueryCriteria::equal('Approved','0'));
+        $query->addAndCondition(QueryCriteria::equal('Archived','0'));
         $query->addOrder(QueryOrder::desc('Date'));
         //$query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);

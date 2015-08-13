@@ -299,6 +299,20 @@ ul.featured li {
     border-left: 1px solid #aaa
 }
 
+.newsRestore {
+    font-size: 12px;
+    color: #0404B4;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid #aaa;
+    cursor: pointer;
+}
+
+.newsRestore:hover {
+    font-weight: bold;
+}
+
+
 .news-sidebar, .rss-sidebar {
     background: #edf2f7;
     padding: 15px;

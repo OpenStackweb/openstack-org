@@ -23,7 +23,7 @@ final class NewsAdminPage_Controller extends AdminController {
 		'logout',
         'setArticleRank',
         'deleteArticle',
-        'removeArticle'
+        'archiveArticle'
 	);
 
     /**
@@ -139,12 +139,12 @@ final class NewsAdminPage_Controller extends AdminController {
         $this->news_repository->deleteArticle($article_id);
     }
 
-    public function removeArticle() {
+    public function archiveArticle() {
         $article_id = intval($this->request->postVar('id'));
         $type = $this->request->postVar('type');
         $old_rank = intval($this->request->postVar('old_rank'));
 
-        $this->news_manager->moveNewsArticle($article_id,0,'standby');
+        $this->news_manager->archiveNewsArticle($article_id);
         $this->news_manager->sortNewsArticles($article_id,0,$old_rank,false,true,$type);
     }
 

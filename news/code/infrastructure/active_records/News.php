@@ -39,6 +39,7 @@ final class News extends DataObject implements INews
         'Approved' => 'Boolean',
         'IsLandscape' => 'Boolean',
         'Archived' => 'Boolean',
+        'Restored' => 'Boolean'
     );
 
     private static $defaults = array
@@ -219,24 +220,26 @@ final class News extends DataObject implements INews
 
     public function registerSection($section)
     {
-        $slider = $featured = $approved = $archived = 0;
+        $slider = $featured = $archived = 0;
         if ($section == 'slider') {
             $slider = 1;
-            $approved = 1;
+            $this->Approved = 1;
         } elseif ($section == 'featured') {
             $featured = 1;
-            $approved = 1;
+            $this->Approved = 1;
         } elseif ($section == 'recent') {
-            $approved = 1;
+            $this->Approved = 1;
         } elseif ($section == 'archive') {
             $archived = 1;
         }
 
+        $this->Archived = $archived;
         $this->Featured = $featured;
         $this->Slider = $slider;
-        $this->Approved = $approved;
-        $this->Archived = $archived;
+    }
 
+    public function registerRestored($restored) {
+        $this->Restored = $restored;
     }
 
     public function registerRank($rank)

@@ -109,10 +109,14 @@ thead {
 
 .newsDelete, .newsRemove {
     cursor: pointer;
-    margin-left: 3px;
+    margin-left: 2px;
 }
 
 .newsRemove:hover{
+    color:#F7D358;
+}
+
+.newsDelete:hover{
     color:red;
 }
 
@@ -121,7 +125,7 @@ thead {
 }
 
 .newsEdit{
-    margin-left: 6px;
+    margin-left: 4px;
 }
 
 .newsSlider,.newsFeatured,.newsRecent,.newsStandBy {

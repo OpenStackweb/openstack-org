@@ -56,7 +56,7 @@ jQuery(document).ready(function($){
     });
 
     $('.newsRemove').click(function(){
-        removeArticle($(this).parents('.article_row'));
+        archiveArticle($(this).parents('.article_row'));
     });
 
     $('.image','.article_row').popover({
@@ -117,31 +117,17 @@ function deleteArticle(article) {
     });
 }
 
-function removeArticle(article) {
+function archiveArticle(article) {
     var article_id = jQuery('.article_id',article).val();
     var article_type = jQuery('.article_type',article).val();
     var old_rank = jQuery('.article_rank',article).val();
 
-    jQuery('.article_type',article).val('standby');
-    jQuery('.newsRemove',article).removeClass().addClass('newsDelete');
-    jQuery('#standby_sortable').prepend(article);
-
-    jQuery('.newsDelete',article).click(function(){
-        if (confirm("Do you wish to delete this article?")) {
-            deleteArticle(article);
-        }
-    });
-
     jQuery.ajax({
         type: "POST",
-        url: 'NewsAdminPage_Controller/removeArticle',
+        url: 'NewsAdminPage_Controller/archiveArticle',
         data: { id : article_id, type : article_type, old_rank : old_rank},
         success: function(){
-
-            jQuery('.article_type',article).val('standby');
-            jQuery('.article_rank','#'+article_type+'_sortable').each(function(index){
-                jQuery(this).val(index+1);
-            });
+            jQuery(article).remove();
         }
     });
 }

@@ -117,4 +117,19 @@ jQuery(function($) {
     }
 
     $('.news-archived-search input').val(searchTerm);
+
+
+    $('.newsRestore').click(function(){
+        var article_id = $(this).attr('article_id');
+
+        $.ajax({
+            type: "POST",
+            url: 'NewsArchivedPage_Controller/restoreArticle',
+            data: { id : article_id},
+            success: function(){
+                $('#article_'+article_id).remove();
+            }
+        });
+    });
+
 });
