@@ -16,14 +16,18 @@ class SummitCategoryChange extends DataObject {
 	static $db = array(
 		'Comment' => 'Varchar',
 		'ApprovalDate' => 'SS_DateTime',
+		'Approved' => 'Boolean',
 		'Done' => 'Boolean'
 	);
 	
 	static $has_one = array(
-		'NewCategory' => 'SummitCategory',
+		'NewCategory' => 'PresentationCategory',
+		'OldCategory' => 'PresentationCategory',		
 		'Presentation' => 'Presentation',
 		'Reqester' => 'Member',
-		'Approver' => 'Member'
+		'OldCatApprover' => 'Member',
+		'NewCatApprover' => 'Member',
+		'AdminApprover' => 'Member'
 	);
 
 }

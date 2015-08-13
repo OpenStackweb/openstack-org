@@ -45,7 +45,8 @@ class Presentation extends DataObject
 
     private static $has_many = array (
         'Votes' => 'PresentationVote',
-        'Comments' => 'SummitPresentationComment'
+        'Comments' => 'SummitPresentationComment',
+        'ChangeRequests' => 'SummitCategoryChange'
     );
 
 
@@ -481,5 +482,29 @@ class Presentation extends DataObject
 
     }
 
+    /**
+     * Used by the track chair app see if the presentaiton has been selected by anyone at all.
+     **/
+
+    public function isSelectedByAnyone() {
+
+        $selected = SummitSelectedPresentation::get()
+            ->where("PresentationID={$this->ID}");
+
+        if ($selected->count()) return true;
+
+    }
+
+    /**
+     * Used by the track chair app see if the presentaiton was moved to this category.
+     **/
+
+    public function movedToThisCategory() {
+        $completedMove = $this->ChangeRequests()->filter(array(
+            'NewCategoryID' => $this->CategoryID,
+            'Done' => TRUE
+        ));
+        if ($completedMove->count()) return true;
+    }
 
 }

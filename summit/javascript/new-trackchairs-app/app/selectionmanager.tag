@@ -22,14 +22,24 @@ require('./selectionmenu.tag')
 		slots="{ slots }" 
 		category="{ activeCategory }" />
 
-
 	<script>
 		var self = this
+			self.lists = []
+
+		calcWidth() {
+			if (self.lists.length > 0) {
+				return self.lists.length * 100 + 'px'
+			} else {
+				return "100%"
+			}
+		}
 
 		opts.api.on('summit-details-loaded', function(result){
 			self.summit = result
-			self.activeCategory = self.summit.track_chair.categories[0]
-			opts.api.trigger('load-selections',self.activeCategory.id)
+			if(self.summit.track_chair.categories) {
+				self.setCategory(self.summit.categories[0])
+				opts.api.trigger('load-selections',self.activeCategory.id)
+			}
 			self.update()
 		})
 

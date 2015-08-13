@@ -78,11 +78,11 @@ class SummitSelectedPresentationList extends DataObject {
           $MemberList = $category->MemberList(Member::currentUser()->ID);
           $GroupList = $category->GroupList();
 
-          $results->push($MemberList);
+          if($MemberList) $results->push($MemberList);
           foreach ($OtherTrackChairLists as $list) {
             $results->push($list);
           }
-          $results->push($GroupList);
+          if($GroupList) $results->push($GroupList);
 
           // Add each of those lists to our results
           foreach ($results as $list) {
