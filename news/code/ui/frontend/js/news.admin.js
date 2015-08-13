@@ -99,6 +99,10 @@ function saveSortArticle(item,is_new) {
                 jQuery('.article_rank','#'+target+'_sortable').each(function(index){
                     jQuery(this).val(index+1);
                 });
+                jQuery('.newsDelete',item).off('click').html('<i class="fa fa-archive"></i>').removeClass().addClass('newsRemove').click(function(){
+                    archiveArticle($(this).parents('.article_row'));
+                });
+
             }
         }
     });

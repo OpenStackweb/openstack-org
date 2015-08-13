@@ -217,6 +217,24 @@ final class NewsRequestManager {
 
     /**
      * @param integer $article_id
+     * @return INews
+     */
+    public function deleteNewsArticle($article_id){
+        $repository = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository,$article_id){
+
+            $news = $repository->getById(intval($article_id));
+            if(!$news)
+                throw new NotFoundEntityException('News',sprintf('id %s',$article_id ));
+
+            $news->deleteArticle();
+
+        });
+    }
+
+    /**
+     * @param integer $article_id
      * @param integer $new_rank
      * @param string $target
      * @return INews

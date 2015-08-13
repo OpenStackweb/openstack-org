@@ -86,7 +86,7 @@
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
-                        <tbody id="standby_sortable" class="connected">
+                        <tbody id="standby_sortable">
                             $getArticles(standby)
                         </tbody>
                     </table>
