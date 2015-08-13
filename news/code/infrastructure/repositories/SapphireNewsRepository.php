@@ -115,6 +115,7 @@ final class SapphireNewsRepository extends SapphireRepository {
         $query->addAndCondition(QueryCriteria::equal('Slider','0'));
         $query->addAndCondition(QueryCriteria::equal('Approved','0'));
         $query->addAndCondition(QueryCriteria::equal('Archived','0'));
+        $query->addAndCondition(QueryCriteria::equal('Deleted','0'));
         $query->addOrder(QueryOrder::desc('Date'));
         //$query->addOrder(QueryOrder::asc('Rank'));
         list($list,$count) = $this->getAll($query,0,1000);
@@ -237,7 +238,4 @@ final class SapphireNewsRepository extends SapphireRepository {
         return $return_array;
     }
 
-    public function deleteArticle($article_id) {
-        DataObject::delete_by_id('News',$article_id);
-    }
 }

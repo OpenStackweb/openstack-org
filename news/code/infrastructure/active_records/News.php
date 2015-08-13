@@ -39,7 +39,8 @@ final class News extends DataObject implements INews
         'Approved' => 'Boolean',
         'IsLandscape' => 'Boolean',
         'Archived' => 'Boolean',
-        'Restored' => 'Boolean'
+        'Restored' => 'Boolean',
+        'Deleted' => 'Boolean'
     );
 
     private static $defaults = array
@@ -306,6 +307,10 @@ final class News extends DataObject implements INews
         }
 
         return $text;
+    }
+
+    public function deleteArticle() {
+        $this->Deleted = true;
     }
 
 

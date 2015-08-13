@@ -136,7 +136,7 @@ final class NewsAdminPage_Controller extends AdminController {
     public function deleteArticle() {
         $article_id = intval($this->request->postVar('id'));
 
-        $this->news_repository->deleteArticle($article_id);
+        $this->news_manager->deleteNewsArticle($article_id);
     }
 
     public function archiveArticle() {
