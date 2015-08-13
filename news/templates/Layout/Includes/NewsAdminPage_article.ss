@@ -19,7 +19,7 @@
         <% if $Type == standby %>
             <span class="newsDelete"><i class="fa fa-times"></i></span>
         <% else %>
-            <span class="newsRemove"><i class="fa fa-times"></i></span>
+            <span class="newsRemove"><i class="fa fa-archive"></i></span>
         <% end_if %>
     </td>
     <td>

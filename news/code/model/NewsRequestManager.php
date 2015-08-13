@@ -179,6 +179,44 @@ final class NewsRequestManager {
 
     /**
      * @param integer $article_id
+     * @return INews
+     */
+    public function archiveNewsArticle($article_id){
+        $repository = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository,$article_id){
+
+            $news = $repository->getById(intval($article_id));
+            if(!$news)
+                throw new NotFoundEntityException('News',sprintf('id %s',$article_id ));
+
+            $news->registerSection('archive');
+            $news->registerRestored(false);
+
+        });
+    }
+
+    /**
+     * @param integer $article_id
+     * @return INews
+     */
+    public function restoreNewsArticle($article_id){
+        $repository = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository,$article_id){
+
+            $news = $repository->getById(intval($article_id));
+            if(!$news)
+                throw new NotFoundEntityException('News',sprintf('id %s',$article_id ));
+
+            $news->registerSection('recent');
+            $news->registerRestored(true);
+
+        });
+    }
+
+    /**
+     * @param integer $article_id
      * @param integer $new_rank
      * @param string $target
      * @return INews
@@ -246,8 +284,6 @@ final class NewsRequestManager {
                 }
 
                 $this->reorderArticles('recent',$repository);
-                $this->reorderArticles('slider',$repository);
-                $this->reorderArticles('featured',$repository);
             }
         });
     }

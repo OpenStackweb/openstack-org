@@ -24,8 +24,19 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         'ViewArticle',
         'signup',
         'sendSignupConfirmation',
-        'newsPage'
+        'newsPage',
+        'restoreArticle'
     );
+
+    /**
+     * @var ISapphireNewsRepository
+     */
+    private $news_repository;
+
+    /**
+     * @var NewsRequestManager
+     */
+    private $news_manager;
 
     /**
      * @var SecurityToken
@@ -49,6 +60,14 @@ final class NewsArchivedPage_Controller extends Page_Controller {
     public function __construct(){
         parent::__construct();
         $this->news_repository = new SapphireNewsRepository();
+        $this->news_manager = new NewsRequestManager(
+            new SapphireNewsRepository,
+            new SapphireSubmitterRepository,
+            new NewsFactory,
+            new NewsValidationFactory,
+            new SapphireFileUploadService(),
+            SapphireTransactionManager::getInstance()
+        );
     }
 
     public function index(){
@@ -65,5 +84,11 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         $searchTerm = isset($_GET["searchTerm"]) ? $_GET["searchTerm"] : '';
         $archived_news = new ArrayList($this->news_repository->getArchivedNews(($number - 1) * $this->news_per_page, $this->news_per_page, $searchTerm));
         return $this->renderWith(array('NewsArchivePage_Articles'), array('ArchivedNews' => $archived_news));
+    }
+
+    public function restoreArticle() {
+        $article_id = intval($this->request->postVar('id'));
+
+        $this->news_manager->restoreNewsArticle($article_id);
     }
 }
