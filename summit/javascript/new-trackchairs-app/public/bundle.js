@@ -1447,9 +1447,14 @@
 	__webpack_require__(17)
 	__webpack_require__(18)
 	__webpack_require__(19)
+	__webpack_require__(20)
 
 
+<<<<<<< HEAD
 	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'tutorial\' }"> <tutorial></tutorial> </div>  <div show="{ DisplayMode === \'directory\' }"> <chairdirectory chairs="{ summit.chair_list }"></chairdirectory> </div>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="row" show="{ !details }"> <div class="col-lg-9 col-md-9 hidden-sm hidden-xs"> &nbsp; </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" > Ave </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"> Count </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"> Total </div> </div>  <div class="presentation-list" id="presentation-list"> <presentationitem each="{ presentation, i in presentations }" activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times pull-right"></i></a></h3> </div> <div class="panel-body">  <div class="row"> <div class="col-lg-6"> <strong>Category:</strong> { currentPresentation.category_name } <br><a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> </div> <div class="col-lg-6"> <div class="btn-group pull-right" role="group" >  <button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> My List</button> <button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> My List</button>  <button if="{ currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupUnselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> Team List</button> <button if="{ !currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupSelectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> Team List</button> </div> </div> </div> <hr> <h2>{ currentPresentation.title }</h2> <h4>{ currentPresentation.level }</h4> <hr> <span class="label label-primary">Vote Count <span class="badge">{ currentPresentation.vote_count }</span></span> <span class="label label-primary">Vote Ave <span class="badge">{ currentPresentation.vote_average }</span></span> <span class="label label-primary">Vote Total <span class="badge">{ currentPresentation.total_points }</span></span> <span class="label label-info" show="{currentPresentation.comments.length}">Chair Comments: { currentPresentation.comments.length }</span> <hr> <raw content="{ currentPresentation.description }"></raw> <div each="{ currentPresentation.speakers }"> <hr> <h4>{ first_name }&nbsp;{ last_name }</h5> <p>{ title }</p> <raw content="{ bio }"></raw> </div> <div> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
+=======
+	riot.tag('app', '<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }"></modal> <navbar admin="{ summit.track_chair.is_admin }"></navbar> <div class="container-fluid"> <rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>  <div show="{ DisplayMode === \'tutorial\' }"> <tutorial></tutorial> </div>  <div show="{ DisplayMode === \'directory\' }"> <chairdirectory chairs="{ summit.chair_list }"></chairdirectory> </div>  <div show="{ DisplayMode === \'selections\' }"> <selection-manager categories="{ summit.categories }" api="{ this.opts }"></selection-manager> </div>   <div show="{ DisplayMode === \'requests\' }"> <change-requests api="{ this.opts }"></change-requests> </div>   <div show="{ DisplayMode === \'browse\' }" class="row"> <div class="{ col-lg-4: details } { col-lg-12: !details }"> <div class="well well-sm"> <h4>{ summit.title } Presentation Submissions</h4> <hr> <div class="input-group"> <span class="input-group-addon" id="sizing-addon2"> <i if="{ !searchmode }" class="fa fa-search"></i> <i if="{ searchmode }" onclick="{ clearSearch }" class="fa fa-times"></i> </span> <form onsubmit="{search}"> <input type="text" id="app-search" class="form-control" placeholder="search..." aria-describedby="sizing-addon2"> </form> </div> </div> <categorymenu categories="{ summit.categories }" active="{ activeCategory }" if="{ !searchmode }"></categorymenu> <div if="{ searchmode && quantity }">Showing { quantity } results</div> <div if="{ quantity }" class="list-group" id="presentation-list"> <div class="row" show="{ !details }"> <div class="col-lg-9 col-md-9 hidden-sm hidden-xs"> &nbsp; </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" > Ave </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"> Count </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"> Total </div> </div>  <div class="presentation-list" id="presentation-list"> <presentationitem each="{ presentation, i in presentations }" activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}"></presentationitem> </div> </div> <div if="{ !quantity && searchmode }">No results were found</div> </div> <div class="col-lg-8" show="{ details }"> <div class="panel panel-default" name="presentation-details"> <div class="panel-heading"> <h3 class="panel-title">Presentation Details <a href="#" onclick="{ closeDetails }"><i class="fa fa-times pull-right"></i></a></h3> </div> <div class="panel-body">  <div class="row"> <div class="col-lg-6"> <strong>Category:</strong> { currentPresentation.category_name } <br><a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a> </div> <div class="col-lg-6"> <div class="btn-group pull-right" role="group" >  <button if="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> My List</button> <button if="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> My List</button>  <button if="{ currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupUnselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> Team List</button> <button if="{ !currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupSelectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> Team List</button> </div> </div> </div> <hr> <h2>{ currentPresentation.title }</h2> <h4>{ currentPresentation.level }</h4> <hr> <span class="label label-primary">Vote Count <span class="badge">{ currentPresentation.vote_count }</span></span> <span class="label label-primary">Vote Ave <span class="badge">{ currentPresentation.vote_average }</span></span> <span class="label label-primary">Vote Total <span class="badge">{ currentPresentation.total_points }</span></span> <span class="label label-info" show="{currentPresentation.comments.length}">Chair Comments: { currentPresentation.comments.length }</span> <hr> <raw content="{ currentPresentation.description }"></raw> <div each="{ currentPresentation.speakers }"> <hr> <h4>{ first_name }&nbsp;{ last_name }</h5> <p>{ title }</p> <raw content="{ bio }"></raw> </div> <div> </div> <div if="{ currentPresentation.comments[0] }"> <hr> <h4>Comments</h4> <comment each="{ currentPresentation.comments }"></comment> <hr> </div> <addcommentform api="{ this.opts }" presentation="{ currentPresentation }"></addcommentform> </div> </div> </div> </div>  </div>', function(opts) {
+>>>>>>> 11ba413... Adding admin tools to approve changes and eavesdrop on other chair selections.
 
 			var self = this
 			this.sortitems = []
@@ -1528,6 +1533,10 @@
 					self.update()				
 				}
 
+				if (mode === 'requests') {
+					self.DisplayMode = 'requests'
+					self.update()				
+				}
 
 			})				
 
@@ -1560,13 +1569,19 @@
 						self.update()				
 					}
 
+					if (mode === 'requests') {
+						self.DisplayMode = 'requests'
+						self.update()				
+					}
+
 
 				})			
 			})
 
 			opts.on('summit-details-loaded', function(result){
 				self.summit = result
-				self.setCategory(self.summit.categories[0])
+				if(self.summit.track_chair.categories) self.setCategory(self.summit.categories[0])
+				self.update()
 			})
 
 			self.sortPresentations = function(set, sortBy, order) {
@@ -2912,7 +2927,11 @@
 
 	var riot = __webpack_require__(1);
 
+<<<<<<< HEAD
 	riot.tag('presentationitem', '<div class="presentation-row {active: isActive()} { selected: opts.data.selected }" onclick="{ setActive }"> <div class="row"> <div class="{ col-lg-9: !opts.details } { col-lg-11: opts.details } { col-md-9: !opts.details } { col-md-11: opts.details }" onclick="{ setActive }"> <span class="pull-left presentation-row-icon"><i class="fa fa-check-circle-o" show="{ opts.data.selected }"></i>&nbsp;</span> <div class="presentation-title">{ opts.data.title }</div> </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show="{ !opts.details }" > { opts.data.vote_average } </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show="{ !opts.details }"> { opts.data.vote_count } </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show="{ !opts.details }"> { opts.data.total_points } </div> </div> </div>', '.presentation-row { border: 1px solid #D5D5D5; padding: 5px; margin-bottom: -1px; cursor: pointer; font-size: 1.3em; } .presentation-row.selected { background-color: rgba(221, 239, 255, 0.50); } .presentation-row a { text-decoration: none; } .presentation-row.active, .presentation-row.active a { background-color: #3A89D3; color: white; } .presentation-row .fa { padding-top: 0.2em; color: #0078AE; } .presentation-row.active .fa { color: white; } .presentation-row-icon { display: block; width: 30px; padding-left: 4px; } .presentation-title { margin-left: 30px; }', function(opts) {
+=======
+	riot.tag('presentationitem', '<div class="presentation-row {active: isActive()} { selected: opts.data.selected }" onclick="{ setActive }"> <div class="row"> <div class="{ col-lg-9: !opts.details } { col-lg-11: opts.details } { col-md-9: !opts.details } { col-md-11: opts.details }" onclick="{ setActive }"> <span class="pull-left presentation-row-icon"><i class="fa fa-check-circle-o" show="{ opts.data.selected }"></i>&nbsp;</span> <div class="presentation-title"> { opts.data.title } <span if="{ opts.data.moved_to_category }" class="new-presentation"><i class="fa fa-star"></i>New</span> </div> </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show="{ !opts.details }" > { opts.data.vote_average } </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show="{ !opts.details }"> { opts.data.vote_count } </div> <div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show="{ !opts.details }"> { opts.data.total_points } </div> </div> </div>', 'presentationitem .presentation-row, [riot-tag="presentationitem"] .presentation-row{ border: 1px solid #D5D5D5; padding: 5px; margin-bottom: -1px; cursor: pointer; font-size: 1.3em; } presentationitem .new-presentation, [riot-tag="presentationitem"] .new-presentation,presentationitem .new-presentation .fa, [riot-tag="presentationitem"] .new-presentation .fa{ color: orange!important; } presentationitem .presentation-row.active .new-presentation, [riot-tag="presentationitem"] .presentation-row.active .new-presentation,presentationitem .presentation-row.active .new-presentation .fa, [riot-tag="presentationitem"] .presentation-row.active .new-presentation .fa{ color: white!important; } presentationitem .presentation-row.selected, [riot-tag="presentationitem"] .presentation-row.selected{ background-color: rgba(221, 239, 255, 0.50); } presentationitem .presentation-row a, [riot-tag="presentationitem"] .presentation-row a{ text-decoration: none; } presentationitem .presentation-row.active, [riot-tag="presentationitem"] .presentation-row.active,presentationitem .presentation-row.active a, [riot-tag="presentationitem"] .presentation-row.active a{ background-color: #3A89D3; color: white; } presentationitem .presentation-row .fa, [riot-tag="presentationitem"] .presentation-row .fa{ padding-top: 0.2em; color: #0078AE; } presentationitem .presentation-row.active .fa, [riot-tag="presentationitem"] .presentation-row.active .fa{ color: white; } presentationitem .presentation-row-icon, [riot-tag="presentationitem"] .presentation-row-icon{ display: block; width: 30px; padding-left: 4px; } presentationitem .presentation-title, [riot-tag="presentationitem"] .presentation-title{ margin-left: 30px; }', function(opts) {
+>>>>>>> 11ba413... Adding admin tools to approve changes and eavesdrop on other chair selections.
 
 		this.setActive = function(e) {
 			this.parent.setActiveKey(this.opts.key)
@@ -2933,7 +2952,7 @@
 
 	var riot = __webpack_require__(1);
 
-	riot.tag('navbar', '<nav class="navbar navbar-default"> <div class="container-fluid">  <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">OpenStack Track Chairs App </a> </div>  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> <ul class="nav navbar-nav"> <li class="{ active: self.parent.DisplayMode === \'tutorial\' }"><a href="#" onclick="{ setMode(\'tutorial\') }">Tutorial</a></li> <li class="{ active: self.parent.DisplayMode === \'browse\' }"><a href="#" onclick="{ setMode(\'presentations\') }">Browse Presentations <span class="sr-only">(current)</span></a></li> <li class="{ active: self.parent.DisplayMode === \'selections\' }"><a href="#" onclick="{ setMode(\'selections\') }">Your Selections</a></li> <li class="{ active: self.parent.DisplayMode === \'directory\' }"><a href="#" onclick="{ setMode(\'directory\') }">Chair Directory</a></li> </ul> </div> </div> </nav>', function(opts) {
+	riot.tag('navbar', '<nav class="navbar navbar-default"> <div class="container-fluid">  <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">OpenStack Track Chairs App </a> </div>  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> <ul class="nav navbar-nav"> <li class="{ active: self.parent.DisplayMode === \'tutorial\' }"><a href="#" onclick="{ setMode(\'tutorial\') }">Tutorial</a></li> <li class="{ active: self.parent.DisplayMode === \'browse\' }"><a href="#" onclick="{ setMode(\'presentations\') }">Browse Presentations <span class="sr-only">(current)</span></a></li> <li class="{ active: self.parent.DisplayMode === \'selections\' }"><a href="#" onclick="{ setMode(\'selections\') }">Your Selections</a></li> <li class="{ active: self.parent.DisplayMode === \'directory\' }"><a href="#" onclick="{ setMode(\'directory\') }">Chair Directory</a></li> <li class="{ active: self.parent.DisplayMode === \'requests\' }" show="{ opts.admin }"><a href="#" onclick="{ setMode(\'requests\') }">Change Requests</a></li> </ul> </div> </div> </nav>', function(opts) {
 		
 		self = this;
 
@@ -4041,11 +4060,22 @@
 
 	riot.tag('selection-manager', '<h2> { activeCategory.title } Track <selectionmenu categories="{ summit.track_chair.categories }" if="{ summit.track_chair.categories.length > 1 }" active="{ activeCategory }" /> </h2> <p>For this track, you should select <strong>{activeCategory.session_count} presentations</strong> plus at least two alternates.</p> <hr> <selection-list each="{ lists }" name="List" listname="{ list_name }" selections="{ selections }" listid="{ \'list\' + list_id }" selectionlist="{ list_id }" mine="{ mine }" listtype="{ list_type }" slots="{ slots }" category="{ activeCategory }"></selection-list>', function(opts) {
 			var self = this
+				self.lists = []
+
+			this.calcWidth = function() {
+				if (self.lists.length > 0) {
+					return self.lists.length * 100 + 'px'
+				} else {
+					return "100%"
+				}
+			}.bind(this);
 
 			opts.api.on('summit-details-loaded', function(result){
 				self.summit = result
-				self.activeCategory = self.summit.track_chair.categories[0]
-				opts.api.trigger('load-selections',self.activeCategory.id)
+				if(self.summit.track_chair.categories) {
+					self.setCategory(self.summit.categories[0])
+					opts.api.trigger('load-selections',self.activeCategory.id)
+				}
 				self.update()
 			})
 
@@ -4295,6 +4325,72 @@
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var riot = __webpack_require__(1);
+
+
+	__webpack_require__(21)
+	__webpack_require__(24)
+
+
+	riot.tag('change-requests', '<approve-modal request="{ activeRequest }"></approve-modal> <change-error-modal request="{ activeRequest }"></change-error-modal> <h1>Change Requests</h1> <table class="table"> <tr> <th>Presentation</th> <th>Status</th> <th>Old Category</th> <th></th> <th>New Category</th> <th>Requester</th> <th></th> </tr> <tr each="{request in requests}" class="{ completed: request.done == \'1\' } { selected: request.has_selections == true }"> <td> <a href="#" data-toggle="modal" data-target="#approveModal" onclick="{ parent.setRequest(request) }" if="{ !request.has_selections }">{ request.presentation_title }</a> <a href="#" data-toggle="modal" data-target="#changeErrorModal" onclick="{ parent.setRequest(request) }" if="{ request.has_selections }">{ request.presentation_title }</a></td> <td> <span if="{ request.done == \'1\'}">Completed</span> <span if="{ request.done == \'0\' }">Requested</span> </td> <td>{ request.old_category.title }</td> <td><i class="fa fa-long-arrow-right"></i></td> <td>{ request.new_category.title }</td> <td>{ request.requester }</td> </tr> </table>', 'change-requests .completed, [riot-tag="change-requests"] .completed{ opacity: 0.4;} change-requests .selected, [riot-tag="change-requests"] .selected,change-requests .selected a, [riot-tag="change-requests"] .selected a{ color: red;}', function(opts) {
+
+			self = this
+			self.requests = []
+			self.activeRequest = []
+
+			this.on('mount', function(){
+				opts.api.trigger('load-change-requests')
+			})
+
+			this.setRequest = function(request) {
+				return function(e) {
+					self.activeRequest = request
+					self.update()
+				}
+			}.bind(this);
+
+			opts.api.on('change-requests-loaded', function(response){
+				self.requests = []
+				self.update()
+				self.requests = response
+				self.update()
+			})
+
+		
+	});
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var riot = __webpack_require__(1);
+
+	<!-- Modal -->
+	riot.tag('approve-modal', '<div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h4 class="modal-title" id="myModalLabel">Review Category Change</h4> </div> <div class="modal-body"> Click Approve Change to move the presentation <strong>{ opts.request.presentation_title }</strong> to the category "<strong>{ opts.request.new_category.title }</strong>". </div> <div class="modal-footer" show="{ !finished }"> <button type="button" class="btn btn-default" onclick="{ showPresentation(opts.request.presentation_id) }" data-dismiss="modal">See Presentation</button> <button type="button" class="btn btn-primary" onclick="{ approveChange(opts.request) }" data-dismiss="modal">Approve Change</button> </div> </div> </div> </div>', function(opts) {
+
+	  var self = this
+
+	  this.showPresentation = function(presId) {
+	    return function(e) {
+	      riot.route('presentations/show/' + presId)
+	    }
+	  }.bind(this);
+
+	  this.approveChange = function(request) {
+	    return function(e) {
+	      self.parent.parent.opts.trigger('approve-change', request.id)
+	    }
+	  }.bind(this);
+
+
+
+	  
+	});
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(riot) {
 	/*
 	* The track chairs API listeners and triggers to fetch server-side data
@@ -4468,6 +4564,33 @@
 		    }
 		})	
 
+	})
+
+	api.on('approve-change', function(id){
+
+		console.log(url + 'category_change/accept/' + id)
+
+		reqwest({
+		    url: url + 'category_change/accept/' + id
+		  , method: 'get'
+		  , success: function (resp) {
+		  		api.trigger('change-approved', resp)
+		    }
+		})	
+	})
+
+	api.on('change-approved', function(){
+		api.trigger('load-change-requests')
+	})
+
+	api.on('load-change-requests', function(){
+		reqwest({
+		    url: url + 'change_requests'
+		  , method: 'get'
+		  , success: function (resp) {
+		  		api.trigger('change-requests-loaded', resp)
+		    }
+		})	
 	})
 
 	module.exports = api;
@@ -5093,6 +5216,18 @@
 	  return reqwest
 	});
 
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var riot = __webpack_require__(1);
+
+	<!-- Modal -->
+	riot.tag('change-error-modal', '<div class="modal fade" id="changeErrorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <h4 class="modal-title" id="myModalLabel">Oops...</h4> </div> <div class="modal-body"> There was a request made to move this presentation to <strong>{ opts.request.new_category.title }</strong>, but it has already been selected by the track chairs of the current category, <strong>{ opts.request.old_category.title }</strong>. In order to move it, you\'ll need to ask if the chairs if they will unselect the presentation first. </div> <div class="modal-footer"> <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button> </div> </div> </div> </div>', function(opts) {
+
+
+	});
 
 /***/ }
 /******/ ]);

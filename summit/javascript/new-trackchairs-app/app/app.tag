@@ -12,13 +12,14 @@ require('riotgear-modal')
 require('./modal.tag')
 require('./chairdirectory.tag')
 require('./tutorial.tag')
+require('./change-requests.tag')
 
 
 <app>
 
 	<modal presentation="{ currentPresentation }" categories="{ summit.categories }" api="{ this.opts }" />
 
-	<navbar/>
+	<navbar admin="{ summit.track_chair.is_admin }" />
     <div class="container-fluid">
 
     	<rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>
@@ -39,6 +40,11 @@ require('./tutorial.tag')
     	</div>
     	<!-- End Chair Selections -->
 
+    	<!-- Change Requests Browser -->
+    	<div show={ DisplayMode === 'requests' }>
+    		<change-requests api="{ this.opts }"/>
+    	</div>
+    	<!-- Change Requests Browser -->    	
 
     	<!-- Presntation Browser -->
     	<div show={ DisplayMode === 'browse' } class="row">
@@ -232,6 +238,10 @@ require('./tutorial.tag')
 				self.update()				
 			}
 
+			if (mode === 'requests') {
+				self.DisplayMode = 'requests'
+				self.update()				
+			}
 
 		})				
 
@@ -264,13 +274,19 @@ require('./tutorial.tag')
 					self.update()				
 				}
 
+				if (mode === 'requests') {
+					self.DisplayMode = 'requests'
+					self.update()				
+				}
+
 
 			})			
 		})
 
 		opts.on('summit-details-loaded', function(result){
 			self.summit = result
-			self.setCategory(self.summit.categories[0])
+			if(self.summit.track_chair.categories) self.setCategory(self.summit.categories[0])
+			self.update()
 		})
 
 		self.sortPresentations = function(set, sortBy, order) {

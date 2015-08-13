@@ -173,4 +173,31 @@ api.on('suggest-category-change', function(suggestedChange){
 
 })
 
+api.on('approve-change', function(id){
+
+	console.log(url + 'category_change/accept/' + id)
+
+	reqwest({
+	    url: url + 'category_change/accept/' + id
+	  , method: 'get'
+	  , success: function (resp) {
+	  		api.trigger('change-approved', resp)
+	    }
+	})	
+})
+
+api.on('change-approved', function(){
+	api.trigger('load-change-requests')
+})
+
+api.on('load-change-requests', function(){
+	reqwest({
+	    url: url + 'change_requests'
+	  , method: 'get'
+	  , success: function (resp) {
+	  		api.trigger('change-requests-loaded', resp)
+	    }
+	})	
+})
+
 module.exports = api;

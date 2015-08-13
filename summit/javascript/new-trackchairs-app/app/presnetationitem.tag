@@ -3,7 +3,10 @@
 			<div class="row">		
 				<div class="{ col-lg-9: !opts.details } { col-lg-11: opts.details } { col-md-9: !opts.details } { col-md-11: opts.details }" onclick={ setActive }>
 					<span class="pull-left presentation-row-icon"><i class="fa fa-check-circle-o" show={ opts.data.selected }></i>&nbsp;</span>
-					<div class="presentation-title">{ opts.data.title }</div>
+					<div class="presentation-title">
+						{ opts.data.title }
+						<span if="{ opts.data.moved_to_category }" class="new-presentation"><i class="fa fa-star"></i>New</span>
+					</div>
 				</div>
 				<div class="col-lg-1 col-md-1 hidden-sm hidden-xs" show={ !opts.details } >
 					{ opts.data.vote_average }
@@ -18,13 +21,21 @@
 			</div>
 	</div>
 
-	<style>
+	<style scoped>
 		.presentation-row {
 			border: 1px solid #D5D5D5;
 			padding: 5px;
 			margin-bottom: -1px;
 			cursor: pointer;
 			font-size: 1.3em;
+		}
+
+		.new-presentation, .new-presentation .fa {
+			color: orange!important;
+		}
+
+		.presentation-row.active .new-presentation, .presentation-row.active .new-presentation .fa {
+			color: white!important;
 		}
 
 		.presentation-row.selected {

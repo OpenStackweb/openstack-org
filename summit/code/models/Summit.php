@@ -37,7 +37,7 @@ class Summit extends DataObject
     private static $has_many = array (
         'Presentations' => 'Presentation',
         'Categories' => 'PresentationCategory',
-        'Speakers' => 'PresentationSpeaker',
+        'Speakers' => 'PresentationSpeaker'
     );
 
     private static $summary_fields = array (

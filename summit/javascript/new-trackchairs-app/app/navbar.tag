@@ -19,7 +19,8 @@
 	        <li class="{ active: self.parent.DisplayMode === 'tutorial' }"><a href="#" onclick="{ setMode('tutorial') }">Tutorial</a></li>		      
 	        <li class="{ active: self.parent.DisplayMode === 'browse' }"><a href="#" onclick="{ setMode('presentations') }">Browse Presentations <span class="sr-only">(current)</span></a></li>
 	        <li class="{ active: self.parent.DisplayMode === 'selections' }"><a href="#" onclick="{ setMode('selections') }">Your Selections</a></li>
-	        <li class="{ active: self.parent.DisplayMode === 'directory' }"><a href="#" onclick="{ setMode('directory') }">Chair Directory</a></li>	       
+	        <li class="{ active: self.parent.DisplayMode === 'directory' }"><a href="#" onclick="{ setMode('directory') }">Chair Directory</a></li>
+	        <li class="{ active: self.parent.DisplayMode === 'requests' }" show="{ opts.admin }"><a href="#" onclick="{ setMode('requests') }">Change Requests</a></li>        
 
 	      </ul>
 

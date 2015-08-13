@@ -74,7 +74,7 @@ class PresentationCategory extends DataObject
               $MemberList->write();
           }
 
-          if($MemberList->exists()) return $MemberList;
+          if($MemberList) return $MemberList;
 
 
     }
