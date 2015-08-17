@@ -24,7 +24,8 @@ class SummitLocation extends DataObject
         'BookingEndDate' => 'SS_DateTime',
         'InRangeBookingGraphic' => 'Text',
         'OutOfRangeBookingGraphic' => 'Text',
-        'DetailsPage' => 'Boolean'
+        'DetailsPage' => 'Boolean',
+        'LocationMessage' => 'Text',
     );
 
     private static $has_one = array (
@@ -40,6 +41,7 @@ class SummitLocation extends DataObject
         $fields->addFieldToTab('Root.Main', new TextareaField('Address','Address'));
         $fields->addFieldToTab('Root.Main', new TextField('Latitude','Latitude'));
         $fields->addFieldToTab('Root.Main', new TextField('Longitude','Longitude'));
+        $fields->addFieldToTab('Root.Main', new TextField('LocationMessage','Message to display for this location'));        
         $fields->addFieldToTab('Root.Main', new TextField('Website','Website'));
         $fields->addFieldToTab('Root.Main', new TextField('BookingLink','BookingLink'));
 
