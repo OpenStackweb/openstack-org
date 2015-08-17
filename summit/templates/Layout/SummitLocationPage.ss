@@ -121,6 +121,13 @@
             <p>
                 $Address
             </p>
+
+            <% if $LocationMessage %>
+                <p>
+                    $LocationMessage
+                </p>
+            <% end_if %>
+
             <p<% if $IsSoldOut %> class="sold-out-hotel" <% end_if%>>
                 <% if $IsSoldOut %>
                     SOLD OUT
