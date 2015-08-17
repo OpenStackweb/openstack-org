@@ -185,18 +185,6 @@
             <h5 class="section-title">More Hotel Details</h5>
             <div class="more-hotel-details">
                 <p>
-                    <i class="fa fa-calendar-check-o fa-2x"></i>
-                </p>
-                <p>
-                    Hotel discounted rates are limited and vary depending on location and dates. See the following chart for more details.
-                </p>
-                <p>
-                    <a href="/summit/images/tokyo/hotel-discount-chart1.png" target="_blank">
-                <img class="hotel-discount-chart" src="/summit/images/tokyo/hotel-discount-chart1.svg" onerror="this.onerror=null; this.src=/summit/images/tokyo/hotel-discount-chart1.png" alt="OpenStack Summit Tokyo Hotel Discounts">
-                    </a>
-                </p>
-                <hr>
-                <p>
                     <i class="fa fa-users fa-2x"></i>
                 </p>
                 <p>
