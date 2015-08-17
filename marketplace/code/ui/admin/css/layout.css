@@ -20,9 +20,14 @@ caption,th {
 	text-align:left;
 }
 h1,h2,h3,h4,h5,h6 {
-	font-size:100%;
-	font-weight:normal;
+    font-size: 15px;
+    font-weight: bold;
 }
+
+h2 {
+    margin: 15px 0 5px 0;
+}
+
 q:before,q:after {
 	content:'';
 }
@@ -36,7 +41,6 @@ html, body {
 	color: #52697E;
 }
 body {
-	text-align: center;
 	overflow: auto;
 }
 .wrapper {

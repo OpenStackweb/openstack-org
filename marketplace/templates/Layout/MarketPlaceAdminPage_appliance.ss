@@ -31,7 +31,7 @@
         <% include AdditionalResources %>
         </fieldset>
     </div>
-    <div style="clear:both">
+    <div class="footer_buttons">
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center" class="roundedButton save-appliance" href="#" id="save-appliance2">Save</a>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton publish-appliance" href="#" id="publish-appliance">Publish</a>
         <% if CurrentAppliance %>

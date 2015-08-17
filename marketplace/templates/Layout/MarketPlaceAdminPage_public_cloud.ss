@@ -33,7 +33,7 @@
         <% include AdditionalResources %>
         </fieldset>
     </div>
-    <div style="clear:both">
+    <div class="footer_buttons">
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center" class="roundedButton save-public-cloud" href="#" id="save-public-cloud2">Save</a>
         <a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:2%;" class="roundedButton publish-public-cloud" href="#" id="publish-public-cloud1">Publish</a>
         <% if CurrentPublicCloud %>
