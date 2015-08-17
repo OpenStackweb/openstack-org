@@ -138,6 +138,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::css(Director::protocol() . "fonts.googleapis.com/css?family=PT+Sans&subset=latin");
 
         $css_files =  array(
+            "marketplace/code/ui/admin/css/layout.css",
             "marketplace/code/ui/admin/css/marketplace.admin.css",
             "themes/openstack/css/chosen.css",
             "themes/openstack/css/colorpicker.css",

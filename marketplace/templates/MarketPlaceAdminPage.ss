@@ -19,7 +19,7 @@
 
             <div id="navigation" class="span-19">
                 <ul id="Menu1">
-                    <li><a href="/markeplaceadmin/">MarketPlace Admin</a></li>
+                    <li><a href="/marketplaceadmin/">MarketPlace Admin</a></li>
                 </ul>
             </div>
 
