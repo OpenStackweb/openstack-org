@@ -226,6 +226,7 @@ class Page_Controller extends ContentController
     private static $allowed_actions = array(
         'logout',
         'FeedbackForm',
+        'getNavigationMenu'
     );
 
 
@@ -272,6 +273,7 @@ class Page_Controller extends ContentController
             "themes/openstack/css/bootstrap.min.css",
             'themes/openstack/css/font-awesome.min.css',
             "themes/openstack/css/combined.css",
+            "themes/openstack/css/navigation_menu.css",
             "themes/openstack/css/dropdown.css",
         );
 
@@ -467,5 +469,13 @@ class Page_Controller extends ContentController
         }
 
         return $response;
+    }
+
+    public function getNavigationMenu() {
+        $menu_html = $this->renderWith('Navigation_menu',array('WidgetCall'=>true))->getValue();
+        $data = array('html'=>$menu_html);
+        $jsonp = "jsonCallback(".json_encode($data).")";
+        header("Content-Type: application/json");
+        echo $jsonp;
     }
 }

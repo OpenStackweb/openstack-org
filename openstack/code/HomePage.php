@@ -267,12 +267,12 @@ class HomePage_Controller extends Page_Controller
                 'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
         }
 
-        for ($i = 0; $i < 3 && $i < count($group_array[RssNews::Blog]); $i++ ) {
+        /*for ($i = 0; $i < 3 && $i < count($group_array[RssNews::Blog]); $i++ ) {
             $item = $group_array[RssNews::Blog][$i];
 
             $return_array->push(array('type' => $item->Category, 'link' => $item->Link, 'title' => $item->Headline,
                 'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
-        }
+        }*/
 
         $rss_count = $return_array->count();
 
