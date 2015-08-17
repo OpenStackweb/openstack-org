@@ -111,3 +111,13 @@ input.error{
     display: block;
     padding-bottom: 25px;
 }
+
+#overview {
+    width: 700px;
+    height: 100px;
+}
+
+.footer_buttons {
+    clear: both;
+    padding-top: 50px;
+}
