@@ -279,9 +279,9 @@ class Company extends DataObject implements PermissionProvider,IEntity {
 		}
 
 		// If there is no URLSegment set, generate one from Title
-        if((!$this->URLSegment || $this->URLSegment == 'new-comapny') && $this->Title != 'New Company') 
+        if((!$this->URLSegment || $this->URLSegment == 'new-company') && $this->Title != 'New Company')
         {
-            $this->URLSegment = SiteTree::generateURLSegment($this->Title);
+            $this->URLSegment = singleton('SiteTree')->generateURLSegment($this->Title);
         } 
         else if($this->isChanged('URLSegment')) 
         {

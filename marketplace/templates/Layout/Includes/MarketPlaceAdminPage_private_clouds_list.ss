@@ -34,7 +34,7 @@
         </form>
     </div>
     <div style="clear:both;">
-        <h2>Company Pirvate Clouds</h2>
+        <h2>Company Private Clouds</h2>
         <p>Click heading to sort:</p>
         <table class="main-table">
             <thead>
