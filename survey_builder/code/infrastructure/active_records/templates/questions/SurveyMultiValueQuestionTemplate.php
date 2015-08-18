@@ -16,7 +16,9 @@ class SurveyMultiValueQuestionTemplate
     extends SurveyQuestionTemplate
     implements IMultiValueQuestionTemplate {
 
-    static $db = array(
+    static $db = array
+    (
+        'EmptyString' => 'VarChar(255)'
     );
 
     static $has_one = array(
@@ -42,6 +44,8 @@ class SurveyMultiValueQuestionTemplate
     public function getCMSFields() {
 
         $fields = parent::getCMSFields();
+
+        $fields->add(new TextField('EmptyString', 'Empty String', 255));
 
         if($this->ID > 0 ){
             //validation rules

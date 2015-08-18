@@ -17,7 +17,8 @@
  */
 class SurveyDropDownQuestionTemplate
     extends SurveyMultiValueQuestionTemplate
-    implements ISurveySelectableQuestion {
+    implements ISurveySelectableQuestion
+{
 
     static $db = array(
         'IsMultiSelect'     => 'Boolean',
@@ -47,7 +48,8 @@ class SurveyDropDownQuestionTemplate
         'IsCountrySelector' => false
     );
 
-    public function Type(){
+    public function Type()
+    {
         return 'ComboBox';
     }
 
