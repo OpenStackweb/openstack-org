@@ -34,17 +34,35 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
         else
             $values = $question->Values()->sort('Order')->map('ID','Value');
 
+        $default_value = $question->DefaultValue();
+
         $field  = ($question->IsMultiSelect) ? new MultiDropdownField($question->name(), $question->label(), $values) : new DropdownField($question->name(), $question->label(), $values);
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {
             $field->setAttribute('data-rule-required','true');
+            $field->setAttribute('aria-required','true');
         }
-        if(!is_null($answer)){
+
+        if($default_value)
+        {
+            $field->setValue($default_value->ID);
+        }
+
+        if(!is_null($answer))
+        {
             $field->setValue($answer->value());
         }
-        if(!$question->IsCountrySelector)
-            $field->setEmptyString('-- Select --');
+
+        $empty_string = $question->EmptyString;
+
+        if(!empty($empty_string))
+        {
+            if($question->UseChosenPlugin && $question->IsMultiSelect)
+                $field->setAttribute('data-placeholder', $empty_string);
+            else
+                $field->setEmptyString($empty_string);
+        }
 
         $this->buildDependantRules($current_step, $question, $field);
 

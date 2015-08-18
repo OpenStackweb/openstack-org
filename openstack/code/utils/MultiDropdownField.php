@@ -112,15 +112,16 @@ final class MultiDropdownField extends FormField {
 			}
 		}
 
-		$attributes = array(
+		$attrs = array(
 			'class'    => ($this->extraClass() ? $this->extraClass() : ''),
 			'id'       => $this->id(),
 			'name'     => $this->name.'[]',
 			'multiple' => 'multiple',
 		);
 
-		if($this->disabled) $attributes['disabled'] = 'disabled';
-		return $this->create_tag('select', $attributes, $options);
+		if($this->disabled) $attrs['disabled'] = 'disabled';
+		$attrs = array_merge($attrs, $this->attributes);
+		return $this->create_tag('select', $attrs, $options);
 	}
 
 

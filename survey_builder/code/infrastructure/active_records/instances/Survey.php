@@ -204,7 +204,7 @@ class Survey
         if($this->BeenEmailed) throw new EntityValidationException(array( array('message'=>'Survey Email Already sent !')));
         if(!$this->isLastStep()) throw new EntityValidationException(array( array('message'=>'Survey is not on last step!')));
         $current_step = $this->currentStep();
-        if(!$current_step->template() instanceof ISurveyThankYouStepTemplate)  throw new EntityValidationException(array( array('message'=>'Survey last step is not thank you template!')));
+        if(!$current_step->template() instanceof ISurveyThankYouStepTemplate)  return;
         $this->BeenEmailed = true;
         $service->send($this);
     }
