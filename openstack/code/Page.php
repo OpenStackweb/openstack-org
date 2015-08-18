@@ -451,11 +451,16 @@ class Page_Controller extends ContentController
         return $response;
     }
 
+    // this returns the navigation menu as a jsonp response, it is used to feed this menu to other sites as docs.openstack.org
+    // the script calling this function is in themes/openstack/javascript/menu-widget.js
     public function getNavigationMenu() {
         $menu_html = $this->renderWith('Navigation_menu',array('WidgetCall'=>true))->getValue();
         $data = array('html'=>$menu_html);
         $jsonp = "jsonCallback(".json_encode($data).")";
-        header("Content-Type: application/json");
-        echo $jsonp;
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(200);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody($jsonp);
+        return $response;
     }
 }
