@@ -479,7 +479,7 @@ class Page_Controller extends ContentController
         $jsonp = "jsonCallback(".json_encode($data).")";
         $response = new SS_HTTPResponse();
         $response->setStatusCode(200);
-        $response->addHeader('Content-Type', 'application/json');
+        $response->addHeader('Content-Type', 'application/javascript');
         $response->setBody($jsonp);
         return $response;
     }
