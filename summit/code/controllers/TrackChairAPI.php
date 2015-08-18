@@ -12,7 +12,11 @@ class TrackChairAPI extends Controller {
 		'POST reorder' => 'handleReorderList',
 		'GET change_requests' => 'handleChangeRequests',
 		'GET chair/add' => 'handleAddChair',
-		'GET category_change/accept/$ID' => 'handleAcceptCategoryChange'		
+		'GET category_change/accept/$ID' => 'handleAcceptCategoryChange',
+		'GET export/schedule' => 'handleScheduleForSched',
+		'GET export/speakers' => 'handleSpeakersForSched',
+		'GET export/speaker-worksheet' => 'handleSpeakerWorksheet',
+		'GET restore-orders' => 'handleRestoreOrders'
 	);
 
 
@@ -25,7 +29,11 @@ class TrackChairAPI extends Controller {
 		'handleReorderList',
 		'handleChangeRequests',
 		'handleAddChair' => 'ADMIN',
-		'handleAcceptCategoryChange' => 'ADMIN'	
+		'handleAcceptCategoryChange' => 'ADMIN',
+		'handleScheduleForSched' => 'ADMIN',
+		'handleSpeakersForSched' => 'ADMIN',
+		'handleRestoreOrders' => 'ADMIN',
+		'handleSpeakerWorksheet' => 'ADMIN'
 	);
 
 
@@ -419,6 +427,181 @@ class TrackChairAPI extends Controller {
 	
 
 	}
+
+
+    public function handleScheduleForSched() {
+        
+      $this->handleRestoreOrders();
+        
+      $filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/schedule-import.csv';
+      $fp = fopen($filepath, 'w');
+
+      // Setup file to be UTF8
+      fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+
+      $activeSummit = Summit::get_active();
+
+      $SummitCategories = DataObject::get('PresentationCategory',$activeSummit->ID);
+
+      foreach ($SummitCategories as $Category) {
+        // Grab the track chairs selections for the category
+                  
+        $SelectedPresentationList = SummitSelectedPresentationList::get()
+                            ->filter(array('CategoryID' => $Category->ID, 'ListType' => 'Group'))
+                            ->first();
+                
+        
+        if($SelectedPresentationList) {
+
+	        // Loop through each selected talk to output the details
+	        // Note that a SummitSelectedTalk is really just a cross-link table that also contains the priority the talk was given
+	        foreach ($SelectedPresentationList->SortedPresentations() as $Selection) {
+
+	            $p = $Selection->Presentation();
+
+	            if($p->SelectionStatus() == 'accepted') {
+
+	                  // Build speaker column
+	                  $Speakers = '';
+
+	                  foreach ($p->Speakers() as $Speaker) {
+	                    $Speakers = $Speakers . $Speaker->FirstName . " ";
+	                    $Speakers = $Speakers . $Speaker->LastName . ",";
+	                  }
+
+	                  // Output presentation row
+	                  $fields = array($p->ID, $p->Title, $p->Category()->Title, $p->Description, $Speakers);
+
+	                  fputcsv($fp, $fields);
+	            }
+	        }
+    	}
+      }
+
+      fclose($fp);
+        
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        header("Content-disposition: attachment; filename=\"schedule-import.csv\"");
+        header("Content-Length: ".filesize($filepath));
+        readfile($filepath);        
+
+        
+    }
+
+    public function handleSpeakerWorksheet() {
+
+    	$activeSummit = Summit::get_active();
+        
+        $filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/speaker-worksheet.csv';
+
+        $fp = fopen($filepath, 'w');
+
+        // Setup file to be UTF8
+        fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+
+        $Speakers = PresentationSpeaker::get()
+        	->filter('SummitID', $activeSummit->ID);
+
+        foreach ($Speakers as $Speaker) {
+            
+            $PhotoURL = "";
+            if($Speaker->PhotoID != 0) $PhotoURL = 'http://www.openstack.org'.$Speaker->Photo()->getURL();
+            $fullName = $Speaker->FirstName . ' ' . $Speaker->LastName;
+
+            foreach ($Speaker->Presentations() as $Presentation) {
+              	$fields = array($Speaker->ID, $fullName, $Speaker->Member()->Email, $Presentation->ID, $Presentation->Category()->Title, $Presentation->Title, $Presentation->SelectionStatus());            	
+            	fputcsv($fp, $fields);
+            }
+
+      }
+
+      fclose($fp);
+        
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        header("Content-disposition: attachment; filename=\"speaker-worksheet.csv\"");
+        header("Content-Length: ".filesize($filepath));
+        readfile($filepath);
+        
+    }
+
+
+    public function handleSpeakersForSched() {
+
+    	$activeSummit = Summit::get_active();
+        
+        $filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/speaker-import.csv';
+
+        $fp = fopen($filepath, 'w');
+
+        // Setup file to be UTF8
+        fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+
+        $Speakers = PresentationSpeaker::get()
+        	->filter('SummitID', $activeSummit->ID);
+
+        foreach ($Speakers as $Speaker) {
+            
+            $AcceptedPresentations = $Speaker->AcceptedPresentations();
+
+            $PhotoURL = "";
+
+            if($Speaker->PhotoID != 0) $PhotoURL = 'http://www.openstack.org'.$Speaker->Photo()->getURL();
+
+            if($Speaker->Bio == NULL) {
+              $SpeakerWithBio = PresentationSpeaker::get()->filter(array(
+                  'MemberID' => $Speaker->MemberID,
+                  'Bio:not' => NULL
+              ))->first();
+              if($SpeakerWithBio && $SpeakerWithBio->Bio) $Speaker->Bio = $SpeakerWithBio->Bio;
+            }
+
+            if($AcceptedPresentations->count()) {
+                $fullName = $Speaker->FirstName . ' ' . $Speaker->LastName;
+                $fields = array($fullName, $Speaker->Member()->Email, ' ', ' ', $Speaker->Title, ' ', $Speaker->Bio, ' ', $PhotoURL);
+                fputcsv($fp, $fields);
+            }
+
+      }
+
+      fclose($fp);
+        
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        header("Content-disposition: attachment; filename=\"speaker-import.csv\"");
+        header("Content-Length: ".filesize($filepath));
+        readfile($filepath);
+        
+    }
+
+    public function handleRestoreOrders() {
+
+      $activeSummit = Summit::get_active();
+
+      $SummitCategories = DataObject::get('PresentationCategory',$activeSummit->ID);
+
+      foreach ($SummitCategories as $Category) {
+        // Grab the track chairs selections for the category
+                  
+        $SelectedPresentationList = SummitSelectedPresentationList::get()
+                            ->filter(array('CategoryID' => $Category->ID));
+
+        foreach ($SelectedPresentationList as $list) {
+        	$selections = $list->SummitSelectedPresentations()->sort('Order','ASC');
+        	$i = 1;
+        	foreach ($selections as $selection) {
+        		$selection->Order = $i;
+        		$selection->write();
+        		$i++;
+        	}
+        }
+      }
+
+    }
 
 }
 

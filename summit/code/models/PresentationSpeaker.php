@@ -192,5 +192,49 @@ implements IPresentationSpeaker
         $this->write();
     }
 
+    public function AcceptedPresentations() {
+        $AcceptedPresentations = new ArrayList();
+
+        $Presentations = $this->Presentations('`SummitID` = '.Summit::get_active()->ID);
+        foreach ($Presentations as $Presentation) {
+            if($Presentation->SelectionStatus() == "accepted") $AcceptedPresentations->push($Presentation);
+        }
+
+        return $AcceptedPresentations;
+    }
+
+    public function UnacceptedPresentations() {
+        $UnacceptedPresentations = new ArrayList();
+
+        $Presentations = $this->Presentations('`SummitID` = '.Summit::get_active()->ID);
+        foreach ($Presentations as $Presentation) {
+            if($Presentation->SelectionStatus() == "unaccepted") $UnacceptedPresentations->push($Presentation);
+        }
+
+        return $UnacceptedPresentations;
+    }
+
+    public function AlternatePresentations() {
+        $AlternatePresentations = new ArrayList();
+
+        $Presentations = $this->Presentations('`SummitID` = '.Summit::get_active()->ID);
+        foreach ($Presentations as $Presentation) {
+            if($Presentation->SelectionStatus() == "alternate") $AlternatePresentations->push($Presentation);
+        }
+
+        return $AlternatePresentations;
+    }
+
+    public function SpeakerConfirmHash() {
+        $id = $this->ID;
+        $prefix = "000";
+        $hash = base64_encode($prefix . $id);
+        return $hash;
+    }
+
+    public function RegistrationCode() {
+        return SummitRegCode::get()->filter('MemberID', $this->MemberID)->first();
+    }
+
 
 }
