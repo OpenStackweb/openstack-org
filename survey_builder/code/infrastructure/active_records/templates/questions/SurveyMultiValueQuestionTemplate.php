@@ -45,7 +45,7 @@ class SurveyMultiValueQuestionTemplate
 
         $fields = parent::getCMSFields();
 
-        $fields->add(new TextField('EmptyString', 'Empty String', 255));
+        $fields->add(new TextField('EmptyString', 'Empty String', '', 255));
 
         if($this->ID > 0 ){
             //validation rules
