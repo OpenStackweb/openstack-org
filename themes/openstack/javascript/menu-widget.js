@@ -47,7 +47,7 @@
             css_link.appendTo('head');
 
             /******* Load HTML *******/
-            var jsonp_url = "http://www.openstack.org/home/getNavigationMenu";
+            var jsonp_url = "http://devbranch.openstack.org/home/getNavigationMenu";
 
             $.ajax({
                 type: 'GET',
