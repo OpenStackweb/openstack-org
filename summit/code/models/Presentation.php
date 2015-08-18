@@ -484,6 +484,7 @@ class Presentation extends DataObject
 
     /**
      * Used by the track chair app see if the presentaiton has been selected by anyone at all.
+     * TODO: refactor to combine with isSelected() by passing optional memberID
      **/
 
     public function isSelectedByAnyone() {
@@ -505,6 +506,36 @@ class Presentation extends DataObject
             'Done' => TRUE
         ));
         if ($completedMove->count()) return true;
+    }
+
+    public function SelectionStatus() {
+
+        $Selections = SummitSelectedPresentation::get()
+            ->leftJoin('SummitSelectedPresentationList','SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID')
+            ->filter(array(
+                'PresentationID' => $this->ID,
+                'ListType' => 'Group'
+            ));
+
+        // Error out if a talk has more than one selection
+        if($Selections && $Selections->count() > 1) user_error('There cannot be more than one instance of this talk selected. Talk ID '.$this->ID);
+    
+        $Selection = NULL;
+        if ($Selections) $Selection = $Selections->first();
+
+        // Error out if the category of presentation does not match category of selection
+        if($Selection && $this->CategoryID != $Selection->SummitSelectedPresentationList()->Category()->ID)
+            user_error('The selection category does not match the presentation category. Presentation ID '.$this->ID);                
+
+
+        If (!$Selection) {
+            return 'unaccepted';
+        } elseif ($Selection->Order <= $this->Category()->SessionCount) {
+            return 'accepted';
+        } else {
+            return 'alternate';
+        }
+
     }
 
 }
