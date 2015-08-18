@@ -80,7 +80,7 @@ final class MultiDropdownField extends FormField {
 	public function Field($properties = array()) {
 		$options = '';
         if(count($this->selectedValues)== 0 && !empty($this->value)){
-            $this->selectedValues = preg_split("/[\s,]+/", $this->value);
+            $this->selectedValues = explode(',', $this->value);
         }
 		$source = $this->getSource();
 		if($source) {
