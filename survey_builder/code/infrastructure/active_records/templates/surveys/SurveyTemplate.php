@@ -202,7 +202,8 @@ class SurveyTemplate
         return $this->Steps()->sort('Order','ASC')->last();
     }
 
-    protected function validate() {
+    protected function validate()
+    {
         $valid = parent::validate();
         if(!$valid->valid()) return $valid;
 
@@ -226,12 +227,14 @@ class SurveyTemplate
             return $valid->error('selected date range is invalid!');
         }
 
-        $start_date = $this->StartDate;
-        $end_date   = $this->EndDate;
-
-        $res = DB::query("SELECT COUNT(ID) FROM SurveyTemplate WHERE ClassName = 'SurveyTemplate' AND ID <> {$id} AND ( (StartDate <= '{$end_date}')  AND  (EndDate >= '{$start_date}')) ;")->value();
-        if(intval($res) > 0 ){
-            return $valid->error('There is already another valid survey template under that date range!');
+        if($this->Enabled)
+        {
+            $start_date = $this->StartDate;
+            $end_date   = $this->EndDate;
+            $res        = DB::query("SELECT COUNT(ID) FROM SurveyTemplate WHERE ClassName = 'SurveyTemplate' AND Enabled = 1 AND ID <> {$id} AND ( (StartDate <= '{$end_date}') AND (EndDate >= '{$start_date}')) ;")->value();
+            if (intval($res) > 0) {
+                return $valid->error('There is already another valid survey template under that date range!');
+            }
         }
         return $valid;
     }
