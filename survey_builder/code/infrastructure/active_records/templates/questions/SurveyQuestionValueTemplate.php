@@ -91,7 +91,7 @@ class SurveyQuestionValueTemplate
         $valid = parent::validate();
         if(!$valid->valid()) return $valid;
 
-        if(empty($this->Value)){
+        if(trim($this->Value) === ''){
             return $valid->error('Value is empty!');
         }
 
