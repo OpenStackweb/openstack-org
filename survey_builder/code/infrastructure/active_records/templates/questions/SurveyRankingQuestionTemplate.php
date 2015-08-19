@@ -36,6 +36,9 @@ class SurveyRankingQuestionTemplate
 
         $fields = parent::getCMSFields();
 
+        $fields->removeByName('EmptyString');
+        $fields->removeByName('DefaultValueID');
+
         $fields->add(new NumericField('MaxItemsToRank', 'Max. Items To Rank'));
         $fields->add(new HtmlEditorField('Intro', 'Intro Text'));
 

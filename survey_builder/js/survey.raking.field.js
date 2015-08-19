@@ -80,6 +80,7 @@
                     var sorted = $('.selected-rank', control);
                     for (var i = 0; i < sorted.length; i++) {
                         clearRankElement($(sorted[i]));
+                        sorted.trigger('rank', false);
                     }
                 }
                 return false;
