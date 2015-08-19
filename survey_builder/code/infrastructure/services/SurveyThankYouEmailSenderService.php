@@ -31,7 +31,8 @@ final class SurveyThankYouEmailSenderService implements IMessageSenderService {
 
        $to    = $subject->createdBy()->getEmail();
        $from  = defined('SURVEY_THANK_U_FROM_EMAIL') ? SURVEY_THANK_U_FROM_EMAIL : Config::inst()->get('Email', 'admin_email');
-       $email = EmailFactory::getInstance()->buildEmail($from, $to, $template->emailSubject(), $template->emailHtmlBody());
+       $email_body = 'Dear '.$subject->createdBy()->getFirstName().': <br>'.$template->emailHtmlBody();
+       $email = EmailFactory::getInstance()->buildEmail($from, $to, $template->emailSubject(), $email_body);
        $email->send();
     }
 }
