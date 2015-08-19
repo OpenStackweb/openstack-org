@@ -49,7 +49,7 @@ class SurveyDynamicEntityStepTemplate
 
         $fields->add(new TextField('FriendlyName', 'Friendly Name'));
         $fields->add(new HtmlEditorField('Content', 'Content'));
-        $fields->add(new CheckboxField('SkipStep', 'Allow To Skip'));
+        $fields->add(new CheckboxField('SkipStep', 'Allow To Skip?'));
         $fields->add(new TextField('AddEntityText', 'Add Text'));
         $fields->add(new TextField('DeleteEntityText', 'Delete Text'));
         $fields->add(new TextField('EditEntityText', 'Edit Text'));

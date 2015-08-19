@@ -19,6 +19,8 @@ class RegularStepForm extends HoneyPotForm {
      */
     private $step;
 
+
+
     /**
      * @param Controller $controller
      * @param String $name

@@ -45,11 +45,10 @@
             var input = $('input.input-organization-name',  control);
 
             if(input.length > 0) {
-                input.autocomplete('/join/register/results', {
-                    minChars: 3,
-                    selectFirst: true,
-                    autoFill: true
-                });
+                input.autocomplete({
+                    source: 'surveys/organizations/suggest',
+                    minLength: 3,
+                })
             }
 
             if(ddl.length > 0) {

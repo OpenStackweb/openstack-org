@@ -286,4 +286,85 @@ final class SurveyManager implements ISurveyManager {
             }
         });
     }
+
+    /**
+     * @param int $entity_survey_id
+     * @param int $member_id
+     * @param IMessageSenderService $sender_service
+     * @return void
+     */
+    public function registerTeamMemberOnEntitySurvey(
+        $entity_survey_id,
+        $member_id,
+        IMessageSenderService $sender_service = null
+    ) {
+        $survey_repository   = $this->survey_repository;
+        $member_repository   = $this->member_repository;
+
+        return $this->tx_manager->transaction(function() use
+        (
+            $entity_survey_id,
+            $member_id,
+            $sender_service,
+            $member_repository,
+            $survey_repository
+        )
+        {
+
+            $member = $member_repository->getById($member_id);
+
+            if(is_null($member)) throw new NotFoundEntityException('Member','');
+
+            $survey = $survey_repository->getById($entity_survey_id);
+
+            if(is_null($survey)) throw new NotFoundEntityException('EntitySurvey','');
+
+            if(!$survey instanceof IEntitySurvey) throw new NotFoundEntityException('EntitySurvey','');
+
+            if($member->getIdentifier() === $survey->createdBy()->getIdentifier())
+                throw new Exception('You cant add owner as a team member!');
+
+            $survey->addTeamMember($member);
+
+            if(!is_null($sender_service))
+                $sender_service->send($member);
+        });
+    }
+
+    /**
+     * @param int $entity_survey_id
+     * @param int $member_id
+     * @return void
+     */
+    public function unRegisterTeamMemberOnEntitySurvey($entity_survey_id, $member_id)
+    {
+        $survey_repository   = $this->survey_repository;
+        $member_repository   = $this->member_repository;
+
+        return $this->tx_manager->transaction(function() use
+        (
+            $entity_survey_id,
+            $member_id,
+            $member_repository,
+            $survey_repository
+        )
+        {
+
+            $member = $member_repository->getById($member_id);
+
+            if(is_null($member)) throw new NotFoundEntityException('Member','');
+
+            $survey = $survey_repository->getById($entity_survey_id);
+
+            if(is_null($survey)) throw new NotFoundEntityException('EntitySurvey','');
+
+            if(!$survey instanceof IEntitySurvey) throw new NotFoundEntityException('EntitySurvey','');
+
+            if($member->getIdentifier() === $survey->createdBy()->getIdentifier())
+                throw new Exception('You cant add owner as a team member!');
+
+            $survey->removeTeamMember($member);
+
+        });
+    }
 }

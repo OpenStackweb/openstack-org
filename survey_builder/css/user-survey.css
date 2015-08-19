@@ -66,6 +66,7 @@ div.deployment {
 	margin-top: -1px;
 }
 
+
 div.deployment a.deployment-name {
 	display: inline-block;
 	margin: 10px;
@@ -452,4 +453,15 @@ div.deployment {
 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
     margin-left: 0px;
     position: absolute;
+}
+
+.entity-survey-label
+{
+    min-width: 200px !important;
+}
+
+.editor-info-panel
+{
+    margin-top:15px !important;
+    margin-bottom:15px !important;
 }

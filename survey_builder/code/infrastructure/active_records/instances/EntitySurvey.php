@@ -15,29 +15,36 @@
 /**
  * Class EntitySurvey
  */
-class EntitySurvey
-    extends Survey
-    implements IEntitySurvey {
+class EntitySurvey extends Survey implements IEntitySurvey
+{
 
-    static $db = array(
+    static $db = array
+    (
     );
 
-    static $indexes = array(
+    static $indexes = array
+    (
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'Template'  => 'EntitySurveyTemplate',
         'Parent'    => 'Survey',
         'Owner'     => 'SurveyDynamicEntityStep',
+        'EditedBy'  => 'Member'
     );
 
-    static $many_many = array(
+    static $many_many = array
+    (
+        'EditorTeam' => 'Member'
     );
 
-    static $has_many = array(
+    static $has_many = array
+    (
     );
 
-    private static $defaults = array(
+    private static $defaults = array
+    (
     );
 
     /**
@@ -56,7 +63,8 @@ class EntitySurvey
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
     }
 
-    protected function onBeforeDelete() {
+    protected function onBeforeDelete()
+    {
         parent::onBeforeDelete();
     }
 
@@ -75,5 +83,61 @@ class EntitySurvey
            }
         }
         return $this->ID;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTeamEditionAllowed()
+    {
+        return $this->Template()->UseTeamEdition;
+    }
+
+    /**
+     * @param ICommunityMember $member
+     * @return void
+     */
+    public function addTeamMember(ICommunityMember $member)
+    {
+       AssociationFactory::getInstance()->getMany2ManyAssociation($this,'EditorTeam')->add($member);
+    }
+
+    /**
+     * @param ICommunityMember $member
+     * @return void
+     */
+    public function removeTeamMember(ICommunityMember $member)
+    {
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this,'EditorTeam')->remove($member);
+    }
+
+    /**
+     * @return ICommunityMember
+     */
+    public function getUpdateBy()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'EditedBy')->getTarget();
+    }
+
+    /**
+     * @return ICommunityMember[]
+     */
+    public function getTeamMembers()
+    {
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'EditorTeam')->toArray();
+    }
+
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        $this->EditedByID = Member::currentUserID();
+    }
+
+    /**
+     * @return bool
+     */
+    public function iAmOwner()
+    {
+        return intval($this->CreatedByID) === intval(Member::currentUserID());
     }
 }

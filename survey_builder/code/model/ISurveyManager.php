@@ -76,4 +76,20 @@ interface ISurveyManager {
      * @return void
      */
     public function resetSteps(ISurvey $survey);
+
+
+    /**
+     * @param int $entity_survey_id
+     * @param int $member_id
+     * @param IMessageSenderService $sender_service
+     * @return void
+     */
+    public function registerTeamMemberOnEntitySurvey($entity_survey_id, $member_id, IMessageSenderService $sender_service = null);
+
+    /**
+     * @param int $entity_survey_id
+     * @param int $member_id
+     * @return void
+     */
+    public function unRegisterTeamMemberOnEntitySurvey($entity_survey_id, $member_id);
 }

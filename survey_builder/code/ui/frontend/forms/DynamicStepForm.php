@@ -30,7 +30,16 @@ class DynamicStepForm extends HoneyPotForm {
      * @param ISurveyDynamicEntityStep $step
      * @param null $validator
      */
-    function __construct($controller, $name, FieldList $fields, FieldList $actions, ISurveyDynamicEntityStep $step, $validator = null) {
+    function __construct
+    (
+        $controller,
+        $name,
+        FieldList $fields,
+        FieldList $actions,
+        ISurveyDynamicEntityStep $step,
+        $validator = null
+    )
+    {
         parent::__construct($controller, $name, $fields, $actions, $validator);
         $this->step = $step;
     }
@@ -38,18 +47,24 @@ class DynamicStepForm extends HoneyPotForm {
     /**
      * @return ISurveyDynamicEntityStep
      */
-    public function CurrentStep(){
+    public function CurrentStep()
+    {
         return $this->step;
     }
 
-    public function EntitiesSurveys(){
-        return new ArrayList($this->step->getEntitySurveys());
+    public function EntitiesSurveys()
+    {
+        $own_entity_surveys  = $this->step->getEntitySurveys();
+        $current_member      = Member::currentUser();
+        $team_entity_surveys = $current_member->TeamEntitySurveys()->toArray();
+        return new ArrayList(array_merge($own_entity_surveys, $team_entity_surveys));
     }
 
     /**
      * @return string
      */
-    public function EntityIconUrl(){
+    public function EntityIconUrl()
+    {
         $icon = $this->step->template()->EntityIcon();
         $icon_url = '/themes/openstack/images/user-survey/cloud.png';
         if($icon->ID > 0){
@@ -58,8 +73,14 @@ class DynamicStepForm extends HoneyPotForm {
         return $icon_url;
     }
 
-    public function EntityFriendlyName($id){
+    public function EntityFriendlyName($id)
+    {
         $entity = $this->step->getEntitySurvey(intval($id));
+        if(is_null($entity))
+        {
+            $current_member      = Member::currentUser();
+            $entity              = $current_member->TeamEntitySurveys()->filter('EntitySurveyID',intval($id))->first();
+        }
         return !is_null($entity)? $entity->getFriendlyName(): $id;
     }
 

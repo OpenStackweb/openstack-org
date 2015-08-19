@@ -20,8 +20,10 @@ class EntitySurveyTemplate
     implements IEntitySurveyTemplate {
 
 
-    static $db = array(
-        'EntityName'  => 'VarChar(255)',
+    static $db = array
+    (
+        'EntityName'     => 'VarChar(255)',
+        'UseTeamEdition' => 'Boolean',
     );
 
     static $indexes = array(
@@ -63,7 +65,8 @@ class EntitySurveyTemplate
         $fields = new FieldList();
 
         $fields->add(new TextField('EntityName','Entity Name (Without Spaces)'));
-        $fields->add(new CheckboxField('Enabled','Is Enabled'));
+        $fields->add(new CheckboxField('Enabled','Is Enabled?'));
+        $fields->add(new CheckboxField('UseTeamEdition', 'Allow Team Edition?'));
         $fields->add(new HiddenField('CreatedByID','CreatedByID', Member::currentUserID()));
         $fields->add(new HiddenField('ParentID','ParentID'));
         //steps

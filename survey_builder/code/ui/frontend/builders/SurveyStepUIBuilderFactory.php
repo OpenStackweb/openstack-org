@@ -39,9 +39,15 @@ final class SurveyStepUIBuilderFactory {
      * @param ISurveyStep $step
      * @return null|ISurveyStepUIBuilder
      */
-    public function build(ISurveyStep $step){
+    public function build(ISurveyStep $step)
+    {
         if($step->template() instanceof ISurveyRegularStepTemplate)
+        {
+            if($step->survey() instanceof IEntitySurvey)
+                return new EntitySurveyRegularStepTemplateUIBuilder;
+
             return new SurveyRegularStepTemplateUIBuilder;
+        }
         if($step->template() instanceof ISurveyDynamicEntityStepTemplate)
             return new SurveyDynamicEntityStepTemplateUIBuilder;
         if($step->template() instanceof ISurveyThankYouStepTemplate)

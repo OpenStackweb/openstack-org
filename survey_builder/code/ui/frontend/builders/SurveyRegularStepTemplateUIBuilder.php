@@ -15,8 +15,7 @@
 /**
  * Class SurveyRegularStepTemplateUIBuilder
  */
-class SurveyRegularStepTemplateUIBuilder
-    implements ISurveyStepUIBuilder
+class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
 {
 
     /**
