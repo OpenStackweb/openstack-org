@@ -1,4 +1,10 @@
 ---
+Name: surveybuilderextensions
+---
+Member:
+  extensions:
+    - EntitySurveyTeamMember
+---
 Name: surveybuilderapi
 ---
 Injector:

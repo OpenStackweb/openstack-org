@@ -4,14 +4,26 @@
             $FieldHolder
         <% end_loop %>
         <% if EntitiesSurveys %>
+            <div class="container">
             <% loop EntitiesSurveys %>
-                <div class="deployment">
-                    <img src="{$Top.EntityIconUrl}" width="30px" height="25px"/>
+                <div class="deployment row">
+                    <div class="col-md-1">
+                        <img src="{$Top.EntityIconUrl}" width="30px" height="25px"/>
+                    </div>
+                    <div class="col-md-9">
                     <span>$Top.EntityFriendlyName($ID)</span>
-                    <a href="/surveys/current/{$Top.CurrentStep.Template.Title}/edit/{$ID}" class="deployment-name">$Top.CurrentStep.Template.getEditEntityText</a>&nbsp;
-                    <a class="delete-entity" href="/surveys/current/{$Top.CurrentStep.Template.Title}/delete/{$ID}">$Top.CurrentStep.Template.getDeleteEntityText</a>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="btn btn-primary active btn-sm" href="/surveys/current/{$Top.CurrentStep.Template.Title}/edit/{$ID}">$Top.CurrentStep.Template.getEditEntityText</a>&nbsp;
+                    </div>
+                    <div class="col-md-1">
+                    <% if iAmOwner %>
+                    <a class="delete-entity btn btn-danger active btn-sm" href="/surveys/current/{$Top.CurrentStep.Template.Title}/delete/{$ID}">$Top.CurrentStep.Template.getDeleteEntityText</a>
+                    <% end_if %>
+                    </div>
                 </div>
             <% end_loop %>
+            </div>
         <% end_if %>
     </fieldset>
     <p>

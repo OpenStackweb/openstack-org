@@ -26,7 +26,8 @@ class Survey_Controller extends Page_Controller {
         'StartSurvey'
     );
 
-    static $allowed_actions = array(
+    static $allowed_actions = array
+    (
         'LandingPage',
         'RenderSurvey',
         'SurveyStepForm',
@@ -40,16 +41,25 @@ class Survey_Controller extends Page_Controller {
         'AddEntity',
         'EditEntity',
         'DeleteEntity',
-  );
+        'suggestMember',
+        'suggestOrganization',
+        'addTeamMember',
+        'deleteTeamMember',
+    );
 
-    static $url_handlers = array(
-        'landing'                                                    => 'LandingPage',
-        'current/$STEP_SLUG/add-entity'                              => 'AddEntity',
-        'current/$STEP_SLUG/skip-step'                               => 'SkipStep',
-        'current/$STEP_SLUG/edit/$ENTITY_SURVEY_ID//$SUB_STEP_SLUG'  => 'EditEntity',
-        'current/$STEP_SLUG/delete/$ENTITY_SURVEY_ID'                => 'DeleteEntity',
-        'current//$STEP_SLUG'                                        => 'RenderSurvey',
-        '$Action//$ID/$OtherID'                                      => 'handleAction',
+    static $url_handlers = array
+    (
+        'landing'                                                         => 'LandingPage',
+        'current/$STEP_SLUG/add-entity'                                   => 'AddEntity',
+        'current/$STEP_SLUG/skip-step'                                    => 'SkipStep',
+        'current/$STEP_SLUG/edit/$ENTITY_SURVEY_ID//$SUB_STEP_SLUG'       => 'EditEntity',
+        'current/$STEP_SLUG/delete/$ENTITY_SURVEY_ID'                     => 'DeleteEntity',
+        'current//$STEP_SLUG'                                             => 'RenderSurvey',
+        'team-members/suggest'                                            => 'suggestMember',
+        'POST entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID'   => 'addTeamMember',
+        'DELETE entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID' => 'deleteTeamMember',
+        'organizations/suggest'                                           => 'suggestOrganization',
+        '$Action//$ID/$OtherID'                                           => 'handleAction',
     );
 
     /**
@@ -113,7 +123,7 @@ class Survey_Controller extends Page_Controller {
         Requirements::css(Director::protocol() . '://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
         Requirements::css('survey_builder/css/user-survey.css');
         Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-        Requirements::css("themes/openstack/css/jquery.autocomplete.css");
+        Requirements::css("themes/openstack/javascript/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css");
 
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/behaviour/behaviour.js');
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/prototype/prototype.js');
@@ -122,7 +132,8 @@ class Survey_Controller extends Page_Controller {
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
         Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
+        Requirements::block("themes/openstack/javascript/jquery.autocomplete.min.js");
+        Requirements::javascript("themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js");
         Requirements::javascript('survey_builder/js/survey.validation.rules.jquery.js');
         Requirements::javascript('survey_builder/js/survey.controller.js');
     }
@@ -302,7 +313,8 @@ class Survey_Controller extends Page_Controller {
      * @return HTMLText|SS_HTTPResponse|void
      * @throws NotFoundEntityException
      */
-    public function EditEntity($request){
+    public function EditEntity($request)
+    {
 
         $step                 = $request->param('STEP_SLUG');
         $sub_step             = $request->param('SUB_STEP_SLUG');
@@ -313,9 +325,21 @@ class Survey_Controller extends Page_Controller {
         if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
 
         $this->current_entity_survey  = $current_step->getEntitySurvey($entity_survey_id);
+
+        if(is_null($this->current_entity_survey))
+        {
+            //check if its a entity survey from a team that i belong
+            $current_member = Member::currentUser();
+            $this->current_entity_survey = $current_member->TeamEntitySurveys()->filter('EntitySurveyID',$entity_survey_id)->first();
+        }
         if(is_null($this->current_entity_survey))
             return $this->httpError(404, 'entity not found!');
-        $this->current_entity_survey =  $this->survey_manager->updateSurveyWithTemplate($this->current_entity_survey, $this->current_entity_survey->template());
+
+        $this->current_entity_survey =  $this->survey_manager->updateSurveyWithTemplate
+        (
+            $this->current_entity_survey,
+            $this->current_entity_survey->template()
+        );
 
         if($sub_step === 'skip-step' && $this->current_entity_survey->currentStep()->canSkip()){
             $next_step = $this->survey_manager->completeStep($this->current_entity_survey->currentStep(), $data = array());
@@ -363,14 +387,25 @@ class Survey_Controller extends Page_Controller {
      * @return Form|string
      * @throws NotFoundEntityException
      */
-    public function SurveyDynamicEntityStepForm(){
+    public function SurveyDynamicEntityStepForm()
+    {
         $this->current_survey = $this->getCurrentSurveyInstance();
         $current_step        =  $this->current_survey->currentStep();
+
         if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
+
         $entity_survey_id     = intval($this->request->param('ENTITY_SURVEY_ID'));
         if($entity_survey_id == 0) $entity_survey_id = intval($this->request->postVar('ENTITY_SURVEY_ID'));
         $this->current_entity_survey  = $current_step->getEntitySurvey($entity_survey_id);
+
+        if(is_null($this->current_entity_survey))
+        {
+            //check if its a entity survey from a team that i belong
+            $current_member = Member::currentUser();
+            $this->current_entity_survey = $current_member->TeamEntitySurveys()->filter('EntitySurveyID',$entity_survey_id)->first();
+        }
         if(is_null($this->current_entity_survey)) throw new LogicException();
+
         $builder        = SurveyStepUIBuilderFactory::getInstance()->build($this->current_entity_survey->currentStep());
         if(is_null($builder)) return '<p>There is not set any form yet!</p>';
         $form           = $builder->build($this->current_entity_survey->currentStep(), 'NextDynamicEntityStep', 'SurveyDynamicEntityStepForm');
@@ -488,5 +523,99 @@ HTML;
         }
     }
 
+    public function suggestMember(SS_HTTPRequest $request)
+    {
+        if (!Director::is_ajax()) return $this->httpError(403);
+
+        $term = Convert::raw2sql($request->getVar('term'));
+
+        $members = Member::get()
+            ->where("Email LIKE '%{$term}%' OR FirstName LIKE '%{$term}%' OR Surname LIKE '%{$term}%' ")
+            ->sort('Email')
+            ->limit(10);
+
+        $items = array();
+
+        foreach ($members as $member) {
+            $items[] = array(
+                'id'    => $member->ID,
+                'label' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname, $member->Email) ,
+                'value' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname, $member->Email)
+            );
+        }
+
+        $response = new SS_HTTPResponse();
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode($items));
+
+        return $response;
+    }
+
+    public function suggestOrganization(SS_HTTPRequest $request)
+    {
+        if (!Director::is_ajax()) return $this->httpError(403);
+
+        $term = Convert::raw2sql($request->getVar('term'));
+        $orgs = Org::get()->filter('Name:PartialMatch', $term)
+            ->sort('Name')
+            ->limit(10);
+
+        $items = array();
+        foreach($orgs as $org)
+        {
+            $items[] = array(
+                'id'    => $org->ID,
+                'label' => $org->Name ,
+                'value' => $org->Name
+            );
+        }
+
+        $response = new SS_HTTPResponse();
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode($items));
+
+        return $response;
+    }
+
+    public function addTeamMember(SS_HTTPRequest $request)
+    {
+        if (!Director::is_ajax()) return $this->httpError(403);
+
+        $entity_survey_id  = (int)$request->param('ENTITY_SURVEY_ID');
+        $member_id         = (int)$request->param('MEMBER_ID');
+
+        try {
+            $this->survey_manager->registerTeamMemberOnEntitySurvey(
+                $entity_survey_id,
+                $member_id,
+                null
+            );
+            return true;
+        }
+        catch(Exception $ex)
+        {
+            return $this->httpError(500);
+        }
+    }
+
+    public function deleteTeamMember(SS_HTTPRequest $request)
+    {
+        if (!Director::is_ajax()) return $this->httpError(403);
+
+        $entity_survey_id = (int)$request->param('ENTITY_SURVEY_ID');
+        $member_id        = (int)$request->param('MEMBER_ID');
+
+        try {
+            $this->survey_manager->unRegisterTeamMemberOnEntitySurvey(
+                $entity_survey_id,
+                $member_id
+            );
+            return true;
+        }
+        catch(Exception $ex)
+        {
+            return $this->httpError(500);
+        }
+    }
 
 }

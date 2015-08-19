@@ -31,4 +31,36 @@ interface IEntitySurvey extends ISurvey {
      * @return string
      */
     public function getFriendlyName();
+
+    /**
+     * @return bool
+     */
+    public function isTeamEditionAllowed();
+
+    /**
+     * @param ICommunityMember $member
+     * @return void
+     */
+    public function addTeamMember(ICommunityMember $member);
+
+    /**
+     * @param ICommunityMember $member
+     * @return void
+     */
+    public function removeTeamMember(ICommunityMember $member);
+
+    /**
+     * @return ICommunityMember[]
+     */
+    public function getTeamMembers();
+
+    /**
+     * @return ICommunityMember
+     */
+    public function getUpdateBy();
+
+    /**
+     * @return bool
+     */
+    public function iAmOwner();
 }
