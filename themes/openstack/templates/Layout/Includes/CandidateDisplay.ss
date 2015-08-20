@@ -1,11 +1,7 @@
 		<div class="candidate">
 			<div class="span-2">
 				<% loop Member %>
-					<% if Photo.Exists %>
-						<a href="/community/members/profile/{$ID}">$Photo.SetWidth(50)</a> <p>&nbsp</p>
-					<% else %>
-						<a href="/community/members/profile/{$ID}"><img src="/themes/openstack/images/generic-profile-photo-small.png"></a><p>&nbsp;</p>
-					<% end_if %>
+					<a href="/community/members/profile/{$ID}">$ProfilePhoto(50)</a> <p>&nbsp</p>
 				<% end_loop %>
 			</div>
 			<div class="span-14 last">

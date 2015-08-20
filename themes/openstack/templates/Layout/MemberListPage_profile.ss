@@ -5,11 +5,7 @@
 <% with Profile %>
 
         <div class="span-4">
-            <% if Photo.Exists %>
-                $Photo.SetWidth(100) <p>&nbsp</p>
-            <% else %>
-                <img src="/themes/openstack/images/generic-profile-photo.png"><p>&nbsp;</p>
-            <% end_if %>
+            $ProfilePhoto()
         </div>
         <a name="profile-$ID"></a>
         <div class="details span-10 last">
