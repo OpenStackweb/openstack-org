@@ -1,6 +1,6 @@
 <div class="user-sidebar">
 <% with $CurrentMember.CurrentSpeakerProfile %>
-    <p class="user-img" <% if $Photo %>style="background-image: url($Photo.URL);"<% else %>style="background-image: url(/summit/images/generic-speaker-icon.png);"<% end_if %>></p>
+    <p class="user-img" style="background-image: url($Up.ProfilePhotoUrl(100,'speaker'));"></p>
     <h3 class="user-name">$Name</h3>
 
     <!-- Speaker Portal Navigation -->

@@ -15,7 +15,7 @@ $Content
 <hr/>
 <div class="candidate">
 <div class="span-4">
-	$Photo.SetWidth(100)
+	$Member.ProfilePhoto()
 	<p>&nbsp;</p>
 </div>
 

@@ -83,11 +83,42 @@ class MemberDecorator extends DataExtension {
 
     function ProfilePhoto($width=100){
         $img = $this->owner->Photo();
+        $twitter_name = $this->owner->TwitterName;
         if(!is_null($img)  && $img->exists() && Director::fileExists($img->Filename)){
             $img = $img->SetWidth($width);
             return "<img alt='{$this->owner->ID}_profile_photo' src='{$img->getURL()}' class='member-profile-photo'/>";
+        } elseif (!empty($twitter_name)) {
+            if ($width < 100) {
+                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=normal" />';
+            } else {
+                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=bigger" />';
+            }
+        } else {
+            if ($width < 100) {
+                return "<img src='themes/openstack/images/generic-profile-photo-small.png'/>";
+            } else {
+                return "<img src='themes/openstack/images/generic-profile-photo.png'/>";
+            }
         }
-        return "<img src='themes/openstack/images/generic-profile-photo.png'/>";
+    }
+
+    function ProfilePhotoUrl($width=100,$generic_photo_type='member') {
+        $img = $this->owner->Photo();
+        $twitter_name = $this->owner->TwitterName;
+        if(!is_null($img)  && $img->exists() && Director::fileExists($img->Filename)){
+            $img = $img->SetWidth($width);
+            return $img->getURL();
+        } elseif (!empty($twitter_name)) {
+            if ($width < 100) {
+                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=normal" />';
+            } else {
+                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=bigger" />';
+            }
+        } elseif ($generic_photo_type == 'speaker') {
+            return '/summit/images/generic-speaker-icon.png';
+        } else {
+            return 'themes/openstack/images/generic-profile-photo.png';
+        }
     }
 
     function getFullName(){
