@@ -2429,6 +2429,20 @@ a.hotel-alert-btn:hover {
 img.hotel-discount-chart {
   max-width: 100%;
 }
+.sold-out-hotel {
+  font-weight: 600;
+  color: #DA422F;
+  font-style: italic;
+  font-size: 1.3em;
+}
+.summit-location-message {
+  border-top: 1px solid #D4DCE5;
+  border-bottom: 1px solid #D4DCE5;
+  padding: 5px 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #DA422F;
+}
 .venue-map {
   height: 600px; }
 

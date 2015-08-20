@@ -123,7 +123,7 @@
             </p>
 
             <% if $LocationMessage %>
-                <p>
+                <p class="summit-location-message">
                     $LocationMessage
                 </p>
             <% end_if %>
