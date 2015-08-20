@@ -140,4 +140,14 @@ class EntitySurvey extends Survey implements IEntitySurvey
     {
         return intval($this->CreatedByID) === intval(Member::currentUserID());
     }
+
+    /**
+     * @param ICommunityMember $member
+     * @return bool
+     */
+    public function isTeamMember(ICommunityMember $member)
+    {
+        $member = $this->EditorTeam()->filter('MemberID', $member->getIdentifier())->first();
+        return !is_null($member);
+    }
 }

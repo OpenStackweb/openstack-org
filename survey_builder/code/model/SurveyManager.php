@@ -324,6 +324,9 @@ final class SurveyManager implements ISurveyManager {
             if($member->getIdentifier() === $survey->createdBy()->getIdentifier())
                 throw new Exception('You cant add owner as a team member!');
 
+            if($survey->isTeamMember($member))
+                throw new Exception('Member already belongs to team!');
+
             $survey->addTeamMember($member);
 
             if(!is_null($sender_service))

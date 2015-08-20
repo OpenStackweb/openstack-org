@@ -63,4 +63,10 @@ interface IEntitySurvey extends ISurvey {
      * @return bool
      */
     public function iAmOwner();
+
+    /**
+     * @param ICommunityMember $member
+     * @return bool
+     */
+    public function isTeamMember(ICommunityMember $member);
 }

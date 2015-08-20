@@ -10,7 +10,7 @@
             </div>
         </div>
         <% if TeamMembers %>
-        <div class="row">
+        <div class="row" id="team-members-container">
             <div class="col-md-12">
                 <table class="table">
                     <thead>
@@ -27,7 +27,7 @@
                         <td>$FirstName</td>
                         <td>$Surname</td>
                         <td>$Email</td>
-                        <td><button class="btn btn-danger acteamtive btn-sm delete-team-member" data-member-id="$ID">Delete</button></td>
+                        <td><button class="btn btn-danger active btn-sm delete-team-member" data-member-id="$ID">Delete</button></td>
                     </tr>
                     <% end_loop %>
                     </tbody>
