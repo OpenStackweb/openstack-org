@@ -1,5 +1,53 @@
 (function ($) {
 
+    var loadTeamMemberList = function(){
+
+        var entity_survey_id   = $('#ENTITY_SURVEY_ID').val();
+        $.ajax(
+            {
+                type: "GET",
+                url: '/surveys/entity-surveys/'+entity_survey_id+'/team-members',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.length === 0)
+                    {
+                        $('#team-members-container').hide();
+                        return;
+                    }
+
+                    var template = $('<tbody>' +
+                        '<tr>'+
+                        '<td class="fname"></td>'+
+                        '<td class="lname"></td>'+
+                        '<td class="email"></td>'+
+                        '<td><button class="btn btn-danger active btn-sm delete-team-member" data-member-id="$ID">Delete</button></td>'+
+                        '</tr>'+
+                        '</tbody>');
+
+                    var directives = {
+                        'tr':{
+                            'member<-context':{
+                                '.fname':'member.fname',
+                                '.lname':'member.lname',
+                                '.email':'member.email',
+                                '.delete-team-member@data-member-id':'member.id'
+                            }
+                        }
+                    };
+
+                    var body = $('#team-members-body');
+                    var html = template.render(data, directives);
+                    body.html(html.html());
+                    $('#team-members-container').show();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert( "Request failed: " + textStatus );
+                }
+            }
+        );
+    };
+
     $(document).ready(function() {
 
         var $auto_complete = $(".ss-member-autocomplete-field");
@@ -9,6 +57,7 @@
         {
            var new_team_member_id = $('#new-team-member-id').val();
            var entity_survey_id   = $('#ENTITY_SURVEY_ID').val();
+
            if(new_team_member_id === '')
            {
                alert('You must select a valid member!');
@@ -24,10 +73,15 @@
                     url: '/surveys/entity-surveys/'+entity_survey_id+'/team-members/'+new_team_member_id,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    complete: function (jqXHR,textStatus) {
-
+                    success: function () {
+                        loadTeamMemberList();
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
+                        if(jqXHR.status === 401)
+                        {
+                            alert(jqXHR.responseText);
+                            return;
+                        }
                         alert( "Request failed: " + textStatus );
                     }
                 }
@@ -37,19 +91,28 @@
         });
 
         $('.delete-team-member').live('click', function(event){
-
             if(window.confirm('Are you sure?'))
             {
-                var member_id = $(this).attr('data-member-id');
-                var entity_survey_id   = $('#ENTITY_SURVEY_ID').val();
+                var btn              = $(this);
+                var member_id        = btn.attr('data-member-id');
+                var entity_survey_id = $('#ENTITY_SURVEY_ID').val();
 
                 $.ajax(
                     {
                         type: "DELETE",
                         url: '/surveys/entity-surveys/'+entity_survey_id+'/team-members/'+member_id,
                         dataType: "json",
-                        complete: function (jqXHR,textStatus) {
-
+                        success: function () {
+                            var tr = btn.parent().parent();
+                            tr.fadeTo("slow",0.7, function(){
+                                $(this).remove();
+                                var body = $('#team-members-body');
+                                //check # rows
+                                if(body.children().length === 0)
+                                {
+                                    $('#team-members-container').hide();
+                                }
+                            })
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert( "Request failed: " + textStatus );

@@ -45,6 +45,7 @@ class Survey_Controller extends Page_Controller {
         'suggestOrganization',
         'addTeamMember',
         'deleteTeamMember',
+        'getTeamMembers'
     );
 
     static $url_handlers = array
@@ -56,6 +57,7 @@ class Survey_Controller extends Page_Controller {
         'current/$STEP_SLUG/delete/$ENTITY_SURVEY_ID'                     => 'DeleteEntity',
         'current//$STEP_SLUG'                                             => 'RenderSurvey',
         'team-members/suggest'                                            => 'suggestMember',
+        'GET entity-surveys/$ENTITY_SURVEY_ID/team-members'               => 'getTeamMembers',
         'POST entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID'   => 'addTeamMember',
         'DELETE entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID' => 'deleteTeamMember',
         'organizations/suggest'                                           => 'suggestOrganization',
@@ -129,13 +131,14 @@ class Survey_Controller extends Page_Controller {
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/behaviour/behaviour.js');
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/prototype/prototype.js');
         Requirements::block(SAPPHIRE_DIR . '/javascript/prototype_improvements.js');
+        Requirements::block("themes/openstack/javascript/jquery.autocomplete.min.js");
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
         Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-        Requirements::block("themes/openstack/javascript/jquery.autocomplete.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js");
         Requirements::javascript('survey_builder/js/survey.validation.rules.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/pure.min.js');
         Requirements::javascript('survey_builder/js/survey.controller.js');
     }
 
@@ -533,15 +536,19 @@ HTML;
         if (!Director::is_ajax()) return $this->httpError(403);
 
         $term = Convert::raw2sql($request->getVar('term'));
+        if(!Member::currentUser()) return $this->httpError(403);
+
+        $current_user_id = Member::currentUserID();
 
         $members = Member::get()
-            ->where("Email LIKE '%{$term}%' OR FirstName LIKE '%{$term}%' OR Surname LIKE '%{$term}%' ")
+            ->where("ID <> {$current_user_id} AND Email <> '' AND (Email LIKE '%{$term}%' OR FirstName LIKE '%{$term}%' OR Surname LIKE '%{$term}%')")
             ->sort('Email')
             ->limit(10);
 
         $items = array();
 
-        foreach ($members as $member) {
+        foreach ($members as $member)
+        {
             $items[] = array(
                 'id'    => $member->ID,
                 'label' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname, $member->Email) ,
@@ -559,6 +566,7 @@ HTML;
     public function suggestOrganization(SS_HTTPRequest $request)
     {
         if (!Director::is_ajax()) return $this->httpError(403);
+        if(!Member::currentUser()) return $this->httpError(403);
 
         $term = Convert::raw2sql($request->getVar('term'));
         $orgs = Org::get()->filter('Name:PartialMatch', $term)
@@ -585,27 +593,30 @@ HTML;
     public function addTeamMember(SS_HTTPRequest $request)
     {
         if (!Director::is_ajax()) return $this->httpError(403);
+        if(!Member::currentUser()) return $this->httpError(403);
 
         $entity_survey_id  = (int)$request->param('ENTITY_SURVEY_ID');
         $member_id         = (int)$request->param('MEMBER_ID');
 
         try {
-            $this->survey_manager->registerTeamMemberOnEntitySurvey(
+            $this->survey_manager->registerTeamMemberOnEntitySurvey
+            (
                 $entity_survey_id,
                 $member_id,
-                null
+                new EntitySurveyTeamMemberEmailSenderService
             );
             return true;
         }
         catch(Exception $ex)
         {
-            return $this->httpError(500);
+            return $this->httpError(401, $ex->getMessage());
         }
     }
 
     public function deleteTeamMember(SS_HTTPRequest $request)
     {
         if (!Director::is_ajax()) return $this->httpError(403);
+        if(!Member::currentUser()) return $this->httpError(403);
 
         $entity_survey_id = (int)$request->param('ENTITY_SURVEY_ID');
         $member_id        = (int)$request->param('MEMBER_ID');
@@ -616,6 +627,37 @@ HTML;
                 $member_id
             );
             return true;
+        }
+        catch(Exception $ex)
+        {
+            return $this->httpError(500);
+        }
+    }
+
+    public function getTeamMembers(SS_HTTPRequest $request)
+    {
+        if (!Director::is_ajax()) return $this->httpError(403);
+        if(!Member::currentUser()) return $this->httpError(403);
+
+        $entity_survey_id = (int)$request->param('ENTITY_SURVEY_ID');
+
+        try {
+            $entity_survey = $this->survey_repository->getById($entity_survey_id);
+            if(is_null($entity_survey) || !$entity_survey instanceof IEntitySurvey) return $this->httpError(404);
+            $items = array();
+            foreach($entity_survey->getTeamMembers() as $member)
+            {
+                $items[] = array(
+                    'id'    => $member->ID,
+                    'fname' => $member->FirstName ,
+                    'lname' => $member->Surname ,
+                    'email' => $member->Email ,
+                );
+            }
+            $response = new SS_HTTPResponse();
+            $response->addHeader('Content-Type', 'application/json');
+            $response->setBody(json_encode($items));
+            return $response;
         }
         catch(Exception $ex)
         {
