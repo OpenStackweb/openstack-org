@@ -309,7 +309,8 @@ class Survey_Controller extends Page_Controller {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
         $can_skip       = $current_step->canSkip();
-        if(!$can_skip)  $this->redirectBack();
+        if($current_step instanceof ISurveyDynamicEntityStep) $can_skip = true;
+        if(!$can_skip)  return $this->redirectBack();
         $next_step = $this->survey_manager->completeStep($current_step, $data = array());
         return $this->redirect('/surveys/current/'.$next_step->template()->title());
     }

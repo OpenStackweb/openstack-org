@@ -465,3 +465,8 @@ div.deployment {
     margin-top:15px !important;
     margin-bottom:15px !important;
 }
+
+.ui-autocomplete
+{
+    border: 1px solid #aaa !important;
+}
