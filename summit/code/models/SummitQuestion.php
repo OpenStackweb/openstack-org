@@ -34,6 +34,21 @@ class SummitQuestion extends DataObject
         $clean = strtolower(trim($clean, '-'));
         $clean = preg_replace("/[\/_|+ -]+/", '-', $clean);
         return $clean;
-    }   
-        
+    }
+
+    public function canEdit($member = null) {
+        return Permission::check('ADMIN') || Permission::check('CMS_ACCESS_CMSMain');
+    }
+
+    public function canCreate($member = null) {
+        return Permission::check('ADMIN') || Permission::check('CMS_ACCESS_CMSMain');
+    }
+
+    public function canDelete($member = null) {
+        return Permission::check('ADMIN') || Permission::check('CMS_ACCESS_CMSMain');
+    }
+
+    public function canView($member = null) {
+        return Permission::check('ADMIN') || Permission::check('CMS_ACCESS_CMSMain');
+    }
 }
