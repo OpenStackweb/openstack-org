@@ -470,7 +470,7 @@ class TrackChairAPI extends Controller {
 	                  }
 
 	                  // Output presentation row
-	                  $fields = array($p->ID, $p->Title, $p->Category()->Title, $p->Description, $Speakers);
+	                  $fields = array($Selection->Order, $p->ID, $p->Title, $p->Category()->Title, $p->Description, $Speakers);
 
 	                  fputcsv($fp, $fields);
 	            }
