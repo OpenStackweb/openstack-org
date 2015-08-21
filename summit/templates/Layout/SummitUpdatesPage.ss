@@ -34,7 +34,7 @@
 				<div class="section">
 					<h5 class="section-title">Summit Timeline</h5>
 					<p>
-						Soon you will be able to purchase the Full Access Pass for the Tokyo Summit, giving you access to every speaker and activity.
+						The Full Access Pass gives you the ability to attend the keynotes, marketplace, business sessions and working groups, encompassing everything the Summit has to offer in Tokyo.
 					</p>
 					<p>
 						<a href="#" data-toggle="modal" data-target="#passModal">
@@ -106,16 +106,16 @@
           </div>
           <div class="modal-body">
             <p>
-                You can purchase two types of passes to attend the Summit: Keynote + Marketplace Pass and Full Access Pass. 
+                The Full Access Pass gives you the ability to attend the keynotes, marketplace, business sessions and working groups, encompassing everything the Summit has to offer in Tokyo.
             </p>
             <hr>
             <p>
-            	<img class="pass-timeline-large" src="/summit/images/pass-timeline2.svg" onerror="this.onerror=null; this.src=/summit/images/pass-timeline2.png" alt="Vancouver Summit Pass Timeline"
+            	<img class="pass-timeline" src="http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/images/2cc1307702c5a6a166f21e85333d7b27e640a3ee/tokyo-pass-timeline.svg" onerror="this.onerror=null; this.src=http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/images/4abaa28e852f01a6e85ea47a214ad51ad953a0f9/tokyo-pass-timeline.png" alt="Tokyo Summit Pass Timeline">
             </p>
             <hr>
             <p>
                 <% if $CurrentSummit.RegistrationLink %>
-                    <a href="$RegistrationLink" class="modal-contact-btn"><i class="fa fa-tag"></i> Purchase Your Summit Pass</a>
+                    <a href="{$RegistrationLink}" class="modal-contact-btn"><i class="fa fa-tag"></i> Purchase Your Summit Pass</a>
                 <% end_if %>
             </p>
           </div>
