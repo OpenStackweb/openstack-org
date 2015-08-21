@@ -568,7 +568,7 @@ i.collapse-nav {
 @media (min-width: 981px) {
   .openNav .sidebar-nav {
     right: -50%; }
-  .closeNav .main-body {
+  .openNav .main-body {
     right: 0;
     left: 0; } }
 
