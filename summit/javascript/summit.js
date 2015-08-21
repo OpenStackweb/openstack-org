@@ -1,7 +1,11 @@
 
 // Toggle sidebar nav
 $(".open-panel").click(function(event){
-   $("body").toggleClass("openNav");
+    if($('body').hasClass('openNav')) {
+        $('body').removeClass('openNav').addClass('closeNav');
+    } else {
+        $('body').removeClass('closeNav').addClass('openNav');
+    }
     event.preventDefault();
     return false;
 });

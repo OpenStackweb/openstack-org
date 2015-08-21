@@ -539,11 +539,18 @@ i.collapse-nav {
   position: relative;
   right: 0;
   left: 0;
-  transition: all 0.5s ease-in-out; }
+}
 
 .openNav .main-body {
   right: 50%;
-  left: -50%; }
+  left: -50%; 
+  transition: all 0.5s ease-in-out; 
+}
+.closeNav .main-body {
+  right: 0;
+  left: 0;
+  transition: all 0.5s ease-in-out;  
+}
 
 .sidebar-nav {
   background: #222831;
@@ -561,7 +568,7 @@ i.collapse-nav {
 @media (min-width: 981px) {
   .openNav .sidebar-nav {
     right: -50%; }
-  .openNav .main-body {
+  .closeNav .main-body {
     right: 0;
     left: 0; } }
 
