@@ -3517,6 +3517,9 @@ a.schedule-btn {
   text-align: center;
   margin-bottom: 10px;
 }
+a.schedule-btn img {
+  max-width: 100%;
+}
 a#mainschedule-btn img, a#designschedule-btn img {
   max-width: 100%;
 }
