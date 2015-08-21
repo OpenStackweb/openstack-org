@@ -3510,3 +3510,39 @@ a.hotel-landing-select-btn {
   display: none; }
 
 /*End Hotel Landing Page*/
+
+/*Select your summit schedule*/
+a.schedule-btn {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+a#mainschedule-btn img, a#designschedule-btn img {
+  max-width: 100%;
+}
+img.schedule-selected {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+h3.schedule-select-title {
+  margin: 0 0 40px;
+  font-weight: 400;
+  font-size: 1.3em;
+}
+.select-schedule-wrapper {
+  margin-top: 40px;
+}
+.schedule-subnav {
+  margin-bottom: 20px;
+}
+.schedule-subnav a {
+  font-size: 0.9em;
+}
+.schedule-subnav a i {
+  margin-right: 5px;
+  font-size: 0.85em;
+}
+.schedule-subnav .right {
+  float: right;
+}
+/*End Select your summit schedule*/
