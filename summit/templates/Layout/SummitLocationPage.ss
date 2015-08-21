@@ -309,7 +309,7 @@
                             <div class="visa-step">
                                 <img src="/themes/openstack/images/summit/tokyo/visa-steps/5.png" alt="">
                                 <p>
-                                    Wait for your visa to be issued, wihch may take up to 10 business days and pict it up from the embassy.
+                                    Wait for your visa to be issued, which may take up to 10 business days and pick it up from the embassy.
                                 </p>
                             </div>
                         </div>
