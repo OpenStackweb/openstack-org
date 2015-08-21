@@ -3519,9 +3519,11 @@ a.schedule-btn {
 }
 a.schedule-btn img {
   max-width: 100%;
+  border: 6px solid white;
 }
-a#mainschedule-btn img, a#designschedule-btn img {
+a.schedule-btn img:hover {
   max-width: 100%;
+  border: 6px solid #D4DCE5;
 }
 img.schedule-selected {
   max-width: 100%;
