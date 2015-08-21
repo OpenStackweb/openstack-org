@@ -1,0 +1,14 @@
+[33mcommit 9c29d2fc9e4fd3e61fa6e42ea1606b941518906c[m
+Author: claudioredi <claudio@tipit.net>
+Date:   Wed Jun 10 19:36:09 2015 -0300
+
+    [credi] Refs #8942 - Change dropdown to three small links below Upcoming Events
+
+ events/_config/routes.yml                           |   1 [32m+[m
+ .../code/interfaces/restfull_api/EventTypeApi.php   |  76 [32m+++++++++++++[m
+ events/code/model/EventManager.php                  |  65 [32m++++++++++[m[31m-[m
+ events/code/ui/EventHolder.php                      | 119 [32m++++++++++++++[m[31m-------[m
+ events/css/events.list.css                          |  13 [32m+++[m
+ events/js/events.js                                 |  58 [32m++++++++[m[31m--[m
+ events/templates/Layout/EventHolder.ss              |  14 [32m+[m[31m--[m
+ 7 files changed, 290 insertions(+), 56 deletions(-)

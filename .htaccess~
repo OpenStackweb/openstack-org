@@ -1,0 +1,112 @@
+### SILVERSTRIPE START ###
+<Files *.ss>
+	Order deny,allow
+	Deny from all
+	Allow from 127.0.0.1
+</Files>
+
+<Files web.config>
+	Order deny,allow
+	Deny from all
+</Files>
+
+# This denies access to all yml files, since developers might include sensitive
+# information in them. See the docs for work-arounds to serve some yaml files
+<Files *.yml>
+	Order allow,deny
+	Deny from all
+</Files>
+
+ErrorDocument 404 /assets/error-404.html
+ErrorDocument 500 /assets/error-500.html
+ErrorDocument 400 /assets/error-400.html
+
+<IfModule mod_rewrite.c>
+	        SetEnv HTTP_MOD_REWRITE On
+            RewriteEngine On
+            RewriteBase '/'
+
+            RewriteRule ^vendor(/|$) - [F,L,NC]
+            RewriteRule silverstripe-cache(/|$) - [F,L,NC]
+            RewriteRule composer\.(json|lock) - [F,L,NC]
+
+            # Hide robots.txt for the www domain, but show it otherwise
+            # (so that crawlers don't index our subdomain which bypasses the CDN).
+            RewriteCond %{HTTP_HOST} !^www\.openstack\.org$ [NC]
+            RewriteCond %{REQUEST_URI} ^/robots.txt$ [NC]
+            RewriteRule robots.txt robots_for_direct.txt [L]
+
+            RewriteRule ^(blog) - [L]
+            RewriteRule ^(chat) - [L]
+
+            #old training url format must redirect to new format
+            RewriteCond %{REQUEST_URI} marketplace/training/company/(.*)
+            RewriteRule ^marketplace/training/company/(.*)$ http://%{HTTP_HOST}/marketplace/training/$1  [R,L]
+
+            #RewriteCond %{REQUEST_URI} !/maintenance/index.html$ [NC]
+            #RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif) [NC]
+            #RewriteRule .* /maintenance/index.html [R=302,L]
+
+            #SS3
+            RewriteCond %{REQUEST_URI} ^(.*)$
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_URI} !\.php$
+            RewriteRule .* framework/main.php?url=%1&%{QUERY_STRING} [L]
+
+</IfModule>
+### SILVERSTRIPE END ###
+
+php_value memory_limit 512M
+php_flag display_startup_errors 1
+php_flag display_errors 1
+php_flag html_errors 1
+php_flag log_errors 1
+php_value error_reporting 2147483647
+
+### http://httpd.apache.org/docs/2.2/mod/mod_expires.html
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/ico "access plus 1 year"
+  ExpiresByType text/css "access plus 24 hours"
+  ExpiresByType text/javascript "access plus 24 hours"
+  ExpiresByType application/x-javascript "access plus 24 hours"
+  ExpiresByType application/pdf "access plus 1 year"
+  ExpiresByType application/x-shockwave-flash "access plus 1 year"
+  ExpiresByType audio/x-wav "access plus 1 year"
+  ExpiresByType audio/mpeg "access plus 1 year"
+  ExpiresByType video/mpeg "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/quicktime "access plus 1 year"
+  ExpiresByType video/x-ms-wmv "access plus 1 year"
+</IfModule>
+
+## dont send server info
+<IfModule mod_headers.c>
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+  # Don't compress images, movies or zip files
+  ## images
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|svg|ico|bmp|pcx|tif|alpha|als|cel|icon|ps)$ no-gzip dont-vary
+  ## zip
+  SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar|arc|tar|dmg|jar|ace|arj|cab)$ no-gzip dont-vary
+  ## movies
+  SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|swf|mp?g|mpeg|m1v|mp2|mpa|mpe|ifo|vob|wmv|asf|m2v|qt|ogv|webm)$ no-gzip dont-vary
+  ## docs
+  SetEnvIfNoCase Request_URI \.(?:pdf|doc|docx|xls|xlsx|csv|key|ppt|pptx|ai|txt|rtf|pages|pps)$ no-gzip dont-vary
+  <IfModule mod_headers.c>
+    # properly handle requests coming from behind proxies
+    Header append Vary User-Agent
+  </IfModule>
+</IfModule>
