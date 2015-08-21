@@ -115,7 +115,7 @@
             <hr>
             <p>
                 <% if $CurrentSummit.RegistrationLink %>
-                    <a href="{$CurrentSummit.RegistrationLink}" class="modal-contact-btn"><i class="fa fa-tag"></i> Purchase Your Summit Pass</a>
+                    <a href="{$RegistrationLink}" class="modal-contact-btn"><i class="fa fa-tag"></i> Purchase Your Summit Pass</a>
                 <% end_if %>
             </p>
           </div>
