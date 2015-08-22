@@ -1,0 +1,66 @@
+/*Containers Page*/
+.intro-header.containers {
+  background: url(/themes/openstack/images/containers/hero-bkgd-containers.jpg) no-repeat center center;
+  background-size: cover;
+  position: relative; }
+  .intro-header.containers a.photo-credit {
+    bottom: 70px; }
+
+@media (max-width: 767px) {
+  .intro-header.containers .intro-message {
+    padding-bottom: 0; }
+  .intro-header.containers a.photo-credit {
+    bottom: 100px; }
+  .intro-header.containers .download-container {
+    margin-bottom: 50px; } }
+
+.containers-intro {
+  background-color: white;
+  padding: 40px 0 60px; }
+
+.containers-highlights {
+  background-color: #edf2f7;
+  padding: 60px 0;
+  color: #2A4E68;
+  text-align: center; }
+  .containers-highlights .single {
+    padding: 20px 2% 10px; }
+  .containers-highlights h2 {
+    text-align: center;
+    margin: 0 0 40px; }
+  .containers-highlights h4 {
+    font-size: 1.1em;
+    line-height: 1.5; }
+  .containers-highlights i {
+    color: #30739C;
+    margin-bottom: 10px; }
+  .containers-highlights a.blue-btn {
+    background-color: #2A4E68;
+    display: block;
+    max-width: 300px;
+    margin: 40px auto 30px; }
+
+.containers-action-wrapper {
+  text-align: center;
+  padding: 50px 0 90px;
+  background: white;
+  border-top: 1px solid #edf2f7; }
+  .containers-action-wrapper p {
+    text-align: center;
+    color: #2A4E68; }
+  .containers-action-wrapper a.containers-action-btn {
+    display: block;
+    max-width: 300px;
+    background: #DA422F;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    margin: 30px auto 0; }
+    .containers-action-wrapper a.containers-action-btn i {
+      margin-right: 5px;
+      font-size: 1.2em; }
+    .containers-action-wrapper a.containers-action-btn:hover {
+      background: #A51B1B;
+      text-decoration: none; }
+
+/*End Containers Page*/
