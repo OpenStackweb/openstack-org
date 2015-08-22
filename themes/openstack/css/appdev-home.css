@@ -1,0 +1,209 @@
+/*App Dev Home Page*/
+.intro-header.appdev {
+  background: url(/themes/openstack/images/appdev/hero-bg-blue.jpg) no-repeat center center;
+  background-size: cover; }
+  .intro-header.appdev .intro-message {
+    text-align: center;
+    padding-bottom: 30px; }
+    .intro-header.appdev .intro-message h1 {
+      text-align: center;
+      margin-bottom: 30px; }
+    .intro-header.appdev .intro-message p {
+      text-align: center; }
+
+a.photo-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 1.3em; }
+
+.appdev-download-row {
+  padding: 50px 0 60px;
+  background: #29abe2; }
+  .appdev-download-row h3 {
+    font-size: 1.4em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: white; }
+  .appdev-download-row p {
+    font-weight: 300;
+    color: #edf2f7; }
+  .appdev-download-row a.container-download-btn {
+    background: #2A4E68;
+    color: white;
+    padding: 15px;
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    margin-top: 50px; }
+    .appdev-download-row a.container-download-btn i {
+      margin-left: 5px; }
+    .appdev-download-row a.container-download-btn:hover {
+      background: #0C1722;
+      text-decoration: none; }
+
+@media (max-width: 767px) {
+  .appdev-download-row a.container-download-btn {
+    margin-top: 30px; } }
+
+.why-ues-wrapper.appdev {
+  padding: 60px 0 90px; }
+
+.why-ues-wrapper.appdev h1 {
+  text-transform: none;
+}
+
+.appdev-build-wrapper {
+  text-align: center; }
+  .appdev-build-wrapper h1 {
+    font-weight: 300;
+    margin-bottom: 20px; }
+  .appdev-build-wrapper p {
+    color: #2A4E68; }
+    .appdev-build-wrapper p a {
+      text-decoration: underline; }
+
+a.appdev-build-video {
+  display: block;
+  position: relative;
+  margin: 30px auto 40px;
+  max-width: 350px; }
+  a.appdev-build-video .play-button {
+    width: 30%;
+    top: 30%; }
+  a.appdev-build-video img {
+    max-width: 100%; }
+
+.appdev-apps-section {
+  padding: 90px 0;
+  background: white; }
+  .appdev-apps-section h2 {
+    font-weight: 300;
+    margin: 0 0 10px; }
+  .appdev-apps-section a.blue-btn i {
+    margin: 0 5px 0 0;
+    font-size: 1.1em; }
+
+.enterprise-why-icons.appdev {
+  text-align: center; }
+  .enterprise-why-icons.appdev h3 {
+    font-size: 1.65em;
+    margin: 0 auto 0px;
+    max-width: 80%;
+    min-height: 55px;
+    line-height: 1.2em; }
+  .enterprise-why-icons.appdev i {
+    font-size: 5em;
+    color: #30739C;
+    margin-bottom: 20px; }
+  .enterprise-why-icons.appdev p {
+    color: #56646e;
+    margin: auto;
+    font-size: 1em; }
+
+.appdev-quotes-wrapper {
+  background: white;
+  padding: 90px 0; }
+  .appdev-quotes-wrapper .section-title-center {
+    margin-bottom: 30px; }
+    .appdev-quotes-wrapper .section-title-center h1 {
+      margin-bottom: 40px; }
+    .appdev-quotes-wrapper .section-title-center p {
+      color: #2A4E68;
+      margin-bottom: 40px; }
+  .appdev-quotes-wrapper .appdev-quotes {
+    padding: 0;
+    text-align: center; }
+    .appdev-quotes-wrapper .appdev-quotes blockquote {
+      font-family: Georgia, serif;
+      font-weight: normal;
+      font-size: 1em;
+      border: none;
+      position: relative;
+      color: #2A4E68;
+      margin-bottom: 15px; }
+    .appdev-quotes-wrapper .appdev-quotes h4 {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #2A4E68;
+      text-transform: uppercase; }
+  .appdev-quotes-wrapper .appdev-quotes blockquote:before {
+    color: #edf2f7;
+    font-size: 5em;
+    position: absolute;
+    content: open-quote;
+    top: -30px;
+    left: -20px; }
+  .appdev-quotes-wrapper .appdev-quotes blockquote:after {
+    visibility: hidden;
+    content: close-quote; }
+
+.fixed-image.appdev {
+  background-image: url('/themes/openstack/images/appdev/fixed-bkgd.jpg'); }
+
+.video-wrapper.small .video-overlay {
+  top: 20%; }
+.video-wrapper.small .play-button {
+  width: 30%;
+  top: 20%; }
+  .video-wrapper.small .play-button img {
+    width: 100%; }
+
+@media (max-width: 1199px) {
+  .video-wrapper.small .video-overlay {
+    top: 10%; } }
+
+@media (max-width: 991px) {
+  .video-wrapper.small .video-overlay {
+    top: 0%; } }
+
+@media (max-width: 767px) {
+  .video-wrapper.small .video-overlay {
+    top: 75%; } }
+
+@media (max-width: 480px) {
+  .video-wrapper.small .video-overlay {
+    top: 30%; } }
+
+.appdev-action-wrapper {
+  text-align: center;
+  padding: 40px 0 60px; }
+  .appdev-action-wrapper h1 {
+    margin: 0 0 25px; }
+  .appdev-action-wrapper p {
+    text-align: center; }
+  .appdev-action-wrapper a.appdev-marketplace-btn {
+    display: block;
+    max-width: 300px;
+    background: #DA422F;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin: 30px auto 0; }
+    .appdev-action-wrapper a.appdev-marketplace-btn i {
+      margin-left: 5px;
+      font-size: 1.2em; }
+    .appdev-action-wrapper a.appdev-marketplace-btn:hover {
+      background: #A51B1B;
+      text-decoration: none; }
+
+i.appdev-try-icon {
+  color: #2A4E68;
+  font-size: 5em;
+  margin-bottom: 15px; }
+
+.border-left {
+  position: relative; }
+  .border-left:before {
+    content: '';
+    border-left: 1px solid #D4DCE5;
+    height: 100%;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: -15px; }
+
+/*End App Dev Home Page*/
