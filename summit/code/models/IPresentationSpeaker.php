@@ -12,8 +12,18 @@
  * limitations under the License.
  **/
 
-interface IPresentationSpeaker extends IEntity {
+/**
+ * Interface IPresentationSpeaker
+ */
+interface IPresentationSpeaker extends IEntity
+{
 
+    const AnnouncementEmailAccepted = 'ACCEPTED';
+    const AnnouncementEmailRejected = 'REJECTED';
+    const AnnouncementEmailAlternate = 'ALTERNATE';
+    const AnnouncementEmailAcceptedAlternate = 'ACCEPTED_ALTERNATE';
+    const AnnouncementEmailAcceptedRejected = 'ACCEPTED_REJECTED';
+    const AnnouncementEmailAlternateRejected = 'ALTERNATE_REJECTED';
     /**
      * @return bool
      */
@@ -29,4 +39,51 @@ interface IPresentationSpeaker extends IEntity {
      * @return void
      */
     public function associateMember(ICommunityMember $member);
+
+    /**
+     * @return bool
+     */
+    public function announcementEmailAlreadySent();
+
+    /**
+     * @return string|null
+     */
+    public function getAnnouncementEmailTypeSent();
+
+    /**
+     * @param string $email_type
+     * @return $this
+     */
+    public function registerAnnouncementEmailTypeSent($email_type);
+
+    /**
+     * @return bool
+     */
+    public function hasRejectedPresentations();
+
+    /**
+     * @return bool
+     */
+    public function hasApprovedPresentations();
+
+    /**
+     * @return bool
+     */
+    public function hasAlternatePresentations();
+
+    /**
+     * @param ISpeakerSummitRegistrationPromoCode $promo_code
+     * @return $this
+     */
+    public function registerSummitPromoCode(ISpeakerSummitRegistrationPromoCode $promo_code);
+
+    /**
+     * @return bool
+     */
+    public function hasSummitPromoCode();
+
+    /**
+     * @return ISpeakerSummitRegistrationPromoCode
+     */
+    public function getSummitPromoCode();
 }

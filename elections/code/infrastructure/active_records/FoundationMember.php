@@ -20,16 +20,20 @@ final class FoundationMember
     implements IFoundationMember, ICommunityMember
 {
 
-    private static $db = array(
+    private static $db = array
+    (
         'ShowDupesOnProfile' => "Boolean"
     );
 
-    private static $has_many = array(
+    private static $has_many = array
+    (
         'RevocationNotifications' => 'FoundationMemberRevocationNotification',
-        'Votes' => 'Vote'
+        'Votes' => 'Vote',
+        'SummitRegistrationCodes' => 'SummitRegistrationPromoCode'
     );
 
-    private static $defaults = array(
+    private static $defaults = array
+    (
         'ShowDupesOnProfile' => TRUE
     );
 
@@ -335,5 +339,32 @@ final class FoundationMember
     public function shouldShowDupesOnProfile()
     {
         return $this->owner->getField('ShowDupesOnProfile');
+    }
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasPromoRegistrationCode($summit_id)
+    {
+        // TODO: Implement hasPromoRegistrationCode() method.
+    }
+
+    /**
+     * @param int $summit_id
+     * @return ISummitRegistrationPromoCode
+     */
+    public function getPromoCodeForSummit($summit_id)
+    {
+        // TODO: Implement getPromoCodeForSummit() method.
+    }
+
+    /**
+     * @param ISummitRegistrationPromoCode $promo_code
+     * @return $this
+     */
+    public function registerPromoCode(ISummitRegistrationPromoCode $promo_code)
+    {
+        // TODO: Implement registerPromoCode() method.
     }
 }
