@@ -18,7 +18,9 @@ implements IPresentationSpeaker
         'FundedTravel' => 'Boolean',
         'Expertise' => 'Text',
         'Country' => 'Varchar(2)',
-        'BeenEmailed' => 'Boolean'
+        'BeenEmailed' => 'Boolean',
+        'AnnouncementEmailTypeSent' => "Enum('ACCEPTED,REJECTED,ALTERNATE,ACCEPTED_ALTERNATE,ACCEPTED_REJECTED,ALTERNATE_REJECTED,NONE','NONE')",
+        'AnnouncementEmailSentDate' => 'SS_Datetime',
     );
 
 
@@ -237,4 +239,80 @@ implements IPresentationSpeaker
     }
 
 
+    /**
+     * @return bool
+     */
+    public function announcementEmailAlreadySent()
+    {
+        $email_type = $this->AnnouncementEmailTypeSent;
+        return !is_null($email_type);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAnnouncementEmailTypeSent()
+    {
+       return $this->AnnouncementEmailTypeSent;
+    }
+
+    /**
+     * @param string $email_type
+     * @throws Exception
+     */
+    public function registerAnnouncementEmailTypeSent($email_type)
+    {
+        if($this->announcementEmailAlreadySent()) throw new Exception('Announcement Email already sent');
+        $this->AnnouncementEmailTypeSent = $email_type;
+        $this->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRejectedPresentations()
+    {
+        // TODO: Implement hasRejectedPresentations() method.
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasApprovedPresentations()
+    {
+        // TODO: Implement hasApprovedPresentations() method.
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAlternatePresentations()
+    {
+        // TODO: Implement hasAlternatePresentations() method.
+    }
+
+    /**
+     * @param ISpeakerSummitRegistrationPromoCode $promo_code
+     * @return $this
+     */
+    public function registerSummitPromoCode(ISpeakerSummitRegistrationPromoCode $promo_code)
+    {
+        // TODO: Implement registerSummitPromoCode() method.
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSummitPromoCode()
+    {
+        // TODO: Implement hasSummitPromoCode() method.
+    }
+
+    /**
+     * @return ISpeakerSummitRegistrationPromoCode
+     */
+    public function getSummitPromoCode()
+    {
+        // TODO: Implement getSummitPromoCode() method.
+    }
 }
