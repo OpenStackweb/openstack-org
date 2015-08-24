@@ -26,6 +26,39 @@ class SurveyTemplateAdmin extends ModelAdmin {
     public function init()
     {
         parent::init();
+
+        $script = '
+        var origin_fields =
+        {
+            "DeploymentSurvey" : [],
+            "AppDevSurvey" : [],
+            "Deployment" : []
+        };
+        ';
+
+        foreach(DeploymentSurveyFields::toArray() as $key)
+        {
+            $script .= sprintf("origin_fields.DeploymentSurvey.push('%s');", $key);
+        }
+
+        foreach(AppDevSurveyFields::toArray() as $key)
+        {
+            $script .= sprintf("origin_fields.AppDevSurvey.push('%s');", $key);
+        }
+
+        foreach(DeploymentFields::toArray() as $key)
+        {
+            $script .= sprintf("origin_fields.Deployment.push('%s');", $key);
+        }
+
+        $path = ASSETS_PATH."/survey.builder.origin.fields.js";
+        $custom_script_file = fopen($path, "w") or die("Unable to open file!");
+        fwrite($custom_script_file, $script);
+        fclose($custom_script_file);
+
+        Requirements::javascript('assets/survey.builder.origin.fields.js');
+        Requirements::javascript('survey_builder/js/active_records/old.datamodel.survey.migration.mapping.js');
+
     }
 
     public function getEditForm($id = null, $fields = null) {

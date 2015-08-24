@@ -147,7 +147,8 @@ class Survey_Controller extends Page_Controller {
      * @param $action
      * @return HTMLText|SS_HTTPResponse
      */
-    protected function handleAction($request, $action) {
+    protected function handleAction($request, $action)
+    {
         if (!Member::currentUser()) {
             if (!in_array($action, self::$allowed_actions_without_auth)) {
                 return $this->redirect("/surveys/landing?BackURL=" . urlencode('/surveys/current'));
@@ -238,8 +239,11 @@ class Survey_Controller extends Page_Controller {
             throw new NotFoundEntityException('SurveyTemplate', 'current template not set');
 
         if(!is_null($this->current_survey)) return $this->current_survey;
+
         $current_survey_id = Session::get('CURRENT_SURVEY_ID');
-        if (!empty($current_survey_id)){
+
+        if (!empty($current_survey_id))
+        {
             $this->current_survey = $this->survey_repository->getById($current_survey_id);
             if($this->current_survey->template()->getIdentifier() !== $current_template->getIdentifier())
             {
@@ -247,10 +251,19 @@ class Survey_Controller extends Page_Controller {
                 Session::clear('CURRENT_SURVEY_ID');
             }
         }
-        if(is_null($this->current_survey)){
+
+        if(is_null($this->current_survey))
+        {
 
             $this->current_survey     = $this->survey_manager->buildSurvey($current_template->getIdentifier(), Member::currentUserID());
             Session::set('CURRENT_SURVEY_ID', $this->current_survey->getIdentifier());
+
+            // check if we should pre populate with former data ....
+
+            if($current_template->shouldPrepopulateWithFormerData())
+            {
+                $this->survey_manager->doAutopopulation($this->current_survey, new OldSurveyDataAutopopulationStrategy);
+            }
         }
 
         $this->current_survey = $this->survey_manager->updateSurveyWithTemplate($this->current_survey, $current_template);

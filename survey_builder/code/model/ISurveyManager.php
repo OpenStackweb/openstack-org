@@ -92,4 +92,11 @@ interface ISurveyManager {
      * @return void
      */
     public function unRegisterTeamMemberOnEntitySurvey($entity_survey_id, $member_id);
+
+    /**
+     * @param ISurvey $survey
+     * @param ISurveyAutopopulationStrategy $strategy
+     * @return mixed
+     */
+    public function doAutopopulation(ISurvey $survey, ISurveyAutopopulationStrategy $strategy);
 }

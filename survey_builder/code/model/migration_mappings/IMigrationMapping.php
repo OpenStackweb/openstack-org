@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,22 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-interface IEntitySurveyTemplate extends ISurveyTemplate
+interface IMigrationMapping
 {
+    /**
+     * @return ISurvey
+     */
+    public function getTargetSurvey();
 
     /**
-     * @return string
+     * @return ISurveyQuestionTemplate
      */
-    public function getEntityName();
-
-    /**
-     * @return bool
-     */
-    public function belongsToDynamicStep();
-
-    /**
-     * @return ISurveyDynamicEntityStepTemplate
-     */
-    public function getDynamicStepTemplate();
+    public function getTargetQuestion();
 }

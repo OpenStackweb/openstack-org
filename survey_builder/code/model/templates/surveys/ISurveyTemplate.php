@@ -57,4 +57,20 @@ interface ISurveyTemplate extends IEntity {
      * @return ISurveyStepTemplate
      */
     public function getLastStep();
+
+    /**
+     * @return bool
+     */
+    public function shouldPrepopulateWithFormerData();
+
+    /**
+     * @return IMigrationMapping[]
+     */
+    public function getAutopopulationMappings();
+
+    /**
+     * @return IEntitySurveyTemplate[]
+     */
+    public function getEntities();
+
 }

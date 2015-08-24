@@ -158,7 +158,8 @@ final class SurveyManager implements ISurveyManager {
             if($current_step instanceof ISurveyRegularStep) {
                 $current_step->clearAnswers();
                 foreach ($current_step->template()->getQuestions() as $q) {
-                    if (isset($data[$q->name()])) {
+                    if (isset($data[$q->name()]))
+                    {
                         // its has an answer set
                         if($q->name() === SurveyOrganizationQuestionTemplate::FieldName){
                             //publish event
@@ -368,6 +369,19 @@ final class SurveyManager implements ISurveyManager {
 
             $survey->removeTeamMember($member);
 
+        });
+    }
+
+    /**
+     * @param ISurvey $survey
+     * @param ISurveyAutopopulationStrategy $strategy
+     * @return mixed
+     */
+    public function doAutopopulation(ISurvey $survey, ISurveyAutopopulationStrategy $strategy)
+    {
+        $this->tx_manager->transaction(function() use($survey, $strategy)
+        {
+            $strategy->autoPopulate($survey);
         });
     }
 }

@@ -12,37 +12,43 @@
  * limitations under the License.
  **/
 
-class SurveyTemplate
-    extends DataObject
-    implements ISurveyTemplate {
+class SurveyTemplate extends DataObject implements ISurveyTemplate {
 
-    static $db = array(
+    static $db = array
+    (
         'Title'     => 'VarChar(255)',
         'StartDate' => 'SS_Datetime',
         'EndDate'   => 'SS_Datetime',
         'Enabled'   => 'Boolean',
     );
 
-    static $indexes = array(
+    static $indexes = array
+    (
         'Title' => array('type' => 'unique', 'value' => 'Title')
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'CreatedBy' => 'Member',
     );
 
-    static $many_many = array(
+    static $many_many = array
+    (
     );
 
-    static $has_many = array(
-        'Steps'         => 'SurveyStepTemplate',
-        'EntitySurveys' => 'EntitySurveyTemplate',
+    static $has_many = array
+    (
+        'Steps'             => 'SurveyStepTemplate',
+        'EntitySurveys'     => 'EntitySurveyTemplate',
+        'MigrationMappings' => 'AbstractSurveyMigrationMapping',
     );
 
-    private static $defaults = array(
+    private static $defaults = array
+    (
     );
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
 
         $fields = new FieldList();
 
@@ -63,22 +69,27 @@ class SurveyTemplate
         $fields->add(new HiddenField('CreatedByID','CreatedByID', Member::currentUserID()));
 
         //steps
-        if($this->ID > 0) {
+        if($this->ID > 0)
+        {
             // steps
             $config = GridFieldConfig_RecordEditor::create();
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
 
-            $step_types = array(
+            $step_types = array
+            (
                 'SurveyRegularStepTemplate'       => 'Regular Step' ,
                 'SurveyDynamicEntityStepTemplate' => 'Entities Holder Step',
             );
+
             $count = $this->Steps()->filter('ClassName', 'SurveyThankYouStepTemplate')->count();
-            if(intval($count) === 0){
+            if(intval($count) === 0)
+            {
                 $step_types['SurveyThankYouStepTemplate'] ='Thank You (Final)';
             }
 
-            $multi_class_selector->setClasses(
+            $multi_class_selector->setClasses
+            (
                 $step_types
             );
 
@@ -91,7 +102,28 @@ class SurveyTemplate
             $config    = GridFieldConfig_RecordEditor::create();
             $gridField = new GridField('EntitySurveys', 'Entities', $this->EntitySurveys(), $config);
             $fields->add($gridField);
+
+
+            //migration Mappings
+            $config    = GridFieldConfig_RecordEditor::create();
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+
+            $migration_mapping_types = array
+            (
+                'OldDataModelSurveyMigrationMapping' => 'Old Survey Data Mapping' ,
+            );
+
+            $multi_class_selector->setClasses
+            (
+                $migration_mapping_types
+            );
+
+            $config->addComponent($multi_class_selector);
+            $gridField = new GridField('MigrationMappings', 'Migration Mappings', $this->MigrationMappings(), $config);
+            $fields->add($gridField);
         }
+
         return $fields;
     }
 
@@ -107,12 +139,14 @@ class SurveyTemplate
         return $validator_fields;
     }
 
-    protected function onAfterWrite() {
+    protected function onAfterWrite()
+    {
         parent::onAfterWrite();
         // fix for order
     }
 
-    protected function onBeforeDelete() {
+    protected function onBeforeDelete()
+    {
         parent::onBeforeDelete();
         foreach($this->Steps() as $s){
             $s->delete();
@@ -237,5 +271,29 @@ class SurveyTemplate
             }
         }
         return $valid;
+    }
+
+    /**
+     * @return bool
+     */
+    public function shouldPrepopulateWithFormerData()
+    {
+        return $this->MigrationMappings()->count();
+    }
+
+    /**
+     * @return IMigrationMapping[]
+     */
+    public function getAutopopulationMappings()
+    {
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'MigrationMappings')->toArray();
+    }
+
+    /**
+     * @return IEntitySurveyTemplate[]
+     */
+    public function getEntities()
+    {
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->toArray();
     }
 }
