@@ -15,9 +15,7 @@
 /**
  * Class EntitySurveyTemplate
  */
-class EntitySurveyTemplate
-    extends SurveyTemplate
-    implements IEntitySurveyTemplate {
+class EntitySurveyTemplate extends SurveyTemplate implements IEntitySurveyTemplate {
 
 
     static $db = array
@@ -64,6 +62,8 @@ class EntitySurveyTemplate
 
         $fields = new FieldList();
 
+        $_REQUEST['entity_survey'] = 1;
+
         $fields->add(new TextField('EntityName','Entity Name (Without Spaces)'));
         $fields->add(new CheckboxField('Enabled','Is Enabled?'));
         $fields->add(new CheckboxField('UseTeamEdition', 'Allow Team Edition?'));
@@ -84,6 +84,25 @@ class EntitySurveyTemplate
             $config->addComponent($multi_class_selector);
             $config->addComponent(new GridFieldSortableRows('Order'));
             $gridField = new GridField('Steps', 'Steps', $this->Steps(), $config);
+            $fields->add($gridField);
+
+            $config    = GridFieldConfig_RecordEditor::create();
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+
+            $migration_mapping_types = array
+            (
+                'OldDataModelSurveyMigrationMapping' => 'Old Survey Data Mapping' ,
+            );
+
+
+            $multi_class_selector->setClasses
+            (
+                $migration_mapping_types
+            );
+
+            $config->addComponent($multi_class_selector);
+            $gridField = new GridField('MigrationMappings', 'Migration Mappings', $this->MigrationMappings(), $config);
             $fields->add($gridField);
         }
         return $fields;
@@ -127,4 +146,20 @@ class EntitySurveyTemplate
         parent::onBeforeDelete();
     }
 
+    /**
+     * @return bool
+     */
+    public function belongsToDynamicStep()
+    {
+        $owner_step = $this->getDynamicStepTemplate();
+        return !is_null($owner_step);
+    }
+
+    /**
+     * @return ISurveyDynamicEntityStepTemplate
+     */
+    public function getDynamicStepTemplate()
+    {
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
+    }
 }
