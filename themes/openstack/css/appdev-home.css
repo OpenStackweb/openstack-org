@@ -9,7 +9,9 @@
       text-align: center;
       margin-bottom: 30px; }
     .intro-header.appdev .intro-message p {
-      text-align: center; }
+      text-align: center; 
+      font-size: 18px;
+    }
 
 a.photo-credit {
   position: absolute;
@@ -37,23 +39,32 @@ a.photo-credit {
     width: 100%;
     border-radius: 4px;
     display: block;
-    margin-top: 50px; }
+    margin-top: 20px; }
     .appdev-download-row a.container-download-btn i {
       margin-left: 5px; }
     .appdev-download-row a.container-download-btn:hover {
       background: #0C1722;
       text-decoration: none; }
 
+i.appdev-download-icon {
+  color: #2A4E68;
+  text-align: center; }
+
 @media (max-width: 767px) {
   .appdev-download-row a.container-download-btn {
     margin-top: 30px; } }
 
+.testimonial-row.appdev {
+  background-color: #edf2f7; 
+  margin-bottom: -50px;
+}
+  .testimonial-row.appdev blockquote {
+    color: #2A4E68; }
+  .testimonial-row.appdev blockquote:before, .testimonial-row.appdev blockquote:after {
+    color: #D4DCE5; }
+
 .why-ues-wrapper.appdev {
   padding: 60px 0 90px; }
-
-.why-ues-wrapper.appdev h1 {
-  text-transform: none;
-}
 
 .appdev-build-wrapper {
   text-align: center; }
@@ -62,13 +73,22 @@ a.photo-credit {
     margin-bottom: 20px; }
   .appdev-build-wrapper p {
     color: #2A4E68; }
+    .appdev-build-wrapper p i {
+      color: #D4DCE5; }
     .appdev-build-wrapper p a {
       text-decoration: underline; }
+  .appdev-build-wrapper .appdev-build-row {
+    margin-top: 30px; }
+  .appdev-build-wrapper a.appdev-build-cover {
+    display: block;
+    margin-top: 15px; }
+    .appdev-build-wrapper a.appdev-build-cover img {
+      max-height: 200px; }
 
 a.appdev-build-video {
   display: block;
   position: relative;
-  margin: 30px auto 40px;
+  margin: 10px auto 40px;
   max-width: 350px; }
   a.appdev-build-video .play-button {
     width: 30%;
@@ -169,19 +189,20 @@ a.appdev-build-video {
 
 .appdev-action-wrapper {
   text-align: center;
-  padding: 40px 0 60px; }
+  padding: 40px 0 60px;
+  background: #edf2f7; }
   .appdev-action-wrapper h1 {
     margin: 0 0 25px; }
   .appdev-action-wrapper p {
     text-align: center; }
   .appdev-action-wrapper a.appdev-marketplace-btn {
     display: block;
-    max-width: 300px;
+    max-width: 350px;
     background: #DA422F;
     color: white;
     padding: 15px 20px;
     border-radius: 4px;
-    text-transform: uppercase;
+    text-transform: none;
     margin: 30px auto 0; }
     .appdev-action-wrapper a.appdev-marketplace-btn i {
       margin-left: 5px;
@@ -205,5 +226,14 @@ i.appdev-try-icon {
     top: 10px;
     bottom: 10px;
     left: -15px; }
+
+.featured-wrapper.appdev .video-wrapper.small {
+  margin-bottom: 10px; }
+.featured-wrapper.appdev p.video-title {
+  margin: 0 auto;
+  font-size: 14px;
+  font-weight: 400;
+  width: 100%;
+  color: #2A4E68; }
 
 /*End App Dev Home Page*/

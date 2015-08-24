@@ -283,7 +283,7 @@ a.marketplace-btn:hover {
   color: #445059;
   font-weight: 300;
   margin: 0 0 60px;
-  text-transform: none; }
+  text-transform: capitalize; }
 
 .steps-section h2 {
   font-size: 1.8em;
