@@ -26,6 +26,7 @@ class SurveyCheckBoxListQuestionTemplate
 
         if($this->ID > 0 ){
             $fields->removeByName('DefaultValueID');
+            $fields->removeByName('EmptyString');
         }
 
         return $fields;

@@ -379,9 +379,11 @@ final class SurveyManager implements ISurveyManager {
      */
     public function doAutopopulation(ISurvey $survey, ISurveyAutopopulationStrategy $strategy)
     {
-        $this->tx_manager->transaction(function() use($survey, $strategy)
+        $survey_builder = $this->survey_builder;
+        $this_var      = $this;
+        $this->tx_manager->transaction(function() use($survey, $strategy, $survey_builder, $this_var)
         {
-            $strategy->autoPopulate($survey);
+            $strategy->autoPopulate($survey, $survey_builder, $this_var);
         });
     }
 }

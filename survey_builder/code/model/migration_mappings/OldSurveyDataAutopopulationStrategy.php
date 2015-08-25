@@ -26,7 +26,7 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
         $owner      = $survey->createdBy();
         $mappings   = $template->getAutopopulationMappings();
         // get former survey ...
-        $old_survey = DeploymentSurvey::get()->filter('MemberID', $owner->getIdentifier());
+        $old_survey = DeploymentSurvey::get()->filter('MemberID', $owner->getIdentifier())->sort('Created', 'DESC')->first();
 
         foreach($mappings as $mapping)
         {
@@ -42,7 +42,21 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
 
             if($origin_table_name === 'DeploymentSurvey')
             {
-                $data          = $old_survey->$origin_field_name;
+                $old_data = $old_survey->$origin_field_name;
+                // old data is only a label, we need to find out the value
+                $data = $old_data;
+                if($question instanceof IMultiValueQuestionTemplate)
+                {
+                    $data = '';
+                    $old_data = explode(',', $old_data);
+                    foreach($old_data as $od)
+                    {
+                        $v = $question->getValueByValue($od);
+                        if(is_null($v)) continue;
+                        if(!empty($data)) $data.=',';
+                        $data.= $v->getIdentifier();
+                    }
+                }
                 if(empty($data)) continue;
                 $step->addAnswer($survey_builder->buildAnswer($question, $data));
             }
@@ -72,7 +86,7 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
 
                     $entity_survey = $manager->buildEntitySurvey($dyn_step, $owner->getIdentifier());
 
-                    foreach ($mappings as $mapping)
+                    /*foreach ($mappings as $mapping)
                     {
                         if (!$mapping instanceof IOldSurveyMigrationMapping)
                         {
@@ -99,7 +113,7 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
                             }
                             $step->addAnswer($survey_builder->buildAnswer($question, $data));
                         }
-                    }
+                    }*/
                 }
             }
         }
