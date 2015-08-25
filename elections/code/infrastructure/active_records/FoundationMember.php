@@ -28,8 +28,8 @@ final class FoundationMember
     private static $has_many = array
     (
         'RevocationNotifications' => 'FoundationMemberRevocationNotification',
-        'Votes' => 'Vote',
-        'SummitRegistrationCodes' => 'SummitRegistrationPromoCode'
+        'Votes'                   => 'Vote',
+        'SummitRegistrationCodes' => 'SummitRegistrationPromoCode',
     );
 
     private static $defaults = array
@@ -347,7 +347,8 @@ final class FoundationMember
      */
     public function hasPromoRegistrationCode($summit_id)
     {
-        // TODO: Implement hasPromoRegistrationCode() method.
+        $code = $this->getPromoCodeForSummit($summit_id);
+        return !is_null($code);
     }
 
     /**
@@ -356,7 +357,7 @@ final class FoundationMember
      */
     public function getPromoCodeForSummit($summit_id)
     {
-        // TODO: Implement getPromoCodeForSummit() method.
+        return $this->owner->SummitRegistrationCodes()->filter('SummitID',$summit_id)->first();
     }
 
     /**
@@ -365,6 +366,7 @@ final class FoundationMember
      */
     public function registerPromoCode(ISummitRegistrationPromoCode $promo_code)
     {
-        // TODO: Implement registerPromoCode() method.
+        $promo_code->assignOwner($this->owner);
+        return $this;
     }
 }

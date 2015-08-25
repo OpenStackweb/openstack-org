@@ -20,6 +20,26 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
      */
     public function run()
     {
-        // TODO: Implement run() method.
+        try
+        {
+            $batch_size = 100;
+            $init_time = time();
+            if (isset($_GET['batch_size']))
+            {
+                $batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
+                echo sprintf('batch_size set to %s', $batch_size);
+            }
+            $manager = Injector::inst()->get('SpeakerSelectionAnnouncementSenderManager');
+            if (!$manager instanceof ISpeakerSelectionAnnouncementSenderManager) {
+                return;
+            }
+            $processed = $manager->send($batch_size);
+            $finish_time = time() - $init_time;
+            echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+        }
     }
 }

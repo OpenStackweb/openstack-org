@@ -27,16 +27,25 @@ class SpeakerSummitRegistrationPromoCode extends SummitRegistrationPromoCode imp
     /**
      * @return string
      */
-    public function type()
+    public function getType()
     {
-        // TODO: Implement type() method.
+        return $this->getField('Type');
     }
 
     /**
      * @return IPresentationSpeaker
      */
-    public function speaker()
+    public function getSpeaker()
     {
-        // TODO: Implement speaker() method.
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Speaker')->getTarget();
+    }
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return $this
+     */
+    public function assignSpeaker(IPresentationSpeaker $speaker)
+    {
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Speaker')->setTarget($speaker);
     }
 }

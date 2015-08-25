@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SpeakerSelectionAnnouncementSenderManager
+final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelectionAnnouncementSenderManager
 {
 
     const TaskName = 'SpeakerSelectionAnnouncementSenderTask';
@@ -75,15 +75,25 @@ final class SpeakerSelectionAnnouncementSenderManager
         $sender_factory     = $this->sender_factory;
         $promo_code_repository = $this->promo_code_repository;
 
-        return $this->tx_manager->transaction(function() use($batch_size, $batch_repository, $speaker_repository, $batch_task_factory, $sender_factory, $promo_code_repository) {
+        return $this->tx_manager->transaction(function() use
+        (
+            $batch_size,
+            $batch_repository,
+            $speaker_repository,
+            $batch_task_factory,
+            $sender_factory,
+            $promo_code_repository
+        )
+        {
 
-            $task = $batch_repository->findByName(self::TaskName);
-            $last_index      = 0;
-            $speakers        = array();
+            $task              = $batch_repository->findByName(self::TaskName);
+            $last_index        = 0;
+            $speakers          = array();
             $speakers_notified = 0;
 
-            $query      = new QueryObject;
+            $query = new QueryObject();
             $query->addAndCondition(QueryCriteria::equal('SummitID', Summit::get_active()->ID));
+            $query->addAndCondition(QueryCriteria::equal('AnnouncementEmailTypeSent', 'NONE'));
 
             if($task)
             {
@@ -91,7 +101,8 @@ final class SpeakerSelectionAnnouncementSenderManager
                 list($speakers,$total_size) = $speaker_repository->getAll($query, $last_index, $batch_size);
                 if($task->lastRecordProcessed() >= $total_size) $task->initialize($total_size);
             }
-            else{
+            else
+            {
                 list($speakers,$total_size) = $speaker_repository->getAll($query, $last_index, $batch_size);
                 $task = $batch_task_factory->buildBatchTask(self::TaskName, $total_size);
                 $batch_repository->add($task);
@@ -99,7 +110,12 @@ final class SpeakerSelectionAnnouncementSenderManager
 
             foreach($speakers as $speaker)
             {
+                $task->updateLastRecord();
+
                 if(!$speaker instanceof IPresentationSpeaker) continue;
+
+                $email = $speaker->getEmail();
+                if(empty($email)) continue;
 
                 if($speaker->announcementEmailAlreadySent()) continue;
 
@@ -107,18 +123,25 @@ final class SpeakerSelectionAnnouncementSenderManager
                 // get registration code
                 if(is_null($sender_service)) continue;
 
-                $code          = null;
+                $code = null;
 
                 if($speaker->hasApprovedPresentations()) //get approved code
                 {
-                    $code = $promo_code_repository->getNextAvailableByType(ISpeakerSummitRegistrationPromoCode::TypeAccepted);
+                    $code = $promo_code_repository->getNextAvailableByType
+                    (
+                        ISpeakerSummitRegistrationPromoCode::TypeAccepted,
+                        $batch_size
+                    );
                     if(is_null($code)) throw new Exception('not available promo code!!!');
                 }
-
-                if($speaker->hasAlternatePresentations()) // get alternate code
+                else if($speaker->hasAlternatePresentations()) // get alternate code
                 {
-                    $code = $promo_code_repository->getNextAvailableByType(ISpeakerSummitRegistrationPromoCode::TypeAlternate);
-                    if(is_null($code)) throw new Exception('not available promo code!!!');
+                    $code = $promo_code_repository->getNextAvailableByType
+                    (
+                        ISpeakerSummitRegistrationPromoCode::TypeAlternate,
+                        $batch_size
+                    );
+                    if(is_null($code)) throw new Exception('not available alternate promo code!!!');
                 }
 
                 if(!is_null($code))
@@ -126,7 +149,7 @@ final class SpeakerSelectionAnnouncementSenderManager
 
                 $sender_service->send($speaker);
                 ++$speakers_notified;
-                $task->updateLastRecord();
+
             }
 
             return $speakers_notified;

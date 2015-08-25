@@ -24,11 +24,13 @@ implements IPresentationSpeaker
     );
 
 
-    private static $has_one = array (
+    private static $has_one = array
+    (
         'Photo'               => 'Image',
         'Member'              => 'Member',
         'Summit'              => 'Summit',
         'RegistrationRequest' => 'SpeakerRegistrationRequest',
+        'SummitRegistrationPromoCode' => 'SpeakerSummitRegistrationPromoCode'
     );
 
 
@@ -43,7 +45,7 @@ implements IPresentationSpeaker
 
     private static $belongs_many_many = array (
         'SchedPresentations' => 'SchedPresentation',
-        'Presentations' => 'Presentation',
+        'Presentations'      => 'Presentation',
     );
 
 
@@ -230,18 +232,13 @@ implements IPresentationSpeaker
         return $hash;
     }
 
-    public function RegistrationCode() {
-        return SummitRegCode::get()->filter('MemberID', $this->MemberID)->first();
-    }
-
-
     /**
      * @return bool
      */
     public function announcementEmailAlreadySent()
     {
-        $email_type = $this->AnnouncementEmailTypeSent;
-        return !is_null($email_type);
+        $email_type = $this->getAnnouncementEmailTypeSent();
+        return !is_null($email_type) && $email_type !== 'NONE';
     }
 
     /**
@@ -249,7 +246,7 @@ implements IPresentationSpeaker
      */
     public function getAnnouncementEmailTypeSent()
     {
-       return $this->AnnouncementEmailTypeSent;
+       return $this->getField('AnnouncementEmailTypeSent');
     }
 
     /**
@@ -268,7 +265,7 @@ implements IPresentationSpeaker
      */
     public function hasRejectedPresentations()
     {
-        // TODO: Implement hasRejectedPresentations() method.
+        return $this->UnacceptedPresentations()->count() > 0;
     }
 
     /**
@@ -276,7 +273,7 @@ implements IPresentationSpeaker
      */
     public function hasApprovedPresentations()
     {
-        // TODO: Implement hasApprovedPresentations() method.
+        return $this->AcceptedPresentations()->count() > 0;
     }
 
     /**
@@ -284,7 +281,7 @@ implements IPresentationSpeaker
      */
     public function hasAlternatePresentations()
     {
-        // TODO: Implement hasAlternatePresentations() method.
+        return $this->AlternatePresentations()->count() > 0;
     }
 
     /**
@@ -293,7 +290,10 @@ implements IPresentationSpeaker
      */
     public function registerSummitPromoCode(ISpeakerSummitRegistrationPromoCode $promo_code)
     {
-        // TODO: Implement registerSummitPromoCode() method.
+        $member = AssociationFactory::getInstance()->getMany2OneAssociation($this,'Member')->getTarget();
+        $member->registerPromoCode($promo_code);
+        $promo_code->assignSpeaker($this);
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'SummitRegistrationPromoCode')->setTarget($promo_code);
     }
 
     /**
@@ -301,7 +301,8 @@ implements IPresentationSpeaker
      */
     public function hasSummitPromoCode()
     {
-        // TODO: Implement hasSummitPromoCode() method.
+       $code = $this->getSummitPromoCode();
+       return !is_null($code);
     }
 
     /**
@@ -309,6 +310,6 @@ implements IPresentationSpeaker
      */
     public function getSummitPromoCode()
     {
-        // TODO: Implement getSummitPromoCode() method.
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'SummitRegistrationPromoCode')->getTarget();
     }
 }

@@ -19,6 +19,10 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
         'Code' => 'Varchar(255)',
     );
 
+    private static $summary_fields = array (
+        'Code' => 'Code',
+    );
+
     private static $has_one = array(
         'Summit' => 'Summit',
         'Owner'  => 'Member'
@@ -33,31 +37,39 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
      */
     public function getIdentifier()
     {
-        // TODO: Implement getIdentifier() method.
+        return (int)$this->getField('ID');
     }
 
     /**
      * @return string
      */
-    public function code()
+    public function getCode()
     {
-        // TODO: Implement code() method.
+        return $this->getField('Code');
     }
 
     /**
      * @return Summit
      */
-    public function summit()
+    public function getSummit()
     {
-        // TODO: Implement summit() method.
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Summit')->getTarget();
     }
 
     /**
      * @return ICommunityMember
      */
-    public function owner()
+    public function getOwner()
     {
-        // TODO: Implement owner() method.
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Owner')->getTarget();
     }
 
+    /**
+     * @param ICommunityMember $owner
+     * @return $this
+     */
+    public function assignOwner(ICommunityMember $owner)
+    {
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Owner')->setTarget($owner);
+    }
 }

@@ -51,3 +51,21 @@ Injector:
       0: '%$SummitPackageRepository'
       1: '%$SummitAddOnRepository'
       2: '%$SummitPackagePurchaseOrderManager'
+  BatchTaskRepository:
+    class: SapphireBatchTaskRepository
+  BatchTaskFactory:
+    class: BatchTaskFactory
+  SpeakerRepository:
+    class: SapphirePresentationSpeakerRepository
+  SpeakerSelectionAnnouncementSenderFactory:
+    class: SpeakerSelectionAnnouncementEmailSenderFactory
+  SpeakerSummitRegistrationPromoCodeRepository:
+    class: SapphireSpeakerSummitRegistrationPromoCodeRepository
+  SpeakerSelectionAnnouncementSenderManager:
+    constructor:
+      0: '%$BatchTaskRepository'
+      1: '%$BatchTaskFactory'
+      2: '%$SpeakerRepository'
+      3: '%$SpeakerSelectionAnnouncementSenderFactory'
+      4: '%$SpeakerSummitRegistrationPromoCodeRepository'
+      5: '%$TransactionManager'

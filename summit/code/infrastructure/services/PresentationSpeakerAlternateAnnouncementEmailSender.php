@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessageSenderService
+final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMessageSenderService
 {
 
     /**
@@ -24,11 +24,11 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
     {
         if(!$subject instanceof IPresentationSpeaker) return;
 
-        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAccepted);
+        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAlternate);
 
         $email = EmailFactory::getInstance()->buildEmail('speakersupport@openstack.org', $subject->getEmail());
 
-        $email->setUserTemplate('presentation-speaker-accepted-only')->populateTemplate(
+        $email->setUserTemplate('presentation-speaker-alternate-only')->populateTemplate(
             array
             (
                 'Speaker'              => $subject,

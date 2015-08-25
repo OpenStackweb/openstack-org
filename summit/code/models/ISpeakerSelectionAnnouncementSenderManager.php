@@ -12,27 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitRegistrationPromoCode extends IEntity
+interface ISpeakerSelectionAnnouncementSenderManager
 {
     /**
-     * @return string
+     * @param int $batch_size
+     * @return void
      */
-    public function getCode();
-
-    /**
-     * @return Summit
-     */
-    public function getSummit();
-
-    /**
-     * @return ICommunityMember
-     */
-    public function getOwner();
-
-    /**
-     * @param ICommunityMember $owner
-     * @return $this
-     */
-    public function assignOwner(ICommunityMember $owner);
-
+    public function send($batch_size);
 }
