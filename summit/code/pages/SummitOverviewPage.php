@@ -339,7 +339,7 @@ class SummitOverviewPage extends SummitPage {
 
         $res = $this->getField('VideoRecapCaption2');
         if(empty($res))
-            return 'October 2014 in Hong Kong.';
+            return 'October 2013 in Hong Kong.';
         return $res;
     }
 
