@@ -21,6 +21,9 @@ implements IPresentationSpeaker
         'BeenEmailed' => 'Boolean',
         'AnnouncementEmailTypeSent' => "Enum('ACCEPTED,REJECTED,ALTERNATE,ACCEPTED_ALTERNATE,ACCEPTED_REJECTED,ALTERNATE_REJECTED,NONE','NONE')",
         'AnnouncementEmailSentDate' => 'SS_Datetime',
+        'ConfirmedDate' => 'SS_Datetime',
+        'OnSitePhoneNumber' => 'Text',
+        'RegisteredForSummit' => 'Boolean'
     );
 
 
