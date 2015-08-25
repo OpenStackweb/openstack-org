@@ -167,12 +167,12 @@ class Summit extends DataObject
     {
         parent::onAfterWrite();
 
-        if ($this->Active) {
+       /* if ($this->Active) {
             foreach (Presentation::get()->exclude('ID', $this->ID) as $p) {
                 $p->Active = false;
                 $p->write();
             }
-        }
+        }*/
     }
 
 
