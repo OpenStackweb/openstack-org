@@ -63,7 +63,7 @@
 
     <div class="content-section-c light-blue appdev-build-wrapper">
         <div class="container">
-            <div class="row">
+            <div class="row section-title-center">
                 <div class="col-sm-10 col-sm-push-1">
                     <h1>Build and operate your first OpenStack application</h1>
                 </div>
