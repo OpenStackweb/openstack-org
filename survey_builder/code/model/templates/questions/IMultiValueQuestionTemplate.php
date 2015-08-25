@@ -33,4 +33,10 @@ interface IMultiValueQuestionTemplate
      * @return IQuestionValueTemplate
      */
     public function getValueById($id);
+
+    /**
+     * @param string $value
+     * @return IQuestionValueTemplate
+     */
+    public function getValueByValue($value);
 }

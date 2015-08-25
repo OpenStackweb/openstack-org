@@ -26,8 +26,13 @@ class SurveyCheckBoxListQuestionTemplateUIBuilder
      */
     public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
-        $values = $question->Values()->sort('Order')->map('ID','Value');
-        $field  = new SurveyCheckboxSetField($question->name(), $question->label(), $values,  $value='', $form=null, $emptyString=null, $question);
+        $options = array();
+        foreach($question->Values()->sort('Order') as $val)
+        {
+            $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
+        }
+
+        $field  = new SurveyCheckboxSetField($question->name(), $question->label(), $options,  $value='', $form=null, $emptyString=null, $question);
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {

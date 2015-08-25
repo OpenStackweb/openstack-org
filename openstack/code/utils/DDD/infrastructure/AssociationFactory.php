@@ -52,6 +52,7 @@ final class AssociationFactory  {
         $alias = $query->getAlias();
 		$component = $entity->getComponents($association_name, (string)$query, $query->getOrder(true));
         foreach($alias as $table => $on){
+			if($component instanceof UnsavedRelationList) continue;
             $component = $component->innerJoin($table, $on);
         }
 		return new PersistentCollection($entity, $component, $query,'1-to-many',$association_name);

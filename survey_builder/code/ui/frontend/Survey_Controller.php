@@ -240,7 +240,7 @@ class Survey_Controller extends Page_Controller {
         if (!empty($current_survey_id))
         {
             $this->current_survey = $this->survey_repository->getById($current_survey_id);
-            if($this->current_survey->template()->getIdentifier() !== $current_template->getIdentifier())
+            if(is_null($this->current_survey) || $this->current_survey->template()->getIdentifier() !== $current_template->getIdentifier())
             {
                 $this->current_survey = null;
                 Session::clear('CURRENT_SURVEY_ID');

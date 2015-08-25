@@ -87,7 +87,7 @@ class OldDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
                     break;
                     case 'Deployment':
                     {
-                        $source = DeploymentSurveyFields::$fields;
+                        $source = DeploymentFields::$fields;
                     }
                     break;
                 }

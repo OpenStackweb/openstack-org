@@ -71,6 +71,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         //steps
         if($this->ID > 0)
         {
+            $_REQUEST['survey_template_id'] = $this->ID;
             // steps
             $config = GridFieldConfig_RecordEditor::create();
             $config->removeComponentsByType('GridFieldAddNewButton');

@@ -21,24 +21,30 @@ class SurveyMultiValueQuestionTemplate
         'EmptyString' => 'VarChar(255)'
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'DefaultValue' => 'SurveyQuestionValueTemplate',
     );
 
-    static $indexes = array(
+    static $indexes = array
+    (
     );
 
-    static $belongs_to = array(
+    static $belongs_to = array
+    (
     );
 
-    static $many_many = array(
+    static $many_many = array
+    (
     );
 
-    static $has_many = array(
+    static $has_many = array
+    (
         'Values' => 'SurveyQuestionValueTemplate'
     );
 
-    private static $defaults = array(
+    private static $defaults = array
+    (
     );
 
     public function getCMSFields() {
@@ -171,5 +177,18 @@ class SurveyMultiValueQuestionTemplate
         foreach($this->Values() as $v){
             $v->delete();
         }
+    }
+
+    /**
+     * @param string $value
+     * @return IQuestionValueTemplate
+     */
+    public function getValueByValue($value)
+    {
+        foreach($this->values() as $v){
+            if( $v->value() === $value)
+                return $v;
+        }
+        return null;
     }
 }

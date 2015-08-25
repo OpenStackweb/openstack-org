@@ -23,20 +23,26 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
      */
     public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
-        $values = array();
+        $options = array();
 
         if($question->IsCountrySelector){
-            $values = CountryCodes::$iso_3166_countryCodes;
-            $values['Worldwide']         = 'Worldwide';
-            $values['Prefer not to say'] = 'Prefer not to say';
-            $values['Too many to list']  = 'Too many to list';
+            $options = CountryCodes::$iso_3166_countryCodes;
+            $options['Worldwide']         = 'Worldwide';
+            $options['Prefer not to say'] = 'Prefer not to say';
+            $options['Too many to list']  = 'Too many to list';
         }
-        else
-            $values = $question->Values()->sort('Order')->map('ID','Value');
+        else {
+            foreach($question->Values()->sort('Order') as $val)
+            {
+                $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
+            }
+        }
 
         $default_value = $question->DefaultValue();
 
-        $field  = ($question->IsMultiSelect) ? new MultiDropdownField($question->name(), $question->label(), $values) : new DropdownField($question->name(), $question->label(), $values);
+        $field  = ($question->IsMultiSelect) ? new MultiDropdownField($question->name(), $question->label(), $options)
+                                             : new DropdownField($question->name(), $question->label(), $options);
+
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {

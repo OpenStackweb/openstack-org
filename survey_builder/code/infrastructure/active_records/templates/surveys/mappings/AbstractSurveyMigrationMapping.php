@@ -61,4 +61,39 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'TargetField')->getTarget();
     }
+
+    public function getCMSFields()
+    {
+        $field = parent::getCMSFields();
+
+        $field->addFieldToTab('Root.Main',  new HiddenField('TargetSurveyID', 'TargetSurveyID'));
+
+        $survey_id = isset($_REQUEST['survey_template_id'])?intval($_REQUEST['survey_template_id']) : $this->TargetSurveyID;
+
+        $template = SurveyTemplate::get()->filter('ID', $survey_id)->first();
+        $steps    = $template->Steps()->filter('ClassName','SurveyRegularStepTemplate');
+        $questions = array();
+
+        foreach($steps as $step)
+        {
+            foreach($step->Questions() as $question)
+            {
+                if($question instanceof SurveyLiteralContentQuestionTemplate) continue;
+                $questions[$question->ID] = $step->Name.' -> '. $question->Name;
+            }
+        }
+
+        $field->addFieldToTab('Root.Main',  new DropdownField('TargetFieldID', 'Target Field', $questions));
+
+
+        return $field;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
 }

@@ -26,6 +26,7 @@ class SurveyRadioButtonListQuestionTemplate
     public function getCMSFields() {
 
         $fields = parent::getCMSFields();
+        $fields->removeByName('EmptyString');
         return $fields;
     }
 

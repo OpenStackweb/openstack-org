@@ -22,9 +22,13 @@ class SurveyRankingQuestionTemplateUIBuilder extends AbstractSurveyQuestionTempl
      */
     public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
-        $values = $question->Values()->sort('Order')->map('ID','Value');
+        $options = array();
+        foreach($question->Values()->sort('Order') as $val)
+        {
+            $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
+        }
 
-        $field  = new SurveyRankingField($question->name(), $question->label(), $values,  $value = '' , $form=null, $emptyString=null, $question);
+        $field  = new SurveyRankingField($question->name(), $question->label(), $options,  $value = '' , $form=null, $emptyString=null, $question);
 
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
