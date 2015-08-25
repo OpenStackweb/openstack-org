@@ -132,10 +132,16 @@ a.appdev-build-video {
     max-width: 80%;
     min-height: 55px;
     line-height: 1.2em; }
+    .enterprise-why-icons.appdev h3 a {
+      color: #2A4E68;
+    }
   .enterprise-why-icons.appdev i {
     font-size: 5em;
     color: #30739C;
     margin-bottom: 20px; }
+    .enterprise-why-icons.appdev i:hover {
+      color: #2A4E68;
+    }
   .enterprise-why-icons.appdev p {
     color: #56646e;
     margin: auto;
