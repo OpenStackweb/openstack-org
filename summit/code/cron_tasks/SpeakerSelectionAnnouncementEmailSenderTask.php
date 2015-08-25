@@ -22,6 +22,9 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
     {
         try
         {
+            $api = new TrackChairAPI();
+            $api->handleRestoreOrders();
+
             $batch_size = 100;
             $init_time = time();
             if (isset($_GET['batch_size']))

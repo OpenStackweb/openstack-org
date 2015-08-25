@@ -35,6 +35,8 @@ class ExportSpeakerEmailsTypes extends BuildTask
     {
         set_time_limit(0);
 
+        $api = new TrackChairAPI();
+        $api->handleRestoreOrders();
 
         $type = intval($request->getVar('type'));
         if(empty($type)) $type = 1;
