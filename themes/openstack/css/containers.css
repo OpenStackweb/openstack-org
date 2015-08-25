@@ -5,6 +5,9 @@
   position: relative; }
   .intro-header.containers a.photo-credit {
     bottom: 70px; }
+.intro-header.containers .download-container {
+  background-color: rgba(17, 31, 45, 0.9);
+}
 
 @media (max-width: 767px) {
   .intro-header.containers .intro-message {

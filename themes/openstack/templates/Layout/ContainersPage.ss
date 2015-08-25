@@ -152,7 +152,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Download the new OpenStack white paper, highlighting containers as an evolving technology and OpenStack's evolving support for them.
             </p>
-                <a href="#" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
+                <a href="//www.openstack.org/assets/pdf-downloads/Containers-and-OpenStack.pdf" target="_blank" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>
             <p>
 
