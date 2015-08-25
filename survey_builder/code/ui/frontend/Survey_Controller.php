@@ -536,13 +536,21 @@ HTML;
     {
         if (!Director::is_ajax()) return $this->httpError(403);
 
-        $term = Convert::raw2sql($request->getVar('term'));
+        $term       = Convert::raw2sql($request->getVar('term'));
+        $split_term = explode(' ', $term);
+
         if(!Member::currentUser()) return $this->httpError(403);
 
         $current_user_id = Member::currentUserID();
 
+        $full_name_condition = " FirstName LIKE '%{$term}%' OR Surname LIKE '%{$term}%' ";
+        if(count($split_term) == 2)
+        {
+            $full_name_condition = " (FirstName LIKE '%{$split_term[0]}%' AND Surname LIKE '%{$split_term[1]}%') ";
+        }
+
         $members = Member::get()
-            ->where("ID <> {$current_user_id} AND Email <> '' AND (Email LIKE '%{$term}%' OR FirstName LIKE '%{$term}%' OR Surname LIKE '%{$term}%')")
+            ->where("ID <> {$current_user_id} AND Email <> '' AND (Email LIKE '%{$term}%' OR {$full_name_condition} )")
             ->sort('Email')
             ->limit(10);
 
