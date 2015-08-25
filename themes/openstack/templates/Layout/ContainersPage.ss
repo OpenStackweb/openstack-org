@@ -58,7 +58,7 @@
                 <div class="col-sm-10 col-sm-push-1 center">
                     <h1>Explore the nimble, streamlined opportunities in containers</h1>
                     <p>
-                        Containers are isolated, portable environments that enable developers to run applications along with all the libraries and dependencies they need. Like virtual machines, containers share OS kernel resources for access to compute, networking, and storage. But unlike VMs, all containers on the same host share the same OS kernel, and keep applications, runtimes, and various other services separated from each other using kernel features known as namespaces and Cgroups. 
+                        Containers are isolated, portable environments that enable developers to run applications along with all the libraries and dependencies they need. Like virtual machines, containers share OS kernel resources for access to compute, networking, and storage. But unlike VMs, all containers on the same host share the same OS kernel, and keep applications, runtimes, and various other services separated from each other using kernel features known as namespaces and cgroups. 
                     </p>
                 </div>
             </div>
