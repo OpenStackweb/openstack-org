@@ -25,7 +25,7 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
     );
 
     private static $indexes = array(
-        'SummitID_Code_Member' => array('type'=>'unique', 'value'=>'SummitID,Code, MemberID')
+        'SummitID_Code_Owner' => array('type'=>'unique', 'value'=>'SummitID,Code, OwnerID')
     );
 
     /**
