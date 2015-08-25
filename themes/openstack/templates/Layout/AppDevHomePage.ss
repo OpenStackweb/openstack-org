@@ -28,24 +28,6 @@
         <a href="https://flic.kr/p/qpWnfV" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Scott Prudence" target="_blank"><i class="fa fa-info-circle"></i></a>
     </div>
     <!-- /.intro-header -->
-    <div class="appdev-download-row">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-sm-7">
-                    <h3>
-                        Small and nimble, containers are a powerful tool
-                    </h3>
-                    <p>
-                    Containers are isolated, portable environments to build and run applications using shared libraries. OpenStack provides a solid platform to run containers in virtual machines or bare metal, without creating new vertical silos of technology in your datacenter. In this whitepaper, learn how OpenStack works with containers and container management technologies.
-                    </p>
-                </div>
-                <div class="col-md-3 col-sm-4 center">
-                    <i class="fa fa-file-pdf-o fa-5x appdev-download-icon"></i>
-                    <a href="/containers" class="container-download-btn">Read the containers white paper <i class="fa fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="content-section-a why-ues-wrapper appdev">
         <div class="container">
             <div class="row section-title-center">
@@ -111,6 +93,24 @@
         </div>
     </div>
 
+    <div class="appdev-download-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-7">
+                    <h3>
+                        Small and nimble, containers are a powerful tool
+                    </h3>
+                    <p>
+                    Containers are isolated, portable environments to build and run applications using shared libraries. OpenStack provides a solid platform to run containers in virtual machines or bare metal, without creating new vertical silos of technology in your datacenter. In this whitepaper, learn how OpenStack works with containers and container management technologies.
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-4 center">
+                    <i class="fa fa-file-pdf-o fa-5x appdev-download-icon"></i>
+                    <a href="/containers" class="container-download-btn">Read the containers white paper <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="appdev-quotes-wrapper">
         <div class="container">
             <div class="row section-title-center">
