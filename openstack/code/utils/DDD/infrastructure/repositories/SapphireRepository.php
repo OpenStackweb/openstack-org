@@ -59,8 +59,9 @@ class SapphireRepository extends AbstractEntityRepository
 
 	public function getAll(QueryObject $query, $offset = 0, $limit = 10)
 	{
-		$filter = (string)$query;
 		$class = $this->entity_class;
+		$query->setBaseEntity(new $class);
+		$filter = (string)$query;
 		$do = $class::get()->where($filter);
 
 		if (count($query->getAlias()))

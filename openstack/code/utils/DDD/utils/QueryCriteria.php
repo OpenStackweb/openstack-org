@@ -82,9 +82,9 @@ class QueryCriteria
         return new QueryCriteria($field, '<>', $value, $quoted);
     }
 
-    public static function greater($field, $value, $quoted = true)
+    public static function greater($field, $value, $quoted = true, $is_id = false)
     {
-        return new QueryCriteria($field, '>', $value, $quoted);
+        return new QueryCriteria($field, '>', $value, $quoted, $is_id);
     }
 
     public static function greaterOrEqual($field, $value, $quoted = true)

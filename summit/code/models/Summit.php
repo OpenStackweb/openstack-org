@@ -32,12 +32,14 @@ class Summit extends DataObject
         'RegistrationLink'            => 'Text',
         'Active'                      => 'Boolean',
         'ComingSoonBtnText'           => 'Text',
+        'SchedUrl'                    => 'Text',
     );
 
     private static $has_many = array (
         'Presentations' => 'Presentation',
         'Categories' => 'PresentationCategory',
-        'Speakers' => 'PresentationSpeaker'
+        'Speakers' => 'PresentationSpeaker',
+        'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
     );
 
     private static $summary_fields = array (
@@ -213,10 +215,32 @@ class Summit extends DataObject
         $date->setConfig('showcalendar', true);
 
         $f->addFieldToTab('Root.Main',new TextField('ComingSoonBtnText', 'Coming Soon Btn Text'));
+        $f->addFieldToTab('Root.Main',new TextField('SchedUrl', 'Sched Main Url'));
 
         $config = new GridFieldConfig_RelationEditor(10);
         $categories = new GridField('Categories','Categories',$this->Categories(), $config);
         $f->addFieldToTab('Root.Categories', $categories);
+
+        // promo codes
+
+        $config    = GridFieldConfig_RecordEditor::create(25);
+        $config->removeComponentsByType('GridFieldAddNewButton');
+        $multi_class_selector = new GridFieldAddNewMultiClass();
+
+
+        $multi_class_selector->setClasses
+        (
+           array
+           (
+               'SpeakerSummitRegistrationPromoCode' => 'Speaker Promo Code',
+           )
+        );
+
+        $config->addComponent($multi_class_selector);
+
+
+        $promo_codes = new GridField('SummitRegistrationPromoCodes','Registration Promo Codes', $this->SummitRegistrationPromoCodes(), $config);
+        $f->addFieldToTab('Root.RegistrationPromoCodes', $promo_codes);
 
         return $f;
     }

@@ -16,8 +16,9 @@ interface ISpeakerSummitRegistrationPromoCodeRepository extends IEntityRepositor
 {
 
     /**
-     * @param $promo_code_type
+     * @param string $promo_code_type
+     * @param int $batch_size
      * @return ISpeakerSummitRegistrationPromoCode
      */
-    public function getNextAvailableByType($promo_code_type);
+    public function getNextAvailableByType($promo_code_type, $batch_size = 10);
 }

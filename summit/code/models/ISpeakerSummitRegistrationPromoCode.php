@@ -14,15 +14,21 @@
  **/
 interface ISpeakerSummitRegistrationPromoCode extends ISummitRegistrationPromoCode
 {
-    const TypeAccepted = 'ACCEPTED';
+    const TypeAccepted  = 'ACCEPTED';
     const TypeAlternate = 'ALTERNATE';
     /**
      * @return string
      */
-    public function type();
+    public function getType();
 
     /**
      * @return IPresentationSpeaker
      */
-    public function speaker();
+    public function getSpeaker();
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return $this
+     */
+    public function assignSpeaker(IPresentationSpeaker $speaker);
 }
