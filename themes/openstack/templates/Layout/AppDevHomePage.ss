@@ -14,7 +14,7 @@
         <div class="intro-header appdev">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-push-2 col-md-10 col-md-push-1 col-sm-12">
+                <div class="col-md-10 col-md-push-1 col-sm-12">
                     <div class="intro-message">
                         <h1>App Dev on OpenStack</h1>
                         <p>
@@ -68,8 +68,8 @@
                     <h1>Build and operate your first OpenStack application</h1>
                 </div>
             </div>
-            <div class="row" style="margin-top:30px;">
-                <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6 appdev-build-row">
                     <p>
                         Start with the first app guide<br/>to learn how to program OpenStack clouds.
                     </p>
@@ -77,7 +77,7 @@
                         <img src="/themes/openstack/images/appdev/guide-cover.png" alt="">
                     </a>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 appdev-build-row">
                     <p>
                         Watch the presentation<br/>from our latest summit event.
                     </p>
@@ -157,7 +157,6 @@
                     <p>
                         Dig into the OpenStack toolbox to access APIs, docs and SDKs in six languages to accelerate your app development. We've assembled resources for every developer or development task in one place, plus community support and blueprints.
                     </p>
-                    <p>&nbsp;</p>
                         <a class="blue-btn" href="http://developer.openstack.org/"><i class="fa fa-code-fork"></i> Explore developer tools</a>
                 </div>
                 <div class="col-sm-6 border-left">
@@ -176,7 +175,6 @@
                             Glance images make you ready to launch virtual machines on your cloud. 
                         </li>
                     </ul>
-                    <p>&nbsp;</p>
                     <a class="blue-btn" href="http://apps.openstack.org/"><i class="fa fa-cloud"></i> Get ready-to-use apps</a>
                 </div>
             </div>
@@ -187,7 +185,7 @@
     <div class="content-section-a appdev-action-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-sm-push-2">
+                <div class="col-sm-8 col-sm-push-2">
                     <i class="fa fa-flag-checkered appdev-try-icon"></i>
                     <h1>Take it for a test drive</h1>
                     <p>

@@ -10,8 +10,14 @@
       margin-bottom: 30px; }
     .intro-header.appdev .intro-message p {
       text-align: center; 
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: 300;
     }
+@media (max-width: 767px) {
+  .intro-header.appdev .intro-message p {
+    font-size: 16px;
+  }
+}
 
 a.photo-credit {
   position: absolute;
@@ -63,6 +69,12 @@ i.appdev-download-icon {
   .testimonial-row.appdev blockquote:before, .testimonial-row.appdev blockquote:after {
     color: #D4DCE5; }
 
+@media (max-width: 767px) {
+  .testimonial-row.appdev blockquote:after {
+    top: -50px;
+  }
+}
+
 .why-ues-wrapper.appdev {
   padding: 60px 0 90px; }
 
@@ -102,6 +114,12 @@ a.appdev-build-video {
   .appdev-apps-section h2 {
     font-weight: 300;
     margin: 0 0 10px; }
+  .appdev-apps-section a.blue-btn {
+    display: block;
+    max-width: 300px;
+    text-align: center;
+    margin: 20px 0;
+  }
   .appdev-apps-section a.blue-btn i {
     margin: 0 5px 0 0;
     font-size: 1.1em; }
@@ -159,6 +177,12 @@ a.appdev-build-video {
   .appdev-quotes-wrapper .appdev-quotes blockquote:after {
     visibility: hidden;
     content: close-quote; }
+    
+  @media (max-width: 767px) {
+    img.appdev-quote-logo {
+      margin-bottom: 30px; 
+    }
+  }
 
 .fixed-image.appdev {
   background-image: url('/themes/openstack/images/appdev/fixed-bkgd.jpg'); }
