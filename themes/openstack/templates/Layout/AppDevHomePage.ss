@@ -37,22 +37,22 @@
             </div>
             <div class="row enterprise-why-icons appdev">
                 <div class="col-sm-4">
-                    <h3>Global standard</h3>
-                    <div><i class="fa fa-globe"></i></div>
+                    <h3><a href="http://developer.openstack.org/api-ref.html">Global standard</a></h3>
+                    <div><a href="http://developer.openstack.org/api-ref.html"><i class="fa fa-globe"></i></a></div>
                     <p>
                         Open source APIs provide a common platform across public, private and hybrid clouds
                     </p>
                 </div>
                 <div class="col-sm-4">
-                    <h3>Strong community</h3>
-                    <div><i class="fa fa-comments"></i></div>
+                    <h3><a href="http://www.openstack.org/community/">Strong community</a></h3>
+                    <div><a href="http://www.openstack.org/community/"><i class="fa fa-comments"></i></a></div>
                     <p>
                         Join a vibrant, global community of developers who have your back
                     </p>
                 </div>
                 <div class="col-sm-4">
-                    <h3>Tools & resources</h3>
-                    <div><i class="fa fa-wrench"></i></div>
+                    <h3><a href="http://developer.openstack.org/">Tools & resources</a></h3>
+                    <div><a href="http://developer.openstack.org/"><i class="fa fa-wrench"></i></a></div>
                     <p>
                         Get moving faster with a growing ecosystem of development tools, applications and public clouds
                     </p>
