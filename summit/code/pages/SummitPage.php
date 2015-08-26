@@ -95,7 +95,7 @@ class SummitPage extends Page
     public function onBeforeWrite() {
         parent::onBeforeWrite();
         $parent = $this->Parent();
-        if($parent && ($parent instanceof SummitPage))
+        if($parent && ($parent instanceof SummitPage) && $parent->SummitID > 0)
         {
             $this->SummitID = $parent->SummitID;
         }
