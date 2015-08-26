@@ -43,6 +43,9 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
         if(!$has_approved && $has_rejected && $has_alternate)
             return new PresentationSpeakerAlternateRejectedAnnouncementEmailSender;
 
+        if($has_approved && $has_rejected && $has_alternate)
+            return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender;
+
         return null;
     }
 }
