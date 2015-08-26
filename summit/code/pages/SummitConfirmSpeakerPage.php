@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-class SummitConfirmSpeakerPage extends SummitPage {    
+class SummitConfirmSpeakerPage extends SummitPage
+{
 
     static $defaults = array(
         'ShowInMenus' => false
@@ -21,26 +22,31 @@ class SummitConfirmSpeakerPage extends SummitPage {
 }
 
 
-class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller {
+class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
+{
 
     static $allowed_actions = array(
         'OnsitePhoneForm',
         'doSavePhoneNumber',
         'confirm',
         'Thanks'
-    );    
-    
-	public function init() {
-		parent::init();
-	}    
+    );
 
-    public function confirm() {
+    public function init()
+    {
+        parent::init();
+    }
+
+    public function confirm()
+    {
         parent::init();
 
         $getVars = $this->request->getVars();
-        if (isset($hashKey)) $speakerID = substr(base64_decode($hashKey), 3);
-        if (isset($hashKey)) $speakerID = $hashKey;
+        $hashKey = $getVars['h'];
 
+        if (isset($hashKey)) {
+            $speakerID = substr(base64_decode($hashKey), 3);
+        }
 
         if (isset($speakerID) && is_numeric($speakerID) && $Speaker = PresentationSpeaker::get()->byID($speakerID)) {
 
@@ -48,7 +54,7 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller {
             Session::set('Speaker', $Speaker);
 
 
-            $Speaker->Confirmed = TRUE;
+            $Speaker->Confirmed = true;
             $Speaker->write();
 
             $data['FirstName'] = $Speaker->FirstName;
@@ -56,25 +62,25 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller {
             $data['Summit'] = Summit::get_active();
 
             return $this->customise($data)
-                ->renderWith(array('SummitConfirmSpeakerPage','SummitPage'), $this->parent);        
+                ->renderWith(array('SummitConfirmSpeakerPage', 'SummitPage'), $this->parent);
 
 
         } else {
             return $this->httpError(404, 'Sorry, this speaker confirmation code does not seem to be correct.');
         }
 
-    }   
+    }
 
-    public function OnsitePhoneForm() {
-
+    public function OnsitePhoneForm()
+    {
         $speakerHash = Session::get('ConfirmSpeakerHash');
         $speaker = Session::get('Speaker');
         $OnsitePhoneForm = new OnsitePhoneForm($this, 'OnsitePhoneForm', $speakerHash);
-        $OnsitePhoneForm->loadDataFrom($speaker);
+        if ($speaker) {
+            $OnsitePhoneForm->loadDataFrom($speaker);
+        }
 
         return $OnsitePhoneForm;
 
     }
-
-
 }
