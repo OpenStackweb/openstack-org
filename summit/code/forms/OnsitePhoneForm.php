@@ -40,12 +40,6 @@ class OnsitePhoneForm extends BootstrapForm {
 
    }
  
-   function forTemplate() {
-      return $this->renderWith(array(
-         $this->class,
-         'Form'
-      ));
-   } 
 
    function doSavePhoneNumber($data, $form) {
 
