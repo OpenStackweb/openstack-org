@@ -4,7 +4,7 @@
     <div class="enterprise-bar">
        <div class="container">
           <a href="/appdev/" class="enterprise-bar-left">OpenStack For App Developers</a>
-          <a href="#top" class="enterprise-bar-right">Back to Top</a>
+          <a href="/containers/#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
 
