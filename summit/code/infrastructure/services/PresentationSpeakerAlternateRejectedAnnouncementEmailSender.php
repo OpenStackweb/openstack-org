@@ -32,7 +32,7 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
             array
             (
                 'Speaker'              => $subject,
-                'ConfirmationLink'     => 'https://www.openstack.org/summit/tokyo-2015/call-for-speakers/SpeakerConfirmation?h='.$subject->SpeakerConfirmHash(),
+                'ConfirmationLink'     => $subject->getSpeakerConfirmationLink(),
                 'ScheduleMainPageLink' => Summit::get_active()->SchedUrl,
                 'PromoCode'            => $subject->getSummitPromoCode()->getCode(),
             )

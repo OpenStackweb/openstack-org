@@ -232,11 +232,20 @@ implements IPresentationSpeaker
         return $AlternatePresentations;
     }
 
-    public function SpeakerConfirmHash() {
+    public function getSpeakerConfirmHash() {
         $id = $this->ID;
         $prefix = "000";
         $hash = base64_encode($prefix . $id);
         return $hash;
+    }
+
+    public function getSpeakerConfirmationLink()
+    {
+        $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', Summit::get_active()->ID)->first();
+        if(!$confirmation_page) throw new Exception('Confirmation Speaker Page not set on current summit!');
+        $url = $confirmation_page->getAbsoluteLiveLink(false);
+        $url = $url.'confirm?h='.$this->getSpeakerConfirmHash();
+        return $url;
     }
 
     /**
