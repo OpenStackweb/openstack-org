@@ -45,6 +45,7 @@ class SurveyMultiValueQuestionTemplate
 
     private static $defaults = array
     (
+        'EmptyString' => '-- Select One --'
     );
 
     public function getCMSFields() {

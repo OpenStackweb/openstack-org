@@ -42,8 +42,11 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
     private static $defaults = array(
     );
 
-    private static $summary_fields = array(
-
+    private static $summary_fields = array
+    (
+        'OriginTable' => 'Origin Table',
+        'OriginField' => 'Origin Field',
+        'TargetField.Name' => 'Target Field',
     );
 
     /**

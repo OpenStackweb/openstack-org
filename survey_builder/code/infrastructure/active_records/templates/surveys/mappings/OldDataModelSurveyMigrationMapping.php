@@ -42,7 +42,8 @@ class OldDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
     private static $defaults = array(
     );
 
-    private static $summary_fields = array(
+    private static $summary_fields = array
+    (
         'OriginTable',
         'OriginField',
         'TargetField.Name'
@@ -56,14 +57,16 @@ class OldDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
         (
             'DeploymentSurvey' => 'DeploymentSurvey',
             'AppDevSurvey'     => 'AppDevSurvey',
-            'Deployment'       => 'Deployment',
+
         );
 
         if(isset($_REQUEST['entity_survey']))
         {
-            unset($origin_table['AppDevSurvey']);
-            unset($origin_table['DeploymentSurvey']);
-        }
+            $origin_table = array
+            (
+                'Deployment'       => 'Deployment',
+            );
+         }
 
         $field->addFieldToTab('Root.Main', $ddl_origin_table = new DropdownField('OriginTable', 'OriginTable', $origin_table));
 

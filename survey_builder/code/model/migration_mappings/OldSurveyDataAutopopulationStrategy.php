@@ -48,6 +48,38 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
                 if($question instanceof IMultiValueQuestionTemplate)
                 {
                     $data = '';
+                    if($question instanceof IDropDownQuestionTemplate && $question->isCountrySelector())
+                    {
+                        $data = $old_data;
+                    }
+                    else
+                    {
+                        $old_data = explode(',', $old_data);
+                        foreach ($old_data as $od)
+                        {
+                            $v = $question->getValueByValue($od);
+                            if (is_null($v)) {
+                                continue;
+                            }
+                            if (!empty($data)) {
+                                $data .= ',';
+                            }
+                            $data .= $v->getIdentifier();
+                        }
+                    }
+                }
+                if(empty($data)) continue;
+                $step->addAnswer($survey_builder->buildAnswer($question, $data));
+            }
+            if($origin_table_name === 'AppDevSurvey')
+            {
+                $app_dev_survey = $old_survey->AppDevSurveys()->first();
+                if(!$app_dev_survey) continue;
+                $old_data = $app_dev_survey->$origin_field_name;
+                $data     = $old_data;
+                if($question instanceof IMultiValueQuestionTemplate)
+                {
+                    $data = '';
                     $old_data = explode(',', $old_data);
                     foreach($old_data as $od)
                     {
@@ -60,14 +92,6 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
                 if(empty($data)) continue;
                 $step->addAnswer($survey_builder->buildAnswer($question, $data));
             }
-            if($origin_table_name === 'AppDevSurvey')
-            {
-                $app_dev_survey = $old_survey->AppDevSurveys()->first();
-                if(!$app_dev_survey) continue;
-                $data          = $app_dev_survey->$origin_field_name;
-                if(empty($data)) continue;
-                $step->addAnswer($survey_builder->buildAnswer($question, $data));
-            }
         }
 
         //check if we need to auto-populate entities
@@ -76,7 +100,7 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
         {
             if($entity_survey->belongsToDynamicStep() && $entity_survey->shouldPrepopulateWithFormerData())
             {
-                $mappings = $template->getAutopopulationMappings();
+                $mappings = $entity_survey->getAutopopulationMappings();
 
                 $dyn_step = $survey->getStep($entity_survey->getDynamicStepTemplate()->title());
 
@@ -86,7 +110,7 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
 
                     $entity_survey = $manager->buildEntitySurvey($dyn_step, $owner->getIdentifier());
 
-                    /*foreach ($mappings as $mapping)
+                    foreach ($mappings as $mapping)
                     {
                         if (!$mapping instanceof IOldSurveyMigrationMapping)
                         {
@@ -107,13 +131,24 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
 
                         if ($origin_table_name === 'Deployment')
                         {
-                            $data = $old_deployment->$origin_field_name;
-                            if (empty($data)) {
-                                continue;
+                            $old_data = $old_deployment->$origin_field_name;
+                            $data     = $old_data;
+                            if($question instanceof IMultiValueQuestionTemplate)
+                            {
+                                $data = '';
+                                $old_data = explode(',', $old_data);
+                                foreach($old_data as $od)
+                                {
+                                    $v = $question->getValueByValue($od);
+                                    if(is_null($v)) continue;
+                                    if(!empty($data)) $data.=',';
+                                    $data.= $v->getIdentifier();
+                                }
                             }
+                            if(empty($data)) continue;
                             $step->addAnswer($survey_builder->buildAnswer($question, $data));
                         }
-                    }*/
+                    }
                 }
             }
         }

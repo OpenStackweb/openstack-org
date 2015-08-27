@@ -331,7 +331,7 @@ final class DeploymentOptions {
         '100 to 999 IPs' => '100 to 999 IPs',
         '1,000 to 9,999 IPs' => '1,000 to 9,999 IPs',
         '10,000 to 99,999 IPs' => '10,000 to 99,999 IPs',
-        '100,000 or more IPs ' => '100,000 or more IPs ',
+        '100,000 or more IPs' => '100,000 or more IPs ',
     );
 
     public static $why_nova_network_options = array(
@@ -424,6 +424,6 @@ final class DeploymentOptions {
         '100,000 to 999,999 users' => '100,000 to 999,999 users',
         '1,000,000 to 9,999,999 users' => '1,000,000 to 9,999,999 users',
         '10,000,000 to 999,999,999 users' => '10,000,000 to 999,999,999 users',
-        '100,000,000 or more users ' => '100,000,000 or more users',
+        '100,000,000 or more users' => '100,000,000 or more users',
     );
 }

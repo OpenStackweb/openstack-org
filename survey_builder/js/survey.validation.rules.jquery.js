@@ -14,7 +14,8 @@
 
     //private methods
 
-    function checkQuestionVisibilityCheckBox(chk_group, question_container){
+    function checkQuestionVisibilityCheckBox(chk_group, question_container)
+    {
         var show = false;
         $.each(chk_group, function(index , chk){
             show = show || chk.is(':checked');
@@ -22,8 +23,12 @@
         setQuestionVisibility(show, question_container)
     }
 
-    function checkQuestionVisibilityDropDown(ddl, question_container, label){
-        var show = ddl.val() == label;
+    function checkQuestionVisibilityDropDown(ddl, question_container, values)
+    {
+        var show = false;
+        $.each(values, function(index , val){
+            show = show || parseInt(ddl.val()) === parseInt(val);
+        });
         setQuestionVisibility(show, question_container)
     }
 
@@ -70,13 +75,13 @@
             checkQuestionVisibilityCheckBox(chk_group, question_container);
         },
 
-        addRequiredAnswer4SelectAbleGroup : function(select_group, question_container, label){
+        addRequiredAnswer4SelectAbleGroup : function(select_group, question_container){
 
-            $.each(select_group, function(index , select){
-                select.change(function (e) {
-                    checkQuestionVisibilityDropDown(select, question_container, label);
+            $.each(select_group, function(index , entry){
+                entry.ddl.change(function (e) {
+                    checkQuestionVisibilityDropDown(entry.ddl, question_container, entry.values);
                 });
-                checkQuestionVisibilityDropDown(select, question_container, label);
+                checkQuestionVisibilityDropDown(entry.ddl, question_container, entry.values);
             });
         },
 
