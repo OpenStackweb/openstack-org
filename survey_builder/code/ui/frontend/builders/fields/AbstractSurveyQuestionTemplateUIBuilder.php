@@ -25,8 +25,8 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
      */
     protected function buildDependantRules(ISurveyStep $current_step, ISurveyQuestionTemplate $question, FormField $field){
         //depends : check visibility
-        $depends = $question->DependsOn();
-
+        $depends = $question->getDependsOn();
+        //$depends = $question->DependsOn();
         if(count($depends) > 0){
 
             $js_rules     = array();
@@ -42,7 +42,7 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
                              'values'      => array(),
                              'operator'    => $d->Operator,
                              'visibility'  => $d->Visibility,
-                             'default'     => $d->DefaultValue
+                             'default'     => $d->DependantDefaultValue
                          );
 
                      array_push($js_rules[$d->getIdentifier()]['values'], $d->ValueID);
@@ -55,7 +55,7 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
                             'values'     => array(),
                             'operator'   => $d->Operator,
                             'visibility' => $d->Visibility,
-                            'default'    => $d->DefaultValue
+                            'default'    => $d->DependantDefaultValue
                          );
 
                      array_push($static_rules[$d->getIdentifier()]['values'], $d->ValueID);
@@ -134,21 +134,30 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
                     case 'Visible':{
                         if(!$condition){
                             $field->addExtraClass('hidden');
-
-                            $field->setValue(''); // clear answer
-                        }
-                        if($condition){
-                            if($default->ID > 0) $field->setValue($default->Value);
+                            // if not visible clean it
+                            $field->setValue('');
                         }
                     }
                     break;
                     case 'Not-Visible':{
                         if($condition) {
                             $field->addExtraClass('hidden');
-                            if($default->ID > 0) $field->setValue($default->Value);
+                            // if not visible clean it
+                            $field->setValue('');
                         }
                     }
                     break;
+                }
+
+                // set the default value set on the rule
+                if(!empty($default))
+                {
+                    $field->setValue($default);
+                    if($question instanceof IMultiValueQuestionTemplate)
+                    {
+                        $value_template = $question->getValueByValue($default);
+                        if(!is_null($value_template)) $field->setValue($value_template->getIdentifier());
+                    }
                 }
             }
         }
@@ -190,43 +199,44 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
                 $operator   = $info['operator'];
                 $visibility = $info['visibility'];
 
-                $option_id = $d->name();
+                if(($d instanceof ISurveyClickableQuestion) || ($d instanceof ISurveyRankableQuestion))
+                {
+                    foreach($values as $value)
+                    {
+                        $option_id = $d->name();
 
-                foreach($values as $value) {
-                    if ($d instanceof ISurveyClickableQuestion) {
-                        if ($d instanceof IMultiValueQuestionTemplate && intval($value) > 0) {
-                            //$value = $d->getValueById(intval($d->ValueID));
-                            $option_id .= '_' . str_replace(' ', '', intval($value));
-                        }
-                        $js .= " clickable_fields.push($('#'+form_id+'_{$option_id}'));";
-                    }
-
-                    if ($d instanceof ISurveySelectableQuestion) {
-
-                        if ($d instanceof IMultiValueQuestionTemplate && intval($value) > 0) {
-                            // $value = $d->getValueById(intval($d->ValueID));
-                            $js .= " selectable_fields.push({ddl : $('#'+form_id+'_{$option_id}'), label: '{$value}' });";
-                        }
-
-                    }
-
-                    if ($d instanceof ISurveyRankableQuestion) {
-
-                        if ($d instanceof IMultiValueQuestionTemplate && intval($value) > 0) {
+                        if ($d instanceof ISurveyClickableQuestion)
+                        {
                             if ($d instanceof IMultiValueQuestionTemplate && intval($value) > 0) {
                                 //$value = $d->getValueById(intval($d->ValueID));
                                 $option_id .= '_' . str_replace(' ', '', intval($value));
                             }
-                            $js .= " rankable_fields.push( $('#'+form_id+'_{$option_id}') );";
+                            $js .= " clickable_fields.push($('#'+form_id+'_{$option_id}'));";
                         }
 
+                        if ($d instanceof ISurveyRankableQuestion)
+                        {
+                            if ($d instanceof IMultiValueQuestionTemplate && intval($value) > 0) {
+                                if ($d instanceof IMultiValueQuestionTemplate && intval($value) > 0) {
+                                    //$value = $d->getValueById(intval($d->ValueID));
+                                    $option_id .= '_' . str_replace(' ', '', intval($value));
+                                }
+                                $js .= " rankable_fields.push( $('#'+form_id+'_{$option_id}') );";
+                            }
+                        }
                     }
                 }
 
+                if ( ($d instanceof ISurveySelectableQuestion) && ($d instanceof IMultiValueQuestionTemplate))
+                {
+                    $option_id = $d->name();
+                    $values = implode(',',$values);
+                    $js .= " selectable_fields.push({ddl : $('#'+form_id+'_{$option_id}'), values: [{$values}] });";
+                }
             }
 
             $js .= "for(var i = 0 ; i < selectable_fields.length; i++ ){
-                form.survey_validation_rules('addRequiredAnswer4SelectAbleGroup', [ selectable_fields[i].ddl ], $('#{$question_id}'), selectable_fields[i].label );
+                form.survey_validation_rules('addRequiredAnswer4SelectAbleGroup', selectable_fields, $('#{$question_id}'));
                 }";
             $js .= "if(clickable_fields.length > 0 )
                 form.survey_validation_rules('addRequiredAnswer4CheckAbleGroup', clickable_fields, $('#{$question_id}') ); ";

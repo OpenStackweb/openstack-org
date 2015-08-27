@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,24 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-class SurveyCheckBoxListQuestionTemplate
-    extends SurveyMultiValueQuestionTemplate
-    implements ISurveyClickableQuestion {
-
-    public function Type(){
-        return 'CheckBoxList';
-    }
-
-    public function getCMSFields() {
-
-        $fields = parent::getCMSFields();
-        $fields->removeByName('EmptyString');
-
-        if($this->ID > 0 ){
-            $fields->removeByName('DefaultValueID');
-        }
-
-        return $fields;
-    }
+interface IDropDownQuestionTemplate extends IMultiValueQuestionTemplate
+{
+    /**
+     * @return bool
+     */
+    public function isCountrySelector();
 }

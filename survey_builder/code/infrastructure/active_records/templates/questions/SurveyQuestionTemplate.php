@@ -21,7 +21,7 @@ class SurveyQuestionTemplate
 
     static $db = array(
         'Name'         => 'VarChar(255)',
-        'Label'        => 'Text',
+        'Label'        => 'HTMLText',
         'Order'        => 'Int',
         'Mandatory'    => 'Boolean',
         'ReadOnly'     => 'Boolean',
@@ -145,7 +145,25 @@ class SurveyQuestionTemplate
      */
     public function getDependsOn()
     {
-       return $this->DependsOn()->toArray();
+        $result = DB::query("
+        SELECT SurveyQuestionTemplate.ClassName, ChildID AS ID, ValueID, Operator, Visibility, DefaultValue
+        FROM SurveyQuestionTemplate_DependsOn
+        INNER JOIN SurveyQuestionTemplate ON SurveyQuestionTemplate.ID = ChildID
+        WHERE SurveyQuestionTemplateID = $this->ID
+        ");
+        $list   = array();
+        foreach($result as $row)
+        {
+            $class                    = $row['ClassName'];
+            $question_id              = intval($row['ID']);
+            $q                        = $class::get()->byID($question_id);
+            $q->ValueID               = $row['ValueID'];
+            $q->Operator              = $row['Operator'];
+            $q->Visibility            = $row['Visibility'];
+            $q->DependantDefaultValue = $row['DefaultValue'];
+            $list[] = $q;
+        }
+        return $list;
     }
 
     protected function validate()
@@ -157,7 +175,7 @@ class SurveyQuestionTemplate
             return $valid->error('Name is empty!');
         }
 
-        if(!preg_match('/^[a-z_091A-Z]*$/',$this->Name)){
+        if(!preg_match('/^[a-z_0-9A-Z]*$/',$this->Name)){
             return  $valid->error('Name has an Invalid Format!');
         }
 
@@ -187,7 +205,7 @@ class SurveyQuestionTemplate
         $fields = new FieldList();
 
         $fields->add(new TextField('Name','Name (Without Spaces)'));
-        $fields->add(new TextField('Label','Label'));
+        $fields->add(new TextareaField('Label','Label'));
         $fields->add(new CheckboxField('Mandatory','Is Mandatory?'));
         $fields->add(new CheckboxField('ReadOnly','Is Read Only?'));
 

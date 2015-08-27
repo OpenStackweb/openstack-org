@@ -15,9 +15,7 @@
 /**
  * Class SurveyDropDownQuestionTemplate
  */
-class SurveyDropDownQuestionTemplate
-    extends SurveyMultiValueQuestionTemplate
-    implements ISurveySelectableQuestion
+class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate implements IDropDownQuestionTemplate, ISurveySelectableQuestion
 {
 
     static $db = array(
@@ -26,23 +24,28 @@ class SurveyDropDownQuestionTemplate
         'UseChosenPlugin'   => 'Boolean',
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
     );
 
-    static $indexes = array(
+    static $indexes = array
+    (
     );
 
-    static $belongs_to = array(
-
+    static $belongs_to = array
+    (
     );
 
-    static $many_many = array(
+    static $many_many = array
+    (
     );
 
-    static $has_many = array(
+    static $has_many = array
+    (
     );
 
-    private static $defaults = array(
+    private static $defaults = array
+    (
         'IsMultiSelect'     => false,
         'UseChosenPlugin'   => true,
         'IsCountrySelector' => false
@@ -64,5 +67,13 @@ class SurveyDropDownQuestionTemplate
         $fields->add(new CheckboxField('IsCountrySelector','Is Country Selector?'));
 
         return $fields;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCountrySelector()
+    {
+        return $this->getField('IsCountrySelector');
     }
 }

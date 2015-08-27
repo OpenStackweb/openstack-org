@@ -49,6 +49,7 @@ class SurveyQuestionValueTemplate
 
     private static $summary_fields = array(
         'Value',
+        'Label',
     );
 
     /**
@@ -105,5 +106,16 @@ class SurveyQuestionValueTemplate
         $fields->add(new TextareaField('Label', 'Label'));
         $fields->add(new HiddenField('OwnerID', 'OwnerID'));
         return $fields;
+    }
+
+    /**
+     * @return string
+     */
+    public function label()
+    {
+        $label =  $this->getField('Label');
+        if(empty($label))
+            return $this->value();
+        return $label;
     }
 }

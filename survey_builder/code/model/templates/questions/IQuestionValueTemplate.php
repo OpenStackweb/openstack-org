@@ -23,6 +23,11 @@ interface IQuestionValueTemplate extends IEntity {
     public function value();
 
     /**
+     * @return string
+     */
+    public function label();
+
+    /**
      * @return int
      */
     public function order();

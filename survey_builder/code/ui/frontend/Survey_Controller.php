@@ -352,6 +352,31 @@ class Survey_Controller extends Page_Controller {
         if(is_null($this->current_entity_survey))
             return $this->httpError(404, 'entity not found!');
 
+        $entity_step          = $this->current_entity_survey->currentStep();
+        $entity_step_template = $entity_step->template();
+
+        // check substep variable
+        if(empty($sub_step))
+        {
+            // is not set, redirect to current steo uri
+            return $this->redirect($request->getUrl().'/'.$entity_step_template->title());
+        }
+        else if($sub_step !== $entity_step_template->title())
+        {
+            // if set, but differs from current tep check if we are allowed to use that step
+            $desired_sub_step = $this->current_entity_survey->getStep($sub_step);
+            if(!is_null($desired_sub_step) && $this->current_entity_survey->isAllowedStep($sub_step))
+            {
+                $this->current_entity_survey->registerCurrentStep($desired_sub_step);
+            }
+            else
+            {
+                // redirect to current step
+                $current_url = str_replace($sub_step, '',$request->getUrl());
+                return $this->redirect($current_url.$entity_step_template->title());
+            }
+        }
+
         $this->current_entity_survey =  $this->survey_manager->updateSurveyWithTemplate
         (
             $this->current_entity_survey,
