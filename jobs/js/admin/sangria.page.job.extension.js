@@ -231,7 +231,7 @@ jQuery(document).ready(function($) {
                                     new_row += '<td class="post-date">'+job.posted_date+'</td>';
                                     new_row += '<td class="url"><a href="'+job.url+'">Link</a></td><td class="company-name">'+job.company_name+'</td>';
                                     new_row += '<td class="location_type">'+job.location_type+'</td><td class="is_foundation"><input class="foundation_check" job_id="'+new_id+'" type="checkbox" /></td>';
-                                    new_row += '<td width="17%"><a href="#" data-job-id="'+new_id+'" class="edit-live-job roundedButton addDeploymentBtn">Edit</a>';
+                                    new_row += '<td class="buttons"><a href="#" data-job-id="'+new_id+'" class="edit-live-job roundedButton addDeploymentBtn">Edit</a>';
                                     new_row += '&nbsp;<a href="#" data-job-id="'+new_id+'" class="delete-live-job roundedButton addDeploymentBtn">Delete</a></td>';
                                     new_row += '</tr>';
 

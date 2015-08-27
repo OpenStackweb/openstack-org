@@ -9,17 +9,39 @@
     background: none repeat scroll 0 0 #FFFFFF;
 }
 
-#posted-jobs-table thead th {
-    background: none repeat scroll 0 0 #FFFFFF;
+#posted-jobs-table th,td {
+    padding: 5px;
 }
 
 #posted-jobs-table .title {
-    max-width: 150px;
+    width: 28%;
 }
 
 #posted-jobs-table .post-date {
-    width: 70px;
+    width: 10%;
 }
+
+#posted-jobs-table .url {
+    width: 5%;
+}
+
+#posted-jobs-table .company-name {
+    width: 20%;
+}
+
+#posted-jobs-table .location_type {
+    width: 10%;
+}
+
+#posted-jobs-table .is_foundation {
+    width: 10%;
+    text-align: center;
+}
+
+#posted-jobs-table .buttons {
+    width: 17%;
+}
+
 
 #job-registration-requests-table .title {
     max-width: 150px;
