@@ -26,13 +26,16 @@ final class MergeSpeakerBulkQuery
         $primary_id = $this->primary_id;
         $dupe_id    = $this->dupe_id;
 
-        return array(
-            "UPDATE Speaker SET AdminID = {$primary_id} WHERE AdminID=  {$dupe_id};",
-            "UPDATE Speaker SET OldMemberID = {$primary_id} WHERE OldMemberID=  {$dupe_id};",
-            "UPDATE Speaker SET MemberID = {$primary_id} WHERE MemberID =  {$dupe_id};",
-            "UPDATE SpeakerVote SET VoterID = {$primary_id} WHERE VoterID = {$dupe_id};",
-            "UPDATE Voter SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id};",
-            "UPDATE Talk SET OwnerID = {$primary_id} WHERE OwnerID = {$dupe_id};");
+        return array
+        (
+            "UPDATE PresentationSpeaker SET MemberID = {$primary_id} WHERE MemberID=  {$dupe_id};",
+            "UPDATE SummitSelectedPresentationList SET MemberID = {$primary_id} WHERE MemberID=  {$dupe_id};",
+            "UPDATE SummitSelectedPresentation SET MemberID = {$primary_id} WHERE MemberID =  {$dupe_id};",
+            "UPDATE Presentation_Speakers SET PresentationSpeakerID = {$primary_id} WHERE PresentationSpeakerID = {$dupe_id};",
+            "UPDATE PresentationVote SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id};",
+            "UPDATE SummitTrackChair SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id};",
+            "UPDATE VideoPresentation SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id};"
+        );
 
     }
 }
