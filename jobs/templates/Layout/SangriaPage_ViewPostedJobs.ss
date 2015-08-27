@@ -3,16 +3,16 @@
     <a href="#" class="add-live-job roundedButton addDeploymentBtn">Create Job</a>
 </div>
 <% if PostedJobs %>
-    <table id="posted-jobs-table">
+    <table id="posted-jobs-table" class="table-striped">
         <thead>
         <tr>
             <th class="title">Title</th>
-            <th>Post Date</th>
+            <th class="post-date">Post Date</th>
             <th class="url">Url</th>
-            <th>Company</th>
-            <th>Job Location</th>
-            <th>Foundation Job</th>
-            <th>&nbsp;</th>
+            <th class="company-name">Company</th>
+            <th class="location_type">Job Location</th>
+            <th class="is_foundation">Foundation</th>
+            <th class="buttons">&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
                 <td class="company-name">$JobCompany</td>
                 <td class="location_type">$JobLocation</td>
                 <td class="is_foundation"><input class="foundation_check" job_id="{$ID}" type="checkbox" <% if FoundationJob == 1 %> checked <% end_if %> /></td>
-                <td width="17%">
+                <td class="buttons">
                     <a href="#" data-job-id="{$ID}" class="edit-live-job roundedButton addDeploymentBtn">Edit</a>
                     &nbsp;
                     <a href="#" data-job-id="{$ID}" class="delete-live-job roundedButton addDeploymentBtn">Delete</a>
