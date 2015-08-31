@@ -59,7 +59,7 @@ class SurveyRegularStepTemplate
         $fields->add(new HiddenField('SurveyStepTemplateID','SurveyStepTemplateID'));
         if($this->ID > 0) {
             //questions
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(100);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses(

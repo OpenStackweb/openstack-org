@@ -79,7 +79,7 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
 
         foreach($steps as $step)
         {
-            foreach($step->Questions() as $question)
+            foreach($step->getQuestions() as $question)
             {
                 if($question instanceof SurveyLiteralContentQuestionTemplate) continue;
                 $questions[$question->ID] = $step->Name.' -> '. $question->Name;

@@ -12,15 +12,7 @@
  * limitations under the License.
  **/
 
-interface ISurveyThankYouStepTemplate extends ISurveyStepTemplate {
+interface ISurveyThankYouStepTemplate extends ISurveyStepTemplate
+{
 
-    /**
-     * @return string
-     */
-    public function emailHtmlBody();
-
-    /**
-     * @return string
-     */
-    public function emailSubject();
 }
