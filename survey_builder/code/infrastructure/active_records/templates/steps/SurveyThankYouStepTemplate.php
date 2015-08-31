@@ -20,9 +20,9 @@ class SurveyThankYouStepTemplate
     implements ISurveyThankYouStepTemplate
 {
 
-    static $db = array(
-        'EmailBodyHTML'      => 'HTMLText',
-        'EmailSubject'       => 'Text',
+    static $db = array
+    (
+
     );
 
     static $has_one = array(
@@ -45,23 +45,18 @@ class SurveyThankYouStepTemplate
         $this->SkipStep = false;
     }
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = new FieldList();
-
         $fields->add(new HtmlEditorField('Content','Content'));
         $fields->add(new TextField('FriendlyName','Friendly Name'));
-
-        $fields->add(new TextField('EmailSubject','Email Subject'));
-        $fields->add(new HtmlEditorField('EmailBodyHTML','Email Body (HTML)'));
-        $fields->add($plain_body = new TextareaField('EmailBodyPlainText','Email Body (Plain)'));
         $fields->add(new HiddenField('SurveyStepTemplateID','SurveyStepTemplateID'));
-        $plain_body->setColumns(40);
         return $fields;
     }
 
     function getValidator()
     {
-        $validator_fields  = new RequiredFields(array('FriendlyName','Content', 'EmailSubject', 'EmailBodyHTML', 'EmailBodyPlainText'));
+        $validator_fields  = new RequiredFields(array('FriendlyName','Content'));
 
         return $validator_fields;
     }
@@ -77,19 +72,4 @@ class SurveyThankYouStepTemplate
         parent::onBeforeWrite();
     }
 
-    /**
-     * @return string
-     */
-    public function emailHtmlBody()
-    {
-        return $this->getField('EmailBodyHTML');
-    }
-
-    /**
-     * @return string
-     */
-    public function emailSubject()
-    {
-        return $this->getField('EmailSubject');
-    }
 }

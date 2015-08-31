@@ -27,8 +27,9 @@ abstract class AppDevSurveyFields
         'OtherOperatingSystems' => 'OtherOperatingSystems',
         'GuestOperatingSystems' => 'GuestOperatingSystems',
         'OtherGuestOperatingSystems' => 'OtherGuestOperatingSystems',
+        'StruggleDevelopmentDeploying' => 'StruggleDevelopmentDeploying',
         'DocsPriority' => 'DocsPriority',
-        'GuestOperatingSystems' => 'GuestOperatingSystems',
+        'OtherDocsPriority' => 'OtherDocsPriority',
     );
 
     /**
