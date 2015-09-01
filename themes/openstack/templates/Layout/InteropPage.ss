@@ -83,28 +83,10 @@
         </div>
     </div>
     <h3>Qualifying for the OpenStack Powered Marketing Programs</h3>
-    <p>
-        OpenStack-based products containing a recent version of the software may qualify for one of the three OpenStack Powered
-        marketing programs, which consist of a logo and unique product naming rights.
-    </p>
-    <p>
-        Products must comply with one of the two most recent versions of requirements approved by the OpenStack Foundation
-        Board of Directors. These versions are numbered based on the date when they were approved, such as &ldquo;2015.05&rdquo;
-        for the version approved in May, 2015.
-    </p>
-    <p>
-        The two most recent versions approved by the board are
-        <a title="DefCore 2015.04 Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.04.json" target="_blank">2015.04</a>
-         and <a title="2015.05 DefCore Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.05.json" target="_blank">2015.05</a>.
-         The list of required capabilities (with must-pass tests) and designated code sections are published on
-         <a title="OpenStack DefCore Repository" href="http://git.openstack.org/cgit/openstack/defcore/tree/" target="_blank">git.openstack.org</a>
-         &nbsp;and summarized below. Once a company verifies their products include the appropriate designated sections and submit API test results,
-         they will be asked to sign the license agreements.
-    </p>
-    <p>
-        You&rsquo;ll note that the &ldquo;Platform&rdquo; program technical requirements are essentially the combination of
-         &ldquo;Compute&rdquo; and &ldquo;Object Storage&rdquo; requirements.
-    </p>
+    <p>OpenStack-based products containing a recent version of the software may qualify for one of the three OpenStack Powered marketing programs, which consist of a logo and unique product naming rights.</p>
+    <p>Products must comply with one of the two most recent versions of requirements approved by the OpenStack Foundation Board of Directors. These versions are numbered based on the date when they were approved, such as &ldquo;2015.07&rdquo; for the version approved in July, 2015.</p>
+    <p>The two most recent versions approved by the board are&nbsp;<a title="2015.05 DefCore Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.05.json" target="_blank">2015.05</a>&nbsp;and <a title="Defcore 2015.07 Guideline" href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.07.json">2015.07</a>. The list of required capabilities (with must-pass tests) and designated code sections are published on <a title="OpenStack DefCore Repository" href="http://git.openstack.org/cgit/openstack/defcore/tree/" target="_blank">git.openstack.org</a>&nbsp;and summarized below. Once a company verifies their products include the appropriate designated sections and submit API test results, they will be asked to sign the license agreements.</p>
+    <p>You&rsquo;ll note that the &ldquo;Platform&rdquo; program technical requirements are essentially the combination of &ldquo;Compute&rdquo; and &ldquo;Object Storage&rdquo; requirements.</p>
 
     <h3>
         Version
