@@ -511,7 +511,7 @@ class Survey_Controller extends Page_Controller {
 			<p>This survey provides users an opportunity to influence the community and software
 		direction. By sharing information about your configuration and requirements, the OpenStack
 		Foundation User Committee will be able to advocate on your behalf.</p>
-		<p><a href="{$link}faq" class="roundedButton">More Information About The Survey</a></p>
+		<p><a href="/user-survey/faq" class="roundedButton">More Information About The Survey</a></p>
 		<hr/>
 
 		<h1>Get Started</h1>
