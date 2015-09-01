@@ -9,8 +9,8 @@
                 <button class="btn btn-primary active btn-sm" id="add-new-member">+ Add Team Member</button>
             </div>
         </div>
-        <% if TeamMembers %>
-        <div class="row" id="team-members-container">
+
+        <div class="row" id="team-members-container"   <% if not TeamMembers %>style="display:none;"<% end_if %> >
             <div class="col-md-12">
                 <table class="table">
                     <thead>
@@ -34,6 +34,5 @@
                 </table>
             </div>
         </div>
-        <% end_if %>
         </div>
 </div>
