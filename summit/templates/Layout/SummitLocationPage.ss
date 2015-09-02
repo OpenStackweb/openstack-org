@@ -383,7 +383,7 @@
                     <td>none</td>
                 </tr>
                 <tr>
-                    <td><a href="http://www.westin-tokyo.co.jp/" target="_blank">The Westin Tokyo</a></td>
+                    <td><a href="http://www.starwoodhotels.com/westin/property/overview/index.html?propertyID=1062&language=en_US&ES=LPS_1062_EN_WI_LANGDD_AP" target="_blank">The Westin Tokyo</a></td>
                     <td>11 min walk to Ebisu Station</td>
                     <td>Yamanote Line</td>
                 </tr>
@@ -393,17 +393,17 @@
                     <td>none</td>
                 </tr>
                 <tr>
-                    <td><a href="http://www.tokyo-marriott.com/" target="_blank">Tokyo Marriott</a></td>
+                    <td><a href="https://www.marriott.com/hotels/travel/tyomc-tokyo-marriott-hotel/" target="_blank">Tokyo Marriott</a></td>
                     <td>9 min walk to Kitashinagawa Station</td>
                     <td>Keikyu Main Line</td>
                 </tr>
                 <tr>
-                    <td><a href="http://www.shinagawa.keikyu-exinn.co.jp/en/index.html" target="_blank">Hotel Villa Fontaine Tamachi</a></td>
+                    <td><a href="http://www.hvf.jp/eng/mita.php" target="_blank">Hotel Villa Fontaine Tamachi</a></td>
                     <td>10 min walk to Tamachi Station</td>
                     <td>Keihin Tohoku Line > Yamanote Lineto</td>
                 </tr>
                 <tr>
-                    <td><a href="http://www.hvf.jp/eng/mita.php" target="_blank">Hotel JAL City Tamachi Tokyo</a></td>
+                    <td><a href="http://www.jalhotels.com/domestic/kanto/tamachi/index.html" target="_blank">Hotel JAL City Tamachi Tokyo</a></td>
                     <td>9 min walk to Tamachi Station</td>
                     <td>Keihin Tohoku Line > Yamanote Lineto</td>
                 </tr>
