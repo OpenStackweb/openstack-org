@@ -15,7 +15,8 @@
 class SurveyAnswer extends DataObject
 implements ISurveyAnswer {
 
-    static $db = array(
+    static $db = array
+    (
         'Value' => 'Text',
     );
 

@@ -233,6 +233,8 @@ class Survey_Controller extends Page_Controller {
      */
     private function getCurrentSurveyInstance()
     {
+
+        // get current template
         $current_template = $this->survey_manager->getCurrentSurveyTemplate();
 
         if (is_null($current_template))
@@ -240,11 +242,13 @@ class Survey_Controller extends Page_Controller {
 
         if(!is_null($this->current_survey)) return $this->current_survey;
 
+        // check if we have the current surver stored on session
         $current_survey_id = Session::get('CURRENT_SURVEY_ID');
 
         if (!empty($current_survey_id))
         {
             $this->current_survey = $this->survey_repository->getById($current_survey_id);
+
             if(is_null($this->current_survey) || $this->current_survey->template()->getIdentifier() !== $current_template->getIdentifier())
             {
                 $this->current_survey = null;
@@ -252,6 +256,19 @@ class Survey_Controller extends Page_Controller {
             }
         }
 
+        // if not , try to get by template and creator
+        if(is_null($this->current_survey))
+        {
+            $this->current_survey = $this->survey_repository->getByTemplateAndCreator
+            (
+                $current_template->getIdentifier(),
+                Member::currentUserID()
+            );
+            if(!is_null($this->current_survey))
+                Session::set('CURRENT_SURVEY_ID', $this->current_survey->getIdentifier());
+        }
+
+        // if not, create the survey and do the population
         if(is_null($this->current_survey))
         {
 

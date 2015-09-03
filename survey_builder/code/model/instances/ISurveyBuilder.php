@@ -34,7 +34,7 @@ interface ISurveyBuilder {
 
     /**
      * @param ISurveyQuestionTemplate $question
-     * @param string $answer_value
+     * @param string|array $answer_value
      * @return ISurveyAnswer
      */
     public function buildAnswer(ISurveyQuestionTemplate $question, $answer_value);
