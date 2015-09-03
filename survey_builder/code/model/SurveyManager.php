@@ -157,7 +157,8 @@ final class SurveyManager implements ISurveyManager {
 
             if($current_step instanceof ISurveyRegularStep) {
                 $current_step->clearAnswers();
-                foreach ($current_step->template()->getQuestions() as $q) {
+                foreach ($current_step->template()->getQuestions() as $q)
+                {
                     if (isset($data[$q->name()]))
                     {
                         // its has an answer set

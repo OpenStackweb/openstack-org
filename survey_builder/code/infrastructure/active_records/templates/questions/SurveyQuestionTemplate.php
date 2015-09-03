@@ -17,9 +17,11 @@
  */
 class SurveyQuestionTemplate
     extends DataObject
-    implements ISurveyQuestionTemplate {
+    implements ISurveyQuestionTemplate
+{
 
-    static $db = array(
+    static $db = array
+    (
         'Name'         => 'VarChar(255)',
         'Label'        => 'HTMLText',
         'Order'        => 'Int',
@@ -27,19 +29,22 @@ class SurveyQuestionTemplate
         'ReadOnly'     => 'Boolean',
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'Step' => 'SurveyStepTemplate',
     );
 
-    static $indexes = array(
+    static $indexes = array
+    (
         'StepID_Name' => array('type' => 'unique', 'value' => 'StepID,Name')
     );
 
-    static $belongs_to = array(
-
+    static $belongs_to = array
+    (
     );
 
-    static $many_many = array(
+    static $many_many = array
+    (
         'DependsOn' => 'SurveyQuestionTemplate'
     );
 
@@ -303,6 +308,12 @@ class SurveyQuestionTemplate
                 }
             }
         }
+    }
+
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        DB::query("DELETE FROM SurveyQuestionTemplate_DependsOn WHERE SurveyQuestionTemplateID = {$this->ID};");
     }
 
     /**

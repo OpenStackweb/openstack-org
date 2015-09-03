@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,32 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-/**
- * Interface IMultiValueQuestionTemplate
- */
-interface IMultiValueQuestionTemplate extends ISurveyQuestionTemplate
+class SurveyQuestionRowValueTemplate extends SurveyQuestionValueTemplate
 {
+    static $db = array
+    (
+        'IsAdditional' => 'Boolean',
+    );
 
-    /**
-     * @return IQuestionValueTemplate[]
-     */
-    public function getValues();
+    private static $summary_fields = array
+    (
+        'Value',
+        'Label',
+        'IsAdditional',
+    );
 
-    /**
-     * @return IQuestionValueTemplate
-     */
-    public function getDefaultValue();
-
-    /**
-     * @param int $id
-     * @return IQuestionValueTemplate
-     */
-    public function getValueById($id);
-
-    /**
-     * @param string $value
-     * @return IQuestionValueTemplate
-     */
-    public function getValueByValue($value);
+    public function getCMSFields() {
+        $fields = parent::getCMSFields();
+        $fields->add(new CheckboxField('IsAdditional', 'Is Additional Row?'));
+        return $fields;
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,32 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-/**
- * Interface IMultiValueQuestionTemplate
- */
-interface IMultiValueQuestionTemplate extends ISurveyQuestionTemplate
+class SurveyRadioButtonMatrixTemplateQuestion extends SurveyDoubleEntryTableQuestionTemplate
 {
-
-    /**
-     * @return IQuestionValueTemplate[]
-     */
-    public function getValues();
-
-    /**
-     * @return IQuestionValueTemplate
-     */
-    public function getDefaultValue();
-
-    /**
-     * @param int $id
-     * @return IQuestionValueTemplate
-     */
-    public function getValueById($id);
-
-    /**
-     * @param string $value
-     * @return IQuestionValueTemplate
-     */
-    public function getValueByValue($value);
+    public function Type()
+    {
+        return 'RadioButtonMatrix';
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,32 +12,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-/**
- * Interface IMultiValueQuestionTemplate
- */
-interface IMultiValueQuestionTemplate extends ISurveyQuestionTemplate
+interface IDoubleEntryTableQuestionTemplate extends ISurveyQuestionTemplate
 {
+    /**
+     * @return IQuestionValueTemplate[]
+     */
+    public function getColumns();
 
     /**
      * @return IQuestionValueTemplate[]
      */
-    public function getValues();
+    public function getRows();
 
     /**
-     * @return IQuestionValueTemplate
+     * @param null $excluded_ids
+     * @return IQuestionValueTemplate[]
      */
-    public function getDefaultValue();
+    public function getAlternativeRows($excluded_ids = null);
 
     /**
-     * @param int $id
-     * @return IQuestionValueTemplate
+     * @param int $row_id
+     * @return bool
      */
-    public function getValueById($id);
+    public function isAlternativeRow($row_id);
 
     /**
-     * @param string $value
+     * @param int $row_id
      * @return IQuestionValueTemplate
      */
-    public function getValueByValue($value);
+    public function getAlternativeRow($row_id);
 }

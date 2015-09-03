@@ -181,11 +181,12 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
 
             $js = "jQuery(document).ready(function($){
 
-                    var form              = $('.survey_step_form');
-                    var form_id           = form.attr('id');
-                    var clickable_fields  = [];
-                    var selectable_fields = [];
-                    var rankable_fields   = [];
+                    var form                = $('.survey_step_form');
+                    var form_id             = form.attr('id');
+                    var clickable_fields    = [];
+                    var selectable_fields   = [];
+                    var rankable_fields     = [];
+                    var double_table_fields = [];
                     ";
 
             //hide and set js rule
@@ -199,7 +200,12 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
                 $operator   = $info['operator'];
                 $visibility = $info['visibility'];
 
-                if(($d instanceof ISurveyClickableQuestion) || ($d instanceof ISurveyRankableQuestion))
+                if
+                (
+                    ($d instanceof ISurveyClickableQuestion) ||
+                    ($d instanceof ISurveyRankableQuestion)  ||
+                    ($d instanceof IDoubleEntryTableQuestionTemplate)
+                )
                 {
                     foreach($values as $value)
                     {
@@ -224,6 +230,11 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
                                 $js .= " rankable_fields.push( $('#'+form_id+'_{$option_id}') );";
                             }
                         }
+
+                        if($d instanceof IDoubleEntryTableQuestionTemplate)
+                        {
+                            $js .= " double_table_fields.push({table : $('#'+'{$option_id}'), value: $value });";
+                        }
                     }
                 }
 
@@ -238,11 +249,15 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
             $js .= "for(var i = 0 ; i < selectable_fields.length; i++ ){
                 form.survey_validation_rules('addRequiredAnswer4SelectAbleGroup', selectable_fields, $('#{$question_id}'));
                 }";
+
             $js .= "if(clickable_fields.length > 0 )
                 form.survey_validation_rules('addRequiredAnswer4CheckAbleGroup', clickable_fields, $('#{$question_id}') ); ";
 
             $js .= "if(rankable_fields.length > 0 )
-                form.survey_validation_rules('addRequiredAnswer4RankAbleGroup', rankable_fields, $('#{$question_id}') );
+                form.survey_validation_rules('addRequiredAnswer4RankAbleGroup', rankable_fields, $('#{$question_id}') );";
+
+            $js .= "if(double_table_fields.length > 0 )
+                form.survey_validation_rules('addRequiredAnswer4TableGroup', double_table_fields, $('#{$question_id}') );
                 });";
 
             Requirements::customScript($js);

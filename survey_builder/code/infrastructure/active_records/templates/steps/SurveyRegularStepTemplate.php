@@ -63,21 +63,23 @@ class SurveyRegularStepTemplate
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses(
-                array(
-                    'SurveyTextBoxQuestionTemplate'         => 'TextBox' ,
-                    'SurveyMemberEmailQuestionTemplate'     => 'Current Member Email' ,
-                    'SurveyMemberFirstNameQuestionTemplate' => 'Current Member FirstName' ,
-                    'SurveyMemberLastNameQuestionTemplate'  => 'Current Member LastName' ,
-                    'SurveyTextBoxQuestionTemplate'         => 'TextBox' ,
-                    'SurveyTextBoxQuestionTemplate'         => 'TextBox' ,
-                    'SurveyTextAreaQuestionTemplate'        => 'TextArea',
-                    'SurveyCheckBoxQuestionTemplate'        => 'CheckBox',
-                    'SurveyCheckBoxListQuestionTemplate'    => 'CheckBoxList',
-                    'SurveyRadioButtonListQuestionTemplate' => 'RadioButtonList',
-                    'SurveyDropDownQuestionTemplate'        => 'ComboBox',
-                    'SurveyRankingQuestionTemplate'         => 'Ranking',
-                    'SurveyOrganizationQuestionTemplate'    => 'Organization',
-                    'SurveyLiteralContentQuestionTemplate'  => 'Literal',
+                array
+                (
+                    'SurveyTextBoxQuestionTemplate'           => 'TextBox' ,
+                    'SurveyMemberEmailQuestionTemplate'       => 'Current Member Email' ,
+                    'SurveyMemberFirstNameQuestionTemplate'   => 'Current Member FirstName' ,
+                    'SurveyMemberLastNameQuestionTemplate'    => 'Current Member LastName' ,
+                    'SurveyTextBoxQuestionTemplate'           => 'TextBox' ,
+                    'SurveyTextBoxQuestionTemplate'           => 'TextBox' ,
+                    'SurveyTextAreaQuestionTemplate'          => 'TextArea',
+                    'SurveyCheckBoxQuestionTemplate'          => 'CheckBox',
+                    'SurveyCheckBoxListQuestionTemplate'      => 'CheckBoxList',
+                    'SurveyRadioButtonListQuestionTemplate'   => 'RadioButtonList',
+                    'SurveyDropDownQuestionTemplate'          => 'ComboBox',
+                    'SurveyRankingQuestionTemplate'           => 'Ranking',
+                    'SurveyOrganizationQuestionTemplate'      => 'Organization',
+                    'SurveyLiteralContentQuestionTemplate'    => 'Literal',
+                    'SurveyRadioButtonMatrixTemplateQuestion' => 'RadioButtonMatrix',
                 )
             );
             $config->addComponent($multi_class_selector);
