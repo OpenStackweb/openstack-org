@@ -78,4 +78,10 @@ jQuery(document).ready(function($) {
             return false;
         }
     });
+
+    $('.entity-survey-prev-action').click(function(event){
+        window.location = $(this).attr('data-prev-url');
+        event.preventDefault();
+        return false;
+    });
 });

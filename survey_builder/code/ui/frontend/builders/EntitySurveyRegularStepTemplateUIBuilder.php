@@ -26,8 +26,7 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
         $entity_survey = $step->survey();
         if
         (
-            $entity_survey instanceof IEntitySurvey &&
-            $entity_survey->isTeamEditionAllowed()
+            $entity_survey instanceof IEntitySurvey
         )
         {
             $fields = $form->Fields();
@@ -35,6 +34,7 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
 
             if
             (
+                $entity_survey->isTeamEditionAllowed() &&
                 $entity_survey->createdBy()->getIdentifier() === Member::currentUserID() &&
                 $step->template()->order() === 1 // only show on first step
             )
@@ -55,6 +55,38 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
                 new LiteralField('owner_label',$edition_info_panel),
                 $first->getName()
             );
+
+            if
+            (
+                $step->template()->order() > 1 &&
+                $previous_step = $entity_survey->getPreviousStep($step->template()->title())
+            )
+            {
+                $request = Controller::curr()->getRequest();
+                $step                 = $request->param('STEP_SLUG');
+                $sub_step             = $request->param('SUB_STEP_SLUG');
+                $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
+                $prev_step_url        = Controller::join_links
+                (
+                    Director::absoluteBaseURL(),
+                    'surveys/current/',
+                    $step,
+                    'edit',
+                    $entity_survey_id,
+                    $previous_step->template()->title()
+                );
+                // add prev button
+                $actions = $form->Actions();
+                $btn = $actions->offsetGet(0);
+                $actions->insertBefore
+                (
+                    $prev_action = new FormAction('','Prev Step'),
+                    $btn->name
+                );
+
+                $prev_action->addExtraClass('entity-survey-prev-action');
+                $prev_action->setAttribute('data-prev-url', $prev_step_url);
+            }
 
         }
         return $form;

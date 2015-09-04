@@ -15,19 +15,20 @@
 /**
  * Class Survey
  */
-class Survey
-    extends DataObject
-    implements ISurvey {
+class Survey extends DataObject implements ISurvey {
 
-    static $db = array(
+    static $db = array
+    (
         'BeenEmailed' => 'Boolean',
     );
 
-    static $indexes = array(
+    static $indexes = array
+    (
 
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'Template'       => 'SurveyTemplate',
         'CreatedBy'      => 'Member',
         'CurrentStep'    => 'SurveyStep',
@@ -240,5 +241,22 @@ class Survey
         foreach($this->Steps() as $step){
             $step->delete();
         }
+    }
+
+    /**
+     * @param string $step_name
+     * @return ISurveyStep|null
+     */
+    public function getPreviousStep($step_name)
+    {
+        $previous = null;
+        foreach($this->getSteps() as $s){
+            if($s->template()->title() === $step_name)
+            {
+                return $previous;
+            }
+            $previous = $s;
+        }
+        return null;
     }
 }

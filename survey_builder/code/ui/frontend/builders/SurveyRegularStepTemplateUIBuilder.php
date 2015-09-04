@@ -17,7 +17,6 @@
  */
 class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
 {
-
     /**
      * @param ISurveyStep $step
      * @param string $action
