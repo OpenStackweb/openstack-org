@@ -99,17 +99,98 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-push-2">
-            <h5 class="section-title">Official Summit Hotels</h5>
+        <div class="col-sm-8 col-sm-push-2">
+            <h5 class="section-title">Hotels</h5>
             <p style="margin-bottom:30px;">
                 <i class="fa fa-hotel fa-4x"></i>
             </p>
-            $LocationsTextHeader
-
             <div class="alert alert-danger" role="alert">
-                IMPORTANT: You must use the following promo code to receive the Summit discounted rate.<br>
-                Please <a href="//openstack.org/assets/pdf-downloads/OS-Tokyo-Hotel-Info-Packet.pdf" target="_blank">read these instructions</a> for room info and additional details.<br><strong style="font-size:1.5em;">Promo Code: OST2015</strong>
+                <p class="center">
+                    All of the discounted Summit hotel room blocks are now sold out. Here are some other hotels where you may reserve a room near the Summit venue. Note that OpenStack does NOT have a contracted room block at any of these hotels.
+                </p>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 col-sm-push-1">
+            <table class="table">
+                <tr>
+                    <td><strong>Hotel</strong></td>
+                    <td><strong>Distance</strong></td>
+                    <td><strong>Train Line to Shinagawa Station</strong></td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.shinagawa.keikyu-exinn.co.jp/en/index.html" target="_blank">Keikyu EX Inn Shinagawa Ekimae</a></td>
+                    <td>450m - 5 min walk</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.intercontinental-strings.jp/eng/index.html" target="_blank">The Strings by InterContinental Tokyo</a></td>
+                    <td>900m - 11 min walk</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.starwoodhotels.com/westin/property/overview/index.html?propertyID=1062&language=en_US&ES=LPS_1062_EN_WI_LANGDD_AP" target="_blank">The Westin Tokyo</a></td>
+                    <td>11 min walk to Ebisu Station</td>
+                    <td>Yamanote Line</td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.miyakohotels.ne.jp/tokyo/english/" target="_blank">Sheraton Miyako Hotel Tokyo</a></td>
+                    <td>1.6km - 20 min walk</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.marriott.com/hotels/travel/tyomc-tokyo-marriott-hotel/" target="_blank">Tokyo Marriott</a></td>
+                    <td>9 min walk to Kitashinagawa Station</td>
+                    <td>Keikyu Main Line</td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.hvf.jp/eng/mita.php" target="_blank">Hotel Villa Fontaine Tamachi</a></td>
+                    <td>10 min walk to Tamachi Station</td>
+                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.jalhotels.com/domestic/kanto/tamachi/index.html" target="_blank">Hotel JAL City Tamachi Tokyo</a></td>
+                    <td>9 min walk to Tamachi Station</td>
+                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
+                </tr>
+                <tr>
+                    <td><a href="http://tamachi.gracery.com/" target="_blank">Hotel Gracery Tamachi</a></td>
+                    <td>9 min walk to Tamachi </td>
+                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
+                </tr>
+                <tr>
+                    <td><a href="http://en.hotel-azur.com/" target="_blank">Hotel Azur</a></td>
+                    <td>Coming Soon</td>
+                    <td>Coming Soon</td>
+                </tr>
+                <tr>
+                    <td><a href=" http://www.arthotels.co.jp/en/omori/rooms/" target="_blank">Art Hotels</a></td>
+                    <td>Coming Soon</td>
+                    <td>Coming Soon</td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.princehotels.com/en/parktower/" target="_blank">The Prince Park Tower Tokyo</a></td>
+                    <td>Coming Soon</td>
+                    <td>Coming Soon</td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.princehotels.com/en/tokyo/" target="_blank">Tokyo Prince Hotel</a></td>
+                    <td>Coming Soon</td>
+                    <td>Coming Soon</td>
+                </tr>
+                <tr>
+                    <td><a href=" http://www.thehotel.co.jp/jp/arietta_gotanda/" target="_blank">Arietta Hotel</a></td>
+                    <td>Coming Soon</td>
+                    <td>Coming Soon</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-lg-push-2">
+            <h5 class="section-title">Official Summit Hotels</h5>
+            $LocationsTextHeader
         </div>
     </div>
     <% loop Hotels %>
@@ -199,16 +280,6 @@
                 </p>
                 <p>
                     Contact <a href="mailto:sarah@fntech.com">sarah@fntech.com</a>
-                </p>
-                <hr>
-                <p>
-                    <i class="fa fa-hotel fa-2x"></i>
-                </p>
-                <p>
-                    Looking for additional hotels near the Summit venue?
-                </p>
-                <p>
-                    <a href="#" data-toggle="modal" data-target="#otherHotelsModal">List of nearby hotels</a>
                 </p>
             </div>
         </div>
@@ -350,73 +421,4 @@
     <a href="{$AboutTheCityBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$AboutTheCityBackgroundImageHero}" target="_blank"><i class="fa fa-info-circle"></i></a>
 </div>
 <% end_if %>
-
-    <!-- Other Hotels Modal -->
-    <div class="modal fade" id="otherHotelsModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">Additional Hotels</h4>
-          </div>
-          <div class="modal-body">
-          <p class="center">
-              <i class="fa fa-hotel fa-4x"></i>
-          </p>
-            <p class="center">
-                Here is a list of additional hotels near the Summit venue in Tokyo. Take the train line shown to <strong>Shinagawa Station</strong>, across the street from the Summit venue.
-            </p>
-            <table class="table">
-                <tr>
-                    <td>Hotel</td>
-                    <td>Distance</td>
-                    <td>Train Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.shinagawa.keikyu-exinn.co.jp/en/index.html" target="_blank">Keikyu EX Inn Shinagawa Ekimae</a></td>
-                    <td>450m - 5 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.intercontinental-strings.jp/eng/index.html" target="_blank">The Strings by InterContinental Tokyo</a></td>
-                    <td>900m - 11 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.starwoodhotels.com/westin/property/overview/index.html?propertyID=1062&language=en_US&ES=LPS_1062_EN_WI_LANGDD_AP" target="_blank">The Westin Tokyo</a></td>
-                    <td>11 min walk to Ebisu Station</td>
-                    <td>Yamanote Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.miyakohotels.ne.jp/tokyo/english/" target="_blank">Sheraton Miyako Hotel Tokyo</a></td>
-                    <td>1.6km - 20 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="https://www.marriott.com/hotels/travel/tyomc-tokyo-marriott-hotel/" target="_blank">Tokyo Marriott</a></td>
-                    <td>9 min walk to Kitashinagawa Station</td>
-                    <td>Keikyu Main Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.hvf.jp/eng/mita.php" target="_blank">Hotel Villa Fontaine Tamachi</a></td>
-                    <td>10 min walk to Tamachi Station</td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.jalhotels.com/domestic/kanto/tamachi/index.html" target="_blank">Hotel JAL City Tamachi Tokyo</a></td>
-                    <td>9 min walk to Tamachi Station</td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-                <tr>
-                    <td><a href="http://tamachi.gracery.com/" target="_blank">Hotel Gracery Tamachi</a></td>
-                    <td>9 min walk to Tamachi </td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-            </table>
-          </div>
-          <div class="modal-footer">
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
     <!-- End Other Hotels Modal -->
