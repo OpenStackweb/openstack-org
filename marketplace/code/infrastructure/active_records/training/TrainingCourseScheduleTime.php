@@ -25,6 +25,12 @@ class TrainingCourseScheduleTime
         'Link'      => 'Text'
     );
 
+    private static $summary_fields = array(
+        'StartDate',
+        'EndDate',
+        'Link'
+    );
+
     function getCMSValidator()
     {
        return $this->getValidator();
@@ -45,10 +51,14 @@ class TrainingCourseScheduleTime
 
         $fields->push(new LiteralField("Title","<h2>Schedule Time</h2>"));
 
-        $start_date = new JQueryUIDatePickerField("StartDate","Start Date","",null,"DataObjectManager_Popup_AddForm_EndDate");
+        $start_date = new DateField("StartDate","Start Date");
+        $start_date->setLocale('en_US');
+        $start_date->setConfig('showcalendar', true);
         $fields->push($start_date);
 
-        $end_date = new JQueryUIDatePickerField("EndDate","End Date");
+        $end_date = new DateField("EndDate","End Date");
+        $end_date->setLocale('en_US');
+        $end_date->setConfig('showcalendar', true);
         $fields->push($end_date);
 
         $fields->push(new TextField("Link","Link"));
