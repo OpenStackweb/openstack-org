@@ -99,6 +99,15 @@
          },
 
         addRequiredAnswer4TableGroup: function(table_group, question_container){
+
+            $('body').on('table_clear', function(evt, selected){
+                var current = $(evt.target);
+
+                $.each(table_group, function(index , entry){
+                    setQuestionVisibility($(radio_class, entry.field).is(':checked'), question_container);
+                });
+            });
+
             $.each(table_group, function(index , entry){
                 var radio_class = '.radio_' + entry.value;
 
