@@ -76,9 +76,9 @@ class SurveyRadioButtonMatrixField extends FormField
         $already_added_additional_rows = new ArrayList();
         $additional_rows = new ArrayList($this->question->getAlternativeRows());
 
-        if(!is_null($this->answer))
+        if(!is_null($this->answer) &&  $answer_value = $this->answer->value() && !empty($answer_value))
         {
-            $tuples           = explode(',', $this->answer->value());
+            $tuples           = explode(',', $answer_value);
             $exclude_row_list = array();
 
             foreach($tuples as $t)

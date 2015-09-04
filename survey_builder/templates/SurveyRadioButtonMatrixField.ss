@@ -7,6 +7,7 @@
     ];
 </script>
 <p>$Label</p>
+<p><a href="#" class="survey-radui-button-matrix-clear">Clear All</a></p>
 <table width="600">
     <tbody>
     <tr>
