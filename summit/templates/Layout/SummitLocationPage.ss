@@ -98,98 +98,51 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-8 col-sm-push-2">
-            <h5 class="section-title">Hotels</h5>
-            <p style="margin-bottom:30px;">
-                <i class="fa fa-hotel fa-4x"></i>
-            </p>
-            <div class="alert alert-danger" role="alert">
-                <p class="center">
-                    All of the discounted Summit hotel room blocks are now sold out. Here are some other hotels where you may reserve a room near the Summit venue. Note that OpenStack does NOT have a contracted room block at any of these hotels.
+    <% if AlternateHotels %>
+        <div class="row">
+            <div class="col-sm-8 col-sm-push-2">
+                <h5 class="section-title">Hotels</h5>
+                <p style="margin-bottom:30px;">
+                    <i class="fa fa-hotel fa-4x"></i>
                 </p>
+                <div class="alert alert-danger" role="alert">
+                    <p class="center">
+                        All of the discounted Summit hotel room blocks are now sold out. Here are some other hotels where you may reserve a room near the Summit venue. Note that OpenStack does NOT have a contracted room block at any of these hotels.
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-10 col-sm-push-1">
-            <table class="table">
-                <tr>
-                    <td><strong>Hotel</strong></td>
-                    <td><strong>Distance</strong></td>
-                    <td><strong>Train Line to Shinagawa Station</strong></td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.shinagawa.keikyu-exinn.co.jp/en/index.html" target="_blank">Keikyu EX Inn Shinagawa Ekimae</a></td>
-                    <td>450m - 5 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.intercontinental-strings.jp/eng/index.html" target="_blank">The Strings by InterContinental Tokyo</a></td>
-                    <td>900m - 11 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.starwoodhotels.com/westin/property/overview/index.html?propertyID=1062&language=en_US&ES=LPS_1062_EN_WI_LANGDD_AP" target="_blank">The Westin Tokyo</a></td>
-                    <td>11 min walk to Ebisu Station</td>
-                    <td>Yamanote Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.miyakohotels.ne.jp/tokyo/english/" target="_blank">Sheraton Miyako Hotel Tokyo</a></td>
-                    <td>1.6km - 20 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="https://www.marriott.com/hotels/travel/tyomc-tokyo-marriott-hotel/" target="_blank">Tokyo Marriott</a></td>
-                    <td>9 min walk to Kitashinagawa Station</td>
-                    <td>Keikyu Main Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.hvf.jp/eng/mita.php" target="_blank">Hotel Villa Fontaine Tamachi</a></td>
-                    <td>10 min walk to Tamachi Station</td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.jalhotels.com/domestic/kanto/tamachi/index.html" target="_blank">Hotel JAL City Tamachi Tokyo</a></td>
-                    <td>9 min walk to Tamachi Station</td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-                <tr>
-                    <td><a href="http://tamachi.gracery.com/" target="_blank">Hotel Gracery Tamachi</a></td>
-                    <td>9 min walk to Tamachi </td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-                <tr>
-                    <td><a href="http://en.hotel-azur.com/" target="_blank">Hotel Azur</a></td>
-                    <td>Coming Soon</td>
-                    <td>Coming Soon</td>
-                </tr>
-                <tr>
-                    <td><a href=" http://www.arthotels.co.jp/en/omori/rooms/" target="_blank">Art Hotels</a></td>
-                    <td>Coming Soon</td>
-                    <td>Coming Soon</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.princehotels.com/en/parktower/" target="_blank">The Prince Park Tower Tokyo</a></td>
-                    <td>Coming Soon</td>
-                    <td>Coming Soon</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.princehotels.com/en/tokyo/" target="_blank">Tokyo Prince Hotel</a></td>
-                    <td>Coming Soon</td>
-                    <td>Coming Soon</td>
-                </tr>
-                <tr>
-                    <td><a href=" http://www.thehotel.co.jp/jp/arietta_gotanda/" target="_blank">Arietta Hotel</a></td>
-                    <td>Coming Soon</td>
-                    <td>Coming Soon</td>
-                </tr>
-            </table>
+        <div class="row">
+            <div class="col-sm-10 col-sm-push-1">
+                <table class="table">
+                    <tr>
+                        <td><strong>Hotel</strong></td>
+                        <td><strong>Distance</strong></td>
+                        <td><strong>Train Line to Shinagawa Station</strong></td>
+                    </tr>
+                    <% loop AlternateHotels %>
+                        <tr>
+                            <% if $BookingLink %>
+                                <td><a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site">$Name</a></td>
+                            <% else %>
+                                <td><a href="{$Website}" target="_blank">Website</a></td>
+                            <% end_if %>
+                            <td>{$DistanceFromVenue}</td>
+                            <td>{$PublicTransitInstructions}</td>
+                        </tr>
+                    <% end_loop %>
+                </table>
+            </div>
         </div>
-    </div>
+    <% end_if %>
     <div class="row">
         <div class="col-lg-8 col-lg-push-2">
             <h5 class="section-title">Official Summit Hotels</h5>
+            <% if not $Top.AlternateHotels %>
+                <p style="margin-bottom:30px;">
+                    <i class="fa fa-hotel fa-4x"></i>
+                </p>
+            <% end_if %>
             $LocationsTextHeader
         </div>
     </div>
