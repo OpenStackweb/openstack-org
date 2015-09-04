@@ -234,16 +234,6 @@
                 <p>
                     Contact <a href="mailto:sarah@fntech.com">sarah@fntech.com</a>
                 </p>
-                <hr>
-                <p>
-                    <i class="fa fa-hotel fa-2x"></i>
-                </p>
-                <p>
-                    Looking for additional hotels near the Summit venue?
-                </p>
-                <p>
-                    <a href="#" data-toggle="modal" data-target="#otherHotelsModal">List of nearby hotels</a>
-                </p>
             </div>
         </div>
     </div>
@@ -384,73 +374,4 @@
     <a href="{$AboutTheCityBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$AboutTheCityBackgroundImageHero}" target="_blank"><i class="fa fa-info-circle"></i></a>
 </div>
 <% end_if %>
-
-    <!-- Other Hotels Modal -->
-    <div class="modal fade" id="otherHotelsModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">Additional Hotels</h4>
-          </div>
-          <div class="modal-body">
-          <p class="center">
-              <i class="fa fa-hotel fa-4x"></i>
-          </p>
-            <p class="center">
-                Here is a list of additional hotels near the Summit venue in Tokyo. Take the train line shown to <strong>Shinagawa Station</strong>, across the street from the Summit venue.
-            </p>
-            <table class="table">
-                <tr>
-                    <td>Hotel</td>
-                    <td>Distance</td>
-                    <td>Train Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.shinagawa.keikyu-exinn.co.jp/en/index.html" target="_blank">Keikyu EX Inn Shinagawa Ekimae</a></td>
-                    <td>450m - 5 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.intercontinental-strings.jp/eng/index.html" target="_blank">The Strings by InterContinental Tokyo</a></td>
-                    <td>900m - 11 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.westin-tokyo.co.jp/" target="_blank">The Westin Tokyo</a></td>
-                    <td>11 min walk to Ebisu Station</td>
-                    <td>Yamanote Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.miyakohotels.ne.jp/tokyo/english/" target="_blank">Sheraton Miyako Hotel Tokyo</a></td>
-                    <td>1.6km - 20 min walk</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.tokyo-marriott.com/" target="_blank">Tokyo Marriott</a></td>
-                    <td>9 min walk to Kitashinagawa Station</td>
-                    <td>Keikyu Main Line</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.shinagawa.keikyu-exinn.co.jp/en/index.html" target="_blank">Hotel Villa Fontaine Tamachi</a></td>
-                    <td>10 min walk to Tamachi Station</td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-                <tr>
-                    <td><a href="http://www.hvf.jp/eng/mita.php" target="_blank">Hotel JAL City Tamachi Tokyo</a></td>
-                    <td>9 min walk to Tamachi Station</td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-                <tr>
-                    <td><a href="http://tamachi.gracery.com/" target="_blank">Hotel Gracery Tamachi</a></td>
-                    <td>9 min walk to Tamachi </td>
-                    <td>Keihin Tohoku Line > Yamanote Lineto</td>
-                </tr>
-            </table>
-          </div>
-          <div class="modal-footer">
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
     <!-- End Other Hotels Modal -->
