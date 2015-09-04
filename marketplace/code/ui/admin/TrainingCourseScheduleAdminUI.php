@@ -23,8 +23,6 @@ class TrainingCourseScheduleAdminUI extends DataExtension {
 		}
 
 		$CountryCodes = CountryCodes::$iso_3166_countryCodes;
-		$CountryCodes[""] = $CountryCodes["unspecified"];
-		unset($CountryCodes["unspecified"]);
 
 		$fields->push(new LiteralField("Title","<h2>Course Schedule </h2>"));
 		$fields->push(new TextField("City","City"));
