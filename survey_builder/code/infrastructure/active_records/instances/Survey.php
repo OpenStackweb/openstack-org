@@ -259,4 +259,13 @@ class Survey extends DataObject implements ISurvey {
         }
         return null;
     }
+
+    /**
+     * @return bool
+     */
+    public function isFirstStep()
+    {
+        $first_step = $this->getSteps()->first();
+        return $first_step->getIdentifier() === $this->currentStep()->getIdentifier();
+    }
 }

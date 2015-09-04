@@ -36,7 +36,7 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
             (
                 $entity_survey->isTeamEditionAllowed() &&
                 $entity_survey->createdBy()->getIdentifier() === Member::currentUserID() &&
-                $step->template()->order() === 1 // only show on first step
+                $entity_survey->isFirstStep() // only show on first step
             )
             {
                 $fields->insertBefore
@@ -56,11 +56,9 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
                 $first->getName()
             );
 
-            if
-            (
-                $step->template()->order() > 1 &&
-                $previous_step = $entity_survey->getPreviousStep($step->template()->title())
-            )
+            $previous_step = $entity_survey->getPreviousStep($step->template()->title());
+
+            if(!is_null($previous_step))
             {
                 $request = Controller::curr()->getRequest();
                 $step                 = $request->param('STEP_SLUG');

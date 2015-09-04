@@ -36,6 +36,10 @@ interface ISurvey extends IEntity {
     /**
      * @return bool
      */
+    public function isFirstStep();
+    /**
+     * @return bool
+     */
     public function isLastStep();
 
     /**
