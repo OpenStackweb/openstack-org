@@ -45,7 +45,7 @@ class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
                 $next_step_url = sprintf("/surveys/current/%s/edit/%s/skip-step", $dyn_step_holder, $id);
             }
             $fields->add(
-                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you make <a href="%s">skip to the next section</a>.</strong></p>', $next_step_url))
+                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you may <a href="%s">skip to the next section</a>.</strong></p>', $next_step_url))
             );
         }
 
