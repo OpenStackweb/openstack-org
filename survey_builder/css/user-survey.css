@@ -470,3 +470,31 @@ div.deployment {
 {
     border: 1px solid #aaa !important;
 }
+
+.checkbox-label
+{
+    font-weight: normal !important;
+    display:inline !important;
+}
+
+table.checkboxset
+{
+    margin-left: 15px;
+}
+
+table.checkboxset tr
+{
+    padding: 15px;
+}
+
+
+table.checkboxset tr td {
+    vertical-align: middle !important;
+    text-align: left !important;
+}
+
+table.checkboxset tr td input[type="checkbox"]
+{
+    top:4px !important;
+}
+
