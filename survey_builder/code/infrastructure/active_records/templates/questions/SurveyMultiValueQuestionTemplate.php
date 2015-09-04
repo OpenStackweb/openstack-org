@@ -79,16 +79,28 @@ class SurveyMultiValueQuestionTemplate
     public function DDLValues(){
         $selected_values = array();
 
-        $owner = $_REQUEST["SurveyQuestionTemplateID"];
+        if(isset($_REQUEST["SurveyQuestionTemplateID"])) {
+            $owner = $_REQUEST["SurveyQuestionTemplateID"];
 
-        if(isset($owner)){
-            $sqlQuery = new SQLQuery();
-            $sqlQuery->setSelect("ValueID");
-            $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
-            $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
-            $selected_values = $sqlQuery->execute()->keyedColumn();
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("ValueID");
+                $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+                $selected_values = $sqlQuery->execute()->keyedColumn();
+            }
         }
-
+        else if(isset($_REQUEST["SurveyStepTemplateID"]))
+        {
+            $owner = $_REQUEST["SurveyStepTemplateID"];
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("ValueID");
+                $sqlQuery->setFrom("SurveyStepTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyStepTemplateID = {$owner} AND SurveyQuestionTemplateID = {$this->ID}");
+                $selected_values = $sqlQuery->execute()->keyedColumn();
+            }
+        }
         return new MultiDropdownField("Values_{$this->ID}", "Values_{$this->ID}",  $this->Values()->map("ID", "Value"), $selected_values);
     }
 
@@ -112,31 +124,92 @@ class SurveyMultiValueQuestionTemplate
 
         $values = array('Equal' => 'Equal', 'Not-Equal' => 'Not-Equal');
         $selected_value = '';
-        $owner = $_REQUEST["SurveyQuestionTemplateID"];
 
-        if(isset($owner)){
-            $sqlQuery = new SQLQuery();
-            $sqlQuery->setSelect("Operator");
-            $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
-            $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
-            $selected_value = current($sqlQuery->execute()->keyedColumn());
+        if(isset($_REQUEST["SurveyQuestionTemplateID"]))
+        {
+            $owner = $_REQUEST["SurveyQuestionTemplateID"];
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("Operator");
+                $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+                $selected_value = current($sqlQuery->execute()->keyedColumn());
+            }
+
         }
-
+        else if(isset($_REQUEST["SurveyStepTemplateID"]))
+        {
+            $owner = $_REQUEST["SurveyStepTemplateID"];
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("Operator");
+                $sqlQuery->setFrom("SurveyStepTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyStepTemplateID = {$owner} AND SurveyQuestionTemplateID = {$this->ID}");
+                $selected_value = current($sqlQuery->execute()->keyedColumn());
+            }
+        }
         return new DropdownField("Operator_{$this->ID}", "Operator_{$this->ID}", $values, $selected_value);
     }
+
+
+    public function DDLBooleanOperator(){
+
+        $values = array('And' => 'And', 'Or' => 'Or');
+        $selected_value = '';
+
+        if(isset($_REQUEST["SurveyQuestionTemplateID"]))
+        {
+            $owner = $_REQUEST["SurveyQuestionTemplateID"];
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("BooleanOperatorOnValues");
+                $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+                $selected_value = current($sqlQuery->execute()->keyedColumn());
+            }
+
+        }
+        else if(isset($_REQUEST["SurveyStepTemplateID"]))
+        {
+            $owner = $_REQUEST["SurveyStepTemplateID"];
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("BooleanOperatorOnValues");
+                $sqlQuery->setFrom("SurveyStepTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyStepTemplateID = {$owner} AND SurveyQuestionTemplateID = {$this->ID}");
+                $selected_value = current($sqlQuery->execute()->keyedColumn());
+            }
+        }
+        return new DropdownField("BooleanOperatorOnValues_{$this->ID}", "BooleanOperatorOnValues_{$this->ID}", $values, $selected_value);
+    }
+
 
     public function DDLVisibility(){
 
         $values = array('Visible' => 'Visible', 'Not-Visible' => 'Not-Visible');
         $selected_value = '';
-        $owner = $_REQUEST["SurveyQuestionTemplateID"];
 
-        if(isset($owner)){
-            $sqlQuery = new SQLQuery();
-            $sqlQuery->setSelect("Visibility");
-            $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
-            $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
-            $selected_value = current($sqlQuery->execute()->keyedColumn());
+        if(isset($_REQUEST["SurveyQuestionTemplateID"])) {
+            $owner = $_REQUEST["SurveyQuestionTemplateID"];
+
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("Visibility");
+                $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyQuestionTemplateID = {$owner} AND ChildID = {$this->ID}");
+                $selected_value = current($sqlQuery->execute()->keyedColumn());
+            }
+        }
+        else if(isset($_REQUEST["SurveyStepTemplateID"])) {
+            $owner = $_REQUEST["SurveyStepTemplateID"];
+
+            if (isset($owner)) {
+                $sqlQuery = new SQLQuery();
+                $sqlQuery->setSelect("Visibility");
+                $sqlQuery->setFrom("SurveyStepTemplate_DependsOn");
+                $sqlQuery->setWhere("SurveyStepTemplateID = {$owner} AND SurveyQuestionTemplateID = {$this->ID}");
+                $selected_value = current($sqlQuery->execute()->keyedColumn());
+            }
         }
 
         return new DropdownField("Visibility_{$this->ID}", "Visibility_{$this->ID}", $values, $selected_value);

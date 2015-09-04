@@ -104,6 +104,7 @@
                 var current = $(evt.target);
 
                 $.each(table_group, function(index , entry){
+                    var radio_class = '.radio_' + entry.value;
                     setQuestionVisibility($(radio_class, entry.field).is(':checked'), question_container);
                 });
             });

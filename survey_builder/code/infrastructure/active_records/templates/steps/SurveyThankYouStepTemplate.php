@@ -47,10 +47,7 @@ class SurveyThankYouStepTemplate
 
     public function getCMSFields()
     {
-        $fields = new FieldList();
-        $fields->add(new HtmlEditorField('Content','Content'));
-        $fields->add(new TextField('FriendlyName','Friendly Name'));
-        $fields->add(new HiddenField('SurveyStepTemplateID','SurveyStepTemplateID'));
+        $fields = parent::getCMSFields();
         return $fields;
     }
 

@@ -52,11 +52,8 @@ class SurveyRegularStepTemplate
 
     public function getCMSFields() {
 
-        $fields = new FieldList();
-        $fields->add(new TextField('FriendlyName','Friendly Name'));
-        $fields->add(new HtmlEditorField('Content','Content'));
-        $fields->add(new CheckboxField('SkipStep','Allow To Skip'));
-        $fields->add(new HiddenField('SurveyStepTemplateID','SurveyStepTemplateID'));
+        $fields = parent::getCMSFields();
+
         if($this->ID > 0) {
             //questions
             $config = GridFieldConfig_RecordEditor::create(100);

@@ -38,11 +38,13 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
                      // js rule, question on which we depends on its on the same step (form)
                      if(!isset( $js_rules[$d->getIdentifier()]))
                          $js_rules[$d->getIdentifier()] = array (
-                             'question'    => $d,
-                             'values'      => array(),
-                             'operator'    => $d->Operator,
-                             'visibility'  => $d->Visibility,
-                             'default'     => $d->DependantDefaultValue
+                             'question'          => $d,
+                             'values'            => array(),
+                             'operator'          => $d->Operator,
+                             'visibility'        => $d->Visibility,
+                             'default'           => $d->DependantDefaultValue,
+                             'boolean_operator'  => $d->BooleanOperatorOnValues,
+                             'initial_condition' => ($d->BooleanOperatorOnValues === 'And') ? true:false
                          );
 
                      array_push($js_rules[$d->getIdentifier()]['values'], $d->ValueID);
@@ -51,11 +53,13 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
                      // belongs to another step (former one)
                      if(!isset($static_rules[$d->getIdentifier()]))
                          $static_rules[$d->getIdentifier()] = array (
-                            'question'   => $d,
-                            'values'     => array(),
-                            'operator'   => $d->Operator,
-                            'visibility' => $d->Visibility,
-                            'default'    => $d->DependantDefaultValue
+                            'question'           => $d,
+                            'values'             => array(),
+                            'operator'           => $d->Operator,
+                            'visibility'         => $d->Visibility,
+                            'default'            => $d->DependantDefaultValue,
+                             'boolean_operator'  => $d->BooleanOperatorOnValues,
+                             'initial_condition' => ($d->BooleanOperatorOnValues === 'And') ? true:false
                          );
 
                      array_push($static_rules[$d->getIdentifier()]['values'], $d->ValueID);
@@ -102,48 +106,67 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
 
         if(count($static_rules)){
 
-            foreach ($static_rules as $id => $info) {
+            foreach ($static_rules as $id => $info)
+            {
 
-                $q          = $info['question'];
-                $values     = $info['values'];
-                $operator   = $info['operator'];
-                $visibility = $info['visibility'];
-                $default    = $info['default'];
+                $q                 = $info['question'];
+                $values            = $info['values'];
+                $operator          = $info['operator'];
+                $visibility        = $info['visibility'];
+                $default           = $info['default'];
+                $boolean_operator  = $info['boolean_operator'];
+                $initial_condition = $info['initial_condition'];
 
-                if(!$q instanceof IMultiValueQuestionTemplate) continue;
                 $answer = $current_step->survey()->findAnswerByQuestion($q);
                 if(is_null($answer)) continue;
-                $condition  = true;
+
+
                 //checks the condition
                 switch($operator){
                     case 'Equal':{
                         foreach($values as $vid) {
-                            $condition &= (strpos($answer->value(), $vid) !== false);
+                            if($boolean_operator === 'And')
+                                $initial_condition &= (strpos($answer->value(), $vid) !== false);
+                            else
+                                $initial_condition |= (strpos($answer->value(), $vid) !== false);
                         }
                     }
                     break;
                     case 'Not-Equal':{
                         foreach($values as $vid) {
-                            $condition &= (strpos($answer->value(), $vid) === false);
+                            if($boolean_operator === 'And')
+                                $initial_condition &= (strpos($answer->value(), $vid) === false);
+                            else
+                                $initial_condition |= (strpos($answer->value(), $vid) === false);
                         }
                     }
                     break;
                 }
                 //visibility
-                switch($visibility){
-                    case 'Visible':{
-                        if(!$condition){
+                switch($visibility)
+                {
+                    case 'Visible':
+                    {
+                        if(!$initial_condition){
                             $field->addExtraClass('hidden');
                             // if not visible clean it
                             $field->setValue('');
                         }
+                        else
+                        {
+                            $field->removeExtraClass('hidden');
+                        }
                     }
                     break;
                     case 'Not-Visible':{
-                        if($condition) {
+                        if($initial_condition) {
                             $field->addExtraClass('hidden');
                             // if not visible clean it
                             $field->setValue('');
+                        }
+                        else
+                        {
+                            $field->removeExtraClass('hidden');
                         }
                     }
                     break;

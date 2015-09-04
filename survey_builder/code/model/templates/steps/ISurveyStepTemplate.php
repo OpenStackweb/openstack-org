@@ -15,7 +15,8 @@
 /**
  * Interface ISurveyStepTemplate
  */
-interface ISurveyStepTemplate extends IEntity {
+interface ISurveyStepTemplate extends IEntity
+{
 
     /**
      * @return ISurveyTemplate;
@@ -46,4 +47,9 @@ interface ISurveyStepTemplate extends IEntity {
      * @return bool
      */
     public function canSkip();
+
+    /**
+     * @return ISurveyQuestionTemplate[]
+     */
+    public function getDependsOn();
 }
