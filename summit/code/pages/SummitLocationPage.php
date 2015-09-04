@@ -362,6 +362,16 @@ class SummitLocationPage_Controller extends SummitPage_Controller {
         }
         return $hotels;
     }
+
+    public function AlternateHotels() {
+        $getVars = $this->request->getVars();
+        if(isset($getVars['showHidden'])) {
+            $hotels = $this->Locations()->filter(array('Type' => 'AlternateHotel'))->sort('Order');
+        } else {
+            $hotels = $this->Locations()->filter(array('Type' => 'AlternateHotel','DisplayOnSite' => TRUE))->sort('Order');
+        }
+        return $hotels;
+    }
     
     public function Airports() {
         return $this->Locations()->filter(array('Type' => 'Airport'))->sort('Order');

@@ -9,7 +9,7 @@ class SummitLocation extends DataObject
 {
 
     private static $db = array (
-        'Type' => "Enum('Hotel,Airport,Venue')",
+        'Type' => "Enum('Hotel,AlternateHotel,Airport,Venue')",
         'Order' => 'Int',
         'Name' => 'Text',
         'Address' => 'HTMLText',
