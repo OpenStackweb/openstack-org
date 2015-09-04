@@ -33,7 +33,11 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
             $fields = $form->Fields();
             $first  = $fields->first();
 
-            if($entity_survey->createdBy()->getIdentifier() === Member::currentUserID())
+            if
+            (
+                $entity_survey->createdBy()->getIdentifier() === Member::currentUserID() &&
+                $step->template()->order() === 1 // only show on first step
+            )
             {
                 $fields->insertBefore
                 (

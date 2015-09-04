@@ -607,7 +607,7 @@ HTML;
         $members = Member::get()
             ->where("ID <> {$current_user_id} AND Email <> '' AND (Email LIKE '%{$term}%' OR {$full_name_condition} )")
             ->sort('Email')
-            ->limit(10);
+            ->limit(100);
 
         $items = array();
 
@@ -635,7 +635,7 @@ HTML;
         $term = Convert::raw2sql($request->getVar('term'));
         $orgs = Org::get()->filter('Name:PartialMatch', $term)
             ->sort('Name')
-            ->limit(10);
+            ->limit(100);
 
         $items = array();
         foreach($orgs as $org)
