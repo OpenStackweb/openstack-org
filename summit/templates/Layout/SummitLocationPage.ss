@@ -98,18 +98,52 @@
 
 
 <div class="container">
+    <% if AlternateHotels %>
+        <div class="row">
+            <div class="col-sm-8 col-sm-push-2">
+                <h5 class="section-title">Hotels</h5>
+                <p style="margin-bottom:30px;">
+                    <i class="fa fa-hotel fa-4x"></i>
+                </p>
+                <div class="alert alert-danger" role="alert">
+                    <p class="center">
+                        All of the discounted Summit hotel room blocks are now sold out. Here are some other hotels where you may reserve a room near the Summit venue. Note that OpenStack does NOT have a contracted room block at any of these hotels.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 col-sm-push-1">
+                <table class="table">
+                    <tr>
+                        <td><strong>Hotel</strong></td>
+                        <td><strong>Distance</strong></td>
+                        <td><strong>Train Line to Shinagawa Station</strong></td>
+                    </tr>
+                    <% loop AlternateHotels %>
+                        <tr>
+                            <% if $BookingLink %>
+                                <td><a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site">$Name</a></td>
+                            <% else %>
+                                <td><a href="{$Website}" target="_blank">Website</a></td>
+                            <% end_if %>
+                            <td>{$DistanceFromVenue}</td>
+                            <td>{$PublicTransitInstructions}</td>
+                        </tr>
+                    <% end_loop %>
+                </table>
+            </div>
+        </div>
+    <% end_if %>
     <div class="row">
         <div class="col-lg-8 col-lg-push-2">
             <h5 class="section-title">Official Summit Hotels</h5>
-            <p style="margin-bottom:30px;">
-                <i class="fa fa-hotel fa-4x"></i>
-            </p>
+            <% if not $Top.AlternateHotels %>
+                <p style="margin-bottom:30px;">
+                    <i class="fa fa-hotel fa-4x"></i>
+                </p>
+            <% end_if %>
             $LocationsTextHeader
-
-            <div class="alert alert-danger" role="alert">
-                IMPORTANT: You must use the following promo code to receive the Summit discounted rate.<br>
-                Please <a href="//openstack.org/assets/pdf-downloads/OS-Tokyo-Hotel-Info-Packet.pdf" target="_blank">read these instructions</a> for room info and additional details.<br><strong style="font-size:1.5em;">Promo Code: OST2015</strong>
-            </div>
         </div>
     </div>
     <% loop Hotels %>
