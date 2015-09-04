@@ -125,7 +125,7 @@
                             <% if $BookingLink %>
                                 <td><a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site">$Name</a></td>
                             <% else %>
-                                <td><a href="{$Website}" target="_blank">Website</a></td>
+                                <td><a href="{$Website}" target="_blank">$Name</a></td>
                             <% end_if %>
                             <td>{$DistanceFromVenue}</td>
                             <td>{$PublicTransitInstructions}</td>
