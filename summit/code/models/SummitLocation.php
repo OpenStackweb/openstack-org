@@ -26,6 +26,8 @@ class SummitLocation extends DataObject
         'OutOfRangeBookingGraphic' => 'Text',
         'DetailsPage' => 'Boolean',
         'LocationMessage' => 'Text',
+        'PublicTransitInstructions' => 'HTMLText',
+        'DistanceFromVenue' => 'Text'
     );
 
     private static $has_one = array (
@@ -60,6 +62,8 @@ class SummitLocation extends DataObject
         $fields->addFieldToTab('Root.Main', new CheckboxField('IsSoldOut','This location is <strong>sold out</strong> (applies to hotels only)'));
         $fields->addFieldToTab('Root.Main', new CheckboxField('DisplayOnSite','Show this location on the website. Will be hidden if unchecked.'));
         $fields->addFieldToTab('Root.Main', new CheckboxField('DetailsPage','Send people to a details page first?'));
+        $fields->addFieldToTab('Root.Main', new TextField('DistanceFromVenue','Distance From Venue'));
+        $fields->addFieldToTab('Root.Main', new TextField('PublicTransitInstructions','Public Transit Instructions'));
 
         return $fields;
     }
