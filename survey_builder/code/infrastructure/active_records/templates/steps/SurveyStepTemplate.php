@@ -24,19 +24,35 @@ class SurveyStepTemplate
         'SkipStep'     => 'Boolean',
     );
 
-    static $indexes = array(
+    static $indexes = array
+    (
         'SurveyTemplateID_Name' => array('type' => 'unique', 'value' => 'SurveyTemplateID,Name')
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'SurveyTemplate' => 'SurveyTemplate'
     );
 
-    static $belongs_to = array(
+    static $belongs_to = array
+    (
         'SkipStep' => false,
     );
 
-    static $many_many = array(
+    static $many_many = array
+    (
+        'DependsOn' => 'SurveyQuestionTemplate'
+    );
+
+    //Administrators Security Groups
+    static $many_many_extraFields = array
+    (
+        'DependsOn' => array(
+            'ValueID'      => "Int",
+            'Operator'     => "Enum('Equal, Not-Equal','Equal')",
+            'Visibility'   => "Enum('Visible, Not-Visible','Visible')",
+            'BooleanOperatorOnValues' => "Enum('And, Or','And')",
+        ),
     );
 
     static $has_many = array(
@@ -133,7 +149,8 @@ class SurveyStepTemplate
         return $validator_fields;
     }
 
-    protected function validate() {
+    protected function validate()
+    {
         $valid = parent::validate();
         if(!$valid->valid()) return $valid;
 
@@ -170,4 +187,127 @@ class SurveyStepTemplate
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
     }
+
+
+    /**
+     * @return DataList
+     */
+    private function getAllowedDependants(){
+        $steps_query = new SQLQuery();
+        $steps_query->setSelect("ID");
+        $steps_query->setFrom("SurveyStepTemplate");
+
+        $current_survey_id = $this->SurveyTemplateID;
+        $high_order = $this->Order;
+
+        $steps_query->setWhere("SurveyTemplateID = {$current_survey_id} AND `Order` <= {$high_order} ");
+        $steps_query->setOrderBy('`Order`','ASC');
+        $current_step_ids = $steps_query->execute()->keyedColumn();
+        return SurveyQuestionTemplate::get()->filter(array ('StepID' => $current_step_ids ) );
+    }
+
+    public function getCMSFields() {
+
+        $_REQUEST["SurveyStepTemplateID"] = $this->ID;
+
+        $fields = new FieldList();
+
+        $fields->add(new TextField('FriendlyName','Friendly Name'));
+        $fields->add(new HtmlEditorField('Content','Content'));
+        $fields->add(new CheckboxField('SkipStep','Allow To Skip'));
+        $fields->add(new HiddenField('SurveyTemplateID','SurveyTemplateID'));
+
+        if($this->ID > 0 ){
+            //depends on
+            $config = GridFieldConfig_RelationEditor::create();
+            $config->removeComponentsByType('GridFieldEditButton');
+            $config->removeComponentsByType('GridFieldAddNewButton');
+
+
+            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->getAllowedDependants());
+
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
+                array(
+                    'Type'          => 'Type',
+                    'Name'          => 'Name',
+                    'DDLOperator'   => 'Operator',
+                    'DDLBooleanOperator' => 'Boolean Operator (Values)',
+                    'DDLValues'     => 'Values ( on which depends)',
+                    'DDLVisibility' => 'Visibility'
+                ));
+
+            $depends = $this->DependsOn()->sort('ID');
+            $query   = $depends->dataQuery();
+            $query->groupby('SurveyQuestionTemplateID');
+            $depends = $depends->setDataQuery($query);
+
+            $gridField = new GridField('DependsOn', 'Depends On Questions (Visibility)', $depends, $config);
+
+            $fields->add($gridField);
+        }
+
+        return $fields;
+    }
+
+    protected function onAfterWrite() {
+        parent::onAfterWrite();
+        if (is_subclass_of(Controller::curr(), "LeftAndMain")) { // check if we are on admin (CMS side)
+            //update all relationships with dependants
+            foreach ($this->DependsOn() as $question) {
+                if
+                (
+                    isset($_REQUEST["Values_{$question->ID}"]) &&
+                    isset($_REQUEST["Visibility_{$question->ID}"]) &&
+                    isset($_REQUEST["Operator_{$question->ID}"]) &&
+                    isset($_REQUEST["BooleanOperatorOnValues_{$question->ID}"])
+                ) {
+
+                    $value_ids        = $_REQUEST["Values_{$question->ID}"];
+                    $operator         = $_REQUEST["Operator_{$question->ID}"];
+                    $visibility       = $_REQUEST["Visibility_{$question->ID}"];
+                    $boolean_operator = $_REQUEST["BooleanOperatorOnValues_{$question->ID}"];
+
+                    if (is_array($value_ids) && count($value_ids) > 0) {
+                        DB::query("DELETE FROM SurveyStepTemplate_DependsOn WHERE SurveyStepTemplateID = {$this->ID} AND SurveyQuestionTemplateID = {$question->ID};");
+                        foreach ($value_ids as $value_id) {
+                            $value_id = intval(Convert::raw2sql($value_id));
+                            DB::query("INSERT INTO SurveyStepTemplate_DependsOn (SurveyStepTemplateID, SurveyQuestionTemplateID , ValueID,Operator, Visibility, BooleanOperatorOnValues) VALUES ({$this->ID}, {$question->ID}, $value_id,'{$operator}','{$visibility}','{$boolean_operator}');");
+                        }
+                    }
+                } else {
+                    DB::query("DELETE FROM SurveyStepTemplate_DependsOn WHERE SurveyStepTemplateID = {$this->ID} AND SurveyQuestionTemplateID = {$question->ID};");
+                    DB::query("INSERT INTO SurveyStepTemplate_DependsOn (SurveyStepTemplateID,SurveyQuestionTemplateID,Operator, Visibility, BooleanOperatorOnValues) VALUES ({$this->ID},{$question->ID},0,'Equal','Visible', 'And');");
+                }
+            }
+        }
+    }
+
+
+    /**
+     * @return ISurveyQuestionTemplate[]
+     */
+    public function getDependsOn()
+    {
+        $result = DB::query("
+        SELECT SurveyQuestionTemplate.ClassName, SurveyQuestionTemplateID AS ID, ValueID, Operator, Visibility, BooleanOperatorOnValues
+        FROM SurveyStepTemplate_DependsOn
+        INNER JOIN SurveyQuestionTemplate ON SurveyQuestionTemplate.ID = SurveyQuestionTemplateID
+        WHERE SurveyStepTemplateID = $this->ID
+        ");
+        $list   = array();
+        foreach($result as $row)
+        {
+            $class                      = $row['ClassName'];
+            $question_id                = intval($row['ID']);
+            $q                          = $class::get()->byID($question_id);
+            $q->ValueID                 = $row['ValueID'];
+            $q->Operator                = $row['Operator'];
+            $q->Visibility              = $row['Visibility'];
+            $q->BooleanOperatorOnValues = $row['BooleanOperatorOnValues'];
+
+            $list[] = $q;
+        }
+        return $list;
+    }
+
 }

@@ -139,6 +139,10 @@ class Survey_Controller extends Page_Controller {
         Requirements::javascript('survey_builder/js/survey.validation.rules.jquery.js');
         Requirements::javascript('themes/openstack/javascript/pure.min.js');
         Requirements::javascript('survey_builder/js/survey.controller.js');
+
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
     }
 
     /**
@@ -237,39 +241,17 @@ class Survey_Controller extends Page_Controller {
 
         if(!is_null($this->current_survey)) return $this->current_survey;
 
-        // check if we have the current surver stored on session
-        $current_survey_id = Session::get('CURRENT_SURVEY_ID');
-
-        if (!empty($current_survey_id))
-        {
-            $this->current_survey = $this->survey_repository->getById($current_survey_id);
-
-            if(is_null($this->current_survey) || $this->current_survey->template()->getIdentifier() !== $current_template->getIdentifier())
-            {
-                $this->current_survey = null;
-                Session::clear('CURRENT_SURVEY_ID');
-            }
-        }
-
-        // if not , try to get by template and creator
-        if(is_null($this->current_survey))
-        {
-            $this->current_survey = $this->survey_repository->getByTemplateAndCreator
-            (
-                $current_template->getIdentifier(),
-                Member::currentUserID()
-            );
-            if(!is_null($this->current_survey))
-                Session::set('CURRENT_SURVEY_ID', $this->current_survey->getIdentifier());
-        }
+        $this->current_survey = $this->survey_repository->getByTemplateAndCreator
+        (
+            $current_template->getIdentifier(),
+            Member::currentUserID()
+        );
 
         // if not, create the survey and do the population
         if(is_null($this->current_survey))
         {
 
             $this->current_survey     = $this->survey_manager->buildSurvey($current_template->getIdentifier(), Member::currentUserID());
-            Session::set('CURRENT_SURVEY_ID', $this->current_survey->getIdentifier());
-
             // check if we should pre populate with former data ....
 
             if($current_template->shouldPrepopulateWithFormerData())

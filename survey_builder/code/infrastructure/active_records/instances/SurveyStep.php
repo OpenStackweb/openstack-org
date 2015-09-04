@@ -47,8 +47,6 @@ class SurveyStep
         return (int)$this->getField('ID');
     }
 
-
-
     /**
      * @return ISurveyStepTemplate
      */

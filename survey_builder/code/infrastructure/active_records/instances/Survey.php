@@ -153,11 +153,18 @@ class Survey extends DataObject implements ISurvey {
         return $last_step->getIdentifier() === $this->currentStep()->getIdentifier();
     }
 
-    /**
-     * @return ISurveyStep
-     */
-    public function completeCurrentStep(){
 
+    /**
+     * @return int
+     */
+    public function getCurrentStepIndex()
+    {
+        return $this->getStepIndex($this->currentStep());
+    }
+
+
+    public function getStepIndex(ISurveyStep $step)
+    {
         $steps = $this->getSteps();
         $d     = array();
 
@@ -165,14 +172,144 @@ class Survey extends DataObject implements ISurvey {
             array_push($d, $s->template()->title());
         }
 
-        $current_step_index = array_search($this->currentStep()->template()->title(), $d);
-        if(($current_step_index+1) === count($d)) return $this->currentStep();
+        return array_search($step->template()->title(), $d);
+    }
+    /**
+     * @return int
+     */
+    public function getStepsCount()
+    {
+        return count($this->getSteps());
+    }
 
-        $new_step = $this->getStep($d[$current_step_index+1]);
+    /**
+     * @param $idx
+     * @return null
+     */
+    public function getStepByIndex($idx)
+    {
+        $steps = $this->getSteps()->toArray();
+        if(count($steps) < $idx) return null;
+        return $steps[$idx];
+    }
 
-        $this->registerAllowedMaxStep($new_step);
-        $this->registerCurrentStep($new_step);
-        return $new_step;
+    /**
+     * @return ISurveyStep
+     */
+    public function completeCurrentStep(){
+
+        $current_step_index = $this->getCurrentStepIndex();
+        $steps_count        = $this->getStepsCount();
+
+        if(($current_step_index+1) === $steps_count) return $this->currentStep();
+
+        do
+        {
+            $next_step = $this->getStepByIndex(++$current_step_index);
+            if($this->canShowStep($next_step)) break;
+        }
+        while($current_step_index <= $steps_count || $next_step instanceof ISurveyThankYouStepTemplate);
+
+        $this->registerCurrentStep($next_step);
+
+        $current_max_step_index = $this->getStepIndex($this->allowedMaxStep());
+        if($current_step_index >= $current_max_step_index)
+            $this->registerAllowedMaxStep($next_step);
+        return $next_step;
+    }
+
+    /**
+     * @param ISurveyStep $step
+     * @return bool
+     */
+    public function canShowStep(ISurveyStep $step)
+    {
+        $should_show = true;
+
+        // checks if we have a dependency to show it or not
+        $static_rules = array();
+
+        foreach($step->template()->getDependsOn() as $d)
+        {
+            // belongs to another step (former one)
+            if(!isset($static_rules[$d->getIdentifier()]))
+                $static_rules[$d->getIdentifier()] = array
+                (
+                    'question'          => $d,
+                    'values'            => array(),
+                    'operator'          => $d->Operator,
+                    'visibility'        => $d->Visibility,
+                    'default'           => $d->DependantDefaultValue,
+                    'boolean_operator'  => $d->BooleanOperatorOnValues,
+                    'initial_condition' => ($d->BooleanOperatorOnValues === 'And') ? true:false
+                );
+
+            array_push($static_rules[$d->getIdentifier()]['values'], $d->ValueID);
+        }
+
+
+        foreach ($static_rules as $id => $info)
+        {
+            $q                 = $info['question'];
+            $values            = $info['values'];
+            $operator          = $info['operator'];
+            $visibility        = $info['visibility'];
+            $boolean_operator  = $info['boolean_operator'];
+            $initial_condition = $info['initial_condition'];
+
+            $answer = $this->findAnswerByQuestion($q);
+            if (is_null($answer))
+            {
+                continue;
+            }
+
+            //checks the condition
+            switch($operator)
+            {
+                case 'Equal':{
+                    foreach($values as $vid)
+                    {
+                        if($boolean_operator === 'And')
+                            $initial_condition &= (strpos($answer->value(), $vid) !== false);
+                        else
+                            $initial_condition |= (strpos($answer->value(), $vid) !== false);
+                    }
+                }
+                break;
+                case 'Not-Equal':{
+                    foreach($values as $vid) {
+                        if($boolean_operator === 'And')
+                            $initial_condition &= (strpos($answer->value(), $vid) === false);
+                        else
+                            $initial_condition |= (strpos($answer->value(), $vid) === false);
+                    }
+                }
+                break;
+            }
+
+            //visibility
+            switch($visibility)
+            {
+                case 'Visible':
+                {
+                    if(!$initial_condition)
+                    {
+                        $should_show = false;
+                    }
+                }
+                    break;
+                case 'Not-Visible':
+                {
+                    if($initial_condition)
+                    {
+                        $should_show = false;
+                    }
+                }
+                    break;
+            }
+        }
+
+        return $should_show;
     }
 
 
@@ -267,5 +404,22 @@ class Survey extends DataObject implements ISurvey {
     {
         $first_step = $this->getSteps()->first();
         return $first_step->getIdentifier() === $this->currentStep()->getIdentifier();
+    }
+
+
+    /**
+     * @return ISurveyStep[]
+     */
+    public function getCompletedSteps()
+    {
+        $completed_steps = array();
+        foreach($this->getSteps() as $step)
+        {
+            if($this->isAllowedStep($step->template()->title()) && $this->canShowStep($step))
+            {
+                $completed_steps[] = $step;
+            }
+        }
+        return new ArrayList($completed_steps);
     }
 }

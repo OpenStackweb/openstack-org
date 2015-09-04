@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <input type="text" id="member-auto-complete" class="form-control ss-member-autocomplete-field" placeholder="Member Identifier">
+                <input type="text" id="member-auto-complete" class="form-control ss-member-autocomplete-field" placeholder="Find your team member in our database">
                 <input type="hidden" id="new-team-member-id"/>
             </div>
             <div class="col-md-6">

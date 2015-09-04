@@ -54,6 +54,11 @@ interface ISurvey extends IEntity {
     public function getSteps();
 
     /**
+     * @return ISurveyStep[]
+     */
+    public function getCompletedSteps();
+
+    /**
      * @param ISurveyStep $step
      * @return void
      */
