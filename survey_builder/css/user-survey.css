@@ -301,7 +301,7 @@ ul.survey-steps li a.future:hover {
     text-decoration: none;
 }
 input.action, input.action:focus, input.action:active {
-    display: block;
+    display: inline;
     outline: none;
     background: #30739C;
     padding: 10px 20px;

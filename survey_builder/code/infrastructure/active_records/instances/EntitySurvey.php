@@ -150,4 +150,5 @@ class EntitySurvey extends Survey implements IEntitySurvey
         $member = $this->EditorTeam()->filter('MemberID', $member->getIdentifier())->first();
         return !is_null($member);
     }
+
 }
