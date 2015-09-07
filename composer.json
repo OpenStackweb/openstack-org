@@ -16,7 +16,7 @@
     "silverstripe/geoip": "dev-master",
     "unclecheese/zen-fields": "dev-master",
     "sendgrid/sendgrid": "2.2.1",
-    "silverstripe-australia/gridfieldextensions": "@stable",
+    "silverstripe-australia/gridfieldextensions": "1.0.3",
 	"unclecheese/display-logic": "dev-master",
 	"unclecheese/zen-fields": "1.0.*",
 	"unclecheese/betterbuttons": "1.2.*",

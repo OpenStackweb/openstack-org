@@ -26,8 +26,20 @@
     function checkQuestionVisibilityDropDown(ddl, question_container, values)
     {
         var show = false;
-        $.each(values, function(index , val){
-            show = show || parseInt(ddl.val()) === parseInt(val);
+        $.each(values, function(index , val)
+        {
+            var selected_values = ddl.val();
+            if(Array.isArray(selected_values))
+            {
+                for(var i=0;i<selected_values.length;i++)
+                {
+                    show = show || parseInt(val) === parseInt(selected_values[i]);
+                }
+            }
+            else
+            {
+                show = show || parseInt(selected_values) === parseInt(val);
+            }
         });
         setQuestionVisibility(show, question_container)
     }
