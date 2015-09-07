@@ -27,10 +27,10 @@
             <table classs="table">
                 <tbody>
                 <tr>
-                    <th class="location">Location</th>
-                    <th class="start">Starts</th>
-                    <th class="end">Ends</th>
-                    <th class="duration">Duration</th>
+                    <th>Location</th>
+                    <th>Starts</th>
+                    <th>Ends</th>
+                    <th>Duration</th>
                     <th>&nbsp;</th>
                 </tr>
                 <% if IsOnline %>
