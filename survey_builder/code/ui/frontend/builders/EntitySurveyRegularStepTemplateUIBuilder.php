@@ -78,7 +78,7 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
                 $btn = $actions->offsetGet(0);
                 $actions->insertBefore
                 (
-                    $prev_action = new FormAction('','Prev Step'),
+                    $prev_action = new FormAction('PrevStep','Prev Step'),
                     $btn->name
                 );
 

@@ -19,7 +19,10 @@ class RegularStepForm extends HoneyPotForm {
      */
     private $step;
 
-
+    /**
+     * @var FormAction
+     */
+    protected $default_action;
 
     /**
      * @param Controller $controller
@@ -34,10 +37,25 @@ class RegularStepForm extends HoneyPotForm {
         $this->step = $step;
     }
 
+
+    /**
+     * @param $default_action
+     */
+    public function setDefaultAction($default_action)
+    {
+        $this->default_action = $default_action;
+    }
+
     /**
      * @return ISurveyRegularStep
      */
-    public function CurrentStep(){
+    public function CurrentStep()
+    {
         return $this->step;
+    }
+
+    public function defaultAction()
+    {
+       return $this->default_action;
     }
 }

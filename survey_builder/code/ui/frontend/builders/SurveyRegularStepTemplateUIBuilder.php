@@ -73,11 +73,13 @@ class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
                 $next_btn_title = 'Save '.$survey->template()->getEntityName();
             }
         }
-        $actions   = new FieldList(
-            FormAction::create($action)->setTitle($next_btn_title)
+        $actions   = new FieldList
+        (
+            $default_action = FormAction::create($action)->setTitle($next_btn_title)
         );
 
         $form =  new RegularStepForm(Controller::curr(), $form_name, $fields, $actions, $step, $validator);
+        $form->setDefaultAction($default_action);
         $form->setAttribute('class','survey_step_form');
         return $form;
     }
