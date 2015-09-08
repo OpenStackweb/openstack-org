@@ -421,7 +421,8 @@ class Survey_Controller extends Page_Controller {
 
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-        if(!($current_step instanceof ISurveyDynamicEntityStep)) throw new LogicException();
+        if(!($current_step instanceof ISurveyDynamicEntityStep))
+            throw new LogicException(sprintf('template %s', $current_step->template()->title()));
 
         //create the current survey entity
         $this->current_entity_survey = $this->survey_manager->buildEntitySurvey($current_step, Member::currentUserID());
