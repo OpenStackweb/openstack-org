@@ -186,6 +186,7 @@ class SurveyStepTemplate
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
+        DB::query("DELETE FROM SurveyStepTemplate_DependsOn WHERE SurveyStepTemplateID = {$this->ID};");
     }
 
 

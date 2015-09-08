@@ -28,6 +28,8 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
         // get former survey ...
         $old_survey = DeploymentSurvey::get()->filter('MemberID', $owner->getIdentifier())->sort('Created', 'DESC')->first();
 
+        if(is_null($old_survey)) return;
+
         foreach($mappings as $mapping)
         {
             if(!$mapping instanceof IOldSurveyMigrationMapping) continue;
@@ -35,9 +37,12 @@ class OldSurveyDataAutopopulationStrategy implements ISurveyAutopopulationStrate
             $origin_table_name = $mapping->getOriginTableName();
             $origin_field_name = $mapping->getOriginFieldName();
             $question          = $mapping->getTargetQuestion();
-            $step_template     = $question->step();
-            $step              = $survey->getStep($step_template->title());
 
+            if(is_null($question)) continue;
+            $step_template     = $question->step();
+            if(is_null($step_template)) continue;
+            $step              = $survey->getStep($step_template->title());
+            if(is_null($step)) continue;
             if(!$step instanceof ISurveyRegularStep) continue;
 
             if($origin_table_name === 'DeploymentSurvey')

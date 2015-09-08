@@ -329,6 +329,9 @@ class SurveyQuestionTemplate
     {
         parent::onBeforeDelete();
         DB::query("DELETE FROM SurveyQuestionTemplate_DependsOn WHERE SurveyQuestionTemplateID = {$this->ID};");
+        DB::query("DELETE FROM SurveyQuestionTemplate_DependsOn WHERE ChildID = {$this->ID};");
+        DB::query("DELETE FROM SurveyStepTemplate_DependsOn WHERE SurveyQuestionTemplateID = {$this->ID};");
+        DB::query("DELETE FROM AbstractSurveyMigrationMapping WHERE TargetFieldID = {$this->ID};");
     }
 
     /**
