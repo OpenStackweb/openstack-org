@@ -61,4 +61,4 @@
     <% end_if %>
     </tbody>
 </table>
-<input type="hidden" name="$Question.Name" id="$Question.Name" value="" class="ctrl_hidden_value" $ValidationAttributesHTML />
+<input type="hidden" name="$Question.Name" id="$Question.Name" value="{$AnswerValue}" class="ctrl_hidden_value" $ValidationAttributesHTML />

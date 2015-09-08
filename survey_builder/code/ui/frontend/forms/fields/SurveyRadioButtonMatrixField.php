@@ -33,6 +33,11 @@ class SurveyRadioButtonMatrixField extends FormField
      */
     private $answer;
 
+    public function AnswerValue()
+    {
+        if(is_null($this->answer)) return '';
+        return $this->answer->value();
+    }
 
 
     public function setAnswer(ISurveyAnswer $answer)
@@ -71,12 +76,13 @@ class SurveyRadioButtonMatrixField extends FormField
                 });
             ");
 
-        $cols = new ArrayList($this->question->getColumns());
-        $rows = new ArrayList($this->question->getRows());
+        $cols                          = new ArrayList($this->question->getColumns());
+        $rows                          = new ArrayList($this->question->getRows());
         $already_added_additional_rows = new ArrayList();
-        $additional_rows = new ArrayList($this->question->getAlternativeRows());
+        $additional_rows               = new ArrayList($this->question->getAlternativeRows());
+        $answer_value                  = $this->AnswerValue();
 
-        if(!is_null($this->answer) &&  $answer_value = $this->answer->value() && !empty($answer_value))
+        if(!empty($answer_value))
         {
             $tuples           = explode(',', $answer_value);
             $exclude_row_list = array();
