@@ -23,7 +23,7 @@
     </ul>
 </li>
 <li>
-    <a href="{$AbsoluteLink}community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+    <a href="{$BaseHref}community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuCommunity">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/">Welcome! Start Here</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org/">Ask A Technical Question</a></li>
