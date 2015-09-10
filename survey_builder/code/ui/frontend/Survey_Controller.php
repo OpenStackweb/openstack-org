@@ -589,7 +589,14 @@ HTML;
 
         $members = Member::get()
             ->where("ID <> {$current_user_id} AND Email <> '' AND ( {$full_name_condition} )")
-            ->sort('ID')
+            ->sort
+            (
+                array
+                (
+                    'Surname' => 'ASC',
+                    'FirstName' => 'ASC',
+                )
+            )
             ->limit(100);
 
         $items = array();
@@ -598,8 +605,8 @@ HTML;
         {
             $items[] = array(
                 'id'    => $member->ID,
-                'label' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname,($member->getCurrentAffiliation())? $member->getCurrentAffiliation()->Organization()->Name:'N/A') ,
-                'value' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname,($member->getCurrentAffiliation())? $member->getCurrentAffiliation()->Organization()->Name:'N/A')
+                'label' => sprintf('%s, %s (%s)',$member->Surname, $member->FirstName,($member->getCurrentAffiliation())? $member->getCurrentAffiliation()->Organization()->Name:'N/A') ,
+                'value' => sprintf('%s, %s (%s)',$member->Surname, $member->FirstName,($member->getCurrentAffiliation())? $member->getCurrentAffiliation()->Organization()->Name:'N/A')
             );
         }
 
