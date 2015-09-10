@@ -579,12 +579,12 @@ HTML;
         $full_name_condition = " FirstName LIKE '%{$term}%' OR Surname LIKE '%{$term}%' ";
         if(count($split_term) == 2)
         {
-            $full_name_condition = " (FirstName LIKE '%{$split_term[0]}%' AND Surname LIKE '%{$split_term[1]}%') ";
+            $full_name_condition = " (FirstName LIKE '%{$split_term[0]}%' OR Surname LIKE '%{$split_term[1]}%') ";
         }
 
         $members = Member::get()
-            ->where("ID <> {$current_user_id} AND Email <> '' AND (Email LIKE '%{$term}%' OR {$full_name_condition} )")
-            ->sort('Email')
+            ->where("ID <> {$current_user_id} AND Email <> '' AND ( {$full_name_condition} )")
+            ->sort('ID')
             ->limit(100);
 
         $items = array();
@@ -593,8 +593,8 @@ HTML;
         {
             $items[] = array(
                 'id'    => $member->ID,
-                'label' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname, $member->Email) ,
-                'value' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname, $member->Email)
+                'label' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname,($member->getCurrentAffiliation())? $member->getCurrentAffiliation()->Organization()->Name:'N/A') ,
+                'value' => sprintf('%s, %s (%s)',$member->FirstName, $member->Surname,($member->getCurrentAffiliation())? $member->getCurrentAffiliation()->Organization()->Name:'N/A')
             );
         }
 
@@ -694,6 +694,7 @@ HTML;
                     'fname' => $member->FirstName ,
                     'lname' => $member->Surname ,
                     'email' => $member->Email ,
+                    'pic_url'   => $member->ProfilePhotoUrl(100)
                 );
             }
             $response = new SS_HTTPResponse();

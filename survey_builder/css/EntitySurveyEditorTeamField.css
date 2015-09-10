@@ -2,3 +2,8 @@
 {
     border: 1px solid #aaa !important;
 }
+
+.team-member-table tr td, .team-member-table tr th {
+    vertical-align: middle !important;
+    text-align: center !important;
+}

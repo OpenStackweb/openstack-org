@@ -18,6 +18,7 @@
 
                     var template = $('<tbody>' +
                         '<tr>'+
+                        '<td class="pic"></td>'+
                         '<td class="fname"></td>'+
                         '<td class="lname"></td>'+
                         '<td class="email"></td>'+
@@ -29,6 +30,13 @@
                         'tr':{
                             'member<-context':{
                                 '.fname':'member.fname',
+                                '.pic'  :function(arg){
+                                    var pic_url = arg.item.pic_url;
+                                    if(pic_url !== ''){
+                                        return '<img width="50" height="50" src="'+pic_url+'"/>';
+                                    }
+                                    return '';
+                                },
                                 '.lname':'member.lname',
                                 '.email':'member.email',
                                 '.delete-team-member@data-member-id':'member.id'
