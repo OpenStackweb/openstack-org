@@ -12,9 +12,10 @@
 
         <div class="row" id="team-members-container"   <% if not TeamMembers %>style="display:none;"<% end_if %> >
             <div class="col-md-12">
-                <table class="table">
+                <table class="table team-member-table">
                     <thead>
                     <tr>
+                        <th>&nbsp;</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Username</th>
@@ -24,6 +25,7 @@
                     <tbody id="team-members-body">
                     <% loop TeamMembers %>
                     <tr>
+                        <td><img width="50" height="50" src="{$ProfilePhotoUrl}"/></td>
                         <td>$FirstName</td>
                         <td>$Surname</td>
                         <td>$Email</td>
