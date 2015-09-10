@@ -166,7 +166,7 @@
                     </p>
                     <ul>
                         <li>
-                            Murano offers complete, ready-to-deploy applications in simple and clustered configurations
+                            Murano packages offer complete, ready-to-deploy applications in simple and clustered configurations
                         </li>
                         <li>
                             Heat templates help you create complete stacks in your cloud
