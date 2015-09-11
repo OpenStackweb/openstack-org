@@ -701,12 +701,12 @@ HTML;
             $items = array();
             foreach($entity_survey->getTeamMembers() as $member)
             {
-                $items[] = array(
-                    'id'    => $member->ID,
-                    'fname' => $member->FirstName ,
-                    'lname' => $member->Surname ,
-                    'email' => $member->Email ,
-                    'pic_url'   => $member->ProfilePhotoUrl(100)
+                $items[] = array
+                (
+                    'id'      => $member->ID,
+                    'fname'   => $member->FirstName ,
+                    'lname'   => $member->Surname ,
+                    'pic_url' => $member->ProfilePhotoUrl(100)
                 );
             }
             $response = new SS_HTTPResponse();
