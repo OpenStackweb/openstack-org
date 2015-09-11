@@ -21,7 +21,6 @@
                         '<td class="pic"></td>'+
                         '<td class="fname"></td>'+
                         '<td class="lname"></td>'+
-                        '<td class="email"></td>'+
                         '<td><button class="btn btn-danger active btn-sm delete-team-member" data-member-id="$ID">Delete</button></td>'+
                         '</tr>'+
                         '</tbody>');
@@ -38,7 +37,6 @@
                                     return '';
                                 },
                                 '.lname':'member.lname',
-                                '.email':'member.email',
                                 '.delete-team-member@data-member-id':'member.id'
                             }
                         }
