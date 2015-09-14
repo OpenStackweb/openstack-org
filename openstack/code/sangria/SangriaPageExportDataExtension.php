@@ -91,10 +91,13 @@ final class SangriaPageExportDataExtension extends Extension
     {
         $params = $this->owner->getRequest()->getVars();
         $fields = $params['fields'];
+        $groups = $params['groups'];
         $ext = $params['ext'];
 
         if (!isset($params['fields']) || empty($params['fields']))
             return $this->owner->httpError('412', 'missing required param fields');
+        if (!isset($params['groups']) || empty($params['groups']))
+            return $this->owner->httpError('412', 'missing required param groups');
         if (!isset($params['ext']) || empty($params['ext']))
             return $this->owner->httpError('412', 'missing required param ext');
         if (!count($fields)) {
@@ -103,10 +106,12 @@ final class SangriaPageExportDataExtension extends Extension
 
         $query = new SQLQuery();
         $query->setFrom('Member');
-        $query->addLeftJoin('Group_Members', 'Group_Members.MemberID = Member.ID');
-        $query->addLeftJoin('Group', 'Group.ID = Group_Members.GroupID');
+        $query->addLeftJoin('Group_Members', 'GM.MemberID = Member.ID','GM');
+        $query->addLeftJoin('Group_Members', 'GM2.MemberID = Member.ID','GM2');
+        $query->addLeftJoin('Group', 'Group.ID = GM.GroupID');
         $query->addWhere('Member.GerritID IS NOT NULL');
-        $fields['Groups'] = "GROUP_CONCAT(Group.Code, ' | ')";
+        $query->addWhere('GM2.GroupID IN ('.implode(',',$groups).')');
+        $fields['Groups'] = "GROUP_CONCAT(Group.Code SEPARATOR ' | ')";
         $query->setSelect($fields);
         $query->addGroupBy('Member.ID');
         $query->addOrderBy(array('Member.Surname','Member.FirstName'));
@@ -286,7 +291,7 @@ SQL;
     public function Groups()
     {
         $sql = <<<SQL
-		SELECT G.Code,G.Title,G.ClassName FROM `Group` G ORDER BY G.Title;
+		SELECT G.ID,G.Code,G.Title,G.ClassName FROM `Group` G ORDER BY G.Title;
 SQL;
         $result = DB::query($sql);
 
