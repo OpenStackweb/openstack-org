@@ -25,11 +25,17 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
     {
         $options = array();
 
-        if($question->IsCountrySelector){
-            $options = CountryCodes::$iso_3166_countryCodes;
-            $options['Worldwide']         = 'Worldwide';
-            $options['Prefer not to say'] = 'Prefer not to say';
-            $options['Too many to list']  = 'Too many to list';
+        if($question->IsCountrySelector)
+        {
+
+            $extra_options = array
+            (
+                'Worldwide' => 'Worldwide',
+                'Prefer not to say' => 'Prefer not to say',
+                'Too many to list' => 'Too many to list',
+            );
+
+            $options = array_merge($extra_options, CountryCodes::$iso_3166_countryCodes);
         }
         else {
             foreach($question->Values()->sort('Order') as $val)
