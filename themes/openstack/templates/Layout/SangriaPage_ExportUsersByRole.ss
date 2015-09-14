@@ -6,7 +6,7 @@
         <div>
         <% loop Groups %>
             <div class="cb_wrapper">
-                <input id="status[]" name="status[]" class="group" type="checkbox" checked value="$Code"/>$Title
+                <input id="groups[]" name="groups[]" class="group" type="checkbox" checked value="{$ID}"/>$Title
             </div>
         <% end_loop %>
         </div>
@@ -100,3 +100,5 @@
     <button style="padding: 5px" id="btn3_xls">Export CLA Users (XLS)</button>
     <button style="padding: 5px" id="btn3_csv">Export CLA Users (CSV)</button>
 </form>
+<br>
+<br>
