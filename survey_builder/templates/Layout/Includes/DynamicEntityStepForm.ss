@@ -4,7 +4,7 @@
             $FieldHolder
         <% end_loop %>
         <% if EntitiesSurveys %>
-            <div class="container">
+            <div class="container-fluid">
             <% loop EntitiesSurveys %>
                 <div class="deployment row">
                     <div class="col-md-1">
