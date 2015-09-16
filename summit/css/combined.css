@@ -2851,14 +2851,20 @@ ul.help-me-menu li a i {
     font-size: 1em; } }
 .dowload-app-wrapper {
   margin: 10px 0 40px;
-  padding: 40px 0;
+  padding: 40px;
   background: #edf2f7;
   border-radius: 4px;
   border: 1px solid #D4DCE5;
 }
+@media (max-width: 767px) {
+  a.app-download-btn {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
 .select-schedule-container {
   margin: 10px 0 20px;
-  padding: 40px 0;
+  padding: 40px;
   background: #edf2f7;
   border-radius: 4px;
   border: 1px solid #D4DCE5;
