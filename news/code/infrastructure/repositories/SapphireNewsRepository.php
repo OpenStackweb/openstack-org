@@ -97,12 +97,18 @@ final class SapphireNewsRepository extends SapphireRepository {
     function buildGeArchivedNewsQuery($searchTerm) {
         $searchTerm = trim($searchTerm, ' "\''); // remove double/single quotes and spaces
         $sqlSearchTerm = Convert::raw2sql($searchTerm);
-        $sqlSearchTerm = preg_replace("/\s+/", " +", $sqlSearchTerm);
-        $sqlSearchTerm = "+".$sqlSearchTerm;
+        //$sqlSearchTerm = preg_replace("/\s+/", " +", $sqlSearchTerm);
+        //$sqlSearchTerm = "+".$sqlSearchTerm;
+
+        /*return DataList::create("News")->where("Archived = 1 AND
+                MATCH ( Headline, SummaryHtmlFree, BodyHtmlFree )
+                AGAINST ('{$sqlSearchTerm}' IN BOOLEAN MODE)");*/
 
         return DataList::create("News")->where("Archived = 1 AND
-                MATCH ( Headline, SummaryHtmlFree, BodyHtmlFree )
-                AGAINST ('{$sqlSearchTerm}' IN BOOLEAN MODE)");
+                (Headline LIKE '%{$sqlSearchTerm}%' OR
+                SummaryHtmlFree LIKE '%{$sqlSearchTerm}%' OR
+                BodyHtmlFree LIKE '%{$sqlSearchTerm}%')
+                ");
     }
 
     /**

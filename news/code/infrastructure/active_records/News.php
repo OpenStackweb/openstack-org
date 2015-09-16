@@ -60,10 +60,10 @@ final class News extends DataObject implements INews
     );
 
     public static $indexes = array(
-        'Headline_SummaryHtmlFree_BodyHtmlFree' => array(
+      /*  'Headline_SummaryHtmlFree_BodyHtmlFree' => array(
             'type' => 'fulltext',
             'value' => 'Headline,SummaryHtmlFree,BodyHtmlFree'
-        )
+        )*/
     );
 
     /**
