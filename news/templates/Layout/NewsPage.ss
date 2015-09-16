@@ -1,14 +1,18 @@
 </div>
 <div class="grey-bar news">
-    <div class="row">
-        <% if CurrentMember %>
-            <% if CurrentMember.isNewsManager %>
-                <a class="manage-news-link" href="/news-manage"><i class="fa fa-cog"></i> Manage News</a>
-            <% end_if %>
-        <% end_if %>
-        <a href="/news-add"><i class="fa fa-plus-circle"></i> Post A News Article</a>
-        <a class="review-news-link" href="/marketing/make-some-news-with-openstack/news-page-editorial-guidelines/"><i class="fa fa-book"></i> Review the Editorial Guidelines</a>
-        <a class="marketing-link" href="/marketing/"><i class="fa fa-cubes"></i> Marketing Portal</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <% if CurrentMember %>
+                    <% if CurrentMember.isNewsManager %>
+                        <a class="manage-news-link" href="/news-manage"><i class="fa fa-cog"></i> Manage News</a>
+                    <% end_if %>
+                <% end_if %>
+                <a href="/news-add"><i class="fa fa-plus-circle"></i> Post A News Article</a>
+                <a class="review-news-link" href="/marketing/make-some-news-with-openstack/news-page-editorial-guidelines/"><i class="fa fa-book"></i> Review the Editorial Guidelines</a>
+                <a class="marketing-link" href="/marketing/"><i class="fa fa-cubes"></i> Marketing Portal</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -71,19 +75,15 @@
             <% end_loop %>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-            <div class="rss-sidebar">
+            <div class="news-sidebar">
                 <h3>Subscribe to our News Feed</h3>
                 <div class="sendgrid-subscription-widget" data-token="tKWLGalJp7SuomZ06awtOEUDVCRyJIzHw6y5mNMWa0Qp7GmM2v7jRcBRkxGCR0oI1XxQh1qSfv1CFfzbMoIFHg%3D%3D"></div>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "sendgrid-subscription-widget-js");</script>
-                <div class="clear"></div>
-            </div>
-            <div>
-                <h2>Foundation News</h2>
+                <hr>
+                <h3>Foundation News</h3>
                 <div class="featured-links">
                     <a href="http://superuser.openstack.org">SuperUser</a> | <a href="news/archived">Archived News</a>
-
                 </div>
-            </div>
             <ul class="featured">
                 <% loop FeaturedNews %>
                         <li>
@@ -103,32 +103,29 @@
                         </li>
                 <% end_loop %>
             </ul>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-            <div class="news-sidebar">
-                <div class="upcomingEvents">
-                    <h3>
-                        Upcoming Events
-                        <div class="see-all-events">
-                            <a href="/events">All Events <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </h3>
-                    <div class="eventBlock upcoming">
-                        <% if FutureEvents(22) %>
-                            <% loop FutureEvents(22) %>
-                                <div class="event <% if First %> top<% end_if %>">
-                                    <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
-                                    <div class="details">$formatDateRange - $EventLocation</div>
-                                    <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
-                                </div>
-                            <% end_loop %>
-                        <% else %>
-                            <div class="event top">
-                                <h3>Sorry, there are no upcoming events listed at the moment.</h3>
-                                <p class="details">Wow! It really rare that we don't have any upcoming events on display. Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;We probably just need to update this list. Please check back soon for more details.</p>
-                            </div>
-                        <% end_if %>
+            <hr>
+            <div class="upcomingEvents">
+                <h3>
+                    Upcoming Events
+                    <div class="see-all-events">
+                        <a href="/events">All Events <i class="fa fa-angle-right"></i></a>
                     </div>
+                </h3>
+                <div class="eventBlock upcoming">
+                    <% if FutureEvents(22) %>
+                        <% loop FutureEvents(22) %>
+                            <div class="event <% if First %> top<% end_if %>">
+                                <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
+                                <div class="details">$formatDateRange - $EventLocation</div>
+                                <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
+                            </div>
+                        <% end_loop %>
+                    <% else %>
+                        <div class="event top">
+                            <h3>Sorry, there are no upcoming events listed at the moment.</h3>
+                            <p class="details">Wow! It really rare that we don't have any upcoming events on display. Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;We probably just need to update this list. Please check back soon for more details.</p>
+                        </div>
+                    <% end_if %>
                 </div>
             </div>
         </div>

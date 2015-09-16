@@ -1,5 +1,5 @@
 .news-container{
-    margin-top: 20px;
+    margin-top: 60px;
 }
 
 @media screen and (max-width: 950px) {
@@ -25,8 +25,11 @@
 .grey-bar.news {
     margin-bottom: 0;
     padding: 20px;
-    text-align: right;
     width: 100%;
+}
+
+.news-subnav {
+    padding-right: 15px;
 }
 
 .grey-bar.news a {
@@ -50,7 +53,6 @@
 }
 
 .grey-bar.news a.review-news-link {
-    color: #249e2e;
     margin: 0 20px 0 20px;
 }
 
@@ -60,9 +62,7 @@
 
 @media (min-width: 730px) {
     .grey-bar.news .row {
-        width: 730px;
-        margin: auto;
-        text-align: center;
+
     }
 }
 
@@ -138,7 +138,23 @@
 
 .carousel-caption {
     text-shadow: none;
-    bottom: 60px
+    bottom: 15%;
+}
+@media (max-width: 900px) {
+    .carousel-caption {
+        bottom: 13%;
+    }
+}
+@media (max-width: 767px) {
+    .carousel-caption {
+        bottom: 18%;
+    }
+}
+
+@media (max-width: 500px) {
+    .carousel-caption {
+        bottom: 10%;
+    }
 }
 
 .carousel-caption h3 {
@@ -266,7 +282,6 @@ ul.featured li {
     list-style: none;
     margin-bottom: 30px;
     border-radius: 4px;
-    width: 290px;
 }
 
 @media (max-width: 767px) {
@@ -313,10 +328,85 @@ ul.featured li {
 
 
 .news-sidebar, .rss-sidebar {
-    background: #edf2f7;
-    padding: 15px;
+    background: white;
+    padding: 15px 0 0 30px;
     border-radius: 4px;
-    margin-top: 0
+    margin-top: 0;
+    border-left: 1px solid #D4DCE5;
+}
+@media (max-width: 767px) {
+    .news-sidebar {
+        border-left: 0;
+        padding-left: 0;
+        border-top: 1px solid #D4DCE5;
+    }
+}
+.news-sidebar h3 {
+    font-weight: 400;
+    font-size: 20px;
+}
+.news-sidebar hr {
+    border-color: #D4DCE5;
+    margin: 30px 0;
+}
+
+.news-sidebar .sendgrid-subscription-widget input[type="email"] {
+    border-radius: 4px;
+    border: 1px solid #D4DCE5;
+    padding: 5px 10px;
+    float: left;
+    width: 60%;
+    font-weight: 400;
+    color: #2A4E68;
+}
+.news-sidebar .sendgrid-subscription-widget input[type="email"]:focus {
+    outline: none;
+    border-color: #248EC7;
+}
+.news-sidebar .sendgrid-subscription-widget label>span {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    color: #2A4E68;
+}
+
+.news-sidebar .sendgrid-subscription-widget input[type="email"]::-webkit-input-placeholder {
+   color: #D4DCE5;
+   font-weight: 400;
+}
+
+.news-sidebar .sendgrid-subscription-widget input[type="email"]:-moz-placeholder { /* Firefox 18- */
+   color: #D4DCE5;
+   font-weight: 400;  
+}
+
+.news-sidebar .sendgrid-subscription-widget input[type="email"]::-moz-placeholder {  /* Firefox 19+ */
+   color: #D4DCE5;
+   font-weight: 400;  
+}
+
+.news-sidebar .sendgrid-subscription-widget input[type="email"]:-ms-input-placeholder {  
+   color: #D4DCE5;
+   font-weight: 400;  
+}
+
+.news-sidebar .sendgrid-subscription-widget input[type="submit"] {
+    border-radius: 4px;
+    border: 1px solid #248EC7;
+    padding: 9px;
+    margin: -2px 0 0 2%;
+    line-height: 1em;
+    color: white;
+    background: #248EC7;
+    width: 38%;
+    box-shadow: none;
+    text-align: center;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+.news-sidebar .sendgrid-subscription-widget input[type="submit"]:hover {
+    background: #2A4E68;
+    border: 1px solid #2A4E68;
 }
 
 .rss-sidebar {
@@ -337,7 +427,7 @@ ul.featured li {
 }
 
 .eventBlock {
-    padding-left: 15px;
+    padding-left: 2px;
     font-size: 12px;
     float: none;
 }
@@ -758,7 +848,9 @@ input[type=checkbox], input[type=radio] {
 }
 
 .featured-links {
-    margin-bottom: 10px;
+    margin: 20px 0 15px;
+    text-transform: uppercase;
+    font-size: 0.85em;
 }
 
 .stylish-input-group {
@@ -789,4 +881,21 @@ input[type=checkbox], input[type=radio] {
 
 .newsHome {
     margin-top: 10px;
+}
+.date.news-article {
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 0;
+}
+h1.article-h1 {
+    text-align: left;
+}
+h3.largeHeadline {
+    font-size: 2.5em;
+}
+@media (max-width: 767px) {
+    h3.largeHeadline {
+        font-size: 1.5em;
+    }
 }
