@@ -2849,7 +2849,20 @@ ul.help-me-menu li a i {
   .schedule-square a.outline-btn {
     width: 60%;
     font-size: 1em; } }
-
+.dowload-app-wrapper {
+  margin: 10px 0 40px;
+  padding: 40px 0;
+  background: #edf2f7;
+  border-radius: 4px;
+  border: 1px solid #D4DCE5;
+}
+.select-schedule-container {
+  margin: 10px 0 20px;
+  padding: 40px 0;
+  background: #edf2f7;
+  border-radius: 4px;
+  border: 1px solid #D4DCE5;
+}
 .about-city-row {
   background: url('/summit/images/tokyo/tokyo-bkgd-city.jpg') no-repeat left top;
   min-height: 610px;
