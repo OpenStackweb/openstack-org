@@ -592,6 +592,20 @@ class Survey_Controller extends Page_Controller {
                 throw new LogicException(sprintf('entity survey id is %s - member_id %s', $entity_survey_id, Member::currentUserID()));
             }
 
+            if($this->current_entity_survey->currentStep()->template()->title() !== $sub_step)
+            {
+                throw new LogicException
+                (
+                    sprintf
+                    (
+                        'current step %s differs from requested one %s - member_id %s',
+                        $this->current_entity_survey->currentStep()->template()->title(),
+                        $sub_step,
+                        Member::currentUserID()
+                    )
+                );
+            }
+
             $builder = SurveyStepUIBuilderFactory::getInstance()->build($this->current_entity_survey->currentStep());
 
             if (is_null($builder))
@@ -628,6 +642,15 @@ class Survey_Controller extends Page_Controller {
     {
         try
         {
+
+            $step     = $this->request->param('STEP_SLUG');
+            if(is_null($step))
+                $step = $this->request->requestVar('STEP_SLUG');
+
+            $sub_step = $this->request->param('SUB_STEP_SLUG');
+            if(is_null($sub_step))
+                $sub_step = $this->request->requestVar('SUB_STEP_SLUG');
+
             $entity_survey = $this->getCurrentEntitySurveyInstance(intval($data['survey_id']));
 
             if(is_null($entity_survey))
@@ -637,7 +660,6 @@ class Survey_Controller extends Page_Controller {
             $next_step     = $this->survey_manager->completeStep($current_step, $data);
             if($entity_survey->isLastStep())
             {
-                $this->survey_manager->resetSteps($entity_survey);
                 return $this->redirect('/surveys/current/'.$this->current_survey->currentStep()->template()->title());
             }
             else{
