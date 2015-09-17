@@ -17,7 +17,8 @@ class SurveyDynamicEntityStepTemplate
     implements ISurveyDynamicEntityStepTemplate
 {
 
-    static $db = array(
+    static $db = array
+    (
         'AddEntityText' => 'VarChar(255)',
         'DeleteEntityText' => 'VarChar(255)',
         'EditEntityText' => 'VarChar(255)',
@@ -99,7 +100,6 @@ class SurveyDynamicEntityStepTemplate
         $id = $this->ID;
         $entity_id = $this->EntityID;
         if ($id === 0 || is_null($id)) return;
-        $this->fixOrder();
         DB::query("UPDATE EntitySurveyTemplate SET `OwnerID` = 0 WHERE OwnerID = {$id}; ");
         if ($entity_id === 0 || is_null($entity_id)) return;
         DB::query("UPDATE EntitySurveyTemplate SET `OwnerID` = {$id} WHERE ID = {$entity_id}; ");

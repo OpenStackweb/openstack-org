@@ -105,8 +105,6 @@ class SurveyRegularStepTemplate
         parent::onAfterWrite();
         $id         = $this->ID;
         if ($id === 0 || is_null($id)) return;
-
-        $this->fixOrder();
     }
 
     protected function onBeforeDelete() {
