@@ -16,7 +16,8 @@ class SurveyStepTemplate
     extends DataObject
     implements ISurveyStepTemplate
 {
-    static $db = array(
+    static $db = array
+    (
         'Name'         => 'VarChar(255)',
         'Content'      => 'HTMLText',
         'FriendlyName' => 'Text',
@@ -55,11 +56,13 @@ class SurveyStepTemplate
         ),
     );
 
-    static $has_many = array(
+    static $has_many = array
+    (
 
     );
 
-    private static $defaults = array(
+    private static $defaults = array
+    (
     );
 
     /**
@@ -168,21 +171,6 @@ class SurveyStepTemplate
         return $valid;
     }
 
-    protected function fixOrder(){
-
-        $id = $this->ID;
-        // fix for thank u step
-        $last_step  = $this->survey()->getLastStep();
-        $new_order = $order = count($this->survey()->getSteps());
-        $last_id   = $last_step->getIdentifier();
-        if($last_step instanceof ISurveyThankYouStepTemplate){
-            $order = $order - 1;
-            DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$new_order} WHERE ID = {$last_id} ");
-        }
-
-        DB::query(" UPDATE SurveyStepTemplate SET `Order` = {$order} WHERE ID = {$id} ");
-
-    }
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();

@@ -61,8 +61,14 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
             if(!is_null($previous_step))
             {
                 $request = Controller::curr()->getRequest();
-                $step                 = $request->param('STEP_SLUG');
-                $sub_step             = $request->param('SUB_STEP_SLUG');
+                $step    = $request->param('STEP_SLUG');
+
+                if(empty($step))
+                    $step = $request->requestVar('STEP_SLUG');
+
+                if(empty($step))
+                    throw new LogicException('step empty! - member_id %s', Member::currentUserID());
+
                 $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
                 $prev_step_url        = Controller::join_links
                 (
