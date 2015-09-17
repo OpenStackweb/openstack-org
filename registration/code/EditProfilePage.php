@@ -662,15 +662,20 @@ class EditProfilePage_Controller extends Page_Controller
             $training_id = intval(@$_GET['training_id']);
         }
         // Validation if it belongs to the program
-        if (Member::currentUser()->canEditTraining($training_id)) {
-            $context = array('Training' => $this->training_repository->getById($training_id));
-            $this->training_id = $training_id;
-            return $this->renderWith(array('EditProfilePage_TrainingAddCourse', 'Page'), $context);
+        if (Member::currentUser()) {
+            if (Member::currentUser()->canEditTraining($training_id)) {
+                $context = array('Training' => $this->training_repository->getById($training_id));
+                $this->training_id = $training_id;
+                return $this->renderWith(array('EditProfilePage_TrainingAddCourse', 'Page'), $context);
 
+            } else {
+                echo "You are not allowed to do this.";
+                die();
+            }
         } else {
-            echo "You are not allowed to do this.";
-            die();
+            return Controller::curr()->redirect('/Security/login?BackURL=/profile/TrainingAddCourse?training_id='.$training_id);
         }
+
     }
 
     function getMarketPlaceManagerLink()
