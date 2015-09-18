@@ -35,11 +35,13 @@
                     <% include Marketing_Announcements %>
                 </div>
             <% end_if %>
+            <%--
             <% if Feeds %>
                 <div class="feed">
                     <% include Marketing_Feeds %>
                 </div>
             <% end_if %>
+            --%>
             <% if LatestCases %>
                 <div class="case-studies">
                     <% include Marketing_Cases %>

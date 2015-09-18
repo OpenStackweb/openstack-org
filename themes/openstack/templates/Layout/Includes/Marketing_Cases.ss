@@ -1,5 +1,4 @@
 <h2>Case Studies</h2>
-<hr>
 <div class="item-list">
 	<% loop LatestCases %>
 	<div class="item row">
