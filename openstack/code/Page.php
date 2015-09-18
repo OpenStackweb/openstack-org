@@ -254,9 +254,8 @@ class Page_Controller extends ContentController
             array_push($js_files, "themes/openstack/javascript/shadowbox/shadowbox.js");
         }
 
-        Requirements::combine_files('base_page.js',
-            $js_files
-        );
+        foreach($js_files as $js_file)
+            Requirements::javascript($js_file);
 
         $filename = 'themes/openstack/css/' . $this->URLSegment . '.css';
 
