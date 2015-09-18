@@ -66,14 +66,14 @@
 	padding-top: 2px;
 }
 
-.feed {
+.feed,.case-studies {
 	border: 1px solid #D4DCE5;
 	background: #edf2f7;
 	padding: 0px 20px;
 	border-radius: 4px;
 }
 
-.feed h2 {
+.feed,.case-studies h2 {
 	line-height: 1;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 	padding-bottom: 10px;
