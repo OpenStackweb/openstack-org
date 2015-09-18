@@ -30,7 +30,7 @@
                 } else {
                     folder_cont.fadeIn();
                 }
-                offset_arrow = div.position().left + 55;
+                offset_arrow = 55;
                 div.children('.folder-contents').children('.arrow').css({
                     'margin-left' : offset_arrow + 'px'
                 });
