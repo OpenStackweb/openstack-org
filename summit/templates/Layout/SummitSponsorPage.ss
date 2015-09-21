@@ -197,7 +197,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
                     <h5 class="section-title">
-                        Media Sponsors
+                        Media Partners
                     </h5>
                 </div>
                 <div class="col-lg-8 col-lg-push-2">
