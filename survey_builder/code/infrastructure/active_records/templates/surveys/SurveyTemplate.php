@@ -297,4 +297,17 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     {
         return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->toArray();
     }
+
+    /**
+     * @param $question_id
+     * @return ISurveyQuestionTemplate
+     */
+    public function getQuestionById($question_id){
+        foreach($this->getSteps() as $step){
+            if(!$step instanceof ISurveyRegularStepTemplate) continue;
+            $q = $step->getQuestionById($question_id);
+            if(!is_null($q)) return $q;
+        }
+        return null;
+    }
 }

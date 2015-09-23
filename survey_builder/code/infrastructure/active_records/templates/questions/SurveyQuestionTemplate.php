@@ -22,11 +22,13 @@ class SurveyQuestionTemplate
 
     static $db = array
     (
-        'Name'         => 'VarChar(255)',
-        'Label'        => 'HTMLText',
-        'Order'        => 'Int',
-        'Mandatory'    => 'Boolean',
-        'ReadOnly'     => 'Boolean',
+        'Name'                    => 'VarChar(255)',
+        'Label'                   => 'HTMLText',
+        'Order'                   => 'Int',
+        'Mandatory'               => 'Boolean',
+        'ReadOnly'                => 'Boolean',
+        'ShowOnSangriaStatistics' => 'Boolean',
+        'ShowOnPublicStatistics'  => 'Boolean',
     );
 
     static $has_one = array
@@ -215,6 +217,8 @@ class SurveyQuestionTemplate
         $fields->add(new TextareaField('Label','Label'));
         $fields->add(new CheckboxField('Mandatory','Is Mandatory?'));
         $fields->add(new CheckboxField('ReadOnly','Is Read Only?'));
+        $fields->add(new CheckboxField('ShowOnSangriaStatistics','Show on Sangria statistics?'));
+        $fields->add(new CheckboxField('ShowOnPublicStatistics','Show on Public statistics?'));
 
         if($this->ID > 0 ){
             //depends on

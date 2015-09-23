@@ -327,6 +327,63 @@ SQL;
 
     // Export CSV of all Deployment Surveys and Associated Deployments
 
+
+    private function ExportSurveyResultsDataSurveyBuilder()
+    {
+        SangriaPage_Controller::generateDateFilters('REPORT', 'LastEdited');
+
+        $date_filter = SangriaPage_Controller::$date_filter_query;
+
+        $range = Controller::curr()->getRequest()->getVar('Range');
+
+$query = <<<SQL
+-- surveys
+SELECT * FROM (
+SELECT
+S.ID AS SurveyID,
+S.CreatedByID,
+M.Email,
+S.Created,
+S.LastEdited,
+SETPL.Name AS Step,
+Q.Name AS Question,
+SETPL.`Order` AS StepOrder,
+Q.`Order` AS QuestionOrder,
+Q.ClassName AS QuestionClass,
+-- SA.ID,
+CASE Q.ClassName
+WHEN 'SurveyDropDownQuestionTemplate'
+THEN (
+IF(
+	( SELECT IsCountrySelector FROM SurveyDropDownQuestionTemplate DDL WHERE DDL.ID = Q.ID) = 1,
+    SA.Value,
+    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+    )
+)
+WHEN 'SurveyCheckBoxListQuestionTemplate'
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+WHEN 'SurveyRankingQuestionTemplate'
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+WHEN 'SurveyRadioButtonListQuestionTemplate'
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+ELSE SA.Value END AS Answer
+FROM Survey S
+INNER JOIN SurveyStep SE ON SE.SurveyID = S.ID
+INNER JOIN Member M ON M.ID = S.CreatedByID
+INNER JOIN SurveyStepTemplate SETPL ON SETPL.ID = SE.TemplateID
+INNER JOIN SurveyAnswer SA ON SA.StepID = SE.ID
+INNER JOIN SurveyQuestionTemplate Q ON SA.QuestionID = Q.ID
+WHERE
+S.ClassName = 'Survey'
+) REPORT
+WHERE {$date_filter}
+ORDER BY SurveyID ASC , StepOrder ASC, QuestionOrder ASC;
+SQL;
+        $res = DB::query($query);
+
+        return $res;
+    }
+
     private function ExportSurveyResultsData(){
         SangriaPage_Controller::generateDateFilters('s');
         $range = Controller::curr()->getRequest()->getVar('Range');
@@ -443,320 +500,588 @@ SQL;
     function ExportSurveyResults()
     {
         $fileDate = date('Ymdhis');
+        $range = Controller::curr()->getRequest()->getVar('Range');
 
-        $res = $this->ExportSurveyResultsData();
-
-        $fields = array(
-            'SurveyID',
-            'SurveyCreated',
-            'SurveyEdited',
-            'OrgName',
-            'OrgID',
-            'DeploymentID',
-            'DeploymentCreated',
-            'DeploymentEdited',
-            'FirstName',
-            'Surname',
-            'Email',
-            'Title',
-            'Industry',
-            'OtherIndustry',
-            'PrimaryCity',
-            'PrimaryState',
-            'PrimaryCountry',
-            'OrgSize',
-            'OpenStackInvolvement',
-            'InformationSources',
-            'OtherInformationSources',
-            'FurtherEnhancement',
-            'FoundationUserCommitteePriorities',
-            'UserGroupMember',
-            'UserGroupName',
-            'OkToContact',
-            'BusinessDrivers',
-            'OtherBusinessDrivers',
-            'WhatDoYouLikeMost',
-            'NetPromoter',
-            'OpenStackRecommendation',
-            'OpenStackActivity',
-            'OpenStackRelationship',
-            'ITActivity',
-            'InterestedUsingContainerTechnology',
-            'ContainerRelatedTechnologies',
-            'Label',
-            'IsPublic',
-            'DeploymentType',
-            'ProjectsUsed',
-            'CurrentReleases',
-            'DeploymentStage',
-            'NumCloudUsers',
-            'APIFormats',
-            'Hypervisors',
-            'OtherHypervisor',
-            'BlockStorageDrivers',
-            'OtherBlockStorageDriver',
-            'NetworkDrivers',
-            'OtherNetworkDriver',
-            'IdentityDrivers',
-            'OtherIndentityDriver',
-            'SupportedFeatures',
-            'ComputeNodes',
-            'ComputeCores',
-            'ComputeInstances',
-            'BlockStorageTotalSize',
-            'ObjectStorageSize',
-            'ObjectStorageNumObjects',
-            'NetworkNumIPs',
-            'WorkloadsDescription',
-            'OtherWorkloadsDescription',
-            'WhyNovaNetwork',
-            'OtherWhyNovaNetwork',
-            'DeploymentTools',
-            'OtherDeploymentTools',
-            'DeploymentOperatingSystems',
-            'DeploymentOtherOperatingSystems',
-            'SwiftGlobalDistributionFeatures',
-            'SwiftGlobalDistributionFeaturesUsesCases',
-            'OtherSwiftGlobalDistributionFeaturesUsesCases',
-            'Plans2UseSwiftStoragePolicies',
-            'OtherPlans2UseSwiftStoragePolicies',
-            'UsedDBForOpenStackComponents',
-            'OtherUsedDBForOpenStackComponents',
-            'ToolsUsedForYourUsers',
-            'OtherToolsUsedForYourUsers',
-            'Reason2Move2Ceilometer',
-            'CountriesPhysicalLocation',
-            'CountriesUsersLocation',
-            'ServicesDeploymentsWorkloads',
-            'OtherServicesDeploymentsWorkloads',
-            'EnterpriseDeploymentsWorkloads',
-            'OtherEnterpriseDeploymentsWorkloads',
-            'HorizontalWorkloadFrameworks',
-            'OtherHorizontalWorkloadFrameworks',
-            'UsedPackages',
-            'CustomPackagesReason',
-            'OtherCustomPackagesReason',
-            'PaasTools',
-            'OtherPaasTools',
-            'OtherSupportedFeatures',
-            'InteractingClouds',
-            'OtherInteractingClouds'
-        );
         $data = array();
+        if($range === SurveyType::FALL_2015)
+        {
+            $data = $this->getSurveyBuilderExportData();
+        }
+        else {
+            $res = $this->ExportSurveyResultsData();
 
-        foreach ($res as $row) {
-            $member = array();
-            foreach ($fields as $field) {
-                $member[$field] = $row[$field];
+            $fields = array(
+                'SurveyID',
+                'SurveyCreated',
+                'SurveyEdited',
+                'OrgName',
+                'OrgID',
+                'DeploymentID',
+                'DeploymentCreated',
+                'DeploymentEdited',
+                'FirstName',
+                'Surname',
+                'Email',
+                'Title',
+                'Industry',
+                'OtherIndustry',
+                'PrimaryCity',
+                'PrimaryState',
+                'PrimaryCountry',
+                'OrgSize',
+                'OpenStackInvolvement',
+                'InformationSources',
+                'OtherInformationSources',
+                'FurtherEnhancement',
+                'FoundationUserCommitteePriorities',
+                'UserGroupMember',
+                'UserGroupName',
+                'OkToContact',
+                'BusinessDrivers',
+                'OtherBusinessDrivers',
+                'WhatDoYouLikeMost',
+                'NetPromoter',
+                'OpenStackRecommendation',
+                'OpenStackActivity',
+                'OpenStackRelationship',
+                'ITActivity',
+                'InterestedUsingContainerTechnology',
+                'ContainerRelatedTechnologies',
+                'Label',
+                'IsPublic',
+                'DeploymentType',
+                'ProjectsUsed',
+                'CurrentReleases',
+                'DeploymentStage',
+                'NumCloudUsers',
+                'APIFormats',
+                'Hypervisors',
+                'OtherHypervisor',
+                'BlockStorageDrivers',
+                'OtherBlockStorageDriver',
+                'NetworkDrivers',
+                'OtherNetworkDriver',
+                'IdentityDrivers',
+                'OtherIndentityDriver',
+                'SupportedFeatures',
+                'ComputeNodes',
+                'ComputeCores',
+                'ComputeInstances',
+                'BlockStorageTotalSize',
+                'ObjectStorageSize',
+                'ObjectStorageNumObjects',
+                'NetworkNumIPs',
+                'WorkloadsDescription',
+                'OtherWorkloadsDescription',
+                'WhyNovaNetwork',
+                'OtherWhyNovaNetwork',
+                'DeploymentTools',
+                'OtherDeploymentTools',
+                'DeploymentOperatingSystems',
+                'DeploymentOtherOperatingSystems',
+                'SwiftGlobalDistributionFeatures',
+                'SwiftGlobalDistributionFeaturesUsesCases',
+                'OtherSwiftGlobalDistributionFeaturesUsesCases',
+                'Plans2UseSwiftStoragePolicies',
+                'OtherPlans2UseSwiftStoragePolicies',
+                'UsedDBForOpenStackComponents',
+                'OtherUsedDBForOpenStackComponents',
+                'ToolsUsedForYourUsers',
+                'OtherToolsUsedForYourUsers',
+                'Reason2Move2Ceilometer',
+                'CountriesPhysicalLocation',
+                'CountriesUsersLocation',
+                'ServicesDeploymentsWorkloads',
+                'OtherServicesDeploymentsWorkloads',
+                'EnterpriseDeploymentsWorkloads',
+                'OtherEnterpriseDeploymentsWorkloads',
+                'HorizontalWorkloadFrameworks',
+                'OtherHorizontalWorkloadFrameworks',
+                'UsedPackages',
+                'CustomPackagesReason',
+                'OtherCustomPackagesReason',
+                'PaasTools',
+                'OtherPaasTools',
+                'OtherSupportedFeatures',
+                'InteractingClouds',
+                'OtherInteractingClouds'
+            );
+
+
+            foreach ($res as $row) {
+                $member = array();
+                foreach ($fields as $field) {
+                    $member[$field] = $row[$field];
+                }
+                array_push($data, $member);
             }
-            array_push($data, $member);
         }
 
-        $filename = "Survey_" . $fileDate . ".csv";
+        switch($range)
+        {
+            case SurveyType::MARCH_2015:
+                $version = 'v2';
+                break;
+            case SurveyType::FALL_2015:
+                $version = 'v3';
+                break;
+            default:
+                $version = 'v1';
+                break;
+        }
+
+        $filename = "Survey_" . $version. '_' . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
+
+    private function buildSurveyBuilderHeaders()
+    {
+
+        $survey_header_query = <<<SQL
+SELECT SS.Name, Q.Name, Q.ClassName FROM SurveyTemplate S
+INNER JOIN SurveyStepTemplate SS ON SS.SurveyTemplateID = S.ID
+INNER JOIN SurveyQuestionTemplate Q ON Q.StepID = SS.ID
+WHERE S.ClassName = 'SurveyTemplate' AND Q.ClassName <> 'SurveyLiteralContentQuestionTemplate'
+ORDER BY SS.`Order`, Q.`Order`;
+SQL;
+
+        $res = DB::query($survey_header_query);
+        $template_1 = array();
+        $template_1['SurveyID']    = null;
+        $template_1['CreatedByID'] = null;
+        $template_1['Email']       = null;
+        $template_1['Created']     = null;
+        $template_1['LastEdited']  = null;
+
+        foreach($res as $row)
+        {
+            $name = $row['Name'];
+            $template_1[$name] = null;
+        }
+
+        $entity_survey_header_query = <<<SQL
+SELECT SS.Name, Q.Name, Q.ClassName FROM SurveyTemplate S
+INNER JOIN EntitySurveyTemplate ES ON ES.ID = S.ID
+INNER JOIN SurveyStepTemplate SS ON SS.SurveyTemplateID = S.ID
+INNER JOIN SurveyQuestionTemplate Q ON Q.StepID = SS.ID
+WHERE
+S.ClassName = 'EntitySurveyTemplate'
+AND Q.ClassName <> 'SurveyLiteralContentQuestionTemplate'
+AND ES.EntityName = 'Deployment'
+ORDER BY SS.`Order`, Q.`Order`;
+SQL;
+
+        $res = DB::query($entity_survey_header_query);
+        $template_2 = array( 'DeploymentID' => null);
+        foreach($res as $row)
+        {
+            $name = $row['Name'];
+            $template_2[$name] = null;
+        }
+
+        return array($template_1, $template_2);
+
+    }
+
+    private function getDeploymentsData($survey_id)
+    {
+        $query = <<<SQL
+
+        -- deployments
+SELECT * FROM (
+SELECT
+ES.ParentID AS SurveyID,
+S.ID AS EntityID,
+S.CreatedByID,
+S.Created,
+S.LastEdited,
+SETPL.Name AS Step,
+Q.Name AS Question,
+SETPL.`Order` AS StepOrder,
+Q.`Order` AS QuestionOrder,
+Q.ClassName AS QuestionClass,
+-- SA.ID,
+CASE Q.ClassName
+WHEN 'SurveyDropDownQuestionTemplate'
+THEN (
+IF(
+    ( SELECT IsCountrySelector FROM SurveyDropDownQuestionTemplate DDL WHERE DDL.ID = Q.ID) = 1,
+    SA.Value,
+    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+    )
+)
+WHEN 'SurveyCheckBoxListQuestionTemplate'
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+WHEN 'SurveyRankingQuestionTemplate'
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+WHEN 'SurveyRadioButtonListQuestionTemplate'
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+ELSE SA.Value END AS Answer
+FROM Survey S
+INNER JOIN EntitySurvey ES ON ES.ID = S.ID
+INNER JOIN EntitySurveyTemplate EST ON EST.ID = S.TemplateID
+INNER JOIN SurveyStep SE ON SE.SurveyID = S.ID
+INNER JOIN SurveyStepTemplate SETPL ON SETPL.ID = SE.TemplateID
+INNER JOIN SurveyAnswer SA ON SA.StepID = SE.ID
+INNER JOIN SurveyQuestionTemplate Q ON SA.QuestionID = Q.ID
+WHERE
+S.ClassName = 'EntitySurvey'
+AND EST.EntityName = 'Deployment'
+AND ES.ParentID = {$survey_id}
+
+) REPORT
+ORDER BY EntityID ASC , StepOrder ASC, QuestionOrder ASC;
+
+SQL;
+
+        $res = DB::query($query);
+
+        return $res;
+    }
+
+    private function getRowsAndColumns(){
+        $query = <<<SQL
+        SELECT ID, `Value` FROM SurveyQuestionValueTemplate WHERE ClassName = 'SurveyQuestionRowValueTemplate';
+SQL;
+
+        $res = DB::query($query);
+        $rows = array();
+        foreach($res as $row)
+        {
+            $id = $row['ID'];
+            $value = $row['Value'];
+            $rows[$id] = $value;
+        }
+
+        $query = <<<SQL
+        SELECT ID, `Value` FROM SurveyQuestionValueTemplate WHERE ClassName = 'SurveyQuestionColumnValueTemplate';
+SQL;
+
+        $res = DB::query($query);
+        $columns = array();
+        foreach($res as $row)
+        {
+            $id = $row['ID'];
+            $value = $row['Value'];
+            $columns[$id] = $value;
+        }
+
+
+        return array($rows, $columns);
+    }
+
+    private function getSurveyBuilderExportData()
+    {
+        $res        = $this->ExportSurveyResultsDataSurveyBuilder();
+        $survey_id  = 0;
+        $file_data  = array();
+        list($header_template1, $header_template2) = $this->buildSurveyBuilderHeaders();
+
+        $line = $header_template1;
+        list($rows, $columns)  = $this->getRowsAndColumns();
+
+        foreach ($res as $row)
+        {
+            if($survey_id !== intval($row['SurveyID']))
+            {
+                // reset
+                if($survey_id > 0)
+                {
+                    $res2                 = $this->getDeploymentsData($survey_id);
+                    $line2                = $header_template2;
+                    $entity_survey_id     = 0;
+                    $entities_surveys_set = array();
+
+                    foreach($res2 as $row2)
+                    {
+
+                        if($entity_survey_id !== intval($row2['EntityID']))
+                        {
+
+                            if($entity_survey_id > 0)
+                            {
+                                array_push($entities_surveys_set, $line2);
+                            }
+
+                            $line2                 = $header_template2;
+                            $line2['DeploymentID'] = intval($row2['EntityID']);
+                            $entity_survey_id      = intval($row2['EntityID']);
+
+                        }
+                        $question         = $row2['Question'];
+                        $class            = $row2['QuestionClass'];
+                        $answer           = $row2['Answer'];
+                        if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
+                        {
+                            $tuples = explode(',', $answer);
+                            $translation = '';
+                            foreach($tuples as $t)
+                            {
+                                $t = explode(':', $t);
+                                $r = $t[0];
+                                $r = $rows[$r];
+                                $c = $t[1];
+                                $c = $columns[$c];
+                                $translation .= sprintf("%s:%s",$r, $c). ',';
+                            }
+                            $answer = trim($translation,',');
+                        }
+                        $line2[$question] = $answer;
+                    }
+
+                    if(isset($line2['DeploymentID']) && intval($line2['DeploymentID']) > 0)
+                        array_push($entities_surveys_set, $line2);
+
+                    if(count($entities_surveys_set) === 0)
+                    {
+                        array_push($entities_surveys_set, $header_template2);
+                    }
+
+                    foreach($entities_surveys_set as $line2)
+                    {
+                        array_push($file_data, array_merge($line, $line2));
+                    }
+
+                }
+                $line = $header_template1;
+                $line['SurveyID']    = intval($row['SurveyID']);
+                $line['CreatedByID'] = intval($row['CreatedByID']);
+                $line['Email']       = $row['Email'];
+                $line['Created']     = $row['Created'];
+                $line['LastEdited']  = $row['LastEdited'];
+                $survey_id           = intval($row['SurveyID']);
+            }
+
+            $question        = $row['Question'];
+            $class           = $row['QuestionClass'];
+            $line[$question] = $row['Answer'];
+        }
+
+        if(isset($line['SurveyID']) && intval($line['SurveyID']) > 0)
+            array_push($file_data, array_merge($line, $header_template2));
+
+        return $file_data;
     }
 
     function ExportSurveyResultsFlat()
     {
         $fileDate = date('Ymdhis');
 
-        $res = $this->ExportSurveyResultsData();
-
         $range = Controller::curr()->getRequest()->getVar('Range');
 
-        $fields = array(
-            'SurveyID',
-            'SurveyCreated',
-            'SurveyEdited',
-            'OrgName',
-            'OrgID',
-            'DeploymentID',
-            'DeploymentCreated',
-            'DeploymentEdited',
-            'FirstName',
-            'Surname',
-            'Email',
-            'Title',
-            'Industry',
-            'OtherIndustry',
-            'PrimaryCity',
-            'PrimaryState',
-            'PrimaryCountry',
-            'OrgSize',
-            'OpenStackInvolvement',
-            'InformationSources',
-            'OtherInformationSources',
-            'FurtherEnhancement',
-            'FoundationUserCommitteePriorities',
-            'OkToContact',
-            'BusinessDrivers',
-            'OtherBusinessDrivers',
-            'WhatDoYouLikeMost',
-            'NetPromoter',
-            'OpenStackActivity',
-            'OpenStackRelationship',
-            'ITActivity',
-            'InterestedUsingContainerTechnology',
-            'ContainerRelatedTechnologies',
-            'Label',
-            'IsPublic',
-            'DeploymentType',
-            'ProjectsUsed',
-            'CurrentReleases',
-            'DeploymentStage',
-            'NumCloudUsers',
-            'Hypervisors',
-            'OtherHypervisor',
-            'BlockStorageDrivers',
-            'OtherBlockStorageDriver',
-            'NetworkDrivers',
-            'OtherNetworkDriver',
-            'IdentityDrivers',
-            'OtherIndentityDriver',
-            'ComputeNodes',
-            'ComputeCores',
-            'ComputeInstances',
-            'BlockStorageTotalSize',
-            'ObjectStorageSize',
-            'ObjectStorageNumObjects',
-            'NetworkNumIPs',
-            'WhyNovaNetwork',
-            'OtherWhyNovaNetwork',
-            'DeploymentTools',
-            'OtherDeploymentTools',
-            'DeploymentOperatingSystems',
-            'DeploymentOtherOperatingSystems',
-            'SwiftGlobalDistributionFeatures',
-            'SwiftGlobalDistributionFeaturesUsesCases',
-            'OtherSwiftGlobalDistributionFeaturesUsesCases',
-            'Plans2UseSwiftStoragePolicies',
-            'OtherPlans2UseSwiftStoragePolicies',
-            'UsedDBForOpenStackComponents',
-            'OtherUsedDBForOpenStackComponents',
-            'ToolsUsedForYourUsers',
-            'OtherToolsUsedForYourUsers',
-            'Reason2Move2Ceilometer',
-            'CountriesPhysicalLocation',
-            'CountriesUsersLocation',
-            'ServicesDeploymentsWorkloads',
-            'OtherServicesDeploymentsWorkloads',
-            'EnterpriseDeploymentsWorkloads',
-            'OtherEnterpriseDeploymentsWorkloads',
-            'HorizontalWorkloadFrameworks',
-            'OtherHorizontalWorkloadFrameworks',
-            'UsedPackages',
-            'CustomPackagesReason',
-            'OtherCustomPackagesReason',
-            'PaasTools',
-            'OtherPaasTools',
-            'InteractingClouds',
-            'OtherInteractingClouds',
-            'SupportedFeatures',
-            'OtherSupportedFeatures',
-        );
+        if($range === SurveyType::FALL_2015)
+        {
+            $file_data = $this->getSurveyBuilderExportData();
+        }
+        else {
+            $res = $this->ExportSurveyResultsData();
 
+            $fields = array(
+                'SurveyID',
+                'SurveyCreated',
+                'SurveyEdited',
+                'OrgName',
+                'OrgID',
+                'DeploymentID',
+                'DeploymentCreated',
+                'DeploymentEdited',
+                'FirstName',
+                'Surname',
+                'Email',
+                'Title',
+                'Industry',
+                'OtherIndustry',
+                'PrimaryCity',
+                'PrimaryState',
+                'PrimaryCountry',
+                'OrgSize',
+                'OpenStackInvolvement',
+                'InformationSources',
+                'OtherInformationSources',
+                'FurtherEnhancement',
+                'FoundationUserCommitteePriorities',
+                'OkToContact',
+                'BusinessDrivers',
+                'OtherBusinessDrivers',
+                'WhatDoYouLikeMost',
+                'NetPromoter',
+                'OpenStackActivity',
+                'OpenStackRelationship',
+                'ITActivity',
+                'InterestedUsingContainerTechnology',
+                'ContainerRelatedTechnologies',
+                'Label',
+                'IsPublic',
+                'DeploymentType',
+                'ProjectsUsed',
+                'CurrentReleases',
+                'DeploymentStage',
+                'NumCloudUsers',
+                'Hypervisors',
+                'OtherHypervisor',
+                'BlockStorageDrivers',
+                'OtherBlockStorageDriver',
+                'NetworkDrivers',
+                'OtherNetworkDriver',
+                'IdentityDrivers',
+                'OtherIndentityDriver',
+                'ComputeNodes',
+                'ComputeCores',
+                'ComputeInstances',
+                'BlockStorageTotalSize',
+                'ObjectStorageSize',
+                'ObjectStorageNumObjects',
+                'NetworkNumIPs',
+                'WhyNovaNetwork',
+                'OtherWhyNovaNetwork',
+                'DeploymentTools',
+                'OtherDeploymentTools',
+                'DeploymentOperatingSystems',
+                'DeploymentOtherOperatingSystems',
+                'SwiftGlobalDistributionFeatures',
+                'SwiftGlobalDistributionFeaturesUsesCases',
+                'OtherSwiftGlobalDistributionFeaturesUsesCases',
+                'Plans2UseSwiftStoragePolicies',
+                'OtherPlans2UseSwiftStoragePolicies',
+                'UsedDBForOpenStackComponents',
+                'OtherUsedDBForOpenStackComponents',
+                'ToolsUsedForYourUsers',
+                'OtherToolsUsedForYourUsers',
+                'Reason2Move2Ceilometer',
+                'CountriesPhysicalLocation',
+                'CountriesUsersLocation',
+                'ServicesDeploymentsWorkloads',
+                'OtherServicesDeploymentsWorkloads',
+                'EnterpriseDeploymentsWorkloads',
+                'OtherEnterpriseDeploymentsWorkloads',
+                'HorizontalWorkloadFrameworks',
+                'OtherHorizontalWorkloadFrameworks',
+                'UsedPackages',
+                'CustomPackagesReason',
+                'OtherCustomPackagesReason',
+                'PaasTools',
+                'OtherPaasTools',
+                'InteractingClouds',
+                'OtherInteractingClouds',
+                'SupportedFeatures',
+                'OtherSupportedFeatures',
+            );
 
-        $flat_fields_V2 = array(
-            //survey
-            'Industry' => DeploymentSurveyOptions::$industry_options,
-            'OpenStackInvolvement' => DeploymentSurveyOptions::$openstack_involvement_options,
-            'BusinessDrivers' => DeploymentSurveyOptions::$business_drivers_options,
-            'InformationSources' => DeploymentSurveyOptions::$information_options,
-            'ContainerRelatedTechnologies' => DeploymentSurveyOptions::$container_related_technologies,
-            //app dev survey
-            'Toolkits' => AppDevSurveyOptions::$toolkits_options,
-            'ProgrammingLanguages' => AppDevSurveyOptions::$languages_options,
-            'APIFormats' => AppDevSurveyOptions::$api_format_options,
-            'GuestOperatingSystems' => AppDevSurveyOptions::$opsys_options,
-            //deployment
-            'ProjectsUsed' => DeploymentOptions::$projects_used_options,
-            'CurrentReleases' => DeploymentOptions::$current_release_options,
-            'ServicesDeploymentsWorkloads' => DeploymentOptions::$services_deployment_workloads_options,
-            'EnterpriseDeploymentsWorkloads' => DeploymentOptions::$enterprise_deployment_workloads_options,
-            'HorizontalWorkloadFrameworks' => DeploymentOptions::$horizontal_workload_framework_options,
-            'UsedPackages' => DeploymentOptions::$used_packages_options,
-            'CustomPackagesReason' => DeploymentOptions::$custom_package_reason_options,
-            'DeploymentTools' => DeploymentOptions::$deployment_tools_options,
-            'PaasTools' => DeploymentOptions::$paas_tools_options,
-            'Hypervisors' => DeploymentOptions::$hypervisors_options,
-            'SupportedFeatures' => DeploymentOptions::$deployment_features_options,
-            'UsedDBForOpenStackComponents' => DeploymentOptions::$used_db_for_openstack_components_options,
-            'NetworkDrivers' => DeploymentOptions::$network_driver_options,
-            'IdentityDrivers' => DeploymentOptions::$identity_driver_options,
-            'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
-            'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
-            'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
-            'OpenStackActivity' => DeploymentSurveyOptions::$activities_options,
-            'DeploymentOperatingSystems' => DeploymentOptions::$operating_systems_options,
-        );
+            $flat_fields_V2 = array(
+                //survey
+                'Industry' => DeploymentSurveyOptions::$industry_options,
+                'OpenStackInvolvement' => DeploymentSurveyOptions::$openstack_involvement_options,
+                'BusinessDrivers' => DeploymentSurveyOptions::$business_drivers_options,
+                'InformationSources' => DeploymentSurveyOptions::$information_options,
+                'ContainerRelatedTechnologies' => DeploymentSurveyOptions::$container_related_technologies,
+                //app dev survey
+                'Toolkits' => AppDevSurveyOptions::$toolkits_options,
+                'ProgrammingLanguages' => AppDevSurveyOptions::$languages_options,
+                'APIFormats' => AppDevSurveyOptions::$api_format_options,
+                'GuestOperatingSystems' => AppDevSurveyOptions::$opsys_options,
+                //deployment
+                'ProjectsUsed' => DeploymentOptions::$projects_used_options,
+                'CurrentReleases' => DeploymentOptions::$current_release_options,
+                'ServicesDeploymentsWorkloads' => DeploymentOptions::$services_deployment_workloads_options,
+                'EnterpriseDeploymentsWorkloads' => DeploymentOptions::$enterprise_deployment_workloads_options,
+                'HorizontalWorkloadFrameworks' => DeploymentOptions::$horizontal_workload_framework_options,
+                'UsedPackages' => DeploymentOptions::$used_packages_options,
+                'CustomPackagesReason' => DeploymentOptions::$custom_package_reason_options,
+                'DeploymentTools' => DeploymentOptions::$deployment_tools_options,
+                'PaasTools' => DeploymentOptions::$paas_tools_options,
+                'Hypervisors' => DeploymentOptions::$hypervisors_options,
+                'SupportedFeatures' => DeploymentOptions::$deployment_features_options,
+                'UsedDBForOpenStackComponents' => DeploymentOptions::$used_db_for_openstack_components_options,
+                'NetworkDrivers' => DeploymentOptions::$network_driver_options,
+                'IdentityDrivers' => DeploymentOptions::$identity_driver_options,
+                'BlockStorageDrivers' => DeploymentOptions::$block_storage_divers_options,
+                'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
+                'WhyNovaNetwork' => DeploymentOptions::$why_nova_network_options,
+                'OpenStackActivity' => DeploymentSurveyOptions::$activities_options,
+                'DeploymentOperatingSystems' => DeploymentOptions::$operating_systems_options,
+            );
 
-        $flat_fields_V1 = array(
-            //survey
-            'Industry' => DeploymentSurveyArchiveOptions::$industry_options,
-            'OpenStackInvolvement' => DeploymentSurveyArchiveOptions::$openstack_involvement_options,
-            'BusinessDrivers' => DeploymentSurveyArchiveOptions::$business_drivers_options,
-            'InformationSources' => DeploymentSurveyArchiveOptions::$information_options,
-            'ContainerRelatedTechnologies' => DeploymentSurveyOptions::$container_related_technologies,
-            //app dev survey
-            'Toolkits' => AppDevSurveyArchiveOptions::$toolkits_options,
-            'ProgrammingLanguages' => AppDevSurveyArchiveOptions::$languages_options,
-            'APIFormats' => AppDevSurveyArchiveOptions::$api_format_options,
-            'DeploymentOperatingSystems' => AppDevSurveyArchiveOptions::$opsys_options,
-            'GuestOperatingSystems' => AppDevSurveyArchiveOptions::$opsys_options,
-            //deployment
-            'ProjectsUsed' => DeploymentArchiveOptions::$projects_used_options,
-            'CurrentReleases' => DeploymentArchiveOptions::$current_release_options,
-            'ServicesDeploymentsWorkloads' => DeploymentOptions::$services_deployment_workloads_options,
-            'EnterpriseDeploymentsWorkloads' => DeploymentOptions::$enterprise_deployment_workloads_options,
-            'HorizontalWorkloadFrameworks' => DeploymentOptions::$horizontal_workload_framework_options,
-            'UsedPackages' => DeploymentOptions::$used_packages_options,
-            'CustomPackagesReason' => DeploymentOptions::$custom_package_reason_options,
-            'DeploymentTools' => DeploymentArchiveOptions::$deployment_tools_options,
-            'PaasTools' => DeploymentOptions::$paas_tools_options,
-            'Hypervisors' => DeploymentArchiveOptions::$hypervisors_options,
-            'SupportedFeatures' => DeploymentArchiveOptions::$deployment_features_options,
-            'UsedDBForOpenStackComponents' => DeploymentArchiveOptions::$used_db_for_openstack_components_options,
-            'NetworkDrivers' => DeploymentArchiveOptions::$network_driver_options,
-            'IdentityDrivers' => DeploymentArchiveOptions::$identity_driver_options,
-            'BlockStorageDrivers' => DeploymentArchiveOptions::$block_storage_divers_options,
-            'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
-            'WhyNovaNetwork' => DeploymentArchiveOptions::$why_nova_network_options,
-            'OpenStackActivity' => DeploymentSurveyOptions::$activities_options,
-        );
+            $flat_fields_V1 = array(
+                //survey
+                'Industry' => DeploymentSurveyArchiveOptions::$industry_options,
+                'OpenStackInvolvement' => DeploymentSurveyArchiveOptions::$openstack_involvement_options,
+                'BusinessDrivers' => DeploymentSurveyArchiveOptions::$business_drivers_options,
+                'InformationSources' => DeploymentSurveyArchiveOptions::$information_options,
+                'ContainerRelatedTechnologies' => DeploymentSurveyOptions::$container_related_technologies,
+                //app dev survey
+                'Toolkits' => AppDevSurveyArchiveOptions::$toolkits_options,
+                'ProgrammingLanguages' => AppDevSurveyArchiveOptions::$languages_options,
+                'APIFormats' => AppDevSurveyArchiveOptions::$api_format_options,
+                'DeploymentOperatingSystems' => AppDevSurveyArchiveOptions::$opsys_options,
+                'GuestOperatingSystems' => AppDevSurveyArchiveOptions::$opsys_options,
+                //deployment
+                'ProjectsUsed' => DeploymentArchiveOptions::$projects_used_options,
+                'CurrentReleases' => DeploymentArchiveOptions::$current_release_options,
+                'ServicesDeploymentsWorkloads' => DeploymentOptions::$services_deployment_workloads_options,
+                'EnterpriseDeploymentsWorkloads' => DeploymentOptions::$enterprise_deployment_workloads_options,
+                'HorizontalWorkloadFrameworks' => DeploymentOptions::$horizontal_workload_framework_options,
+                'UsedPackages' => DeploymentOptions::$used_packages_options,
+                'CustomPackagesReason' => DeploymentOptions::$custom_package_reason_options,
+                'DeploymentTools' => DeploymentArchiveOptions::$deployment_tools_options,
+                'PaasTools' => DeploymentOptions::$paas_tools_options,
+                'Hypervisors' => DeploymentArchiveOptions::$hypervisors_options,
+                'SupportedFeatures' => DeploymentArchiveOptions::$deployment_features_options,
+                'UsedDBForOpenStackComponents' => DeploymentArchiveOptions::$used_db_for_openstack_components_options,
+                'NetworkDrivers' => DeploymentArchiveOptions::$network_driver_options,
+                'IdentityDrivers' => DeploymentArchiveOptions::$identity_driver_options,
+                'BlockStorageDrivers' => DeploymentArchiveOptions::$block_storage_divers_options,
+                'InteractingClouds' => DeploymentOptions::$interacting_clouds_options,
+                'WhyNovaNetwork' => DeploymentArchiveOptions::$why_nova_network_options,
+                'OpenStackActivity' => DeploymentSurveyOptions::$activities_options,
+            );
 
-        $flat_fields = ($range == SurveyType::MARCH_2015)?$flat_fields_V2:$flat_fields_V1;
+            $flat_fields = ($range == SurveyType::MARCH_2015) ? $flat_fields_V2 : $flat_fields_V1;
 
-        $file_data = array();
+            $file_data = array();
 
-        foreach ($res as $row) {
-            $line = array();
-            foreach ($fields as $field) {
-                if (isset($flat_fields[$field])) {
-                    $options = $flat_fields[$field];
-                    $values  = $row[$field];
-                    foreach ($options as $k => $v) {
-                        if($field === 'BusinessDrivers'){
-                            $business_drivers = (empty($values))? array():explode(',',$values);
-                            $business_drivers = (count($business_drivers) > 0) ? array_combine($business_drivers,$business_drivers): array();
-                            $index = false;
-                            if(isset($business_drivers[$k])){
-                                $index = array_search($k,array_keys($business_drivers));
+            foreach ($res as $row) {
+                $line = array();
+                foreach ($fields as $field) {
+                    if (isset($flat_fields[$field])) {
+                        $options = $flat_fields[$field];
+                        $values = $row[$field];
+                        foreach ($options as $k => $v) {
+                            if ($field === 'BusinessDrivers') {
+                                $business_drivers = (empty($values)) ? array() : explode(',', $values);
+                                $business_drivers = (count($business_drivers) > 0) ? array_combine($business_drivers,
+                                    $business_drivers) : array();
+                                $index = false;
+                                if (isset($business_drivers[$k])) {
+                                    $index = array_search($k, array_keys($business_drivers));
+                                }
+
+                                $line[$field . ' - ' . $k] = $index === false ? '0' : ($index + 1);
+                            } else {
+                                $line[$field . ' - ' . $k] = strpos($values, $k) !== false ? '1' : '0';
                             }
-
-                            $line[$field . ' - ' . $k] = $index === false ? '0': ($index+1);
                         }
-                        else
-                            $line[$field . ' - ' . $k] = strpos($values, $k) !== false ?  '1' : '0';
+                    } else {
+                        $line[$field] = $row[$field];
                     }
-                } else {
-                    $line[$field] = $row[$field];
                 }
+                array_push($file_data, $line);
             }
-            array_push($file_data, $line);
         }
 
-        $version  = $range == SurveyType::MARCH_2015 ? 'v2':'v1';
+        switch($range)
+        {
+            case SurveyType::MARCH_2015:
+                $version = 'v2';
+                break;
+            case SurveyType::FALL_2015:
+                $version = 'v3';
+                break;
+            default:
+                $version = 'v1';
+                break;
+        }
+
         $filename = "Survey_Flat_" . $version. '_' . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $file_data, ',');

@@ -80,7 +80,7 @@ final class CSVExporter
 
     function cleanData(&$str)
     {
-        if (is_null($str)) return '';
+        if (is_null($str)) {$str = ''; return;};
         $str = preg_replace("/\t/", "\\t", $str);
         $str = preg_replace("/\r?\n/", "\\n", $str);
         $str = preg_replace("/,/", "-", $str);
