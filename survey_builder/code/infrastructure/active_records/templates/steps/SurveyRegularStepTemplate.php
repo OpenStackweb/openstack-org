@@ -48,6 +48,15 @@ class SurveyRegularStepTemplate
         return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Questions', $query)->toArray();
     }
 
+    /**
+     * @param $question_id
+     * @return mixed
+     */
+    public function getQuestionById($question_id)
+    {
+        return $this->Questions()->filter('SurveyQuestionTemplate.ID', $question_id)->first();
+    }
+
     //admin UI
 
     public function getCMSFields() {

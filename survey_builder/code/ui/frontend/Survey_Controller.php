@@ -544,7 +544,7 @@ class Survey_Controller extends Page_Controller {
                 $sub_step = $request->requestVar('SUB_STEP_SLUG');
 
             if(empty($step) || empty($sub_step))
-                throw new LogicException('step/sub_step empty - member_id %s', Member::currentUserID());
+                throw new LogicException(sprintf('step/sub_step empty - member_id %s', Member::currentUserID()));
 
             $this->current_survey = $this->getCurrentSurveyInstance();
             $current_step         = $this->current_survey->currentStep();

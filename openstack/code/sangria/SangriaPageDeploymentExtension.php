@@ -22,6 +22,7 @@ final class SangriaPageDeploymentExtension extends Extension
     {
         Config::inst()->update(get_class($this), 'allowed_actions', array(
             'ViewDeploymentStatistics',
+            'ViewDeploymentStatisticsSurveyBuilder',
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'DeploymentDetails',
@@ -35,6 +36,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
             'ViewDeploymentStatistics',
+            'ViewDeploymentStatisticsSurveyBuilder',
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'DeploymentDetails',
@@ -1189,5 +1191,110 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         $filename = "UsersPerCountry" . date('Ymd') . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
+
+
+
+
+    public function getSurveyTemplates()
+    {
+        return SurveyTemplate::get()->filter('ClassName', 'SurveyTemplate');
+    }
+
+    public function getEntitySurveyQuestions2Show($entity_survey_id = 0)
+    {
+        $template = EntitySurveyTemplate::get()->first();
+        $res = array();
+        foreach($template->Steps()->sort('Order') as $step)
+        {
+            foreach($step->Questions()->sort('Order') as $q)
+            {
+                if($q->ShowOnSangriaStatistics)
+                {
+                    array_push($res, $q);
+                }
+            }
+        }
+        return new ArrayList($res);
+    }
+
+    public function SurveyBuilderCountAnswers($question_id, $value_id)
+    {
+        $question_id = intval($question_id);
+        $value_id = intval($value_id);
+        $template = EntitySurveyTemplate::get()->first();
+
+$query = <<<SQL
+    SELECT COUNT(A.Value) FROM SurveyAnswer A
+INNER JOIN SurveyStep S ON S.ID = A.StepID
+INNER JOIN SurveyStepTemplate STPL ON STPL.ID = S.TemplateID
+INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
+INNER JOIN SurveyQuestionTemplate Q ON A.QuestionID = Q.ID
+INNER JOIN SurveyQuestionValueTemplate QVT ON QVT.ID = A.Value
+WHERE SSTPL.ID = $template->ID AND Q.ID = {$question_id} AND QVT.ID = {$value_id} ;
+SQL;
+
+        return DB::query($query)->value();
+    }
+
+
+    public function RenderCurrentFilters()
+    {
+        $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
+        if(!empty($questions_filters))
+        {
+            $template = EntitySurveyTemplate::get()->first();
+
+            $questions_filters = explode(',', $questions_filters);
+            $output = '';
+            foreach($questions_filters as $qid)
+            {
+                if(empty($qid)) continue;
+                $q = $template->getQuestionById($qid);
+                if(is_null($q)) continue;
+                $output .= $q->Name. ',';
+            }
+            return trim($output,',');
+        }
+        return '';
+    }
+
+    public function ViewDeploymentStatisticsSurveyBuilder(SS_HTTPRequest $request)
+    {
+        $qid = $request->getVar('qid');
+        $vid = $request->getVar('vid');
+        $clear_filters = $request->getVar('clear_filters');
+
+        if(!empty($clear_filters))
+        {
+            Session::clear("SurveyBuilder.Statistics.Filters");
+            Session::clear("SurveyBuilder.Statistics.Filters_Questions");
+            return Controller::curr()->redirect(Controller::curr()->Link('ViewDeploymentStatisticsSurveyBuilder'));
+        }
+        else if(!empty($qid) && !empty($vid))
+        {
+            $qid = intval($qid);
+            $vid = intval($vid);
+            $filters = Session::get('SurveyBuilder.Statistics.Filters');
+            $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
+            $filters .= sprintf("%s:%s&",$qid,$vid);
+            $questions_filters .= sprintf("%s,",$qid);
+
+            Session::set("SurveyBuilder.Statistics.Filters", $filters);
+            Session::set("SurveyBuilder.Statistics.Filters_Questions", $questions_filters);
+            return Controller::curr()->redirect(Controller::curr()->Link('ViewDeploymentStatisticsSurveyBuilder'));
+        }
+        return $this->owner->renderWith(array('SangriaPage_ViewDeploymentStatisticsSurveyBuilder', 'SangriaPage', 'SangriaPage'));
+    }
+
+    public function IsQuestionOnFiltering($qid)
+    {
+        $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
+        if(!empty($questions_filters))
+        {
+            $questions_filters = explode(',', $questions_filters);
+            return in_array($qid, $questions_filters);
+        }
+        return false;
     }
 }

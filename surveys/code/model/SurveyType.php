@@ -14,6 +14,7 @@
 
 class SurveyType {
 
-    const OLD = 'OLD';
+    const OLD        = 'OLD';
     const MARCH_2015 = 'MARCH_2015';
+    const FALL_2015  = 'FALL_2015';
 }
