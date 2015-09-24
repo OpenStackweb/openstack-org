@@ -1,20 +1,23 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 survey_builder_statistics_filters">
-        <select id="ddl_survey_templates">
-            <% loop SurveyBuilderSurveyTemplates %>
-                <option value="{$ID}">$QualifiedName</option>
+        <form id="survey_template_form" name="survey_template_form" action="$Link($Action)" method="post">
+        <select id="ddl_survey_templates" name="survey_template_id">
+            <option value="-1">-- select a survey --</option>
+            <% loop SurveyBuilderSurveyTemplates($ClassName) %>
+                <option value="{$ID}" <% if $Top.IsSurveyTemplateSelected($ID) %>selected<% end_if %> >$QualifiedName</option>
             <% end_loop %>
         </select>
+        </form>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 survey_builder_questions_values_statistics_filters">
-            <h2>Deployments Submitted &mdash; {$Top.SurveyBuilderSurveyCount} total</h2>
+            <h2>{$Top.SurveyBuilderLabelSubmitted} &mdash; {$Top.SurveyBuilderSurveyCount} total</h2>
             $DateFilters
             $RenderCurrentFilters
             <% if $RenderCurrentFilters %>
-            <a href="$Top.Link(ViewDeploymentStatisticsSurveyBuilder)?clear_filters=1">Clear Filters</a>
+            <a href="$Top.Link($Top.Action)?clear_filters=1">Clear Filters</a>
             <% end_if %>
         </div>
     </div>
@@ -33,7 +36,7 @@
                                         <% if $Top.IsQuestionOnFiltering($Up.ID) %>
                                             <span>$Label</span>
                                         <% else %>
-                                        <a href="$Top.Link(ViewDeploymentStatisticsSurveyBuilder)?qid=$Up.ID&vid=$ID$Top.SurveyBuilderDateFilterQueryString">$Label</a>
+                                        <a href="$Top.Link($Top.Action)?qid=$Up.ID&vid=$ID$Top.SurveyBuilderDateFilterQueryString">$Label</a>
                                         <% end_if %>
                                     </td>
                                     <td>$Top.SurveyBuilderCountAnswers($Up.ID, $ID)</td>

@@ -24,6 +24,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentStatistics',
             'ViewDeploymentStatisticsSurveyBuilder',
             'ViewDeploymentSurveyStatistics',
+            'ViewSurveysStatisticsSurveyBuilder',
             'ViewDeploymentDetails',
             'DeploymentDetails',
             'SurveyDetails',
@@ -38,6 +39,7 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentStatistics',
             'ViewDeploymentStatisticsSurveyBuilder',
             'ViewDeploymentSurveyStatistics',
+            'ViewSurveysStatisticsSurveyBuilder',
             'ViewDeploymentDetails',
             'DeploymentDetails',
             'SurveyDetails',
@@ -92,6 +94,11 @@ final class SangriaPageDeploymentExtension extends Extension
     public function ViewDeploymentSurveyStatistics() 
     {
 
+        $range = self::getSurveyRange('ViewDeploymentSurveyStatistics');
+        if($range === SurveyType::FALL_2015)
+        {
+            return Controller::curr()->redirect(Controller::curr()->Link("ViewSurveysStatisticsSurveyBuilder"));
+        }
         SangriaPage_Controller::generateDateFilters('DS');
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
@@ -245,7 +252,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function ViewDeploymentStatistics()
     {
-        $range = self::getSurveyRange('ViewDeploymentSurveyStatistics');
+        $range = self::getSurveyRange('ViewDeploymentStatistics');
         if($range === SurveyType::FALL_2015)
         {
             return Controller::curr()->redirect(Controller::curr()->Link("ViewDeploymentStatisticsSurveyBuilder"));
@@ -1199,11 +1206,11 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 
-
-
+    // survey builder statistics
 
     public function SurveyBuilderSurveyTemplates($class_name = 'EntitySurveyTemplate')
     {
+        Session::set('SurveyBuilder.Statistics.ClassName', $class_name);
         if($class_name === 'SurveyTemplate')
         return SurveyTemplate::get()->filter('ClassName', 'SurveyTemplate');
         return EntitySurveyTemplate::get();
@@ -1211,10 +1218,13 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
 
     public function getSurveyQuestions2Show()
     {
-        $template = EntitySurveyTemplate::get()->first();
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        if(is_null($template)) return new ArrayList();
         $res = array();
         foreach($template->Steps()->sort('Order') as $step)
         {
+            if(!$step instanceof ISurveyRegularStepTemplate) continue;
+
             foreach($step->Questions()->sort('Order') as $q)
             {
                 if($q->ShowOnSangriaStatistics)
@@ -1226,14 +1236,32 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         return new ArrayList($res);
     }
 
+    /**
+     * @return SurveyTemplate|null
+     */
     private function getCurrentSelectedSurveyTemplate()
     {
-        return  EntitySurveyTemplate::get()->first();
+
+        $template_id = Session::get(sprintf("SurveyBuilder.%sStatistics.TemplateId", Session::get('SurveyBuilder.Statistics.ClassName')));
+        $template    = null;
+        if(!empty($template_id))
+        {
+            $template = SurveyTemplate::get()->byID(intval($template_id));
+            if(!is_null($template) && $template->ClassName === 'EntitySurveyTemplate')
+            {
+                $template = EntitySurveyTemplate::get()->byID(intval($template_id));
+            }
+        }
+        return  $template;
     }
 
+    /**
+     * @return null|string
+     */
     private function getCurrentSelectedSurveyClassName()
     {
        $template = $this->getCurrentSelectedSurveyTemplate();
+       if(is_null($template)) return null;
        if($template instanceof EntitySurveyTemplate) return 'EntitySurvey';
        return "Survey";
     }
@@ -1246,7 +1274,8 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         $question_id = intval($question_id);
         $value_id    = intval($value_id);
         $template    = $this->getCurrentSelectedSurveyTemplate();
-        $filters     = Session::get('SurveyBuilder.Statistics.Filters');
+        if(is_null($template)) return;
+        $filters     = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', Session::get('SurveyBuilder.Statistics.ClassName')));
         $class_name  = $this->getCurrentSelectedSurveyClassName();
 
 $filter_query_tpl = <<<SQL
@@ -1310,10 +1339,11 @@ SQL;
 
     public function RenderCurrentFilters()
     {
-        $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
+        $questions_filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters_Questions', Session::get('SurveyBuilder.Statistics.ClassName')));
         if(!empty($questions_filters))
         {
             $template = $this->getCurrentSelectedSurveyTemplate();
+            if(is_null($template)) return;
 
             $questions_filters = explode(',', $questions_filters);
             $output = '';
@@ -1329,37 +1359,10 @@ SQL;
         return '';
     }
 
-    public function ViewDeploymentStatisticsSurveyBuilder(SS_HTTPRequest $request)
+    public function IsSurveyTemplateSelected($current_template_id)
     {
-        $qid           = $request->getVar('qid');
-        $vid           = $request->getVar('vid');
-        $clear_filters = $request->getVar('clear_filters');
-        $from          = $request->getVar('From');
-        $to            = $request->getVar('To');
-
-        if(!empty($clear_filters))
-        {
-            Session::clear("SurveyBuilder.Statistics.Filters");
-            Session::clear("SurveyBuilder.Statistics.Filters_Questions");
-            return Controller::curr()->redirect(Controller::curr()->Link('ViewDeploymentStatisticsSurveyBuilder'));
-        }
-        else if(!empty($qid) && !empty($vid))
-        {
-            $qid     = intval($qid);
-            $vid     = intval($vid);
-            $filters = Session::get('SurveyBuilder.Statistics.Filters');
-            $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
-            $filters .= sprintf("%s:%s,",$qid,$vid);
-            $questions_filters .= sprintf("%s,",$qid);
-
-            Session::set("SurveyBuilder.Statistics.Filters", $filters);
-            Session::set("SurveyBuilder.Statistics.Filters_Questions", $questions_filters);
-            $query_str = '';
-            if(!empty($from) && !empty($to))
-                $query_str = sprintf("?From=%s&To=%s", $from, $to);
-            return Controller::curr()->redirect(Controller::curr()->Link('ViewDeploymentStatisticsSurveyBuilder').$query_str);
-        }
-        return $this->owner->renderWith(array('SangriaPage_ViewDeploymentStatisticsSurveyBuilder', 'SangriaPage', 'SangriaPage'));
+        $template_id =  Session::get(sprintf("SurveyBuilder.%sStatistics.TemplateId", Session::get('SurveyBuilder.Statistics.ClassName')));
+        return (!empty($template_id) && !empty($current_template_id) && intval($current_template_id) === intval($template_id));
     }
 
     public function SurveyBuilderDateFilterQueryString()
@@ -1375,7 +1378,7 @@ SQL;
 
     public function IsQuestionOnFiltering($qid)
     {
-        $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
+        $questions_filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters_Questions', Session::get('SurveyBuilder.Statistics.ClassName')));
         if(!empty($questions_filters))
         {
             $questions_filters = explode(',', $questions_filters);
@@ -1390,8 +1393,9 @@ SQL;
         $from        = $request->getVar('From');
         $to          = $request->getVar('To');
         $template    = $this->getCurrentSelectedSurveyTemplate();
+        if(is_null($template)) return 0;
         $class_name  = $this->getCurrentSelectedSurveyClassName();
-        $filters     = Session::get('SurveyBuilder.Statistics.Filters');
+        $filters     = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', Session::get('SurveyBuilder.Statistics.ClassName')));
 
         $filter_query_tpl = <<<SQL
     AND EXISTS
@@ -1440,5 +1444,85 @@ SQL;
 SQL;
 
         return DB::query($query)->value();
+    }
+
+    public function SurveyBuilderLabelSubmitted()
+    {
+        $class_name = Session::get('SurveyBuilder.Statistics.ClassName');
+        if(empty($class_name)) return;
+        if($class_name === 'SurveyTemplate')
+            return "Surveys Submitted";
+        else
+            return "Deployments Submitted";
+    }
+
+    private function ViewStatisticsSurveyBuilder(SS_HTTPRequest $request, $action, $class_name)
+    {
+        Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.view.statistics.surveybuilder.js');
+
+        $qid           = $request->requestVar('qid');
+        $vid           = $request->requestVar('vid');
+        $clear_filters = $request->requestVar('clear_filters');
+        $from          = $request->requestVar('From');
+        $to            = $request->requestVar('To');
+        $template_id   = intval($request->requestVar('survey_template_id'));
+
+        if($template_id != 0)
+        {
+            Session::set(sprintf("SurveyBuilder.%sStatistics.TemplateId", $class_name), $template_id);
+            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters",$class_name ));
+            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions",$class_name));
+        }
+
+        if(!empty($clear_filters))
+        {
+            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters",$class_name ));
+            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions",$class_name));
+            return Controller::curr()->redirect(Controller::curr()->Link($action));
+        }
+        else if(!empty($qid) && !empty($vid))
+        {
+            $qid     = intval($qid);
+            $vid     = intval($vid);
+            $filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', $class_name));
+            $questions_filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters_Questions', $class_name));
+            $filters .= sprintf("%s:%s,",$qid,$vid);
+            $questions_filters .= sprintf("%s,",$qid);
+
+            Session::set(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name), $filters);
+            Session::set(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name), $questions_filters);
+
+            $query_str = '';
+            if(!empty($from) && !empty($to))
+                $query_str = sprintf("?From=%s&To=%s", $from, $to);
+            return Controller::curr()->redirect(Controller::curr()->Link($action).$query_str);
+        }
+        return $this->owner->Customise
+        (
+            array
+            (
+                'ClassName' => $class_name,
+                'Action'    => $action
+            )
+        )->renderWith(array('SangriaPage_ViewStatisticsSurveyBuilder', 'SangriaPage', 'SangriaPage'));
+    }
+
+    public function ViewDeploymentStatisticsSurveyBuilder(SS_HTTPRequest $request)
+    {
+        $this->clearStatisticsSurveyBuilderSessionData('SurveyTemplate');
+        return $this->ViewStatisticsSurveyBuilder($request, 'ViewDeploymentStatisticsSurveyBuilder', 'EntitySurveyTemplate');
+    }
+
+    public function ViewSurveysStatisticsSurveyBuilder(SS_HTTPRequest $request)
+    {
+       $this->clearStatisticsSurveyBuilderSessionData('EntitySurveyTemplate');
+       return $this->ViewStatisticsSurveyBuilder($request, 'ViewSurveysStatisticsSurveyBuilder', 'SurveyTemplate');
+    }
+
+    private function clearStatisticsSurveyBuilderSessionData($class_name)
+    {
+        Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters",$class_name ));
+        Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions",$class_name));
+        Session::clear(sprintf("SurveyBuilder.%sStatistics.TemplateId", $class_name));
     }
 }

@@ -41,6 +41,9 @@ class SurveySingleValueTemplateQuestion
             $gridField = new GridField('ValidationRules', 'ValidationRules', $this->ValidationRules(), $config);
             $fields->add($gridField);
         }
+
+        $fields->removeByName('ShowOnSangriaStatistics');
+        $fields->removeByName('ShowOnPublicStatistics');
         return $fields;
     }
 
