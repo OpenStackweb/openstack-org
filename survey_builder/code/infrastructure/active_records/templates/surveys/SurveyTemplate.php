@@ -310,4 +310,12 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         }
         return null;
     }
+
+    /**
+     * @return string
+     */
+    public function QualifiedName()
+    {
+        return $this->Title;
+    }
 }
