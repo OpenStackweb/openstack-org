@@ -1044,7 +1044,6 @@ a.enterprise-bar-right {
   }
   .intro-header.enterprise-booklet p a.lrg-btn {
     background: #DA422F;
-    text-transform: uppercase;
     /*border: 1px solid white;*/
     border-radius: 4px;
     padding: 15px 30px;

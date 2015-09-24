@@ -17,13 +17,13 @@
                 <div class="col-md-8 col-md-push-2">
                     <div class="intro-message">
                         <h5>FEATURED</h5>
-                        <h1>OpenStack: A Business Perspective</h1>
+                        <h1>Recommendations from the enterprise community</h1>
                         <!-- <h3>OpenStack is a driving force in Enterprise software</h3> -->
                         <p>
-                           An executive level view of cloud computing and OpenStack with insightful real-life use cases and initial planning tips, written primarily by enterprise users.
+                            Page through a booklet prepared for IT executives, by current OpenStack users. It offers planning tips and use cases with real business results from cloud computing with OpenStack. 
                         </p>
                         <p>
-                            <a href="https://openstack.org/assets/pdf-downloads/business-perspectives.pdf" class="lrg-btn" target="_blank"><i class="fa fa-file-pdf-o"></i> Read the booklet</a>
+                            <a href="#" class="lrg-btn" data-toggle="modal" data-target="#downloadModal">Get their insights now</a>
                             <span class="lrg-btn-note">*Best viewed with Page Display set to single page and Zoom set to page level</span>
                         </p>
                     </div>
@@ -313,6 +313,29 @@
 
 
     <!-- End Marketplace and Events -->
+
+    <!-- Download Modal -->
+    <div class="modal fade" id="downloadModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">OpenStack: A Business Perspective</h4>
+          </div>
+          <div class="modal-body">
+            <p class="download-text">
+                <i class="fa fa-file-pdf-o fa-4x"></i>
+                Page through a booklet prepared <em>for</em> IT executives, by current OpenStack users. It offers planning tips and use cases with real business results from cloud computing with OpenStack.
+            </p>
+                <a href="//openstack.org/assets/pdf-downloads/business-perspectives.pdf" class="download-btn"><i class="fa fa-print fa-2x"></i> Print The Booklet</a>
+                <a href="//openstack.org/assets/pdf-downloads/business-perspectives-view.pdf" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View The Booklet</a>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Download Modal -->
 
 
       <!-- Hero Video Modal -->
