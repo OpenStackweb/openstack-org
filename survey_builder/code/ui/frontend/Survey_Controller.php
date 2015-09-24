@@ -549,7 +549,7 @@ class Survey_Controller extends Page_Controller {
                 $sub_step = $request->requestVar('SUB_STEP_SLUG');
 
             if(empty($step) || empty($sub_step))
-                throw new LogicException('step/sub_step empty - member_id %s', Member::currentUserID());
+                throw new LogicException(sprintf('step/sub_step empty (%s - %s) - member_id %s',$step, $sub_step, Member::currentUserID()));
 
             $this->current_survey = $this->getCurrentSurveyInstance();
             $current_step         = $this->current_survey->currentStep();
@@ -594,16 +594,24 @@ class Survey_Controller extends Page_Controller {
 
             if($this->current_entity_survey->currentStep()->template()->title() !== $sub_step)
             {
-                throw new LogicException
-                (
-                    sprintf
+
+                if ($this->current_entity_survey->isAllowedStep($sub_step))
+                {
+                    $this->survey_manager->registerCurrentStep($this->current_entity_survey, $sub_step);
+                }
+                else
+                {
+                    throw new LogicException
                     (
-                        'current step %s differs from requested one %s - member_id %s',
-                        $this->current_entity_survey->currentStep()->template()->title(),
-                        $sub_step,
-                        Member::currentUserID()
-                    )
-                );
+                        sprintf
+                        (
+                            'current step %s differs from requested one %s - member_id %s',
+                            $this->current_entity_survey->currentStep()->template()->title(),
+                            $sub_step,
+                            Member::currentUserID()
+                        )
+                    );
+                }
             }
 
             $builder = SurveyStepUIBuilderFactory::getInstance()->build($this->current_entity_survey->currentStep());
