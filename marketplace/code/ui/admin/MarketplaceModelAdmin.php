@@ -32,6 +32,7 @@ class MarketplaceModelAdmin extends ModelAdmin {
 		'OpenStackComponent',
 		'OpenStackRelease',
 		'MarketPlaceAllowedInstance',
+        'Driver',
 	);
 
 	public $showImportForm = false;
