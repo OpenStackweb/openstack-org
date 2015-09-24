@@ -73,4 +73,9 @@ interface ISurveyTemplate extends IEntity {
      */
     public function getEntities();
 
+    /**
+     * @return string
+     */
+    public function QualifiedName();
+
 }

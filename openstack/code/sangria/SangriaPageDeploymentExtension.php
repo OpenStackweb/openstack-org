@@ -91,6 +91,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
     public function ViewDeploymentSurveyStatistics() 
     {
+
         SangriaPage_Controller::generateDateFilters('DS');
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
@@ -244,6 +245,11 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function ViewDeploymentStatistics()
     {
+        $range = self::getSurveyRange('ViewDeploymentSurveyStatistics');
+        if($range === SurveyType::FALL_2015)
+        {
+            return Controller::curr()->redirect(Controller::curr()->Link("ViewDeploymentStatisticsSurveyBuilder"));
+        }
         SangriaPage_Controller::generateDateFilters('D');
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
@@ -264,7 +270,7 @@ final class SangriaPageDeploymentExtension extends Extension
     {
         $list = new ArrayList();
 
-        $urlString = $_SERVER["REDIRECT_URL"] . "?";
+        $urlString = isset($_SERVER["REDIRECT_URL"])?$_SERVER["REDIRECT_URL"]:Controller::curr()->Link('ViewDeploymentStatistics') . "?";
         $keyUrlString = "";
         $keyValue = "";
 
@@ -1196,12 +1202,14 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
 
 
 
-    public function getSurveyTemplates()
+    public function SurveyBuilderSurveyTemplates($class_name = 'EntitySurveyTemplate')
     {
+        if($class_name === 'SurveyTemplate')
         return SurveyTemplate::get()->filter('ClassName', 'SurveyTemplate');
+        return EntitySurveyTemplate::get();
     }
 
-    public function getEntitySurveyQuestions2Show($entity_survey_id = 0)
+    public function getSurveyQuestions2Show()
     {
         $template = EntitySurveyTemplate::get()->first();
         $res = array();
@@ -1218,32 +1226,94 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         return new ArrayList($res);
     }
 
+    private function getCurrentSelectedSurveyTemplate()
+    {
+        return  EntitySurveyTemplate::get()->first();
+    }
+
+    private function getCurrentSelectedSurveyClassName()
+    {
+       $template = $this->getCurrentSelectedSurveyTemplate();
+       if($template instanceof EntitySurveyTemplate) return 'EntitySurvey';
+       return "Survey";
+    }
+
     public function SurveyBuilderCountAnswers($question_id, $value_id)
     {
+        $request     = Controller::curr()->getRequest();
+        $from        = $request->getVar('From');
+        $to          = $request->getVar('To');
         $question_id = intval($question_id);
-        $value_id = intval($value_id);
-        $template = EntitySurveyTemplate::get()->first();
+        $value_id    = intval($value_id);
+        $template    = $this->getCurrentSelectedSurveyTemplate();
+        $filters     = Session::get('SurveyBuilder.Statistics.Filters');
+        $class_name  = $this->getCurrentSelectedSurveyClassName();
+
+$filter_query_tpl = <<<SQL
+    AND EXISTS
+    (
+		SELECT * FROM SurveyAnswer A2
+        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
+		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
+		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
+		INNER JOIN SurveyQuestionValueTemplate V2 ON V2.OwnerID = Q2.ID
+		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+        WHERE
+        I2.ClassName = '{$class_name}'
+		AND FIND_IN_SET(V2.ID, A2.Value) > 0
+		AND SSTPL2.ID = %s
+		AND Q2.ID = %s
+		AND V2.ID = %s
+        AND I2.ID = I.ID
+	)
+SQL;
+
+        $filters_where = '';
+
+        if(!empty($from) && !empty($to))
+        {
+            $filters_where = " AND ".SangriaPage_Controller::generateDateFilters("I", "LastEdited");
+        }
+
+        if(!empty($filters))
+        {
+            $filters = trim($filters, ',');
+            $filters = explode(',', $filters);
+            foreach($filters as $t)
+            {
+                $t = explode(':', $t);
+                $qid = intval($t[0]);
+                $vid = intval($t[1]);
+                $filters_where.= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
+            }
+        }
 
 $query = <<<SQL
     SELECT COUNT(A.Value) FROM SurveyAnswer A
-INNER JOIN SurveyStep S ON S.ID = A.StepID
-INNER JOIN SurveyStepTemplate STPL ON STPL.ID = S.TemplateID
-INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
-INNER JOIN SurveyQuestionTemplate Q ON A.QuestionID = Q.ID
-INNER JOIN SurveyQuestionValueTemplate QVT ON QVT.ID = A.Value
-WHERE SSTPL.ID = $template->ID AND Q.ID = {$question_id} AND QVT.ID = {$value_id} ;
+    INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+    INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
+    INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
+    INNER JOIN SurveyQuestionValueTemplate V ON V.OwnerID = Q.ID
+    INNER JOIN SurveyStep S ON S.ID = A.StepID
+    INNER JOIN Survey I ON I.ID = S.SurveyID
+    WHERE
+    I.ClassName = '{$class_name}'
+    AND FIND_IN_SET(V.ID, A.Value) > 0
+    AND SSTPL.ID = $template->ID
+    AND Q.ID = {$question_id}
+    AND V.ID = {$value_id} {$filters_where};
 SQL;
 
         return DB::query($query)->value();
     }
-
 
     public function RenderCurrentFilters()
     {
         $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
         if(!empty($questions_filters))
         {
-            $template = EntitySurveyTemplate::get()->first();
+            $template = $this->getCurrentSelectedSurveyTemplate();
 
             $questions_filters = explode(',', $questions_filters);
             $output = '';
@@ -1261,9 +1331,11 @@ SQL;
 
     public function ViewDeploymentStatisticsSurveyBuilder(SS_HTTPRequest $request)
     {
-        $qid = $request->getVar('qid');
-        $vid = $request->getVar('vid');
+        $qid           = $request->getVar('qid');
+        $vid           = $request->getVar('vid');
         $clear_filters = $request->getVar('clear_filters');
+        $from          = $request->getVar('From');
+        $to            = $request->getVar('To');
 
         if(!empty($clear_filters))
         {
@@ -1273,18 +1345,32 @@ SQL;
         }
         else if(!empty($qid) && !empty($vid))
         {
-            $qid = intval($qid);
-            $vid = intval($vid);
+            $qid     = intval($qid);
+            $vid     = intval($vid);
             $filters = Session::get('SurveyBuilder.Statistics.Filters');
             $questions_filters = Session::get('SurveyBuilder.Statistics.Filters_Questions');
-            $filters .= sprintf("%s:%s&",$qid,$vid);
+            $filters .= sprintf("%s:%s,",$qid,$vid);
             $questions_filters .= sprintf("%s,",$qid);
 
             Session::set("SurveyBuilder.Statistics.Filters", $filters);
             Session::set("SurveyBuilder.Statistics.Filters_Questions", $questions_filters);
-            return Controller::curr()->redirect(Controller::curr()->Link('ViewDeploymentStatisticsSurveyBuilder'));
+            $query_str = '';
+            if(!empty($from) && !empty($to))
+                $query_str = sprintf("?From=%s&To=%s", $from, $to);
+            return Controller::curr()->redirect(Controller::curr()->Link('ViewDeploymentStatisticsSurveyBuilder').$query_str);
         }
         return $this->owner->renderWith(array('SangriaPage_ViewDeploymentStatisticsSurveyBuilder', 'SangriaPage', 'SangriaPage'));
+    }
+
+    public function SurveyBuilderDateFilterQueryString()
+    {
+        $request       = Controller::curr()->getRequest();
+        $from          = $request->getVar('From');
+        $to            = $request->getVar('To');
+        $query_str = '';
+        if(!empty($from) && !empty($to))
+            $query_str = sprintf("&From=%s&To=%s", $from, $to);
+        return $query_str;
     }
 
     public function IsQuestionOnFiltering($qid)
@@ -1296,5 +1382,63 @@ SQL;
             return in_array($qid, $questions_filters);
         }
         return false;
+    }
+
+    public function SurveyBuilderSurveyCount()
+    {
+        $request     = Controller::curr()->getRequest();
+        $from        = $request->getVar('From');
+        $to          = $request->getVar('To');
+        $template    = $this->getCurrentSelectedSurveyTemplate();
+        $class_name  = $this->getCurrentSelectedSurveyClassName();
+        $filters     = Session::get('SurveyBuilder.Statistics.Filters');
+
+        $filter_query_tpl = <<<SQL
+    AND EXISTS
+    (
+		SELECT * FROM SurveyAnswer A2
+        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
+		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
+		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
+		INNER JOIN SurveyQuestionValueTemplate V2 ON V2.OwnerID = Q2.ID
+		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+        WHERE
+        I2.ClassName = '{$class_name}'
+		AND FIND_IN_SET(V2.ID, A2.Value) > 0
+		AND SSTPL2.ID = %s
+		AND Q2.ID = %s
+		AND V2.ID = %s
+        AND I2.ID = I.ID
+	)
+SQL;
+
+        $filters_where = '';
+
+        if(!empty($from) && !empty($to))
+        {
+            $filters_where = " AND ".SangriaPage_Controller::generateDateFilters("I", "LastEdited");
+        }
+
+        if(!empty($filters))
+        {
+            $filters = trim($filters, ',');
+            $filters = explode(',', $filters);
+            foreach($filters as $t)
+            {
+                $t = explode(':', $t);
+                $qid = intval($t[0]);
+                $vid = intval($t[1]);
+                $filters_where.= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
+            }
+        }
+
+        $query = <<<SQL
+    SELECT COUNT(I.ID) FROM Survey I
+    WHERE
+    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' {$filters_where};
+SQL;
+
+        return DB::query($query)->value();
     }
 }

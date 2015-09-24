@@ -163,4 +163,12 @@ class EntitySurveyTemplate extends SurveyTemplate implements IEntitySurveyTempla
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
     }
+
+    /**
+     * @return string
+     */
+    public function QualifiedName()
+    {
+        return sprintf("%s - %s", $this->Parent()->Title, $this->Title);
+    }
 }

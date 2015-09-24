@@ -19,19 +19,17 @@ class EntitySurvey extends Survey implements IEntitySurvey
 {
 
     static $db = array
-    (
-    );
+    ();
 
     static $indexes = array
-    (
-    );
+    ();
 
     static $has_one = array
     (
-        'Template'  => 'EntitySurveyTemplate',
-        'Parent'    => 'Survey',
-        'Owner'     => 'SurveyDynamicEntityStep',
-        'EditedBy'  => 'Member'
+        'Template' => 'EntitySurveyTemplate',
+        'Parent' => 'Survey',
+        'Owner' => 'SurveyDynamicEntityStep',
+        'EditedBy' => 'Member'
     );
 
     static $many_many = array
@@ -40,12 +38,10 @@ class EntitySurvey extends Survey implements IEntitySurvey
     );
 
     static $has_many = array
-    (
-    );
+    ();
 
     private static $defaults = array
-    (
-    );
+    ();
 
     /**
      * @return ISurvey
@@ -74,14 +70,16 @@ class EntitySurvey extends Survey implements IEntitySurvey
     public function getFriendlyName()
     {
         $steps = $this->getSteps();
-        foreach($steps as $step){
-           if($step instanceof ISurveyRegularStep ){
-               foreach($step->getAnswers() as $a){
-                   if($a->question()->Type() === 'TextBox' && !empty($a->value()))
-                       return $a->value();
-               }
-           }
+        foreach ($steps as $step) {
+            if ($step instanceof ISurveyRegularStep) {
+                foreach ($step->getAnswers() as $a) {
+                    if ($a->question()->Type() === 'TextBox' && !empty($a->value())) {
+                        return $a->value();
+                    }
+                }
+            }
         }
+
         return $this->ID;
     }
 
@@ -99,7 +97,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
      */
     public function addTeamMember(ICommunityMember $member)
     {
-       AssociationFactory::getInstance()->getMany2ManyAssociation($this,'EditorTeam')->add($member);
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'EditorTeam')->add($member);
     }
 
     /**
@@ -108,7 +106,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
      */
     public function removeTeamMember(ICommunityMember $member)
     {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this,'EditorTeam')->remove($member);
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'EditorTeam')->remove($member);
     }
 
     /**
@@ -116,7 +114,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
      */
     public function getUpdateBy()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'EditedBy')->getTarget();
+        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'EditedBy')->getTarget();
     }
 
     /**
@@ -124,7 +122,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
      */
     public function getTeamMembers()
     {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'EditorTeam')->toArray();
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'EditorTeam')->toArray();
     }
 
     protected function onBeforeWrite()
@@ -148,7 +146,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
     public function isTeamMember(ICommunityMember $member)
     {
         $member = $this->EditorTeam()->filter('MemberID', $member->getIdentifier())->first();
+
         return !is_null($member);
     }
-
 }
