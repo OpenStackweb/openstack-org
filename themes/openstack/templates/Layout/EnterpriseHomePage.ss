@@ -11,27 +11,22 @@
 
 
     <!-- Begin Page Content -->
-        <div class="intro-header crowd">
+        <div class="intro-header enterprise-booklet">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-md-7">
+                <div class="col-md-8 col-md-push-2">
                     <div class="intro-message">
-                        <h1>We’re In a Software Defined Economy</h1>
-                        <h3>OpenStack is a driving force in Enterprise software</h3>
+                        <h5>FEATURED</h5>
+                        <h1>OpenStack: A Business Perspective</h1>
+                        <!-- <h3>OpenStack is a driving force in Enterprise software</h3> -->
                         <p>
-                            Today’s software-defined economy requires businesses to move faster than their competitors. Many enterprise organizations and their software developers are turning to OpenStack for its open APIs, flexible architecture and large commercial ecosystem to compete in a completely new paradigm of software development and deployment.
+                           An executive level view of cloud computing and OpenStack with insightful real-life use cases and initial planning tips, written primarily by enterprise users.
+                        </p>
+                        <p>
+                            <a href="https://openstack.org/assets/pdf-downloads/business-perspectives.pdf" class="lrg-btn" target="_blank"><i class="fa fa-file-pdf-o"></i> Read the booklet</a>
+                            <span class="lrg-btn-note">*Best viewed with Page Display set to single page and Zoom set to page level</span>
                         </p>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                        <a href="#" data-toggle="modal" data-target="#VideoModalHero">
-                        <div class="video-wrapper hero">
-                            <div class="play-button">
-                                <img src="//openstack.org/themes/openstack/images/enterprise/play-button-dark.png"> 
-                            </div>
-                            <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise/software-defined-video-summit2.jpg" alt="Jonathan Bryce talking about Software Defined Economy">
-                        </div>
-                        </a>
                 </div>
             </div>
 
