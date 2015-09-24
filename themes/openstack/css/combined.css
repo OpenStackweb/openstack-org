@@ -2349,6 +2349,7 @@ ul.marketplace-nav .current a {
     color: #30c530;
     font-size: 1.3em;
     display: inline-block;
+    line-height: 21px;
 }
 
 .tested-listing .tested-listing-title {
@@ -2358,6 +2359,7 @@ ul.marketplace-nav .current a {
     font-size: 1em;
     display: inline-block;
     margin-left: 2px;
+    vertical-align: top;
 }
 
 .tested-listing .tested-listing-description {
