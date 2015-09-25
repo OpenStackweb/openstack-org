@@ -1061,10 +1061,11 @@ a.enterprise-bar-right {
     text-decoration: none;
     background: #A51B1B;
   }
-  .intro-header.enterprise-booklet p span.lrg-btn-note {
+  span.lrg-btn-note {
     font-size: 0.8em;
     font-style: italic;
     display: block;
+    text-align: center;
   }
 
 .video-wrapper.hero {
