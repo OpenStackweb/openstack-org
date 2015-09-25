@@ -7,7 +7,9 @@
             <select id="range">
                 <option selected value="OLD">V1</option>
                 <option value="MARCH_2015">V2 (March 2015)</option>
+                <% if $UseSurveyBuilder == "1" %>
                 <option value="FALL_2015">V3 (Fall 2015)</option>
+                <% end_if %>
             </select>
         </div>
     </div>

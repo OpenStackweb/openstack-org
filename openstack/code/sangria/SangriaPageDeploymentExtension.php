@@ -151,6 +151,7 @@ final class SangriaPageDeploymentExtension extends Extension
         return is_null($range) ? SurveyType::OLD : $range;
     }
 
+
     private static function generateDeploymentSurveysSummaryOptions($options, $field)
     {
         $list = new ArrayList();
@@ -670,12 +671,41 @@ final class SangriaPageDeploymentExtension extends Extension
                 $range_filter = "AND D.Created < '" . SURVEY_START_DATE . "'";
 
             $continent = DB::query("SELECT ContinentID from Continent_Countries where CountryCode = '{$country}';")->value();
-            $count = DB::query("SELECT COUNT(*) FROM Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}' {$range_filter};")->value();
-            $result = array(
-                'country' => $country,
+
+            $old_query = <<<SQL
+            SELECT COUNT(*) FROM Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}' {$range_filter};
+SQL;
+
+            $new_query = <<<SQL
+            SELECT COUNT(EntityID)
+FROM
+(
+	SELECT
+    S.ID AS EntityID,
+    A.Value AS Countries FROM
+	Survey S
+    INNER JOIN SurveyTemplate ST ON ST.ID = S.TemplateID
+    INNER JOIN EntitySurveyTemplate EST ON EST.ID = ST.ID
+	INNER JOIN EntitySurvey ES ON ES.ID = S.ID
+    INNER JOIN SurveyStep STP ON STP.SurveyID = S.ID
+	INNER JOIN SurveyAnswer A ON A.StepID = STP.ID
+	INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+	INNER JOIN SurveyDropDownQuestionTemplate DDL ON DDL.ID = Q.ID
+	WHERE DDL.IsCountrySelector = 1 AND EST.EntityName = 'Deployment'
+) DEPLOYMENT_COUNTRIES
+INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUNTRIES.Countries) > 0
+WHERE CC.CountryCode = '{$country}';
+SQL;
+
+
+            $query  = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+            $count  = DB::query($query)->value();
+            $result = array
+            (
+                'country'      => $country,
                 'country_name' => CountryCodes::$iso_3166_countryCodes[$country],
-                'continent' => $continent,
-                'count' => $count
+                'continent'    => $continent,
+                'count'        => $count
             );
             Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.viewdeploymentscountry.js');
             return $this->owner->getViewer('ViewDeploymentsPerCountry')->process($this->owner->customise($result));
@@ -730,12 +760,41 @@ final class SangriaPageDeploymentExtension extends Extension
             $range_filter = "WHERE D.Created < '" . SURVEY_START_DATE . "'";
 
 
-        $records = DB::query("SELECT COUNT(D.ID) AS DeploymentsQty, C.ID AS ContinentID, C.Name AS Continent FROM Deployment D
+$old_query = <<<SQL
+SELECT COUNT(D.ID) AS DeploymentsQty, C.ID AS ContinentID, C.Name AS Continent FROM Deployment D
 INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID
 INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry
 INNER JOIN Continent C ON C.ID = CC.ContinentID {$range_filter}
-GROUP BY C.Name, C.ID;");
-        foreach ($records as $record) {
+GROUP BY C.Name, C.ID;
+SQL;
+
+$new_query = <<<SQL
+SELECT COUNT(DEPLOYMENT_COUNTRIES.EntityID) AS DeploymentsQty , C.ID AS ContinentID, C.Name AS Continent FROM
+(
+	SELECT
+    S.ID AS EntityID,
+    A.Value AS Countries FROM
+	Survey S
+    INNER JOIN SurveyTemplate ST ON ST.ID = S.TemplateID
+    INNER JOIN EntitySurveyTemplate EST ON EST.ID = ST.ID
+	INNER JOIN EntitySurvey ES ON ES.ID = S.ID
+    INNER JOIN SurveyStep STP ON STP.SurveyID = S.ID
+	INNER JOIN SurveyAnswer A ON A.StepID = STP.ID
+	INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+	INNER JOIN SurveyDropDownQuestionTemplate DDL ON DDL.ID = Q.ID
+	WHERE DDL.IsCountrySelector = 1 AND EST.EntityName = 'Deployment'
+) DEPLOYMENT_COUNTRIES
+INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUNTRIES.Countries) > 0
+INNER JOIN Continent C ON C.ID = CC.ContinentID
+GROUP BY C.Name, C.ID;
+SQL;
+
+        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+
+        $records = DB::query($query);
+
+        foreach ($records as $record)
+        {
             $count = $record['DeploymentsQty'];
             $continent = $record['Continent'];
             $continent_id = $record['ContinentID'];
@@ -756,10 +815,50 @@ GROUP BY C.Name, C.ID;");
             $range_filter = "AND D.Created >= '" . SURVEY_START_DATE . "'";
         else
             $range_filter = "AND D.Created < '" . SURVEY_START_DATE . "'";
-        $deployments = DB::query("SELECT D.* from Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}' {$range_filter}; ");
-        foreach ($deployments as $deployment) {
+
+$old_query = <<<SQL
+SELECT D.* from Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID WHERE DS.PrimaryCountry = '{$country}' {$range_filter};
+SQL;
+
+$new_query = <<<SQL
+SELECT EntityID AS ID, 'EntitySurvey' AS ClassName, CC.CountryCode AS Country
+FROM
+(
+	SELECT
+    S.ID AS EntityID,
+    A.Value AS Countries FROM
+	Survey S
+    INNER JOIN SurveyTemplate ST ON ST.ID = S.TemplateID
+    INNER JOIN EntitySurveyTemplate EST ON EST.ID = ST.ID
+	INNER JOIN EntitySurvey ES ON ES.ID = S.ID
+    INNER JOIN SurveyStep STP ON STP.SurveyID = S.ID
+	INNER JOIN SurveyAnswer A ON A.StepID = STP.ID
+	INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+	INNER JOIN SurveyDropDownQuestionTemplate DDL ON DDL.ID = Q.ID
+	WHERE DDL.IsCountrySelector = 1 AND EST.EntityName = 'Deployment'
+) DEPLOYMENT_COUNTRIES
+INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUNTRIES.Countries) > 0
+WHERE CC.CountryCode = '{$country}';
+SQL;
+
+        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+
+        $res = DB::query($query);
+
+        foreach ($res as $row) {
             // concept: new Deployment($deployment)
-            $list->push(new $deployment['ClassName']($deployment));
+            $entity = new $row['ClassName']($row);
+            $list->push(
+                new ArrayData
+                (
+                    array
+                    (
+                        'ID'             => $entity->ID,
+                        'Country'        => $entity->ClassName === 'Deployment'? $entity->Country : $row['Country'],
+                        'Label'          => $entity->ClassName === 'Deployment'? sprintf("%s - %s",$entity->Label,$entity->DeploymentType) :$entity->getFriendlyName(),
+                    )
+                )
+            );
         }
         return $list;
     }
@@ -774,10 +873,37 @@ GROUP BY C.Name, C.ID;");
         else
             $range_filter = "AND D.Created < '" . SURVEY_START_DATE . "'";
 
-        $countries = DB::query("SELECT COUNT(D.ID) AS Qty, DS.PrimaryCountry FROM Deployment D
+$old_query = <<<SQL
+SELECT COUNT(D.ID) AS Qty, DS.PrimaryCountry FROM Deployment D
 INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID
 WHERE PrimaryCountry
-IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_id}) {$range_filter} group BY PrimaryCountry;");
+IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_id}) {$range_filter} group BY PrimaryCountry;
+SQL;
+
+$new_query = <<<SQL
+SELECT COUNT(DEPLOYMENT_COUNTRIES.EntityID) AS Qty, CC.CountryCode AS PrimaryCountry FROM
+(
+	SELECT
+    S.ID AS EntityID,
+    A.Value AS Countries FROM
+	Survey S
+    INNER JOIN SurveyTemplate ST ON ST.ID = S.TemplateID
+    INNER JOIN EntitySurveyTemplate EST ON EST.ID = ST.ID
+	INNER JOIN EntitySurvey ES ON ES.ID = S.ID
+    INNER JOIN SurveyStep STP ON STP.SurveyID = S.ID
+	INNER JOIN SurveyAnswer A ON A.StepID = STP.ID
+	INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+	INNER JOIN SurveyDropDownQuestionTemplate DDL ON DDL.ID = Q.ID
+	WHERE DDL.IsCountrySelector = 1 AND EST.EntityName = 'Deployment'
+) DEPLOYMENT_COUNTRIES
+INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUNTRIES.Countries) > 0
+WHERE CC.ContinentID = {$continent_id}
+GROUP BY CC.CountryCode ;
+SQL;
+
+        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+
+        $countries = DB::query($query);
         foreach ($countries as $country) {
             $count = $country['Qty'];
             $country = $country['PrimaryCountry'];
@@ -801,10 +927,37 @@ IN (SELECT CountryCode from Continent_Countries where ContinentID = {$continent_
             $range_filter = "AND D.Created >= '" . SURVEY_START_DATE . "'";
         else
             $range_filter = "AND D.Created < '" . SURVEY_START_DATE . "'";
-
-        $countries = DB::query("SELECT  CC.CountryCode, COUNT(CC.CountryCode) AS Qty from Continent_Countries CC INNER JOIN DeploymentSurvey DS ON DS.PrimaryCountry = CC.CountryCode
+$old_query = <<<SQL
+SELECT  CC.CountryCode, COUNT(CC.CountryCode) AS Qty from Continent_Countries CC INNER JOIN DeploymentSurvey DS ON DS.PrimaryCountry = CC.CountryCode
 INNER JOIN  Deployment D ON DS.ID = D.DeploymentSurveyID
-WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode; ");
+WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode;
+SQL;
+
+$new_query = <<<SQL
+SELECT CC.CountryCode, COUNT(CC.CountryCode) AS Qty
+FROM
+(
+	SELECT
+    S.ID AS EntityID,
+    A.Value AS Countries FROM
+	Survey S
+    INNER JOIN SurveyTemplate ST ON ST.ID = S.TemplateID
+    INNER JOIN EntitySurveyTemplate EST ON EST.ID = ST.ID
+	INNER JOIN EntitySurvey ES ON ES.ID = S.ID
+    INNER JOIN SurveyStep STP ON STP.SurveyID = S.ID
+	INNER JOIN SurveyAnswer A ON A.StepID = STP.ID
+	INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+	INNER JOIN SurveyDropDownQuestionTemplate DDL ON DDL.ID = Q.ID
+	WHERE DDL.IsCountrySelector = 1 AND EST.EntityName = 'Deployment'
+) DEPLOYMENT_COUNTRIES
+INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUNTRIES.Countries) > 0
+WHERE CC.ContinentID = {$continent_id}
+GROUP BY CC.CountryCode
+SQL;
+
+        $query     = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $countries = DB::query($query);
+
         foreach ($countries as $country) {
             // concept: new Deployment($deployment)
             $do = new DataObject();
@@ -840,7 +993,29 @@ WHERE CC.ContinentID =  {$continent_id} {$range_filter} GROUP BY CC.CountryCode;
         $date_filter = '';
         if ($useDateFilter)
             $date_filter = " AND " . SangriaPage_Controller::$date_filter_query;
-        $query = "SELECT COUNT(*) from Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry " . $range_filter . $filterWhereClause . $date_filter;
+        $old_query = "SELECT COUNT(*) from Deployment D INNER JOIN DeploymentSurvey DS ON DS.ID = D.DeploymentSurveyID INNER JOIN Continent_Countries CC ON CC.CountryCode = DS.PrimaryCountry " . $range_filter . $filterWhereClause . $date_filter;
+
+        $new_query = <<<SQL
+      SELECT COUNT(DEPLOYMENT_COUNTRIES.EntityID), CC.CountryCode FROM
+(
+	SELECT
+    S.ID AS EntityID,
+    A.Value AS Countries FROM
+	Survey S
+    INNER JOIN SurveyTemplate ST ON ST.ID = S.TemplateID
+    INNER JOIN EntitySurveyTemplate EST ON EST.ID = ST.ID
+	INNER JOIN EntitySurvey ES ON ES.ID = S.ID
+    INNER JOIN SurveyStep STP ON STP.SurveyID = S.ID
+	INNER JOIN SurveyAnswer A ON A.StepID = STP.ID
+	INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+	INNER JOIN SurveyDropDownQuestionTemplate DDL ON DDL.ID = Q.ID
+	WHERE DDL.IsCountrySelector = 1 AND EST.EntityName = 'Deployment'
+) DEPLOYMENT_COUNTRIES
+INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUNTRIES.Countries) > 0;
+SQL;
+
+        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+
         return DB::query($query)->value();
     }
 

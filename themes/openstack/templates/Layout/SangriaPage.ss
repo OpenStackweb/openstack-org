@@ -119,7 +119,7 @@
                 <li>
                     <a href="#" class="cvs_download_link">Deployment Survey CSV Download</a>
                     <div class="export_filters hidden">
-                        $DateFilters(ExportSurveyResults,true)
+                        $DateFilters(ExportSurveyResults,true, 1)
                     </div>
                 </li>
                 <li>
@@ -131,7 +131,7 @@
                 <li>
                     <a href="#" class="cvs_download_link">Deployment Survey CSV Download (Flat Format)</a>
                     <div class="export_filters hidden">
-                        $DateFilters(ExportSurveyResultsFlat,true)
+                        $DateFilters(ExportSurveyResultsFlat,true,  1)
                     </div>
                 </li>
                 <li>

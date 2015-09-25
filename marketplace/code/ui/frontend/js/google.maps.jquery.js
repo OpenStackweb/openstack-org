@@ -125,7 +125,9 @@
                             markers_images[color] = icon;
                         }
                         var marker_image = markers_images[color];
-                        var lat_lng      = new google.maps.LatLng(place.lat,place.lng);
+                        var geo1 = parseFloat(place.lat);
+                        var geo2 = parseFloat(place.lng);
+                        var lat_lng      = new google.maps.LatLng(geo1,geo2);
                         var marker       = new google.maps.Marker({
                             position: lat_lng,
                             icon: marker_image,
