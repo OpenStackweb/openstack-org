@@ -1,4 +1,4 @@
-<% include SangriaPage_SurveyRangeSelector Label='Select version of deployment', FormAction=$Top.Link(ViewDeploymentStatistics), FromPage=ViewDeploymentStatistics %>
+<% include SangriaPage_SurveyRangeSelector Label='Select version of deployment', FormAction=$Top.Link(ViewDeploymentStatistics), FromPage=ViewDeploymentStatistics, UseSurveyBuilder=1 %>
 
 <h2>Deployments Submitted &mdash; {$Top.DeploymentsCount(ViewDeploymentStatistics)} total (<a href="/sangria/ViewDeploymentStatistics">clear filters</a>)</h2>
 $DateFilters

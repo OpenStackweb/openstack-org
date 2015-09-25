@@ -55,6 +55,13 @@ final class SangriaPage_Controller extends AdminController
         self::$default_end_date = date('Y/m/d') . ' 23:59';
     }
 
+    public function index()
+    {
+        Session::clear("ViewDeploymentSurveyStatistics_survey_range");
+        Session::clear("ViewDeploymentStatistics_survey_range");
+        return $this;
+    }
+
     function providePermissions()
     {
         return array(
@@ -238,7 +245,7 @@ final class SangriaPage_Controller extends AdminController
 
     //Survey date filters constructor
 
-    function DateFilters($action = '', $use_subset = false)
+    function DateFilters($action = '', $use_subset = false, $UseSurveyBuilder = false)
     {
         $start_date = ($this->request->getVar('From')) ? $this->request->getVar('From') : self::$default_start_date;
         $end_date = ($this->request->getVar('To')) ? $this->request->getVar('To') : self::$default_end_date;
@@ -246,7 +253,8 @@ final class SangriaPage_Controller extends AdminController
             "start_date" => $start_date,
             "end_date" => $end_date,
             "action" => $action,
-            "use_subset" => $use_subset
+            "use_subset" => $use_subset,
+            'UseSurveyBuilder' => $UseSurveyBuilder
         );
 
         return $this->renderWith("SurveyDateFilters", $data);

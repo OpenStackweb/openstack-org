@@ -83,7 +83,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
         return $this->ID;
     }
 
-    /**
+     /**
      * @return bool
      */
     public function isTeamEditionAllowed()
