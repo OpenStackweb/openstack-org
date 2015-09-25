@@ -46,8 +46,6 @@
                     <% if $Tested %>
                         <i class="fa fa-check-square"></i>
                         <div class="tested-listing-title">Tested</div>
-                    <% else %>
-                        No
                     <% end_if %>
                     </td>
                 </tr>
@@ -87,8 +85,6 @@
                         <% if $Tested %>
                             <i class="fa fa-check-square"></i>
                             <div class="tested-listing-title">Tested</div>
-                        <% else %>
-                            No
                         <% end_if %>
                         </td>
                     </tr>
