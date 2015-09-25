@@ -99,17 +99,18 @@ abstract class OpenStackImplementationManager
     }
 
 
-    protected function clearCollections(ICompanyService &$implementation)
+    protected function clearCollections(ICompanyService $implementation)
     {
-        parent::clearCollections($implementation);
+        $implementation = parent::clearCollections($implementation);
         $implementation->clearCapabilities();
         $implementation->clearHypervisors();
         $implementation->clearGuests();
+        return $implementation;
     }
 
-    protected function updateCollections(ICompanyService &$implementation, array $data)
+    protected function updateCollections(ICompanyService $implementation, array $data)
     {
-        parent::updateCollections($implementation, $data);
+        $implementation = parent::updateCollections($implementation, $data);
         if (array_key_exists('guest_os', $data) && is_array($data['guest_os'])) {
             $data_guests = $data['guest_os'];
             foreach ($data_guests as $guest_id) {
@@ -130,6 +131,7 @@ abstract class OpenStackImplementationManager
                 $this->addCapability($capability_data, $implementation);
             }
         }
+        return $implementation;
     }
 
     protected function registerCapability(IOpenStackImplementation $implementation, IOpenStackImplementationApiCoverage $capability)

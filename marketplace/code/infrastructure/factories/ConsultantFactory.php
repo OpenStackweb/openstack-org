@@ -39,8 +39,7 @@ final class ConsultantFactory
 			$consultant->deactivate();
 		$consultant->setMarketplace($marketplace_type);
 		$consultant->setCall2ActionUri($call_2_action_url);
-        $consultant->setLiveServiceId($live_id);
-		return $consultant;
+     	return $consultant;
 	}
 
 	/**
