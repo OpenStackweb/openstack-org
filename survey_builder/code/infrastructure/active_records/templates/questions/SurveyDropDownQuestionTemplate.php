@@ -76,4 +76,38 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
     {
         return $this->getField('IsCountrySelector');
     }
+
+    /**
+     * @return IQuestionValueTemplate[]
+     */
+    public function getValues()
+    {
+       if(!$this->isCountrySelector())
+            return parent::getValues();
+
+       $extra_options = array
+       (
+               'Worldwide' => 'Worldwide',
+               'Prefer not to say' => 'Prefer not to say',
+               'Too many to list' => 'Too many to list',
+       );
+
+       $options = array_merge($extra_options, CountryCodes::$iso_3166_countryCodes);
+       $res = array();
+       foreach($options as $k => $v)
+       {
+           array_push($res, new ArrayData
+               (
+                   array
+                   (
+                       'ID'    => $k,
+                       'Label' => $v,
+                       'Value' => $k,
+                   )
+               )
+           );
+       }
+       return $res;
+    }
+
 }

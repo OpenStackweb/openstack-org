@@ -30,7 +30,7 @@
                         <h3>$Label</h3>
                         <table>
                             <tbody>
-                            <% loop Values %>
+                            <% loop getFormattedValues %>
                                 <tr>
                                     <td>
                                         <% if $Top.IsQuestionOnFiltering($Up.ID) %>
