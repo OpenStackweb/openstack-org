@@ -422,4 +422,10 @@ class Survey extends DataObject implements ISurvey {
         }
         return new ArrayList($completed_steps);
     }
+
+    public function getFriendlyName()
+    {
+        $owner = $this->CreatedBy();
+        return sprintf('%s', $owner->Email);
+    }
 }

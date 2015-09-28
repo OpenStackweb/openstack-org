@@ -28,6 +28,33 @@ class SurveyDoubleEntryTableQuestionTemplate extends SurveyMultiValueQuestionTem
     );
 
 
+    /**
+     * @param int $id
+     * @return IQuestionValueTemplate
+     */
+    public function getRowById($id)
+    {
+        foreach($this->Rows() as $v){
+            if( $v->ID === $id)
+                return $v;
+        }
+        return null;
+    }
+
+    /**
+     * @param int $id
+     * @return IQuestionValueTemplate
+     */
+    public function getColumnById($id)
+    {
+        foreach($this->Columns() as $v){
+            if( $v->ID === $id)
+                return $v;
+        }
+        return null;
+    }
+
+
     public function getCMSFields() {
 
         $fields = parent::getCMSFields();

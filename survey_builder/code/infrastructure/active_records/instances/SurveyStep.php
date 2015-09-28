@@ -25,7 +25,8 @@ class SurveyStep
     static $indexes = array(
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'Template' => 'SurveyStepTemplate',
         'Survey'   => 'Survey',
     );
@@ -86,5 +87,11 @@ class SurveyStep
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
+    }
+
+    public function hasAnswers()
+    {
+        $template = $this->Template();
+        return ($template instanceof ISurveyRegularStepTemplate);
     }
 }

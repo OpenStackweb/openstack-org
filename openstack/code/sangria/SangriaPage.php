@@ -57,8 +57,7 @@ final class SangriaPage_Controller extends AdminController
 
     public function index()
     {
-        Session::clear("ViewDeploymentSurveyStatistics_survey_range");
-        Session::clear("ViewDeploymentStatistics_survey_range");
+        $this->extend('onBeforeIndex', $this);
         return $this;
     }
 
@@ -295,7 +294,6 @@ final class SangriaPage_Controller extends AdminController
     {
         $html = '';
         $this->extend('getQuickActionsExtensions', $html);
-
         return $html;
     }
 

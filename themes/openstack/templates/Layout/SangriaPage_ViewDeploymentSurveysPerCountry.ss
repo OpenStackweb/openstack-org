@@ -1,4 +1,4 @@
-<% include SangriaPage_SurveyRangeSelector Label='Select version of survey', FormAction=$Top.GetLinkForDeploymentSurveysPerCountry($country), FromPage=ViewDeploymentSurveysPerRegion %>
+<% include SangriaPage_SurveyRangeSelector Label='Select version of survey', FormAction=$Top.GetLinkForDeploymentSurveysPerCountry($country), FromPage=ViewDeploymentSurveysPerRegion, UseSurveyBuilder=1 %>
 <script type="application/javascript">
         $LoadJsonCountriesCoordinates('ViewDeploymentSurveysPerRegion')
     var countries_with_deployment = [];
@@ -13,12 +13,12 @@
                 <% loop DeploymentSurveysPerCountry($country) %>
                     <li>
                         <script type="application/javascript">
-                            if(!countries_with_deployment.hasOwnProperty("{$PrimaryCountry}") )
-                                countries_with_deployment["{$PrimaryCountry}"] = new Array();
-                            var deployments = countries_with_deployment["{$PrimaryCountry}"];
-                            deployments.push({code:"{$PrimaryCountry}" , name : "{$Email} - {$Industry}", url: "{$Top.Link(SurveyDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentSurveysPerRegion)}%3Fcountry%3D{$Top.country}" });
+                            if(!countries_with_deployment.hasOwnProperty("{$Country}") )
+                                countries_with_deployment["{$Country}"] = new Array();
+                            var deployments = countries_with_deployment["{$Country}"];
+                            deployments.push({code:"{$Country}" , name : "{$Label}", url: "{$Top.Link(SurveyDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentSurveysPerRegion)}%3Fcountry%3D{$Top.country}" });
                         </script>
-                        <a href="{$Top.Link(SurveyDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentSurveysPerRegion)}%3Fcountry%3D{$Top.country}">$Org.Name</a>
+                        <a href="{$Top.Link(SurveyDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentSurveysPerRegion)}%3Fcountry%3D{$Top.country}">$Label</a>
                     </li>
                 <% end_loop %>
             </ul>
