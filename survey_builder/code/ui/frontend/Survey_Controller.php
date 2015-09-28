@@ -312,9 +312,12 @@ class Survey_Controller extends Page_Controller {
     {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-        if(!($current_step instanceof ISurveyRegularStep)) throw new LogicException();
 
-        $next_step = $this->survey_manager->completeStep($current_step, $data);
+        if($current_step instanceof ISurveyRegularStep)
+            $next_step = $this->survey_manager->completeStep($current_step, $data);
+        else
+            $next_step = $current_step;
+
         return $this->redirect('/surveys/current/'.$next_step->template()->title());
     }
 
