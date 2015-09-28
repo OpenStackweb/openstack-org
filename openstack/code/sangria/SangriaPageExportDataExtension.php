@@ -500,7 +500,8 @@ SQL;
         else {
             $res = $this->ExportSurveyResultsData();
 
-            $fields = array(
+            $fields = array
+            (
                 'SurveyID',
                 'SurveyCreated',
                 'SurveyEdited',
@@ -625,11 +626,11 @@ SQL;
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 
-    private function buildSurveyBuilderHeaders()
+    private function buildSurveyBuilderHeaders($flat_fields = array(), $flat_fields_entity = array())
     {
 
         $survey_header_query = <<<SQL
-SELECT SS.Name, Q.Name, Q.ClassName FROM SurveyTemplate S
+SELECT SS.Name, Q.ID AS QuestionID, Q.Name, Q.ClassName FROM SurveyTemplate S
 INNER JOIN SurveyStepTemplate SS ON SS.SurveyTemplateID = S.ID
 INNER JOIN SurveyQuestionTemplate Q ON Q.StepID = SS.ID
 WHERE S.ClassName = 'SurveyTemplate' AND Q.ClassName <> 'SurveyLiteralContentQuestionTemplate'
@@ -647,11 +648,23 @@ SQL;
         foreach($res as $row)
         {
             $name = $row['Name'];
-            $template_1[$name] = null;
+            if(in_array($name, $flat_fields))
+            {
+                $q = SurveyMultiValueQuestionTemplate::get()->byID(intval($row['QuestionID']));
+                if(is_null($q)) continue;
+
+                foreach($q->Values() as $v)
+                {
+                    $header = sprintf('%s - %s',$name, $v->Value );
+                    $template_1[$header] = null;
+                }
+            }
+            else
+                $template_1[$name] = null;
         }
 
         $entity_survey_header_query = <<<SQL
-SELECT SS.Name, Q.Name, Q.ClassName FROM SurveyTemplate S
+SELECT SS.Name, Q.ID AS QuestionID, Q.Name, Q.ClassName FROM SurveyTemplate S
 INNER JOIN EntitySurveyTemplate ES ON ES.ID = S.ID
 INNER JOIN SurveyStepTemplate SS ON SS.SurveyTemplateID = S.ID
 INNER JOIN SurveyQuestionTemplate Q ON Q.StepID = SS.ID
@@ -667,7 +680,19 @@ SQL;
         foreach($res as $row)
         {
             $name = $row['Name'];
-            $template_2[$name] = null;
+            if(in_array($name, $flat_fields_entity))
+            {
+                $q = SurveyMultiValueQuestionTemplate::get()->byID(intval($row['QuestionID']));
+                if(is_null($q)) continue;
+
+                foreach($q->Values() as $v)
+                {
+                    $header = sprintf('%s - %s',$name, $v->Value );
+                    $template_2[$header] = null;
+                }
+            }
+            else
+                $template_2[$name] = null;
         }
 
         return array($template_1, $template_2);
@@ -761,12 +786,12 @@ SQL;
         return array($rows, $columns);
     }
 
-    private function getSurveyBuilderExportData()
+    private function getSurveyBuilderExportData($flat_fields = array(), $flat_fields_entity = array())
     {
         $res        = $this->ExportSurveyResultsDataSurveyBuilder();
         $survey_id  = 0;
         $file_data  = array();
-        list($header_template1, $header_template2) = $this->buildSurveyBuilderHeaders();
+        list($header_template1, $header_template2) = $this->buildSurveyBuilderHeaders($flat_fields, $flat_fields_entity);
 
         $line = $header_template1;
         list($rows, $columns)  = $this->getRowsAndColumns();
@@ -802,6 +827,7 @@ SQL;
                         $question         = $row2['Question'];
                         $class            = $row2['QuestionClass'];
                         $answer           = $row2['Answer'];
+
                         if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
                         {
                             $tuples = explode(',', $answer);
@@ -817,7 +843,17 @@ SQL;
                             }
                             $answer = trim($translation,',');
                         }
-                        $line2[$question] = $answer;
+
+                        if(in_array($question, $flat_fields_entity))
+                        {
+                            $answers = explode('|', $answer);
+                            foreach($answers as $a)
+                            {
+                                $line2[sprintf("%s - %s",$question,$a)] = 1;
+                            }
+                        }
+                        else
+                            $line2[$question] = $answer;
                     }
 
                     if(isset($line2['DeploymentID']) && intval($line2['DeploymentID']) > 0)
@@ -845,7 +881,17 @@ SQL;
 
             $question        = $row['Question'];
             $class           = $row['QuestionClass'];
-            $line[$question] = $row['Answer'];
+
+            if(in_array($question, $flat_fields))
+            {
+                $answers = explode('|', $row['Answer']);
+                foreach($answers as $a)
+                {
+                    $line[sprintf("%s - %s", $question, $a)] = 1;
+                }
+            }
+            else
+                $line[$question] = $row['Answer'];
         }
 
         if(isset($line['SurveyID']) && intval($line['SurveyID']) > 0)
@@ -862,7 +908,31 @@ SQL;
 
         if($range === SurveyType::FALL_2015)
         {
-            $file_data = $this->getSurveyBuilderExportData();
+            $file_data = $this->getSurveyBuilderExportData
+            (
+                array
+                (
+                    "OpenStackActivity",
+                    "BusinessDrivers",
+                    "InteractingClouds",
+                    "Stacks",
+                ),
+                array
+                (
+                    "CurrentReleases",
+                    "UsedPackages",
+                    "IdentityDrivers",
+                    "WorkloadsCategories",
+                    "DeploymentTools",
+                    "PaasTools",
+                    "Hypervisors",
+                    "UsedDBForOpenStackComponents",
+                    "NetworkDrivers",
+                    "OperatingSystems",
+                    "SupportedFeatures",
+                    "WhyNovaNetwork"
+                )
+            );
         }
         else {
             $res = $this->ExportSurveyResultsData();

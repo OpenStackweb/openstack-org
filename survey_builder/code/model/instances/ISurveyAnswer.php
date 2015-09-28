@@ -12,7 +12,8 @@
  * limitations under the License.
  **/
 
-interface ISurveyAnswer extends IEntity {
+interface ISurveyAnswer extends IEntity
+{
 
     /**
      * @return string
@@ -28,4 +29,9 @@ interface ISurveyAnswer extends IEntity {
      * @return ISurveyStep
      */
     public function step();
+
+    /**
+     * @return string
+     */
+    public function getFormattedAnswer();
 }

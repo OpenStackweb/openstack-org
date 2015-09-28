@@ -12,8 +12,8 @@
  * limitations under the License.
  **/
 
-class SurveyAnswer extends DataObject
-implements ISurveyAnswer {
+class SurveyAnswer extends DataObject implements ISurveyAnswer
+{
 
     static $db = array
     (
@@ -69,5 +69,38 @@ implements ISurveyAnswer {
     public function step()
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Step')->getTarget();
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormattedAnswer()
+    {
+        $res = $this->Value;
+        $question = $this->Question();
+        if($question instanceof SurveyMultiValueQuestionTemplate)
+        {
+            $res = explode(',', $res);
+            $aux = '';
+            foreach($res as $v){
+                if($question instanceof SurveyDoubleEntryTableQuestionTemplate)
+                {
+                    $tuple = explode(':', $v);
+                    $value1 = $question->getRowById(intval($tuple[0]));
+                    $value2 = $question->getColumnById(intval($tuple[1]));
+
+                    $aux .= sprintf("%s (%s),", $value1->label(), $value2->label());
+                }
+                else {
+                    $value = $question->getValueById(intval($v));
+                    if (is_null($value)) {
+                        continue;
+                    }
+                    $aux .= $value->label() . ',';
+                }
+            }
+            $res = trim($aux, ',');
+        }
+        return $res;
     }
 }
