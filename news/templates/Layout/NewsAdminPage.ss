@@ -24,6 +24,7 @@
                                 </thead>
                                 <tbody id="slider_sortable" class="connected">
                                     $getArticles(slider)
+                                    <tr class="placeholder_empty"><td></td><td></td><td></td><td></td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -67,6 +68,7 @@
                                 </thead>
                                 <tbody id="recent_sortable" class="connected">
                                     $getArticles(recent)
+                                    <tr class="placeholder_empty"><td></td><td></td><td></td><td></td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
