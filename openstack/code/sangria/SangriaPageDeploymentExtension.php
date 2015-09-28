@@ -1666,17 +1666,18 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
 
     public function SurveyBuilderCountAnswers($question_id, $value_id)
     {
+
         $request     = Controller::curr()->getRequest();
         $from        = $request->getVar('From');
         $to          = $request->getVar('To');
         $question_id = intval($question_id);
-        $value_id    = intval($value_id);
+        $value_id    = is_int($value_id) ? intval($value_id) : $value_id;
         $template    = $this->getCurrentSelectedSurveyTemplate();
         if(is_null($template)) return;
         $filters     = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', Session::get('SurveyBuilder.Statistics.ClassName')));
         $class_name  = $this->getCurrentSelectedSurveyClassName();
 
-$filter_query_tpl = <<<SQL
+$filter_query_tpl_int = <<<SQL
     AND EXISTS
     (
 		SELECT * FROM SurveyAnswer A2
@@ -1696,6 +1697,24 @@ $filter_query_tpl = <<<SQL
 	)
 SQL;
 
+$filter_query_tpl_str = <<<SQL
+    AND EXISTS
+    (
+		SELECT * FROM SurveyAnswer A2
+        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
+		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
+		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
+		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+        WHERE
+        I2.ClassName = '{$class_name}'
+	    AND SSTPL2.ID = %s
+		AND Q2.ID = %s
+        AND I2.ID = I.ID
+        AND FIND_IN_SET('%s', A2.Value) > 0
+	)
+SQL;
+
         $filters_where = '';
 
         if(!empty($from) && !empty($to))
@@ -1711,12 +1730,28 @@ SQL;
             {
                 $t = explode(':', $t);
                 $qid = intval($t[0]);
-                $vid = intval($t[1]);
+                $vid = is_int($t[1])?intval($t[1]):$t[1];
+                $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int: $filter_query_tpl_str;
                 $filters_where.= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
             }
         }
 
-$query = <<<SQL
+$query_str = <<<SQL
+SELECT COUNT(A.Value) FROM SurveyAnswer A
+    INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+    INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
+    INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
+    INNER JOIN SurveyStep S ON S.ID = A.StepID
+    INNER JOIN Survey I ON I.ID = S.SurveyID
+    WHERE
+    I.ClassName = '{$class_name}'
+    AND FIND_IN_SET('{$value_id}', A.Value) > 0
+    AND SSTPL.ID = $template->ID
+    AND Q.ID = {$question_id}
+    {$filters_where};
+SQL;
+
+$query_int = <<<SQL
     SELECT COUNT(A.Value) FROM SurveyAnswer A
     INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
     INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
@@ -1731,7 +1766,7 @@ $query = <<<SQL
     AND Q.ID = {$question_id}
     AND V.ID = {$value_id} {$filters_where};
 SQL;
-
+        $query = is_int($value_id) ? $query_int : $query_str;
         return DB::query($query)->value();
     }
 
@@ -1795,7 +1830,7 @@ SQL;
         $class_name  = $this->getCurrentSelectedSurveyClassName();
         $filters     = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', Session::get('SurveyBuilder.Statistics.ClassName')));
 
-        $filter_query_tpl = <<<SQL
+        $filter_query_tpl_int = <<<SQL
     AND EXISTS
     (
 		SELECT * FROM SurveyAnswer A2
@@ -1815,6 +1850,26 @@ SQL;
 	)
 SQL;
 
+
+
+        $filter_query_tpl_str = <<<SQL
+    AND EXISTS
+    (
+		SELECT * FROM SurveyAnswer A2
+        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
+		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
+		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
+		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+        WHERE
+        I2.ClassName = '{$class_name}'
+
+		AND SSTPL2.ID = %s
+		AND Q2.ID = %s
+        AND I2.ID = I.ID
+       	AND FIND_IN_SET('%s', A2.Value) > 0
+	)
+SQL;
         $filters_where = '';
 
         if(!empty($from) && !empty($to))
@@ -1830,7 +1885,8 @@ SQL;
             {
                 $t = explode(':', $t);
                 $qid = intval($t[0]);
-                $vid = intval($t[1]);
+                $vid = is_int($t[1])? intval($t[1]):$t[1];
+                $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int : $filter_query_tpl_str;
                 $filters_where.= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
             }
         }
@@ -1881,7 +1937,7 @@ SQL;
         else if(!empty($qid) && !empty($vid))
         {
             $qid     = intval($qid);
-            $vid     = intval($vid);
+            $vid     = is_int($vid) ? intval($vid):$vid;
             $filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', $class_name));
             $questions_filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters_Questions', $class_name));
             $filters .= sprintf("%s:%s,",$qid,$vid);

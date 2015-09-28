@@ -225,6 +225,11 @@ class SurveyMultiValueQuestionTemplate
         return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values', $query)->toArray();
     }
 
+    public function getFormattedValues()
+    {
+        return new ArrayList($this->getValues());
+    }
+
     /**
      * @return IQuestionValueTemplate
      */
