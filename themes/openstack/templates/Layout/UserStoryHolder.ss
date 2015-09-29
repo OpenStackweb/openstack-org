@@ -11,6 +11,10 @@
 <div class='case-studies-hero'>
 	<div class='container'>
 		<ul class='rotator_new rotator'>
+		<li data-label = 'Enterprise Booklet' class = 'enterprise-booklet'>
+			<p class='largeQuote'>Current OpenStack users wrote a booklet of use cases and planning tips with IT executives in mind</p>
+			<a href="//www.openstack.org/assets/pdf-downloads/business-perspectives.pdf">Download the booklet</a>
+		</li>
 		<li data-label = 'Automotive' class = 'automotive'>
 			<p class='largeQuote'>Top 10 Automaker Turning Customer Insights Into Action with OpenStack</p>
 			<a href="/enterprise/auto/">Read The Case Study</a>

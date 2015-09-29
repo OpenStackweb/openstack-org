@@ -267,10 +267,51 @@ a.releaseButton:active {
 }
 
 
-.automotive {
+.enterprise-booklet {
     text-align: center;
     color: #f8f8f8;
     background: url('/themes/openstack/images/landing-pages/auto/hero-bkgd.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+.enterprise-booklet a {
+    display: block;
+    background: #b9301d;
+    padding: 10px 20px;
+    border-radius: 2px;
+    width: 80%;
+    margin: 10px auto 0;
+    color: #fff!important;
+    font-weight: 600;
+    font-size: 150%
+}
+
+.enterprise-booklet .largeQuote {
+    margin-top: 140px;
+    color: white;
+    font-size: 300%;
+}
+
+.enterprise-booklet a {
+    text-decoration: none;
+    background: #B73124;
+    color: white;
+    max-width: 300px;
+}
+
+.enterprise-booklet a:hover {
+    text-decoration: none;
+    background: #831917;      
+    color: white;
+    max-width: 300px;
+}
+
+
+.enterprise-booklet {
+    text-align: center;
+    color: #f8f8f8;
+    background: url('/themes/openstack/images/enterprise/booklet-bkgd.jpg') no-repeat center center;
     background-size: cover;
     position: relative;
 }
