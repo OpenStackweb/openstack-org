@@ -15,7 +15,7 @@ $database = '';
 $email_from = '';
 $email_log = '';
 $email_new_deployment = '';
-
+/*
 $mysqli = @new mysqli(SS_DATABASE_SERVER, SS_DATABASE_USERNAME, SS_DATABASE_PASSWORD, $database);
 if ($mysqli->connect_errno) {
 	mysqli_close($mysqli);
@@ -26,6 +26,7 @@ if ($mysqli->connect_errno) {
 	exit();
 }
 mysqli_close($mysqli);
+*/
 
 //used by openstack/code/utils/email/DevelopmentEmail.php
 define('DEV_EMAIL_TO','');

@@ -41,7 +41,19 @@ class CustomMySQLDatabase extends MySQLDatabase
             $error,
             $connect_error
         );
-        user_error($msg, $errorLevel);
+        SS_Log::log($msg, SS_Log::ERR);
+        if(Director::get_environment_type() === "live")
+        {
+            ob_clean();
+            $maintenance_page = file_get_contents(Director::baseFolder() . '/maintenance/index.html');
+            echo $maintenance_page;
+            header("HTTP/1.0 502 Bad Gateway");
+            exit();
+        }
+        else
+        {
+            user_error($msg);
+        }
     }
 
 }

@@ -148,7 +148,6 @@ class OpenStackIdSecurityController extends CustomPasswordController
         }
     }
 
-
     /**
      * Log the currently logged in user out
      *
@@ -188,16 +187,24 @@ SCRIPT;
 
     }
 
-
-
     public function badlogin()
     {
-        return $this->renderWith(
+        return $this->customise
+        (
+            array
+            (
+                "LoginErrorMessage" => Session::get("Security.Message.message"),
+                "OpenStackIdUrl"    => IDP_OPENSTACKID_URL
+            )
+        )
+        ->renderWith
+        (
             array('OpenStackIdSecurityController_badlogin', 'Page')
         );
     }
 
-    public function BackUrl(){
+    public function BackUrl()
+    {
         return OpenStackIdCommon::getRedirectBackUrl();
     }
 }

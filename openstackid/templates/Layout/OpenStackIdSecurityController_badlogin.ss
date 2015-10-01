@@ -1,1 +1,2 @@
-<p>OpenStackID login attempt failed. please try it <a href="/Security/login?BackURL={$Top.BackUrl}">again</a></p>
+<div class="alert alert-danger" role="alert"><p>$LoginErrorMessage</p></div>
+<p>return back to <a href="{$OpenStackIdUrl}">OpenStackId</a></p>

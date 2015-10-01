@@ -17,7 +17,7 @@
  * support for fractional seconds
  * http://dev.mysql.com/doc/refman/5.6/en/fractional-seconds.html
  */
-class MySQLDatabase56 extends MySQLDatabase {
+class MySQLDatabase56 extends CustomMySQLDatabase {
 
     const MicrosecondsPrecision = 6;
 
