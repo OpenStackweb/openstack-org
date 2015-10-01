@@ -79,11 +79,17 @@ class OpenStackIdAuthenticator extends Controller
                 if(!$member){// or by openid
                     $member = Member::get()->filter('IdentityURL', $openid)->first();
                 }
-                if ($member) {
-                    $member->setIdentityUrl($openid);
-                    $member->write();
-                    $member->LogIn(true);
-                    return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());
+                if ($member)
+                {
+                    $result = $member->canLogIn();
+                    if($result->valid())
+                    {
+                        $member->setIdentityUrl($openid);
+                        $member->write();
+                        $member->LogIn(true);
+                        return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());
+                    }
+                    throw new Exception("Inactive User!");
                 }
                 throw new Exception("The OpenID authentication failed.");
             }
@@ -94,8 +100,6 @@ class OpenStackIdAuthenticator extends Controller
             return $this->redirect("Security/badlogin");
         }
     }
-
-
 
     private function getUserProfileInfo($response)
     {

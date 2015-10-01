@@ -71,7 +71,7 @@ final class OpenStackIdCommon {
 
         if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false){
             $member->login();
-                 return Controller::curr()->redirect($back_url);
+            return Controller::curr()->redirect($back_url);
         }
         else{
             return Controller::curr()->redirect('/Security/login?BackURL='.$back_url);
