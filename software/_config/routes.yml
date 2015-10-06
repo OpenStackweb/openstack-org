@@ -1,0 +1,7 @@
+---
+Name: softwareroutes
+After: 'framework/routes#coreroutes'
+---
+Director:
+  rules:
+    'api/v1/software': 'SoftwareRestfulApi'

@@ -1,0 +1,16 @@
+---
+Name: softwareinjector
+---
+Injector:
+  OpenStackComponentSerializer:
+    class: OpenStackComponentArraySerializer
+  SoftwareManager:
+    constructor:
+      0: '%$OpenStackComponentSerializer'
+
+SoftwareHomePage_Controller:
+  dependencies:
+    SoftwareManager: '%$SoftwareManager'
+SoftwareRestfulApi:
+  dependencies:
+    SoftwareManager: '%$SoftwareManager'

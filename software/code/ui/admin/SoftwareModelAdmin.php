@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,18 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-class SummitOverviewPageHelpMenuItem extends DataObject {
-
-    private static $db = array(
-      'Label'  => 'Text',
-      'Url'    => 'Text',
-      //http://fortawesome.github.io/Font-Awesome/icons/
-      'FAIcon' => "Enum('fa-h-square, fa-comment, fa-tag, fa-question, fa-users, fa-mobile, none, fa-map-signs, fa-map, fa-calendar, fa-bed, fa-beer, fa-cab, fa-compass, fa-cutlery, fa-location-arrow, fa-venus, fa-youtube-play','none')",
-      'Order'  => "Int",
+class SoftwareModelAdmin extends ModelAdmin
+{
+    public static $managed_models = array
+    (
+        'OpenStackComponent',
+        'OpenStackRelease',
     );
 
-    private static $has_one = array(
-        'Owner'     => 'SummitOverviewPage',
-    );
+    public $showImportForm = false;
+    private static $url_segment = 'software';
+    private static $menu_title  = 'Software';
+
+    public function init()
+    {
+        parent::init();
+    }
 }
