@@ -1,3 +1,5 @@
+/software/js/public
+/themes/openstack/bower_assets
 #assets
 !assets/error-404.html
 !assets/error-500.html

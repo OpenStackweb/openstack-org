@@ -260,7 +260,7 @@ class Survey extends DataObject implements ISurvey {
             $answer = $this->findAnswerByQuestion($q);
             if (is_null($answer))
             {
-                continue;
+               return false;
             }
 
             //checks the condition
