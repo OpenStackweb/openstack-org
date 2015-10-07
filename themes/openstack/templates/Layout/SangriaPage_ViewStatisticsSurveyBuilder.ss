@@ -55,4 +55,12 @@
         <% end_if %>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+        <h2>User Survey - Projects Used Question Statistics</h2>
+        <hr class="space" />
+        $Top.generateSurveyProjectUsedMatrix
+    </div>
+    </div>
 </div>
