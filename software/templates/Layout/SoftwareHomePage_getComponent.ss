@@ -29,11 +29,9 @@
 <div class="software-main-wrapper">
     <!-- Projects Subnav -->
     <div class="container">
-
         <div class="outer-project-back">
             <a href="$Top.Link(all-projects)"><i class="fa fa-chevron-left"></i> Back to Project Browser</a>
         </div>
-
     </div>
     <div class="container inner-software">
         <!-- Begin Page Content -->
@@ -42,14 +40,18 @@
                 <h2>$Component.CodeName <i class="fa <% if $Component.IconClass %>$Component.IconClass<% else %>fa-cogs<% end_if %>"></i></h2>
                 <h4>$Component.Name</h4>
                 <div class="project-intro-links">
+                    <% if $Component.WikiUrl %>
                     <p>
-                        <a href="#">Project wiki page</a>
+                        <a href="{$Component.WikiUrl}" target="_blank">Project wiki page</a>
                     </p>
+                    <% end_if %>
+                    <% if $Component.HasInstallationGuide %>
                     <p>
-                        <a href="#">View the install guide</a>
+                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/{$Component.InstallationGuideDocName}" target="_blank">View the install guide</a>
                     </p>
+                    <% end_if %>
                     <p>
-                        <a href="#">Search the marketplace</a>
+                        <a href="#" target="_blank">Search the marketplace</a>
                     </p>
                 </div>
             </div>
@@ -113,12 +115,22 @@
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
+                                            <li <% if $Component.HasInstallationGuide %>class="on"<% end_if %>>
+                                                <% if $Component.HasInstallationGuide %>
                                                 <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                <i class="fa fa-times-circle"></i><span>No</span>
+                                                <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://docs.openstack.org/havana/install-guide/install/apt/content/nova-controller.html">View Install Guide</a></td>
+                                    <td>
+                                        <% if $Component.HasInstallationGuide %>
+                                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/{$Component.InstallationGuideDocName}">View Install Guide</a>
+                                        <% else %>
+                                        &nbsp;
+                                        <% end_if %>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Is this project included in the compute starter kit?
@@ -139,8 +151,12 @@
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
-                                                <i class="fa fa-check-circle"></i><span>Yes</span>
+                                            <li  <% if $Component.TCApprovedRelease %>class="on"<% end_if %>>
+                                                <% if $Component.TCApprovedRelease %>
+                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
@@ -153,14 +169,18 @@
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html"><i class="fa fa-check-circle"></i><span>Cycle with milestones</span></a>
+                                            <li <% if $Component.ReleaseMileStones %>class="on"<% end_if %>>
+                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
+                                                    <i class="fa <% if $Component.ReleaseMileStones %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with milestones</span></a>
                                             </li>
-                                            <li>
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html"><i class="fa fa-times-circle"></i><span>Cycle with intermediary</span></a>
+                                            <li <% if $Component.ReleaseCycleWithIntermediary %>class="on" <% end_if %>>
+                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html">
+                                                    <i class="fa <% if $Component.ReleaseCycleWithIntermediary %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with intermediary</span>
+                                                </a>
                                             </li>
-                                            <li>
-                                                <a href="http://governance.openstack.org/reference/tags/release_independent.html"><i class="fa fa-times-circle"></i><span>Independent</span></a>
+                                            <li <% if $Component.ReleaseIndependent %>class="on" <% end_if %>>
+                                                <a href="http://governance.openstack.org/reference/tags/release_independent.html">
+                                                    <i class="fa <% if $Component.ReleaseIndependent %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Independent</span></a>
                                             </li>
                                         </ul>
                                     </td>
@@ -187,7 +207,9 @@
                                     <td>
                                         <ul>
                                             <li class="on">
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html"><i class="fa fa-check-circle"></i><span>97%</span></a>
+                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
+                                                    <i class="fa fa-check-circle"></i><span> {$Component.Adoption}%</span>
+                                                </a>
                                             </li>
                                         </ul>
                                     </td>
@@ -200,8 +222,12 @@
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
+                                            <li <% if $Component.HasTeamDiversity %>class="on" <% end_if %>>
+                                                <% if $Component.HasTeamDiversity %>
                                                 <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                <i class="fa fa-times-circle"></i><span>No</span>
+                                                <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
@@ -232,7 +258,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Is vulnerabilty managed?
+                                        Is vulnerability managed?
                                         <i data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor minus quaerat provident dolorum omnis mollitia delectus qui animi deleniti, sunt sit est nesciunt aspernatur quis quibusdam tempora doloribus et." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
@@ -260,31 +286,35 @@
                 </div> -->
             </div>
         </div>
+        <% if $Component.LatestReleasePTL %>
         <div class="row project-details-ptl">
             <div class="col-sm-12">
                 <h4>PTL for Latest Release</h4>
             </div>
             <div class="row">
                 <div class="ptl-left">
-                    <img alt="" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/ptl-pic.png" class="ptl-bio-pic">
+                    <img alt="" src="{$Component.LatestReleasePTL.ProfilePhotoUrl}" class="ptl-bio-pic">
                     <div class="ptl-details">
-                        <h4>John Garbut</h4>
+                        <h4>$Component.LatestReleasePTL.FullName</h4>
                         <p>
                             Job Title, Rackspace
                         </p>
                         <p>
-                            <a href="#"><img alt="OpenStack Profile" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/ptl-openstack.png"></a>
-                            <a href="#"><img alt="Twitter Profile" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/ptl-twitter.png"></a>
+                            <a target="_blank" href="community/members/profile/{$Component.LatestReleasePTL.ID}"><img alt="OpenStack Profile" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/ptl-openstack.png"></a>
+                            <% if $Component.LatestReleasePTL.TwitterName %>
+                            <a target="_blank" href="https://twitter.com/{$Component.LatestReleasePTL.TwitterName}"><img alt="Twitter Profile" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/ptl-twitter.png"></a>
+                            <% end_if %>
                         </p>
                     </div>
                 </div>
                 <div class="project-details-ptl-bio">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu pretium urna. Maecenas pellentesque, lacus id vulputate accumsan, ante ex viverra ipsum, eget hendrerit odio enim ac diam. Sed consectetur, felis sed lacinia dictum, odio risus dignissim mi, at faucibus massa quam in arcu. Curabitur congue sapien et vestibulum tincidunt. Vestibulum sollicitudin velit purus, eget ullamcorper dui sodales id. Cras nibh mi, molestie et commodo id, rhoncus et tellus. Curabitur euismod mauris quam, quis aliquet nisi euismod vitae. Pellentesque eleifend tempus est, eget tempus est ultricies non. Aliquam sit amet gravida enim.
+                        $Component.LatestReleasePTL.Bio
                     </p>
                 </div>
             </div>
         </div>
+        <% end_if %>
         <div class="row project-details-other">
             <div class="col-sm-6">
                 <h4>Most Active Contributors by Company</h4>

@@ -76,4 +76,10 @@ interface IOpenStackComponent extends IEntity
      */
     public function getSupportedReleases();
 
+    /**
+     * @param string $unit
+     * @return int
+     */
+    public function getAge($unit = 'Yrs');
+
 } 
