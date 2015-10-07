@@ -135,7 +135,6 @@ class SoftwareHomePage_Controller extends Page_Controller
         );
     }
 
-
     public function getReleases()
     {
         $releases = OpenStackRelease::get()->filter

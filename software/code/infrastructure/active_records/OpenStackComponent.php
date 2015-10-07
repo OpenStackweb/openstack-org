@@ -187,4 +187,26 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     {
         $this->setField('SupportsExtensions', $supports_extensions);
     }
+
+    /**
+     * @param string $unit
+     * @return int
+     */
+    public function getAge($unit = 'Yrs')
+    {
+        $older_release = $this->Releases()->filter('Name:ExactMatch:not','Trunk')->sort('ReleaseDate','ASC')->first();
+        if(is_null($older_release)) return 0;
+        $date = $older_release->ReleaseDate;
+        if(empty($date)) return 0;
+        $now  = new DateTime();
+        $date = new DateTime($date);
+        $res = $now->diff($date)->format("%a");
+        return ceil($res / 365.00);
+    }
+
+    public function getInstallationGuideDocName()
+    {
+        return sprintf('%s-install.html', strtolower($this->CodeName));
+    }
+
 }

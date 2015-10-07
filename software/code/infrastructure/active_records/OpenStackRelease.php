@@ -57,8 +57,6 @@ class OpenStackRelease
         'OpenStackComponents'  => array
                                 (
                                     'Adoption'                               => 'Int',
-                                    'Age'                                    => 'Int',
-                                    'AgeUnit'                                => 'Enum(array("d","Wk","Yrs"), "Yrs")',
                                     'MaturityPoints'                         => 'Int',
                                     'HasInstallationGuide'                   => 'Boolean',
                                     'MostActiveContributorsByCompanyJson'    => 'Text',
@@ -94,6 +92,11 @@ class OpenStackRelease
     public function setName($name)
     {
         $this->setField('Name', $name);
+    }
+
+    public function getSlug()
+    {
+        return strtolower($this->getName());
     }
 
     /**

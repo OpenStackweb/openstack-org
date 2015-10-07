@@ -153,9 +153,9 @@ class MemberDecorator extends DataExtension
             return $img->getURL();
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {
-                return '<img src="https://twitter.com/' . $twitter_name . '/profile_image?size=normal" />';
+                return 'https://twitter.com/' . $twitter_name . '/profile_image?size=normal';
             } else {
-                return '<img src="https://twitter.com/' . $twitter_name . '/profile_image?size=bigger" />';
+                return 'https://twitter.com/' . $twitter_name . '/profile_image?size=bigger';
             }
         } elseif ($generic_photo_type == 'speaker') {
             return '/summit/images/generic-speaker-icon.png';

@@ -26,13 +26,14 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
     {
         $releases = OpenStackRelease::get()->where(" Status = 'SecuritySupported' OR Status = 'Current' ");
 
+        $this->processProjects();
+
         foreach($releases as $release)
         {
             $this->getProductionUseStatus($release);
             $this->getInstallationGuideStatus($release);
+            $this->calculateMaturityPoints($release);
         }
-
-        $this->processProjects();
     }
 
     private function processProjects()
@@ -201,6 +202,10 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
         $content = $body->getContents();
         if(empty($content)) return;
         $production_use_status_json = json_decode($content, true);
+        if(is_null($production_use_status_json))
+        {
+            return;
+        }
         $cs = $release->getManyManyComponents('OpenStackComponents');
 
         foreach($production_use_status_json as $component_name => $status)
@@ -216,6 +221,33 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
             $percentage  = intval($percentage[0]);
 
             $cs->add($component, array('Adoption'=>$percentage));
+        }
+    }
+
+    private function calculateMaturityPoints(OpenStackRelease $release)
+    {
+        $components = $release->OpenStackComponents();
+
+        foreach($components as $c)
+        {
+            $points = 0;
+            if($c->Adoption > 75)
+            {
+                $points += 1;
+            }
+            if($c->HasInstallationGuide)
+            {
+                $points += 1;
+            }
+            if($c->HasTeamDiversity)
+            {
+                $points += 1;
+            }
+            if($c->HasStableBranches)
+            {
+                $points += 1;
+            }
+            $components->add($c, array('MaturityPoints'=> $points));
         }
     }
 }
