@@ -584,7 +584,7 @@ class SummitOverviewPage extends SummitPage {
     }
 
     public function getOrderedHelpMenuItems(){
-        return $this->HelpMenuItems()->sort('Label');
+        return $this->HelpMenuItems()->sort('Order', 'ASC');
     }
 
 }

@@ -12,7 +12,14 @@
  * limitations under the License.
  **/
 
-class SummitOverviewPageHelpMenuItem extends DataObject {
+class SummitOverviewPageHelpMenuItem extends DataObject
+{
+
+    private static $summary_fields = array
+    (
+        'Label',
+        'Url'
+    );
 
     private static $db = array(
       'Label'  => 'Text',
