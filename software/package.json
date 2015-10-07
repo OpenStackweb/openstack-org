@@ -1,0 +1,26 @@
+{
+  "name": "openstack-software-module",
+  "version": "1.0.0",
+  "devDependencies": {
+    "webpack-dev-server": "*"
+  },
+  "scripts": {
+    "webpack": "webpack --progress --colors",
+    "dev": "webpack-dev-server --progress --colors",
+    "watch-changes": "webpack --progress --colors --watch",
+    "start": "npm run watch-changes"
+  },
+  "dependencies": {
+    "riot": "2.2.2",
+    "riotjs-loader": "*",
+    "riotcontrol": "*",
+    "tag-loader": "*",
+    "json-loader": "*",
+    "reqwest": "*",
+    "webpack": "*",
+    "riotgear-alert": "^1.1.0",
+    "riotgear-modal": "^1.1.3",
+    "riotgear-toast": "^1.1.0"
+  },
+  "license": "Apache 2.0"
+}
