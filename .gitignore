@@ -63,6 +63,8 @@ reflection-templates/
 silverstripe-permamail/
 themes/openstack/_combinedfiles/
 /node_modules/*
+*/node_modules/
+*/node_modules/*
 gridfieldextensions/*
 gridfieldajaxrefresh/*
 gridfieldajaxrefresh

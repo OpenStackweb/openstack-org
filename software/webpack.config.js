@@ -21,7 +21,8 @@ module.exports = {
   },
   resolveLoader: {
     root: [
-      '/usr/lib/node_modules'
+      '/usr/lib/node_modules',
+      '/usr/local/lib/node_modules'
     ]
   },
 };
