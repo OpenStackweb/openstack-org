@@ -56,8 +56,8 @@
         var self = this;
 
         coreServiceDetails(e) {
-            var id  = e.item.id;
-            var url = self.parent.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+id;
+            var slug  = e.item.slug;
+            var url = self.parent.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+slug;
             console.log(url);
             window.location = url;
         }

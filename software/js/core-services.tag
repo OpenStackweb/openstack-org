@@ -18,7 +18,7 @@ require('./core-service-box.tag')
         var self = this;
 
         getCurrentReleaseId() {
-            return $('#openstack_releases').val();
+            return $('#openstack_releases option:selected').text().toLowerCase();
         }
 
         opts.api.on('loaded-components-by-release',function(data) {

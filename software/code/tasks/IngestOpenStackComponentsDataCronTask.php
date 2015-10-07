@@ -222,6 +222,8 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
 
             $cs->add($component, array('Adoption'=>$percentage));
         }
+        $release->HasStatistics = true;
+        $release->write();
     }
 
     private function calculateMaturityPoints(OpenStackRelease $release)

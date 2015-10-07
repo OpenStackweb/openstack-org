@@ -169,6 +169,19 @@ class MemberDecorator extends DataExtension
         return $this->owner->FirstName . ' ' . $this->owner->Surname;
     }
 
+    function getCurrentPosition()
+    {
+        $current = $this->getCurrentAffiliation();
+        if(is_null($current)) return '';
+        $org = $current->Organization();
+        $res = '';
+        if(!is_null($org))
+            $res = $org->Name;
+        $job_title = $current->JobTitle;
+        if(!empty($job_title))
+            $res .= ', '.$job_title;
+        return $res;
+    }
 
     // Used to group members by last name when displaying the member listing
     public function getSurnameFirstLetter()

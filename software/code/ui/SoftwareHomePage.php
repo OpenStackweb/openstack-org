@@ -70,11 +70,12 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function index()
     {
+        $release = $this->getDefaultRelease();
         return $this->customise
         (
             array
-            (
-                'StorageCoreServices' => OpenStackComponent::get()->filter
+            (   'Release' => $release,
+                'StorageCoreServices' => $release->OpenStackComponents()->filter
                 (
                     array
                     (
@@ -82,7 +83,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                         'Use' => 'Object Storage'
                     )
                 ),
-                'ComputeCoreServices' => OpenStackComponent::get()->filter
+                'ComputeCoreServices' => $release->OpenStackComponents()->filter
                 (
                     array
                     (
@@ -90,7 +91,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                         'Use' => 'Compute'
                     )
                 ),
-                'NoneCoreServices' => OpenStackComponent::get()->filter
+                'NoneCoreServices' => $release->OpenStackComponents()->filter
                 (
                     array
                     (
@@ -98,7 +99,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                         'Use' => 'None'
                     )
                 ),
-                'OptionalServices' => OpenStackComponent::get()->filter
+                'OptionalServices' => $release->OpenStackComponents()->filter
                 (
                     array
                     (
@@ -116,13 +117,13 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function getComponent(SS_HTTPRequest $request)
     {
-        $release_id   = intval($request->param('RELEASE_ID'));
-        $component_id = intval($request->param('ID'));
+        $release_id   = Convert::raw2sql($request->param('RELEASE_ID'));
+        $component_id = Convert::raw2sql($request->param('ID'));
 
-        $release      = OpenStackRelease::get()->byID($release_id);
+        $release      = OpenStackRelease::get()->filter('Name',ucfirst($release_id))->first();
         if(is_null($release)) return $this->httpError(404);
 
-        $component = $release->getComponentById($component_id);
+        $component = $release->supportsComponent(ucfirst($component_id));
         if(is_null($component)) return $this->httpError(404);
 
         return $this->render
@@ -141,7 +142,7 @@ class SoftwareHomePage_Controller extends Page_Controller
         (
             array
             (
-                'Status' => 'Current',
+                'HasStatistics' => true,
             )
         )->sort('ReleaseDate','DESC');
 
@@ -164,7 +165,13 @@ class SoftwareHomePage_Controller extends Page_Controller
      */
     public function getDefaultRelease()
     {
-        return  OpenStackRelease::get()->sort('ReleaseDate','DESC')->first();
+        return  OpenStackRelease::get()->filter
+        (
+            array
+            (
+                'HasStatistics' => true,
+            )
+        )->sort('ReleaseDate','DESC')->first();
     }
 
 

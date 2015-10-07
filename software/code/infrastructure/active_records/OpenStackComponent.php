@@ -93,6 +93,12 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         return $this->getField('CodeName');
     }
 
+    public function getSlug()
+    {
+        return strtolower($this->getCodeName());
+    }
+
+
     public function setCodeName($codename)
     {
         $this->setField('CodeName', $codename);
