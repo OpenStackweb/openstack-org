@@ -1,10 +1,14 @@
             <div class="container faq-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1>Frequently Asked Questions</h1>
+            <h1>$Title</h1>
         </div>
     </div>
-    
+    <div class="row">
+        <div class="col-lg-12">
+            $Content
+        </div>
+    </div>
 
     <div class="row">
         <!-- Sidebar -->
