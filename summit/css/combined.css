@@ -2089,6 +2089,10 @@ ul.doughnut-legend {
 
 /*End Sponsor Page*/
 /*FAQ Page*/
+.page_content {
+    margin: 0 0 30px 0;
+}
+
 .faq-wrapper .section {
   margin-bottom: 80px; }
 
