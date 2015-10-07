@@ -2623,24 +2623,27 @@ ul.resource-links li a:hover {
 
 /* site banner */
 .top-site-banner {
-  background-color: #F0F9FE;
-  color: #4D96C7;
-  padding-top: 10px; }
+  background-color: #248EC7;
+  color: #fff;
+  padding-top: 10px;
+}
 
-.top-site-banner-button {
-  border-radius: 5px;
-  border: 1px solid #C6E5FC;
-  font-size: 90%;
-  padding: 0px 10px;
-  background-color: white;
+a.top-site-banner-button {
+  border-radius: 4px;
+  font-size: 0.85em;
+  padding: 3px 20px;
+  background-color: #0C1722;
   display: inline-block;
-  color: #4D96C7;
-  text-transform: uppercase; }
+  color: white;
+  text-transform: uppercase;
+}
 
 .top-site-banner-button:hover {
   text-decoration: none;
   background-color: #F0F9FE; }
-
+a.top-site-banner-button:visited {
+  color: white;
+}
 /* end of site banner */
 /*Paris Summit Page*/
 .conference-title#paris {
