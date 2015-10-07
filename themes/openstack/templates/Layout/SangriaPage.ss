@@ -78,11 +78,6 @@
 			</div>
 		</div>
 </div>
-<div class="span-24 last">
-<h2>User Survey - Projects Used Question Statistics</h2>
-<hr class="space" />
-$Top.generateSurveyProjectUsedMatrix
-</div>
 <hr class="space" />
 <div class="span-24 last">
     <h2>User Data</h2>
