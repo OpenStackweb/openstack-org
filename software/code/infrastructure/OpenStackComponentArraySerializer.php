@@ -29,6 +29,7 @@ final class OpenStackComponentArraySerializer implements IEntitySerializer
            'name'            => $entity->Name,
            'description'     => $entity->Description,
            'code_name'       => $entity->CodeName,
+           'slug'            => $entity->getSlug(),
            'adoption'        => $entity->Adoption,
            'icon_css_class'  => $entity->IconClass,
            'age'             => $entity->Age,

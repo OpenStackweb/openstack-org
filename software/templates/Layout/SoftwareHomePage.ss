@@ -112,7 +112,7 @@
                 <div id="show-storage">
                     <% loop $StorageCoreServices %>
                     <div class="col-lg-2 col-sm-4 col-xs-6">
-                        <a class="core-project-single" href="$Top.Link(components)/$ID">
+                        <a class="core-project-single" href="{$Top.Link}releases/{$Top.Release.Slug}/components/{$Slug}">
                             <div class="view-project-overlay">
                                 <i class="fa fa-search"></i>
                             </div>
@@ -132,7 +132,7 @@
                     <% loop $NoneCoreServices %>
 
                             <div class="col-lg-2 col-sm-4 col-xs-6">
-                                <a class="core-project-single" href="$Top.Link(components)/$ID">
+                                <a class="core-project-single" href="{$Top.Link}releases/{$Top.Release.Slug}/components/{$Slug}">
                                     <div class="view-project-overlay">
                                         <i class="fa fa-search"></i>
                                     </div>
@@ -151,7 +151,7 @@
                 <div id="show-compute">
                     <% loop $ComputeCoreServices %>
                         <div class="col-lg-2 col-sm-4 col-xs-6">
-                            <a href="$Top.Link(components)/$ID" class="core-project-single">
+                            <a href="{$Top.Link}releases/{$Top.Release.Slug}/components/{$Slug}" class="core-project-single">
                                 <div class="view-project-overlay">
                                     <i class="fa fa-search"></i>
                                 </div>
@@ -186,7 +186,7 @@
                     <!-- Sahara -->
                     <% loop $OptionalServices %>
                     <div class="col-sm-4 col-xs-6">
-                        <a href="$Top.Link(components)/$ID" class="optional-services-single">
+                        <a href="{$Top.Link}releases/{$Top.Release.Slug}/components/{$Slug}" class="optional-services-single">
                             <div class="view-project-overlay">
                                 <i class="fa fa-search"></i>
                             </div>

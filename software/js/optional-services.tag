@@ -43,14 +43,14 @@
     var self                 = this;
 
     optionalServiceDetails(e) {
-        var id  = e.item.id;
-        var url = self.base_url+'releases/'+self.getCurrentReleaseId()+'/components/'+id;
+        var slug  = e.item.slug;
+        var url = self.base_url+'releases/'+self.getCurrentReleaseId()+'/components/'+slug;
         console.log(url);
         window.location = url;
     }
 
     getCurrentReleaseId() {
-        return $('#openstack_releases').val();
+        return $('#openstack_releases option:selected').text().toLowerCase();
     }
 
     opts.api.on('loaded-components-by-release',function(data) {

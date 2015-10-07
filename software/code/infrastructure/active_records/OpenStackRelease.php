@@ -29,6 +29,7 @@ class OpenStackRelease
         'ReleaseDate'                      => 'Date',
         'ReleaseNotesUrl'                  => 'Text',
         'Status'                           => "Enum('Deprecated, EOL, SecuritySupported , Current, UnderDevelopment', 'Deprecated')",
+        'HasStatistics'                    => 'Boolean',
     );
 
     static $summary_fields = array
