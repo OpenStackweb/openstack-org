@@ -33,7 +33,7 @@
                 </div>
 			</div>
 		</div>
-		<div class="span-8 featuredUserStory">
+      	<div class="span-8 featuredUserStory">
 			<div class="wrapper">
 			    <div>
 			    <strong>Platinum Members:</strong>
@@ -77,6 +77,11 @@
 			    </div>
 			</div>
 		</div>
+</div>
+<div class="span-24 last">
+<h2>User Survey - Projects Used Question Statistics</h2>
+<hr class="space" />
+$Top.generateSurveyProjectUsedMatrix
 </div>
 <hr class="space" />
 <div class="span-24 last">

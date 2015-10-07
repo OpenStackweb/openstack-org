@@ -366,4 +366,45 @@ final class SangriaPage_Controller extends AdminController
 
         return $where_query;
     }
+
+    public function generateSurveyProjectUsedMatrix()
+    {
+        $res = DB::Query("select Value from SurveyAnswer A
+INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+WHERE Q.ClassName = 'SurveyRadioButtonMatrixTemplateQuestion'");
+
+        list($rows, $columns)  = SangriaPageExportDataExtension::getRowsAndColumns();
+
+        $counters = array();
+        foreach ($res as $value ) {
+            $tuples = explode(',', $value['Value']);
+            foreach($tuples as $t)
+            {
+                if(!isset($counters[$t])) $counters[$t] = 0;
+                $counters[$t] = $counters[$t] + 1;
+            }
+        }
+
+        $output = "<div><table><thead><tr><th>&nbsp;</th>";
+        foreach($columns as $id => $name)
+        {
+            $output .="<th>{$name}</th>";
+        }
+        $output .= "</tr></thead>";
+        $output .= "<tbody>";
+        foreach($rows as $rid => $rname)
+        {
+            $output .="<tr><td>{$rname}</td>";
+            foreach($columns as $cid => $cname)
+            {
+                $val = "0";
+                if(isset( $counters[sprintf("%s:%s", $rid, $cid)]))
+                    $val = $counters[sprintf("%s:%s", $rid, $cid)];
+                $output .="<td>$val</td>";
+            }
+            $output .= '</tr>';
+        }
+        $output .="</tbody></table></div>";
+        return $output ;
+    }
 }

@@ -60,6 +60,8 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportSurveyResultsFlat',
             'ExportSpeakersData'
         ));
+
+        set_time_limit(0);
     }
 
     public function onAfterInit() {
@@ -692,7 +694,20 @@ SQL;
                 }
             }
             else
-                $template_2[$name] = null;
+            {
+                if($row['ClassName'] === 'SurveyRadioButtonMatrixTemplateQuestion')
+                {
+                    $q = SurveyRadioButtonMatrixTemplateQuestion::get()->byID(intval($row['QuestionID']));
+                    if(is_null($q)) continue;
+                    foreach($q->Rows() as $r)
+                    {
+                        $header = sprintf('%s - %s',$name, $r->Value );
+                        $template_2[$header] = null;
+                    }
+                }
+                else
+                    $template_2[$name] = null;
+            }
         }
 
         return array($template_1, $template_2);
@@ -755,7 +770,7 @@ SQL;
         return $res;
     }
 
-    private function getRowsAndColumns(){
+    public static function getRowsAndColumns(){
         $query = <<<SQL
         SELECT ID, `Value` FROM SurveyQuestionValueTemplate WHERE ClassName = 'SurveyQuestionRowValueTemplate';
 SQL;
@@ -794,7 +809,7 @@ SQL;
         list($header_template1, $header_template2) = $this->buildSurveyBuilderHeaders($flat_fields, $flat_fields_entity);
 
         $line = $header_template1;
-        list($rows, $columns)  = $this->getRowsAndColumns();
+        list($rows, $columns)  = self::getRowsAndColumns();
 
         foreach ($res as $row)
         {
@@ -828,6 +843,8 @@ SQL;
                         $class            = $row2['QuestionClass'];
                         $answer           = $row2['Answer'];
 
+                        if(empty($answer)) continue;
+
                         if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
                         {
                             $tuples = explode(',', $answer);
@@ -853,7 +870,20 @@ SQL;
                             }
                         }
                         else
-                            $line2[$question] = $answer;
+                        {
+                            if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
+                            {
+                                $answer = preg_split('/,/',$answer);
+                                foreach($answer as $a)
+                                {
+                                    $a =  preg_split('/:/',$a);
+                                    $line2[sprintf("%s - %s",$question,$a[0])] = $a[1];
+                                }
+                            }
+                            else
+                                $line2[$question] = $answer;
+                        }
+
                     }
 
                     if(isset($line2['DeploymentID']) && intval($line2['DeploymentID']) > 0)
