@@ -2632,15 +2632,17 @@ a.top-site-banner-button {
   border-radius: 4px;
   font-size: 0.85em;
   padding: 3px 20px;
-  background-color: #0C1722;
+  background-color: #30739C;
   display: inline-block;
   color: white;
   text-transform: uppercase;
 }
 
-.top-site-banner-button:hover {
+a.top-site-banner-button:hover {
   text-decoration: none;
-  background-color: #F0F9FE; }
+  background-color: #2A4E68;
+  color: white;
+}
 a.top-site-banner-button:visited {
   color: white;
 }
