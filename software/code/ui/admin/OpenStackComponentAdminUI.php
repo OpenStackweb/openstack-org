@@ -43,7 +43,7 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new CheckboxField('IsCoreService', 'Is Core Service?'));
         $fields->push(new DropdownField('IconClass', 'Font Awesome Icon CSS Class',  $this->owner->dbObject('IconClass')->enumValues()));
         $fields->push(new DropdownField('Use', 'OpenStack Usage',  $this->owner->dbObject('Use')->enumValues()));
-        
+
         if ($this->owner->getSupportsVersioning()) {
 
             $versions_config = new GridFieldConfig_RecordEditor();
