@@ -6,13 +6,14 @@ jQuery(document).ready(function($) {
 
     $('body').filetracking();
 
-    $('.outbound-link').live('click',function(event){
+    $(document).on("click", ".outbound-link", function(event){
         var href = $(this).attr('href');
         recordOutboundLink(this,'Outbound Links',href);
         event.preventDefault();
         event.stopPropagation()
         return false;
     });
+
     var use_shadow_box = $UseShadowBox;
     if(use_shadow_box)
         Shadowbox.init();

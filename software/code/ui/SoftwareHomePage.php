@@ -14,6 +14,26 @@
  **/
 class SoftwareHomePage extends Page
 {
+    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+
+    static $db = array
+    (
+        'IntroTitle' => 'Text',
+        'IntroText'  => 'HTMLText',
+        'IntroTitle2' => 'Text',
+        'IntroText2'  => 'HTMLText',
+    );
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+        $fields->removeByName('Content');
+        $fields->addFieldsToTab('Root.Main',new TextField('IntroTitle', 'Intro Title'));
+        $fields->addFieldsToTab('Root.Main',new HtmlEditorField('IntroText', 'Intro Text'));
+        $fields->addFieldsToTab('Root.Main',new TextField('IntroTitle2', 'Intro Title 2'));
+        $fields->addFieldsToTab('Root.Main',new HtmlEditorField('IntroText2', 'Intro Text 2'));
+        return $fields;
+    }
 
 }
 
@@ -22,6 +42,8 @@ class SoftwareHomePage extends Page
  */
 class SoftwareHomePage_Controller extends Page_Controller
 {
+
+    const MaxContributionsEntries = 10;
 
     /**
      * @var ISoftwareManager
@@ -117,6 +139,27 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function getComponent(SS_HTTPRequest $request)
     {
+        Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
+        //jqplot and plugins ...
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisTickRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.dateAxisRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.cursor.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.categoryAxisRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasTextRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasOverlay.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.enhancedLegendRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.json2.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.logAxisRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pointLabels.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.trendline.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.barRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.bubbleRenderer.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisLabelRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.highlighter.min.js");
+
+        Requirements::javascript('software/js/openstack-component-details.js');
+
         $release_id   = Convert::raw2sql($request->param('RELEASE_ID'));
         $component_id = Convert::raw2sql($request->param('ID'));
 
@@ -126,12 +169,62 @@ class SoftwareHomePage_Controller extends Page_Controller
         $component = $release->supportsComponent(ucfirst($component_id));
         if(is_null($component)) return $this->httpError(404);
 
+        // individual contributors
+
+        $engineers_contrib = new ArrayList();
+        $json              = $component->MostActiveContributorsByIndividualJson;
+
+        if(!empty($json))
+        {
+            $data = json_decode($json, true);
+            if(!is_null($data))
+            {
+                $stats = $data['stats'];
+                $i = 0;
+                foreach($stats as $entry)
+                {
+                    $engineers_contrib->add(new ArrayData( array( 'Name' => $entry['name'])));
+                    ++$i;
+                    if($i === self::MaxContributionsEntries) break;
+                }
+            }
+        }
+
+        $companies_contrib = new ArrayList();
+        $json              = $component->MostActiveContributorsByCompanyJson;
+
+        if(!empty($json))
+        {
+            $data = json_decode($json, true);
+            if(!is_null($data))
+            {
+                $stats = $data['stats'];
+                $i = 0;
+                foreach($stats as $entry)
+                {
+                    $companies_contrib->add(new ArrayData( array( 'Name' => $entry['name'])));
+                    ++$i;
+                    if($i === self::MaxContributionsEntries) break;
+                }
+            }
+        }
+
+        $json = $component->ContributionsJson;
+
+        if(!empty($json))
+        {
+            Requirements::customScript(" timeline_data = {$json};  renderTimeline();");
+        }
+
         return $this->render
         (
             array
             (
-                'Release'   => $release,
-                'Component' => $component
+                'MostActiveIndividualContributors' => $engineers_contrib,
+                'MostActiveCompanyContributors'    => $companies_contrib,
+                'Release'                          => $release,
+                'Component'                        => $component,
+                'Releases'                         => $component->Releases()->where("Status <>'Deprecated' AND Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC')
             )
         );
     }

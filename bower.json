@@ -18,18 +18,17 @@
     "tests"
   ],
   "dependencies": {
+    "jquery": "2.1.4",
     "jquery-ui": "~1.11.4",
     "jquery-validate": "~1.14.0",
-    "jquery": "~2.1.4",
     "bootstrap": "~3.3.5",
     "fontawesome": "~4.3.0",
-    "jquery-migrate-official": "~1.2.1",
     "bootstrap-tagsinput": "~0.5.0",
     "bootstrap-datepicker": "~1.4.0",
     "pure-templates": "*",
     "pwstrength-bootstrap":"~1.2.7",
     "jquery-cookie": "~1.4.1",
     "webui-popover": "~1.1.5",
-    "riot": "~2.2.4"
+    "jqplot-bower": "~1.0.8"
   }
 }

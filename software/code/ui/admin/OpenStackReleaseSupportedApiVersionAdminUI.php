@@ -35,6 +35,7 @@ final class OpenStackReleaseSupportedApiVersionAdminUI
         $ddl->setEmptyString('--Select An API Version --');
         $fields->insertAfter($ddl, 'OpenStackComponentID');
 
+
         $versions = array();
         foreach (OpenStackComponent::get()->filter('SupportsVersioning', true) as $component) {
             foreach ($component->getVersions() as $version) {
@@ -66,7 +67,7 @@ JS;
         $ddl->setEmptyString('--Select A OS Component--');
         $ddl->addExtraClass('ddl-os-component-id');
         $fields->insertBefore($ddl, 'ApiVersionID');
-
+        $fields->insertAfter(new TextField("ReleaseVersion", "Release Version"), 'ReleaseID');
         return $fields;
     }
 

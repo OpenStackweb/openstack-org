@@ -6,7 +6,6 @@
         </div>
     </div>
 </div>
-
 <!-- Projects Tabs -->
 <div class="software-tab-wrapper">
     <div class="container">
@@ -36,15 +35,13 @@
         <!-- Begin Page Content -->
         <div class="row">
             <div class="col-sm-10 col-sm-push-1 center">
-                <h3>What is OpenStack?</h3>
+                <h3>$IntroTitle</h3>
                 <p>
                     <img src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/openstack-software-diagram.png"/ class="openstack-diagram">
                 </p>
                 <div class="row projects-overview">
                     <div class="col-sm-6">
-                        <p>OpenStack is a cloud operating system that controls large pools of compute, storage, and networking resources throughout a datacenter, all managed through a dashboard that gives administrators control while empowering their users to provision resources through a web interface.</p>
-                        <p>Learn more about OpenStack's <a href="/software/openstack-compute/">compute</a>, <a href="/software/openstack-storage/">storage</a>, <a href="/software/openstack-networking/">networking</a>, take a tour of the <a href="/software/openstack-dashboard/">dashboard</a>, or dive in and learn <a href="/software/start/">how to get started with OpenStack</a> today.</p>
-                        <p>If you're looking for OpenStack related products and services such as Distributions, Appliances, Public Clouds, Consultants, or Training check out our <a href="/marketplace/">OpenStack Marketplace</a>.</p>
+                     $IntroText
                     </div>
                     <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/3UINKsGw95A"><img src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/kilo-screencast.png"/></a>
                         <h4>OpenStack Overview (5:14)</h4>
@@ -55,9 +52,9 @@
         <div class="row">
             <div class="col-sm-10 col-sm-push-1 center">
                 <hr style="margin:40px 0;">
-                <h3>Powered by projects</h3>
+                <h3>$IntroTitle2</h3>
                 <p>
-                    OpenStack clouds are powered by various OpenStack projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis vero velit culpa nam perferendis est, alias, iusto aliquid harum provident, inventore quibusdam ex a iure autem. Odio vero, laboriosam! Ducimus.
+                    $IntroText2
                 </p>
             </div>
         </div>

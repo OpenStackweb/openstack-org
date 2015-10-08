@@ -138,8 +138,12 @@
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
-                                                <i class="fa fa-check-circle"></i><span>Yes</span>
+                                            <li <% if $Component.IncludedComputeStarterKit %>class="on"<% end_if %>>
+                                                <% if $Component.IncludedComputeStarterKit %>
+                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
@@ -165,7 +169,7 @@
                                 <tr>
                                     <td>
                                         How is this project released?
-                                        <i data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor minus quaerat provident dolorum omnis mollitia delectus qui animi deleniti, sunt sit est nesciunt aspernatur quis quibusdam tempora doloribus et." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -188,12 +192,12 @@
                                 </tr>
                                 <tr>
                                     <td>Number of software development kits (SDKs) which support this project.
-                                        <i data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor minus quaerat provident dolorum omnis mollitia delectus qui animi deleniti, sunt sit est nesciunt aspernatur quis quibusdam tempora doloribus et." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
-                                                <i class="fa fa-check-circle"></i><span>15</span>
+                                            <li <% if $Component.SDKSupport %>class="on"<% end_if %>>
+                                                <i class="fa fa-check-circle"></i><span>{$Component.SDKSupport}</span>
                                             </li>
                                         </ul>
                                     </td>
@@ -202,7 +206,7 @@
                                 <tr>
                                     <td>
                                         Percentage of deployments using this project in production environments.
-                                        <i data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor minus quaerat provident dolorum omnis mollitia delectus qui animi deleniti, sunt sit est nesciunt aspernatur quis quibusdam tempora doloribus et." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -236,7 +240,7 @@
                                 <tr>
                                     <td>
                                         Existence and quality of packages for this project in distributions like Red Hat/Fedora, Ubuntu	6 and openSUSE/SLES.
-                                        <i data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor minus quaerat provident dolorum omnis mollitia delectus qui animi deleniti, sunt sit est nesciunt aspernatur quis quibusdam tempora doloribus et." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -259,12 +263,16 @@
                                 <tr>
                                     <td>
                                         Is vulnerability managed?
-                                        <i data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor minus quaerat provident dolorum omnis mollitia delectus qui animi deleniti, sunt sit est nesciunt aspernatur quis quibusdam tempora doloribus et." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
-                                                <i class="fa fa-check-circle"></i><span>Yes</span>
+                                            <li <% if $Component.VulnerabilityManaged %>class="on" <% end_if %>>
+                                                <% if $Component.VulnerabilityManaged %>
+                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
@@ -277,12 +285,15 @@
                 </div>
             </div>
         </div>
+        <% if $Component.ContributionsJson %>
         <div class="row">
             <div class="col-sm-12 project-details-chart-section">
                 <h4>Contributions to $Component.CodeName</h4>
-                <img alt="" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/contributor-chart.png" class="contributor-chart">
+                <div style="width: 100%; height: 120px; margin-top: 15px; position: relative;" id="timeline">
+                </div>
             </div>
         </div>
+        <% end_if %>
         <% if $Component.LatestReleasePTL %>
         <div class="row project-details-ptl">
             <div class="col-sm-12">
@@ -314,90 +325,42 @@
         <% end_if %>
         <div class="row project-details-other">
             <div class="col-sm-6">
+                <% if $MostActiveCompanyContributors %>
                 <h4>Most Active Contributors by Company</h4>
                 <ul>
-                    <li><a href="#">Rackspace</a></li>
-                    <li><a href="#">Redhat</a></li>
-                    <li><a href="#">IBM</a></li>
-                    <li><a href="#">Mirantis</a></li>
-                    <li><a href="#">HP</a></li>
-                    <li><a href="#">VMware</a></li>
-                    <li><a href="#">Intel</a></li>
-                    <li><a href="#">NEC</a></li>
-                    <li><a href="#">Huawai</a></li>
-                    <li><a href="#">Yahoo!</a></li>
+                    <% loop $MostActiveCompanyContributors %>
+                        <li><a href="#">$Name</a></li>
+                    <% end_loop %>
                 </ul>
-
+                <% end_if %>
+                <% if $MostActiveIndividualContributors %>
                 <h4>Most Active Individual Contributors</h4>
                 <ul>
-                    <li><a href="#">John Garbutt</a></li>
-                    <li><a href="#">Gary Kotton</a></li>
-                    <li><a href="#">Matt Riedemann</a></li>
-                    <li><a href="#">Daniel Berrange</a></li>
-                    <li><a href="#">Jay Pipes</a></li>
-                    <li><a href="#">Alex Xu (He Jie Xu)</a></li>
-                    <li><a href="#">Dan Smith</a></li>
-                    <li><a href="#">Sean Dague</a></li>
-                    <li><a href="#">Ken’ichi Ohmichi</a></li>
-                    <li><a href="#">jichenjc</a></li>
+                    <% loop $MostActiveIndividualContributors %>
+                        <li><a href="#">$Name</a></li>
+                    <% end_loop %>
                 </ul>
-
+                <% end_if %>
+                <% if $Component.RelatedContent %>
                 <h4>Related Content</h4>
                 <ul>
-                    <li><a href="#">Upgrading Nova to Kilo with minimal downtime</a></li>
-                    <li><a href="#">ebay in Production: Migration from Nova-Network to Neutron</a></li>
-                    <li><a href="#">Nova Updates - Kilo Edition</a></li>
+                    <% loop $Component.RelatedContent %>
+                    <li><a href="{$Url}" target="_blank">{$Title}</a></li>
+                    <% end_loop %>
                 </ul>
+                <% end_if %>
             </div>
             <div class="col-sm-6 right">
                 <h4>Project History</h4>
                 <div class="project-timeline">
                     <ul>
-                        <li class="timeline-future">
-                            <a href="http://docs.openstack.org/releases/releases/liberty.html">
-                                Next Release (Liberty): October 15, 2015
-                            </a>
-                        </li>
-                        <li class="timeline-current">
-                            <a href="http://docs.openstack.org/releases/releases/kilo.html">
-                                Version 2015.1.1 (Kilo) - LATEST RELEASE
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://docs.openstack.org/releases/releases/juno.html">
-                                Version 2014.2.3 (Juno)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://docs.openstack.org/releases/releases/icehouse.html">
-                                Version 2014.1.5 (Icehouse)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://docs.openstack.org/releases/releases/havana.html">
-                                Version 2013.2.4 (Havana)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://docs.openstack.org/releases/releases/grizzly.html">
-                                Version 2013.1.5 (Grizzly)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://docs.openstack.org/releases/releases/folsom.html">
-                                Version 2012.2.4 (Folsom)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://docs.openstack.org/releases/releases/essex.html">
-                                Version 2012.1.3 (Essex)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://docs.openstack.org/releases/releases/diablo.html">
-                                Version 2011.3.1 (Diablo)
-                            </a>
-                        </li>
+                        <% loop Releases %>
+                            <li <% if $Status == Current %>class="timeline-current"<% end_if %><% if $Status == Future %>class="timeline-future"<% end_if %>>
+                                <a href="http://docs.openstack.org/releases/releases/{$Slug}.html" target="_blank">
+                                    Version {$getVersionLabel($Top.Component.ID)} ({$Name}) <% if $Status == Current %>- LATEST RELEASE<% end_if %>
+                                </a>
+                            </li>
+                        <% end_loop %>
                         <li class="timeline-past">
                             Previous Versions Deprecated
                         </li>
@@ -407,7 +370,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 project-details-footnotes">
-                <h6><a target="_blank" href="http://stackalytics.com">Statistics and charts provided by stackalytics.com</a></h6>
+                <h6><a target="_blank" href="http://stackanalytics.com">Statistics and charts provided by stackanalytics.com</a></h6>
             </div>
         </div>
         <!-- Stats 'what does this mean?' Modal -->
@@ -420,7 +383,6 @@
                     </div>
                     <div class="modal-body">
                         <p class="download-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis quaerat, error cumque ducimus nesciunt, eligendi aliquid. Culpa iure, magni quasi quaerat quia commodi quam! Veritatis hic maxime, sequi odio quia!
                         </p>
                         <hr>
                         <p>

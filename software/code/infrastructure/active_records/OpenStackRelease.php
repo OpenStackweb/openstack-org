@@ -28,7 +28,7 @@ class OpenStackRelease
         'ReleaseNumber'                    => 'Varchar',
         'ReleaseDate'                      => 'Date',
         'ReleaseNotesUrl'                  => 'Text',
-        'Status'                           => "Enum('Deprecated, EOL, SecuritySupported , Current, UnderDevelopment', 'Deprecated')",
+        'Status'                           => "Enum('Deprecated, EOL, SecuritySupported , Current, UnderDevelopment, Future', 'Deprecated')",
         'HasStatistics'                    => 'Boolean',
     );
 
@@ -47,7 +47,6 @@ class OpenStackRelease
         'ReleaseDate' => array('type' => 'unique', 'value' => 'ReleaseDate'),
     );
 
-
     static $many_many = array
     (
         'OpenStackComponents' => 'OpenStackComponent',
@@ -60,13 +59,15 @@ class OpenStackRelease
                                     'Adoption'                               => 'Int',
                                     'MaturityPoints'                         => 'Int',
                                     'HasInstallationGuide'                   => 'Boolean',
+                                    'SDKSupport'                             => 'Int',
                                     'MostActiveContributorsByCompanyJson'    => 'Text',
                                     'MostActiveContributorsByIndividualJson' => 'Text',
                                     'ContributionsJson'                      => 'Text',
                                 )
     );
 
-    static $has_many = array(
+    static $has_many = array
+    (
         'SupportedApiVersions' => 'OpenStackReleaseSupportedApiVersion'
     );
 
@@ -310,5 +311,18 @@ class OpenStackRelease
     public function getComponentById($component_id)
     {
         return $this->OpenStackComponents()->filter(array( 'OpenStackComponentID' => $component_id))->first();
+    }
+
+    public function getVersionLabel($component_id)
+    {
+        $api = $this->SupportedApiVersions()
+            ->innerJoin('OpenStackApiVersion','OpenStackApiVersion.ID = OpenStackReleaseSupportedApiVersion.ApiVersionID')
+            ->filter('OpenStackComponentID', $component_id)->sort('OpenStackReleaseSupportedApiVersion.ReleaseVersion','DESC')->first();
+        if(is_null($api))
+            return 'N/A';
+        $res = $api->ReleaseVersion;
+        if(empty($res))
+            $res = $api->ApiVersion()->Version;
+        return $res;
     }
 }

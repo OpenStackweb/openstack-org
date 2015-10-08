@@ -28,7 +28,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'SupportsVersioning'           => 'Boolean',
         'SupportsExtensions'           => 'Boolean',
         'IsCoreService'                => 'Boolean',
-        'IconClass'                    => 'Text',
+        'IconClass'                    => "Enum('fa-cogs, fa-cloud-upload, fa-archive, fa-exchange, fa-object-group, fa-key','fa-cogs')",
         'Use'                          => 'Enum(array("Compute","Object Storage","None"), "None")',
         'HasStableBranches'            => 'Boolean',
         'WikiUrl'                      => 'Text',
@@ -37,6 +37,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'ReleaseCycleWithIntermediary' => 'Boolean',
         'ReleaseIndependent'           => 'Boolean',
         'HasTeamDiversity'             => 'Boolean',
+        'IncludedComputeStarterKit'    => 'Boolean',
+        'VulnerabilityManaged'         => 'Boolean',
     );
 
     private static $has_one = array
@@ -46,7 +48,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     private static $has_many = array
     (
-        'Versions' => 'OpenStackApiVersion',
+        'Versions'       => 'OpenStackApiVersion',
+        'RelatedContent' => 'OpenStackComponentRelatedContent',
     );
 
     private static $belongs_many_many = array
