@@ -32,7 +32,7 @@ class EnterpriseBigDataPage_Controller extends Page_Controller {
 
             $('body').filetracking();
 
-            $('.outbound-link').live('click',function(event){
+            $(document).on('click', '.outbound-link', function(event){
                 var href = $(this).attr('href');
                 recordOutboundLink(this,'Outbound Links',href);
                 event.preventDefault();

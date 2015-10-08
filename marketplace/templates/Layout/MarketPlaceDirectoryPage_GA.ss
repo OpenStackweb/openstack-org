@@ -18,7 +18,7 @@
         var oldrecordOutboundLink = recordOutboundLink;
         recortboundLink        = function(){};
 
-        $('.outbound-link').live('click',function(event){
+        $(document).on("click", ".outbound-link", function(event){
             var href  = $(this).attr('href');
             var link = this;
             var image = new Image(1,1);
@@ -30,6 +30,7 @@
             event.stopPropagation();
             return false;
         });
+
     });
 
     /* ]]> */

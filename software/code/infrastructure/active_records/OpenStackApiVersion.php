@@ -20,9 +20,10 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
 
     static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-    static $db = array(
-        'Version' => 'Varchar',
-        'Status' => "Enum('Deprecated, Current, Beta, Alpha' , 'Deprecated')",
+    static $db = array
+    (
+        'Version'        => 'Varchar',
+        'Status'         => "Enum('Deprecated, Current, Beta, Alpha' , 'Deprecated')",
     );
 
     static $summary_fields = array(
@@ -68,6 +69,7 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
     {
         return $this->getField('Version');
     }
+
 
     /**
      * @return IOpenStackComponent

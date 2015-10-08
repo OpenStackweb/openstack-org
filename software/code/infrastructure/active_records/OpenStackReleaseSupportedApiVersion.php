@@ -20,15 +20,22 @@ class OpenStackReleaseSupportedApiVersion
     implements IReleaseSupportedApiVersion
 {
 
-    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+    private static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-    static $has_one = array(
-        'OpenStackComponent' => 'OpenStackComponent',
-        'ApiVersion' => 'OpenStackApiVersion',
-        'Release' => 'OpenStackRelease',
+    private static $db = array
+    (
+        'ReleaseVersion'     => 'Text',
     );
 
-    static $indexes = array(
+    private static $has_one = array
+    (
+        'OpenStackComponent' => 'OpenStackComponent',
+        'ApiVersion'         => 'OpenStackApiVersion',
+        'Release'            => 'OpenStackRelease',
+    );
+
+    private static $indexes = array
+    (
         'Component_ApiVersion_Release' => array(
             'type' => 'unique',
             'value' => 'OpenStackComponentID,ApiVersionID,ReleaseID'

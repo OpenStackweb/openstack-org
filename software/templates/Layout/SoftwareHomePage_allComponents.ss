@@ -47,7 +47,6 @@
             <div class="col-sm-12 all-projects-wrapper">
                 <h3>Browse All OpenStack Projects</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo culpa voluptatem quas sequi laboriosam vitae fugiat tempora doloribus, atque qui delectus saepe neque ipsum earum assumenda quo reprehenderit ratione nulla.
                 </p>
                 <p>
                     <a data-target="#statsInfoModal" data-toggle="modal" href="#">What do the stats shown on each project mean?</a>
@@ -68,7 +67,6 @@
                     </div>
                     <div class="modal-body">
                         <p class="download-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis quaerat, error cumque ducimus nesciunt, eligendi aliquid. Culpa iure, magni quasi quaerat quia commodi quam! Veritatis hic maxime, sequi odio quia!
                         </p>
                         <hr>
                         <p>
