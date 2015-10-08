@@ -63,7 +63,7 @@ JS;
             OpenStackComponent::get()->filter('SupportsVersioning',
                 true)->innerJoin('OpenStackRelease_OpenStackComponents',
                 "OpenStackRelease_OpenStackComponents.OpenStackComponentID = OpenStackComponent.ID AND OpenStackReleaseID = {$release_id} ")->map('ID',
-                'Name'));
+                'CodeName'));
         $ddl->setEmptyString('--Select A OS Component--');
         $ddl->addExtraClass('ddl-os-component-id');
         $fields->insertBefore($ddl, 'ApiVersionID');
