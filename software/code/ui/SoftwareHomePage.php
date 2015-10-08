@@ -93,6 +93,8 @@ class SoftwareHomePage_Controller extends Page_Controller
     public function index()
     {
         $release = $this->getDefaultRelease();
+        if(is_null($release)) return $this->httpError(404);
+        
         return $this->customise
         (
             array
