@@ -2,7 +2,7 @@ require('./core-service-box.tag')
 <core-services>
     <div class="row">
     <div class="col-sm-12">
-    <p class="service-section-title"><strong>Core Services</strong>{ components.length > 0 ? ' ( '+components.length+' Results )' : '' }</p>
+    <p class="service-section-title"><strong>Core Services</strong>{ ' ( '+components.length+' Results )' }</p>
     </div>
     </div>
     <div class="row">

@@ -77,7 +77,20 @@
         });
 
         // Popovers
-        $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover();
+
+        // Tooltips
+        if(!('ontouchstart' in window)) {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+
+        // Toggle All Projects Filters
+        $('#toggle-all-projects-filters').click(function(event) {
+            $('#all-projects-filter-wrapper').toggleClass('opened');
+            $(this).toggleClass('active');
+            event.preventDefault();
+        });
+
     });
 
   // End of closure.

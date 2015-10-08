@@ -136,6 +136,8 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function allComponents(SS_HTTPRequest $request)
     {
+        Requirements::css("themes/openstack/bower_assets/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css");
+        Requirements::javascript("themes/openstack/bower_assets/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js");
         return $this->render();
     }
 

@@ -17,7 +17,10 @@ interface ISoftwareManager
     /**
      * @param IOpenStackRelease $release
      * @param string $term
+     * @param int $adoption
+     * @param int $maturity
+     * @param int $age
      * @return array
      */
-    public function getComponents(IOpenStackRelease $release ,$term = '');
+    public function getComponents(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0);
 }
