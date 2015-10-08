@@ -39,6 +39,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'HasTeamDiversity'             => 'Boolean',
         'IncludedComputeStarterKit'    => 'Boolean',
         'VulnerabilityManaged'         => 'Boolean',
+        'Order'                        => 'Int',
     );
 
     private static $has_one = array

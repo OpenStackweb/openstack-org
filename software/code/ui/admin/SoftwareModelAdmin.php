@@ -28,4 +28,16 @@ class SoftwareModelAdmin extends ModelAdmin
     {
         parent::init();
     }
+
+    public function getEditForm($id = null, $fields = null) {
+
+        $form = parent:: getEditForm($id, $fields);
+
+        if($this->modelClass === 'OpenStackComponent') {
+            $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
+            $config = $gridField->getConfig();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+        }
+        return $form;
+    }
 }
