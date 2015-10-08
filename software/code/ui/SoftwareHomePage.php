@@ -106,7 +106,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                         'IsCoreService' => true,
                         'Use' => 'Object Storage'
                     )
-                ),
+                )->sort('Order','ASC'),
                 'ComputeCoreServices' => $release->OpenStackComponents()->filter
                 (
                     array
@@ -114,7 +114,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                         'IsCoreService' => true,
                         'Use' => 'Compute'
                     )
-                ),
+                )->sort('Order','ASC'),
                 'NoneCoreServices' => $release->OpenStackComponents()->filter
                 (
                     array
@@ -122,14 +122,14 @@ class SoftwareHomePage_Controller extends Page_Controller
                         'IsCoreService' => true,
                         'Use' => 'None'
                     )
-                ),
+                )->sort('Order','ASC'),
                 'OptionalServices' => $release->OpenStackComponents()->filter
                 (
                     array
                     (
                         'IsCoreService' => false,
                     )
-                ),
+                )->sort('Order','ASC'),
             )
         )->renderWith(array('SoftwareHomePage'));
     }
