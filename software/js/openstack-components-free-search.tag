@@ -12,12 +12,15 @@
     var last_ajax_request = null;
 
     doFreeTextSearch(e) {
-        var txt = e.target.value;
-        console.log(txt);
+        var term = e.target.value;
+        console.log(term);
         var release_id = $('#openstack_releases').val();
+        var adoption   = $("#all-projects-adoption").slider('getValue');
+        var maturity   = $("#all-projects-maturity").slider('getValue');
+        var age        = $("#all-projects-age").slider('getValue');
         if(self.last_ajax_request != null )
             self.last_ajax_request.abort();
-        self.last_ajax_request = self.api.load_components_by_release(release_id, txt);
+        self.last_ajax_request = self.api.load_components_by_release(release_id, term, adoption, maturity, age);
     }
 
     </script>

@@ -147,8 +147,9 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Tag Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Details</a></td>
                                 </tr>
+                                <!--
                                 <tr>
                                     <td>Is this project recommended by the Technical Committee (TC)?
                                         <i data-content="This tag is used to indicate the projects the TC recommends to the OpenStack Foundation Board as candidates for trademark use under the OpenStack Foundation trademark policy." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What is the Compute Starter Kit?"></i>
@@ -164,8 +165,9 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/tc-approved-release.html">View Tag Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/tc-approved-release.html">View Details</a></td>
                                 </tr>
+                                -->
                                 <tr>
                                     <td>
                                         How is this project released?
@@ -188,7 +190,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Tag Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Details</a></td>
                                 </tr>
                                 <tr>
                                     <td>Number of software development kits (SDKs) which support this project.
@@ -201,7 +203,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Tag Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Details</a></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -217,7 +219,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Tag Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Details</a></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -235,7 +237,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Tag Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Details</a></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -258,11 +260,11 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="https://review.openstack.org/#/c/186633">View Tag Details</a></td>
+                                    <td><a href="https://review.openstack.org/#/c/186633">View Details</a></td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Is vulnerability managed?
+                                        Are security issues in thisproject managed by the OpenStackVulnerability Management Team?
                                         <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
@@ -276,7 +278,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Tag Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Details</a></td>
                                 </tr>
                                 </tbody>
                             </table>

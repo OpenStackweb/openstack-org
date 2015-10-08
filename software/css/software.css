@@ -73,7 +73,7 @@
 .software-tab-dropdown {
     display: none; }
 
-@media (max-width: 767px) {
+@media (max-width: 790px) {
     .software-tab-dropdown {
         display: block;
         width: 98%;
@@ -749,10 +749,12 @@ p.service-section-title {
         min-width: none; } }
 
 .outer-all-projects-subnav {
-    margin-top: -56px; }
+    margin-top: -56px;
+    position: relative; }
 .outer-all-projects-subnav form.all-projects-search-form .all-projects-search-wrapper {
     position: relative;
-    margin-left: -10px; }
+    margin-left: -10px;
+    padding-right: 0; }
 .outer-all-projects-subnav form.all-projects-search-form .all-projects-search-wrapper input#all-projects-search {
     background: white;
     border: 1px solid #D3DEE9;
@@ -770,11 +772,12 @@ p.service-section-title {
 .outer-all-projects-subnav form.all-projects-search-form .all-projects-search-wrapper i {
     position: absolute;
     top: 11px;
-    right: 25px;
+    right: 15px;
     color: #607A8E;
     font-size: 1.2em; }
 .outer-all-projects-subnav form.all-projects-search-form .all-projects-select {
-    position: relative; }
+    position: relative;
+    padding-right: 0; }
 .outer-all-projects-subnav form.all-projects-search-form .all-projects-select select.form-control {
     color: #607A8E;
     height: 38px;
@@ -788,9 +791,83 @@ p.service-section-title {
 .outer-all-projects-subnav form.all-projects-search-form .all-projects-select i {
     position: absolute;
     top: 11px;
-    right: 25px;
+    right: 15px;
     color: #607A8E;
     font-size: 1.2em; }
+
+.all-projects-filter-link {
+    padding-right: 10px; }
+.all-projects-filter-link i {
+    font-size: 1.2em;
+    color: #607A8E;
+    background: white;
+    border: 1px solid #D3DEE9;
+    padding: 10px 15px;
+    border-radius: 8px; }
+.all-projects-filter-link i:hover {
+    cursor: pointer;
+    color: #2A4E68; }
+.all-projects-filter-link i.active {
+    background: #6CBB45;
+    color: white;
+    border: 1px solid #6CBB45; }
+
+#all-projects-filter-wrapper {
+    display: block;
+    width: 100%;
+    padding: 0;
+    background: #edf2f7;
+    color: #607A8E;
+    overflow: hidden;
+    max-height: 0px;
+    -webkit-transition: max-height 0.25s;
+    transition: max-height 0.25s; }
+#all-projects-filter-wrapper .single-filter-wrapper {
+    margin-top: 10px;
+    margin-right: 60px; }
+#all-projects-filter-wrapper .single-filter-wrapper.first {
+    margin-left: 10px; }
+#all-projects-filter-wrapper hr {
+    border-color: #D4DCE5;
+    margin-bottom: 5px; }
+#all-projects-filter-wrapper.opened {
+    max-height: 1000px;
+    /*overflow: visible;*/
+    -webkit-transition: max-height 0.05s;
+    transition: max-height 0.05s; }
+#all-projects-filter-wrapper .row {
+    margin-top: 10px;
+    margin-bottom: 20px; }
+#all-projects-filter-wrapper .filter-stats-label {
+    font-size: 0.85em;
+    margin: 0 0 10px -5px;
+    text-align: left;
+    line-height: 1.2; }
+#all-projects-filter-wrapper .filter-stats-label strong {
+    display: block; }
+#all-projects-filter-wrapper .filter-stats-label span {
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #29abe2; }
+#all-projects-filter-wrapper .slider-handle {
+    background-color: #29abe2;
+    background-image: -webkit-linear-gradient(top, #29abe2 0%, #1D89C5 100%);
+    background-image: linear-gradient(to bottom, #29abe2 0%, #1D89C5 100%); }
+#all-projects-filter-wrapper .slider-tick-label {
+    font-size: 0.85em;
+    font-weight: 700; }
+#all-projects-filter-wrapper .slider-tick.in-selection, #all-projects-filter-wrapper .slider-selection.tick-slider-selection {
+    background-image: -webkit-linear-gradient(top, #29abe2 0%, #1D89C5 100%);
+    background-image: linear-gradient(to bottom, #29abe2 0%, #1D89C5 100%); }
+
+@media (max-width: 990px) {
+    #all-projects-filter-wrapper .single-filter-wrapper {
+        margin-right: 30px; } }
+
+@media (max-width: 768px) {
+    #all-projects-filter-wrapper .single-filter-wrapper {
+        margin-right: 0;
+        margin-left: 10px; } }
 
 .outer-project-back {
     margin-top: -45px; }

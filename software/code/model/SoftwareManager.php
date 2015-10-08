@@ -31,15 +31,18 @@ final class SoftwareManager implements ISoftwareManager
     /**
      * @param IOpenStackRelease $release
      * @param string $term
+     * @param int $adoption
+     * @param int $maturity
+     * @param int $age
      * @return array
      */
-    public function getComponents(IOpenStackRelease $release, $term = '')
+    public function getComponents(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0)
     {
         $res1 = array();
         $res2 = array();
 
-        $core_components     = $release->getOpenStackCoreComponents($term);
-        $optional_components = $release->getOpenStackOptionalComponents($term);
+        $core_components     = $release->getOpenStackCoreComponents($term, $adoption, $maturity, $age);
+        $optional_components = $release->getOpenStackOptionalComponents($term, $adoption, $maturity, $age);
 
         foreach($core_components as $c)
         {

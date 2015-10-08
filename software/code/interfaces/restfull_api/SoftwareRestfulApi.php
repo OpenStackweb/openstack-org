@@ -65,12 +65,22 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
     {
         $release_id = intval($request->param('RELEASE_ID'));
         $term       = Convert::raw2sql($request->getVar('term'));
+        $adoption   = intval(Convert::raw2sql($request->getVar('adoption')));
+        $maturity   = intval(Convert::raw2sql($request->getVar('maturity')));
+        $age        = intval(Convert::raw2sql($request->getVar('age')));
 
         $release = OpenStackRelease::get()->byID($release_id);
         if(is_null($release))
             return $this->notFound();
 
-        list($core_components, $optional_components) = $this->manager->getComponents($release, $term);
+        list($core_components, $optional_components) = $this->manager->getComponents
+        (
+            $release,
+            $term,
+            $adoption,
+            $maturity,
+            $age
+        );
 
         $res = array
         (

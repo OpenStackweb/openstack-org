@@ -1,7 +1,7 @@
 <optional-services>
     <div class="row">
     <div class="col-sm-12">
-    <p class="service-section-title"><strong>Optional Services</strong></p>
+    <p class="service-section-title"><strong>Optional Services</strong>{ ' ( '+components.length+' Results )' }</p>
     </div>
     </div>
     <div class="row">

@@ -6,25 +6,32 @@
     <i class="fa fa-sort"></i>
     </div>
 
-    this.releases   = opts.releases;
-    this.api        = opts.api;
-    this.release_id = null;
-    var self        = this;
+    <script>
 
-    releaseChanged(e) {
-        self.release_id = e.target.value;
-        console.log(self.release_id);
-        self.api.load_components_by_release(self.release_id);
-    }
+        this.releases   = opts.releases;
+        this.api        = opts.api;
+        this.release_id = null;
+        var self        = this;
 
-    this.on('mount', function(){
-        self.release_id =  $('#openstack_releases').val();
-        console.log(self.release_id);
-    });
+        releaseChanged(e) {
+            self.release_id = e.target.value;
+            console.log(self.release_id);
+            var adoption   = $("#all-projects-adoption").slider('getValue');
+            var maturity   = $("#all-projects-maturity").slider('getValue');
+            var age        = $("#all-projects-age").slider('getValue');
+            var term       = $('#all-projects-search').val();
 
-    getCurrentRelease() {
-        return self.release_id;
-    }
+            self.api.load_components_by_release(self.release_id, term, adoption, maturity, age);
+        }
 
+        this.on('mount', function(){
+            self.release_id =  $('#openstack_releases').val();
+            console.log(self.release_id);
+        });
+
+        getCurrentRelease() {
+            return self.release_id;
+        }
+    </script>
 
 </openstack-releases-ddl>

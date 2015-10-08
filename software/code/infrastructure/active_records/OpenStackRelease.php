@@ -267,41 +267,69 @@ class OpenStackRelease
     {
         $this->setField('Status', $status);
     }
-
     /**
      * @param string $term
-     * @return mixed
+     * @param int $adoption
+     * @param int $maturity
+     * @param int $age
+     * @return IOpenStackComponent[]
      */
-    public function getOpenStackCoreComponents($term = '')
+    public function getOpenStackCoreComponents($term = '', $adoption = 0, $maturity = 0, $age = 0)
     {
         $filters = array
         (
-            'IsCoreService' => true
+            'IsCoreService'                     => true,
         );
+
         $query = $this->OpenStackComponents()->filter($filters);
+
+        $query = $query->where(" Adoption >= {$adoption} AND  MaturityPoints >= {$maturity}");
+
         if(!empty($term))
         {
             $query = $query->where(" (Name LIKE '%{$term}%' OR CodeName LIKE '%{$term}%' OR Description LIKE '%{$term}%' ) ");
         }
-        return $query->toArray();
+
+        $final = array();
+        $res   = $query->toArray();
+        foreach($res as $c)
+        {
+            if($c->getAge() >= $age)
+                array_push($final, $c);
+        }
+        return $final;
     }
 
     /**
      * @param string $term
-     * @return mixed
+     * @param int $adoption
+     * @param int $maturity
+     * @param int $age
+     * @return IOpenStackComponent[]
      */
-    public function getOpenStackOptionalComponents($term = '')
+    public function getOpenStackOptionalComponents($term = '', $adoption = 0, $maturity = 0, $age = 0)
     {
         $filters = array
         (
-            'IsCoreService' => false
+            'IsCoreService'                     => false,
         );
+
         $query = $this->OpenStackComponents()->filter($filters);
+
+        $query = $query->where(" Adoption >= {$adoption} AND  MaturityPoints >= {$maturity}");
+
         if(!empty($term))
         {
             $query = $query->where(" (Name LIKE '%{$term}%' OR CodeName LIKE '%{$term}%' OR Description LIKE '%{$term}%' ) ");
         }
-        return $query->toArray();
+        $final = array();
+        $res   = $query->toArray();
+        foreach($res as $c)
+        {
+            if($c->getAge() >= $age)
+                array_push($final, $c);
+        }
+        return $final;
     }
 
     /**
