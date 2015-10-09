@@ -5,7 +5,7 @@ var query_template = 'releases/@RELEASE_ID/components';
 
 // events
 
-api.load_components_by_release = function(release_id, term, adoption, maturity, age)
+api.load_components_by_release = function(release_id, term, adoption, maturity, age, sort, sort_dir)
 {
     console.log('release id '+release_id+' - term '+term+' - adoption '+ adoption+ ' - maturity '+maturity+' - age ' +age );
 
@@ -30,6 +30,11 @@ api.load_components_by_release = function(release_id, term, adoption, maturity, 
     if(age !== null && age !== '' && age !== undefined ) {
         if(filters !== '') filters += '&';
         filters += 'age=' + age;
+    }
+
+    if(sort !== null && sort !== '' && sort !== undefined ) {
+        if(filters !== '') filters += '&';
+        filters += 'sort=' + sort+':'+sort_dir;
     }
 
     return $.get(url+filters,function (resp) {

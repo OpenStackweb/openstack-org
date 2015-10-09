@@ -68,6 +68,14 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
         $adoption   = intval(Convert::raw2sql($request->getVar('adoption')));
         $maturity   = intval(Convert::raw2sql($request->getVar('maturity')));
         $age        = intval(Convert::raw2sql($request->getVar('age')));
+        $sort       = Convert::raw2sql($request->getVar('sort'));
+        $sort_dir   = '';
+        if(!empty($sort))
+        {
+            $sort = explode(':',$sort);
+            $sort_dir = $sort[1];
+            $sort     = $sort[0];
+        }
 
         $release = OpenStackRelease::get()->byID($release_id);
         if(is_null($release))
@@ -79,7 +87,9 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
             $term,
             $adoption,
             $maturity,
-            $age
+            $age,
+            $sort,
+            $sort_dir
         );
 
         $res = array

@@ -305,9 +305,11 @@ class OpenStackRelease
      * @param int $adoption
      * @param int $maturity
      * @param int $age
+     * @param string $sort
+     * @param string $sort_dir
      * @return IOpenStackComponent[]
      */
-    public function getOpenStackOptionalComponents($term = '', $adoption = 0, $maturity = 0, $age = 0)
+    public function getOpenStackOptionalComponents($term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir ='')
     {
         $filters = array
         (
@@ -323,11 +325,29 @@ class OpenStackRelease
             $query = $query->where(" (Name LIKE '%{$term}%' OR CodeName LIKE '%{$term}%' OR Description LIKE '%{$term}%' ) ");
         }
         $final = array();
+        if(!empty($sort) && ( $sort === 'maturity' || $sort === 'adoption'))
+        {
+            $sort  = $sort === 'maturity' ? 'MaturityPoints' : 'Adoption';
+            $query = $query->sort($sort, $sort_dir);
+        }
         $res   = $query->toArray();
         foreach($res as $c)
         {
             if($c->getAge() >= $age)
                 array_push($final, $c);
+        }
+        if(!empty($sort) &&  $sort === 'age')
+        {
+            usort($final, function ($a, $b) use($sort_dir) {
+                if($a->getAge() === $b->getAge()) return 0;
+                if($sort_dir === 'asc'){
+                    return $a->getAge() > $b->getAge() ? 1 : -1;
+                }
+                else
+                {
+                    return $a->getAge() < $b->getAge() ? 1 : -1;
+                }
+            });
         }
         return $final;
     }

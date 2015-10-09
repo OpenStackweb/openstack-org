@@ -89,14 +89,17 @@ interface IOpenStackRelease extends IEntity
      */
     public function getOpenStackCoreComponents($term = '',  $adoption = 0, $maturity = 0, $age = 0);
 
+
     /**
      * @param string $term
      * @param int $adoption
      * @param int $maturity
      * @param int $age
+     * @param string $sort
+     * @param string $sort_dir
      * @return IOpenStackComponent[]
      */
-    public function getOpenStackOptionalComponents($term = '', $adoption = 0, $maturity = 0, $age = 0);
+    public function getOpenStackOptionalComponents($term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir ='');
 
     /**
      * @param int $component_id
