@@ -47,7 +47,7 @@
                     <% end_if %>
                     <% if $Component.HasInstallationGuide %>
                     <p>
-                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/{$Component.InstallationGuideDocName}" target="_blank">View the install guide</a>
+                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html" target="_blank">View the install guide</a>
                     </p>
                     <% end_if %>
                     <p>
@@ -111,7 +111,7 @@
                                 <tbody>
                                 <tr>
                                     <td>Is there an install guide for this project guide (at docs.openstack.org)?
-                                        <i data-content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor minus quaerat provident dolorum omnis mollitia delectus qui animi deleniti, sunt sit est nesciunt aspernatur quis quibusdam tempora doloribus et." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -126,7 +126,7 @@
                                     </td>
                                     <td>
                                         <% if $Component.HasInstallationGuide %>
-                                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/{$Component.InstallationGuideDocName}">View Install Guide</a>
+                                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html">View Install Guide</a>
                                         <% else %>
                                         &nbsp;
                                         <% end_if %>
