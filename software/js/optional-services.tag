@@ -14,9 +14,9 @@
         <tr>
             <th>Name</th>
             <th>Service</th>
-            <th>Adoption <a href="#"><i class="fa fa-sort"></i></a></th>
-            <th>Maturity <a href="#"><i class="fa fa-sort"></i></a></th>
-            <th>Age <a href="#"><i class="fa fa-sort"></i></a></th>
+            <th>Adoption <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
+            <th>Maturity <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
+            <th>Age <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
             <th>Details</th>
         </tr>
     </thead>
@@ -38,6 +38,10 @@
     <script>
 
     this.components          = opts.components;
+    this.api                 = opts.api;
+    this.adoption_dir        = 'desc';
+    this.maturity_dir        = 'desc';
+    this.age_dir             = 'desc';
     this.max_maturity_points = opts.max_maturity_points;
     this.base_url            = opts.base_url;
     var self                 = this;
@@ -45,7 +49,6 @@
     optionalServiceDetails(e) {
         var slug  = e.item.slug;
         var url = self.base_url+'releases/'+self.getCurrentReleaseId()+'/components/'+slug;
-        console.log(url);
         window.location = url;
     }
 
@@ -53,11 +56,44 @@
         return $('#openstack_releases option:selected').text().toLowerCase();
     }
 
-    opts.api.on('loaded-components-by-release',function(data) {
-        console.log('components loaded');
+    this.api.on('loaded-components-by-release',function(data) {
         self.components =  data.optional_components;
         self.update();
     });
+
+    sortAdoption(e) {
+
+        var adoption   = $("#all-projects-adoption").slider('getValue');
+        var maturity   = $("#all-projects-maturity").slider('getValue');
+        var age        = $("#all-projects-age").slider('getValue');
+        var txt        = $('#all-projects-search').val();
+        var release_id = $('#openstack_releases').val();
+
+        self.api.load_components_by_release(release_id, txt, adoption, maturity, age,'adoption', self.adoption_dir);
+        self.adoption_dir = self.adoption_dir === 'desc' ? 'asc' : 'desc';
+    }
+
+    sortMaturity(e) {
+        var adoption   = $("#all-projects-adoption").slider('getValue');
+        var maturity   = $("#all-projects-maturity").slider('getValue');
+        var age        = $("#all-projects-age").slider('getValue');
+        var txt        = $('#all-projects-search').val();
+        var release_id = $('#openstack_releases').val();
+
+        self.api.load_components_by_release(release_id, txt, adoption, maturity, age,'maturity', self.maturity_dir);
+        self.maturity_dir = self.maturity_dir === 'desc' ? 'asc' : 'desc';
+    }
+
+    sortAge(e) {
+        var adoption   = $("#all-projects-adoption").slider('getValue');
+        var maturity   = $("#all-projects-maturity").slider('getValue');
+        var age        = $("#all-projects-age").slider('getValue');
+        var txt        = $('#all-projects-search').val();
+        var release_id = $('#openstack_releases').val();
+
+        self.api.load_components_by_release(release_id, txt, adoption, maturity, age,'age', self.age_dir);
+        self.age_dir = self.age_dir === 'desc' ? 'asc' : 'desc';
+    }
 
     </script>
 </optional-services>

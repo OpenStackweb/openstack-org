@@ -20,7 +20,9 @@ interface ISoftwareManager
      * @param int $adoption
      * @param int $maturity
      * @param int $age
+     * @param string $sort
+     * @param string $sort_dir
      * @return array
      */
-    public function getComponents(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0);
+    public function getComponents(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '');
 }
