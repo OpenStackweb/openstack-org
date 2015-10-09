@@ -26,9 +26,15 @@ class SurveyQuestionRowValueTemplate extends SurveyQuestionValueTemplate
         'IsAdditional',
     );
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
         $fields->add(new CheckboxField('IsAdditional', 'Is Additional Row?'));
         return $fields;
+    }
+
+    public function Columns()
+    {
+        return SurveyQuestionColumnValueTemplate::get()->filter('OwnerID', $this->OwnerID);
     }
 }
