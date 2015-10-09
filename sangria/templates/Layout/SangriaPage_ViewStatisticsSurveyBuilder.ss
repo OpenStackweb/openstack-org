@@ -26,25 +26,11 @@
         <% if SurveyQuestions2Show %>
             <div class="row">
                 <% loop SurveyQuestions2Show %>
-                    <div class="col-md-3 ">
-                        <h3>$Label</h3>
-                        <table>
-                            <tbody>
-                            <% loop getFormattedValues %>
-                                <tr>
-                                    <td>
-                                        <% if $Top.IsQuestionOnFiltering($Up.ID) %>
-                                            <span>$Label</span>
-                                        <% else %>
-                                        <a href="$Top.Link($Top.Action)?qid=$Up.ID&vid=$ID$Top.SurveyBuilderDateFilterQueryString">$Label</a>
-                                        <% end_if %>
-                                    </td>
-                                    <td>$Top.SurveyBuilderCountAnswers($Up.ID, $ID)</td>
-                                </tr>
-                            <% end_loop %>
-                            </tbody>
-                        </table>
-                    </div>
+                    <% if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
+                        <% include SangriaPage_StatisticsSurveyRadioButtonMatrixTemplateQuestion ParentPage=$Top, QuestionID=$ID %>
+                    <% else %>
+                        <% include SangriaPage_StatisticsMultiValueQuestionTemplate ParentPage=$Top %>
+                    <% end_if %>
                 <% end_loop %>
             </div>
         <% else %>
@@ -54,13 +40,5 @@
             </div>
         <% end_if %>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-        <h2>User Survey - Projects Used Question Statistics</h2>
-        <hr class="space" />
-        $Top.generateSurveyProjectUsedMatrix
-    </div>
     </div>
 </div>
