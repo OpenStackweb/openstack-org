@@ -138,7 +138,7 @@
             </div>
         </div>
     <% end_if %>
-    <div class="row">
+<!--     <div class="row">
         <div class="col-lg-8 col-lg-push-2">
             <h5 class="section-title">Official Summit Hotels</h5>
             <% if not $Top.AlternateHotels %>
@@ -148,7 +148,7 @@
             <% end_if %>
             $LocationsTextHeader
         </div>
-    </div>
+    </div> -->
     <% loop Hotels %>
         <% if $First() %>
         <div class="row">
@@ -224,7 +224,7 @@
     <!-- End Hotel Website Modal -->
 
     <% end_loop %>
-    <div class="row">
+<!--     <div class="row">
         <div class="col-sm-10 col-sm-push-1">
             <h5 class="section-title">More Hotel Details</h5>
             <div class="more-hotel-details">
@@ -239,7 +239,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> -->
     <% if $Airports %>
         <% if $AirportsTitle %>
             <div class="row">
@@ -261,8 +261,8 @@
                         $Address
                     </p>
                     <p>
-                        <a class="marker-link" href="$Top.Link#map-canvas" data-location-id="{$ID}" alt="View On Map"><i
-                                class="fa fa-map-marker"></i> Map</a>
+                        <!-- <a class="marker-link" href="$Top.Link#map-canvas" data-location-id="{$ID}" alt="View On Map"><i
+                                class="fa fa-map-marker"></i> Map</a> -->
                         <a href="{$Website}" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Website</a>
                     </p>
                 </div>
