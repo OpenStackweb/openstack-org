@@ -68,6 +68,9 @@
                     <strong>$Name</strong>
                     $Address
                 </p>
+                <p>
+                    <a href="/summit/tokyo-2015/campus-maps" class="outline-btn venue-maps-btn">View Maps of the Summit Campus</a>
+                </p>
             </div>
             <a href="{$Top.VenueBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$Top.VenueBackgroundImageHero}" target="_blank">
                 <i class="fa fa-info-circle"></i>
