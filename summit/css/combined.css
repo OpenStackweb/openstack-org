@@ -2853,6 +2853,18 @@ ul.help-me-menu li a i {
   .schedule-square a.outline-btn {
     width: 60%;
     font-size: 1em; } }
+a.outline-btn.venue-maps-btn {
+  font-size: 14px;
+  color: white;
+  padding: 8px 15px;
+  margin: 40px auto 0;
+  display: block;
+  max-width: 350px;
+}
+a.outline-btn.venue-maps-btn:hover {
+  background: rgba(255,255,255,0.4);
+  text-decoration: none;
+}
 .dowload-app-wrapper {
   margin: 10px 0 40px;
   padding: 40px;
