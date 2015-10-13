@@ -1,5 +1,5 @@
 <openstack-releases-ddl>
-    <div class="col-sm-3 col-xs-6 all-projects-select">
+    <div class="col-sm-3 col-xs-6 all-projects-select" style="display:none;">
     <select id="openstack_releases" class="form-control" onchange={ releaseChanged }  >
         <option each="{ releases }" value="{ id }">{ name }</option>
     </select>

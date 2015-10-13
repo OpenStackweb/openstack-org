@@ -807,10 +807,12 @@ p.service-section-title {
 .all-projects-filter-link i:hover {
     cursor: pointer;
     color: #2A4E68; }
-.all-projects-filter-link i.active {
+.all-projects-filter-link i.active
+{
     background: #6CBB45;
     color: white;
-    border: 1px solid #6CBB45; }
+    border: 1px solid #6CBB45;
+}
 
 #all-projects-filter-wrapper {
   display: block;
@@ -1034,3 +1036,23 @@ img.openstack-diagram {
 {
     max-height: 50px;
 }
+
+/*slider customization*/
+
+.slider.slider-horizontal {
+    height: 20px !important;
+    width: 100% !important;
+}
+
+.tooltip {
+    background: black;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1px 8px;
+    color: white;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px; }
+
+.tooltip {
+    background: none;
+    white-space: nowrap; }
