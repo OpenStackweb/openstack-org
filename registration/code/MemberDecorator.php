@@ -406,5 +406,10 @@ class MemberDecorator extends DataExtension
 
         return $res;
     }
+
+    public function isAdmin()
+    {
+        return Permission::checkMember($this->owner, 'ADMIN');
+    }
 }
 
