@@ -349,6 +349,7 @@ S.Created,
 S.LastEdited,
 SETPL.Name AS Step,
 Q.Name AS Question,
+Q.ID   AS QuestionID,
 SETPL.`Order` AS StepOrder,
 Q.`Order` AS QuestionOrder,
 Q.ClassName AS QuestionClass,
@@ -849,6 +850,7 @@ SQL;
                             $entity_survey_id      = intval($row2['EntityID']);
 
                         }
+
                         $question         = $row2['Question'];
                         $class            = $row2['QuestionClass'];
                         $answer           = $row2['Answer'];
@@ -873,10 +875,33 @@ SQL;
 
                         if(in_array($question, $flat_fields_entity))
                         {
-                            $answers = explode('|', $answer);
-                            foreach($answers as $a)
+                            if($class === 'SurveyRankingQuestionTemplate')
                             {
-                                $line2[sprintf("%s - %s",$question,$a)] = 1;
+
+                                $question_id = intval($row['QuestionID']);
+                                $q = SurveyRankingQuestionTemplate::get()->byID($question_id);
+                                if(!is_null($q))
+                                {
+                                    $values = $q->Values()->sort('Order', 'ASC');
+                                    $options = array();
+                                    foreach($values as $v)
+                                    {
+                                        array_push($options, $v->Value);
+                                    }
+                                    $answers = explode('|', $row['Answer']);
+                                    foreach($options as $o)
+                                    {
+                                        $index = array_search($o, $answers);
+                                        $line[sprintf("%s - %s", $question, $o)] =  $index === false ? '0' : ($index + 1);;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                $answers = explode('|', $answer);
+                                foreach ($answers as $a) {
+                                    $line2[sprintf("%s - %s", $question, $a)] = 1;
+                                }
                             }
                         }
                         else
@@ -924,10 +949,33 @@ SQL;
 
             if(in_array($question, $flat_fields))
             {
-                $answers = explode('|', $row['Answer']);
-                foreach($answers as $a)
+                if($class === 'SurveyRankingQuestionTemplate')
                 {
-                    $line[sprintf("%s - %s", $question, $a)] = 1;
+
+                    $question_id = intval($row['QuestionID']);
+                    $q = SurveyRankingQuestionTemplate::get()->byID($question_id);
+                    if(!is_null($q))
+                    {
+                        $values = $q->Values()->sort('Order', 'ASC');
+                        $options = array();
+                        foreach($values as $v)
+                        {
+                            array_push($options, $v->Value);
+                        }
+                        $answers = explode('|', $row['Answer']);
+                        foreach($options as $o)
+                        {
+                            $index = array_search($o, $answers);
+                            $line[sprintf("%s - %s", $question, $o)] =  $index === false ? '0' : ($index + 1);;
+                        }
+                    }
+                }
+                else
+                {
+                    $answers = explode('|', $row['Answer']);
+                    foreach ($answers as $a) {
+                        $line[sprintf("%s - %s", $question, $a)] = 1;
+                    }
                 }
             }
             else
