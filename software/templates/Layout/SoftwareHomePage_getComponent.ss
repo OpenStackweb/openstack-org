@@ -47,11 +47,11 @@
                     <% end_if %>
                     <% if $Component.HasInstallationGuide %>
                     <p>
-                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html" target="_blank">View the install guide</a>
+                        <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html" target="_blank">View the install guide</a>
                     </p>
                     <% end_if %>
                     <p>
-                        <a href="#" target="_blank">Search the marketplace</a>
+                        <a href="/marketplace" target="_blank">Find this service in the Marketplace</a>
                     </p>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Features</th>
+                                    <th>Maturity Indicators</th>
                                     <th></th>
                                     <th>Tag Details</th>
                                 </tr>
@@ -117,80 +117,20 @@
                                         <ul>
                                             <li <% if $Component.HasInstallationGuide %>class="on"<% end_if %>>
                                                 <% if $Component.HasInstallationGuide %>
-                                                <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
                                                 <% else %>
-                                                <i class="fa fa-times-circle"></i><span>No</span>
+                                                    <i class="fa fa-times-circle"></i><span>No</span>
                                                 <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
                                     <td>
                                         <% if $Component.HasInstallationGuide %>
-                                        <a href="http://docs.openstack.org/{$Release.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html">View Install Guide</a>
+                                            <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html">View Install Guide</a>
                                         <% else %>
-                                        &nbsp;
+                                            &nbsp;
                                         <% end_if %>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>Is this project included in the compute starter kit?
-                                        <i data-content="The Compute Starter Kit is a common starting point for a Compute oriented OpenStack cloud that can be expanded over time to include more of the OpenStack universe." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What is the Compute Starter Kit?"></i>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.IncludedComputeStarterKit %>class="on"<% end_if %>>
-                                                <% if $Component.IncludedComputeStarterKit %>
-                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
-                                                <% else %>
-                                                    <i class="fa fa-times-circle"></i><span>No</span>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Details</a></td>
-                                </tr>
-                                <!--
-                                <tr>
-                                    <td>Is this project recommended by the Technical Committee (TC)?
-                                        <i data-content="This tag is used to indicate the projects the TC recommends to the OpenStack Foundation Board as candidates for trademark use under the OpenStack Foundation trademark policy." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What is the Compute Starter Kit?"></i>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li  <% if $Component.TCApprovedRelease %>class="on"<% end_if %>>
-                                                <% if $Component.TCApprovedRelease %>
-                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
-                                                <% else %>
-                                                    <i class="fa fa-times-circle"></i><span>No</span>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/tc-approved-release.html">View Details</a></td>
-                                </tr>
-                                -->
-                                <tr>
-                                    <td>
-                                        How is this project released?
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.ReleaseMileStones %>class="on"<% end_if %>>
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
-                                                    <i class="fa <% if $Component.ReleaseMileStones %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with milestones</span></a>
-                                            </li>
-                                            <li <% if $Component.ReleaseCycleWithIntermediary %>class="on" <% end_if %>>
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html">
-                                                    <i class="fa <% if $Component.ReleaseCycleWithIntermediary %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with intermediary</span>
-                                                </a>
-                                            </li>
-                                            <li <% if $Component.ReleaseIndependent %>class="on" <% end_if %>>
-                                                <a href="http://governance.openstack.org/reference/tags/release_independent.html">
-                                                    <i class="fa <% if $Component.ReleaseIndependent %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Independent</span></a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Details</a></td>
                                 </tr>
                                 <tr>
                                     <td>Number of software development kits (SDKs) which support this project.
@@ -223,22 +163,81 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Has this project team acheived corporate diversity?
+                                        Has this project team achieved corporate diversity?
                                         <i data-content="A project with this tag has achieved a level of diversity in the affiliation of contributors that is indicative of a healthy collaborative project. This tag exists in the ‘team’ category, which as the name implies, covers information about the team itself. Another example of a tag that could exist in this category is one that conveys the size of the team that is actively contributing." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
                                         <ul>
                                             <li <% if $Component.HasTeamDiversity %>class="on" <% end_if %>>
                                                 <% if $Component.HasTeamDiversity %>
-                                                <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
                                                 <% else %>
-                                                <i class="fa fa-times-circle"></i><span>No</span>
+                                                    <i class="fa fa-times-circle"></i><span>No</span>
                                                 <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
                                     <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Details</a></td>
                                 </tr>
+                                <tr>
+                                    <td>Has this project stable branches?
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li <% if $Component.HasStableBranches %>class="on"<% end_if %>>
+                                                <% if $Component.HasStableBranches %>
+                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                <% end_if %>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/release_has-stable-branches.html">View Details</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive project-tags-table table-hover">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Additional Information</th>
+                                    <th></th>
+                                    <th>Tag Details</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        How is this project released?
+                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li <% if $Component.ReleaseMileStones %>class="on"<% end_if %>>
+                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
+                                                    <i class="fa <% if $Component.ReleaseMileStones %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with milestones</span></a>
+                                            </li>
+                                            <li <% if $Component.ReleaseCycleWithIntermediary %>class="on" <% end_if %>>
+                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html">
+                                                    <i class="fa <% if $Component.ReleaseCycleWithIntermediary %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with intermediary</span>
+                                                </a>
+                                            </li>
+                                            <li <% if $Component.ReleaseIndependent %>class="on" <% end_if %>>
+                                                <a href="http://governance.openstack.org/reference/tags/release_independent.html">
+                                                    <i class="fa <% if $Component.ReleaseIndependent %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Independent</span></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Details</a></td>
+                                </tr>
+
                                 <tr>
                                     <td>
                                         Existence and quality of packages for this project in distributions like Red Hat/Fedora, Ubuntu	6 and openSUSE/SLES.
@@ -264,7 +263,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Are security issues in thisproject managed by the OpenStackVulnerability Management Team?
+                                        Are security issues in this project managed by the OpenStackVulnerability Management Team?
                                         <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
