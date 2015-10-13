@@ -1,11 +1,13 @@
 <% if OpenStackAvailableComponents %>
     <hr>
     <form id="components_form" name="components_form">
+    <div style="display: block;overflow-x:auto; width: 99%">
     <table style="border: 1px solid #ccc; border-collapse:collapse;clear:both;max-width:99%"  width="100%" >
-        <tbody><tr>
-            <th style="border: 1px solid #ccc;width:9%;">OpenStack-powered Capabilities Offered</th>
+        <tbody style="width: auto">
+        <tr>
+            <th style="border: 1px solid #ccc;min-width: 150px;">OpenStack-powered Capabilities Offered</th>
             <% loop OpenStackAvailableComponents %>
-                <th style="border: 1px solid #ccc;background:#eaeaea;max-width:100px;" width="9%">
+                <th style="border: 1px solid #ccc;background:#eaeaea;min-width: 150px" width="10%">
                     $Name ($CodeName)
                 </th>
             <% end_loop %>
@@ -63,5 +65,6 @@
             <% end_loop %>
         </tr>
     </table>
+    </div>
     </form>
 <% end_if %>
