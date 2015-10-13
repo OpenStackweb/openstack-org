@@ -20,15 +20,15 @@
             </li>
             <li>
                 <a href="#hotels">
-                    <i class="fa fa-h-square"></i>
-                    Hotels &amp; Airport
+                    <i class="fa fa-plane"></i>
+                    Airport Directions
                 </a>
             </li>
             <% if GettingAround  %>
             <li>
                 <a href="#getting-around">
-                    <i class="fa fa-road"></i>
-                    Getting Around
+                    <i class="fa fa-map"></i>
+                    Campus Maps
                 </a>
             </li>
             <% end_if %>
@@ -82,7 +82,7 @@
 
 <% if $CampusGraphic %>
 
-    <div class="venue-map-drawn">
+<!--     <div class="venue-map-drawn">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-push-2">
@@ -92,10 +92,10 @@
         </div>
         <img class="" src="{$CampusGraphic}.svg" onerror="this.onerror=null; this.src={$CampusGraphic}.png" alt="OpenStack Summit Tokyo Hotels">
     </div>
-
+ -->
 <% else %>
 
-    <div class="venue-map" id="map-canvas"></div>
+    <!-- <div class="venue-map" id="map-canvas"></div> -->
 
 <% end_if %>
 
@@ -193,35 +193,6 @@
         <div class="row">
         <% end_if %>
 
-    <!-- Hotel Website Modal -->
-    <div class="modal fade" id="Hotel{$ID}">
-      <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Important</h4>
-            </div>
-            <div class="modal-body">
-                <p class="center">
-                    <i class="fa fa-exclamation-triangle fa-4x" style="color:#DA422F;"></i>
-                </p>
-                <p>
-                    You must use the following promo code to receive the Summit discounted rate.
-                    Please <a href="//openstack.org/assets/pdf-downloads/OS-Tokyo-Hotel-Info-Packet.pdf" target="_blank">read these instructions</a> for room info and additional details.
-                </p>
-                <p>
-                    <strong style="font-size:1.5em;">Promo Code: OST2015</strong>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <p style="text-align: center;">
-                    <a href="{$Website}" class="hotel-alert-btn" target="_blank">Book your hotel room(s)</a>
-                </p>
-            </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!-- End Hotel Website Modal -->
 
     <% end_loop %>
 <!--     <div class="row">
@@ -253,21 +224,29 @@
         <% end_if %>
         <div class="row">
 
-        <% loop Airports %>
-
                 <div class="col-sm-4 col-sm-push-2 hotel-block">
-                    <h3>$Name</h3>
+                    <h3>Haneda Airport</h3>
                     <p>
-                        $Address
+                        Hanedakuko<br>
+                        Ota, Tokyo 144-0041, Japan
                     </p>
                     <p>
-                        <!-- <a class="marker-link" href="$Top.Link#map-canvas" data-location-id="{$ID}" alt="View On Map"><i
-                                class="fa fa-map-marker"></i> Map</a> -->
-                        <a href="{$Website}" target="_blank" alt="Visit Website"><i class="fa fa-home"></i> Website</a>
+                        <a href="#" data-toggle="modal" data-target="#videoHanedaModal"><i class="fa fa-youtube-play"></i> Watch video directions to Summit venue</a>
+                        <a href="#" data-toggle="modal" data-target="#downloadHanedaModal"><i class="fa fa-map"></i> Download directions to Summit venue</a>
+                    </p>
+                </div>
+                <div class="col-sm-4 col-sm-push-2 hotel-block">
+                    <h3>Narita International Airport</h3>
+                    <p>
+                        1-1 Furugome, Narita-shi<br>
+                        Chiba-ken 282-0004, Japan
+                    </p>
+                    <p>
+                        <a href="#" data-toggle="modal" data-target="#videoNaritaModal"><i class="fa fa-youtube-play"></i> Watch video directions to Summit venue</a>
+                        <a href="#" data-toggle="modal" data-target="#downloadNaritaModal"><i class="fa fa-map"></i> Download directions to Summit venue</a>
                     </p>
                 </div>
 
-        <% end_loop %>
     </div>
     <% end_if %>
     <% if OtherLocations  %>
@@ -378,3 +357,91 @@
 </div>
 <% end_if %>
     <!-- End Other Hotels Modal -->
+
+    <!-- Haneda - Video Modal -->
+    <div class="modal fade" id="videoHanedaModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Directions from HANEDA airport</h4>
+          </div>
+          <div class="modal-body">
+            <p class="download-text">
+                Watch this step-by-step video on what to expect when you arrive at Haneda and how to get to the Summit video.
+            </p>
+                <iframe width="560" height="315" src="//www.youtube.com/embed/85464R-1Eq8?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Haneda Video Modal -->
+    
+    <!-- Haneda - Download Modal -->
+    <div class="modal fade" id="downloadHanedaModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Directions from HANEDA airport</h4>
+          </div>
+          <div class="modal-body">
+            <p class="download-text">
+                <i class="fa fa-file-pdf-o fa-4x"></i>
+                Select the version you would like to use, view now or download to print.
+            </p>
+                <a href="//openstack.org/assets/tokyo-summit/directions/OSTokyo-Haneda-Directions-PROOF-v2.pdf" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View Directions</a>
+                <a href="//openstack.org/assets/tokyo-summit/directions/OSTokyo-Haneda-Directions-PROOF-v2.zip" class="download-btn"><i class="fa fa-print fa-2x" download></i> Download for Print (zip)</a>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Haneda Download Modal -->
+    
+    <!-- Narita - Video Modal -->
+    <div class="modal fade" id="videoNaritaModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Directions from NARITA International airport</h4>
+          </div>
+          <div class="modal-body">
+            <p class="download-text">
+                Watch this step-by-step video on what to expect when you arrive at Narita and how to get to the Summit video.
+            </p>
+                <iframe width="560" height="315" src="//www.youtube.com/embed/_mlwE_Ha7Ws?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Narita Video Modal -->
+
+    <!-- Narita - Download Modal -->
+    <div class="modal fade" id="downloadNaritaModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Directions from NARITA International airport</h4>
+          </div>
+          <div class="modal-body">
+            <p class="download-text">
+                <i class="fa fa-file-pdf-o fa-4x"></i>
+                Select the version you would like to use, view now or download to print.
+            </p>
+                <a href="//openstack.org/assets/tokyo-summit/directions/OSTokyo-Narita-Directions-PROOF-v2.pdf" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View Directions</a>
+                <a href="//openstack.org/assets/tokyo-summit/directions/OSTokyo-Narita-Directions-PROOF-v2.zip" class="download-btn"><i class="fa fa-print fa-2x" download></i> Download for Print (zip)</a>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Narita Download Modal -->
