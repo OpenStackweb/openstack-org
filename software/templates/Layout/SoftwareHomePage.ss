@@ -37,13 +37,13 @@
             <div class="col-sm-10 col-sm-push-1 center">
                 <h3>$IntroTitle</h3>
                 <p>
-                    <img src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/openstack-software-diagram.png"/ class="openstack-diagram">
+                    <img src="themes/openstack/images/software/openstack-software-diagram.png" class="openstack-diagram">
                 </p>
                 <div class="row projects-overview">
                     <div class="col-sm-6">
                      $IntroText
                     </div>
-                    <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/3UINKsGw95A"><img src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/kilo-screencast.png"/></a>
+                    <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/3UINKsGw95A"><img src="themes/openstack/images/software/kilo-screencast.png"/></a>
                         <h4>OpenStack Overview (5:14)</h4>
                     </div>
                 </div>

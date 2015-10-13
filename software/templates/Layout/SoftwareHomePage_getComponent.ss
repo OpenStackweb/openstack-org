@@ -309,9 +309,12 @@
                             $Component.LatestReleasePTL.CurrentPosition
                         </p>
                         <p>
-                            <a target="_blank" href="community/members/profile/{$Component.LatestReleasePTL.ID}"><img alt="OpenStack Profile" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/ptl-openstack.png"></a>
+                            <a target="_blank" href="community/members/profile/{$Component.LatestReleasePTL.ID}">
+                                <img alt="OpenStack Profile" src="themes/openstack/images/software/ptl-openstack.png"></a>
                             <% if $Component.LatestReleasePTL.TwitterName %>
-                            <a target="_blank" href="https://twitter.com/{$Component.LatestReleasePTL.TwitterName}"><img alt="Twitter Profile" src="http://cdn.getforge.com/os-new-software.getforge.io/1443794583/images/projects/ptl-twitter.png"></a>
+                            <a target="_blank" href="https://twitter.com/{$Component.LatestReleasePTL.TwitterName}">
+                                <img alt="Twitter Profile" src="themes/openstack/images/software/ptl-twitter.png">
+                            </a>
                             <% end_if %>
                         </p>
                     </div>
