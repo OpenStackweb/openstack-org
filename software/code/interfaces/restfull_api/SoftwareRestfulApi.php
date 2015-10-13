@@ -50,8 +50,9 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
     /**
      * @return bool
      */
-    protected function authorize(){
-        return $this->checkOwnAjaxRequest();
+    protected function authorize()
+    {
+        return $this->checkOwnAjaxRequest($this->getRequest());
     }
 
 
