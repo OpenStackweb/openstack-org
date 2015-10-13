@@ -265,6 +265,10 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
             {
                 $points += 1;
             }
+            if(intval($c->SDKSupport) > 7)
+            {
+                $points += 1;
+            }
             $components->add($c, array('MaturityPoints' => $points));
         }
     }
