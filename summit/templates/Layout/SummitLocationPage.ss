@@ -13,15 +13,15 @@
     <div class="container">
         <ul class="city-nav-list">
             <li>
-                <a href="/summit/tokyo-2015/tokyo-and-travel/#hotels">
-                    <i class="fa fa-plane"></i>
-                    Airport Directions
-                </a>
-            </li>
-            <li>
                 <a href="/summit/tokyo-2015/tokyo-and-travel/#venue">
                     <i class="fa fa-map-marker"></i>
                     Venue
+                </a>
+            </li>
+            <li>
+                <a href="/summit/tokyo-2015/tokyo-and-travel/#hotels">
+                    <i class="fa fa-plane"></i>
+                    Airport Directions
                 </a>
             </li>
             <% if GettingAround  %>
@@ -59,6 +59,46 @@
         </ul>
     </div>
 </div>
+<% with $Venue %>
+    <div id="venue">
+        <div class="venue-row" style="background: rgba(0, 0, 0, 0) url('{$Top.VenueBackgroundImageUrl}') no-repeat scroll left top / cover ;">
+            <div class="container">
+                <h1>$Top.VenueTitleText</h1>
+                <p>
+                    <strong>$Name</strong>
+                    $Address
+                </p>
+                <p>
+                    <a href="/summit/tokyo-2015/campus-maps" class="outline-btn venue-maps-btn">View Maps of the Summit Campus</a>
+                </p>
+            </div>
+            <a href="{$Top.VenueBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$Top.VenueBackgroundImageHero}" target="_blank">
+                <i class="fa fa-info-circle"></i>
+            </a>
+        </div>
+    </div>
+<% end_with %>
+<div class="white hotels-row" id="hotels">
+
+<% if $CampusGraphic %>
+
+<!--     <div class="venue-map-drawn">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-push-2">
+                    <h5 class="section-title">Summit Campus</h5>
+                </div>
+            </div>
+        </div>
+        <img class="" src="{$CampusGraphic}.svg" onerror="this.onerror=null; this.src={$CampusGraphic}.png" alt="OpenStack Summit Tokyo Hotels">
+    </div>
+ -->
+<% else %>
+
+    <!-- <div class="venue-map" id="map-canvas"></div> -->
+
+<% end_if %>
+
 
 <div class="container">
     <% if AlternateHotels %>
@@ -219,47 +259,6 @@
     <% end_if %>
 </div>
 </div>
-
-<% with $Venue %>
-    <div id="venue">
-        <div class="venue-row" style="background: rgba(0, 0, 0, 0) url('{$Top.VenueBackgroundImageUrl}') no-repeat scroll left top / cover ;">
-            <div class="container">
-                <h1>$Top.VenueTitleText</h1>
-                <p>
-                    <strong>$Name</strong>
-                    $Address
-                </p>
-                <p>
-                    <a href="/summit/tokyo-2015/campus-maps" class="outline-btn venue-maps-btn">View Maps of the Summit Campus</a>
-                </p>
-            </div>
-            <a href="{$Top.VenueBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$Top.VenueBackgroundImageHero}" target="_blank">
-                <i class="fa fa-info-circle"></i>
-            </a>
-        </div>
-    </div>
-<% end_with %>
-<div class="white hotels-row" id="hotels">
-
-<% if $CampusGraphic %>
-
-<!--     <div class="venue-map-drawn">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-push-2">
-                    <h5 class="section-title">Summit Campus</h5>
-                </div>
-            </div>
-        </div>
-        <img class="" src="{$CampusGraphic}.svg" onerror="this.onerror=null; this.src={$CampusGraphic}.png" alt="OpenStack Summit Tokyo Hotels">
-    </div>
- -->
-<% else %>
-
-    <!-- <div class="venue-map" id="map-canvas"></div> -->
-
-<% end_if %>
-
 <% if GettingAround  %>
 <div class="blue" id="getting-around">
     <div class="container">
