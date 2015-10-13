@@ -38,7 +38,7 @@
     <script>
 
     this.components          = opts.components;
-    this.api                 = opts.api;x
+    this.api                 = opts.api;
     this.adoption_dir        = 'desc';
     this.maturity_dir        = 'desc';
     this.age_dir             = 'desc';
