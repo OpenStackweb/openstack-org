@@ -2203,6 +2203,29 @@ a.close-modal-btn {
   .modal-body hr {
     width: 90%;
     margin: 30px auto 30px; }
+#videoHanedaModal .modal-body, #downloadHanedaModal .modal-body, #videoNaritaModal .modal-body, #downloadNaritaModal .modal-body{
+  text-align: center;
+}
+#videoHanedaModal .modal-body iframe, #videoNaritaModal .modal-body iframe{
+  max-width: 100%;
+}
+
+.modal-body a.download-btn {
+  display: block;
+  color: white;
+  background: #284d68;
+  padding: 20px 30px;
+  width: 70%;
+  margin: 20px auto;
+  text-align: center;
+  vertical-align: middle; }
+.modal-body a.download-btn i {
+  margin-right: 10px;
+}
+.download-text i.fa-file-pdf-o {
+  margin-bottom: 15px;
+  color: #999;
+  display: block; }
 
 #faqModal p {
   text-align: center;
