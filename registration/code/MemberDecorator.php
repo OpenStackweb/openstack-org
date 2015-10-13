@@ -311,5 +311,10 @@ class MemberDecorator extends DataExtension {
 		$res = Permission::check("EDIT_COMPANY");
 		return $res;
 	}
+
+    public function isAdmin()
+    {
+        return Permission::checkMember($this->owner, 'ADMIN');
+    }
 }
 

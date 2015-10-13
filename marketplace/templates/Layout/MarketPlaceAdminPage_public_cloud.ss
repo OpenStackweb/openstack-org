@@ -21,7 +21,9 @@
         <fieldset>
         <form id="public_cloud_form" name="public_cloud_form">
             <% include MarketPlaceAdminPage_CompanyServiceHeader %><BR>
-            <% include MarketPlaceAdminPage_OpenStackPowered %>
+            <% if CurrentMember.isAdmin %>
+                <% include MarketPlaceAdminPage_OpenStackPowered %>
+            <% end_if %>
         </form>
         <% include Components %>
         <% include PricingSchema %>
