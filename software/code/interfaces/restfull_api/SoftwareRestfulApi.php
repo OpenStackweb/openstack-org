@@ -37,6 +37,10 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
         $this->manager = $manager;
     }
 
+    protected function authenticate(){
+        return true;
+    }
+
     protected function isApiCall(){
         $request = $this->getRequest();
         if(is_null($request)) return false;
@@ -47,7 +51,7 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
      * @return bool
      */
     protected function authorize(){
-        return true;
+        return $this->checkOwnAjaxRequest();
     }
 
 

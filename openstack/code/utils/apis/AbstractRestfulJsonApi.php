@@ -11,295 +11,371 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class AbstractRestfulJsonApi
  */
-abstract class AbstractRestfulJsonApi extends Controller {
+abstract class AbstractRestfulJsonApi extends Controller
+{
 
-	protected $before_filters  = array();
-	private $json;
-	protected $current_user;
+    protected $before_filters = array();
+    private $json;
+    protected $current_user;
 
 
-	public function __construct(){
-		parent::__construct();
-		$this->current_user = Member::currentUser();
-		register_shutdown_function(array($this,'shutdown_function'));
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->current_user = Member::currentUser();
+        register_shutdown_function(array($this, 'shutdown_function'));
+    }
 
-	abstract protected function isApiCall();
+    abstract protected function isApiCall();
 
-	protected function unauthorizedHttpBasicAuth($realm){
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(401);
-		$response->addHeader('WWW-Authenticate', 'Basic realm="'.$realm.'"');
-		return $response;
-	}
+    protected function unauthorizedHttpBasicAuth($realm)
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(401);
+        $response->addHeader('WWW-Authenticate', 'Basic realm="' . $realm . '"');
 
-	/**
-	 * @return array|bool
-	 */
-	protected function isHttpBasicAuthPresent(){
-		$username = null;
-		$password = null;
-		// mod_php
-		if (isset($_SERVER['PHP_AUTH_USER'])) {
-			$username = $_SERVER['PHP_AUTH_USER'];
-			$password = $_SERVER['PHP_AUTH_PW'];
-			// most other servers
-		} elseif (isset($_SERVER['HTTP_AUTHENTICATION'])) {
+        return $response;
+    }
 
-			if (strpos(strtolower($_SERVER['HTTP_AUTHENTICATION']),'basic')===0)
-				list($username,$password) = explode(':',base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+    /**
+     * @return array|bool
+     */
+    protected function isHttpBasicAuthPresent()
+    {
+        $username = null;
+        $password = null;
+        // mod_php
+        if (isset($_SERVER['PHP_AUTH_USER'])) {
+            $username = $_SERVER['PHP_AUTH_USER'];
+            $password = $_SERVER['PHP_AUTH_PW'];
+            // most other servers
+        } elseif (isset($_SERVER['HTTP_AUTHENTICATION'])) {
 
-		}
-		if(is_null($username) && is_null($password))
-			return false;
-		return array($username,$password);
-	}
+            if (strpos(strtolower($_SERVER['HTTP_AUTHENTICATION']), 'basic') === 0) {
+                list($username, $password) = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+            }
 
-	/**
-	 * @return bool|Member
-	 */
-	protected function authenticate() {
-		if($this->current_user) return $this->current_user;
-		return false;
-	}
+        }
+        if (is_null($username) && is_null($password)) {
+            return false;
+        }
 
-	private function doBeforeFilter($action,$params){
-		if(array_key_exists($action,$this->before_filters)){
-			$filters = $this->before_filters[$action];
-			foreach($filters as $filter_name => $callback){
-				if($callback instanceof Closure){
-					$parameters = array($this->getRequest(),$action);
-					$res = call_user_func_array($callback, $parameters);
-					if($res) return $res;
-				}
-			}
-		}
-	}
+        return array($username, $password);
+    }
 
-	/**
-	 * Determine if the request is sending JSON.
-	 *
-	 * @return bool
-	 */
-	protected function isJson()
-	{
-		$content_type_header = $this->request->getHeader('Content-Type');
-		if(empty($content_type_header)) return false;
-		return strpos($content_type_header, '/json')!==false;
-	}
+    /**
+     * @return bool|Member
+     */
+    protected function authenticate()
+    {
+        if ($this->current_user) {
+            return $this->current_user;
+        }
 
-	/**
-	 * Determine if the current request is asking for JSON in return.
-	 *
-	 * @return bool
-	 */
-	protected function wantsJson()
-	{
-		$accept_header = $this->request->getHeader('Accept');
-		if(empty($accept_header)) return false;
-		return strpos($accept_header,'/json')!==false;
-	}
+        return false;
+    }
 
-	/**
-	 * @return bool|mixed
-	 */
-	public function getJsonRequest(){
-		if(!$this->json){
+    private function doBeforeFilter($action, $params)
+    {
+        if (array_key_exists($action, $this->before_filters)) {
+            $filters = $this->before_filters[$action];
+            foreach ($filters as $filter_name => $callback) {
+                if ($callback instanceof Closure) {
+                    $parameters = array($this->getRequest(), $action);
+                    $res = call_user_func_array($callback, $parameters);
+                    if ($res) {
+                        return $res;
+                    }
+                }
+            }
+        }
+    }
 
-			if(is_null($this->request)) return false;
-			if(!$this->isJson()) return false;
+    /**
+     * Determine if the request is sending JSON.
+     * @return bool
+     */
+    protected function isJson()
+    {
+        $content_type_header = $this->request->getHeader('Content-Type');
+        if (empty($content_type_header)) {
+            return false;
+        }
 
-			$body = $this->request->getBody();
-			$this->json= json_decode($body,true);
-		}
-		return $this->json;
-	}
+        return strpos($content_type_header, '/json') !== false;
+    }
 
-	protected function addBeforeFilter($action, $name,Closure $callback){
-		if(!array_key_exists($action, $this->before_filters)){
-			$this->before_filters[$action] = array();
-		}
-		$filters = $this->before_filters[$action];
-		if(!array_key_exists($name, $filters)){
-			$filters[$name] = $callback;
-		}
-		$this->before_filters[$action] = $filters;
-	}
+    /**
+     * Determine if the current request is asking for JSON in return.
+     * @return bool
+     */
+    protected function wantsJson()
+    {
+        $accept_header = $this->request->getHeader('Accept');
+        if (empty($accept_header)) {
+            return false;
+        }
 
-	public function handleRequest(SS_HTTPRequest $request, DataModel $model) {
+        return strpos($accept_header, '/json') !== false;
+    }
 
-		$this->request = $request;
+    /**
+     * @return bool|mixed
+     */
+    public function getJsonRequest()
+    {
+        if (!$this->json) {
 
-		if(!$this->authenticate()){
-			return $this->permissionFailure();
-		}
-		if(!$this->authorize()){
-			return $this->permissionFailure();
-		}
+            if (is_null($this->request)) {
+                return false;
+            }
+            if (!$this->isJson()) {
+                return false;
+            }
 
-		$controller_class = ($this->class) ? $this->class : get_class($this);
-		$url_handlers     = Config::inst()->get($controller_class, 'url_handlers', Config::FIRST_SET);
+            $body = $this->request->getBody();
+            $this->json = json_decode($body, true);
+        }
 
-		if($url_handlers){
-			foreach($url_handlers as $rule => $action) {
-				if($params = $request->match($rule)) {
-					$res = $this->doBeforeFilter($action,$params);
-					if($res) return $res;
-					break;
-				}
-			}
-		}
-		return  parent::handleRequest($request, $model);
-	}
+        return $this->json;
+    }
 
-	/**
-	 * @return bool
-	 */
-	protected abstract function authorize();
+    protected function addBeforeFilter($action, $name, Closure $callback)
+    {
+        if (!array_key_exists($action, $this->before_filters)) {
+            $this->before_filters[$action] = array();
+        }
+        $filters = $this->before_filters[$action];
+        if (!array_key_exists($name, $filters)) {
+            $filters[$name] = $callback;
+        }
+        $this->before_filters[$action] = $filters;
+    }
 
-	protected function notFound($msg = null) {
-		$msg = is_null($msg)?"object wasn't found!.":$msg;
-		// return a 404
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(404);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody(json_encode($msg));
-		return $response;
-	}
+    public function handleRequest(SS_HTTPRequest $request, DataModel $model)
+    {
 
-	protected function ok(array $res = null){
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(200);
-		$response->addHeader('Content-Type', 'application/json');
-		if(is_null($res)) $res = array();
-		$response->setBody(json_encode($res));
+        $this->request = $request;
+
+        if (!$this->authenticate()) {
+            return $this->permissionFailure();
+        }
+        if (!$this->authorize()) {
+            return $this->permissionFailure();
+        }
+
+        $controller_class = ($this->class) ? $this->class : get_class($this);
+        $url_handlers = Config::inst()->get($controller_class, 'url_handlers', Config::FIRST_SET);
+
+        if ($url_handlers) {
+            foreach ($url_handlers as $rule => $action) {
+                if ($params = $request->match($rule)) {
+                    $res = $this->doBeforeFilter($action, $params);
+                    if ($res) {
+                        return $res;
+                    }
+                    break;
+                }
+            }
+        }
+
+        return parent::handleRequest($request, $model);
+    }
+
+    /**
+     * @return bool
+     */
+    protected abstract function authorize();
+
+    protected function notFound($msg = null)
+    {
+        $msg = is_null($msg) ? "object wasn't found!." : $msg;
+        // return a 404
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(404);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode($msg));
+
+        return $response;
+    }
+
+    protected function ok(array $res = null)
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(200);
+        $response->addHeader('Content-Type', 'application/json');
+        if (is_null($res)) {
+            $res = array();
+        }
+        $response->setBody(json_encode($res));
 
         //conditional get Request (etags)
         $request = Controller::curr()->getRequest();
-        if($request->isGET()) {
+        if ($request->isGET()) {
             $etag = md5($response->getBody());
             $requestETag = $request->getHeader('If-None-Match');
             if (!empty($requestETag) && $requestETag == $etag) {
                 $response->setStatusCode(304);
-                foreach (array('Allow', 'Content-Encoding', 'Content-Language', 'Content-Length', 'Content-MD5', 'Content-Type', 'Last-Modified') as $header) {
+                foreach (array(
+                             'Allow',
+                             'Content-Encoding',
+                             'Content-Language',
+                             'Content-Length',
+                             'Content-MD5',
+                             'Content-Type',
+                             'Last-Modified'
+                         ) as $header) {
                     $response->removeHeader($header);
                 }
                 $response->setBody(null);
-            } else
+            } else {
                 $response->addHeader('ETag', $etag);
+            }
         }
 
-		return $response;
-	}
+        return $response;
+    }
 
-	protected function deleted(){
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(204);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody('');
-		return $response;
-	}
-
-	protected function updated(){
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(204);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody('');
-		return $response;
-	}
-
-    protected function published(){
+    protected function deleted()
+    {
         $response = new SS_HTTPResponse();
         $response->setStatusCode(204);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody('');
+
         return $response;
     }
 
-	public function serverError(){
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(500);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody(json_encode("Server Error"));
-		return $response;
-	}
+    protected function updated()
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(204);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody('');
 
-    public function forbiddenError(){
+        return $response;
+    }
+
+    protected function published()
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(204);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody('');
+
+        return $response;
+    }
+
+    public function serverError()
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(500);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode("Server Error"));
+
+        return $response;
+    }
+
+    public function forbiddenError()
+    {
         $response = new SS_HTTPResponse();
         $response->setStatusCode(403);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody(json_encode("Security Error"));
+
         return $response;
     }
 
-	public function validationError($messages){
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(412);
-		$response->addHeader('Content-Type', 'application/json');
-		if(!is_array($messages))
-			$messages = array(array('message'=> $messages));
-		$response->setBody(json_encode(
-			array('error' => 'validation','messages' => $messages)
-		));
-		return $response;
-	}
+    public function validationError($messages)
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(412);
+        $response->addHeader('Content-Type', 'application/json');
+        if (!is_array($messages)) {
+            $messages = array(array('message' => $messages));
+        }
+        $response->setBody(json_encode(
+            array('error' => 'validation', 'messages' => $messages)
+        ));
 
-	protected function created($id){
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(201);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody(json_encode($id));
-		return $response;
-	}
+        return $response;
+    }
+
+    protected function created($id)
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(201);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode($id));
+
+        return $response;
+    }
 
 
-	protected function methodNotAllowed() {
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(405);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody(json_encode("Method Not Allowed"));
-		return $response;
-	}
+    protected function methodNotAllowed()
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(405);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode("Method Not Allowed"));
 
-	public function permissionFailure() {
-		// return a 401
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(401);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody(json_encode("You don't have access to this item through the API."));
-		return $response;
-	}
+        return $response;
+    }
 
-	protected function addingDuplicate($msg) {
-		// return a 401
-		$response = new SS_HTTPResponse();
-		$response->setStatusCode(409);
-		$response->addHeader('Content-Type', 'application/json');
-		$response->setBody(json_encode($msg));
-		return $response;
-	}
+    public function permissionFailure()
+    {
+        // return a 401
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(401);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode("You don't have access to this item through the API."));
 
-	public function shutdown_function() {
-		if($this->isApiCall()){
-			$error = error_get_last();
-			if($error['type']==1){
-				ob_end_clean();
-				header('HTTP/1.1 500 Internal Server Error');
-				// Send out the error details to the logger for writing
-				SS_Log::log(
-					array(
-						'errno' => $error['type'],
-						'errstr' => $error['message'],
-						'errfile' => $error['file'],
-						'errline' => $error['line'],
-						'errcontext' => ''
-					),
-					SS_Log::ERR
-				);
-			}
-		}
-	}
+        return $response;
+    }
+
+    protected function addingDuplicate($msg)
+    {
+        // return a 401
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(409);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode($msg));
+
+        return $response;
+    }
+
+    public function shutdown_function()
+    {
+        if ($this->isApiCall()) {
+            $error = error_get_last();
+            if ($error['type'] == 1) {
+                ob_end_clean();
+                header('HTTP/1.1 500 Internal Server Error');
+                // Send out the error details to the logger for writing
+                SS_Log::log(
+                    array(
+                        'errno' => $error['type'],
+                        'errstr' => $error['message'],
+                        'errfile' => $error['file'],
+                        'errline' => $error['line'],
+                        'errcontext' => ''
+                    ),
+                    SS_Log::ERR
+                );
+            }
+        }
+    }
+
+
+    public function checkOwnAjaxRequest($request){
+        $referer = @$_SERVER['HTTP_REFERER'];
+        if(empty($referer)) return false;
+        //validate
+        if (!Director::is_ajax()) return false;
+        return Director::is_site_url($referer);
+    }
 }

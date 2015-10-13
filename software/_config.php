@@ -12,4 +12,4 @@
  * limitations under the License.
  **/
 
-define('MAX_ALLOWED_MATURITY_POINTS', 6);
+define('MAX_ALLOWED_MATURITY_POINTS', 5);
