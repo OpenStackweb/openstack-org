@@ -25,7 +25,7 @@
                     <th class="vendor">Vendor</th>
                     <th class="driver">Driver</th>
                     <th class="ships">Ships with OpenStack</th>
-                    <th class="tested">Tested</th>
+                    <%-- <th class="tested">Tested</th> --%>
                 </tr>
                 <% loop DriverTable() %>
                 <tr>
@@ -42,12 +42,14 @@
                           <% end_loop %>
                         <% end_if %>
                     </td>
+                    <%--
                     <td class="tested-listing" style="width:90px">
                     <% if $Tested %>
                         <i class="fa fa-check-square"></i>
                         <div class="tested-listing-title">Tested</div>
                     <% end_if %>
                     </td>
+                    --%>
                 </tr>
                 <% end_loop %>
             </tbody>
