@@ -100,12 +100,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="table-responsive project-tags-table table-hover">
-                            <table class="table">
+                            <table class="table maturity-table">
                                 <thead>
                                 <tr>
                                     <th>Maturity Indicators</th>
                                     <th></th>
                                     <th>Tag Details</th>
+                                    <th>Meets Maturity<br>Requirements?</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -117,9 +118,9 @@
                                         <ul>
                                             <li <% if $Component.HasInstallationGuide %>class="on"<% end_if %>>
                                                 <% if $Component.HasInstallationGuide %>
-                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-circle"></i><span>Yes</span>
                                                 <% else %>
-                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                    <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
                                             </li>
                                         </ul>
@@ -131,6 +132,11 @@
                                             &nbsp;
                                         <% end_if %>
                                     </td>
+                                    <td>
+                                        <ul>
+                                            <li class="on">Yes</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Number of software development kits (SDKs) which support this project.
@@ -139,11 +145,16 @@
                                     <td>
                                         <ul>
                                             <li <% if $Component.SDKSupport %>class="on"<% end_if %>>
-                                                <i class="fa fa-check-circle"></i><span>{$Component.SDKSupport}</span>
+                                                <i class="fa fa-circle"></i><span>{$Component.SDKSupport}</span>
                                             </li>
                                         </ul>
                                     </td>
                                     <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Details</a></td>
+                                    <td>
+                                        <ul>
+                                            <li class="on">Yes</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -154,12 +165,17 @@
                                         <ul>
                                             <li class="on">
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
-                                                    <i class="fa fa-check-circle"></i><span> {$Component.Adoption}%</span>
+                                                    <i class="fa fa-circle"></i><span> {$Component.Adoption}%</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </td>
                                     <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Details</a></td>
+                                    <td>
+                                        <ul>
+                                            <li>No</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -170,14 +186,19 @@
                                         <ul>
                                             <li <% if $Component.HasTeamDiversity %>class="on" <% end_if %>>
                                                 <% if $Component.HasTeamDiversity %>
-                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-circle"></i><span>Yes</span>
                                                 <% else %>
-                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                    <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
                                     <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Details</a></td>
+                                    <td>
+                                        <ul>
+                                            <li class="on">Yes</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Has this project stable branches?
@@ -187,14 +208,19 @@
                                         <ul>
                                             <li <% if $Component.HasStableBranches %>class="on"<% end_if %>>
                                                 <% if $Component.HasStableBranches %>
-                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-circle"></i><span>Yes</span>
                                                 <% else %>
-                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                    <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
                                     <td><a href="http://governance.openstack.org/reference/tags/release_has-stable-branches.html">View Details</a></td>
+                                    <td>
+                                        <ul>
+                                            <li>No</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -222,16 +248,16 @@
                                         <ul>
                                             <li <% if $Component.ReleaseMileStones %>class="on"<% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
-                                                    <i class="fa <% if $Component.ReleaseMileStones %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with milestones</span></a>
+                                                    <i class="fa <% if $Component.ReleaseMileStones %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Cycle with milestones</span></a>
                                             </li>
                                             <li <% if $Component.ReleaseCycleWithIntermediary %>class="on" <% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html">
-                                                    <i class="fa <% if $Component.ReleaseCycleWithIntermediary %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Cycle with intermediary</span>
+                                                    <i class="fa <% if $Component.ReleaseCycleWithIntermediary %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Cycle with intermediary</span>
                                                 </a>
                                             </li>
                                             <li <% if $Component.ReleaseIndependent %>class="on" <% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_independent.html">
-                                                    <i class="fa <% if $Component.ReleaseIndependent %>fa-check-circle<% else %>fa-times-circle<% end_if %>"></i><span>Independent</span></a>
+                                                    <i class="fa <% if $Component.ReleaseIndependent %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Independent</span></a>
                                             </li>
                                         </ul>
                                     </td>
@@ -246,16 +272,16 @@
                                     <td>
                                         <ul>
                                             <li class="on">
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-check-circle"></i><span>Good</span></a>
+                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle"></i><span>Good</span></a>
                                             </li>
                                             <li>
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-times-circle"></i><span>No</span></a>
+                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle-o"></i><span>No</span></a>
                                             </li>
                                             <li>
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-times-circle"></i><span>Warning</span></a>
+                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle-o"></i><span>Warning</span></a>
                                             </li>
                                             <li>
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-times-circle"></i><span>Beginning</span></a>
+                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle-o"></i><span>Beginning</span></a>
                                             </li>
                                         </ul>
                                     </td>
@@ -270,9 +296,9 @@
                                         <ul>
                                             <li <% if $Component.VulnerabilityManaged %>class="on" <% end_if %>>
                                                 <% if $Component.VulnerabilityManaged %>
-                                                    <i class="fa fa-check-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-circle"></i><span>Yes</span>
                                                 <% else %>
-                                                    <i class="fa fa-times-circle"></i><span>No</span>
+                                                    <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
                                             </li>
                                         </ul>

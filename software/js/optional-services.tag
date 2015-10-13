@@ -14,9 +14,9 @@
         <tr>
             <th>Name</th>
             <th>Service</th>
-            <th>Adoption <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
-            <th>Age <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
             <th>Maturity <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
+            <th>Age <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
+            <th>Adoption <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
             <th>Details</th>
         </tr>
     </thead>
@@ -24,9 +24,9 @@
         <tr each="{ components }">
         <td>{ code_name }</td>
         <td>{ name }</td>
-        <td><div class="service-stat-pill { adoption >= 0  && adoption <= 50 ? 'red': (adoption >= 50  && adoption <= 75 ? 'orange' : 'green') }">{ adoption } %</div></td>
-        <td><div class="service-stat-pill { age >= 0  && age <= 1 ? 'red': (age > 1  && age <= 2 ? 'orange' : 'green') }">{ age } Yrs</div></td>
         <td><div class="service-stat-pill { maturity_points >= 0  && maturity_points <= 1 ? 'red': (maturity_points > 1  && maturity_points <= 3 ? 'orange' : 'green') }">{ maturity_points } <span>of</span> { this.max_maturity_points }</div></td>
+        <td><div>{ age } Yrs</div></td>
+        <td><div>{ adoption } %</div></td>
         <td><a href="#" onclick={ optionalServiceDetails }>More Details</a></td>
         </tr>
     </tbody>
