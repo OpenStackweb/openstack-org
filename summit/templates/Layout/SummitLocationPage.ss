@@ -59,25 +59,6 @@
         </ul>
     </div>
 </div>
-<% with $Venue %>
-    <div id="venue">
-        <div class="venue-row" style="background: rgba(0, 0, 0, 0) url('{$Top.VenueBackgroundImageUrl}') no-repeat scroll left top / cover ;">
-            <div class="container">
-                <h1>$Top.VenueTitleText</h1>
-                <p>
-                    <strong>$Name</strong>
-                    $Address
-                </p>
-                <p>
-                    <a href="/summit/tokyo-2015/campus-maps" class="outline-btn venue-maps-btn">View Maps of the Summit Campus</a>
-                </p>
-            </div>
-            <a href="{$Top.VenueBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$Top.VenueBackgroundImageHero}" target="_blank">
-                <i class="fa fa-info-circle"></i>
-            </a>
-        </div>
-    </div>
-<% end_with %>
 <div class="white hotels-row" id="hotels">
 
 <% if $CampusGraphic %>
@@ -100,165 +81,185 @@
 <% end_if %>
 
 
-<div class="container">
-    <% if AlternateHotels %>
-        <div class="row">
-            <div class="col-sm-8 col-sm-push-2">
-                <h5 class="section-title">Hotels</h5>
-                <p style="margin-bottom:30px;">
-                    <i class="fa fa-hotel fa-4x"></i>
-                </p>
-                <div class="alert alert-danger" role="alert">
-                    <p class="center">
-                        All of the discounted Summit hotel room blocks are now sold out. Here are some other hotels where you may reserve a room near the Summit venue. Note that OpenStack does NOT have a contracted room block at any of these hotels.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-10 col-sm-push-1">
-                <table class="table">
-                    <tr>
-                        <td><strong>Hotel</strong></td>
-                        <td><strong>Distance</strong></td>
-                        <td><strong>Train Line to Shinagawa Station</strong></td>
-                    </tr>
-                    <% loop AlternateHotels %>
-                        <tr>
-                            <% if $BookingLink %>
-                                <td><a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site">$Name</a></td>
-                            <% else %>
-                                <td><a href="{$Website}" target="_blank">$Name</a></td>
-                            <% end_if %>
-                            <td>{$DistanceFromVenue}</td>
-                            <td>{$PublicTransitInstructions}</td>
-                        </tr>
-                    <% end_loop %>
-                </table>
-            </div>
-        </div>
-    <% end_if %>
-<!--     <div class="row">
-        <div class="col-lg-8 col-lg-push-2">
-            <h5 class="section-title">Official Summit Hotels</h5>
-            <% if not $Top.AlternateHotels %>
-                <p style="margin-bottom:30px;">
-                    <i class="fa fa-hotel fa-4x"></i>
-                </p>
-            <% end_if %>
-            $LocationsTextHeader
-        </div>
-    </div> -->
-    <% loop Hotels %>
-        <% if $First() %>
-        <div class="row">
-        <% end_if %>
-        <div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
-            <h3>{$Pos}. $Name</h3>
-            <p>
-                $Address
-            </p>
-
-            <% if $LocationMessage %>
-                <p class="summit-location-message">
-                    $LocationMessage
-                </p>
-            <% end_if %>
-
-            <p<% if $IsSoldOut %> class="sold-out-hotel" <% end_if%>>
-                <% if $IsSoldOut %>
-                    SOLD OUT
-                <% else %> 
-
-                    <% if not $Top.CampusGraphic %>
-                        <a href="$Top.Link#map-canvas" class="marker-link"  data-location-id="{$ID}"  alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
-                    <% end_if %>
-
-                    <% if $DetailsPage %>
-                        <a href="{$Top.Link}details/$ID" alt="Visit Bookings Site"><i class="fa fa-home"></i>
-                            Booking Info</a>
-                    <% else_if $BookingLink %>
-                        <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i>
-                            Bookings</a>
-                    <% else %>
-                        <a href="#" data-toggle="modal" data-target="#Hotel{$ID}"><i class="fa fa-home"></i> Website</a>
-                    <% end_if %>
-                <% end_if %>
-            </p>
-        </div>
-        <% if Last() %>
-        </div>
-        <% else_if $MultipleOf(3) %>
-        </div>
-        <div class="row">
-        <% end_if %>
-
-
-    <% end_loop %>
-<!--     <div class="row">
-        <div class="col-sm-10 col-sm-push-1">
-            <h5 class="section-title">More Hotel Details</h5>
-            <div class="more-hotel-details">
-                <p>
-                    <i class="fa fa-users fa-2x"></i>
-                </p>
-                <p>
-                    Booking for 10 or more rooms for the Summit?
-                </p>
-                <p>
-                    Contact <a href="mailto:sarah@fntech.com">sarah@fntech.com</a>
-                </p>
-            </div>
-        </div>
-    </div> -->
-    <% if $Airports %>
-        <% if $AirportsTitle %>
+    <div class="container">
+        <% if AlternateHotels %>
             <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">$AirportsTitle</h5>
-                    <p>
-                        $AirportsSubTitle
+                <div class="col-sm-8 col-sm-push-2">
+                    <h5 class="section-title">Hotels</h5>
+                    <p style="margin-bottom:30px;">
+                        <i class="fa fa-hotel fa-4x"></i>
                     </p>
+                    <div class="alert alert-danger" role="alert">
+                        <p class="center">
+                            All of the discounted Summit hotel room blocks are now sold out. Here are some other hotels where you may reserve a room near the Summit venue. Note that OpenStack does NOT have a contracted room block at any of these hotels.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 col-sm-push-1">
+                    <table class="table">
+                        <tr>
+                            <td><strong>Hotel</strong></td>
+                            <td><strong>Distance</strong></td>
+                            <td><strong>Train Line to Shinagawa Station</strong></td>
+                        </tr>
+                        <% loop AlternateHotels %>
+                            <tr>
+                                <% if $BookingLink %>
+                                    <td><a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site">$Name</a></td>
+                                <% else %>
+                                    <td><a href="{$Website}" target="_blank">$Name</a></td>
+                                <% end_if %>
+                                <td>{$DistanceFromVenue}</td>
+                                <td>{$PublicTransitInstructions}</td>
+                            </tr>
+                        <% end_loop %>
+                    </table>
                 </div>
             </div>
         <% end_if %>
+    <!--     <div class="row">
+            <div class="col-lg-8 col-lg-push-2">
+                <h5 class="section-title">Official Summit Hotels</h5>
+                <% if not $Top.AlternateHotels %>
+                    <p style="margin-bottom:30px;">
+                        <i class="fa fa-hotel fa-4x"></i>
+                    </p>
+                <% end_if %>
+                $LocationsTextHeader
+            </div>
+        </div> -->
+        <% loop Hotels %>
+            <% if $First() %>
+            <div class="row">
+            <% end_if %>
+            <div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
+                <h3>{$Pos}. $Name</h3>
+                <p>
+                    $Address
+                </p>
+
+                <% if $LocationMessage %>
+                    <p class="summit-location-message">
+                        $LocationMessage
+                    </p>
+                <% end_if %>
+
+                <p<% if $IsSoldOut %> class="sold-out-hotel" <% end_if%>>
+                    <% if $IsSoldOut %>
+                        SOLD OUT
+                    <% else %> 
+
+                        <% if not $Top.CampusGraphic %>
+                            <a href="$Top.Link#map-canvas" class="marker-link"  data-location-id="{$ID}"  alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
+                        <% end_if %>
+
+                        <% if $DetailsPage %>
+                            <a href="{$Top.Link}details/$ID" alt="Visit Bookings Site"><i class="fa fa-home"></i>
+                                Booking Info</a>
+                        <% else_if $BookingLink %>
+                            <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i>
+                                Bookings</a>
+                        <% else %>
+                            <a href="#" data-toggle="modal" data-target="#Hotel{$ID}"><i class="fa fa-home"></i> Website</a>
+                        <% end_if %>
+                    <% end_if %>
+                </p>
+            </div>
+            <% if Last() %>
+            </div>
+            <% else_if $MultipleOf(3) %>
+            </div>
+            <div class="row">
+            <% end_if %>
+
+
+        <% end_loop %>
+    <!--     <div class="row">
+            <div class="col-sm-10 col-sm-push-1">
+                <h5 class="section-title">More Hotel Details</h5>
+                <div class="more-hotel-details">
+                    <p>
+                        <i class="fa fa-users fa-2x"></i>
+                    </p>
+                    <p>
+                        Booking for 10 or more rooms for the Summit?
+                    </p>
+                    <p>
+                        Contact <a href="mailto:sarah@fntech.com">sarah@fntech.com</a>
+                    </p>
+                </div>
+            </div>
+        </div> -->
+        <% if $Airports %>
+            <% if $AirportsTitle %>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-push-2">
+                        <h5 class="section-title">$AirportsTitle</h5>
+                        <p>
+                            $AirportsSubTitle
+                        </p>
+                    </div>
+                </div>
+            <% end_if %>
+            <div class="row">
+
+                    <div class="col-sm-4 col-sm-push-2 hotel-block">
+                        <h3>Haneda Airport</h3>
+                        <p>
+                            Hanedakuko<br>
+                            Ota, Tokyo 144-0041, Japan
+                        </p>
+                        <p>
+                            <a href="#" data-toggle="modal" data-target="#videoHanedaModal"><i class="fa fa-youtube-play"></i> Watch video directions to Summit venue</a>
+                            <a href="#" data-toggle="modal" data-target="#downloadHanedaModal"><i class="fa fa-map"></i> Download directions to Summit venue</a>
+                        </p>
+                    </div>
+                    <div class="col-sm-4 col-sm-push-2 hotel-block">
+                        <h3>Narita International Airport</h3>
+                        <p>
+                            1-1 Furugome, Narita-shi<br>
+                            Chiba-ken 282-0004, Japan
+                        </p>
+                        <p>
+                            <a href="#" data-toggle="modal" data-target="#videoNaritaModal"><i class="fa fa-youtube-play"></i> Watch video directions to Summit venue</a>
+                            <a href="#" data-toggle="modal" data-target="#downloadNaritaModal"><i class="fa fa-map"></i> Download directions to Summit venue</a>
+                        </p>
+                    </div>
+
+        </div>
+        <% end_if %>
+        <% if OtherLocations  %>
         <div class="row">
-
-                <div class="col-sm-4 col-sm-push-2 hotel-block">
-                    <h3>Haneda Airport</h3>
-                    <p>
-                        Hanedakuko<br>
-                        Ota, Tokyo 144-0041, Japan
-                    </p>
-                    <p>
-                        <a href="#" data-toggle="modal" data-target="#videoHanedaModal"><i class="fa fa-youtube-play"></i> Watch video directions to Summit venue</a>
-                        <a href="#" data-toggle="modal" data-target="#downloadHanedaModal"><i class="fa fa-map"></i> Download directions to Summit venue</a>
-                    </p>
-                </div>
-                <div class="col-sm-4 col-sm-push-2 hotel-block">
-                    <h3>Narita International Airport</h3>
-                    <p>
-                        1-1 Furugome, Narita-shi<br>
-                        Chiba-ken 282-0004, Japan
-                    </p>
-                    <p>
-                        <a href="#" data-toggle="modal" data-target="#videoNaritaModal"><i class="fa fa-youtube-play"></i> Watch video directions to Summit venue</a>
-                        <a href="#" data-toggle="modal" data-target="#downloadNaritaModal"><i class="fa fa-map"></i> Download directions to Summit venue</a>
-                    </p>
-                </div>
-
+            <div class="col-lg-8 col-lg-push-2 other-hotel-options">
+                <h5 class="section-title">House Sharing</h5>
+                $OtherLocations
+            </div>
+        </div>
+        <% end_if %>
     </div>
-    <% end_if %>
-    <% if OtherLocations  %>
-    <div class="row">
-        <div class="col-lg-8 col-lg-push-2 other-hotel-options">
-            <h5 class="section-title">House Sharing</h5>
-            $OtherLocations
+</div>
+<% with $Venue %>
+    <div id="venue">
+        <div class="venue-row" style="background: rgba(0, 0, 0, 0) url('{$Top.VenueBackgroundImageUrl}') no-repeat scroll left top / cover ;">
+            <div class="container">
+                <h1>$Top.VenueTitleText</h1>
+                <p>
+                    <strong>$Name</strong>
+                    $Address
+                </p>
+                <p>
+                    <a href="/summit/tokyo-2015/campus-maps" class="outline-btn venue-maps-btn">View Maps of the Summit Campus</a>
+                </p>
+            </div>
+            <a href="{$Top.VenueBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$Top.VenueBackgroundImageHero}" target="_blank">
+                <i class="fa fa-info-circle"></i>
+            </a>
         </div>
     </div>
-    <% end_if %>
-</div>
-</div>
+<% end_with %>
+
 <% if GettingAround  %>
 <div class="blue" id="getting-around">
     <div class="container">
