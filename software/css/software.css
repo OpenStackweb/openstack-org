@@ -689,8 +689,6 @@ p.service-section-title {
     padding-bottom: 13px; }
 .optional-services-table table tbody tr td:first-child, .project-tags-table table tbody tr td:first-child {
     font-weight: 600; }
-.optional-services-table table tbody tr td:last-child a, .project-tags-table table tbody tr td:last-child a {
-    text-decoration: underline; }
 .optional-services-table table tbody tr td .service-stat-pill, .project-tags-table table tbody tr td .service-stat-pill {
     border-radius: 30px;
     padding: 1px;
@@ -711,13 +709,13 @@ p.service-section-title {
     margin-left: 5px;
     color: #ccc; }
 .project-tags-table tr td:first-child {
-    max-width: 500px; }
+    max-width: 400px; }
 .project-tags-table tr td:first-child .popover-content {
     font-weight: 400; }
 .project-tags-table tr td:first-child a {
     text-decoration: underline; }
-.project-tags-table tr tdtd:nth-child(n+2), .project-tags-table tr td td:last-child {
-    min-width: 200px; }
+.project-tags-table tr td:nth-child(n+2), .project-tags-table tr td:last-child {
+    max-width: 200px; }
 .project-tags-table tr td ul {
     margin: 0;
     padding: 0; }
@@ -745,8 +743,11 @@ p.service-section-title {
 @media (max-width: 767px) {
     .project-tags-table tr td:first-child {
         max-width: none; }
-    .project-tags-table tr tdtd:nth-child(n+2), .project-tags-table tr td td:last-child {
+    .project-tags-table tr td:nth-child(n+2), .project-tags-table tr td:last-child {
         min-width: none; } }
+.project-tags-table table.maturity-table {
+    margin-bottom: 50px;
+}
 
 .outer-all-projects-subnav {
     margin-top: -56px;
