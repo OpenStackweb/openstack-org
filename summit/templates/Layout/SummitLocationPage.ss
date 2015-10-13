@@ -13,15 +13,15 @@
     <div class="container">
         <ul class="city-nav-list">
             <li>
-                <a href="/summit/tokyo-2015/tokyo-and-travel/#venue">
-                    <i class="fa fa-map-marker"></i>
-                    Venue
-                </a>
-            </li>
-            <li>
                 <a href="/summit/tokyo-2015/tokyo-and-travel/#hotels">
                     <i class="fa fa-plane"></i>
                     Airport Directions
+                </a>
+            </li>
+            <li>
+                <a href="/summit/tokyo-2015/tokyo-and-travel/#venue">
+                    <i class="fa fa-map-marker"></i>
+                    Venue
                 </a>
             </li>
             <% if GettingAround  %>
