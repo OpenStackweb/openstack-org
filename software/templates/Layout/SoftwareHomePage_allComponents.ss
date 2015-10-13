@@ -39,7 +39,7 @@
                 <openstack-components-free-search></openstack-components-free-search>
                 <openstack-releases-ddl releases="{ releases }"></openstack-releases-ddl>
                 <div class="col-xs-1 all-projects-filter-link">
-                    <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-projects-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
+                    <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-projects-filters" class="fa fa-filter active" data-original-title="Toggle Advanced Filters"></i>
                 </div>
             </form>
         </div>
