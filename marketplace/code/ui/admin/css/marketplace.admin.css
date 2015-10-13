@@ -9,20 +9,32 @@
 }
 
 label.error{
-    position: absolute;
-    display: block;
-    margin-top: 10px;
-    padding: 5px;
-    z-index: 1000;
+    margin-top: 10px !important;
+    padding: 5px !important;
+    z-index: 1000 !important;
 }
 
 select.error{
-    padding: 0;
+    padding: 0 !important;
+}
+
+label.error{
+    color: red !important;
+    font-style: italic !important;
 }
 
 input.error{
-    border: 1px solid #8A1F11;
+    border: solid 1px red !important;
 }
+
+textarea.error{
+    border: solid 1px red !important;
+}
+
+select.error{
+    border: solid 1px red !important;
+}
+
 
 .profile-tabs a {
     display: inline-block;
