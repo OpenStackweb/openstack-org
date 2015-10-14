@@ -49,11 +49,18 @@ class OpenStackSampleConfigAdminUI extends DataExtension
         if($this->owner->ID > 0) {
 
             $components_config = new GridFieldConfig_RelationEditor(100);
-            $components = new GridField("OpenStackComponents", "Supported Release Components",
-                $this->owner->OpenStackComponents(), $components_config);
+            $components        = new GridField
+            (
+                "OpenStackComponents",
+                "Supported Release Components",
+                $this->owner->OpenStackComponents(),
+                $components_config
+            );
+
             $components_config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->getAllowedComponents());
             $components_config->removeComponentsByType('GridFieldAddNewButton');
             //$components_config->addComponent(new GridFieldSortableRows('OpenStackSampleConfig_OpenStackComponents.Order'));
+
             $fields->push($components);
 
             $fields->push($ddl = new DropdownField(

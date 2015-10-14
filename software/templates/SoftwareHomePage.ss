@@ -30,6 +30,13 @@
     <% include Navigation %>
     <!-- Page Content -->
     $Message
+    <div class="container software">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Software</h1>
+            </div>
+        </div>
+    </div>
     $Layout
     <% include Footer %>
     <% include Quantcast %>

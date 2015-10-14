@@ -18,17 +18,30 @@ class OpenStackSampleConfigurationType extends DataObject
     private static $summary_fields = array
     (
         'Type',
+        'IsDefault'
     );
 
     private static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
     private static $db = array
     (
-        'Type' => 'Text',
+        'Type'      => 'Text',
+        'Order'     => 'Int',
+        'IsDefault' => 'Boolean',
     );
 
     private static $has_one = array
     (
         'Release' => 'OpenStackRelease',
     );
+
+    private static $has_many = array
+    (
+        'SampleConfigurations' => 'OpenStackSampleConfig'
+    );
+
+    public function getDefaultSampleConfiguration()
+    {
+        return $this->SampleConfigurations()->filter('isDefault', true)->first();
+    }
 }
