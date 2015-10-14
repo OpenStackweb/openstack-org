@@ -68,7 +68,8 @@ class OpenStackRelease
 
     static $has_many = array
     (
-        'SupportedApiVersions' => 'OpenStackReleaseSupportedApiVersion'
+        'SupportedApiVersions'     => 'OpenStackReleaseSupportedApiVersion',
+        'SampleConfigurationTypes' => 'OpenStackSampleConfigurationType'
     );
 
     /**

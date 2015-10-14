@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,11 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+class OpenStackSampleConfigurationType extends DataObject
+{
 
-define('MAX_ALLOWED_MATURITY_POINTS', 5);
+    private static $summary_fields = array
+    (
+        'Type',
+    );
 
-Object::add_extension('OpenStackComponent', 'OpenStackComponentAdminUI');
-Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
-Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');
-Object::add_extension('OpenStackReleaseSupportedApiVersion', 'OpenStackReleaseSupportedApiVersionAdminUI');
-Object::add_extension('OpenStackSampleConfig', 'OpenStackSampleConfigAdminUI');
+    private static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+
+    private static $db = array
+    (
+        'Type' => 'Text',
+    );
+
+    private static $has_one = array
+    (
+        'Release' => 'OpenStackRelease',
+    );
+}
