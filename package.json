@@ -18,7 +18,8 @@
     "riotgear-modal": "^1.1.3",
     "riotgear-toast": "^1.1.0",
     "mousetrap": "*",
-    "sortablejs": "*"
+    "sortablejs": "*",
+    "xhr2" : "*"
   },
   "license": "Apache-2.0"
 }
