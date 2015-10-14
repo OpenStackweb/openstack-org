@@ -41,10 +41,11 @@ class OpenStackRelease
     );
 
 
-    static $indexes = array(
-        'Name' => array('type' => 'unique', 'value' => 'Name'),
+    static $indexes = array
+    (
+        'Name'          => array('type' => 'unique', 'value' => 'Name'),
         'ReleaseNumber' => array('type' => 'unique', 'value' => 'ReleaseNumber'),
-        'ReleaseDate' => array('type' => 'unique', 'value' => 'ReleaseDate'),
+        'ReleaseDate'   => array('type' => 'unique', 'value' => 'ReleaseDate'),
     );
 
     static $many_many = array
@@ -373,5 +374,10 @@ class OpenStackRelease
         if(empty($res))
             $res = $api->ApiVersion()->Version;
         return $res;
+    }
+
+    public function getDefaultSampleConfigurationType()
+    {
+        return $this->SampleConfigurationTypes()->filter('IsDefault', true)->first();
     }
 }

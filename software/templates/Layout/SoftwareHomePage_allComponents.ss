@@ -3,34 +3,7 @@
     var releases   = $getReleases;
     components.max_maturity_points = $Top.getMaxAllowedMaturityPoints;
 </script>
-<div class="container software">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Software</h1>
-        </div>
-    </div>
-</div>
-<!-- Projects Tabs -->
-<div class="software-tab-wrapper">
-    <div class="container">
-        <ul class="nav nav-tabs project-tabs">
-            <li class=""><a href="$Top.Link">Overview</a></li>
-            <li class="active"><a href="$Top.Link(all-projects)">All Projects</a></li>
-        </ul>
-    </div>
-</div>
-<div class="software-tab-dropdown">
-    <div class="dropdown">
-        <button aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="dropdownMenu1" type="button" class="dropdown-toggle projects-dropdown-btn">
-            All Projects
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <ul class="dropdown-menu">
-            <li class=""><a href="$Top.Link">Overview</a></li>
-            <li class="active"><a href="$Top.Link(all-projects)">All Projects</a></li>
-        </ul>
-    </div>
-</div>
+<% include SoftwareHomePage_MainNavMenu Active=1 %>
 <div class="software-main-wrapper">
     <!-- Projects Subnav -->
     <div class="container">

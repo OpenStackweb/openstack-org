@@ -19,3 +19,4 @@ Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
 Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');
 Object::add_extension('OpenStackReleaseSupportedApiVersion', 'OpenStackReleaseSupportedApiVersionAdminUI');
 Object::add_extension('OpenStackSampleConfig', 'OpenStackSampleConfigAdminUI');
+Object::add_extension('OpenStackSampleConfigurationType', 'OpenStackSampleConfigurationTypeAdminUI');

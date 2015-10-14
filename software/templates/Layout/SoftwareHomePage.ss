@@ -1,32 +1,4 @@
-<!-- Software Tabs UI -->
-<div class="container software">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Software</h1>
-        </div>
-    </div>
-</div>
-<!-- Projects Tabs -->
-<div class="software-tab-wrapper">
-    <div class="container">
-        <ul class="nav nav-tabs project-tabs">
-            <li class="active"><a href="$Top.Link">Overview</a></li>
-            <li class=""><a href="$Top.Link(all-projects)">All Projects</a></li>
-        </ul>
-    </div>
-</div>
-<div class="software-tab-dropdown">
-    <div class="dropdown">
-        <button class="dropdown-toggle projects-dropdown-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Overview
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <ul class="dropdown-menu">
-            <li class="active"><a href="$Top.Link">Overview</a></li>
-            <li class=""><a href="$Top.Link(all-projects)">All Projects</a></li>
-        </ul>
-    </div>
-</div>
+<% include SoftwareHomePage_MainNavMenu Active=0 %>
 <div class="software-main-wrapper">
     <!-- Projects Subnav -->
      <div class="container">

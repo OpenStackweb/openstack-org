@@ -82,11 +82,11 @@ final class OpenStackReleaseAdminUI extends DataExtension
                 $fields->push($supported_versions);
             }
 
-            $config = new GridFieldConfig_RecordEditor(100);
+            $config       = new GridFieldConfig_RecordEditor(100);
             $config_types = new GridField("SampleConfigurationTypes", "Sample Configuration Types",
                 $this->owner->SampleConfigurationTypes(),
                 $config);
-
+            $config->addComponent(new GridFieldSortableRows('Order'));
             $fields->push($config_types);
         }
 

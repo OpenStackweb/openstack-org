@@ -71,15 +71,16 @@ class SoftwareHomePage_Controller extends Page_Controller
         'allComponents',
         'getComponent',
         'getComponentsbyRelease',
+        'getSampleConfigurations',
     );
 
     static $url_handlers = array
     (
         'GET all-projects'                         => 'allComponents',
+        'GET sample-configs'                       => 'getSampleConfigurations',
         'GET releases/$RELEASE_ID/components/$ID!' => 'getComponent',
         'GET releases/$RELEASE_ID/components'      => 'getComponentsbyRelease',
     );
-
 
     public function init()
     {
@@ -285,8 +286,23 @@ class SoftwareHomePage_Controller extends Page_Controller
         );
     }
 
+    public function getSampleConfigurations()
+    {
+        $release = $this->getDefaultRelease();
+        if(is_null($release)) return 'Default Release not set!';
+        return $this->render
+        (
+            array
+            (
+                'Release' => $release,
+            )
+        );
+    }
+
+
     public function getMaxAllowedMaturityPoints()
     {
         return MAX_ALLOWED_MATURITY_POINTS;
     }
+
 }
