@@ -1,6 +1,8 @@
 .testimonial-row {
-  padding: 90px 0;
-  text-align: center; }
+  padding: 60px 0;
+  text-align: center; 
+  background: #edf2f7;
+}
 
 .testimonial-author-img {
   margin: 0 0 30px;
@@ -16,7 +18,7 @@
   position: relative; }
 
 .testimonial-row blockquote:before, .testimonial-row blockquote:after {
-  color: #edf2f7;
+  color: #D4DCE5;
   font-size: 5em;
   position: absolute;
   top: -30px; }
@@ -39,7 +41,16 @@
 
 .testimonial-attribute {
   font-family: Georgia, serif; }
-  
+.kilo-logo h1 {
+  margin: 0 auto 60px; 
+}
+img.icehouse-video {
+  border: 3px solid #edf2f7;
+  margin-top: 30px;
+}
+a.screenshots img {
+  margin-bottom: 10px;
+}
   
 .screenshotBoxes h3 {
     margin-bottom: 20px;
@@ -54,9 +65,12 @@
     margin-bottom: 30px;
     padding-right: 10px;
 }
-  
 .contributors-list ul {
     list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.contributors-list ul li {
     margin: 0px;
     padding: 0px;
 }
