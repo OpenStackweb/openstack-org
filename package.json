@@ -1,6 +1,10 @@
 {
   "name": "openstack-site-module",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/OpenStackweb/openstack-org.git"
+  },
   "dependencies": {
     "bower": "*",
     "riot": "2.2.2",
@@ -16,5 +20,5 @@
     "mousetrap": "*",
     "sortablejs": "*"
   },
-  "license": "Apache 2.0"
+  "license": "Apache-2.0"
 }
