@@ -43,7 +43,7 @@
                 </div>
             </form>
         </div>
-        <openstack-components-filters></openstack-components-filters>
+        <openstack-components-filters max_maturity_points="{ components.max_maturity_points }"></openstack-components-filters>
     </div>
     <div class="container inner-software">
         <!-- Begin Page Content -->
