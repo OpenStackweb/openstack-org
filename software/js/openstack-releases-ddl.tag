@@ -15,12 +15,10 @@
 
         releaseChanged(e) {
             self.release_id = e.target.value;
-            console.log(self.release_id);
             var adoption   = $("#all-projects-adoption").slider('getValue');
             var maturity   = $("#all-projects-maturity").slider('getValue');
             var age        = $("#all-projects-age").slider('getValue');
             var term       = $('#all-projects-search').val();
-
             self.api.load_components_by_release(self.release_id, term, adoption, maturity, age);
         }
 
