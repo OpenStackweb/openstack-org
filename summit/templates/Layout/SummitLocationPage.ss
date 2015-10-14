@@ -369,7 +369,7 @@
           </div>
           <div class="modal-body">
             <p class="download-text">
-                Watch this step-by-step video on what to expect when you arrive at Haneda and how to get to the Summit video.
+                Watch this step-by-step video on what to expect when you arrive at Haneda and how to get to the Summit venue.
             </p>
                 <iframe width="560" height="315" src="//www.youtube.com/embed/85464R-1Eq8?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
           </div>
@@ -413,7 +413,7 @@
           </div>
           <div class="modal-body">
             <p class="download-text">
-                Watch this step-by-step video on what to expect when you arrive at Narita and how to get to the Summit video.
+                Watch this step-by-step video on what to expect when you arrive at Narita and how to get to the Summit venue.
             </p>
                 <iframe width="560" height="315" src="//www.youtube.com/embed/_mlwE_Ha7Ws?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
           </div>
