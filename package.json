@@ -2,7 +2,19 @@
   "name": "openstack-site-module",
   "version": "1.0.0",
   "dependencies": {
-    "bower": "*"
+    "bower": "*",
+    "riot": "2.2.2",
+    "riotjs-loader": "*",
+    "riotcontrol": "*",
+    "tag-loader": "*",
+    "json-loader": "*",
+    "reqwest": "2.0.1",
+    "webpack": "*",
+    "riotgear-alert": "^1.1.0",
+    "riotgear-modal": "^1.1.3",
+    "riotgear-toast": "^1.1.0",
+    "mousetrap": "*",
+    "sortablejs": "*"
   },
   "license": "Apache 2.0"
 }
