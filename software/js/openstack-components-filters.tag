@@ -24,9 +24,10 @@
 
     <script>
 
-        this.api = opts.api;
-        var self = this;
-        var last_ajax_request = null;
+        this.api               = opts.api;
+        this.last_ajax_request = null;
+        var self               = this;
+
 
         this.on('mount', function(){
 
@@ -67,7 +68,7 @@
                 var txt      = $('#all-projects-search').val();
                 var release_id = $('#openstack_releases').val();
                 if(self.last_ajax_request != null )
-                self.last_ajax_request.abort();
+                    self.last_ajax_request.abort();
                 self.last_ajax_request = self.api.load_components_by_release(release_id, txt, adoption, maturity, age);
             });
 
@@ -87,7 +88,7 @@
                 var txt      = $('#all-projects-search').val();
                 var release_id = $('#openstack_releases').val();
                 if(self.last_ajax_request != null )
-                self.last_ajax_request.abort();
+                     self.last_ajax_request.abort();
                 self.last_ajax_request = self.api.load_components_by_release(release_id, txt, adoption, maturity, age);
             });
         });

@@ -7,13 +7,12 @@
 
     <script>
 
-    this.api              = opts.api;
-    var self              = this;
-    var last_ajax_request = null;
+    this.api               = opts.api;
+    this.last_ajax_request = null;
+    var self               = this;
 
     doFreeTextSearch(e) {
         var term = e.target.value;
-        console.log(term);
         var release_id = $('#openstack_releases').val();
         var adoption   = $("#all-projects-adoption").slider('getValue');
         var maturity   = $("#all-projects-maturity").slider('getValue');
