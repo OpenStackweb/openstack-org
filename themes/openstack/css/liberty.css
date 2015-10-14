@@ -40,6 +40,21 @@
 .testimonial-attribute {
   font-family: Georgia, serif; }
   
+  
+.screenshotBoxes h3 {
+    margin-bottom: 20px;
+}
+
+.screenshotBoxes img {
+    margin-bottom: 10px;
+    border: 2px solid #C4E0E9;
+}
+
+.screenshotBoxes p {
+    margin-bottom: 30px;
+    padding-right: 10px;
+}
+  
 .contributors-list ul {
     list-style: none;
     margin: 0px;
