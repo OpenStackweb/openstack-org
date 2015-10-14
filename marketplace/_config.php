@@ -32,10 +32,6 @@ Object::add_extension('Region', 'RegionAdminUI');
 Object::add_extension('ConfigurationManagementType', 'ConfigurationManagementTypeAdminUI');
 Object::add_extension('SupportChannelType', 'SupportChannelTypeAdminUI');
 Object::add_extension('MarketPlaceVideoType', 'MarketPlaceVideoTypeAdminUI');
-Object::add_extension('OpenStackComponent', 'OpenStackComponentAdminUI');
-Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
-Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');
-Object::add_extension('OpenStackReleaseSupportedApiVersion', 'OpenStackReleaseSupportedApiVersionAdminUI');
 Object::add_extension('MarketPlaceAllowedInstance', 'MarketPlaceAllowedInstanceAdminUI');
 
 //Sangria

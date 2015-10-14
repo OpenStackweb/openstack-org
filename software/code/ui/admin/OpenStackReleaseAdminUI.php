@@ -45,7 +45,8 @@ final class OpenStackReleaseAdminUI extends DataExtension
         ));
 
         //components
-        if ($this->owner->ID > 0) {
+        if ($this->owner->ID > 0)
+        {
             $components_config = new GridFieldConfig_RelationEditor(100);
 
             $components = new GridField("OpenStackComponents", "Supported Release Components",
@@ -80,6 +81,13 @@ final class OpenStackReleaseAdminUI extends DataExtension
 
                 $fields->push($supported_versions);
             }
+
+            $config = new GridFieldConfig_RecordEditor(100);
+            $config_types = new GridField("SampleConfigurationTypes", "Sample Configuration Types",
+                $this->owner->SampleConfigurationTypes(),
+                $config);
+
+            $fields->push($config_types);
         }
 
         return $fields;

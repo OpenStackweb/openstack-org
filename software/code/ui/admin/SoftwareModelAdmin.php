@@ -18,6 +18,7 @@ class SoftwareModelAdmin extends ModelAdmin
     (
         'OpenStackComponent',
         'OpenStackRelease',
+        'OpenStackSampleConfig',
     );
 
     public $showImportForm = false;
@@ -33,7 +34,7 @@ class SoftwareModelAdmin extends ModelAdmin
 
         $form = parent:: getEditForm($id, $fields);
 
-        if($this->modelClass === 'OpenStackComponent') {
+        if($this->modelClass === 'OpenStackComponent' || $this->modelClass === 'OpenStackSampleConfig') {
             $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
             $config = $gridField->getConfig();
             $config->addComponent(new GridFieldSortableRows('Order'));
