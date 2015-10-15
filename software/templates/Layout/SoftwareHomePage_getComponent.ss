@@ -19,7 +19,7 @@
                     <% end_if %>
                     <% if $Component.HasInstallationGuide %>
                     <p>
-                        <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html" target="_blank">View the install guide</a>
+                        <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/" target="_blank">View the install guide</a>
                     </p>
                     <% end_if %>
                     <p>
@@ -99,7 +99,7 @@
                                     </td>
                                     <td>
                                         <% if $Component.HasInstallationGuide %>
-                                            <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/install-guide/install/apt/content/ch_{$Component.Slug}.html">View Install Guide</a>
+                                            <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/">View Install Guide</a>
                                         <% else %>
                                             &nbsp;
                                         <% end_if %>
