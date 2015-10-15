@@ -48,45 +48,25 @@ final class OpenStackSampleConfig extends DataObject
 
     public function getOptionalComponents()
     {
-        $release_id = $this->ReleaseID;
-        $id         = $this->ID;
-$query = <<<SQL
-SELECT DISTINCT CASE WHEN OpenStackComponent.ClassName IN ('OpenStackSampleConfig_OpenStackComponents')
-THEN OpenStackSampleConfig_OpenStackComponents.`Order`
-WHEN OpenStackComponent.ClassName IN ('OpenStackComponent') THEN OpenStackComponent.`Order` ELSE NULL END AS `Order`,
-OpenStackComponent.ClassName, OpenStackComponent.Created,
-OpenStackComponent.LastEdited, OpenStackComponent.Name, OpenStackComponent.CodeName,
-OpenStackComponent.Description, OpenStackComponent.SupportsVersioning, OpenStackComponent.SupportsExtensions,
-OpenStackComponent.IsCoreService, OpenStackComponent.IconClass, OpenStackComponent.`Use`,
-OpenStackComponent.HasStableBranches, OpenStackComponent.WikiUrl, OpenStackComponent.TCApprovedRelease,
-OpenStackComponent.ReleaseMileStones, OpenStackComponent.ReleaseCycleWithIntermediary, OpenStackComponent.ReleaseIndependent,
-OpenStackComponent.HasTeamDiversity, OpenStackComponent.IncludedComputeStarterKit, OpenStackComponent.VulnerabilityManaged,
-OpenStackRelease_OpenStackComponents.Adoption,
-OpenStackRelease_OpenStackComponents.MaturityPoints,
-OpenStackRelease_OpenStackComponents.HasInstallationGuide,
-OpenStackRelease_OpenStackComponents.SDKSupport,
-OpenStackComponent.LatestReleasePTLID, OpenStackComponent.ID, CASE WHEN OpenStackComponent.ClassName IS NOT NULL
-THEN OpenStackComponent.ClassName ELSE 'OpenStackComponent' END AS RecordClassName FROM OpenStackComponent
-INNER JOIN OpenStackSampleConfig_OpenStackComponents ON OpenStackSampleConfig_OpenStackComponents.OpenStackComponentID = OpenStackComponent.ID
-INNER JOIN OpenStackRelease_OpenStackComponents ON OpenStackRelease_OpenStackComponents.OpenStackReleaseID = {$release_id}
-AND OpenStackRelease_OpenStackComponents.OpenStackComponentID = OpenStackSampleConfig_OpenStackComponents.OpenStackComponentID
-WHERE (OpenStackSampleConfig_OpenStackComponents.OpenStackSampleConfigID = {$id}) AND (OpenStackComponent.IsCoreService = 0)
-SQL;
-
-
-        $rows = DB::query($query);
-        $list = new ArrayList();
-        foreach($rows as $row)
-        {
-            $class = $row['ClassName'];
-            $list->add(new $class($row));
-        }
-        return $list;
+        return $this->OpenStackComponents()->filter('IsCoreService', 0);
     }
 
     public function getCoreComponents()
     {
-        return $this->OpenStackComponents()->filter('IsCoreService', true);
+        return $this->OpenStackComponents()->filter('IsCoreService', 1);
+    }
+
+    public function getMissingCoreComponents()
+    {
+        $res = new ArrayList();
+        $release_component = $this->Release()->getOpenStackCoreComponents();
+        foreach($release_component as $rc)
+        {
+            if(intval($this->OpenStackComponents()->filter(array( 'IsCoreService' => 1 , 'ID' => $rc->ID ))->count()) === 0){
+                $res->add($rc);
+            }
+        }
+        return $res;
     }
 
 }

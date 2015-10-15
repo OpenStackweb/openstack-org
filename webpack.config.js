@@ -4,6 +4,7 @@ module.exports = {
   entry: {
      /* here u must define all your entries points*/
     "software/js/public/software_all_projects": "./software/js/software_all_projects",
+    "software/js/public/software_sample_configs":"./software/js/software_sample_configs",
     "summit/javascript/new-trackchairs-app/app/index": "./summit/javascript/new-trackchairs-app/app/index",
   },
   output: {

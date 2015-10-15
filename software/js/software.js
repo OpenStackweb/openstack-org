@@ -91,6 +91,43 @@
             event.preventDefault();
         });
 
+
+        // Show/Hide Additional Sample Configurations Details
+        $(".more-about-config").live('click', function(event) {
+            $(".more-sample-config").toggleClass("show");
+            $(this).text(function(i, text){
+                return text === "Less details about this configuration [-]" ? "More about this configuration [+]" : "Less details about this configuration [-]";
+            })
+            event.preventDefault();
+            return false;
+        });
+
+        $('ul.sample-configs-subnav li a').live('click', function(event) {
+            $(this).position({
+                left: "50%"
+            });
+            event.preventDefault();
+            return false;
+        });
+         // Scroll Sample Configuration subnav with arrows
+
+        $('#config-right').click(function(event) {
+
+            $('.sample-configs-slider').animate({
+                scrollLeft: "+=300px"
+            }, "fast");
+            event.preventDefault();
+            return false;
+        });
+
+        $('#config-left').click(function(event) {
+            $('.sample-configs-slider').animate({
+                scrollLeft: "-=300px"
+            }, "fast");
+            event.preventDefault();
+            return false;
+        });
+
     });
 
   // End of closure.

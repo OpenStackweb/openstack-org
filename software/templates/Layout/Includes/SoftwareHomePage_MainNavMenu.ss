@@ -4,7 +4,9 @@
         <ul class="nav nav-tabs project-tabs">
             <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link">Overview</a></li>
             <li <% if Active == 1 %>class="active"<% end_if %>><a href="$Top.Link(all-projects)">All Projects</a></li>
+            <% if $Top.HasAvailableSampleConfigTypes %>
             <li <% if Active == 3 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)">Sample Configurations</a></li>
+            <% end_if %>
         </ul>
     </div>
 </div>
@@ -17,6 +19,9 @@
         <ul class="dropdown-menu">
             <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link">Overview</a></li>
             <li <% if Active == 1 %>class="active"<% end_if %>><a href="$Top.Link(all-projects)">All Projects</a></li>
+            <% if $Top.HasAvailableSampleConfigTypes %>
+                <li <% if Active == 3 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)">Sample Configurations</a></li>
+            <% end_if %>
         </ul>
     </div>
 </div>
