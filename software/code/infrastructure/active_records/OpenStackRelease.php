@@ -293,13 +293,23 @@ class OpenStackRelease
         }
 
         $final = array();
-        $res   = $query->toArray();
+        $res   = $query->sort('ID','ASC')->toArray();
         foreach($res as $c)
         {
             if($c->getAge() >= $age)
                 array_push($final, $c);
         }
         return $final;
+    }
+
+    public function getOpenStackCoreComponentsCount()
+    {
+        return $this->OpenStackComponents()->filter('IsCoreService', true)->count();
+    }
+
+    public function getOpenStackOptionalComponentsCount()
+    {
+        return $this->OpenStackComponents()->filter('IsCoreService', false)->count();
     }
 
     /**
@@ -379,5 +389,19 @@ class OpenStackRelease
     public function getDefaultSampleConfigurationType()
     {
         return $this->SampleConfigurationTypes()->filter('IsDefault', true)->first();
+    }
+
+    public function getComponentAdoption($component_id)
+    {
+        $component = $this->getComponentById($component_id);
+        if(is_null($component)) return null;
+        return $component->Adoption;
+    }
+
+    public function getComponentMaturityPoints($component_id)
+    {
+        $component = $this->getComponentById($component_id);
+        if(is_null($component)) return null;
+        return $component->MaturityPoints;
     }
 }

@@ -299,10 +299,15 @@ class SoftwareHomePage_Controller extends Page_Controller
         );
     }
 
-
     public function getMaxAllowedMaturityPoints()
     {
         return MAX_ALLOWED_MATURITY_POINTS;
     }
 
+    public function HasAvailableSampleConfigTypes()
+    {
+        $release = $this->getDefaultRelease();
+        if(is_null($release)) return false;
+        return intval($release->SampleConfigurationTypes()->count()) > 0;
+    }
 }
