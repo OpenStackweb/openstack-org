@@ -106,7 +106,11 @@
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">Yes</li>
+                                            <% if $Component.HasInstallationGuide %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
                                         </ul>
                                     </td>
                                 </tr>
@@ -124,7 +128,11 @@
                                     <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Details</a></td>
                                     <td>
                                         <ul>
-                                            <li class="on">Yes</li>
+                                            <% if $Component.SDKSupport > 7 %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
                                         </ul>
                                     </td>
                                 </tr>
@@ -145,7 +153,11 @@
                                     <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Details</a></td>
                                     <td>
                                         <ul>
-                                            <li>No</li>
+                                            <% if $Component.Adoption > 75 %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
                                         </ul>
                                     </td>
                                 </tr>
@@ -168,7 +180,11 @@
                                     <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Details</a></td>
                                     <td>
                                         <ul>
-                                            <li class="on">Yes</li>
+                                            <% if $Component.HasTeamDiversity %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
                                         </ul>
                                     </td>
                                 </tr>
@@ -190,7 +206,11 @@
                                     <td><a href="http://governance.openstack.org/reference/tags/release_has-stable-branches.html">View Details</a></td>
                                     <td>
                                         <ul>
-                                            <li>No</li>
+                                            <% if $Component.HasStableBranches %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
                                         </ul>
                                     </td>
                                 </tr>
