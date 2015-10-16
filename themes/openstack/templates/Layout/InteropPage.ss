@@ -24,16 +24,16 @@
         The OpenStack Foundation offers two different logos for vendors. 
         "<a href="http://www.openstack.org/brand/openstack-powered/">OpenStack Powered</a>" is for products that run fully
         functional instances of the OpenStack software. Details on the technical and testing requirements to qualify for
-        the "Powered" program are <a href="#openstackpowered">here</a>.
+        the "Powered" program are <a href="http://www.openstack.org/brand/interop#openstackpowered">here</a>.
     </p>
     <p>
-	   "<a href="http://www.openstack.org/brand/openstack-compatable/">OpenStack Compatible</a>" is for software solutions
+	   "<a href="http://www.openstack.org/brand/openstack-compatible/">OpenStack Compatible</a>" is for software solutions
        that interact with "OpenStack Powered" systems, and hardware solutions that are designed to run the OpenStack
        software. In June 2015, the OpenStack Board approved the development of testing programs for "OpenStack Compatible"
        products. The OpenStack Foundation is rolling out these testing programs with new requirements for storage drivers
        starting in November 2015. Network driver testing and application testing requirements are scheduled for 2016.
        Details on the technical requirements to qualify for the the storage driver "Compatible" logo are
-       <a href="#openstackcompatible">here</a>.
+       <a href="http://www.openstack.org/brand/interop#openstackcompatible">here</a>.
     </p>
 	<h3 id="openstackpowered">OpenStack Powered</h3>
     <p>
@@ -134,29 +134,31 @@
 
     $getCapabilitiesTable()
 
-    <p>
-        To apply for one of the OpenStack Powered marketing programs today, please review the requirements and
-        <a href="brand/openstack-powered">submit via the online form</a>.
-    </p>
     <h4>How to Run the Tests</h4>
     <p>
         OpenStack interoperability tests are part of the Tempest project suite of tests. To run the tests for your license
         application, you will need
         to install <a href="https://git.openstack.org/cgit/openstack/tempest" target="_blank">Tempest</a> with the
-        <a href="https://git.openstack.org/cgit/stackforge/refstack-client" target="_blank">RefStack Client</a>.
+        <a href="https://git.openstack.org/cgit/openstack/refstack-client" target="_blank">RefStack Client</a>.
         After configuring for your particular product, Tempest can be run with a precompiled inventory of tests available from the Defcore
-        repository. You can use <a href="https://raw.githubusercontent.com/openstack/defcore/tree/2015.05/2015.05.required.txt">this file</a>
+        repository. You can use <a href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.07/2015.07.required.txt">this file</a>
         to configure Tempest test runner to execute only the required tests. You will need to run Tempest inside of the RefStack Client
         and upload the results to the RefStack Server. Once your results are uploaded, you can send a link to the report
         page to <a href="mailto:interop@openstack.org">interop@openstack.org</a>&nbsp.
     </p>
     <p>
         For more detailed instructions to run the tests, please consult
-        <a title="Procedure for Running Defcore Interop Tests" href="https://git.openstack.org/cgit/openstack/defcore/tree/2015.05/procedure.rst">this document</a>.
+        <a title="Procedure for Running Defcore Interop Tests" href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.07/procedure.rst">this document</a>.
         If you need help getting started, contact Chris Hoge, the Foundation's Interop Engineer, by emailing
         <a href="mailto:interop@openstack.org">interop@openstack.org</a>. The Foundation is looking for feedback from companies
         who are running tests in order to improve the testing process and shape policy in the future.
     </p>
+    <p>
+        To apply for one of the OpenStack Powered marketing programs, please review the requirements at the
+        <a href="brand/openstack-powered">"OpenStack Powered" brand page</a> and submit your logo application test
+        results via the online form</a>.
+    </p>
+
     <h3 id="openstackcompatible">OpenStack Compatible</h3>
     <p>
     	There are two types of "OpenStack Compatible" products that fall under the unified logo program. The first is software
