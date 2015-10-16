@@ -228,7 +228,19 @@
                         </p>
                     </div>
 
-        </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <h5 class="section-title">Shinagawa Station to The Summit</h5>
+                    <p>
+                         Once you have arrived at Shinagawa Station, follow
+                        <a href="//openstack.org/assets/tokyo-summit/directions/ostokyo-shinagawa-station-directions.pdf">
+                        these step-by-step instructions
+                        </a>
+                         to get to the Summit Venue.
+                    </p>
+                </div>
+            </div>
         <% end_if %>
         <% if OtherLocations  %>
         <div class="row">
