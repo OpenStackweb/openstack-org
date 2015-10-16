@@ -66,8 +66,15 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
     private function getCurrentSelectedSurveyTemplate()
     {
 
-        $template_id = Session::get(sprintf("SurveyBuilder.%sStatistics.TemplateId",
-            Session::get('SurveyBuilder.Statistics.ClassName')));
+        $template_id = Session::get
+        (
+            sprintf
+            (
+                "SurveyBuilder.%sStatistics.TemplateId",
+                Session::get('SurveyBuilder.Statistics.ClassName')
+            )
+        );
+
         $template = null;
         if (!empty($template_id)) {
             $template = SurveyTemplate::get()->byID(intval($template_id));
@@ -158,19 +165,20 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
         return false;
     }
 
-    public function SurveyBuilderSurveyCount()
+    private $total_count = 0;
+
+    /**
+     * @param string $survey_table_prefix
+     * @return array|null|Session|string
+     */
+    private function generateFilters($survey_table_prefix = 'I')
     {
-        $request  = Controller::curr()->getRequest();
-        $from     = $request->getVar('From');
-        $to       = $request->getVar('To');
-        $template = $this->getCurrentSelectedSurveyTemplate();
-
-        if (is_null($template))
-        {
-            return 0;
-        }
-
+        $request    = Controller::curr()->getRequest();
+        $from       = $request->getVar('From');
+        $to         = $request->getVar('To');
+        $template   = $this->getCurrentSelectedSurveyTemplate();
         $class_name = $this->getCurrentSelectedSurveyClassName();
+
         $filters    = Session::get
         (
             sprintf
@@ -184,48 +192,47 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
         );
 
         $filter_query_tpl_int = <<<SQL
-    AND EXISTS
-    (
-		SELECT * FROM SurveyAnswer A2
-        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
-		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
-		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
-		INNER JOIN SurveyQuestionValueTemplate V2 ON V2.OwnerID = Q2.ID
-		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-        WHERE
-        I2.ClassName = '{$class_name}'
-		AND FIND_IN_SET(V2.ID, A2.Value) > 0
-		AND SSTPL2.ID = %s
-		AND Q2.ID = %s
-		AND V2.ID = %s
-        AND I2.ID = I.ID
-	)
+        AND EXISTS
+        (
+            SELECT * FROM SurveyAnswer A2
+            INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
+            INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
+            INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
+            INNER JOIN SurveyQuestionValueTemplate V2 ON V2.OwnerID = Q2.ID
+            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+            WHERE
+            I2.ClassName = '{$class_name}'
+            AND FIND_IN_SET(V2.ID, A2.Value) > 0
+            AND SSTPL2.ID = %s
+            AND Q2.ID = %s
+            AND V2.ID = %s
+            AND I2.ID = {$survey_table_prefix}.ID
+        )
 SQL;
 
-
         $filter_query_tpl_str = <<<SQL
-    AND EXISTS
-    (
-		SELECT * FROM SurveyAnswer A2
-        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
-		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
-		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
-		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-        WHERE
-        I2.ClassName = '{$class_name}'
+        AND EXISTS
+        (
+            SELECT * FROM SurveyAnswer A2
+            INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
+            INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
+            INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
+            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+            WHERE
+            I2.ClassName = '{$class_name}'
 
-		AND SSTPL2.ID = %s
-		AND Q2.ID = %s
-        AND I2.ID = I.ID
-       	AND FIND_IN_SET('%s', A2.Value) > 0
-	)
+            AND SSTPL2.ID = %s
+            AND Q2.ID = %s
+            AND I2.ID = {$survey_table_prefix}.ID
+            AND FIND_IN_SET('%s', A2.Value) > 0
+        )
 SQL;
         $filters_where = '';
 
         if (!empty($from) && !empty($to)) {
-            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters("I", "LastEdited");
+            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters($survey_table_prefix, "LastEdited");
         }
 
         if (!empty($filters))
@@ -236,13 +243,30 @@ SQL;
                 $t = explode(':', $t);
                 $qid = intval($t[0]);
                 $vid = is_int($t[1]) ? intval($t[1]) : $t[1];
-                $vid = is_int($t[1]) ? intval($t[1]) : $t[1];
                 if(count($t) === 3)
                     $vid = sprintf('%s:%s', $t[1], $t[2]);
                 $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int : $filter_query_tpl_str;
                 $filters_where .= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
             }
         }
+
+        return $filters_where;
+    }
+
+    public function SurveyBuilderSurveyCount()
+    {
+        if($this->total_count > 0 ) return $this->total_count;
+
+        $template = $this->getCurrentSelectedSurveyTemplate();
+
+        if (is_null($template))
+        {
+            return 0;
+        }
+
+        $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        $filters_where = $this->generateFilters();
 
         $query = <<<SQL
     SELECT COUNT(I.ID) FROM Survey I
@@ -267,7 +291,9 @@ SQL;
     {$filters_where};
 SQL;
 
-        return DB::query($query)->value();
+        $this->total_count = intval(DB::query($query)->value());
+
+        return $this->total_count;
     }
 
     public function SurveyBuilderLabelSubmitted()
@@ -364,6 +390,7 @@ SQL;
         return true;
     }
 
+    private $matrix_count  = array();
     /**
      * @param $question_id
      * @param $row_id
@@ -372,7 +399,9 @@ SQL;
      */
     public function SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id)
     {
-        $filters_where = '';
+        $key = $question_id.'.'.$row_id.'.'.$column_id;
+
+        if(isset($this->matrix_count[$key])) return $this->matrix_count[$key];
 
         $template    = $this->getCurrentSelectedSurveyTemplate();
 
@@ -381,113 +410,76 @@ SQL;
             return;
         }
 
-        $filters    = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', Session::get('SurveyBuilder.Statistics.ClassName')));
-
-
         $class_name = $this->getCurrentSelectedSurveyClassName();
 
-        $filter_query_tpl_int = <<<SQL
-    AND EXISTS
-    (
-		SELECT * FROM SurveyAnswer A2
-        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
-		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
-		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
-		INNER JOIN SurveyQuestionValueTemplate V2 ON V2.OwnerID = Q2.ID
-		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-        WHERE
-        I2.ClassName = '{$class_name}'
-		AND FIND_IN_SET(V2.ID, A2.Value) > 0
-		AND SSTPL2.ID = %s
-		AND Q2.ID = %s
-		AND V2.ID = %s
-        AND I2.ID = I.ID
-	)
-SQL;
-
-        $filter_query_tpl_str = <<<SQL
-    AND EXISTS
-    (
-		SELECT * FROM SurveyAnswer A2
-        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
-		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
-		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
-		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-        WHERE
-        I2.ClassName = '{$class_name}'
-	    AND SSTPL2.ID = %s
-		AND Q2.ID = %s
-        AND I2.ID = I.ID
-        AND FIND_IN_SET('%s', A2.Value) > 0
-	)
-SQL;
-
-        $filters_where = '';
-
-        if (!empty($from) && !empty($to)) {
-            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters("I", "LastEdited");
-        }
-
-        if (!empty($filters)) {
-            $filters = trim($filters, ',');
-            $filters = explode(',', $filters);
-            foreach ($filters as $t) {
-                $t = explode(':', $t);
-                $qid = intval($t[0]);
-                $vid = is_int($t[1]) ? intval($t[1]) : $t[1];
-                if(count($t) === 3)
-                    $vid = sprintf('%s:%s', $t[1], $t[2]);
-                $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int : $filter_query_tpl_str;
-                $filters_where .= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
-            }
-        }
+        $filters_where = $this->generateFilters();
 
         $query = <<<SQL
-
-SELECT COUNT(A.Value) FROM SurveyAnswer A
-    INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
-    INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
-    INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
-    INNER JOIN SurveyStep S ON S.ID = A.StepID
-    INNER JOIN Survey I ON I.ID = S.SurveyID
-    WHERE
-    I.ClassName = '{$class_name}'
-    AND FIND_IN_SET('{$row_id}:{$column_id}', A.Value) > 0
-    AND SSTPL.ID = $template->ID
-    AND Q.ID = {$question_id}
-    {$filters_where};
+        SELECT COUNT(A.Value) FROM SurveyAnswer A
+        INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+        INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
+        INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
+        INNER JOIN SurveyStep S ON S.ID = A.StepID
+        INNER JOIN Survey I ON I.ID = S.SurveyID
+        WHERE
+        I.ClassName = '{$class_name}'
+        AND FIND_IN_SET('{$row_id}:{$column_id}', A.Value) > 0
+        AND SSTPL.ID = $template->ID
+        AND Q.ID = {$question_id}
+        {$filters_where};
 SQL;
 
-        return DB::query($query)->value();
+        $this->matrix_count[$key] = intval(DB::query($query)->value());
+
+        return $this->matrix_count[$key];
+    }
+
+    private $matrix_dont_answered  = array();
+
+    private function getDontAnsweredCount($question_id)
+    {
+        if(isset($this->matrix_dont_answered[$question_id])) return $this->matrix_dont_answered[$question_id];
+
+        $template     = $this->getCurrentSelectedSurveyTemplate();
+        $filter_where = $this->generateFilters('S');
+        // total of survey that answered this question
+        $query = <<<SQL
+        SELECT COUNT(ID) FROM
+        (
+            SELECT S.ID FROM SurveyAnswer A
+            INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+            INNER JOIN Survey S ON S.ID = STP.SurveyID
+            WHERE
+            S.TemplateID = {$template->ID} AND
+            NOT EXISTS
+            (
+                SELECT A1.ID FROM SurveyAnswer A1
+                INNER JOIN SurveyStep STP1 ON STP1.ID = A1.StepID
+                INNER JOIN Survey S1 ON S1.ID = STP1.SurveyID WHERE A1.QuestionID = {$question_id} AND S1.ID = S.ID
+            )
+            $filter_where
+            GROUP BY S.ID
+        ) DONT_ANSWERED_QUESTION_N;
+SQL;
+
+        $this->matrix_dont_answered[$question_id]   = intval(DB::query($query)->value());
+
+        return $this->matrix_dont_answered[$question_id];
     }
 
     public function SurveyBuilderMatrixPercentAnswers($question_id, $row_id, $column_id)
     {
-        $count   = $this->SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id);
+        $count              = $this->SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id);
+        $total_count        = $this->SurveyBuilderSurveyCount();
+        $count_dont_answers = $this->getDontAnsweredCount($question_id);
 
-        // total of survey that answered this question
-        $total   = DB::query("SELECT COUNT(SurveyID) FROM
-    (
-	SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount , S.ID AS SurveyID FROM SurveyAnswer A
-	INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-	INNER JOIN Survey S ON S.ID = STP.SurveyID
-	WHERE A.QuestionID = {$question_id}
-	GROUP BY S.ID
-) ANSWERED_MANDATORY_QUESTIONS_BY_SURVEY WHERE AnsweredMandatoryQuestionCount = 1")->value();
-
-        $percent = ($count/$total) * 100;
+        $percent = ($count/ ($total_count - $count_dont_answers )) * 100;
         $percent = sprintf ("%.2f", $percent);
         return '( '.$percent.' % )';
     }
 
     public function SurveyBuilderCountAnswers($question_id, $value_id)
     {
-
-        $request     = Controller::curr()->getRequest();
-        $from        = $request->getVar('From');
-        $to          = $request->getVar('To');
         $question_id = intval($question_id);
         $value_id    = intval($value_id) > 0 ? intval($value_id) : $value_id;
         $template    = $this->getCurrentSelectedSurveyTemplate();
@@ -497,66 +489,9 @@ SQL;
             return;
         }
 
-        $filters    = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', Session::get('SurveyBuilder.Statistics.ClassName')));
         $class_name = $this->getCurrentSelectedSurveyClassName();
 
-        $filter_query_tpl_int = <<<SQL
-    AND EXISTS
-    (
-		SELECT * FROM SurveyAnswer A2
-        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
-		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
-		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
-		INNER JOIN SurveyQuestionValueTemplate V2 ON V2.OwnerID = Q2.ID
-		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-        WHERE
-        I2.ClassName = '{$class_name}'
-		AND FIND_IN_SET(V2.ID, A2.Value) > 0
-		AND SSTPL2.ID = %s
-		AND Q2.ID = %s
-		AND V2.ID = %s
-        AND I2.ID = I.ID
-	)
-SQL;
-
-        $filter_query_tpl_str = <<<SQL
-    AND EXISTS
-    (
-		SELECT * FROM SurveyAnswer A2
-        INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
-		INNER JOIN SurveyStepTemplate STPL2 ON STPL2.ID = Q2.StepID
-		INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = STPL2.SurveyTemplateID
-		INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-		INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-        WHERE
-        I2.ClassName = '{$class_name}'
-	    AND SSTPL2.ID = %s
-		AND Q2.ID = %s
-        AND I2.ID = I.ID
-        AND FIND_IN_SET('%s', A2.Value) > 0
-	)
-SQL;
-
-        $filters_where = '';
-
-        if (!empty($from) && !empty($to)) {
-            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters("I", "LastEdited");
-        }
-
-        if (!empty($filters)) {
-            $filters = trim($filters, ',');
-            $filters = explode(',', $filters);
-            foreach ($filters as $t) {
-                $t = explode(':', $t);
-                $qid = intval($t[0]);
-                $vid = is_int($t[1]) ? intval($t[1]) : $t[1];
-                if(count($t) === 3)
-                    $vid = sprintf('%s:%s', $t[1], $t[2]);
-                $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int : $filter_query_tpl_str;
-                $filters_where .= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
-            }
-        }
+        $filters_where  = $this->generateFilters();
 
         $query_str = <<<SQL
         SELECT COUNT(A.Value) FROM SurveyAnswer A
