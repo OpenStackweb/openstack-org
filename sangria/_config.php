@@ -11,3 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+
+//sangria configuration
+Object::add_extension('SangriaPage_Controller', 'SangriaPageDeploymentExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyDetailsExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaPageStandardizeOrgNamesExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaPageViewCurrentStoriesExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaPageExportDataExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaPageViewSpeakingSubmissionsExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaSetCategorySponsorsExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaPageInvolvementTypeExtension');
+Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyBuilderStatisticsExtension');
