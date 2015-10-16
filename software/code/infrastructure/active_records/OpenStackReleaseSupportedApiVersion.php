@@ -102,4 +102,12 @@ class OpenStackReleaseSupportedApiVersion
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'OpenStackComponent')->getTarget();
     }
+
+    public function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        // delete related records ...
+        DB::query("DELETE FROM OpenStackImplementationApiCoverageDraft where ReleaseSupportedApiVersionID = {$this->ID};");
+        DB::query("DELETE FROM OpenStackImplementationApiCoverage where ReleaseSupportedApiVersionID = {$this->ID};");
+    }
 }
