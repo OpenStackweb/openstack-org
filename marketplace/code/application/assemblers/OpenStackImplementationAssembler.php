@@ -70,7 +70,7 @@ final class OpenStackImplementationAssembler
         if($release_api_version->ID === 0 ) return null;
 
         $res['component_id'] = $release_api_version->getOpenStackComponent()->getIdentifier();
-        $res['supports_versioning'] = $release_api_version > getOpenStackComponent()->getSupportsVersioning();
+        $res['supports_versioning'] = $release_api_version->getOpenStackComponent()->getSupportsVersioning();
         $res['release_id'] = $release_api_version->getRelease()->getIdentifier();
         $res['version_id'] = $release_api_version->getApiVersion()->getIdentifier();
         $res['version_name'] = $release_api_version->getApiVersion()->getVersion();
