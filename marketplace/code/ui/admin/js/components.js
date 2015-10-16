@@ -173,6 +173,9 @@
         load: function(components) {
             for(var i in components){
                 var component = components[i];
+
+                if($('#component_'+component.component_id,form).length === 0) continue;
+
                 $('#component_'+component.component_id,form).prop('checked',true);
                 $("#releases_component_"+component.component_id,form).prop("disabled", false);
                 $("#release_api_version_component_"+component.component_id,form).prop("disabled", false);

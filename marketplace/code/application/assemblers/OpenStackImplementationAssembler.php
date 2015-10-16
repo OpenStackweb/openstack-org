@@ -11,63 +11,72 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class OpenStackImplementationAssembler
  */
-final class OpenStackImplementationAssembler {
+final class OpenStackImplementationAssembler
+{
 
-	/**
-	 * @param IOpenStackImplementation $implementation
-	 * @return array
-	 */
-	public static function convertOpenStackImplementationToArray(IOpenStackImplementation $implementation){
-		$res = RegionalSupportedCompanyServiceAssembler::convertRegionalSupportedCompanyServiceToArray($implementation);
+    /**
+     * @param IOpenStackImplementation $implementation
+     * @return array
+     */
+    public static function convertOpenStackImplementationToArray(IOpenStackImplementation $implementation)
+    {
+        $res = RegionalSupportedCompanyServiceAssembler::convertRegionalSupportedCompanyServiceToArray($implementation);
 
-		$res['compatible_compute'] = $implementation->isCompatibleWithCompute();
+        $res['compatible_compute'] = $implementation->isCompatibleWithCompute();
 
-		$res['compatible_storage'] = $implementation->isCompatibleWithStorage();
+        $res['compatible_storage'] = $implementation->isCompatibleWithStorage();
 
         $res['interop_program_version_id'] = $implementation->getProgramVersion()->getIdentifier();
 
-		$res['compatible_federated_identity'] = $implementation->isCompatibleWithFederatedIdentity();
+        $res['compatible_federated_identity'] = $implementation->isCompatibleWithFederatedIdentity();
 
-		//capabilities
-		$capabilities = array();
-		foreach($implementation->getCapabilities() as $capability){
-			array_push($capabilities,OpenStackImplementationAssembler::convertCapabilityToArray($capability));
-		}
-		$res['capabilities'] = $capabilities;
-			//hypervisors
-		$hypervisors = array();
-		foreach($implementation->getHyperVisors() as $hypervisor){
-			array_push($hypervisors,$hypervisor->getIdentifier());
-		}
-		$res['hypervisors'] = $hypervisors;
-		//os guests
-		$guest_os = array();
-		foreach($implementation->getGuests() as $guest){
-			array_push($guest_os,$guest->getIdentifier());
-		}
-		$res['guest_os'] = $guest_os;
+        //capabilities
+        $capabilities = array();
+        foreach ($implementation->getCapabilities() as $capability) {
+            array_push($capabilities, OpenStackImplementationAssembler::convertCapabilityToArray($capability));
+        }
+        $res['capabilities'] = $capabilities;
+        //hypervisors
+        $hypervisors = array();
+        foreach ($implementation->getHyperVisors() as $hypervisor) {
+            array_push($hypervisors, $hypervisor->getIdentifier());
+        }
+        $res['hypervisors'] = $hypervisors;
+        //os guests
+        $guest_os = array();
+        foreach ($implementation->getGuests() as $guest) {
+            array_push($guest_os, $guest->getIdentifier());
+        }
+        $res['guest_os'] = $guest_os;
         //draft
-        if ($res)
-		return $res;
-	}
+        if ($res) {
+            return $res;
+        }
+    }
 
-	/**
-	 * @param IOpenStackImplementationApiCoverage $capability
-	 * @return array
-	 */
-	public static function convertCapabilityToArray(IOpenStackImplementationApiCoverage $capability){
-		$res                        = array();
-		$res['id']                  = $capability->getIdentifier();
-		$res['component_id']        = $capability->getReleaseSupportedApiVersion()->getOpenStackComponent()->getIdentifier();
-		$res['supports_versioning'] = $capability->getReleaseSupportedApiVersion()->getOpenStackComponent()->getSupportsVersioning();
-		$res['release_id']          = $capability->getReleaseSupportedApiVersion()->getRelease()->getIdentifier();
-		$res['version_id']          = $capability->getReleaseSupportedApiVersion()->getApiVersion()->getIdentifier();
-		$res['version_name']        = $capability->getReleaseSupportedApiVersion()->getApiVersion()->getVersion();
-		$res['coverage']            = $capability->getCoveragePercent();
-		return $res;
-	}
+    /**
+     * @param IOpenStackImplementationApiCoverage $capability
+     * @return array
+     */
+    public static function convertCapabilityToArray(IOpenStackImplementationApiCoverage $capability)
+    {
+        $res = array();
+        $res['id'] = $capability->getIdentifier();
+        $release_api_version = $capability->getReleaseSupportedApiVersion();
+        if($release_api_version->ID === 0 ) return null;
+
+        $res['component_id'] = $release_api_version->getOpenStackComponent()->getIdentifier();
+        $res['supports_versioning'] = $release_api_version > getOpenStackComponent()->getSupportsVersioning();
+        $res['release_id'] = $release_api_version->getRelease()->getIdentifier();
+        $res['version_id'] = $release_api_version->getApiVersion()->getIdentifier();
+        $res['version_name'] = $release_api_version->getApiVersion()->getVersion();
+        $res['coverage'] = $capability->getCoveragePercent();
+
+        return $res;
+    }
 
 } 
