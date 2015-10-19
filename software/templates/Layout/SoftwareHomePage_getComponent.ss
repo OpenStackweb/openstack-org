@@ -2,7 +2,7 @@
 <div class="software-main-wrapper">
     <div class="container">
         <div class="outer-project-back">
-            <a href="$Top.Link(all-projects)"><i class="fa fa-chevron-left"></i> Back to Project Browser</a>
+            <a href="$Top.Link(all-projects)"><i class="fa fa-chevron-left"></i> Back to Project Navigator</a>
         </div>
     </div>
     <div class="container inner-software">
@@ -91,6 +91,7 @@
                                             <li <% if $Component.HasInstallationGuide %>class="on"<% end_if %>>
                                                 <% if $Component.HasInstallationGuide %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
@@ -122,6 +123,7 @@
                                         <ul>
                                             <li <% if $Component.SDKSupport %>class="on"<% end_if %>>
                                                 <i class="fa fa-circle"></i><span>{$Component.SDKSupport}</span>
+                                                <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                             </li>
                                         </ul>
                                     </td>
@@ -146,6 +148,7 @@
                                             <li class="on">
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
                                                     <i class="fa fa-circle"></i><span> {$Component.Adoption}%</span>
+                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 </a>
                                             </li>
                                         </ul>
@@ -171,6 +174,7 @@
                                             <li <% if $Component.HasTeamDiversity %>class="on" <% end_if %>>
                                                 <% if $Component.HasTeamDiversity %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
@@ -197,6 +201,7 @@
                                             <li <% if $Component.HasStableBranches %>class="on"<% end_if %>>
                                                 <% if $Component.HasStableBranches %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
@@ -241,6 +246,7 @@
                                             <li <% if $Component.ReleaseMileStones %>class="on"<% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
                                                     <i class="fa <% if $Component.ReleaseMileStones %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Cycle with milestones</span></a>
+                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                             </li>
                                             <li <% if $Component.ReleaseCycleWithIntermediary %>class="on" <% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html">
@@ -258,13 +264,14 @@
 
                                 <tr>
                                     <td>
-                                        Existence and quality of packages for this project in distributions like Red Hat/Fedora, Ubuntu	6 and openSUSE/SLES.
+                                         Existence and quality of packages for this project in popular distributions.
                                         <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
                                     </td>
                                     <td>
                                         <ul>
                                             <li class="on">
                                                 <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle"></i><span>Good</span></a>
+                                                <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                             </li>
                                             <li>
                                                 <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle-o"></i><span>No</span></a>
@@ -289,6 +296,7 @@
                                             <li <% if $Component.VulnerabilityManaged %>class="on" <% end_if %>>
                                                 <% if $Component.VulnerabilityManaged %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
+                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>

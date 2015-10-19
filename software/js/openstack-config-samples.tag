@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { maturity_points } of { this.max_maturity_points }
+                { maturity_points } <span>of</span> { this.max_maturity_points }
                 </div>
                 <div class="core-stat-title">
                 Maturity
@@ -137,7 +137,7 @@
         </div>
         <div class="row" if={ current_config.optional_components.length >0 }>
             <div class="col-sm-12">
-               <p class="service-section-title"><strong>Optional Services</strong> included in this configuration ({ current_config.optional_components.length } of { release_optional_component_count })</p>
+               <p class="service-section-title"><strong>Optional Services</strong> included in this configuration ({ current_config.optional_components.length } <span>of</span> { release_optional_component_count })</p>
             </div>
         </div>
         <div class="row" if={ current_config.optional_components.length > 0 }>

@@ -748,6 +748,10 @@ p.service-section-title {
 .project-tags-table table.maturity-table {
     margin-bottom: 50px;
 }
+.project-tags-table tr td ul li.on i.tag-caveat-note {
+    margin-left: 10px;
+    color: #30739C;
+}
 
 .outer-all-projects-subnav {
     margin-top: -56px;
