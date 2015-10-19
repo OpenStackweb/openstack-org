@@ -153,7 +153,8 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
 
     private function getInstallationGuideStatus(OpenStackRelease $release)
     {
-        $template_url = 'https://raw.githubusercontent.com/stackforge/ops-tags-team/master/%s/ops-docs-install-guide.json';
+
+        $template_url = 'https://raw.githubusercontent.com/openstack/ops-tags-team/master/%s/ops-docs-install-guide.json';
         $client   = new HttpClient;
 
         try
@@ -196,7 +197,7 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
     private function getProductionUseStatus(OpenStackRelease $release)
     {
 
-        $template_url = 'https://raw.githubusercontent.com/stackforge/ops-tags-team/master/%s/ops-production-use.json';
+        $template_url = 'https://raw.githubusercontent.com/openstack/ops-tags-team/master/%s/ops-production-use.json';
         $client   = new HttpClient;
 
         try
@@ -277,7 +278,7 @@ class IngestOpenStackComponentsDataCronTask extends CronTask
     {
         $client        = new HttpClient;
         $components    = $release->OpenStackComponents();
-        $template_url  = 'https://raw.githubusercontent.com/stackforge/ops-tags-team/master/%s/ops-sdk-support.json';
+        $template_url  = 'https://raw.githubusercontent.com/openstack/ops-tags-team/master/%s/ops-sdk-support.json';
 
         try
         {
