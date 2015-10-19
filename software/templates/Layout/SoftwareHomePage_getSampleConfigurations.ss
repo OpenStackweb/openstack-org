@@ -96,7 +96,7 @@
             <div class="close-tip"><i class="fa fa-times"></i></div>
             <h5><i class="fa fa-question-circle"></i>What are sample configurations?</h5>
             <p>
-                Think of these as curated playlists of OpenStack configurations. These sample configurations are put together by OpenStack operators, developers, consultants, and more. Each configuration will give you a good idea of which core and optional projects can be used for the Big Data environments.
+                Think of these as curated playlists of OpenStack configurations. These sample configurations are based on OpenStack case studies and real-world reference architectures across industries and workloads. Each configuration will give you a good idea of which core and optional projects can be used for different environments.
             </p>
         </div>
 
