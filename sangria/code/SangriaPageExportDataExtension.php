@@ -695,17 +695,7 @@ SQL;
             $name = $row['Name'];
             if(in_array($name, $flat_fields_entity))
             {
-                $q = SurveyMultiValueQuestionTemplate::get()->byID(intval($row['QuestionID']));
-                if(is_null($q)) continue;
 
-                foreach($q->Values() as $v)
-                {
-                    $header = sprintf('%s - %s',$name, $v->Value );
-                    $template_2[$header] = null;
-                }
-            }
-            else
-            {
                 if($row['ClassName'] === 'SurveyRadioButtonMatrixTemplateQuestion')
                 {
                     $q = SurveyRadioButtonMatrixTemplateQuestion::get()->byID(intval($row['QuestionID']));
@@ -716,11 +706,23 @@ SQL;
                         $template_2[$header] = null;
                     }
                 }
-                else
-                    $template_2[$name] = null;
+                else {
+                    $q = SurveyMultiValueQuestionTemplate::get()->byID(intval($row['QuestionID']));
+                    if (is_null($q)) {
+                        continue;
+                    }
+
+                    foreach ($q->Values() as $v) {
+                        $header = sprintf('%s - %s', $name, $v->Value);
+                        $template_2[$header] = null;
+                    }
+                }
+            }
+            else
+            {
+                                                                                                                        $template_2[$name] = null;
             }
         }
-
         return array($template_1, $template_2);
 
     }
@@ -855,7 +857,7 @@ SQL;
                         $class            = $row2['QuestionClass'];
                         $answer           = $row2['Answer'];
 
-                        if(empty($answer)) continue;
+                        if(empty($answer) && $answer !== '0') continue;
 
                         if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
                         {
@@ -896,16 +898,6 @@ SQL;
                                     }
                                 }
                             }
-                            else
-                            {
-                                $answers = explode('|', $answer);
-                                foreach ($answers as $a) {
-                                    $line2[sprintf("%s - %s", $question, $a)] = 1;
-                                }
-                            }
-                        }
-                        else
-                        {
                             if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
                             {
                                 $answer = preg_split('/,/',$answer);
@@ -916,9 +908,17 @@ SQL;
                                 }
                             }
                             else
-                                $line2[$question] = $answer;
+                            {
+                                $answers = explode('|', $answer);
+                                foreach ($answers as $a) {
+                                    $line2[sprintf("%s - %s", $question, $a)] = 1;
+                                }
+                            }
                         }
-
+                        else
+                        {
+                            $line2[$question] = $answer;
+                        }
                     }
 
                     if(isset($line2['DeploymentID']) && intval($line2['DeploymentID']) > 0)
@@ -1018,7 +1018,8 @@ SQL;
                     "NetworkDrivers",
                     "OperatingSystems",
                     "SupportedFeatures",
-                    "WhyNovaNetwork"
+                    "WhyNovaNetwork",
+                    "ProjectsUsed",
                 )
             );
         }
