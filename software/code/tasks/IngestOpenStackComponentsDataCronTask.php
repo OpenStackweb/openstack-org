@@ -27,16 +27,17 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
      */
     public function run()
     {
-        $releases = OpenStackRelease::get()->where(" Status = 'SecuritySupported' OR Status = 'Current' ");
-
+        $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
+        DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
         $this->processProjects();
 
         foreach($releases as $release)
         {
             $this->getProductionUseStatus($release);
             $this->getInstallationGuideStatus($release);
-            $this->calculateMaturityPoints($release);
             $this->getSDKSupport($release);
+            $this->getQualityOfPackages($release);
+            $this->calculateMaturityPoints($release);
             $this->getStackAnalytics($release);
         }
     }
@@ -157,14 +158,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     private function getInstallationGuideStatus(OpenStackRelease $release)
     {
 
-        $template_url = 'https://raw.githubusercontent.com/openstack/ops-tags-team/master/%s/ops-docs-install-guide.json';
+        $template_url = '%s/%s/ops-docs-install-guide.json';
         $client   = new HttpClient;
 
         try
         {
             $response = $client->get
             (
-                sprintf($template_url, strtolower($release->Name))
+                sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
             );
         }
         catch(HttpException $ex)
@@ -184,30 +185,45 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             return;
         }
         $cs = $release->getManyManyComponents('OpenStackComponents');
-        foreach($installation_guide_status_json as $component_name => $status)
+        foreach($installation_guide_status_json as $component_name => $entry)
         {
             preg_match("/\((\w*)\)/", $component_name, $output_array);
             if(count($output_array) !== 2) continue;
             $code_name = $output_array[1];
             $component = $release->supportsComponent($code_name);
             if(is_null($component)) continue;
-            $status = $status['status'];
+            $status = $entry['status'];
             if($status !== 'available') continue;
-            $cs->add($component, array('HasInstallationGuide' => true));
+            $data = array('HasInstallationGuide' => true);
+            if(isset($entry['caveats'])) {
+                $caveats = $entry['caveats'];
+                foreach($caveats as $caveat)
+                {
+                    $c               = new OpenStackComponentReleaseCaveat();
+                    $c->ReleaseID   = $release->ID;
+                    $c->ComponentID = $component->ID;
+                    $c->Status      = $caveat['status'];
+                    $c->Label       = $caveat['label'];
+                    $c->Description = $caveat['description'];
+                    $c->Type        = 'InstallationGuide';
+                    $c->write();
+                }
+            }
+            $cs->add($component, $data);
         }
     }
 
     private function getProductionUseStatus(OpenStackRelease $release)
     {
 
-        $template_url = 'https://raw.githubusercontent.com/openstack/ops-tags-team/master/%s/ops-production-use.json';
+        $template_url = '%s/%s/ops-production-use.json';
         $client   = new HttpClient;
 
         try
         {
             $response = $client->get
             (
-                sprintf($template_url, strtolower($release->Name))
+                sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
             );
         }
         catch(HttpException $ex)
@@ -228,17 +244,32 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
         $cs = $release->getManyManyComponents('OpenStackComponents');
 
-        foreach($production_use_status_json as $component_name => $status)
+        foreach($production_use_status_json as $component_name => $entry)
         {
             preg_match("/\((\w*)\)/", $component_name, $output_array);
             if(count($output_array) !== 2) continue;
             $code_name = $output_array[1];
             $component = $release->supportsComponent($code_name);
             if(is_null($component)) continue;
-            $status = $status['status'];
+            $status = $entry['status'];
             $percentage =preg_split("/\%/", $status);
             if(count($percentage) !== 2) continue;
             $percentage  = intval($percentage[0]);
+
+            if(isset($entry['caveats'])) {
+                $caveats = $entry['caveats'];
+                foreach($caveats as $caveat)
+                {
+                    $c               = new OpenStackComponentReleaseCaveat();
+                    $c->ReleaseID   = $release->ID;
+                    $c->ComponentID = $component->ID;
+                    $c->Status      = $caveat['status'];
+                    $c->Label       = $caveat['label'];
+                    $c->Description = $caveat['description'];
+                    $c->Type        = 'ProductionUse';
+                    $c->write();
+                }
+            }
 
             $cs->add($component, array( 'Adoption' => $percentage ));
         }
@@ -281,13 +312,13 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     {
         $client        = new HttpClient;
         $components    = $release->OpenStackComponents();
-        $template_url  = 'https://raw.githubusercontent.com/openstack/ops-tags-team/master/%s/ops-sdk-support.json';
+        $template_url  = '%s/%s/ops-sdk-support.json';
 
         try
         {
             $response = $client->get
             (
-                sprintf($template_url, strtolower($release->Name))
+                sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
             );
         }
         catch(HttpException $ex)
@@ -304,16 +335,89 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         $sdk_support = json_decode($content, true);
         if(is_null($sdk_support)) return;
 
-        foreach($sdk_support as $component_name => $status)
+        foreach($sdk_support as $component_name => $entry)
         {
             preg_match("/\((\w*)\)/", $component_name, $output_array);
             if(count($output_array) !== 2) continue;
             $code_name = $output_array[1];
             $component = $release->supportsComponent($code_name);
             if(is_null($component)) continue;
-            $status = isset($status['status']) ? intval($status['status']) : 0;
+            $status = isset($entry['status']) ? intval($entry['status']) : 0;
 
-            $components->add($component, array('SDKSupport' => $status));
+            $data = array('SDKSupport' => $status);
+
+            if(isset($entry['caveats'])) {
+                $caveats = $entry['caveats'];
+                foreach($caveats as $caveat)
+                {
+                    $c               = new OpenStackComponentReleaseCaveat();
+                    $c->ReleaseID   = $release->ID;
+                    $c->ComponentID = $component->ID;
+                    $c->Status      = $caveat['status'];
+                    $c->Label       = $caveat['label'];
+                    $c->Description = $caveat['description'];
+                    $c->Type        = 'SDKSupport';
+                    $c->write();
+                }
+            }
+
+            $components->add($component, $data);
+        }
+    }
+
+    private function getQualityOfPackages(OpenStackRelease $release)
+    {
+        $client        = new HttpClient;
+        $components    = $release->OpenStackComponents();
+        $template_url  = '%s/%s/ops-packaged.json';
+
+        try
+        {
+            $response = $client->get
+            (
+                sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
+            );
+        }
+        catch(HttpException $ex)
+        {
+            return;
+        }
+
+        if(is_null($response)) return;
+        if($response->getStatusCode() != 200) return;
+        $body =  $response->getBody();
+        if(is_null($body)) return;
+        $content = $body->getContents();
+        if(empty($content)) return;
+        $package_q = json_decode($content, true);
+        if(is_null($package_q)) return;
+
+        foreach($package_q as $component_name => $entry)
+        {
+            preg_match("/\((\w*)\)/", $component_name, $output_array);
+            if(count($output_array) !== 2) continue;
+            $code_name = $output_array[1];
+            $component = $release->supportsComponent($code_name);
+            if(is_null($component)) continue;
+
+            $data = array('QualityOfPackages' => $entry['status']);
+
+            if(isset($entry['caveats'])) {
+                $caveats = $entry['caveats'];
+                foreach($caveats as $caveat)
+                {
+                    $c               = new OpenStackComponentReleaseCaveat();
+                    $c->ReleaseID   = $release->ID;
+                    $c->ComponentID = $component->ID;
+                    $c->Status      = $caveat['status'];
+                    $c->Label       = $caveat['label'];
+                    $c->Description = $caveat['description'];
+                    $c->Type        = 'QualityOfPackages';
+                    $c->write();
+                }
+            }
+
+            $components->add($component, $data);
         }
     }
 
@@ -411,7 +515,5 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             );
 
         }
-
-
     }
 }

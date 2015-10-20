@@ -19,7 +19,7 @@
                     <% end_if %>
                     <% if $Component.HasInstallationGuide %>
                     <p>
-                        <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/" target="_blank">View the install guide</a>
+                        <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/" target="_blank">View the install guide</a>
                     </p>
                     <% end_if %>
                     <p>
@@ -91,7 +91,9 @@
                                             <li <% if $Component.HasInstallationGuide %>class="on"<% end_if %>>
                                                 <% if $Component.HasInstallationGuide %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
-                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
+                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, InstallationGuide) %>
+                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
+                                                    <% end_loop %>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
@@ -100,7 +102,7 @@
                                     </td>
                                     <td>
                                         <% if $Component.HasInstallationGuide %>
-                                            <a href="http://docs.openstack.org/{$Top.DefaultRelease.Slug}/">View Install Guide</a>
+                                            <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/">View Install Guide</a>
                                         <% else %>
                                             &nbsp;
                                         <% end_if %>
@@ -123,7 +125,9 @@
                                         <ul>
                                             <li <% if $Component.SDKSupport %>class="on"<% end_if %>>
                                                 <i class="fa fa-circle"></i><span>{$Component.SDKSupport}</span>
-                                                <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
+                                                <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, SDKSupport) %>
+                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
+                                                <% end_loop %>
                                             </li>
                                         </ul>
                                     </td>
@@ -148,7 +152,9 @@
                                             <li class="on">
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
                                                     <i class="fa fa-circle"></i><span> {$Component.Adoption}%</span>
-                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
+                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, ProductionUse) %>
+                                                            <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
+                                                    <% end_loop %>
                                                 </a>
                                             </li>
                                         </ul>
@@ -174,7 +180,6 @@
                                             <li <% if $Component.HasTeamDiversity %>class="on" <% end_if %>>
                                                 <% if $Component.HasTeamDiversity %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
-                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
@@ -194,14 +199,13 @@
                                 </tr>
                                 <tr>
                                     <td>Has this project stable branches?
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                       <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
                                         <ul>
                                             <li <% if $Component.HasStableBranches %>class="on"<% end_if %>>
                                                 <% if $Component.HasStableBranches %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
-                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>
@@ -245,8 +249,8 @@
                                         <ul>
                                             <li <% if $Component.ReleaseMileStones %>class="on"<% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
-                                                    <i class="fa <% if $Component.ReleaseMileStones %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Cycle with milestones</span></a>
-                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
+                                                    <i class="fa <% if $Component.ReleaseMileStones %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Cycle with milestones</span>
+                                                </a>
                                             </li>
                                             <li <% if $Component.ReleaseCycleWithIntermediary %>class="on" <% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html">
@@ -255,7 +259,8 @@
                                             </li>
                                             <li <% if $Component.ReleaseIndependent %>class="on" <% end_if %>>
                                                 <a href="http://governance.openstack.org/reference/tags/release_independent.html">
-                                                    <i class="fa <% if $Component.ReleaseIndependent %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Independent</span></a>
+                                                    <i class="fa <% if $Component.ReleaseIndependent %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Independent</span>
+                                                </a>
                                             </li>
                                         </ul>
                                     </td>
@@ -269,18 +274,45 @@
                                     </td>
                                     <td>
                                         <ul>
-                                            <li class="on">
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle"></i><span>Good</span></a>
-                                                <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
+                                            <li <% if $Component.QualityOfPackages == 'good' %>class="on"<% end_if %>>
+                                                <a href="https://review.openstack.org/#/c/186633">
+                                                    <i class="fa <% if $Component.QualityOfPackages == 'good' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Good</span>
+                                                </a>
+                                                <% if $Component.QualityOfPackages == 'good' %>
+                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
+                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
+                                                    <% end_loop %>
+                                                <% end_if %>
                                             </li>
-                                            <li>
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle-o"></i><span>No</span></a>
+                                            <li <% if $Component.QualityOfPackages == 'no' %>class="on"<% end_if %>>
+                                                <a href="https://review.openstack.org/#/c/186633">
+                                                    <i class="fa <% if $Component.QualityOfPackages == 'no' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>No</span>
+                                                </a>
+                                                <% if $Component.QualityOfPackages == 'no' %>
+                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
+                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
+                                                    <% end_loop %>
+                                                <% end_if %>
                                             </li>
-                                            <li>
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle-o"></i><span>Warning</span></a>
+                                            <li <% if $Component.QualityOfPackages == 'warning' %>class="on"<% end_if %>>
+                                                <a href="https://review.openstack.org/#/c/186633">
+                                                    <i class="fa <% if $Component.QualityOfPackages == 'warning' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Warning</span>
+                                                </a>
+                                                <% if $Component.QualityOfPackages == 'warning' %>
+                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
+                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
+                                                    <% end_loop %>
+                                                <% end_if %>
                                             </li>
-                                            <li>
-                                                <a href="https://review.openstack.org/#/c/186633"><i class="fa fa-circle-o"></i><span>Beginning</span></a>
+                                            <li <% if $Component.QualityOfPackages == 'beginning' %>class="on"<% end_if %>>
+                                                <a href="https://review.openstack.org/#/c/186633">
+                                                    <i class="fa <% if $Component.QualityOfPackages == 'beginning' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Beginning</span>
+                                                </a>
+                                                <% if $Component.QualityOfPackages == 'beginning' %>
+                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
+                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
+                                                    <% end_loop %>
+                                                <% end_if %>
                                             </li>
                                         </ul>
                                     </td>
@@ -296,7 +328,6 @@
                                             <li <% if $Component.VulnerabilityManaged %>class="on" <% end_if %>>
                                                 <% if $Component.VulnerabilityManaged %>
                                                     <i class="fa fa-circle"></i><span>Yes</span>
-                                                    <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="Caveat information will go here. There could be a decent about of information, but hopefully it's not too too too too too too too long."></i>
                                                 <% else %>
                                                     <i class="fa fa-circle-o"></i><span>No</span>
                                                 <% end_if %>

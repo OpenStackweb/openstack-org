@@ -51,6 +51,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     (
         'Versions'       => 'OpenStackApiVersion',
         'RelatedContent' => 'OpenStackComponentRelatedContent',
+        'Caveats'        => 'OpenStackComponentReleaseCaveat',
     );
 
     private static $belongs_many_many = array
@@ -219,4 +220,16 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         return sprintf('%s-install.html', strtolower($this->CodeName));
     }
 
+    public function getCaveatsForReleaseType($release_id, $type)
+    {
+        return OpenStackComponentReleaseCaveat::get()->filter
+        (
+            array
+            (
+                'ReleaseID'   => intval($release_id),
+                'Type'        => $type,
+                'ComponentID' => $this->ID
+            )
+        );
+    }
 }

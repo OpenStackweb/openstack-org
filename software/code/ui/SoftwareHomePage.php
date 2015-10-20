@@ -272,6 +272,13 @@ class SoftwareHomePage_Controller extends Page_Controller
         )->sort('ReleaseDate','DESC')->first();
     }
 
+    public function getCurrentRelease()
+    {
+        $request      = $this->request;
+        $release_id   = Convert::raw2sql($request->param('RELEASE_ID'));
+        return OpenStackRelease::get()->filter('Name',ucfirst($release_id))->first();
+    }
+
 
     public function getDefaultComponents()
     {
