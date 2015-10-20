@@ -13,6 +13,8 @@
  **/
 
 define('MAX_ALLOWED_MATURITY_POINTS', 5);
+define('OpsTagsTeamRepositoryUrl', 'https://raw.githubusercontent.com/openstack/ops-tags-team/master');
+
 
 Object::add_extension('OpenStackComponent', 'OpenStackComponentAdminUI');
 Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');

@@ -61,6 +61,7 @@ class OpenStackRelease
                                     'MaturityPoints'                         => 'Int',
                                     'HasInstallationGuide'                   => 'Boolean',
                                     'SDKSupport'                             => 'Int',
+                                    'QualityOfPackages'                      => 'Text',
                                     'MostActiveContributorsByCompanyJson'    => 'Text',
                                     'MostActiveContributorsByIndividualJson' => 'Text',
                                     'ContributionsJson'                      => 'Text',
@@ -70,7 +71,8 @@ class OpenStackRelease
     static $has_many = array
     (
         'SupportedApiVersions'     => 'OpenStackReleaseSupportedApiVersion',
-        'SampleConfigurationTypes' => 'OpenStackSampleConfigurationType'
+        'SampleConfigurationTypes' => 'OpenStackSampleConfigurationType',
+        'Caveats'                  => 'OpenStackComponentReleaseCaveat',
     );
 
     /**
