@@ -50,7 +50,16 @@
     </ul>
 </li>
 <li>
-    <a href="{$BaseHref}blog/">Blog</a>
+    <a href="{$BaseHref}learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/traning">Training</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="//wiki.openstack.org">Wiki</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask.OpenStack</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news">News</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}blog">Blog</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/tokyo-2015/summit-videos">Summit Videos</a></li>
+    </ul>
 </li>
 <li>
     <a href="http://docs.openstack.org/">Docs</a>
