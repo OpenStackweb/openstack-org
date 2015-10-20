@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { age} yr
+                { age} <span>yrs</span>
                 </div>
                 <div class="core-stat-title">
                 Age
@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { maturity_points } of { this.max_maturity_points }
+                { maturity_points } <span>of</span> { this.max_maturity_points }
                 </div>
                 <div class="core-stat-title">
                 Maturity
@@ -121,7 +121,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { age} yr
+                { age} <span>yrs</span>
                 </div>
                 <div class="core-stat-title">
                 Age
