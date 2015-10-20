@@ -17,7 +17,10 @@ use \GuzzleHttp\Exception\ClientException as HttpException;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
 
-class IngestOpenStackComponentsDataCronTask extends CronTask
+/**
+ * Class IngestOpenStackComponentsDataCronTask
+ */
+final class IngestOpenStackComponentsDataCronTask extends CronTask
 {
     /**
      * @return void

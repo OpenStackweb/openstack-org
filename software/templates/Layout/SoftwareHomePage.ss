@@ -175,13 +175,13 @@
             <% end_if %>
             <div class="more-optional-projects">
                 <p>
-                    <a href="$Top.Link(all-projects)">...and many more</a>
+                    <a href="$Top.Link(project-navigator)">...and many more</a>
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <a href="$Top.Link(all-projects)" class="red-btn-lrg">Browse All OpenStack Projects</a>
+                <a href="$Top.Link(project-navigator)" class="red-btn-lrg">Browse All OpenStack Projects</a>
             </div>
         </div>
         <!-- End Page Content -->
