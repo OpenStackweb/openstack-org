@@ -275,7 +275,7 @@
                                     <td>
                                         <ul>
                                             <li <% if $Component.QualityOfPackages == 'good' %>class="on"<% end_if %>>
-                                                <a href="https://review.openstack.org/#/c/186633">
+                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
                                                     <i class="fa <% if $Component.QualityOfPackages == 'good' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Good</span>
                                                 </a>
                                                 <% if $Component.QualityOfPackages == 'good' %>
@@ -285,7 +285,7 @@
                                                 <% end_if %>
                                             </li>
                                             <li <% if $Component.QualityOfPackages == 'no' %>class="on"<% end_if %>>
-                                                <a href="https://review.openstack.org/#/c/186633">
+                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
                                                     <i class="fa <% if $Component.QualityOfPackages == 'no' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>No</span>
                                                 </a>
                                                 <% if $Component.QualityOfPackages == 'no' %>
@@ -295,7 +295,7 @@
                                                 <% end_if %>
                                             </li>
                                             <li <% if $Component.QualityOfPackages == 'warning' %>class="on"<% end_if %>>
-                                                <a href="https://review.openstack.org/#/c/186633">
+                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
                                                     <i class="fa <% if $Component.QualityOfPackages == 'warning' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Warning</span>
                                                 </a>
                                                 <% if $Component.QualityOfPackages == 'warning' %>
@@ -305,7 +305,7 @@
                                                 <% end_if %>
                                             </li>
                                             <li <% if $Component.QualityOfPackages == 'beginning' %>class="on"<% end_if %>>
-                                                <a href="https://review.openstack.org/#/c/186633">
+                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
                                                     <i class="fa <% if $Component.QualityOfPackages == 'beginning' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span>Beginning</span>
                                                 </a>
                                                 <% if $Component.QualityOfPackages == 'beginning' %>
@@ -316,7 +316,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="https://review.openstack.org/#/c/186633">View Details</a></td>
+                                    <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">View Details</a></td>
                                 </tr>
                                 <tr>
                                     <td>
