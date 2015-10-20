@@ -2,7 +2,7 @@
 <div class="software-main-wrapper">
     <div class="container">
         <div class="outer-project-back">
-            <a href="$Top.Link(all-projects)"><i class="fa fa-chevron-left"></i> Back to Project Navigator</a>
+            <a href="$Top.Link(project-navigator)"><i class="fa fa-chevron-left"></i> Back to Project Navigator</a>
         </div>
     </div>
     <div class="container inner-software">

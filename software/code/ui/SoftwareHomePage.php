@@ -76,7 +76,7 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     static $url_handlers = array
     (
-        'GET all-projects'                         => 'allComponents',
+        'GET project-navigator'                    => 'allComponents',
         'GET sample-configs'                       => 'getSampleConfigurations',
         'GET releases/$RELEASE_ID/components/$ID!' => 'getComponent',
         'GET releases/$RELEASE_ID/components'      => 'getComponentsbyRelease',
