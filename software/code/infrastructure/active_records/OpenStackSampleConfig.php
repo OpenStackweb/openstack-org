@@ -33,6 +33,11 @@ final class OpenStackSampleConfig extends DataObject
         "Type"    => 'OpenStackSampleConfigurationType',
     );
 
+    private static $has_many = array
+    (
+        'RelatedNotes' => 'OpenStackSampleConfigRelatedNote',
+    );
+
     static $many_many = array
     (
         'OpenStackComponents' => 'OpenStackComponent',

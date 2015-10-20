@@ -8,8 +8,17 @@
             setTimeout(function() {
                 $(".open-sample-config-tip").addClass("show");
             }, 1000);
+            $.cookie('software_sample_config_closed_tooltip', true , { expires: 360, path: '/' });
             event.preventDefault();
         });
+
+        var software_sample_config_closed_tooltip  = $.cookie('software_sample_config_closed_tooltip');
+        if(software_sample_config_closed_tooltip ===  'true')
+        {
+            $(".sample-configs-tip").addClass("closed-config-tip");
+            $(".open-sample-config-tip").addClass("show");
+        }
+
         // Open sample configs tip
         $(".open-sample-config-tip").click(function(event) {
             $(".sample-configs-tip").removeClass("closed-config-tip");
