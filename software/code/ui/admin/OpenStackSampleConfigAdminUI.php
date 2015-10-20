@@ -71,6 +71,21 @@ class OpenStackSampleConfigAdminUI extends DataExtension
 
             $ddl->setEmptyString('-- Select a Configuration Type --');
 
+
+            $related_notes_config =  new GridFieldConfig_RecordEditor(100);
+
+            $related_notes        = new GridField
+            (
+                "RelatedNotes",
+                "Related Notes",
+                $this->owner->RelatedNotes(),
+                $related_notes_config
+            );
+
+            $related_notes_config->addComponent(new GridFieldSortableRows('Order'));
+
+            $fields->push($related_notes);
+
         }
         return $fields;
     }

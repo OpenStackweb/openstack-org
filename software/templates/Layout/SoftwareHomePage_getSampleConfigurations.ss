@@ -78,6 +78,14 @@
                                     age: $Age
                                 },
                             <% end_loop %>
+                        ],
+                        related_notes : [
+                            <% loop RelatedNotes.Sort(Order, ASC) %>
+                                {
+                                    title : '{$Title}',
+                                    link : '{$Link}'
+                                },
+                            <% end_loop %>
                         ]
                     },
                     <% end_loop %>

@@ -1,5 +1,4 @@
 <openstack-config-samples>
-
         <div class="row">
             <div class="col-sm-12 sample-configs-wrapper">
             <div class="open-sample-config-tip"><i class="fa fa-question-circle"></i></div>
@@ -14,9 +13,11 @@
             <p>
                 { current_config.summary }
             </p>
+            <!--
             <p>
                     <strong>Curated by:</strong> <a href="community/members/profile/{ current_config.curator.id }" target="_blank"> { current_config.curator.name }</a> - { current_config.curator.position }
             </p>
+            -->
             <p if={ current_config.description !== null &&  current_config.description !=='' }>
                <a class="more-about-config" href="#">More about this configuration [+]</a>
             </p>
@@ -169,7 +170,18 @@
             </div>
             </div>
         </div>
-
+        <div class="row" if={ current_config.related_notes.length >0 }>
+            <div class="col-sm-12">
+                <p class="service-section-title"><strong>Related Notes</strong></p>
+            </div>
+        </div>
+        <div class="row" if={ current_config.related_notes.length >0 }>
+            <div class="col-sm-12">
+            <ul class="list-group">
+                <li class="list-group-item" each={ current_config.related_notes }><a href="{ link }" target="_blank">{ title }</li>
+            </ul>
+            </div>
+        </div>
         <script>
 
             this.config_samples_types_nav         = opts.config_samples_types_nav;
