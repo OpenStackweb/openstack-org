@@ -1,7 +1,8 @@
 <% include SoftwareHomePage_MainNavMenu Active=3 %>
 <script type="application/javascript">
 
-    var configuration_types              = [];
+    var configuration_types              = new Object();
+    var configuration_types_menu_list    = new Array();
     var default_configuration_type       = null;
     var max_maturity_points              = $Top.getMaxAllowedMaturityPoints;
     var release_core_component_count     = $Release.getOpenStackCoreComponentsCount;
@@ -91,12 +92,13 @@
                     <% end_loop %>
             ]
         };
+        configuration_types_menu_list.push(configuration_types[$ID]);
         <% end_if %>
     <% end_loop %>
 
 </script>
 <div class="software-main-wrapper">
-    <openstack-config-samples-types-nav default_configuration_type="{ default_configuration_type }" configuration_types="{ configuration_types }"></openstack-config-samples-types-nav>
+    <openstack-config-samples-types-nav default_configuration_type="{ default_configuration_type }" configuration_types_menu_list="{ configuration_types_menu_list }" configuration_types="{ configuration_types }"></openstack-config-samples-types-nav>
 
     <div class="container inner-software">
 
