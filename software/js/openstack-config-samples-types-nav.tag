@@ -8,7 +8,7 @@
         </div>
         <div class="sample-configs-slider">
         <ul class="sample-configs-subnav">
-            <li class="sample_config_type" each={ configuration_types } id="{ 'sample_config_type_'+id }" >
+            <li class="sample_config_type" each={ configuration_types_menu_list } id="{ 'sample_config_type_'+id }" >
                 <a id="{ 'sample_config_type_link_'+id }" href="#" data-id="{ id }" onclick={ selectedConfigSampleType }>{ type }</a>
             </li>
         </ul>
@@ -22,10 +22,11 @@
 
     <script>
 
-        this.configuration_types        = opts.configuration_types;
-        this.default_configuration_type = opts.default_configuration_type;
-        this.ctrl                       = riot.observable();
-        var self                        = this;
+        this.configuration_types           = opts.configuration_types;
+        this.default_configuration_type    = opts.default_configuration_type;
+        this.configuration_types_menu_list = opts.configuration_types_menu_list;
+        this.ctrl                          = riot.observable();
+        var self                           = this;
 
         this.on('mount', function(){
 
