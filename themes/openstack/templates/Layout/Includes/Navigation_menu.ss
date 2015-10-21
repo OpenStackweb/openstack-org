@@ -8,7 +8,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/start/">Get Started</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/roadmap/">Roadmap</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/latest-release/">Latest Release</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sourcecode/">Sourcecode</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sourcecode/">Source Code</a></li>
     </ul>
 </li>
 <li>
