@@ -7,6 +7,11 @@
             <% if $Top.HasAvailableSampleConfigTypes %>
             <li <% if Active == 3 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)">Sample Configurations</a></li>
             <% end_if %>
+            <% if SubMenuPages %>
+                <% loop SubMenuPages.Sort(Order, ASC) %>
+                    <li><a href="$Url">$Label</a></li>
+                <% end_loop %>
+            <% end_if %>
         </ul>
     </div>
 </div>

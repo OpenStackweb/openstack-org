@@ -16,12 +16,17 @@ class SoftwareHomePage extends Page
 {
     static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-    static $db = array
+    private static $db = array
     (
-        'IntroTitle' => 'Text',
-        'IntroText'  => 'HTMLText',
+        'IntroTitle'  => 'Text',
+        'IntroText'   => 'HTMLText',
         'IntroTitle2' => 'Text',
         'IntroText2'  => 'HTMLText',
+    );
+
+    private static $has_many = array
+    (
+        'SubMenuPages' => 'SoftwareHomePageSubMenuItem'
     );
 
     public function getCMSFields()
@@ -32,9 +37,21 @@ class SoftwareHomePage extends Page
         $fields->addFieldsToTab('Root.Main',new HtmlEditorField('IntroText', 'Intro Text'));
         $fields->addFieldsToTab('Root.Main',new TextField('IntroTitle2', 'Intro Title 2'));
         $fields->addFieldsToTab('Root.Main',new HtmlEditorField('IntroText2', 'Intro Text 2'));
+
+        $config   = new GridFieldConfig_RecordEditor(100);
+        $sub_menu = new GridField("SubMenuPages", "SubMenu Pages", $this->SubMenuPages(), $config);
+        $config->addComponent(new GridFieldSortableRows('Order'));
+        $fields->push($sub_menu);
+
         return $fields;
     }
 
+    public function getAllowedPagesForMenu()
+    {
+        return Page::get()
+            ->filter('ParentID', (int)$this->ID)
+            ->exclude('ID', (int)$this->ID);
+    }
 }
 
 /**
@@ -65,6 +82,7 @@ class SoftwareHomePage_Controller extends Page_Controller
     {
         $this->manager = $manager;
     }
+
 
     private static $allowed_actions = array
     (
