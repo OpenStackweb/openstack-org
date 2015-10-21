@@ -172,7 +172,7 @@
         </div>
         <div class="row" if={ current_config.related_notes.length >0 }>
             <div class="col-sm-12">
-                <p class="service-section-title"><strong>Related Notes</strong></p>
+                <p class="service-section-title"><strong>Related Content</strong></p>
             </div>
         </div>
         <div class="row" if={ current_config.related_notes.length >0 }>
