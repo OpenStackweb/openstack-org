@@ -21,7 +21,7 @@
     border-radius: 0;
     position: relative;
     display: block;
-    padding: 15px 30px;
+    padding: 15px 25px;
     font-size: 12px;
     color: #698296;
     text-transform: uppercase;
@@ -41,20 +41,20 @@
 
 @media (max-width: 1200px) {
     .software-tab-wrapper ul.project-tabs li a {
-        padding: 15px 20px; } }
+        padding: 15px 15px; } }
 
 @media (max-width: 991px) {
     .software-tab-wrapper .container {
         width: 100%; }
     .software-tab-wrapper ul.project-tabs li a {
-        padding: 15px 15px;
+        padding: 15px 10px;
         font-size: 12px; } }
 
 @media (max-width: 840px) {
     .software-tab-wrapper .container {
         width: 100%; }
     .software-tab-wrapper ul.project-tabs li a {
-        padding: 5px 11px;
+        padding: 5px 5px;
         font-size: 12px; } }
 
 @media (max-width: 790px) {
