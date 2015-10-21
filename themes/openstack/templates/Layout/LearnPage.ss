@@ -33,7 +33,7 @@
                             <p>
                                 Find online and location specific trainings for all levels of expertise from the OpenStack Marketplace.
                             </p>
-                            <a href="https://www.openstack.org/marketplace/training/" class="learn-btn">
+                            <a href="//www.openstack.org/marketplace/training/" class="learn-btn">
                                 Go To Training <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -47,7 +47,7 @@
                             <p>
                                 With topics ranging from how-tos, case studies, organizational culture and more, this publication will give you the tools needed to become a Superuser.
                             </p>
-                            <a href="http://superuser.openstack.org" class="learn-btn">
+                            <a href="//superuser.openstack.org" class="learn-btn">
                                 Go To Superuser <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -63,7 +63,7 @@
                             <p>
                                 Powered by the community, the OpenStack Wiki offers details on getting started, contributing, projects and more.
                             </p>
-                            <a href="https://wiki.openstack.org" class="learn-btn">
+                            <a href="//wiki.openstack.org" class="learn-btn">
                                 Go To The Wiki <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -77,7 +77,7 @@
                             <p>
                                 Dig deep into the the world of OpenStack through the eyes of those who operate and develop OpenStack, ask, find and answer OpenStack specific questions her.
                             </p>
-                            <a href="https://ask.openstack.org" class="learn-btn">
+                            <a href="//ask.openstack.org" class="learn-btn">
                                 Go To Ask OpenStack <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
