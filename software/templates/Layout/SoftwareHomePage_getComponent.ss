@@ -143,7 +143,7 @@
                                 <tr>
                                     <td>
                                         Percentage of deployments using this project in production environments.
-                                        <i data-content="Adoption data is derived from the latest <a href="//www.openstack.org/user-survey">user survey</a>." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How is this calculated?"></i>
+                                        <i data-content="Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How is this calculated?"></i>
                                     </td>
                                     <td>
                                         <ul>
