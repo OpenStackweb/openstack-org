@@ -16,29 +16,6 @@
 </style>
 <div class="container">
     <h1>$LoginPageTitle</h1>
-
-    <div class="row">
-
-        <div class="col-lg-4">
-            <div id="user">
-                <p>$LoginPageSlide1Content</p>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div id="time">
-                <p>$LoginPageSlide2Content</p>
-            </div>
-        </div>
-
-        <div class="survey-box col-lg-4">
-            <div id="private">
-                <p>$LoginPageSlide3Content</p>
-            </div>
-        </div>
-
-    </div>
-    $LoginPageContent
     <!-- user survey report -->
     <div class="row">
         <div class="col-lg-12">
@@ -75,9 +52,6 @@
         <div class="col-md-3 col-md-offset-3">
             <a class="roundedButton" href="#" target="_blank">Download the report</a>
         </div>
-        <div class="col-md-3 col-md-offset-1">
-            <a class="roundedButton" href="#" target="_blank">Downloadable PDF</a>
-        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -105,6 +79,29 @@
         </div>
     </div>
     <!-- end - user survey report -->
+    <hr/>
+    <div class="row">
+
+        <div class="col-lg-4">
+            <div id="user">
+                <p>$LoginPageSlide1Content</p>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div id="time">
+                <p>$LoginPageSlide2Content</p>
+            </div>
+        </div>
+
+        <div class="survey-box col-lg-4">
+            <div id="private">
+                <p>$LoginPageSlide3Content</p>
+            </div>
+        </div>
+
+    </div>
+    $LoginPageContent
     <hr/>
     <h1>Get Started</h1>
     <div class="row">
