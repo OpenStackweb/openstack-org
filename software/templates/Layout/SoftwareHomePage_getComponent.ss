@@ -84,7 +84,6 @@
                                 <tbody>
                                 <tr>
                                     <td>Is there an install guide for this project guide (at docs.openstack.org)?
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -119,7 +118,6 @@
                                 </tr>
                                 <tr>
                                     <td>Number of software development kits (SDKs) which support this project.
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -145,7 +143,7 @@
                                 <tr>
                                     <td>
                                         Percentage of deployments using this project in production environments.
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
+                                        <i data-content="Adoption data is derived from the latest <a href="//www.openstack.org/user-survey">user survey</a>." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How is this calculated?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -198,8 +196,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Has this project stable branches?
-                                       <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                    <td>Does this project have stable branches?
                                     </td>
                                     <td>
                                         <ul>
@@ -243,7 +240,7 @@
                                 <tr>
                                     <td>
                                         How is this project released?
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
+                                        <i data-content="OpenStack development happens on a six-month cycle. Projects can choose to release on this cycle with oversight of the release management team, or to release independently of the cycle." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -270,7 +267,6 @@
                                 <tr>
                                     <td>
                                          Existence and quality of packages for this project in popular distributions.
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="How are projects released?"></i>
                                     </td>
                                     <td>
                                         <ul>
@@ -320,8 +316,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Are security issues in this project managed by the OpenStackVulnerability Management Team?
-                                        <i data-content="" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                        Are vulnerability issues managed by the OpenStack security team?
                                     </td>
                                     <td>
                                         <ul>
