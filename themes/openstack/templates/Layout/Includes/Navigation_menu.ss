@@ -27,9 +27,6 @@
     <a href="{$BaseHref}community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuCommunity">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/">Welcome! Start Here</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org/">Ask A Technical Question</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//wiki.openstack.org/wiki/Main_Page">OpenStack Wiki</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Community Events</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/">Openstack Foundation</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//wiki.openstack.org/wiki/Getting_The_Code">Source Code</a></li>
         <li role="presentation" class="divider"></li>
