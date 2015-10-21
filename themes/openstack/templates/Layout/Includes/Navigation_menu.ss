@@ -20,6 +20,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}enterprise/">OpenStack in the Enterprise</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}appdev/">Application Developers</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org/">Superuser Magazine</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}user-survey/">User Survey</a></li>
     </ul>
 </li>
 <li>
