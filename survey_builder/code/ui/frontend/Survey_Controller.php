@@ -119,7 +119,6 @@ class Survey_Controller extends Page_Controller {
     function init()
     {
         $this->current_survey = $this->current_entity_survey = null;
-        $this->BootstrapConverted = true;
 
         parent::init();
 
@@ -160,10 +159,6 @@ class Survey_Controller extends Page_Controller {
         }
         if(strtolower($action) === 'index') return $this->redirect(self::RoutePrefix.'/current');
         return parent::handleAction($request, $action);
-    }
-
-    public function BootstrapConverted(){
-        return true;
     }
 
     /**
@@ -712,14 +707,11 @@ class Survey_Controller extends Page_Controller {
         $res = '';
         if (empty($res)) {
             $res = <<< HTML
-
-			<p>This survey provides users an opportunity to influence the community and software
-		direction. By sharing information about your configuration and requirements, the OpenStack
-		Foundation User Committee will be able to advocate on your behalf.</p>
-		<p><a href="/user-survey/faq" class="roundedButton">More Information About The Survey</a></p>
-		<hr/>
-
-		<h1>Get Started</h1>
+<p>This survey provides users an opportunity to influence the community and software
+direction. By sharing information about your configuration and requirements, the OpenStack
+Foundation User Committee will be able to advocate on your behalf.</p>
+<p><a href="{$link}faq" class="roundedButton">More Information About The Survey</a></p>
+<hr/>
 HTML;
         }
         return $res;
