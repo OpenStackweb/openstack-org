@@ -6,7 +6,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sample-configs/">Sample Configs</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/start/">Get Started</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/software/roadmap/">Roadmap</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/roadmap/">Roadmap</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/latest-release/">Latest Release</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sourcecode/">Sourcecode</a></li>
     </ul>
