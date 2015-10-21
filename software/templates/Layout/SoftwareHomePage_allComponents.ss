@@ -24,6 +24,7 @@
             <div class="col-sm-12 all-projects-wrapper">
                 <h3>Browse All OpenStack Projects</h3>
                 <p>
+                    The Project Navigator is aimed at helping users make informed decisions about how to consume the software. Data used to power the Project Navigator website is provided by the OpenStack Technical and User Committees. 
                 </p>
                 <p>
                     <a data-target="#statsInfoModal" data-toggle="modal" href="#">What do the stats shown on each project mean?</a>
@@ -47,13 +48,13 @@
                         </p>
                         <hr>
                         <p>
-                            <strong>Adoption</strong> is nulla ipsam veniam quis eos, voluptatibus veritatis magni, molestias magnam doloribus!
+                            <strong>Adoption</strong> is the percentage of production deployments running the project based on the latest biannual user survey results.
                         </p>
                         <p>
-                            <strong>Maturity</strong> comes from looking at {$Top.getMaxAllowedMaturityPoints} distinct tags. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae non nulla odio expedita itaque, soluta assumenda a saepe omnis illum earum officiis aliquid eum error. Ducimus accusantium quod, debitis obcaecati.
+                            <strong>Maturity</strong> comes from looking at {$Top.getMaxAllowedMaturityPoints} distinct tags that indicate stability and sustainability. The current criteria includes whether or not the project has an install guide, whether it is supported by 7 or more SDKs, if the adoption percentage is greater than 75%, whether or not the team has achieved corporate diversity and whether or not there are stable branches.
                         </p>
                         <p>
-                            <strong>Age</strong> is the age of the project, consisting of maxime placeat quasi, eos, obcaecati blanditiis eaque cum cumque quaerat, harum dolorem magnam saepe quam.
+                            <strong>Age</strong> is the number of years the project has been in development.
                         </p>
                     </div>
                     <div class="modal-footer">
