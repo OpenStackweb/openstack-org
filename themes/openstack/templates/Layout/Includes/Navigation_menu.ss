@@ -2,14 +2,13 @@
     <a href="{$BaseHref}software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuSoftware">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/">Overview</a></li>
-        <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/openstack-compute/">Compute</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/openstack-storage/">Storage</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/openstack-networking/">Networking</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/openstack-dashboard/">Dashboard</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/openstack-shared-services/">Shared Services</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/">Project Navigator</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sample-configs/">Sample Configs</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/start/">Get Started</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/software/roadmap/">Roadmap</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/latest-release/">Latest Release</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sourcecode/">Sourcecode</a></li>
     </ul>
 </li>
 <li>
@@ -27,8 +26,9 @@
     <a href="{$BaseHref}community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuCommunity">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/">Welcome! Start Here</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/">Openstack Foundation</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//wiki.openstack.org/wiki/Getting_The_Code">Source Code</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/">OpenStack Foundation</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://groups.openstack.org">User Groups</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/companies/">Supporting Companies</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/jobs/">Jobs</a></li>
@@ -44,16 +44,15 @@
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Overview</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/">The OpenStack Summit</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">More OpenStack Events</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">OpenStack Days</a></li>
     </ul>
 </li>
 <li>
     <a href="{$BaseHref}learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//wiki.openstack.org">Wiki</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask.OpenStack</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}blog/">Blog</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/summit-videos/">Summit Videos</a></li>
