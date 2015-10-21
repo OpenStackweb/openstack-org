@@ -40,7 +40,9 @@
             The OpenStack Foundation will offer its first professional certification for OpenStack administrators starting in Q2 2016.
             The OpenStack Certified Administrator (OSCA) test will be virtual and available anywhere in the world.
         </p>
-        <div class="sendgrid-subscription-widget" data-token="s8WtfiU6aMmIzKLc%2BECPIqKV2Tm%2B5QfB9x4YBNZt4VlTuNHCQ4mKObQJGeMLabqCP5XJUxPeYLwQkJcQuc2kLw%3D%3D">&nbsp;</div>
+        <div class="sendgrid-subscription-widget" data-token="s8WtfiU6aMmIzKLc%2BECPIqKV2Tm%2B5QfB9x4YBNZt4VlTuNHCQ4mKObQJGeMLabqCP5XJUxPeYLwQkJcQuc2kLw%3D%3D"></div>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'sendgrid-subscription-widget-js');</script>
+
         <p>
             The OpenStack Certified Administrator is a professional typically with at least six months OpenStack experience,
             and has the skills required to provide day-to-day operation and management of an OpenStack cloud.
