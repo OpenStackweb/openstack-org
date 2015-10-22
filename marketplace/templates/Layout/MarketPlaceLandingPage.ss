@@ -48,7 +48,7 @@
 
 			<p>OpenStack training courses and workshops are happening daily online and around the world thanks to dozens of training partners. Whether you are installing OpenStack for the first time or interested in advanced networking, there’s a course for you in the <a href="http://www.openstack.org/marketplace/training">Training Marketplace</a>.</p>
 
-			<p>The OpenStack Foundation will offer its first professional certification, OpenStack Certified Administrator (OSCA), in Q2 2016. <a href="http://www.openstack.org/osca">Learn more about the certification and sign up for updates</a>.</p>
+			<p>The OpenStack Foundation will offer its first professional certification, Certified OpenStack Administrator (COA), in Q2 2016. <a href="coa">Learn more about the certification and sign up for updates</a>.</p>
         </div>
     </div>
     <div class="row">
