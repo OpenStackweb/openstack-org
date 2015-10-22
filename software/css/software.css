@@ -453,7 +453,12 @@ ul.sample-configs-subnav li a {
 ul.sample-configs-subnav li.active a {
     color: #2A4E68;
     font-weight: 700;
-    border-bottom: 4px solid #2A4E68; }
+    border-bottom: 4px solid #2A4E68; 
+    text-decoration: none;
+}
+ul.sample-configs-subnav li a:hover, ul.sample-configs-subnav li.active a:hover {
+    text-decoration: none;
+}
 
 .all-projects-wrapper {
     text-align: left; }
