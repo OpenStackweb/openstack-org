@@ -2933,3 +2933,72 @@ i.mobile-expand {
 	width: 100%;
 }
 /*End New responsive nav*/
+/*COA Page*/
+.coa-wrapper p {
+  text-align: center;
+  color: #2A4E68;
+}
+img.coa-hero-img {
+  max-width: 100%;
+  margin: 20px 0 60px;
+}
+.coa-sendgrid {
+  background: #edf2f7;
+  margin: 60px 0;
+  border-radius: 4px;
+  padding: 40px 20px;
+  text-align: center;
+}
+.coa-sendgrid p {
+  color: #2A4E68;
+  margin-bottom: 20px;
+}
+.coa-sendgrid i {
+  color: #C8CDD3;
+  margin: -20px 0 10px;
+}
+.sendgrid-subscription-widget.coa-sendgrid input[type="email"] {
+  border: 2px solid #C8CDD3;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: #2A4E68;
+  font-size: 14px;
+  text-transform: lowercase;
+  font-weight: 400;
+  width: 100%;
+}
+.sendgrid-subscription-widget.coa-sendgrid input[type="email"]:focus {
+  outline: none;
+}
+.sendgrid-subscription-widget.coa-sendgrid label {
+  display: inline-block;
+  margin-right: 10px;
+  width: 40%;
+}
+@media (max-width: 767px) {
+  .sendgrid-subscription-widget.coa-sendgrid label {
+    width: 70%;
+  }
+}
+.sendgrid-subscription-widget.coa-sendgrid label>span {
+  display: none;
+}
+.sendgrid-subscription-widget.coa-sendgrid input[type="submit"] {
+  background: #29abe2;
+  padding: 9px 20px;
+  border-radius: 4px;
+  color: white;
+  text-transform: uppercase;
+  border: 2px solid #29abe2;
+}
+.sendgrid-subscription-widget.coa-sendgrid input[type="submit"]:hover {
+  background: #30739C;
+  border: 2px solid #30739C;
+}
+.sendgrid-subscription-widget.coa-sendgrid input::-webkit-input-placeholder, .sendgrid-subscription-widget.coa-sendgrid input::-webkit-input-placeholder, .sendgrid-subscription-widget.coa-sendgrid input::-webkit-input-placeholder {
+  color: #C8CDD3;
+  font-size: 14px;
+  text-transform: lowercase;
+  font-weight: 400;
+}
+/*End COA Page*/
