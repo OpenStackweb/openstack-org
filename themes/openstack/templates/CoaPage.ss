@@ -33,7 +33,7 @@
       <div class="container coa-wrapper">
         <div class="row">
           <div class="col-sm-10 col-sm-push-1">
-            <h1>OpenStack&nbsp;Certified&nbsp;Administrator</h1>
+            <h1>Certified OpenStack Administrator</h1>
             <img src="/themes/openstack/images/coa/COA-page-img.jpg" class="coa-hero-img" alt="">
             <p>
                 OpenStack skills are in high demand as more companies are productizing and adopting OpenStack.
@@ -41,7 +41,7 @@
             </p>
             <p>
                 The OpenStack Foundation will offer its first professional certification for OpenStack administrators starting in Q2 2016.
-                The OpenStack Certified Administrator (OSCA) test will be virtual and available anywhere in the world.
+                The Certified OpenStack Administrator (COA) test will be virtual and available anywhere in the world.
             </p>
             <div class="sendgrid-subscription-widget coa-sendgrid" data-token="s8WtfiU6aMmIzKLc%2BECPIqKV2Tm%2B5QfB9x4YBNZt4VlTuNHCQ4mKObQJGeMLabqCP5XJUxPeYLwQkJcQuc2kLw%3D%3D">
                 <i class="fa fa-envelope-o fa-3x"></i>
@@ -51,7 +51,7 @@
             </div>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'sendgrid-subscription-widget-js');</script>
             <p>
-                The OpenStack Certified Administrator is a professional typically with at least six months OpenStack experience,
+                The Certified OpenStack Administrator is a professional typically with at least six months OpenStack experience,
                 and has the skills required to provide day-to-day operation and management of an OpenStack cloud.
             </p>
             <p>
