@@ -46,11 +46,9 @@
                 understanding attitudes, organizational profiles, use cases, and technology choices across the
                 community’s various deployment stages and sizes.
             </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 col-md-offset-3">
-            <a class="roundedButton" href="#" target="_blank">Download the report</a>
+            <p>
+                <a class="roundedButton" href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf" target="_blank">Download the report</a>
+            </p>
         </div>
     </div>
     <div class="row">
