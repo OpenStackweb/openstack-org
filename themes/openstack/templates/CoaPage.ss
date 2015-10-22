@@ -30,28 +30,37 @@
       <% include Navigation %>
       
       <!-- Page Content -->
-      <div class="container">
-        <h1>OpenStack&nbsp;Certified&nbsp;Administrator</h1>
-        <p>
-            OpenStack skills are in high demand as more companies are productizing and adopting OpenStack.
-            If you are interested in working in the OpenStack community, training and professional certification can help you stand out.
-        </p>
-        <p>
-            The OpenStack Foundation will offer its first professional certification for OpenStack administrators starting in Q2 2016.
-            The OpenStack Certified Administrator (OSCA) test will be virtual and available anywhere in the world.
-        </p>
-        <div class="sendgrid-subscription-widget" data-token="s8WtfiU6aMmIzKLc%2BECPIqKV2Tm%2B5QfB9x4YBNZt4VlTuNHCQ4mKObQJGeMLabqCP5XJUxPeYLwQkJcQuc2kLw%3D%3D"></div>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'sendgrid-subscription-widget-js');</script>
-
-        <p>
-            The OpenStack Certified Administrator is a professional typically with at least six months OpenStack experience,
-            and has the skills required to provide day-to-day operation and management of an OpenStack cloud.
-        </p>
-        <p>
-            To learn more about OpenStack and get started, consider joining a <a href="http://groups.openstack.org" target="_blank">local user group</a>,
-            attending an <a href="summit" target="_blank">OpenStack Summit</a>, or finding a course in the <a href="training" target="_top">Training Marketplace</a>.
-            And when you&rsquo;re ready, you can browse the many available <a href="jobs" target="_top">OpenStack jobs</a>.
-        </p>
+      <div class="container coa-wrapper">
+        <div class="row">
+          <div class="col-sm-10 col-sm-push-1">
+            <h1>OpenStack&nbsp;Certified&nbsp;Administrator</h1>
+            <img src="/themes/openstack/COA-page-img.jpg" class="coa-hero-img" alt="">
+            <p>
+                OpenStack skills are in high demand as more companies are productizing and adopting OpenStack.
+                If you are interested in working in the OpenStack community, training and professional certification can help you stand out.
+            </p>
+            <p>
+                The OpenStack Foundation will offer its first professional certification for OpenStack administrators starting in Q2 2016.
+                The OpenStack Certified Administrator (OSCA) test will be virtual and available anywhere in the world.
+            </p>
+            <div class="sendgrid-subscription-widget coa-sendgrid" data-token="s8WtfiU6aMmIzKLc%2BECPIqKV2Tm%2B5QfB9x4YBNZt4VlTuNHCQ4mKObQJGeMLabqCP5XJUxPeYLwQkJcQuc2kLw%3D%3D">
+                <i class="fa fa-envelope-o fa-3x"></i>
+              <p>
+                Enter your email address to learn more about becoming a Certified OpenStack Administrator.
+              </p>
+            </div>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'sendgrid-subscription-widget-js');</script>
+            <p>
+                The OpenStack Certified Administrator is a professional typically with at least six months OpenStack experience,
+                and has the skills required to provide day-to-day operation and management of an OpenStack cloud.
+            </p>
+            <p>
+                To learn more about OpenStack and get started, consider joining a <a href="http://groups.openstack.org" target="_blank">local user group</a>,
+                attending an <a href="summit" target="_blank">OpenStack Summit</a>, or finding a course in the <a href="training" target="_top">Training Marketplace</a>.
+                And when you&rsquo;re ready, you can browse the many available <a href="jobs" target="_top">OpenStack jobs</a>.
+            </p>
+          </div>
+        </div>
       </div>
 
     <% include Footer %>
