@@ -44,6 +44,15 @@
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 program-logos">
+			<h3>Training & Certification</h3>
+
+			<p>OpenStack training courses and workshops are happening daily online and around the world thanks to dozens of training partners. Whether you are installing OpenStack for the first time or interested in advanced networking, there’s a course for you in the <a href="http://www.openstack.org/marketplace/training">Training Marketplace</a>.</p>
+
+			<p>The OpenStack Foundation will offer its first professional certification, Certified OpenStack Administrator (COA), in Q2 2016. <a href="coa">Learn more about the certification and sign up for updates</a>.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 program-logos">
             <div class="col-lg-8">
                 <h3>Look for these logos</h3>
                 <p>When evaluating OpenStack related products, look for these logos which indicate products that have met the necessary requirements:</p>
