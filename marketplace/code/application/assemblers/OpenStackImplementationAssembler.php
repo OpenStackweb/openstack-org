@@ -37,7 +37,9 @@ final class OpenStackImplementationAssembler
         //capabilities
         $capabilities = array();
         foreach ($implementation->getCapabilities() as $capability) {
-            array_push($capabilities, OpenStackImplementationAssembler::convertCapabilityToArray($capability));
+            $capability = OpenStackImplementationAssembler::convertCapabilityToArray($capability);
+            if(!is_null($capability))
+            array_push($capabilities, $capability);
         }
         $res['capabilities'] = $capabilities;
         //hypervisors
