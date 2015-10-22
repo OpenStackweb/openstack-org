@@ -47,7 +47,7 @@
                 community’s various deployment stages and sizes.
             </p>
             <p>
-                <a class="roundedButton" href="#" target="_blank">Download the report</a>
+                <a class="roundedButton" href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf" target="_blank">Download the report</a>
             </p>
         </div>
     </div>
