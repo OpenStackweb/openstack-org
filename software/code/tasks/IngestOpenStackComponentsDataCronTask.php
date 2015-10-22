@@ -202,9 +202,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     $c               = new OpenStackComponentReleaseCaveat();
                     $c->ReleaseID   = $release->ID;
                     $c->ComponentID = $component->ID;
-                    $c->Status      = $caveat['status'];
-                    $c->Label       = $caveat['label'];
-                    $c->Description = $caveat['description'];
+                    $c->Status      = isset($caveat['status'])?$caveat['status']:'';
+                    $c->Label       = isset($caveat['label'])?$caveat['label'] : '';
+                    $c->Description = isset($caveat['description'])?$caveat['description']:'';
                     $c->Type        = 'InstallationGuide';
                     $c->write();
                 }
@@ -263,9 +263,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     $c               = new OpenStackComponentReleaseCaveat();
                     $c->ReleaseID   = $release->ID;
                     $c->ComponentID = $component->ID;
-                    $c->Status      = $caveat['status'];
-                    $c->Label       = $caveat['label'];
-                    $c->Description = $caveat['description'];
+                    $c->Status      = isset($caveat['status'])?$caveat['status']:'';
+                    $c->Label       = isset($caveat['label'])?$caveat['label'] : '';
+                    $c->Description = isset($caveat['description'])?$caveat['description']:'';
                     $c->Type        = 'ProductionUse';
                     $c->write();
                 }
@@ -353,9 +353,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     $c               = new OpenStackComponentReleaseCaveat();
                     $c->ReleaseID   = $release->ID;
                     $c->ComponentID = $component->ID;
-                    $c->Status      = $caveat['status'];
-                    $c->Label       = $caveat['label'];
-                    $c->Description = $caveat['description'];
+                    $c->Status      = isset($caveat['status'])?$caveat['status']:'';
+                    $c->Label       = isset($caveat['label'])?$caveat['label'] : '';
+                    $c->Description = isset($caveat['description'])?$caveat['description']:'';
                     $c->Type        = 'SDKSupport';
                     $c->write();
                 }
@@ -409,9 +409,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     $c               = new OpenStackComponentReleaseCaveat();
                     $c->ReleaseID   = $release->ID;
                     $c->ComponentID = $component->ID;
-                    $c->Status      = $caveat['status'];
-                    $c->Label       = $caveat['label'];
-                    $c->Description = $caveat['description'];
+                    $c->Status      = isset($caveat['status'])?$caveat['status']:'';
+                    $c->Label       = isset($caveat['label'])?$caveat['label'] : '';
+                    $c->Description = isset($caveat['description'])?$caveat['description']:'';
                     $c->Type        = 'QualityOfPackages';
                     $c->write();
                 }

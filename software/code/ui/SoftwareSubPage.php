@@ -40,10 +40,10 @@ class SoftwareSubPage_Controller extends Page_Controller
         $parent = SoftwareHomePage::get()->byID($this->ParentID);
         if(is_null($parent)) return -1;
         $pos = 0;
-        foreach($parent->SubMenuPages() as $sp)
+        foreach($parent->SubMenuPages()->sort('Order','ASC') as $sp)
         {
             ++$pos;
-            if($sp->Url === $this->data()->Link(true))
+            if(strpos( $sp->Url, rtrim($this->data()->Link(true),'/')) !== false)
             {
                 break;
             }
