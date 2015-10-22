@@ -84,3 +84,16 @@
             </div>
         </div>
         <% end_if %>
+        <div class="row powered-wrapper">
+            <div class="col-sm-12">
+                <div class="powered-image">
+                    <img src="/marketplace/code/ui/frontend/images/federated-identity-badge.png" alt="">
+                </div>
+                <div class="powered-description federated-identity">
+                    <p>
+                        This product supports OpenStack Federated Identity, allowing it to connect to other OpenStack clouds for Authentication and Authorization.
+                    </p>
+                </div>
+            </div>
+        </div>
+
