@@ -172,6 +172,9 @@ ul.marketplace-nav a:active,ul.marketplace-nav a:hover{
     color: #2A4E68;
     font-weight: 400;
     font-size: 13px; }
+.powered-description.federated-identity {
+  padding-top: 15px;
+}
 .powered-description a {
     color: #29abe2;
     text-decoration: underline; }
