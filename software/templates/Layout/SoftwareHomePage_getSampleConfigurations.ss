@@ -1,4 +1,4 @@
-<% include SoftwareHomePage_MainNavMenu Active=3 %>
+<% include SoftwareHomePage_MainNavMenu Active=2%>
 <script type="application/javascript">
 
     var configuration_types              = new Object();

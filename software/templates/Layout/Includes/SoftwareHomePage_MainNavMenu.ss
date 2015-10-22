@@ -5,11 +5,11 @@
             <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link">Overview</a></li>
             <li <% if Active == 1 %>class="active"<% end_if %>><a href="$Top.Link(project-navigator)">Project Navigator</a></li>
             <% if $Top.HasAvailableSampleConfigTypes %>
-            <li <% if Active == 3 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)">Sample Configurations</a></li>
+            <li <% if Active == 2 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)">Sample Configurations</a></li>
             <% end_if %>
             <% if SubMenuPages %>
                 <% loop SubMenuPages.Sort(Order, ASC) %>
-                    <li><a href="$Url">$Label</a></li>
+                    <li <% if Active == $Top.getCurrentIdx($Pos) %>class="active"<% end_if %>><a href="$Url">$Label</a></li>
                 <% end_loop %>
             <% end_if %>
         </ul>
@@ -25,7 +25,7 @@
             <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link">Overview</a></li>
             <li <% if Active == 1 %>class="active"<% end_if %>><a href="$Top.Link(project-navigator)">All Projects</a></li>
             <% if $Top.HasAvailableSampleConfigTypes %>
-                <li <% if Active == 3 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)">Sample Configurations</a></li>
+                <li <% if Active == 2 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)">Sample Configurations</a></li>
             <% end_if %>
         </ul>
     </div>
