@@ -34,7 +34,7 @@
         <div class="row">
           <div class="col-sm-10 col-sm-push-1">
             <h1>OpenStack&nbsp;Certified&nbsp;Administrator</h1>
-            <img src="/themes/openstack/COA-page-img.jpg" class="coa-hero-img" alt="">
+            <img src="/themes/openstack/images/coa/COA-page-img.jpg" class="coa-hero-img" alt="">
             <p>
                 OpenStack skills are in high demand as more companies are productizing and adopting OpenStack.
                 If you are interested in working in the OpenStack community, training and professional certification can help you stand out.
