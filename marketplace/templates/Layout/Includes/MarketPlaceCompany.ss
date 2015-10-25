@@ -84,7 +84,6 @@
             </div>
         </div>
         <% end_if %>
-        <% if isCompatibleWithFederatedIdentity %>
         <div class="row powered-wrapper">
             <div class="col-sm-12">
                 <div class="powered-image">
@@ -97,4 +96,3 @@
                 </div>
             </div>
         </div>
-        <% end_if %>
