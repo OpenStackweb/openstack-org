@@ -88,7 +88,7 @@
         <div class="row powered-wrapper">
             <div class="col-sm-12">
                 <div class="powered-image">
-                    <img src="/marketplace/code/ui/frontend/images/federated-identity-badge.png" alt="">
+                    <img src="/marketplace/code/ui/frontend/images/federated-identity-badge.png" alt="Federated Identity" width="168">
                 </div>
                 <div class="powered-description federated-identity">
                     <p>
