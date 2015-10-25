@@ -101,7 +101,7 @@
                                     </td>
                                     <td>
                                         <% if $Component.HasInstallationGuide %>
-                                            <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/">View Install Guide</a>
+                                            <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-docs-install-guide.rst">View Install Guide</a>
                                         <% else %>
                                             &nbsp;
                                         <% end_if %>
@@ -129,7 +129,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/starter-kit_compute.html">View Details</a></td>
+                                    <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-sdk-support.rst">View Details</a></td>
                                     <td>
                                         <ul>
                                             <% if $Component.SDKSupport > 7 %>
@@ -148,7 +148,7 @@
                                     <td>
                                         <ul>
                                             <li class="on">
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
+                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst">
                                                     <i class="fa fa-circle"></i><span> {$Component.Adoption}%</span>
                                                     <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, ProductionUse) %>
                                                             <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
@@ -157,7 +157,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">View Details</a></td>
+                                    <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst">View Details</a></td>
                                     <td>
                                         <ul>
                                             <% if $Component.Adoption > 75 %>
@@ -184,7 +184,7 @@
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html">View Details</a></td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/team_diverse-affiliation.html">View Details</a></td>
                                     <td>
                                         <ul>
                                             <% if $Component.HasTeamDiversity %>
