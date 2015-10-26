@@ -385,7 +385,7 @@
                 <h4>Most Active Contributors by Company</h4>
                 <ul>
                     <% loop $MostActiveCompanyContributors %>
-                        <li><a href="#">$Name</a></li>
+                        <li>$Name</li>
                     <% end_loop %>
                 </ul>
                 <% end_if %>
@@ -393,7 +393,7 @@
                 <h4>Most Active Individual Contributors</h4>
                 <ul>
                     <% loop $MostActiveIndividualContributors %>
-                        <li><a href="#">$Name</a></li>
+                        <li>$Name</li>
                     <% end_loop %>
                 </ul>
                 <% end_if %>
