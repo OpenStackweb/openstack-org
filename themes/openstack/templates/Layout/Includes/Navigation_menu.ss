@@ -19,7 +19,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}enterprise/">OpenStack in the Enterprise</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}appdev/">Application Developers</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org/">Superuser Magazine</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}/surveys/landing">User Survey</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
     </ul>
 </li>
 <li>
@@ -44,7 +44,7 @@
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Overview</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/">The OpenStack Summit</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">OpenStack Days</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/#openstack_days">OpenStack Days</a></li>
     </ul>
 </li>
 <li>
