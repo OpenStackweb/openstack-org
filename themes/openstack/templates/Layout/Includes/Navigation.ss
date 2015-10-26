@@ -12,7 +12,7 @@
             <div class="brand-wrapper">
                 <a class="navbar-brand" href="/"></a>
             </div>
-            <div class="search-icon show"><i class="fa fa-search"></i> Search</div>
+            <div class="search-icon show"><i class="fa fa-search"></i> <span class="header-search-text">Search</span></div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

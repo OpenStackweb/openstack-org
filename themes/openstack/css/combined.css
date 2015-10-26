@@ -862,7 +862,11 @@ a, a:visited {
 @media (max-width: 767px), only screen and (max-device-width: 1024px) {
   .search-icon {
     display: none !important; } }
-
+@media (max-width: 1040px) {
+  .header-search-text {
+    display: none;
+  }
+}
 .header-search-form, .gsc-search-box {
   position: absolute;
   z-index: 1000;
