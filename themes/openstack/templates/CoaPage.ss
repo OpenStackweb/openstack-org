@@ -30,11 +30,19 @@
       <% include Navigation %>
       
       <!-- Page Content -->
+      <div class="coa-hero">
+        <div class="coa-hero-content">
+          <div class="container">
+            <div class="row">
+                <i class="fa fa-graduation-cap"></i>
+                <h1>Certified<br/>OpenStack Administrator</h1>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="container coa-wrapper">
         <div class="row">
           <div class="col-sm-10 col-sm-push-1">
-            <h1>Certified OpenStack Administrator</h1>
-            <img src="/themes/openstack/images/coa/COA-page-img.jpg" class="coa-hero-img" alt="">
             <p>
                 OpenStack skills are in high demand as more companies are productizing and adopting OpenStack.
                 If you are interested in working in the OpenStack community, training and professional certification can help you stand out.

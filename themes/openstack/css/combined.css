@@ -2934,8 +2934,46 @@ i.mobile-expand {
 }
 /*End New responsive nav*/
 /*COA Page*/
-.coa-wrapper p {
+.coa-hero {
+  background: #333 url(/themes/openstack/COA-bkgd.jpg) no-repeat center center;
+  padding: 60px 0;
+  background-size: cover;
+  color: white;
+  margin-bottom: 40px;
+}
+.coa-hero-content {
   text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px 0;
+}
+.coa-hero i.fa-graduation-cap {
+  padding: 10px 30px 10px 0;
+  border-right: 2px solid white;
+  margin-right: 30px;
+  font-size: 6em;
+  display: inline-block;
+}
+.coa-hero h1 {
+  color: white;
+  display: inline-block;
+  text-align: left;
+  font-size: 3em;
+  font-weight: 400;
+}
+@media (max-width: 767px) {
+  .coa-hero i.fa-graduation-cap {
+    margin-right: 0;
+    padding: 0;
+    border-right: 0;
+  }
+  .coa-hero h1 {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+  }
+}
+.coa-wrapper p {
+  text-align: left;
   color: #2A4E68;
 }
 img.coa-hero-img {
@@ -2952,6 +2990,7 @@ img.coa-hero-img {
 .coa-sendgrid p {
   color: #2A4E68;
   margin-bottom: 20px;
+  text-align: center;
 }
 .coa-sendgrid i {
   color: #C8CDD3;
