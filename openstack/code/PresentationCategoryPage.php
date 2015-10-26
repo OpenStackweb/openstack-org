@@ -18,54 +18,57 @@
  */
 class PresentationCategoryPage extends Page
 {
-	private static $db = array(
-		'StillUploading' => 'Boolean'
-	);
+    private static $db = array(
+        'StillUploading' => 'Boolean',
+        'FeaturedVideoLabel' => 'Text',
+        'FeaturedVideoDescription' => 'Text'
+    );
 
-	private static $has_one = array();
+    private static $has_one = array();
 
-	private static $has_many = array(
-		'Presentations'  => 'VideoPresentation',
-		'FeaturedVideos' => 'FeaturedVideo',
-		'FeaturedVideoLabel' => 'Text',
-		'FeaturedVideoDescription' => 'Text'
-	);
+    private static $has_many = array(
+        'Presentations' => 'VideoPresentation',
+        'FeaturedVideos' => 'FeaturedVideo',
+    );
 
-	private static $allowed_children = array('PresentationCategoryPage');
+    private static $allowed_children = array('PresentationCategoryPage');
 
-	/** static $icon = "icon/path"; */
+    /** static $icon = "icon/path"; */
 
-	function getCMSFields()
-	{
-		$fields = parent::getCMSFields();
-		$presentationsTable = new GridField('Presentations', 'Presentations', $this->Presentations(),GridFieldConfig_RecordEditor::create(10));
+    function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+        $presentationsTable = new GridField('Presentations', 'Presentations', $this->Presentations(),
+            GridFieldConfig_RecordEditor::create(10));
 
-		$fields->addFieldToTab('Root.Presentations', $presentationsTable);
+        $fields->addFieldToTab('Root.Presentations', $presentationsTable);
 
-		//Featured Videos Descriptions
-		$FeaturedVideoLabelField = new TextField('FeaturedVideoLabel','Label for featured vdieos');
-		$FeaturedVideoDescriptionField = new TextField('FeaturedVideoDescription','Label for featured vdieos');
+        //Featured Videos Descriptions
+        $FeaturedVideoLabelField = new TextField('FeaturedVideoLabel', 'Label for featured vdieos');
+        $FeaturedVideoDescriptionField = new TextField('FeaturedVideoDescription', 'Label for featured vdieos');
 
-		$fields->addFieldToTab("Root.Main", $FeaturedVideoLabelField, 'Content');
-		$fields->addFieldToTab("Root.Main", $FeaturedVideoDescriptionField, 'Content');
+        $fields->addFieldToTab("Root.Main", $FeaturedVideoLabelField, 'Content');
+        $fields->addFieldToTab("Root.Main", $FeaturedVideoDescriptionField, 'Content');
 
-		// Summit Videos
-		$VideosUploadingField = new OptionSetField('StillUploading', 'Are videos still being uploaded?', array(
-			'1' => 'Yes - A message will be displayed.',
-			'0' => 'No'
-		));
+        // Summit Videos
+        $VideosUploadingField = new OptionSetField('StillUploading', 'Are videos still being uploaded?', array(
+            '1' => 'Yes - A message will be displayed.',
+            '0' => 'No'
+        ));
 
-		$fields->addFieldToTab("Root.Main", $VideosUploadingField, 'Content');
+        $fields->addFieldToTab("Root.Main", $VideosUploadingField, 'Content');
 
-		$featuredVideos = new GridField('FeaturedVideos', 'FeaturedVideos', $this->FeaturedVideos(),GridFieldConfig_RecordEditor::create(10));
-		$fields->addFieldToTab('Root.FeaturedVideos', $featuredVideos);
+        $featuredVideos = new GridField('FeaturedVideos', 'FeaturedVideos', $this->FeaturedVideos(),
+            GridFieldConfig_RecordEditor::create(10));
+        $fields->addFieldToTab('Root.FeaturedVideos', $featuredVideos);
 
-        $presentations = new GridField('Presentations', 'Presentations', $this->Presentations(), GridFieldConfig_RecordEditor::create(10));
+        $presentations = new GridField('Presentations', 'Presentations', $this->Presentations(),
+            GridFieldConfig_RecordEditor::create(10));
         $fields->addFieldToTab('Root.Presentations', $presentations);
 
 
-		return $fields;
-	}
+        return $fields;
+    }
 
 }
 
@@ -73,152 +76,169 @@ class PresentationCategoryPage_Controller extends Page_Controller
 {
 
 
-	static $allowed_actions = array(
-		'presentation',
-		'featured',
-		'updateURLS' => 'admin'
-	);
+    static $allowed_actions = array(
+        'presentation',
+        'featured',
+        'updateURLS' => 'admin'
+    );
 
-	public function Presentations()
-	{
-		$sessions = dataobject::get('VideoPresentation', '(`YouTubeID` IS NOT NULL OR `SlidesLink` IS NOT NULL) AND PresentationCategoryPageID = ' . $this->ID, 'StartTime DESC');
-		return $sessions;
-	}
+    public function Presentations()
+    {
+        $sessions = dataobject::get('VideoPresentation',
+            '(`YouTubeID` IS NOT NULL OR `SlidesLink` IS NOT NULL) AND PresentationCategoryPageID = ' . $this->ID,
+            'StartTime DESC');
 
-	function init()
-	{
+        return $sessions;
+    }
 
-		parent::init();
-		if (isset($_GET['day'])) {
-			Session::set('Day', $_GET['day']);
-		} else {
-			Session::set('Day', 1);
-		}
+    function init()
+    {
 
-		if ($this->getRequest()->getVar("OtherID") != "presentation") Session::set('Autoplay', TRUE);
-	}
+        parent::init();
+        if (isset($_GET['day'])) {
+            Session::set('Day', $_GET['day']);
+        } else {
+            Session::set('Day', 1);
+        }
 
-	//Show the Presentation detail page using the PresentationCategoryPage_presentation.ss template
-	function presentation()
-	{
-		if ($Presentation = $this->getPresentationByURLSegment()) {
-			$Data = array(
-				'Presentation' => $Presentation
-			);
+        if ($this->getRequest()->getVar("OtherID") != "presentation") {
+            Session::set('Autoplay', true);
+        }
+    }
 
-			$this->Title = $Presentation->Name;
-			$this->Autoplay = Session::get('Autoplay');
+    //Show the Presentation detail page using the PresentationCategoryPage_presentation.ss template
+    function presentation()
+    {
+        if ($Presentation = $this->getPresentationByURLSegment()) {
+            $Data = array(
+                'Presentation' => $Presentation
+            );
 
-			// Clear autoplay so it only happens when you come directly from videos index
-			Session::set('Autoplay', FALSE);
+            $this->Title = $Presentation->Name;
+            $this->Autoplay = Session::get('Autoplay');
 
-			//return our $Data to use on the page
-			return $this->Customise($Data);
-		} else {
-			//Presentation not found
-			return $this->httpError(404, 'Sorry that presentation could not be found');
-		}
-	}
+            // Clear autoplay so it only happens when you come directly from videos index
+            Session::set('Autoplay', false);
 
-	//Show the Presentation detail page using the PresentationCategoryPage_presentation.ss template
-	function featured()
-	{
-		if ($Presentation = $this->getPresentationByURLSegment(TRUE)) {
-			$Data = array(
-				'Presentation' => $Presentation
-			);
+            //return our $Data to use on the page
+            return $this->Customise($Data);
+        } else {
+            //Presentation not found
+            return $this->httpError(404, 'Sorry that presentation could not be found');
+        }
+    }
 
-			$this->Title = $Presentation->Name;
-			$this->Autoplay = Session::get('Autoplay');
+    //Show the Presentation detail page using the PresentationCategoryPage_presentation.ss template
+    function featured()
+    {
+        if ($Presentation = $this->getPresentationByURLSegment(true)) {
+            $Data = array(
+                'Presentation' => $Presentation
+            );
 
-			// Clear autoplay so it only happens when you come directly from videos index
-			Session::set('Autoplay', FALSE);
+            $this->Title = $Presentation->Name;
+            $this->Autoplay = Session::get('Autoplay');
 
-			//return our $Data to use on the page
-			return $this->Customise($Data);
-		} else {
-			//Presentation not found
-			return $this->httpError(404, 'Sorry that presentation could not be found');
-		}
-	}
+            // Clear autoplay so it only happens when you come directly from videos index
+            Session::set('Autoplay', false);
 
-	function Keynotes()
-	{
-		return $this->Presentations()->filter('IsKeynote',TRUE);
-	}
+            //return our $Data to use on the page
+            return $this->Customise($Data);
+        } else {
+            //Presentation not found
+            return $this->httpError(404, 'Sorry that presentation could not be found');
+        }
+    }
 
-	function PresentationDayID($PresentationDay)
-	{
-		return trim($PresentationDay, ' ');
-	}
+    function Keynotes()
+    {
+        return $this->Presentations()->filter('IsKeynote', true);
+    }
 
-	function LatestPresentation()
-	{
-		if ($this->Presentations()) return $this->Presentations()->first();
-	}
+    function PresentationDayID($PresentationDay)
+    {
+        return trim($PresentationDay, ' ');
+    }
 
-
-	// Check to see if the page is being accessed in Chinese
-	// We use this in the templates to tell Chinese visitors how to obtain the videos on a non-youtube source
-	function ChineseLanguage()
-	{
-		$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-		if ($lang == "zh") {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
+    function LatestPresentation()
+    {
+        if ($this->Presentations()) {
+            return $this->Presentations()->first();
+        }
+    }
 
 
-	//Get the current Presentation from the URL, if any
-	public function getPresentationByURLSegment($featured = FALSE)
-	{
-
-		$Params = $this->getURLParams();
-		$Segment = convert::raw2sql($Params['ID']);
-
-		if ($featured == FALSE && $Params['ID'] && $Presentation = DataObject::get_one('VideoPresentation', "`URLSegment` = '" . $Segment . "' AND `PresentationCategoryPageID` = " . $this->ID)) {
-			return $Presentation;
-		} elseif ($featured == TRUE && $Params['ID'] && $FeaturedVideo = DataObject::get_one('FeaturedVideo', "`URLSegment` = '" . $Segment . "'")) {
-			return $FeaturedVideo;
-		}
-	}
+    // Check to see if the page is being accessed in Chinese
+    // We use this in the templates to tell Chinese visitors how to obtain the videos on a non-youtube source
+    function ChineseLanguage()
+    {
+        $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        if ($lang == "zh") {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
-	function currentDay()
-	{
-		$day = Session::get('Day');
-		Session::clear('Day');
-		// Casting the value as int prevents possible XSS attack
-		return (int)$day;
-	}
+    //Get the current Presentation from the URL, if any
+    public function getPresentationByURLSegment($featured = false)
+    {
 
-	function updateURLS()
-	{
-		$presentations = dataobject::get('VideoPresentation', 'PresentationCategoryPageID = ' . $this->ID, 'StartTime ASC');
-		foreach ($presentations as $presentation) {
-			if ($presentation->URLSegment == NULL) {
-				$presentation->write();
-			}
-		}
-		echo "Presentation URLS updated.";
-	}
+        $Params = $this->getURLParams();
+        $Segment = convert::raw2sql($Params['ID']);
 
-    public function GroupedPresentations(){
+        if ($featured == false && $Params['ID'] && $Presentation = DataObject::get_one('VideoPresentation',
+                "`URLSegment` = '" . $Segment . "' AND `PresentationCategoryPageID` = " . $this->ID)
+        ) {
+            return $Presentation;
+        } elseif ($featured == true && $Params['ID'] && $FeaturedVideo = DataObject::get_one('FeaturedVideo',
+                "`URLSegment` = '" . $Segment . "'")
+        ) {
+            return $FeaturedVideo;
+        }
+    }
+
+
+    function currentDay()
+    {
+        $day = Session::get('Day');
+        Session::clear('Day');
+
+        // Casting the value as int prevents possible XSS attack
+        return (int)$day;
+    }
+
+    function updateURLS()
+    {
+        $presentations = dataobject::get('VideoPresentation', 'PresentationCategoryPageID = ' . $this->ID,
+            'StartTime ASC');
+        foreach ($presentations as $presentation) {
+            if ($presentation->URLSegment == null) {
+                $presentation->write();
+            }
+        }
+        echo "Presentation URLS updated.";
+    }
+
+    public function GroupedPresentations()
+    {
 
         return GroupedList::create($this->Presentations()->sort('StartTime'));
     }
 
-    protected function CustomScripts(){
+    protected function CustomScripts()
+    {
 
         Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
         Requirements::javascript("themes/openstack/javascript/videos.js");
 
     }
 
-    public function PresentationFileName($media_link){
+    public function PresentationFileName($media_link)
+    {
         $res = parse_url($media_link);
+
         return basename($res['path']);
     }
 
