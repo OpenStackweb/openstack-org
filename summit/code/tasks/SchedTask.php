@@ -22,7 +22,7 @@ class SchedTask extends CliController {
 	 * @var string $description Describe the implications the task has,
 	 * and the changes it makes. Accepts HTML formatting.
 	 */
-	protected $description = 'Import sessions from Sched into SchedPresentation records';
+	protected $description = 'Import sessions from Sched into VideoPresentation records';
 	
 
 	/**
@@ -55,11 +55,11 @@ class SchedTask extends CliController {
 	protected function loadSessions($sessions) {
 		$i = 0;
 		foreach($sessions as $sessionData) {
-			$record = SchedPresentation::get_by_sched_id($sessionData['id']);
+			$record = VideoPresentation::get_by_sched_id($sessionData['id']);
 			
 			if(!$record) {
 				$this->writeOut("No presentation with Sched ID " . $sessionData['id'] . " exists. Creating.");
-				$record = SchedPresentation::create();
+				$record = VideoPresentation::create();
 			}
 			else {
 				$this->writeOut("Found existing presentation with Sched ID " . $sessionData['id']);
@@ -81,7 +81,7 @@ class SchedTask extends CliController {
 	 */
 	protected function deleteSessions($sessions) {
 		$i = 0;
-		foreach(SchedPresentation::get() as $existing) {
+		foreach(VideoPresentation::get() as $existing) {
 			$found = false;
 			foreach($sessions as $sessionData) {
 				if($sessionData['id'] == $existing->SchedID) {
@@ -102,17 +102,17 @@ class SchedTask extends CliController {
 
 
 	/**
-	 * Loads array data from the API into a SchedPresentation object
-	 * @param  SchedPresentation $presentation 
+	 * Loads array data from the API into a VideoPresentation object
+	 * @param  VideoPresentation $presentation 
 	 * @param  array             $data         The session data
-	 * @return SchedPresentation
+	 * @return VideoPresentation
 	 */
-	protected function loadIntoPresentation(SchedPresentation $presentation, $data = array ()) {
-		$presentation->Title = $data['name'];
+	protected function loadIntoPresentation(VideoPresentation $presentation, $data = array ()) {
+		$presentation->Name = $data['name'];
 		$presentation->Description = @$data['description'];
 		$presentation->EventEnd = $data['event_end'];
-		$presentation->EventStart = $data['event_start'];
-		$presentation->EventKey = $data['event_key'];
+		$presentation->StartTime = $data['event_start'];
+		$presentation->EndTime = $data['event_key'];
 		$presentation->EventType = @$data['event_type'];
 		$presentation->Goers = $data['goers'];
 		$presentation->SchedID = $data['id'];
