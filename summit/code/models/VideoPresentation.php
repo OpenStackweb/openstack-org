@@ -31,7 +31,8 @@ class VideoPresentation extends DataObject
 		'Speakers' => 'Text',
 		'SlidesLink' => 'Varchar(255)',
 		'event_key' => 'Varchar(255)',
-		'IsKeynote' => 'Boolean'
+		'IsKeynote' => 'Boolean',
+		'SchedID' => 'Varchar'		
 	);
 
 	Static $defaults = array(
@@ -195,5 +196,9 @@ class VideoPresentation extends DataObject
 		$this->YouTubeID = $YouTubeID;
 		$this->write();
 	}
+
+	public static function get_by_sched_id($id) {
+		return self::get()->filter('SchedID', $id)->first();
+	}	
 
 }

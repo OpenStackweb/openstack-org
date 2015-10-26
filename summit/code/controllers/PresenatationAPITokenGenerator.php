@@ -5,8 +5,8 @@ class PresentationAPITokenGenerator extends Controller {
 
 
 	public function index(SS_HTTPRequest $r) {
-		$username = $r->getVar('username');
-		$password = $r->getVar('password');
+		$username = $r->postVar('username');
+		$password = $r->postVar('password');
 
 		if(!$username || !$password) {
 			return $this->httpError(400, "You must provide 'username' and 'password' parameters in the request");
@@ -14,7 +14,8 @@ class PresentationAPITokenGenerator extends Controller {
 
 		if($member = Member::get()->filter('Email', $username)->first()) {
 			if($member->checkPassword($password)) {
-				$member->refreshToken();
+				$member->assignToken();
+				$member->write();
 				$response = new SS_HTTPResponse(200);
 				$response
 					->addHeader('Content-type', 'application/json')

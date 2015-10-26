@@ -133,15 +133,15 @@ class PresentationAPI extends Controller {
 
 	public function handleSchedUpdate(SS_HTTPRequest $r) {		
 
-		if(!Member::currentUser()) {
+		if(!Member::currentUser()) {			
 			return $this->httpError(403);
 		}
 
 		$schedID = $r->param('SchedID');
-		$presentation = SchedPresentation::get_by_sched_id($schedID);
+		$presentation = VideoPresentation::get_by_sched_id($schedID);
 
 		if(!$presentation) {
-			$presentation = SchedPresentation::create(array(
+			$presentation = VideoPresentation::create(array(
 				'SchedID' => $schedID
 			));
 
