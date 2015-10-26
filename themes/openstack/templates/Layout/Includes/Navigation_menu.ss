@@ -55,7 +55,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}blog/">Blog</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/summit-videos/">Summit Videos</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/tokyo-2015/summit-videos/">Summit Videos</a></li>
     </ul>
 </li>
 <li>
