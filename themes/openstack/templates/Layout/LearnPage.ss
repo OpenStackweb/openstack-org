@@ -58,20 +58,6 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-info-circle learn-icon"></i>
-                            <h2>Wiki</h2>
-                            <p>
-                                Powered by the community, the OpenStack Wiki offers details on getting started, contributing, projects and more.
-                            </p>
-                            <a href="//wiki.openstack.org" class="learn-btn">
-                                Go To The Wiki <i class="fa fa-chevron-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End Single Learn Element -->
-                    <!-- Single Learn Element -->
-                    <div class="col-sm-6">
-                        <div class="learn-single">
                             <i class="fa fa-comments learn-icon"></i>
                             <h2>Ask OpenStack</h2>
                             <p>
@@ -83,8 +69,6 @@
                         </div>
                     </div>
                     <!-- End Single Learn Element -->
-                </div>
-                <div class="row">
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
@@ -99,6 +83,8 @@
                         </div>
                     </div>
                     <!-- End Single Learn Element -->
+                </div>
+                <div class="row">
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
@@ -113,11 +99,9 @@
                         </div>
                     </div>
                     <!-- End Single Learn Element -->
-                </div>
-                <div class="row">
                     <!-- Single Learn Element -->
-                    <div class="col-sm-6 col-sm-push-3"> <!-- Centering last learn element -->
-                        <div class="learn-single last">
+                    <div class="col-sm-6">
+                        <div class="learn-single">
                             <i class="fa fa-play-circle learn-icon"></i>
                             <h2>Summit Videos</h2>
                             <p>
