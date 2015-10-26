@@ -54,7 +54,7 @@
             <div class="sendgrid-subscription-widget coa-sendgrid" data-token="s8WtfiU6aMmIzKLc%2BECPIqKV2Tm%2B5QfB9x4YBNZt4VlTuNHCQ4mKObQJGeMLabqCP5XJUxPeYLwQkJcQuc2kLw%3D%3D">
                 <i class="fa fa-envelope-o fa-3x"></i>
               <p>
-                Enter your email address to learn more about becoming a Certified OpenStack Administrator.
+                Sign up to to receive updates on the certification program as it becomes available in 2016.
               </p>
             </div>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'sendgrid-subscription-widget-js');</script>
