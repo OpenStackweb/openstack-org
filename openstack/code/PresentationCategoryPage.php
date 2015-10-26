@@ -26,7 +26,9 @@ class PresentationCategoryPage extends Page
 
 	private static $has_many = array(
 		'Presentations'  => 'VideoPresentation',
-		'FeaturedVideos' => 'FeaturedVideo'
+		'FeaturedVideos' => 'FeaturedVideo',
+		'FeaturedVideoLabel' => 'Text',
+		'FeaturedVideoDescription' => 'Text'
 	);
 
 	private static $allowed_children = array('PresentationCategoryPage');
@@ -39,6 +41,13 @@ class PresentationCategoryPage extends Page
 		$presentationsTable = new GridField('Presentations', 'Presentations', $this->Presentations(),GridFieldConfig_RecordEditor::create(10));
 
 		$fields->addFieldToTab('Root.Presentations', $presentationsTable);
+
+		//Featured Videos Descriptions
+		$FeaturedVideoLabelField = new TextField('FeaturedVideoLabel','Label for featured vdieos');
+		$FeaturedVideoDescriptionField = new TextField('FeaturedVideoDescription','Label for featured vdieos');
+
+		$fields->addFieldToTab("Root.Main", $FeaturedVideoLabelField, 'Content');
+		$fields->addFieldToTab("Root.Main", $FeaturedVideoDescriptionField, 'Content');
 
 		// Summit Videos
 		$VideosUploadingField = new OptionSetField('StillUploading', 'Are videos still being uploaded?', array(

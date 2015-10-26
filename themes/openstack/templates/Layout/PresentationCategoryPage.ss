@@ -4,7 +4,7 @@
 			<div class="still-uploading-row">
 				<div class="container">
 				<i class="fa fa-refresh fa-spin"></i>
-				 Check back again soon! We're still uploading videos from The OpenStack Summit in Vancouver...
+				 Check back again soon! We're still uploading videos from The OpenStack Summit...
 				</div>
 			</div>	
 		<% end_if %>
@@ -32,52 +32,57 @@
 	        </div>
     	</div>
 
-<div class="featured-row">
-	<div class="container">
-		<h2>
-			Daily Recaps
-			<span>Highlights from the OpenStack Summit in Vancouver</span>
-		</h2>
+
+<% if FeaturedVideos %>
+	<div class="featured-row">
+		<div class="container">
+			<h2>
+				<% if FeaturedVideoLabel %> $FeaturedVideoLabel <% else %> Featured Videos <% end_if %>
+				<span>
+					<% if FeaturedVideoDescription %> $FeaturedVideoDescription <% else %> Featured videos from the summit. <% end_if %>
+				</span>
+			</h2>
+		</div>
 	</div>
-</div>
-<div class="container daily-recap-wrapper">
-	<div class="row">
-		<% loop FeaturedVideos %>
+	<div class="container daily-recap-wrapper">
+		<div class="row">
+			<% loop FeaturedVideos %>
 
-		<!-- If there is a YouTube ID -->
+			<!-- If there is a YouTube ID -->
 
-		<% if YouTubeID %>
+			<% if YouTubeID %>
 
-			<div class="col-sm-3 video-block">
-				<a href="{$Top.Link}featured/{$URLSegment}">
+				<div class="col-sm-3 video-block">
+					<a href="{$Top.Link}featured/{$URLSegment}">
+						<div class="video-thumb">
+							<div class="thumb-play"></div>
+							<img class="video-thumb-img" src="//img.youtube.com/vi/{$YouTubeID}/0.jpg">
+						</div>
+						<p class="video-thumb-title">
+							$Name
+						</p>
+					</a>
+				</div>
+
+			<% else %>
+
+
+				<div class="col-sm-3">
 					<div class="video-thumb">
-						<div class="thumb-play"></div>
-						<img class="video-thumb-img" src="//img.youtube.com/vi/{$YouTubeID}/0.jpg">
+						<img class="video-thumb-img" src="/themes/openstack/images/no-video.jpg">
 					</div>
 					<p class="video-thumb-title">
-						$Name
+						Day {$Pos} - Coming Soon
 					</p>
-				</a>
-			</div>
-
-		<% else %>
-
-
-			<div class="col-sm-3">
-				<div class="video-thumb">
-					<img class="video-thumb-img" src="/themes/openstack/images/no-video.jpg">
 				</div>
-				<p class="video-thumb-title">
-					Day {$Pos} - Coming Soon
-				</p>
-			</div>
 
-		<% end_if %>
+			<% end_if %>
 
 
-		<% end_loop %>
+			<% end_loop %>
+		</div>
 	</div>
-</div>
+<% end_if %>
 
 <div class="sort-row">
 	<div class="container">
