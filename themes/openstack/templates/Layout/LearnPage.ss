@@ -100,8 +100,8 @@
                     </div>
                     <!-- End Single Learn Element -->
                     <!-- Single Learn Element -->
-                    <div class="col-sm-6 col-sm-push-3"> <!-- Centering last learn element -->
-                        <div class="learn-single last">
+                    <div class="col-sm-6">
+                        <div class="learn-single">
                             <i class="fa fa-play-circle learn-icon"></i>
                             <h2>Summit Videos</h2>
                             <p>
