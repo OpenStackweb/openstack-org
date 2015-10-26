@@ -61,16 +61,16 @@
 
         // Overview page, show/hide core projects
         $('#choose-compute').click(function(event) {
-            $('#show-storage').removeClass('grey');
-            $('#show-compute').addClass('grey');
+            $('#show-storage').addClass('grey');
+            $('#show-compute').removeClass('grey');
             $('#compute-description').show();
             $('#storage-description').hide();
             $('#both-description').hide();
             event.preventDefault();
         });
         $('#choose-storage').click(function(event) {
-            $('#show-compute').removeClass('grey');
-            $('#show-storage').addClass('grey');
+            $('#show-compute').addClass('grey');
+            $('#show-storage').removeClass('grey');
             $('#compute-description').hide();
             $('#storage-description').show();
             $('#both-description').hide();
