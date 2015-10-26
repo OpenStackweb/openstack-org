@@ -1,7 +1,7 @@
 /*Videos Home Page*/
 .intro-header.featured.videos {
     position: relative;
-    background: url('/themes/openstack/images/videos-hero-bkgd.jpg') center center no-repeat;
+    background: #333 url('/themes/openstack/images/videos-hero-bkgd.jpg') center center no-repeat;
     background-size: cover;
 }
 .main-video-wrapper {
@@ -156,6 +156,10 @@ a.main-video .video-description-wrapper p.latest-video {
   display: block;
   color: white;
 }
+.daily-recap-wrapper {
+  margin-bottom: 50px;
+}
+
 .daily-recap-wrapper .video-thumb-title {
   text-align: center; }
 
@@ -212,7 +216,7 @@ a.main-video .video-description-wrapper p.latest-video {
   padding: 25px 0;
   position: relative;
   display: block;
-  margin: 50px 0;
+  margin: 0 0 50px;
   color: #2A4E68; }
 
 .sort-left {
