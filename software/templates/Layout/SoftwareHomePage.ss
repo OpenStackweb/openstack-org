@@ -56,10 +56,10 @@
                                 Compute resources are accessible via APIs for developers building cloud applications and via web interfaces for administrators and users. The compute architecture is designed to scale horizontally on standard hardware, enabling the cloud economics companies have come to expect.
                             </p>
                             <p id="storage-description">
-                                OpenStack has support for both Object Storage and Block Storage, with many deployment options for each depending on the use case.  Object Storage is ideal for cost effective, scale-out storage. It provides a fully distributed, API-accessible storage platform that can be integrated directly into applications or used for backup, archiving and data retention. Block Storage allows block devices to be exposed and connected to compute instances for expanded storage, better performance and integration with enterprise storage platforms.
+                                OpenStack Object Storage can be deployed independently of a compute cloud or alongside other computing platforms. It is ideal for cost effective, scale-out storage and provides a fully distributed, API-accessible storage platform that can be integrated directly into applications or used for backup, archiving and data retention.
                             </p>
                             <p id="both-description">
-                                Compute + Object provides the complete OpenStack Platform, with compute resources are accessible via APIs for developers building cloud applications and via web interfaces for administrators and users, as well as Object Storage for a fully distributed, API-accessible storage platform that can be integrated directly into applications or used for backup, archiving and data retention; and Block Storage which allows block devices to be exposed and connected to compute instances for expanded storage, better performance and integration with enterprise storage platforms.
+                                Deployed together, Compute and Object Storage provide the full set of OpenStack core services and open APIs. In combination, the platform provides robust cloud computing capabilities with horizontal storage for managing images, snapshots, backups, virtual machines and block devices.
                             </p>
                         </div>
                     </div>
