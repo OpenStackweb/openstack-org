@@ -15,7 +15,7 @@
                     <div class="col-sm-6">
                      $IntroText
                     </div>
-                    <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/e7r2-p8Mki4">img class="icehouse-video" title="" src="assets/software/liberty/demo-screenshot-liberty.png" alt="Liberty Demo" /></a>
+                    <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/e7r2-p8Mki4"><img class="icehouse-video" title="" src="assets/software/liberty/demo-screenshot-liberty.png" alt="Liberty Demo" /></a>
                         <h4>OpenStack Overview (5:14)</h4>
                     </div>
                 </div>
