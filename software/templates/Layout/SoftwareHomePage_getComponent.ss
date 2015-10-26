@@ -426,7 +426,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 project-details-footnotes">
-                <h6><a target="_blank" href="http://stackanalytics.com">Statistics and charts provided by stackanalytics.com</a></h6>
+                <h6><a target="_blank" href="http://stackalytics.com">Statistics and charts provided by stackalytics.com</a></h6>
             </div>
         </div>
         <!-- Stats 'what does this mean?' Modal -->
@@ -442,13 +442,13 @@
                         </p>
                         <hr>
                         <p>
-                            <strong>Adoption</strong> is nulla ipsam veniam quis eos, voluptatibus veritatis magni, molestias magnam doloribus!
+                            <strong>Adoption</strong> is the percentage of production deployments running the project based on the latest biannual user survey results.
                         </p>
                         <p>
-                            <strong>Maturity</strong> comes from looking at {$Top.getMaxAllowedMaturityPoints} distinct tags. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae non nulla odio expedita itaque, soluta assumenda a saepe omnis illum earum officiis aliquid eum error. Ducimus accusantium quod, debitis obcaecati.
+                            <strong>Maturity</strong> comes from looking at 5 distinct tags that indicate stability and sustainability. The current criteria includes whether or not the project has an install guide, whether it is supported by 7 or more SDKs, if the adoption percentage is greater than 75%, whether or not the team has achieved corporate diversity and whether or not there are stable branches.
                         </p>
                         <p>
-                            <strong>Age</strong> is the age of the project, consisting of maxime placeat quasi, eos, obcaecati blanditiis eaque cum cumque quaerat, harum dolorem magnam saepe quam.
+                            <strong>Age</strong> is the number of years the project has been in development.
                         </p>
                     </div>
                     <div class="modal-footer">
