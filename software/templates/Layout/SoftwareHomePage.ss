@@ -7,7 +7,7 @@
         <!-- Begin Page Content -->
         <div class="row">
             <div class="col-sm-10 col-sm-push-1 center">
-                <h3>$IntroTitle</h3>
+                <h1>$IntroTitle</h1>
                 <p>
                     <img src="themes/openstack/images/software/openstack-software-diagram.png" class="openstack-diagram">
                 </p>
@@ -24,10 +24,8 @@
         <div class="row">
             <div class="col-sm-10 col-sm-push-1 center">
                 <hr style="margin:40px 0;">
-                <h3>$IntroTitle2</h3>
-                <p>
-                    $IntroText2
-                </p>
+                <h1>$IntroTitle2</h1>
+                $IntroText2
             </div>
         </div>
         <div class="project-intro-boxes" id="select-use-break">
