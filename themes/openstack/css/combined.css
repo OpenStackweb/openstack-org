@@ -2935,7 +2935,7 @@ i.mobile-expand {
 /*End New responsive nav*/
 /*COA Page*/
 .coa-hero {
-  background: #333 url(/themes/openstack/COA-bkgd.jpg) no-repeat center center;
+  background: #333 url(/themes/openstack/images/coa/COA-bkgd.jpg) no-repeat center center;
   padding: 60px 0;
   background-size: cover;
   color: white;
