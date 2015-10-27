@@ -138,11 +138,11 @@ class PresentationAPI extends Controller {
 		}
 
 		$schedID = $r->param('SchedID');
-		$presentation = VideoPresentation::get_by_sched_id($schedID);
+		$presentation = VideoPresentation::get_by_event_key($schedID);
 
 		if(!$presentation) {
 			$presentation = VideoPresentation::create(array(
-				'SchedID' => $schedID
+				'event_key' => $schedID
 			));
 
 		}

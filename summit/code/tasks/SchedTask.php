@@ -123,6 +123,7 @@ class SchedTask extends CliController {
 		$presentation->VenueID = $data['venue_id'];
 		$presentation->DisplayOnSite = ($data['active'] == "Y");
 		$presentation->SummitID = Summit::get_active()->ID;
+		$presentation->event_key = $data['event_key'];
 
 		return $presentation;
 	}

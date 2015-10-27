@@ -7,7 +7,7 @@ Member:
     - PresentationMemberExtension
     - MemberTokenProvider
 MemberTokenProvider:
-  token_expire: 250000
+  token_expire: 500000
 Director:
   rules:
     'presentations/api/v1': 'PresentationAPI'
