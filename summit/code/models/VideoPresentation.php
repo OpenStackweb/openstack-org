@@ -201,4 +201,8 @@ class VideoPresentation extends DataObject
 		return self::get()->filter('SchedID', $id)->first();
 	}	
 
+	public static function get_by_event_key($id) {
+		return self::get()->filter('event_key', $id)->first();
+	}	
+
 }
