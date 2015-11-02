@@ -20,7 +20,7 @@ final class IndividualFoundationMemberCountQuery implements IQueryHandler {
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification)
+	public function handle(IQuerySpecification $specification = null)
 	{
 		$sql = <<< SQL
 		SELECT COUNT(M.ID) From Member M

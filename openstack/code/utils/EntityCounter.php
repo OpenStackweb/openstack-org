@@ -30,7 +30,7 @@ final class EntityCounter extends Extension {
 
 	    return EntityCounterHelper::getInstance()->EntityCount('FoundationMember',function (){
 		    $query =  new IndividualFoundationMemberCountQuery();
-		    $res   = $query->handle(null)->getResult();
+		    $res   = $query->handle()->getResult();
 		    return $res[0];
 	    });
     }
