@@ -8,7 +8,7 @@
                     <h2>
                         Open source software for creating private and public clouds.
                     </h2>
-                    <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="/software/openstack-dashboard/">dashboard</a> or via the <a href="//developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="//openstack.org/marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
+                    <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="/software/openstack-dashboard/">dashboard</a> or via the <a href="http://developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="//openstack.org/marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
 
 					<p><a href="//openstack.org/user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. OpenStack has a strong <a href="//openstack.org/foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="//openstack.org/marketplace/">Marketplace.</a></p>
 
