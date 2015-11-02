@@ -16,7 +16,7 @@ class SurveyStepTemplate
     extends DataObject
     implements ISurveyStepTemplate
 {
-    static $db = array
+    private static $db = array
     (
         'Name'         => 'VarChar(255)',
         'Content'      => 'HTMLText',
@@ -25,28 +25,28 @@ class SurveyStepTemplate
         'SkipStep'     => 'Boolean',
     );
 
-    static $indexes = array
+    private static $indexes = array
     (
         'SurveyTemplateID_Name' => array('type' => 'unique', 'value' => 'SurveyTemplateID,Name')
     );
 
-    static $has_one = array
+    private static $has_one = array
     (
         'SurveyTemplate' => 'SurveyTemplate'
     );
 
-    static $belongs_to = array
+    private static $defaults = array
     (
         'SkipStep' => false,
     );
 
-    static $many_many = array
+    private static $many_many = array
     (
         'DependsOn' => 'SurveyQuestionTemplate'
     );
 
     //Administrators Security Groups
-    static $many_many_extraFields = array
+    private static $many_many_extraFields = array
     (
         'DependsOn' => array(
             'ValueID'      => "Int",
@@ -56,13 +56,9 @@ class SurveyStepTemplate
         ),
     );
 
-    static $has_many = array
+    private static $has_many = array
     (
 
-    );
-
-    private static $defaults = array
-    (
     );
 
     /**

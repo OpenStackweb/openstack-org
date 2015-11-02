@@ -34,7 +34,7 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
 
             // pre process ...
             foreach($depends as $d) {
-                 if($question->step()->belongsTo($d)){
+                 if($question->step()->belongsToQuestion($d)){
                      // js rule, question on which we depends on its on the same step (form)
                      if(!isset( $js_rules[$d->getIdentifier()]))
                          $js_rules[$d->getIdentifier()] = array (

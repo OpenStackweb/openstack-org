@@ -16,22 +16,22 @@ class SurveyRegularStepTemplate
     extends SurveyStepTemplate
     implements ISurveyRegularStepTemplate {
 
-    static $db = array(
+    private static $db = array(
     );
 
-    static $indexes = array(
+    private static $indexes = array(
     );
 
-    static $has_one = array(
+    private static $has_one = array(
     );
 
-    static $belongs_to = array(
+    private static $belongs_to = array(
     );
 
-    static $many_many = array(
+    private static $many_many = array(
     );
 
-    static $has_many = array(
+    private static $has_many = array(
         'Questions' => 'SurveyQuestionTemplate',
     );
 
@@ -101,7 +101,7 @@ class SurveyRegularStepTemplate
      * @param ISurveyQuestionTemplate $question
      * @return bool
      */
-    public function belongsTo(ISurveyQuestionTemplate $question)
+    public function belongsToQuestion(ISurveyQuestionTemplate $question)
     {
         foreach($this->getQuestions() as $q){
             if($q->getIdentifier() === $question->getIdentifier()) return true;
