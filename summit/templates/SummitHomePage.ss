@@ -26,7 +26,7 @@
                             </div>
                     <% end_if %>
                     <div class="landing-action">
-                        <a href="$CurrentSummit.Link" class="btn register-btn-lrg">JOIN US IN TOKYO <i class="fa fa-chevron-right"></i></a>
+                        <a href="summit/tokyo-2015/videos/" class="btn register-btn-lrg">WATCH THE VIDEOS <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -37,10 +37,10 @@
         <div class="row summit-row">
             <% with $CurrentSummit %>
             <div class="col-lg-6 col-lg-push-3 col-md-6 col-md-push-3 col-sm-6 col-sm-push-3 large-single-summit">
-                <a href="$Link" class="single-summit current-summit">
+                <a href="summit/tokyo-2015/videos/" class="single-summit current-summit">
                     <h3>$DateLabel</h3>
                     <h2>$Title</h2>
-                    <div class="btn register-btn-lrg skinny">Join Us</div>
+                    <div class="btn register-btn-lrg skinny">WATCH THE VIDEOS</div>
                 </a>
                 <div class="single-summit-date current">
                     $DateLabel
