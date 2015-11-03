@@ -32,11 +32,6 @@ interface ISurveyManager {
     public function buildEntitySurvey(ISurveyDynamicEntityStep $step, $creator_id);
 
     /**
-     * @return ISurveyTemplate
-     */
-    public function getCurrentSurveyTemplate();
-
-    /**
      * @param array $data
      * @param ISurveyStep $current_step
      * @return ISurveyStep
