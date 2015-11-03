@@ -180,10 +180,11 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     {
         if(!$this->isEnabled()) return true;
         
-        $now = new \DateTime('now', new DateTimeZone('UTC'));
+        $now        = new \DateTime('now', new DateTimeZone('UTC'));
         $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
-        $end_date = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
-        return $now >= $start_date && $now <= $end_date;
+        $end_date   = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
+
+        return !($now >= $start_date && $now <= $end_date);
     }
 
     /**
