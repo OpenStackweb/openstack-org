@@ -178,6 +178,8 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
      */
     public function isVoid()
     {
+        if(!$this->isEnabled()) return true;
+        
         $now = new \DateTime('now', new DateTimeZone('UTC'));
         $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
         $end_date = new \DateTime($this->EndDate, new DateTimeZone('UTC'));

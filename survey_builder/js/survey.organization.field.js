@@ -46,7 +46,7 @@
 
             if(input.length > 0) {
                 input.autocomplete({
-                    source: 'surveys/organizations/suggest',
+                    source: '/api/v1/surveys/organizations/suggest',
                     minLength: 3,
                 })
             }

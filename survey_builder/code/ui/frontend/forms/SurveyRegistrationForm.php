@@ -48,10 +48,8 @@ class SurveyRegistrationForm extends Form
         ));
     }
 
-
     function StartSurvey($data, $form)
     {
-
 
         //Check for existing member email address
         if ($member = Member::get()->filter('Email', Convert::raw2sql($data['Email']))->first()) {
@@ -80,8 +78,6 @@ class SurveyRegistrationForm extends Form
         //Add member to user group
         $Member->Groups()->add($userGroup);
 
-        $BackURL = Survey_Controller::RoutePrefix.'/current';
-
-        return OpenStackIdCommon::loginMember($Member, $BackURL);
+        return OpenStackIdCommon::loginMember($Member, Controller::curr()->Link());
     }
 }

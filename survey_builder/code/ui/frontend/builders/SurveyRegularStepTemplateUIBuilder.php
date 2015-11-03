@@ -37,11 +37,11 @@ class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
             $fields->add(new LiteralField('content', $content));
 
         if($step->template()->canSkip() && !$step->survey()->isLastStep()){
-            $next_step_url = sprintf("/surveys/current/%s/skip-step", $step->template()->title());
+            $next_step_url = sprintf("%s%s/skip-step",Controller::curr()->Link(), $step->template()->title());
             if( $step->survey() instanceof EntitySurvey){
                 $dyn_step_holder = $step->survey()->owner()->template()->title();
                 $id = $step->survey()->getIdentifier();
-                $next_step_url = sprintf("/surveys/current/%s/edit/%s/skip-step", $dyn_step_holder, $id);
+                $next_step_url = sprintf("%s%s/edit/%s/skip-step",Controller::curr()->Link(), $dyn_step_holder, $id);
             }
             $fields->add(
                 new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you may <a href="%s">skip to the next section</a>.</strong></p>', $next_step_url))
@@ -65,6 +65,7 @@ class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
 
         $fields->add(new HiddenField('survey_id', 'survey_id', $step->survey()->getIdentifier()));
         $fields->add(new HiddenField('step_id', 'step_id', $step->getIdentifier()));
+
         $survey = $step->survey();
         $next_btn_title = 'Next';
         if($survey->isLastStep()){

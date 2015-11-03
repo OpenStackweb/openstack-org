@@ -6,7 +6,7 @@
         $.ajax(
             {
                 type: "GET",
-                url: '/surveys/entity-surveys/'+entity_survey_id+'/team-members',
+                url: '/api/v1/surveys/entity-surveys/'+entity_survey_id+'/team-members',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -76,7 +76,7 @@
             $.ajax(
                 {
                     type: "POST",
-                    url: '/surveys/entity-surveys/'+entity_survey_id+'/team-members/'+new_team_member_id,
+                    url: '/api/v1/surveys/entity-surveys/'+entity_survey_id+'/team-members/'+new_team_member_id,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function () {
@@ -106,7 +106,7 @@
                 $.ajax(
                     {
                         type: "DELETE",
-                        url: '/surveys/entity-surveys/'+entity_survey_id+'/team-members/'+member_id,
+                        url: '/api/v1/surveys/entity-surveys/'+entity_survey_id+'/team-members/'+member_id,
                         dataType: "json",
                         success: function () {
                             var tr = btn.parent().parent();
@@ -130,7 +130,7 @@
         });
 
         $auto_complete.autocomplete({
-            source: 'surveys/team-members/suggest',
+            source: '/api/v1/surveys/team-members/suggest',
             minLength: 2,
             select: function( event, ui )
             {

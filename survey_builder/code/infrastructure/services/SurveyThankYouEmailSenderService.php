@@ -25,17 +25,28 @@ final class SurveyThankYouEmailSenderService implements IMessageSenderService {
     public function send(IEntity $subject)
     {
        if(! ($subject instanceof ISurvey)) return;
+
        $current_step = $subject->currentStep();
-       $template = $current_step->template();
+       $template     = $current_step->template();
+
        if(! ($template instanceof ISurveyThankYouStepTemplate )) return;
+
        $owner = $subject->createdBy();
        $to    = $owner->getEmail();
        $from  = defined('SURVEY_THANK_U_FROM_EMAIL') ? SURVEY_THANK_U_FROM_EMAIL : Config::inst()->get('Email', 'admin_email');
        $email = EmailFactory::getInstance()->buildEmail($from, $to);
-       $email->setUserTemplate('survey-builder-thank-you-step')->populateTemplate(
+
+       // default template name
+       $email_template_name = 'survey-builder-thank-you-step';
+       $email_template      = $template->EmailTemplate();
+
+       if(!is_null($email_template)  && $email_template->ID > 0)
+           $email_template_name = $email_template->Identifier;
+
+       $email->setUserTemplate($email_template_name)->populateTemplate(
             array
             (
-                'Member'              => $owner,
+                'Member' => $owner,
             )
        )
        ->send();

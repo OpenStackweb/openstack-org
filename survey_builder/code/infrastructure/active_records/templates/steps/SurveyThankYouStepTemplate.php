@@ -25,18 +25,22 @@ class SurveyThankYouStepTemplate
 
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
+        'EmailTemplate' => 'PermamailTemplate',
+    );
+
+    static $many_many = array
+    (
+    );
+
+    static $has_many = array
+    (
 
     );
 
-    static $many_many = array(
-    );
-
-    static $has_many = array(
-
-    );
-
-    private static $defaults = array(
+    private static $defaults = array
+    (
     );
 
 
@@ -48,13 +52,14 @@ class SurveyThankYouStepTemplate
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+        $fields->add($ddl = new DropdownField('EmailTemplateID', 'Email Template', PermamailTemplate::get()->map('ID','Identifier')));
+        $ddl->setEmptyString('-- Select an Email Template --');
         return $fields;
     }
 
     function getValidator()
     {
-        $validator_fields  = new RequiredFields(array('FriendlyName','Content'));
-
+        $validator_fields  = new RequiredFields(array('FriendlyName','EmailTemplateID'));
         return $validator_fields;
     }
 

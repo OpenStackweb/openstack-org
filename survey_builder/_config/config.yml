@@ -24,7 +24,11 @@ Injector:
       3: '%$SurveyBuilder'
       4: '%$TransactionManager'
 
-Survey_Controller:
+SurveysRestfulApi:
+  dependencies:
+    SurveyManager: '%$SurveyManager'
+    SurveyRepository: '%$SurveyRepository'
+SurveyPage_Controller:
   dependencies:
     SurveyManager: '%$SurveyManager'
     SurveyRepository: '%$SurveyRepository'

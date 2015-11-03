@@ -52,6 +52,11 @@ class DynamicStepForm extends HoneyPotForm {
         return $this->step;
     }
 
+    public function Controller()
+    {
+        return Controller::curr();
+    }
+
     public function EntitiesSurveys()
     {
         $own_entity_surveys  = $this->step->getEntitySurveys();

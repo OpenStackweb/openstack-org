@@ -73,7 +73,7 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
                 $prev_step_url        = Controller::join_links
                 (
                     Director::absoluteBaseURL(),
-                    'surveys/current/',
+                    Controller::curr()->Link(),
                     $step,
                     'edit',
                     $entity_survey_id,

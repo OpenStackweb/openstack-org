@@ -7,7 +7,7 @@
     <div class="col-md-12" style="padding-left: 0 !important;padding-right: 0 !important;">
         <ul class="survey-steps">
             <% loop Survey.getCompletedSteps %>
-                <li><a id="$Template.Name" href="/surveys/current/{$Template.Name}" class="survey-step {$Top.SurveyStepClass($Template.Name)}">$Template.FriendlyName</a></li>
+                <li><a id="$Template.Name" href="$Top.Link{$Template.Name}" class="survey-step {$Top.SurveyStepClass($Template.Name)}">$Template.FriendlyName</a></li>
             <% end_loop %>
         </ul>
     </div>

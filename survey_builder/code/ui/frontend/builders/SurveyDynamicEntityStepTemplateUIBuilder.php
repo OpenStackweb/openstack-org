@@ -33,7 +33,7 @@ class SurveyDynamicEntityStepTemplateUIBuilder implements ISurveyStepUIBuilder {
 
         if($step->template()->canSkip()){
             $fields->add(
-                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you may <a href="/surveys/current/%s/skip-step">skip to the next section</a>.</strong></p>', $step->template()->title()))
+                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you may <a href="%s%s/skip-step">skip to the next section</a>.</strong></p>', Controller::curr()->Link(), $step->template()->title()))
             );
         }
 
