@@ -252,28 +252,20 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         $id    = $this->ID;
 
         $res = DB::query("SELECT COUNT(ID) FROM SurveyTemplate WHERE Title = '{$title}' AND ClassName = 'SurveyTemplate' AND ID <> {$id}")->value();
-        if(intval($res) > 0 ){
+        if(intval($res) > 0 )
+        {
             return $valid->error('There is already another survey template with that name!');
         }
 
         //check dates ranges
 
         $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
-        $end_date = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
+        $end_date   = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
 
         if($start_date >= $end_date){
             return $valid->error('selected date range is invalid!');
         }
 
-        if($this->Enabled)
-        {
-            $start_date = $this->StartDate;
-            $end_date   = $this->EndDate;
-            $res        = DB::query("SELECT COUNT(ID) FROM SurveyTemplate WHERE ClassName = 'SurveyTemplate' AND Enabled = 1 AND ID <> {$id} AND ( (StartDate <= '{$end_date}') AND (EndDate >= '{$start_date}')) ;")->value();
-            if (intval($res) > 0) {
-                return $valid->error('There is already another valid survey template under that date range!');
-            }
-        }
         return $valid;
     }
 
