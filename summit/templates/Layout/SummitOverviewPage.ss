@@ -5,6 +5,20 @@
                 <h2 style="text-align:center;">The Must-Attend OpenStack Event</h2>
                 <hr/>
                 $OverviewIntro
+                <h3 class="recap-title">$RecapTitle</h3>
+                <% if $VideoRecapYouTubeID1 %>
+                    <div class="about-video-wrapper">
+                        <iframe width="360" height="225" src="//www.youtube.com/embed/{$VideoRecapYouTubeID1}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+                        <p class='video-caption'>$VideoRecapCaption1</p>
+                    </div>
+                <% end_if %>
+                <% if $VideoRecapYouTubeID2 %>
+                    <div class="about-video-wrapper">
+                        <iframe width="360" height="225" src="//www.youtube.com/embed/{$VideoRecapYouTubeID2}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+                        <p class='video-caption'>$VideoRecapCaption2</p>
+                    </div>
+                <% end_if %>
+                <hr />
                 <div class="atendees-charts-wrapper">
                     <h3 class="recap-title">Attendees From Around The World</h3>
                     <div class="atendees-charts">
@@ -42,16 +56,6 @@
                         onerror="this.onerror=null; this.src={$AtendeesChartRefImagePngUrl}" alt="OpenStack Summit Atendees Ref">
                         <a href="/sponsors/#audience">See Full Stats from Vancouver &amp; Paris</a>
                     </div>
-                </div>
-                <hr>
-                <h3 class="recap-title">$RecapTitle</h3>
-                <div class="about-video-wrapper">
-                    <iframe width="360" height="225" src="//www.youtube.com/embed/{$VideoRecapYouTubeID1}?showinfo=0" frameborder="0" allowfullscreen></iframe>
-                    <p class='video-caption'>$VideoRecapCaption1</p>
-                </div>
-                <div class="about-video-wrapper">
-                    <iframe width="360" height="225" src="//www.youtube.com/embed/{$VideoRecapYouTubeID2}?showinfo=0" frameborder="0" allowfullscreen></iframe>
-                    <p class='video-caption'>$VideoRecapCaption2</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4">
