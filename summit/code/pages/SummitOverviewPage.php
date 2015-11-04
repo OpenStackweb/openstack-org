@@ -324,14 +324,14 @@ class SummitOverviewPage extends SummitPage {
 
         $res = $this->getField('VideoRecapCaption1');
         if(empty($res))
-            return 'May 2015 in Vancouver, BC.';
+            return '';
         return $res;
     }
 
     public function getVideoRecapYouTubeID1(){
         $res = $this->getField('VideoRecapYouTubeID1');
         if(empty($res))
-            return 'iZdEwQ-76P4';
+            return '';
         return $res;
     }
 
@@ -339,14 +339,14 @@ class SummitOverviewPage extends SummitPage {
 
         $res = $this->getField('VideoRecapCaption2');
         if(empty($res))
-            return 'November 2013 in Hong Kong.';
+            return '';
         return $res;
     }
 
     public function getVideoRecapYouTubeID2(){
         $res = $this->getField('VideoRecapYouTubeID2');
         if(empty($res))
-            return 'VA-8K4_4NIg';
+            return '';
         return $res;
     }
 
