@@ -68,15 +68,15 @@ class MemberDecorator extends DataExtension
 
     public function onBeforeDelete()
     {
-        $current_id = $this->owner-ID;
+        $current_id = $this->owner->ID;
 
-        $legal_agreements = $this->owner()->LegalAgreements;
+        $legal_agreements = $this->owner->LegalAgreements();
         foreach($legal_agreements as $la)
         {
             $la->delete();
         }
 
-        $affiliations = $this->owner()->Affiliations;
+        $affiliations = $this->owner->Affiliations();
         foreach($affiliations as $a)
         {
             $a->delete();
