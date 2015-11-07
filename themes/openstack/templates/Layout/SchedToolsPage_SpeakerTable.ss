@@ -10,7 +10,7 @@
 	<tr>
 		<td>$name</td>
 		<td>$email</td>
-		<td>http://www.openstack.org{$top.link}Presentations/?key={$SpeakerHash}</td>
+		<td><a href="{$Top.Link}Presentations/?key={$SpeakerHash}">{$Top.Link}Presentations/?key={$SpeakerHash}</a></td>
 	</tr>
 <% end_loop %>
 

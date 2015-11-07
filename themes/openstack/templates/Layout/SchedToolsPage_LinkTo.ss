@@ -9,17 +9,17 @@
 <% else %>
 
 	<% if Presentation.HasAttachmentOrLink %>
-	<h2>Replace Presentation File For "$Presentation.eventtitle"</h2>
+	<h2>Replace Presentation File For "$Presentation.Name"</h2>
 
 		<% if Presentation.IsFile %>
-		<p>The presentation <strong>{$Presentation.eventtitle}</strong> currently has the file <strong><a href="{$Presentation.UploadedMedia.URL}">{$Presentation.UploadedMedia.Name}</a></strong> uploaded. If you proceed, your new file or URL will replace the current one.</p>
+		<p>The presentation <strong>{$Presentation.Name}</strong> currently has the file <strong><a href="{$Presentation.UploadedMedia.URL}">{$Presentation.UploadedMedia.Name}</a></strong> uploaded. If you proceed, your new file or URL will replace the current one.</p>
 		<% else %>
-		<p>The presentation <strong>{$Presentation.eventtitle}</strong> currently has slides set to be available at <a href="{$Presentation.HostedMediaURL}">{$Presentation.HostedMediaURL}</a>. If you proceed, your new file or URL will replace the current one.</p>
+		<p>The presentation <strong>{$Presentation.Name}</strong> currently has slides set to be available at <a href="{$Presentation.HostedMediaURL}">{$Presentation.HostedMediaURL}</a>. If you proceed, your new file or URL will replace the current one.</p>
 		<% end_if %>
 
 	<% else %>
 
-		<h2>Upload Your Slides For "$Presentation.eventtitle"</h2>
+		<h2>Upload Your Slides For "$Presentation.Name"</h2>
 		<p>Please upload a file with your slides or provide a link to where your slides are hosted online. Thank you for the help!</p>
 
 	<% end_if %>

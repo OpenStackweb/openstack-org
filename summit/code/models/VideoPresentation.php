@@ -32,7 +32,9 @@ class VideoPresentation extends DataObject
 		'SlidesLink' => 'Varchar(255)',
 		'event_key' => 'Varchar(255)',
 		'IsKeynote' => 'Boolean',
-		'SchedID' => 'Varchar'		
+		'SchedID' => 'Varchar',
+		'HostedMediaURL' => 'Text',
+		'MediaType' => "Enum('URL, File')"			
 	);
 
 	Static $defaults = array(
@@ -44,11 +46,9 @@ class VideoPresentation extends DataObject
 		'PresentationCategoryPage' => 'PresentationCategoryPage',
 		'Summit' => 'Summit',
 		'Member' => 'Member',
+		'UploadedMedia' => 'File'
 	);
 
-	static $has_many = array(
-		'Presentations' => 'File'
-	);
 
 	static $singular_name = 'Presentation';
 	static $plural_name = 'Presentations';
@@ -59,23 +59,9 @@ class VideoPresentation extends DataObject
 
 	function getCMSFields()
 	{
-		$fields = new FieldList (
-			new TextField('Name', 'Name of Presentation'),
-			new TextField('Speakers', 'Speakers'),
-			new DropdownField('Day', 'Day', array('1' => '1', '2' => '2', '3' => '3', '4' => '4')),
-			new TextField('URLSegment', 'URL Segment'),
-			new LiteralField('Break', '<p>(Automatically filled in on first save.)</p>'),
-			new LiteralField('Break', '<hr/>'),
-			new TextField('YouTubeID', 'YouTube Vidoe ID'),
-			new TextField('SlidesLink', 'Link To Slides (if available)'),
-			new TextField('StartTime', 'Video Start Time'),
-			new TextField('EndTime', 'Video End Time'),
-			new HTMLEditorField('Description', 'Description'),
-			new CheckboxField('IsKeynote','Keynote Presentation'),
-            new HiddenField('PresentationCategoryPageID','PresentationCategoryPageID'),
-            new HiddenField('MemberID','MemberID'),
-            new HiddenField('SummitID','SummitID')
-		);
+
+		$fields = parent::getCMSFields();
+
 		return $fields;
 	}
 
@@ -203,6 +189,38 @@ class VideoPresentation extends DataObject
 
 	public static function get_by_event_key($id) {
 		return self::get()->filter('event_key', $id)->first();
-	}	
+	}
+
+	public function IsASpeaker($SpeakerID) {
+		if(is_numeric($SpeakerID)) {
+
+			$Speaker = SchedSpeaker::get()->byID($SpeakerID);
+
+			// Check to see if the speaker is listed on this event
+			if( $Speaker &&
+				$Speaker->name && 
+				strpos($this->Speakers, $Speaker->name) !== FALSE ) 
+			{
+				return TRUE;
+			}	
+		}
+	}
+
+	public function UploadedMedia() {
+
+		if($this->UploadedMediaID) {
+			$File = File::get()->byID($this->UploadedMediaID);
+			return $File;
+		}
+	}
+	
+
+	public function isFile() {
+		return $this->MediaType == 'File';
+	}
+
+	public function HasAttachmentOrLink() {
+		return ($this->UploadedMediaID || $this->HostedMediaURL);
+	}
 
 }
