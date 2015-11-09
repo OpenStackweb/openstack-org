@@ -29,7 +29,7 @@ final class NewsRequestForm extends HoneyPotForm {
         $StateField = new TextField('state','State');
         $CountryField = new CountryDropdownField('country','Country');
 		$TagsField = new TextField('tags','Tags');
-		$DateField = new TextField('date','Date of Article/Release');
+		$DateField = new TextField('date','Date of Article/Release in CT');
         $DateField->addExtraClass('datefield inline');
         if ($is_manager) {
             $DateEmbargoField = new TextField('date_embargo','Embargo Date');
