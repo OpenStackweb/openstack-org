@@ -359,6 +359,9 @@ class SummitEvent extends DataObject implements ISummitEvent
             throw new EntityValidationException($validation_result->messageList());
         }
 
+        if(intval($this->AllowedSummitTypes()->count()) === 0)
+            throw new EntityValidationException(array('To publish this event you must associate a valid summit type!'));
+
         $start_date = $this->getStartDate();
         $end_date   = $this->getEndDate();
 
@@ -432,6 +435,12 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         if((empty($start_date) || empty($end_date)) && $this->isPublished())
             return $valid->error('To publish this event you must define a start/end datetime!');
+
+        $type_id = intval($this->TypeID);
+        if($type_id === 0)
+        {
+            return $valid->error('You must select an event type!');
+        }
 
         if(!empty($start_date) && !empty($end_date))
         {
