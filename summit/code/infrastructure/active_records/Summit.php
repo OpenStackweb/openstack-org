@@ -928,9 +928,9 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $presentation->write();
         }
 
-        if(!SummitEventType::get()->filter(array('Type'=>'Keynote', 'SummitID'=>$summit_id))->first()) {
+        if(!SummitEventType::get()->filter(array('Type'=>'Keynotes', 'SummitID'=>$summit_id))->first()) {
             $key_note = new SummitEventType();
-            $key_note->Type = 'Keynote';
+            $key_note->Type = 'Keynotes';
             $key_note->SummitID = $summit_id;
             $key_note->write();
         }

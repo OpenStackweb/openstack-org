@@ -489,7 +489,7 @@ class Presentation extends SummitEvent implements IPresentation
             (
                 'SummitID' => $summit_id,
             )
-        )->where(" Type ='Presentation' OR Type ='Keynote' ")->map('ID','Type')));
+        )->where(" Type ='Presentation' OR Type ='Keynotes' ")->map('ID','Type')));
 
         $ddl_type->setEmptyString('-- Select a Presentation Type --');
 
