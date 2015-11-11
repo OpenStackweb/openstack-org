@@ -456,7 +456,7 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         $getVars = $this->request->getVars();
         $extra_filter = '';
         if (!isset($getVars['showHidden'])) {
-            $extra_filter = ' AND DisplayOnSite = 1 ';
+            //$extra_filter = ' AND DisplayOnSite = 1 ';
         }
 
         $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();
