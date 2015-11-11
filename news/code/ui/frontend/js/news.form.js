@@ -17,18 +17,22 @@ jQuery(document).ready(function($){
 
     if(form.length > 0){
 
-        $('#NewsRequestForm_NewsRequestForm_date').datetimepicker({
-        });
-
         $('#NewsRequestForm_NewsRequestForm_date_embargo').datetimepicker({
+            format: 'm/d/Y h:i a',
+            defaultDate: new Date(),
+            formatDate: 'm/d/Y',
+            defaultTime: new Date(),
+            formatTime: 'h:i a'
         });
 
         $('#NewsRequestForm_NewsRequestForm_date_expire').datetimepicker({
+            format: 'm/d/Y h:i a',
         });
 
         var allowed_keys = [8, 13, 16, 17, 18, 20, 33, 34, 35,36, 37, 38, 39, 40, 46];
 
         tinyMCE.init({
+            content_css : "news/code/ui/frontend/css/htmleditor.css",
             theme: "advanced",
             mode : "textareas",
             theme_advanced_toolbar_location: "top",
@@ -86,12 +90,12 @@ jQuery(document).ready(function($){
                 submitter_phone:{required: true},
                 headline:{required: true},
                 summary:{required: true},
+                date_embargo:{required: true, date:true},
                 city:{required: true},
                 state:{required: true},
                 country:{required: true},
                 body:{required: true},
                 tags:{required: true},
-                date:{required: true},
                 link:{url:true},
                 submitter_first_name:{required: true},
                 submitter_last_name:{required: true},

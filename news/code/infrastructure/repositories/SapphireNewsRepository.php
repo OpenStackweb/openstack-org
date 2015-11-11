@@ -23,29 +23,56 @@ final class SapphireNewsRepository extends SapphireRepository {
     /**
      * @return INews[]
      */
-    public function getFeaturedNews($limit = 1000)
+    public function getSlideNews($filter_embargo = true)
     {
-        $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::equal('Featured','1'));
-        $query->addAndCondition(QueryCriteria::equal('Approved','1'));
-        $query->addOrder(QueryOrder::asc('Rank'));
-        list($list,$count) = $this->getAll($query,0,$limit);
+        $where_string = "Slider = 1 AND Approved = 1";
+        if ($filter_embargo) {
+            $now = gmdate("Y-m-d H:i:s");
+            $where_string .= " AND (DateEmbargo < '$now' OR DateEmbargo IS NULL)";
+        }
+
+        $list = News::get()->where($where_string)->sort('Rank','ASC')->limit(1000)->toArray();
         return $list;
     }
 
     /**
      * @return INews[]
      */
-    public function getRecentNews()
+    public function getFeaturedNews($filter_embargo = true,$limit = 1000)
     {
-        $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::equal('Featured','0'));
-        $query->addAndCondition(QueryCriteria::equal('Slider','0'));
-        $query->addAndCondition(QueryCriteria::equal('Approved','1'));
-        $query->addAndCondition(QueryCriteria::equal('Archived','0'));
-        $query->addOrder(QueryOrder::desc('Date'));
-        $query->addOrder(QueryOrder::asc('Rank'));
-        list($list,$count) = $this->getAll($query,0,1000);
+        $where_string = "Featured = 1 AND Approved = 1";
+        if ($filter_embargo) {
+            $now = gmdate("Y-m-d H:i:s");
+            $where_string .= " AND (DateEmbargo < '$now' OR DateEmbargo IS NULL)";
+        }
+
+        $list = News::get()->where($where_string)->sort('Rank','ASC')->limit($limit)->toArray();
+        return $list;
+    }
+
+    /**
+     * @return INews[]
+     */
+    public function getRecentNews($filter_embargo = true)
+    {
+        $where_string = "Featured = 0 AND Slider = 0 AND Approved = 1 AND Archived = 0";
+        if ($filter_embargo) {
+            $now = gmdate("Y-m-d H:i:s");
+            $where_string .= " AND (DateEmbargo < '$now' OR DateEmbargo IS NULL)";
+        }
+
+        $list = News::get()->where($where_string)->sort(array('Created'=>'DESC','Rank'=>'ASC'))->limit(1000)->toArray();
+        return $list;
+
+    }
+
+    /**
+     * @return INews[]
+     */
+    public function getStandByNews()
+    {
+        $where_string = "Featured = 0 AND Slider = 0 AND Approved = 0 AND Archived = 0 AND Deleted = 0";
+        $list = News::get()->where($where_string)->sort('Created','DESC')->limit(1000)->toArray();
         return $list;
     }
 
@@ -54,9 +81,9 @@ final class SapphireNewsRepository extends SapphireRepository {
      */
     public function getOldNews()
     {
-        $thirty_days_ago = date('Y-m-d H:i:s',strtotime('-30 days'));
+        $thirty_days_ago = gmdate('Y-m-d H:i:s',strtotime('-30 days'));
         $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::lower('Date',$thirty_days_ago));
+        $query->addAndCondition(QueryCriteria::lower('DateEmbargo',$thirty_days_ago));
         $query->addAndCondition(QueryCriteria::equal('Featured','0'));
         $query->addAndCondition(QueryCriteria::equal('Slider','0'));
         $query->addAndCondition(QueryCriteria::equal('Approved','1'));
@@ -70,12 +97,12 @@ final class SapphireNewsRepository extends SapphireRepository {
     {
         if (isset($searchTerm) && trim($searchTerm)!=='') {
             $archivedNewsQuery = $this->buildGeArchivedNewsQuery($searchTerm);
-            $list = $archivedNewsQuery->sort('Date DESC')->limit($limit, $offset)->toArray();
+            $list = $archivedNewsQuery->sort('Created DESC')->limit($limit, $offset)->toArray();
         }
         else {
             $query = new QueryObject(new News);
             $query->addAndCondition(QueryCriteria::equal('Archived','1'));
-            $query->addOrder(QueryOrder::desc('Date'));
+            $query->addOrder(QueryOrder::desc('Created'));
             list($list,$count) = $this->getAll($query,$offset,$limit);
         }
         return $list;
@@ -114,36 +141,6 @@ final class SapphireNewsRepository extends SapphireRepository {
     /**
      * @return INews[]
      */
-    public function getStandByNews()
-    {
-        $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::equal('Featured','0'));
-        $query->addAndCondition(QueryCriteria::equal('Slider','0'));
-        $query->addAndCondition(QueryCriteria::equal('Approved','0'));
-        $query->addAndCondition(QueryCriteria::equal('Archived','0'));
-        $query->addAndCondition(QueryCriteria::equal('Deleted','0'));
-        $query->addOrder(QueryOrder::desc('Date'));
-        //$query->addOrder(QueryOrder::asc('Rank'));
-        list($list,$count) = $this->getAll($query,0,1000);
-        return $list;
-    }
-
-    /**
-     * @return INews[]
-     */
-    public function getSlideNews()
-    {
-        $query = new QueryObject(new News);
-        $query->addAndCondition(QueryCriteria::equal('Slider','1'));
-        $query->addAndCondition(QueryCriteria::equal('Approved','1'));
-        $query->addOrder(QueryOrder::asc('Rank'));
-        list($list,$count) = $this->getAll($query,0,1000);
-        return $list;
-    }
-
-    /**
-     * @return INews[]
-     */
     public function getNewsByID($articleID)
     {
         $query = new QueryObject(new News);
@@ -156,7 +153,7 @@ final class SapphireNewsRepository extends SapphireRepository {
      */
     public function getExpiredNews()
     {
-        $today = date("Y-m-d H:i:s");
+        $today = gmdate("Y-m-d H:i:s");
         $query = new QueryObject(new News);
         $query->addAndCondition(QueryCriteria::lower('DateExpire',$today));
         $query->addAndCondition(QueryCriteria::equal('Approved',1));
@@ -168,7 +165,7 @@ final class SapphireNewsRepository extends SapphireRepository {
 
     public function getNewsToActivate()
     {
-        $today = date("Y-m-d H:i:s");
+        $today = gmdate("Y-m-d H:i:s");
         $query = new QueryObject(new News);
         $query->addAndCondition(QueryCriteria::lower('DateEmbargo',$today));
         $query->addAndCondition(QueryCriteria::greater('DateExpire',$today));
