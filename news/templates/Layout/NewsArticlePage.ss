@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-push-2 col-md-10 col-md-push-1 col-sm-10 col-sm-push-1">
-            <div style="text-align:justify;">
+            <div style="text-align:left;">
                 <h1 class="article-h1">$Article.Headline</h1>
                 $Article.ImageForArticle
 
