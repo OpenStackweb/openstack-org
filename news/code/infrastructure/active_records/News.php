@@ -76,7 +76,7 @@ final class News extends DataObject implements INews
 
     public function formatDate()
     {
-        return date('M d, g:i a', strtotime($this->EmbargoDate));
+        return date('M d, g:i a', strtotime($this->DateEmbargo));
     }
 
     /**
@@ -295,7 +295,7 @@ final class News extends DataObject implements INews
 
     public function formattedDate()
     {
-        return date('M jS Y', strtotime($this->EmbargoDate));
+        return date('M jS Y', strtotime($this->DateEmbargo));
     }
 
     public function shortenText($text, $chars)
