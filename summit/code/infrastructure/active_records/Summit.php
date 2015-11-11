@@ -256,6 +256,17 @@ final class Summit extends DataObject implements ISummit
         return "DRAFT";
     }
 
+    public function getNext()
+    {
+        $end_date = $this->getField('SummitEndDate');
+
+        return Summit::get()->filter( array
+        (
+            'SummitEndDate:GreaterThan' => $end_date,
+            'Active' => 1,
+        ))->sort('SummitEndDate', 'ASC')->first();
+    }
+
 
     public function getTitle(){
         $title = $this->getField('Title');
@@ -386,7 +397,12 @@ final class Summit extends DataObject implements ISummit
      */
     public function getName()
     {
-        return $this->getField('Name');
+        $value =  $this->getField('Name');
+        if(empty($value))
+        {
+            $value = $this->getField('Title');
+        }
+        return $value;
     }
 
     /**
