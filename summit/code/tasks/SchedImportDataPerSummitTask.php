@@ -27,8 +27,6 @@ class SchedImportDataPerSummitTask extends BuildTask
      */
     protected $description = 'Sched Import Data Per Summit';
 
-
-
     /**
      * Implement this method in the task subclass to
      * execute via the TaskRunner
@@ -49,8 +47,6 @@ class SchedImportDataPerSummitTask extends BuildTask
             'format' => 'json',
         );
 
-
-
         $response = $client->get("http://openstacksummitoctober2015tokyo.sched.org/api/session/list", array
             (
                 'query' => $query
@@ -61,6 +57,8 @@ class SchedImportDataPerSummitTask extends BuildTask
         $content_type = $response->getHeader('content-type');
         if(empty($content_type)) throw new Exception('invalid content type!');
         if($content_type !== 'application/json') throw new Exception('invalid content type!');
+        $summit = Summit::get()->byID($summit_id);
+        if(is_null($summit)) throw new InvalidArgumentException('missing summit_id param!');
 
         $json   = $response->getBody()->getContents();
         $events = json_decode($json, true);
@@ -75,7 +73,15 @@ class SchedImportDataPerSummitTask extends BuildTask
             $event_type = isset($sched_event["event_type"]) ? $sched_event["event_type"] : $title;
             $venue      = $sched_event["venue"];
 
-            $event    = SummitEvent::get()->filter( array("SummitID" => $summit_id, "Title" => trim($title)))->first();
+            $event    = SummitEvent::get()->filter(
+                array
+                (
+                    "SummitID"  => $summit_id,
+                    "Title"     => trim($title),
+                    "StartDate" => $summit->convertDateFromTimeZone2UTC($start_date),
+                    "EndDate"   => $summit->convertDateFromTimeZone2UTC($end_date)
+                )
+            )->first();
             $location = SummitVenueRoom::get()->filter( array("SummitID" => $summit_id, "Name" => trim($venue)))->first();
             if(is_null($location) && $venue !== 'TBA')
             {
@@ -108,6 +114,7 @@ class SchedImportDataPerSummitTask extends BuildTask
                 $event->TypeID   = $type->ID;
                 $event->SummitID = $summit_id;
                 $event->Title    = trim($title);
+                $event->write();
             }
 
             if($event->isPublished()) continue;
@@ -118,6 +125,15 @@ class SchedImportDataPerSummitTask extends BuildTask
                 $event->LocationID = $location->ID;
             try
             {
+
+                $event_id = $event->ID;
+                if(intval($event->AllowedSummitTypes()->count()) === 0)
+                {
+                    DB::query("INSERT INTO SummitEvent_AllowedSummitTypes
+(SummitEventID, SummitTypeID)
+SELECT SummitEvent.ID, SummitType.ID FROM SummitEvent, SummitType WHERE SummitEvent.ID = {$event_id} ;
+");
+                }
                 $event->publish();
                 $event->write();
             }
