@@ -25,10 +25,9 @@ final class NewsValidationFactory
 
 		$rules = array(
 			'headline'              => 'required|text|max:150',
-			'date'                  => 'required|date',
 			'summary'               => 'required|htmltext',
 			'tags'                  => 'required|text',
-			//'date_embargo'        => 'required|date',
+			'date_embargo'          => 'required|date',
 			'submitter_first_name'  => 'required|text',
             'submitter_last_name'   => 'required|text',
 			'submitter_email'       => 'required|email',
@@ -39,14 +38,12 @@ final class NewsValidationFactory
 			'headline.required'             => ':attribute is required',
 			'headline.text'                 => ':attribute should be valid text.',
 			'headline.max'                  => ':attribute should have less than 150 chars.',
-			'date.required'                 => ':attribute is required',
-			'date.date'                     => ':attribute should be a valid date.',
 			'summary.required'              => ':attribute is required',
 			'summary.htmltext'              => ':attribute should be valid text.',
 			'tags.required'                 => ':attribute is required',
 			'tags.text'                     => ':attribute should be valid text.',
-			//'date_embargo.required'       => ':attribute is required',
-			//'date_embargo.date'           => ':attribute should be a valid date.',
+			'date_embargo.required'         => ':attribute is required',
+			'date_embargo.date'             => ':attribute should be a valid date.',
             'submitter_first_name.required' => ':attribute is required',
             'submitter_first_name.text'     => ':attribute should be valid text.',
             'submitter_last_name.required'  => ':attribute is required',
@@ -68,7 +65,7 @@ final class NewsValidationFactory
 
         $rules = array(
             'headline'              => 'required|text|max:150',
-            'date'                  => 'required|date',
+            'date_embargo'          => 'required|date',
             'summary'               => 'required|htmltext',
             'tags'                  => 'required|text',
         );
@@ -77,8 +74,8 @@ final class NewsValidationFactory
             'headline.required'        => ':attribute is required',
             'headline.text'            => ':attribute should be valid text.',
             'headline.max'             => ':attribute should have less than 150 chars.',
-            'date.required'            => ':attribute is required',
-            'date.date'                => ':attribute should be a valid date.',
+            'date_embargo.required'    => ':attribute is required',
+            'date_embargo.date'        => ':attribute should be a valid date.',
             'summary.required'         => ':attribute is required',
             'summary.htmltext'         => ':attribute should be valid text.',
             'tags.required'            => ':attribute is required',

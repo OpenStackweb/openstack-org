@@ -81,6 +81,8 @@ thead {
     cursor: pointer;
 }
 
+.hidden_article { background-color: #d3d3d3}
+
 .popover-content {
     margin: 0;
     width:auto;

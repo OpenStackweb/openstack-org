@@ -85,13 +85,13 @@ final class NewsAdminPage_Controller extends AdminController {
         $counter = 0;
         switch ($type) {
             case 'slider' :
-                $articles = $this->news_repository->getSlideNews();
+                $articles = $this->news_repository->getSlideNews(false);
                 break;
             case 'featured' :
-                $articles = $this->news_repository->getFeaturedNews();
+                $articles = $this->news_repository->getFeaturedNews(false);
                 break;
             case 'recent' :
-                $articles = $this->news_repository->getRecentNews();
+                $articles = $this->news_repository->getRecentNews(false);
                 break;
             case 'standby' :
                 $articles = $this->news_repository->getStandByNews();
@@ -103,8 +103,9 @@ final class NewsAdminPage_Controller extends AdminController {
             $link = ($article->Link) ? $article->Link : '';
             $headline = $article->Headline;
             if(empty($headline)) continue;
+            $hidden = (strtotime($article->DateEmbargo) > time());
             $data = array('Id'=>$article->Id,'Rank'=>$article->Rank,'Link'=>$link,
-                'Image'=>$article->getImage(),'Headline' => $article->Headline,'Type'=>$type);
+                'Image'=>$article->getImage(),'Headline' => $article->Headline,'Type'=>$type,'Hidden'=>$hidden);
             $output .= $article->renderWith('NewsAdminPage_article', $data);
         }
 

@@ -59,7 +59,7 @@ final class NewsPage_Controller extends Page_Controller {
 
     public function index(){
 
-        $featured_news = new ArrayList($this->news_repository->getFeaturedNews(3));
+        $featured_news = new ArrayList($this->news_repository->getFeaturedNews(true,3));
         $recent_news   = new ArrayList($this->news_repository->getRecentNews());
         $slide_news    = new ArrayList($this->news_repository->getSlideNews());
 

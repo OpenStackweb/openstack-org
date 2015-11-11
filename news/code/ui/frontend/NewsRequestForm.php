@@ -29,17 +29,18 @@ final class NewsRequestForm extends HoneyPotForm {
         $StateField = new TextField('state','State');
         $CountryField = new CountryDropdownField('country','Country');
 		$TagsField = new TextField('tags','Tags');
-		$DateField = new TextField('date','Date of Article/Release in CT');
-        $DateField->addExtraClass('datefield inline');
+        $DateEmbargoField = new TextField('date_embargo',
+            'Desired release date/time: Time zone is Central Time. Please ensure your release date is in Central Time
+            (<a target="_blank" href="http://www.timeanddate.com/worldclock/converter.html">time converter</a>)');
+        $DateEmbargoField->addExtraClass('datefield');
+
         if ($is_manager) {
-            $DateEmbargoField = new TextField('date_embargo','Embargo Date');
-            $DateEmbargoField->addExtraClass('datefield inline');
             $DateExpireField = new TextField('date_expire','Expire Date');
             $DateExpireField->addExtraClass('datefield');
         }
 
         $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
-        $UpdatedField->addExtraClass('inline');
+        //$UpdatedField->addExtraClass('inline');
         //optional fields
         $BodyField = new HtmlEditorField('body','Body');
         $LinkField = new TextField('link','Link');
@@ -85,12 +86,15 @@ final class NewsRequestForm extends HoneyPotForm {
             $StateField->setValue($article->State);
             $CountryField->setValue($article->Country);
             $TagsField->setValue($article->getTagsCSV());
-            $DateField->setValue($article->Date);
-            $DateEmbargoField->setValue($article->DateEmbargo);
+            if ($article->DateEmbargo)
+                $DateEmbargoField->setValue(date('m/d/Y g:i a',strtotime($article->DateEmbargo)));
+            else
+                $DateEmbargoField->setValue(gmdate('m/d/Y g:i a'));
             $UpdatedField->setValue($article->LastEdited);
             $BodyField->setValue($article->Body);
             $LinkField->setValue($article->Link);
-            $DateExpireField->setValue($article->DateExpire);
+            if ($article->DateExpire)
+                $DateExpireField->setValue(date('m/d/Y g:i a',strtotime($article->DateExpire)));
             $IsLandscapeField->setValue($article->IsLandscape);
             //submitter read only
             $SubmitterFirstNameField = new ReadonlyField('submitter_first_name','First Name');
@@ -122,11 +126,11 @@ final class NewsRequestForm extends HoneyPotForm {
             $StateField,
             $CountryField,
             $TagsField,
-            $DateField
+            $DateEmbargoField
         );
 
         if ($is_manager) {
-            $fields->push($DateEmbargoField);
+            $fields->push($DateExpireField);
             $fields->push($UpdatedField);
         }
 
@@ -155,7 +159,6 @@ final class NewsRequestForm extends HoneyPotForm {
         if ($is_manager) {
             $fields->push($IsLandscapeField);
             $fields->push(new LiteralField('break', '<br/>'));
-            $fields->push($DateExpireField);
         }
 
         $fields->push(new LiteralField('break', '<br/><hr/>'));

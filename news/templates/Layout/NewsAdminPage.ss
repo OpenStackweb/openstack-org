@@ -1,5 +1,5 @@
 <div class="link_button">
-    <a href="/news" id="back_to_news">Back to News</a>
+    <a href="{$BaseHref}news" id="back_to_news">Back to News</a>
 </div>
 <% if CurrentMember.isNewsManager %>
     <div class="link_button">
