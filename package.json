@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "bower": "*",
-    "riot": "2.2.2",
+    "riot": "2.2.4",
     "riotjs-loader": "*",
     "riotcontrol": "*",
     "tag-loader": "*",
