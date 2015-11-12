@@ -1081,7 +1081,7 @@ footer {
 }
 
 .summit-hero-wrapper.tokyo {
-    background: url(/images/tokyo/5fbb13be38df53158e865862bdd3e924a8fb7d92/tokyo-bkgd-lrg.jpg) no-repeat center bottom;
+    /*background: url(/images/tokyo/5fbb13be38df53158e865862bdd3e924a8fb7d92/tokyo-bkgd-lrg.jpg) no-repeat center bottom;*/
     background-size: cover;
     position: relative;
     text-align: center;
@@ -1109,7 +1109,7 @@ footer {
 }
 
 .about-city-row.tokyo {
-    background: url(/images/tokyo/ba749b331853d7a12c6977da4a3f9ad0b82127a0/tokyo-bkgd-city.jpg) no-repeat left top;
+    /* background: url(/images/tokyo/ba749b331853d7a12c6977da4a3f9ad0b82127a0/tokyo-bkgd-city.jpg) no-repeat left top;*/
     min-height: 610px;
     background-size: cover;
     position: relative;
@@ -1121,7 +1121,7 @@ footer {
 }
 
 .about-city-row.austin {
-    background: url(/images/post-summit/452677305c034bc9b2da515e2e2b270991cd2802/austin-bottom.jpg) no-repeat left top;
+    /* background: url(/images/post-summit/452677305c034bc9b2da515e2e2b270991cd2802/austin-bottom.jpg) no-repeat left top;*/
     min-height: 610px;
     background-size: cover;
     position: relative;
@@ -3981,7 +3981,7 @@ a.outline-btn.inactive:hover {
 }
 
 .future-summit-promo.tokyo {
-    background: url(/images/post-summit/9a53125c9e007c71972b02b07ce630b7dab0ed64/tokyo-promo.jpg) no-repeat center center;
+    /*background: url(/images/post-summit/9a53125c9e007c71972b02b07ce630b7dab0ed64/tokyo-promo.jpg) no-repeat center center;*/
     background-size: cover
 }
 

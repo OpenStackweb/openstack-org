@@ -6,6 +6,7 @@ module.exports = {
     "software/js/public/software_all_projects": "./software/js/software_all_projects",
     "software/js/public/software_sample_configs":"./software/js/software_sample_configs",
     "summit/javascript/new-trackchairs-app/app/index": "./summit/javascript/new-trackchairs-app/app/index",
+    "summit/javascript/summit-highlights":"./summit/javascript/summit-highlights"
   },
   output: {
     path: __dirname ,
@@ -16,13 +17,13 @@ module.exports = {
     new webpack.ProvidePlugin({
       riot: 'riot'
     }),
-    new webpack.optimize.UglifyJsPlugin(
+    /*new webpack.optimize.UglifyJsPlugin(
           {
               sourceMap: false,
               mangle:    false,
               minimize:  true
           }
-    )
+    )*/
   ],
   module: {
     loaders: [
