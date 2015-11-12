@@ -389,4 +389,16 @@ implements IPresentationSpeaker
     public function canEdit($member = null) {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
+
+    // Used to group speakers by last name when displaying the member listing
+    public function getLastNameFirstLetter()
+    {
+        $firstLetter = $this->owner->LastName[0];
+        $firstLetter = strtr($firstLetter,
+            'ŠŽšžŸµÀÁÂÃÄÅÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝ',
+            'SZszYuAAAAAAEEEEIIIIDNOOOOOUUUUY');
+        $firstLetter = strtoupper($firstLetter);
+
+        return $firstLetter;
+    }
 }

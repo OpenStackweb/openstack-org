@@ -1,52 +1,23 @@
 
-<h1>Speaker Submissions (as of today, $Now.day)</h1>
+<% require themedCSS(filter) %>
 
-<% loop SpeakerSubmissions %>
+<h1>OpenStack Foundation: Speaker Directory</h1>
 
-<hr/>
-<a name="{$ID}"></a>
-<div class="span-4">
-	$Photo.SetWidth(100)
-	<p>&nbsp;</p>
-</div>
+$SpeakerSearchForm
 
 
-<div class="span-20 last">
-<h3>$LastName, $FirstName</h3>
-<div class="span-2"><strong>Email</strong></div>
-<div class="span-18 last">$Email &nbsp;</div>
+<p class="linkLetters">
 
-<div class="span-2"><strong>Edit Link</strong></div>
-<div class="span-18 last"><a href="{$Top.Parent.Link}call-for-speakers/?edit=1&key={$SpeakerEditHash}">Edit This Submission</a> &nbsp; | &nbsp; <a href="{$Top.Link}remove/?id={$ID}" onclick="return confirm('Do you really want delete this entry?')">Delete</a></div>
+<a href="{$Link}?letter=A">A</a><a href="{$Link}?letter=B">B</a><a href="{$Link}?letter=C">C</a><a href="{$Link}?letter=D">D</a><a href="{$Link}?letter=E">E</a><a href="{$Link}?letter=F">F</a><a href="{$Link}?letter=G">G</a><a href="{$Link}?letter=H">H</a><a href="{$Link}?letter=I">I</a><a href="{$Link}?letter=J">J</a><a href="{$Link}?letter=K">K</a><a href="{$Link}?letter=L">L</a><a href="{$Link}?letter=M">M</a><a href="{$Link}?letter=N">N</a><a href="{$Link}?letter=O">O</a><a href="{$Link}?letter=P">P</a><a href="{$Link}?letter=Q">Q</a><a href="{$Link}?letter=R">R</a><a href="{$Link}?letter=S">S</a><a href="{$Link}?letter=T">T</a><a href="{$Link}?letter=U">U</a><a href="{$Link}?letter=V">V</a><a href="{$Link}?letter=W">W</a><a href="{$Link}?letter=X">X</a><a href="{$Link}?letter=Y">Y</a><a href="{$Link}?letter=Z">Z</a><a class="intl" href="{$Link}?letter=intl">International Characters</a>
+</p>
 
-
-<div class="span-2"><strong>Job Title</strong></div>
-<div class="span-18 last">$JobTitle &nbsp;</div>
-
-<div class="span-2"><strong>Company</strong></div>
-<div class="span-18 last">$Company &nbsp;</div>
-
-<div class="span-2"><strong>Bio</strong></div>
-<div class="span-18 last">$Bio &nbsp;</div>
-
-<div class="span-2"><strong>Topic(s)</strong></div>
-<div class="span-18 last">$SetMainTopicLinks &nbsp;</div>
-
-<% if MainTopic %>
-<div class="span-2"><strong>Main Topic:</strong></div>
-<div class="span-18 last"><strong>$MainTopic</strong></div>
-<% end_if %>
-
-<div class="span-2"><strong>Title</strong></div>
-<div class="span-18 last">$PresentationTitle &nbsp;</div>
-
-<div class="span-2"><strong>Abstract</strong></div>
-<div class="span-18 last">$Abstract &nbsp;</div>
-</div>
-
-
-<div class="span-24 last"><p></p></div>
-
-
-
+<% loop SpeakerList.GroupedBy(LastNameFirstLetter) %>
+	<div class="filter">
+    <h3 class="groupHeading" id="$LastNameFirstLetter">$LastNameFirstLetter</h3>
+    <ul>
+        <% loop Children %>
+            <li><strong><a href="{$Top.Link}profile/{$ID}">$FirstName $LastName</strong></a><% if CurrentOrgName %> ($CurrentOrgName)<% end_if %></li>
+        <% end_loop %>
+    </ul>
+	</div>
 <% end_loop %>
