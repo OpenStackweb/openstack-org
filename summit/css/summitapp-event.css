@@ -1,0 +1,27 @@
+.container {
+    font-family:'Montserrat' , sans-serif;
+}
+
+.title_box {
+    background-color:#132539;
+}
+
+.title {
+    margin: 20px 0 10px 0;
+    text-align: left;
+    color: white;
+    font-size: 40px;
+    float: left;
+}
+
+.actions {
+    clear: left;
+    width: 200px;
+}
+
+.subtitle {
+    text-transform: uppercase;
+    color: grey;
+    font-size: 15px;
+    margin-bottom: 20px;
+}

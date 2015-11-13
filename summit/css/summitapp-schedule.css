@@ -1,4 +1,16 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/themes/openstack/fonts/Montserrat-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
 
 #schedule_container {
     font-family: Lato, 'Helvetica Neue', 'Lucida Grande', Helvetica, Arial, sans-serif;
