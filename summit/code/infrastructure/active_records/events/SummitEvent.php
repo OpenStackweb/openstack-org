@@ -124,12 +124,33 @@ class SummitEvent extends DataObject implements ISummitEvent
         return $end_date;
     }
 
+    public function getDateNice() {
+        $start_date = $this->getStartDateNice();
+        $end_date = $this->getEndDateNice();
+        $date_nice = '';
+
+        if ($start_date == 'TBD' || $end_date == 'TBD') return $start_date;
+
+        $date_nice = date('l j-F, g:i a',strtotime($start_date)).' / '.date('g:i a',strtotime($end_date));
+        return $date_nice;
+    }
+
     /**
      * @return string
      */
     public function getDescription()
     {
         return $this->getField('Description');
+    }
+
+    public function getShortDescription($length = 200){
+        $description = strip_tags($this->getField('Description'));
+
+        if (strlen($description) < $length) return $description;
+
+        $pos=strpos($description, ' ', $length);
+        $short_desc = substr($description,0,$pos ).'...';
+        return $short_desc;
     }
 
     /**
@@ -169,6 +190,15 @@ class SummitEvent extends DataObject implements ISummitEvent
         return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'AllowedSummitTypes')->toArray();
     }
 
+    public function isAllowedSummitType($summit_type_name) {
+        $allowed_summits = $this->getAllowedSummitTypes();
+        foreach ($allowed_summits as $summit_type) {
+            if ($summit_type->Title == $summit_type_name) return 1;
+        }
+
+        return 0;
+    }
+
     /**
      * @return ISummit
      */
@@ -182,9 +212,7 @@ class SummitEvent extends DataObject implements ISummitEvent
      */
     public function getFeedback()
     {
-        $query = new QueryObject();
-        $query->addAndCondition(QueryCriteria::equal('ClassName','SummitEventFeedback'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Feedback',$query);
+        return $this->Feedback()->filter('ClassName','SummitEventFeedback');
     }
 
     /**

@@ -36,6 +36,9 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
             return $this->httpError(404, 'Sorry that article could not be found');
         }
 
+        Requirements::block("summit/css/schedule-grid.css");
+        Requirements::css("summit/css/summitapp-event.css");
+
         return $this->renderWith(array('SummitAppEventPage','SummitPage','Page'), array('Event' => $event) );
     }
 

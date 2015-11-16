@@ -668,7 +668,7 @@ SQL;
 
 
     public function getSpeakers() {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Speakers')->toArray();
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Speakers');
     }
 
     public function getTopics() {

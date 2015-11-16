@@ -378,6 +378,16 @@ implements IPresentationSpeaker
         }
     }
 
+    public function getShortBio($length = 200){
+        $bio = strip_tags($this->getField('Bio'));
+
+        if (strlen($bio) < $length) return $bio;
+
+        $pos=strpos($bio, ' ', $length);
+        $short_bio = substr($bio,0,$pos ).'...';
+        return $short_bio;
+    }
+
     /**
      * @param Member $member
      * @return boolean

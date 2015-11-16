@@ -4,10 +4,21 @@
 
 .title_box {
     background-color:#132539;
+    padding: 30px 0;
+}
+
+.col1 {
+    float: left;
+    width: 60%;
+}
+
+.col2 {
+    float: right;
+    width: 30%;
 }
 
 .title {
-    margin: 20px 0 10px 0;
+    margin-bottom: 10px;
     text-align: left;
     color: white;
     font-size: 40px;
@@ -15,7 +26,7 @@
 }
 
 .actions {
-    clear: left;
+    float: left;
     width: 200px;
 }
 
@@ -23,5 +34,148 @@
     text-transform: uppercase;
     color: grey;
     font-size: 15px;
-    margin-bottom: 20px;
+    clear: both;
 }
+
+.section1 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #494949;
+    border-bottom: 1px solid grey;
+}
+
+.short_description {
+    font-size: 20px;
+}
+
+.info {
+
+}
+
+.info_item {
+    clear: both;
+    margin-bottom: 15px;
+}
+
+.info_item_icon {
+    float: left;
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.info_item_icon img {
+    height: 20px;
+}
+
+.info_item_text {
+}
+
+.share {
+    clear: both;
+}
+
+.section2 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #494949;
+}
+
+.description {
+    font-size: 16px;
+}
+
+.logo {
+    float: right;
+    width: 30%;
+}
+
+.speaker_box {
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #C2C2C2;
+    border-top: 1px solid #C2C2C2;
+    padding-bottom: 30px;
+    color: #494949;
+}
+
+.speaker_profile {
+    margin-top: 30px;
+    clear: both;
+}
+
+.speaker_pic {
+    width: 150px;
+    float: left;
+    margin-left: 15px;
+}
+
+.speaker_info {
+}
+
+.speaker_name {
+    margin:0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.speaker_job_title {
+    color: #AAAAAA;
+    font-size: 12px;
+}
+
+.speaker_bio {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.speaker_bio a {
+    text-decoration: underline;
+    color: #494949;
+    font-weight: bold;
+}
+
+.comment_section {
+    padding-top: 50px;
+    padding-bottom: 30px;
+    color: #494949;
+}
+
+.comment_title {
+    font-size: 20px;
+    border-bottom: 2px solid #EEEEEE;
+    padding-bottom: 15px;
+}
+
+.comment {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #EEEEEE;
+    color: #71757a;
+}
+
+.comment.last {
+    border: none;
+}
+
+.comment_info {
+    margin-bottom: 25px;
+}
+
+.comment_pic {
+    float: left;
+    margin-right: 20px;
+}
+
+.comment_date span {
+    color: #AAAAAA;
+}
+
+.comment_date {
+    font-size: 10px;
+}
+
+.comment_text {
+    clear: both;
+    font-size: 12px;
+}
+
