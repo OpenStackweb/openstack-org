@@ -54,14 +54,14 @@ final class SummitsApi extends AbstractRestfulJsonApi
 
         $this->addBeforeFilter('getAllSponsorshipAddOnsBySummit', 'check_own_request',
             function ($request) use ($this_var) {
-                if (!$this_var->checkOwnAjaxRequest($request)) {
+                if (!$this_var->checkOwnAjaxRequest()) {
                     return $this_var->permissionFailure();
                 }
             });
 
         $this->addBeforeFilter('getAllSponsorshipAddOnsBySummit', 'check_own_request2',
             function ($request) use ($this_var) {
-                if (!$this_var->checkOwnAjaxRequest($request)) {
+                if (!$this_var->checkOwnAjaxRequest()) {
                     return $this_var->permissionFailure();
                 }
             });
@@ -78,20 +78,6 @@ final class SummitsApi extends AbstractRestfulJsonApi
             }
         });
 
-    }
-
-    public function checkOwnAjaxRequest($request)
-    {
-        $referer = @$_SERVER['HTTP_REFERER'];
-        if (empty($referer)) {
-            return false;
-        }
-        //validate
-        if (!Director::is_ajax()) {
-            return false;
-        }
-
-        return Director::is_site_url($referer);
     }
 
     public function checkAdminPermissions($request)

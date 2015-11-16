@@ -80,9 +80,13 @@ implements IPresentationSpeaker
         return "{$this->FirstName} {$this->LastName}";
     }
 
-    public function getTitle()
-    {
-        return sprintf('%s (%s)', $this->getName(), $this->Member()->Email);
+    public function getCurrentPosition(){
+        $member = $this->Member();
+        if(!is_null($member) && $member->ID > 0)
+        {
+            return $member->getCurrentPosition();
+        }
+        return 'N/A';
     }
 
     /**
@@ -358,18 +362,18 @@ implements IPresentationSpeaker
         $twitter_name = $this->TwitterHandle;
         if(!is_null($img)  && $img->exists() && Director::fileExists($img->Filename)){
             $img = $img->SetWidth($width);
-            return "<img alt='{$this->ID}_profile_photo' src='{$img->getURL()}' class='member-profile-photo'/>";
+            return $img->getURL();
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {
-                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=normal" />';
+                return 'https://twitter.com/'.$twitter_name.'/profile_image?size=normal';
             } else {
-                return '<img src="https://twitter.com/'.$twitter_name.'/profile_image?size=bigger" />';
+                return 'https://twitter.com/'.$twitter_name.'/profile_image?size=bigger';
             }
         } else {
             if ($width < 100) {
-                return "<img src='themes/openstack/images/generic-profile-photo-small.png'/>";
+                return "themes/openstack/images/generic-profile-photo-small.png";
             } else {
-                return "<img src='themes/openstack/images/generic-profile-photo.png'/>";
+                return "themes/openstack/images/generic-profile-photo.png";
             }
         }
     }

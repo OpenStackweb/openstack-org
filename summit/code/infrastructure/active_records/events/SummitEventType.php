@@ -65,6 +65,8 @@ class SummitEventType extends DataObject implements ISummitEventType
     public function getColor()
     {
         $color = $this->getField('Color');
+        if(empty($color))
+            $color = 'f0f0ee';
         if (strpos($color,'#') === false) {
             $color = '#'.$color;
         }

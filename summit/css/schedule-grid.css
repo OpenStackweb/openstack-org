@@ -1,0 +1,156 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MontserratBold';
+    src: url('/themes/openstack/fonts/Montserrat-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.event-type{
+    width: 5px !important;
+    padding: 0 !important;
+    min-height: 150px !important;
+}
+
+.event-title
+{
+    font-family: 'MontserratBold';
+    font-size: 12pt;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.event-row {
+    min-height: 150px !important;
+    font-family: 'Montserrat';
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: 1px solid #C1C1C1
+}
+
+.day-selected
+{
+    background-color: #F5A623;
+    color: #FFFFFF !important;
+}
+
+.event-details
+{
+    background-color: #E4E4E4;
+    padding: 1em;
+    color: #4F4F4F;
+}
+
+.days-nav
+{
+    font-family: 'Montserrat';
+    background-color: #E4E4E4;
+    text-transform: uppercase;
+    min-height: 30px;
+}
+
+.day-container, .month-container
+{
+    width: auto;
+    min-height: 30px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.month-container span
+{
+    vertical-align: middle;
+}
+
+.day-container
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.day-label
+{
+    vertical-align: middle;
+    text-decoration: none;
+    color: #757575;
+}
+
+.day-label:visited
+{
+    color: #757575;
+}
+
+.main-event-content
+{
+    cursor: pointer;
+}
+
+.event-type-col
+{
+    text-transform: uppercase;
+    color: #D7D7D7;
+    text-align: right;
+}
+
+.event-content
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.icon-clock, .icon-foreign-event, .icon-own-event, .icon-favorite-event, .icon-non-favorite-event, .icon-map
+{
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+.icon-foreign-event
+{
+   color:#CDCDCD;
+}
+
+.icon-own-event
+{
+    color:#5BC86B;
+}
+
+.icon-favorite-event
+{
+    color:#F7A734;
+}
+
+.icon-non-favorite-event
+{
+    color:#CDCDCD;
+}
+
+.my-schedule-container
+{
+    text-align: right;
+}
+
+.speaker-name-row
+{
+    color: #7C7C7C;
+    font-family: 'MontserratBold';
+    font-size: 12pt;
+}
+
+.img-circle
+{
+    width: 60px;
+    height: 60px;;
+}
+
+.speaker-row
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

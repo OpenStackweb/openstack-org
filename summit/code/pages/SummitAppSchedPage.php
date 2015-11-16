@@ -21,9 +21,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         $this->event_repository = new SapphireSummitEventRepository();
         parent::init();
 
-        Requirements::javascript('themes/openstack/javascript/pure.min.js');
+        Requirements::css("summit/css/schedule-grid.css");
+        /*Requirements::javascript('themes/openstack/javascript/pure.min.js');
         Requirements::javascript("summit/javascript/summitapp-schedule.js");
-        Requirements::css("summit/css/summitapp-schedule.css");
+        */
 	}
 
     public function ViewEvent() {
@@ -55,5 +56,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
 
         $form = new SummitEventFeedbackForm($this, 'SummitEventFeedbackForm');
         return $form;
+    }
+
+
+    public function getCurrentSummitEventsBy1stDate()
+    {
+        $summit = $this->Summit();;
+        return new ArrayList($summit->getSchedule($summit->getBeginDate()));
     }
 }

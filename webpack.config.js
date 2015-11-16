@@ -6,7 +6,8 @@ module.exports = {
     "software/js/public/software_all_projects": "./software/js/software_all_projects",
     "software/js/public/software_sample_configs":"./software/js/software_sample_configs",
     "summit/javascript/new-trackchairs-app/app/index": "./summit/javascript/new-trackchairs-app/app/index",
-    "summit/javascript/summit-highlights":"./summit/javascript/summit-highlights"
+    "summit/javascript/summit-highlights":"./summit/javascript/summit-highlights",
+    "summit/javascript/schedule/schedule":"./summit/javascript/schedule/schedule",
   },
   output: {
     path: __dirname ,

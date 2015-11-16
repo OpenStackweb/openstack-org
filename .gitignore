@@ -1,4 +1,3 @@
-/summit/javascript/summit-highlights.bundle.js
 /software/js/public
 /themes/openstack/bower_assets
 #assets
@@ -70,10 +69,9 @@ node_modules
 gridfieldextensions/*
 gridfieldajaxrefresh/*
 gridfieldajaxrefresh
-summit/javascript/new-trackchairs-app/app/index.bundle.js
 reports/
 siteconfig/
 gridfieldextensions/*
 gridfieldajaxrefresh/*
 gridfieldajaxrefresh
-private-assets
+*bundle.js

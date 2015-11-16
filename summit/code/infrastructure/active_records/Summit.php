@@ -189,12 +189,10 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
-
     private static $has_one = array
     (
 
     );
-
 
     private static $has_many = array
     (
@@ -413,7 +411,7 @@ final class Summit extends DataObject implements ISummit
         return $this->getSummitBeginDate();
     }
 
-    /**
+     /**
      * @return DateTime
      */
     public function getEndDate()
@@ -422,15 +420,24 @@ final class Summit extends DataObject implements ISummit
     }
 
     /**
+     * @param mixed|null $day
      * @return SummitEvent[]
      * @throws Exception
      */
-    public function getSchedule()
+    public function getSchedule($day = null)
     {
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('Published',1));
+        if(!is_null($day))
+        {
+            if(!$day instanceof DateTime)
+                $day = new DateTime($day);
+            $day->setTime(0,0,0);
+            $query->addAndCondition(QueryCriteria::greaterOrEqual('StartDate',$day->format('Y-m-d H:i:s')));
+            $query->addAndCondition(QueryCriteria::lowerOrEqual('EndDate', $day->add(new DateInterval('PT23H59M59S'))->format('Y-m-d H:i:s')));
+        }
         $query->addOrder(QueryOrder::asc('StartDate'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',$query);
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',$query)->toArray();
     }
 
     /**
@@ -993,5 +1000,76 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
      */
     public function canEdit($member = null) {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
+    }
+
+    public function getDates()
+    {
+        $start_date = $this->getBeginDate();
+        $end_date   = $this->getEndDate();
+        $res        = array();
+        foreach($this->getDatesFromRange($start_date, $end_date) as $date)
+            array_push($res, new ArrayData(array('Label'=> $date->format('l jS') , 'Date' => $date->format('Y-m-d H:i:s'))));
+        return new ArrayList($res);
+    }
+
+    private function getDatesFromRange($start, $end) {
+        $interval = new DateInterval('P1D');
+
+        $realEnd = new DateTime($end);
+        $realEnd->add($interval);
+
+        $period = new DatePeriod(
+            new DateTime($start),
+            $interval,
+            $realEnd
+        );
+
+        foreach($period as $date) {
+            $array[] = $date->setTime(0,0,0);
+        }
+
+        return $array;
+    }
+
+    /**
+     * @param $event_id
+     * @return SummitEvent
+     * @throws Exception
+     */
+    public function getEventFromSchedule($event_id)
+    {
+        $event = $this->Events()->filter( array('Published' => 1 , 'ID' =>  $event_id))->first();
+        if($event->ClassName == 'Presentation')
+        {
+            $event = Presentation::get()->byID($event_id);
+        }
+        return $event;
+    }
+
+    public function Speakers()
+    {
+        $id = $this->ID;
+
+        $sql = <<<SQL
+SELECT S.* From PresentationSpeaker S
+LEFT JOIN Member M ON M.ID = S.MemberID
+WHERE S.SummitID = {$id} AND EXISTS
+(
+	SELECT E.ID FROM SummitEvent E
+    INNER JOIN Presentation P ON E.ID = P.ID
+    INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+    WHERE E.SummitID = {$id} AND E.Published = 1 AND PS.PresentationSpeakerID = S.ID
+);
+SQL;
+
+        $list = array();
+        $res = DB::query($sql);
+        foreach($res as $row)
+        {
+            $class = $row['ClassName'];
+            array_push($list, new $class($row));
+        }
+
+        return new ArrayList($list);
     }
 }

@@ -371,7 +371,7 @@ abstract class AbstractRestfulJsonApi extends Controller
     }
 
 
-    public function checkOwnAjaxRequest($request){
+    public function checkOwnAjaxRequest(){
         $referer = @$_SERVER['HTTP_REFERER'];
         if(empty($referer)) return false;
         //validate

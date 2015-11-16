@@ -54,11 +54,11 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $summary_fields = array
     (
-        'Title' => 'Event Title',
-        'StartDateNice' => 'Event Start Date',
-        'EndDateNice' => 'Event End Date',
+        'Title'            => 'Event Title',
+        'StartDateNice'    => 'Event Start Date',
+        'EndDateNice'      => 'Event End Date',
         'LocationNameNice' => 'Location',
-        'TypeName' => 'Event Type',
+        'TypeName'         => 'Event Type',
     );
 
     private static $searchable_fields = array
@@ -515,6 +515,12 @@ SQL;
         return $summit->convertDateFromUTC2TimeZone($value);
     }
 
+    public function getStartTime()
+    {
+        $date = new Datetime($this->getStartDate());
+        return $date->format('g:i a');
+    }
+
     /**
      * @return string
      */
@@ -525,6 +531,12 @@ SQL;
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
         $value = $this->getField('EndDate');
         return $summit->convertDateFromUTC2TimeZone($value);
+    }
+
+    public function getEndTime()
+    {
+        $date = new Datetime($this->getEndDate());
+        return $date->format('g:i a');
     }
 
     public function isScheduled() {
