@@ -83,9 +83,18 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $ptl_member   = null;
                 if(!empty($ptl))
                 {
-                    $ptl_names = preg_split("/\s/", $ptl);
-                    $fname = $ptl_names[0];
-                    $lname = $ptl_names[1];
+                    if(is_array($ptl) && isset($ptl['name']))
+                    {
+                        $ptl_names = preg_split("/\s/", $ptl['name']);
+                        $fname = $ptl_names[0];
+                        $lname = $ptl_names[1];
+                    }
+                    else
+                    {
+                        $ptl_names = preg_split("/\s/", $ptl);
+                        $fname = $ptl_names[0];
+                        $lname = $ptl_names[1];
+                    }
                     $ptl_member  = Member::get()->filter
                     (
                         array
