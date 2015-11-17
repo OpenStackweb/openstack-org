@@ -13,6 +13,9 @@
                     The April 2016 OpenStack Summit will be in
                 </h1>
                 <div class="summit-location">Austin, Texas</div>
+                    <div class="summit-venue">
+                      Austin Convention Center & Surrounding Hotels
+                    </div>
                     <div class="summit-date">
                        April 25-29, 2016
                        <br>
