@@ -61,3 +61,6 @@ ul#election-nav li:last-child {
 h2 {
 	padding-top: 20px!important;
 }
+.elections-alert {
+	margin-top: 30px;
+}
