@@ -25,7 +25,7 @@
                 <p>$Overview</p>
             </div>
         </div>
-        <% if isOpenStackTested %>
+        <% if isOpenStackPowered %>
         <div class="row powered-wrapper">
             <div class="col-sm-12">
                 <div class="powered-image">
@@ -34,6 +34,7 @@
                 <div class="powered-description">
                     <p>
                         This product is OpenStack Powered. It contains OpenStack software and has been validated through testing to provide API compatibility for OpenStack core services. <a href="/brand/interop/">Learn more about the testing criteria and core services here</a>.
+                        <% if isOpenStackTested %>
                         <div class="tested-badge-wrapper">
                             <div class="tested-badge">
                                 <div class="tested-icon">
@@ -46,41 +47,44 @@
                             <div class="tested-description">OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name .
                             <a href="#" id="see-results-link">See full results [+]</a>.</div>
                         </div>
+                        <% end_if %>
                     </p>
                 </div>
-                <div class="test-details-list">
-                    <h4>OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</h4>
-                    <table>
-                        <tbody>
+                <% if isOpenStackTested %>
+                    <div class="test-details-list">
+                        <h4>OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</h4>
+                        <table>
+                            <tbody>
                             <thead>
-                                <tr>
-                                    <th>$TestedCapabilityTypeLabel Capabilities</th>
-                                    <th>&nbsp;</th>
-                                </tr>
+                            <tr>
+                                <th>$TestedCapabilityTypeLabel Capabilities</th>
+                                <th>&nbsp;</th>
+                            </tr>
                             </thead>
                             <% loop TestedCapabilities %>
-                            <tr>
-                                <td>$Name</td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
-                            <% end_loop %>
-                        </tbody>
-                        <tbody>
-                            <thead>
                                 <tr>
-                                    <th>Designated Sections</th>
-                                    <th>&nbsp;</th>
+                                    <td>$Name</td>
+                                    <td><i class="fa fa-check"></i></td>
                                 </tr>
+                            <% end_loop %>
+                            </tbody>
+                            <tbody>
+                            <thead>
+                            <tr>
+                                <th>Designated Sections</th>
+                                <th>&nbsp;</th>
+                            </tr>
                             </thead>
                             <% loop DesignatedSections %>
-                            <tr>
-                                <td>$Guidance</td>
-                                <td><i class="fa fa-check"></i></td>
-                            </tr>
+                                <tr>
+                                    <td>$Guidance</td>
+                                    <td><i class="fa fa-check"></i></td>
+                                </tr>
                             <% end_loop %>
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                <% end_if %>
             </div>
         </div>
         <% end_if %>

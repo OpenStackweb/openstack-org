@@ -21,7 +21,7 @@ implements IQueryHandler {
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification){
+	public function handle(IQuerySpecification $specification = null){
 
 		$topics = array();
 
