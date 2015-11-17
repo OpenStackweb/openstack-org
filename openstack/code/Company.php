@@ -170,7 +170,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
                 $title = 'Company',
                 new HeaderField("Company Data"),
                 new TextField('Name', 'Company Name'),
-                new TextField('URLSegment', 'Unique page name for this company profile (ie: company-name)'),
+                new ReadonlyField('URLSegment', 'Unique page name for this company profile (ie: company-name)'),
                 new TextField ('URL', 'Company Web Address (URL)'),
                 $level = new DropDownField(
                     'MemberLevel',
@@ -286,7 +286,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
             return new RequiredFields();
         }
 
-        $validator_fields = new RequiredFields(array('Name', 'URLSegment', 'URL', 'Logo'));
+        $validator_fields = new RequiredFields(array('Name', 'URL', 'Logo'));
 
         return $validator_fields;
     }
@@ -312,29 +312,14 @@ class Company extends DataObject implements PermissionProvider,IEntity
             $this->CompanyAdminID = "";
         }
 
-        // If there is no URLSegment set, generate one from Title
-        if((!$this->URLSegment || $this->URLSegment == 'new-company') && $this->Title != 'New Company')
-        {
-            $this->URLSegment = singleton('SiteTree')->generateURLSegment($this->Title);
-        }
-        else if($this->isChanged('URLSegment'))
-        {
-            // Make sure the URLSegment is valid for use in a URL
-            $segment = preg_replace('/[^A-Za-z0-9]+/','-',$this->URLSegment);
-            $segment = preg_replace('/-+/','-',$segment);
-
-            // If after sanitising there is no URLSegment, give it a reasonable default
-            if(!$segment) {
-                $segment = "product-$this->ID";
-            }
-            $this->URLSegment = $segment;
-        }
+        // generate the url segment from company name
+        $this->URLSegment = singleton('SiteTree')->generateURLSegment($this->Name);
 
         // Ensure that this object has a non-conflicting URLSegment value.
-        $count = 2;
+        $count = 1;
         while($this->LookForExistingURLSegment($this->URLSegment))
         {
-            $this->URLSegment = preg_replace('/-[0-9]+$/', null, $this->URLSegment) . '-' . $count;
+            $this->URLSegment = sprintf('%s-%s',$this->URLSegment,$count);
             $count++;
         }
     }
