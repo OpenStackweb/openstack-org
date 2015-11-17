@@ -154,14 +154,23 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 'type_id'         => $e->TypeID,
                 'sponsors_id'     => array(),
                 'summit_types_id' => array(),
+                'tags_id'         => array(),
+                'own'             => false,
+                'favorite'        => false,
             );
 
-            foreach($e->AllowedSummitTypes as $t)
+
+            foreach($e->Tags() as $t)
+            {
+                array_push($entry['tags_id'], $t->ID);
+            }
+
+            foreach($e->AllowedSummitTypes() as $t)
             {
                 array_push($entry['summit_types_id'], $t->ID);
             }
 
-            foreach($e->Sponsors as $e)
+            foreach($e->Sponsors() as $e)
             {
                 array_push($entry['sponsors_id'], $e->ID);
             }
@@ -174,7 +183,9 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                     array_push($speakers, $s->ID);
                 }
 
-                $entry['speakers'] = $speakers;
+                $entry['speakers_id']  = $speakers;
+                $entry['moderator_id'] = $e->ModeratorID;
+                $entry['track_id']     = $e->CategoryID;
             }
             array_push($events, $entry);
         };

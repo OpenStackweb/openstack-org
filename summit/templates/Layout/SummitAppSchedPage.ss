@@ -1,14 +1,6 @@
 <div class="container-fluid">
     <h1 class="schedule_title">Schedule</h1>
     <hr>
-    <select class="select summit_event_type_filter">
-        <option value="-1">All Events</option>
-        <% loop $Summit.getEventTypes() %>
-            <option value="$ID">$Type</option>
-        <% end_loop %>
-    </select>
-    <hr>
-    <input id="summit_id" type="hidden" value="$Summit.ID" />
     <script type="application/javascript">
         var summit =
         {
@@ -20,16 +12,34 @@
             sponsors : {},
             event_types:{},
             locations : {},
+            tags: {},
+            tracks : {},
         };
 
         <% loop $Summit.Speakers %>
-            summit.speakers[{$ID}] =
-            {
-                id: {$ID},
-                name : "{$Name.JS}",
-                profile_pic : "{$ProfilePhoto.JS}",
-                position : "{$CurrentPosition.JS}",
-            };
+         summit.speakers[{$ID}] =
+         {
+             id: {$ID},
+             name : "{$Name.JS}",
+             profile_pic : "{$ProfilePhoto.JS}",
+             position : "{$CurrentPosition.JS}",
+         };
+        <% end_loop %>
+
+        <% loop $Summit.Tags %>
+        summit.tags[{$ID}] =
+        {
+            id: {$ID},
+            name : "{$Tag.JS}",
+        };
+        <% end_loop %>
+
+        <% loop $Summit.Categories %>
+        summit.tracks[{$ID}] =
+        {
+            id: {$ID},
+            name : "{$Title.JS}",
+        };
         <% end_loop %>
 
         <% loop $Summit.EventTypes %>
@@ -43,7 +53,7 @@
         <% loop $Summit.Types %>
         summit.summit_types[{$ID}] =
         {
-           type : "{$Title}.JS",
+           type : "{$Title.JS}",
            description : "{$Description.JS}",
         };
         <% end_loop %>
@@ -77,10 +87,11 @@
             <% end_if %>
         <% end_loop %>
 
-       <% loop $Summit.getDates %>
+       <% loop $Summit.DatesWithEvents %>
        summit.dates.push({ label: '{$Label}', date:'{$Date}'});
        summit.events['{$Date}'] = [];
        <% end_loop %>
+
        <% loop $Top.CurrentSummitEventsBy1stDate() %>
             summit.events[summit.dates[0].date].push(
                     {
@@ -95,9 +106,12 @@
                         location_id     : {$LocationID},
                         type_id         : {$TypeID},
                         sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
+                        tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                         summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
                         <% if ClassName == Presentation %>
+                        moderator_id: {$ModeratorID},
                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
+                        track_id : {$CategoryID},
                         <% end_if %>
                         own      : false,
                         favorite : false,
@@ -105,7 +119,8 @@
             );
         <% end_loop %>
     </script>
-    <schedule-grid summit="{ summit }" month="october"></schedule-grid>
+    <schedule-main-filters summit="{ summit }"></schedule-main-filters>
+    <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october"></schedule-grid>
 </div>
 <div id="fb-root"></div>
 <script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>

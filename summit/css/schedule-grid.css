@@ -146,11 +146,17 @@
 .img-circle
 {
     width: 60px;
-    height: 60px;;
+    height: 60px;
+    background-color: white;
 }
 
 .speaker-row
 {
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.filter-row
+{
+    padding:0.5em;
 }

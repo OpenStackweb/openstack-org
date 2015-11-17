@@ -20,12 +20,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         $this->top_section = 'full';
         $this->event_repository = new SapphireSummitEventRepository();
         parent::init();
-
+        Requirements::css('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css("summit/css/schedule-grid.css");
-        /*Requirements::javascript('themes/openstack/javascript/pure.min.js');
-        Requirements::javascript("summit/javascript/summitapp-schedule.js");
-        */
-	}
+        Requirements::javascript('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+   }
 
     public function ViewEvent() {
         $event_id = intval($this->request->param('EVENT_ID'));

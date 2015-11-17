@@ -370,11 +370,7 @@ implements IPresentationSpeaker
                 return 'https://twitter.com/'.$twitter_name.'/profile_image?size=bigger';
             }
         } else {
-            if ($width < 100) {
-                return "themes/openstack/images/generic-profile-photo-small.png";
-            } else {
-                return "themes/openstack/images/generic-profile-photo.png";
-            }
+            return 'summit/images/generic-speaker-icon.png';
         }
     }
 

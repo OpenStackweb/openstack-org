@@ -1012,6 +1012,31 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
         return new ArrayList($res);
     }
 
+    public function getDatesWithEvents()
+    {
+        $list  = array();
+        foreach($this->getDates() as $day){
+            if($this->hasPublishedEventOn($day->Date))
+                array_push($list, $day);
+        }
+        return new ArrayList($list);
+    }
+
+    public function hasPublishedEventOn($day)
+    {
+        if(!$day instanceof DateTime)
+            $day = new DateTime($day);
+        $day->setTime(0,0,0);
+        $start_date = $day->format('Y-m-d H:i:s');
+        $end_date   = $day->add(new DateInterval('PT23H59M59S'))->format('Y-m-d H:i:s');
+        $id = $this->ID;
+$sql = <<<SQL
+SELECT COUNT(E.ID) FROM SummitEvent E
+WHERE E.SummitID = {$id} AND StartDate >= '{$start_date}' AND EndDate <= '{$end_date}';
+SQL;
+        return intval(DB::query($sql)->value()) > 0;
+    }
+
     private function getDatesFromRange($start, $end) {
         $interval = new DateInterval('P1D');
 
@@ -1060,6 +1085,29 @@ WHERE S.SummitID = {$id} AND EXISTS
     INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
     WHERE E.SummitID = {$id} AND E.Published = 1 AND PS.PresentationSpeakerID = S.ID
 );
+SQL;
+
+        $list = array();
+        $res = DB::query($sql);
+        foreach($res as $row)
+        {
+            $class = $row['ClassName'];
+            array_push($list, new $class($row));
+        }
+
+        return new ArrayList($list);
+    }
+
+    public function Tags()
+    {
+        $id = $this->ID;
+
+        $sql = <<<SQL
+
+SELECT distinct T.* FROM Tag T
+INNER JOIN SummitEvent_Tags ET ON ET.TagID = T.ID
+INNER JOIN SummitEvent E ON E.ID = ET.SummitEventID
+WHERE E.SummitID = {$id}
 SQL;
 
         $list = array();
