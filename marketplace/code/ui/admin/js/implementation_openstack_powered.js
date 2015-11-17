@@ -18,11 +18,6 @@
             form = $(this);
 
             if ($('.interop-program-version', form).length > 0) {
-                $('.interop-program-version', form).rules('add', { required: function (element) {
-                    if($('#compatible_compute', form).is(':checked') || $('#compatible_storage', form).is(':checked'))
-                        return true;
-                    return false;
-                }});
 
                 $('.interop-program-version', form).change(function (evt){
                     var state = $(this).attr('checked');

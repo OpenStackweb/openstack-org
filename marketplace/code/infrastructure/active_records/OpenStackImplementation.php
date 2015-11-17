@@ -160,17 +160,25 @@ class OpenStackImplementation
         return (bool)$this->getField('CompatibleWithFederatedIdentity');
     }
 
+
     /***
+     * @return bool
+     */
+    public function isOpenStackPowered()
+    {
+        $storage  = $this->isCompatibleWithStorage();
+        $compute  = $this->isCompatibleWithCompute();
+        $platform = $this->isCompatibleWithPlatform();
+        return $storage || $compute || $platform ;
+    }
+
+    /**
      * @return bool
      */
     public function isOpenStackTested()
     {
-        $storage = $this->isCompatibleWithStorage();
-        $compute = $this->isCompatibleWithCompute();
-        $platform = $this->isCompatibleWithPlatform();
-        $identity = $this->isCompatibleWithFederatedIdentity();
-
-        return $storage || $compute || $platform || $identity;
+        $program_version = $this->ProgramVersion();
+        return !is_null($program_version) && $program_version->ID > 0;
     }
 
     /**
