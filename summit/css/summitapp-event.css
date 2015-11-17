@@ -68,11 +68,27 @@
     height: 20px;
 }
 
+.icon-clock {
+    line-height: 23px;
+    position: relative;
+    left: -2px;
+}
+
 .info_item_text {
 }
 
 .share {
     clear: both;
+}
+
+.share_icon {
+    float:left;
+    color: grey;
+    cursor: pointer;
+}
+
+.share_icon:hover {
+    color: #132539;
 }
 
 .section2 {
@@ -179,3 +195,6 @@
     font-size: 12px;
 }
 
+.more_comments {
+    cursor: pointer;
+}

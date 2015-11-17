@@ -1,3 +1,4 @@
+
 <div class="title_box">
     <div class="container">
         <div class="title">$Event.Title</div>
@@ -25,11 +26,11 @@
         </div>
         <div class="info col2">
             <div class="info_item">
-                <div class="info_item_icon"><img src="/summit/images/summitapp/Time.png" /></div>
+                <div class="info_item_icon"><i class="fa fa-2x fa-clock-o icon-clock"></i></div>
                 <div class="info_item_text">$Event.DateNice()</div>
             </div>
             <div class="info_item">
-                <div class="info_item_icon"><img src="/summit/images/summitapp/map_pin.png" /></div>
+                <div class="info_item_icon"><i class="fa fa-2x fa-map-marker icon-map"></i></div>
                 <div class="info_item_text">$Event.LocationNameNice()</div>
             </div>
 
@@ -42,7 +43,7 @@
 
         </div>
         <div class="share">
-            <share-event></share-event>
+            <share-buttons url="{$AbsoluteLink}event/$Event.ID"></share-buttons>
         </div>
     </div>
 </div>
@@ -62,7 +63,7 @@
                 <div class="speaker_info">
                     <div class="speaker_name"> $FirstName $LastName </div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
-                    <div class="speaker_bio"> $getShortBio(200) <a href="">FULL BIO</a></div>
+                    <div class="speaker_bio"> $getShortBio(200) <a href="{$BaseHref}">FULL BIO</a></div>
                 </div>
             </div>
             <% end_loop %>
@@ -73,23 +74,25 @@
 <div class="container">
     <div class="col1 comment_section">
         <div class="comment_title"> Comment </div>
-        <% loop Event.getFeedback().Limit(5) %>
-            <div class="comment <% if Last %>last<% end_if %>">
-                <div class="comment_info">
-                    <div class="comment_pic"> $Owner.ProfilePhoto(50) </div>
-                    <div class="comment_name"> $Owner.getFullName() </div>
-                    <div class="comment_date">
-                        <b> Posted: </b>
-                        <span> $getDateNice() </span>
-                    </div>
-                </div>
-                <div class="comment_text"> $getNote() </div>
-                <div class="comment_actions">
-                    <div class=""></div>
-                </div>
-            </div>
-            <% if Pos = 2 %> <a href="" > More Comments </a> <% end_if %>
-        <% end_loop %>
 
+        <script type="application/javascript">
+                var comments = [];
+
+                <% loop $Event.getFeedback() %>
+                    comments.push(
+                    {
+                        profile_pic : "{$Owner.ProfilePhotoUrl(50).JS}",
+                        full_name : "{$Owner.getFullName.JS}",
+                        date : "{$getDateNice.JS}",
+                        note : "{$getNote.JS}",
+                    });
+                <% end_loop %>
+        </script>
+
+        <event-comments comments="{ comments }" limit="5"></event-comments>
     </div>
 </div>
+
+
+<script src="summit/javascript/schedule/event-detail.bundle.js" type="application/javascript"></script>
+<script src="summit/javascript/schedule/share-buttons.bundle.js" type="application/javascript"></script>

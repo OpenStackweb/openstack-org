@@ -8,6 +8,8 @@ module.exports = {
     "summit/javascript/new-trackchairs-app/app/index": "./summit/javascript/new-trackchairs-app/app/index",
     "summit/javascript/summit-highlights":"./summit/javascript/summit-highlights",
     "summit/javascript/schedule/schedule":"./summit/javascript/schedule/schedule",
+    "summit/javascript/schedule/event-detail":"./summit/javascript/schedule/event-detail",
+      "summit/javascript/schedule/share-buttons":"./summit/javascript/schedule/share-buttons",
   },
   output: {
     path: __dirname ,
