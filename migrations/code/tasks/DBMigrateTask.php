@@ -20,7 +20,8 @@ final class DBMigrateTask extends MigrationTask
 
     private static $migrations = array
     (
-        
+        'SchedRefactoringMigration',
+        'SchedRefactoringMigration2',
     );
 
     function up()

@@ -35,7 +35,6 @@ class Presentation extends SummitEvent implements IPresentation
         'Level'                => "Enum('Beginner,Intermediate,Advanced')",
         'Status'               => 'Varchar',
         'OtherTopic'           => 'Varchar',
-        'ShortDescription'     => 'HTMLText',
         'Progress'             => 'Int',
         'Views'                => 'Int',
         'BeenEmailed'          => 'Boolean',
@@ -49,16 +48,15 @@ class Presentation extends SummitEvent implements IPresentation
     private static $has_many = array
     (
         'Votes'            => 'PresentationVote',
+        // this is related to track chairs app
         'Comments'         => 'SummitPresentationComment',
         'ChangeRequests'   => 'SummitCategoryChange',
         'Materials'        => 'PresentationMaterial',
-        'SpeakersFeedback' => 'PresentationSpeakerFeedback',
     );
 
     private static $many_many = array
     (
         'Speakers' => 'PresentationSpeaker',
-        'Tags'     => 'Tag',
         'Topics'   => 'PresentationTopic',
     );
 
@@ -459,8 +457,7 @@ class Presentation extends SummitEvent implements IPresentation
 
         $f = parent::getCMSFields();
         $f->removeByName('TypeID');
-        $f->htmlEditor('ShortDescription')
-            ->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
+        $f->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
             ->dropdown('CategoryID', 'Category', PresentationCategory::get()->map('ID', 'Title'))
             ->dropdown('Status', 'Status')
             ->configure()
@@ -473,7 +470,6 @@ class Presentation extends SummitEvent implements IPresentation
             ->configure()
             ->setMultiple(true)
             ->end()
-            ->tag('Tags', 'Tags', Tag::get(), $this->Tags())
             ->text('OtherTopic', 'Other topic')
             ->tab('Preview')
             ->literal('preview', sprintf(

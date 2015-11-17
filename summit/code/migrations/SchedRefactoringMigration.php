@@ -12,19 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SchedRefactoringMigration extends MigrationTask
+final class SchedRefactoringMigration extends AbstractDBMigrationTask
 {
     protected $title = "Sched Refactoring #1";
 
     protected $description = "Sched Refactoring #1";
 
-    function up()
+    function doUp()
     {
-        echo "Starting Migration Proc ...<BR>";
-        //check if migration already had ran ...
-        $migration = Migration::get()->filter('Name', $this->title)->first();
-
-        if (!$migration) {
 
             $SQL = <<<SQL
  update Presentation set SummitID = 5;
@@ -143,18 +138,10 @@ SQL;
 
             DB::query($SQL);
 
-
-            $migration = new Migration();
-            $migration->Name = $this->title;
-            $migration->Description = $this->description;
-            $migration->Write();
-        }
-        echo "Ending  Migration Proc ...<BR>";
     }
 
-    function down()
+    function doDown()
     {
 
     }
-
 }

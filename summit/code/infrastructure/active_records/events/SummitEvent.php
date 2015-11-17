@@ -16,13 +16,14 @@ class SummitEvent extends DataObject implements ISummitEvent
 {
     private static $db = array
     (
-        'Title'         => 'Text',
-        'Description'   => 'HTMLText',
-        'StartDate'     => 'SS_Datetime',
-        'EndDate'       => 'SS_Datetime',
-        'Published'     => 'Boolean',
-        'PublishedDate' => 'SS_Datetime',
-        'AllowFeedBack' => 'Boolean',
+        'Title'            => 'Text',
+        'Description'      => 'HTMLText',
+        'ShortDescription' => 'HTMLText',
+        'StartDate'        => 'SS_Datetime',
+        'EndDate'          => 'SS_Datetime',
+        'Published'        => 'Boolean',
+        'PublishedDate'    => 'SS_Datetime',
+        'AllowFeedBack'    => 'Boolean',
     );
 
     private static $has_many = array
@@ -38,6 +39,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     (
         'AllowedSummitTypes' => 'SummitType',
         'Sponsors'           => 'Company',
+        'Tags'               => 'Tag',
     );
 
     private static $belongs_many_many = array
@@ -296,9 +298,12 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         $f->addFieldToTab('Root.Main', new TextField('Title','Title'));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
+        $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Short Description'));
+        $f->tag('Tags', 'Tags', Tag::get(), $this->Tags())->configure()
+        ->setTitleField('Tag')
+        ->end();
         $f->addFieldToTab('Root.Main', new CheckboxField('AllowFeedBack','Is feedback allowed?'));
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
-
         $f->addFieldToTab('Root.Main',$date = new DatetimeField('StartDate', 'Start Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
