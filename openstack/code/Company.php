@@ -15,13 +15,77 @@
 /**
  * Class Company
  */
-class Company extends DataObject implements PermissionProvider, IEntity
+class Company extends DataObject implements PermissionProvider,IEntity
 {
 
-    public function getIdentifier()
-    {
+    public function getIdentifier() {
         return $this->ID;
     }
+
+    static $has_one = array(
+
+        'CompanyListPage' => 'CompanyListPage',
+        'Logo'            => 'BetterImage',
+        'BigLogo'         => 'BetterImage',
+        'Submitter'       => 'Member',
+        'CompanyAdmin'    => 'Member'
+    );
+
+    static $many_many_extraFields = array(
+        'Administrators' => array(
+            'GroupID' => "Int",
+        ),
+    );
+
+    private static $db = array(
+        'Name' => 'Text',
+        'URL' => 'Text',
+        'DisplayOnSite' => 'Boolean',
+        'Featured' => 'Boolean',
+        'City' => 'Varchar(255)',
+        'State' => 'Varchar(255)',
+        'Country' => 'Varchar(255)',
+        'Description' => 'HTMLText',
+        'Industry' => 'Text',
+        'Products' => 'HTMLText',
+        'Contributions' => 'HTMLText',
+        'ContactEmail' => 'Text',
+        'MemberLevel' => "Enum('Platinum, Gold, StartUp, Corporate, Mention, None','None')",
+        'AdminEmail' => 'Text',
+        'URLSegment' => 'Text',
+        'Color' => 'Text',
+        //marketplace updates
+        'Overview' => 'HTMLText',
+        'Commitment' => 'HTMLText',
+        'CommitmentAuthor' => 'Varchar(255)',
+    );
+
+    private static $defaults = array(
+        "Color" => 'C34431',
+    );
+
+    private static $has_many = array(
+        'Photos'   => 'BetterImage',
+        'Contracts' => 'Contract',
+        'Services'  => 'CompanyService',
+    );
+
+    private static $many_many = array(
+        'Administrators' => 'Member'
+    );
+
+    private static $singular_name = 'Company';
+    private static $plural_name = 'Companies';
+
+    //Administrators Security Groups
+    private static $belongs_many_many = array(
+        'SponsorsPages' => 'SponsorsPage'
+    );
+    private static $summary_fields = array(
+        'Name' => 'Company',
+        'MemberLevel' => 'MemberLevel'
+    );
+
 
     function providePermissions()
     {
@@ -59,33 +123,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         );
     }
 
-    private static $db = array(
-        'Name' => 'Text',
-        'URL' => 'Text',
-        'DisplayOnSite' => 'Boolean',
-        'Featured' => 'Boolean',
-        'City' => 'Varchar(255)',
-        'State' => 'Varchar(255)',
-        'Country' => 'Varchar(255)',
-        'Description' => 'HTMLText',
-        'Industry' => 'Text',
-        'Products' => 'HTMLText',
-        'Contributions' => 'HTMLText',
-        'ContactEmail' => 'Text',
-        'MemberLevel' => "Enum('Platinum, Gold, StartUp, Corporate, Mention, None','None')",
-        'AdminEmail' => 'Text',
-        'URLSegment' => 'Text',
-        'Color' => 'Text',
-        //marketplace updates
-        'Overview' => 'HTMLText',
-        'Commitment' => 'HTMLText',
-        'CommitmentAuthor' => 'Varchar(255)',
-    );
-
-    private static $defaults = array(
-        "Color" => 'C34431',
-    );
-
     public function getCompanyColor()
     {
         return empty($this->Color) ? "C34431" : $this->Color;
@@ -109,46 +146,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
 
         return $rgb_color;
     }
-
-    static $has_one = array(
-
-        'CompanyListPage' => 'CompanyListPage',
-        'Logo' => 'BetterImage',
-        'BigLogo' => 'BetterImage',
-        'Submitter' => 'Member',
-        'CompanyAdmin' => 'Member'
-    );
-
-    private static $has_many = array(
-        'Photos' => 'BetterImage',
-        'Contracts' => 'Contract',
-        'Services' => 'CompanyService',
-    );
-
-    private static $many_many = array(
-        'Administrators' => 'Member'
-    );
-
-    //Administrators Security Groups
-    static $many_many_extraFields = array(
-        'Administrators' => array(
-            'GroupID' => "Int",
-        ),
-    );
-
-    private static $singular_name = 'Company';
-    private static $plural_name = 'Companies';
-
-
-    private static $belongs_many_many = array(
-        'SponsorsPages' => 'SponsorsPage'
-    );
-
-    private static $summary_fields = array(
-        'Name' => 'Company',
-        'MemberLevel' => 'MemberLevel'
-    );
-
 
     function getCMSFields()
     {
@@ -179,7 +176,7 @@ class Company extends DataObject implements PermissionProvider, IEntity
                 $title = 'Company',
                 new HeaderField("Company Data"),
                 new TextField('Name', 'Company Name'),
-                new ReadonlyField('URLSegment', 'Unique page name for this company profile (ie: company-name)'),
+                new TextField('URLSegment', 'Unique page name for this company profile (ie: company-name)'),
                 new TextField ('URL', 'Company Web Address (URL)'),
                 $level = new DropDownField(
                     'MemberLevel',
@@ -231,8 +228,7 @@ class Company extends DataObject implements PermissionProvider, IEntity
 
             $admins = new GridField('Administrators', 'Company Administrators', $admin_list, $config);
 
-            $contracts = new GridField("Contracts", "Contracts", $this->Contracts(),
-                GridFieldConfig_RecordEditor::create(10));
+            $contracts = new GridField("Contracts", "Contracts", $this->Contracts(), GridFieldConfig_RecordEditor::create(10));
 
             $fields->addFieldsToTab('Root.Administrators',
                 array(
@@ -252,6 +248,74 @@ class Company extends DataObject implements PermissionProvider, IEntity
         return $fields;
     }
 
+    function canEditLogo()
+    {
+        $MemberID = Member::currentUserID();
+
+        return $this->CompanyAdminID == $MemberID || Permission::check("MANAGE_COMPANY_LOGOS") || Permission::check("MANAGE_COMPANY_PROFILE") || $this->PermissionCheck(array(
+            "MANAGE_COMPANY_PROFILE",
+            'MANAGE_COMPANY_LOGOS'
+        ));
+    }
+
+    private function PermissionCheck(array $permission_2_check)
+    {
+        //check groups
+        $current_user_id = intval(Member::currentUserID());
+        $admins_groups_for_user = $this->getManyManyComponents("Administrators", "MemberID={$current_user_id}", "ID");
+        if ($admins_groups_for_user) {//current user has some admin level
+            foreach ($admins_groups_for_user as $admin_group) {
+                $group_id = intval($admin_group->GroupID);
+                $permissions = Permission::get()->filter('GroupID', $group_id);
+                foreach ($permissions as $p) {
+                    if (in_array($p->Code, $permission_2_check)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    protected function validate()
+    {
+        $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
+        if(empty($this->Name)){
+            return $valid->error('Name is empty!');
+        }
+
+        if(empty($this->URL))
+        {
+            return $valid->error('URL is empty!');
+        }
+
+        if(empty($this->URLSegment)) {
+            $filter = URLSegmentFilter::create();
+            $slug = $filter->filter($this->Name);
+
+            // Fallback to generic page name if path is empty (= no valid, convertable characters)
+            if (!$slug || $slug == '-' || $slug == '-1') {
+                return $valid->error(sprintf('invalid Autogenerated URLSegment (%s) ! please set one by hand.',$slug));
+            }
+
+            $this->URLSegment = $slug;
+        }
+
+        if(empty($this->URLSegment))
+            return $valid->error('URLSegmen is empty!');
+
+        if($this->LookForExistingURLSegment($this->URLSegment))
+            return $valid->error(sprintf('invalid URLSegment: %s already exists! choose another one', $this->URLSegment));
+
+
+        return $valid;
+    }
+
+    //Generate Yes/No for DOM / Complex Table Field
+
     function getCMSValidator()
     {
         return $this->getValidator();
@@ -263,42 +327,33 @@ class Company extends DataObject implements PermissionProvider, IEntity
             return new RequiredFields();
         }
 
-        $validator_fields = new RequiredFields(array('Name', 'URLSegment', 'URL', 'Logo'));
+        $validator_fields = new RequiredFields(array('Logo'));
 
         return $validator_fields;
     }
 
-    //Generate Yes/No for DOM / Complex Table Field
+    //Test whether the URLSegment exists already on another Product
+
     public function DisplayNice()
     {
         return $this->DisplayOnSite ? 'Yes' : 'No';
     }
 
-    function onBeforeWrite()
-    {
+    function onBeforeWrite() {
         parent::onBeforeWrite();
 
         // Assign an Admin using the provided email address
         if ($this->AdminEmail) {
             $EmailAddress = Convert::raw2sql($this->AdminEmail);
-            $Member = Member::get()->filter('Email', $EmailAddress)->first();
+            $Member = Member::get()->filter('Email',$EmailAddress)->first();
             if ($Member) {
                 $this->CompanyAdminID = $Member->ID;
             }
         } else {
             $this->CompanyAdminID = "";
         }
-        // generate the url segment from company name
-        $this->URLSegment = singleton('SiteTree')->generateURLSegment($this->Name);
 
-        // Ensure that this object has a non-conflicting URLSegment value.
-        $count = 1;
-        while ($this->LookForExistingURLSegment($this->URLSegment)) {
-            $this->URLSegment = sprintf('%s-%s', $this->URLSegment, $count);
-            $count++;
-        }
     }
-
     //Test whether the URLSegment exists already on another Product
     function LookForExistingURLSegment($URLSegment)
     {
@@ -333,10 +388,13 @@ class Company extends DataObject implements PermissionProvider, IEntity
         }
     }
 
+    //helper function to create Drop Down for Sponsorship type
     function IsExternalUrl()
     {
         return !$this->Description ? true : false;
     }
+
+    //helper function to create Drop Down for Logo Size
 
     public function getInputSubmitPageUrl()
     {
@@ -353,7 +411,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         return new TextField("SubmitPageUrl_{$this->ID}", "SubmitPageUrl_{$this->ID}", $type, 255);
     }
 
-    //helper function to create Drop Down for Sponsorship type
     public function getDDLSponsorshipType()
     {
         $type = null;
@@ -379,7 +436,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         ), $type);
     }
 
-    //helper function to create Drop Down for Logo Size
     public function getDDLLogoSize()
     {
         $size = null;
@@ -420,7 +476,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         return 'missing';
     }
 
-
     public function SmallLogoPreview($width = 210)
     {
         $img = $this->Logo();
@@ -458,18 +513,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         return 'missing';
     }
 
-    public function BigLogoPreview()
-    {
-        $img = $this->BigLogo();
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
-            $img = $img->SetWidth(300);
-
-            return "<img alt='{$this->Name}_big_logo' src='{$img->getURL()}' class='big-logo-company sponsor-logo'/>";
-        }
-
-        return 'missing';
-    }
-
     public function SubmitLandPageUrl()
     {
         $url = $this->URL;
@@ -486,6 +529,20 @@ class Company extends DataObject implements PermissionProvider, IEntity
     public function SubmitLogo()
     {
         return $this->BigLogoPreview();
+    }
+
+    //Security checks
+
+    public function BigLogoPreview()
+    {
+        $img = $this->BigLogo();
+        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+            $img = $img->SetWidth(300);
+
+            return "<img alt='{$this->Name}_big_logo' src='{$img->getURL()}' class='big-logo-company sponsor-logo'/>";
+        }
+
+        return 'missing';
     }
 
     function onAfterWrite()
@@ -512,8 +569,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         }
     }
 
-    //Security checks
-
     public function canCreate($member = null)
     {
         $MemberID = Member::currentUserID();
@@ -528,6 +583,11 @@ class Company extends DataObject implements PermissionProvider, IEntity
         return $this->CompanyAdminID == $MemberID || Permission::check("EDIT_COMPANY") || $this->PermissionCheck(array("EDIT_COMPANY"));
     }
 
+    /*
+     * Helper method to check if current user has the permissions
+     * passed by arg ($permission_2_check) on the company admin security group that is currently assigned
+     */
+
     public function canDelete($member = null)
     {
         $MemberID = Member::currentUserID();
@@ -540,30 +600,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         $MemberID = Member::currentUserID();
 
         return $this->CompanyAdminID == $MemberID || Permission::check("EDIT_COMPANY") || $this->PermissionCheck(array("EDIT_COMPANY"));
-    }
-
-    /*
-     * Helper method to check if current user has the permissions
-     * passed by arg ($permission_2_check) on the company admin security group that is currently assigned
-     */
-    private function PermissionCheck(array $permission_2_check)
-    {
-        //check groups
-        $current_user_id = intval(Member::currentUserID());
-        $admins_groups_for_user = $this->getManyManyComponents("Administrators", "MemberID={$current_user_id}", "ID");
-        if ($admins_groups_for_user) {//current user has some admin level
-            foreach ($admins_groups_for_user as $admin_group) {
-                $group_id = intval($admin_group->GroupID);
-                $permissions = Permission::get()->filter('GroupID', $group_id);
-                foreach ($permissions as $p) {
-                    if (in_array($p->Code, $permission_2_check)) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
     }
 
     function IsCompanyAdmin($memberId)
@@ -583,16 +619,6 @@ class Company extends DataObject implements PermissionProvider, IEntity
         $MemberID = Member::currentUserID();
 
         return $this->CompanyAdminID == $MemberID || Permission::check("MANAGE_COMPANY_PROFILE") || $this->PermissionCheck(array("MANAGE_COMPANY_PROFILE"));
-    }
-
-    function canEditLogo()
-    {
-        $MemberID = Member::currentUserID();
-
-        return $this->CompanyAdminID == $MemberID || Permission::check("MANAGE_COMPANY_LOGOS") || Permission::check("MANAGE_COMPANY_PROFILE") || $this->PermissionCheck(array(
-            "MANAGE_COMPANY_PROFILE",
-            'MANAGE_COMPANY_LOGOS'
-        ));
     }
 
     /**
