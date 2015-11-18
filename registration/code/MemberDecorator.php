@@ -69,6 +69,15 @@ class MemberDecorator extends DataExtension
     public function onBeforeDelete()
     {
         $current_id = $this->owner->ID;
+        // stored a track of deleted users ...
+        $deleted = new MemberDeleted();
+        $deleted->OriginalID = $current_id;
+        $deleted->FirstName = $this->owner->FirstName;
+        $deleted->Surname = $this->owner->Surname;
+        $deleted->Email = $this->owner->Email;
+        if(Controller::has_curr())
+            $deleted->FromUrl = Controller::curr()->getRequest()->getURL(true);
+        $deleted->write();
 
         $legal_agreements = $this->owner->LegalAgreements();
         foreach($legal_agreements as $la)
