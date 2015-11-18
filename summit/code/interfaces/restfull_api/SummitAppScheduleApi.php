@@ -119,13 +119,10 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     );
 
     public function getScheduleByDay(SS_HTTPRequest $request) {
+
         $query_string        = $request->getVars();
         $summit_id           = intval($request->param('SUMMIT_ID'));
         $day                 = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
-        $summit_types        = isset($query_string['summit_types']) ? Convert::raw2sql($query_string['summit_types']) : '';
-        $event_type_filter   = isset($query_string['event_type']) ? Convert::raw2sql($query_string['event_type']) : null;
-        $summit_types_filter = explode(',', $summit_types);
-        $source              = isset($query_string['summit_source']) ? Convert::raw2sql($query_string['summit_source']) : null;
         $summit              = null;
 
         if(intval($summit_id) > 0)
@@ -155,7 +152,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 'sponsors_id'     => array(),
                 'summit_types_id' => array(),
                 'tags_id'         => array(),
-                'own'             => false,
+                'own'             => self::isEventOnMySchedule($e->ID, $summit),
                 'favorite'        => false,
             );
 
@@ -192,11 +189,19 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         return $this->ok(array( 'day' => $day, 'events' => $events));
     }
 
+    public static function isEventOnMySchedule($event_id, Summit $summit)
+    {
+        $member = Member::currentUser();
+        if(is_null($member) || !$member->isAttendee($summit->ID)) return false;
+        return $member->getSummitAttendee($summit->ID)->isScheduled(intval($event_id));
+    }
+
     public function addToSchedule() {
         try{
             $summit_id = (int)$this->request->param('SUMMIT_ID');
-            $event_id = (int)$this->request->param('EventID');
-            $member = Member::currentUser();
+            $event_id  = (int)$this->request->param('EventID');
+            $member    = Member::currentUser();
+
             if(is_null($member)) return $this->permissionFailure();
 
             if(intval($summit_id) > 0)

@@ -3,6 +3,8 @@
 <head>
     <% include Head %>
     <% include Analytics %>
+    $FBTrackingCode
+    $TwitterTrackingCode
 </head>
 <body>
 <div class="main-body">

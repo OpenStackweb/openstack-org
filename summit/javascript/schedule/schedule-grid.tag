@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div id="event_{ id }" class="row event-row" each={ summit.events[this.selected_day.date] }>
-                                <div class="col-md-12">
+                                    <div class="col-md-12">
                                     <div class="row main-event-content" data-event-id="{ id }">
                                         <div class="col-xs-1 event-type" style="background-color: { parent.summit.event_types[type_id].color }">&nbsp;</div>
                                         <div class="col-xs-11 event-content">
@@ -27,16 +27,10 @@
                                                 <div class="col-md-6">
                                                     <i class="fa fa-clock-o icon-clock"></i>&nbsp;<span>{ start_time }</span>&nbsp;/&nbsp;<span>{ end_time }</span>
                                                 </div>
-                                                <div class="col-md-1 col-md-offset-12 my-schedule-container">
-                                                    <i if={ !own } class="fa fa-plus-circle icon-foreign-event" title="add to my schedule" onclick={ parent.addToMyScheduSummle} ></i>
-                                                    <i if={ own } class="fa fa-check-circle icon-own-event" title="remove from my schedule" onclick={ parent.removeFromMySchedule} ></i>
+                                                <div class="col-md-1 col-md-offset-12 my-schedule-container" if={ parent.summit.current_user !== null } >
+                                                    <i if={ !own } class="fa fa-plus-circle icon-foreign-event icon-event-action" title="add to my schedule" onclick={ parent.addToMySchedule } ></i>
+                                                    <i if={ own } class="fa fa-check-circle icon-own-event icon-event-action" title="remove from my schedule" onclick={ parent.removeFromMySchedule } ></i>
                                                 </div>
-                                                <!--
-                                                <div class="col-md-2">
-                                                    <i class="fa fa-star-o icon-non-favorite-event"></i>
-                                                    <i class="fa fa-star icon-favorite-event"></i>
-                                                </div>
-                                                -->
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12 event-title">
@@ -89,6 +83,7 @@
         this.month             = opts.month;
         this.selected_day      = summit.dates[0];
         this.aux_selected_day  = null;
+        this.clicked_event     = null;
         this.api               = opts.schedule_api;
         this.base_url          = opts.base_url;
         var self               = this;
@@ -97,6 +92,10 @@
 
             // show event details handler (jquery)
             $( "body" ).on( "click", ".main-event-content", function(e) {
+
+                if($(e.target).hasClass('icon-event-action')){
+                    return false;
+                }
                 var event_id = $(e.currentTarget).attr('data-event-id');
                 var detail   = $('#event_details_'+event_id);
 
@@ -130,6 +129,20 @@
             self.update();
         });
 
+        opts.schedule_api.on('eventAdded2MySchedule',function(data) {
+            console.log('eventAdded2MySchedule');
+            self.clicked_event.own = true;
+            self.update();
+            self.clicked_event = null;
+        });
+
+        opts.schedule_api.on('eventRemovedFromMySchedule',function(data) {
+            console.log('eventRemovedFromMySchedule');
+            self.clicked_event.own = false;
+            self.update();
+            self.clicked_event = null;
+        });
+
         locationName(location_id) {
             var location = self.summit.locations[location_id];
             if (typeof location == 'undefined') return 'TBA';
@@ -143,10 +156,14 @@
 
         addToMySchedule(e) {
             console.log('addToMySchedule');
+            self.clicked_event = e.item;
+            self.api.addEvent2MySchedule(self.summit.id, self.clicked_event.id);
         }
 
         removeFromMySchedule(e) {
             console.log('removeFromMySchedule');
+            self.clicked_event = e.item;
+            self.api.removeEventFromMySchedule(self.summit.id, self.clicked_event.id);
         }
     </script>
 

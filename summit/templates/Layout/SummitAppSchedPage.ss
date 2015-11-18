@@ -14,8 +14,14 @@
             locations : {},
             tags: {},
             tracks : {},
+            current_user: null
         };
 
+        <% if CurrentMember && CurrentMember.isAttendee($Summit.ID) %>
+            <% with CurrentMember %>
+            summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}' };
+            <% end_with %>
+        <% end_if %>
         <% loop $Summit.Speakers %>
          summit.speakers[{$ID}] =
          {
@@ -113,7 +119,11 @@
                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                         track_id : {$CategoryID},
                         <% end_if %>
+                        <% if $Top.isEventOnMySchedule($ID) %>
+                        own      : true,
+                        <% else %>
                         own      : false,
+                        <% end_if %>
                         favorite : false,
                     }
             );

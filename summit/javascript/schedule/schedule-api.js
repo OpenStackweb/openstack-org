@@ -9,4 +9,32 @@ schedule_api.getEventByDay = function (summit_id, day)
     });
 }
 
+schedule_api.addEvent2MySchedule = function (summit_id, event_id)
+{
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id;
+
+    $.ajax({
+        type: 'PUT',
+        url:  url,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            schedule_api.trigger('eventAdded2MySchedule', data);
+        }
+    });
+}
+
+schedule_api.removeEventFromMySchedule = function (summit_id, event_id)
+{
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id;
+
+    $.ajax({
+        type: 'DELETE',
+        url:  url,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            schedule_api.trigger('eventRemovedFromMySchedule', data);
+        }
+    });
+}
+
 module.exports = schedule_api;

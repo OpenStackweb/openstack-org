@@ -70,7 +70,7 @@ class MemberDecorator extends DataExtension
     {
         $current_id = $this->owner->ID;
         // stored a track of deleted users ...
-        $deleted = new MemberDeleted();
+        $deleted = MemberDeleted::create();
         $deleted->OriginalID = $current_id;
         $deleted->FirstName = $this->owner->FirstName;
         $deleted->Surname = $this->owner->Surname;

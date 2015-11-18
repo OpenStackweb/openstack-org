@@ -64,7 +64,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
 
     public function getCurrentSummitEventsBy1stDate()
     {
-        $summit = $this->Summit();;
+        $summit = $this->Summit();
         return new ArrayList($summit->getSchedule($summit->getBeginDate()));
+    }
+
+    public function isEventOnMySchedule($event_id)
+    {
+       return SummitAppScheduleApi::isEventOnMySchedule($event_id, $this->Summit());
     }
 }

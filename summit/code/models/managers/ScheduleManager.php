@@ -54,7 +54,12 @@ final class ScheduleManager
     private $tx_manager;
 
     /**
+     * ScheduleManager constructor.
      * @param IEntityRepository $summitevent_repository
+     * @param IEntityRepository $summitpresentation_repository
+     * @param IEntityRepository $eventfeedback_repository
+     * @param IEventFeedbackFactory $eventfeedback_factory
+     * @param IEntityRepository $speakerfeedback_repository
      * @param IEntityRepository $attendee_repository
      * @param ITransactionManager $tx_manager
      */
@@ -85,9 +90,9 @@ final class ScheduleManager
     public function addEventToSchedule($member_id, $event_id)
     {
 
-        $this_var = $this;
+        $this_var               = $this;
         $summitevent_repository = $this->summitevent_repository;
-        $attendee_repository = $this->attendee_repository;
+        $attendee_repository    = $this->attendee_repository;
 
         return $this->tx_manager->transaction(function () use (
             $this_var,
@@ -102,7 +107,7 @@ final class ScheduleManager
                 throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
             }
 
-            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $event->Summit->getIdentifier());
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $event->Summit()->getIdentifier());
 
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
