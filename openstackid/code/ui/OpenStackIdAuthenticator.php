@@ -73,9 +73,12 @@ class OpenStackIdAuthenticator extends Controller
                     $openid = escape($response->endpoint->canonicalID);
                 }
                 //get user info from openid response
+                $member = null;
                 list($email, $full_name) = $this->getUserProfileInfo($response);
-                //try to get user by email
-                $member = $this->member_repository->findByEmail($email);
+                if(!is_null($email)){
+                    //try to get user by email
+                    $member = $this->member_repository->findByEmail($email);
+                }
                 if(!$member){// or by openid
                     $member = Member::get()->filter('IdentityURL', $openid)->first();
                 }
@@ -91,7 +94,7 @@ class OpenStackIdAuthenticator extends Controller
                     }
                     throw new Exception("Inactive User!");
                 }
-                throw new Exception("The OpenID authentication failed.");
+                throw new Exception("The OpenID authentication failed: can not find user ".$openid);
             }
         } catch (Exception $ex) {
             Session::set("Security.Message.message", $ex->getMessage());

@@ -158,8 +158,15 @@ class OpenStackIdSecurityController extends CustomPasswordController
             return parent::logout();
 
         $member = Member::currentUser();
-        if ($member) $member->logOut();
-
+        if ($member){
+            $member_2_delete_id = intval(Session::get('delete_member_id'));
+            $member->logOut();
+            if($member_2_delete_id > 0 && intval($member->ID) == $member_2_delete_id)
+            {
+                $member->Delete();
+            }
+        }
+        Session::clear('delete_member_id');
         $url = OpenStackIdCommon::getRedirectBackUrl();
 
         if(strpos($url,'/admin/pages') !== false)

@@ -442,21 +442,18 @@ class EditProfilePage_Controller extends Page_Controller
     // Resigning membership in the foundation removes the member from the database entirely.
     function resign()
     {
-        $CurrentMember = Member::currentUser();
-        if ($CurrentMember && isset($_GET['confirmed'])) {
-
-
-            $CurrentMember->resign();
+        $current_user = Member::currentUser();
+        if ($current_user && isset($_GET['confirmed'])) {
+            $current_user->resign();
             // Logout and delete the user
+            Session::set('delete_member_id', $current_user->ID);
             $this->setMessage('Success', 'You have resigned your membership to the OpenStack Foundation.');
-            $this->redirect('profile/');
-            $CurrentMember->Delete();
+            $this->redirect('/Security/logout'. "?BackURL=" . urlencode('/profile'));
 
-        } else if ($CurrentMember) {
+        } else if ($current_user) {
             return $this->renderWith(array('EditProfilePage_resign', 'Page'));
         }
     }
-
 
     // Training
 
