@@ -9,16 +9,20 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
 
     static $allowed_actions = array(
         'ViewEvent',
+        'ViewSpeakerProfile',
     );
 
     static $url_handlers = array(
         'event/$EVENT_ID/$EVENT_TITLE'   => 'ViewEvent',
+        'speaker/$SPEAKER_ID'            => 'ViewSpeakerProfile',
     );
 
     public function init() {
         
         $this->top_section = 'full';
         $this->event_repository = new SapphireSummitEventRepository();
+        $this->speaker_repository = new SapphirePresentationSpeakerRepository();
+
         parent::init();
         Requirements::css('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
@@ -40,6 +44,20 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         Requirements::css("summit/css/summitapp-event.css");
 
         return $this->renderWith(array('SummitAppEventPage','SummitPage','Page'), array('Event' => $event) );
+    }
+
+    public function ViewSpeakerProfile() {
+        $speaker_id = intval($this->request->param('SPEAKER_ID'));
+        $speaker = $this->speaker_repository->getById($speaker_id);
+
+        if (!isset($speaker)) {
+            return $this->httpError(404, 'Sorry that speaker could not be found');
+        }
+
+        Requirements::block("summit/css/schedule-grid.css");
+        Requirements::css("summit/css/summitapp-speaker.css");
+
+        return $this->renderWith(array('SummitAppSpeakerPage','SummitPage','Page'), array('Speaker' => $speaker) );
     }
 
     public function getFeedbackForm() {

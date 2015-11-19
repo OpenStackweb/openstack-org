@@ -1,3 +1,25 @@
+
+<div class="container">
+    <% with Speaker %>
+    <div class="row speaker_profile col1">
+        <div class="speaker_pic img-circle"> <img src="$ProfilePhoto(100)" width="100" class="img-circle" /> </div>
+        <div class="speaker_info">
+            <div class="speaker_name"> $FirstName $LastName </div>
+            <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
+            <div class="speaker_bio"> $Bio</div>
+        </div>
+    </div>
+    <div class="row sessions col1">
+        <h2> Sessions </h2>
+        <% loop AcceptedPresentations() %>
+            $Title
+        <% end_loop %>
+    </div>
+
+    <% end_with %>
+</div>
+
+<%--
 <div class="title_box">
     <div class="container">
         <div class="title">$Event.Title</div>
@@ -72,7 +94,7 @@
                 <div class="speaker_info">
                     <div class="speaker_name"> $FirstName $LastName </div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
-                    <div class="speaker_bio"> $getShortBio(200) <a href="{$Top.AbsoluteLink}speaker/{$ID}">FULL BIO</a></div>
+                    <div class="speaker_bio"> $getShortBio(200) <a href="{$BaseHref}">FULL BIO</a></div>
                 </div>
             </div>
             <% end_loop %>
@@ -105,3 +127,5 @@
 
 <script src="summit/javascript/schedule/event-detail.bundle.js" type="application/javascript"></script>
 <script src="summit/javascript/schedule/share-buttons.bundle.js" type="application/javascript"></script>
+
+--%>

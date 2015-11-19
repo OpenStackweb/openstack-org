@@ -1,0 +1,64 @@
+.container {
+    font-family:'Montserrat' , sans-serif;
+}
+
+.title_box {
+    background-color:#132539;
+    padding: 30px 0;
+}
+
+.col1 {
+    float: left;
+    width: 60%;
+}
+
+.col2 {
+    float: right;
+    width: 30%;
+}
+
+.speaker_box {
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #C2C2C2;
+    border-top: 1px solid #C2C2C2;
+    padding-bottom: 30px;
+    color: #494949;
+}
+
+.speaker_profile {
+    margin-top: 30px;
+    clear: both;
+    border-bottom: 1px solid black;
+    padding-bottom: 30px;
+}
+
+.speaker_pic {
+    width: 150px;
+    float: left;
+    margin-left: 15px;
+}
+
+.speaker_info {
+}
+
+.speaker_name {
+    margin:0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.speaker_job_title {
+    color: #AAAAAA;
+    font-size: 12px;
+}
+
+.speaker_bio {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.speaker_bio a {
+    text-decoration: underline;
+    color: #494949;
+    font-weight: bold;
+}
