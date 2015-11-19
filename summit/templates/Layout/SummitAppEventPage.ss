@@ -1,4 +1,3 @@
-
 <div class="title_box">
     <div class="container">
         <div class="title">$Event.Title</div>
@@ -43,7 +42,17 @@
 
         </div>
         <div class="share">
-            <share-buttons url="{$AbsoluteLink}event/$Event.ID"></share-buttons>
+            <script type="application/javascript">
+                    var share_info =
+                    {
+                        url: "{$AbsoluteLink}event/{$Event.ID}",
+                        title : "{$Event.Title.JS}",
+                        description: "{$Event.ShortDescription().JS}",
+                        image: "",
+                        fb_app_id : "227356147446887",
+                    };
+            </script>
+            <share-buttons share_info="{ share_info }"></share-buttons>
         </div>
     </div>
 </div>
@@ -92,7 +101,7 @@
         <event-comments comments="{ comments }" limit="5"></event-comments>
     </div>
 </div>
-
+<div id="fb-root"></div>
 
 <script src="summit/javascript/schedule/event-detail.bundle.js" type="application/javascript"></script>
 <script src="summit/javascript/schedule/share-buttons.bundle.js" type="application/javascript"></script>
