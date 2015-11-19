@@ -18,7 +18,7 @@ schedule_api.addEvent2MySchedule = function (summit_id, event_id)
         url:  url,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            schedule_api.trigger('eventAdded2MySchedule', data);
+            schedule_api.trigger('eventAdded2MySchedule', event_id);
         }
     });
 }
@@ -32,7 +32,7 @@ schedule_api.removeEventFromMySchedule = function (summit_id, event_id)
         url:  url,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            schedule_api.trigger('eventRemovedFromMySchedule', data);
+            schedule_api.trigger('eventRemovedFromMySchedule', event_id);
         }
     });
 }

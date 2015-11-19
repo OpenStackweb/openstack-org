@@ -32,6 +32,7 @@
     "jqplot-bower": "~1.0.8",
     "seiyria-bootstrap-slider": "*",
     "jquery-loading": "1.1.0",
-    "chosen" : "1.4.2"
+    "chosen" : "1.4.2",
+    "awesome-bootstrap-checkbox" : "~0.3.5"
   }
 }

@@ -3,13 +3,13 @@ var webpack = require('webpack');
 module.exports = {
   entry: {
      /* here u must define all your entries points*/
-    "software/js/public/software_all_projects": "./software/js/software_all_projects",
-    "software/js/public/software_sample_configs":"./software/js/software_sample_configs",
-    "summit/javascript/new-trackchairs-app/app/index": "./summit/javascript/new-trackchairs-app/app/index",
-    "summit/javascript/summit-highlights":"./summit/javascript/summit-highlights",
-    "summit/javascript/schedule/schedule":"./summit/javascript/schedule/schedule",
-    "summit/javascript/schedule/event-detail":"./summit/javascript/schedule/event-detail",
-      "summit/javascript/schedule/share-buttons":"./summit/javascript/schedule/share-buttons",
+    "software/js/public/software_all_projects": "./software/js/software_all_projects.js",
+    "software/js/public/software_sample_configs":"./software/js/software_sample_configs.js",
+    "summit/javascript/new-trackchairs-app/app/index": "./summit/javascript/new-trackchairs-app/app/index.js",
+    "summit/javascript/summit-highlights":"./summit/javascript/summit-highlights.js",
+    "summit/javascript/schedule/schedule":"./summit/javascript/schedule/schedule.js",
+    "summit/javascript/schedule/event-detail":"./summit/javascript/schedule/event-detail.js",
+    "summit/javascript/schedule/share-buttons":"./summit/javascript/schedule/share-buttons.js",
   },
   output: {
     path: __dirname ,
@@ -31,6 +31,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.tag$/, loader: 'tag' },
+      { test: /\.css$/, loader: "style!css" }
     ]
   }
 };

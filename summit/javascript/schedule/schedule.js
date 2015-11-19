@@ -1,3 +1,5 @@
+require("!style!css!./../../../themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css");
+
 var schedule_api = require('./schedule-api.js');
 require('./schedule-main-filters.tag');
 require('./schedule-grid.tag');

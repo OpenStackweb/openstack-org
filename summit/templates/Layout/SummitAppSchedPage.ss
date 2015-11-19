@@ -129,7 +129,6 @@
             );
         <% end_loop %>
     </script>
-    <schedule-main-filters summit="{ summit }"></schedule-main-filters>
     <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october"></schedule-grid>
 </div>
 <div id="fb-root"></div>
