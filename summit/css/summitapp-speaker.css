@@ -35,7 +35,7 @@
 .speaker_pic {
     width: 150px;
     float: left;
-    margin-left: 15px;
+    margin: 0 15px 15px 0;
 }
 
 .speaker_info {
