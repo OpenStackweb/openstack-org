@@ -924,12 +924,12 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $main_type->write();
         }
 
-        if(!SummitType::get()->filter(array('Title'=>'Design Summit + Main Conference', 'SummitID'=>$summit_id))->first()) {
-            $design_type = new SummitType();
-            $design_type->Title = 'Design Summit + Main Conference';
+        if(!SummitType::get()->filter(array('Title'=>'Design Summit', 'SummitID'=>$summit_id))->first()) {
+            $design_type              = new SummitType();
+            $design_type->Title       = 'Design Summit';
             $design_type->Description = 'This Schedule is specifically for developers and operators who contribute to the roadmap for the N release cycle. The Design Summit is not a classic track with speakers and presentations and its not the right place to get started or learn the basics of OpenStack. This schedule also Includes the Main Conference Sessions';
-            $design_type->Audience = 'Developers And Operators';
-            $design_type->SummitID = $summit_id;
+            $design_type->Audience    = 'Developers And Operators';
+            $design_type->SummitID    = $summit_id;
             $design_type->StartDate   = $summit->BeginDate;
             $design_type->EndDate     = $summit->EndDate;
             $design_type->write();

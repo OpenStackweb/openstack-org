@@ -21,8 +21,23 @@ class SummitType extends DataObject implements ISummitType
         'Audience'    => 'Text',
         'StartDate'   => 'SS_Datetime',
         'EndDate'     => 'SS_Datetime',
+        'Color'       => 'Text'
     );
 
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        $color = $this->getField('Color');
+        if(empty($color))
+            $color = 'f0f0ee';
+        if (strpos($color,'#') === false) {
+            $color = '#'.$color;
+        }
+        return $color;
+    }
 
     public function setStartDate($value)
     {
@@ -165,6 +180,7 @@ class SummitType extends DataObject implements ISummitType
 
         $f->addFieldToTab('Root.Main', new TextField('Title','Title'));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
+        $f->addFieldToTab('Root.Main', new ColorField("Color","Color"));
         $f->addFieldToTab('Root.Main', new TextField('Audience','Audience'));
 
         $f->addFieldToTab('Root.Main',$date = new DatetimeField('StartDate', 'Start Date'));
