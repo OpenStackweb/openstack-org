@@ -109,10 +109,9 @@ final class SangriaPageExportDataExtension extends Extension
         $query = new SQLQuery();
         $query->setFrom('Member');
         $query->addLeftJoin('Group_Members', 'GM.MemberID = Member.ID','GM');
-        $query->addLeftJoin('Group_Members', 'GM2.MemberID = Member.ID','GM2');
         $query->addLeftJoin('Group', 'Group.ID = GM.GroupID');
-        $query->addWhere('Member.GerritID IS NOT NULL');
-        $query->addWhere('GM2.GroupID IN ('.implode(',',$groups).')');
+        //$query->addWhere('Member.GerritID IS NOT NULL');
+        $query->addWhere('GM.GroupID IN ('.implode(',',$groups).')');
         $fields['Groups'] = "GROUP_CONCAT(Group.Code SEPARATOR ' | ')";
         $query->setSelect($fields);
         $query->addGroupBy('Member.ID');
