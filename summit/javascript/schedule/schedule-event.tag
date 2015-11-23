@@ -25,6 +25,11 @@
                         <div class="col-md-12"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{ locationName(location_id) }</span></div>
                     </div>
                     <div class="row"><div class="col-md-4 col-md-offset-9 event-type-col">{ summit.event_types[type_id].type }</div></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span each={ tag_id in tags_id } class="label label-default">{ summit.tags[tag_id].name }</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row event-details" id="event_details_{ id }" style="display:none;">
