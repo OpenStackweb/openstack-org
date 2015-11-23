@@ -121,7 +121,7 @@
             <div class="election-question span-10 last">
                 <div class="span-1">Q</div>
                 <div class="question span-9 last">
-                    <h4>What do you think the top priority of the Board should be in 2014?</h4>
+                    <h4>What do you think the top priority of the Board should be in 2016?</h4>
                 </div>
                 <div class="span-1">A</div>
                 <div class="answer span-9 last">
