@@ -18,6 +18,16 @@
     min-height: 150px !important;
 }
 
+@media (max-width: 360px) {
+    .event-type{
+        min-height: 175px !important;
+    } }
+
+@media (max-width: 716px) {
+    .event-type{
+        min-height: 155px !important;
+    } }
+
 .event-title
 {
     font-family: 'MontserratBold';
@@ -94,6 +104,7 @@ a.navbar-brand.navbar-brand-month {
 {
     padding-top: 10px;
     padding-bottom: 10px;
+    width: 98%;
 }
 
 .icon-clock, .icon-foreign-event, .icon-own-event, .icon-favorite-event, .icon-non-favorite-event, .icon-map

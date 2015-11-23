@@ -2,16 +2,16 @@
     <div if={ show } id="event_{ id }" class="row event-row">
         <div class="col-md-12">
             <div class="row main-event-content" data-event-id="{ id }">
-                <div class="col-xs-1 event-type" style="background-color: { eventColor(summit_types_id) }">&nbsp;</div>
-                <div class="col-xs-11 event-content">
-                    <div class="row">
-                        <div class="col-md-3">
+                <div class="col-md-1 col-xs-1 event-type" style="background-color: { eventColor(summit_types_id) }">&nbsp;</div>
+                <div class="col-md-11 col-xs-11 event-content">
+                    <div class="row row_location">
+                        <div class="col-md-3 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>&nbsp;<span>{ start_time }</span>&nbsp;/&nbsp;<span>{ end_time }</span>
                         </div>
-                        <div class="col-md-8"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{ locationName(location_id) }</span></div>
-                        <div class="col-md-1 col-md-offset-12 my-schedule-container" if={ parent.summit.current_user !== null } >
-                            <i if={ !own } class="fa fa-plus-circle icon-foreign-event icon-event-action" title="add to my schedule" onclick={ parent.addToMySchedule } ></i>
-                            <i if={ own } class="fa fa-check-circle icon-own-event icon-event-action" title="remove from my schedule" onclick={ parent.removeFromMySchedule } ></i>
+                        <div class="col-md-8 col-location"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{ locationName(location_id) }</span></div>
+                        <div class="col-md-1 my-schedule-container" if={ parent.summit.current_user !== null } >
+                            <i if={ !own } class="fa fa-plus-circle icon-foreign-event icon-event-action" title="add to my schedule" onclick={ addToMySchedule } ></i>
+                            <i if={ own } class="fa fa-check-circle icon-own-event icon-event-action" title="remove from my schedule" onclick={ removeFromMySchedule } ></i>
                         </div>
                     </div>
                     <div class="row">
@@ -20,14 +20,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">&nbsp;</div>
+                        <div class="col-md-12"><span if={ track_id} title="Track Name" class="label label-success">{ trackName() }<span></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <span each={ tag_id in tags_id } class="label label-default">{ summit.tags[tag_id].name }</span>
+                        <div class="col-md-9">
+                            <span each={ tag_id in tags_id } title="Tag" class="label label-default">{ summit.tags[tag_id].name }</span>
                         </div>
+                        <div class="col-md-3 event-type-col">{ summit.event_types[type_id].type }</div>
                     </div>
-                    <div class="row"><div class="col-md-4 col-md-offset-9 event-type-col">{ summit.event_types[type_id].type }</div></div>
                 </div>
             </div>
             <div class="row event-details" id="event_details_{ id }" style="display:none;">
@@ -60,7 +60,6 @@
 
     this.summit            = this.parent.summit;
     this.schedule_api      = this.parent.schedule_api;
-    this.clicked_event     = {};
     var self               = this;
 
     this.on('mount', function(){
@@ -103,32 +102,23 @@
         return self.summit_types[summit_types_id[0]].color;
     }
 
+    trackName(){
+        var track_id = self.track_id;
+        if(typeof track_id !== "undefined"){
+            return self.summit.tracks[track_id].name;
+        }
+        return ' ';
+    }
+
     //EVENTS
 
-    this.schedule_api.on('eventAdded2MySchedule',function(event_id) {
-        console.log('eventAdded2MySchedule');
-        self.clicked_event[event_id].own = true;
-        self.update();
-        delete self.clicked_event[event_id];
-    });
-
-    this.schedule_api.on('eventRemovedFromMySchedule',function(data) {
-        console.log('eventRemovedFromMySchedule');
-        self.clicked_event[event_id].own = false;
-        self.update();
-        delete self.clicked_event[event_id];
-    });
-
-
     addToMySchedule(e) {
-        console.log('addToMySchedule');
-        self.clicked_event[e.item.id] = e.item;
+        self.parent.clicked_event[e.item.id] = e.item;
         self.schedule_api.addEvent2MySchedule(self.summit.id, e.item.id);
     }
 
     removeFromMySchedule(e) {
-        console.log('removeFromMySchedule');
-        self.clicked_event[e.item.id] = e.item;
+        self.parent.clicked_event[e.item.id] = e.item;
         self.schedule_api.removeEventFromMySchedule(self.summit.id, e.item.id);
     }
 

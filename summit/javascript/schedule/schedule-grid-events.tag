@@ -12,6 +12,7 @@
         this.schedule_api      = opts.schedule_api;
         this.base_url          = opts.base_url;
         this.selected_day      = opts.selected_day;
+        this.clicked_event     = {};
         this.current_filter    = null;
         var self               = this;
 
@@ -85,6 +86,21 @@
             }
             self.update();
         }
+
+
+        this.schedule_api.on('eventAdded2MySchedule',function(event_id) {
+            console.log('eventAdded2MySchedule');
+            self.clicked_event[event_id].own = true;
+            self.update();
+         delete self.clicked_event[event_id];
+        });
+
+        this.schedule_api.on('eventRemovedFromMySchedule',function(event_id) {
+            console.log('eventRemovedFromMySchedule');
+            self.clicked_event[event_id].own = false;
+            self.update();
+            delete self.clicked_event[event_id];
+        });
 
     </script>
 </schedule-grid-events>

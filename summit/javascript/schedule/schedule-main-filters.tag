@@ -9,16 +9,13 @@
             <div id="all-events-filter-wrapper" class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-3" each={ id, obj in summit.summit_types }>
+                                <div class="col-md-4" each={ id, obj in summit.summit_types }>
                                     <div class="row">
-                                        <div class="col-md-11">
+                                        <div class="col-md-10">
                                             <div class="checkbox checkbox-success checkbox-inline">
                                                 <input type="checkbox" checked="" value="{ id }" id="summit_type_{ id }" class="styled summit_type_checkbox">
-                                                <label for="summit_type_{ id }">{ obj.type }</label>
+                                                <label for="summit_type_{ id }"><i title="" data-placement="right" data-toggle="tooltip" class="fa fa-circle" data-original-title="{ obj.type }" style="color: { obj.color }"></i>&nbsp;{ obj.type }</label>
                                             </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <i title="" data-placement="right" data-toggle="tooltip" class="fa fa-circle" data-original-title="{ obj.type }" style="color: { obj.color }"></i>
                                         </div>
                                     </div>
                                 </div>
