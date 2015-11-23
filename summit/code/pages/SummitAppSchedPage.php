@@ -27,7 +27,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         Requirements::css('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css("summit/css/schedule-grid.css");
-        Requirements::javascript('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
    }
 

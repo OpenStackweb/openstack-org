@@ -1,8 +1,9 @@
-var schedule_api = riot.observable()
+var schedule_api = riot.observable();
 var api_base_url = 'api/v1/summits/@SUMMIT_ID/schedule';
 
 schedule_api.getEventByDay = function (summit_id, day)
 {
+    schedule_api.trigger('beforeEventsRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'?day='+day;
     return $.get(url,function (data) {
         schedule_api.trigger('eventsRetrieved', data);

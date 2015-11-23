@@ -154,8 +154,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 'tags_id'         => array(),
                 'own'             => self::isEventOnMySchedule($e->ID, $summit),
                 'favorite'        => false,
+                'show'            => true
             );
-
 
             foreach($e->Tags() as $t)
             {

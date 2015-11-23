@@ -61,6 +61,7 @@
         {
            type : "{$Title.JS}",
            description : "{$Description.JS}",
+           color : "{$Color}"
         };
         <% end_loop %>
 
@@ -125,6 +126,7 @@
                         own      : false,
                         <% end_if %>
                         favorite : false,
+                        show : true
                     }
             );
         <% end_loop %>
