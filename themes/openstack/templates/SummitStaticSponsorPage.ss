@@ -48,7 +48,7 @@
                                 April 25 - 29, 2016
                             </h2>
                             <h1>
-                                Austin
+                                OpenStack Summit Austin
                             </h1>
                             <div class="landing-action">
                                 <button href="#" class="btn register-btn-lrg">Register Soon</button>
@@ -92,7 +92,7 @@
             </div>
                 <div class="mobile-city-date">
                     <h2>April 25 - 29, 2016</h2>
-                    <h1>Austin</h1>
+                    <h1>OpenStack Summit Austin</h1>
                     <a href="#" class="btn register-btn-lrg">Register Soon</a>
                 </div>
 
