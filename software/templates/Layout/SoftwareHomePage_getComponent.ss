@@ -407,7 +407,7 @@
                 <% end_if %>
             </div>
             <div class="col-sm-6 right">
-                <h4>Project History</h4>
+                <h4>API Version History</h4>
                 <div class="project-timeline">
                     <ul>
                         <% loop Releases %>
