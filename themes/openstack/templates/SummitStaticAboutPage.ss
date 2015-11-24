@@ -48,7 +48,7 @@
                                 April 25 - 29, 2016
                             </h2>
                             <h1>
-                                Austin
+                                OpenStack Summit Austin
                             </h1>
                             <div class="landing-action">
                                 <button href="#" class="btn register-btn-lrg">Register Soon</button>
@@ -92,7 +92,7 @@
             </div>
                 <div class="mobile-city-date">
                     <h2>April 25 - 29, 2016</h2>
-                    <h1>Austin</h1>
+                    <h1>OpenStack Summit Austin</h1>
                     <a href="#" class="btn register-btn-lrg">Register Soon</a>
                 </div>
 
@@ -104,7 +104,7 @@
                 <h2 class="center">The Must-Attend OpenStack Event</h2>
                 <hr/>
                 <p>
-                    <strong>The OpenStack Summit</strong> is a five-day conference for developers, users, and administrators of OpenStack Cloud Software. It’s a great place to get started with OpenStack. The Summits are attended by thousands of people from all over the world.
+                    <strong>The OpenStack Summit</strong> is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.
                 </p>               
                 <div class="stats-wrapper">
                     <h3 class="recap-title">Attendees From Around The World</h3>
@@ -164,17 +164,17 @@
                     For Everyone
                 </div>
                 <p>
-                   <strong>Held Monday - Thursday</strong><br>Classic track with speakers and sessions. The perfect place for developers, users, and administrators of OpenStack Cloud Software. This is great for those looking for the best way to get started.
+                   <strong>Monday - Thursday</strong><br>Classic track with speakers and sessions. The perfect place for developers, users, and administrators of OpenStack Cloud Software. This is great for those looking for the best way to get started.
                 </p>
             </div>
             <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
                 <img class="summit-type-icon" src="/themes/openstack/static/images/grey-summit-logo.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/grey-summit-logo.png" alt="The OpenStack Conference" style="max-width: 150px;">
-                <h3>The OpenStack Design Summit</h3>
+                <h3>The OpenStack Ops &amp; Design Summit</h3>
                 <div class="sub-h3">
                     For Contributors
                 </div>
                 <p>
-                    <strong>Held Monday - Friday</strong><br>Collaborative working sessions where OpenStack developers come together twice annually to discuss the requirements for the next software release and connect with other community members.
+                    <strong>Monday - Friday</strong><br>Collaborative working sessions where OpenStack developers come together twice annually to discuss the requirements for the next software release and connect with other community members.
                 </p>
             </div>
         </div>
