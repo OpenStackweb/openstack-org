@@ -101,14 +101,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2 sponsor-intro">
-                <h1>Interested being Summit Sponsor in Austin?</h1>
+                <h1>Interested in being a Summit Sponsor in Austin?</h1>
                 <p>
                     Having a presence at the OpenStack Summit is a great way to get your company in front of the OpenStack community. You can read about the various options in the Sponsorship Prospectus.
                 </p>
                 <div class="row">
                     <div class="col-lg-12 prospectus-wrapper">
-                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf">Download Sponsor Prospectus</a>
-                        <a href="//openstack.org/assets/austin-summit/TuesdayCommunityEveningEvent.pdf" style="display: block; margin: 30px 0;">Or Download The Tuesday Evening Event Sponsor Prospectus</a>
+                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" style="margin-right:30px;">Sponsor Prospectus</a>
+                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/TuesdayCommunityEveningEvent.pdf">Tuesday Party Sponsor Prospectus</a>
                     </div>
                 </div>
             </div>
@@ -125,15 +125,15 @@
                 </a>
             </li> -->
             <li>
-                <a href="#packages">
-                    <i class="fa fa-tags"></i>
-                    Packages
-                </a>
-            </li>
-            <li>
                 <a href="#how-to-sponsor">
                     <i class="fa fa-question-circle"></i>
                     How To Sponsor
+                </a>
+            </li>
+            <li>
+                <a href="#packages">
+                    <i class="fa fa-tags"></i>
+                    Packages
                 </a>
             </li>
             <li>
@@ -146,6 +146,93 @@
     </div>
 </div>
 
+<div class="light sponsor-instructions negative-bottom" id="how-to-sponsor">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-push-2 center">
+                <h1>How To Sponsor</h1>
+                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" style="margin-right:30px;">Sponsor Prospectus</a>
+                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/TuesdayCommunityEveningEvent.pdf">Tuesday Party Sponsor Prospectus</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-push-2">
+                <p>&nbsp;</p>
+                <p>
+                    Having a presence at the OpenStack Summit is a great way to get your company in front of the OpenStack community. There are five available levels of sponsorship: Headline, Premier, Spotlight, Event and Startup and a number of add-on opportunities.  You can read about the various options in the Sponsorship Prospectus.
+                </p>
+                <ul>
+                    <li>
+                        <a href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" target="_blank">Sponsorship Prospectus (PDF File)</a>
+                    </li>
+                    <li>
+                        <a href="//openstack.org/assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf" target="_blank">Read Only Draft Version of the OpenStack Summit April 2016 Austin Contract</a>
+                    </li>
+                </ul>
+                <p>
+                    Whichever level you choose to participate, you'll want to act quickly —we've already seen a lot of interest from potential sponsors.
+                </p>
+                <h3>What to do before signing:</h3>
+                <ul>
+                    <li>
+                        Review the <a href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" target="_blank">Prospectus</a> and decide which sponsorship levels and add-ons you are interested in.
+                    </li>
+                    <li>
+                        Review the list of sponsorships to see which ones are still available.
+                    </li>
+                    <li>
+                        If you have not already done so, you will need to first <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDdkLg6AyOkPJQwlVhJH9R3Q6cK_F4lAbP8Heg5Pvk8mHyIIIHVgVMBi5Nzyy5BUjI*" target="_blank">sign the Master Event Sponsorship Agreement</a> with the OpenStack Foundation. ( Note: If you previously sponsored either the Tokyo, Vancouver, Paris, Atlanta, Hong Kong, or Portland Summits then you've already completed this step.  You'll just need to know the date when you signed it previously, as this information will be required in the Vancouver contract.  If you do not know the date when you previously signed the Master Sponsorship agreement please email <a href="mailto:summit@openstack.org">summit@openstack.org.</a>)
+                    </li>
+                    <li>
+                        If your company has any past due balances owed to OpenStack Foundation, these invoices will need to be paid in full in order to be eligible to sponsor the Summit. Please contact <a href="mailto:billing@openstack.org">billing@openstack.org</a> if you think you may have any overdue/outstanding invoices.
+                    </li>
+                </ul>
+                <h3>How to Sign the Agreement:</h3>
+                <ul>
+                    <li>
+                        On December 14 at 9:00 PST / 17:00 UTC the executable electronic contract for the OpenStack Summit April 2016 Austin will be made available HERE.
+                    </li>
+                    <li>
+                        In the meantime you can view the <a href="//openstack.org/assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf" target="_blank">Read Only Draft Version of the OpenStack Summit April 2016 Austin Contract</a>.
+                    </li>
+                    <li>
+                        <strong>After signing the agreement, please check your email to make sure you confirm submission via Echosign.</strong> Contact <a href="mailto:summit@openstack.org">summit@openstack.org</a> if you have any questions. 
+                    </li>
+                    <li>
+                        In order to meet production deadlines, March 8, 2016, is the final day that signed sponsorship agreements will be accepted.
+                    </li>
+                    <li>
+                        Please note that in recognition of the ongoing support of <a href="//openstack.org/foundation/companies/">companies that are Sponsors or Members</a> of the OpenStack Foundation, their contracts will be considered first, for the initial 24 hours after the executable Austin Contract goes live. All other contracts will be processed starting 24 hours later on December 15 at 11:00am CST. From that point forward all sponsorships will be sold on a first-come, first-serve basis determined by the timestamp on completed agreements. 
+                    </li>
+                </ul>
+                <h3>Specific to Headline Level Sponsorships</h3>
+                <ul>
+                    <li>
+                    Headline level sponsorship will also be confirmed on a first-come, first-serve basis if there are four (4) or fewer contracts submitted within the first hour of the executable agreement becoming available.
+                </li>
+                    <li>
+                    In order to create a fair and level playing field, if more than four (4) companies submit signed contracts within the first hour (between 17:00 - 18:00 UTC / 11:00 - 12:00 CST) for a Headline sponsorship level, the Foundation staff will conduct a lottery to draw the four (4) official Headline sponsors. 
+                </li>
+                    <li>
+                    The remaining companies that do not secure the Headline sponsorship via lottery will be given the opportunity to re-sign contracts and obtain Premier level sponsorship slots in the order they submitted Headline agreements. 
+                </li>
+                    <li>
+                    The lottery is only applicable to the Headline sponsorship level. 
+                </li>
+                    <li>
+                    Sponsor companies that signed the October 2015 Tokyo OpenStack Summit contract within the first hour for a Headline sponsorship level, but did not win the lottery drawing will be eligible to have an additional ball in the lottery drawing for the 2016 Austin OpenStack Summit if they again sign the Austin Summit sponsorship contract for a Headline slot within the first hour that the executable electronic contract is made available.
+                    </li>
+                </p>
+                <div class="center" style="margin: 30px 0;">
+                    <a href="mailto:summit@openstack.org">Contact us with any questions.</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sponsor-bkgd">
+    <div class="fixed-image exhibit"></div>
+</div>
 <div class="light" id="packages">
     <div class="container sponsor-wrapper">
     <div class="row">
@@ -232,22 +319,22 @@
                             </thead>
                             <tbody>
                                 <tr class="sponsor_add_on">
-                                    <td>Headline Sponsor</td>
+                                    <td>Tuesday Evening Event Headline Sponsor</td>
                                     <td>$90,000</td>
                                     <td style="text-align:center;">6</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Premier Sponsor</td>
+                                    <td>Tuesday Evening Event Premier Sponsor</td>
                                     <td>$45,000</td>
                                     <td style="text-align:center;">6</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Spotlight Sponsor</td>
+                                    <td>Tuesday Evening Event Spotlight Sponsor</td>
                                     <td>$25,000</td>
                                     <td style="text-align:center;">6</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Startup Sponsor</td>
+                                    <td>Tuesday Evening Event Startup Sponsor</td>
                                     <td>$4,000</td>
                                     <td style="text-align:center;">Unlimited</td>
                                 </tr>
@@ -279,7 +366,7 @@
                                 <tr class="sponsor_add_on">
                                     <td>Sponsored Coffee Breaks In Expo Hall</td>
                                     <td>$30,000 / week</td>
-                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Branded Activity Stations</td>
@@ -324,7 +411,7 @@
                                 <tr class="sponsor_add_on">
                                     <td>Official Water Sponsorship</td>
                                     <td>$30,000 / week</td>
-                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Travel Support Program</td>
@@ -350,7 +437,7 @@
                                 <tr class="sponsor_add_on">
                                     <td>Branded Summit Badge Lanyard</td>
                                     <td>$35,000</td>
-                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>20 Minute Demo Presentation Time Slot & Video Recording</td>
@@ -360,17 +447,17 @@
                                 <tr class="sponsor_add_on">
                                     <td>Full-day Sponsored Breakout Speaking Track</td>
                                     <td>$65,000</td>
-                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">6</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Half-day Sponsored Breakout Speaking Track</td>
                                     <td>$40,000</td>
-                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">5</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Private Meeting Room<br/>Limit Two Per Company</td>
                                     <td>$4,500</td>
-                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">25</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>
@@ -401,68 +488,6 @@
         </div>
     </div>
 
-    </div>
-</div>
-<div class="sponsor-bkgd">
-    <div class="fixed-image exhibit"></div>
-</div>
-<div class="light sponsor-instructions negative-bottom" id="how-to-sponsor">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-sm-push-2 center">
-                <h1>How To Sponsor</h1>
-                <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf">Download Sponsor Prospectus</a>
-                <a href="//openstack.org/assets/austin-summit/TuesdayCommunityEveningEvent.pdf" style="display: block; margin: 30px 0 50px;">Or Download The Tuesday Evening Event Sponsor Prospectus</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-8 col-sm-push-2">
-                <p>
-                    Having a presence at the OpenStack Summit is a great way to get your company in front of the OpenStack community. There are five available levels of sponsorship: Headline, Premier, Spotlight, Event and Startup and a number of add-on opportunities.  You can read about the various options in the Sponsorship Prospectus.
-                </p>
-                <ul>
-                    <li>
-                        <a href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf">Sponsorship Prospectus (PDF File)</a>
-                    </li>
-                    <li>
-                        <a href="//openstack.org/assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf">OpenStack Summit April 2016 Austin Contract</a>
-                    </li>
-                </ul>
-                <p>
-                    Whichever level you choose to participate, you'll want to act quickly —we've already seen a lot of interest from potential sponsors.
-                </p>
-                <h3>What to do before signing:</h3>
-                <ul>
-                    <li>
-                        Review the Prospectus above and decide which sponsorship levels and add-ons you are interested in.
-                    </li>
-                    <li>
-                        Review the below list of sponsorships to see which ones are still available.
-                    </li>
-                    <li>
-                        If you have not already done so, you will need to first sign the Master Event Sponsorship Agreement with the OpenStack Foundation. ( Note: If you previously sponsored either the Tokyo, Vancouver, Paris, Atlanta, Hong Kong, or Portland Summits then you've already completed this step.  You'll just need to know the date when you signed it previously, as this information will be required in the Vancouver contract.  If you do not know the date when you previously signed the Master Sponsorship agreement please email <a href="mailto:summit@openstack.org">summit@openstack.org.</a>)
-                    </li>
-                </ul>
-                <h3>How to Sign the Agreement:</h3>
-                <ul>
-                    <li>
-                        <a href="//openstack.org/assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf" target="_blank">Sign the electronic OpenStack Summit April 2016 Austin agreement HERE.</a>
-                    </li>
-                    <li>
-                        <strong>After signing the agreement, please check your email to make sure you confirm submission via Echosign.</strong> Contact <a href="mailto:summit@openstack.org">summit@openstack.org</a> if you have any questions. 
-                    </li>
-                    <li>
-                        In order to meet production deadlines, March 8, 2016, is the final day that signed sponsorship agreements will be accepted.
-                    </li>
-                    <li>
-                        Please note that in recognition of the ongoing support of <a href="//openstack.org/foundation/companies/">companies that are Sponsors or Members</a> of the OpenStack Foundation, their contracts will be considered first, for the initial 24 hours after the executable Austin Contract goes live. All other contracts will be processed starting 24 hours later on December 15 at 11:00am CST. From that point forward all sponsorships will be sold on a first-come, first-serve basis determined by the timestamp on completed agreements. 
-                    </li>
-                </ul>
-                <div class="center" style="margin: 30px 0;">
-                    <a href="mailto:summit@openstack.org">Contact us with any questions.</a>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <div class="white" id="audience">
@@ -507,6 +532,7 @@
         </div>
     </div>
 </div>
+
             <!-- End Page Content -->
             <div id="push"></div>
         </div>

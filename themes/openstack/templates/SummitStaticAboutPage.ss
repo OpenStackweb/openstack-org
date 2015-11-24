@@ -198,7 +198,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="pass-types">
-                            <div class="pass-type-title keynote">Keynote + Marketplace Pass</div>
+                            <div class="pass-type-title full">Full Access Pass</div>
                             <ul>
                                 <li>
                                     Access to all Breakout Sessions and Workshops, Developer & Operator working sessions, Keynote presentations, Marketplace Expo Hall, Lounges, etc.
@@ -211,14 +211,14 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="pass-types">
-                            <div class="pass-type-title full">Full Access Pass</div>
+                            <div class="pass-type-title keynote">Keynote + Marketplace Pass</div>
                             <ul>
                                 <li>
                                     Access to the Keynote presentations from industry leaders and Marketplace Expo Hall to explore sponsor booths and network<br>
-                                    This pass does NOT include access to any breakout sessions
+                                    
                                 </li>
                                 <li>
-                                    (including sponsored sessions and tracks) taking place Monday - Thursday or the developer and operator working sessions taking place Tuesday - Friday. This pass ONLY includes access to the Keynote presentations and the Marketplace Expo Hall.
+                                    This pass does NOT include access to any breakout sessions (including sponsored sessions and tracks) taking place Monday - Thursday or the developer and operator working sessions taking place Tuesday - Friday. This pass ONLY includes access to the Keynote presentations and the Marketplace Expo Hall.
                                 </li>
                                 <li>
                                     This pass includes lunch
@@ -255,7 +255,7 @@
                 <div class="growth-text-top map">
                     <h2>Join The Movement</h2>
                     <p>
-                         In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Four years later, 6,000 attendees joined us in Tokyo for our fourth international summit and the first OpenStack Summit held in Japan.
+                         In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Four years later, 6,000 attendees joined us in Vancouver for our third international summit and the first OpenStack Summit held in Canada.
                     </p>
                 </div>
                 <div class="growth-map-wrapper">
