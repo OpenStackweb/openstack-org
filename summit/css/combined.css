@@ -955,6 +955,14 @@ footer {
   padding: 70px 0;
   background: url('/assets/summits/overview/austin-bkgd-lrg.jpg') no-repeat right top;
   background-size: cover; }
+.tokyo-landing-wrapper.barcelona {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 70px 0;
+  background: url('/themes/openstack/static/images/barcelona/barcelona-bkgd-lrg.jpg') no-repeat right top;
+  background-size: cover; }
 
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
