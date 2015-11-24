@@ -51,7 +51,7 @@
 
             <% with $PreviousSummit %>
             <div class="col-sm-3 col-sm-pull-6 small-single-summit">
-                <a href="//openstack.org/summit/tokyo-2016/" class="single-summit past-summit">
+                <a href="summit/tokyo-2015/" class="single-summit past-summit">
                     <h2>Tokyo</h2>
                     <h4>Thanks for coming!</h4>
                 </a>
@@ -64,7 +64,7 @@
             
             <% with $NextSummit %>
             <div class="col-sm-3 small-single-summit">
-                <a href="/summit/barcelona-2016/" class="single-summit future-summit">
+                <a href="summit/barcelona-2016/" class="single-summit future-summit">
                     <h2>Barcelona</h2>
                     <h4>Get Ready</h4>
                 </a>
