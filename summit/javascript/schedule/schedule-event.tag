@@ -20,11 +20,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12"><span if={ track_id} title="Track Name" class="label label-success">{ trackName() }<span></div>
+                        <div class="col-md-12"><span if={ track_id} title="Track Name" class="label label-success tag">{ trackName() }<span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            <span each={ tag_id in tags_id } title="Tag" class="label label-default">{ summit.tags[tag_id].name }</span>
+                            <span each={ tag_id in tags_id } title="Tag" class="label label-default tag">{ summit.tags[tag_id].name }</span>
                         </div>
                         <div class="col-md-3 event-type-col">{ summit.event_types[type_id].type }</div>
                     </div>

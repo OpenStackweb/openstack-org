@@ -1,3 +1,5 @@
+body,html{height:100%}
+
 @font-face {
     font-family: 'Montserrat';
     src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
@@ -12,21 +14,23 @@
     font-style: normal;
 }
 
+.tag {
+    display: inline-block !important;
+}
+
+.event-row {
+    font-family: 'Montserrat';
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: 1px solid #C1C1C1;
+}
+
 .event-type{
     width: 5px !important;
     padding: 0 !important;
-    min-height: 150px !important;
+    position: absolute;
+    height: 100%;
 }
-
-@media (max-width: 360px) {
-    .event-type{
-        min-height: 175px !important;
-    } }
-
-@media (max-width: 716px) {
-    .event-type{
-        min-height: 155px !important;
-    } }
 
 .event-title
 {
@@ -36,14 +40,12 @@
     padding-bottom: 5px;
 }
 
-.event-row {
-    min-height: 150px !important;
-    font-family: 'Montserrat';
-    margin-top: 3px;
-    margin-bottom: 3px;
-    border: 1px solid #C1C1C1
-}
+.event-content
+{
+    padding-top: 15px;
+    width: 98%;
 
+}
 
 .event-details
 {
@@ -100,12 +102,6 @@ a.navbar-brand.navbar-brand-month {
     text-align: right;
 }
 
-.event-content
-{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 98%;
-}
 
 .icon-clock, .icon-foreign-event, .icon-own-event, .icon-favorite-event, .icon-non-favorite-event, .icon-map
 {
