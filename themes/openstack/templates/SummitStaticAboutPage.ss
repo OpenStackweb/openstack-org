@@ -93,7 +93,7 @@
                 <div class="mobile-city-date">
                     <h2>April 25 - 29, 2016</h2>
                     <h1>Austin</h1>
-                    <a href="#" class="btn register-btn-lrg">Register Now</a>
+                    <a href="#" class="btn register-btn-lrg">Register Soon</a>
                 </div>
 
             <!-- Begin Page Content -->
