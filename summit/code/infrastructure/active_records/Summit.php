@@ -191,7 +191,7 @@ final class Summit extends DataObject implements ISummit
 
     private static $has_one = array
     (
-
+        'Logo' => 'BetterImage',
     );
 
     private static $has_many = array
@@ -329,7 +329,6 @@ final class Summit extends DataObject implements ISummit
             'Active' => 1
         ))->first();
     }
-
 
     /**
      * @return bool
@@ -682,6 +681,12 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main',$date = new DatetimeField('RegistrationEndDate', 'Registration End Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $logo_field = new UploadField('Logo','Logo');
+        $logo_field->setAllowedMaxFileNumber(1);
+        $logo_field->setAllowedFileCategories('image');
+        $logo_field->setFolderName('summits/logos/');
+        $logo_field->getValidator()->setAllowedMaxFileSize(1048576);
+        $f->add($logo_field);
 
         $f->addFieldToTab('Root.Main',new TextField('ComingSoonBtnText', 'Coming Soon Btn Text'));
         $f->addFieldToTab('Root.Main',new TextField('ExternalEventId', 'Eventbrite Event Id'));
