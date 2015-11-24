@@ -18,6 +18,17 @@ body,html{height:100%}
     display: inline-block !important;
 }
 
+.btn-global-search, .btn-global-search-clear
+{
+    height: 38px;
+}
+
+.input-global-search
+{
+    height: 38px;
+    width: 90%;
+}
+
 .event-row {
     font-family: 'Montserrat';
     margin-top: 3px;

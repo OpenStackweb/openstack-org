@@ -181,7 +181,7 @@ class MemberDecorator extends DataExtension
     function getCurrentPosition()
     {
         $current = $this->getCurrentAffiliation();
-        if(is_null($current)) return '';
+        if(is_null($current) || !$current) return '';
         $org = $current->Organization();
         $res = '';
         if(!is_null($org))

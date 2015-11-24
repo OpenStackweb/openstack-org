@@ -4,7 +4,7 @@
 </raw>
 
 <schedule-grid>
-    <schedule-global-filter schedule_filters={ schedule_filters }></schedule-global-filter>
+    <schedule-global-filter global_search_action={ opts.global_search_action }></schedule-global-filter>
     <schedule-grid-nav month={ month } ></schedule-grid-nav>
     <div class="row">
             <div class="container" id="events-container">

@@ -116,7 +116,7 @@
                         tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                         summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
                         <% if ClassName == Presentation %>
-                        moderator_id: {$ModeratorID},
+                        moderator_id: {$ModeratorID},global-search
                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                         track_id : {$CategoryID},
                         <% end_if %>
@@ -131,7 +131,7 @@
             );
         <% end_loop %>
     </script>
-    <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october"></schedule-grid>
+    <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october" global_search_action="{$Top.Link(global-search)}"></schedule-grid>
 </div>
 <div id="fb-root"></div>
 <script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>
