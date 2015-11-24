@@ -93,7 +93,7 @@
                 <div class="mobile-city-date">
                     <h2>April 25 - 29, 2016</h2>
                     <h1>Austin</h1>
-                    <a href="#" class="btn register-btn-lrg">Register Now</a>
+                    <a href="#" class="btn register-btn-lrg">Register Soon</a>
                 </div>
 
             <!-- Begin Page Content -->
@@ -272,75 +272,127 @@
                             </thead>
                             <tbody>
                                 <tr class="sponsor_add_on">
-                                    <td>Branded Coffee Breaks in Marketplace Expo Hall</td>
-                                    <td>$20,000/day or $40,000/week</td>
+                                    <td>Increase Booth Size By 5 Feet</td>
+                                    <td>$25,000</td>
+                                    <td style="text-align:center;"></td>
+                                </tr>
+                                <tr class="sponsor_add_on">
+                                    <td>Sponsored Coffee Breaks In Expo Hall</td>
+                                    <td>$30,000 / week</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Branded Activity Stations</td>
-                                    <td>$8,000/each</td>
+                                    <td>Vary</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Custom Food/Beverage Stations</td>
-                                    <td>$5,000/each</td>
+                                    <td>Custom Food &amp; Beverage Stations</td>
+                                    <td>Vary</td>
                                     <td style="text-align:center;"></td>
+                                </tr>                                
+                                <tr class="sponsor_add_on">
+                                    <td>Bouldin Creek Community Lounge <br/>Branded By Your Company</td>
+                                    <td>$75,000</td>
+                                    <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Branded Community Lounges</td>
-                                    <td>TBD</td>
-                                    <td style="text-align:center;">6</td>
+                                    <td>South Congress Community Lounge <br/>Branded By Your Company</td>
+                                    <td>$60,000</td>
+                                    <td style="text-align:center;">1</td>
+                                </tr>
+                                <tr class="sponsor_add_on">
+                                    <td>Hyde Park Community Lounge <br/>Branded By Your Company</td>
+                                    <td>$45,000</td>
+                                    <td style="text-align:center;">1</td>
+                                </tr>
+                                <tr class="sponsor_add_on">
+                                    <td>Clarksville Community Lounge <br/>Branded By Your Company</td>
+                                    <td>$30,000</td>
+                                    <td style="text-align:center;">1</td>
+                                </tr>
+                                <tr class="sponsor_add_on">
+                                    <td>Travis Heights Community Lounge <br/>Branded By Your Company</td>
+                                    <td>$40,000</td>
+                                    <td style="text-align:center;">1</td>
+                                </tr>                                             
+                                <tr class="sponsor_add_on">
+                                    <td>Eastside Developers Lounge <br/>Branded By Your Company</td>
+                                    <td>$75,000</td>
+                                    <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Official Water Sponsorship</td>
-                                    <td>$30,000</td>
-                                    <td style="text-align:center;"></td>
-                                </tr>
-                                <tr class="sponsor_add_on">
-                                    <td>Branded Lunch Sponsorship</td>
-                                    <td>$25,000/day</td>
+                                    <td>$30,000 / week</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Travel Support Program</td>
-                                    <td>$20,000 Co-Sponsorship</td>
+                                    <td>$20,000</td>
                                     <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Women of OpenStack Event Named Sponsor</td>
-                                    <td>$46,000 named sponsor; $23,000 co-sponsorship</td>
+                                    <td>
+                                        Women of OpenStack Event, Sunday Evening<br/>
+                                        Named Sponsorship
+                                    </td>
+                                    <td>$46,000</td>
+                                    <td style="text-align:center;">1</td>
+                                </tr>                                                               
+                                <tr class="sponsor_add_on">
+                                    <td>
+                                        Women of OpenStack Event, Sunday Evening<br/>
+                                        Co-Sponsorship
+                                    </td>
+                                    <td>$23,000</td>
                                     <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Branded Summit Badge Lanyard</td>
                                     <td>$35,000</td>
-                                    <td style="text-align:center;">1</td>
-                                </tr>
-                                <tr class="sponsor_add_on">
-                                    <td>20-Min Demo Theater Presentation & Video Recording</td>
-                                    <td> $1,000 for Startup; $2,000 for Event, Spotlight, Premier, Headline</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Premier & Spotlight Increase Booth Size by 5'</td>
-                                    <td>$25,000</td>
+                                    <td>20 Minute Demo Presentation Time Slot & Video Recording</td>
+                                    <td>$1,000 - $2,000</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Headline, Premier, Spotlight Full-Day Sponsored Breakout Speaking Track</td>
+                                    <td>Full-day Sponsored Breakout Speaking Track</td>
                                     <td>$65,000</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Headline, Premier, Spotlight Half-Day Sponsored Breakout Speaking Track</td>
+                                    <td>Half-day Sponsored Breakout Speaking Track</td>
                                     <td>$40,000</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                                 <tr class="sponsor_add_on">
-                                    <td>Event & Startup 46" LCD Monitor Add-On</td>
-                                    <td>$1,000</td>
+                                    <td>Private Meeting Room<br/>Limit Two Per Company</td>
+                                    <td>$4,500</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
+                                <tr class="sponsor_add_on">
+                                    <td>
+                                        Official Off-Site Evening Event Promotion <br/>
+                                        Wednesday &amp; Thursday Nights
+                                    </td>
+                                    <td>Free</td>
+                                    <td style="text-align:center;"></td>
+                                </tr>
+                                <tr class="sponsor_add_on">
+                                    <td>
+                                        Event &amp; Startup Level Add-on: <br/>
+                                        46" HD Capable LCD Monitor And Stand In Your Booth
+                                    </td>
+                                    <td>$1,000 / week</td>
+                                    <td style="text-align:center;"></td>
+                                </tr>
+                                <tr class="sponsor_add_on">
+                                    <td>Digital/Video Wall Advertising Opportunties</td>
+                                    <td>$1,500</td>
+                                    <td style="text-align:center;"></td>
+                                </tr>                                                                                       
                             </tbody>
                         </table>
                     </div>
