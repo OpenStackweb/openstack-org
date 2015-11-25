@@ -14,7 +14,7 @@
                 </h1>
                 <div class="summit-location">Barcelona, Spain</div>
                     <div class="summit-date">
-                       October 2016
+                       October 24-28, 2016
                        <br>
                        <span>Get Excited!</span>
                     </div>
