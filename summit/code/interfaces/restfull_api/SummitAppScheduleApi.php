@@ -37,10 +37,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
      */
     private $eventfeedback_repository;
 
-    /**
-     * @var IEntityRepository
-     */
-    private $speakerfeedback_repository;
 
     /**
      * @var IEntityRepository
@@ -60,32 +56,19 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     public function __construct()
     {
         parent::__construct();
-
-        $this->securityToken     = new SecurityToken();
-        $this->summit_repository  = new SapphireSummitRepository;
-        $this->summitevent_repository = new SapphireSummitEventRepository();
+        // TODO: set by IOC
+        $this->securityToken                 = new SecurityToken();
+        $this->summit_repository             = new SapphireSummitRepository;
+        $this->summitevent_repository        = new SapphireSummitEventRepository();
         $this->summitpresentation_repository = new SapphireSummitPresentationRepository();
-        $this->eventfeedback_repository = new SapphireEventFeedbackRepository();
-        $this->speakerfeedback_repository = new SapphireSpeakerFeedbackRepository();
-        $this->attendee_repository = new SapphireSummitAttendeeRepository();
+        $this->eventfeedback_repository      = new SapphireEventFeedbackRepository();
+        $this->attendee_repository           = new SapphireSummitAttendeeRepository();
 
         $this->schedule_manager = new ScheduleManager($this->summitevent_repository, $this->summitpresentation_repository,
-                                                      $this->eventfeedback_repository, new EventFeedbackFactory(), $this->speakerfeedback_repository,
+                                                      $this->eventfeedback_repository, new EventFeedbackFactory(),
                                                       $this->attendee_repository, SapphireTransactionManager::getInstance());
 
-        $this_var           = $this;
-        $security_token     = $this->securityToken;
-
-        $this->addBeforeFilter('addFeedback','check_access_reject',function ($request) use($this_var, $security_token){
-            $data = $this_var->getJsonRequest();
-            if (!$data) return $this->serverError();
-            if (!$security_token->checkRequest($request)) return $this->forbiddenError();
-            if ($data['field_98438688'] != '') return $this->forbiddenError();
-        });
-
-
     }
-
 
     protected function isApiCall(){
         $request = $this->getRequest();
@@ -105,10 +88,10 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     }
 
     static $url_handlers = array(
-        'GET '                    => 'getScheduleByDay',
-        'PUT $EventID!'           => 'addToSchedule',
-        'DELETE $EventID!'        => 'removeFromSchedule',
-        'PUT $EventID!/feedbacks' => 'addFeedback',
+        'GET '                      => 'getScheduleByDay',
+        'PUT $EventID!'             => 'addToSchedule',
+        'DELETE $EventID!'          => 'removeFromSchedule',
+        'POST $EventID!/feedback'   => 'addFeedback',
     );
 
     static $allowed_actions = array(
@@ -222,9 +205,13 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
             $this->schedule_manager->addEventToSchedule(Member::currentUserID(), $event_id);
         }
-        catch(NotFoundEntityException $ex1){
+        catch(EntityValidationException $ex1){
             SS_Log::log($ex1,SS_Log::WARN);
-            return $this->notFound($ex1->getMessage());
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);
@@ -235,12 +222,14 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     public function removeFromSchedule() {
         try{
             $summit_id = (int)$this->request->param('SUMMIT_ID');
-            $event_id = (int)$this->request->param('EventID');
-            $member = Member::currentUser();
+            $event_id  = (int)$this->request->param('EventID');
+            $member    = Member::currentUser();
+
             if(is_null($member)) return $this->permissionFailure();
 
             if(intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
+
             if(strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
@@ -257,9 +246,13 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
             $this->schedule_manager->removeEventFromSchedule(Member::currentUserID(), $event_id);
         }
-        catch(NotFoundEntityException $ex1){
+        catch(EntityValidationException $ex1){
             SS_Log::log($ex1,SS_Log::WARN);
-            return $this->notFound($ex1->getMessage());
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);
@@ -281,6 +274,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
             if(intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
+
             if(strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
@@ -292,28 +286,28 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
             if(is_null($event))
                 return $this->notFound('event not found!');
+
             else if($event->getSummit()->getIdentifier() != intval($summit_id))
                 return $this->notFound('event not found in current summit');
 
-            $data['event_id'] = $event_id;
+            $data['summit_id'] = $summit->ID;
+            $data['event_id']  = $event_id;
             $data['member_id'] = $member_id;
 
-            $feedback = $this->eventfeedback_repository->getFeedback($event_id,$member_id);
-            if ($feedback) {
-                $this->schedule_manager->updateFeedback($data,$feedback);
-                return $this->updated();
-            } else {
-                return $this->created($this->schedule_manager->addFeedback($data));
-            }
+            return $this->created($this->schedule_manager->addFeedback($data));
+
         }
-        catch (PolicyException $ex2) {
-            SS_Log::log($ex2,SS_Log::ERR);
-            return $this->validationError($ex2->getMessage());
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
         }
-        catch (EntityValidationException $ex3) {
-            SS_Log::log($ex3,SS_Log::ERR);
-            return $this->validationError($ex3->getMessages());
+        catch(NotFoundEntityException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
         }
     }
-
 }

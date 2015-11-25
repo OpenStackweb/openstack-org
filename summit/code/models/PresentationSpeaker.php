@@ -36,11 +36,6 @@ implements IPresentationSpeaker
         'SummitRegistrationPromoCode' => 'SpeakerSummitRegistrationPromoCode'
     );
 
-    private static $has_many = array
-    (
-        'Feedback' => 'PresentationSpeakerFeedback',
-    );
-
     private static $searchable_fields = array
     (
         'Member.Email',
@@ -157,13 +152,6 @@ implements IPresentationSpeaker
              $config->removeComponentsByType('GridFieldAddNewButton');
              $gridField = new GridField('Presentations', 'Presentations', $this->Presentations(), $config);
              $fields->addFieldToTab('Root.Presentations', $gridField);
-
-             //speaker feedback
-
-             $config = GridFieldConfig_RecordEditor::create();
-             $config->removeComponentsByType('GridFieldAddNewButton');
-             $gridField = new GridField('Feedback', 'Feedback', $this->Feedback(), $config);
-             $fields->addFieldToTab('Root.Feedback', $gridField);
          }
 
          return $fields;
@@ -358,19 +346,28 @@ implements IPresentationSpeaker
     }
 
     function ProfilePhoto($width=100){
-        $img = $this->Photo();
+        $img1     = $this->Photo();
+        $member   = $this->Member();
+        $img2     = !is_null($member) && $member->ID > 0 ? $member->Photo(): null;
         $twitter_name = $this->TwitterHandle;
-        if(!is_null($img)  && $img->exists() && Director::fileExists($img->Filename)){
-            $img = $img->SetWidth($width);
-            return $img->getURL();
-        } elseif (!empty($twitter_name)) {
+        if(!is_null($img1)  && $img1->exists() && Director::fileExists($img1->Filename))
+        {
+            $img1 = $img1->SetWidth($width);
+            return $img1->getURL();
+        }
+        if(!is_null($img2)  && $img2->exists() && Director::fileExists($img2->Filename))
+        {
+            $img2 = $img2->SetWidth($width);
+            return $img2->getURL();
+        }
+        elseif (!empty($twitter_name)) {
             if ($width < 100) {
                 return 'https://twitter.com/'.$twitter_name.'/profile_image?size=normal';
             } else {
                 return 'https://twitter.com/'.$twitter_name.'/profile_image?size=bigger';
             }
         } else {
-            return 'summit/images/generic-speaker-icon.png';
+            return Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';
         }
     }
 

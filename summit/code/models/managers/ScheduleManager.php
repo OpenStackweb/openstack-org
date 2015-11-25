@@ -41,11 +41,6 @@ final class ScheduleManager
     /**
      * @var IEntityRepository
      */
-    private $speakerfeedback_repository;
-
-    /**
-     * @var IEntityRepository
-     */
     private $attendee_repository;
 
     /**
@@ -59,7 +54,6 @@ final class ScheduleManager
      * @param IEntityRepository $summitpresentation_repository
      * @param IEntityRepository $eventfeedback_repository
      * @param IEventFeedbackFactory $eventfeedback_factory
-     * @param IEntityRepository $speakerfeedback_repository
      * @param IEntityRepository $attendee_repository
      * @param ITransactionManager $tx_manager
      */
@@ -68,7 +62,6 @@ final class ScheduleManager
         IEntityRepository $summitpresentation_repository,
         IEntityRepository $eventfeedback_repository,
         IEventFeedbackFactory $eventfeedback_factory,
-        IEntityRepository $speakerfeedback_repository,
         IEntityRepository $attendee_repository,
         ITransactionManager $tx_manager
     ) {
@@ -76,7 +69,6 @@ final class ScheduleManager
         $this->summitpresentation_repository = $summitpresentation_repository;
         $this->eventfeedback_repository = $eventfeedback_repository;
         $this->eventfeedback_factory = $eventfeedback_factory;
-        $this->speakerfeedback_repository = $speakerfeedback_repository;
         $this->attendee_repository = $attendee_repository;
         $this->tx_manager = $tx_manager;
     }
@@ -112,7 +104,9 @@ final class ScheduleManager
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
             }
-
+            if($attendee->isScheduled($event_id)){
+                throw new EntityValidationException(array('Event already exist on attendee schedule'));
+            }
             $attendee->addToSchedule($event);
             PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,
                 array($member_id, $event));
@@ -150,8 +144,11 @@ final class ScheduleManager
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
             }
-
+            if(!$attendee->isScheduled($event_id)){
+                throw new NotFoundEntityException('Event does not belong to attendee', sprintf('id %s', $event_id));
+            }
             $attendee->removeFromSchedule($event);
+
             PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::RemovedToSchedule,
                 array($member_id, $event));
 
@@ -206,33 +203,27 @@ final class ScheduleManager
      */
     public function addFeedback($data)
     {
-        $this_var = $this;
-        $summitpresentation_repository = $this->summitpresentation_repository;
-        $eventfeedback_repository = $this->eventfeedback_repository;
-        $speakerfeedback_repository = $this->speakerfeedback_repository;
-        $eventfeedback_factory = $this->eventfeedback_factory;
+        $eventfeedback_repository      = $this->eventfeedback_repository;
+        $eventfeedback_factory         = $this->eventfeedback_factory;
+        $attendee_repository           = $this->attendee_repository;
 
         return $this->tx_manager->transaction(function () use (
-            $this_var,
             $data,
-            $summitpresentation_repository,
+            $attendee_repository,
             $eventfeedback_repository,
-            $eventfeedback_factory,
-            $speakerfeedback_repository
+            $eventfeedback_factory
         ) {
 
-            $feedback = $eventfeedback_factory->buildEventFeedback($data);
-            $feedback_id = $eventfeedback_repository->add($feedback);
+            $member_id = intval($data['member_id']);
+            $summit_id = intval($data['summit_id']);
+            $attendee  = $attendee_repository->getByMemberAndSummit($member_id, $summit_id);
 
-            $presentation = $summitpresentation_repository->getById($data['event_id']);
-            if ($presentation) {
-                foreach ($presentation->getSpeakers()->toArray() as $speaker) {
-                    $speaker_feedback = $eventfeedback_factory->buildSpeakerFeedback($data,$speaker);
-                    $speakerfeedback_repository->add($speaker_feedback);
-                }
+            if (!$attendee) {
+                throw new NotFoundEntityException('Attendee', '');
             }
 
-            return $feedback_id;
+            $feedback  = $eventfeedback_factory->buildEventFeedback($data);
+            return $eventfeedback_repository->add($feedback);
         });
     }
 

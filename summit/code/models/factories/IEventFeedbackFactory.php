@@ -11,22 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Interface IEventFeedbackFactory
  */
-interface IEventFeedbackFactory {
-
-	/**
-	 * @param array $data
-	 * @return ISummitEventFeedback
-	 */
-	public function buildEventFeedback(array $data);
+interface IEventFeedbackFactory
+{
 
     /**
      * @param array $data
-     * @param IPresentationSpeaker $speaker
      * @return ISummitEventFeedback
      */
-    public function buildSpeakerFeedback(array $data, IPresentationSpeaker $speaker);
+    public function buildEventFeedback(array $data);
 
 } 

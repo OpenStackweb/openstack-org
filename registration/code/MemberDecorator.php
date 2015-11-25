@@ -167,9 +167,9 @@ class MemberDecorator extends DataExtension
                 return 'https://twitter.com/' . $twitter_name . '/profile_image?size=bigger';
             }
         } elseif ($generic_photo_type == 'speaker') {
-            return '/summit/images/generic-speaker-icon.png';
+            return Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';
         } else {
-            return 'themes/openstack/images/generic-profile-photo.png';
+            return Director::absoluteBaseURL().'themes/openstack/images/generic-profile-photo.png';
         }
     }
 
