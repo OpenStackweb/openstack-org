@@ -23,10 +23,16 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         }
 
         // Fields
-        $FirstNameField = new TextField('FirstName', "Speaker's First Name");
-        $LastNameField = new TextField('LastName', "Speaker's Last Name");
-        $TitleField = new TextField('Title',"Speaker's Title");
-        $BioField = new TextAreaField('Bio',"Speaker's Bio");
+        $FirstNameField = new TextField('FirstName', "First Name");
+        $LastNameField = new TextField('LastName', "Last Name");
+        $TitleField = new TextField('Title',"Title");
+        $BioField = new TextAreaField('Bio',"Bio");
+
+        // Country Field
+        $CountryCodes = CountryCodes::$iso_3166_countryCodes;
+        $CountryField = new DropdownField('Country', 'Country', $CountryCodes);
+        $CountryField->setEmptyString('-- Select One --');
+        $CountryField->setValue($country);
 
         // ID Fields
         $SpeakerIDField = new HiddenField('SpeakerID', 'SpeakerID', "");
@@ -56,18 +62,36 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         // Opt In Field
         $OptInField = new CheckboxField ('AvailableForBureau',"I'd like to be in the speaker bureau.");
 
-        $Divider = new LiteralField ('hr','<hr/>');
-
         // Funded Travel
         $FundedTravelField = new CheckboxField ('FundedTravel',"My Company would be willing to fund my travel to events.");
 
-        // Country Field
-        $CountryCodes = CountryCodes::$iso_3166_countryCodes;
-        $CountryField = new DropdownField('Country', 'Country', $CountryCodes);
-        $CountryField->setEmptyString('-- Select One --');
-        $CountryField->setValue($country);
+        // Willing to travel
+        $WillingToTravel = new CheckboxField ('WillingToTravel',"I am willing to travel to events.");
 
-        $ExpertiseField = new TextareaField('Expertise', 'Topics of interest (one per line)');
+        // Countries to travel
+        $CountriesToTravelField = new MultiDropdownField('CountriesToTravel', 'Countries willing to travel to', $CountryCodes);
+        $CountriesToTravelField->setEmptyString('-- Select One --');
+
+        // Spoken Languages
+        $LanguageField1 = new TextField('Language[1]','#1');
+        $LanguageField2 = new TextField('Language[2]','#2');
+        $LanguageField3 = new TextField('Language[3]','#3');
+        $LanguageField4 = new TextField('Language[4]','#4');
+        $LanguageField5 = new TextField('Language[5]','#5');
+
+        // Area of Expertise
+        $ExpertiseField1 = new TextField('Expertise[1]','#1');
+        $ExpertiseField2 = new TextField('Expertise[2]','#2');
+        $ExpertiseField3 = new TextField('Expertise[3]','#3');
+        $ExpertiseField4 = new TextField('Expertise[4]','#4');
+        $ExpertiseField5 = new TextField('Expertise[5]','#5');
+
+        // Links To Presentations
+        $PresentationLinkField1 = new TextField('PresentationLink[1]','#1');
+        $PresentationLinkField2 = new TextField('PresentationLink[2]','#2');
+        $PresentationLinkField3 = new TextField('PresentationLink[3]','#3');
+        $PresentationLinkField4 = new TextField('PresentationLink[4]','#4');
+        $PresentationLinkField5 = new TextField('PresentationLink[5]','#5');
 
         // Load Existing Data if present
         if($speaker) {
@@ -80,10 +104,41 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $TitleField->setValue($speaker->Title);
             $IRCHandleField->setValue($speaker->IRCHandle);
             $TwiiterNameField->setValue($speaker->TwitterName);
+            $PhotoField->setValue(null, $speaker);
             $OptInField->setValue($speaker->AvailableForBureau);
             $FundedTravelField->setValue($speaker->FundedTravel);
-            $ExpertiseField->setValue($speaker->Expertise);
-	        $PhotoField->setValue(null, $speaker);
+            $WillingToTravel->setValue($speaker->WillingToTravel);
+
+            foreach ($speaker->AreasOfExpertise() as $key => $expertise) {
+                if ($key > 4) exit;
+                ${'ExpertiseField'.($key+1)}->setValue($expertise->Expertise);
+            }
+
+            foreach ($speaker->Languages() as $key => $language) {
+                if ($key > 4) exit;
+                ${'LanguageField'.($key+1)}->setValue($language->Language);
+            }
+
+            $country_array = array();
+            foreach ($speaker->TravelPreferences() as $pref_country) {
+                $country_array[] = $pref_country->Country;
+            }
+            $CountriesToTravelField->setValue(implode(',',$country_array));
+
+            // first we pull the summit presentations we have
+            foreach ($speaker->Presentations() as $key => $presentation) {
+                if ($key > 4) exit;
+                ${'PresentationLinkField'.($key+1)}->setValue(Director::absoluteURL($presentation->Link()));
+                ${'PresentationLinkField'.($key+1)}->setDisabled(true);
+            }
+            // if are there any places left we see if he has his own links
+            if ($key < 4) {
+                foreach ($speaker->OtherPresentationLinks() as $index => $other_presentation) {
+                    $new_key = $index + $key + 2;
+                    ${'PresentationLinkField'.$new_key}->setValue($other_presentation->LinkUrl);
+                }
+            }
+
         } elseif($member) {
             $FirstNameField->setValue($member->FirstName);
             $LastNameField->setValue($member->LastName);
@@ -98,6 +153,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $FirstNameField,
             $LastNameField,
             $TitleField,
+            $CountryField,
             $BioField,
             $SpeakerIDField,
             $MemberIDField,
@@ -107,11 +163,25 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $IRCHandleField,
             $TwiiterNameField,
             $PhotoField,
-            $Divider,
             $OptInField,
             $FundedTravelField,
-            $CountryField,
-            $ExpertiseField
+            $WillingToTravel,
+            $CountriesToTravelField,
+            $LanguageField1,
+            $LanguageField2,
+            $LanguageField3,
+            $LanguageField4,
+            $LanguageField5,
+            $ExpertiseField1,
+            $ExpertiseField2,
+            $ExpertiseField3,
+            $ExpertiseField4,
+            $ExpertiseField5,
+            $PresentationLinkField1,
+            $PresentationLinkField2,
+            $PresentationLinkField3,
+            $PresentationLinkField4,
+            $PresentationLinkField5
         );
 
         $actions = new FieldList(
@@ -182,6 +252,57 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             }
 
             $speaker->AskedAboutBureau = TRUE;
+
+            // Languages
+            foreach ($speaker->Languages() as $currentlang) {
+                $currentlang->delete();
+            }
+            foreach ($data['Language'] as $lang) {
+                if (trim($lang) != '') {
+                    $spoken_lang = SpeakerLanguage::create(array(
+                        'Language' => $lang
+                    ));
+                    $speaker->Languages()->add( $spoken_lang );
+                }
+            }
+
+            // Expertise
+            foreach ($speaker->AreasOfExpertise() as $currentexp) {
+                $currentexp->delete();
+            }
+            foreach ($data['Expertise'] as $exp) {
+                if (trim($exp) != '') {
+                    $expertise = SpeakerExpertise::create(array(
+                        'Expertise' => $exp
+                    ));
+                    $speaker->AreasOfExpertise()->add( $expertise );
+                }
+            }
+
+            // Presentation Link
+            foreach ($speaker->OtherPresentationLinks() as $currentpres) {
+                $currentpres->delete();
+            }
+            foreach ($data['PresentationLink'] as $link) {
+                if (trim($link) != '') {
+                    $presentation_link = SpeakerPresentationLink::create(array(
+                        'LinkUrl' => $link
+                    ));
+                    $speaker->OtherPresentationLinks()->add( $presentation_link );
+                }
+            }
+
+            // Travel Preferences
+            foreach ($speaker->TravelPreferences() as $current_tf) {
+                $current_tf->delete();
+            }
+            foreach ($data['CountriesToTravel'] as $travel_country) {
+                $travel_pref = SpeakerTravelPreference::create(array(
+                    'Country' => $travel_country
+                ));
+                $speaker->TravelPreferences()->add( $travel_pref );
+            }
+
 
             $speaker->write();
 

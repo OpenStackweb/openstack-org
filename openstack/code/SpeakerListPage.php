@@ -34,13 +34,21 @@ class SpeakerListPage_Controller extends Page_Controller
 							
 					jQuery(function(){
 
-					  $('#SearchForm_SpeakerSearchForm_mq').autocomplete('" . $this->Link('results') . "', {
+					  $('#search_form_input').autocomplete('" . $this->Link('suggestions') . "', {
 					        minChars: 3,
 					        selectFirst: true,
 					        autoFill: true,
+					        focus: function(event, ui) {
+                                if($(ui.item).val() == 'No Matches')
+                                    $(ui.item).disable();
+                            },
+                            select: function(event, ui){
+                                if($(ui.item).val() == 'No Matches')
+                                    return false;
+                            }
 					   });
 
-						$('#SearchForm_SpeakerSearchForm_mq').focus();
+						$('#search_form_input').focus();
 
 					});						
 					
@@ -51,6 +59,7 @@ class SpeakerListPage_Controller extends Page_Controller
     static $allowed_actions = array(
         'profile',
         'results',
+        'suggestions',
         'SpeakerSearchForm'
     );
 
@@ -119,86 +128,74 @@ class SpeakerListPage_Controller extends Page_Controller
         return $this->httpError(404, 'Sorry that speaker could not be found');
     }
 
-    public function SpeakerSearchForm()
+    public function suggestions()
     {
-        $searchField = new TextField('mq', 'Search Speaker', $this->getSearchQuery());
-        $searchField->setAttribute("placeholder", "first name, last name or irc nickname");
-        $fields = new FieldList($searchField);
+        if ($query = $this->getSearchQuery('q')) {
 
-        $form = new SearchForm($this, 'SpeakerSearchForm', $fields);
+            $results = DB::query("SELECT CONCAT(FirstName,' ',LastName) AS Result FROM PresentationSpeaker WHERE FirstName LIKE '%$query% AND AvailableForBureau = 1'
+                                  UNION
+                                  SELECT CONCAT(LastName,', ',FirstName) AS Result FROM PresentationSpeaker WHERE LastName LIKE '%$query% AND AvailableForBureau = 1'
+                                  UNION
+                                  SELECT Expertise AS Result FROM SpeakerExpertise WHERE Expertise LIKE '%$query%'
+                                  UNION
+                                  SELECT Name AS Result FROM Countries WHERE Name LIKE '%$query%'");
 
-        $form->setFormAction($this->Link('results'));
+            $Suggestions = '';
 
-        return $form;
+            if (count($results) > 0) {
+                foreach ($results as $Speaker) {
+                    $Suggestions = $Suggestions . $Speaker['Result']. '|' . '1' . "\n";
+                }
+
+                return $Suggestions;
+            }
+        }
+
+        return "No Matches|1";
     }
 
     public function results()
     {
         if ($query = $this->getSearchQuery()) {
 
-            // Search for only foundation members (Group 5) against the query.
+            $Results = PresentationSpeaker::get()
+                ->leftJoin("SpeakerExpertise","SpeakerExpertise.SpeakerID = PresentationSpeaker.ID")
+                ->leftJoin("Countries","Countries.Code = PresentationSpeaker.Country")
+                ->where("(PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
+                          OR CONCAT_WS(' ',FirstName,LastName) LIKE '%{$query}%' OR Countries.Name LIKE '%{$query}%'
+                          OR SpeakerExpertise.Expertise LIKE '%{$query}%') AND PresentationSpeaker.AvailableForBureau = 1");
 
-            $filter = "FirstName LIKE '%{$query}%'
-					OR LastName LIKE '%{$query}%'
-					OR IRCHandle LIKE '%{$query}%'";
-
-            $Results = PresentationSpeaker::get()->where($filter);
             // No Member was found
             if (!isset($Results) || $Results->count() == 0) {
                 return $this->customise($Results);
             }
 
-            // For AutoComplete
-            if (Director::is_ajax()) {
-
-                $Speakers = $Results->map('ID', 'Name');
-                $Suggestions = '';
-
-                foreach ($Speakers as $Speaker) {
-                    $Suggestions = $Suggestions . $Speaker . '|' . '1' . "\n";
-                }
-
-                return $Suggestions;
-            } // For Results Template
-            else {
-                $filter = "FirstName LIKE '%{$query}%'
-					OR LastName LIKE '%{$query}%'
-					OR IRCHandle LIKE '%{$query}%'";
-
-                $OneSpeaker = PresentationSpeaker::get()->where($filter);
-
-                // see if one member exactly matches the search term
-
-                if ($OneSpeaker) {
-                    $Results = $OneSpeaker;
-                }
-
-                // If there is only one person with this name, go straight to the resulting profile page
-                if ($OneSpeaker && $OneSpeaker->Count() == 1) {
-                    $this->redirect($this->Link() . 'profile/' . $OneSpeaker->First()->ID);
-                }
-
-                $Output = new ArrayData(array(
-                    'Title' => 'Results',
-                    'Results' => $Results
-                ));
-                if ($Results->count() == 0) {
-                    $message = $this->getViewer('results')->process($this->customise($Output));
-                    $this->response->setBody($message);
-                    throw new SS_HTTPResponse_Exception($this->response, 404);
-                }
-
-                return $this->customise($Output);
+            // If there is only one person with this name, go straight to the resulting profile page
+            if ($Results && $Results->Count() == 1) {
+                $this->redirect($this->Link() . 'profile/' . $Results->First()->ID);
             }
+
+            $Output = new ArrayData(array(
+                'Title' => 'Results',
+                'Results' => $Results
+            ));
+            if ($Results->count() == 0) {
+                $message = $this->getViewer('results')->process($this->customise($Output));
+                $this->response->setBody($message);
+                throw new SS_HTTPResponse_Exception($this->response, 404);
+            }
+
+            return $this->customise($Output);
         }
 
         $this->redirect($this->Link());
     }
 
-    function getSearchQuery()
+    function getSearchQuery($search_var='')
     {
+        $search_var = ($search_var) ? $search_var : 'search_query';
         if ($this->request) {
-            $query = $this->request->getVar("mq");
+            $query = $this->request->getVar($search_var);
             if (!empty($query)) {
                 return Convert::raw2sql($query);
             }

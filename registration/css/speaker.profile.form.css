@@ -1,0 +1,29 @@
+.horizontal-fields > .field {
+    margin-right: 30px;
+}
+
+.clear {
+    clear:both;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.checkbox {
+    top: -3px;
+}
+
+.expertise {
+    margin: 10px 0;
+}
+
+.expertise > span {
+    float:left;
+    padding-top: 6px;
+    margin-right: 10px;
+}
+
+.expertise > input {
+    width: 90%;
+}

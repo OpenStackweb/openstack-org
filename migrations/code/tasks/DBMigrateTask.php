@@ -22,6 +22,7 @@ final class DBMigrateTask extends MigrationTask
     (
         'SchedRefactoringMigration',
         'SchedRefactoringMigration2',
+        'CreateTableCountries',
     );
 
     function up()

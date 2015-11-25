@@ -16,7 +16,7 @@ implements IPresentationSpeaker
         'TwitterHandle' => 'Varchar',
         'AvailableForBureau' => 'Boolean',
         'FundedTravel' => 'Boolean',
-        'Expertise' => 'Text',
+        'WillingToTravel' => 'Boolean',
         'Country' => 'Varchar(2)',
         'BeenEmailed' => 'Boolean',
         'AnnouncementEmailTypeSent' => "Enum('ACCEPTED,REJECTED,ALTERNATE,ACCEPTED_ALTERNATE,ACCEPTED_REJECTED,ALTERNATE_REJECTED,NONE','NONE')",
@@ -36,6 +36,16 @@ implements IPresentationSpeaker
         'SummitRegistrationPromoCode' => 'SpeakerSummitRegistrationPromoCode'
     );
 
+    private static $has_many = array
+    (
+        'AreasOfExpertise'   => 'SpeakerExpertise',
+        'OtherPresentationLinks' => 'SpeakerPresentationLink',
+        'TravelPreferences'  => 'SpeakerTravelPreference',
+        'Languages'          => 'SpeakerLanguage'
+
+    );
+
+    
     private static $searchable_fields = array
     (
         'Member.Email',
