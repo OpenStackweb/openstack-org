@@ -353,12 +353,12 @@ implements IPresentationSpeaker
         if(!is_null($img1)  && $img1->exists() && Director::fileExists($img1->Filename))
         {
             $img1 = $img1->SetWidth($width);
-            return $img1->getURL();
+            return $img1->getAbsoluteURL();
         }
         if(!is_null($img2)  && $img2->exists() && Director::fileExists($img2->Filename))
         {
             $img2 = $img2->SetWidth($width);
-            return $img2->getURL();
+            return $img2->getAbsoluteURL();
         }
         elseif (!empty($twitter_name)) {
             if ($width < 100) {

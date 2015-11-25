@@ -158,8 +158,7 @@ class MemberDecorator extends DataExtension
         $twitter_name = $this->owner->TwitterName;
         if (!is_null($img) && $img->exists() && Director::fileExists($img->Filename)) {
             $img = $img->SetWidth($width);
-
-            return $img->getURL();
+            return $img->getAbsoluteURL();
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {
                 return 'https://twitter.com/' . $twitter_name . '/profile_image?size=normal';
