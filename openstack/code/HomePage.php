@@ -253,18 +253,31 @@ class HomePage_Controller extends Page_Controller
         $return_array = new ArrayList();
 
         $group_array = $rss_news_manager->getNewsItemsFromDatabaseGroupedByCategory();
-
-        for ($i = 0; $i < 7 && $i < count($group_array[RssNews::SuperUser]); $i++ ) {
-            $item = $group_array[RssNews::SuperUser][$i];
-            $return_array->push(array('type' => $item->Category, 'link' => $item->Link, 'title' => $item->Headline,
-                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
+        if(isset($group_array[RssNews::SuperUser])) {
+            for ($i = 0; $i < 7 && $i < count($group_array[RssNews::SuperUser]); $i++) {
+                $item = $group_array[RssNews::SuperUser][$i];
+                $return_array->push(array(
+                    'type' => $item->Category,
+                    'link' => $item->Link,
+                    'title' => $item->Headline,
+                    'pubdate' => date('D, M jS Y', strtotime($item->Date)),
+                    'rawpubdate' => $item->Date
+                ));
+            }
         }
 
-        for ($i = 0; $i < 3 && $i < count($group_array[RssNews::Planet]); $i++ ) {
-            $item = $group_array[RssNews::Planet][$i];
+        if(isset($group_array[RssNews::Planet])) {
+            for ($i = 0; $i < 3 && $i < count($group_array[RssNews::Planet]); $i++) {
+                $item = $group_array[RssNews::Planet][$i];
 
-            $return_array->push(array('type' => $item->Category, 'link' => $item->Link, 'title' => $item->Headline,
-                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
+                $return_array->push(array(
+                    'type' => $item->Category,
+                    'link' => $item->Link,
+                    'title' => $item->Headline,
+                    'pubdate' => date('D, M jS Y', strtotime($item->Date)),
+                    'rawpubdate' => $item->Date
+                ));
+            }
         }
 
         /*for ($i = 0; $i < 3 && $i < count($group_array[RssNews::Blog]); $i++ ) {
