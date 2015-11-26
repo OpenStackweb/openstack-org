@@ -134,17 +134,18 @@ exec { 'install-bower-components':
 	require   => Exec['install-bower'],
 }
 
+#create and import db
 mysql::db { $os_db :
-  user     => $os_db_user,
-  password => $os_db_password,
-  host     => 'localhost',
-  grant    => ['SELECT', 'UPDATE', 'INSERT', 'DELETE'],
-  sql      => '/dump.sql',
-  import_timeout => 900,
-  require  => [
-	Service['mysql'],
-	Exec['rename-db'],
-  ],
+	  user     => $os_db_user,
+	  password => $os_db_password,
+	  host     => 'localhost',
+	  grant    => ['SELECT', 'UPDATE', 'INSERT', 'DELETE'],
+	  sql      => '/dump.sql',
+	  import_timeout => 900,
+	  require  => [
+		Service['mysql'],
+		Exec['rename-db'],
+	  ],
 }
 
 file { '/var/www/local.openstack.org/_ss_environment.php':
@@ -165,21 +166,18 @@ class { 'nginx':
 	],
 }
 
-exec {
-   'link_ssl_certs':
-	cwd       => '/',
-	path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-	logoutput => on_failure,
-	command   => 'ln -s /etc/ssl_certs /etc/nginx/ssl',
-	require   => Class['nginx'],
+file { '/etc/nginx/ssl':
+        ensure => 'link',
+        target => '/etc/ssl_certs',
+        require   => Class['nginx'],
 }
 
 file { '/etc/nginx/silverstripe.conf':
-    ensure  => present,
-    content => template('site/silverstripe.conf.erb'),
-    owner   => 'vagrant',
-    group   => 'www-data',
-    mode    => '0640',
+	ensure  => present,
+	content => template('site/silverstripe.conf.erb'),
+	owner   => 'vagrant',
+	group   => 'www-data',
+	mode    => '0640',
 	require => Class['nginx'],
 }
 
@@ -204,11 +202,8 @@ file { '/etc/nginx/sites-available/local.openstack.org':
 	]
 }
 
-exec {
-   'enable_site':
-	cwd       => '/',
-	path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-	logoutput => on_failure,
-	command   => 'ln -s /etc/nginx/sites-available/local.openstack.org /etc/nginx/sites-enabled/local.openstack.org',
+file { '/etc/nginx/sites-enabled/local.openstack.org':
+	ensure => 'link',
+	target => '/etc/nginx/sites-available/local.openstack.org',
 	require   => File['/etc/nginx/sites-available/local.openstack.org'],
 }
