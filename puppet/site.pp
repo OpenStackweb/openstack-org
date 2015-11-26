@@ -63,7 +63,7 @@ exec { 'unzip-db':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
-  command   => 'unzip dbdump-current.zip',
+  command   => 'unzip -o dbdump-current.zip',
   require   => Exec['download-db'],
 }
 
@@ -206,4 +206,38 @@ file { '/etc/nginx/sites-enabled/local.openstack.org':
   ensure    => 'link',
   target    => '/etc/nginx/sites-available/local.openstack.org',
   require   => File['/etc/nginx/sites-available/local.openstack.org'],
+}
+
+file { '/var/www/local.openstack.org/themes/openstack/images':
+  ensure    => 'link',
+  target    => '/var/www/local.openstack.org/private-assets/themes/openstack/images',
+  require   => File['/etc/nginx/sites-available/local.openstack.org'],
+}
+
+cron { 'RssEventsDigestTask':
+    ensure  => 'present',
+    command => 'php /var/www/www.openstack.org/framework/cli-script.php /RssEventsDigestTask',
+    user => 'root', 
+    minute => '*/5', 
+}
+
+cron { 'RssNewsDigestTask':
+    ensure  => 'present',
+    command => 'php /var/www/www.openstack.org/framework/cli-script.php /RssNewsDigestTask',
+    user => 'root', 
+    minute => '*/5', 
+}
+
+cron { 'NewsArticlesUpdateTask':
+    ensure  => 'present',
+    command => 'php /var/www/www.openstack.org/framework/cli-script.php /NewsArticlesUpdateTask',
+    user => 'root', 
+    minute => '*/5', 
+}
+
+cron { 'UpdateFeedTask':
+    ensure  => 'present',
+    command => 'php /var/www/www.openstack.org/framework/cli-script.php /UpdateFeedTask',
+    user => 'root', 
+    minute => '*/5', 
 }

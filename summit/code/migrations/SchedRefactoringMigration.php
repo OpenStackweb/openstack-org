@@ -21,11 +21,22 @@ final class SchedRefactoringMigration extends AbstractDBMigrationTask
     function doUp()
     {
 
+
+	global $database;
+
+        $SQL = <<<SQL
+        SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA ='{$database}' AND TABLE_NAME= 'Presentation' AND COLUMN_NAME = 'SummitID';
+SQL;
+
+        $exists_column = intval(DB::query($SQL)->value()) > 0;
+
+        if($exists_column) {
             $SQL = <<<SQL
- update Presentation set SummitID = 5;
+ UPDATE Presentation SET SummitID = 5;
 SQL;
 
             DB::query($SQL);
+        
 
             DB::query('DELETE FROM SummitEvent;');
 
@@ -137,7 +148,7 @@ SELECT ID from SummitLocation where Type ='Airport';
 SQL;
 
             DB::query($SQL);
-
+}
     }
 
     function doDown()
