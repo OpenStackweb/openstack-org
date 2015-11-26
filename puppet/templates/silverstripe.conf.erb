@@ -1,0 +1,63 @@
+fastcgi_buffer_size 32k;
+fastcgi_busy_buffers_size 64k;
+fastcgi_buffers 4 32k;
+
+location / {
+    try_files $uri /framework/main.php?url=$uri&$query_string;
+}
+
+
+location ^~ /assets/ {
+    try_files $uri =404;
+}
+
+location ~ /(mysite|framework|cms)/.*\.(php|php3|php4|php5|phtml|inc)$ {
+    deny all;
+}
+
+location ~ /\.. {
+    deny all;
+}
+
+location ~ \.ss$ {
+    satisfy any;
+    allow 127.0.0.1;
+    deny all;
+}
+
+location ~ web\.config$ {
+    deny all;
+}
+location ~ \.ya?ml$ {
+    deny all;
+}
+location ^~ /vendor/ {
+    deny all;
+}
+
+location ~* /silverstripe-cache/ {
+    deny all;
+}
+
+location ~* composer\.(json|lock)$ {
+    deny all;
+}
+
+location ~* /(cms|framework)/silverstripe_version$ {
+    deny all;
+}
+
+location ~* \.(png|jpg|jpeg|gif|ico)$ {
+        expires 1y;
+        log_not_found off;
+}
+
+location ~* \.(js)$ {
+        expires 24h;
+        log_not_found off;
+}
+
+location ~* \.(css)$ {
+        expires 24h;
+        log_not_found off;
+}

@@ -1,0 +1,38 @@
+server {
+    
+    listen   80; ## listen for ipv4
+    listen   443 ssl;
+
+    keepalive_timeout   70;
+
+    ssl_certificate /etc/nginx/ssl/server.crt;
+    ssl_certificate_key /etc/nginx/ssl/server.key;
+	
+    server_name local.openstack.org;
+
+    root /var/www/local.openstack.org;
+
+    # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
+    # Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
+
+    location ~ /\. {
+      deny all;
+    }
+ 
+    #logs 	    
+    error_log /var/log/nginx/local.openstack.org.error.log;
+    access_log /var/log/nginx/local.openstack.org.access.log;
+
+    #php-fcgi
+    include /etc/nginx/php5-fpm.conf;
+    include /etc/nginx/silverstripe.conf;
+
+    error_page 404 =200 /404_page/index.html;
+
+    add_header X-Frame-Options SAMEORIGIN;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";    
+}
+
+#PHP config
+fastcgi_param PHP_VALUE "error_log=\"/var/log/php/error.log\"";

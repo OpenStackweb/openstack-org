@@ -1,0 +1,11 @@
+---
+:backends: yaml
+:yaml:
+  # on *nix:
+  :datadir: "/etc/puppet/data"
+:hierarchy:
+  - "nodes/%{::trusted.certname}"
+  - "common"
+:logger: console
+:merge_behavior: native
+:deep_merge_options: {}

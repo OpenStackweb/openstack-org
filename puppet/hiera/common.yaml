@@ -1,0 +1,4 @@
+---
+os_db_user: 'os_user'
+os_db_password: '1qaz2wsx'
+mysql_root_password: '1qaz2wsx'
