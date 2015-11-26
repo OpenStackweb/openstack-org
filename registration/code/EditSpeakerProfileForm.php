@@ -126,15 +126,17 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $CountriesToTravelField->setValue(implode(',',$country_array));
 
             // first we pull the summit presentations we have
+            $presentation_count = 0;
             foreach ($speaker->Presentations() as $key => $presentation) {
                 if ($key > 4) exit;
                 ${'PresentationLinkField'.($key+1)}->setValue(Director::absoluteURL($presentation->Link()));
                 ${'PresentationLinkField'.($key+1)}->setDisabled(true);
+                $presentation_count++;
             }
             // if are there any places left we see if he has his own links
-            if ($key < 4) {
+            if ($presentation_count < 5) {
                 foreach ($speaker->OtherPresentationLinks() as $index => $other_presentation) {
-                    $new_key = $index + $key + 2;
+                    $new_key = $index + $presentation_count + 1;
                     ${'PresentationLinkField'.$new_key}->setValue($other_presentation->LinkUrl);
                 }
             }
