@@ -161,9 +161,9 @@ class MemberDecorator extends DataExtension
             return $img->getAbsoluteURL();
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {
-                return 'https://twitter.com/' . $twitter_name . '/profile_image?size=normal';
+                return 'https://twitter.com/' . trim($twitter_name,'@') . '/profile_image?size=normal';
             } else {
-                return 'https://twitter.com/' . $twitter_name . '/profile_image?size=bigger';
+                return 'https://twitter.com/' . trim($twitter_name,'@') . '/profile_image?size=bigger';
             }
         } elseif ($generic_photo_type == 'speaker') {
             return Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';
