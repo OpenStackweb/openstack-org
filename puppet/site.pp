@@ -139,7 +139,7 @@ mysql::db { $os_db :
   user           => $os_db_user,
   password       => $os_db_password,
   host           => 'localhost',
-  grant          => ['SELECT', 'UPDATE', 'INSERT', 'DELETE'],
+  grant          => ['ALL'],
   sql            => '/dump.sql',
   import_timeout => 900,
   require        => [
