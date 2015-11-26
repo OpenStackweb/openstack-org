@@ -45,7 +45,7 @@ implements IPresentationSpeaker
 
     );
 
-    
+
     private static $searchable_fields = array
     (
         'Member.Email',

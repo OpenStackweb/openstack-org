@@ -203,4 +203,23 @@ class SpeakerListPage_Controller extends Page_Controller
             return false;
         }
     }
+
+    public function ContactForm() {
+        $data = Session::get("FormInfo.Form_SpeakerContactForm.data");
+
+        Requirements::css('speaker_bureau/css/speaker.contact.form.css');
+        Requirements::javascript("speaker_bureau/js/speaker.contact.form.js");
+
+        $form = new SpeakerContactForm($this, 'SpeakerContactForm');
+        // we should also load the data stored in the session. if failed
+        if(is_array($data)) {
+            $form->loadDataFrom($data);
+        }
+
+        return $form;
+    }
+
+    public function sendSpeakerEmail() {
+
+    }
 }
