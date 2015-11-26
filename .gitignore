@@ -75,3 +75,5 @@ gridfieldextensions/*
 gridfieldajaxrefresh/*
 gridfieldajaxrefresh
 *bundle.js
+.vagrant/
+puppet/certs/ssl_certs

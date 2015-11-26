@@ -31,28 +31,28 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-	config.vm.synced_folder("puppet/hiera", "/etc/puppet/data")
-	config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")
-	config.vm.synced_folder("puppet", "/etc/puppet/modules/site")
-	config.vm.synced_folder ".", "/var/www/local.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
+    config.vm.synced_folder("puppet/hiera", "/etc/puppet/data")
+    config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")
+    config.vm.synced_folder("puppet", "/etc/puppet/modules/site")
+    config.vm.synced_folder ".", "/var/www/local.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "4096"
-	 vb.name = "www-openstack-org-dev"
-	 vb.customize ["sharedfolder", "add", :id, "--name", "www", "--hostpath", (("//?/" + File.dirname(__FILE__) + "/www").gsub("/","\\"))]
+     vb.name = "www-openstack-org-dev"
+     vb.customize ["sharedfolder", "add", :id, "--name", "www", "--hostpath", (("//?/" + File.dirname(__FILE__) + "/www").gsub("/","\\"))]
   end
   
   config.vm.provision :shell, :path => "scripts/bootstrap.sh"
 
   config.vm.provision :puppet do |puppet|
-		puppet.manifests_path = "puppet"
-		puppet.manifest_file = "site.pp"
-		puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
-		puppet.working_directory = "/etc/puppet/data"
-		# puppet.options = "--verbose --debug"
+        puppet.manifests_path = "puppet"
+        puppet.manifest_file = "site.pp"
+        puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
+        puppet.working_directory = "/etc/puppet/data"
+        # puppet.options = "--verbose --debug"
   end
   
   config.vm.provision :shell, :path => "scripts/postdeployment.sh"
