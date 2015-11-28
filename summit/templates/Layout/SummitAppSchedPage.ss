@@ -1,6 +1,5 @@
 <div class="container-fluid">
-    <h1 class="schedule_title">Schedule</h1>
-    <hr>
+
     <script type="application/javascript">
         var summit =
         {
@@ -131,6 +130,11 @@
             );
         <% end_loop %>
     </script>
+    <div class="row">
+        <div class="col-xs-12 col-main-title">
+            <h1>Schedule</h1>
+        </div>
+    </div>
     <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october" global_search_action="{$Top.Link(global-search)}"></schedule-grid>
 </div>
 <div id="fb-root"></div>

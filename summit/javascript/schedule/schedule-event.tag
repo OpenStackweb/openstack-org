@@ -5,13 +5,14 @@
                 <div class="col-md-1 col-xs-1 event-type" style="background-color: { eventColor(summit_types_id) }">&nbsp;</div>
                 <div class="col-md-11 col-xs-11 event-content">
                     <div class="row row_location">
-                        <div class="col-md-3 col-time">
+                        <div class="col-xs-12 col-md-3 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>&nbsp;<span>{ start_time }</span>&nbsp;/&nbsp;<span>{ end_time }</span>
                         </div>
-                        <div class="col-md-8 col-location"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{ locationName(location_id) }</span></div>
-                        <div class="col-md-1 my-schedule-container" if={ parent.summit.current_user !== null } >
+                        <div class="col-xs-12 col-md-7 col-location"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{ locationName(location_id) }</span></div>
+                        <div class="col-xs-12 col-md-2 my-schedule-container" if={ parent.summit.current_user !== null } >
                             <i if={ !own } class="fa fa-plus-circle icon-foreign-event icon-event-action" title="add to my schedule" onclick={ addToMySchedule } ></i>
                             <i if={ own } class="fa fa-check-circle icon-own-event icon-event-action" title="remove from my schedule" onclick={ removeFromMySchedule } ></i>
+                            <span>My&nbsp;calendar</span>
                         </div>
                     </div>
                     <div class="row">
@@ -20,11 +21,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12"><span if={ track_id} title="Track Name" class="label label-success tag">{ trackName() }<span></div>
+                        <div class="col-md-12 col-track"><span if={ track_id} title="Track Name" class="track">{ trackName() }<span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            <span each={ tag_id in tags_id } title="Tag" class="label label-default tag">{ summit.tags[tag_id].name }</span>
+                            <div class="row" if={ tags_id.length > 0 }>
+                                <div class="col-xs-12 col-md-2 col-tags-title">
+                                    <i class="fa fa-tags"></i>
+                                    <span>Tags:</span>
+                                </div>
+                                <div class="col-xs-12 col-md-10 col-tags-content">
+                                    <span each={ tag_id, i in tags_id } title="Tag" class="tag">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }&nbsp;</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3 event-type-col">{ summit.event_types[type_id].type }</div>
                     </div>
@@ -48,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="{ parent.base_url+'event/'+ this.id } " class="btn btn-primary btn-md active btn-warning" role="button">GO TO EVENT</a>
+                            <a href="{ parent.base_url+'event/'+ this.id } " class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">GO TO EVENT</a>
                         </div>
                     </div>
                 </div>
@@ -99,7 +108,7 @@
         if(summit_types_id.length > 1){
             return '#757575';
         }
-        return self.summit_types[summit_types_id[0]].color;
+        return self.summit.summit_types[summit_types_id[0]].color;
     }
 
     trackName(){
