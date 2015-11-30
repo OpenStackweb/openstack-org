@@ -51,11 +51,10 @@
                             <div class="row event-row">
                                 <div class="col-md-11 col-xs-11 event-content">
                                     <div class="row row_location">
-                                        <div class="col-xs-12 col-md-3 col-time">
-
+                                        <div class="col-xs-12 col-md-6 col-time">
                                             <i class="fa fa-clock-o icon-clock"></i>&nbsp;<span>{$DateNice}</span>
                                         </div>
-                                        <div class="col-xs-12 col-md-7 col-location"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{$LocationNameNice}</span></div>
+                                        <div class="col-xs-12 col-md-6 col-location"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{$LocationNameNice}</span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 event-title"><a href="{$Top.Link(event)}/{$ID}">$Title.RAW</a></div>
@@ -67,11 +66,11 @@
                                         <div class="col-md-9">
                                             <div class="row tags-row">
                                                 <% if Tags %>
-                                                <div class="col-xs-12 col-md-2 col-tags-title">
+                                                <div class="col-xs-12 col-md-3 col-tags-title">
                                                     <i class="fa fa-tags"></i>
                                                     <span>Tags:</span>
                                                 </div>
-                                                <div class="col-xs-12 col-md-10 col-tags-content">
+                                                <div class="col-xs-12 col-md-9 col-tags-content">
                                                     <% loop Tags %>
                                                         <span title="Tag" class="tag">{$Tag}<% if not $Last %>,<% end_if %>&nbsp;</span>
                                                     <% end_loop %>
@@ -85,11 +84,11 @@
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <div class="row tags-row">
-                                                    <div class="col-xs-12 col-md-2 col-tags-title">
+                                                    <div class="col-xs-12 col-md-3 col-tags-title">
                                                         <i class="fa fa-users"></i>
                                                         <span>Speakers:</span>
                                                     </div>
-                                                    <div class="col-xs-12 col-md-10 col-tags-content">
+                                                    <div class="col-xs-12 col-md-9 col-tags-content">
                                                         <% loop Speakers %>
                                                             <span title="Speaker" class="tag">{$Name}<% if not $Last %>,<% end_if %>&nbsp;</span>
                                                         <% end_loop %>
