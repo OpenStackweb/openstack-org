@@ -132,10 +132,17 @@
     </script>
     <div class="row">
         <div class="col-xs-12 col-main-title">
-            <h1>Schedule</h1>
+            <div class="row">
+                <div class="col-xs-12"><h1>Schedule</h1></div>
+            </div>
+           <div class="row">
+               <div class="col-xs-12">
+                   <schedule-global-filter global_search_action="{$Top.Link(global-search)}"></schedule-global-filter>
+               </div>
+           </div>
         </div>
     </div>
-    <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october" global_search_action="{$Top.Link(global-search)}"></schedule-grid>
+    <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october"></schedule-grid>
 </div>
 <div id="fb-root"></div>
 <script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>

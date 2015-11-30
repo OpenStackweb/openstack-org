@@ -35,6 +35,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         Requirements::css("summit/css/schedule-grid.css");
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
    }
 
     public function ViewEvent() {
@@ -127,7 +129,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         Description LIKE '%{$term}%'
         OR
         ShortDescription LIKE '%{$term}%'
-    );
+    ) ORDER BY E.StartDate ASC, E.EndDate ASC;
 SQL;
 
 $sql_speakers = <<<SQL
@@ -144,7 +146,6 @@ $sql_speakers = <<<SQL
 SQL;
 
         $speakers  = array();
-        $attendees = SummitAttendee::get()->distinct(true)->innerJoin('Member', ' Member.ID = SummitAttendee.MemberID')->where("SummitID = {$summit_id} AND ( Member.FirstName LIKE '%{$term}%' OR  Member.Surname LIKE '%{$term}%' OR  Member.Bio LIKE '%{$term}%' ) ");
         $events    = array();
 
         foreach(DB::query($sql_speakers) as $row)
@@ -170,7 +171,6 @@ SQL;
             array
             (
                 'SpeakerResults'   => new ArrayList($speakers),
-                'AttendeeResults'  => $attendees,
                 'EventResults'     => new ArrayList($events),
                 'SearchTerm'       => $term,
             )

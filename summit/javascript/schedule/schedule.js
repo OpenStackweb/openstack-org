@@ -10,4 +10,5 @@ require('./schedule-event.tag');
 require('./schedule-grid-events.tag');
 require('./schedule-grid.tag');
 
+riot.mount('schedule-global-filter');
 riot.mount('schedule-grid', { schedule_api: schedule_api, schedule_filters: schedule_filters });

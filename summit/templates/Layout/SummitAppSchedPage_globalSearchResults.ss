@@ -1,65 +1,105 @@
 <div class="container-fluid">
-    <h1 class="schedule_title">Schedule</h1>
-    <hr>
     <div class="row">
-        <div class="col-xs-12">
-            <div class="row global-search-container">
-                <form class="form-inline all-events-search-form" method="get" action="$Top.Link(global-search)">
-                    <div class="col-lg-12">
-                        <div class="input-group" style="width: 100%;">
-                            <input type="text" id="global-search-term" name="global-search-term" class="form-control input-global-search" placeholder="Search for..." value="{$SearchTerm}">
-                            <span class="input-group-btn" style="width: 5%;">
-                                <button class="btn btn-default btn-global-search" type="submit">Go!</button>
-                                <button class="btn btn-default btn-global-search-clear" type="button">Clear</button>
-                            </span>
-                        </div>
-                    </div>
-                </form>
+        <div class="col-xs-12 col-main-title">
+            <div class="row">
+                <div class="col-xs-12"><h1>Schedule</h1></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <schedule-global-filter global_search_action="{$Top.Link(global-search)}" value="{$SearchTerm}" clear_action="{$Top.Link}"></schedule-global-filter>
+                </div>
             </div>
         </div>
     </div>
-    <script type="application/javascript">
-        $('.btn-global-search-clear').click(function(){
-            window.location = '{$Top.Link}';
-        });
-    </script>
     <h2>Search Results</h2>
     <% if SpeakerResults && SpeakerResults.Count %>
     <div class="row">
         <div class="col-xs-12">
            <div class="search-header">Speakers Matches</div>
-            <ul>
+            <ul class="list-unstyled people-results">
                 <% loop SpeakerResults %>
                     <li>
-                        <a href="{$Top.Link(speaker)}/{$ID}">$Name</a>
+                        <div class="row speaker-row">
+                            <div class="col-md-1">
+                                <a href="{$Top.Link(speaker)}/{$ID}">
+                                    <img src="{$ProfilePhoto}" class="img-circle" alt="{$Name}">
+                                </a>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="row speaker-name-row">
+                                    <div class="col-md-12">
+                                        <a href="{$Top.Link(speaker)}/{$ID}">$Name</a>
+                                    </div>
+                                </div>
+                                <div class="row speaker-position-row"><div class="col-md-12">{$CurrentPosition}</div></div>
+                            </div>
+                        </div>
                     </li>
                 <% end_loop %>
             </ul>
         </div>
     </div>
     <% end_if %>
-    <% if AttendeeResults  && AttendeeResults.Count %>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="search-header">Attendees Matches</div>
-                <ul>
-                    <% loop AttendeeResults %>
-                        <li>
-                            <a href="#">$Member.FullName</a>
-                        </li>
-                    <% end_loop %>
-                </ul>
-            </div>
-        </div>
-    <% end_if %>
    <% if EventResults && EventResults.Count %>
         <div class="row">
             <div class="col-xs-12">
                 <div class="search-header">Schedule Matches</div>
-                <ul>
+                <ul class="list-unstyled event-results">
                     <% loop EventResults %>
                         <li>
-                            <a href="{$Top.Link(event)}/{$ID}">$Title</a>
+
+                            <div class="row event-row">
+                                <div class="col-md-11 col-xs-11 event-content">
+                                    <div class="row row_location">
+                                        <div class="col-xs-12 col-md-3 col-time">
+
+                                            <i class="fa fa-clock-o icon-clock"></i>&nbsp;<span>{$DateNice}</span>
+                                        </div>
+                                        <div class="col-xs-12 col-md-7 col-location"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{$LocationNameNice}</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 event-title"><a href="{$Top.Link(event)}/{$ID}">$Title.RAW</a></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-track"><span title="Track Name" class="track"></span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row tags-row">
+                                                <% if Tags %>
+                                                <div class="col-xs-12 col-md-2 col-tags-title">
+                                                    <i class="fa fa-tags"></i>
+                                                    <span>Tags:</span>
+                                                </div>
+                                                <div class="col-xs-12 col-md-10 col-tags-content">
+                                                    <% loop Tags %>
+                                                        <span title="Tag" class="tag">{$Tag}<% if not $Last %>,<% end_if %>&nbsp;</span>
+                                                    <% end_loop %>
+                                                </div>
+                                                <% end_if %>
+                                            </div>
+                                           </div>
+                                        <div class="col-md-3 event-type-col">$TypeName</div>
+                                    </div>
+                                    <% if Speakers %>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="row tags-row">
+                                                    <div class="col-xs-12 col-md-2 col-tags-title">
+                                                        <i class="fa fa-users"></i>
+                                                        <span>Speakers:</span>
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-10 col-tags-content">
+                                                        <% loop Speakers %>
+                                                            <span title="Speaker" class="tag">{$Name}<% if not $Last %>,<% end_if %>&nbsp;</span>
+                                                        <% end_loop %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% end_if %>
+                                </div>
+                            </div>
                         </li>
                     <% end_loop %>
                 </ul>
@@ -67,3 +107,4 @@
         </div>
     <% end_if %>
 </div>
+<script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>

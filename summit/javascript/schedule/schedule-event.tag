@@ -21,11 +21,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-track"><span if={ track_id} title="Track Name" class="track">{ trackName() }<span></div>
+                        <div class="col-md-12 col-track"><span if={ track_id} title="Track Name" class="track">{ trackName() }</span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            <div class="row" if={ tags_id.length > 0 }>
+                            <div class="row tags-row" if={ tags_id.length > 0 }>
                                 <div class="col-xs-12 col-md-2 col-tags-title">
                                     <i class="fa fa-tags"></i>
                                     <span>Tags:</span>

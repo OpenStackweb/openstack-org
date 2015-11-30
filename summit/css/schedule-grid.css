@@ -24,6 +24,8 @@ body,html{height:100%}
     color: #FFFFFF;
     font-family: Montserrat, Sans-serif;
     font-size: 42px;
+    margin:0px;
+    padding-top:40px;
 }
 
 .tag {
@@ -49,6 +51,7 @@ body,html{height:100%}
 {
     font-family: 'Montserrat';
     border: 1px solid #C1C1C1;
+    color: #4a4a4a !important;
 }
 
 .event-content
@@ -147,6 +150,11 @@ body,html{height:100%}
 {
     background-color: #224066 !important;
     border-color: #224066 !important;
+}
+
+.tags-row
+{
+    padding-botom: 20px !important;
 }
 
 /* nav bar */
@@ -316,7 +324,7 @@ a.navbar-brand {
     vertical-align: middle;
     text-align: left;
     padding-top: 0.65em;
-
+    color: #1a3b5e;
 }
 
 .all-events-filter-row
@@ -334,7 +342,7 @@ a.navbar-brand {
     padding-right: 10px; }
 .all-events-filter-link i {
     font-size: 1.2em;
-    color: #607A8E;
+    color: #1a3b5e;
     background: white;
     border: 1px solid #D3DEE9;
     padding: 10px 15px;
@@ -405,7 +413,8 @@ form.all-events-search-form .all-events-search-wrapper i {
 
 .tooltip {
     background: none;
-    white-space: nowrap; }
+    white-space: nowrap;
+}
 
 .global-search-container
 {
@@ -421,4 +430,25 @@ form.all-events-search-form .all-events-search-wrapper i {
 .search-field input
 {
     width: 100% !important;
+}
+
+/* search */
+
+.search-header
+{
+    background-color: #7C7C7C;
+    color: #ffffff;
+    font-family: 'MontserratBold';
+    font-size: 16px;
+    padding-left: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.event-results, .people-results
+{
+    width: 90%;
+    padding-top: 2em;
 }
