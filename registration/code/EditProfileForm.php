@@ -118,7 +118,7 @@ class EditProfileForm extends SafeXSSForm {
         $OtherProjectField->addExtraClass('other-field');
 
         //Newsletter Field
-        $subscribedToNewsletterField = new CheckboxField('SubscribedToNewsletter', 'I don\'t mind occasionally receiving the OpenStack community newsletter.');
+        $subscribedToNewsletterField = new CheckboxField('SubscribedToNewsletter', 'I don\'t mind occasionally receiving updates and communications from the OpenStack Foundation.');
 
         $DisplayOnSiteField = new CheckboxField('DisplayOnSite', 'Include this bio on openstack.org.');
 
