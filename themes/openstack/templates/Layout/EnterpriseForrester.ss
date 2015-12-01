@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-sm-12 center">
                     <div class="intro-message">
-                        <h1>Forrester Report<br>Brief: OpenStack Is Now Ready For Business</h1>
+                        <h1>Forrester Report Brief:<br>OpenStack Is Now Ready For Business</h1>
                         <h3>Research-based Insight and Objective Advice for IT Professionals</h3>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-7 left">
-                    <h3>Why Read This Report</h3>
+                    <h3>Report shows that OpenStack is enterprise ready</h3>
                     <p>
                         OpenStack is an open source cloud platform that has become a compatibility standard for the private cloud market. Despite its headway into the Fortune 100 and long list of notable vendor supporters, coverage thus far has been limited to media articles and vendor propaganda that disproportionately inflate both the strengths and shortcomings of OpenStack.
                     </p>
@@ -35,7 +35,7 @@
                         For infrastructure and operations (I&O) professionals about to kick off their OpenStack initiatives, it’s hard to make sense of the key decisions, top challenges, and the team you need to get started. Forrester interviewed eight OpenStack end users and 10 OpenStack ecosystem vendors to discuss the best practices and common pitfalls I&O pros face when adopting OpenStack.
                     </p>
                     <p>
-                        This report guides I&O pros along the early days of their OpenStack deployment to set them off on the right path to success in winning, serving, and retaining customers as part of the larger Business Transformation agenda.
+                        This report guides I&O pros along the early days of their OpenStack deployment to set them off on the right path to success in winning, serving, and retaining customers as part of the larger Business Transformation agenda. <a href="//openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" style="text-decoration:underline;">Read the full brief for free</a>, or <a href="https://www.forrester.com/OpenStack+Is+Ready+8212+Are+You/fulltext/-/E-RES122728" target="_blank" style="text-decoration:underline;">purchase the full report from Forrester</a>.
                     </p>
                 </div>
                 <div class="col-sm-5 right">
@@ -45,7 +45,7 @@
                             Learn from the lessons of the OpenStack masters to help you succeed with the popular private cloud platform 
                         </p>
                         <p>
-                            <a href="//openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" target="_blank" class="forrester-download-btn">Download The Forrester Report</a>
+                            <a href="//openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" target="_blank" class="forrester-download-btn">Download The Forrester Report Brief</a>
                         </p>
                     </div>
                 </div>
