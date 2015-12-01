@@ -63,6 +63,18 @@ class SpeakerListPage_Controller extends Page_Controller
         'SpeakerSearchForm'
     );
 
+    function LettersWithSpeakers(){
+        $query = DB::Query("SELECT DISTINCT SUBSTRING(LastName,1,1) as letter
+                                  FROM PresentationSpeaker WHERE AvailableForBureau = 1 ORDER BY letter");
+
+        $letter_list = array();
+        foreach ($query as $letter) {
+            $letter_list[] = new ArrayData(array("Letter"=>$letter['letter']));
+        }
+
+        return new ArrayList($letter_list);
+    }
+
     function SpeakerList()
     {
 
@@ -140,7 +152,9 @@ class SpeakerListPage_Controller extends Page_Controller
                                   UNION
                                   SELECT Name AS Result, 'Country' AS Source FROM Countries WHERE Name LIKE '%$query%'
                                   UNION
-                                  SELECT Name AS Result, 'Company' AS Source FROM Org WHERE Name LIKE '%$query%'");
+                                  SELECT Name AS Result, 'Company' AS Source FROM Org WHERE Name LIKE '%$query%'
+                                  UNION
+                                  SELECT DISTINCT Language AS Result, 'Language' AS Source FROM SpeakerLanguage WHERE Language LIKE '%$query%'");
 
             $Suggestions = '';
 
@@ -166,10 +180,11 @@ class SpeakerListPage_Controller extends Page_Controller
                 ->leftJoin("Member","Member.ID = PresentationSpeaker.MemberID")
                 ->leftJoin("Affiliation","Affiliation.MemberID = Member.ID")
                 ->leftJoin("Org","Org.ID = Affiliation.OrganizationID")
-                ->where("(PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
+                ->leftJoin("SpeakerLanguage","SpeakerLanguage.SpeakerID = PresentationSpeaker.ID")
+                ->where("PresentationSpeaker.AvailableForBureau = 1 AND (PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
                           OR CONCAT_WS(' ',PresentationSpeaker.FirstName,PresentationSpeaker.LastName) LIKE '%{$query}%'
                           OR Countries.Name LIKE '%{$query}%' OR SpeakerExpertise.Expertise LIKE '%{$query}%'
-                          OR Org.Name LIKE '%{$query}%') AND PresentationSpeaker.AvailableForBureau = 1");
+                          OR Org.Name LIKE '%{$query}%' OR SpeakerLanguage.Language LIKE '%{$query}%')");
 
             // No Member was found
             if (!isset($Results) || $Results->count() == 0) {

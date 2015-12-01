@@ -6,10 +6,13 @@
         <div class="span-4">
             <img src="$ProfilePhoto()" />
         </div>
-        <a name="profile-$ID"></a>
         <div class="details span-10 last">
             <div class="last name-and-title">
-                <h3>$FirstName $LastName</h3>
+                <h3>
+                    $FirstName $LastName
+                    <a class="back" href="{$BaseHref}community/speakers">Back to Speakers Bureau</a>
+                </h3>
+
             </div>
             <hr>
             <div class="col-md-6">
@@ -20,7 +23,7 @@
                     <strong>Country: </strong> $Country
                 </div>
                 <div class="span-4">
-                    <strong>Registered for Summit: </strong> <% if RegisteredForSummit %> $Summit.Name <% else %> No <% end_if %>
+                    <strong>Registered for Upcoming Summit: </strong> <% if RegisteredForSummit %> $Summit.Name <% else %> No <% end_if %>
                 </div>
                 <% if Expertise %>
                     <strong>Expertise: </strong> $Expertise
