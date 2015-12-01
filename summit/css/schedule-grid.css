@@ -479,6 +479,7 @@ form.all-events-search-form .all-events-search-wrapper i {
     margin:0 10px;
     margin-top: 20px;
     height:25px;
+    padding-top: 1em;
 }
 #tags_list li a { text-decoration:none; color:#ffffff; }
 #tags_list li a:hover
