@@ -190,7 +190,7 @@ implements IPresentationSpeaker
     public function MixedPresentationLinks($limit) {
         $presentation_count = 0;
         $links = array();
-        foreach ($this->Presentations() as $key => $presentation) {
+        foreach ($this->Presentations()->filter("DisplayOnSite",1) as $key => $presentation) {
             if ($key > ($limit-1)) exit;
             $links[] = new ArrayData(array('Source'=>'summit','Link'=>Director::absoluteURL($presentation->Link()),'Title'=>$presentation->Title));
             $presentation_count++;

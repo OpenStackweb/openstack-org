@@ -86,7 +86,7 @@ jQuery(document).ready(function($){
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data,textStatus,jqXHR) {
-                $('#'+form_id+'_action_sendSpeakerEmail',form).after('<span class="sent_message">Email Sent!</span>');
+                $('fieldset','.contact_form_div').html('<h4>Thank you for contacting this speaker. Moving forward all communication will occur directly with the Speaker and not within OpenStack.org</h4>');
 
             },
             error: function (jqXHR, textStatus, errorThrown) {

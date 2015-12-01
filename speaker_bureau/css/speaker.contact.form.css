@@ -16,3 +16,9 @@
     float: right;
     font-size: 17px;
 }
+
+.contact_form_div fieldset {
+    height: 700px;
+    vertical-align: middle;
+}
+

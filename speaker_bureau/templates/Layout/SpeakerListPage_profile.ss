@@ -77,7 +77,7 @@
                         <p>I'm involved in the following OpenStack projects: $Projects</p>
                     </div>
                 <% end_if %>
-                <% if Presentations %>
+                <% if MixedPresentationLinks(5) %>
                     <div class="span-4">
                         <strong>Presentations</strong>
                     </div>
@@ -121,7 +121,7 @@
                     </div>
                 <% end_if %>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 contact_form_div">
                 <h4>Contact $FirstName</h4>
                 $Top.ContactForm
             </div>
