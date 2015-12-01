@@ -17,10 +17,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
     );
 
     static $url_handlers = array(
-        'event/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
-        'speaker/$SPEAKER_ID'          => 'ViewSpeakerProfile',
-        'attendee/$ATTENDEE_ID'        => 'ViewAttendeeProfile',
-        'global-search'                => 'DoGlobalSearch',
+        'events/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
+        'speakers/$SPEAKER_ID'          => 'ViewSpeakerProfile',
+        'attendees/$ATTENDEE_ID'        => 'ViewAttendeeProfile',
+        'global-search'                 => 'DoGlobalSearch',
     );
 
     public function init() {
@@ -97,10 +97,22 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
     }
 
     public function DoGlobalSearch(SS_HTTPRequest $request){
-        $term      = Convert::raw2sql($request->requestVar('global-search-term'));
+        $term      = Convert::raw2sql($request->requestVar('t'));
+        if(empty($term)) return $this->httpError(404);
+
         $summit_id = $this->Summit()->ID;
+
+        $db_term = SummitScheduleGlobalSearchTerm::get()->filter(array('Term' => $term, 'SummitID' => $summit_id))->first();
+        if(is_null($db_term)) $db_term = SummitScheduleGlobalSearchTerm::create();
+        $db_term->Hits     = intval($db_term->Hits) + 1;
+        $db_term->Term     = $term;
+        $db_term->SummitID = $summit_id;
+        $db_term->write();
+
+        $popular_terms = SummitScheduleGlobalSearchTerm::get()->filter(array('SummitID' => $summit_id))->sort('Term', 'ASC')->limit(25,0);
+
         // TODO : move all this sql code to repository
-        $sql_events = <<<SQL
+        $sql_events_template = <<<SQL
     SELECT DISTINCT E.* FROM SummitEvent E
     WHERE E.SummitID = {$summit_id} AND E.Published = 1
     AND
@@ -108,7 +120,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         EXISTS
         (
             SELECT S.ID FROM PresentationSpeaker S INNER JOIN Presentation_Speakers PS ON PS.PresentationSpeakerID = S.ID
-            WHERE S.SummitID = {$summit_id} AND PS.PresentationID = E.ID AND (S.FirstName LIKE '%{$term}%' OR  LastName LIKE '%{$term}%' OR  Bio LIKE '%{$term}%')
+            WHERE S.SummitID = {$summit_id} AND PS.PresentationID = E.ID AND (S.FirstName LIKE '%:term%' OR  LastName LIKE '%:term%' OR  Bio LIKE '%:term%')
         )
         OR
         EXISTS
@@ -121,18 +133,18 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         (
             SELECT P.ID FROM Presentation P
             INNER JOIN PresentationCategory T ON T.ID = P.CategoryID
-            WHERE P.ID = E.ID AND T.Title LIKE '%{$term}%'
+            WHERE P.ID = E.ID AND T.Title LIKE '%:term%'
         )
         OR
-        Title LIKE '%{$term}%'
+        Title LIKE '%:term%'
         OR
-        Description LIKE '%{$term}%'
+        Description LIKE '%:term%'
         OR
-        ShortDescription LIKE '%{$term}%'
-    ) ORDER BY E.StartDate ASC, E.EndDate ASC;
+        ShortDescription LIKE '%:term%'
+    )
 SQL;
 
-$sql_speakers = <<<SQL
+$sql_speakers_template = <<<SQL
     SELECT DISTINCT S.* FROM PresentationSpeaker S
     WHERE SummitID = {$summit_id}
     AND EXISTS
@@ -142,11 +154,19 @@ $sql_speakers = <<<SQL
         INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
         WHERE PS.PresentationSpeakerID = S.ID
     )
-    AND ( FirstName LIKE '%{$term}%' OR  LastName LIKE '%{$term}%' OR  Bio LIKE '%{$term}%' );
+    AND ( FirstName LIKE '%:term%' OR  LastName LIKE '%:term%' OR  Bio LIKE '%:term%' )
 SQL;
 
-        $speakers  = array();
-        $events    = array();
+        $speakers     = array();
+        $events       = array();
+        $sql_speakers = '';
+        $sql_events   = '';
+        $terms = explode(' ',$term);
+        foreach($terms as $t)
+        {
+            $sql_speakers = $sql_speakers . (!empty($sql_speakers) ? ' UNION ':'') .str_replace(':term', $t, $sql_speakers_template);
+            $sql_events   = $sql_events . (!empty($sql_events) ? ' UNION ':'') .str_replace(':term', $t, $sql_events_template);
+        }
 
         foreach(DB::query($sql_speakers) as $row)
         {
@@ -154,7 +174,7 @@ SQL;
             array_push($speakers, new $class($row));
         }
 
-        foreach(DB::query($sql_events) as $row)
+        foreach(DB::query($sql_events," ORDER BY E.StartDate ASC, E.EndDate ASC ;") as $row)
         {
             $class = $row['ClassName'];
             array_push($events, new $class($row));
@@ -173,6 +193,7 @@ SQL;
                 'SpeakerResults'   => new ArrayList($speakers),
                 'EventResults'     => new ArrayList($events),
                 'SearchTerm'       => $term,
+                'PopularTerms'     => $popular_terms,
             )
         );
     }

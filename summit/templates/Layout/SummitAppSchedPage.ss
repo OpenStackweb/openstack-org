@@ -115,7 +115,7 @@
                         tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                         summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
                         <% if ClassName == Presentation %>
-                        moderator_id: {$ModeratorID},global-search
+                        moderator_id: {$ModeratorID},
                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                         track_id : {$CategoryID},
                         <% end_if %>
@@ -137,12 +137,12 @@
             </div>
            <div class="row">
                <div class="col-xs-12">
-                   <schedule-global-filter global_search_action="{$Top.Link(global-search)}"></schedule-global-filter>
+                   <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
                </div>
            </div>
         </div>
     </div>
-    <schedule-grid summit="{ summit }" base_url="{$Top.Link}" month="october"></schedule-grid>
+    <schedule-grid summit="{ summit }" default_event_type_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" month="october"></schedule-grid>
 </div>
 <div id="fb-root"></div>
 <script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>

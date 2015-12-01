@@ -1,20 +1,22 @@
 <schedule-grid-events>
     <div class="row">
         <div class="col-md-12">
-            <schedule-event each={ summit.events[selected_day] }></schedule-event>
+            <schedule-event each={ summit.events[selected_day] } ></schedule-event>
         </div>
     </div>
 
     <script>
 
-        this.summit            = opts.summit;
-        this.schedule_filters  = opts.schedule_filters;
-        this.schedule_api      = opts.schedule_api;
-        this.base_url          = opts.base_url;
-        this.selected_day      = opts.selected_day;
-        this.clicked_event     = {};
-        this.current_filter    = null;
-        var self               = this;
+        this.summit                   = opts.summit;
+        this.schedule_filters         = opts.schedule_filters;
+        this.search_url               = opts.search_url;
+        this.schedule_api             = opts.schedule_api;
+        this.base_url                 = opts.base_url;
+        this.selected_day             = opts.selected_day;
+        this.default_event_type_color = opts.default_event_type_color;
+        this.clicked_event            = {};
+        this.current_filter           = null;
+        var self                      = this;
 
         this.on('mount', function(){
 

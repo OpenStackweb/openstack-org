@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-track"><span if={ track_id} title="Track Name" class="track">{ trackName() }</span></div>
+                        <div class="col-md-12 col-track"><span if={ track_id} class="track"><a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+trackName()replace(/ /g,'+') }">{ trackName() }</a></span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-9">
@@ -31,11 +31,24 @@
                                     <span>Tags:</span>
                                 </div>
                                 <div class="col-xs-12 col-md-10 col-tags-content">
-                                    <span each={ tag_id, i in tags_id } title="Tag" class="tag">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }&nbsp;</span>
+                                    <span each={ tag_id, i in tags_id } title="Search Tag" class="tag"><a class="search-link" href="{ parent.search_url+'?t='+summit.tags[tag_id].name.replace(/ /g,'+') }">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }</a>&nbsp;</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 event-type-col">{ summit.event_types[type_id].type }</div>
+                        <div class="col-md-3 event-type-col"><a class="search-link" title="Search Event Type" href="{ parent.search_url+'?t='+summit.event_types[type_id].type.replace(/ /g,'+') }">{ summit.event_types[type_id].type }</a></div>
+                    </div>
+                    <div class="row" if={ speakers_id.length }>
+                        <div class="col-md-12">
+                            <div class="row speakers-row">
+                                <div class="col-xs-12 col-md-2 col-speakers-title">
+                                <i class="fa fa-users"></i>
+                                <span>Speakers:</span>
+                                </div>
+                                <div class="col-xs-12 col-md-10 col-speakers-content">
+                                    <span each={ speaker_id, i in speakers_id } title="Search Speaker" class="speaker"><a class="search-link" href="{ parent.search_url+'?t='+summit.speakers[speaker_id].name.replace(/ /g,'+') }">{ summit.speakers[speaker_id].name + ( (i < parent.speakers_id.length - 1) ? ', ':'' ) }</a>&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,7 +62,7 @@
                                     <img src="{ summit.speakers[speaker_id].profile_pic }" class="img-circle" alt="{ summit.speakers[speaker_id].name }">
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="row speaker-name-row"><div class="col-md-12">{ summit.speakers[speaker_id].name }</div></div>
+                                    <div class="row speaker-name-row"><div class="col-md-12"><a href={ parent.base_url+'speakers/'+ this.speaker_id }>{ summit.speakers[speaker_id].name }</a></div></div>
                                     <div class="row speaker-position-row"><div class="col-md-12">{ summit.speakers[speaker_id].position }</div></div>
                                 </div>
                             </div>
@@ -57,7 +70,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="{ parent.base_url+'event/'+ this.id } " class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">GO TO EVENT</a>
+                            <a href="{ parent.base_url+'evenst/'+ this.id } " class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">GO TO EVENT</a>
                         </div>
                     </div>
                 </div>
@@ -67,9 +80,11 @@
 
     <script>
 
-    this.summit            = this.parent.summit;
-    this.schedule_api      = this.parent.schedule_api;
-    var self               = this;
+    this.summit                   = this.parent.summit;
+    this.search_url               = this.parent.search_url;
+    this.schedule_api             = this.parent.schedule_api;
+    this.default_event_type_color = this.parent.default_event_type_color;
+    var self                      = this;
 
     this.on('mount', function(){
 
@@ -79,6 +94,9 @@
             if($(e.target).hasClass('icon-event-action')){
                 return false;
             }
+
+            if($(e.target).hasClass('search-link')) return true;
+
             var event_id = $(e.currentTarget).attr('data-event-id');
             var detail   = $('#event_details_'+event_id);
 
@@ -106,7 +124,7 @@
 
     eventColor(summit_types_id){
         if(summit_types_id.length > 1){
-            return '#757575';
+            return self.default_event_type_color;
         }
         return self.summit.summit_types[summit_types_id[0]].color;
     }
