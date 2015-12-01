@@ -24,7 +24,9 @@ final class PresentationSpeakerRejectedAnnouncementEmailSender implements IMessa
     {
         if(!$subject instanceof IPresentationSpeaker) return;
 
-        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailRejected);
+        $summit = Summit::get_active();
+
+        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailRejected, $summit->ID);
 
         $email = EmailFactory::getInstance()->buildEmail('summit@openstack.org', $subject->getEmail());
 

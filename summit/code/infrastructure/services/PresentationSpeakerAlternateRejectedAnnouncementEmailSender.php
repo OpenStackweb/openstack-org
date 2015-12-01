@@ -24,7 +24,9 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
     {
         if(!$subject instanceof IPresentationSpeaker) return;
 
-        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAlternateRejected);
+        $summit = Summit::get_active();
+
+        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAlternateRejected, $summit->ID);
 
         $email = EmailFactory::getInstance()->buildEmail('speakersupport@openstack.org', $subject->getEmail());
 
@@ -33,8 +35,8 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
             (
                 'Speaker'              => $subject,
                 'ConfirmationLink'     => $subject->getSpeakerConfirmationLink(),
-                'ScheduleMainPageLink' => Summit::get_active()->SchedUrl,
-                'PromoCode'            => $subject->getSummitPromoCode()->getCode(),
+                'ScheduleMainPageLink' => $summit->SchedUrl,
+                'PromoCode'            => $subject->getSummitPromoCode($summit->ID)->getCode(),
             )
         )
         ->send();

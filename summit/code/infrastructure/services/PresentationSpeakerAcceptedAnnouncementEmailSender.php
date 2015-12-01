@@ -24,7 +24,9 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
     {
         if(!$subject instanceof IPresentationSpeaker) return;
 
-        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAccepted);
+        $summit = Summit::get_active();
+
+        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAccepted, $summit->ID);
 
         $email = EmailFactory::getInstance()->buildEmail('speakersupport@openstack.org', $subject->getEmail());
 
@@ -33,8 +35,8 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
             (
                 'Speaker'              => $subject,
                 'ConfirmationLink'     => $subject->getSpeakerConfirmationLink(),
-                'ScheduleMainPageLink' => Summit::get_active()->SchedUrl,
-                'PromoCode'            => $subject->getSummitPromoCode()->getCode(),
+                'ScheduleMainPageLink' => $summit->SchedUrl,
+                'PromoCode'            => $subject->getSummitPromoCode($summit->ID)->getCode(),
             )
         )
         ->send();

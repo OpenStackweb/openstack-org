@@ -164,4 +164,14 @@ interface ISummit extends IEntity
      */
     public function findTicketTypeByExternalId($ticket_external_id);
 
+    /**
+     * @return bool
+     */
+    public function isCallForSpeakersOpen();
+
+    /**
+     * @return bool
+     */
+    public function isVotingOpen();
+
 }

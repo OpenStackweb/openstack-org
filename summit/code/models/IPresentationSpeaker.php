@@ -41,35 +41,41 @@ interface IPresentationSpeaker extends IEntity
     public function associateMember(ICommunityMember $member);
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function announcementEmailAlreadySent();
+    public function announcementEmailAlreadySent($summit_id);
 
     /**
+     * @param int $summit_id
      * @return string|null
      */
-    public function getAnnouncementEmailTypeSent();
+    public function getAnnouncementEmailTypeSent($summit_id);
 
     /**
      * @param string $email_type
+     * @param int $summit_id
      * @return $this
      */
-    public function registerAnnouncementEmailTypeSent($email_type);
+    public function registerAnnouncementEmailTypeSent($email_type, $summit_id);
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasRejectedPresentations();
+    public function hasRejectedPresentations($summit_id = null);
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasApprovedPresentations();
+    public function hasApprovedPresentations($summit_id = null);
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasAlternatePresentations();
+    public function hasAlternatePresentations($summit_id = null);
 
     /**
      * @param ISpeakerSummitRegistrationPromoCode $promo_code
@@ -78,12 +84,14 @@ interface IPresentationSpeaker extends IEntity
     public function registerSummitPromoCode(ISpeakerSummitRegistrationPromoCode $promo_code);
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasSummitPromoCode();
+    public function hasSummitPromoCode($summit_id);
 
     /**
+     * @param int $summit_id
      * @return ISpeakerSummitRegistrationPromoCode
      */
-    public function getSummitPromoCode();
+    public function getSummitPromoCode($summit_id);
 }

@@ -7,7 +7,8 @@ class PresentationSpeaker extends DataObject
 implements IPresentationSpeaker
 {
 
-    private static $db = array (
+    private static $db = array
+    (
         'FirstName' => 'Varchar',
         'LastName' => 'Varchar',
         'Title' => 'Varchar',
@@ -19,32 +20,27 @@ implements IPresentationSpeaker
         'WillingToTravel' => 'Boolean',
         'Country' => 'Varchar(2)',
         'BeenEmailed' => 'Boolean',
-        'AnnouncementEmailTypeSent' => "Enum('ACCEPTED,REJECTED,ALTERNATE,ACCEPTED_ALTERNATE,ACCEPTED_REJECTED,ALTERNATE_REJECTED,NONE','NONE')",
-        'AnnouncementEmailSentDate' => 'SS_Datetime',
         'ConfirmedDate' => 'SS_Datetime',
         'OnSitePhoneNumber' => 'Text',
         'RegisteredForSummit' => 'Boolean'
     );
 
-
     private static $has_one = array
     (
         'Photo'               => 'Image',
         'Member'              => 'Member',
-        'Summit'              => 'Summit',
         'RegistrationRequest' => 'SpeakerRegistrationRequest',
-        'SummitRegistrationPromoCode' => 'SpeakerSummitRegistrationPromoCode'
     );
 
     private static $has_many = array
     (
-        'AreasOfExpertise'   => 'SpeakerExpertise',
-        'OtherPresentationLinks' => 'SpeakerPresentationLink',
-        'TravelPreferences'  => 'SpeakerTravelPreference',
-        'Languages'          => 'SpeakerLanguage'
-
+        'AreasOfExpertise'         => 'SpeakerExpertise',
+        'OtherPresentationLinks'   => 'SpeakerPresentationLink',
+        'TravelPreferences'        => 'SpeakerTravelPreference',
+        'Languages'                => 'SpeakerLanguage',
+        'PromoCodes'               => 'SpeakerSummitRegistrationPromoCode',
+        'AnnouncementSummitEmails' => 'SpeakerAnnouncementSummitEmail',
     );
-
 
     private static $searchable_fields = array
     (
@@ -65,14 +61,14 @@ implements IPresentationSpeaker
 
     private static $belongs_many_many = array
     (
-        'Presentations'      => 'Presentation',
+        'Presentations' => 'Presentation',
     );
 
     private static $summary_fields = array
     (
-        'FirstName'  => 'LastName',
-        'LastName' => 'LastName',
-        'Member.Email' => 'Email',
+        'FirstName'                 => 'LastName',
+        'LastName'                  => 'LastName',
+        'Member.Email'              => 'Email',
         'AnnouncementEmailTypeSent' => 'Announcement Email Sent',
     );
 
@@ -134,6 +130,7 @@ implements IPresentationSpeaker
     /**
      * Gets a link to the speaker's review page, as seen in the email. Auto authenticates.
      * @param Int $presentationID
+     * @return string
      */
     public function ReviewLink($presentationID) {
         $action = 'review';
@@ -142,7 +139,6 @@ implements IPresentationSpeaker
         }
         return $this->linkTo($presentationID, $action);
     }
-
 
      public function getCMSFields() {
         $fields =  FieldList::create(TabSet::create("Root"))
@@ -173,12 +169,12 @@ implements IPresentationSpeaker
         ));    
     }
 
-    public function MyPresentations() {
-        return Summit::get_active()->Presentations()->filter(array(
+    public function MyPresentations($summit_id = null) {
+        $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
+        return $summit->Presentations()->filter(array(
             'CreatorID' => $this->MemberID
         ));
     }
-
 
     public function OtherPresentations() {
         return $this->Presentations()->exclude(array(
@@ -225,10 +221,10 @@ implements IPresentationSpeaker
         $this->write();
     }
 
-    public function AcceptedPresentations() {
+    public function AcceptedPresentations($summit_id = null) {
         $AcceptedPresentations = new ArrayList();
-
-        $Presentations = $this->Presentations('`SummitID` = '.Summit::get_active()->ID);
+        $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
+        $Presentations = $this->Presentations('`SummitID` = '.$summit->ID);
         foreach ($Presentations as $Presentation) {
             if($Presentation->SelectionStatus() == "accepted") $AcceptedPresentations->push($Presentation);
         }
@@ -236,10 +232,10 @@ implements IPresentationSpeaker
         return $AcceptedPresentations;
     }
 
-    public function UnacceptedPresentations() {
+    public function UnacceptedPresentations($summit_id = null) {
         $UnacceptedPresentations = new ArrayList();
-
-        $Presentations = $this->Presentations('`SummitID` = '.Summit::get_active()->ID);
+        $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
+        $Presentations = $this->Presentations('`SummitID` = '.$summit->ID);
         foreach ($Presentations as $Presentation) {
             if($Presentation->SelectionStatus() == "unaccepted") $UnacceptedPresentations->push($Presentation);
         }
@@ -247,10 +243,10 @@ implements IPresentationSpeaker
         return $UnacceptedPresentations;
     }
 
-    public function AlternatePresentations() {
+    public function AlternatePresentations($summit_id = null) {
         $AlternatePresentations = new ArrayList();
-
-        $Presentations = $this->Presentations('`SummitID` = '.Summit::get_active()->ID);
+        $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
+        $Presentations = $this->Presentations('`SummitID` = '.$summit->ID);
         foreach ($Presentations as $Presentation) {
             if($Presentation->SelectionStatus() == "alternate") $AlternatePresentations->push($Presentation);
         }
@@ -275,55 +271,67 @@ implements IPresentationSpeaker
     }
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function announcementEmailAlreadySent()
+    public function announcementEmailAlreadySent($summit_id)
     {
-        $email_type = $this->getAnnouncementEmailTypeSent();
+        $email_type = $this->getAnnouncementEmailTypeSent($summit_id);
         return !is_null($email_type) && $email_type !== 'NONE';
     }
 
     /**
+     * @param int $summit_id
      * @return string|null
      */
-    public function getAnnouncementEmailTypeSent()
+    public function getAnnouncementEmailTypeSent($summit_id)
     {
-       return $this->getField('AnnouncementEmailTypeSent');
+       $email = $this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->first();
+       return !is_null($email) ? $email->AnnouncementEmailTypeSent : null;
     }
 
-    /**
+    /***
      * @param string $email_type
+     * @param int $summit_id
+     * @return $this|void
      * @throws Exception
      */
-    public function registerAnnouncementEmailTypeSent($email_type)
+    public function registerAnnouncementEmailTypeSent($email_type, $summit_id)
     {
-        if($this->announcementEmailAlreadySent()) throw new Exception('Announcement Email already sent');
-        $this->AnnouncementEmailTypeSent = $email_type;
-        $this->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+        if($this->announcementEmailAlreadySent($summit_id)) throw new Exception('Announcement Email already sent');
+        $email = SpeakerAnnouncementSummitEmail::create();
+        $email->SpeakerID = $this->ID;
+        $email->SummitID  = $summit_id;
+        $email->AnnouncementEmailTypeSent = $email_type;
+        $email->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+        $email->write();
     }
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasRejectedPresentations()
+    public function hasRejectedPresentations($summit_id = null)
     {
-        return $this->UnacceptedPresentations()->count() > 0;
+        return $this->UnacceptedPresentations($summit_id)->count() > 0;
     }
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasApprovedPresentations()
+    public function hasApprovedPresentations($summit_id = null)
     {
-        return $this->AcceptedPresentations()->count() > 0;
+        return $this->AcceptedPresentations($summit_id)->count() > 0;
     }
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasAlternatePresentations()
+    public function hasAlternatePresentations($summit_id = null)
     {
-        return $this->AlternatePresentations()->count() > 0;
+        return $this->AlternatePresentations($summit_id)->count() > 0;
     }
 
     /**
@@ -335,24 +343,28 @@ implements IPresentationSpeaker
         $member = AssociationFactory::getInstance()->getMany2OneAssociation($this,'Member')->getTarget();
         $member->registerPromoCode($promo_code);
         $promo_code->assignSpeaker($this);
-        AssociationFactory::getInstance()->getMany2OneAssociation($this,'SummitRegistrationPromoCode')->setTarget($promo_code);
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'PromoCodes')->add($promo_code);
     }
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function hasSummitPromoCode()
+    public function hasSummitPromoCode($summit_id)
     {
-       $code = $this->getSummitPromoCode();
+       $code = $this->getSummitPromoCode($summit_id);
        return !is_null($code);
     }
 
     /**
+     * @param int $summit_id
      * @return ISpeakerSummitRegistrationPromoCode
      */
-    public function getSummitPromoCode()
+    public function getSummitPromoCode($summit_id)
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'SummitRegistrationPromoCode')->getTarget();
+        $query = new QueryObject();
+        $query->addAndCondition(QueryCriteria::equal('SummitID', $summit_id));
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this,'PromoCodes', $query)->first();
     }
 
     function ProfilePhoto($width=100){

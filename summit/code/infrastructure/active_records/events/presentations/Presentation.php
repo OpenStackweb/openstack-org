@@ -139,7 +139,6 @@ class Presentation extends SummitEvent implements IPresentation
         }
     }
 
-
     /**
      * Gets a link to delete this presentation
      *
@@ -607,6 +606,13 @@ class Presentation extends SummitEvent implements IPresentation
 
     protected function validate()
     {
+        $summit_id = intval($this->SummitID);
+        if($summit_id > 0) {
+            Summit::seedBasicEventTypes($summit_id);
+            $event_type   = SummitEventType::get()->filter(array('Type'=>'Presentation', 'SummitID'=>$summit_id))->first();
+            $this->TypeID = $event_type->ID;
+        }
+
         $valid = parent::validate();
 
         if (!$valid->valid()) {

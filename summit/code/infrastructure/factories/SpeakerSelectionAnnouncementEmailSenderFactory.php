@@ -21,9 +21,11 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
      */
     public function build(IPresentationSpeaker $speaker)
     {
-        $has_approved  = $speaker->hasApprovedPresentations();
-        $has_rejected  = $speaker->hasRejectedPresentations();
-        $has_alternate = $speaker->hasAlternatePresentations();
+        $summit        = Summit::get_active();
+
+        $has_approved  = $speaker->hasApprovedPresentations($summit->ID);
+        $has_rejected  = $speaker->hasRejectedPresentations($summit->ID);
+        $has_alternate = $speaker->hasAlternatePresentations($summit->ID);
 
         if($has_approved && !$has_rejected && !$has_alternate)
             return new PresentationSpeakerAcceptedAnnouncementEmailSender;

@@ -39,6 +39,7 @@ final class Summit extends DataObject implements ISummit
         'TimeZone'                    => 'Text',
     );
 
+
     public function setSummitBeginDate($value)
     {
         if(!empty($value))
@@ -812,9 +813,9 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
 
         // speakers
 
-        $config = GridFieldConfig_RecordEditor::create();
+        /*$config = GridFieldConfig_RecordEditor::create();
         $gridField = new GridField('Speakers', 'Speakers', $this->Speakers(), $config);
-        $f->addFieldToTab('Root.Speakers', $gridField);
+        $f->addFieldToTab('Root.Speakers', $gridField);*/
 
         // presentations
 
@@ -1124,5 +1125,35 @@ SQL;
         }
 
         return new ArrayList($list);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCallForSpeakersOpen()
+    {
+        $start_date = $this->getField('SubmissionBeginDate');
+        $end_date   = $this->getField('SubmissionEndDate');
+
+        if(empty($start_date) || empty($end_date)) return false;
+        $start_date   = new DateTime($start_date, new DateTimeZone('UTC'));
+        $end_date     = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now          = new \DateTime('now', new DateTimeZone('UTC'));
+        return ( $now >=  $start_date && $now <= $end_date);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVotingOpen()
+    {
+        $start_date = $this->getField('VotingBeginDate');
+        $end_date   = $this->getField('VotingEndDate');
+
+        if(empty($start_date) || empty($end_date)) return false;
+        $start_date   = new DateTime($start_date, new DateTimeZone('UTC'));
+        $end_date     = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now          = new \DateTime('now', new DateTimeZone('UTC'));
+        return ( $now >=  $start_date && $now <= $end_date);
     }
 }

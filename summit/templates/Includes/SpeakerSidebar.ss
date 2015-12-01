@@ -1,5 +1,5 @@
 <div class="user-sidebar">
-<% with $CurrentMember.CurrentSpeakerProfile %>
+<% with $CurrentMember.SpeakerProfile %>
     <p class="user-img" style="background-image: url($Up.ProfilePhotoUrl(100,'speaker'));"></p>
     <h3 class="user-name">$Name</h3>
 

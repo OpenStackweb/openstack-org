@@ -69,10 +69,10 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
 
     public function send($batch_size){
 
-        $batch_repository   = $this->batch_repository;
-        $batch_task_factory = $this->batch_task_factory;
-        $speaker_repository = $this->speaker_repository;
-        $sender_factory     = $this->sender_factory;
+        $batch_repository      = $this->batch_repository;
+        $batch_task_factory    = $this->batch_task_factory;
+        $speaker_repository    = $this->speaker_repository;
+        $sender_factory        = $this->sender_factory;
         $promo_code_repository = $this->promo_code_repository;
 
         return $this->tx_manager->transaction(function() use

@@ -8,21 +8,17 @@
 class PresentationMemberExtension extends DataExtension
 {
 
-    private static $db = array (
+    private static $db = array
+    (
         'PresentationList' => 'Text',        
     );
 
-
-    private static $has_one = array (
-        'ActiveSummit' => 'Summit'
-    );
-
-    private static $has_many = array (
-        'Presentations' => 'Presentation',
+    private static $has_many = array
+    (
+        'Presentations'          => 'Presentation',
         'PresentationPriorities' => 'PresentationPriority',
-        'SummitStates' => 'SpeakerSummitState'        
+        'SummitStates'           => 'SpeakerSummitState'
     );
-
 
     /**
      * Gets presentations, ordered in a persistent random fashion
@@ -163,20 +159,11 @@ class PresentationMemberExtension extends DataExtension
     }
 
     /**
-     * Gets the speaker for this member in the current summit
-     * 
-     * @param  Summit $summit
-     * @return PresentationSpeaker
+     * @return PresentationSpeaker|null
      */
-    public function getCurrentSpeakerProfile($summit = null) {
-        $summit = $summit ?: Summit::get_active();
-        if(!$summit) {
-            return false;
-        }
-
+    public function getSpeakerProfile() {
         return PresentationSpeaker::get()->filter(array(
             'MemberID' => $this->owner->ID,
-            'SummitID' => $summit->ID
         ))->first();
     }
 
