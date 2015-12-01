@@ -168,8 +168,8 @@ class SpeakerListPage_Controller extends Page_Controller
                 ->leftJoin("Org","Org.ID = Affiliation.OrganizationID")
                 ->where("(PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
                           OR CONCAT_WS(' ',PresentationSpeaker.FirstName,PresentationSpeaker.LastName) LIKE '%{$query}%'
-                          OR Countries.Name LIKE '%{$query}%' OR SpeakerExpertise.Expertise LIKE '%{$query}%')
-                          OR Org.Name LIKE '%{$query}%' AND PresentationSpeaker.AvailableForBureau = 1");
+                          OR Countries.Name LIKE '%{$query}%' OR SpeakerExpertise.Expertise LIKE '%{$query}%'
+                          OR Org.Name LIKE '%{$query}%') AND PresentationSpeaker.AvailableForBureau = 1");
 
             // No Member was found
             if (!isset($Results) || $Results->count() == 0) {
