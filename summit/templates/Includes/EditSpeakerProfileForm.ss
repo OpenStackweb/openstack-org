@@ -71,11 +71,11 @@
                     $Fields.dataFieldByName(FundedTravel).Title
               </label>
             </div>
-            <div class="checkbox">
+            <div class="field text ">
                 <label for="$FormName_WillingToTravel" class="left">
-                    $Fields.dataFieldByName(WillingToTravel)
                     $Fields.dataFieldByName(WillingToTravel).Title
               </label>
+              $Fields.dataFieldByName(WillingToTravel)
             </div>
             <div class="field text ">
                 <label for="$FormName_CountriesToTravel" class="left">$Fields.dataFieldByName(CountriesToTravel).Title</label>

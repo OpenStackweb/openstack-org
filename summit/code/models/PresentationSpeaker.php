@@ -186,6 +186,28 @@ implements IPresentationSpeaker
         ));        
     }
 
+    // return all presentations for this speaker plus the one he submitted from edit profile
+    public function MixedPresentationLinks($limit) {
+        $presentation_count = 0;
+        $links = array();
+        foreach ($this->Presentations() as $key => $presentation) {
+            if ($key > ($limit-1)) exit;
+            $links[] = new ArrayData(array('Source'=>'summit','Link'=>Director::absoluteURL($presentation->Link()),'Title'=>$presentation->Title));
+            $presentation_count++;
+        }
+        // complete limit with user presentations
+        if ($presentation_count < $limit) {
+            foreach ($this->OtherPresentationLinks() as $other_presentation) {
+                if ($presentation_count < $limit) {
+                    $links[] = new ArrayData(array('Source' => 'speaker', 'Link' => $other_presentation->LinkUrl));
+                    $presentation_count++;
+                }
+            }
+        }
+
+        return new ArrayList($links);
+    }
+
     /**
      * @return int
      */

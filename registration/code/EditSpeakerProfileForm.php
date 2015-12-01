@@ -66,7 +66,10 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         $FundedTravelField = new CheckboxField ('FundedTravel',"My Company would be willing to fund my travel to events.");
 
         // Willing to travel
-        $WillingToTravel = new CheckboxField ('WillingToTravel',"I am willing to travel to events.");
+        $WillingToTravel = new OptionSetField('WillingToTravel', 'I am willing to travel to events:', array(
+            1 => 'Yes',
+            0 => 'No'
+        ));
 
         // Countries to travel
         $CountriesToTravelField = new MultiDropdownField('CountriesToTravel', 'Countries willing to travel to', $CountryCodes);
@@ -125,19 +128,12 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             }
             $CountriesToTravelField->setValue(implode(',',$country_array));
 
-            // first we pull the summit presentations we have
-            $presentation_count = 0;
-            foreach ($speaker->Presentations() as $key => $presentation) {
-                if ($key > 4) exit;
-                ${'PresentationLinkField'.($key+1)}->setValue(Director::absoluteURL($presentation->Link()));
-                ${'PresentationLinkField'.($key+1)}->setDisabled(true);
-                $presentation_count++;
-            }
-            // if are there any places left we see if he has his own links
-            if ($presentation_count < 5) {
-                foreach ($speaker->OtherPresentationLinks() as $index => $other_presentation) {
-                    $new_key = $index + $presentation_count + 1;
-                    ${'PresentationLinkField'.$new_key}->setValue($other_presentation->LinkUrl);
+            foreach ($speaker->MixedPresentationLinks(5) as $key => $presentation) {
+                if ($presentation->Source == 'summit') {
+                    ${'PresentationLinkField'.($key+1)}->setValue($presentation->Link);
+                    ${'PresentationLinkField'.($key+1)}->setDisabled(true);
+                } else {
+                    ${'PresentationLinkField'.($key+1)}->setValue($presentation->Link);
                 }
             }
 

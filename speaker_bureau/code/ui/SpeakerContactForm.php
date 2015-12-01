@@ -14,12 +14,15 @@
 /**
  * Class SpeakerContactForm
  */
-final class SpeakerContactForm extends SafeXSSForm {
+final class SpeakerContactForm extends BootstrapForm {
 
-	function __construct($controller, $name, $use_actions = true) {
+	function __construct($controller, $name, $speakerID, $use_actions = true) {
 
 		$fields = new FieldList;
 		//point of contact
+        $speakerIDfield = new HiddenField('speaker_id');
+        $speakerIDfield->setValue($speakerID);
+        $fields->push($speakerIDfield);
 		$fields->push(new TextField('org_name','Name of Organizer'));
 		$fields->push(new EmailField('org_email','Email'));
         $fields->push(new TextField('event_name','Event'));
@@ -32,13 +35,10 @@ final class SpeakerContactForm extends SafeXSSForm {
         $request->setRows(10);
         $fields->push($request);
 
+        $sec_field = new TextField('field_98438688','field_98438688');
+        $sec_field->addExtraClass('honey');
+        $fields->push($sec_field);
 
-		// Guard against automated spam registrations by optionally adding a field
-		// that is supposed to stay blank (and is hidden from most humans).
-		// The label and field name are intentionally common ("username"),
-		// as most spam bots won't resist filling it out. The actual username field
-		// on the forum is called "Nickname".
-		$fields->push(new TextField('user_name','UserName'));
 		// Create action
 		$actions = new FieldList();
 		if($use_actions)

@@ -132,19 +132,21 @@ class SpeakerListPage_Controller extends Page_Controller
     {
         if ($query = $this->getSearchQuery('q')) {
 
-            $results = DB::query("SELECT CONCAT(FirstName,' ',LastName) AS Result FROM PresentationSpeaker WHERE FirstName LIKE '%$query% AND AvailableForBureau = 1'
+            $results = DB::query("SELECT CONCAT(FirstName,' ',LastName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE FirstName LIKE '%$query% AND AvailableForBureau = 1'
                                   UNION
-                                  SELECT CONCAT(LastName,', ',FirstName) AS Result FROM PresentationSpeaker WHERE LastName LIKE '%$query% AND AvailableForBureau = 1'
+                                  SELECT CONCAT(LastName,', ',FirstName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE LastName LIKE '%$query% AND AvailableForBureau = 1'
                                   UNION
-                                  SELECT Expertise AS Result FROM SpeakerExpertise WHERE Expertise LIKE '%$query%'
+                                  SELECT Expertise AS Result, 'Expertise' AS Source FROM SpeakerExpertise WHERE Expertise LIKE '%$query%'
                                   UNION
-                                  SELECT Name AS Result FROM Countries WHERE Name LIKE '%$query%'");
+                                  SELECT Name AS Result, 'Country' AS Source FROM Countries WHERE Name LIKE '%$query%'
+                                  UNION
+                                  SELECT Name AS Result, 'Company' AS Source FROM Org WHERE Name LIKE '%$query%'");
 
             $Suggestions = '';
 
             if (count($results) > 0) {
                 foreach ($results as $Speaker) {
-                    $Suggestions = $Suggestions . $Speaker['Result']. '|' . '1' . "\n";
+                    $Suggestions = $Suggestions . $Speaker['Result'].'|' . '1' . "\n";
                 }
 
                 return $Suggestions;
@@ -161,9 +163,13 @@ class SpeakerListPage_Controller extends Page_Controller
             $Results = PresentationSpeaker::get()
                 ->leftJoin("SpeakerExpertise","SpeakerExpertise.SpeakerID = PresentationSpeaker.ID")
                 ->leftJoin("Countries","Countries.Code = PresentationSpeaker.Country")
+                ->leftJoin("Member","Member.ID = PresentationSpeaker.MemberID")
+                ->leftJoin("Affiliation","Affiliation.MemberID = Member.ID")
+                ->leftJoin("Org","Org.ID = Affiliation.OrganizationID")
                 ->where("(PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
-                          OR CONCAT_WS(' ',FirstName,LastName) LIKE '%{$query}%' OR Countries.Name LIKE '%{$query}%'
-                          OR SpeakerExpertise.Expertise LIKE '%{$query}%') AND PresentationSpeaker.AvailableForBureau = 1");
+                          OR CONCAT_WS(' ',PresentationSpeaker.FirstName,PresentationSpeaker.LastName) LIKE '%{$query}%'
+                          OR Countries.Name LIKE '%{$query}%' OR SpeakerExpertise.Expertise LIKE '%{$query}%')
+                          OR Org.Name LIKE '%{$query}%' AND PresentationSpeaker.AvailableForBureau = 1");
 
             // No Member was found
             if (!isset($Results) || $Results->count() == 0) {
@@ -206,11 +212,16 @@ class SpeakerListPage_Controller extends Page_Controller
 
     public function ContactForm() {
         $data = Session::get("FormInfo.Form_SpeakerContactForm.data");
+        $SpeakerID = Convert::raw2sql($this->request->param("ID"));
+
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
 
         Requirements::css('speaker_bureau/css/speaker.contact.form.css');
-        Requirements::javascript("speaker_bureau/js/speaker.contact.form.js");
+        Requirements::javascript("speaker_bureau/js/speaker-contact-form.js");
 
-        $form = new SpeakerContactForm($this, 'SpeakerContactForm');
+        $form = new SpeakerContactForm($this, 'SpeakerContactForm', $SpeakerID);
         // we should also load the data stored in the session. if failed
         if(is_array($data)) {
             $form->loadDataFrom($data);
@@ -219,7 +230,4 @@ class SpeakerListPage_Controller extends Page_Controller
         return $form;
     }
 
-    public function sendSpeakerEmail() {
-
-    }
 }
