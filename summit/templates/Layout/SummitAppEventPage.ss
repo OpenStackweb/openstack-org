@@ -7,12 +7,10 @@
         </div>
         <div class="subtitle">
             <% loop $Event.Tags %>
-                <% if First %>
-                    $Tag
-                <% else_if Last %>
-                    & $Tag
+                <% if First %><a href="$Top.Link(global-search)?t={$Tag}">$Tag</a><% else_if Last %>
+                &nbsp;&&nbsp;<a href="$Top.Link(global-search)?t={$Tag}">$Tag</a>
                 <% else %>
-                    , $Tag
+                &nbsp;,&nbsp;<a href="$Top.Link(global-search)?t={$Tag}">$Tag</a>
                 <% end_if %>
             <% end_loop %>
         </div>
@@ -72,7 +70,7 @@
                 <div class="speaker_info">
                     <div class="speaker_name"> $FirstName $LastName </div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
-                    <div class="speaker_bio"> $getShortBio(200) <a href="{$Top.AbsoluteLink}speaker/{$ID}">FULL BIO</a></div>
+                    <div class="speaker_bio"> $getShortBio(200) <a href="{$Top.AbsoluteLink}speakers/{$ID}">FULL BIO</a></div>
                 </div>
             </div>
             <% end_loop %>

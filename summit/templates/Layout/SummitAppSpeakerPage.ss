@@ -14,7 +14,7 @@
         <ul>
         <% loop AcceptedPresentations() %>
             <li>
-            $Title <br>
+            <a href="{$Top.Link}events/{$ID}">$Title</a><br>
             $DateNice() <br>
             $LocationNameNice()
             </li>
