@@ -47,7 +47,9 @@ implements IPresentationSpeaker
         'Member.Email',
         'FirstName',
         'LastName',
-        'AnnouncementEmailTypeSent'
+        'Bio',
+        'IRCHandle',
+        'TwitterHandle'
     );
 
     private static $indexes = array
@@ -66,10 +68,12 @@ implements IPresentationSpeaker
 
     private static $summary_fields = array
     (
-        'FirstName'                 => 'LastName',
+        'FirstName'                 => 'FirstName',
         'LastName'                  => 'LastName',
         'Member.Email'              => 'Email',
-        'AnnouncementEmailTypeSent' => 'Announcement Email Sent',
+        'Bio'                       => 'Bio',
+        'IRCHandle'                 => 'IRCHandle',
+        'TwitterHandle'             => 'TwitterHandle',
     );
 
     /**

@@ -72,13 +72,13 @@ class Presentation extends SummitEvent implements IPresentation
         'Creator'   => 'Member',
         'Category'  => 'PresentationCategory',
         'Moderator' => 'PresentationSpeaker',
-        //'Summit'   => 'Summit'
     );
 
     private static $summary_fields = array
     (
         'Created',
         'Title',
+        'Description',
         'Level',
         'SelectionStatus',
     );
@@ -494,20 +494,12 @@ class Presentation extends SummitEvent implements IPresentation
             $config->removeComponentsByType('GridFieldAddNewButton');
             $speakers = new GridField('Speakers', 'Speakers', $this->Speakers(), $config);
             $f->addFieldToTab('Root.Speakers', $speakers);
-            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->getAllowedSpeakers());
+            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setResultsFormat('$Name - $Member.Email')->setSearchList($this->getAllowedSpeakers());
             // moderator
 
-            $f->addFieldToTab('Root.Speakers',
-                $ddl_moderator = new DropdownField('ModeratorID', 'Moderator', $this->Speakers()->map('ID', 'Name')));
+            $f->addFieldToTab('Root.Speakers', $ddl_moderator = new DropdownField('ModeratorID', 'Moderator', $this->Speakers()->map('ID', 'Name')));
             $ddl_moderator->setEmptyString('-- Select a Moderator --');
 
-            // speakers feedback
-            $config = GridFieldConfig_RecordEditor::create(100);
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $gridField = new GridField('SpeakersFeedback', 'Speakers Feedback', $this->SpeakersFeedback(), $config);
-            $f->addFieldToTab('Root.SpeakersFeedback', $gridField);
-
-            // materials
 
             $config = GridFieldConfig_RecordEditor::create(100);
             $config->removeComponentsByType('GridFieldAddNewButton');
@@ -530,7 +522,7 @@ class Presentation extends SummitEvent implements IPresentation
 
     private function getAllowedSpeakers()
     {
-        return PresentationSpeaker::get()->filter(array('SummitID' => $this->SummitID));
+        return PresentationSpeaker::get();
     }
     /**
      * Used by the track chair app see if the presentaiton has been selected by the group.

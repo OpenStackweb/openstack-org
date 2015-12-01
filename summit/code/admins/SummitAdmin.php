@@ -4,6 +4,8 @@ class SummitAdmin extends ModelAdmin implements PermissionProvider
 {
     private static $url_segment = 'summits';
 
+    public $showImportForm = false;
+
     private static $managed_models = array
     (
         'Summit',

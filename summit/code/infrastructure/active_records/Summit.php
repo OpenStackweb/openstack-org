@@ -199,7 +199,6 @@ final class Summit extends DataObject implements ISummit
     (
         'Presentations'                => 'Presentation',
         'Categories'                   => 'PresentationCategory',
-        'Speakers'                     => 'PresentationSpeaker',
         'Locations'                    => 'SummitAbstractLocation',
         'Types'                        => 'SummitType',
         'EventTypes'                   => 'SummitEventType',
@@ -743,6 +742,7 @@ final class Summit extends DataObject implements ISummit
                 'EndDate' => 'ASC'
             )
         ) , $config);
+        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description"=>"HTMLText->BigSummary"));
         $f->addFieldToTab('Root.Schedule', $gridField);
         $config->addComponent(new GridFieldPublishSummitEventAction);
 
@@ -752,6 +752,7 @@ final class Summit extends DataObject implements ISummit
         $config->addComponent(new GridFieldPublishSummitEventAction);
         $config->addComponent(new GridFieldAjaxRefresh(1000,false));
         $gridField = new GridField('Events', 'Events', $this->Events()->filter('ClassName','SummitEvent') , $config);
+        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description"=>"HTMLText->BigSummary"));
         $f->addFieldToTab('Root.Events', $gridField);
 
         //track selection list presentations
@@ -813,9 +814,10 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
 
         // speakers
 
-        /*$config = GridFieldConfig_RecordEditor::create();
-        $gridField = new GridField('Speakers', 'Speakers', $this->Speakers(), $config);
-        $f->addFieldToTab('Root.Speakers', $gridField);*/
+        $config = GridFieldConfig_RecordEditor::create();
+        $gridField = new GridField('Speakers', 'Speakers', $this->Speakers(false), $config);
+        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Bio"=>"HTMLText->BigSummary"));
+        $f->addFieldToTab('Root.Speakers', $gridField);
 
         // presentations
 
@@ -823,6 +825,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
         $config->addComponent(new GridFieldPublishSummitEventAction);
         $config->addComponent(new GridFieldAjaxRefresh(1000, false));
         $gridField = new GridField('Presentations', 'Presentations', $this->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
+        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description"=>"HTMLText->BigSummary"));
         $f->addFieldToTab('Root.Presentations', $gridField);
         return $f;
 
@@ -1077,31 +1080,24 @@ SQL;
         return $event;
     }
 
-    public function Speakers()
+    public function Speakers($only_published  = true)
     {
-        $id = $this->ID;
+        $id     = $this->ID;
+        $filter = $only_published ? "AND E.Published = 1 " : "";
 
-        $sql = <<<SQL
-SELECT S.* From PresentationSpeaker S
-LEFT JOIN Member M ON M.ID = S.MemberID
-WHERE S.SummitID = {$id} AND EXISTS
-(
-	SELECT E.ID FROM SummitEvent E
-    INNER JOIN Presentation P ON E.ID = P.ID
-    INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
-    WHERE E.SummitID = {$id} AND E.Published = 1 AND PS.PresentationSpeakerID = S.ID
-);
-SQL;
-
-        $list = array();
-        $res = DB::query($sql);
-        foreach($res as $row)
-        {
-            $class = $row['ClassName'];
-            array_push($list, new $class($row));
-        }
-
-        return new ArrayList($list);
+        $dl = new DataList('PresentationSpeaker');
+        $dl
+            ->leftJoin('Member', ' Member.ID = PresentationSpeaker.MemberID')
+            ->where("WHERE S.SummitID = {$id} AND EXISTS
+            (
+                SELECT E.ID FROM SummitEvent E
+                INNER JOIN Presentation P ON E.ID = P.ID
+                INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+                WHERE E.SummitID = {$id}
+                {$filter}
+                AND PS.PresentationSpeakerID = S.ID
+            );");
+        return $dl;
     }
 
     public function Tags()
@@ -1120,6 +1116,7 @@ SQL;
         $res = DB::query($sql);
         foreach($res as $row)
         {
+
             $class = $row['ClassName'];
             array_push($list, new $class($row));
         }
