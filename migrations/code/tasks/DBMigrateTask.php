@@ -23,6 +23,7 @@ final class DBMigrateTask extends MigrationTask
         'SchedRefactoringMigration',
         'SchedRefactoringMigration2',
         'CreateTableCountries',
+        'MigrateExpertiseToDORelation'
     );
 
     function up()

@@ -1,4 +1,13 @@
-#user_name {
-    position: absolute;
-    left: -2000px;
+.honey {
+    position: absolute; left: -9999px
+}
+
+.error,input{
+    border: 1px solid red;
+    background: rgba(255,0,0,0.1);
+}
+
+.sent_message {
+    margin-left: 30px;
+    color: #77D91E;
 }

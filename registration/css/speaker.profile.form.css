@@ -27,3 +27,7 @@
 .expertise > input {
     width: 90%;
 }
+
+#EditSpeakerProfileForm_EditSpeakerProfileForm_WillingToTravel input {
+    top: 6px;
+}

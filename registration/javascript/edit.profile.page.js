@@ -202,7 +202,7 @@ jQuery(document).ready(function($) {
     if(edit_speaker_profile_form.length > 0){
 
         //custom validation
-        jQuery.validator.addMethod(
+        $.validator.addMethod(
             "regex",
             function(value, element, regexp) {
                 var re = new RegExp(regexp,'g');
@@ -218,7 +218,7 @@ jQuery(document).ready(function($) {
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     $('html, body').animate({
-                        scrollTop: validator.errorList[0].element.offset().top-100
+                        scrollTop: $(validator.errorList[0].element).offset().top-100
                     }, 2000);
                 }
             },
@@ -228,7 +228,18 @@ jQuery(document).ready(function($) {
                 Surname:{required: true, ValidPlainText:true },
                 Title: {required: true, ValidPlainText:true},
                 Bio:{required: true},
-                Expertise:{required: true, ValidPlainText:true },
+                'Expertise[1]':{required: true, ValidPlainText:true },
+                'Expertise[2]':{ValidPlainText:true },
+                'Expertise[3]':{ValidPlainText:true },
+                'Expertise[4]':{ValidPlainText:true },
+                'Expertise[5]':{ValidPlainText:true },
+                'PresentationLink[1]' : {required: true},
+                'Language[1]' : {required: true,ValidPlainText:true},
+                'Language[2]':{ValidPlainText:true },
+                'Language[3]':{ValidPlainText:true },
+                'Language[4]':{ValidPlainText:true },
+                'Language[5]':{ValidPlainText:true },
+                WillingToTravel : {required: true},
                 'IRCHandle':{ ValidPlainText:true },
                 'TwitterName':{ ValidPlainText:true }
             },
@@ -246,9 +257,17 @@ jQuery(document).ready(function($) {
                     regex: 'Title is not valid.'
                 },
                 Bio:'Bio is required.',
-                Expertise: {
-                    required: 'Expertise is required.',
+                'Expertise[1]': {
+                    required: 'Add at least one area of expertise.',
                     regex: 'Expertise is not valid.'
+                },
+                'PresentationLink[1]': {
+                    required: 'Add at least one presentation link.',
+                    regex: 'Link is not valid.'
+                },
+                'Language[1]': {
+                    required: 'Add at least one language you are fluent in.',
+                    regex: 'Language is not valid.'
                 }
             }
         });
@@ -270,8 +289,10 @@ jQuery(document).ready(function($) {
         });
 
         // see if Bio has been modified, we do it this way because we can't make the textarea onchange event work
-        edit_speaker_profile_form.submit(function()
+        edit_speaker_profile_form.submit(function(event)
         {
+            if(!edit_speaker_profile_form.valid()) return false;
+
             if (tinyMCE.activeEditor.isDirty()) {
                 if (confirm("We see you just updated your Speaker Bio, would you like to copy this to your Profile Bio?") == true) {
                     $(speaker_form_id+'_ReplaceBio').val(1);
