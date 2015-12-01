@@ -66,7 +66,7 @@
         </div>
     </div>
     <!-- Forrester promo -->
-<!--     <div class="content-section-b forrester-promo-row">
+<div class="content-section-b forrester-promo-row">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="featured-use-case-wrapper light-blue">
        <div class="container">
             <div class="row section-title-center">

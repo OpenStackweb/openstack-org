@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-sm-12 center">
                     <div class="intro-message">
-                        <h1>Forrester Report:<br>OpenStack is Ready - Are You?</h1>
+                        <h1>Forrester Report<br>Brief: OpenStack Is Now Ready For Business</h1>
                         <h3>Research-based Insight and Objective Advice for IT Professionals</h3>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             Learn from the lessons of the OpenStack masters to help you succeed with the popular private cloud platform 
                         </p>
                         <p>
-                            <a href="//openstack.org/assets/pdf-downloads/OpenStack-Is-Ready-Are-You.pdf" target="_blank" class="forrester-download-btn">Download The Forrester Report</a>
+                            <a href="//openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" target="_blank" class="forrester-download-btn">Download The Forrester Report</a>
                         </p>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-push-3 forrester-download-row">
                     <p>
-                        Download two reports from Forrester: "OpenStack is Ready, Are You?" and "The Total Economic Impact of OpenStack".
+                        Download two reports from Forrester: "Brief: OpenStack Is Now Ready For Business?" and "The Total Economic Impact of OpenStack".
                     </p>
                     <p>
                         <a href="#" data-toggle="modal" data-target="#ForresterDownload" class="forrester-download-btn">Download both Forrester Reports</a>
@@ -166,7 +166,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                  Select the paper(s) you want to download.
             </p>
-                <a href="https://www.openstack.org/assets/pdf-downloads/OpenStack-Is-Ready-Are-You.pdf" class="download-btn half"><i class="fa fa-arrow-circle-down fa-2x"></i> Download<br/>"OpenStack is Ready, Are You?"</a>
+                <a href="https://www.openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" class="download-btn half"><i class="fa fa-arrow-circle-down fa-2x"></i> Download<br/>"Brief: OpenStack Is Now Ready For Business"</a>
                 <a href="https://www.openstack.org/assets/pdf-downloads/ForresterOpenStackTEIStudy-20150701.pdf" class="download-btn half"><i class="fa fa-arrow-circle-down fa-2x"></i> Download<br/>"Total Economic Impact of OpenStack"*</a>
                 <div class="center" style="margin-bottom:10px;">
                     <a href="http://openstack.org/assets/pdf-downloads/OpenStackForresterReports.zip">Download Both Papers (zip)</a>
