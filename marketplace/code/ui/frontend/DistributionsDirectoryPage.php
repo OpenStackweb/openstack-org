@@ -175,8 +175,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 
             return $render->draw();
         } catch (Exception $ex) {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
             return $this->httpError(404, 'Sorry that Distribution could not be found!.');
         }
     }
@@ -201,6 +200,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 
             return $render->draw();
         } catch (Exception $ex) {
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
             return $this->httpError(404, 'Sorry that Appliance could not be found!.');
         }
     }
