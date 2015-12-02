@@ -17,6 +17,7 @@ final class SummitEntity extends DataExtension
 
     private $updating   = false;
     private $inserting  = false;
+    private $triggered  = false;
 
     public function onBeforeWrite()
     {
@@ -34,11 +35,12 @@ final class SummitEntity extends DataExtension
 
     public function onAfterWrite()
     {
-
+        if($this->triggered) return;
         if($this->inserting)
         {
             // insert
 
+            $this->triggered = true;
             PublisherSubscriberManager::getInstance()->publish
             (
                 ISummitEntityEvent::InsertedEntity,
@@ -50,6 +52,7 @@ final class SummitEntity extends DataExtension
         }
         else
         {
+            $this->triggered = true;
             PublisherSubscriberManager::getInstance()->publish
             (
                 ISummitEntityEvent::UpdatedEntity,
@@ -63,7 +66,8 @@ final class SummitEntity extends DataExtension
 
     public function onBeforeDelete()
     {
-
+        if($this->triggered) return;
+        $this->triggered = true;
         PublisherSubscriberManager::getInstance()->publish
         (
             ISummitEntityEvent::DeletedEntity,
