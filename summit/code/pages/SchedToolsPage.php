@@ -84,7 +84,7 @@ class SchedToolsPage_Controller extends Page_Controller
 	function ImportSpeakersFromSched()
 	{
 
-		$feed = new RestfulService('http://openstacksummitoctober2015tokyo.sched.org/api/role/export?api_key=47dfbdc49d82ff16669df259952656fa&role=speaker&format=xml&fields=username,name,email', 7200);
+		$feed = new RestfulService('http://openstacksummitoctober2015tokyo.sched.org/api/role/export?api_key=36fde701e81eeea22e61e0b30942a804&role=speaker&format=xml&fields=username,name,email', 7200);
 
 		$feedXML = $feed->request()->getBody();
 
@@ -180,6 +180,8 @@ class SchedToolsPage_Controller extends Page_Controller
 
 		} else {
 			$data["HasError"] = TRUE;
+			print_r($Presentation);
+			echo "Is a speaker " . $$Presentation->IsASpeaker($SpeakerID);
 			return $this->Customise($data);
 		}
 
@@ -260,6 +262,47 @@ class SchedToolsPage_Controller extends Page_Controller
 
 	}
 
+
+	public function ListSpeakers() {
+
+		$filepath = $_SERVER['DOCUMENT_ROOT'].'/assets/shed-speaker-list.csv';
+		$fp = fopen($filepath, 'w');
+
+		// Setup file to be UTF8
+		fprintf($fp, chr(0xEF).chr(0xBB).chr(0xBF));
+
+		$Speakers = SchedSpeaker::get();
+
+		foreach ($Speakers as $Speaker) {
+
+			if($Speaker->PresentationsForThisSpeaker()->count()) {
+
+				// Output speaker row
+				$fields = array(
+					$Speaker->name,
+					$Speaker->email,
+					$Speaker->SpeakerHash(),
+					'https://www.openstack.org/speaker-upload/Presentations/?key=' . $Speaker->SpeakerHash()
+				);
+
+				fputcsv($fp, $fields);
+
+			}
+		}
+
+		fclose($fp);
+
+		header("Cache-control: private");
+		header("Content-type: application/force-download");
+		header("Content-transfer-encoding: binary\n");
+		header("Content-disposition: attachment; filename=\"shed-speaker-list.csv\"");
+		header("Content-Length: ".filesize($filepath));
+		readfile($filepath);        
+
+        
+    }
+
+
 	function EmailSpeakers()
 	{
 
@@ -297,6 +340,7 @@ class SchedToolsPage_Controller extends Page_Controller
 
 		}
 	}
+
 
 	/**
 	 * Validate an email address.

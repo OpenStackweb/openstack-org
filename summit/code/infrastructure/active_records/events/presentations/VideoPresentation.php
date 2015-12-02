@@ -130,7 +130,7 @@ class VideoPresentation extends DataObject
 //Test whether the URLSegment exists already on another Video
 	function LookForExistingURLSegment($URLSegment)
 	{
-		return (DataObject::get_one('Presentation', "URLSegment = '" . $URLSegment . "' AND ID != " . $this->ID));
+		return (DataObject::get_one('VideoPresentation', "URLSegment = '" . $URLSegment . "' AND ID != " . $this->ID));
 	}
 
 // Pull video thumbnail from YouTube API
@@ -198,12 +198,13 @@ class VideoPresentation extends DataObject
 
 			// Check to see if the speaker is listed on this event
 			if( $Speaker &&
-				$Speaker->name && 
-				strpos($this->Speakers, $Speaker->name) !== FALSE ) 
+		 		$Speaker->name && 
+		 		VideoPresentation::get()->filter('speakers:PartialMatch',$this->name)->filter('ID', $this->ID)->count() ) 
 			{
 				return TRUE;
 			}	
 		}
+	
 	}
 
 	public function UploadedMedia() {

@@ -24,13 +24,13 @@ class SchedSpeaker extends DataObject {
 
 	function PresentationsForThisSpeaker() {
 
-		$Presentations = VideoPresentation::get()->filter('speakers:PartialMatch',$this->name);
+		$Presentations = VideoPresentation::get()->filter('speakers:PartialMatch',$this->name)->filter('SummitID',5);
 		return $Presentations;
 	}
 
 	function PresentationsWithoutMedia() {
 
-		$Presentations = VideoPresentation::get()->filter('speakers:PartialMatch',$this->name);
+		$Presentations = VideoPresentation::get()->filter('speakers:PartialMatch',$this->name)->filter('SummitID',5);
 
 		$MissingMedia = FALSE;
 

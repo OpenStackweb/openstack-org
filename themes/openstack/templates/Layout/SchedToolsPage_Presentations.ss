@@ -10,7 +10,7 @@
 	<div class="row">
 	<div class="col-lg-9">
 		<div class="presentation">
-			<a href="{$Top.link}Upload/{$ID}" class="presentation-title">$eventtitle</a>
+			<a href="{$Top.link}Upload/{$ID}" class="presentation-title">$Name</a>
 			<% if isFile %>
 				<% if UploadedMedia %><br/>Currently attached file: <strong>{$UploadedMedia.Name}</strong><% end_if %>
 			<% else %>
@@ -27,7 +27,7 @@
 	<div class="row">
 	<div class="col-lg-9">
 		<div class="presentation no-media">
-			<a href="{$Top.link}Upload/{$ID}" class="presentation-title">$eventtitle</a>
+			<a href="{$Top.link}Upload/{$ID}" class="presentation-title">$Name</a>
 			<br/>No slides have been provided yet. Please <a href="{$Top.link}Upload/{$ID}">upload</a> your slides.</strong>
 		</div>
 	</div>

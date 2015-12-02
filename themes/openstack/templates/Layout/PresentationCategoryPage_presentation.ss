@@ -34,19 +34,39 @@
 				</div>
 				<div class="col-sm-5">
 					<!-- Slides -->
-					<% if SlidesLink %>
-						<div class="video-media-wrapper">
-							<p>
-								<strong>Related Media:</strong>
-							</p>
-							<p class="video-media-title">
-                                $Top.PresentationFileName($SlidesLink)
-							</p>
-							<div class="media-btn-wrapper">
-								<a href="{$SlidesLink}" class="media-btn"><i class="fa fa-cloud-download"></i> Download</a>
+					<% if HasAttachmentOrLink %>
+						<% if isFile %>
+
+							<div class="video-media-wrapper">
+								<p>
+									<strong>Download slides:</strong>
+								</p>
+								<p class="video-media-title">
+	                                $UploadedMedia.Name
+								</p>
+								<div class="media-btn-wrapper">
+									<a href="{$UploadedMedia.Link}" class="media-btn"><i class="fa fa-cloud-download"></i> Download</a>
+								</div>
 							</div>
-						</div>
+
+						<% else %>
+							<% if HostedMediaURL %>
+								<div class="video-media-wrapper">
+									<p>
+										<strong>Slides available here:</strong>
+									</p>
+									<p class="video-media-title">
+		                                $HostedMediaURL
+									</p>
+									<div class="media-btn-wrapper">
+										<a href="{$HostedMediaURL}" class="media-btn"><i class="fa fa-cloud-download"></i> Go</a>
+									</div>
+								</div>
+							<% end_if %>
+						<% end_if %>
 					<% end_if %>
+
+
 				</div>
 			</div>
 		</div>
