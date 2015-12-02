@@ -21,6 +21,7 @@
 
                     <tr>
                         <td>$Type</td>
+                        <td width="15">&nbsp;</td>
                         <td id="enabled_{$ID}"></td>
                     </tr>
                 <% end_loop %>
