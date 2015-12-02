@@ -32,7 +32,7 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
         else
         {
             // just record the published state at the moment of the update
-            $metadata = json_encode( array ( 'pub_new' => intval($this->Published)));
+            $metadata = json_encode( array ( 'pub_new' => intval($entity->Published)));
         }
     }
 
