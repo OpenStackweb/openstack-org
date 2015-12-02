@@ -7,3 +7,5 @@ Injector:
     class: ObservableManyManyList
   TimeField:
     class: ClockTimePickerField
+  HasManyList:
+    class: CustomHasManyList

@@ -22,11 +22,17 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
     if($entity instanceof SummitEvent)
     {
         $fields = $entity->getChangedFields(true);
+        // check if there was a change on publishing state
         if(isset($fields['Published']))
         {
             $pub_old  = intval($fields['Published']['before']);
             $pub_new  = intval($fields['Published']['after']);
             $metadata = json_encode( array ( 'pub_old' => $pub_old, 'pub_new' => $pub_new));
+        }
+        else
+        {
+            // just record the published state at the moment of the update
+            $metadata = json_encode( array ( 'pub_new' => intval($this->Published)));
         }
     }
 
@@ -111,45 +117,80 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Removed
 
 PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', function($list, $item){
 
-    if(!$item instanceof ISummitEvent) return;
-    $summit_id = $item->getField("SummitID");
-    if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
+    if($item instanceof ISummitEvent && $list->getJoinTable() === 'SummitAttendee_Schedule') {
+        $summit_id = $item->getField("SummitID");
+        if (is_null($summit_id) || $summit_id == 0) {
+            $summit_id = Summit::ActiveSummitID();
+        }
 
-    $join_table = $list->getJoinTable();
-    if($join_table !== 'SummitAttendee_Schedule') return;
-    $attendee_id   = $list->getForeignID();
-    $attendee = SummitAttendee::get()->byID($attendee_id);
+        $attendee_id = $list->getForeignID();
+        $attendee = SummitAttendee::get()->byID($attendee_id);
 
-    $metadata = '';
-    $event                  = new SummitEntityEvent();
-    $event->EntityClassName = 'MySchedule';
-    $event->EntityID        = $item->ID;
-    $event->Type            = 'INSERT';
-    $event->OwnerID         = $attendee->MemberID;
-    $event->SummitID        = $summit_id;
-    $event->Metadata        = $metadata;
-    $event->write();
+        $metadata = '';
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'MySchedule';
+        $event->EntityID = $item->ID;
+        $event->Type = 'INSERT';
+        $event->OwnerID = $attendee->MemberID;
+        $event->SummitID = $summit_id;
+        $event->Metadata = $metadata;
+        $event->write();
+    }
+    if($item instanceof PresentationSpeaker && $list->getJoinTable() === 'Presentation_Speakers')
+    {
+        // removed speaker from presentation
+
+        $presentation_id = intval($list->getForeignID());
+        $presentation    = Presentation::get()->byID($presentation_id);
+        if(is_null($presentation)) return;
+        $speaker_id      = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'SpeakerFromEvent';
+        $event->EntityID = $speaker_id;
+        $event->Type     = 'INSERT';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $presentation->SummitID;
+        $event->Metadata = json_encode( array('presentation_id' => $presentation_id ));
+        $event->write();
+    }
 });
 
 
 PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item', function($list, $item){
 
-    if(!$item instanceof ISummitEvent) return;
-    $summit_id = $item->getField("SummitID");
-    if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
-    $metadata = '';
+    if($item instanceof ISummitEvent && $list->getJoinTable() === 'SummitAttendee_Schedule') {
+        $summit_id = $item->getField("SummitID");
+        if (is_null($summit_id) || $summit_id == 0) {
+            $summit_id = Summit::ActiveSummitID();
+        }
+        $metadata = '';
+        $attendee_id = $list->getForeignID();
+        $attendee = SummitAttendee::get()->byID($attendee_id);
 
-    $join_table = $list->getJoinTable();
-    if($join_table !== 'SummitAttendee_Schedule') return;
-    $attendee_id   = $list->getForeignID();
-    $attendee = SummitAttendee::get()->byID($attendee_id);
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'MySchedule';
+        $event->EntityID = $item->ID;
+        $event->Type = 'DELETE';
+        $event->OwnerID = $attendee->MemberID;
+        $event->SummitID = $summit_id;
+        $event->Metadata = $metadata;
+        $event->write();
+    }
+    if($item instanceof PresentationSpeaker && $list->getJoinTable() === 'Presentation_Speakers')
+    {
+        // removed speaker from presentation
 
-    $event                  = new SummitEntityEvent();
-    $event->EntityClassName = 'MySchedule';
-    $event->EntityID        = $item->ID;
-    $event->Type            = 'DELETE';
-    $event->OwnerID         = $attendee->MemberID;
-    $event->SummitID        = $summit_id;
-    $event->Metadata        = $metadata;
-    $event->write();
+        $presentation_id = intval($list->getForeignID());
+        $presentation    = Presentation::get()->byID($presentation_id);
+        if(is_null($presentation)) return;
+        $speaker_id      = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'SpeakerFromEvent';
+        $event->EntityID = $speaker_id;
+        $event->Type     = 'DELETE';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $presentation->SummitID;
+        $event->Metadata = json_encode( array('presentation_id' => $presentation_id ));
+        $event->write();
+    }
 });

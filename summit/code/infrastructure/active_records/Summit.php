@@ -694,139 +694,144 @@ final class Summit extends DataObject implements ISummit
 
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
 
-        $config = new GridFieldConfig_RelationEditor(10);
-        $categories = new GridField('Categories','Presentation Categories',$this->Categories(), $config);
-        $f->addFieldToTab('Root.Presentation Categories', $categories);
+        if($this->ID > 0) {
+            $config = new GridFieldConfig_RelationEditor(10);
+            $categories = new GridField('Categories', 'Presentation Categories', $this->Categories(), $config);
+            $f->addFieldToTab('Root.Presentation Categories', $categories);
 
-        // locations
+            // locations
 
-        $config = GridFieldConfig_RecordEditor::create();
-        $config->removeComponentsByType('GridFieldAddNewButton');
-        $multi_class_selector = new GridFieldAddNewMultiClass();
-        $multi_class_selector->setClasses
-        (
-            array
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+            $multi_class_selector->setClasses
             (
-              'SummitVenue'            => 'Venue',
-              'SummitHotel'            => 'Hotel',
-              'SummitAirport'          => 'Airport',
-              'SummitExternalLocation' => 'External Location',
-            )
-        );
-        $config->addComponent($multi_class_selector);
-        $config->addComponent($sort = new GridFieldSortableRows('Order'));
-        $gridField = new GridField('Locations', 'Locations', $this->Locations()->where("ClassName <> 'SummitVenueRoom' "), $config);
-        $f->addFieldToTab('Root.Locations', $gridField);
+                array
+                (
+                    'SummitVenue' => 'Venue',
+                    'SummitHotel' => 'Hotel',
+                    'SummitAirport' => 'Airport',
+                    'SummitExternalLocation' => 'External Location',
+                )
+            );
+            $config->addComponent($multi_class_selector);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $gridField = new GridField('Locations', 'Locations',
+                $this->Locations()->where("ClassName <> 'SummitVenueRoom' "), $config);
+            $f->addFieldToTab('Root.Locations', $gridField);
 
-        // types
+            // types
 
-        $config = GridFieldConfig_RecordEditor::create();
-        $gridField = new GridField('Types', 'Types', $this->Types(), $config);
-        $f->addFieldToTab('Root.Types', $gridField);
+            $config = GridFieldConfig_RecordEditor::create();
+            $gridField = new GridField('Types', 'Types', $this->Types(), $config);
+            $f->addFieldToTab('Root.Types', $gridField);
 
-        // event types
-        $config = GridFieldConfig_RecordEditor::create();
-        $gridField = new GridField('EventTypes', 'EventTypes', $this->EventTypes(), $config);
-        $f->addFieldToTab('Root.EventTypes', $gridField);
+            // event types
+            $config = GridFieldConfig_RecordEditor::create();
+            $gridField = new GridField('EventTypes', 'EventTypes', $this->EventTypes(), $config);
+            $f->addFieldToTab('Root.EventTypes', $gridField);
 
-        //schedule
+            //schedule
 
-        $config = GridFieldConfig_RecordEditor::create();
-        $config->addComponent(new GridFieldAjaxRefresh(1000,false));
-        $config->removeComponentsByType('GridFieldDeleteAction');
-        $gridField = new GridField('Schedule', 'Schedule', $this->Events()->filter('Published', true)->sort
-        (
-            array
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->removeComponentsByType('GridFieldDeleteAction');
+            $gridField = new GridField('Schedule', 'Schedule', $this->Events()->filter('Published', true)->sort
             (
-                'StartDate' => 'ASC',
-                'EndDate' => 'ASC'
-            )
-        ) , $config);
-        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description"=>"HTMLText->BigSummary"));
-        $f->addFieldToTab('Root.Schedule', $gridField);
-        $config->addComponent(new GridFieldPublishSummitEventAction);
+                array
+                (
+                    'StartDate' => 'ASC',
+                    'EndDate' => 'ASC'
+                )
+            ), $config);
+            $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
+            $f->addFieldToTab('Root.Schedule', $gridField);
+            $config->addComponent(new GridFieldPublishSummitEventAction);
 
-        // events
+            // events
 
-        $config = GridFieldConfig_RecordEditor::create();
-        $config->addComponent(new GridFieldPublishSummitEventAction);
-        $config->addComponent(new GridFieldAjaxRefresh(1000,false));
-        $gridField = new GridField('Events', 'Events', $this->Events()->filter('ClassName','SummitEvent') , $config);
-        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description"=>"HTMLText->BigSummary"));
-        $f->addFieldToTab('Root.Events', $gridField);
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->addComponent(new GridFieldPublishSummitEventAction);
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $gridField = new GridField('Events', 'Events', $this->Events()->filter('ClassName', 'SummitEvent'),
+                $config);
+            $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
+            $f->addFieldToTab('Root.Events', $gridField);
 
-        //track selection list presentations
+            //track selection list presentations
 
-       $result = DB::query("SELECT DISTINCT SummitEvent.*, Presentation.*
+            $result = DB::query("SELECT DISTINCT SummitEvent.*, Presentation.*
 FROM SummitEvent
 INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
 INNER JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
 INNER JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID
 WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (SummitEvent.SummitID = 5)");
 
-        $presentations = new ArrayList();
-        foreach($result as $row)
-        {
-            $presentations->add(new Presentation($row));
-        }
+            $presentations = new ArrayList();
+            foreach ($result as $row) {
+                $presentations->add(new Presentation($row));
+            }
 
-        $config = GridFieldConfig_RecordEditor::create();
-        $config->addComponent(new GridFieldPublishSummitEventAction);
-        $config->addComponent(new GridFieldAjaxRefresh(1000, false));
-        $config->removeComponentsByType('GridFieldAddNewButton');
-        $gridField = new GridField('TrackChairs', 'TrackChairs Selection Lists',$presentations  , $config);
-        $gridField->setModelClass('Presentation');
-        $f->addFieldToTab('Root.TrackChairs Selection Lists', $gridField);
-
-
-        // attendees
-
-        $config = GridFieldConfig_RecordEditor::create();
-        $gridField = new GridField('Attendees', 'Attendees', $this->Attendees(), $config);
-        $f->addFieldToTab('Root.Attendees', $gridField);
-
-        //tickets types
-
-        $config = GridFieldConfig_RecordEditor::create();
-        $gridField = new GridField('SummitTicketTypes', 'Ticket Types', $this->SummitTicketTypes(), $config);
-        $f->addFieldToTab('Root.TicketTypes', $gridField);
-
-        // promo codes
-
-        $config    = GridFieldConfig_RecordEditor::create(25);
-        $config->removeComponentsByType('GridFieldAddNewButton');
-        $multi_class_selector = new GridFieldAddNewMultiClass();
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent(new GridFieldPublishSummitEventAction);
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $gridField = new GridField('TrackChairs', 'TrackChairs Selection Lists', $presentations, $config);
+            $gridField->setModelClass('Presentation');
+            $f->addFieldToTab('Root.TrackChairs Selection Lists', $gridField);
 
 
-        $multi_class_selector->setClasses
-        (
-            array
+            // attendees
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $gridField = new GridField('Attendees', 'Attendees', $this->Attendees(), $config);
+            $f->addFieldToTab('Root.Attendees', $gridField);
+
+            //tickets types
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $gridField = new GridField('SummitTicketTypes', 'Ticket Types', $this->SummitTicketTypes(), $config);
+            $f->addFieldToTab('Root.TicketTypes', $gridField);
+
+            // promo codes
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+
+
+            $multi_class_selector->setClasses
             (
-                'SpeakerSummitRegistrationPromoCode' => 'Speaker Promo Code',
-            )
-        );
+                array
+                (
+                    'SpeakerSummitRegistrationPromoCode' => 'Speaker Promo Code',
+                )
+            );
 
-        $config->addComponent($multi_class_selector);
+            $config->addComponent($multi_class_selector);
 
 
-        $promo_codes = new GridField('SummitRegistrationPromoCodes','Registration Promo Codes', $this->SummitRegistrationPromoCodes(), $config);
-        $f->addFieldToTab('Root.RegistrationPromoCodes', $promo_codes);
+            $promo_codes = new GridField('SummitRegistrationPromoCodes', 'Registration Promo Codes',
+                $this->SummitRegistrationPromoCodes(), $config);
+            $f->addFieldToTab('Root.RegistrationPromoCodes', $promo_codes);
 
-        // speakers
+            // speakers
 
-        $config = GridFieldConfig_RecordEditor::create();
-        $gridField = new GridField('Speakers', 'Speakers', $this->Speakers(false), $config);
-        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Bio"=>"HTMLText->BigSummary"));
-        $f->addFieldToTab('Root.Speakers', $gridField);
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $gridField = new GridField('Speakers', 'Speakers', $this->Speakers(false), $config);
+            $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Bio" => "HTMLText->BigSummary"));
+            $f->addFieldToTab('Root.Speakers', $gridField);
 
-        // presentations
+            // presentations
 
-        $config = GridFieldConfig_RecordEditor::create();
-        $config->addComponent(new GridFieldPublishSummitEventAction);
-        $config->addComponent(new GridFieldAjaxRefresh(1000, false));
-        $gridField = new GridField('Presentations', 'Presentations', $this->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
-        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description"=>"HTMLText->BigSummary"));
-        $f->addFieldToTab('Root.Presentations', $gridField);
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->addComponent(new GridFieldPublishSummitEventAction);
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $gridField = new GridField('Presentations', 'Presentations',
+                $this->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
+            $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
+            $f->addFieldToTab('Root.Presentations', $gridField);
+        }
         return $f;
 
     }
