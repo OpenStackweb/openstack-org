@@ -51,6 +51,9 @@
                 The OpenStack Foundation will offer its first professional certification for OpenStack administrators starting in Q2 2016.
                 The Certified OpenStack Administrator (COA) test will be virtual and available anywhere in the world.
             </p>
+            <p>
+               To learn more about the OpenStack job tasks and capabilities that will be tested please go to <a href="coa/requirements">www.openstack.org/coa/requirements</a>
+            </p>
             <div class="sendgrid-subscription-widget coa-sendgrid" data-token="s8WtfiU6aMmIzKLc%2BECPIqKV2Tm%2B5QfB9x4YBNZt4VlTuNHCQ4mKObQJGeMLabqCP5XJUxPeYLwQkJcQuc2kLw%3D%3D">
                 <i class="fa fa-envelope-o fa-3x"></i>
               <p>
