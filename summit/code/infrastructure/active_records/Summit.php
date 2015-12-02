@@ -432,16 +432,11 @@ final class Summit extends DataObject implements ISummit
             if(!$day instanceof DateTime)
                 $day = new DateTime($day);
 
-            $time_zone_id   = $this->TimeZone;
-            $time_zone_list = timezone_identifiers_list();
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            $time_zone      = new \DateTimeZone($time_zone_name);
-            $day->setTimezone($time_zone);
-            $start = $day->setTime(0,0,0);
-            $end   = $day->add(new DateInterval('PT23H59M59S'));
+            $start = $day->setTime(0,0,0)->format("Y-m-d H:i:s");
+            $end   = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
 
-            $query->addAndCondition(QueryCriteria::greaterOrEqual('StartDate',$this->convertDateFromTimeZone2UTC($start->format("Y-m-d H:i:s"))));
-            $query->addAndCondition(QueryCriteria::lowerOrEqual('EndDate', $this->convertDateFromTimeZone2UTC($end->format("Y-m-d H:i:s"))));
+            $query->addAndCondition(QueryCriteria::greaterOrEqual('StartDate',$this->convertDateFromTimeZone2UTC($start)));
+            $query->addAndCondition(QueryCriteria::lowerOrEqual('EndDate', $this->convertDateFromTimeZone2UTC($end)));
         }
         $query->addOrder(QueryOrder::asc('StartDate'));
         return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',$query)->toArray();
