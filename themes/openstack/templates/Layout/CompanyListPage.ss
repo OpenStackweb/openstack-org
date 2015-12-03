@@ -1,5 +1,29 @@
 		<h1>Companies Supporting The OpenStack Foundation</h1>
 		<p>The OpenStack Foundation would not exist without the support of the Platinum, Gold, and Corporate Sponsors listed below.  Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
+		
+		<!-- Infrastructure Donors -->
+		<hr/>
+		<div class="span-24 last">
+			<h2>Infrastructure Donors</h2>
+			<p>
+				Infrastructure donors are companies running OpenStack public clouds, donating cloud resources to the OpenStack project infrastructure. Those resources are mostly used in our automated testing framework to support OpenStack development efforts.
+			</p>
+		</div>
+
+		<div class="span-24 logos last">
+			<a rel="nofollow" href="http://www.rackspace.com/">
+				<span style="background-image: url(/assets/Uploads/_resampled/SetWidth138-rackspace-sm.png);"></span>
+				Rackspace
+			</a>
+			<a href="/foundation/companies/profile/hewlett-packard-enterprise">\
+				<span style="background-image: url(/assets/companies/main_logo/_resampled/SetWidth138-hpe-pri-grn-pos-rgb2.png);"></span>
+				Hewlett Packard Enterprise
+			</a>
+			<a href="/foundation/companies/profile/ovh-group">
+				<span style="background-image: url(/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png);"></span>
+				OVH Group
+			</a>
+		</div>
 
 		<!-- Platinum Members -->
 		<hr/>
