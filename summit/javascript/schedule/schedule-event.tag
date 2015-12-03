@@ -70,7 +70,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="{ parent.base_url+'evenst/'+ this.id } " class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">GO TO EVENT</a>
+                            <a href="{ parent.base_url+'events/'+ this.id } " class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">GO TO EVENT</a>
                         </div>
                     </div>
                 </div>
