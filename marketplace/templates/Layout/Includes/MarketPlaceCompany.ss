@@ -17,7 +17,7 @@
                 <h1 style="color: #{$Company.CompanyColor} !important;"> $Name </h1>
             </div>
             <div class="col-sm-4">
-                <a style="background-color: #{$Company.CompanyColor}" href="$Call2ActionUri" rel="nofollow" class="marketplace-details-btn">Details &amp; Signup</a>
+                <a style="background-color: #{$Company.CompanyColor}; color: #ffffff;" href="$Call2ActionUri" rel="nofollow" class="marketplace-details-btn">Details &amp; Signup</a>
             </div>
         </div>
         <div class="row">
