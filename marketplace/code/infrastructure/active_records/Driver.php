@@ -11,62 +11,64 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class Driver
  */
-class Driver extends DataObject implements IDriver {
+class Driver extends DataObject implements IDriver
+{
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
     static $db = array(
-		'Name'  => 'Varchar(255)',
-        'Description'  => 'HTMLText',
+        'Name' => 'Varchar(255)',
+        'Description' => 'HTMLText',
         'Project' => 'Varchar(255)',
         'Vendor' => 'Varchar(255)',
         'Url' => 'Varchar(255)',
         'Tested' => 'Boolean',
-	);
+    );
 
     static $many_many = array(
-        'Releases'  => 'DriverRelease',
+        'Releases' => 'DriverRelease',
     );
 
 
-	static $indexes = array(
-		'Name' => array('type'=>'unique', 'value'=>'Name')
-	);
+    static $indexes = array(
+        'Name_Project' => array('type' => 'unique', 'value' => 'Name, Project')
+    );
 
-	static $summary_fields = array(
-		'Name' => 'Name',
+    static $summary_fields = array(
+        'Name' => 'Name',
         'Description' => 'Description',
         'Project' => 'Project',
         'Vendor' => 'Vendor',
         'Tested' => 'Tested'
-	);
+    );
 
-	/**
-	 * @return int
-	 */
-	public function getIdentifier()
-	{
-		return (int)$this->getField('ID');
-	}
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->getField('Name');
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getField('Name');
+    }
 
-	/**
-	 * @param string $name
-	 * @return void
-	 */
-	public function setName($name)
-	{
-		$this->setField('Name',$name);
-	}
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->setField('Name', $name);
+    }
 
 }

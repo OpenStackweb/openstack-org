@@ -11,16 +11,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class UpdateDriversTask
  */
-final class UpdateDriversTask extends CronTask {
+final class UpdateDriversTask extends CronTask
+{
 
-	function run(){
+    function run()
+    {
 
-		set_time_limit(0);
+        set_time_limit(0);
 
-		try{
+        try {
             $url = 'http://stackalytics.com/driverlog/api/1.0/drivers';
             $jsonResponse = @file_get_contents($url);
 
@@ -28,22 +31,29 @@ final class UpdateDriversTask extends CronTask {
             $array = $driverArray['drivers'];
 
             foreach ($array as $contents) {
-                $driver = Driver::get()->filter("Name",trim($contents['name']))->first();
+                if(!isset($contents['project_name']) || !isset($contents['name'])) continue;
+
+                $driver = Driver::get()->filter(
+                    array(
+                        "Name" => trim($contents['name']),
+                        "Project" => trim($contents['project_name'])
+                    )
+                )->first();
 
                 if (!$driver) {
                     $driver = new Driver();
                 }
 
                 $driver->Name = trim($contents['name']);
-                $driver->Description = $contents['description'];
+                $driver->Description = isset($contents['description'])?$contents['description']: null;
                 $driver->Project = $contents['project_name'];
-                $driver->Vendor = $contents['vendor'];
-                $driver->Url = $contents['wiki'];
+                $driver->Vendor = isset($contents['vendor'])?$contents['vendor']: null;
+                $driver->Url = isset($contents['wiki'])?$contents['wiki']: null;
 
                 if (isset($contents['releases_info'])) {
                     $releases = $contents['releases_info'];
                     foreach ($releases as $release) {
-                        $driver_release = DriverRelease::get()->filter("Name",trim($release['name']))->first();
+                        $driver_release = DriverRelease::get()->filter("Name", trim($release['name']))->first();
 
                         if (!$driver_release) {
                             $driver_release = new DriverRelease();
@@ -60,11 +70,10 @@ final class UpdateDriversTask extends CronTask {
                 $driver->write();
             }
 
-			return 'OK';
-		}
-		catch(Exception $ex){
-			SS_Log::log($ex,SS_Log::ERR);
-			echo $ex->getMessage();
-		}
-	}
+            return 'OK';
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            echo $ex->getMessage();
+        }
+    }
 } 
