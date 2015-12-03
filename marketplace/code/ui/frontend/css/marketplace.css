@@ -146,6 +146,10 @@ ul.marketplace-nav a:active,ul.marketplace-nav a:hover{
     margin: 40px 0 20px;
     border-radius: 4px; }
 
+.marketplace-details-btn a:visited {
+    color: #ffffff;
+}
+
 @media (max-width: 767px) {
     .info-area h1 {
         margin-bottom: 10px; }
