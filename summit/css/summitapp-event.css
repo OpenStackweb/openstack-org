@@ -21,7 +21,7 @@
     margin-bottom: 10px;
     text-align: left;
     color: white;
-    font-size: 40px;
+    font-size: 42px;
     float: left;
 }
 
@@ -32,16 +32,24 @@
 
 .subtitle {
     text-transform: uppercase;
-    color: grey;
     font-size: 15px;
     clear: both;
+}
+
+.subtitle a {
+    color: grey;
+    text-decoration: none;
+}
+
+.subtitle a:hover {
+    text-decoration: underline;
 }
 
 .section1 {
     padding-top: 30px;
     padding-bottom: 30px;
     color: #494949;
-    border-bottom: 1px solid grey;
+    /*border-bottom: 1px solid grey;*/
 }
 
 .short_description {
@@ -79,6 +87,7 @@
 
 .share {
     clear: both;
+    margin-top: 20px;
 }
 
 .share_icon {
@@ -98,12 +107,18 @@
 }
 
 .description {
-    font-size: 16px;
+    font-family: "Helvetica",sans-serif;
+    font-size: 18px !important;
+    font-weight: 400 !important;
 }
 
 .logo {
-    float: right;
-    width: 30%;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.multi_logo {
+    float: left;
 }
 
 .speaker_box {
@@ -130,18 +145,19 @@
 
 .speaker_name {
     margin:0;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .speaker_job_title {
     color: #AAAAAA;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .speaker_bio {
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 14px;
+    font-family: "Helvetica",sans-serif;
 }
 
 .speaker_bio a {
@@ -157,9 +173,10 @@
 }
 
 .comment_title {
-    font-size: 20px;
+    font-size: 18px;
     border-bottom: 2px solid #EEEEEE;
     padding-bottom: 15px;
+    font-weight: lighter;
 }
 
 .comment {

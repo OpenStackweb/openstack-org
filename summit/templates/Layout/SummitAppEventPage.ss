@@ -18,8 +18,22 @@
 </div>
 <div class="section1">
     <div class="container">
-        <div class="short_description col1">
-            $Event.ShortDescription()
+        <div class="description col1">
+            $Event.Description()
+
+            <div class="share">
+                <script type="application/javascript">
+                        var share_info =
+                        {
+                            url: "{$AbsoluteLink}event/{$Event.ID}",
+                            title : "{$Event.Title.JS}",
+                            description: "{$Event.ShortDescription().JS}",
+                            image: "",
+                            fb_app_id : "227356147446887",
+                        };
+                </script>
+                <share-buttons share_info="{ share_info }"></share-buttons>
+            </div>
         </div>
         <div class="info col2">
             <div class="info_item">
@@ -31,46 +45,39 @@
                 <div class="info_item_text">$Event.LocationNameNice()</div>
             </div>
 
-            <% if Event.isAllowedSummitType("Design Summit + Main Conference") == 1 %>
+            <% if Event.isAllowedSummitType("DESIGN") == 1 %>
             <div class="info_item">
                 <div class="info_item_icon"><img style="height:15px" src="/summit/images/summitapp/credential.png" /></div>
                 <div class="info_item_text">Design Summit Credential</div>
             </div>
             <% end_if %>
-
-        </div>
-        <div class="share">
-            <script type="application/javascript">
-                    var share_info =
-                    {
-                        url: "{$AbsoluteLink}event/{$Event.ID}",
-                        title : "{$Event.Title.JS}",
-                        description: "{$Event.ShortDescription().JS}",
-                        image: "",
-                        fb_app_id : "227356147446887",
-                    };
-            </script>
-            <share-buttons share_info="{ share_info }"></share-buttons>
+            <div class="logo">
+                <% loop Event.Sponsors %>
+                    <% if TotalItems = 1 %>
+                        $LargeLogoPreview()
+                    <% else %>
+                        $SidebarLogoPreview(100)
+                    <% end_if %>
+                <% end_loop %>
+            </div>
         </div>
     </div>
 </div>
+<%--
 <div class="container section2">
-    <div class="description col1">
-        $Event.Description()
-    </div>
-    <div class="logo"></div>
 </div>
+--%>
 
 <% if Event.getSpeakers().toArray() %>
     <div class="speaker_box">
         <div class="container">
             <% loop Event.getSpeakers() %>
-            <div class="row speaker_profile col1">
+            <div class="row speaker_profile">
                 <div class="speaker_pic img-circle"> <img src="$ProfilePhoto(100)" width="100" class="img-circle" /> </div>
                 <div class="speaker_info">
                     <div class="speaker_name"> $FirstName $LastName </div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
-                    <div class="speaker_bio"> $getShortBio(200) <a href="{$Top.AbsoluteLink}speakers/{$ID}">FULL BIO</a></div>
+                    <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
                 </div>
             </div>
             <% end_loop %>
