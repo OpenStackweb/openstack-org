@@ -12,8 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-
 class SchedRefactoringMigration2 extends AbstractDBMigrationTask
 {
     protected $title = "Sched Refactoring #2";
@@ -22,21 +20,14 @@ class SchedRefactoringMigration2 extends AbstractDBMigrationTask
 
     function doUp()
     {
-     global $database;	
-     $SQL = <<<SQL
-     SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA ='{$database}' AND TABLE_NAME= 'Presentation_Tags';
-SQL;
+        global $database;
 
-        $exists_table = intval(DB::query($SQL)->value()) > 0;
-
-        if($exists_table) {
-
-
-        DB::query("INSERT INTO SummitEvent_Tags (SummitEventID, TagID) select PresentationID, TagID from Presentation_Tags;");
-        DB::query("DROP TABLE Presentation_Tags;");
-        DB::query("UPDATE SummitEvent INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID SET SummitEvent.ShortDescription = Presentation.ShortDescription;");
-        DB::query("ALTER TABLE Presentation DROP COLUMN ShortDescription;");
-}
+        if (DBSchema::existsTable($database, 'Presentation_Tags')) {
+            DB::query("INSERT INTO SummitEvent_Tags (SummitEventID, TagID) select PresentationID, TagID from Presentation_Tags;");
+            DB::query("DROP TABLE Presentation_Tags;");
+            DB::query("UPDATE SummitEvent INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID SET SummitEvent.ShortDescription = Presentation.ShortDescription;");
+            DB::query("ALTER TABLE Presentation DROP COLUMN ShortDescription;");
+        }
     }
 
     function doDown()
