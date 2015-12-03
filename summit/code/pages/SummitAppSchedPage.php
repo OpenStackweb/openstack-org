@@ -17,7 +17,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
     );
 
     static $url_handlers = array(
-        'events/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
+        'event/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
         'speakers/$SPEAKER_ID'          => 'ViewSpeakerProfile',
         'attendees/$ATTENDEE_ID'        => 'ViewAttendeeProfile',
         'global-search'                 => 'DoGlobalSearch',
