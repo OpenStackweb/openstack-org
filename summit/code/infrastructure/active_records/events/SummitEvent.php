@@ -415,7 +415,6 @@ class SummitEvent extends DataObject implements ISummitEvent
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
         if(!empty($value))
         {
-            error_log('start date '. $value);
             $value = $summit->convertDateFromTimeZone2UTC($value);
             $this->setField('StartDate', $value);
         }
@@ -428,7 +427,6 @@ class SummitEvent extends DataObject implements ISummitEvent
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
         if(!empty($value))
         {
-            error_log('end date '. $value);
             $value = $summit->convertDateFromTimeZone2UTC($value);
             $this->setField('EndDate', $value);
         }
@@ -490,7 +488,7 @@ class SummitEvent extends DataObject implements ISummitEvent
 
             $start_date = new DateTime($start_date);
             $end_date   = new DateTime($end_date);
-            error_log(sprintf('validate :  event start date %s - event end date %s', $start_date->format("Y-m-d H:i:s"), $end_date->format("Y-m-d H:i:s")));
+
             if($end_date < $start_date)
                 return $valid->error('start datetime must be greather or equal than end datetime!');
 
