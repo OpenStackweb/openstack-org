@@ -21,7 +21,8 @@ class SummitType extends DataObject implements ISummitType
         'Audience'    => 'Text',
         'StartDate'   => 'SS_Datetime',
         'EndDate'     => 'SS_Datetime',
-        'Color'       => 'Text'
+        'Color'       => 'Text',
+        'Type'        => "Enum('MAIN, DESIGN, OTHER', 'MAIN')",
     );
 
 
@@ -106,7 +107,8 @@ class SummitType extends DataObject implements ISummitType
         'Title',
         'Audience',
         'StartDate',
-        'EndDate'
+        'EndDate',
+        'Type'
     );
 
     private static $searchable_fields = array
@@ -179,6 +181,7 @@ class SummitType extends DataObject implements ISummitType
         );
 
         $f->addFieldToTab('Root.Main', new TextField('Title','Title'));
+        $f->addFieldToTab('Root.Main', new DropdownField('Type','Type',singleton('SummitType')->dbObject('Type')->enumValues()));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
         $f->addFieldToTab('Root.Main', new ColorField("Color","Color"));
         $f->addFieldToTab('Root.Main', new TextField('Audience','Audience'));
