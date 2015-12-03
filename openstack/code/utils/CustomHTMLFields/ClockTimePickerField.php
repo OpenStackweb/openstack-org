@@ -28,4 +28,5 @@ class ClockTimePickerField extends TimeField
             ->customise($properties)
             ->renderWith(array("ClockTimePickerField"));
     }
+
 }

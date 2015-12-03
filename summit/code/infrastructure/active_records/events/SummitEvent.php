@@ -415,6 +415,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
         if(!empty($value))
         {
+            error_log('start date '. $value);
             $value = $summit->convertDateFromTimeZone2UTC($value);
             $this->setField('StartDate', $value);
         }
@@ -427,6 +428,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
         if(!empty($value))
         {
+            error_log('end date '. $value);
             $value = $summit->convertDateFromTimeZone2UTC($value);
             $this->setField('EndDate', $value);
         }
