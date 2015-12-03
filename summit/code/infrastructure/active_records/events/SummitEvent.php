@@ -88,7 +88,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     public function getLink() {
-        return $this->Summit()->Link.'schedule/event/'.$this->getIdentifier().'/'.$this->getTitleForUrl();
+        return $this->Summit()->Link.'schedule/event/'.$this->getIdentifier().'/'.$this->getTitleForUrl(); 
     }
 
     public function getTitleForUrl() {
