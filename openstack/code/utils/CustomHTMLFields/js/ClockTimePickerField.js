@@ -12,7 +12,7 @@
                         align: 'left',
                         autoclose: true,
                         'default': 'now',
-                        twelvehour:  true,
+                        twelvehour:  false,
                     }
                 );
             },
