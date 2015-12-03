@@ -136,16 +136,32 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', 
         $event->Metadata = $metadata;
         $event->write();
     }
+    if($item instanceof Company && $list->getJoinTable() === 'SummitEvent_Sponsors')
+    {
+        // add sponsor
+        $event_id     = intval($list->getForeignID());
+        $summit_event        = SummitEvent::get()->byID($event_id);
+        if(is_null($summit_event)) return;
+        $company_id      = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'SponsorFromEvent';
+        $event->EntityID = $company_id;
+        $event->Type     = 'INSERT';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $summit_event->SummitID;
+        $event->Metadata = json_encode( array('event_id' => $event_id ));
+        $event->write();
+    }
     if($item instanceof PresentationSpeaker && $list->getJoinTable() === 'Presentation_Speakers')
     {
-        // removed speaker from presentation
+        // add speaker from presentation
 
         $presentation_id = intval($list->getForeignID());
         $presentation    = Presentation::get()->byID($presentation_id);
         if(is_null($presentation)) return;
         $speaker_id      = $item->ID;
         $event = new SummitEntityEvent();
-        $event->EntityClassName = 'SpeakerFromEvent';
+        $event->EntityClassName = 'SpeakerFromPresentation';
         $event->EntityID = $speaker_id;
         $event->Type     = 'INSERT';
         $event->OwnerID  = Member::currentUserID();
@@ -176,6 +192,22 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
         $event->Metadata = $metadata;
         $event->write();
     }
+    if($item instanceof Company && $list->getJoinTable() === 'SummitEvent_Sponsors')
+    {
+        // removed sponsor
+        $event_id     = intval($list->getForeignID());
+        $summit_event        = SummitEvent::get()->byID($event_id);
+        if(is_null($summit_event)) return;
+        $company_id      = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'SponsorFromEvent';
+        $event->EntityID = $company_id;
+        $event->Type     = 'DELETE';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $summit_event->SummitID;
+        $event->Metadata = json_encode( array('event_id' => $event_id ));
+        $event->write();
+    }
     if($item instanceof PresentationSpeaker && $list->getJoinTable() === 'Presentation_Speakers')
     {
         // removed speaker from presentation
@@ -185,7 +217,7 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
         if(is_null($presentation)) return;
         $speaker_id      = $item->ID;
         $event = new SummitEntityEvent();
-        $event->EntityClassName = 'SpeakerFromEvent';
+        $event->EntityClassName = 'SpeakerFromPresentation';
         $event->EntityID = $speaker_id;
         $event->Type     = 'DELETE';
         $event->OwnerID  = Member::currentUserID();
