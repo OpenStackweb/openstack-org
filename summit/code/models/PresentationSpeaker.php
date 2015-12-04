@@ -101,7 +101,10 @@ implements IPresentationSpeaker
      * @return  string
      */
     protected function linkTo($presentationID, $action = null) {
-        if($page = PresentationPage::get()->first()) {
+
+        $presentation = Presentation::get()->byID($presentationID);
+        if(is_null($presentation)) return false;
+        if($page = PresentationPage::get()->filter('SummitID', $presentation->SummitID)->first()) {
             return Controller::join_links(
                 $page->Link(),
                 'manage',
