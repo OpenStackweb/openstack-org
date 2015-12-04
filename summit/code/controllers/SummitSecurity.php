@@ -429,6 +429,7 @@ class SummitSecurity extends SummitPage_Controller {
     public function CurrentSummitPage(){
         $summit = Summit::get_active();
         $page = SummitOverviewPage::get()->filter('SummitID', $summit->ID)->first();
+        if(is_null($page)) $page = SummitStaticAboutPage::get()->filter('SummitID', $summit->ID)->first();
         return $page;
     }
 
@@ -440,7 +441,8 @@ class SummitSecurity extends SummitPage_Controller {
     }
 
     public function SummitRoot(){
-        return $this->CurrentSummitPage()->Link();
+        $summit_page = $this->CurrentSummitPage();
+        return !is_null($summit_page)? $summit_page->Link(): '#';
     }
 
     public function PresentationDeadlineText(){
