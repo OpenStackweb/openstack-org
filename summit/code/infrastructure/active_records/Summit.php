@@ -699,6 +699,7 @@ final class Summit extends DataObject implements ISummit
 
 
         if($this->ID > 0) {
+            // tracks
             $config = new GridFieldConfig_RelationEditor(10);
             $categories = new GridField('Categories', 'Presentation Categories', $this->Categories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
@@ -757,8 +758,7 @@ final class Summit extends DataObject implements ISummit
             $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
-            $gridField = new GridField('Events', 'Events', $this->Events()->filter('ClassName', 'SummitEvent'),
-                $config);
+            $gridField = new GridField('Events', 'Events', $this->Events()->filter('ClassName', 'SummitEvent'), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Events', $gridField);
 
@@ -769,7 +769,7 @@ FROM SummitEvent
 INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
 INNER JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
 INNER JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID
-WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (SummitEvent.SummitID = 5)");
+WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (SummitEvent.SummitID = {$this->ID})");
 
             $presentations = new ArrayList();
             foreach ($result as $row) {
@@ -831,8 +831,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
-            $gridField = new GridField('Presentations', 'Presentations',
-                $this->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
+            $gridField = new GridField('Presentations', 'Presentations', $this->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Presentations', $gridField);
         }
@@ -1093,19 +1092,18 @@ SQL;
     {
         $id     = $this->ID;
         $filter = $only_published ? "AND E.Published = 1 " : "";
+        $dl     = new DataList('PresentationSpeaker');
 
-        $dl = new DataList('PresentationSpeaker');
-        $dl
-            ->leftJoin('Member', ' Member.ID = PresentationSpeaker.MemberID')
-            ->where("WHERE S.SummitID = {$id} AND EXISTS
+        $dl = $dl->leftJoin('Member', ' Member.ID = PresentationSpeaker.MemberID')
+            ->where("EXISTS
             (
                 SELECT E.ID FROM SummitEvent E
                 INNER JOIN Presentation P ON E.ID = P.ID
                 INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
                 WHERE E.SummitID = {$id}
                 {$filter}
-                AND PS.PresentationSpeakerID = S.ID
-            );");
+                AND PS.PresentationSpeakerID = PresentationSpeaker.ID
+            )");
         return $dl;
     }
 
