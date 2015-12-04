@@ -23,6 +23,30 @@
 			<% end_loop %>
 
 		</div>
+
+		<!-- Gold Members -->
+		<% if DisplayedCompanies(Gold) %>
+		<div class="clearfix"></div>
+		<hr/>
+		<div class="span-24 last">
+			<h2>Gold Members</h2>
+			<p>
+			OpenStack Foundation Gold Members provide funding and pledge strategic alignment to the OpenStack mission. There can be up to twenty-four Gold Members at any given time, subject to board approval. If your organization is highly involved with OpenStack and interested in becoming a Gold Member, read more about <a href="/join">joining the Foundation</a>. Thank you to the following Gold Members who are committed to OpenStack's success.
+			</p>
+		</div>
+
+		<div class="span-24 logos last">
+
+			<% loop DisplayedCompanies(Gold) %>
+                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
+					<% loop Logo %>
+						<span style="background-image: url({$SetWidth(138).URL});"></span>
+					<% end_loop %>
+					$Name</a>
+			<% end_loop %>
+
+		</div>
+		<% end_if %>
 		
 		<!-- Infrastructure Donors -->
 		
@@ -49,30 +73,6 @@
 				OVH Group
 			</a>
 		</div>
-
-		<!-- Gold Members -->
-		<% if DisplayedCompanies(Gold) %>
-		<div class="clearfix"></div>
-		<hr/>
-		<div class="span-24 last">
-			<h2>Gold Members</h2>
-			<p>
-			OpenStack Foundation Gold Members provide funding and pledge strategic alignment to the OpenStack mission. There can be up to twenty-four Gold Members at any given time, subject to board approval. If your organization is highly involved with OpenStack and interested in becoming a Gold Member, read more about <a href="/join">joining the Foundation</a>. Thank you to the following Gold Members who are committed to OpenStack's success.
-			</p>
-		</div>
-
-		<div class="span-24 logos last">
-
-			<% loop DisplayedCompanies(Gold) %>
-                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
-					<% loop Logo %>
-						<span style="background-image: url({$SetWidth(138).URL});"></span>
-					<% end_loop %>
-					$Name</a>
-			<% end_loop %>
-
-		</div>
-		<% end_if %>
 
 		<!-- Corporate & Startup Members -->
 		<% if DisplayedCompanies(Combined) %>
