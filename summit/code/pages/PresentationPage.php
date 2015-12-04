@@ -433,7 +433,7 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function Summit()
     {
-        return $this->parent()->Summit();
+        return $this->parent->Summit();
     }
 
 

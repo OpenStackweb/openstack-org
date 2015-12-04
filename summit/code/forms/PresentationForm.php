@@ -59,7 +59,7 @@ class PresentationForm extends BootstrapForm
                     ->setSource(Tag::get())
                     ->setPrefetch(
                         Tag::get()
-                            ->leftJoin('Presentation_Tags', 'TagID = Tag.ID')                            
+                            ->leftJoin('SummitEvent_Tags', 'TagID = Tag.ID')
                             ->sort('COUNT(Tag.ID)','DESC')
                             ->limit(10)
                             ->alterDataQuery(function($query) {
