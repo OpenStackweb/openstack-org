@@ -129,7 +129,7 @@ class PresentationMemberExtension extends DataExtension
      * @param  Summit $summit
      * @return SpeakerSummitState
      */
-    public function setSummitState($event, $notes = null, $summit = null) {        
+    public function setSummitState($event, $summit = null, $notes = null) {
         $summit = $summit ?: Summit::get_active();
         if(!$summit) {
             return false;

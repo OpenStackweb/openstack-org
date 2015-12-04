@@ -1247,8 +1247,10 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             return $this->redirectBack();
         }
 
-        $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_AGREED', $this->parent->getParent()->LegalAgreement,
-            $this->parent->Summit());
+        $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_AGREED',
+            $this->parent->Summit(),
+            $this->parent->getParent()->LegalAgreement
+        );
 
         return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
     }
@@ -1333,11 +1335,11 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         if ($data['VideoAgreement'] == 1) {
             $this->speaker->Member()->setSummitState(
                 'VIDEO_AGREEMENT_AGREED',
-                $this->parent->getParent()->LegalAgreement,
-                $this->parent->Summit()
+                $this->parent->Summit(),
+                $this->parent->getParent()->LegalAgreement
             );
         } else {
-            $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_DECLINED', null, $this->parent->Summit());
+            $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_DECLINED', $this->parent->Summit());
         }
 
         $this->speaker->write();
