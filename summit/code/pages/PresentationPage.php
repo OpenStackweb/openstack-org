@@ -1146,26 +1146,39 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
      */
     public function BureauForm()
     {
-        return BootstrapForm::create(
+        $fields = FieldList::create()
+            ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
+            ->configure()
+            ->addExtraClass('bureau-checkbox')
+            ->end()
+            ->checkbox('FundedTravel', 'My company would be willing to fund my travel to events')
+            ->configure()
+            ->addExtraClass('bureau-checkbox')
+            ->end()
+            ->countryDropdown('Country')
+            ->literal('ExpertiseTitle','<h3>Areas of Expertise ( Up to 5)</h3>')
+            ->text('Expertise[1]','#1')
+            ->text('Expertise[2]','#2')
+            ->text('Expertise[3]','#3')
+            ->text('Expertise[4]','#4')
+            ->text('Expertise[5]','#5');
+
+        foreach ($this->speaker->AreasOfExpertise() as $key => $expertise) {
+            if ($key > 4) break;
+            $fields->fieldByName('Expertise['.($key+1).']')->setValue($expertise->Expertise);
+        }
+
+        $form = BootstrapForm::create(
             $this,
             "BureauForm",
-            FieldList::create()
-                ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
-                ->configure()
-                ->addExtraClass('bureau-checkbox')
-                ->end()
-                ->checkbox('FundedTravel', 'My company would be willing to fund my travel to events')
-                ->configure()
-                ->addExtraClass('bureau-checkbox')
-                ->end()
-                ->countryDropdown('Country')
-                ->textarea('Expertise', 'My areas of expertise (one per line)')
-            ,
+            $fields,
             FieldList::create(
                 FormAction::create('doSaveBureau', 'Save Preferences'),
                 FormAction::create('doSkipBureau', 'Skip this step')
             )
         );
+        $form->loadDataFrom($this->speaker);
+        return $form;
     }
 
 
@@ -1265,12 +1278,19 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     public function doSaveSpeaker($data, $form)
     {
         $form->saveInto($this->speaker);
+        foreach ($data['Expertise'] as $exp) {
+            if (trim($exp) != '') {
+                $expertise = SpeakerExpertise::create(array(
+                    'Expertise' => $exp
+                ));
+                $this->speaker->AreasOfExpertise()->add( $expertise );
+            }
+        }
         $this->speaker->write();
         $member = $this->speaker->Member();
         if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
         }
-
         return $this->parent->getParent()->redirect($this->Link('bureau'));
     }
 
@@ -1285,6 +1305,15 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     {
         $form->saveInto($this->speaker);
         $this->speaker->Member()->setSummitState('BUREAU_SEEN', $this->parent->Summit());
+
+        foreach ($data['Expertise'] as $exp) {
+            if (trim($exp) != '') {
+                $expertise = SpeakerExpertise::create(array(
+                    'Expertise' => $exp
+                ));
+                $this->speaker->AreasOfExpertise()->add( $expertise );
+            }
+        }
         $this->speaker->write();
 
         if ($this->isMe()) {
@@ -1341,7 +1370,14 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         } else {
             $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_DECLINED', $this->parent->Summit());
         }
-
+        foreach ($data['Expertise'] as $exp) {
+            if (trim($exp) != '') {
+                $expertise = SpeakerExpertise::create(array(
+                    'Expertise' => $exp
+                ));
+                $this->speaker->AreasOfExpertise()->add( $expertise );
+            }
+        }
         $this->speaker->write();
         $form->sessionMessage('Your details have been updated.', 'good');
         Session::clear("FormInfo.{$form->FormName()}.data", $data);
