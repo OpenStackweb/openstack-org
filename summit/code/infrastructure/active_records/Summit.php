@@ -654,6 +654,9 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main',$registration_link = new TextField('RegistrationLink', 'Registration Link'));
         $registration_link->setDescription('Link to the site where tickets can be purchased.');
 
+        $f->addFieldsToTab('Root.Main', $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
+        $ddl_timezone->setEmptyString('-- Select a Timezone --');
+
         $f->addFieldToTab('Root.Main',$date = new DatetimeField('SummitBeginDate', 'Summit Begin Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
@@ -693,9 +696,7 @@ final class Summit extends DataObject implements ISummit
 
         $f->addFieldToTab('Root.Main',new TextField('ComingSoonBtnText', 'Coming Soon Btn Text'));
         $f->addFieldToTab('Root.Main',new TextField('ExternalEventId', 'Eventbrite Event Id'));
-        $f->addFieldsToTab('Root.Main', $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
 
-        $ddl_timezone->setEmptyString('-- Select a Timezone --');
 
         if($this->ID > 0) {
             $config = new GridFieldConfig_RelationEditor(10);
