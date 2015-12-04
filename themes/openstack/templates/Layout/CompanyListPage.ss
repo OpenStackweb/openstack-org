@@ -1,6 +1,29 @@
 		<h1>Companies Supporting The OpenStack Foundation</h1>
 		<p>The OpenStack Foundation would not exist without the support of the Platinum, Gold, and Corporate Sponsors listed below.  Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
 		
+
+		<!-- Platinum Members -->
+		<hr/>
+		<div class="span-24 last">
+			<h2>Platinum Members</h2>
+			<p>
+			OpenStack Foundation Platinum Members provide a significant portion of the funding to achieve the Foundation's mission of protecting, empowering and promoting the OpenStack community and software. Each Platinum Member's company strategy aligns with the OpenStack mission and is responsible for committing full-time resources toward the project.  There are eight Platinum Members at any given time, each of which holds a seat on the Board of Directors. Thank you to the following Platinum Members who are committed to OpenStack's success.
+			</p>
+		</div>
+
+		<div class="span-24 logos last">
+
+			<% loop DisplayedCompanies(Platinum) %>
+                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
+					<% loop Logo %>
+						<span style="background-image: url({$SetWidth(138).URL});"></span>
+					<% end_loop %>
+					$Name
+				</a>
+			<% end_loop %>
+
+		</div>
+		
 		<!-- Infrastructure Donors -->
 		<hr/>
 		<div class="span-24 last">
@@ -23,28 +46,6 @@
 				<span style="background-image: url(/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png);"></span>
 				OVH Group
 			</a>
-		</div>
-
-		<!-- Platinum Members -->
-		<hr/>
-		<div class="span-24 last">
-			<h2>Platinum Members</h2>
-			<p>
-			OpenStack Foundation Platinum Members provide a significant portion of the funding to achieve the Foundation's mission of protecting, empowering and promoting the OpenStack community and software. Each Platinum Member's company strategy aligns with the OpenStack mission and is responsible for committing full-time resources toward the project.  There are eight Platinum Members at any given time, each of which holds a seat on the Board of Directors. Thank you to the following Platinum Members who are committed to OpenStack's success.
-			</p>
-		</div>
-
-		<div class="span-24 logos last">
-
-			<% loop DisplayedCompanies(Platinum) %>
-                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
-					<% loop Logo %>
-						<span style="background-image: url({$SetWidth(138).URL});"></span>
-					<% end_loop %>
-					$Name
-				</a>
-			<% end_loop %>
-
 		</div>
 
 		<!-- Gold Members -->
