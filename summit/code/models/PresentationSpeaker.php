@@ -247,6 +247,12 @@ implements IPresentationSpeaker
         $this->write();
     }
 
+    public function PublishedPresentations() {
+        $summit = Summit::get_active();
+        $Presentations = $this->Presentations('`SummitID` = '.$summit->ID. ' AND Published = 1');
+        return $Presentations;
+    }
+
     public function AcceptedPresentations($summit_id = null) {
         $AcceptedPresentations = new ArrayList();
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
