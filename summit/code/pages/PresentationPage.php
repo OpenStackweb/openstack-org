@@ -5,7 +5,7 @@ class PresentationPage extends SummitPage
 
     private static $db = array
     (
-        'LegalAgreement' => 'HTMLText',
+        'LegalAgreement'           => 'HTMLText',
         'PresentationDeadlineText' => 'HTMLText',
     );
 

@@ -100,7 +100,7 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function Link()
     {
-        return PresentationPage::get()->first()->Link('show/'.$this->ID);
+        return PresentationPage::get()->filter('SummitID', $this->SummitID)->first()->Link('show/'.$this->ID);
     }
 
     /**
@@ -110,7 +110,7 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function EditLink()
     {
-        if($page = PresentationPage::get()->first()) {
+        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
             return Controller::join_links($page->Link(),'manage', $this->ID, 'summary');
         }
     }
@@ -122,7 +122,7 @@ class Presentation extends SummitEvent implements IPresentation
      * @return  string
      */
     public function PreviewLink() {
-        if($page = PresentationPage::get()->first()) {
+        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
             return Controller::join_links($page->Link(),'manage', $this->ID, 'preview');
         }
     }
@@ -134,7 +134,7 @@ class Presentation extends SummitEvent implements IPresentation
      * @return  string
      */
     public function EditSpeakersLink() {
-        if($page = PresentationPage::get()->first()) {
+        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
             return Controller::join_links($page->Link(),'manage', $this->ID, 'speakers');
         }
     }
@@ -145,7 +145,7 @@ class Presentation extends SummitEvent implements IPresentation
      * @return  string
      */
     public function DeleteLink() {
-        if($page = PresentationPage::get()->first()) {
+        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
             return Controller::join_links($page->Link(),'manage', $this->ID, 'delete','?t='.SecurityToken::inst()->getValue());
         }
     }
