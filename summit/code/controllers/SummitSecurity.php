@@ -90,9 +90,7 @@ class SummitSecurity extends SummitPage_Controller {
     public function CurrentCallForSpeakersPageUrl(){
         $current_summit = Summit::get_active();
         if(!$current_summit) return null;
-        $current_summit_page = SummitOverviewPage::get()->filter('SummitID', $current_summit->ID)->first();
-        if(!$current_summit_page) return null;
-        $presentation_page = PresentationPage::get()->filter('ParentID',$current_summit_page->ID)->first();
+        $presentation_page = PresentationPage::get()->filter('SummitID',$current_summit->ID)->first();
         if(!$presentation_page) return null;
         return $presentation_page->Link();
     }
@@ -127,7 +125,7 @@ class SummitSecurity extends SummitPage_Controller {
      */
     public function index() {
         $back_url = $this->CurrentCallForSpeakersPageUrl();
-        if(is_null($back_url))  return $this->httpError(404, "Summit Speakers Not Found!");
+        if(is_null($back_url))  return $this->httpError(404, "Call for Speakers Page not Found!");
         if(Member::currentUser())
             return $this->redirect($back_url);
         return $this->redirect($this->Link('login'));
