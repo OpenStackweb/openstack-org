@@ -40,13 +40,13 @@
 				<span style="background-image: url(/assets/Uploads/_resampled/SetWidth138-rackspace-sm.png);"></span>
 				Rackspace
 			</a>
-			<a href="/foundation/companies/profile/hewlett-packard-enterprise">\
-				<span style="background-image: url(/assets/companies/main_logo/_resampled/SetWidth138-hpe-pri-grn-pos-rgb2.png);"></span>
-				Hewlett Packard Enterprise
-			</a>
 			<a href="/foundation/companies/profile/ovh-group">
 				<span style="background-image: url(/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png);"></span>
 				OVH Group
+			</a>
+			<a href="/foundation/companies/profile/hewlett-packard-enterprise">
+				<span style="background-image: url(/assets/companies/main_logo/_resampled/SetWidth138-hpe-pri-grn-pos-rgb2.png);"></span>
+				Hewlett Packard Enterprise
 			</a>
 		</div>
 
