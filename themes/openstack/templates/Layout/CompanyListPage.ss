@@ -25,6 +25,8 @@
 		</div>
 		
 		<!-- Infrastructure Donors -->
+		
+		<div class="clearfix"></div>
 		<hr/>
 		<div class="span-24 last">
 			<h2>Infrastructure Donors</h2>
