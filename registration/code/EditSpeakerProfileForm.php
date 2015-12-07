@@ -30,7 +30,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
         // Country Field
         $CountryCodes = CountryCodes::$iso_3166_countryCodes;
-        $CountryField = new DropdownField('Country', 'Country', $CountryCodes);
+        $CountryField = new DropdownField('Country', 'Country of Residence', $CountryCodes);
         $CountryField->setEmptyString('-- Select One --');
         $CountryField->setValue($country);
 
@@ -74,6 +74,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         // Countries to travel
         $CountriesToTravelField = new MultiDropdownField('CountriesToTravel', 'Countries willing to travel to', $CountryCodes);
         $CountriesToTravelField->setEmptyString('-- Select One or More --');
+        $CountriesToTravelField->setSize(10);
 
         // Spoken Languages
         $LanguageField1 = new TextField('Language[1]','#1');
