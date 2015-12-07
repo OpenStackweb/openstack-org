@@ -1,9 +1,6 @@
 <div class="container">
 	<h1>OpenStack Job Board</h1>
 	<div class="postEvent">
-		<p>
-		    Submit your Job Offer here.
-		</p>
 		<a href="$PostJobLink">Post A Job For Free</a>
 	</div>
 	<div class="row">
@@ -17,9 +14,6 @@
 		</div>
 	</div>
 	<div class="postEvent">
-		<p>
-		    Submit your Job Offer here.
-		</p>
 		<a href="$PostJobLink">Post A Job For Free</a>
 	</div>
 </div>
