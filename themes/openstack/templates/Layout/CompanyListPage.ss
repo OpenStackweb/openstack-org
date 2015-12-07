@@ -55,7 +55,7 @@
 		<div class="span-24 last">
 			<h2>Infrastructure Donors</h2>
 			<p>
-				Infrastructure donors are companies running OpenStack public clouds, donating cloud resources to the OpenStack project infrastructure. Those resources are mostly used in our <a href="http://docs.openstack.org/project-team-guide/testing.html" target="_blank">automated testing</a> framework to support OpenStack development efforts.
+				Infrastructure donors are companies running OpenStack clouds, donating cloud resources to the OpenStack project infrastructure. Those resources are mostly used in our <a href="http://docs.openstack.org/infra/system-config/contribute-cloud.html" target="_blank">automated testing</a> framework to support OpenStack development efforts.
 			</p>
 		</div>
 
