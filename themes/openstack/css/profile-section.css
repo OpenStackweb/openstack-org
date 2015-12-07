@@ -125,3 +125,7 @@ h3.section-divider:first-child {
 #Form_AddTrainingCourseForm .note_online{
 	display:none;
 }
+
+.travel-field {
+	min-height: 10em;
+}
