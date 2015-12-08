@@ -12,7 +12,6 @@
 	text-decoration: none;
 	color: black;
 	margin-bottom: 20px;
-	margin-right: 23px;
     font-size: 10px;
 }
 
@@ -22,16 +21,15 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+.logos .img-wrapper p {
+	height: 4em;
+}
 .logos img {
 	display: block;
     width: auto !important;
     max-width: 100%;
     height: auto !important;
     max-height: 100%;
-	border: 5px solid white;
-	margin-bottom: 7px;
-	margin-right: 5px;
-	background: no-repeat center center;
 }
 
 .small-logos a, .small-logos a:visited {
@@ -39,8 +37,6 @@
 	float: left;
 	text-decoration: none;
 	color: black;
-	margin-bottom: 20px;
-	margin-right: 23px;
 }
 
 .small-logos .img-wrapper {
@@ -55,10 +51,7 @@
     width: auto !important;
     max-width: 100%;
     height: auto !important;
-    max-height: 100px;
-	margin-bottom: 7px;
-	margin-right: 0px;
-	background: no-repeat center center;
+    max-height: 100%;
 }
 
 

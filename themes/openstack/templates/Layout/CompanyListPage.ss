@@ -143,7 +143,7 @@
 			<div class="row small-logos">
 
 				<% loop DisplayedCompanies(Mention) %>
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-2 col-xs-4">
 	            		<a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 	            			<div class="img-wrapper">
 								<% loop Logo %>
