@@ -48,7 +48,7 @@ class PresentationPage_Controller extends SummitPage_Controller
         'vote',
         'setpassword',
         'bio',
-        'BioForm',
+        'EditSpeakerProfileForm'
     );
 
 
@@ -244,22 +244,23 @@ class PresentationPage_Controller extends SummitPage_Controller
     }
 
 
-    public function BioForm(SS_HTTPRequest $r)
+    public function EditSpeakerProfileForm(SS_HTTPRequest $r)
     {
-        $form = SpeakerForm::create(
-            $this,
-            "BioForm",
-            FieldList::create(FormAction::create('doSaveBio', 'Save'))
-        );
-        if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
-            $form->loadDataFrom($data);
-        } else {
-            $form->loadDataFrom(Member::currentUser()->getSpeakerProfile());
+        if ($CurrentMember = Member::currentUser()) {
+            Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+            Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+            Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
+            Requirements::javascript("registration/javascript/edit.profile.page.js");
+            Requirements::javascript("framework/thirdparty/tinymce/tiny_mce.js");
+            Requirements::javascript("themes/openstack/javascript/simple-tinymce.js");
+
+            Requirements::css("registration/css/speaker.profile.form.css");
+
+            $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
+            $SpeakerProfileForm = New EditSpeakerProfileForm($this, 'EditSpeakerProfileForm', $speaker, $CurrentMember, null);
+            return $SpeakerProfileForm;
         }
-
-        return $form;
     }
-
 
     /**
      * Gets the presentations that have been already randomised for the user,
@@ -352,26 +353,6 @@ class PresentationPage_Controller extends SummitPage_Controller
         return $presentation;
     }
 
-
-    public function doSaveBio($data, $form)
-    {
-        Session::set("FormInfo.{$form->FormName()}.data", $data);
-        if (empty(strip_tags($data['Bio']))) {
-            $form->addErrorMessage('Bio', 'Please enter a bio', 'bad');
-
-            return $this->redirectBack();
-        }
-
-        $speaker = Member::currentUser()->getSpeakerProfile();
-        $form->saveInto($speaker);
-        $speaker->write();
-
-        $form->sessionMessage('Your bio has been updated', 'good');
-
-        Session::clear("FormInfo.{$form->FormName()}.data", $data);
-
-        return $this->redirectBack();
-    }
 }
 
 

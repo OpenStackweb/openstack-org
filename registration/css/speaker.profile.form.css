@@ -1,5 +1,22 @@
-.horizontal-fields > .field {
-    margin-right: 30px;
+.message {
+    margin: 1em 0;
+    padding: 0.5em;
+    font-weight: bold;
+    border: 1px black solid;
+    background-color: #B9FFB9;
+    border-color: #00FF00;
+}
+
+.good {
+    color: green;
+}
+
+fieldset ul {
+    list-style: none;
+}
+
+input[type="radio"] {
+    display: inline-block;
 }
 
 .clear {
@@ -8,14 +25,25 @@
 
 .field {
     margin-bottom: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .checkbox {
     top: -3px;
 }
 
+.mceLayout {
+    width: 100% !important;
+}
+
 .expertise {
     margin: 10px 0;
+    clear:both;
+}
+
+.expertise .error {
+    margin: 0 0 10px 27px;
 }
 
 .expertise > span {
@@ -30,4 +58,21 @@
 
 #EditSpeakerProfileForm_EditSpeakerProfileForm_WillingToTravel input {
     top: 6px;
+}
+
+label.error{
+    border: 1px solid #aaa;
+    background: #aa2222;
+    color: #fff;
+    padding: 5px;
+    margin: 0;
+    width: auto;
+    float:left;
+    -webkit-border-radius: 05px;
+    -moz-border-radius: 05px;
+    border-radius: 05px;
+}
+
+input.error{
+    border: 1px solid  #aa2222;
 }

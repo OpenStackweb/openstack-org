@@ -26,7 +26,8 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         $FirstNameField = new TextField('FirstName', "First Name");
         $LastNameField = new TextField('LastName', "Last Name");
         $TitleField = new TextField('Title',"Title");
-        $BioField = new TextAreaField('Bio',"Bio");
+        $BioField = new TinyMCEEditorField('Bio',"Bio");
+        $BioField->addExtraClass('bio');
 
         // Country Field
         $CountryCodes = CountryCodes::$iso_3166_countryCodes;
@@ -183,9 +184,9 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $PresentationLinkField5
         );
 
-        $actions = new FieldList(
-            new FormAction('addAction', 'Save Speaker Details')
-        );
+        $save_action = new FormAction('addAction', 'Save Speaker Details');
+        $save_action->addExtraClass('btn btn-primary');
+        $actions = new FieldList($save_action);
 
         $validator = new RequiredFields(
             'FirstName',
@@ -305,8 +306,10 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
             $speaker->write();
 
+            $form->sessionMessage('Your profile has been updated', 'good');
+            Session::clear("FormInfo.{$form->FormName()}.data", $data);
 
-	        $this->controller->redirect($this->controller()->Link().'speaker?saved=1');
+            return $this->controller()->redirectBack();
 
         }
         else {

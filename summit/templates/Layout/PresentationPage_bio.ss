@@ -9,7 +9,7 @@
 					<div class="main-panel-section">
 						<h2>Edit Your Speaker Information</h2>
 					</div>
-					$BioForm
+					$EditSpeakerProfileForm
 				</div>
 			</div>
 		</div>

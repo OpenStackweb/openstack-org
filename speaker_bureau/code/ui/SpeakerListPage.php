@@ -28,6 +28,7 @@ class SpeakerListPage_Controller extends Page_Controller
 
         //CSS
         Requirements::css("themes/openstack/css/jquery.autocomplete.css");
+        Requirements::css("speaker_bureau/css/speaker.bureau.css");
 
         Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
         Requirements::CustomScript("
@@ -62,18 +63,6 @@ class SpeakerListPage_Controller extends Page_Controller
         'suggestions',
         'SpeakerSearchForm'
     );
-
-    function LettersWithSpeakers(){
-        $query = DB::Query("SELECT DISTINCT SUBSTRING(LastName,1,1) as letter
-                                  FROM PresentationSpeaker WHERE AvailableForBureau = 1 ORDER BY letter");
-
-        $letter_list = array();
-        foreach ($query as $letter) {
-            $letter_list[] = new ArrayData(array("Letter"=>$letter['letter']));
-        }
-
-        return new ArrayList($letter_list);
-    }
 
     function SpeakerList()
     {
@@ -150,11 +139,7 @@ class SpeakerListPage_Controller extends Page_Controller
                                   UNION
                                   SELECT Expertise AS Result, 'Expertise' AS Source FROM SpeakerExpertise WHERE Expertise LIKE '%$query%'
                                   UNION
-                                  SELECT Name AS Result, 'Country' AS Source FROM Countries WHERE Name LIKE '%$query%'
-                                  UNION
-                                  SELECT Name AS Result, 'Company' AS Source FROM Org WHERE Name LIKE '%$query%'
-                                  UNION
-                                  SELECT DISTINCT Language AS Result, 'Language' AS Source FROM SpeakerLanguage WHERE Language LIKE '%$query%'");
+                                  SELECT Name AS Result, 'Company' AS Source FROM Org WHERE Name LIKE '%$query%'");
 
             $Suggestions = '';
 
@@ -172,8 +157,41 @@ class SpeakerListPage_Controller extends Page_Controller
 
     public function results()
     {
-        if ($query = $this->getSearchQuery()) {
+        $query = $this->request->getVar('search_query');
+        $spoken_language = $this->request->getVar('spoken_language');
+        $country_origin = $this->request->getVar('country_origin');
+        $travel_preference = $this->request->getVar('travel_preference');
+        $empty_search = true;
+        $where_string = "PresentationSpeaker.AvailableForBureau = 1";
 
+
+        if (!empty($spoken_language)) {
+            $empty_search = false;
+            $spoken_language = Convert::raw2sql($spoken_language);
+            $where_string .= " AND SpeakerLanguage.Language = '{$spoken_language}'";
+        }
+
+        if (!empty($country_origin)) {
+            $empty_search = false;
+            $country_origin = Convert::raw2sql($country_origin);
+            $where_string .= " AND Countries.Name = '{$country_origin}'";
+        }
+
+        if (!empty($travel_preference)) {
+            $empty_search = false;
+            $travel_preference = Convert::raw2sql($travel_preference);
+            $where_string .= " AND Countries2.Name = '{$travel_preference}'";
+        }
+
+        if (!empty($query)) {
+            $empty_search = false;
+            $query = Convert::raw2sql($query);
+            $where_string .= " AND (PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
+                          OR CONCAT_WS(' ',PresentationSpeaker.FirstName,PresentationSpeaker.LastName) LIKE '%{$query}%'
+                          OR SpeakerExpertise.Expertise LIKE '%{$query}%' OR Org.Name LIKE '%{$query}%')";
+        }
+
+        if (!$empty_search) {
             $Results = PresentationSpeaker::get()
                 ->leftJoin("SpeakerExpertise","SpeakerExpertise.SpeakerID = PresentationSpeaker.ID")
                 ->leftJoin("Countries","Countries.Code = PresentationSpeaker.Country")
@@ -181,10 +199,11 @@ class SpeakerListPage_Controller extends Page_Controller
                 ->leftJoin("Affiliation","Affiliation.MemberID = Member.ID")
                 ->leftJoin("Org","Org.ID = Affiliation.OrganizationID")
                 ->leftJoin("SpeakerLanguage","SpeakerLanguage.SpeakerID = PresentationSpeaker.ID")
-                ->where("PresentationSpeaker.AvailableForBureau = 1 AND (PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
-                          OR CONCAT_WS(' ',PresentationSpeaker.FirstName,PresentationSpeaker.LastName) LIKE '%{$query}%'
-                          OR Countries.Name LIKE '%{$query}%' OR SpeakerExpertise.Expertise LIKE '%{$query}%'
-                          OR Org.Name LIKE '%{$query}%' OR SpeakerLanguage.Language LIKE '%{$query}%')");
+                ->leftJoin("SpeakerTravelPreference","SpeakerTravelPreference.SpeakerID = PresentationSpeaker.ID")
+                ->leftJoin("Countries","Countries2.Code = SpeakerTravelPreference.Country","Countries2")
+                ->where($where_string)->
+
+            die($Results);
 
             // No Member was found
             if (!isset($Results) || $Results->count() == 0) {
@@ -243,6 +262,58 @@ class SpeakerListPage_Controller extends Page_Controller
         }
 
         return $form;
+    }
+
+    function LettersWithSpeakers(){
+        $query = DB::Query("SELECT DISTINCT SUBSTRING(LastName,1,1) as letter
+                                  FROM PresentationSpeaker WHERE AvailableForBureau = 1 ORDER BY letter");
+
+        $letter_list = array();
+        foreach ($query as $letter) {
+            $letter_list[] = new ArrayData(array("Letter"=>$letter['letter']));
+        }
+
+        return new ArrayList($letter_list);
+    }
+
+    function AvailableTravelCountries(){
+        $query = DB::Query("SELECT DISTINCT C.Name FROM Countries AS C
+                            LEFT JOIN SpeakerTravelPreference AS STP ON STP.Country = C.Code
+                            RIGHT JOIN PresentationSpeaker AS PS ON PS.ID = STP.SpeakerID
+                            WHERE PS.AvailableForBureau = 1");
+
+        $country_list = array();
+        foreach ($query as $country) {
+            $country_list[] = new ArrayData(array("Country"=>$country['Name']));
+        }
+
+        return new ArrayList($country_list);
+    }
+
+    function AvailableLanguages(){
+        $query = DB::Query("SELECT DISTINCT SL.Language FROM SpeakerLanguage AS SL
+                            RIGHT JOIN PresentationSpeaker AS PS ON PS.ID = SL.SpeakerID
+                            WHERE PS.AvailableForBureau = 1");
+
+        $language_list = array();
+        foreach ($query as $language) {
+            $language_list[] = new ArrayData(array("Language"=>$language['Language']));
+        }
+
+        return new ArrayList($language_list);
+    }
+
+    function AvailableCountries(){
+        $query = DB::Query("SELECT DISTINCT C.Name FROM Countries AS C
+                            RIGHT JOIN PresentationSpeaker AS PS ON PS.Country = C.Code
+                            WHERE PS.AvailableForBureau = 1");
+
+        $country_list = array();
+        foreach ($query as $country) {
+            $country_list[] = new ArrayData(array("Country"=>$country['Name']));
+        }
+
+        return new ArrayList($country_list);
     }
 
 }

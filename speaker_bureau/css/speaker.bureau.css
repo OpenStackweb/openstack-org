@@ -1,0 +1,19 @@
+.search_box > label > span {
+    font-weight: normal;
+    font-size: 10px;
+    color: #808080;
+    padding: 0 10px;
+}
+
+.search_box > .search_input {
+    width: 90%;
+}
+
+.search_box > .btn {
+    margin: 20px 0 0 0;
+}
+
+.filters select {
+    height: 30px;
+    margin-right: 15px;
+}
