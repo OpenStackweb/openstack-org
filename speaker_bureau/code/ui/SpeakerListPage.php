@@ -133,9 +133,9 @@ class SpeakerListPage_Controller extends Page_Controller
     {
         if ($query = $this->getSearchQuery('q')) {
 
-            $results = DB::query("SELECT CONCAT(FirstName,' ',LastName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE FirstName LIKE '%$query% AND AvailableForBureau = 1'
+            $results = DB::query("SELECT CONCAT(FirstName,' ',LastName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE FirstName LIKE '%$query%' AND AvailableForBureau = 1
                                   UNION
-                                  SELECT CONCAT(LastName,', ',FirstName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE LastName LIKE '%$query% AND AvailableForBureau = 1'
+                                  SELECT CONCAT(LastName,', ',FirstName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE LastName LIKE '%$query%' AND AvailableForBureau = 1
                                   UNION
                                   SELECT Expertise AS Result, 'Expertise' AS Source FROM SpeakerExpertise WHERE Expertise LIKE '%$query%'
                                   UNION
@@ -157,39 +157,34 @@ class SpeakerListPage_Controller extends Page_Controller
 
     public function results()
     {
-        $query = $this->request->getVar('search_query');
-        $spoken_language = $this->request->getVar('spoken_language');
-        $country_origin = $this->request->getVar('country_origin');
-        $travel_preference = $this->request->getVar('travel_preference');
         $empty_search = true;
         $where_string = "PresentationSpeaker.AvailableForBureau = 1";
 
 
-        if (!empty($spoken_language)) {
+        if ($spoken_language = $this->getSearchQuery('spoken_language')) {
             $empty_search = false;
-            $spoken_language = Convert::raw2sql($spoken_language);
             $where_string .= " AND SpeakerLanguage.Language = '{$spoken_language}'";
         }
 
-        if (!empty($country_origin)) {
+        if ($country_origin = $this->getSearchQuery('country_origin')) {
             $empty_search = false;
-            $country_origin = Convert::raw2sql($country_origin);
             $where_string .= " AND Countries.Name = '{$country_origin}'";
         }
 
-        if (!empty($travel_preference)) {
+        if ($travel_preference = $this->getSearchQuery('travel_preference')) {
             $empty_search = false;
-            $travel_preference = Convert::raw2sql($travel_preference);
             $where_string .= " AND Countries2.Name = '{$travel_preference}'";
         }
 
-        if (!empty($query)) {
+        if ($query = $this->getSearchQuery('search_query')) {
             $empty_search = false;
-            $query = Convert::raw2sql($query);
             $where_string .= " AND (PresentationSpeaker.FirstName LIKE '%{$query}%' OR PresentationSpeaker.LastName LIKE '%{$query}%'
                           OR CONCAT_WS(' ',PresentationSpeaker.FirstName,PresentationSpeaker.LastName) LIKE '%{$query}%'
+                          OR CONCAT_WS(', ',PresentationSpeaker.LastName,PresentationSpeaker.FirstName) LIKE '%{$query}%'
                           OR SpeakerExpertise.Expertise LIKE '%{$query}%' OR Org.Name LIKE '%{$query}%')";
         }
+
+        //die($where_string);
 
         if (!$empty_search) {
             $Results = PresentationSpeaker::get()
@@ -201,9 +196,7 @@ class SpeakerListPage_Controller extends Page_Controller
                 ->leftJoin("SpeakerLanguage","SpeakerLanguage.SpeakerID = PresentationSpeaker.ID")
                 ->leftJoin("SpeakerTravelPreference","SpeakerTravelPreference.SpeakerID = PresentationSpeaker.ID")
                 ->leftJoin("Countries","Countries2.Code = SpeakerTravelPreference.Country","Countries2")
-                ->where($where_string)->
-
-            die($Results);
+                ->where($where_string);
 
             // No Member was found
             if (!isset($Results) || $Results->count() == 0) {
@@ -236,7 +229,7 @@ class SpeakerListPage_Controller extends Page_Controller
         $search_var = ($search_var) ? $search_var : 'search_query';
         if ($this->request) {
             $query = $this->request->getVar($search_var);
-            if (!empty($query)) {
+            if (!empty($query) ) {
                 return Convert::raw2sql($query);
             }
 

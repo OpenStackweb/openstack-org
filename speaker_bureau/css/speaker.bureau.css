@@ -17,3 +17,20 @@
     height: 30px;
     margin-right: 15px;
 }
+
+.back {
+    float: right;
+    font-size: 17px;
+}
+
+.result_title {
+    margin-bottom: 5px;
+}
+
+.search_criteria {
+    margin-bottom: 20px;
+}
+
+#results {
+    margin-bottom: 30px;
+}
