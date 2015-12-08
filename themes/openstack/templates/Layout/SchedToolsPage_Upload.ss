@@ -34,5 +34,5 @@
 
 <p></p>
 <hr/>
-<p>If you have any problems with this form, please contact <a href="mailto:events@openstack.org">events@openstack.org</a> and we'll work to help you out. Thanks so much for uploading your presentation.</p>
+<p>If you have any problems with this form, please contact <a href="mailto:speakersupport@openstack.org">speakersupport@openstack.org</a> and we'll work to help you out. Thanks so much for uploading your presentation.</p>
 </div>
