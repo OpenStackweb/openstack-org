@@ -17,8 +17,10 @@
 }
 
 .logos .img-wrapper {
-	height: 150px;
+	height: 140px;
 	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
 }
 .logos img {
 	display: block;
@@ -44,6 +46,8 @@
 .small-logos .img-wrapper {
 	height: 75px;
 	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .small-logos img {
