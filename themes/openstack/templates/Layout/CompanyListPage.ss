@@ -1,7 +1,7 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-1">
 				<h1>Companies Supporting The OpenStack Foundation</h1>
-				<p style="text-align:center;">The OpenStack Foundation would not exist without the support of the Platinum, Gold, and Corporate Sponsors listed below.<br>Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
+				<p class="center">The OpenStack Foundation would not exist without the support of the Platinum, Gold, and Corporate Sponsors listed below.<br>Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
 			</div>
 		</div>
 		
@@ -20,13 +20,15 @@
 		<div class="row logos">
 			<% loop DisplayedCompanies(Platinum) %>
 				<div class="col-sm-2 col-xs-6">
-	                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
-						<% loop Logo %>
-							<img src="{$SetWidth(138).URL}" alt="$Name">
-							<!-- <span style="background-image: url({$SetWidth(138).URL});"></span> -->
-						<% end_loop %>
-						<p class="center">$Name</p>
-					</a>
+		                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
+		                	<div class="img-wrapper">
+								<% loop Logo %>
+									<img src="{$SetWidth(138).URL}" alt="$Name">
+									<!-- <span style="background-image: url({$SetWidth(138).URL});"></span> -->
+								<% end_loop %>
+							</div>
+							<p class="center">$Name</p>
+						</a>
 				</div>
 			<% end_loop %>
 
@@ -47,10 +49,13 @@
 				<% loop DisplayedCompanies(Gold) %>
 					<div class="col-sm-2 col-xs-6">
 		                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
-							<% loop Logo %>
-								<img src="{$SetWidth(138).URL}" alt="$Name">
-							<% end_loop %>
-							$Name</a>
+		                	<div class="img-wrapper">
+								<% loop Logo %>
+									<img src="{$SetWidth(138).URL}" alt="$Name">
+								<% end_loop %>
+							</div>
+							<p class="center">$Name</p>
+						</a>
 						</div>
 					<% end_loop %>
 			</div>
@@ -70,20 +75,26 @@
 		<div class="row logos">
 			<div class="col-sm-2 col-xs-6">
 				<a rel="nofollow" href="http://www.rackspace.com/">
-					<img src="/assets/Uploads/_resampled/SetWidth138-rackspace-sm.png" alt="Rackspace">
-					Rackspace
+					<div class="img-wrapper">
+						<img src="/assets/Uploads/_resampled/SetWidth138-rackspace-sm.png" alt="Rackspace">
+					</div>
+					<p class="center">Rackspace</p>
 				</a>
 			</div>
 			<div class="col-sm-2 col-xs-6">
 				<a href="/foundation/companies/profile/hewlett-packard-enterprise">
-					<img src="/assets/companies/main_logo/_resampled/SetWidth138-hpe-pri-grn-pos-rgb2.png" alt="HP">
-					Hewlett Packard Enterprise
+					<div class="img-wrapper">
+						<img src="/assets/companies/main_logo/_resampled/SetWidth138-hpe-pri-grn-pos-rgb2.png" alt="HP">
+					</div>
+					<p class="center">Hewlett Packard Enterprise</p>
 				</a>
 			</div>
 			<div class="col-sm-2 col-xs-6">
 				<a href="/foundation/companies/profile/ovh-group">
-					<img src="/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png" alt="OVH Group">
-					OVH Group
+					<div class="img-wrapper">
+						<img src="/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png" alt="OVH Group">
+					</div>
+					<p class="center">OVH Group</p>
 				</a>
 			</div>
 		</div>
@@ -102,12 +113,15 @@
 
 			<div class="row logos">
 				<% loop DisplayedCompanies(Combined) %>
-					<div class="col-sm-1 col-xs-4">
+					<div class="col-sm-2 col-xs-6">
 	                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
-						<% loop Logo %>
-							<img src="{$SetWidth(138).URL}" alt="$Name">
-						<% end_loop %>
-						$Name</a>
+	                	<div class="img-wrapper">
+							<% loop Logo %>
+								<img src="{$SetWidth(138).URL}" alt="$Name">
+							<% end_loop %>
+						</div>
+						<p class="center">$Name</p>
+					</a>
 					</div>
 				<% end_loop %>
 			</div>
@@ -131,9 +145,11 @@
 				<% loop DisplayedCompanies(Mention) %>
 					<div class="col-sm-1 col-xs-4">
 	            		<a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
-							<% loop Logo %>
-								<img src="{$SetWidth(70).URL}" alt="$Name">
-							<% end_loop %>
+	            			<div class="img-wrapper">
+								<% loop Logo %>
+									<img src="{$SetWidth(70).URL}" alt="$Name">
+								<% end_loop %>
+							</div>
 						</a>
 					</div>
 				<% end_loop %>

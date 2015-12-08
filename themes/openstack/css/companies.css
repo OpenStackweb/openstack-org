@@ -16,12 +16,16 @@
     font-size: 10px;
 }
 
+.logos .img-wrapper {
+	height: 150px;
+	text-align: center;
+}
 .logos img {
 	display: block;
     width: auto !important;
     max-width: 100%;
     height: auto !important;
-    max-height: 200px;
+    max-height: 100%;
 	border: 5px solid white;
 	margin-bottom: 7px;
 	margin-right: 5px;
@@ -35,6 +39,11 @@
 	color: black;
 	margin-bottom: 20px;
 	margin-right: 23px;
+}
+
+.small-logos .img-wrapper {
+	height: 75px;
+	text-align: center;
 }
 
 .small-logos img {
