@@ -219,9 +219,12 @@
                     <li>
                     The lottery is only applicable to the Headline sponsorship level. 
                 </li>
-                    <li>
+                <li>
                     Sponsor companies that signed the October 2015 Tokyo OpenStack Summit contract within the first hour for a Headline sponsorship level, but did not win the lottery drawing will be eligible to have an additional ball in the lottery drawing for the 2016 Austin OpenStack Summit if they again sign the Austin Summit sponsorship contract for a Headline slot within the first hour that the executable electronic contract is made available.
-                    </li>
+                </li>
+                <li>
+                    The same Headline drawing process will apply for the October 2016 Summit in Barcelona - if you submit for a Headline level sponsorship for the Austin OpenStack Summit and are not drawn in the lottery then you will receive an extra entry for the lottery drawing for the Barcelona OpenStack Summit.
+                </li>
                 </p>
                 <div class="center" style="margin: 30px 0;">
                     <a href="mailto:summit@openstack.org">Contact us with any questions.</a>
