@@ -53,8 +53,8 @@
                     <h3>Presentations <strong>Others</strong> Submitted With You As A Speaker</h3>
                     <table class="table">
                         <tbody>
-                            <% if $CurrentMember.SpeakerProfile.OtherPresentations %>
-                                <% loop $CurrentMember.SpeakerProfile.OtherPresentations %>
+                            <% if $CurrentMember.SpeakerProfile.OtherPresentations($Top.Summit.ID) %>
+                                <% loop $CurrentMember.SpeakerProfile.OtherPresentations($Top.Summit.ID) %>
                                 <tr>
                                     <td class="item-name"><i class="fa fa-file-text-o"></i><a
                                             href="$EditLink">$Title</a></td>
