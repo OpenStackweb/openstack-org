@@ -40,6 +40,9 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'IncludedComputeStarterKit'    => 'Boolean',
         'VulnerabilityManaged'         => 'Boolean',
         'Order'                        => 'Int',
+        'YouTubeID'                    => 'Varchar',
+        'VideoDescription'             => 'Text',
+        'VideoTitle'                   => 'Varchar',
     );
 
     private static $has_one = array

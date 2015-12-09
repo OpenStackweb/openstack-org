@@ -379,6 +379,15 @@
             </div>
         </div>
         <% end_if %>
+        <% if $Component.YouTubeID %>
+        <div class="row project-details-ptl">
+            <div class="col-sm-12">
+                <h4>$Component.VideoTitle</h4>
+                <p>$Component.VideoDescription</p>
+                <iframe width="356" height="200" src="//www.youtube.com/embed/{$Component.YouTubeID}" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>
+        <% end_if %>
         <div class="row project-details-other">
             <div class="col-sm-6">
                 <% if $MostActiveCompanyContributors %>
