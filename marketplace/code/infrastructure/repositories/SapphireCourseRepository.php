@@ -227,7 +227,7 @@ SQL;
         SELECT L.City, L.State, L.Country,T.StartDate, T.EndDate, T.Link
         FROM TrainingCourseSchedule L
         INNER JOIN TrainingCourseScheduleTime T ON T.LocationID = L.ID
-        WHERE DATE('{$current_date}') < T.StartDate AND DATE('{$current_date}') < T.EndDate AND L.CourseID = {$course_id}
+        WHERE  T.StartDate <= DATE('{$current_date}') AND T.EndDate >= DATE('{$current_date}') AND L.CourseID = {$course_id}
         ORDER BY T.StartDate ASC, T.EndDate ASC;
 SQL;
 
