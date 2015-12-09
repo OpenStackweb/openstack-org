@@ -72,6 +72,11 @@ body#jobs h2 {
     text-align: right;
 }
 
+.jobExpand {
+    margin: 10px 0;
+    color: black !important;
+}
+
 ul.location {
     margin: 0px;
     padding: 0px;

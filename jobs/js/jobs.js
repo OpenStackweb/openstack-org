@@ -12,41 +12,62 @@
  **/
 
 (function( $ ){
+    var refresh_interval = 30000;
     var xhr = null;
-    var refresh_interval = 10000;
 
-    jQuery(document).ready(function($){
+    $(document).ready(function($){
 
         //hide job descriptions
         $('.jobDescription').hide();
 
-        if(document.location.hash) {
-            $('#' + document.location.hash.substring(1) + '.jobPosting div.jobDescription').slideDown();
+        if(document.location.hash && document.location.hash != '#none') {
+            var opened_job_id = document.location.hash.substring(1);
+            $('.jobDescription','#' + opened_job_id).slideDown();
+            $('.jobExpand','#' + opened_job_id).html('less');
         }
 
         // toggles the job descriptions
-        $('a.jobTitle').live('click',function() {
-            $(this).closest('div.jobPosting').find('div.jobDescription').slideToggle(400);
+        $('.jobExpand').live('click',function() {
+            var parent_div = $(this).closest('div.jobPosting');
+
+            if (parent_div.find('div.jobDescription').is(":visible")) {
+                document.location.hash = 'none';
+                $(this).html('more');
+            } else {
+                document.location.hash = parent_div.attr('id');
+                $(this).html('less');
+            }
+
+            parent_div.find('div.jobDescription').slideToggle(400);
+
             return false;
         });
 
         setInterval(refresh_jobs, refresh_interval);
-
     })
-
-
 
     function refresh_jobs() {
         if(xhr!=null) return;
-        var foundation = $.QueryString['foundation'];
-        var query_string = (typeof(foundation) != "undefined") ? '?foundation=1':'';
+
+        var foundation = (typeof($.QueryString['foundation']) != "undefined") ? 1 : 0;
+        var url = 'api/v1/jobs/list?foundation='+foundation;
+
         xhr = $.ajax({
-            type: "POST",
-            url: 'JobHolder_Controller/AjaxDateSortedJobs'+query_string,
+            type: "GET",
+            url: url,
             success: function(result){
-                jQuery('.jobPosting','.job_list').remove();
-                jQuery('.job_list').append(result);
-                jQuery('.jobDescription').hide();
+
+                $('.jobPosting','.job_list').remove();
+                $('.job_list').append(result);
+
+                if (document.location.hash && document.location.hash != '#none') {
+                    var opened_job_id = document.location.hash.substring(1);
+                    $('.jobDescription' , '#'+opened_job_id).show();
+                    $('.jobExpand','#' + opened_job_id).html('less');
+                } else {
+                    $('.jobDescription').hide();
+                }
+
                 xhr = null;
             }
         });

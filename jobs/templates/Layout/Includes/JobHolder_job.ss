@@ -9,8 +9,13 @@
     <div class="row">
         <div class="col-md-8">
             <ul class="details">
-                <li class="title"><span class="label">Job Title: </span><a href="#" class="jobTitle">$Title</a></li>
-                <li class="employer"><span class="label">Employer: </span>at <strong>$JobCompany</strong></li>
+                <li class="title">
+                    <span class="label">Job Title: </span>
+                    <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl" class="jobTitle">$Title</a>
+                </li>
+                <li class="employer">
+                    <span class="label">Employer: </span>at <strong>$JobCompany</strong>
+                </li>
             </ul>
         </div>
         <div class="col-md-3 postDate">
@@ -30,7 +35,9 @@
         </div>
     <% end_if %>
 
-    <div class="row jobDescription">
+    <a href="" class="jobExpand btn btn-default btn-xs">more</a>
+
+    <div class="row jobDescription" style="display:none">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
@@ -46,6 +53,7 @@
                     </div>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-2">
                     <div class="moreInfo">
@@ -54,7 +62,8 @@
                 </div>
                 <div class="col-md-2">
                     <div class="moreInfo">
-                        <span class="label">Job page: </span><a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl">Link Directly to This Job</a>
+                        <span class="label">Job page: </span>
+                        <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl">Permalink to this job</a>
                     </div>
                 </div>
             </div>

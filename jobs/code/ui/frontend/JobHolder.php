@@ -28,7 +28,6 @@ class JobHolder_Controller extends Page_Controller {
 	private $repository;
 
 	static $allowed_actions = array(
-		'AjaxDateSortedJobs',
         'JobDetailsPage',
 	);
 
@@ -47,41 +46,24 @@ class JobHolder_Controller extends Page_Controller {
 	}
 
 	function rss() {
-        $jobs = $this->DateSortedJobs();
+        $request = Controller::curr()->getRequest();
+        $foundation = ($request->requestVar('foundation'));
+        $jobs = $this->repository->getDateSortedJobs($foundation);
 		$rss = new RSSFeed($jobs, $this->Link(), "OpenStack Jobs Feed");
 		$rss->outputToBrowser();
 	}
 
-	public function DateSortedJobs(){
-		$query   = new QueryObject(new JobPage);
-		$request = Controller::curr()->getRequest();
-        if($request->requestVar('foundation'))
-			$query->addAndCondition(QueryCriteria::equal('FoundationJob',1));
-
-		$now      = new DateTime();
-		$query->addAndCondition(QueryCriteria::equal('Active',1));
-		$post_date = $now->sub(new DateInterval('P6M'));
-		$query->addAndCondition(QueryCriteria::greaterOrEqual('JobPostedDate',$post_date->format('Y-m-d')));
-		$query->addAndCondition(QueryCriteria::greaterOrEqual('ExpirationDate',$now->format('Y-m-d')));
-		$query->addOrder(QueryOrder::desc('JobPostedDate'));
-		$query->addOrder(QueryOrder::desc('ID'));
-		list($jobs,$size) = $this->repository->getAll($query,0,1000);
-		return new ArrayList($jobs);
-	}
-
     public function getDateSortedJobs() {
         $output = '';
-        $jobs = $this->DateSortedJobs();
+        $request = Controller::curr()->getRequest();
+        $foundation = ($request->requestVar('foundation'));
+        $jobs = $this->repository->getDateSortedJobs($foundation);
 
         foreach ($jobs as $job) {
             $output .= $job->renderWith('JobHolder_job');
         }
 
         return $output;
-    }
-
-    function AjaxDateSortedJobs() {
-        return $this->getDateSortedJobs();
     }
 
 	function PostJobLink(){

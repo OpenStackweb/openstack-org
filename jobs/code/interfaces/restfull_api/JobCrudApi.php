@@ -111,6 +111,7 @@ extends AbstractRestfulJsonApi {
 	 */
 	static $url_handlers = array(
 		'GET companies'                 => 'companies',
+        'GET list'                      => 'getJobList',
         'PUT $JOB_ID/toggle_foundation' => 'toggleFoundationJob',
 		'PUT $JOB_ID/delete'            => 'deleteJob',
 		'GET $JOB_ID'                   => 'getJob',
@@ -128,6 +129,7 @@ extends AbstractRestfulJsonApi {
 		'companies',
         'toggleFoundationJob',
         'addJob',
+        'getJobList'
 	);
 
 
@@ -235,6 +237,31 @@ extends AbstractRestfulJsonApi {
         catch (EntityValidationException $ex2) {
             SS_Log::log($ex2,SS_Log::WARN);
             return $this->validationError($ex2->getMessages());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function getJobList(){
+        try{
+            $output = '';
+            $foundation = $this->getRequest()->getVar('foundation');
+            $jobs = $this->repository->getDateSortedJobs($foundation);
+
+            foreach ($jobs as $job) {
+                $output .= $job->renderWith('JobHolder_job');
+            }
+
+            return $output;
+        }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1,SS_Log::ERR);
+            return $this->notFound($ex1->getMessage());
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);
