@@ -114,7 +114,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         // TODO : move all this sql code to repository
         $sql_events_template = <<<SQL
     SELECT DISTINCT E.* FROM SummitEvent E
-    WHERE E.SummitID = {$summit_id} AND E.Published = 1
+    WHERE
+    E.SummitID = {$summit_id} AND E.Published = 1
     AND
     (
         EXISTS
@@ -146,25 +147,56 @@ SQL;
 
 $sql_speakers_template = <<<SQL
     SELECT DISTINCT S.* FROM PresentationSpeaker S
-    WHERE SummitID = {$summit_id}
-    AND EXISTS
+    WHERE EXISTS
     (
         SELECT P.ID From Presentation P
         INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
         INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
         WHERE PS.PresentationSpeakerID = S.ID
     )
-    AND ( FirstName LIKE '%:term%' OR  LastName LIKE '%:term%' OR  Bio LIKE '%:term%' )
+    AND :field LIKE '%:term%'
 SQL;
 
-        $speakers     = array();
-        $events       = array();
-        $sql_speakers = '';
+        $speakers        = array();
+        $speakers_fields = array('FirstName', 'LastName');
+        $events          = array();
+
+        $sql_speakers = <<<SQL
+      SELECT DISTINCT S.* FROM PresentationSpeaker S INNER JOIN
+      ( SELECT ID, CONCAT(FirstName,' ',LastName) AS FullName From PresentationSpeaker ) AS SN
+      ON S.ID = SN.ID
+      WHERE EXISTS
+      (
+            SELECT P.ID From Presentation P
+            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+            WHERE PS.PresentationSpeakerID = S.ID
+      )
+      AND SN.FullName LIKE '%{$term}%'
+      UNION
+      SELECT DISTINCT S.* FROM PresentationSpeaker S INNER JOIN
+      ( SELECT ID, CONCAT(FirstName,' ',LastName) AS FullName From PresentationSpeaker ) AS SN
+      ON S.ID = SN.ID  WHERE EXISTS
+      (
+            SELECT P.ID From Presentation P
+            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+             WHERE PS.PresentationSpeakerID = S.ID
+      ) AND SOUNDEX(SN.FullName) = SOUNDEX('{$term}')
+SQL;
+
         $sql_events   = '';
-        $terms = explode(' ',$term);
+        $terms        = explode(' ',$term);
+
         foreach($terms as $t)
         {
-            $sql_speakers = $sql_speakers . (!empty($sql_speakers) ? ' UNION ':'') .str_replace(':term', $t, $sql_speakers_template);
+            $t = trim($t);
+            if(empty($t)) continue;
+            foreach($speakers_fields as $speaker_field)
+            {
+                $sql_speakers = $sql_speakers . (!empty($sql_speakers) ? ' UNION ' : '') . str_replace(':field',$speaker_field, str_replace(':term', $t,
+                        $sql_speakers_template));
+            }
             $sql_events   = $sql_events . (!empty($sql_events) ? ' UNION ':'') .str_replace(':term', $t, $sql_events_template);
         }
 

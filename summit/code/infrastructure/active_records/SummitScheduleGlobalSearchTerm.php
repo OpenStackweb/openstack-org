@@ -42,7 +42,7 @@ class SummitScheduleGlobalSearchTerm extends DataObject
         if($total === 0) return 10;
         $val = intval($this->Hits) / $total;
         $val = intval($val*100);
-        if($val > 40) $val = 25;
+        if($val > 33) $val = 33;
         if($val < 12) $val = 12;
         return $val;
     }
