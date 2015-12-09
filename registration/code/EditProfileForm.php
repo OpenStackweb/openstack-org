@@ -17,6 +17,8 @@ class EditProfileForm extends SafeXSSForm {
     function __construct($controller, $name)
     {
         // Name Set
+        $MemberIDField = new TextField('MemberID', "Member ID");
+        $MemberIDField->setDisabled(true);
         $FirstNameField = new TextField('FirstName', "First Name");
         $LastNameField = new TextField('Surname', "Last Name");
 
@@ -135,8 +137,7 @@ class EditProfileForm extends SafeXSSForm {
         $fields = new FieldList(
 
             new LiteralField('header', '<h3 class="section-divider">Public Information</h3>'),
-
-
+            $MemberIDField,
             new HeaderField("First & Last Name"),
             $FirstNameField,
             $LastNameField,
@@ -240,7 +241,10 @@ class EditProfileForm extends SafeXSSForm {
                 $this->fields->dataFieldByName('GenderSpecify')->removeExtraClass('hide');
             }
 
-        } 
+        }
+
+        $MemberID = is_array($data)? @$data['ID']:$data->ID;
+        $this->fields->dataFieldByName('MemberID')->setValue($MemberID);
         
         parent::loadDataFrom($data, $mergeStrategy, $fieldList);
     }
