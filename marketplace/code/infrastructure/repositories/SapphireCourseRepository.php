@@ -100,6 +100,7 @@ class SapphireCourseRepository
 
 		$sql = <<< SQL
         SELECT
+            DISTINCT
             c.ID,
             p.ID AS TrainingID,
             cc.URLSegment AS Company_URLSegment,
@@ -126,7 +127,7 @@ class SapphireCourseRepository
         WHERE
         p.Active=1 AND
         (
-          ((DATE('{$current_date}') < t.StartDate AND DATE('{$current_date}') < t.EndDate) OR (c.Online=1 AND t.StartDate IS NULL AND t.EndDate IS NULL)) {$filter}
+          (( t.StartDate <= DATE('{$current_date}')  AND t.EndDate >= DATE('{$current_date}') ) OR (c.Online=1 AND t.StartDate IS NULL AND t.EndDate IS NULL)) {$filter}
         )
         GROUP BY c.ID , c.Name , c.Link , lv.Level , l.City , l.State , l.Country
         ORDER BY lv.SortOrder ASC, t.StartDate ASC, t.EndDate ASC
@@ -135,8 +136,12 @@ SQL;
 		$sql .= ($limit)?" LIMIT 3 ":";";
 
 		$results = DB::query($sql);
+		$courses_id = array();
+
 		for ($i = 0; $i < $results->numRecords(); $i++) {
 			$record = $results->nextRecord();
+			if(isset($courses_id[(int)$record['ID']]) && (bool)$record['Online'] == true) continue;
+			$courses_id[(int)$record['ID']] = (int)$record['ID'];
 			array_push($courses, new CourseDTO(
 				(int)$record['ID'],
 				$record['Name'],
