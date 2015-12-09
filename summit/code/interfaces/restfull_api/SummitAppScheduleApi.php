@@ -166,6 +166,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 $entry['speakers_id']  = $speakers;
                 $entry['moderator_id'] = $e->ModeratorID;
                 $entry['track_id']     = $e->CategoryID;
+                $entry['level']        = $e->Level;
             }
             array_push($events, $entry);
         };

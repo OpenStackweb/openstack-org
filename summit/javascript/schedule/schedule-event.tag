@@ -37,6 +37,15 @@
                         </div>
                         <div class="col-md-3 event-type-col"><a class="search-link" title="Search Event Type" href="{ parent.search_url+'?t='+summit.event_types[type_id].type.replace(/ /g,'+') }">{ summit.event_types[type_id].type }</a></div>
                     </div>
+                    <div class="row" if={ level }>
+                        <div class="col-xs-12 col-md-1 col-level-title">
+                            <i class="fa fa-level-up"></i>
+                            <span>Level:</span>
+                        </div>
+                         <div class="col-xs-12 col-md-11 col-level-content">
+                            <span class="presentation-level'"><a class="search-link" title="Search Presentation Level" href="{ parent.search_url+'?t='+level }">{ level }</a></span>
+                        </div>
+                    </div>
                     <div class="row" if={ speakers_id.length }>
                         <div class="col-md-12">
                             <div class="row speakers-row">

@@ -92,6 +92,17 @@
                                            </div>
                                         <div class="col-md-3 event-type-col">$TypeName</div>
                                     </div>
+                                    <% if Level %>
+                                    <div class="row row-level">
+                                        <div class="col-xs-12 col-md-1 col-level-title">
+                                            <i class="fa fa-level-up"></i>
+                                            <span>Level:</span>
+                                        </div>
+                                        <div class="col-xs-12 col-md-11 col-level-content">
+                                            <span class="presentation-level'"><a href="{$Top.Link(global-search)}?t={$Level}">{$Level}</a></span>
+                                        </div>
+                                    </div>
+                                    <% end_if %>
                                     <% if Speakers %>
                                         <div class="row">
                                             <div class="col-md-12">

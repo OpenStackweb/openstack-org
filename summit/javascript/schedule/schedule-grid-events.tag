@@ -62,6 +62,17 @@
                         else
                         must_show.push(false);
                     }
+                    // levels
+                    if(self.current_filter.levels === null || self.current_filter.levels.length === 0){
+                        must_show.push(true);
+                    }
+                    else
+                    {
+                        if('level' in e)
+                            must_show.push(self.current_filter.levels.indexOf(e.level.toString()) > -1);
+                        else
+                            must_show.push(false);
+                    }
                     // tags
                     if(self.current_filter.tags === null || self.current_filter.tags.length === 0){
                         must_show.push(true);
@@ -78,6 +89,15 @@
                     else
                     {
                         must_show.push(e.summit_types_id.some(function(v) { return self.current_filter.summit_types.indexOf(v.toString()) != -1; }));
+                    }
+
+                    // own
+                    if(self.current_filter.own){
+                        must_show.push(e.own);
+                    }
+                    else
+                    {
+                        must_show.push(true);
                     }
 
                     for(var i = 0 ; i < must_show.length; i++){

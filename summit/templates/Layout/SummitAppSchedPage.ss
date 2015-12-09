@@ -13,6 +13,7 @@
             locations : {},
             tags: {},
             tracks : {},
+            presentation_levels: {},
             current_user: null
         };
 
@@ -39,11 +40,10 @@
         };
         <% end_loop %>
 
-        <% loop $Summit.Categories %>
-        summit.tracks[{$ID}] =
+        <% loop $Top.getPresentationLevels %>
+        summit.presentation_levels['{$Level}'] =
         {
-            id: {$ID},
-            name : "{$Title.JS}",
+            level : "{$Level}",
         };
         <% end_loop %>
 
@@ -52,6 +52,14 @@
         {
             type : "{$Type.JS}",
             color : "{$Color}",
+        };
+        <% end_loop %>
+
+        <% loop $Summit.EventTypes %>
+        summit.event_types[{$ID}] =
+        {
+                type : "{$Type.JS}",
+                color : "{$Color}",
         };
         <% end_loop %>
 
@@ -118,6 +126,7 @@
                         moderator_id: {$ModeratorID},
                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                         track_id : {$CategoryID},
+                        Level : '{$Level}',
                         <% end_if %>
                         <% if $Top.isEventOnMySchedule($ID) %>
                         own      : true,

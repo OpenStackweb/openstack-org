@@ -449,6 +449,16 @@ class Presentation extends SummitEvent implements IPresentation
 
     }
 
+    public static function getLevels()
+    {
+        $res  = singleton('Presentation')->dbObject('Level')->enumValues();
+        $list = new ArrayList();
+        foreach($res as $k => $v)
+        {
+            $list->add(new ArrayData(array('Level'=> $v)));
+        }
+        return $list;
+    }
 
     public function getCMSFields()
     {

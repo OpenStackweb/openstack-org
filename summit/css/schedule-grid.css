@@ -82,12 +82,12 @@ body,html{height:100%}
     font-size: 14px;
 }
 
-.col-tags-title, .col-speakers-title
+.col-tags-title, .col-speakers-title, .col-level-title
 {
     padding-right: 0 !important;
 }
 
-.col-tags-content a, .col-speakers-content a, .event-title a
+.col-tags-content a, .col-speakers-content a, .event-title a, .col-level-content a
 {
     color: #4a4a4a !important;
 }
@@ -143,7 +143,7 @@ body,html{height:100%}
     border-color: #224066 !important;
 }
 
-.tags-row, .speakers-row
+.tags-row, .speakers-row, .row-level
 {
     padding-bottom: 20px !important;
 }

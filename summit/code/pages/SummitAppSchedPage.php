@@ -137,6 +137,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
             WHERE P.ID = E.ID AND T.Title LIKE '%:term%'
         )
         OR
+        EXISTS
+        (
+            SELECT P.ID FROM Presentation P
+            WHERE P.Level LIKE '%:term%'
+        )
+        OR
         Title LIKE '%:term%'
         OR
         Description LIKE '%:term%'
@@ -228,5 +234,10 @@ SQL;
                 'PopularTerms'     => $popular_terms,
             )
         );
+    }
+
+    public function getPresentationLevels()
+    {
+        return Presentation::getLevels();
     }
 }
