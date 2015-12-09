@@ -244,7 +244,7 @@ class EditProfileForm extends SafeXSSForm {
         }
 
         $MemberID = is_array($data)? @$data['ID']:$data->ID;
-        $this->fields->dataFieldByName('MemberID')->setValue($MemberID);
+        $this->fields->dataFieldByName('MemberID')->setValue($MemberID); 
         
         parent::loadDataFrom($data, $mergeStrategy, $fieldList);
     }
