@@ -3637,3 +3637,8 @@ h3.schedule-select-title {
   float: right;
 }
 /*End Select your summit schedule*/
+
+.max-presentation-notice{
+  font-size: 8pt;
+  padding-top: 1em;
+}

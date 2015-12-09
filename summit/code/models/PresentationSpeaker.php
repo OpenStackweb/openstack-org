@@ -206,6 +206,18 @@ implements IPresentationSpeaker
         );
     }
 
+    public function getPresentationsCount($summit_id = null)
+    {
+       $count_others = intval($this->OtherPresentations($summit_id)->count());
+       $count_mine   = intval($this->MyPresentations($summit_id)->count());
+       return  $count_mine + $count_others;
+    }
+
+    public function canAddMorePresentations($summit_id = null)
+    {
+        return $this->getPresentationsCount($summit_id) <= MAX_SUMMIT_ALLOWED_PER_USER;
+    }
+
     // return all presentations for this speaker plus the one he submitted from edit profile
     public function MixedPresentationLinks($limit) {
         $presentation_count = 0;
