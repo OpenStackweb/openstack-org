@@ -181,7 +181,7 @@ class SchedToolsPage_Controller extends Page_Controller
 		} else {
 			$data["HasError"] = TRUE;
 			print_r($Presentation);
-			echo "Is a speaker " . $$Presentation->IsASpeaker($SpeakerID);
+			echo "Is a speaker " . $Presentation->IsASpeaker($SpeakerID);
 			return $this->Customise($data);
 		}
 
