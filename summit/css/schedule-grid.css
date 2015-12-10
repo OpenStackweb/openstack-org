@@ -28,8 +28,7 @@ body,html{height:100%}
     padding-top:40px;
 }
 
-.tag {
-    display: inline-block !important;
+.tags-row, .level-row {
     font-family: Montserrat,Sans-serif;
     font-size: 14px;
 }

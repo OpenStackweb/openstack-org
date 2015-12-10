@@ -25,39 +25,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            <div class="row tags-row" if={ tags_id.length > 0 }>
-                                <div class="col-xs-12 col-md-2 col-tags-title">
-                                    <i class="fa fa-tags"></i>
-                                    <span>Tags:</span>
-                                </div>
-                                <div class="col-xs-12 col-md-10 col-tags-content">
-                                    <span each={ tag_id, i in tags_id } title="Search Tag" class="tag"><a class="search-link" href="{ parent.search_url+'?t='+summit.tags[tag_id].name.replace(/ /g,'+') }">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }</a>&nbsp;</span>
-                                </div>
-                            </div>
+                          &nbsp;
                         </div>
                         <div class="col-md-3 event-type-col"><a class="search-link" title="Search Event Type" href="{ parent.search_url+'?t='+summit.event_types[type_id].type.replace(/ /g,'+') }">{ summit.event_types[type_id].type }</a></div>
-                    </div>
-                    <div class="row" if={ level }>
-                        <div class="col-xs-12 col-md-1 col-level-title">
-                            <i class="fa fa-graduation-cap"></i>
-                            <span>Level:</span>
-                        </div>
-                         <div class="col-xs-12 col-md-11 col-level-content">
-                            <span class="presentation-level'"><a class="search-link" title="Search Presentation Level" href="{ parent.search_url+'?t='+level }">{ level }</a></span>
-                        </div>
-                    </div>
-                    <div class="row" if={ speakers_id.length }>
-                        <div class="col-md-12">
-                            <div class="row speakers-row">
-                                <div class="col-xs-12 col-md-2 col-speakers-title">
-                                <i class="fa fa-users"></i>
-                                <span>Speakers:</span>
-                                </div>
-                                <div class="col-xs-12 col-md-10 col-speakers-content">
-                                    <span each={ speaker_id, i in speakers_id } title="Search Speaker" class="speaker"><a class="search-link" href="{ parent.search_url+'?t='+summit.speakers[speaker_id].name.replace(/ /g,'+') }">{ summit.speakers[speaker_id].name + ( (i < parent.speakers_id.length - 1) ? ', ':'' ) }</a>&nbsp;</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -75,6 +45,26 @@
                                     <div class="row speaker-position-row"><div class="col-md-12">{ summit.speakers[speaker_id].position }</div></div>
                                 </div>
                             </div>
+                            <div class="row level-row" if={ level }>
+                                <div class="col-xs-12 col-md-4 col-level-title">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>Level:</span>
+                                </div>
+                                <div class="col-xs-12 col-md-8 col-level-content">
+                                    <span class="presentation-level'">
+                                        <a class="search-link" title="Search Presentation Level" href="{ parent.search_url+'?t='+level }">{ level }</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row tags-row" if={ tags_id.length > 0 }>
+                        <div class="col-xs-12 col-md-2 col-tags-title">
+                        <i class="fa fa-tags"></i>
+                        <span>Tags:</span>
+                        </div>
+                        <div class="col-xs-12 col-md-10 col-tags-content">
+                        <span each={ tag_id, i in tags_id } title="Search Tag" class="tag"><a class="search-link" href="{ parent.search_url+'?t='+summit.tags[tag_id].name.replace(/ /g,'+') }">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }</a>&nbsp;</span>
                         </div>
                     </div>
                     <div class="row">
