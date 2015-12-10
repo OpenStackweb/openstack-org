@@ -96,9 +96,9 @@ class SummitPushNotificationManager
                             $message['channels'] = ['su_'.$notification->SummitID];
                         }
                         break;
-                        default:
+                        case 'ALL':
                         {
-                            throw new Exception('Invalid channel!');
+                            $message['where'] = new stdClass();
                         }
                         break;
                     }

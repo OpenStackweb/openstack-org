@@ -853,10 +853,15 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
     protected function validate(){
         $valid = parent::validate();
         if(!$valid->valid()) return $valid;
-        $name = $this->Name;
+        $name = trim($this->Title);
         if(empty($name)){
-            return $valid->error('Name is required!');
+            return $valid->error('Title is required!');
         }
+
+        $count = intval(Summit::get()->filter(array('Title'=>$name, "ID:ExactMatch:not" => $this->ID))->count());
+
+        if($count > 0)
+            return $valid->error(sprintf('Summit Title %s already exists!. please set another one', $this->Title));
 
         $time_zone = $this->TimeZone;
         if(empty($time_zone)){
@@ -875,6 +880,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
 
         $start_date = $this->RegistrationBeginDate;
         $end_date   = $this->RegistrationEndDate;
+
         if(!is_null($start_date) && !is_null($end_date))
         {
             $start_date = new DateTime($start_date);
