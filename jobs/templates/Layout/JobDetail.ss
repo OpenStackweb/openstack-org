@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div style="max-width: 1000px">
-                            $RAW_val(JobInstructions2Apply)
+                            $JobInstructions2Apply
                         </div>
                     </div>
                 </div>

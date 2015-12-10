@@ -1,5 +1,10 @@
 label.error{
     padding: 5px !important;
+    color: red;
+}
+
+input.error {
+    border: 1px solid red;
 }
 
 span.message.bad {
