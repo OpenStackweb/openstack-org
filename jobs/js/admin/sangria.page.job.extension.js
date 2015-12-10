@@ -142,8 +142,10 @@ jQuery(document).ready(function($) {
                 form.find('textarea').each(function() {
                     var text_area = $(this);
                     var text_editor = tinyMCE.get(text_area.attr('id'));
+
                     if (text_editor)
-                        text_area.val(text_editor.getContent());
+                        text_area.val(text_editor.getContent({format : 'html'}));
+
                 });
 
                 form_validator.settings.ignore = ".physical_location";

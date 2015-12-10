@@ -173,7 +173,7 @@ class JobPage
         $this->Title              = $info->getTitle();
         $this->JobMoreInfoLink    = $info->getUrl();
         $this->Content            = $info->getDescription();
-        $this->Instructions2Apply = $info->getInstructions();
+        $this->JobInstructions2Apply = $info->getInstructions();
         $this->LocationType       = $info->getLocationType();
         $this->JobCompany         = $info->getCompany()->Name;
     }
