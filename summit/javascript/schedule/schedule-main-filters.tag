@@ -108,6 +108,10 @@
                 self.doFilter();
             });
 
+            $('#ddl_levels').chosen().change(function(e){
+                self.doFilter();
+            });
+
             $('.switch_schedule').click(function(e){
                 var mine = false;
                 if ($(this).hasClass('full'))
@@ -122,7 +126,7 @@
                 $(this).toggleClass('full');
                 self.doFilter();
             });
-       });
+        });
 
         doFilter() {
             var own    = this.summit.current_user !== null && $('.switch_schedule').hasClass('full') === false;

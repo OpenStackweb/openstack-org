@@ -40,6 +40,14 @@
         };
         <% end_loop %>
 
+        <% loop $Summit.Categories %>
+        summit.tracks[{$ID}] =
+        {
+            id: {$ID},
+            name : "{$Title.JS}",
+        };
+        <% end_loop %>
+
         <% loop $Top.getPresentationLevels %>
         summit.presentation_levels['{$Level}'] =
         {
