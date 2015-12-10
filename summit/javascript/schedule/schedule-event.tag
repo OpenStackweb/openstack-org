@@ -39,7 +39,7 @@
                     </div>
                     <div class="row" if={ level }>
                         <div class="col-xs-12 col-md-1 col-level-title">
-                            <i class="fa fa-level-up"></i>
+                            <i class="fa fa-graduation-cap"></i>
                             <span>Level:</span>
                         </div>
                          <div class="col-xs-12 col-md-11 col-level-content">

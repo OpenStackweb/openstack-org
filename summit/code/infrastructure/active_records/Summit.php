@@ -841,7 +841,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
             (
-                array('Channel'=>'Channel','Message'=>'Message', 'IsSent' => 'Is Sent?')
+                array('Channel'=>'Channel','Message'=>'Message', 'Owner.FullName'=>'Owner', 'IsSent' => 'Is Sent?')
             );
             $gridField = new GridField('Notifications', 'Notifications', $this->Notifications(), $config);
             $f->addFieldToTab('Root.Notifications', $gridField);

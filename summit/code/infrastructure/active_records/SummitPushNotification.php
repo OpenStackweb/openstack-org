@@ -124,6 +124,10 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
      * @return boolean
      */
     public function canEdit($member = null) {
+        if ($this->isAlreadySent())
+        {
+            return false;
+        }
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 

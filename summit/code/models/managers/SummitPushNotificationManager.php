@@ -14,6 +14,7 @@
  **/
 use Parse\ParseClient;
 use Parse\ParsePush;
+use Parse\ParseInstallation;
 
 class SummitPushNotificationManager
 {
@@ -98,7 +99,7 @@ class SummitPushNotificationManager
                         break;
                         case 'ALL':
                         {
-                            $message['where'] = new stdClass();
+                            $message['where'] = ParseInstallation::query();
                         }
                         break;
                     }
