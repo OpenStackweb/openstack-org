@@ -65,7 +65,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<hr/>
-				<h2>Infrastructure Donors</h2>
+				<a name="infra-donors"></a><h2>Infrastructure Donors</h2>
 				<p>
 					Infrastructure donors are companies running OpenStack clouds, donating cloud resources to the OpenStack project infrastructure. Those resources are mostly used in our <a href="http://docs.openstack.org/infra/system-config/contribute-cloud.html" target="_blank">automated testing</a> framework to support OpenStack development efforts.
 				</p>
