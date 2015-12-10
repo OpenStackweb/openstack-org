@@ -144,7 +144,6 @@ class SummitType extends DataObject implements ISummitType
         return $this->getField('Audience');
     }
 
-
     /**
      * @return int
      */
@@ -172,8 +171,6 @@ class SummitType extends DataObject implements ISummitType
 
     public function getCMSFields()
     {
-
-        $summit_id = isset($_REQUEST['SummitID']) ? $_REQUEST['SummitID'] : $this->SummitID;
 
         $f = new FieldList
         (
@@ -211,6 +208,11 @@ class SummitType extends DataObject implements ISummitType
         if(!$summit){
             return $valid->error('Invalid Summit!');
         }
+
+        $count = intval(SummitType::get()->filter(array('SummitID' => $summit->ID, 'Title' => trim($this->Title), 'ID:ExactMatch:not' => $this->ID))->count());
+
+        if($count > 0)
+            return $valid->error(sprintf('Summit Type %s already exists!. please set another one', $this->Title));
 
         $start_date = $this->getStartDate();
         $end_date   = $this->getEndDate();

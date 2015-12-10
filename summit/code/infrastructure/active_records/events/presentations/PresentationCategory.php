@@ -46,7 +46,29 @@ class PresentationCategory extends DataObject
             ->numeric('SessionCount', 'Number of sessions')
             ->numeric('AlternateCount', 'Number of alternates')
             ->checkbox('VotingVisible', "This category is visible to voters")
-            ->checkbox('ChairVisible', "This category is visible to track chairs");
+            ->checkbox('ChairVisible', "This category is visible to track chairs")
+            ->hidden('SummitID', 'SummitID');
+    }
+
+    protected function validate()
+    {
+        $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
+        $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
+
+        $summit   = Summit::get()->byID($summit_id);
+
+        if(!$summit){
+            return $valid->error('Invalid Summit!');
+        }
+
+        $count = intval(PresentationCategory::get()->filter(array('SummitID' => $summit->ID, 'Title' => trim($this->Title), 'ID:ExactMatch:not' => $this->ID))->count());
+
+        if($count > 0)
+            return $valid->error(sprintf('Presentation Category "%s" already exists!. please set another one', $this->Title));
+
+        return $valid;
     }
 
     public function getFormattedTitleAndDescription()

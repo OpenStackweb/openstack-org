@@ -17,7 +17,7 @@ class SummitEventType extends DataObject implements ISummitEventType
 
     private static $db = array
     (
-        'Type' => 'Text',
+        'Type'  => 'Text',
         'Color' => 'Text'
     );
 
@@ -74,7 +74,8 @@ class SummitEventType extends DataObject implements ISummitEventType
     }
 
     public function canDelete($member=null) {
-        if ($this->getType() == 'Presentation') {
+        if (Summit::isDefaultEventType($this->Type))
+        {
             return false;
         }
         return parent::canDelete($member);
@@ -82,10 +83,36 @@ class SummitEventType extends DataObject implements ISummitEventType
 
     public function getCMSFields() {
         $fields = new FieldList();
-        $fields->add(new TextField('Type','Type'));
+        $fields->add($type_txt = new TextField('Type','Type'));
+        if($this->ID > 0  && Summit::isDefaultEventType($this->Type))
+        {
+            $type_txt->setReadonly(true);
+        }
         $fields->add(new ColorField("Color","Color"));
         $fields->add(new HiddenField('SummitID','SummitID'));
         return $fields;
+    }
+
+    protected function validate()
+    {
+        $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
+        $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
+
+        $summit   = Summit::get()->byID($summit_id);
+
+        if(!$summit)
+        {
+            return $valid->error('Invalid Summit!');
+        }
+
+        $count = intval(SummitEventType::get()->filter(array('SummitID' => $summit->ID, 'Type' => trim($this->Type), 'ID:ExactMatch:not' => $this->ID))->count());
+
+        if($count > 0)
+            return $valid->error(sprintf('Summit Event Type %s already exists!. please set another one', $this->Type));
+
+        return $valid;
     }
 
     /**

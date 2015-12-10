@@ -113,6 +113,11 @@ define('NEW_PURCHASE_ORDER_EMAIL_SUBJECT','New Sponsorship Package Purchase Orde
 define('REJECTED_PURCHASE_ORDER_EMAIL_FROM','');
 define('REJECTED_PURCHASE_ORDER_EMAIL_SUBJECT','Your OpenStack Sponsorship Package Purchase Order was rejected');
 
+// summit push notification manager settings
+define('PARSE_APP_ID','');
+define('PARSE_REST_KEY','');
+define('PARSE_MASTER_KEY','');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 

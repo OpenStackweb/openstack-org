@@ -9,3 +9,5 @@ Injector:
     class: ClockTimePickerField
   HasManyList:
     class: CustomHasManyList
+  UnsavedRelationList:
+    class: CustomUnsavedRelationList
