@@ -3,11 +3,58 @@
 /**
  * Class SummitAppSchedPage
  */
-class SummitAppSchedPage extends SummitPage {
+class SummitAppSchedPage extends SummitPage
+{
 
 }
 
-class SummitAppSchedPage_Controller extends SummitPage_Controller {
+/**
+ * Class SummitAppSchedPage_Controller
+ */
+class SummitAppSchedPage_Controller extends SummitPage_Controller
+{
+
+    /**
+     * @var ISpeakerRepository
+     */
+    private $speaker_repository;
+
+    /**
+     * @var ISummitEventRepository
+     */
+    private $event_repository;
+
+    /**
+     * @return ISpeakerRepository
+     */
+    public function getSpeakerRepository()
+    {
+        return $this->speaker_repository;
+    }
+
+    /**
+     * @param ISpeakerRepository $speaker_repository
+     */
+    public function setSpeakerRepository(ISpeakerRepository $speaker_repository)
+    {
+        $this->speaker_repository = $speaker_repository;
+    }
+
+    /**
+     * @return ISummitEventRepository
+     */
+    public function getEventRepository()
+    {
+        return $this->event_repository;
+    }
+
+    /**
+     * @param ISummitEventRepository $event_repository
+     */
+    public function setEventRepository(ISummitEventRepository $event_repository)
+    {
+        $this->event_repository = $event_repository;
+    }
 
     static $allowed_actions = array(
         'ViewEvent',
@@ -26,8 +73,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
     public function init() {
         
         $this->top_section = 'full';
-        $this->event_repository = new SapphireSummitEventRepository();
-        $this->speaker_repository = new SapphirePresentationSpeakerRepository();
 
         parent::init();
         Requirements::css('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.css');
@@ -65,7 +110,13 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-speaker.css");
 
-        return $this->renderWith(array('SummitAppSpeakerPage','SummitPage','Page'), array('Speaker' => $speaker) );
+        return $this->renderWith(array('SummitAppSpeakerPage','SummitPage','Page'),
+            array
+            (
+                'Speaker' => $speaker,
+                'Summit'  => $this->Summit()
+            )
+        );
     }
 
     public function ViewAttendeeProfile()
@@ -96,7 +147,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
        return SummitAppScheduleApi::isEventOnMySchedule($event_id, $this->Summit());
     }
 
-    public function DoGlobalSearch(SS_HTTPRequest $request){
+    public function DoGlobalSearch(SS_HTTPRequest $request)
+    {
         $term      = Convert::raw2sql($request->requestVar('t'));
         if(empty($term)) return $this->httpError(404);
 
@@ -111,112 +163,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller {
 
         $popular_terms = SummitScheduleGlobalSearchTerm::get()->filter(array('SummitID' => $summit_id))->sort('Term', 'ASC')->limit(25,0);
 
-        // TODO : move all this sql code to repository
-        $sql_events_template = <<<SQL
-    SELECT DISTINCT E.* FROM SummitEvent E
-    WHERE
-    E.SummitID = {$summit_id} AND E.Published = 1
-    AND
-    (
-        EXISTS
-        (
-            SELECT S.ID FROM PresentationSpeaker S INNER JOIN Presentation_Speakers PS ON PS.PresentationSpeakerID = S.ID
-            WHERE S.SummitID = {$summit_id} AND PS.PresentationID = E.ID AND (S.FirstName LIKE '%:term%' OR  LastName LIKE '%:term%' OR  Bio LIKE '%:term%')
-        )
-        OR
-        EXISTS
-        (
-            SELECT T.ID FROM Tag T INNER JOIN SummitEvent_Tags ET ON ET.TagID = T.ID
-            WHERE ET.SummitEventID = E.ID AND T.Tag LIKE '%{$term}%'
-        )
-        OR
-        EXISTS
-        (
-            SELECT P.ID FROM Presentation P
-            INNER JOIN PresentationCategory T ON T.ID = P.CategoryID
-            WHERE P.ID = E.ID AND T.Title LIKE '%:term%'
-        )
-        OR
-        EXISTS
-        (
-            SELECT P.ID FROM Presentation P
-            WHERE P.Level LIKE '%:term%'
-        )
-        OR
-        Title LIKE '%:term%'
-        OR
-        Description LIKE '%:term%'
-        OR
-        ShortDescription LIKE '%:term%'
-    )
-SQL;
-
-$sql_speakers_template = <<<SQL
-    SELECT DISTINCT S.* FROM PresentationSpeaker S
-    WHERE EXISTS
-    (
-        SELECT P.ID From Presentation P
-        INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
-        INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
-        WHERE PS.PresentationSpeakerID = S.ID
-    )
-    AND :field LIKE '%:term%'
-SQL;
-
-        $speakers        = array();
-        $speakers_fields = array('FirstName', 'LastName');
-        $events          = array();
-
-        $sql_speakers = <<<SQL
-      SELECT DISTINCT S.* FROM PresentationSpeaker S INNER JOIN
-      ( SELECT ID, CONCAT(FirstName,' ',LastName) AS FullName From PresentationSpeaker ) AS SN
-      ON S.ID = SN.ID
-      WHERE EXISTS
-      (
-            SELECT P.ID From Presentation P
-            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
-            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
-            WHERE PS.PresentationSpeakerID = S.ID
-      )
-      AND SN.FullName LIKE '%{$term}%'
-      UNION
-      SELECT DISTINCT S.* FROM PresentationSpeaker S INNER JOIN
-      ( SELECT ID, CONCAT(FirstName,' ',LastName) AS FullName From PresentationSpeaker ) AS SN
-      ON S.ID = SN.ID  WHERE EXISTS
-      (
-            SELECT P.ID From Presentation P
-            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
-            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
-             WHERE PS.PresentationSpeakerID = S.ID
-      ) AND SOUNDEX(SN.FullName) = SOUNDEX('{$term}')
-SQL;
-
-        $sql_events   = '';
-        $terms        = explode(' ',$term);
-
-        foreach($terms as $t)
-        {
-            $t = trim($t);
-            if(empty($t)) continue;
-            foreach($speakers_fields as $speaker_field)
-            {
-                $sql_speakers = $sql_speakers . (!empty($sql_speakers) ? ' UNION ' : '') . str_replace(':field',$speaker_field, str_replace(':term', $t,
-                        $sql_speakers_template));
-            }
-            $sql_events   = $sql_events . (!empty($sql_events) ? ' UNION ':'') .str_replace(':term', $t, $sql_events_template);
-        }
-
-        foreach(DB::query($sql_speakers) as $row)
-        {
-            $class = $row['ClassName'];
-            array_push($speakers, new $class($row));
-        }
-
-        foreach(DB::query($sql_events," ORDER BY E.StartDate ASC, E.EndDate ASC ;") as $row)
-        {
-            $class = $row['ClassName'];
-            array_push($events, new $class($row));
-        }
+        $speakers = $this->speaker_repository->searchBySummitAndTerm($this->Summit(), $term);
+        $events   = $this->event_repository->searchBySummitAndTerm($this->Summit(), $term);
 
         return $this->renderWith
         (

@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 single-filter-wrapper first">
                             <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Choose Summit Type ..."  multiple="multiple">
-                                <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.type }</option>
+                                <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
                              </select>
                         </div>
                         <div class="col-xs-12 col-sm-2 single-filter-wrapper">

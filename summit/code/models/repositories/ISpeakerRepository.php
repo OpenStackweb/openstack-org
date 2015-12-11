@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitEventRepository extends IEntityRepository
+interface ISpeakerRepository extends IEntityRepository
 {
     /**
      * @param ISummit $summit
      * @param string $term
-     * @return ISummitEvent[]
+     * @return IPresentationSpeaker[]
      */
     public function searchBySummitAndTerm(ISummit $summit, $term);
 }

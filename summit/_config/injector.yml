@@ -15,6 +15,10 @@ EventbriteOrderPlacedEndpoint:
 EditProfilePageSummitAttendeeExtension:
   dependencies:
     EventbriteEventManager: '%$EventbriteEventManager'
+SummitAppSchedPage_Controller:
+  dependencies:
+    SpeakerRepository: "%$SpeakerRepository"
+    EventRepository: "%$EventRepository"
 Injector:
   SchedRestfulService:
     class: RestfulService
@@ -25,6 +29,8 @@ Injector:
     constructor:
       0: %$SchedRestfulService
       1: 47dfbdc49d82ff16669df259952656fa
+  EventRepository:
+    class: SapphireSummitEventRepository
   SpeakerRegistrationRequestRepository:
     class: SapphireSpeakerRegistrationRequestRepository
   SpeakerRegistrationRequestFactory:

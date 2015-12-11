@@ -188,6 +188,16 @@ implements IPresentationSpeaker
         ));
     }
 
+    public function PublishedPresentations($summit_id = null)
+    {
+        $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
+        if(is_null($summit)) return false;
+        return $this->Presentations()->filter(array(
+            'SummitID'  => $summit->ID,
+            'Published' => 1
+        ));
+    }
+
     public function OtherPresentations($summit_id = null) {
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
         if(is_null($summit)) return false;

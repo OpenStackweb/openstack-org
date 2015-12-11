@@ -22,7 +22,7 @@ class SummitType extends DataObject implements ISummitType
         'StartDate'   => 'SS_Datetime',
         'EndDate'     => 'SS_Datetime',
         'Color'       => 'Text',
-        'Type'        => "Enum('MAIN, DESIGN, OTHER', 'MAIN')",
+        'Type'        => "Enum('MAIN, DESIGN', 'MAIN')",
     );
 
 

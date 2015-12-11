@@ -12,11 +12,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SapphirePresentationSpeakerRepository extends SapphireRepository
+final class SapphirePresentationSpeakerRepository extends SapphireRepository implements ISpeakerRepository
 {
 
     public function __construct()
     {
         parent::__construct(new PresentationSpeaker);
+    }
+    /**
+     * @param ISummit $summit
+     * @param string $term
+     * @return IPresentationSpeaker[]
+     */
+    public function searchBySummitAndTerm(ISummit $summit, $term)
+    {
+
+        $speakers        = array();
+        $summit_id       = $summit->getIdentifier();
+
+        $sql_speakers = <<<SQL
+      SELECT DISTINCT S.*, CONCAT(S.FirstName,' ',S.LastName) AS FullName FROM PresentationSpeaker S
+      WHERE EXISTS
+      (
+            SELECT P.ID From Presentation P
+            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+            WHERE PS.PresentationSpeakerID = S.ID
+      )
+      HAVING FullName LIKE '%{$term}%'
+      UNION
+      SELECT DISTINCT S.*, CONCAT(S.FirstName,' ',S.LastName) AS FullName FROM PresentationSpeaker S
+      WHERE EXISTS
+      (
+            SELECT P.ID From Presentation P
+            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+             WHERE PS.PresentationSpeakerID = S.ID
+      )
+      HAVING SOUNDEX(FullName) = SOUNDEX('{$term}')
+      UNION
+      SELECT DISTINCT S.*, CONCAT(S.FirstName,' ',S.LastName) AS FullName FROM PresentationSpeaker S
+      WHERE EXISTS
+      (
+            SELECT P.ID From Presentation P
+            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+            WHERE PS.PresentationSpeakerID = S.ID AND E.Title LIKE '%{$term}%'
+      )
+SQL;
+
+        foreach(DB::query($sql_speakers) as $row)
+        {
+            $class = $row['ClassName'];
+            array_push($speakers, new $class($row));
+        }
+
+        return $speakers;
     }
 }

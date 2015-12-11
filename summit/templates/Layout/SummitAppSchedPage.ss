@@ -63,18 +63,12 @@
         };
         <% end_loop %>
 
-        <% loop $Summit.EventTypes %>
-        summit.event_types[{$ID}] =
-        {
-                type : "{$Type.JS}",
-                color : "{$Color}",
-        };
-        <% end_loop %>
 
         <% loop $Summit.Types %>
         summit.summit_types[{$ID}] =
         {
-           type : "{$Title.JS}",
+           type: "{$Type}",
+           name : "{$Title.JS}",
            description : "{$Description.JS}",
            color : "{$Color}"
         };

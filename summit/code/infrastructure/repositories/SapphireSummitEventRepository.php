@@ -28,4 +28,74 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
         return Presentation::get_by_id('Presentation',$event_id);
     }
 
+    /**
+     * @param ISummit $summit
+     * @param string $term
+     * @return ISummitEvent[]
+     */
+    public function searchBySummitAndTerm(ISummit $summit, $term)
+    {
+        $events = array();
+
+        $summit_id = $summit->getIdentifier();
+
+        $sql_events   = <<<SQL
+        SELECT DISTINCT E.* FROM SummitEvent E
+        WHERE
+        E.SummitID = {$summit_id} AND E.Published = 1
+        AND Title LIKE '%{$term}%'
+        UNION
+        SELECT DISTINCT E.* FROM SummitEvent E
+        WHERE
+        E.SummitID = {$summit_id} AND E.Published = 1
+        AND
+        EXISTS
+        (
+            SELECT T.ID FROM Tag T INNER JOIN SummitEvent_Tags ET ON ET.TagID = T.ID
+            WHERE ET.SummitEventID = E.ID AND T.Tag LIKE '%{$term}%'
+        )
+        UNION
+        SELECT DISTINCT E.* FROM SummitEvent E
+        WHERE
+        E.SummitID = {$summit_id} AND E.Published = 1
+        AND
+        EXISTS
+        (
+            SELECT P.ID FROM Presentation P
+            WHERE  P.ID = E.ID AND P.Level LIKE '%{$term}%'
+        )
+        UNION
+        SELECT DISTINCT E.* FROM SummitEvent E
+        WHERE
+        E.SummitID = {$summit_id} AND E.Published = 1
+        AND EXISTS
+        (
+            SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+            INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
+            WHERE P.ID = E.ID
+            HAVING SpeakerFullName LIKE '%{$term}%'
+        )
+        UNION
+        SELECT DISTINCT E.* FROM SummitEvent E
+        WHERE
+        E.SummitID = {$summit_id} AND E.Published = 1
+        AND EXISTS
+        (
+            SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+            INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
+            WHERE P.ID = E.ID
+            HAVING SOUNDEX(SpeakerFullName) = SOUNDEX('{$term}')
+        )
+SQL;
+
+        foreach(DB::query($sql_events," ORDER BY E.StartDate ASC, E.EndDate ASC ;") as $row)
+        {
+            $class = $row['ClassName'];
+            array_push($events, new $class($row));
+        }
+
+        return $events;
+    }
 }

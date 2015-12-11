@@ -12,7 +12,7 @@
     <div class="row sessions col1">
         <h2> Sessions </h2>
         <ul>
-        <% loop PublishedPresentations() %>
+        <% loop PublishedPresentations($Top.Summit.ID) %>
             <li>
             <a href="{$Top.Link}events/{$ID}">$Title</a><br>
             $DateNice() <br>
