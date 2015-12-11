@@ -37,6 +37,10 @@ body
     font-size: 14px;
 }
 
+.tags-row {
+    font-family: Montserrat, Sans-serif;
+}
+
 .btn-global-search, .btn-global-search-clear
 {
     height: 38px;
@@ -82,7 +86,7 @@ body
     font-size: 14px;
 }
 
-.credentials-row
+.credentials-row, .level-row
 {
     font-family: Montserrat,Sans-serif;
     font-size: 14px;
@@ -93,11 +97,20 @@ body
     font-family: Montserrat,Sans-serif;
     font-size: 14px;
     color: aquamarine;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .col-tags-title, .col-speakers-title, .col-level-title
 {
     padding-right: 0 !important;
+}
+
+.level-icon {
+    width: 16px;
+    overflow: hidden;
+    position: relative;
+    top: -10px;
 }
 
 .col-tags-content a, .col-speakers-content a, .event-title a, .col-level-content a
@@ -113,8 +126,7 @@ body
 
 .col-track
 {
-    padding-top: 0px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .event-title
@@ -244,7 +256,7 @@ a.navbar-brand.navbar-brand-month
 .navbar-default .navbar-nav > .active.day-selected > a:hover,
 .navbar-default .navbar-nav > .active.day-selected > a:focus {
     color: #FFFFFF !important;
-    background: #224066;
+    background: #555555;
 }
 
 .day-label

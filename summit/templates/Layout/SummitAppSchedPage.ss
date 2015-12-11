@@ -137,7 +137,7 @@
                         moderator_id: {$ModeratorID},
                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                         track_id : {$CategoryID},
-                        Level : '{$Level}',
+                        level : '{$Level}',
                         <% end_if %>
                         <% if $Top.isEventOnMySchedule($ID) %>
                         own      : true,
