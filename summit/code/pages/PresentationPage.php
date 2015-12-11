@@ -48,8 +48,9 @@ class PresentationPage_Controller extends SummitPage_Controller
         'vote',
         'setpassword',
         'bio',
-        'EditSpeakerProfileForm'
+        'BioForm'
     );
+
 
 
     private static $url_handlers = array(
@@ -244,22 +245,40 @@ class PresentationPage_Controller extends SummitPage_Controller
     }
 
 
-    public function EditSpeakerProfileForm(SS_HTTPRequest $r)
+    public function BioForm(SS_HTTPRequest $r)
     {
-        if ($CurrentMember = Member::currentUser()) {
-            Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-            Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-            Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-            Requirements::javascript("registration/javascript/edit.profile.page.js");
-            Requirements::javascript("framework/thirdparty/tinymce/tiny_mce.js");
-            Requirements::javascript("themes/openstack/javascript/simple-tinymce.js");
-
-            Requirements::css("registration/css/speaker.profile.form.css");
-
-            $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
-            $SpeakerProfileForm = New EditSpeakerProfileForm($this, 'EditSpeakerProfileForm', $speaker, $CurrentMember, null);
-            return $SpeakerProfileForm;
+        $form = SpeakerForm::create(
+            $this,
+            "BioForm",
+            FieldList::create(FormAction::create('doSaveBio', 'Save'))
+        );
+        if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
+            $form->loadDataFrom($data);
+        } else {
+            $form->loadDataFrom(Member::currentUser()->getSpeakerProfile());
         }
+        return $form;
+    }
+
+    public function doSaveBio($data, $form)
+    {
+        Session::set("FormInfo.{$form->FormName()}.data", $data);
+        if (empty(strip_tags($data['Bio']))) {
+            $form->addErrorMessage('Bio', 'Please enter a bio', 'bad');
+
+            return $this->redirectBack();
+        }
+
+        $speaker = Member::currentUser()->getSpeakerProfile();
+        $form->saveInto($speaker);
+        $form->saveExtraData($speaker. $data);
+        $speaker->write();
+
+        $form->sessionMessage('Your bio has been updated', 'good');
+
+        Session::clear("FormInfo.{$form->FormName()}.data", $data);
+
+        return $this->redirectBack();
     }
 
     /**
@@ -917,11 +936,8 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
 
     private static $allowed_actions = array(
         'EditSpeakerForm',
-        'BureauForm',
         'LegalForm',
         'ReviewForm',
-        'doSaveBureau',
-        'doSkipBureau',
         'doSaveSpeaker',
         'doSaveLegal',
         'doReviewForm',
@@ -1083,87 +1099,33 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
      */
     public function EditSpeakerForm()
     {
-        if (!$this->speaker->FirstName) {
+        if (!$this->speaker->FirstName)
+        {
             $this->speaker->FirstName = $this->speaker->Member()->FirstName;
         }
-        if (!$this->speaker->Surname) {
+
+        if (!$this->speaker->Surname)
+        {
             $this->speaker->Surname = $this->speaker->Member()->Surname;
         }
 
-        $fields = FieldList::create();
-        if ($this->speaker->MemberID > 0) {
-            /*if (!$this->speaker->Member()->getSummitState('VIDEO_AGREEMENT_SEEN')) {
-                $fields->push(HeaderField::create('Do you agree to be video recorded?'));
-                $fields->push(LiteralField::create('legal', $this->parent->getParent()->LegalAgreement));
-                $fields->merge($this->LegalForm()->Fields());
-            }*/
-            if (!$this->speaker->Member()->getSummitState('BUREAU_SEEN', $this->parent->Summit())) {
-                $fields->push(HeaderField::create('Want to be in the Speakers\' Bureau?'));
-                $fields->merge($this->BureauForm()->Fields());
-            }
-        }
+        $show_bureau  = !is_null($this->speaker->Member()) && $this->speaker->Member()->ID > 0 && is_null($this->speaker->Member()->getSummitState('BUREAU_SEEN', $this->parent->Summit()));
 
-        $speaker_form = SpeakerForm::create(
+        $speaker_form = SpeakerForm::create
+        (
             $this,
             "EditSpeakerForm",
             FieldList::create(
                 FormAction::create('doSaveSpeaker', 'Save speaker details')
-            )
+            ),
+            $show_bureau
         )
-            ->loadDataFrom($this->speaker);
-        if ($fields->count() > 0) {
-            $old_fields = $speaker_form->Fields();
-            $old_fields->merge($fields);
-            $speaker_form->setFields($old_fields);
-        }
+        ->loadDataFrom($this->speaker);
 
         return $speaker_form;
     }
 
-
-    /**
-     * Creates an edit/create form for the speaker's bureau questionnaire
-     * @return  BureauForm
-     */
-    public function BureauForm()
-    {
-        $fields = FieldList::create()
-            ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
-            ->configure()
-            ->addExtraClass('bureau-checkbox')
-            ->end()
-            ->checkbox('FundedTravel', 'My company would be willing to fund my travel to events')
-            ->configure()
-            ->addExtraClass('bureau-checkbox')
-            ->end()
-            ->countryDropdown('Country')
-            ->literal('ExpertiseTitle','<h3>Areas of Expertise ( Up to 5)</h3>')
-            ->text('Expertise[1]','#1')
-            ->text('Expertise[2]','#2')
-            ->text('Expertise[3]','#3')
-            ->text('Expertise[4]','#4')
-            ->text('Expertise[5]','#5');
-
-        foreach ($this->speaker->AreasOfExpertise() as $key => $expertise) {
-            if ($key > 4) break;
-            $fields->fieldByName('Expertise['.($key+1).']')->setValue($expertise->Expertise);
-        }
-
-        $form = BootstrapForm::create(
-            $this,
-            "BureauForm",
-            $fields,
-            FieldList::create(
-                FormAction::create('doSaveBureau', 'Save Preferences'),
-                FormAction::create('doSkipBureau', 'Skip this step')
-            )
-        );
-        $form->loadDataFrom($this->speaker);
-        return $form;
-    }
-
-
-    /**
+     /**
      * Creates the form that allows a speaker to consent to being on video
      * @return  Form
      */
@@ -1194,20 +1156,11 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         }
 
         $fields = FieldList::create(HeaderField::create('Your details'));
-        $dummy = SpeakerForm::create($this, "EditSpeakerForm", FieldList::create());
+        $dummy  = SpeakerForm::create($this, "EditSpeakerForm", FieldList::create());
         $fields->merge(
             $dummy->Fields()
         );
         $fields->bootstrapIgnore('Photo');
-        /*if(!$this->speaker->Member()->getSummitState('VIDEO_AGREEMENT_SEEN')) {
-            $fields->push(HeaderField::create('Do you agree to be video recorded?'));
-            $fields->push(LiteralField::create('legal', $this->parent->getParent()->LegalAgreement));
-            $fields->merge($this->LegalForm()->Fields());
-        }*/
-        if (!$this->speaker->Member()->getSummitState('BUREAU_SEEN', $this->parent->Summit())) {
-            $fields->push(HeaderField::create('Want to be in the Speakers\' Bureau?'));
-            $fields->merge($this->BureauForm()->Fields());
-        }
 
         $form = BootstrapForm::create(
             $this,
@@ -1237,7 +1190,6 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         $form->saveInto($this->speaker);
         if (!$data['VideoAgreement']) {
             $form->sessionMessage('You must agree to the terms', 'bad');
-
             return $this->redirectBack();
         }
 
@@ -1259,44 +1211,12 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     public function doSaveSpeaker($data, $form)
     {
         $form->saveInto($this->speaker);
-        foreach ($data['Expertise'] as $exp) {
-            if (trim($exp) != '') {
-                $expertise = SpeakerExpertise::create(array(
-                    'Expertise' => $exp
-                ));
-                $this->speaker->AreasOfExpertise()->add( $expertise );
-            }
-        }
+        $form->saveExtraData($this->speaker. $data);
         $this->speaker->write();
         $member = $this->speaker->Member();
         if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
         }
-        return $this->parent->getParent()->redirect($this->Link('bureau'));
-    }
-
-
-    /**
-     * Handles the form submissions for the bureau questionnaire
-     * @param   $data array
-     * @param   $form Form
-     * @return  SSViewer
-     */
-    public function doSaveBureau($data, $form)
-    {
-        $form->saveInto($this->speaker);
-        $this->speaker->Member()->setSummitState('BUREAU_SEEN', $this->parent->Summit());
-
-        foreach ($data['Expertise'] as $exp) {
-            if (trim($exp) != '') {
-                $expertise = SpeakerExpertise::create(array(
-                    'Expertise' => $exp
-                ));
-                $this->speaker->AreasOfExpertise()->add( $expertise );
-            }
-        }
-        $this->speaker->write();
-
         if ($this->isMe()) {
             return $this->parent->getParent()->redirect($this->Link('legal'));
         }
@@ -1306,30 +1226,11 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
 
 
     /**
-     * Handles the form submission for skipping the questionnaire.
-     * Updates the speaker record to reflect that the speaker has been asked about
-     * the bureau
-     * @param   $data array
-     * @param   $form Form
-     * @return  SSViewer
-     */
-    public function doSkipBureau($data, $form)
-    {
-        $this->speaker->Member()->setSummitState('BUREAU_SEEN', $this->parent->Summit());
-
-        if (Member::currentUserID() == $this->speaker->MemberID) {
-            return $this->parent->getParent()->redirect($this->Link('legal'));
-        }
-
-        return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
-    }
-
-
-    /**
-     * Handles the form submission for the speaker "Update my details" page
-     * @param  array $data
-     * @param  Form $form
-     * @return [type]       [description]
+     * @param $data
+     * @param $form
+     * @return bool|SS_HTTPResponse
+     * @throws ValidationException
+     * @throws null
      */
     public function doReviewForm($data, $form)
     {
@@ -1351,14 +1252,7 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         } else {
             $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_DECLINED', $this->parent->Summit());
         }
-        foreach ($data['Expertise'] as $exp) {
-            if (trim($exp) != '') {
-                $expertise = SpeakerExpertise::create(array(
-                    'Expertise' => $exp
-                ));
-                $this->speaker->AreasOfExpertise()->add( $expertise );
-            }
-        }
+        $form->saveExtraData($this->speaker. $data);
         $this->speaker->write();
         $form->sessionMessage('Your details have been updated.', 'good');
         Session::clear("FormInfo.{$form->FormName()}.data", $data);
