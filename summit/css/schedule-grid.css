@@ -14,6 +14,11 @@ body,html{height:100%}
     font-style: normal;
 }
 
+body
+{
+    font-family: Montserrat, Sans-serif;
+}
+
 .col-main-title
 {
     background-color: #132539;
@@ -22,14 +27,13 @@ body,html{height:100%}
 .col-main-title h1
 {
     color: #FFFFFF;
-    font-family: Montserrat, Sans-serif;
     font-size: 42px;
     margin:0px;
     padding-top:40px;
+    font-family: Montserrat, Sans-serif;
 }
 
 .tags-row, .level-row {
-    font-family: Montserrat,Sans-serif;
     font-size: 14px;
 }
 
@@ -48,7 +52,6 @@ body,html{height:100%}
 
 .event-row
 {
-    font-family: 'Montserrat';
     border: 1px solid #C1C1C1;
     color: #4a4a4a !important;
 }
@@ -72,12 +75,10 @@ body,html{height:100%}
 .col-time
 {
     padding-right: 0 !important;
-    font-family: Montserrat,Sans-serif;
     font-size: 14px;
 }
 
 .col-location {
-    font-family: Montserrat,Sans-serif;
     font-size: 14px;
 }
 
@@ -106,7 +107,6 @@ body,html{height:100%}
 
 .track, .track a
 {
-    font-family: Montserrat,Sans-serif;
     font-size: 14px;
     color: #D7D7D7;
 }
@@ -119,7 +119,6 @@ body,html{height:100%}
 
 .event-title
 {
-    font-family: Montserrat,Sans-serif;
     font-size: 24px;
     padding-top: 20px;
     padding-bottom: 5px;
@@ -129,10 +128,11 @@ body,html{height:100%}
 {
     background-color: #E4E4E4;
     padding: 1em;
-    color: #4F4F4F;
+    color: #4a4a4a;
     font-family: Helvetica,Sans-serif;
     font-size: 18px;
     font-weight: 400;
+    border-top: 2px solid #C1C1C1;
 }
 
 .main-event-content
@@ -153,6 +153,8 @@ body,html{height:100%}
 {
     background-color: #224066 !important;
     border-color: #224066 !important;
+    border-radius: 0;
+    margin-top: 10px;
 }
 
 .tags-row, .speakers-row, .row-level
@@ -212,11 +214,13 @@ body,html{height:100%}
 
 .navbar-days
 {
-    font-family: 'Montserrat';
     background-color: #E5E5E5;
     text-transform: uppercase;
     padding: 0 !important;
+    border: none;
+    border-bottom: 3px solid #DDDDDD;
     font-size: 11pt !important;
+    font-weight: bold;
 }
 
 .navbar-days .container
@@ -227,6 +231,7 @@ body,html{height:100%}
 a.navbar-brand.navbar-brand-month
 {
     font-size: 11pt !important;
+    color: #4a4a4a !important
 }
 
 .navbar-default .navbar-nav > .active.day-selected
@@ -246,12 +251,12 @@ a.navbar-brand.navbar-brand-month
 {
     vertical-align: middle;
     text-decoration: none;
-    color: #4B4B4B !important;
+    color: #4a4a4a !important
 }
 
 .day-label:visited
 {
-    color: #757575;
+    color: #4a4a4a !important
 }
 
 .icon-clock, .icon-foreign-event, .icon-own-event, .icon-favorite-event, .icon-non-favorite-event, .icon-map
@@ -286,11 +291,18 @@ a.navbar-brand.navbar-brand-month
     text-align: right;
 }
 
-.speaker-name-row
+.speaker-name-row a
 {
-    color: #7C7C7C;
+    color: #4a4a4a;
     font-family: 'MontserratBold';
-    font-size: 12pt;
+    font-size: 16px;
+}
+
+.speaker-position-row
+{
+    color: #C1C1C1;
+    font-family: 'Montserrat';
+    font-size: 12px;
 }
 
 .img-circle
@@ -303,7 +315,7 @@ a.navbar-brand.navbar-brand-month
 .speaker-row
 {
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .filter-row
@@ -336,7 +348,8 @@ a.navbar-brand {
     vertical-align: middle;
     text-align: left;
     padding-top: 0.65em;
-    color: #1a3b5e;
+    color: #4a4a4a;
+    font-weight: bold;
 }
 
 .all-events-filter-row
@@ -351,17 +364,23 @@ a.navbar-brand {
 }
 
 .all-events-filter-link {
-    padding-right: 10px; }
+    padding-right: 10px;
+}
+
 .all-events-filter-link i {
     font-size: 1.2em;
-    color: #1a3b5e;
+    color: #4a4a4a;
     background: white;
-    border: 1px solid #D3DEE9;
+    border: 1px solid #4a4a4a;
     padding: 10px 15px;
-    border-radius: 8px; }
+    border-radius: 8px;
+}
+
 .all-events-filter-link i:hover {
     cursor: pointer;
-    color: #2A4E68; }
+    background-color: #e8e8e8;
+}
+
 .all-events-filter-link i.active
 {
     background: #6CBB45;
@@ -383,6 +402,10 @@ a.navbar-brand {
 {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.switch_schedule {
+    height: 38px;
 }
 
 form.all-events-search-form .all-events-search-wrapper {
