@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MontserratBold';
+    src: url('/themes/openstack/fonts/Montserrat-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .container {
     font-family:'Montserrat' , sans-serif;
 }
@@ -31,7 +45,6 @@
 }
 
 .subtitle {
-    text-transform: uppercase;
     font-size: 15px;
     clear: both;
 }
@@ -82,7 +95,11 @@
     left: -2px;
 }
 
-.info_item_text {
+.icon-level {
+    width: 16px;
+    overflow: hidden;
+    position: relative;
+    top: -10px;
 }
 
 .share {
@@ -115,10 +132,32 @@
 .logo {
     text-align: center;
     margin-top: 35px;
+    min-height: 280px;
+    background-color: #F5F5F5;
 }
 
 .multi_logo {
     float: left;
+}
+
+.tags-row {
+    font-size: 14px;
+}
+
+.tags-row a {
+    color: #494949;
+}
+
+.col-tags-title {
+    padding-right: 0 !important;
+}
+
+@media all and (min-width: 992px)
+{
+    .col-tags-title, .col-speakers-title
+    {
+        width: auto;
+    }
 }
 
 .speaker_box {

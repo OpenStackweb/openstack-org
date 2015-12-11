@@ -6,13 +6,9 @@
             <event-check></event-check>
         </div>
         <div class="subtitle">
-            <% loop $Event.Tags %>
-                <% if First %><a href="$Top.Link(global-search)?t={$Tag}">$Tag</a><% else_if Last %>
-                &nbsp;&&nbsp;<a href="$Top.Link(global-search)?t={$Tag}">$Tag</a>
-                <% else %>
-                &nbsp;,&nbsp;<a href="$Top.Link(global-search)?t={$Tag}">$Tag</a>
-                <% end_if %>
-            <% end_loop %>
+            <% if $Event.Category %>
+                <a href="$Top.Link(global-search)?t={$Event.Category.Title}">$Event.Category.Title</a>
+            <% end_if %>
         </div>
     </div>
 </div>
@@ -20,6 +16,22 @@
     <div class="container">
         <div class="description col1">
             $Event.Description()
+
+            <% if $Event.Tags %>
+            <div class="row tags-row">
+                <div class="col-xs-12 col-md-2 col-tags-title">
+                    <i class="fa fa-tags"></i>
+                    <span>Tags:</span>
+                </div>
+                <div class="col-xs-12 col-md-10 col-tags-content">
+                    <% loop $Event.Tags %>
+                        <span title="Search Tag" class="tag">
+                            <a href="$Top.Link(global-search)?t={$Tag}">$Tag</a>
+                        </span>
+                    <% end_loop %>
+                </div>
+            </div>
+            <% end_if %>
 
             <div class="share">
                 <script type="application/javascript">
@@ -44,7 +56,12 @@
                 <div class="info_item_icon"><i class="fa fa-2x fa-map-marker icon-map"></i></div>
                 <div class="info_item_text">$Event.LocationNameNice()</div>
             </div>
-
+            <% if $Event.isPresentation %>
+            <div class="info_item">
+                <div class="info_item_icon"><i class="fa fa-2x fa-signal icon-level"></i></div>
+                <div class="info_item_text">Level: $Event.Level</div>
+            </div>
+            <% end_if %>
             <% if Event.isAllowedSummitType("DESIGN") == 1 %>
             <div class="info_item">
                 <div class="info_item_icon"><img style="height:15px" src="/summit/images/summitapp/credential.png" /></div>

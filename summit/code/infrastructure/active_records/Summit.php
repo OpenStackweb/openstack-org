@@ -1048,7 +1048,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
         $end_date   = $this->getEndDate();
         $res        = array();
         foreach($this->getDatesFromRange($start_date, $end_date) as $date)
-            array_push($res, new ArrayData(array('Label'=> $date->format('l jS') , 'Date' => $date->format('Y-m-d H:i:s'))));
+            array_push($res, new ArrayData(array('Label'=> $date->format('l j') , 'Date' => $date->format('Y-m-d H:i:s'))));
         return new ArrayList($res);
     }
 

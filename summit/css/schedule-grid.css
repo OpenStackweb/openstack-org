@@ -251,12 +251,17 @@ a.navbar-brand.navbar-brand-month
 {
     vertical-align: middle;
     text-decoration: none;
-    color: #4a4a4a !important
+    color: #4a4a4a !important;
+    border-right: 2px solid #DDDDDD;
 }
 
 .day-label:visited
 {
     color: #4a4a4a !important
+}
+
+.navbar-nav > li:first-child > a.day-label {
+    border-left: 2px solid #DDDDDD;
 }
 
 .icon-clock, .icon-foreign-event, .icon-own-event, .icon-favorite-event, .icon-non-favorite-event, .icon-map
