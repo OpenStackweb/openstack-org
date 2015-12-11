@@ -22,6 +22,7 @@
             summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}' };
             <% end_with %>
         <% end_if %>
+
         <% loop $Summit.Speakers %>
          summit.speakers[{$ID}] =
          {
@@ -31,6 +32,14 @@
              position : "{$CurrentPosition.JS}",
          };
         <% end_loop %>
+
+       <% loop $Summit.Sponsors %>
+           summit.sponsors[{$ID}] =
+           {
+                id: {$ID},
+                name : "{$Name.JS}",
+           };
+       <% end_loop %>
 
         <% loop $Summit.Tags %>
         summit.tags[{$ID}] =

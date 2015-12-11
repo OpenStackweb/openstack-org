@@ -81,6 +81,19 @@ body,html{height:100%}
     font-size: 14px;
 }
 
+.credentials-row
+{
+    font-family: Montserrat,Sans-serif;
+    font-size: 14px;
+}
+
+.col-sponsors
+{
+    font-family: Montserrat,Sans-serif;
+    font-size: 14px;
+    color: aquamarine;
+}
+
 .col-tags-title, .col-speakers-title, .col-level-title
 {
     padding-right: 0 !important;

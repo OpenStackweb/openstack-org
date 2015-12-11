@@ -174,4 +174,9 @@ interface ISummit extends IEntity
      */
     public function isVotingOpen();
 
+    /**
+     * @return ICompany[]
+     */
+    public function Sponsors();
+
 }

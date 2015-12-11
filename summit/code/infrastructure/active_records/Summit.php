@@ -1183,4 +1183,29 @@ SQL;
         $now          = new \DateTime('now', new DateTimeZone('UTC'));
         return ( $now >=  $start_date && $now <= $end_date);
     }
+
+
+    /**
+     * @return ICompany[]
+     */
+    public function Sponsors()
+    {
+        $query = <<<SQL
+SELECT DISTINCT C.* FROM SummitEvent_Sponsors S
+INNER JOIN SummitEvent E ON E.ID = S.SummitEventID AND E.SummitID = {$this->ID}
+INNER JOIN Company C ON C.ID = S.CompanyID
+SQL;
+
+        $list = array();
+        $res = DB::query($query);
+        foreach($res as $row)
+        {
+
+            $class = $row['ClassName'];
+            array_push($list, new $class($row));
+        }
+
+        return new ArrayList($list);
+
+    }
 }

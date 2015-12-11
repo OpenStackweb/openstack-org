@@ -20,6 +20,11 @@
                             <raw content="{ title }"/>
                         </div>
                     </div>
+                    <div class="row" if={ sponsors_id.length > 0 }>
+                        <div class="col-md-12 col-sponsors">
+                            Sponsored by { sponsorNames(sponsors_id) }
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12 col-track"><span if={ track_id} class="track"><a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+trackName()replace(/ /g,'+') }">{ trackName() }</a></span></div>
                     </div>
@@ -54,6 +59,14 @@
                                     <span class="presentation-level'">
                                         <a class="search-link" title="Search Presentation Level" href="{ parent.search_url+'?t='+level }">{ level }</a>
                                     </span>
+                                </div>
+                            </div>
+                            <div class="row credentials-row" if={ hasDesignCredentials(summit_types_id) } >
+                                <div class="col-md-2 col-xs-12">
+                                    <img style="height:15px" src="/summit/images/summitapp/credential.png" />
+                                </div>
+                                 <div class="col-md-10 col-xs-12">
+                                    Design Summit Credential
                                 </div>
                             </div>
                         </div>
@@ -119,6 +132,27 @@
             return location.name+' - '+room.name;
         }
         return location.name;
+    }
+
+    sponsorNames(sponsors_id) {
+
+        var sponsors = '';
+        for(var id of sponsors_id)
+        {
+            var s = self.summit.sponsors[id];
+            if(sponsors !== '') sponsors += ', ';
+            sponsors += s.name;
+        }
+        return sponsors;
+    }
+
+    hasDesignCredentials(summit_types_id) {
+        for(var id of summit_types_id)
+        {
+            var t = self.summit.summit_types[id];
+            if(t.type === 'DESIGN') return true;
+        }
+        return false;
     }
 
     eventColor(summit_types_id){
