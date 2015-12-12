@@ -6,13 +6,8 @@
 class SpeakerForm extends BootstrapForm
 {
 
-    /**
-     * @var bool
-     */
-    private $show_bureau;
-
-    public function __construct($controller, $name, $actions, $show_bureau = false) {
-        $this->show_bureau = $show_bureau;
+    public function __construct($controller, $name, $actions)
+    {
         parent::__construct(
             $controller, 
             $name, 
@@ -74,11 +69,7 @@ class SpeakerForm extends BootstrapForm
             ->text('PresentationLink[3]','#3')
             ->text('PresentationLink[4]','#4')
             ->text('PresentationLink[5]','#5')
-            ->literal('RecordingAndPublishingLegalAgreement','Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.');
-
-        if($this->show_bureau)
-        {
-            $fields = $fields
+            ->literal('RecordingAndPublishingLegalAgreement','Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.')
             ->header('Want to be in the Speakers\' Bureau?')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
             ->configure()
@@ -94,7 +85,6 @@ class SpeakerForm extends BootstrapForm
              ))
             ->multidropdown('CountriesToTravel', 'Countries willing to travel to (Use Ctrl + C to select more than one):', CountryCodes::$iso_3166_countryCodes);
 
-        }
         return $fields;
     }
 
@@ -108,6 +98,16 @@ class SpeakerForm extends BootstrapForm
         if(!$data instanceof PresentationSpeaker) return;
 
         $speaker = $data;
+
+        if($speaker->Member()->ID > 0)
+        {
+            // populate from member
+            if(empty($speaker->FirstName))  $this->fields->fieldByName('FirstName')->setValue($speaker->Member()->FirstName);
+            if(empty($speaker->LastName))  $this->fields->fieldByName('LastName')->setValue($speaker->Member()->Surname);
+            if(empty($speaker->Bio))  $this->fields->fieldByName('Bio')->setValue($speaker->Member()->Bio);
+            if(empty($speaker->IRCHandle))  $this->fields->fieldByName('IRCHandle')->setValue($speaker->Member()->IRCHandle);
+            if(empty($speaker->TwitterHandle))  $this->fields->fieldByName('TwitterHandle')->setValue($speaker->Member()->TwitterName);
+        }
 
         foreach ($speaker->AreasOfExpertise() as $key => $expertise)
         {
@@ -157,63 +157,47 @@ class SpeakerForm extends BootstrapForm
         if(!$dataObject instanceof PresentationSpeaker) return;
 
         $speaker = $dataObject;
-    }
 
-    public function saveExtraData($speaker, $data)
-    {
-
-        // Languages
-        foreach ($speaker->Languages() as $currentlang) {
-            $currentlang->delete();
+        $speaker->AreasOfExpertise()->removeAll();
+        for($i = 1 ; $i <= 5 ; $i++ ){
+            $field = $this->fields->fieldByName("Expertise[{$i}]");
+            if(is_null($field)) continue;
+            $val = $field->Value();
+            if(empty($val)) continue;
+            $speaker->AreasOfExpertise()->add( SpeakerExpertise::create(array('Expertise' => trim($val))));
         }
-        foreach ($data['Language'] as $lang) {
-            if (trim($lang) != '') {
-                $spoken_lang = SpeakerLanguage::create(array(
-                    'Language' => $lang
-                ));
-                $speaker->Languages()->add( $spoken_lang );
+
+        $speaker->Languages()->removeAll();
+        for($i = 1 ; $i <= 5 ; $i++ ){
+            $field = $this->fields->fieldByName("Language[{$i}]");
+            if(is_null($field)) continue;
+            $val = $field->Value();
+            if(empty($val)) continue;
+            $speaker->Languages()->add( SpeakerLanguage::create(array('Language' => trim($val))));
+        }
+
+        $speaker->OtherPresentationLinks()->removeAll();
+        for($i = 1 ; $i <= 5 ; $i++ ){
+            $field = $this->fields->fieldByName("PresentationLink[{$i}]");
+            if(is_null($field)) continue;
+            $val   = $field->Value();
+            if(empty($val)) continue;
+            $speaker->OtherPresentationLinks()->add( SpeakerPresentationLink::create(array('LinkUrl' => trim($val))));
+        }
+
+        $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
+
+        if(!is_null($countries_2_travel))
+        {
+            $speaker->TravelPreferences()->removeAll();
+            $country_array  = $countries_2_travel->Value();
+            foreach($country_array as $country_name)
+            {
+                $speaker->TravelPreferences()->add(SpeakerTravelPreference::create(array(
+                    'Country' => $country_name
+                )));
             }
         }
-
-        // Expertise
-        foreach ($speaker->AreasOfExpertise() as $currentexp) {
-            $currentexp->delete();
-        }
-        foreach ($data['Expertise'] as $exp) {
-            if (trim($exp) != '') {
-                $expertise = SpeakerExpertise::create(array(
-                    'Expertise' => $exp
-                ));
-                $speaker->AreasOfExpertise()->add( $expertise );
-            }
-        }
-
-        // Presentation Link
-        foreach ($speaker->OtherPresentationLinks() as $currentpres) {
-            $currentpres->delete();
-        }
-        foreach ($data['PresentationLink'] as $link) {
-            if (trim($link) != '') {
-                $presentation_link = SpeakerPresentationLink::create(array(
-                    'LinkUrl' => $link
-                ));
-                $speaker->OtherPresentationLinks()->add( $presentation_link );
-            }
-        }
-
-        // Travel Preferences
-        foreach ($speaker->TravelPreferences() as $current_tf) {
-            $current_tf->delete();
-        }
-        foreach ($data['CountriesToTravel'] as $travel_country) {
-            $travel_pref = SpeakerTravelPreference::create(array(
-                'Country' => $travel_country
-            ));
-            $speaker->TravelPreferences()->add( $travel_pref );
-        }
-
-
-        $speaker->write();
     }
 
 }

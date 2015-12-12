@@ -244,14 +244,15 @@ class PresentationPage_Controller extends SummitPage_Controller
         );
     }
 
-
     public function BioForm(SS_HTTPRequest $r)
     {
+
         $form = SpeakerForm::create(
             $this,
             "BioForm",
             FieldList::create(FormAction::create('doSaveBio', 'Save'))
         );
+
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             $form->loadDataFrom($data);
         } else {
@@ -271,7 +272,6 @@ class PresentationPage_Controller extends SummitPage_Controller
 
         $speaker = Member::currentUser()->getSpeakerProfile();
         $form->saveInto($speaker);
-        $form->saveExtraData($speaker. $data);
         $speaker->write();
 
         $form->sessionMessage('Your bio has been updated', 'good');
@@ -1109,16 +1109,13 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $this->speaker->Surname = $this->speaker->Member()->Surname;
         }
 
-        $show_bureau  = !is_null($this->speaker->Member()) && $this->speaker->Member()->ID > 0 && is_null($this->speaker->Member()->getSummitState('BUREAU_SEEN', $this->parent->Summit()));
-
         $speaker_form = SpeakerForm::create
         (
             $this,
             "EditSpeakerForm",
             FieldList::create(
                 FormAction::create('doSaveSpeaker', 'Save speaker details')
-            ),
-            $show_bureau
+            )
         )
         ->loadDataFrom($this->speaker);
 
@@ -1155,8 +1152,8 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             return $this->httpError(403);
         }
 
-        $fields = FieldList::create(HeaderField::create('Your details'));
-        $dummy  = SpeakerForm::create($this, "EditSpeakerForm", FieldList::create());
+        $fields       = FieldList::create(HeaderField::create('Your details'));
+        $dummy        = SpeakerForm::create($this, "EditSpeakerForm", FieldList::create());
         $fields->merge(
             $dummy->Fields()
         );
@@ -1211,7 +1208,6 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     public function doSaveSpeaker($data, $form)
     {
         $form->saveInto($this->speaker);
-        $form->saveExtraData($this->speaker. $data);
         $this->speaker->write();
         $member = $this->speaker->Member();
         if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
@@ -1242,7 +1238,7 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             return $this->redirectBack();
         }
         $form->saveInto($this->speaker);
-        $this->speaker->Member()->setSummitState('BUREAU_SEEEN', $this->parent->Summit());
+        $this->speaker->Member()->setSummitState('BUREAU_SEEN', $this->parent->Summit());
         if ($data['VideoAgreement'] == 1) {
             $this->speaker->Member()->setSummitState(
                 'VIDEO_AGREEMENT_AGREED',
@@ -1252,7 +1248,6 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         } else {
             $this->speaker->Member()->setSummitState('VIDEO_AGREEMENT_DECLINED', $this->parent->Summit());
         }
-        $form->saveExtraData($this->speaker. $data);
         $this->speaker->write();
         $form->sessionMessage('Your details have been updated.', 'good');
         Session::clear("FormInfo.{$form->FormName()}.data", $data);
