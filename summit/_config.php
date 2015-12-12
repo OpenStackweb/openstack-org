@@ -227,4 +227,4 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
     }
 });
 
-define('MAX_SUMMIT_ALLOWED_PER_USER', 5);
+define('MAX_SUMMIT_ALLOWED_PER_USER', 3);

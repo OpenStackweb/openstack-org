@@ -51,12 +51,9 @@ class PresentationPage_Controller extends SummitPage_Controller
         'BioForm'
     );
 
-
-
     private static $url_handlers = array(
         'manage/$PresentationID!' => 'handleManage',
     );
-
 
     private static $extensions = array(
         'MemberTokenAuthenticator'
@@ -163,6 +160,10 @@ class PresentationPage_Controller extends SummitPage_Controller
         }
     }
 
+    public function MaxAllowedPresentations()
+    {
+        return MAX_SUMMIT_ALLOWED_PER_USER;
+    }
 
     /**
      * Hand off presentation CRUD to a sub controller. Ensure the user
