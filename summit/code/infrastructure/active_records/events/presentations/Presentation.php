@@ -32,12 +32,15 @@ class Presentation extends SummitEvent implements IPresentation
 
     private static $db = array
     (
-        'Level'                => "Enum('Beginner,Intermediate,Advanced')",
-        'Status'               => 'Varchar',
-        'OtherTopic'           => 'Varchar',
-        'Progress'             => 'Int',
-        'Views'                => 'Int',
-        'BeenEmailed'          => 'Boolean',
+        'Level'                   => "Enum('Beginner,Intermediate,Advanced')",
+        'Status'                  => 'Varchar',
+        'OtherTopic'              => 'Varchar',
+        'Progress'                => 'Int',
+        'Views'                   => 'Int',
+        'BeenEmailed'             => 'Boolean',
+        'ProblemAddressed'        => 'HTMLText',
+        'AttendeesExpectedLearnt' => 'HTMLText',
+        'SelectionMotive'         => 'HTMLText',
     );
 
     private static $defaults = array
@@ -480,6 +483,9 @@ class Presentation extends SummitEvent implements IPresentation
             ->setMultiple(true)
             ->end()
             ->text('OtherTopic', 'Other topic')
+            ->htmleditor('ProblemAddressed', 'What is the problem or use case you’re addressing in this session?')
+            ->htmleditor('AttendeesExpectedLearnt', 'What should attendees expect to learn?')
+            ->htmleditor('SelectionMotive', 'Why should this session be selected?')
             ->tab('Preview')
             ->literal('preview', sprintf(
                 '<iframe width="%s" height="%s" frameborder="0" src="%s"></iframe>',
@@ -520,6 +526,7 @@ class Presentation extends SummitEvent implements IPresentation
                 (
                     'PresentationVideo' => 'Video',
                     'PresentationSlide' => 'Slide',
+                    'PresentationLink'  => 'Link',
                 )
             );
             $config->addComponent($multi_class_selector);
