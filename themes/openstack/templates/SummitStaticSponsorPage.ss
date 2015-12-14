@@ -190,7 +190,7 @@
                 <h3>How to Sign the Agreement:</h3>
                 <ul>
                     <li>
-                       <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDcmCnkQDZC7wTOmUwxtlE-IO6VEbSvhPxB6bM8JVQeKZQ_Dp3k-THNstKwYUE10hk*" target="_blank">Click HERE to sign</a> the electronic OpenStack Summit April 2016 Sponsorship Agreement.
+                       <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDcmCnkQDZC7wTOmUwxtlE-IO6VEbSvhPxB6bM8JVQeKZQ_Dp3k-THNstKwYUE10hk*" target="_blank"><strong>Click HERE to sign</strong></a> the electronic OpenStack Summit April 2016 Sponsorship Agreement.
                     </li>
                     <li>
                         After you sign the electronic contract, <strong>CHECK YOUR EMAIL</strong>, you must click through a link in your email in order to complete the signing process. Don’t miss this step!
