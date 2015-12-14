@@ -11,17 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class SpeakerContactEmail
  */
 final class SpeakerContactEmail
-	extends DataObject
-	implements ISpeakerContactEmail
+    extends DataObject
+    implements ISpeakerContactEmail
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-	static $db = array(
+    static $db = array(
         'OrgName' => 'Varchar(255)',
         'OrgEmail' => 'Varchar(255)',
         'EventName' => 'Varchar(255)',
@@ -32,19 +33,19 @@ final class SpeakerContactEmail
         'Topics' => 'Varchar(255)',
         'GeneralRequest' => 'Text',
         'EmailSent' => 'Boolean'
-	);
+    );
 
     static $has_one = array(
         'Recipient' => 'Speaker',
     );
 
-	/**
-	 * @return int
-	 */
-	public function getIdentifier()
-	{
-		return (int)$this->getField('ID');
-	}
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
 
 
 }

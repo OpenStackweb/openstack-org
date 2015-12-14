@@ -23,7 +23,7 @@ final class MigrateExpertiseToDORelation extends AbstractDBMigrationTask
         $speakers = DB::query("SELECT * FROM PresentationSpeaker WHERE Expertise IS NOT NULL");
 
         foreach ($speakers as $speaker) {
-            $expertise_array = preg_split ('/$\R?^/m', $speaker['Expertise']);
+            $expertise_array = preg_split('/$\R?^/m', $speaker['Expertise']);
             foreach ($expertise_array as $exp) {
                 $new_exp = new SpeakerExpertise();
                 $new_exp->Expertise = $exp;

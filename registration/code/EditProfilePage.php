@@ -27,7 +27,6 @@ class EditProfilePage_Controller extends Page_Controller
         'resign',
         'CandidateApplication',
         'CandidateApplicationForm',
-        'AffiliationEditForm',
         'training',
         'trainingAddCourse',
         'AddTrainingCourseForm',
@@ -68,7 +67,6 @@ class EditProfilePage_Controller extends Page_Controller
         parent::init();
 
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
@@ -76,7 +74,7 @@ class EditProfilePage_Controller extends Page_Controller
         $css_files =  array(
             "themes/openstack/css/chosen.css",
             'registration/css/edit.profile.page.css',
-            "registration/css/affiliations.css");
+           );
 
         foreach($css_files as $css_file)
             Requirements::css($css_file);
@@ -88,7 +86,6 @@ class EditProfilePage_Controller extends Page_Controller
             "themes/openstack/javascript/jquery.cleanform.js",
             "themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js",
             "themes/openstack/javascript/jquery.validate.custom.methods.js",
-            "registration/javascript/affiliations.js",
             'registration/javascript/edit.profile.page.js'
         ));
 
@@ -114,13 +111,6 @@ class EditProfilePage_Controller extends Page_Controller
         );
     }
 
-    public function AffiliationEditForm()
-    {
-        if ($CurrentMember = Member::currentUser()) {
-            $AffiliationEditForm = new AffiliationEditForm($this, 'AffiliationEditForm');
-            return $AffiliationEditForm;
-        }
-    }
 
     // The first tab of the profile page. This is called in the EditProfilePage.ss template.
     public function EditProfileForm()

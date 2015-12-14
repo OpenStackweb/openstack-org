@@ -14,8 +14,10 @@ $(".open-panel").click(function(event){
 $('a[href^=#]').click(function(e){
     var $this = $(this);
     e.preventDefault();
+    var offset = $($this.attr('href')).offset();
+    if( typeof offset == 'undefined') return;
     $('html, body').animate({
-        scrollTop: $($this.attr('href')).offset().top
+        scrollTop: offset.top
     }, 500);
 });
 

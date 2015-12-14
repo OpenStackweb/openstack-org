@@ -11,14 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Interface ISpeakerContactEmailFactory
  */
-interface ISpeakerContactEmailFactory {
+interface ISpeakerContactEmailFactory
+{
 
-	/**
-	 * @param array $data
-	 * @return ISpeakerContactEmail
-	 */
-	public function buildSpeakerContactEmail(array $data,PresentationSpeaker $speaker);
+    /**
+     * @param array $data
+     * @return ISpeakerContactEmail
+     */
+    public function buildSpeakerContactEmail(array $data, PresentationSpeaker $speaker);
 } 

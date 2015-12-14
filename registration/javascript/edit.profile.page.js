@@ -18,10 +18,6 @@ jQuery(document).ready(function($) {
 
     if(edit_profile_form.length > 0){
 
-        $("#AffiliationEditForm_AffiliationEditForm").affiliations({
-            storage:'remote'
-        });
-
         var country = $(form_id+'_Country');
         if(country.length > 0){
             country.chosen();
@@ -36,8 +32,8 @@ jQuery(document).ready(function($) {
 
         //custom validation
         jQuery.validator.addMethod('checkAffiliations', function(value, element,params) {
-            var count = $("#AffiliationEditForm_AffiliationEditForm").affiliations('count');
-            return count >0;
+            var count = $("#edit-affiliation-form").affiliations('count');
+            return count  > 0;
         },'You must add at least one Affiliation.');
 
         jQuery.validator.addMethod('checkGender', function(value, element,params) {
@@ -88,8 +84,8 @@ jQuery(document).ready(function($) {
                 City:{required: true},
                 State:{required: true},
                 Postcode:{required: true},
-                'Affiliations':{checkAffiliations:true},
-                'Gender':{checkGender:true}
+                'HiddenAffiliations':{ checkAffiliations:true },
+                'Gender':{ checkGender:true }
             },
             messages: {
                 FirstName:{

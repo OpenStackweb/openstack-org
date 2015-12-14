@@ -3641,3 +3641,12 @@ h3.schedule-select-title {
   font-size: 8pt;
   padding-top: 1em;
 }
+
+#CountriesToTravel label {
+    display: block
+}
+
+.countries-to-travel
+{
+  height: 150px !important;
+}

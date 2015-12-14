@@ -38,10 +38,7 @@ $SetCurrentTab(1)
 			<% include ProfileNav %>
 			<div class="profile-appearance">See how your <a href="/community/members/profile/{$CurrentMember.ID}">public profile</a> appears.</div>
 			$EditProfileForm
-            <div id="affiliation-edition-dialog">
-                $AffiliationEditForm
-            </div>
-			<% include CompanyAdmin %>
+         	<% include CompanyAdmin %>
 		</div> <!-- Close logged in box -->
 		<% else %>
 			<p>In order to edit your community profile, you will first need to <a href="/Security/login/?BackURL=%2Fprofile%2F">login as a member</a>. Don't have an account? <a href="/join/">Join The Foundation</a></p>

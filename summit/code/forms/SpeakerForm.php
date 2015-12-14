@@ -17,7 +17,8 @@ class SpeakerForm extends BootstrapForm
         );
     }
 
-    protected function getSpeakerFields() {
+    protected function getSpeakerFields()
+    {
         $fields =  FieldList::create()
             ->text('FirstName',"Speaker's first name")
                 ->configure()
@@ -51,6 +52,7 @@ class SpeakerForm extends BootstrapForm
                     ->setMaxFilesize(1)
                 ->end()
             ->bootstrapIgnore('Photo')
+
             ->literal('SpokenLanguagesTitle','<h3>Spoken Languages ( Up to 5)</h3>')
             ->text('Language[1]','#1')
             ->text('Language[2]','#2')
@@ -83,8 +85,10 @@ class SpeakerForm extends BootstrapForm
                     1 => 'Yes',
                     0 => 'No'
              ))
-            ->multidropdown('CountriesToTravel', 'Countries willing to travel to (Use Ctrl + C to select more than one):', CountryCodes::$iso_3166_countryCodes);
-
+            ->multidropdown('CountriesToTravel', 'Countries willing to travel to (Use Ctrl + C to select more than one):', CountryCodes::$iso_3166_countryCodes)
+            ->configure()
+                ->addExtraClass('countries-to-travel')
+            ->end();
         return $fields;
     }
 

@@ -11,16 +11,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class SpeakerContactEmailFactory
  */
-final class SpeakerContactEmailFactory implements ISpeakerContactEmailFactory {
+final class SpeakerContactEmailFactory implements ISpeakerContactEmailFactory
+{
 
     /**
      * @param array $data
      * @return ISpeakerContactEmail
      */
-    public function buildSpeakerContactEmail(array $data,PresentationSpeaker $speaker){
+    public function buildSpeakerContactEmail(array $data, PresentationSpeaker $speaker)
+    {
         $contact_email = new SpeakerContactEmail();
         $contact_email->RecipientID = $speaker->ID;
         $contact_email->OrgName = $data['org_name'];

@@ -24,7 +24,6 @@ class RegistrationPage_Controller extends Page_Controller
     static $allowed_actions = array(
         'RegistrationForm',
         'results',
-        'AffiliationEditForm'
     );
 
     function init()
@@ -59,15 +58,10 @@ class RegistrationPage_Controller extends Page_Controller
         ));
     }
 
-    public function AffiliationEditForm()
-    {
-        $AffiliationEditForm = new AffiliationEditForm($this, 'AffiliationEditForm');
-        return $AffiliationEditForm;
-    }
-
     //Generate the registration form
     function RegistrationForm()
     {
+
         // Name Set
         $FirstNameField = new TextField('FirstName', "First Name");
         $LastNameField = new TextField('Surname', "Last Name");
@@ -88,11 +82,8 @@ class RegistrationPage_Controller extends Page_Controller
         $StatementOfInterestField->addExtraClass('autocompleteoff');
 
 
-        $affiliations = new FieldGroup(
-            new HeaderField('Affiliations'),
-            new LiteralField("add-affiliation", "<a class='roundedButton' id='add-affiliation' title='Add New Affiliation' href='#'>Add New Affiliation</a>"),
-            new LiteralField("affiliations-container", "<div id='affiliations-container'></div>")
-        );
+        $affiliations = new AffiliationField('Affiliations', 'Affiliations');
+        $affiliations->setMode('local');
 
         $fields = new FieldList(
             $FirstNameField,
@@ -106,8 +97,6 @@ class RegistrationPage_Controller extends Page_Controller
             new LiteralField('instructions', '<p>It\'s perfectly acceptable if you choose not to tell us: we appreciate you becoming a member of OpenStack Foundation. The information will remain private and only used to monitor our effort to improve gender diversity in our community.</p>'),
             new LiteralField('break', '<hr/>'),
             $affiliations,
-            new HiddenField("Affiliations", "Affiliations", ""),
-            new LiteralField('instructions', '<p>For our purposes, an affiliation is defined as any company where you are an officer, director or employee, or any person or company that has paid you more than $60,000 USD as an independent contractor in the last 12 months. Please list all affiliations which meet this criteria. If you\'re not being paid to work on OpenStack please put "Unaffiliated".</p>'),
             $StatementOfInterestField,
             new LiteralField('instructions', '<p>Your statement of interest should be a few words describing your objectives or plans for OpenStack.</p>'),
             new LiteralField('break', '<hr/>'),
@@ -166,29 +155,35 @@ class RegistrationPage_Controller extends Page_Controller
             'Password'
         );
 
-        return new HoneyPotForm($this, 'RegistrationForm', $fields, $actions, $validator);
+        $form =  new HoneyPotForm($this, 'RegistrationForm', $fields, $actions, $validator);
+
+        if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
+            return $form->loadDataFrom($data);
+        }
+
+        return $form;
     }
 
     //Submit the registration form
     function doRegister($data, $form)
     {
-        if (!isset($data["Affiliations"]) || empty($data["Affiliations"])) {
+        Session::set("FormInfo.{$form->FormName()}.data", $data);
+
+        if (!isset($data["HiddenAffiliations"]) || empty($data["HiddenAffiliations"])) {
             //Set error message
             $form->AddErrorMessage('Affiliations', "Sorry, You must at least enter one valid Affiliation.", 'bad');
             //Set form data from submitted values
-            Session::set("FormInfo.Form_RegistrationForm.data", $data);
             //Return back to form
             return $this->redirectBack();;
         }
 
-        $new_affiliations = json_decode($data["Affiliations"]);
+        $new_affiliations = json_decode($data["HiddenAffiliations"]);
 
         //Check for existing member email address
         if ($member = Member::get()->filter('Email', Convert::raw2sql($data['Email']))->first()) {
             //Set error message
             $form->AddErrorMessage('Email', "Sorry, that email address already exists. Please choose another.", 'bad');
             //Set form data from submitted values
-            Session::set("FormInfo.Form_RegistrationForm.data", $data);
             //Return back to form
             return $this->redirectBack();
         }
@@ -256,6 +251,7 @@ class RegistrationPage_Controller extends Page_Controller
                 $registration_email->send();
             }
             //Redirect to profile page with success message
+            Session::clear("FormInfo.{$form->FormName()}.data");
             return OpenStackIdCommon::loginMember($member, $ProfilePage->Link('?success=1'));
         }
     }
@@ -264,7 +260,6 @@ class RegistrationPage_Controller extends Page_Controller
     {
         return LegalDocumentPage::get()->byID(422);
     }
-
 
     // This method is used to autocomplete match org names as they are entered
     // It's called via Ajax on the OrgName field
@@ -292,7 +287,6 @@ class RegistrationPage_Controller extends Page_Controller
             }
 
         }
-
     }
 
     function getSearchQuery()

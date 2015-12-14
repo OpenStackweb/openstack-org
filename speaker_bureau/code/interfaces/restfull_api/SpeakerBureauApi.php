@@ -11,48 +11,101 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class SpeakerBureauApi
  */
 final class SpeakerBureauApi
-	extends AbstractRestfulJsonApi {
+    extends AbstractRestfulJsonApi
+{
 
-	const ApiPrefix = 'api/v1/speaker-bureau';
+    const ApiPrefix = 'api/v1/speaker-bureau';
+    /**
+     * @var array
+     */
+    static $url_handlers = array(
+        'PUT email' => 'sendSpeakerEmail',
+    );
+    /**
+     * @var array
+     */
+    static $allowed_actions = array(
+        'sendSpeakerEmail',
+    );
+    /**
+     * @var SpeakerBureauManager
+     */
+    private $speaker_bureau_manager;
 
-	protected function isApiCall(){
-		$request = $this->getRequest();
-		if(is_null($request)) return false;
-		return  strpos(strtolower($request->getURL()),self::ApiPrefix) !== false;
-	}
+    public function __construct()
+    {
+        parent::__construct();
 
-	/**
-	 * @var SpeakerBureauManager
-	 */
-	private $speaker_bureau_manager;
+        $this->securityToken = new SecurityToken();
 
-	public function __construct(){
-		parent::__construct();
-
-        $this->securityToken     = new SecurityToken();
-
-		$this->speaker_bureau_manager = new SpeakerBureauManager(
-			new SapphirePresentationSpeakerRepository,
-			new SapphireSpeakerContactEmailRepository,
+        $this->speaker_bureau_manager = new SpeakerBureauManager(
+            new SapphirePresentationSpeakerRepository,
+            new SapphireSpeakerContactEmailRepository,
             new SpeakerContactEmailFactory,
-			SapphireTransactionManager::getInstance()
-		);
+            SapphireTransactionManager::getInstance()
+        );
 
-        $this_var           = $this;
-        $security_token     = $this->securityToken;
+        $this_var = $this;
+        $security_token = $this->securityToken;
 
 
-        $this->addBeforeFilter('sendSpeakerEmail','check_access_reject',function ($request) use($this_var, $security_token){
-            $data = $this_var->getJsonRequest();
-            if (!$data) return $this->serverError();
-            if (!$security_token->checkRequest($request)) return $this->forbiddenError();
-            if ($data['field_98438688'] != '') return $this->forbiddenError();
-        });
-	}
+        $this->addBeforeFilter('sendSpeakerEmail', 'check_access_reject',
+            function ($request) use ($this_var, $security_token) {
+                $data = $this_var->getJsonRequest();
+                if (!$data) {
+                    return $this->serverError();
+                }
+                if (!$security_token->checkRequest($request)) {
+                    return $this->forbiddenError();
+                }
+                if ($data['field_98438688'] != '') {
+                    return $this->forbiddenError();
+                }
+            });
+    }
+
+    public function sendSpeakerEmail()
+    {
+        try {
+            $data = $this->getJsonRequest();
+            if (!$data) {
+                return $this->serverError();
+            }
+
+            $speaker_id = $data['speaker_id'];
+
+            $this->speaker_bureau_manager->sendEmail($speaker_id, $data);
+
+            return $this->ok();
+        } catch (NotFoundEntityException $ex1) {
+            SS_Log::log($ex1, SS_Log::ERR);
+
+            return $this->notFound($ex1->getMessage());
+        } catch (EntityValidationException $ex2) {
+            SS_Log::log($ex2, SS_Log::NOTICE);
+
+            return $this->validationError($ex2->getMessages());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+
+            return $this->serverError();
+        }
+    }
+
+    protected function isApiCall()
+    {
+        $request = $this->getRequest();
+        if (is_null($request)) {
+            return false;
+        }
+
+        return strpos(strtolower($request->getURL()), self::ApiPrefix) !== false;
+    }
 
     /**
      * @return bool
@@ -60,43 +113,5 @@ final class SpeakerBureauApi
     protected function authorize()
     {
         return true;
-    }
-
-	/**
-	 * @var array
-	 */
-	static $url_handlers = array(
-		'PUT email' => 'sendSpeakerEmail',
-	);
-
-	/**
-	 * @var array
-	 */
-	static $allowed_actions = array(
-		'sendSpeakerEmail',
-	);
-
-    public function sendSpeakerEmail() {
-        try{
-            $data = $this->getJsonRequest();
-            if (!$data) return $this->serverError();
-
-            $speaker_id = $data['speaker_id'];
-
-            $this->speaker_bureau_manager->sendEmail($speaker_id, $data);
-            return $this->ok();
-        }
-        catch(NotFoundEntityException $ex1){
-            SS_Log::log($ex1,SS_Log::ERR);
-            return $this->notFound($ex1->getMessage());
-        }
-        catch(EntityValidationException $ex2){
-            SS_Log::log($ex2,SS_Log::NOTICE);
-            return $this->validationError($ex2->getMessages());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
-            return $this->serverError();
-        }
     }
 }

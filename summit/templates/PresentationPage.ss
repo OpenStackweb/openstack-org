@@ -81,12 +81,13 @@
                 </div>
             </div>
         <% end_if %>
+        <% if PresentationDeadlineText %>
         <div class="presentation-app-header">
             <div class="container">
                 <p class="status"><i class="fa fa-calendar"></i>&nbsp;{$Top.PresentationDeadlineText}</p>
             </div>
         </div>
-
+        <% end_if %>
         $Layout
         <!-- End Page Content -->
         <div id="push"></div>

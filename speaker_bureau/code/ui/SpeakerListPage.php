@@ -22,6 +22,13 @@ class SpeakerListPage extends Page
 class SpeakerListPage_Controller extends Page_Controller
 {
 
+    static $allowed_actions = array(
+        'profile',
+        'results',
+        'suggestions',
+        'SpeakerSearchForm'
+    );
+
     function init()
     {
         parent::init();
@@ -32,7 +39,7 @@ class SpeakerListPage_Controller extends Page_Controller
 
         Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
         Requirements::CustomScript("
-							
+
 					jQuery(function(){
 
 					  $('#search_form_input').autocomplete('" . $this->Link('suggestions') . "', {
@@ -51,18 +58,11 @@ class SpeakerListPage_Controller extends Page_Controller
 
 						$('#search_form_input').focus();
 
-					});						
-					
-			
+					});
+
+
 			");
     }
-
-    static $allowed_actions = array(
-        'profile',
-        'results',
-        'suggestions',
-        'SpeakerSearchForm'
-    );
 
     function SpeakerList()
     {
@@ -91,23 +91,6 @@ class SpeakerListPage_Controller extends Page_Controller
         return GroupedList::create($list);
     }
 
-    function findSpeaker($SpeakerID)
-    {
-        $SpeakerID = intval($SpeakerID);
-        $query       = PresentationSpeaker::get()->where(" ID = {$SpeakerID}" )->sql();
-        $res         = DB::query($query.' LOCK IN SHARE MODE');
-        if($res->numRecords() > 0)
-        {
-            $Speaker = new PresentationSpeaker($res->first());
-            // Check to make sure they are in the foundation membership group
-            If ($Speaker && $Speaker->AvailableForBureau == 1)
-            {
-                return $Speaker;
-            }
-        }
-    }
-
-    //Show the profile of the speaker using the SpeakerListPage_profile.ss template
     function profile()
     {
         // Grab speaker ID from the URL
@@ -129,6 +112,22 @@ class SpeakerListPage_Controller extends Page_Controller
         return $this->httpError(404, 'Sorry that speaker could not be found');
     }
 
+    //Show the profile of the speaker using the SpeakerListPage_profile.ss template
+
+    function findSpeaker($SpeakerID)
+    {
+        $SpeakerID = intval($SpeakerID);
+        $query = PresentationSpeaker::get()->where(" ID = {$SpeakerID}")->sql();
+        $res = DB::query($query . ' LOCK IN SHARE MODE');
+        if ($res->numRecords() > 0) {
+            $Speaker = new PresentationSpeaker($res->first());
+            // Check to make sure they are in the foundation membership group
+            If ($Speaker && $Speaker->AvailableForBureau == 1) {
+                return $Speaker;
+            }
+        }
+    }
+
     public function suggestions()
     {
         if ($query = $this->getSearchQuery('q')) {
@@ -145,7 +144,7 @@ class SpeakerListPage_Controller extends Page_Controller
 
             if (count($results) > 0) {
                 foreach ($results as $Speaker) {
-                    $Suggestions = $Suggestions . $Speaker['Result'].'|' . '1' . "\n";
+                    $Suggestions = $Suggestions . $Speaker['Result'] . '|' . '1' . "\n";
                 }
 
                 return $Suggestions;
@@ -153,6 +152,19 @@ class SpeakerListPage_Controller extends Page_Controller
         }
 
         return "No Matches|1";
+    }
+
+    function getSearchQuery($search_var = '')
+    {
+        $search_var = ($search_var) ? $search_var : 'search_query';
+        if ($this->request) {
+            $query = $this->request->getVar($search_var);
+            if (!empty($query)) {
+                return Convert::raw2sql($query);
+            }
+
+            return false;
+        }
     }
 
     public function results()
@@ -188,14 +200,14 @@ class SpeakerListPage_Controller extends Page_Controller
 
         if (!$empty_search) {
             $Results = PresentationSpeaker::get()
-                ->leftJoin("SpeakerExpertise","SpeakerExpertise.SpeakerID = PresentationSpeaker.ID")
-                ->leftJoin("Countries","Countries.Code = PresentationSpeaker.Country")
-                ->leftJoin("Member","Member.ID = PresentationSpeaker.MemberID")
-                ->leftJoin("Affiliation","Affiliation.MemberID = Member.ID")
-                ->leftJoin("Org","Org.ID = Affiliation.OrganizationID")
-                ->leftJoin("SpeakerLanguage","SpeakerLanguage.SpeakerID = PresentationSpeaker.ID")
-                ->leftJoin("SpeakerTravelPreference","SpeakerTravelPreference.SpeakerID = PresentationSpeaker.ID")
-                ->leftJoin("Countries","Countries2.Code = SpeakerTravelPreference.Country","Countries2")
+                ->leftJoin("SpeakerExpertise", "SpeakerExpertise.SpeakerID = PresentationSpeaker.ID")
+                ->leftJoin("Countries", "Countries.Code = PresentationSpeaker.Country")
+                ->leftJoin("Member", "Member.ID = PresentationSpeaker.MemberID")
+                ->leftJoin("Affiliation", "Affiliation.MemberID = Member.ID")
+                ->leftJoin("Org", "Org.ID = Affiliation.OrganizationID")
+                ->leftJoin("SpeakerLanguage", "SpeakerLanguage.SpeakerID = PresentationSpeaker.ID")
+                ->leftJoin("SpeakerTravelPreference", "SpeakerTravelPreference.SpeakerID = PresentationSpeaker.ID")
+                ->leftJoin("Countries", "Countries2.Code = SpeakerTravelPreference.Country", "Countries2")
                 ->where($where_string);
 
             // No Member was found
@@ -224,25 +236,13 @@ class SpeakerListPage_Controller extends Page_Controller
         $this->redirect($this->Link());
     }
 
-    function getSearchQuery($search_var='')
+    public function ContactForm()
     {
-        $search_var = ($search_var) ? $search_var : 'search_query';
-        if ($this->request) {
-            $query = $this->request->getVar($search_var);
-            if (!empty($query) ) {
-                return Convert::raw2sql($query);
-            }
-
-            return false;
-        }
-    }
-
-    public function ContactForm() {
         $data = Session::get("FormInfo.Form_SpeakerContactForm.data");
         $SpeakerID = Convert::raw2sql($this->request->param("ID"));
 
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
 
         Requirements::css('speaker_bureau/css/speaker.contact.form.css');
@@ -250,26 +250,28 @@ class SpeakerListPage_Controller extends Page_Controller
 
         $form = new SpeakerContactForm($this, 'SpeakerContactForm', $SpeakerID);
         // we should also load the data stored in the session. if failed
-        if(is_array($data)) {
+        if (is_array($data)) {
             $form->loadDataFrom($data);
         }
 
         return $form;
     }
 
-    function LettersWithSpeakers(){
+    function LettersWithSpeakers()
+    {
         $query = DB::Query("SELECT DISTINCT SUBSTRING(LastName,1,1) as letter
                                   FROM PresentationSpeaker WHERE AvailableForBureau = 1 ORDER BY letter");
 
         $letter_list = array();
         foreach ($query as $letter) {
-            $letter_list[] = new ArrayData(array("Letter"=>$letter['letter']));
+            $letter_list[] = new ArrayData(array("Letter" => $letter['letter']));
         }
 
         return new ArrayList($letter_list);
     }
 
-    function AvailableTravelCountries(){
+    function AvailableTravelCountries()
+    {
         $query = DB::Query("SELECT DISTINCT C.Name FROM Countries AS C
                             LEFT JOIN SpeakerTravelPreference AS STP ON STP.Country = C.Code
                             RIGHT JOIN PresentationSpeaker AS PS ON PS.ID = STP.SpeakerID
@@ -277,33 +279,35 @@ class SpeakerListPage_Controller extends Page_Controller
 
         $country_list = array();
         foreach ($query as $country) {
-            $country_list[] = new ArrayData(array("Country"=>$country['Name']));
+            $country_list[] = new ArrayData(array("Country" => $country['Name']));
         }
 
         return new ArrayList($country_list);
     }
 
-    function AvailableLanguages(){
+    function AvailableLanguages()
+    {
         $query = DB::Query("SELECT DISTINCT SL.Language FROM SpeakerLanguage AS SL
                             RIGHT JOIN PresentationSpeaker AS PS ON PS.ID = SL.SpeakerID
                             WHERE PS.AvailableForBureau = 1");
 
         $language_list = array();
         foreach ($query as $language) {
-            $language_list[] = new ArrayData(array("Language"=>$language['Language']));
+            $language_list[] = new ArrayData(array("Language" => $language['Language']));
         }
 
         return new ArrayList($language_list);
     }
 
-    function AvailableCountries(){
+    function AvailableCountries()
+    {
         $query = DB::Query("SELECT DISTINCT C.Name FROM Countries AS C
                             RIGHT JOIN PresentationSpeaker AS PS ON PS.Country = C.Code
                             WHERE PS.AvailableForBureau = 1");
 
         $country_list = array();
         foreach ($query as $country) {
-            $country_list[] = new ArrayData(array("Country"=>$country['Name']));
+            $country_list[] = new ArrayData(array("Country" => $country['Name']));
         }
 
         return new ArrayList($country_list);

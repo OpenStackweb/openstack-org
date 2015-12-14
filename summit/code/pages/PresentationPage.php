@@ -7,15 +7,15 @@ class PresentationPage extends SummitPage
     (
         'LegalAgreement'           => 'HTMLText',
         'PresentationDeadlineText' => 'HTMLText',
+        'VideoLegalConsent'        => 'HTMLText',
     );
-
 
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->addFieldsToTab('Root.Main',
-            new HtmlEditorField('PresentationDeadlineText', 'Presentation Deadline Text'));
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('PresentationDeadlineText', 'Presentation Deadline Text'));
         $fields->addFieldsToTab('Root.LegalAgreement', new HtmlEditorField('LegalAgreement', 'Legal Agreement'));
+        $fields->addFieldsToTab('Root.VideoLegalConsent', new HtmlEditorField('VideoLegalConsent', 'Video Legal Consent'));
 
         return $fields;
     }
@@ -253,6 +253,9 @@ class PresentationPage_Controller extends SummitPage_Controller
             "BioForm",
             FieldList::create(FormAction::create('doSaveBio', 'Save'))
         );
+
+        // add affiliations to my speaker
+        $form->Fields()->insertAfter(new AffiliationField('Affiliations', 'Affiliations'), 'Photo');
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             $form->loadDataFrom($data);

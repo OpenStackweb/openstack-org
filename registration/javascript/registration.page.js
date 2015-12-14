@@ -14,10 +14,6 @@ jQuery(document).ready(function($) {
 
     var form_id ="#HoneyPotForm_RegistrationForm";
 
-    $("#AffiliationEditForm_AffiliationEditForm").affiliations({
-        storage:'local'
-    });
-
     var country = $(form_id+'_Country');
 
     if(country.length>0)
@@ -47,8 +43,8 @@ jQuery(document).ready(function($) {
 
         //custom validation
         jQuery.validator.addMethod('checkAffiliations', function(value, element,params) {
-            var count = $("#AffiliationEditForm_AffiliationEditForm").affiliations('count');
-            return count >0;
+            var count = $("#edit-affiliation-form").affiliations('count');
+            return count > 0;
         },'You must add at least one Affiliation.');
 
         jQuery.validator.addMethod('checkGender', function(value, element,params) {
@@ -94,7 +90,7 @@ jQuery(document).ready(function($) {
                 Postcode:{required: true},
                 'Password[_Password]': {required: true,minlength: 5},
                 'Password[_ConfirmPassword]': {required: true,minlength: 5,equalTo: '#Password-_Password'},
-                'Affiliations':{checkAffiliations:true},
+                'HiddenAffiliations':{ checkAffiliations:true },
                 'Gender':{checkGender:true}
             },
             messages: {
@@ -138,11 +134,10 @@ jQuery(document).ready(function($) {
         });
 
         registration_form.submit(function(event){
-            var data_source = $("#AffiliationEditForm_AffiliationEditForm").affiliations('local_datasource');
-            $(form_id+"_Affiliations").val(JSON.stringify(data_source));
+            var data_source = $("#edit-affiliation-form").affiliations('local_datasource');
+            $("#HiddenAffiliations").val(JSON.stringify(data_source));
         })
     }
-
 
     if(default_country != 'US'){
         state_input.rules( "remove", "required" );

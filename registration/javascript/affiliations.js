@@ -36,47 +36,16 @@
                 storage: "remote"//could be also "local"
             }, options );
 
-            affiliation_form = $(this);
+            affiliation_form   = $(this);
             affiliation_form_id = "#"+affiliation_form.attr("id");
-
-            // register AJAX prefilter : options, original options
-            $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-
-                // retry not set or less than 2 : retry not requested
-                if( !originalOptions.retryMax || !originalOptions.retryMax >=2 ) return;
-                // no timeout was setup
-                if( !originalOptions.timeout >0 ) return;
-
-                if( originalOptions.retryCount ) {
-                    // increment retry count each time
-                    originalOptions.retryCount++;
-                }else{
-                    // init the retry count if not set
-                    originalOptions.retryCount = 1;
-                    // copy original error callback on first time
-                    originalOptions._error = originalOptions.error;
-                };
-
-                // overwrite error handler for current request
-                options.error = function( _jqXHR, _textStatus, _errorThrown ){
-                    // retry max was exhausted or it is not a timeout error
-                    if( originalOptions.retryCount >= originalOptions.retryMax || _textStatus!='timeout' ){
-                        // call original error handler if any
-                        if( originalOptions._error ) originalOptions._error( _jqXHR, _textStatus, _errorThrown );
-                        return;
-                    };
-                    // Call AJAX again with original options
-                    $.ajax( originalOptions);
-                };
-            });
 
             if(affiliation_form.length>0){
 
                 var affiliation_form_validator = affiliation_form.validate({
                     rules: {
-                        OrgName  : {required: true, ValidPlainText:true},
-                        StartDate: {required: true, dpDate: true},
-                        EndDate  : {dpDate: true,dpCompareDate:'gt '+affiliation_form_id+'_StartDate'}
+                        OrgName  : { required: true, ValidPlainText:true},
+                        StartDate: { required: true, dpDate: true},
+                        EndDate  : { dpDate: true, dpCompareDate:'after #StartDate' }
                     },
                     onfocusout: false,
                     invalidHandler: function(form, validator) {
@@ -87,18 +56,19 @@
                     }
                 });
 
-                $("#add-affiliation").click(function(event){
-                    event.preventDefault();
-                    event.stopPropagation();
-                    var dlg = $('#affiliation-edition-dialog');
-                    var current = $('#Current',affiliation_form_id);
-                    current.show();
-                    dlg.dialog("option", "title", "Add Affiliation");
-                    dlg.dialog("open");
-                    return false;
+                // init modal form
+
+                $('#modal-edit-affiliation').modal({
+                    show:false
                 });
 
-                var org_name = $(affiliation_form_id+'_OrgName');
+                $('#modal-edit-affiliation').on('hidden.bs.modal', function (e) {
+                    affiliation_form.cleanForm();
+                    affiliation_form_validator.resetForm();
+                })
+
+                // set modal controls
+                var org_name = $('#OrgName', affiliation_form);
 
                 if(org_name.length>0){
                     org_name.autocomplete({
@@ -111,60 +81,75 @@
 
                 }
 
-                var date_picker_start = $(affiliation_form_id+"_StartDate");
+                var date_picker_start = $('#StartDate', affiliation_form);
                 date_picker_start.datepicker({dateFormat: 'yy-mm-dd'});
+                var date_picker_end = $('#EndDate', affiliation_form);
 
-                var date_picker_end = $(affiliation_form_id+"_EndDate");
                 date_picker_end.datepicker({dateFormat: 'yy-mm-dd',onSelect:function(date_str,inst){
                     var date_arr = date_str.split("-");
                     var end_date = new Date(parseInt(date_arr[0]),parseInt(date_arr[1])-1,parseInt(date_arr[2]));
                     var today = new Date();
-                    var current = $('#Current',affiliation_form_id);
+                    var current = $('#Current', affiliation_form);
                     if(end_date < today){
                         //reset checkbox
-                        $(affiliation_form_id+"_Current").prop('checked', false);
+                        $('#Current', affiliation_form).prop('checked', false);
                         current.hide();
                     }
                     else
                         current.show();
                 }});
 
-                $(affiliation_form_id+"_Current").click(function(event){
-                    var checked = $(this).is(':checked');
-                    var date_str = date_picker_end.val();
-                    var date_arr = date_str.split("-");
-                    var end_date = new Date(parseInt(date_arr[0]),parseInt(date_arr[1])-1,parseInt(date_arr[2]));
-                    var today = new Date();
-                    if(end_date < today && checked){
-                        date_picker_end.val('');
-                    }
+                // add handler
+                $("#add-affiliation").click(function(event){
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var dlg = $('#affiliation-edition-dialog');
+                    var current = $('#Current',affiliation_form);
+                    $('#modal-edit-affiliation').modal('show')
+                    $('#editAffiliationLabel').text('Add Affiliation');
+                    return false;
                 });
 
-                $(".edit-affiliation").live('click',function(event){
-                    var current = $('#Current',affiliation_form_id);
-                    current.show();
-                    var id = $(this).attr('data-id');
-                    var dlg = $('#affiliation-edition-dialog');
-                    dlg.dialog("option", "title", "Edit Affiliation");
+                $('#btn-save-affiliation').click(function(event){
+                    event.preventDefault();
+                    event.stopPropagation();
+
+
+                    var is_valid = affiliation_form.valid();
+                    if (!is_valid) return;
+                    var affiliation     = affiliation_form.serializeForm();
+                    var checked         = $('#Current' ,affiliation_form).is(':checked');
+                    affiliation.Current = checked?1:0;
+                    var today           = new Date();
+                    var yyyy            = today.getFullYear().toString();
+                    var mm              = (today.getMonth()+1).toString(); // getMonth() is zero-based
+                    var dd              = today.getDate().toString();
+
+                    affiliation.ClientToday = yyyy +'-'+ (mm[1]?mm:"0"+mm[0])  +'-'+ (dd[1]?dd:"0"+dd[0]);
+                    var $this = this;
                     switch(settings.storage){
                         case 'local':
                         {
-                            var data = local_storage[id];
-                            LoadAffiliationData(dlg,data);
+                            if(affiliation.Id==0){
+                                affiliation.Id = ++last_id;
+                            }
+                            local_storage[affiliation.Id] = affiliation;
+                            LoadAffiliationList();
                         }
-                            break;
+                        break;
                         default:
                         {
                             $.ajax(
                                 {
-                                    type: "GET",
-                                    url: rest_urls.GetAffiliation + '/' + id,
+                                    type: "POST",
+                                    url: rest_urls.SaveAffiliation,
+                                    data: JSON.stringify(affiliation),
+                                    contentType: "application/json; charset=utf-8",
                                     dataType: "json",
                                     timeout:60000,
                                     retryMax: 2,
-                                    success: function (data,textStatus,jqXHR) {
-                                        //load data...
-                                        LoadAffiliationData(dlg,data);
+                                    complete: function (jqXHR,textStatus) {
+                                        LoadAffiliationList();
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
                                         alert( "Request failed: " + textStatus );
@@ -172,12 +157,13 @@
                                 }
                             );
                         }
-                            break;
+                        break;
                     }
-                    event.preventDefault();
-                    event.stopPropagation();
+                    $('#modal-edit-affiliation').modal('hide');
                     return false;
                 });
+
+                // delete handler
 
                 $(".del-affiliation").live('click',function(event){
                     var id = $(this).attr('data-id');
@@ -188,10 +174,10 @@
                                 delete local_storage[id];
                                 LoadAffiliationList();
                             }
-                                break;
+                            break;
                             default:
                             {
-                               $.ajax(
+                                $.ajax(
                                     {
                                         type: "GET",
                                         url: rest_urls.DeleteAffiliation + '/' + id,
@@ -207,7 +193,7 @@
                                     }
                                 );
                             }
-                            break;
+                                break;
                         }
                     }
                     event.preventDefault();
@@ -215,69 +201,47 @@
                     return false;
                 });
 
-                var affiliation_dialog_edit = $("#affiliation-edition-dialog");
-                if(affiliation_dialog_edit.length>0){
-                    affiliation_dialog_edit.dialog({
-                        autoOpen: false,
-                        height: 550 ,
-                        width: 400,
-                        modal: true,
-                        resizable: false,
-                        close: function( event, ui ) {
-                            affiliation_form.cleanForm();
-                            affiliation_form_validator.resetForm();
-                        },
-                        buttons: {
-                            'Save': function () {
-                                var is_valid = affiliation_form.valid();
-                                if (!is_valid) return;
-                                var affiliation     = affiliation_form.serializeForm();
-                                var checked         = $(affiliation_form_id+"_Current").is(':checked');
-                                affiliation.Current = checked?1:0;
-                                var today           = new Date();
-                                var yyyy            = today.getFullYear().toString();
-                                var mm              = (today.getMonth()+1).toString(); // getMonth() is zero-based
-                                var dd              = today.getDate().toString();
+                //edit
 
-                                affiliation.ClientToday = yyyy +'-'+ (mm[1]?mm:"0"+mm[0])  +'-'+ (dd[1]?dd:"0"+dd[0]);
-                                var $this = this;
-                                switch(settings.storage){
-                                    case 'local':
-                                    {
-                                        if(affiliation.Id==0){
-                                            affiliation.Id = ++last_id;
-                                        }
-                                        local_storage[affiliation.Id] = affiliation;
-                                        LoadAffiliationList();
-                                    }
-                                    break;
-                                    default:
-                                    {
-                                        $.ajax(
-                                            {
-                                                type: "POST",
-                                                url: rest_urls.SaveAffiliation,
-                                                data: JSON.stringify(affiliation),
-                                                contentType: "application/json; charset=utf-8",
-                                                dataType: "json",
-                                                timeout:60000,
-                                                retryMax: 2,
-                                                complete: function (jqXHR,textStatus) {
-                                                    LoadAffiliationList();
-                                                },
-                                                error: function (jqXHR, textStatus, errorThrown) {
-                                                    alert( "Request failed: " + textStatus );
-                                                }
-                                            }
-                                        );
-                                    }
-                                        break;
-                                }
-                                $($this).dialog('close');
-                            }
+                $(".edit-affiliation").live('click',function(event){
+                    var current = $('#Current',affiliation_form);
+                    current.show();
+                    var id = $(this).attr('data-id');
+
+                    $('#editAffiliationLabel').text('Edit Affiliation');
+
+                    switch(settings.storage){
+                        case 'local':
+                        {
+                            var data = local_storage[id];
+                            LoadAffiliationData($('#modal-edit-affiliation'), data);
                         }
-                    });
-                }
+                        break;
+                        default:
+                        {
+                            $.ajax(
+                                {
+                                    type: "GET",
+                                    url: rest_urls.GetAffiliation + '/' + id,
+                                    dataType: "json",
+                                    timeout:60000,
+                                    retryMax: 2,
+                                    success: function (data,textStatus,jqXHR) {
+                                        //load data...
+                                        LoadAffiliationData($('#modal-edit-affiliation'), data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert( "Request failed: " + textStatus );
+                                    }
+                                }
+                            );
+                        }
+                        break;
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                });
 
                 LoadAffiliationList();
             }
@@ -345,14 +309,16 @@
 
     //helper functions
 
-    function LoadAffiliationData(dlg,affiliation){
-        $(affiliation_form_id+"_OrgName").val(affiliation.OrgName);
-        $(affiliation_form_id+"_StartDate").val(affiliation.StartDate);
+    function LoadAffiliationData(dlg ,affiliation){
+        $("#OrgName", dlg).val(affiliation.OrgName);
+        $("#StartDate", dlg).val(affiliation.StartDate);
         if(affiliation.EndDate!='')
-            $(affiliation_form_id+"_EndDate").val(affiliation.EndDate);
-        $(affiliation_form_id+"_Id").val(affiliation.Id);
-        $(affiliation_form_id+"_Current").prop('checked', affiliation.Current == 1 ? true : false);
-        dlg.dialog("open");
+            $("#EndDate", dlg).val(affiliation.EndDate);
+        $("#Id", dlg).val(affiliation.Id);
+        $("#Current", dlg).prop('checked', affiliation.Current == 1 ? true : false);
+
+        dlg.modal('show')
+
     }
 
     function renderAffiliationList(data){
@@ -363,8 +329,8 @@
             var template = $('<ul><li><div class="affiliation-header">' +
                 '<span class="title"></span>' +
                 '<span class="affiliation-actions">&nbsp;' +
-                '<a href="#" class="edit-affiliation" title="Edit Affiliation">Edit</a>&nbsp;' +
-                '<a href="#" class="del-affiliation" title="Delete Affiliation">Delete</a>&nbsp;' +
+                '<a href="#" class="btn btn-primary btn-xs edit-affiliation affilation-action-btn" title="Edit Affiliation">Edit</a>&nbsp;' +
+                '<a href="#" class="btn btn-danger btn-xs del-affiliation affilation-action-btn" title="Delete Affiliation">Delete</a>&nbsp;' +
                 '</span></div></li></ul>');
 
             var directives = {

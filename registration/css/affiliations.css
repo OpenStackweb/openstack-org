@@ -6,6 +6,12 @@
 .affiliation-header .title{
 }
 
+#affiliations-container
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 #affiliations-container ul{
     list-style: none;
     padding-left: 0;
@@ -24,7 +30,38 @@
 
 }
 
-.affiliation-info{
+.affiliation-info
+{
     width: 300px !important;
     float: left;
+}
+
+.affilation-action-btn, .affilation-action-btn:visited, .affilation-action-btn:hover
+{
+    color:#FFFFFF;
+}
+
+.affiliation-header {
+    height: 30px !important;
+}
+
+label.error{
+    border: 1px solid #aaa;
+    background: #aa2222;
+    color: #fff;
+    padding: 5px;
+    margin: 0;
+    width: auto;
+    float:left;
+    -webkit-border-radius: 05px;
+    -moz-border-radius: 05px;
+    border-radius: 05px;
+}
+
+input.error{
+    border: 1px solid  #aa2222;
+}
+
+#add-affiliation{
+    color : black !important;
 }
