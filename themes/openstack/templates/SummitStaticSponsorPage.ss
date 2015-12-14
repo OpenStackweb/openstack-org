@@ -270,7 +270,7 @@
                                 $110,000
                             </div>
                             <div class="sponsor-count">
-                                Available: 20 of 20
+                                Available: 11 of 22
                             </div>
                         </div>
                     </div>
@@ -281,7 +281,7 @@
                                 $65,000
                             </div>
                             <div class="sponsor-count">
-                                Available: 20 of 20
+                                Available: 12 of 22
                             </div>
                         </div>
                     </div>
@@ -329,17 +329,17 @@
                                 <tr class="sponsor_add_on">
                                     <td>Tuesday Evening Event Headline Sponsor</td>
                                     <td>$90,000</td>
-                                    <td style="text-align:center;">6</td>
+                                    <td style="text-align:center;">2</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Tuesday Evening Event Premier Sponsor</td>
                                     <td>$45,000</td>
-                                    <td style="text-align:center;">6</td>
+                                    <td style="text-align:center;">5</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Tuesday Evening Event Spotlight Sponsor</td>
                                     <td>$25,000</td>
-                                    <td style="text-align:center;">6</td>
+                                    <td style="text-align:center;">5</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Tuesday Evening Event Startup Sponsor</td>
@@ -371,10 +371,10 @@
                                     <td>$25,000</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
-                                <tr class="sponsor_add_on">
+                                <tr class="sponsor_add_on sold-out">
                                     <td>Sponsored Coffee Breaks In Expo Hall</td>
                                     <td>$30,000 / week</td>
-                                    <td style="text-align:center;">1</td>
+                                    <td style="text-align:center;">SOLD OUT</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Branded Activity Stations</td>
@@ -425,22 +425,14 @@
                                     <td>Travel Support Program</td>
                                     <td>$20,000</td>
                                     <td style="text-align:center;">1</td>
-                                </tr>
+                                </tr>                                                              
                                 <tr class="sponsor_add_on sold-out">
-                                    <td>
-                                        Women of OpenStack Event, Sunday Evening<br/>
-                                        Named Sponsorship
-                                    </td>
-                                    <td>$46,000</td>
-                                    <td style="text-align:center;">SOLD OUT</td>
-                                </tr>                                                               
-                                <tr class="sponsor_add_on">
                                     <td>
                                         Women of OpenStack Event, Sunday Evening<br/>
                                         Co-Sponsorship
                                     </td>
                                     <td>$23,000</td>
-                                    <td style="text-align:center;">1</td>
+                                    <td style="text-align:center;">SOLD OUT</td>
                                 </tr>
                                 <tr class="sponsor_add_on sold-out">
                                     <td>Branded Summit Badge Lanyard</td>
@@ -455,7 +447,7 @@
                                 <tr class="sponsor_add_on">
                                     <td>Full-day Sponsored Breakout Speaking Track</td>
                                     <td>$65,000</td>
-                                    <td style="text-align:center;">6</td>
+                                    <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on sold-out">
                                     <td>Half-day Sponsored Breakout Speaking Track</td>
@@ -465,7 +457,7 @@
                                 <tr class="sponsor_add_on">
                                     <td>Private Meeting Room<br/>Limit Two Per Company</td>
                                     <td>$4,500</td>
-                                    <td style="text-align:center;">25</td>
+                                    <td style="text-align:center;">3</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>
