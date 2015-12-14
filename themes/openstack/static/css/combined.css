@@ -2020,17 +2020,6 @@ p#ForgotPassword {
   .sponsor-table tr.sold-out td {
     background: #f2dede;
     color: #DA422F; }
-    .sponsor-table tr.sold-out td:first-child {
-      padding-left: 30px; }
-
-.sponsor-table tr.sold-out td:first-child:before {
-  position: absolute;
-  font-family: FontAwesome;
-  top: 50%;
-  margin-top: -12px;
-  left: 10px;
-  content: "\f00d";
-  font-size: 1.3em; }
 
 .fixed-image {
   background-attachment: fixed;
