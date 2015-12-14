@@ -41,7 +41,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-9">
-                            <raw content="{ description }"/>
+                            <raw content="{ short_desc }"/>
                             <div class="row tags-row" if={ tags_id.length > 0 }>
                                 <div class="col-xs-12 col-md-2 col-tags-title">
                                     <i class="fa fa-tags"></i>

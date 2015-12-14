@@ -123,6 +123,7 @@
                         id              : {$ID},
                         title           : "{$Title.JS}",
                         description     : "{$Description.JS}",
+                        short_desc      : "{$getShortDescription(600).JS}",
                         start_datetime  : "{$StartDate}",
                         end_datetime    : "{$EndDate}",
                         start_time      : "{$StartTime}",
