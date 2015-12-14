@@ -190,7 +190,7 @@
                 <h3>How to Sign the Agreement:</h3>
                 <ul>
                     <li>
-                        On December 14 at 9:00 PST / 17:00 UTC the executable electronic contract for the OpenStack Summit April 2016 Austin will be made available HERE.
+                       <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDcmCnkQDZC7wTOmUwxtlE-IO6VEbSvhPxB6bM8JVQeKZQ_Dp3k-THNstKwYUE10hk*" target="_blank">Click HERE to sign</a> the electronic OpenStack Summit April 2016 Sponsorship Agreement.
                     </li>
                     <li>
                         In the meantime you can view the <a href="//openstack.org/assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf" target="_blank">Read Only Draft Version of the OpenStack Summit April 2016 Austin Contract</a>.
