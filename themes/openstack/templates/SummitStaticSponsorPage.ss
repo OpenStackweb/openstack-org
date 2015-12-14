@@ -41,7 +41,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <a href="/summit/">
+                            <a href="/">
                                 <img class="summit-hero-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
                             </a>
                             <h2>
@@ -79,6 +79,14 @@
     </li>
 
     
+    
+    <li class="">
+        <a href="/austin-travel/">Austin & Travel</a>
+    </li>
+
+    
+    
+        
     
     <li class="current">
         <a href="/summit/austin-2016/sponsors/">Sponsor The Summit</a>
@@ -190,10 +198,10 @@
                 <h3>How to Sign the Agreement:</h3>
                 <ul>
                     <li>
-                       <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDcmCnkQDZC7wTOmUwxtlE-IO6VEbSvhPxB6bM8JVQeKZQ_Dp3k-THNstKwYUE10hk*" target="_blank"><strong>Click HERE to sign</strong></a> the electronic OpenStack Summit April 2016 Sponsorship Agreement.
+                        On December 14 at 9:00 PST / 17:00 UTC the executable electronic contract for the OpenStack Summit April 2016 Austin will be made available HERE.
                     </li>
                     <li>
-                        After you sign the electronic contract, <strong>CHECK YOUR EMAIL</strong>, you must click through a link in your email in order to complete the signing process. Don’t miss this step!
+                        In the meantime you can view the <a href="//openstack.org/assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf" target="_blank">Read Only Draft Version of the OpenStack Summit April 2016 Austin Contract</a>.
                     </li>
                     <li>
                         <strong>After signing the agreement, please check your email to make sure you confirm submission via Echosign.</strong> Contact <a href="mailto:summit@openstack.org">summit@openstack.org</a> if you have any questions. 
@@ -219,12 +227,9 @@
                     <li>
                     The lottery is only applicable to the Headline sponsorship level. 
                 </li>
-                <li>
+                    <li>
                     Sponsor companies that signed the October 2015 Tokyo OpenStack Summit contract within the first hour for a Headline sponsorship level, but did not win the lottery drawing will be eligible to have an additional ball in the lottery drawing for the 2016 Austin OpenStack Summit if they again sign the Austin Summit sponsorship contract for a Headline slot within the first hour that the executable electronic contract is made available.
-                </li>
-                <li>
-                    The same Headline drawing process will apply for the October 2016 Summit in Barcelona - if you submit for a Headline level sponsorship for the Austin OpenStack Summit and are not drawn in the lottery then you will receive an extra entry for the lottery drawing for the Barcelona OpenStack Summit.
-                </li>
+                    </li>
                 </p>
                 <div class="center" style="margin: 30px 0;">
                     <a href="mailto:summit@openstack.org">Contact us with any questions.</a>
@@ -248,13 +253,13 @@
             </h5>
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="sponsor-spots">
+                        <div class="sponsor-spots sold-out">
                             <h3>Headline</h3>
                             <div class="sponsor-cost">
                                 $200,000
                             </div>
                             <div class="sponsor-count">
-                                Available: 4 of 4
+                                SOLD OUT
                             </div>
                         </div>
                     </div>
@@ -406,10 +411,10 @@
                                     <td>$40,000</td>
                                     <td style="text-align:center;">1</td>
                                 </tr>                                             
-                                <tr class="sponsor_add_on">
+                                <tr class="sponsor_add_on sold-out">
                                     <td>Eastside Developers Lounge <br/>Branded By Your Company</td>
                                     <td>$75,000</td>
-                                    <td style="text-align:center;">1</td>
+                                    <td style="text-align:center;">SOLD OUT</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Official Water Sponsorship</td>
@@ -421,13 +426,13 @@
                                     <td>$20,000</td>
                                     <td style="text-align:center;">1</td>
                                 </tr>
-                                <tr class="sponsor_add_on">
+                                <tr class="sponsor_add_on sold-out">
                                     <td>
                                         Women of OpenStack Event, Sunday Evening<br/>
                                         Named Sponsorship
                                     </td>
                                     <td>$46,000</td>
-                                    <td style="text-align:center;">1</td>
+                                    <td style="text-align:center;">SOLD OUT</td>
                                 </tr>                                                               
                                 <tr class="sponsor_add_on">
                                     <td>
@@ -437,10 +442,10 @@
                                     <td>$23,000</td>
                                     <td style="text-align:center;">1</td>
                                 </tr>
-                                <tr class="sponsor_add_on">
+                                <tr class="sponsor_add_on sold-out">
                                     <td>Branded Summit Badge Lanyard</td>
                                     <td>$35,000</td>
-                                    <td style="text-align:center;">1</td>
+                                    <td style="text-align:center;">SOLD OUT</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>20 Minute Demo Presentation Time Slot & Video Recording</td>
@@ -452,10 +457,10 @@
                                     <td>$65,000</td>
                                     <td style="text-align:center;">6</td>
                                 </tr>
-                                <tr class="sponsor_add_on">
+                                <tr class="sponsor_add_on sold-out">
                                     <td>Half-day Sponsored Breakout Speaking Track</td>
                                     <td>$40,000</td>
-                                    <td style="text-align:center;">5</td>
+                                    <td style="text-align:center;">SOLD OUT</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Private Meeting Room<br/>Limit Two Per Company</td>
@@ -578,7 +583,7 @@
                         <li><a href="http://openstack.org/brand/">Logos & Guidelines</a></li>
                         <li><a href="http://openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
                         <li><a href="http://openstack.org/privacy/">Privacy Policy</a></li>
-                        <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+                        <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributors_License_Agreement">OpenStack CLA</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-sm-4">
@@ -635,6 +640,14 @@
     </li>
 
     
+    
+    <li class="">
+        <a href="/austin-travel/">Austin & Travel</a>
+    </li>
+
+    
+    
+        
     
     <li class="current">
         <a href="/summit/austin-2016/sponsors/">Sponsor The Summit</a>
