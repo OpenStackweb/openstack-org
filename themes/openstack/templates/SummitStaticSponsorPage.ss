@@ -454,10 +454,10 @@
                                     <td>$40,000</td>
                                     <td style="text-align:center;">SOLD OUT</td>
                                 </tr>
-                                <tr class="sponsor_add_on">
+                                <tr class="sponsor_add_on sold-out">
                                     <td>Private Meeting Room<br/>Limit Two Per Company</td>
                                     <td>$4,500</td>
-                                    <td style="text-align:center;">3</td>
+                                    <td style="text-align:center;">SOLD OUT</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>
