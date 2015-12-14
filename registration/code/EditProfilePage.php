@@ -127,7 +127,7 @@ class EditProfilePage_Controller extends Page_Controller
     {
         if ($CurrentMember = Member::currentUser()) {
             Requirements::css("registration/css/speaker.profile.form.css");
-            $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();;
+            $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
             $SpeakerProfileForm = New EditSpeakerProfileForm($this, 'EditSpeakerProfileForm', $speaker, $CurrentMember, null);
             return $SpeakerProfileForm;
         }

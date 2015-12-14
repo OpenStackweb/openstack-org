@@ -115,12 +115,12 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $WillingToTravel->setValue($speaker->WillingToTravel);
 
             foreach ($speaker->AreasOfExpertise() as $key => $expertise) {
-                if ($key > 4) exit;
+                if ($key > 4) break;
                 ${'ExpertiseField'.($key+1)}->setValue($expertise->Expertise);
             }
 
             foreach ($speaker->Languages() as $key => $language) {
-                if ($key > 4) exit;
+                if ($key > 4) break;
                 ${'LanguageField'.($key+1)}->setValue($language->Language);
             }
 
