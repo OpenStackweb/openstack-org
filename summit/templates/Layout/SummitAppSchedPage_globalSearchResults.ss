@@ -78,11 +78,11 @@
                                         <div class="col-md-9">
                                             <div class="row tags-row">
                                                 <% if Tags %>
-                                                <div class="col-xs-12 col-md-2 col-tags-title">
+                                                <div class="col-xs-12 col-md-1 col-tags-title">
                                                     <i class="fa fa-tags"></i>
                                                     <span>Tags:</span>
                                                 </div>
-                                                <div class="col-xs-12 col-md-10 col-tags-content">
+                                                <div class="col-xs-12 col-md-11 col-tags-content">
                                                     <% loop Tags %>
                                                         <span title="Search Tag" class="tag"><a href="{$Top.Link(global-search)}?t={$Tag}">{$Tag}</a><% if not $Last %>,<% end_if %>&nbsp;</span>
                                                     <% end_loop %>
@@ -93,25 +93,29 @@
                                         <div class="col-md-3 event-type-col">$TypeName</div>
                                     </div>
                                     <% if Level %>
+                                    <div class="row">
+                                    <div class="col-md-12">
                                     <div class="row row-level">
                                         <div class="col-xs-12 col-md-1 col-level-title">
-                                            <i class="fa fa-bar-chart"></i>
+                                            <i class="fa fa-2x fa-signal level-icon"></i>
                                             <span>Level:</span>
                                         </div>
                                         <div class="col-xs-12 col-md-11 col-level-content">
                                             <span class="presentation-level'"><a href="{$Top.Link(global-search)}?t={$Level}">{$Level}</a></span>
                                         </div>
                                     </div>
+                                    </div>
+                                    </div>
                                     <% end_if %>
                                     <% if Speakers %>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="row speakers-row">
-                                                    <div class="col-xs-12 col-md-2 col-speakers-title">
+                                                    <div class="col-xs-12 col-md-1 col-speakers-title">
                                                         <i class="fa fa-users"></i>
                                                         <span>Speakers:</span>
                                                     </div>
-                                                    <div class="col-xs-12 col-md-10 col-speakers-content">
+                                                    <div class="col-xs-12 col-md-11 col-speakers-content">
                                                         <% loop Speakers %>
                                                             <span title="Search Speaker" class="speaker"><a href="{$Top.Link(global-search)}?t={$Name}">{$Name}</a><% if not $Last %>,<% end_if %>&nbsp;</span>
                                                         <% end_loop %>

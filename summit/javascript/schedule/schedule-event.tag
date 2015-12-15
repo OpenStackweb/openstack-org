@@ -41,13 +41,15 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-9">
-                            <raw content="{ short_desc }"/>
+                            <div class="bio-row">
+                                <raw content="{ short_desc }"/>
+                            </div>
                             <div class="row tags-row" if={ tags_id.length > 0 }>
                                 <div class="col-xs-12 col-md-2 col-tags-title">
                                     <i class="fa fa-tags"></i>
                                     <span>Tags:</span>
                                 </div>
-                                <div class="col-xs-12 col-md-6 col-tags-content">
+                                <div class="col-xs-12 col-md-10 col-tags-content">
                                     <span each={ tag_id, i in tags_id } title="Search Tag" class="tag">
                                         <a class="search-link" href="{ parent.search_url+'?t='+summit.tags[tag_id].name.replace(/ /g,'+') }">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }</a>
                                         &nbsp;

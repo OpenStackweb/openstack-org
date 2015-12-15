@@ -33,6 +33,10 @@ body
     font-family: Montserrat, Sans-serif;
 }
 
+.bio-row {
+    margin-bottom: 20px;
+}
+
 .tags-row, .level-row {
     font-size: 14px;
 }
@@ -106,11 +110,20 @@ body
     padding-right: 0 !important;
 }
 
+.event-results .col-level-title {
+    height: 10px;
+}
+
 .level-icon {
     width: 16px;
     overflow: hidden;
     position: relative;
     top: -10px;
+}
+
+.event-results .col-level-title > span {
+    position: relative;
+    top: -12px;
 }
 
 .col-tags-content a, .col-speakers-content a, .event-title a, .col-level-content a
@@ -179,6 +192,10 @@ body
 {
     .col-tags-title, .col-speakers-title
     {
+        width: auto;
+    }
+
+    .event-results .col-level-title {
         width: auto;
     }
 }
