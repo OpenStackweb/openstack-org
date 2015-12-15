@@ -30,7 +30,7 @@ final class SpeakerContactForm extends BootstrapForm
         $fields->push(new EmailField('org_email', 'Email'));
         $fields->push(new TextField('event_name', 'Event'));
         $fields->push(new TextField('event_format', 'Format/Length'));
-        $fields->push(new TextField('event_attendance', 'Expected Attendace (number)'));
+        $fields->push(new TextField('event_attendance', 'Expected Attendance (number)'));
         $fields->push(new TextField('event_date', 'Date of Event'));
         $fields->push(new TextField('event_location', 'Location'));
         $fields->push(new TextField('event_topic', 'Topic(s)'));
