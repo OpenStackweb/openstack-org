@@ -14,7 +14,7 @@
 
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::UpdatedEntity, function($entity){
 
-    $summit_id = $entity->getField("SummitID");
+    $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
 
     $metadata = '';
@@ -48,7 +48,7 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
 
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::InsertedEntity, function($entity){
 
-    $summit_id = $entity->getField("SummitID");
+    $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
     $metadata = '';
 
@@ -70,7 +70,7 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Inserte
 
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::DeletedEntity, function($entity){
 
-    $summit_id = $entity->getField("SummitID");
+    $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
     $metadata = '';
     $event                  = new SummitEntityEvent();
@@ -82,7 +82,6 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Deleted
     $event->Metadata        = $metadata;
     $event->write();
 });
-
 
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::AddedToSchedule, function($member_id, $entity){
 
@@ -113,7 +112,6 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Removed
     $event->Metadata        = $metadata;
     $event->write();
 });
-
 
 PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', function($list, $item){
     if($item instanceof ISummitEvent && $list->getJoinTable() === 'SummitAttendee_Schedule') {
@@ -180,14 +178,14 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', 
         $event->EntityID = $summit_type_id;
         $event->Type     = 'INSERT';
         $event->OwnerID  = Member::currentUserID();
-        $event->SummitID = $event_id->SummitID;
+        $event->SummitID = $summit_event->SummitID;
         $event->Metadata = json_encode( array('event_id' => $event_id ));
         $event->write();
     }
 });
 
-
 PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item', function($list, $item){
+
     if($item instanceof ISummitEvent && $list->getJoinTable() === 'SummitAttendee_Schedule') {
         $summit_id = $item->getField("SummitID");
         if (is_null($summit_id) || $summit_id == 0) {
@@ -251,7 +249,7 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
         $event->EntityID = $summit_type_id;
         $event->Type     = 'DELETE';
         $event->OwnerID  = Member::currentUserID();
-        $event->SummitID = $event_id->SummitID;
+        $event->SummitID = $summit_event->SummitID;
         $event->Metadata = json_encode( array('event_id' => $event_id ));
         $event->write();
     }
