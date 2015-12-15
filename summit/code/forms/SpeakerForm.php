@@ -121,7 +121,7 @@ class SpeakerForm extends BootstrapForm
 
         foreach ($speaker->Languages() as $key => $language)
         {
-            if ($key > 4) exit;
+            if ($key > 4) break;
             $this->fields->fieldByName('Language['.($key+1).']')->setValue($language->Language);
         }
 
