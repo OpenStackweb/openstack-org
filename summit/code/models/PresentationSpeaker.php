@@ -152,7 +152,7 @@ implements IPresentationSpeaker
             ->text('FirstName',"Speaker's first name")
             ->text('LastName', "Speaker's last name")
             ->text('Title', "Speaker's title")
-            ->tinyMCEEditor('Bio',"Speaker's Bio")
+            ->htmleditor('Bio',"Speaker's Bio")
             ->text('IRCHandle','IRC Handle (optional)')
             ->text('TwitterHandle','Twitter Handle (optional)')
             ->imageUpload('Photo','Upload a speaker photo')

@@ -116,7 +116,6 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Removed
 
 
 PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', function($list, $item){
-
     if($item instanceof ISummitEvent && $list->getJoinTable() === 'SummitAttendee_Schedule') {
         $summit_id = $item->getField("SummitID");
         if (is_null($summit_id) || $summit_id == 0) {
@@ -169,11 +168,26 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', 
         $event->Metadata = json_encode( array('presentation_id' => $presentation_id ));
         $event->write();
     }
+    if($item instanceof SummitType && $list->getJoinTable() === 'SummitEvent_AllowedSummitTypes')
+    {
+        // removed summit type from event
+        $event_id     = intval($list->getForeignID());
+        $summit_event = SummitEvent::get()->byID($event_id);
+        if(is_null($summit_event)) return;
+        $summit_type_id  = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'SummitTypeFromEvent';
+        $event->EntityID = $summit_type_id;
+        $event->Type     = 'INSERT';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $event_id->SummitID;
+        $event->Metadata = json_encode( array('event_id' => $event_id ));
+        $event->write();
+    }
 });
 
 
 PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item', function($list, $item){
-
     if($item instanceof ISummitEvent && $list->getJoinTable() === 'SummitAttendee_Schedule') {
         $summit_id = $item->getField("SummitID");
         if (is_null($summit_id) || $summit_id == 0) {
@@ -196,7 +210,7 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
     {
         // removed sponsor
         $event_id     = intval($list->getForeignID());
-        $summit_event        = SummitEvent::get()->byID($event_id);
+        $summit_event = SummitEvent::get()->byID($event_id);
         if(is_null($summit_event)) return;
         $company_id      = $item->ID;
         $event = new SummitEntityEvent();
@@ -223,6 +237,22 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
         $event->OwnerID  = Member::currentUserID();
         $event->SummitID = $presentation->SummitID;
         $event->Metadata = json_encode( array('presentation_id' => $presentation_id ));
+        $event->write();
+    }
+    if($item instanceof SummitType && $list->getJoinTable() === 'SummitEvent_AllowedSummitTypes')
+    {
+        // removed summit type from event
+        $event_id     = intval($list->getForeignID());
+        $summit_event = SummitEvent::get()->byID($event_id);
+        if(is_null($summit_event)) return;
+        $summit_type_id  = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'SummitTypeFromEvent';
+        $event->EntityID = $summit_type_id;
+        $event->Type     = 'DELETE';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $event_id->SummitID;
+        $event->Metadata = json_encode( array('event_id' => $event_id ));
         $event->write();
     }
 });
