@@ -107,7 +107,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->httpError(404, 'Sorry that speaker could not be found');
         }
 
-        Requirements::block("summit/css/schedule-grid.css");
+        //Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-speaker.css");
 
         return $this->renderWith(array('SummitAppSpeakerPage','SummitPage','Page'),

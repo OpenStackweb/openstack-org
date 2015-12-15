@@ -1,0 +1,50 @@
+<raw>
+    <span></span>
+    this.root.innerHTML = opts.content
+</raw>
+
+<speaker-profile-events>
+    <div class="col-md-12 speaker-events-div">
+        <schedule-event each={ summit.events } ></schedule-event>
+    </div>
+
+    <script>
+
+        this.summit                   = opts.summit;
+        this.search_url               = opts.search_url;
+        this.schedule_api             = opts.schedule_api;
+        this.base_url                 = opts.base_url;
+        this.default_event_type_color = opts.default_event_type_color;
+        this.clicked_event            = {};
+        var self                      = this;
+
+        this.on('mount', function(){
+
+        });
+
+        this.schedule_api.on('beforeEventsRetrieved', function(){
+            $('#events-container').ajax_loader();
+        });
+
+        this.schedule_api.on('eventsRetrieved',function(data) {
+            self.events = data.events;
+            $('#events-container').ajax_loader('stop');
+        });
+
+
+        this.schedule_api.on('eventAdded2MySchedule',function(event_id) {
+            console.log('eventAdded2MySchedule');
+            self.clicked_event[event_id].own = true;
+            self.update();
+         delete self.clicked_event[event_id];
+        });
+
+        this.schedule_api.on('eventRemovedFromMySchedule',function(event_id) {
+            console.log('eventRemovedFromMySchedule');
+            self.clicked_event[event_id].own = false;
+            self.update();
+            delete self.clicked_event[event_id];
+        });
+
+    </script>
+</speaker-profile-events>

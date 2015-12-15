@@ -85,6 +85,16 @@ implements IPresentationSpeaker
         return "{$this->FirstName} {$this->LastName}";
     }
 
+    public function getCountryName() {
+        $country = '';
+
+        if ($this->Country) {
+            $country = Geoip::countryCode2name($this->Country);
+        }
+
+        return $country;
+    }
+
     public function getCurrentPosition(){
         $member = $this->Member();
         if(!is_null($member) && $member->ID > 0)

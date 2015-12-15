@@ -1,35 +1,40 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MontserratBold';
+    src: url('/themes/openstack/fonts/Montserrat-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .container {
     font-family:'Montserrat' , sans-serif;
 }
 
-.title_box {
-    background-color:#132539;
-    padding: 30px 0;
+.header {
+    background-color: #132539;
 }
 
-.col1 {
-    float: left;
-    width: 60%;
+.header .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.col2 {
-    float: right;
-    width: 30%;
-}
-
-.speaker_box {
-    background-color: #EEEEEE;
-    border-bottom: 1px solid #C2C2C2;
-    border-top: 1px solid #C2C2C2;
-    padding-bottom: 30px;
-    color: #494949;
-}
-
-.speaker_profile {
+.speaker_name {
+    font-size: 42px;
+    color: white;
     margin-top: 30px;
-    clear: both;
-    border-bottom: 1px solid black;
-    padding-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.speaker_job_title {
+    color: #C2C2C2;
+    font-size: 18px;
 }
 
 .speaker_pic {
@@ -38,27 +43,50 @@
     margin: 0 15px 15px 0;
 }
 
-.speaker_info {
-}
-
-.speaker_name {
-    margin:0;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.speaker_job_title {
-    color: #AAAAAA;
-    font-size: 12px;
+.section1 {
+    border-bottom: 1px solid #C2C2C2;
+    color: #4C4C4C;
 }
 
 .speaker_bio {
-    margin-top: 10px;
-    font-size: 12px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-right: 50px;
+    font-size: 18px;
 }
 
-.speaker_bio a {
-    text-decoration: underline;
-    color: #494949;
-    font-weight: bold;
+.speaker_info {
+    margin-top: 50px;
 }
+
+.info_item {
+    clear: both;
+    margin-bottom: 15px;
+    height: 25px;
+}
+
+.info_item_icon {
+    float: left;
+    margin-right: 20px;
+    width: 20px;
+    text-align: center;
+}
+
+.irc_icon {
+    background-color: #4C4C4C;
+    color: white;
+    border-radius: 10px;
+    font-size: 8px;
+    padding: 3px;
+}
+
+.sessions {
+    color: #4C4C4C;
+}
+
+.sessions_title {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+

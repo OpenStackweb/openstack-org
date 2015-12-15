@@ -35,7 +35,7 @@
                         <div class="row speaker-row">
                             <div class="col-md-4">
                                 <a href="{$Top.Link(speaker)}/{$ID}">
-                                    <img src="{$ProfilePhoto}" class="img-circle" alt="{$Name}">
+                                    <img src="{$ProfilePhoto}" class="img-circle profile-pic" alt="{$Name}">
                                 </a>
                             </div>
                             <div class="col-md-8">

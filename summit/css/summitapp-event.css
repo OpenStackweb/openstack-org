@@ -61,7 +61,7 @@
 .section1 {
     padding-top: 30px;
     padding-bottom: 30px;
-    color: #494949;
+    color: #4C4C4C;
     /*border-bottom: 1px solid grey;*/
 }
 
@@ -120,7 +120,7 @@
 .section2 {
     padding-top: 30px;
     padding-bottom: 30px;
-    color: #494949;
+    color: #4C4C4C;
 }
 
 .description {
@@ -145,7 +145,7 @@
 }
 
 .tags-row a {
-    color: #494949;
+    color: #4C4C4C;
 }
 
 .col-tags-title {
@@ -165,7 +165,7 @@
     border-bottom: 1px solid #C2C2C2;
     border-top: 1px solid #C2C2C2;
     padding-bottom: 30px;
-    color: #494949;
+    color: #4C4C4C;
 }
 
 .speaker_profile {
@@ -201,14 +201,14 @@
 
 .speaker_bio a {
     text-decoration: underline;
-    color: #494949;
+    color: #4C4C4C;
     font-weight: bold;
 }
 
 .comment_section {
     padding-top: 50px;
     padding-bottom: 30px;
-    color: #494949;
+    color: #4C4C4C;
 }
 
 .comment_title {

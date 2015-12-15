@@ -58,7 +58,7 @@
                         <div class="col-md-3">
                             <div data-speaker-id={ speaker_id } class="row speaker-row" each={ speaker_id in speakers_id }>
                                 <div class="col-md-4">
-                                    <img src="{ summit.speakers[speaker_id].profile_pic }" class="img-circle" alt="{ summit.speakers[speaker_id].name }">
+                                    <img src="{ summit.speakers[speaker_id].profile_pic }" class="img-circle profile-pic" alt="{ summit.speakers[speaker_id].name }">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row speaker-name-row"><div class="col-md-12"><a href={ parent.base_url+'speakers/'+ this.speaker_id }>{ summit.speakers[speaker_id].name }</a></div></div>
