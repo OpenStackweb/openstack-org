@@ -102,6 +102,9 @@
     </div>
 <% end_if %>
 
+<%--
+Hidding comments, leaving this feature for phase 2
+
 <div class="container">
     <div class="col1 comment_section">
         <div class="comment_title"> Comment </div>
@@ -123,7 +126,9 @@
         <event-comments comments="{ comments }" limit="5"></event-comments>
     </div>
 </div>
+<script src="summit/javascript/schedule/event-detail.bundle.js" type="application/javascript"></script>
+--%>
+
 <div id="fb-root"></div>
 
-<script src="summit/javascript/schedule/event-detail.bundle.js" type="application/javascript"></script>
 <script src="summit/javascript/schedule/share-buttons.bundle.js" type="application/javascript"></script>
