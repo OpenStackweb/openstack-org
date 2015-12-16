@@ -1175,7 +1175,7 @@ a.current-summit-link {
   .presentation-main-panel form {
     margin-top: 20px; }
   .presentation-main-panel .btn {
-    color: white !important; }
+    color: white; }
 
 .form-actions .btn {
   color: white; }
