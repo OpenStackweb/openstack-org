@@ -94,7 +94,8 @@ class EditProfilePageSummitAttendeeExtension extends Extension
                     $attendees = $this->manager->getOrderAttendees($data['ExternalOrderId']);
                     Session::set('attendees', $attendees);
                     Session::set('ExternalOrderId', $data['ExternalOrderId']);
-                    Session::set('SharedContactInfo',$data['SharedContactInfo']);
+                    if(isset($data['SharedContactInfo']))
+                        Session::set('SharedContactInfo',$data['SharedContactInfo']);
                     return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
                 }
                 catch(InvalidEventbriteOrderStatusException $ex1)
@@ -130,7 +131,7 @@ class EditProfilePageSummitAttendeeExtension extends Extension
                         $external_attendee_id,
                         $external_ticket_class_id,
                         $created,
-                        $data['SharedContactInfo']
+                        isset($data['SharedContactInfo']) ? $data['SharedContactInfo'] : false
                     );
                     Session::clear('attendees');
                     Session::clear('ExternalOrderId');
