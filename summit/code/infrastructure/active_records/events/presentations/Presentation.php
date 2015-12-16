@@ -118,6 +118,18 @@ class Presentation extends SummitEvent implements IPresentation
         }
     }
 
+    /**
+     * Gets a link to edit this presentation
+     *
+     * @return  string
+     */
+    public function EditTagsLink()
+    {
+        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
+            return Controller::join_links($page->Link(),'manage', $this->ID, 'tags');
+        }
+    }
+
 
     /**
      * Gets a link to the preview iframe

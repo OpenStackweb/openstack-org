@@ -18,15 +18,14 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="presentation-steps">
-                                    <a href='$Presentation.EditLink' class="step active"><i class="fa fa-file-text-o"></i>&nbsp;Presentation&nbsp;Summary</a>
-                                    <a href='$Presentation.EditTagsLink' class="step"><i class="fa fa-tags"></i>&nbsp;Presentation&nbsp;Tags</a>
+                                    <a href='$Presentation.EditLink' class="step"><i class="fa fa-file-text-o"></i>&nbsp;Presentation&nbsp;Summary</a>
+                                    <a href='$Presentation.EditTagsLink' class="step active"><i class="fa fa-tags"></i>&nbsp;Presentation&nbsp;Tags</a>
                                     <a href='$Presentation.EditSpeakersLink'class="step"><i class="fa fa-user"></i>&nbsp;Speakers</a>
                                 </div>
                             </div>
                         </div>
                     <% end_if %>
-
-                    $PresentationForm
+                    $PresentationTagsForm
                 </div>
             </div>
         </div>

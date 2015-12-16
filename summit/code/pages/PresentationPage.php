@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class PresentationPage
+ */
 class PresentationPage extends SummitPage
 {
 
@@ -389,18 +392,21 @@ class PresentationPage_ManageRequest extends RequestHandler
 
     private static $allowed_actions = array(
         'summary',
+        'tags',
         'delete',
         'PresentationForm',
+        'PresentationTagsForm',
         'AddSpeakerForm',
         'doAddSpeaker',
         'doFinishSpeaker',
         'savePresentationSummary',
+        'savePresentationTags',
         'handleSpeaker',
         'confirm',
         'success',
         'speakers',
-        'preview'
-    );
+        'preview',
+     );
 
 
     private static $url_handlers = array(
@@ -564,6 +570,13 @@ class PresentationPage_ManageRequest extends RequestHandler
         ))->renderWith(array('PresentationPage_speakers', 'PresentationPage'), $this->parent);
     }
 
+    public function tags(SS_HTTPRequest $r)
+    {
+        return $this->customise(array(
+            'Presentation' => $this->presentation
+        ))->renderWith(array('PresentationPage_tags', 'PresentationPage'), $this->parent);
+    }
+
 
     /**
      * Handles the deletion of a presentation
@@ -672,15 +685,14 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function PresentationForm()
     {
-        $save = $this->presentation->isInDB() ? 'Save presentation details' : 'Save and continue <i class="fa fa-arrow-right fa-end"></i>';
         $form = PresentationForm::create(
             $this,
             "PresentationForm",
             FieldList::create(
-                FormAction::create('savePresentationSummary', $save)
+                FormAction::create('savePresentationSummary', 'Save and continue')
             )
         );
-
+        $form->clearMessage();
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             return $form->loadDataFrom($data);
         }
@@ -692,6 +704,19 @@ class PresentationPage_ManageRequest extends RequestHandler
 
         return $form->loadDataFrom($this->presentation);
 
+    }
+
+    public function PresentationTagsForm()
+    {
+        $form =  new BootstrapForm($this, 'PresentationTagsForm',  FieldList::create(),
+            FieldList::create(
+                FormAction::create('savePresentationTags', 'Save')
+            )
+        );
+
+        $form->clearMessage();
+
+        return $form;
     }
 
 
@@ -807,6 +832,21 @@ class PresentationPage_ManageRequest extends RequestHandler
             $this->presentation->SummitID = $currentSummit->ID;
         }
 
+
+        $this->presentation->write();
+
+        Session::clear("FormInfo.{$form->FormName()}.data");
+
+        $form->sessionMessage('Your changes have been saved.', 'good');
+
+        return $this->parent->redirect($this->Link('tags'));
+    }
+
+
+    public function savePresentationTags($data, $form)
+    {
+        Session::set("FormInfo.{$form->FormName()}.data", $data);
+        $new = $this->presentation->isNew();
         $this->presentation->Progress = Presentation::PHASE_SUMMARY;
         $this->presentation->write();
 

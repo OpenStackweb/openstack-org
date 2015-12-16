@@ -72,30 +72,12 @@ final class PresentationForm extends BootstrapForm
             ->text('OtherTopic','Other topic (if one above does not match)')
                 ->configure()
                     ->displayIf('CategoryID')->isEqualTo('other')->end()
-                ->end()
-            ->literal('TagHelp','<p>You can optionally add tags help attendees find presentations that interest them. Examples: <i>nova, ubuntu, ldap.</i></p>')
-            ->bootstrapTag('Tags','Presentation Tags (Optional)')
-                ->configure()
-                    ->setLabelField('Tag')
-                    ->setSource(Tag::get())
-                    ->setPrefetch(
-                        Tag::get()
-                            ->leftJoin('SummitEvent_Tags', 'TagID = Tag.ID')
-                            ->sort('COUNT(Tag.ID)','DESC')
-                            ->limit(10)
-                            ->alterDataQuery(function($query) {
-                                $query->groupby('Tag.ID');
-                            })
-                    )
-                    ->setFreeInput(true)
                 ->end();
-        
         return $fields;
-
     }
 
-
-    protected function getPresentationValidator() {
+    protected function getPresentationValidator()
+    {
         return RequiredFields::create('Title','Level');
     }
 

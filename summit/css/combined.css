@@ -1257,19 +1257,22 @@ td.action {
   color: red; }
 
 .presentation-steps {
-  max-width: 500px;
+
   margin: 20px auto; }
 
 .presentation-steps .step {
-  width: 50%;
+  width: 33%;
   float: left;
   border: 1px solid #CCCCCC;
   padding: 7px 10px;
   margin-left: -1px;
-  text-align: center; }
-  .presentation-steps .step:hover, .presentation-steps .step:active, .presentation-steps .step:visited {
-    color: black;
-    text-decoration: none; }
+  text-align: center;
+}
+
+.presentation-steps a.step:hover, .presentation-steps a.step:active, .presentation-steps a.step:visited {
+    color: black !important;
+    text-decoration: none !important;
+}
 
 .presentation-steps .active {
   font-weight: bold;
