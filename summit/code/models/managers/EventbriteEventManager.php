@@ -215,7 +215,16 @@ final class EventbriteEventManager implements IEventbriteEventManager
      * @param bool $shared_contact_info
      * @return ISummitAttendee
      */
-    public function registerAttendee($member, $external_summit_id, $external_order_id, $external_attendee_id, $external_ticket_class_id, $bought_date, $shared_contact_info = false)
+    public function registerAttendee
+    (
+        $member,
+        $external_summit_id,
+        $external_order_id,
+        $external_attendee_id,
+        $external_ticket_class_id,
+        $bought_date,
+        $shared_contact_info = false
+    )
     {
         $repository          = $this->repository;
         $member_repository   = $this->member_repository;
@@ -223,7 +232,8 @@ final class EventbriteEventManager implements IEventbriteEventManager
         $attendee_repository = $this->attendee_repository;
         $summit_repository   = $this->summit_repository;
 
-        return $this->tx_manager->transaction(function () use (
+        return $this->tx_manager->transaction(function () use
+        (
             $member,
             $external_summit_id,
             $external_order_id,
@@ -236,11 +246,25 @@ final class EventbriteEventManager implements IEventbriteEventManager
             $attendee_factory,
             $attendee_repository,
             $summit_repository
-        ) {
+        )
+        {
             $summit = $summit_repository->getByExternalEventId($external_summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf('external_summit_id %s', $external_summit_id));
+
+            if(is_null($summit))
+                throw new NotFoundEntityException('Summit', sprintf('external_summit_id %s', $external_summit_id));
+
             $ticket_type = $summit->findTicketTypeByExternalId($external_ticket_class_id);
-            if(is_null($ticket_type)) throw new NotFoundEntityException('SummitTicketType', sprintf('external_ticket_class_id %s', $external_ticket_class_id));
+
+            if(is_null($ticket_type))
+                throw new NotFoundEntityException
+                (
+                    'SummitTicketType',
+                    sprintf
+                    (
+                        'external_ticket_class_id %s',
+                        $external_ticket_class_id
+                    )
+                );
 
             $attendee = $attendee_factory->build
             (
@@ -266,8 +290,9 @@ final class EventbriteEventManager implements IEventbriteEventManager
      */
     public function getOrderAttendees($order_external_id)
     {
+        if(is_null($order_external_id))
+            throw new InvalidEventbriteOrderStatusException('invalid');
         $order = $this->api->getOrder($order_external_id);
-
         if (isset($order['attendees']))
         {
             $status     = $order['status'];

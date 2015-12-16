@@ -80,22 +80,29 @@ class EditProfilePageSummitAttendeeExtension extends Extension
         if ($current_member = Member::currentUser())
         {
             $attendee = $current_member->getCurrentSummitAttendee();
-            if(!$attendee && !isset($data['SelectedAttendee']))
-            {
+            if($attendee)
+                return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
 
+            if(!isset($data['SelectedAttendee']))
+            {
+                // if we dont selected an attendee ...
                 try
                 {
                     if(Session::get('attendees'))
                     {
-                        // already retrieved data
+                        // already retrieved data (we have a valid order # with attendees)
                         $form->sessionMessage('Please select an attendee', "bad");
                         return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
                     }
-                    $attendees = $this->manager->getOrderAttendees($data['ExternalOrderId']);
+                    // get order info
+                    $order_id  = isset($data['ExternalOrderId']) ? $data['ExternalOrderId'] : null;
+                    $attendees = $this->manager->getOrderAttendees($order_id);
+                    // store data
                     Session::set('attendees', $attendees);
                     Session::set('ExternalOrderId', $data['ExternalOrderId']);
-                    if(isset($data['SharedContactInfo']))
-                        Session::set('SharedContactInfo',$data['SharedContactInfo']);
+                    $shared_contact_info = isset($data['SharedContactInfo']) ? $data['SharedContactInfo']:false;
+                    Session::set('SharedContactInfo',$shared_contact_info);
+
                     return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
                 }
                 catch(InvalidEventbriteOrderStatusException $ex1)
@@ -107,21 +114,21 @@ class EditProfilePageSummitAttendeeExtension extends Extension
                     return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
                 }
             }
-            if($attendee)
-            {
-                return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
-            }
-            if(isset($data['SelectedAttendee']))
+            else
             {
                 try {
                     // register attendee with current member
                     $attendees                = Session::get('attendees');
                     $external_order_id        = Session::get('ExternalOrderId');
                     $external_attendee_id     = $data['SelectedAttendee'];
+
+                    if(!isset($attendees[$external_attendee_id])) throw new InvalidArgumentException();
+
                     $selected_attendee_data   = $attendees[$external_attendee_id];
                     $external_event_id        = $selected_attendee_data['event_id'];
                     $external_ticket_class_id = $selected_attendee_data['ticket_class_id'];
                     $created                  = $selected_attendee_data['created'];
+                    $shared_contact_info      = isset($data['SharedContactInfo']) ? $data['SharedContactInfo']:false;
 
                     $this->manager->registerAttendee
                     (
@@ -131,8 +138,9 @@ class EditProfilePageSummitAttendeeExtension extends Extension
                         $external_attendee_id,
                         $external_ticket_class_id,
                         $created,
-                        isset($data['SharedContactInfo']) ? $data['SharedContactInfo'] : false
+                        $shared_contact_info
                     );
+
                     Session::clear('attendees');
                     Session::clear('ExternalOrderId');
                     Session::clear('SharedContactInfo');
