@@ -49,6 +49,8 @@ final class DupesMembersApi
 
     protected function authorize()
     {
+        if(!$this->checkOwnAjaxRequest()) return false;
+        if(Member::currentUser() === null) return false;
         return true;
     }
 
@@ -80,7 +82,8 @@ final class DupesMembersApi
         'markForeignAccount',
     );
 
-    public function mergeAccountRequest(){
+    public function mergeAccountRequest()
+    {
         $member_id = (int)convert::raw2sql($this->request->param('MEMBER_ID'));
         try{
             $this->manager->registerMergeAccountRequest(Member::currentUser(), $member_id, new DupeMemberActionRequestEmailNotificationSender(new SapphireDupeMemberMergeRequestRepository,
@@ -101,7 +104,8 @@ final class DupesMembersApi
         }
     }
 
-    public function deleteAccountRequest(){
+    public function deleteAccountRequest()
+    {
         $member_id = (int)convert::raw2sql($this->request->param('MEMBER_ID'));
         try{
             $this->manager->registerDeleteAccountRequest(Member::currentUser(), $member_id,

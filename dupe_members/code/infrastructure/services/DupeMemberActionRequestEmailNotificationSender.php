@@ -39,13 +39,19 @@ final class DupeMemberActionRequestEmailNotificationSender
         $this->merge_request_repository  = $merge_request_repository;
     }
 
+    /**
+     * @param IDupeMemberMergeRequest $request
+     * @throws NotFoundEntityException
+     */
     public function sendMergeNotification(IDupeMemberMergeRequest $request)
     {
         $dupe     = $request->getDupeAccount();
         $primary  = $request->getPrimaryAccount();
+        if(is_null($dupe) || is_null($primary)) throw new NotFoundEntityException();
+
         $email_to = $dupe->getEmail();
 
-        $email = EmailFactory::getInstance()->buildEmail(DUPE_EMAIL_FROM, $email_to  , "You Have Requested to Merge Openstack Duplicated Account");
+        $email = EmailFactory::getInstance()->buildEmail(DUPE_EMAIL_FROM, $email_to  , "You Have Requested to Merge OpenStack Duplicated Account");
 
         $template_data = array(
             'FirstName'      => $dupe->getFirstName(),
@@ -67,12 +73,17 @@ final class DupeMemberActionRequestEmailNotificationSender
         $email->send();
     }
 
+    /**
+     * @param IDupeMemberDeleteRequest $request
+     * @throws NotFoundEntityException
+     */
     public function sendDeleteNotification(IDupeMemberDeleteRequest $request)
     {
         $dupe     = $request->getDupeAccount();
+        if(is_null($dupe)) throw new NotFoundEntityException();
         $email_to = $dupe->getEmail();
 
-        $email = EmailFactory::getInstance()->buildEmail(DUPE_EMAIL_FROM, $email_to  , "You Have Requested to Delete Openstack Duplicated Account");
+        $email = EmailFactory::getInstance()->buildEmail(DUPE_EMAIL_FROM, $email_to  , "You Have Requested to Delete OpenStack Duplicated Account");
 
         $template_data = array(
             'FirstName'   => $dupe->getFirstName(),
