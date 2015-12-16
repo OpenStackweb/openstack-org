@@ -1,7 +1,7 @@
 <schedule-global-filter>
     <div class="row global-search-container">
         <form id="form-schedule-global-search" name="form-schedule-global-search' class="form-inline all-events-search-form" method="get" action="{ opts.search_url }">
-            <div class="col-xs-12 col-sm-4 col-sm-offset-8">
+            <div class="col-xs-12 col-sm-4 col-sm-offset-8 global-search-div">
                 <div class="input-group" style="width: 100%;">
                     <input data-rule-required="true" data-rule-minlength="3" value="{opts.value}" type="text" id="t" name="t" class="form-control input-global-search" placeholder="Search for Events/People">
                     <span class="input-group-btn" style="width: 5%;">

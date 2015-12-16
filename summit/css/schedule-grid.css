@@ -498,6 +498,13 @@ form.all-events-search-form .all-events-search-wrapper i {
     padding-bottom: 0.5em;
 }
 
+.global-search-div {
+    position: relative;
+    top: -47px;
+    float: right;
+    width: 420px;
+}
+
 .label
 {
     margin-left: 5px !important;
