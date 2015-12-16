@@ -3,7 +3,7 @@
     this.root.innerHTML = opts.content
 </raw>
 
-<speaker-profile-events>
+<event-list>
     <div class="col-md-12 speaker-events-div">
         <schedule-event each={ summit.events } ></schedule-event>
     </div>
@@ -47,4 +47,4 @@
         });
 
     </script>
-</speaker-profile-events>
+</event-list>

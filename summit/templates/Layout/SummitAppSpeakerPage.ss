@@ -203,7 +203,7 @@
 
             </script>
 
-            <speaker-profile-events summit="{ summit }" default_event_type_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></speaker-profile-events>
+            <event-list summit="{ summit }" default_event_type_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
 
 
         </div>
@@ -213,5 +213,5 @@
 
 <% end_with %>
 
-<script src="summit/javascript/schedule/speaker-profile.bundle.js" type="application/javascript"></script>
+<script src="summit/javascript/schedule/event-list.bundle.js" type="application/javascript"></script>
 

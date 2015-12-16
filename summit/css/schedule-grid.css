@@ -266,14 +266,14 @@ a.navbar-brand.navbar-brand-month
 .navbar-default .navbar-nav > .active.day-selected
 {
     color: #FFFFFF !important;
-    background: #224066;
+    background: #4a4a4a;
 }
 
 .navbar-default .navbar-nav > .active.day-selected > a,
 .navbar-default .navbar-nav > .active.day-selected > a:hover,
 .navbar-default .navbar-nav > .active.day-selected > a:focus {
     color: #FFFFFF !important;
-    background: #555555;
+    background: #4a4a4a;
 }
 
 .day-label
@@ -343,6 +343,13 @@ a.navbar-brand.navbar-brand-month
 {
     width: 60px;
     height: 60px;
+    background-color: white;
+}
+
+.big-profile-pic
+{
+    width: 100px;
+    height: 100px;
     background-color: white;
 }
 
@@ -503,25 +510,41 @@ form.all-events-search-form .all-events-search-wrapper i {
 
 /* search */
 
-.search-header
-{
-    background-color: #7C7C7C;
-    color: #ffffff;
-    font-family: 'MontserratBold';
-    font-size: 16px;
-    padding-left: 10px;
-    padding-top:5px;
-    padding-bottom:5px;
-    border-radius: 5px;
-    width: 30%;
+.search-header {
+    margin-bottom: 40px;
 }
 
-.event-results, .people-results
+.people-results {
+    background-color: #EEEEEE;
+    border-top: 1px solid #C2C2C2;
+    border-bottom: 1px solid #C2C2C2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.result-speaker-name-div {
+    margin-top: 24px;
+    padding-left: 5px;
+}
+
+.event-results
 {
     width: 90%;
     padding-left:1em;
     padding-top: 2em;
     padding-bottom: 2em;
+}
+
+h2.subtitle {
+    font-family: Montserrat, Sans-serif;
+    color: #4a4a4a;
+    font-size: 23px;
+    margin: 50px 0;
+}
+
+.speaker-result {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 

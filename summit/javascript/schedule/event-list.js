@@ -2,7 +2,7 @@ require("./../../../themes/openstack/bower_assets/awesome-bootstrap-checkbox/awe
 
 var schedule_api     = require('./schedule-api.js');
 
-require('./speaker-profile-events.tag');
+require('./event-list.tag');
 require('./schedule-event.tag');
 
-riot.mount('speaker-profile-events',{ schedule_api: schedule_api});
+riot.mount('event-list',{ schedule_api: schedule_api});
