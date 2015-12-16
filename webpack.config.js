@@ -10,7 +10,8 @@ module.exports = {
     "summit/javascript/schedule/schedule":"./summit/javascript/schedule/schedule.js",
     "summit/javascript/schedule/event-detail":"./summit/javascript/schedule/event-detail.js",
     "summit/javascript/schedule/share-buttons":"./summit/javascript/schedule/share-buttons.js",
-    "summit/javascript/schedule/speaker-profile":"./summit/javascript/schedule/speaker-profile.js"
+    "summit/javascript/schedule/speaker-profile":"./summit/javascript/schedule/speaker-profile.js",
+    "summit/javascript/forms/tagmanagerfield/tagmanagerfield":"./summit/javascript/forms/tagmanagerfield/tagmanagerfield.js"
   },
   output: {
     path: __dirname ,

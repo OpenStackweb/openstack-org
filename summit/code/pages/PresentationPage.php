@@ -708,15 +708,17 @@ class PresentationPage_ManageRequest extends RequestHandler
 
     public function PresentationTagsForm()
     {
-        $form =  new BootstrapForm($this, 'PresentationTagsForm',  FieldList::create(),
+        $fields = FieldList::create()->tagmanager('Tags', 'Tags');
+        $form   = new BootstrapForm($this, 'PresentationTagsForm', $fields ,
             FieldList::create(
                 FormAction::create('savePresentationTags', 'Save')
             )
         );
-
         $form->clearMessage();
-
-        return $form;
+        if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
+            return $form->loadDataFrom($data);
+        }
+        return $form->loadDataFrom($this->presentation);
     }
 
 
@@ -778,7 +780,6 @@ class PresentationPage_ManageRequest extends RequestHandler
                 FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add first speaker')
             );
         }
-
 
         return BootstrapForm::create(
             $this,
@@ -845,9 +846,11 @@ class PresentationPage_ManageRequest extends RequestHandler
 
     public function savePresentationTags($data, $form)
     {
-        Session::set("FormInfo.{$form->FormName()}.data", $data);
         $new = $this->presentation->isNew();
         $this->presentation->Progress = Presentation::PHASE_SUMMARY;
+        $tags = $form->Fields()->fieldByName('Tags');
+        if(!is_null($tags) && isset($data['Tags'])) $tags->setValue($data['Tags']);
+        $form->saveInto($this->presentation);
         $this->presentation->write();
 
         Session::clear("FormInfo.{$form->FormName()}.data");

@@ -599,4 +599,9 @@ SQL;
     public function canEdit($member = null) {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
+
+    public function getTags()
+    {
+        return $this->getManyManyComponents('Tags');
+    }
 }

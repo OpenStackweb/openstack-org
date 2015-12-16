@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,30 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-/**
- * Class Tag
- */
-final class Tag extends DataObject implements ITag
+final class ChangeTagsCollationMigration extends AbstractDBMigrationTask
 {
+    protected $title = "Change Tags Collation";
 
-    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+    protected $description = "Change Tags Collation";
 
-    static $db = array
-    (
-        'Tag' => 'Varchar',
-    );
-
-    static $belongs_many_many = array(
-        'News' => 'News',
-        'Events' => 'SummitEvent',
-    );
-
-    /**
-     * @return int
-     */
-    public function getIdentifier()
+    function doUp()
     {
-        return (int)$this->getField('ID');
+        DB::query("ALTER TABLE  `Tag` CHANGE  `Tag`  `Tag` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL");
+  }
+
+    function doDown()
+    {
+
     }
 }
