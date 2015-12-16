@@ -52,19 +52,10 @@ class EditProfilePageSummitAttendeeExtension extends Extension
         $html .= $view->process($this->owner);
     }
 
-    public function UpcomingSummit()
+    public function ActiveSummit()
     {
-        return Summit::GetUpcoming();
+        return Summit::ActiveSummit();
     }
-
-    public function CurrentSummit()
-    {
-        $current_summit = Summit::CurrentSummit();
-        if(is_null($current_summit))
-            $current_summit = $this->UpcomingSummit();
-        return $current_summit;
-    }
-
 
     public function attendeeInfoRegistration(SS_HTTPRequest $request)
     {

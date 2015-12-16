@@ -4,8 +4,8 @@
     <% if CurrentMember %>
         <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl %>
         <% include ProfileNav %>
-        <% if CurrentSummit %>
-            <h2>$CurrentSummit.Title Summit Attendee Registration Info</h2>
+        <% if $Top.ActiveSummit %>
+            <h2>$Top.ActiveSummit.Title Summit Attendee Registration Info</h2>
             $SummitAttendeeInfoForm
         <% else %>
             <p>There is not current summit yet!</p>
