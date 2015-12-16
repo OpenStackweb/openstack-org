@@ -10,6 +10,7 @@
 class TinyMCEEditorField extends TextareaField
 {
 
+
     /**
      * @var int
      */
@@ -25,6 +26,21 @@ class TinyMCEEditorField extends TextareaField
      */
     public function setWordCount($word_count_limit){
         $this->word_count_limit = $word_count_limit;
+        return $this;
+    }
+
+    /**
+     * @var bool
+     */
+    private $required;
+
+    /**
+     * @param boo $required
+     * @return $this
+     */
+    public function setRequired($required)
+    {
+        $this->required = $required;
         return $this;
     }
 
@@ -47,11 +63,12 @@ class TinyMCEEditorField extends TextareaField
     }
 
     public function FieldHolder($attributes = array ()) {
+
         Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
 
         $script = '';
         $plugins = "'paste'";
-        $extra_options = "";
+        $extra_options = ",setup : function(ed) {";
         if($this->word_count_limit > 0 ){
             $plugins .=", 'wordcount'";
             $extra_options = ",  wordcount_limit : {$this->word_count_limit}";
@@ -78,8 +95,6 @@ class TinyMCEEditorField extends TextareaField
 JS;
 
             $extra_options .= <<<JS
- , setup : function(ed) {
-
     ed.on("KeyDown", function(ed, evt) {
         var chars_without_html = $.trim(tinyMCE.activeEditor.getBody().textContent).length;
         var container_id       = tinyMCE.activeEditor.id;
@@ -115,10 +130,24 @@ JS;
                tinyMCE.activeEditor.setContent(txt.trim());
            },200);
     });
-  }
+
+
+
 JS;
         }
 
+        if($this->required){
+
+            $extra_options.= <<<JS
+
+                ed.on("Change", function(ed){
+                    tinyMCE.triggerSave();
+                    console.log('change');
+                });
+JS;
+        }
+
+        $extra_options .= ' }';
         $script .= <<<SCRIPT
 tinymce.init({
     menubar: false,
@@ -145,6 +174,40 @@ SCRIPT;
  $('#chars_left_{$this->ID()}').html(max_chars - chars_without_html);
  alarmChars('{$this->ID()}', chars_without_html);
 JS;
+        }
+
+        if($this->required)
+        {
+            $form_id = $this->getForm()->FormName();
+            $script .= <<<JS
+                $(document).ready(function(){
+
+                    var form = $('#{$form_id}');
+
+                    if(form.length > 0)
+                    {
+
+                        $( "#{$this->ID()}" ).rules( "add", {
+                          required: true,
+                          messages: {
+                            required: '{$this->Name} field is required.'
+                          }
+                        });
+
+
+                        form.submit(function(e){
+                             tinyMCE.triggerSave();
+                             var is_valid = form.valid();
+                             if(!is_valid)
+                             {
+                                return false;
+                             }
+                             return true;
+                        });
+                    }
+                });
+JS;
+
         }
 
         Requirements::customScript($script);

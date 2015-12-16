@@ -692,7 +692,7 @@ class PresentationPage_ManageRequest extends RequestHandler
                 FormAction::create('savePresentationSummary', 'Save and continue')
             )
         );
-        $form->clearMessage();
+
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             return $form->loadDataFrom($data);
         }
@@ -714,7 +714,6 @@ class PresentationPage_ManageRequest extends RequestHandler
                 FormAction::create('savePresentationTags', 'Save')
             )
         );
-        $form->clearMessage();
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             return $form->loadDataFrom($data);
         }
@@ -846,10 +845,12 @@ class PresentationPage_ManageRequest extends RequestHandler
 
     public function savePresentationTags($data, $form)
     {
+        Session::set("FormInfo.{$form->FormName()}.data", $data);
+
         $new = $this->presentation->isNew();
         $this->presentation->Progress = Presentation::PHASE_SUMMARY;
-        $tags = $form->Fields()->fieldByName('Tags');
-        if(!is_null($tags) && isset($data['Tags'])) $tags->setValue($data['Tags']);
+        /*$tags = $form->Fields()->fieldByName('Tags');
+        if(!is_null($tags) && isset($data['Tags'])) $tags->setValue($data['Tags']);*/
         $form->saveInto($this->presentation);
         $this->presentation->write();
 

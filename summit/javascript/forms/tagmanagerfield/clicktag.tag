@@ -5,7 +5,7 @@
 
         <script>
             var self = this
-            self.selected = this.parent.opts.value.indexOf(opts.label) != -1;
+            self.selected = this.parent.opts.value.toLowerCase().indexOf(opts.label.toLowerCase()) != -1;
 
             self.on('mount', function(){
                 // see if the tag is in the tag list and should be selected

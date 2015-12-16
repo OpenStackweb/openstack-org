@@ -8,6 +8,9 @@ class SpeakerForm extends BootstrapForm
 
     public function __construct($controller, $name, $actions)
     {
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+
         parent::__construct(
             $controller, 
             $name, 
@@ -15,6 +18,40 @@ class SpeakerForm extends BootstrapForm
             $actions,
             $this->getSpeakerValidator()
         );
+
+        $script = <<<JS
+          var form_validator_{$this->FormName()} = null;
+          (function( $ ){
+
+                $(document).ready(function(){
+                    form_validator_{$this->FormName()} = $('#{$this->FormName()}').validate(
+                    {
+                        ignore:[],
+                        invalidHandler: function(form, validator) {
+                        if (!validator.numberOfInvalids())
+                            return;
+                        var element = $(validator.errorList[0].element);
+                        if(!element.is(":visible")){
+                            element = element.parent();
+                        }
+
+                        $('html, body').animate({
+                            scrollTop: element.offset().top
+                        }, 2000);
+                    },
+                    errorPlacement: function(error, element) {
+                        if(!element.is(":visible")){
+                            element = element.parent();
+                        }
+                        error.insertAfter(element);
+                    }
+                    });
+                });
+                // End of closure.
+        }(jQuery ));
+JS;
+
+        Requirements::customScript($script);
     }
 
     protected function getSpeakerFields()
@@ -33,6 +70,7 @@ class SpeakerForm extends BootstrapForm
             ->tinyMCEEditor('Bio',"Speaker's Bio")
                 ->configure()
                     ->setRows(25)
+                    ->setRequired(true)
                 ->end()
             ->text('IRCHandle','IRC Handle (optional)')
              ->configure()
@@ -52,7 +90,6 @@ class SpeakerForm extends BootstrapForm
                     ->setMaxFilesize(1)
                 ->end()
             ->bootstrapIgnore('Photo')
-
             ->literal('SpokenLanguagesTitle','<h3>Spoken Languages ( Up to 5)</h3>')
             ->text('Language[1]','#1')
             ->text('Language[2]','#2')
