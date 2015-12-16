@@ -93,7 +93,7 @@ class SpeakerForm extends BootstrapForm
     }
 
     public function getSpeakerValidator() {
-        return RequiredFields::create('FirstName','LastName','Title','Bio', 'RecordingAndPublishingLegalAgreement');
+        return RequiredFields::create('FirstName','LastName','Title', 'RecordingAndPublishingLegalAgreement');
     }
 
     public function loadDataFrom($data, $mergeStrategy = 0, $fieldList = null)
