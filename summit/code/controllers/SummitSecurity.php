@@ -107,6 +107,10 @@ class SummitSecurity extends SummitPage_Controller {
         return Summit::get_active();
     }
 
+    public function ActiveSummit(){
+        return Summit::ActiveSummit();
+    }
+
     /**
      * Overload the redirect method so we can replace all references to Security
      * with its summit counterpart

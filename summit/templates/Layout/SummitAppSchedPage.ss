@@ -5,7 +5,7 @@
         window.onbeforeunload = function() {
             $('#events-container').ajax_loader();
         }
-        
+
         var summit =
         {
             id:   $Summit.ID,

@@ -6,7 +6,8 @@
 final class PresentationForm extends BootstrapForm
 {
 
-    public function __construct($controller, $name, $actions) {
+
+    public function __construct($controller, $name, $actions, ISummit $summit) {
         parent::__construct(
             $controller, 
             $name, 
@@ -14,10 +15,11 @@ final class PresentationForm extends BootstrapForm
             $actions,
             $this->getPresentationValidator()
         );
+
     }
 
     protected function getPresentationFields() {
-        $categorySource = Summit::get_active()->Categories()->map('ID','FormattedTitleAndDescription')->toArray();
+        $categorySource = Summit::ActiveSummit()->Categories()->map('ID','FormattedTitleAndDescription')->toArray();
         $categorySource['other'] = '<h4 class="category-label">Other topic...</h4>';
 
         $fields = FieldList::create()
