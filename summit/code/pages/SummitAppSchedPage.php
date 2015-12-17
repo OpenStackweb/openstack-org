@@ -103,9 +103,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         }
 
         $date = new DateTime($date);
+        $date = $date->setTime(0,0,0);
         $date = $date->format('Y-m-d');
 
-        return $this->renderWith(array('SummitAppSchedPage','SummitPage','Page'), array('Date' => $date) );
+        return $this->renderWith(array('SummitAppSchedPage','SummitPage','Page'), array('SelectedDate' => $date) );
     }
 
     public function ViewEvent() {
@@ -158,12 +159,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
         $form = new SummitEventFeedbackForm($this, 'SummitEventFeedbackForm');
         return $form;
-    }
-
-    public function getCurrentSummitEventsBy1stDate()
-    {
-        $summit = $this->Summit();
-        return new ArrayList($summit->getSchedule($summit->getBeginDate()));
     }
 
     public function isEventOnMySchedule($event_id)

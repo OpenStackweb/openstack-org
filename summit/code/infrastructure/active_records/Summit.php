@@ -440,7 +440,7 @@ final class Summit extends DataObject implements ISummit
             $query->addAndCondition(QueryCriteria::lowerOrEqual('EndDate', $this->convertDateFromTimeZone2UTC($end)));
         }
         $query->addOrder(QueryOrder::asc('StartDate'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',$query)->toArray();
+        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',$query)->toArray());
     }
 
     /**
@@ -1048,7 +1048,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
         $end_date   = $this->getEndDate();
         $res        = array();
         foreach($this->getDatesFromRange($start_date, $end_date) as $date)
-            array_push($res, new ArrayData(array('Label'=> $date->format('l j') , 'Date' => $date->format('Y-m-d H:i:s'))));
+            array_push($res, new ArrayData(array('Label'=> $date->format('l j') , 'Date' => $date->format('Y-m-d'))));
         return new ArrayList($res);
     }
 
@@ -1219,11 +1219,14 @@ SQL;
             $date =  DateTime::createFromFormat('Y-m-d',$date);
         }
         if($date === false) return false;
-        $date->setTime(0, 0, 0);
+
 
 
         $begin = new DateTime($this->getBeginDate());
         $end   = new DateTime($this->getEndDate());
+        $date  = $date->setTime(0, 0, 0);
+        $begin  = $begin->setTime(0, 0, 0);
+        $end    = $end->setTime(0, 0, 0);
 
         return $begin<= $date && $date <= $end;
     }

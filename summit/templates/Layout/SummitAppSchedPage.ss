@@ -1,6 +1,11 @@
 <div class="container-fluid">
 
     <script type="application/javascript">
+
+        window.onbeforeunload = function() {
+            $('#events-container').ajax_loader();
+        }
+        
         var summit =
         {
             id:   $Summit.ID,
@@ -113,12 +118,12 @@
         <% end_loop %>
 
        <% loop $Summit.DatesWithEvents %>
-       summit.dates.push({ label: '{$Label}', date:'{$Date}'});
-       summit.events['{$Date}'] = [];
+        summit.dates.push({ label: '{$Label}', date:'{$Date}', selected: <% if $Top.SelectedDate == $Date %>true<% else %>false<% end_if %> });
+        summit.events['{$Date}'] = [];
        <% end_loop %>
 
-       <% loop $Top.CurrentSummitEventsBy1stDate() %>
-            summit.events[summit.dates[0].date].push(
+       <% loop $Summit.getSchedule($SelectedDate) %>
+            summit.events['{$Top.SelectedDate}'].push(
                     {
                         id              : {$ID},
                         title           : "{$Title.JS}",
@@ -150,6 +155,12 @@
                     }
             );
         <% end_loop %>
+
+        $(window).load(function () {
+            setTimeout(function () {
+                $('#events-container').ajax_loader('stop');
+            }, 1500);
+        });
     </script>
     <div class="row">
         <div class="col-xs-12 col-main-title">

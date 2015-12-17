@@ -22,21 +22,11 @@
 
         });
 
-        this.schedule_api.on('beforeEventsRetrieved', function(){
-            $('#events-container').ajax_loader();
-        });
-
-        this.schedule_api.on('eventsRetrieved',function(data) {
-            self.events = data.events;
-            $('#events-container').ajax_loader('stop');
-        });
-
-
         this.schedule_api.on('eventAdded2MySchedule',function(event_id) {
             console.log('eventAdded2MySchedule');
             self.clicked_event[event_id].own = true;
             self.update();
-         delete self.clicked_event[event_id];
+            delete self.clicked_event[event_id];
         });
 
         this.schedule_api.on('eventRemovedFromMySchedule',function(event_id) {

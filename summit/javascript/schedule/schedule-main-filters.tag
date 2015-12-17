@@ -126,6 +126,58 @@
                 $(this).toggleClass('full');
                 self.doFilter();
             });
+
+            if(window.location.hash){
+                // process local filters on hash ...
+                var hash   = window.location.hash.substr(1);
+                var params = hash.split('&');
+
+                for(var param of params) {
+
+                    var param = param.split('=');
+                    if(param.length != 2) continue;
+                    var ddl = null;
+
+                    switch(param[0].toLowerCase()) {
+                        case 'summit_types':
+                        {
+                            ddl = $('#ddl_summit_types');
+                        }
+                        break;
+                        case 'event_types':
+                        {
+                            ddl = $('#ddl_event_types');
+                        }
+                        break;
+                        case 'tracks':
+                        {
+                            ddl = $('#ddl_tracks');
+                        }
+                        break;
+                        case 'tags':
+                        {
+                            ddl = $('#ddl_tags');
+                        }
+                        break;
+                        case 'ddl_levels':
+                        {
+                            ddl = $('#ddl_levels');
+                        }
+                        break;
+                    }
+                    if(ddl === null) continue;
+                    var values = param[1].trim();
+                    if(values === '') continue;
+
+                    for(var val of values.split(',')) {
+                        console.log('val '+val);
+                        $('option', ddl).filter(function() {
+                            return $(this).text() == val.trim();
+                        }).prop('selected', true);
+                    }
+                    ddl.trigger("chosen:updated").trigger("change");
+                }
+            }
         });
 
         doFilter() {
@@ -137,7 +189,7 @@
                 tracks       : $('#ddl_tracks').val(),
                 tags         : $('#ddl_tags').val(),
                 levels       : $('#ddl_levels').val(),
-                 own         : own
+                own          : own
             };
             self.schedule_filters.publishFiltersChanged(filters);
         }

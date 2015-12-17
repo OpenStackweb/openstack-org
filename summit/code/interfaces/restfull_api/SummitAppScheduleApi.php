@@ -88,91 +88,16 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     }
 
     static $url_handlers = array(
-        'GET '                      => 'getScheduleByDay',
         'PUT $EventID!'             => 'addToSchedule',
         'DELETE $EventID!'          => 'removeFromSchedule',
         'POST $EventID!/feedback'   => 'addFeedback',
     );
 
     static $allowed_actions = array(
-        'getScheduleByDay',
         'addToSchedule',
         'removeFromSchedule',
         'addFeedback',
     );
-
-    public function getScheduleByDay(SS_HTTPRequest $request) {
-
-        $query_string        = $request->getVars();
-        $summit_id           = intval($request->param('SUMMIT_ID'));
-        $day                 = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
-        $summit              = null;
-
-        if(intval($summit_id) > 0)
-            $summit = $this->summit_repository->getById(intval($summit_id));
-        if(strtolower($summit_id) === 'current')
-            $summit = Summit::ActiveSummit();
-
-        if(is_null($summit))
-            return $this->notFound('summit not found!');
-
-        $events = array();
-
-        foreach($summit->getSchedule($day) as $e)
-        {
-            $entry = array
-            (
-                'id'              => $e->ID,
-                'title'           => $e->Title,
-                'description'     => $e->Description,
-                'short_desc'      => $e->getShortDescription(600),
-                'start_datetime'  => $e->StartDate,
-                'end_datetime'    => $e->EndDate,
-                'start_time'      => $e->StartTime,
-                'end_time'        => $e->EndTime,
-                'allow_feedback'  => $e->AllowFeedBack,
-                'location_id'     => $e->LocationID,
-                'type_id'         => $e->TypeID,
-                'sponsors_id'     => array(),
-                'summit_types_id' => array(),
-                'tags_id'         => array(),
-                'own'             => self::isEventOnMySchedule($e->ID, $summit),
-                'favorite'        => false,
-                'show'            => true
-            );
-
-            foreach($e->Tags() as $t)
-            {
-                array_push($entry['tags_id'], $t->ID);
-            }
-
-            foreach($e->AllowedSummitTypes() as $t)
-            {
-                array_push($entry['summit_types_id'], $t->ID);
-            }
-
-            foreach($e->Sponsors() as $e)
-            {
-                array_push($entry['sponsors_id'], $e->ID);
-            }
-
-            if($e instanceof Presentation)
-            {
-                $speakers = array();
-                foreach($e->Speakers() as $s)
-                {
-                    array_push($speakers, $s->ID);
-                }
-
-                $entry['speakers_id']  = $speakers;
-                $entry['moderator_id'] = $e->ModeratorID;
-                $entry['track_id']     = $e->CategoryID;
-                $entry['level']        = $e->Level;
-            }
-            array_push($events, $entry);
-        };
-        return $this->ok(array( 'day' => $day, 'events' => $events));
-    }
 
     public static function isEventOnMySchedule($event_id, Summit $summit)
     {

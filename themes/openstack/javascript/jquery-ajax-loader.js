@@ -17,8 +17,9 @@
     var methods = {
         init : function(options) {
             element = $(this);
+
             if(jQuery('body').find('#resultLoading').attr('id') != 'resultLoading'){
-                jQuery('body').append('<div id="resultLoading" style="display:none"><div><img src="marketplace/code/ui/admin/images/ajax-loader.gif"><div>'+text+'</div></div><div class="bg"></div></div>');
+                jQuery('body').append('<div id="resultLoading" style="display:none"><div><img src="themes/openstack/javascript/images/loader.gif"><div>'+text+'</div></div><div class="bg"></div></div>');
             }
 
             jQuery('#resultLoading').css({

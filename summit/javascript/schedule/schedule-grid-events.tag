@@ -1,7 +1,7 @@
 <schedule-grid-events>
     <div class="row">
         <div class="col-md-12">
-            <schedule-event each={ summit.events[selected_day] } ></schedule-event>
+            <schedule-event each={ getEvents() } ></schedule-event>
         </div>
     </div>
 
@@ -12,7 +12,6 @@
         this.search_url               = opts.search_url;
         this.schedule_api             = opts.schedule_api;
         this.base_url                 = opts.base_url;
-        this.selected_day             = opts.selected_day;
         this.default_event_type_color = opts.default_event_type_color;
         this.clicked_event            = {};
         this.current_filter           = null;
@@ -22,16 +21,22 @@
 
         });
 
-        this.schedule_api.on('beforeEventsRetrieved', function(){
-            $('#events-container').ajax_loader();
-        });
+        getSummitSelectedDay() {
+            var selected_day = null;
+            for(var day of self.summit.dates){
+                if(day.selected)
+                {
+                    selected_day = day; break;
+                }
+            }
+            return selected_day;
+        }
 
-        this.schedule_api.on('eventsRetrieved',function(data) {
-            self.summit.events[data.day] = data.events;
-            $('#events-container').ajax_loader('stop');
-            self.selected_day = data.day;
-            self.applyFilters();
-        });
+        getEvents() {
+            var selected_day = self.getSummitSelectedDay();
+            if(selected_day === null) return [];
+            return self.summit.events[selected_day.date];
+        }
 
         this.schedule_filters.on('scheduleFiltersChanged', function(filters){
             self.current_filter = filters;
@@ -40,7 +45,7 @@
 
         applyFilters(){
             if(self.current_filter !== null ){
-                $.each(self.summit.events[self.selected_day], function(index, e) {
+                $.each(self.getEvents() , function(index, e) {
                     e.show = true;
                     var must_show = [];
                     // event types
@@ -114,7 +119,7 @@
             console.log('eventAdded2MySchedule');
             self.clicked_event[event_id].own = true;
             self.update();
-         delete self.clicked_event[event_id];
+            delete self.clicked_event[event_id];
         });
 
         this.schedule_api.on('eventRemovedFromMySchedule',function(event_id) {
