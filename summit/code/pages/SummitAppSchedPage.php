@@ -61,9 +61,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'ViewSpeakerProfile',
         'ViewAttendeeProfile',
         'DoGlobalSearch',
+        'index',
     );
 
-    static $url_handlers = array(
+    static $url_handlers = array
+    (
+        '$DATE'                         => 'index',
         'events/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
         'speakers/$SPEAKER_ID'          => 'ViewSpeakerProfile',
         'attendees/$ATTENDEE_ID'        => 'ViewAttendeeProfile',
@@ -83,6 +86,27 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
    }
+
+    public function index(SS_HTTPRequest $request)
+    {
+        $date  = Convert::raw2sql($request->param('DATE'));
+
+        if(empty($date))
+        {
+            $date = $this->Summit()->getBeginDate();
+        }
+        else if (!$this->Summit()->belongsToDuration($date))
+        {
+            $date = $this->Summit()->getBeginDate();
+            $date = new DateTime($date);
+            return $this->redirect($this->Link() . $date->format('Y-m-d'));
+        }
+
+        $date = new DateTime($date);
+        $date = $date->format('Y-m-d');
+
+        return $this->renderWith(array('SummitAppSchedPage','SummitPage','Page'), array('Date' => $date) );
+    }
 
     public function ViewEvent() {
         $event_id = intval($this->request->param('EVENT_ID'));

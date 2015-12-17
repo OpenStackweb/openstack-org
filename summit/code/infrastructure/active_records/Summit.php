@@ -904,10 +904,10 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
 
     public function isEventInsideSummitDuration(ISummitEvent $summit_event)
     {
-        $event_start_date = new DateTime($summit_event->getStartDate());
-        $event_end_date   = new DateTime($summit_event->getEndDate());
+        $event_start_date  = new DateTime($summit_event->getStartDate());
+        $event_end_date    = new DateTime($summit_event->getEndDate());
         $summit_start_date = new DateTime($this->getBeginDate());
-        $summit_end_date = new DateTime($this->getEndDate());
+        $summit_end_date   = new DateTime($this->getEndDate());
 
         return  $event_start_date >= $summit_start_date && $event_start_date <= $summit_end_date &&
         $event_end_date <= $summit_end_date && $event_end_date >= $event_start_date;
@@ -1207,5 +1207,24 @@ SQL;
 
         return new ArrayList($list);
 
+    }
+
+    /**
+     * @param $date
+     * @return bool
+     */
+    public function belongsToDuration($date)
+    {
+        if (is_string($date)) {
+            $date =  DateTime::createFromFormat('Y-m-d',$date);
+        }
+        if($date === false) return false;
+        $date->setTime(0, 0, 0);
+
+
+        $begin = new DateTime($this->getBeginDate());
+        $end   = new DateTime($this->getEndDate());
+
+        return $begin<= $date && $date <= $end;
     }
 }
