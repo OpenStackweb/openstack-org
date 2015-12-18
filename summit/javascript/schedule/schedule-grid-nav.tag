@@ -15,7 +15,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{ active: selected, day-selected: selected }" each={ summit.dates } ><a href="{ base_url+date }" class="day-label" onclick={ selectDate } >{ label }</a></li>
+                <li class="{ active: day.selected, day-selected: day.selected }" each={  key, day in summit.dates } ><a href="#" class="day-label" onclick={ selectDate } >{ day.label }</a></li>
             </ul>
             </div>
             </div>
@@ -25,14 +25,33 @@
     <script>
         this.month             = opts.month;
         this.summit            = this.parent.summit;
-        this.schedule_api      = this.parent.schedule_api;
         this.base_url          = this.parent.base_url;
-        this.aux_selected_day  = null;
+        this.schedule_api      = this.parent.schedule_api;
         var self               = this;
 
+        this.on('mount', function(){
+            var filter_day = $(window).url_fragment('getParam','day');
+            if(filter_day === null) filter_day = Object.keys(self.summit.dates)[0];
+            self.setSelectedDay(self.summit.dates[filter_day]);
+        });
+
         selectDate(e) {
-            $('#events-containe').ajax_loader();
-            return true;
+            self.setSelectedDay(e.item.day);
+        }
+
+        setSelectedDay(day) {
+            day.selected = true;
+            $(window).url_fragment('setParam','day', day.date);
+            window.location.hash = $(window).url_fragment('serialize');
+
+            for(var d in self.summit.dates){
+                d = self.summit.dates[d];
+                if(d.date !== day.date){
+                    d.selected = false;
+                }
+            }
+            self.update();
+            self.schedule_api.getEventByDay(self.summit.id, day.date);
         }
 
     </script>

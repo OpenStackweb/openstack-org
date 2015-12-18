@@ -1,13 +1,18 @@
 <schedule-grid-events>
-    <div class="row">
+    <div class="row" if={ events.length > 0 }>
         <div class="col-md-12">
-            <schedule-event each={ getEvents() } ></schedule-event>
+            <schedule-event each={ events } ></schedule-event>
         </div>
     </div>
-
+    <div class="row" if={ events.length === 0 }>
+        <div class="col-md-12">
+            <p>* There are not events that match your search criteria. </p>
+        </div>
+    </div>
     <script>
 
         this.summit                   = opts.summit;
+        this.events                   = [];
         this.schedule_filters         = opts.schedule_filters;
         this.search_url               = opts.search_url;
         this.schedule_api             = opts.schedule_api;
@@ -21,22 +26,15 @@
 
         });
 
-        getSummitSelectedDay() {
-            var selected_day = null;
-            for(var day of self.summit.dates){
-                if(day.selected)
-                {
-                    selected_day = day; break;
-                }
-            }
-            return selected_day;
-        }
+        this.schedule_api.on('beforeEventsRetrieved', function(){
+            $('#events-container').ajax_loader();
+        });
 
-        getEvents() {
-            var selected_day = self.getSummitSelectedDay();
-            if(selected_day === null) return [];
-            return self.summit.events[selected_day.date];
-        }
+        this.schedule_api.on('eventsRetrieved',function(data) {
+            self.events = data.events;
+            $('#events-container').ajax_loader('stop');
+            self.applyFilters();
+        });
 
         this.schedule_filters.on('scheduleFiltersChanged', function(filters){
             self.current_filter = filters;
@@ -45,7 +43,7 @@
 
         applyFilters(){
             if(self.current_filter !== null ){
-                $.each(self.getEvents() , function(index, e) {
+                $.each(self.events , function(index, e) {
                     e.show = true;
                     var must_show = [];
                     // event types

@@ -2,14 +2,10 @@
 
     <script type="application/javascript">
 
-        window.onbeforeunload = function() {
-            $('#events-container').ajax_loader();
-        }
-
         var summit =
         {
             id:   $Summit.ID,
-            dates : [],
+            dates : {},
             events: {},
             summit_types: {},
             speakers : {},
@@ -118,49 +114,10 @@
         <% end_loop %>
 
        <% loop $Summit.DatesWithEvents %>
-        summit.dates.push({ label: '{$Label}', date:'{$Date}', selected: <% if $Top.SelectedDate == $Date %>true<% else %>false<% end_if %> });
+        summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', selected: false };
         summit.events['{$Date}'] = [];
        <% end_loop %>
 
-       <% loop $Summit.getSchedule($SelectedDate) %>
-            summit.events['{$Top.SelectedDate}'].push(
-                    {
-                        id              : {$ID},
-                        title           : "{$Title.JS}",
-                        description     : "{$Description.JS}",
-                        short_desc      : "{$getShortDescription(600).JS}",
-                        start_datetime  : "{$StartDate}",
-                        end_datetime    : "{$EndDate}",
-                        start_time      : "{$StartTime}",
-                        end_time        : "{$EndTime}",
-                        allow_feedback  : {$AllowFeedBack},
-                        location_id     : {$LocationID},
-                        type_id         : {$TypeID},
-                        sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
-                        tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
-                        summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
-                        <% if ClassName == Presentation %>
-                        moderator_id: {$ModeratorID},
-                        speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
-                        track_id : {$CategoryID},
-                        level : '{$Level}',
-                        <% end_if %>
-                        <% if $Top.isEventOnMySchedule($ID) %>
-                        own      : true,
-                        <% else %>
-                        own      : false,
-                        <% end_if %>
-                        favorite : false,
-                        show : true
-                    }
-            );
-        <% end_loop %>
-
-        $(window).load(function () {
-            setTimeout(function () {
-                $('#events-container').ajax_loader('stop');
-            }, 1500);
-        });
     </script>
     <div class="row">
         <div class="col-xs-12 col-main-title">

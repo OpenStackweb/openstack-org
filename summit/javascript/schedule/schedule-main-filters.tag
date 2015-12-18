@@ -54,6 +54,7 @@
 
         this.summit           = opts.summit;
         this.schedule_filters = opts.schedule_filters;
+        this.atomic_filtering = false;
         var self              = this;
 
         this.on('mount', function(){
@@ -80,8 +81,8 @@
             $('#ddl_levels').chosen({ width: '100%'});
 
             $('#ddl_summit_types').change(function(e, params){
-
-                self.doFilter();
+                if(!self.atomic_filtering)
+                    self.doFilter();
                 var choices = $('.search-choice','#ddl_summit_types_chosen');
                 if(choices.length > 0){
                     choices.each(function(index, e){
@@ -97,19 +98,23 @@
             });
 
             $('#ddl_event_types').change(function(e, params){
-                self.doFilter();
+                if(!self.atomic_filtering)
+                    self.doFilter();
             });
 
             $('#ddl_tracks').chosen().change(function(e){
-                self.doFilter();
+                if(!self.atomic_filtering)
+                    self.doFilter();
             });
 
             $('#ddl_tags').chosen().change(function(e){
-                self.doFilter();
+                if(!self.atomic_filtering)
+                    self.doFilter();
             });
 
             $('#ddl_levels').chosen().change(function(e){
-                self.doFilter();
+                if(!self.atomic_filtering)
+                    self.doFilter();
             });
 
             $('.switch_schedule').click(function(e){
@@ -124,21 +129,22 @@
                     $('.content', this).text('Switch to My Schedule');
                 }
                 $(this).toggleClass('full');
-                self.doFilter();
+                if(!self.atomic_filtering)
+                    self.doFilter();
             });
 
-            if(window.location.hash){
+            var hash = $(window).url_fragment('getParams');
+
+            if(hash){
                 // process local filters on hash ...
-                var hash   = window.location.hash.substr(1);
-                var params = hash.split('&');
 
-                for(var param of params) {
+                self.atomic_filtering = true;
+                for(var key in hash) {
 
-                    var param = param.split('=');
-                    if(param.length != 2) continue;
-                    var ddl = null;
+                    var values = hash[key]
+                    var ddl    = null;
 
-                    switch(param[0].toLowerCase()) {
+                    switch(key) {
                         case 'summit_types':
                         {
                             ddl = $('#ddl_summit_types');
@@ -165,18 +171,14 @@
                         }
                         break;
                     }
-                    if(ddl === null) continue;
-                    var values = param[1].trim();
-                    if(values === '') continue;
+                    if(ddl == null) continue;
 
-                    for(var val of values.split(',')) {
-                        console.log('val '+val);
-                        $('option', ddl).filter(function() {
-                            return $(this).text() == val.trim();
-                        }).prop('selected', true);
-                    }
+                    ddl.val(values.split(','));
                     ddl.trigger("chosen:updated").trigger("change");
                 }
+
+                self.atomic_filtering = false;
+                self.doFilter();
             }
         });
 
@@ -191,6 +193,14 @@
                 levels       : $('#ddl_levels').val(),
                 own          : own
             };
+
+            $(window).url_fragment('setParam','summit_types', filters.summit_types);
+            $(window).url_fragment('setParam','event_types', filters.event_types);
+            $(window).url_fragment('setParam','tracks', filters.tracks);
+            $(window).url_fragment('setParam','tags', filters.tags);
+            $(window).url_fragment('setParam','levels', filters.levels);
+            window.location.hash = $(window).url_fragment('serialize');
+
             self.schedule_filters.publishFiltersChanged(filters);
         }
 
