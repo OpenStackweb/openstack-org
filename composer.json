@@ -18,7 +18,7 @@
     "silverstripe-australia/gridfieldextensions": "1.0.3",
     "unclecheese/display-logic": "1.2.1",
     "unclecheese/zen-fields": "1.0.*",
-    "unclecheese/betterbuttons": "1.2.*",
+    "unclecheese/betterbuttons": "1.2.11",
     "silverstripe/tagfield": "dev-master",
     "unclecheese/silverstripe-permamail": "1.1.*",
     "unclecheese/bootstrap-forms": "1.1.*",

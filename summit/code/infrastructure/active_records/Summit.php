@@ -570,7 +570,11 @@ final class Summit extends DataObject implements ISummit
      */
     public function getHotels($show_all = false, $hotel_type = 'Primary')
     {
-        $filters = array('Type' => $hotel_type);
+        $filters = array
+        (
+            'Type'     => $hotel_type,
+            'SummitID' => $this->ID
+        );
 
         if(!$show_all)
         {
