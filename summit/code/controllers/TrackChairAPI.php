@@ -164,7 +164,7 @@ class TrackChairAPI extends Controller {
 		$presentations = Presentation::get()
 			->leftJoin("PresentationCategory", "PresentationCategory.ID = Presentation.CategoryID")
 			->where("
-				Presentation.SummitID = {$summitID} 
+				SummitEvent.SummitID = {$summitID}
 				AND PresentationCategory.ChairVisible = 1
 				AND Presentation.Status = 'Received'
 				");
