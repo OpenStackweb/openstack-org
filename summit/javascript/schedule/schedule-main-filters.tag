@@ -159,7 +159,7 @@
                             ddl = $('#ddl_tags');
                         }
                         break;
-                        case 'ddl_levels':
+                        case 'levels':
                         {
                             ddl = $('#ddl_levels');
                         }
