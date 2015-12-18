@@ -77,7 +77,7 @@ JS;
                     ->setEmptyString('-- Select one --')
                     ->setSource(Presentation::create()->dbObject('Level')->enumValues())
                 ->end()
-            ->literal('AbstractHelp','<hr/><p>YouTube and other services limit the length of your presentation\'s description. Please provide a shorter, YouTube-friendly summary below.</p>')
+            ->literal('AbstractHelp','<hr/><p>YouTube and other services limit the length of your presentation\'s description. We will take the first 100 characters of your abstract to display in the YouTube description.</p>')
             ->tinyMCEEditor('ShortDescription','Abstract (1000 chars)')
                 ->configure()
                     ->setRows(20)
