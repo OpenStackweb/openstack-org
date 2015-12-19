@@ -148,16 +148,6 @@ class SummitEvent extends DataObject implements ISummitEvent
         return $this->getField('Description');
     }
 
-    public function getShortDescription($length=200){
-        $description = strip_tags($this->getField('Description'));
-
-        if (strlen($description) < $length) return $description;
-
-        $pos=strpos($description, ' ', $length);
-        $short_desc = substr($description,0,$pos ).'...';
-        return $short_desc;
-    }
-
     /**
      * @return ISummitLocation
      */

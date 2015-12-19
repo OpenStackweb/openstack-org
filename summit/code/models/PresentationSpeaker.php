@@ -192,7 +192,7 @@ implements IPresentationSpeaker
     public function MyPresentations($summit_id = null) {
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
         if(is_null($summit)) return false;
-        return $this->Presentations()->filter(array(
+        return Presentation::get()->filter(array(
             'CreatorID' => $this->MemberID,
             'SummitID'  => $summit->ID
         ));
@@ -235,7 +235,7 @@ implements IPresentationSpeaker
 
     public function canAddMorePresentations($summit_id = null)
     {
-        return $this->getPresentationsCount($summit_id) <= MAX_SUMMIT_ALLOWED_PER_USER;
+        return $this->getPresentationsCount($summit_id) < MAX_SUMMIT_ALLOWED_PER_USER;
     }
 
     // return all presentations for this speaker plus the one he submitted from edit profile

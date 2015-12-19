@@ -6,8 +6,11 @@
 final class PresentationForm extends BootstrapForm
 {
 
-
     public function __construct($controller, $name, $actions, ISummit $summit) {
+
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+
         parent::__construct(
             $controller, 
             $name, 
@@ -16,6 +19,48 @@ final class PresentationForm extends BootstrapForm
             $this->getPresentationValidator()
         );
 
+        $script = <<<JS
+          var form_validator_{$this->FormName()} = null;
+          (function( $ ){
+
+                $(document).ready(function(){
+                    form_validator_{$this->FormName()} = $('#{$this->FormName()}').validate(
+                    {
+                        ignore:[],
+                        highlight: function(element) {
+                            $(element).closest('.form-group').addClass('has-error');
+                        },
+                        unhighlight: function(element) {
+                            $(element).closest('.form-group').removeClass('has-error');
+                        },
+                        errorElement: 'span',
+                        errorClass: 'help-block',
+                        errorPlacement: function(error, element) {
+                            if(element.parent('.input-group').length) {
+                                error.insertAfter(element.parent());
+                            } else {
+                                error.insertAfter(element);
+                            }
+                        },
+                       invalidHandler: function(form, validator) {
+                            if (!validator.numberOfInvalids())
+                                return;
+                            var element = $(validator.errorList[0].element);
+                            if(!element.is(":visible")){
+                                element = element.parent();
+                            }
+
+                            $('html, body').animate({
+                                scrollTop: element.offset().top
+                            }, 2000);
+                        },
+                    });
+                });
+                // End of closure.
+        }(jQuery ));
+JS;
+
+        Requirements::customScript($script);
     }
 
     protected function getPresentationFields() {
@@ -38,24 +83,28 @@ final class PresentationForm extends BootstrapForm
                     ->setRows(20)
                     ->setColumns(8)
                     ->setMaxCharLimit(1000)
+                    ->setRequired(true)
                 ->end()
             ->tinyMCEEditor('ProblemAddressed','What is the problem or use case you’re addressing in this session? (1000 chars)')
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
                     ->setMaxCharLimit(1000)
+                    ->setRequired(true)
                 ->end()
             ->tinyMCEEditor('AttendeesExpectedLearnt','What should attendees expect to learn? (1000 chars)')
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
                     ->setMaxCharLimit(1000)
+                    ->setRequired(true)
                 ->end()
             ->tinyMCEEditor('SelectionMotive','Why should this session be selected? (1000 chars)')
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
                     ->setMaxCharLimit(1000)
+                    ->setRequired(true)
                 ->end()
             ->literal('PresentationMaterialsTitle','<h3>Please provide any relevant links to additional information, such as code repositories, case studies, papers, blog posts etc. (Up to 5 links)</h3>')
             ->text('PresentationLink[1]','#1')
@@ -64,17 +113,15 @@ final class PresentationForm extends BootstrapForm
             ->text('PresentationLink[4]','#4')
             ->text('PresentationLink[5]','#5')
             ->literal('HR','<hr/>')            
-            ->optionset(
-                'CategoryID',
-                'What is the general topic of the presentation?'                
-            )
+            ->optionset('CategoryID','What is the general topic of the presentation?')
                 ->configure()
                     ->setSource($categorySource)
                 ->end()
             ->text('OtherTopic','Other topic (if one above does not match)')
                 ->configure()
                     ->displayIf('CategoryID')->isEqualTo('other')->end()
-                ->end();
+                ->end()
+            ->hidden('ID','ID');
         return $fields;
     }
 

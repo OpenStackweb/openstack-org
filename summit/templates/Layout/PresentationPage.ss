@@ -8,13 +8,18 @@
                 <div class="presentation-main-panel">
                     <div class="main-panel-section">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-6 col-md-6">
                                 <h2>Presentations</h2>
                             </div>
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-6 col-md-6">
                                 <% if $Top.Summit.isCallForSpeakersOpen && $CurrentMember.SpeakerProfile.canAddMorePresentations($Top.Summit.ID) %>
                                     <a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New Presentation</a>
-                                    <p class="max-presentation-notice">** Speakers are limited to a total of $MaxAllowedPresentations presentations submissions, whether submitted by them or on their behalf.</p>
+                                    <p class="max-presentation-notice">Speakers are limited to a total of $MaxAllowedPresentations presentations submissions, whether submitted by them or on their behalf.</p>
+                                <% else %>
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <strong>Warning!</strong> You reached presentations submissions limit ($MaxAllowedPresentations).
+                                    </div>
                                 <% end_if %>
                             </div>
                         </div>
@@ -26,7 +31,7 @@
                                 <% loop $CurrentMember.SpeakerProfile.MyPresentations($Top.Summit.ID) %>
                                 <tr>
                                     <td class="item-name"><i class="fa fa-file-text-o"></i><a
-                                            href="$EditLink">$Title</a></td>
+                                            href="$EditLink"><% if $Title %>$Title<% else %>$ID<% end_if %></a></td>
                                     <% if $Status %>
                                         <td class="status"><i class="fa fa-tag"></i> $Status</td>
                                     <% else %>

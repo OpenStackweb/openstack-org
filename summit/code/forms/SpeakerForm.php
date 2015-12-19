@@ -27,30 +27,38 @@ class SpeakerForm extends BootstrapForm
                     form_validator_{$this->FormName()} = $('#{$this->FormName()}').validate(
                     {
                         ignore:[],
-                        invalidHandler: function(form, validator) {
-                        if (!validator.numberOfInvalids())
-                            return;
-                        var element = $(validator.errorList[0].element);
-                        if(!element.is(":visible")){
-                            element = element.parent();
-                        }
+                        highlight: function(element) {
+                            $(element).closest('.form-group').addClass('has-error');
+                        },
+                        unhighlight: function(element) {
+                            $(element).closest('.form-group').removeClass('has-error');
+                        },
+                        errorElement: 'span',
+                        errorClass: 'help-block',
+                        errorPlacement: function(error, element) {
+                            if(element.parent('.input-group').length) {
+                                error.insertAfter(element.parent());
+                            } else {
+                                error.insertAfter(element);
+                            }
+                        },
+                       invalidHandler: function(form, validator) {
+                            if (!validator.numberOfInvalids())
+                                return;
+                            var element = $(validator.errorList[0].element);
+                            if(!element.is(":visible")){
+                                element = element.parent();
+                            }
 
-                        $('html, body').animate({
-                            scrollTop: element.offset().top
-                        }, 2000);
-                    },
-                    errorPlacement: function(error, element) {
-                        if(!element.is(":visible")){
-                            element = element.parent();
-                        }
-                        error.insertAfter(element);
-                    }
+                            $('html, body').animate({
+                                scrollTop: element.offset().top
+                            }, 2000);
+                        },
                     });
                 });
                 // End of closure.
         }(jQuery ));
 JS;
-
         Requirements::customScript($script);
     }
 
@@ -108,7 +116,7 @@ JS;
             ->text('PresentationLink[3]','#3')
             ->text('PresentationLink[4]','#4')
             ->text('PresentationLink[5]','#5')
-            ->literal('RecordingAndPublishingLegalAgreement','Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.')
+            ->literal('RecordingAndPublishingLegalAgreement',sprintf('Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.', Summit::ActiveSummit()->Title))
             ->header('Want to be in the Speakers\' Bureau?')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
             ->configure()

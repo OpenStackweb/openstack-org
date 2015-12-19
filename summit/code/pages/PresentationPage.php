@@ -178,18 +178,21 @@ class PresentationPage_Controller extends SummitPage_Controller
     {
 
         $summit = $this->Summit();
+
         if (is_null($summit) || $summit->ID == 0 || !$summit->isCallForSpeakersOpen()) {
             return $this->httpError(403, 'Call for speaker closed!');
         }
 
-        if ($r->param('PresentationID') === 'new') {
+        if ($r->param('PresentationID') === 'new')
+        {
             $presentation = Presentation::create();
             $presentation->SummitID  = $summit->ID;
             $presentation->CreatorID = Member::currentUserID();
             $presentation->Write();
-
             return $this->redirect($presentation->EditLink());
-        } else {
+        }
+        else
+        {
             $presentation = Presentation::get()->byID($r->param('PresentationID'));
         }
 
@@ -685,16 +688,19 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function PresentationForm()
     {
-        $form = PresentationForm::create(
+        $form = PresentationForm::create
+        (
             $this,
             "PresentationForm",
-            FieldList::create(
+            FieldList::create
+            (
                 FormAction::create('savePresentationSummary', 'Save and continue')
             )
         );
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
-            return $form->loadDataFrom($data);
+            $form->loadDataFrom($data);
+            return $form;
         }
 
         // ugh...
@@ -727,6 +733,7 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function AddSpeakerForm()
     {
+        $summit = $this->Summit();
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
@@ -735,23 +742,23 @@ class PresentationPage_ManageRequest extends RequestHandler
                 'Me' => 'Add yourself as a speaker to this presentation',
                 'Else' => 'Add someone else'
             ))->setValue('Me'),
-            LiteralField::create('LegalMe', '
+            LiteralField::create('LegalMe', sprintf('
             <div id="legal-me" style="display: none;">
              <label>
-                Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
             </label>
-            </div>'),
+            </div>', $summit->Title)),
             EmailField::create('EmailAddress',
-                "To add another person as a speaker, you will need their email adddress. (*)")
+                "To add another person as a speaker, you will need their email address. (*)")
                 ->displayIf('SpeakerType')
                 ->isEqualTo('Else')
                 ->end(),
-            LiteralField::create('LegalOther', '
+            LiteralField::create('LegalOther', sprintf('
             <div id="legal-other" style="display: none;">
              <label>
-                Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
             </label>
-            </div>')
+            </div>', $summit->Title))
 
         );
 
@@ -804,22 +811,21 @@ class PresentationPage_ManageRequest extends RequestHandler
 
         // This should never happen
         if (!isset($data['CategoryID'])) {
+            $form->sessionMessage('Please choose a topic from the list, or specify a custom topic in the Other Topic field.', 'bad');
             return $this->redirectBack();
         }
 
         if (!$data['CategoryID'] && !$data['OtherTopic']) {
-            $form->addErrorMessage('CategoryID',
-                'Please choose a topic from the list, or specify a custom topic in the Other Topic field.', 'bad');
-
+            $form->sessionMessage('Please choose a topic from the list, or specify a custom topic in the Other Topic field.', 'bad');
             return $this->redirectBack();
         }
         if ($data['CategoryID'] == 'other' && !$data['OtherTopic']) {
-            $form->addErrorMessage('OtherTopic', 'Please specify a topic.', 'bad');
-
+            $form->sessionMessage('Please specify a topic.', 'bad');
             return $this->redirectBack();
         }
 
         $new = $this->presentation->isNew();
+
         $form->saveInto($this->presentation);
 
         if ($new) {
@@ -912,7 +918,6 @@ class PresentationPage_ManageRequest extends RequestHandler
 
         if (!$email) {
             $form->sessionMessage('Please specify an email address', 'bad');
-
             return $this->redirectBack();
         }
 
@@ -939,6 +944,12 @@ class PresentationPage_ManageRequest extends RequestHandler
                     $member->write();
                 }
             }
+        }
+
+        if(!$speaker->canAddMorePresentations($this->Summit()->ID))
+        {
+            $form->sessionMessage(sprintf("You reached the maximun allowed # of presentations (%s) for speaker %s", MAX_SUMMIT_ALLOWED_PER_USER, $speaker->getName()), 'bad');
+            return $this->redirectBack();
         }
 
         $speaker->Presentations()->add($this->presentation->ID);
@@ -1260,9 +1271,6 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         $member = $this->speaker->Member();
         if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
-        }
-        if ($this->isMe()) {
-            return $this->parent->getParent()->redirect($this->Link('legal'));
         }
 
         return $this->parent->getParent()->redirect($this->parent->Link('speakers'));

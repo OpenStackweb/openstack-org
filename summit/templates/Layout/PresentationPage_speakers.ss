@@ -22,7 +22,7 @@
                     </div>
 
                     <% if $Presentation.Speakers %>
-                        <h3>Speakers included in this presenation</h3>
+                        <h3>Speakers included in this presentation</h3>
                         <table class="table">
                             <tbody>
                                 <% loop $Presentation.Speakers %>
