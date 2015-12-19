@@ -7,9 +7,9 @@
 			<div class="col-lg-9 col-md-9">
 				<div class="presentation-main-panel">
 					<div class="main-panel-section">
-						<h2>Confirm Your Submission Details</h2>
+						<h2>One Last Step - Confirm Your Submission</h2>
 						<p class="panel-note">Look over everything below to make sure it's to your liking.</p>
-						<p class="panel-note"><strong>IMPORTANT!</strong> You MUST push "CONFIRM MY SUBMISSION to complete the process.</p>
+						<p class="panel-note"><strong>IMPORTANT!</strong> You MUST push "CONFIRM MY SUBMISSION" to complete the process.</p>
 					</div>
 										
 					<div class="panel-buttons">
