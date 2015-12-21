@@ -153,6 +153,7 @@ function initAdminGoogleMaps() {
                                                 var lng = results[0].geometry.location.lng();
 
                                                 setLatLng(lat, lng, true);
+                                                console.log(' address '+newAddress+' lat '+lat+' lng '+lng)
                                             }
                                         }
                                         else

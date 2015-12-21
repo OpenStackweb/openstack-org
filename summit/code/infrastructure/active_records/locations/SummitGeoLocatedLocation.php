@@ -24,8 +24,8 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
         'State'           => 'Text',
         'Country'         => 'Text',
         'WebSiteUrl'      => 'Text',
-        'Lng'             => 'Decimal',
-        'Lat'             => 'Decimal',
+        'Lng'             => 'Text',
+        'Lat'             => 'Text',
         'DisplayOnSite'   => 'Boolean',
         'DetailsPage'     => 'Boolean',
         'LocationMessage' => 'Text',
@@ -189,6 +189,8 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
                     'state'    => "State",
                     'country' => "Country"
                 ),
+                'start_lat' => $this->Lat,
+                'start_lng' => $this->Lng,
             ))
         ));
 

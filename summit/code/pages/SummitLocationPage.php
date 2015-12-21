@@ -363,13 +363,22 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         $this->top_section = 'full';
 
         $lat = $this->HostCityLat;
-        if (empty($lat)) {
-            $lat = '49.287141';
-        }
         $lng = $this->HostCityLng;
-        if (empty($lng)) {
-            $lng = '-123.116976';
+        if(empty($lat) || empty($lng))
+        {
+            $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();
+            $venue = $summit->getMainVenue();
+            if(!is_null($venue))
+            {
+                $lat = $venue->Lat;
+                $lng = $venue->Lng;
+            }
+            else
+            {
+                $lat = $lng = 0.0;
+            }
         }
+
         Requirements::customScript("
         var settings = {
              host_city_lat: {$lat},

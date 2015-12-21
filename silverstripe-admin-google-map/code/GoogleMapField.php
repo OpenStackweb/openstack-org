@@ -16,7 +16,7 @@ class GoogleMapField extends LiteralField
             "lat_field" => "Form_ItemEditForm_Lat",
             "tab" => "Root_Location",
             "address_field" => "Address",
-            "map_zoom" => 10,
+            "map_zoom" => 18,
             "start_lat" => "51.508515",
             "start_lng" => "-0.125487"
         );

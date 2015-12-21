@@ -39,12 +39,19 @@ var infowindow = new google.maps.InfoWindow({
     maxWidth: 400
 });
 
-var marker;
-var markers = new Array();
+var marker           = null;
+var markers          = new Array();
 var location_markers = [];
-var iconCounter = 0;
+var iconCounter      = 2;
 
 $(document).ready(function () {
+
+    if(settings.host_city_lat == '' || settings.host_city_lng == '' && locations.length > 0)
+    {
+        var first_location = locations[0];
+        settings.host_city_lat =  first_location.lat;
+        settings.host_city_lng =  first_location.lng;
+    }
 
     map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 16,
@@ -65,44 +72,47 @@ $(document).ready(function () {
         var id = parseInt($(this).attr('data-location-id'));
         var marker_pos = location_markers[id];
         console.log(marker_pos);
-        google.maps.event.trigger(markers[marker_pos], 'click');
+        var marker = markers[marker_pos]
+        marker.set('pos', marker_pos);
+        google.maps.event.trigger(marker, 'click');
         //return false;
     });
 
     // Add the markers and infowindows to the map
     for (var i = 0; i < locations.length; i++) {
         var location = locations[i];
+        var icon = null;
         if(location.type =='SummitAirport'){
-            iconCounter = 1;
+            icon =  icons[1];
         }
         else if(location.type == 'SummitVenue'){
-            iconCounter = 0;
+            icon = icons[0];
         }
-        else {
-            var min = 2;
-            var max = icons.length;
-            iconCounter = Math.floor(Math.random() * (max - min + 1)) + min
+        else
+        {
+            iconCounter = iconCounter+1 > icons.length ? 2 : iconCounter;
+            icon = icons[iconCounter];
+            iconCounter++;
         }
 
+        console.log(location.name+' lat '+location.lat+' lng '+location.lng);
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(location.lat, location.lng),
             map: map,
-            icon : icons[iconCounter],
+            icon : icon,
             shadow: shadow
         });
 
         location_markers[location.id] = i;
         markers.push(marker);
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infowindow.setContent(location.name+' '+location.description+' '+location.address);
-                infowindow.open(map, marker);
-            }
-        })(marker, i));
-
+        google.maps.event.addListener(marker, 'click', function() {
+            var marker_pos = this.get('pos');
+            var location   = locations[marker_pos];
+            infowindow.setContent(location.name+' '+location.description+' '+location.address);
+            infowindow.open(map, this);
+        });
     }
-
 });
 
 
