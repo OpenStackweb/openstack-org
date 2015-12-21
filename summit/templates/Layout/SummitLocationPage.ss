@@ -311,28 +311,18 @@
     </div>
 </div>
 <% end_if %>
-<div class="about-city-row austin">
+<div class="about-city-row austin" style="background: rgba(0, 0, 0, 0) url('{$AboutTheCityBackgroundImageUrl}') no-repeat scroll left top / cover ">
     <p>
         Legendary music, epic BBQ, history, food trucks and neon...
     </p>
     <h1>Come Join Us In Austin</h1>
+    <a href="{$AboutTheCityBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$AboutTheCityBackgroundImageHero}" target="_blank"><i class="fa fa-info-circle"></i></a>
 </div>
 <% if Locals %>
 <div class="white locals-row" id="locals">
     <div class="container">
         $Locals
     </div>
-</div>
-<% end_if %>
-<% if AboutTheCity %>
-<div class="about-city-row" style="background: rgba(0, 0, 0, 0) url('{$AboutTheCityBackgroundImageUrl}') no-repeat scroll left top / cover ">
-    $AboutTheCity
-    <p>
-        <% if $Summit.RegistrationLink %>
-            <a href="$Summit.RegistrationLink" class="btn register-btn-lrg">Register Now</a>
-        <% end_if %>
-    </p>
-    <a href="{$AboutTheCityBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$AboutTheCityBackgroundImageHero}" target="_blank"><i class="fa fa-info-circle"></i></a>
 </div>
 <% end_if %>
     <!-- End Other Hotels Modal -->
