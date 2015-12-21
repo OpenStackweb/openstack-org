@@ -24,14 +24,12 @@
                     Hotels &amp; Airport
                 </a>
             </li>
-            <% if GettingAround  %>
             <li>
                 <a href="/summit/tokyo-2015/tokyo-and-travel/#getting-around">
                     <i class="fa fa-map"></i>
                     Campus Maps
                 </a>
             </li>
-            <% end_if %>
             <% if TravelSupport  %>
                 <li>
                     <a href="#travel-support">
@@ -234,7 +232,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 <% if TravelSupport  %>
     <div class="light" id="travel-support">
