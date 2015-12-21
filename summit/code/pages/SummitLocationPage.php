@@ -452,7 +452,7 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         }
 
         $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();
-        $locations = $summit->Locations()->sort('Order');
+        $locations = $summit->Locations()->where(" ClassName <> 'SummitVenueRoom' ")->sort('Order');
 
 
         $map_locations = array();
