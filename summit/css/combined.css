@@ -3653,3 +3653,33 @@ h3.schedule-select-title {
 {
   height: 150px !important;
 }
+
+.submit-steps {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #C1C1C1; 
+    margin-bottom: 45px;   
+}
+
+.submit-steps li {
+    background-color: white;
+    list-style-type: none;
+    padding: 15px 20px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.submit-steps li:last-child {
+    border-bottom: none;
+}
+
+.submit-steps li span {
+    background: #154DA4;
+    padding: 2px 8px;
+    color: white;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.submit-button-area {
+    margin-bottom: 40px;
+}
