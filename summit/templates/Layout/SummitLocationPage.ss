@@ -167,7 +167,7 @@
                 <div class="col-sm-4 col-sm-push-4 hotel-block">
                     <h3>$Name</h3>
                     <p>
-                        $Address1<br>$Address2
+                       $Address
                     </p>
                     <p>
                         <a href="$Top.Link#map-canvas" class="marker-link"  data-location-id="{$ID}"  alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
