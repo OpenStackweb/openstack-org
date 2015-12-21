@@ -241,56 +241,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
-                <h1>Visa Information</h1>
-                <div class="visa-steps-wrapper">
-                    <h3>Get your Tokyo Summit Visa in 5 Steps</h3>
-                    <h5><i class="fa fa-exclamation-circle"></i>The entire visa process can take up to 5 weeks, so <strong>apply now</strong>.</h5>
-                    <div class="visa-steps-row">
-                        <div class="steps-count">
-                            <div class="visa-step">
-                                <img src="/themes/openstack/images/summit/tokyo/visa-steps/1.png" alt="">
-                                <p>
-                                    Start now: Book your hotel, plane ticket &amp; summit registration
-                                </p>
-                            </div>
-                            <div class="visa-step">
-                                <img src="/themes/openstack/images/summit/tokyo/visa-steps/2.png" alt="">
-                                <p>
-                                    Complete the <a href="https://openstack.formstack.com/forms/visa_request_form" target="_blank">visa request form here</a>
-                                </p>
-                            </div>
-                            <div class="visa-step">
-                                <img src="/themes/openstack/images/summit/tokyo/visa-steps/3.png" alt="">
-                                <p>
-                                    Receive your visa invitation documents in the mail
-                                </p>
-                            </div>
-                            <div class="visa-step">
-                                <img src="/themes/openstack/images/summit/tokyo/visa-steps/4.png" alt="">
-                                <p>
-                                    Apply for your visa at your Japanese embassy or consulate
-                                </p>
-                            </div>
-                            <div class="visa-step">
-                                <img src="/themes/openstack/images/summit/tokyo/visa-steps/5.png" alt="">
-                                <p>
-                                    Wait for your visa to be issued, which may take up to 10 business days and pick it up from the embassy.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="visa-docs">
-                            <h4>Bring these documents when you apply for your visa:</h4>
-                            <ul>
-                                <li>Valid passport.</li>
-                                <li>Two 45mm x 45mm photos taken within the last 6 months.</li>
-                                <li>Copies of hotel &amp; flight reservations from your travel agent.</li>
-                                <li>Summit invitation.</li>
-                                <li>Documentation showing permission to travel from your company.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
                 $VisaInformation
             </div>
         </div>
