@@ -196,7 +196,7 @@
                     <div class="row seven-cols">
                         <div class="col-xs-1 sessions-first-col"></div>
                         <div class="col-xs-1">
-                            <a href="#/" class="session-chart-category nine">
+                            <a href="#ops" class="session-chart-category nine">
                                 Ops Summit
                             </a>
                         </div>
@@ -220,7 +220,7 @@
                             </a>
                         </div>
                         <div class="col-xs-4">
-                            <a href="#/" class="session-chart-category twelve">
+                            <a href="#design" class="session-chart-category twelve">
                                 Design Summit
                             </a>
                         </div>
@@ -544,6 +544,63 @@
                             <div class="session-list-text">
                                 <p>
                                     At the OpenStack Summit Austin, we're focused on education and training, with more hands-on workshops for operators and application directors than any ever before. We'll also offer the new Certified OpenStack Administrator exam on-site. Workshops will require an RSVP and pre-requisites from your instructor. Bring your laptop and walk away with OpenStack skills. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                </div>
+            </div>
+            <!-- End Category -->
+            
+            <!-- Start Category -->
+            <div class="col-sm-6">
+                <div class="session-wrapper" id="handson">
+                    <h3>Ops Summit</h3>
+                    <div class="session-list-tracks">
+                    </div>
+                    <div class="session-summit-days">
+                        <div class="session-tracks-title">Austin Summit Days</div>
+                        <p>
+                            Monday
+                        </p>
+                    </div>
+                    <div class="session-list-wrapper">
+                        <div class="session-tracks-title">Description</div>
+                        <div class="session-list-description">
+                            <div class="session-list-text">
+                                <p>
+                                    The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices, ideas and give feedback in the development process. It is not a classic conference track with speakers and presentations, but has a round table/working session feel. The agenda is collaboratively set by the operators community.			
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                </div>
+            </div>
+            <!-- End Category -->
+        </div>
+
+        <!-- Row 4 -->
+        <div class="row session-list-row">
+            <!-- Start Category -->
+            <div class="col-sm-6">
+                <div class="session-wrapper" id="handson">
+                    <h3>Design Summit</h3>
+                    <div class="session-list-tracks">
+                    </div>
+                    <div class="session-summit-days">
+                        <div class="session-tracks-title">Austin Summit Days</div>
+                        <p>
+                            Tuesday, Wednesday, Thursday, Friday
+                        </p>
+                    </div>
+                    <div class="session-list-wrapper">
+                        <div class="session-tracks-title">Description</div>
+                        <div class="session-list-description">
+                            <div class="session-list-text">
+                                <p>
+                                    At Design Summits the upstream developers community gathers to discuss requirements for the next software release, debate the implementation details and connect with other community members about cross-project issues. It is not a classic conference track with speakers and presentations. The agenda is collaboratively reviewed and then scheduled by the project technical leads (PTLs). 
                                 </p>
                             </div>
                         </div>
