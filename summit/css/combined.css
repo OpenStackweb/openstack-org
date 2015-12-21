@@ -108,14 +108,15 @@ body.summit-landing-body {
 
 a.register-btn-lrg, .register-btn-lrg {
   border-radius: 2px;
-  background: #F5A623;
+  background: #DA422F;
   color: white;
   text-transform: uppercase;
+  font-size: 1.1em;
   font-weight: 400;
   padding: 12px 30px; }
 
 a.register-btn-lrg:hover, .register-btn-lrg:hover {
-  background: #e79b23;
+  background: #A51B1B;
   color: white; }
 
 a.register-btn-lrg:focus, .register-btn-lrg:focus {
@@ -132,6 +133,11 @@ a.register-btn-lrg.soon, .register-btn-lrg.soon {
 
 a.register-btn-lrg i, .register-btn-lrg i {
   margin-left: 20px;
+}
+
+a.register-btn-lrg:hover, .register-btn-lrg:hover {
+    background: #A51B1B;
+    color: white;
 }
 
 a.register-btn-lrg.soon:hover, .register-btn-lrg.soon:hover {
@@ -350,6 +356,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
 
 .summit-hero-wrapper .landing-action .register-btn-lrg {
   width: 270px;
+  height: 38px;
   padding: 7px;
   margin: 0;
 }
@@ -489,7 +496,9 @@ a.past-summit:hover:after, a.future-summit:hover:after {
 .hero-tab-wrapper .nav-tabs > li a {
     width: 100%;
     padding: 15px 25px;
-    color: white;
+    border-width: 0 1px 0 0;
+    border-right: 1px solid rgba(113, 204, 254, 0.2);
+    color: #71CCFE;
     display: inline-block;
     margin: 0;
 }
@@ -498,18 +507,25 @@ a.past-summit:hover:after, a.future-summit:hover:after {
     margin-right: 0;
     border-width: 0 1px 0 0;
     border-radius: 0;
-    text-transform: uppercase;
 }
 
+.hero-tab-wrapper .nav-tabs > li:first-child a {
+   border-left: 1px solid rgba(113, 204, 254, 0.2); }
+
+.hero-tab-wrapper .nav-tabs > li.current, .hero-tab-wrapper .nav-tabs > li.current:hover {
+    background: white; }
+
 .hero-tab-wrapper .nav-tabs > li.current a, .hero-tab-wrapper .nav-tabs > li.current a:hover {
+  color: #2a4d67;
   font-weight: 600;
-  background: #132539;
+  border-color: white;
+  background: white;
 }
 
 .hero-tab-wrapper .nav-tabs {
   text-align: center;
   border-bottom: 0;
-  background-color: #224066;
+  background-color: rgba(34, 91, 160, 0.3);
 }
 
 .hero-tab-wrapper .nav-tabs > li > a:hover, .hero-tab-wrapper .nav-tabs > li > a:focus {
