@@ -617,6 +617,14 @@ final class Summit extends DataObject implements ISummit
     }
 
     /**
+     * @return ISummitVenue
+     */
+    public function getMainVenue()
+    {
+        return SummitVenue::get()->filter(array('SummitID' => $this->ID, 'IsMain'=>true))->first();
+    }
+
+    /**
      * @param ISummitVenue $venue
      * @return void
      */

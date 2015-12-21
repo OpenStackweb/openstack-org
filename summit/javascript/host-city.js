@@ -1,64 +1,46 @@
-// City nav active on scroll
-
-
-$(document).ready(function () {
-    var num = $('#nav-bar').offset().top;
-    //$(document).on("scroll", onScroll);
-
-    //smoothscroll
-    $('a[href^="#"]').on('click', function (e) {
+$(document).ready(function() {
+    $(document).on("scroll", onScroll);
+    $('a[href^="#"]').on("click", function(e) {
         e.preventDefault();
         $(document).off("scroll");
-        $('a').each(function () {
-            $(this).removeClass('active');
-        })
-        $(this).addClass('active');
-
+        $("a").each(function() {
+            $(this).removeClass("active")
+        });
+        $(this).addClass("active");
         var target = this.hash,
             menu = target;
         $target = $(target);
-
         var detla = 0;
-
-        // figure out how much room to allow for nav bar
-        if ($('#nav-bar').hasClass('fixed')) {
-            detla = 60;
+        if ($("#nav-bar").hasClass("fixed")) {
+            detla = 60
         } else {
-            detla = 170;
+            detla = 170
         }
-
-        $('html, body').stop().animate({
-            'scrollTop': $target.offset().top - detla
-        }, 500, 'swing', function () {
+        $("html, body").stop().animate({
+            scrollTop: $target.offset().top - detla
+        }, 500, "swing", function() {
             window.location.hash = target;
-            $(document).on("scroll", onScroll);
-        });
-    });
-
-    $(document).on("scroll", onScroll);
-
-
-    $(window).bind('scroll', function () {
-        if ($(window).scrollTop() > num) {
-            $('.city-nav.city').addClass('fixed');
-        } else {
-            $('.city-nav.city').removeClass('fixed');
-        }
-    });
+            $(document).on("scroll", onScroll)
+        })
+    })
 });
 
 function onScroll(event) {
     var scrollPos = $(document).scrollTop();
-    $('.city-nav a').each(function () {
-        var currLink = $(this);
-        var refElement = $(currLink.attr("href"));
-        if (refElement.position().top - 60 <= scrollPos && refElement.position().top + refElement.outerHeight() > scrollPos) {
-            $('.city-nav ul li a').removeClass("active");
-            currLink.addClass("active");
-        }
-        else {
-            currLink.removeClass("active");
-        }
-    });
+    $(".city-nav a").each(function() {
+
+    })
 }
 
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+
+var num = 980;
+$(window).bind("scroll", function() {
+    if ($(window).scrollTop() > num) {
+        $(".city-nav.city").addClass("fixed")
+    } else {
+        $(".city-nav.city").removeClass("fixed")
+    }
+});

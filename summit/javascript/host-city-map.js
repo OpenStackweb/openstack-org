@@ -1,7 +1,7 @@
 // City nav active on scroll
 
 // Setup the different icons and shadows
-var iconURLPrefix = 'http://openstack.org/summit/images/mapicons/';
+var iconURLPrefix = '//openstack.org/summit/images/mapicons/';
 
 var icons = [
     iconURLPrefix + 'venue.png',
@@ -28,8 +28,6 @@ var icons = [
     iconURLPrefix + '20.png'
 ];
 
-var icons_length = icons.length;
-
 var shadow = {
     anchor: new google.maps.Point(15, 33),
     url: iconURLPrefix + 'shadow50.png'
@@ -45,6 +43,7 @@ var marker;
 var markers = new Array();
 var location_markers = [];
 var iconCounter = 0;
+
 $(document).ready(function () {
 
     map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -73,15 +72,15 @@ $(document).ready(function () {
     // Add the markers and infowindows to the map
     for (var i = 0; i < locations.length; i++) {
         var location = locations[i];
-        if(location.type =='Airport'){
+        if(location.type =='SummitAirport'){
             iconCounter = 1;
         }
-        else if(type == 'Venue'){
+        else if(location.type == 'SummitVenue'){
             iconCounter = 0;
         }
         else {
             var min = 2;
-            var max = icons.lenght;
+            var max = icons.length;
             iconCounter = Math.floor(Math.random() * (max - min + 1)) + min
         }
 
@@ -91,6 +90,7 @@ $(document).ready(function () {
             icon : icons[iconCounter],
             shadow: shadow
         });
+
         location_markers[location.id] = i;
         markers.push(marker);
 

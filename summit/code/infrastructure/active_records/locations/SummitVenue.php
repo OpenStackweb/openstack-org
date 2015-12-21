@@ -17,6 +17,7 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
 
     private static $db = array
     (
+        'IsMain' => 'Boolean',
     );
 
     private static $has_many = array
@@ -74,7 +75,7 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
-
+        $f->addFieldsToTab('Root.Main', new CheckboxField('IsMain', 'Is Main?'));
         $map_field = new UploadField('Map','Map');
         $map_field->setAllowedMaxFileNumber(1);
         $map_field->setFolderName(sprintf('summits/%s/locations/venues/maps/', $this->SummitID));

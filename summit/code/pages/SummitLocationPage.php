@@ -357,7 +357,6 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         'details'
     );
 
-
     public function init()
     {
 
@@ -380,17 +379,12 @@ class SummitLocationPage_Controller extends SummitPage_Controller
 
         parent::init();
 
-        if (!$this->CampusGraphic) {
-            Requirements::javascript('https://maps.googleapis.com/maps/api/js?v=3.exp');
-        }
         Requirements::javascript("summit/javascript/host-city.js");
-        if (!$this->CampusGraphic) {
+        if (empty($this->CampusGraphic)) {
+            Requirements::javascript('https://maps.googleapis.com/maps/api/js?v=3.exp');
             Requirements::javascript("summit/javascript/host-city-map.js");
-        }
-        if (!$this->CampusGraphic) {
             Requirements::customScript($this->MapScript());
         }
-
     }
 
     public function details(SS_HTTPRequest $r)
@@ -438,16 +432,14 @@ class SummitLocationPage_Controller extends SummitPage_Controller
     {
         $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();
         $airports = $summit->getAirports();
-
         return new ArrayList($airports);
     }
 
     public function Venue()
     {
         $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();
-        $venues = $summit->getVenues();
-
-        return new ArrayList($venues);
+        $venue = $summit->getMainVenue();
+        return new ArrayList(array($venue));
     }
 
     public function MapScript()
@@ -460,7 +452,7 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         }
 
         $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();
-        $locations = $summit->Locations()->where("ClassName = 'SummitHotel' OR  ClassName = 'SummitAirport' " . $extra_filter)->sort('Order');
+        $locations = $summit->Locations()->sort('Order');
 
 
         $map_locations = array();
