@@ -84,10 +84,12 @@
         <a href="/summit/austin-2016/austin-and-travel/">Austin & Travel</a>
     </li>
 
-    
-    
     <li class="">
         <a href="/summit/austin-2016/sponsors/">Sponsor The Summit</a>
+    </li>    
+    
+    <li class="">
+        <a href="/summit/austin-2016/call-for-speakers/">Call for Speakers</a>
     </li>
     
     <li class="current">
