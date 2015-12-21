@@ -1,0 +1,19 @@
+<?php
+
+/* 
+   Static categories page for Austin
+*/
+
+class SummitStaticCategoriesPage extends SummitPage {
+
+}
+
+
+class SummitStaticCategoriesPage_Controller extends SummitPage_Controller {
+
+  public function init() {
+        parent::init();
+        Requirements::clear();
+  }
+
+}
