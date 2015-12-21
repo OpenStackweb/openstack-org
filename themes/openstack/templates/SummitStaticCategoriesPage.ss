@@ -559,7 +559,7 @@
             
             <!-- Start Category -->
             <div class="col-sm-6">
-                <div class="session-wrapper" id="handson">
+                <div class="session-wrapper" id="ops">
                     <h3>Ops Summit</h3>
                     <div class="session-list-tracks">
                     </div>
@@ -589,7 +589,7 @@
         <div class="row session-list-row">
             <!-- Start Category -->
             <div class="col-sm-6">
-                <div class="session-wrapper" id="handson">
+                <div class="session-wrapper" id="design">
                     <h3>Design Summit</h3>
                     <div class="session-list-tracks">
                     </div>
