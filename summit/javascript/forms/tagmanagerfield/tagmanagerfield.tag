@@ -2,7 +2,7 @@ require('./clicktag.tag')
 <tagmanagerfield>
 
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <p></p>
                 <div class="alert alert-info" role="alert" if={canSelect()}> Please select up to 8 tags that describe your presentation.</div>
                 <div class="alert alert-warning" role="alert" if={!canSelect()}> You have selected the maximum number of tags.</div>
@@ -10,26 +10,66 @@ require('./clicktag.tag')
         </div>
 
         <div class="row">
-        <div class="col-lg-6">
-        <h3>Projects Used</h3>
-        <clicktag label="Nova"></clicktag>
-        <clicktag label="Heat"></clicktag>
-        <clicktag label="Swift"></clicktag>
-        <clicktag label="Horizon"></clicktag>
-        <clicktag label="Magnum"></clicktag>
-        <hr/>
+        <div class="col-lg-9">
+
         <h3>Audience Type</h3>
-        <clicktag label="Enterprise"></clicktag>
-        <clicktag label="Upstream"></clicktag>
         <clicktag label="Architect"></clicktag>
-        <clicktag label="Telco"></clicktag>
-        <clicktag label="App Development"></clicktag>
-        <hr/>
-        <h3>Community</h3>
-        <clicktag label="International"></clicktag>
-        <clicktag label="Women of OpenStack"></clicktag>
-        <clicktag label="Community Building"></clicktag>
-        <clicktag label="Open Development"></clicktag>
+        <clicktag label="Ops"></clicktag>
+        <clicktag label="Telecom"></clicktag>
+        <clicktag label="App Developer"></clicktag>
+        <clicktag label="Upstream"></clicktag>
+        <clicktag label="Enterprise"></clicktag>
+        <clicktag label="CxO"></clicktag>
+        <clicktag label="Startup"></clicktag>
+        <clicktag label="Public Clouds"></clicktag>
+        <clicktag label="Community"></clicktag>
+        <clicktag label="ISV"></clicktag>
+
+        <h3>Speaker</h3>
+        <clicktag label="User Talk"></clicktag>
+        <clicktag label="Project Technical Lead (PTL)"></clicktag>
+        <clicktag label="Upstream Dev"></clicktag>
+        <clicktag label="Women Of OpenStack"></clicktag>
+        <clicktag label="Ambassador"></clicktag>
+        <clicktag label="BOD"></clicktag>
+
+        <h3>OpenStack Projects Mentioned</h3>
+
+        <clicktag label="Astara"></clicktag>
+        <clicktag label="Barbican"></clicktag>
+        <clicktag label="Cinder"></clicktag>
+        <clicktag label="Cloudkitty"></clicktag>
+        <clicktag label="Congress"></clicktag>
+        <clicktag label="Cue"></clicktag>
+        <clicktag label="Designate"></clicktag>
+        <clicktag label="Docs"></clicktag>
+        <clicktag label="Freezer"></clicktag>
+        <clicktag label="Glance"></clicktag>
+        <clicktag label="Heat"></clicktag>
+        <clicktag label="Horizon"></clicktag>
+        <clicktag label="Ironic"></clicktag>
+        <clicktag label="Keystone"></clicktag>
+        <clicktag label="Kolla"></clicktag>
+        <clicktag label="Magnum"></clicktag>
+        <clicktag label="Manila"></clicktag>
+        <clicktag label="Mistral"></clicktag>
+        <clicktag label="Monasca"></clicktag>
+        <clicktag label="Murano"></clicktag>
+        <clicktag label="Neutron"></clicktag>
+        <clicktag label="Nova"></clicktag>
+        <clicktag label="Oslo"></clicktag>
+        <clicktag label="Rally"></clicktag>
+        <clicktag label="Sahara"></clicktag>
+        <clicktag label="Searchlight"></clicktag>
+        <clicktag label="Security"></clicktag>
+        <clicktag label="Senlin"></clicktag>
+        <clicktag label="Solum"></clicktag>
+        <clicktag label="Swift"></clicktag>
+        <clicktag label="Telemetry"></clicktag>
+        <clicktag label="Tripleo"></clicktag>
+        <clicktag label="Trove"></clicktag>
+        <clicktag label="Zaqar"></clicktag>  
+
         <hr>
         <input type="hidden" id="Tags" name="Tags" value="{ opts.value }" />
         </div>
