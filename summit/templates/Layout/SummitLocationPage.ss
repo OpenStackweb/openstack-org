@@ -13,21 +13,21 @@
     <div class="container">
         <ul class="city-nav-list">
             <li>
-                <a href="/summit/austin-2016/tokyo-and-travel/#venue">
-                    <i class="fa fa-plane"></i>
+                <a href="#venue">
+                    <i class="fa fa-map-marker"></i>
                     Venue
                 </a>
             </li>
             <li>
-                <a href="/summit/tokyo-2015/tokyo-and-travel/#hotels">
-                    <i class="fa fa-map-marker"></i>
+                <a href="#hotels">
+                    <i class="fa fa-h-square"></i>
                     Hotels &amp; Airport
                 </a>
             </li>
             <li>
-                <a href="/summit/tokyo-2015/tokyo-and-travel/#getting-around">
-                    <i class="fa fa-map"></i>
-                    Campus Maps
+                <a href="#getting-around">
+                    <i class="fa fa-road"></i>
+                    Getting Around
                 </a>
             </li>
             <% if TravelSupport  %>
