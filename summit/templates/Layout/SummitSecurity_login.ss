@@ -51,9 +51,9 @@
 
 
             <a id="categories"></a>
-            <h2>Proposed Summit Categories</h2>
+            <h2>Proposed Summit Tracks</h2>
 
-            <% loop CurrentSummit.SummitCategories %>
+            <% loop ActiveSummit.Categories %>
             <p>
                 <strong>$Title</strong><br/>
                 $Description
