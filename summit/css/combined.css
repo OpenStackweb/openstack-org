@@ -3683,3 +3683,156 @@ h3.schedule-select-title {
 .submit-button-area {
     margin-bottom: 40px;
 }
+
+
+/*Sessions Landing Page*/
+.sessions-landing-intro {
+  padding: 0 0 40px;
+  text-align: center; }
+  .sessions-landing-intro h1 {
+    margin-bottom: 40px; }
+
+.session-list-row {
+  margin-bottom: 40px; }
+
+.session-wrapper h3 {
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #D4DCE5; }
+
+.session-tracks-title {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  color: #93A3B1;
+  margin-bottom: 5px;
+  font-weight: 600; }
+
+.session-list-tracks {
+  margin-bottom: 10px; }
+  .session-list-tracks ul {
+    margin: 0;
+    padding: 0; }
+    .session-list-tracks ul li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 5px 5px 0;
+      text-transform: uppercase;
+      font-size: 0.85em;
+      color: #30739C;
+      background: #edf2f7;
+      border-radius: 4px;
+      padding: 3px 5px; }
+
+.session-list-wrapper {
+  position: relative; }
+  .session-list-wrapper .session-list-description {
+    margin-bottom: 0;
+    display: block; }
+  .session-list-wrapper .show-session-description-wrapper a.show-session-description {
+    font-size: 0.9em; }
+    .session-list-wrapper .show-session-description-wrapper a.show-session-description:before {
+      content: '[+] View Full '; }
+  .session-list-wrapper.active .session-list-description {
+    display: block;
+    /*max-height: 3000px;*/
+    /*transition: max-height 0.5s ease-in-out;*/ }
+    .session-list-wrapper.active .session-list-description .session-list-text {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: normal;
+      min-width: 0; }
+  .session-list-wrapper.active a.show-session-description:before {
+    content: '[-] Hide Full '; }
+
+.session-summit-days {
+  margin-bottom: 15px; }
+
+a.all-sessions-btn {
+  display: block;
+  max-width: 180px;
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+  padding: 10px 20px;
+  background: #29abe2;
+  border-radius: 4px; }
+  a.all-sessions-btn:hover {
+    text-decoration: none;
+    background: #30739C; }
+
+.sessions-chart {
+  margin: 10px 0 30px;
+  padding: 20px 0 30px;
+  border-top: 1px solid #D4DCE5;
+  border-bottom: 1px solid #D4DCE5; }
+
+.sessions-chart-title {
+  text-transform: uppercase;
+  color: #2A4E68;
+  font-weight: 600;
+  font-size: 0.8em;
+  margin-top: 30px; }
+
+.session-chart-days {
+  border-radius: 4px;
+  border: 1px solid #D4DCE5;
+  color: #2A4E68;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  padding: 3px;
+  margin-bottom: 10px; }
+
+.session-chart-empty {
+  border-radius: 4px;
+  padding: 5px;
+  border: 1px solid #D4DCE5;
+  background: #edf2f7;
+  margin-top: 5px; }
+
+a.session-chart-category {
+  background: #bbb;
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
+  margin-top: 5px;
+  opacity: 0.8;
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  a.session-chart-category:hover {
+    opacity: 1;
+    text-decoration: none; }
+  a.session-chart-category.one {
+    background: #2A4F68; }
+  a.session-chart-category.two {
+    background: #0E1823; }
+  a.session-chart-category.three {
+    background: #30739C; }
+  a.session-chart-category.four {
+    background: #DA432E; }
+  a.session-chart-category.five {
+    background: #A51E22; }
+  a.session-chart-category.six {
+    background: #29AAE2; }
+  a.session-chart-category.seven {
+    background: #69C8C3; }
+  a.session-chart-category.eight {
+    background: #EA614C; }
+  a.session-chart-category.nine {
+    background: #3A90BE; }
+  a.session-chart-category.ten {
+    background: #518B88; }
+  a.session-chart-category.eleven {
+    background: #83A36F; }
+  a.session-chart-category.twelve {
+    background: #5FC332; }
+  a.session-chart-category.thirteen {
+    background: #193C50; }
+
+@media (max-width: 767px) {
+  .sessions-first-col {
+    display: none; } }
+
+/*End Sessions Landing Page*/
