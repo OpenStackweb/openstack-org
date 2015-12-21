@@ -428,6 +428,15 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         return new ArrayList($hotels);
     }
 
+    public function thereIsSummitSessionOnHotel($hotel_id)
+    {
+        $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();
+        $hotel = SummitHotel::get()->byID(intval($hotel_id));
+        if(is_null($hotel)) return false;
+        $venue = SummitVenue::get()->filter(array( 'SummitID' => $summit->ID, 'Name' => $hotel->Name))->first();
+        return !is_null($venue);
+    }
+
     public function Airports()
     {
         $summit = $this->Summit()->ID > 0 ? $this->Summit() : $this->CurrentSummit();

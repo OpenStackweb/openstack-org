@@ -122,7 +122,11 @@
                         $LocationMessage
                     </p>
                 <% end_if %>
-
+                <% if $Top.thereIsSummitSessionOnHotel($ID) %>
+                <p>
+                    <em><i class="fa fa-asterisk"></i> There will be Summit sessions at this hotel.</em>
+                </p>
+                <% end_if %>
                 <p<% if $IsSoldOut %> class="sold-out-hotel" <% end_if%>>
                     <% if $IsSoldOut %>
                         SOLD OUT
