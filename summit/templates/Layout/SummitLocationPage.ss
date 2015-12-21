@@ -202,8 +202,6 @@
         <% end_if %>
     </div>
 </div>
-
-<% if GettingAround  %>
 <div class="blue" id="getting-around">
     <div class="container">
         <div class="row">
@@ -238,7 +236,6 @@
     </div>
 </div>
 </div>
-<% end_if %>
 <% if TravelSupport  %>
     <div class="light" id="travel-support">
         <div class="container">
