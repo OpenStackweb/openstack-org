@@ -185,6 +185,10 @@ class PresentationPage_Controller extends SummitPage_Controller
 
         if ($r->param('PresentationID') === 'new')
         {
+
+            if(Member::currentUser()->getSpeakerProfile()->hasReachPresentationLimitBy($summit->ID))
+                return $this->httpError(403, "You reached presentations submissions limit");
+
             $presentation = Presentation::create();
             $presentation->SummitID  = $summit->ID;
             $presentation->CreatorID = Member::currentUserID();
@@ -913,7 +917,7 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function doAddSpeaker($data, $form)
     {
-        $me = $data['SpeakerType'] == 'Me';
+        $me    = $data['SpeakerType'] == 'Me';
         $email = $me ? Member::currentUser()->Email : $data['EmailAddress'];
 
         if (!$email) {
@@ -946,9 +950,10 @@ class PresentationPage_ManageRequest extends RequestHandler
             }
         }
 
-        if(!$speaker->canAddMorePresentations($this->Summit()->ID))
+        // i am adding other speaker than me
+        if(!$me && $speaker->hasReachPresentationLimitBy($this->Summit()->ID))
         {
-            $form->sessionMessage(sprintf("You reached the maximun allowed # of presentations (%s) for speaker %s", MAX_SUMMIT_ALLOWED_PER_USER, $speaker->getName()), 'bad');
+            $form->sessionMessage(sprintf("You reached the maximun allowed # of presentations (%s) for speaker %s (%s)", MAX_SUMMIT_ALLOWED_PER_USER, $speaker->getName(), $email), 'bad');
             return $this->redirectBack();
         }
 

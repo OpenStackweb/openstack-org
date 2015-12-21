@@ -233,9 +233,9 @@ implements IPresentationSpeaker
        return  $count_mine + $count_others;
     }
 
-    public function canAddMorePresentations($summit_id = null)
+    public function hasReachPresentationLimitBy($summit_id = null)
     {
-        return $this->getPresentationsCount($summit_id) < MAX_SUMMIT_ALLOWED_PER_USER;
+        return ($this->getPresentationsCount($summit_id) >= MAX_SUMMIT_ALLOWED_PER_USER);
     }
 
     // return all presentations for this speaker plus the one he submitted from edit profile

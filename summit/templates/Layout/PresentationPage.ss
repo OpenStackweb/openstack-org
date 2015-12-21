@@ -12,7 +12,7 @@
                                 <h2>Presentations</h2>
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <% if $Top.Summit.isCallForSpeakersOpen && $CurrentMember.SpeakerProfile.canAddMorePresentations($Top.Summit.ID) %>
+                                <% if $Top.Summit.isCallForSpeakersOpen && not $CurrentMember.SpeakerProfile.hasReachPresentationLimitBy($Top.Summit.ID) %>
                                     <a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New Presentation</a>
                                     <p class="max-presentation-notice">Speakers are limited to a total of $MaxAllowedPresentations presentations submissions, whether submitted by them or on their behalf.</p>
                                 <% else %>
