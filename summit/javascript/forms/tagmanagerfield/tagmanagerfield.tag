@@ -31,7 +31,7 @@ require('./clicktag.tag')
         <clicktag label="Upstream Dev"></clicktag>
         <clicktag label="Women Of OpenStack"></clicktag>
         <clicktag label="Ambassador"></clicktag>
-        <clicktag label="BOD"></clicktag>
+        <clicktag label="BoF"></clicktag>
 
         <h3>OpenStack Projects Mentioned</h3>
 
