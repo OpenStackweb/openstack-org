@@ -11,9 +11,12 @@ class SummitStaticAboutPage extends SummitPage {
 
 class SummitStaticAboutPage_Controller extends SummitPage_Controller {
 
-  public function init() {
+    public function init()
+    {
         parent::init();
-        Requirements::clear();
-  }
+        Requirements::block("summit/css/combined.css");
+        Requirements::css("themes/openstack/static/css/combined.css");
+    }
+
 
 }
