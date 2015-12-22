@@ -262,7 +262,7 @@ class SummitPage_Controller extends Page_Controller
     }
 
     public function MainNavClass(){
-        if($this->ClassName === 'SummitOverviewPage')
+        if($this->ClassName === 'SummitOverviewPage' || $this->ClassName === 'SummitStaticAboutPage')
             return 'current';
         else{
             //childs page
