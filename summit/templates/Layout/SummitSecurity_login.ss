@@ -13,14 +13,15 @@
             <p>Here are three steps you should take as a potential speaker:</p>
 
             <ul class="submit-steps">
-                <li><span>1</span> <a href="#categories">Review the list of presentation categories.</a></li>
+                <li><span>1</span> <a href="#categories">Review the list of session tracks.</a></li>
                 <li><span>2</span> <a href="#process">Learn about the selection process.</a></li>
-                <li><span>3</span> <a href="#submit">Sumbit your presentation proposal below. (You can submit up to 5.)</a></li>
+                <li><span>3</span> <a href="#submit">Submit your session proposal below. (Limit of 3 per speaker)</a></li>
+                <li><span>4</span> <a href="summit/austin-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></li>
             </ul>
 
             <hr/>
             <a id="submit"></a>
-            <h2>Submit Your Presentation Proposal</h2>
+            <h2>Submit Your Speaking Proposal</h2>
 
             <div class="row">
 
@@ -28,9 +29,6 @@
                     <div class="presentation-app-login-panel">
                         <h3>Already a member? Log in here</h3>
                         $Form
-                    </div>
-                    <div class="presentation-app-login-panel">
-                        <a href="#" data-toggle="modal" data-target="#speakerModal">Learn About the Selection Process & Track Chairs</a>
                     </div>
                 </div>
 
@@ -51,7 +49,9 @@
 
 
             <a id="categories"></a>
-            <h2>Proposed Summit Tracks</h2>
+            <h2>Summit Tracks</h2>
+
+            <p><a href="summit/austin-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
 
             <% loop ActiveSummit.Categories %>
             <p>

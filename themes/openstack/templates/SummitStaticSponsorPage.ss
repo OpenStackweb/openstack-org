@@ -51,7 +51,7 @@
                                 OpenStack Summit Austin
                             </h1>
                             <div class="landing-action">
-                                <button href="https://openstacksummit2016austin.eventbrite.com" class="btn register-btn-lrg">Register Now</button>
+                                <a href="https://openstacksummit2016austin.eventbrite.com" class="btn register-btn-lrg">Register Now</a>
                             </div>
 <!--                             <div class="inner-countdown-wrapper">
                                 <div class="countdown">
@@ -643,7 +643,7 @@
 
 <!-- End Microsite Navigation -->
                 </ul>
-                <button href="https://openstacksummit2016austin.eventbrite.com" class="btn register-btn-lrg">Register Now</button>
+                <a href="https://openstacksummit2016austin.eventbrite.com" class="btn register-btn-lrg">Register Now</a>
             </nav>
         </div>
     </div>
