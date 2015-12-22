@@ -360,8 +360,6 @@ class SummitLocationPage_Controller extends SummitPage_Controller
     public function init()
     {
 
-        $this->top_section = 'full';
-
         $lat = $this->HostCityLat;
         $lng = $this->HostCityLng;
         if(empty($lat) || empty($lng))
