@@ -298,7 +298,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
 /*End Summit Landing*/
 /*Summit Inner Layout*/
 .summit-hero-wrapper {
-  background: url('/summit/images/summit-vancouver-bkgd.jpg') no-repeat center bottom;
+  background: url('/assets/Uploads/austin-bkgd-lrg.jpg') no-repeat center bottom;
   background-size: cover;
   position: relative;
   text-align: center;
@@ -306,11 +306,11 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   overflow: hidden; }
 
 .summit-hero-wrapper.condensed {
-  background: url('/summit/images/summit-vancouver-bkgd.jpg') no-repeat center center; }
+  background: url('/assets/Uploads/austin-bkgd-lrg.jpg') no-repeat center center; }
 
 @media (max-width: 767px) {
   .summit-hero-wrapper {
-    background: url('/summit/images/summit-vancouver-bkgd.jpg') no-repeat center center; } }
+    background: url('/assets/Uploads/austin-bkgd-lrg.jpg') no-repeat center center; } }
 
 .summit-hero-wrapper h1 {
   color: white;

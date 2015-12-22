@@ -382,13 +382,14 @@ a.future-summit:hover:after {
 .summit-hero-wrapper .landing-action .register-btn-lrg {
   width: 270px;
   height: 38px;
-  padding: 0;
+  padding: 7px;
   margin: 0; }
   .summit-hero-wrapper .landing-action .register-btn-lrg.inactive {
     width: 325px; }
     .summit-hero-wrapper .landing-action .register-btn-lrg.inactive:hover {
       cursor: default;
       background: #DA422F; }
+
 
 .summit-hero-wrapper.condensed .register-btn-lrg {
   width: 130px; }
