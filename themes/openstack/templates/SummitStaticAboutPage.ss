@@ -71,10 +71,9 @@
                     <!-- Microsite Navigation -->
 
 <ul class="nav nav-tabs">
-    <li class="current">
-        <a href="/summit/austin-2016/">About The Summit</a>
-    </li>
-    
+        <li class="current">
+            <a href="/summit/austin-2016/">About The Summit</a>
+        </li>
         <li class="link">
             <a href="/summit/austin-2016/austin-and-travel/">Austin &amp; Travel</a>
         </li>
@@ -90,7 +89,6 @@
         <li class="link">
             <a href="/summit/austin-2016/categories/">Session Categories</a>
         </li>
-    
 </ul>
 
 <!-- End Microsite Navigation -->
@@ -418,24 +416,29 @@
                     <!-- Microsite Navigation -->
 
 <ul class="nav nav-tabs">
-
-    
-    
     <li class="current">
         <a href="/summit/austin-2016/">About The Summit</a>
     </li>
-
-    
-    
-    <li class="">
-        <a href="/summit/austin-2016/sponsors/">Sponsor The Summit</a>
+    <li class="link">
+        <a href="/summit/austin-2016/austin-and-travel/">Austin &amp; Travel</a>
     </li>
 
+    <li class="link">
+        <a href="/summit/austin-2016/sponsors/">Sponsors</a>
+    </li>
+
+    <li class="link">
+        <a href="/summit/austin-2016/call-for-speakers/">Call for Speakers</a>
+    </li>
+
+    <li class="link">
+        <a href="/summit/austin-2016/categories/">Session Categories</a>
+    </li>
 </ul>
 
 <!-- End Microsite Navigation -->
                 </ul>
-                <button href="#" class="btn register-btn-lrg soon">Registration Opening Soon</button>
+                <button href="https://openstacksummit2016austin.eventbrite.com" class="btn register-btn-lrg">Register Now</button>
             </nav>
         </div>
     </div>
