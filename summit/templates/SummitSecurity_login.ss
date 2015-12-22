@@ -23,8 +23,12 @@
                                 $Title
                             </h1>
                             <div class="landing-action">
-                                <button href="#" class="btn register-btn-lrg">Join Us</button>
-                            </div>
+                                <% if $RegistrationLink %>
+                                    <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
+                                <% end_if %>
+                                <% if $ComingSoonBtnText %>
+                                    <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
+                                <% end_if %>                            </div>
                         </div>
                         <% end_with %>
                     </div>
