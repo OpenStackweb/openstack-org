@@ -303,7 +303,7 @@
                     The Summit is about more than great sessions and speakers. Join the OpenStack community with networking events and fantastic nightlife.
                 </p>
                 <p>
-                    <a href="#">Registration Opening Soon</a>
+                    <a href="https://openstacksummit2016austin.eventbrite.com" class="btn register-btn-lrg">Register Now</a>
                 </p>
             </div>
         </div>

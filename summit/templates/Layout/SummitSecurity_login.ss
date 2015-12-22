@@ -10,7 +10,7 @@
         <div class="container">
             <h1>Would you like to speak at the OpenStack Summit?</h1>
 
-            <p>Here are three steps you should take as a potential speaker:</p>
+            <p>Here are four steps you should take as a potential speaker:</p>
 
             <ul class="submit-steps">
                 <li><span>1</span> <a href="#categories">Review the list of session tracks.</a></li>
