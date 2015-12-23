@@ -20,10 +20,10 @@
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: fixed;
+    position: absolute;
     left: 250px;
-    width: 0; /* disini agar ketika di kecilkan tidak hilang semua default 0*/
-    height: 100%;
+    width: 0;
+    height: 85vh;
     margin-left: -250px;
     overflow-y: auto;
     background: #000;
@@ -32,15 +32,22 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+
+.breadcrumb
+{
+}
+
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
 
 #page-content-wrapper {
-    width: 100%;
+    width: 85%;
     position: absolute;
-    padding: 15px;
-    height: 100%;
+    left:260px;
+    height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -129,8 +136,6 @@
     }
 
     #page-content-wrapper {
-        padding: 20px;
-        position: relative;
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;

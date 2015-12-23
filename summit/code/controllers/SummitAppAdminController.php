@@ -18,10 +18,10 @@ class SummitAppAdminController extends Page_Controller
     public function init()
     {
         parent::init();
+        if(!Permission::check('ADMIN')) return Security::permissionFailure($this);
         Requirements::css('themes/openstack/css/chosen.css');
         Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
         Requirements::css('summit/css/summit-admin.css');
-
         Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
         Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
@@ -29,7 +29,8 @@ class SummitAppAdminController extends Page_Controller
 
     private static $url_segment = 'summit-admin';
 
-    private static $allowed_actions = array(
+    private static $allowed_actions = array
+    (
         'directory',
         'dashboard',
         'publishedEvents',
@@ -40,18 +41,21 @@ class SummitAppAdminController extends Page_Controller
         'ticketTypes',
         'attendees',
         'editSummit',
+        'scheduleView',
     );
 
-    private static $url_handlers = array (
-        '$SummitID!/dashboard' => 'dashboard',
-        '$SummitID!/events/published' => 'publishedEvents',
-        '$SummitID!/events/unpublished' => 'pendingEvents',
+    private static $url_handlers = array
+    (
+        '$SummitID!/dashboard'                                       => 'dashboard',
+        '$SummitID!/events/published'                                => 'publishedEvents',
+        '$SummitID!/events/schedule'                                 => 'scheduleView',
+        '$SummitID!/events/unpublished'                              => 'pendingEvents',
         '$SummitID!/events/presentation-lists/$PresentationListId!'  => 'editPresentationList',
-        '$SummitID!/events/presentation-lists'  => 'presentationLists',
-        '$SummitID!/events/$EventID!'  => 'editEvent',
-        '$SummitID!/tickets'  => 'ticketTypes',
-        '$SummitID!/attendees'  => 'attendees',
-        '$SummitID!/edit'  => 'editSummit'
+        '$SummitID!/events/presentation-lists'                       => 'presentationLists',
+        '$SummitID!/events/$EventID!'                                => 'editEvent',
+        '$SummitID!/tickets'                                         => 'ticketTypes',
+        '$SummitID!/attendees'                                       => 'attendees',
+        '$SummitID!/edit'                                            => 'editSummit',
     );
 
     /**
@@ -306,5 +310,12 @@ class SummitAppAdminController extends Page_Controller
         return $this->redirectBack();
     }
 
+    public function scheduleView(SS_HTTPRequest $request)
+    {
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-schedule.css');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        return $this->getViewer('scheduleView')->process($this);
+    }
 
 }
