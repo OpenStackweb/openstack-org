@@ -305,41 +305,39 @@
             <% end_if %>
             <% if $SortedAddOns %>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-push-2">
-                            <h5 class="section-title">Sponsorship Add-Ons Available <span>(prices in USD)</span></h5>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-push-2">
+                        <h5 class="section-title">Sponsorship Add-Ons Available <span>(prices in USD)</span></h5>
                     </div>
-                    <div class="table-responsive sponsor-table">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Add-On Package</th>
-                                <th>Cost</th>
-                                <th>Available</th>
-                            </tr>
-                            </thead>
-                            <tbody id="add_ons">
+                </div>
+                <div class="table-responsive sponsor-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Add-On Package</th>
+                            <th>Cost</th>
+                            <th>Available</th>
+                        </tr>
+                        </thead>
+                        <tbody id="add_ons">
 
-                                <% loop $SortedAddOns %>
-                                <tr id="addon_{$ID}" class="sponsor_add_on <% if $SoldOut %>sold-out<% end_if %>">
-                                    <td>$Title</td>
-                                    <td>$Cost</td>
-                                    <% if $SoldOut %>
-                                        <td>Sold Out</td>
+                            <% loop $SortedAddOns %>
+                            <tr id="addon_{$ID}" class="sponsor_add_on <% if $SoldOut %>sold-out<% end_if %>">
+                                <td>$Title</td>
+                                <td>$Cost</td>
+                                <% if $SoldOut %>
+                                    <td>Sold Out</td>
+                                <% else %>
+                                    <% if $ShowQuantity %>
+                                        <td>$CurrentlyAvailable of $MaxAvailable</td>
                                     <% else %>
-                                        <% if $ShowQuantity %>
-                                            <td>$CurrentlyAvailable of $MaxAvailable</td>
-                                        <% else %>
-                                            <td>Available</td>
-                                        <% end_if %>
+                                        <td>Available</td>
                                     <% end_if %>
-                                </tr>
-                                <% end_loop %>
-                            </tbody>
-                        </table>
-                    </div>
+                                <% end_if %>
+                            </tr>
+                            <% end_loop %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <% end_if %>
