@@ -222,8 +222,10 @@
         <div class="container sponsor-wrapper">
             <% if $SortedPackages %>
             <div class="row">
+                <h1>Packages</h1>
+            </div>
+            <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
-                    <h1>Packages</h1>
                     <h5 class="section-title">
                         Sponsorships Packages Available <span>(prices in USD)</span>
                     </h5>
@@ -260,8 +262,46 @@
                         * In order to qualify for a Startup sponsorship a company must be in business for less than 3
                         years and have less than $5 million USD in revenue.
                     </div>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <h5 class="section-title">Tuesday Evening Event Sponsorships Available <span>(prices in USD)</span></h5>
+                            </div>
+                            <div class="table-responsive sponsor-table">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Sponsorship Level</th>
+                                        <th>Cost</th>
+                                        <th style="text-align:center;">Available</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="sponsor_add_on">
+                                            <td>Tuesday Evening Event Headline Sponsor</td>
+                                            <td>$90,000</td>
+                                            <td style="text-align:center;">2</td>
+                                        </tr>
+                                        <tr class="sponsor_add_on">
+                                            <td>Tuesday Evening Event Premier Sponsor</td>
+                                            <td>$45,000</td>
+                                            <td style="text-align:center;">5</td>
+                                        </tr>
+                                        <tr class="sponsor_add_on">
+                                            <td>Tuesday Evening Event Spotlight Sponsor</td>
+                                            <td>$25,000</td>
+                                            <td style="text-align:center;">5</td>
+                                        </tr>
+                                        <tr class="sponsor_add_on">
+                                            <td>Tuesday Evening Event Startup Sponsor</td>
+                                            <td>$4,000</td>
+                                            <td style="text-align:center;">Unlimited</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
             <% end_if %>
             <% if $SortedAddOns %>
             <div class="row">
