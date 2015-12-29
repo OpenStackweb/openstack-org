@@ -32,6 +32,14 @@ class CourseDTO {
 	 * @var string
 	 */
 	private $company_url;
+    /**
+     * @var string
+     */
+    private $company_name;
+    /**
+     * @var string
+     */
+    private $company_logo;
 	/**
 	 * @var string
 	 */
@@ -71,6 +79,8 @@ class CourseDTO {
 	 * @param string $description
 	 * @param int    $training_id
 	 * @param string $company_url
+     * @param string $company_name
+     * @param string $company_logo
 	 * @param string $level
 	 * @param bool   $is_online
 	 * @param string $start_date
@@ -80,12 +90,14 @@ class CourseDTO {
 	 * @param string $country
 	 * @param string $link
 	 */
-	public function __construct($id, $name,$description, $training_id, $company_url, $level, $is_online, $start_date, $end_date, $city, $state, $country, $link){
+	public function __construct($id, $name,$description, $training_id, $company_url, $company_name, $company_logo, $level, $is_online, $start_date, $end_date, $city, $state, $country, $link){
 		$this->id          = $id;
 		$this->name        = $name;
 		$this->description = $description;
 		$this->training_id = $training_id;
 		$this->company_url=$company_url;
+        $this->company_name=$company_name;
+        $this->company_logo=$company_logo;
 		$this->level = $level;
 		$this->is_online = $is_online;
 		$this->start_date = $start_date;
@@ -115,6 +127,16 @@ class CourseDTO {
 	{
 		return $this->company_url;
 	}
+
+    public function getCompanyName()
+    {
+        return $this->company_name;
+    }
+
+    public function getCompanyLogo()
+    {
+        return $this->company_logo;
+    }
 
 	public function getLevel()
 	{

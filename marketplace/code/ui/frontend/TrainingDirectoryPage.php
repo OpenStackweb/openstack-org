@@ -17,8 +17,6 @@
 class TrainingDirectoryPage extends MarketPlaceDirectoryPage
 {
 
-    static $allowed_children = "none";
-
 }
 
 /**
@@ -26,10 +24,11 @@ class TrainingDirectoryPage extends MarketPlaceDirectoryPage
  */
 class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller {
 
-	private static $allowed_actions = array('handleIndex');
+	private static $allowed_actions = array('classes','handleIndex');
 
 	static $url_handlers = array(
-		'$Company!/$Slug' => 'handleIndex',
+        'classes' => 'classes',
+        '$Company!/$Slug' => 'handleIndex'
 	);
 
 	/**
@@ -45,6 +44,10 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 	 * @var IQueryHandler
 	 */
 	private $course_level_query;
+    /**
+     * @var IQueryHandler
+     */
+    private $course_company_query;
 
 	function init(){
         parent::init();
@@ -77,6 +80,7 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
 		$this->course_location_query = new TrainingCoursesLocationQueryHandler;
 		$this->course_level_query    = new TrainingCoursesLevelQueryHandler;
+        $this->course_company_query    = new TrainingCoursesCompanyQueryHandler;
 
 	    Requirements::customScript($this->GATrackingCode());
     }
@@ -88,14 +92,13 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 		return $this->training_facade->getTrainings();
 	}
 
-	public function handleIndex() {
-		$params = $this->request->allParams();
-		if(isset($params["Company"])){
-			//render instance ...
-			return $this->training();
-		}
-	}
-
+    public function handleIndex() {
+        $params = $this->request->allParams();
+        if(isset($params["Company"])){
+            //render instance ...
+            return $this->training();
+        }
+    }
 
 	public function training()
     {
@@ -107,7 +110,7 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 	        $training            = $this->training_facade->getCompanyTraining($training_id,$company_url_segment);
             // we need this for reviews.
             $this->company_service_ID = $training['Training']->getIdentifier();
-            return $this->Customise($training)->renderWith(array('TrainingDirectoryPage_training','TrainingDirectoryPage','MarketPlacePage'));;
+            return $this->Customise($training)->renderWith(array('TrainingDirectoryPage_training','TrainingDirectoryPage','MarketPlacePage'));
 
         } catch (Exception $ex) {
             return $this->httpError(404, 'Sorry that Training could not be found!-');
@@ -121,9 +124,14 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 	     return $this->training_facade->getUpcomingCourses($limit);
     }
 
-	public function LocationCombo(){
+    function getAllCourses(){
+        return $this->training_facade->getAllCourses();
+    }
+
+	public function LocationCombo($only_current=true){
 		$source = array();
-		$result = $this->course_location_query->handle(new OpenStackImplementationNamesQuerySpecification(DateTimeUtils::getCurrentDate()));
+        $filter = ($only_current) ? DateTimeUtils::getCurrentDate() : '';
+		$result = $this->course_location_query->handle(new OpenStackImplementationNamesQuerySpecification($filter));
 		foreach($result->getResult() as $dto){
 			$source[$dto->getValue()] =  $dto->getValue();
 		}
@@ -142,4 +150,22 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 		$ddl->setEmptyString('-- Show All --');
 		return $ddl;
 	}
+
+    public function CompanyCombo($only_current=true){
+        $source = array();
+        $filter = ($only_current) ? DateTimeUtils::getCurrentDate() : '';
+        $result = $this->course_company_query->handle(new OpenStackImplementationNamesQuerySpecification($filter));
+        foreach($result->getResult() as $dto){
+            $source[$dto->getValue()] =  $dto->getValue();
+        }
+        $ddl = new DropdownField('company-term',$title=null,$source);
+        $ddl->setEmptyString('-- Show All --');
+        return $ddl;
+    }
+
+    public function classes() {
+        Requirements::Block("marketplace/code/ui/frontend/js/training.directory.page.js");
+        Requirements::javascript("marketplace/code/ui/frontend/js/training.classes.page.js");
+        return $this->renderWith(array('TrainingDirectoryPage_classes','TrainingDirectoryPage','MarketPlacePage'));
+    }
 }

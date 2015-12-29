@@ -586,6 +586,11 @@ table.course-schedule tr:last-child td {
     padding: 5px;
 }
 
+.show_all_classes {
+    font-size: 15px;
+    margin-left: 10px;
+}
+
 .chosen-container-single .chosen-single {
     box-shadow: none !important;
     color: #30739c !important;
@@ -688,4 +693,22 @@ a.app-promo-banner {
     display: inline-block;
     margin-left: 2px;
 }*/
+
+
+/* classes page */
+
+.date_filter_div {
+    margin-top: 12px;
+}
+
+.image_frame:before {    /* create a full-height inline block pseudo=element */
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;  /* vertical alignment of the inline element */
+    height: 100%;
+}
+
+.image_frame > img {
+    display: inline-block;
+}
 

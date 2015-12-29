@@ -20,7 +20,8 @@ class Training_Controller extends AbstractController {
 	 * @var array
 	 */
 	static $url_handlers = array(
-		'POST search'   => 'search',
+		'POST search_courses'   => 'search_courses',
+        'POST search_classes'   => 'search_classes',
 		'GET topics'    => 'topics',
 	);
 
@@ -28,7 +29,8 @@ class Training_Controller extends AbstractController {
 	 * @var array
 	 */
 	static $allowed_actions = array(
-		'search',
+		'search_courses',
+        'search_classes',
 		'topics',
 	);
 
@@ -61,7 +63,7 @@ class Training_Controller extends AbstractController {
 	/**
 	 * @return string
 	 */
-	function search(){
+	function search_courses(){
 		$output = '';
 		if(!$this->isJson()){
 			return $this->httpError(500,'Content Type not allowed');
@@ -88,6 +90,43 @@ class Training_Controller extends AbstractController {
 		}
 		return empty($output) ? $this->httpError(404,'') : $output;
 	}
+
+    /**
+     * @return string
+     */
+    function search_classes(){
+        $output = '';
+
+        if(!$this->isJson()){
+            return $this->httpError(500,'Content Type not allowed');
+        }
+
+        try{
+            $search_params = json_decode($this->request->getBody(),true);
+            $limit = (40 * $search_params['page_no']) - 40;
+
+            $courses_dto       = $this->training_facade->getFilteredCourses(
+                $search_params['location_term'],
+                $search_params['level_term'],
+                $search_params['company_term'],
+                $search_params['start_date'],
+                $search_params['end_date']
+            );
+
+            $limited_courses = $courses_dto->limit(40,$limit);
+
+            $output .= $this->renderWith('TrainingDirectoryPage_CompanyTrainingFilteredClasses', array(
+                'FilteredCourses' => $limited_courses
+            ));
+
+            $result_array = array('class_html'=>$output,'class_count'=>count($courses_dto));
+
+        }
+        catch(Exception $ex){
+            return $this->httpError(500,'Server Error');
+        }
+        return empty($output) ? $this->httpError(404,'') : json_encode($result_array);
+    }
 
 	/**
 	 * @param string $action

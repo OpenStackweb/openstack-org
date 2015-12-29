@@ -12,17 +12,18 @@
  * limitations under the License.
  **/
 /**
- * Class TrainingCoursesLocationQueryHandler
+ * Class TrainingCoursesCompanyQueryHandler
  */
-final class TrainingCoursesLocationQueryHandler implements IQueryHandler {
+final class TrainingCoursesCompanyQueryHandler implements IQueryHandler {
 
 	/**
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
 	public function handle(IQuerySpecification $specification){
-		$params = $specification->getSpecificationParams();
-		$current_date   = @$params['name_pattern'];
+
+        $params = $specification->getSpecificationParams();
+        $current_date   = @$params['name_pattern'];
         $date_filter = "";
         if ($current_date) {
             $current_date   = Convert::raw2sql($current_date);
@@ -36,32 +37,29 @@ final class TrainingCoursesLocationQueryHandler implements IQueryHandler {
 
         }
 
-		$sql       = <<< SQL
-        SELECT TrainingCourseSchedule.City, TrainingCourseSchedule.State, TrainingCourseSchedule.Country
+        $sql       = <<< SQL
+        SELECT C.Name AS CompanyName
         FROM TrainingCourse
-        INNER JOIN CompanyService  ON CompanyService.ID  = TrainingCourse.TrainingServiceID AND CompanyService.ClassName='TrainingService'
+        INNER JOIN CompanyService ON CompanyService.ID  = TrainingCourse.TrainingServiceID AND CompanyService.ClassName='TrainingService'
+        INNER JOIN Company C on C.ID = CompanyService.CompanyID
         INNER JOIN TrainingCourseSchedule ON TrainingCourseSchedule.CourseID = TrainingCourse.ID
         LEFT JOIN TrainingCourseScheduleTime ON TrainingCourseScheduleTime.LocationID = TrainingCourseSchedule.ID
         WHERE CompanyService.Active = 1
         {$date_filter}
-        GROUP BY TrainingCourseSchedule.City, TrainingCourseSchedule.State, TrainingCourseSchedule.Country
-        ORDER BY TrainingCourseSchedule.City, TrainingCourseSchedule.State, TrainingCourseSchedule.Country ASC;
+        GROUP BY C.Name
+        ORDER BY C.Name ASC;
 SQL;
-		$results   = DB::query($sql);
-		$locations = array();
 
-		for ($i = 0; $i < $results->numRecords(); $i++) {
-			$record = $results->nextRecord();
-			$city    = $record['City'];
-			$state   = $record['State'];
-			$country = Geoip::countryCode2name($record['Country']);
+        $results   = DB::query($sql);
+        $companies = array();
 
-			if(!empty($state))
-				$value   = sprintf('%s, %s, %s',$city, $state, $country);
-			else
-				$value   = sprintf('%s, %s',$city, $country);
-			array_push($locations, new SearchDTO($value,$value));
-		}
-		return new OpenStackImplementationNamesQueryResult($locations);
+        for ($i = 0; $i < $results->numRecords(); $i++) {
+            $record = $results->nextRecord();
+            $company    = $record['CompanyName'];
+
+            $value   = sprintf('%s',$company);
+            array_push($companies, new SearchDTO($value,$value));
+        }
+        return new OpenStackImplementationNamesQueryResult($companies);
 	}
 }

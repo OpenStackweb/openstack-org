@@ -32,7 +32,7 @@ jQuery(document).ready(function($){
         var location_filter = $('#location-term');
         if(location_filter.length > 0 ){
             location_filter.prepend("<option value='' selected='selected'>-- Select a Service--</option>");
-            location_filter.chosen({disable_search_threshold: 3});
+            location_filter.chosen({disable_search_threshold: 3, width:400});
             location_filter.change(function () {
                 $('.filter-label').trigger("click");
             });
@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
 
             last_filter_request = $.ajax({
                     type:        "POST",
-                    url:         'trainings/search',
+                    url:         'trainings/search_courses',
                     contentType: "application/json; charset=utf-8",
                     dataType:    "html",
                     data:        JSON.stringify(params),

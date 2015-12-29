@@ -43,7 +43,7 @@
         </ul>
         <% if UpcomingCourses %>
         <h3>
-            Upcoming Classes
+            Upcoming Classes <a class="show_all_classes" href="$Top.Link(classes)"> Show All </a>
         </h3>
         <ul class="training-updates">
             <% loop UpcomingCourses %>

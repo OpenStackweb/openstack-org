@@ -79,6 +79,22 @@ class CourseViewModel extends ViewableData {
 		return $this->dto->getCompanyURL();
 	}
 
+    /**
+     * @return string
+     */
+    public function getCompanyName()
+    {
+        return $this->dto->getCompanyName();
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompanyLogo()
+    {
+        return $this->dto->getCompanyLogo();
+    }
+
 	/**
 	 * @return string
 	 */
