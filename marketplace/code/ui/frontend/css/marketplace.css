@@ -701,6 +701,11 @@ a.app-promo-banner {
     margin-top: 12px;
 }
 
+.image_frame {
+    text-align: center;
+    height: 140px;
+}
+
 .image_frame:before {    /* create a full-height inline block pseudo=element */
     content: ' ';
     display: inline-block;
@@ -710,5 +715,7 @@ a.app-promo-banner {
 
 .image_frame > img {
     display: inline-block;
+    width: 150px;
+    max-height: 100px;
 }
 
