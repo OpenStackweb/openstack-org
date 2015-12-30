@@ -24,7 +24,11 @@ The following base components are required to run the application:
 
    ````
    curl -sS https://getcomposer.org/installer | php
+   ````
+   ````
    php composer.phar install
+   ````
+   ````
    php composer.phar dump-autoload --optimize
    ````
 
