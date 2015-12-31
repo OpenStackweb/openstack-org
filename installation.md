@@ -68,7 +68,7 @@ The following base components are required to run the application:
 
 * Run the following command to populate database
    ````
-    _php /var/www/openstack/framework/cli-script.php dev/build flush=1_ 
+    php /var/www/openstack/framework/cli-script.php dev/build flush=1_ 
    ````
 * Restart apache
 
