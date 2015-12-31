@@ -50,6 +50,7 @@ The following base components are required to run the application:
 * Rename file _sample.htaccess_ to _.htaccess_
 
 * Edit the file /etc/apache2/sites-available/_default.conf_ to ensure the following content
+
    ````
    <VirtualHost *:80>
       <Directory /var/www/openstack>
@@ -67,6 +68,7 @@ The following base components are required to run the application:
    ````
 
 * Run the following command to populate database
+
    ````
     php /var/www/openstack/framework/cli-script.php dev/build flush=1_ 
    ````
