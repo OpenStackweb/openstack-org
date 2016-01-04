@@ -28,18 +28,18 @@
                         </div>
                         <div class="row events">
                             <div class="col-lg-6">
-                               <a href="http://openstack.org/summit/" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Vancouver">
+                               <a href="http://openstack.org/summit/austin-2016/" class="featured-event-link">
+                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Austin">
                                     <span>OpenStack Summit</span>
-                                    <span>October 27-30, 2015 in Tokyo</span>
+                                    <span>April 25-29, 2016 in Austin</span>
                                 </a>
                             </div>
                             <div class="vert-line"></div>
                             <div class="col-lg-6">
-                                <a href="http://openstack.org/summit/" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Tokyo">
+                                <a href="http://openstack.org//barcelona-2016/" class="featured-event-link">
+                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Barcelona">
                                     <span>OpenStack Summit</span>
-                                    <span>April 2016 in Austin</span>
+                                    <span>October 24-28, 2016 in Barcelona</span>
                                 </a>
                             </div>
                         </div>
