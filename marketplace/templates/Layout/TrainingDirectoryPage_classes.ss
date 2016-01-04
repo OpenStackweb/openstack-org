@@ -42,7 +42,7 @@
                             <p class="date-block">
                                 <span class="month">$StartDateMonth</span>
                                 <span class="day">$StartDateDay</span>
-                                <% if $EndDateDay %>
+                                <% if $EndDateDay !=  $StartDateDay %>
                                  to
                                 <span class="month">$EndDateMonth</span>
                                 <span class="day">$EndDateDay</span>
