@@ -249,7 +249,7 @@ SQL;
         	   F.Filename AS Logo,
         	   C.Name AS Company,
         	   TCL.Level AS Level,
-        	   TC.Link AS Link
+        	   D.Link AS Link
         FROM TrainingCourse TC
         INNER JOIN TrainingCourseSchedule L on L.CourseID = TC.ID
         INNER JOIN TrainingCourseScheduleTime D on D.LocationID = L.ID
@@ -372,7 +372,7 @@ SQL;
         	   F.Filename AS Logo,
         	   C.Name AS Company,
         	   TCL.Level AS Level,
-        	   TC.Link AS Link
+        	   D.Link AS Link
         FROM TrainingCourse TC
         INNER JOIN TrainingCourseSchedule L on L.CourseID = TC.ID
         INNER JOIN TrainingCourseScheduleTime D on D.LocationID = L.ID
