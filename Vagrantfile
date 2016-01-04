@@ -1,6 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+required_plugins = %w( vagrant-vbguest vagrant-hosts )
+required_plugins.each do |plugin|
+  system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
+end
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -16,7 +21,6 @@ Vagrant.configure(2) do |config|
   #config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"	
   config.vm.box = "ubuntu/vivid64"
   config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/vivid64"	
-  config.vm.name = "local.openstack.org"
   config.vm.hostname = "local.openstack.org"
 
   # Create a private network, which allows host-only access to the machine
@@ -41,7 +45,8 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-        vb.memory = "4096"
+        vb.memory = "4096",
+        vb.name   = "local.openstack.org"
   end
 
   # use https://github.com/oscar-stack/vagrant-hosts
