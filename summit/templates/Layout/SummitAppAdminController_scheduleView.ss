@@ -10,84 +10,92 @@
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
             <li class="active">Schedule</li>
         </ol>
-        <div class="row">
-            <div class="col-md-6">
-                <table id="day_schedule">
-                    <tbody>
-                    <tr>
-                        <td class="times-col">
-                            <div class="time-slot">07:00 AM</div>
-                            <div class="time-slot">07:15 AM</div>
-                            <div class="time-slot">07:30 AM</div>
-                            <div class="time-slot">07:45 AM</div>
-                            <div class="time-slot">08:00 AM</div>
-                            <div class="time-slot">08:15 AM</div>
-                            <div class="time-slot">08:30 AM</div>
-                            <div class="time-slot">08:45 AM</div>
-                            <div class="time-slot">09:00 AM</div>
-                            <div class="time-slot">09:15 AM</div>
-                            <div class="time-slot">09:30 AM</div>
-                            <div class="time-slot">09:45 AM</div>
-                            <div class="time-slot">10:00 AM</div>
-                            <div class="time-slot">10:15 AM</div>
-                            <div class="time-slot">10:30 AM</div>
-                            <div class="time-slot">10:45 AM</div>
-                            <div class="time-slot">11:00 AM</div>
-                            <div class="time-slot">11:15 AM</div>
-                            <div class="time-slot">11:30 AM</div>
-                            <div class="time-slot">11:45 AM</div>
-                            <div class="time-slot">12:00 PM</div>
-                            <div class="time-slot">12:15 PM</div>
-                            <div class="time-slot">12:30 PM</div>
-                            <div class="time-slot">12:45 PM</div>
-                            <div class="time-slot">01:00 PM</div>
-                            <div class="time-slot">01:15 PM</div>
-                            <div class="time-slot">01:30 PM</div>
-                            <div class="time-slot">01:45 PM</div>
-                            <div class="time-slot">02:00 PM</div>
-                        </td>
-                        <td class="events-col">
-                            <div class="time-slot-container" data-time="07:00"></div>
-                            <div class="time-slot-container" data-time="07:15"></div>
-                            <div class="time-slot-container" data-time="07:30"></div>
-                            <div class="time-slot-container" data-time="07:45"></div>
-                            <div class="time-slot-container" data-time="08:00"></div>
-                            <div class="time-slot-container" data-time="08:15"></div>
-                            <div class="time-slot-container" data-time="08:30"></div>
-                            <div class="time-slot-container" data-time="08:45"></div>
-                            <div class="time-slot-container" data-time="09:00"></div>
-                            <div class="time-slot-container" data-time="09:15"></div>
-                            <div class="time-slot-container" data-time="09:30"></div>
-                            <div class="time-slot-container" data-time="09:45"></div>
-                            <div class="time-slot-container" data-time="10:00"></div>
-                            <div class="time-slot-container" data-time="10:15"></div>
-                            <div class="time-slot-container" data-time="10:30"></div>
-                            <div class="time-slot-container" data-time="10:45"></div>
-                            <div class="time-slot-container" data-time="11:00"></div>
-                            <div class="time-slot-container" data-time="11:15"></div>
-                            <div class="time-slot-container" data-time="11:30"></div>
-                            <div class="time-slot-container" data-time="11:45"></div>
-                            <div class="time-slot-container" data-time="12:00"></div>
-                            <div class="time-slot-container" data-time="12:15"></div>
-                            <div class="time-slot-container" data-time="12:30"></div>
-                            <div class="time-slot-container" data-time="12:45"></div>
-                            <div class="time-slot-container" data-time="13:00"></div>
-                            <div class="time-slot-container" data-time="13:15"></div>
-                            <div class="time-slot-container" data-time="13:30"></div>
-                            <div class="time-slot-container" data-time="13:45"></div>
-                            <div class="time-slot-container" data-time="14:00"></div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-6">
-            </div>
-        </div>
+
+        <script type="application/javascript">
+
+            var summit =
+            {
+                id:   $Summit.ID,
+                dates : {},
+                events: {},
+                summit_types: {},
+                speakers : {},
+                sponsors : {},
+                event_types:{},
+                locations : {},
+                tags: {},
+                tracks : {},
+                presentation_levels: {},
+                current_user: null
+            };
+
+                <% loop $Summit.EventTypes %>
+                summit.event_types[{$ID}] =
+                {
+                    type : "{$Type.JS}",
+                    color : "{$Color}",
+                };
+                <% end_loop %>
+
+
+                <% loop $Summit.Types %>
+                summit.summit_types[{$ID}] =
+                {
+                    type: "{$Type}",
+                    name : "{$Title.JS}",
+                    description : "{$Description.JS}",
+                    color : "{$Color}"
+                };
+                <% end_loop %>
+
+                <% loop $Summit.Locations %>
+                    <% if ClassName == SummitVenue || ClassName == SummitExternalLocation %>
+                    summit.locations[{$ID}] =
+                    {
+                        class_name : "{$ClassName}",
+                        name       : "{$Name.JS}",
+                        description : "{$Description.JS}",
+                        address_1 : "{$Address1.JS}",
+                        address_2 : "{$Address2.JS}",
+                        city : "{$City}",
+                        state : "{$State}",
+                        country : "{$Country}",
+                        lng : '{$Lng}',
+                        lat : '{$Lat}',
+                    };
+                        <% if ClassName == SummitVenue %>
+                            <% loop Rooms %>
+                            summit.locations[{$ID}] =
+                            {
+                                class_name : "{$ClassName}",
+                                name       : "{$Name.JS}",
+                                capacity   : {$Capacity},
+                                venue_id   : {$VenueID},
+                            };
+                            <% end_loop %>
+                        <% end_if %>
+                    <% end_if %>
+                <% end_loop %>
+
+                <% loop $Summit.DatesWithEvents %>
+                summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', selected: false };
+                summit.events['{$Date}'] = [];
+                <% end_loop %>
+
+        </script>
+
         <div class="page-header">
             <h1>$Summit.Title<small></small></h1>
         </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                <schedule-admin-view-filters summit="{ summit }"></schedule-admin-view-filters>
+                <schedule-admin-view start_time="06:00" end_time="24:00" interval="15" summit="{ summit }"></schedule-admin-view>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
     </div>
-    <!-- /#page-content-wrapper -->
+   <script src="summit/javascript/schedule/admin/schedule-admin-view.bundle.js"  type="application/javascript"></script>
 </div>

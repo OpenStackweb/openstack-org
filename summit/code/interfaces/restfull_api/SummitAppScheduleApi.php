@@ -106,6 +106,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $query_string        = $request->getVars();
         $summit_id           = intval($request->param('SUMMIT_ID'));
         $day                 = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
+        $location            = isset($query_string['location']) ? intval(Convert::raw2sql($query_string['location'])) : null;
         $summit              = null;
 
         if(intval($summit_id) > 0)
@@ -118,7 +119,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
         $events = array();
 
-        foreach($summit->getSchedule($day) as $e)
+        foreach($summit->getSchedule($day, $location) as $e)
         {
             $entry = array
             (

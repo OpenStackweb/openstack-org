@@ -25,6 +25,8 @@ class SummitAppAdminController extends Page_Controller
         Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
         Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js');
     }
 
     private static $url_segment = 'summit-admin';
@@ -314,8 +316,17 @@ class SummitAppAdminController extends Page_Controller
     {
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('summit/css/summit-admin-schedule.css');
+        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.min.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        return $this->getViewer('scheduleView')->process($this);
+        $summit_id = intval($this->request->param('SummitID'));
+        $summit    = Summit::get()->byID($summit_id);
+        if(is_null($summit) || $summit->ID <= 0) return $this->httpError(404);
+
+        return $this->getViewer('scheduleView')->process($this, array
+            (
+                'Summit' => $summit
+            )
+        );
     }
 
 }

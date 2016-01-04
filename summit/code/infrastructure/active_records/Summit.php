@@ -421,10 +421,11 @@ final class Summit extends DataObject implements ISummit
 
     /**
      * @param mixed|null $day
+     * @param int|null $location
      * @return SummitEvent[]
      * @throws Exception
      */
-    public function getSchedule($day = null)
+    public function getSchedule($day = null, $location = null)
     {
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('Published',1));
@@ -438,6 +439,10 @@ final class Summit extends DataObject implements ISummit
 
             $query->addAndCondition(QueryCriteria::greaterOrEqual('StartDate',$this->convertDateFromTimeZone2UTC($start)));
             $query->addAndCondition(QueryCriteria::lowerOrEqual('EndDate', $this->convertDateFromTimeZone2UTC($end)));
+        }
+        if(!is_null($location))
+        {
+            $query->addAndCondition(QueryCriteria::equal('LocationID', intval($location)));
         }
         $query->addOrder(QueryOrder::asc('StartDate'));
         return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',$query)->toArray());

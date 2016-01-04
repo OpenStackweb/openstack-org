@@ -11,7 +11,8 @@ module.exports = {
     "summit/javascript/schedule/event-detail":"./summit/javascript/schedule/event-detail.js",
     "summit/javascript/schedule/share-buttons":"./summit/javascript/schedule/share-buttons.js",
     "summit/javascript/forms/tagmanagerfield/tagmanagerfield":"./summit/javascript/forms/tagmanagerfield/tagmanagerfield.js",
-    "summit/javascript/schedule/event-list":"./summit/javascript/schedule/event-list.js"
+    "summit/javascript/schedule/event-list":"./summit/javascript/schedule/event-list.js",
+    "summit/javascript/schedule/admin/schedule-admin-view":"./summit/javascript/schedule/admin/schedule-admin-view.js",
   },
   output: {
     path: __dirname ,
