@@ -99,9 +99,9 @@ final class TrainingFacade {
     /**
      * @return ArrayList
      */
-    public function getFilteredCourses($location = '', $level = '', $company = '', $start_date = '', $end_date = ''){
+    public function getFilteredClasses($location = '', $level = '', $company = '', $start_date = '', $end_date = ''){
         $res = new ArrayList();
-        $courses_dto       = $this->course_repository->getFilteredCourses($location,$level,$company,$start_date,$end_date);
+        $courses_dto       = $this->course_repository->getFilteredClasses(DateTimeUtils::getCurrentDate(),$location,$level,$company,$start_date,$end_date);
         foreach($courses_dto as $dto){
             if($this->training_manager->isActive($dto->getTrainingID()))
                 $res->push(new CourseViewModel($dto));
@@ -113,9 +113,9 @@ final class TrainingFacade {
     /**
      * @return ArrayList
      */
-    public function getAllCourses(){
+    public function getAllClasses(){
         $res = new ArrayList();
-        $courses_dto       = $this->course_repository->getAllCourses();
+        $courses_dto       = $this->course_repository->getAllClasses(DateTimeUtils::getCurrentDate());
         foreach($courses_dto as $dto){
             if($this->training_manager->isActive($dto->getTrainingID()))
                 $res->push(new CourseViewModel($dto));

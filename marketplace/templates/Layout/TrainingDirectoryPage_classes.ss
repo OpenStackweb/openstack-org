@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-sm-12">
             <ul class="training-updates" id="training-list">
-                <% loop AllCourses.Limit(40) %>
+                <% loop AllClasses.Limit(40) %>
                 <li>
                     <div class="row">
                         <div class="col-md-2">
@@ -71,7 +71,7 @@
         <ul class="pagination"></ul>
     </nav>
     <script type="text/javascript">
-        var class_count = {$AllCourses.Count};
+        var class_count = {$AllClasses.Count};
         var page_count = Math.ceil(class_count/40);
         var current_page = 1;
     </script>

@@ -124,8 +124,8 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 	     return $this->training_facade->getUpcomingCourses($limit);
     }
 
-    function getAllCourses(){
-        return $this->training_facade->getAllCourses();
+    function getAllClasses(){
+        return $this->training_facade->getAllClasses();
     }
 
 	public function LocationCombo($only_current=true){

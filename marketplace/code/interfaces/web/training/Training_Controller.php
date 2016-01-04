@@ -105,7 +105,7 @@ class Training_Controller extends AbstractController {
             $search_params = json_decode($this->request->getBody(),true);
             $limit = (40 * $search_params['page_no']) - 40;
 
-            $courses_dto       = $this->training_facade->getFilteredCourses(
+            $courses_dto       = $this->training_facade->getFilteredClasses(
                 $search_params['location_term'],
                 $search_params['level_term'],
                 $search_params['company_term'],

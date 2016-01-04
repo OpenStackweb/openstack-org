@@ -234,7 +234,7 @@ SQL;
      * @param int    $limit
      * @return CourseDTO[]
      */
-    public function getAllCourses(){
+    public function getAllClasses($current_date){
 
         $courses      = array();
 
@@ -259,7 +259,7 @@ SQL;
         INNER JOIN File F on F.ID = C.LogoID
         INNER JOIN Countries CO on CO.Code = L.Country
         WHERE
-        P.Active=1
+        P.Active=1 AND DATE('{$current_date}') < D.EndDate
         GROUP BY TC.ID,L.ID,D.ID
         ORDER BY StartDate ASC;
 SQL;
@@ -292,7 +292,7 @@ SQL;
      * @param int    $limit
      * @return CourseDTO[]
      */
-    public function getFilteredCourses($location='',$level='',$company='',$start_date='',$end_date=''){
+    public function getFilteredClasses($current_date, $location = '', $level = '', $company = '', $start_date = '', $end_date = ''){
 
         $courses = array();
         $filter = "";
@@ -382,7 +382,7 @@ SQL;
         INNER JOIN File F on F.ID = C.LogoID
         INNER JOIN Countries CO on CO.Code = L.Country
         WHERE
-        P.Active=1 {$filter}
+        P.Active=1 AND DATE('{$current_date}') < D.EndDate {$filter}
         GROUP BY TC.ID,L.ID,D.ID
         ORDER BY StartDate ASC ;
 SQL;
