@@ -22,7 +22,6 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/vivid64"
   config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/vivid64"	
   config.vm.hostname = "local.openstack.org"
-  config.hostsupdater.aliases = ["local2.openstack.org"]
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
