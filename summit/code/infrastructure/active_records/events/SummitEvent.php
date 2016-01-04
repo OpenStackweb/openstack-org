@@ -24,6 +24,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         'Published'        => 'Boolean',
         'PublishedDate'    => 'SS_Datetime',
         'AllowFeedBack'    => 'Boolean',
+        'AvgFeedbackRate'  => 'Float'
     );
 
     private static $has_many = array
@@ -89,6 +90,14 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     public function getLink() {
         return $this->Summit()->Link.'schedule/events/'.$this->getIdentifier().'/'.$this->getTitleForUrl();
+    }
+
+    public function getAvgRate() {
+        return $this->AvgFeedbackRate;
+    }
+
+    public function setAvgRate($avg_rate) {
+        $this->AvgFeedbackRate = $avg_rate;
     }
 
     public function getTitleForUrl() {
