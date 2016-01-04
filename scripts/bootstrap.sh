@@ -1,6 +1,7 @@
 #!/bin/bash -xe
 
 mkdir -p /etc/puppet/modules;
+puppet module install puppetlabs-apt;
 puppet module install puppetlabs-nodejs;
 puppet module install jfryman-nginx;
 puppet module install puppetlabs-mysql;

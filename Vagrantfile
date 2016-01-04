@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-required_plugins = %w( vagrant-vbguest vagrant-hosts )
+required_plugins = %w( vagrant-vbguest vagrant-hosts vagrant-hostsupdater )
 required_plugins.each do |plugin|
   system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
 end
@@ -22,6 +22,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/vivid64"
   config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/vivid64"	
   config.vm.hostname = "local.openstack.org"
+  config.hostsupdater.aliases = ["local2.openstack.org"]
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -45,7 +46,7 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-        vb.memory = "4096",
+        vb.memory = "4096"
         vb.name   = "local.openstack.org"
   end
 
