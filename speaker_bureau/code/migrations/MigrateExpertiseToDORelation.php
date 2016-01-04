@@ -20,6 +20,10 @@ final class MigrateExpertiseToDORelation extends AbstractDBMigrationTask
 
     function doUp()
     {
+        global $database;
+
+        if(!DBSchema::existsColumn($database,'PresentationSpeaker', 'Expertise')) return;
+
         $speakers = DB::query("SELECT * FROM PresentationSpeaker WHERE Expertise IS NOT NULL");
 
         foreach ($speakers as $speaker) {
@@ -32,7 +36,6 @@ final class MigrateExpertiseToDORelation extends AbstractDBMigrationTask
                 $new_exp->Write();
             }
         }
-
         DB::query("ALTER TABLE PresentationSpeaker DROP COLUMN Expertise");
     }
 
