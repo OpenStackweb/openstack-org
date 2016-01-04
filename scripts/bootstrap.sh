@@ -1,7 +1,5 @@
 #!/bin/bash -xe
 
-hostname local.openstack.org
-echo "127.0.0.1 local.openstack.org" >> /etc/hosts
 mkdir -p /etc/puppet/modules;
 puppet module install puppetlabs-nodejs;
 puppet module install jfryman-nginx;

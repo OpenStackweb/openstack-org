@@ -16,7 +16,9 @@ Vagrant.configure(2) do |config|
   #config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"	
   config.vm.box = "ubuntu/vivid64"
   config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/vivid64"	
-  
+  config.vm.name = "local.openstack.org"
+  config.vm.hostname = "local.openstack.org"
+
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.33.10"
@@ -39,11 +41,15 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-     vb.memory = "4096"
-     vb.name = "www-openstack-org-dev"
-     vb.customize ["sharedfolder", "add", :id, "--name", "www", "--hostpath", (("//?/" + File.dirname(__FILE__) + "/www").gsub("/","\\"))]
+        vb.memory = "4096"
   end
-  
+
+  # use https://github.com/oscar-stack/vagrant-hosts
+  # vagrant plugin install vagrant-hosts
+  config.vm.provision :hosts do |provisioner|
+        provisioner.add_host '127.0.0.1', ['local.openstack.org']
+  end
+
   config.vm.provision :shell, :path => "scripts/bootstrap.sh"
 
   config.vm.provision :puppet do |puppet|
