@@ -260,7 +260,7 @@ SQL;
         INNER JOIN Countries CO on CO.Code = L.Country
         WHERE
         P.Active=1
-        GROUP BY TC.ID
+        GROUP BY TC.ID,L.ID,D.ID
         ORDER BY StartDate ASC;
 SQL;
         $results = DB::query($sql);
@@ -383,7 +383,7 @@ SQL;
         INNER JOIN Countries CO on CO.Code = L.Country
         WHERE
         P.Active=1 {$filter}
-        GROUP BY TC.ID
+        GROUP BY TC.ID,L.ID,D.ID
         ORDER BY StartDate ASC ;
 SQL;
         $results = DB::query($sql);
