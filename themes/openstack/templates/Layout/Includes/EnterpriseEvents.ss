@@ -50,9 +50,9 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <ul>
-                                        <li><a href="http://www.gartner.com/technology/summits/na/catalyst/" target="_blank">Gartner Catalyst</a>, August 10-13, 2015 in San Diego, California</li>
-                                        <li><a href="http://www.gartner.com/technology/symposium/orlando/" target="_blank">Gartner Symposium/ITxpo</a>, October 4-8, 2015 in Orlando, Florida</li>
-                                        <li><a href="http://www.gartner.com/events/na/data-center" target="_blank">Gartner Data Center Conference</a>, December 7-10, 2015 in Las Vegas, Nevada</li>
+                                        <li><a href="http://containerevent.com/" target="_blank">Container World</a>, February 16-18, 2016 in Santa Clara, California</li>
+                                        <li><a href="http://www.bigtelecomevent.com/events/big-telecom-event/event-summary-31b6b86b2fa3432ab89ab7db084ab675.aspx" target="_blank">Big Telecom</a>, May 24-25, 2016 in Austin, TX</li>
+                                        <li><a href="http://www.gartner.com/events/na/catalyst" target="_blank">Gartner Catalyst</a>, August 15-18, 2016 in San Diego, California</li>
                                     </ul>
                                 </div>
                         </div>
