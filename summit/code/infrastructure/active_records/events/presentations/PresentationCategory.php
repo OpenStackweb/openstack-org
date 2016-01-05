@@ -27,7 +27,8 @@ class PresentationCategory extends DataObject
     );
 
     private static $belongs_many_many = array(
-        'TrackChairs' => 'SummitTrackChair',
+        'TrackChairs'   => 'SummitTrackChair',
+        'CategoryGroup' => 'PresentationCategoryGroup'
     );
 
     private static $summary_fields = array(

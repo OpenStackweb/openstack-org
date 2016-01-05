@@ -199,6 +199,7 @@ final class Summit extends DataObject implements ISummit
     (
         'Presentations'                => 'Presentation',
         'Categories'                   => 'PresentationCategory',
+        'CategoryGroups'               => 'PresentationCategoryGroup',
         'Locations'                    => 'SummitAbstractLocation',
         'Types'                        => 'SummitType',
         'EventTypes'                   => 'SummitEventType',
@@ -722,8 +723,12 @@ final class Summit extends DataObject implements ISummit
             $categories = new GridField('Categories', 'Presentation Categories', $this->Categories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
 
-            // locations
+            // track groups
+            $config     = GridFieldConfig_RecordEditor::create(10);
+            $categories = new GridField('CategoryGroups', 'Category Groups', $this->CategoryGroups(), $config);
+            $f->addFieldToTab('Root.Category Groups', $categories);
 
+            // locations
             $config = GridFieldConfig_RecordEditor::create();
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
