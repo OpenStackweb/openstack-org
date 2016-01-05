@@ -68,6 +68,7 @@
                 <div class="info_item_text">Design Summit Credential</div>
             </div>
             <% end_if %>
+            <% if Event.Sponsors %>
             <div class="logo">
                 <% loop Event.Sponsors %>
                     <% if TotalItems = 1 %>
@@ -77,6 +78,7 @@
                     <% end_if %>
                 <% end_loop %>
             </div>
+            <% end_if %>
         </div>
     </div>
 </div>
