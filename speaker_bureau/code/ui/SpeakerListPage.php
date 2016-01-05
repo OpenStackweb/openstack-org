@@ -47,12 +47,16 @@ class SpeakerListPage_Controller extends Page_Controller
 					        selectFirst: true,
 					        autoFill: true,
 					        focus: function(event, ui) {
-                                if($(ui.item).val() == 'No Matches')
+					            var selected_option = $(ui.item).val();
+                                if(selected_option == 'No Matches') {
                                     $(ui.item).disable();
+                                }
                             },
                             select: function(event, ui){
-                                if($(ui.item).val() == 'No Matches')
+                                var selected_option = $(ui.item).val();
+                                if(selected_option == 'No Matches') {
                                     return false;
+                                }
                             }
 					   });
 
@@ -132,19 +136,26 @@ class SpeakerListPage_Controller extends Page_Controller
     {
         if ($query = $this->getSearchQuery('q')) {
 
-            $results = DB::query("SELECT CONCAT(FirstName,' ',LastName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE FirstName LIKE '%$query%' AND AvailableForBureau = 1
+            $results = DB::query("SELECT CONCAT(FirstName,' ',LastName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker
+                                    WHERE FirstName LIKE '%$query%' AND AvailableForBureau = 1 GROUP BY Result
                                   UNION
-                                  SELECT CONCAT(LastName,', ',FirstName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker WHERE LastName LIKE '%$query%' AND AvailableForBureau = 1
+                                  SELECT CONCAT(LastName,', ',FirstName) AS Result, 'Speaker' AS Source FROM PresentationSpeaker
+                                    WHERE LastName LIKE '%$query%' AND AvailableForBureau = 1 GROUP BY Result
                                   UNION
-                                  SELECT Expertise AS Result, 'Expertise' AS Source FROM SpeakerExpertise WHERE Expertise LIKE '%$query%'
+                                  SELECT E.Expertise AS Result, 'Expertise' AS Source FROM SpeakerExpertise AS E
+                                    JOIN PresentationSpeaker AS S ON S.ID = E.SpeakerID
+                                    WHERE E.Expertise LIKE '%$query%' AND S.AvailableForBureau = 1 GROUP BY Result
                                   UNION
-                                  SELECT Name AS Result, 'Company' AS Source FROM Org WHERE Name LIKE '%$query%'");
+                                  SELECT O.Name AS Result, 'Company' AS Source FROM Org AS O
+                                    JOIN Affiliation AS A ON A.OrganizationID = O.ID
+                                    JOIN Member AS M ON M.ID = A.MemberID
+                                    JOIN PresentationSpeaker AS S ON S.MemberID = M.ID
+                                    WHERE O.Name LIKE '%$query%' AND S.AvailableForBureau = 1 GROUP BY Result");
 
             $Suggestions = '';
-
             if (count($results) > 0) {
                 foreach ($results as $Speaker) {
-                    $Suggestions = $Suggestions . $Speaker['Result'] . '|' . '1' . "\n";
+                    $Suggestions = $Suggestions . $Speaker['Result'] . ' - ' . $Speaker['Source'] . "\n";
                 }
 
                 return $Suggestions;
