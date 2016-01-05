@@ -38,6 +38,6 @@
     "pure-templates": "*",
     "clockpicker": "0.0.7",
     "urijs": "1.17.0",
-    "moment": "~2.10.6"
+    "moment": "2.11.0"
   }
 }

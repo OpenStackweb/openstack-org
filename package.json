@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "bower": "*",
-    "riot": "2.3.1",
+    "riot": "2.3.12",
     "riotjs-loader": "*",
     "riotcontrol": "*",
     "tag-loader": "*",
@@ -21,7 +21,11 @@
     "riotgear-toast": "*",
     "mousetrap": "*",
     "sortablejs": "*",
-    "xhr2" : "*"
+    "xhr2" : "*",
+    "less": "*",
+    "node-sass": "*",
+    "less-loader": "*",
+    "sass-loader": "*"
   },
   "license": "Apache-2.0"
 }

@@ -10,25 +10,22 @@
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
             <li class="active">Schedule</li>
         </ol>
-
         <script type="application/javascript">
-
-            var summit =
-            {
-                id:   $Summit.ID,
-                dates : {},
-                events: {},
-                summit_types: {},
-                speakers : {},
-                sponsors : {},
-                event_types:{},
-                locations : {},
-                tags: {},
-                tracks : {},
-                presentation_levels: {},
-                current_user: null
-            };
-
+                var summit =
+                {
+                    id:   $Summit.ID,
+                    dates : {},
+                    events: {},
+                    summit_types: {},
+                    speakers : {},
+                    sponsors : {},
+                    event_types:{},
+                    locations : {},
+                    tags: {},
+                    tracks : {},
+                    presentation_levels: {},
+                    current_user: null
+                };
                 <% loop $Summit.EventTypes %>
                 summit.event_types[{$ID}] =
                 {
@@ -36,8 +33,6 @@
                     color : "{$Color}",
                 };
                 <% end_loop %>
-
-
                 <% loop $Summit.Types %>
                 summit.summit_types[{$ID}] =
                 {
@@ -47,7 +42,6 @@
                     color : "{$Color}"
                 };
                 <% end_loop %>
-
                 <% loop $Summit.Locations %>
                     <% if ClassName == SummitVenue || ClassName == SummitExternalLocation %>
                     summit.locations[{$ID}] =
@@ -76,12 +70,10 @@
                         <% end_if %>
                     <% end_if %>
                 <% end_loop %>
-
                 <% loop $Summit.DatesWithEvents %>
                 summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', selected: false };
                 summit.events['{$Date}'] = [];
                 <% end_loop %>
-
         </script>
 
         <div class="page-header">
@@ -91,7 +83,7 @@
         <div class="row">
             <div class="col-md-6">
                 <schedule-admin-view-filters summit="{ summit }"></schedule-admin-view-filters>
-                <schedule-admin-view start_time="06:00" end_time="24:00" interval="15" summit="{ summit }"></schedule-admin-view>
+                <schedule-admin-view start_time="06:00" end_time="24:00" interval="15" summit="{ summit }" minute_pixels="3" slot_width="500"></schedule-admin-view>
             </div>
             <div class="col-md-6">
             </div>

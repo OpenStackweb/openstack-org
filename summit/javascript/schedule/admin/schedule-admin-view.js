@@ -1,5 +1,6 @@
 var api = require('./schedule-admin-view-api.js');
 
+require('./../../../css/summit-admin-schedule.scss')
 require('./schedule-admin-view-filters.tag');
 require('./schedule-admin-view-schedule-event.tag');
 require('./schedule-admin-view.tag');

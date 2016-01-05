@@ -34,7 +34,9 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.tag$/, loader: 'tag' },
-      { test: /\.css$/, loader: "style!css" }
+      { test: /\.css$/, loader: "style!css" },
+      { test: /\.less$/, loader: 'style!css!less' },
+      { test: /\.scss$/, loader: 'style!css!sass' },
     ]
   }
 };

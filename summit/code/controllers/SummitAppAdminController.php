@@ -315,7 +315,7 @@ class SummitAppAdminController extends Page_Controller
     public function scheduleView(SS_HTTPRequest $request)
     {
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('summit/css/summit-admin-schedule.css');
+        // Requirements::css('summit/css/summit-admin-schedule.css');
         Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.min.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         $summit_id = intval($this->request->param('SummitID'));

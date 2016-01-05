@@ -1,19 +1,20 @@
 <schedule-admin-view-schedule-event>
-    <div class="event resizable event-published" id="event_{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
-        <div class="ui-resizable-handle ui-resizable-n">
+    <div class="event resizable event-published" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
+        <div class="ui-resizable-handle ui-resizable-n" title="{ data.start_time }">
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
         <div class="event-title">{ data.title }</div>
-        <div class="event-duration">{ data.start_time } - { data.end_time }</div>
-        <div class="ui-resizable-handle ui-resizable-s">
+        <div class="ui-resizable-handle ui-resizable-s" title="{ data.end_time }">
             <span class="ui-icon ui-icon-triangle-1-s"></span>
         </div>
     </div>
 
     <script>
 
-    this.data = opts.data;
-    var self  = this;
+    this.data          = opts.data;
+    this.minute_pixels = parseInt(opts.minute_pixels);
+    this.interval      = parseInt(opts.interval);
+    var self           = this;
 
     this.on('mount', function() {
         $(function() {
@@ -24,10 +25,10 @@
         var start_time    = moment(self.data.start_time, 'HH:mm a') ;
         var start_hour    = start_time.hour();
         var start_minutes = start_time.minute();
-        var r             = start_minutes % 15;
+        var r             = start_minutes % self.interval;
         var start_minutes = start_minutes - r;
         var target        = $('#time_slot_container_'+self.pad(start_hour,2)+'_'+self.pad(start_minutes,2));
-        var top           = parseInt(target.position().top) + ( r * 3);
+        var top           = parseInt(target.position().top) + ( r * self.minute_pixels);
         return top+'px';
     }
 
@@ -35,7 +36,7 @@
         var start_time    = moment(self.data.start_time, 'HH:mm a') ;
         var start_hour    = start_time.hour();
         var start_minutes = start_time.minute();
-        var r             = start_minutes % 15;
+        var r             = start_minutes % self.interval;
         var start_minutes = start_minutes - r;
         var target        = $('#time_slot_container_'+self.pad(start_hour,2)+'_'+self.pad(start_minutes,2));
         var left          = target.position().left;
@@ -48,7 +49,7 @@
         var duration   = moment.duration(end_time.diff(start_time));
         var minutes    = duration.asMinutes();
         console.log('event duration '+ minutes);
-        return (parseInt(minutes) * 3)+'px';
+        return (parseInt(minutes) * self.minute_pixels)+'px';
     }
 
     pad(num, size) {
