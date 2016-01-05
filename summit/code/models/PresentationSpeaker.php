@@ -235,6 +235,7 @@ implements IPresentationSpeaker
 
     public function hasReachPresentationLimitBy($summit_id = null)
     {
+        if(!$this->exists()) return false;
         return ($this->getPresentationsCount($summit_id) >= MAX_SUMMIT_ALLOWED_PER_USER);
     }
 
