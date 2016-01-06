@@ -128,10 +128,9 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
         return $this->training_facade->getAllClasses();
     }
 
-	public function LocationCombo($only_current=true){
+	public function LocationCombo(){
 		$source = array();
-        $filter = ($only_current) ? DateTimeUtils::getCurrentDate() : '';
-		$result = $this->course_location_query->handle(new OpenStackImplementationNamesQuerySpecification($filter));
+		$result = $this->course_location_query->handle(new OpenStackImplementationNamesQuerySpecification(DateTimeUtils::getCurrentDate()));
 		foreach($result->getResult() as $dto){
 			$source[$dto->getValue()] =  $dto->getValue();
 		}
@@ -151,10 +150,9 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 		return $ddl;
 	}
 
-    public function CompanyCombo($only_current=true){
+    public function CompanyCombo(){
         $source = array();
-        $filter = ($only_current) ? DateTimeUtils::getCurrentDate() : '';
-        $result = $this->course_company_query->handle(new OpenStackImplementationNamesQuerySpecification($filter));
+        $result = $this->course_company_query->handle(new OpenStackImplementationNamesQuerySpecification(DateTimeUtils::getCurrentDate()));
         foreach($result->getResult() as $dto){
             $source[$dto->getValue()] =  $dto->getValue();
         }

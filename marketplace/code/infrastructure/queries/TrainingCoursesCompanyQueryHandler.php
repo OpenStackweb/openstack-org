@@ -29,7 +29,7 @@ final class TrainingCoursesCompanyQueryHandler implements IQueryHandler {
             $current_date   = Convert::raw2sql($current_date);
             $date_filter = "AND (
                                     (
-                                        (DATE('{$current_date}') < TrainingCourseScheduleTime.StartDate AND DATE('{$current_date}') < TrainingCourseScheduleTime.EndDate)
+                                        (DATE('{$current_date}') < TrainingCourseScheduleTime.EndDate)
                                         OR
                                         (TrainingCourse.Online=1 AND TrainingCourseScheduleTime.StartDate IS NULL AND TrainingCourseScheduleTime.EndDate IS NULL)
                                     )

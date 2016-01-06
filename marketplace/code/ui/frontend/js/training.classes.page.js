@@ -17,7 +17,7 @@ jQuery(document).ready(function($){
 
     var location_filter = $('#location-term');
     if(location_filter.length > 0 ){
-        location_filter.prepend("<option value='' selected='selected'>-- Select a Location--</option>");
+        location_filter.prepend("<option value='' selected='selected'>-- Select a City--</option>");
         location_filter.chosen({disable_search_threshold: 3, width:400});
         location_filter.change(function () {
             filter_list(true);
