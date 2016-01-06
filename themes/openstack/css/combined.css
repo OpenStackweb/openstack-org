@@ -1529,7 +1529,7 @@ a.featured-link:hover {
   max-height: 113px;
   max-width: 1140px;
   margin-bottom: 20px;
-  background-image: url('/themes/openstack/images/conferences/tokyo/tokyo-banner-events.jpg');
+  background-image: url('/summit/images/austin-banner-events.jpg');
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center center;
@@ -1539,7 +1539,7 @@ a.featured-link:hover {
 @media (max-width: 767px) {
   .event-ad-lrg {
     max-width: 767px;
-    background-image: url('/themes/openstack/images/conferences/tokyo/tokyo-banner-events-small.jpg');
+    background-image: url('/summit/images/austin-banner-events-small.jpg');
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center center; } }
