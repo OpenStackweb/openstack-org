@@ -45,8 +45,9 @@ final class SapphireJobRepository extends SapphireRepository {
             $query->addAndCondition(QueryCriteria::equal('FoundationJob',1));
 
         $now      = new DateTime();
+        $six_months_ago = new DateTime();
         $query->addAndCondition(QueryCriteria::equal('Active',1));
-        $post_date = $now->sub(new DateInterval('P6M'));
+        $post_date = $six_months_ago->sub(new DateInterval('P6M'));
         $query->addAndCondition(QueryCriteria::greaterOrEqual('JobPostedDate',$post_date->format('Y-m-d')));
         $query->addAndCondition(QueryCriteria::greaterOrEqual('ExpirationDate',$now->format('Y-m-d')));
         $query->addOrder(QueryOrder::desc('JobPostedDate'));
