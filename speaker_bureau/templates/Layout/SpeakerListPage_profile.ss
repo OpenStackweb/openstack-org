@@ -90,7 +90,14 @@
                     <div class="span-6 last">
                         <ul>
                             <% loop MixedPresentationLinks(5) %>
-                                <li><a href="$Link"><% if $Source = 'summit' %>$Title<% else %>$Link<% end_if %></a>
+                                <li>
+                                    <a href="$Link"><% if $Title != '' %>$Title<% else %>$Link<% end_if %></a>
+                                    <% if $YoutubeID %>
+                                        <br>
+                                        <iframe frameborder="0" width="200" height="120" allowfullscreen=""
+                                                src="//www.youtube.com/embed/{$YoutubeID}?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;controls=2">
+                                        </iframe>
+                                    <% end_if %>
                                 </li>
                             <% end_loop %>
                         </ul>

@@ -56,6 +56,25 @@ input[type="radio"] {
     width: 90%;
 }
 
+.presentation > input {
+    width: 89%;
+}
+
+.presentation {
+    margin: 15px 0;
+    clear:both;
+}
+
+.presentation .error {
+    margin: 0 0 10px 27px;
+}
+
+.presentation > span {
+    float:left;
+    padding-top: 6px;
+    margin-right: 10px;
+}
+
 #EditSpeakerProfileForm_EditSpeakerProfileForm_WillingToTravel input {
     top: 6px;
 }

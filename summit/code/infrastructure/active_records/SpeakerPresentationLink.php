@@ -20,7 +20,8 @@ class SpeakerPresentationLink
     implements ISpeakerPresentationLink {
 
     private static $db = array(
-        'LinkUrl' => 'Text'
+        'LinkUrl' => 'Text',
+        'Title'   => 'Text'
     );
 
     private static $has_one = array
@@ -34,5 +35,14 @@ class SpeakerPresentationLink
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
+    }
+
+    public function getYoutubeID() {
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $this->LinkUrl, $matches);
+        if (count($matches) > 1) {
+            return $matches[1];
+        }
+
+        return '';
     }
 }

@@ -92,11 +92,16 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         $ExpertiseField5 = new TextField('Expertise[5]','#5');
 
         // Links To Presentations
-        $PresentationLinkField1 = new TextField('PresentationLink[1]','#1');
-        $PresentationLinkField2 = new TextField('PresentationLink[2]','#2');
-        $PresentationLinkField3 = new TextField('PresentationLink[3]','#3');
-        $PresentationLinkField4 = new TextField('PresentationLink[4]','#4');
-        $PresentationLinkField5 = new TextField('PresentationLink[5]','#5');
+        $PresentationLinkField1  = new TextField('PresentationLink[1]','#1');
+        $PresentationTitleField1 = new TextField('PresentationTitle[1]','');
+        $PresentationLinkField2  = new TextField('PresentationLink[2]','#2');
+        $PresentationTitleField2 = new TextField('PresentationTitle[2]','');
+        $PresentationLinkField3  = new TextField('PresentationLink[3]','#3');
+        $PresentationTitleField3 = new TextField('PresentationTitle[3]','');
+        $PresentationLinkField4  = new TextField('PresentationLink[4]','#4');
+        $PresentationTitleField4 = new TextField('PresentationTitle[4]','');
+        $PresentationLinkField5  = new TextField('PresentationLink[5]','#5');
+        $PresentationTitleField5 = new TextField('PresentationTitle[5]','');
 
         // Load Existing Data if present
         if($speaker) {
@@ -131,11 +136,11 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $CountriesToTravelField->setValue(implode(',',$country_array));
 
             foreach ($speaker->MixedPresentationLinks(5) as $key => $presentation) {
+                ${'PresentationLinkField'.($key+1)}->setValue($presentation->Link);
+                ${'PresentationTitleField'.($key+1)}->setValue($presentation->Title);
                 if ($presentation->Source == 'summit') {
-                    ${'PresentationLinkField'.($key+1)}->setValue($presentation->Link);
                     ${'PresentationLinkField'.($key+1)}->setDisabled(true);
-                } else {
-                    ${'PresentationLinkField'.($key+1)}->setValue($presentation->Link);
+                    ${'PresentationTitleField'.($key+1)}->setDisabled(true);
                 }
             }
 
@@ -178,10 +183,15 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $ExpertiseField4,
             $ExpertiseField5,
             $PresentationLinkField1,
+            $PresentationTitleField1,
             $PresentationLinkField2,
+            $PresentationTitleField2,
             $PresentationLinkField3,
+            $PresentationTitleField3,
             $PresentationLinkField4,
-            $PresentationLinkField5
+            $PresentationTitleField4,
+            $PresentationLinkField5,
+            $PresentationTitleField5
         );
 
         $save_action = new FormAction('addAction', 'Save Speaker Details');
@@ -283,10 +293,12 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             foreach ($speaker->OtherPresentationLinks() as $currentpres) {
                 $currentpres->delete();
             }
-            foreach ($data['PresentationLink'] as $link) {
+            foreach ($data['PresentationLink'] as $key => $link) {
                 if (trim($link) != '') {
+                    $presentation_title = trim($data['PresentationTitle'][$key]);
                     $presentation_link = SpeakerPresentationLink::create(array(
-                        'LinkUrl' => $link
+                        'LinkUrl' => $link,
+                        'Title'   => $presentation_title
                     ));
                     $speaker->OtherPresentationLinks()->add( $presentation_link );
                 }

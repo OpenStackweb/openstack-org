@@ -155,7 +155,7 @@ class SpeakerListPage_Controller extends Page_Controller
             $Suggestions = '';
             if (count($results) > 0) {
                 foreach ($results as $Speaker) {
-                    $Suggestions = $Suggestions . $Speaker['Result'] . ' - ' . $Speaker['Source'] . "\n";
+                    $Suggestions = $Suggestions . $Speaker['Result'] . '|' . '1' . "\n";
                 }
 
                 return $Suggestions;

@@ -111,11 +111,16 @@ JS;
             ->text('Expertise[4]','#4')
             ->text('Expertise[5]','#5')
             ->literal('PresentationTitle','<h3>Links To Previous Presentations ( Up to 5)</h3>')
-            ->text('PresentationLink[1]','#1')
-            ->text('PresentationLink[2]','#2')
-            ->text('PresentationLink[3]','#3')
-            ->text('PresentationLink[4]','#4')
-            ->text('PresentationLink[5]','#5')
+            ->text('PresentationLink[1]','Link #1')
+            ->text('PresentationTitle[1]','Title #1')
+            ->text('PresentationLink[2]','Link #2')
+            ->text('PresentationTitle[2]','Title #2')
+            ->text('PresentationLink[3]','Link #3')
+            ->text('PresentationTitle[3]','Title #3')
+            ->text('PresentationLink[4]','Link #4')
+            ->text('PresentationTitle[4]','Title #4')
+            ->text('PresentationLink[5]','Link #5')
+            ->text('PresentationTitle[5]','Title #5')
             ->literal('RecordingAndPublishingLegalAgreement',sprintf('Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.', Summit::ActiveSummit()->Title))
             ->header('Want to be in the Speakers\' Bureau?')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
@@ -176,14 +181,12 @@ JS;
         }
 
         foreach ($speaker->MixedPresentationLinks(5) as $key => $presentation) {
+            $this->fields->fieldByName('PresentationLink['.($key+1).']')->setValue($presentation->Link);
+            $this->fields->fieldByName('PresentationTitle['.($key+1).']')->setValue($presentation->Title);
             if ($presentation->Source == 'summit')
             {
-                $this->fields->fieldByName('PresentationLink['.($key+1).']')->setValue($presentation->Link);
                 $this->fields->fieldByName('PresentationLink['.($key+1).']')->setDisabled(true);
-            }
-            else
-            {
-                $this->fields->fieldByName('PresentationLink['.($key+1).']')->setValue($presentation->Link);
+                $this->fields->fieldByName('PresentationTitle['.($key+1).']')->setDisabled(true);
             }
         }
 
@@ -227,11 +230,17 @@ JS;
 
         $speaker->OtherPresentationLinks()->removeAll();
         for($i = 1 ; $i <= 5 ; $i++ ){
-            $field = $this->fields->fieldByName("PresentationLink[{$i}]");
-            if(is_null($field)) continue;
-            $val   = $field->Value();
-            if(empty($val)) continue;
-            $speaker->OtherPresentationLinks()->add( SpeakerPresentationLink::create(array('LinkUrl' => trim($val))));
+            $link = $this->fields->fieldByName("PresentationLink[{$i}]");
+            $title = $this->fields->fieldByName("PresentationTitle[{$i}]");
+            if(is_null($link)) continue;
+            $link_val   = $link->Value();
+            $title_val   = (is_null($title)) ? '' : $title->Value();
+            if(empty($link_val)) continue;
+
+            $speaker->OtherPresentationLinks()->add( SpeakerPresentationLink::create(array(
+                'LinkUrl' => trim($link_val),
+                'Title' => trim($title_val))
+            ));
         }
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');

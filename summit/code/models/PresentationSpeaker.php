@@ -245,14 +245,26 @@ implements IPresentationSpeaker
         $links = array();
         foreach ($this->Presentations()->filter("DisplayOnSite",1) as $key => $presentation) {
             if ($key > ($limit-1)) exit;
-            $links[] = new ArrayData(array('Source'=>'summit','Link'=>Director::absoluteURL($presentation->Link()),'Title'=>$presentation->Title));
+
+            $links[] = new ArrayData(array(
+                'Source' => 'summit',
+                'Link' => Director::absoluteURL($presentation->Link()),
+                'Title' => $presentation->Title,
+                'YoutubeID' => '')
+            );
+
             $presentation_count++;
         }
         // complete limit with user presentations
         if ($presentation_count < $limit) {
             foreach ($this->OtherPresentationLinks() as $other_presentation) {
                 if ($presentation_count < $limit) {
-                    $links[] = new ArrayData(array('Source' => 'speaker', 'Link' => $other_presentation->LinkUrl));
+                    $links[] = new ArrayData(array(
+                        'Source' => 'speaker',
+                        'Link' => $other_presentation->LinkUrl,
+                        'Title' => $other_presentation->Title,
+                        'YoutubeID' => $other_presentation->getYoutubeID())
+                    );
                     $presentation_count++;
                 }
             }

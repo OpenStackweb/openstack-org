@@ -135,25 +135,30 @@
 
             <div class="field text ">
                 <label for="$FormName_PresentationLink" class="left">Links To Previous Presentations</label>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(PresentationLink[1]).Title </span>
-                    $Fields.dataFieldByName(PresentationLink[1])
+                <div class="presentation">
+                    <div> $Fields.dataFieldByName(PresentationLink[1]).Title </div>
+                    <span>Link:</span> $Fields.dataFieldByName(PresentationLink[1])
+                    <span>Title:</span> $Fields.dataFieldByName(PresentationTitle[1])
                 </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(PresentationLink[2]).Title </span>
-                    $Fields.dataFieldByName(PresentationLink[2])
+                <div class="presentation">
+                    <div> $Fields.dataFieldByName(PresentationLink[2]).Title </div>
+                    <span>Link:</span> $Fields.dataFieldByName(PresentationLink[2])
+                    <span>Title:</span> $Fields.dataFieldByName(PresentationTitle[2])
                 </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(PresentationLink[3]).Title </span>
-                    $Fields.dataFieldByName(PresentationLink[3])
+                <div class="presentation">
+                    <div> $Fields.dataFieldByName(PresentationLink[3]).Title </div>
+                    <span>Link:</span> $Fields.dataFieldByName(PresentationLink[3])
+                    <span>Title:</span> $Fields.dataFieldByName(PresentationTitle[3])
                 </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(PresentationLink[4]).Title </span>
-                    $Fields.dataFieldByName(PresentationLink[4])
+                <div class="presentation">
+                    <div> $Fields.dataFieldByName(PresentationLink[4]).Title </div>
+                    <span>Link:</span> $Fields.dataFieldByName(PresentationLink[4])
+                    <span>Title:</span> $Fields.dataFieldByName(PresentationTitle[4])
                 </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(PresentationLink[5]).Title </span>
-                    $Fields.dataFieldByName(PresentationLink[5])
+                <div class="presentation">
+                    <div> $Fields.dataFieldByName(PresentationLink[5]).Title </div>
+                    <span>Link:</span> $Fields.dataFieldByName(PresentationLink[5])
+                    <span>Title:</span> $Fields.dataFieldByName(PresentationTitle[5])
                 </div>
             </div>
 

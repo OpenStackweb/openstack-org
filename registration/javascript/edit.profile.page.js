@@ -229,7 +229,16 @@ jQuery(document).ready(function($) {
                 'Expertise[3]':{ValidPlainText:true },
                 'Expertise[4]':{ValidPlainText:true },
                 'Expertise[5]':{ValidPlainText:true },
-                'PresentationLink[1]' : {required: true},
+                'PresentationLink[1]' : {required: true, url: true},
+                'PresentationLink[2]' : {url: true},
+                'PresentationLink[3]' : {url: true},
+                'PresentationLink[4]' : {url: true},
+                'PresentationLink[5]' : {url: true},
+                'PresentationTitle[1]' : {ValidPlainText: true},
+                'PresentationTitle[2]' : {ValidPlainText: true},
+                'PresentationTitle[3]' : {ValidPlainText: true},
+                'PresentationTitle[4]' : {ValidPlainText: true},
+                'PresentationTitle[5]' : {ValidPlainText: true},
                 'Language[1]' : {required: true,ValidPlainText:true},
                 'Language[2]':{ValidPlainText:true },
                 'Language[3]':{ValidPlainText:true },
@@ -260,6 +269,10 @@ jQuery(document).ready(function($) {
                 'PresentationLink[1]': {
                     required: 'Add at least one presentation link.',
                     regex: 'Link is not valid.'
+                },
+                'PresentationTitle[1]': {
+                    required: 'Add a title to the presentation.',
+                    regex: 'Title is not valid.'
                 },
                 'Language[1]': {
                     required: 'Add at least one language you are fluent in.',
