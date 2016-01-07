@@ -23,4 +23,45 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         parent::__construct(new Presentation());
     }
 
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublishedBySummit($summit_id, $page = 1, $page_size = 10, $order = null)
+    {
+       if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
+       $list      = Presentation::get()->filter( array('SummitID' => $summit_id, 'Published' => 0))->where(" Title IS NOT NULL AND Title <>'' ")->sort($order);
+       $count     = intval($list->count());
+       $offset    = ($page - 1 ) * $page_size;
+       $data      = $list->limit($page_size, $offset);
+       return array($page, $page_size, $count, $data);
+    }
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null,  $page = 1 ,$page_size = 10,  $order = null)
+    {
+        if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
+        $filter = array('SummitID' => $summit_id, 'Published' => 0);
+        if(!empty($track_list)){
+            $filter['SummitSelectedPresentationList.ID '] = $track_list;
+        }
+
+        $list = Presentation::get()->filter($filter)->where(" Title IS NOT NULL AND Title <>'' ")
+            ->innerJoin('SummitSelectedPresentation', 'SummitSelectedPresentation.PresentationID = Presentation.ID')
+            ->innerJoin('SummitSelectedPresentationList', "SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group')")
+            ->sort($order);
+
+        $count     = intval($list->count());
+        $offset    = ($page - 1 ) * $page_size;
+        $data      = $list->limit($page_size, $offset);
+        return array($page, $page_size, $count,  $data);
+    }
 }

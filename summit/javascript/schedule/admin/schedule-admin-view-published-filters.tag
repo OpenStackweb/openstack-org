@@ -1,4 +1,4 @@
-<schedule-admin-view-filters>
+<schedule-admin-view-published-filters>
         <div class="row">
             <div class="col-md-12">
                 <label for="select_day">Day</label>
@@ -38,4 +38,4 @@
                     self.api.getScheduleByDayAndLocation(self.summit.id, day ,location_id);
                 }
         </script>
-</schedule-admin-view-filters>
+</schedule-admin-view-published-filters>

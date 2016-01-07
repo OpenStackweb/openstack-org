@@ -45,7 +45,8 @@ body::-webkit-scrollbar { width: 0 !important }
 
 .event
 {
-  background-color: green;
+  background-color: linen;
+  border: 1px solid silver;
 }
 
 .ui-resizable-helper { width:$slot_width; border: 2px dotted #00F; }
@@ -123,4 +124,10 @@ body::-webkit-scrollbar { width: 0 !important }
 .ui-icon-triangle-1-s, .ui-icon-triangle-1-n {
   margin-left:auto;
   margin-right:auto;
+}
+
+.unpublished-events-list li {
+  height: $slot_height;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

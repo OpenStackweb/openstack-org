@@ -3,7 +3,9 @@
         <div class="ui-resizable-handle ui-resizable-n" title="{ data.start_time }">
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
-        <div class="event-title">{ data.title }</div>
+        <div class="event-inner-body">
+            <div class="event-title">{ data.title }</div>
+        </div>
         <div class="ui-resizable-handle ui-resizable-s" title="{ data.end_time }">
             <span class="ui-icon ui-icon-triangle-1-s"></span>
         </div>

@@ -109,11 +109,12 @@ final class SummitsApi extends AbstractRestfulJsonApi
     }
 
     static $url_handlers = array(
-        'GET $SUMMIT_ID/add-ons' => 'getAllSponsorshipAddOnsBySummit',
-        'GET $SUMMIT_ID/packages' => 'getAllSponsorshipPackagesBySummit',
-        '$SUMMIT_ID/schedule'           => 'handleSchedule',
+        'GET $SUMMIT_ID/add-ons'                                  => 'getAllSponsorshipAddOnsBySummit',
+        'GET $SUMMIT_ID/packages'                                 => 'getAllSponsorshipPackagesBySummit',
+        '$SUMMIT_ID/schedule'                                     => 'handleSchedule',
+        '$SUMMIT_ID/events'                                       => 'handleEvents',
         'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/approve' => 'approvePurchaseOrder',
-        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject' => 'rejectPurchaseOrder',
+        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject'  => 'rejectPurchaseOrder',
     );
 
     static $allowed_actions = array(
@@ -122,6 +123,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'approvePurchaseOrder',
         'rejectPurchaseOrder',
         'handleSchedule',
+        'handleEvents',
     );
 
     public function getAllSponsorshipAddOnsBySummit()
@@ -215,6 +217,12 @@ final class SummitsApi extends AbstractRestfulJsonApi
     public function handleSchedule(SS_HTTPRequest $request)
     {
         $api = SummitAppScheduleApi::create($this);
+        return $api->handleRequest($request, DataModel::inst());
+    }
+
+    public function handleEvents(SS_HTTPRequest $request)
+    {
+        $api = SummitAppEventsApi::create($this);
         return $api->handleRequest($request, DataModel::inst());
     }
 }

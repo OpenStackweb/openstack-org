@@ -82,10 +82,12 @@
 
         <div class="row">
             <div class="col-md-6">
-                <schedule-admin-view-filters summit="{ summit }"></schedule-admin-view-filters>
-                <schedule-admin-view start_time="06:00" end_time="24:00" interval="15" summit="{ summit }" minute_pixels="3" slot_width="500"></schedule-admin-view>
+                <schedule-admin-view-published-filters summit="{ summit }"></schedule-admin-view-published-filters>
+                <schedule-admin-view-published start_time="06:00" end_time="24:00" interval="15" summit="{ summit }" minute_pixels="3" slot_width="500"></schedule-admin-view-published>
             </div>
             <div class="col-md-6">
+                <schedule-admin-view-unpublished-filters summit="{ summit }"></schedule-admin-view-unpublished-filters>
+                <schedule-admin-view-unpublished summit="{ summit }" slot_width="500" interval="15" minute_pixels="3" slot_width="500"></schedule-admin-view-unpublished>
             </div>
         </div>
     </div>

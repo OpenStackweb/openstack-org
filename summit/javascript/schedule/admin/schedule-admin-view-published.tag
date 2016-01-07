@@ -1,4 +1,4 @@
-<schedule-admin-view>
+<schedule-admin-view-published>
 
             <div class="row">
                 <div class="col-md-12">
@@ -20,19 +20,20 @@
 
     <script>
 
-        this.day             = null;
-        this.location        = null;
-        this.start_time      = moment(opts.start_time, 'HH:mm');
-        this.end_time        = moment(opts.end_time, 'HH:mm');
-        this.interval        = parseInt(opts.interval);
-        this.minute_pixels   = parseInt(opts.minute_pixels);
-        this.slot_width      = parseInt(opts.slot_width);
-        this.schedule_events = {};
-        this.time_slots      = [];
-        this.api             = opts.api;
-
-        var self             = this;
-        var done             = false;
+        this.day               = null;
+        this.location          = null;
+        this.start_time        = moment(opts.start_time, 'HH:mm');
+        this.end_time          = moment(opts.end_time, 'HH:mm');
+        this.interval          = parseInt(opts.interval);
+        this.minute_pixels     = parseInt(opts.minute_pixels);
+        this.slot_width        = parseInt(opts.slot_width);
+        this.dispatcher        = opts.dispatcher;
+        this.unpublished_store = opts.unpublished_store;
+        this.schedule_events   = {};
+        this.time_slots        = [];
+        this.api               = opts.api;
+        var self               = this;
+        var done               = false;
 
         // create UI
         var slot = this.start_time ;
@@ -75,7 +76,7 @@
                             var e           = self.schedule_events[id2];
                             var start_time2 = moment(e.start_time, 'HH:mm a');
                             var end_time2   = moment(e.end_time, 'HH:mm a');
-                            if(start_time.isSameOrBefore(end_time2) && end_time.isSameOrAfter(start_time2)) {
+                            if(start_time.isBefore(end_time2) && end_time.isAfter(start_time2)) {
                                 console.log('overlapped!!!');
                                 return false;
                             }
@@ -87,6 +88,13 @@
                         event.css('left', left);
 
                         // set model time
+                        if(event.hasClass('event-unpublished')) {
+                            event.removeClass('event-unpublished');
+                            event.addClass('event-published');
+                            $('.ui-resizable-n', event).show();
+                            $('.ui-resizable-s', event).show();
+                            self.schedule_events[id] = self.unpublished_store.delete(id);
+                        }
                         self.schedule_events[id].start_time = start_time.format('hh:mm a');
                         self.schedule_events[id].end_time   = end_time.format('hh:mm a');
 
@@ -235,4 +243,4 @@
         });
 
     </script>
-</schedule-admin-view>
+</schedule-admin-view-published>

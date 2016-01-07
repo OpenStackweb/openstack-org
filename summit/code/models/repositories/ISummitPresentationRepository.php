@@ -14,5 +14,21 @@
  **/
 interface ISummitPresentationRepository extends IEntityRepository
 {
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublishedBySummit($summit_id, $page = 1 ,$page_size = 10, $order = null);
 
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $page = 1 ,$page_size = 10, $order = null);
 }
