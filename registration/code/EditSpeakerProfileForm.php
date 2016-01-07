@@ -104,6 +104,9 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         $PresentationLinkField5  = new TextField('PresentationLink[5]','#5');
         $PresentationTitleField5 = new TextField('PresentationTitle[5]','');
 
+        $NotesField = new TinyMCEEditorField('Notes',"Notes");
+        $NotesField->addExtraClass('notes');
+
         // Load Existing Data if present
         if($speaker) {
 	        $this->record = $speaker;
@@ -120,6 +123,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $WillingVideoField->setValue($speaker->WillingToPresentVideo);
             $FundedTravelField->setValue($speaker->FundedTravel);
             $WillingToTravel->setValue($speaker->WillingToTravel);
+            $NotesField->setValue($speaker->Notes);
 
             foreach ($speaker->AreasOfExpertise() as $key => $expertise) {
                 if ($key > 4) break;
@@ -194,7 +198,8 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $PresentationLinkField4,
             $PresentationTitleField4,
             $PresentationLinkField5,
-            $PresentationTitleField5
+            $PresentationTitleField5,
+            $NotesField
         );
 
         $save_action = new FormAction('addAction', 'Save Speaker Details');

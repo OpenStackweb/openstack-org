@@ -6,12 +6,33 @@
     </h2>
 
     <div class="search_criteria">
-        Spoken language: <b><% if $getSearchQuery('spoken_language') = '' %>
-        Any <% else %> $getSearchQuery('spoken_language') <% end_if %> </b>-
-        Country of Origin: <b><% if $getSearchQuery('country_origin') = '' %>
-        Any <% else %> $getSearchQuery('country_origin') <% end_if %> </b>-
-        Travel Preference: <b><% if $getSearchQuery('travel_preference') = '' %>
-        Any <% else %> $getSearchQuery('travel_preference') <% end_if %> </b>
+        Spoken language:
+        <b>
+        <% if $getSearchQuery('spoken_language') %>
+            $getSearchQueryAsString('spoken_language')
+        <% else %>
+            Any
+        <% end_if %>
+        </b>-
+
+        Country of Origin:
+        <b>
+        <% if $getSearchQuery('country_origin') %>
+            $getSearchQueryAsString('country_origin')
+        <% else %>
+            Any
+        <% end_if %>
+        </b>-
+
+        Travel Preference:
+        <b>
+        <% if $getSearchQuery('travel_preference') %>
+            $getSearchQueryAsString('travel_preference')
+        <% else %>
+            Any
+        <% end_if %>
+        </b>
+
         <% if $getSearchQuery('search_query') %>
             - Search: <b>$getSearchQuery('search_query')</b>
         <% end_if %>

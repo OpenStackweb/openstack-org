@@ -11,11 +11,12 @@
                    placeholder="first name, last name, expertise, or company"/>
         </div>
 
-        <label class="left" for="filters" style="margin-top: 10px;">Or Filter</label>
+        <label class="left" for="filters" style="margin: 20px 0 10px 0;">Or Filter</label>
+        (search results will match at least one of the options selected for every filter)
 
         <div class="filters">
             Spoken Language:
-            <select name="spoken_language">
+            <select id="spoken_language" name="spoken_language[]" multiple="multiple">
                 <option value=""> Any</option>
                 <% loop AvailableLanguages %>
                     <option value="$Language">$Language</option>
@@ -23,7 +24,7 @@
             </select>
 
             Country of Origin:
-            <select name="country_origin">
+            <select id="country_origin" name="country_origin[]" multiple="multiple">
                 <option value=""> Any</option>
                 <% loop AvailableCountries %>
                     <option value="$Country">$Country</option>
@@ -31,7 +32,7 @@
             </select>
 
             Travel Preference:
-            <select name="travel_preference">
+            <select id="travel_preference" name="travel_preference[]" multiple="multiple">
                 <option value=""> Any</option>
                 <% loop AvailableTravelCountries %>
                     <option value="$Country">$Country</option>

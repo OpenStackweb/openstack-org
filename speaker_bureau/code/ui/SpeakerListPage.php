@@ -36,36 +36,12 @@ class SpeakerListPage_Controller extends Page_Controller
         //CSS
         Requirements::css("themes/openstack/css/jquery.autocomplete.css");
         Requirements::css("speaker_bureau/css/speaker.bureau.css");
-
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        //JS
         Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
-        Requirements::CustomScript("
-
-					jQuery(function(){
-
-					  $('#search_form_input').autocomplete('" . $this->Link('suggestions') . "', {
-					        minChars: 3,
-					        selectFirst: true,
-					        autoFill: true,
-					        focus: function(event, ui) {
-					            var selected_option = $(ui.item).val();
-                                if(selected_option == 'No Matches') {
-                                    $(ui.item).disable();
-                                }
-                            },
-                            select: function(event, ui){
-                                var selected_option = $(ui.item).val();
-                                if(selected_option == 'No Matches') {
-                                    return false;
-                                }
-                            }
-					   });
-
-						$('#search_form_input').focus();
-
-					});
-
-
-			");
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript("speaker_bureau/js/speaker.bureau.js");
+        Requirements::CustomScript(" var suggestions_url = '" . $this->Link('suggestions') . "'; ");
     }
 
     function SpeakerList()
@@ -178,6 +154,11 @@ class SpeakerListPage_Controller extends Page_Controller
         }
     }
 
+    function getSearchQueryAsString($search_var) {
+        $query_var = $this->getSearchQuery($search_var);
+        return implode(', ',$query_var);
+    }
+
     public function results()
     {
         $empty_search = true;
@@ -186,17 +167,20 @@ class SpeakerListPage_Controller extends Page_Controller
 
         if ($spoken_language = $this->getSearchQuery('spoken_language')) {
             $empty_search = false;
-            $where_string .= " AND SpeakerLanguage.Language = '{$spoken_language}'";
+            $languages = "'" . implode("','", $spoken_language) . "'";
+            $where_string .= " AND SpeakerLanguage.Language IN ({$languages})";
         }
 
         if ($country_origin = $this->getSearchQuery('country_origin')) {
             $empty_search = false;
-            $where_string .= " AND Countries.Name = '{$country_origin}'";
+            $countries = "'" . implode("','", $country_origin) . "'";
+            $where_string .= " AND Countries.Name IN ({$countries})";
         }
 
         if ($travel_preference = $this->getSearchQuery('travel_preference')) {
             $empty_search = false;
-            $where_string .= " AND Countries2.Name = '{$travel_preference}'";
+            $preferences = "'" . implode("','", $travel_preference) . "'";
+            $where_string .= " AND Countries2.Name IN ({$preferences})";
         }
 
         if ($query = $this->getSearchQuery('search_query')) {

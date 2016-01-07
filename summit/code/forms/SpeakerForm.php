@@ -142,6 +142,10 @@ JS;
             ->multidropdown('CountriesToTravel', 'Countries willing to travel to (Use Ctrl + C to select more than one):', CountryCodes::$iso_3166_countryCodes)
             ->configure()
                 ->addExtraClass('countries-to-travel')
+            ->end()
+            ->tinyMCEEditor('Notes',"Notes")
+                ->configure()
+                ->setRows(10)
             ->end();
         return $fields;
     }

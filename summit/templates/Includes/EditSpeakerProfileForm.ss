@@ -169,6 +169,13 @@
             </div>
 
             <div class="field">
+                <label for="$FormName_Notes" class="left">$Fields.dataFieldByName(Notes).Title</label>
+                <div class="">
+                    $Fields.dataFieldByName(Notes)
+                </div>
+            </div>
+
+            <div class="field">
                 $Fields.dataFieldByName(SpeakerID)
                 $Fields.dataFieldByName(MemberID)
                 $Fields.dataFieldByName(ReplaceBio)

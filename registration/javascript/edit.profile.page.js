@@ -175,7 +175,7 @@ jQuery(document).ready(function($) {
         // see if Bio has been modified, we do it this way because we can't make the textarea onchange event work
         edit_profile_form.submit(function()
         {
-            if (tinyMCE.activeEditor.isDirty()) {
+            if (tinyMCE.get('EditProfileForm_EditProfileForm_Bio').isDirty()) {
                 if (confirm("We see you just updated your Profile Bio, would you like to copy this to your Speaker Bio?") == true) {
                     $(form_id+'_ReplaceBio').val(1);
                     return true;
@@ -302,7 +302,7 @@ jQuery(document).ready(function($) {
         {
             if(!edit_speaker_profile_form.valid()) return false;
 
-            if (tinyMCE.activeEditor.isDirty()) {
+            if (tinyMCE.get('EditSpeakerProfileForm_EditSpeakerProfileForm_Bio').isDirty()) {
                 if (confirm("We see you just updated your Speaker Bio, would you like to copy this to your Profile Bio?") == true) {
                     $(speaker_form_id+'_ReplaceBio').val(1);
                     return true;
