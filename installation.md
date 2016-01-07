@@ -106,28 +106,46 @@ For a clean installation
    ````
    vagrant up
     ````
-** This will create a virtual machine with a local mysql sql using the purged dump located here http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip
+* This will create a virtual machine with a local mysql sql using the purged dump located here http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip
     
-** Site is hosted on nginx under hostheader "local.openstack.org", your local path (site root) is mapped to /var/www/local.openstac.org on guest machine (VM). VM ip is set to "192.168.33.10" so after vm installation you must add following entry to your host file
+* Site is hosted on nginx under hostheader "local.openstack.org", your local path (site root) is mapped to /var/www/local.openstac.org on guest machine (VM). VM ip is set to "192.168.33.10" so after vm installation you must add following entry to your host file
 
    ````
    192.168.33.10 local.openstack.org
     ````
-** In order to ssh to VM you have 2 choices
 
-*** On site root on your host machine run
+* In order to ssh to VM you have 2 choices
+
+# On site root on your host machine run
 
    ````
    vagrant ssh
     ````
 
-*** using an ssh client
+# using an ssh client
 
    ````
-   do ssh vagrant@127.0.0.1 -p 2222
+   ssh vagrant@127.0.0.1 -p 2222
     ````
-(password: vagrant)
+   (password: vagrant)
 
+* Go to the local directory of your site, run the following to get your vagrant ssh private key 
+
+   ````
+   vagrant ssh-config
+    ````
+
+* If you want to view your local database via a MySQL client like Sequel Pro, go to the local directory of your site and run
+
+   ````
+   ssh -i {/LOCALPATH TO OS WEBSITE}/www/openstack-org/.vagrant/machines/default/virtualbox/private_key -p 2222 vagrant@127.0.0.1 -L 3307:127.0.0.1:3306
+    ````
+    Your SQL connection should use a Standard connection:
+    - Host: localhost
+    - Username: root
+    - Password: root
+    - Database: os_local
+    - Port: 3306
 
 ## About the database
 OpenStack will provide a db dump on a weekly basis, purged of protected data. The database will create one default admin user. All other data will need to be populated by the user.
