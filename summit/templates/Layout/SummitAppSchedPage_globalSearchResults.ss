@@ -216,8 +216,16 @@
             </div>
         </div>
     </div>
+    <% end_if %>
 
-
+    <% if SpeakerResults.Count = 0 && EventResults.Count = 0 %>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <h2> We're sorry. There are no results for this search query. </h2>
+            </div>
+        </div>
+    </div>
     <% end_if %>
 </div>
 <script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>
