@@ -16,7 +16,7 @@ The following base components are required to run the application:
 * PHP_dom package
 
 
-## Installation Procedure
+## Local Installation Procedure
 
 * Get the code and place it under /var/www/openstack
 
@@ -73,6 +73,61 @@ The following base components are required to run the application:
     php /var/www/openstack/framework/cli-script.php dev/build flush=1_ 
    ````
 * Restart apache
+
+## Containers Installation Procedure
+
+The Vagrant file is located here: https://github.com/OpenStackweb/openstack-org/blob/master/Vagrantfile
+
+For a clean installation
+
+*  git clone https://github.com/OpenStackweb/openstack-org.git
+*  Be sure that your .ssh/config file contains following info (this is neccesary for the private-assets submodule)
+
+   ````
+   #private assets
+   Host assets.github.com
+       HostName github.com
+       PreferredAuthentications publickey
+       IdentityFile <path_2_your_private_key>
+    ````
+    
+*  run 
+
+   ````
+   git submodule init
+    ````
+*  run 
+
+   ````
+   git submodule update
+    ````
+* Once you installed virtualbox (https://www.virtualbox.org/) and vagrant(https://www.vagrantup.com/downloads.html) on your local environmen, run 
+
+   ````
+   vagrant up
+    ````
+** This will create a virtual machine with a local mysql sql using the purged dump located here http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip
+    
+** Site is hosted on nginx under hostheader "local.openstack.org", your local path (site root) is mapped to /var/www/local.openstac.org on guest machine (VM). VM ip is set to "192.168.33.10" so after vm installation you must add following entry to your host file
+
+   ````
+   192.168.33.10 local.openstack.org
+    ````
+** In order to ssh to VM you have 2 choices
+
+*** On site root on your host machine run
+
+   ````
+   vagrant ssh
+    ````
+
+*** using an ssh client
+
+   ````
+   do ssh vagrant@127.0.0.1 -p 2222
+    ````
+(password: vagrant)
+
 
 ## About the database
 OpenStack will provide a db dump on a weekly basis, purged of protected data. The database will create one default admin user. All other data will need to be populated by the user.
