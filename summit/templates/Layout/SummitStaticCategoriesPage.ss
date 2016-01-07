@@ -301,7 +301,7 @@
                         <div class="session-list-description">
                             <div class="session-list-text">
                                 <p>
-                                    Telecommunications companies present one of the largest growth areas for OpenStack around the world. Working together with the OPNFV Foundation, we'll feature content relevant to these telecom operators and the greater telecom ecosystem, addressing the evolution of the network and emerging NFV architecture, and growing consensus across the industry around a standard, open source technology approach. 
+                                    Telecommunications companies present one of the largest growth areas for OpenStack around the world. Working together with the OPNFV, we'll feature content relevant to these telecom operators and the greater telecom ecosystem, addressing the evolution of the network and emerging NFV architecture, and growing consensus across the industry around a standard, open source technology approach. 
                                 </p>
                             </div>
                         </div>
