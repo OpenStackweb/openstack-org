@@ -35,4 +35,14 @@ class SpeakerTravelPreference
     {
         return (int)$this->getField('ID');
     }
+
+    public function getCountryName() {
+        $country = '';
+
+        if ($this->Country) {
+            $country = Geoip::countryCode2name($this->Country);
+        }
+
+        return $country;
+    }
 }

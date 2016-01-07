@@ -22,7 +22,8 @@ implements IPresentationSpeaker
         'BeenEmailed' => 'Boolean',
         'ConfirmedDate' => 'SS_Datetime',
         'OnSitePhoneNumber' => 'Text',
-        'RegisteredForSummit' => 'Boolean'
+        'RegisteredForSummit' => 'Boolean',
+        'WillingToPresentVideo' => 'Boolean'
     );
 
     private static $has_one = array

@@ -104,11 +104,18 @@
                     </div>
                 <% end_if %>
                 <hr>
-                <div class="span-4">
-                    <strong>Funded Travel: </strong> <% if FundedTravel %> Yes <% else %> No <% end_if %>
+                <% if WillingToPresentVideo %>
+                <div class="span-4 checkbox_item">
+                    <strong>Willing to present via video conference</strong>
                 </div>
-                <div class="span-4">
-                    <strong>Willing to Travel: </strong> <% if WillingToTravel %> Yes <% else %> No <% end_if %>
+                <% end_if %>
+                <div class="span-4 checkbox_item">
+                    <strong>Willing to Travel: </strong>
+                    <% if WillingToTravel %>
+                        Yes <% if FundedTravel %> (My company will fund my travel) <% end_if %>
+                    <% else %>
+                        No
+                    <% end_if %>
                 </div>
                 <% if WillingToTravel %>
                     <div class="span-4">
@@ -117,7 +124,7 @@
                     <div class="span-6 last">
                         <ul>
                             <% loop TravelPreferences %>
-                                <li>$Country</li>
+                                <li>$getCountryName()</li>
                             <% end_loop %>
                         </ul>
                     </div>

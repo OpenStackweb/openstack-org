@@ -65,6 +65,12 @@
               </label>
             </div>
             <div class="checkbox field">
+                <label for="$FormName_WillingToPresentVideo" class="left">
+                    $Fields.dataFieldByName(WillingToPresentVideo)
+                    $Fields.dataFieldByName(WillingToPresentVideo).Title
+              </label>
+            </div>
+            <div class="checkbox field">
                 <label for="$FormName_FundedTravel" class="left">
                     $Fields.dataFieldByName(FundedTravel)
                     $Fields.dataFieldByName(FundedTravel).Title
