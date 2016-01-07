@@ -116,17 +116,18 @@ For a clean installation
 
 * In order to ssh to VM you have 2 choices
 
-# On site root on your host machine run
+   - On site root on your host machine run
 
    ````
    vagrant ssh
     ````
 
-# using an ssh client
+   - using an ssh client
 
    ````
    ssh vagrant@127.0.0.1 -p 2222
     ````
+
    (password: vagrant)
 
 * Go to the local directory of your site, run the following to get your vagrant ssh private key 
@@ -140,7 +141,8 @@ For a clean installation
    ````
    ssh -i {/LOCALPATH TO OS WEBSITE}/www/openstack-org/.vagrant/machines/default/virtualbox/private_key -p 2222 vagrant@127.0.0.1 -L 3307:127.0.0.1:3306
     ````
-    Your SQL connection should use a Standard connection:
+
+ Your SQL client should use a Standard connection:
     - Host: localhost
     - Username: root
     - Password: root
