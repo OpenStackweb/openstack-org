@@ -308,4 +308,10 @@ class SpeakerListPage_Controller extends Page_Controller
         return new ArrayList($country_list);
     }
 
+    public function optionSelected($filter, $option) {
+        $query_var = $this->getSearchQuery($filter);
+
+        return ($query_var && in_array($option,$query_var)) ? 'selected' : '';
+    }
+
 }

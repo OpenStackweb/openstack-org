@@ -17,7 +17,6 @@
         <div class="filters">
             Spoken Language:
             <select id="spoken_language" name="spoken_language[]" multiple="multiple">
-                <option value=""> Any</option>
                 <% loop AvailableLanguages %>
                     <option value="$Language">$Language</option>
                 <% end_loop %>
@@ -25,7 +24,6 @@
 
             Country of Origin:
             <select id="country_origin" name="country_origin[]" multiple="multiple">
-                <option value=""> Any</option>
                 <% loop AvailableCountries %>
                     <option value="$Country">$Country</option>
                 <% end_loop %>
@@ -33,7 +31,6 @@
 
             Travel Preference:
             <select id="travel_preference" name="travel_preference[]" multiple="multiple">
-                <option value=""> Any</option>
                 <% loop AvailableTravelCountries %>
                     <option value="$Country">$Country</option>
                 <% end_loop %>
