@@ -20,6 +20,7 @@ class CustomPasswordController extends Security
 
     private static $allowed_actions = array(
         'changepassword',
+        'lostpassword',
         'ChangePasswordForm',
     );
 
@@ -112,5 +113,35 @@ class CustomPasswordController extends Security
             $this->stat('template_main'),
             'ContentController'
         ));
+    }
+
+    /**
+     * Show the "lost password" page
+     *
+     * @return string Returns the "lost password" page as HTML code.
+     */
+    public function lostpassword() {
+        $controller = $this->getResponseController(_t('Security.LOSTPASSWORDHEADER', 'Lost Password'));
+
+        // if the controller calls Director::redirect(), this will break early
+        if(($response = $controller->getResponse()) && $response->isFinished()) return $response;
+
+        $customisedController = $controller->customise(array(
+            'Content' =>
+                '<br><p>' .
+                _t(
+                    'Security.NOTERESETPASSWORD',
+                    'Enter your e-mail address and we will send you a link with which you can reset your password'
+                ) .
+                '</p>' .
+                '<p>' .
+                'If you no longer have access to the email address associated with your OpenStackID, please send an email to ' .
+                '<a href="mailto:info@openstack.org">info@openstack.org</a> with the relevant details.' .
+                '</p>',
+            'Form' => $this->LostPasswordForm(),
+        ));
+
+        //Controller::$currentController = $controller;
+        return $customisedController->renderWith($this->getTemplatesFor('lostpassword'));
     }
 }
