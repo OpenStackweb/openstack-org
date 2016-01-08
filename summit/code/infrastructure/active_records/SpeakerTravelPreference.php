@@ -40,7 +40,7 @@ class SpeakerTravelPreference
         $country = '';
 
         if ($this->Country) {
-            $country = Geoip::countryCode2name($this->Country);
+            $country = CountryCodes::countryCode2name($this->Country);
         }
 
         return $country;

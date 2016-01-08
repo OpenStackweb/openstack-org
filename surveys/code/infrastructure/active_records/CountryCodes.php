@@ -279,4 +279,15 @@ class CountryCodes {
 		return $list;
 	}
 
+    /**
+     * Returns the country name from the appropriate code.
+     *
+     * @return null|string String if country found, null if none found
+     */
+    public static function countryCode2name($code)
+    {
+        $name = isset(CountryCodes::$iso_3166_countryCodes[$code]) ? CountryCodes::$iso_3166_countryCodes[$code] : null;
+        return $name;
+    }
+
 }

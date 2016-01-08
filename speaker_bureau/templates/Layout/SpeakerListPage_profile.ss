@@ -104,11 +104,9 @@
                     </div>
                 <% end_if %>
                 <hr>
-                <% if WillingToPresentVideo %>
                 <div class="span-4 checkbox_item">
-                    <strong>Willing to present via video conference</strong>
+                    <strong>Willing to present via video conference: </strong><% if WillingToPresentVideo %> Yes <% else %> No <% end_if %>
                 </div>
-                <% end_if %>
                 <div class="span-4 checkbox_item">
                     <strong>Willing to Travel: </strong>
                     <% if WillingToTravel %>
