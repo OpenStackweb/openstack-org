@@ -24,13 +24,20 @@
                     tags: {},
                     tracks : {},
                     presentation_levels: {},
-                    current_user: null
+                    current_user: null,
+                    track_lists: {}
                 };
                 <% loop $Summit.EventTypes %>
                 summit.event_types[{$ID}] =
                 {
                     type : "{$Type.JS}",
                     color : "{$Color}",
+                };
+                <% end_loop %>
+                <% loop $Summit.TrackGroupLists %>
+                summit.track_lists[{$ID}] =
+                {
+                    name : "{$Category.Title.JS}",
                 };
                 <% end_loop %>
                 <% loop $Summit.Types %>
@@ -74,6 +81,17 @@
                 summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', selected: false };
                 summit.events['{$Date}'] = [];
                 <% end_loop %>
+                $(function() {
+
+                    $('#page-content-wrapper').scroll(function () {
+                        console.log('scroll '+$(this).scrollTop());
+                        if ($(this).scrollTop() > 135) {
+                            $('.unpublished-container').addClass('fixed');
+                        } else {
+                            $('.unpublished-container').removeClass('fixed');
+                        }
+                    });
+                });
         </script>
 
         <div class="page-header">
@@ -83,9 +101,9 @@
         <div class="row">
             <div class="col-md-6">
                 <schedule-admin-view-published-filters summit="{ summit }"></schedule-admin-view-published-filters>
-                <schedule-admin-view-published start_time="06:00" end_time="24:00" interval="15" summit="{ summit }" minute_pixels="3" slot_width="500"></schedule-admin-view-published>
+                <schedule-admin-view-published start_time="06:00" end_time="23:45" interval="15" summit="{ summit }" minute_pixels="3" slot_width="500"></schedule-admin-view-published>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 unpublished-container">
                 <schedule-admin-view-unpublished-filters summit="{ summit }"></schedule-admin-view-unpublished-filters>
                 <schedule-admin-view-unpublished summit="{ summit }" slot_width="500" interval="15" minute_pixels="3" slot_width="500"></schedule-admin-view-unpublished>
             </div>

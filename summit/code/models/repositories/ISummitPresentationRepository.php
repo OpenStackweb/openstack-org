@@ -12,17 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitPresentationRepository extends IEntityRepository
+interface ISummitPresentationRepository extends ISummitEventRepository
 {
-    /**
-     * @param int $summit_id
-     * @param int $page
-     * @param int $page_size
-     * @param array $order
-     * @return array
-     */
-    public function getUnpublishedBySummit($summit_id, $page = 1 ,$page_size = 10, $order = null);
-
     /**
      * @param int $summit_id
      * @param int $page

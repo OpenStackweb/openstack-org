@@ -15,8 +15,23 @@ schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, sour
 {
     schedule_admin_view_api.trigger('beforeUnpublishedEventsBySourceRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/events/unpublished/'+source;
-    if(source === 'tracks' && track_list_id !== '')
-        url += '?track_list_id='+track_list_id;
+    var params = {};
+    if(source === 'tracks' && track_list_id !== '' && typeof track_list_id !== 'undefined' )
+        params['track_list_id'] = track_list_id;
+    if(page !== '' && typeof page !== 'undefined')
+        params['page'] = page;
+    if(page_size !== '' && typeof page_size !== 'undefined')
+        params['page_size'] = page_size;
+
+    var query = '';
+    for(var key in params)
+    {
+        if(query !== '') query += '&';
+        query += key +'='+params[key];
+    }
+
+    if(query !=='' ) url += '?' + query;
+
     return $.get(url,function (data) {
         schedule_admin_view_api.trigger(schedule_admin_view_api.RETRIEVED_UNPUBLISHED_EVENTS, data);
     });

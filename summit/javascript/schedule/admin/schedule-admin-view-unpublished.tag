@@ -6,8 +6,8 @@
         </li>
     </ul>
 
-    <nav>
-        <ul if="{ pages.length > 0 }" class="pagination">
+    <nav class="unpublished-events-pager">
+        <ul if="{ pages.length > 1 }" class="pagination">
                 <li class="disabled">
                     <span aria-hidden="true">&laquo;</span>
                 </li>
@@ -30,6 +30,7 @@
 
         onPageChange(e) {
             console.log('page ' + e.item.number);
+            self.dispatcher.unpublishedEventsPageChanged(e.item.number);
         }
 
         self.store.on(self.store.LOAD_STORE,function() {
@@ -53,5 +54,18 @@
                 opacity: 0.35
             });
         }
+
+        self.dispatcher.on(self.dispatcher.UNPUBLISHED_EVENTS_SOURCE_CHANGED, function(source){
+            if(source === '')
+            {
+                $('.unpublished-events-list').hide();
+                $('.unpublished-events-pager').hide();
+            }
+            else
+            {
+                $('.unpublished-events-list').show();
+                $('.unpublished-events-pager').show();
+            }
+        });
     </script>
 </schedule-admin-view-unpublished>

@@ -45,25 +45,10 @@ body::-webkit-scrollbar { width: 0 !important }
 
 .event
 {
-  background-color: linen;
+  background-color: lightcyan;
   border: 1px solid silver;
 }
 
-.ui-resizable-helper { width:$slot_width; border: 2px dotted #00F; }
-
-.ui-tooltip, .arrow:after {
-  background: black;
-  border: 2px solid white;
-}
-
-.ui-tooltip {
-  padding: 10px 20px;
-  color: white;
-  border-radius: 20px;
-  font: bold 14px "Helvetica Neue", Sans-Serif;
-  text-transform: uppercase;
-  box-shadow: 0 0 7px black;
-}
 .arrow {
   width: 70px;
   height: 16px;
@@ -102,14 +87,13 @@ body::-webkit-scrollbar { width: 0 !important }
 
 .ui-resizable-s {
   width: $slot_width;
-  height:7px;
+  height:10px;
   bottom:7px !important;
 }
 
 .ui-resizable-n {
   width: $slot_width;
-  height:7px;
-
+  height:10px;
 }
 
 .event-title
@@ -130,4 +114,18 @@ body::-webkit-scrollbar { width: 0 !important }
   height: $slot_height;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.event-inner-body
+{
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+.fixed
+{
+  position:fixed;
+  top:15%;
+  left:57%;
+  width: 42%;
 }

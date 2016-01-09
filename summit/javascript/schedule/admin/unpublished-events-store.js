@@ -46,6 +46,7 @@ function unpublishedEventsStore(){
     }
 
     this._load = function(events) {
+        this.clear();
         // update model
         for(var e of events) {
             this._unpublished_events[e.id] = e;

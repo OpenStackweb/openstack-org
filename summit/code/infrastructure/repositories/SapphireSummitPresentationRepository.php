@@ -50,13 +50,15 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
     {
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
         $filter = array('SummitID' => $summit_id, 'Published' => 0);
+        $track_filter = '';
+
         if(!empty($track_list)){
-            $filter['SummitSelectedPresentationList.ID '] = $track_list;
+            $track_filter = " AND SummitSelectedPresentationList.ID = {$track_list} ";
         }
 
         $list = Presentation::get()->filter($filter)->where(" Title IS NOT NULL AND Title <>'' ")
             ->innerJoin('SummitSelectedPresentation', 'SummitSelectedPresentation.PresentationID = Presentation.ID')
-            ->innerJoin('SummitSelectedPresentationList', "SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group')")
+            ->innerJoin('SummitSelectedPresentationList', "SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') {$track_filter}")
             ->sort($order);
 
         $count     = intval($list->count());

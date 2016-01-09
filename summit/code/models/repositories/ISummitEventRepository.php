@@ -20,4 +20,13 @@ interface ISummitEventRepository extends IEntityRepository
      * @return ISummitEvent[]
      */
     public function searchBySummitAndTerm(ISummit $summit, $term);
+
+    /**
+     * @param $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param null $order
+     * @return array
+     */
+    public function getUnpublishedBySummit($summit_id, $page = 1, $page_size = 10, $order = null);
 }

@@ -73,22 +73,30 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $query_string = $request->getVars();
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $source        = strtolower(Convert::raw2sql($request->param('Source')));
+            $valid_sources = array('tracks', 'presentations', 'events');
+
+            if(!in_array($source, $valid_sources)) return $this->validationError(array('invalid requested source'));
+
             $track_list_id = isset($query_string['track_list_id']) ? Convert::raw2sql($query_string['track_list_id']) : null;
             $page          = isset($query_string['page']) ? intval($query_string['page']) : 1;
             $page_size     = isset($query_string['page_size']) ? intval($query_string['page_size']) : 10;
             $order         = isset($query_string['order']) ? Convert::raw2sql($query_string['order']) : null;
 
-            switch ($source) {
-                case 'tracks': {
+            switch ($source)
+            {
+                case 'tracks':
+                {
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummitAndTrackList($summit_id, $track_list_id, $page,$page_size, $order);
                 }
                 break;
-                case 'presentations': {
+                case 'presentations':
+                {
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummit($summit_id,  $page,$page_size, $order);
                 }
-                    break;
-                case 'events': {
-
+                break;
+                case 'events':
+                {
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id,  $page,$page_size, $order);
                 }
                 break;
             }

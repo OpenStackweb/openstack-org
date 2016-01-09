@@ -5,7 +5,9 @@
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
         <div class="event-inner-body">
-            <div class="event-title">{ data.title }</div>
+            <div class="event-title">
+                <a id="popover_{ data.id }" data-content="{ data.description }" title="{ data.title }" role="button" data-toggle="popover" data-trigger="focus">{ data.title }</a>
+            </div>
         </div>
         <div class="ui-resizable-handle ui-resizable-s" style="display:none">
             <span class="ui-icon ui-icon-triangle-1-s"></span>
@@ -20,9 +22,7 @@
         var self           = this;
 
         this.on('mount', function() {
-            $(function() {
-
-            });
+            $("#popover_"+self.data.id).popover({ trigger: "hover" });
         });
 
     </script>

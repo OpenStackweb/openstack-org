@@ -104,14 +104,32 @@
 
                         $('.ui-resizable-n', event).attr('title', self.schedule_events[id].start_time);
                         $('.ui-resizable-s', event).attr('title', self.schedule_events[id].end_time);
+                        //$('.ui-resizable-n', event).tooltip('option', 'content', self.schedule_events[id].start_time);
+                        //$('.ui-resizable-s', event).tooltip('option', 'content', self.schedule_events[id].end_time);
                     }
                 });
             });
         });
 
         createResizable(selector) {
-            $(".ui-resizable-n", selector).tooltip({track: true, position: { my: "left+15 center", at: "right center" }});
-            $(".ui-resizable-s", selector).tooltip({track: true, position: { my: "left+15 center", at: "right center" }});
+
+            selector.each(function(){
+                var element = $(this);
+                var id      = element.attr('data-id');
+                var top = $(".ui-resizable-n", element).tooltip({
+                    tooltipClass: "tooltip-n-"+id,
+                    track: true,
+                    position: { my: "left+15 center", at: "right center"  }
+                });
+                var bottom = $(".ui-resizable-s", element).tooltip({
+                    tooltipClass: "tooltip-s-"+id,
+                    track: true,
+                    position: { my: "left+15 center", at: "right center"  }
+                });
+                top.addClass('top');
+                bottom.addClass('bottom');
+            });
+
             selector.resizable({
                 containment: ".events-col",
                 maxWidth: self.slot_width,
@@ -123,23 +141,20 @@
                     n: ".ui-resizable-n",
                     s: ".ui-resizable-s"
                 },
-                animate: true,
-                helper: "ui-resizable-helper",
-                delay: 150,
                 resize: function(e, ui) {
 
                     var element    = $(ui.element);
                     var id         = element.attr('data-id');
                     var size       = ui.size;
-                    var pos        = ui.position;
+                    var pos        = element.offset();
                     var bottom     = pos.top + size.height;
                     var minutes    = ( parseInt(size.height) / self.minute_pixels);
                     var overlapped = false;
                     var container  = null;
                     var original_h = ui.originalSize.height;
-
+                    ui.size.width  = ui.originalSize.width = self.slot_width;
                     console.log('position top ' + pos.top + ' height ' + size.height + ' bottom ' + bottom+' original_h '+original_h);
-
+                    ui.position.left = ui.originalPosition.left;
                     // look for the current slot container that holds the begining of the current event
                     $('.time-slot-container').each(function(){
                         var top       = $(this).offset().top;
@@ -196,6 +211,8 @@
                     self.schedule_events[id].end_time   = end_time.format('hh:mm a');
                     $('.ui-resizable-n', element).attr('title', self.schedule_events[id].start_time);
                     $('.ui-resizable-s', element).attr('title', self.schedule_events[id].end_time);
+                    $('.ui-tooltip-content','.tooltip-n-'+id).html(self.schedule_events[id].start_time);
+                    $('.ui-tooltip-content','.tooltip-s-'+id).html(self.schedule_events[id].end_time);
                 },
                 start: function( event, ui )
                 {

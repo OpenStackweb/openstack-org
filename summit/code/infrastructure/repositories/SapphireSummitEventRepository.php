@@ -98,4 +98,23 @@ SQL;
 
         return $events;
     }
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublishedBySummit($summit_id, $page = 1, $page_size = 10, $order = null)
+    {
+        if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
+        $list      = SummitEvent::get()
+            ->filter( array('SummitID' => $summit_id, 'Published' => 0, 'ClassName:ExactMatch:not' => 'Presentation' ))
+            ->where(" Title IS NOT NULL AND Title <>'' ")->sort($order);
+        $count     = intval($list->count());
+        $offset    = ($page - 1 ) * $page_size;
+        $data      = $list->limit($page_size, $offset);
+        return array($page, $page_size, $count, $data);
+    }
 }

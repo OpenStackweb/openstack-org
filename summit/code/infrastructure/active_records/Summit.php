@@ -1252,4 +1252,13 @@ SQL;
 
         return $begin<= $date && $date <= $end;
     }
+
+    public function TrackGroupLists()
+    {
+        return SummitSelectedPresentationList::get()
+            ->filter('ListType' , 'Group')
+            ->innerJoin('PresentationCategory', 'PresentationCategory.ID = SummitSelectedPresentationList.CategoryID')
+            ->where('PresentationCategory.SummitID = '.$this->ID)
+            ->sort('SummitSelectedPresentationList.Name', 'ASC');
+    }
 }
