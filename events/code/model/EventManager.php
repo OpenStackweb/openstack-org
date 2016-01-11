@@ -263,7 +263,6 @@ final class EventManager {
         }
     }
 
-
     /**
      * @return array
      */

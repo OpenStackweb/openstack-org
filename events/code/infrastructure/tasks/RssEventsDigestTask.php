@@ -35,6 +35,15 @@ final class RssEventsDigestTask extends CronTask {
             $events_array = $event_manager->rss2events($rss_events);
             $event_manager->saveRssEvents($events_array);
 
+            // purge events that no longer come in the xml
+            if (count($events_array) > 0) {
+                $events_to_purge = $repository->getRssForPurge($events_array);
+
+                foreach($events_to_purge as $event) {
+                    $event_manager->deleteEvent($event->ID);
+                }
+            }
+
             return 'OK';
         }
         catch(Exception $ex){

@@ -29,4 +29,15 @@ final class SapphireEventRepository extends SapphireRepository {
 
         return EventPage::get()->where("EventEndDate >= now()")->sort('EventStartDate', 'ASC')->count();
     }
+
+    public function getRssForPurge($pulled_events) {
+        $external_ids = array();
+        foreach ($pulled_events as $event) {
+            $external_ids[] = $event->ExternalSourceId;
+        }
+
+        $in_external_ids = implode(',',$external_ids);
+
+        return EventPage::get()->where("ExternalSourceId IS NOT NULL AND ExternalSourceId NOT IN (".$in_external_ids.")")->toArray();
+    }
 }
