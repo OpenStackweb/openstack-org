@@ -35,6 +35,7 @@ class EventHolder_Controller extends Page_Controller {
 		'AjaxFutureEvents',
 		'AjaxFutureSummits',
 		'AjaxPastSummits',
+        'openstackdays'
 	);
 
 	function init() {
@@ -176,5 +177,10 @@ class EventHolder_Controller extends Page_Controller {
         }
 
         return $event_type_links;
+    }
+
+    function openstackdays() {
+        $events = $this->FutureEvents(100, 'OpenStack Days');
+        return $this->renderWith(array('EventHolder_openstackdays'),array('Events' => $events));
     }
 }
