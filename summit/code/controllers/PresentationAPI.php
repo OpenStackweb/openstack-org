@@ -68,7 +68,7 @@ class PresentationAPI extends Controller {
 		$presentations = Member::currentUser() ? 
 							Member::currentUser()->getRandomisedPresentations() : 
 							Presentation::get()->filter(array(
-								'Presentation.SummitID' => Summit::get_active()->ID
+								'SummitEvent.SummitID' => Summit::get_active()->ID
 							));
 							
 		if($r->getVar('category')) {

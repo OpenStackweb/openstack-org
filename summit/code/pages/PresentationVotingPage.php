@@ -164,7 +164,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
       $summitID = Summit::get_active()->ID;
 
       $presentations = Presentation::get()
-        ->where("Presentation.SummitID = {$summitID}");
+        ->where("SummitEvent.SummitID = {$summitID}");
 
       if($data['Search'] && strlen($data['Search']) > 1) {
 
@@ -222,7 +222,7 @@ class PresentationVotingPage_Controller extends Page_Controller {
 
       $summitID = Summit::get_active()->ID;
       $presentations = Presentation::get()
-        ->where("Presentation.SummitID = {$summitID}");
+        ->where("SummitEvent.SummitID = {$summitID}");
 
       if($CategoryID) $presentations = $presentations->filter('CategoryID', $CategoryID);
       if($currentMemberID) {
