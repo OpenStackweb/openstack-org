@@ -289,7 +289,7 @@ class Page_Controller extends ContentController
 
         $css_files = array(
             "themes/openstack/css/bootstrap.min.css",
-            'themes/openstack/css/font-awesome.min.css',
+            'themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css',
             "themes/openstack/css/combined.css",
             "themes/openstack/css/navigation_menu.css",
             "themes/openstack/css/dropdown.css",

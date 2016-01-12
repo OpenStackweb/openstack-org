@@ -137,3 +137,23 @@ body::-webkit-scrollbar { width: 0 !important }
   max-width: 40%; // Max Width of the popover (depending on the container!)
   margin-top:7px;
 }
+
+.unpublish-event-btn
+{
+  float:right;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  /*
+    Introduced in IE 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
+}

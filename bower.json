@@ -33,7 +33,7 @@
     "seiyria-bootstrap-slider": "*",
     "chosen": "1.4.2",
     "awesome-bootstrap-checkbox": "~0.3.5",
-    "sweetalert": "1.1.3",
+    "sweetalert": "~1.1.3",
     "animate.css": "3.4.0",
     "pure-templates": "*",
     "clockpicker": "0.0.7",

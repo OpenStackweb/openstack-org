@@ -17,6 +17,11 @@
                     </select>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-sm unpublished-events-refresh" title="refresh unpublished events">&nbsp;Refresh&nbsp;<i class="fa fa-refresh"></i></button>
+            </div>
+        </div>
         <script>
             this.summit     = opts.summit;
             this.api        = opts.api;
@@ -42,10 +47,17 @@
                         var track_list_id = $('#select_track_list').val();
                         self.doFilter(source, track_list_id);
                     });
+
+                    $('.unpublished-events-refresh').click(function(e){
+                        var source       = $('#select_unpublished_events_source').val();
+                        var track_list_id = $('#select_track_list').val();
+                        self.doFilter(source, track_list_id);
+                    });
                 });
             });
 
             doFilter(source, track_list_id) {
+                $('body').ajax_loader();
                 self.api.getUnpublishedEventsBySource(self.summit.id, source ,track_list_id);
             }
 

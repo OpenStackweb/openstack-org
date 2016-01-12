@@ -2,7 +2,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="day_schedule">
+                    <table id="day_schedule" class='unselectable'>
                     <tbody>
                         <tr>
                             <td class="times-col">
@@ -53,6 +53,9 @@
 
                 $( ".time-slot-container" ).droppable({
                     hoverClass: "ui-state-hover",
+                    accept: function(){
+                        return self.published_store.currentDay() !== null && self.published_store.currentLocation();
+                    },
                     drop: function( e, ui ) {
 
                         var element = $(ui.draggable);
@@ -76,8 +79,8 @@
                         {
                             if(parseInt(id2) === parseInt(id)) continue;
                             var e           = self.published_store.get(id2);
-                            var start_time2 = moment(e.start_time, 'HH:mm a');
-                            var end_time2   = moment(e.end_time, 'HH:mm a');
+                            var start_time2 = e.start_datetime;
+                            var end_time2   = e.end_datetime;
                             if(start_time.isBefore(end_time2) && end_time.isAfter(start_time2)) {
                                 console.log('overlapped!!!');
                                 return false;
@@ -95,22 +98,40 @@
                             element.addClass('event-published');
                             $('.ui-resizable-n', element).show();
                             $('.ui-resizable-s', element).show();
+                            $('.unpublish-event-btn-container', element).show();
                             self.published_store.add(self.unpublished_store.delete(id));
                         }
-                        var event           = self.published_store.get(id);
-                        event.start_time    = start_time;
-                        event.end_time      = end_time;
+                        var event            = self.published_store.get(id);
+                        event.start_datetime = start_time;
+                        event.end_datetime   = end_time;
 
                         if( typeof element.resizable( "instance" ) == 'undefined'){
                             self.createResizable(element);
                         }
 
-                        $('.ui-resizable-n', element).attr('title', event.start_time.format('hh:mm a'));
-                        $('.ui-resizable-s', element).attr('title', event.end_time.format('hh:mm a'));
+                        $('.ui-resizable-n', element).attr('title', event.start_datetime.format('hh:mm a'));
+                        $('.ui-resizable-s', element).attr('title', event.end_datetime.format('hh:mm a'));
 
                         event.location_id = self.published_store.currentLocation();
                         self.api.publish(self.summit.id, event);
                     }
+                });
+
+                $( "body" ).on( "click", ".unpublish-event-btn",function() {
+                    var id = $(this).attr('data-event-id');
+                    swal({
+                        title: "Are you sure?",
+                        text: "to unpublish this event from summit schedule!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, unpublish it!",
+                        closeOnConfirm: false
+                        }, function(){
+                            self.dispatcher.unPublishEvent(self.summit.id, id);
+                            $('#event_'+id).remove();
+                            swal("Deleted!", "Your event was unpublished.", "success");
+                        });
                 });
             });
         });
@@ -188,8 +209,8 @@
                     {
                         if(parseInt(id2) === parseInt(id)) continue;
                         var event2      = self.published_store.get(id2);
-                        var start_time2 = event2.start_time;
-                        var end_time2   = event2.end_time;
+                        var start_time2 = event2.start_datetime;
+                        var end_time2   = event2.end_datetime;
                         if(start_time.isSameOrBefore(end_time2) && end_time.isSameOrAfter(start_time2)) {
 
                             overlapped    = true;
@@ -202,24 +223,24 @@
                     if(overlapped)
                     {
                         var event2         = self.published_store.get(overlapped_id);
-                        var start_time2    = event2.start_time;
-                        var end_time2      = event2.end_time;
+                        var start_time2    = event2.start_datetime;
+                        var end_time2      = event2.end_datetime;
                         var delta1         = moment.duration(end_time2.diff(start_time)).asMinutes();
                         var delta2         = moment.duration(end_time.diff(start_time2)).asMinutes();
                         var delta          = delta1 < delta2 ? delta1 : delta2;
                         console.log(' delta minutes '+delta);
-                        element.resizable( "option", "maxHeight", size.height - ( delta * self.minute_pixels ));
+                        element.resizable( "option", "maxHeight", size.height - ( ( delta ) * self.minute_pixels ));
                         return false;
                     }
 
                     // set model time
-                    var event        = self.published_store.get(id);
-                    event.start_time = start_time;
-                    event.end_time   = end_time;
-                    $('.ui-resizable-n', element).attr('title', event.start_time.format('hh:mm a'));
-                    $('.ui-resizable-s', element).attr('title', event.end_time.format('hh:mm a'));
-                    $('.ui-tooltip-content','.tooltip-n-'+id).html(event.start_time.format('hh:mm a'));
-                    $('.ui-tooltip-content','.tooltip-s-'+id).html(event.end_time.format('hh:mm a'));
+                    var event            = self.published_store.get(id);
+                    event.start_datetime = start_time;
+                    event.end_datetime   = end_time;
+                    $('.ui-resizable-n', element).attr('title', event.start_datetime.format('hh:mm a'));
+                    $('.ui-resizable-s', element).attr('title', event.end_datetime.format('hh:mm a'));
+                    $('.ui-tooltip-content','.tooltip-n-'+id).html(event.start_datetime.format('hh:mm a'));
+                    $('.ui-tooltip-content','.tooltip-s-'+id).html(event.end_datetime.format('hh:mm a'));
                 },
                 start: function( e, ui )
                 {
@@ -232,8 +253,8 @@
                     var element = $(ui.element);
                     var id      = element.attr('data-id');
                     var event   = self.published_store.get(id);
-                    $('.ui-resizable-n', element).attr('title', event.start_time.format('hh:mm a'));
-                    $('.ui-resizable-s', element).attr('title', event.end_time.format('hh:mm a'));
+                    $('.ui-resizable-n', element).attr('title', event.start_datetime.format('hh:mm a'));
+                    $('.ui-resizable-s', element).attr('title', event.end_datetime.format('hh:mm a'));
                     event.location_id = self.published_store.currentLocation();
                     self.api.publish(self.summit.id, event);
                     console.log('stop');
@@ -246,7 +267,7 @@
                 containment: "document",
                 cursor: "move",
                 helper: "clone",
-                opacity: 0.35
+                opacity: 0.5
             });
         }
 
@@ -262,6 +283,17 @@
             self.createDraggable($(".event-published"));
 
             self.createResizable($(".event-published"));
+
+            $('[data-toggle="popover"]').popover({
+                trigger: 'hover focus',
+                html: true,
+                container: 'body',
+                placement: 'auto',
+                animation: true,
+                template : '<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+            });
+
+            $('body').ajax_loader('stop');
         });
 
     </script>

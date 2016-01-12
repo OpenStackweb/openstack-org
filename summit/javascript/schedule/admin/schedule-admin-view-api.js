@@ -44,27 +44,53 @@ schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, sour
 
 schedule_admin_view_api.publish = function (summit_id, event)
 {
-    var url          = api_base_url.replace('@SUMMIT_ID', summit_id)+'/events/publish';
-    var clone        = jQuery.extend(true, {}, event);
-    clone.start_date = moment(clone.start_date).valueOf();
-    clone.end_date   = moment(clone.end_date).valueOf();
-
+    var url              = api_base_url.replace('@SUMMIT_ID', summit_id)+'/events/'+event.id+'/publish';
+    var clone            = jQuery.extend(true, {}, event);
+    clone.start_datetime = clone.start_datetime.format('YYYY-MM-DD HH:mm:ss');
+    clone.end_datetime   = clone.end_datetime.format('YYYY-MM-DD HH:mm:ss');
+    console.log(' start_datetime ' +clone.start_datetime+' end_datetime '+clone.end_datetime);
     $.ajax({
         url : url,
         type: 'PUT',
         data: JSON.stringify(clone),
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
     })
     .done(function() {
     })
-    .fail(function() {
+    .fail(function(jqXHR) {
+        var responseCode = jqXHR.status;
+        if(responseCode == 412) {
+            var response = $.parseJSON(jqXHR.responseText);
+            $('#event_'+event.id).remove();
+            swal("Validation error", response.messages[0], "warning")
+            return;
+        }
         alert( "There was an error on publishing process, please contact your administrator." );
     });
 }
 
+schedule_admin_view_api.unpublish = function (summit_id, event_id){
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/events/'+event_id+'/unpublish';
+    console.log('unpublish summit_id '+summit_id+' event_id '+event_id);
+    $.ajax({
+            url : url,
+            type: 'DELETE',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        })
+        .done(function() {
+        })
+        .fail(function() {
+            alert( "There was an error on unpublishing process, please contact your administrator." );
+        });
+}
+
 dispatcher.on(dispatcher.PUBLISHED_EVENTS_FILTER_CHANGE, function(summit_id ,day , location_id){
     schedule_admin_view_api.getScheduleByDayAndLocation(summit_id ,day , location_id);
+});
+
+dispatcher.on(dispatcher.UNPUBLISHED_EVENT, function(summit_id, event_id){
+    schedule_admin_view_api.unpublish(summit_id, event_id);
 });
 
 module.exports = schedule_admin_view_api;

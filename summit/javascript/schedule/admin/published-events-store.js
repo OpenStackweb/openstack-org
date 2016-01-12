@@ -1,5 +1,5 @@
-var api  = require('./schedule-admin-view-api.js');
-
+var api        = require('./schedule-admin-view-api.js');
+var dispatcher = require('./schedule-admin-view-dispatcher.js');
 
 function publishedEventsStore(){
     riot.observable(this);
@@ -51,8 +51,8 @@ function publishedEventsStore(){
 
         for(var e of events) {
             this._published_events[e.id] = e;
-            e.start_time = moment(this._day+' '+e.start_time, 'YYYY-MM-DD HH:mm');
-            e.end_time   = moment(this._day+' '+e.end_time, 'YYYY-MM-DD HH:mm');
+            e.start_datetime = moment(e.start_datetime, 'YYYY-MM-DD HH:mm:ss');
+            e.end_datetime   = moment(e.end_datetime, 'YYYY-MM-DD HH:mm:ss');
         }
     }
     var self = this;
@@ -70,5 +70,9 @@ function publishedEventsStore(){
 
 
 var store = new publishedEventsStore();
+
+dispatcher.on(dispatcher.UNPUBLISHED_EVENT, function(summit_id, event_id){
+    store.delete(event_id);
+});
 
 module.exports = store;

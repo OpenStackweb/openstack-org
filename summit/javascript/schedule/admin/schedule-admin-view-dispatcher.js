@@ -13,9 +13,9 @@ function ScheduleAdminViewDispatcher() {
         this.trigger(this.PUBLISHED_EVENT, event_id);
     }
 
-    this.unPublishEvent = function(event_id)
+    this.unPublishEvent = function(summit_id, event_id)
     {
-        this.trigger(this.UNPUBLISHED_EVENT, event_id);
+        this.trigger(this.UNPUBLISHED_EVENT, summit_id, event_id);
     }
 
     this.unpublishedEventsPageChanged = function (page_nbr)

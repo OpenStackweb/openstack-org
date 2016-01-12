@@ -8,7 +8,7 @@
   "dependencies": {
     "bower": "*",
     "webpack": "1.12.11",
-    "riot": "2.3.12",
+    "riot": "2.3.13",
     "riotcontrol": "*",
     "tag-loader": "*",
     "json-loader": "*",

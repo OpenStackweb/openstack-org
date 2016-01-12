@@ -17,7 +17,7 @@
     <% require css("summit/css/voting-app.css") %>
 
     <!-- Fonts -->
-    <% require css("themes/openstack/css/font-awesome.min.css") %>
+    <% require css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css") %>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

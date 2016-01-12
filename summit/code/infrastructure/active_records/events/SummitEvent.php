@@ -500,21 +500,19 @@ class SummitEvent extends DataObject implements ISummitEvent
                 // validate that each speakers is assigned one time at one location
                 $start_date      = $summit->convertDateFromTimeZone2UTC( $this->getStartDate());
                 $end_date        = $summit->convertDateFromTimeZone2UTC( $this->getEndDate() );
-
-                $presentation_id = $this->getIdentifier();
+                $id              = $this->getIdentifier();
                 $location_id     = $this->LocationID;
 
                 if(empty($start_date) || empty($end_date))
                     return $valid;
 
                 $query = <<<SQL
-SELECT COUNT(P.ID) FROM Presentation P
-INNER JOIN SummitEvent E ON E.ID = P.ID
+SELECT COUNT(E.ID) FROM SummitEvent E
 WHERE
 E.Published = 1              AND
-E.StartDate <= '{$end_date}'  AND
-'{$start_date}' <= E.EndDate AND
-E.ID <> $presentation_id     AND
+E.StartDate < '{$end_date}' AND
+'{$start_date}' < E.EndDate AND
+E.ID <> $id                  AND
 E.LocationID = $location_id  AND
 E.LocationID <> 0;
 SQL;

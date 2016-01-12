@@ -317,7 +317,11 @@ class SummitAppAdminController extends Page_Controller
         Requirements::css('summit/css/simple-sidebar.css');
         // Requirements::css('summit/css/summit-admin-schedule.css');
         Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         $summit_id = intval($this->request->param('SummitID'));
         $summit    = Summit::get()->byID($summit_id);
         if(is_null($summit) || $summit->ID <= 0) return $this->httpError(404);

@@ -1,8 +1,11 @@
 <schedule-admin-view-unpublished-event>
 
-    <div class="event resizable event-unpublished" id="event_{ data.id }" data-id="{ data.id }">
+    <div class="event resizable event-unpublished unselectable" id="event_{ data.id }" data-id="{ data.id }">
         <div class="ui-resizable-handle ui-resizable-n" style="display:none">
             <span class="ui-icon ui-icon-triangle-1-n"></span>
+        </div>
+        <div class="unpublish-event-btn-container" style="display:none">
+            <button class="btn btn-danger btn-xs unpublish-event-btn" title="unpublish event" data-event-id="{ data.id }"><i class="fa fa-times"></i></button>
         </div>
         <div class="event-inner-body">
             <div class="event-title">

@@ -31,6 +31,8 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
      */
     private $summitpresentation_repository;
 
+    private $summit_service;
+
     public function __construct()
     {
         parent::__construct();
@@ -38,6 +40,12 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         $this->summit_repository             = new SapphireSummitRepository;
         $this->summitevent_repository        = new SapphireSummitEventRepository();
         $this->summitpresentation_repository = new SapphireSummitPresentationRepository();
+        $this->summit_service                = new SummitService
+        (
+            $this->summit_repository,
+            $this->summitevent_repository,
+            SapphireTransactionManager::getInstance()
+        );
     }
 
 
@@ -61,13 +69,15 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
 
     static $url_handlers = array(
-        'GET unpublished/$Source!'  => 'getUnpublishedEventsBySource',
-        'PUT publish'               => 'publishEvent',
+        'GET unpublished/$Source!' => 'getUnpublishedEventsBySource',
+        'PUT $EVENT_ID!/publish'   => 'publishEvent',
+        'DELETE $EVENT_ID!/unpublish'    => 'unpublishEvent',
     );
 
     static $allowed_actions = array(
         'getUnpublishedEventsBySource',
         'publishEvent',
+        'unpublishEvent',
     );
 
     public function getUnpublishedEventsBySource(SS_HTTPRequest $request) {
@@ -164,8 +174,54 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
            $query_string = $request->getVars();
            $summit_id    = intval($request->param('SUMMIT_ID'));
-           $event        = $this->getJsonRequest();
+           $event_id     = intval($request->param('EVENT_ID'));
+           $event_data   = $this->getJsonRequest();
+           $summit = $this->summit_repository->getById($summit_id);
+           if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+           $this->summit_service->publishEvent($summit, $event_data);
            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessages());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function unpublishEvent(SS_HTTPRequest $request){
+
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $query_string = $request->getVars();
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $event_id     = intval($request->param('EVENT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $event        = $this->summitevent_repository->getById($event_id) ;
+            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+            $this->summit_service->unpublishEvent($summit, $event);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
         }
         catch(Exception $ex)
         {

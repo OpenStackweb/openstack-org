@@ -5,18 +5,9 @@
             <schedule-admin-view-unpublished-event data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-unpublished-event>
         </li>
     </ul>
-
-    <nav class="unpublished-events-pager">
-        <ul if="{ pages.length > 1 }" class="pagination">
-                <li class="disabled">
-                    <span aria-hidden="true">&laquo;</span>
-                </li>
-                <li each={ pages } class="{ active: current }"><a href="#" onclick="{ onPageChange }" >{ number }</a></li>
-                <li>
-                    <span aria-hidden="true">&raquo;</span>
-                </li>
-        </ul>
-    </nav>
+    <div>
+        <ul id="unpublished-events-pager"></ul>
+    </div>
     <script>
 
         this.summit             = opts.summit;
@@ -25,30 +16,30 @@
         this.api                = opts.api;
         this.dispatcher         = opts.dispatcher;
         this.store              = opts.unpublished_store;
-        this.pages              = [];
         var self                = this;
-
-
 
         this.on('mount', function() {
 
         });
-
-        onPageChange(e) {
-            console.log('page ' + e.item.number);
-            self.dispatcher.unpublishedEventsPageChanged(e.item.number);
-        }
 
         self.store.on(self.store.LOAD_STORE,function() {
             console.log('UI: '+self.store.LOAD_STORE);
             // update UI
             $(".event-unpublished").remove();
             var page_info = self.store.getPagesInfo();
-            self.pages    = [];
-            for(var i=0 ; i < page_info.total_pages ; i++){
-                self.pages.push({ number: (i+1), current: page_info.page == (i+1)});
-            }
             self.update();
+            var options = {
+                bootstrapMajorVersion:3,
+                currentPage: page_info.page ,
+                totalPages: page_info.total_pages,
+                numberOfPages: 10,
+                onPageChanged: function(e,oldPage,newPage){
+                    $('#alert-content').text("Current page changed, old: "+oldPage+" new: "+newPage);
+                    console.log('page ' + newPage);
+                    self.dispatcher.unpublishedEventsPageChanged(newPage);
+                }
+            }
+            $('#unpublished-events-pager').bootstrapPaginator(options);
             $('[data-toggle="popover"]').popover({
                 trigger: 'hover focus',
                 html: true,
@@ -58,6 +49,7 @@
                 template : '<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
             });
             self.createDraggable($(".event-unpublished"));
+            $('body').ajax_loader('stop');
         });
 
         createDraggable(selector) {
@@ -65,7 +57,7 @@
                 containment: "document",
                 cursor: "move",
                 helper: "clone",
-                opacity: 0.35
+                opacity: 0.5
             });
         }
 
@@ -73,12 +65,12 @@
             if(source === '')
             {
                 $('.unpublished-events-list').hide();
-                $('.unpublished-events-pager').hide();
+                $('#unpublished-events-pager').hide();
             }
             else
             {
                 $('.unpublished-events-list').show();
-                $('.unpublished-events-pager').show();
+                $('#unpublished-events-pager').show();
             }
         });
     </script>
