@@ -56,7 +56,7 @@ class SpeakerForm extends BootstrapForm
                         },
                     });
 
-                     $("#SpeakerForm_BioForm_CountriesToTravel").chosen();
+                     $("#SpeakerForm_BioForm_CountriesToTravel").chosen({width: '100%'});
                 });
                 // End of closure.
         }(jQuery ));

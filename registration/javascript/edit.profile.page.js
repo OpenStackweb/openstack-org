@@ -199,7 +199,7 @@ jQuery(document).ready(function($) {
 
         var country = $(speaker_form_id+'_CountriesToTravel');
         if(country.length > 0){
-            country.chosen();
+            country.chosen({width: '100%'});
         }
 
         //custom validation
