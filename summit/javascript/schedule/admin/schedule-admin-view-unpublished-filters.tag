@@ -2,7 +2,7 @@
         <div class="row">
             <div class="col-md-6">
                     <label for="select_unpublished_events_source">Source</label>
-                    <select id="select_unpublished_events_source" name="select_unpublished_events_source">
+                    <select id="select_unpublished_events_source" name="select_unpublished_events_source" style="width: 70%">
                         <option value=''>-- Select An Event Source --</option>
                         <option value='tracks'>Tracks List</option>
                         <option value='presentations'>Presentations</option>
@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-6" id="track_list_col" style="display:none;">
                     <label for="select_track_list">Track Lists</label>
-                    <select id="select_track_list" name="select_track_list">
+                    <select id="select_track_list" name="select_track_list" style="width: 70%">
                         <option value=''>-- All --</option>
                         <option each="{ id, list in summit.track_lists }" value='{ id }'>{ list.name }</option>
                     </select>

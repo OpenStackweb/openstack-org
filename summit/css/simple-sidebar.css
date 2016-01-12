@@ -46,8 +46,6 @@
     position: absolute;
     left:260px;
     height: 85vh;
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 #wrapper.toggled #page-content-wrapper {

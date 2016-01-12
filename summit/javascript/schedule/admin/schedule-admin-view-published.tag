@@ -8,7 +8,7 @@
                             <td class="times-col">
                                 <div each={ time_slots } class="time-slot" id='time_slot_{ format("HH_mm") }'>{ format("hh:mm A") }</div>
                             </td>
-                            <td class="events-col">
+                            <td class="events-col col-md-12">
                                 <div each={ time_slots } class="time-slot-container" data-time="{ format('HH:mm') }" id="time_slot_container_{ format('HH_mm') }"></div>
                                 <schedule-admin-view-schedule-event each="{ key, e in published_store.all()  }" data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-schedule-event>
                             </td>
@@ -50,7 +50,7 @@
             $(function() {
 
                 self.createDraggable($(".event"));
-
+                self.slot_width = $('.time-slot-container').width();
                 $( ".time-slot-container" ).droppable({
                     hoverClass: "ui-state-hover",
                     accept: function(){
@@ -133,6 +133,10 @@
                             swal("Deleted!", "Your event was unpublished.", "success");
                         });
                 });
+            });
+
+            $( window ).resize(function() {
+                $('.event-published').css('width', $('.time-slot-container').width());
             });
         });
 
@@ -279,7 +283,7 @@
             $(".event-published").remove();
 
             self.update();
-
+            $(".event-published").css('width', $('.time-slot-container').width());
             self.createDraggable($(".event-published"));
 
             self.createResizable($(".event-published"));

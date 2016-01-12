@@ -96,9 +96,9 @@
                 <% end_loop %>
                 $(function() {
 
-                    $('#page-content-wrapper').scroll(function () {
+                    $(window).scroll(function () {
                         console.log('scroll '+$(this).scrollTop());
-                        if ($(this).scrollTop() > 135) {
+                        if ($(this).scrollTop() > 318) {
                             $('.unpublished-container').addClass('fixed');
                         } else {
                             $('.unpublished-container').removeClass('fixed');
@@ -114,11 +114,11 @@
         <div class="row">
             <div class="col-md-6">
                 <schedule-admin-view-published-filters summit="{ summit }"></schedule-admin-view-published-filters>
-                <schedule-admin-view-published start_time="06:00" end_time="23:45" interval="15" summit="{ summit }" minute_pixels="3" slot_width="500"></schedule-admin-view-published>
+                <schedule-admin-view-published start_time="06:00" end_time="23:45" interval="15" summit="{ summit }" minute_pixels="3" slot_width="100%"></schedule-admin-view-published>
             </div>
             <div class="col-md-6 unpublished-container">
                 <schedule-admin-view-unpublished-filters summit="{ summit }"></schedule-admin-view-unpublished-filters>
-                <schedule-admin-view-unpublished summit="{ summit }" slot_width="500" interval="15" minute_pixels="3" slot_width="500"></schedule-admin-view-unpublished>
+                <schedule-admin-view-unpublished summit="{ summit }" slot_width="500" interval="15" minute_pixels="3" slot_width="100%"></schedule-admin-view-unpublished>
             </div>
         </div>
     </div>

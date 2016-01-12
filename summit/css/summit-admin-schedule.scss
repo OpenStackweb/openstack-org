@@ -2,11 +2,8 @@
 
 body
 {
-  overflow-y:hidden;
-  overflow: -moz-scrollbars-none;
-}
 
-body::-webkit-scrollbar { width: 0 !important }
+}
 
 
 #day_schedule {
@@ -21,8 +18,13 @@ body::-webkit-scrollbar { width: 0 !important }
   height:$slot_height;
   background-color: gray;
   border: solid 1px gray;
+  min-width: 70px;
 }
 
+.events-col
+{
+  padding: 0 !important;
+}
 
 .time-slot-container
 {
@@ -31,6 +33,7 @@ body::-webkit-scrollbar { width: 0 !important }
   height:$slot_height;
   margin:0;
   padding:0;
+  min-width: 351px;
 }
 
 .event
@@ -110,6 +113,11 @@ body::-webkit-scrollbar { width: 0 !important }
   margin-right:auto;
 }
 
+.event-published
+{
+
+}
+
 .unpublished-events-list li {
   height: $slot_height;
   margin-top: 10px;
@@ -125,8 +133,8 @@ body::-webkit-scrollbar { width: 0 !important }
 .fixed
 {
   position:fixed;
-  top:15%;
-  left:57%;
+  top:0;
+  left:59%;
   width: 42%;
 }
 

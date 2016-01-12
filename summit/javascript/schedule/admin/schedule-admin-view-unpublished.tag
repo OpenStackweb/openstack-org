@@ -19,7 +19,9 @@
         var self                = this;
 
         this.on('mount', function() {
-
+            $( window ).resize(function() {
+                 $('.event-unpublished').css('width', $('.time-slot-container').width());
+            });
         });
 
         self.store.on(self.store.LOAD_STORE,function() {
@@ -49,6 +51,7 @@
                 template : '<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
             });
             self.createDraggable($(".event-unpublished"));
+            $('.event-unpublished').css('width', $('.time-slot-container').width());
             $('body').ajax_loader('stop');
         });
 
