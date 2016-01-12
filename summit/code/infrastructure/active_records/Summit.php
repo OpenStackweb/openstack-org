@@ -1136,7 +1136,7 @@ SQL;
     public function Speakers($only_published  = true)
     {
         $id     = $this->ID;
-        $filter = $only_published ? "AND E.Published = 1 " : "";
+        $filter = intval($only_published) ? "AND E.Published = 1 " : "";
         $dl     = new DataList('PresentationSpeaker');
 
         $dl = $dl->leftJoin('Member', ' Member.ID = PresentationSpeaker.MemberID')

@@ -14,9 +14,9 @@
         </div>
 
         <script>
-                this.summit = opts.summit;
-                this.api    = opts.api;
-                var self    = this;
+                this.summit     = opts.summit;
+                this.dispatcher = opts.dispatcher;
+                var self        = this;
 
                 this.on('mount', function(){
                     $(function() {
@@ -31,11 +31,15 @@
                             var location_id = $('#select_venue').val();
                             self.doFilter(day, location_id);
                         });
+
+                        var day         = $('#select_day').val();
+                        var location_id = $('#select_venue').val();
+                        self.doFilter(day, location_id);
                     });
                 });
 
                 doFilter(day, location_id) {
-                    self.api.getScheduleByDayAndLocation(self.summit.id, day ,location_id);
+                    self.dispatcher.publishedEventsFilterChanged(self.summit.id, day ,location_id);
                 }
         </script>
 </schedule-admin-view-published-filters>

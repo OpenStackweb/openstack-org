@@ -10,7 +10,7 @@
                             </td>
                             <td class="events-col">
                                 <div each={ time_slots } class="time-slot-container" data-time="{ format('HH:mm') }" id="time_slot_container_{ format('HH_mm') }"></div>
-                                <schedule-admin-view-schedule-event each="{ key, e in schedule_events }" data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-schedule-event>
+                                <schedule-admin-view-schedule-event each="{ key, e in published_store.all()  }" data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-schedule-event>
                             </td>
                         </tr>
                     </tbody>
@@ -28,8 +28,9 @@
         this.minute_pixels     = parseInt(opts.minute_pixels);
         this.slot_width        = parseInt(opts.slot_width);
         this.dispatcher        = opts.dispatcher;
+        this.published_store   = opts.published_store;
         this.unpublished_store = opts.unpublished_store;
-        this.schedule_events   = {};
+        this.summit            = summit;
         this.time_slots        = [];
         this.api               = opts.api;
         var self               = this;
@@ -54,26 +55,27 @@
                     hoverClass: "ui-state-hover",
                     drop: function( e, ui ) {
 
-                        var event  = $(ui.draggable);
-                        var id     = parseInt(event.attr('data-id'));
-                        var target = $(this);
+                        var element = $(ui.draggable);
+                        var id      = parseInt(element.attr('data-id'));
+                        var target  = $(this);
 
                         var top    = target.position().top;
                         var left   = target.position().left;
 
-                        event.addClass('event-published');
-                        var start_time = target.attr('data-time');
-                        var minutes    = (parseInt(event.css('height'))/ self.minute_pixels);
-                        var end_time   = moment(start_time, 'HH:mm').add('m', minutes);
-                        start_time     = moment(start_time, 'HH:mm');
+                        element.addClass('event-published');
+                        var start_hour = target.attr('data-time');
+                        var day        = self.published_store.currentDay();
+                        var minutes    = (parseInt(element.css('height'))/ self.minute_pixels);
+                        var end_time   = moment(day+' '+start_hour, 'YYYY-MM-DD HH:mm').add('m', minutes);
+                        var start_time = moment(day+' '+start_hour, 'YYYY-MM-DD HH:mm');
 
                         console.log('star time '+ start_time.format('HH:mm'));
                         console.log('end time ' + end_time.format('HH:mm'));
 
-                        for(var id2 in self.schedule_events)
+                        for(var id2 in self.published_store.all())
                         {
                             if(parseInt(id2) === parseInt(id)) continue;
-                            var e           = self.schedule_events[id2];
+                            var e           = self.published_store.get(id2);
                             var start_time2 = moment(e.start_time, 'HH:mm a');
                             var end_time2   = moment(e.end_time, 'HH:mm a');
                             if(start_time.isBefore(end_time2) && end_time.isAfter(start_time2)) {
@@ -82,30 +84,32 @@
                             }
                         }
 
-                        event.appendTo($('.events-col'));
-                        event.css('position','absolute');
-                        event.css('top', top + 1);
-                        event.css('left', left);
+                        element.appendTo($('.events-col'));
+                        element.css('position','absolute');
+                        element.css('top', top + 1);
+                        element.css('left', left);
 
                         // set model time
-                        if(event.hasClass('event-unpublished')) {
-                            event.removeClass('event-unpublished');
-                            event.addClass('event-published');
-                            $('.ui-resizable-n', event).show();
-                            $('.ui-resizable-s', event).show();
-                            self.schedule_events[id] = self.unpublished_store.delete(id);
+                        if(element.hasClass('event-unpublished')) {
+                            element.removeClass('event-unpublished');
+                            element.addClass('event-published');
+                            $('.ui-resizable-n', element).show();
+                            $('.ui-resizable-s', element).show();
+                            self.published_store.add(self.unpublished_store.delete(id));
                         }
-                        self.schedule_events[id].start_time = start_time.format('hh:mm a');
-                        self.schedule_events[id].end_time   = end_time.format('hh:mm a');
+                        var event           = self.published_store.get(id);
+                        event.start_time    = start_time;
+                        event.end_time      = end_time;
 
-                        if( typeof event.resizable( "instance" ) == 'undefined'){
-                            self.createResizable(event);
+                        if( typeof element.resizable( "instance" ) == 'undefined'){
+                            self.createResizable(element);
                         }
 
-                        $('.ui-resizable-n', event).attr('title', self.schedule_events[id].start_time);
-                        $('.ui-resizable-s', event).attr('title', self.schedule_events[id].end_time);
-                        //$('.ui-resizable-n', event).tooltip('option', 'content', self.schedule_events[id].start_time);
-                        //$('.ui-resizable-s', event).tooltip('option', 'content', self.schedule_events[id].end_time);
+                        $('.ui-resizable-n', element).attr('title', event.start_time.format('hh:mm a'));
+                        $('.ui-resizable-s', element).attr('title', event.end_time.format('hh:mm a'));
+
+                        event.location_id = self.published_store.currentLocation();
+                        self.api.publish(self.summit.id, event);
                     }
                 });
             });
@@ -116,12 +120,12 @@
             selector.each(function(){
                 var element = $(this);
                 var id      = element.attr('data-id');
-                var top = $(".ui-resizable-n", element).tooltip({
+                var top = $(".ui-resizable-n", element).uitooltip({
                     tooltipClass: "tooltip-n-"+id,
                     track: true,
                     position: { my: "left+15 center", at: "right center"  }
                 });
-                var bottom = $(".ui-resizable-s", element).tooltip({
+                var bottom = $(".ui-resizable-s", element).uitooltip({
                     tooltipClass: "tooltip-s-"+id,
                     track: true,
                     position: { my: "left+15 center", at: "right center"  }
@@ -143,18 +147,19 @@
                 },
                 resize: function(e, ui) {
 
-                    var element    = $(ui.element);
-                    var id         = element.attr('data-id');
-                    var size       = ui.size;
-                    var pos        = element.offset();
-                    var bottom     = pos.top + size.height;
-                    var minutes    = ( parseInt(size.height) / self.minute_pixels);
-                    var overlapped = false;
-                    var container  = null;
-                    var original_h = ui.originalSize.height;
-                    ui.size.width  = ui.originalSize.width = self.slot_width;
-                    console.log('position top ' + pos.top + ' height ' + size.height + ' bottom ' + bottom+' original_h '+original_h);
+                    var element      = $(ui.element);
+                    var id           = element.attr('data-id');
+                    var size         = ui.size;
+                    var pos          = element.offset();
+                    var bottom       = pos.top + size.height;
+                    var minutes      = ( parseInt(size.height) / self.minute_pixels);
+                    var overlapped   = false;
+                    var container    = null;
+                    var original_h   = ui.originalSize.height;
+                    ui.size.width    = ui.originalSize.width = self.slot_width;
                     ui.position.left = ui.originalPosition.left;
+                    console.log('position top ' + pos.top + ' height ' + size.height + ' bottom ' + bottom+' original_h '+original_h);
+
                     // look for the current slot container that holds the begining of the current event
                     $('.time-slot-container').each(function(){
                         var top       = $(this).offset().top;
@@ -166,8 +171,9 @@
                             return false;
                         }
                     });
-
-                    var start_time   = moment(container.attr('data-time'), 'HH:mm');
+                    var day        = self.published_store.currentDay();
+                    var start_hour = container.attr('data-time');
+                    var start_time = moment(day+' '+start_hour, 'YYYY-MM-DD HH:mm');
                     // calculate delta minutes...
                     if(pos.top > container.offset().top) {
                        var delta_minutes = ( pos.top - container.offset().top) / self.minute_pixels;
@@ -178,12 +184,12 @@
                     var end_time   = start_time.clone().add('m', minutes);
                     // check if we overlap with some former event ...
                     var overlapped_id = null;
-                    for(var id2 in self.schedule_events)
+                    for(var id2 in self.published_store.all())
                     {
                         if(parseInt(id2) === parseInt(id)) continue;
-                        var event2      = self.schedule_events[id2];
-                        var start_time2 = moment(event2.start_time, 'HH:mm a');
-                        var end_time2   = moment(event2.end_time, 'HH:mm a');
+                        var event2      = self.published_store.get(id2);
+                        var start_time2 = event2.start_time;
+                        var end_time2   = event2.end_time;
                         if(start_time.isSameOrBefore(end_time2) && end_time.isSameOrAfter(start_time2)) {
 
                             overlapped    = true;
@@ -195,9 +201,9 @@
 
                     if(overlapped)
                     {
-                        var event2         = self.schedule_events[overlapped_id];
-                        var start_time2    = moment(event2.start_time, 'HH:mm a');
-                        var end_time2      = moment(event2.end_time, 'HH:mm a');
+                        var event2         = self.published_store.get(overlapped_id);
+                        var start_time2    = event2.start_time;
+                        var end_time2      = event2.end_time;
                         var delta1         = moment.duration(end_time2.diff(start_time)).asMinutes();
                         var delta2         = moment.duration(end_time.diff(start_time2)).asMinutes();
                         var delta          = delta1 < delta2 ? delta1 : delta2;
@@ -207,25 +213,29 @@
                     }
 
                     // set model time
-                    self.schedule_events[id].start_time = start_time.format('hh:mm a');
-                    self.schedule_events[id].end_time   = end_time.format('hh:mm a');
-                    $('.ui-resizable-n', element).attr('title', self.schedule_events[id].start_time);
-                    $('.ui-resizable-s', element).attr('title', self.schedule_events[id].end_time);
-                    $('.ui-tooltip-content','.tooltip-n-'+id).html(self.schedule_events[id].start_time);
-                    $('.ui-tooltip-content','.tooltip-s-'+id).html(self.schedule_events[id].end_time);
+                    var event        = self.published_store.get(id);
+                    event.start_time = start_time;
+                    event.end_time   = end_time;
+                    $('.ui-resizable-n', element).attr('title', event.start_time.format('hh:mm a'));
+                    $('.ui-resizable-s', element).attr('title', event.end_time.format('hh:mm a'));
+                    $('.ui-tooltip-content','.tooltip-n-'+id).html(event.start_time.format('hh:mm a'));
+                    $('.ui-tooltip-content','.tooltip-s-'+id).html(event.end_time.format('hh:mm a'));
                 },
-                start: function( event, ui )
+                start: function( e, ui )
                 {
                     var element = $(ui.element);
                     element.resizable( "option", "maxHeight", null );
                     var original_h = ui.originalSize.height;
                     console.log('start original_h '+original_h);
                 },
-                stop: function( event, ui ) {
+                stop: function( e, ui ) {
                     var element = $(ui.element);
                     var id      = element.attr('data-id');
-                    $('.ui-resizable-n', element).attr('title', self.schedule_events[id].start_time);
-                    $('.ui-resizable-s', element).attr('title', self.schedule_events[id].end_time);
+                    var event   = self.published_store.get(id);
+                    $('.ui-resizable-n', element).attr('title', event.start_time.format('hh:mm a'));
+                    $('.ui-resizable-s', element).attr('title', event.end_time.format('hh:mm a'));
+                    event.location_id = self.published_store.currentLocation();
+                    self.api.publish(self.summit.id, event);
                     console.log('stop');
                 }
             });
@@ -240,13 +250,8 @@
             });
         }
 
-        this.api.on('ScheduleByDayAndLocationRetrieved',function(data) {
-            console.log('ScheduleByDayAndLocationRetrieved');
-            self.schedule_events = {};
-            // update model
-            for(var e of data.events) {
-                self.schedule_events[e.id] = e;
-            }
+        self.published_store.on(self.published_store.LOAD_STORE,function() {
+            console.log('UI: '+self.published_store.LOAD_STORE);
             // update UI
             $(".event-published").resizable("destroy");
             $(".event-published").draggable("destroy");

@@ -129,3 +129,11 @@ body::-webkit-scrollbar { width: 0 !important }
   left:57%;
   width: 42%;
 }
+
+/* pop over */
+
+.popover
+{
+  max-width: 40%; // Max Width of the popover (depending on the container!)
+  margin-top:7px;
+}

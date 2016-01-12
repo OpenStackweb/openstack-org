@@ -26,7 +26,20 @@
                     presentation_levels: {},
                     current_user: null,
                     track_lists: {}
+                 };
+                 <% loop $Summit.Categories %>
+                 summit.tracks[{$ID}] =
+                 {
+                    id: {$ID},
+                    name : "{$Title.JS}",
+                 };
+                 <% end_loop %>
+                 <% loop $Top.getPresentationLevels %>
+                summit.presentation_levels['{$Level}'] =
+                {
+                    level : "{$Level}",
                 };
+                <% end_loop %>
                 <% loop $Summit.EventTypes %>
                 summit.event_types[{$ID}] =
                 {

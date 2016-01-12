@@ -62,10 +62,12 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
     static $url_handlers = array(
         'GET unpublished/$Source!'  => 'getUnpublishedEventsBySource',
+        'PUT publish'               => 'publishEvent',
     );
 
     static $allowed_actions = array(
         'getUnpublishedEventsBySource',
+        'publishEvent',
     );
 
     public function getUnpublishedEventsBySource(SS_HTTPRequest $request) {
@@ -81,6 +83,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $page          = isset($query_string['page']) ? intval($query_string['page']) : 1;
             $page_size     = isset($query_string['page_size']) ? intval($query_string['page_size']) : 10;
             $order         = isset($query_string['order']) ? Convert::raw2sql($query_string['order']) : null;
+            $expand        = isset($query_string['expand']) ? Convert::raw2sql($query_string['expand']) : null;
 
             switch ($source)
             {
@@ -114,12 +117,22 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
                 if ($e instanceof Presentation)
                 {
-                    $speakers = array();
-                    foreach ($e->Speakers() as $s) {
-                        array_push($speakers, $s->ID);
-                    }
 
-                    $entry['speakers_id']  = $speakers;
+
+                    $speakers = array();
+                    if(!empty($expand) && strstr($expand, 'speakers')!== false)
+                    {
+                        foreach ($e->Speakers() as $s) {
+                            array_push($speakers, array('id' => $s->ID, 'name' => $s->getName()));
+                        }
+                        $entry['speakers'] = $speakers;
+                    }
+                    else {
+                        foreach ($e->Speakers() as $s) {
+                            array_push($speakers, $s->ID);
+                        }
+                        $entry['speakers_id'] = $speakers;
+                    }
                     $entry['moderator_id'] = $e->ModeratorID;
                     $entry['track_id']     = $e->CategoryID;
                     $entry['level']        = $e->Level;
@@ -136,6 +149,23 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                     'total_pages' => ceil($count/$page_size)
                 )
             );
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function publishEvent(SS_HTTPRequest $request)
+    {
+        try
+        {
+           if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+           $query_string = $request->getVars();
+           $summit_id    = intval($request->param('SUMMIT_ID'));
+           $event        = $this->getJsonRequest();
+           return $this->ok();
         }
         catch(Exception $ex)
         {

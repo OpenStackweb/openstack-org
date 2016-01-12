@@ -229,19 +229,38 @@ class Page_Controller extends ContentController
         'getNavigationMenu'
     );
 
+    /**
+     * @var bool
+     */
+    protected $use_jquery_ui;
+
+    /**
+     * @param bool $enable
+     * @return $this
+     */
+    public function useJqueryUI($enable)
+    {
+        $this->use_jquery_ui = $enable;
+        return $this;
+    }
 
     protected function CustomScripts()
     {
-
         $js_files = array(
             "themes/openstack/javascript/jquery.ticker.js",
             "themes/openstack/javascript/jquery.tools.min.js",
-            //"themes/openstack/javascript/jquery.colorbox-min.js",
             "themes/openstack/javascript/jcarousellite.min.js",
-            "themes/openstack/javascript/bootstrap.min.js",
             "themes/openstack/javascript/navigation.js",
             "themes/openstack/javascript/filetracking.jquery.js",
         );
+
+        if($this->use_jquery_ui)
+        {
+            array_push( $js_files, 'themes/openstack/bower_assets/jquery-ui/jquery-ui.js');
+            array_push( $js_files, 'themes/openstack/javascript/jquery-ui-bridge.js');
+        };
+
+        array_push($js_files,"themes/openstack/javascript/bootstrap.min.js");
 
         $filename = 'themes/openstack/javascript/' . $this->URLSegment . '.js';
 

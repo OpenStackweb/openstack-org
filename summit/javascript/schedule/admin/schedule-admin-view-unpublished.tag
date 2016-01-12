@@ -28,6 +28,12 @@
         this.pages              = [];
         var self                = this;
 
+
+
+        this.on('mount', function() {
+
+        });
+
         onPageChange(e) {
             console.log('page ' + e.item.number);
             self.dispatcher.unpublishedEventsPageChanged(e.item.number);
@@ -43,6 +49,14 @@
                 self.pages.push({ number: (i+1), current: page_info.page == (i+1)});
             }
             self.update();
+            $('[data-toggle="popover"]').popover({
+                trigger: 'hover focus',
+                html: true,
+                container: 'body',
+                placement: 'auto',
+                animation: true,
+                template : '<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+            });
             self.createDraggable($(".event-unpublished"));
         });
 

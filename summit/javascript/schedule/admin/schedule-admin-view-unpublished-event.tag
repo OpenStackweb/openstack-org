@@ -6,7 +6,7 @@
         </div>
         <div class="event-inner-body">
             <div class="event-title">
-                <a id="popover_{ data.id }" data-content="{ data.description }" title="{ data.title }" role="button" data-toggle="popover" data-trigger="focus">{ data.title }</a>
+                <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title }</a>
             </div>
         </div>
         <div class="ui-resizable-handle ui-resizable-s" style="display:none">
@@ -17,13 +17,27 @@
     <script>
 
         this.data          = opts.data;
+        this.summit        = parent.summit;
         this.minute_pixels = parseInt(opts.minute_pixels);
         this.interval      = parseInt(opts.interval);
         var self           = this;
 
+
         this.on('mount', function() {
-            $("#popover_"+self.data.id).popover({ trigger: "hover" });
+
         });
+
+        getPopoverContent() {
+            var res = '<div class="row"><div class="col-md-12">'+self.data.description+'</div></div>';
+            if(typeof(self.data.speakers) !== 'undefined') {
+                res += '<div class="row"><div class="col-md-12"><b>Speakers</b></div></div>';
+                for(var idx in self.data.speakers) {
+                    var speaker = self.data.speakers[idx];
+                    res += '<div class="row"><div class="col-md-12">'+ speaker.name+'</div></div>';
+                }
+            }
+            return res;
+        }
 
     </script>
 </schedule-admin-view-unpublished-event>

@@ -17,6 +17,7 @@ class SummitAppAdminController extends Page_Controller
 
     public function init()
     {
+        $this->useJqueryUI(true);
         parent::init();
         if(!Permission::check('ADMIN')) return Security::permissionFailure($this);
         Requirements::css('themes/openstack/css/chosen.css');
@@ -26,11 +27,6 @@ class SummitAppAdminController extends Page_Controller
         Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-ui/jquery-ui.js');
-        Requirements::customScript("
-         $(function() {
-            $.widget.bridge('jqueryuitooltip', $.ui.tooltip);
-         });");
     }
 
     private static $url_segment = 'summit-admin';
