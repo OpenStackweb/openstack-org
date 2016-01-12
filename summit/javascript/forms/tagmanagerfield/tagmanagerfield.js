@@ -1,2 +1,3 @@
-require('./tagmanagerfield.tag')
+require('./clicktag.tag');
+require('./tagmanagerfield.tag');
 riot.mount('tagmanagerfield');

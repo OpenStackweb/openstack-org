@@ -74,16 +74,16 @@ require('./clicktag.tag')
         <input type="hidden" id="Tags" name="Tags" value="{ opts.value }" />
         </div>
         <div class="col-lg-3">
-        <p></p>
-        <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">Tags You've Selected</div>
-        <div class="panel-body">
-        <h4>{ tagsSelected } of 8 tags</h4>
-        </div>
-        <ul class="list-group" if={!canSelect()}>
-        <li class="list-group-item">You have selected the maximum number of tags.</li>
-        </ul>
+            <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Tags You have Selected</div>
+            <div class="panel-body">
+            <h4>{ tagsSelected } of 8 tags</h4>
+            </div>
+            <ul class="list-group" if={!canSelect()}>
+            <li class="list-group-item">You have selected the maximum number of tags.</li>
+            </ul>
+            </div>
         </div>
         </div>
         <script>
