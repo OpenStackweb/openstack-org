@@ -55,6 +55,8 @@ class SpeakerForm extends BootstrapForm
                             }, 2000);
                         },
                     });
+
+                     $("#SpeakerForm_BioForm_CountriesToTravel").chosen();
                 });
                 // End of closure.
         }(jQuery ));
@@ -81,13 +83,13 @@ JS;
                     ->setRequired(true)
                 ->end()
             ->text('IRCHandle','IRC Handle (optional)')
-             ->configure()
-                ->setMaxLength(25)
-            ->end()
+                ->configure()
+                    ->setMaxLength(25)
+                ->end()
             ->text('TwitterHandle','Twitter Handle (optional)')
-            ->configure()
-                ->setMaxLength(50)
-            ->end()
+                ->configure()
+                    ->setMaxLength(50)
+                ->end()
             ->fileAttachment('Photo','Upload a speaker photo')
                 ->configure()
                     ->setPermission('delete', false)
@@ -124,34 +126,34 @@ JS;
             ->literal('RecordingAndPublishingLegalAgreement',sprintf('Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.', Summit::ActiveSummit()->Title))
             ->header('Want to be in the Speakers\' Bureau?')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
-            ->configure()
-            ->addExtraClass('bureau-checkbox')
-            ->end()
+                ->configure()
+                    ->addExtraClass('bureau-checkbox')
+                ->end()
             ->checkbox('WillingToPresentVideo', "Willing to present via video conference")
-            ->configure()
-            ->addExtraClass('bureau-checkbox')
-            ->end()
+                ->configure()
+                    ->addExtraClass('bureau-checkbox')
+                ->end()
             ->checkbox('FundedTravel', 'My Company would be willing to fund my travel to events')
-            ->configure()
-                ->addExtraClass('bureau-checkbox')
-            ->end()
+                ->configure()
+                    ->addExtraClass('bureau-checkbox')
+                ->end()
              ->optionset('WillingToTravel', 'I am willing to travel to events:', array(
                     1 => 'Yes',
                     0 => 'No'
              ))
-            ->multidropdown('CountriesToTravel', 'Countries willing to travel to (Use Ctrl + C to select more than one):', CountryCodes::$iso_3166_countryCodes)
-            ->configure()
-                ->addExtraClass('countries-to-travel')
-            ->end()
+            ->multidropdown('CountriesToTravel', 'Countries willing to travel to: ', CountryCodes::$iso_3166_countryCodes)
+                ->configure()
+                    ->addExtraClass('countries-to-travel')
+                ->end()
             ->tinyMCEEditor('Notes',"Notes")
                 ->configure()
-                ->setRows(10)
-            ->end();
+                    ->setRows(10)
+                ->end();
         return $fields;
     }
 
     public function getSpeakerValidator() {
-        return RequiredFields::create('FirstName','LastName','Title', 'RecordingAndPublishingLegalAgreement');
+        return RequiredFields::create('FirstName','LastName','Title', 'RecordingAndPublishingLegalAgreement', 'Language[1]','Expertise[1]','WillingToTravel','Bio');
     }
 
     public function loadDataFrom($data, $mergeStrategy = 0, $fieldList = null)

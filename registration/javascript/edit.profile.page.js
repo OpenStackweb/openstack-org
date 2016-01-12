@@ -197,6 +197,11 @@ jQuery(document).ready(function($) {
 
     if(edit_speaker_profile_form.length > 0){
 
+        var country = $(speaker_form_id+'_CountriesToTravel');
+        if(country.length > 0){
+            country.chosen();
+        }
+
         //custom validation
         $.validator.addMethod(
             "regex",
@@ -229,7 +234,7 @@ jQuery(document).ready(function($) {
                 'Expertise[3]':{ValidPlainText:true },
                 'Expertise[4]':{ValidPlainText:true },
                 'Expertise[5]':{ValidPlainText:true },
-                'PresentationLink[1]' : {required: true, url: true},
+                'PresentationLink[1]' : {url: true},
                 'PresentationLink[2]' : {url: true},
                 'PresentationLink[3]' : {url: true},
                 'PresentationLink[4]' : {url: true},
