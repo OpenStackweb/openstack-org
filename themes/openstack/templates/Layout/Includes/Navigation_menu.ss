@@ -29,6 +29,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/">OpenStack Foundation</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://groups.openstack.org">User Groups</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/speakers/">Speakers Bureau</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/companies/">Supporting Companies</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/jobs/">Jobs</a></li>
