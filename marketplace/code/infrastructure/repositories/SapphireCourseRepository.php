@@ -130,10 +130,7 @@ class SapphireCourseRepository
         LEFT JOIN TrainingCourse_Projects tcp on tcp.TrainingCourseID = c.ID
         LEFT JOIN Project pp ON pp.ID = tcp.ProjectID
         WHERE
-        p.Active=1 AND
-        (
-          (( t.StartDate <= DATE('{$current_date}')  AND t.EndDate >= DATE('{$current_date}') ) OR ( DATE('{$current_date}') < t.StartDate AND DATE('{$current_date}') < t.EndDate ) OR (c.Online=1 AND t.StartDate IS NULL AND t.EndDate IS NULL)) {$filter}
-        )
+        p.Active=1 AND ( ( DATE('{$current_date}') < t.StartDate ) OR (c.Online=1 AND t.StartDate IS NULL AND t.EndDate IS NULL ) ) {$filter}
         GROUP BY c.ID , c.Name , c.Link , lv.Level , l.City , l.State , l.Country
         ORDER BY lv.SortOrder ASC, t.StartDate ASC, t.EndDate ASC
 SQL;
@@ -427,8 +424,7 @@ SQL;
         SELECT L.City, L.State, L.Country,T.StartDate, T.EndDate, T.Link
         FROM TrainingCourseSchedule L
         INNER JOIN TrainingCourseScheduleTime T ON T.LocationID = L.ID
-        WHERE
-        ( (T.StartDate <= DATE('{$current_date}') AND T.EndDate >= DATE('{$current_date}')) OR (DATE('{$current_date}') < T.StartDate AND DATE('{$current_date}') < T.EndDate)) AND L.CourseID = {$course_id}
+        WHERE DATE('{$current_date}') < T.StartDate AND L.CourseID = {$course_id}
         ORDER BY T.StartDate ASC, T.EndDate ASC;
 SQL;
 

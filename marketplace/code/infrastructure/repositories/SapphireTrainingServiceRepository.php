@@ -33,9 +33,7 @@ class SapphireTrainingServiceRepository
     public function getCoursesByDate(ITraining $training, $date)
     {
         $res = $training->Courses(
-            $filter = "(TST.StartDate <= DATE('{$date}') AND TST.EndDate >= DATE('{$date}') )
-                OR
-                ( DATE('{$date}') < TST.StartDate AND DATE('{$date}') < TST.EndDate )
+            $filter = "(TST.StartDate >= DATE('{$date}') )
                 OR
                 (Online=1 AND TST.StartDate IS NULL AND TST.EndDate IS NULL) ")
             ->innerJoin('TrainingCourseLevel', 'L.ID = TrainingCourse.LevelID', 'L')
