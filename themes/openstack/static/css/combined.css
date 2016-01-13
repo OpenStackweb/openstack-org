@@ -3813,29 +3813,29 @@ a.session-chart-category {
   a.session-chart-category.one {
     background: #2A4F68; }
   a.session-chart-category.two {
-    background: #0E1823; }
+    background: #3f445d; }
   a.session-chart-category.three {
-    background: #30739C; }
+    background: #007cea; }
   a.session-chart-category.four {
     background: #DA432E; }
   a.session-chart-category.five {
-    background: #A51E22; }
+    background: #0d37c3; }
   a.session-chart-category.six {
-    background: #29AAE2; }
+    background: #2f6c7e; }
   a.session-chart-category.seven {
-    background: #69C8C3; }
+    background: #01c7af; }
   a.session-chart-category.eight {
-    background: #EA614C; }
+    background: #5244c0; }
   a.session-chart-category.nine {
-    background: #3A90BE; }
+    background: #d0021b; }
   a.session-chart-category.ten {
-    background: #518B88; }
+    background: #00cbea; }
   a.session-chart-category.eleven {
-    background: #83A36F; }
+    background: #9aa0b5; }
   a.session-chart-category.twelve {
-    background: #5FC332; }
+    background: #f5a623; }
   a.session-chart-category.thirteen {
-    background: #193C50; }
+    background: #f75466; }
 
 @media (max-width: 767px) {
   .sessions-first-col {
