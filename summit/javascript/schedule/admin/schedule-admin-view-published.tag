@@ -136,7 +136,10 @@
             });
 
             $( window ).resize(function() {
-                $('.event-published').css('width', $('.time-slot-container').width());
+                self.slot_width = $('.time-slot-container').width();
+                $(".event-published").css('width', self.slot_width);
+                $(".ui-resizable").resizable( "option", "maxWidth", self.slot_width );
+                $(".ui-resizable").resizable( "option", "minWidth", self.slot_width );
             });
         });
 

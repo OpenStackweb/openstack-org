@@ -20,7 +20,8 @@
 
         this.on('mount', function() {
             $( window ).resize(function() {
-                 $('.event-unpublished').css('width', $('.time-slot-container').width());
+                 self.slot_width = $('.time-slot-container').width();
+                 $('.event-unpublished').css('width', self.slot_width);
             });
         });
 
