@@ -17,7 +17,7 @@
         this.search_url               = opts.search_url;
         this.schedule_api             = opts.schedule_api;
         this.base_url                 = opts.base_url;
-        this.default_event_type_color = opts.default_event_type_color;
+        this.default_event_color      = opts.default_event_color;
         this.clicked_event            = {};
         this.current_filter           = null;
         var self                      = this;

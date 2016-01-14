@@ -104,7 +104,7 @@
     this.summit                   = this.parent.summit;
     this.search_url               = this.parent.search_url;
     this.schedule_api             = this.parent.schedule_api;
-    this.default_event_type_color = this.parent.default_event_type_color;
+    this.default_event_color      = this.parent.default_event_color;
     var self                      = this;
 
     this.on('mount', function(){
@@ -165,9 +165,10 @@
     }
 
     eventColor(category_group_ids){
-        if(category_group_ids.length > 1){
-            return self.default_event_type_color;
+        if(category_group_ids.length == 0){
+            return self.default_event_color;
         }
+
         return self.summit.category_groups[category_group_ids[0]].color;
     }
 

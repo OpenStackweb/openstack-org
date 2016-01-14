@@ -211,7 +211,7 @@
                     <% end_loop %>
                 </script>
 
-                <event-list summit="{ summit }" default_event_type_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
+                <event-list summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
 
             </div>
         </div>

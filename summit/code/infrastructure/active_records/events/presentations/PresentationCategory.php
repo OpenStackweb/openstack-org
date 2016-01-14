@@ -78,7 +78,7 @@ class PresentationCategory extends DataObject
     }
 
     public function getCategoryGroups() {
-        return $this->CategoryGroup;
+        return $this->CategoryGroup();
     }
 
     public function isTrackChair($memberid)
