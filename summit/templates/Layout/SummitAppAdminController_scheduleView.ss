@@ -90,7 +90,7 @@
                         <% end_if %>
                     <% end_if %>
                 <% end_loop %>
-                <% loop $Summit.DatesWithEvents %>
+                <% loop $Summit.Dates %>
                 summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', selected: false };
                 summit.events['{$Date}'] = [];
                 <% end_loop %>
