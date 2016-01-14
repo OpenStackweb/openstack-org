@@ -16,8 +16,8 @@ class SurveyDoubleEntryTableQuestionTemplate extends SurveyMultiValueQuestionTem
 {
     static $db = array
     (
-        'RowsLabel' => 'Text',
-        'AdditionalRowsLabel' => 'Text',
+        'RowsLabel'                 => 'Text',
+        'AdditionalRowsLabel'       => 'Text',
         'AdditionalRowsDescription' => 'HTMLText',
     );
 
@@ -52,7 +52,6 @@ class SurveyDoubleEntryTableQuestionTemplate extends SurveyMultiValueQuestionTem
         }
         return null;
     }
-
 
     public function getCMSFields() {
 
@@ -110,11 +109,33 @@ class SurveyDoubleEntryTableQuestionTemplate extends SurveyMultiValueQuestionTem
     }
 
     /**
+     * @param IQuestionValueTemplate $col
+     * @return $this
+     * @throws Exception
+     */
+    public function addColumn(IQuestionValueTemplate $col)
+    {
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Columns')->add($col);
+        return $this;
+    }
+
+    /**
      * @return IQuestionValueTemplate[]
      */
     public function getRows()
     {
         return $this->Rows()->filter('IsAdditional', 0)->sort('Order','ASC')->toArray();
+    }
+
+    /**
+     * @param IQuestionValueTemplate $row
+     * @return $this
+     * @throws Exception
+     */
+    public function addRow(IQuestionValueTemplate $row)
+    {
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Rows')->add($row);
+        return $this;
     }
 
     /**

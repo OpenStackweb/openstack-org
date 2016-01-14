@@ -44,22 +44,31 @@ final class SurveyManager implements ISurveyManager {
     private $tx_manager;
 
     /**
+     * @var ISurveyTemplateFactory
+     */
+    private $template_factory;
+
+    /**
+     * SurveyManager constructor.
      * @param ISurveyRepository $survey_repository
      * @param IEntityRepository $template_repository
      * @param IFoundationMemberRepository $member_repository
      * @param ISurveyBuilder $survey_builder
+     * @param ISurveyTemplateFactory $template_factory
      * @param ITransactionManager $tx_manager
      */
     public function __construct(ISurveyRepository $survey_repository,
                                 IEntityRepository $template_repository,
                                 IFoundationMemberRepository $member_repository,
                                 ISurveyBuilder $survey_builder,
+                                ISurveyTemplateFactory $template_factory,
                                 ITransactionManager $tx_manager){
 
         $this->survey_repository   = $survey_repository;
         $this->template_repository = $template_repository;
         $this->member_repository   = $member_repository;
         $this->survey_builder      = $survey_builder;
+        $this->template_factory    = $template_factory;
         $this->tx_manager          = $tx_manager;
     }
 
@@ -371,6 +380,128 @@ final class SurveyManager implements ISurveyManager {
         $this->tx_manager->transaction(function() use($survey, $strategy, $survey_builder, $this_var)
         {
             $strategy->autoPopulate($survey, $survey_builder, $this_var);
+        });
+    }
+
+    /**
+     * @param ISurveyTemplate $template
+     * @param null $clone_name
+     * @param null $parent_id
+     * @return mixed
+     */
+    public function doClone(ISurveyTemplate $template, $clone_name = null, $parent_id = null)
+    {
+        $template_repository = $this->template_repository;
+        $template_factory    = $this->template_factory;
+
+        return $this->tx_manager->transaction(function() use($template, $clone_name, $template_repository, $template_factory, $parent_id)
+        {
+            $now = new \DateTime();
+            if(empty($clone_name)) $clone_name = $template->getTitle().'-Clone-'.$now->format('Y-m-d-H-i-s');
+            $template_clone        = $template_factory->cloneTemplate($template, $parent_id);
+            $template_clone->Title = $clone_name;
+            $template_clone->write();
+            $original_clone_questions_dictionary       = array();
+            $original_clone_question_values_dictionary = array();
+            foreach($template->getSteps() as $original_step)
+            {
+                $clone_step = $template_factory->cloneStep($original_step);
+                $clone_step->SurveyTemplateID = $template_clone->ID;
+                $cloned_entity                = null;
+                if($clone_step instanceof SurveyDynamicEntityStepTemplate)
+                {
+                    // create entity
+                    $original_entity         = $original_step->getEntity();
+                    $cloned_entity           = $this->doClone($original_entity, $original_entity->getTitle(), $template_clone->ID);
+                    $cloned_entity->ParentID = $template_clone->ID;
+                    $cloned_entity->OwnerID  = 0;
+                    $cloned_entity->write();
+                    $clone_step->EntityID    = $cloned_entity->ID;
+                }
+                $clone_step->write();
+                foreach($original_step->getDependsOn() as $original_step_dependant)
+                {
+                    if(!isset($original_clone_questions_dictionary[$original_step_dependant->ID])) continue;
+                    if(!isset($original_clone_question_values_dictionary[$original_step_dependant->ValueID])) continue;
+                    $new_id           = $original_clone_questions_dictionary[$original_step_dependant->ID];
+                    $value_id         = $original_clone_question_values_dictionary[$original_step_dependant->ValueID];
+                    $operator         = $original_step_dependant->Operator;
+                    $visibility       = $original_step_dependant->Visibility;
+                    $boolean_operator = $original_step_dependant->BooleanOperatorOnValues;
+
+                    DB::query("INSERT INTO SurveyStepTemplate_DependsOn
+                    (SurveyStepTemplateID, SurveyQuestionTemplateID , ValueID, Operator, Visibility, BooleanOperatorOnValues)
+                    VALUES ({$clone_step->ID}, {$new_id}, $value_id,'{$operator}','{$visibility}','{$boolean_operator}');");
+                }
+                if($clone_step instanceof SurveyRegularStepTemplate) {
+                    // create questions
+                    foreach ($original_step->getQuestions() as $original_question) {
+                        $clone_question         = $template_factory->cloneQuestion($original_question);
+                        $clone_question->StepID = $clone_step->ID;
+                        $clone_question->write();
+                        $original_clone_questions_dictionary[$original_question->ID] = $clone_question->ID;
+                        foreach($original_question->getDependsOn() as $original_dependant_question)
+                        {
+                            if(!isset($original_clone_questions_dictionary[$original_dependant_question->ID])) continue;
+                            if(!isset($original_clone_question_values_dictionary[$original_dependant_question->ValueID])) continue;
+                            $new_id           = $original_clone_questions_dictionary[$original_dependant_question->ID];
+                            $value_id         = $original_clone_question_values_dictionary[$original_dependant_question->ValueID];
+                            $operator         = $original_dependant_question->Operator;
+                            $visibility       = $original_dependant_question->Visibility;
+                            $initial_value    = $original_dependant_question->DependantDefaultValue;
+                            $boolean_operator = $original_dependant_question->BooleanOperatorOnValues;
+                            DB::query("INSERT INTO SurveyQuestionTemplate_DependsOn
+                            (SurveyQuestionTemplateID, ChildID , ValueID,Operator, Visibility, DefaultValue, BooleanOperatorOnValues)
+                            VALUES ({$clone_question->ID}, {$new_id}, $value_id,'{$operator}','{$visibility}','{$initial_value}', '{$boolean_operator}');");
+                        }
+                        if($original_question instanceof IMultiValueQuestionTemplate)
+                        {
+                            if($original_question instanceof IDropDownQuestionTemplate && $original_question->isCountrySelector()) continue;
+                            foreach($original_question->getValues() as $original_val)
+                            {
+                                $clone_val = $template_factory->cloneQuestionValue($original_val);
+                                $clone_val->OwnerID = $clone_question->ID;
+                                $clone_val->write();
+                                $original_clone_question_values_dictionary[$original_val->ID] = $clone_val->ID;
+                            }
+                        }
+                        if($original_question instanceof IDoubleEntryTableQuestionTemplate)
+                        {
+                            foreach($original_question->getColumns() as $original_val)
+                            {
+                                $clone_val = $template_factory->cloneQuestionValue($original_val);
+                                $clone_val->OwnerID = $clone_question->ID;
+                                $clone_val->write();
+                                $original_clone_question_values_dictionary[$original_val->ID] = $clone_val->ID;
+                            }
+                            foreach($original_question->getRows() as $original_val)
+                            {
+                                $clone_val = $template_factory->cloneQuestionValue($original_val);
+                                $clone_val->OwnerID = $clone_question->ID;
+                                $clone_val->write();
+                                $original_clone_question_values_dictionary[$original_val->ID] = $clone_val->ID;
+                            }
+                            foreach($original_question->getAlternativeRows() as $original_val)
+                            {
+                                $clone_val = $template_factory->cloneQuestionValue($original_val);
+                                $clone_val->OwnerID = $clone_question->ID;
+                                $clone_val->write();
+                                $original_clone_question_values_dictionary[$original_val->ID] = $clone_val->ID;
+                            }
+                        }
+                    }
+                }
+                if($clone_step instanceof SurveyThankYouStepTemplate) {
+                   // clone email ?
+                }
+                if($clone_step instanceof SurveyDynamicEntityStepTemplate && !is_null($cloned_entity))
+                {
+                    $cloned_entity->OwnerID = $clone_step->ID;
+                    $cloned_entity->write();
+                    $cloned_entity = null;
+                }
+            }
+            return $template_clone;
         });
     }
 }

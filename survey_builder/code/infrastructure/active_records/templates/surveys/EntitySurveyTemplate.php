@@ -135,10 +135,11 @@ class EntitySurveyTemplate extends SurveyTemplate implements IEntitySurveyTempla
         $title    = $this->EntityName;
         $id       = $this->ID;
         $owner_id = $this->ParentID;
-
-        $res   = DB::query("SELECT COUNT(ID) FROM EntitySurveyTemplate WHERE EntityName = '{$title}' AND ID <> {$id} AND ParentID = {$owner_id}")->value();
-        if(intval($res) > 0 ){
-            return $valid->error('There is already another entity survey with that name!');
+        if($owner_id > 0) {
+            $res = DB::query("SELECT COUNT(ID) FROM EntitySurveyTemplate WHERE EntityName = '{$title}' AND ID <> {$id} AND ParentID = {$owner_id}")->value();
+            if (intval($res) > 0) {
+                return $valid->error('There is already another entity survey with that name!');
+            }
         }
         return $valid;
     }

@@ -200,8 +200,8 @@ class SurveyQuestionTemplate
                           INNER JOIN `SurveyTemplate` T ON T.ID = S.SurveyTemplateID
                           WHERE Q.Name = '{$this->Name}' AND Q.ID <> {$this->ID} AND T.ID = {$survey_template_id};")->value();
 
-        if(intval($res) > 0 ){
-            return  $valid->error('There is already another Question on the survey with that name!');
+        if (intval($res) > 0) {
+                return $valid->error('There is already another Question on the survey with that name!');
         }
 
         return $valid;

@@ -16,13 +16,17 @@ Injector:
     class: SapphireFoundationMemberRepository
   SurveyBuilder:
     class: SurveyBuilder
+  TemplateSurveyFactory:
+    class: TemplateSurveyFactory
   SurveyManager:
+    class: SurveyManager
     constructor:
       0: '%$SurveyRepository'
       1: '%$TemplateRepository'
       2: '%$FoundationMemberRepository'
       3: '%$SurveyBuilder'
-      4: '%$TransactionManager'
+      4: '%$TemplateSurveyFactory'
+      5: '%$TransactionManager'
 
 SurveysRestfulApi:
   dependencies:

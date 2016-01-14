@@ -135,7 +135,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
 
     function getValidator()
     {
-        $validator_fields  = new RequiredFields(array('Title','StartDate', 'EndDate'));
+        $validator_fields  = new RequiredFields(array('Title', 'StartDate', 'EndDate'));
 
         return $validator_fields;
     }
@@ -143,7 +143,11 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     protected function onAfterWrite()
     {
         parent::onAfterWrite();
-        // fix for order
+        foreach($this->EntitySurveys() as $entity)
+        {
+            $entity->Enabled = $this->Enabled;
+            $entity->write();
+        }
     }
 
     protected function onBeforeDelete()
@@ -258,7 +262,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         }
 
         //check dates ranges
-
+        if($this->StartDate != null && $this->EndDate != null )
         $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
         $end_date   = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
 

@@ -38,13 +38,15 @@ final class SurveyLiteralContentQuestionTemplate extends SurveyQuestionTemplate 
             return $valid->error('Name is empty!');
         }
 
+        $survey_template_id = intval($this->Step()->SurveyTemplateID);
+
         $res = DB::query("SELECT COUNT(Q.ID) FROM SurveyQuestionTemplate Q
                           INNER JOIN `SurveyStepTemplate` S ON S.ID = Q.StepID
-                          INNER JOIN `SurveyTemplate` T ON T.ID = S.`SurveyTemplateID`
-                          WHERE Q.Name = '{$this->Name}' AND Q.ID <> {$this->ID};")->value();
+                          INNER JOIN `SurveyTemplate` T ON T.ID = S.SurveyTemplateID
+                          WHERE Q.Name = '{$this->Name}' AND Q.ID <> {$this->ID} AND T.ID = {$survey_template_id};")->value();
 
-        if(intval($res) > 0 ){
-            return  $valid->error('There is already another Question on the survey with that name!');
+        if (intval($res) > 0) {
+            return $valid->error('There is already another Question on the survey with that name!');
         }
 
         return $valid;

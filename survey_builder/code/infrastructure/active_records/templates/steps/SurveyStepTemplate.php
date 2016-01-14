@@ -159,20 +159,19 @@ class SurveyStepTemplate
         $slug     = $this->getSlug();
         $id       = $this->ID;
         $owner_id = $this->SurveyTemplateID;
-
-        $res = DB::query("SELECT COUNT(ID) FROM SurveyStepTemplate WHERE Name = '{$slug}' AND ID <> {$id} AND SurveyTemplateID = {$owner_id};")->value();
-        if(intval($res) > 0 ){
-            return $valid->error('There is already another step with that name!');
+        if($owner_id > 0) {
+            $res = DB::query("SELECT COUNT(ID) FROM SurveyStepTemplate WHERE Name = '{$slug}' AND ID <> {$id} AND SurveyTemplateID = {$owner_id};")->value();
+            if (intval($res) > 0) {
+                return $valid->error('There is already another step with that name!');
+            }
         }
         return $valid;
     }
-
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
         DB::query("DELETE FROM SurveyStepTemplate_DependsOn WHERE SurveyStepTemplateID = {$this->ID};");
     }
-
 
     /**
      * @return DataList

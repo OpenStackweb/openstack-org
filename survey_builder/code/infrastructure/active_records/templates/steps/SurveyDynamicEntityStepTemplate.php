@@ -19,16 +19,17 @@ class SurveyDynamicEntityStepTemplate
 
     static $db = array
     (
-        'AddEntityText' => 'VarChar(255)',
-        'DeleteEntityText' => 'VarChar(255)',
-        'EditEntityText' => 'VarChar(255)',
+        'AddEntityText'     => 'VarChar(255)',
+        'DeleteEntityText'  => 'VarChar(255)',
+        'EditEntityText'    => 'VarChar(255)',
     );
 
     static $indexes = array();
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'EntityIcon' => 'BetterImage',
-        'Entity' => 'EntitySurveyTemplate',
+        'Entity'     => 'EntitySurveyTemplate',
     );
 
     static $belongs_to = array();
@@ -38,9 +39,9 @@ class SurveyDynamicEntityStepTemplate
     static $has_many = array();
 
     private static $defaults = array(
-        'AddEntityText' => 'Add',
+        'AddEntityText'    => 'Add',
         'DeleteEntityText' => 'Delete',
-        'EditEntityText' => 'Edit',
+        'EditEntityText'   => 'Edit',
     );
 
     public function getCMSFields()
@@ -147,6 +148,12 @@ class SurveyDynamicEntityStepTemplate
     public function getEntity()
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Entity')->getTarget();
+    }
+
+    public function setEntity(IEntitySurveyTemplate $entity)
+    {
+        AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Entity')->setTarget($entity);
+        return $this;
     }
 
     protected function onBeforeDelete() {

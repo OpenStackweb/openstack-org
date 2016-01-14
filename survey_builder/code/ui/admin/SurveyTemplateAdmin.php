@@ -16,7 +16,6 @@ class SurveyTemplateAdmin extends ModelAdmin {
 
     public static $managed_models = array(
         'SurveyTemplate',
-        'SurveySingleValueValidationRule',
     );
 
     public $showImportForm = false;
@@ -81,6 +80,12 @@ class SurveyTemplateAdmin extends ModelAdmin {
             );
 
             $config->addComponent($multi_class_selector);
+        }
+        if($this->modelClass === 'SurveyTemplate') {
+            $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
+            $config = $gridField->getConfig();
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->addComponent(new GridFieldCloneSurveyTemplateAction());
         }
         return $form;
     }

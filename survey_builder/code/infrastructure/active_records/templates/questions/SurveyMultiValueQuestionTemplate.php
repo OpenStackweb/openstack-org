@@ -225,6 +225,18 @@ class SurveyMultiValueQuestionTemplate
         return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values', $query)->toArray();
     }
 
+    /**
+     * @param IQuestionValueTemplate $value
+     * @return $this
+     */
+    public function addValue(IQuestionValueTemplate $value)
+    {
+        $query = new QueryObject();
+        $query->addOrder(QueryOrder::asc('Order'));
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values', $query)->add($value);
+        return $this;
+    }
+
     public function getFormattedValues()
     {
         return new ArrayList($this->getValues());
@@ -270,4 +282,5 @@ class SurveyMultiValueQuestionTemplate
         }
         return null;
     }
+
 }

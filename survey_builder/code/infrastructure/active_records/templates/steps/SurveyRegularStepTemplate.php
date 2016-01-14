@@ -49,6 +49,18 @@ class SurveyRegularStepTemplate
     }
 
     /**
+     * @param ISurveyQuestionTemplate $question
+     * @return $this
+     */
+    public function addQuestion(ISurveyQuestionTemplate $question)
+    {
+        $query = new QueryObject();
+        $query->addOrder(QueryOrder::asc('Order'));
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Questions', $query)->add($question);
+        return $this;
+    }
+
+    /**
      * @param $question_id
      * @return mixed
      */

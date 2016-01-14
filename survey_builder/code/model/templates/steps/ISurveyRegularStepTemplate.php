@@ -24,6 +24,12 @@ interface ISurveyRegularStepTemplate extends ISurveyStepTemplate {
 
     /**
      * @param ISurveyQuestionTemplate $question
+     * @return $this
+     */
+    public function addQuestion(ISurveyQuestionTemplate $question);
+
+    /**
+     * @param ISurveyQuestionTemplate $question
      * @return bool
      */
     public function belongsToQuestion(ISurveyQuestionTemplate $question);

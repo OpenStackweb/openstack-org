@@ -24,6 +24,12 @@ interface IMultiValueQuestionTemplate extends ISurveyQuestionTemplate
     public function getValues();
 
     /**
+     * @param IQuestionValueTemplate $value
+     * @return $this
+     */
+    public function addValue(IQuestionValueTemplate $value);
+
+    /**
      * @return IQuestionValueTemplate
      */
     public function getDefaultValue();

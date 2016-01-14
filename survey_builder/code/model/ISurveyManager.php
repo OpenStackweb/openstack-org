@@ -94,4 +94,12 @@ interface ISurveyManager {
      * @return mixed
      */
     public function doAutopopulation(ISurvey $survey, ISurveyAutopopulationStrategy $strategy);
+
+    /**
+     * @param ISurveyTemplate $template
+     * @param null|string $clone_name
+     * @param null|int $parent_id
+     * @return ISurveyTemplate
+     */
+    public function doClone(ISurveyTemplate $template, $clone_name = null, $parent_id = null);
 }
