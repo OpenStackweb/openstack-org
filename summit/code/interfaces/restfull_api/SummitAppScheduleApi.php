@@ -123,23 +123,24 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         {
             $entry = array
             (
-                'id'              => $e->ID,
-                'title'           => $e->Title,
-                'description'     => $e->Description,
-                'short_desc'      => $e->ShortDescription,
-                'start_datetime'  => $e->StartDate,
-                'end_datetime'    => $e->EndDate,
-                'start_time'      => $e->StartTime,
-                'end_time'        => $e->EndTime,
-                'allow_feedback'  => $e->AllowFeedBack,
-                'location_id'     => $e->LocationID,
-                'type_id'         => $e->TypeID,
-                'sponsors_id'     => array(),
-                'summit_types_id' => array(),
-                'tags_id'         => array(),
-                'own'             => self::isEventOnMySchedule($e->ID, $summit),
-                'favorite'        => false,
-                'show'            => true
+                'id'                 => $e->ID,
+                'title'              => $e->Title,
+                'description'        => $e->Description,
+                'short_desc'         => $e->ShortDescription,
+                'start_datetime'     => $e->StartDate,
+                'end_datetime'       => $e->EndDate,
+                'start_time'         => $e->StartTime,
+                'end_time'           => $e->EndTime,
+                'allow_feedback'     => $e->AllowFeedBack,
+                'location_id'        => $e->LocationID,
+                'type_id'            => $e->TypeID,
+                'sponsors_id'        => array(),
+                'summit_types_id'    => array(),
+                'category_group_ids' => array(),
+                'tags_id'            => array(),
+                'own'                => self::isEventOnMySchedule($e->ID, $summit),
+                'favorite'           => false,
+                'show'               => true
             );
 
             foreach($e->Tags() as $t)
@@ -150,6 +151,15 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             foreach($e->AllowedSummitTypes() as $t)
             {
                 array_push($entry['summit_types_id'], $t->ID);
+            }
+
+            if ($e->isPresentation()) {
+                if($e->Category)
+                {
+                    foreach ($e->Category->getCategoryGroups() as $group) {
+                        array_push($entry['category_group_ids'], $group->ID);
+                    }
+                }
             }
 
             foreach($e->Sponsors() as $e)

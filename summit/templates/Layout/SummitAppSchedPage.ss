@@ -14,6 +14,7 @@
             locations : {},
             tags: {},
             tracks : {},
+            category_groups: {},
             presentation_levels: {},
             current_user: null
         };
@@ -79,6 +80,15 @@
         {
            type: "{$Type}",
            name : "{$Title.JS}",
+           description : "{$Description.JS}",
+           color : "{$Color}"
+        };
+        <% end_loop %>
+
+        <% loop $Summit.CategoryGroups %>
+        summit.category_groups[{$ID}] =
+        {
+           name : "{$Name.JS}",
            description : "{$Description.JS}",
            color : "{$Color}"
         };

@@ -77,6 +77,10 @@ class PresentationCategory extends DataObject
         return '<h4 class="category-label">' . $this->Title . '</h4> <p>' . $this->Description . '</p>';
     }
 
+    public function getCategoryGroups() {
+        return $this->CategoryGroup;
+    }
+
     public function isTrackChair($memberid)
     {
         $r = $this->TrackChairs()->filter('MemberID', $memberid);

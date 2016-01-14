@@ -2,7 +2,7 @@
     <div if={ show } id="event_{ id }" class="row event-row">
         <div class="col-md-12">
             <div class="row main-event-content" data-event-id="{ id }">
-                <div class="col-md-1 col-xs-1 event-type" style="background-color: { eventColor(summit_types_id) }">&nbsp;</div>
+                <div class="col-md-1 col-xs-1 event-type" style="background-color: { eventColor(category_group_ids) }">&nbsp;</div>
                 <div class="col-md-11 col-xs-11 event-content">
                     <div class="row row_location">
                         <div class="col-xs-12 col-md-2 col-time">
@@ -164,11 +164,11 @@
         return false;
     }
 
-    eventColor(summit_types_id){
-        if(summit_types_id.length > 1){
+    eventColor(category_group_ids){
+        if(category_group_ids.length > 1){
             return self.default_event_type_color;
         }
-        return self.summit.summit_types[summit_types_id[0]].color;
+        return self.summit.category_groups[category_group_ids[0]].color;
     }
 
     trackName(){
