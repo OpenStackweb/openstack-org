@@ -19,7 +19,11 @@ SiteTree:
   
 Member:
   extensions:
-    - PresentationMemberExtension  
+    - PresentationMemberExtension
+
+File:
+  extensions:
+    - FileExt
 
 Injector:
   TransactionManager:
