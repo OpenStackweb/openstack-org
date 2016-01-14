@@ -1101,14 +1101,15 @@ SQL;
 
     private function getDatesFromRange($start, $end) {
         $interval = new DateInterval('P1D');
-
-        $realEnd = new DateTime($end);
-        $realEnd->add($interval);
-
+        $start    = new DateTime($start);
+        $start    = $start->setTime(0,0,0);
+        $end      = new DateTime($end);
+        $end      = $end->setTime(0,0,0);
+        $end      = $end->add($interval);
         $period = new DatePeriod(
-            new DateTime($start),
+            $start,
             $interval,
-            $realEnd
+            $end
         );
 
         foreach($period as $date) {
