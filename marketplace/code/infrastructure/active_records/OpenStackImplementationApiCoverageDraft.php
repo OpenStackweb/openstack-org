@@ -91,16 +91,21 @@ class OpenStackImplementationApiCoverageDraft
 
     public function getCoverageForFrontEnd()
     {
-        $class = '';
-        $title = 'Full Coverage';
-        if ($this->getCoveragePercent() == 50) {
-            $class = 'partial';
-            $title = 'Partially Covered';
-        } else if ($this->getCoveragePercent() == 0) {
-            $class = 'none';
-            $title = 'Not Covered';
-        }
+        if (!$this->SupportsVersioning()) {
+            return '<span rel="tooltip" data-placement="right" title="Not Available">N/A</span>';
+        } else {
+            $class = 'fa fa-circle';
+            $title = 'Full Coverage';
 
-        return '<i class="fa fa-circle '.$class.'" rel="tooltip" data-placement="right" title="'.$title.'"></i>';
+            if ($this->getCoveragePercent() == 50) {
+                $class = 'fa fa-circle partial';
+                $title = 'Partially Covered';
+            } else if ($this->getCoveragePercent() == 0) {
+                $class = 'fa fa-circle none';
+                $title = 'Not Covered';
+            }
+
+            return '<i class="'.$class.'" rel="tooltip" data-placement="right" title="'.$title.'"></i>';
+        }
     }
 }

@@ -98,28 +98,29 @@
                         <table class="api-coverage">
                             <tbody>
                                 <% loop Capabilities %>
-                                    <% if SupportsVersioning %>
-                                        <% loop ReleaseSupportedApiVersion %>
-                                            <% if ApiVersion %>
-                                                <% loop OpenStackComponent %>
-                                                    <tr>
-                                                        <td>
-                                                            $Name API
-                                                            <% if SupportsExtensions %> & Extensions<% end_if %>
-                                                        </td>
-                                                        <td>
-                                                            $CodeName
-                                                <% end_loop %>
-                                                            <% loop ApiVersion %> $Version<% end_loop %>
-                                                        </td>
-
-                                            <% end_if %>
-                                        <% end_loop %>
+                                    <tr>
+                                        <td>
+                                            <% with $ReleaseSupportedApiVersion %>
+                                                $OpenStackComponent.Name API
+                                                <% if $OpenStackComponent.SupportsExtensions %> & Extensions<% end_if %>
+                                            <% end_with %>
+                                        </td>
+                                        <td>
+                                            <% with $ReleaseSupportedApiVersion %>
+                                                $OpenStackComponent.CodeName
+                                                <% if $ApiVersion %>
+                                                    $ApiVersion.Version
+                                                <% end_if %>
+                                            <% end_with %>
+                                        </td>
                                         <td class="coverage">
-                                            <span>$CoveragePercent %</span>
+                                            <% if $SupportsVersioning %>
+                                                <span>$CoveragePercent %</span>
+                                            <% else %>
+                                                <span>N/A</span>
+                                            <% end_if %>
                                         </td>
                                     </tr>
-                                    <% end_if %>
                                 <% end_loop %>
                             </tbody>
                         </table>
