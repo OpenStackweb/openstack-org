@@ -10,7 +10,7 @@
         <div class="modal-body">
 
           <div show="{ !finished }">
-            <p>I'd like to suggest that this presentation:</p> 
+            <p>I would like to suggest that this presentation:</p>
             <p><strong>{ opts.presentation.title }</strong></p>
 
             <p>Be moved to this category:
@@ -21,7 +21,7 @@
           </div>
 
           <div show="{ finished }">
-              <p>Ok, thanks! We’ll notify the chairs of the other category that you’d like to make the switch. If the one of the chairs of the other category agrees to the change, the presentation will be moved.</p>
+              <p>Ok, thanks! We will notify the chairs of the other category that you would like to make the switch. If the one of the chairs of the other category agrees to the change, the presentation will be moved.</p>
           </div>
 
         </div>

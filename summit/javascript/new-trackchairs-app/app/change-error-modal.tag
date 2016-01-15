@@ -9,7 +9,7 @@
         </div>
         <div class="modal-body">
 
-          There was a request made to move this presentation to <strong>{ opts.request.new_category.title }</strong>, but it has already been selected by the track chairs of the current category, <strong>{ opts.request.old_category.title }</strong>. In order to move it, you'll need to ask if the chairs if they will unselect the presentation first.
+          There was a request made to move this presentation to <strong>{ opts.request.new_category.title }</strong>, but it has already been selected by the track chairs of the current category, <strong>{ opts.request.old_category.title }</strong>. In order to move it, you will need to ask if the chairs if they will unselect the presentation first.
 
         </div>
 
