@@ -92,7 +92,7 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>Upcoming Events <a href="/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
-                    <a href="/summit/tokyo-2015/"><img class="event-ad" src="/themes/openstack/images/conferences/tokyo/tokyo-banner-home.jpg"></a>
+                    <a href="/summit/austin-2016/"><img class="event-ad" src="/summit/images/austin-banner-home.jpg"></a>
                     $UpcomingEvents(20)
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
