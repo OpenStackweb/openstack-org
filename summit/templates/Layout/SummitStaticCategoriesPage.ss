@@ -65,8 +65,8 @@
                             </a>
                         </div>
                         <div class="col-xs-2">
-                            <a href="#telcom" class="session-chart-category six">
-                                Telcom/NFV
+                            <a href="#telecom" class="session-chart-category six">
+                                Telecom/NFV
                             </a>
                         </div>
                         <div class="col-xs-1">
@@ -280,7 +280,7 @@
         <div class="row session-list-row">
             <!-- Start Category -->
             <div class="col-sm-6">
-                <div class="session-wrapper" id="telcom">
+                <div class="session-wrapper" id="telecom">
                     <h3>Telecom & NFV</h3>
                     <div class="session-list-tracks">
                         <div class="session-tracks-title">Tracks</div>
