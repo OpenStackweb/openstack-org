@@ -12,15 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface IMigrationMapping extends IEntity
+class UpdateSurveyTemplateIndexMigration extends AbstractDBMigrationTask
 {
-    /**
-     * @return ISurveyTemplate
-     */
-    public function getTargetSurvey();
+    protected $title = "Update Survey Template Index Migration";
 
-    /**
-     * @return ISurveyQuestionTemplate
-     */
-    public function getTargetQuestion();
+    protected $description = "Update Survey Template Index Migration";
+
+    function doUp()
+    {
+        global $database;
+
+        if (DBSchema::existsIndex($database, 'SurveyTemplate', 'Title')) {
+
+            DB::query('ALTER TABLE SurveyTemplate DROP INDEX Title;');
+        }
+    }
+
+    function doDown()
+    {
+
+    }
 }

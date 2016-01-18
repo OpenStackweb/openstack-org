@@ -153,7 +153,6 @@ class Survey extends DataObject implements ISurvey {
         return $last_step->getIdentifier() === $this->currentStep()->getIdentifier();
     }
 
-
     /**
      * @return int
      */
@@ -161,7 +160,6 @@ class Survey extends DataObject implements ISurvey {
     {
         return $this->getStepIndex($this->currentStep());
     }
-
 
     public function getStepIndex(ISurveyStep $step)
     {
@@ -371,7 +369,6 @@ class Survey extends DataObject implements ISurvey {
         $step->clear();
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->remove($step);
     }
-
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();

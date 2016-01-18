@@ -27,8 +27,8 @@ class EntitySurvey extends Survey implements IEntitySurvey
     static $has_one = array
     (
         'Template' => 'EntitySurveyTemplate',
-        'Parent' => 'Survey',
-        'Owner' => 'SurveyDynamicEntityStep',
+        'Parent'   => 'Survey',
+        'Owner'    => 'SurveyDynamicEntityStep',
         'EditedBy' => 'Member'
     );
 

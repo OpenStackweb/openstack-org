@@ -24,7 +24,8 @@ final class DBMigrateTask extends MigrationTask
         'SchedRefactoringMigration2',
         'CreateTableCountries',
         'MigrateExpertiseToDORelation',
-        'ChangeTagsCollationMigration'
+        'ChangeTagsCollationMigration',
+        'UpdateSurveyTemplateIndexMigration',
     );
 
     function up()

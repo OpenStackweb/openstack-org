@@ -61,7 +61,8 @@ class DynamicStepForm extends HoneyPotForm {
     {
         $own_entity_surveys  = $this->step->getEntitySurveys();
         $current_member      = Member::currentUser();
-        $team_entity_surveys = $current_member->TeamEntitySurveys()->toArray();
+        $step_template       = $this->step->template();
+        $team_entity_surveys = $current_member->TeamEntitySurveys()->filter('TemplateID',$step_template->getEntity()->getIdentifier())->toArray();
         return new ArrayList(array_merge($own_entity_surveys, $team_entity_surveys));
     }
 

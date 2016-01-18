@@ -12,15 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface IMigrationMapping extends IEntity
+interface INewSurveyMigrationMapping extends IMigrationMapping
 {
-    /**
-     * @return ISurveyTemplate
-     */
-    public function getTargetSurvey();
-
     /**
      * @return ISurveyQuestionTemplate
      */
-    public function getTargetQuestion();
+    public function getOriginField();
+
+    /**
+     * @return ISurveyTemplate
+     */
+    public function getOriginSurvey();
 }

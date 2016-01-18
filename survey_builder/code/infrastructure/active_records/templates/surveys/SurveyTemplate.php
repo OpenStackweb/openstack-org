@@ -24,7 +24,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
 
     static $indexes = array
     (
-        'Title' => array('type' => 'unique', 'value' => 'Title')
+        //'Title' => array('type' => 'unique', 'value' => 'Title')
     );
 
     static $has_one = array
@@ -112,7 +112,8 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
 
             $migration_mapping_types = array
             (
-                'OldDataModelSurveyMigrationMapping' => 'Old Survey Data Mapping' ,
+                //'OldDataModelSurveyMigrationMapping' => 'Old Survey Data Mapping' ,
+                'NewDataModelSurveyMigrationMapping' => 'New Migration Mapping'
             );
 
             $multi_class_selector->setClasses
@@ -122,6 +123,11 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
 
             $config->addComponent($multi_class_selector);
             $gridField = new GridField('MigrationMappings', 'Migration Mappings', $this->MigrationMappings(), $config);
+
+            $dataColumns = $config->getComponentByType('GridFieldDataColumns');
+
+            $dataColumns->setDisplayFields(NewDataModelSurveyMigrationMapping::getDisplayFields());
+
             $fields->add($gridField);
         }
 

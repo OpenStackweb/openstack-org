@@ -56,8 +56,32 @@ class SurveyTemplateAdmin extends ModelAdmin {
         fclose($custom_script_file);
 
         Requirements::javascript('assets/survey.builder.origin.fields.js');
-        Requirements::javascript('survey_builder/js/active_records/old.datamodel.survey.migration.mapping.js');
 
+        $templates = SurveyTemplate::get();
+        $script_data = 'var templates = {}; var origin_field_id = null;';
+        foreach($templates as $template) {
+            $steps     = $template->Steps()->filter('ClassName','SurveyRegularStepTemplate');
+            $script_data .= "templates[{$template->ID}] = { questions : [] };";
+            $questions = array();
+            foreach ($steps as $step) {
+                foreach ($step->getQuestions() as $question) {
+                    if ($question instanceof SurveyLiteralContentQuestionTemplate) {
+                        continue;
+                    }
+                    $questions[$question->ID] = $step->Name . ' -> ' . $question->Name;
+
+                    $script_data .= "templates[{$template->ID}].questions.push({ id: $question->ID, name: '{$step->Name} -> {$question->Name}'});";
+                }
+            }
+        }
+
+        $path = ASSETS_PATH."/templates.data.js";
+        $custom_script_file = fopen($path, "w") or die("Unable to open file!");
+        fwrite($custom_script_file, $script_data);
+        fclose($custom_script_file);
+        Requirements::javascript('assets/templates.data.js');
+
+        Requirements::javascript('survey_builder/js/active_records/new.datamodel.survey.migration.mapping.js');
     }
 
     public function getEditForm($id = null, $fields = null) {

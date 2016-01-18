@@ -280,7 +280,11 @@ class SurveyPage_Controller extends Page_Controller
 
             if($current_template->shouldPrepopulateWithFormerData())
             {
-                $this->survey_manager->doAutopopulation($this->current_survey, new OldSurveyDataAutopopulationStrategy);
+                $this->survey_manager->doAutopopulation
+                (
+                    $this->current_survey,
+                    SurveyDataAutoPopulationStrategyFactory::build(SurveyDataAutoPopulationStrategyFactory::NEW_STRATEGY)
+                );
             }
         }
 

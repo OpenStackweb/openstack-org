@@ -44,9 +44,9 @@ class OldDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
 
     private static $summary_fields = array
     (
-        'OriginTable',
-        'OriginField',
-        'TargetField.Name'
+        'OriginTable'       => 'Origin Table',
+        'OriginField'       => 'Origin Field',
+        'TargetField.Name'  => 'Target Field',
     );
 
     public function getCMSFields()
@@ -99,7 +99,7 @@ class OldDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
         $field->addFieldToTab('Root.Main',$ddl_origin_field = new DropdownField('OriginField', 'OriginField', $source));
 
         $ddl_origin_field->setEmptyString('-- select an origin field --');
-
+        Requirements::javascript('survey_builder/js/active_records/old.datamodel.survey.migration.mapping.js');
         return $field;
     }
 

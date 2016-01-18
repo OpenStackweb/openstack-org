@@ -42,15 +42,8 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
     private static $defaults = array(
     );
 
-    private static $summary_fields = array
-    (
-        'OriginTable' => 'Origin Table',
-        'OriginField' => 'Origin Field',
-        'TargetField.Name' => 'Target Field',
-    );
-
-    /**
-     * @return ISurvey
+     /**
+     * @return ISurveyTemplate
      */
     public function getTargetSurvey()
     {
@@ -73,8 +66,8 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
 
         $survey_id = isset($_REQUEST['survey_template_id'])?intval($_REQUEST['survey_template_id']) : $this->TargetSurveyID;
 
-        $template = SurveyTemplate::get()->filter('ID', $survey_id)->first();
-        $steps    = $template->Steps()->filter('ClassName','SurveyRegularStepTemplate');
+        $template  = SurveyTemplate::get()->filter('ID', $survey_id)->first();
+        $steps     = $template->Steps()->filter('ClassName','SurveyRegularStepTemplate');
         $questions = array();
 
         foreach($steps as $step)
@@ -86,12 +79,28 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
             }
         }
 
-        $field->addFieldToTab('Root.Main',  new DropdownField('TargetFieldID', 'Target Field', $questions));
+        $field->addFieldToTab('Root.Main',  $ddl = new DropdownField('TargetFieldID', 'Target Field', $questions));
 
+        $ddl->setEmptyString('-- select target field --');
 
         return $field;
     }
 
+    public function getCMSValidator() {
+        return new RequiredFields(array(
+            'TargetFieldID'
+        ));
+    }
+
+    public function validate() {
+        $result = parent::validate();
+
+        if(intval($this->TargetFieldID) <= 0) {
+            $result->error('you need to specify a target field!');
+        }
+
+        return $result;
+    }
     /**
      * @return int
      */
