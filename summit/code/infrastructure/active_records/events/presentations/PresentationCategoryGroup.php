@@ -65,7 +65,7 @@ class PresentationCategoryGroup extends DataObject
         );
 
         $f->addFieldToTab('Root.Main', new TextField('Name','Name'));
-        $f->addFieldToTab('Root.Main', new TextField('Color','Color'));
+        $f->addFieldToTab('Root.Main', new ColorField('Color','Color'));
 
         if($this->ID > 0) {
             $config = new GridFieldConfig_RelationEditor(100);
