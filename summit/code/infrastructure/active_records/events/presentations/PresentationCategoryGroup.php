@@ -19,8 +19,6 @@ class PresentationCategoryGroup extends DataObject
         'Name'        => 'Text',
         'Color'       => 'Varchar',
         'Description' => 'HTMLText',
-        'StartDate'   => 'SS_Datetime',
-        'EndDate'     => 'SS_Datetime'
     );
 
     private static $defaults = array
@@ -42,8 +40,6 @@ class PresentationCategoryGroup extends DataObject
         'Name'        => 'Name',
         'Color'       => 'Color',
         'Description' => 'Description',
-        'StartDate'   => 'Start Date',
-        'EndDate'     => 'End Date'
     );
 
     private static $searchable_fields = array
@@ -70,14 +66,6 @@ class PresentationCategoryGroup extends DataObject
 
         $f->addFieldToTab('Root.Main', new TextField('Name','Name'));
         $f->addFieldToTab('Root.Main', new TextField('Color','Color'));
-
-        $f->addFieldToTab('Root.Main',$date = new DateField('StartDate', 'Start Date'));
-        $date->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
-
-        $f->addFieldToTab('Root.Main',$date = new DateField('EndDate', 'End Date'));
-        $date->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
 
         if($this->ID > 0) {
             $config = new GridFieldConfig_RelationEditor(100);
@@ -116,47 +104,7 @@ class PresentationCategoryGroup extends DataObject
         if($count > 0)
             return $valid->error(sprintf('Presentation Category Group "%s" already exists!. please set another one', $this->Name));
 
-        $start_date = $this->getStartDate();
-        $end_date   = $this->getEndDate();
-
-        if((empty($start_date) || empty($end_date))) {
-            return $valid->error('To publish this group you must define a start/end dates!');
-        } else {
-            $timezone = $summit->TimeZone;
-
-            if(empty($timezone)){
-                return $valid->error('Invalid Summit TimeZone!');
-            }
-
-            $start_date = new DateTime($start_date);
-            $end_date   = new DateTime($end_date);
-
-            if($end_date < $start_date)
-                return $valid->error('start datetime must be greather or equal than end datetime!');
-
-            if(!$summit->isEventInsideSummitDuration($this))
-                return $valid->error(sprintf('start/end date must be between summit start/end datetime! (%s - %s)', $summit->getBeginDate(), $summit->getEndDate()));
-        }
-
         return $valid;
-    }
-
-    public function getStartDate()
-    {
-        $summit_id  = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
-        $summit     = Summit::get()->byID($summit_id);
-        if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
-        $value = $this->getField('StartDate');
-        return $summit->convertDateFromUTC2TimeZone($value);
-    }
-
-    public function getEndDate()
-    {
-        $summit_id  = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
-        $summit     = Summit::get()->byID($summit_id);
-        if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
-        $value = $this->getField('EndDate');
-        return $summit->convertDateFromUTC2TimeZone($value);
     }
 
 }
