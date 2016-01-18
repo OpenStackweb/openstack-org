@@ -155,6 +155,13 @@ final class EventManager {
 
     }
 
+    public function deleteFeaturedEvent($id){
+        $this->tx_manager->transaction(function() use ($id){
+            FeaturedEvent::delete_by_id('FeaturedEvent',$id);
+        });
+
+    }
+
     /**
      * @return EventTypeSummary
      */

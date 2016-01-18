@@ -179,8 +179,11 @@ class EventHolder_Controller extends Page_Controller {
         return $event_type_links;
     }
 
+    function getFeaturedEvent() {
+        return EventPage::get()->filter(array('Featured'=> 1))->sort('EventStartDate','ASC')->limit(1);
+    }
+
     function openstackdays() {
-        $events = $this->FutureEvents(100, 'OpenStack Days');
-        return $this->renderWith(array('EventHolder_openstackdays'),array('Events' => $events));
+        return $this->renderWith(array('EventHolder_openstackdays'));
     }
 }

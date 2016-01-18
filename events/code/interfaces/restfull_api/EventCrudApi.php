@@ -75,11 +75,12 @@ final class EventCrudApi
 	 * @var array
 	 */
 	static $url_handlers = array(
-        'PUT $EVENT_ID/toggle_summit' => 'toggleSummit',
-        'PUT $EVENT_ID/delete'        => 'deleteEvent',
-        'GET $EVENT_ID'               => 'getEvent',
-        'PUT '                        => 'updateEvent',
-        'POST '                       => 'addEvent',
+        'PUT $EVENT_ID/toggle_summit'   => 'toggleSummit',
+        'PUT $EVENT_ID/delete'          => 'deleteEvent',
+        'PUT $EVENT_ID/delete_featured' => 'deleteFeaturedEvent',
+        'GET $EVENT_ID'                 => 'getEvent',
+        'PUT '                          => 'updateEvent',
+        'POST '                         => 'addEvent',
 	);
 
 	/**
@@ -88,6 +89,7 @@ final class EventCrudApi
 	static $allowed_actions = array(
 		'toggleSummit',
 		'deleteEvent',
+        'deleteFeaturedEvent',
 		'getEvent',
 		'updateEvent',
         'addEvent',
@@ -194,5 +196,25 @@ final class EventCrudApi
 			return $this->serverError();
 		}
 	}
+
+    public function deleteFeaturedEvent(){
+        try{
+            $event_id = (int)$this->request->param('EVENT_ID');
+            $this->event_manager->deleteFeaturedEvent($event_id);
+            return $this->updated();
+        }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->notFound($ex1->getMessage());
+        }
+        catch(EntityValidationException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->validationError($ex2->getMessages());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
 
 }

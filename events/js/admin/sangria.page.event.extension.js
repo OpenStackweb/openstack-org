@@ -287,6 +287,41 @@ jQuery(document).ready(function($) {
         }
     });
 
+    var confirm_delete_featured_dialog = $('#dialog-delete-post').dialog({
+        resizable: false,
+        autoOpen: false,
+        height:200,
+        width: 450,
+        modal: true,
+        buttons: {
+            "Delete": function() {
+                var form     = $('form',confirm_delete_featured_dialog);
+                var id  = parseInt(confirm_delete_featured_dialog.data('id'));
+                var row = confirm_delete_featured_dialog.data('row');
+
+                var url = 'api/v1/events/'+id+'/delete_featured';
+                $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data,textStatus,jqXHR) {
+                        row.hide('slow', function(){ row.remove();});
+                        confirm_delete_featured_dialog.dialog( "close" );
+                        form.cleanForm();
+                        buildAutocompleteCategory(false);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        ajaxError(jqXHR, textStatus, errorThrown);
+                    }
+                });
+            },
+            "Cancel": function() {
+                confirm_delete_dialog.dialog( "close" );
+            }
+        }
+    });
+
     $('.edit-event').click(function(event){
         event.preventDefault();
         event.stopPropagation();
@@ -456,4 +491,13 @@ jQuery(document).ready(function($) {
 
         anchor.parents("tr").css("background-color","lightyellow");
     }
+
+    $('#featured-event-table').on('click', '.delete-featured-event', function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        var id  = $(this).attr('data-event-id');
+        var row = $(this).parent().parent();
+        confirm_delete_featured_dialog.data('id',id).data('row',row).dialog( "open");
+        return false;
+    });
 });

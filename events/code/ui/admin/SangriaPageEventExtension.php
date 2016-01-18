@@ -26,8 +26,8 @@ final class SangriaPageEventExtension extends Extension {
 	}
 
 	public function onBeforeInit(){
-		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents'));
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents'));
+		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','FeaturedEventForm','saveFeaturedEvent'));
+		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','FeaturedEventForm','saveFeaturedEvent'));
 	}
 
 	public function EventRegistrationRequestForm() {
@@ -64,6 +64,51 @@ final class SangriaPageEventExtension extends Extension {
         return $form;
     }
 
+    public function FeaturedEventForm() {
+        $fields = new FieldList;
+        //main info
+        $events = EventPage::get('EventPage',"EventCategory = 'OpenStack Days'");
+        $options = array();
+        foreach($events as $event) {
+            $options[$event->ID] = $event->Title;
+        }
+
+        $fields->push(new DropdownField('EventID','Event',$options));
+        $ImageField = new CustomUploadField('Picture', 'Image (Max size 2Mb - Suggested size 300x250px)');
+        $ImageField->setCanAttachExisting(false);
+        $ImageField->setAllowedMaxFileNumber(1);
+        $ImageField->setAllowedFileCategories('image');
+        $ImageField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
+        $ImageField->setFolderName('news-images');
+        $ImageField->setRecordClass('BetterImage');
+        $ImageField->getUpload()->setReplaceFile(false);
+        $ImageField->setOverwriteWarning(false);
+        $sizeMB = 2; // 2 MB
+        $size = $sizeMB * 1024 * 1024; // 2 MB in bytes
+        $ImageField->getValidator()->setAllowedMaxFileSize($size);
+        $ImageField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
+        $fields->push($ImageField);
+
+        // Create action
+        $actions = new FieldList();
+        $actions->push(new FormAction('saveFeaturedEvent', 'Save'));
+
+        return new Form($this->owner, 'FeaturedEventForm', $fields, $actions);
+    }
+
+    public function saveFeaturedEvent($data, $form) {
+        $submission = new FeaturedEvent();
+        $form->saveInto($submission);
+        $submission->write();
+        return $this->owner->redirectBack();
+    }
+
+    public function removeFeaturedEvent() {
+        $featured_event_id = (int)$this->request->param('EVENT_ID');
+        FeaturedEvent::delete_by_id('FeaturedEvent',$featured_event_id);
+        return $this->owner->redirectBack();
+    }
+
 	public function onAfterInit(){
 
 	}
@@ -94,6 +139,12 @@ final class SangriaPageEventExtension extends Extension {
         return $this->owner->getViewer('ViewPostedEvents')->process($this->owner);
     }
 
+    public function ViewOpenstackDaysEvents(){
+        $this->commonScripts();
+        Requirements::javascript('events/js/admin/sangria.page.event.extension.js');
+        return $this->owner->getViewer('ViewOpenstackDaysEvents')->process($this->owner);
+    }
+
 	public function getQuickActionsExtensions(&$html){
 		$view = new SSViewer('SangriaPage_EventLinks');
 		$html .= $view->process($this->owner);
@@ -112,5 +163,9 @@ final class SangriaPageEventExtension extends Extension {
     public function getPostedEventsCount(){
         $count = $this->event_repository->countAllPosted();
         return $count;
+    }
+
+    public function getFeaturedEvents(){
+        return FeaturedEvent::get('FeaturedEvent');
     }
 } 
