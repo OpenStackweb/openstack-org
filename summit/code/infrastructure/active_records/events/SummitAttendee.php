@@ -19,7 +19,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     (
         // https://www.eventbrite.com/developer/v3/formats/order/#ebapi-std:format-order
         'ExternalOrderId'         => 'Int',
-        'ExternalId'              => 'Text',
+        'ExternalId'              => 'Int',
         'TicketBoughtDate'        => 'SS_Datetime',
         'SharedContactInfo'       => 'Boolean',
         'SummitHallCheckedIn'     => 'Boolean',
@@ -69,7 +69,8 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     static $indexes = array
     (
-        'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID')
+        'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID'),
+        'Order_Attendee' =>  array('type'=>'unique', 'value'=>'ExternalOrderId,ExternalId')
     );
 
     private static $searchable_fields = array
