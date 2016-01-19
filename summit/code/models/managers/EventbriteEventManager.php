@@ -183,11 +183,10 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                 continue;
                             }
 
-                            $old_attendee = $attendee_repository->getByMemberAndSummitAndOrder
+                            $old_attendee = $attendee_repository->getByMemberAndSummit
                             (
                                 $member->getIdentifier(),
-                                $current_summit->getIdentifier(),
-                                intval($order_id)
+                                $current_summit->getIdentifier()
                             );
 
                             if ($old_attendee)

@@ -69,7 +69,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     static $indexes = array
     (
-        'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID,ExternalOrderId')
+        'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID')
     );
 
     private static $searchable_fields = array

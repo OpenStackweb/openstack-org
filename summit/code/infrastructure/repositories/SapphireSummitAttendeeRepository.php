@@ -25,17 +25,15 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
     /**
      * @param int $member_id
      * @param int $summit_id
-     * @param int $order_id
      * @return ISummitAttendee
      */
-    public function getByMemberAndSummitAndOrder($member_id, $summit_id, $order_id)
+    public function getByMemberAndSummit($member_id, $summit_id)
     {
-        $cache_key = sprintf('%s_%s_%s', $member_id, $summit_id, $order_id );
+        $cache_key = sprintf('%s_%s', $member_id, $summit_id);
         $attendee  = SummitAttendee::get()->filter(array
         (
             'MemberID'        => $member_id,
             'SummitID'        => $summit_id,
-            'ExternalOrderId' => $order_id
         ))->first();
 
         if(is_null($attendee) && isset($this->cache[$cache_key]))
@@ -46,8 +44,8 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
     }
 
     /**
-     * @param $order_id
-     * @param $attendee_id
+     * @param int $order_id
+     * @param int $attendee_id
      * @return ISummitAttendee
      */
     public function getByOrderAndExternalAttendeeId($order_id, $attendee_id)
@@ -55,7 +53,7 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
         return SummitAttendee::get()->filter(array
         (
             'ExternalId'        => $attendee_id,
-            'ExternalOrderId' => $order_id
+            'ExternalOrderId'   => $order_id
         ))->first();
     }
 
@@ -66,6 +64,6 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
     public function add(IEntity $entity)
     {
         parent::add($entity);
-        $this->cache[sprintf('%s_%s_%s', $entity->MemberID, $entity->SummitID, $entity->ExternalOrderId )] = $entity;
+        $this->cache[sprintf('%s_%s', $entity->MemberID, $entity->SummitID)] = $entity;
     }
 }
