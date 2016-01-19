@@ -143,7 +143,7 @@
                     <a href="http://superuser.openstack.org/articles/superuser-roundtable-benefits-and-use-cases-for-network-functions-virtualization-nfv" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/read.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/nfv/featured-1.jpg" alt="Superuser roundtable: benefits and use cases for Network Functions Virtualization (NFV)">
                     </div>
@@ -156,7 +156,7 @@
                     <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/ntt-communications-nfv-service-federation-across-heterogeneous-sites " target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/play-button.png">
+                            <img src="/themes/openstack/images/play-button.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/nfv/featured-2.jpg" alt="NTT Communications talks about their carrier-grade OpenStack NFV PoC ">
                     </div>
@@ -169,7 +169,7 @@
                     <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/telco-openstack-roadmap-panel" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/play-button.png">
+                            <img src="/themes/openstack/images/play-button.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/nfv/featured-3.jpg" alt="Join OpenStack telecom users for a look into the future with the Telco Roadmap Panel">
                     </div>
@@ -182,7 +182,7 @@
                     <a href="#" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/play-button.png">
+                            <img src="/themes/openstack/images/play-button.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/nfv/featured-4.jpg" alt="Superuser TV interviews Kyle Mestery about how OpenStack and NFV work together">
                     </div>
@@ -195,7 +195,7 @@
                     <a href="http://superuser.openstack.org/articles/openstack-and-network-function-virtualization-the-backstory" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/read.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/nfv/featured-5.jpg" alt="Get the backstory on OpenStack and NFV from the OPNFV Summit">
                     </div>
