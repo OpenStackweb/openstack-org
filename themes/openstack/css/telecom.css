@@ -158,7 +158,7 @@ i.fa-caret-right{margin-left:8px}.navbar-nav>li>.dropdown-menu li a{text-transfo
 .summit-promo.nfv{
     background:url(/themes/openstack/images/nfv/nfv-summit-bkgd.jpg) no-repeat center center;
     background-size:cover;
-    padding:60px 0 80px
+    padding:60px 0 80px;
     margin-bottom:-50px;
 }
 
