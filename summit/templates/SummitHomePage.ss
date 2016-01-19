@@ -7,7 +7,7 @@
 </head>
 <body class="summit-landing-body">
     <!-- Begin Page Content -->
-    <div class="summit-landing-wrapper tokyo">
+    <div class="summit-landing-wrapper austin">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">

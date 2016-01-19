@@ -55,7 +55,7 @@ body.summit-landing-body {
 
 .summit-landing-wrapper {
   background: url('/summit/images/landing-hero-bkgd.jpg') no-repeat left top;
-  min-height: 610px;
+  min-height: 500px;
   background-size: cover;
   position: relative;
   border-bottom: 1px solid #243440; }
@@ -64,8 +64,13 @@ body.summit-landing-body {
   background: url('/summit/images/landing-hero-bkgd-v.jpg') no-repeat left center;
   background-size: cover; }
 
+.summit-landing-wrapper.austin {
+  background: url('/summit/images/landing-hero-bkgd.jpg') no-repeat center center;
+  background-size: cover; }
+
 .summit-landing-logo {
-  margin: 145px 0 20px; }
+  margin: 60px 0 20px;
+  max-width: 220px; }
 
 .summit-landing-wrapper p {
   color: #29abe2;
