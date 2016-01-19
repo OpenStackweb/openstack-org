@@ -11,21 +11,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class EnterpriseHomePage extends Page {
+class TelecomHomePage extends Page {
    static $db = array(
 	);
 }
  
-class EnterpriseHomePage_Controller extends Page_Controller {
+class TelecomHomePage_Controller extends Page_Controller {
 
     function init()
     {
         parent::init();
 
-        Requirements::CSS('themes/openstack/css/enterprise.css');
+        Requirements::CSS('themes/openstack/css/telecom.css');
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
-        Requirements::javascript('themes/openstack/javascript/enterprise.js');        
+        Requirements::javascript('themes/openstack/javascript/telecom.js');
 
 	    Requirements::customScript("jQuery(document).ready(function($) {
 
