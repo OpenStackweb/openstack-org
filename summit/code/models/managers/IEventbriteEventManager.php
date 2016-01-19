@@ -23,9 +23,11 @@ interface IEventbriteEventManager
 
     /**
      * @param int $bach_size
-     * @return int
+     * @param IMessageSenderService $invite_sender
+     * @param IMessageSenderService $create_sender
+     * @return mixed
      */
-    public function ingestEvents($bach_size);
+    public function ingestEvents($bach_size, IMessageSenderService $invite_sender, IMessageSenderService $create_sender);
 
 
     /**

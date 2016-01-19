@@ -17,9 +17,9 @@
  */
 interface IMessageSenderService {
     /**
-     * @param IEntity $subject
+     * @param mixed $subject
      * @throws InvalidArgumentException
      * @return void
      */
-    public function send(IEntity $subject);
+    public function send($subject);
 }

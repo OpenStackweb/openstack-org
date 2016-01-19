@@ -18,17 +18,17 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     private static $db = array
     (
         // https://www.eventbrite.com/developer/v3/formats/order/#ebapi-std:format-order
-        'ExternalOrderId'         => 'Text',
+        'ExternalOrderId'         => 'Int',
         'ExternalId'              => 'Text',
         'TicketBoughtDate'        => 'SS_Datetime',
         'SharedContactInfo'       => 'Boolean',
         'SummitHallCheckedIn'     => 'Boolean',
         'SummitHallCheckedInDate' => 'SS_Datetime',
-        'ExternalTicketClassID'   => 'Text',
     );
 
     private static $has_many = array
     (
+
     );
 
     private static $defaults = array
@@ -37,7 +37,8 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     private static $many_many = array
     (
-        'Schedule'   => 'SummitEvent',
+        'Schedule'    => 'SummitEvent',
+        'TicketTypes' => 'SummitTicketType'
     );
 
     private static $belongs_to = array
@@ -57,7 +58,6 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     (
         'Member'     => 'Member',
         'Summit'     => 'Summit',
-        'TicketType' => 'SummitTicketType'
     );
 
     private static $summary_fields = array
@@ -69,7 +69,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     static $indexes = array
     (
-        'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID')
+        'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID,ExternalOrderId')
     );
 
     private static $searchable_fields = array
@@ -175,16 +175,6 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     }
 
     /**
-     * @param $external_order_id
-     * @param ISummitTicketOrderService $order_service
-     * @return void
-     */
-    public function placeOrder($external_order_id, ISummitTicketOrderService $order_service)
-    {
-        $order_info = $order_service->getOrderInfo($external_order_id);
-    }
-
-    /**
      * @return void
      */
     public function registerSummitHallChecking()
@@ -269,5 +259,42 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
      */
     public function canEdit($member = null) {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
+    }
+
+
+    /**
+     * @param ISummitTicketType $ticket
+     * @return bool
+     */
+    public function hasTicketType(ISummitTicketType $ticket)
+    {
+        $query   = new QueryObject($this);
+        $tickets = AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'TicketTypes', $query)->toArray();
+        foreach($tickets as $t)
+        {
+            if(intval($t->ExternalId) === intval($ticket->ExternalId)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return ISummitTicketType[]
+     * @throws Exception
+     */
+    public function getTickets()
+    {
+        $query   = new QueryObject($this);
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'TicketTypes', $query)->toArray();
+    }
+
+    /**
+     * @param ISummitTicketType $ticket
+     * @return $this
+     */
+    public function addTicketType(ISummitTicketType $ticket)
+    {
+        $query = new QueryObject($this);
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'TicketTypes', $query)->add($ticket);
+        return $this;
     }
 }

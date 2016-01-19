@@ -16,11 +16,11 @@ final class EntitySurveyTeamMemberEmailSenderService implements IMessageSenderSe
 {
 
     /**
-     * @param IEntity $subject
+     * @param mixed $subject
      * @throws InvalidArgumentException
      * @return void
      */
-    public function send(IEntity $subject)
+    public function send($subject)
     {
         if(! ($subject instanceof Member)) return;
 

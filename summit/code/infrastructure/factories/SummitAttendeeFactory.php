@@ -20,20 +20,17 @@ final class SummitAttendeeFactory implements ISummitAttendeeFactory
      * @param ISummit $summit
      * @param string $external_attendee_id
      * @param string $order_external_id
-     * @param ISummitTicketType $ticket_type
      * @param string $bought_date
      * @param bool $shared_contact_info
      * @return ISummitAttendee
      */
-    public function build(Member $member, ISummit $summit, $external_attendee_id , $order_external_id, ISummitTicketType $ticket_type , $bought_date, $shared_contact_info = false)
+    public function build(Member $member, ISummit $summit, $external_attendee_id , $order_external_id,  $bought_date, $shared_contact_info = false)
     {
-        $attendee = new SummitAttendee;
-        $attendee->MemberID = $member->ID;
-        $attendee->SummitID = $summit->ID;
-        $attendee->ExternalId = $external_attendee_id;
-        $attendee->ExternalOrderId = $order_external_id;
-        $attendee->TicketTypeID    = $ticket_type->getIdentifier();
-        $attendee->ExternalTicketClassID = $ticket_type->getExternalId();
+        $attendee                    = new SummitAttendee;
+        $attendee->MemberID          = $member->ID;
+        $attendee->SummitID          = $summit->ID;
+        $attendee->ExternalId        = $external_attendee_id;
+        $attendee->ExternalOrderId   = $order_external_id;
         $attendee->SharedContactInfo = $shared_contact_info;
         $attendee->TicketBoughtDate  = $bought_date;
         return $attendee;

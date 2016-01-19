@@ -82,8 +82,10 @@ final class SummitAttendeeInfoForm extends BootstrapForm
         if($data && $data instanceof SummitAttendee && $data->ID > 0)
         {
             $this->fields->insertAfter($t1 = new TextField('TicketBoughtDate', 'Ticket Bought Date', $data->TicketBoughtDate),'ExternalOrderId');
-            $t2 = $this->fields->fieldByName('ExternalOrderId');
-            $this->fields->insertAfter($t3 = new TextField('TicketType', 'Ticket Type', $data->TicketType()->Name), 'TicketBoughtDate');
+            $t2     = $this->fields->fieldByName('ExternalOrderId');
+            $ticket = $data->TicketTypes()->first();
+
+            $this->fields->insertAfter($t3 = new TextField('TicketType', 'Ticket Type', $ticket->Name), 'TicketBoughtDate');
 
             $t1->setReadonly(true);
             $t2->setReadonly(true);

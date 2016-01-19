@@ -96,6 +96,11 @@ class EditProfilePageSummitAttendeeExtension extends Extension
                     }
                     // get order info
                     $order_id  = isset($data['ExternalOrderId']) ? $data['ExternalOrderId'] : null;
+                    if(intval($order_id) <= 0)
+                    {
+                        $form->sessionMessage('invalid order #', "bad");
+                        return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
+                    }
                     $attendees = $this->manager->getOrderAttendees($order_id);
                     // store data
                     Session::set('attendees', $attendees);

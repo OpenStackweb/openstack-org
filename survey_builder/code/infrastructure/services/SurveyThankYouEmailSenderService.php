@@ -18,11 +18,11 @@
 final class SurveyThankYouEmailSenderService implements IMessageSenderService {
 
     /**
-     * @param IEntity $subject
+     * @param mixed $subject
      * @throws InvalidArgumentException
      * @return void
      */
-    public function send(IEntity $subject)
+    public function send($subject)
     {
        if(! ($subject instanceof ISurvey)) return;
 

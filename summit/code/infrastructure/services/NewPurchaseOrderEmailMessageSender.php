@@ -19,12 +19,12 @@ class NewPurchaseOrderEmailMessageSender
     implements IMessageSenderService {
 
     /**
-     * @param IEntity $subject
+     * @param mixed $subject
      * @throws InvalidArgumentException
      */
-    public function send(IEntity $subject)
+    public function send($subject)
     {
-        if(is_null($subject)) throw new InvalidArgumentException('$subject cant be null');
+        if(is_null($subject)) throw new InvalidArgumentException('subject cant be null');
 
         $email = EmailFactory::getInstance()->buildEmail(NEW_PURCHASE_ORDER_EMAIL_FROM,
             NEW_PURCHASE_ORDER_EMAIL_TO,

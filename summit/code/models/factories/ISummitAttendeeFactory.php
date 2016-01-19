@@ -20,10 +20,9 @@ interface ISummitAttendeeFactory
      * @param ISummit $summit
      * @param string $external_attendee_id
      * @param string $order_external_id
-     * @param ISummitTicketType $ticket_type
      * @param string $bought_date
      * @param bool $shared_contact_info
      * @return ISummitAttendee
      */
-    public function build(Member $member, ISummit $summit, $external_attendee_id , $order_external_id, ISummitTicketType $ticket_type , $bought_date, $shared_contact_info = false);
+    public function build(Member $member, ISummit $summit, $external_attendee_id , $order_external_id, $bought_date, $shared_contact_info = false);
 }

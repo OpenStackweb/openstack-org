@@ -12,28 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class PresentationSpeakerRejectedAnnouncementEmailSender implements IMessageSenderService
+final class SummitAttendeeCreatedAnnouncementEmailSender implements IMessageSenderService
 {
 
     /**
-     * @param mixed $subject
+     * @param $subject
      * @throws InvalidArgumentException
      * @return void
      */
     public function send($subject)
     {
-        if(!$subject instanceof IPresentationSpeaker) return;
+        if(!$subject instanceof ISummitAttendee) return;
 
-        $summit = Summit::get_active();
 
-        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailRejected, $summit->ID);
+        $email_template = PermamailTemplate::get_by_identifier('summit-attendee-created');
+        if(is_null($email_template)) return;
 
-        $email = EmailFactory::getInstance()->buildEmail('summit@openstack.org', $subject->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(null, $subject->getMember()->getEmail());
 
-        $email->setUserTemplate('presentation-speaker-rejected-only')->populateTemplate(
+        $email->setUserTemplate('summit-attendee-created')->populateTemplate(
             array
             (
-                'Speaker' => $subject,
+                'Attendee' => $subject,
             )
         )
         ->send();

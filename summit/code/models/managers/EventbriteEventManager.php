@@ -105,9 +105,11 @@ final class EventbriteEventManager implements IEventbriteEventManager
 
     /**
      * @param int $bach_size
-     * @return int
+     * @param IMessageSenderService $invite_sender
+     * @param IMessageSenderService $create_sender
+     * @return mixed
      */
-    public function ingestEvents($bach_size)
+    public function ingestEvents($bach_size, IMessageSenderService $invite_sender, IMessageSenderService $create_sender)
     {
         $repository          = $this->repository;
         $api                 = $this->api;
@@ -123,11 +125,13 @@ final class EventbriteEventManager implements IEventbriteEventManager
             $member_repository,
             $attendee_factory,
             $attendee_repository,
-            $summit_repository
+            $summit_repository,
+            $invite_sender,
+            $create_sender
         ) {
 
             list($list, $count) = $repository->getUnprocessed(0, $bach_size);
-
+            $qty = 0;
             foreach ($list as $event)
             {
                 $json_data = $api->getEntity($event->getApiUrl(), array('expand' => 'attendees'));
@@ -159,7 +163,10 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                 continue;
                             }
                             $member = $member_repository->findByEmail($email);
+
                             if (is_null($member)) {
+                                // member not found ... send email to invite to openstack.org membership
+                                $invite_sender->send($email);
                                 continue;
                             }
                             $current_summit = $summit_repository->getByExternalEventId($event_id);
@@ -176,32 +183,40 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                 continue;
                             }
 
-                            $old_attendee = $attendee_repository->getByMemberAndSummit
+                            $old_attendee = $attendee_repository->getByMemberAndSummitAndOrder
                             (
                                 $member->getIdentifier(),
-                                $current_summit->getIdentifier()
+                                $current_summit->getIdentifier(),
+                                intval($order_id)
                             );
 
-                            if ($old_attendee) {
-                                continue;
+                            if ($old_attendee)
+                            {
+                                if($old_attendee->hasTicketType($ticket_type)) continue;
+                                $attendee = $old_attendee;
                             }
-
-                            $attendee = $attendee_factory->build
-                            (
-                                $member,
-                                $current_summit,
-                                $external_id,
-                                $order_id,
-                                $ticket_type,
-                                $order_date
-                            );
-
+                            else
+                            {
+                                $attendee = $attendee_factory->build
+                                (
+                                    $member,
+                                    $current_summit,
+                                    $external_id,
+                                    $order_id,
+                                    $order_date
+                                );
+                                // send email informing that u became attendee...
+                                $create_sender->send($attendee);
+                            }
+                            $attendee->addTicketType($ticket_type);
                             $attendee_repository->add($attendee);
                         }
                     }
                 }
                 $event->markAsProcessed($status);
+                $qty++;
             };
+            return $qty;
         });
     }
 
@@ -266,17 +281,24 @@ final class EventbriteEventManager implements IEventbriteEventManager
                     )
                 );
 
+            $old_attendee = $attendee_repository->getByOrderAndExternalAttendeeId($external_order_id, $external_attendee_id);
+            if(!is_null($old_attendee))
+            {
+                throw new EntityValidationException(array(sprintf(" order id %s - attendee id %s already taken",$external_order_id, $external_attendee_id)));
+            }
+
             $attendee = $attendee_factory->build
             (
                 $member,
                 $summit,
                 $external_attendee_id,
                 $external_order_id,
-                $ticket_type,
                 $bought_date,
                 $shared_contact_info
             );
 
+
+            $attendee->addTicketType($ticket_type);
             $attendee_repository->add($attendee);
 
             return $attendee;

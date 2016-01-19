@@ -16,11 +16,11 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
 {
 
     /**
-     * @param IEntity $subject
+     * @param mixed $subject
      * @throws InvalidArgumentException
      * @return void
      */
-    public function send(IEntity $subject)
+    public function send($subject)
     {
         if(!$subject instanceof IPresentationSpeaker) return;
 

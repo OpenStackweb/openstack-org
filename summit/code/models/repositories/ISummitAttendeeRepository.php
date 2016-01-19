@@ -17,7 +17,15 @@ interface ISummitAttendeeRepository extends IEntityRepository
     /**
      * @param int $member_id
      * @param int $summit_id
+     * @param int $order_id
      * @return ISummitAttendee
      */
-    public function getByMemberAndSummit($member_id, $summit_id);
+    public function getByMemberAndSummitAndOrder($member_id, $summit_id, $order_id);
+
+    /**
+     * @param $order_id
+     * @param $attendee_id
+     * @return ISummitAttendee
+     */
+    public function getByOrderAndExternalAttendeeId($order_id, $attendee_id);
 }

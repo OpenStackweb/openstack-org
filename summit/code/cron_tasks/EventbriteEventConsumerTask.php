@@ -15,7 +15,6 @@
 final class EventbriteEventConsumerTask extends CronTask
 {
 
-
     /**
      * @return void
      */
@@ -33,7 +32,12 @@ final class EventbriteEventConsumerTask extends CronTask
             }
 
             $manager   = Injector::inst()->get('EventbriteEventManager');
-            $processed = $manager->ingestEvents($batch_size);
+            $processed = $manager->ingestEvents
+            (
+                $batch_size,
+                new SummitAttendeeCreateMembershipAnnouncementEmailSender,
+                new SummitAttendeeCreatedAnnouncementEmailSender
+            );
 
             $finish_time = time() - $init_time;
             echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';

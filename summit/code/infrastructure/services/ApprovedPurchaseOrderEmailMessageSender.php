@@ -15,10 +15,10 @@
 class ApprovedPurchaseOrderEmailMessageSender implements IMessageSenderService {
 
     /**
-     * @param IEntity $subject
+     * @param mixed $subject
      * @throws InvalidArgumentException
      */
-    public function send(IEntity $subject)
+    public function send($subject)
     {
         if(is_null($subject)) throw new InvalidArgumentException('$subject cant be null');
 

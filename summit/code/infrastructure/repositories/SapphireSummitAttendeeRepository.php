@@ -15,21 +15,57 @@
 final class SapphireSummitAttendeeRepository extends SapphireRepository implements ISummitAttendeeRepository
 {
 
+    private $cache = array();
+
     public function __construct()
     {
         parent::__construct(new SummitAttendee);
     }
+
     /**
      * @param int $member_id
      * @param int $summit_id
+     * @param int $order_id
      * @return ISummitAttendee
      */
-    public function getByMemberAndSummit($member_id, $summit_id)
+    public function getByMemberAndSummitAndOrder($member_id, $summit_id, $order_id)
+    {
+        $cache_key = sprintf('%s_%s_%s', $member_id, $summit_id, $order_id );
+        $attendee  = SummitAttendee::get()->filter(array
+        (
+            'MemberID'        => $member_id,
+            'SummitID'        => $summit_id,
+            'ExternalOrderId' => $order_id
+        ))->first();
+
+        if(is_null($attendee) && isset($this->cache[$cache_key]))
+        {
+            $attendee = $this->cache[$cache_key];
+        }
+        return $attendee;
+    }
+
+    /**
+     * @param $order_id
+     * @param $attendee_id
+     * @return ISummitAttendee
+     */
+    public function getByOrderAndExternalAttendeeId($order_id, $attendee_id)
     {
         return SummitAttendee::get()->filter(array
         (
-            'MemberID' => $member_id,
-            'SummitID' => $summit_id,
+            'ExternalId'        => $attendee_id,
+            'ExternalOrderId' => $order_id
         ))->first();
+    }
+
+    /**
+     * @param IEntity $entity
+     * @return int|void
+     */
+    public function add(IEntity $entity)
+    {
+        parent::add($entity);
+        $this->cache[sprintf('%s_%s_%s', $entity->MemberID, $entity->SummitID, $entity->ExternalOrderId )] = $entity;
     }
 }
