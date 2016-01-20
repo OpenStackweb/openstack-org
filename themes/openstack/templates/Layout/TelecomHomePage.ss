@@ -140,7 +140,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/superuser-roundtable-benefits-and-use-cases-for-network-functions-virtualization-nfv" target="_blank">
+                    <a href="http://superuser.openstack.org/articles/superuser-roundtable-benefits-and-use-cases-for-network-functions-virtualization-nfv-ca4ba4be-6e20-4a91-a9a8-82eeffcf85f4" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/read.png">
@@ -179,7 +179,7 @@
                     </p>
                 </div>
                 <div class="col-sm-5ths">
-                    <a href="#" target="_blank">
+                    <a href="http://superuser.openstack.org/articles/creating-the-perfect-match-openstack-and-network-functions-virtualization" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/play-button.png">
