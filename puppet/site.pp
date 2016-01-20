@@ -7,6 +7,7 @@ $developer_email = 'test@test.com'
 
 $main_packages = [
   'curl',
+  'wget',
   'build-essential',
   'git',
   'geoip-bin',
@@ -14,8 +15,6 @@ $main_packages = [
   'mysql-server',
   'zip',
   'unzip',
-  'nodejs',
-  'npm',
 ]
 
 # php packages needed for server
@@ -44,6 +43,13 @@ package { $main_packages:
 package { $php5_packages:
   ensure  => present,
   require => [
+    Package[$main_packages],
+  ],
+}
+
+class { 'nodejs':
+  version => 'stable',
+   require => [
     Package[$main_packages],
   ],
 }
@@ -82,7 +88,7 @@ exec { 'install-n':
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
   command   => 'npm install -g n',
-  require   => Package[$main_packages],
+  require   => Class['nodejs'],
 }
 
 exec { 'update-node':
