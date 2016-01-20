@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-3 col-sm-4 center">
                     <i class="fa fa-file-pdf-o fa-5x nfv-download-icon"></i>
-                    <a href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="container-download-btn" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-right"></i></a>
+                    <a href="#" class="container-download-btn" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
                     <p>
                         Read <em>Accelerating NFV Delivery with OpenStack</em>, a report created by the OpenStack Foundation in collaboration with six global communications companies, to learn more about Network Functions Virtualization.
                     </p>
-                    <a class="appdev-marketplace-btn" href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-circle-right"></i></a>
+                    <a class="appdev-marketplace-btn" href="#" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -251,7 +251,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Read Accelerating NFV Delivery with OpenStack, a report created by the OpenStack Foundation in collaboration with ten global communications companies, to learn more about Network Functions Virtualization.
             </p>
-                <a href="#" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
+                <a href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
             <hr>
             <p>
 
@@ -279,17 +279,6 @@
             <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
             <script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
             <!--End mc_embed_signup-->
-
-<!--                 <form role="form">
-                  <div class="form-group">
-                    <h3>Join our mailing list.</h3>
-                    <p>
-                        Get up to date info about OpenStack and future user stories.
-                    </p>
-                    <input type="email" class="newsletter-input" id="NewsletterSignUp" placeholder="your@email.com">
-                    <a href="#" class="btn subscribe-btn">Subscribe <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-                </form> -->
             </p>
           </div>
           <div class="modal-footer">
