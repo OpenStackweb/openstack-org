@@ -23,7 +23,7 @@ class TelecomHomePage_Controller extends Page_Controller {
         parent::init();
 
         Requirements::CSS('themes/openstack/css/telecom.css');
-
+	Requirements::CSS('themes/openstack/css/enterprise.css');
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
         Requirements::javascript('themes/openstack/javascript/telecom.js');
 
