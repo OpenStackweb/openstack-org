@@ -205,30 +205,6 @@ a.testimonial-link {
   .col-lg-5ths {
     width: 20%;
     float: left; } }
-.appdev-download-row {
-   padding: 50px 0 60px;
-   background: #29abe2 ; }
-.appdev-download-row h3 {
-   font-size: 1.4em;
-   text-transform: uppercase;
-   font-weight: 300;
-   color: white; }
-.appdev-download-row p {
-   font-weight: 300;
-   color: #edf2f7 ; }
-.appdev-download-row a.container-download-btn {
-   background: #2A4E68 ;
-   color: white;
-   padding: 15px;
-   width: 100%;
-   border-radius: 4px;
-   display: block;
-   margin-top: 20px; }
- .appdev-download-row a.container-download-btn i {
-   margin-left: 5px; }
-.appdev-download-row a.container-download-btn:hover {
-   background: #0C1722 ;
-   text-decoration: none; }
 
 /*End Five column layout*/
 /*End NFV Landing*/
