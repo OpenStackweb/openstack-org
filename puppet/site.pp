@@ -14,6 +14,7 @@ $main_packages = [
   'mysql-server',
   'zip',
   'unzip',
+  'nodejs',
 ]
 
 # php packages needed for server
@@ -75,15 +76,12 @@ exec { 'rename-db':
   require   => Exec['unzip-db'],
 }
 
-class { '::nodejs':
-}
-
 exec { 'install-n':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
   command   => 'npm install -g n',
-  require   => Class['::nodejs'],
+  require   => Package[$main_packages],
 }
 
 exec { 'update-node':
