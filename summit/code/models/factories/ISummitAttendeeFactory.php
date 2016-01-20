@@ -18,11 +18,18 @@ interface ISummitAttendeeFactory
     /**
      * @param Member $member
      * @param ISummit $summit
-     * @param string $external_attendee_id
-     * @param string $order_external_id
-     * @param string $bought_date
      * @param bool $shared_contact_info
      * @return ISummitAttendee
      */
-    public function build(Member $member, ISummit $summit, $external_attendee_id , $order_external_id, $bought_date, $shared_contact_info = false);
+    public function build(Member $member, ISummit $summit, $shared_contact_info = false);
+
+    /**
+     * @param int $external_attendee_id
+     * @param int $order_external_id
+     * @param string $bought_date
+     * @param string $changed_date
+     * @param ISummitTicketType $ticket_type
+     * @return ISummitAttendeeTicket
+     */
+    public function buildTicket($external_attendee_id , $order_external_id, $bought_date, $changed_date, ISummitTicketType $ticket_type);
 }

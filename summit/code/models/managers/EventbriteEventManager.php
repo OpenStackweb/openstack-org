@@ -148,6 +148,8 @@ final class EventbriteEventManager implements IEventbriteEventManager
                             $email           = $profile['email'];
                             $external_id     = $attendee['id'];
                             $answers         = $attendee['answers'];
+                            $bought_date     = $attendee['created'];
+                            $changed_date    = $attendee['changed'];
                             $order_id        = $attendee['order_id'];
                             $event_id        = $attendee['event_id'];
                             $ticket_class_id = $attendee['ticket_class_id'];
@@ -189,9 +191,11 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                 $current_summit->getIdentifier()
                             );
 
+
+                            $ticket = $attendee_factory->buildTicket($external_id , $order_id, $bought_date, $changed_date, $ticket_type);
                             if ($old_attendee)
                             {
-                                if($old_attendee->hasTicketType($ticket_type)) continue;
+                                if($old_attendee->hasTicket($ticket)) continue;
                                 $attendee = $old_attendee;
                             }
                             else
@@ -199,15 +203,12 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                 $attendee = $attendee_factory->build
                                 (
                                     $member,
-                                    $current_summit,
-                                    $external_id,
-                                    $order_id,
-                                    $order_date
+                                    $current_summit
                                 );
                                 // send email informing that u became attendee...
                                 $create_sender->send($attendee);
                             }
-                            $attendee->addTicketType($ticket_type);
+                            $attendee->addTicket($ticket);
                             $attendee_repository->add($attendee);
                         }
                     }
@@ -280,24 +281,15 @@ final class EventbriteEventManager implements IEventbriteEventManager
                     )
                 );
 
-            $old_attendee = $attendee_repository->getByOrderAndExternalAttendeeId($external_order_id, $external_attendee_id);
-            if(!is_null($old_attendee))
-            {
-                throw new EntityValidationException(array(sprintf(" order id %s - attendee id %s already taken",$external_order_id, $external_attendee_id)));
-            }
+            $ticket = $attendee_factory->buildTicket($external_attendee_id , $external_order_id, $bought_date, $bought_date, $ticket_type);
 
             $attendee = $attendee_factory->build
             (
                 $member,
-                $summit,
-                $external_attendee_id,
-                $external_order_id,
-                $bought_date,
-                $shared_contact_info
+                $summit
             );
 
-
-            $attendee->addTicketType($ticket_type);
+            $attendee->addTicket($ticket);
             $attendee_repository->add($attendee);
 
             return $attendee;

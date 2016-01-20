@@ -21,7 +21,7 @@ class SummitTicketType extends DataObject implements ISummitTicketType
 {
     private static $db = array
     (
-        'ExternalId'  => 'Text',
+        'ExternalId'  => 'Int',
         'Name'        => 'Text',
         'Description' => 'Text',
     );
@@ -43,7 +43,7 @@ class SummitTicketType extends DataObject implements ISummitTicketType
 
     static $indexes = array
     (
-       // 'ExternalId' => array('type' => 'unique', 'value' => 'ExternalId')
+       'ExternalId' => array('type' => 'unique', 'value' => 'ExternalId')
     );
 
     private static $summary_fields = array

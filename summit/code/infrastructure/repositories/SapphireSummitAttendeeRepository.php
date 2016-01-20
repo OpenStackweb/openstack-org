@@ -44,20 +44,6 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
     }
 
     /**
-     * @param int $order_id
-     * @param int $attendee_id
-     * @return ISummitAttendee
-     */
-    public function getByOrderAndExternalAttendeeId($order_id, $attendee_id)
-    {
-        return SummitAttendee::get()->filter(array
-        (
-            'ExternalId'        => $attendee_id,
-            'ExternalOrderId'   => $order_id
-        ))->first();
-    }
-
-    /**
      * @param IEntity $entity
      * @return int|void
      */

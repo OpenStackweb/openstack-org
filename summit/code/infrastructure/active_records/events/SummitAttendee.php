@@ -17,10 +17,6 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     private static $db = array
     (
-        // https://www.eventbrite.com/developer/v3/formats/order/#ebapi-std:format-order
-        'ExternalOrderId'         => 'Int',
-        'ExternalId'              => 'Int',
-        'TicketBoughtDate'        => 'SS_Datetime',
         'SharedContactInfo'       => 'Boolean',
         'SummitHallCheckedIn'     => 'Boolean',
         'SummitHallCheckedInDate' => 'SS_Datetime',
@@ -28,7 +24,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     private static $has_many = array
     (
-
+        'Tickets' => 'SummitAttendeeTicket',
     );
 
     private static $defaults = array
@@ -38,7 +34,6 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     private static $many_many = array
     (
         'Schedule'    => 'SummitEvent',
-        'TicketTypes' => 'SummitTicketType'
     );
 
     private static $belongs_to = array
@@ -63,14 +58,12 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     private static $summary_fields = array
     (
         "Member.Email"        => 'Member',
-        'TicketBoughtDate'    => 'Ticket Bought Date',
         'SummitHallCheckedIn' => "Is Checked In"
     );
 
     static $indexes = array
     (
         'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID'),
-        'Order_Attendee' =>  array('type'=>'unique', 'value'=>'ExternalOrderId,ExternalId')
     );
 
     private static $searchable_fields = array
@@ -264,38 +257,38 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
 
     /**
-     * @param ISummitTicketType $ticket
+     * @param ISummitAttendeeTicket $ticket
      * @return bool
      */
-    public function hasTicketType(ISummitTicketType $ticket)
+    public function hasTicket(ISummitAttendeeTicket $ticket)
     {
         $query   = new QueryObject($this);
-        $tickets = AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'TicketTypes', $query)->toArray();
+        $tickets = AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Tickets', $query)->toArray();
         foreach($tickets as $t)
         {
-            if(intval($t->ExternalId) === intval($ticket->ExternalId)) return true;
+            if(intval($t->TicketType()->ExternalId) === intval($ticket->TicketType()->ExternalId)) return true;
         }
         return false;
     }
 
     /**
-     * @return ISummitTicketType[]
+     * @return ISummitAttendeeTicket[]
      * @throws Exception
      */
     public function getTickets()
     {
         $query   = new QueryObject($this);
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'TicketTypes', $query)->toArray();
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Tickets', $query)->toArray();
     }
 
     /**
-     * @param ISummitTicketType $ticket
+     * @param ISummitAttendeeTicket $ticket
      * @return $this
      */
-    public function addTicketType(ISummitTicketType $ticket)
+    public function addTicket(ISummitAttendeeTicket $ticket)
     {
         $query = new QueryObject($this);
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'TicketTypes', $query)->add($ticket);
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Tickets', $query)->add($ticket);
         return $this;
     }
 }

@@ -40,7 +40,10 @@ final class SummitAttendeeInfoForm extends BootstrapForm
             $options = array();
             foreach($attendees as $attendee)
             {
-                $options[$attendee['id']] = $attendee['profile']['name'];
+                $ticket_external_id = intval($attendee['ticket_class_id']);
+                $ticket_type = SummitTicketType::get()->filter('ExternalId', $ticket_external_id)->first();
+                if(is_null($ticket_type)) continue;
+                $options[$attendee['id']] = $attendee['profile']['name'].' ('.$ticket_type->Name.')';
             }
             $attendees_ctrl = new OptionSetField('SelectedAttendee','', $options);
             $fields->add($attendees_ctrl);
@@ -81,11 +84,12 @@ final class SummitAttendeeInfoForm extends BootstrapForm
 
         if($data && $data instanceof SummitAttendee && $data->ID > 0)
         {
-            $this->fields->insertAfter($t1 = new TextField('TicketBoughtDate', 'Ticket Bought Date', $data->TicketBoughtDate),'ExternalOrderId');
-            $t2     = $this->fields->fieldByName('ExternalOrderId');
-            $ticket = $data->TicketTypes()->first();
+            $ticket = $data->Tickets()->first();
 
-            $this->fields->insertAfter($t3 = new TextField('TicketType', 'Ticket Type', $ticket->Name), 'TicketBoughtDate');
+            $this->fields->insertAfter($t1 = new TextField('TicketBoughtDate', 'Ticket Bought Date', $ticket->TicketBoughtDate),'ExternalOrderId');
+            $t2 = $this->fields->fieldByName('ExternalOrderId');
+            $t2->setValue($ticket->ExternalOrderId);
+            $this->fields->insertAfter($t3 = new TextField('TicketType', 'Ticket Type', $ticket->TicketType()->Name), 'TicketBoughtDate');
 
             $t1->setReadonly(true);
             $t2->setReadonly(true);

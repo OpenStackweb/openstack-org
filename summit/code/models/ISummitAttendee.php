@@ -25,16 +25,16 @@ interface ISummitAttendee extends IEntity
     public function getSummit();
 
     /**
-     * @param ISummitTicketType $ticket
+     * @param ISummitAttendeeTicket $ticket
      * @return bool
      */
-    public function hasTicketType(ISummitTicketType $ticket);
+    public function hasTicket(ISummitAttendeeTicket $ticket);
 
     /**
-     * @param ISummitTicketType $ticket
+     * @param ISummitAttendeeTicket $ticket
      * @return $this
      */
-    public function addTicketType(ISummitTicketType $ticket);
+    public function addTicket(ISummitAttendeeTicket $ticket);
     /**
      * @return void
      */
@@ -47,7 +47,7 @@ interface ISummitAttendee extends IEntity
 
 
     /**
-     * @return ISummitTicketType[]
+     * @return ISummitAttendeeTicket[]
      * @throws Exception
      */
     public function getTickets();

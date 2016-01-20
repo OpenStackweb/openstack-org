@@ -12,13 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitAttendeeRepository extends IEntityRepository
+interface ISummitAttendeeTicket extends IEntity
 {
-    /**
-     * @param int $member_id
-     * @param int $summit_id
-     * @return ISummitAttendee
-     */
-    public function getByMemberAndSummit($member_id, $summit_id);
 
 }

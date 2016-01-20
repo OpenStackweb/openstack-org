@@ -24,7 +24,7 @@ final class EventbriteEventConsumerTask extends CronTask
         {
 
             $init_time  = time();
-            $batch_size = 10;
+            $batch_size = 100;
             if (isset($_GET['batch_size']))
             {
                 $batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));

@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class UpdateAttendeesTicketsMigration extends AbstractDBMigrationTask
+final class UpdateAttendeesTicketsMigration2 extends AbstractDBMigrationTask
 {
-    protected $title = "Update Attendees Tickets";
+    protected $title = "UpdateAttendeesTicketsMigration2";
 
     protected $description = "Update Attendees Tickets from one2one to many2many";
 
@@ -24,17 +24,13 @@ final class UpdateAttendeesTicketsMigration extends AbstractDBMigrationTask
 
         if (DBSchema::existsColumn($database, 'SummitAttendee', 'TicketTypeID')) {
 
-            $attendees =  DB::query("SELECT * from SummitAttendee;");
-
-            foreach($attendees as $attendee)
-            {
-                $attendee = new SummitAttendee($attendee);
-                $ticket = SummitTicketType::get()->byID(intval($attendee->TicketTypeID));
-                $attendee->TicketTypes()->add($ticket);
-            }
+            DB::query("DELETE FROM SummitAttendee;");
+            DB::query("UPDATE EventbriteEvent SET Processed = 0;");
             DB::query("ALTER TABLE SummitAttendee DROP COLUMN TicketTypeID;");
             DB::query("ALTER TABLE SummitAttendee DROP COLUMN ExternalTicketClassID;");
-
+            DB::query("ALTER TABLE SummitAttendee DROP COLUMN ExternalOrderId;");
+            DB::query("ALTER TABLE SummitAttendee DROP COLUMN TicketBoughtDate;");
+            DB::query("ALTER TABLE SummitAttendee DROP COLUMN ExternalId;");
         }
     }
 
