@@ -15,6 +15,7 @@ $main_packages = [
   'zip',
   'unzip',
   'nodejs',
+  'npm',
 ]
 
 # php packages needed for server
