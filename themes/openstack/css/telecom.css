@@ -1,22 +1,47 @@
 /*NFV Landing*/
+
+.appdev-download-row {
+   padding: 50px 0 60px;
+   background: #29abe2 ; }
+.appdev-download-row h3 {
+   font-size: 1.4em;
+   text-transform: uppercase;
+   font-weight: 300;
+   color: white; }
+.appdev-download-row p {
+   font-weight: 300;
+   color: #edf2f7 ; }
+.appdev-download-row a.container-download-btn {
+   background: #2A4E68 ;
+   color: white;
+   padding: 15px;
+   width: 100%;
+   border-radius: 4px;
+   display: block;
+   margin-top: 20px; }
+ .appdev-download-row a.container-download-btn i {
+   margin-left: 5px; }
+.appdev-download-row a.container-download-btn:hover {
+   background: #0C1722 ;
+   text-decoration: none; }
 .foundation-report-title {
   font-size: 1.1em;
   font-weight: 300;
   margin: 0 0 15px;
   position: relative;
   display: inline-block; }
-  .foundation-report-title:before, .foundation-report-title:after {
-    content: "";
-    position: absolute;
-    border-bottom: 1px solid white;
-    top: 13px;
-    width: 80px; }
-  .foundation-report-title:before {
-    right: 100%;
-    margin-right: 10px; }
-  .foundation-report-title:after {
-    left: 100%;
-    margin-left: 10px; }
+.foundation-report-title:before, .foundation-report-title:after {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid white;
+  top: 13px;
+  width: 80px; }
+.foundation-report-title:before {
+  right: 100%;
+  margin-right: 10px; }
+.foundation-report-title:after {
+  left: 100%;
+  margin-left: 10px; }
 
 .intro-header.nfv {
   background: url('/themes/openstack/images/nfv/nfv-hero.jpg') no-repeat center center;
@@ -180,30 +205,6 @@ a.testimonial-link {
   .col-lg-5ths {
     width: 20%;
     float: left; } }
-.appdev-download-row {
-   padding: 50px 0 60px;
-   background: #29abe2 ; }
-.appdev-download-row h3 {
-   font-size: 1.4em;
-   text-transform: uppercase;
-   font-weight: 300;
-   color: white; }
-.appdev-download-row p {
-   font-weight: 300;
-   color: #edf2f7 ; }
-.appdev-download-row a.container-download-btn {
-   background: #2A4E68 ;
-   color: white;
-   padding: 15px;
-   width: 100%;
-   border-radius: 4px;
-   display: block;
-   margin-top: 20px; }
- .appdev-download-row a.container-download-btn i {
-   margin-left: 5px; }
-.appdev-download-row a.container-download-btn:hover {
-   background: #0C1722 ;
-   text-decoration: none; }
 
 /*End Five column layout*/
 /*End NFV Landing*/
