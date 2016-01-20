@@ -1,7 +1,7 @@
 </div>
 <div class="enterprise-bar">
    <div class="container">
-      <a href="/telecom/" class="enterprise-bar-left">OpenStack For Telecom & NFV</a>
+      <a href="/telecoms-and-nfv" class="enterprise-bar-left">OpenStack For Telecom & NFV</a>
       <a href="{$Link}#top" class="enterprise-bar-right">Back to Top</a>
    </div>
 </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-3 col-sm-4 center">
                     <i class="fa fa-file-pdf-o fa-5x nfv-download-icon"></i>
-                    <a href="#" class="container-download-btn" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-right"></i></a>
+                    <a href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="container-download-btn" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
                     <p>
                         Read <em>Accelerating NFV Delivery with OpenStack</em>, a report created by the OpenStack Foundation in collaboration with six global communications companies, to learn more about Network Functions Virtualization.
                     </p>
-                    <a class="appdev-marketplace-btn" href="#" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-circle-right"></i></a>
+                    <a class="appdev-marketplace-btn" href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
             </div>
         </div>
