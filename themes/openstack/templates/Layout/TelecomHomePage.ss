@@ -251,7 +251,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Read Accelerating NFV Delivery with OpenStack, a report created by the OpenStack Foundation in collaboration with ten global communications companies, to learn more about Network Functions Virtualization.
             </p>
-                <a href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
+                <a href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="download-btn" download="OpenStack-Foundation-NFV-Report.pdf"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
             <hr>
             <p>
 
