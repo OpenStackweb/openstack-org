@@ -16,7 +16,7 @@ schedule_admin_view_api.getScheduleByDayAndLocation = function (summit_id, day, 
     });
 }
 
-schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, source, track_list_id, page, page_size)
+schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, source, track_list_id, search_term, order, page, page_size)
 {
     var url    = api_base_url.replace('@SUMMIT_ID', summit_id)+'/events/unpublished/'+source;
     var params = { 'expand' : 'speakers'};
@@ -27,6 +27,10 @@ schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, sour
         params['page'] = page;
     if(page_size !== '' && typeof page_size !== 'undefined')
         params['page_size'] = page_size;
+    if(search_term !== '' && typeof search_term !== 'undefined')
+        params['search_term'] = search_term;
+    if(order !== '' && typeof order !== 'undefined')
+        params['order'] = order;
 
     var query = '';
     for(var key in params)

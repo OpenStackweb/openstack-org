@@ -21,7 +21,7 @@ function unpublishedEventsStore(){
     }
 
     this.get = function(event_id) {
-        return this._unpublished_events[event_id];
+        return this._unpublished_events['ev_'+event_id];
     }
 
     this._setApiResponse = function (response)
@@ -40,7 +40,7 @@ function unpublishedEventsStore(){
     this.delete = function(event_id)
     {
         var item = this.get(event_id);
-        delete this._unpublished_events[event_id];
+        delete this._unpublished_events['ev_'+event_id];
         self.trigger(self.LOAD_STORE);
         return item;
     }
@@ -49,9 +49,11 @@ function unpublishedEventsStore(){
         this.clear();
         // update model
         for(var e of events) {
-            this._unpublished_events[e.id] = e;
+            // we need to make the array key a string to keep the order of the items
+            this._unpublished_events['ev_'+e.id] = e;
         }
     }
+
     var self = this;
 
     api.on(api.RETRIEVED_UNPUBLISHED_EVENTS,function(response) {

@@ -21,5 +21,5 @@ interface ISummitPresentationRepository extends ISummitEventRepository
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $page = 1 ,$page_size = 10, $order = null);
+    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $search_term = null, $page = 1 ,$page_size = 10, $order = null);
 }

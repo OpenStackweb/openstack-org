@@ -106,12 +106,16 @@ SQL;
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummit($summit_id, $page = 1, $page_size = 10, $order = null)
+    public function getUnpublishedBySummit($summit_id, $search_term, $page = 1, $page_size = 10, $order = null)
     {
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
+
+        $where_clause = " Title IS NOT NULL AND Title <>'' ";
+        if ($search_term) $where_clause .= "AND Title LIKE '%{$search_term}%' ";
+
         $list      = SummitEvent::get()
             ->filter( array('SummitID' => $summit_id, 'Published' => 0, 'ClassName:ExactMatch:not' => 'Presentation' ))
-            ->where(" Title IS NOT NULL AND Title <>'' ")->sort($order);
+            ->where($where_clause)->sort($order);
         $count     = intval($list->count());
         $offset    = ($page - 1 ) * $page_size;
         $data      = $list->limit($page_size, $offset);

@@ -28,5 +28,5 @@ interface ISummitEventRepository extends IEntityRepository
      * @param null $order
      * @return array
      */
-    public function getUnpublishedBySummit($summit_id, $page = 1, $page_size = 10, $order = null);
+    public function getUnpublishedBySummit($summit_id, $search_term, $page = 1, $page_size = 10, $order = null);
 }

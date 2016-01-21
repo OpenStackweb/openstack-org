@@ -53,4 +53,13 @@
     color:green;
 }
 
+/* SCHEDULE FILTERS */
+
+.unpublished-container label {
+    width: 85px;
+}
+
+.unpublished-container .refresh_button_div {
+    margin-top: 10px;
+}
 

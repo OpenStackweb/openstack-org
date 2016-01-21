@@ -30,14 +30,19 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummit($summit_id, $page = 1, $page_size = 10, $order = null)
+    public function getUnpublishedBySummit($summit_id, $search_term = null, $page = 1, $page_size = 10, $order = null)
     {
-       if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
-       $list      = Presentation::get()->filter( array('SummitID' => $summit_id, 'Published' => 0))->where(" Title IS NOT NULL AND Title <>'' ")->sort($order);
-       $count     = intval($list->count());
-       $offset    = ($page - 1 ) * $page_size;
-       $data      = $list->limit($page_size, $offset);
-       return array($page, $page_size, $count, $data);
+        if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
+
+        $where_clause = " Title IS NOT NULL AND Title <>'' ";
+        if ($search_term) $where_clause .= "AND Title LIKE '%{$search_term}%' ";
+
+        $list      = Presentation::get()->filter( array('SummitID' => $summit_id, 'Published' => 0))->where($where_clause)->sort("TRIM({$order})");
+        $count     = intval($list->count());
+        $offset    = ($page - 1 ) * $page_size;
+        $data      = $list->limit($page_size, $offset);
+
+        return array($page, $page_size, $count, $data);
     }
     /**
      * @param int $summit_id
@@ -46,17 +51,20 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null,  $page = 1 ,$page_size = 10,  $order = null)
+    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null)
     {
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
         $filter = array('SummitID' => $summit_id, 'Published' => 0);
-        $track_filter = '';
 
+        $track_filter = '';
         if(!empty($track_list)){
             $track_filter = " AND SummitSelectedPresentationList.ID = {$track_list} ";
         }
 
-        $list = Presentation::get()->filter($filter)->where(" Title IS NOT NULL AND Title <>'' ")
+        $where_clause = " Title IS NOT NULL AND Title <>'' ";
+        if ($search_term) $where_clause .= "AND Title LIKE '%{$search_term}%' ";
+
+        $list = Presentation::get()->filter($filter)->where($where_clause)
             ->innerJoin('SummitSelectedPresentation', 'SummitSelectedPresentation.PresentationID = Presentation.ID')
             ->innerJoin('SummitSelectedPresentationList', "SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') {$track_filter}")
             ->sort($order);
