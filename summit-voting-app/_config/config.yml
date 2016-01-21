@@ -1,0 +1,17 @@
+---
+Name: summit-voting-app
+---
+PresentationVotingPage_Controller:
+  presentation_limit: 50
+---
+Only:
+  environment: dev
+---
+PresentationVotingPage_Controller:
+  app_js_file: 'app.js'
+---
+Except:
+  environment: 'dev'
+---
+PresentationVotingPage_Controller:
+  app_js_file: 'app.min.js'
