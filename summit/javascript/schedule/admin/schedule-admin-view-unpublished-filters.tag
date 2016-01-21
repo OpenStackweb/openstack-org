@@ -137,7 +137,7 @@
             self.api.getUnpublishedEventsBySource(self.summit.id, source ,track_list_id, search_term, order, page_nbr, 10);
         });
 
-        function clearClicked(e){
+        clearClicked(e){
 
             $('#search_term').val('');
 
