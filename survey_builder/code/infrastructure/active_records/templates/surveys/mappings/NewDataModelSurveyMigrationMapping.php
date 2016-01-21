@@ -105,7 +105,7 @@ class NewDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
 
         $old_mapping      = $current_template->MigrationMappings()->first();
 
-        if(intval($old_mapping->OriginSurveyID) !== intval($this->OriginSurveyID) ){
+        if(!is_null($old_mapping)  && intval($old_mapping->OriginSurveyID) !== intval($this->OriginSurveyID) ){
             $result->error('you need to specify the same origin survey for all your mappings');
         }
         return $result;
