@@ -1,5 +1,9 @@
 #!/bin/bash -xe
 
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -;
+sudo apt-get install -y nodejs;
+npm install -g webpack;
+npm install -g bower;
 
 upload_max_filesize=240M
 post_max_size=240M
@@ -15,6 +19,8 @@ done
 
 cd /var/www/local.openstack.org;
 mkdir -p silverstripe-cache;
+sudo npm install;
+sudo bower install --allow-root --config.interactive=false;
 sudo curl -sS https://getcomposer.org/installer | php;
 sudo php composer.phar install;
 sudo ./framework/sake installsake;

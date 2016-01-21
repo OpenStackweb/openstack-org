@@ -47,13 +47,6 @@ package { $php5_packages:
   ],
 }
 
-class { 'nodejs':
-  version => 'stable',
-   require => [
-    Package[$main_packages],
-  ],
-}
-
 service { "mysql":
   ensure  => running,
   require => Package[$main_packages]
@@ -83,62 +76,6 @@ exec { 'rename-db':
   require   => Exec['unzip-db'],
 }
 
-exec { 'install-n':
-  cwd       => '/',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => 'npm install -g n',
-  require   => Class['nodejs'],
-}
-
-exec { 'update-node':
-  cwd       => '/',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => 'n latest',
-  require   => Exec['install-n'],
-}
-
-exec { 'install-webpack':
-  cwd       => '/',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => 'npm install -g webpack',
-  require   => Exec['update-node'],
-}
-
-exec { 'bundle-webpack':
-  cwd       => '/var/www/local.openstack.org',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => 'webpack',
-  require   => Exec['install-webpack']
-}
-
-exec { 'install-node-modules':
-  cwd       => '/var/www/local.openstack.org',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => 'npm install --no-bin-links',
-  require   => Exec['update-node'],
-}
-
-# install bower 
-exec { 'install-bower':
-  cwd       => '/',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => 'npm install -g bower',
-  require   => Exec['update-node'],
-}
-exec { 'install-bower-components':
-  cwd       => '/var/www/local.openstack.org',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => 'bower install --allow-root --config.interactive=false',
-  require   => Exec['install-bower'],
-}
-
 #create and import db
 mysql::db { $os_db :
   user           => $os_db_user,
@@ -166,8 +103,6 @@ class { 'nginx':
     Package[$php5_packages] ,
     Service['mysql'],
     File['/var/www/local.openstack.org/_ss_environment.php'],
-    Exec['install-bower-components'],
-    Exec['bundle-webpack'],
   ],
 }
 
