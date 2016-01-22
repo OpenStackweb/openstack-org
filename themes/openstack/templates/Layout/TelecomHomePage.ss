@@ -287,3 +287,13 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <!-- End Download Modal -->
+    
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#speakingitem').hover(
+    setTimeout(function() {
+      ga('send', 'event', 'navigation', 'hover', 'download-btn');
+    }, 1000);
+    );
+});
+</script>
