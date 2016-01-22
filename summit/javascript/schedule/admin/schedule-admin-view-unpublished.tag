@@ -5,6 +5,7 @@
             <schedule-admin-view-unpublished-event data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-unpublished-event>
         </li>
     </ul>
+    <div if={}
     <div>
         <ul id="unpublished-events-pager"></ul>
     </div>
@@ -42,7 +43,11 @@
                     self.dispatcher.unpublishedEventsPageChanged(newPage);
                 }
             }
-            $('#unpublished-events-pager').bootstrapPaginator(options);
+
+            if (self.store.all().length){
+                $('#unpublished-events-pager').bootstrapPaginator(options);
+            }
+
             $('[data-toggle="popover"]').popover({
                 trigger: 'hover focus',
                 html: true,
