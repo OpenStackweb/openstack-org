@@ -52,10 +52,21 @@ class SummitService
             if(!isset($event_data['id'])) throw new EntityValidationException(array('missing required param: id'));
             $event_id = intval($event_data['id']);
             $event = $event_repository->getById($event_id);
-            if(is_null($event)) throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
+
+            if(is_null($event))
+                throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
 
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
                 throw new EntityValidationException(array('event doest not belongs to summit'));
+
+            // validate blackout times
+            $conflict_events = $event_repository->getPublishedByTimeframe(intval($event->SummitID),$event_data['start_datetime'],$event_data['end_datetime']);
+            foreach ($conflict_events as $c_event) {
+                // if the published event is BlackoutTime or if there is a BlackoutTime event in this timeframe
+                if (($event->Type()->BlackoutTimes || $c_event->Type()->BlackoutTimes) && $event->ID != $c_event->ID) {
+                    throw new EntityValidationException(array("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'"));
+                }
+            }
 
             $event->setStartDate($event_data['start_datetime']);
             $event->setEndDate($event_data['end_datetime']);

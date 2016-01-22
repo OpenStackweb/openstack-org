@@ -61,6 +61,7 @@
                         var element = $(ui.draggable);
                         var id      = parseInt(element.attr('data-id'));
                         var target  = $(this);
+                        var is_published_event = true;
 
                         var top    = target.position().top;
                         var left   = target.position().left;
@@ -94,6 +95,7 @@
 
                         // set model time
                         if(element.hasClass('event-unpublished')) {
+                            is_published_event = false;
                             element.removeClass('event-unpublished');
                             element.addClass('event-published');
                             $('.ui-resizable-n', element).show();
@@ -101,6 +103,7 @@
                             $('.unpublish-event-btn-container', element).show();
                             self.published_store.add(self.unpublished_store.delete(id));
                         }
+
                         var event            = self.published_store.get(id);
                         event.start_datetime = start_time;
                         event.end_datetime   = end_time;
@@ -113,7 +116,7 @@
                         $('.ui-resizable-s', element).attr('title', event.end_datetime.format('hh:mm a'));
 
                         event.location_id = self.published_store.currentLocation();
-                        self.api.publish(self.summit.id, event);
+                        self.api.publish(self.summit.id, event, is_published_event);
                     }
                 });
 
@@ -255,6 +258,9 @@
                     element.resizable( "option", "maxHeight", null );
                     var original_h = ui.originalSize.height;
                     console.log('start original_h '+original_h);
+
+                    $(this).attr('prev-height',$(this).css('height'));
+                    $(this).attr('prev-pos-top',$(this).position().top);
                 },
                 stop: function( e, ui ) {
                     var element = $(ui.element);
@@ -263,7 +269,7 @@
                     $('.ui-resizable-n', element).attr('title', event.start_datetime.format('hh:mm a'));
                     $('.ui-resizable-s', element).attr('title', event.end_datetime.format('hh:mm a'));
                     event.location_id = self.published_store.currentLocation();
-                    self.api.publish(self.summit.id, event);
+                    self.api.publish(self.summit.id, event, true);
                     console.log('stop');
                 }
             });
@@ -274,7 +280,11 @@
                 containment: "document",
                 cursor: "move",
                 helper: "clone",
-                opacity: 0.5
+                opacity: 0.5,
+                start: function(){
+                    $(this).attr('prev-height',$(this).css('height'));
+                    $(this).attr('prev-pos-top',$(this).position().top);
+                }
             });
         }
 

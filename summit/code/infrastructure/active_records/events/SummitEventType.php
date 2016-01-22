@@ -17,8 +17,9 @@ class SummitEventType extends DataObject implements ISummitEventType
 
     private static $db = array
     (
-        'Type'  => 'Text',
-        'Color' => 'Text'
+        'Type'          => 'Text',
+        'Color'         => 'Text',
+        'BlackoutTimes' => 'Boolean'
     );
 
     private static $has_many = array
@@ -60,6 +61,14 @@ class SummitEventType extends DataObject implements ISummitEventType
     }
 
     /**
+     * @return integer
+     */
+    public function getBlackoutTimes()
+    {
+        return $this->getField('BlackoutTimes');
+    }
+
+    /**
      * @return string
      */
     public function getColor()
@@ -89,6 +98,7 @@ class SummitEventType extends DataObject implements ISummitEventType
             $type_txt->setReadonly(true);
         }
         $fields->add(new ColorField("Color","Color"));
+        $fields->add(new CheckboxField("BlackoutTimes","Blackout Times"));
         $fields->add(new HiddenField('SummitID','SummitID'));
         return $fields;
     }

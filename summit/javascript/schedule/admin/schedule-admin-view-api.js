@@ -46,18 +46,20 @@ schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, sour
     });
 }
 
-schedule_admin_view_api.publish = function (summit_id, event)
+schedule_admin_view_api.publish = function (summit_id, event, is_published_event)
 {
     var url              = api_base_url.replace('@SUMMIT_ID', summit_id)+'/events/'+event.id+'/publish';
     var clone            = jQuery.extend(true, {}, event);
+
     clone.start_datetime = clone.start_datetime.format('YYYY-MM-DD HH:mm:ss');
     clone.end_datetime   = clone.end_datetime.format('YYYY-MM-DD HH:mm:ss');
     console.log(' start_datetime ' +clone.start_datetime+' end_datetime '+clone.end_datetime);
+
     $.ajax({
         url : url,
         type: 'PUT',
         data: JSON.stringify(clone),
-        contentType: "application/json; charset=utf-8",
+        contentType: "application/json; charset=utf-8"
     })
     .done(function() {
     })
@@ -65,8 +67,27 @@ schedule_admin_view_api.publish = function (summit_id, event)
         var responseCode = jqXHR.status;
         if(responseCode == 412) {
             var response = $.parseJSON(jqXHR.responseText);
-            $('#event_'+event.id).remove();
-            swal("Validation error", response.messages[0], "warning")
+
+            swal({
+                title: 'Validation error',
+                text: response.messages[0],
+                type: 'warning'
+            },
+                function(){
+                    if (is_published_event) {
+                        $('#event_'+event.id).animate({
+                            top: $('#event_'+event.id).attr('prev-pos-top'),
+                            height: $('#event_'+event.id).attr('prev-height')
+                        });
+                    } else {
+                        $('.unpublished-events-refresh').click();
+                        $('#event_'+event.id).remove();
+                    }
+
+                    return false;
+                }
+            );
+
             return;
         }
         alert( "There was an error on publishing process, please contact your administrator." );

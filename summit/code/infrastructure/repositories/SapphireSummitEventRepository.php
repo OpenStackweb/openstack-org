@@ -121,4 +121,23 @@ SQL;
         $data      = $list->limit($page_size, $offset);
         return array($page, $page_size, $count, $data);
     }
+
+    /**
+     * @param string $start_date
+     * @param string $end_date
+     */
+    public function getPublishedByTimeframe($summit_id,$start_date, $end_date)
+    {
+        $summit     = Summit::get()->byID($summit_id);
+        if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
+
+        $start_date = $summit->convertDateFromTimeZone2UTC($start_date);
+        $end_date = $summit->convertDateFromTimeZone2UTC($end_date);
+
+        $list      = SummitEvent::get()
+            ->filter( array('SummitID' => $summit_id, 'Published' => 1 ))
+            ->where("StartDate < '{$end_date}' AND EndDate > '{$start_date}'");
+
+        return $list->toArray();
+    }
 }

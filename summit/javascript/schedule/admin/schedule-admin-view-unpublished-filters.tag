@@ -110,7 +110,7 @@
                     if (source) {
                         self.doFilter(source, track_list_id,search_term,order);
                     } else {
-                        alert("Please select a source to search on.");
+                        swal("Select a Source", "Please select a source to search on.", "warning");
                     }
                 });
 
