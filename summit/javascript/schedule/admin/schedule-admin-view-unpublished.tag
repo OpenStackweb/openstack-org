@@ -1,12 +1,14 @@
 <schedule-admin-view-unpublished>
-
-    <ul class="list-unstyled unpublished-events-list">
-        <li each="{ key, e in store.all() }">
-            <schedule-admin-view-unpublished-event data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-unpublished-event>
-        </li>
-    </ul>
-    <div>
-        <ul id="unpublished-events-pager"></ul>
+    <div if={ Object.keys(store.all()).length === 0 } class="no_matches">Sorry, found no matches for your search.</div>
+    <div if={ Object.keys(store.all()).length > 0 } >
+        <ul class="list-unstyled unpublished-events-list">
+            <li each="{ key, e in store.all() }">
+                <schedule-admin-view-unpublished-event data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-unpublished-event>
+            </li>
+        </ul>
+        <div>
+            <ul id="unpublished-events-pager"></ul>
+        </div>
     </div>
     <script>
 
@@ -43,7 +45,7 @@
                 }
             }
 
-            if (self.store.all().length){
+            if (Object.keys(self.store.all()).length){
                 $('#unpublished-events-pager').bootstrapPaginator(options);
             }
 

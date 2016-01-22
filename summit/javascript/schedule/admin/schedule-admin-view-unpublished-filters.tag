@@ -3,10 +3,10 @@
         <div class="col-md-6">
             <div>
                 <label for="select_unpublished_events_source">Source</label>
-                <select id="select_unpublished_events_source" name="select_unpublished_events_source" style="width: 70%">
+                <select id="select_unpublished_events_source" name="select_unpublished_events_source" style="width: 70%" value="presentations">
                     <option value=''>-- Select An Event Source --</option>
                     <option value='tracks'>Tracks List</option>
-                    <option value='presentations'>Presentations</option>
+                    <option value='presentations' selected>Presentations</option>
                     <option value='events'>Summit Events</option>
                 </select>
             </div>
@@ -119,6 +119,8 @@
                         $('.btn-global-search').click();
                     }
                 });
+
+                self.doFilter('presentations', '','','Title');
             });
         });
 
