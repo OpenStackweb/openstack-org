@@ -99,7 +99,8 @@ file { '/var/www/local.openstack.org/_ss_environment.php':
 }
 
 class { 'nginx':
-  require => [
+  sendfile => false,
+  require   => [
     Package[$php5_packages] ,
     Service['mysql'],
     File['/var/www/local.openstack.org/_ss_environment.php'],
