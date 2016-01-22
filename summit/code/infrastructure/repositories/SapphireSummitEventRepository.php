@@ -123,10 +123,12 @@ SQL;
     }
 
     /**
-     * @param string $start_date
-     * @param string $end_date
+     * @param int $summit_id
+     * @param $start_date
+     * @param $end_date
+     * @return array
      */
-    public function getPublishedByTimeframe($summit_id,$start_date, $end_date)
+    public function getPublishedByTimeFrame($summit_id,$start_date, $end_date)
     {
         $summit     = Summit::get()->byID($summit_id);
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');

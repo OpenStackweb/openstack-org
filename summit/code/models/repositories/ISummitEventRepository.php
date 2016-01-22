@@ -29,4 +29,12 @@ interface ISummitEventRepository extends IEntityRepository
      * @return array
      */
     public function getUnpublishedBySummit($summit_id, $search_term, $page = 1, $page_size = 10, $order = null);
+
+    /**
+     * @param int $summit_id
+     * @param $start_date
+     * @param $end_date
+     * @return array
+     */
+    public function getPublishedByTimeFrame($summit_id,$start_date, $end_date);
 }
