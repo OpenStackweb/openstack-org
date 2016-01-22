@@ -64,13 +64,17 @@ class NewDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
         $current_template = SurveyTemplate::get()->byID($survey_id);
 
         $templates = SurveyTemplate::get()->exclude('ID', $survey_id);
-        $allowed_templates = new ArrayList();
+        $allowed_templates = array();
         foreach($templates as $template) {
             if($template->ClassName !== $current_template->ClassName) continue;
-            $allowed_templates->add($template);
+            $text = $template->Title;
+            if($template instanceof EntitySurveyTemplate)
+                $text = $template->Parent()->Title.' - '.$text;
+            $allowed_templates[$template->ID] = $text;
         }
 
-        $fields->addFieldToTab('Root.Main',  $ddl_template = new DropdownField('OriginSurveyID', 'Origin Survey', $allowed_templates->map('ID', 'Title')));
+
+        $fields->addFieldToTab('Root.Main',  $ddl_template = new DropdownField('OriginSurveyID', 'Origin Survey', $allowed_templates));
         $ddl_template->setEmptyString('-- select a survey template --');
         $fields->addFieldToTab('Root.Main',  $ddl_fields = new DropdownField('OriginFieldID'  , 'Origin Field'));
         if(intval($this->OriginFieldID) > 0)
