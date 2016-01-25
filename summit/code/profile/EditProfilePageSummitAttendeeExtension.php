@@ -80,9 +80,11 @@ class EditProfilePageSummitAttendeeExtension extends Extension
         if ($current_member = Member::currentUser())
         {
             $attendee = $current_member->getCurrentSummitAttendee();
-            if($attendee)
+            if($attendee) {
+                $attendee->SharedContactInfo = intval($data['SharedContactInfo']);
+                $attendee->write();
                 return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
-
+            }
             if(!isset($data['SelectedAttendee']))
             {
                 // if we dont selected an attendee ...

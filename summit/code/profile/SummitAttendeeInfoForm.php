@@ -81,16 +81,15 @@ final class SummitAttendeeInfoForm extends BootstrapForm
     {
         parent::loadDataFrom($data, $mergeStrategy, $fieldList);
 
-
         if($data && $data instanceof SummitAttendee && $data->ID > 0)
         {
             $ticket = $data->Tickets()->first();
-
+            $chk = $this->fields->fieldByName('SharedContactInfo');
             $this->fields->insertAfter($t1 = new TextField('TicketBoughtDate', 'Ticket Bought Date', $ticket->TicketBoughtDate),'ExternalOrderId');
             $t2 = $this->fields->fieldByName('ExternalOrderId');
             $t2->setValue($ticket->ExternalOrderId);
             $this->fields->insertAfter($t3 = new TextField('TicketType', 'Ticket Type', $ticket->TicketType()->Name), 'TicketBoughtDate');
-
+            $chk->setValue(intval($data->SharedContactInfo) === 1);
             $t1->setReadonly(true);
             $t2->setReadonly(true);
             $t3->setReadonly(true);

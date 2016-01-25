@@ -288,6 +288,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
                 $member,
                 $summit
             );
+            $attendee->setShareContactInfo($shared_contact_info);
 
             $attendee->addTicket($ticket);
             $attendee_repository->add($attendee);

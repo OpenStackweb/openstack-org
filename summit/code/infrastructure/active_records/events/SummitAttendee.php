@@ -291,4 +291,14 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Tickets', $query)->add($ticket);
         return $this;
     }
+
+    /**
+     * @param bool $must_share
+     * @return $this
+     */
+    public function setShareContactInfo($must_share)
+    {
+        $this->setField('SharedContactInfo', $must_share);
+        return $this;
+    }
 }

@@ -80,4 +80,10 @@ interface ISummitAttendee extends IEntity
 
     public function registerCheckInOnEvent(ISummitEvent $summit_event);
 
+    /**
+     * @param bool $must_share
+     * @return $this
+     */
+    public function setShareContactInfo($must_share);
+
 }
