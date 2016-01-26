@@ -79,16 +79,26 @@ class Presentation extends SummitEvent implements IPresentation
 
     private static $summary_fields = array
     (
-        'Created',
-        'Title',
-        'Description',
-        'Level',
-        'SelectionStatus',
+        'Created'          => 'Created',
+        'Title'            => 'Event Title',
+        'SummitTypesLabel' => 'Summit Types',
+        'Level'            => 'Level',
+        'SelectionStatus'  => 'Status',
     );
 
-    /* before saving we check that the EventType is Presentation, if that type does not exist for the summit we create it */
     public function onBeforeWrite() {
-        parent::onBeforeWrite();
+       parent::onBeforeWrite();
+       $this->assignEventType();
+    }
+
+    private function assignEventType()
+    {
+        $summit_id = intval($this->SummitID);
+        if($summit_id > 0 && intval($this->TypeID) === 0) {
+            Summit::seedBasicEventTypes($summit_id);
+            $event_type   = SummitEventType::get()->filter(array('Type'=>'Presentation', 'SummitID'=>$summit_id))->first();
+            $this->TypeID = $event_type->ID;
+        }
     }
 
     public function getTypeName()
@@ -627,12 +637,7 @@ class Presentation extends SummitEvent implements IPresentation
 
     protected function validate()
     {
-        $summit_id = intval($this->SummitID);
-        if($summit_id > 0) {
-            Summit::seedBasicEventTypes($summit_id);
-            $event_type   = SummitEventType::get()->filter(array('Type'=>'Presentation', 'SummitID'=>$summit_id))->first();
-            $this->TypeID = $event_type->ID;
-        }
+        $this->assignEventType();
 
         $valid = parent::validate();
 

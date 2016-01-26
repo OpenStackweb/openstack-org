@@ -58,12 +58,21 @@ class SummitEvent extends DataObject implements ISummitEvent
     private static $summary_fields = array
     (
         'Title'                  => 'Event Title',
-        'Description'            => 'Description',
+        'SummitTypesLabel'       => 'Summit Types',
         'StartDate'              => 'Event Start Date',
         'EndDate'                => 'Event End Date',
         'Location.Name'          => 'Location',
         'Type.Type'              => 'Event Type',
     );
+
+    public function SummitTypesLabel()
+    {
+        $label =  '';
+        foreach($this->AllowedSummitTypes() as $st)
+            $label .= $st->Title. ' ';
+        if(empty($label)) $label = 'NOT SET';
+        return $label;
+    }
 
     private static $searchable_fields = array
     (

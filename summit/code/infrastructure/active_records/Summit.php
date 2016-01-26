@@ -17,7 +17,6 @@ final class Summit extends DataObject implements ISummit
 
     private static $db = array
     (
-        'Name'                        => 'Varchar(255)',
         'Title'                       => 'Varchar',
         'SummitBeginDate'             => 'SS_Datetime',
         'SummitEndDate'               => 'SS_Datetime',
@@ -37,8 +36,24 @@ final class Summit extends DataObject implements ISummit
         // https://www.eventbrite.com
         'ExternalEventId'             => 'Text',
         'TimeZone'                    => 'Text',
+        'StartShowingVenuesDate'      => 'SS_Datetime',
     );
 
+
+    public function setStartShowingVenuesDate($value)
+    {
+        if(!empty($value))
+        {
+            $value = $this->convertDateFromTimeZone2UTC($value);
+            $this->setField('StartShowingVenuesDate', $value);
+        }
+    }
+
+    public function getStartShowingVenuesDate()
+    {
+        $value = $this->getField('StartShowingVenuesDate');
+        return $this->convertDateFromUTC2TimeZone($value);
+    }
 
     public function setSummitBeginDate($value)
     {
@@ -682,6 +697,10 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main',$date = new DatetimeField('SummitEndDate', 'Summit End Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Main',$date = new DatetimeField('StartShowingVenuesDate', 'Start Showing Venues'));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
+
         $f->addFieldToTab('Root.Main',$date = new DatetimeField('SubmissionBeginDate', 'Submission Begin Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
@@ -744,18 +763,19 @@ final class Summit extends DataObject implements ISummit
             );
             $config->addComponent($multi_class_selector);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
-            $gridField = new GridField('Locations', 'Locations',
-                $this->Locations()->where("ClassName <> 'SummitVenueRoom' "), $config);
+            $gridField = new GridField('Locations', 'Locations', $this->Locations()->where("ClassName <> 'SummitVenueRoom' "), $config);
             $f->addFieldToTab('Root.Locations', $gridField);
 
             // types
 
             $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent(new GridFieldAddDefaultSummitTypes);
             $gridField = new GridField('Types', 'Types', $this->Types(), $config);
             $f->addFieldToTab('Root.Types', $gridField);
 
             // event types
             $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent(new GridFieldAddDefaultEventTypes);
             $gridField = new GridField('EventTypes', 'EventTypes', $this->EventTypes(), $config);
             $f->addFieldToTab('Root.EventTypes', $gridField);
 
@@ -781,6 +801,8 @@ final class Summit extends DataObject implements ISummit
             $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
+            $bulk_summit_types->setTitle('Set Summit Types');
             $gridField = new GridField('Events', 'Events', $this->Events()->filter('ClassName', 'SummitEvent'), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Events', $gridField);
@@ -799,9 +821,11 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
                 $presentations->add(new Presentation($row));
             }
 
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
+            $bulk_summit_types->setTitle('Set Summit Types');
             $config->removeComponentsByType('GridFieldAddNewButton');
             $gridField = new GridField('TrackChairs', 'TrackChairs Selection Lists', $presentations, $config);
             $gridField->setModelClass('Presentation');
@@ -854,6 +878,8 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
+            $bulk_summit_types->setTitle('Set Summit Types');
             $gridField = new GridField('Presentations', 'Presentations', $this->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Presentations', $gridField);
@@ -890,14 +916,24 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             return $valid->error('Time Zone is required!');
         }
 
-        $start_date = $this->SummitBeginDate;
-        $end_date   = $this->SummitEndDate;
+        $start_date                = $this->SummitBeginDate;
+        $end_date                  = $this->SummitEndDate;
+        $start_showing_venues_date = $this->StartShowingVenuesDate;
+
         if(!is_null($start_date) && !is_null($end_date))
         {
-            $start_date = new DateTime($start_date);
-            $end_date   = new DateTime($end_date);
+            $start_date                = new DateTime($start_date);
+            $end_date                  = new DateTime($end_date);
+            $start_showing_venues_date = new DateTime($start_showing_venues_date);
+
             if($start_date > $end_date)
                 return $valid->error('End Date must be greather than Start Date');
+
+            if(!is_null($start_showing_venues_date))
+            {
+                if(!($start_showing_venues_date > $start_date && $start_showing_venues_date < $end_date))
+                    return $valid->error('StartShowingVenuesDate should be greather than SummitBeginDate and lower than SummitEndDate!');
+            }
         }
 
         $start_date = $this->RegistrationBeginDate;
@@ -981,7 +1017,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $main_type->write();
         }
 
-        if(!SummitType::get()->filter(array('Title'=>'Design Summit', 'SummitID'=>$summit_id))->first()) {
+        if(!SummitType::get()->filter(array('Title'=>'Design Summit', 'SummitID' => $summit_id))->first()) {
             $design_type              = new SummitType();
             $design_type->Title       = 'Design Summit';
             $design_type->Description = 'This Schedule is specifically for developers and operators who contribute to the roadmap for the N release cycle. The Design Summit is not a classic track with speakers and presentations and its not the right place to get started or learn the basics of OpenStack. This schedule also Includes the Main Conference Sessions';
