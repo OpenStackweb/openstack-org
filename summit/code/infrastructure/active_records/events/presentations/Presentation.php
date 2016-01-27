@@ -219,7 +219,7 @@ class Presentation extends SummitEvent implements IPresentation
      * @return  boolean
      */
     public function canDelete($member = null) {
-        return $this->CreatorID == Member::currentUserID();
+        return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE") || $this->CreatorID == Member::currentUserID();
     }
 
 

@@ -39,13 +39,23 @@ class PresentationCategoryGroup extends DataObject
     (
         'Name'        => 'Name',
         'Color'       => 'Color',
-        'Description' => 'Description',
+        'CategoriesLabel' => 'Categories',
     );
 
     private static $searchable_fields = array
     (
         'Name'
     );
+
+    public function CategoriesLabel()
+    {
+        $label = array();
+        foreach($this->Categories() as $c)
+        {
+            array_push($label, $c->Title);
+        }
+        return count($label) == 0 ? 'NONE': implode(',', $label);
+    }
 
     /**
      * @return int

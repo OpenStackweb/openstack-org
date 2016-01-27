@@ -168,7 +168,6 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', 
     }
     if($item instanceof SummitType && $list->getJoinTable() === 'SummitEvent_AllowedSummitTypes')
     {
-        // removed summit type from event
         $event_id     = intval($list->getForeignID());
         $summit_event = SummitEvent::get()->byID($event_id);
         if(is_null($summit_event)) return;
@@ -180,6 +179,21 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', 
         $event->OwnerID  = Member::currentUserID();
         $event->SummitID = $summit_event->SummitID;
         $event->Metadata = json_encode( array('event_id' => $event_id ));
+        $event->write();
+    }
+    if($item instanceof PresentationCategory && $list->getJoinTable() === 'PresentationCategoryGroup_Categories')
+    {
+        $group_id  = intval($list->getForeignID());
+        $group     = PresentationCategoryGroup::get()->byID($group_id);
+        if(is_null($group)) return;
+        $track_id  = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'TrackFromTrackGroup';
+        $event->EntityID = $track_id;
+        $event->Type     = 'INSERT';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $group->SummitID;
+        $event->Metadata = json_encode( array('group_id' => $group_id ));
         $event->write();
     }
 });
@@ -251,6 +265,21 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
         $event->OwnerID  = Member::currentUserID();
         $event->SummitID = $summit_event->SummitID;
         $event->Metadata = json_encode( array('event_id' => $event_id ));
+        $event->write();
+    }
+    if($item instanceof PresentationCategory && $list->getJoinTable() === 'PresentationCategoryGroup_Categories')
+    {
+        $group_id  = intval($list->getForeignID());
+        $group     = PresentationCategoryGroup::get()->byID($group_id);
+        if(is_null($group)) return;
+        $track_id  = $item->ID;
+        $event = new SummitEntityEvent();
+        $event->EntityClassName = 'TrackFromTrackGroup';
+        $event->EntityID = $track_id;
+        $event->Type     = 'DELETE';
+        $event->OwnerID  = Member::currentUserID();
+        $event->SummitID = $group->SummitID;
+        $event->Metadata = json_encode( array('group_id' => $group_id ));
         $event->write();
     }
 });
