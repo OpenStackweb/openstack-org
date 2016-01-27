@@ -56,7 +56,11 @@
 /* SCHEDULE FILTERS */
 
 .unpublished-container label {
-    width: 85px;
+    width: 28%;
+}
+
+.published-container label {
+    width: 18%;
 }
 
 .unpublished-container .refresh_button_div {

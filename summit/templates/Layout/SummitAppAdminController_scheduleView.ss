@@ -105,6 +105,7 @@
                         }
                     });
                 });
+
         </script>
 
         <div class="page-header">
@@ -112,9 +113,10 @@
         </div>
 
         <div class="row" style="width:100%">
-            <div class="col-md-6">
+            <div class="col-md-6 published-container">
                 <schedule-admin-view-published-filters summit="{ summit }"></schedule-admin-view-published-filters>
                 <schedule-admin-view-published start_time="06:00" end_time="23:45" interval="15" summit="{ summit }" minute_pixels="3" slot_width="100%"></schedule-admin-view-published>
+                <schedule-admin-view-published-results summit="{ summit }"></schedule-admin-view-published-results>
             </div>
             <div class="col-md-6 unpublished-container">
                 <schedule-admin-view-unpublished-filters summit="{ summit }"></schedule-admin-view-unpublished-filters>

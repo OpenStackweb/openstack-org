@@ -4,12 +4,14 @@ var dispatcher = require('./schedule-admin-view-dispatcher.js');
 function publishedEventsStore(){
     riot.observable(this);
 
-    this.LOAD_STORE = 'PUBLISHED_EVENTS_STORE_LOADED';
+    this.LOAD_STORE   = 'PUBLISHED_EVENTS_STORE_LOADED';
+    this.LOAD_RESULTS = 'PUBLISHED_EVENTS_RESULTS_LOADED';
 
-    this._published_events = {};
-    this._summit_id        = null;
-    this._location_id      = null;
-    this._day              = null;
+    this._published_events  = {};
+    this._published_results = {};
+    this._summit_id         = null;
+    this._location_id       = null;
+    this._day               = null;
 
     this.currentLocation = function(){
         return this._location_id;
@@ -26,6 +28,10 @@ function publishedEventsStore(){
 
     this.all = function(){
         return this._published_events;
+    }
+
+    this.results = function(){
+        return this._published_results;
     }
 
     this.add = function(event)
@@ -55,6 +61,16 @@ function publishedEventsStore(){
             e.end_datetime   = moment(e.end_datetime, 'YYYY-MM-DD HH:mm:ss');
         }
     }
+
+    this._load_results = function(events) {
+        this.clear();
+        // update model
+
+        for(var e of events) {
+            this._published_results[e.id] = e;
+        }
+    }
+
     var self = this;
 
     api.on(api.RETRIEVED_PUBLISHED_EVENTS,function(response) {
@@ -65,6 +81,14 @@ function publishedEventsStore(){
         self._day         = response.day;
         self._load(response.events);
         self.trigger(self.LOAD_STORE);
+    });
+
+    api.on(api.RETRIEVED_PUBLISHED_SEARCH,function(response) {
+        console.log(api.RETRIEVED_PUBLISHED_SEARCH);
+
+        self._summit_id   = response.summit_id;
+        self._load_results(response.events);
+        self.trigger(self.LOAD_RESULTS);
     });
 }
 

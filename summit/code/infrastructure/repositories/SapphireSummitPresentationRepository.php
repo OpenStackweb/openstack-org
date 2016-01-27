@@ -30,14 +30,23 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummit($summit_id, $search_term = null, $page = 1, $page_size = 10, $order = null)
+    public function getUnpublishedBySummit($summit_id, $event_type = null, $search_term = null, $page = 1, $page_size = 10, $order = null)
     {
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
-        $where_clause = " Title IS NOT NULL AND Title <>'' ";
-        if ($search_term) $where_clause .= "AND Title LIKE '%{$search_term}%' ";
+        $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
+        if ($search_term) {
+            $where_clause .= "AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
+            $where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
+            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";
+        }
 
-        $list      = Presentation::get()->filter( array('SummitID' => $summit_id, 'Published' => 0))->where($where_clause)->sort("TRIM({$order})");
+        $list      = Presentation::get()
+                        ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
+                        ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
+                        ->filter( array('SummitID' => $summit_id, 'Published' => 0))
+                        ->where($where_clause)
+                        ->sort("TRIM({$order})");
         $count     = intval($list->count());
         $offset    = ($page - 1 ) * $page_size;
         $data      = $list->limit($page_size, $offset);
@@ -61,13 +70,19 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             $track_filter = " AND SummitSelectedPresentationList.ID = {$track_list} ";
         }
 
-        $where_clause = " Title IS NOT NULL AND Title <>'' ";
-        if ($search_term) $where_clause .= "AND Title LIKE '%{$search_term}%' ";
+        $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
+        if ($search_term) {
+            $where_clause .= "AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
+            $where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
+            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";
+        }
 
         $list = Presentation::get()->filter($filter)->where($where_clause)
+            ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
+            ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
             ->innerJoin('SummitSelectedPresentation', 'SummitSelectedPresentation.PresentationID = Presentation.ID')
-            ->innerJoin('SummitSelectedPresentationList', "SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') {$track_filter}")
-            ->sort($order);
+                ->innerJoin('SummitSelectedPresentationList', "SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') {$track_filter}")
+                ->sort("TRIM({$order})");
 
         $count     = intval($list->count());
         $offset    = ($page - 1 ) * $page_size;

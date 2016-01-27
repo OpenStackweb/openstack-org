@@ -27,6 +27,7 @@ class SummitAppAdminController extends Page_Controller
         Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
     }
 
     private static $url_segment = 'summit-admin';

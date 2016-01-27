@@ -45,7 +45,7 @@ body
     font-family: Montserrat, Sans-serif;
 }
 
-.btn-global-search, .btn-global-search-clear
+#search_unpublished.btn-global-search, .btn-global-search-clear
 {
     height: 38px;
 }

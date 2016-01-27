@@ -1,6 +1,6 @@
 <schedule-admin-view-published>
 
-            <div class="row">
+            <div class="row" id="schedule_container">
                 <div class="col-md-12">
                     <table id="day_schedule" class='unselectable'>
                     <tbody>
@@ -144,6 +144,7 @@
                 $(".ui-resizable").resizable( "option", "maxWidth", self.slot_width );
                 $(".ui-resizable").resizable( "option", "minWidth", self.slot_width );
             });
+
         });
 
         createResizable(selector) {
@@ -311,6 +312,23 @@
             });
 
             $('body').ajax_loader('stop');
+
+            // scroll to event in url
+            var hash = $(window).url_fragment('getParams');
+
+            if(hash){
+                for(var key in hash) {
+                    var value = hash[key];
+                    if (key == 'event') {
+                        $('body').animate({
+                            scrollTop: ($("#event_"+value).offset().top - 100)
+                        }, 2000, function() {
+                            $("#event_"+value).effect("highlight", {}, 2000);
+                        });
+                    }
+                }
+            }
+
         });
 
     </script>

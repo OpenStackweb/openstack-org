@@ -3,6 +3,7 @@ var api_base_url                                     = 'api/v1/summits/@SUMMIT_I
 var dispatcher                                       = require('./schedule-admin-view-dispatcher.js');
 schedule_admin_view_api.RETRIEVED_PUBLISHED_EVENTS   = 'RETRIEVED_PUBLISHED_EVENTS';
 schedule_admin_view_api.RETRIEVED_UNPUBLISHED_EVENTS = 'RETRIEVED_UNPUBLISHED_EVENTS';
+schedule_admin_view_api.RETRIEVED_PUBLISHED_SEARCH   = 'RETRIEVED_PUBLISHED_SEARCH';
 
 schedule_admin_view_api.getScheduleByDayAndLocation = function (summit_id, day, location_id)
 {
@@ -16,13 +17,15 @@ schedule_admin_view_api.getScheduleByDayAndLocation = function (summit_id, day, 
     });
 }
 
-schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, source, track_list_id, search_term, order, page, page_size)
+schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, source, second_source, search_term, order, page, page_size)
 {
     var url    = api_base_url.replace('@SUMMIT_ID', summit_id)+'/events/unpublished/'+source;
     var params = { 'expand' : 'speakers'};
 
-    if(source === 'tracks' && track_list_id !== '' && typeof track_list_id !== 'undefined' )
-        params['track_list_id'] = track_list_id;
+    if(source === 'tracks' && second_source !== '' && typeof second_source !== 'undefined' )
+        params['track_list_id'] = second_source;
+    if(source === 'events' && second_source !== '' && typeof second_source !== 'undefined' )
+        params['event_type_id'] = second_source;
     if(page !== '' && typeof page !== 'undefined')
         params['page'] = page;
     if(page_size !== '' && typeof page_size !== 'undefined')
@@ -43,6 +46,15 @@ schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, sour
 
     return $.get(url,function (data) {
         schedule_admin_view_api.trigger(schedule_admin_view_api.RETRIEVED_UNPUBLISHED_EVENTS, data);
+    });
+}
+
+schedule_admin_view_api.getScheduleSearchResults = function (summit_id, term)
+{
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/schedule/search?term='+term;
+    return $.get(url,function (data) {
+        data.summit_id   = summit_id;
+        schedule_admin_view_api.trigger(schedule_admin_view_api.RETRIEVED_PUBLISHED_SEARCH, data);
     });
 }
 
@@ -112,6 +124,10 @@ schedule_admin_view_api.unpublish = function (summit_id, event_id){
 
 dispatcher.on(dispatcher.PUBLISHED_EVENTS_FILTER_CHANGE, function(summit_id ,day , location_id){
     schedule_admin_view_api.getScheduleByDayAndLocation(summit_id ,day , location_id);
+});
+
+dispatcher.on(dispatcher.PUBLISHED_EVENTS_SEARCH, function(summit_id ,term){
+    schedule_admin_view_api.getScheduleSearchResults(summit_id ,term);
 });
 
 dispatcher.on(dispatcher.UNPUBLISHED_EVENT, function(summit_id, event_id){
