@@ -195,4 +195,9 @@ interface ISummit extends IEntity
      */
     public function belongsToDuration($date);
 
+    /**
+     * @return bool
+     */
+    public function ShouldShowVenues();
+
 }

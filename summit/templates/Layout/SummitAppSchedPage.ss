@@ -16,7 +16,8 @@
             tracks : {},
             category_groups: {},
             presentation_levels: {},
-            current_user: null
+            current_user: null,
+            should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
         };
 
         <% if CurrentMember && CurrentMember.isAttendee($Summit.ID) %>

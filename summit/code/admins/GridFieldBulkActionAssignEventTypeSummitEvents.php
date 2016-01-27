@@ -17,7 +17,13 @@ class GridFieldBulkActionAssignEventTypeSummitEvents extends GridFieldBulkAction
 
     protected function processRecordIds(array $ids, $entity_id)
     {
-        // TODO: Implement processRecordIds() method.
+        foreach($ids as $id)
+        {
+            $event = SummitEvent::get()->byID($id);
+            if(is_null($event)) continue;
+            $event->TypeID = $entity_id;
+            $event->write();
+        }
     }
 
     protected function getEntities()

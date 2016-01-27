@@ -931,8 +931,8 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
 
             if(!is_null($start_showing_venues_date))
             {
-                if(!($start_showing_venues_date > $start_date && $start_showing_venues_date < $end_date))
-                    return $valid->error('StartShowingVenuesDate should be greather than SummitBeginDate and lower than SummitEndDate!');
+                if(!($start_showing_venues_date <= $start_date))
+                    return $valid->error('StartShowingVenuesDate should be lower than SummitBeginDate');
             }
         }
 
@@ -1281,9 +1281,9 @@ SQL;
 
 
 
-        $begin = new DateTime($this->getBeginDate());
-        $end   = new DateTime($this->getEndDate());
-        $date  = $date->setTime(0, 0, 0);
+        $begin  = new DateTime($this->getBeginDate());
+        $end    = new DateTime($this->getEndDate());
+        $date   = $date->setTime(0, 0, 0);
         $begin  = $begin->setTime(0, 0, 0);
         $end    = $end->setTime(0, 0, 0);
 
@@ -1297,5 +1297,15 @@ SQL;
             ->innerJoin('PresentationCategory', 'PresentationCategory.ID = SummitSelectedPresentationList.CategoryID')
             ->where('PresentationCategory.SummitID = '.$this->ID)
             ->sort('SummitSelectedPresentationList.Name', 'ASC');
+    }
+
+    /**
+     * @return bool
+     */
+    public function ShouldShowVenues()
+    {
+        $start_showing_venue_date = $this->getField('StartShowingVenuesDate');
+        $now                      = new \DateTime('now', new DateTimeZone('UTC'));
+        return $start_showing_venue_date <= $now;
     }
 }

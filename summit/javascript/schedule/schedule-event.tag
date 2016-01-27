@@ -8,7 +8,7 @@
                         <div class="col-xs-12 col-md-2 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>&nbsp;<span>{ start_time }</span>&nbsp;/&nbsp;<span>{ end_time }</span>
                         </div>
-                        <div class="col-xs-12 col-md-8 col-location"><i class="fa fa-map-marker icon-map"></i>&nbsp;<span>{ locationName(location_id) }</span></div>
+                        <div class="col-xs-12 col-md-8 col-location"><i if={ summit.should_show_venues } class="fa fa-map-marker icon-map"></i>&nbsp;<span if={ summit.should_show_venues } >{ locationName(location_id) }</span></div>
                         <div class="col-xs-12 col-md-2 my-schedule-container" if={ parent.summit.current_user !== null } >
                             <i if={ !own } class="fa fa-plus-circle icon-foreign-event icon-event-action" title="add to my schedule" onclick={ addToMySchedule } ></i>
                             <i if={ own } class="fa fa-check-circle icon-own-event icon-event-action" title="remove from my schedule" onclick={ removeFromMySchedule } ></i>

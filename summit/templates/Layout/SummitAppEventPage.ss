@@ -52,10 +52,12 @@
                 <div class="info_item_icon"><i class="fa fa-2x fa-clock-o icon-clock"></i></div>
                 <div class="info_item_text">$Event.DateNice()</div>
             </div>
+            <% if Event.Summit.ShouldShowVenues %>
             <div class="info_item">
                 <div class="info_item_icon"><i class="fa fa-2x fa-map-marker icon-map"></i></div>
                 <div class="info_item_text">$Event.LocationNameNice()</div>
             </div>
+            <% end_if %>
             <% if $Event.isPresentation %>
             <div class="info_item">
                 <div class="info_item_icon"><i class="fa fa-2x fa-signal icon-level"></i></div>
