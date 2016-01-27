@@ -31,7 +31,17 @@
 
         this.on('mount', function(){
             var filter_day = $(window).url_fragment('getParam','day');
-            if(filter_day === null) filter_day = Object.keys(self.summit.dates)[0];
+            if(filter_day === null){
+                var now    = new Date();
+                var year   = now.getUTCFullYear();
+                var month  = self.pad(now.getUTCMonth()+1,2);
+                var day    = self.pad(now.getUTCDate(),2);
+                filter_day = year+'-'+month+'-'+day;
+                console.log('current date key '+filter_day);
+                if(typeof(self.summit.dates[filter_day]) === 'undefined'){
+                    filter_day = Object.keys(self.summit.dates)[0];
+                }
+            }
             self.setSelectedDay(self.summit.dates[filter_day]);
         });
 
@@ -54,5 +64,10 @@
             self.schedule_api.getEventByDay(self.summit.id, day.date);
         }
 
+        pad(num, size) {
+            var s = num+"";
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
     </script>
 </schedule-grid-nav>
