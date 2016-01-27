@@ -33,13 +33,13 @@
                 <a href="http://docs.openstack.org/">Online Docs</a>
             </li>
             <li>
-                <a href="http://docs.openstack.org/">Operations Guide</a>
+                <a href="http://docs.openstack.org/ops/">Operations Guide</a>
             </li>
             <li>
                 <a href="http://docs.openstack.org/sec">Security Guide</a>
             </li>
             <li>
-                <a href="http://docs.openstack.org/">Getting Started</a>
+                <a href="http://www.openstack.org/software/start/">Getting Started</a>
             </li>
         </ul>
         <div class="add-your-course">
