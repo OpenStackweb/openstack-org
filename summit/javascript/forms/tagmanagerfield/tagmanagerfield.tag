@@ -47,6 +47,7 @@ require('./clicktag.tag')
         <clicktag label="Glance"></clicktag>
         <clicktag label="Heat"></clicktag>
         <clicktag label="Horizon"></clicktag>
+        <clicktag label="Infra"></clicktag>
         <clicktag label="Ironic"></clicktag>
         <clicktag label="Keystone"></clicktag>
         <clicktag label="Kolla"></clicktag>
