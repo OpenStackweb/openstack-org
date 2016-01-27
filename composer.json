@@ -18,7 +18,7 @@
     "silverstripe-australia/gridfieldextensions": "1.0.3",
     "unclecheese/display-logic": "1.2.1",
     "unclecheese/zen-fields": "1.0.*",
-    "unclecheese/betterbuttons": "1.2.11",
+    "unclecheese/betterbuttons": "^1.3",
     "silverstripe/tagfield": "dev-master",
     "unclecheese/silverstripe-permamail": "1.1.*",
     "unclecheese/bootstrap-forms": "1.1.*",
@@ -26,7 +26,8 @@
     "unclecheese/bootstrap-tagfield": "dev-master",
     "guzzlehttp/guzzle": "5.3.0",
     "silverstripe/gridfieldajaxrefresh":"dev-master",
-    "parse/php-sdk" : "1.1.*"
+    "parse/php-sdk" : "1.1.*",
+    "fzaninotto/Faker": "^1.5"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",
