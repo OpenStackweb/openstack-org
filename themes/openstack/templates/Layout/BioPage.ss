@@ -8,31 +8,24 @@ $Content
 <% loop Children %>
 
 <hr/>
+
 <a name="{$ID}"></a>
-<div class="span-4">
-  <div class="photo">$Photo.SetWidth(100)</div>
-  <p>&nbsp;</p>
+<div class="row">
+    <div class="col-sm-2 staff-photo-wrapper">
+        <div class="photo">$Photo.SetWidth(100)</div>
+            <a class="staff-openstack" href="/community/members/profile/{$ID}"></a>
+    </div>
+    <div class="col-sm-10 staff-text-wrapper">
+        <h3>$FirstName $LastName</h3>
+        
+        <h5>Company</h5>
+        <div>$JobTitle &nbsp; - $Company &nbsp;</div>
+        <h5>Bio</h5>
+        <div>
+            <p dir="ltr"><span>$Bio &nbsp;</span></p>
+        </div>
+    </div>
 </div>
-
-
-<div class="span-20 last">
-
-  <h3>$FirstName $LastName</h3>
-  <% if Role %><h4 class="role">$Role</h4><% end_if %>
-
-  <div class="span-2"><strong>Job Title</strong></div>
-  <div class="span-18 last">$JobTitle &nbsp;</div>
-
-  <div class="span-2"><strong>Company</strong></div>
-  <div class="span-18 last">$Company &nbsp;</div>
-
-  <% if Bio %><div class="span-2"><strong>Bio</strong></div>
-  <div class="span-18 last">$Bio &nbsp;</div><% end_if %>
-
-</div>
-
-
-<div class="span-24 last"><p></p></div>
 
 
 <% end_loop %>
