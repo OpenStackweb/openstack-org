@@ -460,7 +460,10 @@ final class Summit extends DataObject implements ISummit
         {
             $query->addAndCondition(QueryCriteria::equal('LocationID', intval($location)));
         }
-        $query->addOrder(QueryOrder::asc('StartDate'));
+        $query
+            ->addOrder(QueryOrder::asc('StartDate'))
+            ->addOrder(QueryOrder::asc('EndDate'))
+            ->addOrder(QueryOrder::asc('Title'));
         return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',$query)->toArray());
     }
 
