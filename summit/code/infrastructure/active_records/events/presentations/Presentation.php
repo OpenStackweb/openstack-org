@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Class Presentation
+ */
 class Presentation extends SummitEvent implements IPresentation
 {
 
@@ -28,6 +30,9 @@ class Presentation extends SummitEvent implements IPresentation
      * Defines a phase where a presentation has been submitted successfully
      */
     const PHASE_COMPLETE = 3;
+
+
+    const STATUS_RECEIVED = 'Received';
 
 
     private static $db = array
@@ -722,5 +727,57 @@ SQL;
         return
             (Member::currentUser() && Member::currentUser()->IsSpeaker($this)) ||
             Member::currentUserID() == $this->CreatorID;
+    }
+
+    /**
+     * @return mixed
+     * @throws EntityValidationException
+     */
+    public function markReceived()
+    {
+        $validation_result = $this->validate();
+
+        if(!$validation_result->valid())
+        {
+            throw new EntityValidationException($validation_result->messageList());
+        }
+
+        if(empty($this->Title)) {
+            throw new EntityValidationException('Title is Mandatory!');
+        }
+
+        if(empty($this->ShortDescription))
+        {
+            throw new EntityValidationException('ShortDescription is mandatory!');
+        }
+
+        if(empty($this->ProblemAddressed))
+        {
+            throw new EntityValidationException('ProblemAddressed is mandatory!');
+        }
+
+        if(empty($this->AttendeesExpectedLearnt))
+        {
+            throw new EntityValidationException('AttendeesExpectedLearnt is mandatory!');
+        }
+
+        if(empty($this->SelectionMotive))
+        {
+            throw new EntityValidationException('SelectionMotive is mandatory!');
+        }
+
+        if(empty($this->Level))
+        {
+            throw new EntityValidationException('Level is mandatory!');
+        }
+
+        $this->Status = self::STATUS_RECEIVED;
+
+        if ($this->Progress < self::PHASE_COMPLETE) {
+            $this->Progress = self::PHASE_COMPLETE;
+        }
+
+
+        return $this;
     }
 }

@@ -192,7 +192,7 @@ class PresentationPage_Controller extends SummitPage_Controller
             $presentation = Presentation::create();
             $presentation->SummitID  = $summit->ID;
             $presentation->CreatorID = Member::currentUserID();
-            $presentation->Write();
+            $presentation->write();
             return $this->redirect($presentation->EditLink());
         }
         else
@@ -642,49 +642,55 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function success(SS_HTTPRequest $r)
     {
-        $speakers = $this->presentation->Speakers()->exclude(array(
-            'MemberID' => $this->presentation->CreatorID
-        ));
+        try {
+            $speakers = $this->presentation->Speakers()->exclude(array(
+                'MemberID' => $this->presentation->CreatorID
+            ));
 
-        $this->presentation->Status = 'Received';
-        $this->presentation->write();
+            $this->presentation->markReceived()->write();
 
-        foreach ($speakers as $speaker) {
+            foreach ($speakers as $speaker) {
 
-            $e = Email::create()
-                ->setTo($speaker->getEmail())
-                ->setUserTemplate('presentation-speaker-notification')
+                $e = Email::create()
+                    ->setTo($speaker->getEmail())
+                    ->setUserTemplate('presentation-speaker-notification')
+                    ->populateTemplate(array(
+                        'RecipientMember' => $speaker->Member(),
+                        'Presentation' => $this->presentation,
+                        'Speaker' => $speaker,
+                        'Creator' => $this->presentation->Creator(),
+                        'EditLink' => Director::makeRelative($speaker->EditLink($this->presentation->ID)),
+                        'ReviewLink' => Director::makeRelative($speaker->ReviewLink($this->presentation->ID)),
+                        'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword',
+                        'Link' => Director::absoluteBaseURL() . Director::makeRelative($this->presentation->EditLink()),
+                    ))
+                    ->send();
+            }
+
+            // Email the creator
+            Email::create()
+                ->setTo($this->presentation->Creator()->Email)
+                ->setUserTemplate('presentation-creator-notification')
                 ->populateTemplate(array(
-                    'RecipientMember' => $speaker->Member(),
-                    'Presentation' => $this->presentation,
-                    'Speaker' => $speaker,
                     'Creator' => $this->presentation->Creator(),
-                    'EditLink' => Director::makeRelative($speaker->EditLink($this->presentation->ID)),
-                    'ReviewLink' => Director::makeRelative($speaker->ReviewLink($this->presentation->ID)),
-                    'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword',
+                    'Summit' => $this->presentation->Summit(),
                     'Link' => Director::absoluteBaseURL() . Director::makeRelative($this->presentation->EditLink()),
+                    'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword'
                 ))
                 ->send();
+
+            return $this->renderWith(array('PresentationPage_success', 'PresentationPage'), $this->parent);
         }
-
-        // Email the creator
-        Email::create()
-            ->setTo($this->presentation->Creator()->Email)
-            ->setUserTemplate('presentation-creator-notification')
-            ->populateTemplate(array(
-                'Creator' => $this->presentation->Creator(),
-                'Summit' => $this->presentation->Summit(),
-                'Link' => Director::absoluteBaseURL() . Director::makeRelative($this->presentation->EditLink()),
-                'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword'
-            ))
-            ->send();
-
-        if ($this->presentation->Progress < Presentation::PHASE_COMPLETE) {
-            $this->presentation->Progress = Presentation::PHASE_COMPLETE;
-            $this->presentation->write();
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::ERR);
+            Form::messageForForm('PresentationForm_PresentationForm', $ex1->getMessages(),'bad');
+            return Controller::curr()->redirect($this->presentation->EditLink());
         }
-
-        return $this->renderWith(array('PresentationPage_success', 'PresentationPage'), $this->parent);
+        catch(Exception $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->httpError(404);
+        }
     }
 
 

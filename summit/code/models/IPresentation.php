@@ -50,4 +50,9 @@ interface IPresentation extends ISummitEvent
      * @return string
      */
     public function DeleteLink();
+
+    /**
+     * @return $this
+     */
+    public function markReceived();
 }

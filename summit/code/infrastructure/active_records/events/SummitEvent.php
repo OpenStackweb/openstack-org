@@ -541,10 +541,6 @@ SQL;
         return new ArrayList();
     }
 
-    /*public function getAtendees() {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this , 'Attendees');
-    }*/
-
     /**
      * @return string
      */
