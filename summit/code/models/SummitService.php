@@ -62,7 +62,7 @@ class SummitService
             if(!$event->Type()->exists())
                 throw new EntityValidationException(array('event doest not have a valid event type'));
 
-            // validate blackout times
+            // validate blackout times and speaker conflict
             $conflict_events = $event_repository->getPublishedByTimeFrame(intval($event->SummitID),$event_data['start_datetime'],$event_data['end_datetime']);
             foreach ($conflict_events as $c_event) {
                 // if the published event is BlackoutTime or if there is a BlackoutTime event in this timeframe
@@ -73,6 +73,13 @@ class SummitService
                 if (intval($event_data['location_id']) == $c_event->LocationID && $event->ID != $c_event->ID) {
                     throw new EntityValidationException(array("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'"));
                 }
+                // validate speaker conflict
+                foreach ($event->Speakers() as $speaker) {
+                    if ($c_event->Speakers()->find('ID',$speaker->ID)) {
+                        throw new EntityValidationException(array("You can't publish on this timeframe, ".$speaker->getName()." is presenting '".$c_event->Title."' at this time."));
+                    }
+                }
+
             }
 
             $event->setStartDate($event_data['start_datetime']);
