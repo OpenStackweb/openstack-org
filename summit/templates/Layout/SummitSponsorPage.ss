@@ -83,61 +83,55 @@
                 </div>
                 <div class="col-lg-8 col-lg-push-2">
                     <div class="row">
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&offer_id=701600000006R7KAAU"><img alt='Red Hat, Inc._big_logo' src='/assets/companies/main_logo/redhat.jpg' class='big-logo-company sponsor-logo'/></a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.cisco.com/"><img alt='Cisco_big_logo' src='/assets/companies/main_logo/cisco.jpg' class='big-logo-company sponsor-logo'/></a>
                             </div>
-                        
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <a rel="nofollow" href="http://www.canonical.com/">
+                                    <img alt='Canonical_big_logo' src='/assets/companies/main_logo/canonical.jpg' class='big-logo-company sponsor-logo'/>
+                                </a>
+                            </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.intel.com/content/www/us/en/homepage.html"><img alt='Intel_big_logo' src='/assets/companies/main_logo/intel-headline-large.png' class='big-logo-company sponsor-logo'/></a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.ibm.com/us/en/">
                                     <img alt='IBM_big_logo' src='/assets/companies/main_logo/ibm-xlg.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="https://www.hpe.com/us/en/home.html">
                                     <img alt='Hewlett Packard Enterprise_big_logo' src='/assets/companies/main_logo/hpe-large.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.netapp.com/us/">
                                     <img alt='NetApp_big_logo' src='/assets/companies/main_logo/netapp.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://swiftstack.com">
                                     <img alt='SwiftStack Inc_big_logo' src='/assets/companies/main_logo/swiftstack.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.easystack.cn">
                                     <img alt='EasyStack_big_logo' src='/assets/companies/main_logo/_resampled/SetWidth300-logo500.png' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.datera.io/">
                                     <img alt='Datera_big_logo' src='/assets/companies/main_logo/datera-lg.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
-                        
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="https://www.aerofs.com">
                                     <img alt='AeroFS (Air Computing, Inc.)_big_logo' src='/assets/companies/main_logo/aerofs-lg.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
-                        
                     </div>
                 </div>
             </div>
@@ -349,12 +343,12 @@
                                 <tr class="sponsor_add_on">
                                     <td>Tuesday Evening Event Headline Sponsor</td>
                                     <td>$90,000</td>
-                                    <td style="text-align:center;">2</td>
+                                    <td style="text-align:center;">1</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Tuesday Evening Event Premier Sponsor</td>
                                     <td>$45,000</td>
-                                    <td style="text-align:center;">5</td>
+                                    <td style="text-align:center;">4</td>
                                 </tr>
                                 <tr class="sponsor_add_on">
                                     <td>Tuesday Evening Event Spotlight Sponsor</td>
