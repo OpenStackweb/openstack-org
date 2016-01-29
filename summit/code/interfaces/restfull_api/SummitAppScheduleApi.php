@@ -90,6 +90,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     static $url_handlers = array(
         'GET '                      => 'getScheduleByDay',
         'GET search'                => 'getSearchResults',
+        'GET empty_spots'           => 'getEmptySpots',
         'PUT $EventID!'             => 'addToSchedule',
         'DELETE $EventID!'          => 'removeFromSchedule',
         'POST $EventID!/feedback'   => 'addFeedback',
@@ -98,6 +99,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     static $allowed_actions = array(
         'getScheduleByDay',
         'getSearchResults',
+        'getEmptySpots',
         'addToSchedule',
         'removeFromSchedule',
         'addFeedback',
@@ -270,6 +272,127 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         };
         return $this->ok(array('events' => $events));
     }
+
+    public function getEmptySpots(SS_HTTPRequest $request) {
+
+        $query_string        = $request->getVars();
+        $summit_id           = intval($request->param('SUMMIT_ID'));
+        $days                = isset($query_string['days']) ? json_decode($query_string['days']) : null;
+        $start_time          = isset($query_string['start_time']) ? $query_string['start_time'] : '06:00:00';
+        $end_time            = isset($query_string['end_time']) ? $query_string['end_time'] : '23:45:00';
+        $locations           = isset($query_string['locations']) ? json_decode($query_string['locations']) : null;
+        $length              = isset($query_string['length']) ? $query_string['length'] : null;
+        $summit              = null;
+
+        if(intval($summit_id) > 0)
+            $summit = $this->summit_repository->getById(intval($summit_id));
+        if(strtolower($summit_id) === 'current')
+            $summit = Summit::ActiveSummit();
+
+        if(is_null($summit))
+            return $this->notFound('summit not found!');
+
+        if (empty($days) || empty($locations) || empty($length))
+            return $this->validationError('Parameters missing.');
+
+        $events = $this->summitevent_repository->getPublishedByTimeAndVenue($summit,$days,$start_time,$end_time,$locations);
+        $empty_spots = array();
+        $control = array();
+        $previous_event = $previous_end_date = $previous_event_day = $previous_event_time = null;
+
+        foreach($events as $event) {
+            $event_start_date = $event->getStartDate();
+            $event_day        = date('Y-m-d',strtotime($event_start_date));
+
+            $control[$event_day][$event->LocationID] = true; //control array to see what days and locations had no events at all
+
+            // if first event or first on this venue or first of the day we use the lower limit
+            if ($previous_event == null) {
+                $previous_time = $start_time;
+            } else if ($previous_event->LocationID != $event->LocationID || $previous_event_day != $event_day) {
+                $previous_time = $start_time;
+
+                // if it is the first event of the room/day, add empty spot between last event and top limit
+                $end_limit = $previous_event_day.' '.$end_time;
+                $unix_time = strtotime($previous_end_date);
+                $empty_space = strtotime($end_limit) - $unix_time;
+                if ($empty_space >= $length) {
+                    $empty_spots[] = array(
+                        'location_id' => $previous_event->LocationID,
+                        'day'         => $previous_event_day,
+                        'time'        => $previous_event_time,
+                        'gap'         => gmdate('G:i', $empty_space),
+                        'unix_time'   => $unix_time
+                    );
+                }
+            } else {
+                $previous_time = $previous_event_time;
+            }
+
+            $unix_time = strtotime($event_day.' '.$previous_time);
+            $empty_space = strtotime($event_start_date) - $unix_time;
+            if ($empty_space >= $length) {
+                $empty_spots[] = array(
+                    'location_id' => $event->LocationID,
+                    'day'         => $event_day,
+                    'time'        => $previous_time,
+                    'gap'         => gmdate('G:i', $empty_space),
+                    'unix_time'   => $unix_time
+                );
+            }
+
+            $previous_event      = $event;
+            $previous_end_date   = $previous_event->getEndDate();
+            $previous_event_day  = date('Y-m-d',strtotime($previous_end_date));
+            $previous_event_time = date('H:i',strtotime($previous_end_date));
+        }
+
+        // check the empty space between the last event on the list and the top limit
+        $end_limit = $previous_event_day.' '.$end_time;
+        $unix_time = strtotime($previous_end_date);
+        $empty_space = strtotime($end_limit) - $unix_time;
+        if ($empty_space >= $length) {
+            $empty_spots[] = array(
+                'location_id' => $previous_event->LocationID,
+                'day'         => $previous_event_day,
+                'time'        => $previous_event_time,
+                'gap'         => gmdate('G:i', $empty_space),
+                'unix_time'   => $unix_time
+            );
+        }
+
+        // now add the days/venues without any events, ie completely free
+        $full_gap = strtotime($end_time) - strtotime($start_time);
+        foreach ($days as $day) {
+            foreach ($locations as $loc) {
+                if (!array_key_exists($day,$control) || !array_key_exists($loc,$control[$day])) {
+                    // we add this location and day
+                    $empty_spots[] = array(
+                        'location_id' => $loc,
+                        'day'         => $day,
+                        'time'        => $start_time,
+                        'gap'         => gmdate('G:i', $full_gap),
+                        'unix_time'   => strtotime($day.' '.$start_time)
+                    );
+                }
+            }
+        }
+
+        // sort by location, day, time
+        usort($empty_spots, function ($a, $b) {
+            if ($a['location_id'] == $b['location_id']) {
+                if ($a['unix_time'] == $b['unix_time']) {
+                    return 0;
+                }
+                return $a['unix_time'] < $b['unix_time'] ? -1 : 1;
+            }
+            return $a['location_id'] < $b['location_id'] ? -1 : 1;
+        });
+
+
+        return $this->ok(array('empty_spots' => $empty_spots));
+    }
+
 
     public static function isEventOnMySchedule($event_id, Summit $summit)
     {

@@ -325,6 +325,10 @@
                         }, 2000, function() {
                             $("#event_"+value).effect("highlight", {}, 2000);
                         });
+                    } else if (key == 'time') {
+                        $('body').animate({
+                        scrollTop: ($('[data-time="'+value+'"]').offset().top - 100)
+                        }, 2000);
                     }
                 }
             }

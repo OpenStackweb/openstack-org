@@ -5,6 +5,7 @@ function ScheduleAdminViewDispatcher() {
     this.PUBLISHED_EVENT                   = 'PUBLISHED_EVENT';
     this.PUBLISHED_EVENTS_FILTER_CHANGE    = 'PUBLISHED_EVENTS_FILTER_CHANGE';
     this.PUBLISHED_EVENTS_SEARCH           = 'PUBLISHED_EVENTS_SEARCH';
+    this.PUBLISHED_EVENTS_SEARCH_EMPTY     = 'PUBLISHED_EVENTS_SEARCH_EMPTY';
     this.PUBLISHED_EVENTS_DEEP_LINK        = 'PUBLISHED_EVENTS_DEEP_LINK';
     this.UNPUBLISHED_EVENT                 = 'UNPUBLISHED_EVENT';
     this.UNPUBLISHED_EVENTS_PAGE_CHANGED   = 'UNPUBLISHED_EVENTS_PAGE_CHANGED';
@@ -37,6 +38,11 @@ function ScheduleAdminViewDispatcher() {
     this.publishedEventsSearch = function(summit_id, term)
     {
         this.trigger(this.PUBLISHED_EVENTS_SEARCH,summit_id ,term);
+    }
+
+    this.publishedEventsSearchEmpty = function(summit_id, days, start_time, end_time, locations, length)
+    {
+        this.trigger(this.PUBLISHED_EVENTS_SEARCH_EMPTY,summit_id, days, start_time, end_time, locations, length);
     }
 
     this.publishedEventsDeepLink = function ()

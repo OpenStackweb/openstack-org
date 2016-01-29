@@ -23,11 +23,13 @@ class SummitAppAdminController extends Page_Controller
         Requirements::css('themes/openstack/css/chosen.css');
         Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
         Requirements::css('summit/css/summit-admin.css');
+        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
         Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
         Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
     }
 
     private static $url_segment = 'summit-admin';

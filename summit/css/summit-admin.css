@@ -63,6 +63,10 @@
     width: 18%;
 }
 
+#empty_spots_modal label {
+    width: auto;
+}
+
 .unpublished-container .refresh_button_div {
     margin-top: 10px;
 }

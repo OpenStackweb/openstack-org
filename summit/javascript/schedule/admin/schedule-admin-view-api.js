@@ -4,6 +4,7 @@ var dispatcher                                       = require('./schedule-admin
 schedule_admin_view_api.RETRIEVED_PUBLISHED_EVENTS   = 'RETRIEVED_PUBLISHED_EVENTS';
 schedule_admin_view_api.RETRIEVED_UNPUBLISHED_EVENTS = 'RETRIEVED_UNPUBLISHED_EVENTS';
 schedule_admin_view_api.RETRIEVED_PUBLISHED_SEARCH   = 'RETRIEVED_PUBLISHED_SEARCH';
+schedule_admin_view_api.RETRIEVED_EMPTY_SPOTS        = 'RETRIEVED_EMPTY_SPOTS';
 
 schedule_admin_view_api.getScheduleByDayAndLocation = function (summit_id, day, location_id)
 {
@@ -55,6 +56,17 @@ schedule_admin_view_api.getScheduleSearchResults = function (summit_id, term)
     return $.get(url,function (data) {
         data.summit_id   = summit_id;
         schedule_admin_view_api.trigger(schedule_admin_view_api.RETRIEVED_PUBLISHED_SEARCH, data);
+    });
+}
+
+schedule_admin_view_api.getScheduleEmptySpots = function (summit_id, days, start_time, end_time, locations, length)
+{
+
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/schedule/empty_spots';
+    var params = {days:JSON.stringify(days),start_time:start_time,end_time:end_time,locations:JSON.stringify(locations),length:length};
+    return $.get(url,params,function (data) {
+        data.summit_id   = summit_id;
+        schedule_admin_view_api.trigger(schedule_admin_view_api.RETRIEVED_EMPTY_SPOTS, data);
     });
 }
 
@@ -128,6 +140,10 @@ dispatcher.on(dispatcher.PUBLISHED_EVENTS_FILTER_CHANGE, function(summit_id ,day
 
 dispatcher.on(dispatcher.PUBLISHED_EVENTS_SEARCH, function(summit_id ,term){
     schedule_admin_view_api.getScheduleSearchResults(summit_id ,term);
+});
+
+dispatcher.on(dispatcher.PUBLISHED_EVENTS_SEARCH_EMPTY, function(summit_id, days, start_time, end_time, locations, length){
+    schedule_admin_view_api.getScheduleEmptySpots(summit_id, days, start_time, end_time, locations, length);
 });
 
 dispatcher.on(dispatcher.UNPUBLISHED_EVENT, function(summit_id, event_id){

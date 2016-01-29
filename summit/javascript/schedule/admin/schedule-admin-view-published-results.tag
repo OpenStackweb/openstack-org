@@ -1,5 +1,5 @@
 <schedule-admin-view-published-results>
-    <div id="search_results">
+    <div id="search_results" style="display:none">
         <h4>Search Results</h4>
         <div class="list-group">
             <a href="#" onclick={ parent.deepLinkToEvent } class="list-group-item" each="{ key, e in published_store.results() }" >

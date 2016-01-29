@@ -8,6 +8,7 @@
                         <button class="btn btn-default btn-global-search-clear" onclick={ clearClicked }>
                             <i class="fa fa-times"></i>
                         </button>
+                        <button class="btn btn-default" data-toggle="modal" data-target="#empty_spots_modal">Find Empty</button>
                     </span>
                 </div>
             </div>
@@ -27,6 +28,53 @@
                     <option value="{ id }" each={ id, location in summit.locations } >{ location.name }</option>
                     <option value="0">TBA</option>
                 </select>
+            </div>
+        </div>
+
+        <!-- Empty Spots Modal -->
+        <div id="empty_spots_modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Find Empty Spots</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" style="margin-bottom: 35px;">
+                            <div class="col-md-6">
+                                <label for="select_day_modal">Day</label>
+                                <select id="select_day_modal" style="width: 80%">
+                                    <option value=''>-- Any Day --</option>
+                                    <option value={ day.date } each={  key, day in summit.dates }>{ day.label }</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="select_venue_modal">Venue</label>
+                                <select id="select_venue_modal" style="width: 80%">
+                                    <option value=''>-- Any Venue --</option>
+                                    <option value="{ id }" each={ id, location in summit.locations } >{ location.name }</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 35px;">
+                            <div class="col-md-3">
+                                <label for="start_time_modal">From </label>
+                                <input type='text' id="start_time_modal" value="06:00" style="width: 60%"/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="end_time_modal" >To </label>
+                                <input type='text' id="end_time_modal" value="23:30" style="width: 60%"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end_time_modal">Gap (minutes)</label>
+                                <input type='number' id="length_modal" min="15" max="240" step="15" value="60" style="width: 60px"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="search_empty" class="btn btn-default" data-dismiss="modal">Find</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -61,11 +109,8 @@
 
                         $('#search_published').click(function(e) {
                             var search_term = $('#published_search_term').val();
-
                             if (search_term) {
                                 self.doSearch(search_term);
-                            } else {
-
                             }
                         });
 
@@ -73,6 +118,18 @@
                             if (e.keyCode == 13) {
                                 $('#search_published').click();
                             }
+                        });
+
+                        $('#search_empty').click(function(e) {
+                            self.doSearchEmpty();
+                        });
+
+                        $('#start_time_modal,#end_time_modal').datetimepicker({
+                            datepicker:false,
+                            format:'H:i',
+                            minTime:'06:00',
+                            maxTime:'23:30',
+                            step: 15
                         });
 
                         self.lockHash();
@@ -102,6 +159,38 @@
                     $('#search_results').hide();
                 }
 
+                doSearchEmpty() {
+                    $('body').ajax_loader();
+                    $('#schedule_container').hide();
+                    $('#empty_spots').show();
+                    window.location.hash = '';
+
+                    var days = [];
+                    var venues = [];
+                    var start_time = $('#start_time_modal').val();
+                    var end_time = $('#end_time_modal').val();
+                    var length = $('#length_modal').val() * 60;
+
+                    // add all options if Any selected
+                    if ($('#select_day_modal').val() == '') {
+                        $("#select_day_modal option").each(function(){
+                            if ($(this).val() != '') days.push($(this).val());
+                        });
+                    } else {
+                        days.push($('#select_day_modal').val());
+                    }
+
+                    if ($('#select_venue_modal').val() == '') {
+                        $("#select_venue_modal option").each(function(){
+                            if ($(this).val() != '') venues.push($(this).val());
+                        });
+                    } else {
+                        venues.push($('#select_venue_modal').val());
+                    }
+
+                    self.dispatcher.publishedEventsSearchEmpty(self.summit.id,days,start_time,end_time,venues,length);
+                }
+
                 lockHash() {
                     // read url hash and redirect to event
                     var hash = $(window).url_fragment('getParams');
@@ -129,6 +218,7 @@
                     $('#published_search_term').val('');
                     $('#schedule_container').show();
                     $('#search_results').hide();
+                    $('#empty_spots').hide();
 
                     $('body').ajax_loader();
 

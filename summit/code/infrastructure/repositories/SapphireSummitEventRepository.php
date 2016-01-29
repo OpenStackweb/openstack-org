@@ -148,4 +148,39 @@ SQL;
 
         return $list->toArray();
     }
+
+    /**
+     * @param ISummit $summit_id
+     * @param array $days
+     * @param string $start_time
+     * @param string $end_time
+     * @param array $locations
+     * @return array
+     */
+    public function getPublishedByTimeAndVenue(ISummit $summit, $days, $start_time, $end_time, $locations)
+    {
+        $where_clause = '';
+
+        if (!empty($days)) {
+            $where_clause .= "(";
+            foreach($days as $day) {
+                $start_date = $summit->convertDateFromTimeZone2UTC($day.' '.$start_time);
+                $end_date = $summit->convertDateFromTimeZone2UTC($day.' '.$end_time);
+                $where_clause .= "(StartDate < '{$end_date}' AND EndDate > '{$start_date}') OR ";
+            }
+            $where_clause = substr($where_clause, 0, -4).")";
+        }
+
+        if (!empty($locations)) {
+            $locations_string = implode(',',$locations);
+            $where_clause .= " AND LocationID IN ({$locations_string})";
+        }
+
+
+        $events = SummitEvent::get()
+            ->filter( array('SummitID' => $summit->getIdentifier(), 'Published' => 1 ))
+            ->where($where_clause)->sort('LocationID,StartDate')->toArray();
+
+        return $events;
+    }
 }
