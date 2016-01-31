@@ -246,7 +246,7 @@ implements IPresentationSpeaker
         $presentation_count = 0;
         $links = array();
         foreach ($this->Presentations() as $key => $presentation) {
-            if ($key > ($limit-1)) exit;
+            if ($key > ($limit-1)) break;
 
             $links[] = new ArrayData(array(
                 'Source' => 'summit',
