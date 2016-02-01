@@ -255,6 +255,7 @@ class SummitAppAdminController extends Page_Controller
         $summit_id = intval($request->param('SummitID'));
         $summit = Summit::get()->byID($summit_id);
         $event_id = intval($request->param('EventID'));
+        $event = SummitEvent::get()->byID($event_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
@@ -265,7 +266,7 @@ class SummitAppAdminController extends Page_Controller
                 array
                 (
                     'Summit' => $summit,
-                    'Event' => null
+                    'Event' => $event
                 )
             )
         );

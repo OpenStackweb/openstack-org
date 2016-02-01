@@ -57,6 +57,13 @@
                 animation: true,
                 template : '<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
             });
+
+            $('.event').hover(function(){
+                $('.event-buttons',this).stop().animate({width: '20px'}, 400)
+            }, function(){
+                $('.event-buttons',this).stop().animate({width: '-0'}, 400)
+            });
+
             self.createDraggable($(".event-unpublished"));
             $('.event-unpublished').css('width', $('.time-slot-container').width());
             $('body').ajax_loader('stop');

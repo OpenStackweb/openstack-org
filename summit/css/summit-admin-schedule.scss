@@ -148,9 +148,24 @@ body
 
 .unpublish-event-btn
 {
-  float:right;
-  margin-right: 5px;
-  margin-top: 5px;
+}
+
+.event-buttons {
+    overflow: hidden;
+    width: 0px;
+    float: right;
+    position: relative;
+    height: 100%;
+    text-align: center;
+    z-index: 99;
+}
+
+.event-buttons a {
+    color: grey;
+}
+
+.event-buttons a:hover {
+    color: black;
 }
 
 .unselectable {

@@ -3,8 +3,11 @@
         <div class="ui-resizable-handle ui-resizable-n" title="{ data.start_datetime.format('hh:mm a') }">
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
-        <div>
-            <button class="btn btn-danger btn-xs unpublish-event-btn" title="unpublish event" data-event-id="{ data.id }"><i class="fa fa-times"></i></button>
+        <div class="event-buttons">
+            <a class="unpublish-event-btn" title="unpublish event" data-event-id="{ data.id }"><i class="fa fa-times"></i></a>
+            <a href="summit-admin/{ parent.summit.id }/events/{ data.id }" class="edit-event-btn" title="edit event">
+                <i class="fa fa-pencil-square-o"></i>
+            </a>
         </div>
         <div class="event-inner-body">
             <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title }</a>
@@ -24,8 +27,7 @@
     var self           = this;
 
     this.on('mount', function() {
-        $(function() {
-        });
+
     });
 
     getEventTop() {
