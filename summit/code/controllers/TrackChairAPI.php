@@ -179,7 +179,7 @@ class TrackChairAPI extends Controller {
 								->leftJoin("PresentationSpeaker", "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID")
 								->where("
 									SummitEvent.Title LIKE '%{$k}%'
-									OR SummitEvent.Description LIKE '%{$k}%
+									OR SummitEvent.Description LIKE '%{$k}%'
 									OR SummitEvent.ShortDescription LIKE '%{$k}%'
 									OR (concat_ws(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'
 								");
