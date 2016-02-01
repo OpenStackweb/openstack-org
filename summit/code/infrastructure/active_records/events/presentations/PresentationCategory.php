@@ -81,11 +81,13 @@ class PresentationCategory extends DataObject
         return $this->CategoryGroup();
     }
 
-    public function isTrackChair($memberid)
+    /**
+     * @param int $member_id
+     * @return int
+     */
+    public function isTrackChair($member_id)
     {
-        $r = $this->TrackChairs()->filter('MemberID', $memberid);
-
-        return $r->count();
+        return $this->exists()? intval($this->TrackChairs()->filter('MemberID', $member_id)->count()):0;
     }
 
     public function MemberList($memberid)
