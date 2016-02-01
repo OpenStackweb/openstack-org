@@ -70,6 +70,19 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     (
     );
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Tickets() as $t)
+            $t->delete();
+
+        $schedule = $this->getManyManyComponents('Schedule');
+        foreach( $schedule as $s)
+        {
+            $schedule->remove($s);
+        }
+    }
+
     /**
      * @return int
      */

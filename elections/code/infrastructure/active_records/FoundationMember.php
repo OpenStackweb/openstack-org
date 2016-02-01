@@ -84,6 +84,11 @@ final class FoundationMember
         }
     }
 
+    public function onBeforeDelete()
+    {
+        $this->resign();
+    }
+
     public function upgradeToFoundationMember()
     {
         if (!$this->isFoundationMember()) {

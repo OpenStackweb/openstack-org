@@ -14,7 +14,7 @@
  **/
 final class AttendeeMember extends DataExtension implements IAttendeeMember
 {
-    private static $has_many =  array
+    private static $has_many = array
     (
         'SummitAttendance' => 'SummitAttendee'
     );
@@ -58,10 +58,10 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
     public function getCurrentSummitAttendee()
     {
         $current_summit = Summit::CurrentSummit();
-        if($current_summit)
-        {
+        if ($current_summit) {
             return $this->getSummitAttendee($current_summit->ID);
         }
+
         return $this->getUpcomingSummitAttendee();
     }
 
@@ -71,10 +71,18 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
     public function getUpcomingSummitAttendee()
     {
         $upcoming_summit = Summit::ActiveSummit();
-        if($upcoming_summit)
-        {
+        if ($upcoming_summit) {
             return $this->getSummitAttendee($upcoming_summit->ID);
         }
+
         return null;
+    }
+
+    public function onBeforeDelete()
+    {
+        // Remove attendees
+        foreach ($this->owner->SummitAttendance() as $attendee) {
+            $attendee->delete();
+        }
     }
 }

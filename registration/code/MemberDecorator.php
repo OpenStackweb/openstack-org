@@ -70,30 +70,15 @@ class MemberDecorator extends DataExtension
     {
         $current_id = $this->owner->ID;
         // stored a track of deleted users ...
-        $deleted = MemberDeleted::create();
-        $deleted->OriginalID = $current_id;
-        $deleted->FirstName = $this->owner->FirstName;
-        $deleted->Surname = $this->owner->Surname;
-        $deleted->Email = $this->owner->Email;
+        $deleted              = MemberDeleted::create();
+        $deleted->OriginalID  = $current_id;
+        $deleted->FirstName   = $this->owner->FirstName;
+        $deleted->Surname     = $this->owner->Surname;
+        $deleted->Email       = $this->owner->Email;
+
         if(Controller::has_curr())
             $deleted->FromUrl = Controller::curr()->getRequest()->getURL(true);
         $deleted->write();
-
-        $legal_agreements = $this->owner->LegalAgreements();
-        foreach($legal_agreements as $la)
-        {
-            $la->delete();
-        }
-
-        $affiliations = $this->owner->Affiliations();
-        foreach($affiliations as $a)
-        {
-            $a->delete();
-        }
-
-        DB::query("DELETE FROM Company_Administrators WHERE MemberID = {$current_id}");
-        DB::query("DELETE FROM Group_Members WHERE MemberID = {$current_id}");
-
     }
 
     public function setOwner($owner, $ownerBaseClass = null)

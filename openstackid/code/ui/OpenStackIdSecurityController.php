@@ -167,7 +167,10 @@ class OpenStackIdSecurityController extends CustomPasswordController
             $member->logOut();
             if($member_2_delete_id > 0 && intval($member->ID) == $member_2_delete_id)
             {
-                $member->Delete();
+                SapphireTransactionManager::getInstance()->transaction(function() use($member)
+                {
+                    $member->delete();
+                });
             }
         }
         Session::clear('delete_member_id');
