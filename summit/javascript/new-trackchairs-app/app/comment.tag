@@ -5,4 +5,7 @@
 	    { body }
 	  </div>
 	</div>
+	<style scoped>
+		.media {border: 1px solid #CBCBCB; padding: 15px; margin-bottom: 10px;}
+	</style>
 </comment>

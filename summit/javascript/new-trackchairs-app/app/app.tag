@@ -44,7 +44,7 @@ require('./change-requests.tag')
     	<div show={ DisplayMode === 'requests' }>
     		<change-requests api="{ this.opts }"/>
     	</div>
-    	<!-- Change Requests Browser -->    	
+    	<!-- Change Requests Browser -->
 
     	<!-- Presntation Browser -->
     	<div show={ DisplayMode === 'browse' } class="row">
@@ -121,38 +121,54 @@ require('./change-requests.tag')
 
 						<hr/>
 						<h2>{ currentPresentation.title }</h2>
-						<h4>{ currentPresentation.level }</h4>
+						<h4>{ currentPresentation.level } | Submitted By: { currentPresentation.creator }</h4>
 						<hr/>
 						<span class="label label-primary">Vote Count <span class="badge">{ currentPresentation.vote_count }</span></span>
 						<span class="label label-primary">Vote Ave <span class="badge">{ currentPresentation.vote_average }</span></span>
 						<span class="label label-primary">Vote Total <span class="badge">{ currentPresentation.total_points }</span></span>
 						<span class="label label-info" show="{currentPresentation.comments.length}">Chair Comments: { currentPresentation.comments.length }</span>
 						<hr/>
+						<h4>Description</h4>
 						<raw content="{ currentPresentation.description }"/>
+
+						<hr/>
+						<h4>Problems Addressed</h4>
+						<raw content="{ currentPresentation.problem_addressed }"/>
+
+						<hr/>
+						<h4>Why Should This Presentation Be Selected?</h4>
+						<raw content="{ currentPresentation.selection_motive }"/>
+
+						<hr/>
+						<h4>What Should Attendees Expect To Learn?</h4>
+						<raw content="{ currentPresentation.attendees_expected_learnt }"/>
 
 						<div each="{ currentPresentation.speakers }">
 							<hr/>
-							<h4>{ first_name }&nbsp;{ last_name }</h5>
+							<h4>Speaker: <strong>{ first_name }&nbsp;{ last_name }</strong></h5>
 							<p>{ title }</p>
 							<raw content="{ bio }"/>
 						</div>
 						<div>
-			
+
 						</div>
+
+						<hr/>
+						<h4>Chair Comments</h4>
+						<p>(These are only visible to Track Chairs)</p>
+
 						<div if="{ currentPresentation.comments[0] }">
-							<hr/>
-							<h4>Comments</h4>
 							<comment each="{ currentPresentation.comments }" />
 							<hr/>
 						</div>
-						<addcommentform api="{ this.opts }" presentation="{ currentPresentation }" />
+						<addcommentform api="{ this.opts }" presentation="{ currentPresentation }" commenter="{ summit.track_chair.first_name + ' ' + summit.track_chair.last_name }" />
 					</div>
 				</div>
-	        </div>   
+	        </div>
 
     	</div>
     	<!-- End Presntation Browser -->
-         
+
     </div>
 
 
@@ -197,7 +213,7 @@ require('./change-requests.tag')
 		setActiveKey(key) {
 			self.activekey = key
 			id = self.presentations[key].id
-			opts.trigger('load-presentation-details', id)			
+			opts.trigger('load-presentation-details', id)
 			self.update()
 		}
 
@@ -225,25 +241,25 @@ require('./change-requests.tag')
 
 			if (mode === 'selections') {
 				self.DisplayMode = 'selections'
-				self.update()				
+				self.update()
 			}
 
 			if (mode === 'directory') {
 				self.DisplayMode = 'directory'
-				self.update()				
+				self.update()
 			}
 
 			if (mode === 'tutorial') {
 				self.DisplayMode = 'tutorial'
-				self.update()				
+				self.update()
 			}
 
 			if (mode === 'requests') {
 				self.DisplayMode = 'requests'
-				self.update()				
+				self.update()
 			}
 
-		})				
+		})
 
 		this.on('mount', function(){
 
@@ -263,24 +279,24 @@ require('./change-requests.tag')
 					self.DisplayMode = 'selections'
 					self.update()
 				}
-				
+
 				if (mode === 'directory') {
 					self.DisplayMode = 'directory'
-					self.update()				
+					self.update()
 				}
 
 				if (mode === 'tutorial') {
 					self.DisplayMode = 'tutorial'
-					self.update()				
+					self.update()
 				}
 
 				if (mode === 'requests') {
 					self.DisplayMode = 'requests'
-					self.update()				
+					self.update()
 				}
 
 
-			})			
+			})
 		})
 
 		opts.on('summit-details-loaded', function(result){
@@ -290,7 +306,7 @@ require('./change-requests.tag')
 		})
 
 		self.sortPresentations = function(set, sortBy, order) {
-			
+
 			if(order === 'desc') {
 				set.sort(function(a,b) {
 					return b[sortBy] - a[sortBy]
@@ -298,11 +314,11 @@ require('./change-requests.tag')
 			} else {
 				set.sort(function(a,b) {
 					return a[sortBy] - b[sortBy]
-				})				
+				})
 			}
 
 			return set
-		}		
+		}
 
 		opts.on('presentations-loaded', function(result){
 
@@ -327,7 +343,7 @@ require('./change-requests.tag')
 			if(!self.searchmode) {
 
 				cat_index = self.categoryIndex(result.category_id)
-				
+
 				if(self.activeCategory != self.summit.categories[cat_index]) {
 					self.activeCategory = self.summit.categories[cat_index]
 					opts.trigger('load-presentations',null,result.category_id)
@@ -376,7 +392,7 @@ require('./change-requests.tag')
 
 		opts.on('presentation-selected', function(){
 			self.currentPresentation.selected = true;
-			self.opts.trigger('load-selections',self.currentPresentation.category_id)				
+			self.opts.trigger('load-selections',self.currentPresentation.category_id)
 			self.toasts.push(
 				{
 				  text: 'The presentation was added to your selection list.',
@@ -405,12 +421,12 @@ require('./change-requests.tag')
 				  timeout: 6000
 				}
 			)
-			self.update();							
-		})		
+			self.update();
+		})
 
 		opts.on('presentation-group-selected', function(){
 			self.currentPresentation.group_selected = true;
-			self.opts.trigger('load-selections',self.currentPresentation.category_id)				
+			self.opts.trigger('load-selections',self.currentPresentation.category_id)
 			self.toasts.push(
 				{
 				  text: 'The presentation was added to the team selection list.',
@@ -432,15 +448,15 @@ require('./change-requests.tag')
 				  timeout: 6000
 				}
 			)
-			self.update();							
-		})	
+			self.update();
+		})
 
 		clearSearch() {
 			document.getElementById('app-search').value='';
 			self.quantity = 0
 			self.searchmode = false
 			opts.trigger('load-presentations', null, this.activeCategory.id)
-			self.activekey = null			
+			self.activekey = null
 			self.update()
 		}
 
@@ -461,11 +477,11 @@ require('./change-requests.tag')
 			if(
 				self.currentPresentation.can_assign &&
 				!self.currentPresentation.selected
-			) 
+			)
 			{
 				self.selectPresentation()
 			 }
-		})		
+		})
 
 	</script>
 

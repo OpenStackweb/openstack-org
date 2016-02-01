@@ -13,7 +13,7 @@
 			// Setup the comments array if no comments have yet been posted
 			if (!opts.presentation.comments) opts.presentation.comments = new Array()
 
-			opts.presentation.comments.push({ body: commentBody.value })
+			opts.presentation.comments.push({ body: commentBody.value, name: opts.commenter })
 
 			// Clear the form field
 			commentBody.value = ''
