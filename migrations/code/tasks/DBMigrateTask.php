@@ -26,11 +26,8 @@ final class DBMigrateTask extends MigrationTask
         'MigrateExpertiseToDORelation',
         'ChangeTagsCollationMigration',
         'UpdateSurveyTemplateIndexMigration',
-<<<<<<< HEAD
         'UpdateAttendeesTicketsMigration2',
-=======
         'RemovePresentationDeprecatedColumnsMigration',
->>>>>>> 45efce7... [smarcet]
     );
 
     function up()
