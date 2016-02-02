@@ -36,7 +36,7 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
         $fields =  new FieldList();
         $fields->add(new TextField('Name','Name'));
         if($this->ID){
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = GridFieldConfig_RelationEditor::create(100);
             $config->addComponent(new GridFieldSortableRows('Order'));
 
             $data_columns = $config->getComponentByType('GridFieldDataColumns');
@@ -49,7 +49,7 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
             $gridField = new GridField('Capabilities', 'Capabilities', $this->Capabilities(), $config);
             $fields->add($gridField);
 
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = GridFieldConfig_RelationEditor::create(100);
             $config->addComponent(new GridFieldSortableRows('Order'));
 
             $data_columns = $config->getComponentByType('GridFieldDataColumns');

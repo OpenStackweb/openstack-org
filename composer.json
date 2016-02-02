@@ -7,7 +7,7 @@
     "silverstripe/framework": "3.1.16",
     "silverstripe/translatable": "2.0.6",
     "ezyang/htmlpurifier": "dev-master",
-    "undefinedoffset/sortablegridfield": "dev-master",
+    "undefinedoffset/sortablegridfield": "0.5.4",
     "tractorcow/silverstripe-colorpicker": "3.0.*@dev",
     "knplabs/github-api": "1.4.4",
     "rackspace/php-opencloud": "1.12.2",
