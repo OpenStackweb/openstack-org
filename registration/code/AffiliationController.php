@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,27 +32,28 @@ class AffiliationController extends Page_Controller
 
     //Affiliation CRUD
 
-    public function SaveAffiliation() {
-	    try{
-	        $newAffiliation = json_decode(file_get_contents("php://input"));
-	        //server side validation
-	        $org_name = Convert::raw2sql($newAffiliation->OrgName);
-	        $org_name = trim($org_name);
-	        $dbAffiliation = (isset($newAffiliation->Id) && is_numeric($newAffiliation->Id) && $newAffiliation->Id > 0) ? Affiliation::get()->byID($newAffiliation->Id) : new Affiliation();
-	        //Check for a logged in member
-	        if ($CurrentMember = Member::currentUser()) {
-	            self::Save($dbAffiliation, $newAffiliation, $org_name, $CurrentMember);
-	            echo json_encode('OK');
-	            exit();
-	        }
-	    }
-	    catch(Exception $ex){
-		    echo json_encode('ERROR');
-	    }
+    public function SaveAffiliation()
+    {
+        try {
+            $newAffiliation = json_decode(file_get_contents("php://input"));
+            //server side validation
+            $org_name = Convert::raw2sql($newAffiliation->OrgName);
+            $org_name = trim($org_name);
+            $dbAffiliation = (isset($newAffiliation->Id) && is_numeric($newAffiliation->Id) && $newAffiliation->Id > 0) ? Affiliation::get()->byID($newAffiliation->Id) : new Affiliation();
+            //Check for a logged in member
+            if ($CurrentMember = Member::currentUser()) {
+                self::Save($dbAffiliation, $newAffiliation, $org_name, $CurrentMember);
+                echo json_encode('OK');
+                exit();
+            }
+        } catch (Exception $ex) {
+            echo json_encode('ERROR');
+        }
     }
 
-    public static function Save(Affiliation $dbAffiliation, $newAffiliation, $org_name, Member $CurrentMember){
-	    $org_name = Convert::raw2sql($org_name);
+    public static function Save(Affiliation $dbAffiliation, $newAffiliation, $org_name, Member $CurrentMember)
+    {
+        $org_name = Convert::raw2sql($org_name);
         // attempt to retrieve Org by the submitted name
         $org = Org::get()->filter('Name', $org_name)->First();
 
@@ -71,22 +73,14 @@ class AffiliationController extends Page_Controller
         // Remove any CSS or inline styles
         $config->set('CSS.AllowedProperties', array());
         $purifier = new HTMLPurifier($config);
-	    if(!empty($newAffiliation->EndDate) && $newAffiliation->Current == 1){
-		    $today    = new DateTime($newAffiliation->ClientToday);
-		    $end_date = new DateTime($newAffiliation->EndDate);
-		    if($end_date<$today)
-			    throw new Exception('Current Affiliation: End Date must me greater than today!.');
-	    }
         $dbAffiliation->OrganizationID = $org->ID;
-        $dbAffiliation->MemberID = $CurrentMember->ID;
-        $dbAffiliation->StartDate = $newAffiliation->StartDate;
-        $dbAffiliation->EndDate = !empty($newAffiliation->EndDate) ? $newAffiliation->EndDate : null;
-        $dbAffiliation->Current = $newAffiliation->Current == 1 ? true : false;
-	    if(empty($newAffiliation->EndDate)){
-		    $dbAffiliation->Current = true;
-	    }
-	    //$dbAffiliation->JobTitle = $purifier->purify($newAffiliation->JobTitle);
-        //$dbAffiliation->Role      = $purifier->purify($newAffiliation->Role);
+        $dbAffiliation->MemberID       = $CurrentMember->ID;
+        $dbAffiliation->StartDate      = $newAffiliation->StartDate;
+        $dbAffiliation->EndDate        = !empty($newAffiliation->EndDate) ? $newAffiliation->EndDate : null;
+        $dbAffiliation->Current        = $newAffiliation->Current == 1 ? true : false;
+        if (empty($newAffiliation->EndDate)) {
+            $dbAffiliation->Current = true;
+        }
         $dbAffiliation->write();
     }
 
@@ -153,7 +147,7 @@ class AffiliationController extends Page_Controller
             $params = $request->allParams();
             $affilliation_id = $params["ID"];
             $affilliation_id = Convert::raw2sql($affilliation_id);
-            $affiliationDB   = Affiliation::get()->byID($affilliation_id);
+            $affiliationDB = Affiliation::get()->byID($affilliation_id);
             if ($affiliationDB) {
                 $affiliationDB->delete();
             }
