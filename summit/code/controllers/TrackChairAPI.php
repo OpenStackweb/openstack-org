@@ -677,17 +677,21 @@ class TrackChairAPI_PresentationRequest extends RequestHandler {
 			$comments[] = $comment;
 		}
 
-		$p->Description = str_replace(array("\r", "\n"), "", $p->Description);
+		// remove unsafe character for JSON
+		$p->ShortDescription =  ($p->ShortDescription != NULL) ? str_replace(array("\r", "\n"), "", $p->ShortDescription) : '(no description provided)';
+		$p->ProblemAddressed = ($p->ProblemAddressed != NULL) ? str_replace(array("\r", "\n"), "", $p->ProblemAddressed) : '(no answer provided)';
+		$p->AttendeesExpectedLearnt = ($p->AttendeesExpectedLearnt != NULL) ? str_replace(array("\r", "\n"), "", $p->AttendeesExpectedLearnt) : '(no answer provided)';
+		$p->SelectionMotive = ($p->SelectionMotive != NULL) ? str_replace(array("\r", "\n"), "", $p->SelectionMotive) : '(no answer provided)';
 
 		$data = $p->toJSON();
 		$data['title'] = $p->Title;
-		$data['description'] = $p->Description;
+		$data['description'] = ($p->ShortDescription != NULL) ? $p->ShortDescription : '(no description provided)';
 		$data['category_name'] = $p->Category()->Title;
 		$data['speakers'] = $speakers;
 		$data['total_votes'] = $p->Votes()->count();
 		$data['vote_count'] = $p->CalcVoteCount();
 		$data['vote_average'] = $p->CalcVoteAverage();
-		$data['total_points'] = $p->CalcTotalPoints() || 0;
+		$data['total_points'] = ($p->CalcTotalPoints() > 0) ? $p->CalcTotalPoints() : '0';
 		$data['creator'] = $p->Creator()->getName();
 		$data['user_vote'] = $p->getUserVote() ? $p->getUserVote()->Vote : null;
 		$data['comments'] = $comments ? $comments : null;
