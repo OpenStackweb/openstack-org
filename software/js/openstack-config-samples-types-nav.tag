@@ -39,7 +39,7 @@
         });
 
         selectedConfigSampleType(e) {
-            var type_id = $(e.target).attr('data-id');
+            var type_id = e.item.id;
             console.log('config type selected '+type_id);
             $('.sample_config_type').removeClass('active');
             $('#sample_config_type_'+type_id).addClass('active');
