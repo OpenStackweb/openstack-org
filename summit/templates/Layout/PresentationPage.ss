@@ -12,13 +12,20 @@
                                 <h2>Presentations</h2>
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <% if $Top.Summit.isCallForSpeakersOpen && not $CurrentMember.SpeakerProfile.hasReachPresentationLimitBy($Top.Summit.ID) %>
-                                    <a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New Presentation</a>
-                                    <p class="max-presentation-notice">Speakers are limited to a total of $MaxAllowedPresentations presentations submissions, whether submitted by them or on their behalf.</p>
+                                <% if $Top.Summit.isCallForSpeakersOpen %>
+                                    <% if not $CurrentMember.SpeakerProfile.hasReachPresentationLimitBy($Top.Summit.ID)  %>
+                                        <a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New Presentation</a>
+                                        <p class="max-presentation-notice">Speakers are limited to a total of $MaxAllowedPresentations presentations submissions, whether submitted by them or on their behalf.</p>
+                                    <% else %>
+                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <strong>Warning!</strong> You reached presentations submissions limit ($MaxAllowedPresentations).
+                                        </div>
+                                    <% end_if %>
                                 <% else %>
                                     <div class="alert alert-danger alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <strong>Warning!</strong> You reached presentations submissions limit ($MaxAllowedPresentations).
+                                        <strong>Warning!</strong> Call for Speakers is closed!.
                                     </div>
                                 <% end_if %>
                             </div>
@@ -30,15 +37,23 @@
                             <% if $CurrentMember.SpeakerProfile.MyPresentations($Top.Summit.ID) %>
                                 <% loop $CurrentMember.SpeakerProfile.MyPresentations($Top.Summit.ID) %>
                                 <tr>
-                                    <td class="item-name"><i class="fa fa-file-text-o"></i><a
-                                            href="$EditLink"><% if $Title %>$Title<% else %>$ID<% end_if %></a></td>
+                                    <td class="item-name">
+                                        <i class="fa fa-file-text-o"></i>
+                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                            <a href="$EditLink">
+                                        <% end_if %>
+                                        <% if $Title %>$Title<% else %>$ID<% end_if %>
+                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                            </a>
+                                        <% end_if %>
+                                    </td>
                                     <% if $Status %>
                                         <td class="status"><i class="fa fa-tag"></i> $Status</td>
                                     <% else %>
                                         <td class="status"></td>
                                     <% end_if %>
                                     <td class="action">
-                                        <% if $CanDelete %>
+                                        <% if $CanDelete && $Top.Summit.isPresentationEditionAllowed %>
                                             <a data-confirm="Whoa, there..."
                                                data-confirm-text="Are you sure you want to delete this presentation?"
                                                data-confirm-ok="Yup. Get rid of it."
@@ -62,10 +77,19 @@
                             <% if $CurrentMember.SpeakerProfile.OtherPresentations($Top.Summit.ID) %>
                                 <% loop $CurrentMember.SpeakerProfile.OtherPresentations($Top.Summit.ID) %>
                                 <tr>
-                                    <td class="item-name"><i class="fa fa-file-text-o"></i><a
-                                            href="$EditLink">$Title</a></td>
+                                    <td class="item-name">
+                                        <i class="fa fa-file-text-o"></i>
+                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                            <a href="$EditLink">
+                                        <% end_if %>
+                                            <% if $Title %>$Title<% else %>$ID<% end_if %>
+                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                            </a>
+                                        <% end_if %>
+                                    </td>
                                     <td class="status"><i class="fa fa-tag"></i> $Status</td>
-                                    <td class="action"><% if $CanDelete %><a href="$DeleteLink">Delete</a><% end_if %>
+                                    <td class="action">
+                                        <% if $CanDelete && $Top.Summit.isPresentationEditionAllowed %><a href="$DeleteLink">Delete</a><% end_if %>
                                     </td>
                                 </tr>
                                 <% end_loop %>

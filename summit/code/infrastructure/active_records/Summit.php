@@ -1376,4 +1376,9 @@ SQL;
         $now                      = new \DateTime('now', new DateTimeZone('UTC'));
         return $start_showing_venue_date <= $now;
     }
+
+    public function isPresentationEditionAllowed()
+    {
+        return $this->isCallForSpeakersOpen() || $this->isVotingOpen();
+    }
 }

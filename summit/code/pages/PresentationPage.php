@@ -179,7 +179,7 @@ class PresentationPage_Controller extends SummitPage_Controller
 
         $summit = $this->Summit();
 
-        if (is_null($summit) || $summit->ID == 0 || !$summit->isCallForSpeakersOpen()) {
+        if (is_null($summit) || $summit->ID == 0 || !$summit->isPresentationEditionAllowed()) {
             return $this->httpError(403, 'Call for speaker closed!');
         }
 

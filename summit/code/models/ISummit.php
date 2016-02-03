@@ -200,4 +200,9 @@ interface ISummit extends IEntity
      */
     public function ShouldShowVenues();
 
+    /**
+     * @return bool
+    */
+    public function isPresentationEditionAllowed();
+
 }
