@@ -106,12 +106,12 @@ require('./change-requests.tag')
 								<div class="btn-group pull-right" role="group" >
 
 									<!-- My list button -->
-									<button show="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> My List</button>
-									<button show="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> My List</button>
+									<!-- <button show="{ currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ unselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> My List</button>
+									<button show="{ !currentPresentation.selected && currentPresentation.can_assign }" type="button" onclick="{ selectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> My List</button> -->
 
 									<!-- Group List button -->
-									<button show="{ currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupUnselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> Team List</button>
-									<button show="{ !currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupSelectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> Team List</button>
+									<!-- <button show="{ currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupUnselectPresentation }" class="btn btn-success select-button"><i class="fa fa-check-circle-o"></i> Team List</button>
+									<button show="{ !currentPresentation.group_selected && currentPresentation.can_assign }" type="button" onclick="{ groupSelectPresentation }" class="btn btn-default select-button"><i class="fa fa-circle-o"></i> Team List</button> -->
 
 								</div>
 
@@ -334,6 +334,7 @@ require('./change-requests.tag')
 
 		opts.on('presentation-details-loaded', function(result){
 
+			// Entirely clear out any previous display elements
 			self.currentPresentation = []
 			self.update()
 
@@ -355,6 +356,7 @@ require('./change-requests.tag')
 
 			self.update()
 		})
+
 
 		showDetails(){
 			self.details = true
