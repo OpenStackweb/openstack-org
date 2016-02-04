@@ -190,14 +190,9 @@ JS;
             $country_array[] = $pref_country->Country;
         }
 
-        foreach ($speaker->MixedPresentationLinks(5) as $key => $presentation) {
-            $this->fields->fieldByName('PresentationLink['.($key+1).']')->setValue($presentation->Link);
+        foreach ($speaker->OtherPresentationLinks() as $key => $presentation) {
+            $this->fields->fieldByName('PresentationLink['.($key+1).']')->setValue($presentation->LinkUrl);
             $this->fields->fieldByName('PresentationTitle['.($key+1).']')->setValue($presentation->Title);
-            if ($presentation->Source == 'summit')
-            {
-                $this->fields->fieldByName('PresentationLink['.($key+1).']')->setDisabled(true);
-                $this->fields->fieldByName('PresentationTitle['.($key+1).']')->setDisabled(true);
-            }
         }
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');

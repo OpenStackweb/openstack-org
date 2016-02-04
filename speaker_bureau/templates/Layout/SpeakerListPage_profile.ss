@@ -83,15 +83,29 @@
                         <p>I'm involved in the following OpenStack projects: $Projects</p>
                     </div>
                 <% end_if %>
-                <% if MixedPresentationLinks(5) %>
+                <% if Presentations() %>
                     <div class="span-4">
-                        <strong>Presentations</strong>
+                        <strong>Presentations from previous OpenStack Summits:</strong>
                     </div>
                     <div class="span-6 last">
                         <ul>
-                            <% loop MixedPresentationLinks(5) %>
+                            <% loop Presentations.Limit(5).Sort(StartDate, DESC) %>
                                 <li>
                                     <a href="$Link"><% if $Title != '' %>$Title<% else %>$Link<% end_if %></a>
+                                </li>
+                            <% end_loop %>
+                        </ul>
+                    </div>
+                <% end_if %>
+                <% if OtherPresentationLinks() %>
+                    <div class="span-4">
+                        <strong>Additional presentations:</strong>
+                    </div>
+                    <div class="span-6 last">
+                        <ul>
+                            <% loop OtherPresentationLinks.Limit(5) %>
+                                <li>
+                                    <a href="$LinkUrl"><% if $Title != '' %>$Title<% else %>$LinkUrl<% end_if %></a>
                                     <% if $YoutubeID %>
                                         <br>
                                         <iframe frameborder="0" width="200" height="120" allowfullscreen=""
