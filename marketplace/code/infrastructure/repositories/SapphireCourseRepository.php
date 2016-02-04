@@ -198,7 +198,7 @@ SQL;
         WHERE
         TC.Online = 0 AND
         DATE('{$current_date}') < D.StartDate AND DATE('{$current_date}') < D.EndDate
-        GROUP BY TC.ID
+        GROUP BY TC.ID,L.ID,D.ID
         ORDER BY StartDate ASC LIMIT {$limit};
 SQL;
 
