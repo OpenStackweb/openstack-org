@@ -24,11 +24,6 @@ PublisherSubscriberManager::getInstance()->subscribe('survey_organization_select
             $org->Name              = $organization_name;
             $org->IsStandardizedOrg = false;
             $org->write();
-            //register new request
-            $new_request                 = new OrganizationRegistrationRequest();
-            $new_request->MemberID       = $member->getIdentifier();
-            $new_request->OrganizationID = $org->ID;
-            $new_request->write();
         }
 
         // If a new org name was provided for the member, find / create the new org and update the member record

@@ -1,0 +1,29 @@
+---
+Name: 'registration-injection'
+After:
+  - 'openstack/*'
+  - 'security/*'
+---
+RegistrationPage_Controller:
+  dependencies:
+    MemberManager: '%$MemberManager'
+MemberVerificationController:
+  dependencies:
+    MemberManager: '%$MemberManager'
+Injector:
+  MemberRepository:
+    class: SapphireMemberRepository
+  MemberFactory:
+    class: MemberFactory
+  AffiliationFactory:
+    class: AffiliationFactory
+  MemberManager:
+    constructor:
+      0: '%$MemberRepository'
+      1: '%$GroupRepository'
+      2: '%$OrgRepository'
+      3: '%$MemberFactory'
+      4: '%$GroupFactory'
+      5: '%$AffiliationFactory'
+      6: '%$OrgFactory'
+      7: '%$TransactionManager'

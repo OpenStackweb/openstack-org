@@ -14,52 +14,57 @@
  **/
 class MemberDecorator extends DataExtension
 {
-
     private static $db = array
     (
-        'SecondEmail' => 'Text',
-        'ThirdEmail' => 'Text',
-        'HasBeenEmailed' => 'Boolean',
-        'ShirtSize' => "Enum('Extra Small, Small, Medium, Large, XL, XXL')",
-        'StatementOfInterest' => 'Text',
-        'Bio' => 'HTMLText',
-        'FoodPreference' => 'Text',
-        'OtherFood' => 'Text',
-        'IRCHandle' => 'Text',
-        'TwitterName' => 'Text',
-        'Projects' => 'Text',
-        'OtherProject' => 'Text',
+        'SecondEmail'            => 'Text',
+        'ThirdEmail'             => 'Text',
+        'HasBeenEmailed'         => 'Boolean',
+        'ShirtSize'              => "Enum('Extra Small, Small, Medium, Large, XL, XXL')",
+        'StatementOfInterest'    => 'Text',
+        'Bio'                    => 'HTMLText',
+        'FoodPreference'         => 'Text',
+        'OtherFood'              => 'Text',
+        'IRCHandle'              => 'Text',
+        'TwitterName'            => 'Text',
+        'Projects'               => 'Text',
+        'OtherProject'           => 'Text',
         'SubscribedToNewsletter' => 'Boolean',
-        'JobTitle' => 'Text',
-        'DisplayOnSite' => 'Boolean',
-        'Role' => 'Text',
-        'LinkedInProfile' => 'Text',
-        'Address' => 'Varchar(255)',
-        'Suburb' => 'Varchar(64)',
-        'State' => 'Varchar(64)',
-        'Postcode' => 'Varchar(64)',
-        'Country' => 'Varchar(2)',
-        'City' => 'Varchar(64)',
-        'Gender' => 'Varchar(32)',
-        'TypeOfDirector' => 'Text',
-        'Active'         => 'Boolean',
+        'JobTitle'               => 'Text',
+        'DisplayOnSite'          => 'Boolean',
+        'Role'                   => 'Text',
+        'LinkedInProfile'        => 'Text',
+        'Address'                => 'Varchar(255)',
+        'Suburb'                 => 'Varchar(64)',
+        'State'                  => 'Varchar(64)',
+        'Postcode'               => 'Varchar(64)',
+        'Country'                => 'Varchar(2)',
+        'City'                   => 'Varchar(64)',
+        'Gender'                 => 'Varchar(32)',
+        'TypeOfDirector'         => 'Text',
+        'Active'                 => 'Boolean',
+        'EmailVerified'          => 'Boolean',
+        'EmailVerifiedTokenHash' => 'Text',
+        'EmailVerifiedDate'      => 'SS_Datetime',
     );
 
-    private static $defaults = array(
+    private static $defaults = array
+    (
         'SubscribedToNewsletter' => true,
-        'DisplayOnSite' => false,
-        'Active' => true,
+        'DisplayOnSite'          => false,
+        'Active'                 => true,
     );
 
-    private static $has_one = array(
+    private static $has_one = array
+    (
         'Photo' => 'BetterImage',
-        'Org' => 'Org'
+        'Org'   => 'Org'
     );
 
 
-    private static $has_many = array(
+    private static $has_many = array
+    (
         'LegalAgreements' => 'LegalAgreement',
-        'Affiliations' => 'Affiliation'
+        'Affiliations'    => 'Affiliation'
     );
 
     private static $belongs_many_many = array(
@@ -404,5 +409,56 @@ class MemberDecorator extends DataExtension
     {
         return Permission::checkMember($this->owner, 'ADMIN');
     }
+
+    public function generateEmailVerificationToken()
+    {
+        $generator = new RandomGenerator();
+        do
+        {
+            $token     = $generator->randomToken();
+            $hash      = self::HashConfirmationToken($token);
+        }
+        while(intval(Member::get()->filter('EmailVerifiedTokenHash', $hash)->count()) > 0);
+        $this->owner->setField('EmailVerifiedTokenHash', $hash);
+        return $token;
+    }
+
+    /**
+     * @param string $token
+     * @return string
+     */
+    public static function HashConfirmationToken($token)
+    {
+        return md5($token);
+    }
+
+    /**
+     * @param string $token
+     * @return bool
+     * @throws EntityValidationException
+     */
+    public function doEmailConfirmation($token)
+    {
+        $original_hash = $this->owner->getField('EmailVerifiedTokenHash');
+        if($this->owner->EmailVerified) throw new EntityValidationException(array('email already verified'));
+        if(self::HashConfirmationToken($token) === $original_hash){
+            $this->owner->EmailVerified           = true;
+            $this->owner->EmailVerifiedDate       = SS_Datetime::now()->Rfc2822();
+            return true;
+        }
+        throw new EntityValidationException(array('invalid hash'));
+    }
+
+    /**
+     * @return $this
+     */
+    public function resetConfirmation()
+    {
+        $this->owner->EmailVerified           = false;
+        $this->owner->EmailVerifiedDate       = null;
+        $this->owner->EmailVerifiedTokenHash  = null;
+        return $this->owner;
+    }
+
 }
 

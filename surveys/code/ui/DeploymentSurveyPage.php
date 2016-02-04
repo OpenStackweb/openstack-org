@@ -311,11 +311,6 @@ class DeploymentSurveyPage_Controller extends Page_Controller
                     $org->Name = $org_data;
                     $org->IsStandardizedOrg = false;
                     $org->write();
-                    //register new request
-                    $new_request = new OrganizationRegistrationRequest();
-                    $new_request->MemberID = Member::currentUserID();
-                    $new_request->OrganizationID = $org->ID;
-                    $new_request->write();
                 }
                 $this->updateMember($org_data);
                 $survey->OrgID = $org->ID;

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,10 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-/**
- * Class SapphireDupesMemberRepository
- */
-class SapphireDupesMemberRepository extends SapphireMemberRepository
+final class OrgFactory implements IOrgFactory
 {
+
+    /**
+     * @param string $name
+     * @param null|string $foundation_support_level
+     * @return IOrganization
+     */
+    public function build($name, $foundation_support_level = null)
+    {
+        $org = Org::create();
+        $org->Name = trim($name);
+        if(!is_null($foundation_support_level))
+        $org->FoundationSupportLevel = $foundation_support_level;
+        return $org;
+    }
 }

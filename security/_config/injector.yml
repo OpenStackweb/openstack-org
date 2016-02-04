@@ -1,0 +1,8 @@
+---
+Name: 'custom-security-module-injector'
+---
+Injector:
+  GroupRepository:
+    class: SapphireSecurityGroupRepository
+  GroupFactory:
+    class: SecurityGroupFactory

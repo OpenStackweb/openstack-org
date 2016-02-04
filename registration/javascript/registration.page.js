@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
     var default_country = country.val();
     var state_input = $(form_id + ' input[name="State"]');
 
-    if(registration_form.length>0){
+    if(registration_form.length > 0){
 
         $('.autocompleteoff').attr('autocomplete', 'off');
 
@@ -66,7 +66,7 @@ jQuery(document).ready(function($) {
                 return !res;
             },'Please check your input.');
 
-        registration_form.validate({
+        var registration_form_validator = registration_form.validate({
             onfocusout: false,
             invalidHandler: function(form, validator) {
                 var errors = validator.numberOfInvalids();
@@ -113,6 +113,11 @@ jQuery(document).ready(function($) {
                     remote:'That address is already in use by another user'
                 }
             }
+        });
+
+        $( "#HiddenAffiliations" ).on( "affiliation:saved", function( event ) {
+            console.log('affiliation:saved');
+            registration_form_validator.resetForm();
         });
 
         var GenderSpecify = $('input[name=GenderSpecify]');

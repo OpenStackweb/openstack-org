@@ -13,8 +13,33 @@
  **/
 
 /**
- * Class SapphireDupesMemberRepository
+ * Class SapphireSecurityGroupRepository
  */
-class SapphireDupesMemberRepository extends SapphireMemberRepository
+class SapphireSecurityGroupRepository
+    extends SapphireRepository
+    implements ISecurityGroupRepository
 {
+
+    public function __construct()
+    {
+        parent::__construct(new Group);
+    }
+
+    /**
+     * @param $title
+     * @return ISecurityGroup
+     */
+    public function getByTitle($title)
+    {
+        return Group::get()->filter('Title', $title)->first();
+    }
+
+    /**
+     * @param string $code
+     * @return ISecurityGroup
+     */
+    public function getByCode($code)
+    {
+        return Group::get()->filter('Code', $code)->first();
+    }
 }

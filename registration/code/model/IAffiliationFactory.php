@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,14 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-/**
- * Interface ISecurityGroup
- */
-interface ISecurityGroup extends IEntity  {
-	public function getTitle();
-	public function setTitle($title);
-	public function getSlug();
-	public function setSlug($slug);
-	public function getDescription();
-	public function setDescription($description);
-} 
+interface IAffiliationFactory
+{
+    /**
+     * @param $data
+     * @param Member $member
+     * @param Org $org
+     * @return Affiliation
+     */
+    public function build($data, Member $member, Org $org);
+}

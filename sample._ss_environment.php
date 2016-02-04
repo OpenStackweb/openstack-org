@@ -6,7 +6,7 @@ define('SS_ENVIRONMENT_TYPE', '');
 define('SS_DATABASE_SERVER', '');
 define('SS_DATABASE_USERNAME', '');
 define('SS_DATABASE_PASSWORD', '');
-define('SS_DATABASE_CLASS','MySQLDatabase');
+define('SS_DATABASE_CLASS','CustomMySQLDatabase');
 //db name
 $database = '';
 

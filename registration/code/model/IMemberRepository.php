@@ -29,4 +29,10 @@ interface IMemberRepository extends IEntityRepository
      * @return ICommunityMember[]
      */
     public function getAllByName($first_name, $last_name);
+
+    /**
+     * @param string $email_verification_token
+     * @return Member|null
+     */
+    public function getByEmailVerificationToken($email_verification_token);
 } 

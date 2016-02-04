@@ -92,8 +92,6 @@ Injector:
     class: SummitAttendeeFactory
   SummitAttendeeRepository:
     class: SapphireSummitAttendeeRepository
-  MemberRepository:
-    class: SapphireDupesMemberRepository
   EventbriteEventManager:
     constructor:
       0: '%$EventbriteEventRepository'

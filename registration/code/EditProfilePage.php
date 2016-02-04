@@ -159,6 +159,13 @@ class EditProfilePage_Controller extends Page_Controller
                 if ($data['Gender'] == 'Specify') {
                     $CurrentMember->Gender = $data['GenderSpecify'];
                 }
+
+                if($CurrentMember->isChanged('Email'))
+                {
+                    $sender = new MemberRegistrationSenderService();
+                    $sender->send($CurrentMember->resetConfirmation());
+                }
+
                 $CurrentMember->write();
 
 

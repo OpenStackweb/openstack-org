@@ -14,3 +14,6 @@
 Object::add_extension('Member', 'MemberDecorator');
 Object::add_extension('SecurityAdmin', 'SecurityAdminDecorator');
 Object::add_extension('SiteConfig', 'CustomSiteConfigRegistration');
+
+define('MEMBER_REGISTRATION_VERIFICATION_EMAIL_TEMPLATE_ID','member-registration-verification-email');
+define('MEMBER_REGISTRATION_VERIFIED_EMAIL_TEMPLATE_ID','member-registration-verified-email');

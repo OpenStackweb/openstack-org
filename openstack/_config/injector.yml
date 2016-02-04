@@ -11,3 +11,7 @@ Injector:
     class: CustomHasManyList
   UnsavedRelationList:
     class: CustomUnsavedRelationList
+  OrgFactory:
+    class: OrgFactory
+  OrgRepository:
+    class: SapphireOrgRepository

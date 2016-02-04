@@ -14,7 +14,7 @@
 require_once(Director::baseFolder().'/marketplace/code/utils/helpers.php');
 
 //extensions
-Object::add_extension('Group', 'SecurityGroupDecorator');
+
 Object::add_extension('Company', 'MarketPlaceCompany');
 Object::add_extension('Member', 'MarketPlaceAdminMember');
 Object::add_extension('Project', 'TrainingCourseRelatedProject');

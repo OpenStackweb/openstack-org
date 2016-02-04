@@ -26,6 +26,27 @@ class RegistrationPage_Controller extends Page_Controller
         'results',
     );
 
+    /**
+     * @var IMemberManager
+     */
+    private $member_manager;
+
+    /**
+     * @return IMemberManager
+     */
+    public function getMemberManager()
+    {
+        return $this->member_manager;
+    }
+
+    /**
+     * @param IMemberManager $manager
+     */
+    public function setMemberManager(IMemberManager $manager)
+    {
+        $this->member_manager = $manager;
+    }
+
     function init()
     {
         parent::init();
@@ -158,6 +179,10 @@ class RegistrationPage_Controller extends Page_Controller
         $form =  new HoneyPotForm($this, 'RegistrationForm', $fields, $actions, $validator);
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
+            if(isset($data['HiddenAffiliations']))
+            {
+                $affiliations->setValue($data['HiddenAffiliations']);
+            }
             return $form->loadDataFrom($data);
         }
 
@@ -167,92 +192,30 @@ class RegistrationPage_Controller extends Page_Controller
     //Submit the registration form
     function doRegister($data, $form)
     {
-        Session::set("FormInfo.{$form->FormName()}.data", $data);
+        try {
+            $data = SQLDataCleaner::clean($data, $non_check_keys = array('HiddenAffiliations'));
 
-        if (!isset($data["HiddenAffiliations"]) || empty($data["HiddenAffiliations"])) {
-            //Set error message
-            $form->AddErrorMessage('Affiliations', "Sorry, You must at least enter one valid Affiliation.", 'bad');
-            //Set form data from submitted values
-            //Return back to form
-            return $this->redirectBack();;
+            Session::set("FormInfo.{$form->FormName()}.data", $data);
+            $profile_page = EditProfilePage::get()->first();
+            $member = $this->member_manager->register($data, $profile_page, new MemberRegistrationSenderService);
+            //Get profile page
+            if (!is_null($profile_page)) {
+                //Redirect to profile page with success message
+                Session::clear("FormInfo.{$form->FormName()}.data");
+                return OpenStackIdCommon::loginMember($member, $profile_page->Link('?success=1'));
+            }
         }
-
-        $new_affiliations = json_decode($data["HiddenAffiliations"]);
-
-        //Check for existing member email address
-        if ($member = Member::get()->filter('Email', Convert::raw2sql($data['Email']))->first()) {
-            //Set error message
-            $form->AddErrorMessage('Email', "Sorry, that email address already exists. Please choose another.", 'bad');
-            //Set form data from submitted values
+        catch(EntityValidationException $ex1){
+            Form::messageForForm('HoneyPotForm_RegistrationForm',$ex1->getMessage(), 'bad');
             //Return back to form
+            SS_Log::log($ex1->getMessage(), SS_Log::ERR);
             return $this->redirectBack();
         }
-
-        //Otherwise create new member and log them in
-        $Member = new Member();
-        $form->saveInto($Member);
-
-        if (isset($data['Gender'])) {
-            $Gender = $data['Gender'];
-
-            if ($Gender != 'Male' && $Gender != 'Female' && $Gender != 'Prefer not to say') {
-                $Member->Gender = Convert::raw2sql($data['GenderSpecify']);
-            }
-        }
-
-        $Member->write();
-
-        if ($data['MembershipType'] == 'foundation') {
-            $Member->upgradeToFoundationMember();
-        } else {
-            $Member->convert2SiteUser();
-        }
-
-        //Find or create the 'user' group
-        if (!$userGroup = Group::get()->filter('Code', 'users')->first()) {
-            $userGroup = new Group();
-            $userGroup->Code = "users";
-            $userGroup->Title = "Users";
-            $userGroup->Write();
-            $Member->Groups()->add($userGroup);
-        }
-        //Add member to user group
-        $Member->Groups()->add($userGroup);
-
-
-        foreach ($new_affiliations as $key => $newAffiliation) {
-            $dbAffiliation = new Affiliation();
-            $org_name = Convert::raw2sql($newAffiliation->OrgName);
-            $org_name = trim($org_name);
-            AffiliationController::Save($dbAffiliation, $newAffiliation, $org_name, $Member);
-        }
-
-        PublisherSubscriberManager::getInstance()->publish('new_user_registered', array($Member->ID));
-
-        //Get profile page
-        if ($ProfilePage = EditProfilePage::get()->first()) {
-
-            //send Thank you email
-
-            $config = SiteConfig::current_site_config();
-            if ($config->RegistrationSendMail &&
-                !empty($config->RegistrationFromMessage) &&
-                !empty($config->RegistrationSubjectMessage) &&
-                !empty($config->RegistrationHTMLMessage) &&
-                !empty($config->RegistrationPlainTextMessage)
-            ) {
-
-
-                $registration_email = new CustomEmail($config->RegistrationFromMessage,
-                    $Member->Email,
-                    $data['MembershipType'] == 'foundation' ? 'Thank you for becoming an OpenStack Foundation Member' : 'Thank you for becoming an OpenStack Community Member',
-                    $config->RegistrationHTMLMessage,
-                    $config->RegistrationPlainTextMessage);
-                $registration_email->send();
-            }
-            //Redirect to profile page with success message
-            Session::clear("FormInfo.{$form->FormName()}.data");
-            return OpenStackIdCommon::loginMember($member, $ProfilePage->Link('?success=1'));
+        catch(Exception $ex){
+            Form::messageForForm('HoneyPotForm_RegistrationForm', "There was an error with your request, please contact your admin.", 'bad');
+            //Return back to form
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->redirectBack();
         }
     }
 

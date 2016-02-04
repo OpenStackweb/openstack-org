@@ -56,4 +56,15 @@ class CustomMySQLDatabase extends MySQLDatabase
         }
     }
 
+    public function transactionStart($transaction_mode=false, $session_characteristics=false){
+        //By default, autocommit mode is enabled in MySQL.
+        $this->query('SET AUTOCOMMIT=0;');
+        parent::transactionStart($transaction_mode, $session_characteristics);
+    }
+
+    public function transactionRollback($savepoint = false){
+        parent::transactionRollback($savepoint);
+        $this->query('SET AUTOCOMMIT=1;');
+    }
+
 }

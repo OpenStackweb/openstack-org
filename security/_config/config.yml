@@ -1,0 +1,6 @@
+---
+Name: 'custom-security-module-config'
+---
+Group:
+  extensions:
+    - SecurityGroupDecorator

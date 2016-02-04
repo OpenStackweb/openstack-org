@@ -11,104 +11,108 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class SapphireTransactionManager
  */
-final class SapphireTransactionManager implements ITransactionManager {
+final class SapphireTransactionManager implements ITransactionManager
+{
 
-	/**
-	 * @var ITransactionManager
-	 */
-	private static $instance;
+    /**
+     * @var ITransactionManager
+     */
+    private static $instance;
 
-	private function __construct(){}
+    private function __construct()
+    {
+    }
 
-	private function __clone(){}
+    private function __clone()
+    {
+    }
 
-	/**
-	 * @return ITransactionManager
-	 */
-	public static function getInstance(){
-		if(!is_object(self::$instance)){
-			self::$instance = new SapphireTransactionManager();
-		}
-		return self::$instance;
-	}
+    /**
+     * @return ITransactionManager
+     */
+    public static function getInstance()
+    {
+        if (!is_object(self::$instance)) {
+            self::$instance = new SapphireTransactionManager();
+        }
 
-	/**
-	 * @var int
-	 */
-	private $transactions = 0;
+        return self::$instance;
+    }
 
-	private function beginTransaction()
-	{
-		++$this->transactions;
-		if ($this->transactions == 1)
-		{
-			//By default, autocommit mode is enabled in MySQL.
-			DB::query("SET AUTOCOMMIT=0;");
-			DB::query("START TRANSACTION;");
-		}
-	}
+    /**
+     * @var int
+     */
+    private $transactions = 0;
 
-	private function commit(){
-		if ($this->transactions == 1){
+    private function beginTransaction()
+    {
+        ++$this->transactions;
+        if ($this->transactions == 1) {
+           DB::getConn()->transactionStart();
+        }
+    }
+
+    private function commit()
+    {
+        if ($this->transactions == 1) {
             $queries = SapphireBulkQueryRegistry::getInstance()->getPreQueries();
-            foreach($queries as $q){
-                foreach($q->toSQL() as $sql)
+            foreach ($queries as $q) {
+                foreach ($q->toSQL() as $sql) {
                     DB::query($sql);
+                }
             }
 
             UnitOfWork::getInstance()->commit();
 
             $queries = SapphireBulkQueryRegistry::getInstance()->getPostQueries();
-            foreach($queries as $q){
-                foreach($q->toSQL() as $sql)
+            foreach ($queries as $q) {
+                foreach ($q->toSQL() as $sql) {
                     DB::query($sql);
+                }
             }
-         	DB::query("COMMIT;");
-			DB::query("SET AUTOCOMMIT=1;");
-		}
-		--$this->transactions;
-	}
+            DB::getConn()->transactionEnd();
+        }
+        --$this->transactions;
+    }
 
-	private function rollBack(){
-		if ($this->transactions == 1)
-		{
-			$this->transactions = 0;
+    private function rollBack()
+    {
+        if ($this->transactions == 1) {
+            $this->transactions = 0;
+            DB::getConn()->transactionRollback();
+        } else {
+            --$this->transactions;
+        }
+    }
 
-			DB::query("ROLLBACK;");
-			DB::query("SET AUTOCOMMIT=1;");
-		}
-		else
-		{
-			--$this->transactions;
-		}
-	}
-
-	/**
-	 * @param callable $callback
-	 * @return mixed|void
-	 * @throws Exception
-	 */
-	public function transaction(Closure $callback){
-		$result = null;
-		try{
-			$this->beginTransaction();
+    /**
+     * @param callable $callback
+     * @return mixed|void
+     * @throws Exception
+     */
+    public function transaction(Closure $callback)
+    {
+        $result = null;
+        try {
+            $this->beginTransaction();
             $r = new ReflectionFunction($callback);
             // reload on UOW entities that could not being on the update context
-            foreach($r->getStaticVariables() as $var){
-                if($var instanceof IEntity && $var->getIdentifier() > 0){
+            foreach ($r->getStaticVariables() as $var) {
+                if ($var instanceof IEntity && $var->getIdentifier() > 0) {
                     UnitOfWork::getInstance()->scheduleForUpdate($var);
                 }
             }
-          	$result = $callback($this);
-			$this->commit();
-		}
-		catch(Exception $ex){
-			$this->rollBack();
-			throw $ex;
-		}
-		return $result;
-	}
+            $result = $callback($this);
+            $this->commit();
+        } catch (Exception $ex) {
+            $this->rollBack();
+            throw $ex;
+        }
+
+        return $result;
+    }
 }

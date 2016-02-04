@@ -39,7 +39,7 @@
             affiliation_form   = $(this);
             affiliation_form_id = "#"+affiliation_form.attr("id");
 
-            if(affiliation_form.length>0){
+            if(affiliation_form.length > 0){
 
                 var affiliation_form_validator = affiliation_form.validate({
                     rules: {
@@ -160,6 +160,7 @@
                         break;
                     }
                     $('#modal-edit-affiliation').modal('hide');
+                    $("#HiddenAffiliations").trigger( "affiliation:saved");
                     return false;
                 });
 
@@ -360,6 +361,14 @@
 
     function LoadLocalAffiliationList(){
         var array = [];
+        if(jQuery.isEmptyObject(local_storage))
+        {
+            var val = $("#HiddenAffiliations").val();
+            if(val != '')
+            {
+                local_storage = JSON.parse(val);
+            }
+        }
         for ( var item in local_storage ){
             array.push( local_storage[ item ] );
         }

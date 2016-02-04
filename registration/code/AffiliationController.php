@@ -62,11 +62,6 @@ class AffiliationController extends Page_Controller
             $org = new Org();
             $org->Name = $org_name;
             $org->write();
-            //register new request
-            $new_request = new OrganizationRegistrationRequest();
-            $new_request->MemberID = $CurrentMember->ID;
-            $new_request->OrganizationID = $org->ID;
-            $new_request->write();
         }
 
         $config = HTMLPurifier_Config::createDefault();
