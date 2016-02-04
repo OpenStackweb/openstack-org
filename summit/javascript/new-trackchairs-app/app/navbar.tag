@@ -16,21 +16,21 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 
-	        <li class="{ active: self.parent.DisplayMode === 'tutorial' }"><a href="#" onclick="{ setMode('tutorial') }">Tutorial</a></li>		      
+	        <li class="{ active: self.parent.DisplayMode === 'tutorial' }"><a href="#" onclick="{ setMode('tutorial') }">Tutorial</a></li>
 	        <li class="{ active: self.parent.DisplayMode === 'browse' }"><a href="#" onclick="{ setMode('presentations') }">Browse Presentations <span class="sr-only">(current)</span></a></li>
 	        <li class="{ active: self.parent.DisplayMode === 'selections' }"><a href="#" onclick="{ setMode('selections') }">Your Selections</a></li>
 	        <li class="{ active: self.parent.DisplayMode === 'directory' }"><a href="#" onclick="{ setMode('directory') }">Chair Directory</a></li>
-	        <li class="{ active: self.parent.DisplayMode === 'requests' }" show="{ opts.admin }"><a href="#" onclick="{ setMode('requests') }">Change Requests</a></li>        
+	        <li class="{ active: self.parent.DisplayMode === 'requests' }" show="{ opts.admin }"><a href="#" onclick="{ setMode('requests') }">Change Requests</a></li>
+					<li class="{ active: self.parent.DisplayMode === 'comments' }" show="{ opts.admin }"><a href="#" onclick="{ setMode('comments') }">All Comments</a></li>
+
 
 	      </ul>
 
-	      
+
 
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
-	
-	self = this;
 
 	setMode(mode) {
 		return function(e) {

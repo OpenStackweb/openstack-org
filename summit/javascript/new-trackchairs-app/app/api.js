@@ -25,7 +25,7 @@ api.on('load-summit-details', function(id){
 	  , success: function (resp) {
 			api.trigger('summit-details-loaded', resp)
 	    }
-	})	
+	})
 
 })
 
@@ -40,7 +40,7 @@ api.on('load-selections', function(categoryId){
 	  , method: 'get'
 	  , success: function (resp) {
 	  		console.log('response from server loading selctions: ', resp)
-			console.log('4b. api fires selections loaded.');	  		
+			console.log('4b. api fires selections loaded.');
 			api.trigger('selections-loaded', resp)
 	    }
 	})
@@ -155,7 +155,7 @@ api.on('save-sort-order', function(list_id, sort_order){
 	  , success: function (resp) {
 	  		api.trigger('sort-order-saved', resp)
 	    }
-	})	
+	})
 
 })
 
@@ -169,7 +169,7 @@ api.on('suggest-category-change', function(suggestedChange){
 	  , success: function (resp) {
 	  		api.trigger('category-change-suggested', resp)
 	    }
-	})	
+	})
 
 })
 
@@ -183,7 +183,7 @@ api.on('approve-change', function(id){
 	  , success: function (resp) {
 	  		api.trigger('change-approved', resp)
 	    }
-	})	
+	})
 })
 
 api.on('change-approved', function(){
@@ -197,7 +197,18 @@ api.on('load-change-requests', function(){
 	  , success: function (resp) {
 	  		api.trigger('change-requests-loaded', resp)
 	    }
-	})	
+	})
 })
+
+api.on('load-all-comments', function(){
+	reqwest({
+	    url: url + 'presentation-comments'
+	  , method: 'get'
+	  , success: function (resp) {
+	  		api.trigger('all-comments-loaded', resp)
+	    }
+	})
+})
+
 
 module.exports = api;

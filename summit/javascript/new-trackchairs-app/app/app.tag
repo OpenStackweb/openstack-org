@@ -13,6 +13,8 @@ require('./modal.tag')
 require('./chairdirectory.tag')
 require('./tutorial.tag')
 require('./change-requests.tag')
+require('./comments-list.tag')
+
 
 
 <app>
@@ -43,6 +45,12 @@ require('./change-requests.tag')
     	<!-- Change Requests Browser -->
     	<div show={ DisplayMode === 'requests' }>
     		<change-requests api="{ this.opts }"/>
+    	</div>
+    	<!-- Change Requests Browser -->
+
+			<!-- Change Requests Browser -->
+    	<div show={ DisplayMode === 'comments' }>
+    		<comments-list api="{ this.opts }"/>
     	</div>
     	<!-- Change Requests Browser -->
 
@@ -256,6 +264,11 @@ require('./change-requests.tag')
 
 			if (mode === 'requests') {
 				self.DisplayMode = 'requests'
+				self.update()
+			}
+
+			if (mode === 'comments') {
+				self.DisplayMode = 'comments'
 				self.update()
 			}
 

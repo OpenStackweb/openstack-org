@@ -16,7 +16,8 @@ class TrackChairAPI extends Controller {
 		'GET export/schedule' => 'handleScheduleForSched',
 		'GET export/speakers' => 'handleSpeakersForSched',
 		'GET export/speaker-worksheet' => 'handleSpeakerWorksheet',
-		'GET restore-orders' => 'handleRestoreOrders'
+		'GET restore-orders' => 'handleRestoreOrders',
+		'GET presentation-comments' => 'handlePresentationsWithComments'
 	);
 
 
@@ -33,7 +34,8 @@ class TrackChairAPI extends Controller {
 		'handleScheduleForSched' => 'ADMIN',
 		'handleSpeakersForSched' => 'ADMIN',
 		'handleRestoreOrders' => 'ADMIN',
-		'handleSpeakerWorksheet' => 'ADMIN'
+		'handleSpeakerWorksheet' => 'ADMIN',
+		'handlePresentationsWithComments' => 'ADMIN'
 	);
 
 
@@ -352,6 +354,48 @@ class TrackChairAPI extends Controller {
 
     	return (new SS_HTTPResponse(
     		Convert::array2json($results), 200
+    	))->addHeader('Content-Type', 'application/json');
+
+	}
+
+	public function handlePresentationsWithComments(SS_HTTPRequest $r) {
+
+		// Gets a list of presentations that have chair comments
+
+		$data = array();
+
+		$summitID = Summit::get_active()->ID;
+
+		// Get a collection of chair-visible presentations with comments
+		$comments = SummitPresentationComment::get()
+			->leftJoin("Presentation", "SummitPresentationComment.PresentationID = Presentation.ID")
+			->leftJoin("PresentationCategory", "PresentationCategory.ID = Presentation.CategoryID")
+			->leftJoin("SummitEvent", "SummitEvent.ID = Presentation.ID")
+			->where("
+				SummitEvent.SummitID = {$summitID}
+				AND PresentationCategory.ChairVisible = 1
+				AND Presentation.Status = 'Received'
+				")
+			->sort('Created','DESC');
+
+		  foreach($comments as $c) {
+
+				$system = strpos($c->Body, "suggested that this presentation be moved") || strpos($c->Body,"presentaiton was moved into the category");
+
+				$data['results'][] = array(
+	        		'id' => $c->ID,
+	          	'body' => $c->Body,
+							'presentaiton_title' => $c->Presentation()->Title,
+							'presentaiton_id' => $c->Presentation()->ID,
+							'commenter' => $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname,
+							'system_comment' => $system
+	    		);
+
+		}
+
+
+    	return (new SS_HTTPResponse(
+    		Convert::array2json($data), 200
     	))->addHeader('Content-Type', 'application/json');
 
 	}

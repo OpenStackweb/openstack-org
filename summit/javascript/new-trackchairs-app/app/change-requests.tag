@@ -24,7 +24,7 @@ require('./change-error-modal.tag')
 		<tr each="{request in requests}" class="{ completed:  request.done == '1' } { selected:  request.has_selections == true }">
 			<td>
 				<a href="#" data-toggle="modal" data-target="#approveModal" onclick="{ parent.setRequest(request) }"  if="{ !request.has_selections }">{ request.presentation_title }</a>
-				<a href="#" data-toggle="modal" data-target="#changeErrorModal" onclick="{ parent.setRequest(request) }" if="{ request.has_selections }">{ request.presentation_title }</a></td>				
+				<a href="#" data-toggle="modal" data-target="#changeErrorModal" onclick="{ parent.setRequest(request) }" if="{ request.has_selections }">{ request.presentation_title }</a></td>
 			<td>
 				<span if="{ request.done == '1'}">Completed</span>
 				<span if="{ request.done == '0' }">Requested</span>
@@ -43,7 +43,7 @@ require('./change-error-modal.tag')
 
 	<script>
 
-		self = this
+		var self = this
 		self.requests = []
 		self.activeRequest = []
 
