@@ -66,7 +66,8 @@ class CustomSiteConfig extends DataExtension {
 
         }
 
-        Session::set('bannerRank',$settings->SiteBannerRank);
+        if ($settings)
+            Session::set('bannerRank',$settings->SiteBannerRank);
 
         return $settings ? $settings->SiteBannerMessage : '';
     }
