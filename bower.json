@@ -38,6 +38,7 @@
     "pure-templates": "*",
     "clockpicker": "0.0.7",
     "urijs": "1.17.0",
-    "moment": "2.11.0"
+    "moment": "2.11.0",
+    "bootstrap3-typeahead": "~4.0.0"
   }
 }

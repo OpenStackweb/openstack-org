@@ -72,12 +72,20 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'GET unpublished/$Source!'    => 'getUnpublishedEventsBySource',
         'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'DELETE $EVENT_ID!/unpublish' => 'unpublishEvent',
+        'PUT $EVENT_ID!/update'       => 'updateEvent',
+        'GET $EVENT_ID!/get_members'  => 'getMemberOptionsForSpeakers',
+        'GET $EVENT_ID!/get_tags'     => 'getTagOptions',
+        'GET $EVENT_ID!/get_sponsors' => 'getSponsorOptions',
     );
 
     static $allowed_actions = array(
         'getUnpublishedEventsBySource',
         'publishEvent',
         'unpublishEvent',
+        'updateEvent',
+        'getMemberOptionsForSpeakers',
+        'getTagOptions',
+        'getSponsorOptions',
     );
 
     public function getUnpublishedEventsBySource(SS_HTTPRequest $request) {
@@ -233,4 +241,147 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             return $this->serverError();
         }
     }
+
+    public function updateEvent(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $event_id     = intval($request->param('EVENT_ID'));
+            $event_data   = $this->getJsonRequest();
+            $event_data['id'] = $event_id;
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $this->summit_service->updateEvent($summit, $event_data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessages());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    // this is called when typing a member name to add as a speaker on edit event
+    public function getMemberOptionsForSpeakers(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $query        = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $event_id     = intval($request->param('EVENT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $event        = $this->summitevent_repository->getById($event_id) ;
+            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+
+            $members = DB::query("SELECT M.ID AS id, CONCAT(M.FirstName,' ',M.Surname) AS name FROM Member AS M
+                                    LEFT JOIN Group_Members AS GM ON M.ID = GM.MemberID
+                                    LEFT JOIN `Group` AS G ON G.ID = GM.GroupID
+                                    WHERE (M.FirstName LIKE '{$query}%' OR M.Surname LIKE '{$query}%')
+                                    AND(G.Code = '".IFoundationMember::CommunityMemberGroupSlug."' OR G.Code = '".IFoundationMember::FoundationMemberGroupSlug."')
+                                    ORDER BY M.FirstName, M.Surname");
+
+            $json_array = array();
+            foreach ($members as $member) {
+                $json_array[] = $member;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    // this is called when typing a tag name to add as a tag on edit event
+    public function getTagOptions(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $query        = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $event_id     = intval($request->param('EVENT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $event        = $this->summitevent_repository->getById($event_id) ;
+            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+
+            $tags = DB::query("SELECT T.ID AS id, T.Tag AS name FROM Tag AS T
+                                    WHERE T.Tag LIKE '{$query}%'
+                                    ORDER BY T.Tag");
+
+            $json_array = array();
+            foreach ($tags as $tag) {
+                $json_array[] = $tag;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    // this is called when typing a sponsor name to add as a tag on edit event
+    public function getSponsorOptions(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $query        = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $event_id     = intval($request->param('EVENT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $event        = $this->summitevent_repository->getById($event_id) ;
+            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+
+            $sponsors = DB::query("SELECT C.ID AS id, C.Name AS name FROM Company AS C
+                                    WHERE C.Name LIKE '{$query}%'
+                                    ORDER BY C.Name");
+
+            $json_array = array();
+            foreach ($sponsors as $sponsor) {
+                $json_array[] = $sponsor;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
 }

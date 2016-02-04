@@ -258,15 +258,24 @@ class SummitAppAdminController extends Page_Controller
         $event = SummitEvent::get()->byID($event_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap3-typeahead/bootstrap3-typeahead.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('summit/javascript/summitapp-editevent.js');
+
         return $this->getViewer('EditEvent')->process
         (
             $this->customise
             (
                 array
                 (
-                    'Summit' => $summit,
-                    'Event' => $event
+                    'Summit'   => $summit,
+                    'Event'    => $event,
                 )
             )
         );

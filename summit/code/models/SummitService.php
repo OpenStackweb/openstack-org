@@ -107,4 +107,62 @@ class SummitService
             return $event;
         });
     }
+
+    /**
+     * @param ISummit $summit
+     * @param array $event_data
+     * @return mixed
+     */
+    public function updateEvent(ISummit $summit, array $event_data)
+    {
+        $event_repository = $this->event_repository;
+        return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
+            if(!isset($event_data['id'])) throw new EntityValidationException(array('missing required param: id'));
+            $event_id = intval($event_data['id']);
+            $event = $event_repository->getById($event_id);
+
+            if(is_null($event))
+                throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
+
+            if(intval($event->SummitID) !== intval($summit->getIdentifier()))
+                throw new EntityValidationException(array('event doest not belongs to summit'));
+
+            $event->Title = $event_data['title'];
+            $event->Description = $event_data['description'];
+            $event->setStartDate($event_data['start_date']);
+            $event->setEndDate($event_data['end_date']);
+            $event->AllowFeedBack = $event_data['allow_feedback'];
+            $event->LocationID = intval($event_data['location_id']);
+            $event->TypeID = intval($event_data['event_type']);
+
+            $event->AllowedSummitTypes()->setByIDList($event_data['summit_type']);
+            $event->Tags()->setByIDList(explode(',',$event_data['tags']));
+            $event->Sponsors()->setByIDList(explode(',',$event_data['sponsors']));
+
+            // Speakers, if one of the added members is not a speaker, we need to make him one
+            if ($event->isPresentation()) {
+                $presentation = $event_repository->getPresentationById($event_id);
+                $speaker_ids = array();
+                $member_ids = explode(',',$event_data['speakers']);
+                foreach ($member_ids as $member_id) {
+                    $speaker = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
+
+                    if (!$speaker) {
+                        $member = Member::get()->byID($member_id);
+                        $speaker = new PresentationSpeaker();
+                        $speaker->FirstName = $member->FirstName;
+                        $speaker->LastName = $member->Surname;
+                        $speaker->MemberID = $member->ID;
+                        $speaker->write();
+                    }
+
+                    $speaker_ids[] = $speaker->ID;
+                }
+
+                $event->Speakers()->setByIDList($speaker_ids);
+            }
+
+            return $event;
+        });
+    }
 }
