@@ -174,14 +174,13 @@ class PresentationVotingPage_Controller extends Page_Controller {
               ->leftJoin("Presentation_Speakers", "Presentation_Speakers.PresentationID = Presentation.ID")
               ->leftJoin("PresentationSpeaker", "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID")
               ->where("
-                  Presentation.Title LIKE '%{$k}%' 
-                  OR Presentation.Description LIKE '%{$k}%'
+                  SummitEvent.Title LIKE '%{$k}%'
+                  OR SummitEvent.Description LIKE '%{$k}%'
+                  OR SummitEvent.ShortDescription LIKE '%{$k}%'
                   OR PresentationSpeaker.FirstName LIKE '%{$k}%'
                   OR PresentationSpeaker.LastName LIKE '%{$k}%'
             ");
         }   
-
-	           
       // Clear the category if one was set
       Session::set('CategoryID',NULL);
       $data["SearchMode"] = TRUE;
