@@ -221,8 +221,7 @@ require('./comments-list.tag')
 		setActiveKey(key) {
 			self.activekey = key
 			id = self.presentations[key].id
-			opts.trigger('load-presentation-details', id)
-			self.update()
+			riot.route('presentations/show/' + id)
 		}
 
 		setCategory(category) {
@@ -233,83 +232,10 @@ require('./comments-list.tag')
 			opts.trigger('load-presentations',null,id)
 		}
 
-
-		riot.route(function(mode, action, id) {
-			if (mode === 'presentations') {
-
-				self.DisplayMode = 'browse'
-
-				if(action === 'show' && id) {
-					opts.trigger('load-presentation-details', id)
-					self.showDetails()
-				}
-
-				self.update()
-			}
-
-			if (mode === 'selections') {
-				self.DisplayMode = 'selections'
-				self.update()
-			}
-
-			if (mode === 'directory') {
-				self.DisplayMode = 'directory'
-				self.update()
-			}
-
-			if (mode === 'tutorial') {
-				self.DisplayMode = 'tutorial'
-				self.update()
-			}
-
-			if (mode === 'requests') {
-				self.DisplayMode = 'requests'
-				self.update()
-			}
-
-			if (mode === 'comments') {
-				self.DisplayMode = 'comments'
-				self.update()
-			}
-
-		})
-
 		this.on('mount', function(){
-
-			console.log('window height', window.innerHeight)
 
 			opts.trigger('load-summit-details')
 
-			riot.route.exec(function(mode, action, id) {
-				if (mode === 'presentations') {
-
-					self.DisplayMode = 'browse'
-
-					self.update()
-				}
-
-				if (mode === 'selections') {
-					self.DisplayMode = 'selections'
-					self.update()
-				}
-
-				if (mode === 'directory') {
-					self.DisplayMode = 'directory'
-					self.update()
-				}
-
-				if (mode === 'tutorial') {
-					self.DisplayMode = 'tutorial'
-					self.update()
-				}
-
-				if (mode === 'requests') {
-					self.DisplayMode = 'requests'
-					self.update()
-				}
-
-
-			})
 		})
 
 		opts.on('summit-details-loaded', function(result){
@@ -335,10 +261,57 @@ require('./comments-list.tag')
 
 		opts.on('presentations-loaded', function(result){
 
+			console.log('presentations loaded')
+
 			self.presentations = result
 			self.quantity = self.presentations.length
 
 			if(self.currentPresentation) self.activekey = self.indexOf(self.currentPresentation.id)
+
+			riot.route(function(mode, action, id) {
+
+				if (mode === 'presentations') {
+
+					self.DisplayMode = 'browse'
+
+					if(action === 'show' && id) {
+						opts.trigger('load-presentation-details', id)
+						self.showDetails()
+					}
+
+					self.update()
+				}
+
+				if (mode === 'selections') {
+					self.DisplayMode = 'selections'
+					self.update()
+				}
+
+				if (mode === 'directory') {
+					self.DisplayMode = 'directory'
+					self.update()
+				}
+
+				if (mode === 'tutorial') {
+					self.DisplayMode = 'tutorial'
+					self.update()
+				}
+
+				if (mode === 'requests') {
+					self.DisplayMode = 'requests'
+					self.update()
+				}
+
+				if (mode === 'comments') {
+					self.DisplayMode = 'comments'
+					self.update()
+				}
+
+
+			})
+
+			// fire up the router defined above and route based on current URL
+			riot.route.start(true)
 
 			self.update()
 
@@ -347,11 +320,12 @@ require('./comments-list.tag')
 
 		opts.on('presentation-details-loaded', function(result){
 
+			console.log('presentations details loaded')
+
 			// Entirely clear out any previous display elements
 			self.currentPresentation = []
 			self.update()
 
-			console.log('currentPresentation', result)
 			self.currentPresentation = result
 
 			if(!self.searchmode) {
@@ -488,7 +462,7 @@ require('./comments-list.tag')
 		})
 
 
-		Mousetrap.bind('s', function() {
+		/* Mousetrap.bind('s', function() {
 			if(
 				self.currentPresentation.can_assign &&
 				!self.currentPresentation.selected
@@ -496,7 +470,7 @@ require('./comments-list.tag')
 			{
 				self.selectPresentation()
 			 }
-		})
+		}) */
 
 	</script>
 

@@ -33,14 +33,11 @@ api.on('load-summit-details', function(id){
 // Request to track chair selections for a particular category
 api.on('load-selections', function(categoryId){
 
-	console.log('4a. api hears load selections.');
 
 	reqwest({
 	    url: url + 'selections/' + categoryId + '/'
 	  , method: 'get'
 	  , success: function (resp) {
-	  		console.log('response from server loading selctions: ', resp)
-			console.log('4b. api fires selections loaded.');
 			api.trigger('selections-loaded', resp)
 	    }
 	})
@@ -98,7 +95,6 @@ api.on('select-presentation', function(id){
 	    url: url + 'presentation/' + id + '/select'
 	  , method: 'get'
 	  , success: function (resp) {
-	  		console.log('2b. API is firing presentation-selected');
 			api.trigger('presentation-selected', resp)
 	    }
 	})
@@ -161,8 +157,6 @@ api.on('save-sort-order', function(list_id, sort_order){
 
 api.on('suggest-category-change', function(suggestedChange){
 
-	console.log(url + 'presentation/' + suggestedChange.presentation_id + '/category_change/new/?new_cat=' + suggestedChange.new_category)
-
 	reqwest({
 	    url: url + 'presentation/' + suggestedChange.presentation_id + '/category_change/new/?new_cat=' + suggestedChange.new_category
 	  , method: 'get'
@@ -174,8 +168,6 @@ api.on('suggest-category-change', function(suggestedChange){
 })
 
 api.on('approve-change', function(id){
-
-	console.log(url + 'category_change/accept/' + id)
 
 	reqwest({
 	    url: url + 'category_change/accept/' + id

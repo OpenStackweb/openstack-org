@@ -9,11 +9,11 @@ var Sortable = require('sortablejs')
 		<div if={!opts.selections && opts.listtype == 'Group'}><i>There are no team selections yet. Drag one into here to create one.</i></div>
 
 		<ul id="{ opts.listid }" class="list-group {empty: !opts.selections}">
-			<li each="{ item, i in opts.selections }" 
-				class="list-group-item { alternate: i >= soltsAvailble }" 
-				data-id="{ item.id }" 
+			<li each="{ item, i in opts.selections }"
+				class="list-group-item { alternate: i >= soltsAvailble }"
+				data-id="{ item.id }"
 				data-order="{ item.order }"
-				onclick="{ loadPresentation }" 
+				onclick="{ loadPresentation }"
 				>
 					<span class="pull-left slot-number" if="{ i < soltsAvailble }">{i+1}</span>
 					<span class="pull-left slot-number" if="{ i >= soltsAvailble }">A</span>
@@ -121,12 +121,10 @@ var Sortable = require('sortablejs')
         }
 
 
-		api.on('selections-ready', function(result){			
-
-			console.log('6a. selection list hears selections-ready.')
+		api.on('selections-ready', function(result){
 
 			var simpleList = document.getElementById(self.opts.listid)
-			
+
 			if(simpleList) {
 				var sortable = Sortable.create(simpleList,{
 					group: { name: "selection-list-group", pull: "clone", put: true },
@@ -143,7 +141,7 @@ var Sortable = require('sortablejs')
 							)
 							api.trigger('sort-order-saved')
 							self.parent.parent.parent.update()
-							return						
+							return
 						}
 
 						if (evt.newIndex >= self.soltsAvailble) {
@@ -166,7 +164,7 @@ var Sortable = require('sortablejs')
 								  timeout: 4000
 								}
 							)
-							self.parent.parent.parent.update()							
+							self.parent.parent.parent.update()
 						}
 
 						else if (self.indexOf(evt.item.dataset.id) > -1) {
@@ -189,7 +187,6 @@ var Sortable = require('sortablejs')
 				});
 			}
 
-			console.log('6b. selection list updates.')
 			self.update()
 
 		})
