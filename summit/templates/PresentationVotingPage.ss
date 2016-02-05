@@ -185,7 +185,6 @@
                                 </div>
                                 <div class="voting-presentation-track">
                                     <h5>Track</h5>
-
                                     <p>$Category.Title</p>
                                 </div>
                                 <div class="voting-presentation-body">
@@ -212,6 +211,8 @@
                                         <% end_loop %>
                                     </div>
                                 </div>
+                        </div>
+                        <div class="voting-presentation-body">
 
                                 <% if Summit.isVotingOpen %>
                                     <% if $CurrentMember %>
@@ -246,6 +247,10 @@
                                                  data-layout="button"></div>
                                         </div>
 
+<<<<<<< HEAD
+=======
+                            <div>$ShortDescription</div>
+>>>>>>> 5ab3c9c... fixed Description and removed extra Speakers
 
                                     </div>
                                 </div>
