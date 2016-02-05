@@ -189,31 +189,12 @@
                                     <p>$Category.Title</p>
                                 </div>
                                 <div class="voting-presentation-body">
-                                    <h5>Speakers</h5>
-                                    <% if Speakers %>
-                                        <div class="voting-speaker-row">
-                                            <ul>
-                                                <% loop Speakers %>
-                                                    <li>
-                                                        <img class="voting-speaker-pic"
-                                                             src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>"/>
-
-                                                        <div class="voting-speaker-name">
-                                                            $FirstName $LastName
-                                                            <% if $Title %><span>$Title</span><% else %>
-                                                                <span>&nbsp;</span><% end_if %>
-                                                        </div>
-                                                    </li>
-                                                <% end_loop %>
-                                            </ul>
-                                        </div>
-                                    <% end_if %>
 
                                     <p>
                                     <h5>Abstract</h5>
                                     </p>
 
-                                    <div>$Description</div>
+                                    <div>$ShortDescription</div>
 
                                     <div class="main-speaker-wrapper">
                                         <% loop Speakers %>
