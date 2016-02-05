@@ -246,12 +246,6 @@
                                             <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"
                                                  data-layout="button"></div>
                                         </div>
-
-<<<<<<< HEAD
-=======
-                            <div>$ShortDescription</div>
->>>>>>> 5ab3c9c... fixed Description and removed extra Speakers
-
                                     </div>
                                 </div>
                             </div>
