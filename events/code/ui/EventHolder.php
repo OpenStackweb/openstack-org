@@ -16,12 +16,26 @@
  */
 class EventHolder extends Page {
    private static$db = array(
+       'OpenstackDaysContent'    => 'HTMLText',
+       'OpenstackDaysVideoID1'   => 'Text',
+       'OpenstackDaysVideoDesc1' => 'Text',
+       'OpenstackDaysVideoID2'   => 'Text',
+       'OpenstackDaysVideoDesc2' => 'Text',
    );
 
    private static $has_one = array(
    );
 
     /** static $icon = "icon/path"; */
+    function getCMSFields() {
+        $fields = parent::getCMSFields();
+        $fields->addFieldToTab("Root.OpenstackDays", new HtmlEditorField("OpenstackDaysContent", "Intro Text"));
+        $fields->addFieldToTab("Root.OpenstackDays", new TextField("OpenstackDaysVideoID1", "Youtube ID 1"));
+        $fields->addFieldToTab("Root.OpenstackDays", new TextField("OpenstackDaysVideoDesc1", "Video Description"));
+        $fields->addFieldToTab("Root.OpenstackDays", new TextField("OpenstackDaysVideoID2", "Youtube ID 2"));
+        $fields->addFieldToTab("Root.OpenstackDays", new TextField("OpenstackDaysVideoDesc2", "Video Description"));
+		return $fields;
+	}
       
 }
 /**

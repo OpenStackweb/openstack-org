@@ -11,31 +11,21 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10 col-sm-push-1 osdays-intro">
-            <p>
-                OpenStack Days bring together hundreds of IT executives, cloud operators and technology providers to discuss cloud
-                computing and learn about OpenStack. The regional events are organized and hosted annually by local OpenStack user
-                groups and companies in the ecosystem, and are often one or two-day events with keynotes, breakout sessions and even workshops.
-                It’s a great opportunity to hear directly from prominent OpenStack leaders, learn from user stories, network and get plugged into
-                your local community.
-            </p>
-            <p>
-                There are more than <strong>22 OpenStack Days</strong> scheduled for 2016 -
-                <a href="{$Top.Link}">find an upcoming OpenStack Day in your region!</a>
-            </p>
+            $OpenstackDaysContent
             <div class="row">
                 <div class="col-xs-6">
                     <div class="video">
-                        <iframe src="https://www.youtube.com/embed/raHGOz_boLI?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+                        <iframe src="https://www.youtube.com/embed/{$OpenstackDaysVideoID1}?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
                         <p>
-                            Video Title or Description here
+                            $OpenstackDaysVideoDesc1
                         </p>
                     </div>
                 </div>
                 <div class="col-xs-6">
                     <div class="video">
-                        <iframe src="https://www.youtube.com/embed/raHGOz_boLI?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+                        <iframe src="https://www.youtube.com/embed/{$OpenstackDaysVideoID2}?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
                         <p>
-                            Video Title or Description here
+                            $OpenstackDaysVideoDesc2
                         </p>
                     </div>
                 </div>
