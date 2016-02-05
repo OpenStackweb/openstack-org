@@ -4,7 +4,7 @@
         <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID %>
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" class="attendees-wrapper">
         <ol class="breadcrumb">
             <li><a href="$Top.Link">Home</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
@@ -12,7 +12,7 @@
         </ol>
         <div class="panel panel-default">
             <div class="panel-heading">Attendee</div>
-            <table class="table">
+            <table id="attendees-table" class="table">
                 <thead>
                 <tr>
                     <th>Member Id</th>
@@ -24,43 +24,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>John Due</td>
-                    <td>jdue@gmail.com</td>
-                    <td>5 Jun, 2015</td>
-                    <td>No</td>
-                    <td><a href="$Top.Link/{$Summit.ID}/attendees/1" class="btn btn-default btn-sm active" role="button">Edit</a></td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>John Due</td>
-                    <td>jdue@gmail.com</td>
-                    <td>5 Jun, 2015</td>
-                    <td>No</td>
-                    <td><a href="$Top.Link/{$Summit.ID}/attendees/1" class="btn btn-default btn-sm active" role="button">Edit</a></td>
-                </tr>
+                    <% loop $Summit.Attendees.Limit(20) %>
+                        <tr>
+                            <td>$Member.ID</td>
+                            <td>$Member.FullName</td>
+                            <td>$Member.Email</td>
+                            <td>$Tickets.TicketBoughtDate.Format(j M, Y)</td>
+                            <td><% if $SummitHallCheckedIn %> Yes <% else %> No <% end_if %></td>
+                            <td><a href="$Top.Link/{$Summit.ID}/attendees/{$ID}" class="btn btn-default btn-sm active" role="button">Edit</a></td>
+                        </tr>
+                    <% end_loop %>
                 </tbody>
             </table>
-            <nav>
-                <ul class="pagination">
-                    <li class="disabled">
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li  class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
+        <nav>
+            <ul id="attendees-pager" class="pagination"></ul>
+        </nav>
     </div>
 </div>
+
+<script>
+    var total_attendees = {$Summit.Attendees().count};
+</script>
