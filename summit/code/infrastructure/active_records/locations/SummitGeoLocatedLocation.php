@@ -28,7 +28,7 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
         'Lat'             => 'Text',
         'DisplayOnSite'   => 'Boolean',
         'DetailsPage'     => 'Boolean',
-        'LocationMessage' => 'Text',
+        'LocationMessage' => 'HTMLText',
     );
 
     private static $has_many = array
@@ -159,7 +159,8 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
         $f = parent::getCMSFields();
         $f->addFieldToTab('Root.Main', new TextField('WebSiteUrl','WebSite Url'));
         $f->addFieldToTab('Root.Main', new CheckboxField('DisplayOnSite','Should Display On Site'));
-        $f->addFieldToTab('Root.Main', new TextField('LocationMessage','Message to display for this location'));
+        $f->addFieldToTab('Root.Main', $messageField = new TextField('LocationMessage','Message to display for this location'));
+        $messageField->setAttribute( 'style', 'max-width:100% !important' );
         $f->addFieldToTab('Root.Main', new CheckboxField('DetailsPage','Send people to a details page first?'));
         
         $f->addFieldsToTab("Root.Location", array
