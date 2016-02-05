@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Vote For Tokyo Summit Presentations | OpenStack Open Source Cloud Computing Software</title>
+    <title>Vote For $ActiveSummit.Name Summit Presentations | OpenStack Open Source Cloud Computing Software</title>
 
     <!-- Bootstrap Core CSS -->
     <% require css("themes/openstack/css/bootstrap3.css") %>
@@ -69,7 +69,7 @@
 					<h1>
 						Vote For Presentations
 						<span>
-							Help us pick the presentations for The Tokyo Summit
+							Help us pick the presentations for The $ActiveSummit.Name Summit
 						</span>
 					</h1>
 				</div>
@@ -86,7 +86,7 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-3 voting-sidebar">
 		    <div class="voting-app-details-link">
-                <a href="#">More About The Tokyo Summit</a>
+                <a href="#">More About The $ActiveSummit.Name Summit</a>
             </div>
             $SearchForm
 
@@ -187,7 +187,7 @@
                 <h5>Login to vote</h5>
                 <div class="login-to-vote">
                     <h3>Help this presentation get to the OpenStack Summit!</h3>
-                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit in Tokyo, Japan. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
+                    <p>OpenStack community members are voting on presentations to be presented at the OpenStack Summit in $ActiveSummit.Name. We received hundreds of high-quality submissions, and your votes can help us determine which ones to include in the schedule.</p>
                     <a className="btn" href="/Security/login?BackURL={$Top.Link}presentation/{$ID}">I already have an account</a>&nbsp; | &nbsp;
                     <a href="/summit-login/login?BackURL={$Top.Link}presentation/{$ID}" className="btn">Sign up now</a>
                 </div>

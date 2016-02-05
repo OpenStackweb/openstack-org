@@ -157,6 +157,12 @@ class PresentationVotingPage_Controller extends Page_Controller {
       return $SearchForm;
     }
 
+
+    public function ActiveSummit()
+    {
+        return  Summit::get_active();
+    }
+
     function doSearch($data, $form) {
 
       $Results = NULL;
@@ -221,15 +227,19 @@ class PresentationVotingPage_Controller extends Page_Controller {
 
       $summitID = Summit::get_active()->ID;
       $presentations = Presentation::get()
-        ->where("SummitEvent.SummitID = {$summitID}");
+        ->where("SummitEvent.SummitID = {$summitID}")
+        ->where(sprintf("Presentation.Status = '%s' ", Presentation::STATUS_RECEIVED))
+        ->where("Presentation.Progress = ".Presentation::PHASE_COMPLETE)
+        ->where("SummitEvent.Title is not null")
+        ->where("SummitEvent.Title <> '' ");
 
       if($CategoryID) $presentations = $presentations->filter('CategoryID', $CategoryID);
       if($currentMemberID) {
           $presentations = $presentations
-                          ->leftJoin("PresentationVote", "PresentationVote.PresentationID = Presentation.ID")
-                          ->where("IFNULL(PresentationVote.MemberID,0) = " . Member::currentUserID());              
+                          ->where(sprintf("NOT EXISTS ( SELECT PresentationVote.PresentationID FROM PresentationVote
+                          WHERE PresentationVote.PresentationID = Presentation.ID  AND PresentationVote.MemberID = %s )", Member::currentUserID()));
       }
-
+      $presentations =  $presentations->sort('RAND()');
       if($presentations->count()) $Result = $presentations->first();
 
       if($Result) {
