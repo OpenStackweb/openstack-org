@@ -20,11 +20,29 @@ final class SummitEntityEvent extends DataObject
         'EntityClassName' => 'Text',
         'Type'            => 'Enum(array("UPDATE","INSERT","DELETE"))',
         'Metadata'        => 'Text',
+        'Processed'       => 'Boolean',
     );
+
+    private static $summary_fields = array
+    (
+        'Created'          => 'Created Date',
+        'EntityClassName'  => 'Entity',
+        'Type'             => 'Type',
+        'Owner.FullName'   => 'Owner',
+    );
+
 
     private static $has_one = array
     (
         'Summit' => 'Summit',
         'Owner'  => 'Member',
     );
+
+    public function canEdit($member = null) {
+        return false;
+    }
+
+    public function canCreate($member = null) {
+        return false;
+    }
 }

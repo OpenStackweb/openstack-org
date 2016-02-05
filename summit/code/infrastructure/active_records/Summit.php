@@ -65,6 +65,7 @@ final class Summit extends DataObject implements ISummit
         'SummitTicketTypes'            => 'SummitTicketType',
         'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
         'Notifications'                => 'SummitPushNotification',
+        'EntityEvents'                 => 'SummitEntityEvent',
     );
 
     private static $summary_fields = array
@@ -72,7 +73,6 @@ final class Summit extends DataObject implements ISummit
         'Title'  => 'Title',
         'Status' => 'Status',
     );
-
 
     public static function get_active()
     {
@@ -903,6 +903,15 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             );
             $gridField = new GridField('Notifications', 'Notifications', $this->Notifications(), $config);
             $f->addFieldToTab('Root.Notifications', $gridField);
+
+            //entity events
+
+            $config = GridFieldConfig_RecordEditor::create(100);
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->addComponent(new GridFieldWipeDevicesDataAction);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $gridField = new GridField('EntityEvents', 'EntityEvents', $this->EntityEvents(), $config);
+            $f->addFieldToTab('Root.EntityEvents', $gridField);
         }
         return $f;
 
