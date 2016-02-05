@@ -3,10 +3,10 @@
   <h1>Comments List</h1>
   <p>(Sorted with most recent comments at the top.)</p>
 
-  <div each="{comment in comments}" class="comment" onclick="{ showPresentation(comment.presentaiton_id) }">
+  <div each="{comment in comments}" class="comment" onclick="{ showPresentation(comment.presentation_id) }">
     <div class="comment-body {system-comment: comment.system_comment }">
       { comment.body }
-      <div class="presentation-line">Comment made on <strong>{ comment.presentaiton_title }</strong> <span if="{ comment.commenter != ' '}">by { comment.commenter }</span>.</div>
+      <div class="presentation-line">Comment made on <strong>{ comment.presentation_title }</strong> <span if="{ comment.commenter != ' '}">by { comment.commenter }</span>.</div>
     </div>
   </div>
 
