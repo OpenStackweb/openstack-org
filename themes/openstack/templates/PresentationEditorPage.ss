@@ -66,13 +66,13 @@
         </div>
       </div>
       <div id='presentation-list'>
-        <div class='row presentaiton'>
+        <div class='row presentation'>
 
           <% if Presentations %>
           
           <% loop PresentationList %>
 
-          <div class='row presentaiton' id="$ID">
+          <div class='row presentation' id="$ID">
             <div class='col-lg-8'>
               <p>
                 <a href="{$Top.Link}Show/{$ID}">$PresentationTitle</a>

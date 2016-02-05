@@ -380,13 +380,13 @@ class TrackChairAPI extends Controller {
 
 		  foreach($comments as $c) {
 
-				$system = strpos($c->Body, "suggested that this presentation be moved") || strpos($c->Body,"presentaiton was moved into the category");
+				$system = strpos($c->Body, "suggested that this presentation be moved") || strpos($c->Body,"presentation was moved into the category");
 
 				$data['results'][] = array(
 	        		'id' => $c->ID,
 	          	'body' => $c->Body,
-							'presentaiton_title' => $c->Presentation()->Title,
-							'presentaiton_id' => $c->Presentation()->ID,
+							'presentation_title' => $c->Presentation()->Title,
+							'presentation_id' => $c->Presentation()->ID,
 							'commenter' => $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname,
 							'system_comment' => $system
 	    		);
@@ -451,9 +451,9 @@ class TrackChairAPI extends Controller {
 			$request->Presentation()->write();
 
 			$comment = new SummitPresentationComment();
-			$comment->Body = 'This presentaiton was moved into the category '
+			$comment->Body = 'This presentation was moved into the category '
 				. $category->Title . '.'
-				. ' The chage was approved by '
+				. ' The change was approved by '
 				. Member::currentUser()->FirstName . ' ' . Member::currentUser()->Surname . '.';
 			$comment->PresentationID = $request->Presentation()->ID;
 			$comment->write();

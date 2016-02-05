@@ -74,7 +74,7 @@
         </div>
       </div>
       <div id='presentation-list'>
-        <div class='row presentaiton'>
+        <div class='row presentation'>
 
           <!-- Search Results -->
           <% if SearchResults %>

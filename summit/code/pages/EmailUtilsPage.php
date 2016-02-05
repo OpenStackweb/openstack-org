@@ -47,7 +47,7 @@ class EmailUtilsPage_Controller extends Page_Controller {
 
         if($myPresentations->count()) $myPresentationList = $myPresentationList . '</ul>';
 
-        // Build a list of presentaitons created by others that feature this person as a speaker
+        // Build a list of presentations created by others that feature this person as a speaker
         $otherPresentationList = '';
         if($otherPresentations->count()) $otherPresentationList = '<strong>Presentations Others Submitted With You As A Speaker</strong> <ul>';
 
