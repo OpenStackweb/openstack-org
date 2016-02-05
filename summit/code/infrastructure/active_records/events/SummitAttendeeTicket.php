@@ -23,6 +23,35 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
         'TicketChangedDate'  => 'SS_Datetime',
     );
 
+    private static $summary_fields = array
+    (
+        "TicketBoughtDate"        => 'Bought Date',
+        'ExternalOrderId'         => "#Order",
+        'ExternalAttendeeId'      => "#Attendee",
+    );
+
+    public function getCMSFields()
+    {
+
+        $f = new FieldList
+        (
+            $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
+        );
+
+        $f->addFieldToTab('Root.Main', new HiddenField('OwnerID','OwnerID'));
+        $f->addFieldsToTab('Root.Main', new TextField('ExternalOrderId', '#Order'));
+        $f->addFieldsToTab('Root.Main', new TextField('ExternalAttendeeId', '#Attendee'));
+
+        $f->addFieldsToTab('Root.Main', $date = new DatetimeField('TicketBoughtDate', 'Bought Date'));
+        $date->getDateField()->setConfig('showcalendar', true);
+
+        $f->addFieldsToTab('Root.Main', $date = new DatetimeField('TicketChangedDate', 'Changed Date'));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $summit_id = $_REQUEST['SummitID'];
+        $f->addFieldsToTab('Root.Main', $ddl = new DropdownField('TicketTypeID', 'Ticket Type', SummitTicketType::get()->filter('SummitID', $summit_id)->map("ID","Name")));
+        return $f;
+    }
+
     static $indexes = array
     (
         'Order_Attendee' =>  array('type'=>'unique', 'value'=>'ExternalOrderId,ExternalAttendeeId')

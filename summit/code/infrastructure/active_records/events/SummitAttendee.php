@@ -58,7 +58,8 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     private static $summary_fields = array
     (
         "Member.Email"        => 'Member',
-        'SummitHallCheckedIn' => "Is Checked In"
+        'SummitHallCheckedIn' => "Is Checked In",
+        'TicketsCount' => '# Tickets'
     );
 
     static $indexes = array
@@ -81,6 +82,11 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         {
             $schedule->remove($s);
         }
+    }
+
+    public function TicketsCount()
+    {
+        return (int)$this->Tickets()->count();
     }
 
     /**
@@ -215,21 +221,12 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         $f->addFieldsToTab('Root.Main', new CheckboxField('SummitHallCheckedIn', 'Is SummitHall checked In?'));
         $f->addFieldsToTab('Root.Main', $checked_in_date = new DatetimeField('SummitHallCheckedInDate', 'SummitHall checked In Date'));
         $checked_in_date->getDateField()->setConfig('showcalendar', true);
-        $checked_in_date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldsToTab('Root.Main', $ticket_bought_date = new DatetimeField('TicketBoughtDate', 'Ticket Bought Date'));
-        $ticket_bought_date->getDateField()->setConfig('showcalendar', true);
-        $ticket_bought_date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldsToTab('Root.Main', new TextField('ExternalOrderId', 'Eventbrite Order ID'));
-        $summit_id = isset($_REQUEST['SummitID'] )? $_REQUEST['SummitID']:$this->SummitID;
-        $ticket_types = SummitTicketType::get()->filter('SummitID',$summit_id )->map('ID','Name');
-        $f->addFieldsToTab('Root.Main', $ddl_ticket = new DropdownField('TicketTypeID', 'TicketType', $ticket_types));
-        $ddl_ticket->setEmptyString('-- Select One --');
         $f->addFieldsToTab('Root.Main', new MemberAutoCompleteField('Member', 'Member'));
 
         if($this->ID > 0)
         {
             // schedule
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = GridFieldConfig_RelationEditor::create(50);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->getAllowedSchedule());
             $config->addComponent(new GridFieldAjaxRefresh(1000,false));
@@ -241,6 +238,12 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
             $config->getComponentByType('GridFieldDetailForm')->setFields($detailFormFields);
             $gridField = new GridField('Schedule', 'Schedule', $this->Schedule(), $config);
             $f->addFieldToTab('Root.Schedule', $gridField);
+
+            //tickets
+
+            $config = GridFieldConfig_RecordEditor::create(10);
+            $gridField = new GridField('Tickets', 'Tickets', $this->Tickets(), $config);
+            $f->addFieldToTab('Root.Tickets', $gridField);
         }
         return $f;
     }
