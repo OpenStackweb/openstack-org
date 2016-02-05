@@ -56,7 +56,7 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
             $field->setAttribute('aria-required','true');
         }
 
-        if($default_value)
+        if(!is_null($default_value) && $default_value->exists())
         {
             $field->setValue($default_value->ID);
         }
