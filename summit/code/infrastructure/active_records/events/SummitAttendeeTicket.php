@@ -28,6 +28,7 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
         "TicketBoughtDate"        => 'Bought Date',
         'ExternalOrderId'         => "#Order",
         'ExternalAttendeeId'      => "#Attendee",
+        'TicketType.Name'         => 'Ticket Type',
     );
 
     public function getCMSFields()
