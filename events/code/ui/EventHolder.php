@@ -92,6 +92,14 @@ class EventHolder_Controller extends Page_Controller {
 		return $events_array->sort('EventStartDate', 'ASC')->limit($num,0)->toArray();
 	}
 
+    function FutureOpenstackDaysEvents($num) {
+        $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
+        $filter_array['EventCategory'] = 'Openstack Days';
+        $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num);
+
+        return $pulled_events;
+    }
+
     function PastSummits($num) {
 	    return EventPage::get()->filter(array('EventEndDate:LessThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventEndDate','DESC')->limit($num);
     }
@@ -184,6 +192,7 @@ class EventHolder_Controller extends Page_Controller {
     }
 
     function openstackdays() {
-        return $this->renderWith(array('EventHolder_openstackdays'));
+        Requirements::css('events/css/openstackdays.css');
+        return $this->renderWith(array('EventHolder_openstackdays','EventHolder','Page'));
     }
 }
