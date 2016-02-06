@@ -59,6 +59,7 @@ class TrackChairAPI extends Controller {
 			'categories' => NULL,
 		);
 
+		$summit = Summit::get_active();
 
 		$TrackChair = SummitTrackChair::get()->filter('MemberID', Member::currentUserID());
 
@@ -69,7 +70,7 @@ class TrackChairAPI extends Controller {
 			$data['first_name'] = $chair->Member()->FirstName;
 			$data['last_name'] = $chair->Member()->Surname;
 
-			foreach($chair->Categories() as $c) {
+			foreach($chair->Categories()->filter('SummitID', $summit->ID) as $c) {
 				$data['categories'][] = $c->toJSON();
 			}
 		}
@@ -77,7 +78,6 @@ class TrackChairAPI extends Controller {
 		if(Permission::check('ADMIN')) {
 			$data['is_admin'] = TRUE;
 			$data['categories'] = [];
-			$summit = Summit::get_active();
 			foreach($summit->Categories()->filter('ChairVisible', TRUE) as $c) {
 				$data['categories'][] = $c->toJSON();
 			}
