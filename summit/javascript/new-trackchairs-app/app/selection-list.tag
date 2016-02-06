@@ -8,7 +8,7 @@ var Sortable = require('sortablejs')
 		<div if={!opts.selections && opts.listtype != 'Group'}><i>This person has not made any selections yet.</i></div>
 		<div if={!opts.selections && opts.listtype == 'Group'}><i>There are no team selections yet. Drag one into here to create one.</i></div>
 
-		<ul id="{ opts.listid }" class="list-group {empty: !opts.selections}">
+		<ul id="{ opts.listid }" class="list-group {empty: !opts.selections} {team-list: opts.listtype == 'Group'}">
 			<li each="{ item, i in opts.selections }"
 				class="list-group-item { alternate: i >= soltsAvailble }"
 				data-id="{ item.id }"
@@ -35,9 +35,21 @@ var Sortable = require('sortablejs')
 			cursor: arrow;
 		}
 
-		.sortable-ghost, .sortable-ghost .selection-front, .sortable-ghost .selection-back {
+		.team-list .list-group-item {
+			background-color: #EAF4FF;
+			border-color: #90D0EB;
+		}
+
+		.sortable-ghost {
 			background-color: #E6E6E6;
 			color: #E6E6E6!important;
+		}
+
+		.team-list .sortable-ghost {
+			background-color: #E6E6E6;
+			color: #E6E6E6!important;
+			border-left-color: #E6E6E6;
+			border-right-color: #E6E6E6;
 		}
 
 		.alternate {
