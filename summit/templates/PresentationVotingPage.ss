@@ -86,177 +86,178 @@
                 </div>
 
                 <!-- TOP BAR AREA ----------------------------------->
-            <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 voting-sidebar">
-                <div class="voting-app-details-link">
-                    <a href="#">More About The $Summit.Name Summit</a>
-                </div>
-                $SearchForm
+                <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 voting-sidebar">
+                    <div class="voting-app-details-link">
+                        <a href="#">More About The $Summit.Name Summit</a>
+                    </div>
+                    $SearchForm
 
-                <!-------------------------------------------------->
-                <!-- NORMAL MODE ----------------------------------->
-                <!-------------------------------------------------->
+                    <!-------------------------------------------------->
+                    <!-- NORMAL MODE ----------------------------------->
+                    <!-------------------------------------------------->
 
-                <% if SearchMode != TRUE %>
+                    <% if SearchMode != TRUE %>
 
-                    <!-- DROP DOWN FOR CATEGORIES ----------------------------------->
-                    <div class="btn-group voting-dropdown">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                aria-expanded="false">
-                            <% if $CategoryName %>
-                                $CategoryName
-                            <% else %>
-                                All Presentations
-                            <% end_if %>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href='{$Top.Link}Category/All'>All Categories</a>
-                            </li>
-                            <li class='divider'></li>
-
-                            <% loop CategoryLinks %>
+                        <!-- DROP DOWN FOR CATEGORIES ----------------------------------->
+                        <div class="btn-group voting-dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                <% if $CategoryName %>
+                                    $CategoryName
+                                <% else %>
+                                    All Presentations
+                                <% end_if %>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href='{$Top.Link}Category/{$ID}'>$Name</a>
+                                    <a href='{$Top.Link}Category/All'>All Categories</a>
                                 </li>
-                            <% end_loop %>
+                                <li class='divider'></li>
+
+                                <% loop CategoryLinks %>
+                                    <li>
+                                        <a href='{$Top.Link}Category/{$ID}'>$Name</a>
+                                    </li>
+                                <% end_loop %>
+                            </ul>
+                        </div>
+
+
+                        <!-- PRESENTATION LIST / BROWSER ----------------------------------->
+                        <% if $CategoryName %>
+                            <h5>Presentations In This Category</h5>
+                        <% else %>
+                            <h5>Showing All Presentations</h5>
+                        <% end_if %>
+                        <ul class="presentation-list">
+                            <% if $CurrentMember %>
+                                <% loop $CurrentMember.getRandomisedPresentations($CategoryID) %>
+
+                                    <li
+                                        <% if $Top.Presentation.ID == $ID %>
+                                        class="active"
+                                        <% else_if $UserVote %>
+                                        class="completed"
+                                        <% end_if %>
+
+                                    ><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
+                                <% end_loop %>
+                            <% else %>
+
+                                <% loop $LoggedOutPresentationList($CategoryID) %>
+
+                                    <li
+                                        <% if $Top.Presentation.ID == $ID %>
+                                        class="active"
+                                        <% end_if %>
+
+                                    ><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
+                                <% end_loop %>
+
+
+                            <% end_if %>
                         </ul>
                     </div>
 
-
-                    <!-- PRESENTATION LIST / BROWSER ----------------------------------->
-                    <% if $CategoryName %>
-                        <h5>Presentations In This Category</h5>
-                    <% else %>
-                        <h5>Showing All Presentations</h5>
-                    <% end_if %>
-                    <ul class="presentation-list">
-                        <% if $CurrentMember %>
-                            <% loop $CurrentMember.getRandomisedPresentations($CategoryID) %>
-
-                                <li
-                                    <% if $Top.Presentation.ID == $ID %>
-                                    class="active"
-                                    <% else_if $UserVote %>
-                                    class="completed"
-                                    <% end_if %>
-
-                                ><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
-                            <% end_loop %>
-                        <% else %>
-
-                            <% loop $LoggedOutPresentationList($CategoryID) %>
-
-                                <li
-                                    <% if $Top.Presentation.ID == $ID %>
-                                    class="active"
-                                    <% end_if %>
-
-                                ><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
-                            <% end_loop %>
-
-
-                        <% end_if %>
-                    </ul>
-                </div>
-
-                    <!-- PRESENTATION DISPLAY ----------------------------------->
+                        <!-- PRESENTATION DISPLAY ----------------------------------->
                     <div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
                         <a href="#" class="voting-open-panel text"><i class="fa fa-chevron-left"></i>All Submissions</a>
                         <% loop Presentation %>
 
-                            <div class="voting-content-body">
+                    <div class="voting-content-body">
 
-                                <% if Summit.isVotingOpen %>
-                                    <% if not $CurrentMember %>
-                                        <% include PresentationVotingPage_LogIn %>
-                                    <% else %>
-                                        <% include PresentationVotingPage_CastYourVote %>
-                                    <% end_if %>
-                                <% else %>
-                                    <% include PresentationVotingPage_closed %>
-                                <% end_if %>
+                        <% if Summit.isVotingOpen %>
+                            <% if not $CurrentMember %>
+                                <% include PresentationVotingPage_LogIn BackUrl=$Top.Link, PresentationID=$ID %>
+                            <% else %>
+                                <% include PresentationVotingPage_CastYourVote %>
+                            <% end_if %>
+                        <% else %>
+                            <% include PresentationVotingPage_closed %>
+                        <% end_if %>
 
-                                <div class="voting-presentation-title">
-                                    <h5>Title</h5>
+                        <div class="voting-presentation-title">
+                            <h5>Title</h5>
 
-                                    <h3>$Title</h3>
-                                </div>
-                                <div class="voting-presentation-track">
-                                    <h5>Track</h5>
-                                    <p>$Category.Title</p>
-                                </div>
-                                <div class="voting-presentation-body">
+                            <h3>$Title</h3>
+                        </div>
+                        <div class="voting-presentation-track">
+                            <h5>Track</h5>
 
-                                    <p>
-                                    <h5>Abstract</h5>
-                                    </p>
-
-                                    <div>$ShortDescription</div>
-
-                                    <div class="main-speaker-wrapper">
-                                        <% loop Speakers %>
-                                            <div class="main-speaker-row">
-                                                <div class="voting-speaker-name">
-                                                    $FirstName $Surname
-                                                    <span>$Title</span>
-                                                </div>
-                                                <img class="voting-speaker-pic"
-                                                     src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>"/>
-                                            </div>
-                                            <div class="main-speaker-description">
-                                                $Bio
-                                            </div>
-                                        <% end_loop %>
-                                    </div>
-                                </div>
+                            <p>$Category.Title</p>
                         </div>
                         <div class="voting-presentation-body">
 
-                                <% if Summit.isVotingOpen %>
-                                    <% if $CurrentMember %>
-                                        <% include PresentationVotingPage_CastYourVote %>
-                                        <div class="voting-tip">
-                                            <strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each
-                                            option.
+                            <p>
+                            <h5>Abstract</h5>
+                            </p>
+
+                            <div>$ShortDescription</div>
+
+                            <div class="main-speaker-wrapper">
+                                <% loop Speakers %>
+                                    <div class="main-speaker-row">
+                                        <div class="voting-speaker-name">
+                                            $FirstName $Surname
+                                            <span>$Title</span>
                                         </div>
-                                    <% end_if %>
-                                <% end_if %>
-                                <div class="voting-share-wrapper">
-                                    <h5>Share This Presentation</h5>
-                                    <div class="sharing-section">
-                                        <div class="single-voting-share">
-                                            <a href="https://twitter.com/share" class="twitter-share-button"
-                                               data-count="none">Tweet</a>
-                                            <script>!function (d, s, id) {
-                                                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                                                if (!d.getElementById(id)) {
-                                                    js = d.createElement(s);
-                                                    js.id = id;
-                                                    js.src = p + '://platform.twitter.com/widgets.js';
-                                                    fjs.parentNode.insertBefore(js, fjs);
-                                                }
-                                            }(document, 'script', 'twitter-wjs');</script>
-                                        </div>
-                                        <div class="single-voting-share">
-                                            <div class="g-plus" data-action="share" data-annotation="none"></div>
-                                        </div>
-                                        <div class="single-voting-share fb-share">
-                                            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"
-                                                 data-layout="button"></div>
-                                        </div>
+                                        <img class="voting-speaker-pic"
+                                             src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>"/>
                                     </div>
-                                </div>
+                                    <div class="main-speaker-description">
+                                        $Bio
+                                    </div>
+                                <% end_loop %>
                             </div>
-                        <% end_loop %>
+                        </div>
+
+                        <% if Summit.isVotingOpen %>
+                            <% if $CurrentMember %>
+                                <% include PresentationVotingPage_CastYourVote %>
+                                <div class="voting-tip">
+                                    <strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each
+                                    option.
+                                </div>
+                            <% end_if %>
+                        <% end_if %>
+                    <div class="voting-share-wrapper">
+                        <h5>Share This Presentation</h5>
+                        <div class="sharing-section">
+                            <div class="single-voting-share">
+                                <a href="https://twitter.com/share" class="twitter-share-button"
+                                   data-count="none">Tweet</a>
+                                <script>!function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                                    if (!d.getElementById(id)) {
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = p + '://platform.twitter.com/widgets.js';
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                                }(document, 'script', 'twitter-wjs');</script>
+                            </div>
+                            <div class="single-voting-share">
+                                <div class="g-plus" data-action="share" data-annotation="none"></div>
+                            </div>
+                            <div class="single-voting-share fb-share">
+                                <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"
+                                     data-layout="button"></div>
+                            </div>
+
+
+                        </div>
                     </div>
+                </div>
+                    <% end_loop %>
+                </div>
 
                     <!-------------------------------------------------->
                     <!-- SEARCH MODE ----------------------------------->
                     <!-------------------------------------------------->
 
-                <% else %>
+                    <% else %>
 
                     <!-- PRESENTATION LIST / BROWSER ----------------------------------->
                     <h5>Search Results</h5>
@@ -268,11 +269,11 @@
                     </ul>
                 </div>
 
-                    <div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
-                        <a href="#" class="voting-open-panel text"><i class="fa fa-chevron-left"></i>Search Results</a>
+                <div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
+                    <a href="#" class="voting-open-panel text"><i class="fa fa-chevron-left"></i>Search Results</a>
 
-                        <p>Select an entry on the left to see the details here.</p>
-                    </div>
+                    <p>Select an entry on the left to see the details here.</p>
+                </div>
 
                 <% end_if %>
 
