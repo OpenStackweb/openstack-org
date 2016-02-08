@@ -282,7 +282,14 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         $tickets = AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Tickets', $query)->toArray();
         foreach($tickets as $t)
         {
-            if(intval($t->TicketType()->ExternalId) === intval($ticket->TicketType()->ExternalId)) return true;
+            if(
+                intval($t->ExternalOrderId)    === intval($ticket->ExternalOrderId) &&
+                intval($t->ExternalAttendeeId) === intval($ticket->ExternalAttendeeId) &&
+                $t->TicketType()->exists() &&
+                $ticket->TicketType()->exists() &&
+                intval($t->TicketType()->ExternalId) === intval($ticket->TicketType()->ExternalId)
+            )
+            return true;
         }
         return false;
     }
