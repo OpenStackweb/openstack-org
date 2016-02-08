@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <a rel="nofollow" href="http://www.netapp.com/us/">
-                                    <img alt='NetApp_big_logo' src='/assets/companies/main_logo/netapp.jpg' class='big-logo-company sponsor-logo'/>
+                                    <img alt='NetApp_big_logo' src='/assets/companies/main_logo/netapp-lg-2.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
