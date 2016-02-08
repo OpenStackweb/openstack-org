@@ -75,7 +75,7 @@ class SummitService
                 }
                 // validate speaker conflict
                 foreach ($event->Speakers() as $speaker) {
-                    if ($c_event->Speakers()->find('ID',$speaker->ID)) {
+                    if ($c_event->Speakers()->find('ID',$speaker->ID) && $event->ID != $c_event->ID) {
                         throw new EntityValidationException(array("You can't publish on this timeframe, ".$speaker->getName()." is presenting in room '".$c_event->getLocationName()."' at this time."));
                     }
                 }

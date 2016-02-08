@@ -158,6 +158,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                     $entry['moderator_id'] = $e->ModeratorID;
                     $entry['track_id']     = $e->CategoryID;
                     $entry['level']        = $e->Level;
+                    $entry['status']       = $e->SelectionStatus();
                 }
                 array_push($events, $entry);
             }

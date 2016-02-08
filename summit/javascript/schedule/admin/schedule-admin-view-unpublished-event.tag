@@ -11,8 +11,9 @@
         </div>
         <div class="event-inner-body">
             <div class="event-title">
-                <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title }</a>
+                <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title.substring(0, 75) }{ data.title.length > 75 ? '...':''}</a>
             </div>
+            <div if={ data.status } class="presentation-status" title="status">&nbsp;{data.status}&nbsp;</div>
         </div>
         <div class="ui-resizable-handle ui-resizable-s" style="display:none">
             <span class="ui-icon ui-icon-triangle-1-s"></span>

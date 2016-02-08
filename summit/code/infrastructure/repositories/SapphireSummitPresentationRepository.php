@@ -53,16 +53,19 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
 
         return array($page, $page_size, $count, $data);
     }
+
     /**
      * @param int $summit_id
+     * @param null $track_list
+     * @param null $search_term
      * @param int $page
      * @param int $page_size
-     * @param array $order
+     * @param null $order
      * @return array
      */
     public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null)
     {
-        if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
+        if(is_null($order)) $order = array('SummitSelectedPresentation.Order' => 'ASC');
         $filter = array('SummitID' => $summit_id, 'Published' => 0);
 
         $track_filter = '';

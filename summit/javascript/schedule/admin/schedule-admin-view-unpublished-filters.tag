@@ -78,14 +78,17 @@
                         case 'tracks':
                             $('#track_list_col').show();
                             $('#event_type_col').hide();
+                            $('#sort_list').append('<option value="SummitSelectedPresentation.Order">Slot</option>');
                             break;
                         case 'events':
                             $('#track_list_col').hide();
                             $('#event_type_col').show();
+                            $("#sort_list option[value='SummitSelectedPresentation.Order']").remove();
                             break;
                         default:
                             $('#track_list_col').hide();
                             $('#event_type_col').hide();
+                            $("#sort_list option[value='SummitSelectedPresentation.Order']").remove();
                             break;
                     }
 
