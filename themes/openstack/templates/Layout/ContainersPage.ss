@@ -125,10 +125,11 @@
     </div>
     <!-- End Quote -->
     <!-- Action Section -->
+    <div class="containers-action-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-sm-push-2">
-                    <div class="containers-action-wrapper">
+                    <div class="">
                         <p>
                             OpenStack offers developers the infrastructure framework based on a single set of compatible APIs to manage their workloads, no matter whether those run on containers, virtual machines or bare metal.
                         </p>
@@ -137,7 +138,116 @@
                 </div>
             </div>
         </div>
+    </div>
     <!-- End Action Section -->
+
+    <!-- Featured Content -->
+
+    <div class="content-section-c featured-wrapper nfv">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Learn more about Containers directly from users</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5ths">
+                    <a href="http://superuser.openstack.org/articles/a-guide-to-navigating-openstack-and-containers" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="/themes/openstack/images/play-button.png">
+                        </div>
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-1.jpg" alt="A guide to navigating OpenStack and containers">
+                    </div>
+                    </a>
+                    <p class="video-title">
+                        A guide to navigating OpenStack and containers
+                    </p>
+                </div>
+                <div class="col-sm-5ths">
+                    <a href="http://superuser.openstack.org/articles/moving-from-monolith-to-microservices-lithium-technologies-shares-its-hybrid-cloud-strategy" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="/themes/openstack/images/read.png">
+                        </div>
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-2.jpg" alt="Combining OpenStack and Kubernetes at Lithium Technologies">
+                    </div>
+                    </a>
+                    <p class="video-title">
+                        Combining OpenStack and Kubernetes at Lithium Technologies
+                    </p>
+                </div>
+                <div class="col-sm-5ths">
+                    <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/openstack-magnum-containers-as-a-service" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="/themes/openstack/images/play-button.png">
+                        </div>
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-3.jpg" alt="OpenStack Magnum - Containers-as-a-Service">
+                    </div>
+                    </a> 
+                    <p class="video-title">
+                        OpenStack Magnum - Containers-as-a-Service
+                    </p>
+                </div>
+                <div class="col-sm-5ths">
+                    <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/beginners-guide-to-containers-technology-and-how-it-actually-works" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="/themes/openstack/images/play-button.png">
+                        </div>
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-4.jpg" alt="Beginners guide to containers technology and how it actually works">
+                    </div>
+                    </a>
+                    <p class="video-title">
+                        Beginners guide to containers technology and how it actually works
+                    </p>
+                </div>
+               <div class="col-sm-5ths">
+                    <a href="https://www.openstack.org/blog/2015/07/google-bringing-container-expertise-to-openstack/" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="/themes/openstack/images/read.png">
+                        </div>
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-5.jpg" alt="Google bringing container expertise to OpenStack">
+                    </div>
+                    </a>
+                    <p class="video-title">
+                        Google bringing container expertise to OpenStack
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Featured Content -->
+    <!-- Summit Promo -->
+    <div class="summit-promo containers">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h3>Learn more about Containers and NFV at the OpenStack Summit Austin</h3>
+                    <p>
+                        Join us in Austin for content and workshops devoted to working with OpenStack and container management. Hear from application developers and users who are building and deploying applications using Kubernetes and Docker on OpenStack clouds on April 27 and 28.
+                    </p>
+                    <p>
+                        <a href="//www.openstack.org/summit/austin-2016/categories/" target="_blank">Learn more about the container and application developer content planned for the Austin Summit</a>
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <div class="containers-summit-right">
+                        <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
+                        <div class="containers-summit-dates">
+                            April 25-29 in Austin, TX
+                        </div>
+                        <div class="containers-summit-register-btn">
+                            <a href="https://openstacksummit2016austin.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Summit Promo -->
    
     <!-- Download Modal -->
     <div class="modal fade" id="downloadModal">
