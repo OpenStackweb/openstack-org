@@ -172,7 +172,7 @@
                             <% if not $CurrentMember %>
                                 <% include PresentationVotingPage_LogIn BackUrl=$Top.Link, PresentationID=$ID %>
                             <% else %>
-                                <% include PresentationVotingPage_CastYourVote %>
+                                <% include PresentationVotingPage_CastYourVote TopLink=$Top.Link, PresentationID=$ID, VoteValue=$Top.VoteValue %>
                             <% end_if %>
                         <% else %>
                             <% include PresentationVotingPage_closed %>
@@ -215,7 +215,7 @@
 
                         <% if Summit.isVotingOpen %>
                             <% if $CurrentMember %>
-                                <% include PresentationVotingPage_CastYourVote %>
+                                <% include PresentationVotingPage_CastYourVote TopLink=$Top.Link, PresentationID=$ID, VoteValue=$Top.VoteValue %>
                                 <div class="voting-tip">
                                     <strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each
                                     option.
