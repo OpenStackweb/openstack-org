@@ -747,13 +747,14 @@ final class Summit extends DataObject implements ISummit
 
 
         if($this->ID > 0) {
+            $summit_id = $this->ID;
             // tracks
-            $config     = GridFieldConfig_RecordEditor::create(10);
+            $config     = GridFieldConfig_RecordEditor::create(25);
             $categories = new GridField('Categories', 'Presentation Categories', $this->Categories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
 
             // track groups
-            $config     = GridFieldConfig_RecordEditor::create(10);
+            $config     = GridFieldConfig_RecordEditor::create(25);
             $categories = new GridField('CategoryGroups', 'Category Groups', $this->CategoryGroups(), $config);
             $f->addFieldToTab('Root.Category Groups', $categories);
 
@@ -780,8 +781,8 @@ final class Summit extends DataObject implements ISummit
 
             $config = GridFieldConfig_RecordEditor::create();
             $config->addComponent(new GridFieldAddDefaultSummitTypes);
-            $gridField = new GridField('Types', 'Types', $this->Types(), $config);
-            $f->addFieldToTab('Root.Types', $gridField);
+            $gridField = new GridField('SummitTypes', 'SummitTypes', $this->Types(), $config);
+            $f->addFieldToTab('Root.SummitTypes', $gridField);
 
             // event types
             $config = GridFieldConfig_RecordEditor::create();
@@ -791,7 +792,7 @@ final class Summit extends DataObject implements ISummit
 
             //schedule
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->removeComponentsByType('GridFieldDeleteAction');
             $gridField = new GridField('Schedule', 'Schedule', $this->Events()->filter('Published', true)->sort
@@ -808,7 +809,7 @@ final class Summit extends DataObject implements ISummit
 
             // events
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
@@ -819,38 +820,23 @@ final class Summit extends DataObject implements ISummit
 
             //track selection list presentations
 
-            $result = DB::query("SELECT DISTINCT SummitEvent.*, Presentation.*
-FROM SummitEvent
-INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-INNER JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
-INNER JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID
-WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (SummitEvent.SummitID = {$this->ID})");
-
-            $presentations = new ArrayList();
-            foreach ($result as $row) {
-                $presentations->add(new Presentation($row));
-            }
-
-            $config = GridFieldConfig_RecordEditor::create(50);
-            $config->addComponent(new GridFieldPublishSummitEventAction);
-            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
-            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
-            $bulk_summit_types->setTitle('Set Summit Types');
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $gridField = new GridField('TrackChairs', 'TrackChairs Selection Lists', $presentations, $config);
-            $gridField->setModelClass('Presentation');
+            $config = GridFieldConfig_RecordEditor::create(25);
+            $gridField = new GridField('TrackChairs', 'TrackChairs Selection Lists',
+                SummitSelectedPresentationList::get()->filter('ListType', 'Group')
+                    ->where(' CategoryID IN ( SELECT ID FROM PresentationCategory WHERE SummitID = '.$summit_id.')')
+                , $config);
             $f->addFieldToTab('Root.TrackChairs Selection Lists', $gridField);
 
 
             // attendees
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $gridField = new GridField('Attendees', 'Attendees', $this->Attendees(), $config);
             $f->addFieldToTab('Root.Attendees', $gridField);
 
             //tickets types
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $gridField = new GridField('SummitTicketTypes', 'Ticket Types', $this->SummitTicketTypes(), $config);
             $f->addFieldToTab('Root.TicketTypes', $gridField);
 
@@ -871,21 +857,20 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
 
             $config->addComponent($multi_class_selector);
 
-
             $promo_codes = new GridField('SummitRegistrationPromoCodes', 'Registration Promo Codes',
                 $this->SummitRegistrationPromoCodes(), $config);
             $f->addFieldToTab('Root.RegistrationPromoCodes', $promo_codes);
 
             // speakers
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $gridField = new GridField('Speakers', 'Speakers', $this->Speakers(false), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Bio" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Speakers', $gridField);
 
             // presentations
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
@@ -895,7 +880,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $f->addFieldToTab('Root.Presentations', $gridField);
 
             // push notifications
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
             (
@@ -906,7 +891,7 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
 
             //entity events
 
-            $config = GridFieldConfig_RecordEditor::create(100);
+            $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent(new GridFieldWipeDevicesDataAction);
             $config->removeComponentsByType('GridFieldAddNewButton');
@@ -914,7 +899,6 @@ WHERE(ListType = 'Group') AND (SummitEvent.ClassName IN ('Presentation')) AND  (
             $f->addFieldToTab('Root.EntityEvents', $gridField);
         }
         return $f;
-
     }
 
 

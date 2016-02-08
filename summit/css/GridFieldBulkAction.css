@@ -32,3 +32,8 @@
     vertical-align: middle;
     background-position: 2px 0px;
     background-repeat: no-repeat no-repeat; }
+
+.select-entity
+{
+    width:250px;
+}

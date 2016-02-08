@@ -17,7 +17,7 @@ class GridFieldBulkActionAssignSummitTypeSummitEvents extends GridFieldBulkActio
 
     protected function getEntities()
     {
-        $summit_id = intval(Controller::curr()->getRequest()->param('ID'));
+        $summit_id = intval($_REQUEST['SummitID']);
         return SummitType::get()->filter('SummitID', $summit_id)->map('ID', 'Title');
     }
 

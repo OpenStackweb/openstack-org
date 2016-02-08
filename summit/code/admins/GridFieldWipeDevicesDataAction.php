@@ -18,7 +18,8 @@ class GridFieldWipeDevicesDataAction implements GridField_HTMLProvider, GridFiel
 
     protected $gridField;
 
-    private static $allowed_actions = array(
+    private static $allowed_actions = array
+    (
         'handleWipeDevicesDataAction',
         'handleGetAttendeesAction',
     );
@@ -69,13 +70,14 @@ class GridFieldWipeDevicesDataAction implements GridField_HTMLProvider, GridFiel
         $controller      = $gridField->getForm()->Controller();
         $this->gridField = $gridField;
 
-        $entity_event    = SummitEntityEvent::create();
+        $entity_event                  = SummitEntityEvent::create();
         $entity_event->EntityClassName = 'WipeData';
-        $entity_event->SummitID = $summit_id;
-        $entity_event->OwnerID  = Member::currentUserID();
-        $entity_event->EntityID = $action === 'wipe-user' ? $attendee_id : 0;
-        $entity_event->Type     = 'DELETE';
+        $entity_event->SummitID        = $summit_id;
+        $entity_event->OwnerID         = Member::currentUserID();
+        $entity_event->EntityID        = $action === 'wipe-user' ? $attendee_id : 0;
+        $entity_event->Type            = 'DELETE';
         $entity_event->write();
+
         $response = new SS_HTTPResponse();
         $response->setStatusCode(200);
         return $response;
@@ -83,6 +85,8 @@ class GridFieldWipeDevicesDataAction implements GridField_HTMLProvider, GridFiel
 
     public function handleGetAttendeesAction($gridField, $request)
     {
+        if(!Permission::check('ADMIN')) return new SS_HTTPResponse(null,403);
+
         $term      = Convert::raw2sql($request->getVar('term'));
         $summit_id = intval($request->param("ID"));
         $result = array();
@@ -90,7 +94,7 @@ class GridFieldWipeDevicesDataAction implements GridField_HTMLProvider, GridFiel
 SELECT A.ID,  CONCAT(M.FirstName,' ',M.Surname) AS FullName, M.Email  FROM SummitAttendee A INNER JOIN
 Member M on M.ID = A.MemberID
 WHERE A.SummitID = {$summit_id}
-HAVING FullName LIKE '%{$term}%' ;
+HAVING FullName LIKE '%{$term}%' OR M.Email LIKE '%{$term}%';
 SQL;
         foreach(DB::query($sql) as $row)
         {

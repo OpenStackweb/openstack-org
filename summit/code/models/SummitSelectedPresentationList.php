@@ -15,19 +15,72 @@
 class SummitSelectedPresentationList extends DataObject
 {
 
-    static $db = array(
-        'Name' => 'Text',
+    static $db = array
+    (
+        'Name'     => 'Text',
         'ListType' => "Enum('Individual,Group','Individual')"
     );
 
-    static $has_one = array(
+    static $has_one = array
+    (
         'Category' => 'PresentationCategory',
-        'Member' => 'Member'
+        'Member'   => 'Member'
     );
 
     static $has_many = array(
         'SummitSelectedPresentations' => 'SummitSelectedPresentation'
     );
+
+    private static $summary_fields = array
+    (
+        'Category.Title' => 'Name',
+    );
+
+
+    public function getCMSFields()
+    {
+
+        $f = new FieldList(
+            $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
+        );
+
+        $f->addFieldToTab('Root.Main', new TextField('Name', 'Name'));
+        $f->addFieldToTab('Root.Main', $ddl = new DropdownField('ListType', 'ListType',  $this->dbObject('ListType')->enumValues()));
+        $f->addFieldToTab('Root.Main', $ddl2 = new DropdownField('CategoryID', 'Category',  PresentationCategory::get()->filter('SummitID', $_REQUEST['SummitID'] )->map('ID', 'Title')));
+        $ddl->setEmptyString('-- Select List Type --');
+        $ddl2->setEmptyString('-- Select Track  --');
+        if($this->ID > 0)
+        {
+            $config     = GridFieldConfig_RecordEditor::create(25);
+
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $config->addComponent(new GridFieldPublishSummitEventAction);
+            $config->removeComponentsByType('GridFieldDeleteAction');
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
+            $bulk_summit_types->setTitle('Set Summit Types');
+
+            $result = DB::query("SELECT DISTINCT SummitEvent.*, Presentation.*
+FROM SummitEvent
+INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+INNER JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
+INNER JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = {$this->ID}
+ORDER BY SummitSelectedPresentation.Order ASC
+");
+
+            $presentations = new ArrayList();
+            foreach ($result as $row) {
+                $presentations->add(new Presentation($row));
+            }
+
+            $gridField = new GridField('SummitSelectedPresentations', 'Selected Presentations', $presentations , $config);
+            $gridField->setModelClass('Presentation');
+            $f->addFieldToTab('Root.Main', $gridField);
+
+        }
+        return $f;
+    }
+
 
     function SortedPresentations()
     {
