@@ -814,6 +814,39 @@ a .video-overlay p {
   width: 100%;
   min-height: 315px; }
 
+.video-wrapper.small .video-overlay {
+  top: 20%; }
+.video-wrapper.small .play-button {
+  width: 30%;
+  top: 20%; }
+  .video-wrapper.small .play-button img {
+    width: 100%; }
+
+@media (max-width: 1199px) {
+  .video-wrapper.small .video-overlay {
+    top: 10%; } }
+
+@media (max-width: 991px) {
+  .video-wrapper.small .video-overlay {
+    top: 0%; } }
+
+@media (max-width: 767px) {
+  .video-wrapper.small .video-overlay {
+    top: 75%; } }
+
+@media (max-width: 480px) {
+  .video-wrapper.small .video-overlay {
+    top: 30%; } }
+.featured-wrapper.nfv .video-wrapper.small {
+  margin-bottom: 0; }
+  .featured-wrapper.nfv .video-wrapper.small:hover .play-button {
+    display: block; }
+.featured-wrapper.nfv .video-title {
+  font-size: 0.9em;
+  width: 100%; }
+
+
+
 /*End Featured Videos*/
 /*Download Modal*/
 .modal-header {

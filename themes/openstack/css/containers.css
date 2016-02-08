@@ -117,6 +117,39 @@
     text-align: center; }
   .summit-promo.containers .containers-summit-right {
     margin-top: 30px; } }
+
+.video-wrapper.small .video-overlay {
+  top: 20%; }
+.video-wrapper.small .play-button {
+  width: 30%;
+  top: 20%; }
+  .video-wrapper.small .play-button img {
+    width: 100%; }
+
+@media (max-width: 1199px) {
+  .video-wrapper.small .video-overlay {
+    top: 10%; } }
+
+@media (max-width: 991px) {
+  .video-wrapper.small .video-overlay {
+    top: 0%; } }
+
+@media (max-width: 767px) {
+  .video-wrapper.small .video-overlay {
+    top: 75%; } }
+
+@media (max-width: 480px) {
+  .video-wrapper.small .video-overlay {
+    top: 30%; } }
+.featured-wrapper.nfv .video-wrapper.small {
+  margin-bottom: 0; }
+  .featured-wrapper.nfv .video-wrapper.small:hover .play-button {
+    display: block; }
+.featured-wrapper.nfv .video-title {
+  font-size: 0.9em;
+  width: 100%; }
+
+
 /*Five column layout*/
 .col-xs-5ths, .col-sm-5ths, .col-md-5ths, .col-lg-5ths {
   position: relative;
