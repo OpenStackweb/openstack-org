@@ -37,7 +37,8 @@ class SapphireMemberRepository extends SapphireRepository implements IMemberRepo
         {
             $member = Member::get()->filter('ThirdEmail', $email )->first();
         }
-        UnitOfWork::getInstance()->scheduleForUpdate($member);
+        if(!is_null($member))
+            UnitOfWork::getInstance()->scheduleForUpdate($member);
         return $member;
     }
 
@@ -63,7 +64,8 @@ class SapphireMemberRepository extends SapphireRepository implements IMemberRepo
         $member = Member::get()
             ->filter('EmailVerifiedTokenHash', MemberDecorator::HashConfirmationToken($email_verification_token) )
             ->first();
-        UnitOfWork::getInstance()->scheduleForUpdate($member);
+        if(!is_null($member))
+            UnitOfWork::getInstance()->scheduleForUpdate($member);
         return $member;
     }
 }
