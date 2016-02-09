@@ -218,7 +218,7 @@
                                 <% loop Speakers %>
                                     <div class="main-speaker-row">
                                         <div class="voting-speaker-name">
-                                            $FirstName $Surname
+                                            $FirstName $LastName
                                             <span>$Title</span>
                                         </div>
                                         <img class="voting-speaker-pic"
