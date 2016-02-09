@@ -159,11 +159,16 @@ class RegistrationPage_Controller extends Page_Controller
 
         $fields->push(new HiddenField('MembershipType', 'MembershipType', 'foundation'));
 
+        $request  = Controller::curr()->getRequest();
+        $back_url = $request->getVar('BackURL');
+        if(!empty($back_url))
+        {
+            $fields->push(new HiddenField('BackURL', 'BackURL', $back_url));
+        }
 
         $actions = new FieldList(
             new FormAction('doRegister', 'Submit My Application')
         );
-
 
         $validator = new Member_Validator(
             'FirstName',
@@ -177,6 +182,8 @@ class RegistrationPage_Controller extends Page_Controller
         );
 
         $form =  new HoneyPotForm($this, 'RegistrationForm', $fields, $actions, $validator);
+
+
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             if(isset($data['HiddenAffiliations']))
@@ -202,7 +209,11 @@ class RegistrationPage_Controller extends Page_Controller
             if (!is_null($profile_page)) {
                 //Redirect to profile page with success message
                 Session::clear("FormInfo.{$form->FormName()}.data");
-                return OpenStackIdCommon::loginMember($member, $profile_page->Link('?success=1'));
+                $request  = Controller::curr()->getRequest();
+                $back_url = $request->postVar('BackURL');
+                $link     = $profile_page->Link('?success=1');
+                if(!empty($back_url)) $link .= "&BackURL=".$back_url;
+                return OpenStackIdCommon::loginMember($member, $link);
             }
         }
         catch(EntityValidationException $ex1){
