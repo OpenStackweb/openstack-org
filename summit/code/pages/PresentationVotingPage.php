@@ -193,8 +193,7 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
                   SummitEvent.Title LIKE '%{$k}%'
                   OR SummitEvent.Description LIKE '%{$k}%'
                   OR SummitEvent.ShortDescription LIKE '%{$k}%'
-                  OR PresentationSpeaker.FirstName LIKE '%{$k}%'
-                  OR PresentationSpeaker.LastName LIKE '%{$k}%'
+                  OR (concat_ws(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                  
             ");
         }
         // Clear the category if one was set
@@ -383,7 +382,7 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
     }
 
     /* function SpeakerVotingLoginForm() {
-      $URLSegment = $this->request->param("ID");    
+      $URLSegment = $this->request->param("ID");
       Session::set('BackURL',$this->Link().'/Presentation/'.$URLSegment);
       $SpeakerVotingLoginForm = new SpeakerVotingLoginForm($this, 'SpeakerVotingLoginForm');
       return $SpeakerVotingLoginForm;
