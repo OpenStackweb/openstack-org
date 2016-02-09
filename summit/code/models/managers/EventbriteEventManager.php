@@ -281,12 +281,26 @@ final class EventbriteEventManager implements IEventbriteEventManager
                     )
                 );
 
-            if(intval(SummitAttendeeTicket::get()->filter(array
+            $old_ticket = SummitAttendeeTicket::get()->filter(array
+            (
+                'ExternalOrderId'    => $external_order_id,
+                'ExternalAttendeeId' => $external_attendee_id,
+            ))->first();
+
+            if(!is_null($old_ticket))
+                throw new EntityValidationException
                 (
-                    'ExternalOrderId' => $external_order_id,
-                    'ExternalAttendeeId' => $external_attendee_id,
-                ))->count()) > 0 )
-                throw new EntityValidationException(array('Ticket already redeem!'));
+                    array
+                    (
+                        sprintf
+                        (
+                            'Ticket already redeem external_order_id %s - external_attendee_id %s - OwnerID %s !',
+                            $external_order_id,
+                            $external_attendee_id,
+                            $old_ticket->OwnerID
+                        )
+                    )
+                );
 
             $ticket = $attendee_factory->buildTicket($external_attendee_id , $external_order_id, $bought_date, $bought_date, $ticket_type);
 
