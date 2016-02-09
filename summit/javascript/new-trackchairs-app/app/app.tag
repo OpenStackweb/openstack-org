@@ -27,35 +27,35 @@ require('./comments-list.tag')
     	<rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>
 
     	<!-- Tutorial -->
-     	<div show={ DisplayMode === 'tutorial' }>
+     	<div if={ DisplayMode === 'tutorial' }>
     		<tutorial/>
     	</div>
 
     	<!-- Chair Directory -->
-     	<div show={ DisplayMode === 'directory' }>
+     	<div if={ DisplayMode === 'directory' }>
     		<chairdirectory chairs="{ summit.chair_list }" />
     	</div>
 
     	<!-- Chair Selections -->
-    	<div show={ DisplayMode === 'selections' }>
-    		<selection-manager categories="{ summit.categories }" api="{ this.opts }"/>
+    	<div if={ DisplayMode === 'selections' }>
+    		<selection-manager categories="{ summit.categories }" api="{ this.opts }" visible="{ DisplayMode === 'selections' }"/>
     	</div>
     	<!-- End Chair Selections -->
 
     	<!-- Change Requests Browser -->
-    	<div show={ DisplayMode === 'requests' }>
+    	<div if={ DisplayMode === 'requests' }>
     		<change-requests api="{ this.opts }"/>
     	</div>
     	<!-- Change Requests Browser -->
 
 			<!-- Change Requests Browser -->
     	<div show={ DisplayMode === 'comments' }>
-    		<comments-list api="{ this.opts }"/>
+    		<comments-list api="{ this.opts }" visible="{ DisplayMode === 'comments' }"/>
     	</div>
     	<!-- Change Requests Browser -->
 
     	<!-- Presntation Browser -->
-    	<div show={ DisplayMode === 'browse' } class="row">
+    	<div if={ DisplayMode === 'browse' } class="row">
 		    <div class="{ col-lg-4: details } { col-lg-12: !details }">
 	        	<div class="well well-sm">
 	        		<h4>{ summit.title } Presentation Submissions</h4>
@@ -92,7 +92,9 @@ require('./comments-list.tag')
 					<div class="presentation-list" id="presentation-list">
 						<presentationitem each={ presentation, i in presentations } activekey="{ activekey }" key="{ i }" data="{ presentation }" details="{details}" />
 					</div>
-
+					<div>
+						<ul id="presentation-list-pager"></ul>
+					</div>
 				</div>
 				<div if="{ !quantity && searchmode }">No results were found</div>
 	        </div>
@@ -185,7 +187,7 @@ require('./comments-list.tag')
 		var self = this
 		this.sortitems = []
 		this.DisplayMode = 'browse'
-
+		this.presentation_query = null;
 		this.toasts = [];
 
 
@@ -229,6 +231,7 @@ require('./comments-list.tag')
 			self.activeCategory = category
 			var id
 			if(category) id = category.id
+			console.log('setCategory '+id)
 			opts.trigger('load-presentations',null,id)
 		}
 
@@ -259,11 +262,11 @@ require('./comments-list.tag')
 			return set
 		}
 
-		opts.on('presentations-loaded', function(result){
+		opts.on('presentations-loaded', function(response){
 
 			console.log('presentations loaded')
 
-			self.presentations = result
+			self.presentations = response.results
 			self.quantity = self.presentations.length
 
 			if(self.currentPresentation) self.activekey = self.indexOf(self.currentPresentation.id)
@@ -278,7 +281,6 @@ require('./comments-list.tag')
 						opts.trigger('load-presentation-details', id)
 						self.showDetails()
 					}
-
 					self.update()
 				}
 
@@ -313,7 +315,26 @@ require('./comments-list.tag')
 			// fire up the router defined above and route based on current URL
 			riot.route.start(true)
 
+			var options = {
+				bootstrapMajorVersion:3,
+				currentPage: response.page ,
+				totalPages:  response.total_pages,
+				numberOfPages: 10,
+				onPageChanged: function(e,oldPage,newPage){
+					console.log('page ' + newPage);
+					$('body').ajax_loader();
+					opts.trigger('load-presentations', self.presentation_query, self.activeCategory.id, newPage)
+				}
+			}
+
+
 			self.update()
+
+			if (response.results.length){
+				$('#presentation-list-pager').bootstrapPaginator(options);
+			}
+
+			$('body').ajax_loader('stop');
 
 		})
 
@@ -360,7 +381,12 @@ require('./comments-list.tag')
 			// prevents flash of wrong value
 			self.quantity = 0
 			self.searchmode = true
-			opts.trigger('load-presentations', e.target[0].value)
+
+			self.presentation_query = e.target[0].value;
+			console.log('search '+self.presentation_query)
+			var id = null;
+			if(self.activeCategory) id = self.activeCategory.id;
+			opts.trigger('load-presentations', self.presentation_query, id)
 		}
 
 		selectPresentation(e){
@@ -444,7 +470,11 @@ require('./comments-list.tag')
 			document.getElementById('app-search').value='';
 			self.quantity = 0
 			self.searchmode = false
-			opts.trigger('load-presentations', null, this.activeCategory.id)
+			self.presentation_query = null;
+			console.log('clearSearch')
+			var id = null;
+			if(self.activeCategory) id = self.activeCategory.id;
+			opts.trigger('load-presentations', self.presentation_query, id)
 			self.activekey = null
 			self.update()
 		}

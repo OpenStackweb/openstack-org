@@ -8,6 +8,10 @@ reqwest = require('reqwest')
 var api = riot.observable()
 var url = '/trackchairs/api/v1/'
 
+var load_presentation_req = null;
+var load_summit_req       = null;
+var load_selections_req   = null;
+var load_all_comments_req = null;
 /*
 *	Listeners
 */
@@ -18,11 +22,14 @@ api.on('load-summit-details', function(id){
 	var append = 'summit/'
 	id = typeof id !== 'undefined' ? id : 'active'
 	var append = append + id
-
-	reqwest({
+	console.log('load-summit-details - id '+id);
+	if(load_summit_req !== null) return;
+	load_summit_req = reqwest({
 	    url: url + append
 	  , method: 'get'
 	  , success: function (resp) {
+			load_summit_req = null;
+			console.log('summit-details-loaded');
 			api.trigger('summit-details-loaded', resp)
 	    }
 	})
@@ -32,12 +39,12 @@ api.on('load-summit-details', function(id){
 
 // Request to track chair selections for a particular category
 api.on('load-selections', function(categoryId){
-
-
-	reqwest({
+	if(load_selections_req !== null) return;
+	load_selections_req = reqwest({
 	    url: url + 'selections/' + categoryId + '/'
 	  , method: 'get'
 	  , success: function (resp) {
+			load_selections_req = null;
 			api.trigger('selections-loaded', resp)
 	    }
 	})
@@ -45,17 +52,21 @@ api.on('load-selections', function(categoryId){
 
 
 // Request to load presenations
-api.on('load-presentations', function(query,categoryId){
-
+api.on('load-presentations', function(query, categoryId, page){
+	if(load_presentation_req !== null) return;
+	console.log('load-presentations - query '+query+' categoryId '+categoryId);
 	var append = '?'
 	if(query) { append = append + 'keyword=' + encodeURI(query) }
 	if(categoryId) { append = append + '&category=' + encodeURI(categoryId) }
-
-	reqwest({
+	if(!page) { page = 1 }
+	append = append + '&page=' + page
+	load_presentation_req = reqwest({
 	    url: url + append
 	  , method: 'get'
 	  , success: function (resp) {
-			api.trigger('presentations-loaded', resp.results)
+			load_presentation_req = null;
+			console.log('presentations-loaded');
+			api.trigger('presentations-loaded', resp)
 	    }
 	})
 
@@ -182,21 +193,24 @@ api.on('change-approved', function(){
 	api.trigger('load-change-requests')
 })
 
-api.on('load-change-requests', function(){
+api.on('load-change-requests', function(page){
+	if(!page) { page = 1 }
 	reqwest({
-	    url: url + 'change_requests'
+	    url: url + 'change_requests?page=' + page
 	  , method: 'get'
-	  , success: function (resp) {
-	  		api.trigger('change-requests-loaded', resp)
+	  , success: function (response) {
+	  		api.trigger('change-requests-loaded', response)
 	    }
 	})
 })
 
-api.on('load-all-comments', function(){
-	reqwest({
-	    url: url + 'presentation-comments'
+api.on('load-all-comments', function(page){
+	if(load_all_comments_req !== null) return;
+	load_all_comments_req = reqwest({
+	    url: url + 'presentation-comments?page='+page
 	  , method: 'get'
 	  , success: function (resp) {
+			load_all_comments_req = null;
 	  		api.trigger('all-comments-loaded', resp)
 	    }
 	})

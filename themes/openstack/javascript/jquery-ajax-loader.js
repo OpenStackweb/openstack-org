@@ -19,7 +19,7 @@
             element = $(this);
 
             if(element.find('#resultLoading').attr('id') != 'resultLoading'){
-                element.append('<div id="resultLoading" style="display:none"><div><img src="themes/openstack/javascript/images/loader.gif"><div>'+text+'</div></div><div class="bg"></div></div>');
+                element.append('<div id="resultLoading" style="display:none"><div><img src="/themes/openstack/javascript/images/loader.gif"><div>'+text+'</div></div><div class="bg"></div></div>');
             }
 
             jQuery('#resultLoading').css({

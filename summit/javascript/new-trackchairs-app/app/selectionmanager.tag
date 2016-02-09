@@ -24,7 +24,8 @@ require('./selectionmenu.tag')
 
 	<script>
 		var self = this
-			self.lists = []
+		self.visible = opts.visible
+	    self.lists = []
 
 		calcWidth() {
 			if (self.lists.length > 0) {
@@ -35,6 +36,7 @@ require('./selectionmenu.tag')
 		}
 
 		opts.api.on('summit-details-loaded', function(result){
+
 			self.summit = result
 			if(self.summit.track_chair.categories) {
 				self.setCategory(self.summit.categories[0])
@@ -49,6 +51,7 @@ require('./selectionmenu.tag')
 			if(category) id = category.id
 			opts.api.trigger('load-selections',category.id)
 			self.parent.details = false
+			console.log('selectionmanager.tag - setCategory');
 			self.parent.setCategory(category)
 		}
 
@@ -69,6 +72,10 @@ require('./selectionmenu.tag')
 
 		opts.api.on('sort-order-saved', function(){
 			self.setCategory(self.activeCategory)
+		})
+
+		this.on('update', function(){
+			console.log('selectionmanager update')
 		})
 
 

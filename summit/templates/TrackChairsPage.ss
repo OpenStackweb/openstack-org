@@ -28,7 +28,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/summit/javascript/bootstrap.min.js"></script>
-
+    <script src="/themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js"></script>
+    <script src="/themes/openstack/javascript/jquery-ajax-loader.js"></script>
     <!-- App -->
     <script src="/summit/javascript/new-trackchairs-app/app/index.bundle.js?v=020520161"></script>
 

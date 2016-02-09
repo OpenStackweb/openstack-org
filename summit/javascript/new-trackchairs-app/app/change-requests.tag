@@ -35,7 +35,9 @@ require('./change-error-modal.tag')
 			<td>{ request.requester }</td>
 		</tr>
 	</table>
-
+	<div>
+	<ul id="change-request-list-pager"></ul>
+	</div>
 	<style scoped>
 		.completed { opacity: 0.4;}
 		.selected, .selected a { color: red;}
@@ -61,8 +63,25 @@ require('./change-error-modal.tag')
 		opts.api.on('change-requests-loaded', function(response){
 			self.requests = []
 			self.update()
-			self.requests = response
+			self.requests = response.results
 			self.update()
+
+			var options = {
+				bootstrapMajorVersion:3,
+				currentPage: response.page ,
+				totalPages:  response.total_pages,
+				numberOfPages: 10,
+				onPageChanged: function(e,oldPage,newPage){
+				console.log('page ' + newPage);
+				$('body').ajax_loader();
+				opts.api.trigger('load-change-requests', newPage)
+				}
+			}
+
+			if (response.results.length){
+				$('#change-request-list-pager').bootstrapPaginator(options);
+			}
+			$('body').ajax_loader('stop');
 		})
 
 	</script>

@@ -17,6 +17,7 @@
 	</div>
 
 	setCategory(e){
+		console.log('categorymenu.tag - setCategory');
 		this.parent.setCategory(e.item.category)
 	}
 
