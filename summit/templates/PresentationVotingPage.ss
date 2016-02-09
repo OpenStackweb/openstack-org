@@ -170,7 +170,7 @@
 
                         <% if Summit.isVotingOpen %>
                             <% if not $CurrentMember %>
-                                <% include PresentationVotingPage_LogIn BackUrl=$Top.Link, PresentationID=$ID %>
+                                <% include PresentationVotingPage_LogIn BackUrl=$Top.Link, PresentationID=$ID, SummitName=$Summit.Name %>
                             <% else %>
                                 <% include PresentationVotingPage_CastYourVote TopLink=$Top.Link, PresentationID=$ID, VoteValue=$Top.VoteValue %>
                             <% end_if %>
@@ -195,6 +195,24 @@
                             </p>
 
                             <div>$ShortDescription</div>
+
+                            <p>
+                            <h5>Problems Addressed</h5>
+                            </p>
+
+                            <div>$ProblemAddressed</div>
+
+                            <p>
+                            <h5>Why Should This Presentation Be Selected?</h5>
+                            </p>
+
+                            <div>$SelectionMotive</div>
+
+                            <p>
+                            <h5>What Should Attendees Expect To Learn?</h5>
+                            </p>
+
+                            <div>$AttendeesExpectedLearnt</div>
 
                             <div class="main-speaker-wrapper">
                                 <% loop Speakers %>
