@@ -6,7 +6,7 @@
                 <hr/>
                 <p>
                     <strong>The OpenStack Summit</strong> is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.
-                </p>               
+                </p>
                 <div class="stats-wrapper">
                     <h3 class="recap-title">Attendees From Around The World</h3>
                     <div class="single-summit-stats right">
@@ -20,7 +20,7 @@
                     <div class="about-summit-legend-wrapper">
                         <img class="about-summit-legend" src="/themes/openstack/static/images/tokyo/about-stats-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/about-stats-legend.png" alt="Vancouver Summit Attendees">
                     </div>
-                </div> 
+                </div>
                 <hr>
                 <h3 class="recap-title">Watch Video Recaps From Previous Summits</h3>
                 <div class="about-video-wrapper">
@@ -37,7 +37,7 @@
                <li><a href="https://openstacksummit2016austin.eventbrite.com/"><i class="fa fa-shopping-cart"></i>Register For The Summit</a></li>
                <li><a href="/summit/austin-2016/austin-and-travel/#hotels"><i class="fa fa-h-square"></i>Hotels</a></li>
                 <li><a href="/summit/austin-2016/sponsors/"><i class="fa fa-tag"></i>Become a Sponsor</a></li>
-                <li><a href="/summit/austin-2016/call-for-speakers/"><i class="fa fa-comment"></i>Become a Speaker</a></li>
+                <li><a href="/summit/austin-2016/vote-for-speakers/"><i class="fa fa-comment"></i>Vote For Speakers</a></li>
                <li><a href="/summit/austin-2016/austin-and-travel/#visa"><i class="fa fa-globe"></i>Visa Invitation</a></li>
                <li><a href="/summit/austin-2016/austin-and-travel/#travel-support"><i class="fa fa-plane"></i>Travel Support</a></li>
                 <li><a href="/summit/austin-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
@@ -119,7 +119,7 @@
                             <ul>
                                 <li>
                                     Access to the Keynote presentations from industry leaders and Marketplace Expo Hall to explore sponsor booths and network<br>
-                                    
+
                                 </li>
                                 <li>
                                     This pass does NOT include access to any breakout sessions (including sponsored sessions and tracks) taking place Monday - Thursday or the developer and operator working sessions taking place Tuesday - Friday. This pass ONLY includes access to the Keynote presentations and the Marketplace Expo Hall.
@@ -163,8 +163,8 @@
                     </p>
                 </div>
                 <div class="growth-map-wrapper">
-                    <img class="growth-map tokyo" src="/themes/openstack/static/images/austin/map-about-summit.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/austin/map-about-summit.png" alt="OpenStack Summit Growth Chart"> 
-                    <img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/map-legend.png" alt="OpenStack Summit Map Legend"> 
+                    <img class="growth-map tokyo" src="/themes/openstack/static/images/austin/map-about-summit.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/austin/map-about-summit.png" alt="OpenStack Summit Growth Chart">
+                    <img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/map-legend.png" alt="OpenStack Summit Map Legend">
                 </div>
                 <div class="growth-text-bottom map">
                     <p>
@@ -225,6 +225,4 @@
            <img src="/themes/openstack/static/images/networking-photos/photo12.jpg" />
     </div>
 </div>
-<!-- End Photo Row --> 
-
-
+<!-- End Photo Row -->
