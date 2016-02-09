@@ -9,6 +9,6 @@
         schedule.</p>
     <a className="btn" href="/Security/login?BackURL={$BackUrl}presentation/{$PresentationID}">I
         already have an account</a>&nbsp; | &nbsp;
-    <a href="/join/register/?membership-type=community" className="btn">Sign
+    <a href="/join/register/?membership-type=community&BackURL={$BackUrl}presentation/{$PresentationID}" className="btn">Sign
         up now</a>
 </div>
