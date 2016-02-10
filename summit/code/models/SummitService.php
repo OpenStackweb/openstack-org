@@ -24,6 +24,10 @@ class SummitService
      */
     private $event_repository;
     /**
+     * @var ISummitAttendeeRepository
+     */
+    private $attendee_repository;
+    /**
      * @var ITransactionManager
      */
     private $tx_service;
@@ -32,11 +36,13 @@ class SummitService
     (
         ISummitRepository $summit_repository,
         ISummitEventRepository $event_repository,
+        ISummitAttendeeRepository $attendee_repository,
         ITransactionManager $tx_service
     )
     {
         $this->summit_repository = $summit_repository;
         $this->event_repository  = $event_repository;
+        $this->attendee_repository  = $attendee_repository;
         $this->tx_service        = $tx_service;
     }
 
@@ -163,6 +169,45 @@ class SummitService
             }
 
             return $event;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $attendee_data
+     * @return mixed
+     */
+    public function updateAttendee(ISummit $summit, array $attendee_data)
+    {
+        $attendee_repository = $this->attendee_repository;
+        return $this->tx_service->transaction(function() use($summit, $attendee_data, $attendee_repository){
+            if(!isset($attendee_data['id'])) throw new EntityValidationException(array('missing required param: id'));
+            $attendee_id = intval($attendee_data['id']);
+            $attendee = $attendee_repository->getById($attendee_id);
+
+            if(is_null($attendee))
+                throw new NotFoundEntityException('Summit Attendee', sprintf('id %s', $attendee_id));
+
+            if(intval($attendee->SummitID) !== intval($summit->getIdentifier()))
+                throw new EntityValidationException(array('attendee doest not belong to summit'));
+
+            $attendee->MemberID = $attendee_data['member'];
+            $attendee->SharedContactInfo = $attendee_data['share_info'];
+            if ($attendee_data['checked_in']) {
+                $attendee->registerSummitHallChecking();
+            } else {
+                $attendee->SummitHallCheckedIn = $attendee_data['checked_in'];
+            }
+
+            if ($attendee->Member() && $attendee->Member()->Speaker()->ID) {
+                $attendee->Member()->Speaker()->Title = $attendee_data['title'];
+                $attendee->Member()->Speaker()->FirstName = $attendee_data['first_name'];
+                $attendee->Member()->Speaker()->LastName = $attendee_data['last_name'];
+                $attendee->Member()->Speaker()->Bio = $attendee_data['bio'];
+                $attendee->Member()->Speaker()->write();
+            }
+
+            return $attendee;
         });
     }
 }

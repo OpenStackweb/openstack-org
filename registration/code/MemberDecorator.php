@@ -60,11 +60,14 @@ class MemberDecorator extends DataExtension
         'Org'   => 'Org'
     );
 
-
     private static $has_many = array
     (
         'LegalAgreements' => 'LegalAgreement',
         'Affiliations'    => 'Affiliation'
+    );
+
+    private static $belongs_to = array(
+        'Speaker' => 'PresentationSpeaker.Member'
     );
 
     private static $belongs_many_many = array(

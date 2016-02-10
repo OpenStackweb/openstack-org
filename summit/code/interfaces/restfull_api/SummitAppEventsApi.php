@@ -39,11 +39,13 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         // TODO: set by IOC
         $this->summit_repository             = new SapphireSummitRepository;
         $this->summitevent_repository        = new SapphireSummitEventRepository();
+        $this->summitattendee_repository     = new SapphireSummitAttendeeRepository();
         $this->summitpresentation_repository = new SapphireSummitPresentationRepository();
         $this->summit_service                = new SummitService
         (
             $this->summit_repository,
             $this->summitevent_repository,
+            $this->summitattendee_repository,
             SapphireTransactionManager::getInstance()
         );
     }
@@ -73,7 +75,6 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'DELETE $EVENT_ID!/unpublish' => 'unpublishEvent',
         'PUT $EVENT_ID!/update'       => 'updateEvent',
-        'GET $EVENT_ID!/get_members'  => 'getMemberOptionsForSpeakers',
         'GET $EVENT_ID!/get_tags'     => 'getTagOptions',
         'GET $EVENT_ID!/get_sponsors' => 'getSponsorOptions',
     );
@@ -83,7 +84,6 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'publishEvent',
         'unpublishEvent',
         'updateEvent',
-        'getMemberOptionsForSpeakers',
         'getTagOptions',
         'getSponsorOptions',
     );
@@ -266,45 +266,6 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex2->getMessage(), SS_Log::WARN);
             return $this->notFound($ex2->getMessages());
-        }
-        catch(Exception $ex)
-        {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
-
-    // this is called when typing a member name to add as a speaker on edit event
-    public function getMemberOptionsForSpeakers(SS_HTTPRequest $request){
-        try
-        {
-            $query_string = $request->getVars();
-            $query        = Convert::raw2sql($query_string['query']);
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $event_id     = intval($request->param('EVENT_ID'));
-            $summit       = $this->summit_repository->getById($summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $event        = $this->summitevent_repository->getById($event_id) ;
-            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
-
-            $members = DB::query("SELECT M.ID AS id, CONCAT(M.FirstName,' ',M.Surname) AS name FROM Member AS M
-                                    LEFT JOIN Group_Members AS GM ON M.ID = GM.MemberID
-                                    LEFT JOIN `Group` AS G ON G.ID = GM.GroupID
-                                    WHERE (M.FirstName LIKE '{$query}%' OR M.Surname LIKE '{$query}%')
-                                    AND(G.Code = '".IFoundationMember::CommunityMemberGroupSlug."' OR G.Code = '".IFoundationMember::FoundationMemberGroupSlug."')
-                                    ORDER BY M.FirstName, M.Surname");
-
-            $json_array = array();
-            foreach ($members as $member) {
-                $json_array[] = $member;
-            }
-
-            echo json_encode($json_array);
-        }
-        catch(NotFoundEntityException $ex2)
-        {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
         }
         catch(Exception $ex)
         {

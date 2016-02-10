@@ -15,71 +15,62 @@ var form_validator = null;
 
 $(document).ready(function(){
 
-    $('#summit_type').chosen({width: "100%", placeholder_text_multiple: "Select Summit Types..."});
-
-    $("#start_date").datetimepicker();
-    $("#end_date").datetimepicker();
-
-    // Speakers autocomplete tags
-    $('#speakers').tagsinput({
+    // Member autocomplete
+    $('#member').tagsinput({
         itemValue: "id",
         itemText: "name",
         freeInput: false,
+        maxTags: 1,
         typeahead: {
             minLength: 4,
             items: 'all',
             source: function(query) {
-                var summit_id = $('#summit_id').val();
-                var event_id = $('#event_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/member_options',{query:query});
+                var max_reached = $('.bootstrap-tagsinput','.member_container').hasClass('bootstrap-tagsinput-max');
+                if (!max_reached) {
+                    var summit_id = $('#summit_id').val();
+                    return $.getJSON('api/v1/summits/'+summit_id+'/member_options',{query:query});
+                } else {
+                    return false;
+                }
             }
         }
     });
 
-    $.each(speakers, function(index, value) {
-        $('#speakers').tagsinput('add', value);
-    });
+    // if we already have a member assigned to this attendee
+    if (!$.isEmptyObject(member)) {
+        $('#member').tagsinput('add', member);
+    }
 
-    // Tags autocomplete tag
-    $('#tags').tagsinput({
-        itemValue: "id",
-        itemText: "name",
-        freeInput: false,
-        tagClass: 'label label-default',
-        typeahead: {
-            minLength: 3,
-            items: 'all',
-            source: function(query) {
-                var summit_id = $('#summit_id').val();
-                var event_id = $('#event_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/events/'+event_id+'/get_tags',{query:query});
+    $('#member').on('itemAdded', function(event) {
+        $.getJSON('api/v1/summits/'+summit_id+'/member_speaker/'+event.item.id, {}, function(speaker){
+            if (speaker) {
+                $('#title').val(speaker.Title);
+                $('#first_name').val(speaker.FirstName);
+                $('#last_name').val(speaker.LastName);
+                tinyMCE.get('bio').setContent(speaker.Bio);
+
+                $('.speaker_details').show();
+                $('.no_speaker').hide();
+            } else {
+                $('.no_speaker_msg').html('This member is not a speaker.');
+
+                $('.speaker_details').hide();
+                $('.no_speaker').show();
             }
+        });
+    });
+
+    $('#member').on('itemRemoved', function(event) {
+        $('.no_speaker_msg').html('No member selected');
+        $('.speaker_details').hide();
+        $('.no_speaker').show();
+    });
+
+    $('input','.bootstrap-tagsinput').keypress(function(e) {
+        var max_reached = $(this).parents('.bootstrap-tagsinput').hasClass('bootstrap-tagsinput-max');
+        if (max_reached) {
+            e.preventDefault();
         }
-    });
-
-    $.each(tags, function(index, value) {
-        $('#tags').tagsinput('add', value);
-    });
-
-    // Sponsors autocomplete tag
-    $('#sponsors').tagsinput({
-        itemValue: "id",
-        itemText: "name",
-        freeInput: false,
-        tagClass: 'label label-success',
-        typeahead: {
-            minLength: 3,
-            items: 'all',
-            source: function(query) {
-                var summit_id = $('#summit_id').val();
-                var event_id = $('#event_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/events/'+event_id+'/get_sponsors',{query:query});
-            }
-        }
-    });
-
-    $.each(sponsors, function(index, value) {
-        $('#sponsors').tagsinput('add', value);
     });
 
     tinymce.init({
@@ -91,7 +82,7 @@ $(document).ready(function(){
         menubar:    false
     });
 
-    var form = $('#edit-event-form');
+    var form = $('#edit-attendee-form');
 
     //validation
     form_validator = form.validate({
@@ -100,7 +91,9 @@ $(document).ready(function(){
         ignore: [],
         rules: {
             title: {required: true},
-            description: {required: true}
+            first_name: {required: true},
+            last_name: {required: true},
+            bio: {required: true}
         },
         focusInvalid: false,
         invalidHandler: function (form, validator) {
@@ -124,21 +117,18 @@ $(document).ready(function(){
 
         if (!form.valid()) return false;
         var summit_id = $('#summit_id').val();
-        var event_id = $('#event_id').val();
-        var url = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/update';
+        var attendee_id = $('#attendee_id').val();
+        var url = 'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/update';
 
         var request = {
+            member: $('#member').val(),
+            company: $('#company').val(),
+            share_info: ($('#share_info').prop('checked')) ? 1 : 0,
+            checked_in: ($('#checked_in').prop('checked')) ? 1 : 0,
             title: $('#title').val(),
-            description: $('#description').val(),
-            location_id: $('#location').val(),
-            start_date: $('#start_date').val(),
-            end_date: $('#end_date').val(),
-            event_type: $('#event_type').val(),
-            summit_type: $('#summit_type').val(),
-            allow_feedback: ($('#allow_feedback').prop('checked')) ? 1 : 0,
-            tags: $('#tags').val(),
-            sponsors: $('#sponsors').val(),
-            speakers: $('#speakers').val()
+            first_name: $('#first_name').val(),
+            last_name: $('#last_name').val(),
+            bio: tinyMCE.get('bio').getContent()
         };
 
         $.ajax({
@@ -148,7 +138,7 @@ $(document).ready(function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function() {
-            swal("Updated!", "Your event was updated successfully.", "success");
+            swal("Updated!", "Attendee was updated successfully.", "success");
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {

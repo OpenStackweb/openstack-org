@@ -49,6 +49,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         (
             $this->summit_repository,
             $this->summitevent_repository,
+            $this->summitattendee_repository,
             SapphireTransactionManager::getInstance()
         );
     }
@@ -74,11 +75,13 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
 
 
     static $url_handlers = array(
-        'GET '    => 'getAttendees',
+        'GET '                     => 'getAttendees',
+        'PUT $ATTENDEE_ID!/update' => 'updateAttendee',
     );
 
     static $allowed_actions = array(
         'getAttendees',
+        'updateAttendee',
     );
 
     public function getAttendees(SS_HTTPRequest $request){
@@ -126,5 +129,35 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         }
     }
 
+    public function updateAttendee(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id     = intval($request->param('SUMMIT_ID'));
+            $attendee_id   = intval($request->param('ATTENDEE_ID'));
+            $attendee_data = $this->getJsonRequest();
+            $attendee_data['id'] = $attendee_id;
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $this->summit_service->updateAttendee($summit, $attendee_data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessages());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
 
 }

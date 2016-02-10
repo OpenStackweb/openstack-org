@@ -98,3 +98,18 @@
     width: 83%;
 }
 
+/* EDIT ATTENDEES */
+
+.edit-attendee-wrapper {
+    width: 83%;
+    margin-bottom: 100px;
+}
+
+.edit-attendee-wrapper input {
+    width: 100%;
+}
+
+.edit-attendee-wrapper .bootstrap-tagsinput {
+    width: 100% !important;
+}
+

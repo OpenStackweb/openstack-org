@@ -106,17 +106,7 @@
             <script>
                 var speakers = [];
                 <% loop $Event.Speakers() %>
-                speakers.push({id : "{$MemberID}", name : "{$FirstName.JS} {$LastName.JS}"});
-                <% end_loop %>
-
-                var tags = [];
-                <% loop $Event.Tags() %>
-                tags.push({id : "{$ID}", name : "{$Tag.JS}"});
-                <% end_loop %>
-
-                var sponsors = [];
-                <% loop $Event.Sponsors() %>
-                sponsors.push({id : "{$ID}", name : "{$Name.JS}"});
+                speakers.push({id : "{$MemberID}", name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})"});
                 <% end_loop %>
             </script>
             <% end_if %>
@@ -128,5 +118,18 @@
         </form>
     </div>
     <!-- /#page-content-wrapper -->
+
+    <script>
+        var tags = [];
+        <% loop $Event.Tags() %>
+        tags.push({id : "{$ID}", name : "{$Tag.JS}"});
+        <% end_loop %>
+
+        var sponsors = [];
+        <% loop $Event.Sponsors() %>
+        sponsors.push({id : "{$ID}", name : "{$Name.JS}"});
+        <% end_loop %>
+    </script>
+
 
 </div>

@@ -45,6 +45,7 @@ class SummitAppAdminController extends Page_Controller
         'editPresentationList',
         'ticketTypes',
         'attendees',
+        'editAttendee',
         'editSummit',
         'scheduleView',
     );
@@ -59,6 +60,7 @@ class SummitAppAdminController extends Page_Controller
         '$SummitID!/events/presentation-lists'                       => 'presentationLists',
         '$SummitID!/events/$EventID!'                                => 'editEvent',
         '$SummitID!/tickets'                                         => 'ticketTypes',
+        '$SummitID!/attendees/$AttendeeID!'                          => 'editAttendee',
         '$SummitID!/attendees'                                       => 'attendees',
         '$SummitID!/edit'                                            => 'editSummit',
     );
@@ -253,6 +255,40 @@ class SummitAppAdminController extends Page_Controller
         );
     }
 
+    public function editAttendee(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+        $summit = Summit::get()->byID($summit_id);
+        $attendee_id = intval($request->param('AttendeeID'));
+        $attendee = SummitAttendee::get()->byID($attendee_id);
+        $affiliation_field = new AffiliationField('');
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap3-typeahead/bootstrap3-typeahead.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        Requirements::javascript('summit/javascript/summitapp-editattendee.js');
+
+        return $this->getViewer('EditAttendee')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit'   => $summit,
+                            'Attendee' => $attendee,
+                            'AffiliationField' => $affiliation_field,
+                        )
+                    )
+            );
+    }
+
     public function editEvent(SS_HTTPRequest $request)
     {
         $summit_id = intval($request->param('SummitID'));
@@ -269,6 +305,7 @@ class SummitAppAdminController extends Page_Controller
         Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/bootstrap3-typeahead/bootstrap3-typeahead.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
         Requirements::javascript('summit/javascript/summitapp-editevent.js');
 
         return $this->getViewer('EditEvent')->process
