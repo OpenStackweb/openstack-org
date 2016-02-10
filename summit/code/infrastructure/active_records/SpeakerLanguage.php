@@ -23,6 +23,11 @@ class SpeakerLanguage
         'Language'      => 'Text'
     );
 
+    private static $summary_fields = array
+    (
+        'Language' => 'Language',
+    );
+
     private static $has_one = array
     (
         'Speaker' => 'PresentationSpeaker',

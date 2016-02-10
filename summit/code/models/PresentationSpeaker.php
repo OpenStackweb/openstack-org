@@ -177,6 +177,26 @@ implements IPresentationSpeaker
              $config->removeComponentsByType('GridFieldAddNewButton');
              $gridField = new GridField('Presentations', 'Presentations', $this->Presentations(), $config);
              $fields->addFieldToTab('Root.Presentations', $gridField);
+
+             // AreasOfExpertise
+             $config = GridFieldConfig_RecordEditor::create();
+             $gridField = new GridField('AreasOfExpertise', 'AreasOfExpertise', $this->AreasOfExpertise(), $config);
+             $fields->addFieldToTab('Root.Main', $gridField);
+
+             // OtherPresentationLinks
+             $config = GridFieldConfig_RecordEditor::create();
+             $gridField = new GridField('OtherPresentationLinks', 'OtherPresentationLinks', $this->OtherPresentationLinks(), $config);
+             $fields->addFieldToTab('Root.Main', $gridField);
+
+             // TravelPreferences
+             $config = GridFieldConfig_RecordEditor::create();
+             $gridField = new GridField('TravelPreferences', 'TravelPreferences', $this->TravelPreferences(), $config);
+             $fields->addFieldToTab('Root.Main', $gridField);
+
+             // Languages
+             $config = GridFieldConfig_RecordEditor::create();
+             $gridField = new GridField('Languages', 'Languages', $this->Languages(), $config);
+             $fields->addFieldToTab('Root.Main', $gridField);
          }
 
          return $fields;

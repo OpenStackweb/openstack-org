@@ -23,6 +23,11 @@ class SpeakerExpertise
         'Expertise'      => 'Varchar(254)'
     );
 
+    private static $summary_fields = array
+    (
+        'Expertise' => 'Expertise',
+    );
+
     private static $has_one = array
     (
         'Speaker' => 'PresentationSpeaker',

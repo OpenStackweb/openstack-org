@@ -24,6 +24,12 @@ class SpeakerPresentationLink
         'Title'   => 'Text'
     );
 
+    private static $summary_fields = array
+    (
+        'LinkUrl' => 'Url',
+        'Title'   => 'Title',
+    );
+
     private static $has_one = array
     (
         'Speaker' => 'PresentationSpeaker',

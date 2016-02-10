@@ -28,6 +28,11 @@ class SpeakerTravelPreference
         'Speaker' => 'PresentationSpeaker',
     );
 
+    private static $summary_fields = array
+    (
+        'Country' => 'Country',
+    );
+
     /**
      * @return int
      */
