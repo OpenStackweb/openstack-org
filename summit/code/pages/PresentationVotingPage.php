@@ -70,7 +70,7 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
 
         $categories = array();
 
-        foreach ($summit->Categories() as $c) {
+        foreach ($summit->Categories()->filter('VotingVisible', 1) as $c) {
             $insert['ID'] = $c->ID;
             $insert['Name'] = $c->Title;
             $categories[] = $insert;
@@ -101,7 +101,10 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
 
         }
 
-        return $this->Summit()->Presentations()->filter($filter);
+        return $this->Summit()->Presentations()
+            ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
+            ->where("PresentationCategory.VotingVisible = 1 ")
+            ->filter($filter);
 
     }
 
@@ -179,6 +182,8 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
         $summitID = $this->Summit()->ID;
 
         $presentations = Presentation::get()
+            ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
+            ->where("PresentationCategory.VotingVisible = 1 ")
             ->where("SummitEvent.SummitID = {$summitID}");
 
         if ($data['Search'] && strlen($data['Search']) > 1) {
@@ -248,10 +253,13 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
 
         $summitID = $this->Summit()->ID;
         $presentations = Presentation::get()
+
+            ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
             ->where("SummitEvent.SummitID = {$summitID}")
             ->where(sprintf("Presentation.Status = '%s' ", Presentation::STATUS_RECEIVED))
             ->where("Presentation.Progress = " . Presentation::PHASE_COMPLETE)
             ->where("SummitEvent.Title is not null")
+            ->where("PresentationCategory.VotingVisible = 1 ")
             ->where("SummitEvent.Title <> '' ");
 
         if ($CategoryID) {
@@ -332,11 +340,11 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
         // Otherwise, look for an ID
         if ($presID) {
             $presentation = $this->PresentationByID($presID);
+            if(intval($presentation->Category()->VotingVisible) === 0) return $this->httpError(403, 'Sorry that talk could not be voted');
 
         } else {
             $CategoryID = Session::get('CategoryID');
             $this->redirect($this->Link() . 'Presentation/' . $this->RandomPresentationID($CategoryID));
-
             return;
         }
 
