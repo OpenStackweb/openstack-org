@@ -26,3 +26,7 @@
         </a>
     </li>
 </ul>
+<div class="voting-tip">
+    <strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each
+    option.
+</div>

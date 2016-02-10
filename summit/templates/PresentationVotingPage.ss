@@ -248,10 +248,6 @@
                         <% if Summit.isVotingOpen %>
                             <% if $CurrentMember %>
                                 <% include PresentationVotingPage_CastYourVote TopLink=$Top.Link, PresentationID=$ID, VoteValue=$Top.VoteValue %>
-                                <div class="voting-tip">
-                                    <strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each
-                                    option.
-                                </div>
                             <% end_if %>
                         <% end_if %>
                     <div class="voting-share-wrapper">
@@ -292,13 +288,18 @@
                     <% else %>
 
                     <!-- PRESENTATION LIST / BROWSER ----------------------------------->
-                    <h5>Search Results</h5>
+                    <h5 style="font-weight: bold" >Search Results for $Search</h5>
+                    <a href="{$Top.Link}">Clear Search Results</a>
                     <ul class="presentation-list">
                         <% loop $SearchResults %>
 
                             <li><a href="{$Top.Link}presentation/{$ID}">$Title</a></li>
                         <% end_loop %>
+
                     </ul>
+                    <script>
+                        $('#PresentationVotingSearchForm_SearchForm_Search').val('{$Search}');
+                    </script>
                 </div>
 
                 <div class="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">

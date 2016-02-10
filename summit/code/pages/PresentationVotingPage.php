@@ -170,10 +170,9 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
 
     function SearchForm()
     {
-        $SearchForm = new PresentationVotingSearchForm($this, 'SearchForm');
-        $SearchForm->disableSecurityToken();
-
-        return $SearchForm;
+        $form = new PresentationVotingSearchForm($this, 'SearchForm');
+        $form->disableSecurityToken();
+        return $form;
     }
 
     function doSearch($data, $form)
