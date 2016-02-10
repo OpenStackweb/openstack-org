@@ -2599,6 +2599,7 @@ img.voting-speaker-pic {
 
 .voting-speaker-name {
   font-size: 14px;
+  padding-left: 10px;
   float: left;
   font-weight: 600;
   max-width: 70%;
@@ -2821,4 +2822,10 @@ p#ForgotPassword {
   margin-top: 5px;
   font-size: 0.9em; }
 
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  float:left;
+}
 /*End Voting For Presentations*/

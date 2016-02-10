@@ -217,16 +217,30 @@
                             <div class="main-speaker-wrapper">
                                 <% loop Speakers %>
                                     <div class="main-speaker-row">
+                                        <% if AvailableForBureau %>
+                                        <a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %>
+                                        <img class="img-circle profile-pic"  title="$FirstName $LastName" src="$ProfilePhoto"/>
+                                        <% if AvailableForBureau %></a><% end_if %>
                                         <div class="voting-speaker-name">
-                                            $FirstName $LastName
+                                            <% if AvailableForBureau %>
+                                            <a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %>
+                                            $FirstName $LastName<% if AvailableForBureau %></a><% end_if %>
                                             <span>$Title</span>
                                         </div>
-                                        <img class="voting-speaker-pic"
-                                             src="<% if $Photo.SetRatioSize(80,80).URL %>$Photo.SetRatioSize(80,80).URL<% else %>/themes/openstack/images/generic-profile-photo.png<% end_if %>"/>
+
                                     </div>
                                     <div class="main-speaker-description">
                                         $Bio
                                     </div>
+                                    <% if OtherPresentationLinks %>
+                                    <div>
+                                        <ul class="list-unstyled">
+                                            <% loop OtherPresentationLinks.limit(10, 0) %>
+                                                <li><a href="{$LinkUrl}" title="{$Title}" target="_blank">{$Title}</a></li>
+                                            <% end_loop %>
+                                        </ul>
+                                    </div>
+                                    <% end_if %>
                                 <% end_loop %>
                             </div>
                         </div>
