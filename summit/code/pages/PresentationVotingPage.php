@@ -104,6 +104,8 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
         return $this->Summit()->Presentations()
             ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
             ->where("PresentationCategory.VotingVisible = 1 ")
+            ->where("SummitEvent.Title IS NOT NULL")
+            ->where("SummitEvent.Title <> '' ")
             ->filter($filter);
 
     }

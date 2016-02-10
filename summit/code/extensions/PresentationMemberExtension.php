@@ -46,8 +46,11 @@ class PresentationMemberExtension extends DataExtension
         $presentations =  Presentation::get()
                 ->innerJoin("PresentationPriority", "PresentationPriority.PresentationID = Presentation.ID")
                 ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
+                ->where("SummitEvent.Title IS NOT NULL")
+                ->where("SummitEvent.Title <> '' ")
                 ->where("PresentationCategory.VotingVisible = 1 ")
                 ->filter('PresentationPriority.MemberID', $mid)
+                ->filter('Presentation.Status', 'Received')
                 ->sort('PresentationPriority.Priority ASC');
 
         if(!empty($category_id) && intval($category_id) > 0)
