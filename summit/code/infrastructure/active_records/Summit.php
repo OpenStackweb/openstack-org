@@ -648,11 +648,19 @@ final class Summit extends DataObject implements ISummit
     }
 
     /**
+     * @return int|void
+     */
+    public function getVenuesCount()
+    {
+       return count($this->getVenues());
+    }
+
+    /**
      * @return ISummitVenue
      */
     public function getMainVenue()
     {
-        return SummitVenue::get()->filter(array('SummitID' => $this->ID, 'IsMain'=>true))->first();
+        return SummitVenue::get()->filter(array('SummitID' => $this->ID, 'IsMain' => true))->first();
     }
 
     /**
@@ -1373,5 +1381,10 @@ SQL;
     public function isPresentationEditionAllowed()
     {
         return $this->isCallForSpeakersOpen() || $this->isVotingOpen();
+    }
+
+    public function PublishedEvents()
+    {
+        return $this->Events()->filter('Published', 1);
     }
 }
