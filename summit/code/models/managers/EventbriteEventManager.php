@@ -294,10 +294,11 @@ final class EventbriteEventManager implements IEventbriteEventManager
                     (
                         sprintf
                         (
-                            'Ticket already redeem external_order_id %s - external_attendee_id %s - OwnerID %s !',
+                            'Ticket already redeem external_order_id %s - external_attendee_id %s - old attendee id %s - current member id %s !',
                             $external_order_id,
                             $external_attendee_id,
-                            $old_ticket->OwnerID
+                            $old_ticket->OwnerID,
+                            $member->ID
                         )
                     )
                 );
