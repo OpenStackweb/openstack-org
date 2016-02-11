@@ -194,7 +194,7 @@
                     <a href="http://superuser.openstack.org/articles/why-no-data-center-should-be-full-of-islands" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/containers/featured-4.jpg" alt="Why no data center should be full of islands">
                     </div>
