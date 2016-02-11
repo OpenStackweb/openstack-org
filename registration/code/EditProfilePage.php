@@ -627,12 +627,14 @@ class EditProfilePage_Controller extends Page_Controller
         $course_id = intval(Convert::raw2sql(@$_GET['course_id']));
 
         if ($course_id > 0) {
-            $course = $this->course_repository->getBydId($course_id);
-            $training = $course->training();
-            if (!Member::currentUser()->canEditTraining($training->getIdentifier())) {
-                die();
+            $course = $this->course_repository->getById($course_id);
+            $training = $course->getTraining();
+            if (Member::currentUser()->canEditTraining($training->getIdentifier())) {
+                $this->setMessage('Success', 'Training Course deleted.');
+                $this->course_manager->unRegister($course_id);
+            } else {
+                $this->setMessage('Danger', "You don't have the permission required to edit this Training Curse" );
             }
-            $this->course_manager->unRegister($course_id);
         }
 
         $this->redirect('training');

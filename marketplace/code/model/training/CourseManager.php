@@ -178,7 +178,7 @@ final class CourseManager {
 	public function unRegister($course_id){
 		$repository = $this->course_repository;
 		$this->tx_manager->transaction(function() use($course_id, $repository){
-			$course = $repository->getBydId($course_id);
+			$course = $repository->getById($course_id);
 			$repository->delete($course);
 		});
 	}
