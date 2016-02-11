@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-lg-8 col-sm-8">
                     <div class="intro-message">
-                        <h1>Exploring Opportunities: Containers and OpenStack</h1>
-                        <h3>OpenStack, as a fundamental framework for IT infrastructure, remains hardware and software agnostic so it can manage everything.</h3>
+                        <h1>Exploring containers with OpenStack</h1>
+                        <h3>OpenStack provides path to production for containers in the enterprise</h3>
                     </div>
                 </div> 
                 <div class="col-lg-4 col-sm-4">
@@ -56,9 +56,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1 center">
-                    <h1>Explore the nimble, streamlined opportunities in containers</h1>
+                    <h1>The containers your developers want, with the manageability your IT staff needs</h1>
                     <p>
-                        Containers are isolated, portable environments that enable developers to run applications along with all the libraries and dependencies they need. Like virtual machines, containers share OS kernel resources for access to compute, networking, and storage. But unlike VMs, all containers on the same host share the same OS kernel, and keep applications, runtimes, and various other services separated from each other using kernel features known as namespaces and cgroups. 
+                        As a fundamental framework for IT infrastructure, OpenStack brings together VMs, bare metal and containers with common APIs and policies. Most organizations have a mix of technologies in their data centers. OpenStack unifies these systems and allows you to integrate containers with your existing infrastructure. Many OpenStack users are starting to deploy containers on OpenStack, because it’s a proven and familiar platform that provides a path to adopt new technologies such as Kubernetes, Docker and Mesos.
                     </p>
                 </div>
             </div>
@@ -191,16 +191,16 @@
                     </p>
                 </div>
                 <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/beginners-guide-to-containers-technology-and-how-it-actually-works" target="_blank">
+                    <a href="http://superuser.openstack.org/articles/why-no-data-center-should-be-full-of-islands" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/play-button.png">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-4.jpg" alt="Beginners guide to containers technology and how it actually works">
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-4.jpg" alt="Why no data center should be full of islands">
                     </div>
                     </a>
                     <p class="video-title">
-                        Beginners guide to containers technology and how it actually works
+                        Why no data center should be full of islands
                     </p>
                 </div>
                <div class="col-sm-5ths">
@@ -225,7 +225,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>Learn more about Containers and NFV at the OpenStack Summit Austin</h3>
+                    <h3>Learn more about Containers at the OpenStack Summit Austin</h3>
                     <p>
                         Join us in Austin for content and workshops devoted to working with OpenStack and container management. Hear from application developers and users who are building and deploying applications using Kubernetes and Docker on OpenStack clouds on April 27 and 28.
                     </p>
