@@ -132,6 +132,11 @@
                                     <img alt='AeroFS (Air Computing, Inc.)_big_logo' src='/assets/companies/main_logo/aerofs-lg.jpg' class='big-logo-company sponsor-logo'/>
                                 </a>
                             </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <a rel="nofollow" href="http://www.brightcomputing.com">
+                                    <img alt="Bright Computing_big_logo" src="/assets/companies/main_logo/brightcomputing-lg2.jpg" class="big-logo-company sponsor-logo">
+                                </a>
+                            </div>
                     </div>
                 </div>
             </div>
