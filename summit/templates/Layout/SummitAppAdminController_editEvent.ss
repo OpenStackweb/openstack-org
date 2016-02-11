@@ -94,6 +94,9 @@
                     </div>
                 </div>
             </div>
+            <script>
+                var speakers = [];
+            </script>
             <% if $Event.isPresentation() %>
             <div class="form-group">
                 <div class="row">
@@ -104,7 +107,6 @@
                 </div>
             </div>
             <script>
-                var speakers = [];
                 <% loop $Event.Speakers() %>
                 speakers.push({id : "{$MemberID}", name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})"});
                 <% end_loop %>
