@@ -261,7 +261,6 @@ class SummitAppAdminController extends Page_Controller
         $summit = Summit::get()->byID($summit_id);
         $attendee_id = intval($request->param('AttendeeID'));
         $attendee = SummitAttendee::get()->byID($attendee_id);
-        $affiliation_field = new AffiliationField('');
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
@@ -283,7 +282,6 @@ class SummitAppAdminController extends Page_Controller
                         (
                             'Summit'   => $summit,
                             'Attendee' => $attendee,
-                            'AffiliationField' => $affiliation_field,
                         )
                     )
             );

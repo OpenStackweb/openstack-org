@@ -77,11 +77,15 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
     static $url_handlers = array(
         'GET '                     => 'getAttendees',
         'PUT $ATTENDEE_ID!/update' => 'updateAttendee',
+        'GET member/$MEMBER_ID!'   => 'getMemberData',
+        'GET company_options'      => 'getCompanySearchOptions',
     );
 
     static $allowed_actions = array(
         'getAttendees',
         'updateAttendee',
+        'getMemberData',
+        'getCompanySearchOptions',
     );
 
     public function getAttendees(SS_HTTPRequest $request){
@@ -160,4 +164,69 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         }
     }
 
+    public function getMemberData(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = Summit::get_by_id('Summit',$summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $member_id    = intval($request->param('MEMBER_ID'));
+            $member       = Member::get_by_id('Member',$member_id);
+            if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' id %s', $member_id));
+
+            $speaker = ($member->Speaker()->ID) ? $member->Speaker()->toMap() : '';
+
+            $affiliation = '';
+            if ($affiliation_obj = $member->getCurrentAffiliation()) {
+                $affiliation = $affiliation_obj->toMap();
+                $affiliation['Company'] = array('id'=>$affiliation_obj->Organization()->ID,'name'=>$affiliation_obj->Organization()->Name);
+            }
+
+            echo json_encode(array('speaker'=>$speaker,'affiliation'=>$affiliation));
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getCompanySearchOptions(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $query        = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = Summit::get_by_id('Summit',$summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $orgs = DB::query(" SELECT O.ID AS id, O.Name AS name FROM Org AS O
+                                WHERE O.Name LIKE '{$query}%'
+                                ORDER BY O.Name");
+
+            $json_array = array();
+            foreach ($orgs as $org) {
+
+                $json_array[] = $org;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
 }

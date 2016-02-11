@@ -207,6 +207,21 @@ class SummitService
                 $attendee->Member()->Speaker()->write();
             }
 
+            if ($attendee->Member()) {
+                $current_affiliation = $attendee->Member()->getcurrentAffiliation();
+                if (!$current_affiliation) {
+                    $current_affiliation = new Affiliation();
+                }
+
+                $current_affiliation->OrganizationID =  $attendee_data['aff_company'];
+                $current_affiliation->StartDate =  $attendee_data['aff_from'];
+                $current_affiliation->EndDate =  $attendee_data['aff_to'];
+                $current_affiliation->Current =  $attendee_data['aff_current'];
+                $current_affiliation->write();
+
+                $attendee->Member()->Affiliations()->add($current_affiliation);
+            }
+
             return $attendee;
         });
     }

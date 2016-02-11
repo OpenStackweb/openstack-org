@@ -16,12 +16,39 @@
             <input type="hidden" id="summit_id" value="$Summit.ID" />
             <input type="hidden" id="attendee_id" value="$Attendee.ID" />
 
-            <h1> Attendee </h1>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4 member_container">
                         <label for="member">Member</label><br>
                         <input id="member" />
+                    </div>
+                </div>
+            </div>
+            <label> Current Affiliation </label>
+            <div class="form-group">
+                <div class="row affiliation" <% if not $Attendee.Member %> style="display:none" <% end_if %>>
+                    <div class="col-md-3">
+                        <label for="aff_company">Company</label><br>
+                        <input id="aff_company" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>From</label><br>
+                        <input id="aff_from" value="{$Attendee.Member.currentAffiliation.StartDate}" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>To</label><br>
+                        <input id="aff_to" value="{$Attendee.Member.currentAffiliation.EndDate}" />
+                    </div>
+                    <div class="col-md-3 company_container">
+                        <br>
+                        <div class="checkbox">
+                            <label> <input id="aff_current" type="checkbox" <% if $Attendee.Member.currentAffiliation.Current %> checked <% end_if %>> Current </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no_affiliation" <% if $Attendee.Member %> style="display:none" <% end_if %>>
+                    <div class="col-md-12">
+                        No member selected
                     </div>
                 </div>
             </div>
@@ -60,12 +87,10 @@
                     </div>
                 </div>
             </div>
-            <hr>
-
-            $AffiliationField.FieldHolder()
 
             <hr>
-            <h1> Speaker Details </h1>
+            <h4> Speaker Details </h4>
+            <br>
 
             <div class="speaker_details" <% if $Attendee.Member.Speaker.ID == 0 %> style="display:none" <% end_if %>>
                 <div class="form-group">
@@ -111,8 +136,10 @@
 
     <script>
         var member = {};
+        var company = {};
         <% if $Attendee.Member %>
         member = {id : "{$Attendee.MemberID}", name : "{$Attendee.Member.FirstName.JS} {$Attendee.Member.Surname.JS} ({$Attendee.Member.ID})"};
+        company = {id : "{$Attendee.Member.currentAffiliation.OrganizationID}", name : "{$Attendee.Member.currentAffiliation.Organization.Name}"};
         <% end_if %>
     </script>
 

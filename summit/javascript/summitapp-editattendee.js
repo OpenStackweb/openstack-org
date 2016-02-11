@@ -15,6 +15,11 @@ var form_validator = null;
 
 $(document).ready(function(){
 
+
+    $("#aff_from").datetimepicker();
+    $("#aff_to").datetimepicker();
+
+
     // Member autocomplete
     $('#member').tagsinput({
         itemValue: "id",
@@ -28,7 +33,7 @@ $(document).ready(function(){
                 var max_reached = $('.bootstrap-tagsinput','.member_container').hasClass('bootstrap-tagsinput-max');
                 if (!max_reached) {
                     var summit_id = $('#summit_id').val();
-                    return $.getJSON('api/v1/summits/'+summit_id+'/member_options',{query:query});
+                    return $.getJSON('api/v1/summits/'+summit_id+'/members/options',{query:query});
                 } else {
                     return false;
                 }
@@ -42,12 +47,18 @@ $(document).ready(function(){
     }
 
     $('#member').on('itemAdded', function(event) {
-        $.getJSON('api/v1/summits/'+summit_id+'/member_speaker/'+event.item.id, {}, function(speaker){
-            if (speaker) {
-                $('#title').val(speaker.Title);
-                $('#first_name').val(speaker.FirstName);
-                $('#last_name').val(speaker.LastName);
-                tinyMCE.get('bio').setContent(speaker.Bio);
+        var summit_id = $('#summit_id').val();
+        $.getJSON('api/v1/summits/'+summit_id+'/attendees/member/'+event.item.id, {}, function(data){
+            if (data.speaker) {
+                var title = (data.speaker.Title) ? data.speaker.Title : '';
+                var first_name = (data.speaker.FirstName) ? data.speaker.FirstName : '';
+                var last_name = (data.speaker.LastName) ? data.speaker.LastName : '';
+                var bio = (data.speaker.Bio) ? data.speaker.Bio : '';
+
+                $('#title').val(title);
+                $('#first_name').val(first_name);
+                $('#last_name').val(last_name);
+                tinyMCE.get('bio').setContent(bio);
 
                 $('.speaker_details').show();
                 $('.no_speaker').hide();
@@ -57,6 +68,22 @@ $(document).ready(function(){
                 $('.speaker_details').hide();
                 $('.no_speaker').show();
             }
+
+            $('#aff_company').tagsinput('removeAll');
+            $('#aff_from').val('');
+            $('#aff_to').val('');
+            $('#aff_current').attr('checked',false);
+            
+            if (data.affiliation) {
+                $('#aff_company').tagsinput('add', data.affiliation.Company);
+                $('#aff_from').val(data.affiliation.StartDate);
+                $('#aff_to').val(data.affiliation.EndDate);
+                $('#aff_current').attr('checked',data.affiliation.Current);
+            }
+
+            $('.affiliation').show();
+            $('.no_affiliation').hide();
+
         });
     });
 
@@ -64,7 +91,35 @@ $(document).ready(function(){
         $('.no_speaker_msg').html('No member selected');
         $('.speaker_details').hide();
         $('.no_speaker').show();
+
+        $('.affiliation').hide();
+        $('.no_affiliation').show();
     });
+
+    $('#aff_company').tagsinput({
+        itemValue: "id",
+        itemText: "name",
+        freeInput: false,
+        maxTags: 1,
+        typeahead: {
+            minLength: 3,
+            items: 'all',
+            source: function(query) {
+                var max_reached = $('.bootstrap-tagsinput','.affiliation').hasClass('bootstrap-tagsinput-max');
+                if (!max_reached) {
+                    var summit_id = $('#summit_id').val();
+                    return $.getJSON('api/v1/summits/'+summit_id+'/attendees/company_options',{query:query});
+                } else {
+                    return false;
+                }
+            }
+        }
+    });
+
+    // if we already have a company assigned to this attendee
+    if (!$.isEmptyObject(company)) {
+        $('#aff_company').tagsinput('add', company);
+    }
 
     $('input','.bootstrap-tagsinput').keypress(function(e) {
         var max_reached = $(this).parents('.bootstrap-tagsinput').hasClass('bootstrap-tagsinput-max');
@@ -84,45 +139,19 @@ $(document).ready(function(){
 
     var form = $('#edit-attendee-form');
 
-    //validation
-    form_validator = form.validate({
-        onfocusout: false,
-        focusCleanup: true,
-        ignore: [],
-        rules: {
-            title: {required: true},
-            first_name: {required: true},
-            last_name: {required: true},
-            bio: {required: true}
-        },
-        focusInvalid: false,
-        invalidHandler: function (form, validator) {
-            if (!validator.numberOfInvalids())
-                return;
-            var element = $(validator.errorList[0].element);
-            if (!element.is(":visible")) {
-                element = element.parent();
-            }
-        },
-        errorPlacement: function (error, element) {
-            if (!element.is(":visible")) {
-                element = element.parent();
-            }
-            //error.insertAfter(element);
-        }
-    });
-
     form.submit(function (event) {
         event.preventDefault();
 
-        if (!form.valid()) return false;
         var summit_id = $('#summit_id').val();
         var attendee_id = $('#attendee_id').val();
         var url = 'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/update';
 
         var request = {
             member: $('#member').val(),
-            company: $('#company').val(),
+            aff_company: $('#aff_company').val(),
+            aff_from: $('#aff_from').val(),
+            aff_to: $('#aff_to').val(),
+            aff_current: ($('#aff_current').prop('checked')) ? 1 : 0,
             share_info: ($('#share_info').prop('checked')) ? 1 : 0,
             checked_in: ($('#checked_in').prop('checked')) ? 1 : 0,
             title: $('#title').val(),

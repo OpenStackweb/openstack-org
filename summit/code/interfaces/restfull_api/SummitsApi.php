@@ -111,11 +111,10 @@ final class SummitsApi extends AbstractRestfulJsonApi
     static $url_handlers = array(
         'GET $SUMMIT_ID/add-ons'                                  => 'getAllSponsorshipAddOnsBySummit',
         'GET $SUMMIT_ID/packages'                                 => 'getAllSponsorshipPackagesBySummit',
-        'GET $SUMMIT_ID/member_options'                           => 'getMemberSearchOptions',
-        'GET $SUMMIT_ID/member_speaker/$MEMBER_ID!'               => 'getMemberSpeaker',
         '$SUMMIT_ID/schedule'                                     => 'handleSchedule',
         '$SUMMIT_ID/events'                                       => 'handleEvents',
         '$SUMMIT_ID/attendees'                                    => 'handleAttendees',
+        '$SUMMIT_ID/members'                                      => 'handleMembers',
         'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/approve' => 'approvePurchaseOrder',
         'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject'  => 'rejectPurchaseOrder',
     );
@@ -128,8 +127,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'handleSchedule',
         'handleEvents',
         'handleAttendees',
-        'getMemberSearchOptions',
-        'getMemberSpeaker',
+        'handleMembers',
     );
 
     public function getAllSponsorshipAddOnsBySummit()
@@ -220,71 +218,6 @@ final class SummitsApi extends AbstractRestfulJsonApi
         }
     }
 
-    // this is called when typing a member name to add as a tag
-    public function getMemberSearchOptions(SS_HTTPRequest $request){
-        try
-        {
-            $query_string = $request->getVars();
-            $query        = Convert::raw2sql($query_string['query']);
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $summit       = Summit::get_by_id('Summit',$summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-
-            $members = DB::query("SELECT M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',M.ID,')') AS name FROM Member AS M
-                                    LEFT JOIN Group_Members AS GM ON M.ID = GM.MemberID
-                                    LEFT JOIN `Group` AS G ON G.ID = GM.GroupID
-                                    WHERE (M.FirstName LIKE '{$query}%' OR M.Surname LIKE '{$query}%')
-                                    AND(G.Code = '".IFoundationMember::CommunityMemberGroupSlug."' OR G.Code = '".IFoundationMember::FoundationMemberGroupSlug."')
-                                    GROUP BY M.ID
-                                    ORDER BY M.FirstName, M.Surname");
-
-            $json_array = array();
-            foreach ($members as $member) {
-
-                $json_array[] = $member;
-            }
-
-            echo json_encode($json_array);
-        }
-        catch(NotFoundEntityException $ex2)
-        {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex)
-        {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
-
-    public function getMemberSpeaker(SS_HTTPRequest $request){
-        try
-        {
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $summit       = Summit::get_by_id('Summit',$summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-
-            $member_id    = intval($request->param('MEMBER_ID'));
-            $member       = Member::get_by_id('Member',$member_id);
-            if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' id %s', $member_id));
-
-            $speaker = ($member->Speaker()->ID) ? $member->Speaker()->toMap() : '';
-
-            echo json_encode($speaker);
-        }
-        catch(NotFoundEntityException $ex2)
-        {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex)
-        {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
-
     public function handleSchedule(SS_HTTPRequest $request)
     {
         $api = SummitAppScheduleApi::create($this);
@@ -300,6 +233,12 @@ final class SummitsApi extends AbstractRestfulJsonApi
     public function handleAttendees(SS_HTTPRequest $request)
     {
         $api = SummitAppAttendeesApi::create($this);
+        return $api->handleRequest($request, DataModel::inst());
+    }
+
+    public function handleMembers(SS_HTTPRequest $request)
+    {
+        $api = SummitAppMembersApi::create($this);
         return $api->handleRequest($request, DataModel::inst());
     }
 }

@@ -31,7 +31,7 @@ $(document).ready(function(){
             source: function(query) {
                 var summit_id = $('#summit_id').val();
                 var event_id = $('#event_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/member_options',{query:query});
+                return $.getJSON('api/v1/summits/'+summit_id+'/members/options',{query:query});
             }
         }
     });
