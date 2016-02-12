@@ -8,8 +8,8 @@
         <ol class="breadcrumb">
             <li><a href="$Top.Link">Home</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
-            <li><a href="$Top.Link/{$Summit.ID}/events/published">Published Events</a></li>
-            <li class="active">$Event.Title</li>
+            <li><a href="$Top.Link/{$Summit.ID}/attendees/">Attendees</a></li>
+            <li class="active">$Attendee.ID</li>
         </ol>
 
         <form id="edit-attendee-form">
@@ -79,7 +79,7 @@
                         <label>Tickets</label><br>
                         <% if $Attendee.Tickets %>
                             <% loop $Attendee.Tickets %>
-                                <a href="">$ExternalOrderId</a>
+                                $ExternalOrderId <br>
                             <% end_loop %>
                         <% else %>
                             <i>None</i>
@@ -132,7 +132,6 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
-    <!-- /#page-content-wrapper -->
 
     <script>
         var member = {};

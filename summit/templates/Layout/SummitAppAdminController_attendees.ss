@@ -10,6 +10,7 @@
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
             <li class="active">Attendees</li>
         </ol>
+        <input id="summit_id" type="hidden" value="{$Summit.ID}" />
         <div class="panel panel-default">
             <div class="panel-heading">Attendee</div>
             <table id="attendees-table" class="table">

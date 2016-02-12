@@ -27,7 +27,8 @@ $(document).ready(function(){
         totalPages: total_pages,
         numberOfPages: 10,
         onPageChanged: function(e,oldPage,newPage){
-            $.getJSON('api/v1/summits/5/attendees',{page:newPage, items:items_per_page},function(data){
+            var summit_id = $('#summit_id').val();
+            $.getJSON('api/v1/summits/'+summit_id+'/attendees',{page:newPage, items:items_per_page},function(data){
                 var output = '';
                 for(var i in data) {
                     var attendee = data[i];

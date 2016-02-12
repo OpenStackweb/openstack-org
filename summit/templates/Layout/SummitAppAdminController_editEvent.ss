@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
             <li><a href="$Top.Link">Home</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
-            <li><a href="$Top.Link/{$Summit.ID}/events/published">Published Events</a></li>
+            <li><a href="$Top.Link/{$Summit.ID}/events/schedule">Events</a></li>
             <li class="active">$Event.Title</li>
         </ol>
 

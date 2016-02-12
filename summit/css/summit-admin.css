@@ -98,6 +98,10 @@
     width: 83%;
 }
 
+#attendees-pager a {
+    cursor: pointer;
+}
+
 /* EDIT ATTENDEES */
 
 .edit-attendee-wrapper {
