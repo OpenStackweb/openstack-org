@@ -902,6 +902,7 @@ final class Summit extends DataObject implements ISummit
             $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent(new GridFieldWipeDevicesDataAction);
+            $config->addComponent(new GridFieldDeleteAllSummitEntityEventsAction);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $gridField = new GridField('EntityEvents', 'EntityEvents', $this->EntityEvents(), $config);
             $f->addFieldToTab('Root.EntityEvents', $gridField);
