@@ -20,7 +20,6 @@ final class SummitEntityEvent extends DataObject
         'EntityClassName' => 'Text',
         'Type'            => 'Enum(array("UPDATE","INSERT","DELETE"))',
         'Metadata'        => 'Text',
-        'Processed'       => 'Boolean',
     );
 
     private static $summary_fields = array
