@@ -172,6 +172,7 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
     {
         $form = new PresentationVotingSearchForm($this, 'SearchForm');
         $form->disableSecurityToken();
+
         return $form;
     }
 
@@ -254,7 +255,6 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
 
         $summitID = $this->Summit()->ID;
         $presentations = Presentation::get()
-
             ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
             ->where("SummitEvent.SummitID = {$summitID}")
             ->where(sprintf("Presentation.Status = '%s' ", Presentation::STATUS_RECEIVED))
@@ -333,48 +333,45 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
 
         // Send them to the done page if they are finished
         if ($presID == 'none') {
-            $this->redirect($this->Link() . 'Done');
-
-            return;
+            return $this->redirect($this->Link() . 'Done');
         }
 
         // Otherwise, look for an ID
         if ($presID) {
             $presentation = $this->PresentationByID($presID);
-            if(intval($presentation->Category()->VotingVisible) === 0) return $this->httpError(403, 'Sorry that talk could not be voted');
+            if (is_null($presentation)) {
+                return $this->httpError(404, 'Sorry that talk could not be found');
+            }
+            if (intval($presentation->Category()->VotingVisible) === 0) {
+                return $this->httpError(403, 'Sorry that talk could not be voted');
+            }
 
         } else {
             $CategoryID = Session::get('CategoryID');
-            $this->redirect($this->Link() . 'Presentation/' . $this->RandomPresentationID($CategoryID));
-            return;
+            return $this->redirect($this->Link() . 'Presentation/' . $this->RandomPresentationID($CategoryID));
         }
 
-        if ($presentation) {
-            $data["Presentation"] = $presentation;
-            $data["VoteValue"] = $this->CurrentVote($presentation->ID);
+        $data["Presentation"] = $presentation;
+        $data["VoteValue"] = $this->CurrentVote($presentation->ID);
 
-            $CategoryID = Session::get('CategoryID');
-            $data["CategoryID"] = $CategoryID;
+        $CategoryID = Session::get('CategoryID');
+        $data["CategoryID"] = $CategoryID;
 
-            if (is_numeric($CategoryID)) {
-                $Category = PresentationCategory::get()->byID($CategoryID);
-            }
-            if (isset($Category)) {
-                $data["CategoryName"] = $Category->Title;
-            }
+        if (is_numeric($CategoryID)) {
+            $Category = PresentationCategory::get()->byID($CategoryID);
+        }
+        if (isset($Category)) {
+            $data["CategoryName"] = $Category->Title;
+        }
 
-            $data["Search"] = isset($_GET['s']) ? $_GET['s'] : null;
-            if (isset($data['Search']) && strlen($data['Search']) > 1) {
-                $data["PresentationWithSearch"] = true;
+        $data["Search"] = isset($_GET['s']) ? $_GET['s'] : null;
+        if (isset($data['Search']) && strlen($data['Search']) > 1) {
+            $data["PresentationWithSearch"] = true;
 
-                return $this->doSearch($data, null);
-            } else {
-                //return our $Data to use on the page
-                return $this->Customise($data);
-            }
+            return $this->doSearch($data, null);
         } else {
-            //Talk not found
-            return $this->httpError(404, 'Sorry that talk could not be found');
+            //return our $Data to use on the page
+            return $this->Customise($data);
         }
     }
 
