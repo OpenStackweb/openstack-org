@@ -89,39 +89,6 @@ final class MergeAccountBulkQueryFactory
         return $query;
     }
 
-    /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
-     * @return IBulkQuery
-     */
-    public function buildMergeDeploymentSurveysBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account)
-    {
-        $query = new MergeDeploymentSurveysBulkQuery();
-
-        $query->addParams(array(
-            'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id' => $dupe_account->getIdentifier()
-        ));
-
-        return $query;
-    }
-
-    /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
-     * @return IBulkQuery
-     */
-    public function buildMergeAppDevSurveysBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account)
-    {
-        $query = new MergeAppDevSurveysBulkQuery;
-
-        $query->addParams(array(
-            'primary_id' => $primary_account->getIdentifier(),
-            'dupe_id' => $dupe_account->getIdentifier()
-        ));
-
-        return $query;
-    }
 
     /**
      * @param ICommunityMember $primary_account Primary Account
@@ -153,6 +120,43 @@ final class MergeAccountBulkQueryFactory
             'primary_id' => $primary_account->getIdentifier(),
             'email' => $newEmail
         ));
+        return $query;
+    }
+
+    /**
+     * @param ICommunityMember $primary_account Primary Account
+     * @param ICommunityMember $dupe_account Account to merge with
+     * @return IBulkQuery
+     */
+    public function buildMergeSurveysBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account)
+    {
+        $query = new SurveysBulkQuery;
+
+        $query->addParams(array(
+            'primary_id' => $primary_account->getIdentifier(),
+            'dupe_id'    => $dupe_account->getIdentifier()
+        ));
+
+        return $query;
+    }
+
+    /**
+     * @param ICommunityMember $primary_account Primary Account
+     * @param ICommunityMember $dupe_account Account to merge with
+     * @return IBulkQuery
+     */
+    public function buildMergeAttendeeBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account)
+    {
+
+        $query  = new AttendeeBulkQuery;
+        $params = array
+        (
+            'primary_id' => $primary_account->getIdentifier(),
+            'dupe_id'    => $dupe_account->getIdentifier()
+        );
+
+        $query->addParams($params);
+
         return $query;
     }
 }

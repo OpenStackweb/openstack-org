@@ -329,7 +329,6 @@ final class DupesMembersManager {
 
             $current_account->updateProfilePhoto($merge_data['photo']);
 
-
             $query = $query_factory->buildMergeProfileBulkQuery($current_account, $dupe_account);
             $query_registry->addBulkQuery($query);
 
@@ -358,13 +357,13 @@ final class DupesMembersManager {
                 $query_registry->addBulkQuery($query);
             }
 
-            if($dupe_account->hasDeploymentSurveys()){
-                $query = $query_factory->buildMergeDeploymentSurveysBulkQuery($current_account, $dupe_account);
+            if($dupe_account->isAttendee()){
+                $query = $query_factory->buildMergeAttendeeBulkQuery($current_account, $dupe_account);
                 $query_registry->addBulkQuery($query);
             }
 
-            if($dupe_account->hasAppDevSurveys()){
-                $query = $query_factory->buildMergeAppDevSurveysBulkQuery($current_account, $dupe_account);
+            if($dupe_account->hasSurveys()){
+                $query = $query_factory->buildMergeSurveysBulkQuery($current_account, $dupe_account);
                 $query_registry->addBulkQuery($query);
             }
 

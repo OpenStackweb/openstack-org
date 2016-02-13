@@ -12,6 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * Class SapphireMemberRepository
+ */
 class SapphireMemberRepository extends SapphireRepository implements IMemberRepository {
 
     public function __construct($entity = null){
@@ -22,6 +26,18 @@ class SapphireMemberRepository extends SapphireRepository implements IMemberRepo
         parent::__construct($entity);
     }
 
+    /**
+     * @param int $id
+     * @return IEntity
+     * @throws Exception
+     */
+    public function getById($id)
+    {
+        $member = parent::getById($id);
+        if(!is_null($member))
+            UnitOfWork::getInstance()->scheduleForUpdate($member);
+        return $member;
+    }
     /**
      * @param string $email
      * @return ICLAMember

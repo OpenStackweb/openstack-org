@@ -21,10 +21,9 @@
 </style>
 
 <div class="container">
-<a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center"
-   class="roundedButton merge" href="#" id="merge">Merge Account</a>
+<a style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-top:1em;" class="roundedButton merge" href="#" id="merge">Merge Account</a>
 <table id="merge_table" class="table table-condensed" data-confirmation-token="$ConfirmationToken">
-<caption>Merge Account</caption>
+<caption style="padding: 1em;">Merge Account</caption>
 <thead>
 <tr>
     <th>#</th>
@@ -1239,7 +1238,7 @@
             <% if isSpeaker %>
                 <div class="checkbox">
                     <label>Yes</label>
-                </div>s
+                </div>
             <% else %>
                 <div class="checkbox">
                     <label>No</label>
@@ -1429,12 +1428,12 @@
     </td>
 </tr>
 <tr>
-    <td>Has Deployment Surveys&nbsp;<span style="cursor: pointer" class="glyphicon glyphicon-exclamation-sign"
+    <td>Is Summit Attendee&nbsp;<span style="cursor: pointer" class="glyphicon glyphicon-exclamation-sign"
                                           aria-hidden="true" title="this merge will be performed automatically"></span>
     </td>
     <td>
         <% with CurrentAccount %>
-            <% if hasDeploymentSurveys %>
+            <% if isAttendee %>
                 <div class="checkbox">
                     <label>Yes</label>
                 </div>
@@ -1447,7 +1446,7 @@
     </td>
     <td>
         <% with DupeAccount %>
-            <% if hasDeploymentSurveys %>
+            <% if isAttendee %>
                 <div class="checkbox">
                     <label>Yes</label>
                 </div>
@@ -1459,15 +1458,15 @@
         <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.hasDeploymentSurveys && DupeAccount.hasDeploymentSurveys %>
+        <% if CurrentAccount.isAttendee && DupeAccount.isAttendee %>
             <div class="checkbox">
                 <label>Yes</label>
             </div>
-        <% else_if  CurrentAccount.hasDeploymentSurveys %>
+        <% else_if  CurrentAccount.isAttendee %>
             <div class="checkbox">
                 <label>Yes</label>
-            </div>s
-        <% else_if  DupeAccount.hasDeploymentSurveys %>
+            </div>
+        <% else_if  DupeAccount.isAttendee %>
             <div class="checkbox">
                 <label>Yes</label>
             </div>
@@ -1479,12 +1478,12 @@
     </td>
 </tr>
 <tr>
-    <td>Has App Dev Surveys&nbsp;<span style="cursor: pointer" class="glyphicon glyphicon-exclamation-sign"
+    <td>Has Surveys&nbsp;<span style="cursor: pointer" class="glyphicon glyphicon-exclamation-sign"
                                        aria-hidden="true" title="this merge will be performed automatically"></span>
     </td>
     <td>
         <% with CurrentAccount %>
-            <% if hasAppDevSurveys %>
+            <% if hasSurveys %>
                 <div class="checkbox">
                     <label>Yes</label>
                 </div>
@@ -1497,7 +1496,7 @@
     </td>
     <td>
         <% with DupeAccount %>
-            <% if hasAppDevSurveys %>
+            <% if hasSurveys %>
                 <div class="checkbox">
                     <label>Yes</label>
                 </div>
@@ -1509,15 +1508,15 @@
         <% end_with %>
     </td>
     <td>
-        <% if CurrentAccount.hasAppDevSurveys && DupeAccount.hasAppDevSurveys %>
+        <% if CurrentAccount.hasSurveys && DupeAccount.hasSurveys %>
             <div class="checkbox">
                 <label>Yes</label>
             </div>
-        <% else_if  CurrentAccount.hasAppDevSurveys %>
+        <% else_if  CurrentAccount.hasSurveys %>
             <div class="checkbox">
                 <label>Yes</label>
             </div>
-        <% else_if  DupeAccount.hasAppDevSurveys %>
+        <% else_if  DupeAccount.hasSurveys %>
             <div class="checkbox">
                 <label>Yes</label>
             </div>

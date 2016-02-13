@@ -15,6 +15,10 @@
 abstract class AbstractMergeBulkQuery implements IBulkQuery {
 
     /**
+     * @var array
+     */
+    protected $params;
+    /**
      * @var int
      */
     protected $primary_id;
@@ -34,6 +38,7 @@ abstract class AbstractMergeBulkQuery implements IBulkQuery {
             $this->primary_id  = $params['primary_id'];
         if(isset($params['dupe_id']))
             $this->dupe_id = $params['dupe_id'];
+        $this->params = $params;
     }
 
 } 

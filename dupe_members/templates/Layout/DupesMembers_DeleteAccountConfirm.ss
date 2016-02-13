@@ -52,17 +52,18 @@
             <a class="roundedButton" id="btn-delete" data-token="$Top.ConfirmationToken" href="#">Yes, I want to delete it.</a>
             <a class="roundedButton" id="btn-merge"  data-token="$Top.ConfirmationToken" href="#">No, I want to merge it.</a>
             <a class="roundedButton" id="btn-keep"   data-token="$Top.ConfirmationToken" href="#">No, I want to keep it.</a>
-    <% else_if hasDeploymentSurveys %>
+
+    <% else_if hasSurveys %>
         <p>
-            Also we detected that this duplicate account has some <b>Deployment Surveys</b> Filled Out. Our recommendation is to merge with your current account (<% with Top.CurrentAccount %> <b>$getEmail</b> <% end_with %>).
+            Also we detected that this duplicate account has some <b>Surveys</b> Filled Out. Our recommendation is to merge with your current account (<% with Top.CurrentAccount %> <b>$getEmail</b> <% end_with %>).
         </p>
         <p>
             <a class="roundedButton" id="btn-delete" data-token="$Top.ConfirmationToken" href="#">Yes, I want to delete it.</a>
             <a class="roundedButton" id="btn-merge"  data-token="$Top.ConfirmationToken" href="#">No, I want to merge it.</a>
             <a class="roundedButton" id="btn-keep"   data-token="$Top.ConfirmationToken" href="#">No, I want to keep it.</a>
-    <% else_if hasAppDevSurveys %>
+    <% else_if isAttendee %>
         <p>
-            Also we detected that this duplicate account has some <b>Application Development Surveys</b> Filled Out. Our recommendation is to merge with your current account (<% with Top.CurrentAccount %> <b>$getEmail</b> <% end_with %>).
+            Also we detected that this duplicate account has some <b>Summit Attendees</b> Filled Out. Our recommendation is to merge with your current account (<% with Top.CurrentAccount %> <b>$getEmail</b> <% end_with %>).
         </p>
         <p>
             <a class="roundedButton" id="btn-delete" data-token="$Top.ConfirmationToken" href="#">Yes, I want to delete it.</a>

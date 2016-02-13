@@ -215,6 +215,14 @@ final class FoundationMember
     /**
      * @return bool
      */
+    public function hasSurveys()
+    {
+        return Survey::get()->filter(array('CreatedByID' => $this->getIdentifier()))->count() > 0;
+    }
+
+    /**
+     * @return bool
+     */
     public function isCompanyAdmin()
     {
         return count($this->owner->getManagedCompanies()) > 0;

@@ -51,14 +51,14 @@ interface IMergeAccountBulkQueryFactory {
      * @param ICommunityMember $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeDeploymentSurveysBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeSurveysBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
 
     /**
      * @param ICommunityMember $primary_account Primary Account
      * @param ICommunityMember $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeAppDevSurveysBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeAttendeeBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
 
     /**
      * @param ICommunityMember $primary_account Primary Account

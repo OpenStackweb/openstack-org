@@ -1,0 +1,7 @@
+---
+Name: dupemembers_module
+After: 'framework/*','cms/*',
+---
+EditProfilePage_Controller:
+  extensions:
+    - EditProfileDupesMemberExtension

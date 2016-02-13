@@ -20,10 +20,10 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
     );
 
     /**
-     * @param int $summit_id
+     * @param int|null $summit_id
      * @return bool
      */
-    public function isAttendee($summit_id)
+    public function isAttendee($summit_id = null)
     {
         $attendee = $this->getSummitAttendee($summit_id);
 
@@ -31,17 +31,19 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
     }
 
     /**
-     * @param int $summit_id
+     * @param int|null $summit_id
      * @return ISummitAttendee
      */
-    public function getSummitAttendee($summit_id)
+    public function getSummitAttendee($summit_id = null)
     {
-        $attendee = $this->owner->SummitAttendance()->filter(array
-        (
-            'SummitID' => $summit_id
-        ))->first();
-
-        return $attendee;
+        $attendee = $this->owner->SummitAttendance();
+        if (!is_null($summit_id)) {
+            $attendee = $attendee->filter(array
+            (
+                'SummitID' => $summit_id
+            ));
+        }
+        return $attendee->first();
     }
 
     /**

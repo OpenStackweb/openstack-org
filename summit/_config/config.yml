@@ -1,6 +1,6 @@
 ---
-Name: mysite
-After: 'framework/*','cms/*', 'mysite/*'
+Name: summit_module
+After: 'framework/*','cms/*', 'openstack/*'
 ---
 Member:
   extensions:

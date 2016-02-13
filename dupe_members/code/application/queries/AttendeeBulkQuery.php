@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,20 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-/**
- * Class MergeDeploymentSurveysBulkQuery
- */
-final class MergeDeploymentSurveysBulkQuery extends AbstractMergeBulkQuery {
+final class AttendeeBulkQuery extends AbstractMergeBulkQuery
+{
 
     /**
-     * @return string
+     * @return string[]
      */
     public function toSQL()
     {
         $primary_id = $this->primary_id;
         $dupe_id    = $this->dupe_id;
-
-        return array("UPDATE DeploymentSurvey SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} ;");
+        $primary    = Member::get()->byID($primary_id);
+        $dupe       = Member::get()->byID($dupe_id);
+        $queries    = array();
+        $summits    = Summit::get();
+        foreach($summits as $summit)
+        {
+            if($dupe->isAttendee($summit->ID) && !$primary->isAttendee($summit->ID) )
+            {
+                // move
+                array_push($queries, "UPDATE SummitAttendee SET MemberID = {$primary_id} WHERE MemberID = {$dupe_id} AND SummitID = {$summit->ID};");
+            }
+        }
+        return $queries;
     }
 }

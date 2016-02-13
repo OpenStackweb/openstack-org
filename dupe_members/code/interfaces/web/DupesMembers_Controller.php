@@ -114,6 +114,11 @@ final class DupesMembers_Controller extends AbstractController {
                 'UserName' => $request->getDupeAccount()->getEmail()
             ));
         }
+        catch(DuperMemberActionRequestVoid $ex2)
+        {
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->renderWith(array('DupesMembers_error','Page'));
+        }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);
             return $this->renderWith(array('DupesMembers_error','Page'));

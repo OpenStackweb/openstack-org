@@ -15,10 +15,10 @@
 interface IAttendeeMember extends IEntity
 {
     /**
-     * @param int $summit_id
+     * @param int|null $summit_id
      * @return bool
      */
-    public function isAttendee($summit_id);
+    public function isAttendee($summit_id = null);
 
     /**
      * @param int $summit_id

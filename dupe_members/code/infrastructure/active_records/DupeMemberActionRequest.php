@@ -111,7 +111,7 @@ class DupeMemberActionRequest
      * @param string $token
      * @return bool
      * @throws DuperMemberActionRequestVoid
-     * @throws InvitationAlreadyConfirmedException
+     * @throws InvalidHashInvitationException
      */
     public function doConfirmation($token)
     {

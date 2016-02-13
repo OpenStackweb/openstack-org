@@ -11,39 +11,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Interface IFoundationMember
  */
-interface IFoundationMember extends IEntity {
+interface IFoundationMember extends IEntity
+{
 
-	const FoundationMemberGroupSlug = 'foundation-members';
-	const CommunityMemberGroupSlug = 'community-members';
-	/**
-	 * @return void
-	 */
-	public function convert2SiteUser();
+    const FoundationMemberGroupSlug = 'foundation-members';
+    const CommunityMemberGroupSlug = 'community-members';
 
-	/**
-	 * @return bool
-	 */
-	public function isFoundationMember();
+    /**
+     * @return void
+     */
+    public function convert2SiteUser();
 
-	/**
-	 * @return void
-	 */
-	public function upgradeToFoundationMember();
+    /**
+     * @return bool
+     */
+    public function isFoundationMember();
 
-	/**
-	 * @param int $latest_election_id
-	 * @return bool
-	 */
-	public function hasPendingRevocationNotifications($latest_election_id);
+    /**
+     * @return void
+     */
+    public function upgradeToFoundationMember();
+
+    /**
+     * @param int $latest_election_id
+     * @return bool
+     */
+    public function hasPendingRevocationNotifications($latest_election_id);
 
     /**
      * @param bool $remove_affiliation_data
      * @return void
      */
-	public function resign($remove_affiliation_data = true);
+    public function resign($remove_affiliation_data = true);
 
     /**
      * @return bool
@@ -69,4 +72,9 @@ interface IFoundationMember extends IEntity {
      * @return ICandidate|null
      */
     public function getCurrentCandidate();
+
+    /**
+     * @return bool
+     */
+    public function hasSurveys();
 } 

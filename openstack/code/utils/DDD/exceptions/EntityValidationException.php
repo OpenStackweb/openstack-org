@@ -27,7 +27,6 @@ class EntityValidationException extends Exception
     {
         parent::__construct();
         $this->messages = $messages;
-        $this->message = implode(', ', $this->messages);
     }
 
     /**
