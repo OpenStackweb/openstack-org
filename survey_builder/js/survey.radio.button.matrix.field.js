@@ -11,6 +11,7 @@
                 var ddl   = $(this);
                 var label = $('option:selected', ddl).text();
                 var id    = ddl.val();
+                if(id === '') return;
 
                 $('option:selected', ddl).remove();
                 var html = '<tr><td>'+label+'</td>';
@@ -19,7 +20,7 @@
                 for(var i=0 ; i < cols.length; i++)
                 {
                     var c = cols[i];
-                    html += ' <td class="input-cell"><input data-row-id="'+id+'" class="radio_'+id+' radio_opt"  name="'+ctrl_container.attr('id')+'_'+id+'" id="'+id+'_'+c.id+'" type="radio" value="'+c.id+'"/></td>';
+                    html += ' <td class="input-cell"><input data-row-id="'+id+'" class="radio_'+id+' radio_opt"  name="'+ctrl_container.attr('id')+'_'+id+'" id="'+id+'_'+c.id+'" type="radio" data-col-id="'+c.id+'"/></td>';
                 }
                 html +='</tr>';
                 $(html).insertBefore($('.tr-add-container', ctrl_container));
@@ -36,7 +37,7 @@
                 var state  = '';
                 $.each($('.radio_opt:checked', ctrl_container), function(index , radio){
                     var row_id = $(radio).attr('data-row-id');
-                    var col_id = $(radio).attr('value');
+                    var col_id = $(radio).attr('data-col-id');
                     state += row_id+':'+col_id+',';
                 });
 
