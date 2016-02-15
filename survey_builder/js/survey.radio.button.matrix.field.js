@@ -6,6 +6,12 @@
 
             var ctrl_container = $(this);
 
+            $('td.highlite-row', ctrl_container).each(function()
+            {
+                var parent_row = $(this).parent();
+                parent_row.addClass('highlited');
+            });
+
             $('.survey-radio-matrix-field-additional-rows-select', ctrl_container).change(function (event){
 
                 var ddl   = $(this);
@@ -33,6 +39,8 @@
 
             $('.radio_opt', ctrl_container).live('click', function(evt)
             {
+                var parent_row = $(this).parent().parent();
+                parent_row.removeClass('highlited');
                 var hidden = $('.ctrl_hidden_value',ctrl_container);
                 var state  = '';
                 $.each($('.radio_opt:checked', ctrl_container), function(index , radio){
@@ -48,6 +56,11 @@
                 $('.radio_opt', ctrl_container).prop('checked', false);
                 $(ctrl_container).trigger('table_clear',false);
                 var hidden = $('.ctrl_hidden_value',ctrl_container);
+                $('td.highlite-row', ctrl_container).each(function()
+                {
+                    var parent_row = $(this).parent();
+                    parent_row.addClass('highlited');
+                });
                 hidden.val('');
                 evt.preventDefault();
                 return false;

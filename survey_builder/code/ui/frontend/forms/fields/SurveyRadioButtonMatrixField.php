@@ -144,6 +144,18 @@ class SurveyRadioButtonMatrixField extends FormField
         return !(strstr($this->answer->value(), $tuple) === false);
     }
 
+    /**
+     * @param $row_id
+     * @param $col_id
+     * @return bool
+     */
+    public function mustHighlite($row_id, $col_id)
+    {
+       if(is_null($this->answer)) return false;
+       $tuple = sprintf('%s:,',$row_id);
+       return !(strstr($this->answer->value(), $tuple) === false);
+    }
+
     protected $validation_attributes = array();
 
     public function setValidationAttribute($name, $value) {

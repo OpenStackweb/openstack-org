@@ -20,7 +20,7 @@
     <tr>
         <td>$Label</td>
           <% loop Columns %>
-            <td class="input-cell"><input data-row-id="{$Up.ID}" data-col-id="{$ID}" class="radio_{$Up.ID} radio_opt" <% if $Top.isChecked($Up.ID,$ID) %>checked<% end_if %> type="radio" name="{$Top.Name}_{$Up.ID}" id="{$Up.ID}_{$ID}"></td>
+            <td class="input-cell<% if $Top.mustHighlite($Up.ID,$ID) %> highlite-row<% end_if %>"><input data-row-id="{$Up.ID}" data-col-id="{$ID}" class="radio_{$Up.ID} radio_opt" <% if $Top.isChecked($Up.ID,$ID) %>checked<% end_if %> type="radio" name="{$Top.Name}_{$Up.ID}" id="{$Up.ID}_{$ID}"></td>
         <% end_loop %>
     </tr>
     <% end_loop %>
@@ -39,7 +39,7 @@
         <tr>
             <td>$Label</td>
             <% loop Columns %>
-                <td class="input-cell"><input data-row-id="{$Up.ID}" data-col-id="{$ID}" class="radio_{$Up.ID} radio_opt" <% if $Top.isChecked($Up.ID,$ID) %>checked<% end_if %> type="radio" name="{$Top.Name}_{$Up.ID}" id="{$Up.ID}_{$ID}"></td>
+                <td class="input-cell<% if $Top.mustHighlite($Up.ID,$ID) %> highlite-row<% end_if %>"><input data-row-id="{$Up.ID}" data-col-id="{$ID}" class="radio_{$Up.ID} radio_opt" <% if $Top.isChecked($Up.ID,$ID) %>checked<% end_if %> type="radio" name="{$Top.Name}_{$Up.ID}" id="{$Up.ID}_{$ID}"></td>
             <% end_loop %>
         </tr>
         <% end_loop %>
