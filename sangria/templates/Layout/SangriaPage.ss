@@ -123,21 +123,9 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#" class="cvs_download_link" >App Dev Survey CSV Download</a>
-                    <div class="export_filters hidden">
-                        $DateFilters(ExportAppDevSurveyResults,true)
-                    </div>
-                </li>
-                <li>
                     <a href="#" class="cvs_download_link">Deployment Survey CSV Download (Flat Format)</a>
                     <div class="export_filters hidden">
                         $DateFilters(ExportSurveyResultsFlat,true,  1)
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="cvs_download_link" >App Dev Survey CSV Download (Flat Format)</a>
-                    <div class="export_filters hidden">
-                        $DateFilters(ExportAppDevSurveyResultsFlat,true)
                     </div>
                 </li>
             </ul>

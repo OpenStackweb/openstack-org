@@ -325,7 +325,7 @@ SQL;
 
         $date_filter = SangriaPage_Controller::$date_filter_query;
 
-        $range = Controller::curr()->getRequest()->getVar('Range');
+        $template_id = intval(Controller::curr()->getRequest()->getVar('Range'));
 
 $query = <<<SQL
 -- surveys
@@ -365,8 +365,10 @@ INNER JOIN Member M ON M.ID = S.CreatedByID
 INNER JOIN SurveyStepTemplate SETPL ON SETPL.ID = SE.TemplateID
 INNER JOIN SurveyAnswer SA ON SA.StepID = SE.ID
 INNER JOIN SurveyQuestionTemplate Q ON SA.QuestionID = Q.ID
+INNER JOIN SurveyTemplate ST ON S.TemplateID = ST.ID
 WHERE
 S.ClassName = 'Survey'
+AND ST.ID = {$template_id}
 ) REPORT
 WHERE {$date_filter}
 ORDER BY SurveyID ASC , StepOrder ASC, QuestionOrder ASC;
@@ -495,7 +497,7 @@ SQL;
         $range = Controller::curr()->getRequest()->getVar('Range');
 
         $data = array();
-        if($range === SurveyType::FALL_2015)
+        if(intval($range) > 0 )
         {
             $data = $this->getSurveyBuilderExportData();
         }
@@ -615,11 +617,11 @@ SQL;
             case SurveyType::MARCH_2015:
                 $version = 'v2';
                 break;
-            case SurveyType::FALL_2015:
-                $version = 'v3';
+            case SurveyType::OLD:
+                $version = 'v1';
                 break;
             default:
-                $version = 'v1';
+                $version = 'v3';
                 break;
         }
 
@@ -854,8 +856,13 @@ SQL;
                             {
                                 $t = explode(':', $t);
                                 $r = $t[0];
+                                if(!isset($rows[$r])) continue;
                                 $r = $rows[$r];
                                 $c = $t[1];
+                                if(!isset($columns[$c]))
+                                {
+                                   continue;
+                                }
                                 $c = $columns[$c];
                                 $translation .= sprintf("%s:%s",$r, $c). ',';
                             }
@@ -901,6 +908,7 @@ SQL;
                                 foreach($answer as $a)
                                 {
                                     $a =  preg_split('/:/',$a);
+                                    if( count($a) !== 2) continue;
                                     $line2[sprintf("%s - %s",$question,$a[0])] = $a[1];
                                 }
                             }
@@ -983,7 +991,7 @@ SQL;
 
         $range = Controller::curr()->getRequest()->getVar('Range');
 
-        if($range === SurveyType::FALL_2015)
+        if(intval($range) > 0)
         {
             $file_data = $this->getSurveyBuilderExportData
             (
@@ -1211,11 +1219,11 @@ SQL;
             case SurveyType::MARCH_2015:
                 $version = 'v2';
                 break;
-            case SurveyType::FALL_2015:
-                $version = 'v3';
+            case SurveyType::OLD:
+                $version = 'v1';
                 break;
             default:
-                $version = 'v1';
+                $version = 'v3';
                 break;
         }
 

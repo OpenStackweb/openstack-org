@@ -298,6 +298,11 @@ final class SangriaPage_Controller extends AdminController
     }
 
 
+    public static function getSurveys()
+    {
+        return SurveyTemplate::get()->filter('ClassName' , 'SurveyTemplate');
+    }
+
     public static function generateFilterWhereClause()
     {
         $filterWhereClause = "";

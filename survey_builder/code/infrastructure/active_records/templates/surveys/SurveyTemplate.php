@@ -323,4 +323,11 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     {
         return $this->Title;
     }
+
+    public function NiceName()
+    {
+        $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
+        $end_date   = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
+        return sprintf(" %s (%s/%s)", $this->Title, $start_date->format('Y-m-d'), $end_date->format('Y-m-d') );
+    }
 }

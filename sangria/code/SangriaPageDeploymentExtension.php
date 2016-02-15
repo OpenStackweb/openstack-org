@@ -65,7 +65,7 @@ final class SangriaPageDeploymentExtension extends Extension
 
         $range = Session::get("global_survey_range");
         //get survey version
-        if (!empty($range) && $range === SurveyType::FALL_2015) {
+        if (!empty($range) && intval($range) > 0 ) {
             $deployment = Survey::get()->byID($deployment_id);
             if ($deployment->ClassName === 'EntitySurvey') {
                 $deployment = EntitySurvey::get()->byID($deployment_id);
@@ -110,7 +110,7 @@ final class SangriaPageDeploymentExtension extends Extension
         $deployment_id = intval(Convert::raw2sql($params["ID"]));;
         $range = Session::get("global_survey_range");
         //get survey version
-        if (!empty($range) && $range === SurveyType::FALL_2015) {
+        if (!empty($range) && intval($range) > 0 ) {
             $survey = Survey::get()->byID($deployment_id);
             if ($survey->ClassName === 'EntitySurvey') {
                 $survey = EntitySurvey::get()->byID($deployment_id);
@@ -155,7 +155,7 @@ final class SangriaPageDeploymentExtension extends Extension
     {
 
         $range = self::getSurveyRange('ViewDeploymentSurveyStatistics');
-        if ($range === SurveyType::FALL_2015) {
+        if (intval($range) > 0) {
             return Controller::curr()->redirect(Controller::curr()->Link("ViewSurveysStatisticsSurveyBuilder"));
         }
         SangriaPage_Controller::generateDateFilters('DS');
@@ -204,7 +204,6 @@ final class SangriaPageDeploymentExtension extends Extension
 
         return is_null($range) ? SurveyType::OLD : $range;
     }
-
 
     private static function generateDeploymentSurveysSummaryOptions($options, $field)
     {
@@ -314,7 +313,7 @@ final class SangriaPageDeploymentExtension extends Extension
     function ViewDeploymentStatistics()
     {
         $range = self::getSurveyRange('ViewDeploymentStatistics');
-        if ($range === SurveyType::FALL_2015) {
+        if (intval($range) > 0 ) {
             return Controller::curr()->redirect(Controller::curr()->Link("ViewDeploymentStatisticsSurveyBuilder"));
         }
         SangriaPage_Controller::generateDateFilters('D');
@@ -812,7 +811,7 @@ WHERE CC.CountryCode = '{$country}';
 SQL;
 
 
-            $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+            $query = intval($range) > 0 ? $new_query : $old_query;
             $count = DB::query($query)->value();
             $result = array
             (
@@ -907,7 +906,7 @@ INNER JOIN Continent C ON C.ID = CC.ContinentID
 GROUP BY C.Name, C.ID;
 SQL;
 
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0? $new_query : $old_query;
 
         $records = DB::query($query);
 
@@ -960,7 +959,7 @@ INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUN
 WHERE CC.CountryCode = '{$country}';
 SQL;
 
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
 
         $res = DB::query($query);
 
@@ -1023,7 +1022,7 @@ WHERE CC.ContinentID = {$continent_id}
 GROUP BY CC.CountryCode ;
 SQL;
 
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
 
         $countries = DB::query($query);
         foreach ($countries as $country) {
@@ -1079,7 +1078,7 @@ WHERE CC.ContinentID = {$continent_id}
 GROUP BY CC.CountryCode
 SQL;
 
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
         $countries = DB::query($query);
 
         foreach ($countries as $country) {
@@ -1141,7 +1140,7 @@ SQL;
 INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, DEPLOYMENT_COUNTRIES.Countries) > 0;
 SQL;
 
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
 
         return DB::query($query)->value();
     }
@@ -1178,7 +1177,7 @@ SQL;
 ) SURVEYS_COUNTRIES
 INNER JOIN Continent_Countries CC ON FIND_IN_SET(CC.CountryCode, SURVEYS_COUNTRIES.Countries) > 0;
 SQL;
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
 
         return DB::query($query)->value();
     }
@@ -1236,7 +1235,7 @@ SQL;
 ) DEPLOYMENT_COUNTRIES
 WHERE FIND_IN_SET('{$country}', DEPLOYMENT_COUNTRIES.Countries) > 0;
 SQL;
-            $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+            $query = intval($range) > 0 ? $new_query : $old_query;
 
 
             $continent = DB::query("SELECT ContinentID from Continent_Countries where CountryCode = '{$country}';")->value();
@@ -1295,7 +1294,7 @@ GROUP BY C.Name, C.ID;
 SQL;
 
         $list = new ArrayList();
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
         $records = DB::query($query);
 
         foreach ($records as $record) {
@@ -1345,7 +1344,7 @@ WHERE CC.CountryCode = '{$country}';
 SQL;
 
         $list = new ArrayList();
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
         $res = DB::query($query);
         foreach ($res as $row) {
             // concept: new DeploymentSurvey($deployment)
@@ -1401,7 +1400,7 @@ GROUP BY CC.CountryCode ;
 SQL;
 
 
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0  ? $new_query : $old_query;
         $list = new ArrayList();
         $countries = DB::query($query);
         foreach ($countries as $country) {
@@ -1466,7 +1465,7 @@ GROUP BY CC.CountryCode ;
 SQL;
 
 
-        $query = $range === SurveyType::FALL_2015 ? $new_query : $old_query;
+        $query = intval($range) > 0 ? $new_query : $old_query;
         $countries = DB::query($query);
         foreach ($countries as $country) {
             // concept: new Deployment($deployment)
