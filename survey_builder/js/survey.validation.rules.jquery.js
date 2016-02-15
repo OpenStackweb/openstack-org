@@ -65,6 +65,8 @@
             //clean controls
             question_container.find('input').val('');
             question_container.find('select').val('');
+            question_container.find("input[type='radio']").prop('checked', false);
+            question_container.find("input[type='checkbox']").prop('checked', false);
             question_container.find('textarea').val('');
             question_container.find('select.chosen').removeClass('chosen-visible');
         }

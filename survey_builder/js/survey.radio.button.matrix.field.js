@@ -47,6 +47,8 @@
             $('.survey-radui-button-matrix-clear', ctrl_container).click(function(evt){
                 $('.radio_opt', ctrl_container).prop('checked', false);
                 $(ctrl_container).trigger('table_clear',false);
+                var hidden = $('.ctrl_hidden_value',ctrl_container);
+                hidden.val('');
                 evt.preventDefault();
                 return false;
             });
