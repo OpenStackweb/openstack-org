@@ -165,7 +165,7 @@ class SummitService
                     $speaker_ids[] = $speaker->ID;
                 }
 
-                $event->Speakers()->setByIDList($speaker_ids);
+                $presentation->Speakers()->setByIDList($speaker_ids);
             }
 
             return $event;

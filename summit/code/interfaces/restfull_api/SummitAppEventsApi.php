@@ -256,6 +256,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $this->summit_service->updateEvent($summit, $event_data);
+
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -263,10 +264,15 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
         }
-        catch(NotFoundEntityException $ex2)
+        catch(ValidationException $ex2)
         {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessages());
+            SS_Log::log($ex2->getResult()->messageList(), SS_Log::WARN);
+            return $this->validationError($ex2->getResult()->messageList());
+        }
+        catch(NotFoundEntityException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessages());
         }
         catch(Exception $ex)
         {
