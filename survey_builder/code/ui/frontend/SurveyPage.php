@@ -166,7 +166,9 @@ class SurveyPage_Controller extends Page_Controller
     {
         if (!Member::currentUser()) {
             if (!in_array($action, self::$allowed_actions_without_auth)) {
-                return $this->redirect($this->Link("landing"). "?BackURL=" . urlencode($this->Link()));
+                $back_url  = $request->getVar('url');
+                if(empty($back_url)) $back_url = urlencode($this->Link());
+                return $this->redirect($this->Link("landing"). "?BackURL=" .$back_url );
             }
         }
         return parent::handleAction($request, $action);

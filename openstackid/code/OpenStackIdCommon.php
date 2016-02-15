@@ -29,6 +29,8 @@ final class OpenStackIdCommon {
         if(!empty($back_url)){
             $back_url = self::cleanBackUrl($back_url);
             $back_url = Controller::curr()->join_links(Director::baseURL(), $back_url);
+            $fragment = Controller::curr()->getRequest()->requestVar('fragment');
+            if(!empty($fragment)) $back_url .= $fragment;
             $return_to_url .= '&BackURL='.urlencode($back_url);
         }
         return $return_to_url;
