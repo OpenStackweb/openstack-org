@@ -77,6 +77,11 @@
     margin-top: 30px;
 }
 
+.unpublished-events-refresh {
+    width: 100%;
+    height: 45px;
+}
+
 /* EDIT EVENT */
 
 .edit-event-wrapper {

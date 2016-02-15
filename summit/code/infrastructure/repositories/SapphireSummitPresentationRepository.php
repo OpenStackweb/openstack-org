@@ -30,8 +30,9 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummit($summit_id, $event_type = null, $search_term = null, $page = 1, $page_size = 10, $order = null)
+    public function getUnpublishedBySummit($summit_id, $event_type = null, $status = null, $search_term = null, $page = 1, $page_size = 10, $order = null)
     {
+        $filter = array('SummitID' => $summit_id, 'Published' => 0);
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
         $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
@@ -41,12 +42,17 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";
         }
 
+        if(!empty($status)){
+            $filter['Status'] = $status;
+        }
+
         $list      = Presentation::get()
                         ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
                         ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
-                        ->filter( array('SummitID' => $summit_id, 'Published' => 0))
+                        ->filter($filter)
                         ->where($where_clause)
                         ->sort("TRIM({$order})");
+
         $count     = intval($list->count());
         $offset    = ($page - 1 ) * $page_size;
         $data      = $list->limit($page_size, $offset);
@@ -63,7 +69,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
      * @param null $order
      * @return array
      */
-    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null)
+    public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $status = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null)
     {
         if(is_null($order)) $order = array('SummitSelectedPresentation.Order' => 'ASC');
         $filter = array('SummitID' => $summit_id, 'Published' => 0);
@@ -71,6 +77,10 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         $track_filter = '';
         if(!empty($track_list)){
             $track_filter = " AND SummitSelectedPresentationList.ID = {$track_list} ";
+        }
+
+        if(!empty($status)){
+            $filter['Status'] = $status;
         }
 
         $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
