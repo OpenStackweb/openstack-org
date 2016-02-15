@@ -111,8 +111,8 @@
     <ul>
         <li>Statistics</li>
             <ul>
-                <li><a href="/sangria/ViewDeploymentSurveyStatistics">Deployment Survey Stats</a></li>
-                <li><a href="/sangria/ViewDeploymentStatistics">Deployment Stats</a></li>
+                <li><a href="/sangria/ViewSurveysStatisticsSurveyBuilder">Deployment Survey Stats</a></li>
+                <li><a href="/sangria/ViewDeploymentStatisticsSurveyBuilder">Deployment Stats</a></li>
             </ul>
         <li>Export Data</li>
             <ul>
