@@ -49,6 +49,17 @@ class OldDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
         'TargetField.Name'  => 'Target Field',
     );
 
+
+    public static function getDisplayFields()
+    {
+        return array
+        (
+            'OriginTable'       => 'Origin Table',
+            'OriginField'       => 'Origin Field',
+            'TargetField.Name'  => 'Target Field',
+        );
+    }
+
     public function getCMSFields()
     {
         $field = parent::getCMSFields();

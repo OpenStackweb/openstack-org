@@ -29,7 +29,8 @@ class SurveyOrganizationQuestionTemplate
         $fields->add(new TextField('Label','Label'));
         $fields->add(new CheckboxField('Mandatory','Is Mandatory?'));
         $fields->add(new HiddenField('Name','Name',SurveyOrganizationQuestionTemplate::FieldName));
-
+        $fields->add(new CheckboxField('ShowOnSangriaStatistics','Show on Sangria statistics?'));
+        $fields->add(new CheckboxField('ShowOnPublicStatistics','Show on Public statistics?'));
         return $fields;
     }
 
