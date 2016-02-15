@@ -129,7 +129,7 @@ $(document).ready(function(){
 
         var request = {
             title: $('#title').val(),
-            description: $('#description').val(),
+            description: tinyMCE.get('description').getContent(),
             location_id: $('#location').val(),
             start_date: $('#start_date').val(),
             end_date: $('#end_date').val(),
