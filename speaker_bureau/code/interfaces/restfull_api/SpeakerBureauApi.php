@@ -107,11 +107,15 @@ final class SpeakerBureauApi
         return strpos(strtolower($request->getURL()), self::ApiPrefix) !== false;
     }
 
-    /**
-     * @return bool
-     */
+    // ANYONE CAN SEND EMAILS TO SPEAKERS
     protected function authorize()
     {
         return true;
     }
+
+    protected function authenticate()
+    {
+        return true;
+    }
+
 }
