@@ -906,11 +906,12 @@ class PresentationPage_ManageRequest extends RequestHandler
         }
 
         if (is_null($speaker)) {
-            $speaker = PresentationSpeaker::get()
-                ->filter(array(
-                    'RegistrationRequest.Email' => $email,
-                    'RegistrationRequest.IsConfirmed' => false,
-                ))->first();
+            $registration_request = SpeakerRegistrationRequest::get()->filter(array(
+                'Email' => $email,
+                'IsConfirmed' => 0,
+            ))->first();
+            if(!is_null($registration_request))
+                $speaker = $registration_request->Speaker();
         }
 
         return $speaker;
