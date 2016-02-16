@@ -11,6 +11,6 @@
 Twitter: <a href="http://www.twitter.com/openstack">twitter.com/openstack</a><br/>
 Q&A Site: <a href="http://ask.openstack.org">ask.openstack.org</a><br/>
 Upcoming Events: <a href="http://www.openstack.org/events">openstack.org/events</a><br/>
-User Groups: <a href="https://wiki.openstack.org/wiki/OpenStack_User_Groups">https://wiki.openstack.org/wiki/OpenStack_User_Groups</a></p>
+User Groups: <a href="https://groups.openstack.org">https://groups.openstack.org</a></p>
 </body>
 </html>
