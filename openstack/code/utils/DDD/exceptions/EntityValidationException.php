@@ -23,10 +23,18 @@ class EntityValidationException extends Exception
      */
     private $messages;
 
-    public function __construct(array $messages)
+    public function __construct($messages)
     {
-        parent::__construct();
-        $this->messages = $messages;
+
+        if (is_array($messages)) {
+            $this->messages = $messages;
+        }
+        if (is_string($messages)) {
+            $this->messages = self::buildMessage($messages);
+        }
+
+
+        parent::__construct($this->__toString());
     }
 
     /**
@@ -37,6 +45,25 @@ class EntityValidationException extends Exception
         return $this->messages;
     }
 
+    public function __toString()
+    {
+        $str = '';
+        foreach ($this->messages as $msg) {
+            if (is_array($msg) && isset($msg['message'])) {
+                $str .= '* ' . $msg['message'];
+            }
+            if (is_string($msg)) {
+                $str .= '* ' . $msg;
+            }
+        }
+
+        return $str;
+    }
+
+    /**
+     * @param string $message
+     * @return array
+     */
     public static function buildMessage($message)
     {
         return array(

@@ -113,19 +113,21 @@ class MemberManager implements IMemberManager
             ) {
 
                 if (!isset($data["HiddenAffiliations"]) || empty($data["HiddenAffiliations"])) {
-                    throw new EntityValidationException(array('You must at least enter one valid Affiliation.'));
+                    throw new EntityValidationException('You must at least enter one valid Affiliation.');
                 }
 
                 $old_member = $repository->findByEmail(Convert::raw2sql($data['Email']));
                 if (!is_null($old_member)) {
-                    throw new EntityValidationException(array('Sorry, that email address already exists. Please choose another.'));
+                    throw new EntityValidationException('Sorry, that email address already exists. Please choose another.');
                 }
                 $member = $factory->build($data);
                 //force write, will write immediatly bc MyIsam engine
                 $member->write();
                 $affiliations_data = json_decode($data["HiddenAffiliations"]);
                 if(is_null($affiliations_data))
-                    throw new EntityValidationException(array('You must at least enter one valid Affiliation.'));
+                    throw new EntityValidationException('You must at least enter one valid Affiliation.');
+                if(!count((array)$affiliations_data))
+                    throw new EntityValidationException('You must at least enter one valid Affiliation.');
                 if ($data['MembershipType'] === 'foundation') {
                     $member->upgradeToFoundationMember();
                 } else {

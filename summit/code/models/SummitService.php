@@ -55,7 +55,7 @@ class SummitService
     {
         $event_repository = $this->event_repository;
         return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
-            if(!isset($event_data['id'])) throw new EntityValidationException(array('missing required param: id'));
+            if(!isset($event_data['id'])) throw new EntityValidationException('missing required param: id');
             $event_id = intval($event_data['id']);
             $event = $event_repository->getById($event_id);
 
@@ -63,26 +63,26 @@ class SummitService
                 throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
 
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
-                throw new EntityValidationException(array('event doest not belongs to summit'));
+                throw new EntityValidationException('event doest not belongs to summit');
 
             if(!$event->Type()->exists())
-                throw new EntityValidationException(array('event doest not have a valid event type'));
+                throw new EntityValidationException('event doest not have a valid event type');
 
             // validate blackout times and speaker conflict
             $conflict_events = $event_repository->getPublishedByTimeFrame(intval($event->SummitID),$event_data['start_datetime'],$event_data['end_datetime']);
             foreach ($conflict_events as $c_event) {
                 // if the published event is BlackoutTime or if there is a BlackoutTime event in this timeframe
                 if (($event->Type()->BlackoutTimes || $c_event->Type()->BlackoutTimes) && $event->ID != $c_event->ID) {
-                    throw new EntityValidationException(array("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'"));
+                    throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
                 }
                 // if trying to publish an event on a slot occupied by another event
                 if (intval($event_data['location_id']) == $c_event->LocationID && $event->ID != $c_event->ID) {
-                    throw new EntityValidationException(array("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'"));
+                    throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
                 }
                 // validate speaker conflict
                 foreach ($event->Speakers() as $speaker) {
                     if ($c_event->Speakers()->find('ID',$speaker->ID) && $event->ID != $c_event->ID) {
-                        throw new EntityValidationException(array("You can't publish on this timeframe, ".$speaker->getName()." is presenting in room '".$c_event->getLocationName()."' at this time."));
+                        throw new EntityValidationException("You can't publish on this timeframe, ".$speaker->getName()." is presenting in room '".$c_event->getLocationName()."' at this time.");
                     }
                 }
 
@@ -108,7 +108,7 @@ class SummitService
         return $this->tx_service->transaction(function() use($summit, $event, $event_repository){
 
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
-                throw new EntityValidationException(array('event doest not belongs to summit'));
+                throw new EntityValidationException(EntityValidationException::buildMessage('event doest not belongs to summit'));
             $event->unPublish();
             return $event;
         });
@@ -123,7 +123,7 @@ class SummitService
     {
         $event_repository = $this->event_repository;
         return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
-            if(!isset($event_data['id'])) throw new EntityValidationException(array('missing required param: id'));
+            if(!isset($event_data['id'])) throw new EntityValidationException('missing required param: id');
             $event_id = intval($event_data['id']);
             $event = $event_repository->getById($event_id);
 
@@ -131,7 +131,7 @@ class SummitService
                 throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
 
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
-                throw new EntityValidationException(array('event doest not belongs to summit'));
+                throw new EntityValidationException('event doest not belongs to summit');
 
             $event->Title = $event_data['title'];
             $event->Description = $event_data['description'];
@@ -181,7 +181,7 @@ class SummitService
     {
         $attendee_repository = $this->attendee_repository;
         return $this->tx_service->transaction(function() use($summit, $attendee_data, $attendee_repository){
-            if(!isset($attendee_data['id'])) throw new EntityValidationException(array('missing required param: id'));
+            if(!isset($attendee_data['id'])) throw new EntityValidationException('missing required param: id');
             $attendee_id = intval($attendee_data['id']);
             $attendee = $attendee_repository->getById($attendee_id);
 
@@ -189,7 +189,7 @@ class SummitService
                 throw new NotFoundEntityException('Summit Attendee', sprintf('id %s', $attendee_id));
 
             if(intval($attendee->SummitID) !== intval($summit->getIdentifier()))
-                throw new EntityValidationException(array('attendee doest not belong to summit'));
+                throw new EntityValidationException('attendee doest not belong to summit');
 
             $attendee->MemberID = $attendee_data['member'];
             $attendee->SharedContactInfo = $attendee_data['share_info'];

@@ -66,7 +66,7 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
 
     public function sent()
     {
-        if($this->isAlreadySent()) throw new EntityValidationException(array('Push notification already sent!.'));
+        if($this->isAlreadySent()) throw new EntityValidationException('Push notification already sent!.');
         $this->IsSent   = true;
         $this->SentDate = MySQLDatabase56::nowRfc2822();
     }

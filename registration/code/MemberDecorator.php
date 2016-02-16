@@ -443,13 +443,13 @@ class MemberDecorator extends DataExtension
     public function doEmailConfirmation($token)
     {
         $original_hash = $this->owner->getField('EmailVerifiedTokenHash');
-        if($this->owner->EmailVerified) throw new EntityValidationException(array('email already verified'));
+        if($this->owner->EmailVerified) throw new EntityValidationException('email already verified');
         if(self::HashConfirmationToken($token) === $original_hash){
             $this->owner->EmailVerified           = true;
             $this->owner->EmailVerifiedDate       = SS_Datetime::now()->Rfc2822();
             return true;
         }
-        throw new EntityValidationException(array('invalid hash'));
+        throw new EntityValidationException('invalid hash');
     }
 
     /**

@@ -394,7 +394,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     public function publish()
     {
         if($this->Published)
-            throw new EntityValidationException(array('Already published Summit Event'));
+            throw new EntityValidationException('Already published Summit Event');
 
         $validation_result = $this->validate();
 
@@ -404,13 +404,13 @@ class SummitEvent extends DataObject implements ISummitEvent
         }
 
         if(intval($this->AllowedSummitTypes()->count()) === 0)
-            throw new EntityValidationException(array('To publish this event you must associate a valid summit type!'));
+            throw new EntityValidationException('To publish this event you must associate a valid summit type!');
 
         $start_date = $this->getStartDate();
         $end_date   = $this->getEndDate();
 
         if((empty($start_date) || empty($end_date)))
-            throw new EntityValidationException(array('To publish this event you must define a start/end datetime!'));
+            throw new EntityValidationException('To publish this event you must define a start/end datetime!');
 
         $this->Published     = true;
         $this->PublishedDate = MySQLDatabase56::nowRfc2822();

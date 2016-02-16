@@ -290,8 +290,6 @@ final class EventbriteEventManager implements IEventbriteEventManager
             if(!is_null($old_ticket))
                 throw new EntityValidationException
                 (
-                    array
-                    (
                         sprintf
                         (
                             'Ticket already redeem external_order_id %s - external_attendee_id %s - old attendee id %s - current member id %s !',
@@ -300,7 +298,6 @@ final class EventbriteEventManager implements IEventbriteEventManager
                             $old_ticket->OwnerID,
                             $member->ID
                         )
-                    )
                 );
 
             $ticket = $attendee_factory->buildTicket($external_attendee_id , $external_order_id, $bought_date, $bought_date, $ticket_type);

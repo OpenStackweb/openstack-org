@@ -105,7 +105,7 @@ final class ScheduleManager
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
             }
             if($attendee->isScheduled($event_id)){
-                throw new EntityValidationException(array('Event already exist on attendee schedule'));
+                throw new EntityValidationException('Event already exist on attendee schedule');
             }
             $attendee->addToSchedule($event);
             PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,

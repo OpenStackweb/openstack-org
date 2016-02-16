@@ -219,7 +219,7 @@ class RegistrationPage_Controller extends Page_Controller
         catch(EntityValidationException $ex1){
             Form::messageForForm('HoneyPotForm_RegistrationForm',$ex1->getMessage(), 'bad');
             //Return back to form
-            SS_Log::log($ex1->getMessage(), SS_Log::ERR);
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->redirectBack();
         }
         catch(Exception $ex){

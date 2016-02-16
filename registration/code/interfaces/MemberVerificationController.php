@@ -56,7 +56,7 @@ final class MemberVerificationController extends AbstractController
             $token = Convert::raw2sql($this->request->param('TOKEN'));
 
             if(is_null($token))
-                throw new EntityValidationException(array('missing token!'));
+                throw new EntityValidationException('missing token!');
 
             $member = $this->member_manager->verify($token, new MemberRegistrationVerifiedSenderService);
 
