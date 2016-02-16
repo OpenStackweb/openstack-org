@@ -114,6 +114,10 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $release_independent      = false;
                 $starter_kit              = false;
                 $vulnerability_managed    = false;
+                $follows_standard_deprecation = false;
+                $supports_upgrade             = false;
+                $supports_rolling_upgrade     = false;
+
                 foreach($tags as $tag)
                 {
                     if($tag === "team:diverse-affiliation" )
@@ -141,6 +145,12 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                         $starter_kit = true;
                     if($tag === "vulnerability:managed" )
                         $vulnerability_managed = true;
+                    if($tag === "assert:follows-standard-deprecation" )
+                        $follows_standard_deprecation = true;
+                    if($tag === "assert:supports-upgrade" )
+                        $supports_upgrade = true;
+                    if($tag === "assert:supports-rolling-upgrade" )
+                        $supports_rolling_upgrade = true;
                 }
 
                 if(!$is_service) continue;
@@ -154,6 +164,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $component->HasTeamDiversity             = $team_diverse_affiliation;
                 $component->IncludedComputeStarterKit    = $starter_kit;
                 $component->VulnerabilityManaged         = $vulnerability_managed;
+                $component->FollowsStandardDeprecation   = $follows_standard_deprecation;
+                $component->SupportsUpgrade              = $supports_upgrade;
+                $component->SupportsRollingUpgrade       = $supports_rolling_upgrade;
 
                 if(!is_null($ptl_member))
                     $component->LatestReleasePTLID = $ptl_member->ID;
@@ -310,6 +323,18 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $points += 1;
             }
             if(intval($c->SDKSupport) > 7)
+            {
+                $points += 1;
+            }
+            if($c->FollowsStandardDeprecation)
+            {
+                $points += 1;
+            }
+            if($c->SupportsUpgrade)
+            {
+                $points += 1;
+            }
+            if($c->SupportsRollingUpgrade)
             {
                 $points += 1;
             }

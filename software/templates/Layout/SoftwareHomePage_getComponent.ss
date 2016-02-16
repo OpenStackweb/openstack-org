@@ -220,6 +220,87 @@
                                         </ul>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        Does this project follows standard deprecation?
+                                        <i data-content="The “assert:follows-standard-deprecation” tag asserts that the project will follow standard feature deprecation rules" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li <% if $Component.FollowsStandardDeprecation %>class="on" <% end_if %>>
+                                                <% if $Component.FollowsStandardDeprecation %>
+                                                    <i class="fa fa-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                    <i class="fa fa-circle-o"></i><span>No</span>
+                                                <% end_if %>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/assert_follows-standard-deprecation.html">View Details</a></td>
+                                    <td>
+                                        <ul>
+                                            <% if $Component.FollowsStandardDeprecation %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Does this project support minimal cold (offline) upgrade capabilities?
+                                        <i data-content="asserts that the project will support minimal cold (offline) upgrade capabilities" title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li <% if $Component.SupportsUpgrade %>class="on" <% end_if %>>
+                                                <% if $Component.SupportsUpgrade %>
+                                                    <i class="fa fa-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                    <i class="fa fa-circle-o"></i><span>No</span>
+                                                <% end_if %>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/assert_supports-upgrade.html">View Details</a></td>
+                                    <td>
+                                        <ul>
+                                            <% if $Component.SupportsUpgrade %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Does this project support minimal rolling upgrade capabilities?
+                                        <i data-content="tag asserts that the project will support minimal rolling upgrade capabilities." title="" data-placement="right" data-toggle="popover" class="fa fa-question-circle tag-tooltip" data-original-title="What does this mean?"></i>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li <% if $Component.SupportsRollingUpgrade %>class="on" <% end_if %>>
+                                                <% if $Component.SupportsRollingUpgrade %>
+                                                    <i class="fa fa-circle"></i><span>Yes</span>
+                                                <% else %>
+                                                    <i class="fa fa-circle-o"></i><span>No</span>
+                                                <% end_if %>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td><a href="http://governance.openstack.org/reference/tags/assert_supports-rolling-upgrade.html">View Details</a></td>
+                                    <td>
+                                        <ul>
+                                            <% if $Component.SupportsRollingUpgrade %>
+                                                <li class="on">Yes</li>
+                                            <% else %>
+                                                <li>No</li>
+                                            <% end_if %>
+                                        </ul>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

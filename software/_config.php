@@ -12,7 +12,7 @@
  * limitations under the License.
  **/
 
-define('MAX_ALLOWED_MATURITY_POINTS', 5);
+define('MAX_ALLOWED_MATURITY_POINTS', 8);
 define('OpsTagsTeamRepositoryUrl', 'https://raw.githubusercontent.com/openstack/ops-tags-team/master');
 
 

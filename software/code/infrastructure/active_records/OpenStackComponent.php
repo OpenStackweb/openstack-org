@@ -43,6 +43,9 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'YouTubeID'                    => 'Varchar',
         'VideoDescription'             => 'Text',
         'VideoTitle'                   => 'Varchar',
+        'FollowsStandardDeprecation'   => 'Boolean',
+        'SupportsUpgrade'              => 'Boolean',
+        'SupportsRollingUpgrade'       => 'Boolean',
     );
 
     private static $has_one = array
