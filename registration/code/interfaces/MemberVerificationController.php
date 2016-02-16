@@ -72,10 +72,16 @@ final class MemberVerificationController extends AbstractController
                     'Member' => $member,
                 )
             );
-        } catch (NotFoundEntityException $ex1) {
+        }
+        catch (NotFoundEntityException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
             return $this->renderWith(array('MemberVerification_error', 'Page'));
-        } catch (Exception $ex) {
+        }
+        catch (EntityValidationException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->renderWith(array('MemberVerification_alreadyVerified', 'Page'));
+        }
+        catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::ERR);
             return $this->renderWith(array('MemberVerification_error', 'Page'));
         }
