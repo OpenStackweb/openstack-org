@@ -128,6 +128,12 @@
                         $DateFilters(ExportSurveyResultsFlat,true,  1)
                     </div>
                 </li>
+                <li>
+                    <a href="#" class="cvs_download_link">Surveys by company CSV Download</a>
+                    <div class="export_filters hidden">
+                        $DateFilters(ExportSurveyResultsByCompany,true,  1)
+                    </div>
+                </li>
             </ul>
         <li>Regional Data</li>
             <ul>
