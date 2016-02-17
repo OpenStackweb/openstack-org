@@ -122,3 +122,12 @@
     width: 100% !important;
 }
 
+.ticket_member_container .bootstrap-tagsinput {
+    width: 100% !important;
+}
+
+#member_error,#ticket_member_error {
+    margin-top: 30px;
+    color: red;
+}
+

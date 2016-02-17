@@ -13,6 +13,7 @@ module.exports = {
     "summit/javascript/forms/tagmanagerfield/tagmanagerfield":"./summit/javascript/forms/tagmanagerfield/tagmanagerfield.js",
     "summit/javascript/schedule/event-list":"./summit/javascript/schedule/event-list.js",
     "summit/javascript/schedule/admin/schedule-admin-view":"./summit/javascript/schedule/admin/schedule-admin-view.js",
+    "summit/javascript/schedule/admin/attendees-admin-view":"./summit/javascript/schedule/admin/attendees-admin-view.js",
   },
   output: {
     path: __dirname ,

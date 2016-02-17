@@ -241,7 +241,6 @@ class SummitAppAdminController extends Page_Controller
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
-        Requirements::javascript('summit/javascript/summitapp-attendees.js');
 
         return $this->getViewer('attendees')->process
         (

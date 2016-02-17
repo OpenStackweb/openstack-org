@@ -10,40 +10,27 @@
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
             <li class="active">Attendees</li>
         </ol>
-        <input id="summit_id" type="hidden" value="{$Summit.ID}" />
-        <div class="panel panel-default">
-            <div class="panel-heading">Attendee</div>
-            <table id="attendees-table" class="table">
-                <thead>
-                <tr>
-                    <th>Member Id</th>
-                    <th>FullName</th>
-                    <th>Email</th>
-                    <th>Bought Date</th>
-                    <th>Checked In?</th>
-                    <th>&nbsp;</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% loop $Summit.Attendees.Limit(20) %>
-                        <tr>
-                            <td>$Member.ID</td>
-                            <td>$Member.FullName</td>
-                            <td>$Member.Email</td>
-                            <td>$Tickets.TicketBoughtDate.Format(j M, Y)</td>
-                            <td><% if $SummitHallCheckedIn %> Yes <% else %> No <% end_if %></td>
-                            <td><a href="$Top.Link/{$Summit.ID}/attendees/{$ID}" class="btn btn-default btn-sm active" role="button">Edit</a></td>
-                        </tr>
-                    <% end_loop %>
-                </tbody>
-            </table>
-        </div>
-        <nav>
-            <ul id="attendees-pager" class="pagination"></ul>
-        </nav>
+
+        <script type="application/javascript">
+                var attendees = [];
+                <% loop $Summit.Attendees.Limit(20) %>
+                    attendees.push(
+                    {
+                        member_id : "{$Member.ID}",
+                        name : "{$Member.FullName.JS}",
+                        email : "{$Member.Email.JS}",
+                        ticket_bought : "{$Tickets.TicketBoughtDate.Format(j M, Y).JS}",
+                        checked_in : <% if $SummitHallCheckedIn %> "Yes" <% else %> "No" <% end_if %>,
+                        link: "$Top.Link/{$Summit.ID}/attendees/{$ID}"
+                    });
+                <% end_loop %>
+
+                var total_attendees = {$Summit.Attendees().count};
+                var page_data = {page: 1, limit: 20, total_items: total_attendees}
+        </script>
+
+        <attendee-list attendees="{ attendees }" page_data="{ page_data }" summit_id="{ $Summit.ID }"></attendee-list>
     </div>
 </div>
 
-<script>
-    var total_attendees = {$Summit.Attendees().count};
-</script>
+<script src="summit/javascript/schedule/admin/attendees-admin-view.bundle.js" type="application/javascript"></script>

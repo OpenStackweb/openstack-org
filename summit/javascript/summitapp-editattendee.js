@@ -48,6 +48,8 @@ $(document).ready(function(){
 
     $('#member').on('itemAdded', function(event) {
         var summit_id = $('#summit_id').val();
+        $('#member_error').hide();
+
         $.getJSON('api/v1/summits/'+summit_id+'/attendees/member/'+event.item.id, {}, function(data){
             if (data.speaker) {
                 var title = (data.speaker.Title) ? data.speaker.Title : '';
@@ -137,10 +139,47 @@ $(document).ready(function(){
         menubar:    false
     });
 
+    $('.ticket').click(function(){
+        var ticket_id = $(this).data('ticket');
+        $.getJSON('api/v1/summits/'+summit_id+'/attendees/ticket/'+ticket_id, {}, function(data){
+            $('#ticket-external').html(data.ExternalOrderId);
+            $('#ticket-bought-date').html(data.TicketBoughtDate);
+            $('#ticket-external-attendee').html(data.ExternalAttendeeId);
+            $('#ticket_id').val(data.ID);
+
+            $('#ticket-member').tagsinput({
+                itemValue: "id",
+                itemText: "name",
+                freeInput: false,
+                maxTags: 1,
+                typeahead: {
+                    minLength: 4,
+                    items: 'all',
+                    source: function(query) {
+                        var max_reached = $('.bootstrap-tagsinput','.ticket_member_container').hasClass('bootstrap-tagsinput-max');
+                        if (!max_reached) {
+                            var summit_id = $('#summit_id').val();
+                            return $.getJSON('api/v1/summits/'+summit_id+'/members/options',{query:query});
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+            });
+
+        });
+
+    });
+
     var form = $('#edit-attendee-form');
 
     form.submit(function (event) {
         event.preventDefault();
+
+        if (!$('#member').val()) {
+            $('#member_error').show();
+            return false;
+        }
 
         var summit_id = $('#summit_id').val();
         var attendee_id = $('#attendee_id').val();
@@ -178,6 +217,69 @@ $(document).ready(function(){
 
         return false;
     });
+
+    $('#save_ticket').click(function(){
+
+        if (!$('#ticket-member').val()) {
+            $('#ticket_member_error').show();
+            return false;
+        }
+
+        var ticket_count = $('.ticket').length;
+
+        if (ticket_count < 2) {
+            swal(
+                {
+                    title: "Are you sure?",
+                    text: "The attendee will be left without any ticket and it will be DELETED !",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                }, function(){
+                    updateTicket();
+                });
+        } else {
+            updateTicket();
+        }
+    });
+
+    function updateTicket() {
+        var summit_id = $('#summit_id').val();
+        var ticket_id = $('#ticket_id').val();
+        var url = 'api/v1/summits/'+summit_id+'/attendees/'+ticket_id+'/update_ticket';
+
+        var request = {
+            member: $('#ticket-member').val()
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            data: JSON.stringify(request),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function() {
+            swal({
+                title: "Updated!",
+                text: "Ticket re-assigned successfully.",
+                type: "success"
+            }, function() {
+                if ($('.ticket').length < 2) {
+                    window.location = location.protocol + '//' + location.host + '/summit-admin/' + summit_id + '/attendees';
+                } else {
+                    $('.ticket [data-ticket="'+ticket_id+'"]').remove();
+                }
+            });
+        }).fail(function(jqXHR) {
+            var responseCode = jqXHR.status;
+            if(responseCode == 412) {
+                var response = $.parseJSON(jqXHR.responseText);
+                swal('Validation error', response.messages[0], 'warning');
+            }
+        });
+    }
 
 });
 

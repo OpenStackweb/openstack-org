@@ -181,8 +181,17 @@ class SummitService
     {
         $attendee_repository = $this->attendee_repository;
         return $this->tx_service->transaction(function() use($summit, $attendee_data, $attendee_repository){
-            if(!isset($attendee_data['id'])) throw new EntityValidationException('missing required param: id');
+
+            if(!isset($attendee_data['id']))
+                throw new EntityValidationException('missing required param: id');
+
+            $member_id = $attendee_data['member'];
             $attendee_id = intval($attendee_data['id']);
+
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
+            if ($attendee && $attendee->ID != $attendee_id)
+                throw new EntityValidationException('This member is already assigned to another tix');
+
             $attendee = $attendee_repository->getById($attendee_id);
 
             if(is_null($attendee))
@@ -191,7 +200,7 @@ class SummitService
             if(intval($attendee->SummitID) !== intval($summit->getIdentifier()))
                 throw new EntityValidationException('attendee doest not belong to summit');
 
-            $attendee->MemberID = $attendee_data['member'];
+            $attendee->MemberID = $member_id;
             $attendee->SharedContactInfo = $attendee_data['share_info'];
             if ($attendee_data['checked_in']) {
                 $attendee->registerSummitHallChecking();
@@ -220,6 +229,52 @@ class SummitService
                 $current_affiliation->write();
 
                 $attendee->Member()->Affiliations()->add($current_affiliation);
+            }
+
+            return $attendee;
+        });
+    }
+
+    /**
+     * @param int $ticket_id
+     * @param int $member_id
+     * @return mixed
+     */
+    public function reassignTicket(ISummit $summit, $ticket_id, $member_id)
+    {
+        $attendee_repository = $this->attendee_repository;
+        return $this->tx_service->transaction(function() use($summit, $ticket_id, $member_id, $attendee_repository){
+
+            if(!$ticket_id)
+                throw new EntityValidationException('missing required param: id');
+
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
+            $ticket = SummitAttendeeTicket::get_by_id('SummitAttendeeTicket',$ticket_id);
+            $previous_owner = $ticket->Owner();
+
+
+            if ($attendee) {
+                if ($attendee->Tickets()->count() > 0) {
+                    throw new EntityValidationException('This member is already assigned to another tix');
+                } else {
+                    $previous_owner->Tickets()->remove($ticket);
+                    $attendee->Tickets()->add($ticket);
+                }
+            } else {
+                $previous_owner->Tickets()->remove($ticket);
+
+                $attendee = new SummitAttendee();
+                $attendee->MemberID = $member_id;
+                $attendee->SummitID = $summit->getIdentifier();
+
+                $attendee->Tickets()->add($ticket);
+            }
+
+            $attendee->write();
+
+            // if the attendee has no more tickets we delete it
+            if ($previous_owner->Tickets()->count() == 0) {
+                $previous_owner->delete();
             }
 
             return $attendee;

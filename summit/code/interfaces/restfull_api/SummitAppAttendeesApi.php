@@ -75,17 +75,21 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
 
 
     static $url_handlers = array(
-        'GET '                     => 'getAttendees',
-        'PUT $ATTENDEE_ID!/update' => 'updateAttendee',
-        'GET member/$MEMBER_ID!'   => 'getMemberData',
-        'GET company_options'      => 'getCompanySearchOptions',
+        'GET '                          => 'getAttendees',
+        'PUT $ATTENDEE_ID!/update'      => 'updateAttendee',
+        'PUT $TICKET_ID!/update_ticket' => 'updateTicket',
+        'GET member/$MEMBER_ID!'        => 'getMemberData',
+        'GET company_options'           => 'getCompanySearchOptions',
+        'GET ticket/$TICKET_ID!'        => 'getTicketData',
     );
 
     static $allowed_actions = array(
         'getAttendees',
         'updateAttendee',
+        'updateTicket',
         'getMemberData',
         'getCompanySearchOptions',
+        'getTicketData',
     );
 
     public function getAttendees(SS_HTTPRequest $request){
@@ -222,6 +226,62 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex2->getMessage(), SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getTicketData(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = Summit::get_by_id('Summit',$summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $ticket_id    = intval($request->param('TICKET_ID'));
+            $ticket       = SummitAttendeeTicket::get_by_id('SummitAttendeeTicket',$ticket_id);
+            if(is_null($ticket)) throw new NotFoundEntityException('SummitAttendeeTicket', sprintf(' id %s', $ticket_id));
+
+            echo json_encode($ticket->toMap());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function updateTicket(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id     = intval($request->param('SUMMIT_ID'));
+            $ticket_id   = intval($request->param('TICKET_ID'));
+            $ticket_data = $this->getJsonRequest();
+
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $this->summit_service->reassignTicket($summit, $ticket_id, $ticket_data['member']);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessages());
         }
         catch(Exception $ex)
         {

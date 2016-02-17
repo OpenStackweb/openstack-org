@@ -1,7 +1,7 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-        <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID %>
+        <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID, Active=2 %>
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
     <div id="page-content-wrapper" class="edit-attendee-wrapper" >
@@ -21,6 +21,9 @@
                     <div class="col-md-4 member_container">
                         <label for="member">Member</label><br>
                         <input id="member" />
+                    </div>
+                    <div id="member_error" class="col-md-4" style="display:none">
+                        Please select a member
                     </div>
                 </div>
             </div>
@@ -79,7 +82,7 @@
                         <label>Tickets</label><br>
                         <% if $Attendee.Tickets %>
                             <% loop $Attendee.Tickets %>
-                                $ExternalOrderId <br>
+                                <a href="" class="ticket" data-toggle="modal" data-target="#ticket-modal" data-ticket="{$ID}">$ExternalOrderId </a>
                             <% end_loop %>
                         <% else %>
                             <i>None</i>
@@ -133,7 +136,48 @@
         </form>
     </div>
 
-    <script>
+    <div id="ticket-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ticket Details</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="ticket_id" />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>External ID</label><br>
+                            <div id="ticket-external"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>External Attendee ID</label><br>
+                            <div id="ticket-external-attendee"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Bought Date</label><br>
+                            <div id="ticket-bought-date"></div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 ticket_member_container">
+                            <label for="ticket-member">Assign to another Member</label><br>
+                            <input id="ticket-member" />
+                        </div>
+                        <div id="ticket_member_error" class="col-md-6" style="display:none">
+                            Please select a member
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="save_ticket" type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
         var member = {};
         var company = {};
         <% if $Attendee.Member %>
