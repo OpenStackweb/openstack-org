@@ -53,8 +53,8 @@
                         <label for="select_unpublished_events_status">Status</label>
                         <select id="select_unpublished_events_status" name="select_unpublished_events_status" style="width: 70%" value="approved">
                             <option value=''>-- Select A Status --</option>
-                            <option value='approved' selected>Approved</option>
-                            <option value=''>Not Approved</option>
+                            <option value='accepted' selected>Accepted</option>
+                            <option value=''>Unaccepted</option>
                         </select>
                     </div>
                 </div>
@@ -93,6 +93,7 @@
             $(function() {
                 $('#select_unpublished_events_source').change(function(e){
                     var source = $('#select_unpublished_events_source').val();
+                    var second_source = '';
                     var search_term = $('#unpublished_search_term').val();
                     var status = $('#select_unpublished_events_status').val();
                     var order = $('#sort_list').val();
@@ -110,12 +111,14 @@
                             $('#event_type_col').hide();
                             $('#event_status_col').show();
                             $('#sort_list').append('<option value="SummitSelectedPresentation.Order">Slot</option>');
+                            second_source = $('#select_track_list').val();
                             break;
                         case 'events':
                             $('#track_list_col').hide();
                             $('#event_type_col').show();
                             $('#event_status_col').hide();
                             $("#sort_list option[value='SummitSelectedPresentation.Order']").remove();
+                            second_source = $('#select_event_type').val();
                             break;
                         default:
                             $('#track_list_col').hide();
@@ -125,7 +128,7 @@
                             break;
                     }
 
-                    self.doFilter(source,'',status,search_term,order);
+                    self.doFilter(source,second_source,status,search_term,order);
                 });
 
                 $('#select_track_list').change(function(e){
@@ -163,10 +166,17 @@
                     var status        = $('#select_unpublished_events_status').val();
                     var track_list_id = $('#select_track_list').val();
                     var search_term = $('#unpublished_search_term').val();
+                    var event_type_id = $('#select_event_type').val();
                     var order = $('#sort_list').val();
 
                     if (source) {
-                        self.doFilter(source,track_list_id,status,search_term,order);
+                        var second_source = '';
+                        if (source == 'events') {
+                            second_source = event_type_id;
+                        } else if (source == 'tracks') {
+                            second_source = track_list_id;
+                        }
+                        self.doFilter(source,second_source,status,search_term,order);
                     }
                 });
 

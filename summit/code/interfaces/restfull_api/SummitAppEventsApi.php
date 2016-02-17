@@ -99,8 +99,8 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
             $search_term   = isset($query_string['search_term']) ? Convert::raw2sql($query_string['search_term']) : null;
             $status        = isset($query_string['status']) ? Convert::raw2sql($query_string['status']) : null;
-            $track_list_id = isset($query_string['track_list_id']) ? Convert::raw2sql($query_string['track_list_id']) : null;
-            $event_type_id = isset($query_string['event_type_id']) ? Convert::raw2sql($query_string['event_type_id']) : null;
+            $track_list_id = isset($query_string['track_list_id']) ? intval($query_string['track_list_id']) : null;
+            $event_type_id = isset($query_string['event_type_id']) ? intval($query_string['event_type_id']) : null;
             $page          = isset($query_string['page']) ? intval($query_string['page']) : 1;
             $page_size     = isset($query_string['page_size']) ? intval($query_string['page_size']) : 10;
             $order         = isset($query_string['order']) ? Convert::raw2sql($query_string['order']) : null;
