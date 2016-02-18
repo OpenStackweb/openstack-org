@@ -23,7 +23,7 @@ final class SummitAttendeeCreateMembershipAnnouncementEmailSender implements IMe
     public function send($subject)
     {
 
-        $email_template = PermamailTemplate::get_by_identifier('summit-attendee-create-membership-invitation');
+        $email_template = PermamailTemplate::get_by_identifier(SUMMIT_ATTENDEE_CREATE_MEMBERSHIP_INVITATION_EMAIL_TEMPLATE);
         if (is_null($email_template)) {
             return;
         }
@@ -33,7 +33,8 @@ final class SummitAttendeeCreateMembershipAnnouncementEmailSender implements IMe
         $email->setUserTemplate('summit-attendee-create-membership-invitation')->populateTemplate(
             array
             (
-                'Email' => $subject,
+                'Email'  => $subject,
+                'Summit' => Summit::get_active()
             )
         )
         ->send();

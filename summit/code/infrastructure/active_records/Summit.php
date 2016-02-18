@@ -1388,4 +1388,13 @@ SQL;
     {
         return $this->Events()->filter('Published', 1);
     }
+
+    /**
+     * @return string
+     */
+    public function Month()
+    {
+        $begin  = new DateTime($this->getBeginDate());
+        return $begin->format('F');
+    }
 }

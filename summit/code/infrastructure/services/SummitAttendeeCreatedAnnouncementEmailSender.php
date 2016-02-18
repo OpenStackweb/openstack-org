@@ -25,7 +25,7 @@ final class SummitAttendeeCreatedAnnouncementEmailSender implements IMessageSend
         if(!$subject instanceof ISummitAttendee) return;
 
 
-        $email_template = PermamailTemplate::get_by_identifier('summit-attendee-created');
+        $email_template = PermamailTemplate::get_by_identifier(SUMMIT_ATTENDEE_CREATED_EMAIL_TEMPLATE);
         if(is_null($email_template)) return;
 
         $email = EmailFactory::getInstance()->buildEmail(null, $subject->getMember()->getEmail());
@@ -34,6 +34,7 @@ final class SummitAttendeeCreatedAnnouncementEmailSender implements IMessageSend
             array
             (
                 'Attendee' => $subject,
+                'Summit'   => Summit::get_active()
             )
         )
         ->send();

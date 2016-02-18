@@ -205,4 +205,9 @@ interface ISummit extends IEntity
     */
     public function isPresentationEditionAllowed();
 
+    /**
+     * @return string
+     */
+    public function Month();
+
 }
