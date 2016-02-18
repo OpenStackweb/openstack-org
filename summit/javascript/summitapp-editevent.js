@@ -100,7 +100,8 @@ $(document).ready(function(){
         ignore: [],
         rules: {
             title: {required: true},
-            description: {required: true}
+            description: {required: true},
+            short_description: {required: true}
         },
         focusInvalid: false,
         invalidHandler: function (form, validator) {
@@ -130,6 +131,7 @@ $(document).ready(function(){
         var request = {
             title: $('#title').val(),
             description: tinyMCE.get('description').getContent(),
+            short_description: tinyMCE.get('short_description').getContent(),
             location_id: $('#location').val(),
             start_date: $('#start_date').val(),
             end_date: $('#end_date').val(),

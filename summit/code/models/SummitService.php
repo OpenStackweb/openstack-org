@@ -136,6 +136,7 @@ class SummitService
 
             $event->Title = $event_data['title'];
             $event->Description = $event_data['description'];
+            $event->ShortDescription = $event_data['short_description'];
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack = $event_data['allow_feedback'];

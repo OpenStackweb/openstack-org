@@ -24,6 +24,10 @@
                 <label for="description">Description</label>
                 <textarea id="description" class="form-control">{$Event.Description}</textarea>
             </div>
+            <div class="form-group">
+                <label for="short_description">Short Description</label>
+                <textarea id="short_description" class="form-control">{$Event.ShortDescription}</textarea>
+            </div>
 
             <div class="form-group">
                 <label>Location</label><br>

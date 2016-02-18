@@ -50,7 +50,8 @@ class Presentation extends SummitEvent implements IPresentation
 
     private static $defaults = array
     (
-        'TrackChairGivenOrder' => 0
+        'TrackChairGivenOrder' => 0,
+        'AllowFeedBack' => 1
     );
 
     private static $has_many = array
