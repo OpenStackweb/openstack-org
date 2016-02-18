@@ -66,6 +66,7 @@ final class Summit extends DataObject implements ISummit
         'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
         'Notifications'                => 'SummitPushNotification',
         'EntityEvents'                 => 'SummitEntityEvent',
+        'TrackChairs'                  => 'SummitTrackChair',
     );
 
     private static $summary_fields = array
@@ -906,6 +907,12 @@ final class Summit extends DataObject implements ISummit
             $config->removeComponentsByType('GridFieldAddNewButton');
             $gridField = new GridField('EntityEvents', 'EntityEvents', $this->EntityEvents(), $config);
             $f->addFieldToTab('Root.EntityEvents', $gridField);
+
+            //TrackChairs
+            $config = GridFieldConfig_RecordEditor::create(25);
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $gridField = new GridField('TrackChairs', 'TrackChairs', $this->TrackChairs(), $config);
+            $f->addFieldToTab('Root.TrackChairs', $gridField);
         }
         return $f;
     }
@@ -1396,5 +1403,34 @@ SQL;
     {
         $begin  = new DateTime($this->getBeginDate());
         return $begin->format('F');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSelectionOpen()
+    {
+        $start_date = $this->getField('SelectionBeginDate');
+        $end_date   = $this->getField('SelectionEndDate');
+
+        if(empty($start_date) || empty($end_date)) return false;
+        $start_date   = new DateTime($start_date, new DateTimeZone('UTC'));
+        $end_date     = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now          = new \DateTime('now', new DateTimeZone('UTC'));
+        return ( $now >=  $start_date && $now <= $end_date);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSelectionOver()
+    {
+        $start_date = $this->getField('SelectionBeginDate');
+        $end_date   = $this->getField('SelectionEndDate');
+
+        if(empty($start_date) || empty($end_date)) return false;
+        $end_date     = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now          = new \DateTime('now', new DateTimeZone('UTC'));
+        return ( $now >  $end_date);
     }
 }

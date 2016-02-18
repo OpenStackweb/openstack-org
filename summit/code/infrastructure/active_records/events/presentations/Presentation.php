@@ -327,11 +327,12 @@ class Presentation extends SummitEvent implements IPresentation
      * Comments are only displayed in the track chair interface.
      **/
 
-    public function addComment($commentBody, $MemberID) {
+    public function addComment($commentBody, $MemberID, $is_category_change_suggestion = false) {
         $comment = new SummitPresentationComment();
         $comment->Body = $commentBody;
         $comment->CommenterID = $MemberID;
         $comment->PresentationID = $this->ID;
+        $comment->IsCategoryChangeSuggestion = $is_category_change_suggestion;
         $comment->write();
     }
 

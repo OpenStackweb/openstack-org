@@ -30,6 +30,7 @@ final class DBMigrateTask extends MigrationTask
         'RemovePresentationDeprecatedColumnsMigration',
         'MemberEmailVerificationMigration',
         'SummitEventbriteRegistrationEmailMigration',
+        'UpdateSummitPresentationCommentChangeSuggestionMigration',
     );
 
     function up()

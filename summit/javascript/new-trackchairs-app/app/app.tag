@@ -109,7 +109,7 @@ require('./comments-list.tag')
 						<div class="row">
 							<div class="col-lg-6">
 								<strong>Category:</strong> { currentPresentation.category_name }
-								<br/><a data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a>
+								<br/><a if="{ !(summit.on_selection_period || summit.is_selection_period_over) }" data-toggle="modal" data-target="#myModal" href="#"><i class="fa fa-random"></i>&nbsp;Suggest Category Change</a>
 							</div>
 
 							<div class="col-lg-6">

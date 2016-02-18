@@ -120,10 +120,13 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         }
 
         $data = $summit->toJSON();
-        $data['status'] = $summit->getStatus();
-        $data['categories'] = array();
-        $data['track_chair'] = $this->trackChairDetails();
+        $data['status']                   = $summit->getStatus();
+        $data['on_voting_period']         = $summit->isVotingOpen();
+        $data['on_selection_period']      = $summit->isSelectionOpen();
+        $data['is_selection_period_over'] = $summit->isSelectionOver();
 
+        $data['categories']          = array();
+        $data['track_chair']         = $this->trackChairDetails();
 
         $chairlist = array();
         $categoriesIsChair = array();
@@ -172,10 +175,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     {
         // Gets a list of presentations that have chair comments
 
-        $page_size = $r->getVar('page_size') ?: 10;
-        if ($page_size > 10) {
-            $page_size = 10;
-        }
+        $page_size = $r->getVar('page_size') ?: 20;
 
         $page = $r->getVar('page') ?: 1;
 
@@ -343,10 +343,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
         $summitID = Summit::get_active()->ID;
 
-        $page_size = $r->getVar('page_size') ?: 10;
-        if ($page_size > 10) {
-            $page_size = 10;
-        }
+        $page_size = $r->getVar('page_size') ?: 20;
 
         $page = $r->getVar('page') ?: 1;
 
@@ -403,10 +400,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
         // Gets a list of presentations that have chair comments
 
-        $page_size = $r->getVar('page_size') ?: 10;
-        if ($page_size > 10) {
-            $page_size = 10;
-        }
+        $page_size = $r->getVar('page_size') ?: 20;
+
 
         $page = $r->getVar('page') ?: 1;
 
@@ -816,7 +811,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         $comments = array();
 
-        foreach ($p->Comments() as $c) {
+        foreach ($p->Comments()->filter('IsCategoryChangeSuggestion', 0) as $c) {
             $comment = $c->toJSON();
             $comment['name'] = $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname;
             $comments[] = $comment;
@@ -957,7 +952,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $m = Member::currentUser();
             $comment = $m->FirstName . ' ' . $m->Surname . ' suggested that this presentation be moved to the category ' . $c->Title . '.';
 
-            $this->presentation->addComment($comment, Member::currentUserID());
+            $this->presentation->addComment($comment, Member::currentUserID(), true);
 
             return new SS_HTTPResponse("change request made.", 200);
 

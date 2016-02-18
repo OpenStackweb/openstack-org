@@ -210,4 +210,13 @@ interface ISummit extends IEntity
      */
     public function Month();
 
+    /**
+     * @return bool
+     */
+    public function isSelectionOpen();
+
+    /**
+     * @return bool
+     */
+    public function isSelectionOver();
 }
