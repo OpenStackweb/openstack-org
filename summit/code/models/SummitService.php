@@ -80,9 +80,9 @@ class SummitService
                     throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
                 }
                 // validate speaker conflict
-                if($event instanceof Presentation) {
+                if ($event instanceof Presentation && $c_event instanceof Presentation && $event->ID != $c_event->ID) {
                     foreach ($event->Speakers() as $speaker) {
-                        if ($c_event->Speakers()->find('ID', $speaker->ID) && $event->ID != $c_event->ID) {
+                        if ($c_event->Speakers()->find('ID', $speaker->ID)) {
                             throw new EntityValidationException("You can't publish on this timeframe, " . $speaker->getName() . " is presenting in room '" . $c_event->getLocationName() . "' at this time.");
                         }
                     }
