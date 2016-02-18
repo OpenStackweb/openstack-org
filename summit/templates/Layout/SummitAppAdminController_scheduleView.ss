@@ -25,8 +25,12 @@
                     tracks : {},
                     presentation_levels: {},
                     current_user: null,
-                    track_lists: {}
+                    track_lists: {},
+                    status_options: [],
                  };
+                 <% loop $PresentationStatusOptions %>
+                     summit.status_options.push("{$Status}");
+                 <% end_loop %>
                  <% loop $Summit.Categories %>
                  summit.tracks[{$ID}] =
                  {

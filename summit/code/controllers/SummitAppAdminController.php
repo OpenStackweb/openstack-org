@@ -378,7 +378,8 @@ class SummitAppAdminController extends Page_Controller
 
         return $this->getViewer('scheduleView')->process($this, array
             (
-                'Summit' => $summit
+                'Summit' => $summit,
+                'PresentationStatusOptions' => Presentation::getStatusOptions(),
             )
         );
     }

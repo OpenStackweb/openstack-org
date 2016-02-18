@@ -52,9 +52,8 @@
                     <div id="event_status_col">
                         <label for="select_unpublished_events_status">Status</label>
                         <select id="select_unpublished_events_status" name="select_unpublished_events_status" style="width: 70%" value="approved">
-                            <option value=''>-- Select A Status --</option>
-                            <option value='accepted' selected>Accepted</option>
-                            <option value=''>Unaccepted</option>
+                            <option value=''>All</option>
+                            <option each="{ status in summit.status_options }" value='{ status }'>{ status }</option>
                         </select>
                     </div>
                 </div>
@@ -212,7 +211,7 @@
                     }
                 });
 
-                self.doFilter('presentations', '','approved','','SummitEvent.Title');
+                self.doFilter('presentations', '','','','SummitEvent.Title');
             });
         });
 

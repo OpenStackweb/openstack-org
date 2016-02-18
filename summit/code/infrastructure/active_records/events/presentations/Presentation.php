@@ -491,6 +491,17 @@ class Presentation extends SummitEvent implements IPresentation
         return $list;
     }
 
+    public static function getStatusOptions()
+    {
+        $statuses = singleton('Presentation')->config()->status_options;
+        $list = new ArrayList();
+        foreach($statuses as $k => $v)
+        {
+            $list->add(new ArrayData(array('Status'=> $v)));
+        }
+        return $list;
+    }
+
     public function getCMSFields()
     {
         $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
