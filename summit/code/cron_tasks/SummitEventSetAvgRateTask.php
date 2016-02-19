@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SummitEventSetAvgRate extends CronTask
+final class SummitEventSetAvgRateTask extends CronTask
 {
 
     /**
@@ -32,7 +32,7 @@ final class SummitEventSetAvgRate extends CronTask
             }
 
             foreach ($events as $event) {
-                $processed_events++;
+
                 $rate_sum = 0;
                 $rate_count = 0;
                 foreach ($event->Feedback as $feedback) {
@@ -40,11 +40,15 @@ final class SummitEventSetAvgRate extends CronTask
                     $rate_sum = $rate_sum + $feedback->Rate;
                 }
 
-                $rate_avg = ($rate_count > 0) ? ($rate_sum/$rate_count) : 0;
+                $avg_rate = ($rate_count > 0) ? ($rate_sum/$rate_count) : 0;
 
                 try {
-                    $event->setAvgRate(round($rate_avg,2));
+                    $avg_rate = round($avg_rate,2);
+                    $old_avg_rate = $event->getAvgRate();
+                    if(floatval($avg_rate) === floatval($old_avg_rate)) continue;
+                    $event->setAvgRate($avg_rate);
                     $event->write(true);
+                    $processed_events++;
                 } catch (Exception $ex) {
                     SS_Log::log($ex, SS_Log::ERR);
                     echo $ex->getMessage();

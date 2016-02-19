@@ -21,19 +21,24 @@ class EntityValidationException extends Exception
     /**
      * @var array
      */
-    private $messages;
+    private $messages = array();
 
     public function __construct($messages)
     {
-
         if (is_array($messages)) {
-            $this->messages = $messages;
+            foreach($messages as $msg) {
+                if(!isset($msg['message']))
+                {
+                    $aux = array();
+                    $aux['message'] = $msg;
+                    $msg = $aux;
+                }
+                array_push($this->messages, $msg);
+            }
         }
         if (is_string($messages)) {
             $this->messages = self::buildMessage($messages);
         }
-
-
         parent::__construct($this->__toString());
     }
 

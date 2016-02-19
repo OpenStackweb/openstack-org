@@ -323,6 +323,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
+        $f->addFieldsToTab('Root.Main', new ReadonlyField('AvgFeedbackRate', 'AvgFeedbackRate'));
 
         $locations = SummitAbstractLocation::get()
             ->filter('SummitID', $summit_id )
@@ -385,6 +386,7 @@ class SummitEvent extends DataObject implements ISummitEvent
             // feedback
             $config = new GridFieldConfig_RecordEditor(100);
             $config->removeComponentsByType('GridFieldAddNewButton');
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $feedback = new GridField('Feedback', 'Feedback', $this->Feedback(), $config);
             $f->addFieldToTab('Root.Feedback', $feedback);
         }

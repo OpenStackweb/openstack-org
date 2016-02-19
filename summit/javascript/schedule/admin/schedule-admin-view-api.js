@@ -98,7 +98,7 @@ schedule_admin_view_api.publish = function (summit_id, event, is_published_event
 
             swal({
                 title: 'Validation error',
-                text: response.messages[0],
+                text: response.messages[0].message,
                 type: 'warning'
             },
                 function(){
