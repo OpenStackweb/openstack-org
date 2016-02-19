@@ -4,8 +4,23 @@
 </raw>
 
 <attendee-list>
+
+    <div class="row">
+        <div class="col-md-6" style="margin:0  0 20px 0;">
+            <div class="input-group" style="width: 100%;">
+                <input data-rule-required="true" data-rule-minlength="3" type="text" id="attendees_search_term" class="form-control input-global-search" placeholder="Search by Name">
+                <span class="input-group-btn" style="width: 5%;">
+                    <button class="btn btn-default btn-global-search" id="search_attendees"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-default btn-global-search-clear" onclick={ clearClicked }>
+                        <i class="fa fa-times"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-default">
-        <div class="panel-heading">Attendee</div>
+        <div class="panel-heading">Attendees ({ page_data.total_items })</div>
 
         <table id="attendees-table" class="table">
             <thead>
@@ -49,17 +64,39 @@
                 totalPages: total_pages,
                 numberOfPages: 10,
                 onPageChanged: function(e,oldPage,newPage){
-                    var summit_id = $('#summit_id').val();
-                    $.getJSON('api/v1/summits/'+self.summit_id+'/attendees',{page:newPage, items:self.page_data.limit},function(data){
-                        self.attendees = data;
-                        self.page_data.page = newPage;
-                        self.update();
-                    });
+                    self.getAttendees(newPage,search_term);
                 }
             }
 
             $('#attendees-pager').bootstrapPaginator(options);
+
+            $('#search_attendees').click(function(e) {
+                var search_term = $('#attendees_search_term').val();
+                self.getAttendees(1,search_term);
+            });
+
+            $("#attendees_search_term").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    $('#search_attendees').click();
+                }
+            });
         });
+
+        getAttendees(page,search_term) {
+            $('body').ajax_loader();
+
+            $.getJSON('api/v1/summits/'+self.summit_id+'/attendees',{page:page, items:self.page_data.limit, term: search_term},function(data){
+                self.attendees = data;
+                self.page_data.page = page;
+                self.update();
+                $('body').ajax_loader('stop');
+            });
+        }
+
+        clearClicked(e){
+            $('#attendees_search_term').val('');
+            self.getAttendees(1,'');
+        }
 
     </script>
 

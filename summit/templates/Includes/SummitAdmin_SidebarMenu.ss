@@ -1,15 +1,12 @@
 <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-    <li class="active">
+    <li <% if $Active == 1 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/dashboard"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
     </li>
-    <li>
+    <li <% if $Active == 2 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/attendees"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Attendees</a>
     </li>
-    <li>
-        <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar fa-stack-1x "></i></span>Events</a>
-        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-            <li><a href="$AdminLink/$SummitID/events/schedule"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar-check-o fa-stack-1x "></i></span>Schedule</a></li>
-        </ul>
+    <li <% if $Active == 3 %> class="active" <% end_if %>>
+        <a href="$AdminLink/$SummitID/events/schedule"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar fa-stack-1x "></i></span>Schedule</a>
     </li>
     <!--
     <li>

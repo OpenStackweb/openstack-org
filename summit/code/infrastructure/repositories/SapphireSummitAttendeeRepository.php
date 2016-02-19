@@ -44,6 +44,30 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
     }
 
     /**
+     * @param string $search_term
+     * @param int $page
+     * @param int $page_size
+     * @param int $summit_id
+     * @return array
+     */
+    public function findAttendeesBySummit($search_term, $page, $page_size, $summit_id)
+    {
+        $where_clause = "SummitAttendee.SummitID = {$summit_id} ";
+        if (!empty($search_term)) {
+            $where_clause .=   "AND (Member.FirstName LIKE '{$search_term}%'
+                                OR Member.Surname LIKE '{$search_term}%'
+                                OR CONCAT(Member.FirstName,' ',Member.Surname) LIKE '{$search_term}%') ";
+        }
+
+        $list = SummitAttendee::get()->leftJoin("Member","Member.ID = SummitAttendee.MemberID")->where($where_clause);
+
+        $offset = ($page - 1 ) * $page_size;
+        $data   = $list->limit($page_size, $offset);
+
+        return $data;
+    }
+
+    /**
      * @param IEntity $entity
      * @return int|void
      */

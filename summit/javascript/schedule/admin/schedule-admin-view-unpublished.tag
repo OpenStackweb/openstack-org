@@ -1,13 +1,23 @@
 <schedule-admin-view-unpublished>
     <div if={ Object.keys(store.all()).length === 0 } class="no_matches">Sorry, found no matches for your search.</div>
-    <div if={ Object.keys(store.all()).length > 0 } >
+    <div class="unpublished-events-list-container" if={ Object.keys(store.all()).length > 0 } >
         <ul class="list-unstyled unpublished-events-list">
             <li each="{ key, e in store.all() }">
                 <schedule-admin-view-unpublished-event data="{ e }" minute_pixels="{ parent.minute_pixels }" interval="{ parent.interval }"></schedule-admin-view-unpublished-event>
             </li>
         </ul>
         <div>
-            <ul id="unpublished-events-pager"></ul>
+            <div class="paginator">
+                <ul id="unpublished-events-pager"></ul>
+            </div>
+            <div class="items_per_page">
+                <select class="form-control" id="page-size">
+                    <option value="10">10 items</option>
+                    <option value="20">20 items</option>
+                    <option value="50">50 items</option>
+                    <option value="0">Show All</option>
+                </select>
+            </div>
         </div>
     </div>
     <script>
@@ -24,6 +34,11 @@
             $( window ).resize(function() {
                  self.slot_width = $('.time-slot-container').width();
                  $('.event-unpublished').css('width', self.slot_width);
+            });
+
+            $("body").on("change","#page-size",function(){
+                $('body').ajax_loader();
+                self.dispatcher.unpublishedEventsPageChanged(1);
             });
         });
 

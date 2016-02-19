@@ -54,8 +54,12 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
                         ->sort("TRIM({$order})");
 
         $count     = intval($list->count());
-        $offset    = ($page - 1 ) * $page_size;
-        $data      = $list->limit($page_size, $offset);
+        if ($page_size) {
+            $offset    = ($page - 1 ) * $page_size;
+            $data      = $list->limit($page_size, $offset);
+        } else {
+            $data = $list;
+        }
 
         return array($page, $page_size, $count, $data);
     }
@@ -98,8 +102,13 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
                 ->sort("TRIM({$order})");
 
         $count     = intval($list->count());
-        $offset    = ($page - 1 ) * $page_size;
-        $data      = $list->limit($page_size, $offset);
+        if ($page_size) {
+            $offset    = ($page - 1 ) * $page_size;
+            $data      = $list->limit($page_size, $offset);
+        } else {
+            $data = $list;
+        }
+
         return array($page, $page_size, $count,  $data);
     }
 }

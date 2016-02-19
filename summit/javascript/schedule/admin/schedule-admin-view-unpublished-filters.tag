@@ -218,18 +218,20 @@
         doFilter(source, second_source, status, search_term, order)
         {
             $('body').ajax_loader();
-            self.api.getUnpublishedEventsBySource(self.summit.id, source ,second_source, status, search_term, order);
+            var page_size = $('#page-size').val();
+            self.api.getUnpublishedEventsBySource(self.summit.id, source ,second_source, status, search_term, order, 1, page_size);
         }
 
         self.dispatcher.on(self.dispatcher.UNPUBLISHED_EVENTS_PAGE_CHANGED, function(page_nbr)
         {
-            var source       = $('#select_unpublished_events_source').val();
+            var source        = $('#select_unpublished_events_source').val();
             var status        = $('#select_unpublished_events_status').val();
             var track_list_id = $('#select_track_list').val();
-            var search_term = $('#unpublished_search_term').val();
-            var order = $('#sort_list').val();
+            var search_term   = $('#unpublished_search_term').val();
+            var order         = $('#sort_list').val();
+            var page_size     = $('#page-size').val();
 
-            self.api.getUnpublishedEventsBySource(self.summit.id, source ,track_list_id, status, search_term, order, page_nbr, 10);
+            self.api.getUnpublishedEventsBySource(self.summit.id, source ,track_list_id, status, search_term, order, page_nbr, page_size);
         });
 
         clearClicked(e){

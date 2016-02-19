@@ -164,13 +164,15 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                 array_push($events, $entry);
             }
 
+            $total_pages = ($page_size) ? ceil($count/$page_size) : 1;
+
             return $this->ok(
                 array
                 (
                     'data'        => $events,
                     'page'        => $page,
                     'page_size'   => $page_size,
-                    'total_pages' => ceil($count/$page_size)
+                    'total_pages' => $total_pages
                 )
             );
         }

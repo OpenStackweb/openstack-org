@@ -97,17 +97,13 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         {
             $query_string = $request->getVars();
             $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
-            $ipp          = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            if ($page && $ipp) {
-                $offset = ($page - 1) * $ipp;
-                $attendees = $summit->Attendees()->limit($ipp,$offset);
-            } else {
-                $attendees = $summit->Attendees();
-            }
+            $attendees = $this->summitattendee_repository->findAttendeesBySummit($search_term,$page,$page_size,$summit_id);
 
             $attendees_array = array();
 
