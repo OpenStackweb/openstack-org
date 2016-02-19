@@ -28,12 +28,14 @@
         this.api                = opts.api;
         this.dispatcher         = opts.dispatcher;
         this.store              = opts.unpublished_store;
+        this.slot_width         = $('.time-slot-container').width();
         var self                = this;
 
         this.on('mount', function() {
+
             $( window ).resize(function() {
-                 self.slot_width = $('.time-slot-container').width();
-                 $('.event-unpublished').css('width', self.slot_width);
+                self.slot_width = $('.time-slot-container').width();
+                $('.event-unpublished').css('width', self.slot_width);
             });
 
             $("body").on("change","#page-size",function(){
@@ -80,12 +82,16 @@
             });
 
             self.createDraggable($(".event-unpublished"));
-            $('.event-unpublished').css('width', $('.time-slot-container').width());
+
+            $('.event-unpublished').css('width', self.slot_width);
+
             $('body').ajax_loader('stop');
         });
 
         createDraggable(selector) {
             selector.draggable({
+                scroll: false,
+                appendTo: "body",
                 containment: "document",
                 cursor: "move",
                 helper: "clone",
