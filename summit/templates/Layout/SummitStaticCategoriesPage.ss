@@ -96,13 +96,10 @@
                                 Ops Summit
                             </a>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             <a href="#arch" class="session-chart-category ten">
                                 Architecture &amp; Operations
                             </a>
-                        </div>
-                        <div class="col-xs-1">
-                            <div class="session-chart-empty">&nbsp;</div>
                         </div>
                         <div class="col-xs-1">
                             <div class="session-chart-empty">&nbsp;</div>
