@@ -302,7 +302,7 @@ class Page_Controller extends ContentController
         foreach($css_files as $css_file)
             Requirements::css($css_file);
 
-        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700', 'stylesheet');
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
 
         Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
         Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
