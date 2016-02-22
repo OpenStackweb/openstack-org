@@ -27,23 +27,23 @@ require('./comments-list.tag')
     	<rg-toast toasts="{ toasts }" position="bottomright"></rg-toast>
 
     	<!-- Tutorial -->
-     	<div if={ DisplayMode === 'tutorial' }>
+     	<div show={ DisplayMode === 'tutorial' }>
     		<tutorial/>
     	</div>
 
     	<!-- Chair Directory -->
-     	<div if={ DisplayMode === 'directory' }>
+     	<div show={ DisplayMode === 'directory' }>
     		<chairdirectory chairs="{ summit.chair_list }" />
     	</div>
 
     	<!-- Chair Selections -->
-    	<div if={ DisplayMode === 'selections' }>
+    	<div show={ DisplayMode === 'selections' }>
     		<selection-manager categories="{ summit.categories }" api="{ this.opts }" visible="{ DisplayMode === 'selections' }"/>
     	</div>
     	<!-- End Chair Selections -->
 
     	<!-- Change Requests Browser -->
-    	<div if={ DisplayMode === 'requests' }>
+    	<div show={ DisplayMode === 'requests' }>
     		<change-requests api="{ this.opts }"/>
     	</div>
     	<!-- Change Requests Browser -->
@@ -54,8 +54,8 @@ require('./comments-list.tag')
     	</div>
     	<!-- Change Requests Browser -->
 
-    	<!-- Presntation Browser -->
-    	<div if={ DisplayMode === 'browse' } class="row">
+    	<!-- Presentation Browser -->
+    	<div show={ DisplayMode === 'browse' } class="row">
 		    <div class="{ col-lg-4: details } { col-lg-12: !details }">
 	        	<div class="well well-sm">
 	        		<h4>{ summit.title } Presentation Submissions</h4>
@@ -467,7 +467,7 @@ require('./comments-list.tag')
 		})
 
 		clearSearch() {
-			document.getElementById('app-search').value='';
+			$('#app-search').val('');
 			self.quantity = 0
 			self.searchmode = false
 			self.presentation_query = null;

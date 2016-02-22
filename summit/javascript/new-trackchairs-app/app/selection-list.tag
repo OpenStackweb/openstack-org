@@ -134,11 +134,10 @@ var Sortable = require('sortablejs')
 
 
 		api.on('selections-ready', function(result){
-
-			var simpleList = document.getElementById(self.opts.listid)
-
-			if(simpleList) {
-				var sortable = Sortable.create(simpleList,{
+			console.log('selections-ready list id '+self.opts.listid);
+			var simpleList = $('#'+self.opts.listid)
+			if(simpleList.length > 0) {
+				var sortable = Sortable.create(simpleList[0],{
 					group: { name: "selection-list-group", pull: "clone", put: true },
 					onUpdate: function(evt){
 
@@ -203,6 +202,9 @@ var Sortable = require('sortablejs')
 
 		})
 
+		this.on('update', function(){
+			console.log('selection-list update')
+		})
 
 		loadPresentation(e) {
 			self.parent.parent.parent.clearSearch()
