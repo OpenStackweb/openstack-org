@@ -106,7 +106,9 @@
 
 .software-main-wrapper {
     background: #edf2f7;
-    padding: 75px 0 65px; }
+    padding: 75px 0 65px; 
+    margin-bottom: -50px;
+}
 .software-main-wrapper .inner-software {
     background: white;
     border-radius: 4px;
