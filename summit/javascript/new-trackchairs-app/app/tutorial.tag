@@ -4,5 +4,9 @@
 	<h3>Step Two: Make Presentation Selections</h3>
 
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/HDva5OMP5Tk" frameborder="0" allowfullscreen></iframe>
+	
+	<h3>How to merge presentations / suggest a panel</h3>
+	
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/NGexUBtOGJg" frameborder="0" allowfullscreen></iframe>
 
 </tutorial>
