@@ -12,6 +12,7 @@
     <div class="row">
         <div class="col-sm-10 col-sm-push-1 osdays-intro">
             $OpenstackDaysContent
+            <% if $OpenstackDaysVideoID1 && $OpenstackDaysVideoID2 %>
             <div class="row">
                 <div class="col-xs-6">
                     <div class="video">
@@ -30,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            <% end_if %>
         </div>
     </div>
 </div>
