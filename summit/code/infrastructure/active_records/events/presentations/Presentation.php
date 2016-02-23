@@ -388,7 +388,7 @@ class Presentation extends SummitEvent implements IPresentation
             // See if the presentation has already been assigned
             $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID)->first();
 
-            if ($AlreadyAssigned->exists()) {
+            if (!is_null($AlreadyAssigned)) {
                 $AlreadyAssigned->delete();
             }
         }
