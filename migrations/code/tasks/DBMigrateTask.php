@@ -31,6 +31,7 @@ final class DBMigrateTask extends MigrationTask
         'MemberEmailVerificationMigration',
         'SummitEventbriteRegistrationEmailMigration',
         'UpdateSummitPresentationCommentChangeSuggestionMigration',
+        'MigrateToInnoDBMyISAMTablesMigration',
     );
 
     function up()
