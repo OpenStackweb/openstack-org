@@ -67,6 +67,7 @@ final class Summit extends DataObject implements ISummit
         'Notifications'                => 'SummitPushNotification',
         'EntityEvents'                 => 'SummitEntityEvent',
         'TrackChairs'                  => 'SummitTrackChair',
+        'PresentationPriorities'	   => 'PresentationPriority'
     );
 
     private static $summary_fields = array
@@ -1288,6 +1289,23 @@ SQL;
         }
 
         return new ArrayList($list);
+    }
+
+    public function generatePresentationPriorities () {
+    	if($this->PresentationPriorities()->exists()) {
+    		$this->PresentationPriorities()->removeAll();
+    	}
+    	$i = 0;
+    	while ($i < 100) {
+    		$priority = PresentationPriority::create([
+    			'SummitID' => $this->ID,
+    			'Priorities' => Convert::array2json(
+    					$this->Presentations()->sort('RAND()')->column('ID')
+    				)
+    		]);
+    		$priority->write();
+    		$i++;
+    	}
     }
 
     /**

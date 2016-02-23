@@ -4,14 +4,19 @@ class PresentationPriority extends DataObject
 {
 
 	private static $db = array (
-		'Priority' => 'Int'
+		'Priorities' => 'Text'
 	);
 
 
 	private static $has_one = array (
-		'Presentation' => 'Presentation',
-		'Member' => 'Member'
+		'Summit' => 'Summit',		
 	);
 
+	private static $has_many = array (
+		'Members' => 'Member'
+	);
 
+	public function getPriorityList () {
+		return Convert::json2array($this->Priorities);
+	}
 }
