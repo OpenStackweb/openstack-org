@@ -56,8 +56,8 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/javascript/speaker-voting.js');
 
         // Sanity check to ensure the priorities have been generated
-        if(!Summit::get_active()->PresentationPriorities()->exists()) {
-        	Summit::get_active()->generatePresentationPriorities();
+        if(!Summit::get_active()->RandomVotingLists()->exists()) {
+        	Summit::get_active()->generateVotingLists();
         }
     }
 

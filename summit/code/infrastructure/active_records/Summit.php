@@ -44,6 +44,7 @@ final class Summit extends DataObject implements ISummit
 		'forcephase',
 		'setasactive',
 		'resetvotes',
+		'handlevotinglists'
     );
 
 
@@ -67,7 +68,7 @@ final class Summit extends DataObject implements ISummit
         'Notifications'                => 'SummitPushNotification',
         'EntityEvents'                 => 'SummitEntityEvent',
         'TrackChairs'                  => 'SummitTrackChair',
-        'PresentationPriorities'	   => 'PresentationPriority'
+        'RandomVotingLists'	   		   => 'PresentationRandomVotingList'
     );
 
     private static $summary_fields = array
@@ -697,7 +698,9 @@ final class Summit extends DataObject implements ISummit
         $f = new FieldList(
             $rootTab = new TabSet("Root",   $tabMain = new Tab('Main'))
         );
-
+        if($this->RandomVotingLists()->exists()) {
+        	$f->addFieldToTab('Root.Main', HeaderField::create('The presentations in this summit have been randomised for voting', 4));
+        }
         $f->addFieldToTab('Root.Main',new TextField('Title','Title'));
         $f->addFieldToTab('Root.Main',$link = new TextField('Link','Summit Page Link'));
         $link->setDescription('The link to the site page for this summit. Eg: <em>/summit/vancouver-2015/</em>');
@@ -937,9 +940,23 @@ final class Summit extends DataObject implements ISummit
     				->setSuccessMessage('All votes have been reset'),
     			BetterButtonCustomAction::create('setasactive', 'Set as active')
     				->setRedirectType(BetterButtonCustomAction::REFRESH)
-    				->setSuccessMessage('Summit is now active')
+    				->setSuccessMessage('Summit is now active')    			
     		]));
     	}
+
+    	$text = $this->RandomVotingLists()->exists() ? "Regenerate random voting order" : "Generate random voting order";
+    	$f->push($random = BetterButtonCustomAction::create(
+    			'handlevotinglists',
+    			$text
+    		)
+    		->setRedirectType(BetterButtonCustomAction::REFRESH)
+    		->setSuccessMessage(Summit::config()->random_list_count . " random incarnations created")
+    	);
+    	if(!$this->checkRange("Voting")) {
+    		$random->setConfirmation('You are randomising the presentations outside of the voting phase. If there are more presentations coming, this could cause errors. Are you sure you want to do this?');
+    	}
+    	
+
 
     	return $f;
     }
@@ -973,6 +990,11 @@ final class Summit extends DataObject implements ISummit
     	DB::query("UPDATE Summit SET Active = 0");
     	$this->Active = 1;
     	$this->write();
+    }
+
+
+    public function handlevotinglists () {
+    	$this->generateVotingLists();
     }
 
     
@@ -1291,19 +1313,17 @@ SQL;
         return new ArrayList($list);
     }
 
-    public function generatePresentationPriorities () {
-    	if($this->PresentationPriorities()->exists()) {
-    		$this->PresentationPriorities()->removeAll();
-    	}
+    public function generateVotingLists () {
+    	DB::query("DELETE FROM PresentationRandomVotingList");
     	$i = 0;
-    	while ($i < 100) {
-    		$priority = PresentationPriority::create([
+    	while ($i < self::config()->random_voting_list_count) {
+    		$list = PresentationRandomVotingList::create([
     			'SummitID' => $this->ID,
-    			'Priorities' => Convert::array2json(
-    					$this->Presentations()->sort('RAND()')->column('ID')
-    				)
     		]);
-    		$priority->write();
+    		$list->setSequence(
+				$this->Presentations()->sort('RAND()')->column('ID')
+    		);
+    		$list->write();
     		$i++;
     	}
     }

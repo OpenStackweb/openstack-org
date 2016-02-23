@@ -20,7 +20,7 @@ class PresentationMemberExtension extends DataExtension
     );
 
     private static $has_one = array (
-    	'PresentationPriority' => 'PresentationPriority'
+    	'VotingList' => 'PresentationRandomVotingList'
     );
 
     /**
@@ -31,10 +31,10 @@ class PresentationMemberExtension extends DataExtension
     public function getRandomisedPresentations($category_id = null, $summit = null) {
         $mid = Member::currentUserID();
         if(!$summit) $summit = Summit::get_active();
-        $priority = $summit->PresentationPriorities()->filter('Members.ID', $mid);
+        $priority = $this->owner->VotingList();        
 
-        if(!$priority->exists()) {
-        	$priority = PresentationPriority::get()->filter(
+        if(!$priority->exists() || $priority->SummitID !== $summit->ID) {
+        	$priority = PresentationRandomVotingList::get()->filter(
         		'SummitID', 
         		$summit->ID
         	)
@@ -43,7 +43,7 @@ class PresentationMemberExtension extends DataExtension
         	if(!$priority) {
         		return false;        	
         	}
-        	$this->owner->PresentationPriorityID = $priority->ID;
+        	$this->owner->VotingListID = $priority->ID;
         	$this->owner->write();
         }
         
