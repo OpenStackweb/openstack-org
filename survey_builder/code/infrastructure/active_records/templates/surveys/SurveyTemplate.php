@@ -41,6 +41,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         'Steps'             => 'SurveyStepTemplate',
         'EntitySurveys'     => 'EntitySurveyTemplate',
         'MigrationMappings' => 'AbstractSurveyMigrationMapping',
+        'Instances'         => 'Survey',
     );
 
     private static $defaults = array
@@ -50,9 +51,11 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     public function getCMSFields()
     {
 
-        $fields = new FieldList();
+        $fields = new FieldList(
+            $rootTab = new TabSet("Root",   $tabMain = new Tab('Main'))
+        );
 
-        $fields->add(new TextField('Title','Title'));
+        $fields->addFieldToTab('Root.Main',new TextField('Title','Title'));
 
         $start_date = new DatetimeField('StartDate', 'Start Date');
         $end_date   = new DatetimeField('EndDate', 'End Date');
@@ -63,10 +66,10 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         $end_date->getDateField()->setConfig('showcalendar', true);
         $end_date->setConfig('dateformat', 'dd/MM/yyyy');
 
-        $fields->add($start_date);
-        $fields->add($end_date);
-        $fields->add(new CheckboxField('Enabled','Is Enabled'));
-        $fields->add(new HiddenField('CreatedByID','CreatedByID', Member::currentUserID()));
+        $fields->addFieldToTab('Root.Main',$start_date);
+        $fields->addFieldToTab('Root.Main',$end_date);
+        $fields->addFieldToTab('Root.Main',new CheckboxField('Enabled','Is Enabled'));
+        $fields->addFieldToTab('Root.Main',new HiddenField('CreatedByID','CreatedByID', Member::currentUserID()));
 
         //steps
         if($this->ID > 0)
@@ -97,13 +100,19 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
             $config->addComponent($multi_class_selector);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $gridField = new GridField('Steps', 'Steps', $this->Steps(), $config);
-            $fields->add( $gridField);
+            $fields->addFieldToTab('Root.Main', $gridField);
 
             //entities
             $config    = GridFieldConfig_RecordEditor::create();
             $gridField = new GridField('EntitySurveys', 'Entities', $this->EntitySurveys(), $config);
-            $fields->add($gridField);
+            $fields->addFieldToTab('Root.Main',$gridField);
 
+            // instances
+
+            $config    = GridFieldConfig_RecordEditor::create(100);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $gridField = new GridField('Instances', 'Instances', $this->Instances(), $config);
+            $fields->addFieldToTab('Root.Surveys', $gridField);
 
             //migration Mappings
             $config    = GridFieldConfig_RecordEditor::create();
@@ -131,7 +140,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
                 OldDataModelSurveyMigrationMapping::getDisplayFields():
                 NewDataModelSurveyMigrationMapping::getDisplayFields());
 
-            $fields->add($gridField);
+            $fields->addFieldToTab('Root.Main', $gridField);
         }
 
         return $fields;

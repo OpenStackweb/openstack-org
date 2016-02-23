@@ -365,7 +365,7 @@ INNER JOIN SurveyAnswer SA ON SA.StepID = SE.ID
 INNER JOIN SurveyQuestionTemplate Q ON SA.QuestionID = Q.ID
 INNER JOIN SurveyTemplate ST ON S.TemplateID = ST.ID
 WHERE
-S.ClassName = 'Survey'
+S.ClassName = 'Survey' AND S.IsTest = 0
 AND ST.ID = {$template_id}
 ) REPORT
 WHERE {$date_filter}
@@ -374,118 +374,6 @@ SQL;
         return DB::query($query);
     }
 
-    private function ExportSurveyResultsData(){
-        SangriaPage_Controller::generateDateFilters('s');
-        $range = Controller::curr()->getRequest()->getVar('Range');
-        $range_filter = '';
-        if (!empty($range)) {
-            $range_filter = ($range == SurveyType::MARCH_2015) ? "AND s.Created >= '" . SURVEY_START_DATE . "'" : "AND s.Created < '" . SURVEY_START_DATE . "'";
-        }
-        $surveyQuery = "SELECT
-				s.ID as SurveyID,
-				s.Created as SurveyCreated,
-                s.UpdateDate as SurveyEdited,
-                o.Name as OrgName,
-                o.ID as OrgID ,
-                d.ID as DeploymentID,
-                d.Created as DeploymentCreated,
-                d.UpdateDate as DeploymentEdited,
-				m.FirstName,
-                m.Surname,
-                m.Email,
-                s.Title,
-                s.Industry,
-                s.OtherIndustry,
-                s.PrimaryCity,
-                s.PrimaryState,
-                s.PrimaryCountry,
-                s.OrgSize,
-                s.OpenStackInvolvement,
-                s.InformationSources,
-                s.OtherInformationSources,
-                s.FurtherEnhancement,
-                s.FoundationUserCommitteePriorities,
-                s.UserGroupMember,
-                s.UserGroupName,
-                s.OkToContact,
-                s.BusinessDrivers,
-                s.OtherBusinessDrivers,
-                s.WhatDoYouLikeMost,
-                s.OpenStackRecommendRate as NetPromoter,
-                s.OpenStackRecommendation,
-                s.OpenStackActivity,
-                s.OpenStackRelationship,
-                s.ITActivity,
-                s.InterestedUsingContainerTechnology,
-                s.ContainerRelatedTechnologies,
-                d.Label,
-                d.IsPublic,
-                d.DeploymentType,
-                d.ProjectsUsed,
-                d.CurrentReleases,
-                d.DeploymentStage,
-				d.NumCloudUsers,
-				d.APIFormats,
-				d.Hypervisors,
-				d.OtherHypervisor,
-                d.BlockStorageDrivers,
-                d.OtherBlockStorageDriver,
-                d.NetworkDrivers,
-                d.OtherNetworkDriver,
-				d.IdentityDrivers,
-				d.OtherIndentityDriver,
-                d.SupportedFeatures,
-                d.ComputeNodes,
-                d.ComputeCores,
-                d.ComputeInstances,
-                d.BlockStorageTotalSize,
-                d.ObjectStorageSize,
-                d.ObjectStorageNumObjects,
-                d.NetworkNumIPs,
-                d.WorkloadsDescription,
-                d.OtherWorkloadsDescription,
-                d.WhyNovaNetwork,
-                d.OtherWhyNovaNetwork,
-                d.DeploymentTools,
-                d.OtherDeploymentTools,
-                d.OperatingSystems as DeploymentOperatingSystems,
-                d.OtherOperatingSystems DeploymentOtherOperatingSystems,
-                d.SwiftGlobalDistributionFeatures,
-                d.SwiftGlobalDistributionFeaturesUsesCases,
-                d.OtherSwiftGlobalDistributionFeaturesUsesCases,
-                d.Plans2UseSwiftStoragePolicies,
-                d.OtherPlans2UseSwiftStoragePolicies,
-                d.UsedDBForOpenStackComponents,
-                d.OtherUsedDBForOpenStackComponents,
-                d.ToolsUsedForYourUsers,
-                d.OtherToolsUsedForYourUsers,
-                d.Reason2Move2Ceilometer,
-                d.CountriesPhysicalLocation,
-				d.CountriesUsersLocation,
-				d.ServicesDeploymentsWorkloads,
-				d.OtherServicesDeploymentsWorkloads,
-				d.EnterpriseDeploymentsWorkloads,
-				d.OtherEnterpriseDeploymentsWorkloads,
-				d.HorizontalWorkloadFrameworks,
-				d.OtherHorizontalWorkloadFrameworks,
-				d.UsedPackages,
-				d.CustomPackagesReason,
-				d.OtherCustomPackagesReason,
-				d.PaasTools,
-				d.OtherPaasTools,
-				d.OtherSupportedFeatures,
-				d.InteractingClouds,
-				d.OtherInteractingClouds
-            from DeploymentSurvey s
-                left outer join Member m on (s.MemberID = m.ID)
-                left outer join Deployment d on (d.DeploymentSurveyID = s.ID)
-                left outer join Org o on (s.OrgID = o.ID)
-            where " . SangriaPage_Controller::$date_filter_query . $range_filter . " order by s.ID;";
-
-        $res = DB::query($surveyQuery);
-
-        return $res;
-    }
 
     function ExportSurveyResults()
     {
@@ -623,7 +511,7 @@ INNER JOIN SurveyStepTemplate SETPL ON SETPL.ID = SE.TemplateID
 INNER JOIN SurveyAnswer SA ON SA.StepID = SE.ID
 INNER JOIN SurveyQuestionTemplate Q ON SA.QuestionID = Q.ID
 WHERE
-S.ClassName = 'EntitySurvey'
+S.ClassName = 'EntitySurvey' AND S.IsTest = 0
 AND EST.EntityName = 'Deployment'
 AND ES.ParentID = {$survey_id}
 
@@ -903,7 +791,7 @@ INNER JOIN SurveyStep ST on ST.ID = A.StepID
 INNER JOIN Survey S ON S.ID = ST.SurveyID
 INNER JOIN Member M ON M.ID = S.CreatedByID
 WHERE QT.ClassName = 'SurveyOrganizationQuestionTemplate'
-AND S.TemplateID = {$template_id} AND {$date_filter}
+AND S.TemplateID = {$template_id} AND S.IsTest = 0 AND {$date_filter}
 ORDER BY Org ASC;
 
 SQL;
@@ -970,7 +858,7 @@ SQL;
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 
-    function exportCompanyData  ()
+    function exportCompanyData()
     {
         $params = $this->owner->getRequest()->getVars();
 

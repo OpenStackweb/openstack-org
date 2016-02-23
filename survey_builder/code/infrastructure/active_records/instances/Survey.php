@@ -15,17 +15,16 @@
 /**
  * Class Survey
  */
-class Survey extends DataObject implements ISurvey {
+class Survey extends DataObject implements ISurvey
+{
 
     static $db = array
     (
         'BeenEmailed' => 'Boolean',
+        'IsTest' => 'Boolean',
     );
 
-    static $indexes = array
-    (
-
-    );
+    static $indexes = array();
 
     static $has_one = array
     (
@@ -35,8 +34,7 @@ class Survey extends DataObject implements ISurvey {
         'MaxAllowedStep' => 'SurveyStep',
     );
 
-    static $many_many = array(
-    );
+    static $many_many = array();
 
     static $has_many = array(
         'Steps' => 'SurveyStep',
@@ -44,8 +42,44 @@ class Survey extends DataObject implements ISurvey {
 
     private static $defaults = array(
         'BeenEmailed' => false,
+        'IsTest'      => false,
     );
 
+    private static $summary_fields = array
+    (
+        'ID'                        => 'ID',
+        'Created'                   => 'Created',
+        'CreatedBy.Email'           => 'CreatedBy',
+        'CurrentStep.Template.Name' => 'CurrentStep',
+        'EntitiesSurveys.Count'     => '# Deployments',
+        'IsTest'                    => 'Is Test ?'
+    );
+
+    protected function onAfterWrite()
+    {
+        parent::onAfterWrite();
+        foreach($this->EntitiesSurveys() as $sub_surveys)
+        {
+              $sub_surveys->IsTest = $this->IsTest;
+              $sub_surveys->write();
+        }
+    }
+
+    public function EntitiesSurveys()
+    {
+        $res = new ArrayList();
+        foreach($this->Steps() as $step)
+        {
+            if($step instanceof SurveyDynamicEntityStep)
+            {
+                foreach($step->EntitySurveys() as $sub_surveys)
+                {
+                    $res->add($sub_surveys);
+                }
+            }
+        }
+        return $res;
+    }
     /**
      * @return int
      */
@@ -78,7 +112,9 @@ class Survey extends DataObject implements ISurvey {
         $query = new QueryObject(new SurveyStep);
         $query->addAlias(QueryAlias::create('Template'));
         $query->addOrder(QueryOrder::asc('Template.Order'));
-        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->toArray());
+
+        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps',
+            $query)->toArray());
     }
 
     /**
@@ -131,14 +167,16 @@ class Survey extends DataObject implements ISurvey {
     public function isAllowedStep($step_name)
     {
         $steps = $this->getSteps();
-        $d     = array();
+        $d = array();
 
-        foreach($steps as $s){
+        foreach ($steps as $s) {
             array_push($d, $s->template()->title());
         }
 
         $desired_index = array_search($step_name, $d);
-        if($desired_index === false) return false;
+        if ($desired_index === false) {
+            return false;
+        }
         $max_allowed_index = array_search($this->allowedMaxStep()->template()->title(), $d);
 
         return $desired_index <= $max_allowed_index;
@@ -150,6 +188,7 @@ class Survey extends DataObject implements ISurvey {
     public function isLastStep()
     {
         $last_step = $this->getSteps()->last();
+
         return $last_step->getIdentifier() === $this->currentStep()->getIdentifier();
     }
 
@@ -164,14 +203,15 @@ class Survey extends DataObject implements ISurvey {
     public function getStepIndex(ISurveyStep $step)
     {
         $steps = $this->getSteps();
-        $d     = array();
+        $d = array();
 
-        foreach($steps as $s){
+        foreach ($steps as $s) {
             array_push($d, $s->template()->title());
         }
 
         return array_search($step->template()->title(), $d);
     }
+
     /**
      * @return int
      */
@@ -187,32 +227,40 @@ class Survey extends DataObject implements ISurvey {
     public function getStepByIndex($idx)
     {
         $steps = $this->getSteps()->toArray();
-        if(count($steps) < $idx) return null;
+        if (count($steps) < $idx) {
+            return null;
+        }
+
         return $steps[$idx];
     }
 
     /**
      * @return ISurveyStep
      */
-    public function completeCurrentStep(){
+    public function completeCurrentStep()
+    {
 
         $current_step_index = $this->getCurrentStepIndex();
-        $steps_count        = $this->getStepsCount();
+        $steps_count = $this->getStepsCount();
 
-        if(($current_step_index+1) === $steps_count) return $this->currentStep();
-
-        do
-        {
-            $next_step = $this->getStepByIndex(++$current_step_index);
-            if($this->canShowStep($next_step)) break;
+        if (($current_step_index + 1) === $steps_count) {
+            return $this->currentStep();
         }
-        while($current_step_index <= $steps_count || $next_step instanceof ISurveyThankYouStepTemplate);
+
+        do {
+            $next_step = $this->getStepByIndex(++$current_step_index);
+            if ($this->canShowStep($next_step)) {
+                break;
+            }
+        } while ($current_step_index <= $steps_count || $next_step instanceof ISurveyThankYouStepTemplate);
 
         $this->registerCurrentStep($next_step);
 
         $current_max_step_index = $this->getStepIndex($this->allowedMaxStep());
-        if($current_step_index >= $current_max_step_index)
+        if ($current_step_index >= $current_max_step_index) {
             $this->registerAllowedMaxStep($next_step);
+        }
+
         return $next_step;
     }
 
@@ -227,79 +275,72 @@ class Survey extends DataObject implements ISurvey {
         // checks if we have a dependency to show it or not
         $static_rules = array();
 
-        foreach($step->template()->getDependsOn() as $d)
-        {
+        foreach ($step->template()->getDependsOn() as $d) {
             // belongs to another step (former one)
-            if(!isset($static_rules[$d->getIdentifier()]))
+            if (!isset($static_rules[$d->getIdentifier()])) {
                 $static_rules[$d->getIdentifier()] = array
                 (
-                    'question'          => $d,
-                    'values'            => array(),
-                    'operator'          => $d->Operator,
-                    'visibility'        => $d->Visibility,
-                    'default'           => $d->DependantDefaultValue,
-                    'boolean_operator'  => $d->BooleanOperatorOnValues,
-                    'initial_condition' => ($d->BooleanOperatorOnValues === 'And') ? true:false
+                    'question' => $d,
+                    'values' => array(),
+                    'operator' => $d->Operator,
+                    'visibility' => $d->Visibility,
+                    'default' => $d->DependantDefaultValue,
+                    'boolean_operator' => $d->BooleanOperatorOnValues,
+                    'initial_condition' => ($d->BooleanOperatorOnValues === 'And') ? true : false
                 );
+            }
 
             array_push($static_rules[$d->getIdentifier()]['values'], $d->ValueID);
         }
 
 
-        foreach ($static_rules as $id => $info)
-        {
-            $q                 = $info['question'];
-            $values            = $info['values'];
-            $operator          = $info['operator'];
-            $visibility        = $info['visibility'];
-            $boolean_operator  = $info['boolean_operator'];
+        foreach ($static_rules as $id => $info) {
+            $q = $info['question'];
+            $values = $info['values'];
+            $operator = $info['operator'];
+            $visibility = $info['visibility'];
+            $boolean_operator = $info['boolean_operator'];
             $initial_condition = $info['initial_condition'];
 
             $answer = $this->findAnswerByQuestion($q);
-            if (is_null($answer))
-            {
-               return false;
+            if (is_null($answer)) {
+                return false;
             }
 
             //checks the condition
-            switch($operator)
-            {
-                case 'Equal':{
-                    foreach($values as $vid)
-                    {
-                        if($boolean_operator === 'And')
+            switch ($operator) {
+                case 'Equal': {
+                    foreach ($values as $vid) {
+                        if ($boolean_operator === 'And') {
                             $initial_condition &= (strpos($answer->value(), $vid) !== false);
-                        else
+                        } else {
                             $initial_condition |= (strpos($answer->value(), $vid) !== false);
+                        }
                     }
                 }
-                break;
-                case 'Not-Equal':{
-                    foreach($values as $vid) {
-                        if($boolean_operator === 'And')
+                    break;
+                case 'Not-Equal': {
+                    foreach ($values as $vid) {
+                        if ($boolean_operator === 'And') {
                             $initial_condition &= (strpos($answer->value(), $vid) === false);
-                        else
+                        } else {
                             $initial_condition |= (strpos($answer->value(), $vid) === false);
+                        }
                     }
                 }
-                break;
+                    break;
             }
 
             //visibility
-            switch($visibility)
-            {
-                case 'Visible':
-                {
-                    if(!$initial_condition)
-                    {
+            switch ($visibility) {
+                case 'Visible': {
+                    if (!$initial_condition) {
                         $should_show = false;
                     }
                 }
                     break;
-                case 'Not-Visible':
-                {
-                    if($initial_condition)
-                    {
+                case 'Not-Visible': {
+                    if ($initial_condition) {
                         $should_show = false;
                     }
                 }
@@ -315,12 +356,14 @@ class Survey extends DataObject implements ISurvey {
      * @param string $step_name
      * @return ISurveyStep|null
      */
-    public function getStep($step_name){
-        foreach($this->getSteps() as $s){
-            if($s->template()->title() === $step_name) {
-              return $s;
+    public function getStep($step_name)
+    {
+        foreach ($this->getSteps() as $s) {
+            if ($s->template()->title() === $step_name) {
+                return $s;
             }
         }
+
         return null;
     }
 
@@ -329,18 +372,25 @@ class Survey extends DataObject implements ISurvey {
      */
     public function isEmailSent()
     {
-       return $this->getField('BeenEmailed');
+        return $this->getField('BeenEmailed');
     }
 
     /**
      * @param IMessageSenderService $service
      * @throws EntityValidationException
      */
-    public function sentEmail(IMessageSenderService $service){
-        if($this->BeenEmailed) throw new EntityValidationException(array( array('message'=>'Survey Email Already sent !')));
-        if(!$this->isLastStep()) throw new EntityValidationException(array( array('message'=>'Survey is not on last step!')));
+    public function sentEmail(IMessageSenderService $service)
+    {
+        if ($this->BeenEmailed) {
+            throw new EntityValidationException(array(array('message' => 'Survey Email Already sent !')));
+        }
+        if (!$this->isLastStep()) {
+            throw new EntityValidationException(array(array('message' => 'Survey is not on last step!')));
+        }
         $current_step = $this->currentStep();
-        if(!$current_step->template() instanceof ISurveyThankYouStepTemplate)  return;
+        if (!$current_step->template() instanceof ISurveyThankYouStepTemplate) {
+            return;
+        }
         $this->BeenEmailed = true;
         $service->send($this);
     }
@@ -351,12 +401,15 @@ class Survey extends DataObject implements ISurvey {
      */
     public function findAnswerByQuestion(ISurveyQuestionTemplate $question)
     {
-        foreach($this->getSteps() as $step){
-            if($step instanceof SurveyRegularStep){
+        foreach ($this->getSteps() as $step) {
+            if ($step instanceof SurveyRegularStep) {
                 $answer = $step->getAnswerByTemplateId($question->getIdentifier());
-                if(!is_null($answer)) return $answer;
+                if (!is_null($answer)) {
+                    return $answer;
+                }
             }
         }
+
         return null;
     }
 
@@ -370,9 +423,10 @@ class Survey extends DataObject implements ISurvey {
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->remove($step);
     }
 
-    protected function onBeforeDelete() {
+    protected function onBeforeDelete()
+    {
         parent::onBeforeDelete();
-        foreach($this->Steps() as $step){
+        foreach ($this->Steps() as $step) {
             $step->delete();
         }
     }
@@ -384,13 +438,13 @@ class Survey extends DataObject implements ISurvey {
     public function getPreviousStep($step_name)
     {
         $previous = null;
-        foreach($this->getSteps() as $s){
-            if($s->template()->title() === $step_name)
-            {
+        foreach ($this->getSteps() as $s) {
+            if ($s->template()->title() === $step_name) {
                 return $previous;
             }
             $previous = $s;
         }
+
         return null;
     }
 
@@ -400,6 +454,7 @@ class Survey extends DataObject implements ISurvey {
     public function isFirstStep()
     {
         $first_step = $this->getSteps()->first();
+
         return $first_step->getIdentifier() === $this->currentStep()->getIdentifier();
     }
 
@@ -410,19 +465,33 @@ class Survey extends DataObject implements ISurvey {
     public function getCompletedSteps()
     {
         $completed_steps = array();
-        foreach($this->getSteps() as $step)
-        {
-            if($this->isAllowedStep($step->template()->title()) && $this->canShowStep($step))
-            {
+        foreach ($this->getSteps() as $step) {
+            if ($this->isAllowedStep($step->template()->title()) && $this->canShowStep($step)) {
                 $completed_steps[] = $step;
             }
         }
+
         return new ArrayList($completed_steps);
     }
 
     public function getFriendlyName()
     {
         $owner = $this->CreatedBy();
+
         return sprintf('%s', $owner->Email);
+    }
+
+    public function getCMSFields()
+    {
+
+        $fields = new FieldList(
+            $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
+        );
+
+        $fields->addFieldsToTab('Root.Main', new HiddenField('TemplateID', 'TemplateID'));
+        $fields->addFieldsToTab('Root.Main', new ReadonlyField('CreatedByEmail','CreatedBy', $this->CreatedBy()->Email));
+        $fields->addFieldsToTab('Root.Main', new CheckboxField('IsTest', 'IsTest'));
+
+        return $fields;
     }
 }

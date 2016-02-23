@@ -202,7 +202,7 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
             INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
             INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
             WHERE
-            I2.ClassName = '{$class_name}'
+            I2.ClassName = '{$class_name}' AND I2.IsTest = 0
             AND FIND_IN_SET(V2.ID, A2.Value) > 0
             AND SSTPL2.ID = %s
             AND Q2.ID = %s
@@ -221,8 +221,7 @@ SQL;
             INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
             INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
             WHERE
-            I2.ClassName = '{$class_name}'
-
+            I2.ClassName = '{$class_name}' AND I2.IsTest = 0
             AND SSTPL2.ID = %s
             AND Q2.ID = %s
             AND I2.ID = {$survey_table_prefix}.ID
@@ -271,7 +270,7 @@ SQL;
         $query = <<<SQL
     SELECT COUNT(I.ID) FROM Survey I
     WHERE
-    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}'
+    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
     AND EXISTS
     (
         SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
@@ -279,7 +278,7 @@ SQL;
         INNER JOIN SurveyStep STP ON STP.ID = A.StepID
         INNER JOIN Survey S ON S.ID = STP.SurveyID
         WHERE
-        S.ID = I.ID AND
+        S.ID = I.ID AND S.IsTest = 0 AND
         A.QuestionID IN
         (
             SELECT Q.ID FROM SurveyQuestionTemplate Q
@@ -422,7 +421,7 @@ SQL;
         INNER JOIN SurveyStep S ON S.ID = A.StepID
         INNER JOIN Survey I ON I.ID = S.SurveyID
         WHERE
-        I.ClassName = '{$class_name}'
+        I.ClassName = '{$class_name}' AND I.IsTest = 0
         AND FIND_IN_SET('{$row_id}:{$column_id}', A.Value) > 0
         AND SSTPL.ID = $template->ID
         AND Q.ID = {$question_id}
@@ -450,7 +449,7 @@ SQL;
             INNER JOIN SurveyStep STP ON STP.ID = A.StepID
             INNER JOIN Survey S ON S.ID = STP.SurveyID
             WHERE
-            S.TemplateID = {$template->ID} AND
+            S.TemplateID = {$template->ID} AND S.IsTest = 0 AND
             NOT EXISTS
             (
                 SELECT A1.ID FROM SurveyAnswer A1
@@ -501,7 +500,7 @@ SQL;
         INNER JOIN SurveyStep S ON S.ID = A.StepID
         INNER JOIN Survey I ON I.ID = S.SurveyID
         WHERE
-        I.ClassName = '{$class_name}'
+        I.ClassName = '{$class_name}' AND I.IsTest = 0
         AND FIND_IN_SET('{$value_id}', A.Value) > 0
         AND SSTPL.ID = $template->ID
         AND Q.ID = {$question_id}
@@ -514,7 +513,7 @@ SQL;
         INNER JOIN Survey I ON I.ID = S.SurveyID
         INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
         WHERE
-        I.TemplateID =  $template->ID
+        I.TemplateID =  $template->ID AND I.IsTest = 0
         AND Q.ID = $question_id
         AND EXISTS
         (
