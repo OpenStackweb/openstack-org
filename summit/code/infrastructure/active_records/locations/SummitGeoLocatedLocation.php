@@ -33,7 +33,8 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
 
     private static $has_many = array
     (
-        'Maps' => 'SummitLocationMap'
+        'Maps'   => 'SummitLocationMap',
+        'Images' => 'SummitLocationImage',
     );
 
     private static $defaults = array
@@ -201,6 +202,11 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
             $gridField = new GridField('Maps', 'Maps', $this->Maps(), $config);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $f->addFieldToTab('Root.Maps', $gridField);
+
+            $config = GridFieldConfig_RecordEditor::create();
+            $gridField = new GridField('Images', 'Images', $this->Images(), $config);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $f->addFieldToTab('Root.Images', $gridField);
         }
 
         return $f;

@@ -12,9 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitLocationMap extends DataObject
+class SummitLocationImage extends DataObject
 {
-
     private static $db = array
     (
         'Name'         => 'Varchar(255)',
@@ -30,13 +29,13 @@ class SummitLocationMap extends DataObject
 
     private static $has_one = array
     (
-        'Map'      => 'BetterImage',
+        'Picture'  => 'BetterImage',
         'Location' => 'SummitGeoLocatedLocation'
     );
 
     public function getThumbnail() {
-        if ($this->Map()->exists()) {
-            return $this->Map()->SetWidth(100);
+        if ($this->Picture()->exists()) {
+            return $this->Picture()->SetWidth(100);
         } else {
             return '(No Image)';
         }
@@ -47,9 +46,9 @@ class SummitLocationMap extends DataObject
      */
     public function getUrl()
     {
-        if($this->Map()->exists())
+        if($this->Picture()->exists())
         {
-            return $this->Map()->Link();
+            return $this->Picture()->Link();
         }
         return null;
     }
@@ -62,9 +61,9 @@ class SummitLocationMap extends DataObject
         $f->add(new TextField('Name','Name'));
         $f->add(new HtmlEditorField('Description','Description'));
 
-        $map_field = new UploadField('Map','Map');
+        $map_field = new UploadField('Picture','Picture');
         $map_field->setAllowedMaxFileNumber(1);
-        $map_field->setFolderName(sprintf('summits/%s/locations/maps/', $this->Location()->SummitID));
+        $map_field->setFolderName(sprintf('summits/%s/locations/images/', $this->Location()->SummitID));
 
         $f->add($map_field );
 
