@@ -61,8 +61,9 @@ class SurveyQuestionTemplate
         ),
     );
 
-    static $has_many = array(
-
+    static $has_many = array
+    (
+        'Answers' => 'SurveyAnswer'
     );
 
     private static $defaults = array(

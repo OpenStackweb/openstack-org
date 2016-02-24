@@ -32,6 +32,11 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         'CreatedBy' => 'Member',
     );
 
+    static $belongs_to = array
+    (
+        'Report' => 'SurveyReport'
+    );
+
     static $many_many = array
     (
     );
