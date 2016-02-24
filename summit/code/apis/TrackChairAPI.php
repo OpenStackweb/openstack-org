@@ -806,9 +806,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
             $former_presentations = array();
 
-            foreach($s->Presentations()->Where(" SummitID <> {$current_summit->ID} ")->Limit(5)->Sort('StartDate', 'DESC') as $p)
+            foreach($s->Presentations()->Where(" SummitID <> {$current_summit->ID} ")->Limit(5)->Sort('StartDate', 'DESC') as $pf)
             {
-                array_push($former_presentations, array('id' => $p->ID, 'title' => $p->Title, 'url' => $p->Link) );
+                array_push($former_presentations, array('id' => $pf->ID, 'title' => $pf->Title, 'url' => $pf->Link) );
             }
             $speakerData['former_presentations'] = $former_presentations;
 
