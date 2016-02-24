@@ -155,9 +155,24 @@ require('./comments-list.tag')
 
 						<div each="{ currentPresentation.speakers }">
 							<hr/>
-							<h4>Speaker: <strong>{ first_name }&nbsp;{ last_name }</strong></h5>
+							<h5>Speaker: <strong>
+							<img class="img-circle profile-pic"  title="{ first_name+' '+last_name }" src="{ photo_url }"/>
+							<a if="{ available_for_bureau }" href="/community/speakers/profile/{ id }" title="{ first_name+' '+last_name }" target="_blank">{ first_name }&nbsp;{ last_name }</a>
+							<span if="{ !available_for_bureau }">{ first_name }&nbsp;{ last_name }</span>		</strong></h5>
 							<p>{ title }</p>
 							<raw content="{ bio }"/>
+							<div if="{ former_presentations.length > 0 }">
+							<strong>Presentations from previous OpenStack Summits:</strong>
+							<ul class="list-unstyled">
+							<li each="{ former_presentations }"><a href="{ url }" title="{ title }" target="_blank">{ title }</a></li>
+							</ul>
+							</div>
+							<div if="{ other_links.length > 0 }">
+								<strong>Additional presentations:</strong>
+								<ul class="list-unstyled">
+									<li each="{ other_links }"><a href="{ url }" title="{ title }" target="_blank">{ title }</a></li>
+								</ul>
+							</div>
 						</div>
 						<div>
 

@@ -776,7 +776,6 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
     protected $parent;
 
-
     public function __construct(Presentation $presentation, PresentationAPI $parent)
     {
         parent::__construct();
@@ -784,27 +783,54 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $this->parent = $parent;
     }
 
-
     public function index(SS_HTTPRequest $r)
     {
 
-        /* if(!Member::currentUser()) {
-            return $this->httpError(403);
-        } */
-
         $p = $this->presentation;
         $speakers = array();
+        $current_summit = $p->Summit();;
 
         foreach ($p->Speakers() as $s) {
             // if($s->Bio == NULL) $s->Bio = "&nbsp;";
             $s->Bio = str_replace(array("\r", "\n"), "", $s->Bio);
-            $photo_url = null;
-            if ($s->Photo()->exists() && $s->Photo()->croppedImage(100, 100)) {
-                $photo_url = $s->Photo()->croppedImage(100, 100)->URL;
-            }
-
             $speakerData = $s->toJSON();
-            $speakerData['photo_url'] = $photo_url;
+            $speakerData['photo_url'] = $s->ProfilePhoto();
+            $speakerData['available_for_bureau'] = intval($speakerData['available_for_bureau']);
+
+            $expertise_areas = array();
+            foreach($s->AreasOfExpertise() as $a)
+            {
+                array_push($expertise_areas, array('id' => $a->ID, 'expertise' => $a->Expertise) );
+            }
+            $speakerData['expertise_areas'] = $expertise_areas;
+
+            $former_presentations = array();
+
+            foreach($s->Presentations()->Where(" SummitID <> {$current_summit->ID} ")->Limit(5)->Sort('StartDate', 'DESC') as $p)
+            {
+                array_push($former_presentations, array('id' => $p->ID, 'title' => $p->Title, 'url' => $p->Link) );
+            }
+            $speakerData['former_presentations'] = $former_presentations;
+
+            $links = array();
+            foreach($s->OtherPresentationLinks() as $l)
+            {
+                array_push($links, array('id' => $l->ID, 'title' => $l->Title, 'url' => $l->LinkUrl) );
+            }
+            $speakerData['other_links'] = $links;
+
+            $travel_preferences = array();
+            foreach($s->TravelPreferences() as $t)
+            {
+                array_push($travel_preferences, array('id' => $t->ID, 'country' => $t->Country) );
+            }
+            $speakerData['travel_preferences'] = $travel_preferences;
+            $languages = array();
+            foreach($s->Languages() as $l)
+            {
+                array_push($languages, array('id' => $l->ID, 'language' => $l->Language) );
+            }
+            $speakerData['languages'] = $languages;
             $speakers[] = $speakerData;
 
         }
@@ -849,7 +875,6 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         ))->addHeader('Content-Type', 'application/json');
 
     }
-
 
     public function handleVote(SS_HTTPRequest $r)
     {
