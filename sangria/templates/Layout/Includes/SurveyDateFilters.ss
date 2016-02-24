@@ -1,7 +1,7 @@
 <fieldset>
     <input type="hidden" class="date_filter_action" value="$action" />
     <% if use_subset %>
-    <div id="subset" class="field text date inline">
+    <div id="subset" class="field text date inline" style="width: 310px !important;">
         <label for="range">Select version of survey</label>
         <div class="middleColumn">
             <% include SangriaPage_SurveySelector %>

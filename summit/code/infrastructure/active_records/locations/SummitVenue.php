@@ -25,6 +25,12 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
         'Rooms' => 'SummitVenueRoom',
     );
 
+    private static $has_one = array
+    (
+        'Picture'      => 'BetterImage',
+    );
+
+
     private static $defaults = array
     (
     );
@@ -76,11 +82,11 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
     {
         $f = parent::getCMSFields();
         $f->addFieldsToTab('Root.Main', new CheckboxField('IsMain', 'Is Main?'));
-        $map_field = new UploadField('Map','Map');
-        $map_field->setAllowedMaxFileNumber(1);
-        $map_field->setFolderName(sprintf('summits/%s/locations/venues/maps/', $this->SummitID));
 
-        $f->addFieldToTab('Root.Main',$map_field );
+        $pic_field = new UploadField('Picture','Picture');
+        $pic_field->setAllowedMaxFileNumber(1);
+        $pic_field->setFolderName(sprintf('summits/%s/locations/venues/pictures/', $this->SummitID));
+        $f->addFieldToTab('Root.Main',$pic_field );
 
         $config = GridFieldConfig_RecordEditor::create();
         $gridField = new GridField('Rooms', 'Rooms', $this->Rooms(), $config);
