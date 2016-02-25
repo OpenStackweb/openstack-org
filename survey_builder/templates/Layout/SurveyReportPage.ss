@@ -1,3 +1,4 @@
+</div>
 <h1>OpenStack Survey Report</h1>
 <script>
     var templates = [];

@@ -1,7 +1,7 @@
 <survey-report-filters>
     <div class="container">
         <div class="report_templates_container">
-            <select id="report-templates">
+            <select id="report-templates" class="form-control">
                 <option each="{ list in templates }" value='{ list.id }'>{ list.title }</option>
             </select>
         </div>
@@ -9,12 +9,12 @@
     <div class="report_global_filters">
         <div class="container">
             <div class="row">
-                <div class="col-md-2">GLOBAL FILTERS</div>
-                <div class="col-md-2"><a href="">Clear Filters</a></div>
+                <div class="report_global_filters_title">GLOBAL FILTERS</div>
+                <div class="report_clear_filters"><a href="">Clear Filters</a></div>
             </div>
             <div class="row">
-                <div class="col-md-2" each="{ filter in report.Filters }">
-                    <select id="report-filter-{ filter.Filter.ID }" class="report_filter">
+                <div class="report_filter_box" each="{ filter in report.Filters }">
+                    <select id="report-filter-{ filter.Filter.ID }" class="report_filter form-control">
                         <option value="" disabled selected>{ filter.Label }</option>
                         <option each="{ option in filter.Options }" value='{ option }'>{ option }</option>
                     </select>

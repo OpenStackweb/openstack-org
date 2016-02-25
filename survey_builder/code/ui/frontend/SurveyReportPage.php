@@ -55,8 +55,8 @@ class SurveyReportPage_Controller extends Page_Controller
         //other js
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         // require custom CSS
-        Requirements::css("surveys/css/survey-report.css");
-        Requirements::javascript('surveys/js/survey_report.js');
+        Requirements::css("survey_builder/css/survey-report.css");
+        Requirements::javascript('survey_builder/js/survey_report.js');
 
     }
 

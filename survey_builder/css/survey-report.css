@@ -1,0 +1,35 @@
+
+body {
+    color: #2A4E68;
+}
+
+.report_templates_container {
+    width: 270px;
+    margin: 0 auto;
+}
+
+.report_global_filters {
+    padding: 10px 0 20px 0;
+    background-color: #edf2f7;
+}
+
+.report_global_filters .form-control {
+    font-size: 11px;
+}
+
+.report_global_filters_title {
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.report_clear_filters {
+    font-size: 8px;
+    background-color: ;
+    color: white;
+}
+
+.report_filter_box {
+    float: left;
+    width: 180px;
+    margin-right: 20px;
+}
