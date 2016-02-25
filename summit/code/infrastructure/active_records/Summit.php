@@ -1213,22 +1213,22 @@ SQL;
     }
 
     private function getDatesFromRange($start, $end) {
-        $interval = new DateInterval('P1D');
+
         $start    = new DateTime($start);
         $start    = $start->setTime(0,0,0);
         $end      = new DateTime($end);
         $end      = $end->setTime(0,0,0);
-        $end      = $end->add($interval);
-        $period = new DatePeriod(
-            $start,
-            $interval,
-            $end
-        );
-
-        foreach($period as $date) {
-            $array[] = $date->setTime(0,0,0);
+        $interval = new DateInterval('P1D');
+        $array[] = $start;
+        $aux     = clone $start;
+        do
+        {
+            $aux     = $aux->add($interval);
+            $aux     = $aux->setTime(0,0,0);
+            $array[] = clone $aux;
         }
-
+        while($aux < $end);
+        $array[] = $end;
         return $array;
     }
 
