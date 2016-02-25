@@ -1373,7 +1373,7 @@ SQL;
             ->filter('ListType' , 'Group')
             ->innerJoin('PresentationCategory', 'PresentationCategory.ID = SummitSelectedPresentationList.CategoryID')
             ->where('PresentationCategory.SummitID = '.$this->ID)
-            ->sort('SummitSelectedPresentationList.Name', 'ASC');
+            ->sort('PresentationCategory.Title', 'ASC');
     }
 
     /**

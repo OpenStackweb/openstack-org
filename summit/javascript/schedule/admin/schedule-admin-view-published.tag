@@ -333,7 +333,7 @@
                         });
                     } else if (key == 'time') {
                         $('body').animate({
-                        scrollTop: ($('[data-time="'+value+'"]').offset().top - 100)
+                            scrollTop: ($('[data-time="'+value+'"]').offset().top - 100)
                         }, 2000);
                     }
                 }

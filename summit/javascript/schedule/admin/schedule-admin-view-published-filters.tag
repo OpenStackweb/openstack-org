@@ -59,11 +59,11 @@
                         <div class="row" style="margin-bottom: 35px;">
                             <div class="col-md-3">
                                 <label for="start_time_modal">From </label>
-                                <input type='text' id="start_time_modal" value="06:00" style="width: 60%"/>
+                                <input type='text' id="start_time_modal" value="07:00" style="width: 60%"/>
                             </div>
                             <div class="col-md-3">
                                 <label for="end_time_modal" >To </label>
-                                <input type='text' id="end_time_modal" value="23:30" style="width: 60%"/>
+                                <input type='text' id="end_time_modal" value="22:00" style="width: 60%"/>
                             </div>
                             <div class="col-md-6">
                                 <label for="end_time_modal">Gap (minutes)</label>

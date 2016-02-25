@@ -22,21 +22,21 @@
                     event_types:{},
                     locations : {},
                     tags: {},
-                    tracks : {},
+                    tracks : [],
                     presentation_levels: {},
                     current_user: null,
-                    track_lists: {},
+                    track_lists: [],
                     status_options: [],
                  };
                  <% loop $PresentationStatusOptions %>
                      summit.status_options.push("{$Status}");
                  <% end_loop %>
-                 <% loop $Summit.Categories %>
-                 summit.tracks[{$ID}] =
+                 <% loop $Summit.Categories.Sort(Title, ASC) %>
+                 summit.tracks.push(
                  {
                     id: {$ID},
                     name : "{$Title.JS}",
-                 };
+                 });
                  <% end_loop %>
                  <% loop $Top.getPresentationLevels %>
                 summit.presentation_levels['{$Level}'] =
@@ -52,10 +52,11 @@
                 };
                 <% end_loop %>
                 <% loop $Summit.TrackGroupLists %>
-                summit.track_lists[{$ID}] =
+                summit.track_lists.push(
                 {
                     name : "{$Category.Title.JS}",
-                };
+                    id : "{$ID}",
+                });
                 <% end_loop %>
                 <% loop $Summit.Types %>
                 summit.summit_types[{$ID}] =

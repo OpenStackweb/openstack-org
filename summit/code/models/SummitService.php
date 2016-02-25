@@ -135,7 +135,6 @@ class SummitService
                 throw new EntityValidationException('event doest not belongs to summit');
 
             $event->Title = $event_data['title'];
-            $event->Description = $event_data['description'];
             $event->ShortDescription = $event_data['short_description'];
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
@@ -189,7 +188,7 @@ class SummitService
             $event_type_id = intval($event_data['event_type']);
             $event_type = SummitEventType::get_by_id('SummitEventType',$event_type_id);
 
-            if ($event_type->Type == 'Presentation') {
+            if ($event_type->Type == 'Presentation'|| $event_type->Type = 'Keynotes') {
                 $event = new Presentation();
             } else {
                 $event = new SummitEvent();
@@ -197,7 +196,6 @@ class SummitService
 
             $event->SummitID = $summit->getIdentifier();
             $event->Title = $event_data['title'];
-            $event->Description = $event_data['description'];
             $event->ShortDescription = $event_data['short_description'];
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);

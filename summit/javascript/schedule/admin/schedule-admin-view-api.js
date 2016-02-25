@@ -24,6 +24,8 @@ schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, sour
     var params = { 'expand' : 'speakers'};
 
     if(source === 'tracks' && second_source !== '' && typeof second_source !== 'undefined' )
+        params['track_id'] = second_source;
+    if(source === 'track_list' && second_source !== '' && typeof second_source !== 'undefined' )
         params['track_list_id'] = second_source;
     if(source === 'events' && second_source !== '' && typeof second_source !== 'undefined' )
         params['event_type_id'] = second_source;

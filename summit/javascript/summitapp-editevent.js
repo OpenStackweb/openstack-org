@@ -20,6 +20,24 @@ $(document).ready(function(){
     $("#start_date").datetimepicker();
     $("#end_date").datetimepicker();
 
+    var event_type = $('#event_type').find("option:selected").text();
+    if ($('#event_type').val()) {
+        $('option','#event_type').attr('disabled','disabled');
+        if (event_type == 'Presentation' || event_type == 'Keynotes') {
+            $('option','#event_type').each(function(){
+                if ($(this).text() == 'Presentation' || $(this).text() == 'Keynotes'){
+                    $(this).removeAttr('disabled');
+                }
+            });
+        } else {
+            $('option','#event_type').each(function(){
+                if ($(this).text() != 'Presentation' && $(this).text() != 'Keynotes'){
+                    $(this).removeAttr('disabled');
+                }
+            });
+        }
+    }
+
     $('#event_type').change(function(){
        if ($(this).find("option:selected").text() == 'Presentation') {
            $('.speakers_container').show();
@@ -92,7 +110,8 @@ $(document).ready(function(){
         selector: "textarea",
         width:      '100%',
         height:     270,
-        plugins:    [ "anchor link" ],
+        plugins:    [ "anchor link spellchecker" ],
+        toolbar:    "formatselect, fontselect, fontsizeselect, bold, italic, underline, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, link, spellchecker",
         statusbar:  false,
         menubar:    false
     });
@@ -106,7 +125,6 @@ $(document).ready(function(){
         ignore: [],
         rules: {
             title: {required: true},
-            description: {required: true},
             short_description: {required: true}
         },
         focusInvalid: false,
@@ -133,11 +151,19 @@ $(document).ready(function(){
         if (!form.valid()) return false;
         var summit_id = $('#summit_id').val();
         var event_id = ($('#event_id').val()) ? $('#event_id').val() : 0;
-        var url = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/save';
+        var url = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/';
+        var request_type = '';
+
+        if (event_id) {
+            request_type = 'PUT';
+            url = url + 'update';
+        } else {
+            request_type = 'POST';
+            url = url + 'create';
+        }
 
         var request = {
             title: $('#title').val(),
-            description: tinyMCE.get('description').getContent(),
             short_description: tinyMCE.get('short_description').getContent(),
             location_id: $('#location').val(),
             start_date: $('#start_date').val(),
@@ -151,7 +177,7 @@ $(document).ready(function(){
         };
 
         $.ajax({
-            type: 'PUT',
+            type: request_type,
             url: url,
             data: JSON.stringify(request),
             contentType: "application/json; charset=utf-8",

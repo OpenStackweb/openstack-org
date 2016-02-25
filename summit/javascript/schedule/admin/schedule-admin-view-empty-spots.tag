@@ -30,6 +30,7 @@
         deepLinkToSpot(event) {
             var item = event.item;
 
+            window.location.hash='';
             $(window).url_fragment('setParam','day', item.day);
             $(window).url_fragment('setParam','venue', item.location_id);
             $(window).url_fragment('setParam','time', item.time);

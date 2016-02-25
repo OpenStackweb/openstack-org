@@ -74,7 +74,8 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'GET unpublished/$Source!'    => 'getUnpublishedEventsBySource',
         'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'DELETE $EVENT_ID!/unpublish' => 'unpublishEvent',
-        'PUT $EVENT_ID!/save'         => 'saveEvent',
+        'PUT $EVENT_ID!/update'       => 'updateEvent',
+        'POST $EVENT_ID!/create'      => 'createEvent',
         'GET get_tags'                => 'getTagOptions',
         'GET get_sponsors'            => 'getSponsorOptions',
     );
@@ -83,7 +84,8 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'getUnpublishedEventsBySource',
         'publishEvent',
         'unpublishEvent',
-        'saveEvent',
+        'createEvent',
+        'updateEvent',
         'getTagOptions',
         'getSponsorOptions',
     );
@@ -93,13 +95,14 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $query_string = $request->getVars();
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $source       = strtolower(Convert::raw2sql($request->param('Source')));
-            $valid_sources = array('tracks', 'presentations', 'events');
+            $valid_sources = array('tracks', 'track_list', 'presentations', 'events');
 
             if(!in_array($source, $valid_sources)) return $this->validationError(array('invalid requested source'));
 
             $search_term   = isset($query_string['search_term']) ? Convert::raw2sql($query_string['search_term']) : null;
             $status        = isset($query_string['status']) ? Convert::raw2sql($query_string['status']) : null;
             $track_list_id = isset($query_string['track_list_id']) ? intval($query_string['track_list_id']) : null;
+            $track_id      = isset($query_string['track_id']) ? intval($query_string['track_id']) : null;
             $event_type_id = isset($query_string['event_type_id']) ? intval($query_string['event_type_id']) : null;
             $page          = isset($query_string['page']) ? intval($query_string['page']) : 1;
             $page_size     = isset($query_string['page_size']) ? intval($query_string['page_size']) : 10;
@@ -110,11 +113,16 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
             switch ($source)
             {
-                case 'tracks':
+                case 'track_list':
                 {
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummitAndTrackList($summit_id, $track_list_id, $status, $search_term, $page,$page_size, $order);
                 }
                 break;
+                case 'tracks':
+                {
+                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummitAndTrack($summit_id, $track_id, $status, $search_term, $page,$page_size, $order);
+                }
+                    break;
                 case 'presentations':
                 {
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummit($summit_id, null, $status, $search_term, $page,$page_size, $order);
@@ -246,7 +254,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         }
     }
 
-    public function saveEvent(SS_HTTPRequest $request)
+    public function createEvent(SS_HTTPRequest $request)
     {
         try
         {
@@ -258,11 +266,45 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            if ($event_id) {
-                $event = $this->summit_service->updateEvent($summit, $event_data);
-            } else {
-                $event = $this->summit_service->createEvent($summit, $event_data);
-            }
+            $event = $this->summit_service->createEvent($summit, $event_data);
+
+            return $this->ok($event->toMap());
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(ValidationException $ex2)
+        {
+            SS_Log::log($ex2->getResult()->messageList(), SS_Log::WARN);
+            return $this->validationError($ex2->getResult()->messageList());
+        }
+        catch(NotFoundEntityException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessages());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function updateEvent(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $event_id     = intval($request->param('EVENT_ID'));
+            $event_data   = $this->getJsonRequest();
+            $event_data['id'] = $event_id;
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $event = $this->summit_service->updateEvent($summit, $event_data);
 
             return $this->ok($event->toMap());
         }
