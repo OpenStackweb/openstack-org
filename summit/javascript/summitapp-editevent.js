@@ -20,6 +20,14 @@ $(document).ready(function(){
     $("#start_date").datetimepicker();
     $("#end_date").datetimepicker();
 
+    $('#event_type').change(function(){
+       if ($(this).find("option:selected").text() == 'Presentation') {
+           $('.speakers_container').show();
+       } else {
+           $('.speakers_container').hide();
+       }
+    });
+
     // Speakers autocomplete tags
     $('#speakers').tagsinput({
         itemValue: "id",
@@ -51,8 +59,7 @@ $(document).ready(function(){
             items: 'all',
             source: function(query) {
                 var summit_id = $('#summit_id').val();
-                var event_id = $('#event_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/events/'+event_id+'/get_tags',{query:query});
+                return $.getJSON('api/v1/summits/'+summit_id+'/events/get_tags',{query:query});
             }
         }
     });
@@ -72,8 +79,7 @@ $(document).ready(function(){
             items: 'all',
             source: function(query) {
                 var summit_id = $('#summit_id').val();
-                var event_id = $('#event_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/events/'+event_id+'/get_sponsors',{query:query});
+                return $.getJSON('api/v1/summits/'+summit_id+'/events/get_sponsors',{query:query});
             }
         }
     });
@@ -122,11 +128,12 @@ $(document).ready(function(){
 
     form.submit(function (event) {
         event.preventDefault();
+        form.find(':submit').attr('disabled','disabled');
 
         if (!form.valid()) return false;
         var summit_id = $('#summit_id').val();
-        var event_id = $('#event_id').val();
-        var url = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/update';
+        var event_id = ($('#event_id').val()) ? $('#event_id').val() : 0;
+        var url = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/save';
 
         var request = {
             title: $('#title').val(),
@@ -149,14 +156,24 @@ $(document).ready(function(){
             data: JSON.stringify(request),
             contentType: "application/json; charset=utf-8",
             dataType: "json"
-        }).done(function() {
-            swal("Updated!", "Your event was updated successfully.", "success");
+        }).done(function(saved_event) {
+            if (event_id) {
+                swal("Updated!", "Your event was updated successfully.", "success");
+            } else {
+                swal("Saved!", "Your event was created successfully.", "success");
+                $('#event_id').val(saved_event.ID);
+                $('.active','.breadcrumb').html(saved_event.Title);
+            }
+            form.find(':submit').removeAttr('disabled');
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
                 var response = $.parseJSON(jqXHR.responseText);
                 swal('Validation error', response.messages[0], 'warning');
+            } else {
+                swal('Error', 'There was a problem saving the event, please contact admin.', 'warning');
             }
+            form.find(':submit').removeAttr('disabled');
         });
 
         return false;

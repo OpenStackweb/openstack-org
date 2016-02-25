@@ -11,19 +11,19 @@ jQuery(document).ready(function($) {
         $('#menu ul').hide();
     });
 
-    $('#menu ul').hide();
+    //$('ul:not(:has(.active))','#menu').hide(); // hide all subsection unless there is an active tab
     $('#menu ul').children('.current').parent().show();
     //$('#menu ul:first').show();
     $('#menu li a').click(
         function() {
             var checkElement = $(this).next();
-            if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+            /*if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
                 return false;
-            }
+            }*/
             if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
                 $('#menu ul:visible').slideUp('normal');
                 checkElement.slideDown('normal');
-                return false;
+                //return false;
             }
         }
     );

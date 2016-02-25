@@ -292,7 +292,7 @@ class SummitAppAdminController extends Page_Controller
         $summit_id = intval($request->param('SummitID'));
         $summit = Summit::get()->byID($summit_id);
         $event_id = intval($request->param('EventID'));
-        $event = SummitEvent::get()->byID($event_id);
+        $event = ($event_id == 0) ? null : SummitEvent::get()->byID($event_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
@@ -314,6 +314,7 @@ class SummitAppAdminController extends Page_Controller
                 (
                     'Summit'   => $summit,
                     'Event'    => $event,
+                    'Tab'      => (($event) ? 3 : 4),
                 )
             )
         );

@@ -143,9 +143,12 @@ class SummitService
             $event->LocationID = intval($event_data['location_id']);
             $event->TypeID = intval($event_data['event_type']);
 
-            $event->AllowedSummitTypes()->setByIDList($event_data['summit_type']);
-            $event->Tags()->setByIDList(explode(',',$event_data['tags']));
-            $event->Sponsors()->setByIDList(explode(',',$event_data['sponsors']));
+            $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
+            $event->AllowedSummitTypes()->setByIDList($summit_types);
+            $tags = ($event_data['tags']) ? explode(',',$event_data['tags']) : array();
+            $event->Tags()->setByIDList($tags);
+            $sponsors = ($event_data['sponsors']) ? explode(',',$event_data['sponsors']) : array();
+            $event->Sponsors()->setByIDList($sponsors);
 
             // Speakers, if one of the added members is not a speaker, we need to make him one
             if ($event->isPresentation()) {
@@ -169,6 +172,69 @@ class SummitService
 
                 $presentation->Speakers()->setByIDList($speaker_ids);
             }
+
+            return $event;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $event_data
+     * @return mixed
+     */
+    public function createEvent(ISummit $summit, array $event_data)
+    {
+        $event_repository = $this->event_repository;
+        return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
+            $event_type_id = intval($event_data['event_type']);
+            $event_type = SummitEventType::get_by_id('SummitEventType',$event_type_id);
+
+            if ($event_type->Type == 'Presentation') {
+                $event = new Presentation();
+            } else {
+                $event = new SummitEvent();
+            }
+
+            $event->SummitID = $summit->getIdentifier();
+            $event->Title = $event_data['title'];
+            $event->Description = $event_data['description'];
+            $event->ShortDescription = $event_data['short_description'];
+            $event->setStartDate($event_data['start_date']);
+            $event->setEndDate($event_data['end_date']);
+            $event->AllowFeedBack = $event_data['allow_feedback'];
+            $event->LocationID = intval($event_data['location_id']);
+            $event->TypeID = intval($event_data['event_type']);
+
+            $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
+            $event->AllowedSummitTypes()->setByIDList($summit_types);
+            $tags = ($event_data['tags']) ? explode(',',$event_data['tags']) : array();
+            $event->Tags()->setByIDList($tags);
+            $sponsors = ($event_data['sponsors']) ? explode(',',$event_data['sponsors']) : array();
+            $event->Sponsors()->setByIDList($sponsors);
+
+            // Speakers, if one of the added members is not a speaker, we need to make him one
+            if ($event->isPresentation()) {
+                $speaker_ids = array();
+                $member_ids = explode(',',$event_data['speakers']);
+                foreach ($member_ids as $member_id) {
+                    $speaker = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
+
+                    if (!$speaker) {
+                        $member = Member::get()->byID($member_id);
+                        $speaker = new PresentationSpeaker();
+                        $speaker->FirstName = $member->FirstName;
+                        $speaker->LastName = $member->Surname;
+                        $speaker->MemberID = $member->ID;
+                        $speaker->write();
+                    }
+
+                    $speaker_ids[] = $speaker->ID;
+                }
+
+                $event->Speakers()->setByIDList($speaker_ids);
+            }
+
+            $event->write();
 
             return $event;
         });

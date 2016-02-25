@@ -7,6 +7,13 @@
     </li>
     <li <% if $Active == 3 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/events/schedule"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar fa-stack-1x "></i></span>Schedule</a>
+        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+            <li <% if $Active == 4 %> class="active" <% end_if %>>
+                <a href="$AdminLink/$SummitID/events/0">
+                    <span class="fa-stack fa-lg pull-left"><i class="fa fa-list-alt fa-stack-1x "></i></span>New Event
+                </a>
+            </li>
+        </ul>
     </li>
     <!--
     <li>

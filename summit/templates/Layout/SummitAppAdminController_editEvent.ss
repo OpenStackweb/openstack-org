@@ -1,7 +1,7 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-        <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID, Active=3 %>
+        <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID, Active=$Tab %>
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
     <div id="page-content-wrapper" class="edit-event-wrapper" >
@@ -9,7 +9,7 @@
             <li><a href="$Top.Link">Home</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/events/schedule">Events</a></li>
-            <li class="active">$Event.Title</li>
+            <li class="active"><% if $Event %> $Event.Title <% else %> New Event <% end_if %></li>
         </ol>
 
         <form id="edit-event-form">
@@ -68,7 +68,6 @@
                     <div class="col-md-4">
                         <label for="summit_type">Summit Type</label>
                         <select class="form-control" id="summit_type" multiple>
-                            <option hidden value="">Select a Summit Type</option>
                             <% loop Summit.Types() %>
                                 <option value="$ID" <% if $Top.Event.isAllowedSummitType($Title) %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
@@ -101,8 +100,8 @@
             <script>
                 var speakers = [];
             </script>
-            <% if $Event.isPresentation() %>
-            <div class="form-group">
+
+            <div class="form-group speakers_container" <% if $Event.isPresentation() == 0 %> style="display:none" <% end_if %>>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="speakers">Speakers</label><br>
@@ -111,11 +110,12 @@
                 </div>
             </div>
             <script>
-                <% loop $Event.Speakers() %>
-                speakers.push({id : "{$MemberID}", name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})"});
-                <% end_loop %>
+                <% if $Event.Speakers() %>
+                    <% loop $Event.Speakers() %>
+                    speakers.push({id : "{$MemberID}", name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})"});
+                    <% end_loop %>
+                <% end_if %>
             </script>
-            <% end_if %>
 
             <button type="submit" class="btn btn-primary">Save</button>
             <% if $Event.isPublished() %>
@@ -127,14 +127,18 @@
 
     <script>
         var tags = [];
-        <% loop $Event.Tags() %>
-        tags.push({id : "{$ID}", name : "{$Tag.JS}"});
-        <% end_loop %>
+        <% if $Event.Tags() %>
+            <% loop $Event.Tags() %>
+            tags.push({id : "{$ID}", name : "{$Tag.JS}"});
+            <% end_loop %>
+        <% end_if %>
 
         var sponsors = [];
-        <% loop $Event.Sponsors() %>
-        sponsors.push({id : "{$ID}", name : "{$Name.JS}"});
-        <% end_loop %>
+        <% if $Event.Sponsors() %>
+            <% loop $Event.Sponsors() %>
+            sponsors.push({id : "{$ID}", name : "{$Name.JS}"});
+            <% end_loop %>
+        <% end_if %>
     </script>
 
 
