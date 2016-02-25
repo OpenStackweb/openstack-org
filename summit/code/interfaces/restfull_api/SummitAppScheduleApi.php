@@ -157,12 +157,10 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 array_push($entry['summit_types_id'], $t->ID);
             }
 
-            if ($e->isPresentation()) {
-                if($e->Category())
-                {
-                    foreach ($e->Category()->getCategoryGroups() as $group) {
-                        array_push($entry['category_group_ids'], $group->ID);
-                    }
+            if($e instanceof Presentation && $e->Category()->exists())
+            {
+                foreach ($e->Category()->getCategoryGroups() as $group) {
+                    array_push($entry['category_group_ids'], $group->ID);
                 }
             }
 
