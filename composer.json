@@ -28,7 +28,8 @@
     "silverstripe/gridfieldajaxrefresh":"dev-master",
     "parse/php-sdk" : "1.1.*",
     "fzaninotto/Faker": "^1.5",
-    "symfony/yaml":  "*"
+    "symfony/yaml":  "*",
+    "stevie-mayhew/trait-loader":  "dev-master"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",

@@ -71,7 +71,7 @@
         summit.event_types[{$ID}] =
         {
             type : "{$Type.JS}",
-            color : "{$Color}",
+            color : "{$FormattedColor}",
         };
         <% end_loop %>
 
@@ -82,7 +82,7 @@
            type: "{$Type}",
            name : "{$Title.JS}",
            description : "{$Description.JS}",
-           color : "{$Color}"
+           color : "{$FormattedColor}"
         };
         <% end_loop %>
 
@@ -91,7 +91,7 @@
         {
            name : "{$Name.JS}",
            description : "{$Description.JS}",
-           color : "{$Color}"
+           color : "{$FormattedColor}"
         };
         <% end_loop %>
 
