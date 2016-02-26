@@ -300,6 +300,17 @@ implements IPresentationSpeaker
         $this->write();
     }
 
+    public function PastAcceptedPresentations($limit = 5) {
+        $AcceptedPresentations = new ArrayList();
+        $Presentations = $this->Presentations()->sort('Created','DESC')->limit($limit);
+        foreach ($Presentations as $Presentation) {
+            if($Presentation->SelectionStatus() == "accepted")
+                $AcceptedPresentations->push($Presentation);
+        }
+
+        return $AcceptedPresentations;
+    }
+
     public function AcceptedPresentations($summit_id = null) {
         $AcceptedPresentations = new ArrayList();
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;

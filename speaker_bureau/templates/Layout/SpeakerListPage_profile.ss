@@ -83,13 +83,13 @@
                         <p>I'm involved in the following OpenStack projects: $Projects</p>
                     </div>
                 <% end_if %>
-                <% if Presentations() %>
+                <% if PastAcceptedPresentations() %>
                     <div class="span-4">
                         <strong>Presentations from previous OpenStack Summits:</strong>
                     </div>
                     <div class="span-6 last">
                         <ul>
-                            <% loop Presentations.Limit(5).Sort(StartDate, DESC) %>
+                            <% loop PastAcceptedPresentations(5) %>
                                 <li>
                                     <a href="$Link"><% if $Title != '' %>$Title<% else %>$Link<% end_if %></a>
                                 </li>
