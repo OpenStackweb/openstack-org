@@ -72,9 +72,9 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
     static $url_handlers = array(
         'POST '                       => 'createEvent',
+        'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'PUT $EVENT_ID!'              => 'updateEvent',
         'GET unpublished/$Source!'    => 'getUnpublishedEventsBySource',
-        'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'DELETE $EVENT_ID!/unpublish' => 'unpublishEvent',
     );
 
