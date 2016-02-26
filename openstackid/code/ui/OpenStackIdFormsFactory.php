@@ -19,7 +19,7 @@ class OpenStackIdFormsFactory {
      * @param string $back_url
      * @return Form
      */
-    public static function buildLoginForm(Controller $controller, $back_url){
+    public static function buildLoginForm(Controller $controller, $back_url = ''){
 
         if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false){
             $form = MemberAuthenticator::get_login_form($controller);

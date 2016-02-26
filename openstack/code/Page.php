@@ -350,6 +350,15 @@ class Page_Controller extends ContentController
 
     }
 
+    public function LoginForm() {
+
+        $back_url = '';
+        if($this->request->getVar('BackURL')){
+            $back_url = $this->request->getVar('BackURL');
+        }
+        return OpenStackIdFormsFactory::buildLoginForm($this, $back_url);
+    }
+
     public function DateSortedChildren()
     {
         $children = $this->Children();
