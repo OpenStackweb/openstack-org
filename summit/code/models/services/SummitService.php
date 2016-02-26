@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitService
+final class SummitService implements ISummitService
 {
 
     /**
@@ -186,13 +186,10 @@ class SummitService
         $event_repository = $this->event_repository;
         return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
             $event_type_id = intval($event_data['event_type']);
-            $event_type = SummitEventType::get_by_id('SummitEventType',$event_type_id);
+            $event_type    = SummitEventType::get()->byID($event_type_id);
+            if(is_null($event_type)) throw new NotFoundEntityException;
 
-            if ($event_type->Type == 'Presentation'|| $event_type->Type = 'Keynotes') {
-                $event = new Presentation();
-            } else {
-                $event = new SummitEvent();
-            }
+            $event = ($event_type->Type == 'Presentation'|| $event_type->Type == 'Keynotes') ? new Presentation :  new SummitEvent;
 
             $event->SummitID = $summit->getIdentifier();
             $event->Title = $event_data['title'];
@@ -211,12 +208,11 @@ class SummitService
             $event->Sponsors()->setByIDList($sponsors);
 
             // Speakers, if one of the added members is not a speaker, we need to make him one
-            if ($event->isPresentation()) {
+            if ($event instanceof Presentation) {
                 $speaker_ids = array();
                 $member_ids = explode(',',$event_data['speakers']);
                 foreach ($member_ids as $member_id) {
                     $speaker = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
-
                     if (!$speaker) {
                         $member = Member::get()->byID($member_id);
                         $speaker = new PresentationSpeaker();
@@ -228,7 +224,6 @@ class SummitService
 
                     $speaker_ids[] = $speaker->ID;
                 }
-
                 $event->Speakers()->setByIDList($speaker_ids);
             }
 
@@ -302,13 +297,15 @@ class SummitService
     }
 
     /**
-     * @param int $ticket_id
-     * @param int $member_id
+     * @param ISummit $summit
+     * @param $ticket_id
+     * @param $member_id
      * @return mixed
      */
     public function reassignTicket(ISummit $summit, $ticket_id, $member_id)
     {
         $attendee_repository = $this->attendee_repository;
+
         return $this->tx_service->transaction(function() use($summit, $ticket_id, $member_id, $attendee_repository){
 
             if(!$ticket_id)

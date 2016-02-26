@@ -33,7 +33,7 @@ $(document).ready(function(){
                 var max_reached = $('.bootstrap-tagsinput','.member_container').hasClass('bootstrap-tagsinput-max');
                 if (!max_reached) {
                     var summit_id = $('#summit_id').val();
-                    return $.getJSON('api/v1/summits/'+summit_id+'/members/options',{query:query});
+                    return $.getJSON('api/v1/summits/'+summit_id+'/members',{query:query});
                 } else {
                     return false;
                 }
@@ -50,7 +50,7 @@ $(document).ready(function(){
         var summit_id = $('#summit_id').val();
         $('#member_error').hide();
 
-        $.getJSON('api/v1/summits/'+summit_id+'/attendees/member/'+event.item.id, {}, function(data){
+        $.getJSON('api/v1/summits/'+summit_id+'/members/'+event.item.id, {}, function(data){
             if (data.speaker) {
                 var title = (data.speaker.Title) ? data.speaker.Title : '';
                 var first_name = (data.speaker.FirstName) ? data.speaker.FirstName : '';
@@ -110,7 +110,7 @@ $(document).ready(function(){
                 var max_reached = $('.bootstrap-tagsinput','.affiliation').hasClass('bootstrap-tagsinput-max');
                 if (!max_reached) {
                     var summit_id = $('#summit_id').val();
-                    return $.getJSON('api/v1/summits/'+summit_id+'/attendees/company_options',{query:query});
+                    return $.getJSON('api/v1/summits/'+summit_id+'/companies',{query:query});
                 } else {
                     return false;
                 }
@@ -140,8 +140,10 @@ $(document).ready(function(){
     });
 
     $('.ticket').click(function(){
+        var summit_id   = $('#summit_id').val();
+        var attendee_id = $('#attendee_id').val();
         var ticket_id = $(this).data('ticket');
-        $.getJSON('api/v1/summits/'+summit_id+'/attendees/ticket/'+ticket_id, {}, function(data){
+        $.getJSON('api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/tickets/'+ticket_id, {}, function(data){
             $('#ticket-external').html(data.ExternalOrderId);
             $('#ticket-bought-date').html(data.TicketBoughtDate);
             $('#ticket-external-attendee').html(data.ExternalAttendeeId);
@@ -159,7 +161,7 @@ $(document).ready(function(){
                         var max_reached = $('.bootstrap-tagsinput','.ticket_member_container').hasClass('bootstrap-tagsinput-max');
                         if (!max_reached) {
                             var summit_id = $('#summit_id').val();
-                            return $.getJSON('api/v1/summits/'+summit_id+'/members/options',{query:query});
+                            return $.getJSON('api/v1/summits/'+summit_id+'/members',{query:query});
                         } else {
                             return false;
                         }
@@ -183,7 +185,7 @@ $(document).ready(function(){
 
         var summit_id = $('#summit_id').val();
         var attendee_id = $('#attendee_id').val();
-        var url = 'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/update';
+        var url = 'api/v1/summits/'+summit_id+'/attendees/'+attendee_id;
 
         var request = {
             member: $('#member').val(),
@@ -238,17 +240,19 @@ $(document).ready(function(){
                     confirmButtonText: "Yes, delete it!",
                     closeOnConfirm: false
                 }, function(){
-                    updateTicket();
+                    reassignTicket();
                 });
         } else {
-            updateTicket();
+            reassignTicket();
         }
     });
 
-    function updateTicket() {
-        var summit_id = $('#summit_id').val();
-        var ticket_id = $('#ticket_id').val();
-        var url = 'api/v1/summits/'+summit_id+'/attendees/'+ticket_id+'/update_ticket';
+    function reassignTicket() {
+        var summit_id   = $('#summit_id').val();
+        var attendee_id = $('#attendee_id').val();
+        var ticket_id   = $('#ticket_id').val();
+
+        var url = 'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/tickets/'+ticket_id+'/reassign';
 
         var request = {
             member: $('#ticket-member').val()
@@ -276,7 +280,7 @@ $(document).ready(function(){
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
                 var response = $.parseJSON(jqXHR.responseText);
-                swal('Validation error', response.messages[0], 'warning');
+                swal('Validation error', response.messages[0].message, 'warning');
             }
         });
     }

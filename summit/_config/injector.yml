@@ -62,12 +62,29 @@ Injector:
       0: '%$SummitPackageRepository'
       1: '%$SummitAddOnRepository'
       2: '%$SummitPackagePurchaseOrderManager'
+      3: '%$SummitRepository'
+  SummitAppAttendeesApi:
+    constructor:
+      0: '%$SummitRepository'
+      1: '%$EventRepository'
+      2: '%$SummitAttendeeRepository'
+      3: '%$PresentationRepository'
+      4: '%$SummitService'
+  SummitAppEventsApi:
+    constructor:
+      0: '%$SummitRepository'
+      1: '%$EventRepository'
+      2: '%$SummitAttendeeRepository'
+      3: '%$PresentationRepository'
+      4: '%$SummitService'
   BatchTaskRepository:
     class: SapphireBatchTaskRepository
   BatchTaskFactory:
     class: BatchTaskFactory
   SpeakerRepository:
     class: SapphirePresentationSpeakerRepository
+  PresentationRepository:
+      class: SapphireSummitPresentationRepository
   SpeakerSelectionAnnouncementSenderFactory:
     class: SpeakerSelectionAnnouncementEmailSenderFactory
   SpeakerSummitRegistrationPromoCodeRepository:
@@ -102,3 +119,9 @@ Injector:
       5: '%$SummitAttendeeRepository'
       6: '%$SummitRepository'
       7: '%$TransactionManager'
+  SummitService:
+    constructor:
+      0: '%$SummitRepository'
+      1: '%$EventRepository'
+      2: '%$SummitAttendeeRepository'
+      3: '%$TransactionManager'

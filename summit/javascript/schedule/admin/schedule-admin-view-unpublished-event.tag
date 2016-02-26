@@ -34,7 +34,8 @@
         });
 
         getPopoverContent() {
-            var res = '<div class="row"><div class="col-md-12">'+self.data.description+'</div></div>';
+            var description = self.data.description != null ? self.data.description : 'TBD';
+            var res = '<div class="row"><div class="col-md-12">'+description+'</div></div>';
             if(typeof(self.data.speakers) !== 'undefined') {
                 res += '<div class="row"><div class="col-md-12"><b>Speakers</b></div></div>';
                 for(var idx in self.data.speakers) {

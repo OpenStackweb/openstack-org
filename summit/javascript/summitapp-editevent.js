@@ -57,7 +57,7 @@ $(document).ready(function(){
             source: function(query) {
                 var summit_id = $('#summit_id').val();
                 var event_id = $('#event_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/members/options',{query:query});
+                return $.getJSON('api/v1/summits/'+summit_id+'/members',{query:query});
             }
         }
     });
@@ -77,7 +77,7 @@ $(document).ready(function(){
             items: 'all',
             source: function(query) {
                 var summit_id = $('#summit_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/events/get_tags',{query:query});
+                return $.getJSON('api/v1/summits/'+summit_id+'/tags',{query:query});
             }
         }
     });
@@ -97,7 +97,7 @@ $(document).ready(function(){
             items: 'all',
             source: function(query) {
                 var summit_id = $('#summit_id').val();
-                return $.getJSON('api/v1/summits/'+summit_id+'/events/get_sponsors',{query:query});
+                return $.getJSON('api/v1/summits/'+summit_id+'/sponsors',{query:query});
             }
         }
     });
@@ -151,16 +151,8 @@ $(document).ready(function(){
         if (!form.valid()) return false;
         var summit_id = $('#summit_id').val();
         var event_id = ($('#event_id').val()) ? $('#event_id').val() : 0;
-        var url = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/';
-        var request_type = '';
-
-        if (event_id) {
-            request_type = 'PUT';
-            url = url + 'update';
-        } else {
-            request_type = 'POST';
-            url = url + 'create';
-        }
+        var url      = 'api/v1/summits/'+summit_id+'/events';
+        if(event_id) url += '/'+event_id
 
         var request = {
             title: $('#title').val(),
@@ -177,7 +169,7 @@ $(document).ready(function(){
         };
 
         $.ajax({
-            type: request_type,
+            type: event_id ? 'PUT' : 'POST',
             url: url,
             data: JSON.stringify(request),
             contentType: "application/json; charset=utf-8",
@@ -187,6 +179,7 @@ $(document).ready(function(){
                 swal("Updated!", "Your event was updated successfully.", "success");
             } else {
                 swal("Saved!", "Your event was created successfully.", "success");
+                window.location = window.location+'/'+saved_event.ID;
                 $('#event_id').val(saved_event.ID);
                 $('.active','.breadcrumb').html(saved_event.Title);
             }

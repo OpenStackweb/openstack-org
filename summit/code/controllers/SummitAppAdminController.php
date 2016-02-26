@@ -58,7 +58,7 @@ class SummitAppAdminController extends Page_Controller
         '$SummitID!/events/unpublished'                              => 'pendingEvents',
         '$SummitID!/events/presentation-lists/$PresentationListId!'  => 'editPresentationList',
         '$SummitID!/events/presentation-lists'                       => 'presentationLists',
-        '$SummitID!/events/$EventID!'                                => 'editEvent',
+        '$SummitID!/events/$EventID'                                 => 'editEvent',
         '$SummitID!/tickets'                                         => 'ticketTypes',
         '$SummitID!/attendees/$AttendeeID!'                          => 'editAttendee',
         '$SummitID!/attendees'                                       => 'attendees',
