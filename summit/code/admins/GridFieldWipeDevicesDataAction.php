@@ -58,7 +58,7 @@ class GridFieldWipeDevicesDataAction implements GridField_HTMLProvider, GridFiel
     {
         return array(
             'wipeDevicesDataAction/$ActionID!' => 'handleWipeDevicesDataAction',
-            'wipeDevicesGetAttendeesAction'                => 'handleGetAttendeesAction',
+            'wipeDevicesGetAttendeesAction'    => 'handleGetAttendeesAction',
         );
     }
 
@@ -94,7 +94,7 @@ class GridFieldWipeDevicesDataAction implements GridField_HTMLProvider, GridFiel
 SELECT A.ID,  CONCAT(M.FirstName,' ',M.Surname) AS FullName, M.Email  FROM SummitAttendee A INNER JOIN
 Member M on M.ID = A.MemberID
 WHERE A.SummitID = {$summit_id}
-HAVING FullName LIKE '%{$term}%' OR M.Email LIKE '%{$term}%';
+HAVING FullName LIKE '%{$term}%' OR M.Email LIKE '%{$term}% LIMIT 10;';
 SQL;
         foreach(DB::query($sql) as $row)
         {
