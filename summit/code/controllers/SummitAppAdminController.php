@@ -19,7 +19,13 @@ class SummitAppAdminController extends Page_Controller
     {
         $this->useJqueryUI(true);
         parent::init();
-        if(!Permission::check('ADMIN')) return Security::permissionFailure($this);
+
+        if(!Member::currentUser())
+            return OpenStackIdCommon::doLogin();
+
+        if(!Permission::check('ADMIN'))
+            return Security::permissionFailure($this);
+
         Requirements::css('themes/openstack/css/chosen.css');
         Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
         Requirements::css('summit/css/summit-admin.css');
@@ -71,9 +77,7 @@ class SummitAppAdminController extends Page_Controller
      */
     public function index()
     {
-        if(Member::currentUser())
-            return $this->redirect($this->Link('directory'));
-        return $this->redirect('/Security/login/?BackURL=/summit-admin');
+        return $this->redirect($this->Link('directory'));
     }
 
     public function Link($action = null)
