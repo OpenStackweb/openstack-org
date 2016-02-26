@@ -28,8 +28,7 @@
     "silverstripe/gridfieldajaxrefresh":"dev-master",
     "parse/php-sdk" : "1.1.*",
     "fzaninotto/Faker": "^1.5",
-    "symfony/yaml":  "*",
-    "stevie-mayhew/trait-loader":  "dev-master"
+    "symfony/yaml":  "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",
@@ -42,7 +41,8 @@
   "autoload": {
     "classmap": [
       "geoip/code",
-      "html2pdf_v4.03"
+      "html2pdf_v4.03",
+      "summit/code/infrastructure/traits"
     ]
   },
   "config": {

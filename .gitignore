@@ -80,3 +80,4 @@ puppet/certs/ssl_certs
 keys.dev.pub
 keys.tags.pub
 trait-loader/
+gridfieldextensions/
