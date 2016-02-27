@@ -159,7 +159,11 @@ require('./comments-list.tag')
 							<img class="img-circle profile-pic"  title="{ first_name+' '+last_name }" src="{ photo_url }"/>
 							<a if="{ available_for_bureau }" href="/community/speakers/profile/{ id }" title="{ first_name+' '+last_name }" target="_blank">{ first_name }&nbsp;{ last_name }</a>
 							<span if="{ !available_for_bureau }">{ first_name }&nbsp;{ last_name }</span>		</strong></h5>
-							<p>{ title }</p>
+							<p>
+									{ title }
+									<br/>
+									<a href="mailto:{ email }">{ email }</a>
+							</p>
 							<raw content="{ bio }"/>
 							<div if="{ former_presentations.length > 0 }">
 							<strong>Presentations from previous OpenStack Summits:</strong>
