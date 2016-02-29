@@ -315,3 +315,50 @@ a.releaseButton:active {
     background-size: cover;
     position: relative;
 }
+
+.nfv a {
+    display: block;
+    background: #b9301d;
+    padding: 10px 20px;
+    border-radius: 2px;
+    width: 80%;
+    margin: 10px auto 0;
+    color: #fff!important;
+    font-weight: 600;
+    font-size: 150%
+}
+
+.nfv .smallQuote {
+    margin-top: 130px;
+    color: white;
+    font-size: 150%;
+}
+
+.nfv .largeQuote {
+    margin-top: 150px;
+    color: white;
+    font-size: 300%;
+}
+
+.nfv a {
+    text-decoration: none;
+    background: #B73124;
+    color: white;
+    max-width: 300px;
+}
+
+.nfv a:hover {
+    text-decoration: none;
+    background: #831917;      
+    color: white;
+    max-width: 300px;
+}
+
+
+.nfv {
+    text-align: center;
+    color: #f8f8f8;
+    background: url('/themes/openstack/images/nfv/nfv-hero.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
