@@ -60,9 +60,9 @@
                 <% if TwitterName || LinkedInProfile || IRCHandle || Bio %>
                     <hr>
                 <% end_if %>
-                <% if TwitterHandle %>
+                <% if TwitterName %>
                     <div class="span-4"><strong>Twitter</strong></div>
-                    <div class="span-6 last"><a href="https://twitter.com/{$TwitterHandle}">@{$TwitterHandle}</a><br>
+                    <div class="span-6 last"><a href="https://twitter.com/{$TwitterName}">@{$TwitterName}</a><br>
 
                         <p>&nbsp;</p></div>
                 <% end_if %>

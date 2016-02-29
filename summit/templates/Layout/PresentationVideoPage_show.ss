@@ -11,7 +11,7 @@
 			<% end_loop %><br>
 		<strong>Speakers</strong>:
 			<% loop $PresentationSpeakers %>
-				<div><a href="{$Top.Link}?Speaker={$ID}">$Title</a> <% if $TwitterHandle %>(<a href="http://twitter.com/{$TwitterHandle}">Follow on Twitter</a>)<% end_if %></div>
+				<div><a href="{$Top.Link}?Speaker={$ID}">$Title</a> <% if $TwitterName %>(<a href="http://twitter.com/{$TwitterName}">Follow on Twitter</a>)<% end_if %></div>
 			<% end_loop %><br>
 
 		<div class="content">

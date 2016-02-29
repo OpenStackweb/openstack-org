@@ -34,10 +34,10 @@
                         <div class="info_item_text">$IRCHandle</div>
                     </div>
                     <% end_if %>
-                    <% if TwitterHandle %>
+                    <% if TwitterName %>
                     <div class="info_item row">
                         <div class="info_item_icon"><i class="fa fa-2x fa-twitter"></i></div>
-                        <div class="info_item_text">$TwitterHandle</div>
+                        <div class="info_item_text">$TwitterName</div>
                     </div>
                     <% end_if %>
                 </div>
