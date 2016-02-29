@@ -11,6 +11,11 @@
 <div class='case-studies-hero'>
 	<div class='container'>
 		<ul class='rotator_new rotator'>
+		<li data-label = 'NFV' class = 'nfv'>
+			<p class='smallQuote'>OpenStack Foundation Report</p>
+			<p class='largeQuote'>Accelerating NFV Delivery with OpenStack</p>
+			<a href="/nfv/">Read The Report</a>
+		</li>
 		<li data-label = 'Enterprise Booklet' class = 'enterprise-booklet'>
 			<p class='largeQuote'>Current OpenStack users wrote a booklet of use cases and planning tips with IT executives in mind</p>
 			<a href="//www.openstack.org/assets/pdf-downloads/business-perspectives.pdf">Download the booklet</a>
