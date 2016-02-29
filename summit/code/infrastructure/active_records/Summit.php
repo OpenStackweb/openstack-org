@@ -822,7 +822,7 @@ final class Summit extends DataObject implements ISummit
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
-            $bulk_summit_types->setTitle('Set Summit Types');
+            $bulk_summit_types->setTitle('Set Summit Type');
             $gridField = new GridField('Events', 'Events', $this->Events()->filter('ClassName', 'SummitEvent'), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Events', $gridField);
@@ -830,7 +830,7 @@ final class Summit extends DataObject implements ISummit
             //track selection list presentations
 
             $config = GridFieldConfig_RecordEditor::create(25);
-            $gridField = new GridField('TrackChairs', 'TrackChairs Selection Lists',
+            $gridField = new GridField('TrackChairsSelectionLists', 'TrackChairs Selection Lists',
                 SummitSelectedPresentationList::get()->filter('ListType', 'Group')
                     ->where(' CategoryID IN ( SELECT ID FROM PresentationCategory WHERE SummitID = '.$summit_id.')')
                 , $config);
@@ -883,7 +883,7 @@ final class Summit extends DataObject implements ISummit
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
-            $bulk_summit_types->setTitle('Set Summit Types');
+            $bulk_summit_types->setTitle('Set Summit Type');
             $gridField = new GridField('Presentations', 'Presentations', $this->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Presentations', $gridField);

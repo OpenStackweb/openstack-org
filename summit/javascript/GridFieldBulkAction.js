@@ -38,13 +38,15 @@
                 var $btn        = $(this);
                 var url         = link.replace("{entityID}", event_type);
                 var ids         = $parent.find('input.bulkSelectAll:first').getSelectRecordsID();
-                if(ids.length === 0)
+                if(ids.length === 0 && event_type.indexOf('_ALL') === -1)
                 {
                     alert('you must select at least one row!');
                     return false;
                 }
                 var data  = { records: ids };
                 $btn.button("disable");
+                var form = $('#Form_ItemEditForm')
+                form.addClass('loading');
                 $.ajax({
                     url: url,
                     data: data,
@@ -52,6 +54,7 @@
                     context: $(this)
                 }).done(function(data, textStatus, jqXHR) {
                     $btn.button("enable");
+                    form.removeClass('loading');
                     this.getGridField().reload();
                 });
                 return false;

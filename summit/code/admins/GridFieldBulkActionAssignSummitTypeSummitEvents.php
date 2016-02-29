@@ -18,16 +18,47 @@ class GridFieldBulkActionAssignSummitTypeSummitEvents extends GridFieldBulkActio
     protected function getEntities()
     {
         $summit_id = intval($_REQUEST['SummitID']);
-        return SummitType::get()->filter('SummitID', $summit_id)->map('ID', 'Title');
+        $res = SummitType::get()->filter('SummitID', $summit_id)->map('ID', 'Title');
+        $additional_actions = array();
+        foreach ($res->toArray() as $k => $v) {
+            $additional_actions[$k . '_ALL'] = $v . ' ( COMPLETE RECORDSET )';
+        }
+        foreach ($additional_actions as $k => $v) {
+            $res->push($k, $v);
+        }
+
+        return $res;
     }
 
-    protected function processRecordIds(array $ids, $entity_id)
+    protected function processRecordIds(array $ids, $entity_id, $gridField, $request)
     {
-       foreach($ids as $id)
-       {
-           $event = SummitEvent::get()->byID($id);
-           if(is_null($event)) continue;
-           $event->AllowedSummitTypes()->add($entity_id);
-       }
+        $summit_id = intval($request->param('ID'));
+        if ((is_null($ids) || count($ids) === 0) && strstr($entity_id, '_ALL') !== false) {
+            $entity_id = explode('_', $entity_id);
+            $entity_id = intval($entity_id[0]);
+
+
+            $query = <<<SQL
+INSERT INTO SummitEvent_AllowedSummitTypes
+(
+`SummitEventID`,
+`SummitTypeID`)
+SELECT ID, {$entity_id} FROM SummitEvent WHERE SummitID = {$summit_id} AND ClassName = '{$gridField->getModelClass()}'
+AND NOT EXISTS (SELECT 1 FROM SummitEvent_AllowedSummitTypes
+WHERE
+SummitEvent_AllowedSummitTypes.SummitEventID = SummitEvent.ID AND SummitEvent_AllowedSummitTypes.SummitTypeID = {$entity_id});
+SQL;
+
+            DB::query($query);
+        }
+        else {
+            foreach ($ids as $id) {
+                $event = SummitEvent::get()->byID($id);
+                if (is_null($event)) {
+                    continue;
+                }
+                $event->AllowedSummitTypes()->add($entity_id);
+            }
+        }
     }
 }

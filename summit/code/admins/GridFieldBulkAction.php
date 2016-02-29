@@ -73,10 +73,10 @@ abstract class GridFieldBulkAction implements GridField_HTMLProvider, GridField_
     {
         $vars = Controller::curr()->getRequest()->requestVars();
 
-        return $vars['records'];
+        return isset($vars['records'])? $vars['records']:array();
     }
 
-    protected abstract function processRecordIds(array $ids, $entity_id);
+    protected abstract function processRecordIds(array $ids, $entity_id, $gridField, $request);
 
     public function handleAssignBulkAction($gridField, $request)
     {
@@ -84,7 +84,7 @@ abstract class GridFieldBulkAction implements GridField_HTMLProvider, GridField_
         $controller      = $gridField->getForm()->Controller();
         $this->gridField = $gridField;
         $ids             = $this->getRecordIDList();
-        $this->processRecordIds($ids, $entity_id);
+        $this->processRecordIds($ids, $entity_id, $gridField, $request);
         $response = new SS_HTTPResponse(Convert::raw2json(array(
             'done' => true,
             'records' => $ids,
