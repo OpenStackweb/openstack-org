@@ -24,9 +24,9 @@
             <div class="col-md-6">
                 <label for="select_venue">Venue</label>
                 <select id="select_venue" name="select_venue" style="width: 80%">
-                    <option value=''>-- Select A Venue --</option>
-                    <option value="{ id }" each={ id, location in summit.locations } >{ location.name }</option>
+                    <option hidden value=''>-- Select A Venue --</option>
                     <option value="0">TBA</option>
+                    <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ summit.locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
                 </select>
             </div>
         </div>
@@ -106,6 +106,9 @@
                             self.clearClicked();
                             self.doFilter();
                         });
+
+                        $('#select_day').chosen();
+                        $('#select_venue').chosen();
 
                         $('#search_published').click(function(e) {
                             var search_term = $('#published_search_term').val();
@@ -227,6 +230,39 @@
 
                 });
 
+                getLocationOptionCSSClass(class_name) {
+                    switch(class_name) {
+                        case 'SummitVenue':
+                            return 'location-venue';
+                        break;
+                        case 'SummitHotel':
+                            return 'location-hotel';
+                        break;
+                        case 'SummitExternalLocation':
+                             return 'location-external';
+                        break;
+                        case 'SummitVenueRoom':
+                            return 'location-venue-room';
+                        break;
+                    }
+                }
+
+                getLocationOptionTitle(class_name) {
+                    switch(class_name) {
+                        case 'SummitVenue':
+                            return 'Venue';
+                        break;
+                        case 'SummitHotel':
+                            return 'Hotel';
+                        break;
+                        case 'SummitExternalLocation':
+                            return 'External Location';
+                        break;
+                        case 'SummitVenueRoom':
+                            return 'Room';
+                        break;
+                    }
+                }
 
         </script>
 </schedule-admin-view-published-filters>

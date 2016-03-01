@@ -62,7 +62,7 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
-        $f->addFieldToTab('Root.Main', new TextField('Capacity','Capacity'));
+        $f->addFieldToTab('Root.Main', new NumericField('Capacity','Capacity'));
         $f->addFieldToTab('Root.Main', new HiddenField('VenueID','VenueID'));
         // hack
         $this->SummitID = $_REQUEST['SummitID'];

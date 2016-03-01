@@ -26,6 +26,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         'AllowFeedBack'    => 'Boolean',
         'AvgFeedbackRate'  => 'Float',
         'RSVPLink'         => 'Text',
+        'HeadCount'        => 'Int',
     );
 
     private static $has_many = array
@@ -310,7 +311,8 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         $f->addFieldToTab('Root.Main', new TextField('Title','Title'));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
-        $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Short Description'));
+        $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Abstract'));
+        $f->addFieldToTab('Root.Main', new TextField('HeadCount','HeadCount'));
         $f->tag('Tags', 'Tags', Tag::get(), $this->Tags())->configure()
         ->setTitleField('Tag')
         ->end();
@@ -612,5 +614,14 @@ SQL;
     public function getTags()
     {
         return $this->getManyManyComponents('Tags');
+    }
+
+    /**
+     * @return int
+     */
+    public function AttendeesScheduleCount()
+    {
+        $res = DB::query("SELECT COUNT(ID) AS QTY FROM SummitAttendee_Schedule WHERE SummitEventID = {$this->ID};")->first();
+        return intval($res['QTY']);
     }
 }

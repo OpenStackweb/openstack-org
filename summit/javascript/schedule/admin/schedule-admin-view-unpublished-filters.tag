@@ -125,7 +125,7 @@
                             $('#track_col').hide();
                             $('#event_type_col').hide();
                             $('#event_status_col').show();
-                            $('#sort_list').append('<option value="SummitSelectedPresentation.Order">Slot</option>');
+                            $('#sort_list').append('<option value="SummitSelectedPresentation.Order">Track Chair List Order</option>');
                             second_source = $('#select_track_list').val();
                             break;
                         case 'events':

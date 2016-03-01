@@ -182,6 +182,14 @@ body
     margin-top: 10px;
 }
 
+.btn-rsvp-event
+{
+    background-color: #224066 !important;
+    border-color: #224066 !important;
+    border-radius: 0;
+    margin-top: 10px;
+}
+
 .tags-row, .speakers-row, .row-level
 {
     padding-bottom: 20px !important;

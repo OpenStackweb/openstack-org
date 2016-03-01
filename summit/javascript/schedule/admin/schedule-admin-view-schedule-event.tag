@@ -11,7 +11,11 @@
         </div>
         <div class="event-inner-body">
             <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title.substring(0, 75) }{ data.title.length > 75 ? '...':''}</a>
-            <div if={ data.status } class="presentation-status" title="status">&nbsp;{data.status}&nbsp;</div>
+            <div class="presentation-status">
+                <div if={ data.status }  class="event-status-component" title="status"><i class="fa fa-check-circle">&nbsp;{data.status}</i></div>
+                <div if={ data.headcount } class="event-status-component" title="headcount">&nbsp;<i class="fa fa-users">&nbsp;{data.headcount}&nbsp;of&nbsp;{ parent.summit.locations_dictionary[data.location_id].capacity }</i></div>
+                <div if={ data.attendees_schedule_count } class="event-status-component" title="# Added to Schedule">&nbsp;<i class="fa fa-calendar-check-o">&nbsp;{ data.attendees_schedule_count }</i></div>
+            </div>
         </div>
         <div class="ui-resizable-handle ui-resizable-s" title="{ data.end_datetime.format('hh:mm a') }">
             <span class="ui-icon ui-icon-triangle-1-s"></span>
@@ -63,7 +67,9 @@
     }
 
     getPopoverContent() {
-        var res = '<div class="row"><div class="col-md-12">'+self.data.description+'</div></div>';
+        var description = self.data.abstract != null ? self.data.abstract : self.data.description;
+        if(description == null) description = 'TBD';
+        var res = '<div class="row"><div class="col-md-12">'+description+'</div></div>';
         if(typeof(self.data.speakers) !== 'undefined') {
             res += '<div class="row"><div class="col-md-12"><b>Speakers</b></div></div>';
             for(var idx in self.data.speakers) {

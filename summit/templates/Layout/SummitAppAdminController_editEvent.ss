@@ -11,7 +11,6 @@
             <li><a href="$Top.Link/{$Summit.ID}/events/schedule">Events</a></li>
             <li class="active"><% if $Event %> $Event.Title <% else %> New Event <% end_if %></li>
         </ol>
-
         <form id="edit-event-form">
             <input type="hidden" id="summit_id" value="$Summit.ID" />
             <input type="hidden" id="event_id" value="$Event.ID" />
@@ -25,6 +24,10 @@
                 <textarea id="short_description" name="short_description" class="form-control">{$Event.ShortDescription}</textarea>
             </div>
             <div class="form-group">
+                <label for="headcount">Head Count</label>
+                <input type="number" class="form-control" id="headcount" name="headcount" value="{$Event.HeadCount}">
+            </div>
+            <div class="form-group">
                 <label for="rsvp_link">RSVP Link</label>
                 <input type="text" class="form-control" id="rsvp_link" name="rsvp_link" value="{$Event.RSVPLink}">
             </div>
@@ -32,8 +35,9 @@
                 <label>Location</label><br>
                 <div class="row">
                     <div class="col-md-6">
-                        <select class="form-control" id="location">
-                            <option hidden value="">Select a Venue</option>
+                        <select hidden class="form-control" id="location">
+                            <option hidden value=''>-- Select A Venue --</option>
+                            <option value="0">TBA</option>
                             <% loop Summit.getTopVenues() %>
                                 <option value="$ID"
                                     <% if $ClassName == 'SummitVenue' %>
@@ -51,6 +55,7 @@
                                     <% end_loop %>
                                 <% end_if %>
                             <% end_loop %>
+
                         </select>
                     </div>
                     <div class="col-md-3">

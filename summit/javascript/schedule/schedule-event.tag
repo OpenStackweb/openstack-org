@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-md-9">
                             <div class="bio-row">
-                                <raw content="{ short_desc }"/>
+                                <raw content="{ abstract }"/>
                             </div>
                             <div class="row tags-row" if={ tags_id.length > 0 }>
                                 <div class="col-xs-12 col-md-2 col-tags-title">
@@ -90,9 +90,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <a href="{ parent.base_url+'events/'+ this.id } " class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
+                        <div class="col-md-2">
+                            <a href="{ parent.base_url+'events/'+ this.id }" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
                         </div>
+                        <div class="col-md-2" if="{ this.rsvp_link != null && this.rsvp_link != ''}">
+                            <a href="{ this.rsvp_link }" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" target="_blank" role="button">RSVP to this Event</a>
+                        </div>
+
                     </div>
                 </div>
             </div>

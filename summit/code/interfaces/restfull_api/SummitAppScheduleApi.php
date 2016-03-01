@@ -127,25 +127,27 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         {
             $entry = array
             (
-                'id'                 => $e->ID,
-                'title'              => $e->Title,
-                'description'        => $e->Description,
-                'short_desc'         => $e->ShortDescription,
-                'start_datetime'     => $e->StartDate,
-                'end_datetime'       => $e->EndDate,
-                'start_time'         => $e->StartTime,
-                'end_time'           => $e->EndTime,
-                'allow_feedback'     => $e->AllowFeedBack,
-                'location_id'        => $e->LocationID,
-                'type_id'            => $e->TypeID,
-                'rsvp_link'          => $e->RSVPLink,
-                'sponsors_id'        => array(),
-                'summit_types_id'    => array(),
-                'category_group_ids' => array(),
-                'tags_id'            => array(),
-                'own'                => self::isEventOnMySchedule($e->ID, $summit),
-                'favorite'           => false,
-                'show'               => true
+                'id'                      => $e->ID,
+                'title'                    => $e->Title,
+                'description'              => $e->Description,
+                'abstract'                 => $e->ShortDescription,
+                'start_datetime'           => $e->StartDate,
+                'end_datetime'             => $e->EndDate,
+                'start_time'               => $e->StartTime,
+                'end_time'                 => $e->EndTime,
+                'allow_feedback'           => $e->AllowFeedBack,
+                'location_id'              => $e->LocationID,
+                'type_id'                  => $e->TypeID,
+                'rsvp_link'                => $e->RSVPLink,
+                'sponsors_id'              => array(),
+                'summit_types_id'          => array(),
+                'category_group_ids'       => array(),
+                'tags_id'                  => array(),
+                'own'                      => self::isEventOnMySchedule($e->ID, $summit),
+                'favorite'                 => false,
+                'show'                     => true,
+                'headcount'                => intval($e->HeadCount),
+                'attendees_schedule_count' => $e->AttendeesScheduleCount()
             );
 
             foreach($e->Tags() as $t)

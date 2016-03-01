@@ -20,7 +20,8 @@
                     speakers : {},
                     sponsors : {},
                     event_types:{},
-                    locations : {},
+                    locations : [],
+                    locations_dictionary: {},
                     tags: {},
                     tracks : [],
                     presentation_levels: {},
@@ -67,10 +68,26 @@
                     color : "{$Color}"
                 };
                 <% end_loop %>
-                <% loop $Summit.Locations %>
-                    <% if ClassName == SummitVenue || ClassName == SummitExternalLocation %>
-                    summit.locations[{$ID}] =
-                    {
+                <% loop $Summit.getTopVenues() %>
+                    <% if ClassName == SummitVenue || ClassName == SummitExternalLocation || ClassName == SummitHotel  %>
+
+
+                    summit.locations.push({
+                        id:$ID,
+                        class_name : "{$ClassName}",
+                        name       : "{$Name.JS}",
+                        description : "{$Description.JS}",
+                        address_1 : "{$Address1.JS}",
+                        address_2 : "{$Address2.JS}",
+                        city : "{$City}",
+                        state : "{$State}",
+                        country : "{$Country}",
+                        lng : '{$Lng}',
+                        lat : '{$Lat}',
+                    });
+
+                    summit.locations_dictionary[$ID] = {
+                        id:$ID,
                         class_name : "{$ClassName}",
                         name       : "{$Name.JS}",
                         description : "{$Description.JS}",
@@ -82,10 +99,18 @@
                         lng : '{$Lng}',
                         lat : '{$Lat}',
                     };
-                        <% if ClassName == SummitVenue %>
+                    <% if ClassName == SummitVenue %>
                             <% loop Rooms %>
-                            summit.locations[{$ID}] =
-                            {
+                            summit.locations.push({
+                                id         : $ID,
+                                class_name : "{$ClassName}",
+                                name       : "{$Name.JS}",
+                                capacity   : {$Capacity},
+                                venue_id   : {$VenueID},
+                            });
+
+                            summit.locations_dictionary[$ID] = {
+                                id         : $ID,
                                 class_name : "{$ClassName}",
                                 name       : "{$Name.JS}",
                                 capacity   : {$Capacity},

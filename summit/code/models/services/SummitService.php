@@ -136,6 +136,7 @@ final class SummitService implements ISummitService
 
             $event->Title = $event_data['title'];
             $event->RSVPLink = $event_data['rsvp_link'];
+            $event->HeadCount = intval($event_data['headcount']);
             $event->ShortDescription = $event_data['short_description'];
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
@@ -195,6 +196,7 @@ final class SummitService implements ISummitService
             $event->SummitID = $summit->getIdentifier();
             $event->Title = $event_data['title'];
             $event->RSVPLink = $event_data['rsvp_link'];
+            $event->HeadCount = intval($event_data['headcount']);
             $event->ShortDescription = $event_data['short_description'];
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
