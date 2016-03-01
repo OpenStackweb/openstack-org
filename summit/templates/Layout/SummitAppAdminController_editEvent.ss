@@ -18,21 +18,38 @@
 
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" value="{$Event.Title}">
+                <input type="text" class="form-control" id="title" name="title" value="{$Event.Title}">
             </div>
             <div class="form-group">
-                <label for="short_description">Short Description</label>
-                <textarea id="short_description" class="form-control">{$Event.ShortDescription}</textarea>
+                <label for="short_description">Short Description/Abstract</label>
+                <textarea id="short_description" name="short_description" class="form-control">{$Event.ShortDescription}</textarea>
             </div>
-
+            <div class="form-group">
+                <label for="rsvp_link">RSVP Link</label>
+                <input type="text" class="form-control" id="rsvp_link" name="rsvp_link" value="{$Event.RSVPLink}">
+            </div>
             <div class="form-group">
                 <label>Location</label><br>
                 <div class="row">
                     <div class="col-md-6">
                         <select class="form-control" id="location">
                             <option hidden value="">Select a Venue</option>
-                            <% loop Summit.Locations() %>
-                                <option value="$ID" <% if $Top.Event.LocationID = $ID %> selected <% end_if %>>$Name</option>
+                            <% loop Summit.getTopVenues() %>
+                                <option value="$ID"
+                                    <% if $ClassName == 'SummitVenue' %>
+                                        class="location-venue" title="Venue"
+                                     <% else_if $ClassName == 'SummitHotel' %>
+                                        class="location-hotel" title="Hotel"
+                                     <% else_if $ClassName == 'SummitExternalLocation' %>
+                                        class="location-external" title="External Location"
+                                    <% end_if %>
+                                    <% if $Top.Event.LocationID = $ID %> selected <% end_if %>
+                                >$Name</option>
+                                <% if $ClassName == 'SummitVenue' %>
+                                    <% loop Rooms() %>
+                                        <option value="$ID" title="Venue Room" class="location-venue-room"<% if $Top.Event.LocationID = $ID %> selected <% end_if %>>$Name</option>
+                                    <% end_loop %>
+                                <% end_if %>
                             <% end_loop %>
                         </select>
                     </div>
@@ -135,6 +152,9 @@
             sponsors.push({id : "{$ID}", name : "{$Name.JS}"});
             <% end_loop %>
         <% end_if %>
+
+        $("#location").chosen();
+        $("#event_type").chosen();
     </script>
 
 

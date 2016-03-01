@@ -135,6 +135,7 @@ final class SummitService implements ISummitService
                 throw new EntityValidationException('event doest not belongs to summit');
 
             $event->Title = $event_data['title'];
+            $event->RSVPLink = $event_data['rsvp_link'];
             $event->ShortDescription = $event_data['short_description'];
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
@@ -193,6 +194,7 @@ final class SummitService implements ISummitService
 
             $event->SummitID = $summit->getIdentifier();
             $event->Title = $event_data['title'];
+            $event->RSVPLink = $event_data['rsvp_link'];
             $event->ShortDescription = $event_data['short_description'];
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);

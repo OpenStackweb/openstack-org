@@ -301,6 +301,7 @@ class SummitAppAdminController extends Page_Controller
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('summit/css/summit-admin-edit-event.css');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');

@@ -138,6 +138,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 'allow_feedback'     => $e->AllowFeedBack,
                 'location_id'        => $e->LocationID,
                 'type_id'            => $e->TypeID,
+                'rsvp_link'          => $e->RSVPLink,
                 'sponsors_id'        => array(),
                 'summit_types_id'    => array(),
                 'category_group_ids' => array(),

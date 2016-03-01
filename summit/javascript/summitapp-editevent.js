@@ -125,7 +125,8 @@ $(document).ready(function(){
         ignore: [],
         rules: {
             title: {required: true},
-            short_description: {required: true}
+            short_description: {required: true},
+            rsvp_link: { url : true }
         },
         focusInvalid: false,
         invalidHandler: function (form, validator) {
@@ -156,6 +157,7 @@ $(document).ready(function(){
 
         var request = {
             title: $('#title').val(),
+            rsvp_link: $('#rsvp_link').val(),
             short_description: tinyMCE.get('short_description').getContent(),
             location_id: $('#location').val(),
             start_date: $('#start_date').val(),

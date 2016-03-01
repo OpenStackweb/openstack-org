@@ -24,7 +24,8 @@ class SummitEvent extends DataObject implements ISummitEvent
         'Published'        => 'Boolean',
         'PublishedDate'    => 'SS_Datetime',
         'AllowFeedBack'    => 'Boolean',
-        'AvgFeedbackRate'  => 'Float'
+        'AvgFeedbackRate'  => 'Float',
+        'RSVPLink'         => 'Text',
     );
 
     private static $has_many = array
@@ -324,7 +325,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
         $f->addFieldsToTab('Root.Main', new ReadonlyField('AvgFeedbackRate', 'AvgFeedbackRate'));
-
+        $f->addFieldsToTab('Root.Main', new TextField('RSVPLink', 'RSVP Link'));
         $locations = SummitAbstractLocation::get()
             ->filter('SummitID', $summit_id )
             ->filter('ClassName', array('SummitVenue', 'SummitVenueRoom', 'SummitExternalLocation') );

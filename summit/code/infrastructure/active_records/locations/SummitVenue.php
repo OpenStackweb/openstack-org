@@ -55,7 +55,7 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
      */
     public function getRooms()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Rooms')->toArray();
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Rooms');
     }
 
     /**

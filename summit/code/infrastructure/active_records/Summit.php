@@ -918,6 +918,11 @@ final class Summit extends DataObject implements ISummit
     }
 
 
+    public function getTopVenues()
+    {
+        return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'");
+    }
+
     public function getBetterButtonsActions () {
     	$f = parent::getBetterButtonsActions();
     	if(Director::isDev() && Permission::check('ADMIN')) {
