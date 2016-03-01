@@ -982,7 +982,8 @@ footer {
   text-align: center;
   padding: 70px 0;
   background: url('/themes/openstack/static/images/barcelona/barcelona-bkgd-lrg.jpg') no-repeat right top;
-  background-size: cover; }
+  background-size: cover; 
+  overflow: scroll;}
 
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
