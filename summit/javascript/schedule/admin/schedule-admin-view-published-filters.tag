@@ -205,10 +205,12 @@
                             switch(key) {
                                 case 'day':
                                     $('#select_day').val(value);
+                                    $("#select_day").trigger("chosen:updated");
                                     self.day = value;
                                     break;
                                 case 'venue':
                                     $('#select_venue').val(value);
+                                    $("#select_venue").trigger("chosen:updated");
                                     self.location_id = value;
                                     break;
                             }

@@ -12,13 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitAppAdminController extends Page_Controller
+class SummitAppAdminController extends Controller
 {
 
     public function init()
     {
-        $this->useJqueryUI(true);
         parent::init();
+
+
 
         if(!Member::currentUser())
             return OpenStackIdCommon::doLogin();
@@ -26,16 +27,34 @@ class SummitAppAdminController extends Page_Controller
         if(!Permission::check('ADMIN'))
             return Security::permissionFailure($this);
 
+
+        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        Requirements::css("themes/openstack/css/combined.css");
+        Requirements::css("themes/openstack/css/navigation_menu.css");
+        Requirements::css("themes/openstack/css/dropdown.css");
         Requirements::css('themes/openstack/css/chosen.css');
         Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('summit/css/summit-admin.css');
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
-        Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
-        Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::css('summit/css/summit-admin.css');
+
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+
+        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
-        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+
+        Requirements::javascript("themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js");
+        Requirements::javascript("themes/openstack/javascript/jquery-ui-bridge.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
+        Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
+        Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+
     }
 
     private static $url_segment = 'summit-admin';
