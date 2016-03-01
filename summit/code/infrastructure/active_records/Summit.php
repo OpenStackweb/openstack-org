@@ -962,7 +962,7 @@ final class Summit extends DataObject implements ISummit
 
     public function getTopVenues()
     {
-        return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('ID','ASC');
+        return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('Name','ASC');
     }
 
     public function getBetterButtonsActions()

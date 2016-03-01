@@ -100,7 +100,7 @@
                         lat : '{$Lat}',
                     };
                     <% if ClassName == SummitVenue %>
-                            <% loop Rooms %>
+                            <% loop Rooms.sort('Name', 'ASC') %>
                             summit.locations.push({
                                 id         : $ID,
                                 class_name : "{$ClassName}",

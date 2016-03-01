@@ -50,7 +50,7 @@
                                     <% if $Top.Event.LocationID = $ID %> selected <% end_if %>
                                 >$Name</option>
                                 <% if $ClassName == 'SummitVenue' %>
-                                    <% loop Rooms() %>
+                                    <% loop Rooms().sort('Name', 'ASC') %>
                                         <option value="$ID" title="Venue Room" class="location-venue-room"<% if $Top.Event.LocationID = $ID %> selected <% end_if %>>$Name</option>
                                     <% end_loop %>
                                 <% end_if %>
