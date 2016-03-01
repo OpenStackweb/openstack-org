@@ -1074,6 +1074,11 @@ a.white-link {
   .tokyo-landing-wrapper .summit-location::after {
     width: 75px; } }
 
+@media (max-width: 480px) {
+  .tokyo-landing-wrapper .summit-location::before, .tokyo-landing-wrapper .summit-location::after {
+    width: 0; }
+}
+
 .summit-date {
   background: none;
   font-size: 25px;
