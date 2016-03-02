@@ -21,7 +21,7 @@ class SurveyReportSection extends DataObject {
     (
         'Name'  => 'VarChar(255)',
         'Order' => 'Int',
-        'Description' => 'HtmlText',
+        'Description' => 'HTMLText',
     );
 
     static $has_one = array

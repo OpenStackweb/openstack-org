@@ -45,6 +45,16 @@ class SurveyReport extends DataObject {
         return (int)$this->getField('ID');
     }
 
+    public function getCMSFields() {
+        $fields = parent::getCMSFields();
+        $templateList = SurveyTemplate::get()->filter(array('ClassName' => 'SurveyTemplate' ))->sort('Title')->map()->toArray();
+        $templateSelect = DropdownField::create('TemplateID', 'Survey Template')->setSource($templateList);
+
+        $fields->replaceField('TemplateID', $templateSelect);
+
+        return $fields;
+    }
+
     public function mapTemplate()
     {
         $report_map = array();
@@ -70,5 +80,6 @@ class SurveyReport extends DataObject {
         return $report_map;
 
     }
+
 
 }
