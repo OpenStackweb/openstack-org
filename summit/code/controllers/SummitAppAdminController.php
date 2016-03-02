@@ -12,21 +12,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitAppAdminController extends Controller
+final class SummitAppAdminController extends Controller implements PermissionProvider
 {
+
+    /**
+     * Return a map of permission codes to add to the dropdown shown in the Security section of the CMS.
+     * array(
+     *   'VIEW_SITE' => 'View the site',
+     * );
+     */
+    public function providePermissions()
+    {
+
+        return array(
+            'ADMIN_SUMMIT_APP_FRONTEND_ADMIN' => array(
+                'name'     => 'Full Access to Summit FrontEnd Admin',
+                'category' => 'Summit Application',
+                'help'     => '',
+                'sort'     => 2
+            ),
+        );
+    }
 
     public function init()
     {
         parent::init();
 
-
-
         if(!Member::currentUser())
             return OpenStackIdCommon::doLogin();
 
-        if(!Permission::check('ADMIN'))
-            return Security::permissionFailure($this);
-
+        if(!Permission::check("ADMIN_SUMMIT_APP_FRONTEND_ADMIN")) Security::permissionFailure($this);
 
         Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
         Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");

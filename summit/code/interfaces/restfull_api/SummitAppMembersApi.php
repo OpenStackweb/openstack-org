@@ -44,7 +44,7 @@ class SummitAppMembersApi extends AbstractRestfulJsonApi {
      * @return bool
      */
     protected function authorize(){
-        if(!Permission::check('ADMIN')) return false;
+        if(!Permission::check('ADMIN_SUMMIT_APP_FRONTEND_ADMIN')) return false;
         return $this->checkOwnAjaxRequest();
     }
 
@@ -54,8 +54,8 @@ class SummitAppMembersApi extends AbstractRestfulJsonApi {
 
 
     static $url_handlers = array(
-        'GET '      => 'getMembers',
-        'GET $MEMBER_ID!'      => 'getMember',
+        'GET '            => 'getMembers',
+        'GET $MEMBER_ID!' => 'getMember',
     );
 
     static $allowed_actions = array(

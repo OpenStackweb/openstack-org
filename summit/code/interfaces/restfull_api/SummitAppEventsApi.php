@@ -61,7 +61,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
      * @return bool
      */
     protected function authorize(){
-        if(!Permission::check('ADMIN')) return false;
+        if(!Permission::check('ADMIN_SUMMIT_APP_FRONTEND_ADMIN')) return false;
         return $this->checkOwnAjaxRequest();
     }
 

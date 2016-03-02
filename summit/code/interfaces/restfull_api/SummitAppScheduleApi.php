@@ -395,7 +395,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         return $this->ok(array('empty_spots' => $empty_spots));
     }
 
-
     public static function isEventOnMySchedule($event_id, Summit $summit)
     {
         $member = Member::currentUser();
