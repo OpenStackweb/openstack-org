@@ -19,12 +19,7 @@ class SurveyReport extends DataObject {
 
     static $db = array
     (
-
-    );
-
-    static $indexes = array
-    (
-
+        'Name' => 'Varchar(254)'
     );
 
     static $has_one = array
@@ -33,20 +28,13 @@ class SurveyReport extends DataObject {
     );
 
     static $has_many = array(
-        'Sections' => 'SurveyReportSection'
+        'Sections' => 'SurveyReportSection',
+        'Filters'  => 'SurveyReportFilter',
     );
 
-    static $many_many = array(
-        'Filters' => 'SurveyQuestionTemplate',
-    );
-
-    static $many_many_extraFields = array(
-        'Filters' => array(
-            'Label' => "Varchar(254)",
-        ),
-    );
-
-    private static $defaults = array(
+    private static $summary_fields = array(
+        'ID',
+        'Template.Title',
     );
 
     /**
@@ -57,35 +45,30 @@ class SurveyReport extends DataObject {
         return (int)$this->getField('ID');
     }
 
-    public function mapToArray()
+    public function mapTemplate()
     {
-        $report_map = $this->toMap();
-        $report_map['Template'] = $this->Template()->toMap();
+        $report_map = array();
 
         $filters = array();
-        foreach ($this->Filters() as $filter) {
-            $label = $this->Filters()->getExtraData('Label',$filter->ID);
+        foreach ($this->Filters()->sort('Order') as $filter) {
             $options = array();
 
-            foreach ($filter->getValues() as $option) {
+            foreach ($filter->Question()->getValues() as $option) {
                 $options[] = $option->Value;
             }
 
             $filters[] = array(
-                'Label'    => $label['Label'],
-                'Question' => $filter->ID,
+                'Label'    => $filter->Label,
+                'Question' => $filter->Question()->ID,
                 'Options'  => $options,
             );
         }
         $report_map['Filters'] = $filters;
 
-        $report_map['Sections'] = $this->Sections()->toNestedArray();
+        $report_map['Sections'] = $this->Sections()->sort('Order')->toNestedArray();
 
         return $report_map;
 
     }
-
-
-
 
 }

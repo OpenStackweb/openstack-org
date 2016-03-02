@@ -39,6 +39,9 @@
     "clockpicker": "0.0.7",
     "urijs": "1.17.0",
     "moment": "2.11.0",
-    "bootstrap3-typeahead": "~4.0.0"
+    "bootstrap3-typeahead": "~4.0.0",
+    "html2canvas": "~0.4.1",
+    "jspdf": "~1.2.61",
+    "jspdf-plugins": "jsPDF-plugins#*"
   }
 }

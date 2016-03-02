@@ -1,20 +1,20 @@
 <survey-report-filters>
-    <div class="container">
-        <div class="report_templates_container">
-            <select id="report-templates" class="form-control">
-                <option each="{ list in templates }" value='{ list.id }'>{ list.title }</option>
-            </select>
-        </div>
-    </div>
+
     <div class="report_global_filters">
         <div class="container">
             <div class="row">
                 <div class="report_global_filters_title">GLOBAL FILTERS</div>
-                <div class="report_clear_filters"><a href="">Clear Filters</a></div>
+                <div class="report_clear_filters">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                    </span>
+                    clear all filters
+                </div>
             </div>
             <div class="row">
-                <div class="report_filter_box" each="{ filter in report.Filters }">
-                    <select id="report-filter-{ filter.Filter.ID }" class="report_filter form-control">
+                <div class="report_filter_box { last:((parent.filters.length-1) == i) }" each="{ filter,i in filters }">
+                    <select data-qid="{ filter.Question }" class="report_filter form-control">
                         <option value="" disabled selected>{ filter.Label }</option>
                         <option each="{ option in filter.Options }" value='{ option }'>{ option }</option>
                     </select>
@@ -25,24 +25,32 @@
 
 
     <script>
-        this.templates  = opts.templates;
-        this.report     = null;
+        this.filters   = null;
+        this.dispatcher = opts.dispatcher;
+        this.api        = opts.api;
         var self        = this;
 
         this.on('mount', function(){
-            var template_id = $('#report-templates').val();
-            self.getReport(template_id);
+            $("body").on("change",".report_filter",function(){
+                self.api.getReport();
+            });
+
+            $("body").on("click",".report_clear_filters",function(){
+                $('.report_filter').each(function(){
+                    $(this).val('');
+                });
+                self.api.getReport();
+            });
         });
 
-        getReport(template_id) {
-            $('body').ajax_loader();
+        self.api.on(self.api.TEMPLATE_RETRIEVED, function(template)
+        {
+            self.filters = template.Filters;
+            self.update();
 
-            $.getJSON('api/v1/surveys/report/'+template_id,{},function(data){
-                self.report = data;
-                self.update();
-                $('body').ajax_loader('stop');
-            });
-        }
+        });
+
+
 
     </script>
 </survey-report-filters>

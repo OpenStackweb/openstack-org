@@ -49,11 +49,14 @@ class SurveyReportPage_Controller extends Page_Controller
         Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pointLabels.min.js");
         Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.trendline.min.js");
         Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.barRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pieRenderer.min.js");
         Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.bubbleRenderer.js");
         Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisLabelRenderer.min.js");
         Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.highlighter.min.js");
         //other js
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('themes/openstack/bower_assets/jspdf/dist/jspdf.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/html2canvas/build/html2canvas.min.js');
         // require custom CSS
         Requirements::css("survey_builder/css/survey-report.css");
         Requirements::javascript('survey_builder/js/survey_report.js');

@@ -2,30 +2,45 @@
     <div class="survey_sections">
         <h2>Survey Sections</h2>
         <div class="section_container">
-            <div class="section" each="{ section in report.Sections }">
+            <div class="section { active:(i == 0) }" data-section-id="{ section.ID }" each="{ section,i in sections }">
                 <span>{ section.Name }</span>
+                <span><i class="fa fa-chevron-circle-right"></i></span>
+            </div>
+        </div>
+        <div class="pdf_container">
+            <div class="pdf_button">
+            <span>DOWNLOAD AS PDF</span>
+            <span><i class="fa fa-download"></i></span>
             </div>
         </div>
     </div>
 
     <script>
-        this.report     = null;
+        this.sections    = null;
+        this.dispatcher = opts.dispatcher;
+        this.api        = opts.api;
         var self        = this;
 
         this.on('mount', function(){
-            var template_id = $('#report-templates').val();
-            self.getReport(template_id);
+            $("body").on("click",".section",function(){
+                $('.section').removeClass('active');
+                $(this).addClass('active');
+                self.api.getReport();
+            });
+
+            $("body").on("click",".pdf_button",function() {
+                self.dispatcher.exportToPdf();
+            });
         });
 
-        getReport(template_id) {
-            $('body').ajax_loader();
+        self.api.on(self.api.TEMPLATE_RETRIEVED, function(template)
+        {
+            self.sections = template.Sections;
+            self.update();
 
-            $.getJSON('api/v1/surveys/report/'+template_id,{},function(data){
-                self.report = data;
-                self.update();
-                $('body').ajax_loader('stop');
-            });
-        }
+        });
+
+
 
     </script>
 </survey-report-sections>

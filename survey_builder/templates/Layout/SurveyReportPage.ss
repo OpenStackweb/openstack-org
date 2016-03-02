@@ -1,22 +1,28 @@
 </div>
 <h1>OpenStack Survey Report</h1>
-<script>
-    var templates = [];
 
-    <% loop $SurveyTemplates %>
-        templates.push({id:{$ID},title:"{$Title.JS}"});
-    <% end_loop %>
+<div class="container">
+    <div class="report_templates_container">
+        <select id="report-templates" class="form-control">
+            <% loop $SurveyTemplates %>
+                <option value="{$ID}">{$Title}</option>
+            <% end_loop %>
+        </select>
+    </div>
+</div>
+<script>
+
 
 
 </script>
-<survey-report-filters templates="{ templates }"></survey-report-filters>
+<survey-report-filters></survey-report-filters>
 <div class="container">
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <survey-report-sections></survey-report-sections>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9" id="dashboard-container">
             <survey-report-dashboard></survey-report-dashboard>
         </div>
     </div>

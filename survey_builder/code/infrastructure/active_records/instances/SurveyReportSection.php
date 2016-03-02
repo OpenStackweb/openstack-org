@@ -21,23 +21,16 @@ class SurveyReportSection extends DataObject {
     (
         'Name'  => 'VarChar(255)',
         'Order' => 'Int',
-    );
-
-    static $indexes = array
-    (
-
+        'Description' => 'HtmlText',
     );
 
     static $has_one = array
     (
-        'Report' => 'SurveyReport'
+        'Report' => 'SurveyReport',
     );
 
-    static $many_many = array(
-        'Questions' => 'SurveyQuestionTemplate',
-    );
-
-    private static $defaults = array(
+    static $has_many = array (
+        'Graphs' => 'SurveyReportGraph',
     );
 
     /**
@@ -48,5 +41,42 @@ class SurveyReportSection extends DataObject {
         return (int)$this->getField('ID');
     }
 
+
+
+    public function mapSection($filters)
+    {
+        $section_map = $this->toMap();
+        $repository = new SapphireAnswerSurveyRepository();
+        $questions = array();
+
+        foreach ($this->Graphs()->sort('Order') as $graph) {
+            $values = array();
+            $total = 0;
+
+            $answers = $repository->getByQuestionAndFilters($graph->Question()->ID, $filters);
+
+            foreach ($answers as $answer) {
+                $answer_text = $answer['Value'];
+                if (!isset($values[$answer_text]))
+                    $values[$answer_text] = 0;
+
+                $values[$answer_text]++;
+                $total++;
+            }
+
+            $questions[] = array(
+                'ID'         => $graph->Question()->ID,
+                'Graph'      => $graph->Type,
+                'Title'      => $graph->Label,
+                'Values'     => $values,
+                'Total'      => $total,
+            );
+        }
+
+        $section_map['Questions'] = $questions;
+
+        return $section_map;
+
+    }
 
 }
