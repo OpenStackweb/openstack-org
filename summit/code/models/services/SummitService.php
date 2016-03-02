@@ -54,7 +54,10 @@ final class SummitService implements ISummitService
     public function publishEvent(ISummit $summit, array $event_data)
     {
         $event_repository = $this->event_repository;
-        return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
+        $this_var         = $this;
+
+        return $this->tx_service->transaction(function() use($summit, $this_var, $event_data, $event_repository){
+
             if(!isset($event_data['id'])) throw new EntityValidationException('missing required param: id');
             $event_id = intval($event_data['id']);
             $event = $event_repository->getById($event_id);
@@ -68,34 +71,43 @@ final class SummitService implements ISummitService
             if(!$event->Type()->exists())
                 throw new EntityValidationException('event doest not have a valid event type');
 
-            // validate blackout times and speaker conflict
-            $conflict_events = $event_repository->getPublishedByTimeFrame(intval($event->SummitID),$event_data['start_datetime'],$event_data['end_datetime']);
-            foreach ($conflict_events as $c_event) {
-                // if the published event is BlackoutTime or if there is a BlackoutTime event in this timeframe
-                if (($event->Type()->BlackoutTimes || $c_event->Type()->BlackoutTimes) && $event->ID != $c_event->ID) {
-                    throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
-                }
-                // if trying to publish an event on a slot occupied by another event
-                if (intval($event_data['location_id']) == $c_event->LocationID && $event->ID != $c_event->ID) {
-                    throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
-                }
-                // validate speaker conflict
-                if ($event instanceof Presentation && $c_event instanceof Presentation && $event->ID != $c_event->ID) {
-                    foreach ($event->Speakers() as $speaker) {
-                        if ($c_event->Speakers()->find('ID', $speaker->ID)) {
-                            throw new EntityValidationException("You can't publish on this timeframe, " . $speaker->getName() . " is presenting in room '" . $c_event->getLocationName() . "' at this time.");
-                        }
-                    }
-                }
-            }
-
             $event->setStartDate($event_data['start_datetime']);
             $event->setEndDate($event_data['end_datetime']);
             $event->LocationID = intval($event_data['location_id']);
+            $this_var->validateBlackOutTimesAndTimes($event);
             $event->unPublish();
             $event->publish();
             return $event;
         });
+    }
+
+
+    /**
+     * @param SummitEvent $event
+     * @throws EntityValidationException
+     */
+    public function validateBlackOutTimesAndTimes(SummitEvent $event)
+    {
+        // validate blackout times and speaker conflict
+        $event_on_timeframe = $this->event_repository->getPublishedByTimeFrame(intval($event->SummitID), $event->getStartDate(), $event->getEndDate());
+        foreach ($event_on_timeframe as $c_event) {
+            // if the published event is BlackoutTime or if there is a BlackoutTime event in this timeframe
+            if (($event->Type()->BlackoutTimes || $c_event->Type()->BlackoutTimes) && $event->ID != $c_event->ID) {
+                throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
+            }
+            // if trying to publish an event on a slot occupied by another event
+            if (intval($event->LocationID) == $c_event->LocationID && $event->ID != $c_event->ID) {
+                throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
+            }
+            // validate speaker conflict
+            if ($event instanceof Presentation && $c_event instanceof Presentation && $event->ID != $c_event->ID) {
+                foreach ($event->Speakers() as $speaker) {
+                    if ($c_event->Speakers()->find('ID', $speaker->ID)) {
+                        throw new EntityValidationException("You can't publish on this timeframe, " . $speaker->getName() . " is presenting in room '" . $c_event->getLocationName() . "' at this time.");
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -115,68 +127,6 @@ final class SummitService implements ISummitService
         });
     }
 
-    /**
-     * @param ISummit $summit
-     * @param array $event_data
-     * @return mixed
-     */
-    public function updateEvent(ISummit $summit, array $event_data)
-    {
-        $event_repository = $this->event_repository;
-        return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
-            if(!isset($event_data['id'])) throw new EntityValidationException('missing required param: id');
-            $event_id = intval($event_data['id']);
-            $event = $event_repository->getById($event_id);
-
-            if(is_null($event))
-                throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
-
-            if(intval($event->SummitID) !== intval($summit->getIdentifier()))
-                throw new EntityValidationException('event doest not belongs to summit');
-
-            $event->Title = $event_data['title'];
-            $event->RSVPLink = $event_data['rsvp_link'];
-            $event->HeadCount = intval($event_data['headcount']);
-            $event->ShortDescription = $event_data['short_description'];
-            $event->setStartDate($event_data['start_date']);
-            $event->setEndDate($event_data['end_date']);
-            $event->AllowFeedBack = $event_data['allow_feedback'];
-            $event->LocationID = intval($event_data['location_id']);
-            $event->TypeID = intval($event_data['event_type']);
-
-            $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
-            $event->AllowedSummitTypes()->setByIDList($summit_types);
-            $tags = ($event_data['tags']) ? explode(',',$event_data['tags']) : array();
-            $event->Tags()->setByIDList($tags);
-            $sponsors = ($event_data['sponsors']) ? explode(',',$event_data['sponsors']) : array();
-            $event->Sponsors()->setByIDList($sponsors);
-
-            // Speakers, if one of the added members is not a speaker, we need to make him one
-            if ($event->isPresentation()) {
-                $presentation = $event_repository->getPresentationById($event_id);
-                $speaker_ids = array();
-                $member_ids = explode(',',$event_data['speakers']);
-                foreach ($member_ids as $member_id) {
-                    $speaker = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
-
-                    if (!$speaker) {
-                        $member = Member::get()->byID($member_id);
-                        $speaker = new PresentationSpeaker();
-                        $speaker->FirstName = $member->FirstName;
-                        $speaker->LastName = $member->Surname;
-                        $speaker->MemberID = $member->ID;
-                        $speaker->write();
-                    }
-
-                    $speaker_ids[] = $speaker->ID;
-                }
-
-                $presentation->Speakers()->setByIDList($speaker_ids);
-            }
-
-            return $event;
-        });
-    }
 
     /**
      * @param ISummit $summit
@@ -233,6 +183,78 @@ final class SummitService implements ISummitService
 
             $event->write();
 
+            return $event;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $event_data
+     * @return mixed
+     */
+    public function updateEvent(ISummit $summit, array $event_data)
+    {
+        $event_repository = $this->event_repository;
+        $this_var         = $this;
+
+        return $this->tx_service->transaction(function() use($this_var, $summit, $event_data, $event_repository){
+
+            if(!isset($event_data['id'])) throw new EntityValidationException('missing required param: id');
+            $event_id = intval($event_data['id']);
+            $event = $event_repository->getById($event_id);
+
+            if(is_null($event))
+                throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
+
+            if(intval($event->SummitID) !== intval($summit->getIdentifier()))
+                throw new EntityValidationException('event doest not belongs to summit');
+
+            $event->Title            = $event_data['title'];
+            $event->RSVPLink         = $event_data['rsvp_link'];
+            $event->HeadCount        = intval($event_data['headcount']);
+            $event->ShortDescription = $event_data['short_description'];
+            $event->setStartDate($event_data['start_date']);
+            $event->setEndDate($event_data['end_date']);
+            $event->AllowFeedBack = $event_data['allow_feedback'];
+            $event->LocationID    = intval($event_data['location_id']);
+            $event->TypeID        = intval($event_data['event_type']);
+
+            $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
+            $event->AllowedSummitTypes()->setByIDList($summit_types);
+            $tags = ($event_data['tags']) ? explode(',',$event_data['tags']) : array();
+            $event->Tags()->setByIDList($tags);
+            $sponsors = ($event_data['sponsors']) ? explode(',',$event_data['sponsors']) : array();
+            $event->Sponsors()->setByIDList($sponsors);
+
+            // Speakers, if one of the added members is not a speaker, we need to make him one
+            if ($event->isPresentation()) {
+                $presentation = $event_repository->getPresentationById($event_id);
+                $speaker_ids = array();
+                $member_ids = explode(',',$event_data['speakers']);
+                foreach ($member_ids as $member_id) {
+                    $speaker = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
+
+                    if (!$speaker) {
+                        $member = Member::get()->byID($member_id);
+                        $speaker = new PresentationSpeaker();
+                        $speaker->FirstName = $member->FirstName;
+                        $speaker->LastName = $member->Surname;
+                        $speaker->MemberID = $member->ID;
+                        $speaker->write();
+                    }
+
+                    $speaker_ids[] = $speaker->ID;
+                }
+
+                $presentation->Speakers()->setByIDList($speaker_ids);
+            }
+
+            if($event->isPublished())
+            {
+                $this_var->validateBlackOutTimesAndTimes($event);
+                $event->unPublish();
+                $event->publish();
+            }
             return $event;
         });
     }

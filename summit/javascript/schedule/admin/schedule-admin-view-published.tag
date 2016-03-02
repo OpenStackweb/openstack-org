@@ -25,6 +25,7 @@
         this.start_time        = moment(opts.start_time, 'HH:mm');
         this.end_time          = moment(opts.end_time, 'HH:mm');
         this.interval          = parseInt(opts.interval);
+        this.step              = parseInt(opts.step);
         this.minute_pixels     = parseInt(opts.minute_pixels);
         this.slot_width        = parseInt(opts.slot_width);
         this.dispatcher        = opts.dispatcher;
@@ -100,7 +101,7 @@
                             element.addClass('event-published');
                             $('.ui-resizable-n', element).show();
                             $('.ui-resizable-s', element).show();
-                            $('.unpublish-event-btn-container', element).show();
+                            $('.unpublish-event-btn', element).show();
                             self.published_store.add(self.unpublished_store.delete(id));
                         }
 
@@ -172,7 +173,7 @@
                 minWidth: self.slot_width,
                 minHeight: self.minute_pixels * self.interval,
                 maxHeight: null,
-                grid: self.minute_pixels,
+                grid: [0, self.minute_pixels * self.step ],
                 handles: {
                     n: ".ui-resizable-n",
                     s: ".ui-resizable-s"
@@ -181,15 +182,22 @@
 
                     var element      = $(ui.element);
                     var id           = element.attr('data-id');
+                    // height correction
+                    if((ui.size.height % (self.minute_pixels * self.step)) > 0 ) {
+                        var aux_h = 0;
+                        do{ aux_h += (self.minute_pixels * self.step);}while(aux_h < ui.size.height);
+                        ui.size.height = aux_h;
+                    }
                     var size         = ui.size;
                     var pos          = element.offset();
                     var bottom       = pos.top + size.height;
-                    var minutes      = ( parseInt(size.height) / self.minute_pixels);
+                    var minutes      = Math.ceil( parseInt(size.height) / self.minute_pixels);
                     var overlapped   = false;
                     var container    = null;
                     var original_h   = ui.originalSize.height;
                     ui.size.width    = ui.originalSize.width = self.slot_width;
                     ui.position.left = ui.originalPosition.left;
+
                     console.log('position top ' + pos.top + ' height ' + size.height + ' bottom ' + bottom+' original_h '+original_h);
 
                     // look for the current slot container that holds the begining of the current event
@@ -208,7 +216,7 @@
                     var start_time = moment(day+' '+start_hour, 'YYYY-MM-DD HH:mm');
                     // calculate delta minutes...
                     if(pos.top > container.offset().top) {
-                       var delta_minutes = ( pos.top - container.offset().top) / self.minute_pixels;
+                       var delta_minutes = Math.floor(( pos.top - container.offset().top) / self.minute_pixels);
                        console.log(' adding '+ delta_minutes+' minutes to start time '+ container.attr('data-time'));
                        start_time = start_time.add('m', delta_minutes)
                     }
@@ -259,7 +267,6 @@
                     element.resizable( "option", "maxHeight", null );
                     var original_h = ui.originalSize.height;
                     console.log('start original_h '+original_h);
-
                     $(this).attr('prev-height',$(this).css('height'));
                     $(this).attr('prev-pos-top',$(this).position().top);
                 },

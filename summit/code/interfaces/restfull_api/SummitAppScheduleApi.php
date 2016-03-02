@@ -127,17 +127,18 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         {
             $entry = array
             (
-                'id'                      => $e->ID,
+                'id'                       => intval($e->ID),
                 'title'                    => $e->Title,
                 'description'              => $e->Description,
+                'class_name'               => $e->ClassName,
                 'abstract'                 => $e->ShortDescription,
                 'start_datetime'           => $e->StartDate,
                 'end_datetime'             => $e->EndDate,
                 'start_time'               => $e->StartTime,
                 'end_time'                 => $e->EndTime,
                 'allow_feedback'           => $e->AllowFeedBack,
-                'location_id'              => $e->LocationID,
-                'type_id'                  => $e->TypeID,
+                'location_id'              => intval($e->LocationID),
+                'type_id'                  => intval($e->TypeID),
                 'rsvp_link'                => $e->RSVPLink,
                 'sponsors_id'              => array(),
                 'summit_types_id'          => array(),
@@ -152,24 +153,24 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
             foreach($e->Tags() as $t)
             {
-                array_push($entry['tags_id'], $t->ID);
+                array_push($entry['tags_id'], intval($t->ID));
             }
 
             foreach($e->AllowedSummitTypes() as $t)
             {
-                array_push($entry['summit_types_id'], $t->ID);
+                array_push($entry['summit_types_id'], intval($t->ID));
             }
 
             if($e instanceof Presentation && $e->Category()->exists())
             {
                 foreach ($e->Category()->getCategoryGroups() as $group) {
-                    array_push($entry['category_group_ids'], $group->ID);
+                    array_push($entry['category_group_ids'], intval($group->ID));
                 }
             }
 
             foreach($e->Sponsors() as $e)
             {
-                array_push($entry['sponsors_id'], $e->ID);
+                array_push($entry['sponsors_id'], intval($e->ID));
             }
 
             if($e instanceof Presentation)
@@ -177,12 +178,12 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 $speakers = array();
                 foreach($e->Speakers() as $s)
                 {
-                    array_push($speakers, $s->ID);
+                    array_push($speakers, intval($s->ID));
                 }
 
                 $entry['speakers_id']  = $speakers;
-                $entry['moderator_id'] = $e->ModeratorID;
-                $entry['track_id']     = $e->CategoryID;
+                $entry['moderator_id'] = intval($e->ModeratorID);
+                $entry['track_id']     = intval($e->CategoryID);
                 $entry['level']        = $e->Level;
                 $entry['status']       = $e->SelectionStatus();
             }

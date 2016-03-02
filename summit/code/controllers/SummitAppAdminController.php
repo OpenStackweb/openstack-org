@@ -419,8 +419,24 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 
         return $this->getViewer('scheduleView')->process($this, array
             (
-                'Summit' => $summit,
-                'PresentationStatusOptions' => Presentation::getStatusOptions(),
+                'Summit'                    => $summit,
+                'PresentationStatusOptions' => new ArrayList
+                (
+                    array
+                    (
+                        new ArrayData(array('Status'=> 'Non Received')),
+                        new ArrayData(array('Status'=> Presentation::STATUS_RECEIVED))
+                    )
+                ),
+                'PresentationSelectionStatusOptions' => new ArrayList
+                (
+                    array
+                    (
+                        //new ArrayData(array('Status'=> 'unaccepted')),
+                        new ArrayData(array('Status'=> 'accepted')),
+                        new ArrayData(array('Status'=> 'alternate')),
+                    )
+                ),
             )
         );
     }

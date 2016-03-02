@@ -24,13 +24,18 @@
                     locations_dictionary: {},
                     tags: {},
                     tracks : [],
+                    tracks_dictionary : {},
                     presentation_levels: {},
                     current_user: null,
                     track_lists: [],
                     status_options: [],
+                    selection_status_options: [],
                  };
                  <% loop $PresentationStatusOptions %>
                      summit.status_options.push("{$Status}");
+                 <% end_loop %>
+                 <% loop $PresentationSelectionStatusOptions %>
+                    summit.selection_status_options.push("{$Status}");
                  <% end_loop %>
                  <% loop $Summit.Categories.Sort(Title, ASC) %>
                  summit.tracks.push(
@@ -38,6 +43,10 @@
                     id: {$ID},
                     name : "{$Title.JS}",
                  });
+                 summit.tracks_dictionary[{$ID}]= {
+                     id: {$ID},
+                     name : "{$Title.JS}",
+                 };
                  <% end_loop %>
                  <% loop $Top.getPresentationLevels %>
                 summit.presentation_levels['{$Level}'] =
@@ -150,7 +159,7 @@
         <div class="row" style="width:100%">
             <div class="col-md-6 published-container">
                 <schedule-admin-view-published-filters summit="{ summit }"></schedule-admin-view-published-filters>
-                <schedule-admin-view-published start_time="07:00" end_time="22:00" interval="15" summit="{ summit }" minute_pixels="3" slot_width="100%"></schedule-admin-view-published>
+                <schedule-admin-view-published start_time="07:00" end_time="22:00" interval="15" step="5" summit="{ summit }" minute_pixels="3" slot_width="100%"></schedule-admin-view-published>
                 <schedule-admin-view-published-results summit="{ summit }"></schedule-admin-view-published-results>
                 <schedule-admin-view-empty-spots summit="{ summit }"></schedule-admin-view-empty-spots>
             </div>

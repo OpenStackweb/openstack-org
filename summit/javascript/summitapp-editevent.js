@@ -17,8 +17,14 @@ $(document).ready(function(){
 
     $('#summit_type').chosen({width: "100%", placeholder_text_multiple: "Select Summit Types..."});
 
-    $("#start_date").datetimepicker();
-    $("#end_date").datetimepicker();
+    $("#start_date").datetimepicker({
+        format:'Y-m-d H:i:s',
+        step:5
+    });
+    $("#end_date").datetimepicker({
+        format:'Y-m-d H:i:s',
+        step:5
+    });
 
     var event_type = $('#event_type').find("option:selected").text();
     if ($('#event_type').val()) {
@@ -192,7 +198,7 @@ $(document).ready(function(){
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
                 var response = $.parseJSON(jqXHR.responseText);
-                swal('Validation error', response.messages[0], 'warning');
+                swal('Validation error', response.messages[0].message, 'warning');
             } else {
                 swal('Error', 'There was a problem saving the event, please contact admin.', 'warning');
             }

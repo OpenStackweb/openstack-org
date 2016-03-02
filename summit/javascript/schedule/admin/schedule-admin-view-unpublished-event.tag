@@ -5,6 +5,7 @@
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
         <div class="event-buttons">
+            <a style="display:none" class="unpublish-event-btn" title="unpublish event" data-event-id="{ data.id }"><i class="fa fa-times"></i></a>
             <a href="summit-admin/{ parent.summit.id }/events/{ data.id }" class="edit-event-btn" title="edit event">
                 <i class="fa fa-pencil-square-o"></i>
             </a>
