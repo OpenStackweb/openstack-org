@@ -94,8 +94,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $this->event_id = $event_id;
         $event = $this->event_repository->getById($event_id);
 
-        if (!isset($event)) {
-            return $this->httpError(404, 'Sorry that article could not be found');
+        if (is_null($event) || !$event->isPublished()) {
+            return $this->httpError(404, 'Sorry that event could not be found');
         }
 
         Requirements::block("summit/css/schedule-grid.css");

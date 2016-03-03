@@ -74,12 +74,29 @@ class SummitAppMembersApi extends AbstractRestfulJsonApi {
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
             $members = DB::query("SELECT M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',M.ID,')') AS name FROM Member AS M
-                                    LEFT JOIN Group_Members AS GM ON M.ID = GM.MemberID
-                                    LEFT JOIN `Group` AS G ON G.ID = GM.GroupID
-                                    WHERE (M.FirstName LIKE '{$query}%' OR M.Surname LIKE '{$query}%' OR CONCAT(M.FirstName,' ',M.Surname) LIKE '{$query}%')
-                                    AND(G.Code = '".IFoundationMember::CommunityMemberGroupSlug."' OR G.Code = '".IFoundationMember::FoundationMemberGroupSlug."')
-                                    GROUP BY M.ID
-                                    ORDER BY M.FirstName, M.Surname LIMIT 25;");
+
+                                    WHERE
+                                    (
+                                      M.FirstName LIKE '%{$query}%' OR
+                                      M.Surname LIKE '%{$query}%' OR
+                                      M.Email LIKE '%{$query}%' OR
+                                      CONCAT(M.FirstName,' ',M.Surname) LIKE '%{$query}%'
+                                    )
+                                    AND
+                                    EXISTS
+                                    (
+                                      SELECT 1 FROM Group_Members AS GM
+                                      INNER JOIN `Group` AS G ON G.ID = GM.GroupID
+                                      WHERE
+                                      GM.MemberID = M.ID
+                                      AND
+                                      (
+                                        G.Code = '".IFoundationMember::CommunityMemberGroupSlug."'
+                                        OR
+                                        G.Code = '".IFoundationMember::FoundationMemberGroupSlug."'
+                                      )
+                                    )
+                                    ORDER BY M.FirstName, M.Surname LIMIT 10;");
 
             $json_array = array();
             foreach ($members as $member) {

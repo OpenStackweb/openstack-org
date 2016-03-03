@@ -12,9 +12,14 @@
             <li class="active"><% if $Event %> $Event.Title <% else %> New Event <% end_if %></li>
         </ol>
         <form id="edit-event-form">
-            <input type="hidden" id="summit_id" value="$Summit.ID" />
-            <input type="hidden" id="event_id" value="$Event.ID" />
-
+            <input type="hidden" id="summit_id" value="{$Summit.ID}" />
+            <input type="hidden" id="event_id" value="{$Event.ID}" />
+            <input type="hidden" id="published" value="{$Event.IsPublished}" />
+            <% if $Event %>
+            <div class="form-group">
+                <span><% if $Event.IsPublished %>Published<% else %>Not Published<% end_if %></span>
+            </div>
+            <% end_if %>
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" value="{$Event.Title}">
@@ -35,9 +40,9 @@
                 <label>Location</label><br>
                 <div class="row">
                     <div class="col-md-6">
-                        <select hidden class="form-control" id="location">
+                        <select hidden class="form-control" id="location" name="location">
                             <option hidden value=''>-- Select A Venue --</option>
-                            <option value="0">TBA</option>
+                            <option value="0" <% if $Top.Event.LocationID = 0 %> selected <% end_if %>>TBA</option>
                             <% loop Summit.getTopVenues() %>
                                 <option value="$ID"
                                     <% if $ClassName == 'SummitVenue' %>
@@ -61,40 +66,53 @@
                     <div class="col-md-3">
                         <div class="left-inner-addon">
                             <span class="glyphicon glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                            <input type="text" class="form-control" placeholder="Start Date" id="start_date" value="$Event.StartDate"/>
+                            <input type="text" class="form-control" placeholder="Start Date" autocomplete="off" readonly="readonly" id="start_date" name="start_date" value="$Event.StartDate"/>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="left-inner-addon">
                             <span class="glyphicon glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                            <input type="text" class="form-control" placeholder="End Date" id="end_date" value="$Event.EndDate"/>
+                            <input type="text" class="form-control" placeholder="End Date" autocomplete="off" readonly="readonly" id="end_date" name="end_date" value="$Event.EndDate"/>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="event_type">Event Type</label>
-                        <select class="form-control" id="event_type">
-                            <option hidden value="">Select a Type</option>
+                        <% if $Top.Event %>
+                            <div> {$Top.Event.Type.Type}</div>
+                        <% else %>
+                        <select class="form-control" id="event_type" name="event_type">
+                            <option hidden value="">-- Select a Type --</option>
                             <% loop Summit.EventTypes() %>
-                                <option value="$ID" <% if $Top.Event.TypeID = $ID %> selected <% end_if %>>$Type</option>
+                                <option value="$ID">$Type</option>
                             <% end_loop %>
                         </select>
+                        <% end_if %>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="summit_type">Summit Type</label>
-                        <select class="form-control" id="summit_type" multiple>
+                        <select class="form-control" id="summit_type" name="summit_type" multiple>
                             <% loop Summit.Types() %>
                                 <option value="$ID" <% if $Top.Event.isAllowedSummitType($Title) %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3 track_container" style="display:none">
+                        <label for="track">Track</label>
+                        <select class="form-control" id="track" name="track">
+                            <option hidden value="">-- Select a Track --</option>
+                            <% loop Summit.Categories() %>
+                                <option value="$ID" <% if $Top.Event.isPresentation() && $Top.Event.CategoryID == $ID %> selected <% end_if %>>$Title</option>
+                            <% end_loop %>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
                         <label>Feedback</label>
                         <div class="checkbox">
-                            <label> <input id="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>> Allow Feedback </label>
+                            <label> <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>> Allow Feedback </label>
                         </div>
                     </div>
                 </div>
@@ -103,7 +121,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="tags">Tags</label><br>
-                        <input id="tags" />
+                        <input id="tags" name="tags"/>
                     </div>
                 </div>
             </div>
@@ -111,19 +129,31 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="sponsors">Sponsors</label><br>
-                        <input id="sponsors" />
+                        <input id="sponsors" name="sponsors"/>
                     </div>
                 </div>
             </div>
             <script>
-                var speakers = [];
+                var speakers          = [];
+                var moderator         = {};
+                var summit_begin_date = '{$Summit.BeginDateYMD}';
+                var summit_end_date   = '{$Summit.EndDateYMD}';
+                var summit_start_time = '{$Summit.BeginTime}';
             </script>
 
-            <div class="form-group speakers_container" <% if $Event.isPresentation() == 0 %> style="display:none" <% end_if %>>
+            <div class="form-group speakers_container" style="display:none;">
                 <div class="row">
                     <div class="col-md-12">
                         <label for="speakers">Speakers</label><br>
-                        <input id="speakers" />
+                        <input id="speakers" name="speakers"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group moderator_container" style="display:none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="moderator">Moderator</label><br>
+                        <input id="moderator" name="moderator"/>
                     </div>
                 </div>
             </div>
@@ -133,17 +163,31 @@
                     speakers.push({id : "{$MemberID}", name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})"});
                     <% end_loop %>
                 <% end_if %>
+                <% if $Event.Moderator() %>
+                moderator = {id : "{$Event.Moderator.MemberID}", name : "{$Event.Moderator.FirstName.JS} {$Event.Moderator.LastName.JS}  ({$Event.Moderator.MemberID})"};
+                <% end_if %>
             </script>
-
-            <button type="submit" class="btn btn-primary">Save</button>
+            <% if $Event%>
+                <% if $Event.isPublished %>
+                <button id="btn_publish" class="btn btn-primary btn-success">Save & Publish</button>
+                <% else %>
+                <button id="btn_save" class="btn btn-primary">Save</button>
+                <button id="btn_publish" class="btn btn-primary btn-success">Save & Publish</button>
+                <% end_if %>
+            <% else %>
+                <button id="btn_save" class="btn btn-primary">Save</button>
+                <button id="btn_publish" class="btn btn-primary btn-success">Save & Publish</button>
+            <% end_if %>
             <% if $Event.isPublished() %>
-            <a href="{$Top.Link()}/{$Summit.ID}/events/schedule/#day={$Event.StartDate.Format('Y-m-d')}&venue={$Event.LocationID}&event={$Event.ID}" class="btn btn-default">Go to Calendar</a>
+                <button id="btn_unpublish" class="btn btn-primary btn-danger">UnPublish</button>
+                <a href="{$Top.Link()}/{$Summit.ID}/events/schedule/#day={$Event.StartDate.Format('Y-m-d')}&venue={$Event.LocationID}&event={$Event.ID}" class="btn btn-default">Go to Calendar</a>
             <% end_if %>
         </form>
     </div>
     <!-- /#page-content-wrapper -->
 
     <script>
+
         var tags = [];
         <% if $Event.Tags() %>
             <% loop $Event.Tags() %>
@@ -158,8 +202,18 @@
             <% end_loop %>
         <% end_if %>
 
+        $(document).ready(function(){
         $("#location").chosen();
         $("#event_type").chosen();
+        <% if $Top.Event %>
+        <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' %>
+        $('.speakers_container').show();
+        <% end_if %>
+        <% if $Top.Event.Type.Type == 'Keynotes' %>
+        $('.moderator_container').show();
+        <% end_if %>
+        <% end_if %>
+        });
     </script>
 
 

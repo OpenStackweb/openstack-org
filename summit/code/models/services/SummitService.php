@@ -136,13 +136,27 @@ final class SummitService implements ISummitService
     public function createEvent(ISummit $summit, array $event_data)
     {
         $event_repository = $this->event_repository;
-        return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
+        $this_var         = $this;
+
+        return $this->tx_service->transaction(function() use($this_var, $summit, $event_data, $event_repository){
+
             $event_type_id = intval($event_data['event_type']);
             $event_type    = SummitEventType::get()->byID($event_type_id);
-            if(is_null($event_type)) throw new NotFoundEntityException;
+            if(is_null($event_type)) throw new NotFoundEntityException('EventType');
 
             $event = ($event_type->Type == 'Presentation'|| $event_type->Type == 'Keynotes') ? new Presentation :  new SummitEvent;
-
+            $start_date = $event_data['start_date'];
+            $end_date   = $event_data['end_date'];
+            if(!empty($start_date) || !empty($end_date))
+            {
+                $d1 = new DateTime($start_date);
+                $d2 = new DateTime($end_date);
+                if($d1 >= $d2) throw new EntityValidationException('Start Date should be lower than End Date!');
+                if(!$summit->belongsToDuration($d1))
+                    throw new EntityValidationException('Start Date should be inside Summit Duration!');
+                if(!$summit->belongsToDuration($d2))
+                    throw new EntityValidationException('Start Date should be inside Summit Duration!');
+            }
             $event->SummitID = $summit->getIdentifier();
             $event->Title = $event_data['title'];
             $event->RSVPLink = $event_data['rsvp_link'];
@@ -164,7 +178,7 @@ final class SummitService implements ISummitService
             // Speakers, if one of the added members is not a speaker, we need to make him one
             if ($event instanceof Presentation) {
                 $speaker_ids = array();
-                $member_ids = explode(',',$event_data['speakers']);
+                $member_ids  = explode(',',$event_data['speakers']);
                 foreach ($member_ids as $member_id) {
                     $speaker = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
                     if (!$speaker) {
@@ -179,10 +193,35 @@ final class SummitService implements ISummitService
                     $speaker_ids[] = $speaker->ID;
                 }
                 $event->Speakers()->setByIDList($speaker_ids);
+
+                if($event_type->Type == 'Keynotes')
+                {
+                    $member_id    = intval($event_data['moderator']);
+                    $moderator    = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
+                    if (is_null($moderator)) {
+                        $member = Member::get()->byID($moderator);
+                        $moderator = PresentationSpeaker::create();
+                        $moderator->FirstName = $member->FirstName;
+                        $moderator->LastName = $member->Surname;
+                        $moderator->MemberID = $member->ID;
+                        $moderator->write();
+                    }
+                    $event->ModeratorID = $moderator->ID;
+                }
+
+                $track = PresentationCategory::get()->byID(intval($event_data['track']));
+                if(is_null($track)) throw new NotFoundEntityException('Track');
+
+                $event->CategoryID = $track->ID;
             }
 
+            $must_publish= (bool)$event_data['publish'];
+            if($must_publish)
+            {
+                $this_var->validateBlackOutTimesAndTimes($event);
+                $event->publish();
+            }
             $event->write();
-
             return $event;
         });
     }
@@ -209,6 +248,19 @@ final class SummitService implements ISummitService
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
                 throw new EntityValidationException('event doest not belongs to summit');
 
+            $start_date = $event_data['start_date'];
+            $end_date   = $event_data['end_date'];
+            if(!empty($start_date) || !empty($end_date))
+            {
+                $d1 = new DateTime($start_date);
+                $d2 = new DateTime($end_date);
+                if($d1 >= $d2) throw new EntityValidationException('Start Date should be lower than End Date!');
+                if(!$summit->belongsToDuration($d1))
+                    throw new EntityValidationException('Start Date should be inside Summit Duration!');
+                if(!$summit->belongsToDuration($d2))
+                    throw new EntityValidationException('Start Date should be inside Summit Duration!');
+            }
+
             $event->Title            = $event_data['title'];
             $event->RSVPLink         = $event_data['rsvp_link'];
             $event->HeadCount        = intval($event_data['headcount']);
@@ -217,7 +269,6 @@ final class SummitService implements ISummitService
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack = $event_data['allow_feedback'];
             $event->LocationID    = intval($event_data['location_id']);
-            $event->TypeID        = intval($event_data['event_type']);
 
             $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
             $event->AllowedSummitTypes()->setByIDList($summit_types);
@@ -227,8 +278,7 @@ final class SummitService implements ISummitService
             $event->Sponsors()->setByIDList($sponsors);
 
             // Speakers, if one of the added members is not a speaker, we need to make him one
-            if ($event->isPresentation()) {
-                $presentation = $event_repository->getPresentationById($event_id);
+            if ($event instanceof Presentation) {
                 $speaker_ids = array();
                 $member_ids = explode(',',$event_data['speakers']);
                 foreach ($member_ids as $member_id) {
@@ -246,15 +296,36 @@ final class SummitService implements ISummitService
                     $speaker_ids[] = $speaker->ID;
                 }
 
-                $presentation->Speakers()->setByIDList($speaker_ids);
-            }
+                $event->Speakers()->setByIDList($speaker_ids);
 
-            if($event->isPublished())
+                if($event->Type()->Type == 'Keynotes')
+                {
+                    $member_id    = intval($event_data['moderator']);
+                    $moderator    = PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
+                    if (is_null($moderator)) {
+                        $member = Member::get()->byID($moderator);
+                        $moderator = PresentationSpeaker::create();
+                        $moderator->FirstName = $member->FirstName;
+                        $moderator->LastName = $member->Surname;
+                        $moderator->MemberID = $member->ID;
+                        $moderator->write();
+                    }
+                    $event->ModeratorID = $moderator->ID;
+                }
+
+                $track = PresentationCategory::get()->byID(intval($event_data['track']));
+                if(is_null($track)) throw new NotFoundEntityException('Track');
+
+                $event->CategoryID = $track->ID;
+            }
+            $must_publish= (bool)$event_data['publish'];
+            if($event->isPublished() || $must_publish)
             {
                 $this_var->validateBlackOutTimesAndTimes($event);
                 $event->unPublish();
                 $event->publish();
             }
+            $event->write();
             return $event;
         });
     }

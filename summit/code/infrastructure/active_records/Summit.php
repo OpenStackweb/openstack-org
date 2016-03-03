@@ -177,6 +177,24 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    public function getBeginDateYMD()
+    {
+        $date = new DateTime($this->getSummitBeginDate());
+        return $date->format('Y-m-d');
+    }
+
+    public function getEndDateYMD()
+    {
+        $date = new DateTime($this->getSummitEndDate());
+        return $date->format('Y-m-d');
+    }
+
+    public function getBeginTime()
+    {
+        $date = new DateTime($this->getSummitBeginDate());
+        return $date->format('H:i:s');
+    }
+
     public function setSummitEndDate($value)
     {
         if (!empty($value)) {
@@ -1095,10 +1113,10 @@ final class Summit extends DataObject implements ISummit
 
     public function isEventInsideSummitDuration(ISummitEvent $summit_event)
     {
-        $event_start_date = new DateTime($summit_event->getStartDate());
-        $event_end_date = new DateTime($summit_event->getEndDate());
+        $event_start_date  = new DateTime($summit_event->getStartDate());
+        $event_end_date    = new DateTime($summit_event->getEndDate());
         $summit_start_date = new DateTime($this->getBeginDate());
-        $summit_end_date = new DateTime($this->getEndDate());
+        $summit_end_date   = new DateTime($this->getEndDate());
 
         return $event_start_date >= $summit_start_date && $event_start_date <= $summit_end_date &&
         $event_end_date <= $summit_end_date && $event_end_date >= $event_start_date;

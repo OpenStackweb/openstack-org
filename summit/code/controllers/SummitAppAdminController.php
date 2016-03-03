@@ -336,13 +336,20 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         Requirements::css('summit/css/summit-admin-edit-event.css');
+        Requirements::css('summit/css/summit-admin-edit-event.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
         Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap3-typeahead/bootstrap3-typeahead.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        //tags inputs
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('summit/javascript/summitapp-editevent.js');
 
         return $this->getViewer('EditEvent')->process
@@ -362,8 +369,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     public function editSummit(SS_HTTPRequest $request)
     {
         Requirements::javascript('summit/javascript/summitapp-summitform.js');
-        Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js');
-        Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
         Requirements::css('summit/css/summit-admin.css');
 
         return $this->getViewer('EditSummit')->process($this->owner);

@@ -96,7 +96,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     public function isPresentation() {
-        return ($this->getTypeName() == 'Presentation');
+        return $this instanceof Presentation;
     }
 
     public function getLink() {
@@ -450,7 +450,7 @@ class SummitEvent extends DataObject implements ISummitEvent
      */
     public function isPublished()
     {
-        return  $this->Published;
+        return  (bool)$this->Published;
     }
 
     /**
