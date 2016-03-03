@@ -174,14 +174,14 @@
     color: red;
 }
 
-li.location-venue
+.location-venue
 {
     font-size: 10pt !important;
     font-weight: bold !important;
     text-transform: uppercase;
 }
 
-li.location-venue-room
+.location-venue-room
 {
     font-size: 8pt !important;
     padding-left: 20px !important;

@@ -52,7 +52,7 @@
                                 <label for="select_venue_modal">Venue</label>
                                 <select id="select_venue_modal" style="width: 80%">
                                     <option value=''>-- Any Venue --</option>
-                                    <option value="{ id }" each={ id, location in summit.locations_dictionary } >{ location.name }</option>
+                                    <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ summit.locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
                                 </select>
                             </div>
                         </div>
@@ -130,8 +130,8 @@
                         $('#start_time_modal,#end_time_modal').datetimepicker({
                             datepicker:false,
                             format:'H:i',
-                            minTime:'06:00',
-                            maxTime:'23:30',
+                            minTime:'07:00',
+                            maxTime:'22:00',
                             step: 15
                         });
 

@@ -308,65 +308,67 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $control = array();
         $previous_event = $previous_end_date = $previous_event_day = $previous_event_time = null;
 
-        foreach($events as $event) {
-            $event_start_date = $event->getStartDate();
-            $event_day        = date('Y-m-d',strtotime($event_start_date));
+        if ($events) {
+            foreach($events as $event) {
+                $event_start_date = $event->getStartDate();
+                $event_day        = date('Y-m-d',strtotime($event_start_date));
 
-            $control[$event_day][$event->LocationID] = true; //control array to see what days and locations had no events at all
+                $control[$event_day][$event->LocationID] = true; //control array to see what days and locations had no events at all
 
-            // if first event or first on this venue or first of the day we use the lower limit
-            if ($previous_event == null) {
-                $previous_time = $start_time;
-            } else if ($previous_event->LocationID != $event->LocationID || $previous_event_day != $event_day) {
-                $previous_time = $start_time;
+                // if first event or first on this venue or first of the day we use the lower limit
+                if ($previous_event == null) {
+                    $previous_time = $start_time;
+                } else if ($previous_event->LocationID != $event->LocationID || $previous_event_day != $event_day) {
+                    $previous_time = $start_time;
 
-                // if it is the first event of the room/day, add empty spot between last event and top limit
-                $end_limit = $previous_event_day.' '.$end_time;
-                $unix_time = strtotime($previous_end_date);
-                $empty_space = strtotime($end_limit) - $unix_time;
+                    // if it is the first event of the room/day, add empty spot between last event and top limit
+                    $end_limit = $previous_event_day.' '.$end_time;
+                    $unix_time = strtotime($previous_end_date);
+                    $empty_space = strtotime($end_limit) - $unix_time;
+                    if ($empty_space >= $length) {
+                        $empty_spots[] = array(
+                            'location_id' => $previous_event->LocationID,
+                            'day'         => $previous_event_day,
+                            'time'        => $previous_event_time,
+                            'gap'         => gmdate('G:i', $empty_space),
+                            'unix_time'   => $unix_time
+                        );
+                    }
+                } else {
+                    $previous_time = $previous_event_time;
+                }
+
+                $unix_time = strtotime($event_day.' '.$previous_time);
+                $empty_space = strtotime($event_start_date) - $unix_time;
                 if ($empty_space >= $length) {
                     $empty_spots[] = array(
-                        'location_id' => $previous_event->LocationID,
-                        'day'         => $previous_event_day,
-                        'time'        => $previous_event_time,
+                        'location_id' => $event->LocationID,
+                        'day'         => $event_day,
+                        'time'        => $previous_time,
                         'gap'         => gmdate('G:i', $empty_space),
                         'unix_time'   => $unix_time
                     );
                 }
-            } else {
-                $previous_time = $previous_event_time;
+
+                $previous_event      = $event;
+                $previous_end_date   = $previous_event->getEndDate();
+                $previous_event_day  = date('Y-m-d',strtotime($previous_end_date));
+                $previous_event_time = date('H:i',strtotime($previous_end_date));
             }
 
-            $unix_time = strtotime($event_day.' '.$previous_time);
-            $empty_space = strtotime($event_start_date) - $unix_time;
+            // check the empty space between the last event on the list and the top limit
+            $end_limit = $previous_event_day.' '.$end_time;
+            $unix_time = strtotime($previous_end_date);
+            $empty_space = strtotime($end_limit) - $unix_time;
             if ($empty_space >= $length) {
                 $empty_spots[] = array(
-                    'location_id' => $event->LocationID,
-                    'day'         => $event_day,
-                    'time'        => $previous_time,
+                    'location_id' => $previous_event->LocationID,
+                    'day'         => $previous_event_day,
+                    'time'        => $previous_event_time,
                     'gap'         => gmdate('G:i', $empty_space),
                     'unix_time'   => $unix_time
                 );
             }
-
-            $previous_event      = $event;
-            $previous_end_date   = $previous_event->getEndDate();
-            $previous_event_day  = date('Y-m-d',strtotime($previous_end_date));
-            $previous_event_time = date('H:i',strtotime($previous_end_date));
-        }
-
-        // check the empty space between the last event on the list and the top limit
-        $end_limit = $previous_event_day.' '.$end_time;
-        $unix_time = strtotime($previous_end_date);
-        $empty_space = strtotime($end_limit) - $unix_time;
-        if ($empty_space >= $length && !is_null($previous_event)) {
-            $empty_spots[] = array(
-                'location_id' => $previous_event->LocationID,
-                'day'         => $previous_event_day,
-                'time'        => $previous_event_time,
-                'gap'         => gmdate('G:i', $empty_space),
-                'unix_time'   => $unix_time
-            );
         }
 
         // now add the days/venues without any events, ie completely free
