@@ -284,7 +284,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $start_time          = isset($query_string['start_time']) ? $query_string['start_time'] : '06:00:00';
         $end_time            = isset($query_string['end_time']) ? $query_string['end_time'] : '23:45:00';
         $locations           = isset($query_string['locations']) ? json_decode($query_string['locations']) : null;
-        $length              = isset($query_string['length']) ? $query_string['length'] : null;
+        $length              = isset($query_string['length']) ? intval($query_string['length']) : 0;
         $summit              = null;
 
         if(intval($summit_id) > 0)
@@ -354,7 +354,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $end_limit = $previous_event_day.' '.$end_time;
         $unix_time = strtotime($previous_end_date);
         $empty_space = strtotime($end_limit) - $unix_time;
-        if ($empty_space >= $length) {
+        if ($empty_space >= $length && !is_null($previous_event)) {
             $empty_spots[] = array(
                 'location_id' => $previous_event->LocationID,
                 'day'         => $previous_event_day,

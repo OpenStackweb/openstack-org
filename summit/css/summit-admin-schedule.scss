@@ -183,7 +183,38 @@ body
 
 .presentation-status
 {
-  color: grey;
+  color: black;
   font-size: 8pt;
   font-weight: bold;
+}
+
+.status-alternate
+{
+  background-color: lightgoldenrodyellow !important;
+}
+
+.status-alternate a,.status-alternate a:visited
+{
+  color: black !important;
+}
+
+.status-accepted
+{
+  background-color: lime!important;
+}
+
+.status-accepted a,.status-accepted a:visited
+{
+  color: black !important;
+}
+
+.status-unaccepted
+{
+  background-color: lightcoral!important;
+  color: white !important;
+}
+
+.status-unaccepted a,.status-unaccepted a:visited
+{
+  color: white !important;
 }

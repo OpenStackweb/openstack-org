@@ -1,5 +1,5 @@
 <schedule-admin-view-schedule-event>
-    <div class="event resizable event-published unselectable" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
+    <div class="event resizable event-published unselectable { getCSSClassBySelectionStatus(data.status) }" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
         <div class="ui-resizable-handle ui-resizable-n" title="{ data.start_datetime.format('hh:mm a') }">
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
@@ -84,6 +84,16 @@
         var s = num+"";
         while (s.length < size) s = "0" + s;
         return s;
+    }
+
+    getCSSClassBySelectionStatus(status) {
+        switch(status){
+            case 'accepted':return 'status-accepted';break;
+            case 'alternate':return 'status-alternate';break;
+            case 'unaccepted':return 'status-unaccepted';break;
+            default: return '';break;
+        }
+        return '';
     }
 
     </script>

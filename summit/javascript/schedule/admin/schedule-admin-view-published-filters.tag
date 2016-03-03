@@ -52,7 +52,7 @@
                                 <label for="select_venue_modal">Venue</label>
                                 <select id="select_venue_modal" style="width: 80%">
                                     <option value=''>-- Any Venue --</option>
-                                    <option value="{ id }" each={ id, location in summit.locations } >{ location.name }</option>
+                                    <option value="{ id }" each={ id, location in summit.locations_dictionary } >{ location.name }</option>
                                 </select>
                             </div>
                         </div>
