@@ -1,5 +1,5 @@
 <schedule-admin-view-schedule-event>
-    <div class="event resizable event-published unselectable { getCSSClassBySelectionStatus(data.status) }" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
+    <div if={ !isForeignBlackout() } class="event resizable event-published unselectable { getCSSClassBySelectionStatus(data.status) }" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
         <div class="ui-resizable-handle ui-resizable-n" title="{ data.start_datetime.format('hh:mm a') }">
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
@@ -22,6 +22,17 @@
         <div class="ui-resizable-handle ui-resizable-s" title="{ data.end_datetime.format('hh:mm a') }">
             <span class="ui-icon ui-icon-triangle-1-s"></span>
         </div>
+    </div>
+
+    <div if={ isForeignBlackout() } class="event event-published unselectable no_drag" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
+
+        <div class="event-inner-body">
+            Blackout Event on { parent.summit.locations_dictionary[data.location_id].name }:
+            <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">
+                { data.title.substring(0, 75) }{ data.title.length > 75 ? '...':''}
+            </a>
+        </div>
+
     </div>
 
     <script>
@@ -80,6 +91,11 @@
             }
         }
         return res;
+    }
+
+    isForeignBlackout() {
+        var current_location = $('#select_venue').val();
+        return (self.data.location_id != current_location);
     }
 
     pad(num, size) {

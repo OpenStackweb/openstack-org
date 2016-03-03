@@ -189,4 +189,34 @@ SQL;
 
         return $events;
     }
+
+    /**
+     * Returns the blackout events for this day on every other location
+     * @param ISummit $summit
+     * @param mixed $day
+     * @param int $location
+     * @return array
+     */
+    public function getOtherBlackoutsByDay(ISummit $summit, $day, $location) {
+        if (is_null($summit)) throw new InvalidArgumentException('summit not found!');
+        if (is_null($day) || is_null($location)) throw new InvalidArgumentException('need a day and a location!');
+
+        if (!$day instanceof DateTime) {
+            $day = new DateTime($day);
+        }
+
+        $start = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
+        $end = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
+
+        $start_date = $summit->convertDateFromTimeZone2UTC($start);
+        $end_date = $summit->convertDateFromTimeZone2UTC($end);
+
+        $list = SummitEvent::get()
+            ->leftJoin('SummitEventType','SummitEventType.ID = SummitEvent.TypeID')
+            ->where("SummitEvent.SummitID = {$summit->getIdentifier()} AND SummitEvent.Published = 1
+                     AND SummitEvent.StartDate < '{$end_date}' AND SummitEvent.EndDate > '{$start_date}'
+                     AND SummitEvent.LocationID != {$location} AND ");
+
+        return $list->toArray();
+    }
 }

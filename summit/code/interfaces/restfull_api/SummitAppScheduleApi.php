@@ -111,6 +111,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $summit_id           = intval($request->param('SUMMIT_ID'));
         $day                 = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
         $location            = isset($query_string['location']) ? intval(Convert::raw2sql($query_string['location'])) : null;
+        $inc_blackouts       = isset($query_string['blackouts']) ? intval(Convert::raw2sql($query_string['blackouts'])) : null;
         $summit              = null;
 
         if(intval($summit_id) > 0)
@@ -122,8 +123,12 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             return $this->notFound('summit not found!');
 
         $events = array();
+        $schedule = $summit->getSchedule($day, $location);
+        $blackouts = ($inc_blackouts) ? $summit->getBlackouts($day,$location) : new ArrayList();
 
-        foreach($summit->getSchedule($day, $location) as $e)
+        $schedule->merge($blackouts);
+
+        foreach($schedule as $e)
         {
             $entry = array
             (
@@ -281,8 +286,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $query_string        = $request->getVars();
         $summit_id           = intval($request->param('SUMMIT_ID'));
         $days                = isset($query_string['days']) ? json_decode($query_string['days']) : null;
-        $start_time          = isset($query_string['start_time']) ? $query_string['start_time'] : '06:00:00';
-        $end_time            = isset($query_string['end_time']) ? $query_string['end_time'] : '23:45:00';
+        $start_time          = isset($query_string['start_time']) ? $query_string['start_time'] : '07:00:00';
+        $end_time            = isset($query_string['end_time']) ? $query_string['end_time'] : '22:00:00';
         $locations           = isset($query_string['locations']) ? json_decode($query_string['locations']) : null;
         $length              = isset($query_string['length']) ? intval($query_string['length']) : 0;
         $summit              = null;

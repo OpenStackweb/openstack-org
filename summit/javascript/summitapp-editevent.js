@@ -76,7 +76,6 @@ $(document).ready(function(){
         freeInput: false,
         allowDuplicates: false,
         trimValue: true,
-
         typeaheadjs: [
             {
                 hint: true,
@@ -112,7 +111,6 @@ $(document).ready(function(){
         freeInput: false,
         allowDuplicates: false,
         trimValue: true,
-
         typeaheadjs: [
             {
                 hint: true,
