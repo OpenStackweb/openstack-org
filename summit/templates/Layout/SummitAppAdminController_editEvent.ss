@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <select hidden class="form-control" id="location" name="location">
-                            <option hidden value=''>-- Select A Venue --</option>
+                            <option value=''>-- Select A Venue --</option>
                             <option value="0" <% if $Top.Event.LocationID = 0 %> selected <% end_if %>>TBA</option>
                             <% loop Summit.getTopVenues() %>
                                 <option value="$ID"
@@ -85,7 +85,7 @@
                             <div> {$Top.Event.Type.Type}</div>
                         <% else %>
                         <select class="form-control" id="event_type" name="event_type">
-                            <option hidden value="">-- Select a Type --</option>
+                            <option value="">-- Select a Type --</option>
                             <% loop Summit.EventTypes() %>
                                 <option value="$ID">$Type</option>
                             <% end_loop %>
@@ -103,7 +103,7 @@
                     <div class="col-md-3 track_container" style="display:none">
                         <label for="track">Track</label>
                         <select class="form-control" id="track" name="track">
-                            <option hidden value="">-- Select a Track --</option>
+                            <option value="">-- Select a Track --</option>
                             <% loop Summit.Categories() %>
                                 <option value="$ID" <% if $Top.Event.isPresentation() && $Top.Event.CategoryID == $ID %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
@@ -208,6 +208,7 @@
         <% if $Top.Event %>
         <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' %>
         $('.speakers_container').show();
+        $('.track_container').show();
         <% end_if %>
         <% if $Top.Event.Type.Type == 'Keynotes' %>
         $('.moderator_container').show();

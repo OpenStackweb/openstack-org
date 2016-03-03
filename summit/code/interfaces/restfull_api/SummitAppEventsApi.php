@@ -134,21 +134,20 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             {
                 $entry = array
                 (
-                    'id'          => $e->ID,
+                    'id'          => intval($e->ID),
                     'title'       => $e->Title,
                     'description' => !empty($e->Description)? $e->Description : $e->ShortDescription,
-                    'type_id'     => $e->TypeID,
+                    'type_id'     => intval($e->TypeID),
+                    'class_name'  => $e->ClassName,
                 );
 
                 if ($e instanceof Presentation)
                 {
-
-
                     $speakers = array();
                     if(!empty($expand) && strstr($expand, 'speakers')!== false)
                     {
                         foreach ($e->Speakers() as $s) {
-                            array_push($speakers, array('id' => $s->ID, 'name' => $s->getName()));
+                            array_push($speakers, array('id' => intval($s->ID), 'name' => $s->getName()));
                         }
                         $entry['speakers'] = $speakers;
                     }
@@ -158,8 +157,8 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                         }
                         $entry['speakers_id'] = $speakers;
                     }
-                    $entry['moderator_id'] = $e->ModeratorID;
-                    $entry['track_id']     = $e->CategoryID;
+                    $entry['moderator_id'] = intval($e->ModeratorID);
+                    $entry['track_id']     = intval($e->CategoryID);
                     $entry['level']        = $e->Level;
                     $entry['status']       = $e->SelectionStatus();
                 }

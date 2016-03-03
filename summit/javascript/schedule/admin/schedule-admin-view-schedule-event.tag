@@ -10,7 +10,9 @@
             </a>
         </div>
         <div class="event-inner-body">
-            <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title.substring(0, 75) }{ data.title.length > 75 ? '...':''}{ data.class_name === 'Presentation'?' - '+parent.summit.tracks_dictionary[data.track_id].name:'' }</a>
+            <div>
+                 <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title.substring(0, 70) }{ data.title.length > 70 ? '...':''}{ data.class_name === 'Presentation'?' - '+parent.summit.tracks_dictionary[data.track_id].name:'' }</a>
+            </div>
             <div class="presentation-status">
                 <div if={ data.status }  class="event-status-component" title="status"><i class="fa fa-check-circle">&nbsp;{data.status}</i></div>
                 <div if={ data.headcount } class="event-status-component" title="headcount">&nbsp;<i class="fa fa-users">&nbsp;{data.headcount}&nbsp;of&nbsp;{ parent.summit.locations_dictionary[data.location_id].capacity }</i></div>
