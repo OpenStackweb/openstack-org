@@ -18,6 +18,7 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
     private static $db = array
     (
         'Capacity' => 'Int',
+        'OverrideBlackouts' => 'Boolean',
     );
 
     private static $has_many = array
@@ -37,7 +38,8 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
     private static $summary_fields = array
     (
         'Name',
-        'Capacity'
+        'Capacity',
+        'OverrideBlackouts',
     );
 
     private static $searchable_fields = array
@@ -59,10 +61,15 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
         return false;
     }
 
+    public function overridesBlackouts() {
+        return $this->OverrideBlackouts;
+    }
+
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
         $f->addFieldToTab('Root.Main', new NumericField('Capacity','Capacity'));
+        $f->addFieldToTab('Root.Main', new CheckboxField('OverrideBlackouts','Overrides Blackouts'));
         $f->addFieldToTab('Root.Main', new HiddenField('VenueID','VenueID'));
         // hack
         $this->SummitID = $_REQUEST['SummitID'];

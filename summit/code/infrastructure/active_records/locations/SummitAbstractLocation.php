@@ -54,6 +54,11 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         return 'SummitLocation';
     }
 
+    public function overridesBlackouts()
+    {
+        return false;
+    }
+
     /**
      * @return int
      */

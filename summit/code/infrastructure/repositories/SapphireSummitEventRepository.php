@@ -194,12 +194,12 @@ SQL;
      * Returns the blackout events for this day on every other location
      * @param ISummit $summit
      * @param mixed $day
-     * @param int $location
+     * @param int $location_id
      * @return array
      */
-    public function getOtherBlackoutsByDay(ISummit $summit, $day, $location) {
+    public function getOtherBlackoutsByDay(ISummit $summit, $day, $location_id) {
         if (is_null($summit)) throw new InvalidArgumentException('summit not found!');
-        if (is_null($day) || is_null($location)) throw new InvalidArgumentException('need a day and a location!');
+        if (is_null($day) || is_null($location_id)) throw new InvalidArgumentException('need a day and a location!');
 
         if (!$day instanceof DateTime) {
             $day = new DateTime($day);
@@ -215,7 +215,7 @@ SQL;
             ->leftJoin('SummitEventType','SummitEventType.ID = SummitEvent.TypeID')
             ->where("SummitEvent.SummitID = {$summit->getIdentifier()} AND SummitEvent.Published = 1
                      AND SummitEvent.StartDate < '{$end_date}' AND SummitEvent.EndDate > '{$start_date}'
-                     AND SummitEvent.LocationID != {$location} AND SummitEventType.BlackOutTimes");
+                     AND SummitEvent.LocationID != {$location_id} AND SummitEventType.BlackOutTimes");
 
         return $list->toArray();
     }

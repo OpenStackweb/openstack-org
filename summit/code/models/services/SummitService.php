@@ -92,7 +92,7 @@ final class SummitService implements ISummitService
         $event_on_timeframe = $this->event_repository->getPublishedByTimeFrame(intval($event->SummitID), $event->getStartDate(), $event->getEndDate());
         foreach ($event_on_timeframe as $c_event) {
             // if the published event is BlackoutTime or if there is a BlackoutTime event in this timeframe
-            if (($event->Type()->BlackoutTimes || $c_event->Type()->BlackoutTimes) && $event->ID != $c_event->ID) {
+            if (!$event->Location()->overridesBlackouts() && ($event->Type()->BlackoutTimes || $c_event->Type()->BlackoutTimes) && $event->ID != $c_event->ID) {
                 throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
             }
             // if trying to publish an event on a slot occupied by another event
