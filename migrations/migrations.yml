@@ -18,3 +18,4 @@ migrations:
   - CreateSummitFrontEndAdminGroupMigration
   - PresentationSpeakerSummitConfirmationMigration
   - ClearOlderIngestTaskMigration
+  - VideoPresentationMigration
