@@ -5,7 +5,7 @@
 
 <event-list>
     <div class="col-md-12 speaker-events-div">
-        <schedule-event each={ summit.events } ></schedule-event>
+        <schedule-event each={ summit.events } show_date={ true } ></schedule-event>
     </div>
 
     <script>

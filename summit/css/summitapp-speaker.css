@@ -43,6 +43,10 @@
     margin: 0 15px 15px 0;
 }
 
+.global-search-div {
+    top: -47px;
+}
+
 .section1 {
     border-bottom: 1px solid #C2C2C2;
     color: #4C4C4C;

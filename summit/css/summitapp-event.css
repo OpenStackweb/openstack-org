@@ -16,6 +16,17 @@
     font-family:'Montserrat' , sans-serif;
 }
 
+.global-search-div {
+    position: relative;
+    top: -40px;
+    float: right;
+    width: 420px;
+}
+
+.global-search-div input {
+    font-family: Montserrat, Sans-serif;
+}
+
 .title_box {
     background-color:#132539;
     padding: 30px 0;

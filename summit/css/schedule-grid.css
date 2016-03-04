@@ -45,12 +45,12 @@ body
     font-family: Montserrat, Sans-serif;
 }
 
-#search_unpublished.btn-global-search, .btn-global-search-clear
+#search_unpublished.btn-global-search, #search_unpublished.btn-global-search-clear
 {
     height: 38px;
 }
 
-.input-global-search
+#search_unpublished.input-global-search
 {
     height: 38px;
     width: 90%;
@@ -508,7 +508,7 @@ form.all-events-search-form .all-events-search-wrapper i {
 
 .global-search-div {
     position: relative;
-    top: -47px;
+    top: 0px;
     float: right;
     width: 420px;
 }

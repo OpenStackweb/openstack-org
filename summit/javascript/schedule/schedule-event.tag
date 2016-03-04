@@ -5,10 +5,12 @@
                 <div class="col-md-1 col-xs-1 event-type" style="background-color: { eventColor(category_group_ids) }">&nbsp;</div>
                 <div class="col-md-11 col-xs-11 event-content">
                     <div class="row row_location">
-                        <div class="col-xs-12 col-md-2 col-time">
-                            <i class="fa fa-clock-o icon-clock"></i>&nbsp;<span>{ start_time }</span>&nbsp;/&nbsp;<span>{ end_time }</span>
+                        <div class="col-xs-12 col-md-3 col-time">
+                            <i class="fa fa-clock-o icon-clock"></i>
+                            <span if={ show_date }>{ date_nice }</span>
+                            &nbsp;<span>{ start_time }</span>&nbsp;/&nbsp;<span>{ end_time }</span>
                         </div>
-                        <div class="col-xs-12 col-md-8 col-location"><i if={ summit.should_show_venues } class="fa fa-map-marker icon-map"></i>&nbsp;<span if={ summit.should_show_venues } >{ locationName(location_id) }</span></div>
+                        <div class="col-xs-12 col-md-7 col-location"><i if={ summit.should_show_venues } class="fa fa-map-marker icon-map"></i>&nbsp;<span if={ summit.should_show_venues } >{ locationName(location_id) }</span></div>
                         <div class="col-xs-12 col-md-2 my-schedule-container" if={ parent.summit.current_user !== null } >
                             <i if={ !own } class="fa fa-plus-circle icon-foreign-event icon-event-action" title="add to my schedule" onclick={ addToMySchedule } ></i>
                             <i if={ own } class="fa fa-check-circle icon-own-event icon-event-action" title="remove from my schedule" onclick={ removeFromMySchedule } ></i>
@@ -109,6 +111,7 @@
     this.search_url               = this.parent.search_url;
     this.schedule_api             = this.parent.schedule_api;
     this.default_event_color      = this.parent.default_event_color;
+    this.show_date                = opts.show_date;
     var self                      = this;
 
     this.on('mount', function(){
