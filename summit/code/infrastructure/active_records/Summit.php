@@ -1331,14 +1331,8 @@ final class Summit extends DataObject implements ISummit
         $id = $this->ID;
         $sql = <<<SQL
 SELECT COUNT(E.ID) FROM SummitEvent E
-WHERE E.SummitID =
-{
-$id
-}
-
- AND StartDate >= '{
-    $start_date}' AND EndDate <= '{
-    $end_date}';
+WHERE E.SummitID ={$id}
+AND StartDate >= '{$start_date}' AND EndDate <= '{$end_date}';
 SQL;
 
         return intval(DB::query(
