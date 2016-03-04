@@ -20,27 +20,27 @@
                 <div class="col-xs-12 col-md-12">
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 single-filter-wrapper first">
-                            <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Choose Summit Type ..."  multiple="multiple">
+                            <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Summit Type"  multiple="multiple">
                                 <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
                              </select>
                         </div>
                         <div class="col-xs-12 col-sm-2 single-filter-wrapper">
-                            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Choose Event Type ..."  multiple="multiple">
+                            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Type"  multiple="multiple">
                                 <option each={ id, obj in summit.event_types } value="{ id }">{ obj.type }</option>
                             </select>
                         </div>
                         <div class="col-xs-12 col-sm-3 single-filter-wrapper">
-                            <select id="ddl_tracks" data-placeholder="Choose Presentation Tracks ..."  multiple="multiple">
+                            <select id="ddl_tracks" data-placeholder="Presentation Tracks"  multiple="multiple">
                                 <option each={ id, obj in summit.tracks } value="{ id }">{ obj.name }</option>
                             </select>
                         </div>
                         <div class="col-xs-12 col-sm-3 single-filter-wrapper">
-                            <select id="ddl_levels" data-placeholder="Choose Presentation Levels ..."  multiple="multiple">
+                            <select id="ddl_levels" data-placeholder="Presentation Levels"  multiple="multiple">
                                 <option each={ id, obj in summit.presentation_levels } value="{ id }">{ obj.level }</option>
                             </select>
                         </div>
                         <div class="col-xs-12 col-sm-2 single-filter-wrapper">
-                            <select id="ddl_tags" data-placeholder="Choose Tags ..."  multiple="multiple">
+                            <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple">
                                 <option each={ id, obj in summit.tags } value="{ id }">{ obj.name }</option>
                             </select>
                         </div>

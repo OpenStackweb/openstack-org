@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-md-9 col-track">
                             <span if={ track_id} class="track">
-                                <a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+trackName()replace(/ /g,'+') }">{ trackName() }</a>
+                                <a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+trackName().replace(/ /g,'+') }">{ trackName() }</a>
                             </span>
                         </div>
                         <div class="col-md-3 event-type-col">
