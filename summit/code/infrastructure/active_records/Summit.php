@@ -1409,8 +1409,7 @@ $sql)->value()) > 0;
 SELECT distinct T.* FROM Tag T
 INNER JOIN SummitEvent_Tags ET ON ET.TagID = T.ID
 INNER JOIN SummitEvent E ON E.ID = ET.SummitEventID
-WHERE E.SummitID = {
-    $id}
+WHERE E.SummitID = {$id}
 SQL;
 
         $list = array();
@@ -1483,8 +1482,7 @@ SQL;
     {
         $query = <<<SQL
 SELECT DISTINCT C.* FROM SummitEvent_Sponsors S
-INNER JOIN SummitEvent E ON E.ID = S.SummitEventID AND E.SummitID = {
-    $this->ID}
+INNER JOIN SummitEvent E ON E.ID = S.SummitEventID AND E.SummitID = {$this->ID}
 INNER JOIN Company C ON C.ID = S.CompanyID
 SQL;
 
