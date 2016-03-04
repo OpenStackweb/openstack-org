@@ -111,6 +111,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $summit_id           = intval($request->param('SUMMIT_ID'));
         $day                 = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
         $location            = isset($query_string['location']) ? intval(Convert::raw2sql($query_string['location'])) : null;
+        $inc_blackouts       = isset($query_string['blackouts']) ? intval(Convert::raw2sql($query_string['blackouts'])) : null;
         $summit              = null;
 
         if(intval($summit_id) > 0)
@@ -122,53 +123,59 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             return $this->notFound('summit not found!');
 
         $events = array();
+        $schedule = $summit->getSchedule($day, $location);
+        $blackouts = ($inc_blackouts) ? $summit->getBlackouts($day,$location) : new ArrayList();
 
-        foreach($summit->getSchedule($day, $location) as $e)
+        $schedule->merge($blackouts);
+
+        foreach($schedule as $e)
         {
             $entry = array
             (
-                'id'                 => $e->ID,
-                'title'              => $e->Title,
-                'description'        => $e->Description,
-                'short_desc'         => $e->ShortDescription,
-                'start_datetime'     => $e->StartDate,
-                'end_datetime'       => $e->EndDate,
-                'start_time'         => $e->StartTime,
-                'end_time'           => $e->EndTime,
-                'allow_feedback'     => $e->AllowFeedBack,
-                'location_id'        => $e->LocationID,
-                'type_id'            => $e->TypeID,
-                'sponsors_id'        => array(),
-                'summit_types_id'    => array(),
-                'category_group_ids' => array(),
-                'tags_id'            => array(),
-                'own'                => self::isEventOnMySchedule($e->ID, $summit),
-                'favorite'           => false,
-                'show'               => true
+                'id'                       => intval($e->ID),
+                'title'                    => $e->Title,
+                'description'              => $e->Description,
+                'class_name'               => $e->ClassName,
+                'abstract'                 => $e->ShortDescription,
+                'start_datetime'           => $e->StartDate,
+                'end_datetime'             => $e->EndDate,
+                'start_time'               => $e->StartTime,
+                'end_time'                 => $e->EndTime,
+                'allow_feedback'           => $e->AllowFeedBack,
+                'location_id'              => intval($e->LocationID),
+                'type_id'                  => intval($e->TypeID),
+                'rsvp_link'                => $e->RSVPLink,
+                'sponsors_id'              => array(),
+                'summit_types_id'          => array(),
+                'category_group_ids'       => array(),
+                'tags_id'                  => array(),
+                'own'                      => self::isEventOnMySchedule($e->ID, $summit),
+                'favorite'                 => false,
+                'show'                     => true,
+                'headcount'                => intval($e->HeadCount),
+                'attendees_schedule_count' => $e->AttendeesScheduleCount()
             );
 
             foreach($e->Tags() as $t)
             {
-                array_push($entry['tags_id'], $t->ID);
+                array_push($entry['tags_id'], intval($t->ID));
             }
 
             foreach($e->AllowedSummitTypes() as $t)
             {
-                array_push($entry['summit_types_id'], $t->ID);
+                array_push($entry['summit_types_id'], intval($t->ID));
             }
 
-            if ($e->isPresentation()) {
-                if($e->Category())
-                {
-                    foreach ($e->Category()->getCategoryGroups() as $group) {
-                        array_push($entry['category_group_ids'], $group->ID);
-                    }
+            if($e instanceof Presentation && $e->Category()->exists())
+            {
+                foreach ($e->Category()->getCategoryGroups() as $group) {
+                    array_push($entry['category_group_ids'], intval($group->ID));
                 }
             }
 
             foreach($e->Sponsors() as $e)
             {
-                array_push($entry['sponsors_id'], $e->ID);
+                array_push($entry['sponsors_id'], intval($e->ID));
             }
 
             if($e instanceof Presentation)
@@ -176,12 +183,12 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 $speakers = array();
                 foreach($e->Speakers() as $s)
                 {
-                    array_push($speakers, $s->ID);
+                    array_push($speakers, intval($s->ID));
                 }
 
                 $entry['speakers_id']  = $speakers;
-                $entry['moderator_id'] = $e->ModeratorID;
-                $entry['track_id']     = $e->CategoryID;
+                $entry['moderator_id'] = intval($e->ModeratorID);
+                $entry['track_id']     = intval($e->CategoryID);
                 $entry['level']        = $e->Level;
                 $entry['status']       = $e->SelectionStatus();
             }
@@ -279,10 +286,10 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $query_string        = $request->getVars();
         $summit_id           = intval($request->param('SUMMIT_ID'));
         $days                = isset($query_string['days']) ? json_decode($query_string['days']) : null;
-        $start_time          = isset($query_string['start_time']) ? $query_string['start_time'] : '06:00:00';
-        $end_time            = isset($query_string['end_time']) ? $query_string['end_time'] : '23:45:00';
+        $start_time          = isset($query_string['start_time']) ? $query_string['start_time'] : '07:00:00';
+        $end_time            = isset($query_string['end_time']) ? $query_string['end_time'] : '22:00:00';
         $locations           = isset($query_string['locations']) ? json_decode($query_string['locations']) : null;
-        $length              = isset($query_string['length']) ? $query_string['length'] : null;
+        $length              = isset($query_string['length']) ? intval($query_string['length']) : 0;
         $summit              = null;
 
         if(intval($summit_id) > 0)
@@ -301,65 +308,67 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $control = array();
         $previous_event = $previous_end_date = $previous_event_day = $previous_event_time = null;
 
-        foreach($events as $event) {
-            $event_start_date = $event->getStartDate();
-            $event_day        = date('Y-m-d',strtotime($event_start_date));
+        if ($events) {
+            foreach($events as $event) {
+                $event_start_date = $event->getStartDate();
+                $event_day        = date('Y-m-d',strtotime($event_start_date));
 
-            $control[$event_day][$event->LocationID] = true; //control array to see what days and locations had no events at all
+                $control[$event_day][$event->LocationID] = true; //control array to see what days and locations had no events at all
 
-            // if first event or first on this venue or first of the day we use the lower limit
-            if ($previous_event == null) {
-                $previous_time = $start_time;
-            } else if ($previous_event->LocationID != $event->LocationID || $previous_event_day != $event_day) {
-                $previous_time = $start_time;
+                // if first event or first on this venue or first of the day we use the lower limit
+                if ($previous_event == null) {
+                    $previous_time = $start_time;
+                } else if ($previous_event->LocationID != $event->LocationID || $previous_event_day != $event_day) {
+                    $previous_time = $start_time;
 
-                // if it is the first event of the room/day, add empty spot between last event and top limit
-                $end_limit = $previous_event_day.' '.$end_time;
-                $unix_time = strtotime($previous_end_date);
-                $empty_space = strtotime($end_limit) - $unix_time;
+                    // if it is the first event of the room/day, add empty spot between last event and top limit
+                    $end_limit = $previous_event_day.' '.$end_time;
+                    $unix_time = strtotime($previous_end_date);
+                    $empty_space = strtotime($end_limit) - $unix_time;
+                    if ($empty_space >= $length) {
+                        $empty_spots[] = array(
+                            'location_id' => $previous_event->LocationID,
+                            'day'         => $previous_event_day,
+                            'time'        => $previous_event_time,
+                            'gap'         => gmdate('G:i', $empty_space),
+                            'unix_time'   => $unix_time
+                        );
+                    }
+                } else {
+                    $previous_time = $previous_event_time;
+                }
+
+                $unix_time = strtotime($event_day.' '.$previous_time);
+                $empty_space = strtotime($event_start_date) - $unix_time;
                 if ($empty_space >= $length) {
                     $empty_spots[] = array(
-                        'location_id' => $previous_event->LocationID,
-                        'day'         => $previous_event_day,
-                        'time'        => $previous_event_time,
+                        'location_id' => $event->LocationID,
+                        'day'         => $event_day,
+                        'time'        => $previous_time,
                         'gap'         => gmdate('G:i', $empty_space),
                         'unix_time'   => $unix_time
                     );
                 }
-            } else {
-                $previous_time = $previous_event_time;
+
+                $previous_event      = $event;
+                $previous_end_date   = $previous_event->getEndDate();
+                $previous_event_day  = date('Y-m-d',strtotime($previous_end_date));
+                $previous_event_time = date('H:i',strtotime($previous_end_date));
             }
 
-            $unix_time = strtotime($event_day.' '.$previous_time);
-            $empty_space = strtotime($event_start_date) - $unix_time;
+            // check the empty space between the last event on the list and the top limit
+            $end_limit = $previous_event_day.' '.$end_time;
+            $unix_time = strtotime($previous_end_date);
+            $empty_space = strtotime($end_limit) - $unix_time;
             if ($empty_space >= $length) {
                 $empty_spots[] = array(
-                    'location_id' => $event->LocationID,
-                    'day'         => $event_day,
-                    'time'        => $previous_time,
+                    'location_id' => $previous_event->LocationID,
+                    'day'         => $previous_event_day,
+                    'time'        => $previous_event_time,
                     'gap'         => gmdate('G:i', $empty_space),
                     'unix_time'   => $unix_time
                 );
             }
-
-            $previous_event      = $event;
-            $previous_end_date   = $previous_event->getEndDate();
-            $previous_event_day  = date('Y-m-d',strtotime($previous_end_date));
-            $previous_event_time = date('H:i',strtotime($previous_end_date));
-        }
-
-        // check the empty space between the last event on the list and the top limit
-        $end_limit = $previous_event_day.' '.$end_time;
-        $unix_time = strtotime($previous_end_date);
-        $empty_space = strtotime($end_limit) - $unix_time;
-        if ($empty_space >= $length) {
-            $empty_spots[] = array(
-                'location_id' => $previous_event->LocationID,
-                'day'         => $previous_event_day,
-                'time'        => $previous_event_time,
-                'gap'         => gmdate('G:i', $empty_space),
-                'unix_time'   => $unix_time
-            );
         }
 
         // now add the days/venues without any events, ie completely free
@@ -393,7 +402,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
         return $this->ok(array('empty_spots' => $empty_spots));
     }
-
 
     public static function isEventOnMySchedule($event_id, Summit $summit)
     {

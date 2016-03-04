@@ -61,8 +61,7 @@ class OpenStackIdDatabaseConnection extends Auth_OpenID_DatabaseConnection {
     }
 
     public function autoCommit($mode) {
-        $mode = $mode == false? 0:1;
-        DB::query("SET AUTOCOMMIT={$mode};");
+
     }
 
     function begin()

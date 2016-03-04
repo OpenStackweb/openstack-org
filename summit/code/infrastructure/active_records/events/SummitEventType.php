@@ -15,6 +15,8 @@
 class SummitEventType extends DataObject implements ISummitEventType
 {
 
+    use Colorable;
+
     private static $db = array
     (
         'Type'          => 'Text',
@@ -66,20 +68,6 @@ class SummitEventType extends DataObject implements ISummitEventType
     public function getBlackoutTimes()
     {
         return $this->getField('BlackoutTimes');
-    }
-
-    /**
-     * @return string
-     */
-    public function getColor()
-    {
-        $color = $this->getField('Color');
-        if(empty($color))
-            $color = 'f0f0ee';
-        if (strpos($color,'#') === false) {
-            $color = '#'.$color;
-        }
-        return $color;
     }
 
     public function canDelete($member=null) {

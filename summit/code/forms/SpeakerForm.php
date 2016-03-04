@@ -86,7 +86,7 @@ JS;
                 ->configure()
                     ->setMaxLength(25)
                 ->end()
-            ->text('TwitterHandle','Twitter Handle (optional)')
+            ->text('TwitterName','Twitter Handle (optional)')
                 ->configure()
                     ->setMaxLength(50)
                 ->end()
@@ -170,7 +170,7 @@ JS;
             if(empty($speaker->LastName))  $this->fields->fieldByName('LastName')->setValue($speaker->Member()->Surname);
             if(empty($speaker->Bio))  $this->fields->fieldByName('Bio')->setValue($speaker->Member()->Bio);
             if(empty($speaker->IRCHandle))  $this->fields->fieldByName('IRCHandle')->setValue($speaker->Member()->IRCHandle);
-            if(empty($speaker->TwitterHandle))  $this->fields->fieldByName('TwitterHandle')->setValue($speaker->Member()->TwitterName);
+            if(empty($speaker->TwitterName))  $this->fields->fieldByName('TwitterName')->setValue($speaker->Member()->TwitterName);
         }
 
         foreach ($speaker->AreasOfExpertise() as $key => $expertise)

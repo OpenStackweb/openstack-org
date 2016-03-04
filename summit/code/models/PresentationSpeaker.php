@@ -9,22 +9,22 @@ implements IPresentationSpeaker
 
     private static $db = array
     (
-        'FirstName' => 'Varchar',
-        'LastName' => 'Varchar',
-        'Title' => 'Varchar',
-        'Bio' => 'HTMLText',
-        'IRCHandle' => 'Varchar',
-        'TwitterHandle' => 'Varchar',
-        'AvailableForBureau' => 'Boolean',
-        'FundedTravel' => 'Boolean',
-        'WillingToTravel' => 'Boolean',
-        'Country' => 'Varchar(2)',
-        'BeenEmailed' => 'Boolean',
-        'ConfirmedDate' => 'SS_Datetime',
-        'OnSitePhoneNumber' => 'Text',
-        'RegisteredForSummit' => 'Boolean',
+        'FirstName'             => 'Varchar',
+        'LastName'              => 'Varchar',
+        'Title'                 => 'Varchar',
+        'Bio'                   => 'HTMLText',
+        'IRCHandle'             => 'Varchar',
+        'TwitterName'           => 'Varchar',
+        'AvailableForBureau'    => 'Boolean',
+        'FundedTravel'          => 'Boolean',
+        'WillingToTravel'       => 'Boolean',
+        'Country'               => 'Varchar(2)',
+        'BeenEmailed'           => 'Boolean',
+        'ConfirmedDate'         => 'SS_Datetime',
+        'OnSitePhoneNumber'     => 'Text',
+        'RegisteredForSummit'   => 'Boolean',
         'WillingToPresentVideo' => 'Boolean',
-        'Notes' => 'HTMLText'
+        'Notes'                 => 'HTMLText'
     );
 
     private static $has_one = array
@@ -51,7 +51,7 @@ implements IPresentationSpeaker
         'LastName',
         'Bio',
         'IRCHandle',
-        'TwitterHandle'
+        'TwitterName'
     );
 
     private static $indexes = array
@@ -75,7 +75,7 @@ implements IPresentationSpeaker
         'Member.Email'              => 'Email',
         'Bio'                       => 'Bio',
         'IRCHandle'                 => 'IRCHandle',
-        'TwitterHandle'             => 'TwitterHandle',
+        'TwitterName'               => 'TwitterName',
     );
 
     /**
@@ -166,7 +166,7 @@ implements IPresentationSpeaker
             ->text('Title', "Speaker's title")
             ->htmleditor('Bio',"Speaker's Bio")
             ->text('IRCHandle','IRC Handle (optional)')
-            ->text('TwitterHandle','Twitter Handle (optional)')
+            ->text('TwitterName','Twitter Handle (optional)')
             ->imageUpload('Photo','Upload a speaker photo')
             ->memberAutoComplete('Member', 'Member');
 
@@ -298,6 +298,17 @@ implements IPresentationSpeaker
     public function clearBeenEmailed() {
         $this->BeenEmailed = false;
         $this->write();
+    }
+
+    public function PastAcceptedPresentations($limit = 5) {
+        $AcceptedPresentations = new ArrayList();
+        $Presentations = $this->Presentations()->sort('Created','DESC')->limit($limit);
+        foreach ($Presentations as $Presentation) {
+            if($Presentation->SelectionStatus() == "accepted")
+                $AcceptedPresentations->push($Presentation);
+        }
+
+        return $AcceptedPresentations;
     }
 
     public function AcceptedPresentations($summit_id = null) {
@@ -453,7 +464,7 @@ implements IPresentationSpeaker
         $img1     = $this->Photo();
         $member   = $this->Member();
         $img2     = !is_null($member) && $member->ID > 0 ? $member->Photo(): null;
-        $twitter_name = $this->TwitterHandle;
+        $twitter_name = $this->TwitterName;
         if(!is_null($img1)  && $img1->exists() && Director::fileExists($img1->Filename))
         {
             $img1 = $img1->SetWidth($width);

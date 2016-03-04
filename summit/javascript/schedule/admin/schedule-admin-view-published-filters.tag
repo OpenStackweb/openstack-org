@@ -24,9 +24,9 @@
             <div class="col-md-6">
                 <label for="select_venue">Venue</label>
                 <select id="select_venue" name="select_venue" style="width: 80%">
-                    <option value=''>-- Select A Venue --</option>
-                    <option value="{ id }" each={ id, location in summit.locations } >{ location.name }</option>
+                    <option hidden value=''>-- Select A Venue --</option>
                     <option value="0">TBA</option>
+                    <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ summit.locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
                 </select>
             </div>
         </div>
@@ -52,18 +52,18 @@
                                 <label for="select_venue_modal">Venue</label>
                                 <select id="select_venue_modal" style="width: 80%">
                                     <option value=''>-- Any Venue --</option>
-                                    <option value="{ id }" each={ id, location in summit.locations } >{ location.name }</option>
+                                    <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ summit.locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row" style="margin-bottom: 35px;">
                             <div class="col-md-3">
                                 <label for="start_time_modal">From </label>
-                                <input type='text' id="start_time_modal" value="06:00" style="width: 60%"/>
+                                <input type='text' id="start_time_modal" value="07:00" style="width: 60%"/>
                             </div>
                             <div class="col-md-3">
                                 <label for="end_time_modal" >To </label>
-                                <input type='text' id="end_time_modal" value="23:30" style="width: 60%"/>
+                                <input type='text' id="end_time_modal" value="22:00" style="width: 60%"/>
                             </div>
                             <div class="col-md-6">
                                 <label for="end_time_modal">Gap (minutes)</label>
@@ -107,6 +107,9 @@
                             self.doFilter();
                         });
 
+                        $('#select_day').chosen();
+                        $('#select_venue').chosen();
+
                         $('#search_published').click(function(e) {
                             var search_term = $('#published_search_term').val();
                             if (search_term) {
@@ -127,8 +130,8 @@
                         $('#start_time_modal,#end_time_modal').datetimepicker({
                             datepicker:false,
                             format:'H:i',
-                            minTime:'06:00',
-                            maxTime:'23:30',
+                            minTime:'07:00',
+                            maxTime:'22:00',
                             step: 15
                         });
 
@@ -202,10 +205,12 @@
                             switch(key) {
                                 case 'day':
                                     $('#select_day').val(value);
+                                    $("#select_day").trigger("chosen:updated");
                                     self.day = value;
                                     break;
                                 case 'venue':
                                     $('#select_venue').val(value);
+                                    $("#select_venue").trigger("chosen:updated");
                                     self.location_id = value;
                                     break;
                             }
@@ -227,6 +232,39 @@
 
                 });
 
+                getLocationOptionCSSClass(class_name) {
+                    switch(class_name) {
+                        case 'SummitVenue':
+                            return 'location-venue';
+                        break;
+                        case 'SummitHotel':
+                            return 'location-hotel';
+                        break;
+                        case 'SummitExternalLocation':
+                             return 'location-external';
+                        break;
+                        case 'SummitVenueRoom':
+                            return 'location-venue-room';
+                        break;
+                    }
+                }
+
+                getLocationOptionTitle(class_name) {
+                    switch(class_name) {
+                        case 'SummitVenue':
+                            return 'Venue';
+                        break;
+                        case 'SummitHotel':
+                            return 'Hotel';
+                        break;
+                        case 'SummitExternalLocation':
+                            return 'External Location';
+                        break;
+                        case 'SummitVenueRoom':
+                            return 'Room';
+                        break;
+                    }
+                }
 
         </script>
 </schedule-admin-view-published-filters>

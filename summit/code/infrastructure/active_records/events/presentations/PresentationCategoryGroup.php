@@ -14,6 +14,8 @@
  **/
 class PresentationCategoryGroup extends DataObject
 {
+    use Colorable;
+
     private static $db = array
     (
         'Name'        => 'Text',
@@ -37,9 +39,9 @@ class PresentationCategoryGroup extends DataObject
 
     private static $summary_fields = array
     (
-        'Name'        => 'Name',
-        'Color'       => 'Color',
-        'CategoriesLabel' => 'Categories',
+        'Name'             => 'Name',
+        'Color'            => 'Color',
+        'CategoriesLabel'  => 'Categories',
     );
 
     private static $searchable_fields = array

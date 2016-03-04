@@ -3,7 +3,7 @@
         <h4>Empty Spots</h4>
         <div each="{ location, spot in published_store.empty_spots() }" >
             <hr>
-            <h5>{ summit.locations[location].name }</h5>
+            <h5>{ summit.locations_dictionary[location].name }</h5>
             <div class="list-group">
                 <a href="#" onclick={ parent.deepLinkToSpot } class="list-group-item" each={ spot } >
                     <h4 class="list-group-item-heading">
@@ -30,6 +30,7 @@
         deepLinkToSpot(event) {
             var item = event.item;
 
+            window.location.hash='';
             $(window).url_fragment('setParam','day', item.day);
             $(window).url_fragment('setParam','venue', item.location_id);
             $(window).url_fragment('setParam','time', item.time);

@@ -53,4 +53,20 @@ SQL;
 SQL;
        return intval(DB::query($sql)->value()) > 0;
     }
+
+    public static function dropColumn($db_name, $table_name, $col_name)
+    {
+        $sql = <<<SQL
+       ALTER TABLE $table_name DROP COLUMN $col_name;
+SQL;
+        return intval(DB::query($sql)->value()) > 0;
+    }
+
+    public static function renameColumn($db_name, $table_name, $old_column_name, $new_column_name, $data_type)
+    {
+        $sql = <<<SQL
+       ALTER TABLE "{$table_name}" CHANGE '{$old_column_name}' '{$new_column_name}' {$data_type};
+SQL;
+        return intval(DB::query($sql)->value()) > 0;
+    }
 }

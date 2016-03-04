@@ -14,6 +14,8 @@
  **/
 class SummitType extends DataObject implements ISummitType
 {
+    use Colorable;
+
     private static $db = array
     (
         'Title'       => 'Text',
@@ -24,21 +26,6 @@ class SummitType extends DataObject implements ISummitType
         'Color'       => 'Text',
         'Type'        => "Enum('MAIN, DESIGN', 'MAIN')",
     );
-
-
-    /**
-     * @return string
-     */
-    public function getColor()
-    {
-        $color = $this->getField('Color');
-        if(empty($color))
-            $color = 'f0f0ee';
-        if (strpos($color,'#') === false) {
-            $color = '#'.$color;
-        }
-        return $color;
-    }
 
     public function setStartDate($value)
     {

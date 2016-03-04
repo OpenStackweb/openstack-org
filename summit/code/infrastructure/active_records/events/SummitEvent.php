@@ -24,7 +24,9 @@ class SummitEvent extends DataObject implements ISummitEvent
         'Published'        => 'Boolean',
         'PublishedDate'    => 'SS_Datetime',
         'AllowFeedBack'    => 'Boolean',
-        'AvgFeedbackRate'  => 'Float'
+        'AvgFeedbackRate'  => 'Float',
+        'RSVPLink'         => 'Text',
+        'HeadCount'        => 'Int',
     );
 
     private static $has_many = array
@@ -94,7 +96,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     public function isPresentation() {
-        return ($this->getTypeName() == 'Presentation');
+        return $this instanceof Presentation;
     }
 
     public function getLink() {
@@ -309,7 +311,8 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         $f->addFieldToTab('Root.Main', new TextField('Title','Title'));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
-        $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Short Description'));
+        $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Abstract'));
+        $f->addFieldToTab('Root.Main', new TextField('HeadCount','HeadCount'));
         $f->tag('Tags', 'Tags', Tag::get(), $this->Tags())->configure()
         ->setTitleField('Tag')
         ->end();
@@ -324,7 +327,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
         $f->addFieldsToTab('Root.Main', new ReadonlyField('AvgFeedbackRate', 'AvgFeedbackRate'));
-
+        $f->addFieldsToTab('Root.Main', new TextField('RSVPLink', 'RSVP Link'));
         $locations = SummitAbstractLocation::get()
             ->filter('SummitID', $summit_id )
             ->filter('ClassName', array('SummitVenue', 'SummitVenueRoom', 'SummitExternalLocation') );
@@ -447,7 +450,7 @@ class SummitEvent extends DataObject implements ISummitEvent
      */
     public function isPublished()
     {
-        return  $this->Published;
+        return  (bool)$this->Published;
     }
 
     /**
@@ -611,5 +614,14 @@ SQL;
     public function getTags()
     {
         return $this->getManyManyComponents('Tags');
+    }
+
+    /**
+     * @return int
+     */
+    public function AttendeesScheduleCount()
+    {
+        $res = DB::query("SELECT COUNT(ID) AS QTY FROM SummitAttendee_Schedule WHERE SummitEventID = {$this->ID};")->first();
+        return intval($res['QTY']);
     }
 }

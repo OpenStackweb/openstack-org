@@ -24,7 +24,7 @@
     "jquery-validate": "~1.14.0",
     "bootstrap": "3.3.6",
     "fontawesome": "4.5.0",
-    "bootstrap-tagsinput": "~0.5.0",
+    "bootstrap-tagsinput": "0.7.1",
     "bootstrap-datepicker": "~1.4.0",
     "pwstrength-bootstrap": "~1.2.7",
     "jquery-cookie": "~1.4.1",
@@ -39,6 +39,10 @@
     "clockpicker": "0.0.7",
     "urijs": "1.17.0",
     "moment": "2.11.0",
-    "bootstrap3-typeahead": "~4.0.0"
+    "bootstrap3-typeahead": "~4.0.0",
+    "typeahead.js": "0.11.1",
+    "html2canvas": "~0.4.1",
+    "jspdf": "~1.2.61",
+    "jspdf-plugins": "jsPDF-plugins#*"
   }
 }

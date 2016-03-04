@@ -35,20 +35,19 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         $filter = array('SummitID' => $summit_id, 'Published' => 0);
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
-        $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
+        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND SummitEventType.Type = 'Presentation'";
         if ($search_term) {
-            $where_clause .= "AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
+            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
             $where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
-            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";
+            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' )";
         }
 
-        if(!empty($status)){
-            $filter['Status'] = $status;
-        }
+        $filter['Status'] = Presentation::STATUS_RECEIVED;
 
         $list      = Presentation::get()
                         ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
                         ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
+                        ->leftJoin("SummitEventType","SummitEventType.ID = SummitEvent.TypeID")
                         ->filter($filter)
                         ->where($where_clause)
                         ->sort("TRIM({$order})");
@@ -75,17 +74,117 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
      */
     public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $status = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null)
     {
-        if(is_null($order)) $order = array('SummitSelectedPresentation.Order' => 'ASC');
-        $filter = array('SummitID' => $summit_id, 'Published' => 0);
+        if(is_null($order)) $order = " SummitSelectedPresentation.Order ASC ";
 
         $track_filter = '';
         if(!empty($track_list)){
             $track_filter = " AND SummitSelectedPresentationList.ID = {$track_list} ";
         }
 
-        if(!empty($status)){
-            $filter['Status'] = $status;
+        $where_clause = '';
+        if(!empty($status))
+        {
+            $where_clause .= " WHERE SelectionStatus = '{$status}' ";
         }
+
+        if (!empty($search_term)) {
+            $where_clause .= empty($where_clause) ? " WHERE " : " AND ";
+            $where_clause .= " (Title LIKE '%{$search_term}%' OR Description LIKE '%{$search_term}%'";
+            /*$where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
+            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";*/
+        }
+
+        $sql_count = <<<SQL
+
+SELECT COUNT(ID) AS QTY FROM (
+SELECT
+DISTINCT Presentation.ID,
+CASE WHEN SummitSelectedPresentation.`Order` IS NULL THEN 'unaccepted'
+WHEN SummitSelectedPresentation.`Order` <= PresentationCategory.SessionCount THEN 'accepted'
+ELSE 'alternate' END AS SelectionStatus
+FROM SummitEvent
+INNER JOIN Presentation  ON Presentation.ID = SummitEvent.ID
+INNER JOIN PresentationCategory ON PresentationCategory.ID = Presentation.CategoryID
+LEFT JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
+LEFT JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') AND SummitSelectedPresentationList.CategoryID =  Presentation.CategoryID
+WHERE
+SummitEvent.Title IS NOT NULL
+AND SummitEvent.Title <>''
+AND SummitEvent.SummitID = {$summit_id}
+AND SummitEvent.Published = 0
+AND SummitSelectedPresentationList.ListType = 'Group'
+AND SummitSelectedPresentationList.CategoryID = Presentation.CategoryID
+{$track_filter}
+
+) AS P {$where_clause}
+SQL;
+        $offset    = ($page - 1 ) * $page_size;
+        $sql = <<<SQL
+SELECT * FROM (
+SELECT DISTINCT
+SummitEvent.Title,
+SummitEvent.Description,
+SummitEvent.ShortDescription,
+SummitEvent.StartDate,
+SummitEvent.EndDate,
+SummitEvent.Published,
+SummitEvent.PublishedDate,
+SummitEvent.AllowFeedBack,
+SummitEvent.AvgFeedbackRate,
+SummitEvent.RSVPLink,
+SummitEvent.HeadCount,
+Presentation.*,
+CASE WHEN SummitSelectedPresentation.`Order` IS NULL THEN 'unaccepted'
+WHEN SummitSelectedPresentation.`Order` <= PresentationCategory.SessionCount THEN 'accepted'
+ELSE 'alternate' END AS SelectionStatus
+FROM SummitEvent
+INNER JOIN Presentation  ON Presentation.ID = SummitEvent.ID
+INNER JOIN PresentationCategory ON PresentationCategory.ID = Presentation.CategoryID
+LEFT JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
+LEFT JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID
+WHERE
+SummitEvent.Title IS NOT NULL
+AND SummitEvent.Title <>''
+AND SummitEvent.SummitID = {$summit_id}
+AND SummitEvent.Published = 0
+AND SummitSelectedPresentationList.ListType = 'Group'
+AND SummitSelectedPresentationList.CategoryID = Presentation.CategoryID
+{$track_filter}
+ORDER BY {$order}
+) AS P  {$where_clause} LIMIT {$offset}, {$page_size}
+SQL;
+
+
+        $count = intval(DB::query($sql_count)->first()['QTY']);
+        $data  = array();
+        $res   = DB::query($sql);
+        foreach($res as $row)
+        {
+            array_push($data, new Presentation($row));
+        }
+        return array($page, $page_size, $count,  $data);
+    }
+
+    /**
+     * @param $summit_id
+     * @param null $track
+     * @param null $status
+     * @param null $search_term
+     * @param int $page
+     * @param int $page_size
+     * @param null $order
+     * @return array
+     */
+    public function getUnpublishedBySummitAndTrack($summit_id, $track = null, $status = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null)
+    {
+        $filter = array('SummitID' => $summit_id, 'Published' => 0);
+
+        $track_filter = '';
+        if(!empty($track)){
+            $track_filter = " AND CategoryID = {$track} ";
+        }
+
+        $filter['Status'] = Presentation::STATUS_RECEIVED;
 
         $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
         if ($search_term) {
@@ -94,12 +193,12 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";
         }
 
+        $where_clause .= $track_filter;
+
         $list = Presentation::get()->filter($filter)->where($where_clause)
             ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
             ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
-            ->innerJoin('SummitSelectedPresentation', 'SummitSelectedPresentation.PresentationID = Presentation.ID')
-                ->innerJoin('SummitSelectedPresentationList', "SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') {$track_filter}")
-                ->sort("TRIM({$order})");
+            ->sort("TRIM({$order})");
 
         $count     = intval($list->count());
         if ($page_size) {

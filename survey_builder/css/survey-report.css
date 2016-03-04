@@ -1,0 +1,147 @@
+
+body {
+    color: #2A4E68;
+}
+
+.report_templates_container {
+    width: 270px;
+    margin: 0 auto;
+}
+
+.report_global_filters {
+    padding: 10px 0 10px 0;
+    background-color: #edf2f7;
+    margin-top: 20px;
+}
+
+.report_global_filters .form-control {
+    font-size: 11px;
+}
+
+.report_global_filters_title {
+    font-weight: bold;
+    font-size: 12px;
+    float: left;
+    margin-right: 20px;
+}
+
+.report_clear_filters {
+    font-size: 9px;
+    background-color: #a8b2c4;
+    color: white;
+    float: left;
+    border-radius: 10px;
+    padding: 2px 7px;
+    cursor: pointer;
+}
+
+.report_clear_filters .fa-stack {
+    font-size: 5px;
+}
+
+.report_clear_filters .fa-inverse {
+    color: #a8b2c4;
+}
+
+.report_filter_box.last {
+    margin-right: 0;
+}
+
+.report_filter_box {
+    float: left;
+    width: 178px;
+    margin: 10px 20px 20px 0;
+}
+
+.survey_sections {
+    border-right: 1px solid #a8b2c4;
+}
+
+.section_container {
+    width: 90%;
+    border-bottom: 1px solid #a8b2c4;
+    padding-bottom: 20px;
+}
+
+.section {
+    height: 50px;
+    background-color: #edf2f7;
+    border-radius: 5px;
+    padding: 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.section .fa {
+    float: right;
+    margin-right: 10px;
+    margin-top: 2px;
+    display: none;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.active .fa {
+    display: block;
+}
+
+.pdf_container {
+    width: 90%;
+    padding-top: 20px;
+}
+
+.pdf_button {
+    height: 50px;
+    background-color: #2A4E68;
+    color: white;
+    border-radius: 5px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.pdf_button .fa {
+    float: right;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+#dashboard {
+    background: #FFFFFF;
+}
+
+.graph_box {
+    margin-right: 20px;
+    border: 2px solid #edf2f7;
+    padding: 10px;
+}
+
+.pie {
+    width: 400px;
+    float: left;
+}
+
+.label_n {
+    float:right;
+}
+
+.jqplot-data-label {
+    color: white;
+}
+
+table.jqplot-table-legend, table.jqplot-cursor-legend {
+    border: none;
+}
+
+div.jqplot-table-legend-swatch-outline {
+    border: none;
+    margin-right: 7px;
+}
+
+div.jqplot-table-legend-swatch {
+    border-radius: 10px;
+    border: none;
+    width: 10px;
+    height: 10px;
+}

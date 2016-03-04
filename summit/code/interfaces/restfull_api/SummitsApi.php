@@ -36,19 +36,22 @@ final class SummitsApi extends AbstractRestfulJsonApi
     private $package_purchase_order_manager;
 
     /**
-     * @param IEntityRepository $sponsorship_package_repository
-     * @param IEntityRepository $sponsorship_add_on_repository
-     * @param ISummitPackagePurchaseOrderManager $package_purchase_order_manager
+     * @var ISummitRepository
      */
+    private $summit_repository;
+
     public function __construct(
         IEntityRepository $sponsorship_package_repository,
         IEntityRepository $sponsorship_add_on_repository,
-        ISummitPackagePurchaseOrderManager $package_purchase_order_manager
+        ISummitPackagePurchaseOrderManager $package_purchase_order_manager,
+        ISummitRepository $summit_repository
     ) {
         parent::__construct();
+
         $this->sponsorship_add_on_repository = $sponsorship_add_on_repository;
         $this->sponsorship_package_repository = $sponsorship_package_repository;
         $this->package_purchase_order_manager = $package_purchase_order_manager;
+        $this->summit_repository              = $summit_repository;
 
         $this_var = $this;
 
@@ -111,6 +114,9 @@ final class SummitsApi extends AbstractRestfulJsonApi
     static $url_handlers = array(
         'GET $SUMMIT_ID/add-ons'                                  => 'getAllSponsorshipAddOnsBySummit',
         'GET $SUMMIT_ID/packages'                                 => 'getAllSponsorshipPackagesBySummit',
+        'GET $SUMMIT_ID/tags'                                     => 'getTags',
+        'GET $SUMMIT_ID/companies'                                => 'getCompanies',
+        'GET $SUMMIT_ID/sponsors'                                 => 'getSponsors',
         '$SUMMIT_ID/schedule'                                     => 'handleSchedule',
         '$SUMMIT_ID/events'                                       => 'handleEvents',
         '$SUMMIT_ID/attendees'                                    => 'handleAttendees',
@@ -128,7 +134,109 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'handleEvents',
         'handleAttendees',
         'handleMembers',
+        'getTags',
+        'getSponsors',
+        'getCompanies',
     );
+
+    // this is called when typing a tag name to add as a tag on edit event
+    public function getTags(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $query        = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $tags = DB::query("SELECT T.ID AS id, T.Tag AS name FROM Tag AS T
+                                    WHERE T.Tag LIKE '{$query}%'
+                                    ORDER BY T.Tag LIMIT 10;");
+
+            $json_array = array();
+            foreach ($tags as $tag) {
+                $json_array[] = $tag;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    // this is called when typing a sponsor name to add as a tag on edit event
+    public function getSponsors(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $query        = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $sponsors = DB::query("SELECT C.ID AS id, C.Name AS name FROM Company AS C
+                                    WHERE C.Name LIKE '{$query}%'
+                                    ORDER BY C.Name LIMIT 10;");
+
+            $json_array = array();
+            foreach ($sponsors as $sponsor) {
+                $json_array[] = $sponsor;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getCompanies(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $query        = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $orgs = DB::query(" SELECT O.ID AS id, O.Name AS name FROM Org AS O
+                                WHERE O.Name LIKE '{$query}%'
+                                ORDER BY O.Name LIMIT 10;");
+
+            $json_array = array();
+            foreach ($orgs as $org) {
+
+                $json_array[] = $org;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
 
     public function getAllSponsorshipAddOnsBySummit()
     {
@@ -220,25 +328,25 @@ final class SummitsApi extends AbstractRestfulJsonApi
 
     public function handleSchedule(SS_HTTPRequest $request)
     {
-        $api = SummitAppScheduleApi::create($this);
+        $api = SummitAppScheduleApi::create();
         return $api->handleRequest($request, DataModel::inst());
     }
 
     public function handleEvents(SS_HTTPRequest $request)
     {
-        $api = SummitAppEventsApi::create($this);
+        $api = SummitAppEventsApi::create();
         return $api->handleRequest($request, DataModel::inst());
     }
 
     public function handleAttendees(SS_HTTPRequest $request)
     {
-        $api = SummitAppAttendeesApi::create($this);
+        $api = SummitAppAttendeesApi::create();
         return $api->handleRequest($request, DataModel::inst());
     }
 
     public function handleMembers(SS_HTTPRequest $request)
     {
-        $api = SummitAppMembersApi::create($this);
+        $api = SummitAppMembersApi::create();
         return $api->handleRequest($request, DataModel::inst());
     }
 }

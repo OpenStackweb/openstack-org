@@ -1,5 +1,5 @@
 <schedule-admin-view-schedule-event>
-    <div class="event resizable event-published unselectable" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
+    <div if={ !isForeignBlackout() } class="event resizable event-published unselectable { getCSSClassBySelectionStatus(data.status) }" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
         <div class="ui-resizable-handle ui-resizable-n" title="{ data.start_datetime.format('hh:mm a') }">
             <span class="ui-icon ui-icon-triangle-1-n"></span>
         </div>
@@ -10,12 +10,29 @@
             </a>
         </div>
         <div class="event-inner-body">
-            <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title.substring(0, 75) }{ data.title.length > 75 ? '...':''}</a>
-            <div if={ data.status } class="presentation-status" title="status">&nbsp;{data.status}&nbsp;</div>
+            <div>
+                 <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title.substring(0, 70) }{ data.title.length > 70 ? '...':''}{ data.class_name === 'Presentation'?' - '+parent.summit.tracks_dictionary[data.track_id].name:'' }</a>
+            </div>
+            <div class="presentation-status">
+                <div if={ data.status }  class="event-status-component" title="status"><i class="fa fa-check-circle">&nbsp;{data.status}</i></div>
+                <div if={ data.headcount } class="event-status-component" title="headcount">&nbsp;<i class="fa fa-users">&nbsp;{data.headcount}&nbsp;of&nbsp;{ parent.summit.locations_dictionary[data.location_id].capacity }</i></div>
+                <div if={ data.attendees_schedule_count } class="event-status-component" title="# Added to Schedule">&nbsp;<i class="fa fa-calendar-check-o">&nbsp;{ data.attendees_schedule_count }</i></div>
+            </div>
         </div>
         <div class="ui-resizable-handle ui-resizable-s" title="{ data.end_datetime.format('hh:mm a') }">
             <span class="ui-icon ui-icon-triangle-1-s"></span>
         </div>
+    </div>
+
+    <div if={ isForeignBlackout() } class="event event-published unselectable no_drag" id="event_{ data.id }" data-id="{ data.id }" style='position:absolute; top: { getEventTop() }; left: { getEventLeft() }; height: { getEventHeight() }'>
+
+        <div class="event-inner-body">
+            Blackout Event on { parent.summit.locations_dictionary[data.location_id].name }:
+            <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">
+                { data.title.substring(0, 75) }{ data.title.length > 75 ? '...':''}
+            </a>
+        </div>
+
     </div>
 
     <script>
@@ -63,7 +80,9 @@
     }
 
     getPopoverContent() {
-        var res = '<div class="row"><div class="col-md-12">'+self.data.description+'</div></div>';
+        var description = self.data.abstract != null ? self.data.abstract : self.data.description;
+        if(description == null) description = 'TBD';
+        var res = '<div class="row"><div class="col-md-12">'+description+'</div></div>';
         if(typeof(self.data.speakers) !== 'undefined') {
             res += '<div class="row"><div class="col-md-12"><b>Speakers</b></div></div>';
             for(var idx in self.data.speakers) {
@@ -74,10 +93,25 @@
         return res;
     }
 
+    isForeignBlackout() {
+        var current_location = $('#select_venue').val();
+        return (self.data.location_id != current_location);
+    }
+
     pad(num, size) {
         var s = num+"";
         while (s.length < size) s = "0" + s;
         return s;
+    }
+
+    getCSSClassBySelectionStatus(status) {
+        switch(status){
+            case 'accepted':return 'status-accepted';break;
+            case 'alternate':return 'status-alternate';break;
+            case 'unaccepted':return 'status-unaccepted';break;
+            default: return '';break;
+        }
+        return '';
     }
 
     </script>

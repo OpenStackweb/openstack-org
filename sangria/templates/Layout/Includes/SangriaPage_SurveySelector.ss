@@ -1,4 +1,5 @@
-<select id="range" style="max-width: 125px;">
+<select id="range" style="width: 300px;">
+    <option value="0">--select one --</option>
     <% loop $Top.getSurveys %>
         <option  <% if $Top.getSurveyRange($FromPage) == $ID %>selected<% end_if %> value="{$ID}">{$NiceName}</option>
     <% end_loop %>

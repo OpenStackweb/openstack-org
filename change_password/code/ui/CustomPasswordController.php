@@ -22,6 +22,7 @@ class CustomPasswordController extends Security
         'changepassword',
         'lostpassword',
         'ChangePasswordForm',
+        'LostPasswordForm',
     );
 
     /**
@@ -29,10 +30,16 @@ class CustomPasswordController extends Security
      */
     private $password_manager;
 
+    /**
+     * @var ITransactionManager
+     */
+    private $tx_manager;
+
     public function __construct()
     {
         parent::__construct();
-        $this->password_manager = new PasswordManager;
+        $this->tx_manager       = SapphireTransactionManager::getInstance();
+        $this->password_manager = new PasswordManager($this->tx_manager);
     }
 
     /**
@@ -49,14 +56,13 @@ class CustomPasswordController extends Security
      */
     public function changepassword()
     {
-        $tmpPage = new Page();
-        $tmpPage->Title = _t('Security.CHANGEPASSWORDHEADER', 'Change your password');
-        $tmpPage->URLSegment = 'Security';
-        $tmpPage->ID = -1; // Set the page ID to -1 so we dont get the top level pages as its children
-        $controller = new Page_Controller($tmpPage);
-        $controller->init();
+        $controller = $this->getResponseController(_t('Security.CHANGEPASSWORDHEADER', 'Change your password'));
+
+        // if the controller calls Director::redirect(), this will break early
+        if(($response = $controller->getResponse()) && $response->isFinished()) return $response;
 
         try {
+
             $former_hash = Session::get('AutoLoginHash');
 
             // if we have the token and the member redirect back to clear those values and avoid leaking
@@ -143,5 +149,10 @@ class CustomPasswordController extends Security
 
         //Controller::$currentController = $controller;
         return $customisedController->renderWith($this->getTemplatesFor('lostpassword'));
+    }
+
+    public function LostPasswordForm()
+    {
+        return new CustomLostPasswordForm(Controller::curr(), 'LostPasswordForm', $this->tx_manager);
     }
 }

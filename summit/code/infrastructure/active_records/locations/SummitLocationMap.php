@@ -25,6 +25,7 @@ class SummitLocationMap extends DataObject
     private static $summary_fields = array
     (
         'Name'  => 'Name',
+        'Thumbnail'=>'Thumbnail',
     );
 
     private static $has_one = array
@@ -32,6 +33,14 @@ class SummitLocationMap extends DataObject
         'Map'      => 'BetterImage',
         'Location' => 'SummitGeoLocatedLocation'
     );
+
+    public function getThumbnail() {
+        if ($this->Map()->exists()) {
+            return $this->Map()->SetWidth(100);
+        } else {
+            return '(No Image)';
+        }
+    }
 
     /**
      * @return string

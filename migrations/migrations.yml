@@ -1,0 +1,18 @@
+migrations:
+  # here you should add all your custom migrations classes
+  # each custom migration class must inherit from MigrationTask class
+  # in order to be run
+  - SchedRefactoringMigration
+  - SchedRefactoringMigration2
+  - CreateTableCountries
+  - MigrateExpertiseToDORelation
+  - ChangeTagsCollationMigration
+  - UpdateSurveyTemplateIndexMigration
+  - UpdateAttendeesTicketsMigration2
+  - RemovePresentationDeprecatedColumnsMigration
+  - MemberEmailVerificationMigration
+  - SummitEventbriteRegistrationEmailMigration
+  - UpdateSummitPresentationCommentChangeSuggestionMigration
+  - MigrateToInnoDBMyISAMTablesMigration
+  - UpdatePresentationSpeakerMigration
+  - CreateSummitFrontEndAdminGroupMigration

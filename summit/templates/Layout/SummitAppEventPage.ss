@@ -15,8 +15,7 @@
 <div class="section1">
     <div class="container">
         <div class="description col1">
-            $Event.Description()
-
+            $Event.ShortDescription
             <% if $Event.Tags %>
             <div class="row tags-row">
                 <div class="col-xs-12 col-md-2 col-tags-title">

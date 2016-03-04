@@ -511,13 +511,6 @@ class Presentation extends SummitEvent implements IPresentation
         $f->removeByName('TypeID');
         $f->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
             ->dropdown('CategoryID', 'Category', PresentationCategory::get()->map('ID', 'Title'))
-            ->dropdown('Status', 'Status')
-            ->configure()
-            ->setSource(array_combine(
-                $this->config()->status_options,
-                $this->config()->status_options
-            ))
-            ->end()
             ->listbox('Topics', 'Topics', PresentationTopic::get()->map('ID', 'Title')->toArray())
             ->configure()
             ->setMultiple(true)
@@ -647,7 +640,7 @@ class Presentation extends SummitEvent implements IPresentation
         If (!$Selection) {
             return 'unaccepted';
         } elseif ($Selection->Order <= $this->Category()->SessionCount) {
-            return 'accepted';
+                return 'accepted';
         } else {
             return 'alternate';
         }

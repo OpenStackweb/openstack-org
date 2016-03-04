@@ -110,16 +110,17 @@ SQL;
     {
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
-        $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
+        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND SummitEventType.Type != 'Presentation'";
         if (!empty($search_term)) {
-            $where_clause .= "AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%') ";
+            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%')";
         }
         if(!empty($event_type)){
-            $where_clause .= " AND SummitEvent.TypeID = {$event_type} ";
+            $where_clause .= " AND SummitEvent.TypeID = {$event_type}";
         }
 
         $list      = SummitEvent::get()
-            ->filter( array('SummitID' => $summit_id, 'Published' => 0, 'ClassName:ExactMatch:not' => 'Presentation' ))
+            ->filter( array('SummitID' => $summit_id, 'Published' => 0))
+            ->leftJoin("SummitEventType","SummitEventType.ID = SummitEvent.TypeID")
             ->where($where_clause)->sort("TRIM({$order})");
 
         $count     = intval($list->count());
@@ -187,5 +188,35 @@ SQL;
             ->where($where_clause)->sort('LocationID,StartDate')->toArray();
 
         return $events;
+    }
+
+    /**
+     * Returns the blackout events for this day on every other location
+     * @param ISummit $summit
+     * @param mixed $day
+     * @param int $location_id
+     * @return array
+     */
+    public function getOtherBlackoutsByDay(ISummit $summit, $day, $location_id) {
+        if (is_null($summit)) throw new InvalidArgumentException('summit not found!');
+        if (is_null($day) || is_null($location_id)) throw new InvalidArgumentException('need a day and a location!');
+
+        if (!$day instanceof DateTime) {
+            $day = new DateTime($day);
+        }
+
+        $start = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
+        $end = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
+
+        $start_date = $summit->convertDateFromTimeZone2UTC($start);
+        $end_date = $summit->convertDateFromTimeZone2UTC($end);
+
+        $list = SummitEvent::get()
+            ->leftJoin('SummitEventType','SummitEventType.ID = SummitEvent.TypeID')
+            ->where("SummitEvent.SummitID = {$summit->getIdentifier()} AND SummitEvent.Published = 1
+                     AND SummitEvent.StartDate < '{$end_date}' AND SummitEvent.EndDate > '{$start_date}'
+                     AND SummitEvent.LocationID != {$location_id} AND SummitEventType.BlackOutTimes");
+
+        return $list->toArray();
     }
 }

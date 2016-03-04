@@ -8,7 +8,7 @@ schedule_admin_view_api.RETRIEVED_EMPTY_SPOTS        = 'RETRIEVED_EMPTY_SPOTS';
 
 schedule_admin_view_api.getScheduleByDayAndLocation = function (summit_id, day, location_id)
 {
-    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/schedule?day='+day+'&location='+location_id;
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/schedule?day='+day+'&location='+location_id+'&blackouts=1';
     return $.get(url,function (data) {
         data.summit_id   = summit_id;
         data.location_id = location_id;
@@ -24,6 +24,8 @@ schedule_admin_view_api.getUnpublishedEventsBySource = function (summit_id, sour
     var params = { 'expand' : 'speakers'};
 
     if(source === 'tracks' && second_source !== '' && typeof second_source !== 'undefined' )
+        params['track_id'] = second_source;
+    if(source === 'track_list' && second_source !== '' && typeof second_source !== 'undefined' )
         params['track_list_id'] = second_source;
     if(source === 'events' && second_source !== '' && typeof second_source !== 'undefined' )
         params['event_type_id'] = second_source;

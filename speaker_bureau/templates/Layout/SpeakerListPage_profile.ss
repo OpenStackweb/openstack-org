@@ -60,9 +60,9 @@
                 <% if TwitterName || LinkedInProfile || IRCHandle || Bio %>
                     <hr>
                 <% end_if %>
-                <% if TwitterHandle %>
+                <% if TwitterName %>
                     <div class="span-4"><strong>Twitter</strong></div>
-                    <div class="span-6 last"><a href="https://twitter.com/{$TwitterHandle}">@{$TwitterHandle}</a><br>
+                    <div class="span-6 last"><a href="https://twitter.com/{$TwitterName}">@{$TwitterName}</a><br>
 
                         <p>&nbsp;</p></div>
                 <% end_if %>
@@ -83,13 +83,13 @@
                         <p>I'm involved in the following OpenStack projects: $Projects</p>
                     </div>
                 <% end_if %>
-                <% if Presentations() %>
+                <% if PastAcceptedPresentations() %>
                     <div class="span-4">
                         <strong>Presentations from previous OpenStack Summits:</strong>
                     </div>
                     <div class="span-6 last">
                         <ul>
-                            <% loop Presentations.Limit(5).Sort(StartDate, DESC) %>
+                            <% loop PastAcceptedPresentations(5) %>
                                 <li>
                                     <a href="$Link"><% if $Title != '' %>$Title<% else %>$Link<% end_if %></a>
                                 </li>

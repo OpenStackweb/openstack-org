@@ -12,24 +12,64 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitAppAdminController extends Page_Controller
+final class SummitAppAdminController extends Controller implements PermissionProvider
 {
+
+    /**
+     * Return a map of permission codes to add to the dropdown shown in the Security section of the CMS.
+     * array(
+     *   'VIEW_SITE' => 'View the site',
+     * );
+     */
+    public function providePermissions()
+    {
+
+        return array(
+            'ADMIN_SUMMIT_APP_FRONTEND_ADMIN' => array(
+                'name'     => 'Full Access to Summit FrontEnd Admin',
+                'category' => 'Summit Application',
+                'help'     => '',
+                'sort'     => 2
+            ),
+        );
+    }
 
     public function init()
     {
-        $this->useJqueryUI(true);
         parent::init();
-        if(!Permission::check('ADMIN')) return Security::permissionFailure($this);
+
+        if(!Member::currentUser())
+            return OpenStackIdCommon::doLogin();
+
+        if(!Permission::check("ADMIN_SUMMIT_APP_FRONTEND_ADMIN")) Security::permissionFailure($this);
+
+        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        Requirements::css("themes/openstack/css/combined.css");
+        Requirements::css("themes/openstack/css/navigation_menu.css");
+        Requirements::css("themes/openstack/css/dropdown.css");
         Requirements::css('themes/openstack/css/chosen.css');
         Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('summit/css/summit-admin.css');
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
-        Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
-        Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::css('summit/css/summit-admin.css');
+
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+
+        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
-        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+
+        Requirements::javascript("themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js");
+        Requirements::javascript("themes/openstack/javascript/jquery-ui-bridge.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
+        Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
+        Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+
     }
 
     private static $url_segment = 'summit-admin';
@@ -58,7 +98,7 @@ class SummitAppAdminController extends Page_Controller
         '$SummitID!/events/unpublished'                              => 'pendingEvents',
         '$SummitID!/events/presentation-lists/$PresentationListId!'  => 'editPresentationList',
         '$SummitID!/events/presentation-lists'                       => 'presentationLists',
-        '$SummitID!/events/$EventID!'                                => 'editEvent',
+        '$SummitID!/events/$EventID'                                 => 'editEvent',
         '$SummitID!/tickets'                                         => 'ticketTypes',
         '$SummitID!/attendees/$AttendeeID!'                          => 'editAttendee',
         '$SummitID!/attendees'                                       => 'attendees',
@@ -71,9 +111,7 @@ class SummitAppAdminController extends Page_Controller
      */
     public function index()
     {
-        if(Member::currentUser())
-            return $this->redirect($this->Link('directory'));
-        return $this->redirect('/Security/login/?BackURL=/summit-admin');
+        return $this->redirect($this->Link('directory'));
     }
 
     public function Link($action = null)
@@ -292,18 +330,26 @@ class SummitAppAdminController extends Page_Controller
         $summit_id = intval($request->param('SummitID'));
         $summit = Summit::get()->byID($summit_id);
         $event_id = intval($request->param('EventID'));
-        $event = SummitEvent::get()->byID($event_id);
+        $event = ($event_id == 0) ? null : SummitEvent::get()->byID($event_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('summit/css/summit-admin-edit-event.css');
+        Requirements::css('summit/css/summit-admin-edit-event.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
         Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap3-typeahead/bootstrap3-typeahead.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        //tags inputs
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('summit/javascript/summitapp-editevent.js');
 
         return $this->getViewer('EditEvent')->process
@@ -314,6 +360,7 @@ class SummitAppAdminController extends Page_Controller
                 (
                     'Summit'   => $summit,
                     'Event'    => $event,
+                    'Tab'      => (($event) ? 3 : 4),
                 )
             )
         );
@@ -322,8 +369,6 @@ class SummitAppAdminController extends Page_Controller
     public function editSummit(SS_HTTPRequest $request)
     {
         Requirements::javascript('summit/javascript/summitapp-summitform.js');
-        Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js');
-        Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
         Requirements::css('summit/css/summit-admin.css');
 
         return $this->getViewer('EditSummit')->process($this->owner);
@@ -379,8 +424,24 @@ class SummitAppAdminController extends Page_Controller
 
         return $this->getViewer('scheduleView')->process($this, array
             (
-                'Summit' => $summit,
-                'PresentationStatusOptions' => Presentation::getStatusOptions(),
+                'Summit'                    => $summit,
+                'PresentationStatusOptions' => new ArrayList
+                (
+                    array
+                    (
+                        new ArrayData(array('Status'=> 'Non Received')),
+                        new ArrayData(array('Status'=> Presentation::STATUS_RECEIVED))
+                    )
+                ),
+                'PresentationSelectionStatusOptions' => new ArrayList
+                (
+                    array
+                    (
+                        //new ArrayData(array('Status'=> 'unaccepted')),
+                        new ArrayData(array('Status'=> 'accepted')),
+                        new ArrayData(array('Status'=> 'alternate')),
+                    )
+                ),
             )
         );
     }

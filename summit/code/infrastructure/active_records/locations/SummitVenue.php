@@ -25,10 +25,13 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
         'Rooms' => 'SummitVenueRoom',
     );
 
-    private static $defaults = array
+    private static $has_one = array
     (
     );
 
+    private static $defaults = array
+    (
+    );
 
     private static $summary_fields = array
     (
@@ -52,7 +55,7 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
      */
     public function getRooms()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Rooms')->toArray();
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Rooms');
     }
 
     /**
@@ -76,11 +79,6 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
     {
         $f = parent::getCMSFields();
         $f->addFieldsToTab('Root.Main', new CheckboxField('IsMain', 'Is Main?'));
-        $map_field = new UploadField('Map','Map');
-        $map_field->setAllowedMaxFileNumber(1);
-        $map_field->setFolderName(sprintf('summits/%s/locations/venues/maps/', $this->SummitID));
-
-        $f->addFieldToTab('Root.Main',$map_field );
 
         $config = GridFieldConfig_RecordEditor::create();
         $gridField = new GridField('Rooms', 'Rooms', $this->Rooms(), $config);

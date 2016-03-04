@@ -15,7 +15,6 @@ class JSONable extends DataExtension
 			$fieldName = "{$relation}ID";
 			$data[self::to_underscore("{$relation}ID")] = $this->owner->$fieldName;
 		}
-
 		$data['id'] = $this->owner->ID;
 
 		return $data;

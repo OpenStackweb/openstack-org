@@ -24,6 +24,7 @@ class DateTimeUtils {
     }
 
     public static  function getMonthShortName($input_date){
+        if(is_null($input_date)) return 'TBD';
         $date = date_create_from_format('Y-m-d', $input_date);
         $monthNumber = date_format($date,"m");
         $time = mktime(0, 0, 0, $monthNumber);
@@ -32,16 +33,20 @@ class DateTimeUtils {
     }
 
     public static function getDay($input_date){
+        if(is_null($input_date)) return 'TBD';
         $date = date_create_from_format('Y-m-d', $input_date);
         return date_format($date,"d");
     }
 
     public static function getYear($input_date){
+        if(is_null($input_date)) return 'TBD';
         $date = date_create_from_format('Y-m-d', $input_date);
         return date_format($date,"Y");
     }
 
     public static function getDayDiff($input_date_l,$input_date_r){
+        if(is_null($input_date_l)) return 'TBD';
+        if(is_null($input_date_r)) return 'TBD';
         $date_1 = date_create_from_format('Y-m-d', $input_date_l);
         $date_2 = date_create_from_format('Y-m-d', $input_date_r);
         $interval = date_diff($date_1, $date_2);

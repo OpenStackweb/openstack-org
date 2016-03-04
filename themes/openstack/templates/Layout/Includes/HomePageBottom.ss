@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <a href="/news">See More News <i class="fa fa-caret-right"></i></h2>
-                    <a href="http://www.openstack.org/enterprise/workload-portability/"><img class="news-ad" src="/themes/openstack/images/dft-workload-home-banner.jpg"></a>
+                    <a href="//openstack.org/telecoms-and-nfv/"><img class="news-ad" src="/themes/openstack/images/homepage/nfv-homepage-banner.jpg"></a>
                     
                        <% loop NewsItems %>
                             <!-- News Item -->

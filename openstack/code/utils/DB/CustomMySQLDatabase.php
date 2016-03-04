@@ -17,6 +17,7 @@ class CustomMySQLDatabase extends MySQLDatabase
     public function __construct($parameters)
     {
         parent::__construct($parameters);
+        $this->query('SET AUTOCOMMIT=1;');
     }
 
     public function databaseError($msg, $errorLevel = E_USER_ERROR)
@@ -65,6 +66,12 @@ class CustomMySQLDatabase extends MySQLDatabase
     public function transactionRollback($savepoint = false){
         parent::transactionRollback($savepoint);
         $this->query('SET AUTOCOMMIT=1;');
+    }
+
+    public function query($sql, $errorLevel = E_USER_ERROR) {
+        $query = parent::query($sql, $errorLevel);
+        SS_Log::log($sql, SS_Log::DEBUG);
+        return $query;
     }
 
 }

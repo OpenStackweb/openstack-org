@@ -25,13 +25,13 @@ class SummitAdmin extends ModelAdmin implements PermissionProvider
     public function providePermissions() {
         return array(
             'ADMIN_SUMMIT_APP' => array(
-                'name'     => 'Full Access to Summit App',
+                'name'     => 'Full Access to Summit CMS Admin',
                 'category' => 'Summit Application',
                 'help'     => '',
                 'sort'     => 0
             ),
             'ADMIN_SUMMIT_APP_SCHEDULE' => array(
-                'name'     => 'Full Access to Summit App Schedule',
+                'name'     => 'Full Access to Summit CMS Schedule Admin',
                 'category' => 'Summit Application',
                 'help'     => '',
                 'sort'     => 1

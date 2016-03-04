@@ -43,7 +43,8 @@
   "autoload": {
     "classmap": [
       "geoip/code",
-      "html2pdf_v4.03"
+      "html2pdf_v4.03",
+      "summit/code/infrastructure/traits"
     ]
   },
   "config": {

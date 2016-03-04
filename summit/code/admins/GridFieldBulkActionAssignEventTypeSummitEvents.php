@@ -15,7 +15,7 @@
 class GridFieldBulkActionAssignEventTypeSummitEvents extends GridFieldBulkAction
 {
 
-    protected function processRecordIds(array $ids, $entity_id)
+    protected function processRecordIds(array $ids, $entity_id, $gridField, $request)
     {
         foreach($ids as $id)
         {

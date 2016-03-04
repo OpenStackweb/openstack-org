@@ -45,6 +45,14 @@ class Survey extends DataObject implements ISurvey
         'IsTest'      => false,
     );
 
+
+    private static $searchable_fields = array
+    (
+        'ID',
+        'Created',
+        'IsTest',
+    );
+
     private static $summary_fields = array
     (
         'ID'                        => 'ID',

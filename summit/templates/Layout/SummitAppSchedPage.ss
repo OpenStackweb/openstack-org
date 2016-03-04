@@ -71,7 +71,7 @@
         summit.event_types[{$ID}] =
         {
             type : "{$Type.JS}",
-            color : "{$Color}",
+            color : "{$FormattedColor}",
         };
         <% end_loop %>
 
@@ -82,7 +82,7 @@
            type: "{$Type}",
            name : "{$Title.JS}",
            description : "{$Description.JS}",
-           color : "{$Color}"
+           color : "{$FormattedColor}"
         };
         <% end_loop %>
 
@@ -91,7 +91,7 @@
         {
            name : "{$Name.JS}",
            description : "{$Description.JS}",
-           color : "{$Color}"
+           color : "{$FormattedColor}"
         };
         <% end_loop %>
 
@@ -142,7 +142,7 @@
            </div>
         </div>
     </div>
-    <schedule-grid summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" month="october"></schedule-grid>
+    <schedule-grid summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" month="{$Summit.Month}"></schedule-grid>
 </div>
 <div id="fb-root"></div>
 <script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>

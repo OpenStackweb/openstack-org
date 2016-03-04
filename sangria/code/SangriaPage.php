@@ -25,7 +25,7 @@ class SangriaPage extends Page
 /**
  * Class SangriaPage_Controller
  */
-final class SangriaPage_Controller extends AdminController
+final class SangriaPage_Controller extends AdminController implements PermissionProvider
 {
 
     public static $submissionsCount = 0;
@@ -63,8 +63,13 @@ final class SangriaPage_Controller extends AdminController
 
     function providePermissions()
     {
-        return array(
-            "SANGRIA_ACCESS" => "Access the Sangria Admin"
+         return array(
+            'SANGRIA_ACCESS' => array(
+                'name'     => 'Access the Sangria Admin',
+                'category' => 'Sangria',
+                'help'     => '',
+                'sort'     => 0
+            ),
         );
     }
 
@@ -301,6 +306,11 @@ final class SangriaPage_Controller extends AdminController
     public static function getSurveys()
     {
         return SurveyTemplate::get()->filter('ClassName' , 'SurveyTemplate');
+    }
+
+    public static function getEntitySurveyTemplate()
+    {
+        return EntitySurveyTemplate::get()->filter('ClassName' , 'EntitySurveyTemplate');
     }
 
     public static function generateFilterWhereClause()

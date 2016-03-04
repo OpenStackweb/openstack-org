@@ -88,8 +88,8 @@ class SurveyAnswer extends DataObject implements ISurveyAnswer
                     $tuple = explode(':', $v);
                     $value1 = $question->getRowById(intval($tuple[0]));
                     $value2 = $question->getColumnById(intval($tuple[1]));
-
-                    $aux .= sprintf("%s (%s),", $value1->label(), $value2->label());
+                    if(!is_null($value1) && !is_null($value2))
+                        $aux .= sprintf("%s (%s),", $value1->label(), $value2->label());
                 }
                 else {
                     $value = $question->getValueById(intval($v));

@@ -15,7 +15,6 @@
                     <option value="10">10 items</option>
                     <option value="20">20 items</option>
                     <option value="50">50 items</option>
-                    <option value="0">Show All</option>
                 </select>
             </div>
         </div>

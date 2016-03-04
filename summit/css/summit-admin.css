@@ -174,3 +174,26 @@
     color: red;
 }
 
+.location-venue
+{
+    font-size: 10pt !important;
+    font-weight: bold !important;
+    text-transform: uppercase;
+}
+
+.location-venue-room
+{
+    font-size: 8pt !important;
+    padding-left: 20px !important;
+}
+
+.location-venue-room:before {
+    content: "- ";
+}
+
+.event-status-component
+{
+    width: auto;
+    float:left;
+    cursor: pointer;
+}

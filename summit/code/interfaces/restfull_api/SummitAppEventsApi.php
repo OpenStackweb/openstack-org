@@ -14,8 +14,6 @@
  **/
 class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
-
-
     /**
      * @var IEntityRepository
      */
@@ -31,25 +29,27 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
      */
     private $summitpresentation_repository;
 
+    /**
+     * @var ISummitService
+     */
     private $summit_service;
 
-    public function __construct()
+    public function __construct
+    (
+        ISummitRepository $summit_repository,
+        ISummitEventRepository $summitevent_repository,
+        ISummitAttendeeRepository $summitattendee_repository,
+        ISummitPresentationRepository $summitpresentation_repository,
+        ISummitService $summit_service
+    )
     {
         parent::__construct();
-        // TODO: set by IOC
-        $this->summit_repository             = new SapphireSummitRepository;
-        $this->summitevent_repository        = new SapphireSummitEventRepository();
-        $this->summitattendee_repository     = new SapphireSummitAttendeeRepository();
-        $this->summitpresentation_repository = new SapphireSummitPresentationRepository();
-        $this->summit_service                = new SummitService
-        (
-            $this->summit_repository,
-            $this->summitevent_repository,
-            $this->summitattendee_repository,
-            SapphireTransactionManager::getInstance()
-        );
+        $this->summit_repository             = $summit_repository;
+        $this->summitevent_repository        = $summitevent_repository;
+        $this->summitattendee_repository     = $summitattendee_repository;
+        $this->summitpresentation_repository = $summitpresentation_repository;
+        $this->summit_service                = $summit_service;
     }
-
 
     protected function isApiCall(){
         $request = $this->getRequest();
@@ -61,7 +61,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
      * @return bool
      */
     protected function authorize(){
-        if(!Permission::check('ADMIN')) return false;
+        if(!Permission::check('ADMIN_SUMMIT_APP_FRONTEND_ADMIN')) return false;
         return $this->checkOwnAjaxRequest();
     }
 
@@ -71,21 +71,19 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
 
     static $url_handlers = array(
-        'GET unpublished/$Source!'    => 'getUnpublishedEventsBySource',
+        'POST '                       => 'createEvent',
         'PUT $EVENT_ID!/publish'      => 'publishEvent',
+        'PUT $EVENT_ID!'              => 'updateEvent',
+        'GET unpublished/$Source!'    => 'getUnpublishedEventsBySource',
         'DELETE $EVENT_ID!/unpublish' => 'unpublishEvent',
-        'PUT $EVENT_ID!/update'       => 'updateEvent',
-        'GET $EVENT_ID!/get_tags'     => 'getTagOptions',
-        'GET $EVENT_ID!/get_sponsors' => 'getSponsorOptions',
     );
 
     static $allowed_actions = array(
         'getUnpublishedEventsBySource',
         'publishEvent',
         'unpublishEvent',
+        'createEvent',
         'updateEvent',
-        'getTagOptions',
-        'getSponsorOptions',
     );
 
     public function getUnpublishedEventsBySource(SS_HTTPRequest $request) {
@@ -93,28 +91,32 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $query_string = $request->getVars();
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $source       = strtolower(Convert::raw2sql($request->param('Source')));
-            $valid_sources = array('tracks', 'presentations', 'events');
+            $valid_sources = array('tracks', 'track_list', 'presentations', 'events');
 
             if(!in_array($source, $valid_sources)) return $this->validationError(array('invalid requested source'));
 
             $search_term   = isset($query_string['search_term']) ? Convert::raw2sql($query_string['search_term']) : null;
             $status        = isset($query_string['status']) ? Convert::raw2sql($query_string['status']) : null;
             $track_list_id = isset($query_string['track_list_id']) ? intval($query_string['track_list_id']) : null;
+            $track_id      = isset($query_string['track_id']) ? intval($query_string['track_id']) : null;
             $event_type_id = isset($query_string['event_type_id']) ? intval($query_string['event_type_id']) : null;
             $page          = isset($query_string['page']) ? intval($query_string['page']) : 1;
             $page_size     = isset($query_string['page_size']) ? intval($query_string['page_size']) : 10;
             $order         = isset($query_string['order']) ? Convert::raw2sql($query_string['order']) : null;
             $expand        = isset($query_string['expand']) ? Convert::raw2sql($query_string['expand']) : null;
 
-
-
             switch ($source)
             {
-                case 'tracks':
+                case 'track_list':
                 {
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummitAndTrackList($summit_id, $track_list_id, $status, $search_term, $page,$page_size, $order);
                 }
                 break;
+                case 'tracks':
+                {
+                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummitAndTrack($summit_id, $track_id, $status, $search_term, $page,$page_size, $order);
+                }
+                    break;
                 case 'presentations':
                 {
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummit($summit_id, null, $status, $search_term, $page,$page_size, $order);
@@ -132,21 +134,20 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             {
                 $entry = array
                 (
-                    'id'          => $e->ID,
+                    'id'          => intval($e->ID),
                     'title'       => $e->Title,
-                    'description' => $e->Description,
-                    'type_id'     => $e->TypeID,
+                    'description' => !empty($e->Description)? $e->Description : $e->ShortDescription,
+                    'type_id'     => intval($e->TypeID),
+                    'class_name'  => $e->ClassName,
                 );
 
                 if ($e instanceof Presentation)
                 {
-
-
                     $speakers = array();
                     if(!empty($expand) && strstr($expand, 'speakers')!== false)
                     {
                         foreach ($e->Speakers() as $s) {
-                            array_push($speakers, array('id' => $s->ID, 'name' => $s->getName()));
+                            array_push($speakers, array('id' => intval($s->ID), 'name' => $s->getName()));
                         }
                         $entry['speakers'] = $speakers;
                     }
@@ -156,8 +157,8 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                         }
                         $entry['speakers_id'] = $speakers;
                     }
-                    $entry['moderator_id'] = $e->ModeratorID;
-                    $entry['track_id']     = $e->CategoryID;
+                    $entry['moderator_id'] = intval($e->ModeratorID);
+                    $entry['track_id']     = intval($e->CategoryID);
                     $entry['level']        = $e->Level;
                     $entry['status']       = $e->SelectionStatus();
                 }
@@ -246,20 +247,19 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         }
     }
 
-    public function updateEvent(SS_HTTPRequest $request)
+    public function createEvent(SS_HTTPRequest $request)
     {
         try
         {
             if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
             $summit_id    = intval($request->param('SUMMIT_ID'));
-            $event_id     = intval($request->param('EVENT_ID'));
             $event_data   = $this->getJsonRequest();
-            $event_data['id'] = $event_id;
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $this->summit_service->updateEvent($summit, $event_data);
 
-            return $this->ok();
+            $event = $this->summit_service->createEvent($summit, $event_data);
+
+            return $this->ok($event->toMap());
         }
         catch(EntityValidationException $ex1)
         {
@@ -283,34 +283,36 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         }
     }
 
-    // this is called when typing a tag name to add as a tag on edit event
-    public function getTagOptions(SS_HTTPRequest $request){
+    public function updateEvent(SS_HTTPRequest $request)
+    {
         try
         {
-            $query_string = $request->getVars();
-            $query        = Convert::raw2sql($query_string['query']);
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $event_id     = intval($request->param('EVENT_ID'));
-            $summit       = $this->summit_repository->getById($summit_id);
+            $event_data   = $this->getJsonRequest();
+            $event_data['id'] = $event_id;
+            $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $event        = $this->summitevent_repository->getById($event_id) ;
-            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
 
-            $tags = DB::query("SELECT T.ID AS id, T.Tag AS name FROM Tag AS T
-                                    WHERE T.Tag LIKE '{$query}%'
-                                    ORDER BY T.Tag");
+            $event = $this->summit_service->updateEvent($summit, $event_data);
 
-            $json_array = array();
-            foreach ($tags as $tag) {
-                $json_array[] = $tag;
-            }
-
-            echo json_encode($json_array);
+            return $this->ok($event->toMap());
         }
-        catch(NotFoundEntityException $ex2)
+        catch(EntityValidationException $ex1)
         {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(ValidationException $ex2)
+        {
+            SS_Log::log($ex2->getResult()->messageList(), SS_Log::WARN);
+            return $this->validationError($ex2->getResult()->messageList());
+        }
+        catch(NotFoundEntityException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessages());
         }
         catch(Exception $ex)
         {
@@ -318,41 +320,4 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             return $this->serverError();
         }
     }
-
-    // this is called when typing a sponsor name to add as a tag on edit event
-    public function getSponsorOptions(SS_HTTPRequest $request){
-        try
-        {
-            $query_string = $request->getVars();
-            $query        = Convert::raw2sql($query_string['query']);
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $event_id     = intval($request->param('EVENT_ID'));
-            $summit       = $this->summit_repository->getById($summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $event        = $this->summitevent_repository->getById($event_id) ;
-            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
-
-            $sponsors = DB::query("SELECT C.ID AS id, C.Name AS name FROM Company AS C
-                                    WHERE C.Name LIKE '{$query}%'
-                                    ORDER BY C.Name");
-
-            $json_array = array();
-            foreach ($sponsors as $sponsor) {
-                $json_array[] = $sponsor;
-            }
-
-            echo json_encode($json_array);
-        }
-        catch(NotFoundEntityException $ex2)
-        {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex)
-        {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
-
 }

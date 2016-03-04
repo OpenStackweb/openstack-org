@@ -16,6 +16,7 @@ class SurveyTemplateAdmin extends ModelAdmin {
 
     public static $managed_models = array(
         'SurveyTemplate',
+        'SurveyReport'
     );
 
     public $showImportForm = false;
@@ -111,6 +112,7 @@ class SurveyTemplateAdmin extends ModelAdmin {
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent(new GridFieldCloneSurveyTemplateAction());
         }
+
         return $form;
     }
 

@@ -28,7 +28,7 @@ final class CustomChangePasswordForm extends ChangePasswordForm
     {
         parent::__construct($controller, $name, $fields, $actions);
         $this->fields->removeByName('OldPassword');
-        $this->password_manager = new PasswordManager;
+        $this->password_manager = new PasswordManager(SapphireTransactionManager::getInstance());
     }
 
     /**
@@ -40,12 +40,7 @@ final class CustomChangePasswordForm extends ChangePasswordForm
 
         try {
             $token = Session::get('AutoLoginHash');
-            $this->password_manager->changePassword($token, @$data['NewPassword1'], @$data['NewPassword2']);
-            $member = Member::currentUser();
-            if (!$member) {
-                if (empty($token)) throw new InvalidResetPasswordTokenException;
-                $member = Member::member_from_autologinhash($token);
-            }
+            $member = $this->password_manager->changePassword($token, @$data['NewPassword1'], @$data['NewPassword2']);
             Session::clear('AutoLoginHash');
             $back_url = isset($_REQUEST['BackURL']) ? $_REQUEST['BackURL'] : '/';
             return OpenStackIdCommon::loginMember($member, $back_url);
