@@ -54,6 +54,11 @@ class PresentationVotingPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/javascript/bootstrap.min.js');
         Requirements::javascript('themes/openstack/javascript/presentationeditor/mousetrap.min.js');
         Requirements::javascript('themes/openstack/javascript/speaker-voting.js');
+
+        // Sanity check to ensure the priorities have been generated
+        if(!Summit::get_active()->RandomVotingLists()->exists()) {
+        	Summit::get_active()->generateVotingLists();
+        }
     }
 
     function CategoryList()

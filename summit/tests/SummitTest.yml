@@ -1,0 +1,44 @@
+Summit:
+  summit1:
+    Active: false
+    Title: 'Summit 1'
+  summit2:
+    Active: true
+    Title: 'Summit 2'
+PresentationCategory:
+  category1:
+    Title: test
+    VotingVisible: 1
+Presentation:
+  presentation1:
+    Summit: =>Summit.summit1
+    Title: Presentation 1
+    Category: =>PresentationCategory.category1
+    Status: Received
+  presentation2:
+    Summit: =>Summit.summit1
+    Title: Presentation 2
+    Category: =>PresentationCategory.category1
+    Status: Received
+  presentation3:
+    Summit: =>Summit.summit1
+    Title: Presentation 3
+    Category: =>PresentationCategory.category1
+    Status: Received
+  presentation4:
+    Summit: =>Summit.summit2
+    Title: Presentation 4
+    Category: =>PresentationCategory.category1
+    Status: Received
+  presentation5:
+    Summit: =>Summit.summit2
+    Title: Presentation 5
+    Category: =>PresentationCategory.category1
+    Status: Received
+Member:
+  unclecheese:
+    FirstName: Uncle
+    Surname: Cheese
+PresentationVotingPage:
+  voting:
+    Title: Vote for speakers

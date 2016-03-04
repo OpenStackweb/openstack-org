@@ -16,8 +16,11 @@ class PresentationMemberExtension extends DataExtension
     private static $has_many = array
     (
         'Presentations'          => 'Presentation',
-        'PresentationPriorities' => 'PresentationPriority',
         'SummitStates'           => 'SpeakerSummitState'
+    );
+
+    private static $has_one = array (
+    	'VotingList' => 'PresentationRandomVotingList'
     );
 
     /**
@@ -25,38 +28,41 @@ class PresentationMemberExtension extends DataExtension
      *         
      * @return DataList
      */
-    public function getRandomisedPresentations($category_id = nul) {
+    public function getRandomisedPresentations($category_id = null, $summit = null) {
         $mid = Member::currentUserID();
-        if($this->owner->PresentationPriorities()->count() != Summit::get_active()->Presentations()->count()) {            
-            DB::query("DELETE FROM PresentationPriority WHERE MemberID = {$mid}");
-            $list = Summit::get_active()
-                        ->Presentations()
-                        ->sort('Views ASC, RAND()')
-                        ->column('ID');
-            
-            foreach($list as $priority => $id) {
-                PresentationPriority::create(array(
-                    'PresentationID' => $id,
-                    'MemberID' => $this->owner->ID,
-                    'Priority' => $priority
-                ))->write();
-            }            
-        }
+        if(!$summit) $summit = Summit::get_active();
+        $priority = $this->owner->VotingList();        
 
+        if(!$priority->exists() || $priority->SummitID !== $summit->ID) {
+        	$priority = PresentationRandomVotingList::get()->filter(
+        		'SummitID', 
+        		$summit->ID
+        	)
+        	->sort('RAND()')
+        	->first();        	
+        	if(!$priority) {
+        		return false;        	
+        	}
+        	$this->owner->VotingListID = $priority->ID;
+        	$this->owner->write();
+        }
+        
+        $list = $priority->getPriorityList();
+        if(!count($list)) return false;
+        
         $presentations =  Presentation::get()
-                ->innerJoin("PresentationPriority", "PresentationPriority.PresentationID = Presentation.ID")
                 ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
                 ->where("SummitEvent.Title IS NOT NULL")
                 ->where("SummitEvent.Title <> '' ")
-                ->where("PresentationCategory.VotingVisible = 1 ")
-                ->filter('PresentationPriority.MemberID', $mid)
+                ->where("PresentationCategory.VotingVisible = 1 ")                
                 ->filter('Presentation.Status', 'Received')
-                ->sort('PresentationPriority.Priority ASC');
+                ->filter('SummitID', $summit->ID)
+                ->sort("FIND_IN_SET(Presentation.ID, '".implode(',', $list)."')");
 
-        if(!empty($category_id) && intval($category_id) > 0)
-        {
-            $presentations = $presentations->where("CategoryID = ".$category_id);
+        if(!empty($category_id) && intval($category_id) > 0) {
+            $presentations = $presentations->filter('CategoryID', $category_id);
         }
+
         return $presentations;
 
     }
