@@ -47,6 +47,12 @@ class SurveyReportFilter extends DataObject {
     public function getCMSFields() {
         $fields = parent::getCMSFields();
         $valid_steps = $this->Report()->Template()->Steps()->column();
+        $entity_survey_temp = $this->Report()->Template()->EntitySurveys();
+        foreach ($entity_survey_temp as $est) {
+            $est_steps = $est->Steps()->column();
+            $valid_steps = array_merge($valid_steps,$est_steps);
+        }
+
         $questionList = SurveyMultiValueQuestionTemplate::get()->filter(array('StepID'=> $valid_steps ))->sort('Label')->map('ID','Label')->toArray();
         $questionSelect = DropdownField::create('QuestionID', 'Question')->setSource($questionList);
 

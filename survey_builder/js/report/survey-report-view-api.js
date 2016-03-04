@@ -1,5 +1,5 @@
 var survey_report_view_api                  = riot.observable();
-var api_base_url                            = 'api/v1/surveys/';
+var api_base_url                            = 'api/v1/survey_report';
 
 survey_report_view_api.TEMPLATE_RETRIEVED   = 'TEMPLATE_RETRIEVED';
 survey_report_view_api.REPORT_RETRIEVED     = 'REPORT_RETRIEVED';

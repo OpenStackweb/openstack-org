@@ -82,8 +82,6 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
         'getTeamMembers',
         'addTeamMember',
         'deleteTeamMember',
-        'getReportTemplate',
-        'getReport',
     );
 
     static $url_handlers = array
@@ -93,8 +91,6 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
         'GET entity-surveys/$ENTITY_SURVEY_ID/team-members'               => 'getTeamMembers',
         'POST entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID'   => 'addTeamMember',
         'DELETE entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID' => 'deleteTeamMember',
-        'GET report_template/$SURVEY_TEMPLATE_ID!'                        => 'getReportTemplate',
-        'GET report/$SURVEY_TEMPLATE_ID!'                                 => 'getReport',
     );
 
     public function suggestMember(SS_HTTPRequest $request)
@@ -233,48 +229,6 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
         catch(Exception $ex)
         {
             return $this->serverError();
-        }
-    }
-
-    public function getReportTemplate(SS_HTTPRequest $request)
-    {
-        if (!Director::is_ajax()) return $this->forbiddenError();
-        if(!Member::currentUser()) return $this->forbiddenError();
-
-        $template_id = (int)$request->param('SURVEY_TEMPLATE_ID');
-
-        try {
-            $survey_template = SurveyTemplate::get_by_id('SurveyTemplate',$template_id);
-            if(is_null($survey_template)) return $this->httpError(404);
-
-            return $this->ok($survey_template->Report()->mapTemplate());
-        }
-        catch(Exception $ex)
-        {
-            return $ex->getMessage();
-        }
-    }
-
-    public function getReport(SS_HTTPRequest $request)
-    {
-        if (!Director::is_ajax()) return $this->forbiddenError();
-        if(!Member::currentUser()) return $this->forbiddenError();
-
-        $template_id = (int)$request->param('SURVEY_TEMPLATE_ID');
-        $section_id  = (int)$request->getVar('section_id');
-        $filters     = json_decode($request->getVar('filters'));
-
-        try {
-            $survey_template = SurveyTemplate::get_by_id('SurveyTemplate',$template_id);
-            if(is_null($survey_template)) return $this->httpError(404);
-
-            $section = $survey_template->Report()->Sections()->filter('ID',$section_id)->first();
-
-            return $this->ok($section->mapSection($filters));
-        }
-        catch(Exception $ex)
-        {
-            return $ex->getMessage();
         }
     }
 
