@@ -145,6 +145,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
                 OldDataModelSurveyMigrationMapping::getDisplayFields():
                 NewDataModelSurveyMigrationMapping::getDisplayFields());
 
+
             $fields->addFieldToTab('Root.Main', $gridField);
         }
 

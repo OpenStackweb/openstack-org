@@ -385,12 +385,16 @@ SQL;
 
     private function buildSurveyBuilderHeaders($flat_fields = array(), $flat_fields_entity = array())
     {
+        $template_id = intval(Controller::curr()->getRequest()->getVar('Range'));
 
         $survey_header_query = <<<SQL
 SELECT SS.Name, Q.ID AS QuestionID, Q.Name, Q.ClassName FROM SurveyTemplate S
 INNER JOIN SurveyStepTemplate SS ON SS.SurveyTemplateID = S.ID
 INNER JOIN SurveyQuestionTemplate Q ON Q.StepID = SS.ID
-WHERE S.ClassName = 'SurveyTemplate' AND Q.ClassName <> 'SurveyLiteralContentQuestionTemplate'
+WHERE
+S.ClassName = 'SurveyTemplate'
+AND Q.ClassName <> 'SurveyLiteralContentQuestionTemplate'
+AND S.ID = {$template_id}
 ORDER BY SS.`Order`, Q.`Order`;
 SQL;
 
@@ -421,7 +425,8 @@ SQL;
         }
 
         $entity_survey_header_query = <<<SQL
-SELECT SS.Name, Q.ID AS QuestionID, Q.Name, Q.ClassName FROM SurveyTemplate S
+SELECT SS.Name, Q.ID AS QuestionID, Q.Name, Q.ClassName
+FROM SurveyTemplate S
 INNER JOIN EntitySurveyTemplate ES ON ES.ID = S.ID
 INNER JOIN SurveyStepTemplate SS ON SS.SurveyTemplateID = S.ID
 INNER JOIN SurveyQuestionTemplate Q ON Q.StepID = SS.ID
@@ -429,6 +434,7 @@ WHERE
 S.ClassName = 'EntitySurveyTemplate'
 AND Q.ClassName <> 'SurveyLiteralContentQuestionTemplate'
 AND ES.EntityName = 'Deployment'
+AND ES.ParentID = {$template_id}
 ORDER BY SS.`Order`, Q.`Order`;
 SQL;
 
@@ -764,7 +770,9 @@ SQL;
                     "NetworkDrivers",
                     "OperatingSystems",
                     "SupportedFeatures",
-                    "WhyNovaNetwork"
+                    "WhyNovaNetwork",
+                    "ProjectsUsed",
+                    "ProjectsUsedPoC",
                 )
         );
 
