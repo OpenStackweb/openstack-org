@@ -6,6 +6,17 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 
     protected $description = "Deprecates the old VideoPresentation table in favor of PresentationMaterial (PresentationVideo). Backfills legacy Summit records and the Presentation records that should relate to them.";
 
+    private static $summits = [
+    	'San Diego',
+    	'Portland',
+    	'Atlanta',
+    	'Hong Kong',
+    	'Paris',
+    	'Vancouver',
+    	'Tokyo'
+    ];
+
+
 	/**
 	 * Helper method to write context sensitive line breaks
 	 * @param  integer $times Number of repetitinos
@@ -83,27 +94,26 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 
 
 	/**
-	 * Guarantees that all VideoPresentation objects in the database have a summit ID.
-	 * NB: this relies on string matching voodoo.
-	 * @param  array  $map Map of summit names to ID
-	 * @return void
+	 * Guarantees that a VideoPresentation object has a correct SummitID.
+	 * NB: this relies on string matching voodoo, as legacy summits were the wild west.
+	 * @param  VideoPresentation
+	 * @return VideoPresentation
 	 */
-	private function ensureVideoPresentationSummitIDs($map = array ()) {
-		foreach(VideoPresentation::get() as $v) {
-			$title = $v->PresentationCategoryPage()->Parent()->MenuTitle;
-			foreach($map as $s => $id) {
-				if(strpos($title, $s) !== false) {
-					$v->SummitID = $id;
-					$v->write();
-					break;
+	private function ensureSummitID(VideoPresentation $v) {
+		$title = $v->PresentationCategoryPage()->Parent()->MenuTitle;
+		foreach(self::$summits as $summitName) {
+			if(strpos($title, $summitName) !== false) {
+				$summit = Summit::get()->filter('Title:PartialMatch', $summitName)->first();
+				if(!$summit) {
+					echo "$title did not match any summits".$this->br();
+					die();
 				}
+				$v->SummitID = $summit->ID;
+				return $v;
 			}
-			if(!Summit::get()->byID($v->SummitID)) {
-				echo "$title did not match any summits".$this->br();
-				var_dump($map);
-				die();
-			}
-		}		
+		}
+
+		return $v;
 	}
 
 
@@ -195,7 +205,9 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			'Name' => $v->Name,
 			'DisplayOnSite' => $v->DisplayOnSite,
 			'YouTubeID' => $v->YouTubeID,
-			'Featured' => $v->Featured
+			'Featured' => $v->Featured,
+			'Created' => $v->LastEdited,
+			'LastEdited' => $v->LastEdited
 		]);		
 	}
 
@@ -210,10 +222,6 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 		// Add the old SD / Portland summits
 		$this->ensureLegacySummits();
 		echo $this->br(2);
-		$summitToIDMap = Summit::get()->map('Title', 'ID')->toArray();
-		echo "Ensuring VideoPresentation objects have SummitIDs...";
-		$this->ensureVideoPresentationSummitIDs($summitToIDMap);
-		echo "Done.".$this->br(2);
 
 		// Presentations weren't always SummitEvents, so the tables are out of sync.
 		// Get the higer of the two ID increments to run a counter and force the ID.
@@ -233,6 +241,8 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 				echo "No YouTubeID. Skipping.".$this->br();
 				continue;
 			}
+
+			$v = $this->ensureSummitID($v);
 			
 			// Match an existing Presentation object by name and summit
 			$originalPresentation = Presentation::get()->filter([
@@ -264,6 +274,7 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	 * Reverses the migration	 
 	 */
 	public function doDown () {
+		Migration::get()->filter('Name', $this->title)->removeAll();
 		PresentationVideo::get()->removeAll();
 		if(!PresentationVideo::get()->exists()) {
 			echo "Deleted all presentation video materials".$this->br();			
