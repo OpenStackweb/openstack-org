@@ -12,13 +12,20 @@
  * limitations under the License.
  **/
 /**
- * Interface IBatchTaskFactory
+ * Class BatchTaskFactory
  */
-interface  IBatchTaskFactory {
+final class BatchTaskFactory implements IBatchTaskFactory {
+
 	/**
 	 * @param string $task_name
 	 * @param int $total_record_qty
+	 * @param int $current_page
 	 * @return IBatchTask
 	 */
-	public function buildBatchTask($task_name, $total_record_qty);
-} 
+	public function buildBatchTask($task_name, $total_record_qty, $current_page = 0) {
+		$task               = new BatchTask();
+		$task->Name         = $task_name;
+		$task->initialize($total_record_qty, $current_page);
+		return $task;
+	}
+}

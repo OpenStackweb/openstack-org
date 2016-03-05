@@ -16,3 +16,5 @@ migrations:
   - MigrateToInnoDBMyISAMTablesMigration
   - UpdatePresentationSpeakerMigration
   - CreateSummitFrontEndAdminGroupMigration
+  - PresentationSpeakerSummitConfirmationMigration
+  - ClearOlderIngestTaskMigration

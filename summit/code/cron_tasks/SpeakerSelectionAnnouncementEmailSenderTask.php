@@ -22,23 +22,32 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
     {
         try
         {
-            $api = new TrackChairAPI();
-            $api->handleRestoreOrders();
-
             $batch_size = 100;
             $init_time = time();
+            $summit    = null;
+
             if (isset($_GET['batch_size']))
             {
                 $batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
                 echo sprintf('batch_size set to %s', $batch_size);
             }
+
+            if (isset($_GET['summit_id']))
+            {
+               $summit = Summit::get()->byID(intval($_GET['summit_id']));
+            }
+
+            if(is_null($summit)) throw new Exception('summit_id is not valid!');
+
             $manager = Injector::inst()->get('SpeakerSelectionAnnouncementSenderManager');
             if (!$manager instanceof ISpeakerSelectionAnnouncementSenderManager) {
                 return;
             }
-            $processed = $manager->send($batch_size);
+
+            $processed = $manager->send($summit, $batch_size);
             $finish_time = time() - $init_time;
             echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';
+
         }
         catch(Exception $ex)
         {

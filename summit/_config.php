@@ -287,3 +287,14 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
 define('MAX_SUMMIT_ALLOWED_PER_USER', 3);
 define('SUMMIT_ATTENDEE_CREATE_MEMBERSHIP_INVITATION_EMAIL_TEMPLATE', 'summit-attendee-create-membership-invitation');
 define('SUMMIT_ATTENDEE_CREATED_EMAIL_TEMPLATE', 'summit-attendee-created');
+
+// speaker promo code ingestion configuration
+// email templates ids
+
+define('PRESENTATION_SPEAKER_ACCEPTED_ONLY_EMAIL', 'presentation-speaker-accepted-only');
+define('PRESENTATION_SPEAKER_ACCEPTED_REJECTED_EMAIL', 'presentation-speaker-accepted-rejected');
+define('PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL', 'presentation-speaker-alternate-only');
+define('PRESENTATION_SPEAKER_ALTERNATE_REJECTED_EMAIL', 'presentation-speaker-alternate-rejected');
+define('PRESENTATION_SPEAKER_REJECTED_EMAIL', 'presentation-speaker-rejected-only');
+define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersupport@openstack.org');
+define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@openstack.org');

@@ -18,10 +18,11 @@ class SummitConfirmSpeakerPage extends SummitPage
     static $defaults = array(
         'ShowInMenus' => false
     );
-
 }
 
-
+/**
+ * Class SummitConfirmSpeakerPage_Controller
+ */
 class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
 {
 
@@ -41,46 +42,43 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
     {
         parent::init();
 
-        $getVars = $this->request->getVars();
-        $hashKey = $getVars['h'];
+        try {
+            $token = $this->request->getVar('t');
 
-        if (isset($hashKey)) {
-            $speakerID = substr(base64_decode($hashKey), 3);
+            if(empty($token))
+                throw new InvalidArgumentException('missing token!');
+
+            $token = base64_decode($token);
+            $request = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
+                ->filter('ConfirmationHash',
+                    PresentationSpeakerSummitAssistanceConfirmationRequest::HashConfirmationToken($token))
+                ->first();
+
+            if (is_null($request)) {
+                throw new NotFoundEntityException;
+            }
+
+            $request->confirm($token);
+            $request->write();
+
+            $data['Speaker'] = $request->Speaker();
+            $data['Summit']  = $request->Summit();
+            Session::set('Current.PresentationSpeakerSummitAssistanceConfirmationRequest', $request);
+            return $this->customise($data)->renderWith(array('SummitConfirmSpeakerPage', 'SummitPage'), $this->parent);
         }
-
-        if (isset($speakerID) && is_numeric($speakerID) && $Speaker = PresentationSpeaker::get()->byID($speakerID)) {
-
-            Session::set('ConfirmSpeakerHash', $hashKey);
-            Session::set('Speaker', $Speaker);
-
-
-            $Speaker->Confirmed = true;
-            $Speaker->write();
-
-            $data['FirstName'] = $Speaker->FirstName;
-            $data['LastName'] = $Speaker->LastName;
-            $data['Summit'] = Summit::get_active();
-
-            return $this->customise($data)
-                ->renderWith(array('SummitConfirmSpeakerPage', 'SummitPage'), $this->parent);
-
-
-        } else {
-            return $this->httpError(404, 'Sorry, this speaker confirmation code does not seem to be correct.');
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->httpError(404, 'Sorry, this speaker confirmation token does not seem to be correct.');
         }
-
     }
 
-    public function OnsitePhoneForm()
+    public function OnSitePhoneForm()
     {
-        $speakerHash = Session::get('ConfirmSpeakerHash');
-        $speaker = Session::get('Speaker');
-        $OnsitePhoneForm = new OnsitePhoneForm($this, 'OnsitePhoneForm', $speakerHash);
-        if ($speaker) {
-            $OnsitePhoneForm->loadDataFrom($speaker);
-        }
-
-        return $OnsitePhoneForm;
-
+        $request = Session::get('Current.PresentationSpeakerSummitAssistanceConfirmationRequest');
+        if(is_null($request)) throw new InvalidArgumentException('missing current request!');
+        $form = new OnsitePhoneForm($this, 'OnSitePhoneForm', $request);
+        $form->loadDataFrom($request);
+        return $form;
     }
 }

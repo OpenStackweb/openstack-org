@@ -26,6 +26,8 @@ class AbstractDBMigrationTask extends MigrationTask
 
         if (!$migration) {
 
+            set_time_limit(0);
+
             $this->doUp();
             $migration = new Migration();
             $migration->Name = $this->title;

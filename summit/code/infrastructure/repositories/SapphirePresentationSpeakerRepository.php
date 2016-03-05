@@ -69,4 +69,53 @@ SQL;
 
         return $speakers;
     }
+
+
+    /**
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @return array
+     */
+    public function getBySummit(ISummit $summit, $page= 1, $page_size = 10)
+    {
+
+        $offset    = ($page - 1 ) * $page_size;
+        $query_count = <<<SQL
+SELECT COUNT( DISTINCT PresentationSpeaker.ID) AS QTY FROM PresentationSpeaker
+WHERE EXISTS
+(
+	SELECT 1 FROM SummitEvent
+    INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+    INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+    WHERE SummitEvent.SummitID = {$summit->ID}
+    AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+);
+SQL;
+
+
+        $query = <<<SQL
+SELECT DISTINCT PresentationSpeaker.*  FROM PresentationSpeaker
+WHERE EXISTS
+(
+	SELECT 1 FROM SummitEvent
+    INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+    INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+    WHERE SummitEvent.SummitID = {$summit->ID}
+    AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+) LIMIT {$offset}, {$page_size};
+SQL;
+
+
+        $count_res = DB::query($query_count)->first();
+        $res       = DB::query($query);
+        $count     = intval($count_res['QTY']);
+        $data      = array();
+        foreach($res as $row)
+        {
+            array_push($data, new PresentationSpeaker($row));
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
 }

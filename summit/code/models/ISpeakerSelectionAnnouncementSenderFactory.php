@@ -15,8 +15,9 @@
 interface ISpeakerSelectionAnnouncementSenderFactory
 {
     /**
+     * @param ISummit $summit
      * @param IPresentationSpeaker $speaker
      * @return IMessageSenderService
      */
-    public function build(IPresentationSpeaker $speaker);
+    public function build(ISummit $summit, IPresentationSpeaker $speaker);
 }

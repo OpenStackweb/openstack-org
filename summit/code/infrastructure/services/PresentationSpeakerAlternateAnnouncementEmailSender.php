@@ -17,26 +17,31 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
 
     /**
      * @param mixed $subject
-     * @throws InvalidArgumentException
-     * @return void
+     * @throws Exception
      */
     public function send($subject)
     {
-        if(!$subject instanceof IPresentationSpeaker) return;
+        if(!$subject instanceof IPresentationSpeaker) return;if(!is_array($subject)) return;
+        if(!isset($subject['Summit'])  || !isset($subject['Speaker'])) return;
+        $summit  = $subject['Summit'];
+        $speaker = $subject['Speaker'];
+        if(!$speaker instanceof IPresentationSpeaker) return;
+        if(!$summit instanceof ISummit) return;
 
-        $summit = Summit::get_active();
+        $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL)->first();
+        if(is_null($email)) throw new Exception(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL));
 
-        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAlternate, $summit->ID);
+        $speaker->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAlternate, $summit->ID);
 
-        $email = EmailFactory::getInstance()->buildEmail('speakersupport@openstack.org', $subject->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM, $speaker->getEmail());
 
-        $email->setUserTemplate('presentation-speaker-alternate-only')->populateTemplate(
+        $email->setUserTemplate(PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL)->populateTemplate(
             array
             (
-                'Speaker'              => $subject,
-                'ConfirmationLink'     => $subject->getSpeakerConfirmationLink(),
-                'ScheduleMainPageLink' => $summit->SchedUrl,
-                'PromoCode'            => $subject->getSummitPromoCode($summit->ID)->getCode(),
+                'Speaker'              => $speaker,
+                'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink(),
+                'PromoCode'            => $speaker->getSummitPromoCode($summit->ID)->getCode(),
+                'Summit'               => $summit,
             )
         )
         ->send();

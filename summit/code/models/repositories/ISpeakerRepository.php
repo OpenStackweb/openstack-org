@@ -20,4 +20,12 @@ interface ISpeakerRepository extends IEntityRepository
      * @return IPresentationSpeaker[]
      */
     public function searchBySummitAndTerm(ISummit $summit, $term);
+
+    /**
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @return array
+     */
+    public function getBySummit(ISummit $summit, $page= 1, $page_size = 10);
 }

@@ -26,11 +26,12 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
     }
 
     /**
+     * @param ISummit $summit
      * @param string $promo_code_type
      * @param int $batch_size
      * @return ISpeakerSummitRegistrationPromoCode
      */
-    public function getNextAvailableByType($promo_code_type, $batch_size = 10)
+    public function getNextAvailableByType(ISummit $summit, $promo_code_type, $batch_size = 10)
     {
         switch($promo_code_type)
         {
@@ -42,7 +43,7 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
                     $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
                     $query->addAndCondition(QueryCriteria::equal('OwnerID',0));
                     $query->addAndCondition(QueryCriteria::equal('SpeakerID',0));
-                    $query->addAndCondition(QueryCriteria::equal('SummitID',Summit::get_active()->ID));
+                    $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
                     $query->addOrder(QueryOrder::asc('ID'));
                     list($this->promo_code_speaker_session_pool, $count) = $this->getAll($query,0, $batch_size);
                 }
@@ -57,7 +58,7 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
                     $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
                     $query->addAndCondition(QueryCriteria::equal('OwnerID',0));
                     $query->addAndCondition(QueryCriteria::equal('SpeakerID',0));
-                    $query->addAndCondition(QueryCriteria::equal('SummitID',Summit::get_active()->ID));
+                    $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
                     $query->addOrder(QueryOrder::asc('ID'));
                     list($this->promo_code_alternate_speaker_session_pool, $count) = $this->getAll($query,0, $batch_size);
                 }

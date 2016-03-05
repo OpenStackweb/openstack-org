@@ -22,18 +22,25 @@ final class PresentationSpeakerRejectedAnnouncementEmailSender implements IMessa
      */
     public function send($subject)
     {
-        if(!$subject instanceof IPresentationSpeaker) return;
+        if(!$subject instanceof IPresentationSpeaker) return;if(!is_array($subject)) return;
+        if(!isset($subject['Summit'])  || !isset($subject['Speaker'])) return;
+        $summit  = $subject['Summit'];
+        $speaker = $subject['Speaker'];
+        if(!$speaker instanceof IPresentationSpeaker) return;
+        if(!$summit instanceof ISummit) return;
 
-        $summit = Summit::get_active();
+        $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_REJECTED_EMAIL)->first();
+        if(is_null($email)) throw new Exception(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_REJECTED_EMAIL));
 
-        $subject->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailRejected, $summit->ID);
+        $speaker->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailRejected, $summit->ID);
 
-        $email = EmailFactory::getInstance()->buildEmail('summit@openstack.org', $subject->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT, $speaker->getEmail());
 
-        $email->setUserTemplate('presentation-speaker-rejected-only')->populateTemplate(
+        $email->setUserTemplate(PRESENTATION_SPEAKER_REJECTED_EMAIL)->populateTemplate(
             array
             (
-                'Speaker' => $subject,
+                'Speaker' => $speaker,
+                'Summit'  => $summit,
             )
         )
         ->send();

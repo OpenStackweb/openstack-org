@@ -52,8 +52,21 @@ interface IBatchTask extends IEntity {
 
 	/**
 	 * @param int $total_qty
+	 * @param int $current_page
 	 * @return void
 	 */
-	public function initialize($total_qty);
+	public function initialize($total_qty, $current_page = 0);
 
-} 
+
+	/**
+	 * @return int
+	 */
+	public function getCurrentPage();
+
+    /**
+     * @param int $count
+     * @param int $page_size
+     * @return $this
+     */
+    public function updatePage($count, $page_size);
+}

@@ -20,9 +20,6 @@ implements IPresentationSpeaker
         'WillingToTravel'       => 'Boolean',
         'Country'               => 'Varchar(2)',
         'BeenEmailed'           => 'Boolean',
-        'ConfirmedDate'         => 'SS_Datetime',
-        'OnSitePhoneNumber'     => 'Text',
-        'RegisteredForSummit'   => 'Boolean',
         'WillingToPresentVideo' => 'Boolean',
         'Notes'                 => 'HTMLText'
     );
@@ -42,6 +39,7 @@ implements IPresentationSpeaker
         'Languages'                => 'SpeakerLanguage',
         'PromoCodes'               => 'SpeakerSummitRegistrationPromoCode',
         'AnnouncementSummitEmails' => 'SpeakerAnnouncementSummitEmail',
+        'SummitAssistances'        => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
     );
 
     private static $searchable_fields = array
@@ -197,6 +195,13 @@ implements IPresentationSpeaker
              $config = GridFieldConfig_RecordEditor::create();
              $gridField = new GridField('Languages', 'Languages', $this->Languages(), $config);
              $fields->addFieldToTab('Root.Main', $gridField);
+
+             // Summit Assistances
+
+             $config = GridFieldConfig_RecordEditor::create();
+             $gridField = new GridField('SummitAssistances', 'Summit Assistances', $this->SummitAssistances(), $config);
+             $fields->addFieldToTab('Root.Main', $gridField);
+
          }
 
          return $fields;
@@ -347,20 +352,53 @@ implements IPresentationSpeaker
         return $AlternatePresentations;
     }
 
-    public function getSpeakerConfirmHash() {
-        $id = $this->ID;
-        $prefix = "000";
-        $hash = base64_encode($prefix . $id);
-        return $hash;
-    }
-
-    public function getSpeakerConfirmationLink()
+    /**
+     * @param ISummit $summit
+     * @return string
+     * @throws Exception
+     * @throws ValidationException
+     */
+    public function getSpeakerConfirmationLink(ISummit $summit)
     {
-        $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', Summit::get_active()->ID)->first();
+        $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', $summit->getIdentifier())->first();
         if(!$confirmation_page) throw new Exception('Confirmation Speaker Page not set on current summit!');
         $url = $confirmation_page->getAbsoluteLiveLink(false);
-        $url = $url.'confirm?h='.$this->getSpeakerConfirmHash();
-        return $url;
+        $request = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
+            ->filter
+            (
+                array
+                (
+                    'SummitID'  => $summit->getIdentifier(),
+                    'SpeakerID' => $this->ID
+                )
+            )->first();
+
+        if(!is_null($request))
+        {
+            throw new ValidationException('there is already a confirmed request!');
+        }
+
+        $request = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
+        $request->SummitID  = $summit->getIdentifier();
+        $request->SpeakerID = $this->ID;
+        $token              = null;
+        $already_exists     = false;
+        do {
+            $token = $request->generateConfirmationToken();
+            $already_exists =  intval(PresentationSpeakerSummitAssistanceConfirmationRequest::get()
+                ->filter
+                (
+                    array
+                    (
+                        'SummitID'                 => $summit->getIdentifier(),
+                        'SpeakerID:ExactMatch:not' => $this->ID,
+                        'ConfirmationHash'         =>  PresentationSpeakerSummitAssistanceConfirmationRequest::HashConfirmationToken($token)
+                    )
+                )
+                ->count()) > 1;
+        } while($already_exists);
+        $request->write();
+        return $url.'?t='.base64_encode($token);
     }
 
     /**
