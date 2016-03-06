@@ -531,13 +531,11 @@ final class Summit extends DataObject implements ISummit
     public function getBlackouts($day, $location_id)
     {
         $blackouts = new ArrayList();
-        $location = SummitAbstractLocation::get_by_id('SummitAbstractLocation', $location_id);
-
-        if (!$location->overridesBlackouts()) {
+        $location  = SummitAbstractLocation::get()->byID($location_id);
+        if (!is_null($location) && !$location->overridesBlackouts()) {
             $event_repository = new SapphireSummitEventRepository();
             $blackouts = $event_repository->getOtherBlackoutsByDay($this, $day, $location_id);
         }
-
         return $blackouts;
     }
 
