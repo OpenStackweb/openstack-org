@@ -17,4 +17,5 @@ migrations:
   - UpdatePresentationSpeakerMigration
   - CreateSummitFrontEndAdminGroupMigration
   - PresentationSpeakerSummitConfirmationMigration
+  - PresentationAllowFeedbackMigration
   - ClearOlderIngestTaskMigration

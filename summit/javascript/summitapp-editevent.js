@@ -48,6 +48,7 @@ $(document).ready(function(){
         if (val == 'Presentation' || val == 'Keynotes' ) {
            $('.speakers_container').show();
            $('.track_container').show();
+           $('#allow_feedback').attr("checked","checked");
            if(val == 'Keynotes')
                $('.moderator_container').show();
            else
@@ -57,6 +58,7 @@ $(document).ready(function(){
            $('.speakers_container').hide();
            $('.moderator_container').hide();
            $('.track_container').hide();
+           $('#allow_feedback').removeAttr("checked");
        }
     });
     // speakers autocomplete
