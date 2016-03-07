@@ -232,7 +232,18 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 		
 		$total = VideoPresentation::get()->count();
 		$i = 0;
-		echo "Migrating VideoPresentations...".$this->br(3);		
+		echo "Migrating VideoPresentations...".$this->br(3);
+		$presentationLookup = [];
+		foreach(Summit::get() as $s) {
+			$presentationLookup[$s->ID] = [];
+			foreach($s->Presentations()->sort('Title ASC') as $p) {
+				$presentationLookup[$s->ID][
+					strtolower(
+						preg_replace('/[^a-zA-Z0-9]/', '', $p->Title)
+					)
+				] = $p->ID;
+			}
+		}		
 		foreach(VideoPresentation::get() as $v) {
 			$i++;			
 			echo "{$i} / {$total} ....";
@@ -243,14 +254,16 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			}
 
 			$v = $this->ensureSummitID($v);
-			
-			// Match an existing Presentation object by name and summit
-			$originalPresentation = Presentation::get()->filter([
-				'Title' => $v->Name,
-				'SummitID' => $v->SummitID
-			])->first();
+			$lookup = $presentationLookup[$v->SummitID];
+			$cleanTitle = strtolower(preg_replace('/[^a-zA-Z0-9]/','', $v->Name));
+			$originalPresentation = false;
+			if(isset($lookup[$cleanTitle])) {
+				$originalPresentation = Presentation::get()->byID($lookup[$cleanTitle]);
+			}			
 
 			if(!$originalPresentation) {
+				echo "********* {$v->Name} has no original presentation!!!".$this->br();
+
 				$v = $this->normaliseDateTime($v, 'StartTime');
 				$v = $this->normaliseDateTime($v, 'EndTime');
 
