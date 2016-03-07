@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6 login-container" if={ summit.current_user == null }>
-                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ window.location.href  }" method="post" enctype="application/x-www-form-urlencoded">
+                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="fragment" id="fragment"/>
                         <div class="Actions">
                             <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
@@ -63,6 +63,7 @@
         this.summit           = opts.summit;
         this.schedule_filters = opts.schedule_filters;
         this.atomic_filtering = false;
+        this.base_url         = opts.base_url;
         var self              = this;
 
         this.on('mount', function(){
