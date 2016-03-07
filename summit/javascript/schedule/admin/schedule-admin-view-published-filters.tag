@@ -5,7 +5,7 @@
                     <input data-rule-required="true" data-rule-minlength="3" type="text" id="published_search_term" class="form-control input-global-search" placeholder="Search for published Events">
                     <span class="input-group-btn" style="width: 5%;">
                         <button class="btn btn-default btn-global-search" id="search_published" ><i class="fa fa-search"></i></button>
-                        <button class="btn btn-default btn-global-search-clear" onclick={ clearClicked }>
+                        <button class="btn btn-default btn-global-search-clear" onclick={ resetFilters }>
                             <i class="fa fa-times"></i>
                         </button>
                         <button class="btn btn-default" data-toggle="modal" data-target="#empty_spots_modal">Find Empty</button>
@@ -82,29 +82,37 @@
                 this.summit     = opts.summit;
                 this.day        = '';
                 this.location_id = '';
+                this.time = '';
+                this.event_id = '';
+                this.query = '';
                 this.dispatcher = opts.dispatcher;
                 var self        = this;
 
+
+
                 this.on('updated', function(){
-                    $('#select_day').val(self.day);
-                    $('#select_venue').val(self.location_id);
+                    self.updateFilters();
                 });
+
+                window.onhashchange = function(event)
+                {
+                    self.setFromHash();
+                    self.doFilter();
+                };
 
 
                 this.on('mount', function(){
                     $(function() {
                         $('#select_day').change(function(e){
-                            self.day         = $('#select_day').val();
-                            self.location_id = $('#select_venue').val();
-                            self.clearClicked();
-                            self.doFilter();
+                            self.resetFilters();
+                            self.buildHash();
+                            //self.doFilter();
                         });
 
                         $('#select_venue').change(function(e) {
-                            self.day         = $('#select_day').val();
-                            self.location_id = $('#select_venue').val();
-                            self.clearClicked();
-                            self.doFilter();
+                            self.resetFilters();
+                            self.buildHash();
+                            //self.doFilter();
                         });
 
                         $('#select_day').chosen();
@@ -113,7 +121,9 @@
                         $('#search_published').click(function(e) {
                             var search_term = $('#published_search_term').val();
                             if (search_term) {
-                                self.doSearch(search_term);
+                                self.query = search_term;
+                                self.buildHash();
+                                //self.doFilter();
                             }
                         });
 
@@ -135,29 +145,48 @@
                             step: 15
                         });
 
-                        self.lockHash();
-
+                        self.setFromHash();
                         self.doFilter();
+
                     });
+
                 });
 
-                doFilter() {
-                    if(self.day === '' || self.location_id === '') return;
-                    $('body').ajax_loader();
 
-                    self.dispatcher.publishedEventsFilterChanged(self.summit.id, self.day ,self.location_id);
+                doFilter() {
+                    if (self.query) {
+                        self.doSearch();
+                    } else {
+                        if(self.day === '' || self.location_id === '') return;
+                        $('body').ajax_loader();
+
+                        self.dispatcher.publishedEventsFilterChanged(self.summit.id, self.day ,self.location_id);
+                    }
                 }
 
-                doSearch(term) {
+                doSearch() {
                     $('body').ajax_loader();
                     $('#schedule_container').hide();
+                    $('#empty_spots').hide();
                     $('#search_results').show();
-                    self.dispatcher.publishedEventsSearch(self.summit.id, term);
+                    self.dispatcher.publishedEventsSearch(self.summit.id, self.query);
                 }
 
                 clearClicked(){
                     $('#published_search_term').val('');
-                    window.location.hash = '';
+                    $('#schedule_container').show();
+                    $('#search_results').hide();
+                    $('#empty_spots').hide();
+                }
+
+                resetFilters() {
+                    self.query = '';
+                    self.event_id = '';
+                    self.day = $('#select_day').val();
+                    self.location_id = $('#select_venue').val();
+                    self.time = '';
+
+                    $('#published_search_term').val('');
                     $('#schedule_container').show();
                     $('#search_results').hide();
                 }
@@ -165,6 +194,7 @@
                 doSearchEmpty() {
                     $('body').ajax_loader();
                     $('#schedule_container').hide();
+                    $('#search_results').hide();
                     $('#empty_spots').show();
                     window.location.hash = '';
 
@@ -194,9 +224,14 @@
                     self.dispatcher.publishedEventsSearchEmpty(self.summit.id,days,start_time,end_time,venues,length);
                 }
 
-                lockHash() {
+                setFromHash() {
                     // read url hash and redirect to event
                     var hash = $(window).url_fragment('getParams');
+                    self.day = '';
+                    self.location_id = '';
+                    self.event_id = '';
+                    self.time = '';
+                    self.query = '';
 
                     if(!$.isEmptyObject(hash)){
                         for(var key in hash) {
@@ -204,18 +239,52 @@
 
                             switch(key) {
                                 case 'day':
-                                    $('#select_day').val(value);
-                                    $("#select_day").trigger("chosen:updated");
                                     self.day = value;
                                     break;
                                 case 'venue':
-                                    $('#select_venue').val(value);
-                                    $("#select_venue").trigger("chosen:updated");
                                     self.location_id = value;
+                                    break;
+                                case 'event':
+                                    self.event_id = value;
+                                    break;
+                                case 'time':
+                                    self.time = value;
+                                    break;
+                                case 'q':
+                                    self.query = value;
                                     break;
                             }
                         }
                     }
+
+                    self.updateFilters();
+                }
+
+                buildHash() {
+                    $(window).url_fragment('setParam','q', '');
+                    $(window).url_fragment('setParam','day', '');
+                    $(window).url_fragment('setParam','venue', '');
+                    $(window).url_fragment('setParam','event', '');
+                    $(window).url_fragment('setParam','time', '');
+
+                    if (self.query) {
+                        $(window).url_fragment('setParam','q', self.query);
+                    } else {
+                        $(window).url_fragment('setParam','day', self.day);
+                        $(window).url_fragment('setParam','venue', self.location_id);
+                        $(window).url_fragment('setParam','event', self.event_id);
+                        $(window).url_fragment('setParam','time', self.time);
+                    }
+
+                    window.location.hash =  $(window).url_fragment('serialize');
+                }
+
+                updateFilters() {
+                    $('#select_day').val(self.day);
+                    $("#select_day").trigger("chosen:updated");
+                    $('#select_venue').val(self.location_id);
+                    $("#select_venue").trigger("chosen:updated");
+                    $('#published_search_term').val(self.query);
                 }
 
                 self.dispatcher.on(self.dispatcher.PUBLISHED_EVENTS_DEEP_LINK, function()
@@ -227,8 +296,8 @@
 
                     $('body').ajax_loader();
 
-                    self.lockHash();
-                    self.doFilter();
+                    self.setFromHash();
+                    //self.doFilter();
 
                 });
 

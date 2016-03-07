@@ -319,7 +319,7 @@
             });
 
             $('.event').hover(function(){
-                $('.event-buttons',this).stop().animate({width: '35px'}, 400)
+                $('.event-buttons',this).stop().animate({width: '20px'}, 400)
             }, function(){
                 $('.event-buttons',this).stop().animate({width: '-0'}, 400)
             });
