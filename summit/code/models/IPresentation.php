@@ -15,6 +15,13 @@
 interface IPresentation extends ISummitEvent
 {
     /**
+     * SELECTION STATUS (TRACK CHAIRS LIST)
+     */
+    const SelectionStatus_Accepted   = 'accepted';
+    const SelectionStatus_Unaccepted = 'unaccepted';
+    const SelectionStatus_Alternate  = 'alternate';
+
+    /**
      * @return bool
      */
     public function creatorBeenEmailed();
@@ -24,6 +31,9 @@ interface IPresentation extends ISummitEvent
      */
     public function isNew();
 
+    /**
+     * @return mixed
+     */
     public function clearBeenEmailed();
 
     /**

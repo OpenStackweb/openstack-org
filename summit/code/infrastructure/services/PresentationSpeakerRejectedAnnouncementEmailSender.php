@@ -17,12 +17,11 @@ final class PresentationSpeakerRejectedAnnouncementEmailSender implements IMessa
 
     /**
      * @param mixed $subject
-     * @throws InvalidArgumentException
-     * @return void
+     * @throws Exception
      */
     public function send($subject)
     {
-        if(!$subject instanceof IPresentationSpeaker) return;if(!is_array($subject)) return;
+        if(!is_array($subject)) return;
         if(!isset($subject['Summit'])  || !isset($subject['Speaker'])) return;
         $summit  = $subject['Summit'];
         $speaker = $subject['Speaker'];

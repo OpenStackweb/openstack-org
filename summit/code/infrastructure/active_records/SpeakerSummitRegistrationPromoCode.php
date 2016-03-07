@@ -46,6 +46,7 @@ class SpeakerSummitRegistrationPromoCode extends SummitRegistrationPromoCode imp
      */
     public function assignSpeaker(IPresentationSpeaker $speaker)
     {
+        $this->SpeakerID = $speaker->getIdentifier();
         AssociationFactory::getInstance()->getMany2OneAssociation($this,'Speaker')->setTarget($speaker);
     }
 }

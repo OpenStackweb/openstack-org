@@ -125,7 +125,7 @@ final class BatchTask
     public function updatePage($count, $page_size)
     {
         $last     = $this->getCurrentPage();
-        $max_page = ($count/$page_size) + 1;
+        $max_page = (int)ceil(($count/$page_size) + 1);
         $current  = $last + 1;
 
         if($current > $max_page) $current = 1;

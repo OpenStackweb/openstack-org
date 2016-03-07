@@ -29,7 +29,7 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
             if (isset($_GET['batch_size']))
             {
                 $batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
-                echo sprintf('batch_size set to %s', $batch_size);
+                echo sprintf('batch_size set to %s', $batch_size).PHP_EOL;
             }
 
             if (isset($_GET['summit_id']))

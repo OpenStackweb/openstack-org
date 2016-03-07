@@ -1,6 +1,8 @@
 # OpenStack Speaker Promo Code Ingestion Process
 
-ingestion task sake dev/tasks/SummitSpeakerPromoCodesIngestTask
+ingestion task 
+
+sake /SummitSpeakerPromoCodesIngestTask promo_code_type=2 promo_code_file='speakers_promo_codes_alternates.csv' summit_id=6
 
 this task insert all promocodes by type on the specified summit
 
@@ -10,7 +12,9 @@ parameters
 * summit_id: int (summit identifier)
 
 
-process task sake dev/SpeakerSelectionAnnouncementEmailSenderTask
+process task 
+
+sake SpeakerSelectionAnnouncementEmailSenderTask summit_id=6 batch_size=10
 
 this task sent all speaker announcement emails by summit
 

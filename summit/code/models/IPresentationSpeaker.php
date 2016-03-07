@@ -24,6 +24,7 @@ interface IPresentationSpeaker extends IEntity
     const AnnouncementEmailAcceptedAlternate = 'ACCEPTED_ALTERNATE';
     const AnnouncementEmailAcceptedRejected = 'ACCEPTED_REJECTED';
     const AnnouncementEmailAlternateRejected = 'ALTERNATE_REJECTED';
+
     /**
      * @return bool
      */
@@ -94,4 +95,12 @@ interface IPresentationSpeaker extends IEntity
      * @return ISpeakerSummitRegistrationPromoCode
      */
     public function getSummitPromoCode($summit_id);
+
+    /**
+     * @param int $summit_id
+     * @return string
+     * @throws Exception
+     * @throws ValidationException
+     */
+    public function getSpeakerConfirmationLink($summit_id);
 }

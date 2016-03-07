@@ -86,79 +86,88 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
             $batch_task_factory
         )
         {
-            $page = 1;
-            $page_size  = $batch_size;
-            $task       = $batch_repository->findByName(self::TaskName);
+            try {
+                $page = 1;
+                $page_size = $batch_size;
+                $task = $batch_repository->findByName(self::TaskName);
 
-            if(is_null($task))
-            {
-                //create task
-                $task = $batch_task_factory->buildBatchTask(self::TaskName, 0, $page);
-                $batch_repository->add($task);
-            }
-
-            $page = $task->getCurrentPage();
-            echo "Processing Page ".$page;
-            // get speakers with not email sent for this current summit
-
-            list($page, $page_size, $count, $speakers) = $speaker_repository->getBySummit
-            (
-                $current_summit,
-                $page,
-                $page_size
-            );
-            $speakers_notified = 0;
-
-            foreach($speakers as $speaker)
-            {
-
-                if(!$speaker instanceof IPresentationSpeaker) continue;
-                // we need an email for this speaker ...
-                $email = $speaker->getEmail();
-                if(empty($email)) continue;
-
-                $sender_service = $sender_factory->build($current_summit, $speaker);
-                // get registration code
-                if(is_null($sender_service)) continue;
-
-                $code = null;
-
-                if($speaker->hasApprovedPresentations($current_summit->getIdentifier())) //get approved code
-                {
-                    $code = $promo_code_repository->getNextAvailableByType
-                    (
-                        $current_summit,
-                        ISpeakerSummitRegistrationPromoCode::TypeAccepted,
-                        $batch_size
-                    );
-                    if(is_null($code)) throw new Exception('not available promo code!!!');
-                }
-                else if($speaker->hasAlternatePresentations($current_summit->getIdentifier())) // get alternate code
-                {
-                    $code = $promo_code_repository->getNextAvailableByType
-                    (
-                        $current_summit,
-                        ISpeakerSummitRegistrationPromoCode::TypeAlternate,
-                        $batch_size
-                    );
-                    if(is_null($code)) throw new Exception('not available alternate promo code!!!');
+                if (is_null($task)) {
+                    //create task
+                    $task = $batch_task_factory->buildBatchTask(self::TaskName, 0, $page);
+                    $batch_repository->add($task);
                 }
 
-                if(!is_null($code))
-                    $speaker->registerSummitPromoCode($code);
+                $page = $task->getCurrentPage();
+                echo "Processing Page " . $page . PHP_EOL;
+                // get speakers with not email sent for this current summit
 
-                $sender_service->send
+                list($page, $page_size, $count, $speakers) = $speaker_repository->getBySummit
                 (
-                    array
+                    $current_summit,
+                    $page,
+                    $page_size
+                );
+
+                $speakers_notified = 0;
+
+                foreach ($speakers as $speaker) {
+
+                    if (!$speaker instanceof IPresentationSpeaker) continue;
+                    // we need an email for this speaker ...
+                    $email = $speaker->getEmail();
+                    if (empty($email)) continue;
+
+                    if ($speaker->announcementEmailAlreadySent($current_summit->ID)) continue;
+
+                    $sender_service = $sender_factory->build($current_summit, $speaker);
+                    // get registration code
+                    if (is_null($sender_service)) continue;
+
+                    $code = null;
+
+                    if ($speaker->hasApprovedPresentations($current_summit->getIdentifier())) //get approved code
+                    {
+                        $code = $promo_code_repository->getNextAvailableByType
+                        (
+                            $current_summit,
+                            ISpeakerSummitRegistrationPromoCode::TypeAccepted,
+                            $batch_size
+                        );
+                        if (is_null($code)) throw new Exception('not available promo code!!!');
+                    } else if ($speaker->hasAlternatePresentations($current_summit->getIdentifier())) // get alternate code
+                    {
+                        $code = $promo_code_repository->getNextAvailableByType
+                        (
+                            $current_summit,
+                            ISpeakerSummitRegistrationPromoCode::TypeAlternate,
+                            $batch_size
+                        );
+                        if (is_null($code)) throw new Exception('not available alternate promo code!!!');
+                    }
+
+                    $params = array
                     (
                         'Speaker' => $speaker,
-                        'Summit'  => $current_summit
-                    )
-                );
-                ++$speakers_notified;
+                        'Summit' => $current_summit
+                    );
+
+                    if (!is_null($code)) {
+                        $speaker->registerSummitPromoCode($code);
+                        $params['PromoCode'] = $code;
+                    }
+
+                    $sender_service->send($params);
+                    ++$speakers_notified;
+                }
+                $task->updatePage($count, $page_size);
+                $task->write();
+                return $speakers_notified;
             }
-            $task->updatePage($count, $page_size);
-            return $speakers_notified;
+            catch(Exception $ex)
+            {
+                SS_Log::log($ex->getMessage(), SS_Log::ERR);
+                throw $ex;
+            }
         });
     }
 
