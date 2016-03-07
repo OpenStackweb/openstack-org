@@ -65,13 +65,13 @@ $(document).ready(function(){
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'api/v1/summits/'+summit_id+'/members?query=%QUERY',
+            url: 'api/v1/summits/'+summit_id+'/speakers?query=%QUERY',
             wildcard: '%QUERY'
         }
     });
 
     $('#speakers').tagsinput({
-        itemValue: 'id',
+        itemValue: 'unique_id',
         itemText: 'name',
         freeInput: false,
         allowDuplicates: false,
@@ -166,17 +166,17 @@ $(document).ready(function(){
     });
     // moderator autocomplete
 
-    var sponsors_source = new Bloodhound({
+    var moderators_source = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'api/v1/summits/'+summit_id+'/members?query=%QUERY',
+            url: 'api/v1/summits/'+summit_id+'/speakers?query=%QUERY',
             wildcard: '%QUERY'
         }
     });
 
     $('#moderator').tagsinput({
-        itemValue: 'id',
+        itemValue: 'unique_id',
         itemText: 'name',
         freeInput: false,
         maxTags: 1,
@@ -188,9 +188,9 @@ $(document).ready(function(){
                 minLength: 3
             },
             {
-                name: 'sponsors_source',
+                name: 'moderators_source',
                 displayKey: 'name',
-                source: sponsors_source
+                source: moderators_source
             }
         ]
     });
@@ -359,8 +359,8 @@ $(document).ready(function(){
             allow_feedback: ($('#allow_feedback').prop('checked')) ? 1 : 0,
             tags: $('#tags').val(),
             sponsors: $('#sponsors').val(),
-            speakers: $('#speakers').val(),
-            moderator: $('#moderator').val(),
+            speakers: $('#speakers').tagsinput('items'),
+            moderator: $('#moderator').tagsinput('items'),
             publish: publish
         };
 

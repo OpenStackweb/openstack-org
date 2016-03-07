@@ -158,13 +158,23 @@
                 </div>
             </div>
             <script>
-                <% if $Event.Speakers() %>
+                <% if $Event && $Event.isPresentation && $Event.Speakers() %>
                     <% loop $Event.Speakers() %>
-                    speakers.push({id : "{$MemberID}", name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})"});
+                    speakers.push({
+                        unique_id : "{$MemberID}_{$ID}",
+                        name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})",
+                        speaker_id : $ID,
+                        member_id: $MemberID
+                    });
                     <% end_loop %>
                 <% end_if %>
-                <% if $Event.Moderator() %>
-                moderator = {id : "{$Event.Moderator.MemberID}", name : "{$Event.Moderator.FirstName.JS} {$Event.Moderator.LastName.JS}  ({$Event.Moderator.MemberID})"};
+                <% if if $Event && $Event.isPresentation && $Event.Moderator() %>
+                moderator = {
+                                unique_id : "{$Event.Moderator.MemberID}_{$Event.Moderator.ID}",
+                                name : "{$Event.Moderator.FirstName.JS} {$Event.Moderator.LastName.JS}  ({$Event.Moderator.MemberID})",
+                                speaker_id : $Event.Moderator.ID,
+                                member_id:  $Event.Moderator.$MemberID,
+                            };
                 <% end_if %>
             </script>
             <% if $Event%>
