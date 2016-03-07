@@ -5,6 +5,9 @@
         var summit =
         {
             id:   $Summit.ID,
+            link: "{$Summit.Link.JS}",
+            title: "{$Summit.Title.JS}",
+            year: "{$Summit.getSummitYear().JS}",
             dates : {},
             events: {},
             summit_types: {},

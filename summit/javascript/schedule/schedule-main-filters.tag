@@ -7,13 +7,21 @@
                         <div class="col-xs-1 col-md-1 col-filter-btn">
                             <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
                         </div>
-                        <div class="col-xs-4 col-md-2 col-filter-title">
-                            <span>Filter&nbsp;View</span>
+                        <div class="col-xs-6 col-md-4 col-filter-title">
+                            <span>Calendar&nbsp;Search&nbsp;Filters</span>
                         </div>
-                        <div class="col-xs-7 col-md-9">
+                        <div class="col-xs-6 col-md-7">
                             <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
                         </div>
                     </div>
+                </div>
+                <div class="col-xs-12 col-md-6 login-container" if={ summit.current_user == null }>
+                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ window.location.href  }" method="post" enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="fragment" id="fragment"/>
+                        <div class="Actions">
+                            <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
+                        </div>
+                    </form>
                 </div>
             </div>
            <div id="all-events-filter-wrapper" class="row">
@@ -175,6 +183,7 @@
 
                     ddl.val(values.split(','));
                     ddl.trigger("chosen:updated").trigger("change");
+                    $('#toggle-all-events-filters').click();
                 }
 
                 self.atomic_filtering = false;

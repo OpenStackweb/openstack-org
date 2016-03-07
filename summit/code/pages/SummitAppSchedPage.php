@@ -75,7 +75,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     public function init()
     {
 
-        $this->top_section = 'full';
+        $this->top_section = 'short'; //or full
 
         parent::init();
         Requirements::css('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.css');
