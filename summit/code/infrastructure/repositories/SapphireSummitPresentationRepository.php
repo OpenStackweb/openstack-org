@@ -76,26 +76,41 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
     {
         if(is_null($order)) $order = " SummitSelectedPresentation.Order ASC ";
 
-        $track_filter = '';
+        $filter = '';
         if(!empty($track_list)){
-            $track_filter = " AND SummitSelectedPresentationList.ID = {$track_list} ";
+            $filter = " AND SummitSelectedPresentationList.ID = {$track_list} ";
         }
 
-        $where_clause = '';
+        $selection_status_filter = '';
         if(!empty($status))
         {
-            $where_clause .= " WHERE SelectionStatus = '{$status}' ";
+            $selection_status_filter .= " WHERE SelectionStatus = '{$status}' ";
         }
 
         if (!empty($search_term)) {
-            $where_clause .= empty($where_clause) ? " WHERE " : " AND ";
-            $where_clause .= " (Title LIKE '%{$search_term}%' OR Description LIKE '%{$search_term}%'";
-            /*$where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
-            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";*/
+            $search_term   = trim($search_term);
+            $filter .= " AND (
+            SummitEvent.Title LIKE '%{$search_term}%'
+            OR SummitEvent.Description LIKE '%{$search_term}%'
+            OR SummitEvent.ShortDescription LIKE '%{$search_term}%'
+            OR EXISTS
+                (
+                        SELECT 1 FROM PresentationSpeaker
+                        INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID
+                        WHERE
+                        Presentation_Speakers.PresentationID = Presentation.ID AND
+                        (
+                            PresentationSpeaker.FirstName LIKE '%{$search_term}%'
+                            OR PresentationSpeaker.LastName LIKE '%{$search_term}%'
+                            OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%'
+                        )
+                )
+            )
+            ";
+
         }
 
         $sql_count = <<<SQL
-
 SELECT COUNT(ID) AS QTY FROM (
 SELECT
 DISTINCT Presentation.ID,
@@ -114,9 +129,8 @@ AND SummitEvent.SummitID = {$summit_id}
 AND SummitEvent.Published = 0
 AND SummitSelectedPresentationList.ListType = 'Group'
 AND SummitSelectedPresentationList.CategoryID = Presentation.CategoryID
-{$track_filter}
-
-) AS P {$where_clause}
+{$filter}
+) AS P {$selection_status_filter}
 SQL;
         $offset    = ($page - 1 ) * $page_size;
         $sql = <<<SQL
@@ -149,9 +163,9 @@ AND SummitEvent.SummitID = {$summit_id}
 AND SummitEvent.Published = 0
 AND SummitSelectedPresentationList.ListType = 'Group'
 AND SummitSelectedPresentationList.CategoryID = Presentation.CategoryID
-{$track_filter}
+{$filter}
 ORDER BY {$order}
-) AS P  {$where_clause} LIMIT {$offset}, {$page_size}
+) AS P  {$selection_status_filter} LIMIT {$offset}, {$page_size}
 SQL;
 
 
