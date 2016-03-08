@@ -518,9 +518,9 @@ implements IPresentationSpeaker
         }
         elseif (!empty($twitter_name)) {
             if ($width < 100) {
-                return 'https://twitter.com/'.trim($twitter_name,'@').'/profile_image?size=normal';
+                return 'https://twitter.com/'.trim(trim($twitter_name,'@')).'/profile_image?size=normal';
             } else {
-                return 'https://twitter.com/'.trim($twitter_name,'@').'/profile_image?size=bigger';
+                return 'https://twitter.com/'.trim(trim($twitter_name,'@')).'/profile_image?size=bigger';
             }
         } else {
             return Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';

@@ -89,7 +89,7 @@ Object::add_extension('SecurityAdmin', 'SecurityAdminExtension');
 //Force cache to flush on page load if in Dev mode (prevents needing ?flush=1 on the end of a URL)
 if (Director::isDev()) {
 	//Set default login
-	Security::setDefaultAdmin('admin','pass');
+	//Security::setDefaultAdmin('admin','pass');
 }
 
 /* TinyMCE Configuration */

@@ -16,7 +16,9 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
 
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
-
+    if($entity instanceof PresentationMaterial){
+        $summit_id = $entity->Presentation()->SummitID;
+    }
     $metadata = '';
 
     if($entity instanceof SummitEvent)
@@ -50,6 +52,9 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Inserte
 
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
+    if($entity instanceof PresentationMaterial){
+        $summit_id = $entity->Presentation()->SummitID;
+    }
     $metadata = '';
 
     if($entity instanceof SummitEvent)
@@ -72,6 +77,9 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Deleted
 
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
+    if($entity instanceof PresentationMaterial){
+        $summit_id = $entity->Presentation()->SummitID;
+    }
     $metadata = '';
     $event                  = new SummitEntityEvent();
     $event->EntityClassName = $entity->ClassName;

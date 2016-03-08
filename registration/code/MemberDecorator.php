@@ -132,9 +132,9 @@ class MemberDecorator extends DataExtension
             return "<img alt='{$this->owner->ID}_profile_photo' src='{$img->getURL()}' class='member-profile-photo'/>";
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {
-                return '<img src="https://twitter.com/' . $twitter_name . '/profile_image?size=normal" />';
+                return '<img src="https://twitter.com/' . trim(trim($twitter_name,'@')) . '/profile_image?size=normal" />';
             } else {
-                return '<img src="https://twitter.com/' . $twitter_name . '/profile_image?size=bigger" />';
+                return '<img src="https://twitter.com/' . trim(trim($twitter_name,'@')) . '/profile_image?size=bigger" />';
             }
         } else {
             if ($width < 100) {
@@ -154,9 +154,9 @@ class MemberDecorator extends DataExtension
             return $img->getAbsoluteURL();
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {
-                return 'https://twitter.com/' . trim($twitter_name,'@') . '/profile_image?size=normal';
+                return 'https://twitter.com/' . trim(trim($twitter_name,'@')) . '/profile_image?size=normal';
             } else {
-                return 'https://twitter.com/' . trim($twitter_name,'@') . '/profile_image?size=bigger';
+                return 'https://twitter.com/' . trim(trim($twitter_name,'@')) . '/profile_image?size=bigger';
             }
         } elseif ($generic_photo_type == 'speaker') {
             return Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';

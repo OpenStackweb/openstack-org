@@ -21,3 +21,4 @@ migrations:
   - ClearOlderIngestTaskMigration
   - RemoveNullMembersMigration
   - VideoPresentationMigration
+  - RemoveSummitDeprecatedColumnsMigration
