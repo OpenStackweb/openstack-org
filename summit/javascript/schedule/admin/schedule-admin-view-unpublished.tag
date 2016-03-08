@@ -46,7 +46,6 @@
         self.store.on(self.store.LOAD_STORE,function() {
             console.log('UI: '+self.store.LOAD_STORE);
             // update UI
-            $(".event-unpublished").remove();
             var page_info = self.store.getPagesInfo();
             self.update();
             var options = {
