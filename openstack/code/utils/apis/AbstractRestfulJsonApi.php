@@ -22,6 +22,39 @@ abstract class AbstractRestfulJsonApi extends Controller
     private $json;
     protected $current_user;
 
+    /**
+     * @return Zend_Cache_Frontend
+     */
+    protected function getCache()
+    {
+        $cache  = SS_Cache::factory(get_class($this). '_api_cache');
+        return $cache;
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return mixed
+     */
+    protected function loadJSONResponseFromCache(SS_HTTPRequest $request)
+    {
+        $key    = md5($request->getURL(true));
+        $cache  = $this->getCache();
+        $result = $cache->load($key);
+        if(!$result) return null;
+        return $this->ok(unserialize($result));
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @param $data
+     * @return $this
+     */
+    protected function saveJSONResponseToCache(SS_HTTPRequest $request, $data){
+        $key   = md5($request->getURL(true));
+        $cache = $this->getCache();
+        $cache->save(serialize($data), $key);
+        return $this;
+    }
 
     public function __construct()
     {
@@ -37,7 +70,6 @@ abstract class AbstractRestfulJsonApi extends Controller
         $response = new SS_HTTPResponse();
         $response->setStatusCode(401);
         $response->addHeader('WWW-Authenticate', 'Basic realm="' . $realm . '"');
-
         return $response;
     }
 

@@ -308,10 +308,13 @@ SQL;
         }
     }
 
-    public function getAllSponsorshipAddOnsBySummit()
+    public function getAllSponsorshipAddOnsBySummit(SS_HTTPRequest $request)
     {
         try {
-            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $response = $this->loadJSONResponseFromCache($request);
+            if(!is_null($response)) return $response;
+
+            $summit_id = (int)$request->param('SUMMIT_ID');
             $query = new QueryObject(new SummitAddOn);
             $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
@@ -321,7 +324,7 @@ SQL;
                 array_push($res, SummitAddOnAssembler::toArray($add_on));
             }
 
-            return $this->ok($res);
+            return $this->saveJSONResponseToCache($request, $res)->ok($res);
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
 
@@ -329,11 +332,13 @@ SQL;
         }
     }
 
-    public function getAllSponsorshipPackagesBySummit()
+    public function getAllSponsorshipPackagesBySummit(SS_HTTPRequest $request)
     {
         try {
+            $response = $this->loadJSONResponseFromCache($request);
+            if(!is_null($response)) return $response;
             $query = new QueryObject(new SummitPackage());
-            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $summit_id = (int)$request->param('SUMMIT_ID');
             $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
             list($list, $count) = $this->sponsorship_package_repository->getAll($query, 0, 999999);
@@ -342,7 +347,7 @@ SQL;
                 array_push($res, SummitPackageAssembler::toArray($package));
             }
 
-            return $this->ok($res);
+            return $this->saveJSONResponseToCache($request, $res)->ok($res);
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
 

@@ -29,6 +29,8 @@
             <% end_with %>
         <% end_if %>
 
+        <% cached 'summitblock', $Summit.LastEdited %>
+
         <% loop $Summit.Speakers %>
          summit.speakers[{$ID}] =
          {
@@ -127,6 +129,7 @@
             <% end_if %>
         <% end_loop %>
 
+       <% end_cached %>
        <% loop $Summit.DatesWithEvents %>
         summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', selected: false };
         summit.events['{$Date}'] = [];
