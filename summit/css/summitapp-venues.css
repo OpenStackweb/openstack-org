@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MontserratBold';
+    src: url('/themes/openstack/fonts/Montserrat-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.container {
+    font-family:'Montserrat' , sans-serif;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
