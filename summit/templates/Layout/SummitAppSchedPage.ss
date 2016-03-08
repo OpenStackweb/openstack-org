@@ -29,7 +29,7 @@
             <% end_with %>
         <% end_if %>
 
-        <% cached 'summitblock', $Summit.LastEdited %>
+        <% cached 'frontend_schedule_page', $Summit.ID, $Summit.LastEdited %>
 
         <% loop $Summit.Speakers %>
          summit.speakers[{$ID}] =

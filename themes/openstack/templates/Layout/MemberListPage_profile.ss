@@ -2,7 +2,8 @@
 
 <h1>Individual Member Profile</h1>
 <div class="candidate span-14">
-<% with Profile %>
+    <% cached 'member_profile_page', $Profile.ID %>
+    <% with Profile %>
 
         <div class="span-4">
             $ProfilePhoto()
@@ -62,6 +63,7 @@
 
 
 <% end_with %>
+    <% end_cached %>
 
 <% if Candidate %>
     <% if Candidate.HasAcceptedNomination %>
