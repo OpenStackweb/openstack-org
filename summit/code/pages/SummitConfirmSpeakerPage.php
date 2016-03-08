@@ -40,14 +40,9 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
 
     public function index()
     {
-        $request = Session::get('Current.PresentationSpeakerSummitAssistanceConfirmationRequest');
-        if(is_null($request))
-        {
-            $response = new SS_HTTPResponse;
-            $response->setStatusCode(404);
-            return $response;
-        }
-        return $this->getViewer('index')->process($this);
+        $response = new SS_HTTPResponse;
+        $response->setStatusCode(404);
+        return $response;
     }
 
     public function confirm()
@@ -89,7 +84,7 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
         }
         catch(Exception $ex)
         {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
             return $this->httpError(404, 'Sorry, this speaker confirmation token does not seem to be correct.');
         }
     }
@@ -97,7 +92,13 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
     public function OnSitePhoneForm()
     {
         $request = Session::get('Current.PresentationSpeakerSummitAssistanceConfirmationRequest');
-        $form = new OnsitePhoneForm($this, 'OnSitePhoneForm', $request);
+        if(is_null($request))
+        {
+            $response = new SS_HTTPResponse;
+            $response->setStatusCode(404);
+            return $response;
+        }
+        $form = new OnSitePhoneForm($this, 'OnSitePhoneForm', $request);
         $form->loadDataFrom($request);
         return $form;
     }
