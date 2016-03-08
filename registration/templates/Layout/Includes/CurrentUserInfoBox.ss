@@ -1,7 +1,7 @@
 <div class="loggedInBox">
     <div class="row">
-        <div class="col-md-4" style="height: 35px;line-height: 35px;"><span style="display:inline-block; vertical-align:middle;">You are logged in as: <strong>$CurrentMember.Name</strong></span></div>
-        <div class="col-md-8  text-right">
+        <div class="col-md-6" style="height: 35px;line-height: 35px;"><span style="display:inline-block; vertical-align:middle;">You are logged in as: <strong>$CurrentMember.Name</strong></span></div>
+        <div class="col-md-6  text-right">
             <a class="roundedButton" href="{$ResignLink}">Resign Membership</a>
             <% if $CurrentMember.isFoundationMember %>
                 <a class="roundedButton downgrade-2-community-member" href="$Top.Link(downgrade2communitymember)">Change to Community Member</a>

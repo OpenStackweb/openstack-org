@@ -19,3 +19,4 @@ migrations:
   - PresentationSpeakerSummitConfirmationMigration
   - PresentationAllowFeedbackMigration
   - ClearOlderIngestTaskMigration
+  - RemoveNullMembersMigration

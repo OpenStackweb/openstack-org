@@ -94,11 +94,8 @@ class MemberManager implements IMemberManager
         $affiliation_factory = $this->affiliation_factory;
         $org_repository      = $this->org_repository;
         $org_factory         = $this->org_factory;
-        // we use an external ref to member bc is there is any error on TX, Member table does not
-        // support transactions bc its MyISam
-        $member              = null;
         try {
-            $this->tx_manager->transaction(function () use (
+            return $this->tx_manager->transaction(function () use (
                 $data,
                 $profile_page,
                 $repository,
@@ -108,8 +105,7 @@ class MemberManager implements IMemberManager
                 $group_factory,
                 $affiliation_factory,
                 $org_factory,
-                $sender_service,
-                &$member
+                $sender_service
             ) {
 
                 if (!isset($data["HiddenAffiliations"]) || empty($data["HiddenAffiliations"])) {
@@ -121,7 +117,7 @@ class MemberManager implements IMemberManager
                     throw new EntityValidationException('Sorry, that email address already exists. Please choose another.');
                 }
                 $member = $factory->build($data);
-                //force write, will write immediatly bc MyIsam engine
+
                 $member->write();
                 $affiliations_data = json_decode($data["HiddenAffiliations"]);
                 if(is_null($affiliations_data))
@@ -157,19 +153,15 @@ class MemberManager implements IMemberManager
                 }
                 //force write,
                 $member->write();
+                PublisherSubscriberManager::getInstance()->publish('new_user_registered', array($member->ID));
                 return $member;
             });
         }
         catch(Exception $ex)
         {
-            if(!is_null($member))
-                $member->delete();
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
             throw $ex;
         }
-
-        PublisherSubscriberManager::getInstance()->publish('new_user_registered', array($member->ID));
-
-        return $member;
     }
 
     /**
