@@ -107,16 +107,18 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
     public function getScheduleByDay(SS_HTTPRequest $request)
     {
-
-        $response = $this->loadJSONResponseFromCache($request);
-        if(!is_null($response)) return $response;
-
         $query_string        = $request->getVars();
         $summit_id           = intval($request->param('SUMMIT_ID'));
         $day                 = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
         $location            = isset($query_string['location']) ? intval(Convert::raw2sql($query_string['location'])) : null;
         $inc_blackouts       = isset($query_string['blackouts']) ? intval(Convert::raw2sql($query_string['blackouts'])) : null;
+        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
         $summit              = null;
+
+        if($cache) {
+            $response = $this->loadJSONResponseFromCache($request);
+            if (!is_null($response)) return $response;
+        }
 
         if(intval($summit_id) > 0)
             $summit = $this->summit_repository->getById(intval($summit_id));
