@@ -90,6 +90,9 @@ final class OpenStackIdCommon {
         if(empty($back_url) || (!empty($back_url) && !Director::is_site_url($back_url))){
             $back_url = Director::baseURL();
         }
+
+        if($back_url == Director::baseURL()."Security/")
+            $back_url = Director::baseURL();
         return $back_url;
     }
 }

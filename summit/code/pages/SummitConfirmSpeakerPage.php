@@ -38,28 +38,44 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
         parent::init();
     }
 
+    public function index()
+    {
+        $response = new SS_HTTPResponse;
+        $response->setStatusCode(404);
+        return $response;
+    }
+
     public function confirm()
     {
         parent::init();
 
         try {
-            $token = $this->request->getVar('t');
+
+            $token = Session::get('SummitConfirmSpeakerPage.Token');
+
+            if (isset($_REQUEST['t'])) {
+                $token = base64_decode($_REQUEST['t']);
+                Session::set('SummitConfirmSpeakerPage.Token', $token);
+                return $this->redirect($this->Link('confirm'));
+            }
 
             if(empty($token))
                 throw new InvalidArgumentException('missing token!');
 
-            $token = base64_decode($token);
             $request = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
                 ->filter('ConfirmationHash',
                     PresentationSpeakerSummitAssistanceConfirmationRequest::HashConfirmationToken($token))
                 ->first();
 
+
             if (is_null($request)) {
-                throw new NotFoundEntityException;
+                throw new NotFoundEntityException('PresentationSpeakerSummitAssistanceConfirmationRequest','');
             }
 
-            $request->confirm($token);
-            $request->write();
+            if(!$request->alreadyConfirmed()) {
+                $request->confirm($token);
+                $request->write();
+            }
 
             $data['Speaker'] = $request->Speaker();
             $data['Summit']  = $request->Summit();
@@ -68,7 +84,7 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
         }
         catch(Exception $ex)
         {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
             return $this->httpError(404, 'Sorry, this speaker confirmation token does not seem to be correct.');
         }
     }
@@ -76,8 +92,13 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
     public function OnSitePhoneForm()
     {
         $request = Session::get('Current.PresentationSpeakerSummitAssistanceConfirmationRequest');
-        if(is_null($request)) throw new InvalidArgumentException('missing current request!');
-        $form = new OnsitePhoneForm($this, 'OnSitePhoneForm', $request);
+        if(is_null($request))
+        {
+            $response = new SS_HTTPResponse;
+            $response->setStatusCode(404);
+            return $response;
+        }
+        $form = new OnSitePhoneForm($this, 'OnSitePhoneForm', $request);
         $form->loadDataFrom($request);
         return $form;
     }

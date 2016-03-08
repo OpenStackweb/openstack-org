@@ -309,7 +309,7 @@ implements IPresentationSpeaker
         $AcceptedPresentations = new ArrayList();
         $Presentations = $this->Presentations()->sort('Created','DESC')->limit($limit);
         foreach ($Presentations as $Presentation) {
-            if($Presentation->SelectionStatus() == "accepted")
+            if($Presentation->SelectionStatus() == IPresentation::SelectionStatus_Accepted)
                 $AcceptedPresentations->push($Presentation);
         }
 
@@ -320,9 +320,13 @@ implements IPresentationSpeaker
         $AcceptedPresentations = new ArrayList();
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
         if(is_null($summit)) return false;
-        $Presentations = $this->Presentations('`SummitID` = '.$summit->ID);
-        foreach ($Presentations as $Presentation) {
-            if($Presentation->SelectionStatus() == "accepted") $AcceptedPresentations->push($Presentation);
+        $presentations = $this->Presentations()->filter('SummitEvent.SummitID',$summit->ID);
+
+        $presentations_hash = array();
+        foreach ($presentations as $p) {
+            if(isset($presentations_hash[$p->ID])) continue;
+            $presentations_hash[$p->ID] = $p->ID;
+            if($p->SelectionStatus() == IPresentation::SelectionStatus_Accepted || $p->isPublished()) $AcceptedPresentations->push($p);
         }
 
         return $AcceptedPresentations;
@@ -332,9 +336,9 @@ implements IPresentationSpeaker
         $UnacceptedPresentations = new ArrayList();
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
         if(is_null($summit)) return false;
-        $Presentations = $this->Presentations('`SummitID` = '.$summit->ID);
-        foreach ($Presentations as $Presentation) {
-            if($Presentation->SelectionStatus() == "unaccepted") $UnacceptedPresentations->push($Presentation);
+        $presentations = $this->Presentations()->filter('SummitEvent.SummitID',$summit->ID);
+        foreach ($presentations as $p) {
+            if($p->SelectionStatus() == IPresentation::SelectionStatus_Unaccepted && !$p->isPublished()) $UnacceptedPresentations->push($p);
         }
 
         return $UnacceptedPresentations;
@@ -344,23 +348,22 @@ implements IPresentationSpeaker
         $AlternatePresentations = new ArrayList();
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id) ;
         if(is_null($summit)) return false;
-        $Presentations = $this->Presentations('`SummitID` = '.$summit->ID);
-        foreach ($Presentations as $Presentation) {
-            if($Presentation->SelectionStatus() == "alternate") $AlternatePresentations->push($Presentation);
+        $presentations = $this->Presentations()->filter('SummitEvent.SummitID',$summit->ID);
+        foreach ($presentations as $p) {
+            if($p->SelectionStatus() == IPresentation::SelectionStatus_Alternate && !$p->isPublished()) $AlternatePresentations->push($p);
         }
-
         return $AlternatePresentations;
     }
 
     /**
-     * @param ISummit $summit
+     * @param int $summit_id
      * @return string
      * @throws Exception
      * @throws ValidationException
      */
-    public function getSpeakerConfirmationLink(ISummit $summit)
+    public function getSpeakerConfirmationLink($summit_id)
     {
-        $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', $summit->getIdentifier())->first();
+        $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', intval($summit_id))->first();
         if(!$confirmation_page) throw new Exception('Confirmation Speaker Page not set on current summit!');
         $url = $confirmation_page->getAbsoluteLiveLink(false);
         $request = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
@@ -368,7 +371,7 @@ implements IPresentationSpeaker
             (
                 array
                 (
-                    'SummitID'  => $summit->getIdentifier(),
+                    'SummitID'  => intval($summit_id),
                     'SpeakerID' => $this->ID
                 )
             )->first();
@@ -379,7 +382,7 @@ implements IPresentationSpeaker
         }
 
         $request = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
-        $request->SummitID  = $summit->getIdentifier();
+        $request->SummitID  = intval($summit_id);
         $request->SpeakerID = $this->ID;
         $token              = null;
         $already_exists     = false;
@@ -390,7 +393,7 @@ implements IPresentationSpeaker
                 (
                     array
                     (
-                        'SummitID'                 => $summit->getIdentifier(),
+                        'SummitID'                 => intval($summit_id),
                         'SpeakerID:ExactMatch:not' => $this->ID,
                         'ConfirmationHash'         =>  PresentationSpeakerSummitAssistanceConfirmationRequest::HashConfirmationToken($token)
                     )
@@ -398,7 +401,7 @@ implements IPresentationSpeaker
                 ->count()) > 1;
         } while($already_exists);
         $request->write();
-        return $url.'?t='.base64_encode($token);
+        return $url.'confirm?t='.base64_encode($token);
     }
 
     /**

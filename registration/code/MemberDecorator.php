@@ -463,5 +463,17 @@ class MemberDecorator extends DataExtension
         return $this->owner;
     }
 
+
+    public function validate(ValidationResult $validationResult) {
+        if(empty($this->owner->FirstName))
+            return $validationResult->error('FirstName is required');
+        if(empty($this->owner->Surname))
+            return $validationResult->error('Surname is required');
+        if(empty($this->owner->Email))
+            return $validationResult->error('Email is required');
+        if(empty($this->owner->Password))
+            return $validationResult->error('Password is required');
+    }
+
 }
 

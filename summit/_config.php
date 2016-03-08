@@ -295,6 +295,7 @@ define('PRESENTATION_SPEAKER_ACCEPTED_ONLY_EMAIL', 'presentation-speaker-accepte
 define('PRESENTATION_SPEAKER_ACCEPTED_REJECTED_EMAIL', 'presentation-speaker-accepted-rejected');
 define('PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL', 'presentation-speaker-alternate-only');
 define('PRESENTATION_SPEAKER_ALTERNATE_REJECTED_EMAIL', 'presentation-speaker-alternate-rejected');
+define('PRESENTATION_SPEAKER_ACCEPTED_ALTERNATE_EMAIL','presentation-speaker-accepted-alternate');
 define('PRESENTATION_SPEAKER_REJECTED_EMAIL', 'presentation-speaker-rejected-only');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersupport@openstack.org');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@openstack.org');

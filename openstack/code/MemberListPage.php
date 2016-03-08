@@ -114,18 +114,15 @@ class MemberListPage_Controller extends Page_Controller
         }
     }
 
-    function findMember($CandidateID)
+    function findMember($member_id)
     {
-        $CandidateID = intval($CandidateID);
-        $query       = Member::get()->where(" ID = {$CandidateID}" )->sql();
-        $res         = DB::query($query.' LOCK IN SHARE MODE');
-        if($res->numRecords() > 0)
+        $member  = Member::get()->byID(intval($member_id));
+        if(!is_null($member))
         {
-            $Candidate = new Member($res->first());
             // Check to make sure they are in the foundation membership group
-            If ($Candidate && $Candidate->inGroup(5, true))
+            If ($member->inGroup(5, true))
             {
-                return $Candidate;
+                return $member;
             }
         }
     }

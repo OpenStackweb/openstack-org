@@ -542,10 +542,6 @@ SQL;
         return $valid;
     }
 
-    public function getSpeakers() {
-        return new ArrayList();
-    }
-
     /**
      * @return string
      */

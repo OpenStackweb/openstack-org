@@ -245,18 +245,21 @@ extends AbstractRestfulJsonApi {
     }
 
     /**
-     * @return SS_HTTPResponse
+     * @param SS_HTTPRequest $request
+     * @return mixed|null|SS_HTTPResponse|string
      */
-    public function getJobList(){
+    public function getJobList(SS_HTTPRequest $request){
         try{
+            $output = $this->loadRAWResponseFromCache($request);
+            if(!is_null($output)) return $output;
             $output = '';
-            $foundation = $this->getRequest()->getVar('foundation');
+            $foundation = $request->getVar('foundation');
             $jobs = $this->repository->getDateSortedJobs($foundation);
 
             foreach ($jobs as $job) {
                 $output .= $job->renderWith('JobHolder_job');
             }
-
+            $this->saveRAWResponseToCache($request, $output);
             return $output;
         }
         catch(NotFoundEntityException $ex1){

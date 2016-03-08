@@ -105,7 +105,11 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'addFeedback',
     );
 
-    public function getScheduleByDay(SS_HTTPRequest $request) {
+    public function getScheduleByDay(SS_HTTPRequest $request)
+    {
+
+        $response = $this->loadJSONResponseFromCache($request);
+        if(!is_null($response)) return $response;
 
         $query_string        = $request->getVars();
         $summit_id           = intval($request->param('SUMMIT_ID'));
@@ -194,7 +198,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             }
             array_push($events, $entry);
         };
-        return $this->ok(array( 'day' => $day, 'events' => $events));
+        $data = array( 'day' => $day, 'events' => $events);
+        return $this->saveJSONResponseToCache($request, $data)->ok($data);
     }
 
     public function getSearchResults(SS_HTTPRequest $request) {

@@ -481,6 +481,10 @@ form.all-events-search-form .all-events-search-wrapper i {
     top: 11px;
 }
 
+.login-container {
+    text-align: right;
+}
+
 .chosen-container .chosen-results
 {
     max-height:  100px !important;

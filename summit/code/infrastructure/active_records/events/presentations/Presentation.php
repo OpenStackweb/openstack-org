@@ -639,11 +639,15 @@ class Presentation extends SummitEvent implements IPresentation
 
 
         If (!$Selection) {
-            return 'unaccepted';
-        } elseif ($Selection->Order <= $this->Category()->SessionCount) {
-                return 'accepted';
-        } else {
-            return 'alternate';
+            return IPresentation::SelectionStatus_Unaccepted;
+        }
+        elseif ($Selection->Order <= $this->Category()->SessionCount)
+        {
+            return IPresentation::SelectionStatus_Accepted;
+        }
+        else
+        {
+            return IPresentation::SelectionStatus_Alternate;
         }
     }
 

@@ -2,7 +2,9 @@
 
 <h1>Individual Speaker Profile</h1>
 <div class="candidate span-14">
+
     <% with Profile %>
+        <% cached 'speaker_profile_page', $Profile.ID %>
         <div class="span-4">
             <img src="$ProfilePhoto()"/>
         </div>
@@ -161,10 +163,12 @@
                     <div class="span-6 last"> $Notes </div>
                 <% end_if %>
             </div>
+            <% end_cached %>
             <div class="col-md-6 contact_form_div">
                 <h4>Contact $FirstName</h4>
                 $Top.ContactForm
             </div>
         </div>
     <% end_with %>
+
 </div>

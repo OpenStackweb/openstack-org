@@ -117,6 +117,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'GET $SUMMIT_ID/tags'                                     => 'getTags',
         'GET $SUMMIT_ID/companies'                                => 'getCompanies',
         'GET $SUMMIT_ID/sponsors'                                 => 'getSponsors',
+        'GET $SUMMIT_ID/speakers'                                 => 'getSpeakers',
         '$SUMMIT_ID/schedule'                                     => 'handleSchedule',
         '$SUMMIT_ID/events'                                       => 'handleEvents',
         '$SUMMIT_ID/attendees'                                    => 'handleAttendees',
@@ -137,6 +138,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'getTags',
         'getSponsors',
         'getCompanies',
+        'getSpeakers',
     );
 
     // this is called when typing a tag name to add as a tag on edit event
@@ -205,6 +207,74 @@ final class SummitsApi extends AbstractRestfulJsonApi
         }
     }
 
+    // this is called when typing a Speakers name to add as a tag on edit event
+    public function getSpeakers(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $term         = Convert::raw2sql($query_string['query']);
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = Summit::get_by_id('Summit',$summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $slug1 = IFoundationMember::CommunityMemberGroupSlug;
+            $slug2 = IFoundationMember::FoundationMemberGroupSlug;
+
+            $query = <<<SQL
+SELECT CONCAT(M.ID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+M.ID AS member_id ,
+M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',M.ID,')') AS name,
+IFNULL(PS.ID , 0) AS speaker_id
+FROM Member AS M
+LEFT JOIN PresentationSpeaker AS PS ON PS.MemberID = M.ID
+WHERE
+(
+  M.FirstName LIKE '%{$term}%' OR
+  M.Surname LIKE '%{$term}%' OR
+  M.Email LIKE '%{$term}%' OR
+  CONCAT(M.FirstName,' ',M.Surname) LIKE '%{$term}%'
+)
+AND
+EXISTS
+(
+  SELECT 1 FROM Group_Members AS GM
+  INNER JOIN `Group` AS G ON G.ID = GM.GroupID
+  WHERE
+  GM.MemberID = M.ID
+  AND
+  (
+    G.Code = '{$slug1}'
+    OR
+    G.Code = '{$slug2}'
+  )
+)
+ORDER BY M.FirstName, M.Surname
+LIMIT 25;
+SQL;
+
+
+            $speakers = DB::query($query);
+
+            $json_array = array();
+            foreach ($speakers as $s) {
+
+                $json_array[] = $s;
+            }
+
+            echo json_encode($json_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
     public function getCompanies(SS_HTTPRequest $request){
         try
         {
@@ -238,10 +308,13 @@ final class SummitsApi extends AbstractRestfulJsonApi
         }
     }
 
-    public function getAllSponsorshipAddOnsBySummit()
+    public function getAllSponsorshipAddOnsBySummit(SS_HTTPRequest $request)
     {
         try {
-            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $response = $this->loadJSONResponseFromCache($request);
+            if(!is_null($response)) return $response;
+
+            $summit_id = (int)$request->param('SUMMIT_ID');
             $query = new QueryObject(new SummitAddOn);
             $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
@@ -251,7 +324,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
                 array_push($res, SummitAddOnAssembler::toArray($add_on));
             }
 
-            return $this->ok($res);
+            return $this->saveJSONResponseToCache($request, $res)->ok($res);
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
 
@@ -259,11 +332,13 @@ final class SummitsApi extends AbstractRestfulJsonApi
         }
     }
 
-    public function getAllSponsorshipPackagesBySummit()
+    public function getAllSponsorshipPackagesBySummit(SS_HTTPRequest $request)
     {
         try {
+            $response = $this->loadJSONResponseFromCache($request);
+            if(!is_null($response)) return $response;
             $query = new QueryObject(new SummitPackage());
-            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $summit_id = (int)$request->param('SUMMIT_ID');
             $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
             list($list, $count) = $this->sponsorship_package_repository->getAll($query, 0, 999999);
@@ -272,7 +347,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
                 array_push($res, SummitPackageAssembler::toArray($package));
             }
 
-            return $this->ok($res);
+            return $this->saveJSONResponseToCache($request, $res)->ok($res);
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
 

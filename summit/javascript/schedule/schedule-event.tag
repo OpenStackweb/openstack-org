@@ -81,14 +81,6 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="row credentials-row" if={ hasDesignCredentials(summit_types_id) } >
-                                <div class="col-md-2 col-xs-12">
-                                    <img style="height:15px" src="/summit/images/summitapp/credential.png" />
-                                </div>
-                                 <div class="col-md-10 col-xs-12">
-                                    Design Summit Credential
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="row">

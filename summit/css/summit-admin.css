@@ -125,6 +125,24 @@
     margin: 10px 0 20px 0;
 }
 
+/* SCHEDULE RESULTS */
+
+.result-event-buttons {
+    position: relative;
+    right: 0px;
+    width: 20px;
+    float: right;
+    top: -44px;
+}
+
+.result-event-buttons a {
+    color: grey;
+}
+
+.result-event-buttons a:hover {
+    color: black;
+}
+
 /* EDIT EVENT */
 
 .edit-event-wrapper {

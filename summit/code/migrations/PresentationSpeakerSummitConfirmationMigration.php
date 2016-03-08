@@ -39,6 +39,9 @@ SQL;
                 $speaker        = PresentationSpeaker::get()->byID($speaker_id);
                 if(is_null($speaker)) continue;
 
+                if(PresentationSpeakerSummitAssistanceConfirmationRequest::get()->filter(
+                        array('SummitID' => 5, 'SpeakerID' => $speaker_id)
+                    )->count() > 0) continue;
                 $assistance                       = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
                 $assistance->SpeakerID            = $speaker_id;
                 $assistance->SummitID             = 5;

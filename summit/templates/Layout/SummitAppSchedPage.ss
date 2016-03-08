@@ -5,6 +5,9 @@
         var summit =
         {
             id:   $Summit.ID,
+            link: "{$Summit.Link.JS}",
+            title: "{$Summit.Title.JS}",
+            year: "{$Summit.getSummitYear().JS}",
             dates : {},
             events: {},
             summit_types: {},
@@ -25,6 +28,8 @@
             summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}' };
             <% end_with %>
         <% end_if %>
+
+        <% cached 'frontend_schedule_page', $Summit.ID, $Summit.LastEdited %>
 
         <% loop $Summit.Speakers %>
          summit.speakers[{$ID}] =
@@ -124,6 +129,7 @@
             <% end_if %>
         <% end_loop %>
 
+       <% end_cached %>
        <% loop $Summit.DatesWithEvents %>
         summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', selected: false };
         summit.events['{$Date}'] = [];

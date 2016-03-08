@@ -182,7 +182,7 @@
                                     id              : {$ID},
                                     title           : "{$Title.JS}",
                                     description     : "{$Description.JS}",
-                                    short_desc      : "{$getShortDescription(600).JS}",
+                                    abstract        : "{$ShortDescription.JS}",
                                     date_nice       : "{$StartDate().Format(D j)}",
                                     start_datetime  : "{$StartDate}",
                                     end_datetime    : "{$EndDate}",

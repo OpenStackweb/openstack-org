@@ -162,6 +162,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    public function getSummitYear() {
+        return date('Y',strtotime($this->getField('SummitBeginDate')));
+    }
 
     public function setSummitBeginDate($value)
     {

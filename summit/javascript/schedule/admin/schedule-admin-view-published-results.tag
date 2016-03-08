@@ -2,9 +2,16 @@
     <div id="search_results" style="display:none">
         <h4>Search Results</h4>
         <div class="list-group">
-            <a href="#" onclick={ parent.deepLinkToEvent } class="list-group-item" each="{ key, e in published_store.results() }" >
-                <h4 class="list-group-item-heading" id="popover_{ e.id }" data-content="{ getPopoverContent(e) }" title="{ e.title }" data-toggle="popover">{ e.title }</h4>
-            </a>
+            <div each="{ key, e in published_store.results() }">
+                <a href="#" onclick={ parent.deepLinkToEvent } class="list-group-item">
+                    <h4 class="list-group-item-heading" id="popover_{ e.id }" data-content="{ getPopoverContent(e) }" title="{ e.title }" data-toggle="popover">{ e.title }</h4>
+                </a>
+                <div class="result-event-buttons">
+                    <a href="summit-admin/{ parent.summit.id }/events/{ e.id }" class="edit-event-btn" title="edit event">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -46,7 +53,7 @@
         deepLinkToEvent(event) {
             var item = event.item;
 
-            window.location.hash='';
+            $(window).url_fragment('setParam','q', '');
             $(window).url_fragment('setParam','day', item.e.start_date);
             $(window).url_fragment('setParam','venue', item.e.location_id);
             $(window).url_fragment('setParam','event', item.e.id);
