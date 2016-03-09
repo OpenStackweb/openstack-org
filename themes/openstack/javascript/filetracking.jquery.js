@@ -25,7 +25,13 @@
                             $(this).click(function() {
                             var extension = (/[\./]/.exec(href)) ? /[^\./]+$/.exec(href) : undefined;
                             var filePath = href;
-                            _gaq.push(['_trackEvent', 'Download', 'Click-' + extension, filePath]);
+
+                            ga('send', 'event', {
+                                    eventCategory: 'Download',
+                                    eventAction:  'Click - ' + extension,
+                                    eventLabel:filePath
+                            });
+
                             if ($(this).attr('target') != undefined && $(this).attr('target').toLowerCase() != '_blank') {
                                 setTimeout(function() { location.href = baseHref + href; }, 200);
                                 return false;
