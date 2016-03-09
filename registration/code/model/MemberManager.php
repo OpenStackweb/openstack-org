@@ -94,6 +94,7 @@ class MemberManager implements IMemberManager
         $affiliation_factory = $this->affiliation_factory;
         $org_repository      = $this->org_repository;
         $org_factory         = $this->org_factory;
+
         try {
             return $this->tx_manager->transaction(function () use (
                 $data,
@@ -107,18 +108,34 @@ class MemberManager implements IMemberManager
                 $org_factory,
                 $sender_service
             ) {
+                $mandatory_fields = array
+                (
+                    'HiddenAffiliations' => 'Affiliations',
+                    'Email'              => 'Email',
+                    'FirstName'          => 'First Name',
+                    'Surname'            => 'Surname',
+                    'Password'           => 'Password',
+                );
 
-                if (!isset($data["HiddenAffiliations"]) || empty($data["HiddenAffiliations"])) {
-                    throw new EntityValidationException('You must at least enter one valid Affiliation.');
+                foreach($mandatory_fields as $mf => $fn){
+                    if (!isset($data[$mf]) || empty($data[$mf])) {
+                        throw new EntityValidationException(sprintf('% is a mandatory field!.',$fn));
+                    }
+                }
+
+                if(!isset($data['Password']['_Password']) || !isset($data['Password']['_ConfirmPassword']) || $data['Password']['_ConfirmPassword'] !== $data['Password']['_Password'])
+                {
+                    throw new EntityValidationException('Password is a mandatory field!.');
                 }
 
                 $old_member = $repository->findByEmail(Convert::raw2sql($data['Email']));
                 if (!is_null($old_member)) {
                     throw new EntityValidationException('Sorry, that email address already exists. Please choose another.');
                 }
-                $member = $factory->build($data);
 
+                $member = $factory->build($data);
                 $member->write();
+
                 $affiliations_data = json_decode($data["HiddenAffiliations"]);
                 if(is_null($affiliations_data))
                     throw new EntityValidationException('You must at least enter one valid Affiliation.');
@@ -156,6 +173,11 @@ class MemberManager implements IMemberManager
                 PublisherSubscriberManager::getInstance()->publish('new_user_registered', array($member->ID));
                 return $member;
             });
+        }
+        catch(ValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            throw $ex1;
         }
         catch(Exception $ex)
         {
