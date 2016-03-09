@@ -1,0 +1,25 @@
+#page-content-wrapper{
+    width: 80% !important;
+}
+
+.row-space
+{
+    padding-top:5px;
+    bottom-top:5px;
+}
+
+.clockpicker
+{
+    width: 150px;
+}
+
+.date{
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+.input-group.date
+{
+    width: 145px;
+}
