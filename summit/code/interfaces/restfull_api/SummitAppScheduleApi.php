@@ -105,6 +105,12 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'addFeedback',
     );
 
+    protected function getCacheKey(SS_HTTPRequest $request){
+        $key    = parent::getCacheKey($request);
+        $key   .= '.'.Member::currentUserID();
+        return $key;
+    }
+
     public function getScheduleByDay(SS_HTTPRequest $request)
     {
         $query_string        = $request->getVars();
@@ -115,9 +121,11 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
         $summit              = null;
 
-        if($cache) {
-            $response = $this->loadJSONResponseFromCache($request);
-            if (!is_null($response)) return $response;
+        $member = Member::currentUser();
+        $cache  = (!is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+
+        if($cache && $response = $this->loadJSONResponseFromCache($request)) {
+            return $response;
         }
 
         if(intval($summit_id) > 0)
@@ -128,8 +136,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         if(is_null($summit))
             return $this->notFound('summit not found!');
 
-        $events = array();
-        $schedule = $summit->getSchedule($day, $location);
+        $events    = array();
+        $schedule  = $summit->getSchedule($day, $location);
         $blackouts = ($inc_blackouts) ? $summit->getBlackouts($day,$location) : new ArrayList();
 
         $schedule->merge($blackouts);

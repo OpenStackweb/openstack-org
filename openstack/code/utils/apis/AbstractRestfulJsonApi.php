@@ -48,13 +48,19 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function loadRAWResponseFromCache(SS_HTTPRequest $request)
     {
-        $key    = md5($request->getURL(true));
         $cache  = $this->getCache();
-        $result = $cache->load($key);
+        $result = $cache->load(md5($this->getCacheKey($request)));
         if(!$result) return null;
         return unserialize($result);
     }
 
+    /**
+     * @param SS_HTTPRequest $request
+     * @return string
+     */
+    protected function getCacheKey(SS_HTTPRequest $request){
+        return $request->getURL(true);
+    }
 
     /**
      * @param SS_HTTPRequest $request
@@ -71,7 +77,7 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @return $this
      */
     protected function saveRAWResponseToCache(SS_HTTPRequest $request, $data){
-        $key   = md5($request->getURL(true));
+        $key   = md5($this->getCacheKey($request));
         $cache = $this->getCache();
         $cache->save(serialize($data), $key);
         return $this;
