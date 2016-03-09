@@ -13,7 +13,7 @@
         </ol>
         <form id="edit-event-form">
             <input type="hidden" id="summit_id" value="{$Summit.ID}" />
-            <input type="hidden" id="event_id" value="{$Event.ID}" />
+            <input type="hidden" id="event_id"  value="{$Event.ID}" />
             <input type="hidden" id="published" value="{$Event.IsPublished}" />
             <% if $Event %>
             <div class="form-group">
@@ -81,16 +81,12 @@
                 <div class="row">
                     <div class="col-md-3">
                         <label for="event_type">Event Type</label>
-                        <% if $Top.Event %>
-                            <div> {$Top.Event.Type.Type}</div>
-                        <% else %>
-                        <select class="form-control" id="event_type" name="event_type">
+                        <select <% if $Top.Event %>disabled="disabled"<% end_if %> class="form-control" id="event_type" name="event_type">
                             <option value="">-- Select a Type --</option>
                             <% loop Summit.EventTypes() %>
-                                <option value="$ID">$Type</option>
+                                <option value="$ID" <% if $Top.Event.Type.ID == $ID %>selected<% end_if %> >$Type</option>
                             <% end_loop %>
                         </select>
-                        <% end_if %>
                     </div>
                     <div class="col-md-3">
                         <label for="summit_type">Summit Type</label>
@@ -168,12 +164,12 @@
                     });
                     <% end_loop %>
                 <% end_if %>
-                <% if if $Event && $Event.isPresentation && $Event.Moderator() %>
+                <% if $Event && $Event.isPresentation && $Event.Moderator().Exists %>
                 moderator = {
                                 unique_id : "{$Event.Moderator.MemberID}_{$Event.Moderator.ID}",
                                 name : "{$Event.Moderator.FirstName.JS} {$Event.Moderator.LastName.JS}  ({$Event.Moderator.MemberID})",
                                 speaker_id : $Event.Moderator.ID,
-                                member_id:  $Event.Moderator.$MemberID,
+                                member_id:  $Event.Moderator.MemberID,
                             };
                 <% end_if %>
             </script>

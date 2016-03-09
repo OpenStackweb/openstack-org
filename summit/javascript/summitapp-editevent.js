@@ -362,7 +362,7 @@ $(document).ready(function(){
             tags: $('#tags').val(),
             sponsors: $('#sponsors').val(),
             speakers: $('#speakers').tagsinput('items'),
-            moderator: $('#moderator').tagsinput('items'),
+            moderator: $('#moderator').tagsinput('items')[0],
             publish: publish
         };
 

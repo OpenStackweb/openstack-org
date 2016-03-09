@@ -203,7 +203,7 @@ final class SummitService implements ISummitService
         if ($event instanceof Presentation) {
             foreach ($event_data['speakers'] as $speaker) {
                 if(!isset($speaker['speaker_id']) || !isset($speaker['member_id']))
-                    throw new ValidationException('missing parameter on speakers collection!');
+                    throw new EntityValidationException('missing parameter on speakers collection!');
 
                 $speaker_id = intval($speaker['speaker_id']);
                 $member_id  = intval($speaker['member_id']);
@@ -228,13 +228,13 @@ final class SummitService implements ISummitService
             if($event->Type()->Type == 'Keynotes')
             {
                 if(!isset($event_data['moderator']))
-                    throw new ValidationException('moderator is required!');
+                    throw new EntityValidationException('moderator is required!');
                 $moderator    = $event_data['moderator'];
                 if(!isset($moderator['member_id']) || !isset($moderator['speaker_id']))
-                    throw new ValidationException('missing parameter on moderator!');
+                    throw new EntityValidationException('missing parameter on moderator!');
 
-                $speaker_id = intval($speaker['speaker_id']);
-                $member_id  = intval($speaker['member_id']);
+                $speaker_id = intval($moderator['speaker_id']);
+                $member_id  = intval($moderator['member_id']);
                 $moderator    = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id):null;
                 $moderator    = is_null($moderator) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : null;
                 if (is_null($moderator)) {
