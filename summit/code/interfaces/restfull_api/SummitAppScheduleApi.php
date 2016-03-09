@@ -122,7 +122,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $summit              = null;
 
         $member = Member::currentUser();
-        $cache  = (!is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+        $cache  = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
 
         if($cache && $response = $this->loadJSONResponseFromCache($request)) {
             return $response;
