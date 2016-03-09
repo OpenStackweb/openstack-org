@@ -28,6 +28,10 @@ final class SummitService implements ISummitService
      */
     private $attendee_repository;
     /**
+     * @var ISummitAssistanceRepository
+     */
+    private $assistance_repository;
+    /**
      * @var ITransactionManager
      */
     private $tx_service;
@@ -37,12 +41,14 @@ final class SummitService implements ISummitService
         ISummitRepository $summit_repository,
         ISummitEventRepository $event_repository,
         ISummitAttendeeRepository $attendee_repository,
+        ISummitAssistanceRepository $assistance_repository,
         ITransactionManager $tx_service
     )
     {
         $this->summit_repository = $summit_repository;
         $this->event_repository  = $event_repository;
         $this->attendee_repository  = $attendee_repository;
+        $this->assistance_repository  = $assistance_repository;
         $this->tx_service        = $tx_service;
     }
 
@@ -430,6 +436,37 @@ final class SummitService implements ISummitService
             }
 
             return $attendee;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $assistance_data
+     * @return mixed
+     */
+    public function updateAssistance(ISummit $summit, array $assistance_data)
+    {
+        $assistance_repository = $this->assistance_repository;
+        return $this->tx_service->transaction(function() use($summit, $assistance_data, $assistance_repository){
+
+            if(!isset($assistance_data['id']))
+                throw new EntityValidationException('missing required param: id');
+
+            $assistance_id = intval($assistance_data['id']);
+
+            $assistance = $assistance_repository->getById($assistance_id);
+
+            if(is_null($assistance))
+                throw new NotFoundEntityException('Speaker Assistance', sprintf('id %s', $assistance_id));
+
+            if(intval($assistance->SummitID) !== intval($summit->getIdentifier()))
+                throw new EntityValidationException('speaker assistance doest not belong to summit');
+
+            $assistance->CheckedIn = $assistance_data['checked_in'];
+
+            $assistance->write();
+
+            return $assistance;
         });
     }
 }

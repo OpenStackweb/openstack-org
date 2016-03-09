@@ -25,6 +25,7 @@ class PresentationSpeakerSummitAssistanceConfirmationRequest extends DataObject
         'IsConfirmed'           => 'Boolean',
         'ConfirmationDate'      => 'SS_Datetime',
         'ConfirmationHash'      => 'Text',
+        'CheckedIn'             => 'Boolean',
     );
 
     private static $has_one = array

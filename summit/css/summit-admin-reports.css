@@ -1,0 +1,15 @@
+.center_text {
+    text-align: center;
+}
+
+.fa-check {
+    color: limegreen;
+}
+
+.sortable {
+    cursor: pointer;
+}
+
+th .fa {
+    margin-left: 5px;
+}

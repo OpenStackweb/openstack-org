@@ -78,6 +78,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     (
         'directory',
         'dashboard',
+        'reports',
         'publishedEvents',
         'pendingEvents',
         'editEvent',
@@ -93,6 +94,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     private static $url_handlers = array
     (
         '$SummitID!/dashboard'                                       => 'dashboard',
+        '$SummitID!/reports'                                         => 'reports',
         '$SummitID!/events/published'                                => 'publishedEvents',
         '$SummitID!/events/schedule'                                 => 'scheduleView',
         '$SummitID!/events/unpublished'                              => 'pendingEvents',
@@ -336,7 +338,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         Requirements::css('summit/css/summit-admin-edit-event.css');
-        Requirements::css('summit/css/summit-admin-edit-event.css');
         // tag inputes
         Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
         Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
@@ -445,5 +446,31 @@ final class SummitAppAdminController extends Controller implements PermissionPro
             )
         );
     }
+
+    public function reports(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+        $summit = Summit::get()->byID($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-reports.css');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('summit/javascript/jquery.tabletoCSV.js');
+
+        return $this->getViewer('reports')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                        )
+                    )
+            );
+    }
+
+
 
 }

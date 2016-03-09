@@ -67,7 +67,8 @@ final class Summit extends DataObject implements ISummit
         'Notifications' => 'SummitPushNotification',
         'EntityEvents' => 'SummitEntityEvent',
         'TrackChairs' => 'SummitTrackChair',
-        'RandomVotingLists' => 'PresentationRandomVotingList'
+        'RandomVotingLists' => 'PresentationRandomVotingList',
+        'SummitAssistances' => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
     );
 
     private static $summary_fields = array

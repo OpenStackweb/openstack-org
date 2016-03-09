@@ -122,6 +122,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         '$SUMMIT_ID/events'                                       => 'handleEvents',
         '$SUMMIT_ID/attendees'                                    => 'handleAttendees',
         '$SUMMIT_ID/members'                                      => 'handleMembers',
+        '$SUMMIT_ID/reports'                                      => 'handleReports',
         'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/approve' => 'approvePurchaseOrder',
         'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject'  => 'rejectPurchaseOrder',
     );
@@ -135,6 +136,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'handleEvents',
         'handleAttendees',
         'handleMembers',
+        'handleReports',
         'getTags',
         'getSponsors',
         'getCompanies',
@@ -422,6 +424,12 @@ SQL;
     public function handleMembers(SS_HTTPRequest $request)
     {
         $api = SummitAppMembersApi::create();
+        return $api->handleRequest($request, DataModel::inst());
+    }
+
+    public function handleReports(SS_HTTPRequest $request)
+    {
+        $api = SummitAppReportsApi::create();
         return $api->handleRequest($request, DataModel::inst());
     }
 }
