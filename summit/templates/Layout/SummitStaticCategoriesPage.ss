@@ -4,7 +4,7 @@
             <div class="col-sm-10 col-sm-push-1">
                 <h1>Session Categories</h1>
                 <p>The OpenStack Summit is a five-day event comprised of presentations, panels, workshops, BoFs and collaborative working sessions. Topics span cloud strategy and business case development to operational best practices and technical deep dives. Start planning your week by looking at the high level themes below. The full schedule will be available early March 2016.</p>
-                <a href="{$Summit.Link()}call-for-speakers/track-list" target="_blank">Learn more about the {$Summit.Title} Summit {$Summit.getSummitYear()} Tracks</a>
+                <a href="/summit/austin-2016/categories/track-list" target="_blank">Learn more about the {$Summit.Title} Summit {$Summit.getSummitYear()} Tracks</a>
             </div>
         </div>
         <div class="row">
