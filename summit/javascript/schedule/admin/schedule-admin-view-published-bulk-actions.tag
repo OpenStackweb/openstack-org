@@ -1,7 +1,7 @@
 <schedule-admin-view-published-bulk-actions>
     <div class="row bulk-actions-container">
         <div class="col-md-4">
-            <input type="checkbox" id="select_all_published" title="select all"/>
+            <input disabled="disabled" type="checkbox" id="select_all_published" title="select all"/>
             <select disabled="disabled" id="bulk-actions-published" name="bulk-actions-published">
                 <option value="">-- Select a Bulk Action --</option>
                 <option value="EDIT">Edit</option>
@@ -14,11 +14,31 @@
     </div>
 
     <script>
+
     this.bulk_edition_url = opts.bulk_edition_url;
+    this.published_store  = opts.published_store;
+    this.summit           = opts.summit;
     var self              = this;
 
+    self.published_store.on(self.published_store.LOAD_STORE,function() {
+        if(self.published_store.isEmpty())
+        {
+            $('#select_all_published').attr('disabled', 'disabled');
+        }
+        else
+        {
+            $('#select_all_published').removeAttr('disabled');
+        }
+        $('#select_all_published').prop('checked', false);
+        $('#bulk-actions-published').val('');
+        $('#apply-bulk-published-action').attr('disabled', 'disabled');
+        $('#bulk-actions-published').attr('disabled', 'disabled');
+    });
+
     this.on('mount', function(){
+
         $(function() {
+
             $('body').on('click', '.bulk-action-published-selector', function() {
                 var enable = $(".bulk-action-published-selector:checked").length > 0;
                 if(enable)
@@ -75,7 +95,30 @@
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Yes, Unpublish them all!",
                             closeOnConfirm: true },
-                            function(){
+                            function(isConfirm){
+                                if (isConfirm) {
+                                    $('body').ajax_loader();
+                                    $.ajax({
+                                        type: 'DELETE',
+                                        url: 'api/v1/summits/'+self.summit.id+'/events/unpublish/bulk',
+                                        data: JSON.stringify(ids),
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json"
+                                    }).done(function(saved_event) {
+                                        $('body').ajax_loader('stop');
+                                        swal("Updated!", "Events were unpublished successfully.", "success");
+                                        location.reload();
+                                    }).fail(function(jqXHR) {
+                                        $('body').ajax_loader('stop');
+                                        var responseCode = jqXHR.status;
+                                        if(responseCode == 412) {
+                                        var response = $.parseJSON(jqXHR.responseText);
+                                            swal('Validation error', response.messages[0].message, 'warning');
+                                            return;
+                                        }
+                                        swal('Error', 'There was a problem saving the events, please contact admin.', 'warning');
+                                    });
+                                }
                             }
                         );
                     }

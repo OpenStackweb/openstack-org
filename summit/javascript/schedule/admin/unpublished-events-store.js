@@ -54,6 +54,10 @@ function unpublishedEventsStore(){
         }
     }
 
+    this.isEmpty = function() {
+        return Object.keys(this._unpublished_events).length  == 0;
+    }
+
     var self = this;
 
     api.on(api.RETRIEVED_UNPUBLISHED_EVENTS,function(response) {

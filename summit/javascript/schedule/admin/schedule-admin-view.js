@@ -15,8 +15,8 @@ require('./schedule-admin-view-unpublished.tag');
 require('./schedule-admin-view-published-bulk-actions.tag');
 require('./schedule-admin-view-unpublished-bulk-actions.tag');
 
-riot.mount('schedule-admin-view-published-bulk-actions');
-riot.mount('schedule-admin-view-unpublished-bulk-actions');
+riot.mount('schedule-admin-view-published-bulk-actions', { published_store: published_store });
+riot.mount('schedule-admin-view-unpublished-bulk-actions', { unpublished_store: unpublished_store } );
 riot.mount('schedule-admin-view-published-filters', { dispatcher: dispatcher});
 riot.mount('schedule-admin-view-published', { api: api, dispatcher: dispatcher, published_store: published_store, unpublished_store: unpublished_store });
 riot.mount('schedule-admin-view-published-results', { api: api, dispatcher: dispatcher, published_store: published_store });

@@ -69,4 +69,11 @@ interface ISummitService
      */
     public function updateBulkEvents(ISummit $summit, array $data);
 
+
+    /**
+     * @param ISummit $summit
+     * @param array $event_ids
+     */
+    public function unPublishBulkEvents(ISummit $summit, array $event_ids);
+
 }

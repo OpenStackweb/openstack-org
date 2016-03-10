@@ -497,9 +497,8 @@ final class SummitService implements ISummitService
     public function updateBulkEvents(ISummit $summit, array $data)
     {
         $event_repository = $this->event_repository;
-        $this_var         = $this;
 
-        $this->tx_service->transaction(function() use($summit, $data, $event_repository, $this_var){
+        $this->tx_service->transaction(function() use($summit, $data, $event_repository){
 
             $events = $data['events'];
             foreach($events as $event_dto) {
@@ -512,6 +511,24 @@ final class SummitService implements ISummitService
                 $event->setEndDate(sprintf("%s %s", $event_dto['end_date'], $event_dto['end_time']));
                 $event->unPublish();
                 $event->write();
+            }
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $event_ids
+     */
+    public function unPublishBulkEvents(ISummit $summit, array $event_ids)
+    {
+        $event_repository = $this->event_repository;
+
+        $this->tx_service->transaction(function() use($summit, $event_ids, $event_repository){
+            foreach($event_ids as $event_id) {
+                $event = $event_repository->getById($event_id);
+                if(is_null($event)) throw new NotFoundEntityException('SummitEvent');
+                if(intval($event->SummitID) !== $summit->getIdentifier()) throw new EntityValidationException('SummitEvent does not belong to Summit!');
+                $event->unPublish();
             }
         });
     }

@@ -159,7 +159,7 @@
         <div class="row" style="width:100%">
             <div class="col-md-6 published-container">
                 <schedule-admin-view-published-filters summit="{ summit }"></schedule-admin-view-published-filters>
-                <schedule-admin-view-published-bulk-actions bulk_edition_url="{$Top.Link}/{$Summit.ID}/events/bulk-action" ></schedule-admin-view-published-bulk-actions>
+                <schedule-admin-view-published-bulk-actions summit="{ summit }" bulk_edition_url="{$Top.Link}/{$Summit.ID}/events/bulk-action" ></schedule-admin-view-published-bulk-actions>
                 <schedule-admin-view-published start_time="07:00" end_time="22:00" interval="15" step="5" summit="{ summit }" minute_pixels="3" slot_width="100%"></schedule-admin-view-published>
                 <schedule-admin-view-published-results summit="{ summit }"></schedule-admin-view-published-results>
                 <schedule-admin-view-empty-spots summit="{ summit }"></schedule-admin-view-empty-spots>

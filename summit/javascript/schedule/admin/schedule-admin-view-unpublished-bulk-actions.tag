@@ -1,7 +1,7 @@
 <schedule-admin-view-unpublished-bulk-actions>
     <div class="row bulk-actions-container">
         <div class="col-md-4">
-            <input type="checkbox" id="select_all_unpublished" title="select all"/>
+            <input disabled="disabled" type="checkbox" id="select_all_unpublished" title="select all"/>
             <select disabled="disabled" id="bulk-actions-unpublished" name="bulk-actions-unpublished" class="bulk-actions">
                 <option value="">--Select a Bulk Action --</option>
                 <option value="EDIT">Edit</option>
@@ -13,8 +13,25 @@
     </div>
 
     <script>
-    this.bulk_edition_url = opts.bulk_edition_url;
-    var self              = this;
+
+    this.bulk_edition_url  = opts.bulk_edition_url;
+    this.unpublished_store = opts.unpublished_store;
+    var self               = this;
+
+    self.unpublished_store.on(self.unpublished_store.LOAD_STORE,function() {
+        if(self.unpublished_store.isEmpty())
+        {
+            $('#select_all_unpublished').attr('disabled', 'disabled');
+        }
+        else
+        {
+            $('#select_all_unpublished').removeAttr('disabled');
+        }
+        $('#select_all_unpublished').prop('checked', false);
+        $('#bulk-actions-unpublished').val('');
+        $('#apply-bulk-unpublished-action').attr('disabled', 'disabled');
+        $('#bulk-actions-unpublished').attr('disabled', 'disabled');
+    });
 
     this.on('mount', function(){
         $(function() {
