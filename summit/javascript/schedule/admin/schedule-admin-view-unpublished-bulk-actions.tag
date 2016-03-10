@@ -1,14 +1,14 @@
 <schedule-admin-view-unpublished-bulk-actions>
-    <div class="row">
+    <div class="row bulk-actions-container">
         <div class="col-md-4">
+            <input type="checkbox" id="select_all_unpublished" title="select all"/>
             <select disabled="disabled" id="bulk-actions-unpublished" name="bulk-actions-unpublished" class="bulk-actions">
                 <option value="">--Select a Bulk Action --</option>
                 <option value="EDIT">Edit</option>
-                <option value="PUBLISH">Publish</option>
             </select>
         </div>
         <div class="col-md-8">
-            <button disabled="disabled" class="btn btn-default btn-sm" id="apply-bulk-unpublished-action"><i class="fa fa-play">&nbsp;GO</i></button>
+            <button title="Apply Bulk Action" disabled="disabled" class="btn btn-default btn-sm" id="apply-bulk-unpublished-action"><i class="fa fa-play">&nbsp;GO</i></button>
         </div>
     </div>
 
@@ -21,6 +21,22 @@
             $('body').on('click', '.bulk-action-unpublished-selector', function() {
                 var enable = $(".bulk-action-unpublished-selector:checked").length > 0;
                 if(enable)
+                {
+                    $('#apply-bulk-unpublished-action').removeAttr('disabled');
+                    $('#bulk-actions-unpublished').removeAttr('disabled');
+                }
+                else
+                {
+                    $('#bulk-actions-unpublished').val('');
+                    $('#apply-bulk-unpublished-action').attr('disabled', 'disabled');
+                    $('#bulk-actions-unpublished').attr('disabled', 'disabled');
+                }
+            });
+
+            $('#select_all_unpublished').click(function(){
+                var all_checked = $(this).is(':checked');
+                $(".bulk-action-unpublished-selector").prop('checked', all_checked);
+                if(all_checked)
                 {
                     $('#apply-bulk-unpublished-action').removeAttr('disabled');
                     $('#bulk-actions-unpublished').removeAttr('disabled');

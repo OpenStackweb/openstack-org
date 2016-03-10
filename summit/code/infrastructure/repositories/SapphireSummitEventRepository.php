@@ -156,13 +156,13 @@ SQL;
      * @param $end_date
      * @return array
      */
-    public function getPublishedByTimeFrame($summit_id,$start_date, $end_date)
+    public function getPublishedByTimeFrame($summit_id, $start_date, $end_date)
     {
         $summit     = Summit::get()->byID($summit_id);
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
 
         $start_date = $summit->convertDateFromTimeZone2UTC($start_date);
-        $end_date = $summit->convertDateFromTimeZone2UTC($end_date);
+        $end_date   = $summit->convertDateFromTimeZone2UTC($end_date);
 
         $list      = SummitEvent::get()
             ->filter( array('SummitID' => $summit_id, 'Published' => 1 ))
@@ -172,11 +172,11 @@ SQL;
     }
 
     /**
-     * @param ISummit $summit_id
-     * @param array $days
-     * @param string $start_time
-     * @param string $end_time
-     * @param array $locations
+     * @param ISummit $summit
+     * @param $days
+     * @param $start_time
+     * @param $end_time
+     * @param $locations
      * @return array
      */
     public function getPublishedByTimeAndVenue(ISummit $summit, $days, $start_time, $end_time, $locations)

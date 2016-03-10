@@ -23,3 +23,15 @@
 {
     width: 145px;
 }
+
+.alert
+{
+    padding: 5px;
+    width: auto;
+    max-width: 450px;
+    z-index: 10;
+}
+
+.datepicker-dropdown {
+    z-index: 999999;
+}

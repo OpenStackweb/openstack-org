@@ -37,5 +37,5 @@ interface ISummitEventRepository extends IEntityRepository
      * @param $end_date
      * @return array
      */
-    public function getPublishedByTimeFrame($summit_id,$start_date, $end_date);
+    public function getPublishedByTimeFrame($summit_id, $start_date, $end_date);
 }

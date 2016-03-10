@@ -1,6 +1,7 @@
 <schedule-admin-view-published-bulk-actions>
-    <div class="row">
+    <div class="row bulk-actions-container">
         <div class="col-md-4">
+            <input type="checkbox" id="select_all_published" title="select all"/>
             <select disabled="disabled" id="bulk-actions-published" name="bulk-actions-published">
                 <option value="">-- Select a Bulk Action --</option>
                 <option value="EDIT">Edit</option>
@@ -8,7 +9,7 @@
             </select>
         </div>
         <div class="col-md-8">
-            <button disabled="disabled" class="btn btn-default btn-sm" id="apply-bulk-published-action"><i class="fa fa-play">&nbsp;GO</i></button>
+            <button title="Apply Bulk Action" disabled="disabled" class="btn btn-default btn-sm" id="apply-bulk-published-action"><i class="fa fa-play">&nbsp;GO</i></button>
         </div>
     </div>
 
@@ -21,6 +22,22 @@
             $('body').on('click', '.bulk-action-published-selector', function() {
                 var enable = $(".bulk-action-published-selector:checked").length > 0;
                 if(enable)
+                {
+                    $('#apply-bulk-published-action').removeAttr('disabled');
+                    $('#bulk-actions-published').removeAttr('disabled');
+                }
+                else
+                {
+                    $('#bulk-actions-published').val('');
+                    $('#apply-bulk-published-action').attr('disabled', 'disabled');
+                    $('#bulk-actions-published').attr('disabled', 'disabled');
+                }
+            });
+
+            $('#select_all_published').click(function(){
+                var all_checked = $(this).is(':checked');
+                $(".bulk-action-published-selector").prop('checked', all_checked);
+                if(all_checked)
                 {
                     $('#apply-bulk-published-action').removeAttr('disabled');
                     $('#bulk-actions-published').removeAttr('disabled');

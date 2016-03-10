@@ -69,8 +69,16 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 
         Requirements::javascript("themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery-ui-bridge.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
+        if (Director::isLive())
+        {
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
+        }
+        else
+        {
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.js");
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.js");
+        }
         Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
         Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
 
@@ -487,10 +495,10 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        //Requirements::javascript('themes/openstack/bower_assets/clockpicker/dist/bootstrap-clockpicker.min.js');
         Requirements::javascript('openstack/code/utils/CustomHTMLFields/js/jquery-clockpicker.js');
         Requirements::javascript('themes/openstack/bower_assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js');
-        Requirements::javascript('summit/javascript/schedule/admin/bulk-actions.js');
+        Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
+        Requirements::javascript('summit/javascript/summitapp-bulkactions.js');
 
         return $this->getViewer('scheduleViewEditBulkAction')->process($this, array
             (

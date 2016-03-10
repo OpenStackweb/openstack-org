@@ -14,7 +14,6 @@
  **/
 final class SummitService implements ISummitService
 {
-
     /**
      * @var ISummitRepository
      */
@@ -81,7 +80,6 @@ final class SummitService implements ISummitService
         });
     }
 
-
     /**
      * @param SummitEvent $event
      * @throws EntityValidationException
@@ -93,17 +91,48 @@ final class SummitService implements ISummitService
         foreach ($event_on_timeframe as $c_event) {
             // if the published event is BlackoutTime or if there is a BlackoutTime event in this timeframe
             if (!$event->Location()->overridesBlackouts() && ($event->Type()->BlackoutTimes || $c_event->Type()->BlackoutTimes) && $event->ID != $c_event->ID) {
-                throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
+                throw new EntityValidationException
+                (
+                    sprintf
+                    (
+                        "You can't publish Event (%s) %s  on this timeframe, it conflicts with (%s) %s.",
+                        $event->ID,
+                        $event->Title,
+                        $c_event->ID,
+                        $c_event->Title
+                    )
+                );
             }
             // if trying to publish an event on a slot occupied by another event
             if (intval($event->LocationID) == $c_event->LocationID && $event->ID != $c_event->ID) {
-                throw new EntityValidationException("You can't publish on this timeframe, it conflicts with '".$c_event->Title."'");
+                throw new EntityValidationException
+                (
+                    sprintf
+                    (
+                        "You can't publish Event (%s) %s  on this timeframe, it conflicts with (%s) %s.",
+                        $event->ID,
+                        $event->Title,
+                        $c_event->ID,
+                        $c_event->Title
+                    )
+                );
             }
+
             // validate speaker conflict
             if ($event instanceof Presentation && $c_event instanceof Presentation && $event->ID != $c_event->ID) {
                 foreach ($event->Speakers() as $speaker) {
                     if ($c_event->Speakers()->find('ID', $speaker->ID)) {
-                        throw new EntityValidationException("You can't publish on this timeframe, " . $speaker->getName() . " is presenting in room '" . $c_event->getLocationName() . "' at this time.");
+                        throw new EntityValidationException
+                        (
+                            sprintf
+                            (
+                                "You can't publish Event %s (%s) on this timeframe, speaker %s its presention in room %s at this time.",
+                                $event->Title,
+                                $event->ID,
+                                $speaker->getName(),
+                                $c_event->getLocationName()
+                            )
+                        );
                     }
                 }
             }
@@ -126,7 +155,6 @@ final class SummitService implements ISummitService
             return $event;
         });
     }
-
 
     /**
      * @param ISummit $summit
@@ -256,6 +284,7 @@ final class SummitService implements ISummitService
         }
         return $event;
     }
+
     /**
      * @param ISummit $summit
      * @param array $event_data
@@ -430,6 +459,60 @@ final class SummitService implements ISummitService
             }
 
             return $attendee;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateAndPublishBulkEvents(ISummit $summit, array $data)
+    {
+        $event_repository = $this->event_repository;
+        $this_var         = $this;
+
+        $this->tx_service->transaction(function() use($summit, $data, $event_repository, $this_var){
+
+            $events = $data['events'];
+            foreach($events as $event_dto) {
+                $event = $event_repository->getById($event_dto['id']);
+                if(is_null($event)) throw new NotFoundEntityException('SummitEvent');
+                if(intval($event->SummitID) !== $summit->getIdentifier()) throw new EntityValidationException('SummitEvent does not belong to Summit!');
+
+                $event->LocationID = intval($event_dto['location_id']);
+                $event->setStartDate(sprintf("%s %s", $event_dto['start_date'], $event_dto['start_time']));
+                $event->setEndDate(sprintf("%s %s", $event_dto['end_date'], $event_dto['end_time']));
+                $this_var->validateBlackOutTimesAndTimes($event);
+                $event->unPublish();
+                $event->publish();
+                $event->write();
+            }
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateBulkEvents(ISummit $summit, array $data)
+    {
+        $event_repository = $this->event_repository;
+        $this_var         = $this;
+
+        $this->tx_service->transaction(function() use($summit, $data, $event_repository, $this_var){
+
+            $events = $data['events'];
+            foreach($events as $event_dto) {
+                $event = $event_repository->getById($event_dto['id']);
+                if(is_null($event)) throw new NotFoundEntityException('SummitEvent');
+                if(intval($event->SummitID) !== $summit->getIdentifier()) throw new EntityValidationException('SummitEvent does not belong to Summit!');
+
+                $event->LocationID = intval($event_dto['location_id']);
+                $event->setStartDate(sprintf("%s %s", $event_dto['start_date'], $event_dto['start_time']));
+                $event->setEndDate(sprintf("%s %s", $event_dto['end_date'], $event_dto['end_time']));
+                $event->unPublish();
+                $event->write();
+            }
         });
     }
 }
