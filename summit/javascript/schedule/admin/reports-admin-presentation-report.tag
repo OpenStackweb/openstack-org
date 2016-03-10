@@ -3,40 +3,50 @@
     this.root.innerHTML = opts.content
 </raw>
 
-<reports-admin-speaker-report>
+<reports-admin-presentation-report>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Speakers ({ page_data.total })</div>
+        <div class="panel-heading">Presentations ({ page_data.total })</div>
 
         <table class="table">
             <thead>
                 <tr>
+                    <th class="sortable" data-sort="presentation" data-dir="ASC">Presentation</th>
+                    <th class="center_text">Published</th>
+                    <th>Status</th>
+                    <th>Track</th>
+                    <th class="sortable sorted" data-sort="start_date" data-dir="ASC">Start Date<i class="fa fa-caret-up"></i></th>
+                    <th>Location</th>
                     <th>Speaker Id</th>
                     <th>Member Id</th>
-                    <th class="sortable sorted" data-sort="name" data-dir="ASC">Speaker<i class="fa fa-caret-up"></i></th>
+                    <th class="sortable" data-sort="name" data-dir="ASC">Speaker</th>
                     <th>Email</th>
                     <th>Phone On Site</th>
-                    <th>Company</th>
-                    <th>Presentation</th>
-                    <th>Track</th>
+                    <th>Code Type</th>
+                    <th>Promo Code</th>
                     <th class="center_text">Confirmed?</th>
                     <th data-sort="registered" data-dir="ASC" class="center_text sortable">Registered?</th>
                     <th data-sort="checked_in" data-dir="ASC" class="center_text sortable">Checked In?</th>
                 </tr>
             </thead>
             <tbody>
-                <tr each={ speaker, i in speakers } data-id="{ speaker.id }">
-                    <td>{ speaker.speaker_id }</td>
-                    <td>{ speaker.member_id }</td>
-                    <td>{ speaker.name }</td>
-                    <td>{ speaker.email }</td>
-                    <td><input type="text" class="phone" value={ speaker.phone } /></td>
-                    <td>{ speaker.company }</td>
-                    <td>{ speaker.presentation }</td>
-                    <td>{ speaker.track }</td>
-                    <td class="center_text"><i class={ fa: true, fa-check: speaker.confirmed, fa-times: !speaker.confirmed } ></i></td>
-                    <td class="center_text"><input type="checkbox" class="registered" checked={ speaker.registered } /></td>
-                    <td class="center_text"><input type="checkbox" class="checked_in" checked={ speaker.checked_in } /></td>
+                <tr each={ presentation, i in presentations } data-id="{ presentation.assistance_id }">
+                    <td>{ presentation.title }</td>
+                    <td class="center_text"><i class={ fa: true, fa-check: presentation.published, fa-times: !presentation.published } ></i></td>
+                    <td>{ presentation.status }</td>
+                    <td>{ presentation.track }</td>
+                    <td>{ presentation.start_date }</td>
+                    <td>{ presentation.location }</td>
+                    <td>{ presentation.speaker_id }</td>
+                    <td>{ presentation.member_id }</td>
+                    <td>{ presentation.name }</td>
+                    <td>{ presentation.email }</td>
+                    <td><input type="text" class="phone" value={ presentation.phone } /></td>
+                    <td>{ presentation.code_type }</td>
+                    <td>{ presentation.promo_code }</td>
+                    <td class="center_text"><i class={ fa: true, fa-check: presentation.confirmed, fa-times: !presentation.confirmed } ></i></td>
+                    <td class="center_text"><input type="checkbox" class="registered" checked={ presentation.registered } /></td>
+                    <td class="center_text"><input type="checkbox" class="checked_in" checked={ presentation.checked_in } /></td>
                 </tr>
             </tbody>
         </table>
@@ -48,7 +58,7 @@
     <script>
         this.page_data       = {total: 100, limit: opts.page_limit, page: 1};
         this.summit_id       = opts.summit_id;
-        this.speakers        = [];
+        this.presentations   = [];
         var self             = this;
 
 
@@ -70,10 +80,10 @@
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/speaker_report',
+            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/presentation_report',
                 {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir},
                 function(data){
-                    self.speakers = data.data;
+                    self.presentations = data.data;
                     self.page_data.page = page;
                     self.page_data.total = data.total;
 
@@ -100,4 +110,4 @@
 
     </script>
 
-</reports-admin-speaker-report>
+</reports-admin-presentation-report>

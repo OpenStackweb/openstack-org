@@ -8,7 +8,7 @@
     <div class="panel panel-default" each="{ key, day in data }">
         <div class="panel-heading">{ key }</div>
 
-        <table id="report-table-{ key }" class="table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Time</th>

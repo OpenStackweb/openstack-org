@@ -444,29 +444,32 @@ final class SummitService implements ISummitService
      * @param array $assistance_data
      * @return mixed
      */
-    public function updateAssistance(ISummit $summit, array $assistance_data)
+    public function updateAssistanceBatch(ISummit $summit, array $data)
     {
         $assistance_repository = $this->assistance_repository;
-        return $this->tx_service->transaction(function() use($summit, $assistance_data, $assistance_repository){
+        $this->tx_service->transaction(function() use($summit, $data, $assistance_repository){
 
-            if(!isset($assistance_data['id']))
-                throw new EntityValidationException('missing required param: id');
+            foreach ($data as $assistance_data) {
+                if(!isset($assistance_data['id']))
+                    throw new EntityValidationException('missing required param: id');
 
-            $assistance_id = intval($assistance_data['id']);
+                $assistance_id = intval($assistance_data['id']);
 
-            $assistance = $assistance_repository->getById($assistance_id);
+                $assistance = $assistance_repository->getById($assistance_id);
 
-            if(is_null($assistance))
-                throw new NotFoundEntityException('Speaker Assistance', sprintf('id %s', $assistance_id));
+                if(is_null($assistance))
+                    throw new NotFoundEntityException('Speaker Assistance', sprintf('id %s', $assistance_id));
 
-            if(intval($assistance->SummitID) !== intval($summit->getIdentifier()))
-                throw new EntityValidationException('speaker assistance doest not belong to summit');
+                if(intval($assistance->SummitID) !== intval($summit->getIdentifier()))
+                    throw new EntityValidationException('speaker assistance doest not belong to summit');
 
-            $assistance->CheckedIn = $assistance_data['checked_in'];
+                $assistance->OnSitePhoneNumber = $assistance_data['phone'];
+                $assistance->RegisteredForSummit = $assistance_data['registered'];
+                $assistance->CheckedIn = $assistance_data['checked_in'];
 
-            $assistance->write();
+                $assistance->write();
+            }
 
-            return $assistance;
         });
     }
 }

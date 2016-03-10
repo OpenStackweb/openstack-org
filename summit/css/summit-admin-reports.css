@@ -13,3 +13,12 @@
 th .fa {
     margin-left: 5px;
 }
+
+.table {
+    font-size: 10px;
+}
+
+
+#page-content-wrapper {
+    width: 83%;
+}
