@@ -60,7 +60,7 @@
                         seriesDefaults:{
                             renderer:$.jqplot.PieRenderer,
                             trendline:{ show:false },
-                            rendererOptions: { padding: 8, showDataLabels: true }
+                            rendererOptions: { padding: 8, showDataLabels: true, startAngle: -90 }
                         },
                         legend:{
                             show:true

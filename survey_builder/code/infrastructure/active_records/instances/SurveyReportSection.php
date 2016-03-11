@@ -86,6 +86,9 @@ class SurveyReportSection extends DataObject {
                 $extra_label = 'NPS: '.($promoter_perc - $detractor_perc).'%';
             }
 
+            //sort results
+            arsort($values);
+
             $questions[] = array(
                 'ID'         => $graph->Question()->ID,
                 'Graph'      => $graph->Type,
