@@ -34,6 +34,14 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
      */
     private $summit_service;
 
+    /**
+     * SummitAppEventsApi constructor.
+     * @param ISummitRepository $summit_repository
+     * @param ISummitEventRepository $summitevent_repository
+     * @param ISummitAttendeeRepository $summitattendee_repository
+     * @param ISummitPresentationRepository $summitpresentation_repository
+     * @param ISummitService $summit_service
+     */
     public function __construct
     (
         ISummitRepository $summit_repository,
@@ -69,21 +77,26 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         return true;
     }
 
-
     static $url_handlers = array(
         'POST '                       => 'createEvent',
+        'PUT bulk'                    => 'updateBulkEvents',
+        'PUT publish/bulk'            => 'updateAndPublishBulkEvents',
         'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'PUT $EVENT_ID!'              => 'updateEvent',
         'GET unpublished/$Source!'    => 'getUnpublishedEventsBySource',
-        'DELETE $EVENT_ID!/unpublish' => 'unpublishEvent',
+        'DELETE unpublish/bulk'       => 'unPublishBulkEvents',
+        'DELETE $EVENT_ID!/unpublish' => 'unPublishEvent',
     );
 
     static $allowed_actions = array(
         'getUnpublishedEventsBySource',
         'publishEvent',
-        'unpublishEvent',
+        'unPublishEvent',
         'createEvent',
         'updateEvent',
+        'updateBulkEvents',
+        'updateAndPublishBulkEvents',
+        'unPublishBulkEvents',
     );
 
     public function getUnpublishedEventsBySource(SS_HTTPRequest $request) {
@@ -203,10 +216,10 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
         }
-        catch(NotFoundEntityException $ex2)
+        catch(NotFoundEntityException $ex3)
         {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessages());
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessage());
         }
         catch(Exception $ex)
         {
@@ -215,7 +228,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         }
     }
 
-    public function unpublishEvent(SS_HTTPRequest $request){
+    public function unPublishEvent(SS_HTTPRequest $request){
 
         try
         {
@@ -235,10 +248,10 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
         }
-        catch(NotFoundEntityException $ex2)
+        catch(NotFoundEntityException $ex3)
         {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessage());
         }
         catch(Exception $ex)
         {
@@ -266,15 +279,10 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
         }
-        catch(ValidationException $ex2)
-        {
-            SS_Log::log($ex2->getResult()->messageList(), SS_Log::WARN);
-            return $this->validationError($ex2->getResult()->messageList());
-        }
         catch(NotFoundEntityException $ex3)
         {
             SS_Log::log($ex3->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex3->getMessages());
+            return $this->notFound($ex3->getMessage());
         }
         catch(Exception $ex)
         {
@@ -304,15 +312,10 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
         }
-        catch(ValidationException $ex2)
-        {
-            SS_Log::log($ex2->getResult()->messageList(), SS_Log::WARN);
-            return $this->validationError($ex2->getResult()->messageList());
-        }
         catch(NotFoundEntityException $ex3)
         {
             SS_Log::log($ex3->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex3->getMessages());
+            return $this->notFound($ex3->getMessage());
         }
         catch(Exception $ex)
         {
@@ -320,4 +323,92 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             return $this->serverError();
         }
     }
+
+    public function updateBulkEvents(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data = $this->getJsonRequest();
+            $this->summit_service->updateBulkEvents($summit, $data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function updateAndPublishBulkEvents(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data = $this->getJsonRequest();
+            $this->summit_service->updateAndPublishBulkEvents($summit, $data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function unPublishBulkEvents(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data = $this->getJsonRequest();
+            $this->summit_service->unPublishBulkEvents($summit, $data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
 }

@@ -51,6 +51,10 @@ function publishedEventsStore(){
         return this._published_events[event_id];
     }
 
+    this.isEmpty = function() {
+        return Object.keys(this._published_events).length  == 0;
+    }
+
     this.delete = function(event_id)
     {
         var item = this.get(event_id);

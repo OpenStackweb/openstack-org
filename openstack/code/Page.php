@@ -244,6 +244,11 @@ class Page_Controller extends ContentController
         return $this;
     }
 
+    public function getTime()
+    {
+        return time();
+    }
+
     protected function CustomScripts()
     {
         $js_files = array(

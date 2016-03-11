@@ -57,4 +57,30 @@ interface ISummitService
      */
     public function reassignTicket(ISummit $summit, $ticket_id, $member_id);
 
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateAndPublishBulkEvents(ISummit $summit, array $data);
+
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateBulkEvents(ISummit $summit, array $data);
+
+
+    /**
+     * @param ISummit $summit
+     * @param array $event_ids
+     */
+    public function unPublishBulkEvents(ISummit $summit, array $event_ids);
+
+    /**
+     * @param ISummit $summit
+     * @param array $assistance_data
+     * @return mixed
+     */
+    public function updateAssistance(ISummit $summit, array $assistance_data);
+
 }

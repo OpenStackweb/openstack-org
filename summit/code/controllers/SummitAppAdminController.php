@@ -16,6 +16,10 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 {
 
     /**
+     * @var ISummitEventRepository
+     */
+    private $event_repository;
+    /**
      * Return a map of permission codes to add to the dropdown shown in the Security section of the CMS.
      * array(
      *   'VIEW_SITE' => 'View the site',
@@ -65,11 +69,20 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 
         Requirements::javascript("themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery-ui-bridge.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
+        if (Director::isLive())
+        {
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
+        }
+        else
+        {
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.js");
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.js");
+        }
         Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
         Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
 
+        $this->event_repository = new SapphireSummitEventRepository();
     }
 
     private static $url_segment = 'summit-admin';
@@ -89,6 +102,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'editAttendee',
         'editSummit',
         'scheduleView',
+        'scheduleViewEditBulkAction',
     );
 
     private static $url_handlers = array
@@ -96,6 +110,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/dashboard'                                       => 'dashboard',
         '$SummitID!/reports'                                         => 'reports',
         '$SummitID!/events/published'                                => 'publishedEvents',
+        '$SummitID!/events/bulk-action'                              => 'scheduleViewEditBulkAction',
         '$SummitID!/events/schedule'                                 => 'scheduleView',
         '$SummitID!/events/unpublished'                              => 'pendingEvents',
         '$SummitID!/events/presentation-lists/$PresentationListId!'  => 'editPresentationList',
@@ -412,14 +427,13 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     public function scheduleView(SS_HTTPRequest $request)
     {
         Requirements::css('summit/css/simple-sidebar.css');
-        // Requirements::css('summit/css/summit-admin-schedule.css');
         Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        $summit_id = intval($this->request->param('SummitID'));
+        $summit_id = intval($request->param('SummitID'));
         $summit    = Summit::get()->byID($summit_id);
         if(is_null($summit) || $summit->ID <= 0) return $this->httpError(404);
 
@@ -443,6 +457,55 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                         new ArrayData(array('Status'=> 'alternate')),
                     )
                 ),
+            )
+        );
+    }
+
+    public function scheduleViewEditBulkAction(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+        $action    = $request->getVar('action');
+        $type      = $request->getVar('type');
+        $event_ids = $request->getVar('event_ids');
+
+        if(empty($action)) throw new InvalidArgumentException('action');
+        if(empty($type)) throw new InvalidArgumentException('type');
+        if(empty($event_ids)) throw new InvalidArgumentException('event_ids');
+
+        $event_ids = explode(',', $event_ids);
+
+
+
+        $summit    = Summit::get()->byID($summit_id);
+        if(is_null($summit) || $summit->ID <= 0) return $this->httpError(404);
+
+        $events = new ArrayList();
+        foreach($event_ids as $event_id)
+        {
+            $event = $this->event_repository->getById(intval($event_id));
+            if(is_null($event) || $event->SummitID != $summit_id) continue;
+            $events->push($event);
+        }
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('themes/openstack/bower_assets/clockpicker/dist/bootstrap-clockpicker.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css');
+        Requirements::css('summit/css/bulk-actions.css');
+
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('openstack/code/utils/CustomHTMLFields/js/jquery-clockpicker.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
+        Requirements::javascript('summit/javascript/summitapp-bulkactions.js');
+
+        return $this->getViewer('scheduleViewEditBulkAction')->process($this, array
+            (
+                'Summit'            => $summit,
+                'Events'            => $events,
+                'UnpublishedEvents' => $type === 'unpublished',
             )
         );
     }
@@ -472,7 +535,4 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                     )
             );
     }
-
-
-
 }
