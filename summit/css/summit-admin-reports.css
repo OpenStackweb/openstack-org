@@ -20,5 +20,5 @@ th .fa {
 
 
 #page-content-wrapper {
-    width: 83%;
+    min-width: 83%;
 }
