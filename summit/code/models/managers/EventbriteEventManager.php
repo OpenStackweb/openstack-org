@@ -92,7 +92,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
 
             $old_one = $repository->getByApiUrl($api_url);
             if ($old_one) {
-                throw new EntityAlreadyExistsException('IEventbriteEvent');
+                throw new EntityAlreadyExistsException('EventbriteEvent', sprintf("type %s - url %s", $type, $api_url));
             }
 
             $new_event = $factory->build($type, $api_url);

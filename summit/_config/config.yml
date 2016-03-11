@@ -81,3 +81,9 @@ SummitTicketType:
 PresentationCategoryGroup:
   extensions:
     - SummitEntity
+SummitLocationMap:
+  extensions:
+    - SummitEntity
+SummitLocationImage:
+  extensions:
+    - SummitEntity
