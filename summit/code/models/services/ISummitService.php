@@ -76,4 +76,11 @@ interface ISummitService
      */
     public function unPublishBulkEvents(ISummit $summit, array $event_ids);
 
+    /**
+     * @param ISummit $summit
+     * @param array $assistance_data
+     * @return mixed
+     */
+    public function updateAssistance(ISummit $summit, array $assistance_data);
+
 }

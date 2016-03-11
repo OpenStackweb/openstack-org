@@ -1,5 +1,4 @@
 <schedule-admin-view-unpublished-event>
-
     <div class="event resizable event-unpublished unselectable { getCSSClassBySelectionStatus(data.status) }" id="event_{ data.id }" data-id="{ data.id }">
         <div class="ui-resizable-handle ui-resizable-n" style="display:none">
             <span class="ui-icon ui-icon-triangle-1-n"></span>

@@ -119,7 +119,7 @@ class MemberManager implements IMemberManager
 
                 foreach($mandatory_fields as $mf => $fn){
                     if (!isset($data[$mf]) || empty($data[$mf])) {
-                        throw new EntityValidationException(sprintf('% is a mandatory field!.',$fn));
+                        throw new EntityValidationException(sprintf('%s is a mandatory field!.',$fn));
                     }
                 }
 
@@ -174,7 +174,7 @@ class MemberManager implements IMemberManager
                 return $member;
             });
         }
-        catch(ValidationException $ex1)
+        catch(EntityValidationException $ex1)
         {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             throw $ex1;
