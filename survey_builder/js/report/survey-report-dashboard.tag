@@ -2,11 +2,12 @@
     <h2>{ section.Name }</h2>
     <p>{ section.Description }</p>
     <div id="dashboard">
-        <div class="graph_box { question.Graph }" each="{ question in section.Questions }">
+        <div class="graph_box { question.Graph }" each="{ question in section.Questions }" if={ Object.keys(question.Values).length }>
             <div class="graph_title">{ question.Title }</div>
             <div id="graph_{ question.ID }" class="graph"></div>
+            <span class="label_extra" if={ question.ExtraLabel }>{ question.ExtraLabel }</span>
             <span class="label_n">n={ question.Total }</span>
-            <div id="image_graph_{ question.ID }"></div>
+            <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -22,7 +23,9 @@
                 for (var key in self.section.Questions) {
                     var values =  self.section.Questions[key].Values;
                     var graph_type = self.section.Questions[key].Graph;
-                    self.renderGraph('graph_'+self.section.Questions[key].ID, values, graph_type);
+                    if (Object.keys(values).length) {
+                        self.renderGraph('graph_'+self.section.Questions[key].ID, values, graph_type);
+                    }
                 }
             }
         });
@@ -45,35 +48,49 @@
 
         renderGraph(graph_id, values, graph_type) {
             var graph_data = [];
-            for (var label in values) {
-                graph_data.push([label, values[label]])
-            }
 
-            var plot1 = $.jqplot(graph_id, [graph_data], {
-                gridPadding: {top:30, bottom:0, left:0, right:0},
-                seriesDefaults:{
-                    renderer:self.getGraphRenderer(graph_type),
-                    trendline:{ show:false },
-                    rendererOptions: { padding: 8, showDataLabels: true }
-                },
-                legend:{
-                    show:true
-                },
-                grid:{borderColor:'transparent',shadow:false,drawBorder:false}
-            });
-
-        }
-
-        getGraphRenderer(graph_type) {
-            switch(graph_type) {
+            switch (graph_type) {
                 case 'pie':
-                    return $.jqplot.PieRenderer;
+                    for (var label in values) {
+                        graph_data.push([label, values[label]])
+                    }
+
+                    var plot1 = $.jqplot(graph_id, [graph_data], {
+                        gridPadding: {top:30, bottom:0, left:0, right:0},
+                        seriesDefaults:{
+                            renderer:$.jqplot.PieRenderer,
+                            trendline:{ show:false },
+                            rendererOptions: { padding: 8, showDataLabels: true }
+                        },
+                        legend:{
+                            show:true
+                        },
+                        grid:{borderColor:'transparent',shadow:false,drawBorder:false}
+                    });
                     break;
-                case 'bar':
-                    return $.jqplot.BarRenderer;
-                    break;
-                default :
-                    return $.jqplot.BarRenderer;
+                case 'bars':
+                    var s1 = [];
+                    var ticks = [];
+
+                    for (var label in values) {
+                        var first_word = label.split(' ')[0];
+                        s1.push(values[label]);
+                        ticks.push(first_word);
+                    }
+
+                    var plot1 = $.jqplot(graph_id, [s1], {
+                        seriesDefaults:{
+                            renderer:$.jqplot.BarRenderer,
+                            pointLabels: { show: true }
+                        },
+                        axes: {
+                            xaxis: {
+                                renderer: $.jqplot.CategoryAxisRenderer,
+                                ticks: ticks
+                            }
+                        },
+                        highlighter: { show: false }
+                    });
                     break;
             }
         }

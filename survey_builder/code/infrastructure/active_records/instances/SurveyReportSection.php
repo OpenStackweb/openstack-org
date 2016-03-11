@@ -52,16 +52,38 @@ class SurveyReportSection extends DataObject {
         foreach ($this->Graphs()->sort('Order') as $graph) {
             $values = array();
             $total = 0;
+            $extra_label = '';
 
             $answers = $repository->getByQuestionAndFilters($graph->Question()->ID, $filters);
 
             foreach ($answers as $answer) {
+                if (!$answer['Value']) continue;
+
                 $answer_text = $answer['Value'];
+                // NPS mapping
+                if ($graph->Question()->Name == 'NetPromoter') {
+                    if ($answer_text < 7) {
+                        $answer_text = 'Detractor';
+                    } else if ($answer_text < 9) {
+                        $answer_text = 'Neutral';
+                    } else {
+                        $answer_text = 'Promoter';
+                    }
+
+
+                }
+                // end NPS mapping
                 if (!isset($values[$answer_text]))
                     $values[$answer_text] = 0;
 
                 $values[$answer_text]++;
                 $total++;
+            }
+
+            if ($graph->Question()->Name == 'NetPromoter') {
+                $promoter_perc = round(($values['Promoter'] / $total) * 100);
+                $detractor_perc = round(($values['Detractor'] / $total) * 100);
+                $extra_label = 'NPS: '.($promoter_perc - $detractor_perc).'%';
             }
 
             $questions[] = array(
@@ -70,6 +92,7 @@ class SurveyReportSection extends DataObject {
                 'Title'      => $graph->Label,
                 'Values'     => $values,
                 'Total'      => $total,
+                'ExtraLabel' => $extra_label,
             );
         }
 
