@@ -54,22 +54,6 @@
                 </div>
             </div>
             <div class="info col2">
-                <% if $Event.Summit.CurrentUser() %>
-                <div class="info_item">
-                    <div id="remove_from_my_schedule" <% if $isEventOnMySchedule($Event.ID) == 0 %> style="display:none" <% end_if %>>
-                        <span onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
-                            <i class="fa fa-2x fa-check-circle icon-own-event"></i>
-                            My&nbsp;calendar
-                        </span>
-                    </div>
-                    <div id="add_to_my_schedule" <% if $isEventOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
-                        <span onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
-                            <i class="fa fa-2x fa-plus-circle icon-foreign-event" ></i>
-                            My&nbsp;calendar
-                        </span>
-                    </div>
-                </div>
-                <% end_if %>
                 <div class="info_item">
                     <div class="info_item_icon"><i class="fa fa-2x fa-clock-o icon-clock"></i></div>
                     <div class="info_item_text">$Event.DateNice()</div>
@@ -118,16 +102,10 @@
             <% loop Event.getSpeakers() %>
             <div class="row speaker_profile">
                 <div class="speaker_pic img-circle">
-                    <a href="{$Top.AbsoluteLink}speakers/{$ID}">
-                        <img src="$ProfilePhoto(100)" width="100" class="img-circle" />
-                    </a>
+                    <% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %><img src="$ProfilePhoto(100)" class="img-circle speaker-photo" /><% if AvailableForBureau %></a><% end_if %>
                 </div>
                 <div class="speaker_info">
-                    <div class="speaker_name">
-                        <a href="{$Top.AbsoluteLink}speakers/{$ID}">
-                            $FirstName $LastName
-                        </a>
-                    </div>
+                    <div class="speaker_name"> <% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %>$FirstName $LastName<% if AvailableForBureau %></a><% end_if %></div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
                     <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
                 </div>

@@ -4,7 +4,7 @@
 <div class="candidate span-14">
 
     <% with Profile %>
-        <% cached 'speaker_profile_page', $Profile.ID %>
+        <% cached "speaker_profile_page", $ID, $qLastEdited %>
         <div class="span-4">
             <img src="$ProfilePhoto()"/>
         </div>

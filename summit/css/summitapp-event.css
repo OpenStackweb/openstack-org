@@ -191,6 +191,7 @@
 }
 
 .speaker_info {
+    padding-top: 8px;
 }
 
 .speaker_name {
@@ -291,4 +292,10 @@
 .icon-own-event
 {
     color:#5BC86B;
+}
+
+.speaker-photo
+{
+    width: 120px;
+    height: 120px;
 }

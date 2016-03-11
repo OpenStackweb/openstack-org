@@ -96,16 +96,7 @@ class SpeakerListPage_Controller extends Page_Controller
 
     function findSpeaker($SpeakerID)
     {
-        $SpeakerID = intval($SpeakerID);
-        $query = PresentationSpeaker::get()->where(" ID = {$SpeakerID}")->sql();
-        $res = DB::query($query . ' LOCK IN SHARE MODE');
-        if ($res->numRecords() > 0) {
-            $Speaker = new PresentationSpeaker($res->first());
-            // Check to make sure they are in the foundation membership group
-            If ($Speaker && $Speaker->AvailableForBureau == 1) {
-                return $Speaker;
-            }
-        }
+        return PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID,'AvailableForBureau'=>1))->first();
     }
 
     public function suggestions()
