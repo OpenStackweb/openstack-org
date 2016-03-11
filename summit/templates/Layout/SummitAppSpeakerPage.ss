@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-2">
                         <div class="row">
-                            <img src="$ProfilePhoto(150)" width="150" class="img-circle" />
+                            <% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %><img src="$ProfilePhoto(100)" class="img-circle speaker-photo-big" /><% if AvailableForBureau %></a><% end_if %>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-10">
