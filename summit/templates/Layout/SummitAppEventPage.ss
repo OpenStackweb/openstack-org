@@ -39,19 +39,7 @@
                 </div>
                 <% end_if %>
 
-                <div class="share">
-                    <script type="application/javascript">
-                            var share_info =
-                            {
-                                url: "{$AbsoluteLink}event/{$Event.ID}",
-                                title : "{$Event.Title.JS}",
-                                description: "{$Event.ShortDescription().JS}",
-                                image: "",
-                                fb_app_id : "227356147446887",
-                            };
-                    </script>
-                    <share-buttons share_info="{ share_info }"></share-buttons>
-                </div>
+
             </div>
             <div class="info col2">
                 <div class="info_item">
@@ -87,6 +75,19 @@
                     <% end_loop %>
                 </div>
                 <% end_if %>
+                <div class="share">
+                    <script type="application/javascript">
+                            var share_info =
+                            {
+                                url: "{$AbsoluteLink}event/{$Event.ID}",
+                                title : "{$Event.Title.JS}",
+                                description: "{$Event.ShortDescription().JS}",
+                                image: "",
+                                fb_app_id : "227356147446887",
+                            };
+                    </script>
+                    <share-buttons share_info="{ share_info }"></share-buttons>
+                </div>
             </div>
         </div>
     </div>
