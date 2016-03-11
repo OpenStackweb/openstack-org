@@ -541,10 +541,10 @@ final class SummitService implements ISummitService
 
     /**
      * @param ISummit $summit
-     * @param array $assistance_data
+     * @param array $data
      * @return mixed
      */
-    public function updateAssistanceBatch(ISummit $summit, array $data)
+    public function updateAssistance(ISummit $summit, array $data)
     {
         $assistance_repository = $this->assistance_repository;
         $this->tx_service->transaction(function() use($summit, $data, $assistance_repository){
@@ -572,4 +572,5 @@ final class SummitService implements ISummitService
 
         });
     }
+
 }
