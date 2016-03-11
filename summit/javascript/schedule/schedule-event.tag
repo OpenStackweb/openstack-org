@@ -8,13 +8,18 @@
                         <div class="col-xs-12 col-md-3 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>
                             <span if={ show_date }>{ date_nice }</span>
-                            &nbsp;<span>{ start_time }</span>&nbsp;/&nbsp;<span>{ end_time }</span>
+                            &nbsp;<span>{ start_time }</span>-<span>{ end_time }</span>
                         </div>
                         <div class="col-xs-12 col-md-7 col-location"><i if={ summit.should_show_venues } class="fa fa-map-marker icon-map"></i>&nbsp;<span if={ summit.should_show_venues } >{ locationName(location_id) }</span></div>
                         <div class="col-xs-12 col-md-2 my-schedule-container" if={ parent.summit.current_user !== null } >
-                            <i if={ !own } class="fa fa-plus-circle icon-foreign-event icon-event-action" title="add to my schedule" onclick={ addToMySchedule } ></i>
-                            <i if={ own } class="fa fa-check-circle icon-own-event icon-event-action" title="remove from my schedule" onclick={ removeFromMySchedule } ></i>
-                            <span>My&nbsp;calendar</span>
+                            <span if={ !own } onclick={ addToMySchedule } title="add to my schedule" class="icon-event-action">
+                                <i class="fa fa-plus-circle icon-foreign-event" ></i>
+                                My&nbsp;calendar
+                            </span>
+                            <span if={ own } onclick={ removeFromMySchedule } title="remove from my schedule" class="icon-event-action">
+                                <i class="fa fa-check-circle icon-own-event"></i>
+                                My&nbsp;calendar
+                            </span>
                         </div>
                     </div>
                     <div class="row">
@@ -62,7 +67,9 @@
                         <div class="col-md-3">
                             <div data-speaker-id={ speaker_id } class="row speaker-row" each={ speaker_id in speakers_id }>
                                 <div class="col-md-4">
-                                    <img src="{ summit.speakers[speaker_id].profile_pic }" class="img-circle profile-pic" alt="{ summit.speakers[speaker_id].name }">
+                                    <a href={ parent.base_url+'speakers/'+ this.speaker_id }>
+                                        <img src="{ summit.speakers[speaker_id].profile_pic }" class="img-circle profile-pic" alt="{ summit.speakers[speaker_id].name }">
+                                    </a>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row speaker-name-row"><div class="col-md-12"><a href={ parent.base_url+'speakers/'+ this.speaker_id }>{ summit.speakers[speaker_id].name }</a></div></div>

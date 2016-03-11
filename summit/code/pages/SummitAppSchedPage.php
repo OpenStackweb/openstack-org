@@ -100,6 +100,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-event.css");
+        Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
         return $this->renderWith(array('SummitAppEventPage', 'SummitPage', 'Page'), array('Event' => $event));
     }

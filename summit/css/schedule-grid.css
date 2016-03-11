@@ -19,6 +19,10 @@ body
     font-family: Montserrat, Sans-serif;
 }
 
+i.collapse-nav {
+    color: white;
+}
+
 .col-main-title
 {
     background-color: #132539;

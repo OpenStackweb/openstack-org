@@ -156,7 +156,7 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         if ($start_date == 'TBD' || $end_date == 'TBD') return $start_date;
 
-        $date_nice = date('l j-F, g:i a',strtotime($start_date)).' / '.date('g:i a',strtotime($end_date));
+        $date_nice = date('l, F j, g:ia',strtotime($start_date)).'-'.date('g:ia',strtotime($end_date));
         return $date_nice;
     }
 
@@ -559,7 +559,7 @@ SQL;
     public function getStartTime()
     {
         $date = new Datetime($this->getStartDate());
-        return $date->format('g:i a');
+        return $date->format('g:ia');
     }
 
     public function getStartTimeHMS()
@@ -597,7 +597,7 @@ SQL;
     public function getEndTime()
     {
         $date = new Datetime($this->getEndDate());
-        return $date->format('g:i a');
+        return $date->format('g:ia');
     }
 
     public function getEndTimeHMS()

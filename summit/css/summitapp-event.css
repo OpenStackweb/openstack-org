@@ -199,6 +199,10 @@
     font-weight: bold;
 }
 
+.speaker_name a {
+    color: #4a4a4a;
+}
+
 .speaker_job_title {
     color: #AAAAAA;
     font-size: 14px;
@@ -264,4 +268,27 @@
 
 .more_comments {
     cursor: pointer;
+}
+
+.icon-foreign-event, .icon-own-event, .icon-event-action
+{
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+.icon-event-action i{
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+
+.icon-foreign-event
+{
+    color:#CDCDCD;
+}
+
+.icon-own-event
+{
+    color:#5BC86B;
 }
