@@ -67,7 +67,7 @@ $(document).ready(function(){
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'api/v1/summits/'+summit_id+'/speakers?query=%QUERY',
+            url: 'api/v1/summits/'+summit_id+'/speakers/%QUERY',
             wildcard: '%QUERY'
         }
     });
@@ -172,7 +172,7 @@ $(document).ready(function(){
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'api/v1/summits/'+summit_id+'/speakers?query=%QUERY',
+            url: 'api/v1/summits/'+summit_id+'/speakers/%QUERY',
             wildcard: '%QUERY'
         }
     });

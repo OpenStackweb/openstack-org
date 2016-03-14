@@ -73,7 +73,7 @@ class SummitAppMembersApi extends AbstractRestfulJsonApi {
             $summit       = Summit::get_by_id('Summit',$summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $members = DB::query("SELECT M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',M.ID,')') AS name FROM Member AS M
+            $members = DB::query("SELECT M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',M.Email,')') AS name FROM Member AS M
 
                                     WHERE
                                     (
@@ -96,15 +96,15 @@ class SummitAppMembersApi extends AbstractRestfulJsonApi {
                                         G.Code = '".IFoundationMember::FoundationMemberGroupSlug."'
                                       )
                                     )
-                                    ORDER BY M.FirstName, M.Surname LIMIT 10;");
+                                    ORDER BY M.FirstName, M.Surname LIMIT 25;");
 
-            $json_array = array();
+            $data = array();
             foreach ($members as $member) {
 
-                $json_array[] = $member;
+                $data[] = $member;
             }
 
-            echo json_encode($json_array);
+            return $this->ok($data);
         }
         catch(NotFoundEntityException $ex2)
         {

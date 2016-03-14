@@ -103,6 +103,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'editSummit',
         'scheduleView',
         'scheduleViewEditBulkAction',
+        'speakers',
+        'editSpeaker'
     );
 
     private static $url_handlers = array
@@ -120,6 +122,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/attendees/$AttendeeID!'                          => 'editAttendee',
         '$SummitID!/attendees'                                       => 'attendees',
         '$SummitID!/edit'                                            => 'editSummit',
+        '$SummitID!/speakers/$SpeakerID!'                            => 'editSpeaker',
+        '$SummitID!/speakers'                                        => 'speakers',
     );
 
     /**
@@ -535,4 +539,66 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                     )
             );
     }
+
+    public function speakers(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+
+        $summit = Summit::get()->byID($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+
+        return $this->getViewer('speakers')->process
+        (
+            $this->customise
+            (
+                array
+                (
+                    'Summit' => $summit,
+                )
+            )
+        );
+    }
+
+    public function editSpeaker(SS_HTTPRequest $request)
+    {
+        $summit_id  = intval($request->param('SummitID'));
+        $summit     = Summit::get()->byID($summit_id);
+        $speaker_id = intval($request->param('SpeakerID'));
+        $speaker    = PresentationSpeaker::get()->byID($speaker_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('summit/javascript/summitapp-editspeaker.js');
+
+        return $this->getViewer('EditSpeaker')->process
+        (
+            $this->customise
+            (
+                array
+                (
+                    'Summit'   => $summit,
+                    'Speaker' => $speaker,
+                )
+            )
+        );
+    }
+
 }

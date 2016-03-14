@@ -117,7 +117,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
                 );
             }
 
-            echo json_encode($attendees_array);
+           return $this->ok($attendees_array);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -143,7 +143,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $this->summit_service->updateAttendee($summit, $attendee_data);
-            return $this->ok();
+            return $this->updated();
         }
         catch(EntityValidationException $ex1)
         {
@@ -173,7 +173,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $ticket       = SummitAttendeeTicket::get_by_id('SummitAttendeeTicket',$ticket_id);
             if(is_null($ticket)) throw new NotFoundEntityException('SummitAttendeeTicket', sprintf(' id %s', $ticket_id));
 
-            echo json_encode($ticket->toMap());
+            return $this->ok($ticket->toMap());
         }
         catch(NotFoundEntityException $ex2)
         {

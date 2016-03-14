@@ -162,18 +162,20 @@
                     <% loop $Event.Speakers() %>
                     speakers.push({
                         unique_id : "{$MemberID}_{$ID}",
-                        name : "{$FirstName.JS} {$LastName.JS}  ({$MemberID})",
+                        name : "{$FirstName.JS} {$LastName.JS}  ({$getEmail})",
                         speaker_id : $ID,
-                        member_id: $MemberID
+                        member_id: $MemberID,
+                        email:"$getEmail"
                     });
                     <% end_loop %>
                 <% end_if %>
                 <% if $Event && $Event.isPresentation && $Event.Moderator().Exists %>
                 moderator = {
                                 unique_id : "{$Event.Moderator.MemberID}_{$Event.Moderator.ID}",
-                                name : "{$Event.Moderator.FirstName.JS} {$Event.Moderator.LastName.JS}  ({$Event.Moderator.MemberID})",
+                                name : "{$Event.Moderator.FirstName.JS} {$Event.Moderator.LastName.JS}  ({$Event.Moderator.getEmail})",
                                 speaker_id : $Event.Moderator.ID,
                                 member_id:  $Event.Moderator.MemberID,
+                                email: "$Event.Moderator.getEmail"
                             };
                 <% end_if %>
             </script>

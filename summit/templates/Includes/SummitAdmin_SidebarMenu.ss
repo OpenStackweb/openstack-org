@@ -15,6 +15,9 @@
             </li>
         </ul>
     </li>
+    <li <% if $Active == 6 %> class="active" <% end_if %>>
+        <a href="$AdminLink/$SummitID/speakers"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Speakers</a>
+    </li>
     <li <% if $Active == 5 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/reports"><span class="fa-stack fa-lg pull-left"><i class="fa fa-list fa-stack-1x "></i></span>Reports</a>
     </li>

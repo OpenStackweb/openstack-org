@@ -70,40 +70,75 @@ SQL;
         return $speakers;
     }
 
-
     /**
      * @param ISummit $summit
      * @param int $page
      * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
      * @return array
      */
-    public function getBySummit(ISummit $summit, $page= 1, $page_size = 10)
+    public function getBySummit(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
     {
 
-        $offset    = ($page - 1 ) * $page_size;
+        $offset = ($page - 1 ) * $page_size;
+        $sort  = '';
+        $where = '';
+        if(!empty($term))
+        {
+            $where = " HAVING FullName LIKE  '%{$term}%' ";
+        }
+        switch(strtolower($sort_by))
+        {
+            case 'id':
+                $sort = ' ORDER BY PresentationSpeaker.ID '.strtoupper($sort_dir);
+                break;
+            case 'fullname':
+                $sort = ' ORDER BY FullName '.strtoupper($sort_dir);
+                break;
+            case 'email':
+                $sort = ' ORDER BY Email '.strtoupper($sort_dir);
+                break;
+        }
+
         $query_count = <<<SQL
-SELECT COUNT( DISTINCT PresentationSpeaker.ID) AS QTY FROM PresentationSpeaker
-WHERE EXISTS
-(
-	SELECT 1 FROM SummitEvent
-    INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-    INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
-    WHERE SummitEvent.SummitID = {$summit->ID}
-    AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
-);
+        SELECT COUNT(FullName) AS QTY FROM
+        (
+            SELECT
+            IFNULL(CONCAT(PresentationSpeaker.FirstName,' ', PresentationSpeaker.LastName), CONCAT(Member.FirstName,' ', Member.Surname)) AS FullName
+            FROM PresentationSpeaker
+            LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
+            LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
+            WHERE EXISTS
+            (
+                SELECT 1 FROM SummitEvent
+                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+                WHERE SummitEvent.SummitID = {$summit->ID}
+                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+            )
+            {$where}
+        ) AS P;
 SQL;
-
-
         $query = <<<SQL
-SELECT DISTINCT PresentationSpeaker.*  FROM PresentationSpeaker
-WHERE EXISTS
+SELECT DISTINCT PresentationSpeaker.*,
+IFNULL(CONCAT(PresentationSpeaker.FirstName,' ', PresentationSpeaker.LastName), CONCAT(Member.FirstName,' ', Member.Surname)) AS FullName,
+IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS Email
+FROM PresentationSpeaker
+LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
+LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
+WHERE
+EXISTS
 (
 	SELECT 1 FROM SummitEvent
     INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
     INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
     WHERE SummitEvent.SummitID = {$summit->ID}
     AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
-) LIMIT {$offset}, {$page_size};
+)
+{$where}
+{$sort} LIMIT {$offset}, {$page_size};
 SQL;
 
 

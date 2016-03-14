@@ -82,7 +82,12 @@ implements IPresentationSpeaker
      * @return  string
      */
     public function getName() {
-        return "{$this->FirstName} {$this->LastName}";
+        $full_name =  "{$this->FirstName} {$this->LastName}";
+        if(empty($full_name))
+        {
+            $full_name = $this->Member()->exists() ? $this->Member()->getFullName(): 'TBD';
+        }
+        return $full_name;
     }
 
     public function getCountryName() {
@@ -563,5 +568,15 @@ implements IPresentationSpeaker
         $firstLetter = strtoupper($firstLetter);
 
         return $firstLetter;
+    }
+
+    /**
+     * @param int $summit_id
+     * @return string
+     */
+    public function getOnSitePhoneFor($summit_id)
+    {
+        $request = $this->SummitAssistances('SummitID', intval($summit_id))->first();
+        return !is_null($request) ? $request->OnSitePhoneNumber : '';
     }
 }

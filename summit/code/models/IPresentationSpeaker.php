@@ -103,4 +103,10 @@ interface IPresentationSpeaker extends IEntity
      * @throws ValidationException
      */
     public function getSpeakerConfirmationLink($summit_id);
+
+    /**
+     * @param int $summit_id
+     * @return string
+     */
+    public function getOnSitePhoneFor($summit_id);
 }

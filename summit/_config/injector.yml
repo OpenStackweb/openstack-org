@@ -82,6 +82,11 @@ Injector:
       2: '%$SummitAttendeeRepository'
       3: '%$PresentationRepository'
       4: '%$SummitService'
+  SummitAppSpeakersApi:
+    constructor:
+      0: '%$SummitRepository'
+      1: '%$SpeakerRepository'
+      2: '%$SummitService'
   BatchTaskRepository:
     class: SapphireBatchTaskRepository
   BatchTaskFactory:

@@ -81,6 +81,26 @@ final class SummitsApi extends AbstractRestfulJsonApi
             }
         });
 
+        // summit front end admin permissions ...
+
+        $this->addBeforeFilter('getCompanies', 'check_reject', function ($request) use ($this_var) {
+            if (!Permission::check("ADMIN_SUMMIT_APP_FRONTEND_ADMIN")) {
+                return $this_var->permissionFailure();
+            }
+        });
+
+        $this->addBeforeFilter('getSponsors', 'check_reject', function ($request) use ($this_var) {
+            if (!Permission::check("ADMIN_SUMMIT_APP_FRONTEND_ADMIN")) {
+                return $this_var->permissionFailure();
+            }
+        });
+
+        $this->addBeforeFilter('getTags', 'check_reject', function ($request) use ($this_var) {
+            if (!Permission::check("ADMIN_SUMMIT_APP_FRONTEND_ADMIN")) {
+                return $this_var->permissionFailure();
+            }
+        });
+
     }
 
     public function checkAdminPermissions($request)
@@ -117,7 +137,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'GET $SUMMIT_ID/tags'                                     => 'getTags',
         'GET $SUMMIT_ID/companies'                                => 'getCompanies',
         'GET $SUMMIT_ID/sponsors'                                 => 'getSponsors',
-        'GET $SUMMIT_ID/speakers'                                 => 'getSpeakers',
+        '$SUMMIT_ID/speakers'                                     => 'handleSpeakers',
         '$SUMMIT_ID/schedule'                                     => 'handleSchedule',
         '$SUMMIT_ID/events'                                       => 'handleEvents',
         '$SUMMIT_ID/attendees'                                    => 'handleAttendees',
@@ -140,7 +160,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'getTags',
         'getSponsors',
         'getCompanies',
-        'getSpeakers',
+        'handleSpeakers',
     );
 
     // this is called when typing a tag name to add as a tag on edit event
@@ -157,12 +177,12 @@ final class SummitsApi extends AbstractRestfulJsonApi
                                     WHERE T.Tag LIKE '{$query}%'
                                     ORDER BY T.Tag LIMIT 10;");
 
-            $json_array = array();
+            $data = array();
             foreach ($tags as $tag) {
-                $json_array[] = $tag;
+                $data[] = $tag;
             }
 
-            echo json_encode($json_array);
+            return $this->ok($data);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -190,80 +210,12 @@ final class SummitsApi extends AbstractRestfulJsonApi
                                     WHERE C.Name LIKE '{$query}%'
                                     ORDER BY C.Name LIMIT 10;");
 
-            $json_array = array();
+            $data = array();
             foreach ($sponsors as $sponsor) {
-                $json_array[] = $sponsor;
+                $data[] = $sponsor;
             }
 
-            echo json_encode($json_array);
-        }
-        catch(NotFoundEntityException $ex2)
-        {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex)
-        {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
-
-    // this is called when typing a Speakers name to add as a tag on edit event
-    public function getSpeakers(SS_HTTPRequest $request){
-        try
-        {
-            $query_string = $request->getVars();
-            $term         = Convert::raw2sql($query_string['query']);
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $summit       = Summit::get_by_id('Summit',$summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-
-            $slug1 = IFoundationMember::CommunityMemberGroupSlug;
-            $slug2 = IFoundationMember::FoundationMemberGroupSlug;
-
-            $query = <<<SQL
-SELECT CONCAT(M.ID,'_',IFNULL(PS.ID , 0)) AS unique_id,
-M.ID AS member_id ,
-M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',M.ID,')') AS name,
-IFNULL(PS.ID , 0) AS speaker_id
-FROM Member AS M
-LEFT JOIN PresentationSpeaker AS PS ON PS.MemberID = M.ID
-WHERE
-(
-  M.FirstName LIKE '%{$term}%' OR
-  M.Surname LIKE '%{$term}%' OR
-  M.Email LIKE '%{$term}%' OR
-  CONCAT(M.FirstName,' ',M.Surname) LIKE '%{$term}%'
-)
-AND
-EXISTS
-(
-  SELECT 1 FROM Group_Members AS GM
-  INNER JOIN `Group` AS G ON G.ID = GM.GroupID
-  WHERE
-  GM.MemberID = M.ID
-  AND
-  (
-    G.Code = '{$slug1}'
-    OR
-    G.Code = '{$slug2}'
-  )
-)
-ORDER BY M.FirstName, M.Surname
-LIMIT 25;
-SQL;
-
-
-            $speakers = DB::query($query);
-
-            $json_array = array();
-            foreach ($speakers as $s) {
-
-                $json_array[] = $s;
-            }
-
-            echo json_encode($json_array);
+            return $this->ok($data);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -290,13 +242,13 @@ SQL;
                                 WHERE O.Name LIKE '{$query}%'
                                 ORDER BY O.Name LIMIT 10;");
 
-            $json_array = array();
+            $data = array();
             foreach ($orgs as $org) {
 
-                $json_array[] = $org;
+                $data[] = $org;
             }
 
-            echo json_encode($json_array);
+           return $this->ok($data);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -432,4 +384,11 @@ SQL;
         $api = SummitAppReportsApi::create();
         return $api->handleRequest($request, DataModel::inst());
     }
+
+    public function handleSpeakers(SS_HTTPRequest $request)
+    {
+        $api = SummitAppSpeakersApi::create();
+        return $api->handleRequest($request, DataModel::inst());
+    }
+
 }
