@@ -23,6 +23,15 @@
         <div class="container">
             <div class="description col1">
                 $Event.ShortDescription
+
+                <% if $Event.isPresentation &&  $Event.AttendeesExpectedLearnt %>
+                <br>
+                <div class="expercted-learnt">
+                    <h4>What can I expect to learn?</h4>
+                    $Event.AttendeesExpectedLearnt
+                </div>
+                <% end_if %>
+
                 <% if $Event.Tags %>
                 <div class="row tags-row">
                     <div class="col-xs-12 col-md-2 col-tags-title">
@@ -41,6 +50,7 @@
 
 
             </div>
+
             <div class="info col2">
                 <div class="info_item">
                     <div class="info_item_icon"><i class="fa fa-2x fa-clock-o icon-clock"></i></div>

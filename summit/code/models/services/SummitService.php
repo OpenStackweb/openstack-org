@@ -287,6 +287,7 @@ final class SummitService implements ISummitService
             if(is_null($track)) throw new NotFoundEntityException('Track');
 
             $event->CategoryID = $track->ID;
+            $event->AttendeesExpectedLearnt = $event_data['expect_learn'];
         }
         return $event;
     }

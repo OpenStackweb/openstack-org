@@ -29,6 +29,10 @@
                 <textarea id="short_description" name="short_description" class="form-control">{$Event.ShortDescription}</textarea>
             </div>
             <div class="form-group">
+                <label for="expect_learn">What can attendees expect to learn?</label>
+                <textarea id="expect_learn" name="expect_learn" class="form-control">{$Event.AttendeesExpectedLearnt}</textarea>
+            </div>
+            <div class="form-group">
                 <label for="headcount">Head Count</label>
                 <input type="number" class="form-control" id="headcount" name="headcount" value="{$Event.HeadCount}">
             </div>

@@ -352,6 +352,7 @@ $(document).ready(function(){
             rsvp_link: $('#rsvp_link').val(),
             headcount: $('#headcount').val(),
             short_description: tinyMCE.get('short_description').getContent(),
+            expect_learn: tinyMCE.get('expect_learn').getContent(),
             location_id: $('#location').val(),
             start_date: $('#start_date').val(),
             end_date: $('#end_date').val(),
