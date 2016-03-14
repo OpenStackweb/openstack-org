@@ -224,4 +224,8 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
        }
         return $urls;
     }
+
+    public function getFirstImage() {
+        return ($this->Images()->count()) ? $this->Images()->sort('Order')->first()->Picture() : '';
+    }
 }

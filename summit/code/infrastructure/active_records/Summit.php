@@ -716,11 +716,9 @@ final class Summit extends DataObject implements ISummit
      */
     public function getVenues()
     {
-        $query = new QueryObject(new SummitVenue);
-        $query->addAndCondition(QueryCriteria::equal('ClassName', 'SummitVenue'));
-        $query->addOrder(QueryOrder::asc('Order'));
+        $venues = $this->Locations()->where("ClassName IN ('SummitVenue','SummitExternalLocation')")->sort("Order");
 
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Locations', $query)->toArray();
+        return $venues;
     }
 
     /**

@@ -20,3 +20,60 @@
     height: 400px;
     width: 100%;
 }
+
+.venue .header {
+    height: 350px;
+    background-color: #00004b;
+    color: white;
+    position: relative;
+    cursor: pointer;
+}
+
+.venue .image {
+    width: 100%;
+    height: 100%;
+}
+
+.venue .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.venue .overlay:hover {
+    background-color: transparent;
+}
+
+.venue .labelbox {
+    position: absolute;
+    top: 33%;
+    width: 100%;
+}
+
+.venue .title {
+    text-align: center;
+    font-size: 30px;
+}
+
+.venue .address {
+    text-align: center;
+}
+
+.venue .carousel {
+    padding: 15px 0;
+    display: none;
+}
+
+.venue .carousel-control {
+    background: none;
+}
+
+.venue .carousel-control.left {
+    left: 10%;
+}
+
+.venue .carousel-control.right {
+    right: 10%;
+}
