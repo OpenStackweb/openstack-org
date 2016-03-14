@@ -80,4 +80,8 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
     {
         return 'VenueRoom';
     }
+
+    public function getVenue() {
+        return $this->Venue();
+    }
 }

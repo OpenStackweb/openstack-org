@@ -228,4 +228,8 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
     public function getFirstImage() {
         return ($this->Images()->count()) ? $this->Images()->sort('Order')->first()->Picture() : '';
     }
+
+    public function getVenue() {
+        return $this;
+    }
 }

@@ -49,7 +49,9 @@
                 <% if Event.Summit.ShouldShowVenues %>
                 <div class="info_item">
                     <div class="info_item_icon"><i class="fa fa-2x fa-map-marker icon-map"></i></div>
-                    <div class="info_item_text">$Event.LocationNameNice()</div>
+                    <div class="info_item_text">
+                        <a href="{$Event.Summit.Link}venues/#venue={$Event.Location.Venue().ID}" > $Event.LocationNameNice() </a>
+                    </div>
                 </div>
                 <% end_if %>
                 <% if $Event.isPresentation %>
@@ -106,7 +108,7 @@
                     <% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %><img src="$ProfilePhoto(100)" class="img-circle speaker-photo" /><% if AvailableForBureau %></a><% end_if %>
                 </div>
                 <div class="speaker_info">
-                    <div class="speaker_name"> <% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %>$FirstName $LastName<% if AvailableForBureau %></a><% end_if %></div>
+                    <div class="speaker_name"><% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %>$FirstName $LastName<% if AvailableForBureau %></a><% end_if %></div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
                     <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
                 </div>

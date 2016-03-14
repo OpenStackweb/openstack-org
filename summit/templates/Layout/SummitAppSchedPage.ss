@@ -114,6 +114,7 @@
                 country : "{$Country}",
                 lng : '{$Lng}',
                 lat : '{$Lat}',
+                venue_id : {$Venue.ID},
             };
             <% if ClassName == SummitVenue %>
             <% loop Rooms %>
