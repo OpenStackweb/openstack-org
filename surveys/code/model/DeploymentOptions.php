@@ -15,8 +15,8 @@
 final class DeploymentOptions {
 
     public static $deployment_type_options = array(
-        'On-Premise Private Cloud (Managed by my organization)' => 'On-Premise Private Cloud (Managed by my organization)',
-        'On-Premise Private Cloud (Managed by someone else)' => 'On-Premise Private Cloud (Managed by someone else)',
+        'On-Premises Private Cloud (Managed by my organization)' => 'On-Premises Private Cloud (Managed by my organization)',
+        'On-Premises Private Cloud (Managed by someone else)' => 'On-Premises Private Cloud (Managed by someone else)',
         'Public Cloud' => 'Public Cloud',
         'Remote Private Cloud (Managed by my organization)' => 'Remote Private Cloud (Managed by my organization)',
         'Remote Private Cloud (Managed by someone else)' => 'Remote Private Cloud (Managed by someone else)',

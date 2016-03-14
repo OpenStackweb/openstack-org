@@ -15,7 +15,7 @@
 final class DeploymentArchiveOptions {
 
     public static $deployment_type_options = array(
-        'On-Premise Private Cloud' => 'On-Premise Private Cloud',
+        'On-Premises Private Cloud' => 'On-Premises Private Cloud',
         'Hosted Private Cloud' => 'Hosted Private Cloud',
         'Public Cloud' => 'Public Cloud',
         'Hybrid Cloud' => 'Hybrid Cloud',
