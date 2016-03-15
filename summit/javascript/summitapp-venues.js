@@ -46,6 +46,7 @@ function initMap() {
         // Create a marker and set its position.
         var marker = new google.maps.Marker({
             map: map,
+            icon : '/summit/images/mapicons/venue.png',
             position: latlng,
             title: title,
             id: id
