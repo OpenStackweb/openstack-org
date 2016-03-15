@@ -30,7 +30,9 @@ class EventMaterial extends DataObject {
 		$fields = new FieldList();
 		$attach = new CustomUploadField('Attachment','File');
 		$attach->setFolderName('marketing/event_material');
-		$attach->setAllowedExtensions(array('doc','docx','txt','rtf','xls','xlsx','pages', 'ppt','pptx','pps','csv', 'html','htm','xhtml', 'xml','pdf','ai','key'));
+		$attach->setAllowedExtensions(
+            array('doc','docx','txt','xls','xlsx','ppt','pptx','pps',
+                  'pdf','ai','key','jpg','jpeg','png','gif','mp4'));
 
 		$fields->push(new TextField('Name'));
 		$fields->push($attach);
