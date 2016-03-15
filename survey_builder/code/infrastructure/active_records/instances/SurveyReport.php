@@ -45,6 +45,18 @@ class SurveyReport extends DataObject {
         return (int)$this->getField('ID');
     }
 
+    public function getSections() {
+        $sections = $this->Sections()->sort('Order');
+        $section_array = array();
+        foreach ($sections as $section) {
+            if ($section->Graphs()->count()) {
+                $section_array[] = $section->toMap();
+            }
+        }
+
+        return $section_array;
+    }
+
     public function getCMSFields() {
         $fields = parent::getCMSFields();
         $templateList = SurveyTemplate::get()->filter(array('ClassName' => 'SurveyTemplate' ))->sort('Title')->map()->toArray();
@@ -75,7 +87,7 @@ class SurveyReport extends DataObject {
         }
         $report_map['Filters'] = $filters;
 
-        $report_map['Sections'] = $this->Sections()->sort('Order')->toNestedArray();
+        $report_map['Sections'] = $this->getSections();
 
         return $report_map;
 
