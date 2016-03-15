@@ -46,6 +46,7 @@
     </nav>
 
     <script>
+        this.dispatcher      = opts.dispatcher;
         this.page_data       = {total: 100, limit: opts.page_limit, page: 1};
         this.summit_id       = opts.summit_id;
         this.speakers        = [];
@@ -96,6 +97,38 @@
             });
         }
 
+        self.dispatcher.on(self.dispatcher.SAVE_SPEAKER_REPORT,function(report) {
+            var request = [];
+            $('.changed').each(function(){
+                var id = $(this).data('id');
+                var phone = $('.phone',this).val();
+                var registered = $('.registered',this).attr('checked') ? 1 : 0;
+                var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
+
+                request.push({id: id, phone: phone, registered: registered, checked_in: checked_in});
+            });
+
+            if (request.length) {
+                $.ajax({
+                    type: 'PUT',
+                    url: 'api/v1/summits/'+self.summit_id+'/reports/save_report/'+report,
+                    data: JSON.stringify(request),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                }).done(function(data) {
+                    $('.changed').removeClass('changed');
+                    swal('Updated', 'Changes saved.', 'success');
+                }).fail(function(jqXHR) {
+                    var responseCode = jqXHR.status;
+                    if(responseCode == 412) {
+                        var response = $.parseJSON(jqXHR.responseText);
+                        swal('Validation error', response.messages[0].message, 'warning');
+                    } else {
+                        swal('Error', 'There was a problem saving the speaker, please contact admin.', 'warning');
+                    }
+                });
+            }
+        });
 
 
     </script>

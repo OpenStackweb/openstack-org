@@ -67,7 +67,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET room_report'           => 'getRoomReport',
         'GET presentation_report'   => 'getPresentationReport',
         'GET export/$REPORT!'       => 'exportReport',
-        'PUT save_report'           => 'updateAssistanceBatch',
+        'PUT save_report/$REPORT!'  => 'updateReport',
     );
 
     static $allowed_actions = array(
@@ -75,7 +75,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'getRoomReport',
         'getPresentationReport',
         'exportReport',
-        'updateAssistanceBatch',
+        'updateReport',
     );
 
     public function getSpeakerReport(SS_HTTPRequest $request){
@@ -125,18 +125,19 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         }
     }
 
-    public function updateAssistanceBatch(SS_HTTPRequest $request)
+    public function updateReport(SS_HTTPRequest $request)
     {
         try
         {
             if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
             $summit_id       = intval($request->param('SUMMIT_ID'));
+            $report          = $request->param('REPORT');
             $report_data     = $this->getJsonRequest();
 
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $this->summit_service->updateAssistanceBatch($summit, $report_data);
+            $this->summit_service->updateAssistance($summit, $report_data);
 
             return $this->ok();
         }

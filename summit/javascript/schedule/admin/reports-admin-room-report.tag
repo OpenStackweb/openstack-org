@@ -31,6 +31,7 @@
     </div>
 
     <script>
+        this.dispatcher      = opts.dispatcher;
         this.summit_id       = opts.summit_id;
         this.data            = [];
         var self             = this;

@@ -43,7 +43,7 @@
                     <td>{ presentation.email }</td>
                     <td><input type="text" class="phone" value={ presentation.phone } /></td>
                     <td>{ presentation.code_type }</td>
-                    <td>{ presentation.promo_code }</td>
+                    <td><input type="text" class="promo_code" value={ presentation.promo_code } /></td>
                     <td class="center_text"><i class={ fa: true, fa-check: presentation.confirmed, fa-times: !presentation.confirmed } ></i></td>
                     <td class="center_text"><input type="checkbox" class="registered" checked={ presentation.registered } /></td>
                     <td class="center_text"><input type="checkbox" class="checked_in" checked={ presentation.checked_in } /></td>
@@ -56,6 +56,7 @@
     </nav>
 
     <script>
+        this.dispatcher      = opts.dispatcher;
         this.page_data       = {total: 100, limit: opts.page_limit, page: 1};
         this.summit_id       = opts.summit_id;
         this.presentations   = [];
@@ -106,7 +107,39 @@
             });
         }
 
+        self.dispatcher.on(self.dispatcher.SAVE_PRESENTATION_REPORT,function(report) {
+            var request = [];
+            $('.changed').each(function(){
+                var id = $(this).data('id');
+                var phone = $('.phone',this).val();
+                var promo_code = $('.promo_code',this).val();
+                var registered = $('.registered',this).attr('checked') ? 1 : 0;
+                var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
 
+                request.push({id: id, phone: phone, promo_code: promo_code, registered: registered, checked_in: checked_in});
+            });
+
+            if (request.length) {
+                $.ajax({
+                    type: 'PUT',
+                    url: 'api/v1/summits/'+self.summit_id+'/reports/save_report/'+report,
+                    data: JSON.stringify(request),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                }).done(function(data) {
+                    $('.changed').removeClass('changed');
+                    swal('Updated', 'Changes saved.', 'success');
+                }).fail(function(jqXHR) {
+                    var responseCode = jqXHR.status;
+                    if(responseCode == 412) {
+                        var response = $.parseJSON(jqXHR.responseText);
+                        swal('Validation error', response.messages[0].message, 'warning');
+                    } else {
+                        swal('Error', 'There was a problem saving the speaker, please contact admin.', 'warning');
+                    }
+                });
+            }
+        });
 
     </script>
 

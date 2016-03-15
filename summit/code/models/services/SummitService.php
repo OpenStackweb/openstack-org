@@ -555,7 +555,6 @@ final class SummitService implements ISummitService
                     throw new EntityValidationException('missing required param: id');
 
                 $assistance_id = intval($assistance_data['id']);
-
                 $assistance = $assistance_repository->getById($assistance_id);
 
                 if(is_null($assistance))
@@ -569,6 +568,18 @@ final class SummitService implements ISummitService
                 $assistance->CheckedIn = $assistance_data['checked_in'];
 
                 $assistance->write();
+
+                if (isset($assistance_data['promo_code'])) {
+                    $promo_code = SummitRegistrationPromoCode::get("SummitRegistrationPromoCode")
+                        ->leftJoin("SpeakerSummitRegistrationPromoCode","SpeakerSummitRegistrationPromoCode.ID = SummitRegistrationPromoCode.ID")
+                        ->where("SpeakerSummitRegistrationPromoCode.SpeakerID = {$assistance->SpeakerID} AND SummitRegistrationPromoCode.SummitID = {$assistance->SummitID}")
+                        ->first();
+
+                    $promo_code->Code = $assistance_data['promo_code'];
+                    $promo_code->write();
+                }
+
+
             }
 
         });
