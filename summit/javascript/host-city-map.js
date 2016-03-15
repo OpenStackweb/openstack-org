@@ -1,7 +1,7 @@
 // City nav active on scroll
 
 // Setup the different icons and shadows
-var iconURLPrefix = '//openstack.org/summit/images/mapicons/';
+var iconURLPrefix = '/summit/images/mapicons/';
 
 var icons = [
     iconURLPrefix + 'venue.png',
@@ -82,7 +82,10 @@ $(document).ready(function () {
     for (var i = 0; i < locations.length; i++) {
         var location = locations[i];
         var icon = null;
-        if(location.type =='SummitAirport'){
+        if (location.type =='SummitExternalLocation'){
+            continue;
+        }
+        else if(location.type =='SummitAirport'){
             icon =  icons[1];
         }
         else if(location.type == 'SummitVenue'){
