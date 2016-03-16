@@ -62,7 +62,7 @@ SQL;
         return $result;
     }
 
-    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir)
+    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term)
     {
         $query_body =
             " FROM (
@@ -99,6 +99,10 @@ SQL;
             LEFT JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
             LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID
             WHERE RPC.SummitID = {$summit_id} AND ACR.SummitID={$summit_id} AND L.`Name` IS NOT NULL";
+
+        if ($search_term) {
+            $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%' OR S.LastName LIKE '%{$search_term}%')";
+        }
 
         $query_count = "SELECT COUNT(*)";
 

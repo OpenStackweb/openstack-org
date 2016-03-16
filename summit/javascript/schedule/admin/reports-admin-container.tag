@@ -16,6 +16,17 @@
             <button class="btn btn-primary" id="export-report" onclick={ exportReport } >Export CSV</button>
             <button class="btn btn-success" id="save-report" onclick={ saveReport } >Save</button>
         </div>
+        <div class="col-md-4" if={report == 'presentation_report'}>
+            <div class="input-group" style="width: 100%;">
+                <input data-rule-required="true" data-rule-minlength="3" type="text" id="search-term" class="form-control input-global-search" placeholder="Search Speaker or Presentation">
+                <span class="input-group-btn" style="width: 5%;">
+                    <button class="btn btn-default btn-global-search" onclick={ searchReport }><i class="fa fa-search"></i></button>
+                    <button class="btn btn-default btn-global-search-clear" onclick={ clearSearch }>
+                        <i class="fa fa-times"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
     </div>
     <br>
 
@@ -34,6 +45,12 @@
             $("#report_select").change(function(){
                 self.report = $(this).val();
                 self.update();
+            });
+
+            $("#search-term").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    self.searchReport();
+                }
             });
 
         });
@@ -72,6 +89,17 @@
             var arrow = (sort_dir == 'ASC') ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>';
             elem.html(elem.text()+arrow);
             elem.addClass('sorted');
+        }
+
+        searchReport() {
+            var report = $('#report_select').val();
+            self.dispatcher.getReport(report);
+        }
+
+        clearSearch() {
+            $('#search-term').val('');
+            var report = $('#report_select').val();
+            self.dispatcher.getReport(report);
         }
 
     </script>

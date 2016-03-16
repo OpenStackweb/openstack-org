@@ -80,9 +80,10 @@
             $('body').ajax_loader();
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
+            var term = $('#search-term').val();
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/presentation_report',
-                {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir},
+                {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term},
                 function(data){
                     self.presentations = data.data;
                     self.page_data.page = page;
@@ -139,6 +140,10 @@
                     }
                 });
             }
+        });
+
+        self.dispatcher.on(self.dispatcher.GET_PRESENTATION_REPORT,function() {
+            self.getReport(1);
         });
 
     </script>
