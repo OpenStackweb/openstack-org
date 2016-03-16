@@ -146,12 +146,14 @@ SQL;
     {
 
         $query = <<<SQL
-SELECT E.StartDate AS start_date, E.EndDate AS end_date, 'K' AS code, E.Title AS event, L.Name AS room, COUNT(PS.PresentationSpeakerID) AS speakers
+SELECT E.ID AS id ,E.StartDate AS start_date, E.EndDate AS end_date, 'K' AS code, E.Title AS event,
+L.Name AS room, COUNT(PS.PresentationSpeakerID) AS speakers, E.HeadCount AS headcount, COUNT(A.ID) AS total
 FROM Presentation AS P
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
 INNER JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
 LEFT JOIN SummitEvent AS E ON E.ID = P.ID AND E.SummitID = {$summit_id}
 LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
+LEFT JOIN SummitAttendee_Schedule AS A ON A.SummitEventID = E.ID
 WHERE DATE(E.StartDate) = '{$date}'
 GROUP BY P.ID
 SQL;

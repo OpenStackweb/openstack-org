@@ -137,7 +137,15 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $this->summit_service->updateAssistance($summit, $report_data);
+            switch ($report) {
+                case 'speaker_report':
+                case 'presentation_report':
+                    $this->summit_service->updateAssistance($summit, $report_data);
+                    break;
+                case 'room_report':
+                    $this->summit_service->updateHeadCount($summit, $report_data);
+            }
+
 
             return $this->ok();
         }
@@ -179,12 +187,15 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                 $report_array[$day->Label] = array();
                 foreach ($day_report as $rooms) {
                     $report_array[$day->Label][] = array(
+                        'id'         => intVal($rooms['id']),
                         'start_time' => date('g:ia',strtotime($rooms['start_date'])),
                         'end_time'   => date('g:ia',strtotime($rooms['end_date'])),
                         'code'       => 'K',
                         'title'      => $rooms['event'],
                         'room'       => $rooms['room'],
-                        'speakers'   => intVal($rooms['speakers'])
+                        'speakers'   => intVal($rooms['speakers']),
+                        'headcount'  => intVal($rooms['headcount']),
+                        'total'      => intVal($rooms['total'])
                     );
                 }
             }
@@ -285,7 +296,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                 case 'room_report' :
                     $csv = '';
                     $days = $summit->getDates();
-                    $header = array('Time', 'Code', 'Presentation', 'Room', 'Speakers');
+                    $header = array('Time', 'Code', 'Presentation', 'Room', 'Speakers','Head Count', 'Total');
                     foreach($days as $day) {
                         $csv .= $day->Label.PHP_EOL;
                         $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date);

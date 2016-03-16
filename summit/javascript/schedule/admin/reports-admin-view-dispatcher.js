@@ -5,6 +5,7 @@ function ReportsAdminViewDispatcher() {
     this.SAVE_PRESENTATION_REPORT              = 'SAVE_PRESENTATION_REPORT';
     this.GET_PRESENTATION_REPORT               = 'GET_PRESENTATION_REPORT';
     this.SAVE_SPEAKER_REPORT                   = 'SAVE_SPEAKER_REPORT';
+    this.SAVE_ROOM_REPORT                      = 'SAVE_ROOM_REPORT';
 
     this.saveReport = function(report)
     {
@@ -14,6 +15,9 @@ function ReportsAdminViewDispatcher() {
                 break;
             case 'speaker_report' :
                 this.trigger(this.SAVE_SPEAKER_REPORT, report);
+                break;
+            case 'room_report' :
+                this.trigger(this.SAVE_ROOM_REPORT, report);
                 break;
         }
 

@@ -55,12 +55,13 @@
 
         });
 
-        saveReport() {
+        saveReport(e) {
             var report = $('#report_select').val();
+            e.preventUpdate = true;
             self.dispatcher.saveReport(report);
         }
 
-        exportReport(sort,sort_dir) {
+        exportReport() {
             var report = $('#report_select').val();
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
