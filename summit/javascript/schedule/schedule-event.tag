@@ -1,11 +1,11 @@
 <schedule-event>
     <div if={ show } id="event_{ id }" class="row event-row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="row main-event-content" data-event-id="{ id }">
                 <div class="col-md-1 col-xs-1 event-type" style="background-color: { eventColor(category_group_ids) }">&nbsp;</div>
                 <div class="col-md-11 col-xs-11 event-content">
                     <div class="row row_location">
-                        <div class="col-xs-12 col-md-3 col-time">
+                        <div class="col-xs-12 col-xs-3 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>
                             <span if={ show_date }>{ date_nice }</span>
                             &nbsp;<span>{ start_time }</span>-<span>{ end_time }</span>
@@ -42,12 +42,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-9 col-track">
+                        <div class="col-xs-8 col-track">
                             <span if={ track_id} class="track">
                                 <a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+trackName().replace(/ /g,'+') }">{ trackName() }</a>
                             </span>
                         </div>
-                        <div class="col-md-3 event-type-col">
+                        <div class="col-xs-4 event-type-col">
                             <a class="search-link" title="Search Event Type" href="{ parent.search_url+'?t='+summit.event_types[type_id].type.replace(/ /g,'+') }">{ summit.event_types[type_id].type }</a>
                         </div>
                     </div>
@@ -76,8 +76,7 @@
                         <div class="col-md-3">
                             <div data-speaker-id={ speaker_id } class="row speaker-row" each={ speaker_id in speakers_id }>
                                 <div class="col-md-4">
-                                    <a href={ parent.base_url+'speakers/'+ this.speaker_id }>
-                                        <img src="{ summit.speakers[speaker_id].profile_pic }" class="img-circle profile-pic" alt="{ summit.speakers[speaker_id].name }">
+                                    <a href={ parent.base_url+'speakers/'+ this.speaker_id } class="profile-pic-wrapper" style="background-image: url('{ summit.speakers[speaker_id].profile_pic }')">
                                     </a>
                                 </div>
                                 <div class="col-md-8">
@@ -100,10 +99,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-6">
                             <a href="{ parent.base_url+'events/'+ this.id }" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
                         </div>
-                        <div class="col-md-2" if="{ this.rsvp_link != null && this.rsvp_link != ''}">
+                        <div class="col-md-2 col-xs-6" if="{ this.rsvp_link != null && this.rsvp_link != ''}">
                             <a href="{ this.rsvp_link }" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" target="_blank" role="button">RSVP to this Event</a>
                         </div>
 

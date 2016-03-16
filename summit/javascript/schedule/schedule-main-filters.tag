@@ -1,28 +1,23 @@
 <schedule-main-filters>
     <div class="row all-events-filter-row">
-        <div class="col-xs-12 col-md-12 all-events-filter-container">
-           <div class="row">
-                <div class="col-xs-12 col-md-6 all-events-filter-link">
-                    <div class="row">
-                        <div class="col-xs-1 col-md-1 col-filter-btn">
-                            <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
-                        </div>
-                        <div class="col-xs-6 col-md-4 col-filter-title">
-                            <span>Calendar&nbsp;Search&nbsp;Filters</span>
-                        </div>
-                        <div class="col-xs-6 col-md-7">
-                            <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
-                        </div>
+            <div class="col-sm-6 all-events-filter-link">
+                <div class="col-filter-btn">
+                    <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
+                </div>
+                <div class="col-filter-title">
+                    <span>Calendar Search Filters</span>
+                </div>
+                <div class="col-xs-6 col-md-7">
+                    <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
+                </div>
+            </div>
+            <div class="col-sm-6 login-container" if={ summit.current_user == null }>
+                <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="fragment" id="fragment"/>
+                    <div class="Actions">
+                        <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
                     </div>
-                </div>
-                <div class="col-xs-12 col-md-6 login-container" if={ summit.current_user == null }>
-                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
-                        <input type="hidden" name="fragment" id="fragment"/>
-                        <div class="Actions">
-                            <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
-                        </div>
-                    </form>
-                </div>
+                </form>
             </div>
            <div id="all-events-filter-wrapper" class="row">
                 <div class="col-xs-12 col-md-12">
@@ -55,7 +50,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <script>

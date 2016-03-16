@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
 
     <script type="application/javascript">
 
@@ -137,16 +137,12 @@
        <% end_loop %>
 
     </script>
-    <div class="row">
-        <div class="col-xs-12 col-main-title">
-            <div class="row">
-                <div class="col-xs-12"><h1>Schedule</h1></div>
-            </div>
-           <div class="row">
-               <div class="col-xs-12">
-                   <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
-               </div>
-           </div>
+    <div class="row schedule-title-wrapper">
+        <div class="col-sm-6 col-main-title">
+            <h1 style="text-align:left;">Schedule</h1>
+        </div>
+        <div class="col-sm-6">
+           <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
         </div>
     </div>
     <schedule-grid summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" month="{$Summit.Month}"></schedule-grid>

@@ -1,6 +1,6 @@
 body,html{height:100%}
 
-@font-face {
+/*@font-face {
     font-family: 'Montserrat';
     src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
     font-weight: normal;
@@ -17,24 +17,19 @@ body,html{height:100%}
 body
 {
     font-family: Montserrat, Sans-serif;
-}
+}*/
 
 i.collapse-nav {
     color: white;
 }
 
-.col-main-title
-{
-    background-color: #132539;
+.schedule-title-wrapper {
+    padding: 20px 0;
 }
-
 .col-main-title h1
 {
-    color: #FFFFFF;
-    font-size: 42px;
-    margin:0px;
-    padding-top:40px;
-    font-family: Montserrat, Sans-serif;
+    margin: 0;
+    line-height: 1.5;
 }
 
 .bio-row {
@@ -45,9 +40,9 @@ i.collapse-nav {
     font-size: 14px;
 }
 
-.tags-row {
+/*.tags-row {
     font-family: Montserrat, Sans-serif;
-}
+}*/
 
 #search_unpublished.btn-global-search, #search_unpublished.btn-global-search-clear
 {
@@ -66,6 +61,8 @@ i.collapse-nav {
 {
     border: 1px solid #C1C1C1;
     color: #4a4a4a !important;
+    margin: 5px 0;
+    border-radius: 4px;
 }
 
 .event-content
@@ -96,15 +93,14 @@ i.collapse-nav {
 
 .credentials-row, .level-row
 {
-    font-family: Montserrat,Sans-serif;
+    /*font-family: Montserrat,Sans-serif;*/
     font-size: 14px;
 }
 
 .col-sponsors
 {
-    font-family: Montserrat,Sans-serif;
-    font-size: 14px;
-    color: aquamarine;
+    font-size: 1em;
+    color: #29abe2;
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -141,34 +137,32 @@ i.collapse-nav {
     color: #D7D7D7;
 }
 
-.col-track
-{
-    padding-bottom: 15px;
-}
-
 .event-title
 {
-    font-size: 24px;
-    padding-top: 20px;
-    padding-bottom: 5px;
+    font-size: 1.5em;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: #2A4E68;
 }
 
 .event-details
 {
-    background-color: #E4E4E4;
+    background-color: #edf2f7;
     padding: 1em;
-    color: #4a4a4a;
+    color: #2A4E68;
     font-family: Helvetica,Sans-serif;
-    font-size: 18px;
+    font-size: 1em;
     font-weight: 400;
-    border-top: 2px solid #C1C1C1;
+    border-top: 1px solid #C1C1C1;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
 .main-event-content
 {
     cursor: pointer;
-    min-height:147px !important;
     position: relative;
+    padding: 0px 0 20px;
 }
 
 .event-type-col, .event-type-col a
@@ -176,6 +170,7 @@ i.collapse-nav {
     text-transform: uppercase;
     color: #D7D7D7;
     text-align: right;
+    font-size: 0.9em;
 }
 
 .btn-go-event
@@ -243,7 +238,7 @@ i.collapse-nav {
 @media all and (min-width: 860px) and (max-width: 1027px) {
     .navbar-days .navbar-header
     {
-        left: 10%;
+        left: 3%;
         position: absolute;
     }
     .navbar-days .navbar-collapse
@@ -255,24 +250,32 @@ i.collapse-nav {
 
 .navbar-days
 {
-    background-color: #E5E5E5;
-    text-transform: uppercase;
+    background-color: #edf2f7;
     padding: 0 !important;
     border: none;
-    border-bottom: 3px solid #DDDDDD;
-    font-size: 11pt !important;
-    font-weight: bold;
+    border-radius: 4px;
 }
 
 .navbar-days .container
 {
-    background-color: #E5E5E5;
+    background-color: #edf2f7;
+}
+
+.navbar-days .navbar-nav>li>a {
+    color: #2A4E68;
+}
+
+@media (max-width: 1000px) and (min-width: 768px) {
+    .navbar-days .navbar-nav>li>a {
+        font-size: 0.8em;
+        padding: 15px 10px;
+    }
 }
 
 a.navbar-brand.navbar-brand-month
 {
     font-size: 11pt !important;
-    color: #4a4a4a !important
+    color: #2A4E68 !important
 }
 
 .navbar-default .navbar-nav > .active.day-selected
@@ -285,31 +288,32 @@ a.navbar-brand.navbar-brand-month
 .navbar-default .navbar-nav > .active.day-selected > a:hover,
 .navbar-default .navbar-nav > .active.day-selected > a:focus {
     color: #FFFFFF !important;
-    background: #4a4a4a;
+    background: #30739C;
 }
 
 .day-label
 {
     vertical-align: middle;
     text-decoration: none;
-    color: #4a4a4a !important;
-    border-right: 2px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    border-left: 0;
+
 }
 
 .day-label:visited
 {
-    color: #4a4a4a !important
+    /*color: #4a4a4a !important*/
 }
 
 .navbar-nav > li:first-child > a.day-label {
-    border-left: 2px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
 }
 
 .icon-clock, .icon-foreign-event, .icon-own-event, .icon-favorite-event, .icon-non-favorite-event, .icon-map
 {
-    text-shadow: 1px 1px 1px #ccc;
-    font-size: 1.3em;
+    font-size: 1.1em;
     cursor: pointer;
+    color: #999;
 }
 
 .icon-foreign-event
@@ -340,7 +344,7 @@ a.navbar-brand.navbar-brand-month
 .speaker-name-row a
 {
     color: #4a4a4a;
-    font-family: 'MontserratBold';
+    /*font-family: 'MontserratBold';*/
     font-size: 16px;
 }
 
@@ -351,10 +355,15 @@ a.navbar-brand.navbar-brand-month
     font-size: 12px;
 }
 
-.profile-pic
-{
+a.profile-pic-wrapper {
     width: 60px;
     height: 60px;
+}
+
+.profile-pic
+{
+    width: 100%;
+    height: auto;
     background-color: white;
 }
 
@@ -388,14 +397,10 @@ a.navbar-brand {
 }
 
 /*filters*/
-
-@media all and (max-width: 700px) {
-    .col-filter-title
-    {
-        padding-left: 3em;
-    }
+.col-filter-btn {
+    float: left;
+    margin-right: 10px;
 }
-
 .col-filter-title
 {
     vertical-align: middle;
@@ -403,6 +408,13 @@ a.navbar-brand {
     padding-top: 0.65em;
     color: #4a4a4a;
     font-weight: bold;
+}
+
+@media all and (max-width: 700px) {
+    .col-filter-title
+    {
+        padding-left: 3em;
+    }
 }
 
 .all-events-filter-row
@@ -519,6 +531,11 @@ form.all-events-search-form .all-events-search-wrapper i {
     top: 0px;
     float: right;
     width: 420px;
+}
+@media (max-width: 767px) {
+    .global-search-div {
+        width: 100%;
+    }
 }
 
 .label

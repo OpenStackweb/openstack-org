@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
     font-family: 'Montserrat';
     src: url('/themes/openstack/fonts/Montserrat-Regular.otf');
     font-weight: normal;
@@ -14,7 +14,7 @@
 
 .container {
     font-family:'Montserrat' , sans-serif;
-}
+}*/
 
 .global-search-div {
     position: relative;
