@@ -106,7 +106,7 @@ final class EventManager {
 				throw new NotFoundEntityException('EventPage',sprintf('id %s',$data['id'] ));
 
             $event->registerMainInfo($factory->buildEventMainInfo($data));
-            $event->registerLocation($data['location']);
+            $event->registerLocation($data['location'],$data['continent']);
             $event->registerDuration($factory->buildEventDuration($data));
 		});
 	}
@@ -131,7 +131,7 @@ final class EventManager {
             $event = new EventPage();
 
             $event->registerMainInfo($factory->buildEventMainInfo($data));
-            $event->registerLocation($data['location']);
+            $event->registerLocation($data['location'],$data['continent']);
             $event->registerDuration($factory->buildEventDuration($data));
 
             $repository->add($event);

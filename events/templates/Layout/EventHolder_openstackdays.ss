@@ -59,10 +59,10 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 osdays-events">
-                        <% if $FutureOpenstackDaysEvents(100) %>
-                            <% loop $FutureOpenstackDaysEvents(100) %>
-                                <a rel="nofollow" href="$EventLink" target="_blank" class="osdays-event" data-type="$EventCategory">
-                                    <div class="row">
+                        <% if $FutureOpenstackDaysEvents(22) %>
+                            <% loop $FutureOpenstackDaysEvents(22) %>
+
+                                    <div class="row osdays-event">
                                         <div class="col-sm-2 col-xs-3">
                                             <div class="osd-date"> $formatDateRange </div>
                                         </div>
@@ -70,13 +70,16 @@
                                             <div class="osd-name"> $Title </div>
                                         </div>
                                         <div class="col-sm-3 col-xs-3">
-                                            <div class="osd-location"> $EventLocation </div>
+                                            <div class="osd-location"> $Location, $Continent </div>
                                         </div>
+                                        <% if $EventLink %>
                                         <div class="col-sm-3 col-xs-2">
-                                            <div class="osd-link"></div>
+                                            <a rel="nofollow" href="$EventLink" target="_blank" data-type="$EventCategory">
+                                                <div class="osd-link"></div>
+                                            </a>
                                         </div>
+                                        <% end_if %>
                                     </div>
-                                </a>
                             <% end_loop %>
                         <% else %>
                             <h3>Sorry, there are no upcoming events listed at the moment.</h3>

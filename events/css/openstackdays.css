@@ -38,13 +38,15 @@
     text-decoration: underline; }
 .inner-osdays hr {
     margin: 30px 0; }
-.inner-osdays a.osdays-event {
+.osdays-events .row{
+    border-bottom: 1px solid #D4DCE5;
     text-align: left;
     padding-bottom: 20px;
-    border-bottom: 1px solid #D4DCE5;
     margin-bottom: 20px;
-    display: block; }
-.inner-osdays a.osdays-event .osd-date {
+    display: block;
+}
+
+.inner-osdays .osdays-event .osd-date {
     background: #fff;
     border: 2px solid #DA422F;
     border-radius: 4px;
@@ -54,7 +56,7 @@
     font-size: 10px;
     text-align: center;
     max-width: 150px; }
-.inner-osdays a.osdays-event .osd-name {
+.inner-osdays .osdays-event .osd-name {
     font-size: 14px;
     font-weight: 600;
     color: #333;
@@ -63,19 +65,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-top: 5px; }
-.inner-osdays a.osdays-event .osd-location {
+.inner-osdays .osdays-event .osd-location {
     font-style: italic;
     color: #333;
     font-weight: 300;
     margin-top: 5px; }
-.inner-osdays a.osdays-event .osd-link {
+.inner-osdays .osdays-event .osd-link {
     text-align: right;
     margin-top: 5px;
     padding-right: 45px;
     position: relative; }
-.inner-osdays a.osdays-event .osd-link:before {
+.inner-osdays .osdays-event .osd-link:before {
     content: 'More Details'; }
-.inner-osdays a.osdays-event .osd-link:after {
+.inner-osdays .osdays-event .osd-link:after {
     position: absolute;
     font-family: FontAwesome;
     top: -5px;

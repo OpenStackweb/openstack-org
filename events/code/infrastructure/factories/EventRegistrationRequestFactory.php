@@ -87,7 +87,11 @@ final class EventRegistrationRequestFactory
 
 	public function buildEvent(IEventRegistrationRequest $request) {
 
-		$event                      = new EventPage;
+        $continent = DB::query("SELECT Name FROM Continent AS C
+                                LEFT JOIN Continent_Countries AS CC ON C.ID = CC.ContinentID
+                                WHERE CC.CountryCode = '{$request->Country}'")->value();
+
+        $event                      = new EventPage;
 		$event->Title               = $request->Title;
 		$event->ClassName           = 'EventPage';
 		$event->EventLink           = $request->Url;
@@ -96,7 +100,8 @@ final class EventRegistrationRequestFactory
 		$event->EventStartDate      = $request->StartDate;
 		$event->EventEndDate        = $request->EndDate;
 		$event->EventLocation       = (!empty($request->State))?sprintf("%s, %s, %s",$request->City,$request->State,$request->Country):sprintf("%s, %s",$request->City,$request->Country);
-		$event->IsSummit            = false;
+		$event->EventContinent      = $continent;
+        $event->IsSummit            = false;
 		return $event;
 	}
 

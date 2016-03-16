@@ -123,6 +123,7 @@ jQuery(document).ready(function($) {
                     url        : $('#'+form_id+'_url',form).val(),
                     category   : $('#'+form_id+'_event_category',form).val(),
                     location   : $('#'+form_id+'_location',form).val(),
+                    continent  : $('#'+form_id+'_continent',form).val(),
                     start_date : $('#'+form_id+'_start_date',form).val(),
                     end_date   : $('#'+form_id+'_end_date',form).val()
                 };
@@ -422,6 +423,7 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_url',form).val(data.url);
                 $('#'+form_id+'_event_category',form).val(data.category);
                 $('#'+form_id+'_location',form).val(data.location);
+                $('#'+form_id+'_continent',form).val(data.continent);
                 $('#'+form_id+'_start_date',form).val(data.start_date);
                 $('#'+form_id+'_end_date',form).val(data.end_date);
                 edit_live_dialog.data('id',id).data('row',row).dialog( "open");

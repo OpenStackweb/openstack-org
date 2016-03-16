@@ -51,6 +51,7 @@ final class EventsAssembler {
         $res['label']                  = $main_info->getLabel();
         $res['category']               = $main_info->getCategory();
         $res['location']               = $event->getLocation();
+        $res['continent']              = $event->getContinent();
         $duration                      = $event->getDuration();
         $res['start_date']             = $duration->getStartDate()->format('Y-m-d');
         $res['end_date']               = $duration->getEndDate()->format('Y-m-d');

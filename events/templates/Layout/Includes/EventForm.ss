@@ -48,6 +48,14 @@
                     $Fields.dataFieldByName(location)
                 </div>
             </div>
+
+            <div class="field text " id="continent">
+                <label for="$FormName_continent" class="left">Continent</label>
+
+                <div class="middleColumn">
+                    $Fields.dataFieldByName(continent)
+                </div>
+            </div>
         </div>
 
         <div class="row">

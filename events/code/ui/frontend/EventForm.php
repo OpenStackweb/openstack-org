@@ -25,7 +25,9 @@ final class EventForm extends SafeXSSForm {
         $categoryField->setAttribute('class','event-category-autocomplete text');
         $fields->push($categoryField);
 		//location
+        $continents = DB::query("SELECT Name FROM Continent")->keyedColumn();
 		$fields->push(new TextField('location','Location'));
+        $fields->push(new DropdownField('continent','Continent',$continents));
 		//duration
 		$fields->push($start_date = new TextField('start_date','Start Date'));
 		$fields->push($end_date   = new TextField('end_date','End Date'));

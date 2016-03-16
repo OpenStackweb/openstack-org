@@ -109,7 +109,7 @@ class EventHolder_Controller extends Page_Controller {
     function FutureOpenstackDaysEvents($num) {
         $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
         $filter_array['EventCategory'] = 'Openstack Days';
-        $pulled_events = EventPage::get()->filter($filter_array)->sort('EventStartDate','ASC')->limit($num);
+        $pulled_events = EventPage::get()->filter($filter_array)->sort(array('EventStartDate'=>'ASC','EventContinent'=>'ASC'))->limit($num);
 
         return $pulled_events;
     }

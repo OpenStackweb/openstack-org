@@ -30,10 +30,12 @@ class EventPage
         'EventSponsorLogoUrl'  => 'Text',
         'IsSummit'             => 'Boolean',
         'ExternalSourceId'     => 'Varchar(255)',
+        'EventContinent'       => 'Varchar(255)',
     );
 
     private static $defaults = array(
         'ExternalSourceId' => null,
+        'EventContinent' => '',
     );
 
     private static $has_one = array();
@@ -127,6 +129,14 @@ class EventPage
     }
 
     /**
+     * @return string
+     */
+    public function getContinent()
+    {
+        return $this->EventContinent;
+    }
+
+    /**
      * @return EventDuration
      */
     public function getDuration()
@@ -150,8 +160,9 @@ class EventPage
      * @param string $location
      * @return void
      */
-    function registerLocation($location) {
+    function registerLocation($location, $continent) {
         $this->EventLocation = $location;
+        $this->EventContinent = $continent;
     }
 
     /**
