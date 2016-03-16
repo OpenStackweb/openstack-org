@@ -183,8 +183,6 @@ class RegistrationPage_Controller extends Page_Controller
 
         $form =  new HoneyPotForm($this, 'RegistrationForm', $fields, $actions, $validator);
 
-
-
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             if(isset($data['HiddenAffiliations']))
             {

@@ -31,4 +31,10 @@ interface ISpeakerRepository extends IEntityRepository
      * @return array
      */
     public function getBySummit(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
+
+    /**
+     * @param int $member_id
+     * @return IPresentationSpeaker
+     */
+    public function getByMemberID($member_id);
 }

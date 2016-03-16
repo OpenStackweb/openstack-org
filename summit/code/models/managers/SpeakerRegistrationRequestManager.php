@@ -45,7 +45,6 @@ final class SpeakerRegistrationRequestManager
         $this->repository = $repository;
         $this->factory    = $factory;
         $this->tx_manager = $tx_manager;
-
     }
 
     /**

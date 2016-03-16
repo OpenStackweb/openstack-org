@@ -32,7 +32,7 @@ $(document).ready(function(){
         }
     });
 
-    $('#member').tagsinput({
+    $('#member_id').tagsinput({
         itemValue: 'id',
         itemText: 'name',
         freeInput: false,
@@ -53,22 +53,57 @@ $(document).ready(function(){
     });
 
     if (!$.isEmptyObject(member)) {
-        $('#member').tagsinput('add', member);
+        $('#member_id').tagsinput('add', member);
     }
 
     var form = $('#edit-speaker-form');
 
     //validation
     form_validator = form.validate({
-
+        onfocusout: false,
+        focusCleanup: true,
+        ignore: [],
+        rules: {
+            title:      { required: true},
+            first_name: { required : true },
+            last_name:  { required: true },
+            bio:        { required: true },
+        },
     });
 
-    form.submit(function (event) {
-        event.preventDefault();
-        if(form.valid())
-        {
-
-        }
+    form.submit(function (evt) {
+        evt.preventDefault();
+        form.find('textarea').each(function() {
+            var text_area = $(this);
+            var text_editor = tinyMCE.get(text_area.attr('id'));
+            if (text_editor)
+                text_area.val(text_editor.getContent());
+        });
+        if (!form.valid()) return false;
+        form.find(':submit').attr('disabled','disabled');
+        var request    = form.serializeForm();
+        var summit_id  = $('#summit_id').val();
+        var speaker_id = $('#speaker_id').val();
+        var url        = 'api/v1/summits/'+summit_id+'/speakers/'+speaker_id;
+        $.ajax({
+            type: 'PUT',
+            url: url,
+            data: JSON.stringify(request),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(saved_event) {
+             swal("Updated!", "Speaker was updated successfully.", "success");
+             form.find(':submit').removeAttr('disabled');
+        }).fail(function(jqXHR) {
+            var responseCode = jqXHR.status;
+            if(responseCode == 412) {
+                var response = $.parseJSON(jqXHR.responseText);
+                swal('Validation error', response.messages[0].message, 'warning');
+            } else {
+                swal('Error', 'There was a problem updating speaker, please contact admin.', 'warning');
+            }
+            form.find(':submit').removeAttr('disabled');
+        });
         return false;
     });
 });

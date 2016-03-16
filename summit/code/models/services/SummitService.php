@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,6 +30,21 @@ final class SummitService implements ISummitService
      * @var ISummitAssistanceRepository
      */
     private $assistance_repository;
+
+    /**
+     * @var ISpeakerRepository
+     */
+    private $speaker_repository;
+
+    /**
+     * @var IMemberRepository
+     */
+    private $member_repository;
+
+    /**
+     * @var ISpeakerRegistrationRequestManager
+     */
+    private $speaker_registration_request_manager;
     /**
      * @var ITransactionManager
      */
@@ -41,14 +56,20 @@ final class SummitService implements ISummitService
         ISummitEventRepository $event_repository,
         ISummitAttendeeRepository $attendee_repository,
         ISummitAssistanceRepository $assistance_repository,
+        ISpeakerRepository $speaker_repository,
+        IMemberRepository $member_repository,
+        ISpeakerRegistrationRequestManager $speaker_registration_request_manager,
         ITransactionManager $tx_service
     )
     {
-        $this->summit_repository = $summit_repository;
-        $this->event_repository  = $event_repository;
-        $this->attendee_repository  = $attendee_repository;
-        $this->assistance_repository  = $assistance_repository;
-        $this->tx_service        = $tx_service;
+        $this->summit_repository                    = $summit_repository;
+        $this->event_repository                     = $event_repository;
+        $this->attendee_repository                  = $attendee_repository;
+        $this->assistance_repository                = $assistance_repository;
+        $this->speaker_repository                   = $speaker_repository;
+        $this->member_repository                    = $member_repository;
+        $this->speaker_registration_request_manager = $speaker_registration_request_manager;
+        $this->tx_service                           = $tx_service;
     }
 
     /**
@@ -588,31 +609,174 @@ final class SummitService implements ISummitService
     /**
      * @param ISummit $summit
      * @param $data
-     * @return mixed
      */
     public function updateHeadCount(ISummit $summit, $data)
     {
         $event_repository = $this->event_repository;
-        $this_var         = $this;
+        $this_var = $this;
 
-        $this->tx_service->transaction(function() use($this_var, $summit, $data, $event_repository){
+        $this->tx_service->transaction(function () use ($this_var, $summit, $data, $event_repository) {
             foreach ($data as $event_data) {
-                if(!isset($event_data['id']))
+                if (!isset($event_data['id']))
                     throw new EntityValidationException('missing required param: id');
 
                 $event_id = intval($event_data['id']);
-                $event    = $event_repository->getById($event_id);
+                $event = $event_repository->getById($event_id);
 
-                if(is_null($event))
+                if (is_null($event))
                     throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
 
-                if(intval($event->SummitID) !== intval($summit->getIdentifier()))
+                if (intval($event->SummitID) !== intval($summit->getIdentifier()))
                     throw new EntityValidationException('event doest not belongs to summit');
 
                 $event->HeadCount = intval($event_data['headcount']);
 
                 $event->write();
             }
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $speaker_data
+     * @return IPresentationSpeaker
+     */
+    public function createSpeaker(ISummit $summit, array $speaker_data)
+    {
+        $speaker_repository                   = $this->speaker_repository;
+        $member_repository                    = $this->member_repository;
+        $speaker_registration_request_manager = $this->speaker_registration_request_manager;
+
+        return $this->tx_service->transaction(function () use
+        (
+            $summit, $speaker_data, $speaker_repository, $member_repository , $speaker_registration_request_manager
+        ) {
+
+            $speaker   = PresentationSpeaker::create();
+            $member_id = 0;
+            if(!isset($speaker_data['email']) && !isset($speaker_data['member_id']))
+                throw new EntityValidationException
+                ("you mus provide an email or a member_id in order to create a speaker!");
+
+            if(isset($speaker_data['member_id']) && intval($speaker_data['member_id']) > 0){
+                $member_id = intval($speaker_data['member_id']);
+                $old_speaker = $speaker_repository->getByMemberID($member_id);
+                if(!is_null($old_speaker))
+                    throw new EntityValidationException
+                    (
+                        sprintf
+                        (
+                            "Member %s already has assigned an speaker!",
+                            $member_id
+                        )
+                    );
+            }
+
+            $speaker->Title       = trim($speaker_data['title']);
+            $speaker->FirstName   = trim($speaker_data['first_name']);
+            $speaker->LastName    = trim($speaker_data['last_name']);
+            $speaker->IRCHandle   = trim($speaker_data['twitter_name']);
+            $speaker->TwitterName = trim($speaker_data['irc_name']);
+            $speaker->MemberID    = $member_id;
+            $speaker->write();
+
+            if($member_id === 0 && isset($speaker_data['email'])){
+                $email  = trim($speaker_data['email']);
+                $member = $member_repository->findByEmail($email);
+                if(is_null($member)){
+                    // we need to create a registration request
+                    $request = $speaker_registration_request_manager->register($speaker, $email);
+                    $request->write();
+                    $speaker->RegistrationRequestID = $request->ID;
+                    $speaker->write();
+                }
+                else
+                {
+                    $old_speaker = $speaker_repository->getByMemberID($member->getIdentifier());
+                    if(!is_null($old_speaker))
+                        throw new EntityValidationException
+                        (
+                            sprintf
+                            (
+                                "Member %s already has assigned an speaker!",
+                                $member->getIdentifier()
+                            )
+                        );
+                    $speaker->MemberID = $member->getIdentifier();
+                    $speaker->write();
+                }
+            }
+
+            $onsite_phone = trim($speaker_data['onsite_phone']);
+            if(!empty($onsite_phone)) {
+                $summit_assistance = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
+                $summit_assistance->SummitID = $summit->getIdentifier();
+                $summit_assistance->SpeakerID = $speaker->ID;
+                $summit_assistance->write();
+                $summit_assistance->OnSitePhoneNumber = $onsite_phone;
+                $summit_assistance->write();
+            }
+
+            return $speaker;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $speaker_data
+     * @return IPresentationSpeaker
+     */
+    public function updateSpeaker(ISummit $summit, array $speaker_data)
+    {
+        $speaker_repository = $this->speaker_repository;
+        $member_repository  = $this->member_repository;
+
+        return $this->tx_service->transaction(function () use ($summit, $speaker_data, $speaker_repository, $member_repository) {
+            $speaker_id = intval($speaker_data['speaker_id']);
+            $speaker    = $speaker_repository->getById($speaker_id);
+            if(is_null($speaker)) throw new NotFoundEntityException('PresentationSpeaker');
+            $member_id            = intval($speaker_data['member_id']);
+            if($member_id > 0)
+            {
+                $old_speaker = $speaker_repository->getByMemberID($member_id);
+                if($old_speaker->getIdentifier() !== $speaker_id)
+                    throw new EntityValidationException
+                    (
+                        sprintf
+                        (
+                            "Member %s already has assigned an speaker!",
+                            $member_id
+                        )
+                    );
+            }
+            $speaker->Title       = trim($speaker_data['title']);
+            $speaker->FirstName   = trim($speaker_data['first_name']);
+            $speaker->LastName    = trim($speaker_data['last_name']);
+            $speaker->Bio         = trim($speaker_data['bio']);
+            $speaker->IRCHandle   = trim($speaker_data['twitter_name']);
+            $speaker->TwitterName = trim($speaker_data['irc_name']);
+            if($speaker->MemberID > 0  && $member_id == 0)
+                throw new EntityValidationException
+                (
+                    sprintf('you cant leave Speaker %s without associated Member!', $speaker_id)
+                );
+
+            $speaker->MemberID    = $member_id;
+
+            $onsite_phone = trim($speaker_data['onsite_phone']);
+            if(!empty($onsite_phone)) {
+                $summit_assistance = $speaker->getAssistanceFor($summit->getIdentifier());
+                if(is_null($summit_assistance)){
+                    $summit_assistance = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
+                    $summit_assistance->SummitID = $summit->getIdentifier();
+                    $summit_assistance->SpeakerID = $speaker_id;
+                    $summit_assistance->write();
+                }
+                $summit_assistance->OnSitePhoneNumber = $onsite_phone;
+                $summit_assistance->write();
+            }
+            return $speaker;
+
         });
     }
 

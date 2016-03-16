@@ -14,13 +14,13 @@
 
         <form id="edit-speaker-form">
             <input type="hidden" id="summit_id" value="$Summit.ID" />
-            <input type="hidden" id="attendee_id" value="$Speaker.ID" />
+            <input type="hidden" id="speaker_id" value="$Speaker.ID" />
 
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4 member_container">
                         <label for="member">Member</label><br>
-                        <input id="member" name="member"/>
+                        <input id="member_id" name="member_id"/>
                     </div>
                 </div>
             </div>
@@ -44,6 +44,19 @@
                             <input id="onsite_phone" name="onsite_phone" value="$Speaker.getOnSitePhoneFor($Top.Summit.ID)" />
                         </div>
                     </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Twitter Name</label>
+                        <input id="twitter_name" name="twitter_name" value="$Speaker.TwitterName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>IRC Name</label>
+                        <input id="irc_name" name="irc_name" value="$Speaker.IRCHandle" />
+                    </div>
+
+                </div>
             </div>
             <div class="form-group">
                 <div class="row">

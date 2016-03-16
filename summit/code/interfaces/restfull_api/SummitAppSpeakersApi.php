@@ -1,10 +1,19 @@
 <?php
+/**
+ * Copyright 2016 OpenStack Foundation
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 /**
- * Created by PhpStorm.
- * User: smarcet
- * Date: 3/14/16
- * Time: 1:29 PM
+ * Class SummitAppSpeakersApi
  */
 class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
 
@@ -57,7 +66,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
     }
 
     static $url_handlers = array(
-        'GET $TERM!'         => 'getSpeakersByTerm',
+        'GET $TERM!'       => 'getSpeakersByTerm',
         'GET '             => 'getSpeakers',
         'POST '            => 'addSpeaker',
         'PUT $SPEAKER_ID!' => 'updateSpeaker',
@@ -67,7 +76,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
         'getSpeakers',
         'getSpeakersByTerm',
         'updateSpeaker',
-        'updateSpeaker',
+        'addSpeaker',
     );
 
     // this is called when typing a Speakers name to add as a tag on edit event
@@ -79,8 +88,6 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $summit       = Summit::get_by_id('Summit',$summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $slug1 = IFoundationMember::CommunityMemberGroupSlug;
-            $slug2 = IFoundationMember::FoundationMemberGroupSlug;
 
             $query = <<<SQL
 SELECT
@@ -97,24 +104,29 @@ WHERE
   M.FirstName LIKE '%{$term}%' OR
   M.Surname LIKE '%{$term}%' OR
   M.Email LIKE '%{$term}%' OR
+  M.ID LIKE '%{$term}%' OR
   CONCAT(M.FirstName,' ',M.Surname) LIKE '%{$term}%'
 )
-AND
-EXISTS
+
+UNION
+SELECT
+CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+PS.MemberID AS member_id ,
+PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
+PS.ID  AS speaker_id,
+PSR.Email AS email
+FROM PresentationSpeaker AS PS
+INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
+WHERE
 (
-  SELECT 1 FROM Group_Members AS GM
-  INNER JOIN `Group` AS G ON G.ID = GM.GroupID
-  WHERE
-  GM.MemberID = M.ID
-  AND
-  (
-    G.Code = '{$slug1}'
-    OR
-    G.Code = '{$slug2}'
-  )
+  PS.FirstName LIKE '%{$term}%' OR
+  PS.LastName LIKE '%{$term}%' OR
+  PSR.Email LIKE '%{$term}%' OR
+  CONCAT(PS.FirstName,' ', PS.LastName) LIKE '%{$term}%'
 )
-ORDER BY M.FirstName, M.Surname
-LIMIT 10;
+AND
+PS.MemberID = 0
+LIMIT 15;
 SQL;
             $speakers = DB::query($query);
 
@@ -189,7 +201,17 @@ SQL;
     public function addSpeaker(SS_HTTPRequest $request){
         try
         {
-
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data         = $this->getJsonRequest();
+            $this->summit_service->createSpeaker($summit, $data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -206,7 +228,19 @@ SQL;
     public function updateSpeaker(SS_HTTPRequest $request){
         try
         {
-
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $speaker_id   = intval($request->param('SPEAKER_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data         = $this->getJsonRequest();
+            $data['speaker_id'] = $speaker_id;
+            $this->summit_service->updateSpeaker($summit, $data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
         }
         catch(NotFoundEntityException $ex2)
         {

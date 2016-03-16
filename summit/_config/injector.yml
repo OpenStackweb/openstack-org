@@ -137,4 +137,7 @@ Injector:
       1: '%$EventRepository'
       2: '%$SummitAttendeeRepository'
       3: '%$SummitAssistanceRepository'
-      4: '%$TransactionManager'
+      4: '%$SpeakerRepository'
+      5: '%$MemberRepository'
+      6: '%$SpeakerRegistrationRequestManager'
+      7: '%$TransactionManager'

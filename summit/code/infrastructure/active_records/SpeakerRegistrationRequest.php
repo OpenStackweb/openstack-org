@@ -21,7 +21,8 @@ class SpeakerRegistrationRequest
 
     const ConfirmationTokenParamName = 'spk_reg_t';
 
-    private static $db = array(
+    private static $db = array
+    (
         'IsConfirmed'      => 'Boolean',
         'Email'            => 'Varchar(254)',
         'ConfirmationDate' => 'SS_Datetime',

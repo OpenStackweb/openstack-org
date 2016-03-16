@@ -153,4 +153,13 @@ SQL;
 
         return array($page, $page_size, $count, $data);
     }
+
+    /**
+     * @param int $member_id
+     * @return IPresentationSpeaker
+     */
+    public function getByMemberID($member_id)
+    {
+        return PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
+    }
 }

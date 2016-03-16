@@ -271,7 +271,6 @@ $(document).ready(function(){
 
     $('#btn_publish').click(function(evt){
         evt.preventDefault();
-        form.find(':submit')
         form.find('textarea').each(function() {
             var text_area = $(this);
             var text_editor = tinyMCE.get(text_area.attr('id'));

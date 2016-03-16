@@ -90,8 +90,9 @@ final class SapphireTransactionManager implements ITransactionManager
     }
 
     /**
-     * @param callable $callback
-     * @return mixed|void
+     * @param Closure $callback
+     * @return null
+     * @throws EntityValidationException
      * @throws Exception
      */
     public function transaction(Closure $callback)

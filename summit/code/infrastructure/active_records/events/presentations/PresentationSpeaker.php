@@ -576,7 +576,24 @@ implements IPresentationSpeaker
      */
     public function getOnSitePhoneFor($summit_id)
     {
-        $request = $this->SummitAssistances('SummitID', intval($summit_id))->first();
+        $request = $this->getAssistanceFor($summit_id);
         return !is_null($request) ? $request->OnSitePhoneNumber : '';
+    }
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasAssistanceFor($summit_id){
+        return intval($this->SummitAssistances('SummitID', intval($summit_id))->count()) > 0;
+    }
+
+    /**
+     * @param int $summit_id
+     * @return PresentationSpeakerSummitAssistanceConfirmationRequest
+     */
+    public function getAssistanceFor($summit_id)
+    {
+        return$this->SummitAssistances('SummitID', intval($summit_id))->first();
     }
 }
