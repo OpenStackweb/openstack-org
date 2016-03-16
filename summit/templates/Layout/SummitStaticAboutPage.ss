@@ -46,7 +46,7 @@
                 <p>
                     Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Austin.
                 </p>
-                <a href="#" class="btn outline-btn">Coming Soon</a>
+                <a href="/summit/austin-2016/summit-schedule/" class="btn outline-btn">View The Schedule</a>
             </div>
         </div>
         </div>
@@ -186,7 +186,7 @@
                     Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Austin.
                 </p>
                 <p>
-                    <a href="#" class="btn outline-btn">Coming Soon</a>
+                    <a href="/summit/austin-2016/summit-schedule/" class="btn outline-btn">View the Schedule</a>
                 </p>
             </div>
         </div>
