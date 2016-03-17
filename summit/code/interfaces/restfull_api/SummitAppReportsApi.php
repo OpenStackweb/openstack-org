@@ -290,6 +290,10 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     $csv = implode(',',$header).PHP_EOL;
                     foreach($report_data as $val) {
                         $val = array_slice($val, 1); //skip id
+                        //escape commas
+                        foreach($val as &$col) {
+                            $col = '"'.str_replace("\"","'" , $col ).'"';
+                        }
                         $csv .= implode(',',$val).PHP_EOL;
                     }
                     break;
@@ -305,6 +309,10 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                             $time = date('g:ia',strtotime($val['start_date'])).' - '.date('g:ia',strtotime($val['end_date']));
                             unset($val['start_date']);
                             unset($val['end_date']);
+                            //escape commas
+                            foreach($val as &$col) {
+                                $col = '"'.str_replace("\"","'" , $col ).'"';
+                            }
                             array_unshift($val,$time);
                             $csv .= implode(',',$val).PHP_EOL;
                         }
@@ -321,6 +329,10 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     $csv = implode(',',$header).PHP_EOL;
                     foreach($report_data as $val) {
                         $val = array_slice($val, 2); //skip id
+                        //escape commas
+                        foreach($val as &$col) {
+                            $col = '"'.str_replace("\"","'" , $col ).'"';
+                        }
                         $csv .= implode(',',$val).PHP_EOL;
                     }
                     break;
