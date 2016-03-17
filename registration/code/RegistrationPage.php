@@ -23,7 +23,13 @@ class RegistrationPage_Controller extends Page_Controller
     //Allow our form as an action
     static $allowed_actions = array(
         'RegistrationForm',
+        'MobileRegistrationForm',
+        'MobileRegistrationPage',
         'results',
+    );
+
+    private static $url_handlers = array (
+        'mobile/$MEMBERSHIP!' => 'MobileRegistrationPage'
     );
 
     /**
@@ -194,7 +200,6 @@ class RegistrationPage_Controller extends Page_Controller
         return $form;
     }
 
-    //Submit the registration form
     function doRegister($data, $form)
     {
         try {
@@ -222,6 +227,102 @@ class RegistrationPage_Controller extends Page_Controller
         }
         catch(Exception $ex){
             Form::messageForForm('HoneyPotForm_RegistrationForm', "There was an error with your request, please contact your admin.", 'bad');
+            //Return back to form
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->redirectBack();
+        }
+    }
+
+    function MobileRegistrationPage()
+    {
+        $membership = $this->request->param('MEMBERSHIP');
+        Requirements::block("registration/javascript/affiliations.js");
+        Requirements::block("registration/javascript/registration.page.js");
+        Requirements::css('registration/css/mobile.registration.page.css');
+        Requirements::javascript("registration/javascript/mobile.registration.page.js");
+
+        echo $this->renderWith(array('MobileRegistrationPage','RegistrationPage','Page'), array('Membership' => $membership));
+    }
+
+    //Generate the registration form for mobile
+    function MobileRegistrationForm($membership)
+    {
+        //Membership
+        $membershipField = new HiddenField('MembershipType',null,$membership);
+        // Name Set
+        $FirstNameField = new TextField('FirstName', "First Name");
+        $LastNameField = new TextField('Surname', "Last Name");
+        // Country
+        $label = _t('Addressable.COUNTRY', 'Country');
+        $countryField = new CountryDropdownField('Country', $label);
+        $countryField->setEmptyString('-- Select One --');
+        $countryField->addExtraClass('chzn-select');
+        // Email Addresses
+        $PrimaryEmailField = new TextField('Email', "Primary Email Address");
+
+        $fields = new FieldList(
+            $membershipField,
+            $FirstNameField,
+            $LastNameField,
+            $countryField,
+            new LiteralField('break', '<hr/>'),
+            $PrimaryEmailField,
+            new LiteralField('login_text','<div class="login_lit"> You will use this to login. </div>')
+        );
+
+        $fields->push(new ConfirmedPasswordField('Password', 'Password'));
+
+        $actions = new FieldList(
+            new FormAction('doRegisterMobile', 'Complete Registration')
+        );
+
+        $validator = new Member_Validator(
+            'FirstName',
+            'Surname',
+            'Email',
+            'Country',
+            'Password'
+        );
+
+        $form =  new HoneyPotForm($this, 'MobileRegistrationForm', $fields, $actions, $validator);
+
+        if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
+            return $form->loadDataFrom($data);
+        }
+
+        return $form;
+    }
+
+
+
+    //Submit the registration form
+    function doRegisterMobile($data, $form)
+    {
+        try {
+            $data = SQLDataCleaner::clean($data);
+
+            Session::set("FormInfo.{$form->FormName()}.data", $data);
+            $profile_page = EditProfilePage::get()->first();
+            $member = $this->member_manager->registerMobile($data, $profile_page, new MemberRegistrationSenderService);
+            //Get profile page
+            if (!is_null($profile_page)) {
+                //Redirect to profile page with success message
+                Session::clear("FormInfo.{$form->FormName()}.data");
+                $request  = Controller::curr()->getRequest();
+                $back_url = $request->postVar('BackURL');
+                $link     = $profile_page->Link('?success=1');
+                if(!empty($back_url)) $link .= "&BackURL=".$back_url;
+                return OpenStackIdCommon::loginMember($member, $link);
+            }
+        }
+        catch(EntityValidationException $ex1){
+            Form::messageForForm('HoneyPotForm_MobileRegistrationForm',$ex1->getMessage(), 'bad');
+            //Return back to form
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->redirectBack();
+        }
+        catch(Exception $ex){
+            Form::messageForForm('HoneyPotForm_MobileRegistrationForm', "There was an error with your request, please contact your admin.", 'bad');
             //Return back to form
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->redirectBack();

@@ -41,4 +41,15 @@ final class MemberFactory implements IMemberFactory
         $member->Password = trim($data['Password']['_Password']);
         return $member;
     }
+
+    public function buildReduced(array $data)
+    {
+        $member = Member::create();
+        $member->FirstName = trim($data['FirstName']);
+        $member->Surname = trim($data['Surname']);
+        $member->Email = trim($data['Email']);
+        $member->Country = trim($data['Country']);
+        $member->Password = trim($data['Password']['_Password']);
+        return $member;
+    }
 }

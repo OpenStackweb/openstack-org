@@ -187,6 +187,98 @@ class MemberManager implements IMemberManager
     }
 
     /**
+     * @param array $data
+     * @param EditProfilePage $profile_page
+     * @param IMessageSenderService $sender_service
+     * @return null
+     * @throws Exception
+     */
+    public function registerMobile(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service)
+    {
+        $repository          = $this->repository;
+        $group_repository    = $this->group_repository;
+        $factory             = $this->factory;
+        $group_factory       = $this->group_factory;
+        $affiliation_factory = $this->affiliation_factory;
+        $org_repository      = $this->org_repository;
+        $org_factory         = $this->org_factory;
+
+        try {
+            return $this->tx_manager->transaction(function () use (
+                $data,
+                $profile_page,
+                $repository,
+                $group_repository,
+                $org_repository,
+                $factory,
+                $group_factory,
+                $affiliation_factory,
+                $org_factory,
+                $sender_service
+            ) {
+                $mandatory_fields = array
+                (
+                    'Email'              => 'Email',
+                    'FirstName'          => 'First Name',
+                    'Surname'            => 'Surname',
+                    'Password'           => 'Password',
+                );
+
+                foreach($mandatory_fields as $mf => $fn){
+                    if (!isset($data[$mf]) || empty($data[$mf])) {
+                        throw new EntityValidationException(sprintf('%s is a mandatory field!.',$fn));
+                    }
+                }
+
+                if(!isset($data['Password']['_Password']) || !isset($data['Password']['_ConfirmPassword']) || $data['Password']['_ConfirmPassword'] !== $data['Password']['_Password'])
+                {
+                    throw new EntityValidationException('Password is a mandatory field!.');
+                }
+
+                $old_member = $repository->findByEmail(Convert::raw2sql($data['Email']));
+                if (!is_null($old_member)) {
+                    throw new EntityValidationException('Sorry, that email address already exists. Please choose another.');
+                }
+
+                $member = $factory->buildReduced($data);
+                $member->write();
+
+                if ($data['MembershipType'] === 'foundation') {
+                    $member->upgradeToFoundationMember();
+                } else {
+                    $member->convert2SiteUser();
+                }
+
+                $users_group = $group_repository->getByCode(ISecurityGroupFactory::UsersGroupCode);
+                if (is_null($users_group)) {
+                    // create group
+                    $users_group = $group_factory->build(ISecurityGroupFactory::UsersGroupCode);
+                    $users_group->write();
+                }
+                $member->addToGroupByCode(ISecurityGroupFactory::UsersGroupCode);
+
+                if (!is_null($profile_page)) {
+                    $sender_service->send($member);
+                }
+                //force write,
+                $member->write();
+                PublisherSubscriberManager::getInstance()->publish('new_user_registered', array($member->ID));
+                return $member;
+            });
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            throw $ex1;
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            throw $ex;
+        }
+    }
+
+    /**
      * @param string $token
      * @param IMessageSenderService $sender_service
      * @throws NotFoundEntityException

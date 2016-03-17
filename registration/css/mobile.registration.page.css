@@ -1,0 +1,80 @@
+label.error {
+  border: 1px solid #aaa;
+  background: #aa2222;
+  color: #fff;
+  padding: 5px;
+  margin: 0;
+  -webkit-border-radius: 05px;
+  -moz-border-radius: 05px;
+  border-radius: 05px; }
+
+input.error {
+  border: 1px solid #aa2222; }
+
+.membership-level-container {
+  margin-top: 1em;
+  margin-bottom: 1em; }
+
+form {
+  margin-top: 1em;
+  margin-bottom: 1em; }
+
+.container.wrap {
+    max-width: 400px;
+    text-align: center;
+}
+
+form {
+    border-color: #D4DCE5;
+    border-radius: 5px;
+    background-color: #EDF2F7;
+    text-align: left;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 0;
+}
+
+hr {
+    border-color: #D4DCE5;
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+input {
+    border-color: #D4DCE5;
+}
+
+.Actions {
+    padding: 0 17px 20px 17px;
+    width: 100%;
+}
+
+.Actions input {
+    width:100%;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    background: #2A4E68;
+    color: white !important;
+    text-shadow: none;
+    padding:8px;
+}
+
+#member-application-title {
+    text-align: center;
+}
+
+#Email {
+    margin-bottom: 0;
+}
+
+.login_lit {
+    font-size: 12px;
+    margin: 3px 0 10px 0;
+    font-style: italic;
+}
