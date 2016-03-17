@@ -54,16 +54,18 @@
         this.page_data     = opts.page_data;
         this.summit_id     = opts.summit_id;
         this.edit_link     = opts.edit_link;
+        this.total_pages   = 0;
         this.sort_by       = 'id';
         this.sort_dir      = 'asc';
         var self           = this;
 
         this.on('mount', function() {
 
+            self.total_pages = self.page_data.total_items > 0 ? Math.ceil(self.page_data.total_items / self.page_data.limit): 0;
             var options = {
                 bootstrapMajorVersion:3,
                 currentPage: self.page_data.page ,
-                totalPages: Math.ceil(self.page_data.total_items / self.page_data.limit),
+                totalPages: self.total_pages ,
                 numberOfPages: 10,
                 onPageChanged: function(e,oldPage,newPage){
                     self.getSpeakers(newPage, $('#speakers_search_term').val());
@@ -85,8 +87,8 @@
         });
 
         getSpeakers(page, search_term) {
-                $('body').ajax_loader();
 
+                $('body').ajax_loader();
 
                 $.getJSON('api/v1/summits/'+self.summit_id+'/speakers',{
                         page:page,
@@ -99,18 +101,22 @@
                     self.speakers              = data.speakers;
                     self.page_data.page        = data.page;
                     self.page_data.total_items = data.count;
+                    self.total_pages           = self.page_data.total_items > 0 ? Math.ceil(self.page_data.total_items / self.page_data.limit): 0;
+                    if(self.speakers .length > 0){
+                        var options = {
+                            bootstrapMajorVersion:3,
+                            currentPage: self.page_data.page ,
+                            totalPages: self.total_pages,
+                            numberOfPages: 10,
+                            onPageChanged: function(e,oldPage,newPage){
+                                self.getSpeakers(newPage, $('#speakers_search_term').val());
+                            }
+                        };
 
-                    var options = {
-                        bootstrapMajorVersion:3,
-                        currentPage: self.page_data.page ,
-                        totalPages: Math.ceil(self.page_data.total_items / self.page_data.limit),
-                        numberOfPages: 10,
-                        onPageChanged: function(e,oldPage,newPage){
-                            self.getSpeakers(newPage, $('#speakers_search_term').val());
-                        }
-                    };
-
-                    $('#speakers-pager').bootstrapPaginator(options);
+                        $('#speakers-pager').bootstrapPaginator(options);
+                        $('#speakers-pager').show();
+                    }
+                    else $('#speakers-pager').hide();
                     self.update();
                     $('body').ajax_loader('stop');
                 });
