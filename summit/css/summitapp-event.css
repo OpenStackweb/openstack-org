@@ -113,6 +113,14 @@
     top: -10px;
 }
 
+.btn-rsvp-event
+{
+    background-color: #224066 !important;
+    border-color: #224066 !important;
+    border-radius: 0;
+    margin-top: 10px;
+}
+
 .share {
     clear: both;
     margin-top: 20px;

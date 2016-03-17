@@ -76,6 +76,11 @@
                     <div class="info_item_text">Design Summit Credential</div>
                 </div>
                 <% end_if %>
+                <% if Event.RSVPLink %>
+                <div class="info_item">
+                    <a href="{$Event.RSVPLink}" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" target="_blank" role="button">RSVP to this Event</a>
+                </div>
+                <% end_if %>
                 <% if Event.Sponsors %>
                 <div class="logo">
                     <% loop Event.Sponsors %>
