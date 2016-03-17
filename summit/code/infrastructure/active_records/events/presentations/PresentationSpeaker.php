@@ -21,7 +21,8 @@ implements IPresentationSpeaker
         'Country'               => 'Varchar(2)',
         'BeenEmailed'           => 'Boolean',
         'WillingToPresentVideo' => 'Boolean',
-        'Notes'                 => 'HTMLText'
+        'Notes'                 => 'HTMLText',
+        'CreatedFromAPI'        => 'Boolean',
     );
 
     private static $has_one = array
@@ -58,7 +59,8 @@ implements IPresentationSpeaker
     );
 
     private static $defaults = array(
-        'MemberID' => 0,
+        'MemberID'       => 0,
+        'CreatedFromAPI' => false,
     );
 
     private static $belongs_many_many = array

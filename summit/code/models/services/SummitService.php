@@ -672,12 +672,13 @@ final class SummitService implements ISummitService
                     );
             }
 
-            $speaker->Title       = trim($speaker_data['title']);
-            $speaker->FirstName   = trim($speaker_data['first_name']);
-            $speaker->LastName    = trim($speaker_data['last_name']);
-            $speaker->IRCHandle   = trim($speaker_data['twitter_name']);
-            $speaker->TwitterName = trim($speaker_data['irc_name']);
-            $speaker->MemberID    = $member_id;
+            $speaker->Title          = trim($speaker_data['title']);
+            $speaker->FirstName      = trim($speaker_data['first_name']);
+            $speaker->LastName       = trim($speaker_data['last_name']);
+            $speaker->IRCHandle      = trim($speaker_data['twitter_name']);
+            $speaker->TwitterName    = trim($speaker_data['irc_name']);
+            $speaker->MemberID       = $member_id;
+            $speaker->CreatedFromAPI = true;
             $speaker->write();
 
             if($member_id === 0 && isset($speaker_data['email'])){
