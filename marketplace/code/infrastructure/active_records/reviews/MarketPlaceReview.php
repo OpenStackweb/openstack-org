@@ -20,7 +20,7 @@ class MarketPlaceReview extends DataObject implements IMarketPlaceReview {
 
 	static $db = array(
 		'Title'     => 'Varchar',
-        'Comment'   => 'Varchar',
+        'Comment'   => 'Text',
         'Rating'    => 'Float',
         'Approved'  => 'Boolean'
 	);
