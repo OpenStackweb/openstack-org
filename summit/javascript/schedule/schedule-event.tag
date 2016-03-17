@@ -1,16 +1,15 @@
 <schedule-event>
     <div if={ show } id="event_{ id }" class="row event-row">
         <div class="col-sm-12">
-            <div class="row main-event-content" data-event-id="{ id }">
-                <div class="col-md-1 col-xs-1 event-type" style="background-color: { eventColor(category_group_ids) }">&nbsp;</div>
-                <div class="col-md-11 col-xs-11 event-content">
+            <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids) }" data-event-id="{ id }">
+                <div class="event-content">
                     <div class="row row_location">
-                        <div class="col-xs-12 col-xs-3 col-time">
+                        <div class="col-sm-2 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>
                             <span if={ show_date }>{ date_nice }</span>
                             &nbsp;<span>{ start_time }</span>-<span>{ end_time }</span>
                         </div>
-                        <div class="col-xs-12 col-md-7 col-location">
+                        <div class="col-sm-7 col-location">
                             <div if={ summit.should_show_venues } >
                                 <i class="fa fa-map-marker icon-map"></i>
                                 &nbsp;
@@ -20,7 +19,7 @@
                                 <span if={ !summit.locations[location_id] }> { locationName(location_id) } </span>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-2 my-schedule-container" if={ parent.summit.current_user !== null } >
+                        <div class="col-sm-3 my-schedule-container" if={ parent.summit.current_user !== null } >
                             <span if={ !own } onclick={ addToMySchedule } title="add to my schedule" class="icon-event-action">
                                 <i class="fa fa-plus-circle icon-foreign-event" ></i>
                                 My&nbsp;calendar
@@ -54,58 +53,63 @@
                 </div>
             </div>
             <div class="row event-details" id="event_details_{ id }" style="display:none;">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="bio-row">
-                                <raw content="{ abstract }"/>
-                            </div>
-                            <div class="row tags-row" if={ tags_id.length > 0 }>
-                                <div class="col-xs-12 col-md-2 col-tags-title">
-                                    <i class="fa fa-tags"></i>
-                                    <span>Tags:</span>
-                                </div>
-                                <div class="col-xs-12 col-md-10 col-tags-content">
-                                    <span each={ tag_id, i in tags_id } title="Search Tag" class="tag">
-                                        <a class="search-link" href="{ parent.search_url+'?t='+summit.tags[tag_id].name.replace(/ /g,'+') }">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }</a>
-                                        &nbsp;
-                                    </span>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="bio-row">
+                            <raw content="{ abstract }"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div data-speaker-id={ speaker_id } class="row speaker-row" each={ speaker_id in speakers_id }>
+                            <div class="speaker-name-row">
+                                <div class="col-sm-12">
+                                    <div class="speaker-photo-left">
+                                        <a href={ parent.base_url+'speakers/'+ this.speaker_id } class="profile-pic-wrapper" style="background-image: url('{ summit.speakers[speaker_id].profile_pic }')">
+                                        </a>
+                                    </div>
+                                    <div class="speaker-name-right">
+                                        <a href={ parent.base_url+'speakers/'+ this.speaker_id }>
+                                            { summit.speakers[speaker_id].name }
+                                        </a>
+                                        <div class="speaker-company">
+                                            { summit.speakers[speaker_id].position }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div data-speaker-id={ speaker_id } class="row speaker-row" each={ speaker_id in speakers_id }>
-                                <div class="col-md-4">
-                                    <a href={ parent.base_url+'speakers/'+ this.speaker_id } class="profile-pic-wrapper" style="background-image: url('{ summit.speakers[speaker_id].profile_pic }')">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="row speaker-name-row"><div class="col-md-12"><a href={ parent.base_url+'speakers/'+ this.speaker_id }>{ summit.speakers[speaker_id].name }</a></div></div>
-                                    <div class="row speaker-position-row"><div class="col-md-12">{ summit.speakers[speaker_id].position }</div></div>
-                                </div>
+                            <div class="space-row">
+                                &nbsp;
                             </div>
-                            <div class="space-row row">&nbsp;</div>
-                            <div class="row level-row" if={ level }>
-                                <div class="col-xs-12 col-md-2 col-level-title">
-                                    <i class="fa fa-2x fa-signal level-icon"></i>
-                                </div>
-                                <div class="col-xs-12 col-md-8 col-level-content">
+                            <div class="level-row" if={ level }>
+                                <div class="col-sm-12 col-level-content">
+                                    <i class="fa fa-signal level-icon"></i>
                                     <span>Level:</span>
                                     <span class="presentation-level'">
                                         <a class="search-link" title="Search Presentation Level" href="{ parent.search_url+'?t='+level }">{ level }</a>
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="tags-row" if={ tags_id.length > 0 }>
+                                <div class="col-sm-12 col-tags-content">
+                                    <i class="fa fa-tags"></i>
+                                    <span>Tags:</span>
+                                    <span each={ tag_id, i in tags_id } title="Search Tag" class="tag">
+                                        <a class="search-link" href="{ parent.search_url+'?t='+summit.tags[tag_id].name.replace(/ /g,'+') }">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }</a>
+                                        &nbsp;
+                                    </span>
+                                </div>
+                            </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2 col-xs-6">
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="event-btn">
                             <a href="{ parent.base_url+'events/'+ id }" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
                         </div>
-                        <div class="col-md-2 col-xs-6" if={ rsvp_link != null && rsvp_link != ''}>
+                        <div class="event-btn" if={ rsvp_link != null && rsvp_link != ''}>
                             <a href={ rsvp_link } class="btn btn-primary btn-md active btn-warning btn-rsvp-event" target="_blank" role="button">RSVP to this Event</a>
                         </div>
-
                     </div>
                 </div>
             </div>

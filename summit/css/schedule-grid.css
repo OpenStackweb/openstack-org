@@ -38,6 +38,7 @@ i.collapse-nav {
 
 .tags-row, .level-row {
     font-size: 14px;
+    margin-bottom: 5px;
 }
 
 /*.tags-row {
@@ -65,10 +66,15 @@ i.collapse-nav {
     border-radius: 4px;
 }
 
+.event-btn {
+    float: left;
+    display: inline-block;
+    margin-right: 10px;
+}
 .event-content
 {
     height: 100%;
-    padding-top: 26px;
+    padding: 20px;
     width: 100%;
 }
 
@@ -110,15 +116,12 @@ i.collapse-nav {
     padding-right: 0 !important;
 }
 
-.event-results .col-level-title {
-    height: 10px;
+.col-tags-content {
+    margin-top: 10px;
 }
 
-.level-icon {
-    width: 16px;
-    overflow: hidden;
-    position: relative;
-    top: -10px;
+.event-results .col-level-title {
+    height: 10px;
 }
 
 .event-results .col-level-title > span {
@@ -134,7 +137,7 @@ i.collapse-nav {
 .track, .track a
 {
     font-size: 14px;
-    color: #D7D7D7;
+    color: #777;
 }
 
 .event-title
@@ -148,7 +151,7 @@ i.collapse-nav {
 .event-details
 {
     background-color: #edf2f7;
-    padding: 1em;
+    padding: 20px;
     color: #2A4E68;
     font-family: Helvetica,Sans-serif;
     font-size: 1em;
@@ -162,13 +165,13 @@ i.collapse-nav {
 {
     cursor: pointer;
     position: relative;
-    padding: 0px 0 20px;
+    padding: 0;
 }
 
 .event-type-col, .event-type-col a
 {
     text-transform: uppercase;
-    color: #D7D7D7;
+    color: #777;
     text-align: right;
     font-size: 0.9em;
 }
@@ -177,7 +180,7 @@ i.collapse-nav {
 {
     background-color: #224066 !important;
     border-color: #224066 !important;
-    border-radius: 0;
+    border-radius: 2px;
     margin-top: 10px;
 }
 
@@ -185,7 +188,7 @@ i.collapse-nav {
 {
     background-color: #224066 !important;
     border-color: #224066 !important;
-    border-radius: 0;
+    border-radius: 2px;
     margin-top: 10px;
 }
 
@@ -350,14 +353,25 @@ a.navbar-brand.navbar-brand-month
 
 .speaker-position-row
 {
-    color: #C1C1C1;
-    font-family: 'Montserrat';
+    color: #777;
     font-size: 12px;
 }
-
+.speaker-photo-left {
+    float: left;
+}
+.speaker-name-right {
+    display: inline-block;
+    margin: 12px 0 0 15px;
+}
 a.profile-pic-wrapper {
     width: 60px;
     height: 60px;
+    display: inline-block;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fff;
 }
 
 .profile-pic
@@ -383,6 +397,9 @@ a.profile-pic-wrapper {
 .filter-row
 {
     padding:0.5em;
+}
+.chosen-container-multi .chosen-choices {
+    border-radius: 4px;
 }
 
 a.navbar-brand {
@@ -420,7 +437,6 @@ a.navbar-brand {
 .all-events-filter-row
 {
     margin-top: 15px;
-    margin-bottom:15px;
 }
 
 .all-events-filter-container
@@ -455,12 +471,10 @@ a.navbar-brand {
 
 #all-events-filter-wrapper {
     display: none;
-    width: 100%;
-    padding: 0;
+    padding: 10px 0 5px;
     background: #ffffff;
     color: #607A8E;
     overflow: visible !important;
-    padding-top: 10px;
 }
 
 .single-filter-wrapper
@@ -562,6 +576,10 @@ form.all-events-search-form .all-events-search-wrapper i {
     padding-bottom: 20px;
 }
 
+.speaker-company {
+    font-size: 0.8em;
+}
+
 .result-speaker-name-div {
     margin-top: 24px;
     padding-left: 5px;
@@ -622,4 +640,37 @@ h2.subtitle {
 .tag-cloud
 {
     border-radius: 10px;
+}
+
+/*Five column grid*/
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
 }

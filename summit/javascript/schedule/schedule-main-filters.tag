@@ -1,55 +1,51 @@
 <schedule-main-filters>
     <div class="row all-events-filter-row">
-            <div class="col-sm-6 all-events-filter-link">
-                <div class="col-filter-btn">
-                    <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
-                </div>
-                <div class="col-filter-title">
-                    <span>Calendar Search Filters</span>
-                </div>
-                <div class="col-xs-6 col-md-7">
-                    <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
-                </div>
+        <div class="col-xs-9 all-events-filter-link">
+            <div class="col-filter-btn">
+                <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
-            <div class="col-sm-6 login-container" if={ summit.current_user == null }>
-                <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
-                    <input type="hidden" name="fragment" id="fragment"/>
-                    <div class="Actions">
-                        <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
-                    </div>
-                </form>
+            <div class="col-filter-title">
+                <span>Calendar Search Filters</span>
             </div>
-           <div id="all-events-filter-wrapper" class="row">
-                <div class="col-xs-12 col-md-12">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2 single-filter-wrapper first">
-                            <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Summit Type"  multiple="multiple">
-                                <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
-                             </select>
-                        </div>
-                        <div class="col-xs-12 col-sm-2 single-filter-wrapper">
-                            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Type"  multiple="multiple">
-                                <option each={ id, obj in summit.event_types } value="{ id }">{ obj.type }</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-12 col-sm-3 single-filter-wrapper">
-                            <select id="ddl_tracks" data-placeholder="Presentation Tracks"  multiple="multiple">
-                                <option each={ id, obj in summit.tracks } value="{ id }">{ obj.name }</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-12 col-sm-3 single-filter-wrapper">
-                            <select id="ddl_levels" data-placeholder="Presentation Levels"  multiple="multiple">
-                                <option each={ id, obj in summit.presentation_levels } value="{ id }">{ obj.level }</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-12 col-sm-2 single-filter-wrapper">
-                            <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple">
-                                <option each={ id, obj in summit.tags } value="{ id }">{ obj.name }</option>
-                            </select>
-                        </div>
-                    </div>
+            <div class="">
+                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
+            </div>
+        </div>
+        <div class="col-xs-3 login-container" if={ summit.current_user == null }>
+            <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="fragment" id="fragment"/>
+                <div class="Actions">
+                    <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
                 </div>
-            </div>
+            </form>
+        </div>
+    </div>
+   <div id="all-events-filter-wrapper" class="row">
+        <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
+            <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Summit Type"  multiple="multiple">
+                <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
+             </select>
+        </div>
+        <div class="col-sm-15 col-xs-12 single-filter-wrapper">
+            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Type"  multiple="multiple">
+                <option each={ id, obj in summit.event_types } value="{ id }">{ obj.type }</option>
+            </select>
+        </div>
+        <div class="col-sm-15 col-xs-12 single-filter-wrapper">
+            <select id="ddl_tracks" data-placeholder="Presentation Tracks"  multiple="multiple">
+                <option each={ id, obj in summit.tracks } value="{ id }">{ obj.name }</option>
+            </select>
+        </div>
+        <div class="col-sm-15 col-xs-12 single-filter-wrapper">
+            <select id="ddl_levels" data-placeholder="Presentation Levels"  multiple="multiple">
+                <option each={ id, obj in summit.presentation_levels } value="{ id }">{ obj.level }</option>
+            </select>
+        </div>
+        <div class="col-sm-15 col-xs-12 single-filter-wrapper">
+            <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple">
+                <option each={ id, obj in summit.tags } value="{ id }">{ obj.name }</option>
+            </select>
+        </div>
     </div>
 
     <script>
@@ -95,7 +91,6 @@
                         var color  = $(option).attr('data-color');
                         $(this).css('background-color', color);
                         $(this).css('background-image','none');
-                        $(this).css('color','#FFFFFF');
                     });
                 }
             });
