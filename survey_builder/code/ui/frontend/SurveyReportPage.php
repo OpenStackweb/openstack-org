@@ -34,6 +34,8 @@ class SurveyReportPage_Controller extends Page_Controller
     {
         parent::init();
 
+        if(!Permission::checkMember(Member::currentUser(),"ADMIN")) Security::permissionFailure($this);
+
         Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
         //jqplot and plugins ...
         Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.js");
