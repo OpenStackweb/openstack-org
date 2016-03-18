@@ -679,7 +679,7 @@ final class SummitService implements ISummitService
             $speaker->TwitterName    = trim($speaker_data['irc_name']);
             $speaker->MemberID       = $member_id;
             $speaker->CreatedFromAPI = true;
-            $speaker->write();
+            $speaker_repository->add($speaker);
 
             if($member_id === 0 && isset($speaker_data['email'])){
                 $email  = trim($speaker_data['email']);

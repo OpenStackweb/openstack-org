@@ -15,6 +15,8 @@
 final class SapphirePresentationSpeakerRepository extends SapphireRepository implements ISpeakerRepository
 {
 
+    private $cache = array();
+
     public function __construct()
     {
         parent::__construct(new PresentationSpeaker);
@@ -81,6 +83,7 @@ SQL;
      */
     public function getBySummit(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
     {
+        $cache_key = $term;
 
         $offset = ($page - 1 ) * $page_size;
         $sort  = '';
@@ -110,14 +113,6 @@ SQL;
             FROM PresentationSpeaker
             LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
             LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
-            WHERE EXISTS
-            (
-                SELECT 1 FROM SummitEvent
-                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
-                WHERE SummitEvent.SummitID = {$summit->ID}
-                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
-            )
             {$where}
         ) AS P;
 SQL;
@@ -128,15 +123,6 @@ IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS Email
 FROM PresentationSpeaker
 LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
 LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
-WHERE
-EXISTS
-(
-	SELECT 1 FROM SummitEvent
-    INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-    INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
-    WHERE SummitEvent.SummitID = {$summit->ID}
-    AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
-)
 {$where}
 {$sort} LIMIT {$offset}, {$page_size};
 SQL;
@@ -151,6 +137,13 @@ SQL;
             array_push($data, new PresentationSpeaker($row));
         }
 
+        //add cache results
+        foreach($this->cache as $cache_name => $cache_speaker) {
+            if (strpos($cache_name,strtolower($term)) !== false) {
+                array_push($data, $cache_speaker);
+            }
+        }
+
         return array($page, $page_size, $count, $data);
     }
 
@@ -161,5 +154,15 @@ SQL;
     public function getByMemberID($member_id)
     {
         return PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
+    }
+
+    /**
+     * @param IEntity $entity
+     * @return int|void
+     */
+    public function add(IEntity $entity)
+    {
+        parent::add($entity);
+        $this->cache[strtolower($entity->getName())] = $entity;
     }
 }

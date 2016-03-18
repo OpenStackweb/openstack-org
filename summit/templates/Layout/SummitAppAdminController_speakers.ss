@@ -22,6 +22,7 @@
                             name: "$getName",
                             email : "{$getEmail}",
                             onsite_phone : "{$getOnSitePhoneFor($Top.Summit.ID)}",
+                            presentation_count: "{$Presentations().Count()}"
                         });
                 <% end_loop %>
 

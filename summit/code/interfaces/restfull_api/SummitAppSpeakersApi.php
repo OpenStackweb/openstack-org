@@ -176,11 +176,12 @@ SQL;
 
             foreach($speakers as $speaker) {
                 $data[] = array(
-                    'id'            => $speaker->ID,
-                    'member_id'     => $speaker->MemberID,
-                    'name'          => $speaker->getName(),
-                    'email'         => $speaker->getEmail(),
-                    'onsite_phone'  => $speaker->getOnSitePhoneFor($summit_id),
+                    'id'                 => $speaker->ID,
+                    'member_id'          => $speaker->MemberID,
+                    'name'               => $speaker->getName(),
+                    'email'              => $speaker->getEmail(),
+                    'onsite_phone'       => $speaker->getOnSitePhoneFor($summit_id),
+                    'presentation_count' => $speaker->Presentations()->count(),
                 );
             }
 
