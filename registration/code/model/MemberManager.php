@@ -243,10 +243,11 @@ class MemberManager implements IMemberManager
                 $member = $factory->buildReduced($data);
                 $member->write();
 
-                if ($data['MembershipType'] === 'foundation') {
-                    $member->upgradeToFoundationMember();
-                } else {
+                if ($data['MembershipType'] === 'community') {
                     $member->convert2SiteUser();
+                } else {
+                    throw new EntityValidationException('You can only register as a community member.');
+                    //$member->upgradeToFoundationMember();
                 }
 
                 $users_group = $group_repository->getByCode(ISecurityGroupFactory::UsersGroupCode);
