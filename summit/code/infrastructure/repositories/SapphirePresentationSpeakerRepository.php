@@ -31,13 +31,14 @@ final class SapphirePresentationSpeakerRepository extends SapphireRepository imp
     {
 
         $term_split = explode(' ',$term);
-        $term1 = '';
-        $term2 = '';
+        $first_name = $term;
+        $last_name1 = $term;
+        $last_name2 = '';
 
         if(count($term_split) == 2)
         {
-            $term1 = $term_split[0];
-            $term2 = $term_split[1];
+            $first_name = trim($term_split[0]);
+            $last_name2  = trim($term_split[1]);
         }
 
         $member_sql = <<<SQL
@@ -64,50 +65,52 @@ INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
 SQL;
 
         $member_conditions = array(
+            "combined" => "M.FirstName LIKE '{$first_name}%' AND M.Surname LIKE '{$last_name2}%' ",
             "single"   => array(
-                "M.FirstName LIKE '{$term}%'",
-                "M.Surname   LIKE '{$term}%'",
-                "M.Email LIKE '{$term}%'",
-                "M.ID LIKE '{$term}%'",
+                "M.FirstName LIKE '{$first_name}%'",
+                "M.Surname   LIKE '{$last_name1}%'",
+                "M.Email LIKE '{$first_name}%'",
+                "M.ID LIKE '{$first_name}%'",
             ),
-            "combined" => "M.FirstName LIKE '{$term1}%' AND M.Surname LIKE '{$term2}%' ",
+
         );
 
         $speakers_conditions = array(
+            "combined" => "PS.FirstName LIKE '{$first_name}%' AND PS.LastName LIKE '{$last_name2}%' ",
             "single"   => array(
-                "PS.FirstName LIKE '{$term}%'",
-                "PS.LastName   LIKE '{$term}%'",
-                "PSR.Email LIKE '{$term}%'",
+                "PS.FirstName LIKE '{$first_name}%'",
+                "PS.LastName   LIKE '{$last_name1}%'",
+                "PSR.Email LIKE '{$first_name}%'",
             ),
-            "combined" => "PS.FirstName LIKE '{$term1}%' AND PS.Surname LIKE '{$term2}%' ",
         );
 
         $query = '';
 
         foreach($member_conditions as $type => $condition){
-            if($type == 'single') {
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $member_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
                 foreach($condition as $c) {
                     $query .= $member_sql . ' WHERE ' . $c;
                     $query .= ' UNION ';
                 }
             }
-            else if(!empty($term1) && !empty($term2))
-            {
-                $query .= $member_sql . ' WHERE ' . $condition;
-                $query .= ' UNION ';
-            }
         }
 
         foreach($speakers_conditions as $type => $condition){
-            if($type == 'single') {
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $speakers_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
                 foreach($condition as $c) {
                     $query .= $speakers_sql . ' WHERE ' . $c;
                     $query .= ' UNION ';
                 }
-            }
-            else if(!empty($term1) && !empty($term2))
-            {
-                $query .= $member_sql . ' WHERE ' . $condition;
             }
         }
         $query = substr($query,0, strlen($query) - strlen(' UNION '));
