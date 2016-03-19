@@ -16,8 +16,8 @@ class MemberDecorator extends DataExtension
 {
     private static $db = array
     (
-        'SecondEmail'            => 'Text',
-        'ThirdEmail'             => 'Text',
+        'SecondEmail'            => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
+        'ThirdEmail'             => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
         'HasBeenEmailed'         => 'Boolean',
         'ShirtSize'              => "Enum('Extra Small, Small, Medium, Large, XL, XXL')",
         'StatementOfInterest'    => 'Text',
@@ -52,6 +52,15 @@ class MemberDecorator extends DataExtension
         'SubscribedToNewsletter' => true,
         'DisplayOnSite'          => false,
         'Active'                 => true,
+    );
+
+    private static $indexes = array
+    (
+        'SecondEmail' => array('type' => 'index', 'value' => 'SecondEmail'),
+        'ThirdEmail' => array('type' => 'index', 'value' => 'ThirdEmail'),
+        'FirstName' => array('type' => 'index', 'value' => 'FirstName'),
+        'Surname' => array('type' => 'index', 'value' => 'Surname'),
+        'FirstName_Surname' => array('type' => 'index', 'value' => 'FirstName,Surname'),
     );
 
     private static $has_one = array

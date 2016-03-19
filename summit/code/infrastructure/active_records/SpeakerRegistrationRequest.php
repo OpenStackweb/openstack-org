@@ -39,6 +39,10 @@ class SpeakerRegistrationRequest
      */
     private $token;
 
+    private static $indexes = array(
+        'Email' => array('type' => 'unique', 'value' => '"Email"'),
+    );
+
     private static $many_many = array (
 
     );

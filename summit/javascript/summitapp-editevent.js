@@ -96,6 +96,12 @@ $(document).ready(function(){
         $('#speakers').tagsinput('add', value);
     });
 
+    $("#speakers").bind("paste", function(e){
+        // access the clipboard using the api
+        var pastedData = e.originalEvent.clipboardData.getData('text');
+        alert(pastedData);
+    } );
+
     // tags autocomplete
 
     var tags_source = new Bloodhound({

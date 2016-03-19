@@ -87,56 +87,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = Summit::get_by_id('Summit',$summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-
-
-            $query = <<<SQL
-SELECT
-CONCAT(M.ID,'_',IFNULL(PS.ID , 0)) AS unique_id,
-M.ID AS member_id ,
-M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',IFNULL(M.Email , PSR.Email),')') AS name,
-IFNULL(PS.ID , 0) AS speaker_id,
-IFNULL(M.Email , PSR.Email) AS email
-FROM Member AS M
-LEFT JOIN PresentationSpeaker AS PS ON PS.MemberID = M.ID
-LEFT JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
-WHERE
-(
-  M.FirstName LIKE '%{$term}%' OR
-  M.Surname LIKE '%{$term}%' OR
-  M.Email LIKE '%{$term}%' OR
-  M.ID LIKE '%{$term}%' OR
-  CONCAT(M.FirstName,' ',M.Surname) LIKE '%{$term}%'
-)
-
-UNION
-SELECT
-CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
-PS.MemberID AS member_id ,
-PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
-PS.ID  AS speaker_id,
-PSR.Email AS email
-FROM PresentationSpeaker AS PS
-INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
-WHERE
-(
-  PS.FirstName LIKE '%{$term}%' OR
-  PS.LastName LIKE '%{$term}%' OR
-  PSR.Email LIKE '%{$term}%' OR
-  CONCAT(PS.FirstName,' ', PS.LastName) LIKE '%{$term}%'
-)
-AND
-PS.MemberID = 0
-LIMIT 15;
-SQL;
-            $speakers = DB::query($query);
-
-            $json_array = array();
-            foreach ($speakers as $s) {
-
-                $json_array[] = $s;
-            }
-
-            echo json_encode($json_array);
+            return $this->ok($this->speaker_repository->searchByTerm($term), false);
         }
         catch(NotFoundEntityException $ex2)
         {

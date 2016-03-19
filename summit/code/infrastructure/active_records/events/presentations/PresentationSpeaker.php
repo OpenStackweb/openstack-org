@@ -55,7 +55,9 @@ implements IPresentationSpeaker
 
     private static $indexes = array
     (
-        //'EmailAddress' => true
+        'FirstName' => array('type' => 'index', 'value' => 'FirstName'),
+        'LastName' => array('type' => 'index', 'value' => 'LastName'),
+        'FirstName_LastName' => array('type' => 'index', 'value' => 'FirstName,LastName'),
     );
 
     private static $defaults = array(

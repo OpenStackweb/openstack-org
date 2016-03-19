@@ -21,6 +21,112 @@ final class SapphirePresentationSpeakerRepository extends SapphireRepository imp
     {
         parent::__construct(new PresentationSpeaker);
     }
+
+    /**
+     * @param string $term
+     * @param int $limit
+     * @return array;
+     */
+    public function searchByTerm($term, $limit = 10)
+    {
+
+        $term_split = explode(' ',$term);
+        $term1 = '';
+        $term2 = '';
+
+        if(count($term_split) == 2)
+        {
+            $term1 = $term_split[0];
+            $term2 = $term_split[1];
+        }
+
+        $member_sql = <<<SQL
+SELECT
+CONCAT(M.ID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+M.ID AS member_id ,
+M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',IFNULL(M.Email , PSR.Email),')') AS name,
+IFNULL(PS.ID , 0) AS speaker_id,
+IFNULL(M.Email , PSR.Email) AS email
+FROM Member AS M
+LEFT JOIN PresentationSpeaker AS PS ON PS.MemberID = M.ID
+LEFT JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
+SQL;
+
+        $speakers_sql = <<<SQL
+SELECT
+CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+PS.MemberID AS member_id ,
+PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
+PS.ID  AS speaker_id,
+PSR.Email AS email
+FROM PresentationSpeaker AS PS
+INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
+SQL;
+
+        $member_conditions = array(
+            "single"   => array(
+                "M.FirstName LIKE '{$term}%'",
+                "M.Surname   LIKE '{$term}%'",
+                "M.Email LIKE '{$term}%'",
+                "M.ID LIKE '{$term}%'",
+            ),
+            "combined" => "M.FirstName LIKE '{$term1}%' AND M.Surname LIKE '{$term2}%' ",
+        );
+
+        $speakers_conditions = array(
+            "single"   => array(
+                "PS.FirstName LIKE '{$term}%'",
+                "PS.LastName   LIKE '{$term}%'",
+                "PSR.Email LIKE '{$term}%'",
+            ),
+            "combined" => "PS.FirstName LIKE '{$term1}%' AND PS.Surname LIKE '{$term2}%' ",
+        );
+
+        $query = '';
+
+        foreach($member_conditions as $type => $condition){
+            if($type == 'single') {
+                foreach($condition as $c) {
+                    $query .= $member_sql . ' WHERE ' . $c;
+                    $query .= ' UNION ';
+                }
+            }
+            else if(!empty($term1) && !empty($term2))
+            {
+                $query .= $member_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+        }
+
+        foreach($speakers_conditions as $type => $condition){
+            if($type == 'single') {
+                foreach($condition as $c) {
+                    $query .= $speakers_sql . ' WHERE ' . $c;
+                    $query .= ' UNION ';
+                }
+            }
+            else if(!empty($term1) && !empty($term2))
+            {
+                $query .= $member_sql . ' WHERE ' . $condition;
+            }
+        }
+        $query = substr($query,0, strlen($query) - strlen(' UNION '));
+        $query .= " ORDER BY `name` LIMIT 0, {$limit};";
+        $res = DB::query($query);
+        $data = array();
+        foreach ($res as $row) {
+
+            $data[] = array
+            (
+                'unique_id'  => $row['unique_id'],
+                'member_id'  => $row['member_id'],
+                'name'       => $row['name'],
+                'speaker_id' => $row['speaker_id'],
+                'email'      => $row['email'],
+            );
+        }
+        return $data;
+    }
     /**
      * @param ISummit $summit
      * @param string $term

@@ -262,7 +262,7 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
-    protected function ok(array $res = null)
+    protected function ok(array $res = null, $use_etag = true)
     {
         $response = new SS_HTTPResponse();
         $response->setStatusCode(200);
@@ -274,7 +274,7 @@ abstract class AbstractRestfulJsonApi extends Controller
 
         //conditional get Request (etags)
         $request = Controller::curr()->getRequest();
-        if ($request->isGET()) {
+        if ($request->isGET() && $use_etag) {
             $etag = md5($response->getBody());
             $requestETag = $request->getHeader('If-None-Match');
             if (!empty($requestETag) && $requestETag == $etag) {
