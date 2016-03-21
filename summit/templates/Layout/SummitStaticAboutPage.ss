@@ -37,6 +37,7 @@
                <li><a href="/summit/austin-2016/summit-schedule/#day=2016-04-25"><i class="fa fa-calendar"></i>Summit Schedule</a></li>
                <li><a href="https://openstacksummit2016austin.eventbrite.com/"><i class="fa fa-shopping-cart"></i>Register For The Summit</a></li>
                <li><a href="http://spousetivities.com/2016/03/austin-bbq-openstack-and-spousetivities/"><i class="fa fa-heart"></i>Spousetivities</a></li>
+               <li><a href="/summit/austin-2016/mentoring-and-diversity/"><i class="fa fa-map-signs"></i>Mentoring & Diversity</a></li>
                <li><a href="/summit/austin-2016/austin-and-travel/#hotels"><i class="fa fa-h-square"></i>Hotels</a></li>
                <li><a href="/summit/austin-2016/austin-and-travel/#visa"><i class="fa fa-globe"></i>Visa Invitation</a></li>
                 <li><a href="/summit/austin-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>

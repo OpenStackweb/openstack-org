@@ -3534,7 +3534,7 @@ a.outline-btn.inactive:hover {
   margin: 50px 0 60px; }
 
 .single-summit-stats {
-  max-width: 45%;
+  width: 45%;
   display: inline-block; }
   .single-summit-stats img {
     max-width: 100%; }
@@ -3842,3 +3842,25 @@ a.session-chart-category {
     display: none; } }
 
 /*End Sessions Landing Page*/
+
+/*Mentoring & Diversity Page*/
+
+h1 span.subhead {
+  display: block;
+  font-size: 0.7em;
+  margin-top: 10px; }
+
+.diversity-wrapper {
+  margin-top: 30px; }
+  .diversity-wrapper .single-diversity-row {
+    margin-top: 30px; }
+  .diversity-wrapper ul {
+    margin: 0 0 20px 0;
+    padding: 0; }
+    .diversity-wrapper ul li {
+      list-style: none; }
+      .diversity-wrapper ul li a.rsvp-link {
+        display: block;
+        margin-top: 10px; }
+
+/*Edn Mentoring & Diversity Page*/
