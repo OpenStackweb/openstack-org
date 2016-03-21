@@ -18,17 +18,31 @@
 
 .global-search-div {
     position: relative;
-    top: -40px;
+    top: 0px;
     float: right;
     width: 420px;
 }
 
+.global-search-container {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
 .global-search-div input {
-    font-family: Montserrat, Sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.schedule-title-wrapper {
+    padding: 20px 0;
+}
+
+.col-main-title h1 {
+    margin: 0;
+    line-height: 1.5;
 }
 
 .title_box {
-    background-color:#132539;
+    /*background-color:#132539;*/
     padding: 30px 0;
 }
 
@@ -43,11 +57,13 @@
 }
 
 .title {
-    margin-bottom: 10px;
+    color: #2A4E68;
+    font-size: 24px;
+    margin: 0;
+    line-height: 1.5;
     text-align: left;
-    color: white;
-    font-size: 42px;
-    float: left;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    background-color: #edf2f7;
 }
 
 .actions {
@@ -55,22 +71,21 @@
     width: 200px;
 }
 
-.subtitle {
-    font-size: 15px;
-    clear: both;
+.track, .track a {
+    font-size: 16px;
+    color: #777;
+    margin: 20px 0 5px 0;
 }
 
-.subtitle a {
-    color: grey;
-    text-decoration: none;
-}
-
-.subtitle a:hover {
+.track a:hover {
     text-decoration: underline;
 }
 
+.back {
+    text-align: right;
+}
+
 .section1 {
-    padding-top: 30px;
     padding-bottom: 30px;
     color: #4C4C4C;
     /*border-bottom: 1px solid grey;*/
@@ -87,6 +102,7 @@
 .info_item {
     clear: both;
     margin-bottom: 15px;
+    min-height: 20px;
 }
 
 .info_item_icon {
@@ -104,6 +120,11 @@
     line-height: 23px;
     position: relative;
     left: -2px;
+    font-size: 1.6em;
+}
+
+.icon-map {
+    font-size: 1.6em;
 }
 
 .icon-level {
@@ -111,6 +132,11 @@
     overflow: hidden;
     position: relative;
     top: -10px;
+}
+
+.info_item_text {
+    float: left;
+    width: 90%;
 }
 
 .btn-rsvp-event
@@ -143,16 +169,17 @@
 }
 
 .description {
-    font-family: "Helvetica",sans-serif;
-    font-size: 18px !important;
-    font-weight: 400 !important;
+    color: #2A4E68;
+    font-family: Helvetica,Sans-serif;
+    font-size: 1em;
+    font-weight: 400;
 }
 
 .logo {
     text-align: center;
     margin-top: 35px;
     min-height: 280px;
-    background-color: #F5F5F5;
+    background-color: #edf2f7;
 }
 
 .multi_logo {
@@ -180,7 +207,7 @@
 }
 
 .speaker_box {
-    background-color: #EEEEEE;
+    background-color: #edf2f7;
     border-bottom: 1px solid #C2C2C2;
     border-top: 1px solid #C2C2C2;
     padding-bottom: 30px;

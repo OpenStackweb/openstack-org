@@ -93,6 +93,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $event_id = intval($this->request->param('EVENT_ID'));
         $this->event_id = $event_id;
         $event = $this->event_repository->getById($event_id);
+        $goback = $this->getRequest()->getVar('goback') ? $this->getRequest()->getVar('goback') : '';
 
         if (is_null($event) || !$event->isPublished()) {
             return $this->httpError(404, 'Sorry that event could not be found');
@@ -102,7 +103,9 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
-        return $this->renderWith(array('SummitAppEventPage', 'SummitPage', 'Page'), array('Event' => $event));
+        return $this->renderWith(
+            array('SummitAppEventPage', 'SummitPage', 'Page'),
+            array('Event' => $event, 'goback' => $goback));
     }
 
     public function ViewSpeakerProfile()
