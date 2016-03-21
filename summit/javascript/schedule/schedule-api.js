@@ -10,6 +10,24 @@ schedule_api.getEventByDay = function (summit_id, day)
     });
 }
 
+schedule_api.getEventByLevel = function (summit_id, level)
+{
+    schedule_api.trigger('beforeEventsRetrieved',{});
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/level?level='+level;
+    return $.get(url,function (data) {
+        schedule_api.trigger('eventsRetrieved', data);
+    });
+}
+
+schedule_api.getEventByTrack = function (summit_id, track)
+{
+    schedule_api.trigger('beforeEventsRetrieved',{});
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/track?track='+track;
+    return $.get(url,function (data) {
+        schedule_api.trigger('eventsRetrieved', data);
+    });
+}
+
 schedule_api.addEvent2MySchedule = function (summit_id, event_id)
 {
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id;

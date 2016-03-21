@@ -89,6 +89,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
     static $url_handlers = array(
         'GET '                      => 'getScheduleByDay',
+        'GET level'                 => 'getScheduleByLevel',
+        'GET track'                 => 'getScheduleByTrack',
         'GET search'                => 'getSearchResults',
         'GET empty_spots'           => 'getEmptySpots',
         'PUT $EventID!'             => 'addToSchedule',
@@ -98,6 +100,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
     static $allowed_actions = array(
         'getScheduleByDay',
+        'getScheduleByLevel',
+        'getScheduleByTrack',
         'getSearchResults',
         'getEmptySpots',
         'addToSchedule',
@@ -109,6 +113,66 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $key    = parent::getCacheKey($request);
         $key   .= '.'.Member::currentUserID();
         return $key;
+    }
+
+    public function getScheduleByTrack(SS_HTTPRequest $request)
+    {
+        $query_string        = $request->getVars();
+        $summit_id           = intval($request->param('SUMMIT_ID'));
+        $track               = isset($query_string['track']) ? Convert::raw2sql($query_string['track']) : null;
+        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
+        $summit              = null;
+
+        $member = Member::currentUser();
+        $cache  = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+
+        if($cache && $response = $this->loadJSONResponseFromCache($request)) {
+            return $response;
+        }
+
+        if(intval($summit_id) > 0)
+            $summit = $this->summit_repository->getById(intval($summit_id));
+        if(strtolower($summit_id) === 'current')
+            $summit = Summit::ActiveSummit();
+
+        if(is_null($summit))
+            return $this->notFound('summit not found!');
+
+        $schedule  = $summit->getScheduleByLevel($track);
+        $events = $this->normalizeEvents($schedule, $summit);
+
+        $data = array( 'track' => $track, 'events' => $events);
+        return $this->saveJSONResponseToCache($request, $data)->ok($data);
+    }
+
+    public function getScheduleByLevel(SS_HTTPRequest $request)
+    {
+        $query_string        = $request->getVars();
+        $summit_id           = intval($request->param('SUMMIT_ID'));
+        $level               = isset($query_string['level']) ? Convert::raw2sql($query_string['level']) : null;
+        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
+        $summit              = null;
+
+        $member = Member::currentUser();
+        $cache  = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+
+        if($cache && $response = $this->loadJSONResponseFromCache($request)) {
+            return $response;
+        }
+
+        if(intval($summit_id) > 0)
+            $summit = $this->summit_repository->getById(intval($summit_id));
+        if(strtolower($summit_id) === 'current')
+            $summit = Summit::ActiveSummit();
+
+        if(is_null($summit))
+            return $this->notFound('summit not found!');
+
+        $schedule  = $summit->getScheduleByLevel($level);
+        $events = $this->normalizeEvents($schedule, $summit);
+
+        $data = array( 'level' => $level, 'events' => $events);
+        return $this->saveJSONResponseToCache($request, $data)->ok($data);
     }
 
     public function getScheduleByDay(SS_HTTPRequest $request)
@@ -136,11 +200,19 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         if(is_null($summit))
             return $this->notFound('summit not found!');
 
-        $events    = array();
         $schedule  = $summit->getSchedule($day, $location);
         $blackouts = ($inc_blackouts) ? $summit->getBlackouts($day,$location) : new ArrayList();
 
         $schedule->merge($blackouts);
+
+        $events = $this->normalizeEvents($schedule, $summit);
+
+        $data = array( 'day' => $day, 'events' => $events);
+        return $this->saveJSONResponseToCache($request, $data)->ok($data);
+    }
+
+    public function normalizeEvents($schedule, $summit) {
+        $events    = array();
 
         foreach($schedule as $e)
         {
@@ -208,8 +280,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             }
             array_push($events, $entry);
         };
-        $data = array( 'day' => $day, 'events' => $events);
-        return $this->saveJSONResponseToCache($request, $data)->ok($data);
+
+        return $events;
     }
 
     public function getSearchResults(SS_HTTPRequest $request) {

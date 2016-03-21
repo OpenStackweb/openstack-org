@@ -526,6 +526,40 @@ final class Summit extends DataObject implements ISummit
             $query)->toArray());
     }
 
+    public function getScheduleByLevel($level = null)
+    {
+        $query = new QueryObject();
+        $query->addAndCondition(QueryCriteria::equal('Published', 1));
+        if (!is_null($level)) {
+            $query->addAndCondition(QueryCriteria::equal('Level',$level));
+        }
+
+        $query
+            ->addOrder(QueryOrder::asc('StartDate'))
+            ->addOrder(QueryOrder::asc('EndDate'))
+            ->addOrder(QueryOrder::asc('Title'));
+
+        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Presentations',
+            $query)->toArray());
+    }
+
+    public function getScheduleByTrack($track = null)
+    {
+        $query = new QueryObject();
+        $query->addAndCondition(QueryCriteria::equal('Published', 1));
+        if (!is_null($track)) {
+            $query->addAndCondition(QueryCriteria::equal('CategoryID',$track));
+        }
+
+        $query
+            ->addOrder(QueryOrder::asc('StartDate'))
+            ->addOrder(QueryOrder::asc('EndDate'))
+            ->addOrder(QueryOrder::asc('Title'));
+
+        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',
+            $query)->toArray());
+    }
+
     /**
      * @param mixed $day
      * @param int $location_id

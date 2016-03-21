@@ -212,15 +212,25 @@ i.collapse-nav {
 
 /* nav bar */
 
+.navbar-container {
+    background-color: #edf2f7;
+    border: none;
+    border-radius: 4px;
+    margin: 0;
+}
+
+.view-select-container {
+    padding: 15px;
+}
+
 @media all and (min-width: 1400px) {
     .navbar-days .navbar-header
     {
-        left: 30%;
         position: absolute;
     }
     .navbar-days .navbar-collapse
     {
-        left: 35%;
+        left: 5%;
         position: absolute;
     }
 }
@@ -228,12 +238,11 @@ i.collapse-nav {
 @media all and (min-width: 1027px) and (max-width: 1399px) {
     .navbar-days .navbar-header
     {
-        left: 20%;
         position: absolute;
     }
     .navbar-days .navbar-collapse
     {
-        left: 27%;
+        left: 7%;
         position: absolute;
     }
 }
@@ -256,7 +265,6 @@ i.collapse-nav {
     background-color: #edf2f7;
     padding: 0 !important;
     border: none;
-    border-radius: 4px;
 }
 
 .navbar-days .container
