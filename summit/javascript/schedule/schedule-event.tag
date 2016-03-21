@@ -4,12 +4,12 @@
             <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids) }" data-event-id="{ id }">
                 <div class="event-content">
                     <div class="row row_location">
-                        <div class="col-sm-2 col-time">
+                        <div class="col-sm-3 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>
                             <span if={ show_date }>{ date_nice }</span>
                             &nbsp;<span>{ start_time }</span>-<span>{ end_time }</span>
                         </div>
-                        <div class="col-sm-7 col-location">
+                        <div class="col-sm-6 col-location">
                             <div if={ summit.should_show_venues } >
                                 <i class="fa fa-map-marker icon-map"></i>
                                 &nbsp;

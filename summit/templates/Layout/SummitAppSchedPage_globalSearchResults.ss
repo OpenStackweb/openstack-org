@@ -191,6 +191,7 @@
                                     allow_feedback  : {$AllowFeedBack},
                                     location_id     : {$LocationID},
                                     type_id         : {$TypeID},
+                                    rsvp_link       : "{$RSVPLink.JS}",
                                     sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
                                     tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                                     summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
