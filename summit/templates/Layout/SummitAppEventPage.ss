@@ -25,8 +25,8 @@
 
             <% if $Event.isPresentation &&  $Event.AttendeesExpectedLearnt %>
             <br>
-            <div class="expercted-learnt">
-                <h3>What can I expect to learn?</h3>
+            <div class="expected-learnt">
+                <div>What can I expect to learn?</div>
                 $Event.AttendeesExpectedLearnt
             </div>
             <% end_if %>

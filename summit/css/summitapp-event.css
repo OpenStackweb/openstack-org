@@ -63,7 +63,6 @@
     line-height: 1.5;
     text-align: left;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    background-color: #edf2f7;
 }
 
 .actions {
@@ -93,6 +92,10 @@
 
 .short_description {
     font-size: 20px;
+}
+
+.expected-learnt div {
+    font-weight: bold;
 }
 
 .info {
