@@ -107,8 +107,8 @@
         <div class="container">
             <% loop Event.getSpeakers() %>
             <div class="row speaker_profile">
-                <div class="speaker_pic img-circle">
-                    <% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %><img src="$ProfilePhoto(100)" class="img-circle speaker-photo" /><% if AvailableForBureau %></a><% end_if %>
+                <div class="speaker-photo-left">
+                    <a class="profile-pic-wrapper" href="/community/speakers/profile/{$ID}" target="_blank" style="background-image: url('$ProfilePhoto(100)')"></a>
                 </div>
                 <div class="speaker_info">
                     <div class="speaker_name"><% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %>$FirstName $LastName<% if AvailableForBureau %></a><% end_if %></div>

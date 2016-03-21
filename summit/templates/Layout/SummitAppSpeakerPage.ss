@@ -4,8 +4,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-md-2">
-                        <div class="row">
-                            <% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %><img src="$ProfilePhoto(100)" class="img-circle speaker-photo-big" /><% if AvailableForBureau %></a><% end_if %>
+                        <div class="speaker-photo-left">
+                            <a class="profile-pic-wrapper" target="_blank" href="/community/speakers/profile/{$ID}" style="background-image: url('$ProfilePhoto(100)')"></a>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-10">

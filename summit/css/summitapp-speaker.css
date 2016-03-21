@@ -94,8 +94,7 @@
     margin-bottom: 30px;
 }
 
-.speaker-photo-big
-{
-    width: 140px;
-    height: 140px;
+a.profile-pic-wrapper {
+    width: 160px;
+    height: 160px;
 }
