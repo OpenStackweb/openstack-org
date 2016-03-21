@@ -1312,9 +1312,8 @@ final class Summit extends DataObject implements ISummit
     {
         $list = array();
         foreach ($this->getDates() as $day) {
-            if ($this->hasPublishedEventOn($day->Date)) {
-                array_push($list, $day);
-            }
+            $day->Has_Published_Events = $this->hasPublishedEventOn($day->Date);
+            array_push($list, $day);
         }
 
         return new ArrayList($list);
@@ -1332,11 +1331,10 @@ final class Summit extends DataObject implements ISummit
         $sql = <<<SQL
 SELECT COUNT(E.ID) FROM SummitEvent E
 WHERE E.SummitID ={$id}
-AND StartDate >= '{$start_date}' AND EndDate <= '{$end_date}';
+AND StartDate >= '{$start_date}' AND EndDate <= '{$end_date}' AND Published = 1;
 SQL;
 
-        return intval(DB::query(
-$sql)->value()) > 0;
+        return (intval(DB::query($sql)->value()) > 0) ? 1 : 0;
     }
 
     private function getDatesFromRange($start, $end)

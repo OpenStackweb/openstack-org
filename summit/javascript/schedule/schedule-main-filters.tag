@@ -1,15 +1,15 @@
 <schedule-main-filters>
     <div class="row all-events-filter-row">
-        <div class="col-xs-9 all-events-filter-link">
+        <div class="col-xs-3 all-events-filter-link">
             <div class="col-filter-btn">
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
             <div class="col-filter-title">
                 <span>Calendar Search Filters</span>
             </div>
-            <div class="">
-                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
-            </div>
+        </div>
+        <div class="col-xs-6 col-switch-schedule">
+            <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
         </div>
         <div class="col-xs-3 login-container" if={ summit.current_user == null }>
             <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">

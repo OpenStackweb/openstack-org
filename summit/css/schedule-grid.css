@@ -308,6 +308,10 @@ a.navbar-brand.navbar-brand-month
     /*color: #4a4a4a !important*/
 }
 
+.day-label.diabled {
+    pointer-events: none;
+}
+
 .navbar-nav > li:first-child > a.day-label {
     border-left: 1px solid #DDDDDD;
 }
@@ -437,6 +441,7 @@ a.navbar-brand {
 .all-events-filter-row
 {
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .all-events-filter-container
@@ -481,6 +486,10 @@ a.navbar-brand {
 {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.col-switch-schedule {
+
 }
 
 .switch_schedule {

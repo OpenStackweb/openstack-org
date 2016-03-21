@@ -15,7 +15,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{ active: day.selected, day-selected: day.selected }" each={  key, day in summit.dates } ><a href="#" class="day-label" onclick={ selectDate } >{ day.label }</a></li>
+                <li class="{ active: day.selected, day-selected: day.selected }" each={  key, day in summit.dates } >
+                    <a href="#" class="day-label" onclick={ selectDate } >{ day.label }</a>
+                </li>
             </ul>
             </div>
             </div>
@@ -40,6 +42,12 @@
                 console.log('current date key '+filter_day);
                 if(typeof(self.summit.dates[filter_day]) === 'undefined'){
                     filter_day = Object.keys(self.summit.dates)[0];
+                    for (adate in self.summit.dates) {
+                        if (self.summit.dates[adate].has_events) {
+                            filter_day = adate;
+                            break;
+                        }
+                    }
                 }
             }
             self.setSelectedDay(self.summit.dates[filter_day]);
