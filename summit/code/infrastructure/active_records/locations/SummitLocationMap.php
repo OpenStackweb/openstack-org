@@ -12,64 +12,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitLocationMap extends DataObject
+class SummitLocationMap extends SummitLocationImage
 {
 
     private static $db = array
     (
-        'Name'         => 'Varchar(255)',
-        'Description'  => 'HTMLText',
-        'Order'        => 'Int',
     );
 
     private static $summary_fields = array
     (
-        'Name'  => 'Name',
-        'Thumbnail'=>'Thumbnail',
+        'Name'       => 'Name',
+        'Thumbnail'  => 'Thumbnail',
     );
 
     private static $has_one = array
     (
-        'Map'      => 'BetterImage',
-        'Location' => 'SummitGeoLocatedLocation'
     );
-
-    public function getThumbnail() {
-        if ($this->Map()->exists()) {
-            return $this->Map()->SetWidth(100);
-        } else {
-            return '(No Image)';
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        if($this->Map()->exists())
-        {
-            return $this->Map()->Link();
-        }
-        return null;
-    }
-
 
     public function getCMSFields()
     {
-        $f = new FieldList();
-
-        $f->add(new TextField('Name','Name'));
-        $f->add(new HtmlEditorField('Description','Description'));
-
-        $map_field = new UploadField('Map','Map');
+        $f = parent::getCMSFields();
+        $f->removeByName('Picture');
+        $map_field = new UploadField('Picture','Map');
         $map_field->setAllowedMaxFileNumber(1);
         $map_field->setFolderName(sprintf('summits/%s/locations/maps/', $this->Location()->SummitID));
-
         $f->add($map_field );
-
-        $f->add(new HiddenField('LocationID', 'LocationID') );
-
         return $f;
     }
 

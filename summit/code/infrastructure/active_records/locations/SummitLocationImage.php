@@ -23,8 +23,8 @@ class SummitLocationImage extends DataObject
 
     private static $summary_fields = array
     (
-        'Name'  => 'Name',
-        'Thumbnail'=>'Thumbnail',
+        'Name'      => 'Name',
+        'Thumbnail' => 'Thumbnail',
     );
 
     private static $has_one = array
@@ -52,7 +52,6 @@ class SummitLocationImage extends DataObject
         }
         return null;
     }
-
 
     public function getCMSFields()
     {

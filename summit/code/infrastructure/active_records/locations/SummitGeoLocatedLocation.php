@@ -204,7 +204,7 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
             $f->addFieldToTab('Root.Maps', $gridField);
 
             $config = GridFieldConfig_RecordEditor::create();
-            $gridField = new GridField('Images', 'Images', $this->Images(), $config);
+            $gridField = new GridField('Images', 'Images', $this->Images()->filter('ClassName', 'SummitLocationImage' ), $config);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $f->addFieldToTab('Root.Images', $gridField);
         }

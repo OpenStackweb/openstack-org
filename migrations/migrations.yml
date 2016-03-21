@@ -22,3 +22,4 @@ migrations:
   - RemoveNullMembersMigration
   - VideoPresentationMigration
   - RemoveSummitDeprecatedColumnsMigration
+  - UpdateSummitLocationImagesMigration
