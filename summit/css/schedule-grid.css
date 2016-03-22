@@ -313,7 +313,7 @@ a.navbar-brand.navbar-brand-month
     background: #30739C;
 }
 
-.day-label
+.day-label, .level-label
 {
     vertical-align: middle;
     text-decoration: none;
@@ -327,11 +327,11 @@ a.navbar-brand.navbar-brand-month
     /*color: #4a4a4a !important*/
 }
 
-.day-label.diabled {
-    pointer-events: none;
+.navbar-nav > li:first-child > a.day-label {
+    border-left: 1px solid #DDDDDD;
 }
 
-.navbar-nav > li:first-child > a.day-label {
+.navbar-nav > li:first-child > a.level-label {
     border-left: 1px solid #DDDDDD;
 }
 
