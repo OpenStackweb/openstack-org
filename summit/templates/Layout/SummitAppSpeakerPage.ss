@@ -11,9 +11,6 @@
                 </div>
                 <% end_if %>
             </div>
-            <div class="col-sm-6">
-               <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
-            </div>
         </div>
         <hr/>
         <div class="speaker-photo-left">
