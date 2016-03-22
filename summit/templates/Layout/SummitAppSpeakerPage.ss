@@ -1,24 +1,27 @@
 <div class="container-fluid">
     <% with Speaker %>
-        <div class="row header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-2">
-                        <div class="speaker-photo-left">
-                            <a class="profile-pic-wrapper" target="_blank" href="/community/speakers/profile/{$ID}" style="background-image: url('$ProfilePhoto(100)')"></a>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-10">
-                        <div class="speaker_name row"> $FirstName $LastName </div>
-                        <div class="speaker_job_title row"> $Member.getCurrentPosition() </div>
-                    </div>
+    
+    <div class="container section1">
+        <div class="row schedule-title-wrapper">
+            <div class="col-sm-6 col-main-title">
+                <h1 style="text-align:left;">Speaker Details</h1>
+                <% if $goback %>
+                <div class="go-back">
+                    <a href="#" onclick="window.history.back(); return false;"><< Go back </a>
                 </div>
+                <% end_if %>
+            </div>
+            <div class="col-sm-6">
+               <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
-            </div>
+        <hr/>
+        <div class="speaker-photo-left">
+            <a class="profile-pic-wrapper" target="_blank" href="/community/speakers/profile/{$ID}" style="background-image: url('$ProfilePhoto(100)')"></a>
+        </div>
+        <div class="speaker-info">
+            <div class="speaker_name row">$FirstName $LastName</div>
+            <div class="speaker_job_title row">$Member.getCurrentPosition()</div>
         </div>
         <div class="row section1">
             <div class="container">
