@@ -219,4 +219,26 @@ interface ISummit extends IEntity
      * @return bool
      */
     public function isSelectionOver();
+
+    /**
+     * @param mixed|null $day
+     * @param int|null $location
+     * @return SummitEvent[]
+     * @throws Exception
+     */
+    public function getSchedule($day = null, $location = null);
+
+    /**
+     * @param mixed|null $level
+     * @return SummitEvent[]
+     * @throws Exception
+     */
+    public function getScheduleByLevel($level = null);
+
+    /**
+     * @param int|null $track
+     * @return SummitEvent[]
+     * @throws Exception
+     */
+    public function getScheduleByTrack($track = null);
 }

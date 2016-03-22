@@ -3,9 +3,9 @@
         <div class="col-md-3 view-select-container">
             View by
             <select id="view-select">
-                <option value="days" selected>Day</option>
-                <option value="tracks">Track</option>
-                <option value="levels">Level</option>
+                <option value="days" selected={ view == 'days' }>Day</option>
+                <option value="tracks" selected={ view == 'tracks' }>Track</option>
+                <option value="levels" selected={ view == 'levels' }>Level</option>
             </select>
         </div>
         <div class="col-md-9">
@@ -32,8 +32,8 @@
                 </div>
             </nav>
             <div class="track-nav-container" if={ view == 'tracks' }>
-                <select id="track-select" onchange={ setSelectedTrack }>
-                    <option each={  key, cat in summit.category_groups } value="{ key }">{ cat.name }</option>
+                <select id="track-select" onchange={ selectTrack }>
+                    <option each={  key, cat in summit.tracks } value="{ key }" selected={ cat.selected }>{ cat.name }</option>
                 </select>
             </div>
             <nav class="navbar navbar-default navbar-days" if={ view == 'levels' }>
@@ -60,7 +60,11 @@
 
         this.on('mount', function(){
             var filter_day = $(window).url_fragment('getParam','day');
-            if(filter_day === null){
+            var filter_level = $(window).url_fragment('getParam','level');
+            var filter_track = $(window).url_fragment('getParam','track');
+            self.view = 'days';
+
+            if(filter_day === null && filter_level === null && filter_track === null){
                 var now    = new Date();
                 var year   = now.getUTCFullYear();
                 var month  = self.pad(now.getUTCMonth()+1,2);
@@ -76,14 +80,33 @@
                         }
                     }
                 }
+                self.setSelectedDay(self.summit.dates[filter_day]);
+
+            } else if (filter_day != null) {
+                self.setSelectedDay(self.summit.dates[filter_day]);
+            }  else if (filter_level != null) {
+                filter_level = filter_level.charAt(0).toUpperCase() + filter_level.slice(1);
+                self.view = 'levels';
+                self.setSelectedLevel(self.summit.presentation_levels[filter_level]);
+            }  else if (filter_track != null) {
+                self.view = 'tracks';
+                self.setSelectedTrack(self.summit.tracks[filter_track]);
             }
 
             $('#view-select').change(function(){
                 self.view = $(this).val();
+                if(self.view == 'days') {
+                    var day = Object.keys(self.summit.dates)[0];
+                    self.setSelectedDay(self.summit.dates[day]);
+                } else if (self.view == 'levels') {
+                    var level = Object.keys(self.summit.presentation_levels)[0];
+                    self.setSelectedLevel(self.summit.presentation_levels[level]);
+                } else if (self.view == 'tracks') {
+                    var track = Object.keys(self.summit.tracks)[0];
+                    self.setSelectedTrack(track);
+                }
                 self.update();
             });
-
-            self.setSelectedDay(self.summit.dates[filter_day]);
         });
 
         selectDate(e) {
@@ -93,6 +116,8 @@
         setSelectedDay(day) {
             day.selected = true;
             $(window).url_fragment('setParam','day', day.date);
+            $(window).url_fragment('setParam','level', '');
+            $(window).url_fragment('setParam','track', '');
             window.location.hash = $(window).url_fragment('serialize');
 
             for(var d in self.summit.dates){
@@ -112,6 +137,8 @@
         setSelectedLevel(level) {
             level.selected = true;
             $(window).url_fragment('setParam','level', level.level);
+            $(window).url_fragment('setParam','day', '');
+            $(window).url_fragment('setParam','track', '');
             window.location.hash = $(window).url_fragment('serialize');
 
             for(var l in self.summit.presentation_levels){
@@ -124,18 +151,26 @@
             self.schedule_api.getEventByLevel(self.summit.id, level.level);
         }
 
-        setSelectedTrack() {
+        selectTrack() {
             var track = $('#track-select').val();
-            $(window).url_fragment('setParam','track', track);
+            self.setSelectedTrack(self.summit.tracks[track]);
+        }
+
+        setSelectedTrack(track) {
+            track.selected = true;
+            $(window).url_fragment('setParam','track', track.id);
+            $(window).url_fragment('setParam','day', '');
+            $(window).url_fragment('setParam','level', '');
             window.location.hash = $(window).url_fragment('serialize');
-            self.summit.presentation_levels[track].selected = true;
-            for(var c in self.summit.category_groups){
-                if(c !== track){
-                    self.summit.presentation_levels[c].selected = false;
+
+            for(var c in self.summit.tracks){
+                c = self.summit.tracks[c];
+                if(c.id !== track.id){
+                    c.selected = false;
                 }
             }
             self.update();
-            self.schedule_api.getEventByTrack(self.summit.id, track);
+            self.schedule_api.getEventByTrack(self.summit.id, track.id);
         }
 
         pad(num, size) {

@@ -556,7 +556,7 @@ final class Summit extends DataObject implements ISummit
             ->addOrder(QueryOrder::asc('EndDate'))
             ->addOrder(QueryOrder::asc('Title'));
 
-        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',
+        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Presentations',
             $query)->toArray());
     }
 

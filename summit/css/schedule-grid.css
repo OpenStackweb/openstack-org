@@ -223,6 +223,10 @@ i.collapse-nav {
     padding: 15px;
 }
 
+.track-nav-container {
+    padding: 15px;
+}
+
 @media all and (min-width: 1400px) {
     .navbar-days .navbar-header
     {
@@ -297,7 +301,14 @@ a.navbar-brand.navbar-brand-month
 
 .navbar-default .navbar-nav > .active.day-selected > a,
 .navbar-default .navbar-nav > .active.day-selected > a:hover,
-.navbar-default .navbar-nav > .active.day-selected > a:focus {
+.navbar-default .navbar-nav > .active.day-selected > a:focus{
+    color: #FFFFFF !important;
+    background: #30739C;
+}
+
+.navbar-default .navbar-nav > .active.level-selected > a,
+.navbar-default .navbar-nav > .active.level-selected > a:hover,
+.navbar-default .navbar-nav > .active.level-selected > a:focus{
     color: #FFFFFF !important;
     background: #30739C;
 }

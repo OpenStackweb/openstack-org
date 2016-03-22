@@ -138,7 +138,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         if(is_null($summit))
             return $this->notFound('summit not found!');
 
-        $schedule  = $summit->getScheduleByLevel($track);
+        $schedule  = $summit->getScheduleByTrack($track);
         $events = $this->normalizeEvents($schedule, $summit);
 
         $data = array( 'track' => $track, 'events' => $events);
