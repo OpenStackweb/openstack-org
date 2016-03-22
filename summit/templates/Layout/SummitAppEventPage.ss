@@ -2,10 +2,10 @@
     <div class="container section1">
         <div class="row schedule-title-wrapper">
             <div class="col-sm-6 col-main-title">
-                <h1 style="text-align:left;">Schedule</h1>
+                <h1 style="text-align:left;">Event Details</h1>
                 <% if $goback %>
                 <div class="go-back">
-                    <a href="#" onclick="window.history.back(); return false;"> Go back </a>
+                    <a href="#" onclick="window.history.back(); return false;"><< Go back </a>
                 </div>
                 <% end_if %>
             </div>
@@ -13,8 +13,9 @@
                <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
             </div>
         </div>
+        <hr/>
+        <div class="title">$Event.Title</div>
         <div class="description col1">
-            <div class="title">$Event.Title</div>
             <% if $Event.Category %>
             <div class="track">
                 <a href="$Top.Link(global-search)?t={$Event.Category.Title}">$Event.Category.Title</a>
