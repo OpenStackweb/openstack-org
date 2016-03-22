@@ -6,6 +6,7 @@ schedule_api.getEventByDay = function (summit_id, day)
     schedule_api.trigger('beforeEventsRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'?day='+day;
     return $.get(url,function (data) {
+        data.show_date = false;
         schedule_api.trigger('eventsRetrieved', data);
     });
 }
@@ -15,6 +16,7 @@ schedule_api.getEventByLevel = function (summit_id, level)
     schedule_api.trigger('beforeEventsRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/level?level='+level;
     return $.get(url,function (data) {
+        data.show_date = true;
         schedule_api.trigger('eventsRetrieved', data);
     });
 }
@@ -24,6 +26,7 @@ schedule_api.getEventByTrack = function (summit_id, track)
     schedule_api.trigger('beforeEventsRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/track?track='+track;
     return $.get(url,function (data) {
+        data.show_date = true;
         schedule_api.trigger('eventsRetrieved', data);
     });
 }

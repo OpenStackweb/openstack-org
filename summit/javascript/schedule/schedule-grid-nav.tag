@@ -55,6 +55,7 @@
         this.summit            = this.parent.summit;
         this.base_url          = this.parent.base_url;
         this.schedule_api      = this.parent.schedule_api;
+        this.schedule_filters  = opts.schedule_filters;
         this.view              = 'days';
         var self               = this;
 
@@ -93,6 +94,8 @@
                 self.setSelectedTrack(self.summit.tracks[filter_track]);
             }
 
+            self.schedule_filters.toggleFilters(self.view);
+
             $('#view-select').change(function(){
                 self.view = $(this).val();
                 if(self.view == 'days') {
@@ -103,8 +106,10 @@
                     self.setSelectedLevel(self.summit.presentation_levels[level]);
                 } else if (self.view == 'tracks') {
                     var track = Object.keys(self.summit.tracks)[0];
-                    self.setSelectedTrack(track);
+                    self.setSelectedTrack(self.summit.tracks[track]);
                 }
+
+                self.schedule_filters.toggleFilters(self.view);
                 self.update();
             });
         });

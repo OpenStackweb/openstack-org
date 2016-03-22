@@ -4,7 +4,7 @@
 </raw>
 
 <schedule-grid>
-    <schedule-grid-nav month={ month } ></schedule-grid-nav>
+    <schedule-grid-nav month={ month } schedule_filters={ schedule_filters } ></schedule-grid-nav>
     <div>
         <div id="events-container">
             <div class="row">

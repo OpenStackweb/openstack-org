@@ -1,7 +1,7 @@
 <schedule-grid-events>
     <div class="row" if={ events.length > 0 }>
         <div class="col-md-12">
-            <schedule-event each={ events } ></schedule-event>
+            <schedule-event each={ events } show_date={ show_date } ></schedule-event>
         </div>
     </div>
     <div class="row" if={ events.length === 0 }>
@@ -20,6 +20,7 @@
         this.default_event_color      = opts.default_event_color;
         this.clicked_event            = {};
         this.current_filter           = null;
+        this.show_date                = false;
         var self                      = this;
 
         this.on('mount', function(){
@@ -31,6 +32,7 @@
         });
 
         this.schedule_api.on('eventsRetrieved',function(data) {
+            self.show_date = data.show_date;
             self.events = data.events;
             $('#events-container').ajax_loader('stop');
             self.applyFilters();
