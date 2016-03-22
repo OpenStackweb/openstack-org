@@ -39,4 +39,13 @@ interface IMemberManager
      */
     public function registerMobile(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service);
 
+    /**
+     * @param $email
+     * @param IMessageSenderService $sender_service
+     * @throws NotFoundEntityException
+     * @throws EntityValidationException
+     * @return Member
+     */
+    public function resendEmailVerification($email, IMessageSenderService $sender_service);
+
 }

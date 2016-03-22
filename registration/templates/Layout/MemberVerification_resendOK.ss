@@ -1,0 +1,1 @@
+<p>$Email, your request was successfully processed! please verify your INBOX </p>

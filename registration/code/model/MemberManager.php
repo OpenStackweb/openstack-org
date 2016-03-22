@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class MemberManager implements IMemberManager
+final class MemberManager implements IMemberManager
 {
 
     /**
@@ -290,6 +290,30 @@ class MemberManager implements IMemberManager
             $member->doEmailConfirmation($token);
             $sender_service->send($member);
             return $member;
+        });
+    }
+
+    /**
+     * @param $email
+     * @param IMessageSenderService $sender_service
+     * @throws NotFoundEntityException
+     * @throws EntityValidationException
+     * @return Member
+     */
+    public function resendEmailVerification($email, IMessageSenderService $sender_service)
+    {
+        $repository = $this->repository;
+
+        return $this->tx_manager->transaction(function () use ($email, $repository, $sender_service){
+
+            if(filter_var($email, FILTER_VALIDATE_EMAIL) === false)
+                throw new EntityValidationException('invalid mail address');
+            $member = $repository->findByEmail($email);
+            if (is_null($member))
+                throw new NotFoundEntityException('Member', $email);
+            if($member->EmailVerified) throw new EntityValidationException('Member already verified!');
+            $sender_service = new MemberRegistrationSenderService();
+            $sender_service->send($member);
         });
     }
 }

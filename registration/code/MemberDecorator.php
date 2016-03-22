@@ -45,6 +45,7 @@ class MemberDecorator extends DataExtension
         'EmailVerified'          => 'Boolean',
         'EmailVerifiedTokenHash' => 'Text',
         'EmailVerifiedDate'      => 'SS_Datetime',
+        'LegacyMember'           => 'Boolean',
     );
 
     private static $defaults = array
@@ -52,14 +53,15 @@ class MemberDecorator extends DataExtension
         'SubscribedToNewsletter' => true,
         'DisplayOnSite'          => false,
         'Active'                 => true,
+        'LegacyMember'           => false,
     );
 
     private static $indexes = array
     (
-        'SecondEmail' => array('type' => 'index', 'value' => 'SecondEmail'),
-        'ThirdEmail' => array('type' => 'index', 'value' => 'ThirdEmail'),
-        'FirstName' => array('type' => 'index', 'value' => 'FirstName'),
-        'Surname' => array('type' => 'index', 'value' => 'Surname'),
+        'SecondEmail'       => array('type' => 'index', 'value' => 'SecondEmail'),
+        'ThirdEmail'        => array('type' => 'index', 'value' => 'ThirdEmail'),
+        'FirstName'         => array('type' => 'index', 'value' => 'FirstName'),
+        'Surname'           => array('type' => 'index', 'value' => 'Surname'),
         'FirstName_Surname' => array('type' => 'index', 'value' => 'FirstName,Surname'),
     );
 
@@ -127,6 +129,10 @@ class MemberDecorator extends DataExtension
         if(!$this->owner->Active)
         {
             $result->error('Your account has been disabled');
+        }
+        if(!$this->owner->EmailVerified)
+        {
+            $result->error('Your account is not verfied, please verify your email');
         }
         return $result;
     }
