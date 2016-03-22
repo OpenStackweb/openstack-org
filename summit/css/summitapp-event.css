@@ -48,12 +48,14 @@
 
 .col1 {
     float: left;
-    width: 60%;
+    width: 55%;
 }
 
 .col2 {
     float: right;
-    width: 30%;
+    width: 40%;
+    background-color: #eaeaea;
+    padding: 20px;
 }
 
 .title {
@@ -73,7 +75,7 @@
 .track, .track a {
     font-size: 16px;
     color: #777;
-    margin: 20px 0 5px 0;
+    margin: 0px 0px 35px 0;
 }
 
 .track a:hover {
@@ -210,10 +212,6 @@
 }
 
 .speaker_box {
-    background-color: #edf2f7;
-    border-bottom: 1px solid #C2C2C2;
-    border-top: 1px solid #C2C2C2;
-    padding-bottom: 30px;
     color: #4C4C4C;
 }
 
@@ -228,15 +226,9 @@
     margin-left: 15px;
 }
 
-.speaker_info {
-    padding-top: 8px;
-    float:left;
-    padding-left: 10px;
-}
-
 .speaker_name {
     margin:0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -246,12 +238,12 @@
 
 .speaker_job_title {
     color: #AAAAAA;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .speaker_bio {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 12px;
     font-family: "Helvetica",sans-serif;
 }
 
@@ -334,8 +326,10 @@
     color:#5BC86B;
 }
 
-.speaker-photo-left {
+.speaker-photo-left {    
     float: left;
+    padding-right: 15px;
+    padding-bottom: 20px;
 }
 
 a.profile-pic-wrapper {
