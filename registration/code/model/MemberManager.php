@@ -190,7 +190,7 @@ class MemberManager implements IMemberManager
      * @param array $data
      * @param EditProfilePage $profile_page
      * @param IMessageSenderService $sender_service
-     * @return null
+     * @return Member
      * @throws Exception
      */
     public function registerMobile(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service)
@@ -242,14 +242,10 @@ class MemberManager implements IMemberManager
 
                 $member = $factory->buildReduced($data);
                 $member->write();
-
-                if ($data['MembershipType'] === 'community') {
-                    $member->convert2SiteUser();
-                } else {
+                if($data['MembershipType'] !== 'community') {
                     throw new EntityValidationException('You can only register as a community member.');
-                    //$member->upgradeToFoundationMember();
                 }
-
+                $member->convert2SiteUser();
                 $users_group = $group_repository->getByCode(ISecurityGroupFactory::UsersGroupCode);
                 if (is_null($users_group)) {
                     // create group

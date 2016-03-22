@@ -29,4 +29,14 @@ interface IMemberManager
      * @return Member
      */
     public function verify($token, IMessageSenderService $sender_service);
+
+    /**
+     * @param array $data
+     * @param EditProfilePage $profile_page
+     * @param IMessageSenderService $sender_service
+     * @return Member
+     * @throws Exception
+     */
+    public function registerMobile(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service);
+
 }

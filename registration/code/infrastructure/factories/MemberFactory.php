@@ -21,10 +21,7 @@ final class MemberFactory implements IMemberFactory
      */
     public function build(array $data)
     {
-        $member = Member::create();
-        $member->FirstName = trim($data['FirstName']);
-        $member->Surname = trim($data['Surname']);
-        $member->Email = trim($data['Email']);
+        $member = $this->buildReduced($data);
         $gender = $data['Gender'];
         if ($gender != 'Male' && $gender != 'Female' && $gender != 'Prefer not to say') {
             $member->Gender = $data['GenderSpecify'];
@@ -37,11 +34,14 @@ final class MemberFactory implements IMemberFactory
         $member->City = trim($data['City']);
         $member->State = trim($data['State']);
         $member->Postcode = trim($data['Postcode']);
-        $member->Country = trim($data['Country']);
-        $member->Password = trim($data['Password']['_Password']);
+
         return $member;
     }
 
+    /**
+     * @param array $data
+     * @return Member
+     */
     public function buildReduced(array $data)
     {
         $member = Member::create();
