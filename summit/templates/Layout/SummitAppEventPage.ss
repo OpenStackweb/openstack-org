@@ -109,10 +109,10 @@
             <% loop Event.getSpeakers() %>
             <div class="row speaker_profile">
                 <div class="speaker-photo-left">
-                    <a class="profile-pic-wrapper" href="/community/speakers/profile/{$ID}" target="_blank" style="background-image: url('$ProfilePhoto(100)')"></a>
+                    <a class="profile-pic-wrapper" href="{$Top.AbsoluteLink}speakers/{$ID}" target="_blank" style="background-image: url('$ProfilePhoto(100)')"></a>
                 </div>
                 <div class="speaker_info">
-                    <div class="speaker_name"><% if AvailableForBureau %><a href="/community/speakers/profile/{$ID}" title="$FirstName $LastName" target="_blank"><% end_if %>$FirstName $LastName<% if AvailableForBureau %></a><% end_if %></div>
+                    <div class="speaker_name"><a href="{$Top.AbsoluteLink}speakers/{$ID}" title="$FirstName $LastName" target="_blank">$FirstName $LastName</a><% end_if %></div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
                     <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
                 </div>
