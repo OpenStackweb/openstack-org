@@ -5,7 +5,7 @@
                 <h1 style="text-align:left;">Event Details</h1>
                 <% if $goback %>
                 <div class="go-back">
-                    <a href="#" onclick="window.history.back(); return false;">Go back </a>
+                    <a href="#" onclick="window.history.back(); return false;"><< Go back </a>
                 </div>
                 <% end_if %>
             </div>
@@ -112,7 +112,7 @@
                     <a class="profile-pic-wrapper" href="{$Top.AbsoluteLink}speakers/{$ID}" target="_blank" style="background-image: url('$ProfilePhoto(100)')"></a>
                 </div>
                 <div class="speaker_info">
-                    <div class="speaker_name"><a href="{$Top.AbsoluteLink}speakers/{$ID}" title="$FirstName $LastName" target="_blank">$FirstName $LastName</a><% end_if %></div>
+                    <div class="speaker_name"><a href="{$Top.AbsoluteLink}speakers/{$ID}" title="$FirstName $LastName" target="_blank">$FirstName $LastName</a></div>
                     <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
                     <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
                 </div>
