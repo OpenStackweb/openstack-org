@@ -5,7 +5,7 @@
                 <h1 style="text-align:left;">Event Details</h1>
                 <% if $goback %>
                 <div class="go-back">
-                    <a href="#" onclick="window.history.back(); return false;"><< Go back </a>
+                    <a href="#" onclick="window.history.back(); return false;">Go back </a>
                 </div>
                 <% end_if %>
             </div>
