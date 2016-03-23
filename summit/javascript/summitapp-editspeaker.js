@@ -81,7 +81,7 @@ $(document).ready(function(){
         evt.preventDefault();
         var summit_id  = $('#summit_id').val();
         var speaker_id = $('#speaker_id').val();
-        var url        = 'api/v1/summits/'+summit_id+'/speakers/'+speaker_id+'/upload_pic';
+        var url        = 'api/v1/summits/'+summit_id+'/speakers/'+speaker_id+'/pic';
         var file_data  = $("#profile-pic").prop("files")[0];
         var form_data  = new FormData();
         form_data.append("file", file_data);

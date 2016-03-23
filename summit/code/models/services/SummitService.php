@@ -799,11 +799,15 @@ final class SummitService implements ISummitService
 
             $image = new BetterImage();
             $upload = new Upload();
-            $validator = new Upload_Image_Validator();
+            $validator = new Upload_Validator();
             $validator->setAllowedExtensions(array('png','jpg','jpeg','gif'));
-            $validator->setAllowedMaxImageWidth(200);
+            $validator->setAllowedMaxFileSize(300*1024); // 300Kb
             $upload->setValidator($validator);
-            $upload->loadIntoFile($tmp_file,$image,'profile-images');
+
+            if (!$upload->loadIntoFile($tmp_file,$image,'profile-images')) {
+                throw new EntityValidationException($upload->getErrors());
+            }
+
             $image->write();
 
             return $image;

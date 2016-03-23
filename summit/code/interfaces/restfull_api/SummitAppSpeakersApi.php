@@ -70,7 +70,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
         'GET '                         => 'getSpeakers',
         'POST '                        => 'addSpeaker',
         'PUT $SPEAKER_ID!'             => 'updateSpeaker',
-        'POST $SPEAKER_ID!/upload_pic' => 'uploadSpeakerPic',
+        'POST $SPEAKER_ID!/pic'        => 'uploadSpeakerPic',
     );
 
     static $allowed_actions = array(
