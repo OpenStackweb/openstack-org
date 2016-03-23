@@ -205,11 +205,11 @@
 
         this.schedule_filters.on('scheduleToggleFilters', function(hide){
             if (hide) {
-                $('#ddl_summit_types').val('').trigger("chosen:updated").trigger("change");
-                $('#ddl_event_types').val('').trigger("chosen:updated").trigger("change");
-                $('#ddl_tracks').val('').trigger("chosen:updated").trigger("change");
-                $('#ddl_tags').val('').trigger("chosen:updated").trigger("change");
-                $('#ddl_levels').val('').trigger("chosen:updated").trigger("change");
+                $('#ddl_summit_types').val('').trigger("chosen:updated");
+                $('#ddl_event_types').val('').trigger("chosen:updated");
+                $('#ddl_tracks').val('').trigger("chosen:updated");
+                $('#ddl_tags').val('').trigger("chosen:updated");
+                $('#ddl_levels').val('').trigger("chosen:updated");
                 $('.all-events-filter-link').fadeOut();
                 $('#all-events-filter-wrapper').slideUp();
                 $('#toggle-all-events-filters').removeClass('active');
