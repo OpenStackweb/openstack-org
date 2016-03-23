@@ -66,10 +66,11 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
     }
 
     static $url_handlers = array(
-        'GET $TERM!'       => 'getSpeakersByTerm',
-        'GET '             => 'getSpeakers',
-        'POST '            => 'addSpeaker',
-        'PUT $SPEAKER_ID!' => 'updateSpeaker',
+        'GET $TERM!'                   => 'getSpeakersByTerm',
+        'GET '                         => 'getSpeakers',
+        'POST '                        => 'addSpeaker',
+        'PUT $SPEAKER_ID!'             => 'updateSpeaker',
+        'POST $SPEAKER_ID!/upload_pic' => 'uploadSpeakerPic',
     );
 
     static $allowed_actions = array(
@@ -77,6 +78,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
         'getSpeakersByTerm',
         'updateSpeaker',
         'addSpeaker',
+        'uploadSpeakerPic',
     );
 
     // this is called when typing a Speakers name to add as a tag on edit event
@@ -188,6 +190,34 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $data['speaker_id'] = $speaker_id;
             $this->summit_service->updateSpeaker($summit, $data);
             return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function uploadSpeakerPic(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $speaker_id   = intval($request->param('SPEAKER_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $image = $this->summit_service->uploadSpeakerPic($summit, $speaker_id, $_FILES['file']);
+            return $this->ok($image->ID);
         }
         catch(EntityValidationException $ex1)
         {

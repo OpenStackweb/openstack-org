@@ -26,24 +26,24 @@
             </div>
 
             <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Title</label>
-                            <input id="title" name="title" value="$Speaker.Title" />
-                        </div>
-                        <div class="col-md-3">
-                            <label>First Name</label>
-                            <input id="first_name" name="first_name" value="$Speaker.FirstName" />
-                        </div>
-                        <div class="col-md-3">
-                            <label>Last Name</label>
-                            <input id="last_name" name="last_name" value="$Speaker.LastName" />
-                        </div>
-                        <div class="col-md-3">
-                            <label>Summit On Site Phone</label>
-                            <input id="onsite_phone" name="onsite_phone" value="$Speaker.getOnSitePhoneFor($Top.Summit.ID)" />
-                        </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Title</label>
+                        <input id="title" name="title" value="$Speaker.Title" />
                     </div>
+                    <div class="col-md-3">
+                        <label>First Name</label>
+                        <input id="first_name" name="first_name" value="$Speaker.FirstName" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Last Name</label>
+                        <input id="last_name" name="last_name" value="$Speaker.LastName" />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Summit On Site Phone</label>
+                        <input id="onsite_phone" name="onsite_phone" value="$Speaker.getOnSitePhoneFor($Top.Summit.ID)" />
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <div class="row">
@@ -60,14 +60,31 @@
             </div>
             <div class="form-group">
                 <div class="row">
-                        <div class="col-md-12">
-                            <label>Bio</label><br>
-                            <textarea id="bio" name="bio" >
-                                $Speaker.Bio
-                            </textarea>
-                        </div>
+                    <div class="col-md-12">
+                        <label>Bio</label><br>
+                        <textarea id="bio" name="bio" >
+                            $Speaker.Bio
+                        </textarea>
+                    </div>
                 </div>
-           </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Profile Pic</label><br>
+                        <img class="profile_pic" src="{$Speaker.ProfilePhoto}" />
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-default btn-file">
+                                    Change… <input type="file" id="profile-pic" name="profile-pic">
+                                </span>
+                            </span>
+                            <input id="image-filename" type="text" class="form-control" readonly="">
+                            <input id="photoID" name="photoID" type="hidden">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <% if $Speaker.AllPresentations($Top.Summit.ID) %>
             <div class="form-group">
                 <div class="row">
@@ -82,6 +99,7 @@
                 </div>
             </div>
             <% end_if %>
+            <hr>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

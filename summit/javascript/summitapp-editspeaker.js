@@ -14,6 +14,12 @@ var form_validator = null;
 
 $(document).ready(function(){
 
+    $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        $('#image-filename').val(label);
+    });
+
     tinymce.init({
         selector: "textarea",
         width:      '100%',
@@ -73,6 +79,38 @@ $(document).ready(function(){
 
     form.submit(function (evt) {
         evt.preventDefault();
+        var summit_id  = $('#summit_id').val();
+        var speaker_id = $('#speaker_id').val();
+        var url        = 'api/v1/summits/'+summit_id+'/speakers/'+speaker_id+'/upload_pic';
+        var file_data  = $("#profile-pic").prop("files")[0];
+        var form_data  = new FormData();
+        form_data.append("file", file_data);
+
+        if ($('#image-filename').val()) {
+            $.ajax({
+                url: url,
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'POST',
+                success: function(image_id){
+                    updateSpeaker(image_id);
+                },
+                error: function(response,status,error) {
+                    swal('Validation error', response.responseJSON.messages[0].message, 'warning');
+                }
+            });
+        } else {
+            updateSpeaker(0);
+        }
+
+
+        return false;
+    });
+
+    function updateSpeaker(profile_pic_id) {
         form.find('textarea').each(function() {
             var text_area = $(this);
             var text_editor = tinyMCE.get(text_area.attr('id'));
@@ -80,11 +118,15 @@ $(document).ready(function(){
                 text_area.val(text_editor.getContent());
         });
         if (!form.valid()) return false;
+
+        $('#photoID',form).val(profile_pic_id);
+
         form.find(':submit').attr('disabled','disabled');
         var request    = form.serializeForm();
         var summit_id  = $('#summit_id').val();
         var speaker_id = $('#speaker_id').val();
         var url        = 'api/v1/summits/'+summit_id+'/speakers/'+speaker_id;
+
         $.ajax({
             type: 'PUT',
             url: url,
@@ -92,8 +134,8 @@ $(document).ready(function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(saved_event) {
-             swal("Updated!", "Speaker was updated successfully.", "success");
-             form.find(':submit').removeAttr('disabled');
+            swal("Updated!", "Speaker was updated successfully.", "success");
+            form.find(':submit').removeAttr('disabled');
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
@@ -104,6 +146,5 @@ $(document).ready(function(){
             }
             form.find(':submit').removeAttr('disabled');
         });
-        return false;
-    });
+    }
 });

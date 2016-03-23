@@ -586,6 +586,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         $speaker    = PresentationSpeaker::get()->byID($speaker_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-edit-speaker.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         // tag input

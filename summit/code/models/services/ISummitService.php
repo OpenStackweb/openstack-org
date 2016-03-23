@@ -103,4 +103,12 @@ interface ISummitService
      */
     public function updateSpeaker(ISummit $summit, array $speaker_data);
 
+    /**
+     * @param ISummit $summit
+     * @param $speaker_id
+     * @param $tmp_file
+     * @return BetterImage
+     */
+    public function uploadSpeakerPic(ISummit $summit, $speaker_id, $tmp_file);
+
 }

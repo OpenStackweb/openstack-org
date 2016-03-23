@@ -510,7 +510,7 @@ implements IPresentationSpeaker
         return AssociationFactory::getInstance()->getOne2ManyAssociation($this,'PromoCodes', $query)->first();
     }
 
-    function ProfilePhoto($width=100){
+    public function ProfilePhoto($width=100){
         $img1     = $this->Photo();
         $member   = $this->Member();
         $img2     = !is_null($member) && $member->ID > 0 ? $member->Photo(): null;

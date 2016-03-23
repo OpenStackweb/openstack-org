@@ -756,6 +756,7 @@ final class SummitService implements ISummitService
             $speaker->Bio         = trim($speaker_data['bio']);
             $speaker->IRCHandle   = trim($speaker_data['twitter_name']);
             $speaker->TwitterName = trim($speaker_data['irc_name']);
+            $speaker->PhotoID     = intval($speaker_data['photoID']);
             if($speaker->MemberID > 0  && $member_id == 0)
                 throw new EntityValidationException
                 (
@@ -777,6 +778,35 @@ final class SummitService implements ISummitService
                 $summit_assistance->write();
             }
             return $speaker;
+
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param $speaker_id
+     * @param $tmp_file
+     * @return BetterImage
+     */
+    public function uploadSpeakerPic(ISummit $summit, $speaker_id, $tmp_file)
+    {
+        $speaker_repository = $this->speaker_repository;
+
+        return $this->tx_service->transaction(function () use ($summit, $speaker_id, $tmp_file, $speaker_repository) {
+            $speaker_id = intval($speaker_id);
+            $speaker    = $speaker_repository->getById($speaker_id);
+            if(is_null($speaker)) throw new NotFoundEntityException('PresentationSpeaker');
+
+            $image = new BetterImage();
+            $upload = new Upload();
+            $validator = new Upload_Image_Validator();
+            $validator->setAllowedExtensions(array('png','jpg','jpeg','gif'));
+            $validator->setAllowedMaxImageWidth(200);
+            $upload->setValidator($validator);
+            $upload->loadIntoFile($tmp_file,$image,'profile-images');
+            $image->write();
+
+            return $image;
 
         });
     }
