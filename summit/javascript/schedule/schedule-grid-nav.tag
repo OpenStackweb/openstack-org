@@ -5,7 +5,7 @@
             <select id="view-select">
                 <option value="days" selected={ view == 'days' }>Day</option>
                 <option value="tracks" selected={ view == 'tracks' }>Track</option>
-                <option value="levels" selected={ view == 'levels' }>Level</option>
+                <!-- <option value="levels" selected={ view == 'levels' }>Level</option> -->
             </select>
         </div>
         <div class="col-md-9">
