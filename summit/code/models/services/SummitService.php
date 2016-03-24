@@ -801,7 +801,7 @@ final class SummitService implements ISummitService
             $upload = new Upload();
             $validator = new Upload_Validator();
             $validator->setAllowedExtensions(array('png','jpg','jpeg','gif'));
-            $validator->setAllowedMaxFileSize(300*1024); // 300Kb
+            $validator->setAllowedMaxFileSize(800*1024); // 300Kb
             $upload->setValidator($validator);
 
             if (!$upload->loadIntoFile($tmp_file,$image,'profile-images')) {
