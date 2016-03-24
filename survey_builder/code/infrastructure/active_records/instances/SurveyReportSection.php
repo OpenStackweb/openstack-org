@@ -60,23 +60,24 @@ class SurveyReportSection extends DataObject {
             foreach ($answers as $answer) {
                 if (!$answer) continue;
 
-                // NPS mapping
-                if ($graph->Question()->Name == 'NetPromoter') {
-                    if ($answer < 7) {
-                        $answer = 'Detractor';
-                    } else if ($answer < 9) {
-                        $answer = 'Neutral';
-                    } else {
-                        $answer = 'Promoter';
-                    }
+                if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
 
+                    $col = $answer->row;
+                    $row = $answer->col;
 
+                    if (!isset($values[$row]))
+                        $values[$row] = array();
+
+                    if (!isset($values[$row][$col]))
+                        $values[$row][$col] = 0;
+
+                    $values[$row][$col]++;
+                } else {
+                    if (!isset($values[$answer]))
+                        $values[$answer] = 0;
+
+                    $values[$answer]++;
                 }
-                // end NPS mapping
-                if (!isset($values[$answer]))
-                    $values[$answer] = 0;
-
-                $values[$answer]++;
             }
 
             if ($graph->Question()->Name == 'NetPromoter') {

@@ -26,5 +26,5 @@ interface ISurveyAnswerRepository extends IEntityRepository {
      * @param ArrayList $answers
      * @return ArrayList
      */
-    public function explodeAnswers($question_id, $answers);
+    public function mapAnswers($question_id, $answers);
 }

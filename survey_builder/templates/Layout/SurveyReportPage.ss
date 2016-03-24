@@ -4,7 +4,7 @@
 <div class="container">
     <div class="report_templates_container">
         <select id="report-templates" class="form-control">
-            <% loop $SurveyTemplates.Sort(StartDate,DESC) %>
+            <% loop $SurveyTemplates.Sort(StartDate,ASC) %>
                 <option value="{$ID}">{$Title}</option>
             <% end_loop %>
         </select>

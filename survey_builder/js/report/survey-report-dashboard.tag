@@ -69,16 +69,39 @@
                     });
                     break;
                 case 'bars':
-                    var s1 = [];
+                    var data = [];
                     var ticks = [];
 
                     for (var label in values) {
                         var first_word = label.split(' ')[0];
-                        s1.push(values[label]);
                         ticks.push(first_word);
+
+                        if ($.isPlainObject(values[label])) {
+                            var cat = values[label];
+                            var array_data = [];
+                            for (var sublabel in cat) {
+                                array_data.push(cat[sublabel]);
+                            }
+
+                            data.push(array_data);
+                        } else {
+                            data.push(values[label]);
+                        }
+
                     }
 
-                    var plot1 = $.jqplot(graph_id, [s1], {
+                    var plot1 = $.jqplot(graph_id, [data], {
+                        stackSeries: true,
+    legend: {
+    show: true,
+    location: 'ne'
+    },
+                        series: [
+                        {label: 'Memberships'},
+                        {label: 'eBooks'},
+                        {label: 'Conference Tickets'},
+                        {label: 'Support'}
+                        ],
                         seriesDefaults:{
                             renderer:$.jqplot.BarRenderer,
                             pointLabels: { show: true }
