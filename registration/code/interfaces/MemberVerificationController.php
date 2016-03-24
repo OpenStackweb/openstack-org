@@ -119,6 +119,12 @@ final class MemberVerificationController extends AbstractController
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->redirectBack();
         }
+        catch(NotFoundEntityException $ex2){
+            Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
+            //Return back to form
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->redirectBack();
+        }
         catch(Exception $ex){
             Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
             //Return back to form

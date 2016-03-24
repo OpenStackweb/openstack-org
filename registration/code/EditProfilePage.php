@@ -18,6 +18,27 @@ class EditProfilePage extends Page
 
 class EditProfilePage_Controller extends Page_Controller
 {
+    /**
+     * @var IMemberManager
+     */
+    private $member_manager;
+
+    /**
+     * @return IMemberManager
+     */
+    public function getMemberManager()
+    {
+        return $this->member_manager;
+    }
+
+    /**
+     * @param IMemberManager $manager
+     */
+    public function setMemberManager(IMemberManager $manager)
+    {
+        $this->member_manager = $manager;
+    }
+
     static $allowed_actions = array
     (
         'EditProfileForm',
@@ -71,12 +92,12 @@ class EditProfilePage_Controller extends Page_Controller
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
-        $css_files =  array(
+        $css_files = array(
             "themes/openstack/css/chosen.css",
             'registration/css/edit.profile.page.css',
-           );
+        );
 
-        foreach($css_files as $css_file)
+        foreach ($css_files as $css_file)
             Requirements::css($css_file);
 
         Requirements::combine_files('edit_profile_page.js', array(
@@ -138,65 +159,59 @@ class EditProfilePage_Controller extends Page_Controller
     function SaveProfile($data, $form)
     {
         //Check for a logged in member
-        if ($CurrentMember = Member::currentUser()) {
-            //Check for another member with the same email address
-            if (Member::get()->filter(array('Email' => Convert::raw2sql($data['Email']), 'ID:not' => $CurrentMember->ID))->count() > 0) {
-                $form->addErrorMessage("Email", 'Sorry, that email address already exists.', "bad");
-                Session::set("FormInfo.Form_EditProfileForm.data", $data);
-                return $this->redirect($this->Link('?error=1'));
-            } //Otherwise save profile
-            else {
-                // Clean up bio
-                if ($data["Bio"]) {
-                    $config = HTMLPurifier_Config::createDefault();
-                    // Remove any CSS or inline styles
-                    $config->set('CSS.AllowedProperties', array());
-                    $purifier = new HTMLPurifier($config);
-                    $cleanedBio = $purifier->purify($data["Bio"]);
-                }
-                $form->saveInto($CurrentMember);
-                if (isset($cleanedBio)) $CurrentMember->Bio = $cleanedBio;
-                if ($data['Gender'] == 'Specify') {
-                    $CurrentMember->Gender = $data['GenderSpecify'];
-                }
-
-                if($CurrentMember->isChanged('Email'))
-                {
-                    $sender = new MemberRegistrationSenderService();
-                    $sender->send($CurrentMember->resetConfirmation());
-                }
-
-                $CurrentMember->write();
-
-
-                $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
-
-                if ($speaker) {
-                    if ($data['ReplaceName'] == 1) {
-                        $speaker->FirstName = $data['FirstName'];
-                    }
-                    if ($data['ReplaceSurname'] == 1) {
-                        $speaker->Surname = $data['Surname'];
-                    }
-                    if ($data['ReplaceBio'] == 1) {
-                        $speaker->Bio = $data['Bio'];
-                    }
-
-                    $speaker->write();
-                }
-
-
-                // If they do not have a photo uploaded, but they have provided a twitter URL, attempt to grab a photo from twitter
-                if ($CurrentMember->TwitterName && !$CurrentMember->Photo()->Exists()) {
-                    $this->ProfilePhotoFromTwitter($CurrentMember);
-                }
-
-                return $this->redirect($this->Link('?saved=1'));
-            }
-        } //If not logged in then return a permission error
-        else {
+        $CurrentMember = Member::currentUser();
+        if (!$CurrentMember)
             return Security::PermissionFailure($this->controller, 'You must be <a href="/join">registered</a> and logged in to edit your profile:');
+
+        //Check for another member with the same email address
+        if (Member::get()->filter(array('Email' => Convert::raw2sql($data['Email']), 'ID:not' => $CurrentMember->ID))->count() > 0) {
+            $form->addErrorMessage("Email", 'Sorry, that email address already exists.', "bad");
+            Session::set("FormInfo.Form_EditProfileForm.data", $data);
+            return $this->redirect($this->Link('?error=1'));
         }
+        //Otherwise save profile
+        // Clean up bio
+        if ($data["Bio"]) {
+            $config = HTMLPurifier_Config::createDefault();
+            // Remove any CSS or inline styles
+            $config->set('CSS.AllowedProperties', array());
+            $purifier = new HTMLPurifier($config);
+            $cleanedBio = $purifier->purify($data["Bio"]);
+        }
+        $form->saveInto($CurrentMember);
+        if (isset($cleanedBio)) $CurrentMember->Bio = $cleanedBio;
+        if ($data['Gender'] == 'Specify') {
+            $CurrentMember->Gender = $data['GenderSpecify'];
+        }
+        $email_updated = $CurrentMember->isChanged('Email');
+        $CurrentMember->write();
+
+        $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
+
+        if ($speaker) {
+            if ($data['ReplaceName'] == 1) {
+                $speaker->FirstName = $data['FirstName'];
+            }
+            if ($data['ReplaceSurname'] == 1) {
+                $speaker->Surname = $data['Surname'];
+            }
+            if ($data['ReplaceBio'] == 1) {
+                $speaker->Bio = $data['Bio'];
+            }
+
+            $speaker->write();
+        }
+
+        // If they do not have a photo uploaded, but they have provided a twitter URL, attempt to grab a photo from twitter
+        if ($CurrentMember->TwitterName && !$CurrentMember->Photo()->Exists()) {
+            $this->ProfilePhotoFromTwitter($CurrentMember);
+        }
+
+        if ($email_updated) {
+            $this->member_manager->resetEmailVerification($CurrentMember, new MemberRegistrationSenderService());
+        }
+
+        return $this->redirect($this->Link('?saved=1'));
     }
 
     //Check for just saved
@@ -447,7 +462,7 @@ class EditProfilePage_Controller extends Page_Controller
             // Logout and delete the user
             Session::set('delete_member_id', $current_user->ID);
             $this->setMessage('Success', 'You have resigned your membership to the OpenStack Foundation.');
-            $this->redirect('/Security/logout'. "?BackURL=" . urlencode('/profile'));
+            $this->redirect('/Security/logout' . "?BackURL=" . urlencode('/profile'));
 
         } else if ($current_user) {
             return $this->renderWith(array('EditProfilePage_resign', 'Page'));
@@ -633,7 +648,7 @@ class EditProfilePage_Controller extends Page_Controller
                 $this->setMessage('Success', 'Training Course deleted.');
                 $this->course_manager->unRegister($course_id);
             } else {
-                $this->setMessage('Danger', "You don't have the permission required to edit this Training Curse" );
+                $this->setMessage('Danger', "You don't have the permission required to edit this Training Curse");
             }
         }
 
@@ -668,7 +683,7 @@ class EditProfilePage_Controller extends Page_Controller
                 die();
             }
         } else {
-            return Controller::curr()->redirect('/Security/login?BackURL=/profile/TrainingAddCourse?training_id='.$training_id);
+            return Controller::curr()->redirect('/Security/login?BackURL=/profile/TrainingAddCourse?training_id=' . $training_id);
         }
 
     }
@@ -727,9 +742,10 @@ class EditProfilePage_Controller extends Page_Controller
         }
     }
 
-    public function getRenderUITopExtensions(){
+    public function getRenderUITopExtensions()
+    {
         $html = '';
-        $this->extend('getRenderUITopExtensions',$html);
+        $this->extend('getRenderUITopExtensions', $html);
         return $html;
     }
 }

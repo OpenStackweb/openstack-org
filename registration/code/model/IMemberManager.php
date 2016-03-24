@@ -48,4 +48,11 @@ interface IMemberManager
      */
     public function resendEmailVerification($email, IMessageSenderService $sender_service);
 
+    /**
+     * @param Member $member
+     * @param IMessageSenderService $sender_service
+     * @return Member
+     */
+    public function resetEmailVerification(Member $member, IMessageSenderService $sender_service);
+
 }

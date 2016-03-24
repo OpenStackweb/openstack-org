@@ -308,12 +308,28 @@ final class MemberManager implements IMemberManager
 
             if(filter_var($email, FILTER_VALIDATE_EMAIL) === false)
                 throw new EntityValidationException('invalid mail address');
+
             $member = $repository->findByEmail($email);
             if (is_null($member))
                 throw new NotFoundEntityException('Member', $email);
+
             if($member->EmailVerified) throw new EntityValidationException('Member already verified!');
             $sender_service = new MemberRegistrationSenderService();
             $sender_service->send($member);
+        });
+    }
+
+    /**
+     * @param Member $member
+     * @param IMessageSenderService $sender_service
+     * @return Member
+     */
+    public function resetEmailVerification(Member $member, IMessageSenderService $sender_service){
+        return $this->tx_manager->transaction(function () use ($member, $sender_service){
+            $member->resetConfirmation();
+            $member->write();
+            $this->resendEmailVerification($member->Email, $sender_service);
+            return $member;
         });
     }
 }

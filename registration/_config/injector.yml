@@ -7,6 +7,9 @@ After:
 RegistrationPage_Controller:
   dependencies:
     MemberManager: '%$MemberManager'
+EditProfilePage_Controller:
+  dependencies:
+    MemberManager: '%$MemberManager'
 MemberVerificationController:
   dependencies:
     MemberManager: '%$MemberManager'
