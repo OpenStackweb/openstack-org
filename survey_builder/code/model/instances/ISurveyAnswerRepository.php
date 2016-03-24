@@ -20,4 +20,11 @@ interface ISurveyAnswerRepository extends IEntityRepository {
      * @return ArrayList
      */
     public function getByQuestionAndFilters($question_id, $filters);
+
+    /**
+     * @param int $question_id
+     * @param ArrayList $answers
+     * @return ArrayList
+     */
+    public function explodeAnswers($question_id, $answers);
 }

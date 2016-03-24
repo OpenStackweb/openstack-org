@@ -16,7 +16,7 @@
                 <div class="report_filter_box { last:((parent.filters.length-1) == i) }" each="{ filter,i in filters }">
                     <select data-qid="{ filter.Question }" class="report_filter form-control">
                         <option value="" disabled selected>{ filter.Label }</option>
-                        <option each="{ option in filter.Options }" value='{ option }'>{ option }</option>
+                        <option each="{ option in filter.Options }" value='{ option.id }'>{ option.value }</option>
                     </select>
                 </div>
             </div>

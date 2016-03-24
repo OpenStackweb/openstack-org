@@ -51,38 +51,37 @@ class SurveyReportSection extends DataObject {
 
         foreach ($this->Graphs()->sort('Order') as $graph) {
             $values = array();
-            $total = 0;
             $extra_label = '';
 
             $answers = $repository->getByQuestionAndFilters($graph->Question()->ID, $filters);
+            $total_answers = $answers['total'];
+            $answers = $answers['answers'];
 
             foreach ($answers as $answer) {
-                if (!$answer['Value']) continue;
+                if (!$answer) continue;
 
-                $answer_text = $answer['Value'];
                 // NPS mapping
                 if ($graph->Question()->Name == 'NetPromoter') {
-                    if ($answer_text < 7) {
-                        $answer_text = 'Detractor';
-                    } else if ($answer_text < 9) {
-                        $answer_text = 'Neutral';
+                    if ($answer < 7) {
+                        $answer = 'Detractor';
+                    } else if ($answer < 9) {
+                        $answer = 'Neutral';
                     } else {
-                        $answer_text = 'Promoter';
+                        $answer = 'Promoter';
                     }
 
 
                 }
                 // end NPS mapping
-                if (!isset($values[$answer_text]))
-                    $values[$answer_text] = 0;
+                if (!isset($values[$answer]))
+                    $values[$answer] = 0;
 
-                $values[$answer_text]++;
-                $total++;
+                $values[$answer]++;
             }
 
             if ($graph->Question()->Name == 'NetPromoter') {
-                $promoter_perc = round(($values['Promoter'] / $total) * 100);
-                $detractor_perc = round(($values['Detractor'] / $total) * 100);
+                $promoter_perc = round(($values['Promoter'] / $total_answers) * 100);
+                $detractor_perc = round(($values['Detractor'] / $total_answers) * 100);
                 $extra_label = 'NPS: '.($promoter_perc - $detractor_perc).'%';
             }
 
@@ -94,7 +93,7 @@ class SurveyReportSection extends DataObject {
                 'Graph'      => $graph->Type,
                 'Title'      => $graph->Label,
                 'Values'     => $values,
-                'Total'      => $total,
+                'Total'      => $total_answers,
                 'ExtraLabel' => $extra_label,
             );
         }

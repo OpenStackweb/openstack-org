@@ -30,7 +30,7 @@ class SapphireAnswerSurveyRepository
      */
     public function getByQuestionAndFilters($question_id, $filters = null)
     {
-        $answers_query = "  SELECT qval.`Value` FROM SurveyAnswer AS a
+        $answers_query = "  SELECT a.`Value` FROM SurveyAnswer AS a
                             LEFT JOIN SurveyStep AS step ON step.ID = a.StepID";
 
         if ($filters) {
@@ -46,7 +46,9 @@ class SapphireAnswerSurveyRepository
         }
 
         $answers_query .= " LEFT JOIN SurveyQuestionValueTemplate AS qval ON a.`Value` = qval.ID
-                            WHERE a.QuestionID = {$question_id}";
+                            LEFT JOIN SurveyTemplate AS st ON s.TemplateID = st.ID
+                            WHERE s.IsTest = 0 AND (s.Created BETWEEN st.StartDate AND st.EndDate )
+                            AND a.QuestionID = {$question_id}";
 
         if ($filters) {
             $filter_query = "SELECT DISTINCT(q0.ID) FROM ";
@@ -65,8 +67,10 @@ class SapphireAnswerSurveyRepository
                 }
 
                 $filter_query .= " LEFT JOIN SurveyAnswer AS a ON a.StepID = step.ID
-                                      LEFT JOIN SurveyQuestionValueTemplate AS qval ON a.`Value` = qval.ID
-                                      WHERE a.QuestionID = {$filter->id} AND qval.`Value` = '{$filter->value}' ) AS q".$key;
+                                   LEFT JOIN SurveyQuestionValueTemplate AS qval ON a.`Value` = qval.ID
+                                   LEFT JOIN SurveyTemplate AS st ON s.TemplateID = st.ID
+                                   WHERE s.IsTest = 0 AND (s.Created BETWEEN st.StartDate AND st.EndDate )
+                                   AND a.QuestionID = {$filter->id} AND FIND_IN_SET({$filter->value},a.`Value`) > 0 ) AS q".$key;
 
                 $filter_query .= ($key > 0) ? " ON q".($key-1).".ID = q{$key}.ID" : "";
             }
@@ -74,8 +78,32 @@ class SapphireAnswerSurveyRepository
             $answers_query .= " AND s.ID IN ($filter_query)";
         }
 
-        $answers = DB::query($answers_query);
+        //die($answers_query);
 
-        return $answers;
+        $query_result = DB::query($answers_query);
+        $answers = $this->explodeAnswers($question_id, $query_result);
+        $total_answers = $query_result->numRecords();
+
+        return array('answers' => $answers, 'total' => $total_answers);
     }
+
+    /**
+     * @param int $question_id
+     * @param ArrayList $answers
+     * @return ArrayList
+     */
+    public function explodeAnswers($question_id, $answers) {
+        $answer_values = new ArrayList();
+        $question_values = SurveyQuestionValueTemplate::get()->where('OwnerID = '.$question_id)->map('ID','Value')->toArray();
+        foreach($answers as $answer) {
+            $multi_answer = explode(',',$answer['Value']);
+            foreach($multi_answer as $single_answer) {
+                $answer_value = $question_values[$single_answer];
+                $answer_values->push($answer_value);
+            }
+        }
+
+        return $answer_values;
+    }
+
 }
