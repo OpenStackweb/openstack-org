@@ -53,8 +53,10 @@ $(document).ready(function(){
                $('.moderator_container').show();
            else
                $('.moderator_container').hide();
+           $('#expect_learn_container').show();
        }
        else {
+           $('#expect_learn_container').hide();
            $('.speakers_container').hide();
            $('.moderator_container').hide();
            $('.track_container').hide();

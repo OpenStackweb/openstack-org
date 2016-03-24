@@ -615,4 +615,20 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         );
     }
 
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public function IsPresentationEventType($type){
+        return SummitService::IsPresentationEventType($type);
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public function IsSummitEventType($type){
+        return SummitService::IsSummitEventType($type);
+    }
+
 }

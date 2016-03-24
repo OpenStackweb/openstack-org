@@ -95,6 +95,9 @@ class SummitEvent extends DataObject implements ISummitEvent
         return (int)$this->getField('ID');
     }
 
+    /**
+     * @return bool
+     */
     public function isPresentation() {
         return $this instanceof Presentation;
     }

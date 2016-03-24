@@ -123,4 +123,9 @@ interface ISummitEvent extends IEntity
      * @return void
      */
     public function unPublish();
+
+    /**
+     * @return bool
+     */
+    public function isPresentation();
 }

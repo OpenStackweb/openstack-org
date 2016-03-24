@@ -222,7 +222,7 @@ final class SummitService implements ISummitService
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
             $event->LocationID       = intval($event_data['location_id']);
-            $event->TypeID           = intval($event_data['event_type']);
+            $event->TypeID           = $event_type_id;
 
             $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
             $event->AllowedSummitTypes()->setByIDList($summit_types);
@@ -276,6 +276,7 @@ final class SummitService implements ISummitService
                 }
 
                 $speaker_ids[] = $speaker->ID;
+                $event->ModeratorID = 0;
             }
 
             $event->Speakers()->setByIDList($speaker_ids);
@@ -313,6 +314,36 @@ final class SummitService implements ISummitService
         return $event;
     }
 
+
+    /**
+     * @param ISummitEvent $event
+     * @param SummitEventType $type
+     * @return bool
+     */
+    public static function checkEventType(ISummitEvent $event, SummitEventType $type)
+    {
+        if($event->isPresentation() ){
+            return self::IsPresentationEventType($type->Type);
+        }
+        return self::IsSummitEventType($type->Type);
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function IsPresentationEventType($type){
+        return ($type === 'Presentation' || $type === 'Keynotes');
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function IsSummitEventType($type){
+        return !self::IsPresentationEventType($type);
+    }
+
     /**
      * @param ISummit $summit
      * @param array $event_data
@@ -336,6 +367,13 @@ final class SummitService implements ISummitService
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
                 throw new EntityValidationException('event doest not belongs to summit');
 
+            $event_type_id = intval($event_data['event_type']);
+            $event_type    = SummitEventType::get()->byID($event_type_id);
+            if(is_null($event_type)) throw new NotFoundEntityException('EventType');
+
+            if(!self::checkEventType($event, $event_type))
+                throw new EntityValidationException('Invalid event type!');
+
             $start_date = $event_data['start_date'];
             $end_date   = $event_data['end_date'];
             if(!empty($start_date) || !empty($end_date))
@@ -357,6 +395,7 @@ final class SummitService implements ISummitService
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
             $event->LocationID       = intval($event_data['location_id']);
+            $event->TypeID           = $event_type_id;
 
             $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
             $event->AllowedSummitTypes()->setByIDList($summit_types);
@@ -378,6 +417,8 @@ final class SummitService implements ISummitService
             return $event;
         });
     }
+
+
 
     /**
      * @param ISummit $summit
