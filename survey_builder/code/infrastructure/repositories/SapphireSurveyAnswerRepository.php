@@ -103,6 +103,8 @@ class SapphireAnswerSurveyRepository
                     $matrix = explode(':',$single_answer);
                     $col = $matrix[0];
                     $row = $matrix[1];
+                    if (!$col || !$row) continue;
+                    
                     $answer_value = array('col' => $question_values[$col],'row' => $question_values[$row]);
                     $answer_values->push($answer_value);
                 } else if ($question->Name == 'NetPromoter') {
