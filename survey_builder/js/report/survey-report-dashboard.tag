@@ -68,28 +68,23 @@
                         grid:{borderColor:'transparent',shadow:false,drawBorder:false}
                     });
                     break;
-                case 'bars':
+                case 'multibars':
                     var data = [];
                     var ticks = [];
                     var series = [];
 
                     for (var label in values) {
                         series.push({label:label});
-
-                        if ($.isPlainObject(values[label])) {
-                            var cat = values[label];
-                            var array_data = [];
-                            for (var sublabel in cat) {
-                                var first_word = sublabel.split(' ')[0];
-                                if ($.inArray(first_word,ticks) < 0) {
-                                    ticks.push(first_word);
-                                }
-                                array_data.push(cat[sublabel]);
+                        var cat = values[label];
+                        var array_data = [];
+                        for (var sublabel in cat) {
+                            var first_word = sublabel.split(' ')[0];
+                            if ($.inArray(first_word,ticks) < 0) {
+                                ticks.push(first_word);
                             }
-                            data.push(array_data);
-                        } else {
-                            data.push(values[label]);
+                            array_data.push(cat[sublabel]);
                         }
+                        data.push(array_data);
                     }
 
                     var plot1 = $.jqplot(graph_id, data, {
@@ -108,6 +103,39 @@
                             tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
                             tickOptions: {
                                 angle: -90,
+                                fontSize: '8pt'
+                            }
+                        },
+                        axes: {
+                            xaxis: {
+                                renderer: $.jqplot.CategoryAxisRenderer,
+                                ticks: ticks
+                            }
+                        },
+                        highlighter: { show: false }
+                    });
+                    break;
+                case 'bars':
+                    var data = [];
+                    var ticks = [];
+                    var series = [];
+
+                    for (var label in values) {
+                        var first_word = label.split('(')[0];
+                        ticks.push(first_word);
+                        data.push(values[label]);
+                    }
+
+                    var plot1 = $.jqplot(graph_id, [data], {
+                        seriesDefaults:{
+                            renderer:$.jqplot.BarRenderer,
+                            rendererOptions: {fillToZero: true},
+                            pointLabels: { show: true }
+                        },
+                        axesDefaults: {
+                            tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+                            tickOptions: {
+                                angle: -30,
                                 fontSize: '8pt'
                             }
                         },
