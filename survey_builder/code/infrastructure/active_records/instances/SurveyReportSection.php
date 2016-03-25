@@ -62,8 +62,8 @@ class SurveyReportSection extends DataObject {
 
                 if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
 
-                    $col = $answer->row;
-                    $row = $answer->col;
+                    $col = $answer->col;
+                    $row = $answer->row;
 
                     if (!isset($values[$row]))
                         $values[$row] = array();

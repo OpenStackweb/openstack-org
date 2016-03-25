@@ -71,40 +71,45 @@
                 case 'bars':
                     var data = [];
                     var ticks = [];
+                    var series = [];
 
                     for (var label in values) {
-                        var first_word = label.split(' ')[0];
-                        ticks.push(first_word);
+                        series.push({label:label});
 
                         if ($.isPlainObject(values[label])) {
                             var cat = values[label];
                             var array_data = [];
                             for (var sublabel in cat) {
+                                var first_word = sublabel.split(' ')[0];
+                                if ($.inArray(first_word,ticks) < 0) {
+                                    ticks.push(first_word);
+                                }
                                 array_data.push(cat[sublabel]);
                             }
-
                             data.push(array_data);
                         } else {
                             data.push(values[label]);
                         }
-
                     }
 
-                    var plot1 = $.jqplot(graph_id, [data], {
+                    var plot1 = $.jqplot(graph_id, data, {
                         stackSeries: true,
-    legend: {
-    show: true,
-    location: 'ne'
-    },
-                        series: [
-                        {label: 'Memberships'},
-                        {label: 'eBooks'},
-                        {label: 'Conference Tickets'},
-                        {label: 'Support'}
-                        ],
+                        legend: {
+                            show: true,
+                            placement: 'outsideGrid'
+                        },
+                        series: series,
                         seriesDefaults:{
                             renderer:$.jqplot.BarRenderer,
+                            rendererOptions: {fillToZero: true},
                             pointLabels: { show: true }
+                        },
+                        axesDefaults: {
+                            tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+                            tickOptions: {
+                                angle: -90,
+                                fontSize: '8pt'
+                            }
                         },
                         axes: {
                             xaxis: {
