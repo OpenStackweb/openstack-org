@@ -104,7 +104,7 @@ class SapphireAnswerSurveyRepository
                     $col = $matrix[0];
                     $row = $matrix[1];
                     if (!$col || !$row) continue;
-                    
+
                     $answer_value = array('col' => $question_values[$col],'row' => $question_values[$row]);
                     $answer_values->push($answer_value);
                 } else if ($question->Name == 'NetPromoter') {
@@ -117,9 +117,11 @@ class SapphireAnswerSurveyRepository
                         $answer_value = 'Promoter';
                     }
                     $answer_values->push($answer_value);
-                } else {
+                } else if(isset($question_values[$single_answer])){
                     $answer_value = $question_values[$single_answer];
                     $answer_values->push($answer_value);
+                } else {
+                    $answer_values->push($single_answer);
                 }
             }
         }
