@@ -97,6 +97,8 @@ class SapphireAnswerSurveyRepository
         foreach($answers as $answer) {
             $multi_answer = explode(',',$answer['Value']);
             foreach($multi_answer as $single_answer) {
+                if (!$single_answer) continue;
+
                 if ($question->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
                     $matrix = explode(':',$single_answer);
                     $col = $matrix[0];
@@ -113,7 +115,7 @@ class SapphireAnswerSurveyRepository
                         $answer_value = 'Promoter';
                     }
                     $answer_values->push($answer_value);
-                } else if ($single_answer){
+                } else {
                     $answer_value = $question_values[$single_answer];
                     $answer_values->push($answer_value);
                 }
