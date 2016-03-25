@@ -113,7 +113,7 @@ class SapphireAnswerSurveyRepository
                         $answer_value = 'Promoter';
                     }
                     $answer_values->push($answer_value);
-                } else {
+                } else if ($single_answer){
                     $answer_value = $question_values[$single_answer];
                     $answer_values->push($answer_value);
                 }
