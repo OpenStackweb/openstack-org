@@ -89,6 +89,21 @@ class SurveyReportSection extends DataObject {
             //sort results
             arsort($values);
 
+            // hide answers if less than 10
+            if ($total_answers <= 10) {
+                $values = array();
+                $total_answers = 0;
+            }
+
+            if($graph->Type == 'pie' && count($values) > 10) {
+                $other_values = array_slice($values,13);
+                $values = array_slice($values,0,12);
+                $values['Other'] = 0;
+                foreach ($other_values as $val) {
+                    $values['Other'] += $val;
+                }
+            }
+
             $questions[] = array(
                 'ID'         => $graph->Question()->ID,
                 'Graph'      => $graph->Type,

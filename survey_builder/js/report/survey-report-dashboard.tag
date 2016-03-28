@@ -1,13 +1,26 @@
+<raw>
+    <span></span>
+    this.on('update', function(){
+        if(opts.content) {
+            this.root.innerHTML = opts.content
+        }
+    })
+</raw>
 <survey-report-dashboard>
     <h2>{ section.Name }</h2>
-    <p>{ section.Description }</p>
+    <raw class="section_desc" content="{ section.Description }"/>
     <div id="dashboard">
-        <div class="graph_box { question.Graph }" each="{ question in section.Questions }" if={ Object.keys(question.Values).length }>
+        <div class="graph_box { question.Graph }" each="{ question in section.Questions }">
             <div class="graph_title">{ question.Title }</div>
-            <div id="graph_{ question.ID }" class="graph"></div>
-            <span class="label_extra" if={ question.ExtraLabel }>{ question.ExtraLabel }</span>
-            <span class="label_n">n={ question.Total }</span>
-            <div class="clearfix"></div>
+            <div if={ question.Total > 0 }>
+                <div id="graph_{ question.ID }" class="graph"></div>
+                <span class="label_extra" if={ question.ExtraLabel }>{ question.ExtraLabel }</span>
+                <span class="label_n">n={ question.Total }</span>
+                <div class="clearfix"></div>
+            </div>
+            <div if={ question.Total == 0 }>
+                There is no data available for a sample size this small.
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -162,7 +175,8 @@
             doc.text(25, 35, self.section.Name);
 
             doc.setFontSize(14);
-            var split_desc = doc.splitTextToSize(self.section.Description, 160);
+            var desc = $('.section_desc').text();
+            var split_desc = (desc.length > 60) ? doc.splitTextToSize(desc, 160) : desc;
             doc.text(25, 45, split_desc );
 
 
