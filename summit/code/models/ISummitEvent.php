@@ -128,4 +128,9 @@ interface ISummitEvent extends IEntity
      * @return bool
      */
     public function isPresentation();
+
+    /**
+     * @return string
+     */
+    public function getDayLabel();
 }

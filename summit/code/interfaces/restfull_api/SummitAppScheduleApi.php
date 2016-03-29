@@ -93,6 +93,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'GET track'                 => 'getScheduleByTrack',
         'GET search'                => 'getSearchResults',
         'GET empty_spots'           => 'getEmptySpots',
+        'GET my_schedule/pdf'       => 'getMySchedulePDF',
         'PUT $EventID!'             => 'addToSchedule',
         'DELETE $EventID!'          => 'removeFromSchedule',
         'POST $EventID!/feedback'   => 'addFeedback',
@@ -109,6 +110,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'removeFromSchedule',
         'addFeedback',
         'shareEmail',
+        'getMySchedulePDF',
     );
 
     protected function getCacheKey(SS_HTTPRequest $request){

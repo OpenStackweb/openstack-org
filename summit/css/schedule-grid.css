@@ -515,6 +515,12 @@ a.navbar-brand {
     height: 38px;
 }
 
+.view-all-schedule {
+    text-decoration: none;
+    padding: 8px;
+    color: grey !important;
+}
+
 form.all-events-search-form .all-events-search-wrapper {
     margin-left: -10px;
     padding-right: 0;
@@ -701,4 +707,10 @@ h2.subtitle {
         width: 20%;
         float: left;
     }
+}
+
+.export_my_schedule {
+    color: white !important;
+    margin-top: 10px;
+    float: right;
 }

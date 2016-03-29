@@ -56,10 +56,13 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $this->event_repository = $event_repository;
     }
 
+
     static $allowed_actions = array(
         'ViewEvent',
         'ViewSpeakerProfile',
         'ViewAttendeeProfile',
+        'ViewMySchedule',
+        'ExportMySchedule',
         'DoGlobalSearch',
         'index',
     );
@@ -69,6 +72,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'events/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
         'speakers/$SPEAKER_ID' => 'ViewSpeakerProfile',
         'attendees/$ATTENDEE_ID' => 'ViewAttendeeProfile',
+        'mine/pdf' => 'ExportMySchedule',
+        'mine' => 'ViewMySchedule',
         'global-search' => 'DoGlobalSearch',
     );
 
@@ -109,6 +114,82 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
                 'Event' => $event,
                 'FB_APP_ID' => FB_APP_ID,
                 'goback' => $goback));
+    }
+
+    public function ViewMySchedule()
+    {
+        $member    = Member::currentUser();
+        $goback = $this->getRequest()->getVar('goback') ? $this->getRequest()->getVar('goback') : '';
+
+        if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
+
+        if(is_null($member) || !$member->isAttendee($this->Summit()->ID)) return $this->permissionFailure();
+
+        $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
+
+        return $this->renderWith(
+            array('SummitAppMySchedulePage', 'SummitPage', 'Page'),
+            array(
+                'Schedule' => $my_schedule,
+                'Summit'   => $this->Summit(),
+                'goback'   => $goback));
+    }
+
+    public function ExportMySchedule()
+    {
+        $member = Member::currentUser();
+        $base = Director::protocolAndHost();
+
+        if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
+
+        if(is_null($member) || !$member->isAttendee($this->Summit()->ID)) return $this->permissionFailure();
+
+        $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
+        $day_schedule = new ArrayList();
+        foreach ($my_schedule as $event) {
+            $day_label = $event->getDayLabel();
+            if ($day_array = $day_schedule->find('Day',$day_label)) {
+                $day_array->Events->push($event);
+            } else {
+                $day_array = new ArrayData(array('Day' => $day_label, 'Events' => new ArrayList()));
+                $day_array->Events->push($event);
+                $day_schedule->push($day_array);
+            }
+        }
+
+        $html_inner = $this->renderWith(
+            array('SummitAppMySchedulePage_pdf'),
+            array('Schedule' => $day_schedule));
+
+        $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
+
+        //create pdf
+        $file = FileUtils::convertToFileName('my-schedule') . '.pdf';
+
+        $html_outer = sprintf("<html><head><style>%s</style></head><body><div class='container'>%s</div></body></html>",
+            $css, $html_inner);
+
+        //return $html_outer;
+
+        try {
+            $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));
+            $html2pdf->setTestIsImage(false);
+            $html2pdf->WriteHTML($html_outer);
+
+            //clean output buffer
+            ob_end_clean();
+            $html2pdf->Output($file, "D");
+        } catch (HTML2PDF_exception $e) {
+            $message = array(
+                'errno' => '',
+                'errstr' => $e->__toString(),
+                'errfile' => 'SummitAppSchedPage.php',
+                'errline' => '',
+                'errcontext' => ''
+            );
+            SS_Log::log($message, SS_Log::ERR);
+            $this->httpError(404, 'There was an error on PDF generation!');
+        }
     }
 
     public function ViewSpeakerProfile()
