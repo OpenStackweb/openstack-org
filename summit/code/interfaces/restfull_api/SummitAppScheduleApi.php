@@ -96,6 +96,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'PUT $EventID!'             => 'addToSchedule',
         'DELETE $EventID!'          => 'removeFromSchedule',
         'POST $EventID!/feedback'   => 'addFeedback',
+        'POST /shareEmail'          => 'shareEmail',
     );
 
     static $allowed_actions = array(
@@ -107,6 +108,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'addToSchedule',
         'removeFromSchedule',
         'addFeedback',
+        'shareEmail',
     );
 
     protected function getCacheKey(SS_HTTPRequest $request){
@@ -623,6 +625,30 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         catch(NotFoundEntityException $ex2){
             SS_Log::log($ex2,SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function shareEmail(){
+        try {
+
+
+            $data = $this->getJsonRequest();
+
+            if (!$data) return $this->serverError();
+
+            $this->schedule_manager->sendEmail($data);
+
+        }
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);

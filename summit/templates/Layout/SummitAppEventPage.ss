@@ -88,14 +88,14 @@
             <% end_if %>
             <div class="share">
                 <script type="application/javascript">
-                        var share_info =
-                        {
-                            url: "{$AbsoluteLink}event/{$Event.ID}",
-                            title : "{$Event.Title.JS}",
-                            description: "{$Event.ShortDescription().JS}",
-                            image: "",
-                            fb_app_id : "227356147446887",
-                        };
+                    var share_info =
+                    {
+                        url: "{$AbsoluteLink}event/{$Event.ID}",
+                        title : "{$Event.Title.JS}",
+                        description: "{$Event.ShortDescription().JS}",
+                        image: "/themes/openstack/images/openstack-logo-full.png",
+                        fb_app_id : {$FB_APP_ID},
+                    };
                 </script>
                 <share-buttons share_info="{ share_info }"></share-buttons>
             </div>

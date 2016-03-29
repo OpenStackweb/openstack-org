@@ -1,7 +1,3 @@
-<raw>
-    <span></span>
-    this.root.innerHTML = opts.content
-</raw>
 
 <share-buttons>
 
@@ -31,6 +27,46 @@
         </span>
     </div>
 
+    <div id="email-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Email</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="email-form">
+                        <div class="form-group">
+                            <label for="email-from">From:</label>
+                            <input type="email" class="form-control" id="email-from" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-to">To:</label>
+                            <input type="email" class="form-control" id="email-to" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-subject">Subject:</label>
+                            <input type="text" class="form-control" id="email-subject" value="Fwd: { share_info.title}" >
+                        </div>
+                        <div class="form-group">
+                            <label for="email-body">Body:</label>
+                            <textarea id="email-body" class="form-control">
+                                { share_info.title }
+                                &#13;&#10;
+                                { share_info.description }
+                                &#13;&#10;&#13;&#10;
+                                Check it out: { share_info.url }
+                            </textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick={ sendEmail }>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
 
         this.share_info   = opts.share_info;
@@ -49,7 +85,35 @@
         }
 
         shareMail(e) {
-            console.log("share mail");
+            console.log('email');
+            $('#email-modal').modal('show');
+
+            $('#email-form').validate();
+        }
+
+        sendEmail() {
+            var url = 'api/v1/summits/6/schedule/shareEmail';
+            var request = {
+                from:$('#email-from').val(),
+                to:$('#email-to').val(),
+                subject:$('#email-subject').val(),
+                body:$('#email-body').val()
+            }
+
+            if (!$('#email-form').valid()) {
+                return false;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url:  url,
+                data: JSON.stringify(request),
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $('#email-modal').modal('hide');
+                    swal('Success');
+                }
+            });
         }
 
         window.fbAsyncInit = function() {

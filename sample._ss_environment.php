@@ -118,6 +118,9 @@ define('PARSE_APP_ID','');
 define('PARSE_REST_KEY','');
 define('PARSE_MASTER_KEY','');
 
+//SOCIAL MEDIA
+define('FB_APP_ID','');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 

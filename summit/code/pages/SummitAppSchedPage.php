@@ -105,7 +105,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         return $this->renderWith(
             array('SummitAppEventPage', 'SummitPage', 'Page'),
-            array('Event' => $event, 'goback' => $goback));
+            array(
+                'Event' => $event,
+                'FB_APP_ID' => FB_APP_ID,
+                'goback' => $goback));
     }
 
     public function ViewSpeakerProfile()

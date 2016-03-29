@@ -342,3 +342,7 @@ a.profile-pic-wrapper {
     background-repeat: no-repeat;
     background-color: #fff;
 }
+
+.error {
+    color: red;
+}
