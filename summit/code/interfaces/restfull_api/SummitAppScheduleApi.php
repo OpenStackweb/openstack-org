@@ -643,7 +643,13 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
             if (!$data) return $this->serverError();
 
-            $this->schedule_manager->sendEmail($data);
+            if (!$data['from'] || !$data['to']) {
+                throw new EntityValidationException('Please enter From and To email addresses.');
+            }
+
+            $email = EmailFactory::getInstance()->buildEmail($data['from'], $data['to'], $data['subject'], $data['body']);
+
+            return $this->ok($email->send());
 
         }
         catch(EntityValidationException $ex1){

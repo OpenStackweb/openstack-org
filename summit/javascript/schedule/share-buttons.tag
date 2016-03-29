@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email-body">Body:</label>
-                            <textarea id="email-body" class="form-control">
+                            <textarea id="email-body" class="form-control" rows="5">
                                 { share_info.title }
                                 &#13;&#10;
                                 { share_info.description }
@@ -111,7 +111,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function () {
                     $('#email-modal').modal('hide');
-                    swal('Success');
+                    swal('Email Sent', 'Email sent successfully', 'success');
                 }
             });
         }

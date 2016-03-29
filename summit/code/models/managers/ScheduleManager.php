@@ -227,22 +227,4 @@ final class ScheduleManager
         });
     }
 
-    /**
-     * @param $data
-     * @return mixed
-     */
-    public function sendEmail($data)
-    {
-        return $this->tx_manager->transaction(function () use ( $data ) {
-
-            if (!$data['from'] || !$data['to']) {
-                throw new EntityValidationException('Please enter From and To email addresses.');
-            }
-
-            $email = EmailFactory::getInstance()->buildEmail($data['from'], $data['to'], $data['subject'], $data['body']);
-
-            return $email->send();
-        });
-    }
-
 } 
