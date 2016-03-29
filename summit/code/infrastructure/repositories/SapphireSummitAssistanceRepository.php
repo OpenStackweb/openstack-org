@@ -101,7 +101,8 @@ SQL;
             WHERE RPC.SummitID = {$summit_id} AND ACR.SummitID={$summit_id} AND L.`Name` IS NOT NULL";
 
         if ($search_term) {
-            $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%' OR S.LastName LIKE '%{$search_term}%')";
+            $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
+                            OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%')";
         }
 
         $query_count = "SELECT COUNT(*)";

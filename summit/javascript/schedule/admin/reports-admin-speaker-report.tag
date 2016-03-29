@@ -76,9 +76,9 @@
                 function(data){
                     self.speakers = data.data;
                     self.page_data.page = page;
-                    self.page_data.total = data.total;
+                    self.page_data.total = parseInt(data.total);
 
-                    var total_pages = Math.ceil(self.page_data.total / self.page_data.limit);
+                    var total_pages = (self.page_data.total) ? Math.ceil(self.page_data.total / self.page_data.limit) : 1;
                     var options = {
                         bootstrapMajorVersion:3,
                         currentPage: self.page_data.page ,
