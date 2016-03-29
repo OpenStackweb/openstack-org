@@ -57,7 +57,9 @@
 
         saveReport(e) {
             var report = $('#report_select').val();
-            e.preventUpdate = true;
+            if (typeof(e) !== 'undefined') {
+                e.preventUpdate = true;
+            }
             self.dispatcher.saveReport(report);
         }
 
