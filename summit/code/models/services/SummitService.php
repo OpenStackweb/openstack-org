@@ -697,7 +697,7 @@ final class SummitService implements ISummitService
             $member_id = 0;
             if(!isset($speaker_data['email']) && !isset($speaker_data['member_id']))
                 throw new EntityValidationException
-                ("you mus provide an email or a member_id in order to create a speaker!");
+                ("you must provide an email or a member_id in order to create a speaker!");
 
             if(isset($speaker_data['member_id']) && intval($speaker_data['member_id']) > 0){
                 $member_id = intval($speaker_data['member_id']);

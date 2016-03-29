@@ -30,6 +30,7 @@ final class SapphirePresentationSpeakerRepository extends SapphireRepository imp
     public function searchByTerm($term, $limit = 10)
     {
 
+        $term       = trim($term);
         $term_split = explode(' ',$term);
         $first_name = $term;
         $last_name1 = $term;
@@ -37,7 +38,7 @@ final class SapphirePresentationSpeakerRepository extends SapphireRepository imp
 
         if(count($term_split) == 2)
         {
-            $first_name = trim($term_split[0]);
+            $first_name  = trim($term_split[0]);
             $last_name2  = trim($term_split[1]);
         }
 
