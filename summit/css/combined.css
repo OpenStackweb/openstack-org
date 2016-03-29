@@ -109,7 +109,7 @@ body.summit-landing-body {
 
 .landing-action {
   display: block;
-  margin-top: 20px; }
+  margin: 20px 0; }
 
 a.register-btn-lrg, .register-btn-lrg {
   border-radius: 2px;

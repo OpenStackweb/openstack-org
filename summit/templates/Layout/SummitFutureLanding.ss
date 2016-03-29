@@ -19,6 +19,9 @@
                        <span>Get Excited!</span>
                     </div>
                 <div>
+                  <a href="//openstack.org/assets/barcelona-summit/Barcelona-Sponsorship-Prospectus.pdf" class="btn register-btn-lrg">Download The Barcelona Prospectus</a>
+                </div>
+                <div>
                   <a href="/summit/austin-2016/" class="white-link current-summit-link">View The Current Summit</a>
                 </div>
                 <div class="landing-social">
