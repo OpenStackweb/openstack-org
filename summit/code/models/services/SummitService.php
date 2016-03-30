@@ -788,6 +788,16 @@ final class SummitService implements ISummitService
                         )
                     );
             }
+
+            // set email
+            if ($speaker->MemberID > 0) {
+                $speaker->Member()->Email = trim($speaker_data['email']);
+                $speaker->Member()->write();
+            } else {
+                $speaker->RegistrationRequest()->Email = trim($speaker_data['email']);
+                $speaker->RegistrationRequest()->write();
+            }
+
             $speaker->Title       = trim($speaker_data['title']);
             $speaker->FirstName   = trim($speaker_data['first_name']);
             $speaker->LastName    = trim($speaker_data['last_name']);

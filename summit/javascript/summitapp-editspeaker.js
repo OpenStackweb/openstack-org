@@ -70,6 +70,7 @@ $(document).ready(function(){
         focusCleanup: true,
         ignore: [],
         rules: {
+            email:      { email: true},
             title:      { required: true},
             first_name: { required : true },
             last_name:  { required: true },

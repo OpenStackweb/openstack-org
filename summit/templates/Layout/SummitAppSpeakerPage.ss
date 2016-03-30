@@ -18,7 +18,13 @@
         </div>
         <div class="speaker-info">
             <div class="speaker_name row">$FirstName $LastName</div>
-            <div class="speaker_job_title row">$Member.getCurrentPosition()</div>
+            <div class="speaker_job_title row">
+                <% if $Title %>
+                    $Title
+                <% else_if $Member.getCurrentPosition() %>
+                    $Member.getCurrentPosition()
+                <% end_if %>
+            </div>
         </div>
         <div class="row section1">
             <div class="container">

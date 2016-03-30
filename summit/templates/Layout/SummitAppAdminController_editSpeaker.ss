@@ -19,8 +19,12 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4 member_container">
-                        <label for="member">Member</label><br>
-                        <input id="member_id" name="member_id"/>
+                        <label for="member_id">Member</label><br>
+                        <input id="member_id" name="member_id" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email">Email</label><br>
+                        <input id="email" name="email" value="{$Speaker.getEmail()}"/>
                     </div>
                 </div>
             </div>
