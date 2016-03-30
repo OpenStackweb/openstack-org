@@ -76,6 +76,14 @@ class SummitEvent extends DataObject implements ISummitEvent
         return $label;
     }
 
+    public function getShortDescription(){
+        $val = $this->getField('ShortDescription');
+        if(empty($val)){
+            $val = $this->getField('Description');
+        }
+        return $val;
+    }
+
     private static $searchable_fields = array
     (
         'Title',
