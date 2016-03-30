@@ -58,6 +58,12 @@ $(document).ready(function(){
         ]
     });
 
+    $('#member_id').on('itemAdded', function(event) {
+        var regExp = /\(([^)]+)\)/;
+        var matches = regExp.exec(event.item.name);
+        $('#email').val(matches[1]);
+    });
+
     if (!$.isEmptyObject(member)) {
         $('#member_id').tagsinput('add', member);
     }

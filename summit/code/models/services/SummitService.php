@@ -778,7 +778,7 @@ final class SummitService implements ISummitService
             if($member_id > 0)
             {
                 $old_speaker = $speaker_repository->getByMemberID($member_id);
-                if($old_speaker->getIdentifier() !== $speaker_id)
+                if($old_speaker && $old_speaker->getIdentifier() !== $speaker_id)
                     throw new EntityValidationException
                     (
                         sprintf
@@ -787,15 +787,6 @@ final class SummitService implements ISummitService
                             $member_id
                         )
                     );
-            }
-
-            // set email
-            if ($speaker->MemberID > 0) {
-                $speaker->Member()->Email = trim($speaker_data['email']);
-                $speaker->Member()->write();
-            } else {
-                $speaker->RegistrationRequest()->Email = trim($speaker_data['email']);
-                $speaker->RegistrationRequest()->write();
             }
 
             $speaker->Title       = trim($speaker_data['title']);
@@ -812,6 +803,15 @@ final class SummitService implements ISummitService
                 );
 
             $speaker->MemberID    = $member_id;
+
+            // set email
+            if ($speaker->MemberID > 0) {
+                $speaker->Member()->Email = trim($speaker_data['email']);
+                $speaker->Member()->write();
+            } else {
+                $speaker->RegistrationRequest()->Email = trim($speaker_data['email']);
+                $speaker->RegistrationRequest()->write();
+            }
 
             $onsite_phone = trim($speaker_data['onsite_phone']);
             if(!empty($onsite_phone)) {
