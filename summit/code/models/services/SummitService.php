@@ -856,4 +856,49 @@ final class SummitService implements ISummitService
         });
     }
 
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     * @return mixed
+     */
+    public function updateAssistance(ISummit $summit, array $data)
+    {
+        $assistance_repository = $this->assistance_repository;
+        $this->tx_service->transaction(function() use($summit, $data, $assistance_repository){
+
+            foreach ($data as $assistance_data) {
+                if(!isset($assistance_data['id']))
+                    throw new EntityValidationException('missing required param: id');
+
+                $assistance_id = intval($assistance_data['id']);
+                $assistance = $assistance_repository->getById($assistance_id);
+
+                if(is_null($assistance))
+                    throw new NotFoundEntityException('Speaker Assistance', sprintf('id %s', $assistance_id));
+
+                if(intval($assistance->SummitID) !== intval($summit->getIdentifier()))
+                    throw new EntityValidationException('speaker assistance doest not belong to summit');
+
+                $assistance->OnSitePhoneNumber = $assistance_data['phone'];
+                $assistance->RegisteredForSummit = $assistance_data['registered'];
+                $assistance->CheckedIn = $assistance_data['checked_in'];
+
+                $assistance->write();
+
+                if (isset($assistance_data['promo_code'])) {
+                    $promo_code = SummitRegistrationPromoCode::get("SummitRegistrationPromoCode")
+                        ->leftJoin("SpeakerSummitRegistrationPromoCode","SpeakerSummitRegistrationPromoCode.ID = SummitRegistrationPromoCode.ID")
+                        ->where("SpeakerSummitRegistrationPromoCode.SpeakerID = {$assistance->SpeakerID} AND SummitRegistrationPromoCode.SummitID = {$assistance->SummitID}")
+                        ->first();
+
+                    $promo_code->Code = $assistance_data['promo_code'];
+                    $promo_code->write();
+                }
+
+
+            }
+
+        });
+    }
+
 }

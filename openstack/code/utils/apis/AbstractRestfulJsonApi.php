@@ -412,8 +412,6 @@ abstract class AbstractRestfulJsonApi extends Controller
         if ($this->isApiCall()) {
             $error = error_get_last();
             if ($error['type'] == 1) {
-                ob_end_clean();
-                header('HTTP/1.1 500 Internal Server Error');
                 // Send out the error details to the logger for writing
                 SS_Log::log(
                     array(
@@ -425,6 +423,7 @@ abstract class AbstractRestfulJsonApi extends Controller
                     ),
                     SS_Log::ERR
                 );
+                header('HTTP/1.1 500 Internal Server Error');
             }
         }
     }

@@ -247,20 +247,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         $summit_id = $this->Summit()->ID;
 
-        $db_term = SummitScheduleGlobalSearchTerm::get()->filter(array(
-            'Term' => $term,
-            'SummitID' => $summit_id
-        ))->first();
-        if (is_null($db_term)) {
-            $db_term = SummitScheduleGlobalSearchTerm::create();
-        }
-        $db_term->Hits = intval($db_term->Hits) + 1;
-        $db_term->Term = $term;
-        $db_term->SummitID = $summit_id;
-        $db_term->write();
-
-        $popular_terms = SummitScheduleGlobalSearchTerm::get()->filter(array('SummitID' => $summit_id))->sort('Term',
-            'ASC')->limit(25, 0);
 
         $speakers = $this->speaker_repository->searchBySummitAndTerm($this->Summit(), $term);
         $events = $this->event_repository->searchBySummitAndTerm($this->Summit(), $term);
@@ -276,9 +262,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             array
             (
                 'SpeakerResults' => new ArrayList($speakers),
-                'EventResults' => new ArrayList($events),
-                'SearchTerm' => $term,
-                'PopularTerms' => $popular_terms,
+                'EventResults'   => new ArrayList($events),
+                'SearchTerm'     => $term,
             )
         );
     }

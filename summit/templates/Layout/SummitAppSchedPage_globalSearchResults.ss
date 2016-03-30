@@ -11,21 +11,6 @@
             </div>
         </div>
     </div>
-<%--
-    <% if PopularTerms %>
-        <div class="row cloud-tags">
-            <ul id="tags_list">
-                <% loop PopularTerms %>
-                    <li data-hits="{$Hits}" data-term="{$Term}">
-                        <a href="{$Top.Link(global-search)}?t={$Term.JS}" Title="Search for {$Term.JS}">
-                            <span class="label label-default tag-cloud" style="background-color: hsl(0, 0%, {$Opacity}%);font-size: {$FontSize}px;">$Term</span>
-                        </a>
-                    </li>
-                <% end_loop %>
-            </ul>
-        </div>
-    <% end_if %>
---%>
     <% if SpeakerResults && SpeakerResults.Count %>
     <div class="container">
         <div class="col-md-12">

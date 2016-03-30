@@ -145,8 +145,6 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                 case 'room_report':
                     $this->summit_service->updateHeadCount($summit, $report_data);
             }
-
-
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
