@@ -90,11 +90,13 @@
                 <script type="application/javascript">
                     var share_info =
                     {
-                        url: "{$AbsoluteLink}event/{$Event.ID}",
+                        event_id: {$Event.ID},
+                        url: "{$AbsoluteLink}events/{$Event.ID}",
                         title : "{$Event.Title.JS}",
                         description: "{$Event.ShortDescription().JS}",
                         image: "/themes/openstack/images/openstack-logo-full.png",
                         fb_app_id : {$FB_APP_ID},
+                        token: "{$Token}"
                     };
                 </script>
                 <share-buttons share_info="{ share_info }"></share-buttons>

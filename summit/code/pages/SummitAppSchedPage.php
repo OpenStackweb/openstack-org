@@ -108,12 +108,21 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
+        $token = Session::get("SummitAppEventPage.ShareEmail");
+        if (!$token) {
+            $token = md5(uniqid(rand(), TRUE));
+            Session::set("SummitAppEventPage.ShareEmail",$token);
+            Session::set("SummitAppEventPage.ShareEmailCount",0);
+        }
+
         return $this->renderWith(
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
                 'Event' => $event,
                 'FB_APP_ID' => FB_APP_ID,
-                'goback' => $goback));
+                'goback' => $goback,
+                'Token' => $token
+            ));
     }
 
     public function ViewMySchedule()

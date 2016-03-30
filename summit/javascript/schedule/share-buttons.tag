@@ -44,20 +44,7 @@
                             <label for="email-to">To:</label>
                             <input type="email" class="form-control" id="email-to" required>
                         </div>
-                        <div class="form-group">
-                            <label for="email-subject">Subject:</label>
-                            <input type="text" class="form-control" id="email-subject" value="Fwd: { share_info.title}" >
-                        </div>
-                        <div class="form-group">
-                            <label for="email-body">Body:</label>
-                            <textarea id="email-body" class="form-control" rows="5">
-                                { share_info.title }
-                                &#13;&#10;
-                                { share_info.description }
-                                &#13;&#10;&#13;&#10;
-                                Check it out: { share_info.url }
-                            </textarea>
-                        </div>
+                        <input type="hidden" id="email-token" value="{ share_info.token}" >
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -92,12 +79,11 @@
         }
 
         sendEmail() {
-            var url = 'api/v1/summits/6/schedule/shareEmail';
+            var url = 'api/v1/summits/current/events/'+self.share_info.event_id+'/share';
             var request = {
                 from:$('#email-from').val(),
                 to:$('#email-to').val(),
-                subject:$('#email-subject').val(),
-                body:$('#email-body').val()
+                token:$('#email-token').val()
             }
 
             if (!$('#email-form').valid()) {
