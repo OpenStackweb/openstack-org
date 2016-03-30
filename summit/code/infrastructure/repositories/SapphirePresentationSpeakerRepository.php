@@ -62,7 +62,7 @@ PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
 PS.ID  AS speaker_id,
 PSR.Email AS email
 FROM PresentationSpeaker AS PS
-INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
+INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.ID = PS.RegistrationRequestID
 SQL;
 
         $member_conditions = array(

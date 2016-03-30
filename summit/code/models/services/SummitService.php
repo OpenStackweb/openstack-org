@@ -716,6 +716,7 @@ final class SummitService implements ISummitService
             $speaker->MemberID       = $member_id;
             $speaker->CreatedFromAPI = true;
             $speaker_repository->add($speaker);
+            $speaker->write();
 
             if($member_id === 0 && isset($speaker_data['email'])){
                 $email  = trim($speaker_data['email']);
@@ -723,6 +724,7 @@ final class SummitService implements ISummitService
                 if(is_null($member)){
                     // we need to create a registration request
                     $request = $speaker_registration_request_manager->register($speaker, $email);
+                    $request->SpeakerID = $speaker->ID;
                     $request->write();
                     $speaker->RegistrationRequestID = $request->ID;
                     $speaker->write();
