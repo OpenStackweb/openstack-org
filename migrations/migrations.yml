@@ -24,3 +24,4 @@ migrations:
   - RemoveSummitDeprecatedColumnsMigration
   - UpdateSummitLocationImagesMigration
   - MemberLegacyMembersMigration
+  - ChangePremiseForPremisesMigration
