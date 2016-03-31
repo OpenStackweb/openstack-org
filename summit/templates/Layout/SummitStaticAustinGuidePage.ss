@@ -276,7 +276,7 @@
 						Austin, TX 78702
 					</div>
 					<p>
-						For those not willing/able to wait in line four hours but still want an authentic Austin barbecue experience, head down Cesar Chavz about a mile to La BBQ. Show up by 10:00am to ensure your spot towards the front of the line and be sure to order the beef ribs.
+						For those not willing/able to wait in line four hours but still want an authentic Austin barbecue experience, head down Cesar Chavez about a mile to La BBQ. Show up by 10:00am to ensure your spot towards the front of the line and be sure to order the beef ribs.
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.labarbecue.com/" target="_blank">Website</a>
@@ -533,8 +533,8 @@
 			517 E 6th St, Austin, TX 78701
 		</div>
 		<div class="col-sm-4">
-			<a href="http://hotdogscoldbeer.com/" target="_blank">Website</a> |
-			<a href="https://goo.gl/maps/cD6uUmahvJ52" target="_blank">Map</a>
+			<a href="http://www.casinoelcamino.net/" target="_blank">Website</a> |
+			<a href="https://goo.gl/maps/DNbe37pWg1z" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -545,8 +545,8 @@
 			407 Colorado St, Austin, TX 78701
 		</div>
 		<div class="col-sm-4">
-			<a href="http://www.casinoelcamino.net/" target="_blank">Website</a> |
-			<a href="https://goo.gl/maps/DNbe37pWg1z" target="_blank">Map</a>
+			<a href="http://hotdogscoldbeer.com/" target="_blank">Website</a> |
+			<a href="https://goo.gl/maps/cD6uUmahvJ52" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -759,7 +759,7 @@
 						Austin, TX 78704
 					</div>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure necessitatibus velit excepturi numquam eligendi quibusdam hic. Quas non tempore mollitia ea iure, aut. Porro, aperiam, corrupti. Dicta, delectus voluptates distinctio.
+						For nearly 70 years, Peter Pan mini golf has been providing guests with two 18 hole mini golf courses full of fun characters and obstacles just south of Downtown Austin. The venue is cash only ($7-11 per person) and allows drinks of all varities to be brought in for your enjoyment onsite. 
 					</p>
 					<p>
 						<a class="featured-site" href="http://peterpanminigolf.com/" target="_blank">Website</a>
