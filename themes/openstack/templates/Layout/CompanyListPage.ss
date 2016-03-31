@@ -82,20 +82,17 @@
 				</a>
 			</div>
 			<div class="col-sm-2 col-xs-6">
-				<a href="/foundation/companies/profile/hewlett-packard-enterprise">
-					<div class="img-wrapper">
-						<img src="/assets/companies/main_logo/_resampled/SetWidth138-hpe-pri-grn-pos-rgb2.png" alt="HP">
-					</div>
-					<p class="center">Hewlett Packard Enterprise</p>
-				</a>
-			</div>
-			<div class="col-sm-2 col-xs-6">
 				<a href="/foundation/companies/profile/ovh-group">
 					<div class="img-wrapper">
 						<img src="/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png" alt="OVH Group">
 					</div>
 					<p class="center">OVH Group</p>
 				</a>
+			</div>
+			<div class="col-sm-2 col-xs-6">
+					<div class="img-wrapper">
+					</div>
+					<p class="center">OpenStack Innovation Center</p>
 			</div>
 		</div>
 
