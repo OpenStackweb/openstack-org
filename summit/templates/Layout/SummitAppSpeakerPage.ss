@@ -19,10 +19,10 @@
         <div class="speaker-info">
             <div class="speaker_name row">$FirstName $LastName</div>
             <div class="speaker_job_title row">
-                <% if $Title %>
-                    $Title
-                <% else_if $Member.getCurrentPosition() %>
+                <% if $Member.getCurrentPosition() %>
                     $Member.getCurrentPosition()
+                <% else_if $Title %>
+                    $Title
                 <% end_if %>
             </div>
         </div>
