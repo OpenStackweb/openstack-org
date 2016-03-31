@@ -7,24 +7,6 @@
 			</p>
 		</div>
 	</div>
-	<div class="row guide-quotes">
-		<div class="col-sm-6">
-			<blockquote>
-				There’s a freedom you feel the closer you get to Austin, Texas.
-			</blockquote>
-			<div class="guide-quote-name">
-				Willie Nelson
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<blockquote>
-				Explore the best of what Austin has to offer - go stack outside.
-			</blockquote>
-			<div class="guide-quote-name">
-				Claire Massey
-			</div>
-		</div>
-	</div>
 </div>
 <div class="guide-nav">
 	<div class="container">
