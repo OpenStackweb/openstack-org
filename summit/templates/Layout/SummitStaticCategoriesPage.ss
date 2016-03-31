@@ -120,11 +120,12 @@
                     </div>
                     <div class="row seven-cols">
                         <div class="col-xs-1 sessions-first-col"></div>
-                        <div class="col-xs-5">
+                        <div class="col-xs-4">
                             <a href="#handson" class="session-chart-category thirteen">
                                 Hands-On Workshops &amp; On-Site Certification
                             </a>
                         </div>
+                        <div class="col-xs-1 sessions-first-col"></div>
                     </div>
                 </div>
             </div>
