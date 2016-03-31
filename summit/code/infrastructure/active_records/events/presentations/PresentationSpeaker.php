@@ -166,7 +166,8 @@ implements IPresentationSpeaker
         return $this->linkTo($presentationID, $action);
     }
 
-     public function getCMSFields() {
+
+    public function getCMSFields() {
         $fields =  FieldList::create(TabSet::create("Root"))
             ->text('FirstName',"Speaker's first name")
             ->text('LastName', "Speaker's last name")
@@ -367,15 +368,15 @@ implements IPresentationSpeaker
     /**
      * @param int $summit_id
      * @return string
-     * @throws Exception
-     * @throws ValidationException
+     * @throws EntityValidationException
+     * @throws NotFoundEntityException
      */
     public function getSpeakerConfirmationLink($summit_id)
     {
         $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', intval($summit_id))->first();
-        if(!$confirmation_page) throw new Exception('Confirmation Speaker Page not set on current summit!');
-        $url = $confirmation_page->getAbsoluteLiveLink(false);
-        $request = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
+        if(!$confirmation_page) throw new NotFoundEntityException('Confirmation Speaker Page not set on current summit!');
+        $url      = $confirmation_page->getAbsoluteLiveLink(false);
+        $request  = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
             ->filter
             (
                 array
@@ -387,14 +388,15 @@ implements IPresentationSpeaker
 
         if(!is_null($request))
         {
-            throw new ValidationException('there is already a confirmed request!');
+            throw new EntityValidationException('there is already a confirmed request!');
         }
 
-        $request = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
+        $request            = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
         $request->SummitID  = intval($summit_id);
         $request->SpeakerID = $this->ID;
         $token              = null;
         $already_exists     = false;
+
         do {
             $token = $request->generateConfirmationToken();
             $already_exists =  intval(PresentationSpeakerSummitAssistanceConfirmationRequest::get()
@@ -408,6 +410,57 @@ implements IPresentationSpeaker
                     )
                 )
                 ->count()) > 1;
+        } while($already_exists);
+        $request->write();
+        return $url.'confirm?t='.base64_encode($token);
+    }
+
+    /**
+     * Resets the confirmation request if exists and its not confirmed yet
+     * otherwise exception
+     * @param int $summit_id
+     * @return string
+     * @throws Exception
+     * @throws ValidationException
+     * @throws null
+     */
+    public function resetConfirmationLink($summit_id){
+        $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', intval($summit_id))->first();
+        if(!$confirmation_page) throw new NotFoundEntityException('Confirmation Speaker Page not set on current summit!');
+        $url      = $confirmation_page->getAbsoluteLiveLink(false);
+        $request  = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
+            ->filter
+            (
+                array
+                (
+                    'SummitID'  => intval($summit_id),
+                    'SpeakerID' => $this->ID
+                )
+            )->first();
+
+        if(is_null($request))
+        {
+            throw new EntityValidationException('there is not valid request!');
+        }
+
+        if($request->alreadyConfirmed())
+            throw new EntityValidationException('request already confirmed!');
+
+        $token              = null;
+        $already_exists     = false;
+        do {
+            $token = $request->generateConfirmationToken();
+            $already_exists =  intval(PresentationSpeakerSummitAssistanceConfirmationRequest::get()
+                    ->filter
+                    (
+                        array
+                        (
+                            'SummitID'                 => intval($summit_id),
+                            'SpeakerID:ExactMatch:not' => $this->ID,
+                            'ConfirmationHash'         =>  PresentationSpeakerSummitAssistanceConfirmationRequest::HashConfirmationToken($token)
+                        )
+                    )
+                    ->count()) > 1;
         } while($already_exists);
         $request->write();
         return $url.'confirm?t='.base64_encode($token);
@@ -429,7 +482,10 @@ implements IPresentationSpeaker
      */
     public function getAnnouncementEmailTypeSent($summit_id)
     {
-       $email = $this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->first();
+       $email = $this->AnnouncementSummitEmails()
+           ->filter('SummitID', $summit_id)
+           ->where("AnnouncementEmailTypeSent <> 'SECOND_BREAKOUT' ")
+           ->first();
        return !is_null($email) ? $email->AnnouncementEmailTypeSent : null;
     }
 
@@ -483,10 +539,11 @@ implements IPresentationSpeaker
      */
     public function registerSummitPromoCode(ISpeakerSummitRegistrationPromoCode $promo_code)
     {
-        $member = AssociationFactory::getInstance()->getMany2OneAssociation($this,'Member')->getTarget();
-        $member->registerPromoCode($promo_code);
+        if($this->Member()->exists())
+            $this->Member()->registerPromoCode($promo_code);
         $promo_code->assignSpeaker($this);
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'PromoCodes')->add($promo_code);
+        $promo_code->write();
+        return $this;
     }
 
     /**
@@ -505,9 +562,7 @@ implements IPresentationSpeaker
      */
     public function getSummitPromoCode($summit_id)
     {
-        $query = new QueryObject();
-        $query->addAndCondition(QueryCriteria::equal('SummitID', $summit_id));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this,'PromoCodes', $query)->first();
+        return $this->PromoCodes()->filter('SummitID', $summit_id)->first();
     }
 
     public function ProfilePhoto($width=100){
@@ -598,6 +653,77 @@ implements IPresentationSpeaker
      */
     public function getAssistanceFor($summit_id)
     {
-        return$this->SummitAssistances('SummitID', intval($summit_id))->first();
+        return $this->SummitAssistances('SummitID', intval($summit_id))->first();
+    }
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function breakoutEmailAlreadySent($summit_id)
+    {
+        $count1 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REMAINDER')->count());
+        $count2 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REMAINDER')->count());
+        return $count1 > 0 ||$count2 > 0 ;
+    }
+
+    /**
+     * @return bool
+     */
+    public function membershipCreateEmailAlreadySent(){
+        $email = $this->AnnouncementSummitEmails()->filter('SummitID', 0)->filter('AnnouncementEmailTypeSent', 'CREATE_MEMBERSHIP')->first();
+        return !is_null($email);
+    }
+
+    /***
+     * @param int $summit_id
+     * @param string $type
+     * @return $this|void
+     * @throws Exception
+     */
+    public function registerBreakOutSent($summit_id, $type)
+    {
+        if($this->breakoutEmailAlreadySent($summit_id)) throw new Exception('Second Breakout Email already sent');
+        $email = SpeakerAnnouncementSummitEmail::create();
+        $email->SpeakerID = $this->ID;
+        $email->SummitID  = $summit_id;
+        $email->AnnouncementEmailTypeSent = $type;
+        $email->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+        $email->write();
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @throws Exception
+     */
+    public function registerCreateMembershipSent()
+    {
+        if($this->membershipCreateEmailAlreadySent()) throw new Exception('Create Membership Email already sent');
+        $email = SpeakerAnnouncementSummitEmail::create();
+        $email->SpeakerID = $this->ID;
+        $email->SummitID  = 0;
+        $email->AnnouncementEmailTypeSent = 'CREATE_MEMBERSHIP';
+        $email->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+        $email->write();
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPendingRegistrationRequest(){
+        $request = $this->RegistrationRequest();
+        return !is_null($request) && $request->exists() && !$request->alreadyConfirmed();
+    }
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasConfirmedAssistanceFor($summit_id)
+    {
+        $assistance = $this->getAssistanceFor($summit_id);
+        return !is_null($assistance) && $assistance->alreadyConfirmed();
     }
 }

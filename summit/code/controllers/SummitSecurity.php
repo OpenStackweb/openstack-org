@@ -48,6 +48,28 @@ class SummitSecurity extends SummitPage_Controller {
         $this->speaker_registration_request_manager = $speaker_registration_request_manager;;
     }
 
+
+    /**
+     * @var IMemberManager
+     */
+    private $member_manager;
+
+    /**
+     * @return IMemberManager
+     */
+    public function getMemberManager()
+    {
+        return $this->member_manager;
+    }
+
+    /**
+     * @param IMemberManager $manager
+     */
+    public function setMemberManager(IMemberManager $manager)
+    {
+        $this->member_manager = $manager;
+    }
+
     /**
      * The URL segment of this controller
      * @var string
@@ -266,53 +288,37 @@ class SummitSecurity extends SummitPage_Controller {
     public function doRegister($data, $form) {
         try {
 
+            $data         = SQLDataCleaner::clean($data);
             Session::set("FormInfo.{$form->getName()}.data", $data);
+            $profile_page = EditProfilePage::get()->first();
 
-            $member = Member::get()->filter('Email', $data['Email'])->first();
+            $member = $this->member_manager->registerSpeaker($data, $profile_page, new MemberRegistrationSenderService);
 
-            if ($member) {
-                $form->sessionMessage('Bah! We\'ve already got a user with that email.', 'bad');
-                return $this->redirectBack();
+            //Get profile page
+            if (!is_null($profile_page)) {
+                //Redirect to profile page with success message
+                Session::clear("FormInfo.{$form->FormName()}.data");
+                if ($data['BackURL']) {
+                    $redirect = HTTP::setGetVar('welcome', 1, $data['BackURL']);
+                    return OpenStackIdCommon::loginMember($member, $redirect);
+                }
+
+                $form->sessionMessage('Awesome! You should receive an email shortly.', 'good');
+                return OpenStackIdCommon::loginMember($member, $this->redirectBackUrl());
             }
 
-            if ($data['Password'] != $data['Password_confirm']) {
-                $form->sessionMessage('Passwords do not match.', 'bad');
-                return $this->redirectBack();
-            }
-
-            $member = Member::create(array(
-                'FirstName' => $data['FirstName'],
-                'Surname' => $data['Surname'],
-                'Email' => $data['Email'],
-                'Password' => $data['Password']
-            ));
-
-            $member->write();
-
-            if (!empty($data[SpeakerRegistrationRequest::ConfirmationTokenParamName])) {
-
-                $speaker_registration_token = $data[SpeakerRegistrationRequest::ConfirmationTokenParamName];
-
-                $this->speaker_registration_request_manager->confirm($speaker_registration_token, $member);
-
-            }
-
-            $member->addToGroupByCode('speakers');
-            $member->sendWelcomeEmail();
-
-            Session::clear("FormInfo.{$form->getName()}.data");
-
-            if ($data['BackURL']) {
-                $redirect = HTTP::setGetVar('welcome', 1, $data['BackURL']);
-                return OpenStackIdCommon::loginMember($member, $redirect);
-            }
-
-            $form->sessionMessage('Awesome! You should receive an email shortly.', 'good');
-            return OpenStackIdCommon::loginMember($member, $this->redirectBackUrl());
+        }
+        catch(EntityValidationException $ex1){
+            Form::messageForForm($form->getName(),$ex1->getMessage(), 'bad');
+            //Return back to form
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->redirectBack();
         }
         catch(Exception $ex){
-            SS_Log::log($ex, SS_Log::WARN);
-            return $this->httpError(404, $ex->getMessage());
+            Form::messageForForm($form->getName(), "There was an error with your request, please contact your admin.", 'bad');
+            //Return back to form
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->redirectBack();
         }
     }
 

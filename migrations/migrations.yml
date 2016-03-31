@@ -25,3 +25,4 @@ migrations:
   - UpdateSummitLocationImagesMigration
   - MemberLegacyMembersMigration
   - ChangePremiseForPremisesMigration
+  - SummitSecondBreakoutEmailMigration

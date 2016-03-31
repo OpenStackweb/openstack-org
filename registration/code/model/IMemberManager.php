@@ -39,6 +39,16 @@ interface IMemberManager
      */
     public function registerMobile(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service);
 
+
+    /**
+     * Register an speaker and confirm the registration request if exists
+     * @param array $data
+     * @param EditProfilePage $profile_page
+     * @param IMessageSenderService $sender_service
+     * @return Member
+     */
+    public function registerSpeaker(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service);
+
     /**
      * @param $email
      * @param IMessageSenderService $sender_service

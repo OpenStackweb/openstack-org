@@ -49,6 +49,12 @@ interface IPresentationSpeaker extends IEntity
 
     /**
      * @param int $summit_id
+     * @return bool
+     */
+    public function breakoutEmailAlreadySent($summit_id);
+
+    /**
+     * @param int $summit_id
      * @return string|null
      */
     public function getAnnouncementEmailTypeSent($summit_id);
@@ -109,4 +115,57 @@ interface IPresentationSpeaker extends IEntity
      * @return string
      */
     public function getOnSitePhoneFor($summit_id);
+
+    /***
+     * @param int $summit_id
+     * @param string $type
+     * @return $this|void
+     * @throws Exception
+     */
+    public function registerBreakOutSent($summit_id, $type);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function PublishedPresentations($summit_id = null);
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasAssistanceFor($summit_id);
+
+    /**
+     * Resets the confirmation request if exists and its not confirmed yet
+     * otherwise exception
+     * @param int $summit_id
+     * @return string
+     * @throws Exception
+     * @throws ValidationException
+     * @throws null
+     */
+    public function resetConfirmationLink($summit_id);
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasConfirmedAssistanceFor($summit_id);
+
+    /**
+     * @return bool
+     */
+    public function membershipCreateEmailAlreadySent();
+
+    /**
+     * @return $this
+     * @throws Exception
+     */
+    public function registerCreateMembershipSent();
+
+    /**
+     * @return bool
+     */
+    public function hasPendingRegistrationRequest();
 }

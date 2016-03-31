@@ -116,9 +116,8 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            list($page, $page_size, $count, $speakers) = $this->speaker_repository->getBySummit
+            list($page, $page_size, $count, $speakers) = $this->speaker_repository->searchByTermPaginated
             (
-                $summit,
                 $page,
                 $page_size,
                 $term,

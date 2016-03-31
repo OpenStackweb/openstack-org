@@ -307,3 +307,8 @@ define('PRESENTATION_SPEAKER_ACCEPTED_ALTERNATE_EMAIL','presentation-speaker-acc
 define('PRESENTATION_SPEAKER_REJECTED_EMAIL', 'presentation-speaker-rejected-only');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersupport@openstack.org');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@openstack.org');
+
+// Second Break Out Email Templates
+define('PRESENTATION_SPEAKER_CREATE_MEMBERSHIP_EMAIL', 'presentation-speaker-create-membership-email');
+define('PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL', 'presentation-speaker-confirm-summit-assistance-ema');
+define('PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL', 'presentation-speaker-summit-reminder-email');

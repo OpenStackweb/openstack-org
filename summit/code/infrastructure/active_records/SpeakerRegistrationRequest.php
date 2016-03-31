@@ -89,10 +89,19 @@ class SpeakerRegistrationRequest
      * @return string
      */
     public function generateConfirmationToken() {
-        $generator  = new RandomGenerator();
-        $this->token = $generator->randomToken();
-        $hash      = self::HashConfirmationToken($this->token);
-        $this->setField('ConfirmationHash',$hash);
+        $generator      = new RandomGenerator();
+        $already_exists = false;
+        $repository     = new SapphireSpeakerRegistrationRequestRepository;
+
+        do
+        {
+            $this->token    = $generator->randomToken();
+            $already_exists = $repository->existsConfirmationToken($this->token);
+        }
+        while($already_exists);
+
+        $hash           = self::HashConfirmationToken($this->token);
+        $this->setField('ConfirmationHash', $hash);
         Session::set(self::ConfirmationTokenParamName.'_'. $this->Speaker()->ID, $this->token);
         return $this->token;
     }

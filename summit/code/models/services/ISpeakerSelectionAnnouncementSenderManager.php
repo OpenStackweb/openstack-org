@@ -20,4 +20,5 @@ interface ISpeakerSelectionAnnouncementSenderManager
      * @return void
      */
     public function send(ISummit $current_summit, $batch_size);
+
 }

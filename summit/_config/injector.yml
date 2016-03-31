@@ -9,6 +9,7 @@ SummitSecurity:
   dependencies:
     SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
     SpeakerRegistrationRequestManager: '%$SpeakerRegistrationRequestManager'
+    MemberManager: '%$MemberManager'
 EventbriteOrderPlacedEndpoint:
   dependencies:
     EventbriteEventManager: '%$EventbriteEventManager'
@@ -97,6 +98,8 @@ Injector:
       class: SapphireSummitPresentationRepository
   SpeakerSelectionAnnouncementSenderFactory:
     class: SpeakerSelectionAnnouncementEmailSenderFactory
+  SpeakerSecondBreakOutSenderFactory:
+    class: SpeakerSecondBreakOutSenderFactory
   SpeakerSummitRegistrationPromoCodeRepository:
     class: SapphireSpeakerSummitRegistrationPromoCodeRepository
   SpeakerSelectionAnnouncementSenderManager:
@@ -107,6 +110,15 @@ Injector:
       3: '%$SpeakerSelectionAnnouncementSenderFactory'
       4: '%$SpeakerSummitRegistrationPromoCodeRepository'
       5: '%$TransactionManager'
+  SpeakerSecondBreakoutAnnouncementSenderManager:
+      constructor:
+        0: '%$BatchTaskRepository'
+        1: '%$BatchTaskFactory'
+        2: '%$SpeakerRepository'
+        3: '%$SpeakerSelectionAnnouncementSenderFactory'
+        4: '%$SpeakerSecondBreakOutSenderFactory'
+        5: '%$SpeakerSummitRegistrationPromoCodeRepository'
+        6: '%$TransactionManager'
   EventbriteEventRepository:
     class: SapphireEventbriteEventRepository
   EventbriteEventFactory:

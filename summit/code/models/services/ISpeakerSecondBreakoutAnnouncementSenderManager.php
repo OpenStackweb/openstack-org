@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,17 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISecurityGroupFactory
+interface ISpeakerSecondBreakoutAnnouncementSenderManager
 {
-    const UsersGroupCode = 'users';
-
-    const SpeakersGroupCode = 'speakers';
-
     /**
-     * @param string$code
-     * @param null|string $title
-     * @param null|string $description
-     * @return ISecurityGroup
+     * @param ISummit $current_summit
+     * @param int $batch_size
+     * @return void
      */
-    public function build($code, $title = null, $description = null);
+    public function send(ISummit $current_summit, $batch_size);
+
 }

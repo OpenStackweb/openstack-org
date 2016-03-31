@@ -55,6 +55,11 @@ final class MemberManager implements IMemberManager
      */
     private $org_factory;
 
+    /**
+     * @var ISpeakerRegistrationRequestManager
+     */
+    private $speaker_registration_request_manager;
+
     public function __construct
     (
         IMemberRepository $repository,
@@ -64,17 +69,19 @@ final class MemberManager implements IMemberManager
         ISecurityGroupFactory $group_factory,
         IAffiliationFactory $affiliation_factory,
         IOrgFactory $org_factory,
+        ISpeakerRegistrationRequestManager $speaker_registration_request_manager,
         ITransactionManager $tx_manager
     )
     {
-        $this->repository          = $repository;
-        $this->group_repository    = $group_repository;
-        $this->org_repository      = $org_repository;
-        $this->factory             = $factory;
-        $this->group_factory       = $group_factory;
-        $this->org_factory         = $org_factory;
-        $this->affiliation_factory = $affiliation_factory;
-        $this->tx_manager          = $tx_manager;
+        $this->repository                           = $repository;
+        $this->group_repository                     = $group_repository;
+        $this->org_repository                       = $org_repository;
+        $this->factory                              = $factory;
+        $this->group_factory                        = $group_factory;
+        $this->org_factory                          = $org_factory;
+        $this->affiliation_factory                  = $affiliation_factory;
+        $this->speaker_registration_request_manager = $speaker_registration_request_manager;
+        $this->tx_manager                           = $tx_manager;
     }
 
 
@@ -331,5 +338,97 @@ final class MemberManager implements IMemberManager
             $this->resendEmailVerification($member->Email, $sender_service);
             return $member;
         });
+    }
+
+    /**
+     * Register an speaker and confirm the registration request if exists
+     * @param array $data
+     * @param EditProfilePage $profile_page
+     * @param IMessageSenderService $sender_service
+     * @return Member
+     * @throws EntityValidationException
+     * @throws Exception
+     */
+    public function registerSpeaker(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service)
+    {
+        $repository                           = $this->repository;
+        $group_repository                     = $this->group_repository;
+        $factory                              = $this->factory;
+        $group_factory                        = $this->group_factory;
+        $speaker_registration_request_manager = $this->speaker_registration_request_manager;
+
+        try {
+            return $this->tx_manager->transaction(function () use (
+                $data,
+                $profile_page,
+                $repository,
+                $group_repository,
+                $factory,
+                $group_factory,
+                $speaker_registration_request_manager,
+                $sender_service
+            ) {
+                $mandatory_fields = array
+                (
+                    'Email'              => 'Email',
+                    'FirstName'          => 'First Name',
+                    'Surname'            => 'Surname',
+                    'Password'           => 'Password',
+                );
+
+                foreach($mandatory_fields as $mf => $fn){
+                    if (!isset($data[$mf]) || empty($data[$mf])) {
+                        throw new EntityValidationException(sprintf('%s is a mandatory field!.',$fn));
+                    }
+                }
+
+                if(!isset($data['Password']['_Password']) || !isset($data['Password']['_ConfirmPassword']) || $data['Password']['_ConfirmPassword'] !== $data['Password']['_Password'])
+                {
+                    throw new EntityValidationException('Password is a mandatory field!.');
+                }
+
+                $old_member = $repository->findByEmail(Convert::raw2sql($data['Email']));
+                if (!is_null($old_member)) {
+                    throw new EntityValidationException('Sorry, that email address already exists. Please choose another.');
+                }
+
+                $member = $factory->buildReduced($data);
+                $member->write();
+                $member->convert2SiteUser();
+
+                $speakers_group = $group_repository->getByCode(ISecurityGroupFactory::SpeakersGroupCode);
+                if (is_null($speakers_group)) {
+                    // create group
+                    $speakers_group = $group_factory->build(ISecurityGroupFactory::SpeakersGroupCode);
+                    $speakers_group->write();
+                }
+
+                $member->addToGroupByCode(ISecurityGroupFactory::SpeakersGroupCode);
+
+                if (!empty($data[SpeakerRegistrationRequest::ConfirmationTokenParamName])) {
+
+                    $speaker_registration_token = $data[SpeakerRegistrationRequest::ConfirmationTokenParamName];
+                    $speaker_registration_request_manager->confirm($speaker_registration_token, $member);
+                }
+
+                if (!is_null($profile_page)) {
+                    $sender_service->send($member);
+                }
+                //force write,
+                $member->write();
+                PublisherSubscriberManager::getInstance()->publish('new_user_registered', array($member->ID));
+                return $member;
+            });
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            throw $ex1;
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            throw $ex;
+        }
     }
 }

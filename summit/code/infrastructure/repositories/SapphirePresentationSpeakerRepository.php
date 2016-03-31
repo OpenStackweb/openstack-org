@@ -14,9 +14,6 @@
  **/
 final class SapphirePresentationSpeakerRepository extends SapphireRepository implements ISpeakerRepository
 {
-
-    private $cache = array();
-
     public function __construct()
     {
         parent::__construct(new PresentationSpeaker);
@@ -182,19 +179,8 @@ SQL;
         return $speakers;
     }
 
-    /**
-     * @param ISummit $summit
-     * @param int $page
-     * @param int $page_size
-     * @param string $term
-     * @param string $sort_by
-     * @param string $sort_dir
-     * @return array
-     */
-    public function getBySummit(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
-    {
-        $cache_key = $term;
 
+    private function buildSpeakersSearchParams($page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc'){
         $offset = ($page - 1 ) * $page_size;
         $sort  = '';
         $where = '';
@@ -214,8 +200,15 @@ SQL;
                 $sort = ' ORDER BY Email '.strtoupper($sort_dir);
                 break;
         }
+        return array($offset, $sort, $where);
+    }
 
-        $query_count = <<<SQL
+    /**
+     * @param string $where
+     * @return string
+     */
+    private function buildSearchSpeakersBaseCountSQLQuery($where){
+        $sql = <<<SQL
         SELECT COUNT(FullName) AS QTY FROM
         (
             SELECT
@@ -226,17 +219,137 @@ SQL;
             {$where}
         ) AS P;
 SQL;
-        $query = <<<SQL
-SELECT DISTINCT PresentationSpeaker.*,
+        return $sql;
+    }
+
+    /**
+     * @param string $where
+     * @param string $sort
+     * @param string $offset
+     * @param string $page_size
+     * @return string
+     */
+    private function buildSearchSpeakersBaseSQLQuery($where, $sort,$offset ,$page_size){
+
+        $sql =<<<SQL
+    SELECT DISTINCT PresentationSpeaker.*,
 IFNULL(CONCAT(PresentationSpeaker.FirstName,' ', PresentationSpeaker.LastName), CONCAT(Member.FirstName,' ', Member.Surname)) AS FullName,
 IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS Email
 FROM PresentationSpeaker
 LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
 LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
-{$where}
-{$sort} LIMIT {$offset}, {$page_size};
+ {$where}
+ {$sort} LIMIT {$offset}, {$page_size}
+SQL;
+        return $sql;
+    }
+
+    /**
+     * Gets all speakers that belongs to given summit , those are the ones that has at least a
+     * Presentation on the give summit
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchBySummitPaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
+    {
+
+        list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
+
+        $where = <<<SQL
+      WHERE EXISTS
+            (
+                SELECT 1 FROM SummitEvent
+                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+                WHERE SummitEvent.SummitID = {$summit->ID}
+                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+            )
+            {$where_having}
 SQL;
 
+        $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where);
+        $query       = $this->buildSearchSpeakersBaseSQLQuery($where, $sort, $offset, $page_size);
+
+
+        $count_res = DB::query($query_count)->first();
+        $res       = DB::query($query);
+        $count     = intval($count_res['QTY']);
+        $data      = array();
+
+        foreach($res as $row)
+        {
+            array_push($data, new PresentationSpeaker($row));
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
+    /**
+     * Gets all speakers that belongs to given summit , those are the ones that has at least a
+     * Published Presentation on the give summit
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchBySummitSchedulePaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
+    {
+
+        list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
+
+        $where = <<<SQL
+      WHERE EXISTS
+            (
+                SELECT 1 FROM SummitEvent
+                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+                WHERE SummitEvent.SummitID = {$summit->ID}
+                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+                AND SummitEvent.Published = 1
+            )
+            {$where_having}
+SQL;
+
+        $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where);
+        $query       = $this->buildSearchSpeakersBaseSQLQuery($where, $sort, $offset, $page_size);
+
+
+        $count_res = DB::query($query_count)->first();
+        $res       = DB::query($query);
+        $count     = intval($count_res['QTY']);
+        $data      = array();
+
+        foreach($res as $row)
+        {
+            array_push($data, new PresentationSpeaker($row));
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
+
+    /**
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchByTermPaginated($page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc'){
+
+        list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
+
+        $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where_having);
+        $query       = $this->buildSearchSpeakersBaseSQLQuery($where_having, $sort, $offset, $page_size);
 
         $count_res = DB::query($query_count)->first();
         $res       = DB::query($query);
@@ -246,14 +359,6 @@ SQL;
         {
             array_push($data, new PresentationSpeaker($row));
         }
-
-        //add cache results
-        foreach($this->cache as $cache_name => $cache_speaker) {
-            if (strpos($cache_name,strtolower($term)) !== false) {
-                array_push($data, $cache_speaker);
-            }
-        }
-
         return array($page, $page_size, $count, $data);
     }
 
@@ -266,13 +371,4 @@ SQL;
         return PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
     }
 
-    /**
-     * @param IEntity $entity
-     * @return int|void
-     */
-    public function add(IEntity $entity)
-    {
-        parent::add($entity);
-        $this->cache[strtolower($entity->getName())] = $entity;
-    }
 }

@@ -17,7 +17,7 @@ class SpeakerAnnouncementSummitEmail extends DataObject
 
     private static $db = array
     (
-        'AnnouncementEmailTypeSent' => "Enum('ACCEPTED,REJECTED,ALTERNATE,ACCEPTED_ALTERNATE,ACCEPTED_REJECTED,ALTERNATE_REJECTED,NONE','NONE')",
+        'AnnouncementEmailTypeSent' => "Enum('ACCEPTED,REJECTED,ALTERNATE,ACCEPTED_ALTERNATE,ACCEPTED_REJECTED,ALTERNATE_REJECTED,SECOND_BREAKOUT_REMAINDER,SECOND_BREAKOUT_REGISTER,CREATE_MEMBERSHIP,NONE','NONE')",
         'AnnouncementEmailSentDate' => 'SS_Datetime',
     );
 

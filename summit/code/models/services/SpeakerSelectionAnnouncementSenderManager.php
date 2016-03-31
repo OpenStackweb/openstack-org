@@ -58,14 +58,13 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
     )
     {
 
-        $this->batch_repository      = $batch_repository;
-        $this->batch_task_factory    = $batch_task_factory;
-        $this->speaker_repository    = $speaker_repository;
-        $this->tx_manager            = $tx_manager;
-        $this->sender_factory        = $sender_factory;
-        $this->promo_code_repository = $promo_code_repository;
+        $this->batch_repository         = $batch_repository;
+        $this->batch_task_factory      = $batch_task_factory;
+        $this->speaker_repository      = $speaker_repository;
+        $this->tx_manager              = $tx_manager;
+        $this->sender_factory          = $sender_factory;
+        $this->promo_code_repository   = $promo_code_repository;
     }
-
 
     public function send(ISummit $current_summit, $batch_size){
 
@@ -101,7 +100,7 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
                 echo "Processing Page " . $page . PHP_EOL;
                 // get speakers with not email sent for this current summit
 
-                list($page, $page_size, $count, $speakers) = $speaker_repository->getBySummit
+                list($page, $page_size, $count, $speakers) = $speaker_repository->searchBySummitPaginated
                 (
                     $current_summit,
                     $page,
@@ -153,6 +152,7 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
 
                     if (!is_null($code)) {
                         $speaker->registerSummitPromoCode($code);
+                        $code->write();
                         $params['PromoCode'] = $code;
                     }
 
