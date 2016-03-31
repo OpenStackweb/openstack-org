@@ -17,7 +17,7 @@ $('a[href^=#]').click(function(e){
     var offset = $($this.attr('href')).offset();
     if( typeof offset == 'undefined') return;
     $('html, body').animate({
-        scrollTop: offset().top - 100
+        scrollTop: offset.top - 100
     }, 500);
 });
 
