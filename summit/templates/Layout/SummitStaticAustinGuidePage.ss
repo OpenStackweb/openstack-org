@@ -521,9 +521,9 @@
 		</div>
 	</div>
 
-	<!-- Uniqely Austin -->
+	<!-- Uniquely Austin -->
 	<div class="row">
-		<h5 class="section-title guide">Uniqely Austin</h5>
+		<h5 class="section-title guide">Uniquely Austin</h5>
 	</div>
 	<div class="row guide-listing">
 		<div class="col-sm-4 guide-name">
