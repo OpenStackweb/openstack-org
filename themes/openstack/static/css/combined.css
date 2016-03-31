@@ -3864,3 +3864,196 @@ h1 span.subhead {
         margin-top: 10px; }
 
 /*Edn Mentoring & Diversity Page*/
+
+
+/*Austin Guide*/
+.guide-header {
+  text-align: center; }
+  .guide-header h1 {
+    margin-bottom: 20px; }
+
+@media (max-width: 767px) {
+  .guide-header h1 {
+    margin-top: 20px; } }
+
+.guide-nav-title {
+  text-align: center;
+  margin: 35px 0 10px;
+  font-size: 20px;
+  font-weight: 400; }
+
+.guide-nav {
+  margin: 20px 0 0;
+  padding: 20px 0;
+  background: #29abe2; }
+  .guide-nav.fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    margin-top: 0; }
+    .guide-nav.fixed a.guide-icons {
+      font-size: 12px; }
+      .guide-nav.fixed a.guide-icons i {
+        display: inline-block;
+        margin-right: 3px;
+        font-size: 15px; }
+
+@media (max-width: 767px) {
+  .guide-nav.fixed a.guide-icons {
+    font-size: 10px; }
+    .guide-nav.fixed a.guide-icons i {
+      display: block;
+      margin-right: 0;
+      font-size: 17px; } }
+
+.guide-icons-wrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+a.guide-icons {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  opacity: 0.8; }
+  a.guide-icons i {
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 2.2em; }
+  a.guide-icons:hover, a.guide-icons:focus {
+    text-decoration: none;
+    opacity: 1; }
+
+@media (max-width: 767px) {
+  a.guide-icons {
+    font-size: 10px; }
+    a.guide-icons i {
+      font-size: 30px;
+      margin-bottom: 10px; } }
+
+h5.section-title.guide {
+  margin: 60px 0.75% 10px;
+  color: #2A4E68;
+  text-transform: uppercase;
+  background: #edf2f7;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px; }
+
+.guide-quotes {
+  margin: 20px 0 30px; }
+  .guide-quotes blockquote {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 1.1em;
+    border: none;
+    position: relative;
+    text-align: center;
+    margin: 20px 20px 10px; }
+    .guide-quotes blockquote:before, .guide-quotes blockquote:after {
+      color: #edf2f7;
+      font-size: 5em;
+      position: absolute;
+      top: -30px; }
+    .guide-quotes blockquote:before {
+      content: open-quote;
+      left: 0px; }
+    .guide-quotes blockquote:after {
+      content: close-quote;
+      right: 0px; }
+  .guide-quotes .guide-quote-name {
+    text-align: center;
+    font-size: 0.9em; }
+
+.featured-guide-row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 30px; }
+  .featured-guide-row .featured {
+    position: relative;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    margin: 10px;
+    border: 1px solid #D4DCE5;
+    border-radius: 4px; }
+    .featured-guide-row .featured .image-wrapper {
+      overflow: hidden;
+      width: 100%;
+      height: 180px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px; }
+    .featured-guide-row .featured .featured-content {
+      padding: 5px 10px 10px; }
+      .featured-guide-row .featured .featured-content h5 {
+        color: #2A4E68;
+        font-weight: 600;
+        margin-bottom: 10px; }
+      .featured-guide-row .featured .featured-content .address {
+        font-size: 0.9em;
+        font-weight: 600;
+        margin: 5px 0 10px; }
+      .featured-guide-row .featured .featured-content p {
+        font-size: 0.9em; }
+      .featured-guide-row .featured .featured-content a.featured-site {
+        color: #30739C;
+        padding: 3px 7px;
+        border-radius: 4px;
+        border: 1px solid #30739C;
+        display: inline-block;
+        margin-top: 5px; }
+        .featured-guide-row .featured .featured-content a.featured-site:hover {
+          text-decoration: none;
+          border-color: #29abe2;
+          color: #29abe2; }
+
+@media (max-width: 767px) {
+  .featured-guide-row {
+    display: block;
+    margin-bottom: 30px; }
+    .featured-guide-row .featured {
+      display: block;
+      width: 95%;
+      float: left; }
+      .featured-guide-row .featured .image-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 30%;
+        min-height: 100%;
+        height: 100%;
+        float: left;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        border-top-right-radius: 0; }
+      .featured-guide-row .featured .featured-content {
+        padding: 10px;
+        margin-left: 31%; } }
+
+.guide-listing {
+  border-bottom: 1px solid #edf2f7;
+  padding: 10px 0;
+  margin-bottom: 10px; }
+  .guide-listing .guide-name {
+    font-weight: 600; }
+
+/*End Austin Guide*/
