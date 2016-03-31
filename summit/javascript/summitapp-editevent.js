@@ -94,9 +94,14 @@ $(document).ready(function(){
         ]
     });
 
+    var speakers_emails = [];
     $.each(speakers, function(index, value) {
         $('#speakers').tagsinput('add', value);
+        speakers_emails.push(value.email);
     });
+
+    var email_href = $('#email-speakers').attr('href')+speakers_emails.join();
+    $('#email-speakers').attr('href',email_href);
 
     $("#speakers").bind("paste", function(e){
         // access the clipboard using the api

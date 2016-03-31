@@ -155,9 +155,12 @@
 
             <div class="form-group speakers_container" style="display:none;">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                         <label for="speakers">Speakers</label><br>
                         <input id="speakers" name="speakers"/>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="mailto:" id="email-speakers" class="btn btn-default" target="_blank">Contact</a>
                     </div>
                 </div>
             </div>

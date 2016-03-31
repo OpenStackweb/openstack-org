@@ -97,6 +97,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'PUT $EventID!'             => 'addToSchedule',
         'DELETE $EventID!'          => 'removeFromSchedule',
         'POST $EventID!/feedback'   => 'addFeedback',
+        'POST $EVENT_ID!/share'     => 'shareEmail',
     );
 
     static $allowed_actions = array(
@@ -109,6 +110,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'removeFromSchedule',
         'addFeedback',
         'getMySchedulePDF',
+        'shareEmail',
     );
 
     protected function getCacheKey(SS_HTTPRequest $request){
@@ -625,6 +627,51 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         catch(NotFoundEntityException $ex2){
             SS_Log::log($ex2,SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function shareEmail(SS_HTTPRequest $request){
+        try {
+            $event_id     = intval($request->param('EVENT_ID'));
+            $event        = $this->summitevent_repository->getById($event_id) ;
+            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+
+            $data = $this->getJsonRequest();
+            if (!$data) return $this->serverError();
+
+            if (!$data['from'] || !$data['to']) {
+                throw new EntityValidationException('Please enter From and To email addresses.');
+            }
+
+            if (!$data['token'])
+                throw new EntityValidationException('Validation Error');
+            else {
+                $token = Session::get("SummitAppEventPage.ShareEmail");
+                $token_count = Session::get("SummitAppEventPage.ShareEmailCount");
+            }
+
+            if ($data['token'] != $token || $token_count > 5) {
+                throw new EntityValidationException('Validation Error');
+            }
+
+            $subject = 'Fwd: '.$event->Title;
+            $body = $event->Title.'<br>'.$event->ShortDescription.'<br><br>Check it out: '.$event->getLink();
+
+            $email = EmailFactory::getInstance()->buildEmail($data['from'], $data['to'], $subject, $body);
+
+            return $this->ok($email->send());
+
+        }
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);

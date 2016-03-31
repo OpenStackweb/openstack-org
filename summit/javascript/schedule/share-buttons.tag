@@ -79,7 +79,7 @@
         }
 
         sendEmail() {
-            var url = 'api/v1/summits/current/events/'+self.share_info.event_id+'/share';
+            var url = 'api/v1/summits/current/schedule/'+self.share_info.event_id+'/share';
             var request = {
                 from:$('#email-from').val(),
                 to:$('#email-to').val(),
