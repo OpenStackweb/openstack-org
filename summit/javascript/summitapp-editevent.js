@@ -101,6 +101,7 @@ $(document).ready(function(){
     });
 
     var email_href = $('#email-speakers').attr('href')+speakers_emails.join();
+    email_href += '?cc=speakersupport@openstack.org';
     $('#email-speakers').attr('href',email_href);
 
     $("#speakers").bind("paste", function(e){
