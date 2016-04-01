@@ -48,7 +48,9 @@
                         <% if TwitterName %>
                         <div class="info_item row">
                             <div class="info_item_icon"><i class="fa fa-2x fa-twitter"></i></div>
-                            <div class="info_item_text">$TwitterName</div>
+                            <div class="info_item_text">
+                                <a href="https://twitter.com/{$TwitterName}">@{$TwitterName}</a>
+                            </div>
                         </div>
                         <% end_if %>
                     </div>
