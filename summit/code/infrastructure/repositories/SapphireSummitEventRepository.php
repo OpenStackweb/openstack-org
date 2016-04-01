@@ -40,6 +40,7 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
         $summit_id = $summit->getIdentifier();
 
         $sql_events   = <<<SQL
+        SELECT * FROM (
         SELECT DISTINCT E.* FROM SummitEvent E
         WHERE
         E.SummitID = {$summit_id} AND E.Published = 1
@@ -106,7 +107,7 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
         )
 SQL;
 
-        foreach(DB::query($sql_events," ORDER BY E.StartDate ASC, E.EndDate ASC ;") as $row)
+        foreach(DB::query($sql_events.") AS Q1 ORDER BY StartDate ASC, EndDate ASC ;") as $row)
         {
             $class = $row['ClassName'];
             array_push($events, new $class($row));
