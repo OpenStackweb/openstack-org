@@ -17,7 +17,8 @@
                 <tr each={ event in day } data-id="{ event.id }">
                     <td>{ event.start_time } - { event.end_time }</td>
                     <td>{ event.title }</td>
-                    <td>{ event.room }</td>
+                    <td if={ should_show_venues == 1 }>{ event.room }</td>
+                    <td if={ should_show_venues == 0 }>TBD</td>
                     <td>{ event.total }/{ event.capacity }</td>
                     <td>
                         <a href="{ event.rsvp }" if={ event.rsvp != ''}>RSVP</a>
@@ -29,12 +30,12 @@
     </div>
 
     <script>
-        this.events          = opts.events;
-        var self             = this;
+        this.events             = opts.events;
+        this.should_show_venues = opts.should_show_venues
+        var self                = this;
 
 
         this.on('mount', function() {
-
         });
 
 

@@ -168,7 +168,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         $html_inner = $this->renderWith(
             array('SummitAppMySchedulePage_pdf'),
-            array('Schedule' => $day_schedule));
+            array('Schedule' => $day_schedule, 'Summit' => $this->Summit()));
 
         $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
 

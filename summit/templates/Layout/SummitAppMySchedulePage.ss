@@ -30,8 +30,10 @@
                     rsvp: "{$RSVPLink}"
                 });
             <% end_loop %>
+
+            var should_show_venues = <% if $Summit.ShouldShowVenues %> 1 <% else %> 0 <% end_if %>;
         </script>
-        <schedule-my-schedule events="{ events }" ></schedule-my-schedule>
+        <schedule-my-schedule events="{ events }" should_show_venues="{ should_show_venues }"></schedule-my-schedule>
     </div>
 </div>
 

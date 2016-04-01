@@ -25,7 +25,7 @@
                     <tr>
                         <td style="width:20%">{$getStartTime} - {$getEndTime}</td>
                         <td style="width:50%">{$Title}</td>
-                        <td style="width:10%">{$getLocationNameNice}</td>
+                        <td style="width:10%"><% if $Summit.ShouldShowVenues %> {$getLocationNameNice} <% else %> TBD <% end_if %></td>
                         <td style="width:10%">{$Attendees.Count()}/{$LocationCapacity}</td>
                         <td style="width:10%"><% if $RSVPLink %> Yes <% else %> No <% end_if %></td>
                     </tr>
