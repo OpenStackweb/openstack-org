@@ -663,8 +663,8 @@ implements IPresentationSpeaker
     public function breakoutEmailAlreadySent($summit_id)
     {
         $count1 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REMAINDER')->count());
-        $count2 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REMAINDER')->count());
-        return $count1 > 0 ||$count2 > 0 ;
+        $count2 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REGISTER')->count());
+        return $count1 > 0 || $count2 > 0 ;
     }
 
     /**
