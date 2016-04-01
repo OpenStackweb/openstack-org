@@ -545,6 +545,14 @@ form.all-events-search-form .all-events-search-wrapper i {
     top: 11px;
 }
 
+#clear-filters {
+    margin-left: 3px;
+}
+
+#clear-filters a{
+    cursor: pointer;
+}
+
 .login-container {
     text-align: right;
 }

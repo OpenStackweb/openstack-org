@@ -5,14 +5,15 @@
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
             <div class="col-filter-title">
-                <span>Calendar Search Filters</span>
+                <span>Calendar&nbsp;Search&nbsp;Filters</span>
+                <span id="clear-filters" style="display:none">(<a onclick={ clearFilters }>clear</a>) </span>
             </div>
         </div>
         <div class="col-xs-3 col-switch-schedule">
-            <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
+            <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
         </div>
         <div class="col-xs-3 col-view-all-schedule">
-            <a href="{ base_url+'mine/' }?goback=1" class="btn btn-default pull-left view-all-schedule" role="button" if={ mine }>View / Print Full Calendar</a>
+            <a href="{ base_url+'mine/' }?goback=1" class="btn btn-default pull-right view-all-schedule" role="button" if={ mine }>View / Print Full Calendar</a>
         </div>
         <div class="col-xs-3 login-container" if={ summit.current_user == null }>
             <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
@@ -70,8 +71,10 @@
             $('#toggle-all-events-filters').click(function(event) {
                 if ( $('#all-events-filter-wrapper').is( ":hidden" ) ) {
                     $('#all-events-filter-wrapper').slideDown( "slow" );
+                    $('#clear-filters').show();
                 } else {
                     $('#all-events-filter-wrapper').slideUp( "slow" );
+                    $('#clear-filters').hide();
                 }
                 $(this).toggleClass('active');
                 event.preventDefault();
@@ -209,17 +212,21 @@
             self.schedule_filters.publishFiltersChanged(filters);
         }
 
+        clearFilters() {
+            $('#ddl_summit_types').val('').trigger("chosen:updated");
+            $('#ddl_event_types').val('').trigger("chosen:updated");
+            $('#ddl_tracks').val('').trigger("chosen:updated");
+            $('#ddl_tags').val('').trigger("chosen:updated");
+            $('#ddl_levels').val('').trigger("chosen:updated");
+            self.doFilter();
+        }
+
         this.schedule_filters.on('scheduleToggleFilters', function(hide){
             if (hide) {
-                $('#ddl_summit_types').val('').trigger("chosen:updated");
-                $('#ddl_event_types').val('').trigger("chosen:updated");
-                $('#ddl_tracks').val('').trigger("chosen:updated");
-                $('#ddl_tags').val('').trigger("chosen:updated");
-                $('#ddl_levels').val('').trigger("chosen:updated");
                 $('.all-events-filter-link').fadeOut();
                 $('#all-events-filter-wrapper').slideUp();
                 $('#toggle-all-events-filters').removeClass('active');
-                self.doFilter();
+                self.clearFilters();
             } else {
                 $('.all-events-filter-link').fadeIn();
             }
