@@ -5,6 +5,7 @@ schedule_admin_view_api.RETRIEVED_PUBLISHED_EVENTS   = 'RETRIEVED_PUBLISHED_EVEN
 schedule_admin_view_api.RETRIEVED_UNPUBLISHED_EVENTS = 'RETRIEVED_UNPUBLISHED_EVENTS';
 schedule_admin_view_api.RETRIEVED_PUBLISHED_SEARCH   = 'RETRIEVED_PUBLISHED_SEARCH';
 schedule_admin_view_api.RETRIEVED_EMPTY_SPOTS        = 'RETRIEVED_EMPTY_SPOTS';
+schedule_admin_view_api.RETRIEVED_LOCATIONS_BY_DAY   = 'RETRIEVED_LOCATIONS_BY_DAY';
 
 schedule_admin_view_api.getScheduleByDayAndLocation = function (summit_id, day, location_id)
 {
@@ -67,10 +68,17 @@ schedule_admin_view_api.getScheduleSearchResults = function (summit_id, term)
 
 schedule_admin_view_api.getScheduleEmptySpots = function (summit_id, days, start_time, end_time, locations, length)
 {
+    var url    = api_base_url.replace('@SUMMIT_ID', summit_id)+'/schedule/empty_spots';
 
-    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/schedule/empty_spots';
-    var params = {days:JSON.stringify(days),start_time:start_time,end_time:end_time,locations:JSON.stringify(locations),length:length};
-    return $.get(url,params,function (data) {
+    var params = {
+        days:JSON.stringify(days),
+        start_time:start_time,
+        end_time:end_time,
+        locations:JSON.stringify(locations),
+        length:length
+    };
+
+    return $.get(url, params, function (data) {
         data.summit_id   = summit_id;
         schedule_admin_view_api.trigger(schedule_admin_view_api.RETRIEVED_EMPTY_SPOTS, data);
     });
@@ -140,6 +148,16 @@ schedule_admin_view_api.unpublish = function (summit_id, event_id){
         });
 }
 
+schedule_admin_view_api.getLocations = function (summit_id, day){
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/locations';
+    console.log('getLocations summit_id '+summit_id+' day '+day);
+
+    return $.get(url+'?day='+day, function (data) {
+        data.summit_id   = summit_id;
+        schedule_admin_view_api.trigger(schedule_admin_view_api.RETRIEVED_LOCATIONS_BY_DAY, data);
+    });
+}
+
 dispatcher.on(dispatcher.PUBLISHED_EVENTS_FILTER_CHANGE, function(summit_id ,day , location_id){
     schedule_admin_view_api.getScheduleByDayAndLocation(summit_id ,day , location_id);
 });
@@ -154,6 +172,10 @@ dispatcher.on(dispatcher.PUBLISHED_EVENTS_SEARCH_EMPTY, function(summit_id, days
 
 dispatcher.on(dispatcher.UNPUBLISHED_EVENT, function(summit_id, event_id){
     schedule_admin_view_api.unpublish(summit_id, event_id);
+});
+
+dispatcher.on(dispatcher.PUBLISHED_EVENTS_DAY_CHANGE, function(summit_id, day){
+    schedule_admin_view_api.getLocations(summit_id, day);
 });
 
 module.exports = schedule_admin_view_api;

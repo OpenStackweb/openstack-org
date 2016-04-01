@@ -81,11 +81,11 @@ final class SummitAppLocationsApi extends AbstractRestfulJsonApi
                 $class_name = $venue->ClassName;
                 if($class_name != 'SummitVenue' && $class_name != 'SummitExternalLocation' && $class_name != 'SummitHotel') continue;
                 $count = $summit->getPublishedEventsCountByDateLocation($day, $venue);
-                array_push($response['locations'], array('location_id' => intval($venue->ID), 'events_count' => intval($count)));
+                array_push($response['locations'], array('id' => intval($venue->ID), 'events_count' => intval($count)));
                 if($class_name == 'SummitVenue'){
                     foreach($venue->Rooms() as $room){
                         $count = $summit->getPublishedEventsCountByDateLocation($day, $room);
-                        array_push($response['locations'], array('location_id' => intval($room->ID), 'events_count' => intval($count)));
+                        array_push($response['locations'], array('id' => intval($room->ID), 'events_count' => intval($count)));
                     }
                 }
             }

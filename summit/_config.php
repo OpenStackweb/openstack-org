@@ -36,6 +36,11 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
             // just record the published state at the moment of the update
             $metadata = json_encode( array ( 'pub_new' => intval($entity->Published)));
         }
+        if(!$entity->Published)
+        {
+            // clean attendees schedules
+            DB::query("DELETE SummitAttendee_Schedule FROM SummitAttendee_Schedule WHERE SummitEventID = {$entity->ID};");
+        }
     }
 
     $event                  = new SummitEntityEvent();
@@ -77,8 +82,14 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Deleted
 
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
-    if($entity instanceof PresentationMaterial){
+    if($entity instanceof PresentationMaterial)
+    {
         $summit_id = $entity->Presentation()->SummitID;
+    }
+    if($entity instanceof SummitEvent)
+    {
+        // clean attendees schedules
+        DB::query("DELETE SummitAttendee_Schedule FROM SummitAttendee_Schedule WHERE SummitEventID = {$entity->ID};");
     }
     $metadata = '';
     $event                  = new SummitEntityEvent();

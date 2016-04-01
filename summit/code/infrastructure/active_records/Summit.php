@@ -160,8 +160,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
-    public function getSummitYear() {
-        return date('Y',strtotime($this->getField('SummitBeginDate')));
+    public function getSummitYear()
+    {
+        return date('Y', strtotime($this->getField('SummitBeginDate')));
     }
 
     public function setSummitBeginDate($value)
@@ -527,7 +528,7 @@ final class Summit extends DataObject implements ISummit
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('Published', 1));
         if (!is_null($level)) {
-            $query->addAndCondition(QueryCriteria::equal('Level',$level));
+            $query->addAndCondition(QueryCriteria::equal('Level', $level));
         }
 
         $query
@@ -544,7 +545,7 @@ final class Summit extends DataObject implements ISummit
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('Published', 1));
         if (!is_null($track)) {
-            $query->addAndCondition(QueryCriteria::equal('CategoryID',$track));
+            $query->addAndCondition(QueryCriteria::equal('CategoryID', $track));
         }
 
         $query
@@ -565,7 +566,7 @@ final class Summit extends DataObject implements ISummit
     public function getBlackouts($day, $location_id)
     {
         $blackouts = new ArrayList();
-        $location  = SummitAbstractLocation::get()->byID($location_id);
+        $location = SummitAbstractLocation::get()->byID($location_id);
         if (!is_null($location) && !$location->overridesBlackouts()) {
             $event_repository = new SapphireSummitEventRepository();
             $blackouts = $event_repository->getOtherBlackoutsByDay($this, $day, $location_id);
@@ -1101,11 +1102,13 @@ final class Summit extends DataObject implements ISummit
         $this->write();
     }
 
-    public function handlevotinglists () {
+    public function handlevotinglists()
+    {
         $this->generateVotingLists();
     }
 
-    protected function validate(){
+    protected function validate()
+    {
 
         $valid = parent::validate();
         if (!$valid->valid()) {
@@ -1174,10 +1177,10 @@ final class Summit extends DataObject implements ISummit
 
     public function isEventInsideSummitDuration(ISummitEvent $summit_event)
     {
-        $event_start_date  = new DateTime($summit_event->getStartDate());
-        $event_end_date    = new DateTime($summit_event->getEndDate());
+        $event_start_date = new DateTime($summit_event->getStartDate());
+        $event_end_date = new DateTime($summit_event->getEndDate());
         $summit_start_date = new DateTime($this->getBeginDate());
-        $summit_end_date   = new DateTime($this->getEndDate());
+        $summit_end_date = new DateTime($this->getEndDate());
 
         return $event_start_date >= $summit_start_date && $event_start_date <= $summit_end_date &&
         $event_end_date <= $summit_end_date && $event_end_date >= $event_start_date;
@@ -1438,19 +1441,20 @@ SQL;
         return new ArrayList($list);
     }
 
-    public function generateVotingLists () {
-    	DB::query("DELETE FROM PresentationRandomVotingList");
-    	$i = 0;
-    	while ($i < self::config()->random_voting_list_count) {
-    		$list = PresentationRandomVotingList::create([
-    			'SummitID' => $this->ID,
-    		]);
-    		$list->setSequence(
-				$this->Presentations()->sort('RAND()')->column('ID')
-    		);
-    		$list->write();
-    		$i++;
-    	}
+    public function generateVotingLists()
+    {
+        DB::query("DELETE FROM PresentationRandomVotingList");
+        $i = 0;
+        while ($i < self::config()->random_voting_list_count) {
+            $list = PresentationRandomVotingList::create([
+                'SummitID' => $this->ID,
+            ]);
+            $list->setSequence(
+                $this->Presentations()->sort('RAND()')->column('ID')
+            );
+            $list->write();
+            $i++;
+        }
     }
 
     /**
@@ -1551,8 +1555,8 @@ SQL;
     public function ShouldShowVenues()
     {
         $start_showing_venue_date = $this->getField('StartShowingVenuesDate');
-        if(empty($start_showing_venue_date)) return true;
-        $now                      = new \DateTime('now', new DateTimeZone('UTC'));
+        if (empty($start_showing_venue_date)) return true;
+        $now = new \DateTime('now', new DateTimeZone('UTC'));
         $start_showing_venue_date = new \DateTime($start_showing_venue_date, new DateTimeZone('UTC'));
         return $start_showing_venue_date <= $now;
     }
@@ -1614,7 +1618,7 @@ SQL;
 
     public function getTopVenues()
     {
-        return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('Name','ASC');
+        return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('Name', 'ASC');
     }
 
     /**
@@ -1633,6 +1637,17 @@ SQL;
      */
     public function getPublishedEventsCountByDateLocation($day, SummitAbstractLocation $location)
     {
-        return 0;
+
+        if (!$day instanceof DateTime) {
+            $day = new DateTime($day);
+        }
+
+        $start       = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
+        $end         = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
+        $start       = $this->convertDateFromTimeZone2UTC($start);
+        $end         = $this->convertDateFromTimeZone2UTC($end);
+        $location_id = $location->ID;
+
+        return intval($this->Events()->where(" LocationID = {$location_id} AND Published = 1 AND StartDate >= '{$start}' AND EndDate <= '{$end}'")->count());
     }
 }
