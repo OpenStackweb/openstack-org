@@ -35,6 +35,11 @@ interface ISummit extends IEntity
     public function getEndDate();
 
     /**
+     * @return string
+     */
+    public function getScheduleLink();
+
+    /**
      * @return DateTime
      */
     public function getStartShowingVenuesDate();

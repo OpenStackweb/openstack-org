@@ -9,7 +9,7 @@
         <div id="events-container">
             <div class="row">
                 <div class="col-sm-12">
-                    <a href="{ host }{ summit.link }call-for-speakers/track-list" target="_blank">Learn more about the { summit.title } Summit { summit.year } Tracks</a>
+                    <a href="{ summit.schedule_link }track-list" target="_blank">Learn more about the { summit.title } Summit { summit.year } Tracks</a>
                 </div>
             </div>
             <schedule-main-filters summit="{ summit }" schedule_filters={ schedule_filters } base_url={ base_url }></schedule-main-filters>

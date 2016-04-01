@@ -6,6 +6,7 @@
         {
             id:   $Summit.ID,
             link: "{$Summit.Link.JS}",
+            schedule_link: "{$Summit.getScheduleLink.JS}",
             title: "{$Summit.Title.JS}",
             year: "{$Summit.getSummitYear().JS}",
             dates : {},
