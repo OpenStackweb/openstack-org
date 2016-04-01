@@ -28,6 +28,7 @@
                     <th><a title="sort by Speaker FullName" style="cursor:pointer;" onclick="{ sortBy }" data-field='fullname' data-dir='asc'>FullName</a></th>
                     <th><a title="sort by Email" style="cursor:pointer;" onclick="{ sortBy }" data-field='email' data-dir='asc'>Email</a></th>
                     <th>Member Id</th>
+                    <th>Registration Code</th>
                     <th>Summit On Site Phone</th>
                     <th># Presentations</th>
                     <th>&nbsp;</th>
@@ -39,6 +40,7 @@
                     <td>{ speaker.name }</td>
                     <td>{ speaker.email }</td>
                     <td>{ speaker.member_id }</td>
+                    <td>{ speaker.registration_code }</td>
                     <td>{ speaker.onsite_phone }</td>
                     <td>{ speaker.presentation_count }</td>
                     <td><a href="{ parent.edit_link+'/'+speaker.id }" class="btn btn-default btn-sm active" role="button">Edit</a></td>
@@ -108,6 +110,7 @@
                     self.page_data.page        = data.page;
                     self.page_data.total_items = data.count;
                     self.total_pages           = self.page_data.total_items > 0 ? Math.ceil(self.page_data.total_items / self.page_data.limit): 0;
+
                     if(self.speakers .length > 0){
                         var options = {
                             bootstrapMajorVersion:3,

@@ -22,7 +22,8 @@
                             name: "$getName",
                             email : "{$getEmail}",
                             onsite_phone : "{$getOnSitePhoneFor($Top.Summit.ID)}",
-                            presentation_count: "{$Presentations().Count()}"
+                            presentation_count: "{$Presentations().Count()}",
+                            registration_code: "{$getSummitPromoCode($Top.Summit.ID).Code}"
                         });
                 <% end_loop %>
 

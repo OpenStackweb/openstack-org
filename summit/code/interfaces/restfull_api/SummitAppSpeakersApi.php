@@ -127,6 +127,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $data = array();
 
             foreach($speakers as $speaker) {
+                $promo_code  = $speaker->getSummitPromoCode($summit_id);
                 $data[] = array(
                     'id'                 => $speaker->ID,
                     'member_id'          => $speaker->MemberID,
@@ -134,6 +135,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
                     'email'              => $speaker->getEmail(),
                     'onsite_phone'       => $speaker->getOnSitePhoneFor($summit_id),
                     'presentation_count' => $speaker->Presentations()->count(),
+                    'registration_code'  => !is_null($promo_code) ? $promo_code->Code : '',
                 );
             }
 
