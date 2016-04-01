@@ -814,6 +814,7 @@ final class SummitService implements ISummitService
             }
 
             $onsite_phone = trim($speaker_data['onsite_phone']);
+            $reg_code     = trim($speaker_data['reg_code']);
             if(!empty($onsite_phone)) {
                 $summit_assistance = $speaker->getAssistanceFor($summit->getIdentifier());
                 if(is_null($summit_assistance)){
@@ -824,6 +825,34 @@ final class SummitService implements ISummitService
                 }
                 $summit_assistance->OnSitePhoneNumber = $onsite_phone;
                 $summit_assistance->write();
+            }
+            if(!empty($reg_code)){
+                $old_code = SpeakerSummitRegistrationPromoCode::get()->filter
+                (
+                    array
+                    (
+                        'SummitID'  => $summit->getIdentifier(),
+                        'SpeakerID' => $speaker->ID,
+                    )
+                )->first();
+
+                if(!(is_null($old_code) || $old_code->Code === $reg_code)) {
+                    $code = SpeakerSummitRegistrationPromoCode::get()->filter
+                    (
+                        array
+                        (
+                            'Code' => $reg_code,
+                            'SummitID' => $summit->getIdentifier(),
+                            'OwnerID' => 0,
+                            'SpeakerID' => 0,
+                        )
+                    )->first();
+
+                    if (is_null($code)) throw new EntityValidationException(sprintf('registration code %s is already assigned or not exists!', $reg_code));
+                    if ($code->Code !== $old_code->Code) throw new EntityValidationException(sprintf('speaker has already assigned to another registration code (%s)', $old_code->Code));
+                    $speaker->registerSummitPromoCode($code);
+                    $code->write();
+                }
             }
             return $speaker;
 

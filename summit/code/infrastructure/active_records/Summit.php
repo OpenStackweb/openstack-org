@@ -46,7 +46,6 @@ final class Summit extends DataObject implements ISummit
         'handlevotinglists'
     );
 
-
     private static $has_one = array
     (
         'Logo' => 'BetterImage',
@@ -102,7 +101,6 @@ final class Summit extends DataObject implements ISummit
         return (time() > $this->obj($beginField)->format('U')) && (time() < $this->obj($endField)->format('U'));
     }
 
-
     public function getStatus()
     {
         if (!$this->Active) {
@@ -138,7 +136,6 @@ final class Summit extends DataObject implements ISummit
             'Active' => 1,
         ))->sort('SummitEndDate', 'ASC')->first();
     }
-
 
     public function getTitle()
     {
@@ -337,7 +334,6 @@ final class Summit extends DataObject implements ISummit
 
         return $this->convertDateFromUTC2TimeZone($value);
     }
-
 
     function TalksByMemberID($memberID)
     {
@@ -637,8 +633,8 @@ final class Summit extends DataObject implements ISummit
     }
 
     /**
-     * @param ISummitEventType $type
-     * @return void
+     * @param ISummitEventType $event_type
+     * @throws Exception
      */
     public function addEventType(ISummitEventType $event_type)
     {
@@ -751,7 +747,6 @@ final class Summit extends DataObject implements ISummit
     public function getVenues()
     {
         $venues = $this->Locations()->where("ClassName IN ('SummitVenue','SummitExternalLocation')")->sort("Order");
-
         return $venues;
     }
 
@@ -793,7 +788,6 @@ final class Summit extends DataObject implements ISummit
     }
 
     // CMS admin UI
-
 
     public function getCMSFields()
     {
@@ -1039,7 +1033,6 @@ final class Summit extends DataObject implements ISummit
         return $f;
     }
 
-
     public function getBetterButtonsActions()
     {
         $f = parent::getBetterButtonsActions();
@@ -1077,7 +1070,6 @@ final class Summit extends DataObject implements ISummit
         return $f;
     }
 
-
     public function forcephase($data, $form)
     {
         $span = 10;
@@ -1094,7 +1086,6 @@ final class Summit extends DataObject implements ISummit
         $form->sessionMessage('Phase updated', 'good');
     }
 
-
     public function resetvotes()
     {
         DB::query(sprintf(
@@ -1103,14 +1094,12 @@ final class Summit extends DataObject implements ISummit
         ));
     }
 
-
     public function setasactive()
     {
         DB::query("UPDATE Summit SET Active = 0");
         $this->Active = 1;
         $this->write();
     }
-
 
     public function handlevotinglists () {
         $this->generateVotingLists();
@@ -1626,5 +1615,24 @@ SQL;
     public function getTopVenues()
     {
         return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('Name','ASC');
+    }
+
+    /**
+     * @param string $day
+     * @return bool
+     */
+    public function isDayBelongs($day)
+    {
+        return true;
+    }
+
+    /**
+     * @param string $day
+     * @param SummitAbstractLocation $location
+     * @return int
+     */
+    public function getPublishedEventsCountByDateLocation($day, SummitAbstractLocation $location)
+    {
+        return 0;
     }
 }

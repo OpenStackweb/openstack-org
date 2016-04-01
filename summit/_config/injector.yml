@@ -83,6 +83,12 @@ Injector:
       2: '%$SummitAttendeeRepository'
       3: '%$PresentationRepository'
       4: '%$SummitService'
+  SummitAppLocationsApi:
+    constructor:
+      0: '%$SummitRepository'
+  SummitAppRegistrationCodesApi:
+    constructor:
+      0: '%$SummitRepository'
   SummitAppSpeakersApi:
     constructor:
       0: '%$SummitRepository'

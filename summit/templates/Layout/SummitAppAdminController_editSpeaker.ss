@@ -26,6 +26,10 @@
                         <label for="email">Email</label><br>
                         <input id="email" name="email" value="{$Speaker.getEmail()}"/>
                     </div>
+                    <div class="col-md-4">
+                        <label for="reg_code">Summit Registration Code</label><br>
+                        <input id="reg_code" name="reg_code" value="{$Speaker.getSummitPromoCode($Top.Summit.ID).Code}"/>
+                    </div>
                 </div>
             </div>
 
@@ -110,8 +114,12 @@
 
     <script type="text/javascript">
         var member = {};
+        var registration_code = {};
        <% if $Speaker.Member.Exists %>
             member = {id : "{$Speaker.MemberID}", name : "{$Speaker.Member.FirstName.JS} {$Speaker.Member.Surname.JS} ({$Speaker.Member.Email})"};
+       <% end_if %>
+       <% if $Speaker.getSummitPromoCode($Top.Summit.ID) %>
+       registration_code = { code : "$Speaker.getSummitPromoCode($Top.Summit.ID).Code", name: "{$Speaker.getSummitPromoCode($Top.Summit.ID).Code} ({$Speaker.getSummitPromoCode($Top.Summit.ID).Type})"};
        <% end_if %>
     </script>
 

@@ -241,4 +241,17 @@ interface ISummit extends IEntity
      * @throws Exception
      */
     public function getScheduleByTrack($track = null);
+
+    /**
+     * @param string $day
+     * @return bool
+     */
+    public function isDayBelongs($day);
+
+    /**
+     * @param string $day
+     * @param SummitAbstractLocation $location
+     * @return int
+     */
+    public function getPublishedEventsCountByDateLocation($day, SummitAbstractLocation $location);
 }
