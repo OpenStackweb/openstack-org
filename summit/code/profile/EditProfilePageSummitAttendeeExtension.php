@@ -65,6 +65,7 @@ class EditProfilePageSummitAttendeeExtension extends Extension
 
     public function SummitAttendeeInfoForm()
     {
+        Requirements::css('summit/css/EditProfilePageSummitAttendeeExtension.css');
         if ($current_member = Member::currentUser())
         {
             $form = new SummitAttendeeInfoForm($this->owner, 'SummitAttendeeInfoForm');
