@@ -4013,14 +4013,14 @@ h5.section-title.guide {
         margin: 5px 0 10px; }
       .featured-guide-row .featured .featured-content p {
         font-size: 0.9em; }
-      .featured-guide-row .featured .featured-content a.featured-site {
+      a.featured-site {
         color: #30739C;
         padding: 3px 7px;
         border-radius: 4px;
         border: 1px solid #30739C;
         display: inline-block;
         margin-top: 5px; }
-        .featured-guide-row .featured .featured-content a.featured-site:hover {
+        a.featured-site:hover {
           text-decoration: none;
           border-color: #29abe2;
           color: #29abe2; }
