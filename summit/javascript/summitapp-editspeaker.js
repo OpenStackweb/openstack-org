@@ -59,37 +59,6 @@ $(document).ready(function(){
         ]
     });
 
-    // promo codes
-
-    var reg_code_source = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: 'api/v1/summits/'+summit_id+'/registration-codes/%QUERY',
-            wildcard: '%QUERY'
-        }
-    });
-
-    $('#reg_code').tagsinput({
-        itemValue: 'code',
-        itemText: 'name',
-        freeInput: false,
-        maxTags: 1,
-        trimValue: true,
-        typeaheadjs: [
-            {
-                hint: true,
-                highlight: true,
-                minLength: 3
-            },
-            {
-                name: 'reg_code_source',
-                displayKey: 'name',
-                source: reg_code_source
-            }
-        ]
-    });
-
     $('#member_id').on('itemAdded', function(event) {
         var regExp = /\(([^)]+)\)/;
         var matches = regExp.exec(event.item.name);
@@ -98,10 +67,6 @@ $(document).ready(function(){
 
     if (!$.isEmptyObject(member)) {
         $('#member_id').tagsinput('add', member);
-    }
-
-    if (!$.isEmptyObject(registration_code)) {
-        $('#reg_code').tagsinput('add', registration_code);
     }
 
     var form = $('#edit-speaker-form');
@@ -162,7 +127,7 @@ $(document).ready(function(){
         });
         if (!form.valid()) return false;
 
-        $('#photoID',form).val(profile_pic_id);
+        $('#picture_id', form).val(profile_pic_id);
 
         form.find(':submit').attr('disabled','disabled');
         var request    = form.serializeForm();

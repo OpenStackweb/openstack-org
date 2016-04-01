@@ -88,7 +88,7 @@
                                 </span>
                             </span>
                             <input id="image-filename" type="text" class="form-control" readonly="">
-                            <input id="photoID" name="photoID" type="hidden">
+                            <input id="picture_id" name="picture_id" type="hidden" value="{$Speaker.PhotoID}">
                         </div>
                     </div>
                 </div>
