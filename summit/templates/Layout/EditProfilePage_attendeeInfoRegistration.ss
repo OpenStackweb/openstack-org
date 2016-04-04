@@ -6,8 +6,25 @@
         <% include ProfileNav %>
         <% if $Top.ActiveSummit %>
             <h2>$Top.ActiveSummit.Title Summit Attendee Registration Info</h2>
-            <h3>Where is the Evenbrite Order # ?</h3>
-            <img src="summit/images/ticket_sample.png" class="ticket-sample"/>
+            <a href="#" data-toggle="modal" data-target="#myModal">Where is the Evenbrite Order # ?</a>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Where is the Evenbrite Order # ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <img src="summit/images/ticket_sample.png" class="ticket-sample"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             $SummitAttendeeInfoForm
         <% else %>
             <p>There is not current summit yet!</p>
