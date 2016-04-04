@@ -146,6 +146,26 @@
            <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
         </div>
     </div>
+    <% if CurrentMember %>
+        <% if not CurrentMember.isAttendee($Summit.ID)  %>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>Hello {$CurrentMember.FullName} ! registration process for <strong>$Top.Summit.Title</strong> Summit is opened from <strong>$Top.Summit.RegistrationBeginDate</strong> to <strong>$Top.Summit.RegistrationEndDate</strong>.</p>
+                <p>Are you a Summit Attendee? Add your Order # to unlock features only available for Registered Summit Attendees <a href="profile/attendeeInfoRegistration" class="alert-link">here</a></p>
+            </div>
+        <% end_if %>
+    <% else %>
+    <div class="row">
+            <div class="col-xs-3 login-container">
+            <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Top.Link}" method="post" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="fragment" id="fragment"/>
+                <div class="Actions">
+                    <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in to unlock features only available for registered summit attendees"/>
+                </div>
+            </form>
+            </div>
+        </div>
+    <% end_if %>
     <schedule-grid summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" month="{$Summit.Month}"></schedule-grid>
 </div>
 <div id="fb-root"></div>

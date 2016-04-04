@@ -15,14 +15,6 @@
         <div class="col-xs-3 col-view-all-schedule">
             <a href="{ base_url+'mine/' }?goback=1" class="btn btn-default pull-right view-all-schedule" role="button" if={ mine }>View / Print Full Calendar</a>
         </div>
-        <div class="col-xs-3 login-container" if={ summit.current_user == null }>
-            <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
-                <input type="hidden" name="fragment" id="fragment"/>
-                <div class="Actions">
-                    <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
-                </div>
-            </form>
-        </div>
     </div>
    <div id="all-events-filter-wrapper" class="row">
         <div class="col-sm-15 col-xs-12 single-filter-wrapper first">

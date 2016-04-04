@@ -554,7 +554,8 @@ form.all-events-search-form .all-events-search-wrapper i {
 }
 
 .login-container {
-    text-align: right;
+    text-align: left;
+    padding-bottom: 15px;
 }
 
 .chosen-container .chosen-results
