@@ -204,7 +204,7 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
             $f->addFieldToTab('Root.Maps', $gridField);
 
             $config = GridFieldConfig_RecordEditor::create();
-            $gridField = new GridField('Images', 'Images', $this->Images()->filter('ClassName', 'SummitLocationImage' ), $config);
+            $gridField = new GridField('Images', 'Images', $this->getImages(), $config);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $f->addFieldToTab('Root.Images', $gridField);
         }
@@ -225,8 +225,18 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
         return $urls;
     }
 
+    /**
+     * @return SummitLocationImage[]
+     */
+    public function getImages() {
+        return $this->Images()->filter('ClassName', 'SummitLocationImage' )->sort('Order');
+    }
+
+    /**
+     * @return SummitLocationImage
+     */
     public function getFirstImage() {
-        return ($this->Images()->count()) ? $this->Images()->sort('Order')->first()->Picture() : '';
+        return ($this->getImages()->count()) ? $this->getImages()->first()->Picture() : '';
     }
 
     public function getVenue() {

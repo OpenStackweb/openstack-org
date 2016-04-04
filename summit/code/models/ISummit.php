@@ -131,6 +131,11 @@ interface ISummit extends IEntity
     public function getVenues();
 
     /**
+     * @return ISummitVenue[]
+     */
+    public function getPrimaryVenues();
+
+    /**
      * @return ISummitVenue
      */
     public function getMainVenue();

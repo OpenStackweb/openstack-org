@@ -760,6 +760,15 @@ final class Summit extends DataObject implements ISummit
     }
 
     /**
+     * @return ISummitVenue[]
+     */
+    public function getPrimaryVenues()
+    {
+        $venues = $this->Locations()->where("ClassName = 'SummitVenue'")->sort("Order");
+        return $venues;
+    }
+
+    /**
      * @return int|void
      */
     public function getVenuesCount()
