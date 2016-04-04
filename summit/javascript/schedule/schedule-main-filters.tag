@@ -15,6 +15,7 @@
         <div class="col-xs-3 col-view-all-schedule">
             <a href="{ base_url+'mine/' }?goback=1" class="btn btn-default pull-right view-all-schedule" role="button" if={ mine }>View / Print Full Calendar</a>
         </div>
+    Please note that adding an item to "My Calendar" does not guarantee  a seat in the presentation. Rooms fill up fast, so get there early. Some events require an RSVP and, in those cases, you will see a link to RSVP to the event.
     </div>
    <div id="all-events-filter-wrapper" class="row">
         <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
