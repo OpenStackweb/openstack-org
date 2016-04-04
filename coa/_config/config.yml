@@ -1,0 +1,7 @@
+---
+Name: coa_module
+After: 'framework/*','cms/*', 'openstack/*'
+---
+Member:
+  extensions:
+    - CertifiedOpenStackAdministrator

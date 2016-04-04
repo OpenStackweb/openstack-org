@@ -1,0 +1,11 @@
+---
+Name: 'coa-injection'
+---
+Injector:
+  COAFileApi:
+    class: COAFileApi
+  COAManager:
+    constructor:
+      0: '%$MemberRepository'
+      1: '%$COAFileApi'
+      2: '%$TransactionManager'
