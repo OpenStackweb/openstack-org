@@ -51,6 +51,8 @@
     position: absolute;
     top: 33%;
     width: 100%;
+    text-shadow: 2px 2px black;
+    z-index: 999;
 }
 
 .venue .title {
