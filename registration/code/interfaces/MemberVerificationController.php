@@ -92,7 +92,6 @@ final class MemberVerificationController extends AbstractController
     }
 
     public function resendMemberVerificationEmail(SS_HTTPRequest $request){
-        if(Member::currentUser()) return $this->httpError(404);
         return $this->renderWith(array('MemberVerification_resend', 'Page'));
     }
 
@@ -105,10 +104,7 @@ final class MemberVerificationController extends AbstractController
     function SendMemberVerificationEmail($data, $form)
     {
         try {
-            if (Member::currentUser()) return $this->httpError(404);
-
             if (!isset($data['Email'])) throw new EntityValidationException('Missing Email!');
-
             $email = trim($data['Email']);
             $this->member_manager->resendEmailVerification($email,  new MemberRegistrationSenderService);
             return $this->renderWith(array('MemberVerification_resendOK', 'Page'), array('Email' => $email));
