@@ -115,7 +115,7 @@
                 </div>
                 <div class="speaker_info">
                     <div class="speaker_name"><a href="{$Top.AbsoluteLink}speakers/{$ID}" title="$FirstName $LastName" target="_blank">$FirstName $LastName</a></div>
-                    <div class="speaker_job_title"> $Member.getCurrentPosition()</div>
+                    <div class="speaker_job_title"> $getTitleNice() </div>
                     <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
                 </div>
             </div>

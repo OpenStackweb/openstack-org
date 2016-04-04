@@ -33,7 +33,7 @@
                                     <a href="{$Top.Link(speakers)}/{$ID}">$Name</a>
                                 </div>
                             </div>
-                            <div class="row speaker-position-row"><div class="col-md-12">{$CurrentPosition}</div></div>
+                            <div class="row speaker-position-row"><div class="col-md-12">{$getTitleNice()}</div></div>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                          id: {$ID},
                          name : "{$Name.JS}",
                          profile_pic : "{$ProfilePhoto.JS}",
-                         position : "{$CurrentPosition.JS}",
+                         position : "{$TitleNice.JS}",
                      };
                     <% end_loop %>
 

@@ -113,6 +113,17 @@ implements IPresentationSpeaker
         return 'N/A';
     }
 
+    public function getTitleNice(){
+        $title = '';
+        $member = $this->Member();
+        if(!is_null($member) && $member->ID > 0)
+        {
+            $title = $member->getCurrentPosition();
+        }
+
+        return (trim($title) != '') ? $title : $this->Title;
+    }
+
     /**
      * Helper method to link to this speaker, given an action
      * 

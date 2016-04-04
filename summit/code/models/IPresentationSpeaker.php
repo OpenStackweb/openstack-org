@@ -26,6 +26,77 @@ interface IPresentationSpeaker extends IEntity
     const AnnouncementEmailAlternateRejected = 'ALTERNATE_REJECTED';
 
     /**
+     * @return  string
+     */
+    public function getName();
+
+    /**
+     * @return  string
+     */
+    public function getCountryName();
+
+    /**
+     * @return  string
+     */
+    public function getCurrentPosition();
+
+    /**
+     * @return  string
+     */
+    public function getTitleNice();
+
+    /**
+     * Gets a link to edit this record
+     *
+     * @return  string
+     */
+    public function EditLink($presentationID);
+
+    /**
+     * Gets a link to delete this presentation
+     *
+     * @return  string
+     */
+    public function DeleteLink($presentationID);
+
+    /**
+     * Gets a link to the speaker's review page, as seen in the email. Auto authenticates.
+     * @param Int $presentationID
+     * @return string
+     */
+    public function ReviewLink($presentationID);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function AllPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function MyPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function OtherPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function getPresentationsCount($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function hasReachPresentationLimitBy($summit_id = null);
+
+    /**
      * @return bool
      */
     public function isPendingOfRegistration();

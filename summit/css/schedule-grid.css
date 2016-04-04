@@ -385,6 +385,7 @@ a.navbar-brand.navbar-brand-month
 .speaker-name-right {
     display: inline-block;
     margin: 12px 0 0 15px;
+    width: 75%;
 }
 a.profile-pic-wrapper {
     width: 60px;

@@ -90,7 +90,7 @@
     margin-bottom: 30px;
 }
 
-a.profile-pic-wrapper {
-    width: 120px;
-    height: 120px;
+.big-pic {
+    width: 120px !important;
+    height: 120px !important;
 }
