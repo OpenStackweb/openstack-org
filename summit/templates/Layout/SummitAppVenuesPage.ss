@@ -4,7 +4,7 @@
         <div class="venue">
             <div class="header" id="{$ID}">
                 <div class="overlay"></div>
-                <img class="image" src="$getFirstImage.getURL()" />
+                <img class="image" src="$getFirstImage.croppedImage(1500,350).getURL()" />
                 <div class="labelbox">
                     <div class="title"> $Name </div>
                     <div class="address"> $Address </div>
