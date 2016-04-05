@@ -1360,7 +1360,8 @@ final class Summit extends DataObject implements ISummit
         $end_date = $this->getEndDate();
         $res = array();
         foreach ($this->getDatesFromRange($start_date, $end_date) as $date) {
-            $date_array = array('Label' => $date->format('l j'), 'Date' => $date->format('Y-m-d'), 'IsWeekday' => ($date->format('N') < 6));
+            $is_weekday = ($date->format('N') < 6) ? 1: 0;
+            $date_array = array('Label' => $date->format('l j'), 'Date' => $date->format('Y-m-d'), 'IsWeekday' => $is_weekday);
             array_push($res, new ArrayData($date_array));
         }
 
