@@ -133,7 +133,7 @@
 
        <% end_cached %>
        <% loop $Summit.DatesWithEvents %>
-        summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', has_events:{$Has_Published_Events} , selected: false };
+        summit.dates['{$Date}']  = { label: '{$Label}', date:'{$Date}', has_events:{$Has_Published_Events} , selected: false, is_weekday:{$IsWeekday} };
         summit.events['{$Date}'] = [];
        <% end_loop %>
 

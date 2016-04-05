@@ -73,13 +73,7 @@
                 filter_day = year+'-'+month+'-'+day;
                 console.log('current date key '+filter_day);
                 if(typeof(self.summit.dates[filter_day]) === 'undefined'){
-                    filter_day = Object.keys(self.summit.dates)[0];
-                    for (adate in self.summit.dates) {
-                        if (self.summit.dates[adate].has_events) {
-                            filter_day = adate;
-                            break;
-                        }
-                    }
+                    filter_day = self.chooseDefaultDate();
                 }
                 self.setSelectedDay(self.summit.dates[filter_day]);
 
@@ -113,6 +107,19 @@
                 self.update();
             });
         });
+
+        chooseDefaultDate() {
+            var filter_day = Object.keys(self.summit.dates)[0];
+            for (adate in self.summit.dates) {
+                var date_obj = self.summit.dates[adate];
+                if (date_obj.has_events && date_obj.is_weekday) {
+                    filter_day = adate;
+                    break;
+                }
+            }
+
+            return filter_day;
+        }
 
         selectDate(e) {
             self.setSelectedDay(e.item.day);
