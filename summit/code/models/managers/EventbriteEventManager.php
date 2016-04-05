@@ -320,25 +320,30 @@ final class EventbriteEventManager implements IEventbriteEventManager
      * @param $order_external_id
      * @return mixed
      * @throws InvalidEventbriteOrderStatusException
+     * @throws NotFoundEntityException
      */
     public function getOrderAttendees($order_external_id)
     {
-        if(is_null($order_external_id))
-            throw new InvalidEventbriteOrderStatusException('invalid');
-        $order = $this->api->getOrder($order_external_id);
-        if (isset($order['attendees']))
-        {
-            $status     = $order['status'];
+        try {
+            if (is_null($order_external_id))
+                throw new InvalidEventbriteOrderStatusException('invalid');
+            $order = $this->api->getOrder($order_external_id);
+            if (isset($order['attendees'])) {
+                $status = $order['status'];
 
-            if($status !== 'placed') throw new InvalidEventbriteOrderStatusException($status);
+                if ($status !== 'placed') throw new InvalidEventbriteOrderStatusException($status);
 
-            $attendees = array();
-            foreach($order['attendees'] as $a)
-            {
-                $attendees[$a['id']] = $a;
+                $attendees = array();
+                foreach ($order['attendees'] as $a) {
+                    $attendees[$a['id']] = $a;
+                }
+
+                return $attendees;
             }
-
-            return $attendees;
+        }
+        catch(GuzzleHttp\Exception\ClientException $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            throw new NotFoundEntityException(sprintf("order # %s does not exists!",$order_external_id));
         }
     }
 }
