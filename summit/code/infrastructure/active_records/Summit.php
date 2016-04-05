@@ -194,6 +194,21 @@ final class Summit extends DataObject implements ISummit
         return $date->format('Y-m-d');
     }
 
+    public function getBeginDateDMY()
+    {
+        $date = new DateTime($this->getSummitBeginDate());
+
+        return $date->format('d/m/Y');
+    }
+
+    public function getEndDateDMY()
+    {
+        $date = new DateTime($this->getSummitEndDate());
+
+        return $date->format('d/m/Y');
+    }
+
+
     public function getBeginTime()
     {
         $date = new DateTime($this->getSummitBeginDate());
