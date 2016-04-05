@@ -36,7 +36,7 @@ final class CertifiedOpenStackAdministrator extends DataExtension implements ICe
      */
     public function getLatestApprovedExam()
     {
-        return $this->owner->Exams()->filter('Status', 'Pass')->first();
+        return $this->owner->Exams()->filter('Status', 'Pass')->sort('ExpirationDate', 'DESC')->first();
     }
 
     /**

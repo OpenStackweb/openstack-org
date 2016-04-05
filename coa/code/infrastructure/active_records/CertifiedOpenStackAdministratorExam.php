@@ -16,7 +16,7 @@
 /**
  * Class CertifiedOpenStackAdministratorExam
  */
-final class CertifiedOpenStackAdministratorExam extends DatabObject implements ICertifiedOpenStackAdministratorExam
+final class CertifiedOpenStackAdministratorExam extends DataObject implements ICertifiedOpenStackAdministratorExam
 {
     private static $db = array
     (
@@ -26,8 +26,11 @@ final class CertifiedOpenStackAdministratorExam extends DatabObject implements I
         'ExpirationDate'       => 'SS_Datetime',
         'PassFailDate'         => 'SS_Datetime',
         'ModifiedDate'         => 'SS_Datetime',
-        'Status'               => "Enum('New,Pending,Pass,Fail','New')",
+        'Status'               => "Enum('New,Pending,Pass,No Pass','New')",
     );
+
+
+    public static $valid_status = array('New','Pending','Pass','No Pass');
 
     private static $has_one = array
     (
@@ -43,15 +46,36 @@ final class CertifiedOpenStackAdministratorExam extends DatabObject implements I
     }
 
     /**
-     * @param string $status
+     * @param array|string $status
      * @param string $pass_date
      * @param string $cert_nbr
      * @param string $code
      * @param string $modified_date
+     * @param string $expiration_date
      * @return $this
+     * @throws EntityValidationException
      */
-    public function update($status, $pass_date, $cert_nbr, $code, $modified_date)
+    public function update($status, $pass_date, $cert_nbr, $code, $modified_date, $expiration_date)
     {
+        if(!$this->isValidStatus($status)) throw new EntityValidationException(sprintf("invalid status %s", $status));
+        $this->Status              = $status;
+        $this->CertificationNumber = $cert_nbr;
+        $this->Code                = $code;
+        $this->ModifiedDate        = $modified_date;
+
+        if(!empty($expiration_date))
+            $this->ExpirationDate = $expiration_date;
+
+        if(!empty($pass_date))
+            $this->PassFailDate = $pass_date;
         return $this;
+    }
+
+    /**
+     * @param string $status
+     * @return bool
+     */
+    public function isValidStatus($status){
+        return in_array($status, self::$valid_status);
     }
 }

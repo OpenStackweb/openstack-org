@@ -52,36 +52,55 @@ final class COAManager implements ICOAManager
      */
     public function processFiles()
     {
-        $files = $this->coa_file_api->getFilesList();
-        foreach($files as $file_info)
-        {
-            if($this->isFileProcessed($file_info)) continue;
-            $content = $this->coa_file_api->getFileContent($file_info['filename']);
-            $rows    = CSVReader::load($content);
-            foreach($rows as $row)
-            {
-                $email         = $row['open_stack_id'];
-                $exam_ext_id   = $row['candidate_exam_id'];
-                $status        = $row['exam_status'];
-                $pass_date     = $row['pass_fail_date_c'];
-                $cert_nbr      = $row['certification_number'];
-                $code          = $row['exam_code'];
-                $modified_date = $row['candidate_exam_date_modified'];
+        $coa_file_api      = $this->coa_file_api;
+        $member_repository = $this->member_repository;
 
-                $member        = $this->member_repository->findByEmail($email);
-                if(is_null($member)) continue;
-                $exam          = $member->getExamByExternalId($exam_ext_id);
-                if(is_null($exam)){
-                    //create exam
-                    $exam = CertifiedOpenStackAdministratorExam::create();
-                    $exam->OwnerID    = $member->ID;
-                    $exam->ExternalID = $exam_ext_id;
+        return $this->tx_manager->transaction(function() use($coa_file_api, $member_repository) {
+            try {
+                $files = $coa_file_api->getFilesList();
+                $processed_files = 0;
+
+                foreach ($files as $file_info) {
+                    if ($this->isFileProcessed($file_info)) continue;
+
+                    $content = $coa_file_api->getFileContent($file_info['filename']);
+                    $rows = CSVReader::load($content);
+
+                    foreach ($rows as $row) {
+                        $email           = $row['open_stack_id'];
+                        $exam_ext_id     = $row['candidate_exam_id'];
+                        $status          = $row['exam_status'];
+                        $pass_date       = $row['pass_fail_date_c'];
+                        $cert_nbr        = $row['certification_number'];
+                        $code            = $row['exam_code'];
+                        $modified_date   = $row['candidate_exam_date_modified'];
+                        $expiration_date = $row['exam_expiration_date'];
+
+                        $member = $member_repository->findByEmail($email);
+                        if (is_null($member)) continue;
+                        $exam = $member->getExamByExternalId($exam_ext_id);
+                        if (is_null($exam)) {
+                            //create exam
+                            $exam = CertifiedOpenStackAdministratorExam::create();
+                            $exam->OwnerID = $member->ID;
+                            $exam->ExternalID = $exam_ext_id;
+                        }
+                        $exam->update($status, $pass_date, $cert_nbr, $code, $modified_date, $expiration_date);
+                        $exam->write();
+                    }
+                    $this->markFileAsProcessed($file_info);
+                    $processed_files++;
                 }
-                $exam->update($status, $pass_date, $cert_nbr, $code, $modified_date);
-                $exam->write();
+
+                return $processed_files;
             }
-            $this->markFileAsProcessed($file_info);
-        }
+            catch(Exception $ex)
+            {
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                throw $ex;
+            }
+        });
+
     }
 
     private function isFileProcessed(array $file_info)
