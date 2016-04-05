@@ -178,6 +178,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $html_outer = sprintf("<html><head><style>%s</style></head><body><div class='container'>%s</div></body></html>",
             $css, $html_inner);
 
+        //Requirements::css("/summit/css/summitapp-myschedule-pdf.css");
         //return $html_outer;
 
         try {
