@@ -20,6 +20,12 @@ class SecurityAdminExtension extends Extension{
 
 class GroupDecorator extends DataExtension {
 
+    private static $many_many_extraFields = array(
+        'Members' => array(
+            'SortOrder' => "Int"
+        ),
+    );
+
     function updateCMSFields(FieldList $fields) {
 
         $fields->removeFieldFromTab('Root.Members','Members');

@@ -22,20 +22,27 @@ final class AddUsersToFoundationStaffMigration extends AbstractDBMigrationTask
     {
         global $database;
         $group_repository = new SapphireSecurityGroupRepository();
+        $member_repository = new SapphireMemberRepository();
 
         // Jonathan Bryce, Mark Collier, Lauren Sell, Heidi Bretz, Thierry Carrez, Todd Morey, Wes Wilson, Jimmy McArthur, Jeremy Stanley
         // Clark Boylan, Mike Perez, Heidi Joy Tretheway, Chris Hoge, Scott Raschke, Danny Carreno, Claire Massey, Allison Price
         // Erin Disney, Anne Bertucio, Kendall Waters, David Flanders
         $staff_members = array(28,31,4,7506,154,2138,20997,1395,5479,1092,4840,37953,10331,26518,35643,6997,17777,50757,53381,29123,39506);
+        $group = $group_repository->getByCode('openstack-foundation-staff');
+
+        foreach ($staff_members as $order => $member_id) {
+            $member = $member_repository->getById($member_id);
+            $group->Members()->add($member, array('SortOrder' => $order));
+        }
 
         // Tom Fifield, Kathy Cacciatore, Mark Radcliffe, Lisa Miller
         $sup_members = array(369,7564,1429,7565);
-
-        $group = $group_repository->getByCode('openstack-foundation-staff');
-        $group->Members()->setByIDList($staff_members);
-
         $group = $group_repository->getByCode('supporting-cast');
-        $group->Members()->setByIDList($sup_members);
+
+        foreach ($sup_members as $order => $member_id) {
+            $member = $member_repository->getById($member_id);
+            $group->Members()->add($member, array('SortOrder' => $order));
+        }
 
     }
 
