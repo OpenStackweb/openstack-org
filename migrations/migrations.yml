@@ -26,3 +26,5 @@ migrations:
   - MemberLegacyMembersMigration
   - ChangePremiseForPremisesMigration
   - SummitSecondBreakoutEmailMigration
+  - CreateUserCommitteeGroupMigration
+  - AddUsersToFoundationStaffMigration
