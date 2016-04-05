@@ -9,3 +9,6 @@ Injector:
       0: '%$MemberRepository'
       1: '%$COAFileApi'
       2: '%$TransactionManager'
+  IngestCOAFilesTask:
+    constructor:
+      0: '%$COAManager'

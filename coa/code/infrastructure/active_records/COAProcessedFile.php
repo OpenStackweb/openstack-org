@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class COAProcessedFile extends DatabObject
+class COAProcessedFile extends DataObject
 {
     private static $db = array
     (
         'Name'      => 'Varchar(255)',
-        'TimeStamp' => 'Integer',
+        'TimeStamp' => 'Int',
     );
 }

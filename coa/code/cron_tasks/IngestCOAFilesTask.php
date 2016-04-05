@@ -16,16 +16,26 @@ final class IngestCOAFilesTask extends CronTask
 {
 
     /**
+     * @var ICOAManager
+     */
+    private $manager;
+    /**
+     * IngestCOAFilesTask constructor.
+     * @param ICOAManager $manager
+     */
+    public function __construct(ICOAManager $manager){
+        $this->manager = $manager;
+        parent::__construct();
+    }
+    /**
      * @return void
      */
     public function run()
     {
         try
         {
-            $init_time  = time();
-            $manager    = Injector::inst()->get('COAManager');
-            if(!$manager instanceof  ICOAManager) return;
-            $processed  = $manager->processFiles();
+            $init_time   = time();
+            $processed   = $this->manager->processFiles();
             $finish_time = time() - $init_time;
             echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';
         }
