@@ -50,7 +50,7 @@ final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender implem
 
         $speaker->registerBreakOutSent($summit->getIdentifier(), 'SECOND_BREAKOUT_REGISTER');
 
-        $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL, $speaker->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(null, $speaker->getEmail());
 
         $email->setUserTemplate(PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL)->populateTemplate(
             array

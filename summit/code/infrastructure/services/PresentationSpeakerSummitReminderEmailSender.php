@@ -44,7 +44,7 @@ final class PresentationSpeakerSummitReminderEmailSender implements IMessageSend
 
         $speaker->registerBreakOutSent($summit->getIdentifier(), 'SECOND_BREAKOUT_REMAINDER');
 
-        $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL, $speaker->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(null, $speaker->getEmail());
 
         $email->setUserTemplate(PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL)->populateTemplate(
             array

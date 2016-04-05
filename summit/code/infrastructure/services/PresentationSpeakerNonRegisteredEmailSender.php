@@ -52,7 +52,7 @@ final class PresentationSpeakerNonRegisteredEmailSender implements IMessageSende
 
         $speaker->registerCreateMembershipSent();
 
-        $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_CREATE_MEMBERSHIP_EMAIL, $speaker->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(null, $speaker->getEmail());
 
         $email->setUserTemplate(PRESENTATION_SPEAKER_CREATE_MEMBERSHIP_EMAIL)->populateTemplate(
             array
