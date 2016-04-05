@@ -1080,7 +1080,7 @@ a.gs-title, a.gs-title b {
 
 .intro-message {
   position: relative;
-  padding-top: 80px;
+  padding-top: 0;
   padding-bottom: 110px; }
 
 @media (max-width: 1199px) {
@@ -1089,16 +1089,17 @@ a.gs-title, a.gs-title b {
 
 .intro-message > h1 {
   margin: 0;
-  font-size: 3em;
+  font-size: 1.9em;
   font-weight: 400;
   text-align: center;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   width: 100%;
-	letter-spacing: -0.4px;}
+  letter-spacing: -0.4px;
+}
 
 @media (max-width: 767px) {
   .intro-message > h1 {
-    font-size: 3em; } }
+    font-size: 1.5em; } }
 
 .intro-divider {
   width: 400px;
@@ -1128,46 +1129,51 @@ a.gs-title, a.gs-title b {
 /*Hero Promo, add .featured to .intro-header*/
 .intro-header.featured {
   text-align: center;
-  background: no-repeat scroll center center / cover  rgba(0, 0, 0, 0);
-  min-height: 420px;
+  background: no-repeat scroll center center / cover rgba(0, 0, 0, 0);
+  min-height: 370px;
   background-size: cover;
-  position: relative; }
+  position: relative;
+  padding: 40px 0;
+}
 
 .intro-header.featured .intro-message {
-  padding-bottom: 50px; }
+  padding-bottom: 30px; }
 
 a.promo-btn {
-    color: #fff;
-    font-size: 22px;
-    font-weight: 300;
-    background: transparent;
-    border: 2px solid #fff;
-    border-radius: 4px;
-    padding: 12px 20px;
-    margin: 0 auto;
-    text-align: center;
-    min-width: 300px;
-    display: inline-block; }
+  color: #fff;
+  font-size: 16px;
+  font-weight: 300;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  padding: 2px 30px;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 300px;
+  display: inline-block;
+  line-height: 2;
+  }
 
-a.promo-btn:hover {
+a.promo-btn:hover, a.promo-btn:focus  {
   text-decoration: none;
   background: rgba(255, 255, 255, 0.2); }
 
+.promo-btn-wrapper {
+  margin-bottom: 10px;
+}
 a.promo-btn i.fa-chevron-right {
   background: transparent;
-  border: 2px solid #fff;
-  border-radius: 100px;
+  border-radius: 50%;
   padding: 0;
-  font-size: 14px;
-  margin-left: 10px;
-  width: 30px;
-  height: 30px;
-  line-height: 2.1; }
+  font-size: 13px;
+  margin-left: 20px;
+  line-height: 1em;
+}
 
 p.promo-dates {
   display: inline-block;
   margin-top: 10px;
-  font-weight: 600; }
+  font-weight: 400; }
 
 /*End Hero*/
 /*Overview Section*/
