@@ -6,6 +6,10 @@ body {
     background-color: #fff;
 }
 
+.container {
+    width: 620px
+}
+
 .panel {
     margin-bottom: 20px;
     background-color: #fff;
@@ -13,6 +17,7 @@ body {
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    width: 100%;
 }
 
 .panel-heading {
@@ -30,8 +35,6 @@ body {
 }
 
 .table {
-    width: 100%;
-    max-width: 100%;
     margin-bottom: 20px;
     border-spacing: 0;
     border-collapse: collapse;

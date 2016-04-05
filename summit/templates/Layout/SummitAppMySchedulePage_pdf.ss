@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="container section1">
+    <div class="container">
         <div class="row schedule-title-wrapper">
             <div class="col-sm-6 col-main-title">
                 <h1 style="text-align:left;">My Schedule</h1>
@@ -23,11 +23,11 @@
                 <tbody>
                     <% loop $Events %>
                     <tr>
-                        <td style="width:20%">{$getStartTime} - {$getEndTime}</td>
-                        <td style="width:50%">{$Title}</td>
-                        <td style="width:10%"><% if $Summit.ShouldShowVenues %> {$getLocationNameNice} <% else %> TBD <% end_if %></td>
-                        <td style="width:10%">{$Attendees.Count()}/{$LocationCapacity}</td>
-                        <td style="width:10%"><% if $RSVPLink %> Yes <% else %> No <% end_if %></td>
+                        <td style="width:100px">{$getStartTime} - {$getEndTime}</td>
+                        <td style="width:260px">{$Title}</td>
+                        <td style="width:100px"><% if $Summit.ShouldShowVenues %> {$getLocationNameNice} <% else %> TBD <% end_if %></td>
+                        <td style="width:60px">{$Attendees.Count()}/{$LocationCapacity}</td>
+                        <td style="width:20px"><% if $RSVPLink %> Yes <% else %> No <% end_if %></td>
                     </tr>
                     <% end_loop %>
                 </tbody>
