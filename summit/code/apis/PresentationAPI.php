@@ -138,14 +138,14 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 		'GET ' => 'index',
 		'POST vote' => 'handleVote',
 		'PUT view' => 'handleView',
-		'POST video' => 'handleCreateVideo'
+		'POST video' => 'handleApplyVideo'
 	);
 
 
 	private static $allowed_actions = array (
 		'handleVote',
 		'handleView',
-		'handleCreateVideo'
+		'handleApplyVideo'
 	);
 
 
@@ -217,7 +217,7 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 	}
 
 
-	public function handleCreateVideo(SS_HTTPRequest $r) {		
+	public function handleApplyVideo(SS_HTTPRequest $r) {		
 
 		if(!Member::currentUser()) {			
 			return $this->httpError(403);
@@ -225,12 +225,17 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 
 		// Only allow one writeable property here
 		if($youTube = $r->postVar('youtubeid')) {
-			$video = PresentationVideo::create([
-				'PresentationID' => $this->presentation->ID,
-				'DateUploaded' => SS_Datetime::now()->Rfc2822(),
-				'Name' => $this->presentation->Name,
-				'YouTubeID' => $youTube
-			]);
+			$video = $this->presentation->Materials()
+							->filter('ClassName', 'PresentationVideo')
+							->first();
+			if(!$video) {
+				$video = PresentationVideo::create();					
+			}
+
+			$video->PresentationID = $this->presentation->ID;
+			$video->DateUploaded = SS_Datetime::now()->Rfc2822();
+			$video->Name = $this->presentation->Name;
+			$video->YouTubeID = $youTube;
 			$video->write();
 
 			return new SS_HTTPResponse("OK", 200);			
