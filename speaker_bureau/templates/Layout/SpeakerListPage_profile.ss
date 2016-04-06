@@ -6,7 +6,7 @@
     <% with Profile %>
         <% cached "speaker_profile_page", $ID, $qLastEdited %>
         <div class="span-4">
-            <img src="$ProfilePhoto()"/>
+            <img class="profile_pic" src="$ProfilePhoto()"/>
         </div>
         <div class="details span-10 last">
             <div class="last name-and-title">
