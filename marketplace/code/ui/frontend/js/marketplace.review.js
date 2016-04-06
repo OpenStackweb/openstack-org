@@ -23,26 +23,19 @@ jQuery(document).ready(function($){
 
     //validation
     form_validator = form.validate({
-        onfocusout: false,
-        focusCleanup: true,
+        onkeyup: false,
         ignore: [],
         rules: {
             title   : { required: true , ValidPlainText:true, maxlength: 100 },
             comment : { required: true , ValidPlainText:true, maxlength: 500 },
-            rating  : { required: true , number:true}
+            rating  : { required: true , number:true, min:0.5}
         },
-        focusInvalid: false,
-        invalidHandler: function(form, validator) {
-            if (!validator.numberOfInvalids())
-                return;
-            var element = $(validator.errorList[0].element);
-            if(!element.is(":visible")){
-                element = element.parent();
-            }
+        messages: {
+            rating: "Please rate this review."
         },
         errorPlacement: function(error, element) {
             if(!element.is(":visible")){
-                element = element.parent();
+                element = element.parent().parent();
             }
             error.insertAfter(element);
         }
