@@ -583,7 +583,8 @@ implements IPresentationSpeaker
         $twitter_name = $this->TwitterName;
         if(!is_null($img1)  && $img1->exists() && Director::fileExists($img1->Filename))
         {
-            $img1 = $img1->SetWidth($width);
+            // we resize it if the photo is too large
+            $img1 = ($img1->getWidth() == $width) ? $img1 : $img1->SetWidth($width);
             return $img1->getAbsoluteURL();
         }
         if(!is_null($img2)  && $img2->exists() && Director::fileExists($img2->Filename))

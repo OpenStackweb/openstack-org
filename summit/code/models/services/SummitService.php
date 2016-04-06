@@ -799,7 +799,8 @@ final class SummitService implements ISummitService
             $speaker->Bio         = trim($speaker_data['bio']);
             $speaker->IRCHandle   = trim($speaker_data['twitter_name']);
             $speaker->TwitterName = trim($speaker_data['irc_name']);
-            $speaker->PhotoID     = intval($speaker_data['picture_id']);
+            $speaker->PhotoID     = ($speaker_data['picture_id'] != 0) ? intval($speaker_data['picture_id']) : $speaker->PhotoID;
+
             if($speaker->MemberID > 0  && $member_id == 0)
                 throw new EntityValidationException
                 (
