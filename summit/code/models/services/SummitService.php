@@ -270,8 +270,8 @@ final class SummitService implements ISummitService
                     if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' member id %s', $member_id));
                     $speaker = new PresentationSpeaker();
                     $speaker->FirstName = $member->FirstName;
-                    $speaker->LastName = $member->Surname;
-                    $speaker->MemberID = $member->ID;
+                    $speaker->LastName  = $member->Surname;
+                    $speaker->MemberID  = $member->ID;
                     $speaker->write();
                 }
 
@@ -285,14 +285,17 @@ final class SummitService implements ISummitService
             {
                 if(!isset($event_data['moderator']))
                     throw new EntityValidationException('moderator is required!');
+
                 $moderator    = $event_data['moderator'];
+
                 if(!isset($moderator['member_id']) || !isset($moderator['speaker_id']))
                     throw new EntityValidationException('missing parameter on moderator!');
 
                 $speaker_id = intval($moderator['speaker_id']);
                 $member_id  = intval($moderator['member_id']);
-                $moderator    = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id):null;
-                $moderator    = is_null($moderator) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : null;
+                $moderator  = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id):null;
+                $moderator  = is_null($moderator) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : $moderator;
+
                 if (is_null($moderator)) {
                     $member  = Member::get()->byID($member_id);
                     if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' member id %s', $member_id));
@@ -691,11 +694,12 @@ final class SummitService implements ISummitService
             $speaker   = PresentationSpeaker::create();
             $member_id = 0;
             if(!isset($speaker_data['email']) && !isset($speaker_data['member_id']))
-                throw new EntityValidationException
+                throw
+                new EntityValidationException
                 ("you must provide an email or a member_id in order to create a speaker!");
 
             if(isset($speaker_data['member_id']) && intval($speaker_data['member_id']) > 0){
-                $member_id = intval($speaker_data['member_id']);
+                $member_id   = intval($speaker_data['member_id']);
                 $old_speaker = $speaker_repository->getByMemberID($member_id);
                 if(!is_null($old_speaker))
                     throw new EntityValidationException
