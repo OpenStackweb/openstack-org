@@ -583,13 +583,20 @@ implements IPresentationSpeaker
         $twitter_name = $this->TwitterName;
         if(!is_null($img1)  && $img1->exists() && Director::fileExists($img1->Filename))
         {
+            // make it square
+            $size = ($img1->getWidth() < $img1->getHeight()) ? $img1->getWidth() : $img1->getHeight();
+            $img1 = $img1->CroppedImage($size,$size);
             // we resize it if the photo is too large
-            $img1 = (($img1->getWidth() - $width) < 200) ? $img1 : $img1->SetWidth($width);
+            $img1 = (($size - $width) < 200) ? $img1 : $img1->SetWidth($width);
             return $img1->getAbsoluteURL();
         }
         if(!is_null($img2)  && $img2->exists() && Director::fileExists($img2->Filename))
         {
-            $img2 = $img2->SetWidth($width);
+            // make it square
+            $size = ($img2->getWidth() < $img2->getHeight()) ? $img2->getWidth() : $img2->getHeight();
+            $img2 = $img2->CroppedImage($size,$size);
+            // we resize it if the photo is too large
+            $img2 = (($img2->getWidth() - $width) < 200) ? $img2 : $img2->SetWidth($width);
             return $img2->getAbsoluteURL();
         }
         elseif (!empty($twitter_name)) {

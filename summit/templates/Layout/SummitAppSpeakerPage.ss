@@ -14,7 +14,7 @@
         </div>
         <hr/>
         <div class="speaker-photo-left">
-            <a class="profile-pic-wrapper big-pic" target="_blank" href="/community/speakers/profile/{$ID}" style="background-image: url('$ProfilePhoto(100)')"></a>
+            <a class="profile-pic-wrapper big-pic" target="_blank" href="/community/speakers/profile/{$ID}" style="background-image: url('$ProfilePhoto(120)')"></a>
         </div>
         <div class="speaker-info">
             <div class="speaker_name row">$FirstName $LastName</div>
@@ -90,7 +90,7 @@
                              {
                                  id: {$ID},
                                  name : "{$Name.JS}",
-                                 profile_pic : "{$ProfilePhoto.JS}",
+                                 profile_pic : "{$ProfilePhoto(60).JS}",
                                  position : "{$TitleNice.JS}",
                              };
                             <% end_loop %>
