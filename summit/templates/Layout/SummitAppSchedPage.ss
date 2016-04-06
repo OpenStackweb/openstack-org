@@ -37,7 +37,7 @@
          {
              id: {$ID},
              name : "{$Name.JS}",
-             profile_pic : "{$ProfilePhoto.JS}",
+             profile_pic : "{$ProfilePhoto(60).JS}",
              position : "{$TitleNice.JS}",
          };
         <% end_loop %>

@@ -23,8 +23,8 @@
                 <div class="col-xs-4 col-md-4">
                     <div class="row speaker-result">
                         <div class="col-md-4">
-                            <a href="{$Top.Link(speaker)}/{$ID}">
-                                <img src="{$ProfilePhoto}" class="img-circle big-profile-pic" alt="{$Name}">
+                            <a href="{$Top.Link(speakers)}/{$ID}">
+                                <img src="{$ProfilePhoto(100)}" class="img-circle big-profile-pic" alt="{$Name}">
                             </a>
                         </div>
                         <div class="col-md-8 result-speaker-name-div">
@@ -77,7 +77,7 @@
                      {
                          id: {$ID},
                          name : "{$Name.JS}",
-                         profile_pic : "{$ProfilePhoto.JS}",
+                         profile_pic : "{$ProfilePhoto(60).JS}",
                          position : "{$TitleNice.JS}",
                      };
                     <% end_loop %>
