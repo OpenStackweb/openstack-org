@@ -264,4 +264,18 @@ interface ISummit extends IEntity
      * @return int
      */
     public function getPublishedEventsCountByDateLocation($day, SummitAbstractLocation $location);
+
+    /**
+     * @param $value
+     * @param $format
+     * @return null|string
+     */
+    public function convertDateFromUTC2TimeZone($value, $format);
+
+    /**
+     * @param $value
+     * @param $format
+     * @return null|string
+     */
+    public function convertDateFromTimeZone2UTC($value, $format);
 }

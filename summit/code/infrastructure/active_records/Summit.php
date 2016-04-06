@@ -599,9 +599,10 @@ final class Summit extends DataObject implements ISummit
 
     /**
      * @param $value
+     * @param $format
      * @return null|string
      */
-    public function convertDateFromTimeZone2UTC($value)
+    public function convertDateFromTimeZone2UTC($value, $format="Y-m-d H:i:s")
     {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
@@ -616,7 +617,7 @@ final class Summit extends DataObject implements ISummit
             $date = new \DateTime($value, $time_zone);
             $date->setTimezone($utc_timezone);
 
-            return $date->format("Y-m-d H:i:s");
+            return $date->format($format);
         }
 
         return null;
@@ -624,9 +625,10 @@ final class Summit extends DataObject implements ISummit
 
     /**
      * @param $value
+     * @param $format
      * @return null|string
      */
-    public function convertDateFromUTC2TimeZone($value)
+    public function convertDateFromUTC2TimeZone($value, $format="Y-m-d H:i:s")
     {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
@@ -642,7 +644,7 @@ final class Summit extends DataObject implements ISummit
 
             $date->setTimezone($time_zone);
 
-            return $date->format("Y-m-d H:i:s");
+            return $date->format($format);
         }
 
         return null;
