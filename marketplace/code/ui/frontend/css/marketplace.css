@@ -719,3 +719,17 @@ a.app-promo-banner {
     max-height: 100px;
 }
 
+.small-logo-company {
+    max-width: 150px;
+    max-height: 107px;
+}
+
+.logo-area {
+    display: table-cell;
+    height: 150px;
+    width: 150px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0px;
+}
+
