@@ -32,9 +32,15 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	 * @return void
 	 */
 	private function ensureLegacySummits () {
-		if(!Summit::get()->filter('Title:PartialMatch', 'San Diego')->first()) {
+		if(!Summit::get()->filterAny([
+				'Title:PartialMatch' => 'San Diego',
+				'Name:PartialMatch' => 'San Diego'
+		])->first()) {
+
 			$sanDiego = Summit::create([
 				'Title' => 'San Diego',
+				'Name' => 'San Diego',
+				'Location' => 'San Diego, CA',
 		        'SummitBeginDate' => '2012-10-15 00:00:00',
 		        'SummitEndDate' => '2012-10-18 00:00:00',
 		        'SubmissionBeginDate' => '2012-08-15 00:00:00',
@@ -51,9 +57,14 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			$sanDiego->write();
 			echo "Created San Diego summit!".$this->br();
 		}
-		if(!Summit::get()->filter('Title:PartialMatch', 'Portland')->first()) {
+		if(!Summit::get()->filterAny([
+				'Title:PartialMatch' => 'Portland',
+				'Name:PartialMatch' => 'Portland'
+		])->first()) {
 			$portland = Summit::create([
 				'Title' => 'Portland',
+				'Name' => 'Portland',
+				'Location' => 'Portland, OR',
 		        'SummitBeginDate' => '2013-04-15 00:00:00',
 		        'SummitEndDate' => '2013-04-18 00:00:00',
 		        'SubmissionBeginDate' => '2013-01-15 00:00:00',
@@ -70,25 +81,12 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			$portland->write();
 			echo "Created Portland summit!".$this->br();
 		}
-		if(!Summit::get()->filter('Title:PartialMatch', 'Atlanta')->first()) {
-			$atlanta = Summit::create([
-				'Title' => 'Atlanta',
-		        'SummitBeginDate' => '2013-05-05 00:00:00',
-		        'SummitEndDate' => '2013-05-08 00:00:00',
-		        'SubmissionBeginDate' => '2013-01-15 00:00:00',
-		        'SubmissionEndDate' => '2013-01-18 00:00:00',
-		        'VotingBeginDate' => '2013-02-20 00:00:00',
-		        'VotingEndDate' => '2013-02-25 00:00:00',
-		        'SelectionBeginDate' => '2013-03-15 00:00:00',
-		        'SelectionEndDate' => '2013-03-18 00:00:00',
-		        'RegistrationBeginDate' => '2013-04-01 00:00:00',
-		        'RegistrationEndDate' => '2013-04-10 00:00:00',
-		        'StartShowingVenuesDate' => '2013-01-01 00:00:00',
-		        'TimeZone' => '151'
-			]);
-			$atlanta->write();
-			echo "Created Atlanta summit!".$this->br();
-		}
+
+		// Clean up junk data from old summits
+		DB::query("UPDATE Summit SET Name = Title WHERE Name IS NULL");
+		DB::query("UPDATE Summit SET Title = Name WHERE Title IS NULL");
+		DB::query("UPDATE Summit SET SummitBeginDate = StartDate WHERE SummitBeginDate IS NULL");
+		DB::query("UPDATE Summit SET SummitEndDate = EndDate WHERE SummitEndDate IS NULL");
 
 	}
 
@@ -277,7 +275,14 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 
 			$material = $this->createLegacyVideoMaterial($originalPresentation, $v);
 			$material->write();
-			$v->write();
+
+			DB::query(sprintf(
+				"UPDATE PresentationMaterial SET Created = '%s', LastEdited = '%s' WHERE ID = '%s'",
+				$v->LastEdited,
+				$v->LastEdited,
+				$material->ID
+			));
+
 			echo "Created video." . $this->br();
 		}
 	}
