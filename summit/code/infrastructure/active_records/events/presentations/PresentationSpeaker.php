@@ -587,7 +587,7 @@ implements IPresentationSpeaker
             $size = ($img1->getWidth() < $img1->getHeight()) ? $img1->getWidth() : $img1->getHeight();
             $img1 = $img1->CroppedImage($size,$size);
             // we resize it if the photo is too large
-            $img1 = (($size - $width) < 200) ? $img1 : $img1->SetWidth($width);
+            $img1 = (($size - $width) < 200) ? $img1 : $img1->SetRatioSize($width,$width);
             return $img1->getAbsoluteURL();
         }
         if(!is_null($img2)  && $img2->exists() && Director::fileExists($img2->Filename))
@@ -596,7 +596,7 @@ implements IPresentationSpeaker
             $size = ($img2->getWidth() < $img2->getHeight()) ? $img2->getWidth() : $img2->getHeight();
             $img2 = $img2->CroppedImage($size,$size);
             // we resize it if the photo is too large
-            $img2 = (($img2->getWidth() - $width) < 200) ? $img2 : $img2->SetWidth($width);
+            $img2 = (($size - $width) < 200) ? $img2 : $img2->SetRatioSize($width,$width);
             return $img2->getAbsoluteURL();
         }
         elseif (!empty($twitter_name)) {
