@@ -52,7 +52,11 @@
                 <script type="application/javascript">
                     var summit =
                         {
-                            id:   $Top.Summit.ID,
+                            id:   $Summit.ID,
+                            link: "{$Summit.Link.JS}",
+                            schedule_link: "{$Summit.getScheduleLink.JS}",
+                            title: "{$Summit.Title.JS}",
+                            year: "{$Summit.getSummitYear().JS}",
                             dates : [],
                             events: [],
                             summit_types: {},
@@ -62,8 +66,10 @@
                             locations : {},
                             tags: {},
                             tracks : {},
+                            category_groups: {},
                             presentation_levels: {},
-                            current_user: null
+                            current_user: null,
+                            should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
                         };
 
                     <% if CurrentMember && CurrentMember.isAttendee($Top.Summit.ID) %>
