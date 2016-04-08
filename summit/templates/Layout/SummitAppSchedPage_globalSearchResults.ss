@@ -72,7 +72,7 @@
                             should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
                         };
 
-                    <% if CurrentMember && CurrentMember.isAttendee($Top.Summit.ID) %>
+                    <% if $CurrentMember && $CurrentMember.isAttendee($Top.Summit.ID) %>
                         <% with CurrentMember %>
                         summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}' };
                         <% end_with %>
@@ -126,8 +126,6 @@
                         color : "{$Color}",
                     };
                     <% end_loop %>
-
-
                     <% loop $Top.Summit.Types %>
                     summit.summit_types[{$ID}] =
                     {
@@ -192,7 +190,7 @@
                                     track_id : {$CategoryID},
                                     level : '{$Level}',
                                     <% end_if %>
-                                    <% if $Top.isEventOnMySchedule($ID) %>
+                                    <% if $CurrentMember && $CurrentMember.isOnMySchedule($ID) %>
                                     own      : true,
                                     <% else %>
                                     own      : false,

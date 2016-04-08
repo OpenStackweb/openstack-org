@@ -216,7 +216,9 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     }
 
     public function normalizeEvents($schedule, $summit) {
-        $events    = array();
+        $events         = array();
+        $current_member = Member::currentUser();
+        $is_attendee    = is_null($current_member)? false: $current_member->isAttendee($summit->ID);
 
         foreach($schedule as $e)
         {
@@ -240,7 +242,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 'summit_types_id'          => array(),
                 'category_group_ids'       => array(),
                 'tags_id'                  => array(),
-                'own'                      => self::isEventOnMySchedule($e->ID, $summit),
+                'own'                      => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
                 'favorite'                 => false,
                 'show'                     => true,
                 'headcount'                => intval($e->HeadCount),
@@ -304,8 +306,9 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         if(is_null($summit))
             return $this->notFound('summit not found!');
 
-        $events = array();
-
+        $events         = array();
+        $current_member = Member::currentUser();
+        $is_attendee    = is_null($current_member)? false: $current_member->isAttendee($summit->ID);
         foreach($this->summitevent_repository->searchBySummitAndTerm($summit,$term) as $e)
         {
             $entry = array
@@ -326,7 +329,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 'summit_types_id'    => array(),
                 'category_group_ids' => array(),
                 'tags_id'            => array(),
-                'own'                => self::isEventOnMySchedule($e->ID, $summit),
+                'own'                => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
                 'favorite'           => false,
                 'show'               => true
             );
@@ -493,13 +496,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
 
         return $this->ok(array('empty_spots' => $empty_spots));
-    }
-
-    public static function isEventOnMySchedule($event_id, Summit $summit)
-    {
-        $member = Member::currentUser();
-        if(is_null($member) || !$member->isAttendee($summit->ID)) return false;
-        return $member->getSummitAttendee($summit->ID)->isScheduled(intval($event_id));
     }
 
     public function addToSchedule() {

@@ -5,7 +5,6 @@
  */
 class SummitAppSchedPage extends SummitPage
 {
-
 }
 
 /**
@@ -241,11 +240,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $form = new SummitEventFeedbackForm($this, 'SummitEventFeedbackForm');
 
         return $form;
-    }
-
-    public function isEventOnMySchedule($event_id)
-    {
-        return SummitAppScheduleApi::isEventOnMySchedule($event_id, $this->Summit());
     }
 
     public function DoGlobalSearch(SS_HTTPRequest $request)

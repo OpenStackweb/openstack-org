@@ -14,6 +14,7 @@
             </div>
         </div>
         <hr/>
+
         <div class="title">$Event.Title</div>
         <div class="description col1">
             <% if $Event.Category %>
@@ -34,6 +35,30 @@
         </div>
 
         <div class="info col2">
+            <% if CurrentMember %>
+            <% if $Event.Summit.isAttendee() %>
+                <div class="info_item">
+                    <div id="remove_from_my_schedule" <% if not CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
+                        <span onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
+                            <i class="fa fa-2x fa-check-circle icon-own-event"></i>
+                            My&nbsp;calendar
+                        </span>
+                    </div>
+                    <div id="add_to_my_schedule" <% if CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
+                        <span onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
+                            <i class="fa fa-2x fa-plus-circle icon-foreign-event" ></i>
+                            My&nbsp;calendar
+                        </span>
+                    </div>
+                </div>
+            <% else %>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p>Hello {$CurrentMember.FullName} ! registration process for <strong>$Top.Summit.Title</strong> Summit is opened from <strong>$Top.Summit.getBeginDateDMY</strong> to <strong>$Top.Summit.getEndDateDMY</strong>.</p>
+                    <p>Are you a Summit Attendee? Add your Order # to unlock features only available for Registered Summit Attendees <a href="profile/attendeeInfoRegistration" class="alert-link">here</a></p>
+                </div>
+            <% end_if %>
+            <% end_if %>
             <div class="info_item">
                 <div class="info_item_icon"><i class="fa fa-clock-o icon-clock"></i></div>
                 <div class="info_item_text">$Event.DateNice()</div>
