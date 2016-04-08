@@ -22,7 +22,7 @@
 						<li>10:00 am - 4:00 PM CDT</li>
 						<li>JW Marriott Hotel, Level 3</li>
 						<li>
-							<a href="https://www.eventbrite.com/e/upstream-university-openstack-summit-austin-tickets-22669105906" target="_blank" class="rsvp-link">RSVP Required</a>
+							<a href="https://www.eventbrite.com/e/upstream-university-openstack-summit-austin-tickets-22669105906" target="_blank" class="rsvp-link" style="color: red;">At Max Capacity</a>
 						</li>
 					</ul>
 				</div>
@@ -44,7 +44,7 @@
 						<li>9:30am-12:30pm</li>
 						<li>JW Marriott, Level 3, Salon D</li>
 						<li>
-							<a href="https://commandpresenceworkshop.eventbrite.com/" target="_blank" class="rsvp-link">RSVP Required</a>
+							<a href="https://commandpresenceworkshop.eventbrite.com/" target="_blank" class="rsvp-link" style="color: red;">At Max Capacity</a>
 						</li>
 					</ul>
 				</div>
@@ -80,18 +80,18 @@
 			<div class="row single-diversity-row">
 				<div class="col-sm-4">
 					<ul>
-						<li><strong>NCWIT Male Allies Workshop</strong></li>
+						<li><strong>Champions for Change: Engaging Male Advocates for Diversity and Inclusion</strong></li>
 						<li>Tuesday, April 26</li>
 						<li>12:05 - 2:40 pm CDT</li>
 						<li>Hilton Austin, Level 6, Salon F</li>
 						<li>
-							<a href="#" target="_blank" class="rsvp-link">RSVP Required (coming soon)</a>
+							<a href="https://maleadvocatesfordiversity.eventbrite.com" target="_blank" class="rsvp-link">RSVP Required</a>
 						</li>
 					</ul>
 				</div>
 				<div class="col-sm-8">
 					<p>
-						The National Center for Women in Information Technology (NCWIT) will join us at the OpenStack Summit Austin to discuss why it matters and how to advocate for more inclusive environments that foster innovation in the technical environment, led by NCWIT research scientist <a href="https://www.ncwit.org/profile/brad-mclain">Dr. Brad McLain</a>. This session welcomes male allies who want to make a difference in the OpenStack community. Please grab a boxed lunch on Level 4 before you join us on Level 6. More details and an RSVP will be made available soon. 
+						A 2-hour lunch workshop on the research and practice of male advocacy, including why it matters and how to take action. This spirited workshop will involve discussions, activities, resources, and key takeaways for both men and women to advocate for more inclusive environments that foster innovation in the technical environment. Led by National Center for Women and IT research scientist <a href="https://www.ncwit.org/profile/brad-mclain" target="_blank">Dr. Brad McLain</a>.
 					</p>
 				</div>
 			</div>
@@ -99,7 +99,7 @@
 			<div class="row single-diversity-row">
 				<div class="col-sm-4">
 					<ul>
-						<li><strong>NCWIT Male Allies Panel</strong></li>
+						<li><strong>The Diversity of Innovation</strong></li>
 						<li>Tuesday, April 26</li>
 						<li>4:40 - 5:20 pm CDT</li>
 						<li>ACC, Level 4, Ballroom G</li>
@@ -107,7 +107,7 @@
 				</div>
 				<div class="col-sm-8">
 					<p>
-						An NCWIT-supported panel during the OpenStack Summit, which would focus on diversity and inclusion topics, including male advocacy, for the general OpenStack community. No RSVP required; see the Summit schedule.
+						This panel will focus on the links between diversity and inclusion strategies with technical innovation, talent recruiting and retention, male advocacy, and the OpenStack community. The panelists were nominated by the Women of OpenStack.
 					</p>
 				</div>
 			</div>
@@ -140,6 +140,28 @@
 				</div>
 			</div>
 
+			<div class="row single-diversity-row">
+				<div class="col-sm-4">
+					<ul>
+						<li><strong>Gender-diversity Analysis of Technical Contributions in the OpenStack Projects</strong></li>
+						<li>Thursday, April 28</li>
+						<li>11:50 - 12:30 pm CDT</li>
+						<li>ACC, Level 4, MR 15</li>
+					</ul>
+				</div>
+				<div class="col-sm-8">
+					<p>
+						Women are half of the population in the world, but they are still under represented in the tech world industry nowadays. While there are clear actions in favor of attracting more female developers in order to bring more diversity to the project, the OpenStack Foundation shows a similar trend with this respect.
+					</p>
+					<p>
+						Some numbers can be easily extracted from the Women of OpenStack group in Linkedin with more than 600 members and 137 discussion. Specific diversity-focused panels during the summits. Women of OpenStack mailing list with close 380 emails in 2015 and 90 different people commenting and changing ideas [own analysis]
+					</p>
+					<p>
+						This talk will cover the journey of the OpenStack ecosystem gender diversity since it was born till nowadays. This will focus on the analysis of the code review and code development activity. It is intended to be a quantitative analysis plus specific manual polishing process to help in the accuracy of the data. As this is mainly focused on the analysis of Git and Gerrit repositories, this talk will open further paths of analysis for those interested in this type of analysis.
+					</p>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -155,7 +177,7 @@
 						<li>6:00 - 9:00 PM CDT</li>
 						<li><a href="http://www.thebelmontaustin.com/" target="_blank">The Belmont Austin</a></li>
 						<li>
-							<a href="#" target="_blank" class="rsvp-link">RSVP Required (coming soon)</a>
+							<a href="https://woopresummitsocial.eventbrite.com" target="_blank" class="rsvp-link">RSVP Required</a>
 						</li>
 					</ul>
 				</div>
@@ -180,10 +202,52 @@
 				</div>
 				<div class="col-sm-8">
 					<p>
-						Each Summit, the Women of OpenStack gather to hear from influential speakers and discuss how to help support women in the OpenStack community.
+						Join the Women of OpenStack on Tuesday morning before the keynote session to hear from other women working in the OpenStack community and discuss how we can help support each other. During the session we'll celebrate our accomplishments over the past year and hear lightning talks from three Women of OpenStack who have recently taken on new roles within the OpenStack community. The speakers and will share their insights on how you can accelerate your learning curve to navigate and become an influencer within the OpenStack community. 
 					</p>
 					<p>
-						Details and agenda will be announced soon. Breakfast and coffee will be provided.
+						<ul>
+							<li>&#8226; Allison Randal, OpenStack Board Member</li>
+							<li>&#8226; Lana Brindley, Project Technical Lead</li>
+							<li>&#8226; Kendall Nelson, OpenStack Developer</li>
+						</ul>
+					</p>
+					<p>
+						We'll break into small groups to discuss the key lightening talk messages and identify actions for the Women of OpenStack to achieve over the next six months. 
+					</p>
+					<p>
+						Breakfast and coffee will be provided. 
+					</p>
+				</div>
+			</div>
+
+			<div class="row single-diversity-row">
+				<div class="col-sm-4">
+					<ul>
+						<li><strong>Fostering Full Equality, organized by the Women of OpenStack</strong></li>
+						<li>Thursday, April 28</li>
+						<li>1:30 - 2:10 PM CDT</li>
+						<li>ACC, Level 4, MR 15</li>
+					</ul>
+				</div>
+				<div class="col-sm-8">
+					<p>
+						Following up on the themes related to gender equality presented at the previous Summit talks sponsored by The Women of OpenStack working group, this session will focus on our vision of a world where the OpenStack community is truly and completely blind to meaningless differences in gender, color, creed and culture. What will this new world look like? How will it differ from the current one? A panel of people from all walks of life will explore what that future is and what we can do as a community as a whole to achieve it.
+					</p>
+				</div>
+			</div>
+
+			<div class="row single-diversity-row">
+				<div class="col-sm-4">
+					<ul>
+						<li><strong>Newcomers Need You, How to Be a Good Mentor</strong></li>
+						<li>Thursday, April 28</li>
+						<li>2:20 - 3:00 PM CDT</li>
+						<li>ACC, Level 4, MR 15</li>
+					</ul>
+				</div>
+				<div class="col-sm-8">
+					<p>
+						You still remember the first time you've heard the word OpenStack, the efforts you had to make to wrap your head around it and to get your first patch merged. Now you know enough to be able to teach other people and put them up to speed. You would like to be a mentor but you are not sure about how time consuming it might be, you still have doubts and questions. In this session we will try to answer them. We will give advices based on our experience mentoring in the Outreachy and Google Summer of Code programs, suggest some strategies and list the most common mistakes a new mentor does.
 					</p>
 				</div>
 			</div>
