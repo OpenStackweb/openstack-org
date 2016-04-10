@@ -4,7 +4,6 @@
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-sm-12">
                 <div class="intro-message">
-                    <img src="/themes/openstack/static/images/mitaka-logo.png" alt="" style="margin-bottom: 20px;">
                     <h1>$PromoIntroMessage</h1>
                 </div>
                 <div class="promo-btn-wrapper">
