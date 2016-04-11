@@ -171,5 +171,5 @@
             </div>
         </div>
     </div>
-   <script src="summit/javascript/schedule/admin/schedule-admin-view.bundle.js"  type="application/javascript"></script>
+   <script src="summit/javascript/schedule/admin/schedule-admin-view.bundle.js?t={$Top.Time}"  type="application/javascript"></script>
 </div>
