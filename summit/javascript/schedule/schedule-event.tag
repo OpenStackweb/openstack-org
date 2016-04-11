@@ -21,11 +21,11 @@
                         </div>
                         <div class="col-sm-3 my-schedule-container" if={ parent.summit.current_user !== null } >
                             <span if={ !own } onclick={ addToMySchedule } title="add to my schedule" class="icon-event-action">
-                                <i class="fa fa-plus-circle icon-foreign-event" ></i>
+                                <i class="fa fa-plus-circle icon-foreign-event myschedule-icon" ></i>
                                 My&nbsp;calendar
                             </span>
                             <span if={ own } onclick={ removeFromMySchedule } title="remove from my schedule" class="icon-event-action">
-                                <i class="fa fa-check-circle icon-own-event"></i>
+                                <i class="fa fa-check-circle icon-own-event myschedule-icon"></i>
                                 My&nbsp;calendar
                             </span>
                         </div>
@@ -130,7 +130,7 @@
     // show event details handler (jquery)
     $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
 
-            if($(e.target).hasClass('icon-event-action')){
+            if($(e.target).is('.icon-event-action, .myschedule-icon')){
                 return false;
             }
 
