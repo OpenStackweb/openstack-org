@@ -577,8 +577,9 @@ implements IPresentationSpeaker
     }
 
     public function ProfilePhoto($width=100){
-        $img1     = $this->Photo();
-        $member   = $this->Member();
+        $generic_url =  Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';
+        $img1        = $this->Photo();
+        $member      = $this->Member();
         $img2     = !is_null($member) && $member->ID > 0 ? $member->Photo(): null;
         $twitter_name = $this->TwitterName;
         if(!is_null($img1)  && $img1->exists() && Director::fileExists($img1->Filename))
@@ -588,7 +589,7 @@ implements IPresentationSpeaker
             $img1 = $img1->CroppedImage($size,$size);
             // we resize it if the photo is too large
             $img1 = (($size - $width) < 200) ? $img1 : $img1->SetRatioSize($width,$width);
-            return $img1->getAbsoluteURL();
+            return is_null($img1)?$generic_url:$img1->getAbsoluteURL();
         }
         if(!is_null($img2)  && $img2->exists() && Director::fileExists($img2->Filename))
         {
@@ -597,17 +598,14 @@ implements IPresentationSpeaker
             $img2 = $img2->CroppedImage($size,$size);
             // we resize it if the photo is too large
             $img2 = (($size - $width) < 200) ? $img2 : $img2->SetRatioSize($width,$width);
-            return $img2->getAbsoluteURL();
+            return is_null($img2)?$generic_url:$img2->getAbsoluteURL();
         }
         elseif (!empty($twitter_name)) {
-            if ($width < 100) {
-                return 'https://twitter.com/'.trim(trim($twitter_name,'@')).'/profile_image?size=normal';
-            } else {
-                return 'https://twitter.com/'.trim(trim($twitter_name,'@')).'/profile_image?size=bigger';
-            }
-        } else {
-            return Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';
+            if ($width < 100)
+                return 'https://twitter.com/' . trim(trim($twitter_name, '@')) . '/profile_image?size=normal';
+            return 'https://twitter.com/' . trim(trim($twitter_name, '@')) . '/profile_image?size=bigger';
         }
+        return $generic_url;
     }
 
     public function getShortBio($length = 200){
