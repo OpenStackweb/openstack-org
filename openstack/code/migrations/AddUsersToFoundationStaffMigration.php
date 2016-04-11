@@ -32,6 +32,7 @@ final class AddUsersToFoundationStaffMigration extends AbstractDBMigrationTask
 
         foreach ($staff_members as $order => $member_id) {
             $member = $member_repository->getById($member_id);
+            $order++;
             $group->Members()->add($member, array('SortOrder' => $order));
         }
 
@@ -41,6 +42,7 @@ final class AddUsersToFoundationStaffMigration extends AbstractDBMigrationTask
 
         foreach ($sup_members as $order => $member_id) {
             $member = $member_repository->getById($member_id);
+            $order++;
             $group->Members()->add($member, array('SortOrder' => $order));
         }
 

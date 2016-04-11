@@ -14,13 +14,9 @@
     </div>
     <div class="col-sm-10 staff-text-wrapper">
         <h3>$FullName</h3>
-        <% if TypeOfDirector %>
-            <h5>Type of Director</h5>
-            <div>$TypeOfDirector&nbsp;</div>
-        <% end_if %>
-        <% if CurrentCompanies %>
-            <h5>Company</h5>
-            <div>$CurrentCompanies&nbsp;</div>
+        <% if CurrentJobTitle %>
+            <h5>Job Title</h5>
+            <div>$CurrentJobTitle&nbsp;</div>
         <% end_if %>
         <% if Bio %>
             <h5>Bio</h5>
