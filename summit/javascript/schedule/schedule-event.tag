@@ -1,7 +1,7 @@
 <schedule-event>
     <div if={ show } id="event_{ id }" class="row event-row">
         <div class="col-sm-12">
-            <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids) }" data-event-id="{ id }">
+            <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids, type_id) }" data-event-id="{ id }">
                 <div class="event-content">
                     <div class="row row_location">
                         <div class="col-sm-3 col-time">
@@ -182,11 +182,10 @@
         return false;
     }
 
-    eventColor(category_group_ids){
+    eventColor(category_group_ids, type_id) {
         if(category_group_ids.length == 0){
-            return self.default_event_color;
+            return self.summit.event_types[type_id].color
         }
-
         return self.summit.category_groups[category_group_ids[0]].color;
     }
 
