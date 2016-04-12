@@ -40,10 +40,10 @@
     <% end_loop %>
 </div>
 <script type="text/javascript">
-    var coordinates = [];
+    var locations = [];
     <% loop $Summit.PrimaryVenues() %>
         <% if $Lat && $Lng %>
-            coordinates.push({id: {$ID}, lat: {$Lat}, lng: {$Lng}, title: "{$Name.JS}"});
+            locations.push({id: {$ID}, lat: {$Lat}, lng: {$Lng}, title: "<h5>{$Name.JS}</h5>", description: "{$Description.JS}", address: "{$Address.JS}"});
         <% end_if %>
     <% end_loop %>
 </script>
