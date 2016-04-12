@@ -67,6 +67,16 @@ class SummitEvent extends DataObject implements ISummitEvent
         'Type.Type'              => 'Event Type',
     );
 
+    public function getTitle()
+    {
+        return html_entity_decode($this->getField('Title'));
+    }
+
+    public function getRSVPLink()
+    {
+        return html_entity_decode($this->getField('RSVPLink'));
+    }
+
     public function SummitTypesLabel()
     {
         $label =  '';

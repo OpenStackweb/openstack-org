@@ -214,10 +214,10 @@ final class SummitService implements ISummitService
             }
 
             $event->SummitID         = $summit->getIdentifier();
-            $event->Title            = $event_data['title'];
-            $event->RSVPLink         = $event_data['rsvp_link'];
+            $event->Title            = html_entity_decode($event_data['title']);
+            $event->RSVPLink         = html_entity_decode($event_data['rsvp_link']);
             $event->HeadCount        = intval($event_data['headcount']);
-            $event->ShortDescription = $event_data['short_description'];
+            $event->ShortDescription = html_entity_decode($event_data['short_description']);
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
@@ -312,7 +312,7 @@ final class SummitService implements ISummitService
             if(is_null($track)) throw new NotFoundEntityException('Track');
 
             $event->CategoryID = $track->ID;
-            $event->AttendeesExpectedLearnt = $event_data['expect_learn'];
+            $event->AttendeesExpectedLearnt = html_entity_decode($event_data['expect_learn']);
             $event->Level = $event_data['level'];
         }
         return $event;
@@ -391,10 +391,10 @@ final class SummitService implements ISummitService
                     throw new EntityValidationException('Start Date should be inside Summit Duration!');
             }
 
-            $event->Title            = $event_data['title'];
-            $event->RSVPLink         = $event_data['rsvp_link'];
+            $event->Title            = html_entity_decode($event_data['title']);
+            $event->RSVPLink         = html_entity_decode($event_data['rsvp_link']);
             $event->HeadCount        = intval($event_data['headcount']);
-            $event->ShortDescription = $event_data['short_description'];
+            $event->ShortDescription = html_entity_decode($event_data['short_description']);
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];

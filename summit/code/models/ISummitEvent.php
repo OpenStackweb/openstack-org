@@ -32,6 +32,11 @@ interface ISummitEvent extends IEntity
     /**
      * @return string
      */
+    public function getRSVPLink();
+
+    /**
+     * @return string
+     */
     public function getDescription();
 
     /**
