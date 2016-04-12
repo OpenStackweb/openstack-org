@@ -41,7 +41,6 @@
                <li><a href="/summit/austin-2016/openstack-academy/"><i class="fa fa-graduation-cap"></i>OpenStack Academy</a></li>
                 <li><a href="/summit/austin-2016/guide-to-austin/"><i class="fa fa-map"></i>Guide To Austin</a></li>
                <li><a href="/summit/austin-2016/austin-and-travel/#hotels"><i class="fa fa-h-square"></i>Hotels</a></li>
-               <li><a href="/summit/austin-2016/austin-and-travel/#visa"><i class="fa fa-globe"></i>Visa Invitation</a></li>
                 <li><a href="/summit/austin-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
             </ul>
             <div class="schedule-square">

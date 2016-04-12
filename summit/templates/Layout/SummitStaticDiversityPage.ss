@@ -41,7 +41,7 @@
 					<ul>
 						<li><strong>Command Presence Workshop</strong></li>
 						<li>Sunday, April 24</li>
-						<li>9:30am-12:30pm</li>
+						<li>12:00pm-3:00pm</li>
 						<li>JW Marriott, Level 3, Salon D</li>
 						<li>
 							<a href="https://commandpresenceworkshop.eventbrite.com/" target="_blank" class="rsvp-link" style="color: red;">At Max Capacity</a>
