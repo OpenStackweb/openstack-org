@@ -313,6 +313,7 @@ final class SummitService implements ISummitService
 
             $event->CategoryID = $track->ID;
             $event->AttendeesExpectedLearnt = $event_data['expect_learn'];
+            $event->Level = $event_data['level'];
         }
         return $event;
     }

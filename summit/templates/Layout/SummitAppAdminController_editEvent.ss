@@ -121,7 +121,20 @@
                             <% end_loop %>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3 level_container" style="display:none;">
+                        <label for="level">Level</label>
+                        <select class="form-control" id="level" name="level">
+                            <option value="">-- Select a Level --</option>
+                            <option value="Beginner" <% if $Top.Event.isPresentation() && $Top.Event.Level == Beginner %> selected <% end_if %>>Beginner</option>
+                            <option value="Intermediate" <% if $Top.Event.isPresentation() && $Top.Event.Level == Intermediate %> selected <% end_if %>>Intermediate</option>
+                            <option value="Advanced" <% if $Top.Event.isPresentation() && $Top.Event.Level == Advanced %> selected <% end_if %>>Advanced</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div classs="row">
+                    <div class="col-md-12">
                         <label>Feedback</label>
                         <div class="checkbox">
                             <label> <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>> Allow Feedback </label>
@@ -230,18 +243,19 @@
         <% end_if %>
 
         $(document).ready(function(){
-        $("#location").chosen();
-        $("#event_type").chosen();
-        <% if $Top.Event %>
-        <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' %>
-        $('.speakers_container').show();
-        $('.track_container').show();
-        $('#expect_learn_container').show();
-        <% end_if %>
-        <% if $Top.Event.Type.Type == 'Keynotes' %>
-        $('.moderator_container').show();
-        <% end_if %>
-        <% end_if %>
+            $("#location").chosen();
+            $("#event_type").chosen();
+            <% if $Top.Event %>
+                <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' %>
+                    $('.speakers_container').show();
+                    $('.track_container').show();
+                    $('.level_container').show();
+                    $('#expect_learn_container').show();
+                <% end_if %>
+                <% if $Top.Event.Type.Type == 'Keynotes' %>
+                    $('.moderator_container').show();
+                <% end_if %>
+            <% end_if %>
         });
     </script>
 
