@@ -98,4 +98,13 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
         if(!$this->isAttendee($event->SummitID)) return false;
         return $this->owner->getSummitAttendee($event->SummitID)->isScheduled(intval($event_id));
     }
+
+    public function updateCMSFields(FieldList $fields)
+    {
+        $fields->removeByName("SummitAttendance");
+        // event types
+        $config = GridFieldConfig_RecordEditor::create();
+        $gridField = new GridField('Tickets', 'Tickets', $this->owner->SummitAttendance(), $config);
+        $fields->addFieldToTab('Root.SummitAttendance', $gridField);
+    }
 }

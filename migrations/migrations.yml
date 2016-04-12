@@ -27,3 +27,5 @@ migrations:
   - SummitSecondBreakoutEmailMigration
   - CreateUserCommitteeGroupMigration
   - AddUsersToFoundationStaffMigration
+  - RemoveSortColumnFromGroups
+  - SummitAttendeeDropIndexMigration
