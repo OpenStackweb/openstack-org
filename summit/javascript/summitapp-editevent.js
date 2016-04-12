@@ -229,6 +229,10 @@ $(document).ready(function(){
 
     var form = $('#edit-event-form');
 
+    jQuery.validator.addMethod("no_rel_urls", function(value, element) {
+        return this.optional(element) || !(/(?=.*href\s*=\s*"(?!http))/.test(value));
+    }, "We don't allow relative urls in the text.");
+
     //validation
     form_validator = form.validate({
         onfocusout: false,
@@ -236,7 +240,8 @@ $(document).ready(function(){
         ignore: [],
         rules: {
             title: {required: true},
-            short_description: {required: true},
+            short_description: {required: true, no_rel_urls: true},
+            expect_learn: {no_rel_urls: true},
             rsvp_link: { url : true },
             headcount: { number: true },
             event_type: { required: true },
