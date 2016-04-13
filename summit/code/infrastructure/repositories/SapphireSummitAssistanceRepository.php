@@ -143,20 +143,41 @@ SQL;
         return $result;
     }
 
-    public function getRoomsBySummitAndDay($summit_id,$date)
+    public function getRoomsBySummitAndDay($summit_id, $date, $event_type = 'all')
     {
 
         $query = <<<SQL
 SELECT E.ID AS id ,E.StartDate AS start_date, E.EndDate AS end_date, 'K' AS code, E.Title AS event,
-L.Name AS room, COUNT(PS.PresentationSpeakerID) AS speakers, E.HeadCount AS headcount, COUNT(A.ID) AS total
-FROM Presentation AS P
+L.Name AS room, R.Capacity AS capacity,COUNT(DISTINCT(SA.SpeakerID),SA.SpeakerID IS NOT NULL) AS speakers, E.HeadCount AS headcount, COUNT(A.ID) AS total
+FROM SummitEvent AS E
+LEFT JOIN Presentation AS P ON P.ID = E.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
-INNER JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
-LEFT JOIN SummitEvent AS E ON E.ID = P.ID AND E.SummitID = {$summit_id}
+LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
 LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
+LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
 LEFT JOIN SummitAttendee_Schedule AS A ON A.SummitEventID = E.ID
-WHERE DATE(E.StartDate) = '{$date}'
-GROUP BY P.ID
+WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
+SQL;
+        if ($event_type == 'presentation') {
+            $query .= <<<SQL
+ AND E.ClassName = 'Presentation'
+SQL;
+        }
+
+        $query .= <<<SQL
+ GROUP BY E.ID
+SQL;
+
+        return DB::query($query);
+    }
+
+    public function getAttendeesWithCalendar($summit_id)
+    {
+        $query = <<<SQL
+SELECT COUNT(DISTINCT(ASched.SummitAttendeeID)) AS calcount
+FROM SummitAttendee_Schedule AS ASched
+LEFT JOIN SummitEvent AS E ON E.Id = ASched.SummitEventID
+WHERE E.SummitID = {$summit_id} GROUP BY ASched.SummitAttendeeID
 SQL;
 
         return DB::query($query);

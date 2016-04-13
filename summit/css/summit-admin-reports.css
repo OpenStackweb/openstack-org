@@ -22,3 +22,7 @@ th .fa {
 #page-content-wrapper {
     min-width: 83%;
 }
+
+#event_type {
+    margin-bottom: 15px;
+}

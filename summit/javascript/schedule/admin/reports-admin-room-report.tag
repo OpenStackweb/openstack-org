@@ -5,18 +5,30 @@
 
 <reports-admin-room-report>
 
+    <div class="row">
+        <div class="col-md-6">
+            <select id="event_type">
+                <option value="presentation">Presentations Only</option>
+                <option value="all">All Events</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            Users with calendar: { calendar_count }
+        </div>
+    </div>
     <div class="panel panel-default" each="{ key, day in report_data }">
         <div class="panel-heading">{ key }</div>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Time</th>
+                    <th width="10%">Time</th>
                     <th>Code</th>
-                    <th>Event</th>
-                    <th>Room</th>
+                    <th width="50%">Event</th>
+                    <th width="10%">Room</th>
+                    <th>Capacity</th>
                     <th>Speakers</th>
-                    <th>HeadCount</th>
+                    <th width="10%">HeadCount</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -26,6 +38,7 @@
                     <td>{ event.code }</td>
                     <td>{ event.title }</td>
                     <td>{ event.room }</td>
+                    <td>{ event.capacity }</td>
                     <td>{ event.speakers }</td>
                     <td><input type="text" class="headcount" value={ event.headcount } /></td>
                     <td>{ event.total }</td>
@@ -38,6 +51,7 @@
         this.dispatcher      = opts.dispatcher;
         this.summit_id       = opts.summit_id;
         this.report_data     = [];
+        this.calendar_count  = 0;
         var self             = this;
 
 
@@ -47,13 +61,19 @@
             $('.reports-wrapper').on('change','input',function(){
                 $(this).parents('tr').addClass('changed');
             });
+
+            $('#event_type').change(function(){
+                self.getReport();
+            });
         });
 
         getReport() {
             $('body').ajax_loader();
+            var event_type = $('#event_type').val();
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {}, function(data){
-                self.report_data = data;
+            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type}, function(data){
+                self.report_data = data.report;
+                self.calendar_count = data.calendar_count;
                 self.update();
                 $('body').ajax_loader('stop');
             });

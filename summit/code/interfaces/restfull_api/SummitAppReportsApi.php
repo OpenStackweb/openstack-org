@@ -174,6 +174,9 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         {
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
+            $query_string = $request->getVars();
+            $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : '';
+
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
             $days = $summit->getDates();
@@ -181,7 +184,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $report_array = array();
 
             foreach($days as $day) {
-                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date);
+                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type);
                 $report_array[$day->Label] = array();
                 foreach ($day_report as $rooms) {
 
@@ -192,6 +195,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                         'code'       => 'K',
                         'title'      => $rooms['event'],
                         'room'       => $rooms['room'],
+                        'capacity'   => $rooms['capacity'],
                         'speakers'   => intVal($rooms['speakers']),
                         'headcount'  => intVal($rooms['headcount']),
                         'total'      => intVal($rooms['total'])
@@ -199,7 +203,11 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                 }
             }
 
-            echo json_encode($report_array);
+            $calendar_count = $this->assistance_repository->getAttendeesWithCalendar($summit_id);
+            $return_array['calendar_count'] = $calendar_count->value();
+            $return_array['report'] = $report_array;
+
+            echo json_encode($return_array);
         }
         catch(NotFoundEntityException $ex2)
         {
