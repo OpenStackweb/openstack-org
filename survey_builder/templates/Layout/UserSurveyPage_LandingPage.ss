@@ -1,7 +1,7 @@
 <style>
     .hero-survey {
         background-color: transparent;
-        background-image: url('themes/openstack/images/user-survey/report_cover_image.jpg');
+        background-image: url('assets/survey/Crowd-General-Session-3.jpg');
         background-repeat: no-repeat;
         background-position: left center;
         background-attachment: scroll;
@@ -36,18 +36,16 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <h3>OpenStack users share their opinions and deployment choices to inform the roadmap</h3>
+            <h3>See the OpenStack community’s opinions, adoption and technology choices</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <p>
-                Read more from the sixth survey of OpenStack users since April 2013, with a goal of better
-                understanding attitudes, organizational profiles, use cases, and technology choices across the
-                community’s various deployment stages and sizes.
+                Read more from the seventh survey of OpenStack users since April 2013, with a goal of better understanding attitudes, organizational profiles, use cases, and technology choices across the community’s various deployment stages and sizes.
             </p>
             <p>
-                <a class="roundedButton" href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf" target="_blank">Download the report</a>
+                <a class="roundedButton" href="http://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf" target="_blank">Download the April 2016 Report</a>
             </p>
         </div>
     </div>
@@ -63,6 +61,8 @@
             </p>
             <ul class="list-unstyled">
                 <li>
+                    <a href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf">October 2015 Full report</a>
+                <li>
                     <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
                        target="_blank">May 2015 Demographics</a></li>
                 <li>
@@ -77,6 +77,7 @@
         </div>
     </div>
     <!-- end - user survey report -->
+    <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
     <hr/>
     <div class="row">
 
@@ -97,18 +98,20 @@
                 <p>$LoginPageSlide3Content</p>
             </div>
         </div>
-
     </div>
-    $LoginPageContent
-    <hr/>
+    <% end_if %>
+    <% if  $LoginPageContent %>
+     $LoginPageContent
+        <hr/>
+    <% end_if %>
+    <% if not $Top.SurveyTemplate.isVoid && not $CurrentMember %>
     <h1>Get Started</h1>
     <div class="row">
         <div class="col-lg-6">
             <h3>Already have an OpenStack Foundation login?</h3>
             <div class="survey-login-wrapper">
-                <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$BackURL}" method="post"
+                <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Link}" method="post"
                       enctype="application/x-www-form-urlencoded">
-                    <input type="hidden" name="fragment" id="fragment"/>
                     <div class="Actions">
                         <input class="action " id="MemberLoginForm_LoginForm_action_dologin" type="submit"
                                name="action_dologin" value="Log in" title="Log in"/>
@@ -125,6 +128,7 @@
             </div>
         </div>
     </div>
+    <% end_if %>
     <script>
         $(function () {
             var param = $('#fragment');

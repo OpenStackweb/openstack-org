@@ -208,8 +208,12 @@ class SurveyPage_Controller extends Page_Controller
                 'Survey' => $current_survey,
             ))->renderWith(array('Surveys_CurrentSurveyContainer', 'Page'));
         }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->LandingPage();
+        }
         catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::WARN);
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->httpError(404, "Survey not found!");
         }
     }
