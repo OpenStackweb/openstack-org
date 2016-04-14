@@ -29,4 +29,14 @@ interface ICertifiedOpenStackAdministrator extends IEntity
      * @return ICertifiedOpenStackAdministratorExam|null
      */
     public function getExamByExternalId($external_id);
+
+    /**
+     * @return bool
+     */
+    public function hasAvailableCertifications();
+
+    /**
+     * @return COACertification|null
+     */
+    public function getLatestCertification();
 }

@@ -16,19 +16,26 @@ interface ICertifiedOpenStackAdministratorExam extends IEntity
 {
     /**
      * @param string $status
-     * @param string $pass_date
-     * @param string $cert_nbr
-     * @param string $code
      * @param string $modified_date
-     * @param string $expiration_date
-     * @throws EntityValidationException
+     * @param string $exam_expiration_date
+     * @param string $pass_date
+     * @param string $code
+     * @param string $cert_nbr
+     * @param string $cert_expiration_date
+     * @param string $cert_status
      * @return $this
+     * @throws EntityValidationException
      */
-    public function update($status, $pass_date, $cert_nbr, $code, $modified_date, $expiration_date);
+    public function update($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr, $cert_expiration_date, $cert_status);
 
     /**
      * @param string $status
      * @return bool
      */
     public function isValidStatus($status);
+
+    /**
+     * @return COACertification
+     */
+    public function getCertification();
 }

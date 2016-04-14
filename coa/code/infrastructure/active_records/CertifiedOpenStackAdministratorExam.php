@@ -20,18 +20,21 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
 {
     private static $db = array
     (
-        'Code'                 => 'Varchar(255)',
-        'CertificationNumber'  => 'Varchar(255)',
-        'ExternalID'           => 'Varchar(255)',
-        'ExpirationDate'       => 'SS_Datetime',
-        'PassFailDate'         => 'SS_Datetime',
-        'ModifiedDate'         => 'SS_Datetime',
-        'Status'               => "Enum('New,Pending,Pass,No Pass','New')",
+        'ExternalID'                   => 'Varchar(255)',
+        'ExpirationDate'               => 'SS_Datetime',
+        'PassFailDate'                 => 'SS_Datetime',
+        'ModifiedDate'                 => 'SS_Datetime',
+        'Status'                       => "Enum('New,Pending,Pass,No Pass','New')",
+        'Code'                         => 'Varchar(255)',
+        'CertificationNumber'          => 'Varchar(255)',
+        'CertificationStatus'          => "Enum('None,Achieved,InProgress,Expired,Renewed,In Appeals,Revoked','None')",
+        'CertificationExpirationDate'  => "SS_Datetime",
     );
 
 
     public static $valid_status = array('New','Pending','Pass','No Pass');
-
+    public static $valid_certification_status = array('Achieved','InProgress','Expired','Renewed','In Appeals','Revoked');
+    public static $approved_certification_status = array('Renewed', 'Achieved', 'InProgress');
     private static $has_one = array
     (
         'Owner' => 'Member',
@@ -46,28 +49,41 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
     }
 
     /**
-     * @param array|string $status
-     * @param string $pass_date
-     * @param string $cert_nbr
-     * @param string $code
+     * @param string $status
      * @param string $modified_date
-     * @param string $expiration_date
+     * @param string $exam_expiration_date
+     * @param string $pass_date
+     * @param string $code
+     * @param string $cert_nbr
+     * @param string $cert_expiration_date
+     * @param string $cert_status
      * @return $this
      * @throws EntityValidationException
      */
-    public function update($status, $pass_date, $cert_nbr, $code, $modified_date, $expiration_date)
+    public function update($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr,$cert_expiration_date, $cert_status)
     {
         if(!$this->isValidStatus($status)) throw new EntityValidationException(sprintf("invalid status %s", $status));
         $this->Status              = $status;
-        $this->CertificationNumber = $cert_nbr;
-        $this->Code                = $code;
+
         $this->ModifiedDate        = $modified_date;
+        if(!empty($code))
+            $this->Code = $code;
 
         if(!empty($expiration_date))
             $this->ExpirationDate = $expiration_date;
 
         if(!empty($pass_date))
             $this->PassFailDate = $pass_date;
+
+        if(!empty($cert_nbr))
+            $this->CertificationNumber = $cert_nbr;
+
+        if(!empty($cert_status))
+            $this->CertificationStatus = $cert_status;
+
+        if(!empty($cert_expiration_date))
+            $this->CertificationExpirationDate = $cert_expiration_date;
+
         return $this;
     }
 
@@ -77,5 +93,15 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
      */
     public function isValidStatus($status){
         return in_array($status, self::$valid_status);
+    }
+
+    /**
+     * @return COACertification
+     */
+    public function getCertification()
+    {
+        if(!in_array($this->CertificationStatus, self::$approved_certification_status)) return null;
+        $expiration_date = empty($this->CertificationExpirationDate) ? null: new DateTime($this->CertificationExpirationDate);
+        return new COACertification($this->Code,  $this->CertificationNumber, $this->CertificationStatus, $expiration_date );
     }
 }

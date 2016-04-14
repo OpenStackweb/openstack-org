@@ -12,6 +12,4 @@
  * limitations under the License.
  **/
 
-define('COA_FILE_API_BASE_URL','https://officestg.linuxfoundation.org');
-define('COA_FILE_API_BASE_USER','openstackdevel');
-define('COA_FILE_API_BASE_PASS','WqbpznsPuPfUMdjQj0X0');
+define('COA_CNAME', 'https://coa.openstack.org/');

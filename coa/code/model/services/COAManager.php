@@ -67,25 +67,38 @@ final class COAManager implements ICOAManager
                     $rows = CSVReader::load($content);
 
                     foreach ($rows as $row) {
-                        $email           = $row['open_stack_id'];
-                        $exam_ext_id     = $row['candidate_exam_id'];
-                        $status          = $row['exam_status'];
-                        $pass_date       = $row['pass_fail_date_c'];
-                        $cert_nbr        = $row['certification_number'];
-                        $code            = $row['exam_code'];
-                        $modified_date   = $row['candidate_exam_date_modified'];
-                        $expiration_date = $row['exam_expiration_date'];
+                        $email                     = $row['open_stack_id'];
+                        $exam_ext_id               = $row['candidate_exam_id'];
+                        $status                    = $row['exam_status'];
+                        $pass_date                 = $row['pass_fail_date_c'];
+                        $cert_nbr                  = $row['certification_number'];
+                        $code                      = $row['exam_code'];
+                        $modified_date             = $row['candidate_exam_date_modified'];
+                        $exam_expiration_date      = $row['exam_expiration_date'];
+                        $cert_exam_expiration_date = $row['certificate_expiration_date'];
+                        $cert_status               = $row['certification_status'];
 
                         $member = $member_repository->findByEmail($email);
                         if (is_null($member)) continue;
                         $exam = $member->getExamByExternalId($exam_ext_id);
-                        if (is_null($exam)) {
+                        if (is_null($exam))
+                        {
                             //create exam
-                            $exam = CertifiedOpenStackAdministratorExam::create();
-                            $exam->OwnerID = $member->ID;
+                            $exam             = CertifiedOpenStackAdministratorExam::create();
+                            $exam->OwnerID    = $member->ID;
                             $exam->ExternalID = $exam_ext_id;
                         }
-                        $exam->update($status, $pass_date, $cert_nbr, $code, $modified_date, $expiration_date);
+                        $exam->update
+                        (
+                            $status,
+                            $modified_date,
+                            $exam_expiration_date,
+                            $pass_date,
+                            $code,
+                            $cert_nbr,
+                            $cert_exam_expiration_date,
+                            $cert_status
+                        );
                         $exam->write();
                     }
                     $this->markFileAsProcessed($file_info);

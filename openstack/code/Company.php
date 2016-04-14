@@ -503,6 +503,19 @@ class Company extends DataObject implements PermissionProvider,IEntity
         return 'missing';
     }
 
+    public function MediumLogoUrl()
+    {
+        $img = $this->BigLogo();
+        $img = $img->exists() ? $img : $this->Logo();
+        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+            $img = $img->SetWidth(210);
+
+            return $img->getURL();
+        }
+
+        return '#';
+    }
+
     public function LargeLogoPreview()
     {
         $img = $this->BigLogo();
