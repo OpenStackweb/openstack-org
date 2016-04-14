@@ -7,6 +7,9 @@ Injector:
   SoftwareManager:
     constructor:
       0: '%$OpenStackComponentSerializer'
+  IngestOpenStackComponentsDataCronTask:
+    constructor:
+      0: '%$TransactionManager'
 
 SoftwareHomePage_Controller:
   dependencies:
