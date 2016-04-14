@@ -365,6 +365,18 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   padding: 7px;
   margin: 0;
 }
+
+.summit-hero-wrapper .landing-action .btn-download-apps {
+    height: 38px;
+    padding: 7px;
+    margin: 0 10px 0 0;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 400;
+    border-radius: 2px;
+    border: 1px solid transparent;
+}
+
 .summit-hero-wrapper .landing-action .register-btn-lrg.inactive {
     width: 325px;
 }
@@ -895,6 +907,59 @@ footer {
 #registrationModal img.summit-modal-logo {
   max-width: 100%;
   margin-bottom: 40px; }
+
+#download-app-modal .modal-dialog {
+    width: 50%;
+    max-width: 700px;
+}
+
+@media (max-width: 900px) {
+    #download-app-modal .modal-dialog {
+        width: 100%;
+    }
+}
+
+#download-app-modal .modal-content{
+    background-color: #2A4E68;
+    color: white;
+    text-align: center;
+}
+
+#download-app-modal .col-phones {
+    padding: 0;
+}
+
+#download-app-modal .col-buttons {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+#download-app-modal .cell-phone-img{
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+#download-app-modal .os-logo{
+    margin-top: 60px;
+    width: 100%;
+    height: 100%;
+}
+
+#download-app-modal .download-label{
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 40px 10px 15px 10px;
+}
+
+#download-app-modal .os-img{
+    width: 75%;
+}
+
+#download-app-modal .android-img{
+    padding-top: 3px;
+    width: 75%;
+}
 
 /*Photo Row*/
 .photo-row-wrapper {

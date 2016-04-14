@@ -155,14 +155,17 @@
             </div>
         <% end_if %>
     <% else %>
-    <div class="row">
-            <div class="col-xs-3 login-container">
-            <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Top.Link}" method="post" enctype="application/x-www-form-urlencoded">
-                <input type="hidden" name="fragment" id="fragment"/>
-                <div class="Actions">
-                    <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in to unlock features only available for registered summit attendees"/>
-                </div>
-            </form>
+        <div class="row">
+            <div class="col-xs-12 login-container">
+                <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Top.Link}" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="fragment" id="fragment"/>
+                    <div class="Actions">
+                        <button class="action btn btn-primary" type="submit" id="login-button" name="action_dologin" title="Log in to unlock features only available for registered summit attendees">
+                            <i class="fa fa-user"></i>
+                            Log in
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     <% end_if %>

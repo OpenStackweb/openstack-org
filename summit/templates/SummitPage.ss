@@ -32,6 +32,9 @@
                                 <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
                             <% end_if %>
                         </div>
+                        <div class="landing-action download-apps">
+                            <a data-toggle="modal" data-target="#download-app-modal" class="btn btn-primary btn-download-apps">Download App</a>
+                        </div>
                         <% if IsUpComing %>
                             <div class="inner-countdown-wrapper">
                                 <div class="countdown">
@@ -91,6 +94,8 @@
         <% include RegistrationModal %>
 
     <% end_if %>
+
+    <% include DownloadAppModal %>
 
     <!-- Footer -->
     <footer>

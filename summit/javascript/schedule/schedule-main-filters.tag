@@ -1,23 +1,35 @@
 <schedule-main-filters>
     <div class="row all-events-filter-row">
-        <div class="col-xs-3 all-events-filter-link">
+        <div class="col-xs-6 all-events-filter-link">
             <div class="col-filter-btn">
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
             <div class="col-filter-title">
                 <span>Calendar&nbsp;Search&nbsp;Filters</span>
-                <span id="clear-filters" style="display:none">(<a onclick={ clearFilters }>clear</a>) </span>
+                <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
-        <div class="col-xs-3 col-switch-schedule">
-            <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
-        </div>
-        <div class="col-xs-3 col-view-all-schedule">
+
+        <div class="col-xs-6">
+            <div class="col-switch-schedule">
+            <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
+            <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
+            </button>
+            </div>
+            <div class="col-view-all-schedule">
             <a href="{ base_url+'mine/' }?goback=1" class="btn btn-default pull-right view-all-schedule" role="button" if={ mine }>View / Print Full Calendar</a>
+            </div>
         </div>
+
     </div>
-    <div>Please note that adding an item to "My Calendar" does not guarantee a seat in the presentation. Rooms fill up fast, so get there early. Some events require an RSVP and, in those cases, you will see a link to RSVP to the event. </div>
+    <div class="rsvp-note" if={ summit.current_user !== null }>
+        Please note that adding an item to "My Calendar" does not guarantee a seat in the presentation.
+        Rooms fill up fast, so get there early. Some events require an RSVP and, in those cases, you will see a link to RSVP to the event.
+    </div>
    <div id="all-events-filter-wrapper" class="row">
+        <div class="col-sm-12">
+            <a href="{ summit.schedule_link }track-list" target="_blank">Learn more about the { summit.title } Summit { summit.year } Tracks</a>
+        </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
             <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Summit Type"  multiple="multiple">
                 <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
