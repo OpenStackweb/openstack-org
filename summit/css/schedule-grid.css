@@ -43,6 +43,7 @@ i.collapse-nav {
 
 #login-button {
     padding: 8px 14px;
+    background-color: #29aae2;
 }
 
 #login-button > i {
@@ -547,6 +548,7 @@ a.navbar-brand {
 
 .switch_schedule {
     padding: 8px 14px;
+    background-color: #29aae2;
 }
 
 .switch_schedule > .glyphicon {
