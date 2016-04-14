@@ -375,7 +375,6 @@ a.past-summit:hover:after, a.future-summit:hover:after {
     font-weight: 400;
     border-radius: 2px;
     border: 1px solid transparent;
-    background-color: #29aae2;
 }
 
 .summit-hero-wrapper .landing-action .register-btn-lrg.inactive {
