@@ -32,13 +32,14 @@
 
     <reports-admin-speaker-report if={report == 'speaker_report'} page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-speaker-report>
     <reports-admin-presentation-report if={report == 'presentation_report'} page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentation-report>
-    <reports-admin-room-report if={report == 'room_report'} summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-room-report>
+    <reports-admin-room-report if={report == 'room_report'} summit_id="{ summit_id }" locations="{ locations }" dispatcher="{ dispatcher }"></reports-admin-room-report>
 
     <script>
         this.report     = opts.report;
         this.dispatcher = opts.dispatcher;
         this.summit_id  = opts.summit_id;
         this.limit      = opts.limit;
+        this.locations  = opts.locations;
         var self        = this;
 
         this.on('mount', function() {

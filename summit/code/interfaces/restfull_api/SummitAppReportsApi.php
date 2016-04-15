@@ -175,7 +175,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             $query_string = $request->getVars();
-            $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : '';
+            $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
+            $venue        = (isset($query_string['venue'])) ? Convert::raw2sql($query_string['venue']) : 'all';
 
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
@@ -184,7 +185,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $report_array = array();
 
             foreach($days as $day) {
-                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type);
+                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venue);
                 $report_array[$day->Label] = array();
                 foreach ($day_report as $rooms) {
 
@@ -283,6 +284,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $query_string = $request->getVars();
             $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'name';
             $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
+            $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
+            $venue        = (isset($query_string['venue'])) ? Convert::raw2sql($query_string['venue']) : 'all';
             $report       = $request->param('REPORT');
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
@@ -311,7 +314,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     $header = array('Time', 'Code', 'Presentation', 'Room', 'Speakers','Head Count', 'Total');
                     foreach($days as $day) {
                         $csv .= $day->Label.PHP_EOL;
-                        $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date);
+                        $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venue);
                         $csv .= implode(',',$header).PHP_EOL;
                         foreach($day_report as $val) {
                             $start_date = $summit->convertDateFromUTC2TimeZone($val['start_date'],'g:ia');

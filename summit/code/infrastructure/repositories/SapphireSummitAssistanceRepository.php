@@ -143,7 +143,7 @@ SQL;
         return $result;
     }
 
-    public function getRoomsBySummitAndDay($summit_id, $date, $event_type = 'all')
+    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venue='all')
     {
 
         $query = <<<SQL
@@ -164,6 +164,12 @@ SQL;
 SQL;
         }
 
+        if ($venue != 'all') {
+            $query .= <<<SQL
+ AND E.LocationID = {$venue}
+SQL;
+        }
+
         $query .= <<<SQL
  GROUP BY E.ID
 SQL;
@@ -177,7 +183,7 @@ SQL;
 SELECT COUNT(DISTINCT(ASched.SummitAttendeeID)) AS calcount
 FROM SummitAttendee_Schedule AS ASched
 LEFT JOIN SummitEvent AS E ON E.Id = ASched.SummitEventID
-WHERE E.SummitID = {$summit_id} GROUP BY ASched.SummitAttendeeID
+WHERE E.SummitID = {$summit_id}
 SQL;
 
         return DB::query($query);

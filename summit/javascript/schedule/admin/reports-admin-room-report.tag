@@ -5,14 +5,21 @@
 
 <reports-admin-room-report>
 
-    <div class="row">
-        <div class="col-md-6">
-            <select id="event_type">
+    <div class="row" style="margin-bottom:30px;">
+        <div class="col-md-3">
+            <select id="event_type" style="width:100%">
                 <option value="presentation">Presentations Only</option>
                 <option value="all">All Events</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <select id="select_venue" style="width:100%">
+                <option value='all'>All Venues</option>
+                <option value="0">TBA</option>
+                <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
+            </select>
+        </div>
+        <div class="col-md-6 pull-right">
             Users with calendar: { calendar_count }
         </div>
     </div>
@@ -52,6 +59,7 @@
         this.summit_id       = opts.summit_id;
         this.report_data     = [];
         this.calendar_count  = 0;
+        this.locations       = opts.locations;
         var self             = this;
 
 
@@ -65,13 +73,21 @@
             $('#event_type').change(function(){
                 self.getReport();
             });
+
+            $('#select_venue').change(function(){
+                self.getReport();
+            });
+
+            $('#select_venue').chosen();
+            $('#event_type').chosen({disable_search: true});
         });
 
         getReport() {
             $('body').ajax_loader();
             var event_type = $('#event_type').val();
+            var venue = $('#select_venue').val();
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type}, function(data){
+            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type, venue: venue}, function(data){
                 self.report_data = data.report;
                 self.calendar_count = data.calendar_count;
                 self.update();
@@ -108,6 +124,40 @@
                 });
             }
         });
+
+        getLocationOptionCSSClass(class_name) {
+        switch(class_name) {
+        case 'SummitVenue':
+        return 'location-venue';
+        break;
+        case 'SummitHotel':
+        return 'location-hotel';
+        break;
+        case 'SummitExternalLocation':
+        return 'location-external';
+        break;
+        case 'SummitVenueRoom':
+        return 'location-venue-room';
+        break;
+        }
+        }
+
+        getLocationOptionTitle(class_name) {
+        switch(class_name) {
+        case 'SummitVenue':
+        return 'Venue';
+        break;
+        case 'SummitHotel':
+        return 'Hotel';
+        break;
+        case 'SummitExternalLocation':
+        return 'External Location';
+        break;
+        case 'SummitVenueRoom':
+        return 'Room';
+        break;
+        }
+        }
 
     </script>
 
