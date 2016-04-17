@@ -37,6 +37,10 @@ In `summit-video-app/_config/config.yml`:
 </tbody>
 </table>
 
+## Deprecations
+
+This module should deprecate the `VideoPresentation` table.
+
 ## Contributing
 
 * Run `$ npm install` in the `source/` directory
