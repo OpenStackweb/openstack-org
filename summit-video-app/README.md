@@ -12,29 +12,37 @@ It is also critical to run a migration task to populate the `PresentationVideo` 
 
 `framework/sake dev/tasks/VideoPresentationMigration`
 
-### Install dependencies
+## Installation
 
-`npm install`
+* Create a `SummitVideoApp` page somewhere in the SiteTree, and title the page appropriately (e.g. `/summit/videos`)
+* In the _Summit Videos_ admin tab, choose one video to be featured by clicking the "Set as Featured" button on its edit form.
+* Select a few videos to be highlighted by checking their "highlighed" checkbox
 
-### Create the page type
+## Configuration
 
-Add a new page of type `SummitVideoApp` under "Summits". You can only create one of these.
+There are several configurable settings made available to the developer to tailor the user experience.
 
-### Start the Webpack dev server
+In `summit-video-app/_config/config.yml`:
 
-`npm run start`
+|Setting name             |Description                             |Default value|
+|--------------------------------------------------------------------------------|
+| default_speaker_limit   | Number of speakers returned by default|20|
+| popular_video_view_threshold| Number of views a video needs to be in the "popular" section|10|
+| popular_video_limit|Number of popular videos|10|
+| video_poll_interval|Frequency, in milliseconds, that the app passively refreshes state|15000|
+| video_view_throttle|How long, in seconds, a user has to wait before adding a view the same video|10|
+| video_view_delay|How long, in milliseconds, a user has to watch a video before it's considered a view|10000|
 
-## Development workflow
+## Contributing
+
+* Run `$ npm install` in the `source/` directory
+* Run `$ npm run start` in the `source/` directory to start the Webpack dev server
 
 In dev mode, the Javascript and CSS assets will be loaded from the local webpack dev server instead of the web server.  This provides hot reloads of CSS and Javascript, meaning most of the time, reloading the browser is unnecessary. Further, changes to React components will hot reload in the browser and persist their state.
 
 The determination to use the dev server is based on the outcome of the `$WebpackDevServer` template accessor.
 
-## Data polling
-
-The app features an intervalic poll for new data (the latest video upload). The duration of this interval, in milliseconds, is set in `video_poll_interval` in the config (15000).
-
-## Production building
+## Releasing
 
 All assets that will be shipped to production, including images, need to be declared in `index.js`, which serves as a manifest the production build. Ideally, the `source/` folder should not be deployed to production.
 
@@ -237,5 +245,3 @@ Gets a list of the speakers, ordered by most aggregate videos, descending. Limit
   	  }
 }
 ```
-
-
