@@ -23,15 +23,19 @@ It is also critical to run a migration task to populate the `PresentationVideo` 
 There are several configurable settings made available to the developer to tailor the user experience.
 
 In `summit-video-app/_config/config.yml`:
-
-|Setting name             |Description                             |Default value|
-|--------------------------------------------------------------------------------|
-| default_speaker_limit   | Number of speakers returned by default|20|
-| popular_video_view_threshold| Number of views a video needs to be in the "popular" section|10|
-| popular_video_limit|Number of popular videos|10|
-| video_poll_interval|Frequency, in milliseconds, that the app passively refreshes state|15000|
-| video_view_throttle|How long, in seconds, a user has to wait before adding a view the same video|10|
-| video_view_delay|How long, in milliseconds, a user has to watch a video before it's considered a view|10000|
+<table>
+<thead>
+<tr><th>Setting name</th><th>Description</th><th>Default value</th></tr>
+</thead>
+<tbody>
+<tr><td>default_speaker_limit</td><td>Number of speakers returned by default</td><td>20</td></tr>
+<tr><td>popular_video_view_threshold</td><td>Number of views a video needs to be in the "popular" section</td><td>10</td></tr>
+<tr><td>popular_video_limit</td><td>Number of popular videos</td><td>10</td></tr>
+<tr><td>video_poll_interval</td><td>Frequency, in milliseconds, that the app passively refreshes state</td><td>15000</td></tr>
+<tr><td>video_view_throttle</td><td>How long, in seconds, a user has to wait before adding a view the same video</td><td>10</td></tr>
+<tr><td>video_view_delay</td><td>How long, in milliseconds, a user has to watch a video before it's considered a view</td><td>10000</td></tr>
+</tbody>
+</table>
 
 ## Contributing
 
