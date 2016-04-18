@@ -42,6 +42,13 @@ schedule_api.addEvent2MySchedule = function (summit_id, event_id)
         success: function (data) {
             schedule_api.trigger('eventAdded2MySchedule', event_id);
         }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        var http_code = jqXHR.status;
+        if(http_code === 401){
+            // user lost its session
+            alert('you are not logged in!');
+            location.reload();
+        }
     });
 }
 
@@ -55,6 +62,13 @@ schedule_api.removeEventFromMySchedule = function (summit_id, event_id)
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             schedule_api.trigger('eventRemovedFromMySchedule', event_id);
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        var http_code = jqXHR.status;
+        if(http_code === 401){
+            // user lost its session
+            alert('you are not logged in!');
+            location.reload();
         }
     });
 }
