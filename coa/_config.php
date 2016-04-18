@@ -12,4 +12,4 @@
  * limitations under the License.
  **/
 
-define('COA_CNAME', 'https://coa.openstack.org/');
+define('COA_CNAME', 'https://cert.openstack.org');
