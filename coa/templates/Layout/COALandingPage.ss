@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4 center">
-                <img src="coa/images/coa-badge.svg" class="coa-badge-top" alt="Certified OpenStack Administrator">
+                <img src="/themes/openstack/images/coa/coa-badge.svg" class="coa-badge-top" alt="Certified OpenStack Administrator">
             </div>
             <div class="col-sm-8">
                 <h1>Certified OpenStack Administrator</h1>

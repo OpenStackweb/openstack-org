@@ -658,4 +658,13 @@ class Company extends DataObject implements PermissionProvider,IEntity
 
         return null;
     }
+
+    /**
+     * @return bool
+     */
+    public function isCOAPartner(){
+        $coa_page = COALandingPage::get()->first();
+        if(is_null($coa_page)) return false;
+        return intval($coa_page->TrainingPartners()->filter('CompanyID', $this->ID)->count()) > 0;
+    }
 }

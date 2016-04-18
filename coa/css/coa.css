@@ -1,7 +1,7 @@
 
 /*COA landing*/
 .coa-hero {
-    background: url("../images/coa-bkgd2.jpg") no-repeat center left;
+    background: url("/themes/openstack/images/coa/coa-bkgd2.jpg") no-repeat center left;
     background-size: cover;
     padding: 60px 0 60px;
     color: white; }

@@ -2,16 +2,18 @@
 
 <h1>Individual Member Profile</h1>
 <div class="candidate span-14">
-    <% cached 'member_profile_page', $Profile.ID %>
+    <% cached 'member_profile_page', $Profile.ID, $Profile.LastEdited %>
     <% with Profile %>
-
         <div class="span-4">
             $ProfilePhoto()
         </div>
         <a name="profile-$ID"></a>
         <div class="details span-10 last">
             <div class="last name-and-title">
-                <h3>$FirstName $Surname</h3>
+                <h3>$FirstName $Surname <% if hasAvailableCertifications %>
+                    <img height="65px" src="/themes/openstack/images/coa/coa-badge.jpg" title="COA Certified" alt="COA Certified">
+                <% end_if %></h3>
+
             </div>
             <hr>
             <div class="span-4">

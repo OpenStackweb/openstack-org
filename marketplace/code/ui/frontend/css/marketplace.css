@@ -733,3 +733,9 @@ a.app-promo-banner {
     padding: 0px;
 }
 
+.coa-partner-badge
+{
+    float:right;
+    padding-bottom:15px;
+    height:65px;
+}

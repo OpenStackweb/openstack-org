@@ -30,6 +30,9 @@
 
         <div class="col-sm-4 marketplace-training-sidebar">
             $Company.MediumLogoPreview
+            <% if $Company.isCOAPartner %>
+                <img class="coa-partner-badge" src="/themes/openstack/images/coa/coa-badge.jpg" title="COA Training Partner" alt="COA Training Partner">
+            <% end_if %>
             <p>$Training.RAW_val(Description)</p>
             <div class="span-7 last training-rating">
                <% include MarketPlaceReviews %>
