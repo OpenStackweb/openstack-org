@@ -50,16 +50,22 @@ class CustomUnsavedRelationList extends UnsavedRelationList
     }
 
     public function remove($item) {
-        parent::remove($item);
         $ids = Session::get($this->itemsSessionKey());
         if(is_null($ids)) return;
         unset($ids[$item->ID]);
+        $this->removeAll();
         Session::set($this->itemsSessionKey(), $ids);
+        $dataClass = $this->dataClass;
+        foreach($ids as $id)
+        {
+            $this->add($dataClass::get()->byID($id));
+        }
     }
 
     public function removeAll(){
-        parent:;$this->removeAll();
+        parent::removeAll();
         Session::clear($this->itemsSessionKey());
+        unset($_SESSION[$this->itemsSessionKey()]);
     }
 
     public function byID($id) {

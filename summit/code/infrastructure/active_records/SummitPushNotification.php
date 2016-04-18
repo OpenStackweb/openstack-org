@@ -17,7 +17,7 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
     private static $db = array
     (
         'Message'  => 'Text',
-        'Channel'  => "Enum('ALL, SPEAKERS, ATTENDEES, MEMBERS, SUMMIT, NONE', 'NONE')",
+        'Channel'  => "Enum('ALL, SPEAKERS, ATTENDEES, MEMBERS, SUMMIT', 'ALL')",
         'IsSent'   => 'Boolean',
         'SentDate' => 'SS_Datetime',
     );
@@ -43,15 +43,17 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
     public function getCMSFields()
     {
 
+        Requirements::javascript('summit/javascript/SummitPushNotification.js');
+
         $f = new FieldList
         (
             $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
         );
 
         $f->addFieldToTab('Root.Main', new TextareaField('Message','Message'));
-        $f->addFieldToTab('Root.Main', new DropdownField('Channel','Channel',singleton('SummitPushNotification')->dbObject('Channel')->enumValues()));
+        $f->addFieldToTab('Root.Main', $ddl_channel = new DropdownField('Channel','Channel',singleton('SummitPushNotification')->dbObject('Channel')->enumValues()));
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
-
+        $ddl_channel->setEmptyString('--SELECT A CHANNEL--');
         $config = GridFieldConfig_RelationEditor::create(50);
         $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
         $config->removeComponentsByType('GridFieldAddNewButton');
