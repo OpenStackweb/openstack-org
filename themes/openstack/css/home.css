@@ -574,10 +574,11 @@ a.pager-active {
 
 .intro-header.featured.livestream {
     text-align: center;
-    background: url(/themes/openstack/images/homepage/summit-promo-bkgd1.jpg) no-repeat center center;
+    background: #e83641;
     min-height: 420px;
     background-size: cover;
     position: relative;
+    padding: 0;
 }  
 
 .livestream-container {
@@ -648,10 +649,13 @@ a.pager-active {
       margin-left: 10px; }
 
 .intro-header.featured.livestream-watch-wrapper {
-  background: black; }
+  background: black;
+  padding: 0;
+   }
   .intro-header.featured.livestream-watch-wrapper .livestream-container {
     max-width: 100%;
-    background: black; }
+    background: black;
+}
     .intro-header.featured.livestream-watch-wrapper .livestream-container iframe {
       margin-bottom: -5px; }
 

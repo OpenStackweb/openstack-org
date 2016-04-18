@@ -1085,16 +1085,16 @@ a.gs-title, a.gs-title b {
 
 @media (max-width: 1199px) {
   .intro-message {
-    padding-bottom: 50px; } }
+    padding-bottom: 30px; } }
 
 .intro-message > h1 {
-  margin: 0;
-  font-size: 1.9em;
-  font-weight: 400;
-  text-align: center;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  width: 100%;
-  letter-spacing: -0.4px;
+    margin: 0;
+    font-size: 2.4em;
+    font-weight: 400;
+    text-align: center;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    width: 100%;
+    letter-spacing: -0.4px;
 }
 
 @media (max-width: 767px) {
@@ -1130,10 +1130,10 @@ a.gs-title, a.gs-title b {
 .intro-header.featured {
   text-align: center;
   background: no-repeat scroll center center / cover rgba(0, 0, 0, 0);
-  min-height: 370px;
+  min-height: 300px;
   background-size: cover;
   position: relative;
-  padding: 40px 0;
+  padding: 60px 0;
 }
 
 .intro-header.featured .intro-message {
