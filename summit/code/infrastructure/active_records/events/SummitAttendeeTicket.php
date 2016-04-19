@@ -23,6 +23,13 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
         'TicketChangedDate'  => 'SS_Datetime',
     );
 
+    private static $has_one = array
+    (
+        'TicketType' => 'SummitTicketType',
+        'Owner'      => 'SummitAttendee'
+    );
+
+
     private static $summary_fields = array
     (
         "TicketBoughtDate"        => 'Bought Date',
@@ -49,8 +56,25 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
         $f->addFieldsToTab('Root.Main', $date = new DatetimeField('TicketChangedDate', 'Changed Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $summit_id = $_REQUEST['SummitID'];
+
+        if(empty($summit_id))
+        {
+            $summit_id =  $this->Owner()->exists() ? $this->Owner()->SummitID : Summit::get_active()->ID;
+        }
+
         $f->addFieldsToTab('Root.Main', $ddl = new DropdownField('TicketTypeID', 'Ticket Type', SummitTicketType::get()->filter('SummitID', $summit_id)->map("ID","Name")));
         return $f;
+    }
+
+    function getCMSValidator()
+    {
+        return $this->getValidator();
+    }
+
+    function getValidator()
+    {
+        $validator= new RequiredFields(array('ExternalOrderId', 'ExternalAttendeeId', 'TicketTypeID'));
+        return $validator;
     }
 
     static $indexes = array
@@ -79,12 +103,6 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
 
     static $many_many_extraFields = array
     (
-    );
-
-    private static $has_one = array
-    (
-        'TicketType' => 'SummitTicketType',
-        'Owner'      => 'SummitAttendee'
     );
 
     /**
