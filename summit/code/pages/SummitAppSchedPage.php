@@ -101,7 +101,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $event_id = intval($this->request->param('EVENT_ID'));
         $this->event_id = $event_id;
         $event = $this->event_repository->getById($event_id);
-        $goback = $this->getRequest()->getVar('goback') ? $this->getRequest()->getVar('goback') : '';
+        $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
 
         if (is_null($event) || !$event->isPublished()) {
             return $this->httpError(404, 'Sorry that event could not be found');
@@ -131,7 +131,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     public function ViewMySchedule()
     {
         $member    = Member::currentUser();
-        $goback = $this->getRequest()->getVar('goback') ? $this->getRequest()->getVar('goback') : '';
+        $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 
@@ -149,7 +149,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
     public function ViewFullSchedule()
     {
-        $goback = $this->getRequest()->getVar('goback') ? $this->getRequest()->getVar('goback') : '';
+        $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 
@@ -306,7 +306,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             array
             (
                 'Speaker' => $speaker,
-                'Summit' => $this->Summit()
+                'Summit' => $this->Summit(),
             )
         );
     }

@@ -218,15 +218,9 @@
             </script>
 
             <event-list summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
->>>>>>> 76260f3... [smarcet] - #10869
 
-                </script>
-
-                <event-list summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
-
-
-            </div>
         </div>
+    </div>
     <% end_with %>
 
 </div>
