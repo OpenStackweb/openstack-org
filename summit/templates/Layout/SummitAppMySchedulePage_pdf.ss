@@ -1,9 +1,9 @@
 
-<h1 style="text-align:left;">My Schedule</h1>
+<h1 style="text-align:left;">$Heading</h1>
 <hr/>
 
 <% loop $Schedule %>
-    <div class="panel-heading">{$Day}</div>
+    <div class="panel-heading">{$Group}</div>
     <table class="table" cellspacing="0">
         <thead>
             <tr>

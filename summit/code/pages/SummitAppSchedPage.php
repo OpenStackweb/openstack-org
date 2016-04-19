@@ -64,6 +64,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'ExportMySchedule',
         'DoGlobalSearch',
         'index',
+        'ViewFullSchedule',
+        'ExportFullSchedule',
     );
 
     static $url_handlers = array
@@ -73,6 +75,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'attendees/$ATTENDEE_ID' => 'ViewAttendeeProfile',
         'mine/pdf' => 'ExportMySchedule',
         'mine' => 'ViewMySchedule',
+        'full/pdf' => 'ExportFullSchedule',
+        'full' => 'ViewFullSchedule',
         'global-search' => 'DoGlobalSearch',
     );
 
@@ -143,6 +147,22 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
                 'goback'   => $goback));
     }
 
+    public function ViewFullSchedule()
+    {
+        $goback = $this->getRequest()->getVar('goback') ? $this->getRequest()->getVar('goback') : '';
+
+        if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
+
+        $schedule = $this->Summit()->getSchedule();
+
+        return $this->renderWith(
+            array('SummitAppFullSchedulePage', 'SummitPage', 'Page'),
+            array(
+                'Schedule' => $schedule,
+                'Summit'   => $this->Summit(),
+                'goback'   => $goback));
+    }
+
     public function ExportMySchedule()
     {
         $member = Member::currentUser();
@@ -156,10 +176,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $day_schedule = new ArrayList();
         foreach ($my_schedule as $event) {
             $day_label = $event->getDayLabel();
-            if ($day_array = $day_schedule->find('Day',$day_label)) {
+            if ($day_array = $day_schedule->find('Group',$day_label)) {
                 $day_array->Events->push($event);
             } else {
-                $day_array = new ArrayData(array('Day' => $day_label, 'Events' => new ArrayList()));
+                $day_array = new ArrayData(array('Group' => $day_label, 'Events' => new ArrayList()));
                 $day_array->Events->push($event);
                 $day_schedule->push($day_array);
             }
@@ -167,7 +187,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         $html_inner = $this->renderWith(
             array('SummitAppMySchedulePage_pdf'),
-            array('Schedule' => $day_schedule, 'Summit' => $this->Summit()));
+            array('Schedule' => $day_schedule, 'Summit' => $this->Summit(), 'Heading' => 'My Schedule'));
 
         $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
 
@@ -177,8 +197,77 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $html_outer = sprintf("<html><head><style>%s</style></head><body><div class='container'>%s</div></body></html>",
             $css, $html_inner);
 
-        //Requirements::css("/summit/css/summitapp-myschedule-pdf.css");
-        //return $html_outer;
+        try {
+            $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));
+            $html2pdf->setTestIsImage(false);
+            $html2pdf->WriteHTML($html_outer);
+
+            //clean output buffer
+            ob_end_clean();
+            $html2pdf->Output($file, "D");
+        } catch (HTML2PDF_exception $e) {
+            $message = array(
+                'errno' => '',
+                'errstr' => $e->__toString(),
+                'errfile' => 'SummitAppSchedPage.php',
+                'errline' => '',
+                'errcontext' => ''
+            );
+            SS_Log::log($message, SS_Log::ERR);
+            $this->httpError(404, 'There was an error on PDF generation!');
+        }
+    }
+
+    public function ExportFullSchedule()
+    {
+        $sort = $this->getRequest()->getVar('sort') ? $this->getRequest()->getVar('sort') : 'day';
+        $base = Director::protocolAndHost();
+
+        if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
+
+        $schedule = $this->Summit()->getSchedule();
+        $events = new ArrayList();
+        $sort_list = false;
+
+        foreach ($schedule as $event) {
+            switch ($sort) {
+                case 'day':
+                    $group_label = $event->getDayLabel();
+                    break;
+                case 'track':
+                    if (!$event->isPresentation() || !$event->Category() || !$event->Category()->Title) {continue 2;}
+                    $group_label = $event->Category()->Title;
+                    $sort_list = true;
+                    break;
+                case 'event_type':
+                    $group_label = $event->Type->Type;
+                    $sort_list = true;
+                    break;
+            }
+
+            if ($group_array = $events->find('Group',$group_label)) {
+                $group_array->Events->push($event);
+            } else {
+                $group_array = new ArrayData(array('Group' => $group_label, 'Events' => new ArrayList()));
+                $group_array->Events->push($event);
+                $events->push($group_array);
+            }
+        }
+
+        if ($sort_list)
+            $events->sort('Group');
+
+        $html_inner = $this->renderWith(
+            array('SummitAppMySchedulePage_pdf'),
+            array('Schedule' => $events, 'Summit' => $this->Summit(), 'Heading' => 'Full Schedule by '.$sort));
+
+        $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
+
+        //create pdf
+        $file = FileUtils::convertToFileName('full-schedule') . '.pdf';
+
+        $html_outer = sprintf("<html><head><style>%s</style></head><body><div class='container'>%s</div></body></html>",
+            $css, $html_inner);
 
         try {
             $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));

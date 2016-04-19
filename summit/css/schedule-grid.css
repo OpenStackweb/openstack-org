@@ -758,8 +758,15 @@ h2.subtitle {
     }
 }
 
-.export_my_schedule {
+.export_schedule {
     color: white !important;
     margin-top: 10px;
     float: right;
+}
+
+#full-schedule-filter {
+    margin-top: 10px;
+    float: right;
+    margin-right: 20px;
+    padding: 6px;
 }

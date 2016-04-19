@@ -93,7 +93,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'GET track'                 => 'getScheduleByTrack',
         'GET search'                => 'getSearchResults',
         'GET empty_spots'           => 'getEmptySpots',
-        'GET my_schedule/pdf'       => 'getMySchedulePDF',
+        'GET full'                  => 'getFullSchedule',
         'PUT $EventID!'             => 'addToSchedule',
         'DELETE $EventID!'          => 'removeFromSchedule',
         'POST $EventID!/feedback'   => 'addFeedback',
@@ -109,7 +109,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'addToSchedule',
         'removeFromSchedule',
         'addFeedback',
-        'getMySchedulePDF',
+        'getFullSchedule',
         'shareEmail',
     );
 
@@ -673,5 +673,69 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex,SS_Log::ERR);
             return $this->serverError();
         }
+    }
+
+    public function getFullSchedule(SS_HTTPRequest $request)
+    {
+        $query_string        = $request->getVars();
+        $summit_id           = intval($request->param('SUMMIT_ID'));
+        $sort                = isset($query_string['sort']) ? Convert::raw2sql($query_string['sort']) : null;
+        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
+        $summit              = null;
+
+        $member = Member::currentUser();
+        $cache  = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+
+        if($cache && $response = $this->loadJSONResponseFromCache($request)) {
+            return $response;
+        }
+
+        if(intval($summit_id) > 0)
+            $summit = $this->summit_repository->getById(intval($summit_id));
+        if(strtolower($summit_id) === 'current')
+            $summit = Summit::ActiveSummit();
+
+        if(is_null($summit))
+            return $this->notFound('summit not found!');
+
+        $schedule  = $summit->getSchedule();
+        $events = array();
+        $index = '';
+        $sort_list = false;
+
+        foreach ($schedule as $event) {
+
+            switch ($sort) {
+                case 'day':
+                    $index = $event->getDayLabel();
+                    break;
+                case 'track':
+                    if (!$event->isPresentation() || !$event->Category() || !$event->Category()->Title) {continue 2;}
+                    $index = $event->Category()->Title;
+                    $sort_list = true;
+                    break;
+                case 'event_type':
+                    $index = $event->Type->Type;
+                    $sort_list = true;
+                    break;
+            }
+
+            if (!isset($events[$index])) $events[$index] = array();
+
+            $events[$index][] = array(
+                'id' =>  $event->ID,
+                'start_time' => $event->getStartTime(),
+                'end_time' => $event->getEndTime(),
+                'title' => $event->Title,
+                'room' => $event->getLocationNameNice(),
+                'total' => $event->Attendees()->Count(),
+                'capacity' => $event->getLocationCapacity(),
+                'rsvp' => $event->getRSVPLink()
+            );
+
+            if ($sort_list) ksort($events);
+        }
+
+        return $this->saveJSONResponseToCache($request, $events)->ok($events);
     }
 }

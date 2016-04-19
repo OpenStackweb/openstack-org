@@ -12,12 +12,13 @@
 
         <div class="col-xs-6">
             <div class="col-switch-schedule">
-            <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
-            <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
-            </button>
+                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
+                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
+                </button>
             </div>
             <div class="col-view-all-schedule">
-            <a href="{ base_url+'mine/' }?goback=1" class="btn btn-default pull-right view-all-schedule" role="button" if={ mine }>View / Print Full Calendar</a>
+                <a href="{ base_url+'mine/' }?goback=1" class="btn btn-default pull-right view-all-schedule" role="button" if={ mine }>View / Print Full Calendar</a>
+                <a href="{ base_url+'full/' }" class="btn btn-default pull-right view-all-schedule" role="button" if={ !mine }>View / Print Full Calendar</a>
             </div>
         </div>
 
