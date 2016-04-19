@@ -172,4 +172,4 @@
     <schedule-grid summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" month="{$Summit.Month}"></schedule-grid>
 </div>
 <div id="fb-root"></div>
-<script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>
+<script src="summit/javascript/schedule/schedule.bundle.js?t={$Top.getTime}" type="application/javascript"></script>

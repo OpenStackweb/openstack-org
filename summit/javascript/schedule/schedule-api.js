@@ -5,9 +5,17 @@ schedule_api.getEventByDay = function (summit_id, day)
 {
     schedule_api.trigger('beforeEventsRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'?day='+day;
-    return $.get(url,function (data) {
-        data.show_date = false;
-        schedule_api.trigger('eventsRetrieved', data);
+    $.ajax({
+        type: 'GET',
+        url:  url,
+        timeout:60000,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            data.show_date = false;
+            schedule_api.trigger('eventsRetrieved', data);
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert('there was an error, please contact your administrator');
     });
 }
 
@@ -34,10 +42,11 @@ schedule_api.getEventByTrack = function (summit_id, track)
 schedule_api.addEvent2MySchedule = function (summit_id, event_id)
 {
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id;
-
+    console.log('API.addEvent2MySchedule');
     $.ajax({
         type: 'PUT',
         url:  url,
+        timeout:10000,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             schedule_api.trigger('eventAdded2MySchedule', event_id);
@@ -47,7 +56,7 @@ schedule_api.addEvent2MySchedule = function (summit_id, event_id)
         if(http_code === 401){
             // user lost its session
             alert('you are not logged in!');
-            location.reload();
+                location.reload();
         }
     });
 }
@@ -55,10 +64,11 @@ schedule_api.addEvent2MySchedule = function (summit_id, event_id)
 schedule_api.removeEventFromMySchedule = function (summit_id, event_id)
 {
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id;
-
+    console.log('API.removeEventFromMySchedule');
     $.ajax({
         type: 'DELETE',
         url:  url,
+        timeout:10000,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             schedule_api.trigger('eventRemovedFromMySchedule', event_id);
