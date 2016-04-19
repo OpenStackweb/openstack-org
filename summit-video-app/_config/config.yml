@@ -1,0 +1,18 @@
+---
+Name: summit-video-app
+---
+SummitVideoApp:
+  # Number of videos returned in a response by default
+  default_video_limit: 50
+  # Number of speakers returned by default
+  default_speaker_limit: 20
+  # Number of views a video needs to be in the "popular" section
+  popular_video_view_threshold: 10
+  # Number of popular videos
+  popular_video_limit: 10
+  # Frequency, in milliseconds, that the app passively refreshes state
+  video_poll_interval: 15000
+  # How long a user has to wait before adding a view to the same video
+  video_view_throttle: 10
+  # How long, in milliseconds, a user has to watch a video before it's considered a view
+  video_view_delay: 10000
