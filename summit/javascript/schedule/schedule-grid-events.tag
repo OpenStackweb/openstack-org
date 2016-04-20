@@ -1,7 +1,7 @@
 <schedule-grid-events>
     <div class="row" if={ events.length > 0 }>
         <div class="col-md-12">
-            <schedule-event each={ events } show_date={ show_date } ></schedule-event>
+            <schedule-event each={ events } show_date={ show_date }></schedule-event>
         </div>
     </div>
     <div class="row" if={ events.length === 0 }>
@@ -30,10 +30,13 @@
             $('#events-container').ajax_loader();
         });
 
-        this.schedule_api.on('eventsRetrieved',function(data) {
-            self.show_date    = data.show_date;
-            self.events       = data.events;
-            self.applyFilters(true);
+        this.schedule_api.on('eventsRetrieved',function(data, status) {
+            if(status == 200){
+                self.show_date    = data.show_date;
+                self.events       = data.events;
+                console.log(self.events.length +' events retrieved ...');
+                self.applyFilters(true);
+            }
             window.setTimeout(function(){$('#events-container').ajax_loader('stop');}, 1000);
         });
 
@@ -93,8 +96,7 @@
                     }
                 }
             }
-            if(self.events.length > 0)
-                self.update();
+            self.update();
         }
     </script>
 </schedule-grid-events>

@@ -54,6 +54,20 @@ abstract class AbstractRestfulJsonApi extends Controller
         return unserialize($result);
     }
 
+    protected function loadRAWFromCache($key){
+        $key    = md5($key);
+        $cache  = $this->getCache();
+        $result = $cache->load($key);
+        if(!$result) return null;
+        return unserialize($result);
+    }
+
+    protected function saveRAW2Cache($key, $data){
+        $key    = md5($key);
+        $cache  = $this->getCache();
+        $cache->save(serialize($data), $key);
+    }
+
     /**
      * @param SS_HTTPRequest $request
      * @return string
@@ -277,25 +291,24 @@ abstract class AbstractRestfulJsonApi extends Controller
         if ($request->isGET() && $use_etag) {
             $etag = md5($response->getBody());
             $requestETag = $request->getHeader('If-None-Match');
+            foreach (array(
+                         'Expires',
+                         'Cache-Control'
+                     ) as $header) {
+                $response->removeHeader($header);
+            }
+
+            $lastmod = gmdate('D, d M Y 0:0:0 \G\M\T', time());
+            $response->addHeader('Cache-Control', 'max-age=3600');
+            $response->addHeader('Last-Modified', $lastmod);
+            $response->addHeader('Expires', gmdate('D, d M Y H:m:i \G\M\T', time() + 3600));
+            $response->addHeader('ETag', $etag);
             if (!empty($requestETag) && $requestETag == $etag) {
                 $response->setStatusCode(304);
-                foreach (array(
-                             'Allow',
-                             'Content-Encoding',
-                             'Content-Language',
-                             'Content-Length',
-                             'Content-MD5',
-                             'Content-Type',
-                             'Last-Modified'
-                         ) as $header) {
-                    $response->removeHeader($header);
-                }
-                $response->setBody(null);
-            } else {
                 $response->addHeader('ETag', $etag);
+                $response->setBody(null);
             }
         }
-
         return $response;
     }
 

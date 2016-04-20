@@ -202,15 +202,17 @@
     //EVENTS
 
     addToMySchedule(e) {
-        console.log('EVENT.addToMySchedule');
+        e.preventUpdate = true;
+        this.own        = true;
         self.schedule_api.addEvent2MySchedule(self.summit.id, e.item.id);
-        e.item.own = true;
+        self.update();
     }
 
     removeFromMySchedule(e) {
-        console.log('EVENT.removeFromMySchedule');
+        e.preventUpdate = true;
+        this.own        = false;
         self.schedule_api.removeEventFromMySchedule(self.summit.id, e.item.id);
-        e.item.own = false;
+        self.update();
     }
 
     </script>
