@@ -16,7 +16,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
 
     /**
-     * @var IEntityRepository
+     * @var ISummitAssistanceRepository
      */
     private $assistance_repository;
 
@@ -246,13 +246,12 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     'assistance_id'   => $presentation['assistance_id'],
                     'title'           => $presentation['presentation'],
                     'published'       => $presentation['published'],
-                    'status'          => $presentation['status'],
                     'track'           => $presentation['track'],
                     'start_date'      => $summit->convertDateFromUTC2TimeZone($presentation['start_date'],'m/d/Y g:ia'),
                     'location'        => $presentation['location'],
                     'speaker_id'      => $presentation['speaker_id'],
                     'member_id'       => $presentation['member_id'],
-                    'name'            => $presentation['name'],
+                    'name'            => empty($presentation['speaker_name'])? $presentation['member_name'] : $presentation['speaker_name'],
                     'email'           => $presentation['email'],
                     'phone'           => $presentation['phone'],
                     'code_type'       => $presentation['code_type'],
@@ -334,23 +333,20 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     break;
                 case 'presentation_report' :
                     $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
-                    $report_data = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id,null,null,$sort,$sort_dir,$search_term);
-                    $report_data = $report_data['Data'];
-                    $header = array('Presentation','Published','Status','Track','Start Date','Location','Speaker ID',
-                                    'Member ID', 'Speaker', 'Email', 'Phone On Site', 'Code Type', 'Promo Code', 'Confirmed?',
-                                    'Registered?', 'Checked In');
-
-                    $csv = implode(',',$header).PHP_EOL;
-                    foreach($report_data as $val) {
-                        $val = array_slice($val, 2); //skip id
-                        $val['start_date'] = $summit->convertDateFromUTC2TimeZone($val['start_date'],'m/d/Y g:ia');
-
-                        //escape commas
-                        foreach($val as &$col) {
-                            $col = '"'.str_replace("\"","'" , $col ).'"';
-                        }
-                        $csv .= implode(',',$val).PHP_EOL;
+                    $report_data  = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id,null,null,$sort,$sort_dir,$search_term);
+                    $data         = $report_data['Data'];
+                    $results      = array();
+                    foreach($data as $row)
+                    {
+                        unset($row['presentation_id']);
+                        unset($row['assistance_id']);
+                        array_push($results, $row);
                     }
+
+                    $ext = 'csv';
+                    $filename = "presentations_report-" . date('Ymd') . "." . $ext;
+                    $delimiter = ($ext == 'xls') ? "\t" : "," ;
+                    return CSVExporter::getInstance()->export($filename, $results, $delimiter);
                     break;
             }
 

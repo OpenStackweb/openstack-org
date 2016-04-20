@@ -13,7 +13,6 @@
                 <tr>
                     <th class="sortable" data-sort="presentation" data-dir="ASC">Presentation</th>
                     <th class="center_text">Published</th>
-                    <th>Status</th>
                     <th>Track</th>
                     <th class="sortable sorted" data-sort="start_date" data-dir="ASC">Start Date<i class="fa fa-caret-up"></i></th>
                     <th>Location</th>
@@ -33,7 +32,6 @@
                 <tr each={ presentation, i in presentations } data-id="{ presentation.assistance_id }">
                     <td>{ presentation.title }</td>
                     <td class="center_text"><i class={ fa: true, fa-check: presentation.published, fa-times: !presentation.published } ></i></td>
-                    <td>{ presentation.status }</td>
                     <td>{ presentation.track }</td>
                     <td>{ presentation.start_date }</td>
                     <td>{ presentation.location }</td>

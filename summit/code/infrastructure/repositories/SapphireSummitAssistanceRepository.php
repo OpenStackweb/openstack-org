@@ -15,8 +15,6 @@
 final class SapphireSummitAssistanceRepository extends SapphireRepository implements ISummitAssistanceRepository
 {
 
-    private $cache = array();
-
     public function __construct()
     {
         parent::__construct(new PresentationSpeakerSummitAssistanceConfirmationRequest);
@@ -64,69 +62,56 @@ SQL;
 
     public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term)
     {
-        $query_body =
-            " FROM (
-                SELECT
-                    E.ID,
-                    CASE WHEN SP.`Order`<= PC.SessionCount THEN 'accepted' ELSE 'alternate' END AS SelectionStatus,
-                    E.Published
-                FROM SummitEvent AS E
-                INNER JOIN Presentation AS P ON P.ID = E.ID
-                INNER JOIN PresentationCategory AS PC ON PC.ID = P.CategoryID
-                LEFT JOIN SummitSelectedPresentation AS SP ON SP.PresentationID = P.ID
-                LEFT JOIN SummitSelectedPresentationList AS SPL ON SP.SummitSelectedPresentationListID = SPL.ID
-                WHERE E.SummitID = {$summit_id} AND SPL.ListType = 'Group'
-                UNION
-                SELECT E.ID, 'unaccepted' AS SelectionStatus, E.Published
-                FROM SummitEvent AS E
-                INNER JOIN Presentation AS P ON P.ID = E.ID
-                WHERE E.SummitID = {$summit_id} AND NOT EXISTS (
-                    SELECT 1 FROM SummitSelectedPresentation AS SP
-                    INNER JOIN SummitSelectedPresentationList AS SPL ON SP.SummitSelectedPresentationListID = SPL.ID
-                    WHERE SP.PresentationID = P.ID AND SPL.ListType = 'Group'
-                )
-            ) AS Q1
-            INNER JOIN Presentation_Speakers AS PS ON PS.PresentationID = Q1.ID
-            INNER JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
-            LEFT JOIN SpeakerRegistrationRequest AS SRR ON SRR.SpeakerID = S.ID
-            LEFT JOIN Member AS M ON M.ID = S.MemberID
-            LEFT JOIN SpeakerSummitRegistrationPromoCode AS SRPC ON SRPC.SpeakerID = S.ID
-            LEFT JOIN SummitRegistrationPromoCode AS RPC ON RPC.ID = SRPC.ID
-            LEFT JOIN SpeakerAnnouncementSummitEmail AS ASE ON ASE.SpeakerID = S.ID
-            LEFT JOIN SummitEvent AS E ON E.ID = Q1.ID
-            LEFT JOIN Presentation AS P ON P.ID = Q1.ID
-            LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
-            LEFT JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
-            LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID
-            WHERE RPC.SummitID = {$summit_id} AND ACR.SummitID={$summit_id} AND L.`Name` IS NOT NULL";
+
+$query_body = <<<SQL
+
+FROM SummitEvent AS E
+INNER JOIN Presentation ON Presentation.ID = E.ID
+INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID
+INNER JOIN PresentationCategory  ON PresentationCategory.ID = Presentation.CategoryID
+LEFT JOIN Member ON Member.ID = S.MemberID
+LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
+LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = 6
+LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
+LEFT JOIN SpeakerSummitRegistrationPromoCode ON SpeakerSummitRegistrationPromoCode.SpeakerID = S.ID
+LEFT JOIN SummitRegistrationPromoCode ON SummitRegistrationPromoCode.ID = SpeakerSummitRegistrationPromoCode.ID
+WHERE
+E.SummitID = {$summit_id}
+AND E.Published = 1
+AND SummitRegistrationPromoCode.SummitID = {$summit_id}
+
+SQL;
+
 
         if ($search_term) {
             $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
                             OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%')";
         }
 
-        $query_count = "SELECT COUNT(*)";
+        $query_count = "SELECT COUNT(*) ";
 
-        $query =
-            "SELECT
-                Q1.ID AS presentation_id,
-                ACR.id AS assistance_id,
-                E.Title AS presentation,
-                Q1.Published AS published,
-                Q1.SelectionStatus AS status,
-                PC.Title AS track,
-                E.StartDate AS start_date,
-                L.Name AS location,
-                S.ID AS speaker_id,
-                S.MemberID AS member_id,
-                CONCAT(S.FirstName,' ',S.LastName) AS name,
-                IFNULL(M.Email, SRR.Email) AS email,
-                ACR.OnSitePhoneNumber AS phone,
-                SRPC.Type AS code_type,
-                RPC.Code AS promo_code,
-                ACR.IsConfirmed AS confirmed,
-                ACR.RegisteredForSummit AS registered,
-                ACR.CheckedIn AS checked_in";
+        $query = <<<SQL
+        SELECT
+        E.Title AS presentation,
+        E.Published AS published,
+        PresentationCategory.Title AS track,
+        E.StartDate AS start_date,
+        L.Name AS location,
+        S.ID AS speaker_id,
+        Member.ID AS member_id,
+        CONCAT(Member.FirstName ,' ',Member.Surname) AS speaker_name,
+        CONCAT(S.FirstName ,' ',S.LastName) AS member_name,
+        IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
+        ACR.OnSitePhoneNumber AS phone,
+        SpeakerSummitRegistrationPromoCode.Type AS code_type,
+        SummitRegistrationPromoCode.Code AS promo_code,
+        ACR.IsConfirmed AS confirmed,
+        ACR.RegisteredForSummit AS registered,
+        ACR.CheckedIn AS checked_in,
+        E.ID AS presentation_id,
+        ACR.ID AS assistance_id
+SQL;
 
         $query .= $query_body." ORDER BY {$sort} {$sort_dir}";
         $query_count .= $query_body;
@@ -139,7 +124,6 @@ SQL;
         $data = DB::query($query);
         $total = DB::query($query_count)->value();
         $result = array('Total' => $total, 'Data' => $data);
-
         return $result;
     }
 

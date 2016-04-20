@@ -22,4 +22,7 @@ interface ISummitAssistanceRepository extends IEntityRepository
 
     public function getRoomsBySummitAndDay($summit_id, $date, $event_type, $venue);
 
+    //TODO : this does not belongs here, move to another repository !!!
+    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term);
+
 }
