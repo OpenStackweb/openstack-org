@@ -189,13 +189,13 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
         $summit              = null;
 
-        $member     = Member::currentUser();
-        $update_own = !is_null($member) && $member->isAttendee($summit_id);
+        $member              = Member::currentUser();
+        $update_schedule     = !is_null($member) && $member->isAttendee($summit_id);
 
         if($cache && $data = $this->loadRAWResponseFromCache($request)) {
-            if($update_own)
+            if($update_schedule)
             {
-                // update my schedule
+                // update my schedule state
                 $events = $data['events'];
                 foreach($events as $idx => $e)
                 {

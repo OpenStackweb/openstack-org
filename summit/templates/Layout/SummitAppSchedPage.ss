@@ -81,7 +81,6 @@
         };
         <% end_loop %>
 
-
         <% loop $Summit.Types %>
         summit.summit_types[{$ID}] =
         {

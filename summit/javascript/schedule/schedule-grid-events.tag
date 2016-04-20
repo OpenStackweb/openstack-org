@@ -34,15 +34,16 @@
             if(status == 200){
                 self.show_date    = data.show_date;
                 self.events       = data.events;
+                self.update();
                 console.log(self.events.length +' events retrieved ...');
-                self.applyFilters(true);
+                self.applyFilters();
             }
             window.setTimeout(function(){$('#events-container').ajax_loader('stop');}, 1000);
         });
 
         this.schedule_filters.on('scheduleFiltersChanged', function(filters){
             self.current_filter = filters;
-            window.setTimeout(function(){self.applyFilters(false);}, 1000);
+            self.applyFilters();
         });
 
         isFilterEmpty() {
@@ -74,7 +75,7 @@
         }
 
         applyFilters(load_data){
-
+            $('.event-row').show();
             if(!self.isFilterEmpty()){
                     console.log('doing filtering ...');
                     for(var e of self.events){
@@ -107,10 +108,6 @@
                     }
                     console.log('filtering finished ...');
             }
-            else
-                $('.event-row').show();
-            if(load_data)
-                self.update();
         }
     </script>
 </schedule-grid-events>
