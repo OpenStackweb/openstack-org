@@ -9,14 +9,10 @@ schedule_api.getEventByDay = function (summit_id, day)
         type: 'GET',
         url:  url,
         timeout:60000,
-        // ifModified: true,
-        contentType: "application/json; charset=utf-8",
+        dataType:'json',
         success: function (data, textStatus, jqXHR) {
-            if(jqXHR.status === 200) {
-                data.show_date = false;
-            }
-            schedule_api.trigger('eventsRetrieved', data, jqXHR.status);
-
+            data.show_date = false;
+            schedule_api.trigger('eventsRetrieved', data);
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert('there was an error, please contact your administrator');

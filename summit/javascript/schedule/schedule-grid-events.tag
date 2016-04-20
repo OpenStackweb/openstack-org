@@ -30,14 +30,12 @@
             $('#events-container').ajax_loader();
         });
 
-        this.schedule_api.on('eventsRetrieved',function(data, status) {
-            if(status == 200){
-                self.show_date    = data.show_date;
-                self.events       = data.events;
-                self.update();
-                console.log(self.events.length +' events retrieved ...');
-                self.applyFilters();
-            }
+        this.schedule_api.on('eventsRetrieved',function(data) {
+            self.show_date    = data.show_date;
+            self.events       = data.events;
+            self.update();
+            console.log(self.events.length +' events retrieved ...');
+            self.applyFilters();
             window.setTimeout(function(){$('#events-container').ajax_loader('stop');}, 1000);
         });
 
