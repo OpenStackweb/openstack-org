@@ -1,0 +1,195 @@
+/*ISVs landing page*/
+.intro-header.isv {
+  padding: 40px 0;
+  background: url("/themes/openstack/images/isv/isv-bkgd3.jpg") no-repeat center center; }
+  .intro-header.isv h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: 400; }
+  .intro-header.isv p {
+    color: white;
+    font-size: 1.2em; }
+
+.appdev-quotes .right {
+  text-align: left; }
+
+.enterprise-why-icons.isv i {
+  border-radius: 4px;
+  font-size: 5em;
+  color: #29abe2;
+  margin-bottom: 10px;
+  line-height: 1; }
+
+.enterprise-why-icons.isv h3 {
+  font-size: 1.5em;
+  margin: 0 auto;
+  max-width: 100%;
+  min-height: 0;
+  line-height: 1em;
+  color: #30739C; }
+
+.isv-growth-wrapper {
+  margin-top: 40px; }
+  .isv-growth-wrapper p {
+    font-size: 15px;
+    font-weight: 300;
+    color: #445059;
+    margin: 10px auto; }
+  .isv-growth-wrapper .isv-growth-right {
+    margin-top: 10px;
+    color: #2A4E68; }
+
+img.isv-growth-chart {
+  float: left;
+  margin-right: 20px;
+  max-width: 580px;
+  border: 2px solid #edf2f7; }
+
+.isv-sml {
+  display: none; }
+
+.isv-sml i, .isv-lrg i {
+  margin-right: 10px; }
+
+@media (max-width: 767px) {
+  img.isv-growth-chart {
+    max-width: 100%;
+    margin-bottom: 20px;
+    margin-right: 0; }
+  .isv-sml {
+    display: block; }
+  .isv-lrg {
+    display: none; } }
+
+h5.section-title {
+  color: #2A4E68;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-bottom: 1px solid #dae5ee;
+  padding-bottom: 20px;
+  margin: 50px 0 30px; }
+  h5.section-title span {
+    float: right;
+    text-transform: uppercase;
+    color: #a9a9a9;
+    font-weight: 700;
+    font-size: 0.8em;
+    position: relative; }
+    h5.section-title span i {
+      font-size: 1.3em;
+      margin-right: 5px; }
+    h5.section-title span:hover {
+      color: #29abe2;
+      cursor: default; }
+  h5.section-title .tooltip {
+    font-weight: 400;
+    width: auto;
+    white-space: normal; }
+
+.isv-resources-wrapper {
+  padding: 60px 0; }
+  .isv-resources-wrapper h2 {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 300;
+    color: #445059;
+    margin-bottom: 20px; }
+  .isv-resources-wrapper p {
+    font-size: 15px;
+    font-weight: 300;
+    color: #445059;
+    margin: 10px auto; }
+  .isv-resources-wrapper p a {
+    text-decoration: underline;
+  }
+
+.isv-promotional-wrapper h2 {
+  text-align: left;
+  font-size: 35px;
+  font-weight: 300;
+  color: #445059;
+  margin-bottom: 20px; }
+
+.isv-promotional-wrapper h5.section-title {
+  text-align: left;
+  margin-bottom: 0px;
+  padding-bottom: 10px; }
+
+.isv-promotional-wrapper p {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 300;
+  color: #445059;
+  margin: 10px auto; }
+
+.isv-promotional-wrapper .isv-promo-btn {
+  background: #29abe2;
+  padding: 3px 20px;
+  border-radius: 20px;
+  color: white;
+  display: inline-block;
+  font-size: .9em; }
+  .isv-promotional-wrapper .isv-promo-btn:hover, .isv-promotional-wrapper .isv-promo-btn:focus {
+    background: #2A4E68;
+    text-decoration: none; }
+  .isv-promotional-wrapper .isv-promo-btn i {
+    margin-left: 5px; }
+
+.fixed-image.isv {
+  background-image: url("/themes/openstack/images/isv/keyboard-bkgd.jpg"); }
+
+.featured-wrapper.isv .video-wrapper .play-button {
+  text-align: center;
+  top: 28%; }
+  .featured-wrapper.isv .video-wrapper .play-button img {
+    max-width: 80px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px; }
+
+.featured-wrapper.isv .video-wrapper:hover .play-button {
+  display: block; }
+  .featured-wrapper.isv .video-wrapper:hover .play-button img {
+    background: #1d99de; }
+
+.isv-cta {
+  background: #29abe2;
+  padding: 40px 0;
+  width: 100%;
+  color: white;
+  text-align: center; }
+  .isv-cta i {
+    font-size: 4em;
+    color: #30739C;
+    margin-bottom: 20px; }
+  .isv-cta a {
+    color: white;
+    text-decoration: underline; }
+  .isv-cta a.isv-cta-btn {
+    background: #30739C;
+    border-radius: 4px;
+    padding: 10px 20px;
+    display: block;
+    max-width: 210px;
+    margin: 20px auto 0;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center; }
+    .isv-cta a.isv-cta-btn:hover {
+      background: #2A4E68; }
+    .isv-cta a.isv-cta-btn i {
+      font-size: 1em;
+      color: white;
+      margin: 0 0 0 10px; }
+
+.isv-footnotes {
+  padding: 60px 0;
+  width: 100%;
+  background: white; 
+  margin-bottom: -50px;
+}
+  .isv-footnotes p {
+    font-size: 0.8em; }
+
+/*End ISVs landing page*/

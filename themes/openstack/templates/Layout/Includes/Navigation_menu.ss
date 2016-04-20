@@ -17,7 +17,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}user-stories/">Overview</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}enterprise/">OpenStack in the Enterprise</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}appdev/">Application Developers</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}appdev/">App Developers & ISVs</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org/">Superuser Magazine</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
     </ul>

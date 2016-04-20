@@ -3158,6 +3158,31 @@ a.guide-icons {
       font-size: 30px;
       margin-bottom: 10px; } }
 
+h5.section-title {
+  color: #2A4E68;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-bottom: 1px solid #dae5ee;
+  padding-bottom: 20px;
+  margin: 50px 0 30px; }
+  h5.section-title span {
+    float: right;
+    text-transform: uppercase;
+    color: #a9a9a9;
+    font-weight: 700;
+    font-size: 0.8em;
+    position: relative; }
+    h5.section-title span i {
+      font-size: 1.3em;
+      margin-right: 5px; }
+    h5.section-title span:hover {
+      color: #29abe2;
+      cursor: default; }
+  h5.section-title .tooltip {
+    font-weight: 400;
+    width: auto;
+    white-space: normal; }
+
 h5.section-title.guide {
   margin: 60px 0.75% 10px;
   color: #2A4E68;
