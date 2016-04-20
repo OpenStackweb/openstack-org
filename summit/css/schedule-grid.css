@@ -49,6 +49,15 @@ i.collapse-nav {
     margin-right: 5px;
 }
 
+#logout-button {
+    padding: 8px 14px;
+    color: grey;
+}
+
+#logout-button > i {
+    margin-right: 5px;
+}
+
 /*.tags-row {
     font-family: Montserrat, Sans-serif;
 }*/
@@ -542,7 +551,7 @@ a.navbar-brand {
 
 .col-switch-schedule {
     float: right;
-    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .switch_schedule {
@@ -591,7 +600,7 @@ form.all-events-search-form .all-events-search-wrapper i {
     cursor: pointer;
 }
 
-.login-container {
+.login-container, .logout-container {
     position: relative;
     top: 120px;
     right: 0px;

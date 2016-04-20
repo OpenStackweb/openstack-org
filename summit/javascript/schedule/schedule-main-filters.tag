@@ -9,16 +9,18 @@
                 <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
-        <div class="col-xs-3">
-            <div class="col-view-all-schedule">
-                <form onsubmit={ fullViewAction } id="full-view-form" method="POST">
-                    <input type="hidden" name="goback" value="1" />
-                    <button type="submit" class="btn btn-default pull-right view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Calendar</button></button>
-                </form>
-            </div>
-        </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-5">
+    <div class="col-view-all-schedule">
+    <form action="{ self.base_url+'mine/' }" method="POST" if={ mine }>
+    <input type="hidden" name="goback" value="1" />
+    <button type="submit" class="btn btn-default pull-right view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;My&nbsp;Schedule</button></button>
+    </form>
+    <form onsubmit="{ self.base_url+'full/' }" method="POST" if={ !mine }>
+    <input type="hidden" name="goback" value="1" />
+    <button type="submit" class="btn btn-default pull-right view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule</button></button>
+    </form>
+    </div>
             <div class="col-switch-schedule">
                 <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
                     <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
@@ -230,12 +232,6 @@
             $('#ddl_tags').val('').trigger("chosen:updated");
             $('#ddl_levels').val('').trigger("chosen:updated");
             self.doFilter();
-        }
-
-        fullViewAction() {
-            var action = (self.mine) ? self.base_url+'mine/' : self.base_url+'full/';
-            $("#full-view-form").attr("action", action);
-            return true;
         }
 
         this.schedule_filters.on('scheduleToggleFilters', function(hide){
