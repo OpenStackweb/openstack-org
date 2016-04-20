@@ -72,7 +72,7 @@
             return (!self.current_filter.own);
         }
 
-        applyFilters(load_data){
+        applyFilters(){
             $('.event-row').show();
             if(!self.isFilterEmpty()){
                     console.log('doing filtering ...');

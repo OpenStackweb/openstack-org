@@ -161,15 +161,19 @@
     addToMySchedule(e) {
         e.preventUpdate = true;
         this.own        = true;
+        e.item.own      = true;
         self.schedule_api.addEvent2MySchedule(self.summit.id, e.item.id);
         self.update();
+        self.parent.applyFilters();
     }
 
     removeFromMySchedule(e) {
         e.preventUpdate = true;
         this.own        = false;
+        e.item.own      = false;
         self.schedule_api.removeEventFromMySchedule(self.summit.id, e.item.id);
         self.update();
+        self.parent.applyFilters();
     }
 
     </script>
