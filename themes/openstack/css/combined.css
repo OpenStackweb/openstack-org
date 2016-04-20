@@ -2519,6 +2519,25 @@ ul.resource-links li a:hover {
   padding: 20px;
   font-size: 13px; }
 
+.foundation-report-title {
+  font-size: 1.1em;
+  font-weight: 300;
+  margin: 0 0 15px;
+  position: relative;
+  display: inline-block; }
+  .foundation-report-title:before, .foundation-report-title:after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid white;
+    top: 13px;
+    width: 80px; }
+  .foundation-report-title:before {
+    right: 100%;
+    margin-right: 10px; }
+  .foundation-report-title:after {
+    left: 100%;
+    margin-left: 10px; }
+
 /*404 Page*/
 .four-o-four-wrapper {
   text-align: center;

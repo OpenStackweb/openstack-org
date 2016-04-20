@@ -1047,7 +1047,7 @@ a.enterprise-bar-right {
     opacity: 1; }
 
 .intro-header.enterprise-booklet {
-  background: url('/themes/openstack/images/enterprise/booklet-bkgd.jpg') no-repeat center center;
+  background: url('/themes/openstack/images/enterprise/path-to-cloud/path-to-cloud-hero.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
   padding: 60px 0; }
@@ -1070,8 +1070,9 @@ a.enterprise-bar-right {
   }
   .intro-header.enterprise-booklet p {
     text-align: left;
-    font-weight: 300;
-    line-height: 1.3em;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.1em;
     margin: 20px 0; 
     text-align: center;
   }
@@ -1622,3 +1623,114 @@ img.global-figures-chart {
     text-align: center; }
   .summit-promo.containers .containers-summit-right {
     margin-top: 30px; } }
+.mid-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px 0;
+  width: 100%;
+  margin: 20px 0; }
+
+a.path-options-btn {
+  max-width: 325px;
+  whitespace: nowrap;
+  background: #DA422F;
+  border-radius: 4px;
+  padding: 15px 30px;
+  color: white;
+  display: block;
+  margin: 30px auto 10px;
+  font-weight: 400;
+  font-size: 14px; }
+  a.path-options-btn:hover, a.path-options-btn:focus {
+    text-decoration: none;
+    background: #A51B1B;
+    outline: none; }
+
+.booklets-section {
+  padding: 60px 0;
+  background: url("/themes/openstack/images/enterprise/path-to-cloud/booklet-bkgd.jpg") no-repeat center center;
+  background-size: cover;
+  position: relative;
+  text-align: center;
+  color: white; }
+  .booklets-section .booklets-intro {
+    margin-bottom: 30px; }
+  .booklets-section h1 {
+    margin: 0 0 10px;
+    color: white; }
+  .booklets-section .booklets-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    padding: 20px 30px; }
+    .booklets-section .booklets-wrapper .booklets-top {
+      min-height: 120px;
+      font-size: 0.95em; }
+      .booklets-section .booklets-wrapper .booklets-top strong {
+        font-weight: 400;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        display: block;
+        padding-bottom: 7px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+  .booklets-section a.booklets-btn {
+    background: #DA422F;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 20px auto 0;
+    color: white;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    whitespace: nowrap;
+    width: 250px; }
+    .booklets-section a.booklets-btn i {
+      margin-left: 10px;
+      font-size: 1.15em; }
+    .booklets-section a.booklets-btn:hover, .booklets-section a.booklets-btn:focus {
+      background: #A51B1B;
+      text-decoration: none;
+      outline: none; }
+
+@media (max-width: 990px) {
+  .booklets-section .booklets-wrapper .booklets-top {
+    min-height: 150px; } }
+
+@media (max-width: 767px) {
+  .booklets-section .left {
+    margin-bottom: 20px; }
+  .booklets-section .booklets-wrapper .booklets-top {
+    min-height: 0; } }
+
+#BookletModalHero .modal-title {
+  text-align: center; }
+
+.booklets-list {
+  margin: 20px 0 0;
+  padding: 0; }
+  .booklets-list li {
+    list-style: none;
+    margin-bottom: 5px;
+    width: 100%; }
+    .booklets-list li a {
+      padding: 10px 15px;
+      background: #edf2f7;
+      border-radius: 4px;
+      width: 100%;
+      display: block; }
+      .booklets-list li a:hover, .booklets-list li a:focus {
+        text-decoration: none;
+        background: #30739C;
+        color: white; }
+    .booklets-list li:last-child {
+      margin-bottom: 0; }
+
+.tip {
+  margin-top: 20px;
+  font-size: 0.9em; }
+  .tip i {
+    margin-right: 5px; }
+  .tip a {
+    font-style: italic;
+    color: #2A4E68;
+    text-decoration: underline; }
+    .tip a:hover {
+      color: #30739C; }
