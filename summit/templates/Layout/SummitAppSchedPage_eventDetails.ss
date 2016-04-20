@@ -11,7 +11,7 @@
                 <div class="speaker-name-row">
                     <div class="col-sm-12">
                         <div class="speaker-photo-left">
-                            <a href="{$Top.Link(speakers)}/{$ID}" class="profile-pic-wrapper" style="background-image: url('{$ProfilePhoto}')">
+                            <a href="{$Top.Link(speakers)}/{$ID}" class="profile-pic-wrapper" style="background-image: url('{$ProfilePhoto(60)}')">
                             </a>
                         </div>
                         <div class="speaker-name-right">
@@ -19,7 +19,7 @@
                             $Name
                             </a>
                             <div class="speaker-company">
-                                $getCurrentPosition
+                                $TitleNice
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                 <span>Tags:</span>
                 <% loop $Event.Tags %>
                 <span title="Search Tag" class="tag">
-                    <a class="search-link" href="{$Top.Link(global-search)}?t={$Tag.XML}">{$Tag}<% if not Last %>,&nbsp;<% end_if %></a>
+                    <a class="search-link" href="{$Top.Link(global-search)}?t={$TagURL}">{$Tag}<% if not Last %>,&nbsp;<% end_if %></a>
                 &nbsp;
                 </span>
                 <% end_loop %>

@@ -26,7 +26,7 @@ final class Tag extends DataObject implements ITag
     );
 
     static $belongs_many_many = array(
-        'News' => 'News',
+        'News'   => 'News',
         'Events' => 'SummitEvent',
     );
 
@@ -36,5 +36,9 @@ final class Tag extends DataObject implements ITag
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
+    }
+
+    public function TagURL(){
+        return str_replace(' ','+', $this->getField('Tag'));
     }
 }

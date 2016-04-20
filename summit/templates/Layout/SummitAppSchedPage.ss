@@ -32,17 +32,7 @@
 
         <% cached 'frontend_schedule_page', $Summit.ID, $Summit.LastEdited %>
 
-        <% loop $Summit.Speakers %>
-         summit.speakers[{$ID}] =
-         {
-             id: {$ID},
-             name : "{$Name.JS}",
-             profile_pic : "{$ProfilePhoto(60).JS}",
-             position : "{$TitleNice.JS}",
-         };
-        <% end_loop %>
-
-       <% loop $Summit.Sponsors %>
+        <% loop $Summit.Sponsors %>
            summit.sponsors[{$ID}] =
            {
                 id: {$ID},

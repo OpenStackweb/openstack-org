@@ -9,7 +9,7 @@ schedule_api.getEventByDay = function (summit_id, day)
         type: 'GET',
         url:  url,
         timeout:60000,
-        ifModified: true,
+        // ifModified: true,
         contentType: "application/json; charset=utf-8",
         success: function (data, textStatus, jqXHR) {
             if(jqXHR.status === 200) {
