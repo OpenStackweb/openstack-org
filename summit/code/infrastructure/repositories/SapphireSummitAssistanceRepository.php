@@ -74,12 +74,14 @@ LEFT JOIN Member ON Member.ID = S.MemberID
 LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = 6
 LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
-LEFT JOIN SpeakerSummitRegistrationPromoCode ON SpeakerSummitRegistrationPromoCode.SpeakerID = S.ID
-LEFT JOIN SummitRegistrationPromoCode ON SummitRegistrationPromoCode.ID = SpeakerSummitRegistrationPromoCode.ID
+LEFT JOIN (
+    SELECT Type, Code, SpeakerID FROM SpeakerSummitRegistrationPromoCode
+    INNER JOIN SummitRegistrationPromoCode ON SummitRegistrationPromoCode.ID = SpeakerSummitRegistrationPromoCode.ID
+    AND SummitRegistrationPromoCode.SummitID = $summit_id
+) AS PromoCodes ON PromoCodes.SpeakerID = S.ID
 WHERE
 E.SummitID = {$summit_id}
 AND E.Published = 1
-AND SummitRegistrationPromoCode.SummitID = {$summit_id}
 
 SQL;
 
@@ -104,8 +106,8 @@ SQL;
         CONCAT(S.FirstName ,' ',S.LastName) AS member_name,
         IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
         ACR.OnSitePhoneNumber AS phone,
-        SpeakerSummitRegistrationPromoCode.Type AS code_type,
-        SummitRegistrationPromoCode.Code AS promo_code,
+        PromoCodes.Type AS code_type,
+        PromoCodes.Code AS promo_code,
         ACR.IsConfirmed AS confirmed,
         ACR.RegisteredForSummit AS registered,
         ACR.CheckedIn AS checked_in,
