@@ -10,7 +10,6 @@
                 <th>Time</th>
                 <th>Event</th>
                 <th>Room</th>
-                <th>Vacancy</th>
                 <th>RSVP</th>
             </tr>
         </thead>
@@ -19,8 +18,7 @@
             <tr nobr="true">
                 <td style="width:20%">{$getStartTime} - {$getEndTime}</td>
                 <td style="width:45%">{$Title}</td>
-                <td style="width:15%"><% if $Summit.ShouldShowVenues %> {$getLocationNameNice} <% else %> TBD <% end_if %></td>
-                <td style="width:12%">{$Attendees.Count()}/{$LocationCapacity}</td>
+                <td style="width:27%"><% if $Summit.ShouldShowVenues %> {$getLocationNameNice} <% else %> TBD <% end_if %></td>
                 <td style="width:8%"><% if $RSVPLink %> Yes <% else %> No <% end_if %></td>
             </tr>
             <% end_loop %>

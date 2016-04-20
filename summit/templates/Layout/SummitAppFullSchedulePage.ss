@@ -41,7 +41,7 @@
             var should_show_venues = <% if $Summit.ShouldShowVenues %> 1 <% else %> 0 <% end_if %>;
             var summit_id = {$Summit.ID};
         </script>
-        <schedule-full-schedule events="{ events }" summit_id="{ summit_id }" should_show_venues="{ should_show_venues }"></schedule-full-schedule>
+        <schedule-full-schedule events="{ events }" base_url="{$Top.Link}" summit_id="{ summit_id }" should_show_venues="{ should_show_venues }"></schedule-full-schedule>
     </div>
 </div>
 

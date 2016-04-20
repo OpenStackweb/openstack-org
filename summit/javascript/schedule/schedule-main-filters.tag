@@ -9,19 +9,22 @@
                 <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
-
-        <div class="col-xs-6">
-            <div class="col-switch-schedule">
-                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
-                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
-                </button>
-            </div>
+        <div class="col-xs-3">
             <div class="col-view-all-schedule">
                 <form onsubmit={ fullViewAction } id="full-view-form" method="POST">
                     <input type="hidden" name="goback" value="1" />
                     <button type="submit" class="btn btn-default pull-right view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Calendar</button></button>
                 </form>
             </div>
+        </div>
+
+        <div class="col-xs-3">
+            <div class="col-switch-schedule">
+                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
+                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
+                </button>
+            </div>
+
         </div>
 
     </div>
