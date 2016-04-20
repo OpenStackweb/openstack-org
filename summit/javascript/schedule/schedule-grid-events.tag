@@ -46,11 +46,15 @@
         });
 
         isFilterEmpty() {
-            return self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty();
+            return self.isSummitTypesFilterEmpty() && self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty();
         }
 
         isEventTypesFilterEmpty() {
             return (self.current_filter.event_types === null || self.current_filter.event_types.length === 0);
+        }
+
+        isSummitTypesFilterEmpty() {
+            return (self.current_filter.summit_types === null || self.current_filter.summit_types.length === 0);
         }
 
         isTracksFilterEmpty() {
@@ -70,33 +74,43 @@
         }
 
         applyFilters(load_data){
-            if(self.current_filter !== null && self.events.length > 0){
-                if(!(load_data && self.isFilterEmpty())){
+
+            if(!self.isFilterEmpty()){
                     console.log('doing filtering ...');
                     for(var e of self.events){
                         e.show = true;
+                        //summit types
+                        if(!self.isSummitTypesFilterEmpty())
+                            e.show &= e.summit_types_id.some(function(v) { return self.current_filter.summit_types.indexOf(v.toString()) != -1; });
+                        if(!e.show){ $('#event_'+e.id).hide(); continue;}
+                        //eventypes
                         if(!self.isEventTypesFilterEmpty())
                             e.show &= self.current_filter.event_types.indexOf(e.type_id.toString()) > -1;
-                        if(!e.show) continue;
+                        if(!e.show){ $('#event_'+e.id).hide(); continue;}
                         //tracks
                         if(!self.isTracksFilterEmpty() && e.hasOwnProperty('track_id'))
                             e.show &= self.current_filter.tracks.indexOf(e.track_id.toString()) > -1;
-                        if(!e.show) continue;
+                        if(!e.show){ $('#event_'+e.id).hide(); continue;}
                         //level
                         if(!self.isLevelsFilterEmpty() && e.hasOwnProperty('level'))
                             e.show &= self.current_filter.levels.indexOf(e.level.toString()) > -1;
-                        if(!e.show) continue;
+                        if(!e.show){ $('#event_'+e.id).hide(); continue;}
                         //tags
                         if(!self.isTagsFilterEmpty())
                             e.show &= e.tags_id.some(function(v) { return self.current_filter.tags.indexOf(v.toString()) != -1; });
-                        if(!e.show) continue;
+                        if(!e.show){ $('#event_'+e.id).hide(); continue;}
                         //my schedule
                         if(self.current_filter.own)
                             e.show &= e.own;
+                        if(!e.show){ $('#event_'+e.id).hide(); continue;}
+                        $('#event_'+e.id).show();
                     }
-                }
+                    console.log('filtering finished ...');
             }
-            self.update();
+            else
+                $('.event-row').show();
+            if(load_data)
+                self.update();
         }
     </script>
 </schedule-grid-events>
