@@ -255,6 +255,12 @@ class SummitVideoAppBackend {
 
 
 	protected function createSummitJSON(Summit $s) {
+		$page = SummitPage::get()->filter('SummitID', $s->ID)->first();
+		$image = null;
+		if($page) {
+			$image = $page->SummitImage()->Image();
+		}
+
 		return [
 			'id' => $s->ID,
 			'title' => $s->Title,
@@ -262,8 +268,8 @@ class SummitVideoAppBackend {
 			'videoCount' => PresentationVideo::get()->filter([
 					'PresentationID' => $s->Presentations()->column('ID')
 				])->count(),
-			'imageURL' => ($s->Logo()->exists() && Director::fileExists($s->Logo()->Filename)) ? 
-								$s->Logo()->URL : 
+			'imageURL' => ($image && $image->exists() && Director::fileExists($image->Filename)) ? 
+								$image->CroppedImage(263,148)->URL : 
 								'summit-video-app/production/images/placeholder-image.jpg'
 		];
 	}

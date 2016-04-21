@@ -12,7 +12,7 @@ const SpeakerItem = ({
 		className='gallery-item speaker-item'
 		imageUrl={speaker.imageURL}		
 		title={speaker.name}
-		subtitle={`${speaker.jobTitle} (${speaker.videoCount} videos)`}
+		subtitle={`${speaker.jobTitle || ''} (${speaker.videoCount} videos)`}
 		link={URL.create(`speakers/show/${speaker.id}`)}
 		onItemClicked={onItemClicked}
 	/>
