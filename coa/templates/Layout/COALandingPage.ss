@@ -53,23 +53,19 @@
                 <p>
                     The best path to certification is through one of the OpenStack Foundation training partners. Dozens of companies around the world offer OpenStack training, ranging from 101 to advanced skills. Many of these companies bundle the COA exam with their training courses. Find the best fit for you in the <a href="http://www.openstack.org/training">OpenStack Training Marketplace</a>.
                 </p>
-                <% loop $Top.TrainingPartners.Sort(Order) %>
-                    <% if First %>
-                    <div class="coa-partners-row">
-                    <% end_if %>
+                <div class="coa-partners-row-wrapper">
+                    <div class="row">
+                        <% loop $Top.TrainingPartners.Sort(Order) %>
 
-                    <div class="coa-partner-logo">
-                        <a href="#">
-                            <img src="{$MediumLogoUrl}" alt="{$Name}">
-                        </a>
+                            <div class="col-sm-2 col-xs-3 coa-partner-logo">
+                                <a href="#">
+                                    <img src="{$MediumLogoUrl}" alt="{$Name}">
+                                </a>
+                            </div>
+
+                        <% end_loop %>
                     </div>
-                    <% if $MultipleOf(6) %>
-                    </div><div class="coa-partners-row">
-                    <% end_if %>
-                    <% if Last %>
-                    </div>
-                    <% end_if %>
-                <% end_loop %>
+                </div>
 
                 <p>
                     Want your OpenStack training company to be listed here? Contact <a href="mailto:ecosystem@openstack.org">ecosystem@openstack.org</a>.

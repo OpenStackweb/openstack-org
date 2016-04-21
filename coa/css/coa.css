@@ -68,9 +68,15 @@
     padding: 60px 0; }
 .coa-partners a {
     text-decoration: underline; }
+.coa-partners-row-wrapper {
+    background: white;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 10px 0;
+}
 .coa-partners .coa-partners-row {
-    margin-top: 60px;
-    margin-bottom: 60px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -88,27 +94,21 @@
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center; }
-.coa-partners .coa-partners-row .coa-partner-logo {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+.coa-partners .coa-partner-logo {
     text-align: center;
-    margin: 0 10px;
 }
-.coa-partners .coa-partners-row .coa-partner-logo img {
-    max-width: 110px;
+.coa-partners .coa-partner-logo img {
+    max-width: 100%;
     max-height: 80px;
 }
 
 @media (max-width: 767px) {
-    .coa-partners .coa-partners-row {
-        -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
-    .coa-partners .coa-partners-row .coa-partner-logo {
+    .coa-partners .coa-partner-logo {
         max-width: 100%;
-        margin: 10px; } }
+    }
+/*    .coa-partners .coa-partners-row .coa-partner-logo img {
+        max-width: 100%; }*/
+    }
 
 .coa-exam-details {
     padding: 90px 0; }
@@ -148,3 +148,10 @@
         border-bottom: 1px solid #D4DCE5;
         padding-bottom: 20px;
         margin-bottom: 20px; } }
+h5.section-title {
+  color: #2A4E68;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-bottom: 1px solid #dae5ee;
+  padding-bottom: 20px;
+  margin: 50px 0 30px; }
