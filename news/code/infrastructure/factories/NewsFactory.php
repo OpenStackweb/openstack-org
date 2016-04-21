@@ -56,9 +56,8 @@ final class NewsFactory
         $date_expire = isset($data['date_expire']) ? $data['date_expire'] : null;
         $is_landscape = isset($data['is_landscape']) ? $data['is_landscape'] : 0;
 
-
         $main_info = new NewsMainInfo(trim($data['headline']),trim($data['summary']),$data['city'],$data['state'], $data['country'],
-                                      $data['date'],trim($data['body']),$data['link'],$data['Image'],$is_landscape,$data['Document'],
+                                      trim($data['body']),$data['link'],$data['Image'],$is_landscape,$data['Document'],
                                       $date_embargo,$date_expire);
 		return $main_info;
 	}

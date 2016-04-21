@@ -76,7 +76,6 @@ final class NewsRequestForm extends HoneyPotForm {
             $IsLandscapeField = new CheckboxField('is_landscape','Is Banner? (landscape image)');
             $IsLandscapeField->addExtraClass('is_landscape');
         }
-
         if($article) {
             $IDField->setValue($article->ID);
             $HeadlineField->setValue($article->Headline);
@@ -85,15 +84,20 @@ final class NewsRequestForm extends HoneyPotForm {
             $StateField->setValue($article->State);
             $CountryField->setValue($article->Country);
             $TagsField->setValue($article->getTagsCSV());
-            if ($article->DateEmbargo)
-                $DateEmbargoField->setValue(date('m/d/Y g:i a',strtotime($article->DateEmbargo)));
-            else
-                $DateEmbargoField->setValue(gmdate('m/d/Y g:i a'));
-            $UpdatedField->setValue($article->LastEdited);
+            if ($article->DateEmbargo) {
+                $DateEmbargoField->setValue($article->getDateEmbargoCentral('m/d/Y g:i a'));
+            } else {
+                $now_central = new DateTime();
+                $now_central->setTimezone(new DateTimeZone('America/Chicago'));
+                $DateEmbargoField->setValue($now_central->format('m/d/Y g:i a'));
+            }
+            $last_edited_date = new DateTime($article->LastEdited, new DateTimeZone('GMT'));
+            $last_edited_date->setTimezone(new DateTimeZone('America/Chicago'));
+            $UpdatedField->setValue($last_edited_date->format('M j, Y g:i:s A'));
             $BodyField->setValue($article->Body);
             $LinkField->setValue($article->Link);
             if ($article->DateExpire)
-                $DateExpireField->setValue(date('m/d/Y g:i a',strtotime($article->DateExpire)));
+                $DateExpireField->setValue($article->getDateExpireCentral('m/d/Y g:i a'));
             $IsLandscapeField->setValue($article->IsLandscape);
             //submitter read only
             $SubmitterFirstNameField = new ReadonlyField('submitter_first_name','First Name');

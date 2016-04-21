@@ -36,10 +36,6 @@ final class NewsMainInfo {
      */
     private $country;
     /**
-     * @var DateTime
-     */
-    private $date;
-    /**
      * @var string
      */
     private $body;
@@ -82,7 +78,6 @@ final class NewsMainInfo {
      * @param string $city
      * @param string $state
      * @param string $country
-     * @param DateTime $date
      * @param string $body
      * @param string $link
      * @param array $image
@@ -90,13 +85,12 @@ final class NewsMainInfo {
      * @param DateTime $date_embargo
      * @param DateTime $date_expire
      */
-    public function __construct($headline,$summary,$city,$state,$country,$date,$body,$link, array $image, $is_landscape, array $document,$date_embargo,$date_expire){
+    public function __construct($headline,$summary,$city,$state,$country,$body,$link, array $image, $is_landscape, array $document,$date_embargo,$date_expire){
         $this->headline     = $headline;
         $this->summary      = $summary;
         $this->city         = $city;
         $this->state        = $state;
         $this->country      = $country;
-        $this->date         = $date;
         $this->body         = $body;
         $this->link         = $link;
         $this->image        = $image;
@@ -108,10 +102,6 @@ final class NewsMainInfo {
 
     public function getHeadline(){
         return $this->headline;
-    }
-
-    public function getDate(){
-        return $this->date;
     }
 
     public function getSummary(){
