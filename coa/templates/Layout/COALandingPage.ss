@@ -12,6 +12,7 @@
                 <div class="coa-action-top">
                     <h5>Have a code to redeem?</h5>
                     <a href="$Top.Link(get-started)" class="coa-action-btn">Get Started <i class="fa fa-chevron-right"></i></a>
+                    <a href="#" class="coa-already-registered">Already Registered?</a>
                 </div>
             </div>
         </div>
@@ -129,6 +130,7 @@
                                 <p>
                                     <a href="{$Top.Link(get-started)}" class="coa-details-btn red">Get Started <i class="fa fa-chevron-right"></i></a>
                                 </p>
+                                <a href="#" class="coa-already-registered">Already Registered?</a>
                             </div>
                         </div>
                     </div>

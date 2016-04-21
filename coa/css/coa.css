@@ -109,7 +109,12 @@
 /*    .coa-partners .coa-partners-row .coa-partner-logo img {
         max-width: 100%; }*/
     }
-
+a.coa-already-registered {
+    color: white;
+    text-decoration: underline;
+    display: inline-block;
+    margin-top: 10px;;
+}
 .coa-exam-details {
     padding: 90px 0; }
 .coa-exam-details .coa-details-action {
@@ -139,6 +144,9 @@
     background: #C71A28; }
 .coa-exam-details .coa-details-action a.coa-details-btn.red:hover, .coa-exam-details .coa-details-action a.coa-details-btn.red:focus {
     background: #A51B1B; }
+.coa-exam-details .coa-details-action .coa-action-bottom a.coa-already-registered {
+    color: #333;
+}
 
 @media (max-width: 767px) {
     .coa-exam-details .coa-details-action {
