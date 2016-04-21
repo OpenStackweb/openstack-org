@@ -169,7 +169,7 @@ class SummitVideoAppBackend {
 			$speakers = $speakers->filter(
 				'LastName:StartsWith', 
 				$params['letter']
-			);
+			)->sort('LastName ASC');
 		}
 
 		$total = $speakers->count();
@@ -262,7 +262,7 @@ class SummitVideoAppBackend {
 			'videoCount' => PresentationVideo::get()->filter([
 					'PresentationID' => $s->Presentations()->column('ID')
 				])->count(),
-			'imageURL' => ($s->Logo()->exists() && Director::fileExists($s->Logo()->URL)) ? 
+			'imageURL' => ($s->Logo()->exists() && Director::fileExists($s->Logo()->Filename)) ? 
 								$s->Logo()->URL : 
 								'summit-video-app/production/images/placeholder-image.jpg'
 		];
@@ -274,7 +274,7 @@ class SummitVideoAppBackend {
 			'id' => $s->ID,
 			'name' => $s->getName(),
 			'jobTitle' => $s->Title,
-			'imageURL' => ($s->Photo()->exists() && Director::fileExists($s->Photo()->URL)) ? 
+			'imageURL' => ($s->Photo()->exists() && Director::fileExists($s->Photo()->Filename)) ? 
 								$s->Photo()->URL : 
 								'summit-video-app/production/images/placeholder-image.jpg',
 			'videoCount' => $s->Presentations()->count()
