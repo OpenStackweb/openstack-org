@@ -275,7 +275,7 @@ class SummitVideoAppBackend {
 			'name' => $s->getName(),
 			'jobTitle' => $s->Title,
 			'imageURL' => ($s->Photo()->exists() && Director::fileExists($s->Photo()->Filename)) ? 
-								$s->Photo()->URL : 
+								$s->Photo()->CroppedImage(263,148)->URL : 
 								'summit-video-app/production/images/placeholder-image.jpg',
 			'videoCount' => $s->Presentations()->count()
 		];
