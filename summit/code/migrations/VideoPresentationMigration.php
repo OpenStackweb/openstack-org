@@ -31,6 +31,13 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
     	'Tokyo'
     ];
 
+	public function run($request) {		
+		if ($request->getVar('Direction') == 'down') {
+			$this->down();
+		} else {
+			$this->up();
+		}
+	}    
 
 	/**
 	 * Helper method to write context sensitive line breaks
