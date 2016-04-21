@@ -1657,6 +1657,23 @@ SQL;
         return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('Name', 'ASC');
     }
 
+    public function getSummitDateRange() 
+    {
+    	$start = $this->obj('SummitBeginDate');
+    	$end = $this->obj('SummitEndDate');
+	
+		$d1 = $start->DayOfMonth();
+		$d2 = $end->DayOfMonth();
+		$m1 = $start->ShortMonth();
+		$m2 = $end->ShortMonth();
+		$y1 = $start->Year();
+		$y2 = $end->Year();
+		
+		if($y1 != $y2) return "$m1 $d1, $y1 - $m2 $d2, $y2";
+		else if($m1 != $m2) return "$m1 $d1 - $m2 $d2, $y1";
+		else return "$m1 $d1 - $d2, $y1";
+	}    
+
     /**
      * @param string $day
      * @return bool
