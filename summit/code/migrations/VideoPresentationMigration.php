@@ -67,13 +67,11 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	private function ensureLegacySummits () {
 		$created = 0;
 		if(!Summit::get()->filterAny([
-				'Title:PartialMatch' => 'San Diego',
-				'Name:PartialMatch' => 'San Diego'
+				'Title:PartialMatch' => 'San Diego'
 		])->first()) {
 
 			$sanDiego = Summit::create([
-				'Title' => 'San Diego',
-				'Name' => 'San Diego',
+				'Title' => 'San Diego',				
 				'Location' => 'San Diego, CA',
 		        'SummitBeginDate' => '2012-10-15 00:00:00',
 		        'SummitEndDate' => '2012-10-18 00:00:00',
@@ -93,12 +91,10 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			$created++;
 		}
 		if(!Summit::get()->filterAny([
-				'Title:PartialMatch' => 'Portland',
-				'Name:PartialMatch' => 'Portland'
+				'Title:PartialMatch' => 'Portland'
 		])->first()) {
 			$portland = Summit::create([
-				'Title' => 'Portland',
-				'Name' => 'Portland',
+				'Title' => 'Portland',				
 				'Location' => 'Portland, OR',
 		        'SummitBeginDate' => '2013-04-15 00:00:00',
 		        'SummitEndDate' => '2013-04-18 00:00:00',
@@ -142,8 +138,6 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 		$this->stats['Summits created'] += $created;
 
 		// Clean up junk data from old summits
-		DB::query("UPDATE Summit SET Name = Title WHERE Name IS NULL");
-		DB::query("UPDATE Summit SET Title = Name WHERE Title IS NULL");
 		DB::query("UPDATE Summit SET SummitBeginDate = StartDate WHERE SummitBeginDate IS NULL");
 		DB::query("UPDATE Summit SET SummitEndDate = EndDate WHERE SummitEndDate IS NULL");
 
