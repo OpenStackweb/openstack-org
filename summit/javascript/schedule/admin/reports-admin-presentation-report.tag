@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr each={ presentation, i in presentations } data-id="{ presentation.assistance_id }">
+                <tr each={ presentation, i in presentations } data-speaker-id="{ presentation.speaker_id }">
                     <td>{ presentation.title }</td>
                     <td class="center_text"><i class={ fa: true, fa-check: presentation.published, fa-times: !presentation.published } ></i></td>
                     <td>{ presentation.track }</td>
@@ -109,19 +109,18 @@
         self.dispatcher.on(self.dispatcher.SAVE_PRESENTATION_REPORT,function(report) {
             var request = [];
             $('.changed').each(function(){
-                var id = $(this).data('id');
-                var phone = $('.phone',this).val();
+                var speaker_id = $(this).data('speaker-id');
+                var phone      = $('.phone',this).val();
                 var promo_code = $('.promo_code',this).val();
                 var registered = $('.registered',this).attr('checked') ? 1 : 0;
                 var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
-
-                request.push({id: id, phone: phone, promo_code: promo_code, registered: registered, checked_in: checked_in});
+                request.push({speaker_id: speaker_id, phone: phone, promo_code: promo_code, registered: registered, checked_in: checked_in});
             });
 
             if (request.length) {
                 $.ajax({
                     type: 'PUT',
-                    url: 'api/v1/summits/'+self.summit_id+'/reports/save_report/'+report,
+                    url: 'api/v1/summits/'+self.summit_id+'/reports/'+report,
                     data: JSON.stringify(request),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"

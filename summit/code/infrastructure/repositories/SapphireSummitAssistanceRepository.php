@@ -26,25 +26,56 @@ final class SapphireSummitAssistanceRepository extends SapphireRepository implem
      */
     public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir)
     {
-        $total_list = PresentationSpeakerSummitAssistanceConfirmationRequest::get()->filter(array('SummitID' => $summit_id ));
-        $total  = $total_list->count();
+
+        $from = <<<SQL
+
+FROM SummitEvent AS E
+INNER JOIN Presentation ON Presentation.ID = E.ID
+INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID
+INNER JOIN PresentationCategory  ON PresentationCategory.ID = Presentation.CategoryID
+LEFT JOIN Member ON Member.ID = S.MemberID
+LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
+LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
+LEFT JOIN Affiliation AS A ON A.ID = (
+	SELECT ID FROM Affiliation
+    WHERE
+    Affiliation.MemberID = Member.ID
+    AND Affiliation.Current = 1
+    ORDER BY EndDate DESC
+    LIMIT 1
+)
+LEFT JOIN Org AS O ON O.ID = A.OrganizationID
+WHERE
+E.SummitID = {$summit_id}
+AND E.Published = 1
+
+SQL;
+
 
         $query = <<<SQL
-SELECT SA.ID AS id, S.ID AS speaker_id, M.ID AS member_id, CONCAT(S.FirstName,' ',S.LastName) AS name,
-       M.Email AS email, SA.OnSitePhoneNumber AS phone, O.Name AS company, E.Title AS presentation, C.Title AS track,
-       SA.IsConfirmed AS confirmed, SA.RegisteredForSummit AS registered, SA.CheckedIn AS checked_in
-FROM PresentationSpeaker AS S
-INNER JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON S.ID = SA.SpeakerID AND SA.SummitID = {$summit_id}
-LEFT JOIN Member AS M ON M.ID = S.MemberID
-LEFT JOIN Affiliation AS A ON A.MemberID = M.ID
-LEFT JOIN Org AS O ON O.ID = A.OrganizationID
-LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationSpeakerID = S.ID
-LEFT JOIN Presentation AS P ON P.ID = PS.PresentationID
-LEFT JOIN SummitEvent AS E ON E.ID = PS.PresentationID AND E.SummitID = {$summit_id}
-LEFT JOIN PresentationCategory AS C ON C.ID = P.CategoryID
-GROUP BY S.ID
+SELECT
+       S.ID AS speaker_id,
+       Member.ID AS member_id,
+       IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS name,
+       IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
+       O.Name AS company,
+       E.Title AS presentation,
+       PresentationCategory.Title AS track,
+       ACR.OnSitePhoneNumber AS phone,
+       ACR.IsConfirmed AS confirmed,
+       ACR.RegisteredForSummit AS registered,
+       ACR.CheckedIn AS checked_in
+{$from}
 ORDER BY {$sort} {$sort_dir}
 SQL;
+
+
+        $query_count = <<<SQL
+SELECT COUNT(*)
+{$from}
+SQL;
+
         if ($page && $page_size) {
             $offset = ($page - 1 ) * $page_size;
             $query .=
@@ -53,8 +84,8 @@ SQL;
 SQL;
 
         }
-
-        $data = DB::query($query);
+        $total  = DB::query($query_count)->value();
+        $data   = DB::query($query);
         $result = array('Total' => $total, 'Data' => $data);
 
         return $result;
@@ -72,7 +103,7 @@ INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.Presentation
 INNER JOIN PresentationCategory  ON PresentationCategory.ID = Presentation.CategoryID
 LEFT JOIN Member ON Member.ID = S.MemberID
 LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
-LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = 6
+LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
 LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
 LEFT JOIN (
     SELECT Type, Code, SpeakerID FROM SpeakerSummitRegistrationPromoCode
@@ -102,15 +133,14 @@ SQL;
         L.Name AS location,
         S.ID AS speaker_id,
         Member.ID AS member_id,
-        CONCAT(Member.FirstName ,' ',Member.Surname) AS speaker_name,
-        CONCAT(S.FirstName ,' ',S.LastName) AS member_name,
+       IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS name,
         IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
-        ACR.OnSitePhoneNumber AS phone,
         PromoCodes.Type AS code_type,
         PromoCodes.Code AS promo_code,
         ACR.IsConfirmed AS confirmed,
         ACR.RegisteredForSummit AS registered,
         ACR.CheckedIn AS checked_in,
+        ACR.OnSitePhoneNumber AS phone,
         E.ID AS presentation_id,
         ACR.ID AS assistance_id
 SQL;

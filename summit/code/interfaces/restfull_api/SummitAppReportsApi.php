@@ -55,19 +55,20 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
      */
     protected function authorize(){
         if(!Permission::check('ADMIN_SUMMIT_APP_FRONTEND_ADMIN')) return false;
-        return $this->checkOwnAjaxRequest();
+        return true;
     }
 
     protected function authenticate() {
         return true;
     }
 
-    static $url_handlers = array(
+    static $url_handlers = array
+    (
+        'PUT $REPORT!'              => 'updateReport',
         'GET speaker_report'        => 'getSpeakerReport',
         'GET room_report'           => 'getRoomReport',
         'GET presentation_report'   => 'getPresentationReport',
         'GET export/$REPORT!'       => 'exportReport',
-        'PUT save_report/$REPORT!'  => 'updateReport',
     );
 
     static $allowed_actions = array(
@@ -90,13 +91,12 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $assistances = $this->assistance_repository->getAssistanceBySummit($summit_id,$page,$page_size,$sort,$sort_dir);
+            $assistances = $this->assistance_repository->getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir);
 
             $assistance_array = array();
 
             foreach($assistances['Data'] as $assistance) {
                 $assistance_array[] = array(
-                    'id'            => $assistance['id'],
                     'speaker_id'    => $assistance['speaker_id'],
                     'member_id'     => $assistance['member_id'],
                     'name'          => $assistance['name'],
@@ -111,7 +111,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                 );
             }
 
-            echo json_encode(array('total' => $assistances['Total'], 'data' => $assistance_array));
+            return $this->ok(array('total' => $assistances['Total'], 'data' => $assistance_array));
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -208,7 +208,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $return_array['calendar_count'] = $calendar_count->value();
             $return_array['report'] = $report_array;
 
-            echo json_encode($return_array);
+            return $this->ok($return_array);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -251,7 +251,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     'location'        => $presentation['location'],
                     'speaker_id'      => $presentation['speaker_id'],
                     'member_id'       => $presentation['member_id'],
-                    'name'            => empty($presentation['speaker_name'])? $presentation['member_name'] : $presentation['speaker_name'],
+                    'name'            => $presentation['name'],
                     'email'           => $presentation['email'],
                     'phone'           => $presentation['phone'],
                     'code_type'       => $presentation['code_type'],
@@ -262,7 +262,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                 );
             }
 
-            echo json_encode(array('total' => $presentations['Total'], 'data' => $presentation_array));
+           return $this->ok(array('total' => $presentations['Total'], 'data' => $presentation_array));
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -277,81 +277,68 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     }
 
     public function exportReport(SS_HTTPRequest $request) {
-        try
-        {
+        try {
 
             $query_string = $request->getVars();
-            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'name';
-            $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
-            $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
-            $venue        = (isset($query_string['venue'])) ? Convert::raw2sql($query_string['venue']) : 'all';
-            $report       = $request->param('REPORT');
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $summit       = $this->summit_repository->getById($summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-
+            $sort = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'name';
+            $sort_dir = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
+            $event_type = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
+            $venue = (isset($query_string['venue'])) ? Convert::raw2sql($query_string['venue']) : 'all';
+            $report = $request->param('REPORT');
+            $summit_id = intval($request->param('SUMMIT_ID'));
+            $summit = $this->summit_repository->getById($summit_id);
+            if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $ext = 'csv';
             switch ($report) {
                 case 'speaker_report' :
-                    $report_data = $this->assistance_repository->getAssistanceBySummit($summit_id,null,null,$sort,$sort_dir);
-                    $report_data = $report_data['Data'];
-                    $header = array('Speaker ID', 'Member ID', 'Name', 'Email', 'Phone On Site', 'Company',
-                                    'Presentation', 'Track', 'Confirmed?', 'Registered?', 'Checked In');
-
-                    $csv = implode(',',$header).PHP_EOL;
-                    foreach($report_data as $val) {
-                        $val = array_slice($val, 1); //skip id
-                        //escape commas
-                        foreach($val as &$col) {
-                            $col = '"'.str_replace("\"","'" , $col ).'"';
-                        }
-                        $csv .= implode(',',$val).PHP_EOL;
+                    $report_data = $this->assistance_repository->getAssistanceBySummit($summit_id, null, null, $sort, $sort_dir);
+                    $data = $report_data['Data'];
+                    $results = array();
+                    foreach ($data as $row) {
+                        array_push($results, $row);
                     }
+
+                    $filename = "$data-" . date('Ymd') . "." . $ext;
+                    $delimiter = ($ext == 'xls') ? "\t" : ",";
+                    return CSVExporter::getInstance()->export($filename, $results, $delimiter);
+                    break;
                     break;
                 case 'room_report' :
-                    $csv = '';
                     $days = $summit->getDates();
-                    $header = array('Time', 'Code', 'Presentation', 'Room', 'Speakers','Head Count', 'Total');
-                    foreach($days as $day) {
-                        $csv .= $day->Label.PHP_EOL;
-                        $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venue);
-                        $csv .= implode(',',$header).PHP_EOL;
-                        foreach($day_report as $val) {
-                            $start_date = $summit->convertDateFromUTC2TimeZone($val['start_date'],'g:ia');
-                            $end_date = $summit->convertDateFromUTC2TimeZone($val['start_date'],'g:ia');
+                    $results = array();
+                    foreach ($days as $day) {
+                        $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venue);
+                        foreach ($day_report as $val) {
+                            $start_date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');
+                            $end_date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');
 
-                            $time = $start_date.' - '.$end_date;
+                            $time = $start_date . ' - ' . $end_date;
                             unset($val['start_date']);
                             unset($val['end_date']);
-                            //escape commas
-                            foreach($val as &$col) {
-                                $col = '"'.str_replace("\"","'" , $col ).'"';
-                            }
-                            array_unshift($val,$time);
-                            $csv .= implode(',',$val).PHP_EOL;
+                            array_unshift($val, $time);
+                            array_push($results, $val);
                         }
                     }
+                    $filename = "room_report-" . date('Ymd') . "." . $ext;
+                    $delimiter = ($ext == 'xls') ? "\t" : ",";
+                    return CSVExporter::getInstance()->export($filename, $results, $delimiter);
                     break;
                 case 'presentation_report' :
-                    $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
-                    $report_data  = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id,null,null,$sort,$sort_dir,$search_term);
-                    $data         = $report_data['Data'];
-                    $results      = array();
-                    foreach($data as $row)
-                    {
+                    $search_term = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+                    $report_data = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id, null, null, $sort, $sort_dir, $search_term);
+                    $data = $report_data['Data'];
+                    $results = array();
+                    foreach ($data as $row) {
                         unset($row['presentation_id']);
                         unset($row['assistance_id']);
                         array_push($results, $row);
                     }
-
-                    $ext = 'csv';
                     $filename = "presentations_report-" . date('Ymd') . "." . $ext;
-                    $delimiter = ($ext == 'xls') ? "\t" : "," ;
+                    $delimiter = ($ext == 'xls') ? "\t" : ",";
                     return CSVExporter::getInstance()->export($filename, $results, $delimiter);
                     break;
             }
-
-            echo $csv;
-
+            return $this->notFound();
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -363,15 +350,5 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->serverError();
         }
-    }
-
-    public function buildCSV($header,$data) {
-        $csv = implode(',',$header).PHP_EOL;
-        foreach($data as $val) {
-            $val = array_slice($val, 1); //skip id
-            $csv .= implode(',',$val).PHP_EOL;
-        }
-
-        return $csv;
     }
 }

@@ -106,7 +106,7 @@
             if (request.length) {
                 $.ajax({
                     type: 'PUT',
-                    url: 'api/v1/summits/'+self.summit_id+'/reports/save_report/'+report,
+                    url: 'api/v1/summits/'+self.summit_id+'/reports/'+report,
                     data: JSON.stringify(request),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"

@@ -611,36 +611,38 @@ final class SummitService implements ISummitService
      */
     public function updateAssistance(ISummit $summit, array $data)
     {
-        $assistance_repository = $this->assistance_repository;
-        $this->tx_service->transaction(function() use($summit, $data, $assistance_repository){
+        $speaker_repository    = $this->speaker_repository;
+
+        $this->tx_service->transaction(function() use($summit, $data, $speaker_repository){
 
             foreach ($data as $assistance_data) {
-                if(!isset($assistance_data['id']))
-                    throw new EntityValidationException('missing required param: id');
 
-                $assistance_id = intval($assistance_data['id']);
-                $assistance = $assistance_repository->getById($assistance_id);
+                $speaker_id    = isset($assistance_data['speaker_id']) ? intval($assistance_data['speaker_id']) : 0;
 
+                if(!$speaker_id)
+                    throw new EntityValidationException('speaker_id param is missing!');
+
+                $speaker = $speaker_repository->getById($speaker_id);
+
+                if(is_null($speaker))
+                    throw new NotFoundEntityException('Speaker');
+
+                $assistance = $speaker->getAssistanceFor($summit->getIdentifier());
                 if(is_null($assistance))
-                    throw new NotFoundEntityException('Speaker Assistance', sprintf('id %s', $assistance_id));
+                {
+                    $assistance = $speaker->createAssistanceFor($summit->getIdentifier());
+                    $assistance->write();
+                }
 
-                if(intval($assistance->SummitID) !== intval($summit->getIdentifier()))
-                    throw new EntityValidationException('speaker assistance doest not belong to summit');
-
-                $assistance->OnSitePhoneNumber = $assistance_data['phone'];
+                $assistance->OnSitePhoneNumber   = $assistance_data['phone'];
                 $assistance->RegisteredForSummit = $assistance_data['registered'];
-                $assistance->CheckedIn = $assistance_data['checked_in'];
+                $assistance->CheckedIn           = $assistance_data['checked_in'];
 
                 $assistance->write();
 
-                if (isset($assistance_data['promo_code'])) {
-                    $promo_code = SummitRegistrationPromoCode::get("SummitRegistrationPromoCode")
-                        ->leftJoin("SpeakerSummitRegistrationPromoCode","SpeakerSummitRegistrationPromoCode.ID = SummitRegistrationPromoCode.ID")
-                        ->where("SpeakerSummitRegistrationPromoCode.SpeakerID = {$assistance->SpeakerID} AND SummitRegistrationPromoCode.SummitID = {$assistance->SummitID}")
-                        ->first();
-
-                    $promo_code->Code = $assistance_data['promo_code'];
-                    $promo_code->write();
+                if (isset($assistance_data['promo_code']) && !empty($assistance_data['promo_code'])) {
+                    $code = $speaker->registerSummitPromoCodeByValue($assistance_data['promo_code'], $summit);
+                    $code->write();
                 }
             }
         });
@@ -753,10 +755,7 @@ final class SummitService implements ISummitService
 
             $onsite_phone = trim($speaker_data['onsite_phone']);
             if(!empty($onsite_phone)) {
-                $summit_assistance = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
-                $summit_assistance->SummitID = $summit->getIdentifier();
-                $summit_assistance->SpeakerID = $speaker->ID;
-                $summit_assistance->write();
+                $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
                 $summit_assistance->OnSitePhoneNumber = $onsite_phone;
                 $summit_assistance->write();
             }
@@ -825,62 +824,14 @@ final class SummitService implements ISummitService
             if(!empty($onsite_phone)) {
                 $summit_assistance = $speaker->getAssistanceFor($summit->getIdentifier());
                 if(is_null($summit_assistance)){
-                    $summit_assistance = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
-                    $summit_assistance->SummitID = $summit->getIdentifier();
-                    $summit_assistance->SpeakerID = $speaker_id;
-                    $summit_assistance->write();
+                    $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
                 }
                 $summit_assistance->OnSitePhoneNumber = $onsite_phone;
                 $summit_assistance->write();
             }
 
             if(!empty($reg_code)){
-                // check if we have an assigned one already
-                $old_code = SpeakerSummitRegistrationPromoCode::get()->filter
-                (
-                    array
-                    (
-                        'SummitID'  => $summit->getIdentifier(),
-                        'SpeakerID' => $speaker->ID,
-                    )
-                )->first();
-
-                // we are trying to update the promo code with another one ....
-                if (!is_null($old_code) && $reg_code !== $old_code->Code)
-                    throw new EntityValidationException
-                    (
-                        sprintf
-                        (
-                            'speaker has already assigned to another registration code (%s)', $old_code->Code
-                        )
-                    );
-
-                if(is_null($old_code)) {
-                    // check if promo code exists ...
-                    $code = SpeakerSummitRegistrationPromoCode::get()->filter
-                    (
-                        array
-                        (
-                            'Code'      => $reg_code,
-                            'SummitID'  => $summit->getIdentifier(),
-                            'OwnerID'   => 0,
-                            'SpeakerID' => 0,
-                        )
-                    )->first();
-
-                    if (is_null($code))
-                    {
-                        //create it
-                        $code = SpeakerSummitRegistrationPromoCode::create();
-                        $code->SummitID = $summit->getIdentifier();
-                        $code->Code     = $reg_code;
-                        $code->write();
-                    }
-
-
-                    $speaker->registerSummitPromoCode($code);
-                    $code->write();
-                }
+               $speaker->registerSummitPromoCodeByValue($reg_code, $summit);
             }
             return $speaker;
 

@@ -64,24 +64,12 @@
             self.dispatcher.saveReport(report);
         }
 
-        exportReport() {
-            var report = $('#report_select').val();
-            var sort = $('.sorted').data('sort');
+        exportReport(e) {
+            var report   = $('#report_select').val();
+            var sort     = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
-            $('body').ajax_loader();
-
-            $.get('api/v1/summits/'+self.summit_id+'/reports/export/'+report,
-                {sort:sort, sort_dir:sort_dir},
-                function(csv){
-                    $('body').ajax_loader('stop');
-                    var uri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-                    var download_link = document.createElement('a');
-                    download_link.href = uri;
-                    download_link.download = report+".csv";
-                    document.body.appendChild(download_link);
-                    download_link.click();
-                    document.body.removeChild(download_link);
-            });
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/'+report+'?sort='+sort+'&sort_dir='+sort_dir, '_blank');
+            e.preventUpdate = true;
         }
 
         toggleSort(elem) {

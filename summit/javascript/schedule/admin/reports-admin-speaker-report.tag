@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr each={ speaker, i in speakers } data-id="{ speaker.id }">
+                <tr each={ speaker, i in speakers } data-speaker-id="{ speaker.id }">
                     <td>{ speaker.speaker_id }</td>
                     <td>{ speaker.member_id }</td>
                     <td>{ speaker.name }</td>
@@ -100,18 +100,18 @@
         self.dispatcher.on(self.dispatcher.SAVE_SPEAKER_REPORT,function(report) {
             var request = [];
             $('.changed').each(function(){
-                var id = $(this).data('id');
-                var phone = $('.phone',this).val();
+                var speaker_id = $(this).data('speaker-id');
+                var phone      = $('.phone',this).val();
                 var registered = $('.registered',this).attr('checked') ? 1 : 0;
                 var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
 
-                request.push({id: id, phone: phone, registered: registered, checked_in: checked_in});
+                request.push({speaker_id: speaker_id, phone: phone, registered: registered, checked_in: checked_in});
             });
 
             if (request.length) {
                 $.ajax({
                     type: 'PUT',
-                    url: 'api/v1/summits/'+self.summit_id+'/reports/save_report/'+report,
+                    url: 'api/v1/summits/'+self.summit_id+'/reports/'+report,
                     data: JSON.stringify(request),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"

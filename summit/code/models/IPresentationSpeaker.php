@@ -208,6 +208,12 @@ interface IPresentationSpeaker extends IEntity
     public function hasAssistanceFor($summit_id);
 
     /**
+     * @param int $summit_id
+     * @return PresentationSpeakerSummitAssistanceConfirmationRequest
+     */
+    public function createAssistanceFor($summit_id);
+
+    /**
      * Resets the confirmation request if exists and its not confirmed yet
      * otherwise exception
      * @param int $summit_id
@@ -239,4 +245,13 @@ interface IPresentationSpeaker extends IEntity
      * @return bool
      */
     public function hasPendingRegistrationRequest();
+
+    /**
+     * @param $promo_code_value
+     * @param ISummit $summit
+     * @return ISpeakerSummitRegistrationPromoCode
+     * @throws EntityValidationException
+     * @throws ValidationException
+     */
+    public function registerSummitPromoCodeByValue($promo_code_value, ISummit $summit);
 }

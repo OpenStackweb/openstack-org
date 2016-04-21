@@ -387,24 +387,13 @@ implements IPresentationSpeaker
         $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', intval($summit_id))->first();
         if(!$confirmation_page) throw new NotFoundEntityException('Confirmation Speaker Page not set on current summit!');
         $url      = $confirmation_page->getAbsoluteLiveLink(false);
-        $request  = PresentationSpeakerSummitAssistanceConfirmationRequest::get()
-            ->filter
-            (
-                array
-                (
-                    'SummitID'  => intval($summit_id),
-                    'SpeakerID' => $this->ID
-                )
-            )->first();
 
-        if(!is_null($request))
+        if($this->hasAssistanceFor($summit_id))
         {
-            throw new EntityValidationException('there is already a confirmed request!');
+            throw new EntityValidationException(sprintf('this is already an assistance request for summit id %s', $summit_id));
         }
 
-        $request            = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
-        $request->SummitID  = intval($summit_id);
-        $request->SpeakerID = $this->ID;
+        $request            = $this->createAssistanceFor($summit_id);
         $token              = null;
         $already_exists     = false;
 
@@ -424,6 +413,17 @@ implements IPresentationSpeaker
         } while($already_exists);
         $request->write();
         return $url.'confirm?t='.base64_encode($token);
+    }
+
+    /**
+     * @param int $summit_id
+     * @return PresentationSpeakerSummitAssistanceConfirmationRequest
+     */
+    public function createAssistanceFor($summit_id){
+        $request            = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
+        $request->SummitID  = $summit_id;
+        $request->SpeakerID = $this->ID;
+        return $request;
     }
 
     /**
@@ -555,6 +555,83 @@ implements IPresentationSpeaker
         $promo_code->assignSpeaker($this);
         $promo_code->write();
         return $this;
+    }
+
+    /**
+     * @param $promo_code_value
+     * @param ISummit $summit
+     * @return ISpeakerSummitRegistrationPromoCode
+     * @throws EntityValidationException
+     * @throws ValidationException
+    */
+    public function registerSummitPromoCodeByValue($promo_code_value, ISummit $summit)
+    {
+        // check if we have an assigned one already
+        $old_code = SpeakerSummitRegistrationPromoCode::get()->filter
+        (
+            array
+            (
+                'SummitID'  => $summit->getIdentifier(),
+                'SpeakerID' => $this->ID,
+            )
+        )->first();
+
+        // we are trying to update the promo code with another one ....
+        if (!is_null($old_code) && $promo_code_value !== $old_code->Code)
+            throw new EntityValidationException
+            (
+                sprintf
+                (
+                    'speaker has already assigned to another registration code (%s)', $old_code->Code
+                )
+            );
+        //we already have the same code ...
+
+        if(!is_null($old_code)) return $old_code;
+
+        // check if the promo code already exists and assigned to another user
+        $existent_code = SpeakerSummitRegistrationPromoCode::get()->filter
+        (
+            array
+            (
+                'Code'                     => $promo_code_value,
+                'SummitID'                 => $summit->getIdentifier(),
+                'SpeakerID:ExactMatch:not' => 0,
+            )
+        )->first();
+
+        if(!is_null($existent_code))
+            throw new EntityValidationException
+            (
+                sprintf
+                (
+                    'there is another speaker with that code for this summit (%s)', $promo_code_value
+                )
+            );
+       // check if promo code exists and its not assigned ...
+       $code = SpeakerSummitRegistrationPromoCode::get()->filter
+       (
+            array
+            (
+                'Code'      => $promo_code_value,
+                'SummitID'  => $summit->getIdentifier(),
+                'OwnerID'   => 0,
+                'SpeakerID' => 0,
+            )
+       )->first();
+
+       if (is_null($code)) {
+            //create it
+            $code = SpeakerSummitRegistrationPromoCode::create();
+            $code->SummitID = $summit->getIdentifier();
+            $code->Code = $promo_code_value;
+            $code->write();
+       }
+
+        $this->registerSummitPromoCode($code);
+        $code->write();
+
+        return $code;
     }
 
     /**
