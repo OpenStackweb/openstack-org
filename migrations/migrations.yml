@@ -29,3 +29,4 @@ migrations:
   - AddUsersToFoundationStaffMigration
   - RemoveSortColumnFromGroups
   - SummitAttendeeDropIndexMigration
+  - VideoPresentationMigration
