@@ -12,4 +12,5 @@
  * limitations under the License.
  **/
 
-define('COA_CNAME', 'https://cert.openstack.org');
+define('GET_STARTED_URL', 'https://identity.linuxfoundation.org/pid/317');
+define('ALREADY_REGISTERED_URL', 'https://identity.linuxfoundation.org/portal/openstack');

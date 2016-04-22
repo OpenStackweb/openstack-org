@@ -110,12 +110,14 @@ class COALandingPage_Controller extends Page_Controller
     static $allowed_actions = array
     (
         'index',
-        'getStarted'
+        'getStarted',
+        'alreadyRegistered'
     );
 
     static $url_handlers = array
     (
-        'get-started' => 'getStarted',
+        'get-started'        => 'getStarted',
+        'already-registered' => 'alreadyRegistered',
     );
 
     function init()
@@ -135,9 +137,16 @@ class COALandingPage_Controller extends Page_Controller
 
     public function getStarted(){
         if(Member::currentUser()){
-            $this->redirect(COA_CNAME);
+            $this->redirect(GET_STARTED_URL);
         }
         OpenStackIdCommon::doLogin($this->Link('get-started'));
+    }
+
+    public function alreadyRegistered(){
+        if(Member::currentUser()){
+            $this->redirect(ALREADY_REGISTERED_URL);
+        }
+        OpenStackIdCommon::doLogin($this->Link('already-registered'));
     }
 
 }
