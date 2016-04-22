@@ -96,7 +96,7 @@
                 </p>
                 <h5 class="section-title">Duration</h5>
                 <p>
-                    2 - 2.5 hours
+                    2.5 hours
                 </p>
                 <h5 class="section-title">Scoring</h5>
                 <p>
