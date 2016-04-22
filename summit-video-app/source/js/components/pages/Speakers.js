@@ -20,14 +20,14 @@ class Speakers extends React.Component {
 	}
 
 	componentDidMount () {
-		if(!this.props.speakers.length) {
-			this.props.fetchSpeakers(0, this.props.letter);
+		if(!this.props.speakers.length || (this.props.queryLetter !== this.props.currentLetter)) {
+			this.props.fetchSpeakers(0, this.props.queryLetter);
 		}
 	}
 
 	componentWillReceiveProps (nextProps) {
-		if(nextProps.letter !== this.props.letter) {
-			this.props.fetchSpeakers(0, nextProps.letter);
+		if(nextProps.queryLetter !== this.props.queryLetter) {
+			this.props.fetchSpeakers(0, nextProps.queryLetter);
 		}
 	}
 
@@ -35,7 +35,7 @@ class Speakers extends React.Component {
 		e.preventDefault();
 		this.props.fetchSpeakers(
 			this.props.speakers.length,
-			this.props.letter
+			this.props.queryLetter
 		);
 	}
 
@@ -53,13 +53,13 @@ class Speakers extends React.Component {
 							<AlphabetBar 
 								className='speaker-name-filter'
 								label='Browse by last name'
-								selected={this.props.letter}
+								selected={this.props.queryLetter}
 								linkProvider={this.createLetterLink}
 								onLetterClicked={this.props.goToLetter}
 							/>
 							<div className="popular-speakers-link">
 								Or Browse By:
-								<RouterLink link='speakers' active={!this.props.letter}>Popular Speakers</RouterLink>
+								<RouterLink link='speakers' active={!this.props.queryLetter}>Popular Speakers</RouterLink>
 							</div>						
 						</div>
 					</div>
@@ -72,7 +72,7 @@ class Speakers extends React.Component {
 							<div className="row">
 								<div className="video-app-speaker-videos">
 									<div className="col-sm-12">
-										<h2>{this.props.letter ? this.props.letter.toUpperCase() : 'Popular speakers'}</h2>
+										<h2>{this.props.queryLetter ? this.props.queryLetter.toUpperCase() : 'Popular speakers'}</h2>
 									</div>
 									<GalleryPanel className='video-panel'>
 										<FadeAnimation>
@@ -105,7 +105,8 @@ export default connect (
 			speakers: state.speakers.results,
 			hasMore: state.speakers.has_more,
 			total: state.speakers.total,
-			letter: state.router.location.query.letter
+			currentLetter: state.speakers.letter,
+			queryLetter: state.router.location.query.letter
 		}
 	},
 	dispatch => ({

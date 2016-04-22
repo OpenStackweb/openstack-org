@@ -10,9 +10,11 @@ const SpeakerItem = ({
 }) => (
 	<GalleryItem
 		className='gallery-item speaker-item'
-		imageUrl={speaker.imageURL}		
-		title={speaker.name}
-		subtitle={`${speaker.jobTitle || ''} (${speaker.videoCount} videos)`}
+		imageUrl={speaker.imageURL}	
+		imageWidth={263}
+		imageHeight={148}	
+		title={`${speaker.name} (${speaker.videoCount} videos)`}
+		subtitle={speaker.jobTitle || ''}
 		link={URL.create(`speakers/show/${speaker.id}`)}
 		onItemClicked={onItemClicked}
 	/>

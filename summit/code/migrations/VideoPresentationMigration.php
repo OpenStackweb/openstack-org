@@ -135,6 +135,16 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			$created++;
 		}
 
+		// Hong Kong has no date
+		if($hongKong = Summit::get()->filter('Title:PartialMatch','Hong Kong')->first()) {
+			if(!$hongKong->SummitBeginDate) {
+				$hongKong->SummitBeginDate = '2013-11-05 00:00:00';
+				$hongKong->SummitEndDate = '2013-11-08 00:00:00';
+				$hongKong->write();
+				echo "Fixed HongKong date!".$this->br();
+			}
+		}
+
 		$this->stats['Summits created'] += $created;
 
 		// Clean up junk data from old summits
@@ -204,8 +214,8 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			'ID' => $id,
 			'Title' => $v->Name,
 			'Description' => $v->Description,
-			'StartDate' => $v->StartTime ?: $v->Created,
-			'EndDate' => $v->EndTime ?: $v->Created,
+			'StartDate' => $v->StartTime ?: $v->Summit()->SummitBeginDate,
+			'EndDate' => $v->EndTime ?: $v->Summit()->SummitBeginDate,
 			'Published' => true,
 			'PublishedDate' => $v->Created,
 			'SummitID' => $v->SummitID,
@@ -296,7 +306,7 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			'Featured' => $v->Featured,
 			'Created' => $v->LastEdited,
 			'LastEdited' => $v->LastEdited,
-			'DateUploaded' => $p->StartDate
+			'DateUploaded' => $p->StartDate ?: $p->Summit()->SummitBeginDate
 		]);		
 	}
 
@@ -338,7 +348,7 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			}
 		}		
 
-		foreach(VideoPresentation::get() as $v) {
+		foreach(VideoPresentation::get()->filter('DisplayOnSite',true) as $v) {
 			$i++;
 			$created = 0;	
 			echo "{$i} / {$total} ....";
@@ -373,6 +383,9 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 				echo "Created presentation {$v->ID} -> {$originalPresentation->ID}...";
 				$originalPresentation = $this->addLegacySpeakers($originalPresentation, $v);
 				$this->stats['Presentations created'] ++;
+			}
+			else {
+				echo "*** Original presentation found: " . $originalPresentation->ID . $this->br();
 			}
 
 			$material = $this->createLegacyVideoMaterial($originalPresentation, $v);

@@ -24,7 +24,9 @@ class GalleryItem extends React.Component {
 			title,
 			subtitle,
 			link,
-			badge
+			badge,
+			imageHeight,
+			imageWidth
 		} = this.props;
 
 		const autoLink = createAutoLink(link, this.handleClick);
@@ -37,7 +39,7 @@ class GalleryItem extends React.Component {
 							<div className="gallery-image-caption">
 								{imageCaption}
 							</div>
-							<img src={imageUrl} />
+							<img width={imageWidth} height={imageHeight} src={imageUrl} />
 						</div>					
 						<div className="gallery-title">
 							{title}

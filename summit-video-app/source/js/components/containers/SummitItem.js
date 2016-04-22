@@ -10,7 +10,9 @@ const SummitItem = ({
 }) => (
 	<GalleryItem
 		className='gallery-item summit-item'
-		imageUrl={summit.imageURL}		
+		imageUrl={summit.imageURL}
+		imageWidth={263}
+		imageHeight={148}			
 		title={summit.title}
 		subtitle={summit.dates}
 		link={URL.create(`summits/show/${summit.id}`)}

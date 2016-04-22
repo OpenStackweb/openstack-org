@@ -160,11 +160,12 @@ class SummitVideoAppBackend {
 		$speakers = PresentationSpeaker::get()
 						->innerJoin('Presentation_Speakers','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
 						->innerJoin('Presentation','Presentation.ID = Presentation_Speakers.PresentationID')
+						->innerJoin('PresentationMaterial','PresentationMaterial.PresentationID = Presentation.ID')
+						->innerJoin('PresentationVideo', 'PresentationVideo.ID = PresentationMaterial.ID')
 						->sort('COUNT(Presentation_Speakers.ID) DESC')
 						->alterDataQuery(function ($query) {
 							$query->groupby('PresentationSpeaker.ID');
 						});
-		
 		if(isset($params['letter'])) {
 			$speakers = $speakers->filter(
 				'LastName:StartsWith', 
@@ -283,7 +284,10 @@ class SummitVideoAppBackend {
 			'imageURL' => ($s->Photo()->exists() && Director::fileExists($s->Photo()->Filename)) ? 
 								$s->Photo()->CroppedImage(263,148)->URL : 
 								'summit-video-app/production/images/placeholder-image.jpg',
-			'videoCount' => $s->Presentations()->count()
+			'videoCount' => $s->Presentations()
+							  ->innerJoin('PresentationMaterial', 'PresentationMaterial.PresentationID = Presentation.ID')
+							  ->innerJoin('PresentationVideo','PresentationVideo.ID = PresentationMaterial.ID')
+							  ->count()
 		];
 	}
 
