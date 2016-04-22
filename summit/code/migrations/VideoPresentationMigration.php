@@ -2,42 +2,42 @@
 
 class VideoPresentationMigration extends AbstractDBMigrationTask {
 
-    protected $title = "VideoPresentation to PresentationVideo Migration";
+	protected $title = "VideoPresentation to PresentationVideo Migration";
 
 
-    protected $description = "Deprecates the old VideoPresentation table in favor of PresentationMaterial (PresentationVideo). Backfills legacy Summit records and the Presentation records that should relate to them.";
+	protected $description = "Deprecates the old VideoPresentation table in favor of PresentationMaterial (PresentationVideo). Backfills legacy Summit records and the Presentation records that should relate to them.";
 
 
-    protected $errors = [];
+	protected $errors = [];
 
 
-    protected $stats = [
-    	'Summits created' => 0,
-    	'Speakers created' => 0,
-    	'Speakers resolved' => 0,
-    	'Speakers found' => 0,
-    	'Presentations created' => 0,
-    	'Presentations skipped' => 0
-    ];
+	protected $stats = [
+		'Summits created' => 0,
+		'Speakers created' => 0,
+		'Speakers resolved' => 0,
+		'Speakers found' => 0,
+		'Presentations created' => 0,
+		'Presentations skipped' => 0
+	];
 
 
-    private static $summits = [
-    	'San Diego',
-    	'Portland',
-    	'Atlanta',
-    	'Hong Kong',
-    	'Paris',
-    	'Vancouver',
-    	'Tokyo'
-    ];
+	private static $summits = [
+		'San Diego',
+		'Portland',
+		'Atlanta',
+		'Hong Kong',
+		'Paris',
+		'Vancouver',
+		'Tokyo'
+	];
 
-	public function run($request) {		
+	public function run($request) {
 		if ($request->getVar('Direction') == 'down') {
 			$this->down();
 		} else {
 			$this->up();
 		}
-	}    
+	}
 
 	/**
 	 * Helper method to write context sensitive line breaks
@@ -50,8 +50,8 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 
 	/**
 	 * Maintains a persistent list of errors
-	 * @param int $summitID 
-	 * @param string $error    
+	 * @param int $summitID
+	 * @param string $error
 	 */
 	private function addError($summitID, $error) {
 		if(!isset($this->errors[$summitID])) {
@@ -67,47 +67,47 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	private function ensureLegacySummits () {
 		$created = 0;
 		if(!Summit::get()->filterAny([
-				'Title:PartialMatch' => 'San Diego'
+			'Title:PartialMatch' => 'San Diego'
 		])->first()) {
 
 			$sanDiego = Summit::create([
-				'Title' => 'San Diego',				
+				'Title' => 'San Diego',
 				'Location' => 'San Diego, CA',
-		        'SummitBeginDate' => '2012-10-15 00:00:00',
-		        'SummitEndDate' => '2012-10-18 00:00:00',
-		        'SubmissionBeginDate' => '2012-08-15 00:00:00',
-		        'SubmissionEndDate' => '2012-08-18 00:00:00',
-		        'VotingBeginDate' => '2012-08-20 00:00:00',
-		        'VotingEndDate' => '2012-08-25 00:00:00',
-		        'SelectionBeginDate' => '2012-09-15 00:00:00',
-		        'SelectionEndDate' => '2012-09-18 00:00:00',
-		        'RegistrationBeginDate' => '2012-10-01 00:00:00',
-		        'RegistrationEndDate' => '2012-10-10 00:00:00',
-		        'StartShowingVenuesDate' => '2012-05-05 00:00:00',
-		        'TimeZone' => '132'
+				'SummitBeginDate' => '2012-10-15 00:00:00',
+				'SummitEndDate' => '2012-10-18 00:00:00',
+				'SubmissionBeginDate' => '2012-08-15 00:00:00',
+				'SubmissionEndDate' => '2012-08-18 00:00:00',
+				'VotingBeginDate' => '2012-08-20 00:00:00',
+				'VotingEndDate' => '2012-08-25 00:00:00',
+				'SelectionBeginDate' => '2012-09-15 00:00:00',
+				'SelectionEndDate' => '2012-09-18 00:00:00',
+				'RegistrationBeginDate' => '2012-10-01 00:00:00',
+				'RegistrationEndDate' => '2012-10-10 00:00:00',
+				'StartShowingVenuesDate' => '2012-05-05 00:00:00',
+				'TimeZone' => '132'
 			]);
 			$sanDiego->write();
 			echo "Created San Diego summit!".$this->br();
 			$created++;
 		}
 		if(!Summit::get()->filterAny([
-				'Title:PartialMatch' => 'Portland'
+			'Title:PartialMatch' => 'Portland'
 		])->first()) {
 			$portland = Summit::create([
-				'Title' => 'Portland',				
+				'Title' => 'Portland',
 				'Location' => 'Portland, OR',
-		        'SummitBeginDate' => '2013-04-15 00:00:00',
-		        'SummitEndDate' => '2013-04-18 00:00:00',
-		        'SubmissionBeginDate' => '2013-01-15 00:00:00',
-		        'SubmissionEndDate' => '2013-01-18 00:00:00',
-		        'VotingBeginDate' => '2013-02-20 00:00:00',
-		        'VotingEndDate' => '2013-02-25 00:00:00',
-		        'SelectionBeginDate' => '2013-03-15 00:00:00',
-		        'SelectionEndDate' => '2013-03-18 00:00:00',
-		        'RegistrationBeginDate' => '2013-04-01 00:00:00',
-		        'RegistrationEndDate' => '2013-04-10 00:00:00',
-		        'StartShowingVenuesDate' => '2013-01-01 00:00:00',
-		        'TimeZone' => '132'
+				'SummitBeginDate' => '2013-04-15 00:00:00',
+				'SummitEndDate' => '2013-04-18 00:00:00',
+				'SubmissionBeginDate' => '2013-01-15 00:00:00',
+				'SubmissionEndDate' => '2013-01-18 00:00:00',
+				'VotingBeginDate' => '2013-02-20 00:00:00',
+				'VotingEndDate' => '2013-02-25 00:00:00',
+				'SelectionBeginDate' => '2013-03-15 00:00:00',
+				'SelectionEndDate' => '2013-03-18 00:00:00',
+				'RegistrationBeginDate' => '2013-04-01 00:00:00',
+				'RegistrationEndDate' => '2013-04-10 00:00:00',
+				'StartShowingVenuesDate' => '2013-01-01 00:00:00',
+				'TimeZone' => '132'
 			]);
 			$portland->write();
 			echo "Created Portland summit!".$this->br();
@@ -117,18 +117,18 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 		if(!Summit::get()->filter('Title:PartialMatch', 'Atlanta')->first()) {
 			$atlanta = Summit::create([
 				'Title' => 'Atlanta',
-		        'SummitBeginDate' => '2013-05-05 00:00:00',
-		        'SummitEndDate' => '2013-05-08 00:00:00',
-		        'SubmissionBeginDate' => '2013-01-15 00:00:00',
-		        'SubmissionEndDate' => '2013-01-18 00:00:00',
-		        'VotingBeginDate' => '2013-02-20 00:00:00',
-		        'VotingEndDate' => '2013-02-25 00:00:00',
-		        'SelectionBeginDate' => '2013-03-15 00:00:00',
-		        'SelectionEndDate' => '2013-03-18 00:00:00',
-		        'RegistrationBeginDate' => '2013-04-01 00:00:00',
-		        'RegistrationEndDate' => '2013-04-10 00:00:00',
-		        'StartShowingVenuesDate' => '2013-01-01 00:00:00',
-		        'TimeZone' => '151'
+				'SummitBeginDate' => '2013-05-05 00:00:00',
+				'SummitEndDate' => '2013-05-08 00:00:00',
+				'SubmissionBeginDate' => '2013-01-15 00:00:00',
+				'SubmissionEndDate' => '2013-01-18 00:00:00',
+				'VotingBeginDate' => '2013-02-20 00:00:00',
+				'VotingEndDate' => '2013-02-25 00:00:00',
+				'SelectionBeginDate' => '2013-03-15 00:00:00',
+				'SelectionEndDate' => '2013-03-18 00:00:00',
+				'RegistrationBeginDate' => '2013-04-01 00:00:00',
+				'RegistrationEndDate' => '2013-04-10 00:00:00',
+				'StartShowingVenuesDate' => '2013-01-01 00:00:00',
+				'TimeZone' => '151'
 			]);
 			$atlanta->write();
 			echo "Created Atlanta summit!".$this->br();
@@ -181,10 +181,10 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	/**
 	 * Some VideoPresentation objects have wacky d/m/y dates that are stored as Varchar.
 	 * This method fixes those to be Y-m-d H:i:s
-	 * 
+	 *
 	 * There are also some records with weird alphanumeric values like "S55", so we throw those out.
-	 * 
-	 * @param  VideoPresentation $v     
+	 *
+	 * @param  VideoPresentation $v
 	 * @param  string            $field The date field name to update
 	 * @return VideoPresentation
 	 */
@@ -206,7 +206,7 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	/**
 	 * Given a VideoPresentation object, create a Presentation
 	 * @param  int            $id A forced ID (SummitEvent and Presentation tables are offset)
-	 * @param  VideoPresentation $v 
+	 * @param  VideoPresentation $v
 	 * @return Presentation
 	 */
 	private function createLegacyPresentation($id, VideoPresentation $v) {
@@ -226,8 +226,8 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 
 	/**
 	 * Attempt to add speakers to the presentation by fuzzy matching the FirstName / Surname
-	 * @param Presentation      $p 
-	 * @param VideoPresentation $v 
+	 * @param Presentation      $p
+	 * @param VideoPresentation $v
 	 */
 	private function addLegacySpeakers(Presentation $p, VideoPresentation $v) {
 		$speakers = explode(',', $v->Speakers);
@@ -293,8 +293,8 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 
 	/**
 	 * Create a PresentationVideo object for a presentation from a VideoPresentation
-	 * @param  Presentation      $p 
-	 * @param  VideoPresentation $v 
+	 * @param  Presentation      $p
+	 * @param  VideoPresentation $v
 	 * @return PresentationVideo
 	 */
 	private function createLegacyVideoMaterial(Presentation $p, VideoPresentation $v) {
@@ -307,7 +307,7 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 			'Created' => $v->LastEdited,
 			'LastEdited' => $v->LastEdited,
 			'DateUploaded' => $p->StartDate ?: $p->Summit()->SummitBeginDate
-		]);		
+		]);
 	}
 
 
@@ -315,157 +315,158 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	 * Performs the migration
 	 */
 	public function doUp () {
-		// We're mocking some stuff, e.g. Summit, Presentation, and we need some forgiveness here
-		Config::inst()->update('DataObject', 'validation_enabled', false);
-		
-		// Add the old SD / Portland summits
-		$this->ensureLegacySummits();
-		echo $this->br(2);
 
-		// Presentations weren't always SummitEvents, so the tables are out of sync.
-		// Get the higer of the two ID increments to run a counter and force the ID.
-		$maxSummitEventID = DB::query("SELECT MAX(ID) FROM SummitEvent")->value();
-		$maxPresentationID = DB::query("SELECT MAX(ID) FROM Presentation")->value();
-		$idCounter = max($maxSummitEventID, $maxPresentationID);
-		$idCounter++;
-		
-		$total = VideoPresentation::get()->count();
-		$i = 0;
-		echo "Migrating VideoPresentations...".$this->br(3);
-		$presentationLookup = [];
+		SapphireTransactionManager::getInstance()->transaction(function(){
+            // We're mocking some stuff, e.g. Summit, Presentation, and we need some forgiveness here
+            Config::inst()->update('DataObject', 'validation_enabled', false);
 
-		// Finding a potential presentation for the video can only be done on fuzzy matching
-		// the title. Special characters in the title can defeat that matching, so this
-		// loop creates a lookup of alphnumeric skus of the title for easier matching later.
-		foreach(Summit::get() as $s) {
-			$presentationLookup[$s->ID] = [];
-			foreach($s->Presentations()->sort('Title ASC') as $p) {
-				$presentationLookup[$s->ID][
-					strtolower(
-						preg_replace('/[^a-zA-Z0-9]/', '', $p->Title)
-					)
-				] = $p->ID;
-			}
-		}		
+            // Add the old SD / Portland summits
+            $this->ensureLegacySummits();
+            echo $this->br(2);
 
-		foreach(VideoPresentation::get()->filter('DisplayOnSite',true) as $v) {
-			$i++;
-			$created = 0;	
-			echo "{$i} / {$total} ....";
+            // Presentations weren't always SummitEvents, so the tables are out of sync.
+            // Get the higer of the two ID increments to run a counter and force the ID.
+            $maxSummitEventID = DB::query("SELECT MAX(ID) FROM SummitEvent")->value();
+            $maxPresentationID = DB::query("SELECT MAX(ID) FROM Presentation")->value();
+            $idCounter = max($maxSummitEventID, $maxPresentationID);
+            $idCounter++;
 
-			if(!$v->YouTubeID) {
-				echo "No YouTubeID. Skipping.".$this->br();
-				$this->stats['Presentations skipped']++;
-				continue;
-			}
+            $total = VideoPresentation::get()->count();
+            $i = 0;
+            echo "Migrating VideoPresentations...".$this->br(3);
+            $presentationLookup = [];
 
-			$v = $this->ensureSummitID($v);
+            // Finding a potential presentation for the video can only be done on fuzzy matching
+            // the title. Special characters in the title can defeat that matching, so this
+            // loop creates a lookup of alphnumeric skus of the title for easier matching later.
+            foreach(Summit::get() as $s) {
+                $presentationLookup[$s->ID] = [];
+                foreach($s->Presentations()->sort('Title ASC') as $p) {
+                    $presentationLookup[$s->ID][
+                    strtolower(
+                        preg_replace('/[^a-zA-Z0-9]/', '', $p->Title)
+                    )
+                    ] = $p->ID;
+                }
+            }
 
-			// Attempt to match a Presentation of the same name as the video
-			$lookup = $presentationLookup[$v->SummitID];
-			$cleanTitle = strtolower(preg_replace('/[^a-zA-Z0-9]/','', $v->Name));			
-			$originalPresentation = false;
-			if(isset($lookup[$cleanTitle])) {
-				$originalPresentation = Presentation::get()->byID($lookup[$cleanTitle]);
-			}			
+            foreach(VideoPresentation::get()->filter('DisplayOnSite',true) as $v) {
+                $i++;
+                $created = 0;
+                echo "{$i} / {$total} ....";
 
-			// If no Presentation exists, create a shell.
-			if(!$originalPresentation) {
-				echo "********* {$v->Name} has no original presentation.".$this->br();
+                if(!$v->YouTubeID) {
+                    echo "No YouTubeID. Skipping.".$this->br();
+                    $this->stats['Presentations skipped']++;
+                    continue;
+                }
 
-				$v = $this->normaliseDateTime($v, 'StartTime');
-				$v = $this->normaliseDateTime($v, 'EndTime');
+                $v = $this->ensureSummitID($v);
 
-				$originalPresentation = $this->createLegacyPresentation($idCounter, $v);
-				$originalPresentation->write(false, true);
-				$idCounter++;
-				
-				echo "Created presentation {$v->ID} -> {$originalPresentation->ID}...";
-				$originalPresentation = $this->addLegacySpeakers($originalPresentation, $v);
-				$this->stats['Presentations created'] ++;
-			}
-			else {
-				echo "*** Original presentation found: " . $originalPresentation->ID . $this->br();
-			}
+                // Attempt to match a Presentation of the same name as the video
+                $lookup = $presentationLookup[$v->SummitID];
+                $cleanTitle = strtolower(preg_replace('/[^a-zA-Z0-9]/','', $v->Name));
+                $originalPresentation = false;
+                if(isset($lookup[$cleanTitle])) {
+                    $originalPresentation = Presentation::get()->byID($lookup[$cleanTitle]);
+                }
 
-			$material = $this->createLegacyVideoMaterial($originalPresentation, $v);
-			$material->write();
+                // If no Presentation exists, create a shell.
+                if(!$originalPresentation) {
+                    echo "********* {$v->Name} has no original presentation.".$this->br();
 
-			DB::query(sprintf(
-				"UPDATE PresentationMaterial SET Created = '%s', LastEdited = '%s' WHERE ID = '%s'",
-				$v->LastEdited,
-				$v->LastEdited,
-				$material->ID
-			));
+                    $v = $this->normaliseDateTime($v, 'StartTime');
+                    $v = $this->normaliseDateTime($v, 'EndTime');
 
-			echo "Created video with date uploaded {$material->DateUploaded}." . $this->br();
-		}
+                    $originalPresentation = $this->createLegacyPresentation($idCounter, $v);
+                    $originalPresentation->write(false, true);
+                    $idCounter++;
 
-		echo $this->br(3);
-		echo "Migration complete!".$this->br(3);
-		if(!empty($this->errors)) {
-			echo "Warnings:".$this->br();
-			foreach($this->errors as $summitID => $errors) {
-				echo Summit::get()->byID($summitID)->Title . " (".sizeof($errors).")" . $this->br();
-				echo "----------------------------";
-				echo $this->br(2);
-				foreach($errors as $e) {
-					echo "\t{$e}".$this->br();
-				}
-			}
-		}
+                    echo "Created presentation {$v->ID} -> {$originalPresentation->ID}...";
+                    $originalPresentation = $this->addLegacySpeakers($originalPresentation, $v);
+                    $this->stats['Presentations created'] ++;
+                }
+                else {
+                    echo "*** Original presentation found: " . $originalPresentation->ID . $this->br();
+                }
 
-		if(!empty($this->stats)) {
-			echo $this->br(3);
-			echo "Stats".$this->br();
-			echo "---------------------".$this->br();
-			foreach($this->stats as $title => $stat) {
-				echo "{$title}: $stat".$this->br();
-			}
-		}
+                $material = $this->createLegacyVideoMaterial($originalPresentation, $v);
+                $material->write();
+
+                DB::query(sprintf(
+                    "UPDATE PresentationMaterial SET Created = '%s', LastEdited = '%s' WHERE ID = '%s'",
+                    $v->LastEdited,
+                    $v->LastEdited,
+                    $material->ID
+                ));
+
+                echo "Created video with date uploaded {$material->DateUploaded}." . $this->br();
+            }
+
+            echo $this->br(3);
+            echo "Migration complete!".$this->br(3);
+            if(!empty($this->errors)) {
+                echo "Warnings:".$this->br();
+                foreach($this->errors as $summitID => $errors) {
+                    echo Summit::get()->byID($summitID)->Title . " (".sizeof($errors).")" . $this->br();
+                    echo "----------------------------";
+                    echo $this->br(2);
+                    foreach($errors as $e) {
+                        echo "\t{$e}".$this->br();
+                    }
+                }
+            }
+
+            if(!empty($this->stats)) {
+                echo $this->br(3);
+                echo "Stats".$this->br();
+                echo "---------------------".$this->br();
+                foreach($this->stats as $title => $stat) {
+                    echo "{$title}: $stat".$this->br();
+                }
+            }
+        });
 	}
 
 
 	/**
-	 * Reverses the migration	 
+	 * Reverses the migration
 	 */
 	public function doDown () {
-		Migration::get()->filter('Name', $this->title)->removeAll();
-		PresentationVideo::get()->removeAll();
-		if(!PresentationVideo::get()->exists()) {
-			echo "Deleted all presentation video materials".$this->br();			
-		}
-		else {
-			echo "*** FAIL: Did not delete presentation video materials".$this->br();			
-		}
-		foreach(Presentation::get()->filter('Legacy', true) as $p) {
-			$p->Speakers()->setByIdList(array ());
-			$p->delete();
-		}
-		if(!Presentation::get()->filter('Legacy', true)->exists()) {
-			echo "Deleted all legacy presentations".$this->br();
-		}
-		else {
-			echo "*** FAIL: Did not delete all legacy presentations".$this->br();
-		}
+        SapphireTransactionManager::getInstance()->transaction(function() {
+            Migration::get()->filter('Name', $this->title)->removeAll();
+            PresentationVideo::get()->removeAll();
+            if (!PresentationVideo::get()->exists()) {
+                echo "Deleted all presentation video materials" . $this->br();
+            } else {
+                echo "*** FAIL: Did not delete presentation video materials" . $this->br();
+            }
+            foreach (Presentation::get()->filter('Legacy', true) as $p) {
+                $p->Speakers()->setByIdList(array());
+                $p->delete();
+            }
+            if (!Presentation::get()->filter('Legacy', true)->exists()) {
+                echo "Deleted all legacy presentations" . $this->br();
+            } else {
+                echo "*** FAIL: Did not delete all legacy presentations" . $this->br();
+            }
 
-		foreach(PresentationSpeaker::get()->filter('Notes','[LEGACY]') as $speaker) {
-			$speaker->delete();
-		}
-		if(!PresentationSpeaker::get()->filter('Notes','[LEGACY]')->exists()) {
-			echo "Deleted all legacy speakers".$this->br();
-		}
-		else {
-			echo "*** FAIL: Did not delete all legacy speakers".$this->br();
-		}
-		
-		Summit::get()->filter('Title', ['San Diego','Portland', 'Atlanta'])->removeAll();
+            foreach (PresentationSpeaker::get()->filter('Notes', '[LEGACY]') as $speaker) {
+                $speaker->delete();
+            }
+            if (!PresentationSpeaker::get()->filter('Notes', '[LEGACY]')->exists()) {
+                echo "Deleted all legacy speakers" . $this->br();
+            } else {
+                echo "*** FAIL: Did not delete all legacy speakers" . $this->br();
+            }
 
-		if(!Summit::get()->filter('Title', ['San Diego','Portland','Atlanta'])->exists()) {
-			echo "Deleted legacy summits".$this->br();
-		}
-		else {
-			echo "*** FAIL: Did not delete legacy summits".$this->br();
-		}
+            Summit::get()->filter('Title', ['San Diego', 'Portland', 'Atlanta'])->removeAll();
+
+            if (!Summit::get()->filter('Title', ['San Diego', 'Portland', 'Atlanta'])->exists()) {
+                echo "Deleted legacy summits" . $this->br();
+            } else {
+                echo "*** FAIL: Did not delete legacy summits" . $this->br();
+            }
+        });
 	}
 }
