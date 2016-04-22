@@ -191,8 +191,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
                     $report_array[$day->Label][] = array(
                         'id'         => intVal($rooms['id']),
-                        'start_time' => $summit->convertDateFromUTC2TimeZone($rooms['start_date'],'g:ia'),
-                        'end_time'   => $summit->convertDateFromUTC2TimeZone($rooms['end_date'],'g:ia'),
+                        'start_time' => $summit->convertDateFromUTC2TimeZone($rooms['start_date'],'m/d/Y g:ia'),
+                        'end_time'   => $summit->convertDateFromUTC2TimeZone($rooms['end_date'],'m/d/Y g:ia'),
                         'code'       => empty($rooms['code'])? 'TBD': $rooms['code'],
                         'title'      => $rooms['event'],
                         'room'       => $rooms['room'],
@@ -308,8 +308,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     foreach ($days as $day) {
                         $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venue);
                         foreach ($day_report as $val) {
-                            $start_date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');
-                            $end_date   = $summit->convertDateFromUTC2TimeZone($val['end_date'], 'g:ia');
+                            $start_date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'm/d/Y g:ia');
+                            $end_date   = $summit->convertDateFromUTC2TimeZone($val['end_date'], 'm/d/Y g:ia');
 
                             $time = $start_date . ' - ' . $end_date;
                             unset($val['start_date']);
