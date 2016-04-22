@@ -51,11 +51,14 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+            <h3>Survey Assets</h3>
+            <p>
+            <ul><li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">Order a print copy here</a></li>
+            <li><a href="https://www.youtube.com/watch?v=lmu5r7BCY_U&feature=youtu.be" target="_blank">Video</a></li>
+            <li><a href="https://www.dropbox.com/s/8sxfm5bt57kgeys/User%20Survey%20overview%20web.pptx?dl=0" target="_blank">Slide deck</a></li>
+            </ul>
+            </p>
             <h3>See prior surveys</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
             <p>
                 Learn more about past User Survey data to see how OpenStack is growing and maturing.
             </p>
