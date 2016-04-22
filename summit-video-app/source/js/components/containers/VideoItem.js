@@ -13,6 +13,8 @@ const VideoItem = ({
 		<GalleryItem
 			className='gallery-item video-item'
 			imageUrl={video.thumbnailURL}
+			imageWidth={263}
+			imageHeight={148}
 			imageCaption={video.summit ? video.summit.title : ''}
 			title={video.title}
 			subtitle={video.speakers && video.speakers.map(s => s.name).join(', ')}
