@@ -242,7 +242,7 @@ class SummitVideoAppBackend {
 			'title' => $v->Name,
 			'date' => $dateUploaded->format('Y-m-d'),
 			'dateUTC' => $dateUploaded->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d'),
-			'thumbnailURL' => "http://img.youtube.com/vi/{$v->YouTubeID}/mqdefault.jpg",
+			'thumbnailURL' => "//img.youtube.com/vi/{$v->YouTubeID}/mqdefault.jpg",
 			'summit' => [
 				'id' => $v->Presentation()->SummitID,
 				'title' => $v->Presentation()->Summit()->Title
