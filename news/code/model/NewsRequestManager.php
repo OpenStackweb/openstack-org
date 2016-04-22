@@ -319,6 +319,7 @@ final class NewsRequestManager {
                 foreach ($activate_news as $article) {
                     $article->registerSection('recent');
                     $article->registerRank(1);
+                    $article->write();
                 }
 
                 $this->reorderArticles('recent',$repository);
