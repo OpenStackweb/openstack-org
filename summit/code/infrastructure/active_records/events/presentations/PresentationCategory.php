@@ -5,12 +5,13 @@ class PresentationCategory extends DataObject
 {
 
     private static $db = array(
-        'Title' => 'Varchar',
-        'Description' => 'Text',
-        'SessionCount' => 'Int',
+        'Title'          => 'Varchar',
+        'Description'    => 'Text',
+        'SessionCount'   => 'Int',
         'AlternateCount' => 'Int',
-        'VotingVisible' => 'Boolean',
-        'ChairVisible' => 'Boolean'
+        'VotingVisible'  => 'Boolean',
+        'ChairVisible'   => 'Boolean',
+        'Code'           => 'Varchar(5)',
     );
 
     private static $defaults = array(
@@ -43,6 +44,7 @@ class PresentationCategory extends DataObject
     {
         return FieldList::create(TabSet::create('Root'))
             ->text('Title')
+            ->text('Code','Code','',5)
             ->textarea('Description')
             ->numeric('SessionCount', 'Number of sessions')
             ->numeric('AlternateCount', 'Number of alternates')

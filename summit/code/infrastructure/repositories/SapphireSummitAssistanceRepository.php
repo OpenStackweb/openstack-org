@@ -163,10 +163,19 @@ SQL;
     {
 
         $query = <<<SQL
-SELECT E.ID AS id ,E.StartDate AS start_date, E.EndDate AS end_date, 'K' AS code, E.Title AS event,
-L.Name AS room, R.Capacity AS capacity,COUNT(DISTINCT(SA.SpeakerID),SA.SpeakerID IS NOT NULL) AS speakers, E.HeadCount AS headcount, COUNT(A.ID) AS total
+SELECT E.ID AS id ,
+E.StartDate AS start_date,
+E.EndDate AS end_date,
+PC.Code AS code,
+E.Title AS event,
+L.Name AS room,
+R.Capacity AS capacity,
+COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL) AS speakers,
+E.HeadCount AS headcount,
+COUNT(A.ID) AS total
 FROM SummitEvent AS E
 LEFT JOIN Presentation AS P ON P.ID = E.ID
+LEFT JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
 LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID

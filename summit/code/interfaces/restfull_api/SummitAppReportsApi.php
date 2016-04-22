@@ -193,7 +193,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                         'id'         => intVal($rooms['id']),
                         'start_time' => $summit->convertDateFromUTC2TimeZone($rooms['start_date'],'g:ia'),
                         'end_time'   => $summit->convertDateFromUTC2TimeZone($rooms['end_date'],'g:ia'),
-                        'code'       => 'K',
+                        'code'       => empty($rooms['code'])? 'TBD': $rooms['code'],
                         'title'      => $rooms['event'],
                         'room'       => $rooms['room'],
                         'capacity'   => $rooms['capacity'],
@@ -328,7 +328,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     $data = $report_data['Data'];
                     $results = array();
                     foreach ($data as $row) {
-                        $row['start_date'] = $summit->convertDateFromUTC2TimeZone($row['start_date'], 'g:ia');
+                        $row['start_date'] = $summit->convertDateFromUTC2TimeZone($row['start_date'],'m/d/Y g:ia');
                         unset($row['presentation_id']);
                         unset($row['assistance_id']);
                         array_push($results, $row);
