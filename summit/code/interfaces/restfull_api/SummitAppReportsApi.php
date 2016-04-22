@@ -297,8 +297,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     foreach ($data as $row) {
                         array_push($results, $row);
                     }
-
-                    $filename = "$data-" . date('Ymd') . "." . $ext;
+                    $filename = "speaker_report-" . date('Ymd') . "." . $ext;
                     $delimiter = ($ext == 'xls') ? "\t" : ",";
                     return CSVExporter::getInstance()->export($filename, $results, $delimiter);
                     break;
@@ -310,7 +309,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                         $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venue);
                         foreach ($day_report as $val) {
                             $start_date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');
-                            $end_date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');
+                            $end_date   = $summit->convertDateFromUTC2TimeZone($val['end_date'], 'g:ia');
 
                             $time = $start_date . ' - ' . $end_date;
                             unset($val['start_date']);
@@ -329,6 +328,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     $data = $report_data['Data'];
                     $results = array();
                     foreach ($data as $row) {
+                        $row['start_date'] = $summit->convertDateFromUTC2TimeZone($row['start_date'], 'g:ia');
                         unset($row['presentation_id']);
                         unset($row['assistance_id']);
                         array_push($results, $row);
