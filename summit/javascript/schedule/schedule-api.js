@@ -8,7 +8,7 @@ schedule_api.getEventByDay = function (summit_id, day)
     $.ajax({
         type: 'GET',
         url:  url,
-        timeout:60000,
+        timeout:120000,
         dataType:'json',
         success: function (data, textStatus, jqXHR) {
             data.show_date = false;

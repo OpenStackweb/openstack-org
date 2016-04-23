@@ -96,6 +96,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('themes/openstack/bower_assets/pure-templates/libs/pure.min.js');
     }
 
     public function ViewEvent()

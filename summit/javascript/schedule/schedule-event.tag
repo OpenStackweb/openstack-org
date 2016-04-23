@@ -1,5 +1,5 @@
 <schedule-event>
-    <div if={ show } id="event_{ id }" class="row event-row">
+    <div id="event_{ id }" class="row event-row">
         <div class="col-sm-12">
             <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids, type_id) }" data-event-id="{ id }">
                 <div class="event-content">
