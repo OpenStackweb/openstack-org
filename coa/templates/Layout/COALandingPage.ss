@@ -12,7 +12,8 @@
                 <div class="coa-action-top">
                     <h5>Have a code to redeem?</h5>
                     <a href="{$Top.Link(get-started)}" class="coa-action-btn">Get Started <i class="fa fa-chevron-right"></i></a>
-                    <a href="{$Top.Link(already-registered)}" class="coa-already-registered">Already Registered?</a>
+                    <a href="{$Top.Link(already-registered)}" class="coa-already-registered">Already Registered?</a> &nbsp; | &nbsp; 
+                    <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
                 </div>
             </div>
         </div>
@@ -79,9 +80,17 @@
 <div class="coa-exam-details">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12" id="coa-details">
                 <h2>Exam Details</h2>
                 $Top.ExamDetails
+                <h5 class="section-title"> What does the exam cost?</h5>
+                <p>
+                    $300
+                </p>
+                <h5 class="section-title">How long do I have to schedule my exam?</h5>
+                <p>
+                    Exam may be scheduled anytime within <strong>12 months</strong> of purchase.
+                </p>
                 <h5 class="section-title">Format</h5>
                 <p>
                     The COA is a performance-based exam and Candidates will need to perform tasks or solve problems using the command line interface and Horizon dashboard. For exam security, Candidates are monitored virtually by a proctor during the exam session via streaming audio, video, and screensharing feeds. The screensharing feed allows proctors to view candidates' desktops (including all monitors). The audio, video and screensharing feeds will be stored for a limited period of time in the event that there is a subsequent need for review.
