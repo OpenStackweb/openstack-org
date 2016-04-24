@@ -60,7 +60,8 @@ class URL {
 
 	makeRelative (url) {
 		const replace = this.baseURL.replace(/^\//,'');
-		return url.replace(new RegExp(`^${replace}`), '')
+		return url.replace(/^\//,'')
+				  .replace(new RegExp(`^${replace}`), '')
 				  .replace(/^\//,'');
 	}
 }

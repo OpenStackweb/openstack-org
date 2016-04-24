@@ -25,7 +25,6 @@ const NavigationBar = ({
 export default connect (
 	(state, ownProps) => {
 		const activeLink = URL.makeRelative(state.router.location.pathname);
-
 		return {
 			className: ownProps.className,
 			newVideos: state.videos.allVideos.results.filter(v => v.isNew),

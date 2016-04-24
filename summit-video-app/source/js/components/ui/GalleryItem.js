@@ -7,6 +7,11 @@ class GalleryItem extends React.Component {
 		super(props);
 
 		this.handleClick = this.handleClick.bind(this);
+		this.handleImageLoad = this.handleImageLoad.bind(this);
+
+		this.state = {
+			imageLoaded: false
+		}
 	}
 
 	handleClick (e) {
@@ -14,6 +19,12 @@ class GalleryItem extends React.Component {
 			e.preventDefault();
 			return this.props.onItemClicked(this.props.link);
 		}
+	}
+
+	handleImageLoad () {
+		this.setState({
+			imageLoaded: true
+		});
 	}
 
 	render () {
@@ -39,7 +50,10 @@ class GalleryItem extends React.Component {
 							<div className="gallery-image-caption">
 								{imageCaption}
 							</div>
-							<img width={imageWidth} height={imageHeight} src={imageUrl} />
+							{!this.state.imageLoaded &&
+								<div style={{width: imageWidth, height: imageHeight}} />
+							}
+							<img onLoad={this.handleImageLoad} src={imageUrl} style={{display: this.state.imageLoaded ? 'block' : 'none'}} />
 						</div>					
 						<div className="gallery-title">
 							{title}
