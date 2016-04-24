@@ -143,10 +143,10 @@
                 <p>Are you a Summit Attendee? Add your Order # to unlock features only available for Registered Summit Attendees <a href="profile/attendeeInfoRegistration" class="alert-link">here</a></p>
             </div>
         <% else %>
-        <div class="row">
-                    <div class="col-xs-12 logout-container">
-            <a class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link}">Log Out</a>
-            </div>
+            <div class="row">
+                <div class="col-xs-12 logout-container">
+                    <a class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link}">Log Out</a>
+                </div>
             </div>
         <% end_if %>
     <% else %>

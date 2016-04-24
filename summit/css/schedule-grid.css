@@ -566,6 +566,20 @@ a.navbar-brand {
     text-decoration: none;
     padding: 8px 14px;
     color: grey !important;
+    float: right;
+}
+
+@media (max-width: 600px) {
+    .view-all-schedule {
+        float: left;
+        margin-top: 10px;
+    }
+
+    .col-switch-schedule {
+        float: left;
+        margin-right: 20px;
+        margin-top: 10px;
+    }
 }
 
 form.all-events-search-form .all-events-search-wrapper {
@@ -605,6 +619,24 @@ form.all-events-search-form .all-events-search-wrapper i {
     top: 120px;
     right: 0px;
     text-align: right;
+}
+
+@media (max-width: 1200px) {
+    .login-container, .logout-container {
+        position: relative;
+        top: 165px;
+        right: 0px;
+        text-align: right;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-container, .logout-container {
+        position: relative;
+        top: -12px;
+        right: 0px;
+        text-align: right;
+    }
 }
 
 .chosen-container .chosen-results

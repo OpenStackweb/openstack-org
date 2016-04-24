@@ -1,6 +1,6 @@
 <schedule-main-filters>
     <div class="row all-events-filter-row">
-        <div class="col-xs-6 all-events-filter-link">
+        <div class="col-md-6 col-xs-12 all-events-filter-link">
             <div class="col-filter-btn">
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
@@ -9,15 +9,15 @@
                 <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
-        <div class="col-xs-5">
+        <div class="col-md-5 col-xs-12">
             <div class="col-view-all-schedule">
                 <form action="{ base_url+'mine/' }" method="POST" if={ mine }>
                     <input type="hidden" name="goback" value="1" />
-                    <button type="submit" class="btn btn-default pull-right view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;My&nbsp;Schedule</button>
+                    <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;My&nbsp;Schedule</button>
                 </form>
                 <form action="{ base_url+'full/' }" method="POST" if={ !mine }>
                     <input type="hidden" name="goback" value="1" />
-                    <button type="submit" class="btn btn-default pull-right view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule</button>
+                    <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule</button>
                 </form>
             </div>
             <div class="col-switch-schedule">
