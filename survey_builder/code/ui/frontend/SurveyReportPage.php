@@ -34,7 +34,7 @@ class SurveyReportPage_Controller extends Page_Controller
     {
         parent::init();
 
-        if(!Permission::checkMember(Member::currentUser(),"ADMIN")) Security::permissionFailure($this);
+        //if(!Permission::checkMember(Member::currentUser(),"ADMIN")) Security::permissionFailure($this);
 
         Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
         //jqplot and plugins ...
@@ -61,8 +61,7 @@ class SurveyReportPage_Controller extends Page_Controller
         Requirements::javascript('themes/openstack/bower_assets/html2canvas/build/html2canvas.min.js');
         // require custom CSS
         Requirements::css("survey_builder/css/survey-report.css");
-        Requirements::javascript('survey_builder/js/survey_report.js');
-
+        //Requirements::javascript('survey_builder/js/survey_report.js');
     }
 
     function getSurveyTemplates() {
