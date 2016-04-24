@@ -65,9 +65,6 @@ class App extends React.Component {
 					<div className="row">
 						<div className="col-sm-12">
 							<h1>OpenStack Videos</h1>
-							{this.props.errorMsg &&
-								<div className="error">{this.props.errorMsg}</div>
-							}
 						</div>
 					</div>
 					<div className="row">
@@ -80,7 +77,7 @@ class App extends React.Component {
 					</div>
 				</div>
 			</div>
-			<div className="video-navbar-wrapper">
+			<div className="video-navbar-wrapper" id="video-navigation">
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-12">
@@ -89,7 +86,7 @@ class App extends React.Component {
 					</div>
 				</div>
 			</div>
-			<div className="video-page-main">
+			<div className="video-page-main" id="video-page-main">
 				<div className="video-app-layout">
 					{this.props.children}				
 				</div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class SimpleSearchForm extends React.Component {
 
@@ -8,6 +9,8 @@ class SimpleSearchForm extends React.Component {
 	}
 
 	handleSubmit (e) {
+		ReactDOM.findDOMNode(this.refs.search).blur();
+		console.log('blur');
 		if(this.props.onSearch) {
 			e.preventDefault();
 			this.props.onSearch(this.refs.search.value);

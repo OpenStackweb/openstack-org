@@ -12,6 +12,15 @@ import Featured from './components/pages/Featured';
 import Search from './components/pages/Search';
 import VideoDetail from './components/pages/VideoDetail';
 
+browserHistory.listenBefore(location => {
+	if(location.search.match(/^\?search=/) || location.pathname.match(/video\/.*$/)) {
+		const main = document.getElementById('video-navigation');
+		const box = main.getBoundingClientRect();
+		const currentScroll = window.scrollY;
+		window.scrollTo(0, currentScroll + box.top - 50);
+	}
+});
+
 const Routes = (baseURL) => (
     <Router history={browserHistory}>
       <Route path={baseURL} component={App}>
