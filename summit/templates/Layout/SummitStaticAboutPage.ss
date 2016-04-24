@@ -35,7 +35,7 @@
         <div class="col-lg-3 col-md-4 col-sm-4">
             <ul class="help-me-menu">
                <li><a href="/summit/austin-2016/summit-schedule/#day=2016-04-25"><i class="fa fa-calendar"></i>Summit Schedule</a></li>
-               <li><a href="https://openstacksummit2016austin.eventbrite.com/"><i class="fa fa-shopping-cart"></i>Register For The Summit</a></li>
+               <!-- <li><a href="https://openstacksummit2016austin.eventbrite.com/"><i class="fa fa-shopping-cart"></i>Register For The Summit</a></li> -->
                <li><a href="/summit/austin-2016/categories/"><i class="fa fa-info-circle"></i>Schedule at-a-glance</a></li>
                <li><a href="/summit/austin-2016/venues/"><i class="fa fa-compass"></i>Venues</a></li>
                <li><a href="http://spousetivities.com/2016/03/austin-bbq-openstack-and-spousetivities/"><i class="fa fa-heart"></i>Spousetivities</a></li>
@@ -207,9 +207,9 @@
                 <p>
                     The Summit is about more than great sessions and speakers. Join the OpenStack community with networking events and fantastic nightlife.
                 </p>
-                <p>
+<!--                 <p>
                     <a href="https://openstacksummit2016austin.eventbrite.com" class="btn register-btn-lrg">Register Now</a>
-                </p>
+                </p> -->
             </div>
         </div>
     </div>
