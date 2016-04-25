@@ -42,6 +42,7 @@ class PresentationVideo extends PresentationMaterial
 		$f->addFieldToTab('Root.Main', new ReadonlyField('Views'),'Description');
 		$f->addFieldToTab('Root.Main', new TextField('YouTubeID','YouTube ID'),'Description');
 		$f->addFieldToTab('Root.Main', new DateField('DateUploaded'));
+		$f->addFieldToTab('Root.Main', new ReadonlyField('PresentationTitle', 'Presentation title', $this->Presentation()->Title));
 		return $f;
 	}
 
