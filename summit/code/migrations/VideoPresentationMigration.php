@@ -316,7 +316,7 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	 */
 	public function doUp () {
 
-		SapphireTransactionManager::getInstance()->transaction(function(){
+
             // We're mocking some stuff, e.g. Summit, Presentation, and we need some forgiveness here
             Config::inst()->update('DataObject', 'validation_enabled', false);
 
@@ -425,7 +425,7 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
                     echo "{$title}: $stat".$this->br();
                 }
             }
-        });
+
 	}
 
 
@@ -433,7 +433,6 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
 	 * Reverses the migration
 	 */
 	public function doDown () {
-        SapphireTransactionManager::getInstance()->transaction(function() {
             Migration::get()->filter('Name', $this->title)->removeAll();
             PresentationVideo::get()->removeAll();
             if (!PresentationVideo::get()->exists()) {
@@ -467,6 +466,6 @@ class VideoPresentationMigration extends AbstractDBMigrationTask {
             } else {
                 echo "*** FAIL: Did not delete legacy summits" . $this->br();
             }
-        });
+
 	}
 }
