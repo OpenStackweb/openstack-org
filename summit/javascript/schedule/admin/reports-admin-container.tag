@@ -13,7 +13,7 @@
             </select>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-primary" id="export-report" onclick={ exportReport } >Export CSV</button>
+            <button class="btn btn-primary" id="export-report" onclick={ exportReport } >Export</button>
             <button class="btn btn-success" id="save-report" onclick={ saveReport } >Save</button>
         </div>
         <div class="col-md-4" if={report == 'presentation_report'}>
