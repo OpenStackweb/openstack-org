@@ -12,5 +12,5 @@
  * limitations under the License.
  **/
 
-define('GET_STARTED_URL', 'https://identity.linuxfoundation.org/pid/317');
+define('GET_STARTED_URL', 'https://identity.linuxfoundation.org/openstack/pid/317');
 define('ALREADY_REGISTERED_URL', 'https://identity.linuxfoundation.org/portal/openstack');
