@@ -159,16 +159,19 @@ SQL;
         return $result;
     }
 
-    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venue='all')
+    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='all')
     {
 
         $query = <<<SQL
 SELECT E.ID AS id ,
+0 AS date,
+0 AS time,
 E.StartDate AS start_date,
 E.EndDate AS end_date,
 PC.Code AS code,
 E.Title AS event,
 L.Name AS room,
+L2.Name AS venue,
 R.Capacity AS capacity,
 COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL) AS speakers,
 E.HeadCount AS headcount,
@@ -180,6 +183,7 @@ LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
 LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
 LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
+LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
 LEFT JOIN SummitAttendee_Schedule AS A ON A.SummitEventID = E.ID
 WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
 SQL;
@@ -189,9 +193,9 @@ SQL;
 SQL;
         }
 
-        if ($venue != 'all') {
+        if ($venues != 'all') {
             $query .= <<<SQL
- AND E.LocationID = {$venue}
+ AND E.LocationID IN ( {$venues} )
 SQL;
         }
 

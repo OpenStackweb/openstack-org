@@ -143,6 +143,12 @@
             self.getReport(1);
         });
 
+        self.dispatcher.on(self.dispatcher.EXPORT_PRESENTATION_REPORT,function() {
+            var sort     = $('.sorted').data('sort');
+            var sort_dir = $('.sorted').data('dir');
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/presentation_report?sort='+sort+'&sort_dir='+sort_dir, '_blank');
+        });
+
     </script>
 
 </reports-admin-presentation-report>

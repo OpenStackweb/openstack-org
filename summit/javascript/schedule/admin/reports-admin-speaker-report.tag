@@ -25,8 +25,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr each={ speaker, i in speakers } data-speaker-id="{ speaker.id }">
-                    <td>{ speaker.speaker_id }</td>
+                <tr each={ speaker, i in speakers }>
+                    <td class="speaker-id">{ speaker.speaker_id }</td>
                     <td>{ speaker.member_id }</td>
                     <td>{ speaker.name }</td>
                     <td>{ speaker.email }</td>
@@ -100,7 +100,7 @@
         self.dispatcher.on(self.dispatcher.SAVE_SPEAKER_REPORT,function(report) {
             var request = [];
             $('.changed').each(function(){
-                var speaker_id = $(this).data('speaker-id');
+                var speaker_id = $('.speaker-id',this).text();
                 var phone      = $('.phone',this).val();
                 var registered = $('.registered',this).attr('checked') ? 1 : 0;
                 var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
@@ -128,6 +128,12 @@
                     }
                 });
             }
+        });
+
+        self.dispatcher.on(self.dispatcher.EXPORT_SPEAKER_REPORT,function() {
+            var sort     = $('.sorted').data('sort');
+            var sort_dir = $('.sorted').data('dir');
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/speaker_report?sort='+sort+'&sort_dir='+sort_dir, '_blank');
         });
 
 

@@ -65,11 +65,11 @@
         }
 
         exportReport(e) {
-            var report   = $('#report_select').val();
-            var sort     = $('.sorted').data('sort');
-            var sort_dir = $('.sorted').data('dir');
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/'+report+'?sort='+sort+'&sort_dir='+sort_dir, '_blank');
-            e.preventUpdate = true;
+            var report = $('#report_select').val();
+            if (typeof(e) !== 'undefined') {
+                e.preventUpdate = true;
+            }
+            self.dispatcher.exportReport(report);
         }
 
         toggleSort(elem) {

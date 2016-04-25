@@ -176,7 +176,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             $query_string = $request->getVars();
             $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
-            $venue        = (isset($query_string['venue'])) ? Convert::raw2sql($query_string['venue']) : 'all';
+            $venues       = (isset($query_string['venues'])) ? html_entity_decode($query_string['venues']) : 'all';
 
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
@@ -185,17 +185,19 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $report_array = array();
 
             foreach($days as $day) {
-                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venue);
+                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venues);
                 $report_array[$day->Label] = array();
                 foreach ($day_report as $rooms) {
 
                     $report_array[$day->Label][] = array(
                         'id'         => intVal($rooms['id']),
-                        'start_time' => $summit->convertDateFromUTC2TimeZone($rooms['start_date'],'m/d/Y g:ia'),
-                        'end_time'   => $summit->convertDateFromUTC2TimeZone($rooms['end_date'],'m/d/Y g:ia'),
+                        'date'       => $summit->convertDateFromUTC2TimeZone($rooms['start_date'],'m/d/Y'),
+                        'start_time' => $summit->convertDateFromUTC2TimeZone($rooms['start_date'],'g:ia'),
+                        'end_time'   => $summit->convertDateFromUTC2TimeZone($rooms['end_date'],'g:ia'),
                         'code'       => empty($rooms['code'])? 'TBD': $rooms['code'],
                         'title'      => $rooms['event'],
                         'room'       => $rooms['room'],
+                        'venue'      => $rooms['venue'],
                         'capacity'   => $rooms['capacity'],
                         'speakers'   => intVal($rooms['speakers']),
                         'headcount'  => intVal($rooms['headcount']),
@@ -283,12 +285,13 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $sort = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'name';
             $sort_dir = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
             $event_type = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
-            $venue = (isset($query_string['venue'])) ? Convert::raw2sql($query_string['venue']) : 'all';
+            $venues = (isset($query_string['venues'])) ? html_entity_decode($query_string['venues']) : 'all';
             $report = $request->param('REPORT');
             $summit_id = intval($request->param('SUMMIT_ID'));
             $summit = $this->summit_repository->getById($summit_id);
             if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $ext = 'csv';
+
             switch ($report) {
                 case 'speaker_report' :
                     $report_data = $this->assistance_repository->getAssistanceBySummit($summit_id, null, null, $sort, $sort_dir);
@@ -303,24 +306,54 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     break;
                     break;
                 case 'room_report' :
-                    $days = $summit->getDates();
-                    $results = array();
-                    foreach ($days as $day) {
-                        $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venue);
-                        foreach ($day_report as $val) {
-                            $start_date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'm/d/Y g:ia');
-                            $end_date   = $summit->convertDateFromUTC2TimeZone($val['end_date'], 'm/d/Y g:ia');
+                    $filename = "room_report-" . date('Ymd') . ".xlsx";
 
-                            $time = $start_date . ' - ' . $end_date;
+                    $objPHPExcel = new PHPExcel();
+                    $objPHPExcel->getProperties()->setCreator("OpenStack");
+                    $objPHPExcel->getProperties()->setTitle("Speaker Per Room Report");
+                    $objPHPExcel->setActiveSheetIndex(0);
+
+                    // sheet 1, key codes
+                    $categories = $summit->Categories()->toArray();
+                    $active_sheet = $objPHPExcel->getActiveSheet();
+                    $active_sheet->setTitle("Key Codes");
+                    $active_sheet->fromArray(array('Code','Category'), NULL, 'A1');
+                    foreach ($categories as $key => $category) {
+                        $row = $key + 2;
+                        $active_sheet->SetCellValue('A'.$row, $category->Code);
+                        $active_sheet->SetCellValue('B'.$row, $category->Title);
+                    }
+
+                    // day sheets
+                    $days = $summit->getDates();
+                    foreach ($days as $day) {
+                        $active_sheet = $objPHPExcel->createSheet();
+                        $active_sheet->setTitle(date('n-d',strtotime($day->Date)));
+                        $active_sheet->fromArray(array('Date','Time','Code','Event','Room','Venue','Capacity','Speakers','Headcount','Total'), NULL, 'A1');
+                        $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venues);
+                        foreach ($day_report as $key2 => $val) {
+                            $row = $key2 + 2;
+                            $start_time = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');
+                            $end_time   = $summit->convertDateFromUTC2TimeZone($val['end_date'], 'g:ia');
+                            $date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'm/d/Y');
+                            $time = $start_time . ' - ' . $end_time;
                             unset($val['start_date']);
                             unset($val['end_date']);
-                            array_unshift($val, $time);
-                            array_push($results, $val);
+                            unset($val['id']);
+                            $val['date'] = $date;
+                            $val['time'] = $time;
+                            $active_sheet->fromArray($val, NULL, 'A'.$row);
                         }
                     }
-                    $filename = "room_report-" . date('Ymd') . "." . $ext;
-                    $delimiter = ($ext == 'xls') ? "\t" : ",";
-                    return CSVExporter::getInstance()->export($filename, $results, $delimiter);
+
+                    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+
+                    header('Content-type: application/vnd.ms-excel');
+                    header('Content-Disposition: attachment; filename="'.$filename.'"');
+
+                    $objWriter->save('php://output');
+
+                    return;
                     break;
                 case 'presentation_report' :
                     $search_term = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
