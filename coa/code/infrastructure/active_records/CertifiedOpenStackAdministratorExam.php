@@ -24,7 +24,7 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
         'ExpirationDate'               => 'SS_Datetime',
         'PassFailDate'                 => 'SS_Datetime',
         'ModifiedDate'                 => 'SS_Datetime',
-        'Status'                       => "Enum('New,Pending,Pass,No Pass','New')",
+        'Status'                       => "Enum('None,New,Pending,Pass,No Pass,No Pending,Invalidated,Cancelled','None')",
         'Code'                         => 'Varchar(255)',
         'CertificationNumber'          => 'Varchar(255)',
         'CertificationStatus'          => "Enum('None,Achieved,InProgress,Expired,Renewed,In Appeals,Revoked','None')",
@@ -32,9 +32,10 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
     );
 
 
-    public static $valid_status = array('New','Pending','Pass','No Pass');
-    public static $valid_certification_status = array('Achieved','InProgress','Expired','Renewed','In Appeals','Revoked');
+    public static $valid_status                  = array('None','New','Pending','Pass','No Pass','No Pending','Invalidated', 'Cancelled');
+    public static $valid_certification_status    = array('Achieved','InProgress','Expired','Renewed','In Appeals','Revoked');
     public static $approved_certification_status = array('Renewed', 'Achieved', 'InProgress');
+
     private static $has_one = array
     (
         'Owner' => 'Member',
@@ -62,8 +63,12 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
      */
     public function update($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr,$cert_expiration_date, $cert_status)
     {
-        if(!$this->isValidStatus($status)) throw new EntityValidationException(sprintf("invalid status %s", $status));
-        $this->Status              = $status;
+        if(!empty($status)) {
+            if (!$this->isValidStatus($status))
+                throw new EntityValidationException(sprintf("invalid status %s", $status));
+
+            $this->Status = $status;
+        }
 
         $this->ModifiedDate        = $modified_date;
         if(!empty($code))
