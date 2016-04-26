@@ -74,14 +74,12 @@ HTML;
 
     function getCMSFields()
     {
-        $fields = new FieldList(
-            $rootTab = new TabSet("Root",   $tabMain = new Tab('Main'))
-        );
+        $fields = parent::getCMSFields();
 
+        $fields->removeByName('Content');
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('BannerText', 'Banner Text'));
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('ExamDetails', 'Exam Details'));
         $fields->addFieldToTab('Root.Main', new TextField('HandBookLink', 'HandBook Link'));
-
 
         if ($this->ID > 0) {
 

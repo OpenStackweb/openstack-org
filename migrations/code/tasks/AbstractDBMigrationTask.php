@@ -20,30 +20,33 @@ class AbstractDBMigrationTask extends MigrationTask
 
     function up()
     {
-        echo sprintf("starting migration # %s ...", $this->title).PHP_EOL;
-        //check if migration already had ran ...
-        $migration = Migration::get()->filter('Name', $this->title)->first();
+        SapphireTransactionManager::getInstance()->transaction(function() {
 
-        if (!$migration) {
+            echo sprintf("starting migration # %s ...", $this->title) . PHP_EOL;
+            //check if migration already had ran ...
+            $migration = Migration::get()->filter('Name', $this->title)->first();
 
-            set_time_limit(0);
+            if (!$migration) {
 
-            $this->doUp();
-            $migration = new Migration();
-            $migration->Name = $this->title;
-            $migration->Description = $this->description;
-            $migration->Write();
-            echo sprintf("ending migration # %s ...", $this->title).PHP_EOL;
-        }
-        else
-        {
-            echo sprintf("migration # %s already ran !...", $this->title).PHP_EOL;
-        }
+                set_time_limit(0);
+
+                $this->doUp();
+                $migration = new Migration();
+                $migration->Name = $this->title;
+                $migration->Description = $this->description;
+                $migration->Write();
+                echo sprintf("ending migration # %s ...", $this->title) . PHP_EOL;
+            } else {
+                echo sprintf("migration # %s already ran !...", $this->title) . PHP_EOL;
+            }
+        });
     }
 
     function down()
     {
-        $this->doDown();
+        SapphireTransactionManager::getInstance()->transaction(function() {
+            $this->doDown();
+        });
     }
 
     public function doUp(){}
