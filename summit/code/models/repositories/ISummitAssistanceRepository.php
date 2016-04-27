@@ -26,4 +26,7 @@ interface ISummitAssistanceRepository extends IEntityRepository
     //TODO : this does not belongs here, move to another repository !!!
     public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term);
 
+    //TODO : this does not belongs here, move to another repository !!!
+    public function getPresentationMaterialBySummitAndDay($summit_id, $date, $tracks = 'all');
+
 }

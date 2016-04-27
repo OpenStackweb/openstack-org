@@ -42,6 +42,11 @@ final class SummitService implements ISummitService
     private $member_repository;
 
     /**
+     * @var IReportRepository
+     */
+    private $report_repository;
+
+    /**
      * @var ISpeakerRegistrationRequestManager
      */
     private $speaker_registration_request_manager;
@@ -58,6 +63,7 @@ final class SummitService implements ISummitService
         ISummitAssistanceRepository $assistance_repository,
         ISpeakerRepository $speaker_repository,
         IMemberRepository $member_repository,
+        IReportRepository $report_repository,
         ISpeakerRegistrationRequestManager $speaker_registration_request_manager,
         ITransactionManager $tx_service
     )
@@ -68,6 +74,7 @@ final class SummitService implements ISummitService
         $this->assistance_repository                = $assistance_repository;
         $this->speaker_repository                   = $speaker_repository;
         $this->member_repository                    = $member_repository;
+        $this->report_repository                    = $report_repository;
         $this->speaker_registration_request_manager = $speaker_registration_request_manager;
         $this->tx_service                           = $tx_service;
     }
@@ -675,6 +682,66 @@ final class SummitService implements ISummitService
 
                 $event->write();
             }
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param $data
+     */
+    public function updateVideoDisplay(ISummit $summit, $data)
+    {
+        $event_repository = $this->event_repository;
+        $this_var = $this;
+
+        $this->tx_service->transaction(function () use ($this_var, $summit, $data, $event_repository) {
+            foreach ($data as $event_data) {
+                if (!isset($event_data['id']))
+                    throw new EntityValidationException('missing required param: id');
+
+                $event_id = intval($event_data['id']);
+                $event = $event_repository->getById($event_id);
+
+                if (is_null($event))
+                    throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
+
+                if (intval($event->SummitID) !== intval($summit->getIdentifier()))
+                    throw new EntityValidationException('event doest not belongs to summit');
+
+                foreach ($event->Materials()->filter('ClassName','PresentationVideo') as $video) {
+                    $video->DisplayOnSite = intval($event_data['display_video']);
+                    $video->write;
+                }
+
+                $event->write();
+            }
+        });
+    }
+
+    /**
+     * @param $report_name
+     * @param $data
+     */
+    public function updateReportConfig($report_name, $data)
+    {
+        $report_repository = $this->report_repository;
+        $this_var = $this;
+
+        $report = $this->tx_service->transaction(function () use ($this_var, $report_name, $data, $report_repository) {
+            if (!$report_name)
+                throw new EntityValidationException('missing required param: report_name');
+
+            $report = $report_repository->getByName($report_name);
+
+            if (is_null($report)) {
+                $report = new SummitReport();
+                $report->Name = $report_name;
+            }
+
+            $report->setConfigByName($data['config_name'],$data['config_value']);
+
+            $report->write();
+            return $report;
         });
     }
 

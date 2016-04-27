@@ -35,8 +35,16 @@
                 <% end_if %>
             <% end_loop %>
 
+        var tracks = [];
+            <% loop $Summit.Categories() %>
+                tracks.push({
+                    id: $ID,
+                    title: "{$Title.JS}",
+                });
+            <% end_loop %>
+
         </script>
-        <reports-admin-container report="presentation_report" limit="10" summit_id="{ $Summit.ID }" locations="{ locations }"></reports-admin-container>
+        <reports-admin-container report="presentation_report" limit="10" summit_id="{ $Summit.ID }" locations="{ locations }" tracks="{ tracks }"></reports-admin-container>
 
     </div>
 </div>

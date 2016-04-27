@@ -26,6 +26,11 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     private $summit_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $report_repository;
+
+    /**
      * @var ISummitService
      */
     private $summit_service;
@@ -34,12 +39,14 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     (
         ISummitRepository $summit_repository,
         ISummitAssistanceRepository $assistance_repository,
+        ISummitReportRepository $report_repository,
         ISummitService $summit_service
     )
     {
         parent::__construct();
         $this->assistance_repository         = $assistance_repository;
         $this->summit_repository             = $summit_repository;
+        $this->report_repository             = $report_repository;
         $this->summit_service                = $summit_service;
     }
 
@@ -68,6 +75,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET speaker_report'        => 'getSpeakerReport',
         'GET room_report'           => 'getRoomReport',
         'GET presentation_report'   => 'getPresentationReport',
+        'GET video_report'          => 'getVideoReport',
         'GET export/$REPORT!'       => 'exportReport',
     );
 
@@ -75,6 +83,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'getSpeakerReport',
         'getRoomReport',
         'getPresentationReport',
+        'getVideoReport',
         'exportReport',
         'updateReport',
     );
@@ -144,6 +153,11 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     break;
                 case 'room_report':
                     $this->summit_service->updateHeadCount($summit, $report_data);
+                    break;
+                case 'video_report':
+                    $this->summit_service->updateVideoDisplay($summit, $report_data['report_data']);
+                    $this->summit_service->updateReportConfig($report,$report_data['report_config']);
+                    break;
             }
             return $this->ok();
         }
@@ -224,6 +238,64 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         }
     }
 
+    public function getVideoReport(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            $query_string = $request->getVars();
+            $report       = $this->report_repository->getByName('video_report');
+            $tracks       = '';
+            if(isset($query_string['tracks']) && $query_string['tracks'] != '') {
+                $tracks = html_entity_decode($query_string['tracks']);
+            } else if ($report) {
+                $tracks = $report->getConfigByName('Tracks');;
+            }
+
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $days = $summit->getDates();
+
+            $report_array = array();
+
+            foreach($days as $day) {
+                $day_report = $this->assistance_repository->getPresentationMaterialBySummitAndDay($summit_id,$day->Date,$tracks);
+                $report_array[$day->Label] = array();
+                foreach ($day_report as $videos) {
+
+                    $report_array[$day->Label][] = array(
+                        'id'          => intVal($videos['id']),
+                        'date'        => $summit->convertDateFromUTC2TimeZone($videos['start_date'],'m/d/Y'),
+                        'start_time'  => $summit->convertDateFromUTC2TimeZone($videos['start_date'],'g:ia'),
+                        'end_time'    => $summit->convertDateFromUTC2TimeZone($videos['end_date'],'g:ia'),
+                        'tags'        => $videos['tags'].','.$videos['speakers'].',OpenStack Summit Austin',
+                        'title'       => $videos['event'],
+                        'description' => $videos['description'],
+                        'room'        => $videos['room'],
+                        'venue'       => $videos['venue'],
+                        'display'     => $videos['display'],
+                        'youtube'     => $videos['youtube_id']
+                    );
+                }
+            }
+
+            $return_array['tracks'] = ($tracks) ? explode(',',$tracks) : '';
+            $return_array['report'] = $report_array;
+
+            return $this->ok($return_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
     public function getPresentationReport(SS_HTTPRequest $request){
         try
         {
@@ -286,6 +358,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $sort_dir = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
             $event_type = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
             $venues = (isset($query_string['venues'])) ? html_entity_decode($query_string['venues']) : 'all';
+            $tracks = (isset($query_string['tracks'])) ? html_entity_decode($query_string['tracks']) : 'all';
             $report = $request->param('REPORT');
             $summit_id = intval($request->param('SUMMIT_ID'));
             $summit = $this->summit_repository->getById($summit_id);
@@ -369,6 +442,48 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     $filename = "presentations_report-" . date('Ymd') . "." . $ext;
                     $delimiter = ($ext == 'xls') ? "\t" : ",";
                     return CSVExporter::getInstance()->export($filename, $results, $delimiter);
+                    break;
+                case 'video_report' :
+                    $filename = "video_report-" . date('Ymd') . ".xlsx";
+
+                    $objPHPExcel = new PHPExcel();
+                    $objPHPExcel->getProperties()->setCreator("OpenStack");
+                    $objPHPExcel->getProperties()->setTitle("Video Output List");
+
+                    // day sheets
+                    $days = $summit->getDates();
+                    foreach ($days as $day) {
+                        $active_sheet = $objPHPExcel->createSheet();
+                        $active_sheet->setTitle(date('n-d',strtotime($day->Date)));
+                        $active_sheet->fromArray(array('Date','Time','Tags','Event','Description','Room','Venue','Display','YoutubeID'), NULL, 'A1');
+
+                        $day_report = $this->assistance_repository->getPresentationMaterialBySummitAndDay($summit_id,$day->Date,$tracks);
+
+                        foreach ($day_report as $key2 => $val) {
+                            $row = $key2 + 2;
+                            $start_time = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');
+                            $end_time   = $summit->convertDateFromUTC2TimeZone($val['end_date'], 'g:ia');
+                            $date = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'm/d/Y');
+                            $time = $start_time . ' - ' . $end_time;
+                            unset($val['start_date']);
+                            unset($val['end_date']);
+                            unset($val['id']);
+                            $val['date'] = $date;
+                            $val['time'] = $time;
+                            $val['tags'] .= ','.$val['speakers'].',OpenStack Summit Austin';
+                            unset($val['speakers']);
+                            $active_sheet->fromArray($val, NULL, 'A'.$row);
+                        }
+                    }
+
+                    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+
+                    header('Content-type: application/vnd.ms-excel');
+                    header('Content-Disposition: attachment; filename="'.$filename.'"');
+
+                    $objWriter->save('php://output');
+
+                    return;
                     break;
             }
             return $this->notFound();

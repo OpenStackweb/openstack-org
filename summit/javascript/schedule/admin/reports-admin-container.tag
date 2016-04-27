@@ -10,6 +10,7 @@
                 <option value="speaker_report"> Speaker Report </option>
                 <option value="presentation_report" selected> Presentation Report </option>
                 <option value="room_report"> Speakers Per Room </option>
+                <option value="video_report"> Video Output List </option>
             </select>
         </div>
         <div class="col-md-4">
@@ -33,6 +34,7 @@
     <reports-admin-speaker-report if={report == 'speaker_report'} page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-speaker-report>
     <reports-admin-presentation-report if={report == 'presentation_report'} page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentation-report>
     <reports-admin-room-report if={report == 'room_report'} summit_id="{ summit_id }" locations="{ locations }" dispatcher="{ dispatcher }"></reports-admin-room-report>
+    <reports-admin-video-report if={report == 'video_report'} summit_id="{ summit_id }" tracks="{ tracks }" dispatcher="{ dispatcher }"></reports-admin-room-report>
 
     <script>
         this.report     = opts.report;
@@ -40,6 +42,7 @@
         this.summit_id  = opts.summit_id;
         this.limit      = opts.limit;
         this.locations  = opts.locations;
+        this.tracks     = opts.tracks;
         var self        = this;
 
         this.on('mount', function() {

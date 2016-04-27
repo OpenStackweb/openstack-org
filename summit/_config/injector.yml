@@ -75,7 +75,8 @@ Injector:
       constructor:
         0: '%$SummitRepository'
         1: '%$SummitAssistanceRepository'
-        2: '%$SummitService'
+        2: '%$SummitReportRepository'
+        3: '%$SummitService'
   SummitAppEventsApi:
     constructor:
       0: '%$SummitRepository'
@@ -139,6 +140,8 @@ Injector:
     class: SapphireSummitAttendeeRepository
   SummitAssistanceRepository:
       class: SapphireSummitAssistanceRepository
+  SummitReportRepository:
+        class: SapphireSummitReportRepository
   EventbriteEventManager:
     constructor:
       0: '%$EventbriteEventRepository'
@@ -157,5 +160,6 @@ Injector:
       3: '%$SummitAssistanceRepository'
       4: '%$SpeakerRepository'
       5: '%$MemberRepository'
-      6: '%$SpeakerRegistrationRequestManager'
-      7: '%$TransactionManager'
+      6: '%$SummitReportRepository'
+      7: '%$SpeakerRegistrationRequestManager'
+      8: '%$TransactionManager'

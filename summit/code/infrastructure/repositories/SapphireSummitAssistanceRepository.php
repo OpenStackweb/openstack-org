@@ -217,4 +217,55 @@ SQL;
 
         return DB::query($query);
     }
+
+    /**
+     * @param int $summit_id
+     * @param string $date
+     * @param string $tracks
+     * @return array
+     */
+    public function getPresentationMaterialBySummitAndDay($summit_id, $date, $tracks = 'all')
+    {
+
+        $query = <<<SQL
+SELECT E.ID AS id ,
+0 AS date,
+0 AS time,
+E.StartDate AS start_date,
+E.EndDate AS end_date,
+GROUP_CONCAT(CONCAT(S.FirstName,' ',S.LastName)) AS speakers,
+GROUP_CONCAT(T.Tag) AS tags,
+E.Title AS event,
+E.ShortDescription AS description,
+L.Name AS room,
+L2.Name AS venue,
+PM.DisplayOnSite as display,
+PV.YouTubeID as youtube_id
+FROM SummitEvent AS E
+LEFT JOIN Presentation AS P ON P.ID = E.ID
+LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
+LEFT JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
+LEFT JOIN Presentation_Tags AS PT ON PT.PresentationID = P.ID
+LEFT JOIN Tag AS T ON T.ID = PT.TagID
+LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
+LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
+LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
+LEFT JOIN PresentationMaterial AS PM ON P.ID = PM.PresentationID
+LEFT JOIN PresentationVideo AS PV ON PM.ID = PV.ID
+WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
+AND E.ClassName = 'Presentation' AND PM.ClassName = 'PresentationVideo'
+SQL;
+
+        if ($tracks) {
+            $query .= <<<SQL
+ AND P.CategoryID IN ( {$tracks} )
+SQL;
+        }
+
+        $query .= <<<SQL
+ GROUP BY E.ID
+SQL;
+
+        return DB::query($query);
+    }
 }

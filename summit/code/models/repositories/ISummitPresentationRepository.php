@@ -14,6 +14,17 @@
  **/
 interface ISummitPresentationRepository extends ISummitEventRepository
 {
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublishedBySummit($summit_id, $event_type = null, $status = null, $search_term = null, $page = 1, $page_size = 10, $order = null);
+
+
     /**
      * @param int $summit_id
      * @param int $page
@@ -22,4 +33,17 @@ interface ISummitPresentationRepository extends ISummitEventRepository
      * @return array
      */
     public function getUnpublishedBySummitAndTrackList($summit_id, $track_list = null, $search_term = null, $page = 1 ,$page_size = 10, $order = null);
+
+    /**
+     * @param $summit_id
+     * @param null $track
+     * @param null $status
+     * @param null $search_term
+     * @param int $page
+     * @param int $page_size
+     * @param null $order
+     * @return array
+     */
+    public function getUnpublishedBySummitAndTrack($summit_id, $track = null, $status = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null);
+
 }
