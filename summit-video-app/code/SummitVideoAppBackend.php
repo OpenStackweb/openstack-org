@@ -8,7 +8,8 @@ class SummitVideoAppBackend {
 		$start = isset($params['start']) ? $params['start'] : 0;
 		$defaultLimit = SummitVideoApp::config()->default_video_limit;
 
-		$videos = PresentationVideo::get()					
+		$videos = PresentationVideo::get()
+					->filter('DisplayOnSite', true)				
 					->sort('DateUploaded', 'DESC');
 
 		if(isset($params['summit'])) {
@@ -139,7 +140,10 @@ class SummitVideoAppBackend {
 
 	public function getFeaturedVideo() {
 		$video = PresentationVideo::get()
-				->filter('Featured', true)
+				->filter([
+					'Featured' => true,
+					'DisplayOnSite' => true
+				])
 				->first();
 		
 		return $video ? $this->createVideoJSON($video) : null;
@@ -148,6 +152,7 @@ class SummitVideoAppBackend {
 
 	public function getLatestVideo() {
 		$video = PresentationVideo::get()
+				->filter('DisplayOnSite', true)
 				->sort('DateUploaded DESC')
 				->first();
 
@@ -210,10 +215,17 @@ class SummitVideoAppBackend {
 
 
 	public function getVideoDetail($id) {		
-		$video = PresentationVideo::get()->filter('Presentation.Slug', $id)->first();
+		$video = PresentationVideo::get()->filter([
+			'Presentation.Slug' => $id,
+			'DisplayOnSite' => true
+		])->first();
 		
 		if(!$video) {
-			$video = PresentationVideo::get()->byID($id);
+			$video = PresentationVideo::get()
+						->filter([
+							'ID' => $id,
+							'DisplayOnSite' => true
+						])->first();
 		}
 
 		if($video) {
@@ -267,6 +279,7 @@ class SummitVideoAppBackend {
 			'title' => $s->Title,
 			'dates' => $s->getSummitDateRange(),
 			'videoCount' => PresentationVideo::get()->filter([
+					'DisplayOnSite' => true,
 					'PresentationID' => $s->Presentations()->column('ID')
 				])->count(),
 			'imageURL' => ($image && $image->exists() && Director::fileExists($image->Filename)) ? 

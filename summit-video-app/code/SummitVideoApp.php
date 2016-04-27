@@ -17,7 +17,6 @@ class SummitVideoApp_Controller extends Page_Controller {
         'api/videos' => 'handleVideos',
         'api/summits' => 'handleSummits',
         'api/speakers' => 'handleSpeakers',
-        'simulateupload' => 'handleSimulateUpload',
         'PUT api/view/$VideoID' => 'handleVideoViewed',
         '$Page/$Action/$ID' => 'handleIndex'
     ];
@@ -30,7 +29,6 @@ class SummitVideoApp_Controller extends Page_Controller {
         'handleSpeakers',
         'handleVideoViewed',
         'handleIndex',
-        'handleSimulateUpload' => 'ADMIN'
     ];
 
 
@@ -141,10 +139,18 @@ class SummitVideoApp_Controller extends Page_Controller {
     		return $this->httpError(403, 'Invalid token');
     	}
     	$videoID = $r->param('VideoID');
-		$video = PresentationVideo::get()->filter('Presentation.Slug', $videoID)->first();
+		$video = PresentationVideo::get()
+					->filter([
+						'Presentation.Slug' => $videoID,
+						'DisplayOnSite' => true
+					])->first();
     	
     	if(!$video) {
-    		$video = PresentationVideo::get()->byID($videoID);
+    		$video = PresentationVideo::get()
+    					->filter([
+    						'ID' => $videoID,
+    						'DisplayOnSite' => true
+    					])->first();
     	}
 
     	if(!$video) {
@@ -272,18 +278,4 @@ class SummitVideoApp_Controller extends Page_Controller {
         }
     }
 
-    public function handleSimulateUpload(SS_HTTPRequest $r) 
-    {
-		Config::inst()->update('DataObject', 'validation_enabled', false);
-    	$rand = PresentationVideo::get()->sort('RAND()')->first();
-    	$vid = $rand->duplicate();
-    	$vid->Name = $r->getVar('title') ? $r->getVar('title') : 'New video ' . uniqid();    	
-    	DB::query("INSERT INTO SummitEvent SET ClassName = 'Presentation', Created = '".date('Y-m-d H:i:s')."', Title = '{$vid->Name}', SummitID = 6");
-    	$id = DB::get_generated_id("SummitEvent");
-    	DB::query("INSERT INTO Presentation SET ClassName='Presentation', ID = $id, Slug='temp-video-${id}', Legacy=1");
-    	$vid->PresentationID = $id;
-    	$vid->forceChange();
-    	$vid->write();
-    	die('OK');
-    }	
 }

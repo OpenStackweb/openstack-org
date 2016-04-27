@@ -235,6 +235,7 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 			$video->PresentationID = $this->presentation->ID;
 			$video->DateUploaded = SS_Datetime::now()->Rfc2822();
 			$video->Name = $this->presentation->Title;
+			$video->DisplayOnSite = true;
 			$video->YouTubeID = $youTube;
 			$video->write();
 
