@@ -250,12 +250,12 @@
                             show &= self.current_filter.event_types.indexOf(e.type_id.toString()) > -1;
                         if(!show){ $('#event_'+e.id).hide(); continue;}
                         //tracks
-                        if(!self.isTracksFilterEmpty() && e.hasOwnProperty('track_id'))
-                            show &= self.current_filter.tracks.indexOf(e.track_id.toString()) > -1;
+                        if(!self.isTracksFilterEmpty())
+                            show &=  e.hasOwnProperty('track_id') ? self.current_filter.tracks.indexOf(e.track_id.toString()) > -1 : false;
                         if(!show){ $('#event_'+e.id).hide(); continue;}
                         //level
-                        if(!self.isLevelsFilterEmpty() && e.hasOwnProperty('level'))
-                            show &= self.current_filter.levels.indexOf(e.level.toString()) > -1;
+                        if(!self.isLevelsFilterEmpty())
+                            show &= e.hasOwnProperty('level') ? self.current_filter.levels.indexOf(e.level.toString()) > -1 : false;
                         if(!show){ $('#event_'+e.id).hide(); continue;}
                         //tags
                         if(!self.isTagsFilterEmpty())
