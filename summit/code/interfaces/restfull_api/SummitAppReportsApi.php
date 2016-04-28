@@ -273,7 +273,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                         'description' => $videos['description'],
                         'room'        => $videos['room'],
                         'venue'       => $videos['venue'],
-                        'display'     => $videos['display'],
+                        'display'     => intval($videos['display']),
                         'youtube'     => $videos['youtube_id']
                     );
                 }
