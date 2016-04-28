@@ -245,8 +245,8 @@ FROM SummitEvent AS E
 LEFT JOIN Presentation AS P ON P.ID = E.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
 LEFT JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
-LEFT JOIN Presentation_Tags AS PT ON PT.PresentationID = P.ID
-LEFT JOIN Tag AS T ON T.ID = PT.TagID
+LEFT JOIN SummitEvent_Tags AS ET ON ET.SummitEventID = E.ID
+LEFT JOIN Tag AS T ON T.ID = ET.TagID
 LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
 LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
 LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
