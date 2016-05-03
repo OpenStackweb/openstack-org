@@ -1,6 +1,6 @@
 <?php 
 
-class PresentationAPI extends Controller {
+class PresentationAPI extends Controller implements PermissionProvider {
 
 
 	private static $url_handlers = array (
@@ -128,6 +128,11 @@ class PresentationAPI extends Controller {
 	}
 
 
+	public function providePermissions () {
+		return array (
+			'VIDEO_UPLOADER' => 'Upload videos through the presentation API'
+		);
+	}
 }
 
 
@@ -137,14 +142,12 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 	private static $url_handlers = array (
 		'GET ' => 'index',
 		'POST vote' => 'handleVote',
-		'PUT view' => 'handleView',
 		'POST video' => 'handleApplyVideo'
 	);
 
 
 	private static $allowed_actions = array (
 		'handleVote',
-		'handleView',
 		'handleApplyVideo'
 	);
 
@@ -209,18 +212,9 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 	}
 
 
-	public function handleView(SS_HTTPRequest $r) {
-		$this->presentation->Views++;
-		$this->presentation->write();
-		
-		return new SS_HTTPResponse(null, 200);
-	}
-
-
 	public function handleApplyVideo(SS_HTTPRequest $r) {		
-
-		if(!Member::currentUser()) {			
-			return $this->httpError(403);
+		if(!Permission::check('VIDEO_UPLOADER')) {
+			return $this->httpError(403, 'You do not have permission to use this method');
 		}
 
 		// Only allow one writeable property here
