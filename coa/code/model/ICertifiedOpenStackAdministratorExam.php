@@ -26,7 +26,7 @@ interface ICertifiedOpenStackAdministratorExam extends IEntity
      * @return $this
      * @throws EntityValidationException
      */
-    public function update($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr, $cert_expiration_date, $cert_status);
+    public function setState($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr, $cert_expiration_date, $cert_status);
 
     /**
      * @param string $status

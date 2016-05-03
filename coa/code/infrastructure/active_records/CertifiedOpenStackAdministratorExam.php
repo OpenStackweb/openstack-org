@@ -61,7 +61,7 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
      * @return $this
      * @throws EntityValidationException
      */
-    public function update($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr,$cert_expiration_date, $cert_status)
+    public function setState($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr,$cert_expiration_date, $cert_status)
     {
         if(!empty($status)) {
             if (!$this->isValidStatus($status))

@@ -27,7 +27,6 @@ migrations:
   - SummitSecondBreakoutEmailMigration
   - CreateUserCommitteeGroupMigration
   - AddUsersToFoundationStaffMigration
-  - RemoveSortColumnFromGroups
   - SummitAttendeeDropIndexMigration
   - VideoPresentationMigration
   - NewsChangeNewsDatesToCentral

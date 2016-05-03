@@ -1,4 +1,0 @@
-[submodule "private-assets"]
-path = private-assets
-url = git@assets.github.com:OpenStackweb/openstackwebsite-assets.git
-ignore = dirty

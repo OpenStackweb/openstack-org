@@ -88,7 +88,7 @@ final class COAManager implements ICOAManager
                             $exam->OwnerID    = $member->ID;
                             $exam->ExternalID = $exam_ext_id;
                         }
-                        $exam->update
+                        $exam->setState
                         (
                             $status,
                             $modified_date,
