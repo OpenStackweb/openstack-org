@@ -230,7 +230,7 @@ class SummitVideoAppBackend {
 
 		if($video) {
 			$json = $this->createVideoJSON($video);
-			$json['description'] = $video->Presentation()->Description;
+			$json['description'] = $video->Presentation()->ShortDescription ?: $video->Presentation()->Description;
 
 			return $json;
 		}
