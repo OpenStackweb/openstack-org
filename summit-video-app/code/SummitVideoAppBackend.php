@@ -245,15 +245,12 @@ class SummitVideoAppBackend {
 			];
 		}, $v->Presentation()->Speakers()->toArray());
 		$list = timezone_identifiers_list(); 		
-		$timezone = $v->Presentation()->Summit()->TimeZone;
-		$timezoneName = (isset($list[$timezone])) ? $list[$timezone] : 'UTC';
-		$dateUploaded = new \DateTime($v->DateUploaded, new \DateTimeZone($timezoneName));
 
 		return [
 			'id' => $v->ID,
 			'title' => $v->Name,
-			'date' => $dateUploaded->format('Y-m-d'),
-			'dateUTC' => $dateUploaded->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d'),
+			'date' => $v->Presentation()->Summit()->convertDateFromUTC2TimeZone($v->DateUploaded, 'Y-m-d'),
+			'dateUTC' => $v->DateUploaded,
 			'thumbnailURL' => "//img.youtube.com/vi/{$v->YouTubeID}/mqdefault.jpg",
 			'summit' => [
 				'id' => $v->Presentation()->SummitID,

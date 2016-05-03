@@ -88,11 +88,4 @@ class PresentationVideo extends PresentationMaterial
 		}, $this->Presentation()->Speakers()->toArray()));
 	}
 
-	public function onBeforeWrite () 
-	{
-		parent::onBeforeWrite();
-		if($this->isChanged('YouTubeID')) {
-			$this->DateUploaded = SS_DateTime::now()->Rfc2822();
-		}
-	}
 }

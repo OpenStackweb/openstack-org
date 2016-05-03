@@ -226,8 +226,12 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 				$video = PresentationVideo::create();					
 			}
 
+			$dateUTC = $this->presentation->Summit()->convertDateFromTimeZone2UTC(
+				SS_DateTime::now()->Rfc2822()
+			);
+			
 			$video->PresentationID = $this->presentation->ID;
-			$video->DateUploaded = SS_Datetime::now()->Rfc2822();
+			$video->DateUploaded = $dateUTC;
 			$video->Name = $this->presentation->Title;
 			$video->DisplayOnSite = true;
 			$video->YouTubeID = $youTube;
