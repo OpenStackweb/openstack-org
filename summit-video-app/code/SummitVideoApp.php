@@ -135,9 +135,6 @@ class SummitVideoApp_Controller extends Page_Controller {
 
     public function handleVideoViewed(SS_HTTPRequest $r) 
     {
-    	if(!SecurityToken::inst()->checkRequest($r)) {
-    		return $this->httpError(403, 'Invalid token');
-    	}
     	$videoID = $r->param('VideoID');
 		$video = PresentationVideo::get()
 					->filter([
@@ -158,7 +155,7 @@ class SummitVideoApp_Controller extends Page_Controller {
     	}
     	
     	if(!$this->canEditVideo($video->ID)) {
-    		return $this->httpError(403, 'Too many requests');
+    		return new SS_HTTPResponse('Video already viewed', 200);
     	}
 
 		$video->Views++;

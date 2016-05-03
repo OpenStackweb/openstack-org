@@ -170,7 +170,7 @@ export const viewVideo = (videoID, token) => (dispatch) => {
 	const key = `VIEW_VIDEO_${videoID}`;	
 	cancel(key);
 
-	const url = URL.create(`api/view/${videoID}`, {SecurityID: token});
+	const url = URL.create(`api/view/${videoID}`);
 	const req = http.put(url)
 		.end(responseHandler(dispatch, json => {
 			dispatch(createAction('VIEW_VIDEO_SUCCESS', json));
