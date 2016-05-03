@@ -46,7 +46,7 @@ class Presentation extends SummitEvent implements IPresentation
         'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
         'SelectionMotive'         => 'HTMLText',
-        'Legacy'		  => 'Boolean'
+        'Legacy'		          => 'Boolean'
     );
 
     private static $defaults = array
