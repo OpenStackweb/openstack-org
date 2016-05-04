@@ -128,6 +128,7 @@
                         <% end_if %>
                     </div>
                 </div>
+                <hr>
                 <h3>Media Contacts</h3>
                 <p><strong>Robert Cathey</strong><br/>
                 <a href="http://www.cathey.co/">Cathey.co</a> for the OpenStack Foundation<br/>
