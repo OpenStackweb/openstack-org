@@ -22,6 +22,7 @@ class SoftwareModelAdmin extends ModelAdmin
     );
 
     public $showImportForm = false;
+
     private static $url_segment = 'software';
     private static $menu_title  = 'Software';
 
@@ -38,6 +39,11 @@ class SoftwareModelAdmin extends ModelAdmin
             $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
             $config = $gridField->getConfig();
             $config->addComponent(new GridFieldSortableRows('Order'));
+        }
+        if($this->modelClass === 'OpenStackRelease') {
+            $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
+            $config = $gridField->getConfig();
+            $config->addComponent(new GridFieldCloneReleaseAction());
         }
         return $form;
     }

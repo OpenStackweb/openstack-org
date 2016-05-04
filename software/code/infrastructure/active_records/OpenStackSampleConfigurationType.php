@@ -40,6 +40,13 @@ class OpenStackSampleConfigurationType extends DataObject
         'SampleConfigurations' => 'OpenStackSampleConfig'
     );
 
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->SampleConfigurations() as $item) {
+            $item->delete();
+        }
+    }
+
     public function getDefaultSampleConfiguration()
     {
         return $this->SampleConfigurations()->filter('isDefault', true)->first();

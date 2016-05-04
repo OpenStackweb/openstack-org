@@ -59,7 +59,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             $this->processProjects();
             foreach($releases as $release)
             {
-                error_log(sprintf('proccessing release %s ...', $release->Name));
+                error_log(sprintf('processing release %s ...', $release->Name));
                 $this->getProductionUseStatus($release);
                 $this->getInstallationGuideStatus($release);
                 $this->getSDKSupport($release);

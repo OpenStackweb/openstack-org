@@ -7,6 +7,7 @@ Injector:
   SoftwareManager:
     constructor:
       0: '%$OpenStackComponentSerializer'
+      1: '%$TransactionManager'
   IngestOpenStackComponentsDataCronTask:
     constructor:
       0: '%$TransactionManager'

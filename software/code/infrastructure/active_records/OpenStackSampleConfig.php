@@ -38,6 +38,14 @@ final class OpenStackSampleConfig extends DataObject
         'RelatedNotes' => 'OpenStackSampleConfigRelatedNote',
     );
 
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->RelatedNotes() as $item) {
+            $item->delete();
+        }
+        $this->OpenStackComponents()->removeAll();
+    }
+
     static $many_many = array
     (
         'OpenStackComponents' => 'OpenStackComponent',
