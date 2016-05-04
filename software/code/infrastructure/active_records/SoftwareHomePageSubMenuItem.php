@@ -31,4 +31,9 @@ class SoftwareHomePageSubMenuItem extends DataObject
     (
         'Parent' => 'SoftwareHomePage',
     );
+
+
+    public function getTitle() {
+    	return $this->Label;
+    }
 }
