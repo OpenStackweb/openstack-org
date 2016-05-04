@@ -81,4 +81,5 @@ keys.dev.pub
 keys.tags.pub
 trait-loader/
 gridfieldextensions/
+fluent/
 *.bundle.js
