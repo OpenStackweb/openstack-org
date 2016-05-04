@@ -84,50 +84,57 @@
                 <div class="featured-links">
                     <a href="http://superuser.openstack.org">SuperUser</a> | <a href="news/archived">Archived News</a>
                 </div>
-            <ul class="featured">
-                <% loop FeaturedNews %>
-                        <li>
-                            <div class="featuredImage">
-                                <a href="news/view/$ID/$HeadlineForUrl">
-                                    <div class="featuredDate">$formatDate</div>
-                                    <div class="featuredHeadline">
-                                        $Headline
-                                        <div class="more">Read More <i class="fa fa-chevron-circle-right"></i></div>
-                                    </div>
-                                    <% if Image.Exists %>
-                                        $Image.SetWidth(360)
-                                    <% end_if %>
-                                </a>
-                            </div>
-                            <div class="featuredSummary">$HTMLSummary</div>
-                        </li>
-                <% end_loop %>
-            </ul>
-            <hr>
-            <div class="upcomingEvents">
-                <h3>
-                    Upcoming Events
-                    <div class="see-all-events">
-                        <a href="/events">All Events <i class="fa fa-angle-right"></i></a>
-                    </div>
-                </h3>
-                <div class="eventBlock upcoming">
-                    <% if FutureEvents(22) %>
-                        <% loop FutureEvents(22) %>
-                            <div class="event <% if First %> top<% end_if %>">
-                                <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
-                                <div class="details">$formatDateRange - $EventLocation</div>
-                                <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
-                            </div>
-                        <% end_loop %>
-                    <% else %>
-                        <div class="event top">
-                            <h3>Sorry, there are no upcoming events listed at the moment.</h3>
-                            <p class="details">Wow! It really rare that we don't have any upcoming events on display. Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;We probably just need to update this list. Please check back soon for more details.</p>
+                <ul class="featured">
+                    <% loop FeaturedNews %>
+                            <li>
+                                <div class="featuredImage">
+                                    <a href="news/view/$ID/$HeadlineForUrl">
+                                        <div class="featuredDate">$formatDate</div>
+                                        <div class="featuredHeadline">
+                                            $Headline
+                                            <div class="more">Read More <i class="fa fa-chevron-circle-right"></i></div>
+                                        </div>
+                                        <% if Image.Exists %>
+                                            $Image.SetWidth(360)
+                                        <% end_if %>
+                                    </a>
+                                </div>
+                                <div class="featuredSummary">$HTMLSummary</div>
+                            </li>
+                    <% end_loop %>
+                </ul>
+                <hr>
+                <div class="upcomingEvents">
+                    <h3>
+                        Upcoming Events
+                        <div class="see-all-events">
+                            <a href="/events">All Events <i class="fa fa-angle-right"></i></a>
                         </div>
-                    <% end_if %>
+                    </h3>
+                    <div class="eventBlock upcoming">
+                        <% if FutureEvents(22) %>
+                            <% loop FutureEvents(22) %>
+                                <div class="event <% if First %> top<% end_if %>">
+                                    <a rel="nofollow" href="$EventLink" target="_blank">$Title</a>
+                                    <div class="details">$formatDateRange - $EventLocation</div>
+                                    <span class="eventButton"><a rel="nofollow" href="$EventLink" target="_blank">Details</a></span>
+                                </div>
+                            <% end_loop %>
+                        <% else %>
+                            <div class="event top">
+                                <h3>Sorry, there are no upcoming events listed at the moment.</h3>
+                                <p class="details">Wow! It really rare that we don't have any upcoming events on display. Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;We probably just need to update this list. Please check back soon for more details.</p>
+                            </div>
+                        <% end_if %>
+                    </div>
                 </div>
-            </div>
+                <h3>Media Contacts</h3>
+                <p><strong>Robert Cathey</strong><br/>
+                <a href="http://www.cathey.co/">Cathey.co</a> for the OpenStack Foundation<br/>
+                +1 865-386-6118<br/>
+                <a href="mailto:robert@cathey.co">robert@cathey.co</a>
+                <a href="http://twitter.com/robertcathey">@robertcathey</a>
+                </p>
         </div>
     </div>
 </div>
