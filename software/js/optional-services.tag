@@ -1,7 +1,11 @@
+require('./t.tag');
 <optional-services>
     <div class="row">
     <div class="col-sm-12">
-    <p class="service-section-title"><strong>Optional Services</strong>{ ' ( '+components.length+' Results )' }</p>
+    <p class="service-section-title">
+    	<strong><t entity="Software.OPTIONAL_SERVICES">Optional Services</t></strong>
+    	{` ( ${components.length} ${ss.i18n._t('Openstack.RESULTS','Results')} )`}
+    </p>
     </div>
     </div>
     <div class="row">
@@ -12,12 +16,12 @@
     <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Service</th>
-            <th>Maturity <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
-            <th>Age <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
-            <th>Adoption <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
-            <th>Details</th>
+            <th><t entity="Software.NAME">Name</t></th>
+            <th><t entity="Software.SERVICE">Service</t></th>
+            <th><t entity="Software.MATURITY">Maturity</t> <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
+            <th><t entity="Software.AGE">Age</tr> <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
+            <th><t entity="Software.ADOPTION">Adoption</t> <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
+            <th><t entity="Software.DETAILS">Details</t></th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +31,11 @@
         <td><div class="service-stat-pill { maturity_points >= 0  && maturity_points <= 1 ? 'red': (maturity_points > 1  && maturity_points <= 3 ? 'orange' : 'green') }">{ maturity_points } <span>of</span> { this.max_maturity_points }</div></td>
         <td><div>{ age } Yrs</div></td>
         <td><div>{ adoption } %</div></td>
-        <td><a href="#" onclick={ optionalServiceDetails }>More Details</a></td>
+        <td>
+        	<a href="#" onclick={ optionalServiceDetails }>
+        		<t entity="Software.MORE_DETAILS">More Details</t>
+        	</a>
+        </td>
         </tr>
     </tbody>
     </table>

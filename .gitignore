@@ -13,8 +13,6 @@ colorpicker/
 colorpicker
 cms/
 cms
-translatable/
-translatable
 vendor/
 .htaccess
 debug.log

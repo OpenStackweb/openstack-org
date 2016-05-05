@@ -1,29 +1,41 @@
+require('./t.tag');
 <openstack-components-filters>
     <div id="all-projects-filter-wrapper">
     <div class="row">
     <div class="col-md-2 col-sm-3 col-xs-10 single-filter-wrapper first">
     <div class="filter-stats-label">
-    <strong>ADOPTION</strong> of at least <span id="adoptionSliderVal">0</span>%
+    	<t entity="Software.ADOPTION_OF_AT_LEAST">
+    		<strong>ADOPTION</strong> of at least
+    	</t>
+    	<span id="adoptionSliderVal">0</span>%
     </div>
     <input id="all-projects-adoption" data-slider-id='adoptionSlider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0"/>
     </div>
     <div class="col-md-2 col-sm-3 col-xs-10 single-filter-wrapper">
     <div class="filter-stats-label">
-    <strong>MATURITY</strong> of at least <span id="maturitySliderVal">0</span> of { this.max_maturity_points }
+    	<t entity="Software.MATURITY_OF_AT_LEAST">
+    		<strong>MATURITY</strong> of at least
+    	</t> 
+    	<span id="maturitySliderVal">0</span> 
+    	<t entity="Software.MATUIRY_OF">of</t> 
+    	{ this.max_maturity_points }
     </div>
     <input id="all-projects-maturity" data-slider-id='maturitySlider' type="text" data-slider-min="0" data-slider-max="{ this.max_maturity_points }" data-slider-step="1" data-slider-value="0"/>
     </div>
     <div class="col-md-2 col-sm-3 col-xs-10 single-filter-wrapper">
     <div class="filter-stats-label">
-    <strong>AGE</strong> of at least <span id="ageSliderVal">0</span> years
+    	<t entity="Software.AGE_OF_AT_LEAST">
+    		<strong>AGE</strong> of at least 
+    	</t>
+    	<span id="ageSliderVal">0</span> 
+    	<t entity="Software.YEARS">years</t>
     </div>
     <input id="all-projects-age" data-slider-id='ageSlider' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0"/>
     </div>
     </div>
     </div>
 
-    <script>
-
+    <script>    
         this.api                 = opts.api;
         this.last_ajax_request   = null;
         this.max_maturity_points = opts.max_maturity_points;

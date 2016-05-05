@@ -278,6 +278,11 @@ class OpenStackRelease
         return $this->getField('Status');
     }
 
+    public function getStatusI18n()
+    {
+    	return _t('Software.RELEASE_STATUS_'.strtoupper($this->Status), $this->Status);
+    }
+
     /**
      * @param string $status
      * @return void

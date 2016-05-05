@@ -103,10 +103,13 @@ class SoftwareHomePage_Controller extends Page_Controller
     public function init()
     {
         parent::init();
+		Requirements::add_i18n_javascript('software/lang');
         Requirements::css("themes/openstack/bower_assets/webui-popover/dist/jquery.webui-popover.min.css");
         Requirements::css("software/css/software.css");
         Requirements::javascript("themes/openstack/bower_assets/webui-popover/dist/jquery.webui-popover.min.js");
         Requirements::javascript("software/js/software.js");
+
+
     }
 
     public function index()

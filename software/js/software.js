@@ -30,7 +30,9 @@
         $(".more-about-config").click(function(event) {
             $(".more-sample-config").toggleClass("show");
             $(this).text(function(i, text){
-                return text === "Less details about this configuration [-]" ? "More about this configuration [+]" : "Less details about this configuration [-]";
+                return text === ss.i18n._t('Software.LESS_DETAIL_CONFIG','Less details about this configuration') + ' [-]' ? 
+                				ss.i18n._t('Software.MORE_ABOUT_CONFIG', 'More about this configuration') + ' [+]' : 
+                				ss.i18n._t('Software.LESS_DETAIL_CONFIG', 'Less details about this configuration') + ' [-]';
             })
             event.preventDefault();
         });
@@ -105,7 +107,10 @@
         $(".more-about-config").live('click', function(event) {
             $(".more-sample-config").toggleClass("show");
             $(this).text(function(i, text){
-                return text === "Less details about this configuration [-]" ? "More about this configuration [+]" : "Less details about this configuration [-]";
+                return text === ss.i18n._t('Software.LESS_DETAIL_CONFIG','Less details about this configuration') + ' [-]' ? 
+                				ss.i18n._t('Software.MORE_ABOUT_CONFIG', 'More about this configuration') + ' [+]' : 
+                				ss.i18n._t('Software.LESS_DETAIL_CONFIG', 'Less details about this configuration') + ' [-]';
+
             })
             event.preventDefault();
             return false;

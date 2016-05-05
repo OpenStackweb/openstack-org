@@ -21,17 +21,6 @@ DataObject::add_extension('SiteConfig', 'CustomSiteConfig');
 i18n::set_locale('en_US');
 
 //Turn on Silverstripe Translation
-Object::add_extension('SiteTree', 'Translatable');
-Object::add_extension('SiteConfig', 'Translatable');
-
-Translatable::set_allowed_locales(array(
-	'en_US',
-	'de_DE',
-	'es_ES',
-    'ja_JP'
-));
-
-//Turn on Silverstripe Translation
 
 // Search index for Orgs
 Object::add_extension('Org', 'AutocompleteOrgDecorator');

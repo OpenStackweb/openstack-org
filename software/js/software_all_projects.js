@@ -1,14 +1,14 @@
-require('./core-services.tag');
-require('./optional-services.tag');
-require('./openstack-releases-ddl.tag');
-require('./openstack-components-free-search.tag');
-require('./openstack-components-filters.tag');
+import './core-services.tag';
+import './optional-services.tag';
+import './openstack-releases-ddl.tag';
+import './openstack-components-free-search.tag';
+import './openstack-components-filters.tag';
 
 // observable object
-var api = require('./api.js')
+import api from './api';
 
-riot.mount('core-services', { api: api });
-riot.mount('openstack-releases-ddl', { api: api });
-riot.mount('openstack-components-free-search', { api: api });
-riot.mount('optional-services', { api: api });
-riot.mount('openstack-components-filters', { api: api });
+riot.mount('core-services', { api });
+riot.mount('openstack-releases-ddl', { api });
+riot.mount('openstack-components-free-search', { api });
+riot.mount('optional-services', { api });
+riot.mount('openstack-components-filters', { api });

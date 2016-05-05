@@ -106,4 +106,9 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
     {
         $this->setField('Status', $status);
     }
+
+    public function getStatusI18n()
+    { 
+    	return _t('Software.API_VERSION_STATUS_'.strtoupper($this->Status), $this->Status);
+    }
 }

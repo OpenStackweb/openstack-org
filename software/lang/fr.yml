@@ -1,0 +1,110 @@
+fr:
+  Software:
+    SOFTWARE: Logiciel
+    ADOPTION: Adoption
+    MATURITY: Maturité
+    AGE: Age
+    NEXT_STEPS: Étapes à suivre
+    MORE_QUESTIONS: Toujours des questions ?
+    STRIVES_TO_BE_HELPFUL: OpenStack s'efforce à être un communité utile. &nbsp;Essayez le site Q&amp;A Ask.OpenStack.Org.
+    SUGGEST_AN_UPDATE: Suggérer une mise à jour pour cette guide
+    KNOW_A_COMPANY: Connaissez-vous une société ou résource qui devraient se lister ici ?
+    EMAIL_US: Contactez nous
+    GET_INVOLVED_WITH_OS: Impliquez-vous avec OpenStack
+    WIKI_USEFUL: Le wiki est une guide utile pour les contributions
+    HOW_TO_CONTRIBUTE: Comment contribuer
+    OVERVIEW: Aperçu
+    PROJECT_NAVIGATOR: Navigateur de projets
+    SAMPLE_CONFIGURATIONS: Examples de Configurations
+    SELECT_A_PAGE: Sélectionner une Page
+    HOW_TO_GET_STARTED: Comment commencer sur OpenStack
+    OPENSTACK_OVERVIEW: Aperçu d'OpenStack
+    SOFTWARE_STEP_ONE: '1<span>er</span>'
+    HOW_WILL_YOU_USE: 'Comment comptez-vous <strong>utiliser OpenStack</strong> ?'
+    COMPUTE: Calcul
+    OBJECT_STORAGE: Stockage d'objets
+    COMPUTE_OBJECT_STORAGE: 'Calcul +<br/>Stockage d'objects'
+    COMPUTE_DESCRIPTION: 'Ressources de calcul sont accessibles via des API pour les développeurs créent des applications cloud et via des interfaces web pour les administrateurs et les utilisateurs. L'architecture de calcul est conçu pour évoluer horizontalement sur du matériel standard, ce qui permet l'économie de nuage entreprises sont venus à attendre.'
+    STORAGE_DESCRIPTION: 'OpenStack Object Storage peut être déployé indépendamment d'un nuage de calcul ou à côté d'autres plates-formes informatiques. Il est idéal pour le coût, le stockage efficace scale-out et fournit une plate-forme de stockage API accessible entièrement distribuée qui peut être intégré directement dans les applications ou utilisé pour la sauvegarde, l'archivage et la conservation des données.'
+    BOTH_DESCRIPTION: 'Déployé ensemble, Compute et Object Storage fournit l'ensemble des services de base OpenStack et API ouvertes. En combinaison, la plate-forme fournit de solides capacités de cloud computing avec le stockage horizontal pour la gestion des images, des instantanés, des sauvegardes, des machines virtuelles et périphériques de bloc.'
+    SOFTWARE_STEP_TWO: '2<span>me</span>'
+    SELECT_CORE_SERVICES: 'Sélectionnez les <strong>Services fondamentales</strong> que vous voulez utiliser'
+    SOFTWARE_STEP_THREE: '3<span>me</span>'
+    SOFTWARE_ADD_ON: 'Ajouter des <strong>Services Optionelles</strong> pour améliorer votre monde.'
+    AND_MANY_MORE: '... et beaucoup plus'
+    BROWSE_ALL_PROJECTS: Feuilleter tous les projets
+    PROJECT_NAVIGATOR_DESCRIPTION: "Le navigateur de projet vise à aider les utilisateurs à prendre des décisions éclairées sur la façon de consommer le logiciel. Les données utilisées pour alimenter le site Web Navigator Project est fourni par la technique OpenStack et des comités d'utilisateurs."
+    STATS_MEANING_PROJECT: 'Que signifient les stats affichés sur chaque projet ?'
+    BROWSE_ALL_OS_PROJECTS: Feuilleter tous les projets OpenStack
+    STATS_MEANING: 'Que signifient ces stats ?'
+    ADOPTION_DESCRIPTION: "<strong>Adoption</strong> est le pourcentage des déploiements de production en cours d'exécution du projet sur la base des derniers résultats semestriels de l'enquête de l'utilisateur."
+    MATURITY_DESCRIPTION: "<strong>Maturité</strong> vient de regarder {points} points de balises distinctes qui indiquent la stabilité et la durabilité. Les critères actuels comprend ou non le projet a un guide d'installation, si elle est soutenue par 7 ou plus SDKs, si le pourcentage d'adoption est supérieure à 75%, si oui ou non l'équipe a atteint la diversité des entreprises et si oui ou non il y a stable branches."
+    AGE_DESCRIPTION: "<strong>Age</strong> est le nombre d'années que le projet a été en développment."
+    WHAT_ARE_SAMPLES: "Quelle sont ces configurations samples ?"
+    WHAT_ARE_SAMPLES_ANSWER: "Pensez à ces listes de lecture en tant curated de configurations de OpenStack. Ces exemples de configurations sont basées sur OpenStack études de cas et des architectures de référence du monde réel entre les industries et les charges de travail. Chaque configuration vous donnera une bonne idée de ce qui base et les projets optionnels peuvent être utilisés pour différents environnements."
+    BACK_TO_NAVIGATOR: 'Rétourner vers le navigateur'
+    PROJECT_WIKI: 'La page wiki'
+    VIEW_INSTALL_GUIDE: "Guide d'installation"
+    FIND_SERVICE_MARKETPLACE: 'Retrouver cette service dans le marché'
+    WHAT_DOES_THIS_MEAN: "C'est quoi ?"
+    ABOUT_PROJECT: 'Apropos de ce projet'
+    PROJECT_DETAILS: 'Détails du projet'
+    MATURITY_INDICATORS: 'Indicateurs de maturité'
+    TAG_DETAILS: 'Détails du tag'
+    MEETS_MATURITY: 'Satisfait les <br> exigences de maturité ?'
+    IS_THERE_INSTALL: "Est-ce qu'il y a une guide d'instalattion pour ce projet (sur docs.openstack.org) ?"
+    VIEW_INSTALL_GUIDE: "Voir la guide d'installation"
+    NUMBER_OF_SDK: "Nombre de SDKs qui soutiennent ce projet"
+    ADOPTION_DATA_CONTENT: "Les données d'adoption est dérivée de la dernière <a href='//www.openstack.org/user-survey'> enquête auprès des utilisateurs </a>."
+    HOW_CALCULATED: 'Comment calculé ?'
+    PERCENTAGE_OF_DEPLOYMENTS: 'Pourcentage des déploiements utilisant ce projet dans des environnements de production.'
+    USED_IN_CORPORATE: 'Est-ce que cette équipe de projet a atteint la diversité des entreprises ?'
+    PROJECT_DIVERSITY: "Un projet avec celui-ci a atteint un niveau de diversité dans l'affiliation des contributeurs qui est indicatif d'un projet de collaboration en santé. Cette balise existe dans la catégorie «équipe» qui, comme son nom l'indique, couvre des informations sur l'équipe elle-même. Un autre exemple d'une balise qui pourrait exister dans cette catégorie est celle qui transmet la taille de l'équipe qui contribue activement."
+    WHAT_DOES_MEAN: "C'est quoi ?"
+    STABLE_BRANCHES: 'Ce projet a-t-il branches stables ?'
+    FOLLOW_DEPRECATION: "Est-ce que ce projet suit l'amortissement norme ?"
+    DEPRECATION_TAG_DESCRIPTION: 'Le tag “assert:follows-standard-deprecation” affirme que le projet suivra les règles fonction de désapprobation standards'
+    MINIMAL_UPGRADE: 'Est-ce que le soutien de projet minimal froid (hors ligne) mise à niveau des capacités ?'
+    MINIMAL_UPGRADE_DESCRIPTION: 'affirme que le projet appuiera un minimum froid (hors ligne) de mise à niveau des capacités'
+    MINIMAL_ROLLING: 'Est-ce que ce projet de soutien au roulement minimal de mise à niveau des capacités?'
+    MINIMAL_ROLLING_DESCRIPTION: 'tag affirme que le projet appuiera les capacités de mise à niveau de roulement minimal.'
+    ADDITIONAL_INFORMATION: 'Additional Information'
+    TAG_DETAILS: 'Détails de tag'
+    HOW_RELEASED: 'Comment est relâché ce projet ?'
+    HOW_RELEASED_DESCRIPTION: 'le développement OpenStack qui se passe sur un cycle de six mois. Les projets peuvent choisir de libérer sur ce cycle sous la supervision de l'équipe de gestion des versions, ou de libérer indépendamment du cycle.'
+    HOW_PROJECTS_RELEASED: 'Comment les projets sont libérés ?'
+    CYCLE_WITH_MILESTONES: 'Cycle avec des jalons'
+    CYCLE_WITH_INTERMEDIARY: 'Cycle intermédiaire'
+    INDEPENDENT: 'Independent'
+    EXISTENCE_AND_QUALITY: 'Existence et qualité des emballages pour ce projet dans les distributions populaires.'
+    GOOD: 'Bon'
+    WARNING: 'Attention'
+    BEGINNING: 'Début'
+    VULNERABILITY_ISSUES: "Les questions de vulnérabilité gérés par l'équipe de sécurité de OpenStack?"
+    CONTRIBUTIONS_TO: "Contributions vers {codename}"
+    PTL_FOR_RELEASE: 'PTL pour la dernière version'
+    MOST_ACTIVE_CONTRIBUTORS: 'Les contributeurs plus actives par société'
+    RELATED_CONTENT: 'Contenu en rélation'
+    API_HISTORY: 'L'histoire de API'
+    VERSION: 'Version'
+    PREVIOUS_DEPRECATED: 'Versions précédentes désapprouvées'
+    CHARTS_ATTR: 'Statistiques et graphiques fournies par stackalytics.com'
+    WHAT_STATS_MEAN: 'Que signifient ces statistiques ?'
+    ADOPTION_DESCRIPTION: "<strong>Adoption</strong> est le pourcentage des déploiements de production en cours d'exécution du projet sur la base des derniers résultats semestriels de l'enquête de l'utilisateur."
+    MATURITY_DESCRIPTION: "<strong>Maturité</strong> vient de regarder 5 balises distinctes qui indiquent la stabilité et la durabilité. Les critères actuels comprend ou non le projet a un guide d'installation, si elle est soutenue par 7 ou plus SDKs, si le pourcentage d'adoption est supérieure à 75%, si oui ou non l'équipe a atteint la diversité des entreprises et si oui ou non il y a stable branches."
+    AGE_DESCRIPTION: '<strong>Age</strong> est le nombre d'années, le projet a été en développement.'
+    API_VERSION_STATUS_DEPRECATED: Obsolète
+    API_VERSION_STATUS_CURRENT: Actuel
+    API_VERSION_STATUS_BETA: Beta
+    API_VERSION_STATUS_ALPHA: Alpha
+    RELEASE_CAVEAT_TYPE_NOTSET: Pas encore défini
+    RELEASE_CAVEAT_TYPE_INSTALLATIONGUIDE: Guide d'installation
+    RELEASE_CAVEAT_TYPE_QUALITYOFPACKAGES: Qualité de paquets
+    RELEASE_CAVEAT_TYPE_PRODUCTIONUSE: Usage production
+    RELEASE_CAVEAT_TYPE_SDKSUPPORT: Soutien SDK
+    RELEASE_STATUS_DEPRECATED: Obsolète
+    RELEASE_STATUS_EOL: EOL
+    RELEASE_STATUS_SECURITYSUPPORTED: Sécurité soutenu
+    RELEASE_STATUS_CURRENT: Actuel
+    RELEASE_STATUS_UNDERDEVELOPMENT: Sous développement
+    RELEASE_STATUS_FUTURE: Avenir

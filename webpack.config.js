@@ -39,6 +39,7 @@ module.exports = {
   ],
   module: {
     loaders: [
+      { test: /\.js$/, loader: 'babel?presets[]=es2015', exclude: /(node_modules|bower_components)/ },
       { test: /\.tag$/, loader: 'tag' },
       { test: /\.css$/, loader: "style!css" },
       { test: /\.less$/, loader: 'style!css!less' },

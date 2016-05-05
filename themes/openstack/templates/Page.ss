@@ -31,7 +31,7 @@
       
       <!-- Page Content -->
       <div class="container">
-        $Message
+        $Message        
         $Layout
       </div>
 

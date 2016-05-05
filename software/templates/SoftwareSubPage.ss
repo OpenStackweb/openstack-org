@@ -32,7 +32,7 @@
 <div class="container software">
     <div class="row">
         <div class="col-sm-12">
-            <h1>Software</h1>
+            <h1><%t Software.SOFTWARE 'Software' %></h1>
         </div>
     </div>
 </div>

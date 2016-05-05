@@ -1,0 +1,45 @@
+---
+Name: openstack-software-translations
+---
+SoftwareHomePage:
+  translate:
+    - IntroTitle
+    - IntroText
+    - IntroTitle2
+    - IntroText2
+SoftwareHomePageSubMenuItem:
+  extensions:
+    - FluentExtension
+  translate:
+    - Label
+StartPage:
+  translate:
+    - Summary
+OpenStackComponent:
+  extensions:
+    - FluentExtension
+  translate:
+    - Name
+    - Description
+OpenStackComponentRelatedContent:
+  extensions:
+    - FluentExtension
+  translate:
+    - Title
+OpenStackSampleConfig:
+  extensions:
+    - FluentExtension
+  translate:
+    - Title
+    - Summary
+    - Description
+OpenStackSampleConfigRelatedNote:
+  extensions:
+    - FluentExtension
+  translate:
+    - Title
+OpenStackSampleConfigurationType:
+  extensions:
+    - FluentExtension
+  translate:
+    - Type

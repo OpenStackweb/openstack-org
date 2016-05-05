@@ -1,8 +1,12 @@
 require('./core-service-box.tag')
+require('./t.tag');
 <core-services>
     <div class="row">
     <div class="col-sm-12">
-    <p class="service-section-title"><strong>Core Services</strong>{ ' ( '+components.length+' Results )' }</p>
+    <p class="service-section-title">
+    	<strong>
+    		<t entity="Software.CORE_SERVICES">Core Services</t>
+    	</strong>{ ' ( '+components.length+' Results )' }</p>
     </div>
     </div>
     <div class="row">

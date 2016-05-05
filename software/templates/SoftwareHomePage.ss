@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
         "http://www.w3.org/TR/html4/strict.dtd">
 
-<html lang="en">
+<html lang="$CurrentLocale">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +25,7 @@
 
 </head>
 
-<body id="$URLSegment">
+<body id="$URLSegment" lang="$CurrentLocale">
     <% include SiteBanner %>
     <% include Navigation %>
     <!-- Page Content -->
@@ -33,10 +33,11 @@
     <div class="container software">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Software</h1>
+                <h1><%t Software.SOFTWARE 'Software' %></h1>
             </div>
         </div>
     </div>
+    <% include LocaleMenu %>
     $Layout
     <% include Footer %>
     <% include Quantcast %>

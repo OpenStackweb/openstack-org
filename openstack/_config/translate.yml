@@ -1,16 +1,7 @@
 ---
-Name: openstack-translations
+Name: openstack-core-translations
 ---
 SiteTree:
   translate:
     - Title
     - Content
-SoftwareHomePage:
-  translate:
-    - IntroTitle
-    - IntroText
-    - IntroTitle2
-    - IntroText2
-SoftwareHomePageSubMenuItem:
-  translate:
-    - Label
