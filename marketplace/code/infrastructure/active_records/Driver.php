@@ -27,6 +27,7 @@ class Driver extends DataObject implements IDriver
         'Vendor' => 'Varchar(255)',
         'Url' => 'Varchar(255)',
         'Tested' => 'Boolean',
+        'Active' => 'Boolean'
     );
 
     static $many_many = array(
@@ -69,6 +70,10 @@ class Driver extends DataObject implements IDriver
     public function setName($name)
     {
         $this->setField('Name', $name);
+    }
+
+    public function getReleases() {
+        return $this->Releases()->filter('Active',1);
     }
 
 }

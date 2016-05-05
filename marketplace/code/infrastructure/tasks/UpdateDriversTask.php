@@ -24,6 +24,9 @@ final class UpdateDriversTask extends CronTask
         set_time_limit(0);
 
         try {
+            DB::query("UPDATE Driver SET Active = 0");
+            DB::query("UPDATE DriverRelease SET Active = 0");
+
             $url = 'http://stackalytics.com/driverlog/api/1.0/drivers';
             $jsonResponse = @file_get_contents($url);
 
@@ -49,6 +52,7 @@ final class UpdateDriversTask extends CronTask
                 $driver->Project = $contents['project_name'];
                 $driver->Vendor = isset($contents['vendor'])?$contents['vendor']: null;
                 $driver->Url = isset($contents['wiki'])?$contents['wiki']: null;
+                $driver->Active = 1;
 
                 if (isset($contents['releases_info'])) {
                     $releases = $contents['releases_info'];
@@ -61,6 +65,8 @@ final class UpdateDriversTask extends CronTask
 
                         $driver_release->Name = trim($release['name']);
                         $driver_release->Url = $release['wiki'];
+                        $driver_release->Active = 1;
+
                         $driver_release->write();
 
                         $driver->Releases()->add($driver_release);

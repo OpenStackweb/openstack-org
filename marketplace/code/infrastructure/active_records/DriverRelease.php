@@ -21,6 +21,7 @@ class DriverRelease extends DataObject implements IDriverRelease {
 	static $db = array(
 		'Name'  => 'Varchar(255)',
         'Url' => 'Varchar(255)',
+        'Active' => 'Boolean'
 	);
 
 	static $indexes = array(
