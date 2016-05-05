@@ -1,6 +1,6 @@
 import { throwError } from '../actions';
 
-const GENERIC_ERROR = "Yikes. Something seems to be broken. Our web team has been notified, and we apologize fo the inconvenience.";
+const GENERIC_ERROR = "Yikes. Something seems to be broken. Our web team has been notified, and we apologize for the inconvenience.";
 
 const xhrs = {};
 
