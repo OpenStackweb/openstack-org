@@ -14,69 +14,65 @@
  **/
 class SchedToolsPage extends Page
 {
-	static $db = array();
-	static $has_one = array();
-	static $has_many = array();
 
-	static $defaults = array(
+	private static $defaults = [
 		'ShowInMenus' => false,
 		'ShowInSearch' => false
-	);
+	];
 
 
-	function getCMSFields()
+	public function canCreate($member = null) 
 	{
-		$fields = parent::getCMSFields();
-		return $fields;
+		return !SchedToolsPage::get()->exists();
 	}
+
 }
 
 
 class SchedToolsPage_Controller extends Page_Controller
 {
-	public static $allowed_actions = array(
-		'ImportSpeakersFromSched' => 'ADMIN',
-		'ListSpeakers' => 'ADMIN',
-		'SpeakerTable' => 'ADMIN',
-		'Presentations',
-		'Upload',
+	private static $allowed_actions = [
+		'importspeakersfromsched' => 'ADMIN',
+		'listspeakers' => 'ADMIN',
+		'speakertable' => 'ADMIN',
+		'presentations',
+		'upload',
 		'Form',
-		'Success',
-		'LinkTo',
-		'LinkToForm',
-		'EmailSpeakers' => 'ADMIN'
-	);
+		'success',
+		'linkto',
+		'linktoform',
+		'emailspeakers' => 'ADMIN'
+	];
 
-	function init()
+	public function init()
 	{
-
 		parent::init();
 
-		Requirements::CustomScript("
+		// Requirements::CustomScript("
 
-					jQuery(function(){
+		// 			jQuery(function(){
 
-						$('#PresentationMediaUploadForm_Form_action_doUpload').hide();
+		// 				$('#PresentationMediaUploadForm_Form_action_doUpload').hide();
 
-						$('#PresentationMediaUploadForm_Form_UploadedMedia').change(function(){
-						    path = $(this).val();
-						    file = path.split('\\\\').pop();
-						    $( '#file-well p:first' ).html( file );
-						    $( '#file-well' ).removeClass( 'no-selected-file' );
-						    $( '#file-well' ).addClass( 'selected-file' );
-						    $('#PresentationMediaUploadForm_Form_action_doUpload').fadeIn();
-						    $('.browseButton').html('Ready to upload.');
-						    $('.browseButton').addClass('buttonFileSelected');
-						});
+		// 				$('#PresentationMediaUploadForm_Form_UploadedMedia').change(function(){
+		// 				    path = $(this).val();
+		// 				    file = path.split('\\\\').pop();
+		// 				    $( '#file-well p:first' ).html( file );
+		// 				    $( '#file-well' ).removeClass( 'no-selected-file' );
+		// 				    $( '#file-well' ).addClass( 'selected-file' );
+		// 				    $('#PresentationMediaUploadForm_Form_action_doUpload').fadeIn();
+		// 				    $('.browseButton').html('Ready to upload.');
+		// 				    $('.browseButton').addClass('buttonFileSelected');
+		// 				});
 
-						$('#PresentationMediaUploadForm_Form').submit(function(){
-							$('#uploadProgressBarOuterBarG').css({ opacity: 1 });
-						});
+		// 				$('#PresentationMediaUploadForm_Form').submit(function(){
+		// 					$('#uploadProgressBarOuterBarG').css({ opacity: 1 });
+		// 				});
 
-					});
+		// 			});
 
 
-			");
+		// 	");
 
 	}
 
