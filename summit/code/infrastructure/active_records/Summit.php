@@ -78,15 +78,20 @@ final class Summit extends DataObject implements ISummit
 
     public static function get_active()
     {
-        $summit = Summit::get()->filter
-        (
-            array
-            (
-                'Active' => true
-            )
-        )->first();
+        $summit = Summit::get()->filter([
+            'Active' => true
+        ])
+        ->first();
 
         return $summit ?: Summit::create();
+    }
+
+    public static function get_most_recent()
+    {
+		return Summit::get()
+			->where('SummitEndDate < DATE(NOW())')
+			->sort('SummitEndDate DESC')
+			->first();    	
     }
 
     public function checkRange($key)

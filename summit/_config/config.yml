@@ -7,6 +7,9 @@ Member:
     - PresentationMemberExtension
     - MemberTokenProvider
     - AttendeeMember
+Director:
+  rules:
+    'submit-slides': 'PresentationSlideSubmissionController'
 EditProfilePage_Controller:
   extensions:
     - EditProfilePageSummitAttendeeExtension

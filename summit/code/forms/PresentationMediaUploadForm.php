@@ -14,73 +14,61 @@
 class PresentationMediaUploadForm extends Form
 {
 
-	function __construct($controller, $name)
+	protected $presentation;
+
+	public function __construct($controller, $name, SummitEvent $presentation)
 	{
+		$this->presentation = $presentation;
 
-		$FileAttachment = new FileField('UploadedMedia', 'File', null, null, null, '/presentation-media/');
+		$fields = FieldList::create(
+			FileAttachmentField::create('Slide','File')
+				->setFolderName('/presentation-media/')
+				->setPermissions([
+        			'upload' => true,
+        			'detach' => false,
+        			'delete' => false
+        		])
+		);
 
-		$fields = new FieldList(
-			$FileAttachment
+		$actions = FieldList::create(
+			FormAction::create('doUpload', 'Upload File')
 		);
-		$actions = new FieldList(
-			new FormAction('doUpload', 'Upload File')
-		);
-		$validator = new RequiredFields(array('UploadedMedia'));
+
+		$validator = RequiredFields::create(['Slide']);
 
 		parent::__construct($controller, $name, $fields, $actions, $validator);
 
+        $material = $presentation->MaterialType('PresentationSlide');
+
+        if($material) {        	
+        	$this->loadDataFrom($material);	
+        }
 	}
 
-	function forTemplate()
+	public function forTemplate()
 	{
-		return $this->renderWith(array(
+		return $this->renderWith([
 			$this->class,
 			'Form'
-		));
+		]);
 	}
 
-	function doUpload($data, $form)
-	{
-		if (isset($data['UploadedMedia']['tmp_name'])) {
-			if (!empty($data['UploadedMedia']['name'])) {
-				// create new single file array from file uploads array
-				$file = array();
-				$file['name'] = $data['UploadedMedia']['name'];
-				$file['type'] = $data['UploadedMedia']['type'];
-				$file['tmp_name'] = $data['UploadedMedia']['tmp_name'];
-				$file['error'] = $data['UploadedMedia']['error'];
-				$file['size'] = $data['UploadedMedia']['size'];
+	public function doUpload($data, $form)
+	{		
+		$material = PresentationSlide::create();
+		$material->SlideID = $data['Slide'];
+		$material->write();
+		$this->presentation->Materials()->filter([
+			'ClassName' => 'PresentationSlide'
+		])->removeAll();
+		$this->presentation->Materials()->add($material);
+		$token = SecurityToken::inst()->getValue();
 
-				// create & write uploaded file in DB
-				try {
-					$newfile = new File();
-					$upload = new Upload();
-					// get folder from form upload field
-					$folder = $form->Fields()->fieldByName('UploadedMedia')->getFolderName();
-					$upload->loadIntoFile($file, $newfile, $folder);
-					$fileObj = $upload->getFile();
-
-					$EventID = Session::get('UploadMedia.PresentationID');
-					if ($EventID) $Event  = VideoPresentation::get()->byID($EventID);
-
-					if (isset($Event)) {
-						$Event->UploadedMediaID = $fileObj->ID;
-						$Event->MediaType = 'File';
-						$Event->write();
-						Session::set('UploadMedia.Success', TRUE);
-						Session::set('UploadMedia.FileName', $fileObj->Name);
-						Session::set('UploadMedia.Type', 'File');
-
-						Controller::curr()->redirect($form->controller()->link() . 'Success');
-					}
-
-				} catch (ValidationException $e) {
-					$form->sessionMessage('Extension not allowed...', 'bad');
-					return $this->controller()->redirectBack();
-				}
-			}
-		}
-
+		return $form->controller()->redirect(Controller::join_links(
+			$form->controller()->Link(),
+			'success',
+			"?key={$token}&material={$material->ID}"
+		));
 	}
 
 }

@@ -7,7 +7,7 @@
     margin-top: 15px;
 }
 
-.browseButton, #PresentationMediaUploadForm_Form_UploadedMedia {
+.browseButton, #PresentationMediaUploadForm_Form_Slide {
 }
 
 .browseButton {
@@ -24,7 +24,7 @@
 	position: relative;
 }
 
-input#PresentationMediaUploadForm_Form_UploadedMedia{
+input#PresentationMediaUploadForm_Form_Slide{
     width: 446px;
 	cursor: pointer;
 	background-color: #E4EEF1;
@@ -227,7 +227,7 @@ div.presentation.no-media {
 	width: 498px;
 }
 
-#PresentationLinkToForm_LinkToForm_HostedMediaURL {
+#PresentationLinkToForm_LinkToForm_Link {
 	width: 95%;
 }
 

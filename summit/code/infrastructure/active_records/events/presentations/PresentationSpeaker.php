@@ -514,7 +514,7 @@ class PresentationSpeaker extends DataObject
     public function registerAnnouncementEmailTypeSent($email_type, $summit_id)
     {
         if ($this->announcementEmailAlreadySent($summit_id)) {
-        	throw new Exception('Announcement Email already sent');
+            throw new Exception('Announcement Email already sent');
         }
 
         $email = SpeakerAnnouncementSummitEmail::create();
@@ -578,15 +578,15 @@ class PresentationSpeaker extends DataObject
     {
         // check if we have an assigned one already
         $old_code = SpeakerSummitRegistrationPromoCode::get()->filter([
-                'SummitID' => $summit->getIdentifier(),
-                'SpeakerID' => $this->ID,
-        	])
-        	->first();
+            'SummitID' => $summit->getIdentifier(),
+            'SpeakerID' => $this->ID,
+        ])
+            ->first();
 
         // we are trying to update the promo code with another one ....
         if ($old_code && $promo_code_value !== $old_code->Code) {
             throw new EntityValidationException(sprintf(
-                    'speaker has already assigned to another registration code (%s)', $old_code->Code
+                'speaker has already assigned to another registration code (%s)', $old_code->Code
             ));
         }
         //we already have the same code ...
@@ -595,25 +595,25 @@ class PresentationSpeaker extends DataObject
 
         // check if the promo code already exists and assigned to another user
         $existent_code = SpeakerSummitRegistrationPromoCode::get()->filter([
-                'Code' => $promo_code_value,
-                'SummitID' => $summit->getIdentifier(),
-                'SpeakerID:ExactMatch:not' => 0,
-        	])
-        	->first();
+            'Code' => $promo_code_value,
+            'SummitID' => $summit->getIdentifier(),
+            'SpeakerID:ExactMatch:not' => 0,
+        ])
+            ->first();
 
         if ($existent_code) {
             throw new EntityValidationException(sprintf(
-                    'there is another speaker with that code for this summit (%s)', $promo_code_value
+                'there is another speaker with that code for this summit (%s)', $promo_code_value
             ));
         }
         // check if promo code exists and its not assigned ...
         $code = SpeakerSummitRegistrationPromoCode::get()->filter([
-                'Code' => $promo_code_value,
-                'SummitID' => $summit->getIdentifier(),
-                'OwnerID' => 0,
-                'SpeakerID' => 0,
-			])
-        	->first();
+            'Code' => $promo_code_value,
+            'SummitID' => $summit->getIdentifier(),
+            'OwnerID' => 0,
+            'SpeakerID' => 0,
+        ])
+            ->first();
 
         if (!$code) {
             //create it
@@ -776,7 +776,7 @@ class PresentationSpeaker extends DataObject
     public function registerBreakOutSent($summit_id, $type)
     {
         if ($this->breakoutEmailAlreadySent($summit_id)) {
-        	throw new Exception('Second Breakout Email already sent');
+            throw new Exception('Second Breakout Email already sent');
         }
 
         $email = SpeakerAnnouncementSummitEmail::create();
@@ -796,7 +796,7 @@ class PresentationSpeaker extends DataObject
     public function registerCreateMembershipSent()
     {
         if ($this->membershipCreateEmailAlreadySent()) {
-        	throw new Exception('Create Membership Email already sent');
+            throw new Exception('Create Membership Email already sent');
         }
 
         $email = SpeakerAnnouncementSummitEmail::create();
@@ -805,7 +805,7 @@ class PresentationSpeaker extends DataObject
         $email->AnnouncementEmailTypeSent = 'CREATE_MEMBERSHIP';
         $email->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
         $email->write();
-        
+
         return $this;
     }
 
@@ -827,4 +827,32 @@ class PresentationSpeaker extends DataObject
         $assistance = $this->getAssistanceFor($summit_id);
         return !is_null($assistance) && $assistance->alreadyConfirmed();
     }
+
+    public function SpeakerHash()
+    {
+        $prefix = "000";
+        $hash = base64_encode($prefix . $this->Member()->Email);
+
+        return $hash;
+    }
+
+
+    // Look to see if a presenter has a general session or a keynote.
+    public function GeneralOrKeynote()
+    {
+        $presentations = $this->PublishedPresentations();
+        if (!$presentations->exists()) return false;
+
+        foreach ($presentations as $presentation) {
+            if ($presentation->event_type == 'General Session' || $Presentation->event_type == 'Keynotes') return true;
+            break;
+        }
+    }
+
+
+    public static function hash_to_username($hash)
+    {
+        return substr(base64_decode($hash), 3);
+    }
+
 }

@@ -14,53 +14,41 @@
  **/
 class PresentationSlide extends PresentationMaterial
 {
-    private static $db = array
-    (
+    private static $db = [
         'Link' => 'Text',
-    );
+    ];
 
-    private static $has_many = array
-    (
-    );
 
-    private static $defaults = array
-    (
-    );
-
-    private static $many_many = array
-    (
-    );
-
-    static $many_many_extraFields = array(
-    );
-
-    private static $has_one = array
-    (
+    private static $has_one = [
         'Slide' => 'File'
-    );
+    ];
 
-    private static $summary_fields = array
-    (
-    );
-
-    private static $searchable_fields = array
-    (
-    );
 
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
-        $f->addFieldToTab('Root.Main', new TextField('Link','Slide Link'));
-        $f->addFieldToTab('Root.Main', $upload = new UploadField('Slide','Slide File'));
+        $f->addFieldToTab('Root.Main', new TextField('Link', 'Slide Link'));
+        $f->addFieldToTab('Root.Main', $upload = new UploadField('Slide', 'Slide File'));
         $upload->setAllowedMaxFileNumber(1);
         return $f;
     }
 
-    public function getSlideUrl() {
+    public function getSlideUrl()
+    {
         if ($this->Link) {
             return $this->Link;
         } else {
             return $this->Slide()->URL;
         }
+    }
+
+    public function IsLink()
+    {
+        return !empty($this->Link);
+    }
+
+    public function IsUpload()
+    {
+        return $this->Slide()->exists();
     }
 }
