@@ -157,11 +157,12 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $deliverables = isset($info['deliverables']) ? $info['deliverables'] : array();
                 $service_info = isset($deliverables[$project_name]) ? $deliverables[$project_name] : array();
                 $service_tags = isset($service_info['tags']) ? $service_info['tags'] : array();
+
                 foreach($service_tags as $tag)
                 {
                     if($tag === "type:service" )
                         $is_service = true;
-                    if($tag === "release:has-stable-branches" )
+                    if($tag === "stable:follows-policy" )
                         $has_stable_branches = true;
                     if($tag === "release:cycle-with-milestones" )
                         $release_milestones = true;
@@ -200,6 +201,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                 if(!is_null($ptl_member))
                     $component->LatestReleasePTLID = $ptl_member->ID;
+
                 $component->write();
             }
         } catch (ParseException $e) {
