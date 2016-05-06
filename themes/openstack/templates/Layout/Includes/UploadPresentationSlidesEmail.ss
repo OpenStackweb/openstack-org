@@ -23,7 +23,7 @@
 <p><strong>UPLOAD YOUR PRESENTATION SLIDES NOW OR LATER</strong></p>
 <p>Please use the direct link below to upload your final presentation slides. After the Summit your slides will be made viewable on the OpenStack website alongside the video recording of your presentation.</p>
 
-<p>Ready? Click this link to go to the upload area: <a href="http://www.openstack.org/summit-upload/Presentations/?key={$SpeakerHash}">http://www.openstack.org/summit-upload/Presentations/?key={$SpeakerHash}</a></p>
+<p>Ready? Click this link to go to the upload area: <a href="http://www.openstack.org/submit-slides/presentations/?key={$SpeakerHash}">http://www.openstack.org/submit-slides/presentations/?key={$SpeakerHash}</a></p>
  
 <p><strong>AV / ROOM SET UP</strong></p>
 <p>**Sessions: small stage with presenter table (highboy), theater style seating for audience<br/>
