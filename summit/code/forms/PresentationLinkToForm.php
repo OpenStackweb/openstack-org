@@ -14,9 +14,17 @@
  **/
 class PresentationLinkToForm extends Form
 {
-
+    /**
+     * @var SummitEvent
+     */
     protected $presentation;
 
+    /**
+     * PresentationLinkToForm constructor.
+     * @param Controller $controller
+     * @param string $name
+     * @param SummitEvent $presentation
+     */
     public function __construct($controller, $name, SummitEvent $presentation)
     {
         $this->presentation = $presentation;
@@ -40,6 +48,9 @@ class PresentationLinkToForm extends Form
         }        
     }
 
+    /**
+     * @return HTMLText
+     */
     public function forTemplate()
     {
         return $this->renderWith([
@@ -48,7 +59,12 @@ class PresentationLinkToForm extends Form
         ]);
     }
 
-    public function saveLink($data, $form)
+    /**
+     * @param $data
+     * @param Form $form
+     * @return bool|SS_HTTPResponse
+     */
+    public function saveLink($data, Form $form)
     {
         $url = $data['Link'];
 
@@ -60,7 +76,7 @@ class PresentationLinkToForm extends Form
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             $form->sessionMessage('That does not appear to be a valid URL', 'bad');
 
-            return $this->controller()->redirectBack();
+            return $this->Controller()->redirectBack();
         }
 
     	$material = PresentationSlide::create();
@@ -73,8 +89,8 @@ class PresentationLinkToForm extends Form
     	$this->presentation->Materials()->add($material);
     	$token = SecurityToken::inst()->getValue();
 
-        return $this->controller()->redirect(Controller::join_links(
-    		$this->controller()->Link(),
+        return $this->Controller()->redirect(Controller::join_links(
+    		$this->Controller()->Link(),
     		'success',
     		"?key={$token}&material={$material->ID}"
         ));

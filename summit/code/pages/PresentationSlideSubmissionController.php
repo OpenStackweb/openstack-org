@@ -110,12 +110,13 @@ class PresentationSlideSubmissionController extends Page_Controller
 		$getVars = $r->getVars();
 		$speakers = PresentationSpeaker::get();
 		$summit = Summit::get_most_recent();
-		foreach ($speakers as $speaker) {			
+		foreach ($speakers as $speaker) {
+			/* @var DataList */
 			$presentations = $speaker->PublishedPresentations($summit->ID);
 				// Todo -- how to deal with this?
 				// !$speaker->GeneralOrKeynote() &&
 				// !SchedSpeakerEmailLog::BeenEmailed($Speaker->email) &&
-			if ($presentations->exists() && self::valid_email($speaker->Member()->Email)) {
+			if ($presentations->exists() && EmailValidator::validEmail($speaker->Member()->Email)) {
 				$to = $speaker->Member()->Email;				
 				$subject = "Important Speaker Information for OpenStack Summit in {$summit->Title}";
 
@@ -136,60 +137,6 @@ class PresentationSlideSubmissionController extends Page_Controller
 	}
 
 
-	/**
-	 * Validate an email address.
-	 * Provide email address (raw input)
-	 * Returns true if the email address has the email
-	 * address format and the domain exists.
-	 */
-	public static function valid_email($email)
-	{
-		$isValid = true;
-		$atIndex = strrpos($email, "@");
-		if (is_bool($atIndex) && !$atIndex) {
-			$isValid = false;
-		} else {
-			$domain = substr($email, $atIndex + 1);
-			$local = substr($email, 0, $atIndex);
-			$localLen = strlen($local);
-			$domainLen = strlen($domain);
-			if ($localLen < 1 || $localLen > 64) {
-				// local part length exceeded
-				$isValid = false;
-			} else if ($domainLen < 1 || $domainLen > 255) {
-				// domain part length exceeded
-				$isValid = false;
-			} else if ($local[0] == '.' || $local[$localLen - 1] == '.') {
-				// local part starts or ends with '.'
-				$isValid = false;
-			} else if (preg_match('/\\.\\./', $local)) {
-				// local part has two consecutive dots
-				$isValid = false;
-			} else if (!preg_match('/^[A-Za-z0-9\\-\\.]+$/', $domain)) {
-				// character not valid in domain part
-				$isValid = false;
-			} else if (preg_match('/\\.\\./', $domain)) {
-				// domain part has two consecutive dots
-				$isValid = false;
-			} else if
-			(!preg_match('/^(\\\\.|[A-Za-z0-9!#%&`_=\\/$\'*+?^{}|~.-])+$/',
-				str_replace("\\\\", "", $local))
-			) {
-				// character not valid in local part unless
-				// local part is quoted
-				if (!preg_match('/^"(\\\\"|[^"])+"$/',
-					str_replace("\\\\", "", $local))
-				) {
-					$isValid = false;
-				}
-			}
-			if ($isValid && !(checkdnsrr($domain, "MX") || checkdnsrr($domain, "A"))) {
-				// domain not found in DNS
-				$isValid = false;
-			}
-		}
-		return $isValid;
-	}
 
 }
 
@@ -207,7 +154,7 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 
 	protected $presentation;
 
-	public function __construct(PresentationSlideSubmission $parent, Presentation $presentation)
+	public function __construct(PresentationSlideSubmissionController $parent, Presentation $presentation)
 	{
 		$this->parent = $parent;
 		$this->presentation = $presentation;
@@ -274,13 +221,13 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 	public function success(SS_HTTPRequest $r)
 	{
 		if(!SecurityToken::inst()->check($r->getVar('key'))) {
-			return $this->httpError(404);
+			$this->httpError(404);
 		}
 
 		$material = PresentationSlide::get()->byID($r->getVar('material'));
 
 		if(!$material) {
-			return $this->httpError(404);
+			$this->httpError(404);
 		}
 
 		return $this->customise([
@@ -290,7 +237,5 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 			'PresentationSlideSubmissionController_success',
 			'Page'
 		]);
-
-		return $this->redirect($this->Link('presentations'));
 	}
 }

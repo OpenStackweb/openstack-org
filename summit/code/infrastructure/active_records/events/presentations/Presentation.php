@@ -32,9 +32,15 @@ class Presentation extends SummitEvent implements IPresentation
     const PHASE_COMPLETE = 3;
 
 
+    /**
+     *
+     */
     const STATUS_RECEIVED = 'Received';
 
 
+    /**
+     * @var array
+     */
     private static $db = array
     (
         'Level' => "Enum('Beginner,Intermediate,Advanced')",
@@ -49,12 +55,18 @@ class Presentation extends SummitEvent implements IPresentation
         'Legacy' => 'Boolean'
     );
 
+    /**
+     * @var array
+     */
     private static $defaults = array
     (
         'TrackChairGivenOrder' => 0,
         'AllowFeedBack' => 1
     );
 
+    /**
+     * @var array
+     */
     private static $has_many = array
     (
         'Votes' => 'PresentationVote',
@@ -64,12 +76,18 @@ class Presentation extends SummitEvent implements IPresentation
         'Materials' => 'PresentationMaterial',
     );
 
+    /**
+     * @var array
+     */
     private static $many_many = array
     (
         'Speakers' => 'PresentationSpeaker',
         'Topics' => 'PresentationTopic',
     );
 
+    /**
+     * @var array
+     */
     static $many_many_extraFields = array(
         'Speakers' => array
         (
@@ -77,6 +95,9 @@ class Presentation extends SummitEvent implements IPresentation
         ),
     );
 
+    /**
+     * @var array
+     */
     private static $has_one = array
     (
         'Creator' => 'Member',
@@ -84,6 +105,9 @@ class Presentation extends SummitEvent implements IPresentation
         'Moderator' => 'PresentationSpeaker',
     );
 
+    /**
+     * @var array
+     */
     private static $summary_fields = array
     (
         'Created' => 'Created',
@@ -93,12 +117,18 @@ class Presentation extends SummitEvent implements IPresentation
         'SelectionStatus' => 'Status',
     );
 
+    /**
+     *
+     */
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
         $this->assignEventType();
     }
 
+    /**
+     *
+     */
     private function assignEventType()
     {
         $summit_id = intval($this->SummitID);
@@ -109,6 +139,9 @@ class Presentation extends SummitEvent implements IPresentation
         }
     }
 
+    /**
+     * @return string
+     */
     public function getTypeName()
     {
         return 'Presentation';
@@ -187,6 +220,9 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
 
+    /**
+     * @return HTMLText
+     */
     public function PreviewHTML()
     {
         $template = new SSViewer('PresentationPreview');
@@ -205,7 +241,6 @@ class Presentation extends SummitEvent implements IPresentation
 
     public function canAssign()
     {
-
         // see if they have either of the appropiate permissions
         if (!Permission::check('TRACK_CHAIR')) return false;
 
@@ -275,6 +310,9 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
 
+    /**
+     * @return string
+     */
     public function CalcTotalPoints()
     {
         $sqlQuery = new SQLQuery(
@@ -285,6 +323,9 @@ class Presentation extends SummitEvent implements IPresentation
         return $sqlQuery->execute()->value();
     }
 
+    /**
+     * @return string
+     */
     public function CalcVoteCount()
     {
         $sqlQuery = new SQLQuery(
@@ -295,6 +336,9 @@ class Presentation extends SummitEvent implements IPresentation
         return $sqlQuery->execute()->value();
     }
 
+    /**
+     * @return float
+     */
     public function CalcVoteAverage()
     {
         $sqlQuery = new SQLQuery(
@@ -317,6 +361,9 @@ class Presentation extends SummitEvent implements IPresentation
         return $this->Progress == self::PHASE_NEW;
     }
 
+    /**
+     * @return bool
+     */
     public function creatorIsSpeaker()
     {
         $c = $this->Speakers()->filter(array(
@@ -325,11 +372,18 @@ class Presentation extends SummitEvent implements IPresentation
         if ($c->count()) return true;
     }
 
+    /**
+     * @return mixed
+     */
     public function creatorBeenEmailed()
     {
         return $this->BeenEmailed;
     }
 
+    /**
+     * @throws ValidationException
+     * @throws null
+     */
     public function clearBeenEmailed()
     {
         $this->BeenEmailed = false;
@@ -421,7 +475,7 @@ class Presentation extends SummitEvent implements IPresentation
 
 
         // Check permissions of user on talk
-        if ($this->CanAssign()) {
+        if ($this->canAssign()) {
 
             $GroupList = SummitSelectedPresentationList::get()
                 ->filter(array(
@@ -501,6 +555,9 @@ class Presentation extends SummitEvent implements IPresentation
 
     }
 
+    /**
+     * @return ArrayList
+     */
     public static function getLevels()
     {
         $res = singleton('Presentation')->dbObject('Level')->enumValues();
@@ -511,6 +568,9 @@ class Presentation extends SummitEvent implements IPresentation
         return $list;
     }
 
+    /**
+     * @return ArrayList
+     */
     public static function getStatusOptions()
     {
         $statuses = singleton('Presentation')->config()->status_options;
@@ -521,6 +581,9 @@ class Presentation extends SummitEvent implements IPresentation
         return $list;
     }
 
+    /**
+     * @return FieldList
+     */
     public function getCMSFields()
     {
         $summit_id = isset($_REQUEST['SummitID']) ? $_REQUEST['SummitID'] : $this->SummitID;
@@ -588,15 +651,22 @@ class Presentation extends SummitEvent implements IPresentation
         return $f;
     }
 
+    /**
+     * @return DataList
+     */
     private function getAllowedSpeakers()
     {
         return PresentationSpeaker::get();
     }
 
 
+    /**
+     * @param $type
+     * @return mixed
+     */
     public function MaterialType($type)
     {
-    	return $this->Materials()->filter('ClassName', $type)->first();
+        return $this->Materials()->filter('ClassName', $type)->first();
     }
 
     /**
@@ -645,6 +715,9 @@ class Presentation extends SummitEvent implements IPresentation
         if ($completedMove->count()) return true;
     }
 
+    /**
+     * @return string
+     */
     public function SelectionStatus()
     {
 
@@ -675,6 +748,9 @@ class Presentation extends SummitEvent implements IPresentation
         }
     }
 
+    /**
+     * @return ValidationResult
+     */
     protected function validate()
     {
         $this->assignEventType();
@@ -733,11 +809,26 @@ SQL;
     }
 
 
+    /**
+     * @return bool|PersistentCollection
+     * @throws Exception
+     */
     public function getSpeakers()
     {
         return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Speakers');
     }
 
+    public function getSpeakersCSV()
+    {
+        return implode(', ', array_map(function ($s) {
+            return $s->getName();
+        }, $this->Speakers()->toArray()));
+    }
+
+    /**
+     * @return bool|PersistentCollection
+     * @throws Exception
+     */
     public function getTopics()
     {
         return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Topics');

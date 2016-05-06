@@ -14,14 +14,20 @@
  **/
 class PresentationVideo extends PresentationMaterial
 {
-    private static $db = array (
+	/**
+	 * @var array
+     */
+	private static $db = array (
         'YouTubeID' => 'Text',
         'DateUploaded' => 'SS_DateTime',
         'Highlighted' => 'Boolean',
         'Views' => 'Int'
     );
 
-    private static $summary_fields = array (
+	/**
+	 * @var array
+     */
+	private static $summary_fields = array (
     	'Name' => 'Title',
     	'Presentation.Summit.Title' => 'Summit',
     	'PresentationID' => 'Presentation ID',
@@ -30,11 +36,17 @@ class PresentationVideo extends PresentationMaterial
     	'Highlighted.Nice' => 'Highlighted?'
     );
 
-    private static $better_buttons_actions = array (
+	/**
+	 * @var array
+     */
+	private static $better_buttons_actions = array (
     	'setasfeatured',
     	'unsetasfeatured'
     );
 
+	/**
+	 * @return FieldList
+     */
 	public function getCMSFields()
 	{
 		$f = parent::getCMSFields();		
@@ -46,6 +58,9 @@ class PresentationVideo extends PresentationMaterial
 		return $f;
 	}
 
+	/**
+	 * @return mixed
+     */
 	public function getBetterButtonsActions()
 	{
 		$f = parent::getBetterButtonsActions();
@@ -64,7 +79,13 @@ class PresentationVideo extends PresentationMaterial
 
 	}
 
-	public function setasfeatured($data, $form) 
+	/**
+	 * @param $data
+	 * @param $form
+	 * @throws ValidationException
+	 * @throws null
+     */
+	public function setasfeatured($data, $form)
 	{
 		foreach(PresentationVideo::get()->filter('Featured', true) as $v) {
 			$v->Featured = false;
@@ -75,17 +96,24 @@ class PresentationVideo extends PresentationMaterial
 		$this->write();
 	}
 
-	public function unsetasfeatured($data, $form) 
+	/**
+	 * @param $data
+	 * @param $form
+	 * @throws ValidationException
+	 * @throws null
+     */
+	public function unsetasfeatured($data, $form)
 	{
 		$this->Featured = false;
 		$this->write();
 	}
 
-	public function getSpeakersCSV() 
+	/**
+	 * @return mixed
+     */
+	public function getSpeakersCSV()
 	{
-		return implode(', ', array_map(function ($s) {
-			return $s->getName();
-		}, $this->Presentation()->Speakers()->toArray()));
+		return $this->Presentation()->getSpeakersCSV();
 	}
 
 }
