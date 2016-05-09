@@ -141,15 +141,15 @@
         application, you will need
         to install <a href="https://git.openstack.org/cgit/openstack/tempest" target="_blank">Tempest</a> with the
         <a href="https://git.openstack.org/cgit/openstack/refstack-client" target="_blank">RefStack Client</a>.
-        After configuring for your particular product, Tempest can be run with a precompiled inventory of tests available from the Defcore
-        repository. You can use <a href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.07/2015.07.required.txt">this file</a>
-        to configure Tempest test runner to execute only the required tests. You will need to run Tempest inside of the RefStack Client
-        and upload the results to the RefStack Server. Once your results are uploaded, you can send a link to the report
-        page to <a href="mailto:interop@openstack.org">interop@openstack.org</a>&nbsp.
+        You will need to run Tempest inside of the RefStack Client and upload the results to the RefStack server.
+        We prefer that you run the complete set of non-admin API tests, however, Tempest can be run with a precompiled
+        inventory of tests available from the <a href="https://refstack.openstack.org/#/guidelines">RefStack server guidelines
+        page</a>.  Once your results are uploaded, you can send a link to the report page to
+        <a href="mailto:interop@openstack.org">interop@openstack.org</a>&nbsp.
     </p>
     <p>
         For more detailed instructions to run the tests, please consult
-        <a title="Procedure for Running Defcore Interop Tests" href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.07/procedure.rst">this document</a>.
+        <a title="Procedure for Running Defcore Interop Tests" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.01/procedure.rst">this document</a>.
         If you need help getting started, contact Chris Hoge, the Foundation's Interop Engineer, by emailing
         <a href="mailto:interop@openstack.org">interop@openstack.org</a>. The Foundation is looking for feedback from companies
         who are running tests in order to improve the testing process and shape policy in the future.
@@ -164,7 +164,7 @@
     <p>
     	There are two types of "OpenStack Compatible" products that fall under the unified logo program. The first is software
         applications that interact with "OpenStack Powered" systems. The second is hardware solutions and drivers that run
-        OpenStack software. Starting November 1 2015, The OpenStack Foundation will require that new "OpenStack Compatible" logos
+        OpenStack software. Starting November 1 2015, The OpenStack Foundation required that new "OpenStack Compatible" logos
         for storage drivers pass community-defined third-party integration tests. The Cinder team has a
         <a href="https://wiki.openstack.org/wiki/Cinder/tested-3rdParty-drivers">detailed overview of the requirements</a> for
         third-party testing. 
