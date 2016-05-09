@@ -86,7 +86,7 @@
         getReport() {
             $('body').ajax_loader();
             var event_type = $('#event_type').val();
-            var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : 'all';
+            var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : '';
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type, venues: venues}, function(data){
                 self.report_data = data.report;
@@ -128,7 +128,7 @@
 
         self.dispatcher.on(self.dispatcher.EXPORT_ROOM_REPORT,function() {
             var event_type = $('#event_type').val();
-            var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : 'all';
+            var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : '';
 
             window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report?event_type='+event_type+'&venues='+venues, '_blank');
         });
@@ -166,8 +166,6 @@
                     break;
             }
         }
-
-
 
     </script>
 

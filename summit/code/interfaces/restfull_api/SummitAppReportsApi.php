@@ -190,7 +190,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             $query_string = $request->getVars();
             $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
-            $venues       = (isset($query_string['venues'])) ? html_entity_decode($query_string['venues']) : 'all';
+            $venues       = (isset($query_string['venues'])) ? $query_string['venues'] : '';
 
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
@@ -252,6 +252,11 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                 $tracks = $report->getConfigByName('Tracks');;
             }
 
+            $venues = (isset($query_string['venues'])) ? $query_string['venues'] : '';
+            $start_date = (isset($query_string['start_date']) && $query_string['start_date']) ? date('Y-m-d',strtotime($query_string['start_date'])) : '';
+            $end_date = (isset($query_string['end_date']) && $query_string['end_date']) ? date('Y-m-d',strtotime($query_string['end_date'])) : '';
+            $search_term = (isset($query_string['search_term'])) ? $query_string['search_term'] : '';
+
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
             $days = $summit->getDates();
@@ -259,7 +264,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $report_array = array();
 
             foreach($days as $day) {
-                $day_report = $this->assistance_repository->getPresentationMaterialBySummitAndDay($summit_id,$day->Date,$tracks);
+                $day_report = $this->assistance_repository->getPresentationMaterialBySummitAndDay($summit_id,$day->Date,$tracks,$venues,$start_date,$end_date,$search_term);
                 $report_array[$day->Label] = array();
                 foreach ($day_report as $videos) {
 
@@ -357,8 +362,11 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $sort = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'name';
             $sort_dir = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
             $event_type = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
-            $venues = (isset($query_string['venues'])) ? html_entity_decode($query_string['venues']) : 'all';
+            $venues = (isset($query_string['venues'])) ? $query_string['venues'] : '';
             $tracks = (isset($query_string['tracks'])) ? html_entity_decode($query_string['tracks']) : 'all';
+            $start_date = (isset($query_string['start_date']) && $query_string['start_date']) ? date('Y-m-d',strtotime($query_string['start_date'])) : '';
+            $end_date = (isset($query_string['end_date']) && $query_string['end_date']) ? date('Y-m-d',strtotime($query_string['end_date'])) : '';
+            $search_term = (isset($query_string['search_term'])) ? $query_string['search_term'] : '';
             $report = $request->param('REPORT');
             $summit_id = intval($request->param('SUMMIT_ID'));
             $summit = $this->summit_repository->getById($summit_id);
@@ -457,7 +465,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                         $active_sheet->setTitle(date('n-d',strtotime($day->Date)));
                         $active_sheet->fromArray(array('Date','Time','Tags','Event','Description','Room','Venue','Display','YoutubeID'), NULL, 'A1');
 
-                        $day_report = $this->assistance_repository->getPresentationMaterialBySummitAndDay($summit_id,$day->Date,$tracks);
+                        $day_report = $this->assistance_repository->getPresentationMaterialBySummitAndDay($summit_id,$day->Date,$tracks,$venues,$start_date,$end_date,$search_term);
 
                         foreach ($day_report as $key2 => $val) {
                             $row = $key2 + 2;

@@ -6,12 +6,39 @@
 <reports-admin-video-report>
     <div class="row" style="margin-bottom:30px;">
         <div class="col-md-12">
+            <label for="tracks">Categories</label>
             <select id="tracks" style="width:100%" multiple>
                 <option value="{ track.id }" each={ track in tracks } selected={ this.parent.isTrackSelected(track.id) } >{ track.title }</option>
             </select>
         </div>
     </div>
-    <div class="panel panel-default" each="{ key, day in report_data }">
+    <div class="row" style="margin-bottom:30px;">
+        <div class="col-md-4 venues_col">
+            <label>Venues</label><br>
+            <select id="venues" style="width:100%" multiple data-placeholder="Choose one or more rooms...">
+                <option value="0">TBA</option>
+                <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label>Event Date</label><br>
+            From <input class="form-control" id="start_date" />
+            To <input class="form-control" id="end_date" />
+        </div>
+        <div class="col-md-4">
+            <label>Search</label><br>
+            <div class="input-group" style="width: 100%;">
+                <input data-rule-required="true" data-rule-minlength="3" type="text" id="search_term" class="form-control input-global-search" placeholder="Search Title, Tag or Description">
+                <span class="input-group-btn" style="width: 5%;">
+                <button class="btn btn-default btn-global-search" onclick={ searchReport }><i class="fa fa-search"></i></button>
+                <button class="btn btn-default btn-global-search-clear" onclick={ clearSearch }>
+                    <i class="fa fa-times"></i>
+                </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" each="{ key, day in report_data }" if={ day.length > 0 }>
         <div class="panel-heading">{ key }</div>
 
         <table class="table">
@@ -50,12 +77,17 @@
         this.report_data     = [];
         this.tracks          = opts.tracks;
         this.report_tracks   = [];
+        this.locations       = opts.locations;
         var self             = this;
 
 
         this.on('mount', function() {
             self.getReport();
             $('#tracks').chosen();
+            $('#venues').chosen();
+
+            $('#start_date').datepicker();
+            $('#end_date').datepicker();
 
             $('.reports-wrapper').on('change','input',function(){
                 $(this).parents('tr').addClass('changed');
@@ -66,13 +98,38 @@
                 self.getReport();
             });
 
+            $('#venues').change(function(){
+                self.getReport();
+            });
+
+            $('#start_date').change(function(){
+                self.getReport();
+            });
+
+            $('#end_date').change(function(){
+                self.getReport();
+            });
+
+            $("#search_term").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    self.searchReport();
+                }
+            });
+
+
         });
 
         getReport() {
             $('body').ajax_loader();
-            var selected_tracks = ($('#tracks').val()) ? $('#tracks').val().join(',') : '';
+            var request = {
+                tracks: ($('#tracks').val()) ? $('#tracks').val().join(',') : '',
+                venues: ($('#venues').val()) ? $('#venues').val().join(',') : '',
+                start_date: $('#start_date').val(),
+                end_date: $('#end_date').val(),
+                search_term: $('#search_term').val()
+            };
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/video_report', {tracks: selected_tracks}, function(data){
+            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/video_report', request, function(data){
                 self.report_data = data.report;
                 self.report_tracks = data.tracks;
                 self.update();
@@ -118,9 +175,57 @@
         });
 
         self.dispatcher.on(self.dispatcher.EXPORT_VIDEO_REPORT,function() {
-            var tracks = ($('#tracks').val()) ? $('#tracks').val().join(',') : 'all';
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/video_report?tracks='+tracks, '_blank');
+            var tracks = ($('#tracks').val()) ? $('#tracks').val().join(',') : '';
+            var venues = ($('#venues').val()) ? $('#venues').val().join(',') : '';
+            var start_date = $('#start_date').val();
+            var end_date = $('#end_date').val();
+            var search_term = $('#search_term').val();
+
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/video_report?tracks='+tracks+'&venues='+venues+'&start_date='+start_date+'&end_date='+end_date+'&search_term='+search_term, '_blank');
         });
+
+        getLocationOptionCSSClass(class_name) {
+            switch(class_name) {
+                case 'SummitVenue':
+                    return 'location-venue';
+                    break;
+                case 'SummitHotel':
+                    return 'location-hotel';
+                    break;
+                case 'SummitExternalLocation':
+                    return 'location-external';
+                    break;
+                case 'SummitVenueRoom':
+                    return 'location-venue-room';
+                    break;
+            }
+        }
+
+        getLocationOptionTitle(class_name) {
+            switch(class_name) {
+                case 'SummitVenue':
+                    return 'Venue';
+                    break;
+                case 'SummitHotel':
+                    return 'Hotel';
+                    break;
+                case 'SummitExternalLocation':
+                    return 'External Location';
+                    break;
+                case 'SummitVenueRoom':
+                    return 'Room';
+                    break;
+            }
+        }
+
+        searchReport() {
+            self.getReport();
+        }
+
+        clearSearch() {
+            $('#search_term').val('');
+            self.getReport();
+        }
 
     </script>
 

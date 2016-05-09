@@ -523,6 +523,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('summit/css/summit-admin-reports.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');

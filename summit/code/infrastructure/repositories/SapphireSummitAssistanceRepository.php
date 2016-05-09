@@ -159,7 +159,7 @@ SQL;
         return $result;
     }
 
-    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='all')
+    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='')
     {
 
         $query = <<<SQL
@@ -193,7 +193,7 @@ SQL;
 SQL;
         }
 
-        if ($venues != 'all') {
+        if ($venues) {
             $query .= <<<SQL
  AND E.LocationID IN ( {$venues} )
 SQL;
@@ -224,7 +224,7 @@ SQL;
      * @param string $tracks
      * @return array
      */
-    public function getPresentationMaterialBySummitAndDay($summit_id, $date, $tracks = 'all')
+    public function getPresentationMaterialBySummitAndDay($summit_id, $date, $tracks = 'all', $venues = 'all', $start_date, $end_date, $search_term)
     {
 
         $query = <<<SQL
@@ -234,7 +234,7 @@ SELECT E.ID AS id ,
 E.StartDate AS start_date,
 E.EndDate AS end_date,
 GROUP_CONCAT(DISTINCT(CONCAT(S.FirstName,' ',S.LastName))) AS speakers,
-GROUP_CONCAT(T.Tag) AS tags,
+GROUP_CONCAT(DISTINCT(T.Tag)) AS tags,
 E.Title AS event,
 E.ShortDescription AS description,
 L.Name AS room,
@@ -252,6 +252,8 @@ LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
 LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
 LEFT JOIN PresentationMaterial AS PM ON P.ID = PM.PresentationID
 LEFT JOIN PresentationVideo AS PV ON PM.ID = PV.ID
+LEFT JOIN SummitEvent_Tags AS ETag ON E.ID = ETag.SummitEventID
+LEFT JOIN Tag ON Tag.ID = ETag.TagID
 WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
 AND E.ClassName = 'Presentation' AND PM.ClassName = 'PresentationVideo'
 SQL;
@@ -259,6 +261,30 @@ SQL;
         if ($tracks) {
             $query .= <<<SQL
  AND P.CategoryID IN ( {$tracks} )
+SQL;
+        }
+
+        if ($venues) {
+            $query .= <<<SQL
+ AND E.LocationID IN ( {$venues} )
+SQL;
+        }
+
+        if ($start_date) {
+            $query .= <<<SQL
+ AND DATE(E.StartDate) >= '$start_date'
+SQL;
+        }
+
+        if ($end_date) {
+            $query .= <<<SQL
+ AND DATE(E.EndDate) <= '$end_date'
+SQL;
+        }
+
+        if ($search_term) {
+            $query .= <<<SQL
+ AND (E.Title LIKE '%$search_term%' OR E.ShortDescription LIKE '%$search_term%' OR Tag.Tag LIKE '%$search_term%' )
 SQL;
         }
 
