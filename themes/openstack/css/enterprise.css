@@ -669,8 +669,10 @@ li.hosted-cloud {
 img.event-logo {
   margin: 50px 0 20px; }
 
-img.event-logo.paris {
-  margin-top: 20px; }
+img.event-logo.lrg {
+  max-width: 170px;
+  margin: 60px 0 39px;
+}
 
 .events span {
   display: block; }
@@ -982,6 +984,7 @@ a.featured-event-link {
   a.featured-event-link:hover {
     text-decoration: underline;
     color: white; }
+
 
 /*End Legacy*/
 /*Enterprise Home Page*/

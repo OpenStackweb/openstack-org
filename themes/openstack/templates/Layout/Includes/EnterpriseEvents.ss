@@ -28,7 +28,7 @@
                         </div>
                         <div class="row events">
                             <div class="col-lg-6">
-                               <a href="http://www.gartner.com/events/na/catalyst" class="featured-event-link">
+                               <a href="http://www.gartner.com/events/na/catalyst" class="featured-event-link lrg">
                                     <img class="event-logo paris" src="/themes/openstack/images/enterprise/gartner-catalyst-logo.png" alt="Gartner Catalyst Conference">
                                     <span>Gartner Catalyst Conference</span>
                                     <span>August 15-18, 2016 in San Diego</span>
