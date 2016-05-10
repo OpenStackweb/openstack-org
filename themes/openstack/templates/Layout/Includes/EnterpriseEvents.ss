@@ -29,7 +29,7 @@
                         <div class="row events">
                             <div class="col-lg-6">
                                <a href="http://www.gartner.com/events/na/catalyst" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/gartner-catalyst-logo.png" alt="Gartner Catalyst Conference">
+                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise/gartner-catalyst-logo.png" alt="Gartner Catalyst Conference">
                                     <span>Gartner Catalyst Conference</span>
                                     <span>August 15-18, 2016 in San Diego</span>
                                 </a>
@@ -37,7 +37,7 @@
                             <div class="vert-line"></div>
                             <div class="col-lg-6">
                                 <a href="http://openstack.org//barcelona-2016/" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Barcelona">
+                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Barcelona">
                                     <span>OpenStack Summit</span>
                                     <span>October 24-28, 2016 in Barcelona</span>
                                 </a>
@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <ul>
-                                        <li><a href="http://containerevent.com/" target="_blank">Container World</a>, February 16-18, 2016 in Santa Clara, California</li>
                                         <li><a href="http://www.bigtelecomevent.com/events/big-telecom-event/event-summary-31b6b86b2fa3432ab89ab7db084ab675.aspx" target="_blank">Big Telecom</a>, May 24-25, 2016 in Austin, TX</li>
+                                        <li><a href="http://2016.dockercon.com/" target="_blank">DockerCon</a>, June 19-21, 2016 in Seattle, WA</li>
                                         <li><a href="http://www.gartner.com/events/na/catalyst" target="_blank">Gartner Catalyst</a>, August 15-18, 2016 in San Diego, California</li>
                                     </ul>
                                 </div>
