@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-git submodule update
-git submodule foreach git pull --rebase origin master
 echo "installing npm dependencies ...";
 if [ -f "package.json" ]; then
     sudo npm install;

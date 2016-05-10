@@ -12,14 +12,13 @@
                                 <h2>Presentations</h2>
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <% if $Top.Summit.isCallForSpeakersOpen %>
-                                    <% if not $CurrentMember.SpeakerProfile.hasReachPresentationLimitBy($Top.Summit.ID)  %>
+                                <% if $Top.isCallForSpeakerOpen %>
+                                    <% if $Top.isPresentationSubmissionAllowed  %>
                                         <a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New Presentation</a>
-                                        <p class="max-presentation-notice">Speakers are limited to a total of $MaxAllowedPresentations presentations submissions, whether submitted by them or on their behalf.</p>
                                     <% else %>
                                         <div class="alert alert-danger alert-dismissible" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong>Warning!</strong> You reached presentations submissions limit ($MaxAllowedPresentations).
+                                            <strong>Warning!</strong> You reached presentations submissions limit.
                                         </div>
                                     <% end_if %>
                                 <% else %>
@@ -39,11 +38,11 @@
                                 <tr>
                                     <td class="item-name">
                                         <i class="fa fa-file-text-o"></i>
-                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                        <% if $Top.canEditPresentation($ID) %>
                                             <a href="$EditLink">
                                         <% end_if %>
                                         <% if $Title %>$Title<% else %>$ID<% end_if %>
-                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                        <% if $Top.canEditPresentation($ID) %>
                                             </a>
                                         <% end_if %>
                                     </td>
@@ -53,7 +52,7 @@
                                         <td class="status"></td>
                                     <% end_if %>
                                     <td class="action">
-                                        <% if $CanDelete && $Top.Summit.isPresentationEditionAllowed %>
+                                        <% if $CanDelete && $Top.canEditPresentation($ID) %>
                                             <a data-confirm="Whoa, there..."
                                                data-confirm-text="Are you sure you want to delete this presentation?"
                                                data-confirm-ok="Yup. Get rid of it."
@@ -79,17 +78,17 @@
                                 <tr>
                                     <td class="item-name">
                                         <i class="fa fa-file-text-o"></i>
-                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                        <% if $Top.canEditPresentation($ID) %>
                                             <a href="$EditLink">
                                         <% end_if %>
                                             <% if $Title %>$Title<% else %>$ID<% end_if %>
-                                        <% if $Top.Summit.isPresentationEditionAllowed %>
+                                        <% if $Top.canEditPresentation($ID) %>
                                             </a>
                                         <% end_if %>
                                     </td>
                                     <td class="status"><i class="fa fa-tag"></i> $Status</td>
                                     <td class="action">
-                                        <% if $CanDelete && $Top.Summit.isPresentationEditionAllowed %><a href="$DeleteLink">Delete</a><% end_if %>
+                                        <% if $CanDelete && $Top.canEditPresentation($ID) %><a href="$DeleteLink">Delete</a><% end_if %>
                                     </td>
                                 </tr>
                                 <% end_loop %>

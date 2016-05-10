@@ -5,8 +5,28 @@
  */
 final class PresentationForm extends BootstrapForm
 {
+    /**
+     * @var IPresentationManager
+     */
+    private $presentation_manager;
 
-    public function __construct($controller, $name, $actions, ISummit $summit) {
+    /**
+     * @var ISummit
+     */
+    private $summit;
+
+    /**
+     * PresentationForm constructor.
+     * @param Controller $controller
+     * @param string $name
+     * @param FieldList $actions
+     * @param ISummit $summit
+     * @param IPresentationManager $presentation_manager
+     */
+     public function __construct($controller, $name, $actions, ISummit $summit, IPresentationManager $presentation_manager) {
+
+        $this->presentation_manager = $presentation_manager;
+        $this->summit               = $summit;
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
@@ -64,8 +84,16 @@ JS;
     }
 
     protected function getPresentationFields() {
-        $categorySource = Summit::ActiveSummit()->Categories()->map('ID','FormattedTitleAndDescription')->toArray();
-        $categorySource['other'] = '<h4 class="category-label">Other topic...</h4>';
+        $categorySource = array();
+        $categories = $this->presentation_manager->getAvailableCategoriesFor(Member::currentUser(), $this->summit );
+
+        foreach ($categories as $category)
+        {
+            $categorySource[$category->ID] = $category->FormattedTitleAndDescription;
+        }
+
+        if($this->summit->isCallForSpeakersOpen())
+            $categorySource['other'] = '<h4 class="category-label">Other topic...</h4>';
 
         $fields = FieldList::create()
             ->text('Title', 'Proposed Presentation Title')

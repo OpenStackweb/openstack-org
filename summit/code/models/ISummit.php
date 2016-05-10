@@ -278,4 +278,34 @@ interface ISummit extends IEntity
      * @return null|string
      */
     public function convertDateFromTimeZone2UTC($value, $format);
+
+
+    /**
+     * @return PrivatePresentationCategoryGroup[]
+     */
+    public function getPrivateCategoryGroups();
+
+    /**
+     * @return PresentationCategory[]
+     */
+    public function getPublicCategories();
+
+    /**
+     * @param PresentationCategory $category
+     * @return bool
+     */
+    public function isPublicCategory(PresentationCategory $category);
+
+    /**
+     * @param PresentationCategory $category
+     * @return bool
+     */
+    public function isPrivateCategory(PresentationCategory $category);
+
+    /**
+     * @param PresentationCategory $category
+     * @return null|PrivatePresentationCategoryGroup
+     */
+    public function getPrivateGroupFor(PresentationCategory $category);
+
 }

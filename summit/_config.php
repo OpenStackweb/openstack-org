@@ -303,7 +303,6 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
     }
 });
 
-define('MAX_SUMMIT_ALLOWED_PER_USER', 3);
 define('SUMMIT_ATTENDEE_CREATE_MEMBERSHIP_INVITATION_EMAIL_TEMPLATE', 'summit-attendee-create-membership-invitation');
 define('SUMMIT_ATTENDEE_CREATED_EMAIL_TEMPLATE', 'summit-attendee-created');
 

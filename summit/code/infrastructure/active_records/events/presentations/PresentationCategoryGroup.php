@@ -41,6 +41,7 @@ class PresentationCategoryGroup extends DataObject
     (
         'Name'             => 'Name',
         'Color'            => 'Color',
+        'ClassName'        => 'Type',
         'CategoriesLabel'  => 'Categories',
     );
 
@@ -57,6 +58,14 @@ class PresentationCategoryGroup extends DataObject
             array_push($label, $c->Title);
         }
         return count($label) == 0 ? 'NONE': implode(',', $label);
+    }
+
+    /**
+     * @param PresentationCategory $category
+     * @return bool
+     */
+    public function hasCategory(PresentationCategory $category){
+        return $this->Categories()->filter('PresentationCategoryID', $category->ID)->count() > 0;
     }
 
     /**

@@ -12,24 +12,27 @@ class Presentation extends SummitEvent implements IPresentation
      */
     const PHASE_NEW = 0;
 
-
     /**
      * Defines the phase where a presenation has been given a summary,
      * but no speakers have been added
      */
     const PHASE_SUMMARY = 1;
 
+    /**
+     * defines a phase where a presentation has a tags
+     */
+    const PHASE_TAGS = 2;
 
     /**
-     * Deinfes a phase where a presentation has a summary and speakers
+     * defines a phase where a presentation has a summary and speakers
      */
-    const PHASE_SPEAKERS = 2;
+    const PHASE_SPEAKERS = 3;
 
 
     /**
      * Defines a phase where a presentation has been submitted successfully
      */
-    const PHASE_COMPLETE = 3;
+    const PHASE_COMPLETE = 4;
 
 
     /**
@@ -43,16 +46,16 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $db = array
     (
-        'Level' => "Enum('Beginner,Intermediate,Advanced')",
-        'Status' => 'Varchar',
-        'OtherTopic' => 'Varchar',
-        'Progress' => 'Int',
-        'Views' => 'Int',
-        'BeenEmailed' => 'Boolean',
-        'ProblemAddressed' => 'HTMLText',
+        'Level'                   => "Enum('Beginner,Intermediate,Advanced')",
+        'Status'                  => 'Varchar',
+        'OtherTopic'              => 'Varchar',
+        'Progress'                => 'Int',
+        'Views'                   => 'Int',
+        'BeenEmailed'             => 'Boolean',
+        'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
-        'SelectionMotive' => 'HTMLText',
-        'Legacy' => 'Boolean'
+        'SelectionMotive'         => 'HTMLText',
+        'Legacy'                  => 'Boolean'
     );
 
     /**
@@ -69,11 +72,11 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $has_many = array
     (
-        'Votes' => 'PresentationVote',
+        'Votes'          => 'PresentationVote',
         // this is related to track chairs app
-        'Comments' => 'SummitPresentationComment',
+        'Comments'       => 'SummitPresentationComment',
         'ChangeRequests' => 'SummitCategoryChange',
-        'Materials' => 'PresentationMaterial',
+        'Materials'      => 'PresentationMaterial',
     );
 
     /**
@@ -82,7 +85,7 @@ class Presentation extends SummitEvent implements IPresentation
     private static $many_many = array
     (
         'Speakers' => 'PresentationSpeaker',
-        'Topics' => 'PresentationTopic',
+        'Topics'   => 'PresentationTopic',
     );
 
     /**
@@ -100,8 +103,8 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $has_one = array
     (
-        'Creator' => 'Member',
-        'Category' => 'PresentationCategory',
+        'Creator'   => 'Member',
+        'Category'  => 'PresentationCategory',
         'Moderator' => 'PresentationSpeaker',
     );
 
@@ -110,11 +113,11 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $summary_fields = array
     (
-        'Created' => 'Created',
-        'Title' => 'Event Title',
+        'Created'          => 'Created',
+        'Title'            => 'Event Title',
         'SummitTypesLabel' => 'Summit Types',
-        'Level' => 'Level',
-        'SelectionStatus' => 'Status',
+        'Level'            => 'Level',
+        'SelectionStatus'  => 'Status',
     );
 
     /**
@@ -268,7 +271,10 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function canDelete($member = null)
     {
-        return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE") || $this->CreatorID == Member::currentUserID();
+        return Permission::check("ADMIN")
+        || Permission::check("ADMIN_SUMMIT_APP")
+        || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE")
+        || $this->CreatorID == Member::currentUserID();
     }
 
 
@@ -640,7 +646,7 @@ class Presentation extends SummitEvent implements IPresentation
                 (
                     'PresentationVideo' => 'Video',
                     'PresentationSlide' => 'Slide',
-                    'PresentationLink' => 'Link',
+                    'PresentationLink'  => 'Link',
                 )
             );
             $config->addComponent($multi_class_selector);

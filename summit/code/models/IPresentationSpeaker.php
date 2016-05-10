@@ -90,13 +90,7 @@ interface IPresentationSpeaker extends IEntity
      */
     public function getPresentationsCount($summit_id = null);
 
-    /**
-     * @param null|int $summit_id
-     * @return mixed
-     */
-    public function hasReachPresentationLimitBy($summit_id = null);
-
-    /**
+   /**
      * @return bool
      */
     public function isPendingOfRegistration();
@@ -254,4 +248,30 @@ interface IPresentationSpeaker extends IEntity
      * @throws ValidationException
      */
     public function registerSummitPromoCodeByValue($promo_code_value, ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @return DataList
+     */
+    public function getPublicCategoryPresentationsBySummit(ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @return DataList
+     */
+    public function getPublicCategoryOwnedPresentationsBySummit(ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @param PrivatePresentationCategoryGroup $private_group
+     * @return DataList
+     */
+    public function getPrivateCategoryPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
+
+    /**
+     * @param ISummit $summit
+     * @param PrivatePresentationCategoryGroup $private_group
+     * @return DataList
+     */
+    public function getPrivateCategoryOwnedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
 }

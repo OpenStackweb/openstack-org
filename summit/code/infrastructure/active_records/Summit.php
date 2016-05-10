@@ -17,29 +17,37 @@ final class Summit extends DataObject implements ISummit
 
     private static $db = array
     (
-        'Title' => 'Varchar',
-        'SummitBeginDate' => 'SS_Datetime',
-        'SummitEndDate' => 'SS_Datetime',
-        'SubmissionBeginDate' => 'SS_Datetime',
-        'SubmissionEndDate' => 'SS_Datetime',
-        'VotingBeginDate' => 'SS_Datetime',
-        'VotingEndDate' => 'SS_Datetime',
-        'SelectionBeginDate' => 'SS_Datetime',
-        'SelectionEndDate' => 'SS_Datetime',
-        'RegistrationBeginDate' => 'SS_Datetime',
-        'RegistrationEndDate' => 'SS_Datetime',
-        'Active' => 'Boolean',
-        'DateLabel' => 'Varchar',
-        'Link' => 'Varchar',
-        'RegistrationLink' => 'Text',
-        'ComingSoonBtnText' => 'Text',
+        'Title'                       => 'Varchar',
+        'SummitBeginDate'             => 'SS_Datetime',
+        'SummitEndDate'               => 'SS_Datetime',
+        'SubmissionBeginDate'         => 'SS_Datetime',
+        'SubmissionEndDate'           => 'SS_Datetime',
+        'VotingBeginDate'             => 'SS_Datetime',
+        'VotingEndDate'               => 'SS_Datetime',
+        'SelectionBeginDate'          => 'SS_Datetime',
+        'SelectionEndDate'            => 'SS_Datetime',
+        'RegistrationBeginDate'       => 'SS_Datetime',
+        'RegistrationEndDate'         => 'SS_Datetime',
+        'Active'                      => 'Boolean',
+        'DateLabel'                   => 'Varchar',
+        'Link'                        => 'Varchar',
+        'RegistrationLink'            => 'Text',
+        'ComingSoonBtnText'           => 'Text',
         // https://www.eventbrite.com
-        'ExternalEventId' => 'Text',
-        'TimeZone' => 'Text',
-        'StartShowingVenuesDate' => 'SS_Datetime',
+        'ExternalEventId'             => 'Text',
+        'TimeZone'                    => 'Text',
+        'StartShowingVenuesDate'      => 'SS_Datetime',
+        'MaxSubmissionAllowedPerUser' => 'Int',
     );
 
-    private static $better_buttons_actions = array(
+
+    private static $defaults = array
+    (
+        'MaxSubmissionAllowedPerUser' => 3,
+    );
+
+    private static $better_buttons_actions = array
+    (
         'forcephase',
         'setasactive',
         'resetvotes',
@@ -53,26 +61,26 @@ final class Summit extends DataObject implements ISummit
 
     private static $has_many = array
     (
-        'Presentations' => 'Presentation',
-        'Categories' => 'PresentationCategory',
-        'CategoryGroups' => 'PresentationCategoryGroup',
-        'Locations' => 'SummitAbstractLocation',
-        'Types' => 'SummitType',
-        'EventTypes' => 'SummitEventType',
-        'Events' => 'SummitEvent',
-        'Attendees' => 'SummitAttendee',
-        'SummitTicketTypes' => 'SummitTicketType',
+        'Presentations'                => 'Presentation',
+        'Categories'                   => 'PresentationCategory',
+        'CategoryGroups'               => 'PresentationCategoryGroup',
+        'Locations'                    => 'SummitAbstractLocation',
+        'Types'                        => 'SummitType',
+        'EventTypes'                   => 'SummitEventType',
+        'Events'                       => 'SummitEvent',
+        'Attendees'                    => 'SummitAttendee',
+        'SummitTicketTypes'            => 'SummitTicketType',
         'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
-        'Notifications' => 'SummitPushNotification',
-        'EntityEvents' => 'SummitEntityEvent',
-        'TrackChairs' => 'SummitTrackChair',
-        'RandomVotingLists' => 'PresentationRandomVotingList',
-        'SummitAssistances' => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
+        'Notifications'                => 'SummitPushNotification',
+        'EntityEvents'                 => 'SummitEntityEvent',
+        'TrackChairs'                  => 'SummitTrackChair',
+        'RandomVotingLists'            => 'PresentationRandomVotingList',
+        'SummitAssistances'            => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
     );
 
     private static $summary_fields = array
     (
-        'Title' => 'Title',
+        'Title'  => 'Title',
         'Status' => 'Status',
     );
 
@@ -853,8 +861,7 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main', $registration_link = new TextField('RegistrationLink', 'Registration Link'));
         $registration_link->setDescription('Link to the site where tickets can be purchased.');
 
-        $f->addFieldsToTab('Root.Main',
-            $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
+        $f->addFieldsToTab('Root.Main', $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
 
         $f->addFieldToTab('Root.Main', $date = new DatetimeField('SummitBeginDate', 'Summit Begin Date'));
@@ -873,6 +880,8 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main', $date = new DatetimeField('SubmissionEndDate', 'Submission End Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldsToTab('Root.Main', new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
+
         $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingBeginDate', 'Voting Begin Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
@@ -902,6 +911,7 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main', new TextField('ExternalEventId', 'Eventbrite Event Id'));
 
 
+
         if ($this->ID > 0) {
             $summit_id = $this->ID;
             // tracks
@@ -911,6 +921,17 @@ final class Summit extends DataObject implements ISummit
 
             // track groups
             $config = GridFieldConfig_RecordEditor::create(25);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+            $multi_class_selector->setClasses
+            (
+                array
+                (
+                    'PresentationCategoryGroup'        => 'Category Group',
+                    'PrivatePresentationCategoryGroup' => 'Private Category Group',
+                )
+            );
+            $config->addComponent($multi_class_selector);
             $categories = new GridField('CategoryGroups', 'Category Groups', $this->CategoryGroups(), $config);
             $f->addFieldToTab('Root.Category Groups', $categories);
 
@@ -1504,14 +1525,14 @@ SQL;
     public function isCallForSpeakersOpen()
     {
         $start_date = $this->getField('SubmissionBeginDate');
-        $end_date = $this->getField('SubmissionEndDate');
+        $end_date   = $this->getField('SubmissionEndDate');
 
         if (empty($start_date) || empty($end_date)) {
             return false;
         }
         $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
-        $end_date = new DateTime($end_date, new DateTimeZone('UTC'));
-        $now = new \DateTime('now', new DateTimeZone('UTC'));
+        $end_date   = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now        = new \DateTime('now', new DateTimeZone('UTC'));
 
         return ($now >= $start_date && $now <= $end_date);
     }
@@ -1707,5 +1728,80 @@ SQL;
         $location_id = $location->ID;
 
         return intval($this->Events()->where(" LocationID = {$location_id} AND Published = 1 AND StartDate >= '{$start}' AND EndDate <= '{$end}'")->count());
+    }
+
+    /**
+     * @return PrivatePresentationCategoryGroup[]
+     */
+    public function getPrivateCategoryGroups()
+    {
+        return $this->CategoryGroups()->filter('ClassName', 'PrivatePresentationCategoryGroup');
+    }
+
+    /**
+     * @return PresentationCategory[]
+     */
+    public function getPublicCategories()
+    {
+        $categories     = array();
+        $private_groups = $this->getPrivateCategoryGroups();
+
+        foreach($this->Categories() as $cat)
+        {
+            $is_private = false;
+            foreach($private_groups as $private_group)
+            {
+                if($private_group->hasCategory($cat)){
+                    $is_private = true;
+                    break;
+                }
+            }
+            if(!$is_private)
+                array_push($categories, $cat);
+        }
+        return $categories;
+    }
+
+    /**
+     * @param PresentationCategory $category
+     * @return bool
+     */
+    public function isPublicCategory(PresentationCategory $category)
+    {
+        return !$this->isPrivateCategory($category);
+    }
+
+    /**
+     * @param PresentationCategory $category
+     * @return bool
+     */
+    public function isPrivateCategory(PresentationCategory $category)
+    {
+        $res = false;
+        $private_groups = $this->getPrivateCategoryGroups();
+        foreach($private_groups as $private_group)
+        {
+            if($private_group->hasCategory($category)){
+                $res = true;
+                break;
+            }
+        }
+        return $res;
+    }
+
+    /**
+     * @param PresentationCategory $category
+     * @return null|PrivatePresentationCategoryGroup
+     */
+    public function getPrivateGroupFor(PresentationCategory $category)
+    {
+        $private_groups = $this->getPrivateCategoryGroups();
+        foreach($private_groups as $private_group)
+        {
+            if($private_group->hasCategory($category)){
+                return $private_group;
+            }
+        }
+        return null;
     }
 }
