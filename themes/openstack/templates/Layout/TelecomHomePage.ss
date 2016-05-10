@@ -214,22 +214,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>Learn more about NFV at the OpenStack Summit Austin</h3>
+                    <h3>From the Summit to your browser: Everything you need to know about OpenStack and NFV</h3>
                     <p>
-                        Join us in Austin for tracks devoted exclusively to OpenStack networking. Hear straight from developers and users who are actively shaping NFV in the open source community on April 27 and 28.
-                    </p>
-                    <p>
-                        <a href="//www.openstack.org/summit/austin-2016/categories/" target="_blank">Learn more about the Telecom and NFV content planned for the Austin Summit.</a>
+                        Developers and global telecoms who are actively shaping NFV in the open source community gathered at the Austin Summit to discuss use cases, project requirements and next steps.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="nfv-summit-right">
                         <img class="nfv-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
-                        <div class="nfv-summit-dates">
+<!--                         <div class="nfv-summit-dates">
                             April 25-29 in Austin, TX
-                        </div>
+                        </div> -->
                         <div class="nfv-summit-register-btn">
-                            <a href="https://openstacksummit2016austin.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
+                            <a href="https://www.openstack.org/videos/search?search=NFV" class="nfv-summit-btn" target="_blank">Stream the sessions now <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

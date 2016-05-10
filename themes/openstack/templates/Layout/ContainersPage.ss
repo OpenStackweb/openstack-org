@@ -225,22 +225,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>Learn more about Containers at the OpenStack Summit Austin</h3>
+                    <h3>From the Summit to your browser: Everything you need to know about containers and OpenStack</h3>
                     <p>
-                        Join us in Austin for content and workshops devoted to working with OpenStack and container management. Hear from application developers and users who are building and deploying applications using Kubernetes and Docker on OpenStack clouds on April 27 and 28.
-                    </p>
-                    <p>
-                        <a href="//www.openstack.org/summit/austin-2016/categories/" target="_blank">Learn more about the container and application developer content planned for the Austin Summit</a>
+                        At the Austin Summit, there were dozens of sessions covering the latest updates around containers, including use cases from Ancestry.com, Time Warner Cable and LivePerson, as well as OpenStack project updates from Magnum, Kuryr and Murano.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="containers-summit-right">
                         <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
-                        <div class="containers-summit-dates">
-                            April 25-29 in Austin, TX
-                        </div>
+<!--                         <div class="containers-summit-dates">
+                            October 25-28 in Barcelona
+                        </div> -->
                         <div class="containers-summit-register-btn">
-                            <a href="https://openstacksummit2016austin.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
+                            <a href="https://www.openstack.org/videos" class="nfv-summit-btn" target="_blank">Stream the sessions now <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

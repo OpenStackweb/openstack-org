@@ -28,10 +28,10 @@
                         </div>
                         <div class="row events">
                             <div class="col-lg-6">
-                               <a href="http://openstack.org/summit/austin-2016/" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Austin">
-                                    <span>OpenStack Summit</span>
-                                    <span>April 25-29, 2016 in Austin</span>
+                               <a href="http://www.gartner.com/events/na/catalyst" class="featured-event-link">
+                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/gartner-catalyst-logo.png" alt="Gartner Catalyst Conference">
+                                    <span>Gartner Catalyst Conference</span>
+                                    <span>August 15-18, 2016 in San Diego</span>
                                 </a>
                             </div>
                             <div class="vert-line"></div>
