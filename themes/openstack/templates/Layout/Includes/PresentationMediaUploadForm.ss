@@ -9,7 +9,6 @@
     <fieldset>
 
         $Fields.dataFieldByName('Slide').FieldHolder
-        <div class="browseButton">Select a file using the button above.</div>
         $Fields.dataFieldByName('SecurityID')
 
     </fieldset>

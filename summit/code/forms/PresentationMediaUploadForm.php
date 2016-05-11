@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,61 +15,78 @@
 class PresentationMediaUploadForm extends Form
 {
 
-	protected $presentation;
+    /**
+     * @var SummitEvent
+     */
+    protected $presentation;
 
-	public function __construct($controller, $name, SummitEvent $presentation)
-	{
-		$this->presentation = $presentation;
+    /**
+     * PresentationMediaUploadForm constructor.
+     * @param Controller $controller
+     * @param string $name
+     * @param SummitEvent $presentation
+     */
+    public function __construct($controller, $name, SummitEvent $presentation)
+    {
+        $this->presentation = $presentation;
 
-		$fields = FieldList::create(
-			FileAttachmentField::create('Slide','File')
-				->setFolderName('/presentation-media/')
-				->setPermissions([
-        			'upload' => true,
-        			'detach' => false,
-        			'delete' => false
-        		])
-		);
+        $fields = FieldList::create(
+            FileAttachmentField::create('Slide', 'File')
+                ->setFolderName('/presentation-media/')
+                ->setPermissions([
+                    'upload' => true,
+                    'detach' => false,
+                    'delete' => false
+                ])
+        );
 
-		$actions = FieldList::create(
-			FormAction::create('doUpload', 'Upload File')
-		);
+        $actions = FieldList::create(
+            FormAction::create('doUpload', 'Upload File')
+        );
 
-		$validator = RequiredFields::create(['Slide']);
+        $validator = RequiredFields::create(['Slide']);
 
-		parent::__construct($controller, $name, $fields, $actions, $validator);
+        parent::__construct($controller, $name, $fields, $actions, $validator);
 
         $material = $presentation->MaterialType('PresentationSlide');
 
-        if($material) {        	
-        	$this->loadDataFrom($material);	
+        if ($material) {
+            $this->loadDataFrom($material);
         }
-	}
+    }
 
-	public function forTemplate()
-	{
-		return $this->renderWith([
-			$this->class,
-			'Form'
-		]);
-	}
+    /**
+     * @return HTMLText
+     */
+    public function forTemplate()
+    {
+        return $this->renderWith([
+            $this->class,
+            'Form'
+        ]);
+    }
 
-	public function doUpload($data, $form)
-	{		
-		$material = PresentationSlide::create();
-		$material->SlideID = $data['Slide'];
-		$material->write();
-		$this->presentation->Materials()->filter([
-			'ClassName' => 'PresentationSlide'
-		])->removeAll();
-		$this->presentation->Materials()->add($material);
-		$token = SecurityToken::inst()->getValue();
+    /**
+     * @param $data
+     * @param $form
+     * @return mixed
+     */
+    public function doUpload($data, $form)
+    {
+        $material = PresentationSlide::create();
+        $material->SlideID = $data['Slide'];
+        $material->write();
+        $this->presentation->Materials()->filter([
+            'ClassName' => 'PresentationSlide'
+        ])->removeAll();
+        $this->presentation->Materials()->add($material);
+        $token = SecurityToken::inst()->getValue();
 
-		return $form->controller()->redirect(Controller::join_links(
-			$form->controller()->Link(),
-			'success',
-			"?key={$token}&material={$material->ID}"
-		));
-	}
+        return $form->controller()->redirect(Controller::join_links(
+            $form->controller()->Link(),
+            'success',
+            "?key={$token}&material={$material->ID}"
+        ));
+    }
 
 }
