@@ -672,7 +672,12 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function MaterialType($type)
     {
-        return $this->Materials()->filter('ClassName', $type)->first();
+        $materials = $this->Materials();
+        if($materials->exists()) {
+            return $materials->filter('ClassName', $type)->first();
+        }
+
+        return false;
     }
 
     /**
