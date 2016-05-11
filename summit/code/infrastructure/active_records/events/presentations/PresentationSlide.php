@@ -14,16 +14,25 @@
  **/
 class PresentationSlide extends PresentationMaterial
 {
+    /**
+     * @var array
+     */
     private static $db = [
         'Link' => 'Text',
     ];
 
 
+    /**
+     * @var array
+     */
     private static $has_one = [
         'Slide' => 'File'
     ];
 
 
+    /**
+     * @return FieldList
+     */
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
@@ -33,6 +42,9 @@ class PresentationSlide extends PresentationMaterial
         return $f;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSlideUrl()
     {
         if ($this->Link) {
@@ -42,11 +54,17 @@ class PresentationSlide extends PresentationMaterial
         }
     }
 
+    /**
+     * @return bool
+     */
     public function IsLink()
     {
         return !empty($this->Link);
     }
 
+    /**
+     * @return mixed
+     */
     public function IsUpload()
     {
         return $this->Slide()->exists();

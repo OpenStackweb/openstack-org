@@ -80,21 +80,29 @@ class VideoDetail extends React.Component {
 								<div className="detail-panel-section">
 									<h5 className="section-title">Speakers</h5>
 									<ul className="video-speakers-list">
-									{video.speakers.map(s => (
+									{video.speakers && video.speakers.map(s => (
 										<li key={s.id}><RouterLink link={`speakers/show/${s.id}`}>{s.name}</RouterLink></li>
 									))}
 									</ul>
 								</div>
-								<div className="detail-panel-section">
-									<h5 className="section-title">Summit</h5>
-									<RouterLink link={`summits/show/${video.summit.id}`}>
-										{video.summit.title}
-									</RouterLink>
-								</div>
+                                {video.summit &&
+                                <div className="detail-panel-section">
+                                    <h5 className="section-title">Summit</h5>
+                                    <RouterLink link={`summits/show/${video.summit.id}`}>
+                                        {video.summit.title}
+                                    </RouterLink>
+                                </div>
+                                }
 								<div className="detail-panel-section">
 									<h5 className="section-title">Views</h5>									
 									{video.views}
 								</div>
+                                {video.slides &&
+                                    <div className="detail-panel-section">
+                                        <h5 className="section-title">Slides</h5>
+                                        <a href={video.slides}>Download</a>
+                                    </div>
+                                }
 
 								<div className="detail-panel-section">
 									<h5 className="section-title">Share</h5>

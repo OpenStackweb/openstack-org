@@ -14,16 +14,25 @@
  **/
 class PresentationSlideSubmissionController extends Page_Controller
 {
+	/**
+	 * @var array
+     */
 	private static $allowed_actions = [
 		'presentations',
 		'handlePresentation',
 		'emailspeakers' => 'ADMIN'
 	];
 
+	/**
+	 * @var array
+     */
 	private static $url_handlers = [
 		'presentation/$ID' => 'handlePresentation'
 	];
 
+	/**
+	 *
+     */
 	public function init()
 	{
 		parent::init();
@@ -34,6 +43,10 @@ class PresentationSlideSubmissionController extends Page_Controller
 		}
 	}
 
+	/**
+	 * @param null $action
+	 * @return String
+     */
 	public function Link($action = null)
 	{
 		return Controller::join_links(
@@ -42,6 +55,9 @@ class PresentationSlideSubmissionController extends Page_Controller
 		);
 	}
 
+	/**
+	 * @param SS_HTTPRequest $r
+     */
 	public function presentations(SS_HTTPRequest $r)
 	{
 		$data = [];
@@ -76,7 +92,12 @@ class PresentationSlideSubmissionController extends Page_Controller
 			$slide = $presentations->first()->MaterialType('PresentationSlide');
 			if(!$slide) {
 				$presentationID = $presentations->first()->ID;
-				return $this->redirect($this->Link() . 'upload/' . $presentationID);			
+				return $this->redirect(Controller::join_links(
+					$this->Link(),
+					'/presentation/',
+					$presentationID,
+					'upload'
+				));
 			}
 		}
 
@@ -86,7 +107,11 @@ class PresentationSlideSubmissionController extends Page_Controller
 		return $this->customise($data);
 	}
 
-	public function handlePresentation(SS_HTTPRequest $r) 
+	/**
+	 * @param SS_HTTPRequest $r
+	 * @return mixed
+     */
+	public function handlePresentation(SS_HTTPRequest $r)
 	{
 		$presentationID = $this->request->param("ID");
 		// make sure there's a presentation by that id
@@ -105,6 +130,9 @@ class PresentationSlideSubmissionController extends Page_Controller
 		]);
 	}
 
+	/**
+	 * @param SS_HTTPRequest $r
+     */
 	public function emailspeakers(SS_HTTPRequest $r)
 	{
 		$getVars = $r->getVars();
@@ -140,8 +168,14 @@ class PresentationSlideSubmissionController extends Page_Controller
 
 }
 
+/**
+ * Class PresentationSlideSubmissionController_PresentationRequest
+ */
 class PresentationSlideSubmissionController_PresentationRequest extends Controller
 {
+	/**
+	 * @var array
+     */
 	private static $allowed_actions = [
 		'upload',
 		'Form',
@@ -150,10 +184,21 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 		'success'
 	];
 
+	/**
+	 * @var PresentationSlideSubmissionController
+     */
 	protected $parent;
 
+	/**
+	 * @var Presentation
+     */
 	protected $presentation;
 
+	/**
+	 * PresentationSlideSubmissionController_PresentationRequest constructor.
+	 * @param PresentationSlideSubmissionController $parent
+	 * @param Presentation $presentation
+     */
 	public function __construct(PresentationSlideSubmissionController $parent, Presentation $presentation)
 	{
 		$this->parent = $parent;
@@ -162,7 +207,11 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 		parent::__construct();
 	}
 
-	public function Link($action = null) 
+	/**
+	 * @param null $action
+	 * @return String
+     */
+	public function Link($action = null)
 	{
 		return Controller::join_links(
 			$this->parent->Link(),
@@ -172,11 +221,17 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 		);
 	}
 
-	public function getPresentation() 
+	/**
+	 * @return Presentation
+     */
+	public function getPresentation()
 	{
 		return $this->presentation;
 	}
 
+	/**
+	 * @return mixed
+     */
 	public function Form()
 	{
 		$form = PresentationMediaUploadForm::create(
@@ -189,6 +244,9 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 	}
 
 
+	/**
+	 * @return mixed
+     */
 	public function LinkToForm()
 	{
 		$form = PresentationLinkToForm::create(
@@ -200,7 +258,11 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 		return $form;
 	}
 
-	public function upload(SS_HTTPRequest $r) 
+	/**
+	 * @param SS_HTTPRequest $r
+	 * @return mixed
+     */
+	public function upload(SS_HTTPRequest $r)
 	{
 		return $this->renderWith([
 			'PresentationSlideSubmissionController_upload',
@@ -209,7 +271,11 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 	}
 
 
-	public function linkto(SS_HTTPRequest $r) 
+	/**
+	 * @param SS_HTTPRequest $r
+	 * @return mixed
+     */
+	public function linkto(SS_HTTPRequest $r)
 	{
 		return $this->renderWith([
 			'PresentationSlideSubmissionController_linkto',
@@ -218,6 +284,10 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 	}
 
 
+	/**
+	 * @param SS_HTTPRequest $r
+	 * @return mixed
+     */
 	public function success(SS_HTTPRequest $r)
 	{
 		if(!SecurityToken::inst()->check($r->getVar('key'))) {

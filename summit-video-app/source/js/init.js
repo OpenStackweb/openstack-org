@@ -9,6 +9,7 @@ import Routes from './routes';
 import URL from './utils/url';
 
 const { baseURL } = window.VideoAppConfig;
+console.log(baseURL);
 URL.setBaseURL(baseURL);
 
 /*eslint-enable */

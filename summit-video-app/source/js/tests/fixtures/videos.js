@@ -13,6 +13,7 @@ export default {
          },
          "youtubeID":"2H95tx7Fuv4",
          "views": 5,
+         "slides": "http://google.com",
          "speakers":[  
             {  
                "id":806,
@@ -41,6 +42,7 @@ export default {
          },
          "youtubeID":"jZmYSpimnDo",
          "views": 4,
+         "slides": "http://google.com",
          "speakers":[  
             {  
                "id":741,
@@ -68,6 +70,7 @@ export default {
             "title":"Tokyo"
          },
          "views": 3,
+         "slides": "http://google.com",
          "youtubeID":"TgP7A1CNQ2E",
          "speakers":[  
             {  
@@ -89,6 +92,7 @@ export default {
          },
          "youtubeID":"18cekPobwzg",
          "views": 2,
+         "slides": "http://google.com",
          "speakers":[  
             {  
                "id":2846,

@@ -20,7 +20,6 @@ browserHistory.listenBefore(location => {
 		window.scrollTo(0, currentScroll + box.top - 50);
 	}
 });
-
 const Routes = (baseURL) => (
     <Router history={browserHistory}>
       <Route path={baseURL} component={App}>
