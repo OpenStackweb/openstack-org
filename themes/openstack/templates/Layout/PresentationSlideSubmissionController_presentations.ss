@@ -10,7 +10,7 @@
         <% if $MaterialType('PresentationSlide') %>
             <div class="row">
                 <div class="col-lg-9">
-                    <h3>$Title ($Slug)</h3>
+                    <h3>$Title</h3>
                     <p><strong>$SpeakersCSV</strong></p>
                     <div class="presentation">
                         <a href="{$Top.link}/presentation/{$ID}/upload" class="presentation-title">$Name</a>
