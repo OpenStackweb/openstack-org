@@ -134,9 +134,14 @@ class PresentationSlideSubmissionController extends Page_Controller
      */
 	public function emailspeakers(SS_HTTPRequest $r)
 	{
-		$getVars = $r->getVars();
-		$speakers = PresentationSpeaker::get();
+		$confirm = $r->getVar('confirm');
 		$summit = Summit::get_most_recent();
+		$speakers = PresentationSpeaker::get()
+			->innerJoin('Presentation_Speakers','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
+			->innerJoin('SummitEvent', 'SummitEvent.ID = Presentation_Speakers.PresentationID')
+			->filter('SummitID', $summit->ID)
+			->limit($confirm ? null : 50);
+
 		foreach ($speakers as $speaker) {
 			/* @var DataList */
 			$presentations = $speaker->PublishedPresentations($summit->ID);
@@ -149,16 +154,19 @@ class PresentationSlideSubmissionController extends Page_Controller
 
 				$email = EmailFactory::getInstance()->buildEmail('do-not-reply@openstack.org', $to, $subject);
 				$email->setTemplate("UploadPresentationSlidesEmail");
-				$email->populateTemplate($speaker);
+				$email->populateTemplate([
+					'Speaker' => $speaker,
+					'Presentations' => $presentations,
+					'Summit' => $summit
+				]);
 
-				if (isset($getVars['confirm'])) {
-					//SchedSpeakerEmailLog::addSpeaker($to);
+				if ($confirm) {
 					$email->send();
-				} else {					
+				} else {
 					echo $email->debug();
 				}
 
-				echo 'Email sent to ' . $to . '<br/>';
+				echo 'Email sent to ' . $to . ' ('.$speaker->getName().')<br/>';
 			}
 		}
 	}

@@ -15,37 +15,46 @@
 final class Summit extends DataObject implements ISummit
 {
 
+    /**
+     * @var array
+     */
     private static $db = array
     (
-        'Title'                       => 'Varchar',
-        'SummitBeginDate'             => 'SS_Datetime',
-        'SummitEndDate'               => 'SS_Datetime',
-        'SubmissionBeginDate'         => 'SS_Datetime',
-        'SubmissionEndDate'           => 'SS_Datetime',
-        'VotingBeginDate'             => 'SS_Datetime',
-        'VotingEndDate'               => 'SS_Datetime',
-        'SelectionBeginDate'          => 'SS_Datetime',
-        'SelectionEndDate'            => 'SS_Datetime',
-        'RegistrationBeginDate'       => 'SS_Datetime',
-        'RegistrationEndDate'         => 'SS_Datetime',
-        'Active'                      => 'Boolean',
-        'DateLabel'                   => 'Varchar',
-        'Link'                        => 'Varchar',
-        'RegistrationLink'            => 'Text',
-        'ComingSoonBtnText'           => 'Text',
+        'Title' => 'Varchar',
+        'SummitBeginDate' => 'SS_Datetime',
+        'SummitEndDate' => 'SS_Datetime',
+        'SubmissionBeginDate' => 'SS_Datetime',
+        'SubmissionEndDate' => 'SS_Datetime',
+        'VotingBeginDate' => 'SS_Datetime',
+        'VotingEndDate' => 'SS_Datetime',
+        'SelectionBeginDate' => 'SS_Datetime',
+        'SelectionEndDate' => 'SS_Datetime',
+        'RegistrationBeginDate' => 'SS_Datetime',
+        'RegistrationEndDate' => 'SS_Datetime',
+        'Active' => 'Boolean',
+        'DateLabel' => 'Varchar',
+        'Link' => 'Varchar',
+        'RegistrationLink' => 'Text',
+        'ComingSoonBtnText' => 'Text',
         // https://www.eventbrite.com
-        'ExternalEventId'             => 'Text',
-        'TimeZone'                    => 'Text',
-        'StartShowingVenuesDate'      => 'SS_Datetime',
+        'ExternalEventId' => 'Text',
+        'TimeZone' => 'Text',
+        'StartShowingVenuesDate' => 'SS_Datetime',
         'MaxSubmissionAllowedPerUser' => 'Int',
     );
 
 
+    /**
+     * @var array
+     */
     private static $defaults = array
     (
         'MaxSubmissionAllowedPerUser' => 3,
     );
 
+    /**
+     * @var array
+     */
     private static $better_buttons_actions = array
     (
         'forcephase',
@@ -54,54 +63,73 @@ final class Summit extends DataObject implements ISummit
         'handlevotinglists'
     );
 
+    /**
+     * @var array
+     */
     private static $has_one = array
     (
         'Logo' => 'BetterImage',
     );
 
+    /**
+     * @var array
+     */
     private static $has_many = array
     (
-        'Presentations'                => 'Presentation',
-        'Categories'                   => 'PresentationCategory',
-        'CategoryGroups'               => 'PresentationCategoryGroup',
-        'Locations'                    => 'SummitAbstractLocation',
-        'Types'                        => 'SummitType',
-        'EventTypes'                   => 'SummitEventType',
-        'Events'                       => 'SummitEvent',
-        'Attendees'                    => 'SummitAttendee',
-        'SummitTicketTypes'            => 'SummitTicketType',
+        'Presentations' => 'Presentation',
+        'Categories' => 'PresentationCategory',
+        'CategoryGroups' => 'PresentationCategoryGroup',
+        'Locations' => 'SummitAbstractLocation',
+        'Types' => 'SummitType',
+        'EventTypes' => 'SummitEventType',
+        'Events' => 'SummitEvent',
+        'Attendees' => 'SummitAttendee',
+        'SummitTicketTypes' => 'SummitTicketType',
         'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
-        'Notifications'                => 'SummitPushNotification',
-        'EntityEvents'                 => 'SummitEntityEvent',
-        'TrackChairs'                  => 'SummitTrackChair',
-        'RandomVotingLists'            => 'PresentationRandomVotingList',
-        'SummitAssistances'            => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
+        'Notifications' => 'SummitPushNotification',
+        'EntityEvents' => 'SummitEntityEvent',
+        'TrackChairs' => 'SummitTrackChair',
+        'RandomVotingLists' => 'PresentationRandomVotingList',
+        'SummitAssistances' => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
     );
 
+    /**
+     * @var array
+     */
     private static $summary_fields = array
     (
-        'Title'  => 'Title',
+        'Title' => 'Title',
         'Status' => 'Status',
     );
 
+    /**
+     * @return mixed
+     */
     public static function get_active()
     {
         $summit = Summit::get()->filter([
             'Active' => true
         ])
-        ->first();
+            ->first();
 
         return $summit ?: Summit::create();
     }
 
+    /**
+     * @return DataObject
+     */
     public static function get_most_recent()
     {
-		return Summit::get()
-			->where('SummitEndDate < DATE(NOW())')
-			->sort('SummitEndDate DESC')
-			->first();    	
+        return Summit::get()
+            ->where('SummitEndDate < DATE(NOW())')
+            ->sort('SummitEndDate DESC')
+            ->first();
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function checkRange($key)
     {
         $beginField = "{$key}BeginDate";
@@ -114,6 +142,9 @@ final class Summit extends DataObject implements ISummit
         return (time() > $this->obj($beginField)->format('U')) && (time() < $this->obj($endField)->format('U'));
     }
 
+    /**
+     * @return string
+     */
     public function getStatus()
     {
         if (!$this->Active) {
@@ -139,6 +170,9 @@ final class Summit extends DataObject implements ISummit
         return "DRAFT";
     }
 
+    /**
+     * @return DataObject
+     */
     public function getNext()
     {
         $end_date = $this->getField('SummitEndDate');
@@ -150,6 +184,9 @@ final class Summit extends DataObject implements ISummit
         ))->sort('SummitEndDate', 'ASC')->first();
     }
 
+    /**
+     * @return mixed
+     */
     public function getTitle()
     {
         $title = $this->getField('Title');
@@ -158,6 +195,9 @@ final class Summit extends DataObject implements ISummit
         return empty($title) ? $name : $title;
     }
 
+    /**
+     * @param $value
+     */
     public function setStartShowingVenuesDate($value)
     {
         if (!empty($value)) {
@@ -166,6 +206,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getStartShowingVenuesDate()
     {
         $value = $this->getField('StartShowingVenuesDate');
@@ -173,11 +216,17 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @return bool|string
+     */
     public function getSummitYear()
     {
         return date('Y', strtotime($this->getField('SummitBeginDate')));
     }
 
+    /**
+     * @param $value
+     */
     public function setSummitBeginDate($value)
     {
         if (!empty($value)) {
@@ -186,6 +235,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getSummitBeginDate()
     {
         $value = $this->getField('SummitBeginDate');
@@ -193,6 +245,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @return string
+     */
     public function getBeginDateYMD()
     {
         $date = new DateTime($this->getSummitBeginDate());
@@ -200,6 +255,9 @@ final class Summit extends DataObject implements ISummit
         return $date->format('Y-m-d');
     }
 
+    /**
+     * @return string
+     */
     public function getEndDateYMD()
     {
         $date = new DateTime($this->getSummitEndDate());
@@ -207,6 +265,9 @@ final class Summit extends DataObject implements ISummit
         return $date->format('Y-m-d');
     }
 
+    /**
+     * @return string
+     */
     public function getBeginDateDMY()
     {
         $date = new DateTime($this->getSummitBeginDate());
@@ -214,6 +275,9 @@ final class Summit extends DataObject implements ISummit
         return $date->format('d/m/Y');
     }
 
+    /**
+     * @return string
+     */
     public function getEndDateDMY()
     {
         $date = new DateTime($this->getSummitEndDate());
@@ -222,6 +286,9 @@ final class Summit extends DataObject implements ISummit
     }
 
 
+    /**
+     * @return string
+     */
     public function getBeginTime()
     {
         $date = new DateTime($this->getSummitBeginDate());
@@ -229,6 +296,9 @@ final class Summit extends DataObject implements ISummit
         return $date->format('H:i:s');
     }
 
+    /**
+     * @param $value
+     */
     public function setSummitEndDate($value)
     {
         if (!empty($value)) {
@@ -237,6 +307,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getSummitEndDate()
     {
         $value = $this->getField('SummitEndDate');
@@ -244,6 +317,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setSubmissionBeginDate($value)
     {
         if (!empty($value)) {
@@ -252,6 +328,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getSubmissionBeginDate()
     {
         $value = $this->getField('SubmissionBeginDate');
@@ -259,6 +338,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setSubmissionEndDate($value)
     {
         if (!empty($value)) {
@@ -267,6 +349,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getSubmissionEndDate()
     {
         $value = $this->getField('SubmissionEndDate');
@@ -274,6 +359,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setVotingBeginDate($value)
     {
         if (!empty($value)) {
@@ -282,6 +370,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getVotingBeginDate()
     {
         $value = $this->getField('VotingBeginDate');
@@ -289,6 +380,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setVotingEndDate($value)
     {
         if (!empty($value)) {
@@ -297,6 +391,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getVotingEndDate()
     {
         $value = $this->getField('VotingEndDate');
@@ -304,6 +401,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setSelectionBeginDate($value)
     {
         if (!empty($value)) {
@@ -312,6 +412,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getSelectionBeginDate()
     {
         $value = $this->getField('SelectionBeginDate');
@@ -319,6 +422,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setSelectionEndDate($value)
     {
         if (!empty($value)) {
@@ -327,6 +433,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getSelectionEndDate()
     {
         $value = $this->getField('SelectionEndDate');
@@ -334,6 +443,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setRegistrationBeginDate($value)
     {
         if (!empty($value)) {
@@ -342,6 +454,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getRegistrationBeginDate()
     {
         $value = $this->getField('RegistrationBeginDate');
@@ -349,6 +464,9 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $value
+     */
     public function setRegistrationEndDate($value)
     {
         if (!empty($value)) {
@@ -357,6 +475,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @return null|string
+     */
     public function getRegistrationEndDate()
     {
         $value = $this->getField('RegistrationEndDate');
@@ -364,6 +485,10 @@ final class Summit extends DataObject implements ISummit
         return $this->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @param $memberID
+     * @return ArrayList
+     */
     function TalksByMemberID($memberID)
     {
 
@@ -389,6 +514,9 @@ final class Summit extends DataObject implements ISummit
     /*
      * @return int
      */
+    /**
+     * @return int
+     */
     public static function CurrentSummitID()
     {
         $current = self::CurrentSummit();
@@ -397,6 +525,9 @@ final class Summit extends DataObject implements ISummit
     }
 
 
+    /**
+     * @return DataObject|ISummit
+     */
     public static function ActiveSummit()
     {
         $summit = self::CurrentSummit();
@@ -407,6 +538,9 @@ final class Summit extends DataObject implements ISummit
         return $summit;
     }
 
+    /**
+     * @return int
+     */
     public static function ActiveSummitID()
     {
         $current = self::ActiveSummit();
@@ -440,6 +574,9 @@ final class Summit extends DataObject implements ISummit
         return $this->Active && $start <= $now && $end >= $now;
     }
 
+    /**
+     * @return bool
+     */
     public function IsUpComing()
     {
         $now = new \DateTime('now', new DateTimeZone('UTC'));
@@ -449,6 +586,9 @@ final class Summit extends DataObject implements ISummit
         return $this->Active && $start >= $now && $end >= $now;
     }
 
+    /**
+     * @return DataObject
+     */
     public static function GetUpcoming()
     {
         $now = new \DateTime('now', new DateTimeZone('UTC'));
@@ -460,8 +600,14 @@ final class Summit extends DataObject implements ISummit
         ))->first();
     }
 
+    /**
+     * @var bool
+     */
     private $must_seed = false;
 
+    /**
+     *
+     */
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
@@ -471,6 +617,9 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     *
+     */
     public function onAfterWrite()
     {
         parent::onAfterWrite();
@@ -520,7 +669,8 @@ final class Summit extends DataObject implements ISummit
     /**
      * @return string
      */
-    public function getScheduleLink() {
+    public function getScheduleLink()
+    {
         $page = SummitAppSchedPage::get()->filter('SummitID', $this->getIdentifier())->first();
         return $page->getAbsoluteLiveLink(false);
     }
@@ -559,6 +709,11 @@ final class Summit extends DataObject implements ISummit
             $query)->toArray());
     }
 
+    /**
+     * @param null $level
+     * @return ArrayList
+     * @throws Exception
+     */
     public function getScheduleByLevel($level = null)
     {
         $query = new QueryObject();
@@ -576,6 +731,11 @@ final class Summit extends DataObject implements ISummit
             $query)->toArray());
     }
 
+    /**
+     * @param null $track
+     * @return ArrayList
+     * @throws Exception
+     */
     public function getScheduleByTrack($track = null)
     {
         $query = new QueryObject();
@@ -615,7 +775,7 @@ final class Summit extends DataObject implements ISummit
      * @param $format
      * @return null|string
      */
-    public function convertDateFromTimeZone2UTC($value, $format="Y-m-d H:i:s")
+    public function convertDateFromTimeZone2UTC($value, $format = "Y-m-d H:i:s")
     {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
@@ -641,7 +801,7 @@ final class Summit extends DataObject implements ISummit
      * @param $format
      * @return null|string
      */
-    public function convertDateFromUTC2TimeZone($value, $format="Y-m-d H:i:s")
+    public function convertDateFromUTC2TimeZone($value, $format = "Y-m-d H:i:s")
     {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
@@ -837,6 +997,9 @@ final class Summit extends DataObject implements ISummit
 
     // CMS admin UI
 
+    /**
+     * @return FieldList
+     */
     public function getCMSFields()
     {
 
@@ -861,7 +1024,8 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main', $registration_link = new TextField('RegistrationLink', 'Registration Link'));
         $registration_link->setDescription('Link to the site where tickets can be purchased.');
 
-        $f->addFieldsToTab('Root.Main', $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
+        $f->addFieldsToTab('Root.Main',
+            $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
 
         $f->addFieldToTab('Root.Main', $date = new DatetimeField('SummitBeginDate', 'Summit Begin Date'));
@@ -880,7 +1044,8 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main', $date = new DatetimeField('SubmissionEndDate', 'Submission End Date'));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldsToTab('Root.Main', new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
+        $f->addFieldsToTab('Root.Main',
+            new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
 
         $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingBeginDate', 'Voting Begin Date'));
         $date->getDateField()->setConfig('showcalendar', true);
@@ -911,7 +1076,6 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main', new TextField('ExternalEventId', 'Eventbrite Event Id'));
 
 
-
         if ($this->ID > 0) {
             $summit_id = $this->ID;
             // tracks
@@ -927,7 +1091,7 @@ final class Summit extends DataObject implements ISummit
             (
                 array
                 (
-                    'PresentationCategoryGroup'        => 'Category Group',
+                    'PresentationCategoryGroup' => 'Category Group',
                     'PrivatePresentationCategoryGroup' => 'Private Category Group',
                 )
             );
@@ -1094,6 +1258,9 @@ final class Summit extends DataObject implements ISummit
         return $f;
     }
 
+    /**
+     * @return mixed
+     */
     public function getBetterButtonsActions()
     {
         $f = parent::getBetterButtonsActions();
@@ -1131,6 +1298,12 @@ final class Summit extends DataObject implements ISummit
         return $f;
     }
 
+    /**
+     * @param $data
+     * @param $form
+     * @throws ValidationException
+     * @throws null
+     */
     public function forcephase($data, $form)
     {
         $span = 10;
@@ -1147,6 +1320,9 @@ final class Summit extends DataObject implements ISummit
         $form->sessionMessage('Phase updated', 'good');
     }
 
+    /**
+     *
+     */
     public function resetvotes()
     {
         DB::query(sprintf(
@@ -1155,6 +1331,10 @@ final class Summit extends DataObject implements ISummit
         ));
     }
 
+    /**
+     * @throws ValidationException
+     * @throws null
+     */
     public function setasactive()
     {
         DB::query("UPDATE Summit SET Active = 0");
@@ -1162,11 +1342,17 @@ final class Summit extends DataObject implements ISummit
         $this->write();
     }
 
+    /**
+     *
+     */
     public function handlevotinglists()
     {
         $this->generateVotingLists();
     }
 
+    /**
+     * @return ValidationResult
+     */
     protected function validate()
     {
 
@@ -1235,6 +1421,10 @@ final class Summit extends DataObject implements ISummit
         $this->SummitEndDate = $info->getEndDate();
     }
 
+    /**
+     * @param ISummitEvent $summit_event
+     * @return bool
+     */
     public function isEventInsideSummitDuration(ISummitEvent $summit_event)
     {
         $event_start_date = new DateTime($summit_event->getStartDate());
@@ -1246,6 +1436,9 @@ final class Summit extends DataObject implements ISummit
         $event_end_date <= $summit_end_date && $event_end_date >= $event_start_date;
     }
 
+    /**
+     * @return bool
+     */
     public function isAttendeesRegistrationOpened()
     {
         $registration_begin_date = $this->RegistrationBeginDate;
@@ -1351,12 +1544,19 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
+    /**
+     * @param $event_type
+     * @return bool
+     */
     public static function isDefaultEventType($event_type)
     {
         return in_array($event_type,
             array('Presentation', 'Keynotes', 'Hand-on Labs', 'Lunch & Breaks', 'Evening Events'));
     }
 
+    /**
+     * @return bool
+     */
     public function isAttendee()
     {
         $current_user = Member::currentUser();
@@ -1382,20 +1582,30 @@ final class Summit extends DataObject implements ISummit
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 
+    /**
+     * @return ArrayList
+     */
     public function getDates()
     {
         $start_date = $this->getBeginDate();
         $end_date = $this->getEndDate();
         $res = array();
         foreach ($this->getDatesFromRange($start_date, $end_date) as $date) {
-            $is_weekday = ($date->format('N') < 6) ? 1: 0;
-            $date_array = array('Label' => $date->format('l j'), 'Date' => $date->format('Y-m-d'), 'IsWeekday' => $is_weekday);
+            $is_weekday = ($date->format('N') < 6) ? 1 : 0;
+            $date_array = array(
+                'Label' => $date->format('l j'),
+                'Date' => $date->format('Y-m-d'),
+                'IsWeekday' => $is_weekday
+            );
             array_push($res, new ArrayData($date_array));
         }
 
         return new ArrayList($res);
     }
 
+    /**
+     * @return ArrayList
+     */
     public function getDatesWithEvents()
     {
         $list = array();
@@ -1407,6 +1617,10 @@ final class Summit extends DataObject implements ISummit
         return new ArrayList($list);
     }
 
+    /**
+     * @param $day
+     * @return int
+     */
     public function hasPublishedEventOn($day)
     {
         if (!$day instanceof DateTime) {
@@ -1425,6 +1639,11 @@ SQL;
         return (intval(DB::query($sql)->value()) > 0) ? 1 : 0;
     }
 
+    /**
+     * @param $start
+     * @param $end
+     * @return array
+     */
     private function getDatesFromRange($start, $end)
     {
 
@@ -1460,6 +1679,10 @@ SQL;
         return $event;
     }
 
+    /**
+     * @param bool $only_published
+     * @return DataList
+     */
     public function Speakers($only_published = true)
     {
         $id = $this->ID;
@@ -1480,6 +1703,9 @@ SQL;
         return $dl;
     }
 
+    /**
+     * @return ArrayList
+     */
     public function Tags()
     {
         $id = $this->ID;
@@ -1503,6 +1729,9 @@ SQL;
         return new ArrayList($list);
     }
 
+    /**
+     *
+     */
     public function generateVotingLists()
     {
         DB::query("DELETE FROM PresentationRandomVotingList");
@@ -1525,14 +1754,14 @@ SQL;
     public function isCallForSpeakersOpen()
     {
         $start_date = $this->getField('SubmissionBeginDate');
-        $end_date   = $this->getField('SubmissionEndDate');
+        $end_date = $this->getField('SubmissionEndDate');
 
         if (empty($start_date) || empty($end_date)) {
             return false;
         }
         $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
-        $end_date   = new DateTime($end_date, new DateTimeZone('UTC'));
-        $now        = new \DateTime('now', new DateTimeZone('UTC'));
+        $end_date = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now = new \DateTime('now', new DateTimeZone('UTC'));
 
         return ($now >= $start_date && $now <= $end_date);
     }
@@ -1602,6 +1831,9 @@ SQL;
         return $begin <= $date && $date <= $end;
     }
 
+    /**
+     * @return DataList
+     */
     public function TrackGroupLists()
     {
         return SummitSelectedPresentationList::get()
@@ -1617,17 +1849,25 @@ SQL;
     public function ShouldShowVenues()
     {
         $start_showing_venue_date = $this->getField('StartShowingVenuesDate');
-        if (empty($start_showing_venue_date)) return true;
+        if (empty($start_showing_venue_date)) {
+            return true;
+        }
         $now = new \DateTime('now', new DateTimeZone('UTC'));
         $start_showing_venue_date = new \DateTime($start_showing_venue_date, new DateTimeZone('UTC'));
         return $start_showing_venue_date <= $now;
     }
 
+    /**
+     * @return bool
+     */
     public function isPresentationEditionAllowed()
     {
         return $this->isCallForSpeakersOpen() || $this->isVotingOpen();
     }
 
+    /**
+     * @return mixed
+     */
     public function PublishedEvents()
     {
         return $this->Events()->filter('Published', 1);
@@ -1678,27 +1918,40 @@ SQL;
         return ($now > $end_date);
     }
 
+    /**
+     * @return mixed
+     */
     public function getTopVenues()
     {
-        return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('Name', 'ASC');
+        return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' OR ClassName='SummitHotel'")->sort('Name',
+            'ASC');
     }
 
-    public function getSummitDateRange() 
+    /**
+     * @return string
+     */
+    public function getSummitDateRange()
     {
-    	$start = $this->obj('SummitBeginDate');
-    	$end = $this->obj('SummitEndDate');
-	
-		$d1 = $start->DayOfMonth();
-		$d2 = $end->DayOfMonth();
-		$m1 = $start->ShortMonth();
-		$m2 = $end->ShortMonth();
-		$y1 = $start->Year();
-		$y2 = $end->Year();
-		
-		if($y1 != $y2) return "$m1 $d1, $y1 - $m2 $d2, $y2";
-		else if($m1 != $m2) return "$m1 $d1 - $m2 $d2, $y1";
-		else return "$m1 $d1 - $d2, $y1";
-	}    
+        $start = $this->obj('SummitBeginDate');
+        $end = $this->obj('SummitEndDate');
+
+        $d1 = $start->DayOfMonth();
+        $d2 = $end->DayOfMonth();
+        $m1 = $start->ShortMonth();
+        $m2 = $end->ShortMonth();
+        $y1 = $start->Year();
+        $y2 = $end->Year();
+
+        if ($y1 != $y2) {
+            return "$m1 $d1, $y1 - $m2 $d2, $y2";
+        } else {
+            if ($m1 != $m2) {
+                return "$m1 $d1 - $m2 $d2, $y1";
+            } else {
+                return "$m1 $d1 - $d2, $y1";
+            }
+        }
+    }
 
     /**
      * @param string $day
@@ -1721,10 +1974,10 @@ SQL;
             $day = new DateTime($day);
         }
 
-        $start       = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
-        $end         = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
-        $start       = $this->convertDateFromTimeZone2UTC($start);
-        $end         = $this->convertDateFromTimeZone2UTC($end);
+        $start = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
+        $end = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
+        $start = $this->convertDateFromTimeZone2UTC($start);
+        $end = $this->convertDateFromTimeZone2UTC($end);
         $location_id = $location->ID;
 
         return intval($this->Events()->where(" LocationID = {$location_id} AND Published = 1 AND StartDate >= '{$start}' AND EndDate <= '{$end}'")->count());
@@ -1743,21 +1996,20 @@ SQL;
      */
     public function getPublicCategories()
     {
-        $categories     = array();
+        $categories = array();
         $private_groups = $this->getPrivateCategoryGroups();
 
-        foreach($this->Categories() as $cat)
-        {
+        foreach ($this->Categories() as $cat) {
             $is_private = false;
-            foreach($private_groups as $private_group)
-            {
-                if($private_group->hasCategory($cat)){
+            foreach ($private_groups as $private_group) {
+                if ($private_group->hasCategory($cat)) {
                     $is_private = true;
                     break;
                 }
             }
-            if(!$is_private)
+            if (!$is_private) {
                 array_push($categories, $cat);
+            }
         }
         return $categories;
     }
@@ -1779,9 +2031,8 @@ SQL;
     {
         $res = false;
         $private_groups = $this->getPrivateCategoryGroups();
-        foreach($private_groups as $private_group)
-        {
-            if($private_group->hasCategory($category)){
+        foreach ($private_groups as $private_group) {
+            if ($private_group->hasCategory($category)) {
                 $res = true;
                 break;
             }
@@ -1796,9 +2047,8 @@ SQL;
     public function getPrivateGroupFor(PresentationCategory $category)
     {
         $private_groups = $this->getPrivateCategoryGroups();
-        foreach($private_groups as $private_group)
-        {
-            if($private_group->hasCategory($category)){
+        foreach ($private_groups as $private_group) {
+            if ($private_group->hasCategory($category)) {
                 return $private_group;
             }
         }
