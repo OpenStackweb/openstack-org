@@ -25,9 +25,6 @@
                   <a href="//openstack.org/assets/barcelona-summit/Barcelona-Sponsorship-Prospectus.pdf" class="btn register-btn-lrg" style="">Download The Prospectus<i class="fa fa-cloud-download"></i></a>
                   <a href="//openstack.org/assets/barcelona-summit/WATERMARK-Draft-Executable-OpenStack-Event-Sponsorship-Agreement-BARCELONA-SUMMIT.pdf" class="btn register-btn-lrg" style="margin: 10px;">Draft Sponsor Contract<i class="fa fa-chevron-circle-right"></i></a>
                 </div>
-                <div>
-                  <a href="/summit/austin-2016/" class="white-link current-summit-link">View The Current Summit</a>
-                </div>
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text=The October 2016 OpenStack Summit will be in Barcelona&url=http://openstack.org/summit/barcelona-2016/"></a>
                     <a target="_blank" class="social-icons landing-facebook" onclick="return windowpop(this.href, 545, 433)" 
