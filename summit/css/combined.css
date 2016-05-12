@@ -150,6 +150,24 @@ a.register-btn-lrg.soon:hover, .register-btn-lrg.soon:hover {
   color: white;
   cursor: default; }
 
+.future-sponsor-wrapper {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  margin: 30px 5% 20px;
+  border-radius: 4px;
+}
+.future-sponsor-wrapper h3 {
+  margin-top: 0;
+  font-size: 1.4em;
+  color: white;
+}
+.future-sponsor-wrapper .register-btn-lrg {
+  background: #29abe2;
+}
+.future-sponsor-wrapper .register-btn-lrg:hover {
+  background: #30739C;
+}
+
 .summit-landing-bottom {
   padding-bottom: 80px; }
 
@@ -1148,7 +1166,7 @@ a.white-link {
 .summit-date {
   background: none;
   font-size: 25px;
-  margin-top: 30px;
+  margin: 20px 0;
   color: white; }
 
 .summit-date span {
