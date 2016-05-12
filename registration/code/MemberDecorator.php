@@ -373,12 +373,17 @@ class MemberDecorator extends DataExtension
 
     public function getCurrentJobTitle()
     {
-        $a = $this->getCurrentAffiliation();
-        if (!is_null($a)) {
-            return empty($a->JobTitle) ? $this->owner->JobTitle : $a->JobTitle;
+        $job_title = '';
+        if (!empty($this->owner->JobTitle)) {
+            $job_title = $this->owner->JobTitle;
+        } else {
+            $a = $this->getCurrentAffiliation();
+            if (!is_null($a) && !empty($a->JobTitle)) {
+                $job_title = $a->JobTitle;
+            }
         }
 
-        return $this->owner->JobTitle;
+        return $job_title;
     }
 
     public function getCurrentRole()
