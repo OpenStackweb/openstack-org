@@ -39,7 +39,7 @@ class PresentationSlideSubmissionController extends Page_Controller
 
 		// sanity check
 		if(!Summit::get_most_recent()) {
-			return $this->httpError(404, 'There is no recent summit');
+			throw new Exception('There is no recent summit');
 		}
 	}
 
@@ -62,9 +62,8 @@ class PresentationSlideSubmissionController extends Page_Controller
 	{
 		$data = [];
 		$speaker = null;
-
-		if ($r->getVar('key')) {
-			$key = Convert::raw2sql($_GET['key']);
+		$key = $r->getVar('key');
+		if ($key) {
 			$username = PresentationSpeaker::hash_to_username($key);
 			$speaker = PresentationSpeaker::get()->filter('Member.Email', $username)->first();
 
