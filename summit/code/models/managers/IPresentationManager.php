@@ -87,4 +87,38 @@ interface IPresentationManager
      * @return bool
      */
     public function canAddSpeakerOnPresentation(PresentationSpeaker $speaker, Presentation $presentation);
+
+    /**
+     * @param int $presentation_id
+     * @return void
+     */
+    public function removePresentation($presentation_id);
+
+    /**
+     * @param IPresentation $presentation
+     * @param Member $member
+     * @param $vote
+     */
+    public function voteFor(IPresentation $presentation, Member $member, $vote);
+
+    /**
+     * @param IPresentation $presentation
+     * @param string $email
+     * @param Member|null $member
+     * @return IPresentationSpeaker
+     */
+    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null);
+
+    /**
+     * @param IPresentation $presentation
+     * @param IMessageSenderService $speakers_message_sender
+     * @param IMessageSenderService $creator_message_sender
+     * @return IPresentation
+     */
+    public function completePresentation
+    (
+        IPresentation $presentation,
+        IMessageSenderService $speakers_message_sender,
+        IMessageSenderService $creator_message_sender
+    );
 }

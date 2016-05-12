@@ -65,7 +65,7 @@ final class SpeakerRegistrationRequestManager
 
             $request = $factory->build($speaker, $email);
 
-            $repository->add($request);
+            $request->write();
 
             return $request;
         });

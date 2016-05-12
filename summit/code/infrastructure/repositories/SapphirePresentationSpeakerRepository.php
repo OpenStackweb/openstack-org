@@ -371,4 +371,42 @@ SQL;
         return PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
     }
 
+
+    /**
+     * @param string $email
+     * @return IPresentationSpeaker
+     */
+    public function getByEmail($email)
+    {
+        $speaker = PresentationSpeaker::get()
+            ->filter(array(
+                'Member.Email' => $email,
+            ))->first();
+
+        if (is_null($speaker)) {
+            $speaker = PresentationSpeaker::get()
+                ->filter(array(
+                    'Member.SecondEmail' => $email,
+                ))->first();
+        }
+
+        if (is_null($speaker)) {
+            $speaker = PresentationSpeaker::get()
+                ->filter(array(
+                    'Member.ThirdEmail' => $email,
+                ))->first();
+        }
+
+        if (is_null($speaker)) {
+            $registration_request = SpeakerRegistrationRequest::get()->filter(array(
+                'Email' => $email,
+                'IsConfirmed' => 0,
+            ))->first();
+            if(!is_null($registration_request))
+                $speaker = $registration_request->Speaker();
+        }
+
+        return $speaker;
+    }
+
 }

@@ -34,12 +34,53 @@ class Presentation extends SummitEvent implements IPresentation
      */
     const PHASE_COMPLETE = 4;
 
-
     /**
-     *
+     * @param $progress
+     * @return bool
      */
+    public static function isValidProgressState($progress)
+    {
+        $valid = array(self::PHASE_NEW, self::PHASE_SUMMARY, self::PHASE_TAGS, self::PHASE_SPEAKERS, self::PHASE_COMPLETE);
+        return in_array($progress, $valid);
+    }
+
     const STATUS_RECEIVED = 'Received';
 
+    /**
+     * @return int
+     */
+    public function getProgress()
+    {
+        return intval($this->getField('Progress'));
+    }
+
+    /**
+     * @param int $progress
+     * @return $this
+     * @throws EntityValidationException
+     */
+    public function setProgress($progress)
+    {
+        if(!self::isValidProgressState($progress))
+            throw new EntityValidationException('invalid presentation progress');
+
+        if ($this->getProgress() < $progress)
+        {
+            $this->setField('Progress', $progress);
+            $this->write();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setComplete(){
+        $this->Progress = self::PHASE_COMPLETE;
+        $this->write();
+        return $this;
+    }
 
     /**
      * @var array
@@ -906,10 +947,7 @@ SQL;
 
         $this->Status = self::STATUS_RECEIVED;
 
-        if ($this->Progress < self::PHASE_COMPLETE) {
-            $this->Progress = self::PHASE_COMPLETE;
-        }
-
+        $this->setComplete();
 
         return $this;
     }

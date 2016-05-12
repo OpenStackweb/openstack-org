@@ -69,4 +69,10 @@ interface ISpeakerRepository extends IEntityRepository
      * @return IPresentationSpeaker
      */
     public function getByMemberID($member_id);
+
+    /**
+     * @param string $email
+     * @return IPresentationSpeaker
+     */
+    public function getByEmail($email);
 }

@@ -43,27 +43,43 @@ final class PresentationManager implements IPresentationManager
     private $tx_manager;
 
     /**
+     * @var ISummitPresentationRepository
+     */
+    private $presentation_repository;
+
+    /**
+     * @var ISpeakerRegistrationRequestManager
+     */
+    private $speaker_registration_manager;
+
+    /**
      * PresentationManager constructor.
      * @param ISummitRepository $summit_repository
      * @param ISummitEventRepository $event_repository
+     * @param ISummitPresentationRepository $presentation_repository
      * @param ISpeakerRepository $speaker_repository
      * @param IMemberRepository $member_repository
+     * @param ISpeakerRegistrationRequestManager $speaker_registration_manager
      * @param ITransactionManager $tx_manager
      */
     public function __construct
     (
         ISummitRepository $summit_repository,
         ISummitEventRepository $event_repository,
+        ISummitPresentationRepository $presentation_repository,
         ISpeakerRepository $speaker_repository,
         IMemberRepository $member_repository,
+        ISpeakerRegistrationRequestManager $speaker_registration_manager,
         ITransactionManager $tx_manager
     )
     {
-        $this->summit_repository  = $summit_repository;
-        $this->event_repository   = $event_repository;
-        $this->speaker_repository = $speaker_repository;
-        $this->member_repository  = $member_repository;
-        $this->tx_manager         = $tx_manager;
+        $this->summit_repository            = $summit_repository;
+        $this->event_repository             = $event_repository;
+        $this->presentation_repository      = $presentation_repository;
+        $this->speaker_repository           = $speaker_repository;
+        $this->member_repository            = $member_repository;
+        $this->speaker_registration_manager = $speaker_registration_manager;
+        $this->tx_manager                   = $tx_manager;
     }
 
     /**
@@ -111,19 +127,28 @@ final class PresentationManager implements IPresentationManager
      */
     public function isPresentationSubmissionAllowedFor(PresentationSpeaker $speaker, ISummit $summit)
     {
-        $max_per_summit     = intval($summit->MaxSubmissionAllowedPerUser);
-        $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count())
-                              + intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count());
+        $res = false;
 
-        $res                = $presentation_count < $max_per_summit;
+        if($summit->isCallForSpeakersOpen())
+        {
+            $max_per_summit = intval($summit->MaxSubmissionAllowedPerUser);
+            // zero means infinity
+            if ($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
+
+            $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count())
+                + intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count());
+
+            $res = $presentation_count < $max_per_summit;
+        }
 
         if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit))
         {
             // check private groups
             foreach($groups as $g)
             {
+                if(!$g->isSubmissionOpen()) continue;
                 $max_per_group = intval($g->MaxSubmissionAllowedPerUser);
-                if(!$max_per_group) return true; /// infinite
+                if($max_per_group === 0) $max_per_group = PHP_INT_MAX; /// infinite
                 // we need to check
                 $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g))
                                             + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g));
@@ -146,6 +171,8 @@ final class PresentationManager implements IPresentationManager
         if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category))
         {
             $max_per_summit     = intval($summit->MaxSubmissionAllowedPerUser);
+            //zero means infinity
+            if($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
             $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count())
                 + intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count());
             return $presentation_count < $max_per_summit;
@@ -156,7 +183,10 @@ final class PresentationManager implements IPresentationManager
             // check private groups
             foreach($groups as $g)
             {
+                if(!$g->isSubmissionOpen()) continue;
                 $max_per_group = intval($g->MaxSubmissionAllowedPerUser);
+                //zero means infinity
+                if($max_per_group === 0) $max_per_group = PHP_INT_MAX;
                 if(!$g->hasCategory($category)) continue;
                 // we need to check
                 $group_presentation_count =
@@ -177,20 +207,19 @@ final class PresentationManager implements IPresentationManager
     public function getSubmissionLimitFor(PresentationSpeaker $speaker, PresentationCategory $category)
     {
         $summit = $category->Summit();
-
+        $res    = -1;
         if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category))
-            return intval($summit->MaxSubmissionAllowedPerUser);
+            $res = intval($summit->MaxSubmissionAllowedPerUser);
 
         if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit)){
-            foreach($groups as $g)
-            {
-                if($g->hasCategory($category))
-                {
-                    $res = $g->isSubmissionOpen() ? intval($g->MaxSubmissionAllowedPerUser) : -1;
-                    break;
-                }
+            foreach($groups as $g) {
+                if (!$g->isSubmissionOpen()) continue;
+                if (!$g->hasCategory($category)) continue;
+                $res = intval($g->MaxSubmissionAllowedPerUser);
+                break;
             }
         }
+        // zero means infinity
         $res = $res === 0 ? PHP_INT_MAX : $res;
         return $res;
     }
@@ -237,8 +266,10 @@ final class PresentationManager implements IPresentationManager
             $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit);
             foreach($groups as $g)
             {
-                $res = $g->isSubmissionOpen() && $g->Categories()->count() > 0;
-                if($res) break;
+                if(!$g->isSubmissionOpen()) continue;
+                if($g->Categories()->count() == 0) continue;
+                $res = true;
+                break;
             }
         }
         return $res;
@@ -252,41 +283,26 @@ final class PresentationManager implements IPresentationManager
     public function canEditPresentation($presentation_id, PresentationSpeaker $speaker){
 
         $presentation = Presentation::get()->byID($presentation_id);
-
-        if(is_null($presentation)) return false;
-        if(!$presentation->canEdit()) return false;
+        if(is_null($presentation) || !$presentation->canEdit()) return false;
 
         $summit = $presentation->Summit();
         if(!$summit->Active) return false;
+        $category = $presentation->Category();
 
-        $res = false;
-        if($summit->isCallForSpeakersOpen()) $res = true;
+        if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category)) return true;
 
-
-        // check if the category belongs to a private category group
-        $private_groups = $summit->getPrivateCategoryGroups();
-
-        foreach($private_groups as $private_group)
-        {
-            if($private_group->Categories()->filter('PresentationCategoryID', $presentation->CategoryID)->count() > 0)
-            {
-                $res = false;
-                break;
-            }
-        }
         // check member private categories groups
-
-        if(!$res && $speaker->Member()->exists())
+        if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit))
         {
-            $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit);
+
             foreach($groups as $g)
             {
-                if($g->Categories()->filter('PresentationCategoryID', $presentation->CategoryID)->count() == 0) continue;
-                $res = $g->isSubmissionOpen();
-                if($res) break;
+                if(!$g->hasCategory($category)) continue;
+                if(!$g->isSubmissionOpen()) continue;
+                return true;
             }
         }
-        return $res;
+        return false;
     }
 
     /**
@@ -296,16 +312,15 @@ final class PresentationManager implements IPresentationManager
      */
     public function isPresentationEditionAllowed(Member $member, ISummit $summit)
     {
-        $res = $summit->isPresentationEditionAllowed();
-        if(!$res){
-            $groups = $this->getPrivateCategoryGroupsFor($member, $summit);
-            foreach($groups as $g)
-            {
-                $res = $g->isSubmissionOpen() && $g->Categories()->count() > 0;
-                if($res) break;
-            }
+        if($summit->isPresentationEditionAllowed()) return true;
+        $groups = $this->getPrivateCategoryGroupsFor($member, $summit);
+        foreach($groups as $g)
+        {
+            if(!$g->isSubmissionOpen()) continue;
+            if($g->Categories()->count() == 0) continue;
+            return true;
         }
-        return $res;
+        return false;
     }
 
     /**
@@ -319,6 +334,7 @@ final class PresentationManager implements IPresentationManager
         return $this->tx_manager->transaction(function() use($summit, $creator, $data){
 
             $speaker                               = $creator->getSpeakerProfile();
+
             $presentation                          = Presentation::create();
 
             $presentation->Title                   = trim($data['Title']);
@@ -327,8 +343,7 @@ final class PresentationManager implements IPresentationManager
             $presentation->ProblemAddressed        = trim($data['ProblemAddressed']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
             $presentation->SelectionMotive         = trim($data['SelectionMotive']);
-            $presentation->CategoryID              = trim($data['CategoryID']);
-            $presentation->Progress                = Presentation::PHASE_SUMMARY;
+            $presentation->CategoryID              = intval(trim($data['CategoryID']));
 
             if(intval($presentation->CategoryID) > 0) {
                 $category = PresentationCategory::get()->byID($presentation->CategoryID);
@@ -354,7 +369,7 @@ final class PresentationManager implements IPresentationManager
 
             $presentation->SummitID  = $summit->getIdentifier();
             $presentation->CreatorID = $creator->ID;
-
+            $presentation->Progress  = Presentation::PHASE_SUMMARY;
             $presentation->write();
 
             if(isset($data["PresentationLink"]))
@@ -386,7 +401,7 @@ final class PresentationManager implements IPresentationManager
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
             $presentation->SelectionMotive         = trim($data['SelectionMotive']);
 
-            $presentation->CategoryID              = trim($data['CategoryID']);
+            $presentation->CategoryID              = intval(trim($data['CategoryID']));
             $creator                               = Member::get()->byID($presentation->CreatorID);
             $summit                                = $presentation->Summit();
             $speaker                               = $creator->getSpeakerProfile();
@@ -431,4 +446,128 @@ final class PresentationManager implements IPresentationManager
             return $presentation;
         });
     }
+
+    /**
+     * @param int $presentation_id
+     * @return void
+     */
+    public function removePresentation($presentation_id)
+    {
+       $this->tx_manager->transaction(function() use($presentation_id){
+
+           $presentation = $this->presentation_repository->getById($presentation_id);
+           if(is_null($presentation)) throw new NotFoundEntityException(sprintf('presentation id %s', $presentation_id));
+
+           if (!$presentation->canDelete())
+               throw new EntityValidationException('you cant delete this presentation!');
+
+           $this->presentation_repository->delete($presentation);
+       });
+    }
+
+
+    /**
+     * @param IPresentation $presentation
+     * @param Member $member
+     * @param $vote
+     */
+    public function voteFor(IPresentation $presentation, Member $member, $vote){
+        $this->tx_manager->transaction(function() use($presentation, $member, $vote){
+            $presentation->setUserVote($vote);
+            $member->removePresentation($presentation->getIdentifier());
+        });
+    }
+
+    /**
+     * @param IPresentation $presentation
+     * @param string $email
+     * @param Member|null $member
+     * @return IPresentationSpeaker
+     */
+    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null)
+    {
+
+        return $this->tx_manager->transaction(function() use($presentation, $email, $member){
+
+            $speaker = $this->speaker_repository->getByEmail($email);
+
+            if(!is_null($speaker) && !is_null($member) && intval($member->ID) !== intval($speaker->MemberID))
+                throw new EntityValidationException(sprintf('speaker does not belongs to selected member!'));
+
+            if (!$speaker) {
+                // create it
+                $speaker = PresentationSpeaker::create();
+                $speaker->write();
+
+                if(!is_null($member)) {
+                    $speaker->MemberID = $member->ID;
+                    $member->addToGroupByCode('speakers');
+                    $member->write();
+                }
+                else
+                {
+                    $speaker->MemberID              = 0;
+                    $request                        = $this->speaker_registration_manager->register($speaker, $email);
+                    $speaker->RegistrationRequestID = $request->getIdentifier();
+                }
+                $speaker->write();
+            }
+
+            // i am adding other speaker than me
+            if(!is_null($member)  &&
+                intval($member->ID) !== intval(Member::currentUserID()) &&
+                $this->canAddSpeakerOnPresentation($speaker, $presentation))
+            {
+                throw new EntityValidationException
+                (
+                    sprintf
+                    (
+                        "You reached the max. allowed # of presentations for speaker %s (%s)",
+                        $speaker->getName(),
+                        $email
+                    )
+                );
+            }
+
+            $speaker->Presentations()->add($presentation);
+            $speaker->write();
+
+            return $speaker;
+        });
+
+    }
+
+    /**
+     * @param IPresentation $presentation
+     * @param IMessageSenderService $speakers_message_sender
+     * @param IMessageSenderService $creator_message_sender
+     * @return IPresentation
+     */
+    public function completePresentation
+    (
+        IPresentation $presentation,
+        IMessageSenderService $speakers_message_sender,
+        IMessageSenderService $creator_message_sender
+    )
+    {
+        return $this->tx_manager->transaction(function() use($presentation, $speakers_message_sender, $creator_message_sender)
+        {
+
+            $speakers = $presentation->Speakers()->exclude(array(
+                'MemberID' => $presentation->CreatorID
+            ));
+
+            $presentation->markReceived()->write();
+
+            foreach ($speakers as $speaker)
+            {
+                 $speakers_message_sender->send(['Presentation' => $presentation, 'Speaker' => $speaker]);
+            }
+
+            $creator_message_sender->send(['Presentation'=> $presentation]);
+
+            return $presentation;
+        });
+    }
+
 }

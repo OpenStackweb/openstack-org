@@ -245,8 +245,7 @@ class SummitSecurity extends SummitPage_Controller {
             $first_name = TextField::create('FirstName','Your First Name'),
             $last_name  = TextField::create('Surname','Your Last Name'),
             $email      = EmailField::create('Email','Your email address'),
-            PasswordField::create('Password','Password'),
-            PasswordField::create('Password_confirm','Confirm your password'),
+            ConfirmedPasswordField::create('Password','Password'),
             HiddenField::create('BackURL','', $url)
         );
 
@@ -269,7 +268,7 @@ class SummitSecurity extends SummitPage_Controller {
             FieldList::create(
                 FormAction::create('doRegister','Register now')
             ),
-            RequiredFields::create('FirstName','Surname','Email','Password','Password_confirm')
+            RequiredFields::create('FirstName','Surname','Email','Password')
         );
 
         $data = Session::get("FormInfo.{$form->getName()}.data");
@@ -309,16 +308,21 @@ class SummitSecurity extends SummitPage_Controller {
 
         }
         catch(EntityValidationException $ex1){
-            Form::messageForForm($form->getName(),$ex1->getMessage(), 'bad');
+            Form::messageForForm($form->getName(), $ex1->getMessage(), 'bad');
             //Return back to form
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
-            return $this->redirectBack();
+            $token = $this->request->getVar(SpeakerRegistrationRequest::ConfirmationTokenParamName);
+            $url   = Controller::join_links(Director::baseURL(), 'summit-login', 'registration');
+            if(!empty($token))
+                $url .= '?'.SpeakerRegistrationRequest::ConfirmationTokenParamName . '='.$token;
+            return $this->redirect($url);
         }
         catch(Exception $ex){
             Form::messageForForm($form->getName(), "There was an error with your request, please contact your admin.", 'bad');
             //Return back to form
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->redirectBack();
+            $url = Controller::join_links(Director::baseURL(), 'summit-login', 'registration');
+            return $this->redirect($url);
         }
     }
 

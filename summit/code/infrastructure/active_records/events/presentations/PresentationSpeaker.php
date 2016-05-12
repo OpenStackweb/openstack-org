@@ -150,7 +150,11 @@ class PresentationSpeaker extends DataObject
      */
     public function EditLink($presentationID)
     {
-        return $this->linkTo($presentationID, 'edit');
+        $action = 'edit';
+        if ($this->isPendingOfRegistration()) {
+            $action .= '?' . SpeakerRegistrationRequest::ConfirmationTokenParamName . '=' . $this->RegistrationRequest()->getToken();
+        }
+        return $this->linkTo($presentationID, $action);
     }
 
     /**

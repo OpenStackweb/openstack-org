@@ -1,11 +1,14 @@
 ---
-Name: 'presentations-injection'
+Name: 'summit-injection'
 ---
 PresentationPage_Controller:
   dependencies:
     SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
     SpeakerRegistrationRequestManager: '%$SpeakerRegistrationRequestManager'
     PresentationManager: '%$PresentationManager'
+    SpeakerManager: '%$SpeakerManager'
+    SpeakerRepository: '%$SpeakerRepository'
+    MemberRepository: '%$MemberRepository'
 SummitSecurity:
   dependencies:
     SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
@@ -168,6 +171,14 @@ Injector:
     constructor:
       0: '%$SummitRepository'
       1: '%$EventRepository'
-      2: '%$SpeakerRepository'
-      3: '%$MemberRepository'
-      4: '%$TransactionManager'
+      2: '%$PresentationRepository'
+      3: '%$SpeakerRepository'
+      4: '%$MemberRepository'
+      5: '%$SpeakerRegistrationRequestManager'
+      6: '%$TransactionManager'
+  SpeakerManager:
+    constructor:
+      0: '%$SummitRepository'
+      3: '%$SpeakerRepository'
+      4: '%$MemberRepository'
+      5: '%$TransactionManager'

@@ -30,3 +30,4 @@ migrations:
   - SummitAttendeeDropIndexMigration
   - VideoPresentationMigration
   - NewsChangeNewsDatesToCentral
+  - SummitMaxAllowedSubmissionTaskMigration
