@@ -11,3 +11,4 @@ Director:
     'presentations/authenticate': 'PresentationAPITokenGenerator'
     'summit-login': 'SummitSecurity'
     'summit-admin': 'SummitAppAdminController'
+    'submit-slides': 'PresentationSlideSubmissionController'
