@@ -516,7 +516,7 @@ final class PresentationManager implements IPresentationManager
             // i am adding other speaker than me
             if(!is_null($member)  &&
                 intval($member->ID) !== intval(Member::currentUserID()) &&
-                $this->canAddSpeakerOnPresentation($speaker, $presentation))
+                !$this->canAddSpeakerOnPresentation($speaker, $presentation))
             {
                 throw new EntityValidationException
                 (
@@ -528,6 +528,8 @@ final class PresentationManager implements IPresentationManager
                     )
                 );
             }
+            if($speaker->Presentations()->filter('PresentationID', $presentation->ID)->count() > 0 )
+                throw new EntityValidationException('Speaker already assigned to this presentation!.');
 
             $speaker->Presentations()->add($presentation);
             $speaker->write();

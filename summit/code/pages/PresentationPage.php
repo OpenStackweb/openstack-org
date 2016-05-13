@@ -221,6 +221,7 @@ class PresentationPage_Controller extends SummitPage_Controller
             $speaker_registration_token = $this->request->getVar(SpeakerRegistrationRequest::ConfirmationTokenParamName);
 
             if (!is_null($speaker_registration_token)) {
+                // send it to SummitSecurity Controller to complete speaker registration
                 $request = $this->speaker_registration_request_repository->getByConfirmationToken($speaker_registration_token);
 
                 if (is_null($request) || $request->alreadyConfirmed()) {
@@ -229,8 +230,9 @@ class PresentationPage_Controller extends SummitPage_Controller
 
                 // redirect to register member speaker
                 $url = Controller::join_links(Director::baseURL(), 'summit-login', 'registration');
-
-                return $this->redirect($url . '?BackURL=' . urlencode($this->request->getURL()) . '&' . SpeakerRegistrationRequest::ConfirmationTokenParamName . '=' . $speaker_registration_token);
+                Session::set(SpeakerRegistrationRequest::ConfirmationTokenParamName, $speaker_registration_token);
+                Session::set('BackURL', $this->request->getURL());
+                return $this->redirect($url);
             }
 
             return SummitSecurity::permission_failure($this);
