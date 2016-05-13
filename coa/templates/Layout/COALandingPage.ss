@@ -11,8 +11,8 @@
                 <hr>
                 <div class="coa-action-top">
                     <h5>Have a code to redeem?</h5>
-                    <a href="https://identity.linuxfoundation.org/pid/317" class="coa-action-btn">Get Started <i class="fa fa-chevron-right"></i></a>
-                    <a href="https://identity.linuxfoundation.org/portal/openstack" class="coa-already-registered">Already Registered?</a> &nbsp; | &nbsp; 
+                    <a href="{$Top.Link(get-started)}" class="coa-action-btn">Get Started <i class="fa fa-chevron-right"></i></a>
+                    <a href="{$Top.Link(already-registered)}" class="coa-already-registered">Already Registered?</a> &nbsp; | &nbsp; 
                     <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
                 </div>
             </div>
