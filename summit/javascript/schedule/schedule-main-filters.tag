@@ -66,13 +66,13 @@
 
         this.summit           = opts.summit;
         this.schedule_filters = opts.schedule_filters;
+        this.calendar_synch   = opts.calendar_synch;
         this.atomic_filtering = false;
         this.base_url         = opts.base_url;
         this.mine             = false;
         var self              = this;
 
         this.on('mount', function(){
-
             // Tooltips
             if(!('ontouchstart' in window)) {
                 $('[data-toggle="tooltip"]').tooltip();

@@ -88,16 +88,18 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     }
 
     static $url_handlers = array(
-        'GET '                      => 'getScheduleByDay',
-        'GET level'                 => 'getScheduleByLevel',
-        'GET track'                 => 'getScheduleByTrack',
-        'GET search'                => 'getSearchResults',
-        'GET empty_spots'           => 'getEmptySpots',
-        'GET full'                  => 'getFullSchedule',
-        'PUT $EventID!'             => 'addToSchedule',
-        'DELETE $EventID!'          => 'removeFromSchedule',
-        'POST $EventID!/feedback'   => 'addFeedback',
-        'POST $EVENT_ID!/share'     => 'shareEmail',
+        'GET '                                          => 'getScheduleByDay',
+        'GET level'                                     => 'getScheduleByLevel',
+        'GET track'                                     => 'getScheduleByTrack',
+        'GET search'                                    => 'getSearchResults',
+        'GET empty_spots'                               => 'getEmptySpots',
+        'GET full'                                      => 'getFullSchedule',
+        'PUT $EventID!/synch/$Target!/$CalEventID!'     => 'synchEvent',
+        'PUT $EventID!'                                 => 'addToSchedule',
+        'DELETE $EventID!/synch/$Target!'               => 'unSynchEvent',
+        'DELETE $EventID!'                              => 'removeFromSchedule',
+        'POST $EventID!/feedback'                       => 'addFeedback',
+        'POST $EventID!/share'                          => 'shareEmail',
     );
 
     static $allowed_actions = array(
@@ -111,6 +113,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'addFeedback',
         'getFullSchedule',
         'shareEmail',
+        'synchEvent',
+        'unSynchEvent',
     );
 
     protected function getCacheKey(SS_HTTPRequest $request){
@@ -255,6 +259,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 'category_group_ids'       => array(),
                 'tags_id'                  => array(),
                 'own'                      => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
+                'gcal_id'                  => is_null($current_member) || !$is_attendee ? false : $current_member->getGoogleCalEventId($e->ID),
                 'favorite'                 => false,
                 'show'                     => true,
                 'headcount'                => intval($e->HeadCount),
@@ -634,7 +639,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
      */
     public function shareEmail(SS_HTTPRequest $request){
         try {
-            $event_id     = intval($request->param('EVENT_ID'));
+            $event_id     = intval($request->param('EventID'));
             $event        = $this->summitevent_repository->getById($event_id) ;
             if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
 
@@ -737,4 +742,76 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
         return $this->saveJSONResponseToCache($request, $events)->ok($events);
     }
+
+    public function synchEvent() {
+        try{
+            $summit_id      = (int)$this->request->param('SUMMIT_ID');
+            $event_id       = (int)$this->request->param('EventID');
+            $target         = $this->request->param('Target');
+            $cal_event_id   = $this->request->param('CalEventID');
+            $member    = Member::currentUser();
+
+            if(is_null($member)) return $this->permissionFailure();
+
+            if(intval($summit_id) > 0)
+                $summit = $this->summit_repository->getById(intval($summit_id));
+            if(strtolower($summit_id) === 'current')
+                $summit = Summit::ActiveSummit();
+
+            if(is_null($summit))
+                return $this->notFound('summit not found!');
+
+            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, $target, $cal_event_id);
+
+            return $this->ok($cal_event_id);
+        }
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function unSynchEvent() {
+        try{
+            $summit_id      = (int)$this->request->param('SUMMIT_ID');
+            $event_id       = (int)$this->request->param('EventID');
+            $target         = $this->request->param('Target');
+            $member    = Member::currentUser();
+
+            if(is_null($member)) return $this->permissionFailure();
+
+            if(intval($summit_id) > 0)
+                $summit = $this->summit_repository->getById(intval($summit_id));
+            if(strtolower($summit_id) === 'current')
+                $summit = Summit::ActiveSummit();
+
+            if(is_null($summit))
+                return $this->notFound('summit not found!');
+
+            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, $target, '');
+
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1,SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
 }

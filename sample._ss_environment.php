@@ -121,10 +121,13 @@ define('PARSE_MASTER_KEY','');
 //SOCIAL MEDIA
 define('FB_APP_ID','');
 // COA
-
 define('COA_FILE_API_BASE_URL','');
 define('COA_FILE_API_BASE_USER','');
 define('COA_FILE_API_BASE_PASS','');
+
+//GOOGLE CALENDAR
+define('GAPI_CLIENT','');
+
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

@@ -227,4 +227,44 @@ final class ScheduleManager
         });
     }
 
+    /**
+     * @param $member_id
+     * @param $event_id
+     * @return mixed
+     */
+    public function saveSynchId($member_id, $event_id, $target, $cal_event_id)
+    {
+
+        $this_var               = $this;
+        $summitevent_repository = $this->summitevent_repository;
+        $attendee_repository    = $this->attendee_repository;
+
+        return $this->tx_manager->transaction(function () use (
+            $this_var,
+            $member_id,
+            $event_id,
+            $target,
+            $cal_event_id,
+            $attendee_repository,
+            $summitevent_repository
+        ) {
+
+            $event = $summitevent_repository->getById($event_id);
+            if (!$event) {
+                throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
+            }
+
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $event->Summit()->getIdentifier());
+
+            if (!$attendee) {
+                throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
+            }
+
+            if ($target == 'google')
+                $attendee->setGoogleCalEventId($event, $cal_event_id);
+
+            return $cal_event_id;
+        });
+    }
+
 } 

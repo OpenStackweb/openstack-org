@@ -379,7 +379,7 @@ a.navbar-brand.navbar-brand-month
     color:#CDCDCD;
 }
 
-.my-schedule-container
+.my-schedule-container, .gcal-synch-container
 {
     text-align: right;
 }

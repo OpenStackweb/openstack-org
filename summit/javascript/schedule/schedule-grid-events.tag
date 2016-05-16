@@ -85,6 +85,30 @@
                 e.stopPropagation();
                 return false;
             });
+
+            $(document).off("click",".gcal-synch").on("click",".gcal-synch", function(e){
+                var event_id = $(e.currentTarget).parents('.main-event-content').attr('data-event-id');
+                var event    = self.dic_events[event_id];
+                event.location = self.getSummitLocation(event);
+
+                if($(this).hasClass('foreign')){
+                    // synch with google cal
+                    self.schedule_api.googleCalSynch(self.summit.id, event);
+                    $(this).removeClass('foreign').addClass('own');
+                    $('.gcal-icon',$(this)).removeClass('icon-foreign-event').addClass('icon-own-event');
+                    return false;
+                }
+                if($(this).hasClass('own')){
+                    // unsynch with google
+                    self.schedule_api.googleCalUnSynch(self.summit.id, event);
+                    $(this).removeClass('own').addClass('foreign');
+                    $('.gcal-icon',$(this)).removeClass('icon-own-event').addClass('icon-foreign-event');
+                    return false;
+                }
+
+                e.preventDefault();
+                e.stopPropagation();
+            });
         });
 
         this.schedule_api.on('beforeEventsRetrieved', function(){
@@ -98,6 +122,11 @@
             var myschedule_container = self.summit.current_user !== null ? '<div class="col-sm-3 my-schedule-container">'+
             '<span class="icon-event-action">'+
             '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;calendar</span>'+
+            '</div>' : '';
+
+            var gcal_synch_container = self.summit.current_user !== null ? '<div class="col-md-2 gcal-synch-container">'+
+            '<span class="gcal-synch">'+
+            '<i class="fa fa-check-circle gcal-icon"></i>&nbsp;Google&nbsp;synch</span>'+
             '</div>' : '';
 
             var event_template = $(
@@ -118,7 +147,8 @@
                 myschedule_container+
                 '</div>'+
                 '<div class="row">'+
-                '<div class="col-md-12 event-title"></div>'+
+                '<div class="col-md-10 event-title"></div>'+
+                gcal_synch_container+
                 '</div>'+
                 '<div class="row">'+
                 '<div class="col-xs-8 col-track">'+
@@ -138,65 +168,69 @@
             console.log(self.events.length +' events retrieved ...');
 
             var event_directives  = {
-                    'div.event-details@id':  function (arg){ return 'event_details_'+arg.item.id; },
-                    '@id': function(arg){ return 'event_'+arg.item.id; },
+                'div.event-details@id':  function (arg){ return 'event_details_'+arg.item.id; },
+                '@id': function(arg){ return 'event_'+arg.item.id; },
+                'div.event-title': 'event.title',
+                'div.main-event-content@data-event-id': 'event.id',
+                'div.main-event-content@style': function (arg){
+                    var category_group_ids = arg.item.category_group_ids;
+                    var type_id = arg.item.type_id;
+                    var color = (category_group_ids.length == 0)? self.summit.event_types[type_id].color :
+                    self.summit.category_groups[category_group_ids[0]].color;
+                    return 'border-left: 3px solid '+color;
+                },
+                'span.track@style': function(arg){ arg.item.class_name === 'SummitEvent' ? 'display:none' : '';},
+                'a.track-search-link': function(arg){
+                    var track_id = arg.item.track_id;
+                    if(typeof track_id !== "undefined"){
+                        return self.summit.tracks[track_id].name;
+                    }
+                    return '';
+                },
+                'a.track-search-link@href': function(arg){
+                    var track_id = arg.item.track_id;
+                    var track_name = '';
+                    if(typeof track_id !== "undefined"){
+                        track_name = self.summit.tracks[track_id].name;
+                    }
+                    return track_name != '' ? self.search_url+'?t='+track_name.replace(/ /g,'+') : '';
+                },
+                'a.event-type-search-link': function(arg){ return self.summit.event_types[arg.item.type_id].type; },
+                'a.event-type-search-link@href': function(arg){ return self.search_url+'?t='+self.summit.event_types[arg.item.type_id].type.replace(/ /g,'+')  },
+                'a.venue-search-link': function(arg){
+                    return self.getSummitLocation(arg.item);
+                },
+                'a.venue-search-link@href':function(arg){
+                    return self.summit.link+'venues/#venue='+ self.summit.locations[arg.item.location_id].venue_id;
+                },
+                'span.start-time': 'event.start_time',
+                'span.end-time': 'event.end_time'
+            };
 
-                    'div.event-title': 'event.title',
-                    'div.main-event-content@data-event-id': 'event.id',
-                    'div.main-event-content@style': function (arg){
-                        var category_group_ids = arg.item.category_group_ids;
-                        var type_id = arg.item.type_id;
-                        var color = (category_group_ids.length == 0)? self.summit.event_types[type_id].color :
-                        self.summit.category_groups[category_group_ids[0]].color;
-                        return 'border-left: 3px solid '+color;
-                    },
-                    'span.track@style': function(arg){ arg.item.class_name === 'SummitEvent' ? 'display:none' : '';},
-                    'a.track-search-link': function(arg){
-                        var track_id = arg.item.track_id;
-                        if(typeof track_id !== "undefined"){
-                            return self.summit.tracks[track_id].name;
-                        }
-                        return '';
-                    },
-                    'a.track-search-link@href': function(arg){
-                        var track_id = arg.item.track_id;
-                        var track_name = '';
-                        if(typeof track_id !== "undefined"){
-                            track_name = self.summit.tracks[track_id].name;
-                        }
-                        return track_name != '' ? self.search_url+'?t='+track_name.replace(/ /g,'+') : '';
-                    },
-                    'a.event-type-search-link': function(arg){ return self.summit.event_types[arg.item.type_id].type; },
-                    'a.event-type-search-link@href': function(arg){ return self.search_url+'?t='+self.summit.event_types[arg.item.type_id].type.replace(/ /g,'+')  },
-                    'a.venue-search-link': function(arg){
-                        var location = self.summit.locations[arg.item.location_id];
-                        if (typeof location == 'undefined') return 'TBA';
-                        if(location.class_name === 'SummitVenueRoom') {
-                            var room = location;
-                            location = self.summit.locations[room.venue_id];
-                            return location.name+' - '+room.name;
-                        }
-                        return location.name;
-                    },
-                    'a.venue-search-link@href':function(arg){ return self.summit.link+'venues/#venue='+ self.summit.locations[arg.item.location_id].venue_id; },
-                    'span.start-time': 'event.start_time',
-                    'span.end-time': 'event.end_time',
-                    };
             if(self.summit.current_user !== null ){
-                    event_directives['i.myschedule-icon@class+']             = function(arg){ return arg.item.own ? ' icon-own-event':' icon-foreign-event'; };
-                    event_directives['span.icon-event-action@title']         = function(arg){ return arg.item.own ? 'remove from my schedule':'add to my schedule'; };
-                    event_directives['span.icon-event-action@data-event-id'] = function(arg){
-                        var item = arg.item;
-                        self.dic_events[item.id] = item;
-                        return item.id;
-                    };
-                    event_directives['span.icon-event-action@class+']        = function(arg){ return arg.item.own ? ' own':' foreign'; };
+                // MY SCHEDULE
+                event_directives['i.myschedule-icon@class+']             = function(arg){ return arg.item.own ? ' icon-own-event':' icon-foreign-event'; };
+                event_directives['span.icon-event-action@title']         = function(arg){ return arg.item.own ? 'remove from my schedule':'add to my schedule'; };
+                event_directives['span.icon-event-action@data-event-id'] = function(arg){
+                    var item = arg.item;
+                    self.dic_events[item.id] = item;
+                    return item.id;
+                };
+                // GOOGLE CALENDAR SYNCH
+                event_directives['i.gcal-icon@class+']                   = function(arg){ return arg.item.gcal_id ? ' icon-own-event':' icon-foreign-event'; };
+                event_directives['span.gcal-synch@title']                = function(arg){ return arg.item.gcal_id ? 'unsynch from google calendar':'synch with google calendar'; };
+                event_directives['span.gcal-synch@data-event-id']        = function(arg){ return arg.item.id; };
+
+                event_directives['span.gcal-synch@class+']               = function(arg){ return arg.item.gcal_id ? ' own':' foreign'; };
+                event_directives['span.icon-event-action@class+']        = function(arg){ return arg.item.own ? ' own':' foreign'; };
             }
+
             var directives = {
                 'div.event-row':{
                     'event<-': event_directives
                 }
             };
+
             var html = event_template.render(data.events, directives);
             $('#events-inner-container').html(html);
             self.applyFilters();
@@ -206,6 +240,10 @@
         this.schedule_filters.on('scheduleFiltersChanged', function(filters){
             self.current_filter = filters;
             self.applyFilters();
+        });
+
+        this.schedule_api.on('googleEventSynchSaved', function(event_id, cal_event_id){
+            self.dic_events[event_id].gcal_id = cal_event_id;
         });
 
         isFilterEmpty() {
@@ -234,6 +272,17 @@
 
         isMyScheduleFilterEmpty() {
             return (!self.current_filter.own);
+        }
+
+        getSummitLocation(event) {
+            var location = self.summit.locations[event.location_id];
+            if (typeof location == 'undefined') return 'TBA';
+            if(location.class_name === 'SummitVenueRoom') {
+                var room = location;
+                location = self.summit.locations[room.venue_id];
+                return location.name+' - '+room.name;
+            }
+            return location.name;
         }
 
         applyFilters(){

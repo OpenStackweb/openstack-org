@@ -99,6 +99,17 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
         return $this->owner->getSummitAttendee($event->SummitID)->isScheduled(intval($event_id));
     }
 
+    /**
+     * @param int $event_id
+     * @return string
+     */
+    public function getGoogleCalEventId($event_id){
+        $event = SummitEvent::get()->byID($event_id);
+        if(is_null($event)) return false;
+        if(!$this->isAttendee($event->SummitID)) return false;
+        return $this->owner->getSummitAttendee($event->SummitID)->getGoogleCalEventId($event);
+    }
+
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName("SummitAttendance");

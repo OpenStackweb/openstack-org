@@ -132,7 +132,7 @@ final class PersistentCollection extends RelationList
     {
         $identifier = spl_object_hash($item);
         //get extra fields by object
-        $extra_fields = $this->extra_fields[$identifier];
+        $extra_fields = (isset($this->extra_fields[$identifier])) ? $this->extra_fields[$identifier] : array();
         foreach ($extraFields as $name => $value) {
             $extra_fields[$name] = array();//reset it
             array_push($extra_fields[$name], $value);
