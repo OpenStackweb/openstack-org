@@ -33,7 +33,7 @@
         </ul>
         <div class="add-your-course">
             <p>
-                Does your company offer distrobutions or appliances for OpenStack? Be listed here!
+                Does your company offer distributions or appliances for OpenStack? Be listed here!
                 <a href="mailto:info@openstack.org">Email us for details</a>
             </p>
         </div>
