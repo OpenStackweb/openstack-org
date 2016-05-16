@@ -36,16 +36,9 @@
             <ul class="help-me-menu">
                <li><a href="/summit/austin-2016/summit-schedule/#day=2016-04-25"><i class="fa fa-calendar"></i>Summit Schedule</a></li>
                <!-- <li><a href="https://openstacksummit2016austin.eventbrite.com/"><i class="fa fa-shopping-cart"></i>Register For The Summit</a></li> -->
-               <li><a href="/summit/austin-2016/categories/"><i class="fa fa-info-circle"></i>Schedule at-a-glance</a></li>
                <li><a href="/summit/austin-2016/venues/"><i class="fa fa-compass"></i>Venues</a></li>
-               <li><a href="http://spousetivities.com/2016/03/austin-bbq-openstack-and-spousetivities/"><i class="fa fa-heart"></i>Spousetivities</a></li>
-               <li><a href="/summit/austin-2016/mentoring-and-diversity/"><i class="fa fa-map-signs"></i>Mentoring & Diversity</a></li>
-               <li><a href="/summit/austin-2016/openstack-academy/"><i class="fa fa-graduation-cap"></i>OpenStack Academy</a></li>
-               <li><a href="/summit/austin-2016/summit-map/"><i class="fa fa-map-marker"></i>Summit Maps</a></li>
                <li><a href="/summit/austin-2016/mobile-apps/"><i class="fa fa-mobile"></i>Mobile Apps</a></li>
-               <li><a href="/summit/austin-2016/lunch-menus/"><i class="fa fa-cutlery"></i>Lunch Menus</a></li>
                 <li><a href="/summit/austin-2016/guide-to-austin/"><i class="fa fa-map"></i>Guide To Austin</a></li>
-               <li><a href="/summit/austin-2016/austin-and-travel/#hotels"><i class="fa fa-h-square"></i>Hotels</a></li>
                 <li><a href="/summit/austin-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
             </ul>
             <div class="schedule-square">
