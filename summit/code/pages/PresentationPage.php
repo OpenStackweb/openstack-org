@@ -1249,9 +1249,11 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         (
             $this,
             "EditSpeakerForm",
-            FieldList::create(
+            FieldList::create
+            (
                 FormAction::create('doSaveSpeaker', 'Save speaker details')
-            )
+            ),
+            $this->parent->Summit()
         )
         ->loadDataFrom($this->speaker);
 

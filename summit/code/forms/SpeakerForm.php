@@ -5,9 +5,15 @@
  */
 class SpeakerForm extends BootstrapForm
 {
+    /**
+     * @var ISummit
+     */
+    private $summit;
 
-    public function __construct($controller, $name, $actions)
+    public function __construct($controller, $name, $actions, ISummit $summit)
     {
+        $this->summit = $summit;
+
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
 
@@ -123,7 +129,7 @@ JS;
             ->text('PresentationTitle[4]','Title #4')
             ->text('PresentationLink[5]','Link #5')
             ->text('PresentationTitle[5]','Title #5')
-            ->literal('RecordingAndPublishingLegalAgreement',sprintf('Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.', Summit::ActiveSummit()->Title))
+            ->literal('RecordingAndPublishingLegalAgreement',sprintf('Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.',$this->summit->Title))
             ->header('Want to be in the Speakers\' Bureau?')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
                 ->configure()
