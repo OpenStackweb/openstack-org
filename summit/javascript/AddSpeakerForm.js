@@ -23,7 +23,7 @@
                     return;
                 }
 
-                $.getJSON("summit/barcelona-2016/call-for-speakers/manage/13747/speakers/search", request, function( data, status, xhr ) {
+                $.getJSON(speaker_search_url, request, function( data, status, xhr ) {
                     cache[ term ] = data;
                     response( data );
                 });

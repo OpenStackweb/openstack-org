@@ -805,6 +805,7 @@ class PresentationPage_ManageRequest extends RequestHandler
     {
         Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/ui-lightness/jquery-ui.min.css');
         Requirements::javascript('themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js');
+        Requirements::customScript(sprintf("var speaker_search_url = '%s/%s'; ", $this->Link('speakers'), 'search'));
         Requirements::javascript('summit/javascript/AddSpeakerForm.js');
 
         $summit = $this->Summit();
