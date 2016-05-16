@@ -150,8 +150,8 @@ final class PresentationManager implements IPresentationManager
                 $max_per_group = intval($g->MaxSubmissionAllowedPerUser);
                 if($max_per_group === 0) $max_per_group = PHP_INT_MAX; /// infinite
                 // we need to check
-                $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g))
-                                            + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g));
+                $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g)->count())
+                                            + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g)->count());
                 $res = $group_presentation_count < $max_per_group;
                 if($res) break;
             }
@@ -190,8 +190,8 @@ final class PresentationManager implements IPresentationManager
                 if(!$g->hasCategory($category)) continue;
                 // we need to check
                 $group_presentation_count =
-                    intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g))
-                    + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g));
+                    intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g)->count())
+                    + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g)->count());
                 return $group_presentation_count < $max_per_group;
             }
         }
