@@ -2,6 +2,7 @@
 
 /**
  * Class PresentationPage
+ * Call for Speakers
  */
 class PresentationPage extends SummitPage
 {
@@ -173,7 +174,6 @@ class PresentationPage_Controller extends SummitPage_Controller
     {
         $this->speaker_repository = $speaker_repository;
     }
-
 
     /**
      * @var IMemberRepository
@@ -392,7 +392,6 @@ class PresentationPage_Controller extends SummitPage_Controller
         return Member::currentUser()->getVotedPresentations();
     }
 
-
     /**
      * The link to create a new presentation
      * @return  string
@@ -468,6 +467,8 @@ class PresentationPage_Controller extends SummitPage_Controller
 class PresentationPage_ManageRequest extends RequestHandler
 {
 
+    use RestfulJsonApiResponses;
+
     private static $allowed_actions = array(
         'summary',
         'tags',
@@ -484,11 +485,13 @@ class PresentationPage_ManageRequest extends RequestHandler
         'success',
         'speakers',
         'preview',
+        'searchSpeaker',
      );
 
 
     private static $url_handlers = array
     (
+        'speakers/search'     => 'searchSpeaker',
         'speaker/$SpeakerID!' => 'handleSpeaker'
     );
 
@@ -605,6 +608,18 @@ class PresentationPage_ManageRequest extends RequestHandler
         return $request->handleRequest($r, DataModel::inst());
     }
 
+    public function searchSpeaker(SS_HTTPRequest $request){
+
+        if(!$this->checkOwnAjaxRequest())
+            return $this->forbiddenError();
+
+        if(!Member::currentUser())
+            return $this->permissionFailure();
+
+        $term = Convert::raw2sql($request->getVar('term'));
+        $data = $this->parent->getSpeakerManager()->getSpeakerByTerm($term, true);
+        return $this->ok($data);
+    }
 
     /**
      * Default controller action. Forwards to the main edit page for a presentation
@@ -788,13 +803,17 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function AddSpeakerForm()
     {
+        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/ui-lightness/jquery-ui.min.css');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js');
+        Requirements::javascript('summit/javascript/AddSpeakerForm.js');
+
         $summit = $this->Summit();
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
                 '<p class="at-least-one">Each presentation needs at least one speaker.</p>'),
             OptionsetField::create('SpeakerType', '', array(
-                'Me' => 'Add yourself as a speaker to this presentation',
+                'Me'   => 'Add yourself as a speaker to this presentation',
                 'Else' => 'Add someone else'
             ))->setValue('Me'),
             LiteralField::create('LegalMe', sprintf('
@@ -803,11 +822,13 @@ class PresentationPage_ManageRequest extends RequestHandler
                 Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
             </label>
             </div>', $summit->Title)),
-            EmailField::create('EmailAddress',
-                "To add another person as a speaker, you will need their email address. (*)")
+            TextField::create('EmailAddress',
+                "To add another person as a speaker, you will need their first name, last name or email address. (*)")
                 ->displayIf('SpeakerType')
                 ->isEqualTo('Else')
                 ->end(),
+            HiddenField::create('SpeakerId','SpeakerId'),
+            HiddenField::create('MemberId','MemberId'),
             LiteralField::create('LegalOther', sprintf('
             <div id="legal-other" style="display: none;">
              <label>
@@ -833,7 +854,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             if (Member::currentUser()->IsSpeaker($this->presentation)) {
                 $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
                 $fields->field('EmailAddress')
-                    ->setTitle('Enter the email address of your next speaker (*)')
+                    ->setTitle('Enter the first name, last name or email address of your next speaker (*)')
                     ->setDisplayLogicCriteria(null);
             }
         } else {
@@ -959,29 +980,43 @@ class PresentationPage_ManageRequest extends RequestHandler
             $rules = array
             (
                 'SpeakerType'           => 'required',
-                'EmailAddress'          => 'sometimes|email',
+                'EmailAddress'          => 'sometimes|required_if:SpeakerType,Else',
             );
 
             $messages = array
             (
-                'SpeakerType.required'   => ':attribute is required.',
-                'EmailAddress.sometimes' => 'Please specify an email address.',
-                'EmailAddress.email'     => 'Please specify a valid email address.',
+                'SpeakerType.required'     => ':attribute is required.',
+                'EmailAddress.sometimes'   => 'Please specify an email address.',
+                'EmailAddress.required_if' => 'Please specify an email address.',
             );
 
-            $validator = ValidatorService::make($data, $rules, $messages);
+            $member_id          = intval($data['MemberId']);
+            $speaker_id         = intval($data['SpeakerId']);
+            $provided_email     = !filter_var($email, FILTER_VALIDATE_EMAIL) === false;
+
+            $validator          = ValidatorService::make($data, $rules, $messages);
+            $member_repository  = $this->getParent()->getMemberRepository();
+            $speaker_repository = $this->getParent()->getSpeakerRepository();
+
 
             if($validator->fails()){
                 throw new EntityValidationException($validator->messages());
             }
 
-            $member  = $me ? Member::currentUser() : $this->getParent()->getMemberRepository()->findByEmail($email);
+            if($member_id === 0 && $speaker_id === 0 && !$provided_email)
+                throw new EntityValidationException('Please specify an email address.');
+
+            $member  = $me ? Member::currentUser() : $member_repository->getById($member_id);
+            if(is_null($member) && $provided_email)
+                $member = $member_repository->findByEmail($email);
+            $speaker    = $speaker_repository->getById($speaker_id);
 
             $speaker = $this->getParent()->getPresentationManager()->addSpeakerByEmailTo
             (
                 $this->presentation,
                 $email,
-                $member
+                $member,
+                $speaker
             );
 
             return $this->parent->redirect

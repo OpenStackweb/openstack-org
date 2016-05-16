@@ -71,12 +71,64 @@ final class SpeakerManager implements ISpeakerManager
             (
                 array
                 (
-                    'MemberID' => Member::currentUserID(),
+                    'MemberID'  => Member::currentUserID(),
                     'FirstName' => Member::currentUser()->FirstName,
-                    'LastName' => Member::currentUser()->Surname
+                    'LastName'  => Member::currentUser()->Surname
                 )
             );
             $speaker->write();
         }
+    }
+
+    /**
+     * @param $term
+     * @param bool $obscure_email
+     * @return array
+     */
+    public function getSpeakerByTerm($term, $obscure_email = true)
+    {
+        $data = $this->speaker_repository->searchByTerm($term);
+        $res  = array();
+
+        foreach($data as $row)
+        {
+            $entry               = array();
+            $speaker_id          = intval($row['speaker_id']);
+            $member_id           = intval($row['member_id']);
+            $entry['name']       = sprintf("%s %s", $row['firstname'], $row['surname']);
+
+            if(empty($entry['name'])) continue;
+
+            $entry['title']      = '';
+            $entry['company']    = '';
+            $entry['speaker_id'] = $speaker_id;
+            $entry['member_id']  = $member_id;
+
+            if($member_id > 0)
+            {
+                $member       = $this->member_repository->getById($member_id);
+                $entry['pic'] = $member->ProfilePhotoUrl();
+                $company      = $member->getCurrentCompany();
+
+                if(!empty($company))
+                    $entry['company'] = $company;
+            }
+
+            if($speaker_id > 0)
+            {
+                $speaker      = $this->speaker_repository->getById($speaker_id);
+                $entry['pic'] = $speaker->ProfilePhoto();
+
+                if(!empty($speaker->Title))
+                    $entry['title'] = $speaker->Title;
+            }
+
+            if($obscure_email)
+                $entry['email'] = preg_replace('/(?<=.).(?=.*.@)/u','*',$row['email']);
+
+            array_push($res, $entry);
+        }
+
+        return $res;
     }
 }

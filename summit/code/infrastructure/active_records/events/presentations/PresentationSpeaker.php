@@ -8,25 +8,25 @@ class PresentationSpeaker extends DataObject
 {
 
     private static $db = [
-        'FirstName' => 'Varchar',
-        'LastName' => 'Varchar',
-        'Title' => 'Varchar',
-        'Bio' => 'HTMLText',
-        'IRCHandle' => 'Varchar',
-        'TwitterName' => 'Varchar',
-        'AvailableForBureau' => 'Boolean',
-        'FundedTravel' => 'Boolean',
-        'WillingToTravel' => 'Boolean',
-        'Country' => 'Varchar(2)',
-        'BeenEmailed' => 'Boolean',
+        'FirstName'             => 'Varchar',
+        'LastName'              => 'Varchar',
+        'Title'                 => 'Varchar',
+        'Bio'                   => 'HTMLText',
+        'IRCHandle'             => 'Varchar',
+        'TwitterName'           => 'Varchar',
+        'AvailableForBureau'    => 'Boolean',
+        'FundedTravel'          => 'Boolean',
+        'WillingToTravel'       => 'Boolean',
+        'Country'               => 'Varchar(2)',
+        'BeenEmailed'           => 'Boolean',
         'WillingToPresentVideo' => 'Boolean',
-        'Notes' => 'HTMLText',
-        'CreatedFromAPI' => 'Boolean',
+        'Notes'                 => 'HTMLText',
+        'CreatedFromAPI'        => 'Boolean',
     ];
 
     private static $has_one = [
-        'Photo' => 'Image',
-        'Member' => 'Member',
+        'Photo'               => 'Image',
+        'Member'              => 'Member',
         'RegistrationRequest' => 'SpeakerRegistrationRequest',
     ];
 

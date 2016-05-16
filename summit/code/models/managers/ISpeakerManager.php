@@ -24,4 +24,10 @@ interface ISpeakerManager
     public function ensureSpeakerProfile(Member $member);
 
 
+    /**
+     * @param $term
+     * @param bool $obscure_email
+     * @return array
+     */
+    public function getSpeakerByTerm($term, $obscure_email = true);
 }

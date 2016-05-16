@@ -44,6 +44,8 @@ SELECT
 CONCAT(M.ID,'_',IFNULL(PS.ID , 0)) AS unique_id,
 M.ID AS member_id ,
 M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',IFNULL(M.Email , PSR.Email),')') AS name,
+M.FirstName AS firstname,
+M.Surname AS surname,
 IFNULL(PS.ID , 0) AS speaker_id,
 IFNULL(M.Email , PSR.Email) AS email
 FROM Member AS M
@@ -56,6 +58,8 @@ SELECT
 CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
 PS.MemberID AS member_id ,
 PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
+PS.FirstName AS firstname,
+PS.LastName  AS surname,
 PS.ID  AS speaker_id,
 PSR.Email AS email
 FROM PresentationSpeaker AS PS
@@ -122,6 +126,8 @@ SQL;
                 'unique_id'  => $row['unique_id'],
                 'member_id'  => $row['member_id'],
                 'name'       => $row['name'],
+                'firstname'  => $row['firstname'],
+                'surname'    => $row['surname'],
                 'speaker_id' => $row['speaker_id'],
                 'email'      => $row['email'],
             );

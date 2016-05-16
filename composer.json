@@ -45,7 +45,8 @@
     "classmap": [
       "geoip/code",
       "html2pdf_v4.03",
-      "summit/code/infrastructure/traits"
+      "summit/code/infrastructure/traits",
+      "openstack/code/utils/apis/traits"
     ]
   },
   "config": {

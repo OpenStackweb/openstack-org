@@ -482,14 +482,15 @@ final class PresentationManager implements IPresentationManager
      * @param IPresentation $presentation
      * @param string $email
      * @param Member|null $member
+     * @param IPresentationSpeaker|null $speaker
      * @return IPresentationSpeaker
      */
-    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null)
+    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null, IPresentationSpeaker $speaker = null)
     {
 
-        return $this->tx_manager->transaction(function() use($presentation, $email, $member){
+        return $this->tx_manager->transaction(function() use($presentation, $email, $member, $speaker){
 
-            $speaker = $this->speaker_repository->getByEmail($email);
+            $speaker = !is_null($speaker)? $speaker : $this->speaker_repository->getByEmail($email);
 
             if(!is_null($speaker) && !is_null($member) && intval($member->ID) !== intval($speaker->MemberID))
                 throw new EntityValidationException(sprintf('speaker does not belongs to selected member!'));
@@ -528,6 +529,7 @@ final class PresentationManager implements IPresentationManager
                     )
                 );
             }
+
             if($speaker->Presentations()->filter('PresentationID', $presentation->ID)->count() > 0 )
                 throw new EntityValidationException('Speaker already assigned to this presentation!.');
 
