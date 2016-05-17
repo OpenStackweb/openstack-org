@@ -92,7 +92,7 @@ JS;
 
     protected function getPresentationFields() {
         $categorySource = array();
-        $categories = $this->presentation_manager->getAvailableCategoriesFor(Member::currentUser(), $this->summit );
+        $categories     = $this->presentation_manager->getAvailableCategoriesFor(Member::currentUser(), $this->summit);
 
         //if we are not allowed to use any category and the presentation exists use the one set on the presentation
         if(count($categories) == 0 && $this->presentation->exists()){
@@ -104,6 +104,7 @@ JS;
             $categorySource[$category->ID] = $category->FormattedTitleAndDescription;
         }
 
+        // the other category, its only available when the main process is open
         if($this->summit->isCallForSpeakersOpen())
             $categorySource['other'] = '<h4 class="category-label">Other topic...</h4>';
 

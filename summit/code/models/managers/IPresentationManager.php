@@ -18,9 +18,12 @@
 interface IPresentationManager
 {
     /**
+     * returns all available categories for member
+     * it consider public ones plus private ones
      * @param Member $member
      * @param ISummit $summit
      * @return PresentationCategory[]
+     * @throws NotFoundEntityException
      */
     public function getAvailableCategoriesFor(Member $member, ISummit $summit);
 
