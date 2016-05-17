@@ -168,6 +168,7 @@ final class PresentationManager implements IPresentationManager
     {
         $category = $presentation->Category();
         $summit   = $category->Summit();
+
         if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category))
         {
             $max_per_summit     = intval($summit->MaxSubmissionAllowedPerUser);
@@ -178,20 +179,15 @@ final class PresentationManager implements IPresentationManager
             return $presentation_count < $max_per_summit;
         }
 
-        if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit))
-        {
-            // check private groups
-            foreach($groups as $g)
-            {
-                if(!$g->isSubmissionOpen()) continue;
-                $max_per_group = intval($g->MaxSubmissionAllowedPerUser);
+        if($summit->isPrivateCategory($category) && $group = $summit->getPrivateGroupFor($category)) {
+
+            if($group->isSubmissionOpen()){
+                $max_per_group = intval($group->MaxSubmissionAllowedPerUser);
                 //zero means infinity
-                if($max_per_group === 0) $max_per_group = PHP_INT_MAX;
-                if(!$g->hasCategory($category)) continue;
-                // we need to check
+                if ($max_per_group === 0) $max_per_group = PHP_INT_MAX;
                 $group_presentation_count =
-                    intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g)->count())
-                    + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g)->count());
+                    intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $group)->count())
+                    + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $group)->count());
                 return $group_presentation_count < $max_per_group;
             }
         }
@@ -302,6 +298,15 @@ final class PresentationManager implements IPresentationManager
                 return true;
             }
         }
+        //check if we have presentations for the current summit that are private categories
+        foreach($speaker->Presentations() as $presentation){
+            $category = $presentation->Category();
+            if(!$summit->isPrivateCategory($category)) continue;
+            $group = $summit->getPrivateGroupFor($category);
+            if(is_null($group)) continue;
+            if(!$group->isSubmissionOpen()) continue;
+            return true;
+        }
         return false;
     }
 
@@ -313,12 +318,26 @@ final class PresentationManager implements IPresentationManager
     public function isPresentationEditionAllowed(Member $member, ISummit $summit)
     {
         if($summit->isPresentationEditionAllowed()) return true;
+        //check our groups
         $groups = $this->getPrivateCategoryGroupsFor($member, $summit);
         foreach($groups as $g)
         {
             if(!$g->isSubmissionOpen()) continue;
             if($g->Categories()->count() == 0) continue;
             return true;
+        }
+        //check if we have presentations for the current summit that are private categories
+        $speaker = $member->getSpeakerProfile();
+        if(!is_null($speaker))
+        {
+            foreach($speaker->Presentations() as $presentation){
+                $category = $presentation->Category();
+                if(!$summit->isPrivateCategory($category)) continue;
+                $group = $summit->getPrivateGroupFor($category);
+                if(is_null($group)) continue;
+                if(!$group->isSubmissionOpen()) continue;
+                return true;
+            }
         }
         return false;
     }
@@ -492,6 +511,9 @@ final class PresentationManager implements IPresentationManager
 
             $speaker = !is_null($speaker)? $speaker : $this->speaker_repository->getByEmail($email);
 
+            if(is_null($speaker))
+                $speaker = $member->getSpeakerProfile();
+
             if(!is_null($speaker) && !is_null($member) && intval($member->ID) !== intval($speaker->MemberID))
                 throw new EntityValidationException(sprintf('speaker does not belongs to selected member!'));
 
@@ -513,6 +535,7 @@ final class PresentationManager implements IPresentationManager
                 }
                 $speaker->write();
             }
+
 
             // i am adding other speaker than me
             if(!is_null($member)  &&

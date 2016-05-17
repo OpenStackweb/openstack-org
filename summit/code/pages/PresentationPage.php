@@ -767,7 +767,8 @@ class PresentationPage_ManageRequest extends RequestHandler
                 FormAction::create('savePresentationSummary', 'Save and continue')
             ),
             $this->parent->Summit(),
-            $this->parent->getPresentationManager()
+            $this->parent->getPresentationManager(),
+            $this->presentation
         );
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
