@@ -104,6 +104,11 @@ interface ISummitEvent extends IEntity
     public function getFeedback();
 
     /**
+     * @return ISummitEventFeedBack
+     */
+    public function getCurrentMemberFeedback();
+
+    /**
      * @param ISummitEventFeedBack $feedback
      * @return void
      */

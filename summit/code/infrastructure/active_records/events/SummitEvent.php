@@ -260,6 +260,15 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     /**
+     * @return ISummitEventFeedBack
+     */
+    public function getCurrentMemberFeedback()
+    {
+        $member = Member::currentUser();
+        return $this->Feedback()->where('OwnerID = '.$member->ID)->filter('ClassName','SummitEventFeedback')->first();
+    }
+
+    /**
      * @param ISummitLocation $location
      * @return void
      */

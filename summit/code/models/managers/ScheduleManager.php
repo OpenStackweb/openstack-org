@@ -222,8 +222,17 @@ final class ScheduleManager
                 throw new NotFoundEntityException('Attendee', '');
             }
 
-            $feedback  = $eventfeedback_factory->buildEventFeedback($data);
-            return $eventfeedback_repository->add($feedback);
+            $feedback = $eventfeedback_repository->getFeedback($data['event_id'],$member_id);
+            if ($feedback) {
+                $feedback->Rate = $data['rating'];
+                $feedback->Note = $data['comment'];
+                $feedback->write();
+            } else {
+                $feedback  = $eventfeedback_factory->buildEventFeedback($data);
+                $eventfeedback_repository->add($feedback);
+            }
+
+            return $feedback;
         });
     }
 
