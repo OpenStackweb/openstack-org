@@ -118,12 +118,12 @@ final class COAManager implements ICOAManager
 
     private function isFileProcessed(array $file_info)
     {
-        return intval(COAProcessedFile::get()->filter('Name', trim($file_info['filename']))->count()) > 1;
+        return intval(COAProcessedFile::get()->filter('Name', trim($file_info['filename']))->count()) > 0;
     }
 
     private function markFileAsProcessed(array $file_info)
     {
-        $file = COAProcessedFile::create();
+        $file            = COAProcessedFile::create();
         $file->Name      = trim($file_info['filename']);
         $file->TimeStamp = intval($file_info['timestamp']);
         $file->write();
