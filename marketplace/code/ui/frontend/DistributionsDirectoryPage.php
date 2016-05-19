@@ -163,7 +163,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
             $query = new QueryObject();
             $query->addAndCondition(QueryCriteria::equal('Slug', $slug));
             $distribution = $this->distribution_repository->getBy($query);
-            if (!$distribution) {
+            if (!$distribution || !$distribution->Active) {
                 throw new NotFoundEntityException('', '');
             }
             if ($distribution->getCompany()->URLSegment != $company_url_segment) {
@@ -189,7 +189,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
             $query = new QueryObject();
             $query->addAndCondition(QueryCriteria::equal('Slug', $slug));
             $appliance = $this->appliance_repository->getBy($query);
-            if (!$appliance) {
+            if (!$appliance || !$appliance->Active) {
                 throw new NotFoundEntityException('', '');
             }
             $this->company_service_ID = $appliance->getIdentifier();

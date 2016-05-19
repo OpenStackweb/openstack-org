@@ -149,7 +149,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			$query               = new QueryObject();
 			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 			$consultant          = $this->consultant_repository->getBy($query);
-			if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
+			if(!$consultant || !$consultant->Active) throw new NotFoundEntityException('Consultant','by slug');
 			if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
             // we need this for reviews.
             $this->company_service_ID = $consultant->getIdentifier();
