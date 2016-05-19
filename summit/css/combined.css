@@ -210,11 +210,12 @@ a.single-summit {
   display: block;
   position: relative; }
 
-a.single-summit:hover {
-  text-decoration: none; }
+a.single-summit:hover, a.single-summit:focus {
+  text-decoration: none; 
+}
 
 a.past-summit::after {
-  background: url('/themes/openstack/static/images/home/tokyo-square.jpg') no-repeat center center;
+  background: url('/summit/images/barcelona/austin-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -228,7 +229,7 @@ a.current-summit {
   padding-top: 10px; }
 
 a.current-summit::after {
-  background: url('/themes/openstack/static/images/home/austin-wide.jpg') no-repeat center center;
+  background: url('/summit/images/barcelona/barcelona-wide.jpg') no-repeat center center;
   content: "";
   opacity: 0.8;
   top: 0;
@@ -242,7 +243,7 @@ a.current-summit:hover:after {
   opacity: 1; }
 
 a.future-summit::after {
-  background: url('/themes/openstack/static/images/home/barcelona-square.jpg') no-repeat center center;
+  background: url('/summit/images/barcelona/boston-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -253,7 +254,7 @@ a.future-summit::after {
   z-index: -1; }
 
 a.past-summit:hover:after, a.future-summit:hover:after {
-  opacity: 0.5; }
+  opacity: 0.8; }
 
 @media (max-width: 767px) {
   a.single-summit::after {

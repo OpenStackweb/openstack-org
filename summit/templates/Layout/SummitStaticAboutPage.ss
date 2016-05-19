@@ -14,7 +14,7 @@
                         <img src="/summit/images/barcelona/stats-paris.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/stats-paris.png" alt="Paris Summit Attendees">
                     </div>
                     <div class="single-summit-stats">
-                        <h4>May 2016: Austin, Texas</h4>
+                        <h4>April 2016: Austin, Texas</h4>
                         <img src="/summit/images/barcelona/stats-austin.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/stats-austin.png" alt="Austin Summit Attendees">
                     </div>
                     <div class="about-summit-legend-wrapper">
