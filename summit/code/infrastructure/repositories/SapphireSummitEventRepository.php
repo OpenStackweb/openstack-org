@@ -41,70 +41,55 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
 
         $sql_events   = <<<SQL
         SELECT * FROM (
-        SELECT DISTINCT E.* FROM SummitEvent E
-        WHERE
-        E.SummitID = {$summit_id} AND E.Published = 1
-        AND Title LIKE '%{$term}%'
-        UNION
-        SELECT DISTINCT E.* FROM SummitEvent E
-        WHERE
-        E.SummitID = {$summit_id} AND E.Published = 1
-        AND
-        EXISTS
-        (
-            SELECT T.ID FROM Tag T INNER JOIN SummitEvent_Tags ET ON ET.TagID = T.ID
-            WHERE ET.SummitEventID = E.ID AND T.Tag LIKE '%{$term}%'
-        )
-        UNION
-        SELECT DISTINCT E.* FROM SummitEvent E
-        WHERE
-        E.SummitID = {$summit_id} AND E.Published = 1
-        AND
-        EXISTS
-        (
-            SELECT P.ID FROM Presentation P
-            LEFT JOIN PresentationCategory PC ON PC.ID = P.CategoryID
-            WHERE  P.ID = E.ID AND PC.Title LIKE '%{$term}%'
-        )
-        UNION
-        SELECT DISTINCT E.* FROM SummitEvent E
-        LEFT JOIN SummitEventType ET ON ET.ID = E.TypeID
-        WHERE
-        E.SummitID = {$summit_id} AND E.Published = 1 AND ET.Type LIKE '%{$term}%'
-        UNION
-        SELECT DISTINCT E.* FROM SummitEvent E
-        WHERE
-        E.SummitID = {$summit_id} AND E.Published = 1
-        AND
-        EXISTS
-        (
-            SELECT P.ID FROM Presentation P
-            WHERE  P.ID = E.ID AND P.Level LIKE '%{$term}%'
-        )
-        UNION
-        SELECT DISTINCT E.* FROM SummitEvent E
-        WHERE
-        E.SummitID = {$summit_id} AND E.Published = 1
-        AND EXISTS
-        (
-            SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
-            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
-            INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
-            WHERE P.ID = E.ID
-            HAVING SpeakerFullName LIKE '%{$term}%'
-        )
-        UNION
-        SELECT DISTINCT E.* FROM SummitEvent E
-        WHERE
-        E.SummitID = {$summit_id} AND E.Published = 1
-        AND EXISTS
-        (
-            SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
-            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
-            INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
-            WHERE P.ID = E.ID
-            HAVING SOUNDEX(SpeakerFullName) = SOUNDEX('{$term}')
-        )
+            SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND (Title LIKE '%{$term}%' OR E.ID = {$term})
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
+                    SELECT T.ID FROM Tag T INNER JOIN SummitEvent_Tags ET ON ET.TagID = T.ID
+                    WHERE ET.SummitEventID = E.ID AND T.Tag LIKE '%{$term}%'
+                )
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
+                    SELECT P.ID FROM Presentation P
+                    LEFT JOIN PresentationCategory PC ON PC.ID = P.CategoryID
+                    WHERE  P.ID = E.ID AND PC.Title LIKE '%{$term}%'
+                )
+            UNION SELECT DISTINCT E.* FROM SummitEvent E LEFT JOIN SummitEventType ET ON ET.ID = E.TypeID
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND ET.Type LIKE '%{$term}%'
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
+                    SELECT P.ID FROM Presentation P
+                    WHERE  P.ID = E.ID AND P.Level LIKE '%{$term}%'
+                )
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
+                    SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
+                    INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+                    INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
+                    WHERE P.ID = E.ID
+                    HAVING
+                        SpeakerFullName LIKE '%{$term}%'
+                        OR SOUNDEX(SpeakerFullName) = SOUNDEX('{$term}')
+                )
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
+                    SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
+                    INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+                    INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
+                    WHERE P.ID = E.ID AND S.ID = {$term}
+                )
 SQL;
 
         foreach(DB::query($sql_events.") AS Q1 ORDER BY StartDate ASC, EndDate ASC ;") as $row)
