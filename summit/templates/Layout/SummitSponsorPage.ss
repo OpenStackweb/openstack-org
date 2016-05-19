@@ -75,71 +75,6 @@
 <% if HasSponsors %>
 <div class="white sponsor-list" id="sponsors">
     <div class="container">
-        <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Tuesday Community Party Sponsors
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&offer_id=701600000006R7KAAU"><img alt='Red Hat, Inc._big_logo' src='/assets/companies/main_logo/redhat.jpg' class='big-logo-company sponsor-logo'/></a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.cisco.com/"><img alt='Cisco_big_logo' src='/assets/companies/main_logo/cisco.jpg' class='big-logo-company sponsor-logo'/></a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.canonical.com/">
-                                    <img alt='Canonical_big_logo' src='/assets/companies/main_logo/canonical.jpg' class='big-logo-company sponsor-logo'/>
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.intel.com/content/www/us/en/homepage.html"><img alt='Intel_big_logo' src='/assets/companies/main_logo/intel-headline-large.png' class='big-logo-company sponsor-logo'/></a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.ibm.com/us/en/">
-                                    <img alt='IBM_big_logo' src='/assets/companies/main_logo/ibm-xlg.jpg' class='big-logo-company sponsor-logo'/>
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="https://www.hpe.com/us/en/home.html">
-                                    <img alt='Hewlett Packard Enterprise_big_logo' src='/assets/companies/main_logo/hpe-large.jpg' class='big-logo-company sponsor-logo'/>
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.netapp.com/us/">
-                                    <img alt='NetApp_big_logo' src='/assets/companies/main_logo/netapp-lg-2.jpg' class='big-logo-company sponsor-logo'/>
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://swiftstack.com">
-                                    <img alt='SwiftStack Inc_big_logo' src='/assets/companies/main_logo/swiftstack.jpg' class='big-logo-company sponsor-logo'/>
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.easystack.cn">
-                                    <img alt='EasyStack_big_logo' src='/assets/companies/main_logo/_resampled/SetWidth300-logo500.png' class='big-logo-company sponsor-logo'/>
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="https://www.aerofs.com">
-                                    <img alt='AeroFS (Air Computing, Inc.)_big_logo' src='/assets/companies/main_logo/aerofs-lg.jpg' class='big-logo-company sponsor-logo'/>
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.brightcomputing.com">
-                                    <img alt="Bright Computing_big_logo" src="/assets/companies/main_logo/brightcomputing-lg2.jpg" class="big-logo-company sponsor-logo">
-                                </a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="http://www.linuxfoundation.org/">
-                                    <img alt="Open Platform for NFV_big_logo" src="/assets/companies/main_logo/opnfv-lg.jpg" class="big-logo-company sponsor-logo">
-                                </a>
-                            </div>
-                    </div>
-                </div>
-            </div>
         <% if HeadlineSponsors %>
             <div class="row">
                 <p>&nbsp;</p>
@@ -471,11 +406,13 @@
 </div>
 <% end_if %>
 <% if HowToSponsorContent %>
-<div class="sponsor-bkgd">
+<!-- <div class="sponsor-bkgd">
     <div class="fixed-image exhibit" style="background-image: url('{$ExhibitImageUrl}');"></div>
-</div>
+</div> -->
 <div class="light sponsor-instructions negative-bottom" id="how-to-sponsor">
-    $HowToSponsorContent
+    <div class="container">
+        $HowToSponsorContent
+    </div>
 </div>
 <% end_if %>
 <% if ShowSponsorShipPackages %>

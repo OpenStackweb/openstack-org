@@ -1995,7 +1995,7 @@ p#ForgotPassword {
 /*End Voting For Presentations*/
 /*Sponsor Page*/
 .sponsor-page-wrapper {
-  padding-top: 0;
+  padding: 10px 0 30px;
   text-align: center; }
 
 .sponsor-wrapper {

@@ -10,12 +10,12 @@
                 <div class="stats-wrapper">
                     <h3 class="recap-title">Attendees From Around The World</h3>
                     <div class="single-summit-stats right">
-                        <h4>May 2014: Atlanta, GA</h4>
-                        <img src="/themes/openstack/static/images/austin/stats-atlanta.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/austin/stats-austin.png" alt="Atlanta Summit Attendees">
+                        <h4>November 2014: Paris, France</h4>
+                        <img src="/summit/images/barcelona/stats-paris.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/stats-paris.png" alt="Paris Summit Attendees">
                     </div>
                     <div class="single-summit-stats">
-                        <h4>May 2015: Vancouver, BC</h4>
-                        <img src="/themes/openstack/static/images/tokyo/stats-vancouver.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/stats-vancouver.png" alt="Vancouver Summit Attendees">
+                        <h4>May 2016: Austin, Texas</h4>
+                        <img src="/summit/images/barcelona/stats-austin.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/stats-austin.png" alt="Austin Summit Attendees">
                     </div>
                     <div class="about-summit-legend-wrapper">
                         <img class="about-summit-legend" src="/themes/openstack/static/images/tokyo/about-stats-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/about-stats-legend.png" alt="Vancouver Summit Attendees">
@@ -34,19 +34,19 @@
             </div>
         <div class="col-lg-3 col-md-4 col-sm-4">
             <ul class="help-me-menu">
-               <li><a href="/summit/austin-2016/summit-schedule/#day=2016-04-25"><i class="fa fa-calendar"></i>Summit Schedule</a></li>
-               <!-- <li><a href="https://openstacksummit2016austin.eventbrite.com/"><i class="fa fa-shopping-cart"></i>Register For The Summit</a></li> -->
+               <!-- <li><a href="#"><i class="fa fa-calendar"></i>Summit Schedule</a></li>
+               <li><a href="$"><i class="fa fa-shopping-cart"></i>Register For The Summit</a></li>
                <li><a href="/summit/austin-2016/venues/"><i class="fa fa-compass"></i>Venues</a></li>
                <li><a href="/summit/austin-2016/mobile-apps/"><i class="fa fa-mobile"></i>Mobile Apps</a></li>
                 <li><a href="/summit/austin-2016/guide-to-austin/"><i class="fa fa-map"></i>Guide To Austin</a></li>
-                <li><a href="/summit/austin-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
+                <li><a href="/summit/austin-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li> -->
             </ul>
             <div class="schedule-square">
                 <h3><i class="fa fa-calendar"></i>Schedule</h3>
                 <p>
-                    Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Austin.
+                    Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Barcelona.
                 </p>
-                <a href="/summit/austin-2016/summit-schedule/" class="btn outline-btn">View The Schedule</a>
+                <a href="#" class="btn outline-btn">Coming Soon</a>
             </div>
         </div>
         </div>
@@ -67,7 +67,7 @@
                     For Everyone
                 </div>
                 <p>
-                   <strong>Monday - Thursday</strong><br>Classic track with speakers and sessions. The perfect place for developers, users, and administrators of OpenStack Cloud Software. This is great for those looking for the best way to get started.
+                   <strong>Tuesday - Thursday</strong><br>Classic track with speakers and sessions. The perfect place for developers, users, and administrators of OpenStack Cloud Software. This is great for those looking for the best way to get started.
                 </p>
             </div>
             <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
@@ -77,26 +77,17 @@
                     For Contributors
                 </div>
                 <p>
-                    <strong>Monday - Friday</strong><br>Collaborative working sessions where OpenStack developers come together twice annually to discuss the requirements for the next software release and connect with other community members.
+                    <strong>Tuesday - Friday</strong><br>Collaborative working sessions where OpenStack developers come together twice annually to discuss the requirements for the next software release and connect with other community members.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-8 col-sm-push-2">
-                <div class="about-timeline-wrapper">
-                    <hr>
-                    <h3>Additional Events</h3>
-                    <p>The Austin Summit is chock full of supplemental events, starting the weekend before the keynotes. These events include Upstream University, Command Presence Workshop, Women of OpenStack Networking Event, Foundation Board of Directors Meeting, and more.</p>
-                    <hr style="margin-bottom: 0;">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-8 col-sm-push-2">
+                <hr style="margin-bottom: 0;">
                 <div class="about-timeline-wrapper">
                     <h3>Summit Timeline</h3>
-                    <p>You can access the Austin Summit with one of two passes: Keynote + Marketplace Pass or The Full Access Pass.</p>
-                    <img class="summit-type-icon" src="/themes/openstack/static/images/austin/schedule-chart.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/austin/schedule-chart.png" alt="Summit Timeline">
+                    <p>You can access the Barcelona Summit with one of two passes: Keynote + Marketplace Pass or The Full Access Pass.</p>
+                    <img class="summit-type-icon" src="/summit/images/barcelona/barcelona-schedule.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/barcelona-schedule.png" alt="Summit Timeline">
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
@@ -158,20 +149,20 @@
                 <div class="growth-text-top map">
                     <h2>Join The Movement</h2>
                     <p>
-                         In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Four years later, 6,000 attendees joined us in Vancouver for our third international summit and the first OpenStack Summit held in Canada.
+                         In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Six years later, over 7,800 attendees joined us as we returned to Austin.
                     </p>
                 </div>
                 <div class="growth-map-wrapper">
-                    <img class="growth-map tokyo" src="/themes/openstack/static/images/austin/map-about-summit.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/austin/map-about-summit.png" alt="OpenStack Summit Growth Chart">
+                    <img class="growth-map tokyo" src="/summit/images/barcelona/map-about-summit.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/map-about-summit.png" alt="OpenStack Summit Growth Chart">
                     <img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/map-legend.png" alt="OpenStack Summit Map Legend">
                 </div>
                 <div class="growth-text-bottom map">
                     <p>
                         The OpenStack summit is a unique opportunity for the developers and users of OpenStack software to meet and exchange ideas. Hundreds of the core developers will be on site to discuss all things OpenStack. Summits include in-depth technical discussions, hands-on workshops, and the full presence of almost every player in the OpenStack Ecosystem. If you are deploying OpenStack—or considering how it can help your enterprise—there’s no better way to connect with the community than the OpenStack Summit.
                     </p>
-                    <p>
-                        <a href="https://www.eventbrite.com/e/openstack-summit-april-2016-austin-tickets-19805252042" target="_blank">Register Now</a>
-                    </p>
+<!--                     <p>
+                        <a href="#" target="_blank">Register Now</a>
+                    </p> -->
                 </div>
             </div>
         </div>
@@ -183,10 +174,10 @@
             <div class="col-lg-8 col-lg-push-2">
                 <h1>Schedule</h1>
                 <p>
-                    Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Austin.
+                    Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Barcelona.
                 </p>
                 <p>
-                    <a href="/summit/austin-2016/summit-schedule/" class="btn outline-btn">View the Schedule</a>
+                    <a href="#" class="btn outline-btn">Coming Soon</a>
                 </p>
             </div>
         </div>
