@@ -62,6 +62,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'ViewAttendeeProfile',
         'ViewMySchedule',
         'ExportMySchedule',
+        'ExportEventToICS',
         'DoGlobalSearch',
         'index',
         'ViewFullSchedule',
@@ -72,6 +73,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     static $url_handlers = array
     (
         'events/$EVENT_ID/html'         => 'eventDetails',
+        'events/$EVENT_ID/export_ics'   => 'ExportEventToICS',
         'events/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
         'speakers/$SPEAKER_ID'          => 'ViewSpeakerProfile',
         'attendees/$ATTENDEE_ID'        => 'ViewAttendeeProfile',
@@ -157,6 +159,37 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
                 'Event' => $event,
             )
         );
+    }
+
+    public function ExportEventToICS(SS_HTTPRequest $request)
+    {
+        $event_id            = intval($request->param('EVENT_ID'));
+
+        $event  = $this->event_repository->getById($event_id);
+        if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+
+
+        $ical = "BEGIN:VCALENDAR
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:" . md5(uniqid(mt_rand(), true)) . "event
+DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
+DTSTART:".date('Ymd',strtotime($event->getField('StartDate')))."T".date('His',strtotime($event->getField('StartDate')))."Z
+DTEND:".date('Ymd',strtotime($event->getField('EndDate')))."T".date('His',strtotime($event->getField('EndDate')))."Z
+SUMMARY:".$event->Title."
+DESCRIPTION:".$event->ShortDescription."
+END:VEVENT
+END:VCALENDAR";
+
+        //set correct content-type-header
+        header('Content-type: text/calendar; charset=utf-8');
+        header('Content-Disposition: inline; filename=event-'.$event_id.'.ics');
+        echo $ical;
+
+        exit();
     }
 
     public function ViewMySchedule()

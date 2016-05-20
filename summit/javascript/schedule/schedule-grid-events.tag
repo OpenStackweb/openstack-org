@@ -124,10 +124,17 @@
             '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;calendar</span>'+
             '</div>' : '';
 
-            var gcal_synch_container = self.summit.current_user !== null ? '<div class="col-md-2 gcal-synch-container">'+
-            '<span class="gcal-synch">'+
-            '<i class="fa fa-check-circle gcal-icon"></i>&nbsp;Google&nbsp;synch</span>'+
-            '</div>' : '';
+            var cal_synch_container = '<div class="col-md-2 gcal-synch-container">'+
+            '<div class="btn-group">'+
+            '<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+            'Synch to Cal'+
+            '</button>'+
+            '<div class="dropdown-menu">'+
+            '<a class="dropdown-item gcal-synch" href="#"><i class="fa fa-check-circle gcal-icon"></i>&nbsp;Google&nbsp;synch</a><br>'+
+            '<a class="dropdown-item export_event search-link" href="">Export&nbsp;ICS</a>'+
+            '</div>'+
+            '</div>'+
+            '</div>';
 
             var event_template = $(
             '<div class="col-md-12">'+
@@ -148,7 +155,7 @@
                 '</div>'+
                 '<div class="row">'+
                 '<div class="col-md-10 event-title"></div>'+
-                gcal_synch_container+
+                cal_synch_container+
                 '</div>'+
                 '<div class="row">'+
                 '<div class="col-xs-8 col-track">'+
@@ -204,7 +211,11 @@
                     return self.summit.link+'venues/#venue='+ self.summit.locations[arg.item.location_id].venue_id;
                 },
                 'span.start-time': 'event.start_time',
-                'span.end-time': 'event.end_time'
+                'span.end-time': 'event.end_time',
+                'a.export_event@href': function(arg){
+                    var event_id = +arg.item.id;
+                    return self.parent.base_url+'events/'+event_id+'/export_ics';
+                },
             };
 
             if(self.summit.current_user !== null ){
@@ -218,10 +229,10 @@
                 };
                 // GOOGLE CALENDAR SYNCH
                 event_directives['i.gcal-icon@class+']                   = function(arg){ return arg.item.gcal_id ? ' icon-own-event':' icon-foreign-event'; };
-                event_directives['span.gcal-synch@title']                = function(arg){ return arg.item.gcal_id ? 'unsynch from google calendar':'synch with google calendar'; };
-                event_directives['span.gcal-synch@data-event-id']        = function(arg){ return arg.item.id; };
+                event_directives['a.gcal-synch@title']                = function(arg){ return arg.item.gcal_id ? 'unsynch from google calendar':'synch with google calendar'; };
+                event_directives['a.gcal-synch@data-event-id']        = function(arg){ return arg.item.id; };
 
-                event_directives['span.gcal-synch@class+']               = function(arg){ return arg.item.gcal_id ? ' own':' foreign'; };
+                event_directives['a.gcal-synch@class+']               = function(arg){ return arg.item.gcal_id ? ' own':' foreign'; };
                 event_directives['span.icon-event-action@class+']        = function(arg){ return arg.item.own ? ' own':' foreign'; };
             }
 

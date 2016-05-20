@@ -94,9 +94,9 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'GET search'                                    => 'getSearchResults',
         'GET empty_spots'                               => 'getEmptySpots',
         'GET full'                                      => 'getFullSchedule',
-        'PUT $EventID!/synch/$Target!/$CalEventID!'     => 'synchEvent',
+        'PUT $EventID!/synch/google/$CalEventID!'       => 'synchEvent',
         'PUT $EventID!'                                 => 'addToSchedule',
-        'DELETE $EventID!/synch/$Target!'               => 'unSynchEvent',
+        'DELETE $EventID!/synch/google'                 => 'unSynchEvent',
         'DELETE $EventID!'                              => 'removeFromSchedule',
         'POST $EventID!/feedback'                       => 'addFeedback',
         'POST $EventID!/share'                          => 'shareEmail',
@@ -747,7 +747,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         try{
             $summit_id      = (int)$this->request->param('SUMMIT_ID');
             $event_id       = (int)$this->request->param('EventID');
-            $target         = $this->request->param('Target');
             $cal_event_id   = $this->request->param('CalEventID');
             $member    = Member::currentUser();
 
@@ -761,7 +760,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             if(is_null($summit))
                 return $this->notFound('summit not found!');
 
-            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, $target, $cal_event_id);
+            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, 'google', $cal_event_id);
 
             return $this->ok($cal_event_id);
         }
@@ -783,7 +782,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         try{
             $summit_id      = (int)$this->request->param('SUMMIT_ID');
             $event_id       = (int)$this->request->param('EventID');
-            $target         = $this->request->param('Target');
             $member    = Member::currentUser();
 
             if(is_null($member)) return $this->permissionFailure();
@@ -796,7 +794,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             if(is_null($summit))
                 return $this->notFound('summit not found!');
 
-            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, $target, '');
+            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, 'google', '');
 
             return $this->ok();
         }
