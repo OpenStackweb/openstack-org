@@ -7,12 +7,11 @@ import Store from './store';
 import Config from './utils/Config';
 import VotingApp from './components/views/VotingApp';
 import PresentationDetail from './components/views/PresentationDetail';
-import DevTools from './components/containers/DevTools';
 
 Config.load(window.VotingAppConfig);
 
 const routes = (
-  <Route path={Config.get('baseURL')} component={VotingApp}>
+  <Route path={Config.get('baseURL').replace(/\/$/,'')} component={VotingApp}>
       <Route path="presentation/:id" component={PresentationDetail} />
   </Route>
 );
