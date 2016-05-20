@@ -1,4 +1,4 @@
 require('./app.tag')
 var api = require('./api.js')
 
-app = riot.mount('app', api)
+var app = riot.mount('app', api);

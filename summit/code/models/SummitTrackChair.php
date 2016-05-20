@@ -67,7 +67,7 @@ class SummitTrackChair extends DataObject
     public function getCMSFields()
     {
 
-        $summit_id = $_REQUEST['SummitID'];
+        $summit_id = @$_REQUEST['SummitID'];
 
         $f = new FieldList(
             $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))

@@ -4,9 +4,9 @@
 */
 
 // Requirements and globals
-reqwest = require('reqwest')
-var api = riot.observable()
-var url = '/trackchairs/api/v1/'
+var reqwest = require('reqwest');
+var api = riot.observable();
+var url = '/trackchairs/api/v1/';
 
 var load_presentation_req = null;
 var load_summit_req       = null;
