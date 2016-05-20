@@ -117,7 +117,7 @@
                         </p>
                         <h5 class="section-title">Scoring</h5>
                         <p>
-                            Upon completion, exams are scored automatically and a score report will be made available within three (3) business days. If a passing score is achieved and other applicable requirements for Certification have been fulfilled, a notification indicating the Candidate has been successfully Certified will follow the score report. Candidate will receive a certificate and logo for personal use.
+                            Upon completion, exams are scored automatically and a score report will be made available within three (3) business days. If a passing score of 76 or higher is achieved and other applicable requirements for Certification have been fulfilled, a notification indicating the Candidate has been successfully Certified will follow the score report. Candidate will receive a certificate and logo for personal use.
                         </p>
                         <h5 class="section-title">Language</h5>
                         <p>
