@@ -112,7 +112,7 @@
 
                                 </li>
                                 <li>
-                                    This pass does NOT include access to any breakout sessions (including sponsored sessions and tracks) taking place Monday - Thursday or the developer and operator working sessions taking place Tuesday - Friday. This pass ONLY includes access to the Keynote presentations and the Marketplace Expo Hall.
+                                    This pass does NOT include access to any breakout sessions (including sponsored sessions and tracks) taking place Tuesday - Thursday or the developer and operator working sessions taking place Tuesday - Friday. This pass ONLY includes access to the Keynote presentations and the Marketplace Expo Hall.
                                 </li>
                                 <li>
                                     This pass includes lunch
