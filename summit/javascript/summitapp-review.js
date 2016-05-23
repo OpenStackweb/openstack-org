@@ -12,7 +12,7 @@
  **/
 
 $(document).ready(function(){
-    $(".rating").rating({size:'xs',showCaption:false,showClear:false});
+    $(".rating").rating({size:'xs',showCaption:false,showClear:false,step:1});
 
     $('.save').click(function() {
        saveReview($(this).attr('id'));

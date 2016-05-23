@@ -35,7 +35,6 @@ class SummitAppReviewPage_Controller extends SummitPage_Controller
         //Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
         Requirements::javascript('summit/javascript/summitapp-review.js');
         Requirements::javascript('marketplace/code/ui/frontend/js/star-rating.min.js');
-        Requirements::javascript('summit/javascript/summitapp-review.js');
         Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
 
     }
@@ -45,10 +44,13 @@ class SummitAppReviewPage_Controller extends SummitPage_Controller
         $member    = Member::currentUser();
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
+        if(is_null($member)) return $this->httpError(401, 'You need to login to access your schedule.');
 
-        if(is_null($member) || !$member->isAttendee($this->Summit()->ID)) return $this->httpError(401, 'You need to login to access your schedule.');
+        $is_attendee = $member->isAttendee($this->Summit()->ID);
+        $my_schedule = '';
 
-        $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
+        if ($is_attendee)
+            $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
 
         return $this->renderWith(
             array('SummitAppReviewPage', 'SummitPage', 'Page'),
