@@ -15,8 +15,12 @@
 /**
  * Class SummitAppApi
  */
-final class SummitAppApi extends AbstractRestfulJsonApi {
+final class SummitAppApi extends AbstractRestfulJsonApi
+{
 
+    /**
+     *
+     */
     const ApiPrefix = 'api/v1/summitapp';
 
     /**
@@ -34,139 +38,190 @@ final class SummitAppApi extends AbstractRestfulJsonApi {
      */
     private $summit_manager;
 
-    public function __construct(){
+    /**
+     * SummitAppApi constructor.
+     */
+    public function __construct()
+    {
         parent::__construct();
-        $this->summit_repository  = new SapphireSummitRepository;
+        $this->summit_repository = new SapphireSummitRepository;
         $this->summittype_repository = new SapphireSummitTypeRepository();
-        $this->summit_manager = new SummitManager($this->summit_repository,new SummitFactory(),
-                                                  $this->summittype_repository,new SummitTypeFactory(),
-                                                  SapphireTransactionManager::getInstance());
+        $this->summit_manager = new SummitManager($this->summit_repository, new SummitFactory(),
+            $this->summittype_repository, new SummitTypeFactory(),
+            SapphireTransactionManager::getInstance());
 
         $this_var = $this;
 
-        $this->addBeforeFilter('createSummit','check_create',function ($request) use($this_var){
-            if(!$this_var->checkAdminPermissions($request))
+        $this->addBeforeFilter('createSummit', 'check_create', function ($request) use ($this_var) {
+            if (!$this_var->checkAdminPermissions($request)) {
                 return $this_var->permissionFailure();
+            }
         });
 
-    }
-
-    public function checkOwnAjaxRequest($request){
-        $referer = @$_SERVER['HTTP_REFERER'];
-        if(empty($referer)) return false;
-        //validate
-        if (!Director::is_ajax()) return false;
-        return Director::is_site_url($referer);
-    }
-
-    public function checkAdminPermissions($request){
-        return true; //Permission::check("SUMMITAPP_ADMIN_ACCESS");
-    }
-
-    protected function isApiCall(){
-        $request = $this->getRequest();
-        if(is_null($request)) return false;
-        return  strpos(strtolower($request->getURL()),self::ApiPrefix) !== false;
     }
 
     /**
      * @return bool
      */
-    protected function authorize(){
+    public function checkOwnAjaxRequest()
+    {
+        $referer = @$_SERVER['HTTP_REFERER'];
+        if (empty($referer)) {
+            return false;
+        }
+        //validate
+        if (!Director::is_ajax()) {
+            return false;
+        }
+        return Director::is_site_url($referer);
+    }
+
+    /**
+     * @param $request
+     * @return bool
+     */
+    public function checkAdminPermissions($request)
+    {
+        return true; //Permission::check("SUMMITAPP_ADMIN_ACCESS");
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isApiCall()
+    {
+        $request = $this->getRequest();
+        if (is_null($request)) {
+            return false;
+        }
+        return strpos(strtolower($request->getURL()), self::ApiPrefix) !== false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function authorize()
+    {
         return true;
     }
 
-    protected function authenticate() {
+    /**
+     * @return bool
+     */
+    protected function authenticate()
+    {
         return true;
     }
 
+    /**
+     * @var array
+     */
     static $url_handlers = array(
         'PUT new-summit' => 'createSummit',
         'PUT $SummitID!/delete' => 'deleteSummit',
         'PUT $SummitID!/save-summittype' => 'saveSummitType',
     );
 
+    /**
+     * @var array
+     */
     static $allowed_actions = array(
         'createSummit',
         'deleteSummit',
         'saveSummitType',
     );
 
-    public function createSummit() {
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function createSummit()
+    {
         try {
             $data = $this->getJsonRequest();
-            if (!$data) return $this->serverError();
+            if (!$data) {
+                return $this->serverError();
+            }
 
             $summit = $this->summit_manager->createSummit($data);
 
             echo $this->buildSummitTableRow($summit);
-        }
-        catch (EntityAlreadyExistsException $ex1) {
-            SS_Log::log($ex1,SS_Log::ERR);
+        } catch (EntityAlreadyExistsException $ex1) {
+            SS_Log::log($ex1, SS_Log::ERR);
             return $this->addingDuplicate($ex1->getMessage());
         }
     }
 
-    public function buildSummitTableRow($summit) {
-        $start_date = ($summit->getBeginDate()) ? date('M jS Y',strtotime($summit->getBeginDate())) : '';
-        $end_date = ($summit->getEndDate()) ? date('M jS Y',strtotime($summit->getEndDate())) : '';
+    /**
+     * @param $summit
+     * @return string
+     */
+    public function buildSummitTableRow($summit)
+    {
+        $start_date = ($summit->getBeginDate()) ? date('M jS Y', strtotime($summit->getBeginDate())) : '';
+        $end_date = ($summit->getEndDate()) ? date('M jS Y', strtotime($summit->getEndDate())) : '';
         $summit_id = $summit->getIdentifier();
 
-        $html = ' <tr id="summit_'.$summit_id.'">
+        $html = ' <tr id="summit_' . $summit_id . '">
                         <td class="summit_name">
-                            '.$summit->getName().'
+                            ' . $summit->getName() . '
                         </td>
                         <td>
-                            '.$start_date.'
+                            ' . $start_date . '
                         </td>
                         <td>
-                            '.$end_date.'
+                            ' . $end_date . '
                         </td>
                         <td class="center_text">
-                            <a href="summit-admin/'.$summit_id.'/dashboard" class="btn btn-primary btn-sm" role="button">Control Panel</a>
+                            <a href="summit-admin/' . $summit_id . '/dashboard" class="btn btn-primary btn-sm" role="button">Control Panel</a>
                         </td>
                         <td class="center_text">
-                            <a href="$Top.Link/'.$summit_id.'/edit" class="btn btn-default btn-sm" role="button">Edit</a>
-                            <a href="#delete_summit_modal" data-toggle="modal" data-summit-id="'.$summit_id.'" class="btn btn-danger btn-sm delete_summit">Delete</a>
+                            <a href="$Top.Link/' . $summit_id . '/edit" class="btn btn-default btn-sm" role="button">Edit</a>
+                            <a href="#delete_summit_modal" data-toggle="modal" data-summit-id="' . $summit_id . '" class="btn btn-danger btn-sm delete_summit">Delete</a>
                         </td>
                     </tr>';
 
         return $html;
     }
 
-    public function deleteSummit() {
-        try{
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function deleteSummit()
+    {
+        try {
             $summit_id = (int)$this->request->param('SummitID');
             $this->summit_manager->deleteSummit($summit_id);
             return $this->updated();
-        }
-        catch(NotFoundEntityException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->notFound($ex1->getMessage());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
 
-    public function saveSummitType() {
-        try{
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function saveSummitType()
+    {
+        try {
             $data = $this->getJsonRequest();
             $summit_id = (int)$this->request->param('SummitID');
 
-            if (!$data) return $this->serverError();
+            if (!$data) {
+                return $this->serverError();
+            }
 
-            $this->summit_manager->saveSummitType($summit_id,$data);
+            $this->summit_manager->saveSummitType($summit_id, $data);
             $inserted_id = $this->summittype_repository->getLastIdInserted($summit_id);
             return $inserted_id;
-        }
-        catch(NotFoundEntityException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->notFound($ex1->getMessage());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
