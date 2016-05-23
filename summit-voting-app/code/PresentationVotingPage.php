@@ -177,7 +177,7 @@ class PresentationVotingPage_API extends RequestHandler
         $presentations = [];
         $offset = $r->getVar('offset') ?: 0;
         $m = Member::currentUser();
-        $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : Presentation::get_voteable();
+        $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();  
 
         if ($r->getVar('category')) {
             $list = $list->filter(['CategoryID' => $r->getVar('category')]);
