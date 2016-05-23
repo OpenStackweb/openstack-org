@@ -9,6 +9,9 @@ PresentationCategory:
   category1:
     Title: test
     VotingVisible: 1
+  invisible-category:
+    Title: invisible
+    VotingVisible: 0
 Presentation:
   presentation1:
     Summit: =>Summit.summit1
@@ -35,6 +38,12 @@ Presentation:
     Title: Presentation 5
     Category: =>PresentationCategory.category1
     Status: Received
+  presentation6:
+    Summit: =>Summit.summit2
+    Title: Presentation 6
+    Category: =>PresentationCategory.invisible-category
+    Status: Received
+
 Member:
   unclecheese:
     FirstName: Uncle

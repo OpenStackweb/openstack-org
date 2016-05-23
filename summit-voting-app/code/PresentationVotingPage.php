@@ -176,13 +176,8 @@ class PresentationVotingPage_API extends RequestHandler
     {
         $presentations = [];
         $offset = $r->getVar('offset') ?: 0;
-
-        $list = SummitEvent::get()
-            ->innerJoin("Presentation", "Presentation.ID = SummitEvent.ID")
-            ->filter([
-                'SummitID' => $this->summit->ID,
-                'Published' => true
-            ]);
+        $m = Member::currentUser();
+        $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : Presentation::get_voteable();
 
         if ($r->getVar('category')) {
             $list = $list->filter(['CategoryID' => $r->getVar('category')]);
@@ -202,8 +197,8 @@ class PresentationVotingPage_API extends RequestHandler
                 ->where("
                   	SummitEvent.Title LIKE '%{$k}%'
                   	OR SummitEvent.Description LIKE '%{$k}%'
-                  	OR PresentationSpeaker.FirstName LIKE '%{$k}%'
-                  	OR PresentationSpeaker.LastName LIKE '%{$k}%'
+                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
+                    OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
                 ");
         }
 
@@ -316,7 +311,7 @@ class PresentationVotingPage_API extends RequestHandler
     public function handleCategories(SS_HTTPRequest $r)
     {
         $result = [];
-        foreach ($this->summit->Categories() as $c) {
+        foreach ($this->summit->Categories()->filter('VotingVisible', true) as $c) {
             $result[] = [
                 'id' => $c->ID,
                 'title' => $c->Title
@@ -338,7 +333,12 @@ class PresentationVotingPage_API extends RequestHandler
     {
         $info = pathinfo($file);
         $id = $info['filename'];
+        $list = $class::get();
 
-        return $class::get()->byID($id);
+        if($class === 'Presentation') {
+            $list = $list->filter('Category.VotingVisible', true);
+        }
+
+        return $list->byID($id);
     }
 }

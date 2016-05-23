@@ -50,13 +50,7 @@ class PresentationMemberExtension extends DataExtension
         $list = $priority->getPriorityList();
         if(!count($list)) return false;
         
-        $presentations =  Presentation::get()
-                ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
-                ->where("SummitEvent.Title IS NOT NULL")
-                ->where("SummitEvent.Title <> '' ")
-                ->where("PresentationCategory.VotingVisible = 1 ")                
-                ->filter('Presentation.Status', 'Received')
-                ->filter('SummitID', $summit->ID)
+        $presentations = Presentation::get_voteable($summit->ID)
                 ->sort("FIND_IN_SET(Presentation.ID, '".implode(',', $list)."')");
 
         if(!empty($category_id) && intval($category_id) > 0) {

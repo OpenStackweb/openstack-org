@@ -1741,7 +1741,9 @@ SQL;
                 'SummitID' => $this->ID,
             ]);
             $list->setSequence(
-                $this->Presentations()->sort('RAND()')->column('ID')
+                Presentation::get_voteable($this->ID)
+                    ->sort('RAND()')
+                    ->column('ID')
             );
             $list->write();
             $i++;
