@@ -1741,13 +1741,23 @@ SQL;
                 'SummitID' => $this->ID,
             ]);
             $list->setSequence(
-                Presentation::get_voteable($this->ID)
+                $this->VoteablePresentations()
                     ->sort('RAND()')
                     ->column('ID')
             );
             $list->write();
             $i++;
         }
+    }
+
+
+    public function VoteablePresentations()
+    {
+        return $this->Presentations()
+            ->where("SummitEvent.Title IS NOT NULL")
+            ->where("SummitEvent.Title <> '' ")
+            ->filter('Presentation.Status', Presentation::STATUS_RECEIVED)
+            ->filter('Category.VotingVisible', true);
     }
 
     /**

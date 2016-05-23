@@ -50,7 +50,7 @@ class PresentationMemberExtension extends DataExtension
         $list = $priority->getPriorityList();
         if(!count($list)) return false;
         
-        $presentations = Presentation::get_voteable($summit->ID)
+        $presentations = $summit->VoteablePresentations()
                 ->sort("FIND_IN_SET(Presentation.ID, '".implode(',', $list)."')");
 
         if(!empty($category_id) && intval($category_id) > 0) {

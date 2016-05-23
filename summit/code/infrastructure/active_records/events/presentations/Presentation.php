@@ -55,34 +55,6 @@ class Presentation extends SummitEvent implements IPresentation
         return in_array($progress, $valid);
     }
 
-    /**
-     * @param $summitID
-     * @return DataList
-     */
-    public static function get_received($summitID)
-    {
-        if (!$summitID) {
-            $summitID = Summit::get_active()->ID;
-        }
-
-        return Presentation::get()
-            ->where("SummitEvent.Title IS NOT NULL")
-            ->where("SummitEvent.Title <> '' ")
-            ->filter('Presentation.Status', self::STATUS_RECEIVED)
-            ->filter('SummitID', $summitID);
-
-    }
-
-    /**
-     * @param $summitID
-     * @return DataList
-     */
-    public static function get_voteable($summitID)
-    {
-        return self::get_received($summitID)
-            ->filter('Category.VotingVisible', true);
-    }
-
 
     /**
      * @return int
