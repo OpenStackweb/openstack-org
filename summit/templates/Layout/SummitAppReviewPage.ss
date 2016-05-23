@@ -1,7 +1,8 @@
 <div class="" style="padding:20px">
     <h1>Review Summit</h1>
-
-
+    <h4>Please rate the sessions listed below that you attended. If you did not attend one, just skip it. The list is
+    based on the summit sessions you added to your personal schedule. Note: All feedback will be publicly viewable including your name.</h4>
+    <br>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,7 +18,7 @@
             <% loop $Schedule %>
                 <tr class="event">
                     <td>$Title</td>
-                    <td><a href="$Link">event details</a></td>
+                    <td><a href="$getLink()" target="_blank">event details</a></td>
                     <td>
                     <% loop $Speakers %>
                         $FirstName $LastName <% if $Last %> <% else %> , <% end_if %>
