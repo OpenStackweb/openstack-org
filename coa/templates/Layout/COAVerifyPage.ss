@@ -19,6 +19,17 @@
             </div>
         </div>
         <input type="text" name="username" id="username" style="position:relative;left:-1000px"/>
+        <div id="cert_verification">
+            <p>
+                <b>Owner:</b> <span id="result_name"></span><br>
+                <b>Certification:</b> <span id="result_cert"></span><br>
+                <b>Date of Certification Achievement:</b> <span id="result_date"></span><br>
+                <b>Status:</b> <span id="result_status"></span><br>
+            </p>
+        </div>
+        <div id="cert_empty">
+            Sorry, we couldn't find any certification for the provided Certificate ID# and Last Name.
+        </div>
         <div class="row" style="margin-top:20px;">
             <div class="col-md-12">
                 <input type="checkbox" id="terms" class="">
@@ -35,17 +46,7 @@
             </div>
         </div>
 
-        <div id="cert_verification">
-            <p>
-                <b>Owner:</b> <span id="result_name"></span><br>
-                <b>Certification:</b> <span id="result_cert"></span><br>
-                <b>Date of Certification Achievement:</b> <span id="result_date"></span><br>
-                <b>Status:</b> <span id="result_status"></span><br>
-            </p>
-        </div>
-        <div id="cert_empty">
-            Sorry, we couldn't find any certification for the provided Certificate ID# and Last Name.
-        </div>
+
 
     </div>
 
