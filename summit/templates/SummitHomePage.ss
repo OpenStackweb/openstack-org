@@ -64,7 +64,7 @@
             
             <% with $NextSummit %>
             <div class="col-sm-3 small-single-summit">
-                <a href="summit/barcelona-2016/" class="single-summit future-summit">
+                <a href="summit/boston-2017/" class="single-summit future-summit">
                     <h2>Boston</h2>
                     <h4>Get Ready</h4>
                 </a>
