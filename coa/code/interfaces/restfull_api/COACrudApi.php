@@ -45,6 +45,14 @@ final class COACrudApi
 		return true;
 	}
 
+    /**
+     * @return bool|Member
+     */
+    protected function authenticate()
+    {
+        return true;
+    }
+
 	/**
 	 * @var array
 	 */
