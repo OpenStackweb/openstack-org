@@ -1,11 +1,10 @@
 <!-- Begin Page Content -->
 <div class="container">
-    <h1>Verify a Linux Foundation Certified Professional</h1>
+    <h1>Verify a Certified OpenStack Administrator</h1>
     <div class="lf-form" id="lf-verify-cert-form">
-        <img src="https://training.linuxfoundation.org/images/LFCS-LFCE_badge_rgb.png" width="150px" align="right" style="cursor: default;">
-        <p style="font-size: 18px; font-weight: bold; cursor: default;">The Linux Foundation Certification Verification Tool</p>
-        <p style="font-size: 18px; cursor: default;">Individuals who achieve a Linux Foundation Certification represent the best Linux talent available and have the skills required to make an immediate impact.</p>
-        <p style="margin: 25px 0px; cursor: default;">This verification tool allows you to confirm the validity of a job candidate's Linux Foundation Certification. Just enter the last name and Certificate ID number in the boxes below.</p>
+        <p style="font-size: 18px; font-weight: bold; cursor: default;">Certified OpenStack Administrator Verification Tool</p>
+        <p style="font-size: 18px; cursor: default;">Individuals who become a Certified OpenStack Administrator represent the best OpenStack talent available and have the skills required to make an immediate impact.</p>
+        <p style="margin: 25px 0px; cursor: default;">This verification tool allows you to confirm the validity of a job candidate's OpenStack Foundation Certification. Just enter the last name and Certificate ID number in the boxes below.</p>
 
         <div class="row">
             <div class="col-md-2"><label>Certificate ID #:</label></div>
@@ -26,7 +25,7 @@
                 <label for="terms">
                     I agree to abide by the
                     <a href="{$Link()}#tos" class="tos-link" data-toggle="modal" data-target="#tos">Terms of Service</a>
-                    for The Linux Foundation Certification Verification Tool.
+                    for Certified OpenStack Administrator Verification Tool.
                 </label>
             </div>
         </div>
