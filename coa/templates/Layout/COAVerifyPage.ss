@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <p>Individuals who become a Certified OpenStack Administrator represent the best OpenStack talent available and have the skills required to make an immediate impact.</p>
-                    <p>This verification tool allows you to confirm the validity of a job candidate's OpenStack Foundation Certification. Just enter the last name and Certificate ID number in the boxes below.</p>
+                    <p>This verification tool allows you to confirm the validity of a Certified OpenStack Administrator certification. Enter the last name and Certificate ID number in the boxes below.</p>
                 </div>
             </div>
             <div class="row">
