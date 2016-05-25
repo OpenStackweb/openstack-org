@@ -114,7 +114,7 @@ final class PresentationManager implements IPresentationManager
                    $is_public = false;
                    break;
                 }
-                if($is_public) array_push($res, $public_category);
+                if($is_public) array_push($res, $category);
             }
         }
 
