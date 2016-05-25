@@ -7,7 +7,6 @@ Director:
     'api/v1/summits': 'SummitsApi'
     'api/v1/eventbrite': 'EventbriteOrderPlacedEndpoint'
     'presentations/api/v1': 'PresentationAPI'
-    'trackchairs/api/v1': 'TrackChairAPI'
     'presentations/authenticate': 'PresentationAPITokenGenerator'
     'summit-login': 'SummitSecurity'
     'summit-admin': 'SummitAppAdminController'

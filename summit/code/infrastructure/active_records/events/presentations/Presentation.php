@@ -55,6 +55,27 @@ class Presentation extends SummitEvent implements IPresentation
         return in_array($progress, $valid);
     }
 
+    public static function apply_search_query(DataList $list, $keyword)
+    {
+        $k = Convert::raw2sql($keyword);
+        return $list
+            ->leftJoin(
+                "Presentation_Speakers",
+                "Presentation_Speakers.PresentationID = Presentation.ID"
+            )
+            ->leftJoin(
+                "PresentationSpeaker",
+                "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID"
+            )
+            ->where("
+                  	SummitEvent.Title LIKE '%{$k}%'
+                  	OR SummitEvent.Description LIKE '%{$k}%'
+                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
+                    OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
+                ");
+
+    }
+
 
     /**
      * @return int

@@ -124,7 +124,10 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     public function getLink() {
         $page = SummitAppSchedPage::get()->filter('SummitID', $this->SummitID)->first();
-        return $page->getAbsoluteLiveLink(false).'events/'.$this->getIdentifier().'/'.$this->getTitleForUrl();
+        if($page) {
+        	return $page->getAbsoluteLiveLink(false).'events/'.$this->getIdentifier().'/'.$this->getTitleForUrl();	
+        }
+        
     }
 
     public function getAvgRate() {

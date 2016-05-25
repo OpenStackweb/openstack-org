@@ -18,8 +18,17 @@
 abstract class AbstractRestfulJsonApi extends Controller
 {
 
+    /**
+     * @var array
+     */
     protected $before_filters = array();
+    /**
+     * @var
+     */
     private $json;
+    /**
+     * @var Member|null
+     */
     protected $current_user;
 
     /**
@@ -27,7 +36,7 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function getCache()
     {
-        $cache  = SS_Cache::factory( strtolower( get_class($this)). '_api_cache');
+        $cache = SS_Cache::factory(strtolower(get_class($this)) . '_api_cache');
         return $cache;
     }
 
@@ -38,7 +47,9 @@ abstract class AbstractRestfulJsonApi extends Controller
     protected function loadJSONResponseFromCache(SS_HTTPRequest $request)
     {
         $result = $this->loadRAWResponseFromCache($request);
-        if(!$result) return null;
+        if (!$result) {
+            return null;
+        }
         return $this->ok($result);
     }
 
@@ -48,23 +59,37 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function loadRAWResponseFromCache(SS_HTTPRequest $request)
     {
-        $cache  = $this->getCache();
+        $cache = $this->getCache();
         $result = $cache->load(md5($this->getCacheKey($request)));
-        if(!$result) return null;
+        if (!$result) {
+            return null;
+        }
         return unserialize($result);
     }
 
-    protected function loadRAWFromCache($key){
-        $key    = md5($key);
-        $cache  = $this->getCache();
+    /**
+     * @param $key
+     * @return mixed|null
+     */
+    protected function loadRAWFromCache($key)
+    {
+        $key = md5($key);
+        $cache = $this->getCache();
         $result = $cache->load($key);
-        if(!$result) return null;
+        if (!$result) {
+            return null;
+        }
         return unserialize($result);
     }
 
-    protected function saveRAW2Cache($key, $data){
-        $key    = md5($key);
-        $cache  = $this->getCache();
+    /**
+     * @param $key
+     * @param $data
+     */
+    protected function saveRAW2Cache($key, $data)
+    {
+        $key = md5($key);
+        $cache = $this->getCache();
         $cache->save(serialize($data), $key);
     }
 
@@ -72,7 +97,8 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @param SS_HTTPRequest $request
      * @return string
      */
-    protected function getCacheKey(SS_HTTPRequest $request){
+    protected function getCacheKey(SS_HTTPRequest $request)
+    {
         return $request->getURL(true);
     }
 
@@ -81,7 +107,8 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @param $data
      * @return $this
      */
-    protected function saveJSONResponseToCache(SS_HTTPRequest $request, $data){
+    protected function saveJSONResponseToCache(SS_HTTPRequest $request, $data)
+    {
         return $this->saveRAWResponseToCache($request, $data);
     }
 
@@ -90,13 +117,17 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @param $data
      * @return $this
      */
-    protected function saveRAWResponseToCache(SS_HTTPRequest $request, $data){
-        $key   = md5($this->getCacheKey($request));
+    protected function saveRAWResponseToCache(SS_HTTPRequest $request, $data)
+    {
+        $key = md5($this->getCacheKey($request));
         $cache = $this->getCache();
         $cache->save(serialize($data), $key);
         return $this;
     }
 
+    /**
+     * AbstractRestfulJsonApi constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -104,8 +135,15 @@ abstract class AbstractRestfulJsonApi extends Controller
         register_shutdown_function(array($this, 'shutdown_function'));
     }
 
+    /**
+     * @return mixed
+     */
     abstract protected function isApiCall();
 
+    /**
+     * @param $realm
+     * @return SS_HTTPResponse
+     */
     protected function unauthorizedHttpBasicAuth($realm)
     {
         $response = new SS_HTTPResponse();
@@ -152,6 +190,11 @@ abstract class AbstractRestfulJsonApi extends Controller
         return false;
     }
 
+    /**
+     * @param $action
+     * @param $params
+     * @return mixed
+     */
     private function doBeforeFilter($action, $params)
     {
         if (array_key_exists($action, $this->before_filters)) {
@@ -217,6 +260,11 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $this->json;
     }
 
+    /**
+     * @param $action
+     * @param $name
+     * @param Closure $callback
+     */
     protected function addBeforeFilter($action, $name, Closure $callback)
     {
         if (!array_key_exists($action, $this->before_filters)) {
@@ -229,6 +277,11 @@ abstract class AbstractRestfulJsonApi extends Controller
         $this->before_filters[$action] = $filters;
     }
 
+    /**
+     * @param SS_HTTPRequest $request
+     * @param DataModel $model
+     * @return mixed|SS_HTTPResponse
+     */
     public function handleRequest(SS_HTTPRequest $request, DataModel $model)
     {
 
@@ -264,6 +317,10 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected abstract function authorize();
 
+    /**
+     * @param null $msg
+     * @return SS_HTTPResponse
+     */
     protected function notFound($msg = null)
     {
         $msg = is_null($msg) ? "object wasn't found!." : $msg;
@@ -276,6 +333,11 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @param array|null $res
+     * @param bool $use_etag
+     * @return SS_HTTPResponse
+     */
     protected function ok(array $res = null, $use_etag = true)
     {
         $response = new SS_HTTPResponse();
@@ -312,6 +374,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @return SS_HTTPResponse
+     */
     protected function deleted()
     {
         $response = new SS_HTTPResponse();
@@ -322,6 +387,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @return SS_HTTPResponse
+     */
     protected function updated()
     {
         $response = new SS_HTTPResponse();
@@ -332,6 +400,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @return SS_HTTPResponse
+     */
     protected function published()
     {
         $response = new SS_HTTPResponse();
@@ -342,6 +413,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @return SS_HTTPResponse
+     */
     public function serverError()
     {
         $response = new SS_HTTPResponse();
@@ -352,6 +426,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @return SS_HTTPResponse
+     */
     public function forbiddenError()
     {
         $response = new SS_HTTPResponse();
@@ -362,6 +439,10 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @param $messages
+     * @return SS_HTTPResponse
+     */
     public function validationError($messages)
     {
         $response = new SS_HTTPResponse();
@@ -377,6 +458,10 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @param $id
+     * @return SS_HTTPResponse
+     */
     protected function created($id)
     {
         $response = new SS_HTTPResponse();
@@ -388,6 +473,9 @@ abstract class AbstractRestfulJsonApi extends Controller
     }
 
 
+    /**
+     * @return SS_HTTPResponse
+     */
     protected function methodNotAllowed()
     {
         $response = new SS_HTTPResponse();
@@ -398,6 +486,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @return SS_HTTPResponse
+     */
     public function permissionFailure()
     {
         // return a 401
@@ -409,6 +500,10 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     * @param $msg
+     * @return SS_HTTPResponse
+     */
     protected function addingDuplicate($msg)
     {
         // return a 401
@@ -420,6 +515,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         return $response;
     }
 
+    /**
+     *
+     */
     public function shutdown_function()
     {
         if ($this->isApiCall()) {
@@ -442,11 +540,19 @@ abstract class AbstractRestfulJsonApi extends Controller
     }
 
 
-    public function checkOwnAjaxRequest(){
+    /**
+     * @return bool
+     */
+    public function checkOwnAjaxRequest()
+    {
         $referer = @$_SERVER['HTTP_REFERER'];
-        if(empty($referer)) return false;
+        if (empty($referer)) {
+            return false;
+        }
         //validate
-        if (!Director::is_ajax()) return false;
+        if (!Director::is_ajax()) {
+            return false;
+        }
         return Director::is_site_url($referer);
     }
 }

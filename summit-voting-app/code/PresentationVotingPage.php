@@ -214,22 +214,7 @@ class PresentationVotingPage_API extends RequestHandler
 	        }
 
 	        if ($r->getVar('search')) {
-	            $k = Convert::raw2sql($r->getVar('search'));
-	            $list = $list
-	                ->leftJoin(
-	                    "Presentation_Speakers",
-	                    "Presentation_Speakers.PresentationID = Presentation.ID"
-	                )
-	                ->leftJoin(
-	                    "PresentationSpeaker",
-	                    "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID"
-	                )
-	                ->where("
-	                  	SummitEvent.Title LIKE '%{$k}%'
-	                  	OR SummitEvent.Description LIKE '%{$k}%'
-	                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
-	                    OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
-	                ");
+	            $list = Presentation::apply_search_query($list, $r->getVar('search'));
 	        }
 
 	        $total = $list->count();
@@ -239,6 +224,7 @@ class PresentationVotingPage_API extends RequestHandler
     		$list = [];
     		$total = 0;
     	}
+
         foreach ($list as $p) {
             $vote = $p->getUserVote();
             $presentations[] = [
