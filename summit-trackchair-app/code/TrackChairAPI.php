@@ -6,9 +6,62 @@
 class TrackChairAPI extends AbstractRestfulJsonApi
 {
 
+    /**
+     * @var array
+     */
+    private static $url_handlers = [
+        'summit/$ID' => 'handleSummit',
+        'presentation/$ID' => 'handleManagePresentation',
+        'GET ' => 'handleGetAllPresentations',
+        'GET selections/$categoryID' => 'handleGetMemberSelections',
+        'PUT reorder' => 'handleReorderList',
+        'GET changerequests' => 'handleChangeRequests',
+        'GET chair/add' => 'handleAddChair',
+        'GET categorychange/accept/$ID' => 'handleAcceptCategoryChange',
+        'GET export/speakerworksheet' => 'handleSpeakerWorksheet',
+        'GET restoreorders' => 'handleRestoreOrders',
+        'GET presentationcomments' => 'handlePresentationsWithComments'
+    ];
+
+    /**
+     * @var array
+     */
+    private static $allowed_actions = [
+        'handleSummit',
+        'handleManagePresentation',
+        'handleGetAllPresentations',
+        'handleGetMemberSelections',
+        'handleReorderList',
+        'handleChangeRequests',
+        'handleAddChair' => 'ADMIN',
+        'handleAcceptCategoryChange' => 'ADMIN',
+        'handleRestoreOrders' => 'ADMIN',
+        'handleSpeakerWorksheet' => 'ADMIN',
+        'handlePresentationsWithComments' => 'ADMIN'
+    ];
+
+    /**
+     * @var array
+     */
+    private static $extensions = [
+        'MemberTokenAuthenticator'
+    ];
+
+    /**
+     *
+     */
+    public function init()
+    {
+        parent::init();
+        $this->checkAuthenticationToken(false);
+    }
+
+    /**
+     * @return bool
+     */
     protected function isApiCall()
     {
-       return true;
+        return true;
     }
 
     /**
@@ -16,72 +69,32 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      */
     protected function authorize()
     {
-        return !is_null(Member::currentUser());
+        return !!Member::currentUser();
     }
 
-    private static $url_handlers = array(
-        'summit/$ID' => 'handleSummit',
-        'POST presentation/sched/$SchedID!' => 'handleSchedUpdate',
-        'presentation/$ID' => 'handleManagePresentation',
-        'GET ' => 'handleGetAllPresentations',
-        'GET selections/$categoryID' => 'handleGetMemberSelections',
-        'POST reorder' => 'handleReorderList',
-        'GET change_requests' => 'handleChangeRequests',
-        'GET chair/add' => 'handleAddChair',
-        'GET category_change/accept/$ID' => 'handleAcceptCategoryChange',
-        'GET export/schedule' => 'handleScheduleForSched',
-        'GET export/speakers' => 'handleSpeakersForSched',
-        'GET export/speaker-worksheet' => 'handleSpeakerWorksheet',
-        'GET restore-orders' => 'handleRestoreOrders',
-        'GET presentation-comments' => 'handlePresentationsWithComments'
-    );
 
-    private static $allowed_actions = array(
-        'handleSummit',
-        'handleManagePresentation',
-        'handleGetAllPresentations',
-        'handleSchedUpdate',
-        'handleGetMemberSelections',
-        'handleReorderList',
-        'handleChangeRequests',
-        'handleAddChair' => 'ADMIN',
-        'handleAcceptCategoryChange' => 'ADMIN',
-        'handleScheduleForSched' => 'ADMIN',
-        'handleSpeakersForSched' => 'ADMIN',
-        'handleRestoreOrders' => 'ADMIN',
-        'handleSpeakerWorksheet' => 'ADMIN',
-        'handlePresentationsWithComments' => 'ADMIN'
-    );
-
-    private static $extensions = array(
-        'MemberTokenAuthenticator'
-    );
-
-    public function init()
-    {
-        parent::init();
-        $this->checkAuthenticationToken(false);
-    }
-
-    private function trackChairDetails()
+    /**
+     * @return array|void
+     * @throws SS_HTTPResponse_Exception
+     */
+    protected function trackChairDetails()
     {
 
         if (!Member::currentUser()) {
             return $this->httpError(403);
         }
 
-        $data = array(
+        $data = [
             'categories' => null,
-        );
+        ];
 
         $summit = Summit::get_active();
 
-        $TrackChair = SummitTrackChair::get()->filter('MemberID', Member::currentUserID());
+        $chair = SummitTrackChair::get()
+                        ->filter('MemberID', Member::currentUserID())
+                        ->first();
 
-        if ($TrackChair->count()) {
-
-            $chair = $TrackChair->first();
-
+        if ($chair) {
             $data['first_name'] = $chair->Member()->FirstName;
             $data['last_name'] = $chair->Member()->Surname;
 
@@ -104,6 +117,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleSummit(SS_HTTPRequest $r)
     {
         if ($r->param('ID') == "active") {
@@ -120,24 +138,21 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         }
 
         $data = $summit->toJSON();
-        $data['status']                   = $summit->getStatus();
-        $data['on_voting_period']         = $summit->isVotingOpen();
-        $data['on_selection_period']      = $summit->isSelectionOpen();
+        $data['status'] = $summit->getStatus();
+        $data['on_voting_period'] = $summit->isVotingOpen();
+        $data['on_selection_period'] = $summit->isSelectionOpen();
         $data['is_selection_period_over'] = $summit->isSelectionOver();
 
-        $data['categories']          = array();
-        $data['track_chair']         = $this->trackChairDetails();
+        $data['categories'] = array();
+        $data['track_chair'] = $this->trackChairDetails();
 
-        $chairlist = array();
-        $categoriesIsChair = array();
-        $categoriesNotChair = array();
-
+        $chairlist = [];
+        $categoriesIsChair = [];
+        $categoriesNotChair = [];
 
         foreach ($summit->Categories()->filter('ChairVisible', true) as $c) {
-
-            $isChair = ($c->isTrackChair(Member::currentUserID()) == 1);
-
-            $categoryDetials = array(
+            $isChair = ($c->isTrackChair(Member::currentUserID()) === 1);
+            $categoryDetials = [
                 'id' => $c->ID,
                 'title' => $c->Title,
                 'description' => $c->Description,
@@ -145,7 +160,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'alternate_count' => $c->AlternateCount,
                 'summit_id' => $c->SummitID,
                 'user_is_chair' => $isChair
-            );
+            ];
 
             if ($isChair) {
                 $categoriesIsChair[] = $categoryDetials;
@@ -171,58 +186,48 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         return $this->ok($data);
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse
+     */
     public function handleGetAllPresentations(SS_HTTPRequest $r)
     {
         // Gets a list of presentations that have chair comments
-
-        $page_size = $r->getVar('page_size') ?: 20;
-
+        $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
         $page = $r->getVar('page') ?: 1;
-
         $summitID = Summit::get_active()->ID;
 
         // Get a collection of chair-visible presentation categories
         $presentations = Presentation::get()
-            ->leftJoin("PresentationCategory", "PresentationCategory.ID = Presentation.CategoryID")
-            ->where("
-				SummitEvent.SummitID = {$summitID}
-				AND PresentationCategory.ChairVisible = 1
-				AND Presentation.Status = 'Received'
-				");
-
+            ->filter([
+                'Category.ChairVisible' => true,
+                'SummitEvent.SummitID' => $summitID,
+                'Presentation.Status' => Presentation::STATUS_RECEIVED
+            ]);
+        
         if ($r->getVar('category')) {
-            $presentations = $presentations->filter('CategoryID', (int)$r->getVar('category'));
+            $presentations = $presentations->filter('CategoryID', (int) $r->getVar('category'));
         }
-        if ($r->getVar('keyword')) {
-            $k = Convert::raw2sql($r->getVar('keyword'));
-            $presentations = $presentations
-                ->leftJoin("Presentation_Speakers", "Presentation_Speakers.PresentationID = Presentation.ID")
-                ->leftJoin("PresentationSpeaker",
-                    "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID")
-                ->where("
-									SummitEvent.Title LIKE '%{$k}%'
-									OR SummitEvent.Description LIKE '%{$k}%'
-									OR SummitEvent.ShortDescription LIKE '%{$k}%'
-									OR (concat_ws(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'
-								");
+        if ($r->getVar('keyword')) {            
+            $presentations = Presentation::apply_search_query($presentations, $r->getVar('keyword'));
         }
 
-        $offset     = ($page - 1 ) * $page_size;
-        $count        = $presentations->count();
+        $offset = ($page - 1) * $page_size;
+        $count = $presentations->count();
         $presentations = $presentations->limit($page_size, $offset);
 
-        $data = array(
-            'results'     => array(),
-            'page'        => $page,
-            'total_pages' =>  ceil($count/$page_size),
-            'results'     => array(),
-            'has_more'    => $count > ($page_size * ($page)),
-            'total'       => $count,
-            'remaining'   => $count - ($page_size * ($page))
-        );
+        $data = [
+            'results' => [],
+            'page' => $page,
+            'total_pages' => ceil($count / $page_size),
+            'results' => [],
+            'has_more' => $count > ($page_size * ($page)),
+            'total' => $count,
+            'remaining' => $count - ($page_size * ($page))
+        ];
 
         foreach ($presentations as $p) {
-            $data['results'][] = array(
+            $data['results'][] = [
                 'id' => $p->ID,
                 'title' => $p->Title,
                 'selected' => $p->isSelected(),
@@ -230,12 +235,16 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'vote_average' => $p->CalcVoteAverage(),
                 'total_points' => $p->CalcTotalPoints(),
                 'moved_to_category' => $p->movedToThisCategory(),
-            );
+            ];
         }
 
         return $this->ok($data);
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleManagePresentation(SS_HTTPRequest $r)
     {
 
@@ -252,6 +261,10 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         return $this->httpError(404);
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse
+     */
     public function handleGetMemberSelections(SS_HTTPRequest $r)
     {
         $results = [];
@@ -259,19 +272,22 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $results['category_id'] = $categoryID;
 
         $category = PresentationCategory::get()->byID($categoryID);
-        if(is_null($category)) return $this->notFound(sprintf('Category id %s not found!',$categoryID));
-        $summitID = intval(Summit::get_active()->ID);
-        if(intval($category->SummitID) !== $summitID ) return $this->validationError(sprintf('Category id %s does not belong to current summit!',$categoryID));
+        if (!$category) {
+            return $this->notFound(sprintf('Category id %s not found!', $categoryID));
+        }
+        $summitID = (int) Summit::get_active()->ID;
+        if (intval($category->SummitID) !== $summitID) {
+            return $this->validationError(sprintf('Category id %s does not belong to current summit!', $categoryID));
+        }
 
         $lists = SummitSelectedPresentationList::getAllListsByCategory($categoryID);
 
         foreach ($lists as $key => $list) {
-
             $selections = $list->SummitSelectedPresentations()->sort('Order ASC');
             $count = $selections->count();
             $listID = $list->ID;
 
-            $data = array(
+            $data = [
                 'list_name' => $list->name,
                 'list_type' => $list->ListType,
                 'list_id' => $listID,
@@ -279,14 +295,14 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'can_edit' => $list->memberCanEdit(),
                 'slots' => $list->maxPresentations(),
                 'mine' => $list->mine()
-            );
+            ];
 
             foreach ($selections as $s) {
-                $data['selections'][] = array(
+                $data['selections'][] = [
                     'title' => $s->Presentation()->Title,
                     'order' => $s->Order,
                     'id' => $s->PresentationID
-                );
+                ];
             }
 
             $results['lists'][] = $data;
@@ -294,28 +310,33 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         }
 
         return $this->ok($results);
-
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse
+     * @throws ValidationException
+     * @throws null
+     */
     public function handleReorderList(SS_HTTPRequest $r)
     {
-
-        $sortOrder = $r->postVar('sort_order');
-        $listID    = $r->postVar('list_id');
-        $list      = SummitSelectedPresentationList::get()->byId($listID);
+        parse_str($r->getBody(), $vars);
+        $sortOrder = $vars['sort_order'];
+        $listID = $vars['list_id'];
+        $list = SummitSelectedPresentationList::get()->byId($listID);
 
         if (is_array($sortOrder)) {
             foreach ($sortOrder as $key => $id) {
-                $selection = SummitSelectedPresentation::get()->filter(array(
+                $selection = SummitSelectedPresentation::get()->filter([
                     'PresentationID' => $id,
                     'SummitSelectedPresentationListID' => $listID
-                ));
+                ]);
 
                 // Add the selection if it's new
                 if (!$selection->exists()) {
                     $presentation = Presentation::get()->byId($id);
                     if ($presentation->exists() && $presentation->CategoryID == $list->CategoryID) {
-                        $s = new SummitSelectedPresentation();
+                        $s = SummitSelectedPresentation::create();
                         $s->SummitSelectedPresentationListID = $listID;
                         $s->PresentationID = $presentation->ID;
                         $s->MemberID = Member::currentUserID();
@@ -338,41 +359,40 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse
+     */
     public function handleChangeRequests(SS_HTTPRequest $r)
     {
-
         $summitID = Summit::get_active()->ID;
-
-        $page_size = $r->getVar('page_size') ?: 20;
-
+        $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
         $page = $r->getVar('page') ?: 1;
 
         $changeRequests = SummitCategoryChange::get()
-            ->innerJoin('Presentation','Presentation.ID = PresentationID')
-            ->innerJoin('SummitEvent','Presentation.ID = SummitEvent.ID')
-            ->filter(array( 'SummitEvent.SummitID' => $summitID))
+            ->innerJoin('Presentation', 'Presentation.ID = PresentationID')
+            ->innerJoin('SummitEvent', 'Presentation.ID = SummitEvent.ID')
+            ->filter('SummitEvent.SummitID', $summitID)
             ->sort('Done', 'ASC');
 
-        $results = [];
         $isAdmin = Permission::check('ADMIN');
         $memID = Member::currentUserID();
 
-        $offset         = ($page - 1 ) * $page_size;
-        $count          = intval($changeRequests->count());
+        $offset = ($page - 1) * $page_size;
+        $count = $changeRequests->count();
         $changeRequests = $changeRequests->limit($page_size, $offset);
 
-        $data = array(
-            'results'     => array(),
-            'page'        => $page,
-            'total_pages' =>  ceil($count/$page_size),
-            'results'     => array(),
-            'has_more'    => $count > ($page_size * ($page)),
-            'total'       => $count,
-            'remaining'   => $count - ($page_size * ($page))
-        );
+        $data = [
+            'results' => [],
+            'page' => $page,
+            'total_pages' => ceil($count / $page_size),
+            'results' => [],
+            'has_more' => $count > ($page_size * ($page)),
+            'total' => $count,
+            'remaining' => $count - ($page_size * ($page))
+        ];
 
         foreach ($changeRequests as $request) {
-
             $row = [];
             $row['id'] = $request->ID;
             $row['presentation_id'] = $request->PresentationID;
@@ -388,68 +408,73 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $row['requester'] = $request->Reqester()->FirstName
                 . ' ' . $request->Reqester()->Surname;
             $row['has_selections'] = $request->Presentation()->isSelectedByAnyone();
-            $data['results'][]  = $row;
+            $data['results'][] = $row;
         }
 
         return $this->ok($data);
-
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse
+     */
     public function handlePresentationsWithComments(SS_HTTPRequest $r)
     {
-
         // Gets a list of presentations that have chair comments
-
-        $page_size = $r->getVar('page_size') ?: 20;
-
-
+        $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
         $page = $r->getVar('page') ?: 1;
-
         $summitID = Summit::get_active()->ID;
 
         // Get a collection of chair-visible presentations with comments
         $comments = SummitPresentationComment::get()
             ->leftJoin("Presentation", "SummitPresentationComment.PresentationID = Presentation.ID")
-            ->leftJoin("PresentationCategory", "PresentationCategory.ID = Presentation.CategoryID")
             ->leftJoin("SummitEvent", "SummitEvent.ID = Presentation.ID")
-            ->where("
-				SummitEvent.SummitID = {$summitID}
-				AND PresentationCategory.ChairVisible = 1
-				AND Presentation.Status = 'Received'
-				")
+            ->filter([
+                'SummitEvent.SummitID' => $summitID,
+                'Category.ChairVisible' => true,
+                'Presentation.Status' => Presentation::STATUS_RECEIVED
+            ])
             ->sort('Created', 'DESC');
 
-        $offset     = ($page - 1 ) * $page_size;
-        $count       = intval($comments->count());
-        $comments    = $comments->limit($page_size, $offset);
+        $offset = ($page - 1) * $page_size;
+        $count = intval($comments->count());
+        $comments = $comments->limit($page_size, $offset);
 
-        $data = array(
-            'page'        => $page,
-            'total_pages' =>  ceil($count/$page_size),
-            'results'     => array(),
-            'has_more'    => $count > ($page_size * ($page)),
-            'total'       => $count,
-            'remaining'   => $count - ($page_size * ($page))
-        );
+        $data = [
+            'page' => $page,
+            'total_pages' => ceil($count / $page_size),
+            'results' => array(),
+            'has_more' => $count > ($page_size * ($page)),
+            'total' => $count,
+            'remaining' => $count - ($page_size * ($page))
+        ];
 
         foreach ($comments as $c) {
+            $system = strpos(
+                $c->Body,
+                "suggested that this presentation be moved"
+            ) || strpos(
+                $c->Body,
+                "presentation was moved into the category"
+            );
 
-            $system = strpos($c->Body, "suggested that this presentation be moved") || strpos($c->Body,
-                    "presentation was moved into the category");
-
-            $data['results'][] = array(
+            $data['results'][] = [
                 'id' => $c->ID,
                 'body' => $c->Body,
                 'presentation_title' => $c->Presentation()->Title,
                 'presentation_id' => $c->Presentation()->ID,
                 'commenter' => $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname,
                 'system_comment' => $system
-            );
+            ];
 
         }
-       return $this->ok($data);
+        return $this->ok($data);
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return string
+     */
     public function handleAddChair(SS_HTTPRequest $r)
     {
         $email = $r->getVar('email');
@@ -472,6 +497,13 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     }
 
+    /**
+     * @param SS_HTTPResponse $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     * @throws ValidationException
+     * @throws null
+     */
     public function handleAcceptCategoryChange(SS_HTTPResponse $r)
     {
 
@@ -486,7 +518,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $request = SummitCategoryChange::get()->byID($r->param('ID'));
 
         if ($request->exists()) {
-
             if ($request->Presentation()->isSelectedByAnyone()) {
                 return new SS_HTTPResponse("The presentation has already been selected by chairs.", 500);
             }
@@ -510,7 +541,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $request->Presentation()->CategoryID = $request->NewCategoryID;
             $request->Presentation()->write();
 
-            $comment = new SummitPresentationComment();
+            $comment = SummitPresentationComment::create();
             $comment->Body = 'This presentation was moved into the category '
                 . $category->Title . '.'
                 . ' The change was approved by '
@@ -526,115 +557,39 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $request->write();
 
             return $this->ok('change request accepted.');
-
-
         }
-
-
     }
 
-    public function handleScheduleForSched()
-    {
 
-        $this->handleRestoreOrders();
-
-        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/assets/schedule-import.csv';
-        $fp = fopen($filepath, 'w');
-
-        // Setup file to be UTF8
-        fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
-
-        $activeSummit = Summit::get_active();
-
-        $SummitCategories = DataObject::get('PresentationCategory', $activeSummit->ID);
-
-        foreach ($SummitCategories as $Category) {
-            // Grab the track chairs selections for the category
-
-            $SelectedPresentationList = SummitSelectedPresentationList::get()
-                ->filter(array('CategoryID' => $Category->ID, 'ListType' => 'Group'))
-                ->first();
-
-
-            if ($SelectedPresentationList) {
-
-                // Loop through each selected talk to output the details
-                // Note that a SummitSelectedTalk is really just a cross-link table that also contains the priority the talk was given
-                foreach ($SelectedPresentationList->SortedPresentations() as $Selection) {
-
-                    $p = $Selection->Presentation();
-
-                    if ($p->SelectionStatus() == 'accepted') {
-
-                        // Build speaker column
-                        $Speakers = '';
-
-                        foreach ($p->Speakers() as $Speaker) {
-                            $Speakers = $Speakers . $Speaker->FirstName . " ";
-                            $Speakers = $Speakers . $Speaker->LastName . ",";
-                        }
-
-                        // Output presentation row
-                        $fields = array(
-                            $Selection->Order,
-                            $p->ID,
-                            $p->Title,
-                            $p->Category()->Title,
-                            $p->Description,
-                            $Speakers
-                        );
-
-                        fputcsv($fp, $fields);
-                    }
-                }
-            }
-        }
-
-        fclose($fp);
-
-        header("Cache-control: private");
-        header("Content-type: application/force-download");
-        header("Content-transfer-encoding: binary\n");
-        header("Content-disposition: attachment; filename=\"schedule-import.csv\"");
-        header("Content-Length: " . filesize($filepath));
-        readfile($filepath);
-
-
-    }
-
+    /**
+     *
+     */
     public function handleSpeakerWorksheet()
     {
 
         $activeSummit = Summit::get_active();
-
         $filepath = $_SERVER['DOCUMENT_ROOT'] . '/assets/speaker-worksheet.csv';
-
         $fp = fopen($filepath, 'w');
 
         // Setup file to be UTF8
         fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
-        $Speakers = PresentationSpeaker::get()
+        $speakers = PresentationSpeaker::get()
             ->filter('SummitID', $activeSummit->ID);
 
-        foreach ($Speakers as $Speaker) {
+        foreach ($speakers as $speaker) {
+            $fullName = $speaker->FirstName . ' ' . $speaker->LastName;
 
-            $PhotoURL = "";
-            if ($Speaker->PhotoID != 0) {
-                $PhotoURL = 'http://www.openstack.org' . $Speaker->Photo()->getURL();
-            }
-            $fullName = $Speaker->FirstName . ' ' . $Speaker->LastName;
-
-            foreach ($Speaker->Presentations() as $Presentation) {
-                $fields = array(
-                    $Speaker->ID,
+            foreach ($speaker->Presentations() as $presentation) {
+                $fields = [
+                    $speaker->ID,
                     $fullName,
-                    $Speaker->Member()->Email,
-                    $Presentation->ID,
-                    $Presentation->Category()->Title,
-                    $Presentation->Title,
-                    $Presentation->SelectionStatus()
-                );
+                    $speaker->Member()->Email,
+                    $presentation->ID,
+                    $presentation->Category()->Title,
+                    $presentation->Title,
+                    $presentation->SelectionStatus()
+                ];
                 fputcsv($fp, $fields);
             }
 
@@ -651,84 +606,22 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     }
 
-    public function handleSpeakersForSched()
-    {
 
-        $activeSummit = Summit::get_active();
-
-        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/assets/speaker-import.csv';
-
-        $fp = fopen($filepath, 'w');
-
-        // Setup file to be UTF8
-        fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
-
-        $Speakers = PresentationSpeaker::get()
-            ->filter('SummitID', $activeSummit->ID);
-
-        foreach ($Speakers as $Speaker) {
-
-            $AcceptedPresentations = $Speaker->AcceptedPresentations();
-
-            $PhotoURL = "";
-
-            if ($Speaker->PhotoID != 0) {
-                $PhotoURL = 'http://www.openstack.org' . $Speaker->Photo()->getURL();
-            }
-
-            if ($Speaker->Bio == null) {
-                $SpeakerWithBio = PresentationSpeaker::get()->filter(array(
-                    'MemberID' => $Speaker->MemberID,
-                    'Bio:not' => null
-                ))->first();
-                if ($SpeakerWithBio && $SpeakerWithBio->Bio) {
-                    $Speaker->Bio = $SpeakerWithBio->Bio;
-                }
-            }
-
-            if ($AcceptedPresentations->count()) {
-                $fullName = $Speaker->FirstName . ' ' . $Speaker->LastName;
-                $fields = array(
-                    $fullName,
-                    $Speaker->Member()->Email,
-                    ' ',
-                    ' ',
-                    $Speaker->Title,
-                    ' ',
-                    $Speaker->Bio,
-                    ' ',
-                    $PhotoURL
-                );
-                fputcsv($fp, $fields);
-            }
-
-        }
-
-        fclose($fp);
-
-        header("Cache-control: private");
-        header("Content-type: application/force-download");
-        header("Content-transfer-encoding: binary\n");
-        header("Content-disposition: attachment; filename=\"speaker-import.csv\"");
-        header("Content-Length: " . filesize($filepath));
-        readfile($filepath);
-
-    }
-
+    /**
+     *
+     */
     public function handleRestoreOrders()
     {
-
         $activeSummit = Summit::get_active();
+        $summitCategories = PresentationCategory::get()->filter('SummitID', $activeSummit->ID);
 
-        $SummitCategories = DataObject::get('PresentationCategory', $activeSummit->ID);
-
-        foreach ($SummitCategories as $Category) {
+        foreach ($summitCategories as $category) {
             // Grab the track chairs selections for the category
 
-            $SelectedPresentationList = SummitSelectedPresentationList::get()
-                ->filter(array('CategoryID' => $Category->ID));
+            $selectedPresentationList = SummitSelectedPresentationList::get()
+                ->filter('CategoryID', $category->ID);
 
-            foreach ($SelectedPresentationList as $list) {
+            foreach ($selectedPresentationList as $list) {
                 $selections = $list->SummitSelectedPresentations()->sort('Order', 'ASC');
                 $i = 1;
                 foreach ($selections as $selection) {
@@ -744,10 +637,16 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 }
 
 
+/**
+ * Class TrackChairAPI_PresentationRequest
+ */
 class TrackChairAPI_PresentationRequest extends RequestHandler
 {
 
 
+    /**
+     * @var array
+     */
     private static $url_handlers = array(
         'GET ' => 'index',
         'POST vote' => 'handleVote',
@@ -756,10 +655,13 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         'GET unselect' => 'handleUnselect',
         'GET group/select' => 'handleGroupSelect',
         'GET group/unselect' => 'handleGroupUnselect',
-        'GET category_change/new' => 'handleCategoryChangeRequest',
+        'GET categorychange/new' => 'handleCategoryChangeRequest',
     );
 
 
+    /**
+     * @var array
+     */
     private static $allowed_actions = array(
         'handleVote',
         'handleAddComment',
@@ -771,11 +673,22 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
     );
 
 
+    /**
+     * @var Presentation
+     */
     protected $presentation;
 
 
+    /**
+     * @var PresentationAPI
+     */
     protected $parent;
 
+    /**
+     * TrackChairAPI_PresentationRequest constructor.
+     * @param Presentation $presentation
+     * @param PresentationAPI $parent
+     */
     public function __construct(Presentation $presentation, PresentationAPI $parent)
     {
         parent::__construct();
@@ -783,9 +696,12 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $this->parent = $parent;
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPRequest
+     */
     public function index(SS_HTTPRequest $r)
     {
-
         $p = $this->presentation;
         $speakers = array();
         $current_summit = $p->Summit();;
@@ -797,47 +713,61 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $speakerData['photo_url'] = $s->ProfilePhoto();
             $speakerData['available_for_bureau'] = intval($speakerData['available_for_bureau']);
 
-            $expertise_areas = array();
-            foreach($s->AreasOfExpertise() as $a)
-            {
-                array_push($expertise_areas, array('id' => $a->ID, 'expertise' => $a->Expertise) );
+            $expertise_areas = [];
+            foreach ($s->AreasOfExpertise() as $a) {
+                array_push($expertise_areas, [
+                    'id' => $a->ID,
+                    'expertise' => $a->Expertise
+                ]);
             }
             $speakerData['expertise_areas'] = $expertise_areas;
 
             $former_presentations = array();
-
-            foreach($s->Presentations()->Where(" SummitID <> {$current_summit->ID} ")->Limit(5)->Sort('StartDate', 'DESC') as $pf)
-            {
-                array_push($former_presentations, array('id' => $pf->ID, 'title' => $pf->Title, 'url' => $pf->Link) );
+            $formerList = $s->Presentations()
+                            ->exclude('SummitID', $current_summit->ID)
+                            ->limit(5)
+                            ->sort('StartDate', 'DESC');
+            foreach ($formerList as $pf) {
+                array_push($former_presentations, [
+                    'id' => $pf->ID,
+                    'title' => $pf->Title,
+                    'url' => $pf->Link
+                ]);
             }
             $speakerData['former_presentations'] = $former_presentations;
 
-            $links = array();
-            foreach($s->OtherPresentationLinks() as $l)
-            {
-                array_push($links, array('id' => $l->ID, 'title' => $l->Title, 'url' => $l->LinkUrl) );
+            $links = [];
+            foreach ($s->OtherPresentationLinks() as $l) {
+                array_push($links, [
+                    'id' => $l->ID,
+                    'title' => $l->Title,
+                    'url' => $l->LinkUrl
+                ]);
             }
             $speakerData['other_links'] = $links;
 
-            $travel_preferences = array();
-            foreach($s->TravelPreferences() as $t)
-            {
-                array_push($travel_preferences, array('id' => $t->ID, 'country' => $t->Country) );
+            $travel_preferences = [];
+            foreach ($s->TravelPreferences() as $t) {
+                array_push($travel_preferences, [
+                    'id' => $t->ID,
+                    'country' => $t->Country
+                ]);
             }
             $speakerData['travel_preferences'] = $travel_preferences;
-            $languages = array();
-            foreach($s->Languages() as $l)
-            {
-                array_push($languages, array('id' => $l->ID, 'language' => $l->Language) );
+            $languages = [];
+            foreach ($s->Languages() as $l) {
+                array_push($languages, [
+                    'id' => $l->ID,
+                    'language' => $l->Language
+                ]);
             }
             $speakerData['languages'] = $languages;
             $speakers[] = $speakerData;
-
         }
 
-        $comments = array();
+        $comments = [];
 
-        foreach ($p->Comments()->filter('IsCategoryChangeSuggestion', 0) as $c) {
+        foreach ($p->Comments()->filter('IsCategoryChangeSuggestion', false) as $c) {
             $comment = $c->toJSON();
             $comment['name'] = $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname;
             $comments[] = $comment;
@@ -874,6 +804,11 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleVote(SS_HTTPRequest $r)
     {
         if (!Member::currentUser()) {
@@ -890,6 +825,11 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         return $this->httpError(400, "Invalid vote");
     }
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleAddComment(SS_HTTPRequest $r)
     {
         if (!Member::currentUser()) {
@@ -907,6 +847,10 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         return $this->httpError(400, "Invalid comment");
     }
 
+    /**
+     * @param SS_HTTPResponse $r
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleSelect(SS_HTTPResponse $r)
     {
         if (!Member::currentUser()) {
@@ -917,6 +861,11 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
     }
 
+    /**
+     * @param SS_HTTPResponse $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleUnselect(SS_HTTPResponse $r)
     {
         if (!Member::currentUser()) {
@@ -929,6 +878,10 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
     }
 
+    /**
+     * @param SS_HTTPResponse $r
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleGroupSelect(SS_HTTPResponse $r)
     {
         if (!Member::currentUser()) {
@@ -939,6 +892,11 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
     }
 
+    /**
+     * @param SS_HTTPResponse $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     */
     public function handleGroupUnselect(SS_HTTPResponse $r)
     {
         if (!Member::currentUser()) {
@@ -947,10 +905,17 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         $this->presentation->removeFromGroupList();
 
-        return new SS_HTTPResponse("Presentation unseleted.", 200);
+        return new SS_HTTPResponse("Presentation unselected.", 200);
 
     }
 
+    /**
+     * @param SS_HTTPResponse $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     * @throws ValidationException
+     * @throws null
+     */
     public function handleCategoryChangeRequest(SS_HTTPResponse $r)
     {
 
@@ -965,8 +930,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $c = PresentationCategory::get()->byID((int)$r->getVar('new_cat'));
 
         if ($c) {
-
-            $request = new SummitCategoryChange();
+            $request = SummitCategoryChange::create();
             $request->PresentationID = $this->presentation->ID;
             $request->NewCategoryID = $r->getVar('new_cat');
             $request->ReqesterID = Member::currentUserID();
@@ -980,9 +944,5 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             return new SS_HTTPResponse("change request made.", 200);
 
         }
-
-
     }
-
-
 }

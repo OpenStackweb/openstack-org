@@ -12,6 +12,14 @@ class TrackChairsPage extends Page
 class TrackChairsPage_Controller extends Page_Controller
 {
 
+	private static $url_handlers = [
+        '$Page/$Action/$ID' => 'handleIndex'
+	];
+
+	public function index (SS_HTTPRequest $r) {
+		return $this;
+	}
+
     public function init()
     {
         if (!$this->trackChairCheck()) {
@@ -21,7 +29,7 @@ class TrackChairsPage_Controller extends Page_Controller
         Requirements::clear();
     }
 
-    function trackChairCheck()
+    public function trackChairCheck()
     {
 
         $member = Member::currentUser();
@@ -38,6 +46,28 @@ class TrackChairsPage_Controller extends Page_Controller
             return true;
         }
 
+    }
+
+
+    public function JSONConfig()
+    {
+        return Convert::array2json([
+            'baseURL' => $this->Link(),
+            'summitID' => Summit::get_active()->ID
+        ]);
+    }
+
+    public function IsDev()
+    {
+        return Director::isDev();
+    }
+
+
+    public function WebpackDevServer() {
+        if(Director::isDev()) {
+            $socket = @fsockopen('localhost', 3000, $errno, $errstr, 1);
+            return !$socket ? false : true;
+        }
     }
 
 }

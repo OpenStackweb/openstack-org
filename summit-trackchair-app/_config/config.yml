@@ -1,0 +1,8 @@
+---
+Name: summit-trackchair-app
+---
+Director:
+  rules:
+    'trackchairs/api/v1': 'TrackChairAPI'
+TrackChairAPI:
+  default_page_size: 20
