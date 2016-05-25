@@ -139,6 +139,11 @@ class PresentationSlideSubmissionController extends Page_Controller
 		$speakers = PresentationSpeaker::get()
 			->innerJoin('Presentation_Speakers','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
 			->innerJoin('SummitEvent', 'SummitEvent.ID = Presentation_Speakers.PresentationID')
+			->innerJoin('Presentation', 'Presentation.ID = SummitEvent.ID')
+			->exclude([
+				// Keynotes, Sponsored Sessions, BoF, and Working Groups, vBrownBag
+				'Presentation.CategoryID' => [40, 41, 46, 45, 48]
+			])
 			->filter('SummitID', $summit->ID)
 			->limit($confirm ? null : 50);
 
