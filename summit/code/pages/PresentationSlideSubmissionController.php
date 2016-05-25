@@ -134,8 +134,8 @@ class PresentationSlideSubmissionController extends Page_Controller
      */
 	public function emailspeakers(SS_HTTPRequest $r)
 	{
-		$confirm = $r->getVar('confirm');
 		$summit = Summit::get_most_recent();
+		$confirm = $r->getVar('confirm');
 		$speakers = PresentationSpeaker::get()
 			->innerJoin('Presentation_Speakers','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
 			->innerJoin('SummitEvent', 'SummitEvent.ID = Presentation_Speakers.PresentationID')
@@ -166,6 +166,7 @@ class PresentationSlideSubmissionController extends Page_Controller
 				]);
 
 				if ($confirm) {
+					//SchedSpeakerEmailLog::addSpeaker($to);
 					$email->send();
 				} else {
 					echo $email->debug();
