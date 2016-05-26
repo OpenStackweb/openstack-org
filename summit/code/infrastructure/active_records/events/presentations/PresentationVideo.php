@@ -66,13 +66,13 @@ class PresentationVideo extends PresentationMaterial
 		$f = parent::getBetterButtonsActions();
 		if(!$this->Featured) {
 			$f->push(BetterButtonCustomAction::create('setasfeatured', 'Set as the featured video')
-	    				->setRedirectType(BetterButtonCustomAction::REFRESH)
-	    				->setSuccessMessage('This is now the featured video'));		
+	    				->setRedirectType(BetterButtonCustomAction::REFRESH));
+	    				//->setSuccessMessage('This is now the featured video'));
 		}
 		else {
 			$f->push(BetterButtonCustomAction::create('unsetasfeatured', 'Unmark as featured video')
-	    				->setRedirectType(BetterButtonCustomAction::REFRESH)
-	    				->setSuccessMessage('This is now the featured video'));					
+	    				->setRedirectType(BetterButtonCustomAction::REFRESH));
+	    				//->setSuccessMessage('This is now the featured video'));
 		}
 
 		return $f;
