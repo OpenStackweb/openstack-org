@@ -1276,11 +1276,11 @@ final class Summit extends DataObject implements ISummit
                     ])
                 )),
                 BetterButtonCustomAction::create('resetvotes', 'Reset presentation votes')
-                    ->setRedirectType(BetterButtonCustomAction::REFRESH)
-                    ->setSuccessMessage('All votes have been reset'),
+                    ->setRedirectType(BetterButtonCustomAction::REFRESH),
+                    //->setSuccessMessage('All votes have been reset'),
                 BetterButtonCustomAction::create('setasactive', 'Set as active')
                     ->setRedirectType(BetterButtonCustomAction::REFRESH)
-                    ->setSuccessMessage('Summit is now active')
+                    //->setSuccessMessage('Summit is now active')
             ]));
         }
 
@@ -1290,7 +1290,7 @@ final class Summit extends DataObject implements ISummit
             $text
         )
             ->setRedirectType(BetterButtonCustomAction::REFRESH)
-            ->setSuccessMessage(Summit::config()->random_list_count . " random incarnations created")
+            //->setSuccessMessage(Summit::config()->random_list_count . " random incarnations created")
         );
         if (!$this->checkRange("Voting")) {
             $random->setConfirmation('You are randomising the presentations outside of the voting phase. If there are more presentations coming, this could cause errors. Are you sure you want to do this?');
