@@ -105,8 +105,9 @@ JS;
         }
 
         // the other category, its only available when the main process is open
-        if($this->summit->isCallForSpeakersOpen())
-            $categorySource['other'] = '<h4 class="category-label">Other topic...</h4>';
+        // COMMENTED OUT TEMPORARILY - 5/26/16 - JDM
+        //if($this->summit->isCallForSpeakersOpen())
+        //    $categorySource['other'] = '<h4 class="category-label">Other topic...</h4>';
 
         $fields = FieldList::create()
             ->text('Title', 'Proposed Presentation Title')
