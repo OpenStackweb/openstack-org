@@ -67,12 +67,10 @@ class PresentationVideo extends PresentationMaterial
 		if(!$this->Featured) {
 			$f->push(BetterButtonCustomAction::create('setasfeatured', 'Set as the featured video')
 	    				->setRedirectType(BetterButtonCustomAction::REFRESH));
-	    				//->setSuccessMessage('This is now the featured video'));
 		}
 		else {
 			$f->push(BetterButtonCustomAction::create('unsetasfeatured', 'Unmark as featured video')
 	    				->setRedirectType(BetterButtonCustomAction::REFRESH));
-	    				//->setSuccessMessage('This is now the featured video'));
 		}
 
 		return $f;
@@ -94,6 +92,8 @@ class PresentationVideo extends PresentationMaterial
 
 		$this->Featured = true;
 		$this->write();
+
+		return 'This is now the featured video';
 	}
 
 	/**
@@ -106,6 +106,8 @@ class PresentationVideo extends PresentationMaterial
 	{
 		$this->Featured = false;
 		$this->write();
+
+		return 'This video is no longer featured';
 	}
 
 	/**
