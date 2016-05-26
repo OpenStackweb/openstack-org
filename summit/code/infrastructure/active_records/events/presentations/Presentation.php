@@ -483,6 +483,8 @@ class Presentation extends SummitEvent implements IPresentation
     /**
      * Used by the track chair app to allow comments on presentations.
      * Comments are only displayed in the track chair interface.
+     *
+     * @return  SummitPresentationComment
      **/
 
     public function addComment($commentBody, $MemberID, $is_category_change_suggestion = false)
@@ -493,6 +495,8 @@ class Presentation extends SummitEvent implements IPresentation
         $comment->PresentationID = $this->ID;
         $comment->IsCategoryChangeSuggestion = $is_category_change_suggestion;
         $comment->write();
+
+        return $comment;
     }
 
     /**

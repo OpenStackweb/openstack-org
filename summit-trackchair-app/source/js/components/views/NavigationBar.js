@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { routeActions } from 'react-router-redux';
 import MainNav from '../containers/MainNav';
 import NotificationDropdown from '../containers/NotificationDropdown';
-import URL from '../../utils/url';
 
 const NavigationBar = ({
 	onLinkClicked,

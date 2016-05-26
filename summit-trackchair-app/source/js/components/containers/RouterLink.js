@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { routeActions } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import LinkButton from '../ui/LinkButton';
 import URL from '../../utils/url';
 
@@ -14,7 +14,7 @@ export default connect (
 	},
 	dispatch => ({
 		onLinkClicked (link) {
-			dispatch(routeActions.push(URL.create(link)));
+			browserHistory.push(URL.create(link));
 		}
 	})
 )(LinkButton);

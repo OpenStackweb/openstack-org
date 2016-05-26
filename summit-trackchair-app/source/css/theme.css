@@ -5414,8 +5414,11 @@ a.compose-mail {
 .feed-activity-list .feed-element {
   border-bottom: 1px solid #e7eaec;
 }
-.feed-element:first-child {
-  margin-top: 0;
+.feed-activity-list a {
+	display:block;
+}
+.feed-activity-list a:first-child {
+	margin-top:-15px;
 }
 .feed-element {
   padding-bottom: 15px;

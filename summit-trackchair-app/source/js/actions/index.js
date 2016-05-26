@@ -19,7 +19,6 @@ const createRequestReceiveAction = (
 	receiveActionCreator, 
 	endpoint
 ) => (params) => (dispatch) => {
-	console.log('ugh');
 	const key = `${requestActionCreator().type}_${JSON.stringify(params || {})}`;
 	dispatch(requestActionCreator(params));
 	cancel(key);
@@ -69,6 +68,41 @@ export const fetchPresentationDetail = (id) => {
     	receivePresentationDetail,
     	`presentation/${id}`
 	)(id);
+};
+
+export const createComment = createAction('CREATE_COMMENT');
+
+export const syncComment = createAction('SYNC_COMMENT');
+
+export const postComment = (presentationID, commentData) => {
+	return (dispatch) => {
+		
+		const key = `POST_COMMENT__${JSON.stringify(commentData || {})}`;
+		const __id = +new Date();
+		console.log(commentData);		
+		dispatch(createComment({
+			...commentData,
+			__id
+		}));
+		cancel(key);
+		
+		const url = URL.create(
+			`presentation/${presentationID}/comment`,
+			{}, 
+			'/trackchairs/api/v1'
+		);
+		
+		const req = http.post(url)
+			.send({comment: commentData.body})
+			.type('form')
+			.end(responseHandler(dispatch, json => {
+				dispatch(syncComment({
+					__id,
+					response: json
+				}));
+			}));
+		schedule(key, req);
+	};
 }
 
 /*eslint-enable */

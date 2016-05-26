@@ -9,7 +9,6 @@ const LinkBar = ({
 }) => {
 	let navChildren = children;
 	if(typeof component === 'string' && component.toUpperCase() === 'UL') {
-		console.log('yup');
 		navChildren = children.map(c => <li>{c}</li>);
 	}
 

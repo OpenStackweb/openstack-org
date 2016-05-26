@@ -235,6 +235,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'vote_average' => $p->CalcVoteAverage(),
                 'total_points' => $p->CalcTotalPoints(),
                 'moved_to_category' => $p->movedToThisCategory(),
+                'speakers' => $p->getSpeakersCSV()
             ];
         }
 
@@ -770,6 +771,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         foreach ($p->Comments()->filter('IsCategoryChangeSuggestion', false) as $c) {
             $comment = $c->toJSON();
             $comment['name'] = $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname;
+            $comment['ago'] =  $c->obj('Created')->Ago(false);
             $comments[] = $comment;
         }
 
@@ -839,9 +841,16 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $comment = $r->postVar('comment');
 
         if ($comment != null) {
-            $this->presentation->addComment($comment, Member::currentUserID());
+            $commentObj = $this->presentation->addComment($comment, Member::currentUserID());
+            
+            $json = $commentObj->toJSON();
+            $json['name'] = Member::currentUser()->getName();
+            $json['ago'] = $commentObj->obj('Created')->Ago(false);
 
-            return new SS_HTTPResponse(null, 200);
+	        return (new SS_HTTPResponse(
+	            Convert::array2json($json), 200
+	        ))->addHeader('Content-Type', 'application/json');
+
         }
 
         return $this->httpError(400, "Invalid comment");

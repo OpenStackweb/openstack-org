@@ -1,7 +1,8 @@
 import React from 'react';
 import Dropdown from '../ui/Dropdown';
+import DropdownItem from '../ui/DropdownItem';
 import {connect} from 'react-redux';
-import {routeActions} from 'react-router-redux';
+import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
 
 const CategoryDropdown = ({
@@ -9,9 +10,9 @@ const CategoryDropdown = ({
 	selectedText,
 	goToCategory
 }) => (
-	<Dropdown onItemSelected={goToCategory} selectedText={selectedText}>
+	<Dropdown onItemSelected={goToCategory} selectedText={selectedText} className="category-dropdown">
 		{categories.map(c => (
-			<li eventKey={c.id} key={c.id}>{c.title}</li>
+			<DropdownItem eventKey={c.id} key={c.id}>{c.title}</DropdownItem>
 		))}
 	</Dropdown>
 );
@@ -21,17 +22,17 @@ export default connect(
 		const {categories} = state.summit.data;
 		let selectedText = categories.filter(c => (
 			c.id == state.routing.locationBeforeTransitions.query.category
-		));
+		));		
 
 		return {
 			categories,
-			selectedText: selectedText.length === 1 ? selectedText[0] : '--- Select a category ---' 
+			selectedText: selectedText.length === 1 ? selectedText[0].title : '--- Select a category ---' 
 		}
 	},
 
 	dispatch => ({
-		goToCategory(category) {
-			dispatch(routeActions.push(URL.create(undefined, {category})));
+		goToCategory(category) {			
+			browserHistory.push(URL.create(undefined, {category}));
 		}
 	})
 )(CategoryDropdown);

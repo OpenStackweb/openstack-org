@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import URL from '../../utils/url';
 import LinkBar from '../ui/LinkBar';
 import LinkButton from '../ui/LinkButton';
+import {browserHistory} from 'react-router';
+
 const MainNav = ({
 	activeLink,
 	onLinkClicked
@@ -40,7 +42,7 @@ export default connect (
 	},
 	dispatch => ({
 		onLinkClicked (link) {			
-			dispatch(routeActions.push(URL.create(link || '/')));
+			browserHistory.push(URL.create(link || '/'));
 		}
 	})
 

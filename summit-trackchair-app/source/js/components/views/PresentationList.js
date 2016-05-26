@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import FullHeightScroller from '../ui/FullHeightScroller';
-import ListItem from '../ui/ListItem';
+import FeedItem from '../ui/FeedItem';
 import BlockButton from '../ui/BlockButton';
 import RouterLink from '../containers/RouterLink';
 
@@ -11,14 +11,23 @@ const PresentationList = ({
     onRequestMore
 }) => (
     <FullHeightScroller>
-        {presentations.map(presentation => (
-        	<RouterLink key={presentation.id}  link={`browse/${presentation.id}`}>
-            	<ListItem active={presentation.active} title={presentation.title} />
-            </RouterLink>
-        ))}
-        {hasMore &&
-        	<BlockButton onButtonClicked={onRequestMore}>Load more</BlockButton>
-        }
+    	<div className="ibox-content">
+    		<div className="feed-activity-list">
+		        {presentations.map(presentation => (
+		        	<RouterLink  link={`browse/${presentation.id}`}>
+		            	<FeedItem
+		            		key={presentation.id} 
+		            		active={presentation.active}
+		            		description={presentation.speakers}
+		            		notes={`Avg. vote: ${presentation.vote_average}`}
+		            		title={presentation.title} />
+		            </RouterLink>
+		        ))}
+		        {hasMore &&
+		        	<BlockButton onButtonClicked={onRequestMore}>Load more</BlockButton>
+		        }
+    		</div>
+    	</div>
     </FullHeightScroller>    
 );
 
