@@ -20,7 +20,6 @@ class PresentationSlideSubmissionController extends Page_Controller
 	private static $allowed_actions = [
 		'presentations',
 		'handlePresentation',
-		'emailspeakers' => 'ADMIN'
 	];
 
 	/**
@@ -129,53 +128,6 @@ class PresentationSlideSubmissionController extends Page_Controller
 		]);
 	}
 
-	/**
-	 * @param SS_HTTPRequest $r
-     */
-	public function emailspeakers(SS_HTTPRequest $r)
-	{
-		$summit = Summit::get_most_recent();
-		$confirm = $r->getVar('confirm');
-		$speakers = PresentationSpeaker::get()
-			->innerJoin('Presentation_Speakers','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
-			->innerJoin('SummitEvent', 'SummitEvent.ID = Presentation_Speakers.PresentationID')
-			->innerJoin('Presentation', 'Presentation.ID = SummitEvent.ID')
-			->exclude([
-				// Keynotes, Sponsored Sessions, BoF, and Working Groups, vBrownBag
-				'Presentation.CategoryID' => [40, 41, 46, 45, 48]
-			])
-			->filter('SummitID', $summit->ID)
-			->limit($confirm ? null : 50);
-
-		foreach ($speakers as $speaker) {
-			/* @var DataList */
-			$presentations = $speaker->PublishedPresentations($summit->ID);
-				// Todo -- how to deal with this?
-				// !$speaker->GeneralOrKeynote() &&
-				// !SchedSpeakerEmailLog::BeenEmailed($Speaker->email) &&
-			if ($presentations->exists() && EmailValidator::validEmail($speaker->Member()->Email)) {
-				$to = $speaker->Member()->Email;				
-				$subject = "Important Speaker Information for OpenStack Summit in {$summit->Title}";
-
-				$email = EmailFactory::getInstance()->buildEmail('do-not-reply@openstack.org', $to, $subject);
-				$email->setTemplate("UploadPresentationSlidesEmail");
-				$email->populateTemplate([
-					'Speaker' => $speaker,
-					'Presentations' => $presentations,
-					'Summit' => $summit
-				]);
-
-				if ($confirm) {
-					//SchedSpeakerEmailLog::addSpeaker($to);
-					$email->send();
-				} else {
-					echo $email->debug();
-				}
-
-				echo 'Email sent to ' . $to . ' ('.$speaker->getName().')<br/>';
-			}
-		}
-	}
 
 
 
