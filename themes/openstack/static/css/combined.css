@@ -3728,6 +3728,26 @@ a.hotel-landing-select-btn {
       background: #edf2f7;
       border-radius: 4px;
       padding: 3px 5px; }
+.session-list-tracks ul li:hover {
+  cursor: pointer;
+}
+a.view-all-tracks-link {
+  /*text-decoration: underline;*/
+  margin-left: 5px;
+  /*font-size: 0.9em;*/
+}
+a.view-all-tracks-link:before {
+  content: "(";
+  text-decoration: none;
+  color: #93A3B1;
+  margin-right: 2px;
+}
+a.view-all-tracks-link:after {
+  content: ")";
+  text-decoration: none;
+  color: #93A3B1;
+  margin-left: 2px;
+}
 
 .session-list-wrapper {
   position: relative; }
