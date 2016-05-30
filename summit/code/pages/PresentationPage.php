@@ -896,8 +896,7 @@ class PresentationPage_ManageRequest extends RequestHandler
                 'ProblemAddressed'        => 'required',
                 'AttendeesExpectedLearnt' => 'required',
                 'SelectionMotive'         => 'required',
-                'CategoryID'              => 'required|text',
-                'OtherTopic'              => 'sometimes|required_if:CategoryID,other'
+                'CategoryID'              => 'required|text'
             );
 
             $messages = array
@@ -908,8 +907,7 @@ class PresentationPage_ManageRequest extends RequestHandler
                 'ProblemAddressed.required'        => ':attribute is required.',
                 'AttendeesExpectedLearnt.required' => ':attribute is required.',
                 'SelectionMotive.required'         => ':attribute is required.',
-                'CategoryID.required'              => 'Please choose a topic from the list, or specify a custom topic in the Other Topic field.',
-                'OtherTopic.required_if'           => 'Please specify a topic.'
+                'CategoryID.required'              => 'Please choose a category group and then a category.'
             );
 
             $validator = ValidatorService::make($data, $rules, $messages);

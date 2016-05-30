@@ -37,6 +37,7 @@ final class PresentationForm extends BootstrapForm
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript("summit/javascript/presentation-form.js");
 
         parent::__construct(
             $controller, 
@@ -46,68 +47,17 @@ final class PresentationForm extends BootstrapForm
             $this->getPresentationValidator()
         );
 
-        $script = <<<JS
-          var form_validator_{$this->FormName()} = null;
-          (function( $ ){
-
-                $(document).ready(function(){
-                    form_validator_{$this->FormName()} = $('#{$this->FormName()}').validate(
-                    {
-                        ignore:[],
-                        highlight: function(element) {
-                            $(element).closest('.form-group').addClass('has-error');
-                        },
-                        unhighlight: function(element) {
-                            $(element).closest('.form-group').removeClass('has-error');
-                        },
-                        errorElement: 'span',
-                        errorClass: 'help-block',
-                        errorPlacement: function(error, element) {
-                            if(element.parent('.input-group').length) {
-                                error.insertAfter(element.parent());
-                            } else {
-                                error.insertAfter(element);
-                            }
-                        },
-                       invalidHandler: function(form, validator) {
-                            if (!validator.numberOfInvalids())
-                                return;
-                            var element = $(validator.errorList[0].element);
-                            if(!element.is(":visible")){
-                                element = element.parent();
-                            }
-
-                            $('html, body').animate({
-                                scrollTop: element.offset().top
-                            }, 2000);
-                        },
-                    });
-                });
-                // End of closure.
-        }(jQuery ));
-JS;
-
-        Requirements::customScript($script);
     }
 
     protected function getPresentationFields() {
-        $categorySource = array();
-        $categories     = $this->presentation_manager->getAvailableCategoriesFor(Member::currentUser(), $this->summit);
 
-        //if we are not allowed to use any category and the presentation exists use the one set on the presentation
-        if(count($categories) == 0 && $this->presentation->exists()){
-            array_push($categories, $this->presentation->Category());
+        $private_groups = $this->presentation_manager->getPrivateCategoryGroupsFor(Member::currentUser(), $this->summit);
+        $public_groups = $this->summit->CategoryGroups()->filter('ClassName', 'PresentationCategoryGroup')->toArray();
+        $category_groups = array_merge($public_groups,$private_groups);
+        $category_groups_map = array();
+        foreach ($category_groups as $group) {
+            $category_groups_map[$group->ID] = $group->Name;
         }
-
-        foreach ($categories as $category)
-        {
-            $categorySource[$category->ID] = $category->FormattedTitleAndDescription;
-        }
-
-        // the other category, its only available when the main process is open
-        // COMMENTED OUT TEMPORARILY - 5/26/16 - JDM
-        //if($this->summit->isCallForSpeakersOpen())
-        //    $categorySource['other'] = '<h4 class="category-label">Other topic...</h4>';
 
         $fields = FieldList::create()
             ->text('Title', 'Proposed Presentation Title')
@@ -154,16 +104,17 @@ JS;
             ->text('PresentationLink[3]','#3')
             ->text('PresentationLink[4]','#4')
             ->text('PresentationLink[5]','#5')
-            ->literal('HR','<hr/>')            
-            ->optionset('CategoryID','What is the general topic of the presentation?')
+            ->literal('HR','<hr/>')
+            ->dropdown('GroupID','Please select the category group of your presentation content')
                 ->configure()
-                    ->setSource($categorySource)
+                    ->setEmptyString('-- Select one --')
+                    ->setSource($category_groups_map)
                 ->end()
-            ->text('OtherTopic','Other topic (if one above does not match)')
-                ->configure()
-                    ->displayIf('CategoryID')->isEqualTo('other')->end()
-                ->end()
-            ->hidden('ID','ID');
+            ->literal('CategoryContainer','<div id="category_options"></div>')
+            ->hidden('ID','ID')
+            ->hidden('SummitID',$this->summit->ID)
+            ->hidden('CategoryIDbis','');
+
         return $fields;
     }
 
@@ -180,6 +131,12 @@ JS;
         }
 
         $presentation = $data;
+
+        if ($presentation->Category()->ID) {
+            $group = $presentation->Category()->getCategoryGroups()->first();
+            $this->fields->fieldByName('GroupID')->setValue($group->ID);
+            $this->fields->fieldByName('CategoryIDbis')->setValue($presentation->Category()->ID);
+        }
 
         foreach ($presentation->Materials()->filter('ClassName', 'PresentationLink') as $key => $link)
         {
