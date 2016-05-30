@@ -360,8 +360,10 @@ class Presentation extends SummitEvent implements IPresentation
         $v->MemberID = Member::currentUserID();
         $v->PresentationID = $this->ID;
         $v->Vote = $vote;
+        $v->Content = $content;
         $v->write();
     }
+
 
 
     /**

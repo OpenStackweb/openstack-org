@@ -77,6 +77,16 @@ class PresentationVotingPage_Controller extends Page_Controller
     }
 
 
+    public function handleIndex(SS_HTTPRequest $r)
+    {
+    	if($r->param('Action') === 'presentation' && is_numeric($r->param('ID'))) {
+    		return $this->redirect($this->Link());
+    	}
+
+    	return $this;
+    }
+
+
     /**
      * @return string
      */
@@ -244,6 +254,7 @@ class PresentationVotingPage_API extends RequestHandler
             'category' => $presentation->Category()->Title,
             'speakers' => [],
             'user_vote' => $vote ? $vote->Vote : null,
+            'user_comment' => $vote ? $vote->Content : null,
             'abstract' => $presentation->Description,
         ];
 
@@ -284,9 +295,23 @@ class PresentationVotingPage_API extends RequestHandler
         $vars = Convert::json2array($r->getBody());
 
         if (isset($vars['vote'])) {
-            $presentation->setUserVote((int)$vars['vote']);
+            $presentation->setUserVote(
+            	(int)$vars['vote'],
+            	isset($vars['content']) ? $vars['content'] : null
+            );
 
             return new SS_HTTPResponse('OK', 200);
+        }
+
+        if(isset($vars['content'])) {
+        	if($userVote = $presentation->getUserVote()) {
+        		$userVote->Content = $vars['content'];
+        		$userVote->write();
+
+        		return new SS_HTTPResponse('OK', 200);
+        	}
+
+        	return new SS_HTTPResponse('No vote found', 403);
         }
 
         return $this->httpError(400);

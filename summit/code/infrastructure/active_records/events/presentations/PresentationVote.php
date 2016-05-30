@@ -6,7 +6,7 @@ class PresentationVote extends DataObject
 
     private static $db = array (
         'Vote' => 'Int',
-        'Content' => 'HTMLText'
+        'Content' => 'Text'
     );
 
 

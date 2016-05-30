@@ -32,8 +32,7 @@ class PresentationMemberExtension extends DataExtension
         $mid = Member::currentUserID();
         if(!$summit) $summit = Summit::get_active();
         $priority = $this->owner->VotingList();        
-
-        if(!$priority->exists() || $priority->SummitID !== $summit->ID) {
+        if(!$priority->exists() || $priority->SummitID != $summit->ID) {        	
         	$priority = PresentationRandomVotingList::get()->filter(
         		'SummitID', 
         		$summit->ID

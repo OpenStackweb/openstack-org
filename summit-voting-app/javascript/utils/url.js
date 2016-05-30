@@ -20,7 +20,7 @@ export default (pathParts, queryParams, windowObj) => {
 	}
 	// null
 	else if(!pathParts) {
-		path = windowObj.location.pathname.replace(new RegExp(`^${baseURL}`), '');		
+		path = windowObj.location.pathname.replace(new RegExp(`^${baseURL}`), '');	
 	}
 	// string
 	else {
@@ -30,7 +30,7 @@ export default (pathParts, queryParams, windowObj) => {
 	if(queryParams) {
 		const serialised = serialise(queryParams);
 		if(serialised.length) {
-			path += `?${serialise(queryParams)}`;	
+			path += `/?${serialise(queryParams)}`;	
 		}
 		
 	}
