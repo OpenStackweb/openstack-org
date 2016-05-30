@@ -509,7 +509,6 @@ class Presentation extends SummitEvent implements IPresentation
 
         // Check permissions of user on talk
         if ($this->CanAssign()) {
-
             $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
 
 

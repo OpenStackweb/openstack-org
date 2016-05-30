@@ -40,6 +40,18 @@ export const detailPresentation = function (
         		})
         	}
 
+        case 'TOGGLE_FOR_ME':
+        	return {
+        		...state,
+        		selected: !!action.payload
+        	};
+
+        case 'TOGGLE_FOR_GROUP':
+        	return {
+        		...state,
+        		group_selected: !!action.payload
+        	};
+        	
         default:
             return state;
 

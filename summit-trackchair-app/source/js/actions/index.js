@@ -33,12 +33,20 @@ const createRequestReceiveAction = (
 };
 
 export const throwError = createAction('THROW_ERROR');
-
 export const clearError = createAction('CLEAR_ERROR');
-
 export const requestSummit = createAction('REQUEST_SUMMIT');
-
 export const receiveSummit = createAction('RECEIVE_SUMMIT');
+export const requestPresentations = createAction('REQUEST_PRESENTATIONS');
+export const receivePresentations = createAction('RECEIVE_PRESENTATIONS');
+export const requestPresentationDetail = createAction('REQUEST_PRESENTATION_DETAIL');
+export const receivePresentationDetail = createAction('RECEIVE_PRESENTATION_DETAIL');
+export const createComment = createAction('CREATE_COMMENT');
+export const syncComment = createAction('SYNC_COMMENT');
+export const toggleForMe = createAction('TOGGLE_FOR_ME');
+export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
+
+
+/* Async Actions */
 
 export const fetchSummit = (id) => {
 	return createRequestReceiveAction(
@@ -48,9 +56,6 @@ export const fetchSummit = (id) => {
 	)(id);
 }
 
-export const requestPresentations = createAction('REQUEST_PRESENTATIONS');
-
-export const receivePresentations = createAction('RECEIVE_PRESENTATIONS');
 
 export const fetchPresentations = createRequestReceiveAction(
     requestPresentations,
@@ -58,9 +63,6 @@ export const fetchPresentations = createRequestReceiveAction(
     ''
 );
 
-export const requestPresentationDetail = createAction('REQUEST_PRESENTATION_DETAIL');
-
-export const receivePresentationDetail = createAction('RECEIVE_PRESENTATION_DETAIL');
 
 export const fetchPresentationDetail = (id) => {
 	return createRequestReceiveAction(
@@ -70,16 +72,50 @@ export const fetchPresentationDetail = (id) => {
 	)(id);
 };
 
-export const createComment = createAction('CREATE_COMMENT');
+export const postMySelection = (presentationID, bool) => {
+	return (dispatch) => {
+		const key = `TOGGLE_FOR_ME_${presentationID}`;
+		dispatch(toggleForMe(bool));
+		cancel(key);
 
-export const syncComment = createAction('SYNC_COMMENT');
+		const url = URL.create(
+			`presentation/${presentationID}/${bool ? 'select' : 'unselect'}`,
+			{},
+			'/trackchairs/api/v1'
+		);
+
+		const req = http.put(url)
+			.end(responseHandler(dispatch, json => {
+			}));
+		schedule(key, req);
+	}
+};
+
+export const postGroupSelection = (presentationID, bool) => {
+	return (dispatch) => {
+		const key = `TOGGLE_FOR_GROUP_${presentationID}`;
+		dispatch(toggleForGroup(bool));
+		cancel(key);
+
+		const url = URL.create(
+			`presentation/${presentationID}/group/${bool ? 'select' : 'unselect'}`,
+			{},
+			'/trackchairs/api/v1'
+		);
+
+		const req = http.put(url)
+			.end(responseHandler(dispatch, json => {
+			}));
+		schedule(key, req);
+	}
+};
+
 
 export const postComment = (presentationID, commentData) => {
 	return (dispatch) => {
 		
 		const key = `POST_COMMENT__${JSON.stringify(commentData || {})}`;
 		const __id = +new Date();
-		console.log(commentData);		
 		dispatch(createComment({
 			...commentData,
 			__id

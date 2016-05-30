@@ -652,10 +652,10 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         'GET ' => 'index',
         'POST vote' => 'handleVote',
         'POST comment' => 'handleAddComment',
-        'GET select' => 'handleSelect',
-        'GET unselect' => 'handleUnselect',
-        'GET group/select' => 'handleGroupSelect',
-        'GET group/unselect' => 'handleGroupUnselect',
+        'PUT select' => 'handleSelect',
+        'PUT unselect' => 'handleUnselect',
+        'PUT group/select' => 'handleGroupSelect',
+        'PUT group/unselect' => 'handleGroupUnselect',
         'GET categorychange/new' => 'handleCategoryChangeRequest',
     );
 
@@ -794,7 +794,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $data['total_points'] = ($p->CalcTotalPoints() > 0) ? $p->CalcTotalPoints() : '0';
         $data['creator'] = $p->Creator()->getName();
         $data['user_vote'] = $p->getUserVote() ? $p->getUserVote()->Vote : null;
-        $data['comments'] = $comments ? $comments : null;
+        $data['comments'] = $comments;
         $data['can_assign'] = $p->canAssign(1) ? $p->canAssign(1) : null;
         $data['selected'] = $p->isSelected();
         $data['group_selected'] = $p->isGroupSelected();
@@ -868,6 +868,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         $this->presentation->assignToIndividualList();
 
+        return new SS_HTTPResponse('OK');
     }
 
     /**
@@ -883,7 +884,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         $this->presentation->removeFromIndividualList();
 
-        return new SS_HTTPResponse("Presentation unseleted.", 200);
+        return new SS_HTTPResponse("Presentation unselected.", 200);
 
     }
 
@@ -898,6 +899,8 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         }
 
         $this->presentation->assignToGroupList();
+
+        return new SS_HTTPResponse('OK');
 
     }
 

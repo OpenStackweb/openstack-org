@@ -8,16 +8,14 @@ const LinkBar = ({
 	component
 }) => {
 	let navChildren = children;
-	if(typeof component === 'string' && component.toUpperCase() === 'UL') {
-		navChildren = children.map(c => <li>{c}</li>);
-	}
-
+	const listItem = (typeof component === 'string' && component.toUpperCase() === 'UL');
 	return React.createElement(
 		component,
 		{className},
 		navChildren.map((c,i) => (
 			React.cloneElement(c, {
 				onLinkClicked,
+				listItem, 
 				active: c.props.link === activeLink.split('/')[0],
 				key: i
 			}, c.props.children)

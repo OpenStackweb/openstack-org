@@ -23,7 +23,6 @@ class Browse extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
 		if(nextProps.category !== this.props.category) {
 			this.props.fetch({
 				category: nextProps.category,
@@ -31,7 +30,6 @@ class Browse extends React.Component {
 			});
 		}
 		else if(nextProps.search !== this.props.search) {
-			console.log('search changed');
 			this.props.fetch({
 				keyword: nextProps.search,
 				page: 1

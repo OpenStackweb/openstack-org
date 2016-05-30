@@ -37,13 +37,44 @@
 	height:38px;
 }
 
-.feed-activity-list {
-	.feed-element {
-  		border-bottom: 1px solid #e7eaec;
+.scrollable-feed {
+	.ibox-content {
+		padding:0;
+	}
 
-  	}
-  	a {
-  		color:inherit;
-  		cursor:pointer;
-  	}
+	.feed-activity-list {
+		.feed-element {
+			margin:0;
+			padding:0;
+			border:0;
+		}
+  		> a {
+  			padding: 15px 20px 20px 20px;
+  			border-bottom: 1px solid #e7eaec;
+  			color:inherit;
+  			cursor:pointer;
+  			&.active {
+  				background: #3A89D3;
+  				color:white;
+	  			small {
+	  				color:white;
+	  			}
+
+  			}
+  		}
+	}
+
+}
+.contact-box {	
+	background-color: #ffffff;
+	padding: 20px;
+	text-align: center;
+	.text-center {
+		text-align:center;
+	}
+	.bio {
+		margin:10px;
+		line-height:2;
+		text-align:left;
+	}
 }

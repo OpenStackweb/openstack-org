@@ -14,19 +14,19 @@ const MainNav = ({
         	<i className="fa fa-list"></i>
         	<span className="nav-label">Browse</span>
         </LinkButton>
-        <LinkButton link="">
+        <LinkButton link="selections">
         	<i className="fa fa-check-square"></i>
         	<span className="nav-label">Selections</span>
         </LinkButton>
-        <LinkButton link="">
+        <LinkButton link="directory">
         	<i className="fa fa-sort-alpha-asc"></i>
         	<span className="nav-label">Directory</span>
         </LinkButton>
-        <LinkButton link="">
+        <LinkButton link="change-requests">
         	<i className="fa fa-edit"></i>
         	<span className="nav-label">Change Requests</span>
         </LinkButton>
-        <LinkButton link="">
+        <LinkButton link="help">
         	<i className="fa fa-question-circle"></i>
         	<span className="nav-label">Help</span>
         </LinkButton>
@@ -41,7 +41,7 @@ export default connect (
 		}
 	},
 	dispatch => ({
-		onLinkClicked (link) {			
+		onLinkClicked (link) {		
 			browserHistory.push(URL.create(link || '/'));
 		}
 	})
