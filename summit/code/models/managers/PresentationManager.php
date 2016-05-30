@@ -376,6 +376,7 @@ final class PresentationManager implements IPresentationManager
             $presentation                          = Presentation::create();
 
             $presentation->Title                   = trim($data['Title']);
+            $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
             $presentation->ShortDescription        = trim($data['ShortDescription']);
             $presentation->ProblemAddressed        = trim($data['ProblemAddressed']);
@@ -433,6 +434,7 @@ final class PresentationManager implements IPresentationManager
         return $this->tx_manager->transaction(function() use($presentation,  $data){
 
             $presentation->Title                   = trim($data['Title']);
+            $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
             $presentation->ShortDescription        = trim($data['ShortDescription']);
             $presentation->ProblemAddressed        = trim($data['ProblemAddressed']);

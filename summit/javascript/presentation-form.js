@@ -11,6 +11,8 @@
  * limitations under the License.
  **/
 
+var show_if_public = ['ProblemAddressed','AttendeesExpectedLearnt','SelectionMotive'];
+
 
 $(document).ready(function(){
 
@@ -24,6 +26,58 @@ $(document).ready(function(){
         },
         unhighlight: function(element) {
             $(element).closest('.form-group').removeClass('has-error');
+        },
+        rules: {
+            Title:{required: true, maxlength: 100},
+            TypeID:{required: true},
+            GroupID:{required: true},
+            CategoryID:{required: true},
+            Level:{required: true},
+            ShortDescription:{required: true, maxlength: 1000},
+            ProblemAddressed:{
+                required: function(){
+                    return $('select[name=GroupID] option:selected').val() == 13;
+                },
+                maxlength: 1000
+            },
+            AttendeesExpectedLearnt:{
+                required: function(){
+                    return $('select[name=GroupID] option:selected').val() == 13;
+                },
+                maxlength: 1000
+            },
+            SelectionMotive:{
+                required: function(){
+                    return $('select[name=GroupID] option:selected').val() == 13;
+                },
+                maxlength: 1000
+            }
+        },
+        messages: {
+            Title:{
+                required:'Title is required.',
+                maxlength: 'Title must be less than 100 characters long.'
+            },
+            TypeID:{ required: 'Presentation type is required.'},
+            GroupID:{ required: 'Presentation category group is required.'},
+            CategoryID:{ required: 'Presentation category is required.'},
+            Level:{ required: 'Presentation level is required.'},
+            ShortDescription:{
+                required: 'Presentation abstract is required.',
+                maxlength: 'Abstract must be less than 1000 characters long.'
+            },
+            ProblemAddressed:{
+                required: 'This field is required.',
+                maxlength: 'This must be less than 1000 characters long.'
+            },
+            AttendeesExpectedLearnt:{
+                required: 'This field is required.',
+                maxlength: 'This must be less than 1000 characters long.'
+            },
+            SelectionMotive:{
+                required: 'This field is required.',
+                maxlength: 'This must be less than 1000 characters long.'
+            }
         },
         errorElement: 'span',
         errorClass: 'help-block',
@@ -50,6 +104,7 @@ $(document).ready(function(){
 
     $('#PresentationForm_PresentationForm_GroupID').change(function(){
         getCategories();
+        toggleFields();
     });
 
     $('body').on('change','input[name=CategoryID][type=radio]',function () {
@@ -59,6 +114,19 @@ $(document).ready(function(){
     if ($('#PresentationForm_PresentationForm_CategoryIDbis').val()) {
         getCategories();
     }
+
+    toggleFields();
+
+    $("#PresentationForm_PresentationForm_action_savePresentationSummary").click(function(evt) {
+        tinyMCE.triggerSave();
+        if($("#PresentationForm_PresentationForm").valid()) {
+            //Carry on
+        } else {
+            evt.preventDefault();
+            evt.stopPropagation();
+            return false;
+        }
+    });
 
 });
 
@@ -103,3 +171,17 @@ function getCategories() {
     }
 
 }
+
+function toggleFields() {
+    var is_public = $('select[name=GroupID] option:selected').val() == 13;
+
+    $.each(show_if_public,function(index, value) {
+        if (is_public) {
+            $('#'+value).show();
+        } else {
+            $('#'+value).hide();
+        }
+    });
+}
+
+

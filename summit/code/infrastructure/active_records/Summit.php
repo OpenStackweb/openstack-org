@@ -1512,17 +1512,36 @@ final class Summit extends DataObject implements ISummit
     public static function seedBasicEventTypes($summit_id)
     {
         if (!SummitEventType::get()->filter(array('Type' => 'Presentation', 'SummitID' => $summit_id))->first()) {
-            $presentation = new SummitEventType();
+            $presentation = new PresentationType();
             $presentation->Type = 'Presentation';
             $presentation->SummitID = $summit_id;
+            $presentation->MinSpeakers = 1;
+            $presentation->MaxSpeakers = 3;
+            $presentation->MinModerators = 0;
+            $presentation->MaxModerators = 0;
             $presentation->write();
         }
 
         if (!SummitEventType::get()->filter(array('Type' => 'Keynotes', 'SummitID' => $summit_id))->first()) {
-            $key_note = new SummitEventType();
+            $key_note = new PresentationType();
             $key_note->Type = 'Keynotes';
             $key_note->SummitID = $summit_id;
+            $key_note->MinSpeakers = 1;
+            $key_note->MaxSpeakers = 3;
+            $key_note->MinModerators = 0;
+            $key_note->MaxModerators = 0;
             $key_note->write();
+        }
+
+        if (!SummitEventType::get()->filter(array('Type' => 'Panel', 'SummitID' => $summit_id))->first()) {
+            $panel = new PresentationType();
+            $panel->Type = 'Panel';
+            $panel->SummitID = $summit_id;
+            $panel->MinSpeakers = 1;
+            $panel->MaxSpeakers = 3;
+            $panel->MinModerators = 0;
+            $panel->MaxModerators = 1;
+            $panel->write();
         }
 
         if (!SummitEventType::get()->filter(array('Type' => 'Hand-on Labs', 'SummitID' => $summit_id))->first()) {

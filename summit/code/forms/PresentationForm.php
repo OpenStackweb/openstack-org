@@ -37,9 +37,9 @@ final class PresentationForm extends BootstrapForm
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-        Requirements::javascript("summit/javascript/presentation-form.js");
+        Requirements::javascript('summit/javascript/presentation-form.js');
 
-        parent::__construct(
+         parent::__construct(
             $controller, 
             $name, 
             $this->getPresentationFields(),
@@ -56,7 +56,8 @@ final class PresentationForm extends BootstrapForm
         $category_groups = array_merge($public_groups,$private_groups);
         $category_groups_map = array();
         foreach ($category_groups as $group) {
-            $category_groups_map[$group->ID] = $group->Name;
+            $group_type = ($group->ClassName == 'PrivatePresentationCategoryGroup') ? 'private' : 'public';
+            $category_groups_map[$group->ID] = array('title' => $group->Name, 'group_type' => $group_type);
         }
 
         $fields = FieldList::create()
@@ -64,6 +65,12 @@ final class PresentationForm extends BootstrapForm
                 ->configure()
                     ->setAttribute('autofocus','TRUE')
                 ->end()
+            ->dropdown('TypeID','Please select the type of your presentation content')
+                ->configure()
+                    ->setEmptyString('-- Select one --')
+                    ->setSource(PresentationType::get()->map('ID', 'Type'))
+                ->end()
+            ->literal('CategoryContainer','<div id="category_options"></div>')
             ->dropdown('Level','Please select the level of your presentation content')
                 ->configure()
                     ->setEmptyString('-- Select one --')
@@ -74,29 +81,21 @@ final class PresentationForm extends BootstrapForm
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
-                    ->setMaxCharLimit(1000)
-                    ->setRequired(true)
                 ->end()
             ->tinyMCEEditor('ProblemAddressed','What is the problem or use case you’re addressing in this session? (1000 chars)')
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
-                    ->setMaxCharLimit(1000)
-                    ->setRequired(true)
                 ->end()
             ->tinyMCEEditor('AttendeesExpectedLearnt','What should attendees expect to learn? (1000 chars)')
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
-                    ->setMaxCharLimit(1000)
-                    ->setRequired(true)
                 ->end()
             ->tinyMCEEditor('SelectionMotive','Why should this session be selected? (1000 chars)')
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
-                    ->setMaxCharLimit(1000)
-                    ->setRequired(true)
                 ->end()
             ->literal('PresentationMaterialsTitle','<h3>Please provide any relevant links to additional information, such as code repositories, case studies, papers, blog posts etc. (Up to 5 links)</h3>')
             ->text('PresentationLink[1]','#1')
@@ -104,16 +103,13 @@ final class PresentationForm extends BootstrapForm
             ->text('PresentationLink[3]','#3')
             ->text('PresentationLink[4]','#4')
             ->text('PresentationLink[5]','#5')
-            ->literal('HR','<hr/>')
-            ->dropdown('GroupID','Please select the category group of your presentation content')
-                ->configure()
-                    ->setEmptyString('-- Select one --')
-                    ->setSource($category_groups_map)
-                ->end()
-            ->literal('CategoryContainer','<div id="category_options"></div>')
             ->hidden('ID','ID')
-            ->hidden('SummitID',$this->summit->ID)
+            ->hidden('SummitID','',$this->summit->ID)
             ->hidden('CategoryIDbis','');
+
+        $CategoryGroupField = new CategoryGroupField('GroupID','Please select the category group of your presentation content');
+        $CategoryGroupField->setSource($category_groups_map);
+        $fields->insertAfter($CategoryGroupField,'TypeID');
 
         return $fields;
     }
@@ -169,6 +165,5 @@ final class PresentationForm extends BootstrapForm
             $presentation->Materials()->add( PresentationLink::create(array('Link' => trim($val))));
         }
     }
-
 
 }

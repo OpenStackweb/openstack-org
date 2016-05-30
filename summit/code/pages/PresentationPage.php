@@ -764,7 +764,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             "PresentationForm",
             FieldList::create
             (
-                FormAction::create('savePresentationSummary', 'Save and continue')
+                FormAction::create('savePresentationSummary', 'Save and continue')->addExtraClass('btn-primary')
             ),
             $this->parent->Summit(),
             $this->parent->getPresentationManager(),
@@ -774,11 +774,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             $form->loadDataFrom($data);
             return $form;
-        }
-
-        // ugh...
-        if ($this->presentation->OtherTopic && !$this->presentation->CategoryID) {
-            $this->presentation->CategoryID = 'other';
         }
 
         return ($this->presentation->exists())? $form->loadDataFrom($this->presentation):$form;
@@ -842,22 +837,34 @@ class PresentationPage_ManageRequest extends RequestHandler
         $validator = RequiredFields::create();
 
         if ($this->presentation->Speakers()->exists()) {
-            $fields->insertBefore(
-                LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
-                'SpeakerNote'
-            );
-            $fields->removeField('SpeakerNote');
+            if (!$this->presentation->maxSpeakersReached()) {
+                $fields->insertBefore(
+                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
+                    'SpeakerNote'
+                );
+                $fields->removeField('SpeakerNote');
 
-            $actions = FieldList::create(
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another speaker'),
-                FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
-            );
+                $actions = FieldList::create(
+                    FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another speaker'),
+                    FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
+                );
 
-            if (Member::currentUser()->IsSpeaker($this->presentation)) {
-                $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
-                $fields->field('EmailAddress')
-                    ->setTitle('Enter the first name, last name or email address of your next speaker (*)')
-                    ->setDisplayLogicCriteria(null);
+                if (Member::currentUser()->IsSpeaker($this->presentation)) {
+                    $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
+                    $fields->field('EmailAddress')
+                        ->setTitle('Enter the first name, last name or email address of your next speaker (*)')
+                        ->setDisplayLogicCriteria(null);
+                }
+            } else {
+                $fields->insertBefore(
+                    LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of speakers.</h3>'),
+                    'SpeakerNote'
+                );
+                $fields->removeField('SpeakerNote');
+                $fields->removeField('SpeakerType');
+                $actions = FieldList::create(
+                    FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
+                );
             }
         } else {
             $actions = FieldList::create(
@@ -890,23 +897,20 @@ class PresentationPage_ManageRequest extends RequestHandler
 
             $rules = array
             (
-                'Title'                   => 'required',
+                'Title'                   => 'required|max:100',
+                'TypeID'                  => 'required',
                 'Level'                   => 'required|text',
                 'ShortDescription'        => 'required',
-                'ProblemAddressed'        => 'required',
-                'AttendeesExpectedLearnt' => 'required',
-                'SelectionMotive'         => 'required',
                 'CategoryID'              => 'required|text'
             );
 
             $messages = array
             (
                 'Title.required'                   => ':attribute is required.',
+                'Title.max'                        => ':attribute must be less than 100 characters long.',
+                'TypeID.required'                  => ':attribute is required.',
                 'Level.required'                   => ':attribute is required.',
                 'ShortDescription.required'        => ':attribute is required.',
-                'ProblemAddressed.required'        => ':attribute is required.',
-                'AttendeesExpectedLearnt.required' => ':attribute is required.',
-                'SelectionMotive.required'         => ':attribute is required.',
                 'CategoryID.required'              => 'Please choose a category group and then a category.'
             );
 
