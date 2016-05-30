@@ -288,7 +288,7 @@ jQuery(document).ready(function($) {
         }
     });
 
-    var confirm_delete_featured_dialog = $('#dialog-delete-post').dialog({
+    var confirm_delete_featured_dialog = $('#dialog-delete-featured-post').dialog({
         resizable: false,
         autoOpen: false,
         height:200,

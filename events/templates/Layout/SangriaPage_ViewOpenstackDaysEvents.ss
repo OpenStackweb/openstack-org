@@ -33,6 +33,6 @@ $FeaturedEventForm
     </table>
 <% end_if %>
 
-<div id="dialog-delete-post" title="Delete Featured Event ?" style="display: none;">
+<div id="dialog-delete-featured-post" title="Delete Featured Event ?" style="display: none;">
     <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure to remove this event from featured?</p>
 </div>
