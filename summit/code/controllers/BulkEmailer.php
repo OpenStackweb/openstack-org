@@ -4,14 +4,14 @@ class BulkEmailer extends Controller
 {
 
 	private static $allowed_actions = [
-		'emailspeakers' => 'ADMIN',
-		'emailattendees' => 'ADMIN'
+		'emailspeakers',
+		'emailattendees'
 	];
 
 	public function init() 
 	{
 		parent::init();
-		if(!Permission::check('ADMIN')) {
+		if(!Director::is_cli() && !Permission::check('ADMIN')) {
 			die('You must be logged in as an admin to use this tool');
 		}
 	}
@@ -51,7 +51,7 @@ class BulkEmailer extends Controller
 				continue;
 			}
 			if(!EmailValidator::validEmail($speaker->Member()->Email)) {
-				echo $speaker->Member()->Email . " is not a valid email address. Skipping<br>";
+				echo $speaker->Member()->Email . " is not a valid email address. Skipping.".$this->br();
 				continue;
 			}
 			
@@ -73,10 +73,10 @@ class BulkEmailer extends Controller
 				echo $email->debug();
 			}
 
-			echo 'Email sent to ' . $to . ' ('.$speaker->getName().')<br/>';
+			echo 'Email sent to ' . $to . ' ('.$speaker->getName().')'.$this->br();
 		}
 
-		echo "<br><br><br>Sent a sample of $appliedLimit emails out of $totalBeforeLimit total<br />";
+		echo $this->br(3) . "Sent a sample of $appliedLimit emails out of $totalBeforeLimit total".$this->br();
 	}
 
 
@@ -85,42 +85,56 @@ class BulkEmailer extends Controller
      */
 	public function emailattendees(SS_HTTPRequest $r)
 	{
+		$startTime = microtime(true);
 		$summit = Summit::get_most_recent();
 		$confirm = $r->getVar('confirm');
 		$limit = $r->getVar('limit');		
 		$attendees = $summit->Attendees();
 		$totalBeforeLimit = $attendees->count();
-		$appliedLimit = $confirm ? null : ($limit ?: 50);
+		$chunkSize = 100;
+		$offset = 0;
+		$appliedLimit = $confirm ? $chunkSize : ($limit ?: 50);
 		$attendees = $attendees->limit($appliedLimit);
+		while($offset < $totalBeforeLimit) {
+			echo "----- new chunk ($offset) ----".$this->br();
+			foreach ($attendees->limit($chunkSize, $offset) as $attendee) {
+				if (!EmailValidator::validEmail($attendee->Member()->Email)) {
+					echo $attendee->Member()->Email . " is not a valid email. Skipping".$this->br();
+					continue;
+				}
 
-		foreach ($attendees as $attendee) {
-			if (!EmailValidator::validEmail($attendee->Member()->Email)) {
-				echo $attendee->Member()->Email . " is not a valid email. Skipping";
-				continue;
+				$to = $attendee->Member()->Email;
+				$subject = "Rate OpenStack Summit sessions from {$summit->Title}";
+
+				$email = EmailFactory::getInstance()->buildEmail('do-not-reply@openstack.org', $to, $subject);
+				$email->setUserTemplate("rate-summit-sessions-austin");
+				$email->populateTemplate([
+					'Name' => $attendee->Member()->FirstName,
+				]);
+
+				if ($confirm) {
+					$email->send();
+				} else {
+					//echo $email->debug();
+				}
+
+				echo 'Email sent to ' . $to . ' ('.$attendee->Member()->getName().')'.$this->br();
+
 			}
-
-			$to = $attendee->Member()->Email;				
-			$subject = "Rate OpenStack Summit sessions from {$summit->Title}";
-
-			$email = EmailFactory::getInstance()->buildEmail('do-not-reply@openstack.org', $to, $subject);
-			$email->setUserTemplate("rate-summit-sessions-austin");
-			$email->populateTemplate([
-				'Name' => $attendee->Member()->FirstName,
-			]);
-
-			if ($confirm) {
-				//SchedSpeakerEmailLog::addSpeaker($to);
-				$email->send();
-			} else {
-				echo $email->debug();
-			}
-
-			echo 'Email sent to ' . $to . ' ('.$attendee->Member()->getName().')<br/>';
-
+			echo "---- end chunk ($offset) ----".$this->br();
+			$offset += $chunkSize;
 		}
-		
-		echo "<br><br><br>Sent a sample of $appliedLimit emails out of $totalBeforeLimit total<br />";		
+
+		echo $this->br(3) ."Sent a sample of $appliedLimit emails out of $totalBeforeLimit total".$this->br();
+		$endTime = microtime(true);
+		echo "Elapsed time: " . $endTime - $startTime.$this->br();
 	}
 
+	protected function br($times = 1)
+	{
+		$str = Director::is_cli() ? PHP_EOL : "<br>";
+
+		return str_repeat($str, $times);
+	}
 
 }
