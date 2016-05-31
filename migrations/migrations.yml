@@ -31,3 +31,4 @@ migrations:
   - VideoPresentationMigration
   - NewsChangeNewsDatesToCentral
   - SummitMaxAllowedSubmissionTaskMigration
+  - SummitPresentationTypeMigration
