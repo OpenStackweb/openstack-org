@@ -57,21 +57,23 @@ final class PresentationForm extends BootstrapForm
         $category_groups_map = array();
         foreach ($category_groups as $group) {
             $group_type = ($group->ClassName == 'PrivatePresentationCategoryGroup') ? 'private' : 'public';
-            $category_groups_map[$group->ID] = array('title' => $group->Name, 'group_type' => $group_type);
+            $category_groups_map[] = array('id' => $group->ID,'title' => $group->Name, 'group_type' => $group_type);
         }
+
+        usort($category_groups_map, function($a, $b) { return strcmp($a["title"], $b["title"]); });
 
         $fields = FieldList::create()
             ->text('Title', 'Proposed Presentation Title')
                 ->configure()
                     ->setAttribute('autofocus','TRUE')
                 ->end()
-            ->dropdown('TypeID','Please select the type of your presentation content')
+            ->dropdown('TypeID','Select the presentation format')
                 ->configure()
                     ->setEmptyString('-- Select one --')
-                    ->setSource(PresentationType::get()->map('ID', 'Type'))
+                    ->setSource(PresentationType::get()->exclude('Type','Keynotes')->map('ID', 'Type'))
                 ->end()
             ->literal('CategoryContainer','<div id="category_options"></div>')
-            ->dropdown('Level','Please select the level of your presentation content')
+            ->dropdown('Level','Select the level of your presentation content')
                 ->configure()
                     ->setEmptyString('-- Select one --')
                     ->setSource(Presentation::create()->dbObject('Level')->enumValues())
@@ -107,7 +109,7 @@ final class PresentationForm extends BootstrapForm
             ->hidden('SummitID','',$this->summit->ID)
             ->hidden('CategoryIDbis','');
 
-        $CategoryGroupField = new CategoryGroupField('GroupID','Please select the category group of your presentation content');
+        $CategoryGroupField = new CategoryGroupField('GroupID','Select the <a href="'.$this->summit->Link.'categories" target="_blank">Summit Category</a> of your presentation');
         $CategoryGroupField->setSource($category_groups_map);
         $fields->insertAfter($CategoryGroupField,'TypeID');
 
