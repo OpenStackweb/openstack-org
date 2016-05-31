@@ -36,19 +36,19 @@ $(document).ready(function(){
             ShortDescription:{required: true, maxlength: 1000},
             ProblemAddressed:{
                 required: function(){
-                    return $('select[name=GroupID] option:selected').val() == 13;
+                    return $('select[name=GroupID] option:selected').hasClass('public');
                 },
                 maxlength: 1000
             },
             AttendeesExpectedLearnt:{
                 required: function(){
-                    return $('select[name=GroupID] option:selected').val() == 13;
+                    return $('select[name=GroupID] option:selected').hasClass('public');
                 },
                 maxlength: 1000
             },
             SelectionMotive:{
                 required: function(){
-                    return $('select[name=GroupID] option:selected').val() == 13;
+                    return $('select[name=GroupID] option:selected').hasClass('public');
                 },
                 maxlength: 1000
             }
@@ -173,7 +173,7 @@ function getCategories() {
 }
 
 function toggleFields() {
-    var is_public = $('select[name=GroupID] option:selected').val() == 13;
+    var is_public = $('select[name=GroupID] option:selected').hasClass('public');
 
     $.each(show_if_public,function(index, value) {
         if (is_public) {
