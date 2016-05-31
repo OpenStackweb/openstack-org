@@ -187,6 +187,8 @@
             <!-- End Category -->
             <div class="col-sm-6">
             </div>
+        </div>
+        <div class="row session-list-row">
             <p>* These tracks are not eligible for public submission during Call for Presentations</p>
         </div>
         <!-- Full track definitions -->
@@ -195,52 +197,52 @@
                 <hr>
                 <h1 id="all-tracks">All Summit Tracks</h1>
                 <p>
-                    <strong>Hands-on Workshops</strong><br>
-                    Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.
+                    <strong>Architectural Decisions</strong><br>
+                    If you are a cloud architect or involved in planning your cloud srategy, this track will discuss popular reference architectures, configuration options, workload optimiziation, and architecture show and tell, where experienced users will share their architectures and experiences.
                 </p>
                 <p>
-                    <strong>Working Groups</strong><br>
-                    This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.
+                    <strong>Big Data</strong><br>
+                    Big Data collection and analysis is a common use case for OpenStack infrastruture. In this track, you'll learn about specific reference architectures and use cases, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.
                 </p>
                 <p>
                     <strong>Birds of a Feather</strong><br>
                     For the first time, the OpenStack Summit will formalize BoF sessions are part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.
                 </p>
                 <p>
-                    <strong>Community Building</strong><br>
-                    OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.
-                </p>
-                <p>
-                    <strong>IT Strategy</strong><br>
-                    Enterprise IT leaders building their cloud business case are facing unique requirements to manage legacy applications, new software development and shadow IT within industry regulations and business constraints. In this track, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy, hybrid cloud, how to manage legacy applications and recruiting.
-                </p>
-                <p>
-                    <strong>Evaluating OpenStack</strong><br>
-                    If you are evaluating cloud technologies or building your cloud strategy, this track will cover the basics for you to evaluate the technology, understand the different ways to consume OpenStack, review popular use cases and determine your path forward.
-                </p>
-                <p>
                     <strong>Case Studies</strong><br>
                     Sharing knowledge is a core value for the OpenStack community. In the case sudies track, you'll hear directly from enterprises, service providers and application developers who are using OpenStack to address their business problems. Learn challenges, best practices and measured results. ⇥⇥⇥⇥
                 </p>
                 <p>
-                    <strong>Telecom &amp; NFV Strategy</strong><br>
-                    In response to disruptive market changes, telecoms and large network operaters must change the economics of their businesses with agile, programmable networks. In this track, we'll cover the emerging NFV architecture, the unique business cases, the value of open source standards, and how OpenStack is at the heart of this transformational platform.
+                    <strong>Cloud App Development</strong><br>
+                    A large community of application developers and ecosystem of development tools is growing around OpenStack. This track will be for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, application software configuration, SDKs, tools, PaaS and big data.
                 </p>
                 <p>
                     <strong>Cloudfunding</strong><br>
                     Startups are critical to drive new innovations in the OpenStack community and the broader cloud computing market, and keeping a pulse on the startup community is critical for any user or company in the OpenStack ecosystem. This track will highlight new and successful startups and discuss where investors are seeing the most opportunity.
                 </p>
                 <p>
-                    <strong>Products &amp; Services</strong><br>
-                    OpenStack's vibrant ecosystem and the different ways to consume it are among it's greatest strengths. In this track, you'll hear about the latest products, tools and services from the OpenStack ecosystem.
+                    <strong>Cloud Models &amp; Economics</strong><br>
+                    There are many ways to consume OpenStack, whether you simply want to use a public cloud service, build your own private cloud or any combination of these options. Most organizations are making use of multiple cloud environments, and in this track we’ll discuss which workloads fit different cloud models, how to optimize for cost and mitigate risk.
+                </p>
+                <p>
+                    <strong>Community Building</strong><br>
+                    OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.
+                </p>
+                <p>
+                    <strong>Containers</strong><br>
+                    OpenStack provides a single platform and set of APIs for virtual machines, bare metal and containers. Many organizations looking to adopt cotainers to increase speed for their developers have found OpenStack to be their path to production. In this track, learn how containers fit with OpenStack, including reference architectures, use cases and updates from popular containers projects like Magnum and Kuryr.
                 </p>
                 <p>
                     <strong>Culture &amp; Organizational Change</strong><br>
                     As the OpenStack community and ecosystem have matured, it's clear that people and processes are at the heart of cloud transformation, and technology is no longer the barrier. Join us to learn from organizations who have successfully navigated organizational change to gain agility, speed to market and developer satisfaction.
                 </p>
                 <p>
-                    <strong>Cloud Models &amp; Economics</strong><br>
-                    There are many ways to consume OpenStack, whether you simply want to use a public cloud service, build your own private cloud or any combination of these options. Most organizations are making use of multiple cloud environments, and in this track we’ll discuss which workloads fit different cloud models, how to optimize for cost and mitigate risk.
+                    <strong>Developer Tools</strong><br>
+                    
+                </p>
+                <p>
+                    <strong>Evaluating OpenStack</strong><br>
+                    If you are evaluating cloud technologies or building your cloud strategy, this track will cover the basics for you to evaluate the technology, understand the different ways to consume OpenStack, review popular use cases and determine your path forward.
                 </p>
                 <p>
                     <strong>Field Experiences</strong><br>
@@ -251,60 +253,64 @@
                     Are you new to the OpenStack community? Still learning about cloud computing and unsure which path is right for you? The sessions in this track will give you the OpenStack 101, including an overview of the technology, how to get involved with the community and get started on your cloud journey.
                 </p>
                 <p>
-                    <strong>Ops Tools</strong><br>
-                    OpenStack provides cloud infrastructure services, but there are many other tools that come into play when operating a full cloud environment. In this track, you’ll learn from fellow operators and from cloud experts about popular open source and commercial tools, including monitoring, billing, lifecycle management, and more.
-                </p>
-                <p>
-                    <strong>Architectural Decisions</strong><br>
-                    If you are a cloud architect or involved in planning your cloud srategy, this track will discuss popular reference architectures, configuration options, workload optimiziation, and architecture show and tell, where experienced users will share their architectures and experiences.
-                </p>
-                <p>
-                    <strong>Networking</strong><br>
-                    The networking track will feature technical presentations, use cases, design and implementation discussions relevant to cloud networking, specifically topics like SDN, scale, IPv6, policies, HA and performance.
-                </p>
-                <p>
-                    <strong>Storage</strong><br>
-                    The Storage track will feature technical presentations, use cases, design and implementation discussions relevant to cloud storage and OpenStack.
+                    <strong>Hands-on Workshops</strong><br>
+                    Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.
                 </p>
                 <p>
                     <strong>How To &amp; Best Practices</strong><br>
                     This track is 100% focused on what it takes to run a production OpenStack cloud. Every presenter has put endless coffee-fueled hours into making services scale robustly, never go down, and automating, automating, automating. The track will cover efficient use of existing tools, managing upgrades and staying up-to-date with one of the world's fastest-moving code bases and Architecture-show-and-tell, where established clouds will lead a discussion around their architecture. If you're already running a cloud, you should also join us in the Ops Summit for some serious working sessions (no basic intros here) on making the OpenStack software and ops tools for it better.
                 </p>
                 <p>
-                    <strong>Security</strong><br>
-                    Cloud security is a very important topic for IT executives and operators, and this track will feature technical presentations, design and implementation disussions relevant to security and OpenStack.
+                    <strong>How to Contribute</strong><br>
+                    The How to Contribute track is for new community members and companies interested in contributing to the open source code, with a focus on OpenStack community processes, tools, culture and best practices.
                 </p>
                 <p>
                     <strong>HPC / Research</strong><br>
                     HPC is one of the earliest and most popular use cases for OpenStack, allowing operators to run workloads on standard hardware rather than supercomputers. In this track, we'll discuss reference architectures, best practices and case studies for high performance computing.
                 </p>
                 <p>
-                    <strong>Telecom / NFV Operations</strong><br>
-                    Telecommunications companies present one of the largest growth areas for OpenStack around the world. Working together with the OPNFV project, we'll feature content relevant to these telecom operators and the greater telecom ecosystem, addressing the evolution of the network and emerging NFV architecture, and growing consensus across the industry around a standard, open source technology approach.
+                    <strong>IT Strategy</strong><br>
+                    Enterprise IT leaders building their cloud business case are facing unique requirements to manage legacy applications, new software development and shadow IT within industry regulations and business constraints. In this track, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy, hybrid cloud, how to manage legacy applications and recruiting.
+                </p>
+                <p>
+                    <strong>Ops Tools</strong><br>
+                    OpenStack provides cloud infrastructure services, but there are many other tools that come into play when operating a full cloud environment. In this track, you’ll learn from fellow operators and from cloud experts about popular open source and commercial tools, including monitoring, billing, lifecycle management, and more.
+                </p>
+                <p>
+                    <strong>Networking</strong><br>
+                    The networking track will feature technical presentations, use cases, design and implementation discussions relevant to cloud networking, specifically topics like SDN, scale, IPv6, policies, HA and performance.
+                </p>
+                <p>
+                    <strong>Products &amp; Services</strong><br>
+                    OpenStack's vibrant ecosystem and the different ways to consume it are among it's greatest strengths. In this track, you'll hear about the latest products, tools and services from the OpenStack ecosystem.
                 </p>
                 <p>
                     <strong>Project Updates</strong><br>
                     The OpenStack community continues to innovate on a six-month release cycle. This track provides an opportunity for users and ecosytem members to hear directly from technical contributors, covering the latest features and what's on the roadmap for their projects.
                 </p>
                 <p>
-                    <strong>Big Data</strong><br>
-                    Big Data collection and analysis is a common use case for OpenStack infrastruture. In this track, you'll learn about specific reference architectures and use cases, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.
+                    <strong>Security</strong><br>
+                    Cloud security is a very important topic for IT executives and operators, and this track will feature technical presentations, design and implementation disussions relevant to security and OpenStack.
                 </p>
                 <p>
-                    <strong>Cloud App Development</strong><br>
-                    A large community of application developers and ecosystem of development tools is growing around OpenStack. This track will be for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, application software configuration, SDKs, tools, PaaS and big data.
+                    <strong>Storage</strong><br>
+                    The Storage track will feature technical presentations, use cases, design and implementation discussions relevant to cloud storage and OpenStack.
                 </p>
                 <p>
-                    <strong>Containers</strong><br>
-                    OpenStack provides a single platform and set of APIs for virtual machines, bare metal and containers. Many organizations looking to adopt cotainers to increase speed for their developers have found OpenStack to be their path to production. In this track, learn how containers fit with OpenStack, including reference architectures, use cases and updates from popular containers projects like Magnum and Kuryr.
+                    <strong>Telecom &amp; NFV Operations</strong><br>
+                    Telecommunications companies present one of the largest growth areas for OpenStack around the world. Working together with the OPNFV project, we'll feature content relevant to these telecom operators and the greater telecom ecosystem, addressing the evolution of the network and emerging NFV architecture, and growing consensus across the industry around a standard, open source technology approach.
+                </p>
+                <p>
+                    <strong>Telecom &amp; NFV Strategy</strong><br>
+                    In response to disruptive market changes, telecoms and large network operaters must change the economics of their businesses with agile, programmable networks. In this track, we'll cover the emerging NFV architecture, the unique business cases, the value of open source standards, and how OpenStack is at the heart of this transformational platform.
                 </p>
                 <p>
                     <strong>Upstream Development</strong><br>
                     Presentations in this track are targeted toward prospective and existing contributors, to discover new processes, learn about common cross-project features or libraries you should adopt in your project, or share best development practices.
                 </p>
                 <p>
-                    <strong>How to Contribute</strong><br>
-                    The How to Contribute track is for new community members and companies interested in contributing to the open source code, with a focus on OpenStack community processes, tools, culture and best practices.
+                    <strong>Working Groups</strong><br>
+                    This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.
                 </p>
             </div>
         </div>
