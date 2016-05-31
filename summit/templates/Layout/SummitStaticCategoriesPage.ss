@@ -189,7 +189,7 @@
             </div>
         </div>
         <div class="row session-list-row">
-            <p>* These tracks are not eligible for public submission during Call for Presentations</p>
+            <p>* Note: these are not selected though the Call for Presentations process</p>
         </div>
         <!-- Full track definitions -->
         <div class="row">
