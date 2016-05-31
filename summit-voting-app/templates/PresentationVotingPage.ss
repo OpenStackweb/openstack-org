@@ -74,7 +74,11 @@
                   <script type="text/javascript">
                   	window.VotingAppConfig = $JSONConfig;
                   </script>
-                  <script type="text/javascript" src="summit-voting-app/javascript/build/{$AppJSFile}"></script>
+				<% if $WebpackDevServer %>
+				    <script type="text/javascript" src="http://127.0.0.1:3000/production/js/main.js"></script>
+				<% else %>
+					<script type="text/javascript" src="summit-voting-app/production/js/main.js"></script>    
+				<% end_if %>                  
                </div>
             </div>
             <!-- End Page Content -->

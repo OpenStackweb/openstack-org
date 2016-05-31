@@ -78,6 +78,30 @@ export function votePresentation (id, vote) {
 	};
 };
 
+export function commentPresentation (id, comment) {
+	return {
+		type: 'COMMENT_PRESENTATION',
+		id,
+		comment
+	};
+};
+
+export function removeUserComment (id) {
+	return {
+		type: 'REMOVE_USER_COMMENT',
+		payload: {
+			id
+		}
+	};
+};
+
+export function toggleCommentForm (bool) {
+	return {
+		type: 'TOGGLE_COMMENT_FORM',
+		payload: bool
+	}
+};
+
 export function requestPresentations (params = {}) {
 	return dispatch => {
 		dispatch(beginXHR());
@@ -197,6 +221,49 @@ export function requestVote (id, vote) {
 				));
 
 		return xhrs['VOTE_PRESENTATION'] = req;
+	}
+}
+
+export function postComment (id, comment) {
+	return (dispatch, getState) => {
+		const p = getState().presentations.presentations.find(p => p.id === id);
+		const originalcomment = p ? p.user_comment : null;
+
+		dispatch(commentPresentation(id, comment));
+		cancelPending(xhrs, 'COMMENT_PRESENTATION');
+		
+		let req = http.post(api(`presentation/${id}.json`))
+				.send({comment})
+				.end(responseHandler(
+					dispatch, 
+					null,
+					(err, res) => {
+						dispatch(throwError(GENERIC_ERROR));
+						dispatch(commentPresentation(id, originalComment));
+					}
+				));
+
+		return xhrs['COMMENT_PRESENTATION'] = req;
+	}
+}
+
+export function destroyUserComment (id) {
+	return (dispatch, getState) => {
+		const p = getState().presentations.presentations.find(p => p.id === id);
+
+		dispatch(removeUserComment(id));
+		cancelPending(xhrs, 'REMOVE_USER_COMMENT');
+		
+		let req = http.del(api(`presentation/${id}.json`))
+				.end(responseHandler(
+					dispatch, 
+					null,
+					(err, res) => {
+						dispatch(throwError(GENERIC_ERROR));						
+					}
+				));
+
+		return xhrs['REMOVE_USER_COMMENT'] = req;
 	}
 }
 

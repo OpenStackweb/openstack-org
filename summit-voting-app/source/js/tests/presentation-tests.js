@@ -113,7 +113,48 @@ describe('Presentations', () => {
   		expect(result.selectedPresentation).toEqual(presentation1);
   		expect(result.presentations[0].abstract).toBe("abstract 1");
   	});
-  	if('Should not cache a presentation that is not in the list', () => {
+  	it('Should add a comment', () => {
+  		const action = Actions.commentPresentation(presentation1.id, 'Test comment');
+  		const result = presentations({
+  			...response1,
+  			selectedPresentation: {...presentation1}
+  		}, action);
+
+  		expect(result.selectedPresentation.user_comment).toBeA('object');
+  		expect(result.selectedPresentation.user_comment.comment).toBe('Test comment');
+  		expect(result.selectedPresentation.showForm).toBe(false);
+  	});
+  	it('Should edit a comment', () => {
+  		const action = Actions.commentPresentation(presentation1.id, 'New comment');
+  		const result = presentations({
+  			...response1,
+  			selectedPresentation: {
+  				...presentation1,
+  				user_comment: {
+  					comment: 'Old comment'
+  				}
+  			}
+  		}, action);
+
+  		expect(result.selectedPresentation.user_comment).toBeA('object');
+  		expect(result.selectedPresentation.user_comment.comment).toBe('New comment');
+  		expect(result.selectedPresentation.showForm).toBe(false);
+  	});
+  	it('Should remove a comment', () => {
+  		const action = Actions.removeUserComment(presentation1.id);
+  		const result = presentations({
+  			...response1,
+  			selectedPresentation: {
+  				...presentation1,
+  				user_comment: {
+  					comment: 'Old comment'
+  				}
+  			}
+  		}, action);
+
+  		expect(result.selectedPresentation.user_comment).toNotExist();
+  	});
+  	it('Should not cache a presentation that is not in the list', () => {
   		const newPresentation = {
   			...presentation1,
   			id: 100

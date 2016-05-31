@@ -3,10 +3,13 @@ import VotingBar from '../containers/VotingBar';
 import PresentationMeta from '../ui/PresentationMeta';
 import VotingSpeakerRow from '../ui/VotingSpeakerRow';
 import MainSpeakerRow from '../ui/MainSpeakerRow';
-import VotingShare from '../ui/VotingShare';
+import CommentForm from '../containers/CommentForm';
+import Comment from '../ui/Comment'
+import PresentationCommentList from '../containers/PresentationCommentList';
 import Config from '../../utils/Config';
 import { connect } from 'react-redux';
-import { requestPresentation } from '../../action-creators';
+import { requestPresentation, toggleCommentForm, destroyUserComment } from '../../action-creators';
+
 require('array.prototype.find');
 
 class PresentationDetail extends React.Component {
@@ -38,6 +41,11 @@ class PresentationDetail extends React.Component {
 		const loggedIn = Config.get('loggedIn');
 
 		if(!presentation || !presentation.speakers) return <div />;
+
+		const showForm = (
+			presentation.user_vote !== null &&
+			presentation.user_comment === null
+		) || presentation.showForm;
 
 		return (
 			<div className="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
@@ -71,12 +79,6 @@ class PresentationDetail extends React.Component {
 						  	}
 						
 						  	<div>
-						      	{loggedIn && 
-							      	<div>
-						      			<h5>Cast Your Vote</h5>						      	
-							      		<VotingBar presentation={presentation} />							      		
-								    </div>
-						      	}
 						      	<div className="voting-presentation-body">
 						      		<PresentationMeta presentation={presentation} />
 							         <h5>Speakers</h5>
@@ -88,14 +90,46 @@ class PresentationDetail extends React.Component {
 						      	{loggedIn && 
 							      	<div>
 						      			<h5>Cast Your Vote</h5>						      	
-							      		<VotingBar presentation={presentation} />							      		
+							      		<VotingBar presentation={presentation} />
+								      	<div className="voting-tip">
+								        	<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
+								      	</div>
+							      		
+							      		{presentation.user_comment &&
+								      		<div className="comment-list your-comment">
+								      			<h4>Your comment</h4>
+								      			<Comment
+								      				author={presentation.user_comment.author}
+								      				comment={presentation.user_comment.comment}
+								      				date={presentation.user_comment.date}
+								      				ago={presentation.user_comment.ago}
+								      				/>
+								      			<a onClick={() => this.props.toggleCommentForm(!presentation.showForm)}>
+								      				Edit
+								      			</a> | 
+								      			<a onClick={() => this.props.destroyUserComment(presentation.id)}>
+								      				Delete
+								      			</a>
+
+								      		</div>
+							      		}
+							      		{presentation.all_comments &&
+								      		<div className="comment-list all-comments">
+								      			<h4>Comments from voters</h4>
+								      			<PresentationCommentList />
+								      		</div>
+							      		}						      		
+							      		{showForm &&
+							      			<div className="voting-comment">								      			
+								      			<p>Leave a comment</p>
+								      			<CommentForm />
+								      			<small>Your vote is anonymous. Your comment is not.</small>
+							      			</div>
+							      		}
+
 								    </div>
 						      	}
-						      	<div className="voting-tip">
-						        	<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
-						      	</div>
-						     	<VotingShare presentationID={presentation.id}/>					
-						    </div>
+ 						    </div>
 						</div>
 						}		   				      
 			   </div>
@@ -112,7 +146,17 @@ export default connect (
 		requestedPresentationID: state.router.params.id,
 		presentation: state.presentations.selectedPresentation
 	}),
-	{
-		requestPresentation
-	}
+	dispatch => ({
+		requestPresentation(id) {
+			dispatch(requestPresentation(id));
+		},
+		toggleCommentForm(bool) {
+			dispatch(toggleCommentForm(bool));
+		},
+		destroyUserComment(id) {
+			if(window.confirm('Delete your comment?')) {
+				dispatch(destroyUserComment(id));
+			}
+		}
+	})
 )(PresentationDetail);

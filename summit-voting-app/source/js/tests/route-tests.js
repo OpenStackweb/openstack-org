@@ -20,10 +20,10 @@ describe('URL functions', () => {
 	});
 	it('should add a query string to a url', () => {
 		let result = url(['six','seven'], {foo: 'bar'}, window);
-		expect(result).toBe('one/two/three/six/seven?foo=bar');		
+		expect(result).toBe('one/two/three/six/seven/?foo=bar');		
 	});
 	it('should add a query string to the current path', () => {
 		let result = url(null, {foo: 'bar'}, window);
-		expect(result).toBe('one/two/three/four/five?foo=bar');		
+		expect(result).toBe('one/two/three/four/five/?foo=bar');		
 	});
 });

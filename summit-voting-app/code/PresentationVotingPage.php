@@ -77,13 +77,17 @@ class PresentationVotingPage_Controller extends Page_Controller
     }
 
 
+    /**
+     * @param SS_HTTPRequest $r
+     * @return $this
+     */
     public function handleIndex(SS_HTTPRequest $r)
     {
-    	if($r->param('Action') === 'presentation' && is_numeric($r->param('ID'))) {
-    		return $this->redirect($this->Link());
-    	}
+        if ($r->param('Action') === 'presentation' && is_numeric($r->param('ID'))) {
+            return $this->redirect($this->Link());
+        }
 
-    	return $this;
+        return $this;
     }
 
 
@@ -104,12 +108,16 @@ class PresentationVotingPage_Controller extends Page_Controller
 
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getAppJSFile()
+    public function WebpackDevServer()
     {
-        return $this->config()->app_js_file;
+        if (Director::isDev()) {
+            $socket = @fsockopen('localhost', 3000, $errno, $errstr, 1);
+            return !$socket ? false : true;
+        }
     }
+
 }
 
 /**
@@ -127,7 +135,8 @@ class PresentationVotingPage_API extends RequestHandler
         'GET summit.json' => 'handleSummit',
         'GET categories.json' => 'handleCategories',
         'GET presentation/$ID' => 'handleReadPresentation',
-        'POST presentation/$ID' => 'handleUpdatePresentation'
+        'POST presentation/$ID' => 'handleUpdatePresentation',
+        'DELETE presentation/$ID' => 'handleDeleteComment'
     );
 
     /**
@@ -138,7 +147,8 @@ class PresentationVotingPage_API extends RequestHandler
         'handleSummit',
         'handleCategories',
         'handleReadPresentation',
-        'handleUpdatePresentation'
+        'handleUpdatePresentation',
+        'handleDeleteComment'
     );
 
 
@@ -187,7 +197,7 @@ class PresentationVotingPage_API extends RequestHandler
         $presentations = [];
         $offset = $r->getVar('offset') ?: 0;
         $m = Member::currentUser();
-        $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();  
+        $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();
 
         if ($r->getVar('category')) {
             $list = $list->filter(['CategoryID' => $r->getVar('category')]);
@@ -254,7 +264,12 @@ class PresentationVotingPage_API extends RequestHandler
             'category' => $presentation->Category()->Title,
             'speakers' => [],
             'user_vote' => $vote ? $vote->Vote : null,
-            'user_comment' => $vote ? $vote->Content : null,
+            'user_comment' => $vote ? [
+                'id' => $vote->ID,
+                'comment' => nl2br($vote->Content),
+                'date' => $vote->obj('Created')->Format('F j, Y'),
+                'ago' => $vote->obj('Created')->Ago()
+            ] : null,
             'abstract' => $presentation->Description,
         ];
 
@@ -270,6 +285,32 @@ class PresentationVotingPage_API extends RequestHandler
 
         }
 
+        $userIsSpeaker = $presentation->Speakers()
+            ->filter('MemberID', Member::currentUserID())
+            ->exists();
+
+        $userIsTrackChair = SummitTrackChair::get()->filter([
+            'MemberID' => Member::currentUserID(),
+            'SummitID' => $presentation->SummitID
+        ])->exists();
+
+
+        if ($userIsSpeaker || $userIsTrackChair || Permission::check('ADMIN')) {
+            $json['all_comments'] = [];
+            $votes = $presentation->Votes()
+                ->where('Content IS NOT NULL')
+                ->sort('Created ASC');
+
+            foreach ($votes as $v) {
+                $json['all_comments'][] = [
+                    'id' => $v->ID,
+                    'comment' => nl2br($v->Content),
+                    'author' => $v->Member()->getName(),
+                    'date' => $v->obj('Created')->Format('F j, Y'),
+                    'ago' => $v->obj('Created')->Ago()
+                ];
+            }
+        }
         return (new SS_HTTPResponse(Convert::array2json($json), 200))
             ->addHeader('Content-Type', 'application/json');
     }
@@ -295,26 +336,48 @@ class PresentationVotingPage_API extends RequestHandler
         $vars = Convert::json2array($r->getBody());
 
         if (isset($vars['vote'])) {
-            $presentation->setUserVote(
-            	(int)$vars['vote'],
-            	isset($vars['content']) ? $vars['content'] : null
-            );
+            $presentation->setUserVote((int)$vars['vote']);
 
             return new SS_HTTPResponse('OK', 200);
         }
 
-        if(isset($vars['content'])) {
-        	if($userVote = $presentation->getUserVote()) {
-        		$userVote->Content = $vars['content'];
-        		$userVote->write();
+        if (isset($vars['comment'])) {
+            if ($userVote = $presentation->getUserVote()) {
+                $userVote->Content = $vars['comment'];
+                $userVote->write();
 
-        		return new SS_HTTPResponse('OK', 200);
-        	}
+                return new SS_HTTPResponse('OK', 200);
+            }
 
-        	return new SS_HTTPResponse('No vote found', 403);
+            return new SS_HTTPResponse('No vote found', 403);
         }
 
         return $this->httpError(400);
+    }
+
+
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     */
+    public function handleDeleteComment(SS_HTTPRequest $r)
+    {
+        if (!Member::currentUser()) {
+            return $this->httpError(403, 'You must be logged in to vote');
+        }
+
+        $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
+
+        if (!$presentation) {
+            return $this->httpError(404);
+        }
+
+        $userVote = $presentation->getUserVote();
+        $userVote->Content = null;
+        $userVote->write();
+
+        return new SS_HTTPResponse('OK', 200);
     }
 
 
@@ -360,7 +423,7 @@ class PresentationVotingPage_API extends RequestHandler
         $id = $info['filename'];
         $list = $class::get();
 
-        if($class === 'Presentation') {
+        if ($class === 'Presentation') {
             $list = $list->filter('Category.VotingVisible', true);
         }
 
