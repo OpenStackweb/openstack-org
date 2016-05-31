@@ -27,8 +27,9 @@ class CategoryGroupField extends DropdownField
                 ));
             }
 
-            foreach($source as $value => $data) {
+            foreach($source as $data) {
                 $selected = false;
+                $value = $data['id'];
                 if($value === '' && ($this->value === '' || $this->value === null)) {
                     $selected = true;
                 } else {
