@@ -101,8 +101,8 @@
                         <ul>
                             <li class="tracks-tooltip" title="For the first time, the OpenStack Summit will formalize BoF sessions are part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather</li>
                             <li class="tracks-tooltip" title="OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.">Community Building</li>
-                            <li class="tracks-tooltip" title="">Design Summit*</li>
-                            <li class="tracks-tooltip" title="">Ops Summit*</li>
+                            <li class="tracks-tooltip" title="The Design Summit is a part of the OpenStack Summit. It is not a classic conference track with speakers and presentations. Developer teams brainstorm the topics they need to cover and get alignment on. The agenda is collaboratively reviewed and then scheduled by the program technical leads (PTLs).">Design Summit*</li>
+                            <li class="tracks-tooltip" title="The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process.">Ops Summit*</li>
                             <li class="tracks-tooltip" title="This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.">Working Groups</li>
                         </ul>
                     </div>
@@ -166,8 +166,8 @@
                             <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
                         </div>
                         <ul>
-                            <li class="tracks-tooltip" title="">COA Exams*</li>
-                            <li class="tracks-tooltip" title="">Full Day Intensive Trainings*</li>
+                            <li class="tracks-tooltip" title="The OpenStack Foundation has developed the Certified OpenStack Administrator exam which offers a career-path based Certification for OpenStack professionals. The exam is performance-based and will test the baseline skills of an OpenStack Administrator, a person with at least 6 months of OpenStack experience who provides day-to-day operation and management of an OpenStack cloud.">COA Exams*</li>
+                            <li class="tracks-tooltip" title="Intensive training courses will be run and offered free of charge to registered Summit attendees by leading training companies in the OpenStack ecosystem, including Cloud Foundry, Mirantis, Rackspace, Red Hat, Solinea and SUSE. The courses are scheduled on Wednesday and Thursday of the Summit week. RSVP is required and we’ll just be requesting a $50 deposit to reserve your spot, which is refundable upon completion of the course. Bring your laptop.">Full Day Intensive Trainings*</li>
                             <li class="tracks-tooltip" title="Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.">Hands-On Workshops</li>
                         </ul>
                     </div>
@@ -185,6 +185,8 @@
                 </div>
             </div>
             <!-- End Category -->
+            <div class="col-sm-6">
+            </div>
             <p>* These tracks are not eligible for public submission during Call for Presentations</p>
         </div>
         <!-- Full track definitions -->
