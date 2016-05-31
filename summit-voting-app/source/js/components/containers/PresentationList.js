@@ -32,24 +32,10 @@ class PresentationList extends React.Component {
 	}
 
 
-	componentDidUpdate (prevProps) {		
-		// if(
-		// 	((this.props.selectedPresentation && prevProps.selectedPresentation) &&
-		// 	(this.props.selectedPresentation.id !== prevProps.selectedPresentation.id)) ||
-		// 	(this.props.selectedPresentation && !prevProps.selectedPresentation)
-		// ) {		
-			
-		// 	const scroller = ReactDOM.findDOMNode(this.refs.scroller);			
-		// 	const item = document.querySelector('.presentation-list li.active').getBoundingClientRect();
-		// 	const scrollerTop = scroller.getBoundingClientRect().top;
-		// 	if((item.bottom-scrollerTop) > scroller.offsetHeight) {
-		// 		console.log('yes', item.top, scroller.offsetHeight, item.offsetHeight,  (item.top + scroller.offsetHeight - item.offsetHeight));
-		// 		scroller.scrollTop = (item.top + scroller.offsetHeight - (item.bottom-item.top));
-		// 	}
-		// 	else {
-		// 		console.log('negative', item.bottom-scrollerTop, scroller.offsetHeight);
-		// 	}			
-		// }
+	componentDidMount (prevProps) {
+		if(this.props.presentations.length && !this.props.selectedPresentation) {
+			this.props.dispatch(goToPresentation(this.props.presentations[0].id));
+		}
 	}
 
 

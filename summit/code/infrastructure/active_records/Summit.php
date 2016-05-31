@@ -132,14 +132,17 @@ final class Summit extends DataObject implements ISummit
      */
     public function checkRange($key)
     {
-        $beginField = "{$key}BeginDate";
-        $endField = "{$key}EndDate";
+        $start_date = $this->getField("{$key}BeginDate");
+        $end_date = $this->getField("{$key}EndDate");
 
-        if (!$this->hasField($beginField) || !$this->hasField($endField)) {
+        if (empty($start_date) || empty($end_date)) {
             return false;
         }
+        $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
+        $end_date = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now = new \DateTime('now', new DateTimeZone('UTC'));
 
-        return (time() > $this->obj($beginField)->format('U')) && (time() < $this->obj($endField)->format('U'));
+        return ($now >= $start_date && $now <= $end_date);
     }
 
     /**
@@ -1304,13 +1307,13 @@ final class Summit extends DataObject implements ISummit
     public function forcephase($data, $form)
     {
         $span = 10;
-        $subtractor = ($data['Phase'] * $span) * -1;
+        $subtractor = (($data['Phase'] * $span) * -1);
         foreach (['Submission', 'Voting', 'Selection', 'Registration'] as $period) {
-            $date = new DateTime('@' . strtotime("$subtractor days"));
-            $this->{"set" . $period . "BeginDate"}($date->format("Y-m-d H:i:s"));
+            $date = (new DateTime(null, new DateTimeZone('UTC')))->modify("$subtractor days");
+            $this->{"set" . $period . "BeginDate"}($date->format("Y-m-d"));
             $subtractor += $span;
             $date->add(DateInterval::createFromDateString("$span days"));
-            $this->{"set" . $period . "EndDate"}($date->format("Y-m-d H:i:s"));
+            $this->{"set" . $period . "EndDate"}($date->format("Y-m-d"));
         }
 
         $this->write();
@@ -1805,17 +1808,7 @@ SQL;
      */
     public function isVotingOpen()
     {
-        $start_date = $this->getField('VotingBeginDate');
-        $end_date = $this->getField('VotingEndDate');
-
-        if (empty($start_date) || empty($end_date)) {
-            return false;
-        }
-        $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
-        $end_date = new DateTime($end_date, new DateTimeZone('UTC'));
-        $now = new \DateTime('now', new DateTimeZone('UTC'));
-
-        return ($now >= $start_date && $now <= $end_date);
+        return $this->checkRange('Voting');
     }
 
 

@@ -67,11 +67,22 @@ class VotingApp extends React.Component {
 			clearError,
 			xhrLoading,
 			children,
-			ready
+			ready,
+			preview
 		} = this.props;
 
+		if(preview) {
+			return (
+				<div className="row">
+					<div className="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
+						{children}
+					</div>
+				</div>
+			);
+		}
+
 		return (
-			<div className="row">
+			<div className="row">				
 				{errorMsg &&
 					<TopBanner 
 						className="error"
@@ -83,8 +94,10 @@ class VotingApp extends React.Component {
 				{ready &&
 					<div>
 						<Loader active={xhrLoading} type='spin' className='main-loader' />
-						<Sidebar />	
-						{children}
+						<Sidebar />
+						<div className={`col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper`}>
+							{children}
+						</div>
 					</div>
 				}
 				{!ready &&
@@ -99,11 +112,12 @@ class VotingApp extends React.Component {
 export default connect(
 	state => {
 		return {
-		xhrLoading: state.ui.loading,
-		errorMsg: state.ui.errorMsg,
-		ready: (state.categories.initialised && state.presentations.initialised),
-		category: state.router.location.query.category,
-		search: state.router.location.query.q
+			xhrLoading: state.ui.loading,
+			errorMsg: state.ui.errorMsg,
+			ready: (state.categories.initialised && state.presentations.initialised),
+			category: state.router.location.query.category,
+			search: state.router.location.query.q,
+			preview: state.router.location.query.preview
 		}
 	},
 	{ 

@@ -83,6 +83,15 @@ export default (state = {
 				}
 			};
 
+		case 'NAVIGATE_ADJACENT':
+			return {
+				...state,
+				selectedPresentation: {
+					...state.selectedPresentation,
+					navigationDirection: action.payload
+				}
+			};
+
 		default:
 			return state;
 	}

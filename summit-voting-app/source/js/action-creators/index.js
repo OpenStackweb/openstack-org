@@ -267,7 +267,7 @@ export function destroyUserComment (id) {
 	}
 }
 
-export function goToPresentation (id) {
+export function goToPresentation (id, adder) {
 	return (dispatch, getState) => {
 		dispatch(clearPresentation())
 		dispatch(
@@ -294,12 +294,21 @@ export function navigatePresentations (adder) {
 			if(index < 0 || index > (presentations.presentations.length-1)) {			
 				return;
 			}
+			dispatch(adjacentPresentation(adder));
 			dispatch(
 				goToPresentation(
-					presentations.presentations[index].id
+					presentations.presentations[index].id,
+					adder
 				)
 			);
 		}
+	};
+};
+
+export function adjacentPresentation(adder) {
+	return {
+		type: 'NAVIGATE_ADJACENT',
+		payload: adder
 	};
 };
 

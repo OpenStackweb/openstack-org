@@ -83,8 +83,16 @@ class PresentationVotingPage_Controller extends Page_Controller
      */
     public function handleIndex(SS_HTTPRequest $r)
     {
+        // No one should be able to deep link to the presentation other than priviledged users
         if ($r->param('Action') === 'presentation' && is_numeric($r->param('ID'))) {
-            return $this->redirect($this->Link());
+            $presentation = Presentation::get()->byID($r->param('ID'));
+            if(!$presentation) {
+            	return $this->httpError(404);
+            }
+            if(!$presentation->canEdit()) {
+            	return $this->redirect($this->Link());	
+            }
+            
         }
 
         return $this;
@@ -101,6 +109,7 @@ class PresentationVotingPage_Controller extends Page_Controller
             'baseURL' => $this->Link(),
             'summitTitle' => $s->Title,
             'summitLink' => $this->Parent()->Link(),
+            'votingOpen' => $s->isVotingOpen(),
             'loggedIn' => !!Member::currentUser(),
             'presentationLimit' => $this->config()->presentation_limit
         ]);
@@ -333,6 +342,10 @@ class PresentationVotingPage_API extends RequestHandler
             return $this->httpError(404);
         }
 
+        if(!$presentation->Summit()->isVotingOpen()) {
+        	return $this->httpError(403,'Voting is closed');
+        }
+
         $vars = Convert::json2array($r->getBody());
 
         if (isset($vars['vote'])) {
@@ -372,6 +385,11 @@ class PresentationVotingPage_API extends RequestHandler
         if (!$presentation) {
             return $this->httpError(404);
         }
+
+        if(!$presentation->Summit()->isVotingOpen()) {
+        	return $this->httpError(403,'Voting is closed');
+        }
+
 
         $userVote = $presentation->getUserVote();
         $userVote->Content = null;
