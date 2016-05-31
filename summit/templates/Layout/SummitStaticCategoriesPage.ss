@@ -91,37 +91,6 @@
         <div class="row session-list-row">
             <!-- Start Category -->
             <div class="col-sm-6">
-                <div class="session-wrapper">
-                    <h3>Comunity Collaboration</h3>
-                    <div class="session-list-tracks">
-                        <div class="session-tracks-title">
-                            Tracks
-                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
-                        </div>
-                        <ul>
-                            <li class="tracks-tooltip" title="For the first time, the OpenStack Summit will formalize BoF sessions are part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather</li>
-                            <li class="tracks-tooltip" title="OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.">Community Building</li>
-                            <li class="tracks-tooltip" title="The Design Summit is a part of the OpenStack Summit. It is not a classic conference track with speakers and presentations. Developer teams brainstorm the topics they need to cover and get alignment on. The agenda is collaboratively reviewed and then scheduled by the program technical leads (PTLs).">Design Summit*</li>
-                            <li class="tracks-tooltip" title="The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process.">Ops Summit*</li>
-                            <li class="tracks-tooltip" title="This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.">Working Groups</li>
-                        </ul>
-                    </div>
-                    <div class="session-list-wrapper">
-                        <div class="session-tracks-title">Description</div>
-                        <div class="session-list-description">
-                            <div class="session-list-text">
-                                <p>
-                                    Community Collaboration brings together the upstream developers, operators and various working groups under the User Committee to plan the future of the software and collaborate around various community initiatives.  The Design Summit allows the upstream developer community to discuss requirements for the next software release, debate the implementation details and connect with other community members about cross-project issues. The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process. In other sessions, organizing bodies, such as ambassadors, user groups, User Committee and associated working groups, and those who are helping evangelize OpenStack around the world have an opportunitiy to join new groups, participate in working sessions, share learnings and collaborate in real-time. None of these are classic conference track with speakers and presentations, but instead collaborative group working sessions.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
-                </div>
-            </div>
-            <!-- End Category -->
-            <!-- Start Category -->
-            <div class="col-sm-6">
                 <div class="session-wrapper" id="telecom">
                     <h3>Developers</h3>
                     <div class="session-list-tracks">
@@ -152,11 +121,7 @@
                 </div>
             </div>
             <!-- End Category -->
-        </div>
-
-        <!-- Row 3 -->
-        <div class="row session-list-row">
-           <!-- Start Category -->
+            <!-- Start Category -->
             <div class="col-sm-6">
                 <div class="session-wrapper" id="keynotes">
                     <h3>OpenStack Academy</h3>
@@ -177,6 +142,41 @@
                             <div class="session-list-text">
                                 <p>
                                     With a focus on education and training for cloud operators and application developers, the OpenStack Academy brings together hands-on workshops and day-long intensive training sessions under one roof. We'll also offer the Certified OpenStack Administrator exam on-site. Workshops and trainings will require an RSVP and certain pre-requisites. Bring your laptop and walk away with OpenStack skills.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                </div>
+            </div>
+            <!-- End Category -->
+        </div>
+
+        <!-- Row 3 -->
+        <div class="row session-list-row">
+           <!-- Start Category -->
+            <div class="col-sm-6">
+                <div class="session-wrapper">
+                    <h3>Comunity Collaboration</h3>
+                    <div class="session-list-tracks">
+                        <div class="session-tracks-title">
+                            Tracks
+                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
+                        </div>
+                        <ul>
+                            <li class="tracks-tooltip" title="For the first time, the OpenStack Summit will formalize BoF sessions are part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather</li>
+                            <li class="tracks-tooltip" title="OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.">Community Building</li>
+                            <li class="tracks-tooltip" title="The Design Summit is a part of the OpenStack Summit. It is not a classic conference track with speakers and presentations. Developer teams brainstorm the topics they need to cover and get alignment on. The agenda is collaboratively reviewed and then scheduled by the program technical leads (PTLs).">Design Summit*</li>
+                            <li class="tracks-tooltip" title="The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process.">Ops Summit*</li>
+                            <li class="tracks-tooltip" title="This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.">Working Groups</li>
+                        </ul>
+                    </div>
+                    <div class="session-list-wrapper">
+                        <div class="session-tracks-title">Description</div>
+                        <div class="session-list-description">
+                            <div class="session-list-text">
+                                <p>
+                                    Community Collaboration brings together the upstream developers, operators and various working groups under the User Committee to plan the future of the software and collaborate around various community initiatives.  The Design Summit allows the upstream developer community to discuss requirements for the next software release, debate the implementation details and connect with other community members about cross-project issues. The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process. In other sessions, organizing bodies, such as ambassadors, user groups, User Committee and associated working groups, and those who are helping evangelize OpenStack around the world have an opportunitiy to join new groups, participate in working sessions, share learnings and collaborate in real-time. None of these are classic conference track with speakers and presentations, but instead collaborative group working sessions.
                                 </p>
                             </div>
                         </div>
