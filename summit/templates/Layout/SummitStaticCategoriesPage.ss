@@ -30,7 +30,6 @@
                             <li class="tracks-tooltip" title="OpenStack provides cloud infrastructure services, but there are many other tools that come into play when operating a full cloud environment. In this track, you’ll learn from fellow operators and from cloud experts about popular open source and commercial tools, including monitoring, billing, lifecycle management, and more.">Ops Tools</li>
                             <li class="tracks-tooltip" title="The OpenStack community continues to innovate on a six-month release cycle. This track provides an opportunity for users and ecosytem members to hear directly from technical contributors, covering the latest features and what's on the roadmap for their projects.">Project Updates</li>
                             <li class="tracks-tooltip" title="Cloud security is a very important topic for IT executives and operators, and this track will feature technical presentations, design and implementation disussions relevant to security and OpenStack.">Security</li>
-                            <li class="tracks-tooltip" title="">Sponsored Sessions</li>
                             <li class="tracks-tooltip" title="The Storage track will feature technical presentations, use cases, design and implementation discussions relevant to cloud storage and OpenStack.">Storage</li>
                             <li class="tracks-tooltip" title="Telecommunications companies present one of the largest growth areas for OpenStack around the world. Working together with the OPNFV project, we'll feature content relevant to these telecom operators and the greater telecom ecosystem, addressing the evolution of the network and emerging NFV architecture, and growing consensus across the industry around a standard, open source technology approach.">Telecom / NFV Operations</li>
                         </ul>
@@ -68,8 +67,6 @@
                             <li class="tracks-tooltip" title="If you are evaluating cloud technologies or building your cloud strategy, this track will cover the basics for you to evaluate the technology, understand the different ways to consume OpenStack, review popular use cases and determine your path forward.">Evaluating OpenStack</li>
                             <li class="tracks-tooltip" title="Enterprise IT leaders building their cloud business case are facing unique requirements to manage legacy applications, new software development and shadow IT within industry regulations and business constraints. In this track, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy, hybrid cloud, how to manage legacy applications and recruiting.">IT Strategy</li>
                             <li class="tracks-tooltip" title="OpenStack's vibrant ecosystem and the different ways to consume it are among it's greatest strengths. In this track, you'll hear about the latest products, tools and services from the OpenStack ecosystem.">Products & Services</li>
-                            <li class="tracks-tooltip" title="">Sponsored Demo Theater</li>
-                            <li class="tracks-tooltip" title="">Sponsored Sessions</li>
                             <li class="tracks-tooltip" title="In response to disruptive market changes, telecoms and large network operaters must change the economics of their businesses with agile, programmable networks. In this track, we'll cover the emerging NFV architecture, the unique business cases, the value of open source standards, and how OpenStack is at the heart of this transformational platform.">Telecom & NFV Strategy</li>
                         </ul>
                     </div>
@@ -104,8 +101,8 @@
                         <ul>
                             <li class="tracks-tooltip" title="For the first time, the OpenStack Summit will formalize BoF sessions are part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather</li>
                             <li class="tracks-tooltip" title="OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.">Community Building</li>
-                            <li class="tracks-tooltip" title="">Design Summit</li>
-                            <li class="tracks-tooltip" title="">Ops Summit</li>
+                            <li class="tracks-tooltip" title="">Design Summit*</li>
+                            <li class="tracks-tooltip" title="">Ops Summit*</li>
                             <li class="tracks-tooltip" title="This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.">Working Groups</li>
                         </ul>
                     </div>
@@ -136,9 +133,8 @@
                             <li class="tracks-tooltip" title="Big Data collection and analysis is a common use case for OpenStack infrastruture. In this track, you'll learn about specific reference architectures and use cases, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.">Big Data</li>
                             <li class="tracks-tooltip" title="A large community of application developers and ecosystem of development tools is growing around OpenStack. This track will be for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, application software configuration, SDKs, tools, PaaS and big data.">Cloud App Development</li>
                             <li class="tracks-tooltip" title="OpenStack provides a single platform and set of APIs for virtual machines, bare metal and containers. Many organizations looking to adopt cotainers to increase speed for their developers have found OpenStack to be their path to production. In this track, learn how containers fit with OpenStack, including reference architectures, use cases and updates from popular containers projects like Magnum and Kuryr.">Containers</li>
-                            <li class="tracks-tooltip" title="">Developer Tools</li>
+                            <li class="tracks-tooltip" title="">Developer Tools*</li>
                             <li class="tracks-tooltip" title="The How to Contribute track is for new community members and companies interested in contributing to the open source code, with a focus on OpenStack community processes, tools, culture and best practices.">How to Contribute</li>
-                            <li class="tracks-tooltip" title="">Sponsored Sessions</li>
                             <li class="tracks-tooltip" title="Presentations in this track are targeted toward prospective and existing contributors, to discover new processes, learn about common cross-project features or libraries you should adopt in your project, or share best development practices.">Upstream Development</li>
                         </ul>
                     </div>
@@ -170,8 +166,8 @@
                             <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
                         </div>
                         <ul>
-                            <li class="tracks-tooltip" title="">COA Exams</li>
-                            <li class="tracks-tooltip" title="">Full Day Intensive Trainings</li>
+                            <li class="tracks-tooltip" title="">COA Exams*</li>
+                            <li class="tracks-tooltip" title="">Full Day Intensive Trainings*</li>
                             <li class="tracks-tooltip" title="Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.">Hands-On Workshops</li>
                         </ul>
                     </div>
@@ -189,34 +185,7 @@
                 </div>
             </div>
             <!-- End Category -->
-
-            <!-- Start Category -->
-            <div class="col-sm-6">
-                <div class="session-wrapper" id="upstream">
-                    <h3>vBrownBag Tech Talks</h3>
-                    <div class="session-list-tracks">
-                        <div class="session-tracks-title">
-                            Tracks
-                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
-                        </div>
-                        <ul>
-                            <li class="tracks-tooltip" title="">vBrown Bag</li>
-                        </ul>
-                    </div>
-                    <div class="session-list-wrapper">
-                        <div class="session-tracks-title">Description</div>
-                        <div class="session-list-description">
-                            <div class="session-list-text">
-                                <p>
-                                    10 minute technical talks to a small audience.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
-                </div>
-            </div>
-            <!-- End Category -->
+            <p>* These tracks are not eligible for public submission during Call for Presentations</p>
         </div>
         <!-- Full track definitions -->
         <div class="row">
