@@ -137,6 +137,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'GET $SUMMIT_ID/tags'                                     => 'getTags',
         'GET $SUMMIT_ID/companies'                                => 'getCompanies',
         'GET $SUMMIT_ID/sponsors'                                 => 'getSponsors',
+        'GET $SUMMIT_ID/category_groups/$GROUP_ID/categories'     => 'getCategoriesByGroup',
         '$SUMMIT_ID/speakers'                                     => 'handleSpeakers',
         '$SUMMIT_ID/schedule'                                     => 'handleSchedule',
         '$SUMMIT_ID/events'                                       => 'handleEvents',
@@ -165,6 +166,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'handleSpeakers',
         'handleLocations',
         'handleRegistrationCodes',
+        'getCategoriesByGroup',
     );
 
     // this is called when typing a tag name to add as a tag on edit event
@@ -405,6 +407,35 @@ final class SummitsApi extends AbstractRestfulJsonApi
     {
         $api = SummitAppRegistrationCodesApi::create();
         return $api->handleRequest($request, DataModel::inst());
+    }
+
+    public function getCategoriesByGroup(SS_HTTPRequest $request){
+        try
+        {
+            $group_id     = intval($request->param('GROUP_ID'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $category_group = PresentationCategoryGroup::get_by_id('PresentationCategoryGroup',$group_id);
+            $categories = $category_group->Categories()->sort('Title');
+            $category_map = array();
+            foreach ($categories as $category) {
+                $category_map[] = array('ID' => $category->ID, 'Html' => $category->FormattedTitleAndDescription);
+            }
+
+            return $this->ok($category_map);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
     }
 
 }

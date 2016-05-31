@@ -98,7 +98,7 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $db = array
     (
-        'Level' => "Enum('Beginner,Intermediate,Advanced')",
+        'Level' => "Enum('Beginner,Intermediate,Advanced,N/A')",
         'Status' => 'Varchar',
         'OtherTopic' => 'Varchar',
         'Progress' => 'Int',
@@ -178,19 +178,20 @@ class Presentation extends SummitEvent implements IPresentation
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
-        $this->assignEventType();
+        if (!$this->TypeID)
+            $this->assignEventType();
     }
 
     /**
      *
      */
-    private function assignEventType()
+    public function assignEventType($type="Presentation")
     {
         $summit_id = intval($this->SummitID);
         if ($summit_id > 0 && intval($this->TypeID) === 0) {
             Summit::seedBasicEventTypes($summit_id);
-            $event_type = SummitEventType::get()->filter(array(
-                'Type' => 'Presentation',
+            $event_type = PresentationType::get()->filter(array(
+                'Type' => $type,
                 'SummitID' => $summit_id
             ))->first();
             $this->TypeID = $event_type->ID;
@@ -687,7 +688,7 @@ class Presentation extends SummitEvent implements IPresentation
                 (
                     'SummitID' => $summit_id,
                 )
-            )->where(" Type ='Presentation' OR Type ='Keynotes' ")->map('ID', 'Type')));
+            )->where(" Type ='Presentation' OR Type ='Keynotes' OR Type ='Panel' ")->map('ID', 'Type')));
 
         $ddl_type->setEmptyString('-- Select a Presentation Type --');
 
@@ -845,7 +846,8 @@ class Presentation extends SummitEvent implements IPresentation
      */
     protected function validate()
     {
-        $this->assignEventType();
+        if (!$this->TypeID)
+            $this->assignEventType();
 
         $valid = parent::validate();
 
@@ -909,6 +911,15 @@ SQL;
     public function getSpeakers()
     {
         return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Speakers');
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function maxSpeakersReached()
+    {
+        return ($this->Type()->getMaxSpeakers() == $this->Speakers()->count());
     }
 
     /**
