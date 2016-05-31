@@ -97,7 +97,7 @@ class PresentationDetail extends React.Component {
 
 								      		</div>
 							      		}
-							      		{presentation.all_comments.length > 0 &&
+							      		{presentation.all_comments && presentation.all_comments.length > 0 &&
 								      		<div className="comment-list all-comments">
 								      			<h4>Comments from voters</h4>
 								      			<PresentationCommentList />
