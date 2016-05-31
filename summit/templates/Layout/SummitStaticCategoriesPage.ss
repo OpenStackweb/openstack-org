@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-10 col-sm-push-1">
                 <h1>Summit Categories</h1>
-                <p>The OpenStack Summit is a four-day event comprised of presentations, panels, workshops, BoFs and collaborative working sessions. Topics span cloud strategy and business case development to operational best practices and technical deep dives. Start planning your week by looking at the high level themes below. The full schedule will be available early September 2016.</p>
+                <p>The OpenStack Summit is a four-day event comprised of presentations, panels, workshops, and educational opportunities through OpenStack Academy. Topics span cloud strategy and business case development to operational best practices and technical deep dives. Start planning your week by looking at the high level themes below. The full schedule will be available early September 2016.</p>
                <!-- <a href="/summit/austin-2016/categories/track-list" target="_blank">Learn more about the {$Summit.Title} Summit {$Summit.getSummitYear()} Sessions</a> -->
             </div>
         </div>
@@ -31,7 +31,7 @@
                             <li class="tracks-tooltip" title="The OpenStack community continues to innovate on a six-month release cycle. This track provides an opportunity for users and ecosytem members to hear directly from technical contributors, covering the latest features and what's on the roadmap for their projects.">Project Updates</li>
                             <li class="tracks-tooltip" title="Cloud security is a very important topic for IT executives and operators, and this track will feature technical presentations, design and implementation disussions relevant to security and OpenStack.">Security</li>
                             <li class="tracks-tooltip" title="The Storage track will feature technical presentations, use cases, design and implementation discussions relevant to cloud storage and OpenStack.">Storage</li>
-                            <li class="tracks-tooltip" title="Telecommunications companies present one of the largest growth areas for OpenStack around the world. Working together with the OPNFV project, we'll feature content relevant to these telecom operators and the greater telecom ecosystem, addressing the evolution of the network and emerging NFV architecture, and growing consensus across the industry around a standard, open source technology approach.">Telecom / NFV Operations</li>
+                            <li class="tracks-tooltip" title="In this track, we'll feature content relevant to cloud architects, operators and developers at telecom operators, addressing OpenStack as the platform for NFV.">Telecom / NFV Operations</li>
                         </ul>
                     </div>
                     <div class="session-list-wrapper">
@@ -39,7 +39,7 @@
                         <div class="session-list-description">
                             <div class="session-list-text">
                                 <p>
-                                   The architecture & operations conference is designed for cloud architects, operators and system administrators who are building or running OpenStack clouds. Featuring stories from the trenches, best practices, tools and industry-specific considerations, you'll hear directy from your peers and walk away with practical knowledge.
+                                   The Architecture & Operations category is designed for cloud architects, operators and system administrators who are building or running OpenStack clouds. Featuring stories from the trenches, best practices, tools and industry-specific considerations, you'll hear directy from your peers and walk away with practical knowledge.
                                 </p>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                         <div class="session-list-description">
                             <div class="session-list-text">
                                 <p>
-                                    IT leaders building their cloud business case are facing unique requirements to move faster and control costs within the bounds of industry regulations and business realities. In this track, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy and recruiting. We'll also cover important emerging technology shifts such as Network Functions Virtualization and the growing use of cloud services in the telecom and carrier space.
+                                    IT leaders building their cloud business case are facing unique requirements to move faster and control costs within the bounds of industry regulations and business realities. In this category, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy and recruiting. We'll also cover important emerging technology shifts such as Network Functions Virtualization and the growing use of cloud services in the telecom and carrier space.
                                 </p>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                         <div class="session-list-description">
                             <div class="session-list-text">
                                 <p>
-                                    The developers conference will cover developing cloud applications, making the most of containers, delivering valuable services like big data analytics, as well as presentations and help getting started for upstream contributors.
+                                    The Developers category will cover developing cloud applications, making the most of containers, delivering valuable services like big data analytics, as well as presentations and help getting started for upstream contributors.
                                 </p>
                             </div>
                         </div>
@@ -131,8 +131,8 @@
                             <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
                         </div>
                         <ul>
-                            <li class="tracks-tooltip" title="The OpenStack Foundation has developed the Certified OpenStack Administrator exam which offers a career-path based Certification for OpenStack professionals. The exam is performance-based and will test the baseline skills of an OpenStack Administrator, a person with at least 6 months of OpenStack experience who provides day-to-day operation and management of an OpenStack cloud.">COA Exams*</li>
-                            <li class="tracks-tooltip" title="Intensive training courses will be run and offered free of charge to registered Summit attendees by leading training companies in the OpenStack ecosystem, including Cloud Foundry, Mirantis, Rackspace, Red Hat, Solinea and SUSE. The courses are scheduled on Wednesday and Thursday of the Summit week. RSVP is required and we’ll just be requesting a $50 deposit to reserve your spot, which is refundable upon completion of the course. Bring your laptop.">Full Day Intensive Trainings*</li>
+                            <li class="tracks-tooltip" title="Looking to prove your OpenStack skills in the job market or industry? The OpenStack Foundation will offer the official Certified OpenStack Administrator exam on-site at the Summit. The exam takes approximately 2.5 hours to complete and will cost $300 USD. Learn more at http://www.openstack.org/coa.">COA Exams*</li>
+                            <li class="tracks-tooltip" title="Intensive training courses will be run and offered free of charge to registered Summit attendees by leading training companies in the OpenStack ecosystem. RSVP is required and we’ll just be requesting a small deposit to reserve your spot, which is refundable upon completion of the course. Bring your laptop.">Full Day Intensive Trainings*</li>
                             <li class="tracks-tooltip" title="Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.">Hands-On Workshops</li>
                         </ul>
                     </div>
@@ -157,18 +157,18 @@
            <!-- Start Category -->
             <div class="col-sm-6">
                 <div class="session-wrapper">
-                    <h3>Comunity Collaboration</h3>
+                    <h3>Community Collaboration</h3>
                     <div class="session-list-tracks">
                         <div class="session-tracks-title">
                             Tracks
                             <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
                         </div>
                         <ul>
-                            <li class="tracks-tooltip" title="For the first time, the OpenStack Summit will formalize BoF sessions are part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather</li>
+                            <li class="tracks-tooltip" title="BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather*</li>
                             <li class="tracks-tooltip" title="OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.">Community Building</li>
-                            <li class="tracks-tooltip" title="The Design Summit is a part of the OpenStack Summit. It is not a classic conference track with speakers and presentations. Developer teams brainstorm the topics they need to cover and get alignment on. The agenda is collaboratively reviewed and then scheduled by the program technical leads (PTLs).">Design Summit*</li>
+                            <li class="tracks-tooltip" title="The Design Summit is a part of the OpenStack Summit. It is not a classic track with speakers and presentations. Developer teams brainstorm the topics they need to cover and get alignment on. The agenda is collaboratively reviewed and then scheduled by the program technical leads (PTLs).">Design Summit*</li>
                             <li class="tracks-tooltip" title="The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process.">Ops Summit*</li>
-                            <li class="tracks-tooltip" title="This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.">Working Groups</li>
+                            <li class="tracks-tooltip" title="This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.">Working Groups*</li>
                         </ul>
                     </div>
                     <div class="session-list-wrapper">
@@ -176,7 +176,7 @@
                         <div class="session-list-description">
                             <div class="session-list-text">
                                 <p>
-                                    Community Collaboration brings together the upstream developers, operators and various working groups under the User Committee to plan the future of the software and collaborate around various community initiatives.  The Design Summit allows the upstream developer community to discuss requirements for the next software release, debate the implementation details and connect with other community members about cross-project issues. The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process. In other sessions, organizing bodies, such as ambassadors, user groups, User Committee and associated working groups, and those who are helping evangelize OpenStack around the world have an opportunitiy to join new groups, participate in working sessions, share learnings and collaborate in real-time. None of these are classic conference track with speakers and presentations, but instead collaborative group working sessions.
+                                    Community Collaboration brings together the upstream developers, operators and various working groups under the User Committee to plan the future of the software and collaborate around various community initiatives.  The Design Summit allows the upstream developer community to discuss requirements for the next software release, debate the implementation details and connect with other community members about cross-project issues. The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process. In other sessions, organizing bodies, such as ambassadors, user groups, User Committee and associated working groups, and those who are helping evangelize OpenStack around the world have an opportunitiy to join new groups, participate in working sessions, share learnings and collaborate in real-time. None of these are classic track with speakers and presentations, but instead collaborative group working sessions.
                                 </p>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                 </p>
                 <p>
                     <strong>Birds of a Feather</strong><br>
-                    For the first time, the OpenStack Summit will formalize BoF sessions are part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.
+                    BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.
                 </p>
                 <p>
                     <strong>Case Studies</strong><br>
@@ -298,7 +298,7 @@
                 </p>
                 <p>
                     <strong>Telecom &amp; NFV Operations</strong><br>
-                    Telecommunications companies present one of the largest growth areas for OpenStack around the world. Working together with the OPNFV project, we'll feature content relevant to these telecom operators and the greater telecom ecosystem, addressing the evolution of the network and emerging NFV architecture, and growing consensus across the industry around a standard, open source technology approach.
+                    In this track, we'll feature content relevant to cloud architects, operators and developers at telecom operators, addressing OpenStack as the platform for NFV.
                 </p>
                 <p>
                     <strong>Telecom &amp; NFV Strategy</strong><br>
