@@ -599,7 +599,8 @@ class PresentationPage_ManageRequest extends RequestHandler
             return $this->httpError(404, 'Speaker not found');
         }
 
-        if ($speaker->isInDB() && !$speaker->Presentations()->byID($this->presentation->ID)) {
+        if ($speaker->isInDB() &&
+           (!$speaker->Presentations()->byID($this->presentation->ID) && $this->presentation->ModeratorID != $speaker->ID)) {
             return $this->httpError(403, 'That speaker is not part of this presentation');
         }
 
@@ -805,39 +806,52 @@ class PresentationPage_ManageRequest extends RequestHandler
         Requirements::javascript('summit/javascript/AddSpeakerForm.js');
 
         $summit = $this->Summit();
+        $max_speakers_reached = $this->presentation->maxSpeakersReached();
+        $max_moderators_reached = $this->presentation->maxModeratorsReached();
+        $speaker_type = (!$max_moderators_reached) ? 'Moderator' : 'Speaker';
+        $presentation_type = $this->presentation->getTypeName();
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
-                '<p class="at-least-one">Each presentation needs at least one speaker.</p>'),
+                '<p class="at-least-one">Each '.$presentation_type.' needs at least one '.$speaker_type.'.</p>'),
             OptionsetField::create('SpeakerType', '', array(
-                'Me'   => 'Add yourself as a speaker to this presentation',
+                'Me'   => 'Add yourself as a '.$speaker_type.' to this '.$presentation_type,
                 'Else' => 'Add someone else'
             ))->setValue('Me'),
             LiteralField::create('LegalMe', sprintf('
-            <div id="legal-me" style="display: none;">
-             <label>
-                Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
-            </label>
-            </div>', $summit->Title)),
+                <div id="legal-me" style="display: none;">
+                 <label>
+                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                </label>
+                </div>', $summit->Title)),
             TextField::create('EmailAddress',
-                "To add another person as a speaker, you will need their first name, last name or email address. (*)")
+                "To add another person as a ".$speaker_type.", you will need their first name, last name or email address. (*)")
                 ->displayIf('SpeakerType')
                 ->isEqualTo('Else')
                 ->end(),
             HiddenField::create('SpeakerId','SpeakerId'),
             HiddenField::create('MemberId','MemberId'),
             LiteralField::create('LegalOther', sprintf('
-            <div id="legal-other" style="display: none;">
-             <label>
-                Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
-            </label>
-            </div>', $summit->Title))
+                <div id="legal-other" style="display: none;">
+                 <label>
+                    '.$speaker_type.' agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                </label>
+                </div>', $summit->Title)
+            )
         );
 
         $validator = RequiredFields::create();
 
+        if (Member::currentUser()->IsSpeaker($this->presentation)
+        || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
+            $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
+            $fields->field('EmailAddress')
+                ->setTitle('Enter the first name, last name or email address of your next speaker (*)')
+                ->setDisplayLogicCriteria(null);
+        }
+
         if ($this->presentation->Speakers()->exists()) {
-            if (!$this->presentation->maxSpeakersReached()) {
+            if (!$max_speakers_reached) {
                 $fields->insertBefore(
                     LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
                     'SpeakerNote'
@@ -848,13 +862,6 @@ class PresentationPage_ManageRequest extends RequestHandler
                     FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another speaker'),
                     FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
                 );
-
-                if (Member::currentUser()->IsSpeaker($this->presentation)) {
-                    $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
-                    $fields->field('EmailAddress')
-                        ->setTitle('Enter the first name, last name or email address of your next speaker (*)')
-                        ->setDisplayLogicCriteria(null);
-                }
             } else {
                 $fields->insertBefore(
                     LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of speakers.</h3>'),
@@ -868,7 +875,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             }
         } else {
             $actions = FieldList::create(
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add first speaker')
+                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add first '.$speaker_type)
             );
         }
 
@@ -1176,7 +1183,12 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
 
         $p = $this->parent->getPresentation();
         if ($p->canRemoveSpeakers()) {
-            $p->Speakers()->remove($this->speaker);
+            if ($this->speaker->ID == $p->ModeratorID) {
+                $p->ModeratorID = 0;
+                $p->write();
+            } else {
+                $p->Speakers()->remove($this->speaker);
+            }
 
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
         }

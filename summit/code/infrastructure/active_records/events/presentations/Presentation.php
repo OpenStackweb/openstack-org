@@ -203,7 +203,7 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function getTypeName()
     {
-        return 'Presentation';
+        return $this->Type()->Type;
     }
 
     /**
@@ -920,6 +920,17 @@ SQL;
     public function maxSpeakersReached()
     {
         return ($this->Type()->getMaxSpeakers() == $this->Speakers()->count());
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function maxModeratorsReached()
+    {
+        $max_moderators = $this->Type()->getMaxModerators();
+        $moderator_count = ($this->Moderator()->exists() ? 1 : 0);
+        return ($max_moderators == $moderator_count);
     }
 
     /**

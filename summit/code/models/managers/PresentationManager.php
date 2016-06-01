@@ -574,11 +574,17 @@ final class PresentationManager implements IPresentationManager
                 );
             }
 
-            if($speaker->Presentations()->filter('PresentationID', $presentation->ID)->count() > 0 )
+            if($speaker->Presentations()->filter('PresentationID', $presentation->ID)->count() > 0
+                || $presentation->ModeratorID == $speaker->ID)
                 throw new EntityValidationException('Speaker already assigned to this presentation!.');
 
-            $speaker->Presentations()->add($presentation);
-            $speaker->write();
+            // The first one is the moderator.
+            if (!$presentation->maxModeratorsReached()) {
+                $presentation->ModeratorID = $speaker->ID;
+            } else {
+                $speaker->Presentations()->add($presentation);
+                $speaker->write();
+            }
 
             return $speaker;
         });
