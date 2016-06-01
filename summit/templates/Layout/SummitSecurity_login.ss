@@ -13,10 +13,9 @@
             <p>Here are four steps you should take as a potential speaker:</p>
 
             <ul class="submit-steps">
-                <li><span>1</span> <a href="#categories">Review the list of session tracks.</a></li>
+                <li><span>1</span> <a href="summit/barcelona-2016/categories/" target="_blank">Review the list of session tracks.</a></li>
                 <li><span>2</span> <a href="#process">Learn about the selection process.</a></li>
                 <li><span>3</span> <a href="#submit">Submit your session proposal below. (Limit of 3 per speaker)</a></li>
-                <li><span>4</span> <a href="summit/austin-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></li>
             </ul>
 
             <hr/>
@@ -48,7 +47,7 @@
             <hr/>
 
 
-            <a id="categories"></a>
+            <!-- <a id="categories"></a>
             <h2>Summit Tracks</h2>
 
             <p><a href="summit/austin-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
@@ -63,7 +62,7 @@
             <p class="submit-button-area"><a href="#submit" class="btn btn-default">Submit Your Presentation Proposal</a></p>
 
 
-            <hr/>
+            <hr/> -->
 
             <a id="process"></a>
             <h2>Selection Process</h2>
