@@ -67,7 +67,7 @@ final class PresentationForm extends BootstrapForm
                 ->configure()
                     ->setAttribute('autofocus','TRUE')
                 ->end()
-            ->dropdown('TypeID','Select the format (Presenation: Max 2 speakers; Panel: Max 4 speakers, 1 moderator)')
+            ->dropdown('TypeID','Select the format (Presentation: Max 2 speakers; Panel: Max 4 speakers, 1 moderator)')
                 ->configure()
                     ->setEmptyString('-- Select one --')
                     ->setSource(PresentationType::get()->exclude('Type','Keynotes')->map('ID', 'Type'))
