@@ -834,7 +834,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             LiteralField::create('LegalOther', sprintf('
                 <div id="legal-other" style="display: none;">
                  <label>
-                    '.$speaker_type.' agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $summit->Title)
             )
@@ -868,6 +868,7 @@ class PresentationPage_ManageRequest extends RequestHandler
                     'SpeakerNote'
                 );
                 $fields->removeField('SpeakerNote');
+                $fields->removeField('EmailAddress');
                 $fields->removeField('SpeakerType');
                 $actions = FieldList::create(
                     FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
