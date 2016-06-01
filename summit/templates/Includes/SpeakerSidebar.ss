@@ -7,7 +7,7 @@
     <ul class="user-menu">
         <li><a href="$Top.Link"<% if $Top.ActiveLink=="presentations" %> class="active"<% end_if %>>Presentations <i class="fa fa-chevron-right"></i></a></li>
         <li><a href="$Top.Link(bio)"<% if $Top.ActiveLink=="bio" %> class="active"<% end_if %>>My Speaker Bio <i class="fa fa-chevron-right"></i></a></li>
-        <li><a href="$Top.Link(track-list)">Session Track List <i class="fa fa-chevron-right"></i></a></li>
+        <li><a href="/summit/barcelona-2016/categories/">Summit Categories &amp; Tracks <i class="fa fa-chevron-right"></i></a></li>
         <li><a href="$Top.Link(selection-process)">Speaker Selection Process <i class="fa fa-chevron-right"></i></a></li>
         <li><a href="/Security/logout?BackURL={$Top.Link}" class="">Logout <i class="fa fa-chevron-right"></i></a></li>
     </ul>
