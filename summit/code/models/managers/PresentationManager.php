@@ -532,7 +532,7 @@ final class PresentationManager implements IPresentationManager
 
             $speaker = !is_null($speaker)? $speaker : $this->speaker_repository->getByEmail($email);
 
-            if(is_null($speaker))
+            if(is_null($speaker) && !is_null($member))
                 $speaker = $member->getSpeakerProfile();
 
             if(!is_null($speaker) && !is_null($member) && intval($member->ID) !== intval($speaker->MemberID))
