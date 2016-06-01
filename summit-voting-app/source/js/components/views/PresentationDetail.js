@@ -42,12 +42,14 @@ class PresentationDetail extends React.Component {
 		const {presentation, requestedPresentationID} = this.props;
 		const loggedIn = Config.get('loggedIn');
 
-		if(!presentation || !presentation.speakers) return <div />;
-
-		const showForm = (
-			presentation.user_vote !== null &&
-			presentation.user_comment === null
-		) || presentation.showForm;
+		if(!presentation) return <div />;
+		let showForm = false;
+		if(presentation) {
+			showForm = (
+				presentation.user_vote !== null &&
+				presentation.user_comment === null
+			) || presentation.showForm;
+		}
 
 		return (
 			<div>

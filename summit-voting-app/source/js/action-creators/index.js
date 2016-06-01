@@ -269,7 +269,7 @@ export function destroyUserComment (id) {
 
 export function goToPresentation (id, adder) {
 	return (dispatch, getState) => {
-		dispatch(clearPresentation())
+//		dispatch(clearPresentation())
 		dispatch(
 			pushState(
 				null, 
