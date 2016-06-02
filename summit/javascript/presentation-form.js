@@ -45,12 +45,6 @@ $(document).ready(function(){
                     return $('select[name=GroupID] option:selected').hasClass('public');
                 },
                 maxlength: 1000
-            },
-            SelectionMotive:{
-                required: function(){
-                    return $('select[name=GroupID] option:selected').hasClass('public');
-                },
-                maxlength: 1000
             }
         },
         messages: {
@@ -71,10 +65,6 @@ $(document).ready(function(){
                 maxlength: 'This must be less than 1000 characters long.'
             },
             AttendeesExpectedLearnt:{
-                required: 'This field is required.',
-                maxlength: 'This must be less than 1000 characters long.'
-            },
-            SelectionMotive:{
                 required: 'This field is required.',
                 maxlength: 'This must be less than 1000 characters long.'
             }
