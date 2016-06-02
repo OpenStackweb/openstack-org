@@ -105,7 +105,7 @@
                     </p>
                 <% end_if %>
                 <p class="center">
-                    <strong>We have contracted out hotel rooms at several hotels surrounding the convention center. Instructions and links to book hotel rooms will be posted in the coming weeks.</strong>
+                    <strong>We have contracted out discounted hotel room blocks at several surrounding hotels. Links to book hotel rooms will be posted in the coming weeks.</strong>
                 </p>
                 $LocationsTextHeader
             </div>
