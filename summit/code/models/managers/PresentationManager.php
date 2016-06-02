@@ -381,7 +381,6 @@ final class PresentationManager implements IPresentationManager
             $presentation->ShortDescription        = trim($data['ShortDescription']);
             $presentation->ProblemAddressed        = trim($data['ProblemAddressed']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
-            $presentation->SelectionMotive         = trim($data['SelectionMotive']);
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
 
             if(intval($presentation->CategoryID) > 0) {
@@ -439,7 +438,6 @@ final class PresentationManager implements IPresentationManager
             $presentation->ShortDescription        = trim($data['ShortDescription']);
             $presentation->ProblemAddressed        = trim($data['ProblemAddressed']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
-            $presentation->SelectionMotive         = trim($data['SelectionMotive']);
 
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
             $creator                               = Member::get()->byID($presentation->CreatorID);

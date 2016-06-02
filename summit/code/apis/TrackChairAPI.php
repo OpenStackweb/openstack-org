@@ -850,8 +850,6 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $p->ProblemAddressed) : '(no answer provided)';
         $p->AttendeesExpectedLearnt = ($p->AttendeesExpectedLearnt != null) ? str_replace(array("\r", "\n"), "",
             $p->AttendeesExpectedLearnt) : '(no answer provided)';
-        $p->SelectionMotive = ($p->SelectionMotive != null) ? str_replace(array("\r", "\n"), "",
-            $p->SelectionMotive) : '(no answer provided)';
 
         $data = $p->toJSON();
         $data['title'] = $p->Title;
