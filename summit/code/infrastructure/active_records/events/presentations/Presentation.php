@@ -106,7 +106,6 @@ class Presentation extends SummitEvent implements IPresentation
         'BeenEmailed' => 'Boolean',
         'ProblemAddressed' => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
-        'SelectionMotive' => 'HTMLText',
         'Legacy' => 'Boolean'
     );
 
@@ -672,7 +671,6 @@ class Presentation extends SummitEvent implements IPresentation
             ->text('OtherTopic', 'Other topic')
             ->htmleditor('ProblemAddressed', 'What is the problem or use case you’re addressing in this session?')
             ->htmleditor('AttendeesExpectedLearnt', 'What should attendees expect to learn?')
-            ->htmleditor('SelectionMotive', 'Why should this session be selected?')
             ->tab('Preview')
             ->literal('preview', sprintf(
                 '<iframe width="%s" height="%s" frameborder="0" src="%s"></iframe>',
