@@ -21,6 +21,13 @@ interface ISpeakerRepository extends IEntityRepository
      */
     public function searchByTerm($term, $limit = 10);
 
+/**
+     * @param string $term
+     * @param int $limit
+     * @return array
+     */
+    public function searchByTermActive($term, $limit = 10);
+
     /**
      * @param ISummit $summit
      * @param string $term

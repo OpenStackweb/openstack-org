@@ -87,7 +87,7 @@ final class SpeakerManager implements ISpeakerManager
      */
     public function getSpeakerByTerm($term, $obscure_email = true)
     {
-        $data = $this->speaker_repository->searchByTerm($term);
+        $data = $this->speaker_repository->searchByTermActive($term);
         $res  = array();
 
         foreach($data as $row)
