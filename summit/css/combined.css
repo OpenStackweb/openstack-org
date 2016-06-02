@@ -1346,7 +1346,24 @@ a.current-summit-link {
   margin-left: -20px;
   margin-right: -20px;
   padding: 0px 20px;
-  border-bottom: 1px solid #CCCCCC; }
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.confirm-block {
+    padding: 20px 20px 10px 20px;
+}
+
+.confirm-block label {
+    margin-bottom: 0px;
+}
+
+.confirm-item {
+    padding-bottom:10px;
+}
+
+.confirm-actions {
+    padding-top: 20px;
+}
 
 .panel-note {
   padding: 0px 10px;

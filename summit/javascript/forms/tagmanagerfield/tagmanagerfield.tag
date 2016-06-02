@@ -105,13 +105,7 @@ require('./clicktag.tag')
                 self.form      = $('form');
                 self.validator = self.form.validate({
                     ignore: [],
-                    rules: {
-                        'Tags':{ required:true },
-                        messages:
-                        {
-                            Tags:'You must select at least one Tag.'
-                        }
-                    },
+                    rules: {},
                     invalidHandler: function(form, validator) {
                         var errors = validator.numberOfInvalids();
                         if (errors) {

@@ -15,7 +15,7 @@ var form_validator = null;
 
 $(document).ready(function(){
 
-    form_validator = $('#SpeakerForm_BioForm').validate(
+    form_validator = $('#'+form_id).validate(
         {
             ignore:[],
             highlight: function(element) {
@@ -47,7 +47,7 @@ $(document).ready(function(){
             },
         });
 
-    $("#SpeakerForm_BioForm_CountriesToTravel").chosen({width: '100%'});
+    $("#"+form_id+"_CountriesToTravel").chosen({width: '100%'});
 
     var language_source = ['Afrikaans','Apprenda','Arabic','Armenian','ASL Sign Language','Bahasa','Basque','Belarusian',
         'Bengali','Brazilian Portuguese','Bulgarian','Burmese','Canadian','Cantonese','Catalan','Chinese','Croatian','Czech',
@@ -70,7 +70,7 @@ $(document).ready(function(){
     });
     languages.initialize();
 
-    $('#SpeakerForm_BioForm_Language').tagsinput({
+    $('#'+form_id+'_Language').tagsinput({
         freeInput: true,
         maxTags: 5,
         trimValue: true,
@@ -90,7 +90,7 @@ $(document).ready(function(){
         ]
     });
 
-    $('#SpeakerForm_BioForm_Expertise').tagsinput({
+    $('#'+form_id+'_Expertise').tagsinput({
         freeInput: true,
         maxTags: 5,
         trimValue: true

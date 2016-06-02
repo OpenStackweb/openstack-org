@@ -744,7 +744,7 @@ class PresentationPage_ManageRequest extends RequestHandler
         catch(EntityValidationException $ex1)
         {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
-            Form::messageForForm('PresentationForm_PresentationForm', $ex1->getMessages(),'bad');
+            Form::messageForForm('PresentationForm_PresentationForm', $ex1,'bad');
             return Controller::curr()->redirect($this->presentation->EditLink());
         }
         catch(Exception $ex){
@@ -847,11 +847,11 @@ class PresentationPage_ManageRequest extends RequestHandler
         || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
             $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
             $fields->field('EmailAddress')
-                ->setTitle('Enter the first name, last name or email address of your next speaker (*)')
+                ->setTitle('Enter the first name, last name or email address of your '.$speaker_type.' (*)')
                 ->setDisplayLogicCriteria(null);
         }
 
-        if ($this->presentation->Speakers()->exists()) {
+        if ($this->presentation->Speakers()->exists() && $max_moderators_reached) {
             if (!$max_speakers_reached) {
                 $fields->insertBefore(
                     LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
@@ -876,8 +876,9 @@ class PresentationPage_ManageRequest extends RequestHandler
                 );
             }
         } else {
+            $action_text = 'Add '.(($speaker_type == 'speaker') ? 'first ' : 'a ').$speaker_type;
             $actions = FieldList::create(
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add first '.$speaker_type)
+                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> '.$action_text)
             );
         }
 
@@ -1067,8 +1068,8 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function doFinishSpeaker($data, $form)
     {
-        if ($this->presentation->getProgress() < Presentation::PHASE_TAGS) {
-            return $this->parent->redirect($this->Link('tags'));
+        if ($this->presentation->getProgress() < Presentation::PHASE_SUMMARY) {
+            return $this->parent->redirect($this->Link('summary'));
         } else {
             $this->presentation->setProgress(Presentation::PHASE_SPEAKERS);
         }

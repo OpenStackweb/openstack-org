@@ -399,7 +399,7 @@ final class PresentationManager implements IPresentationManager
                     );
 
                 if ($count >= $limit)
-                    throw new EntityValidationException(sprintf('*You reached the limit (%s) of presentations for Category %s', $limit,  $category->Title));
+                    throw new EntityValidationException(sprintf('*You reached the limit (%s) of presentations.', $limit));
             }
 
             if(isset($data['OtherTopic']))
@@ -444,7 +444,13 @@ final class PresentationManager implements IPresentationManager
             $summit                                = $presentation->Summit();
             $speaker                               = $creator->getSpeakerProfile();
 
-            if(intval($presentation->CategoryID) > 0)
+            // if the user changed the presentation type from panel to presentation we need to remove the moderator
+            if ($presentation->Type()->Type != 'Panel') {
+                $presentation->ModeratorID = 0;
+            }
+
+            // SANTI: why do we check limit on edition?
+            /*if(intval($presentation->CategoryID) > 0)
             {
                 $category = PresentationCategory::get()->byID($presentation->CategoryID);
                 if(is_null($category)) throw new NotFoundEntityException('category not found!.');
@@ -461,8 +467,8 @@ final class PresentationManager implements IPresentationManager
                     );
 
                 if ($count >= $limit)
-                    throw new EntityValidationException(sprintf('You reached the limit (%s) of presentations for Category %s', $limit,  $category->Title));
-            }
+                    throw new EntityValidationException(sprintf('You reached the limit (%s) of presentations.', $limit));
+            }*/
 
             if(isset($data['OtherTopic']))
                 $presentation->OtherTopic = trim($data['OtherTopic']);
