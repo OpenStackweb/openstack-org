@@ -217,6 +217,7 @@ SQL;
             if($type == 'single' && empty($last_name2) ) {
                 foreach($condition as $c) {
                     $query .= $member_sql . ' WHERE ' . $c;
+                    $query .= ' AND M.Active=1';
                     $query .= ' UNION ';
                 }
             }
