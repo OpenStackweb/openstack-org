@@ -24,12 +24,12 @@
                     Hotels &amp; Airport
                 </a>
             </li>
-            <li>
+            <!--<li>
                 <a href="#getting-around">
                     <i class="fa fa-road"></i>
                     Getting Around
                 </a>
-            </li>
+            </li>-->
             <% if TravelSupport  %>
                 <li>
                     <a href="#travel-support">
@@ -78,7 +78,7 @@
 <% end_if %>
 <div class="white hotels-row" id="hotels">
     <% if not $Top.CampusGraphic %>
-    <div class="venue-map" id="map-canvas"></div>
+    <!-- <div class="venue-map" id="map-canvas"></div> -->
     <% end_if %>
     <div class="container">
         <% if AlternateHotels %>
@@ -104,6 +104,9 @@
                         <i class="fa fa-hotel fa-4x"></i>
                     </p>
                 <% end_if %>
+                <p class="center">
+                    <strong>We have contracted out hotel rooms at several hotels surrounding the convention center. Instructions and links to book hotel rooms will be posted in the coming weeks.</strong>
+                </p>
                 $LocationsTextHeader
             </div>
         </div>
@@ -185,14 +188,14 @@
         <div class="row">
             <div class="col-lg-8 col-lg-push-2 other-hotel-options">
                 <h5 class="section-title">House Sharing</h5>
-                <p>If you plan to bring your family with you to Austin or if you would like to have more space than a hotel room offers, then you may want to rent an apartment or condo during your stay. The following sites are available for short-term property rentals.</p>
+                <p>If you plan to bring your family with you to Barcelona or if you would like to have more space than a hotel room offers, then you may want to rent an apartment or condo during your stay. The following sites are available for short-term property rentals.</p>
                 $OtherLocations
             </div>
         </div>
         <% end_if %>
     </div>
 </div>
-<div class="blue" id="getting-around">
+<!-- <div class="blue" id="getting-around">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
@@ -225,6 +228,7 @@
         </div>
     </div>
 </div>
+-->
 <% if TravelSupport  %>
     <div class="light" id="travel-support">
         <div class="container">
@@ -247,6 +251,7 @@
     </div>
 </div>
 <% end_if %>
+<% if Locals %>
 <div class="about-city-row austin" style="background: rgba(0, 0, 0, 0) url('{$AboutTheCityBackgroundImageUrl}') no-repeat scroll left top / cover ">
     <p>
         Legendary music, epic BBQ, history, food trucks and neon...
@@ -254,7 +259,6 @@
     <h1>Come Join Us In Austin</h1>
     <a href="{$AboutTheCityBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$AboutTheCityBackgroundImageHero}" target="_blank"><i class="fa fa-info-circle"></i></a>
 </div>
-<% if Locals %>
 <div class="white locals-row" id="locals">
     <div class="container">
         $Locals
