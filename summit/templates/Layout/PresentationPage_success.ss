@@ -23,7 +23,7 @@
 				        <li>Once all presentations have been submitted and the call for speakers closes, the OpenStack community will be invited to review the submissions openly and vote on the presentations they find most interesting. Voting begins July 26, 2016 and ends August 8, 2016.</li>
 				        <li>Ultimately, the OpenStack Summit Track Chairs will decide which presentations are included in the Summit, using the results of the community voting as input. Your presentation will either be selected for the Summit, selected as an alternate, or not included in this Summit’s agenda. You will be emailed the results just as soon as they are confirmed.</li>
 				    </ol>
-				    <p>Good luck in the selection process!</p>
+				    <p>Good luck in the <a href="/summit/barcelona-2016/call-for-speakers/selection-process">Speaker Selection Process</a>!</p>
 					    
 
 					<a class="btn btn-primary" href="$Link">Got It</a>
