@@ -1,5 +1,6 @@
 import presentation from './presentation';
 require('array.prototype.findindex');
+import nl2br from '../utils/nl2br';
 
 export default (state = {
 	presentations: [],
@@ -65,7 +66,7 @@ export default (state = {
 					...state.selectedPresentation,
 					user_comment: {
 						id: +new Date(),
-						comment: action.comment,
+						comment: nl2br(action.comment),
 						author: 'You',
 						ago: 'Just now'
 					},

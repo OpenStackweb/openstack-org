@@ -4,7 +4,7 @@ export default ({
 	speakers
 }) => (
      <div className="main-speaker-wrapper">
-     	{speakers.map((speaker, i)  => (
+     	{speakers && speakers.map((speaker, i)  => (
 	        <div key={i}>
 		        <div className="main-speaker-row">
 		           <div className="voting-speaker-name">

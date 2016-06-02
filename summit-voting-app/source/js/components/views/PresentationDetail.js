@@ -68,10 +68,14 @@ class PresentationDetail extends React.Component {
 						      	<div className="voting-presentation-body">
 						      		<PresentationMeta presentation={presentation} />
 							         <h5>Speakers</h5>
-							         <VotingSpeakerRow speakers={presentation.speakers} />
+							         {presentation.speakers &&
+							         	<VotingSpeakerRow speakers={presentation.speakers} />
+							     	 }
 							         <h5>Abstract</h5>			         
 							         <div dangerouslySetInnerHTML={{__html: presentation.abstract}} />
-							         <MainSpeakerRow speakers={presentation.speakers}/>
+							         {presentation.speakers &&
+							         	<MainSpeakerRow speakers={presentation.speakers}/>
+							     	 }
 						      	</div>
 						      	{loggedIn && 
 							      	<div>

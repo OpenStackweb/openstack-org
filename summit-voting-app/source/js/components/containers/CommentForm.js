@@ -7,8 +7,9 @@ class CommentForm extends React.Component {
 	constructor (props) {
 		super(props);
 		const {user_comment} = this.props.presentation;
+		
 		this.state = {
-			comment: user_comment ? user_comment.comment : null
+			comment: user_comment ? user_comment.comment.replace(/<br \/>/g, "") : null
 		};
 		this.updateComment = this.updateComment.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +32,7 @@ class CommentForm extends React.Component {
 	render () {		
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<textarea className="form-control" value={this.state.comment} onChange={this.updateComment}></textarea>
+				<textarea rows={10} className="form-control" value={this.state.comment} onChange={this.updateComment}></textarea>
 				<button className="btn block-btn btn-primary" type="submit">Add comment</button>
 			</form>
 		);

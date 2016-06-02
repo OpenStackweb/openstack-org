@@ -1,3 +1,5 @@
+import nl2br from '../utils/nl2br';
+
 export default (state, action) => {
 	switch(action.type) {
 		case 'VOTE_PRESENTATION':
@@ -18,7 +20,7 @@ export default (state, action) => {
 						id: +new Date(),
 						author: 'You',
 						ago: 'Just now',
-						comment: action.comment
+						comment: nl2br(action.comment)
 					}	
 				}
 			}

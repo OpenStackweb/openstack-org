@@ -61,7 +61,7 @@
                               <h1>
                                  Vote For Presentations
                                  <span>
-                                 Help us pick the presentations for The Tokyo Summit
+                                 Help us pick the presentations for The $Parent.Title Summit
                                  </span>
                               </h1>
                            </div>
