@@ -1,4 +1,3 @@
-<h1>Affiliations</h1>
 <a class='btn btn-default btn-xs active' id='add-affiliation' title='Add New Affiliation' href='#'>Add New Affiliation</a>
 <div id='affiliations-container'></div>
 <input type="hidden" id="HiddenAffiliations" name="HiddenAffiliations" value='$Value'/>

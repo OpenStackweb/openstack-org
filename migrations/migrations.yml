@@ -32,3 +32,4 @@ migrations:
   - NewsChangeNewsDatesToCentral
   - SummitMaxAllowedSubmissionTaskMigration
   - SummitPresentationTypeMigration
+  - PopulateOrganizationalRoleAndActiveInvolvement

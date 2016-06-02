@@ -1,0 +1,32 @@
+.nolabel label {
+    display: none;
+}
+
+#Language .bootstrap-tagsinput {
+    width: 100%;
+}
+
+#Expertise .bootstrap-tagsinput {
+    width: 100%;
+}
+
+.disclaimer {
+    margin-bottom: 20px;
+}
+
+.bureau-text {
+    margin-bottom: 20px;
+}
+
+.checkbox, .radio {
+    margin-top: 0px !important;
+    margin-bottom: 5px;
+}
+
+#AvailableForBureau {
+    margin-bottom: 5px;
+}
+
+#WillingToPresentVideo{
+    margin-bottom: 15px;
+}

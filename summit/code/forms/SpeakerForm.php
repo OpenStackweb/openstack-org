@@ -16,6 +16,13 @@ class SpeakerForm extends BootstrapForm
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('summit/javascript/speaker-form.js');
+
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::css('summit/css/speaker-form.css');
 
         parent::__construct(
             $controller, 
@@ -25,53 +32,15 @@ class SpeakerForm extends BootstrapForm
             $this->getSpeakerValidator()
         );
 
-        $script = <<<JS
-          var form_validator_{$this->FormName()} = null;
-          (function( $ ){
-
-                $(document).ready(function(){
-                    form_validator_{$this->FormName()} = $('#{$this->FormName()}').validate(
-                    {
-                        ignore:[],
-                        highlight: function(element) {
-                            $(element).closest('.form-group').addClass('has-error');
-                        },
-                        unhighlight: function(element) {
-                            $(element).closest('.form-group').removeClass('has-error');
-                        },
-                        errorElement: 'span',
-                        errorClass: 'help-block',
-                        errorPlacement: function(error, element) {
-                            if(element.parent('.input-group').length) {
-                                error.insertAfter(element.parent());
-                            } else {
-                                error.insertAfter(element);
-                            }
-                        },
-                       invalidHandler: function(form, validator) {
-                            if (!validator.numberOfInvalids())
-                                return;
-                            var element = $(validator.errorList[0].element);
-                            if(!element.is(":visible")){
-                                element = element.parent();
-                            }
-
-                            $('html, body').animate({
-                                scrollTop: element.offset().top
-                            }, 2000);
-                        },
-                    });
-
-                     $("#SpeakerForm_BioForm_CountriesToTravel").chosen({width: '100%'});
-                });
-                // End of closure.
-        }(jQuery ));
-JS;
-        Requirements::customScript($script);
     }
 
     protected function getSpeakerFields()
     {
+        $organizational_roles = SpeakerOrganizationalRole::get()->where('IsDefault',1)->map('ID','Role');
+        $organizational_roles->push(0,'Other');
+        $active_involvements = SpeakerActiveInvolvement::get()->where('IsDefault',1)->map('ID','Involvement');
+        $active_involvements->push(0,'Other');
+
         $fields =  FieldList::create()
             ->text('FirstName',"Speaker's first name")
                 ->configure()
@@ -85,7 +54,7 @@ JS;
                 ->end()
             ->tinyMCEEditor('Bio',"Speaker's Bio")
                 ->configure()
-                    ->setRows(25)
+                    ->setRows(12)
                     ->setRequired(true)
                 ->end()
             ->text('IRCHandle','IRC Handle (optional)')
@@ -106,31 +75,10 @@ JS;
                     ->setMaxFilesize(1)
                 ->end()
             ->bootstrapIgnore('Photo')
-            ->literal('SpokenLanguagesTitle','<h3>Spoken Languages ( Up to 5)</h3>')
-            ->text('Language[1]','#1')
-            ->text('Language[2]','#2')
-            ->text('Language[3]','#3')
-            ->text('Language[4]','#4')
-            ->text('Language[5]','#5')
-            ->literal('ExpertiseTitle','<h3>Areas of Expertise ( Up to 5)</h3>')
-            ->text('Expertise[1]','#1')
-            ->text('Expertise[2]','#2')
-            ->text('Expertise[3]','#3')
-            ->text('Expertise[4]','#4')
-            ->text('Expertise[5]','#5')
-            ->literal('PresentationTitle','<h3>Links To Previous Presentations ( Up to 5)</h3>')
-            ->text('PresentationLink[1]','Link #1')
-            ->text('PresentationTitle[1]','Title #1')
-            ->text('PresentationLink[2]','Link #2')
-            ->text('PresentationTitle[2]','Title #2')
-            ->text('PresentationLink[3]','Link #3')
-            ->text('PresentationTitle[3]','Title #3')
-            ->text('PresentationLink[4]','Link #4')
-            ->text('PresentationTitle[4]','Title #4')
-            ->text('PresentationLink[5]','Link #5')
-            ->text('PresentationTitle[5]','Title #5')
-            ->literal('RecordingAndPublishingLegalAgreement',sprintf('Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.',$this->summit->Title))
-            ->header('Want to be in the Speakers\' Bureau?')
+            ->literal('DisclaimerTitle','<hr><label>Disclaimer</label>')
+            ->literal('RecordingAndPublishingLegalAgreement',sprintf('<div class="disclaimer">Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.</div>',$this->summit->Title))
+            ->literal('BureauTitle','<label>Want to be in the Speakers\' Bureau?</label>')
+            ->literal('BureauText','<div class="bureau-text">In addition to the OpenStack Summit, we regularly recruit speakers for OpenStack community events around the world. If you would like to be considered for more speaking opportunities, please indicate your interest in being listed in the speaker’s bureau and complete the below questions so event organizers can learn more about you.</div>')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
                 ->configure()
                     ->addExtraClass('bureau-checkbox')
@@ -139,10 +87,58 @@ JS;
                 ->configure()
                     ->addExtraClass('bureau-checkbox')
                 ->end()
-            ->checkbox('FundedTravel', 'My Company would be willing to fund my travel to events')
+            ->literal('SpokenLanguagesTitle','<hr><label>Spoken Languages ( Up to 5)</label>')
+            ->text('Language','')
                 ->configure()
-                    ->addExtraClass('bureau-checkbox')
+                    ->addHolderClass('nolabel')
                 ->end()
+            ->literal('ExpertiseTitle','<label>Areas of Expertise ( Up to 5)</label>')
+            ->text('Expertise','')
+                ->configure()
+                    ->addHolderClass('nolabel')
+                ->end()
+            ->literal('PresentationTitle','<label>Links To Previous Presentations ( Up to 5)</label><br>')
+            ->text('PresentationLink[1]','Link')
+                ->configure()
+                    ->addHolderClass('col-md-6')
+                ->end()
+            ->text('PresentationTitle[1]','Title')
+                ->configure()
+                    ->addHolderClass('col-md-6')
+                ->end()
+            ->text('PresentationLink[2]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[2]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationLink[3]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[3]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationLink[4]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[4]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationLink[5]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[5]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->literal('HR','<div class="clearfix"></div><hr>')
              ->optionset('WillingToTravel', 'I am willing to travel to events:', array(
                     1 => 'Yes',
                     0 => 'No'
@@ -151,6 +147,25 @@ JS;
                 ->configure()
                     ->addExtraClass('countries-to-travel')
                 ->end()
+            ->checkbox('FundedTravel', 'My Company would be willing to fund my travel to events')
+                ->configure()
+                    ->addExtraClass('bureau-checkbox')
+                ->end()
+            ->checkboxset('OrganizationalRole','What is your current Organizational Role at your company? (check all that apply):',$organizational_roles)
+            ->text('OtherOrganizationalRole','Please specify your role:')
+                ->configure()
+                    ->displayIf('OrganizationalRole')
+                        ->hasCheckedOption(0)
+                    ->end()
+                ->end()
+            ->checkboxset('ActiveInvolvement','What is your Active Involvement in the OpenStack Community?  (check all that apply):',$active_involvements)
+            ->text('OtherActiveInvolvement','Please specify your involvement:')
+                ->configure()
+                    ->displayIf('ActiveInvolvement')
+                        ->hasCheckedOption(0)
+                    ->end()
+                ->end()
+            ->literal('HR','<hr>')
             ->tinyMCEEditor('Notes',"Notes")
                 ->configure()
                     ->setRows(10)
@@ -159,7 +174,7 @@ JS;
     }
 
     public function getSpeakerValidator() {
-        return RequiredFields::create('FirstName','LastName','Title', 'RecordingAndPublishingLegalAgreement', 'Language[1]','Expertise[1]','WillingToTravel','Bio');
+        return RequiredFields::create('FirstName','LastName','Title', 'RecordingAndPublishingLegalAgreement', 'Language','Expertise','WillingToTravel','Bio');
     }
 
     public function loadDataFrom($data, $mergeStrategy = 0, $fieldList = null)
@@ -179,17 +194,8 @@ JS;
             if(empty($speaker->TwitterName))  $this->fields->fieldByName('TwitterName')->setValue($speaker->Member()->TwitterName);
         }
 
-        foreach ($speaker->AreasOfExpertise() as $key => $expertise)
-        {
-            if ($key > 4) break;
-            $this->fields->fieldByName('Expertise['.($key+1).']')->setValue($expertise->Expertise);
-        }
-
-        foreach ($speaker->Languages() as $key => $language)
-        {
-            if ($key > 4) break;
-            $this->fields->fieldByName('Language['.($key+1).']')->setValue($language->Language);
-        }
+        $this->fields->fieldByName('Expertise')->setValue(implode(',',$speaker->AreasOfExpertise()->map('ID','Expertise')->toArray()));
+        $this->fields->fieldByName('Language')->setValue(implode(',',$speaker->Languages()->map('ID','Language')->toArray()));
 
         $country_array = array();
         foreach ($speaker->TravelPreferences() as $pref_country) {
@@ -200,6 +206,9 @@ JS;
             $this->fields->fieldByName('PresentationLink['.($key+1).']')->setValue($presentation->LinkUrl);
             $this->fields->fieldByName('PresentationTitle['.($key+1).']')->setValue($presentation->Title);
         }
+
+        $this->fields->fieldByName('OrganizationalRole')->setValue($speaker->OrganizationalRoles()->getIdList());
+        $this->fields->fieldByName('ActiveInvolvement')->setValue($speaker->ActiveInvolvements()->getIdList());
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
         if(!is_null($countries_2_travel))
@@ -222,21 +231,17 @@ JS;
         $speaker = $dataObject;
 
         $speaker->AreasOfExpertise()->removeAll();
-        for($i = 1 ; $i <= 5 ; $i++ ){
-            $field = $this->fields->fieldByName("Expertise[{$i}]");
-            if(is_null($field)) continue;
-            $val = $field->Value();
-            if(empty($val)) continue;
-            $speaker->AreasOfExpertise()->add( SpeakerExpertise::create(array('Expertise' => trim($val))));
+        $expertise_csv = $this->fields->fieldByName("Expertise")->Value();
+        foreach (explode(',',$expertise_csv) as $expertise) {
+            if(empty($expertise)) continue;
+            $speaker->AreasOfExpertise()->add( SpeakerExpertise::create(array('Expertise' => trim($expertise))));
         }
 
         $speaker->Languages()->removeAll();
-        for($i = 1 ; $i <= 5 ; $i++ ){
-            $field = $this->fields->fieldByName("Language[{$i}]");
-            if(is_null($field)) continue;
-            $val = $field->Value();
-            if(empty($val)) continue;
-            $speaker->Languages()->add( SpeakerLanguage::create(array('Language' => trim($val))));
+        $language_csv = $this->fields->fieldByName("Language")->Value();
+        foreach (explode(',',$language_csv) as $language) {
+            if(empty($language)) continue;
+            $speaker->Languages()->add( SpeakerLanguage::create(array('Language' => trim($language))));
         }
 
         $speaker->OtherPresentationLinks()->removeAll();
@@ -253,6 +258,12 @@ JS;
                 'Title' => trim($title_val))
             ));
         }
+
+        $roles = $this->fields->fieldByName("OrganizationalRole")->Value();
+        $speaker->OrganizationalRoles()->setByIdList($roles);
+
+        $involvements = $this->fields->fieldByName("ActiveInvolvement")->Value();
+        $speaker->ActiveInvolvements()->setByIdList($involvements);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
 

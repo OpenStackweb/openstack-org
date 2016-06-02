@@ -339,11 +339,12 @@ class PresentationPage_Controller extends SummitPage_Controller
         $form = SpeakerForm::create(
             $this,
             "BioForm",
-            FieldList::create(FormAction::create('doSaveBio', 'Save'))
+            FieldList::create(FormAction::create('doSaveBio', 'Save')),
+            $this->Summit()
         );
 
         // add affiliations to my speaker
-        $form->Fields()->insertAfter(new AffiliationField('Affiliations', 'Affiliations'), 'Photo');
+        //$form->Fields()->insertAfter(new AffiliationField('Affiliations', 'Affiliations'), 'Photo');
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             $form->loadDataFrom($data);

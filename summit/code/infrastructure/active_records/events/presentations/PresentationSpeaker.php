@@ -64,6 +64,11 @@ class PresentationSpeaker extends DataObject
         'Presentations' => 'Presentation',
     ];
 
+    private static $many_many = [
+        'OrganizationalRoles' => 'SpeakerOrganizationalRole',
+        'ActiveInvolvements' => 'SpeakerActiveInvolvement'
+    ];
+
     private static $summary_fields = [
         'FirstName' => 'FirstName',
         'LastName' => 'LastName',
