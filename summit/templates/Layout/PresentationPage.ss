@@ -18,13 +18,13 @@
                                     <% else %>
                                         <div class="alert alert-danger alert-dismissible" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong>Warning!</strong> You reached presentations submissions limit.
+                                            <strong>Warning!</strong> You have reached the presentation submission limit.
                                         </div>
                                     <% end_if %>
                                 <% else %>
                                     <div class="alert alert-danger alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <strong>Warning!</strong> Call for Speakers is closed!.
+                                        <strong>Warning!</strong> Call for Presentations is closed!.
                                     </div>
                                 <% end_if %>
                             </div>
