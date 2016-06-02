@@ -7,6 +7,7 @@ import Directory from './components/pages/Directory';
 import Help from './components/pages/Help';
 import ChangeRequests from './components/pages/ChangeRequests';
 import BrowseDetail from './components/pages/BrowseDetail';
+import SelectionsDetail from './components/pages/SelectionsDetail';
 import { syncHistoryWithStore } from 'react-router-redux';
 import store from './store';
 
@@ -19,7 +20,9 @@ const Routes = (baseURL) => (
       	<Route path="browse" component={Browse}>
         	<Route path=":id" component={BrowseDetail} />
         </Route>
-        <Route path="selections" component={Selections}/>
+        <Route path="selections" component={Selections}>
+        	<Route path=":id" component={SelectionsDetail} />
+        </Route>
         <Route path="directory" component={Directory} />
         <Route path="change-requests" component={ChangeRequests} />
         <Route path="help" component={Help} />

@@ -15,10 +15,22 @@ class URL {
 	serialise (obj) {
 	  var str = [];
 	  for(var p in obj)
-	    if (obj.hasOwnProperty(p) && obj[p] !== null && obj[p] !== '') {
+	    if (obj.hasOwnProperty(p) && obj[p] !== null && obj[p] !== '' && obj[p] !== undefined) {
 	      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 	    }
 	  return str.join("&");
+	}
+
+	addQueryParams(path, queryParams) {
+		if(queryParams && typeof queryParams === 'object') {
+			const serialised = this.serialise(queryParams);
+			if(serialised.length) {
+				path += `?${this.serialise(queryParams)}`;	
+			}
+			
+		}
+		
+		return path;		
 	}
 
 	create (pathParts, queryParams, baseURL, windowObj) {
@@ -44,13 +56,7 @@ class URL {
 			path = pathParts;
 		}
 
-		if(queryParams && typeof queryParams === 'object') {
-			const serialised = this.serialise(queryParams);
-			if(serialised.length) {
-				path += `?${this.serialise(queryParams)}`;	
-			}
-			
-		}
+		path = this.addQueryParams(path, queryParams);
 
 		baseURL = baseURL.replace(/\/$/,'');//.replace(/^\//, '');
 		path = path.replace(/\/$/,'').replace(/^\//, '');

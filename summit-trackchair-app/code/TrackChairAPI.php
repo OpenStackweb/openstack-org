@@ -289,6 +289,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $listID = $list->ID;
 
             $data = [
+            	'id' => $listID,
                 'list_name' => $list->name,
                 'list_type' => $list->ListType,
                 'list_id' => $listID,

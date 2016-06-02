@@ -58,6 +58,8 @@ class Browse extends React.Component {
 	                	presentations={this.props.presentations} 
 	                	hasMore={this.props.hasMore}
 	                	onRequestMore={this.requestMore}
+	                	category={this.props.category}
+	                	search={this.props.search}
 	                	/>
 	               </div>
                 </div>

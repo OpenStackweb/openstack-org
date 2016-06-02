@@ -9,7 +9,7 @@ export default connect (
 		return {
 			link: ownProps.link,
 			onClick: ownProps.onClick,
-			active: state.routing.locationBeforeTransitions.pathname === URL.create(ownProps.link)
+			active: state.routing.locationBeforeTransitions.pathname === URL.create(ownProps.link.split('?')[0])
 		}
 	},
 	dispatch => ({

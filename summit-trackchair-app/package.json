@@ -9,6 +9,7 @@
   "dependencies": {
     "array.prototype.find": "^2.0.0",
     "array.prototype.findindex": "^2.0.0",
+    "array.prototype.move": "0.0.3",
     "bootstrap": "^3.3.6",
     "classnames": "^2.1.5",
     "dataset": "^0.3.1",
@@ -30,6 +31,7 @@
     "react-redux": "^4.4",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0",
+    "react-sortable": "^1.0.0",
     "redux": "^3.0",
     "redux-actions": "^0.7.0",
     "redux-mock-store": "^1.0.2",

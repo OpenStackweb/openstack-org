@@ -44,8 +44,10 @@ export const createComment = createAction('CREATE_COMMENT');
 export const syncComment = createAction('SYNC_COMMENT');
 export const toggleForMe = createAction('TOGGLE_FOR_ME');
 export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
-
-
+export const requestLists = createAction('REQUEST_LISTS');
+export const receiveLists = createAction('RECEIVE_LISTS');
+export const moveSelectionUp = createAction('MOVE_SELECTION_UP');
+export const moveSelectionDown = createAction('MOVE_SELECTION_DOWN');
 /* Async Actions */
 
 export const fetchSummit = (id) => {
@@ -62,6 +64,14 @@ export const fetchPresentations = createRequestReceiveAction(
     receivePresentations,
     ''
 );
+
+export const fetchLists = (category) => {
+	return createRequestReceiveAction(
+		requestLists,
+		receiveLists,
+		`selections/${category}`
+	)(category);
+};
 
 
 export const fetchPresentationDetail = (id) => {
