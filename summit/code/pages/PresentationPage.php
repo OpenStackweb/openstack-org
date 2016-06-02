@@ -1364,10 +1364,25 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     public function doSaveSpeaker($data, $form)
     {
         $form->saveInto($this->speaker);
+        $has_changed = $this->speaker->isChanged();
         $this->speaker->write();
+
         $member = $this->speaker->Member();
         if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
+        }
+
+        if ($has_changed && !$this->isMe()) {
+            $current_user = Member::currentUser();
+            $subject = "Attn: Your OpenStack Member Profile has been updated";
+            $body = "A Presentation owner, ".$current_user->getName()." has just updated your Speaker Bio.
+                Please double check https://www.openstack.org/profile/speaker to ensure everything looks as expected.
+                If you find a problem with your bio, please send an email to speakersupport@openstack.org and we'll take a look right away.<br>
+                Thank you,<br>
+                OpenStack Speaker Support";
+
+            $email = EmailFactory::getInstance()->buildEmail(null, $this->speaker->getEmail(), $subject, $body);
+            $email->send();
         }
 
         return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
