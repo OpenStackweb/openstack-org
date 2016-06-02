@@ -207,8 +207,27 @@ class SpeakerForm extends BootstrapForm
             $this->fields->fieldByName('PresentationTitle['.($key+1).']')->setValue($presentation->Title);
         }
 
-        $this->fields->fieldByName('OrganizationalRole')->setValue($speaker->OrganizationalRoles()->getIdList());
-        $this->fields->fieldByName('ActiveInvolvement')->setValue($speaker->ActiveInvolvements()->getIdList());
+        $role_ids = array();
+        foreach ($speaker->OrganizationalRoles() as $role) {
+            if($role->IsDefault) {
+                $role_ids[] = $role->ID;
+            } else { //add other
+                $role_ids[] = 0;
+                $this->fields->fieldByName('OtherOrganizationalRole')->setValue($role->Role);
+            }
+        }
+        $this->fields->fieldByName('OrganizationalRole')->setValue($role_ids);
+
+        $inv_ids = array();
+        foreach ($speaker->ActiveInvolvements() as $involvement) {
+            if($involvement->IsDefault) {
+                $inv_ids[] = $involvement->ID;
+            } else { //add other
+                $inv_ids[] = 0;
+                $this->fields->fieldByName('OtherActiveInvolvement')->setValue($involvement->Involvement);
+            }
+        }
+        $this->fields->fieldByName('ActiveInvolvement')->setValue($inv_ids);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
         if(!is_null($countries_2_travel))
@@ -260,9 +279,29 @@ class SpeakerForm extends BootstrapForm
         }
 
         $roles = $this->fields->fieldByName("OrganizationalRole")->Value();
+        if ($roles && in_array(0,$roles)) { // 0 is the id for Other
+            $other_role = $this->fields->fieldByName("OtherOrganizationalRole")->Value();
+            $new_role = SpeakerOrganizationalRole::get()->where("Role = '$other_role'")->first();
+            if (!$new_role) {
+                $new_role = new SpeakerOrganizationalRole(array('Role' => $other_role, 'IsDefault' => 0));
+                $new_role->write();
+            }
+            array_pop($roles);
+            $roles[] = $new_role->ID;
+        }
         $speaker->OrganizationalRoles()->setByIdList($roles);
 
         $involvements = $this->fields->fieldByName("ActiveInvolvement")->Value();
+        if ($involvements && in_array(0,$involvements)) { // 0 is the id for Other
+            $other_involvement = $this->fields->fieldByName("OtherActiveInvolvement")->Value();
+            $new_inv = SpeakerActiveInvolvement::get()->where("Involvement = '$other_involvement'")->first();
+            if (!$new_inv) {
+                $new_inv = new SpeakerActiveInvolvement(array('Involvement' => $other_involvement, 'IsDefault' => 0));
+                $new_inv->write();
+            }
+            array_pop($involvements);
+            $involvements[] = $new_inv->ID;
+        }
         $speaker->ActiveInvolvements()->setByIdList($involvements);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
