@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-lg-10">
                     <label>Speaker</label>
-                    <div class="confirm-item">$Title $FirstName $LastName</div>
+                    <div class="confirm-item">$FirstName $LastName <br> $Title</div>
                     <label>Bio</label>
                     <div class="confirm-item">$Bio</div>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-10">
                     <label>Speaker</label>
-                    <div class="confirm-item">$Title $FirstName $LastName</div>
+                    <div class="confirm-item">$FirstName $LastName <br> $Title</div>
                     <label>Bio</label>
                     <div class="confirm-item">$Bio</div>
                 </div>

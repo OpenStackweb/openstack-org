@@ -8,9 +8,9 @@ class PresentationSpeaker extends DataObject
 {
 
     private static $db = [
-        'FirstName'             => 'Varchar',
-        'LastName'              => 'Varchar',
-        'Title'                 => 'Varchar',
+        'FirstName'             => 'Varchar(100)',
+        'LastName'              => 'Varchar(100)',
+        'Title'                 => 'Varchar(100)',
         'Bio'                   => 'HTMLText',
         'IRCHandle'             => 'Varchar',
         'TwitterName'           => 'Varchar',
