@@ -96,4 +96,8 @@ $(document).ready(function(){
         trimValue: true
     });
 
+    $('input').change(function(){
+       $('#'+form_id+'_HasChanged').val(1);
+    });
+
 });

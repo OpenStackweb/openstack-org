@@ -177,7 +177,9 @@ class SpeakerForm extends BootstrapForm
             ->tinyMCEEditor('Notes',"Notes")
                 ->configure()
                     ->setRows(10)
-                ->end();
+                ->end()
+            ->hidden('HasChanged',0);
+
         return $fields;
     }
 
@@ -257,34 +259,61 @@ class SpeakerForm extends BootstrapForm
 
         $speaker = $dataObject;
 
-        $speaker->AreasOfExpertise()->removeAll();
         $expertise_csv = $this->fields->fieldByName("Expertise")->Value();
-        foreach (explode(',',$expertise_csv) as $expertise) {
-            if(empty($expertise)) continue;
-            $speaker->AreasOfExpertise()->add( SpeakerExpertise::create(array('Expertise' => trim($expertise))));
-        }
+        $expertise_array = explode(',',$expertise_csv);
+        $exp_ids = array();
+        if ($expertise_array) {
+            foreach ($expertise_array as $expertise) {
+                if(empty($expertise)) continue;
+                $expertise = trim($expertise);
+                if (!$anexp = $speaker->AreasOfExpertise()->find('Expertise',$expertise)) {
+                    $anexp = SpeakerExpertise::create(array('Expertise' => $expertise));
+                }
 
-        $speaker->Languages()->removeAll();
+                $anexp->write();
+                $exp_ids[] = $anexp->ID;
+            }
+        }
+        $speaker->AreasOfExpertise()->setByIdList($exp_ids);
+
+
         $language_csv = $this->fields->fieldByName("Language")->Value();
-        foreach (explode(',',$language_csv) as $language) {
-            if(empty($language)) continue;
-            $speaker->Languages()->add( SpeakerLanguage::create(array('Language' => trim($language))));
-        }
+        $language_array = explode(',',$language_csv);
+        $lang_ids = array();
+        if ($language_array) {
+            foreach ($language_array as $language) {
+                if(empty($language)) continue;
+                $language = trim($language);
+                if (!$alang = $speaker->Languages()->find('Language',$language)) {
+                    $alang = SpeakerLanguage::create(array('Language' => $language));
+                }
 
-        $speaker->OtherPresentationLinks()->removeAll();
+                $alang->write();
+                $lang_ids[] = $alang->ID;
+            }
+        }
+        $speaker->Languages()->setByIdList($lang_ids);
+
+        $link_ids = array();
         for($i = 1 ; $i <= 5 ; $i++ ){
             $link = $this->fields->fieldByName("PresentationLink[{$i}]");
             $title = $this->fields->fieldByName("PresentationTitle[{$i}]");
             if(is_null($link)) continue;
-            $link_val   = $link->Value();
-            $title_val   = (is_null($title)) ? '' : $title->Value();
+            $link_val  = trim($link->Value());
             if(empty($link_val)) continue;
+            $title_val = (is_null($title)) ? '' : trim($title->Value());
 
-            $speaker->OtherPresentationLinks()->add( SpeakerPresentationLink::create(array(
-                'LinkUrl' => trim($link_val),
-                'Title' => trim($title_val))
-            ));
+            if (!$alink = $speaker->OtherPresentationLinks()->find('LinkUrl',$link_val)) {
+                $alink = SpeakerPresentationLink::create(array('LinkUrl' => $link_val, 'Title' => $title_val));
+            } else {
+                $alink->Title = $title_val;
+            }
+
+            $alink->write();
+            $link_ids[] = $alink->ID;
         }
+        $speaker->OtherPresentationLinks()->setByIdList($link_ids);
+
 
         $roles = $this->fields->fieldByName("OrganizationalRole")->Value();
         if ($roles && in_array(0,$roles)) { // 0 is the id for Other
@@ -313,18 +342,23 @@ class SpeakerForm extends BootstrapForm
         $speaker->ActiveInvolvements()->setByIdList($involvements);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
-
-        if(!is_null($countries_2_travel))
-        {
-            $speaker->TravelPreferences()->removeAll();
+        $country_ids = array();
+        if(!is_null($countries_2_travel)) {
             $country_array  = $countries_2_travel->Value();
-            foreach($country_array as $country_name)
-            {
-                $speaker->TravelPreferences()->add(SpeakerTravelPreference::create(array(
-                    'Country' => $country_name
-                )));
+            if ($country_array) {
+                foreach($country_array as $country_name)
+                {
+                    if (!$acountry = $speaker->TravelPreferences()->find('Country',$country_name)) {
+                        $acountry = SpeakerTravelPreference::create(array('Country' => $country_name));
+                    }
+
+                    $acountry->write();
+                    $country_ids[] = $acountry->ID;
+                }
             }
         }
+        $speaker->TravelPreferences()->setByIdList($country_ids);
+
     }
 
 }

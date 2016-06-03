@@ -1105,7 +1105,6 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     /**
      * @var  Speaker The speaker being updated
      */
-    protected $speaker;
 
 
     /**
@@ -1258,9 +1257,9 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $this->speaker->FirstName = $this->speaker->Member()->FirstName;
         }
 
-        if (!$this->speaker->Surname)
+        if (!$this->speaker->LastName)
         {
-            $this->speaker->Surname = $this->speaker->Member()->Surname;
+            $this->speaker->LastName = $this->speaker->Member()->Surname;
         }
 
         $speaker_form = SpeakerForm::create
@@ -1364,15 +1363,11 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     public function doSaveSpeaker($data, $form)
     {
         $form->saveInto($this->speaker);
-        $has_changed = $this->speaker->isChanged();
+
+        $changed_fields = $this->speaker->getChangedFields(true,2);
         $this->speaker->write();
 
-        $member = $this->speaker->Member();
-        if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
-            return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
-        }
-
-        if ($has_changed && !$this->isMe()) {
+        if ((!empty($changed_fields) || $this->speaker->HasChanged == 1) && !$this->isMe()) {
             $current_user = Member::currentUser();
             $subject = "Attn: Your OpenStack Member Profile has been updated";
             $body = "A Presentation owner, ".$current_user->getName()." has just updated your Speaker Bio.
@@ -1384,6 +1379,13 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $email = EmailFactory::getInstance()->buildEmail(null, $this->speaker->getEmail(), $subject, $body);
             $email->send();
         }
+
+        $member = $this->speaker->Member();
+        if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
+            return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
+        }
+
+        // Why an if that results in the same return ? ^^^^
 
         return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
     }
