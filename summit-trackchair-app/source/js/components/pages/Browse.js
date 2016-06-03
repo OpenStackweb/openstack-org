@@ -5,6 +5,8 @@ import {fetchPresentations} from '../../actions';
 import CategoryDropdown from '../containers/CategoryDropdown';
 import PresentationSearchForm from '../containers/PresentationSearchForm';
 import FeedItem from '../ui/FeedItem';
+import {browserHistory} from 'react-router';
+import URL from '../../utils/url';
 
 class Browse extends React.Component {
 
@@ -34,6 +36,12 @@ class Browse extends React.Component {
 				keyword: nextProps.search,
 				page: 1
 			});
+		}
+		else if(nextProps.presentations && !nextProps.params.id) {
+			browserHistory.push(URL.create(`browse/${nextProps.presentations[0].id}`, {
+				category: nextProps.category,
+				search: nextProps.search
+			}));
 		}
 	}
 

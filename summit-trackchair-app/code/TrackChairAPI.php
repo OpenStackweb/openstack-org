@@ -321,10 +321,10 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      * @throws null
      */
     public function handleReorderList(SS_HTTPRequest $r)
-    {
-        parse_str($r->getBody(), $vars);
+    {        
+        $vars = Convert::json2array($r->getBody());        
         $sortOrder = $vars['sort_order'];
-        $listID = $vars['list_id'];
+        $listID = $vars['list_id'];        	
         $list = SummitSelectedPresentationList::get()->byId($listID);
 
         if (is_array($sortOrder)) {

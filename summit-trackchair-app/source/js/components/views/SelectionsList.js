@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {moveSelectionUp, moveSelectionDown} from '../../actions';
-import LeaderboardItem from '../ui/LeaderboardItem';
-import Sortable from '../mixins/Sortable';
+import {moveSelectionUp, moveSelectionDown, postReorder} from '../../actions';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import SortableLeaderboardItem from '../containers/SortableLeaderboardItem';
 
 class SelectionsList extends React.Component {
 
@@ -16,16 +17,38 @@ class SelectionsList extends React.Component {
 		};
 	}
 
-	handleUp(key) {
-		this.props.onUp(this.props.list.id, key);
+	handleUp(currentIndex) {
+		let newIndex = currentIndex-1;
+		let {selections} = this.props.list;
+		if(newIndex < 0) {
+			newIndex = currentIndex;
+		}
+
+		this.props.sortSelections(
+			this.props.list.id,
+			selections.move(currentIndex, newIndex)
+		);
 	}
 
-	handleDown(key) {
-		this.props.onDown(this.props.list.id, key);
+	handleDown(currentIndex) {
+		let newIndex = currentIndex+1;
+		let {selections} = this.props.list;
+		if(newIndex >= (selections.length-1)) {
+			newIndex = currentIndex;
+		}
+
+		this.props.sortSelections(
+			this.props.list.id,
+			selections.move(currentIndex, newIndex)			
+		);
 	}
 
-	updateDragState(obj) {
-		//this.setState(obj);
+	updateDragState(dragIndex, hoverIndex) {
+		let {selections} = this.props.list;
+		this.props.sortSelections(
+			this.props.list.id,
+			selections.move(dragIndex, hoverIndex)			
+		);
 	}
 
 	render() {
@@ -36,38 +59,29 @@ class SelectionsList extends React.Component {
 		selections.sort((a,b) => +a.order-+b.order);
 
 		const {can_edit} = this.props.list;
-		const SortableWrapper = Sortable('div');
-
 		return (
-		<div className="selections-list">
-			{selections.map((s,i) => (
-				<SortableWrapper
-					key={s.id}
-					items={selections}
-					item={s}
-					sortId={i}
-					outline="list"
-					updateState={this.updateDragState}
-					>
-
-					<LeaderboardItem						
-						title={s.title}
-						rank={s.order}
-						notes="Fill this in later"
-						onUp={this.handleUp}
-						onDown={this.handleDown}
-						eventKey={s.id}
-						canUp={can_edit && i > 0}
-						canDown={can_edit && i < (selections.length-1)}
-						/>
-
-				</SortableWrapper>
-			))}
-		</div>
+			<div className="selections-list">
+				{selections.map((s,i) => (
+				<SortableLeaderboardItem 
+					key={s.id} 
+					onMove={this.updateDragState} 
+					index={i} 
+					id={s.id}
+					title={s.title}
+					rank={s.order}
+					notes="Fill this in later"
+					onUp={this.handleUp}
+					onDown={this.handleDown}
+					eventKey={i}
+					canUp={can_edit && i > 0}
+					canDown={can_edit && i < (selections.length-1)}				
+					/>	
+				))}
+			</div>
 		);
 	}	
 }
-
+const SortableSelectionsList = DragDropContext(HTML5Backend)(SelectionsList);
 export default connect(
 	state => {
 		return {
@@ -75,12 +89,9 @@ export default connect(
 		}
 	},
 	dispatch => ({
-		onUp(listID, selectionID) {
-			dispatch(moveSelectionUp({listID, selectionID}))
-		},
-		onDown(listID, selectionID) {
-			dispatch(moveSelectionDown({listID, selectionID}))
-		},
+		sortSelections(listID, newOrder) {
+			dispatch(postReorder(listID, newOrder));
+		}
 
 	})
-)(SelectionsList);
+)(SortableSelectionsList);

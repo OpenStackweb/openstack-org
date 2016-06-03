@@ -46,8 +46,7 @@ export const toggleForMe = createAction('TOGGLE_FOR_ME');
 export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
 export const requestLists = createAction('REQUEST_LISTS');
 export const receiveLists = createAction('RECEIVE_LISTS');
-export const moveSelectionUp = createAction('MOVE_SELECTION_UP');
-export const moveSelectionDown = createAction('MOVE_SELECTION_DOWN');
+export const sortSelections = createAction('SORT_SELECTIONS');
 /* Async Actions */
 
 export const fetchSummit = (id) => {
@@ -147,6 +146,24 @@ export const postComment = (presentationID, commentData) => {
 					response: json
 				}));
 			}));
+		schedule(key, req);
+	};
+}
+
+export const postReorder = (listID, newOrder) => {
+	return (dispatch, getState) => {
+		const key = `REORDER_${listID}`;
+		dispatch(sortSelections({listID, selections: newOrder}));
+		cancel(key);
+		const data = {
+			list_id: listID,
+			sort_order: newOrder.map(s => s.id)
+		};
+		console.log(data);
+		const req = http.put('/trackchairs/api/v1/reorder')
+			.send(data)
+			//.type('form')
+			.end(responseHandler());
 		schedule(key, req);
 	};
 }

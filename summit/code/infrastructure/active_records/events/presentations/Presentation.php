@@ -323,15 +323,14 @@ class Presentation extends SummitEvent implements IPresentation
     {
         // see if they have either of the appropiate permissions
         if (!Permission::check('TRACK_CHAIR')) {
+
             return false;
         }
 
         // see if they are a chair of this particular track
-        $IsTrackChair = $this->Category()->TrackChairs('MemberID = ' . Member::currentUser()->ID);
-        if ($IsTrackChair->Count() != 0) {
-            return true;
-        }
-
+        return $this->Category()->TrackChairs()->filter([
+        	'MemberID' => Member::currentUserID()
+        ])->exists();
     }
 
     /**
