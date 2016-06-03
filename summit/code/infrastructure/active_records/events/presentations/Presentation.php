@@ -1003,10 +1003,6 @@ SQL;
             throw new EntityValidationException('AttendeesExpectedLearnt is mandatory!');
         }
 
-        if (empty($this->SelectionMotive)) {
-            throw new EntityValidationException('SelectionMotive is mandatory!');
-        }
-
         if (empty($this->Level)) {
             throw new EntityValidationException('Level is mandatory!');
         }
