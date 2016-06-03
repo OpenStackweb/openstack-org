@@ -1372,7 +1372,7 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $subject = "Attn: Your OpenStack Member Profile has been updated";
             $body = "A Presentation owner, ".$current_user->getName()." has just updated your Speaker Bio.
                 Please double check https://www.openstack.org/profile/speaker to ensure everything looks as expected.
-                If you find a problem with your bio, please send an email to speakersupport@openstack.org and we'll take a look right away.<br>
+                If you find a problem with your bio, please send an email to speakersupport@openstack.org and we'll take a look right away.<br><br>
                 Thank you,<br>
                 OpenStack Speaker Support";
 
