@@ -208,32 +208,37 @@ class PresentationVotingPage_API extends RequestHandler
         $m = Member::currentUser();
         $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();
 
-        if ($r->getVar('category')) {
-            $list = $list->filter(['CategoryID' => $r->getVar('category')]);
-        }
+        if($list) {
+	        if ($r->getVar('category')) {
+	            $list = $list->filter(['CategoryID' => $r->getVar('category')]);
+	        }
 
-        if ($r->getVar('search')) {
-            $k = Convert::raw2sql($r->getVar('search'));
-            $list = $list
-                ->leftJoin(
-                    "Presentation_Speakers",
-                    "Presentation_Speakers.PresentationID = Presentation.ID"
-                )
-                ->leftJoin(
-                    "PresentationSpeaker",
-                    "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID"
-                )
-                ->where("
-                  	SummitEvent.Title LIKE '%{$k}%'
-                  	OR SummitEvent.Description LIKE '%{$k}%'
-                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
-                    OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
-                ");
-        }
+	        if ($r->getVar('search')) {
+	            $k = Convert::raw2sql($r->getVar('search'));
+	            $list = $list
+	                ->leftJoin(
+	                    "Presentation_Speakers",
+	                    "Presentation_Speakers.PresentationID = Presentation.ID"
+	                )
+	                ->leftJoin(
+	                    "PresentationSpeaker",
+	                    "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID"
+	                )
+	                ->where("
+	                  	SummitEvent.Title LIKE '%{$k}%'
+	                  	OR SummitEvent.Description LIKE '%{$k}%'
+	                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
+	                    OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
+	                ");
+	        }
 
-        $total = $list->count();
-        $list = $list->limit($this->limit, $offset);
-
+	        $total = $list->count();
+	        $list = $list->limit($this->limit, $offset);
+    	}
+    	else {
+    		$list = [];
+    		$total = 0;
+    	}
         foreach ($list as $p) {
             $vote = $p->getUserVote();
             $presentations[] = [
