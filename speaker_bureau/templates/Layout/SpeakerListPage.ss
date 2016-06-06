@@ -29,12 +29,14 @@
                 <% end_loop %>
             </select>
 
+            <% cached 'COUNTRIES' %>
             Travel Preference:
             <select id="travel_preference" name="travel_preference[]" multiple="multiple">
                 <% loop AvailableTravelCountries %>
                     <option value="$Country">$Country</option>
                 <% end_loop %>
             </select>
+            <% end_cached %>
         </div>
 
         <input type="submit" class="btn btn-default" value="Go"/>
