@@ -43,8 +43,6 @@ class SpeakerForm extends BootstrapForm
     {
         $organizational_roles = SpeakerOrganizationalRole::get()->where('IsDefault',1)->map('ID','Role');
         $organizational_roles->push(0,'Other');
-        $active_involvements = SpeakerActiveInvolvement::get()->where('IsDefault',1)->map('ID','Involvement');
-        $active_involvements->push(0,'Other');
 
         $fields =  FieldList::create()
             ->text('FirstName',"Speaker's first name")
@@ -166,18 +164,7 @@ class SpeakerForm extends BootstrapForm
                         ->hasCheckedOption(0)
                     ->end()
                 ->end()
-            ->checkboxset('ActiveInvolvement','What is your Active Involvement in the OpenStack Community?  (check all that apply):',$active_involvements)
-            ->text('OtherActiveInvolvement','Please specify your involvement:')
-                ->configure()
-                    ->displayIf('ActiveInvolvement')
-                        ->hasCheckedOption(0)
-                    ->end()
-                ->end()
             ->literal('HR','<hr>')
-            ->tinyMCEEditor('Notes',"Notes")
-                ->configure()
-                    ->setRows(10)
-                ->end()
             ->hidden('HasChanged',0);
 
         return $fields;
@@ -227,17 +214,6 @@ class SpeakerForm extends BootstrapForm
             }
         }
         $this->fields->fieldByName('OrganizationalRole')->setValue($role_ids);
-
-        $inv_ids = array();
-        foreach ($speaker->ActiveInvolvements() as $involvement) {
-            if($involvement->IsDefault) {
-                $inv_ids[] = $involvement->ID;
-            } else { //add other
-                $inv_ids[] = 0;
-                $this->fields->fieldByName('OtherActiveInvolvement')->setValue($involvement->Involvement);
-            }
-        }
-        $this->fields->fieldByName('ActiveInvolvement')->setValue($inv_ids);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
         if(!is_null($countries_2_travel))
@@ -327,19 +303,6 @@ class SpeakerForm extends BootstrapForm
             $roles[] = $new_role->ID;
         }
         $speaker->OrganizationalRoles()->setByIdList($roles);
-
-        $involvements = $this->fields->fieldByName("ActiveInvolvement")->Value();
-        if ($involvements && in_array(0,$involvements)) { // 0 is the id for Other
-            $other_involvement = $this->fields->fieldByName("OtherActiveInvolvement")->Value();
-            $new_inv = SpeakerActiveInvolvement::get()->where("Involvement = '$other_involvement'")->first();
-            if (!$new_inv) {
-                $new_inv = new SpeakerActiveInvolvement(array('Involvement' => $other_involvement, 'IsDefault' => 0));
-                $new_inv->write();
-            }
-            array_pop($involvements);
-            $involvements[] = $new_inv->ID;
-        }
-        $speaker->ActiveInvolvements()->setByIdList($involvements);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
         $country_ids = array();
