@@ -768,7 +768,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             (
                 FormAction::create('savePresentationSummary', 'Save and continue')->addExtraClass('btn-primary')
             ),
-            $this->parent->Summit(),
+            $this->Summit(),
             $this->parent->getPresentationManager(),
             $this->presentation
         );
