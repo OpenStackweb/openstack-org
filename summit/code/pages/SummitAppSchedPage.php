@@ -24,6 +24,11 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     private $event_repository;
 
     /**
+     * @var IRSVPRepository
+     */
+    private $rsvp_repository;
+
+    /**
      * @return ISpeakerRepository
      */
     public function getSpeakerRepository()
@@ -53,6 +58,22 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     public function setEventRepository(ISummitEventRepository $event_repository)
     {
         $this->event_repository = $event_repository;
+    }
+
+    /**
+     * @return IRSVPRepository
+     */
+    public function getRSVPRepository()
+    {
+        return $this->rsvp_repository;
+    }
+
+    /**
+     * @param IRSVPRepository $rsvp_repository
+     */
+    public function setRSVPRepository(IRSVPRepository $rsvp_repository)
+    {
+        $this->rsvp_repository = $rsvp_repository;
     }
 
 
@@ -159,6 +180,20 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
                 'Event' => $event,
             )
         );
+    }
+
+    /**
+     * @return Form|string
+     * @throws NotFoundEntityException
+     */
+    public function RSVPForm($event_id)
+    {
+        $event = $this->event_repository->getById($event_id);
+        $rsvp_template  = $event->RSVPTemplate();
+        $rsvp = $this->rsvp_repository->getByEventAndSubmitter($event_id,Member::currentUserID());
+        $builder = new RSVPTemplateUIBuilder();
+        $form = $builder->build($rsvp_template,$rsvp,$event);
+        return $form;
     }
 
     public function ExportEventToICS(SS_HTTPRequest $request)

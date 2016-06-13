@@ -87,3 +87,25 @@ SummitLocationMap:
 SummitLocationImage:
   extensions:
     - SummitEntity
+
+Injector:
+    RSVPTextBoxUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPMemberEmailUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPMemberFirstNameUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPMemberLastNameUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPTextAreaUIBuilder:
+        class: RSVPTextAreaQuestionTemplateUIBuilder
+    RSVPCheckBoxUIBuilder:
+        class: RSVPCheckBoxQuestionTemplateUIBuilder
+    RSVPCheckBoxListUIBuilder:
+        class: RSVPCheckBoxListQuestionTemplateUIBuilder
+    RSVPRadioButtonListUIBuilder:
+        class: RSVPRadioButtonListQuestionTemplateUIBuilder
+    RSVPComboBoxUIBuilder:
+        class: RSVPDropDownQuestionTemplateUIBuilder
+    RSVPLiteralUIBuilder:
+      class: RSVPLiteralQuestionTemplateUIBuilder

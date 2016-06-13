@@ -24,6 +24,7 @@ SummitAppSchedPage_Controller:
   dependencies:
     SpeakerRepository: "%$SpeakerRepository"
     EventRepository: "%$EventRepository"
+    RSVPRepository: "%$RSVPRepository"
 Injector:
   SchedRestfulService:
     class: RestfulService
@@ -38,6 +39,8 @@ Injector:
     class: SapphireSummitEventRepository
   SpeakerRegistrationRequestRepository:
     class: SapphireSpeakerRegistrationRequestRepository
+  RSVPRepository:
+    class: SapphireRSVPRepository
   SpeakerRegistrationRequestFactory:
     class: SapphireSpeakerRegistrationRequestFactory
     constructor:

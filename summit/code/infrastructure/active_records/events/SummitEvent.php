@@ -31,7 +31,8 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $has_many = array
     (
-        'Feedback' => 'SummitEventFeedback',
+        'Feedback'        => 'SummitEventFeedback',
+        'RSVPSubmissions' => 'RSVP',
     );
 
     private static $defaults = array
@@ -52,9 +53,10 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $has_one = array
     (
-        'Location' => 'SummitAbstractLocation',
-        'Summit'   => 'Summit',
-        'Type'     => 'SummitEventType',
+        'Location'     => 'SummitAbstractLocation',
+        'Summit'       => 'Summit',
+        'Type'         => 'SummitEventType',
+        'RSVPTemplate' => 'RSVPTemplate',
     );
 
     private static $summary_fields = array
@@ -430,6 +432,26 @@ class SummitEvent extends DataObject implements ISummitEvent
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $feedback = new GridField('Feedback', 'Feedback', $this->Feedback(), $config);
             $f->addFieldToTab('Root.Feedback', $feedback);
+
+            // rsvp
+            $rsvp_template = new DropdownField('RSVPTemplateID','Select a Template',RSVPTemplate::get()->map());
+            $rsvp_template->setEmptyString('-- Select a RSVP Template --');
+            $f->addFieldToTab('Root.RSVP', $rsvp_template);
+
+            if ($this->RSVPTemplate()->exists()) {
+                $config = new GridFieldConfig_RecordEditor(100);
+                $config->removeComponentsByType('GridFieldAddNewButton');
+                $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+                $rsvps = new GridField('RSVPSubmissions', 'RSVP Submissions', $this->RSVPSubmissions(), $config);
+                $f->addFieldToTab('Root.RSVP', $rsvps);
+            } else {
+                $f->addFieldToTab('Root.RSVP', LiteralField::create('AddNew','Or add a new one'));
+                $config = new GridFieldConfig_RecordEditor(100);
+                $rsvp_templates = new GridField('RSVPTemplates', 'RSVP Templates', RSVPTemplate::get(), $config);
+                $f->addFieldToTab('Root.RSVP', $rsvp_templates);
+            }
+
+
         }
         return $f;
     }

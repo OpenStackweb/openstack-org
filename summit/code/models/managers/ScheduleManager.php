@@ -44,6 +44,11 @@ final class ScheduleManager
     private $attendee_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $rsvp_repository;
+
+    /**
      * @var ITransactionManager
      */
     private $tx_manager;
@@ -63,6 +68,7 @@ final class ScheduleManager
         IEntityRepository $eventfeedback_repository,
         IEventFeedbackFactory $eventfeedback_factory,
         IEntityRepository $attendee_repository,
+        IEntityRepository $rsvp_repository,
         ITransactionManager $tx_manager
     ) {
         $this->summitevent_repository = $summitevent_repository;
@@ -70,6 +76,7 @@ final class ScheduleManager
         $this->eventfeedback_repository = $eventfeedback_repository;
         $this->eventfeedback_factory = $eventfeedback_factory;
         $this->attendee_repository = $attendee_repository;
+        $this->rsvp_repository = $rsvp_repository;
         $this->tx_manager = $tx_manager;
     }
 
@@ -276,4 +283,78 @@ final class ScheduleManager
         });
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function addRSVP($data)
+    {
+        $rsvp_repository        = $this->rsvp_repository;
+        $attendee_repository    = $this->attendee_repository;
+        $summitevent_repository = $this->summitevent_repository;
+
+        return $this->tx_manager->transaction(function () use (
+            $data,
+            $attendee_repository,
+            $rsvp_repository,
+            $summitevent_repository
+        ) {
+
+            $member_id = intval($data['member_id']);
+            $summit_id = intval($data['summit_id']);
+            $event_id = intval($data['event_id']);
+
+            $attendee  = $attendee_repository->getByMemberAndSummit($member_id, $summit_id);
+            $event     = $summitevent_repository->getById($event_id);
+
+            if (!$attendee) {
+                throw new NotFoundEntityException('Attendee', '');
+            }
+
+            if (!$event) {
+                throw new NotFoundEntityException('Attendee', '');
+            }
+
+            if (!$event->RSVPTemplate()) {
+                throw new NotFoundEntityException('RSVPTemplate', '');
+            }
+
+            $rsvp = $rsvp_repository->getByEventAndSubmitter($event_id,$member_id);
+            if (!$rsvp) {
+                $rsvp = new RSVP();
+                $rsvp->EventID = $event_id;
+                $rsvp->SubmittedByID = $member_id;
+            }
+
+            foreach ($event->RSVPTemplate()->getQuestions() as $q)
+            {
+                $key = array_search($q->name(), array_column($data, 'name'));
+
+                if ($key !== false)
+                {
+                    if (!$rsvp || !$answer = $rsvp->findAnswerByQuestion($q)) {
+                        $answer = new RSVPAnswer();
+                    }
+
+                    $answer_value = $data[$key]['value'];
+
+                    if(is_array($answer_value) ){
+                        $answer_value = str_replace('{comma}', ',', $answer_value);
+                        $answer->Value = implode(',', $answer_value);
+                    }
+                    else{
+                        $answer->Value = $answer_value;
+                    }
+                    $answer->QuestionID = $q->getIdentifier();
+                    $answer->write();
+
+                    $rsvp->addAnswer($answer);
+                }
+            }
+
+            $rsvp->write();
+
+            return $rsvp;
+        });
+    }
 } 
