@@ -278,7 +278,7 @@ class PresentationVotingPage_API extends RequestHandler
             'category' => $presentation->Category()->Title,
             'speakers' => [],
             'user_vote' => $vote ? $vote->Vote : null,
-            'user_comment' => $vote ? [
+            'user_comment' => $vote && $vote->Content ? [
                 'id' => $vote->ID,
                 'comment' => nl2br($vote->Content),
                 'date' => $vote->obj('Created')->Format('F j, Y'),
