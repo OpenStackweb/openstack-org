@@ -114,7 +114,7 @@ SQL;
 
         $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND SummitEventType.Type != 'Presentation'";
         if (!empty($search_term)) {
-            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%')";
+            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.ID = '{$search_term}' OR SummitEvent.Description LIKE '%{$search_term}%')";
         }
         if(!empty($event_type)){
             $where_clause .= " AND SummitEvent.TypeID = {$event_type}";

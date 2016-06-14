@@ -39,7 +39,8 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         if ($search_term) {
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
             $where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
-            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' )";
+            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%'";
+            $where_clause .= " OR PresentationSpeaker.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}' )";
         }
 
         $filter['Status'] = Presentation::STATUS_RECEIVED;
@@ -93,6 +94,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             SummitEvent.Title LIKE '%{$search_term}%'
             OR SummitEvent.Description LIKE '%{$search_term}%'
             OR SummitEvent.ShortDescription LIKE '%{$search_term}%'
+            OR SummitEvent.ID = '{$search_term}'
             OR EXISTS
                 (
                         SELECT 1 FROM PresentationSpeaker
@@ -103,6 +105,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
                             PresentationSpeaker.FirstName LIKE '%{$search_term}%'
                             OR PresentationSpeaker.LastName LIKE '%{$search_term}%'
                             OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%'
+                            OR PresentationSpeaker.ID = '{$search_term}'
                         )
                 )
             )
@@ -204,7 +207,8 @@ SQL;
         if ($search_term) {
             $where_clause .= "AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
             $where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
-            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%' ) ";
+            $where_clause .= " OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%'";
+            $where_clause .= " OR PresentationSpeaker.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}' ) ";
         }
 
         $where_clause .= $track_filter;
