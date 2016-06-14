@@ -15,28 +15,40 @@
 class SummitSelectedPresentationList extends DataObject
 {
 
-    static $db = array
-    (
-        'Name'     => 'Text',
+    /**
+     * @var array
+     */
+    private static $db = [
+        'Name' => 'Text',
         'ListType' => "Enum('Individual,Group','Individual')"
-    );
+    ];
 
-    static $has_one = array
-    (
+    /**
+     * @var array
+     */
+    private static $has_one = [
         'Category' => 'PresentationCategory',
-        'Member'   => 'Member'
-    );
+        'Member' => 'Member'
+    ];
 
-    static $has_many = array(
+    /**
+     * @var array
+     */
+    private static $has_many = [
         'SummitSelectedPresentations' => 'SummitSelectedPresentation'
-    );
+    ];
 
-    private static $summary_fields = array
-    (
+    /**
+     * @var array
+     */
+    private static $summary_fields = [
         'Category.Title' => 'Name',
-    );
+    ];
 
 
+    /**
+     * @return FieldList
+     */
     public function getCMSFields()
     {
 
@@ -45,13 +57,14 @@ class SummitSelectedPresentationList extends DataObject
         );
 
         $f->addFieldToTab('Root.Main', new TextField('Name', 'Name'));
-        $f->addFieldToTab('Root.Main', $ddl = new DropdownField('ListType', 'ListType',  $this->dbObject('ListType')->enumValues()));
-        $f->addFieldToTab('Root.Main', $ddl2 = new DropdownField('CategoryID', 'Category',  PresentationCategory::get()->filter('SummitID', $_REQUEST['SummitID'] )->map('ID', 'Title')));
+        $f->addFieldToTab('Root.Main',
+            $ddl = new DropdownField('ListType', 'ListType', $this->dbObject('ListType')->enumValues()));
+        $f->addFieldToTab('Root.Main', $ddl2 = new DropdownField('CategoryID', 'Category',
+            PresentationCategory::get()->filter('SummitID', $_REQUEST['SummitID'])->map('ID', 'Title')));
         $ddl->setEmptyString('-- Select List Type --');
         $ddl2->setEmptyString('-- Select Track  --');
-        if($this->ID > 0)
-        {
-            $config     = GridFieldConfig_RecordEditor::create(25);
+        if ($this->ID > 0) {
+            $config = GridFieldConfig_RecordEditor::create(25);
 
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent(new GridFieldPublishSummitEventAction);
@@ -73,7 +86,8 @@ ORDER BY SummitSelectedPresentation.Order ASC
                 $presentations->add(new Presentation($row));
             }
 
-            $gridField = new GridField('SummitSelectedPresentations', 'Selected Presentations', $presentations , $config);
+            $gridField = new GridField('SummitSelectedPresentations', 'Selected Presentations', $presentations,
+                $config);
             $gridField->setModelClass('Presentation');
             $f->addFieldToTab('Root.Main', $gridField);
 
@@ -82,7 +96,10 @@ ORDER BY SummitSelectedPresentation.Order ASC
     }
 
 
-    function SortedPresentations()
+    /**
+     * @return mixed
+     */
+    public function SortedPresentations()
     {
         return SummitSelectedPresentation::get()->filter(array(
             'SummitSelectedPresentationListID' => $this->ID,
@@ -90,7 +107,10 @@ ORDER BY SummitSelectedPresentation.Order ASC
         ))->sort('Order', 'ASC');
     }
 
-    function UnsortedPresentations()
+    /**
+     * @return mixed
+     */
+    public function UnsortedPresentations()
     {
         return SummitSelectedPresentation::get()->filter(array(
             'SummitSelectedPresentationListID' => $this->ID,
@@ -98,7 +118,10 @@ ORDER BY SummitSelectedPresentation.Order ASC
         ))->sort('Order', 'ASC');
     }
 
-    function UnusedPostions()
+    /**
+     * @return ArrayList
+     */
+    public function UnusedPostions()
     {
 
         // Define the columns
@@ -118,6 +141,10 @@ ORDER BY SummitSelectedPresentation.Order ASC
 
     }
 
+    /**
+     * @param $SummitCategoryID
+     * @return mixed
+     */
     public static function getAllListsByCategory($SummitCategoryID)
     {
 
@@ -166,11 +193,17 @@ ORDER BY SummitSelectedPresentation.Order ASC
         return $results;
     }
 
+    /**
+     * @return mixed
+     */
     public function maxPresentations()
     {
         return $this->Category()->SessionCount;
     }
 
+    /**
+     * @return bool
+     */
     public function memberCanEdit()
     {
 
@@ -184,11 +217,18 @@ ORDER BY SummitSelectedPresentation.Order ASC
 
     }
 
+    /**
+     * @return bool
+     */
     public function mine()
     {
         return $this->MemberID == Member::currentUser()->ID;
     }
 
+    /**
+     * @param $SummitCategoryID
+     * @return bool|SummitSelectedPresentationList
+     */
     public static function getMemberList($SummitCategoryID)
     {
 
@@ -214,6 +254,5 @@ ORDER BY SummitSelectedPresentation.Order ASC
         }
 
         return $SummitSelectedPresentationList;
-
     }
 }

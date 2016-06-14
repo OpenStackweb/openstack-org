@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import CategoryDropdown from '../containers/CategoryDropdown';
-import ListList from '../views/ListList';
+import ListDropdown from '../containers/ListDropdown';
 import {fetchLists} from '../../actions';
 import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
@@ -22,6 +22,9 @@ class Selections extends React.Component {
 		if(nextProps.category !== this.props.category) {
 			this.props.fetch(nextProps.category);
 		}
+		if(nextProps.lists && !this.props.params.id) {
+			browserHistory.push(URL.create(`selections/${nextProps.lists[0].id}`, true));
+		}
 	}
 
     render () {
@@ -30,16 +33,16 @@ class Selections extends React.Component {
     	}
 
         return (
-            <div>
-               <div className="col-lg-4">
-                  <div className="ibox float-e-margins">
-                  	<CategoryDropdown />
-	                <ListList lists={this.props.lists} category={this.props.category} />
-	               </div>
+            <div className="selections">
+                <div className="row">
+					<div className="col-lg-4">
+						<strong>Category</strong>: <CategoryDropdown autoSelect />
+					</div>
+					<div className="col-lg-4">
+						<strong>List</strong>: <ListDropdown list={this.props.params.id} category={this.props.category} />
+					</div>
                 </div>
-                <div className="col-lg-8">
-               		{this.props.children}
-                </div>
+                {this.props.children}
             </div>
         );
     }
@@ -53,7 +56,7 @@ export default connect(
 		defaultCategory: state.summit.data.categories[0]		
 	}),
 	dispatch => ({
-		fetch(category) {	
+		fetch(category) {
 			dispatch(fetchLists(category))
 		}
 	})

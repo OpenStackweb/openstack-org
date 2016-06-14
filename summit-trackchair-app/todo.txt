@@ -1,0 +1,33 @@
+Browse
+	- New filters: 
+		All, 
+		Seen, 
+		Unseen, 
+		Moved here (and unseen), 
+		Selected, 
+		Maybe, 
+		Pass
+	- List view meta:
+		# selected
+		# maybe
+		# pass
+		#score
+	- Bug: browse should go to detail presentation if exists
+
+Browse Detail
+	- Action for approve category change
+	- Email speakers
+	- Activity log and notifications
+	- Signal team selection
+
+Selections
+	- Need remove button
+	- Send to team list
+	- Slush pile drawer
+	- Add team list
+
+Directory
+	Check resort on revisit
+
+Change Requests
+	Link presentations

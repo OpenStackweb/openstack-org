@@ -54,7 +54,7 @@ class SelectionsList extends React.Component {
 	render() {
 		if(!this.props.list) return <div>Not found</div>;
 		
-		let {selections} = this.props.list;
+		let {selections} = this.props;
 		selections = selections || [];
 		selections.sort((a,b) => +a.order-+b.order);
 
@@ -69,12 +69,14 @@ class SelectionsList extends React.Component {
 					id={s.id}
 					title={s.title}
 					rank={s.order}
-					notes="Fill this in later"
+					list={this.props.list}
 					onUp={this.handleUp}
 					onDown={this.handleDown}
 					eventKey={i}
 					canUp={can_edit && i > 0}
-					canDown={can_edit && i < (selections.length-1)}				
+					canDown={can_edit && i < (selections.length-1)}
+					canUp={true}
+					canDown={true}
 					/>	
 				))}
 			</div>

@@ -11,7 +11,8 @@ const cardSource = {
   beginDrag(props) {
     return {
       id: props.id,
-      index: props.index
+      index: props.index,
+      listID: props.list.id
     };
   }
 };
@@ -20,9 +21,11 @@ const cardTarget = {
   hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
+    const dragList = monitor.getItem().listID;
+    const hoverList = props.list.id;
 
     // Don't replace items with themselves
-    if (dragIndex === hoverIndex) {
+    if (dragIndex === hoverIndex && dragList === hoverList) {
       return;
     }
 
@@ -43,23 +46,19 @@ const cardTarget = {
     // When dragging upwards, only move when the cursor is above 50%
 
     // Dragging downwards
-    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY && dragList === hoverList) {
       return;
     }
 
     // Dragging upwards
-    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY && dragList === hoverList) {
       return;
     }
 
     // Time to actually perform the action
-    props.onMove(dragIndex, hoverIndex);
-
-    // Note: we're mutating the monitor item here!
-    // Generally it's better to avoid mutations,
-    // but it's good here for the sake of performance
-    // to avoid expensive index searches.
+    props.onMove(dragIndex, hoverIndex, dragList, hoverList);
     monitor.getItem().index = hoverIndex;
+    monitor.getItem().listID = hoverList;
   }
 };
 
@@ -73,7 +72,7 @@ class SortableLeaderboardItem extends Component {
     	connectDropTarget,
     	connectDragPreview 
     } = this.props;
-    const opacity = isDragging ? 1 : 1;
+    const opacity = isDragging ? 0.5 : 1;
 
     return connectDragSource(connectDropTarget(
       <div style={{ ...style, opacity }}>

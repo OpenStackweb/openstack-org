@@ -230,7 +230,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $data['results'][] = [
                 'id' => $p->ID,
                 'title' => $p->Title,
-                'selected' => $p->isSelected(),
+                'viewed' => $p->isViewedByTrackChair(),
+                'selected' => $p->getSelectionType(),
                 'vote_count' => $p->CalcVoteCount(),
                 'vote_average' => $p->CalcVoteAverage(),
                 'total_points' => $p->CalcTotalPoints(),
@@ -374,8 +375,45 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $changeRequests = SummitCategoryChange::get()
             ->innerJoin('Presentation', 'Presentation.ID = PresentationID')
             ->innerJoin('SummitEvent', 'Presentation.ID = SummitEvent.ID')
-            ->filter('SummitEvent.SummitID', $summitID)
-            ->sort('Done', 'ASC');
+            ->leftJoin('PresentationCategory', 'OldCategory.ID = Presentation.CategoryID','OldCategory')
+            ->leftJoin('PresentationCategory', 'NewCategory.ID = SummitCategoryChange.NewCategoryID','NewCategory')
+            ->leftJoin('Member', 'Member.ID = SummitCategoryChange.ReqesterID')
+            ->filter('SummitEvent.SummitID', $summitID);
+
+        $sortCol = $r->getVar('sortCol') ?: 'Done';
+        $sortDir = $r->getVar('sortDir') == -1 ? 'DESC' : 'ASC';
+        $search = $r->getVar('search');
+
+        switch($sortCol) {
+        	case 'presentation':
+        		$sortClause = "SummitEvent.Title";
+        		break;
+        	case 'status':
+        		$sortClause = "Done";
+        		break;
+        	case 'oldcat':
+        		$sortClause = "OldCategory.Title";
+        		break;
+        	case 'newcat':
+        		$sortClause = "NewCategory.Title";
+        		break;
+        	case 'requester':
+        		$sortClause = "Member.Surname";
+        		break;
+        	default:
+        		$sortClause = "Done";
+        }
+
+        $changeRequests = $changeRequests->sort($sortClause, $sortDir);
+
+        if($search) {
+        	$changeRequests = $changeRequests->filterAny([
+        		'SummitEvent.Title:PartialMatch' => $search,
+        		'OldCategory.Title' => $search,
+        		'NewCategory.Title' => $search,
+        		'Member.Surname' => $search
+        	]);
+        }
 
         $isAdmin = Permission::check('ADMIN');
         $memID = Member::currentUserID();
@@ -655,6 +693,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         'POST comment' => 'handleAddComment',
         'PUT select' => 'handleSelect',
         'PUT unselect' => 'handleUnselect',
+        'PUT markasviewed' => 'handleMarkAsViewed',
         'PUT group/select' => 'handleGroupSelect',
         'PUT group/unselect' => 'handleGroupUnselect',
         'GET categorychange/new' => 'handleCategoryChangeRequest',
@@ -669,6 +708,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         'handleAddComment',
         'handleSelect',
         'handleUnselect',
+        'handleMarkAsViewed',
         'handleCategoryChangeRequest',
         'handleGroupSelect',
         'handleGroupUnselect'
@@ -887,6 +927,16 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         return new SS_HTTPResponse("Presentation unselected.", 200);
 
+    }
+
+    public function handleMarkAsViewed(SS_HTTPResponse $r) 
+    {
+    	try {
+    		$this->presentation->markAsViewedByTrackChair();
+    		return new SS_HTTPResponse('Marked as viewed');
+    	} catch(Exception $e) {
+    		return new SS_HTTPResponse("Error", 500);
+    	}
     }
 
     /**

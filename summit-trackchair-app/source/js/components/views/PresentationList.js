@@ -20,6 +20,7 @@ const PresentationList = ({
 	            		key={presentation.id} 
 	            		active={presentation.active}
 	            		description={presentation.speakers}
+	            		muted={!!presentation.viewed}
 	            		notes={`Avg. vote: ${presentation.vote_average}`}
 	            		title={presentation.title} />
 	            </RouterLink>

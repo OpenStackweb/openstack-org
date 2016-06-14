@@ -4,9 +4,10 @@ export default ({
     title,
     description,
     notes,
-    active
+    active,
+    muted
 }) => (
-   <div className={`feed-element ${active ? 'active' : ''}`}>
+   <div className={`feed-element ${active ? 'active' : ''} ${muted ? 'muted' : ''}`}>
       <div>
          <strong>{title}</strong>
          <div>{description}</div>

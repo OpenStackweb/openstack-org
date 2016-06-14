@@ -5,4 +5,7 @@ Director:
   rules:
     'trackchairs/api/v1': 'TrackChairAPI'
 TrackChairAPI:
-  default_page_size: 20
+  default_page_size: 50
+Presentation:
+  extensions:
+    - PresentationTrackChairFeatures

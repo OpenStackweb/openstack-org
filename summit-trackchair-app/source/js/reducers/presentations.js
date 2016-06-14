@@ -4,7 +4,8 @@ export const presentations = function (
         results: null,
         has_more: false,
         loading: false,
-        page: 0
+        page: 0,
+        filter: 'all'
     },
     action = {}) {	
     switch(action.type) {
@@ -26,6 +27,26 @@ export const presentations = function (
                 loading: false
             };
 
+        case 'ACTIVATE_PRESENTATION_FILTER':
+        	return {
+        		...state,
+        		filter: action.payload
+        	};
+
+        case 'MARK_AS_READ':
+        	return {
+        		...state,
+        		results: state.results.map(p => {
+        				if(+p.id === +action.payload) {
+        					return {
+        						...p,
+        						viewed: true
+        					};
+        				}
+
+        				return p;
+        			})
+        	};
         default:
             return state;
 

@@ -16,7 +16,10 @@ export const lists = function (
         case 'RECEIVE_LISTS':
             return {
                 ...state,
-                results: [...action.payload.response.lists],                
+                results: [
+                	...action.payload.response.lists
+                			.sort((a,b) => a.list_type !== 'Group')
+                ],
                 loading: false
             };
 

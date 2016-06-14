@@ -15,19 +15,27 @@
 class SummitTrackChair extends DataObject
 {
 
-    static $has_one = array(
+    /**
+     * @var array
+     */
+    private static $has_one = [
         'Member' => 'Member',
         'Summit' => 'Summit'
-    );
+    ];
 
-    static $many_many = array(
+    /**
+     * @var array
+     */
+    private static $many_many = [
         'Categories' => 'PresentationCategory'
-    );
+    ];
 
-    private static $summary_fields = array
-    (
-        'Member.Email'  => 'Member',
-    );
+    /**
+     * @var array
+     */
+    private static $summary_fields = [
+        'Member.Email' => 'Member',
+    ];
 
     /**
      * @param $member
@@ -39,7 +47,7 @@ class SummitTrackChair extends DataObject
     {
 
         $priorChair = SummitTrackChair::get()->filter('MemberID', $member->ID)->first();
-        $category   = PresentationCategory::get()->byID($category_id);
+        $category = PresentationCategory::get()->byID($category_id);
 
         if (!$priorChair) {
             $chair = new self();
@@ -64,6 +72,9 @@ class SummitTrackChair extends DataObject
         }
     }
 
+    /**
+     * @return FieldList
+     */
     public function getCMSFields()
     {
 
@@ -76,20 +87,27 @@ class SummitTrackChair extends DataObject
         $f->addFieldsToTab('Root.Main', new HiddenField('SummitID', 'SummitID'));
         $f->addFieldsToTab('Root.Main', new MemberAutoCompleteField('Member', 'Member'));
 
-        if($this->ID > 0) {
-            $config     = GridFieldConfig_RelationEditor::create(25);
-            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList(PresentationCategory::get()->filter('SummitID', $summit_id ));
+        if ($this->ID > 0) {
+            $config = GridFieldConfig_RelationEditor::create(25);
+            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList(PresentationCategory::get()->filter('SummitID',
+                $summit_id));
             $categories = new GridField('Categories', 'Presentation Categories', $this->Categories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
         }
         return $f;
     }
 
-    protected function validate(){
+    /**
+     * @return mixed
+     */
+    protected function validate()
+    {
 
         $summit_id = $_REQUEST['SummitID'];
         $valid = parent::validate();
-        if(!$valid->valid()) return $valid;
+        if (!$valid->valid()) {
+            return $valid;
+        }
         $old_one = SummitTrackChair::get()->filter
         (
             array
@@ -99,8 +117,7 @@ class SummitTrackChair extends DataObject
             )
         )->first();
 
-        if(!is_null($old_one))
-        {
+        if (!is_null($old_one)) {
             return $valid->error('Already exists a track chair for this member!');
         }
         return $valid;

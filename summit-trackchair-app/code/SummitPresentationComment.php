@@ -15,17 +15,25 @@
 class SummitPresentationComment extends DataObject
 {
 
-    static $db = array
-    (
+    /**
+     * @var array
+     */
+    private static $db = [
         'Body' => 'Text',
         'IsCategoryChangeSuggestion' => 'Boolean',
-    );
+    ];
 
-    static $has_one = array(
+    /**
+     * @var array
+     */
+    private static $has_one = [
         'Presentation' => 'Presentation',
         'Commenter' => 'Member',
-    );
+    ];
 
+    /**
+     * @return string
+     */
     public function getDateNice()
     {
         $timestamp = strtotime($this->Created);

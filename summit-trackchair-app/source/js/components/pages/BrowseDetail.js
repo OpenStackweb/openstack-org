@@ -1,11 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Initials from '../ui/Initials';
-import {fetchPresentationDetail, postMySelection, postGroupSelection} from '../../actions';
+import {
+	fetchPresentationDetail, 
+	postMySelection, 
+	postGroupSelection,
+	postMarkAsRead
+} from '../../actions';
 import PresentationCommentForm from '../containers/PresentationCommentForm';
 import PresentationMeta from '../views/PresentationMeta';
 import PresentationActivity from '../views/PresentationActivity';
 import PresentationSpeakers from '../views/PresentationSpeakers';
+import SelectionButtonBar from '../containers/SelectionButtonBar';
 
 class BrowseDetail extends React.Component {
 
@@ -21,6 +27,10 @@ class BrowseDetail extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.params.id !== this.props.params.id) {
 			this.props.fetch(nextProps.params.id);
+		}
+
+		if(nextProps.presentation && !nextProps.presentation.viewed) {
+			this.props.markAsRead(nextProps.params.id);
 		}
 	}
 
@@ -52,13 +62,10 @@ class BrowseDetail extends React.Component {
 			            <div className="col-lg-12">
 			            {p.can_assign &&
 			               <div className="row">
-			                  <div className="col-lg-3 pull-right">
-			                     <a onClick={this.toggleMySelection} href="#" className="btn btn-primary btn-xs">
-			                     	<i className={`fa fa-${p.selected ? 'minus' : 'plus'}`}></i> My list
-			                     </a>
-			                     <a onClick={this.toggleGroupSelection} href="#" className="btn btn-warning btn-xs">
-			                     	<i className={`fa fa-${p.group_selected ? 'minus' : 'plus'}`}></i> Team list
-			                     </a>
+			                  <div className="col-lg-4 col-lg-offset-8">
+			                  	<div className="pull-right">
+			                  		<SelectionButtonBar />
+			                  	</div>
 			                  </div>
 			               </div>
 			            }
@@ -86,11 +93,8 @@ export default connect(
 		fetch(id) {
 			dispatch(fetchPresentationDetail(id));
 		},
-		toggleForMe(presentationID, bool) {
-			dispatch(postMySelection(presentationID, bool));
-		},
-		toggleForGroup(presentationID, bool) {
-			dispatch(postGroupSelection(presentationID, bool));
+		markAsRead(presentationID) {
+			dispatch(postMarkAsRead(presentationID));
 		}
 
 	})

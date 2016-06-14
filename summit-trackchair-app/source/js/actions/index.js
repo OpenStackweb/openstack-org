@@ -47,6 +47,14 @@ export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
 export const requestLists = createAction('REQUEST_LISTS');
 export const receiveLists = createAction('RECEIVE_LISTS');
 export const sortSelections = createAction('SORT_SELECTIONS');
+export const sortDirectory = createAction('SORT_DIRECTORY');
+export const searchDirectory = createAction('SEARCH_DIRECTORY');
+export const requestChangeRequests = createAction('REQUEST_CHANGE_REQUESTS');
+export const receiveChangeRequests = createAction('RECEIVE_CHANGE_REQUESTS');
+export const sortChangeRequests = createAction('SORT_CHANGE_REQUESTS');
+export const searchChangeRequests = createAction('SEARCH_CHANGE_REQUESTS');
+export const activatePresentationFilter = createAction('ACTIVATE_PRESENTATION_FILTER');
+export const markAsRead = createAction('MARK_AS_READ');
 /* Async Actions */
 
 export const fetchSummit = (id) => {
@@ -62,6 +70,12 @@ export const fetchPresentations = createRequestReceiveAction(
     requestPresentations,
     receivePresentations,
     ''
+);
+
+export const fetchChangeRequests = createRequestReceiveAction(
+    requestChangeRequests,
+    receiveChangeRequests,
+    'changerequests'
 );
 
 export const fetchLists = (category) => {
@@ -159,13 +173,31 @@ export const postReorder = (listID, newOrder) => {
 			list_id: listID,
 			sort_order: newOrder.map(s => s.id)
 		};
-		console.log(data);
 		const req = http.put('/trackchairs/api/v1/reorder')
 			.send(data)
-			//.type('form')
 			.end(responseHandler());
 		schedule(key, req);
 	};
 }
+
+export const postMarkAsRead = (presentationID) => {
+	return (dispatch) => {
+		const key = `MARK_AS_READ_${presentationID}`;
+		dispatch(markAsRead(presentationID));
+		cancel(key);
+
+		const url = URL.create(
+			`presentation/${presentationID}/markasviewed`,
+			{},
+			'/trackchairs/api/v1'
+		);
+
+		const req = http.put(url)
+			.end(responseHandler(dispatch, json => {
+			}));
+		schedule(key, req);
+	}
+};
+
 
 /*eslint-enable */

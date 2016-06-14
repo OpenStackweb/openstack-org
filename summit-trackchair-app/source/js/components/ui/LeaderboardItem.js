@@ -23,14 +23,19 @@ class LeaderboardItem extends React.Component {
 		return (
 		<div className="vote-item">
 			<div className="row">
-				<div className="col-md-10">
+				<div className="col-md-2 ">
+					<div className="vote-icon">
+						#{rank}
+					</div>
+				</div>
+				<div className="col-md-10 vote-content">
 					<div className="vote-actions">
 					{this.props.canUp &&
 						<a href="#" onClick={this.handleUp}>
 							<i className="fa fa-chevron-up"> </i>
 						</a>
 					}					
-						<div>&nbsp;</div>
+					<div />
 					{this.props.canDown &&
 						<a href="#" onClick={this.handleDown}>
 							<i className="fa fa-chevron-down"> </i>
@@ -40,14 +45,11 @@ class LeaderboardItem extends React.Component {
 					<a href="#" className="vote-title">
 						{title}
 					</a>
+					{notes &&
 					<div className="vote-info">
 						<i className="fa fa-comments-o"></i> {notes}
 					</div>
-				</div>
-				<div className="col-md-2 ">
-					<div className="vote-icon">
-						#{rank}
-					</div>
+					}	
 				</div>
 
 			</div>

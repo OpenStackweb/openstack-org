@@ -47,6 +47,9 @@
 			margin:0;
 			padding:0;
 			border:0;
+			&.muted > div {
+				opacity: 0.5;
+			}
 		}
   		> a {
   			padding: 15px 20px 20px 20px;
@@ -78,9 +81,41 @@
 		text-align:left;
 	}
 }
-.vote-item {
-	/* Crazy thing needed to make the drag image work */
-	[class^="col"] {
-		position:static;
+ul.navbar-nav {
+	li > a.active {
+		color:#1ab394;
+	}
+}
+.selections {
+	.ibox-content {
+		background:#e2e4e6;
+	}
+	.category-dropdown {
+		display:inline-block;
+	}
+	.vote-item {
+		padding:10px 10px;
+		margin:10px 0;
+		border-radius:5px;
+		.vote-content {
+			padding-left:0;
+		}
+		.vote-title {
+			font-size:12px;
+			margin-left:0;
+			margin-top:0;
+		}
+		.vote-actions {
+			float:right;
+			margin-left:15px;
+			margin-right:0;
+		}
+		.vote-icon {
+			font-size:20px;
+		}
+		/* Crazy thing needed to make the drag image work */
+		[class^="col"] {
+			position:static;
+		}
 	}
 }

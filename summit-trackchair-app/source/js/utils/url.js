@@ -22,10 +22,17 @@ class URL {
 	}
 
 	addQueryParams(path, queryParams) {
-		if(queryParams && typeof queryParams === 'object') {
-			const serialised = this.serialise(queryParams);
-			if(serialised.length) {
-				path += `?${this.serialise(queryParams)}`;	
+		if(queryParams) {
+			let serialised;
+			if(typeof queryParams === 'object') {
+				serialised = this.serialise(queryParams);
+			}
+			else if(queryParams === true) {
+				serialised = window.location.search.substring(1);
+			}
+			
+			if(serialised) {
+				path += `?${serialised}`;
 			}
 			
 		}
@@ -57,7 +64,6 @@ class URL {
 		}
 
 		path = this.addQueryParams(path, queryParams);
-
 		baseURL = baseURL.replace(/\/$/,'');//.replace(/^\//, '');
 		path = path.replace(/\/$/,'').replace(/^\//, '');
 

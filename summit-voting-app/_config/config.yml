@@ -3,6 +3,9 @@ Name: summit-voting-app
 ---
 PresentationVotingPage_Controller:
   presentation_limit: 50
+Presentation:
+  extensions:
+    - PresentationVotingFeatures
 ---
 Only:
   environment: dev

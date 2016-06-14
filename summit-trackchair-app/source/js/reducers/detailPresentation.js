@@ -51,6 +51,12 @@ export const detailPresentation = function (
         		...state,
         		group_selected: !!action.payload
         	};
+
+        case 'MARK_AS_READ':
+        	return {
+        		...state,
+        		viewed: true
+        	};
         	
         default:
             return state;
