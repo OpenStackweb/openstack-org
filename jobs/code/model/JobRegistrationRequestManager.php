@@ -142,8 +142,11 @@ final class JobRegistrationRequestManager {
 			$request = $repository->getById($id);
 			if(!$request) throw new NotFoundEntityException('JobRegistrationRequest',sprintf('id %s',$id ));
 			$job = $factory->buildJob($request);
-			$jobs_repository->add($job);
+            // force write we need the id
+            $job->write();
+			//$job_id = $jobs_repository->add($job);
 			$request->markAsPosted();
+
 			//send Accepted message
 			$point_of_contact = $request->getPointOfContact();
 			$name_to  = $point_of_contact->getName();
@@ -153,7 +156,7 @@ final class JobRegistrationRequestManager {
 			$email = EmailFactory::getInstance()->buildEmail(JOB_REGISTRATION_REQUEST_EMAIL_FROM, $email_to, "Your OpenStack Job is Now Live");
 			$email->setTemplate('JobRegistrationRequestAcceptedEmail');
 			$email->populateTemplate(array(
-				'JobLink' => $jobs_link,
+				'JobLink' => $jobs_link.'view/'.$job->getIdentifier().'/'.$job->getTitleForUrl(),
 			));
 			$email->send();
 			return $job;
