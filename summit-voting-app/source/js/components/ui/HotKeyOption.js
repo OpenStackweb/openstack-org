@@ -22,8 +22,12 @@ class HotKeyOption extends React.Component {
 
 
 	handleKeyup (e) {
-		if(this.props.keyCodes.indexOf(e.keyCode) !== -1) {
-			this.selectOption();
+		const {tagName} = e.target;
+
+		if(tagName !== 'TEXTAREA' && tagName !== 'INPUT') {
+			if(this.props.keyCodes.indexOf(e.keyCode) !== -1) {
+				this.selectOption();
+			}			
 		}
 	}
 	selectOption () {

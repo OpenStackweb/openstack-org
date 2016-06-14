@@ -23,10 +23,12 @@ class CommentForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.onCreateComment(
-			this.props.presentation,
-			this.state.comment
-		);
+		if(this.state.comment) {
+			this.props.onCreateComment(
+				this.props.presentation,
+				this.state.comment
+			);
+		}
 	}
 
 	render () {		
