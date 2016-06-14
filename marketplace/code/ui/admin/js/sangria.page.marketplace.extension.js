@@ -65,6 +65,7 @@ jQuery(document).ready(function($) {
                     dataType: "json",
                     success: function (data,textStatus,jqXHR) {
                         row.hide('slow', function(){ row.remove();});
+                        btn.attr("disabled", false);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         ajaxError(jqXHR, textStatus, errorThrown);
