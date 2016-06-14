@@ -76,7 +76,7 @@ class RSVPDropDownQuestionTemplateUIBuilder  extends AbstractRSVPQuestionTemplat
                 $field->setEmptyString($empty_string);
         }
 
-        $this->buildDependantRules($rsvp, $question, $field);
+        $field = $this->buildDependantRules($rsvp, $question, $field);
 
         if($question->UseChosenPlugin){
 

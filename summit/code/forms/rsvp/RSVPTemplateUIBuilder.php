@@ -34,6 +34,7 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
 
             $type          = $q->Type();
             $builder_class = $type.'UIBuilder';
+
             // @IRSVPQuestionTemplateUIBuilder
             $builder = Injector::inst()->create($builder_class);
             $answer = ($rsvp) ? $rsvp->findAnswerByQuestion($q) : null;
@@ -55,7 +56,7 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
             FormAction::create('submit_rsvp')->setTitle('Send RSVP')
         );
 
-        $form =  new HoneyPotForm(Controller::curr(), $form_name, $fields, $actions, $validator);
+        $form =  new BootstrapForm(Controller::curr(), $form_name, $fields, $actions, $validator);
         $form->setAttribute('class','rsvp_form');
         return $form;
     }

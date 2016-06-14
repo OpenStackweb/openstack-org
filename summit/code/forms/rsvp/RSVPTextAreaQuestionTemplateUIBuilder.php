@@ -37,7 +37,7 @@ class RSVPTextAreaQuestionTemplateUIBuilder
         if(!is_null($answer)){
             $field->setValue($answer->value());
         }
-        $this->buildDependantRules($rsvp, $question, $field);
-        return $field;
+
+        return $this->buildDependantRules($rsvp, $question, $field);
     }
 }

@@ -328,15 +328,21 @@ final class ScheduleManager
 
             foreach ($event->RSVPTemplate()->getQuestions() as $q)
             {
-                $key = array_search($q->name(), array_column($data, 'name'));
+                $question_name = $q->name();
 
-                if ($key !== false)
+                if ($q instanceof RSVPDropDownQuestionTemplate) {
+                    $question_name = ($q->IsMultiSelect) ? $q->name().'[]' : $question_name;
+                } else if ($q instanceof RSVPCheckBoxListQuestionTemplate) {
+                    $question_name = $q->name().'[]';
+                }
+
+                if (isset($data[$question_name]))
                 {
                     if (!$rsvp || !$answer = $rsvp->findAnswerByQuestion($q)) {
                         $answer = new RSVPAnswer();
                     }
 
-                    $answer_value = $data[$key]['value'];
+                    $answer_value = $data[$question_name];
 
                     if(is_array($answer_value) ){
                         $answer_value = str_replace('{comma}', ',', $answer_value);

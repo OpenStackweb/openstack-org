@@ -42,7 +42,8 @@ class RSVPCheckBoxListQuestionTemplateUIBuilder
             $field->setValue($answer->value());
         }
 
-        $this->buildDependantRules($rsvp, $question, $field);
-        return $field;
+        $field->setTemplate('RSVPCheckboxSetField');
+
+        return $this->buildDependantRules($rsvp, $question, $field);
     }
 }

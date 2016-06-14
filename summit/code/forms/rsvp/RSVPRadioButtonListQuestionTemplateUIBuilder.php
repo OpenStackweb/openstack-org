@@ -31,7 +31,7 @@ final class RSVPRadioButtonListQuestionTemplateUIBuilder extends AbstractRSVPQue
             $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
         }
 
-        $field         = new OptionSetField($question->name(), $question->label(), $options);
+        $field         = new OptionsetField($question->name(), $question->label(), $options);
         $default_value = $question->getDefaultValue();
         if(!is_null($default_value) && $default_value->ID > 0){
             $field->setValue($default_value->ID);
@@ -44,7 +44,9 @@ final class RSVPRadioButtonListQuestionTemplateUIBuilder extends AbstractRSVPQue
         if(!is_null($answer)){
             $field->setValue($answer->value());
         }
-        $this->buildDependantRules($rsvp, $question, $field);
-        return $field;
+
+        $field->setTemplate('RSVPOptionSetField');
+
+        return $this->buildDependantRules($rsvp, $question, $field);
     }
 }

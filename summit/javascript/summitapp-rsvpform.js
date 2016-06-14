@@ -15,12 +15,16 @@ var form_validator = null;
 
 jQuery(document).ready(function($){
 
-    var form_id  = 'HoneyPotForm_RSVPForm';
+    var form_id  = 'BootstrapForm_RSVPForm';
     var form     = $('#'+form_id);
 
     //validation
     //var form = $(".rsvp_form");
-    form.validate();
+    form.validate({
+        errorPlacement: function(error, element) {
+            error.insertAfter($(element).closest('div'));
+        }
+    });
 
     // SAVE RSVP
 
@@ -36,20 +40,39 @@ jQuery(document).ready(function($){
         $.ajax({
             type: 'PUT',
             url: url,
-            data: JSON.stringify(form.serializeArray()),
+            data: JSON.stringify(form.serializeObject()),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data,textStatus,jqXHR) {
-                //push feedback
+                $('#rsvpModal').modal('toggle');
+                swal("Done!", "Your rsvp to this event was sent successfully.", "success");
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                ajaxError(jqXHR, textStatus, errorThrown);
+                $('#rsvpModal').modal('toggle');
+                swal('Error', 'There was a problem sending the rsvp, please contact admin.', 'warning');
             }
         });
 
         return false;
     });
 
-
-
 });
+
+(function ($) {
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+})(jQuery);
