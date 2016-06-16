@@ -200,6 +200,9 @@ h5.section-title {
     text-decoration: none;
     color: white;
 }
+.coa-action-single a:visited {
+    color: white;
+}
 .coa-started-btn {
     background: transparent;
     border: 2px solid white;
@@ -213,6 +216,9 @@ h5.section-title {
 a.coa-started-btn:hover, a.coa-started-btn:focus {
     background: rgba(255,255,255,0.4);
     text-decoration: none;
+    color: white;
+}
+a.coa-started-btn:visited {
     color: white;
 }
 .coa-started-btn i {

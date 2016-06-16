@@ -171,7 +171,7 @@
                 </div>
                 <div class="coa-details-action">
                     <div class="row">
-                        <div class="col-sm-6 left">
+                        <div class="col-sm-12">
                             <div class="coa-action-bottom">
                                 <p>
                                     Review policies and terms of service.
@@ -179,17 +179,6 @@
                                 <p>
                                     <a href="{$Top.HandBookLink}" class="coa-details-btn">Download the handbook <i class="fa fa-cloud-download"></i></a>
                                 </p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="coa-action-bottom">
-                                <p>
-                                    Have a code to redeem?
-                                </p>
-                                <p>
-                                    <a href="{$Top.Link(get-started)}" class="coa-details-btn red">Get Started <i class="fa fa-chevron-right"></i></a>
-                                </p>
-                                <a href="{$Top.Link(already-registered)}" class="coa-already-registered">Already Registered?</a>
                             </div>
                         </div>
                     </div>
