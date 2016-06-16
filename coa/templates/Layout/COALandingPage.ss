@@ -10,11 +10,40 @@
                 $Top.BannerText
                 <hr>
                 <div class="coa-action-top">
-                    <h5>Have a code to redeem?</h5>
-                    <a href="{$Top.Link(get-started)}" class="coa-action-btn">Get Started <i class="fa fa-chevron-right"></i></a>
-                    <a href="{$Top.Link(already-registered)}" class="coa-already-registered">Already Registered?</a> &nbsp; | &nbsp; 
+                    <a href="{/coa#coa-get-started" class="coa-action-btn">How To Get Started <i class="fa fa-chevron-right"></i></a>
+                    <span class="coa-already-registered">Exam Fee: $300</span> &nbsp; | &nbsp; 
                     <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="coa-actions-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 coa-action-single">
+                <a href="{$Top.Link(get-started)}" class="coa-action-btn">Purchase Exam</a>
+                <p>
+                    Get started with a new COA exam.
+                </p>
+            </div>
+            <div class="col-sm-3 coa-action-single">
+                <a href="#" class="coa-action-btn">Redeem A Code</a>
+                <p>
+                    Redeem a code from a partner company and get started with your COA exam.
+                </p>
+            </div>
+            <div class="col-sm-3 coa-action-single">
+                <a href="http://www.openstack.org/coa/already-registered" class="coa-action-btn">COA Portal Login</a>
+                <p>
+                    Login to retake the test or resume the process of scheduling an exam.
+                </p>
+            </div>
+            <div class="col-sm-3 coa-action-single">
+                <a href="#" class="coa-action-btn">Hire A COA</a>
+                <p>
+                    Learn what COA means for talent teams or verify a candidate's COA credentials.
+                </p>
             </div>
         </div>
     </div>
@@ -77,6 +106,21 @@
     </div>
 </div>
 <% end_if %>
+<div class="coa-actions-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="coa-get-started">
+                <h2>How to Get Started</h2>
+                <p>
+                    The Certified OpenStack Administrator exam is the only professional certification offered by the OpenStack Foundation. It was written for OpenStack professionals with at least six months of experience managing an OpenStack cloud environment. You can learn more details about the exam below, or visit our Training Marketplace to find companies that can help you prepare and often bundle the exam with their training courses. To get started with a new exam purchase or to redeem a code, you'll be prompted to log into the COA portal with an OpenStackID or equivalent.
+                </p>
+                <p>
+                    <a href="#" class="coa-started-btn">Get Started <i class="fa fa-angle-right"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="coa-exam-details">
     <div class="container">
         <div class="row">

@@ -163,3 +163,59 @@ h5.section-title {
   border-bottom: 1px solid #dae5ee;
   padding-bottom: 20px;
   margin: 50px 0 30px; }
+.coa-actions-section {
+    background: #148AC8;
+    padding: 60px 0 40px;
+    width: 100%;
+    color: white;
+    margin-top: -40px;
+}
+.coa-actions-section h2 {
+    color: white;
+}
+.coa-action-single {
+    text-align: center;
+}
+.coa-action-single a.coa-action-btn {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 15px 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+    .coa-action-single {
+        margin-bottom: 40px;
+    }
+    .coa-action-single a.coa-action-btn {
+        max-width: 300px;
+    }
+}
+.coa-action-single a.coa-action-btn:hover, .coa-action-single a.coa-action-btn:focus {
+    background: rgba(255,255,255,0.4);
+    text-decoration: none;
+    color: white;
+}
+.coa-started-btn {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 30px 0 20px;
+    padding: 10px 40px;
+}
+a.coa-started-btn:hover, a.coa-started-btn:focus {
+    background: rgba(255,255,255,0.4);
+    text-decoration: none;
+    color: white;
+}
+.coa-started-btn i {
+    margin-left: 10px;
+    font-size: 1.5em;
+}
