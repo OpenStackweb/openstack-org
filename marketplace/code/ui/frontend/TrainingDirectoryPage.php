@@ -142,7 +142,7 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
     public function LocationCombo()
     {
-        $source = array();
+        $source = array(0 => 'Virtual Courses');
         $result = $this->course_location_query->handle(new OpenStackImplementationNamesQuerySpecification(DateTimeUtils::getCurrentDate()));
         foreach ($result->getResult() as $dto) {
             $source[$dto->getValue()] = $dto->getValue();

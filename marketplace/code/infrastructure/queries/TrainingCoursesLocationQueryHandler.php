@@ -42,7 +42,7 @@ final class TrainingCoursesLocationQueryHandler implements IQueryHandler {
         INNER JOIN CompanyService  ON CompanyService.ID  = TrainingCourse.TrainingServiceID AND CompanyService.ClassName='TrainingService'
         INNER JOIN TrainingCourseSchedule ON TrainingCourseSchedule.CourseID = TrainingCourse.ID
         LEFT JOIN TrainingCourseScheduleTime ON TrainingCourseScheduleTime.LocationID = TrainingCourseSchedule.ID
-        WHERE CompanyService.Active = 1
+        WHERE CompanyService.Active = 1 AND TrainingCourseSchedule.City NOT LIKE '%Virtual%' AND TrainingCourseSchedule.City NOT LIKE '%Online%'
         {$date_filter}
         GROUP BY TrainingCourseSchedule.City, TrainingCourseSchedule.State, TrainingCourseSchedule.Country
         ORDER BY TrainingCourseSchedule.City, TrainingCourseSchedule.State, TrainingCourseSchedule.Country ASC;

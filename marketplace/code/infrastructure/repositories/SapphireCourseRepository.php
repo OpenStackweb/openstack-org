@@ -62,7 +62,7 @@ class SapphireCourseRepository
             $parts_count = count($location_parts);
 
             if ($parts_count > 1) {
-                $conditions = $parts_count == 2 ? array("l.City", "l.Country") : array(
+                $conditions = ($parts_count == 2) ? array("l.City", "l.Country") : array(
                     "l.City",
                     "l.State",
                     "l.Country"
@@ -83,8 +83,10 @@ class SapphireCourseRepository
                     $condition .= $conditions[$i] . " LIKE '%{$l}%' COLLATE utf8_general_ci AND ";
                 }
                 $condition = substr($condition, 0, -4);
+            } else if ($location == 'Virtual Courses') {
+                $condition .= " ( l.City LIKE '%Virtual%' COLLATE utf8_general_ci OR l.City LIKE '%Online%' COLLATE utf8_general_ci )";
             } else {
-                $l = trim($location_parts[0]);
+                $l = trim($location);
                 if (array_key_exists($l, $country_names)) {
                     $l = $country_names[$l];
                 } else {
