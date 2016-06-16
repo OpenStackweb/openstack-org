@@ -162,7 +162,21 @@ tinymce.init({
     paste_strip_class_attributes: true,
     paste_retain_style_properties: 'font-size, font-style, color',
     toolbar: 'bold italic | alignleft aligncenter | bullist numlist | paste',
-    statusbar : false
+    statusbar : false,
+    valid_elements : "@[id|class|style|title"
+        + "a[name|href|target|title|class],strong/b,em/i,strike,u,"
+        + "#p,-ol[type|compact],-ul[type|compact],-li,br,"
+        + "img[src|border|alt=|title|width|height|align],"
+        + "-blockquote,-table[border=0|cellspacing|cellpadding|width|frame|rules|"
+        + "height|align|summary|bgcolor|background|bordercolor],-tr[rowspan|width|"
+        + "height|align|valign|bgcolor|background|bordercolor],tbody,thead,tfoot,"
+        + "#td[colspan|rowspan|width|height|align|valign|bgcolor|background|bordercolor"
+        + "|scope],#th[colspan|rowspan|width|height|align|valign|scope],caption,"
+        + "-span,-code,-pre,-h1,-h2,-h3,-h4,-h5,-h6,hr[size|noshade],-font[face"
+        + "|size|color],dd,dl,dt,cite,abbr,acronym,del[datetime|cite],ins[datetime|cite],"
+        + "col[align|char|charoff|span|valign|width],colgroup[align|char|charoff|span|"
+        + "valign|width],fieldset,label[for],legend,q[cite],small,"
+        + "textarea[cols|rows|disabled|name|readonly],big"
     {$extra_options}
 });
 SCRIPT;
