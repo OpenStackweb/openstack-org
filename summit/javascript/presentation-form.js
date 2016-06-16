@@ -18,6 +18,11 @@ $(document).ready(function(){
 
     var form_validator = null;
 
+    $.validator.addMethod("text_length", function(value, element) {
+        return ($.trim($(value).text()).length < 1000);
+    }, "Text must be less than 1000 characters long.");
+
+
     form_validator = $('#PresentationForm_PresentationForm').validate(
     {
         ignore:[],
@@ -33,18 +38,18 @@ $(document).ready(function(){
             GroupID:{required: true},
             CategoryID:{required: true},
             Level:{required: true},
-            ShortDescription:{required: true, maxlength: 1000},
+            ShortDescription:{required: true, text_length: true},
             ProblemAddressed:{
                 required: function(){
                     return $('select[name=GroupID] option:selected').hasClass('public');
                 },
-                maxlength: 1000
+                text_length: true
             },
             AttendeesExpectedLearnt:{
                 required: function(){
                     return $('select[name=GroupID] option:selected').hasClass('public');
                 },
-                maxlength: 1000
+                text_length: true
             }
         },
         messages: {
