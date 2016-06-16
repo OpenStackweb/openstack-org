@@ -105,6 +105,17 @@
         </div>
     </div>
 
+    <!-- Video -->
+    <div class="container-video-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <iframe src="https://www.youtube.com/embed/PwOB_y__AKY?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Quote -->
     <div class="content-section-a testimonial-row">
         <div class="container"> 

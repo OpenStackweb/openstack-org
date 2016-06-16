@@ -64,6 +64,48 @@
     .containers-action-wrapper a.containers-action-btn:hover {
       background: #A51B1B;
       text-decoration: none; }
-
+.container-video-section {
+  background: #000;
+}
+.container-video-section iframe {
+  width: 100%;
+  height: 644px;
+  margin: 0 0 -5px 0;
+}
+@media (max-width: 1200px) {
+  .container-video-section iframe {
+    height: 528px;
+  }
+}
+@media (max-width: 992px) {
+  .container-video-section iframe {
+    height: 405px;
+  }
+}
+@media (max-width: 680px) {
+  .container-video-section iframe {
+    height: 335px;
+  }
+}
+@media (max-width: 625px) {
+  .container-video-section iframe {
+    height: 363px;
+  }
+}
+@media (max-width: 600px) {
+  .container-video-section iframe {
+    height: 319px;
+  }
+}
+@media (max-width: 500px) {
+  .container-video-section iframe {
+    height: 263px;
+  }
+}
+@media (max-width: 460px) {
+  .container-video-section iframe {
+    height: 208px;
+  }
+}
 
 /*End Containers Page*/
