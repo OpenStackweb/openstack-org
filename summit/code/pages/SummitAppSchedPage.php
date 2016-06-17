@@ -266,6 +266,8 @@ END:VCALENDAR";
     {
         $member = Member::currentUser();
         $base = Director::protocolAndHost();
+        $show_desc = $this->getRequest()->getVar('show_desc') ? $this->getRequest()->getVar('show_desc') : false;
+
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 
@@ -286,7 +288,11 @@ END:VCALENDAR";
 
         $html_inner = $this->renderWith(
             array('SummitAppMySchedulePage_pdf'),
-            array('Schedule' => $day_schedule, 'Summit' => $this->Summit(), 'Heading' => 'My Schedule'));
+            array(
+                'Schedule' => $day_schedule,
+                'Summit' => $this->Summit(),
+                'ShowDescription' => $show_desc,
+                'Heading' => 'My Schedule'));
 
         $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
 
@@ -320,6 +326,7 @@ END:VCALENDAR";
     public function ExportFullSchedule()
     {
         $sort = $this->getRequest()->getVar('sort') ? $this->getRequest()->getVar('sort') : 'day';
+        $show_desc = $this->getRequest()->getVar('show_desc') ? $this->getRequest()->getVar('show_desc') : false;
         $base = Director::protocolAndHost();
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
@@ -358,7 +365,10 @@ END:VCALENDAR";
 
         $html_inner = $this->renderWith(
             array('SummitAppMySchedulePage_pdf'),
-            array('Schedule' => $events, 'Summit' => $this->Summit(), 'Heading' => 'Full Schedule by '.$sort));
+            array(  'Schedule' => $events,
+                    'Summit' => $this->Summit(),
+                    'ShowDescription' => $show_desc,
+                    'Heading' => 'Full Schedule by '.$sort));
 
         $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
 

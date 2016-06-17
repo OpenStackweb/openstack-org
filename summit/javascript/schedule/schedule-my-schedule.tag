@@ -1,5 +1,8 @@
-<schedule-my-schedule>
+<raw>
+    this.root.innerHTML = opts.content
+</raw>
 
+<schedule-my-schedule>
     <div class="panel panel-default" each="{ key, day in events }">
         <div class="panel-heading">{ key }</div>
 
@@ -15,7 +18,12 @@
             <tbody>
                 <tr each={ event in day } data-id="{ event.id }">
                     <td>{ event.start_time } - { event.end_time }</td>
-                    <td><a href="{ base_url+'events/'+ event.id }" target="_blank">{ event.title }</a></td>
+                    <td>
+                        <a href="{ base_url+'events/'+ event.id }" target="_blank">{ event.title }</a>
+                        <div class="event_description" style="display:none">
+                            <raw content="{ event.description }"/>
+                        </div>
+                    </td>
                     <td if={ should_show_venues == 1 }>{ event.room }</td>
                     <td if={ should_show_venues == 0 }>TBD</td>
                     <td>
@@ -35,6 +43,10 @@
 
 
         this.on('mount', function() {
+            $('#show_desc').change(function(){
+                $(this).toggleClass('active');
+                $('.event_description').toggle();
+            });
         });
 
 

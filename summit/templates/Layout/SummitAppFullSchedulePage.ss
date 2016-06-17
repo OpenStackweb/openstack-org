@@ -17,6 +17,9 @@
                         <option value="track">Sort By Track</option>
                         <option value="event_type">Sort By Event Type</option>
                     </select>
+                    <label class="btn btn-default" id="show_desc">
+                        <input type="checkbox" autocomplete="off" name="show_desc"> Show Description
+                    </label>
                </form>
             </div>
         </div>
@@ -31,6 +34,7 @@
                     start_time: "{$getStartTime}",
                     end_time: "{$getEndTime}",
                     title: "{$Title.JS}",
+                    description: "{$ShortDescription.JS}",
                     room: "{$getLocationNameNice.JS}",
                     total: $Attendees.Count(),
                     capacity: "{$LocationCapacity}",

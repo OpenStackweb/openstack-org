@@ -10,7 +10,12 @@
                 <% end_if %>
             </div>
             <div class="col-sm-6">
-                <a href="{$Top.Link('mine/pdf')}" class="btn btn-primary export_schedule" >Export PDF</a>
+                <form action="{$Top.Link('/mine/pdf')}">
+                    <button type="submit" class="btn btn-primary export_schedule" >Export PDF</button>
+                    <label class="btn btn-default" id="show_desc">
+                        <input type="checkbox" autocomplete="off" name="show_desc"> Show Description
+                    </label>
+               </form>
             </div>
         </div>
         <hr/>
@@ -24,6 +29,7 @@
                     start_time: "{$getStartTime}",
                     end_time: "{$getEndTime}",
                     title: "{$Title.JS}",
+                    description: "{$ShortDescription.JS}",
                     room: "{$getLocationNameNice.JS}",
                     total: $Attendees.Count(),
                     capacity: "{$LocationCapacity}",

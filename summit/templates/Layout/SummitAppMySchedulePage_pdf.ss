@@ -17,7 +17,12 @@
             <% loop $Events %>
             <tr nobr="true">
                 <td style="width:20%">{$getStartTime} - {$getEndTime}</td>
-                <td style="width:45%">{$Title}</td>
+                <td style="width:45%">
+                    {$Title}<br>
+                    <% if $Top.ShowDescription %>
+                        {$ShortDescription.NoHTML()}
+                    <% end_if %>
+                </td>
                 <td style="width:27%"><% if $Summit.ShouldShowVenues %> {$getLocationNameNice} <% else %> TBD <% end_if %></td>
                 <td style="width:8%"><% if $RSVPLink %> Yes <% else %> No <% end_if %></td>
             </tr>

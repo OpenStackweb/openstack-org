@@ -811,3 +811,10 @@ h2.subtitle {
     margin-right: 20px;
     padding: 6px;
 }
+
+#show_desc {
+    margin-top: 10px;
+    float: right;
+    margin-right: 20px;
+    padding: 6px;
+}
