@@ -81,7 +81,7 @@
                     		<img class="video-image" src="/themes/openstack/images/analysts/video2.jpg" alt="">
                     	</div>
 	                    <div class="gallery-title">OpenStack is Ready, Are You?</div>
-	                    <div class="gallery-subtitle">Forester Research</div>
+	                    <div class="gallery-subtitle">Forrester Research</div>
                     </div>
                     </a>
                 </div>
