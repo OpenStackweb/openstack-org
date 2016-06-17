@@ -115,7 +115,7 @@
                     The Certified OpenStack Administrator exam is the only professional certification offered by the OpenStack Foundation. It was written for OpenStack professionals with at least six months of experience managing an OpenStack cloud environment. You can learn more details about the exam below, or visit our Training Marketplace to find companies that can help you prepare and often bundle the exam with their training courses. To get started with a new exam purchase or to redeem a code, you'll be prompted to log into the COA portal with an OpenStackID or equivalent.
                 </p>
                 <p>
-                    <a href="#" class="coa-started-btn">Get Started <i class="fa fa-angle-right"></i></a>
+                    <a href="{$Top.Link(get-started)}" class="coa-started-btn">Get Started <i class="fa fa-angle-right"></i></a>
                 </p>
             </div>
         </div>
