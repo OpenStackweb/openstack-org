@@ -10,7 +10,7 @@
                 $Top.BannerText
                 <hr>
                 <div class="coa-action-top">
-                    <a href="{/coa#coa-get-started" class="coa-action-btn">How To Get Started <i class="fa fa-chevron-right"></i></a>
+                    <a href="/coa#coa-get-started" class="coa-action-btn">How To Get Started <i class="fa fa-chevron-right"></i></a>
                     <span class="coa-already-registered">Exam Fee: $300</span> &nbsp; | &nbsp; 
                     <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
                 </div>
@@ -28,19 +28,19 @@
                 </p>
             </div>
             <div class="col-sm-3 coa-action-single">
-                <a href="#" class="coa-action-btn">Redeem A Code</a>
+                <a href="{$Top.Link(already-registered)}" class="coa-action-btn">Redeem A Code</a>
                 <p>
                     Redeem a code from a partner company and get started with your COA exam.
                 </p>
             </div>
             <div class="col-sm-3 coa-action-single">
-                <a href="http://www.openstack.org/coa/already-registered" class="coa-action-btn">COA Portal Login</a>
+                <a href="{$Top.Link(already-registered)}" class="coa-action-btn">COA Portal Login</a>
                 <p>
                     Login to retake the test or resume the process of scheduling an exam.
                 </p>
             </div>
             <div class="col-sm-3 coa-action-single">
-                <a href="#" class="coa-action-btn">Hire A COA</a>
+                <a href="/coa/coa-verify/" class="coa-action-btn">Hire A COA</a>
                 <p>
                     Learn what COA means for talent teams or verify a candidate's COA credentials.
                 </p>
