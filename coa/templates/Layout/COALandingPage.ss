@@ -28,7 +28,7 @@
                 </p>
             </div>
             <div class="col-sm-3 coa-action-single">
-                <a href="{$Top.Link(already-registered)}" class="coa-action-btn">Redeem A Code</a>
+                <a href="{$Top.Link(get-started)}" class="coa-action-btn">Redeem A Code</a>
                 <p>
                     Redeem a code from a partner company and get started with your COA exam.
                 </p>
@@ -40,7 +40,7 @@
                 </p>
             </div>
             <div class="col-sm-3 coa-action-single">
-                <a href="/coa/coa-verify/" class="coa-action-btn">Hire A COA</a>
+                <a href="/coa/coa-professional/" class="coa-action-btn">Hire A COA</a>
                 <p>
                     Learn what COA means for talent teams or verify a candidate's COA credentials.
                 </p>
