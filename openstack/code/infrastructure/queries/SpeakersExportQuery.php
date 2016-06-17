@@ -42,7 +42,7 @@ class SpeakersExportQuery implements IQueryHandler {
                 $whereClause = "WHERE ";
                 $whereAdded = true;
             }
-            $whereClause.= "PR.SummitID IN {$inCondition}";
+            $whereClause.= "E.SummitID IN {$inCondition}";
         }
 
         if ($onlyApprovedSpeakers) {
@@ -71,10 +71,11 @@ class SpeakersExportQuery implements IQueryHandler {
 Surname,
 FirstName,
 Email,
-Title as PresentationTitle,
+E.Title as PresentationTitle,
 Progress as PresentationProgress,
 Status as PresentationStatus
 FROM Presentation PR
+LEFT JOIN SummitEvent AS E ON PR.ID = E.ID
 INNER JOIN Presentation_Speakers PS ON PR.Id = PS.PresentationID
 INNER JOIN Member ME ON ME.Id = PS.PresentationSpeakerID
 LEFT JOIN Affiliation AF ON AF.MemberID = ME.ID
