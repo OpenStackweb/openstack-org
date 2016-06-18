@@ -35,7 +35,6 @@
   },
   "require-dev": {
     "phpunit/PHPUnit": "~3.7@stable",
- 	"squizlabs/php_codesniffer": "2.*",
  	"behat/behat": "@stable",		
  	"behat/mink": "@stable",		
  	"behat/mink-extension": "@stable",		

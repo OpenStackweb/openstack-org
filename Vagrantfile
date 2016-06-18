@@ -17,10 +17,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  #config.vm.box = "ubuntu/trusty64"
-  #config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"	
-  config.vm.box = "ubuntu/vivid64"
-  config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/vivid64"	
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"	
   config.vm.hostname = "local.openstack.org"
 
   # Create a private network, which allows host-only access to the machine
@@ -62,7 +60,7 @@ Vagrant.configure(2) do |config|
         puppet.manifest_file = "site.pp"
         puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
         puppet.working_directory = "/etc/puppet/data"
-        # puppet.options = "--verbose --debug"
+        puppet.options = "--verbose --debug"
   end
   
   config.vm.provision :shell, :path => "scripts/postdeployment.sh"

@@ -21,6 +21,7 @@ $main_packages = [
 $php5_packages = [
   'php5-fpm',
   'php5-mcrypt',
+  'php5-cli',
   'php5-curl',
   'php5-gd',
   'php5-json',
@@ -146,12 +147,6 @@ file { '/etc/nginx/sites-available/local.openstack.org':
 file { '/etc/nginx/sites-enabled/local.openstack.org':
   ensure    => 'link',
   target    => '/etc/nginx/sites-available/local.openstack.org',
-  require   => File['/etc/nginx/sites-available/local.openstack.org'],
-}
-
-file { '/var/www/local.openstack.org/themes/openstack/images':
-  ensure    => 'link',
-  target    => '/var/www/local.openstack.org/private-assets/themes/openstack/images',
   require   => File['/etc/nginx/sites-available/local.openstack.org'],
 }
 
