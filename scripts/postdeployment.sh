@@ -20,7 +20,7 @@ done
 
 cd /var/www/local.openstack.org;
 mkdir -p silverstripe-cache;
-sudo npm install;
+sudo npm install --no-bin-links;
 sudo bower install --allow-root --config.interactive=false;
 #composer installation from https://getcomposer.org/download/
 sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
