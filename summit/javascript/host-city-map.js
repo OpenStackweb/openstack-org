@@ -67,15 +67,11 @@ $(document).ready(function () {
     });
 
     $('.marker-link').click(function (event) {
-        //event.preventDefault();
         // The function to trigger the marker click, 'id' is the reference index to the 'markers' array.
         var id = parseInt($(this).attr('data-location-id'));
         var marker_pos = location_markers[id];
-        console.log(marker_pos);
         var marker = markers[marker_pos]
-        marker.set('pos', marker_pos);
         google.maps.event.trigger(marker, 'click');
-        //return false;
     });
 
     // Add the markers and infowindows to the map
@@ -98,12 +94,13 @@ $(document).ready(function () {
             iconCounter++;
         }
 
-        console.log(location.name+' lat '+location.lat+' lng '+location.lng);
+        //console.log(location.name+' lat '+location.lat+' lng '+location.lng);
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(location.lat, location.lng),
             map: map,
             icon : icon,
-            shadow: shadow
+            shadow: shadow,
+            pos: i
         });
 
         location_markers[location.id] = i;
