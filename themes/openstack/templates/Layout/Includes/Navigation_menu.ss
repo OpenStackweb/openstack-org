@@ -52,7 +52,7 @@
     <a href="{$BaseHref}learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Certified OpenStack Administrator</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
