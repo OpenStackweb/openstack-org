@@ -304,15 +304,10 @@ final class ScheduleManager
             $summit_id = intval($data['summit_id']);
             $event_id = intval($data['event_id']);
 
-            $attendee  = $attendee_repository->getByMemberAndSummit($member_id, $summit_id);
             $event     = $summitevent_repository->getById($event_id);
 
-            if (!$attendee) {
-                throw new NotFoundEntityException('Attendee', '');
-            }
-
             if (!$event) {
-                throw new NotFoundEntityException('Attendee', '');
+                throw new NotFoundEntityException('Event', '');
             }
 
             if (!$event->RSVPTemplate()) {
