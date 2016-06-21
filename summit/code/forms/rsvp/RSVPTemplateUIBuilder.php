@@ -53,7 +53,7 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
 
         $actions   = new FieldList
         (
-            FormAction::create('submit_rsvp')->setTitle('Send RSVP')
+            FormAction::create('submit_rsvp')->setTitle('Send RSVP')->addExtraClass('rsvp_submit')
         );
 
         $form =  new BootstrapForm(Controller::curr(), $form_name, $fields, $actions, $validator);

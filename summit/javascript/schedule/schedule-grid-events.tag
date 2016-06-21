@@ -109,6 +109,45 @@
                 e.preventDefault();
                 e.stopPropagation();
             });
+
+            $('.rsvp_form').validate({
+            errorPlacement: function(error, element) {
+            error.insertAfter($(element).closest('div'));
+            }
+            });
+
+            $(document).off("click", ".rsvp_submit").on( "click", ".rsvp_submit", function(e) {
+                e.preventDefault();
+
+                var form  = $(this).closest('.rsvp_form');
+                var form_id = form.attr('id');
+
+                if(!form.valid()) return false;
+
+                var event_id = $('input[name="event_id"]',form).val();
+                var summit_id = $('input[name="summit_id"]',form).val();
+                var security_id = $('input[name="SecurityID"]',form).val();
+                var url = 'api/v1/summits/'+summit_id+'/schedule'+'/'+event_id+'/rsvp?SecurityID='+security_id;
+
+                $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    data: JSON.stringify(self.serializeObject(form)),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data,textStatus,jqXHR) {
+                        $(this).closest('.modal').modal('toggle');
+                        swal("Done!", "Your rsvp to this event was sent successfully.", "success");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $(this).closest('.modal').modal('toggle');
+                        swal('Error', 'There was a problem sending the rsvp, please contact admin.', 'warning');
+                    }
+                });
+
+                return false;
+            });
+
         });
 
         this.schedule_api.on('beforeEventsRetrieved', function(){
@@ -329,5 +368,22 @@
                     }
             }
         }
-    </script>
+
+        serializeObject(form) {
+            var o = {};
+            var a = form.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        }
+
+     </script>
 </schedule-grid-events>
