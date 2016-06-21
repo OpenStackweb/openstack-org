@@ -42,10 +42,10 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                        	<img class="learn-superuser-icon" src="/assets/learn/COA-learn-icon.svg" onerror="this.onerror=null; this.src=/assets/learn/COA-learn-icon.svg" alt="Certified OpenStack Administrator">
-                            <h2>Certified OpenStack Administrator</h2>
+                        	<img class="learn-coa-icon" src="/assets/learn/COA-learn-icon.svg" onerror="this.onerror=null; this.src=/assets/learn/COA-learn-icon.svg" alt="Certified OpenStack Administrator">
+                            <h2>Get Certified</h2>
                             <p>
-                                Register for the Certified OpenStack Administrator (COA) exam, the first professional certification offered by the OpenStack Foundation.
+                                Register for the COA exam, the first professional certification offered by the OpenStack Foundation.
                             </p>
                             <a href="https://www.openstack.org/coa" class="learn-btn">
                                 Go To COA <i class="fa fa-chevron-right"></i>
