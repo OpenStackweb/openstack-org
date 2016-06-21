@@ -104,9 +104,6 @@
                         <i class="fa fa-hotel fa-4x"></i>
                     </p>
                 <% end_if %>
-                <p class="center">		
- -                    <strong>The dates below represent the contracted dates that we have with each hotel. If you wish to book additional dates, outside of these blocks, you will need to book directly with the hotel. PLEASE NOTE that the hotel cancellation policies are very strict. <a href="/summit/barcelona-2016/barcelona-and-travel/hotel-cancellation-policy" target="_blank">Read the policy carefully before booking your reservations</a>.</strong>		
- -                </p>
                 $LocationsTextHeader
             </div>
         </div>
