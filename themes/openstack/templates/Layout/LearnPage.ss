@@ -42,6 +42,22 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
+                        	<img class="learn-superuser-icon" src="/assets/learn/COA-learn-icon.svg" onerror="this.onerror=null; this.src=/assets/learn/COA-learn-icon.svg" alt="Certified OpenStack Administrator">
+                            <h2>Certified OpenStack Administrator</h2>
+                            <p>
+                                Register for the Certified OpenStack Administrator (COA) exam, the first professional certification offered by the OpenStack Foundation.
+                            </p>
+                            <a href="https://www.openstack.org/coa" class="learn-btn">
+                                Go To COA <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Single Learn Element -->
+                </div>
+                <div class="row">
+                    <!-- Single Learn Element -->
+                    <div class="col-sm-6">
+                        <div class="learn-single">
                         <img class="learn-superuser-icon" src="/themes/openstack/images/learn/superuser-icon.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/learn/superuser-icon.svg" alt="OpenStack Superuser Magazine">
                             <h2>Superuser Magazine</h2>
                             <p>
@@ -53,8 +69,6 @@
                         </div>
                     </div>
                     <!-- End Single Learn Element -->
-                </div>
-                <div class="row">
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
@@ -69,16 +83,32 @@
                         </div>
                     </div>
                     <!-- End Single Learn Element -->
+                </div>
+                <div class="row">
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-newspaper-o learn-icon"></i>
-                            <h2>News</h2>
+                            <i class="fa fa-play-circle learn-icon"></i>
+                            <h2>Summit Videos</h2>
                             <p>
-                                Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the OpenStack Foundation.
+                                Did you know almost every session at an OpenStack Summit is recordning and shared for the world to see? They are and you can find them here!
                             </p>
-                            <a href="https://www.openstack.org/news" class="learn-btn">
-                                Go To News <i class="fa fa-chevron-right"></i>
+                            <a href="https://www.openstack.org/summit/tokyo-2015/summit-videos" class="learn-btn">
+                                Go To Summit Videos <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Single Learn Element -->
+                    <!-- Single Learn Element -->
+                    <div class="col-sm-6">
+                        <div class="learn-single">
+                            <i class="fa fa-line-chart learn-icon"></i>
+                            <h2>Analyst Reports</h2>
+                            <p>
+                                Find the latest research and insights from leading technology analysts on the power of OpenStack’s cloud services.
+                            </p>
+                            <a href="https://www.openstack.org/analysts" class="learn-btn">
+                                Go To The Analyst Reports <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
@@ -102,13 +132,13 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-play-circle learn-icon"></i>
-                            <h2>Summit Videos</h2>
+                            <i class="fa fa-newspaper-o learn-icon"></i>
+                            <h2>News</h2>
                             <p>
-                                Did you know almost every session at an OpenStack Summit is recordning and shared for the world to see? They are and you can find them here!
+                                Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the OpenStack Foundation.
                             </p>
-                            <a href="https://www.openstack.org/summit/tokyo-2015/summit-videos" class="learn-btn">
-                                Go To Summit Videos <i class="fa fa-chevron-right"></i>
+                            <a href="https://www.openstack.org/news" class="learn-btn">
+                                Go To News <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
