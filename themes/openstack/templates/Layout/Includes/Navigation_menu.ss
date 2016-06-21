@@ -53,12 +53,12 @@
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}analysts/">Analyst Reports</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}blog/">Blog</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/tokyo-2015/summit-videos/">Summit Videos</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}analysts/">Analyst Reports</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}blog/">Blog</a></li>
     </ul>
 </li>
 <li>
