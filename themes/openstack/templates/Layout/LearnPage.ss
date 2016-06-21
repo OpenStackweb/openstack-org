@@ -108,7 +108,7 @@
                                 Find the latest research and insights from leading technology analysts on the power of OpenStack’s cloud services.
                             </p>
                             <a href="https://www.openstack.org/analysts" class="learn-btn">
-                                Go To The Analyst Reports <i class="fa fa-chevron-right"></i>
+                                Go To Analyst Reports <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
