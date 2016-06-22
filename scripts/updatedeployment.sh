@@ -4,7 +4,7 @@ sudo php composer.phar update --ignore-platform-reqs;
 #run ss tasks
 sake dev/build;
 sake dev/tasks/DBMigrateTask;
-sudo npm install --no-bin-links;
+sudo npm install;
 sudo bower install --allow-root --config.interactive=false;
 chown vagrant:www-data -R /home/vagrant/node_modules;
 chown vagrant:www-data -R /home/vagrant/bower_modules;
