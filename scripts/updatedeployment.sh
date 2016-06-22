@@ -8,7 +8,6 @@ sudo npm install;
 sudo bower install --allow-root --config.interactive=false;
 chown vagrant:www-data -R /home/vagrant/node_modules;
 chown vagrant:www-data -R /home/vagrant/bower_modules;
-chown vagrant:www-data -R /home/vagrant/vendor;
 chown vagrant:www-data -R /var/www/local.openstack.org/vendor;
 sudo service nginx restart;
 sudo service php5-fpm restart;
