@@ -100,7 +100,8 @@ $(document).ready(function () {
             map: map,
             icon : icon,
             shadow: shadow,
-            pos: i
+            pos: i,
+            loc_type: location.type,
         });
 
         location_markers[location.id] = i;
@@ -113,6 +114,8 @@ $(document).ready(function () {
             infowindow.open(map, this);
         });
     }
+
+    AutoCenter();
 });
 
 
@@ -123,9 +126,9 @@ function AutoCenter() {
     var bounds = new google.maps.LatLngBounds();
     //  Go through each...
     $.each(markers, function (index, marker) {
-        bounds.extend(marker.position);
+        if (marker.loc_type != "SummitAirport")
+            bounds.extend(marker.position);
     });
     //  Fit these bounds to the map
     map.fitBounds(bounds);
-    map.setZoom(map.getZoom() - 2);
 }
