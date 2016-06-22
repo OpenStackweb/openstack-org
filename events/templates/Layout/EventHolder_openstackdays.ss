@@ -42,7 +42,6 @@
     <div class="container">
         <ul class="nav nav-tabs project-tabs" id="osdays-tabs" role="tablist">
             <li class="active"><a href="#events_tab" role="tab" data-toggle="tab">Upcoming Events</a></li>
-            <li><a href="#toolkit_tab" role="tab" data-toggle="tab">OpenStack Days Toolkit</a></li>
             <li><a href="#host_tab" role="tab" data-toggle="tab">Host An OpenStack Day</a></li>
         </ul>
     </div>
@@ -90,40 +89,6 @@
                                 We probably just need to update this list. Please check back soon for more details.
                             </p>
                         <% end_if %>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="toolkit_tab"> <!-- Toolkit Tab -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h3>OpenStack Days Toolkit</h3>
-                        <p>
-                            In order to help you create an exciting, efficient and successful OpenStack Day event, we have created this OpenStack Days Tool Kit that includes a number of helpful documents.   
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <hr>
-                        <h3>FAQs</h3>
-                        <p class="question">
-                            Can anyone host an OpenStack Day event?
-                        </p>
-                        <p class="answer">
-                            OpenStack Day events are typically hosted by local user groups, but anyone can get involved. If you are interested in starting a new OpenStack Day in your area, it’s best to get in touch with your <a href="//groups.openstack.org">local user group or regional ambassador</a>. In order to use the “OpenStack Day” brand, you must get approval from the OpenStack Foundation and meet <a href="//www.openstack.org/brand/event-policy/">the event guidelines</a>.
-                        </p>
-                        <p class="question">
-                            Who attends OpenStack Day events?
-                        </p>
-                        <p class="answer">
-                            OpenStack Day events vary based on the organizers and local communities. Some events are more focused on business issues and cloud strategy, while some are more focused on technical operators and developers. Most events attract a few hundred attendees, but the largest event had more than 1,500 participants. Most annual events grow and attract new participants each year, so it’s OK to start on the smaller end and build over time.
-                        </p>
-                        <p class="question">
-                            How can the OpenStack Foundation help?
-                        </p>
-                        <p class="answer">
-                            Once an event is approved, the Foundation typically provides sponsorship funding (up to 5,000 USD depending on the size of the event), logos and digital branding assets, support attracting key speakers in the community and promotion. Please contact <a href="mailto:events@openstack.org">events@openstack.org</a> for more information and to get started.
-                        </p>
                     </div>
                 </div>
             </div>
