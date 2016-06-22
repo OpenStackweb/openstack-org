@@ -50,9 +50,9 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <ul>
-                                        <li><a href="http://www.bigtelecomevent.com/events/big-telecom-event/event-summary-31b6b86b2fa3432ab89ab7db084ab675.aspx" target="_blank">Big Telecom</a>, May 24-25, 2016 in Austin, TX</li>
-                                        <li><a href="http://2016.dockercon.com/" target="_blank">DockerCon</a>, June 19-21, 2016 in Seattle, WA</li>
                                         <li><a href="http://www.gartner.com/events/na/catalyst" target="_blank">Gartner Catalyst</a>, August 15-18, 2016 in San Diego, California</li>
+                                        <li><a href="http://events.linuxfoundation.org/events/kubecon" target="_blank">KubeCon</a>, November 8-9, Seattle</li>
+                                        <li><a href="http://sc16.supercomputing.org/" target="_blank">Supercomputing</a>, November 13-18, Salt Lake City, UT</li>
                                     </ul>
                                 </div>
                         </div>
