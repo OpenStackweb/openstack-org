@@ -127,5 +127,5 @@ function AutoCenter() {
     });
     //  Fit these bounds to the map
     map.fitBounds(bounds);
-    map.setZoom(map.getZoom() - 1);
+    map.setZoom(map.getZoom() - 2);
 }
