@@ -43,7 +43,7 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
         SELECT * FROM (
             SELECT DISTINCT E.* FROM SummitEvent E
                 WHERE E.SummitID = {$summit_id} AND E.Published = 1
-                AND (Title LIKE '%{$term}%' OR E.ID = {$term})
+                AND (Title LIKE '%{$term}%' OR E.ID = '{$term}')
             UNION SELECT DISTINCT E.* FROM SummitEvent E
                 WHERE E.SummitID = {$summit_id} AND E.Published = 1
                 AND EXISTS
@@ -88,7 +88,7 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
                     SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
                     INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
                     INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
-                    WHERE P.ID = E.ID AND S.ID = {$term}
+                    WHERE P.ID = E.ID AND S.ID = '{$term}'
                 )
 SQL;
 
