@@ -1,12 +1,12 @@
 #!/bin/bash -xe
 # install node js 5.x
 # https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
-#curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -;
-#sudo apt-get install -y nodejs;
-#sudo npm cache clean;
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -;
+sudo apt-get install -y nodejs;
+sudo npm cache clean;
 #install webpack and bower at global level
-#npm install -g webpack;
-#npm install -g bower;
+npm install -g webpack;
+npm install -g bower;
 # update php.ini settings
 upload_max_filesize=240M
 post_max_size=240M
