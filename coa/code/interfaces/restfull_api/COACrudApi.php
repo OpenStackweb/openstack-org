@@ -68,8 +68,8 @@ final class COACrudApi
 	);
 
 	public function getCOAExam(){
-		$cert_id = $this->request->param('CERT_ID');
-		$last_name = html_entity_decode($this->request->param('LAST_NAME'));
+		$cert_id   = Convert::raw2sql($this->request->param('CERT_ID'));
+		$last_name = Convert::raw2sql(html_entity_decode($this->request->param('LAST_NAME')));
 		try{
 			$exam = $this->repository->getByCertAndLastName($cert_id,$last_name);
             if ($exam->count() > 0) {

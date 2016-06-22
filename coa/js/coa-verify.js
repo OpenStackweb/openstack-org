@@ -41,7 +41,7 @@ function getVerification() {
 
                 if (data.ID) {
                     $('#result_name').text(data.OwnerName);
-                    $('#result_cert').text(data.Code);
+                    $('#result_cert').text(data.CertificationNumber);
                     $('#result_date').text(data.PassFailDate);
                     $('#result_status').text(data.CertificationStatus);
 
