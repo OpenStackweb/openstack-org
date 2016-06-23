@@ -15,12 +15,13 @@ const createRow = (row, columns) => {
 };
 
 const validChildren = (children) => {
-	return children.filter(c => (c && c.type.name === 'TableColumn'));
+	return children.filter(c => (c && c.props && (typeof c.props.cell === 'function')));
 }
 
 
 const Table = (props) => {
 	const children = validChildren(props.children);
+
 	return (
 	<table {...props}>
 		<thead>
@@ -52,7 +53,7 @@ const Table = (props) => {
 			</tr>
 		</thead>
 		<tbody>
-		{props.data.map((row,i) => {
+		{children.length > 0 && props.data.map((row,i) => {
 			if(row.length !== children.length) {
 				console.warn(`Data at row ${i} is ${row.length}. It should be ${children.length}.`);
 				return <tr />
