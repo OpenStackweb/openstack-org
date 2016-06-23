@@ -55,6 +55,27 @@ class Presentation extends SummitEvent implements IPresentation
         return in_array($progress, $valid);
     }
 
+    public static function apply_search_query(DataList $list, $keyword)
+    {
+        $k = Convert::raw2sql($keyword);
+        return $list
+            ->leftJoin(
+                "Presentation_Speakers",
+                "Presentation_Speakers.PresentationID = Presentation.ID"
+            )
+            ->leftJoin(
+                "PresentationSpeaker",
+                "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID"
+            )
+            ->where("
+                  	SummitEvent.Title LIKE '%{$k}%'
+                  	OR SummitEvent.Description LIKE '%{$k}%'
+                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
+                    OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
+                ");
+
+    }
+
 
     /**
      * @return int
@@ -292,26 +313,6 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
 
-    /**
-     * Determines if a track chair can assign this presentation to a seleciton list
-     *
-     * @return boolean
-     */
-
-    public function canAssign()
-    {
-        // see if they have either of the appropiate permissions
-        if (!Permission::check('TRACK_CHAIR')) {
-            return false;
-        }
-
-        // see if they are a chair of this particular track
-        $IsTrackChair = $this->Category()->TrackChairs('MemberID = ' . Member::currentUser()->ID);
-        if ($IsTrackChair->Count() != 0) {
-            return true;
-        }
-
-    }
 
     /**
      * Determines if the user can create a presentation
@@ -349,72 +350,6 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
 
-    /**
-     * Sets a vote for this presentation by the current user
-     *
-     * @param  $vote int
-     */
-    public function setUserVote($vote)
-    {
-        $v = $this->Votes()->filter('MemberID', Member::currentUserID())->first() ?: PresentationVote::create();
-        $v->MemberID = Member::currentUserID();
-        $v->PresentationID = $this->ID;
-        $v->Vote = $vote;
-        $v->write();
-    }
-
-
-
-    /**
-     * Gets the vote on this presentation by the current user
-     * @return int
-     */
-    public function getUserVote()
-    {
-        return $this->Votes()->filter(array(
-            'MemberID' => Member::currentUserID()
-        ))->first();
-    }
-
-
-    /**
-     * @return string
-     */
-    public function CalcTotalPoints()
-    {
-        $sqlQuery = new SQLQuery(
-            "SUM(Vote)",
-            "PresentationVote",
-            "PresentationID = " . $this->ID
-        );
-        return $sqlQuery->execute()->value();
-    }
-
-    /**
-     * @return string
-     */
-    public function CalcVoteCount()
-    {
-        $sqlQuery = new SQLQuery(
-            "COUNT(ID)",
-            "PresentationVote",
-            "PresentationID = " . $this->ID
-        );
-        return $sqlQuery->execute()->value();
-    }
-
-    /**
-     * @return float
-     */
-    public function CalcVoteAverage()
-    {
-        $sqlQuery = new SQLQuery(
-            "AVG(Vote)",
-            "PresentationVote",
-            "PresentationID = " . $this->ID
-        );
-        return round($sqlQuery->execute()->value(), 2);
-    }
 
     /**
      * Determines if the presentation is "new." Since presentations are
@@ -459,173 +394,6 @@ class Presentation extends SummitEvent implements IPresentation
         $this->write();
     }
 
-    /**
-     * Used by the track chair app to allow comments on presentations.
-     * Comments are only displayed in the track chair interface.
-     **/
-
-    public function addComment($commentBody, $MemberID, $is_category_change_suggestion = false)
-    {
-        $comment = new SummitPresentationComment();
-        $comment->Body = $commentBody;
-        $comment->CommenterID = $MemberID;
-        $comment->PresentationID = $this->ID;
-        $comment->IsCategoryChangeSuggestion = $is_category_change_suggestion;
-        $comment->write();
-    }
-
-    /**
-     * Used by the track chair app to allow chairs to add a presentation to a personal list.
-     **/
-
-    public function assignToIndividualList()
-    {
-
-
-        // Check permissions of user on talk
-        if ($this->CanAssign()) {
-
-            $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
-
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID);
-
-
-            if ($AlreadyAssigned->count() == 0) {
-
-                // Find the higest order value assigned up to this point
-                $HighestOrderInList = $MySelections
-                    ->SummitSelectedPresentations()
-                    ->sort('Order DESC')
-                    ->first()
-                    ->Order;
-
-                $SelectedPresentation = new SummitSelectedPresentation();
-                $SelectedPresentation->SummitSelectedPresentationListID = $MySelections->ID;
-                $SelectedPresentation->PresentationID = $this->ID;
-                $SelectedPresentation->MemberID = Member::currentUser()->ID;
-                // Place at bottom of list
-                $SelectedPresentation->Order = $HighestOrderInList + 1;
-                $SelectedPresentation->write();
-            }
-        }
-    }
-
-    /**
-     * Used by the track chair app to allow chairs to remove a presentation from a personal list.
-     **/
-
-    public function removeFromIndividualList()
-    {
-
-
-        // Check permissions of user on talk
-        if ($this->CanAssign()) {
-
-            $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID)->first();
-
-            if (!is_null($AlreadyAssigned)) {
-                $AlreadyAssigned->delete();
-            }
-        }
-    }
-
-
-    /**
-     * Used by the track chair app to allow chairs to add a presentation to a group list.
-     **/
-
-    public function assignToGroupList()
-    {
-
-
-        // Check permissions of user on talk
-        if ($this->canAssign()) {
-
-            $GroupList = SummitSelectedPresentationList::get()
-                ->filter(array(
-                    'CategoryID' => $this->CategoryID,
-                    'ListType' => 'Group'
-                ))
-                ->first();
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $GroupList->SummitSelectedPresentations('PresentationID = ' . $this->ID);
-
-
-            if ($AlreadyAssigned->count() == 0) {
-
-                // Find the higest order value assigned up to this point
-                $HighestOrderInList = $GroupList
-                    ->SummitSelectedPresentations()
-                    ->sort('Order DESC')
-                    ->first()
-                    ->Order;
-
-                $SelectedPresentation = new SummitSelectedPresentation();
-                $SelectedPresentation->SummitSelectedPresentationListID = $GroupList->ID;
-                $SelectedPresentation->PresentationID = $this->ID;
-                $SelectedPresentation->MemberID = Member::currentUser()->ID;
-                // Place at bottom of list
-                $SelectedPresentation->Order = $HighestOrderInList + 1;
-                $SelectedPresentation->write();
-            }
-        }
-    }
-
-    /**
-     * Used by the track chair app to allow chairs to remove a presentation from a group list.
-     **/
-
-    public function removeFromGroupList()
-    {
-
-
-        // Check permissions of user on talk
-        if ($this->CanAssign()) {
-
-            $GroupList = SummitSelectedPresentationList::get()
-                ->filter(array(
-                    'CategoryID' => $this->CategoryID,
-                    'ListType' => 'Group'
-                ))
-                ->first();
-
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $GroupList->SummitSelectedPresentations('PresentationID = ' . $this->ID)->first();
-
-            if ($AlreadyAssigned->exists()) {
-                $AlreadyAssigned->delete();
-            }
-        }
-    }
-
-    /**
-     * Used by the track chair app see if the presentation has been selected by currently logged in member.
-     **/
-
-    public function isSelected()
-    {
-
-        $memID = Member::currentUserID();
-
-
-        $selected = SummitSelectedPresentation::get()
-            ->leftJoin("SummitSelectedPresentationList",
-                "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")
-            ->where("PresentationID={$this->ID} and SummitSelectedPresentation.MemberID={$memID} 
-                     AND ListType='Individual'");
-
-        if ($selected->count()) {
-            return true;
-        }
-
-    }
 
     /**
      * @return ArrayList
@@ -747,97 +515,7 @@ class Presentation extends SummitEvent implements IPresentation
         return false;
     }
 
-    /**
-     * Used by the track chair app see if the presentation has been selected by the group.
-     **/
 
-    public function isGroupSelected()
-    {
-
-        $memID = Member::currentUserID();
-
-
-        $selected = SummitSelectedPresentation::get()
-            ->leftJoin("SummitSelectedPresentationList",
-                "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")
-            ->where("PresentationID={$this->ID} AND ListType='Group'");
-
-        if ($selected->count()) {
-            return true;
-        }
-
-    }
-
-    /**
-     * Used by the track chair app see if the presentation has been selected by anyone at all.
-     * TODO: refactor to combine with isSelected() by passing optional memberID
-     **/
-
-    public function isSelectedByAnyone()
-    {
-
-        $selected = SummitSelectedPresentation::get()
-            ->where("PresentationID={$this->ID}");
-
-        if ($selected->count()) {
-            return true;
-        }
-
-    }
-
-    /**
-     * Used by the track chair app see if the presentation was moved to this category.
-     **/
-
-    public function movedToThisCategory()
-    {
-        $completedMove = $this->ChangeRequests()->filter(array(
-            'NewCategoryID' => $this->CategoryID,
-            'Done' => true
-        ));
-        if ($completedMove->count()) {
-            return true;
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function SelectionStatus()
-    {
-
-        $Selections = SummitSelectedPresentation::get()
-            ->leftJoin('SummitSelectedPresentationList',
-                'SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID')
-            ->filter(array(
-                'PresentationID' => $this->ID,
-                'ListType' => 'Group'
-            ));
-
-        // Error out if a talk has more than one selection
-        if ($Selections && $Selections->count() > 1) {
-            user_error('There cannot be more than one instance of this talk selected. Talk ID ' . $this->ID);
-        }
-
-        $Selection = null;
-        if ($Selections) {
-            $Selection = $Selections->first();
-        }
-
-        // Error out if the category of presentation does not match category of selection
-        if ($Selection && $this->CategoryID != $Selection->SummitSelectedPresentationList()->Category()->ID) {
-            user_error('The selection category does not match the presentation category. Presentation ID ' . $this->ID);
-        }
-
-
-        If (!$Selection) {
-            return IPresentation::SelectionStatus_Unaccepted;
-        } elseif ($Selection->Order <= $this->Category()->SessionCount) {
-            return IPresentation::SelectionStatus_Accepted;
-        } else {
-            return IPresentation::SelectionStatus_Alternate;
-        }
-    }
 
     /**
      * @return ValidationResult

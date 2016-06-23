@@ -67,13 +67,6 @@ interface IPresentation extends ISummitEvent
     public function markReceived();
 
     /**
-     * Sets a vote for this presentation by the current user
-     *
-     * @param  $vote int
-     */
-    public function setUserVote($vote);
-
-    /**
      * @return int
      */
     public function getProgress();
