@@ -33,3 +33,4 @@ migrations:
   - SummitMaxAllowedSubmissionTaskMigration
   - SummitPresentationTypeMigration
   - PopulateOrganizationalRoleAndActiveInvolvement
+  - MissingCOACertsMigration
