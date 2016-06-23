@@ -20,7 +20,7 @@ class SummitPresentationComment extends DataObject
      */
     private static $db = [
         'Body' => 'Text',
-        'IsCategoryChangeSuggestion' => 'Boolean',
+        'IsActivity' => 'Boolean',
     ];
 
     /**

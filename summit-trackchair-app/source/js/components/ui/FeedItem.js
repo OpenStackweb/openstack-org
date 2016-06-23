@@ -5,13 +5,14 @@ export default ({
     description,
     notes,
     active,
-    muted
+    muted,
+    className
 }) => (
-   <div className={`feed-element ${active ? 'active' : ''} ${muted ? 'muted' : ''}`}>
+   <div className={`feed-element ${active ? 'active' : ''} ${muted ? 'muted' : ''} ${className}`}>
       <div>
          <strong>{title}</strong>
          <div>{description}</div>
-         <small className="pull-right text-navy">{notes}</small>
+         <small className="text-navy">{notes}</small>
       </div>
    </div>
 );

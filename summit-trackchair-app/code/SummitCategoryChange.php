@@ -15,14 +15,19 @@
 class SummitCategoryChange extends DataObject
 {
 
+	const STATUS_PENDING = 0;
+
+	const STATUS_APPROVED = 1;
+
+	const STATUS_REJECTED = 2;
+
     /**
      * @var array
      */
     private static $db = [
         'Comment' => 'Varchar',
         'ApprovalDate' => 'SS_DateTime',
-        'Approved' => 'Boolean',
-        'Done' => 'Boolean'
+        'Status' => 'Int',
     ];
 
     /**
@@ -37,5 +42,17 @@ class SummitCategoryChange extends DataObject
         'NewCatApprover' => 'Member',
         'AdminApprover' => 'Member'
     ];
+
+    public function getNiceStatus()
+    {
+    	switch($this->Status) {
+    		case self::STATUS_PENDING:
+    			return "Pending";
+    		case self::STATUS_APPROVED:
+    			return "Approved";
+    		case self::STATUS_REJECTED:
+    			return "Rejected";
+    	}
+    }
 
 }

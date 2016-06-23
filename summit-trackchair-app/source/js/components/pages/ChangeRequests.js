@@ -2,6 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fetchChangeRequests, sortChangeRequests, searchChangeRequests} from '../../actions';
 import {Table, TableColumn} from '../ui/table';
+import Bounce from '../ui/loaders/Bounce';
+import RouterLink from '../containers/RouterLink';
+import RequestResolutionButtons from '../containers/RequestResolutionButtons';
+
 class ChangeRequests extends React.Component {
 
 	constructor (props) {
@@ -52,9 +56,8 @@ class ChangeRequests extends React.Component {
 
     render () {
     	if(!this.props.changeRequests) {
-    		return <div>loading</div>
+    		return <Bounce />
     	}
-
         return (
 			<div className="col-lg-12">
 			   <div className="ibox float-e-margins">
@@ -82,12 +85,22 @@ class ChangeRequests extends React.Component {
 			               		className="table table-striped table-bordered table-hover dataTable" 
 			               		role="grid"
 			               	>
-				               		<TableColumn width='45%' columnKey='presentation'>Presentation</TableColumn>
+				               		<TableColumn width='45%' columnKey='presentation'
+				               			cell={(data) => {
+				               				return <RouterLink link={`browse/${data.id}`}>{data.title}</RouterLink>
+				               			}}
+				               			>
+				               			Presentation
+				               		</TableColumn>
 				               		<TableColumn columnKey='status'
 				               			cell={(data) => {
-				               				if(data === 'Completed') {
-				               					return <span className="label label-primary">{data}</span>
+				               				if(data === 'Approved') {
+				               					return <span className="label label-success">{data}</span>
 				               				}
+				               				else if(data === 'Rejected') {
+				               					return <span className="label label-danger">{data}</span>	
+				               				}
+
 				               				return <span className="label label-warning">{data}</span>
 				               			}}
 				               			>
@@ -96,6 +109,22 @@ class ChangeRequests extends React.Component {
 				               		<TableColumn width='15%'columnKey='oldcat'>Old Category</TableColumn>
 				               		<TableColumn width='15%' columnKey='newcat'>New Category</TableColumn>
 				               		<TableColumn width='15%' columnKey='requester'>Requester</TableColumn>
+				               		{this.props.isAdmin &&
+				               			<TableColumn width='10%' columnKey='admin'
+				               				cell={(data, row) => {
+				               					if(data === false) {
+				               						return <small>Presentation already has selections.</small>
+				               					}
+				               					if(row[1] === 'Pending') {
+				               						return <RequestResolutionButtons request={data} />
+				               					}
+				               					return <span />
+				               					
+				               				}}
+				               			>
+				               				Admin
+				               			</TableColumn>
+				               		}
 			               </Table>
 			               {this.props.hasMore &&
 			               		<button className="btn btn-block btn-outline btn-primary" onClick={this.requestMore}>Load more...</button>
@@ -118,7 +147,11 @@ export default connect(
 		currentPage: state.changeRequests.page,
 		sortCol: state.changeRequests.sortCol,
 		sortDir: state.changeRequests.sortDir,
-		search: state.changeRequests.search
+		search: state.changeRequests.search,
+		isAdmin: state.changeRequests.results && 
+				 state.changeRequests.results.length && 
+				 state.changeRequests.results[0].length === 6
+
 	}),
 	dispatch => ({
 		fetch(params) {			

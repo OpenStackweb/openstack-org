@@ -39,25 +39,31 @@ class Dropdown extends React.Component {
 				<button type="button" className="btn btn-default dropdown-toggle" onClick={(e) => {
 					this.setState({opened: !this.state.opened})
 				}}>
-					{this.props.selectedText}
-					<span className="caret"></span>
+					{this.props.selectedText}&nbsp;
+					{this.props.caret &&
+						<span className="caret" />
+					}
 				</button>				
 				<ul style={{display: this.state.opened ? 'block' : 'none'}} className="dropdown-menu" role="menu">
-					{children && this.props.children.map((child, i) => (
-						React.cloneElement(
-							child,
-							{									
-								key: i,
-								onItemClick: (e) => {
-									e.preventDefault();
-									if(child.props.divider) return;
-									
-									this.setState({opened: false});
-									this.props.onItemSelected(child.props.eventKey);
+					{children && React.Children.map(children, (child, i) => {						
+						return (
+							child &&
+							React.cloneElement(
+								child,
+								{									
+									key: i,
+									onItemClick: (e) => {
+										e.preventDefault();
+										if(child.props.divider) return;
+										
+										this.setState({opened: false});
+										this.props.onItemSelected && this.props.onItemSelected(child.props.eventKey);
+									},
+									active: this.props.activeKey === child.props.eventKey
 								}
-							}
-						)
-					))}
+							)
+						);
+					})}
 				</ul>
 			
 		    </div>
@@ -68,7 +74,13 @@ class Dropdown extends React.Component {
 
 Dropdown.propTypes = {
 	onItemSelected: React.PropTypes.func,
-	selectedText: React.PropTypes.string
+	selectedText: React.PropTypes.any,
+	activeKey: React.PropTypes.any,
+	caret: React.PropTypes.bool
 };
+
+Dropdown.defaultProps = {
+	caret: true
+}
 
 export default Dropdown;

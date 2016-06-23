@@ -7,7 +7,13 @@ export const detailPresentation = function (
         case 'REQUEST_PRESENTATION_DETAIL':
             return {
                 ...state,
-                loading: true
+                loading: true,
+                sending: false,
+                emailSuccess: false,
+                showForm: false,
+                showChangeRequest: false,
+                categorySuccess: false,
+                requesting: false
             };
         case 'RECEIVE_PRESENTATION_DETAIL':
             return {
@@ -43,7 +49,7 @@ export const detailPresentation = function (
         case 'TOGGLE_FOR_ME':
         	return {
         		...state,
-        		selected: !!action.payload
+        		selected: action.payload.type
         	};
 
         case 'TOGGLE_FOR_GROUP':
@@ -57,7 +63,40 @@ export const detailPresentation = function (
         		...state,
         		viewed: true
         	};
-        	
+        case 'BEGIN_EMAIL':
+        	return {
+        		...state,
+        		sending: true
+        	};
+
+        case 'SUCCESS_EMAIL':
+        	return {
+        		...state,
+        		emailSuccess: action.payload,
+        		sending: false
+        	};
+        case 'TOGGLE_REQUEST_CATEGORY_CHANGE':
+        	return {
+        		...state,
+        		showChangeRequest: !state.showChangeRequest
+        	};
+        case 'TOGGLE_EMAIL_SPEAKERS':
+        	return {
+        		...state,
+        		showForm: !state.showForm
+        	};
+        case 'REQUEST_CATEGORY_CHANGE':
+        	return {
+        		...state,
+        		requesting: true
+        	};
+        case 'SUCCESS_CATEGORY_CHANGE':
+        	return {
+        		...state,
+        		requesting: false,
+        		categorySuccess: action.payload,
+        		change_requests_count: +state.change_requests_count+1
+        	};
         default:
             return state;
 

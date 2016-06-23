@@ -26,10 +26,12 @@ const MainNav = ({
         	<i className="fa fa-edit"></i>
         	<span className="nav-label">Change Requests</span>
         </LinkButton>
+        {/*
         <LinkButton link="help">
         	<i className="fa fa-question-circle"></i>
         	<span className="nav-label">Help</span>
         </LinkButton>
+		*/}
     </LinkBar>
 );
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CategoryDropdown from '../containers/CategoryDropdown';
+import CategoryNavigator from '../containers/CategoryNavigator';
 import ListDropdown from '../containers/ListDropdown';
 import {fetchLists} from '../../actions';
 import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
+import Bounce from '../ui/loaders/Bounce';
 
 class Selections extends React.Component {
 
@@ -22,26 +23,25 @@ class Selections extends React.Component {
 		if(nextProps.category !== this.props.category) {
 			this.props.fetch(nextProps.category);
 		}
-		if(nextProps.lists && !this.props.params.id) {
-			browserHistory.push(URL.create(`selections/${nextProps.lists[0].id}`, true));
-		}
 	}
 
     render () {
     	if(!this.props.lists) {
-    		return <div>loading</div>
+    		return <Bounce />
     	}
 
         return (
             <div className="selections">
+            <div className="container-fluid selections-navigation">
                 <div className="row">
 					<div className="col-lg-4">
-						<strong>Category</strong>: <CategoryDropdown autoSelect />
+						<strong>Category</strong>: <CategoryNavigator />
 					</div>
 					<div className="col-lg-4">
-						<strong>List</strong>: <ListDropdown list={this.props.params.id} category={this.props.category} />
+						<strong>List</strong>: <ListDropdown list={this.props.params.id} autoSelect />
 					</div>
                 </div>
+            </div>
                 {this.props.children}
             </div>
         );
@@ -50,11 +50,15 @@ class Selections extends React.Component {
 }
 
 export default connect(
-	state => ({
-		lists: state.lists.results,
-		category: state.routing.locationBeforeTransitions.query.category,
-		defaultCategory: state.summit.data.categories[0]		
-	}),
+	state => {
+		return {
+			lists: state.lists.results,
+			category: state.routing.locationBeforeTransitions.query.category,
+			defaultCategory: state.summit.data.categories.find(c => (
+				c.user_is_chair
+			))
+		};
+	},
 	dispatch => ({
 		fetch(category) {
 			dispatch(fetchLists(category))

@@ -1,14 +1,20 @@
 /*eslint-disable */
 const map = (results) => {
-	return results.map(data => (
-		[
-			data.presentation_title,
-			data.done ? 'Completed' : 'Requested',
+	return results.map(data => {
+		const r = [
+			{title: data.presentation_title, id: data.presentation_id},
+			data.status,
 			data.old_category.title,
 			data.new_category.title,
-			data.requester
-		]
-	));
+			data.requester		
+		];
+
+		if(data.is_admin) {
+			r.push(data.has_selections ? false : data.id);
+		}
+
+		return r;
+	});
 }
 export const changeRequests = function (
     state = {
@@ -17,7 +23,7 @@ export const changeRequests = function (
         loading: false,
         page: 1,
         sortCol: 'status',
-        sortDir: -1,
+        sortDir: 1,
         search: null
     },
     action = {}) {	
@@ -52,6 +58,21 @@ export const changeRequests = function (
         	return {
         		...state,
         		search: action.payload
+        	};
+
+        case 'RESOLVE_REQUEST':
+        	return {
+        		...state,
+        		results: state.results.map(r => {        			
+        			if(+r[5] === action.payload.requestID) {        				
+        				const newRow = [...r];
+        				newRow[1] = action.payload.approved ? 'Approved' : 'Rejected';
+
+        				return newRow;
+        			}
+
+        			return r;
+        		})
         	};
 
         default:

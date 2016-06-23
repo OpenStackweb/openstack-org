@@ -20,12 +20,7 @@ const NavigationBar = ({
             <div className="navbar-collapse collapse" id="navbar">
 				<MainNav />
 				<ul className="nav navbar-top-links navbar-right">
-					<NotificationDropdown />
-					<li>
-						<a href="login.html">
-							<i className="fa fa-sign-out"></i>
-						</a>
-					</li>
+					{/*<NotificationDropdown />*/}
 				</ul>
             </div>
         </nav>

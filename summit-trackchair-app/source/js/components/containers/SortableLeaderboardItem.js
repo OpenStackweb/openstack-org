@@ -2,28 +2,30 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import LeaderboardItem from '../ui/LeaderboardItem';
-
-const style = {
-  cursor: 'move'
-};
+import PresentationMetrics from'../views/PresentationMetrics';
+import Dropdown from '../ui/Dropdown';
+import DropdownItem from '../ui/DropdownItem';
+import {connect} from 'react-redux';
 
 const cardSource = {
   beginDrag(props) {
     return {
       id: props.id,
       index: props.index,
-      listID: props.list.id
+      presentation: props.presentation,
+      order: props.rank,
+      column: props.column
     };
   }
 };
 
 const cardTarget = {
   hover(props, monitor, component) {
+    const itemID = monitor.getItem().id;
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
-    const dragList = monitor.getItem().listID;
-    const hoverList = props.list.id;
-
+    const dragList = monitor.getItem().column;
+    const hoverList = props.column;
     // Don't replace items with themselves
     if (dragIndex === hoverIndex && dragList === hoverList) {
       return;
@@ -46,7 +48,7 @@ const cardTarget = {
     // When dragging upwards, only move when the cursor is above 50%
 
     // Dragging downwards
-    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY && dragList === hoverList) {
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY && dragList === hoverList) {      
       return;
     }
 
@@ -54,15 +56,29 @@ const cardTarget = {
     if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY && dragList === hoverList) {
       return;
     }
-
     // Time to actually perform the action
-    props.onMove(dragIndex, hoverIndex, dragList, hoverList);
+    props.onMove(monitor.getItem(), dragList, dragIndex, hoverList, hoverIndex);
     monitor.getItem().index = hoverIndex;
-    monitor.getItem().listID = hoverList;
   }
 };
 
 class SortableLeaderboardItem extends Component {
+  
+  constructor(props) {
+  	super(props);
+  	this.handleSelect = this.handleSelect.bind(this);  	
+  }
+
+  
+  handleSelect (key) {
+  	if(key === 'remove') {
+  		this.props.onRemove && this.props.onRemove(this.props.id, this.props.index);	
+  	}
+  	else if(key === 'team') {
+  		this.props.onAddToTeam && this.props.onAddToTeam(this.props.id, this.props.index);	
+  	}  	
+  }
+
 
   render() {
     const {
@@ -70,13 +86,30 @@ class SortableLeaderboardItem extends Component {
     	isDragging,
     	connectDragSource,
     	connectDropTarget,
-    	connectDragPreview 
+    	connectDragPreview,
+    	canAddTeam,
+    	isAlternate
     } = this.props;
-    const opacity = isDragging ? 0.5 : 1;
+    
+    const p = this.props.presentation;
+    const metrics = <PresentationMetrics presentation={p} />;
 
-    return connectDragSource(connectDropTarget(
-      <div style={{ ...style, opacity }}>
-        <LeaderboardItem {...this.props} />
+    return connectDragPreview(connectDropTarget(
+      <div className={'selection-container' + (isDragging ? ' dragging' : '') + (isAlternate ? ' alternate' : '')}>
+      {connectDragSource(<i className="drag-handle fa fa-bars" />)}
+        <LeaderboardItem {...this.props} title={p.title} notes={metrics} />
+        <div className="selection-tools">
+	        <Dropdown onItemSelected={this.handleSelect} selectedText={<i className="fa fa-cog" />} caret={false}>
+				{canAddTeam &&
+	        	<DropdownItem eventKey='team'>
+	        		<i className="fa fa-group" /> Add to team list
+	        	</DropdownItem>
+	        	}
+	        	<DropdownItem eventKey='remove'>
+	        		<i className="fa fa-remove" /> Remove from this list
+	        	</DropdownItem>
+	        </Dropdown>	        
+        </div>
       </div>
     ));
   }
@@ -88,14 +121,30 @@ SortableLeaderboardItem.propTypes = {
     index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
-    onMove: PropTypes.func.isRequired
+    onMove: PropTypes.func.isRequired,
+    canAddTeam: PropTypes.bool
 };
 
 const LeaderboardItemDropTarget = DropTarget('CARD', cardTarget, connect =>({
 	connectDropTarget: connect.dropTarget()
 }))(SortableLeaderboardItem);
 
-export default DragSource('CARD', cardSource, (connect, monitor) => ({
+const LeaderboardItemDragSource = DragSource('CARD', cardSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview(),
   isDragging: monitor.isDragging()
 }))(LeaderboardItemDropTarget);
+
+export default connect(
+	(state, ownProps) => {
+		const teamList = state.lists.results.find(l => l.list_type === 'Group');
+		if(!teamList) return;
+
+		const teamHasThis = teamList.selections.some(s => +s.id === +ownProps.id);
+		const teamIsFull = teamList.selections.length >= teamList.slots;
+
+		return {
+			canAddTeam: (!teamHasThis && !teamIsFull)
+		};
+	}
+)(LeaderboardItemDragSource);

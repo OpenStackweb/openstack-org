@@ -4,17 +4,19 @@ const DropdownItem = ({
 	divider,
 	eventKey,
 	children,
-	onItemClick
+	onItemClick,
+	active
 }) => {
 	return divider ? <li className="divider" /> : (
-		<li onClick={onItemClick}>
+		<li onClick={onItemClick} className={active ? 'active' : ''}>
 			<a>{children}</a>
 		</li>
 	);
 };
 DropdownItem.propTypes = {
 	divider: React.PropTypes.bool,
-	onItemClick: React.PropTypes.func
+	onItemClick: React.PropTypes.func,
+	eventKey: React.PropTypes.any
 }
 
 export default DropdownItem;

@@ -1,33 +1,8 @@
-Browse
-	- New filters: 
-		All, 
-		Seen, 
-		Unseen, 
-		Moved here (and unseen), 
-		Selected, 
-		Maybe, 
-		Pass
-	- List view meta:
-		# selected
-		# maybe
-		# pass
-		#score
-	- Bug: browse should go to detail presentation if exists
+Migrations:
 
-Browse Detail
-	- Action for approve category change
-	- Email speakers
-	- Activity log and notifications
-	- Signal team selection
+UPDATE SummitCategoryChange SET Status = 1 WHERE Done=1;
+UPDATE SummitCategoryChange SET Status = 0 WHERE Done=0;
 
-Selections
-	- Need remove button
-	- Send to team list
-	- Slush pile drawer
-	- Add team list
+UPDATE SummitSelectedPresentation SET Collection = 'selected';
 
-Directory
-	Check resort on revisit
-
-Change Requests
-	Link presentations
+UPDATE SummitPresentationComment SET IsActivity = 1 WHERE IsCategoryChangeSuggestion = 1;

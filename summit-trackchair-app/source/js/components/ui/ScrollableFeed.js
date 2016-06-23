@@ -12,7 +12,7 @@ export default ({
     		<div className="feed-activity-list">
     			{children}
 		        {hasMore &&
-		        	<BlockButton onButtonClicked={onRequestMore}>Load more</BlockButton>
+		        	<BlockButton className="load-more" onButtonClicked={onRequestMore}>Load more</BlockButton>
 		        }
     		</div>
     	</div>

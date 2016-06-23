@@ -198,8 +198,9 @@ ORDER BY SummitSelectedPresentation.Order ASC
      */
     public function maxPresentations()
     {
-        return $this->Category()->SessionCount;
+        return $this->Category()->SessionCount + $this->Category()->AlternateCount;
     }
+
 
     /**
      * @return bool

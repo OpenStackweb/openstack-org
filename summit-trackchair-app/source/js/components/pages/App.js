@@ -3,6 +3,7 @@ import NavigationBar from '../views/NavigationBar';
 import ErrorMessage from '../containers/ErrorMessage';
 import {connect} from 'react-redux';
 import {fetchSummit} from '../../actions';
+import Bounce from '../ui/loaders/Bounce';
 
 class App extends React.Component {
 
@@ -12,7 +13,7 @@ class App extends React.Component {
     
     render () {
     	if(!this.props.isReady) {
-    		return <div>loading</div>
+    		return <Bounce />
     	}
         return (
             <div>

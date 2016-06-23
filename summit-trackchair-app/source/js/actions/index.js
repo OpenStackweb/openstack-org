@@ -46,7 +46,7 @@ export const toggleForMe = createAction('TOGGLE_FOR_ME');
 export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
 export const requestLists = createAction('REQUEST_LISTS');
 export const receiveLists = createAction('RECEIVE_LISTS');
-export const sortSelections = createAction('SORT_SELECTIONS');
+export const reorganiseSelections = createAction('REORGANISE_SELECTIONS');
 export const sortDirectory = createAction('SORT_DIRECTORY');
 export const searchDirectory = createAction('SEARCH_DIRECTORY');
 export const requestChangeRequests = createAction('REQUEST_CHANGE_REQUESTS');
@@ -55,6 +55,15 @@ export const sortChangeRequests = createAction('SORT_CHANGE_REQUESTS');
 export const searchChangeRequests = createAction('SEARCH_CHANGE_REQUESTS');
 export const activatePresentationFilter = createAction('ACTIVATE_PRESENTATION_FILTER');
 export const markAsRead = createAction('MARK_AS_READ');
+export const beginEmail = createAction('BEGIN_EMAIL');
+export const successEmail = createAction('SUCCESS_EMAIL');
+export const toggleRequestCategoryChange = createAction('TOGGLE_REQUEST_CATEGORY_CHANGE');
+export const toggleEmailSpeakers = createAction('TOGGLE_EMAIL_SPEAKERS');
+export const toggleMaybeDrawer = createAction('TOGGLE_MAYBE_DRAWER');
+export const requestCategoryChange = createAction('REQUEST_CATEGORY_CHANGE');
+export const successCategoryChange = createAction('SUCCESS_CATEGORY_CHANGE');
+export const resolveRequest = createAction('RESOLVE_REQUEST');
+
 /* Async Actions */
 
 export const fetchSummit = (id) => {
@@ -95,15 +104,15 @@ export const fetchPresentationDetail = (id) => {
 	)(id);
 };
 
-export const postMySelection = (presentationID, bool) => {
+export const postMySelection = (presentationID, type, name) => {
 	return (dispatch) => {
 		const key = `TOGGLE_FOR_ME_${presentationID}`;
-		dispatch(toggleForMe(bool));
+		dispatch(toggleForMe({presentationID, type, name}));
 		cancel(key);
 
 		const url = URL.create(
-			`presentation/${presentationID}/${bool ? 'select' : 'unselect'}`,
-			{},
+			`presentation/${presentationID}/select`,
+			{type},
 			'/trackchairs/api/v1'
 		);
 
@@ -164,20 +173,92 @@ export const postComment = (presentationID, commentData) => {
 	};
 }
 
-export const postReorder = (listID, newOrder) => {
-	return (dispatch, getState) => {
-		const key = `REORDER_${listID}`;
-		dispatch(sortSelections({listID, selections: newOrder}));
+export const postEmail = (presentationID, emailData) => {
+	return (dispatch) => {
+		
+		const key = `POST_EMAIL__${JSON.stringify(emailData || {})}`;
+		const __id = +new Date();
 		cancel(key);
+		dispatch(beginEmail());
+		const url = URL.create(
+			`presentation/${presentationID}/emailspeakers`,
+			{}, 
+			'/trackchairs/api/v1'
+		);
+		
+		const req = http.post(url)
+			.send({email: emailData.body})
+			.type('form')
+			.end(responseHandler(dispatch, json => {
+				dispatch(successEmail(true));
+				setTimeout(() => successEmail(false), 3000);
+			}));
+		schedule(key, req);
+	};
+}
+
+export const postReorganise = (listID, collection, newOrder) => {
+	return (dispatch, getState) => {
+		const key = `REORDER_${listID}_${collection}`;
+		dispatch(reorganiseSelections({listID, collection, newOrder}));
+		cancel(key);
+		const collectionMap = {
+			selections: 'selected',
+			maybes: 'maybe',
+			team: 'selected'
+		};
 		const data = {
 			list_id: listID,
-			sort_order: newOrder.map(s => s.id)
+			order: newOrder.map(s => s.id),
+			collection: collectionMap[collection]
 		};
 		const req = http.put('/trackchairs/api/v1/reorder')
 			.send(data)
-			.end(responseHandler());
+			.end(responseHandler(dispatch));
 		schedule(key, req);
 	};
+};
+
+export const postResolveRequest = (requestID, approved) => {
+	return (dispatch, getState) => {
+		const key = `RESOLVE_${requestID}`;
+		dispatch(resolveRequest({requestID, approved}));
+		cancel(key);
+
+		const req = http.put(`/trackchairs/api/v1/categorychange/resolve/${requestID}`)
+			.send({approved})
+			.end(responseHandler(dispatch));
+
+		schedule(key, req);
+	}
+};
+
+export const postCategoryChange = (presentationID, newCategory) => {
+	return (dispatch, getState) => {
+		const key = `REQUEST_CATEGORY_CHANGE_${presentationID}`;
+		dispatch(requestCategoryChange({presentationID, newCategory}));
+		cancel(key);
+		
+		const data = {
+			new_cat: newCategory
+		};
+		const url = URL.create(
+			`presentation/${presentationID}/categorychange/new`,
+			{}, 
+			'/trackchairs/api/v1'
+		);
+
+		const req = http.post(url)
+			.send(data)
+			.type('form')
+			.end(responseHandler(dispatch, json => {
+				dispatch(successCategoryChange(true));
+				//setTimeout(() => successCategoryChange(false), 3000);
+			}));
+
+		
+		schedule(key, req);
+	}
 }
 
 export const postMarkAsRead = (presentationID) => {

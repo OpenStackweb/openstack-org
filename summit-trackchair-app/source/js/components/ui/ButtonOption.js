@@ -16,7 +16,7 @@ class ButtonOption extends React.Component {
 		const {active, children} = this.props;
 
 		return (
-			<button onClick={this.handleClick} className={`btn btn-${active ? 'primary' : 'white'}`} type="button">
+			<button onClick={this.handleClick} className={`btn btn-white ${this.props.className} ${active ? 'active' : ''}`} disabled={this.props.disabled} type="button">
 				{children}
 			</button>
 		);
@@ -25,7 +25,8 @@ class ButtonOption extends React.Component {
 }
 
 ButtonOption.propTypes = {
-	active: React.PropTypes.bool
+	active: React.PropTypes.bool,
+	disabled: React.PropTypes.bool
 };
 
 export default ButtonOption;

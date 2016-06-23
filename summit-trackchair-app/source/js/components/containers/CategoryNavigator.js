@@ -5,12 +5,13 @@ import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
 
-const CategoryDropdown = ({
+const CategoryNavigator = ({
 	categories,
 	selectedText,
+	activeCategory,
 	goToCategory
 }) => (
-	<Dropdown onItemSelected={goToCategory} selectedText={selectedText} className="category-dropdown">
+	<Dropdown onItemSelected={goToCategory} selectedText={selectedText} activeKey={activeCategory} className="category-dropdown">
 		{categories.map(c => (
 			<DropdownItem eventKey={c.id} key={c.id}>{c.title}</DropdownItem>
 		))}
@@ -26,6 +27,7 @@ export default connect(
 
 		return {
 			categories,
+			activeCategory: selectedText.length === 1 ? selectedText[0].id : null,
 			selectedText: selectedText.length === 1 ? selectedText[0].title : '--- Select a category ---' 
 		}
 	},
@@ -35,4 +37,4 @@ export default connect(
 			browserHistory.push(URL.create(undefined, {category}));
 		}
 	})
-)(CategoryDropdown);
+)(CategoryNavigator);

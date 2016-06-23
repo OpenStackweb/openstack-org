@@ -44,7 +44,6 @@ class SortableList extends React.Component {
 		let relY = e.clientY - this.over.offsetTop;
 		let height = this.over.offsetHeight / 2;
 		let parent = e.target.parentNode;
-console.log(parent);
 		if(relY > height) {
 		  this.nodePlacement = "after";
 		  parent.insertBefore(this.placeholder, e.target.nextElementSibling);

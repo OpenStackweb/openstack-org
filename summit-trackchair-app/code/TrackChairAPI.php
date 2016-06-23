@@ -17,7 +17,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'PUT reorder' => 'handleReorderList',
         'GET changerequests' => 'handleChangeRequests',
         'GET chair/add' => 'handleAddChair',
-        'GET categorychange/accept/$ID' => 'handleAcceptCategoryChange',
+        'PUT categorychange/resolve/$ID' => 'handleResolveCategoryChange',
         'GET export/speakerworksheet' => 'handleSpeakerWorksheet',
         'GET restoreorders' => 'handleRestoreOrders',
         'GET presentationcomments' => 'handlePresentationsWithComments'
@@ -34,7 +34,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'handleReorderList',
         'handleChangeRequests',
         'handleAddChair' => 'ADMIN',
-        'handleAcceptCategoryChange' => 'ADMIN',
+        'handleResolveCategoryChange' => 'ADMIN',
         'handleRestoreOrders' => 'ADMIN',
         'handleSpeakerWorksheet' => 'ADMIN',
         'handlePresentationsWithComments' => 'ADMIN'
@@ -232,6 +232,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'title' => $p->Title,
                 'viewed' => $p->isViewedByTrackChair(),
                 'selected' => $p->getSelectionType(),
+                'selectors' => array_keys($p->getSelectors()->map('Name','Name')->toArray()),
+                'likers' => array_keys($p->getLikers()->map('Name','Name')->toArray()),
+                'passers' => array_keys($p->getPassers()->map('Name','Name')->toArray()),
+                'comment_count' => $p->Comments()->count(),
+                'popularity' => $p->getPopularityScore(),
                 'vote_count' => $p->CalcVoteCount(),
                 'vote_average' => $p->CalcVoteAverage(),
                 'total_points' => $p->CalcTotalPoints(),
@@ -285,7 +290,10 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $lists = SummitSelectedPresentationList::getAllListsByCategory($categoryID);
 
         foreach ($lists as $key => $list) {
-            $selections = $list->SummitSelectedPresentations()->sort('Order ASC');
+            $selections = $list->SummitSelectedPresentations()
+            					->exclude('Collection', SummitSelectedPresentation::COLLECTION_PASS)
+            					->sort(['Collection DESC', 'Order ASC']);
+            
             $count = $selections->count();
             $listID = $list->ID;
 
@@ -297,15 +305,32 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'total' => $count,
                 'can_edit' => $list->memberCanEdit(),
                 'slots' => $list->maxPresentations(),
-                'mine' => $list->mine()
+                'alternates' => $list->Category()->AlternateCount,
+                'mine' => $list->mine(),
+                'selections' => [],
+                'maybes' => []                
             ];
 
             foreach ($selections as $s) {
-                $data['selections'][] = [
-                    'title' => $s->Presentation()->Title,
+            	$p = $s->Presentation();
+            	$selectionData = [
+                    'presentation' => [
+                    	'title' => $p->Title,
+		                'selectors' => array_keys($p->getSelectors()->map('Name','Name')->toArray()),
+		                'likers' => array_keys($p->getLikers()->map('Name','Name')->toArray()),
+		                'passers' => array_keys($p->getPassers()->map('Name','Name')->toArray()),
+		                'group_selected' => $p->isGroupSelected(),
+		                'comment_count' => $p->Comments()->count()
+		            ],
                     'order' => $s->Order,
                     'id' => $s->PresentationID
                 ];
+                if($s->isSelected()) {
+                	$data['selections'][] = $selectionData;
+                }
+                else if($s->isMaybe()) {
+                	$data['maybes'][] = $selectionData;
+                }                
             }
 
             $results['lists'][] = $data;
@@ -324,37 +349,42 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     public function handleReorderList(SS_HTTPRequest $r)
     {        
         $vars = Convert::json2array($r->getBody());        
-        $sortOrder = $vars['sort_order'];
-        $listID = $vars['list_id'];        	
+        $idList = $vars['order'];
+        $listID = $vars['list_id'];
+        $collection = $vars['collection'];        	
         $list = SummitSelectedPresentationList::get()->byId($listID);
 
-        if (is_array($sortOrder)) {
-            foreach ($sortOrder as $key => $id) {
-                $selection = SummitSelectedPresentation::get()->filter([
+        // Remove any presentations that are not in the list
+        SummitSelectedPresentation::get()
+        	->filter([
+        		'SummitSelectedPresentationListID' => $listID,
+        		'Collection' => $collection
+        	])
+        	->exclude([
+        		'PresentationID' => array_values($idList)
+        	])
+        	->removeAll();
+
+        if (is_array($idList)) {
+            foreach ($idList as $order => $id) {
+            	$attributes = [
                     'PresentationID' => $id,
-                    'SummitSelectedPresentationListID' => $listID
-                ]);
+                    'SummitSelectedPresentationListID' => $listID,
+                    'Collection' => $collection,
+                    'MemberID' => Member::currentUserID()
+                ];
 
-                // Add the selection if it's new
-                if (!$selection->exists()) {
-                    $presentation = Presentation::get()->byId($id);
-                    if ($presentation->exists() && $presentation->CategoryID == $list->CategoryID) {
-                        $s = SummitSelectedPresentation::create();
-                        $s->SummitSelectedPresentationListID = $listID;
-                        $s->PresentationID = $presentation->ID;
-                        $s->MemberID = Member::currentUserID();
-                        $s->Order = $key + 1;
-                        $s->write();
-                    }
+                $selection = SummitSelectedPresentation::get()
+                	->filter($attributes)
+                	->first();
 
+                if(!$selection) {
+                	$selection = SummitSelectedPresentation::create($attributes);
                 }
 
-                // Adjust the order if not
-                if ($selection->exists()) {
-                    $s = $selection->first();
-                    $s->Order = $key + 1;
-                    $s->write();
-                }
+                $selection->Order = $order+1;
+                $selection->write();
+
             }
         }
 
@@ -380,8 +410,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             ->leftJoin('Member', 'Member.ID = SummitCategoryChange.ReqesterID')
             ->filter('SummitEvent.SummitID', $summitID);
 
-        $sortCol = $r->getVar('sortCol') ?: 'Done';
-        $sortDir = $r->getVar('sortDir') == -1 ? 'DESC' : 'ASC';
+        $sortCol = $r->getVar('sortCol') ?: 'Status';
+        $sortDir = $r->getVar('sortDir') == 1 ? 'ASC' : 'DESC';
         $search = $r->getVar('search');
 
         switch($sortCol) {
@@ -438,7 +468,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $row['presentation_id'] = $request->PresentationID;
             $row['presentation_title'] = $request->Presentation()->Title;
             $row['is_admin'] = $isAdmin;
-            $row['done'] = $request->Done;
+            $row['status'] = $request->getNiceStatus();
             $row['chair_of_old'] = $request->Presentation()->Category()->isTrackChair($memID);
             $row['chair_of_new'] = $request->NewCategory()->isTrackChair($memID);
             $row['new_category']['title'] = $request->NewCategory()->Title;
@@ -544,7 +574,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      * @throws ValidationException
      * @throws null
      */
-    public function handleAcceptCategoryChange(SS_HTTPResponse $r)
+    public function handleResolveCategoryChange(SS_HTTPResponse $r)
     {
 
         if (!Permission::check('ADMIN')) {
@@ -555,49 +585,77 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             return $this->httpError(500, "Invalid category change id");
         }
 
-        $request = SummitCategoryChange::get()->byID($r->param('ID'));
-
-        if ($request->exists()) {
-            if ($request->Presentation()->isSelectedByAnyone()) {
-                return new SS_HTTPResponse("The presentation has already been selected by chairs.", 500);
-            }
-
-            if ($request->Presentation()->CategoryID == $request->NewCategoryID) {
-                $request->Done = true;
-                $request->write();
-
-                return new SS_HTTPResponse("The presentation is already in this category.", 200);
-            }
-
-            // Make the category change
-            $summit = Summit::get_active();
-            $category = $summit->Categories()->filter('ID', $request->NewCategoryID)->first();
-            if (!$category->exists()) {
-                return $this->httpError(500, "Category not found in current summit");
-            }
-
-            $request->OldCategoryID = $request->Presentation()->CategoryID;
-
-            $request->Presentation()->CategoryID = $request->NewCategoryID;
-            $request->Presentation()->write();
-
-            $comment = SummitPresentationComment::create();
-            $comment->Body = 'This presentation was moved into the category '
-                . $category->Title . '.'
-                . ' The change was approved by '
-                . Member::currentUser()->FirstName . ' ' . Member::currentUser()->Surname . '.';
-            $comment->PresentationID = $request->Presentation()->ID;
-            $comment->write();
-
-            $request->AdminApproverID = Member::currentUserID();
-            $request->Approved = true;
-            $request->Done = true;
-            $request->ApprovalDate = SS_Datetime::now();
-
-            $request->write();
-
-            return $this->ok('change request accepted.');
+        $vars = Convert::json2array($r->getBody());        
+        if(!isset($vars['approved'])) {
+        	return $this->httpError(500, "Request body must contain 'approved' 1 or 0");	
         }
+        $approved = (boolean) $vars['approved'];
+
+        $request = SummitCategoryChange::get()->byID($r->param('ID'));
+        if(!$request) {
+        	return $this->httpError(500, "Request " . $r->param('ID') . " does not exist");
+        }
+        
+    	$status = $approved ? SummitCategoryChange::STATUS_APPROVED : SummitCategoryChange::STATUS_REJECTED;
+
+        if ($request->Presentation()->isSelectedByAnyone()) {
+            return new SS_HTTPResponse("The presentation has already been selected by chairs.", 500);
+        }
+
+        if ($request->Presentation()->CategoryID == $request->NewCategoryID) {
+            return new SS_HTTPResponse("The presentation is already in this category.", 200);
+        }
+
+        // Make the category change
+        $summit = Summit::get_active();
+        $category = $summit->Categories()->filter('ID', $request->NewCategoryID)->first();
+        if (!$category->exists()) {
+            return $this->httpError(500, "Category not found in current summit");
+        }
+		
+		$comment = SummitPresentationComment::create();
+    	$comment->PresentationID = $request->Presentation()->ID;		
+        
+        if($approved) {
+	        $request->OldCategoryID = $request->Presentation()->CategoryID;
+	        $request->Presentation()->CategoryID = $request->NewCategoryID;
+	        $request->Presentation()->write();    
+	        $comment->Body = 'This presentation was moved into the category '
+	            . $category->Title . '.'
+	            . ' The change was approved by '
+	            . Member::currentUser()->FirstName . ' ' . Member::currentUser()->Surname . '.';	        
+    	}
+    	else {	        
+	        $comment->Body = 'A request to move this presentation to the category '
+	            . $category->Title  
+	            . ' was rejected by '
+	            . Member::currentUser()->getName() . '.';	        
+    	}
+
+    	$comment->write();    		
+        
+        $request->AdminApproverID = Member::currentUserID();
+        $request->Status = $status;
+        $request->ApprovalDate = SS_Datetime::now();
+        $request->write();
+
+        $peers = SummitCategoryChange::get()
+        	->filter([
+        		'PresentationID' => $request->PresentationID,
+        		'NewCategoryID' => $request->NewCategoryID
+        	])
+        	->exclude([
+        		'ID' => $request->ID
+        	]);
+
+        foreach($peers as $p) {
+            $p->AdminApproverID = Member::currentUserID();
+            $p->Status = SummitCategoryChange::STATUS_APPROVED;
+            $p->ApprovalDate = SS_Datetime::now();
+            $p->write();
+        }
+
+        return $this->ok('change request accepted.');
     }
 
 
@@ -687,32 +745,34 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
     /**
      * @var array
      */
-    private static $url_handlers = array(
+    private static $url_handlers = [
         'GET ' => 'index',
         'POST vote' => 'handleVote',
         'POST comment' => 'handleAddComment',
+        'POST emailspeakers' => 'handleEmailSpeakers',
         'PUT select' => 'handleSelect',
         'PUT unselect' => 'handleUnselect',
         'PUT markasviewed' => 'handleMarkAsViewed',
         'PUT group/select' => 'handleGroupSelect',
         'PUT group/unselect' => 'handleGroupUnselect',
-        'GET categorychange/new' => 'handleCategoryChangeRequest',
-    );
+        'POST categorychange/new' => 'handleCategoryChangeRequest',
+    ];
 
 
     /**
      * @var array
      */
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'handleVote',
         'handleAddComment',
+        'handleEmailSpeakers',
         'handleSelect',
         'handleUnselect',
         'handleMarkAsViewed',
         'handleCategoryChangeRequest',
         'handleGroupSelect',
         'handleGroupUnselect'
-    );
+    ];
 
 
     /**
@@ -809,10 +869,11 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         $comments = [];
 
-        foreach ($p->Comments()->filter('IsCategoryChangeSuggestion', false) as $c) {
+        foreach ($p->Comments() as $c) {
             $comment = $c->toJSON();
             $comment['name'] = $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname;
             $comment['ago'] =  $c->obj('Created')->Ago(false);
+            $comment['is_activity'] = (boolean) $c->IsActivity;
             $comments[] = $comment;
         }
 
@@ -837,9 +898,17 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $data['user_vote'] = $p->getUserVote() ? $p->getUserVote()->Vote : null;
         $data['comments'] = $comments;
         $data['can_assign'] = $p->canAssign(1) ? $p->canAssign(1) : null;
-        $data['selected'] = $p->isSelected();
+        $data['selected'] = $p->getSelectionType();
+        $data['selectors'] = array_keys($p->getSelectors()->map('Name','Name')->toArray());
+        $data['likers'] = array_keys($p->getLikers()->map('Name','Name')->toArray());
+        $data['passers'] = array_keys($p->getPassers()->map('Name','Name')->toArray());
+        $data['popularity'] = $p->getPopularityScore();
         $data['group_selected'] = $p->isGroupSelected();
         $data['moved_to_category'] = $p->movedToThisCategory();
+        $data['change_requests_count'] = SummitCategoryChange::get()->filter([
+        		'PresentationID' => $p->ID,
+        		'Status' => SummitCategoryChange::STATUS_PENDING
+        	])->count();
 
         return (new SS_HTTPResponse(
             Convert::array2json($data), 200
@@ -898,6 +967,46 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
     }
 
     /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse|void
+     * @throws SS_HTTPResponse_Exception
+     */
+    public function handleEmailSpeakers(SS_HTTPRequest $r)
+    {
+        if (!Member::currentUser()) {
+            return $this->httpError(403);
+        }
+
+        $email = $r->postVar('email');
+
+        if ($email != null) {
+            $current_user = Member::currentUser();
+            $addresses = [];
+            foreach($this->presentation->Speakers() as $s) {
+            	$addresses[] = $s->getEmail();
+            }
+            $subject = "Track chair {$current_user->getName()} has a question about your presentation";
+            $body = $email;
+            $email = EmailFactory::getInstance()->buildEmail(
+            	null,
+            	implode(',',$addresses),
+            	$subject,
+            	$body
+            );
+            $email->setCc('speakersupport@openstack.org');
+            
+            try {
+            	$email->send();
+            	return new SS_HTTPResponse('OK');
+        	} catch(Exception $e) {
+        		return new SS_HTTPResponse($e->getMessage(), 400);
+        	}
+        }
+
+        return $this->httpError(400, "Invalid comment");
+    }
+
+    /**
      * @param SS_HTTPResponse $r
      * @throws SS_HTTPResponse_Exception
      */
@@ -907,8 +1016,22 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             return $this->httpError(403);
         }
 
-        $this->presentation->assignToIndividualList();
-
+        $maybe = SummitSelectedPresentation::COLLECTION_MAYBE;
+        $pass = SummitSelectedPresentation::COLLECTION_PASS;
+        $selected = SummitSelectedPresentation::COLLECTION_SELECTED;
+        
+        switch($r->getVar('type')) {
+        	case $maybe:
+        		$this->presentation->assignToIndividualList($maybe);
+        		break;
+        	case $pass:
+        		$this->presentation->assignToIndividualList($pass);
+        		break;
+        	default:
+        		$this->presentation->assignToIndividualList($selected);
+        		break;
+        }
+        
         return new SS_HTTPResponse('OK');
     }
 
@@ -985,17 +1108,17 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         if (!Member::currentUser()) {
             return $this->httpError(403);
         }
-
-        if (!is_numeric($r->getVar('new_cat'))) {
-            return $this->httpError(500, "Invalid category id");
+        $newCat = $r->postVar('new_cat');
+        if (!is_numeric($newCat)) {
+            return $this->httpError(500, "Invalid category id");        
         }
 
-        $c = PresentationCategory::get()->byID((int)$r->getVar('new_cat'));
+        $c = PresentationCategory::get()->byID($newCat);
 
         if ($c) {
             $request = SummitCategoryChange::create();
             $request->PresentationID = $this->presentation->ID;
-            $request->NewCategoryID = $r->getVar('new_cat');
+            $request->NewCategoryID = $newCat;
             $request->ReqesterID = Member::currentUserID();
             $request->write();
 

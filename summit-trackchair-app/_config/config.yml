@@ -9,3 +9,9 @@ TrackChairAPI:
 Presentation:
   extensions:
     - PresentationTrackChairFeatures
+## What is the order for a presentation marked "pass"
+SummitSelectedPresentation:
+  weight_select: 2
+  weight_maybe: 1
+  weight_pass: -1
+

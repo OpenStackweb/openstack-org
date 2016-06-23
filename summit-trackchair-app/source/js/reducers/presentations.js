@@ -33,6 +33,36 @@ export const presentations = function (
         		filter: action.payload
         	};
 
+        case 'TOGGLE_FOR_ME':
+        	const metrics = {
+        		selected: 'selectors',
+        		maybe: 'likers',
+        		pass: 'passers'
+        	};
+        	return {
+        		...state,
+        		results: state.results.map(p => {
+        			if(+p.id === +action.payload.presentationID) {
+        				let subtractFrom = metrics[p.selected];
+        				let addTo = metrics[action.payload.type];        				
+        				let newPresentation = {
+        					...p,
+        					selected: action.payload.type,
+        					[addTo]: [...p[addTo], action.payload.name]
+        				};
+        				if(subtractFrom) {
+        					newPresentation[subtractFrom] = newPresentation[subtractFrom].filter(name => (
+        						name !== action.payload.name
+        					))
+        				}
+
+        				return newPresentation;
+        			}
+
+        			return p;
+        		})
+        	}
+
         case 'MARK_AS_READ':
         	return {
         		...state,

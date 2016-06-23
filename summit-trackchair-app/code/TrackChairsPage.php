@@ -54,9 +54,11 @@ class TrackChairsPage_Controller extends Page_Controller
         return Convert::array2json([
             'baseURL' => $this->Link(),
             'summitID' => Summit::get_active()->ID,
+            'pass_order' => SummitSelectedPresentation::config()->pass_order,
             'userinfo' => [
             	'name' => Member::currentUser()->getName(),
-            	'email' => Member::currentUser()->Email
+            	'email' => Member::currentUser()->Email,
+            	'isAdmin' => Permission::check('ADMIN')
             ]
         ]);
     }

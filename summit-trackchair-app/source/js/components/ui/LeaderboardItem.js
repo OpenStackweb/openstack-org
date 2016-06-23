@@ -19,15 +19,19 @@ class LeaderboardItem extends React.Component {
 	}
 
 	render() {
-		const {title, notes, rank} = this.props;
+		const {title, notes, rank, children, showRank, link} = this.props;
+		
 		return (
 		<div className="vote-item">
 			<div className="row">
-				<div className="col-md-2 ">
+				{showRank &&
+				<div className="col-md-2 ">		
 					<div className="vote-icon">
-						#{rank}
-					</div>
+						{rank}
+					</div>			
 				</div>
+				}
+				{!showRank && <div className="col-md-1" />}
 				<div className="col-md-10 vote-content">
 					<div className="vote-actions">
 					{this.props.canUp &&
@@ -42,16 +46,16 @@ class LeaderboardItem extends React.Component {
 						</a>
 					}
 					</div>
-					<a href="#" className="vote-title">
-						{title}
-					</a>
+					<span className="vote-title">
+						<a href={link}>{title}</a>
+					</span>
 					{notes &&
 					<div className="vote-info">
-						<i className="fa fa-comments-o"></i> {notes}
+						{notes}
 					</div>
 					}	
 				</div>
-
+				{children}
 			</div>
 		</div>
 		);
@@ -71,7 +75,8 @@ LeaderboardItem.propTypes = {
 
 LeaderboardItem.defaultProps = {
 	canUp: true,
-	canDown: true
+	canDown: true,
+	showRank: true
 };
 
 export default LeaderboardItem;

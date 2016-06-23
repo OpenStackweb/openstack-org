@@ -19,13 +19,13 @@ class PresentationTrackChairFeatures extends DataExtension
      * @return  SummitPresentationComment
      **/
 
-    public function addComment($commentBody, $MemberID, $is_category_change_suggestion = false)
+    public function addComment($commentBody, $MemberID, $isActivity = false)
     {
         $comment = new SummitPresentationComment();
         $comment->Body = $commentBody;
         $comment->CommenterID = $MemberID;
         $comment->PresentationID = $this->owner->ID;
-        $comment->IsCategoryChangeSuggestion = $is_category_change_suggestion;
+        $comment->IsActivity = $isActivity;
         $comment->write();
 
         return $comment;
@@ -35,63 +35,57 @@ class PresentationTrackChairFeatures extends DataExtension
      * Used by the track chair app to allow chairs to add a presentation to a personal list.
      **/
 
-    public function assignToIndividualList($maybe = false)
+    public function assignToIndividualList($collection)
     {
 
         // Check permissions of user on talk
-        if ($this->owner->CanAssign()) {
-            $mySelections = SummitSelectedPresentationList::getMemberList($this->owner->CategoryID);
+        if (!$this->owner->CanAssign()) return;
+
+    	$maybe = $collection === SummitSelectedPresentation::COLLECTION_MAYBE;
+    	$pass = $collection === SummitSelectedPresentation::COLLECTION_PASS;
+    	$selected = $collection === SummitSelectedPresentation::COLLECTION_SELECTED;
+
+    	if(!$maybe && !$pass && !$selected && !$alternate) {
+    		throw new InvalidArgumentException("assignToIndividualList() must take a collection argument of COLLECTION_MAYBE, COLLECTION_PASS, or COLLECTION_SELECTED per the SummitSelectedPresentation class definition");
+    	}
+
+        $mySelections = SummitSelectedPresentationList::getMemberList($this->owner->CategoryID);
 
 
-            // See if the presentation has already been assigned
-            $alreadyAssigned = $mySelections->SummitSelectedPresentations()
-            							    ->filter('PresentationID', $this->owner->ID)
-            							    ->exists();
+        // See if the presentation has already been assigned
+        $selectedPresentation = $mySelections->SummitSelectedPresentations()
+        							    ->filter('PresentationID', $this->owner->ID)
+        							    ->first();
 
-            if (!$alreadyAssigned) {
-            	$category = $this->owner->Category();
-            	$maybeThreshold = $category->SessionCount + $category->AlternateCount;
-                // Find the higest order value assigned up to this point              
-                $highestOrderInList = $mySelections
-                    ->SummitSelectedPresentations()
-                    ->max('Order');
-                if($maybe) {
-                	if($highestOrder > $maybeThreshold) {
-                		$order = $highestOrderInList+1;
-                	}
-                	else {
-                		$order = $maybeThreshold+1;
-                	}
-                }
-                else {
-                	$selectionList = $mySelections
-                		->SummitSelectedPresentations()                		
-                		->filter([
-                			'Order:LessThan' => $maybeThreshold
-                		]);
-
-                	if($selectionList->count() >= $$maybeThreshold) {
-                		throw new Exception("Cannot add any more presentations. Limit is $maybeThreshold. Currently at {$selectionList->count()}");
-                	}
-                	
-                	$order = $selectionList->max('Order')+1;
-                }
-
-                $selectedPresentation = SummitSelectedPresentation::create();
-                $selectedPresentation->SummitselectedPresentationListID = $mySelections->ID;
-                $selectedPresentation->PresentationID = $this->owner->ID;
-                $selectedPresentation->MemberID = Member::currentUser()->ID;                
-                $selectedPresentation->Order = $order;
-                $selectedPresentation->write();
-            }
+        $category = $this->owner->Category();
+        $highestSelection = ($category->SessionCount + $category->AlternateCount);
+        $highestOrderInList = $mySelections
+            ->SummitSelectedPresentations()
+            ->filter('Collection', $collection)
+            ->max('Order');
+        
+        if($selected && $highestOrderInList >= $highestSelection) {
+        	throw new Exception("Selection list is full. Curerntly at $highestOrderInList. Limit is $highestSelection.");
         }
+
+        if (!$selectedPresentation) {
+            $selectedPresentation = SummitSelectedPresentation::create();
+            $selectedPresentation->SummitSelectedPresentationListID = $mySelections->ID;
+            $selectedPresentation->PresentationID = $this->owner->ID;
+            $selectedPresentation->MemberID = Member::currentUser()->ID;
+        }
+
+	    $selectedPresentation->Collection = $collection;
+	    $selectedPresentation->Order = $highestOrderInList+1;
+	    $selectedPresentation->write();
+
     }
 
     /**
      * Used by the track chair app to allow chairs to remove a presentation from a personal list.
      **/
 
-    public function removeFromIndividualList()
+    public function removeFromIndividualList($pass = false)
     {
         // Check permissions of user on talk
         if ($this->owner->CanAssign()) {
@@ -104,6 +98,7 @@ class PresentationTrackChairFeatures extends DataExtension
 
             if($alreadyAssigned->exists()) {
                 $alreadyAssigned->delete();
+
             }
         }
     }
@@ -147,6 +142,7 @@ class PresentationTrackChairFeatures extends DataExtension
                 $selectedPresentation->MemberID = Member::currentUser()->ID;
                 // Place at bottom of list
                 $selectedPresentation->Order = $highestOrderInList + 1;
+                $selectedPresentation->Collection = SummitSelectedPresentation::COLLECTION_SELECTED;
                 $selectedPresentation->write();
             }
         }
@@ -188,53 +184,83 @@ class PresentationTrackChairFeatures extends DataExtension
         $memID = Member::currentUserID();
         $selected = $this->getSelectedPresentation();
 
-        if(!$selected->exists()) return false;
+        if(!$selected) return false;
 
-        $category = $this->owner->Category();
-
-        return $selected->Order <= $category->SessionCount;
+        return $selected->isSelected();
     }
 
-    public function isAlternate()
-    {
-        $memID = Member::currentUserID();
-		$selected = $this->getSelectedPresentation();
-
-        if(!$selected->exists()) return false;
-
-        $category = $this->owner->Category();
-
-        return $selected->Order <= ($category->SessionCount + $category->AlternateCount);
-    }
 
     public function isMaybe()
     {
-
         $memID = Member::currentUserID();
         $selected = $this->getSelectedPresentation();
 
-        if(!$selected->exists()) return false;
+        if(!$selected) return false;
 
-        $category = $this->owner->Category();
+        return $selected->isMaybe();
+    }
 
-        return $selected->Order > ($category->SessionCount + $category->AlternateCount);
+    
+    public function isPass() 
+    {
+        $memID = Member::currentUserID();
+        $selected = $this->getSelectedPresentation();
+
+        if(!$selected) return false;
+
+        return $selected->isPass();
     }
 
     public function getSelectionType()
     {
     	if($this->isSelected()) {
-    		return 'selected';
-    	}
-    	if($this->isAlternate()) {
-    		return 'alternate';
+    		return SummitSelectedPresentation::COLLECTION_SELECTED;
     	}
     	if($this->isMaybe()) {
-    		return 'maybe';
+    		return SummitSelectedPresentation::COLLECTION_MAYBE;
+    	}
+    	if($this->isPass()) {    		
+    		return SummitSelectedPresentation::COLLECTION_PASS;
     	}
 
     	return null;
     }
+
+    public function getSelectors()
+    {
+    	return $this->getSelectingMembers()
+    		->filter('Collection', SummitSelectedPresentation::COLLECTION_SELECTED);
+    }
     
+
+    public function getLikers()
+    {
+    	$category = $this->owner->Category();
+
+    	return $this->getSelectingMembers()
+			->filter('Collection', SummitSelectedPresentation::COLLECTION_MAYBE);
+    }
+
+
+    public function getPassers()
+    {
+    	$category = $this->owner->Category();
+
+    	return $this->getSelectingMembers()
+			->filter('Collection', SummitSelectedPresentation::COLLECTION_PASS);
+    }
+
+
+    public function getPopularityScore()
+    {
+    	$config = SummitSelectedPresentation::config();
+
+    	return (
+    		($this->getSelectors()->count() * $config->weight_select) +
+    		($this->getLikers()->count() * $config->weight_maybe) +
+    		($this->getPassers()->count() * $config->weight_pass)
+    	);
+    }
 
     /**
      * Used by the track chair app see if the presentation has been selected by the group.
@@ -248,7 +274,8 @@ class PresentationTrackChairFeatures extends DataExtension
                 "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")
             ->filter([
             	'PresentationID' => $this->owner->ID,            	
-            	'ListType' => 'Group'
+            	'ListType' => 'Group',
+            	'Collection' => SummitSelectedPresentation::COLLECTION_SELECTED
             ]);
 
 
@@ -283,9 +310,7 @@ class PresentationTrackChairFeatures extends DataExtension
 
     public function isSelectedByAnyone()
     {
-        return SummitSelectedPresentation::get()
-            ->filter(['PresentationID' => $this->owner->ID])
-            ->exists();
+        return $this->getSelectors()->exists();
     }
 
     /**
@@ -314,7 +339,8 @@ class PresentationTrackChairFeatures extends DataExtension
                 'SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID')
             ->filter([
                 'PresentationID' => $this->owner->ID,
-                'ListType' => 'Group'
+                'ListType' => 'Group',
+                'Collection' => SummitSelectedPresentation::COLLECTION_SELECTED
             ]);
 
         // Error out if a talk has more than one selection
@@ -375,13 +401,31 @@ class PresentationTrackChairFeatures extends DataExtension
     {
         $memID = Member::currentUserID();
         return SummitSelectedPresentation::get()
-            ->leftJoin("SummitSelectedPresentationList",
-                "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")
             ->filter([
             	'PresentationID' => $this->owner->ID,
             	'SummitSelectedPresentation.MemberID' => $memID,
-            	'ListType' => 'Individual'
-            ]);
+            	'SummitSelectedPresentationList.ListType' => 'Individual'
+            ])
+            ->first();
+    }
+
+    protected function getSelectingMembers()
+    {
+    	return Member::get()
+    		->innerJoin(
+    			'SummitSelectedPresentation',
+    			'ssp.MemberID = Member.ID',
+    			'ssp'
+    		)
+    		->innerJoin(
+    			'SummitSelectedPresentationList',
+    			'sspl.ID = ssp.SummitSelectedPresentationListID',
+    			'sspl'
+    		)
+    		->filter([
+    			'PresentationID' => $this->owner->ID,    			
+    			'ListType' => 'Individual'
+    		]);
     }
 
 

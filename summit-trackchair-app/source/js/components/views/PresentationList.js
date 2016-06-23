@@ -4,6 +4,8 @@ import FeedItem from '../ui/FeedItem';
 import ScrollableFeed from '../ui/ScrollableFeed';
 import RouterLink from '../containers/RouterLink';
 import URL from '../../utils/url';
+import PresentationMetrics from '../views/PresentationMetrics';
+
 const PresentationList = ({
     presentations,
     category,
@@ -13,15 +15,17 @@ const PresentationList = ({
 }) => (
 	<ScrollableFeed onRequestMore={onRequestMore} hasMore={hasMore}>
         {presentations.map(presentation => {        	
-        	let link = URL.addQueryParams(`browse/${presentation.id}`, {category, search});
+        	let link = URL.addQueryParams(`browse/${presentation.id}`, {category, search});        	
+        	const notes = <PresentationMetrics presentation={presentation} />
         	return (
 	        	<RouterLink link={link} key={presentation.id}>
 	            	<FeedItem
+	            		className={`presentation-feed-item ${presentation.selected}`}
 	            		key={presentation.id} 
 	            		active={presentation.active}
 	            		description={presentation.speakers}
 	            		muted={!!presentation.viewed}
-	            		notes={`Avg. vote: ${presentation.vote_average}`}
+	            		notes={notes}
 	            		title={presentation.title} />
 	            </RouterLink>
             );

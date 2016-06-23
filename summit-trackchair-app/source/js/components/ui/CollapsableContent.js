@@ -33,7 +33,7 @@ class CollapsableContent extends React.Component {
 	render () {
 
 		if(!this.state.ready) {
-			return <div style={{visibility:'hidden'}}>{this.props.children}</div>
+			return <div style={{opacity:0}}>{this.props.children}</div>
 		}
 
 		if(!this.state.needsCollapsing) {
@@ -45,7 +45,7 @@ class CollapsableContent extends React.Component {
 			overflow: 'hidden'
 		};
 
-		const buttonStyle = {
+		const fadeStyle = {
 			position: 'absolute',
 			bottom: 0,
 			left: 0,
@@ -55,16 +55,23 @@ class CollapsableContent extends React.Component {
 			padding: `${this.props.gradientHeight}px 0`
 		};
 
+		const buttonStyle = {
+			textAlign: 'center'
+		};
+
 		if(this.state.collapsed) {
-			buttonStyle.backgroundImage = `linear-gradient(to bottom, transparent, ${this.props.gradientColor})`;
+			fadeStyle.backgroundImage = `linear-gradient(to bottom, transparent, ${this.props.gradientColor})`;
 			containerStyle.maxHeight = this.props.collapsedHeight;		
 		}
 
 		const buttonText = this.state.collapsed ? this.props.collapsedText : this.props.expandedText;
 
 		return (
-			<div className={`collapsable-content ${this.state.collapsed ? 'collapsed' : 'expanded'}`} style={containerStyle}>
-				{this.props.children}
+			<div>
+				<div className={`collapsable-content ${this.state.collapsed ? 'collapsed' : 'expanded'}`} style={containerStyle}>
+					{this.props.children}
+					<div className="collapsable-content-fade" style={fadeStyle} />				
+				</div>
 				<div className="collapsable-content-button" style={buttonStyle}>
 					<a onClick={this.toggle} href="#">{buttonText}</a>
 				</div>

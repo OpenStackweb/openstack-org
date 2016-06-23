@@ -124,7 +124,7 @@ var preLoaders = [
 ];
 
 module.exports = {
-
+  
   entry: {
     main: PRODUCTION ? ['./source']: devServerEntry.concat(['./source'])
   },

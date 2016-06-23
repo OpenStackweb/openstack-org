@@ -15,11 +15,18 @@
 class SummitSelectedPresentation extends DataObject
 {
 
+	const COLLECTION_SELECTED = 'selected';	
+
+	const COLLECTION_MAYBE = 'maybe';
+
+	const COLLECTION_PASS = 'pass';
+
     /**
      * @var array
      */
     private static $db = [
         'Order' => 'Int',
+        'Collection' => "Enum('maybe, selected, pass')"
     ];
 
     /**
@@ -31,44 +38,19 @@ class SummitSelectedPresentation extends DataObject
         'Member' => 'Member'
     ];
 
-    /**
-     * @return int
-     */
-    public function PresentationPosition()
+    public function isSelected()
     {
+    	return $this->Collection === self::COLLECTION_SELECTED;
+    }
 
-        $Presentations = SummitSelectedPresentation::get()->filter([
-            'SummitSelectedPresentationListID' => $this->SummitSelectedPresentationList()->ID,
-            'Order:not' => 0
-        ])->sort('Order', 'ASC');
-        $PresentationPosition = 0;
+    public function isMaybe()
+    {
+    	return $this->Collection === self::COLLECTION_MAYBE;
+    }
 
-        $counter = 1;
-
-        if ($Presentations) {
-            foreach ($Presentations as $Presentation) {
-                if ($Presentation->ID == $this->ID) {
-                    $PresentationPosition = $counter;
-                }
-                $counter = $counter + 1;
-            }
-        }
-
-        $Presentations = SummitSelectedPresentation::get()->filter([
-            'SummitSelectedPresentationListID' => $this->SummitSelectedPresentationList()->ID,
-            'Order' => 0
-        ])->sort('Order', 'ASC');
-
-        if ($Presentations) {
-            foreach ($Presentations as $Presentation) {
-                if ($Presentation->ID == $this->ID) {
-                    $PresentationPosition = $counter;
-                }
-                $counter = $counter + 1;
-            }
-        }
-        
-        return $PresentationPosition;
+    public function isPass()
+    {
+    	return $this->Collection === self::COLLECTION_PASS;
     }
 
 }
