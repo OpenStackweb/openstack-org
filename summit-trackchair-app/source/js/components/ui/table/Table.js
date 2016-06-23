@@ -54,7 +54,8 @@ const Table = (props) => {
 		<tbody>
 		{props.data.map((row,i) => {
 			if(row.length !== children.length) {
-				throw new Error(`Data at row ${i} is ${row.length}. It should be ${children.length}.`);
+				console.warn(`Data at row ${i} is ${row.length}. It should be ${children.length}.`);
+				return <tr />
 			}
 			return (
 				<TableRow even={i%2 === 0} key={i}>					
