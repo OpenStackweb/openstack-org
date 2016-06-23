@@ -1,7 +1,3 @@
-import speakerData from '../fixtures/speakers';
-import summitData from '../fixtures/summits';
-import videosData from '../fixtures/videos';
-
 import request from 'superagent';
 import mock from 'superagent-mock';
 
