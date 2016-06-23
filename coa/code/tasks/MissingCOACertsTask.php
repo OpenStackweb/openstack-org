@@ -13,14 +13,14 @@
  **/
 
 /**
- * Class MissingCOACertsMigration
+ * Class MissingCOACertsTask
  * @package coa\code\migrations
  */
-final class MissingCOACertsMigration extends AbstractDBMigrationTask
+final class MissingCOACertsTask extends CliController
 {
-    protected $title = "MissingCOACertsMigration";
+    protected $title = "MissingCOACertsTask";
 
-    protected $description = "Missing COA Certs Migration";
+    protected $description = "MissingCOACertsTask";
 
     /**
      * @var IMemberRepository
@@ -33,12 +33,19 @@ final class MissingCOACertsMigration extends AbstractDBMigrationTask
         $this->member_repository= Injector::inst()->get('MemberRepository');
     }
 
-    function doUp()
+    function process()
     {
+        set_time_limit(0);
+        $csv_file = isset($_GET['csv_file'])? trim($_GET['csv_file']):null;
+        if(is_null($csv_file))
+        {
+            echo 'ERROR - csv_file param missing!';
+            exit;
+        }
         $ds       = new CvsDataSourceReader(",");
         $cur_path = Director::baseFolder();
 
-        $ds->Open($cur_path . "/coa/code/migrations/data/austinsummit-allCOAusers.csv");
+        $ds->Open($cur_path . "/assets/".$csv_file);
         $headers = $ds->getFieldsInfo();
 
         try {
@@ -88,8 +95,4 @@ final class MissingCOACertsMigration extends AbstractDBMigrationTask
         echo sprintf("created %s exams", $exams);
     }
 
-    function doDown()
-    {
-        // TODO: Implement doDown() method.
-    }
 }
