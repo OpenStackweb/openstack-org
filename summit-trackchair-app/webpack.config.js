@@ -132,7 +132,7 @@ module.exports = {
   output: {
     filename: 'js/main.js',
     path: path.join(__dirname, 'production'),
-    publicPath: PRODUCTION ? '/summit-video-app/production/' : 'http://localhost:3000/production/'
+    publicPath: PRODUCTION ? '/summit-trackchair-app/production/' : 'http://localhost:3000/production/'
   },
 
   eslint: {configFile: '.eslintrc'},
