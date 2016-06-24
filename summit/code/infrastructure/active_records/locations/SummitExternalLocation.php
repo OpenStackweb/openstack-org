@@ -18,4 +18,16 @@ class SummitExternalLocation extends SummitGeoLocatedLocation
     {
         return 'External';
     }
+
+    private static $db = array
+    (
+        'Capacity' => 'Int',
+    );
+
+    public function getCMSFields()
+    {
+        $f = parent::getCMSFields();
+        $f->addFieldToTab('Root.Main', new TextField('Capacity', 'Capacity'));
+        return $f;
+    }
 }
