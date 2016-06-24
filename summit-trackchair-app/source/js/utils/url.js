@@ -76,6 +76,10 @@ class URL {
 				  .replace(new RegExp(`^${replace}`), '')
 				  .replace(/^\//,'');
 	}
+
+	trim(url) {
+		return url.replace(/^\//,'').replace(/\/$/,'');
+	}
 }
 
 const SNG = new URL();

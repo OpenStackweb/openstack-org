@@ -19,16 +19,41 @@ class PresentationTrackChairFeatures extends DataExtension
      * @return  SummitPresentationComment
      **/
 
-    public function addComment($commentBody, $MemberID, $isActivity = false)
+    public function addComment($commentBody, $MemberID)
     {
         $comment = new SummitPresentationComment();
         $comment->Body = $commentBody;
         $comment->CommenterID = $MemberID;
         $comment->PresentationID = $this->owner->ID;
-        $comment->IsActivity = $isActivity;
+        $comment->IsActivity = false;
         $comment->write();
 
         return $comment;
+    }
+
+
+    public function addNotification($text)
+    {
+    	$text = str_replace(
+    		[
+    			'{member}',
+    			'{presentation}'
+    		],
+    		[
+    			Member::currentUser()->getName(),
+    			$this->owner->Title
+    		],
+    		$text
+    	);
+
+    	$comment = SummitPresentationComment::create([
+    		'Body' => $text,
+    		'CommenterID' => Member::currentUserID(),
+    		'PresentationID' => $this->owner->ID,
+    		'IsActivity' => true
+    	]);
+
+    	$comment->write();
     }
 
     /**
@@ -58,14 +83,14 @@ class PresentationTrackChairFeatures extends DataExtension
         							    ->first();
 
         $category = $this->owner->Category();
-        $highestSelection = ($category->SessionCount + $category->AlternateCount);
+        $highestSelection = $mySelections->maxPresentations();
         $highestOrderInList = $mySelections
             ->SummitSelectedPresentations()
             ->filter('Collection', $collection)
             ->max('Order');
         
         if($selected && $highestOrderInList >= $highestSelection) {
-        	throw new Exception("Selection list is full. Curerntly at $highestOrderInList. Limit is $highestSelection.");
+        	throw new Exception("Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.");
         }
 
         if (!$selectedPresentation) {

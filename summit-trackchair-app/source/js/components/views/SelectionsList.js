@@ -36,7 +36,7 @@ class SelectionsList extends React.Component {
 		let newIndex = currentIndex+1;
 		let {selections} = this.props;
 
-		if(newIndex >= (selections.length-1)) {
+		if(newIndex > (selections.length-1)) {			
 			newIndex = currentIndex;
 		}
 		

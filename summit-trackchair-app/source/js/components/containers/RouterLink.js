@@ -6,10 +6,13 @@ import URL from '../../utils/url';
 
 export default connect (
 	(state, ownProps) => {		
+		const currentURL = URL.trim(state.routing.locationBeforeTransitions.pathname);
+		const thisURL = URL.trim(URL.create(ownProps.link.split('?')[0]));
+
 		return {
 			link: ownProps.link,
 			onClick: ownProps.onClick,
-			active: state.routing.locationBeforeTransitions.pathname === URL.create(ownProps.link.split('?')[0])
+			active: currentURL === thisURL
 		}
 	},
 	dispatch => ({

@@ -353,6 +353,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $listID = $vars['list_id'];
         $collection = $vars['collection'];        	
         $list = SummitSelectedPresentationList::get()->byId($listID);
+        $isTeam = $list->ListType === 'Group';
 
         // Remove any presentations that are not in the list
         SummitSelectedPresentation::get()
@@ -380,6 +381,12 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
                 if(!$selection) {
                 	$selection = SummitSelectedPresentation::create($attributes);
+                	if($isTeam) {
+                		$presentation = Presentation::get()->byID($id);
+                		if($presentation) {
+                			$presentation->addNotification('{member} added this presentation to the team list');
+                		}
+                	}
                 }
 
                 $selection->Order = $order+1;
@@ -484,62 +491,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         return $this->ok($data);
     }
 
-    /**
-     * @param SS_HTTPRequest $r
-     * @return SS_HTTPResponse
-     */
-    public function handlePresentationsWithComments(SS_HTTPRequest $r)
-    {
-        // Gets a list of presentations that have chair comments
-        $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
-        $page = $r->getVar('page') ?: 1;
-        $summitID = Summit::get_active()->ID;
-
-        // Get a collection of chair-visible presentations with comments
-        $comments = SummitPresentationComment::get()
-            ->leftJoin("Presentation", "SummitPresentationComment.PresentationID = Presentation.ID")
-            ->leftJoin("SummitEvent", "SummitEvent.ID = Presentation.ID")
-            ->filter([
-                'SummitEvent.SummitID' => $summitID,
-                'Category.ChairVisible' => true,
-                'Presentation.Status' => Presentation::STATUS_RECEIVED
-            ])
-            ->sort('Created', 'DESC');
-
-        $offset = ($page - 1) * $page_size;
-        $count = intval($comments->count());
-        $comments = $comments->limit($page_size, $offset);
-
-        $data = [
-            'page' => $page,
-            'total_pages' => ceil($count / $page_size),
-            'results' => array(),
-            'has_more' => $count > ($page_size * ($page)),
-            'total' => $count,
-            'remaining' => $count - ($page_size * ($page))
-        ];
-
-        foreach ($comments as $c) {
-            $system = strpos(
-                $c->Body,
-                "suggested that this presentation be moved"
-            ) || strpos(
-                $c->Body,
-                "presentation was moved into the category"
-            );
-
-            $data['results'][] = [
-                'id' => $c->ID,
-                'body' => $c->Body,
-                'presentation_title' => $c->Presentation()->Title,
-                'presentation_id' => $c->Presentation()->ID,
-                'commenter' => $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname,
-                'system_comment' => $system
-            ];
-
-        }
-        return $this->ok($data);
-    }
 
     /**
      * @param SS_HTTPRequest $r
@@ -613,26 +564,19 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             return $this->httpError(500, "Category not found in current summit");
         }
 		
-		$comment = SummitPresentationComment::create();
-    	$comment->PresentationID = $request->Presentation()->ID;		
-        
         if($approved) {
 	        $request->OldCategoryID = $request->Presentation()->CategoryID;
 	        $request->Presentation()->CategoryID = $request->NewCategoryID;
 	        $request->Presentation()->write();    
-	        $comment->Body = 'This presentation was moved into the category '
-	            . $category->Title . '.'
-	            . ' The change was approved by '
-	            . Member::currentUser()->FirstName . ' ' . Member::currentUser()->Surname . '.';	        
+	        $request->Presentation()->addNotification(
+	        	'{member} approved ' . $request->Reqester()->getName() .'\'s request to move this presentation to ' . $category->Title
+	        );
     	}
-    	else {	        
-	        $comment->Body = 'A request to move this presentation to the category '
-	            . $category->Title  
-	            . ' was rejected by '
-	            . Member::currentUser()->getName() . '.';	        
+    	else {	   
+    		$request->Presentation()->addNotification(
+    			'{member} rejected ' . $request->Reqester()->getName() .'\'s request to move this presentation to ' . $category->Title
+    		);     
     	}
-
-    	$comment->write();    		
         
         $request->AdminApproverID = Member::currentUserID();
         $request->Status = $status;
@@ -704,34 +648,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     }
 
-
-    /**
-     *
-     */
-    public function handleRestoreOrders()
-    {
-        $activeSummit = Summit::get_active();
-        $summitCategories = PresentationCategory::get()->filter('SummitID', $activeSummit->ID);
-
-        foreach ($summitCategories as $category) {
-            // Grab the track chairs selections for the category
-
-            $selectedPresentationList = SummitSelectedPresentationList::get()
-                ->filter('CategoryID', $category->ID);
-
-            foreach ($selectedPresentationList as $list) {
-                $selections = $list->SummitSelectedPresentations()->sort('Order', 'ASC');
-                $i = 1;
-                foreach ($selections as $selection) {
-                    $selection->Order = $i;
-                    $selection->write();
-                    $i++;
-                }
-            }
-        }
-
-    }
-
 }
 
 
@@ -740,7 +656,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
  */
 class TrackChairAPI_PresentationRequest extends RequestHandler
 {
-
 
     /**
      * @var array
@@ -921,27 +836,6 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
      * @return SS_HTTPResponse|void
      * @throws SS_HTTPResponse_Exception
      */
-    public function handleVote(SS_HTTPRequest $r)
-    {
-        if (!Member::currentUser()) {
-            return $this->httpError(403);
-        }
-
-        $vote = $r->postVar('vote');
-        if ($vote >= -1 && $vote <= 3) {
-            $this->presentation->setUserVote($vote);
-
-            return new SS_HTTPResponse(null, 200);
-        }
-
-        return $this->httpError(400, "Invalid vote");
-    }
-
-    /**
-     * @param SS_HTTPRequest $r
-     * @return SS_HTTPResponse|void
-     * @throws SS_HTTPResponse_Exception
-     */
     public function handleAddComment(SS_HTTPRequest $r)
     {
         if (!Member::currentUser()) {
@@ -997,10 +891,15 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             
             try {
             	$email->send();
+	        	$this->presentation->addNotification('
+	        		{member} emailed the speakers
+	        	');        	
+
             	return new SS_HTTPResponse('OK');
         	} catch(Exception $e) {
         		return new SS_HTTPResponse($e->getMessage(), 400);
         	}
+
         }
 
         return $this->httpError(400, "Invalid comment");
@@ -1122,11 +1021,10 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $request->ReqesterID = Member::currentUserID();
             $request->write();
 
-            $m = Member::currentUser();
-            $comment = $m->FirstName . ' ' . $m->Surname . ' suggested that this presentation be moved to the category ' . $c->Title . '.';
-
-            $this->presentation->addComment($comment, Member::currentUserID(), true);
-
+            $this->presentation->addNotification('
+            	{member} submitted a request to change the category to '.$c->Title
+            );           
+            
             return new SS_HTTPResponse("change request made.", 200);
 
         }
