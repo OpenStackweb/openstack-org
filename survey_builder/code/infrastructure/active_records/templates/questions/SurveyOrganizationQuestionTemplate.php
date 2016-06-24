@@ -31,6 +31,7 @@ class SurveyOrganizationQuestionTemplate
         $fields->add(new HiddenField('Name','Name',SurveyOrganizationQuestionTemplate::FieldName));
         $fields->add(new CheckboxField('ShowOnSangriaStatistics','Show on Sangria statistics?'));
         $fields->add(new CheckboxField('ShowOnPublicStatistics','Show on Public statistics?'));
+        $fields->add(new CheckboxField('Hidden','Hide on front-end?'));
         return $fields;
     }
 

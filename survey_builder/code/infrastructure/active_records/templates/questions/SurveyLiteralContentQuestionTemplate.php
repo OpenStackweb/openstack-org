@@ -56,6 +56,7 @@ final class SurveyLiteralContentQuestionTemplate extends SurveyQuestionTemplate 
         $fields = new FieldList();
         $fields->add(new TextField('Name','Name (Without Spaces)'));
         $fields->add(new HtmlEditorField('Content', 'Content'));
+        $fields->add(new CheckboxField('Hidden','Hide on front-end?'));
         return $fields;
     }
 }

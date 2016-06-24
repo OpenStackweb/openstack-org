@@ -29,6 +29,7 @@ class SurveyQuestionTemplate
         'ReadOnly'                => 'Boolean',
         'ShowOnSangriaStatistics' => 'Boolean',
         'ShowOnPublicStatistics'  => 'Boolean',
+        'Hidden'                  => 'Boolean',
     );
 
     static $has_one = array
@@ -69,6 +70,7 @@ class SurveyQuestionTemplate
     private static $defaults = array(
         'Mandatory' => true,
         'ReadOnly'  => false,
+        'Hidden'    => false,
     );
 
 
@@ -150,6 +152,14 @@ class SurveyQuestionTemplate
     }
 
     /**
+     * @return bool
+     */
+    public function isHidden()
+    {
+        return $this->Hidden;
+    }
+
+    /**
      * @return ISurveyQuestionTemplate[]
      */
     public function getDependsOn()
@@ -220,6 +230,7 @@ class SurveyQuestionTemplate
         $fields->add(new CheckboxField('ReadOnly','Is Read Only?'));
         $fields->add(new CheckboxField('ShowOnSangriaStatistics','Show on Sangria statistics?'));
         $fields->add(new CheckboxField('ShowOnPublicStatistics','Show on Public statistics?'));
+        $fields->add(new CheckboxField('Hidden','Hide on front-end?'));
 
         if($this->ID > 0 ){
             //depends on
