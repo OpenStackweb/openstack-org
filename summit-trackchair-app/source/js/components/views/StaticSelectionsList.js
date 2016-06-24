@@ -13,7 +13,7 @@ class StaticSelectionsList extends React.Component {
 				{selections.map((s,i) => (
 				<LeaderboardItem 
 					key={s.id} 					
-					title={s.title}
+					title={s.presentation.title}
 					rank={s.order}					
 					canUp={false}
 					canDown={false}
