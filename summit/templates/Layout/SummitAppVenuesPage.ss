@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div id="floor_{$ID}" class="floor_image">
-                        <img class="" src="$Image.getURL()" style="width:auto;margin:0 auto;height:500px" />
+                        <img class="" src="$Image.getURL()"/>
                     </div>
                 </div>
                 <% end_loop %>
