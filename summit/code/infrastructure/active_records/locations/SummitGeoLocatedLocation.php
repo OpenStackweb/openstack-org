@@ -242,4 +242,5 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
     public function getVenue() {
         return $this;
     }
+
 }

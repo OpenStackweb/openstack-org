@@ -23,6 +23,7 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
     private static $has_many = array
     (
         'Rooms' => 'SummitVenueRoom',
+        'Floors' => 'SummitVenueFloor',
     );
 
     private static $has_one = array
@@ -84,6 +85,10 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
         $gridField = new GridField('Rooms', 'Rooms', $this->Rooms(), $config);
         $f->addFieldToTab('Root.Rooms', $gridField);
 
+        $config = GridFieldConfig_RecordEditor::create();
+        $gridField = new GridField('Floors', 'Floors', $this->Floors(), $config);
+        $f->addFieldToTab('Root.Floors', $gridField);
+
         return $f;
     }
 
@@ -97,5 +102,8 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
         return 'Internal';
     }
 
+    public function getLink() {
+        return parent::getLink().'/#venue='.$this->ID;
+    }
 
 }

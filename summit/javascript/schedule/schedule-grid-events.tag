@@ -247,7 +247,7 @@
                     return self.getSummitLocation(arg.item);
                 },
                 'a.venue-search-link@href':function(arg){
-                    return self.summit.link+'venues/#venue='+ self.summit.locations[arg.item.location_id].venue_id;
+                    return self.summit.locations[arg.item.location_id].link;
                 },
                 'span.start-time': 'event.start_time',
                 'span.end-time': 'event.end_time',
@@ -327,12 +327,7 @@
         getSummitLocation(event) {
             var location = self.summit.locations[event.location_id];
             if (typeof location == 'undefined') return 'TBA';
-            if(location.class_name === 'SummitVenueRoom') {
-                var room = location;
-                location = self.summit.locations[room.venue_id];
-                return location.name+' - '+room.name;
-            }
-            return location.name;
+            else return location.name_nice;
         }
 
         applyFilters(){

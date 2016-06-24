@@ -27,12 +27,16 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
 
     private static $has_one = array
     (
-        'Venue' => 'SummitVenue'
+        'Venue' => 'SummitVenue',
+        'Floor' => 'SummitVenueFloor'
     );
 
     public function getFullName()
     {
-        return sprintf('%s - %s', $this->Venue()->Name, $this->Name);
+        if ($this->Floor()->exists())
+            return sprintf('%s - %s - %s', $this->Floor()->Venue()->Name, $this->Floor()->Name, $this->Name);
+        else
+            return sprintf('%s - %s', $this->Venue()->Name, $this->Name);
     }
 
     private static $summary_fields = array
@@ -83,5 +87,9 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
 
     public function getVenue() {
         return $this->Venue();
+    }
+
+    public function getLink() {
+        return parent::getLink().'/#room='.$this->ID;
     }
 }

@@ -125,4 +125,8 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 
+    public function getLink() {
+        return $this->Summit()->Link.'venues';
+    }
+
 }

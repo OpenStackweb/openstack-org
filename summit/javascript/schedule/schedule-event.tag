@@ -13,7 +13,7 @@
                             <div if={ summit.should_show_venues } >
                                 <i class="fa fa-map-marker icon-map"></i>
                                 &nbsp;
-                                <a class="search-link" if={ summit.locations[location_id] } href="{ summit.link+'venues/#venue='+ summit.locations[location_id].venue_id }">
+                                <a class="search-link" if={ summit.locations[location_id] } href="{ summit.locations[location_id].link }">
                                     { locationName(location_id) }
                                 </a>
                                 <span if={ !summit.locations[location_id] }> { locationName(location_id) } </span>
@@ -113,12 +113,7 @@
     locationName(location_id) {
         var location = self.summit.locations[location_id];
         if (typeof location == 'undefined') return 'TBA';
-        if(location.class_name === 'SummitVenueRoom') {
-        var room = location;
-            location = self.summit.locations[room.venue_id];
-            return location.name+' - '+room.name;
-        }
-        return location.name;
+        else return location.name_nice;
     }
 
     sponsorNames(sponsors_id) {

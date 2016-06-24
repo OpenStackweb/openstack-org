@@ -10,6 +10,21 @@
                     <div class="address"> $Address </div>
                 </div>
             </div>
+            <div class="floor-accordion">
+                <% loop $Floors() %>
+                <div class="floor">
+                    <div class="header">
+                        <div class="overlay"></div>
+                        <div class="labelbox">
+                            <div class="title"> $Name </div>
+                        </div>
+                    </div>
+                    <div id="floor_{$ID}" class="floor_image">
+                        <img class="" src="$Image.getURL()" style="width:auto;margin:0 auto;height:500px" />
+                    </div>
+                </div>
+                <% end_loop %>
+            </div>
             <div id="carousel_{$ID}" class="carousel slide" data-ride="carousel" >
                 <ol class="carousel-indicators">
                     <% loop $Images() %>
@@ -40,10 +55,36 @@
     <% end_loop %>
 </div>
 <script type="text/javascript">
-    var locations = [];
+    var primary_locations = [];
     <% loop $Summit.PrimaryVenues() %>
         <% if $Lat && $Lng %>
-            locations.push({id: {$ID}, lat: {$Lat}, lng: {$Lng}, title: "<h5>{$Name.JS}</h5>", description: "{$Description.JS}", address: "{$Address.JS}"});
+            primary_locations.push({id: {$ID}, lat: {$Lat}, lng: {$Lng}, title: "<h5>{$Name.JS}</h5>", description: "{$Description.JS}", address: "{$Address.JS}"});
+        <% end_if %>
+    <% end_loop %>
+
+    var rooms = [];
+    <% loop $Summit.Locations() %>
+        <% if ClassName == SummitVenue %>
+            <% loop Rooms %>
+                rooms[{$ID}] =
+                {
+                    name       : "{$Name.JS}",
+                    name_nice  : "{$FullName.JS}",
+                    venue_id   : {$VenueID},
+                    floor_id   : 0,
+                };
+            <% end_loop %>
+            <% loop Floors %>
+                <% loop Rooms %>
+                    rooms[{$ID}] =
+                    {
+                        name       : "{$Name.JS}",
+                        name_nice  : "{$FullName.JS}",
+                        venue_id   : {$Up.VenueID},
+                        floor_id   : {$Up.ID},
+                    };
+                <% end_loop %>
+            <% end_loop %>
         <% end_if %>
     <% end_loop %>
 </script>

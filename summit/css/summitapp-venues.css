@@ -84,3 +84,21 @@
 .gm-style-iw {
     text-align: center;
 }
+
+.floor .header {
+    height: 100px;
+    background-color: #84798c;
+    color: white;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+
+.floor-accordion {
+    display: none;
+}
+
+.floor_image {
+    height: 200px;
+    display: none;
+}
