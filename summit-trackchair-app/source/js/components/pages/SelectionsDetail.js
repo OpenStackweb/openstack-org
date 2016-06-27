@@ -83,7 +83,7 @@ class SelectionsDetail extends React.Component {
 
         return (
         	<div className="row">        	
-        		<div className="col-lg-4 column-maybe">
+        		<div className="col-md-4 column-maybe">
 					<div className="wrapper wrapper-content">
 					   <div className="ibox">
 					      <div className="ibox-content">
@@ -102,7 +102,7 @@ class SelectionsDetail extends React.Component {
 					   </div>
 					</div>
         		</div>
-        		<div className="col-lg-4 column-selected">
+        		<div className="col-md-4 column-selected">
 					<div className="wrapper wrapper-content">
 					   <div className="ibox">
 					      <div className="ibox-content">
@@ -122,7 +122,7 @@ class SelectionsDetail extends React.Component {
 					   </div>
 					</div>
         		</div>
-        		<div className="col-lg-4 column-team">
+        		<div className="col-md-4 column-team">
 					<div className="wrapper wrapper-content">
 					   <div className="ibox">
 					      <div className="ibox-content">

@@ -70,7 +70,7 @@ class Browse extends React.Component {
 
         return (
             <div>
-               <div className="col-lg-4">
+               <div className="col-md-4">
                   <div className="ibox float-e-margins">
                   	<PresentationSearchForm />
                   	<div className="row">
@@ -90,7 +90,7 @@ class Browse extends React.Component {
 	                	/>
 	               </div>
                 </div>
-                <div className="col-lg-8">
+                <div className="col-md-8">
                		{this.props.children}
                 </div>
             </div>
