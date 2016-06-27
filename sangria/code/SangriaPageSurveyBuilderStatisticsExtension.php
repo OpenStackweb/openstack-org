@@ -295,6 +295,60 @@ SQL;
         return $this->total_count;
     }
 
+    public function SurveyBuilderDeploymentCompanyList()
+    {
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        if (is_null($template))
+        {
+            return 0;
+        }
+
+        if ($class_name != 'EntitySurvey') //only works for deployment
+        {
+            return 0;
+        }
+
+        $filters_where = $this->generateFilters();
+
+        $query = <<<SQL
+    SELECT SANS.`Value` AS Company FROM Survey AS I
+    LEFT JOIN EntitySurvey AS ES ON ES.ID = I.ID
+    LEFT JOIN Survey AS I2 ON I2.ID = ES.ParentID
+    LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I2.ID
+    LEFT JOIN SurveyAnswer AS SANS ON SANS.StepID = SSTEP.ID
+    LEFT JOIN SurveyQuestionTemplate AS SQUEST ON SQUEST.ID = SANS.QuestionID
+    WHERE
+    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
+    AND SQUEST.ClassName = 'SurveyOrganizationQuestionTemplate'
+    AND EXISTS
+    (
+        SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
+        FROM SurveyAnswer A
+        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+        INNER JOIN Survey S ON S.ID = STP.SurveyID
+        WHERE
+        S.ID = I.ID AND S.IsTest = 0 AND
+        A.QuestionID IN
+        (
+            SELECT Q.ID FROM SurveyQuestionTemplate Q
+            INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
+            WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
+        )
+        GROUP BY S.ID
+    )
+    {$filters_where} GROUP BY SANS.`Value` ORDER BY SANS.`Value`;
+SQL;
+
+        $companies = new ArrayList();
+        foreach (DB::query($query)->column('Company') as $company) {
+            $companies->push(new ArrayData(array('Company' => $company)));
+        }
+
+        return $companies;
+    }
+
     public function SurveyBuilderLabelSubmitted()
     {
         $class_name = Session::get('SurveyBuilder.Statistics.ClassName');
