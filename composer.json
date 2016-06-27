@@ -1,6 +1,12 @@
 {
   "name": "silverstripe/installer",
   "description": "The SilverStripe Framework Installer",
+  "repositories": [
+  	{
+  		"type": "vcs",
+  		"url": "git://github.com/unclecheese/silverstripe-fluent"
+  	}
+  ],
   "require": {
     "php": ">=5.3.2",
     "silverstripe/cms": "3.1.16",
@@ -29,7 +35,7 @@
     "fzaninotto/Faker": "^1.5",
     "symfony/yaml": "~2.1|~3.0",
     "phpoffice/phpexcel": "dev-master",
-    "tractorcow/silverstripe-fluent": "^3.2",
+    "tractorcow/silverstripe-fluent": "dev-patch/default-route",
     "google/apiclient": "1.*"
 
   },

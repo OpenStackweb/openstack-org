@@ -1,14 +1,14 @@
 <li>
-    <a href="{$BaseHref}software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+    <a href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuSoftware">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/">Overview</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/">Project Navigator</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sample-configs/">Sample Configs</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/">Overview</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/project-navigator/">Project Navigator</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/sample-configs/">Sample Configs</a></li>
         <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/start/">Get Started</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/roadmap/">Roadmap</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/latest-release/">Latest Release</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sourcecode/">Source Code</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/start/">Get Started</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/roadmap/">Roadmap</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/latest-release/">Latest Release</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/sourcecode/">Source Code</a></li>
     </ul>
 </li>
 <li>
