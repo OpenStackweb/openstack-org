@@ -26,8 +26,8 @@ final class SangriaPageEventExtension extends Extension {
 	}
 
 	public function onBeforeInit(){
-		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','FeaturedEventForm','saveFeaturedEvent'));
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','FeaturedEventForm','saveFeaturedEvent'));
+		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','ViewOpenStackHackathonsEvents','FeaturedEventForm','saveFeaturedEvent'));
+		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','ViewOpenStackHackathonsEvents','FeaturedEventForm','saveFeaturedEvent'));
 	}
 
 	public function EventRegistrationRequestForm() {
@@ -143,6 +143,12 @@ final class SangriaPageEventExtension extends Extension {
         $this->commonScripts();
         Requirements::javascript('events/js/admin/sangria.page.event.extension.js');
         return $this->owner->getViewer('ViewOpenstackDaysEvents')->process($this->owner);
+    }
+
+    public function ViewOpenstackHackathonsEvents(){
+        $this->commonScripts();
+        Requirements::javascript('events/js/admin/sangria.page.event.extension.js');
+        return $this->owner->getViewer('ViewOpenstackHackathonsEvents')->process($this->owner);
     }
 
 	public function getQuickActionsExtensions(&$html){
