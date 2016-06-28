@@ -39,6 +39,7 @@ final class SangriaPageExportDataExtension extends Extension
             'exportMarketplaceAdmins',
             'ExportSurveyResultsFlat',
             'ExportSpeakersData',
+            'ExportSpeakersSubmissions',
             'ExportSurveyResultsByCompany',
         ));
 
@@ -56,6 +57,7 @@ final class SangriaPageExportDataExtension extends Extension
             'exportMarketplaceAdmins',
             'ExportSurveyResultsFlat',
             'ExportSpeakersData',
+            'ExportSpeakersSubmissions',
             'ExportSurveyResultsByCompany',
         ));
 
@@ -158,6 +160,36 @@ final class SangriaPageExportDataExtension extends Extension
 
     function GetSpeakersData($sort=SangriaPageExportDataExtension::SpeakersSortSummit) {
 
+    }
+
+    function ExportSpeakersSubmissions()
+    {
+        $selected_summit_ids = $this->owner->request->postVar('summit');
+        $summits = Summit::get()->sort('SummitBeginDate');
+
+        if ($this->owner->request->isGET()) {
+
+            return $this->owner->getViewer('ExportSpeakersSubmissions')
+                ->process($this->owner->Customise(array(
+                    "Summits" => $summits,
+                    "statusAlternate" => 1,
+                    "statusPrimary" => 1,
+                )));
+        }
+        else if ($this->owner->request->isPOST()) {
+            $status_alternate = $this->owner->request->postVar('statusAlternate');
+            $status_primary = $this->owner->request->postVar('statusPrimary');
+
+            $speakersSubmissionsExportQuerySpecification = new SpeakersSubmissionsExportQuerySpecification($selected_summit_ids, $status_primary, $status_alternate);
+            $speakersSubmissionsExportQuery = new SpeakersSubmissionsExportQuery();
+            $res = $speakersSubmissionsExportQuery->handle($speakersSubmissionsExportQuerySpecification);
+
+            $ext = $_POST['ext'];
+            $filename = "PresentationSpeakers_" . date('Ymd') . "." . $ext;
+            $delimiter = ",";
+
+            return CSVExporter::getInstance()->export($filename, $res->getResult()[0], $delimiter);
+        }
     }
 
     function exportConditionrs()

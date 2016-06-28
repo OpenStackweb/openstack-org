@@ -167,8 +167,9 @@
 
     <h2>Speakers</h2>
     <ul>
-        <li><a href="/sangria/ViewSpeakingSubmissions">View Speaking Submissions</a></li>
-        <li><a href="$Link(ExportSpeakersData)">Speakers Users</a></li>
+        <%-- <li><a href="/sangria/ViewSpeakingSubmissions">View Speaking Submissions</a></li> --%>
+        <%-- <li><a href="$Link(ExportSpeakersData)">Speakers Users</a></li> --%>
+        <li><a href="$Link(ExportSpeakersSubmissions)">Export Speakers Submissions</a></li>
     </ul>
 
     <h2>DB Cleanup</h2>
