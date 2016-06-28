@@ -1,0 +1,21 @@
+/*Mascots Proposal landing*/
+.mascots-hero {
+	background: url(/themes/openstack/images/learn/learn-hero.jpg) no-repeat top right;
+	background-size: cover; 
+}
+.mascots-hero .intro-message > h1 {
+	margin: 90px 0 0;
+}
+.mascots-intro {
+	text-align: center;
+	color: #2A4E68;
+	margin: 50px auto 50px;
+}
+p.question, p.checklist-item-title {
+    font-weight: 700;
+    margin-bottom: 1px;
+}
+p.answer, p.checklist-item-details {
+    margin-bottom: 20px;
+}
+/*End Mascots Proposal landing*/
