@@ -15,10 +15,21 @@ The following base components are required to run the application:
 * PHP_gmp package
 * PHP_dom package
 
+Example installation of dependencies for Ubuntu 14.04:
+```
+  apt-get  install mariadb-server mariadb-client
+  mysql_secure_installation
+  apt-get install apache2
+  apt-get install php5 php5-curl php5-gd php5-gmp php-dompdf php5-mysql libapache2-mod-php5
+```
 
 ## Local Installation Procedure
 
 * Get the code and place it under /var/www/openstack
+  ```
+  cd /var/www
+  git clone https://github.com/OpenStackweb/openstack-org openstack
+  ```
 
 * Run composer to solve dependencies
 
@@ -37,6 +48,17 @@ The following base components are required to run the application:
 * Get the database dump from [http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip](http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip)
 
 * Create a database and restore the dump into it
+  ```
+  mysql -u root -p
+  > CREATE DATABASE openstack;
+  > GRANT ALL PRIVILEGES ON openstack.* TO 'openstack'@'localhost' IDENTIFIED BY 'OPENSTACK_DBPASS';
+  > GRANT ALL PRIVILEGES ON openstack.* TO 'openstack'@'%' IDENTIFIED BY 'OPENSTACK_DBPASS';
+  
+  wget http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip
+  unzip dbdump-current.zip
+  mysql -u openstack -p < www.openstack.org-purged-backup-db-Jun-27-2017_22-00-02.sql 
+  
+  ```
 
 * Edit the file sample._ss_environment.php to adjust the following lines to match your environment and save it as _ss_environment.php
    ```
@@ -65,6 +87,10 @@ The following base components are required to run the application:
        ErrorLog "${APACHE_LOG_DIR}/openstack.log"
       CustomLog "${APACHE_LOG_DIR}/openstack.log" common
    </VirtualHost>
+   ```
+* Ensure mod_rewrite is enabled
+   ```
+   a2enmod rewrite
    ```
 
 * Run the following command to populate database
