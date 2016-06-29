@@ -152,7 +152,6 @@
         <li><a href="$Top.Link(ViewEventDetails)">New Event Submissions</a></li>
         <li><a href="$Top.Link(ViewPostedEvents)">Edit Posted Events</a></li>
         <li><a href="$Top.Link(ViewOpenstackDaysEvents)">Openstask Days Events</a></li>
-        <li><a href="$Top.Link(ViewOpenstackHackathonsEvents)">Openstask Hackathons Events</a></li>
     </ul>
 
     <h2>Jobs</h2>
