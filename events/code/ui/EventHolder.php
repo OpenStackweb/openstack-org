@@ -21,6 +21,11 @@ class EventHolder extends Page {
        'OpenstackDaysVideoDesc1' => 'Text',
        'OpenstackDaysVideoID2'   => 'Text',
        'OpenstackDaysVideoDesc2' => 'Text',
+       'OpenstackHackathonsContent'    => 'HTMLText',
+       'OpenstackHackathonsVideoID1'   => 'Text',
+       'OpenstackHackathonsVideoDesc1' => 'Text',
+       'OpenstackHackathonsVideoID2'   => 'Text',
+       'OpenstackHackathonsVideoDesc2' => 'Text',
    );
 
    private static $has_one = array(
@@ -34,6 +39,11 @@ class EventHolder extends Page {
         $fields->addFieldToTab("Root.OpenstackDays", new TextField("OpenstackDaysVideoDesc1", "Video Description"));
         $fields->addFieldToTab("Root.OpenstackDays", new TextField("OpenstackDaysVideoID2", "Youtube ID 2"));
         $fields->addFieldToTab("Root.OpenstackDays", new TextField("OpenstackDaysVideoDesc2", "Video Description"));
+        $fields->addFieldToTab("Root.OpenstackHackathons", new HtmlEditorField("OpenstackHackathonsContent", "Intro Text"));
+        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoID1", "Youtube ID 1"));
+        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoDesc1", "Video Description"));
+        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoID2", "Youtube ID 2"));
+        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoDesc2", "Video Description"));
 		return $fields;
 	}
       
@@ -49,7 +59,8 @@ class EventHolder_Controller extends Page_Controller {
 		'AjaxFutureEvents',
 		'AjaxFutureSummits',
 		'AjaxPastSummits',
-        'openstackdays'
+        'openstackdays',
+        'openstackhackathons'
 	);
 
 	function init() {
@@ -109,6 +120,14 @@ class EventHolder_Controller extends Page_Controller {
     function FutureOpenstackDaysEvents($num) {
         $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
         $filter_array['EventCategory'] = 'Openstack Days';
+        $pulled_events = EventPage::get()->filter($filter_array)->sort(array('EventStartDate'=>'ASC','EventContinent'=>'ASC'))->limit($num);
+
+        return $pulled_events;
+    }
+
+    function FutureOpenstackHackathonsEvents($num) {
+        $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
+        $filter_array['EventCategory'] = 'Hackathons';
         $pulled_events = EventPage::get()->filter($filter_array)->sort(array('EventStartDate'=>'ASC','EventContinent'=>'ASC'))->limit($num);
 
         return $pulled_events;
@@ -208,5 +227,10 @@ class EventHolder_Controller extends Page_Controller {
     function openstackdays() {
         Requirements::css('events/css/openstackdays.css');
         return $this->renderWith(array('EventHolder_openstackdays','EventHolder','Page'));
+    }
+
+    function openstackhackathons() {
+        Requirements::css('events/css/openstackhackathons.css');
+        return $this->renderWith(array('EventHolder_openstackhackathons','EventHolder','Page'));
     }
 }
