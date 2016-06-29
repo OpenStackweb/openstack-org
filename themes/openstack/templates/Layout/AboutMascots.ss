@@ -5,7 +5,8 @@
             <div class="row">
                 <div class="col-md-8 col-md-push-2">
                     <div class="intro-message">
-                        <h1>A great project needs a great mascot. Choose yours now.</h1>
+                        <h1>A great project needs a great mascot.</h1>
+                        <h2>Choose yours now.</h2>
                         <h4>OpenStack projects are getting some super natural personality.</h4>
                     </div>
                 </div>
@@ -15,7 +16,7 @@
     </div>
     <div class="container">
     	<div class="row">
-    		<div class="col-sm-12">
+    		<div class="col-sm-10 col-sm-push-1 center">
 		    	<p>
 		    		Whether your OpenStack project is focused on creating greater scalability, manageability or interoperability, one thing is certain—the team behind each development effort is bursting with personality and deserving of recognition. 
 		    	</p>
@@ -25,11 +26,17 @@
 		    </div>
     	</div>
     </div>
-    <div class="mascots-webinar">
+    <div class="mascots-intro">
     	<div class="container">
     		<div class="col-sm-12">
+    			<h2>
+    				Join us
+    			</h2>
     			<p>
-    				Join us Wednesday, <strong>July 6 at 1500 UTC/ 8 a.m. Pacific</strong> or <strong>Tuesday, July 12 at 2300 UTC/ 4 p.m. Pacific</strong> for a quick, 10-minute info session on project mascots followed by an open Q&A.
+    				<span><strong>Wednesday, July 6</strong><br>at 1500 UTC / 8 a.m. Pacific</span> or <span><strong>Tuesday, July 12</strong><br>at 2300 UTC / 4 p.m. Pacific</span>
+    			</p>
+    			<p>
+    				 for a quick, 10-minute info session on project mascots followed by an open Q&A.
     			</p>
     			<p>
     				<em>
@@ -41,7 +48,7 @@
     </div>
     <div class="container">
     	<div class="col-sm-12">
-    		<h5 class"section-title">Here's how it works</h5>
+    		<h5 class="section-title">Here's how it works</h5>
     		<ul>
     			<li>
     				Project teams select a list of mascot “candidates.” 
@@ -59,9 +66,12 @@
     				The illustrator creates the project team’s new logo assets and delivers it to the team before the Barcelona Summit.
     			</li>
     		</ul>
-    		<h5 class"section-title">Example (fictional) project logo</h5>
-			<img src="http://placehold.it/350x150">
-			<h5 class"section-title">What kinds of mascots can a project team choose?</h5>
+    		<h5 class="section-title">Example (fictional) project logo</h5>
+			<img class="example-project-logo" src="/themes/openstack/static/images/project-mascots/example.png">
+			<p>
+    			<em>*This is an example of a fictional project logo and possible applications. Please note that the design style is not finalized.</em>
+    		</p>
+			<h5 class="section-title">What kinds of mascots can a project team choose?</h5>
 			<p>
 				Mascots are unique to each project, and are available on a first-come, first-served basis. That means if one project has agreed on a fox, another project can’t also choose a fox.
 			</p>
@@ -85,7 +95,7 @@
 					The mascot should not be specific to an individual creature or location—selecting “a mountain” is OK, but “Mount Fuji” is not.
 				</li>
 			</ul>
-			<h5 class"section-title">I’m ready to get started! What’s next?</h5>
+			<h5 class="section-title">I’m ready to get started! What’s next?</h5>
 			<p>
 				We recommend bringing up the opportunity to select a mascot on your team’s next regular meeting. You can also use your mailing list for discussion.
 			</p>
@@ -103,11 +113,11 @@
 			<p>
 				Please refer back to this web page for the core requirements and if you have questions (we’ll keep updating it throughout the process). 
 			</p>
-			<h5 class"section-title">Mascots already selected</h5>
+			<h5 class="section-title">Mascots already selected</h5>
 			<p>
 				Watch this space—we’ll be updating it frequently as project teams select their mascots.
 			</p>
-			<h5 class"section-title">FAQs</h5>
+			<h5 class="section-title">FAQs</h5>
 			<p class="question">
 				Who can get a mascot?
 			</p>
@@ -166,7 +176,7 @@
 				Whom should I contact with more questions?
 			</p>
 			<p class="answer">
-				Ask Heidi Joy Tretheway from the OpenStack Foundation, who is the liaison for the project teams in this branding effort.
+				Ask <a href="mailto:heidijoy@openstack.org">Heidi Joy Tretheway</a> from the OpenStack Foundation, who is the liaison for the project teams in this branding effort.
 			</p>
     	</div>
     </div>
