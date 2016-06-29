@@ -370,7 +370,12 @@ class PresentationTrackChairFeatures extends DataExtension
 
         // Error out if a talk has more than one selection
         if ($selections->count() > 1) {
-            user_error('There cannot be more than one instance of this talk selected. Talk ID ' . $this->owner->ID);
+        	$selectionsList = [];
+        	foreach($selections as $s) {
+        		$l = $s->SummitSelectedPresentationList();
+        		$selectionsList[] = $l->ListName . " (" . $l->Category()->Title . ")";        		
+        	}
+            user_error('There cannot be more than one instance of this talk selected. Talk ID ' . $this->owner->ID . ' appears in: ' . implode(', ', $selectionsList));
         }
 
         $selection = null;
