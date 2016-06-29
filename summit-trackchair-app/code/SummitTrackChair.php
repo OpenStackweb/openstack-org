@@ -102,24 +102,26 @@ class SummitTrackChair extends DataObject
      */
     protected function validate()
     {
-
-        $summit_id = $_REQUEST['SummitID'];
+    	$summit_id = null;
+        if(isset($_REQUEST['SummitID'])) {
+        	$summit_id = $_REQUEST['SummitID'];
+        }
+        
         $valid = parent::validate();
-        if (!$valid->valid()) {
+        
+        if (!$valid->valid() || !$summit_id) {
             return $valid;
         }
-        $old_one = SummitTrackChair::get()->filter
-        (
-            array
-            (
-                'MemberID' => $this->MemberID,
-                'SummitID' => $summit_id
-            )
-        )->first();
+        
+        $old_one = SummitTrackChair::get()->filter([
+            'MemberID' => $this->MemberID,
+            'SummitID' => $summit_id
+        ])->first();
 
-        if (!is_null($old_one)) {
+        if (!$old_one) {
             return $valid->error('Already exists a track chair for this member!');
         }
+
         return $valid;
     }
 
