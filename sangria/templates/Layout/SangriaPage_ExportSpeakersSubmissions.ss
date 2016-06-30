@@ -27,14 +27,21 @@
         <div class="col-md-3">
             <div class="checkbox">
                 <label>
-                    <input name="statusPrimary" value="PRIMARY" type="checkbox" <% if $statusPrimary %> checked <% end_if %>/>Primary
+                    <input name="statusSubmitted" value="1" type="checkbox" <% if $statusSubmitted %> checked <% end_if %>/>Submitted, Not Accepted
                 </label>
             </div>
         </div>
         <div class="col-md-3">
             <div class="checkbox">
                 <label>
-                    <input name="statusAlternate" value="ALTERNATE" type="checkbox" <% if $statusAlternate %> checked <% end_if %>/>Alternate
+                    <input name="statusPrimary" value="1" type="checkbox" <% if $statusPrimary %> checked <% end_if %>/>Accepted Primary
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="checkbox">
+                <label>
+                    <input name="statusAlternate" value="1" type="checkbox" <% if $statusAlternate %> checked <% end_if %>/>Accepted Alternate
                 </label>
             </div>
         </div>

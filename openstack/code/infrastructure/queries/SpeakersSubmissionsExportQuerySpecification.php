@@ -17,10 +17,8 @@ class SpeakersSubmissionsExportQuerySpecification implements IQuerySpecification
 
     /**
      */
-    public function __construct($selectedSummits, $statusPrimary, $statusAlternate){
+    public function __construct($selectedSummits){
         $this->selectedSummits = $selectedSummits;
-        $this->statusPrimary = $statusPrimary;
-        $this->statusAlternate = $statusAlternate;
     }
     /**
      * @return array
@@ -29,8 +27,6 @@ class SpeakersSubmissionsExportQuerySpecification implements IQuerySpecification
     {
         return array(
             "selectedSummits" => $this->selectedSummits,
-            "statusPrimary" => $this->statusPrimary,
-            "statusAlternate" => $this->statusAlternate,
         );
     }
 

@@ -179,16 +179,34 @@ final class SangriaPageExportDataExtension extends Extension
         else if ($this->owner->request->isPOST()) {
             $status_alternate = $this->owner->request->postVar('statusAlternate');
             $status_primary = $this->owner->request->postVar('statusPrimary');
+            $status_submitted = $this->owner->request->postVar('statusSubmitted');
 
-            $speakersSubmissionsExportQuerySpecification = new SpeakersSubmissionsExportQuerySpecification($selected_summit_ids, $status_primary, $status_alternate);
+            $speakersSubmissionsExportQuerySpecification = new SpeakersSubmissionsExportQuerySpecification($selected_summit_ids);
             $speakersSubmissionsExportQuery = new SpeakersSubmissionsExportQuery();
             $res = $speakersSubmissionsExportQuery->handle($speakersSubmissionsExportQuerySpecification);
+
+            $submissions = array();
+            foreach ($res->getResult()[0] as $submission){
+                if ($submission['ListType'] == 'Group'){
+                    if ($submission['Order'] <= $submission['SessionCount']){
+                        if ($status_primary) $submission['Status'] = 'PRIMARY';
+                        else continue;
+                    } else {
+                        if ($status_alternate) $submission['Status'] = 'ALTERNATE';
+                        else continue;
+                    }
+                } else {
+                    if ($status_submitted) $submission['Status'] = 'NOT ACCEPTED';
+                    else continue;
+                }
+                $submissions[] = $submission;
+            }
 
             $ext = $_POST['ext'];
             $filename = "PresentationSpeakers_" . date('Ymd') . "." . $ext;
             $delimiter = ",";
 
-            return CSVExporter::getInstance()->export($filename, $res->getResult()[0], $delimiter);
+            return CSVExporter::getInstance()->export($filename, $submissions, $delimiter);
         }
     }
 

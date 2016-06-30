@@ -22,30 +22,22 @@ class SpeakersSubmissionsExportQuery implements IQueryHandler {
     public function handle(IQuerySpecification $specification) {
         $params = $specification->getSpecificationParams();
         $selectedSummits = implode(',',$params["selectedSummits"]);
-        $statusPrimary = $params["statusPrimary"];
-        $statusAlternate = $params["statusAlternate"];
 
-        $statuses = array();
-
-        if ($statusPrimary) $statuses[] = 'PRIMARY';
-        if ($statusAlternate) $statuses[] = 'ALTERNATE';
-
-        $statuses = "'".implode("','",$statuses)."'";
-
-        $query = "SELECT *,
-            IF(`Order` <= SessionCount, 'PRIMARY', 'ALTERNATE') AS AcceptedStatus
-            FROM (
-                SELECT S.FirstName, S.LastName, S.MemberID, E.Title AS PresentationTitle,
-                P.ID as PresentationID, PC.Title AS Track, SSP.`Order`, PC.SessionCount, PC.AlternateCount
-                FROM PresentationSpeaker S
-                INNER JOIN Presentation_Speakers PS on PS.PresentationSpeakerID = S.ID
-                INNER JOIN Presentation P ON P.ID = PS.PresentationID
-                INNER JOIN SummitEvent E ON E.ID = P.ID
-                INNER JOIN PresentationCategory PC ON PC.ID = P.CategoryID
-                LEFT  JOIN SummitSelectedPresentation SSP ON SSP.PresentationID = P.ID
-                LEFT  JOIN SummitSelectedPresentationList SSPL ON SSPL.ID = SSP.SummitSelectedPresentationListID
-                WHERE E.SummitID IN ( $selectedSummits ) AND SSPL.ListType = 'Group'
-            ) AS REPORT_2 HAVING AcceptedStatus IN ( $statuses );";
+        $query = "SELECT * FROM (
+                    SELECT IF(S.FirstName IS NOT NULL,S.FirstName,M.FirstName) AS FirstName,
+                    IF(S.LastName IS NOT NULL,S.LastName,M.Surname) AS LastName,
+                    S.MemberID, E.Title AS PresentationTitle, P.ID as PresentationID,
+                    PC.Title AS Track, SSP.`Order`, SSPL.ListType, PC.SessionCount, PC.AlternateCount
+                    FROM PresentationSpeaker S
+                    LEFT JOIN Member M ON S.MemberID = M.ID
+                    INNER JOIN Presentation_Speakers PS on PS.PresentationSpeakerID = S.ID
+                    INNER JOIN Presentation P ON P.ID = PS.PresentationID
+                    INNER JOIN SummitEvent E ON E.ID = P.ID
+                    INNER JOIN PresentationCategory PC ON PC.ID = P.CategoryID
+                    LEFT  JOIN SummitSelectedPresentation SSP ON SSP.PresentationID = P.ID
+                    LEFT  JOIN SummitSelectedPresentationList SSPL ON SSPL.ID = SSP.SummitSelectedPresentationListID
+                    WHERE E.SummitID IN ( $selectedSummits ) ORDER BY P.ID,S.MemberID,SSP.LastEdited DESC
+                 ) AS Q1 GROUP BY PresentationID,MemberID;";
 
         $result = DB::query($query);
 
