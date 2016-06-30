@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import ButtonGroup from '../ui/ButtonGroup';
 import ButtonOption from '../ui/ButtonOption';
 import {postMySelection} from '../../actions';
+import {Selected, Maybe, Pass} from '../ui/Icons';
 
 class SelectionButtonBar extends React.Component {
 
@@ -34,9 +35,9 @@ class SelectionButtonBar extends React.Component {
 
 		return (
 			<ButtonGroup onSelect={this.handleSelect} activeKey={activeKey}>
-				<ButtonOption disabled={!canAdd} eventKey='selected' className='success'><i className="fa fa-thumbs-up" /> Yes</ButtonOption>
-				<ButtonOption eventKey='maybe' className='warning'><i className="fa fa-balance-scale" /> Maybe</ButtonOption>
-				<ButtonOption eventKey='pass' className='danger'><i className="fa fa-thumbs-down" /> Pass</ButtonOption>
+				<ButtonOption disabled={!canAdd} eventKey='selected' className='success'><Selected /> Yes</ButtonOption>
+				<ButtonOption eventKey='maybe' className='warning'><Maybe /> Interested</ButtonOption>
+				<ButtonOption eventKey='pass' className='danger'><Pass /> No thanks</ButtonOption>
 			</ButtonGroup>
 		);		
 	}

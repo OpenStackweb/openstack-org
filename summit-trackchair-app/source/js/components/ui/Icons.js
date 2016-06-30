@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Maybe = () => (
-	<i className="fa fa-balance-scale" />
+	<i className="fa fa-eye" />
 );
 
 export const Selected = () => (

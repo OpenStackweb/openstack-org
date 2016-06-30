@@ -43,7 +43,12 @@ class PresentationEmailForm extends React.Component {
 	        	}
 	           <form role="form" onSubmit={this.handleSubmit}>
 	              <div className="form-group">
-	                 <textarea value={this.state.value} onChange={this.updateValue} className="form-control" rows={10}></textarea>
+	                 <textarea 
+	                 	placeholder="Write your message..."
+	                 	value={this.state.value}
+	                 	onChange={this.updateValue}
+	                 	className="form-control"
+	                 	rows={10} />
 	              </div>
 	              <div className="text-right">
 	                 <button type="submit" className="btn btn-sm btn-primary m-t-n-xs">

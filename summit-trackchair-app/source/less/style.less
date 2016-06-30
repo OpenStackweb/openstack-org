@@ -156,6 +156,9 @@
 		line-height:2;
 		text-align:left;
 	}
+	img {
+		width:73px;
+	}
 }
 ul.navbar-nav {
 	li > a.active {
@@ -213,6 +216,14 @@ ul.navbar-nav {
 				color:#666;
 			}
 		}
+		.selection-meta {
+			position:absolute;
+			top:5px;
+			right:10px;
+			font-size:9px;
+			text-transform:uppercase;
+		}
+
 	}
 	.label-full {
 		position:absolute;
@@ -264,10 +275,15 @@ ul.navbar-nav {
 	
 
 		}
+
 		/* Crazy thing needed to make the drag image work */
 		[class^="col"] {
 			position:static;
 		}
+	}
+
+	.static .vote-item {
+		border: 1px solid #aaa;
 	}
 
 	.column-selected {
@@ -278,6 +294,7 @@ ul.navbar-nav {
 				background: linear-gradient(#F70505 0%, @red 100%);
 			}
 		}
+		.selection-stats {color:white;}
 	}
 
 	.column-team {
@@ -289,8 +306,11 @@ ul.navbar-nav {
 			}
 
 		}
-	}
 
+		.selection-stats {color:white;}
+	}
+	
+	.selection-stats {font-size:10px;}
 }
 
 .change-request-form {

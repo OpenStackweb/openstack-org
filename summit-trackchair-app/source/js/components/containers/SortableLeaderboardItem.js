@@ -110,6 +110,9 @@ class SortableLeaderboardItem extends Component {
 	        	</DropdownItem>
 	        </Dropdown>	        
         </div>
+        <div className="selection-meta">
+        	{p.level}
+        </div>
       </div>
     ));
   }

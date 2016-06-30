@@ -34,10 +34,10 @@ class Selections extends React.Component {
             <div className="selections">
             <div className="container-fluid selections-navigation">
                 <div className="row">
-					<div className="col-lg-4">
+					<div className="col-md-4">
 						<strong>Category</strong>: <CategoryNavigator />
 					</div>
-					<div className="col-lg-4">
+					<div className="col-md-4">
 						<strong>List</strong>: <ListDropdown list={this.props.params.id} autoSelect />
 					</div>
                 </div>
@@ -56,7 +56,7 @@ export default connect(
 			category: state.routing.locationBeforeTransitions.query.category,
 			defaultCategory: state.summit.data.categories.find(c => (
 				c.user_is_chair
-			))
+			)) || state.summit.data.categories[0]
 		};
 	},
 	dispatch => ({

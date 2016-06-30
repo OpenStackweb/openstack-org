@@ -8,6 +8,7 @@ import SlideInLeft from '../ui/animate/SlideInLeft';
 import SlideOutRight from '../ui/animate/SlideOutRight';
 import {toggleMaybeDrawer, postReorganise} from '../../actions';
 import {Maybe, Selected, Team} from '../ui/Icons';
+import SelectionStats from '../ui/SelectionStats';
 
 class SelectionsDetail extends React.Component {
 
@@ -89,7 +90,8 @@ class SelectionsDetail extends React.Component {
 					      <div className="ibox-content">
 					         <div className="row">
 					            <div className="col-lg-12">
-					            	<h3><Maybe /> Slush pile ({maybes.length})</h3>
+					            	<h3><Maybe /> Interested ({maybes.length})</h3>
+					            	{maybes.length > 0 && <SelectionStats selections={maybes} />}
 					            	<IndividualListComponent 
 					            		onColumnChange={this.handleColumnChange}
 					            		selections={maybes} 
@@ -110,6 +112,7 @@ class SelectionsDetail extends React.Component {
 					            <div className="col-lg-12">
 					            	<h3><Selected /> Selections ({selections.length} / {sessionLimit})</h3>
 					            	{myListFull && <span className="label label-full label-danger">FULL</span>}
+					            	{selections.length > 0 && <SelectionStats selections={selections} />}
 					            	<IndividualListComponent
 					            		onColumnChange={this.handleColumnChange} 
 					            		selections={selections} 
@@ -130,6 +133,7 @@ class SelectionsDetail extends React.Component {
 					            <div className="col-lg-12">
 					            	<h3><Team /> Team list ({team.length} / {sessionLimit})</h3>
 					            	{teamListFull && <span className="label label-full label-danger">FULL</span>}
+					            	<SelectionStats selections={team} />
 					            	<TeamListComponent 
 					            		onColumnChange={this.handleColumnChange}
 					            		selections={team} 

@@ -20,7 +20,7 @@ const MainNav = ({
         </LinkButton>
         <LinkButton link="directory">
         	<i className="fa fa-sort-alpha-asc"></i>
-        	<span className="nav-label">Directory</span>
+        	<span className="nav-label">Track Chair Directory</span>
         </LinkButton>
         <LinkButton link="change-requests">
         	<i className="fa fa-edit"></i>

@@ -28,16 +28,22 @@ class Browse extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		console.log('compare', nextProps.search, this.props.search);
 		if(nextProps.category !== this.props.category) {
 			this.props.fetchPresentations({
 				category: nextProps.category,
+				keyword: nextProps.search,
 				page: 1
-			});			
-			this.props.fetchLists(nextProps.category);
+			});
+			if(nextProps.category) {		
+				this.props.fetchLists(nextProps.category);
+			}
 		}
 		else if(nextProps.search !== this.props.search) {
+			console.log('its a search');
 			this.props.fetchPresentations({
 				keyword: nextProps.search,
+				category: nextProps.category,
 				page: 1
 			});
 		}

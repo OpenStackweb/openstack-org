@@ -53,7 +53,7 @@ class PresentationMeta extends React.Component {
 				key='popularity'
 				arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
 				placement="left" 
-				overlay="Popularity score is a composite rating<br>that weights individual selections, <br>maybes, and passes from everyone on the team"
+				overlay={`Popularity score is a composite rating<br>that weights individual selections, <br>"interested", and "no thanks" from everyone on the team`}
 			>
 				<i className="fa fa-question-circle" />
 			</Tooltip>
@@ -61,13 +61,13 @@ class PresentationMeta extends React.Component {
 		return (
 		<div className="presntation-meta">
 		        <div className="row">
-		            <div className="col-lg-5">
+		            <div className="col-md-5">
 		               <dl className="dl-horizontal">
 		                  <dt>Submitted by:</dt>
 		                  <dd>{presentation.creator}</dd>
 		               </dl>
 		            </div>
-		            <div className="col-lg-7" id="cluster_info">
+		            <div className="col-md-7" id="cluster_info">
 		               <dl className="dl-horizontal">
 		                  <dt>Level:</dt>
 		                  <dd>{presentation.level}</dd>
@@ -82,7 +82,7 @@ class PresentationMeta extends React.Component {
 		        </div>
               	{this.state.showCategoryChange &&
               	<div className="row">
-              		<div className="col-lg-8 col-lg-offset-2">
+              		<div className="col-md-8 col-md-offset-2">
 	              		<div className="change-request-form">
 							<form onSubmit={this.onSubmit}>
 								{!success &&
@@ -120,7 +120,7 @@ class PresentationMeta extends React.Component {
               	</div>             		              	
               	}
 				<div className="row presentation-data">
-		        	<div className="col-lg-3 presentation-data-vote">
+		        	<div className="col-md-3 presentation-data-vote">
 		                <div className="ibox">
 		                    <div className="ibox-content">
 		                        <h5>Community Vote</h5>
@@ -129,7 +129,7 @@ class PresentationMeta extends React.Component {
 		                    </div>
 		                </div>
 		            </div>
-		        	<div className="col-lg-3 presentation-data-selections">
+		        	<div className="col-md-3 presentation-data-selections">
 		                <div className="ibox">
 		                    <div className="ibox-content">
 		                        <h5>Selections</h5>
@@ -138,7 +138,7 @@ class PresentationMeta extends React.Component {
 		                    </div>
 		                </div>
 		            </div>
-		        	<div className="col-lg-3 presentation-data-interest">
+		        	<div className="col-md-3 presentation-data-interest">
 		                <div className="ibox">
 		                    <div className="ibox-content">
 		                        <h5>Interested</h5>
@@ -148,7 +148,7 @@ class PresentationMeta extends React.Component {
 		                </div>
 		            </div>
 
-		        	<div className="col-lg-3 presentation-data-popularity">
+		        	<div className="col-md-3 presentation-data-popularity">
 		                <div className="ibox">				
 		                    <div className="ibox-content">
 		                        <h5>Popularity Score {tooltip}</h5>

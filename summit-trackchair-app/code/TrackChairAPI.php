@@ -320,7 +320,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 		                'likers' => array_keys($p->getLikers()->map('Name','Name')->toArray()),
 		                'passers' => array_keys($p->getPassers()->map('Name','Name')->toArray()),
 		                'group_selected' => $p->isGroupSelected(),
-		                'comment_count' => $p->Comments()->count()
+		                'comment_count' => $p->Comments()->count(),
+		                'level' => $p->Level
 		            ],
                     'order' => $s->Order,
                     'id' => $s->PresentationID
@@ -409,13 +410,27 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
         $page = $r->getVar('page') ?: 1;
 
+        $categories = SummitTrackChair::get()->filter([
+        	'MemberID' => Member::currentUserID()
+        ])
+        ->first()
+        ->Categories()->column('ID');
+
         $changeRequests = SummitCategoryChange::get()
             ->innerJoin('Presentation', 'Presentation.ID = PresentationID')
             ->innerJoin('SummitEvent', 'Presentation.ID = SummitEvent.ID')
             ->leftJoin('PresentationCategory', 'OldCategory.ID = Presentation.CategoryID','OldCategory')
             ->leftJoin('PresentationCategory', 'NewCategory.ID = SummitCategoryChange.NewCategoryID','NewCategory')
             ->leftJoin('Member', 'Member.ID = SummitCategoryChange.ReqesterID')
-            ->filter('SummitEvent.SummitID', $summitID);
+            ->filter([
+            	'SummitEvent.SummitID' => $summitID            	
+            ]);
+
+        if(!Permission::check('ADMIN')) {
+        	$changeRequests = $changeRequests->filter([
+        		'Presentation.CategoryID' => $categories
+        	]);
+        }
 
         $sortCol = $r->getVar('sortCol') ?: 'Status';
         $sortDir = $r->getVar('sortDir') == 1 ? 'ASC' : 'DESC';

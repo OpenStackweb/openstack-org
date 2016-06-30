@@ -66,11 +66,17 @@ class BrowseDetail extends React.Component {
     		'maybe': 'warning',
     		'pass': 'danger'
     	};
+
+    	const voteLookup = {
+    		'maybe': 'Interested',
+    		'selected': 'Selected',
+    		'pass': 'No thanks'
+    	};
         
         return (
 			<div className="wrapper wrapper-content">
 			{p.selected && !p.group_selected &&
-			  <Ribbon type={ribbonTypes[p.selected]}>{p.selected}</Ribbon>
+			  <Ribbon type={ribbonTypes[p.selected]}>{voteLookup[p.selected]}</Ribbon>
 			}
 			{p.group_selected &&
 			  <Ribbon type='primary'>TEAM SELECTION</Ribbon>
@@ -90,7 +96,7 @@ class BrowseDetail extends React.Component {
 			            }
 			            {p.can_assign &&
 			               <div className="row">
-			                  <div className="col-lg-5 col-lg-offset-7">
+			                  <div className="col-lg-6 col-lg-offset-6 col-md-8 col-md-offset-4">
 			                  	<div className="pull-right">			                  	
 			                  		<SelectionButtonBar />
 			                  	</div>
@@ -107,7 +113,7 @@ class BrowseDetail extends React.Component {
 					<PresentationSpeakers speakers={p.speakers} />
 					<div className="row">
 						<div className="col-sm-12">
-							<button className="btn btn-primary" onClick={this.props.toggleEmailSpeakers}>Email the speakers</button>							
+							<a onClick={this.props.toggleEmailSpeakers}><i className="fa fa-envelope" /> Email the speakers</a>							
 						</div>
 					</div>
 					{p.showForm &&

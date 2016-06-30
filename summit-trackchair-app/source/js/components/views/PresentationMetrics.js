@@ -1,20 +1,21 @@
 import React from 'react';
 import Tooltip from '../ui/Tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
+import {Selected, Maybe, Pass} from '../ui/Icons';
 
 export default ({
 	presentation
 }) => {
-	let metrics = {
-		'selectors': 'thumbs-up',
-		'likers': 'balance-scale',
-		'passers': 'thumbs-down'
+	let icons = {
+		'selectors': Selected,
+		'likers': Maybe,
+		'passers': Pass
 	};
 	const tooltipLimit = 2;
 	let arrowContent = <div className="rc-tooltip-arrow-inner"></div>;
-	let innerContent = Object.keys(metrics).map(k => {
+	let innerContent = Object.keys(icons).map(k => {
 		if(presentation[k].length) {
-			let icon = metrics[k];
+			let Icon = icons[k];
 			let list = presentation[k];
 			let listLength = list.length;
 			if(list.length > tooltipLimit) {
@@ -22,10 +23,11 @@ export default ({
 				list.push(`... and ${listLength - tooltipLimit} more`);
 			}
 			list = list.join('<br>');
+
 			return (
 				<Tooltip key={k} arrowContent={arrowContent} placement="bottom" overlay={list}>
     				<span className={`presentation-metric ${k}`}>
-    					<i className={`fa fa-${icon}`} /> {presentation[k].length}
+    					<Icon /> {presentation[k].length}
     				</span>
 				</Tooltip>
 			);
