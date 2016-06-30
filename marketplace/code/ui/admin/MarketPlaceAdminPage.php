@@ -655,7 +655,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         if (!empty($product_name)) {
             $query->addOrCondition(QueryCriteria::like('CompanyService.Name', $product_name));
             $query->addOrCondition(QueryCriteria::like('Company.Name', $product_name));
-            $query_draft->addOrCondition(QueryCriteria::like('CompanyService.Name', $product_name));
+            $query_draft->addOrCondition(QueryCriteria::like('CompanyServiceDraft.Name', $product_name));
             $query_draft->addOrCondition(QueryCriteria::like('Company.Name', $product_name));
         }
         if ($company_id > 0) {
