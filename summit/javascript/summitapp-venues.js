@@ -28,6 +28,12 @@ $(document).ready(function(){
         clickVenue(venue_id,0);
     });
 
+    $('.floor_header').on('click',function(){
+        $('.floor_image').slideUp();
+        $(this).siblings('.floor_image').slideDown();
+
+    });
+
     handleDeepLink();
 
 });
@@ -79,7 +85,6 @@ function clickVenue(venue_id, floor_id) {
 
     opened_elem.siblings('.carousel').slideUp();
     opened_elem.siblings('.floor-accordion').slideUp();
-    $('#floor_image').slideUp();
 
     opened_elem.animate({
         height: "350"

@@ -13,7 +13,7 @@
             <div class="floor-accordion">
                 <% loop $Floors() %>
                 <div class="floor">
-                    <div class="header">
+                    <div class="floor_header">
                         <div class="overlay"></div>
                         <div class="labelbox">
                             <div class="title"> $Name </div>
