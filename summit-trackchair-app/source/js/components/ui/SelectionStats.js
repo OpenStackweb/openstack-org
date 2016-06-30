@@ -9,9 +9,8 @@ export default({
 		'Advanced': 0,
 		'N/A': 0
 	};
-console.log(selections);
+
 	selections.forEach(s => {
-		console.log(s.presentation.level);
 		const l = s.presentation.level || 'N/A';
 		stats[l]++;
 	});

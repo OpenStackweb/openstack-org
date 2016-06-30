@@ -28,7 +28,6 @@ class Browse extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log('compare', nextProps.search, this.props.search);
 		if(nextProps.category !== this.props.category) {
 			this.props.fetchPresentations({
 				category: nextProps.category,
@@ -39,8 +38,7 @@ class Browse extends React.Component {
 				this.props.fetchLists(nextProps.category);
 			}
 		}
-		else if(nextProps.search !== this.props.search) {
-			console.log('its a search');
+		else if(nextProps.search !== this.props.search) {			
 			this.props.fetchPresentations({
 				keyword: nextProps.search,
 				category: nextProps.category,
