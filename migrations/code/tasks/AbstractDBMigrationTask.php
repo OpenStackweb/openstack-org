@@ -43,6 +43,10 @@ class AbstractDBMigrationTask extends MigrationTask
             if (!$migration) {
 
                 set_time_limit(0);
+
+$title = Convert::raw2sql($this->title);
+$description = Convert::raw2sql($this->description);
+
 $sql = <<<SQL
 INSERT INTO `Migration`
 (
@@ -55,8 +59,8 @@ VALUES
 (
     NOW(),
     NOW(),
-    '{$this->title}',
-    '{$this->description}'
+    '$title',
+    '$description'
 );
 SQL;
 
