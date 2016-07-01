@@ -15,7 +15,7 @@ const NavigationBar = ({
                 <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" className="navbar-toggle collapsed" type="button">
                     <i className="fa fa-reorder"></i>
                 </button>
-                <a href="#" className="navbar-brand">Track Chairs App</a>
+                <span className="navbar-brand">Track Chairs App</span>
             </div>
             <div className="navbar-collapse collapse" id="navbar">
 				<MainNav />
