@@ -28,6 +28,10 @@ class CommentForm extends React.Component {
 				this.props.presentation,
 				this.state.comment
 			);
+
+			this.setState({
+				comment: null
+			});
 		}
 	}
 
