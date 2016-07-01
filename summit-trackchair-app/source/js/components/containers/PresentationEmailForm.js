@@ -29,6 +29,10 @@ class PresentationEmailForm extends React.Component {
 				name: window.TrackChairAppConfig.userinfo.name			
 			}
 		);
+
+		this.setState({
+			value: ''
+		});
 	}
 
 	render() {

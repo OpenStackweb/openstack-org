@@ -29,9 +29,12 @@ class PresentationCommentForm extends React.Component {
 				name: window.TrackChairAppConfig.userinfo.name			
 			}
 		);
+		this.setState({
+			value: ''
+		});
 	}
 
-	render() {
+	render() {		
 		return (
 	        <div className="chat-form">
 	           <form role="form" onSubmit={this.handleSubmit}>
