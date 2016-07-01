@@ -56,6 +56,7 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
         $f->add(new TextareaField('Description','Description'));
         $f->add(new NumericField('Number','Number'));
         $f->add(new UploadField('Image','Image'));
+        $f->add(new HiddenField('VenueID','VenueID'));
 
         if ($this->ID) {
             $f->add(new LiteralField('br','<br>'));
