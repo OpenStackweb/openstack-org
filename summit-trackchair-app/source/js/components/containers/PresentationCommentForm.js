@@ -22,6 +22,11 @@ class PresentationCommentForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
+
+		if(!this.state.value) {
+			return;
+		}
+
 		this.props.postComment(
 			this.props.presentation.id, 
 			{

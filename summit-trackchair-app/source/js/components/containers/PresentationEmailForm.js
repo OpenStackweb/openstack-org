@@ -22,6 +22,11 @@ class PresentationEmailForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
+
+		if(!this.state.value) {
+			return;
+		}
+
 		this.props.postEmail(
 			this.props.presentation.id, 
 			{
