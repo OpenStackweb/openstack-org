@@ -69,6 +69,21 @@ class SummitEvent extends DataObject implements ISummitEvent
         'Type.Type'              => 'Event Type',
     );
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Feedback() as $e){
+            $e->delete();
+        }
+        foreach($this->RSVPSubmissions() as $e){
+            $e->delete();
+        }
+        $this->AllowedSummitTypes()->removeAll();
+        $this->Sponsors()->removeAll();
+        $this->Tags()->removeAll();
+        $this->Attendees()->removeAll();
+    }
+
     public function getTitle()
     {
         return html_entity_decode($this->getField('Title'));

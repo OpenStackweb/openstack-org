@@ -129,4 +129,10 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         return $this->Summit()->Link.'venues';
     }
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        //remove locations from all events
+        DB::query("UPDATE SummitEvent SET LocationID = 0 WHERE LocationID = {$this->ID} AND SummitID = {$this->SummitID};");
+    }
 }

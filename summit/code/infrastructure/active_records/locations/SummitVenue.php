@@ -22,7 +22,7 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
 
     private static $has_many = array
     (
-        'Rooms' => 'SummitVenueRoom',
+        'Rooms'  => 'SummitVenueRoom',
         'Floors' => 'SummitVenueFloor',
     );
 
@@ -42,6 +42,17 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
     (
     );
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Floors() as $e){
+            $e->delete();
+        }
+
+        foreach($this->Rooms() as $e){
+            $e->delete();
+        }
+    }
 
     /**
      * @return bool

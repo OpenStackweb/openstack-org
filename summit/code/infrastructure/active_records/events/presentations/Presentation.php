@@ -73,9 +73,7 @@ class Presentation extends SummitEvent implements IPresentation
                   	OR SummitEvent.ShortDescription LIKE '%{$k}%'
                     OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
                 ");
-
     }
-
 
     /**
      * @return int
@@ -200,6 +198,25 @@ class Presentation extends SummitEvent implements IPresentation
         parent::onBeforeWrite();
         if (!$this->TypeID)
             $this->assignEventType();
+    }
+
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Votes() as $e){
+            $e->delete();
+        }
+        foreach($this->Comments() as $e){
+            $e->delete();
+        }
+        foreach($this->ChangeRequests() as $e){
+            $e->delete();
+        }
+        foreach($this->Materials() as $e){
+            $e->delete();
+        }
+        $this->Topics()->removeAll();
+        $this->Speakers()->removeAll();
     }
 
     /**

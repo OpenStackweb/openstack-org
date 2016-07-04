@@ -78,6 +78,43 @@ class PresentationSpeaker extends DataObject
         'TwitterName' => 'TwitterName',
     ];
 
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+
+        if($this->Photo()->exists()) $this->Photo()->delete();
+        if($this->RegistrationRequest()->exists()) $this->RegistrationRequest()->delete();
+
+        foreach($this->AreasOfExpertise() as $e){
+            $e->delete();
+        }
+        foreach($this->OtherPresentationLinks() as $e){
+            $e->delete();
+        }
+        foreach($this->TravelPreferences() as $e){
+            $e->delete();
+        }
+        foreach($this->Languages() as $e){
+            $e->delete();
+        }
+        foreach($this->PromoCodes() as $e){
+            $e->delete();
+        }
+        foreach($this->AnnouncementSummitEmails() as $e){
+            $e->delete();
+        }
+        foreach($this->SummitAssistances() as $e){
+            $e->delete();
+        }
+
+        $this->Presentations()->removeAll();
+        $this->OrganizationalRoles()->removeAll();
+        $this->ActiveInvolvements()->removeAll();
+
+        // set moderator to zero
+
+        DB::query("UPDATE Presentation SET ModeratorID = 0 WHERE ModeratorID = {$this->ID};");
+    }
+
     /**
      * Gets a readable label for the speaker
      *

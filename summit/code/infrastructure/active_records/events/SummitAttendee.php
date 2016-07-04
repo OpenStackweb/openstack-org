@@ -80,10 +80,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
             $t->delete();
 
         $schedule = $this->getManyManyComponents('Schedule');
-        foreach( $schedule as $s)
-        {
-            $schedule->remove($s);
-        }
+        $schedule->removeAll();
     }
 
     public function TicketsCount()

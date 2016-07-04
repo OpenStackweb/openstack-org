@@ -50,6 +50,17 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
     (
     );
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Maps() as $e){
+            $e->delete();
+        }
+        foreach($this->Images() as $e){
+            $e->delete();
+        }
+    }
+
     /**
      * @return string
      */

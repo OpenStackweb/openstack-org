@@ -98,6 +98,19 @@ class MemberDecorator extends DataExtension
         if(Controller::has_curr())
             $deleted->FromUrl = Controller::curr()->getRequest()->getURL(true);
         $deleted->write();
+
+        if($this->owner->Speaker()->exists()) $this->owner->Speaker()->delete();
+        if($this->owner->Photo()->exists()) $this->owner->Photo()->delete();
+
+        foreach($this->owner->LegalAgreements() as $e){
+            $e->delete();
+        }
+
+        foreach($this->owner->Affiliations() as $e){
+            $e->delete();
+        }
+
+        $this->owner->ManagedCompanies()->removeAll();
     }
 
     public function setOwner($owner, $ownerBaseClass = null)

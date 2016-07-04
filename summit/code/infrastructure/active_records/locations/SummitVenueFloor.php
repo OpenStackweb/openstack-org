@@ -77,4 +77,11 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
     public function getVenue() {
         return $this->Venue();
     }
+
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        // reset all rooms assigned to this deleted floor
+        DB::query("UPDATE SummitVenueRoom SET FloorID = 0 WHERE FloorID = {$this->ID};");
+    }
 }
