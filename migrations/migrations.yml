@@ -34,3 +34,4 @@ migrations:
   - SummitPresentationTypeMigration
   - PopulateOrganizationalRoleAndActiveInvolvement
   - TrackChairMigration
+  - UninstallTranslatableMigration
