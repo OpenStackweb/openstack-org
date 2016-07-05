@@ -33,9 +33,10 @@ class Directory extends React.Component {
 			               		className="table table-striped table-bordered table-hover dataTable" 
 			               		role="grid"
 			               	>
-				               		<TableColumn width='33%'>Category</TableColumn>
-				               		<TableColumn width='40%'>Name</TableColumn>
-				               		<TableColumn				               			
+				               		<TableColumn columnKey='category' width='33%'>Category</TableColumn>
+				               		<TableColumn columnKey='name' width='40%'>Name</TableColumn>
+				               		<TableColumn
+				               			columnKey='email'				               			
 				               			cell={data => <a href={`mailto:${data}`}>{data}</a>}
 				               		>
 				               			Email
@@ -63,7 +64,7 @@ export default connect(
 		}
 	},
 	dispatch => ({
-		sortTable(index, dir) {
+		sortTable(index, key, dir) {
 			dispatch(sortDirectory({
 				sortCol: index,
 				sortDir: dir
