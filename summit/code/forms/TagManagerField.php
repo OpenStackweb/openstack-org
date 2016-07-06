@@ -14,10 +14,22 @@
  **/
 class TagManagerField extends FormField
 {
+    public $Category;
+
     public function FieldHolder($attributes = array ())
     {
+        //$tags_json = json_encode($this->Category->AllowedTags()->column('Tag'));
+        $tag_array = array();
+        foreach ($this->Category->AllowedTags() as $tag) {
+            if(!isset($tag_array[$tag->Group])) $tag_array[$tag->Group] = array();
+            $tag_array[$tag->Group][] = $tag->Tag;
+        }
+        $tags_json = json_encode($tag_array);
+
+        Requirements::customScript("var category_tags = {$tags_json};");
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript("summit/javascript/forms/tagmanagerfield/tagmanagerfield.bundle.js");
+        Requirements::set_write_js_to_body(false);
+
         return parent::FieldHolder($attributes);
     }
 
@@ -53,5 +65,9 @@ class TagManagerField extends FormField
             $this->value = $value;
         }
         return $this;
+    }
+
+    public function setCategory($category) {
+        $this->Category = $category;
     }
 }

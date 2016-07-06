@@ -24,11 +24,11 @@ interface INews extends IEntity {
     public function setSubmitter(ISubmitter $submitter);
 
     /**
-     * @return ITag[]
+     * @return INewsTag[]
      */
     public function getTags();
 
-    public function addTag(ITag $tag);
+    public function addTag(INewsTag $tag);
 
     public function clearTags();
 

@@ -11,34 +11,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 /**
- * Class Tag
+ * Interface INewsTag
  */
-final class Tag extends DataObject implements ITag
-{
+interface INewsTag extends IEntity {
 
-    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-    static $db = array
-    (
-        'Tag' => 'Varchar',
-    );
-
-    static $belongs_many_many = array(
-        'News'   => 'News',
-        'Events' => 'SummitEvent',
-    );
-
-    /**
-     * @return int
-     */
-    public function getIdentifier()
-    {
-        return (int)$this->getField('ID');
-    }
-
-    public function TagURL(){
-        return str_replace(' ','+', $this->getField('Tag'));
-    }
-}
+} 

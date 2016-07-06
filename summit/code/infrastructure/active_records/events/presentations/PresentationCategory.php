@@ -39,7 +39,17 @@ class PresentationCategory extends DataObject
     );
 
     private static $has_many = array(
-        'ChangeRequests' => 'SummitCategoryChange'
+        'ChangeRequests' => 'SummitCategoryChange',
+    );
+
+    private static $many_many = array(
+        'AllowedTags' => 'Tag',
+    );
+
+    private static $many_many_extraFields = array(
+        'AllowedTags' => array(
+            'Group' => "Enum('topics, speaker, openstack projects mentioned', 'topics')", // if change see also getcms
+        ),
     );
 
     private static $belongs_many_many = array(
@@ -57,7 +67,7 @@ class PresentationCategory extends DataObject
 
     public function getCMSFields()
     {
-        return FieldList::create(TabSet::create('Root'))
+        $fields = FieldList::create(TabSet::create('Root'))
             ->text('Title')
             ->text('Code','Code','',5)
             ->textarea('Description')
@@ -66,6 +76,39 @@ class PresentationCategory extends DataObject
             ->checkbox('VotingVisible', "This category is visible to voters")
             ->checkbox('ChairVisible', "This category is visible to track chairs")
             ->hidden('SummitID', 'SummitID');
+
+        if($this->ID > 0)
+        {
+            //tags
+            $config = new GridFieldConfig_RelationEditor(100);
+            $config->removeComponentsByType(new GridFieldDataColumns());
+            $config->removeComponentsByType(new GridFieldDetailForm());
+
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setResultsFormat('$Tag');
+            $completer->setSearchFields(array('Tag'));
+            $completer->setSearchList(Tag::get());
+
+            $editconf = new GridFieldDetailForm();
+            $editconf->setFields(FieldList::create(
+                TextField::create('Tag','Tag'),
+                DropdownField::create('ManyMany[Group]', 'Group', array(
+                    'topics' => 'Topics',
+                    'speaker' => 'Speaker',
+                    'openstack projects mentioned' => 'OpenStack Projects Mentioned'))
+            ));
+
+            $summaryfieldsconf = new GridFieldDataColumns();
+            $summaryfieldsconf->setDisplayFields(array( 'Tag' => 'Tag', 'Group' => 'Group'));
+
+            $config->addComponent($editconf);
+            $config->addComponent($summaryfieldsconf, new GridFieldFilterHeader());
+
+            $tags = new GridField('AllowedTags', 'Tags', $this->AllowedTags(), $config);
+            $fields->addFieldToTab('Root.Main', $tags);
+        }
+
+        return $fields;
     }
 
     protected function onAfterWrite() {

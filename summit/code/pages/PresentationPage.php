@@ -783,7 +783,11 @@ class PresentationPage_ManageRequest extends RequestHandler
 
     public function PresentationTagsForm()
     {
-        $fields = FieldList::create()->tagmanager('Tags', 'Tags');
+        $fields = FieldList::create();
+        $tag_field = new TagManagerField('Tags', 'Tags');
+        $tag_field->setCategory($this->presentation->Category());
+        $fields->add($tag_field);
+
         $form   = new BootstrapForm($this, 'PresentationTagsForm', $fields ,
             FieldList::create(
                 FormAction::create('savePresentationTags', 'Save')
