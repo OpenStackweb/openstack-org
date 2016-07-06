@@ -29,6 +29,13 @@
                     $Fields.dataFieldByName(url)
                 </div>
             </div>
+            <div class="field text " id="logo_url">
+                <label for="$FormName_logo_url" class="left">Logo Url</label>
+
+                <div class="middleColumn">
+                    $Fields.dataFieldByName(logo_url)
+                </div>
+            </div>
             <div class="field text " id="category">
                 <label for="$FormName_event_category" class="left">Category</label>
 

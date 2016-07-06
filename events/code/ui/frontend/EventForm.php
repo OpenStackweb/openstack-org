@@ -21,6 +21,7 @@ final class EventForm extends SafeXSSForm {
 		//main info
 		$fields->push(new TextField('title','Title'));
 		$fields->push(new TextField('url','Url'));
+		$fields->push(new TextField('logo_url','Logo Url'));
         $categoryField = new TextField('event_category','Category');
         $categoryField->setAttribute('class','event-category-autocomplete text');
         $fields->push($categoryField);

@@ -42,7 +42,17 @@ class EnterpriseHomePage_Controller extends Page_Controller {
 
         });");
 
-    } 
+    }
+
+    public function getEnterpriseEvents($limit = 3)
+    {
+        return EventPage::get()->filter('EventCategory','Enterprise')->sort('EventStartDate')->limit($limit);
+    }
+
+    public function getSummitEvent()
+    {
+        return EventPage::get()->filter('IsSummit',1)->sort('EventStartDate')->first();
+    }
 }
  
 ?>

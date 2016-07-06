@@ -121,6 +121,7 @@ jQuery(document).ready(function($) {
                 var event = {
                     title      : $('#'+form_id+'_title',form).val(),
                     url        : $('#'+form_id+'_url',form).val(),
+                    logo_url   : $('#'+form_id+'_logo_url',form).val(),
                     category   : $('#'+form_id+'_event_category',form).val(),
                     location   : $('#'+form_id+'_location',form).val(),
                     continent  : $('#'+form_id+'_continent',form).val(),
@@ -421,6 +422,7 @@ jQuery(document).ready(function($) {
                 //populate edit form
                 $('#'+form_id+'_title',form).val(data.title);
                 $('#'+form_id+'_url',form).val(data.url);
+                $('#'+form_id+'_logo_url',form).val(data.logo_url);
                 $('#'+form_id+'_event_category',form).val(data.category);
                 $('#'+form_id+'_location',form).val(data.location);
                 $('#'+form_id+'_continent',form).val(data.continent);

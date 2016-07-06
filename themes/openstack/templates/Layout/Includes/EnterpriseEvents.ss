@@ -28,19 +28,23 @@
                         </div>
                         <div class="row events">
                             <div class="col-lg-6">
-                               <a href="http://www.gartner.com/events/na/catalyst" class="featured-event-link lrg">
-                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise/gartner-catalyst-logo.png" alt="Gartner Catalyst Conference">
-                                    <span>Gartner Catalyst Conference</span>
-                                    <span>August 15-18, 2016 in San Diego</span>
+                                <% with EnterpriseEvents(1).First %>
+                                <a href="$EventLink" class="featured-event-link lrg">
+                                    <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="$Title">
+                                    <span>$Title</span>
+                                    <span>$formatDateRange() in $EventLocation</span>
                                 </a>
+                                <% end_with %>
                             </div>
                             <div class="vert-line"></div>
                             <div class="col-lg-6">
-                                <a href="http://openstack.org//barcelona-2016/" class="featured-event-link">
-                                    <img class="event-logo paris" src="/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Barcelona">
+                                <% with SummitEvent %>
+                                <a href="$EventLink" class="featured-event-link">
+                                    <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="OpenStack Summit in $EventLocation">
                                     <span>OpenStack Summit</span>
-                                    <span>October 24-28, 2016 in Barcelona</span>
+                                    <span>$formatDateRange() in $EventLocation</span>
                                 </a>
+                                <% end_with %>
                             </div>
                         </div>
                         <div class="row more-events">
@@ -50,9 +54,9 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <ul>
-                                        <li><a href="http://www.gartner.com/events/na/catalyst" target="_blank">Gartner Catalyst</a>, August 15-18, 2016 in San Diego, California</li>
-                                        <li><a href="http://events.linuxfoundation.org/events/kubecon" target="_blank">KubeCon</a>, November 8-9, Seattle</li>
-                                        <li><a href="http://sc16.supercomputing.org/" target="_blank">Supercomputing</a>, November 13-18, Salt Lake City, UT</li>
+                                        <% loop EnterpriseEvents(3) %>
+                                        <li><a href="$EventLink" target="_blank">$Title</a>, $formatDateRange() in $EventLocation</li>
+                                        <% end_loop %>
                                     </ul>
                                 </div>
                         </div>

@@ -108,6 +108,7 @@ final class EventManager {
             $event->registerMainInfo($factory->buildEventMainInfo($data));
             $event->registerLocation($data['location'],$data['continent']);
             $event->registerDuration($factory->buildEventDuration($data));
+            $event->registerLogoUrl($data['logo_url']);
 		});
 	}
 
@@ -133,6 +134,7 @@ final class EventManager {
             $event->registerMainInfo($factory->buildEventMainInfo($data));
             $event->registerLocation($data['location'],$data['continent']);
             $event->registerDuration($factory->buildEventDuration($data));
+            $event->registerLogoUrl($data['logo_url']);
 
             $repository->add($event);
 

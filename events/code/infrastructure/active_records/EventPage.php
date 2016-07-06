@@ -145,6 +145,14 @@ class EventPage
     }
 
     /**
+     * @return string
+     */
+    public function getLogoUrl()
+    {
+        return $this->EventSponsorLogoUrl;
+    }
+
+    /**
      * @param EventMainInfo $info
      * @return void
      */
@@ -174,4 +182,14 @@ class EventPage
         $this->EventStartDate = $duration->getStartDate()->format('Y-m-d');
         $this->EventEndDate   = $duration->getEndDate()->format('Y-m-d ');
     }
+
+    /**
+     * @param $logo_url
+     * @return void
+     */
+    public function registerLogoUrl($logo_url)
+    {
+        $this->EventSponsorLogoUrl = $logo_url;
+    }
+
 }
