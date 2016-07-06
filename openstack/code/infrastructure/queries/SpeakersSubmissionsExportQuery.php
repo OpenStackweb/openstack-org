@@ -25,7 +25,7 @@ class SpeakersSubmissionsExportQuery implements IQueryHandler {
 
         $query = "SELECT * FROM (
                     SELECT IF(S.FirstName IS NOT NULL,S.FirstName,M.FirstName) AS FirstName,
-                    IF(S.LastName IS NOT NULL,S.LastName,M.Surname) AS LastName,
+                    IF(S.LastName IS NOT NULL,S.LastName,M.Surname) AS LastName, M.Email AS Email,
                     S.MemberID, E.Title AS PresentationTitle, P.ID as PresentationID,
                     PC.Title AS Track, SSP.`Order`, SSPL.ListType, PC.SessionCount, PC.AlternateCount
                     FROM PresentationSpeaker S
