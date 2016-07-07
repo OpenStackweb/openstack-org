@@ -87,7 +87,9 @@ SummitLocationMap:
 SummitLocationImage:
   extensions:
     - SummitEntity
-
+SummitVenueFloor:
+  extensions:
+    - SummitEntity
 Injector:
     RSVPTextBoxUIBuilder:
       class: RSVPTextBoxQuestionTemplateUIBuilder
