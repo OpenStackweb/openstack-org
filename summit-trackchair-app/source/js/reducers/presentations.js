@@ -72,19 +72,24 @@ export const presentations = function (
         	}
 
         case 'MARK_AS_READ':
-        	return {
-        		...state,
-        		results: state.results.map(p => {
-        				if(+p.id === +action.payload) {
-        					return {
-        						...p,
-        						viewed: true
-        					};
-        				}
+       		if(state.results) {
+	        	return {
+	        		...state,
+	        		results: state.results.map(p => {
+	        				if(+p.id === +action.payload) {
+	        					return {
+	        						...p,
+	        						viewed: true
+	        					};
+	        				}
 
-        				return p;
-        			})
-        	};
+	        				return p;
+	        			})
+	        	};
+        	}
+
+        	return state;
+        	
         default:
             return state;
 

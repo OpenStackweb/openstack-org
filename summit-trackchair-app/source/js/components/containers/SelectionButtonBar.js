@@ -46,7 +46,7 @@ class SelectionButtonBar extends React.Component {
 export default connect(
 	state => ({		
 		presentation: state.detailPresentation,
-		myList: state.lists.results.find(l => l.mine)
+		myList: state.lists.results && state.lists.results.find(l => l.mine)
 	}),
 	dispatch => ({
 		onSelect(presentationID, key, name) {
