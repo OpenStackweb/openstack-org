@@ -438,7 +438,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         	]);
         }
 
-        $sortCol = $r->getVar('sortCol') ?: 'Status';
+        $sortCol = $r->getVar('sortCol') ?: 'status';
         $sortDir = $r->getVar('sortDir') == 1 ? 'ASC' : 'DESC';
         $search = $r->getVar('search');
 
@@ -447,7 +447,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         		$sortClause = "SummitEvent.Title";
         		break;
         	case 'status':
-        		$sortClause = "Done";
+        		$sortClause = "Status";
         		break;
         	case 'oldcat':
         		$sortClause = "OldCategory.Title";
