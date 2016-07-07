@@ -22,6 +22,14 @@ class TrackChairsPage_Controller extends Page_Controller
 
     public function init()
     {
+    	$parts = parse_url($_SERVER['REQUEST_URI']);
+    	$path = $parts['path'];
+    	if(!preg_match('/\/$/', $path)) {    	
+    		return $this->redirect(
+    			$path.'/'.(isset($parts['query']) ? '?'.$parts['query'] : '')
+    		);
+    	}
+
         if (!$this->trackChairCheck()) {
             Security::permissionFailure($this);
         }
