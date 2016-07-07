@@ -70,7 +70,7 @@ final class PresentationForm extends BootstrapForm
             ->dropdown('TypeID','Select the format (Presentation: Max 3 speakers; Panel: Max 4 speakers, 1 moderator)')
                 ->configure()
                     ->setEmptyString('-- Select one --')
-                    ->setSource(PresentationType::get()->exclude('Type','Keynotes')->map('ID', 'Type'))
+                    ->setSource(PresentationType::get()->filter('SummitID',$this->summit->ID)->exclude('Type','Keynotes')->map('ID', 'Type'))
                 ->end()
             ->literal('CategoryContainer','<div id="category_options"></div>')
             ->dropdown('Level','Select the technical level of your presentation content')

@@ -35,3 +35,4 @@ migrations:
   - PopulateOrganizationalRoleAndActiveInvolvement
   - TrackChairMigration
   - UninstallTranslatableMigration
+  - FixSummitEventTypesMigration
