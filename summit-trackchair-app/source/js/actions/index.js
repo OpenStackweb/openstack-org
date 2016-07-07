@@ -63,7 +63,7 @@ export const toggleMaybeDrawer = createAction('TOGGLE_MAYBE_DRAWER');
 export const requestCategoryChange = createAction('REQUEST_CATEGORY_CHANGE');
 export const successCategoryChange = createAction('SUCCESS_CATEGORY_CHANGE');
 export const resolveRequest = createAction('RESOLVE_REQUEST');
-
+export const clearPresentations = createAction('CLEAR_PRESENTATIONS');
 /* Async Actions */
 
 export const fetchSummit = (id) => {

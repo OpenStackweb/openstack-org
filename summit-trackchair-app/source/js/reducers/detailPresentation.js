@@ -4,6 +4,9 @@ export const detailPresentation = function (
     },
     action = {}) {	
     switch(action.type) {
+    	case 'CLEAR_PRESENTATIONS':
+    			return {};
+
         case 'REQUEST_PRESENTATION_DETAIL':
             return {
                 ...state,

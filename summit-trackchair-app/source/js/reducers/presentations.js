@@ -27,6 +27,14 @@ export const presentations = function (
                 loading: false
             };
 
+        case 'CLEAR_PRESENTATIONS':
+    		return {
+    			results: null,
+    			has_more: false,
+    			loading:true,
+    			page: 0,
+    			filter: 'all'
+    		};        	
         case 'ACTIVATE_PRESENTATION_FILTER':
         	return {
         		...state,

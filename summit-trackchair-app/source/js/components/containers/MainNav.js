@@ -7,10 +7,11 @@ import {browserHistory} from 'react-router';
 
 const MainNav = ({
 	activeLink,
-	onLinkClicked
+	onLinkClicked,
+	browseLink
 }) => (
 	<LinkBar activeLink={activeLink} onLinkClicked={onLinkClicked} className="nav navbar-nav" component="UL">                     
-        <LinkButton link="">
+        <LinkButton link={browseLink}>
         	<i className="fa fa-list"></i>
         	<span className="nav-label">Browse</span>
         </LinkButton>
@@ -39,7 +40,10 @@ export default connect (
 	(state, ownProps) => {
 		const activeLink = URL.makeRelative(state.routing.locationBeforeTransitions.pathname);
 		return {
-			activeLink
+			activeLink,
+			browseLink: state.detailPresentation.id ? 
+				`browse/${state.detailPresentation.id}?category=${state.detailPresentation.category_id}` :
+				''
 		}
 	},
 	dispatch => ({

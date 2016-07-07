@@ -1,7 +1,7 @@
 import React from 'react';
 import PresentationList from '../views/PresentationList';
 import {connect} from 'react-redux';
-import {fetchPresentations, fetchLists} from '../../actions';
+import {fetchPresentations, fetchLists, clearPresentations} from '../../actions';
 import CategoryNavigator from '../containers/CategoryNavigator';
 import PresentationSearchForm from '../containers/PresentationSearchForm';
 import PresentationFilterDropdown from '../containers/PresentationFilterDropdown';
@@ -18,47 +18,63 @@ class Browse extends React.Component {
 	}
 
 	componentDidMount() {
-		if(this.props.category) {
-			this.props.fetchPresentations({category: this.props.category});
-			this.props.fetchLists(this.props.category);
+		const {category, detailPresentation, params, defaultCategory, search} = this.props;
+		if(category) {
+			this.props.fetchPresentations({category});
+			this.props.fetchLists(category);
 		}
-		else {
-			this.props.fetchPresentations();
-		}
+		// /browse ---> /browse?category=1
+		else if(defaultCategory && !params.id) {
+			browserHistory.push(URL.create(`browse`, {
+				category: defaultCategory.id,
+				search: search
+			}));
+		}	
+
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.category !== this.props.category) {
+		const {category, search, params, presentations, detailPresentation} = nextProps;
+
+		// /browse/123?category=20  ----> /browse/123?category=30
+		if(category !== this.props.category) {
+			this.props.clearPresentations();
 			this.props.fetchPresentations({
-				category: nextProps.category,
-				keyword: nextProps.search,
+				category: category,
+				keyword: search,
 				page: 1
 			});
-			if(nextProps.category) {		
-				this.props.fetchLists(nextProps.category);
+			if(category) {
+				this.props.clearPresentations();		
+				this.props.fetchLists(category);
+				// /browse/123?category=20 -> /browse/123?category=30 -> /browse/?category=30
+				if(params.id) {
+					browserHistory.push(URL.create('browse/', {
+						category: category,
+						search: search
+					}));				
+				}
 			}
 		}
-		else if(nextProps.search !== this.props.search) {			
+		// /browse/123?search=foo  ----> /browse/123?search=bar
+		else if(search !== this.props.search) {
+			this.props.clearPresentations();	
 			this.props.fetchPresentations({
-				keyword: nextProps.search,
-				category: nextProps.category,
+				keyword: search,
+				category: category,
 				page: 1
 			});
 		}
-		else if(nextProps.presentations && nextProps.defaultPresentation.id) {			
-			if(nextProps.params.id && !nextProps.category && nextProps.defaultPresentation.category_id) {
+		
+		else if(presentations && detailPresentation) {			
+			// /browse/123 ----> /browse/123?category=20
+			if(params.id && !category && detailPresentation.category_id) {
 				browserHistory.push(URL.create(undefined, {
-					category: nextProps.defaultPresentation.category_id,
-					search: nextProps.search
+					category: detailPresentation.category_id,
+					search: search
 				}));
 			}
-			else if(!nextProps.params.id) {
-				browserHistory.push(URL.create(`browse/${nextProps.defaultPresentation.id}`, {
-					category: nextProps.defaultPresentation.category_id,
-					search: nextProps.search
-				}));
-			}
-		}		
+		}
 	}
 
 	requestMore() {
@@ -68,10 +84,6 @@ class Browse extends React.Component {
 	}
 
     render () {
-    	if(!this.props.presentations) {
-    		return <Bounce />
-    	}
-
         return (
             <div>
                <div className="col-md-4">
@@ -85,6 +97,7 @@ class Browse extends React.Component {
                   			<CategoryNavigator />
                   		</div>
                   	</div>
+                  	{this.props.presentations &&
 	                <PresentationList 
 	                	presentations={this.props.presentations} 
 	                	hasMore={this.props.hasMore}
@@ -92,10 +105,16 @@ class Browse extends React.Component {
 	                	category={this.props.category}
 	                	search={this.props.search}
 	                	/>
+	                }
+	                {!this.props.presentations &&
+	                	<Bounce />
+	                }
 	               </div>
                 </div>
                 <div className="col-md-8">
-               		{this.props.children}
+
+						<div>{this.props.children}</div>
+
                 </div>
             </div>
         );
@@ -134,7 +153,10 @@ export default connect(
 		}
 		return {
 			presentations: results,
-			defaultPresentation: state.detailPresentation.id ? state.detailPresentation : (results ? results[0] : null),
+			detailPresentation: state.detailPresentation.id ? state.detailPresentation : null,
+			defaultCategory: state.summit.data.categories.find(c => (
+				c.user_is_chair
+			)) || state.summit.data.categories[0],
 			category: state.routing.locationBeforeTransitions.query.category,
 			search: state.routing.locationBeforeTransitions.query.search,
 			hasMore: state.presentations.has_more,
@@ -148,6 +170,10 @@ export default connect(
 
 		fetchLists(category) {
 			dispatch(fetchLists(category));
+		},
+
+		clearPresentations() {
+			dispatch(clearPresentations());
 		}
 	})
 )(Browse);

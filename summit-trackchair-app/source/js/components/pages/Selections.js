@@ -42,7 +42,9 @@ class Selections extends React.Component {
 					</div>
                 </div>
             </div>
-                {this.props.children}
+            {this.props.category &&
+                <div>{this.props.children}</div>
+            }
             </div>
         );
     }

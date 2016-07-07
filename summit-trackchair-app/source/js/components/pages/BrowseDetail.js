@@ -34,7 +34,7 @@ class BrowseDetail extends React.Component {
 			this.props.fetch(nextProps.params.id);
 		}
 
-		if(nextProps.presentation && !nextProps.presentation.viewed) {
+		if(nextProps.presentation.id && !nextProps.presentation.viewed) {
 			this.props.markAsRead(nextProps.params.id);
 		}
 	}
