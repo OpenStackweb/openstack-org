@@ -35,14 +35,14 @@
     				Join us
     			</h2>
     			<p>
-    				<a href="https://openstack.webex.com/openstack/j.php?MTID=m9c33827d57829e960e7748d7ca736102"><strong>Tuesday, July 12</strong><br>at 2300 UTC / 4 a.m. Pacific</a> or <a href="https://openstack.webex.com/openstack/j.php?MTID=m9c33827d57829e960e7748d7ca736102"><strong>Monday, July 18</strong><br>at 1500 UTC / 8 a.m. Pacific</a>
+    				<a href="https://openstack.webex.com/mw3100/mywebex/default.do?service=1&siteurl=openstack&nomenu=true&main_url=%2Fmc3100%2Fe.do%3Fsiteurl%3Dopenstack%26AT%3DMI%26EventID%3D465253947%26UID%3D520120647%26Host%3DQUhTSwAAAAJBP1JDRRjivAteljmB_u-i8ARQ-ercJfq21ruAtpozhLQlv2wqibbSVyCxv2-obCPmUNo_OInpMsq-cSzJU7820%26FrameSet%3D2%26MTID%3Dmd6811ee06a38fb133202f3ba81afac2b"><strong>Tuesday, July 12</strong><br>at 2300 UTC / 4 p.m. Pacific</a> or <a href="https://openstack.webex.com/mw3100/mywebex/default.do?service=1&siteurl=openstack&nomenu=true&main_url=%2Fmc3100%2Fe.do%3Fsiteurl%3Dopenstack%26AT%3DMI%26EventID%3D467071687%26UID%3D520120647%26Host%3DQUhTSwAAAALYWtoSja6PYTpMDuCBH_qm1gCQbhd-GdbJfBZND-dY6gRssKo-knY-eJ--MObV0aQNFgOjGTF9B-ctZ5OheGB_0%26FrameSet%3D2%26MTID%3Dm8c948a4622ac0870f5220eeb53897837"><strong>Monday, July 18</strong><br>at 1500 UTC / 8 a.m. Pacific</a>
     			</p>
     			<p>
     				 for a 10-minute info session followed by an open Q&A.
     			</p>
     			<p>
     				<em>
-    					(Note - presentation will be recorded and posted here afterward)
+    					(Presentation video will be posted shortly)
     				</em>
     			</p>
     		</div>
