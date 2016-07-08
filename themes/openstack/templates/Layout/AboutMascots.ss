@@ -40,11 +40,8 @@
     			<p>
     				 for a 10-minute info session followed by an open Q&A.
     			</p>
-    			<p>
-    				<em>
-    					(Presentation video will be posted shortly)
-    				</em>
-    			</p>
+				<hr style="width:50%;margin:20px auto;">
+				<iframe width="350" height="197" src="https://www.youtube.com/embed/LOdsuNr2T-o?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
     	</div>
     </div>
