@@ -78,7 +78,7 @@
         <% if HeadlineSponsors %>
             <div class="row">
                 <p>&nbsp;</p>
-                <p><strong>Thank you to our Austin Summit sponsors!</strong></p>
+                <p><strong>Thank you to our Barcelona Summit sponsors!</strong></p>
                 <div class="col-lg-8 col-lg-push-2">
                     <h5 class="section-title">
                         Headline Sponsors
