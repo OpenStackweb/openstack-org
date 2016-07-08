@@ -73,5 +73,6 @@ p.answer, p.checklist-item-details {
 img.example-project-logo {
 	border: 1px solid #ccc;
 	max-width: 950px;
+	width: 100%;
 }
 /*End Mascots Proposal landing*/
