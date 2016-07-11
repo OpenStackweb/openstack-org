@@ -10,13 +10,18 @@ class AddChairForm extends React.Component {
 		this.handleAddChair = this.handleAddChair.bind(this);
 	}
 
+	isValid() {
+		return this.props.emailCheck && this.props.chairEmail && this.props.chairCategory;
+	}
+
 	handleAddChair(e) {
 		e.preventDefault();
-
-		this.props.submitAddChair(
-			this.props.chairEmail,
-			this.props.chairCategory
-		);
+		if(this.isValid()) {
+			this.props.submitAddChair(
+				this.props.chairEmail,
+				this.props.chairCategory
+			);
+		}
 	}
 
 	render () {
@@ -30,6 +35,7 @@ class AddChairForm extends React.Component {
 			loading, 
 			message
 		} = this.props;
+		const valid = this.isValid();
 		return (
     	<div className="directory-add-chair">
     		<h3>Add a new chair</h3>
@@ -50,7 +56,7 @@ class AddChairForm extends React.Component {
 					<CategorySelector activeCategory={chairCategory} onSelect={updateAddChairCategory} />
 				</div>
 				<div className="add-chair-field add-chair-actions">				            			
-    				<button type="submit">{loading && 'Please wait...'} {!loading && 'Add'}</button>
+    				<button disabled={!valid} type="submit">{loading && 'Please wait...'} {!loading && 'Add'}</button>    				
 				</div>			            			
     		</form>
     	</div>

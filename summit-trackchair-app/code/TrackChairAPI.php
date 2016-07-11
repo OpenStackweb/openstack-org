@@ -638,7 +638,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $filepath = Controller::join_links(
         	BASE_PATH,
         	ASSETS_DIR,
-        	'speaker-worksheet.csv'
+        	'track-chairs.csv'
         );
 
         $fp = fopen($filepath, 'w');

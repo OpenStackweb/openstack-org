@@ -427,9 +427,9 @@ ul.navbar-nav {
 
 	}
 	.form-message {
-		border:1px solid #ddd;
 		padding:3px;
 		width: 100%;
+		margin-left:20px;
 		&.success {
 			color:@green;
 		}
@@ -449,10 +449,18 @@ ul.navbar-nav {
 		width:100%;
 		float:none;
 		clear:both;
+		text-align:center;
 		button {
 			display:block;
 			width:20%;
 			margin:4px auto;
+			background:@blue;
+			color:white;
+			&:disabled {
+				opacity:0.5;
+				background:transparent;
+				color:#999;
+			}
 		}
 	}
 
