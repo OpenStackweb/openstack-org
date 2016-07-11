@@ -65,22 +65,23 @@
       background: #A51B1B;
       text-decoration: none; }
 .container-video-section {
-  background: #000;
+  background: #29abe2;
+  padding: 60px 0;
+  text-align: center;
+}
+.container-video-section h2 {
+  text-align: center;
+  color: white;
+}
+.container-video-section p {
+  text-align: center;
+  color: white;
 }
 .container-video-section iframe {
   width: 100%;
-  height: 644px;
-  margin: 0 0 -5px 0;
-}
-@media (max-width: 1200px) {
-  .container-video-section iframe {
-    height: 528px;
-  }
-}
-@media (max-width: 992px) {
-  .container-video-section iframe {
-    height: 405px;
-  }
+  max-width: 650px;
+  height: 360px;
+  margin: 20px auto 0 auto;
 }
 @media (max-width: 680px) {
   .container-video-section iframe {

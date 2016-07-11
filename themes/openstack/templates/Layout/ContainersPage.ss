@@ -110,6 +110,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
+                    <h2>What app developers were saying at the Austin Summit</h2>
+                    <p>
+                        OpenStack is the is programmable platform that gives users access to bare metal, VMs and containers. The March 2016 user survey indicated that 70% of OpenStack users are interested in containers, and at the OpenStack Summit Austin, users including Time Warner Cable, Lithium technologies and LivePerson spoke about how their teams are working with container technologies like Kubernetes and Mesos. To further build the community of app developers, hackathons are being held to provide access to OpenStack resources, and the winning team from the first apphackthaon in Taipei shared a demo how its app measures muscle movement on top of an OpenStack cloud.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
                     <iframe src="https://www.youtube.com/embed/PwOB_y__AKY?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
