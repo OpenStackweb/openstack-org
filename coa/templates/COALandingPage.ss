@@ -9,9 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="globalsign-domain-verification" content="tWFOHNAA_WMHmHfBMq38uTgupHFugV_dZ2rqyRxNMx" />
-    <meta property="og:image" content="https://www.openstack.org/assets/coa/coa-og.jpg" />
-    <meta property="og:title" content="Certified OpenStack Administrator" />
-    <meta property="og:description" content="Certified OpenStack Administrator (COA) is the first professional certification offered by the OpenStack Foundation." />
+    <meta property="og:image" content="http://www.openstack.org/assets/coa/coa-og.jpg" />
+    <meta property="og:title" content="Certified OpenStack Administrator: the only certification from the OpenStack Foundation" />
+    <meta property="og:url" content="http://www.openstack.org/coa" />
+    <meta property="og:description" content="OpenStack skills are in high demand. Certified OpenStack Administrator (COA) is the only professional certification offered by the OpenStack Foundation, designed to help companies identify top professionals and job seekers demonstrate their skills." />
     <title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
 
     <% base_tag %>
