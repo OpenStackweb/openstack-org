@@ -15,7 +15,13 @@ export const directory = function (
         sortDir: 1,
         loading: false,
         searchTerm: '',
-        searchResults: []
+        searchResults: [],
+        showAddForm: false,
+        chairEmail: '',
+        chairCategory: null,
+        formMessage: null,
+        emailCheck: null,
+        formLoading: false
     },
     action = {}) {
     switch(action.type) {
@@ -62,6 +68,59 @@ export const directory = function (
         		),
         		searchTerm: term
         	}
+        case 'TOGGLE_ADD_CHAIR':
+        	return {
+        		...state,
+        		showAddForm: !state.showAddForm,
+		        chairEmail: '',
+		        chairCategory: null,
+		        formMessage: null,
+		        emailCheck: null,
+		        formLoading: false
+        	};
+        case 'UPDATE_ADD_CHAIR_EMAIL':
+        	return {
+        		...state,
+        		chairEmail: action.payload
+        	};
+        case 'UPDATE_ADD_CHAIR_CATEGORY':
+        	return {
+        		...state,
+        		chairCategory: action.payload
+        	};
+        case 'UPDATE_EMAIL_CHECK':
+        	return {
+        		...state,
+        		emailCheck: action.payload
+        	};
+        case 'TOGGLE_ADD_CHAIR_LOADING':
+        	return {
+        		...state,
+        		formLoading: !state.formLoading
+        	};
+        case 'UPDATE_ADD_CHAIR_MESSAGE':
+        	return {
+        		...state,
+        		formMessage: {
+        			...action.payload
+        		},
+        		formLoading:false
+        	};
+        case 'ADD_NEW_CHAIR':
+        	const {category, first_name, last_name, email} = action.payload;
+        	return {
+        		...state,
+        		data: [
+					[
+						category,
+						`${first_name} ${last_name}`,
+						email
+					],
+					...state.data
+        		],
+        		formLoading: false
+        	}
+
         default:
             return state;
 

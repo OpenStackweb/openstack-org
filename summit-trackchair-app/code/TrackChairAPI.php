@@ -16,11 +16,12 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'GET selections/$categoryID' => 'handleGetMemberSelections',
         'PUT reorder' => 'handleReorderList',
         'GET changerequests' => 'handleChangeRequests',
-        'GET chair/add' => 'handleAddChair',
+        'POST chair/add' => 'handleAddChair',
         'PUT categorychange/resolve/$ID' => 'handleResolveCategoryChange',
-        'GET export/speakerworksheet' => 'handleSpeakerWorksheet',
+        'GET export/chairs' => 'handleChairExport',
         'GET restoreorders' => 'handleRestoreOrders',
-        'GET presentationcomments' => 'handlePresentationsWithComments'
+        'GET presentationcomments' => 'handlePresentationsWithComments',
+        'GET checkemail' => 'handleCheckEmail'
     ];
 
     /**
@@ -36,8 +37,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'handleAddChair' => 'ADMIN',
         'handleResolveCategoryChange' => 'ADMIN',
         'handleRestoreOrders' => 'ADMIN',
-        'handleSpeakerWorksheet' => 'ADMIN',
-        'handlePresentationsWithComments' => 'ADMIN'
+        'handleChairExport' => 'ADMIN',
+        'handlePresentationsWithComments' => 'ADMIN',
+        'handleCheckEmail' => 'ADMIN'
     ];
 
     /**
@@ -143,7 +145,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $data['on_selection_period'] = $summit->isSelectionOpen();
         $data['is_selection_period_over'] = $summit->isSelectionOver();
 
-        $data['categories'] = array();
+        $data['categories'] = [];
         $data['track_chair'] = $this->trackChairDetails();
 
         $chairlist = [];
@@ -512,31 +514,34 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         return $this->ok($data);
     }
 
-
     /**
      * @param SS_HTTPRequest $r
      * @return string
      */
     public function handleAddChair(SS_HTTPRequest $r)
-    {
-        $email = $r->getVar('email');
-        $catid = $r->getVar('cat_id');
+    {    	
+        $email = $r->postVar('email');
+        $catid = $r->postVar('category');
         $category = PresentationCategory::get()->byID($catid);
         if (!$category) {
-            return 'category not found';
+            return $this->httpError(404, 'Category not found');
         }
 
         $member = Member::get()->filter('Email', $email)->first();
         if (!$member) {
-            return 'member not found';
+            return $this->httpError(404, 'Member not found');
         }
-
         SummitTrackChair::addChair($member, $catid);
         $category->MemberList($member->ID);
         $category->GroupList();
 
-        return $member->FirstName . ' ' . $member->Surname . ' added as a chair to category ' . $category->Title;
-
+        return (new SS_HTTPResponse(Convert::array2json([
+        		'first_name' => $member->FirstName,
+        		'last_name' => $member->Surname,
+        		'email' => $member->Email,
+        		'category' => $category->Title
+        	]), 200))
+        	->addHeader('Content-type', 'application/json');
     }
 
     /**
@@ -627,35 +632,34 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     /**
      *
      */
-    public function handleSpeakerWorksheet()
+    public function handleChairExport()
     {
-
         $activeSummit = Summit::get_active();
-        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/assets/speaker-worksheet.csv';
+        $filepath = Controller::join_links(
+        	BASE_PATH,
+        	ASSETS_DIR,
+        	'speaker-worksheet.csv'
+        );
+
         $fp = fopen($filepath, 'w');
 
         // Setup file to be UTF8
         fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
-        $speakers = PresentationSpeaker::get()
-            ->filter('SummitID', $activeSummit->ID);
+        $categories = $activeSummit->Categories()
+        		->filter('ChairVisible', true);        		
 
-        foreach ($speakers as $speaker) {
-            $fullName = $speaker->FirstName . ' ' . $speaker->LastName;
-
-            foreach ($speaker->Presentations() as $presentation) {
-                $fields = [
-                    $speaker->ID,
-                    $fullName,
-                    $speaker->Member()->Email,
-                    $presentation->ID,
-                    $presentation->Category()->Title,
-                    $presentation->Title,
-                    $presentation->SelectionStatus()
-                ];
-                fputcsv($fp, $fields);
-            }
-
+        foreach($categories as $cat) {
+	        foreach ($cat->TrackChairs() as $c) {
+	        	$m = $c->Member();
+	            $fields = [
+	                $m->FirstName,
+	                $m->Surname,
+	                $m->Email,
+	                $cat->Title
+	            ];
+	            fputcsv($fp, $fields);
+	        }
         }
 
         fclose($fp);
@@ -666,9 +670,30 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         header("Content-disposition: attachment; filename=\"speaker-worksheet.csv\"");
         header("Content-Length: " . filesize($filepath));
         readfile($filepath);
-
     }
 
+
+    public function handleCheckEmail(SS_HTTPRequest $r)
+    {
+    	$email = $r->getVar('email');
+    	$fuzzy = Member::get()
+    				->filter([
+    					'Email:StartsWith' => $email
+    				])
+    				->exists();
+
+    	if(!$fuzzy) {
+    		return new SS_HTTPResponse('That email was not found', 404);
+    	}
+
+    	$exact = Member::get()->filter('Email', $email)->exists();
+    	
+    	if($exact) {
+    		return new SS_HTTPResponse('OK', 200);
+    	}
+
+    	return new SS_HTTPResponse('Partial match', 204);
+    }
 }
 
 

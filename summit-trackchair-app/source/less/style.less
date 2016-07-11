@@ -64,6 +64,8 @@ body {
 	}
 	.dropdown-menu {
 		width:100%;
+		max-height:200px;
+		overflow-y:auto;
 		li {
 			display:block;
 			a {
@@ -393,6 +395,69 @@ ul.navbar-nav {
 	}
 }
 
+.directory-add-chair {
+	width:95%;
+	margin:10px auto;
+	padding:15px;
+	background:#e4e4e4;
+	border:1px solid #aaa;
+	position:relative;
+	.add-chair-field {
+		width:42%;
+		float:left;
+		margin:8px 20px;
+		position:relative;
+		input {
+			display:block;
+			width:100%;
+			padding:4px 25px 4px 4px;
+			font-size:14px;	
+		}
+		i.fa {
+			position:absolute;
+			right:20px;
+			top:10px;
+			&.fa-check {
+				color:@green;
+			}
+			&.fa-exclamation-circle {
+				color:@red;
+			}
+		}
+
+	}
+	.form-message {
+		border:1px solid #ddd;
+		padding:3px;
+		width: 100%;
+		&.success {
+			color:@green;
+		}
+		&.error {
+			background:@red;
+			color:white
+		}
+	}
+	.close {
+		top:10px;
+		right:10px;
+		font-size:24px;
+		position:absolute;
+		color:#555;
+	}
+	.add-chair-actions {
+		width:100%;
+		float:none;
+		clear:both;
+		button {
+			display:block;
+			width:20%;
+			margin:4px auto;
+		}
+	}
+
+}
+
 .ribbon {
   position: absolute;
   left: 35px; top:35px;
@@ -499,5 +564,22 @@ ul.navbar-nav {
 		  border-top: 3px solid @blue;
 		}	  	
   	}
+
+}
+
+@media (max-width: 768px) {
+.directory-add-chair {
+	.add-chair-field {
+		width:90%;
+		float:none;
+	}
+	.add-chair-actions {
+		button {
+			display:block;
+			width:50%;
+			margin:4px auto;
+		}
+	}
+}
 
 }

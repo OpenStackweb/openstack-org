@@ -1,7 +1,8 @@
 import React from 'react';
 import {Table, TableColumn} from '../ui/table';
 import {connect} from 'react-redux';
-import {sortDirectory, searchDirectory} from '../../actions';
+import {sortDirectory, searchDirectory, toggleAddChair} from '../../actions';
+import AddChairForm from '../containers/AddChairForm';
 
 class Directory extends React.Component {
 
@@ -13,6 +14,19 @@ class Directory extends React.Component {
 			         <div className="table-responsive">
 			         	{this.props.directory &&
 			            <div className="dataTables_wrapper form-inline dt-bootstrap">
+			            {this.props.isAdmin &&
+							<div className="html5buttons">
+								<div className="dt-buttons btn-group">
+									<a href='/trackchairs/api/v1/export/chairs' className="btn btn-default buttons-html5">
+										<span><i className="fa fa-download" /> Export CSV</span>
+									</a>
+									<a onClick={this.props.toggleAddChair} className="btn btn-primary">
+										<span><i className="fa fa-plus" /> Add new chair</span>
+									</a>
+
+								</div>
+							</div>
+						}
 			               <div className="dataTables_filter">
 			               	<label>
 			               		Search: 
@@ -25,6 +39,9 @@ class Directory extends React.Component {
 			               			/>
 			               	</label>
 			               </div>
+			            {this.props.showAddForm &&
+			            	<AddChairForm />
+			            }
 			               <Table 
 			               		sortCol={this.props.sortCol} 
 			               		sortDir={this.props.sortDir} 
@@ -54,13 +71,22 @@ class Directory extends React.Component {
 
 export default connect(
 	state => {
-		const {data, sortCol, sortDir, searchTerm, searchResults} = state.directory;
+		const {
+			data, 
+			sortCol, 
+			sortDir, 
+			searchTerm, 
+			searchResults, 
+			showAddForm			
+		} = state.directory;
 
 		return {
 			directory: searchTerm ? searchResults : data,
 			sortCol,
 			sortDir,
-			searchTerm
+			searchTerm,
+			isAdmin: window.TrackChairAppConfig.userinfo.isAdmin,
+			showAddForm
 		}
 	},
 	dispatch => ({
@@ -73,6 +99,10 @@ export default connect(
 		searchDirectory(e) {
 			e.preventDefault();
 			dispatch(searchDirectory(e.target.value));
+		},
+		toggleAddChair(e) {
+			e.preventDefault();
+			dispatch(toggleAddChair());
 		}
 	})
 )(Directory);

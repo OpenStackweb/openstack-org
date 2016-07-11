@@ -64,6 +64,14 @@ export const requestCategoryChange = createAction('REQUEST_CATEGORY_CHANGE');
 export const successCategoryChange = createAction('SUCCESS_CATEGORY_CHANGE');
 export const resolveRequest = createAction('RESOLVE_REQUEST');
 export const clearPresentations = createAction('CLEAR_PRESENTATIONS');
+export const toggleAddChair = createAction('TOGGLE_ADD_CHAIR');
+export const updateAddChairCategory = createAction('UPDATE_ADD_CHAIR_CATEGORY');
+export const updateAddChairEmail = createAction('UPDATE_ADD_CHAIR_EMAIL');
+export const updateEmailCheck = createAction('UPDATE_EMAIL_CHECK');
+export const toggleAddChairLoading = createAction('TOGGLE_ADD_CHAIR_LOADING');
+export const updateAddChairMessage = createAction('UPDATE_ADD_CHAIR_MESSAGE');
+export const addNewChair = createAction('ADD_NEW_CHAIR');
+
 /* Async Actions */
 
 export const fetchSummit = (id) => {
@@ -279,6 +287,78 @@ export const postMarkAsRead = (presentationID) => {
 		schedule(key, req);
 	}
 };
+
+var checkChairTimeout;
+export const checkChair = (email) => {
+	return (dispatch) => {
+		dispatch(updateAddChairEmail(email));
+		checkChairTimeout && window.clearTimeout(checkChairTimeout);
+		checkChairTimeout = window.setTimeout(() => {
+			const key = 'CHECK_CHAIR_EMAIL'
+			cancel(key);
+
+			const url = URL.addQueryParams(
+				'/trackchairs/api/v1/checkemail',
+				{email, ajax: 1}
+			);
+
+			const req = http.get(url)
+				.end((err, res) => {
+					if(err && err.status === 404) {
+						dispatch(updateEmailCheck(false));
+					}
+					else if(res.status === 204) {
+						dispatch(updateEmailCheck(null));
+					}
+					else if(res.status === 200) {
+						dispatch(updateEmailCheck(true));
+					}
+					else if(!res.ok) {
+						dispatch(throwError(res.text));
+					}
+				})
+			schedule(key, req);
+		}, 300);
+	}
+};
+
+export const submitAddChair = (params = {}) => {
+	return (dispatch) => {
+		const key = `ADD_CHAIR_${params.email}`;
+		dispatch(toggleAddChairLoading());
+		cancel(key);
+
+		const url = URL.create(
+			`chair/add`,
+			{},
+			'/trackchairs/api/v1'
+		);
+
+		const req = http.post(url)
+			.send({ajax: 1, ...params})
+			.type('form')
+			.end((err, res) => {
+				if(err) {
+					dispatch(updateAddChairMessage({
+						text: res.text,
+						type: 'error'
+					}));
+				}
+				else {
+					const {first_name, last_name, email, category} = res.body;
+					
+					dispatch(addNewChair(res.body));
+					dispatch(updateAddChairMessage({
+						text: `${first_name} ${last_name} was added to ${category}`,
+						type: 'success'
+					}));
+
+				}
+			});
+		schedule(key, req);
+
+	}
+}
 
 
 /*eslint-enable */
