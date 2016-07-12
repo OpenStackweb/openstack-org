@@ -388,10 +388,11 @@ class PresentationTrackChairFeatures extends DataExtension
 
         // Error out if the category of presentation does not match category of selection
         if ($selection && $this->owner->CategoryID != $selection->SummitSelectedPresentationList()->Category()->ID) {
-            user_error(
+            SS_Log::log(
             	"The selection category does not match the presentation category. 
             	Presentation {$this->owner->Title} is in list {$selection->SummitSelectedPresentationList()->Title} for {$selection->SummitSelectedPresentationList()->Category()->Title},
-            	but the presentation itself is in {$this->owner->Category()->Title}"
+            	but the presentation itself is in {$this->owner->Category()->Title}",
+            	SS_Log::WARN
             );
         }
 
