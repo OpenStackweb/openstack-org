@@ -53,7 +53,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.corneliaandco.com/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/ZZ2LgKvJqoH2" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -70,7 +70,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.cafe-emma.com/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/Wj3HDTBtfwn" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.muns.cat/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/hAfidcn8xa62" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -102,7 +102,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.caravelle.es/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/zeZxEtm18yQ2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -114,7 +114,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.candende.com/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/d6GMX5bfaVQ2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -126,7 +126,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.yelp.com/biz/rep%C3%BAblic-caf%C3%A8-barcelona-2" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/QeAk5dyucUv" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -138,7 +138,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.cupcakesbarcelona.com/shops-brunchcake/?lang=en" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/D1NkEqJ2gxq" target="_blank">Map</a>
 		</div>
 	</div>
 
@@ -162,7 +162,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.mandarinoriental.com/barcelona/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/L4tYp5Vbpeq" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -179,7 +179,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.hojasanta.es/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/9cuZdxSLKtn" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -211,7 +211,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.martinezbarcelona.com/index.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/RjGwz7VDZpv" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -223,7 +223,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.abacbarcelona.com/en" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/W9KTvRpH9452" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -235,19 +235,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.melia.com/es/hoteles/espana/barcelona/melia-barcelona-sky/dos-cielos.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
-		</div>
-	</div>
-	<div class="row guide-listing">
-		<div class="col-sm-4 guide-name">
-			Name
-		</div>
-		<div class="col-sm-4">
-			Address
-		</div>
-		<div class="col-sm-4">
-			<a href="#" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/HWqjksoFTrS2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -259,7 +247,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.mandarinoriental.es/barcelona/fine-dining/bistreau/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/fiojKncz4zx" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -271,7 +259,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.dospalillos.com/home.php?rest=1&lang=en" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/nrDLS2vGrSF2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -283,7 +271,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.koyshunka.com/KoyShunka/home.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/CxFAhYJ3UeK2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -295,7 +283,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://jaime-beriestain.com/CONCEPTSTORE/01restaurante.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/2nbSHby5UiQ2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -307,7 +295,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.encompaniadelobos.com/gallito/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/WG9XVRGkYYR2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -319,7 +307,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.elnacionalbcn.com/ca/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/tCxgHXzpxjM2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -331,7 +319,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://ca.disfrutarbarcelona.com" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/4xzJjqRkzzw" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -343,7 +331,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.xiringuitoescriba.com/en/index.html#guingueta" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/oj9fKe6unUu" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -355,7 +343,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://grupotragaluz.com/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/mwCP5H3U8ox" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -367,7 +355,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.restaurantbarceloneta.com/home/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/6D49mfCMNXv" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -379,7 +367,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://arumerestaurant.com/eng/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/7RQLZi33dCy" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -391,19 +379,19 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.cera23.com/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/hiPgxmgm1472" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
 		<div class="col-sm-4 guide-name">
-			Recasens
+			Can Recasens
 		</div>
 		<div class="col-sm-4">
 			Rambla del Poblenou, 102, 08005 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.canrecasens.com/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/hCFQ5SDeQ4S2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -415,7 +403,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.elspescadors.com/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/mvzdAsfRRYL2" target="_blank">Map</a>
 		</div>
 	</div>
 
@@ -432,7 +420,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.facebook.com/quimetiquimet/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/4zYjKWZ3YCt" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -443,7 +431,7 @@
 			Carrer del Baluart, 56, 08003 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/gfhBd4wtTj72" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -454,7 +442,7 @@
 			Carrer de Mallorca, 236, 08008 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/A8YehYzc7ES2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -466,7 +454,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="www.restaurantbarcelonamilano.com" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/w4J2HseDDVA2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -478,7 +466,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="www.caballacanalla.com" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/Gg7VPCzw1jK2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -490,7 +478,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.tensbarcelona.com/index.php?lang=en&s=restaurante" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/FsKb7KhyXRN2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -502,7 +490,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.carlesabellan.com/mis-restaurantes/tapas-24/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/rcX6heaEwyS2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -514,7 +502,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.bodega1900.com" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/joWqWZ61uSp" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -526,7 +514,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.barcanete.com/en" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/kg4Skqv63u92" target="_blank">Map</a>
 		</div>
 	</div>
 
@@ -543,7 +531,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.google.com/url?sa=t&rct=j&url=http%3A%2F%2Fwww.7portes.com%2F&source=maps&cd=1&usg=AFQjCNEDmmuLIoYAakT48vukQYYB9UoxUQ&ved=1t%3A3443%2Cp%3A0TFsV6HKEYrxmAHHk4voCg" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/LVWdJKWVqC92" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -555,7 +543,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=12&cad=rja&uact=8&ved=0ahUKEwjGsJXH7b7NAhUDziYKHWCFBVkQ_BcIhwEwCw&url=http%3A%2F%2Fwww.grupxativa.com%2F&usg=AFQjCNE5WWR_cnZf9PFBkx4H6lhBuam9-Q&bvm=bv.125221236,d.eWE" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/WRiqKAzf9AS2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -567,7 +555,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="suquetdelalmirall.com" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/Wr2LUEdr8u62" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -579,7 +567,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.cansole.cat/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/uxGzXRQX8TE2" target="_blank">Map</a>
 		</div>
 	</div>
 
@@ -602,7 +590,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.solangecocktail.com/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/TLDX2ruiayn" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -619,7 +607,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.gatsbybarcelona.com" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/LhjnX1Sh3y92" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -636,7 +624,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.pecheaustin.com/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/K8UV351ay7N2" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -651,7 +639,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.torrerosa.com/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/YGyohi44aen" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -663,7 +651,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.slowbarcelona.es/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/A1KvkyhLW1R2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -675,7 +663,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.morrofi.cat/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/eqY7v8Fd2SL2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -687,7 +675,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://idealcocktailbar.com/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/SXp6yoASQCt" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -699,7 +687,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.monvinic.com/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/zEY2sKFyYww" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -711,7 +699,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.facebook.com/senyorvermut/info/?entry_point=page_nav_about_item&tab=overview" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/iEjjekpH2pL2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -723,7 +711,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.urabcn.com/#es/about-us" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/etEoSqeYgiS2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -735,7 +723,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.bocagrande.cat/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/w4y2mb9ipb82" target="_blank">Map</a>
 		</div>
 	</div>
 
@@ -758,7 +746,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.sagradafamilia.org/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/yUa88MyAhUE2" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -775,7 +763,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.boqueria.info/index.php?lang=en" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/dt9vsWALpxF2" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -792,7 +780,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.parkguell.cat/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/wNkcF23pnRy" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -807,7 +795,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.mercatsantacaterina.com/Index.php" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/DsB76MVBtMG2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -819,7 +807,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.mercatdelborn.org/welcome/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/G9yWXu15KJU2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -831,7 +819,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.santamariadelmarbarcelona.org/home/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/Zs3dYmm25MR2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -843,7 +831,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.barcelonaturisme.com/wv3/en/page/1240/passeig-del-born.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/Y7APftpymy72" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -854,7 +842,7 @@
 			Gothic Quarter
 		</div>
 		<div class="col-sm-4">
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/w2ncSRyxQjr" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -866,7 +854,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.parkguell.cat/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/rX6HEUk9Thr" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -878,7 +866,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.barcelona-tourist-guide.com/en/areas/el-raval-barrio.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/dhvbeboTCDz" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -890,7 +878,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://barcelonapaseodegracia.com/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/cPHL6y3JJ6m" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -902,7 +890,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.larocavillage.com/en/home/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/Zc4UmJd2D6k" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -914,7 +902,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.catedralbcn.org/index.php?lang=en" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/13BiJpkBsJ62" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -926,7 +914,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.basilicadelamerce.com/en/Welcome.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/NYLdJ9cmUn42" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -938,7 +926,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.fmirobcn.org/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/VcncfVVkazq" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -950,7 +938,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.fundaciotapies.org/site/spip.php?rubrique64" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/zyiDgc9gZAN2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -962,7 +950,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.museupicasso.bcn.cat/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/i5oMBviG2dp" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -974,7 +962,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://macba.es/en/index" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/hCATUYboCzD2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -986,7 +974,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.telefericdemontjuic.cat/en/welcome" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/uS4pWxDZVL72" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -998,7 +986,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://w110.bcn.cat/portal/site/FontMagica/index135e.html?lang=en_GB" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/2zxjFKbhUKq" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1010,7 +998,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.salvador-dali.org/en_index/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/DaTQY2ha6YL2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1022,7 +1010,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.liceubarcelona.cat/en.html" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/dYYiB3i3qAK2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1034,7 +1022,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.fcbarcelona.com/?_ga=1.69153554.2078580286.1462477135" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/q9aWU9ptfiN2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1046,7 +1034,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.lapedrera.com/en/home" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/rT2BYBt1LRN2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1058,7 +1046,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.casabatllo.es/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/nedazAkk14u" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1070,7 +1058,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.palaumusica.cat/en" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/qqi6czU6evT2" target="_blank">Map</a>
 		</div>
 	</div>
 
@@ -1093,7 +1081,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://barcelonaboscurba.com" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/ebxuJwojTzw" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -1109,7 +1097,7 @@
 						Bogatell Beach has activities for the whole family that could provide an entire day of entertainment
 					</p>
 					<p>
-						<a class="featured-site" href="https://goo.gl/maps/ka5LePY2xuR2" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/23NJT8hvzD92" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -1123,7 +1111,7 @@
 			plaça del Tibidabo, 3-4.
 		</div>
 		<div class="col-sm-4">
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/vcoMNeg6hWQ2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1135,7 +1123,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://lasgolondrinas.com/en/" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/EafLFEpBHb12" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1147,7 +1135,7 @@
 		</div>
 		<div class="col-sm-4">
 			<a href="http://museuhistoria.bcn.cat" target="_blank">Website</a> |
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/LfEtPcbTMa12" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1158,7 +1146,7 @@
 			Passeig Marítim de la Nova Icària, 60, 08005 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/9uPiNzU6c1y" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1169,7 +1157,7 @@
 
 		</div>
 		<div class="col-sm-4">
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/SzeNfnAsHby" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1180,7 +1168,7 @@
 
 		</div>
 		<div class="col-sm-4">
-			<a href="#" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/UUbFGWpDKtz" target="_blank">Map</a>
 		</div>
 	</div>
 
