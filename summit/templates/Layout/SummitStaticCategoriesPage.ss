@@ -23,7 +23,7 @@
                         </div>
                         <ul>
                             <li class="tracks-tooltip" title="If you are a cloud architect or involved in planning your cloud strategy, this track will discuss popular reference architectures, configuration options, workload optimization, and architecture show and tell, where experienced users will share their architectures and experiences.">Architectural Decisions</li>
-                            <li class="tracks-tooltip" title="Sharing knowledge and best practices is a core value for the OpenStack community. In the track, you’ll hear directly from fellow cloud architects and operators who will share their stories from the trenches, proven architecture diagrams, and lessons learned.">Field Experiences</li>
+                            <li class="tracks-tooltip" title="Sharing knowledge and best practices is a core value for the OpenStack community. In the track, you’ll hear directly from fellow cloud architects and operators who will share their stories from the trenches, proven architecture diagrams, and lessons learned.">Operations War Stories</li>
                             <li class="tracks-tooltip" title="Are you new to the OpenStack community? Still learning about cloud computing and unsure which path is right for you? The sessions in this track will give you the OpenStack 101, including an overview of the technology, how to get involved with the community and get started on your cloud journey.">Getting Started</li>
                             <li class="tracks-tooltip" title="HPC is one of the earliest and most popular use cases for OpenStack, allowing operators to run workloads on standard hardware rather than supercomputers. In this track, we'll discuss reference architectures, best practices and case studies for high performance computing.">HPC / Research</li>
                             <li class="tracks-tooltip" title="This track is 100% focused on what it takes to run a production OpenStack cloud. Every presenter has put endless coffee-fueled hours into making services scale robustly, never go down, and automating, automating, automating. The track will cover efficient use of existing tools, managing upgrades and staying up-to-date with one of the world's fastest-moving code bases and Architecture-show-and-tell, where established clouds will lead a discussion around their architecture. If you're already running a cloud, you should also join us in the Ops Summit for some serious working sessions (no basic intros here) on making the OpenStack software and ops tools for it better.">How To & Best Practices</li>
@@ -246,7 +246,7 @@
                     If you are evaluating cloud technologies or building your cloud strategy, this track will cover the basics for you to evaluate the technology, understand the different ways to consume OpenStack, review popular use cases and determine your path forward.
                 </p>
                 <p>
-                    <strong>Field Experiences</strong><br>
+                    <strong>Operations War Stories</strong><br>
                     Sharing knowledge and best practices is a core value for the OpenStack community. In the track, you’ll hear directly from fellow cloud architects and operators who will share their stories from the trenches, proven architecture diagrams, and lessons learned.
                 </p>
                 <p>
