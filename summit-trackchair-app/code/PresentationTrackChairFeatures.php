@@ -375,7 +375,10 @@ class PresentationTrackChairFeatures extends DataExtension
         		$l = $s->SummitSelectedPresentationList();
         		$selectionsList[] = "List: {$l->ListName} ID: {$l->ID} Category: ({$l->Category()->Title})";        		
         	}
-            user_error('There cannot be more than one instance of this talk selected. Talk ID ' . $this->owner->ID . ' appears in: ' . implode(', ', $selectionsList));
+            SS_Log::log(
+            	'There is more than one instance of a talk selected. Talk ID ' . $this->owner->ID . ' appears in: ' . implode(', ', $selectionsList),
+            	SS_Log::WARN
+            );
         }
 
         $selection = null;

@@ -356,6 +356,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $listID = $vars['list_id'];
         $collection = $vars['collection'];        	
         $list = SummitSelectedPresentationList::get()->byId($listID);
+        
+        if(!$list->memberCanEdit()) {
+        	return $this->httpError(403, 'You cannot edit this list');
+        }
+        
         $isTeam = $list->ListType === 'Group';
 
         // Remove any presentations that are not in the list
@@ -374,8 +379,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             	$attributes = [
                     'PresentationID' => $id,
                     'SummitSelectedPresentationListID' => $listID,
-                    'Collection' => $collection,
-                    'MemberID' => Member::currentUserID()
+                    'Collection' => $collection
                 ];
 
                 $selection = SummitSelectedPresentation::get()
@@ -383,7 +387,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 	->first();
 
                 if(!$selection) {
-                	$selection = SummitSelectedPresentation::create($attributes);
+                	$selection = SummitSelectedPresentation::create($attributes);                	
                 	if($isTeam) {
                 		$presentation = Presentation::get()->byID($id);
                 		if($presentation) {
@@ -394,7 +398,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
                 $selection->Order = $order+1;
                 $selection->write();
-
             }
         }
 
