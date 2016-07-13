@@ -599,16 +599,24 @@ final class PresentationManager implements IPresentationManager
      * @param IPresentation $presentation
      * @param IMessageSenderService $speakers_message_sender
      * @param IMessageSenderService $creator_message_sender
+     * @param IMessageSenderService $moderator_message_sender
      * @return IPresentation
      */
     public function completePresentation
     (
         IPresentation $presentation,
         IMessageSenderService $speakers_message_sender,
-        IMessageSenderService $creator_message_sender
+        IMessageSenderService $creator_message_sender,
+        IMessageSenderService $moderator_message_sender
     )
     {
-        return $this->tx_manager->transaction(function() use($presentation, $speakers_message_sender, $creator_message_sender)
+        return $this->tx_manager->transaction(function() use
+        (
+            $presentation,
+            $speakers_message_sender,
+            $creator_message_sender,
+            $moderator_message_sender
+        )
         {
 
             $speakers = $presentation->Speakers()->exclude(array(
@@ -624,8 +632,38 @@ final class PresentationManager implements IPresentationManager
 
             $creator_message_sender->send(['Presentation'=> $presentation]);
 
+            if($presentation->Moderator()->exists()){
+                $moderator_message_sender->send(['Presentation' => $presentation]);
+            }
+
             return $presentation;
         });
     }
 
+    /**
+     * @param IPresentation $presentation
+     * @param IPresentationSpeaker $speaker
+     * @return void
+     */
+    public function removeSpeakerFrom(IPresentation $presentation, IPresentationSpeaker $speaker)
+    {
+        return $this->tx_manager->transaction(function() use
+        (
+            $presentation,
+            $speaker
+        )
+        {
+
+            if (!$presentation->canRemoveSpeakers())
+                throw new EntityValidationException('You cannot remove speakers from this presentation');
+
+            if($presentation->isModerator($speaker)) {
+                $presentation->unsetModerator();
+                return;
+            }
+
+            $presentation->removeSpeaker($speaker);
+
+        });
+    }
 }

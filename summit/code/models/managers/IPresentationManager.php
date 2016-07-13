@@ -117,12 +117,21 @@ interface IPresentationManager
      * @param IPresentation $presentation
      * @param IMessageSenderService $speakers_message_sender
      * @param IMessageSenderService $creator_message_sender
+     * @param IMessageSenderService $moderator_message_sender
      * @return IPresentation
      */
     public function completePresentation
     (
         IPresentation $presentation,
         IMessageSenderService $speakers_message_sender,
-        IMessageSenderService $creator_message_sender
+        IMessageSenderService $creator_message_sender,
+        IMessageSenderService $moderator_message_sender
     );
+
+    /**
+     * @param IPresentation $presentation
+     * @param IPresentationSpeaker $speaker
+     * @return void
+     */
+    public function removeSpeakerFrom(IPresentation $presentation, IPresentationSpeaker $speaker);
 }

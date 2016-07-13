@@ -319,6 +319,17 @@ class PresentationSpeaker extends DataObject
         ]);
     }
 
+    public function ModeratorPresentations($summit_id = null)
+    {
+        $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
+        if (!$summit) return false;
+
+        return Presentation::get()->filter([
+            'ModeratorID' => $this->ID,
+            'SummitID'    => $summit->ID
+        ]);
+    }
+
     public function getPresentationsCount($summit_id = null)
     {
         $count_others = $this->OtherPresentations($summit_id)->count();

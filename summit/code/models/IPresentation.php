@@ -83,4 +83,21 @@ interface IPresentation extends ISummitEvent
      */
     public function setComplete();
 
+    /**
+     * @return void
+     */
+    public function unsetModerator();
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return bool
+     */
+    public function isModerator(IPresentationSpeaker $speaker);
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return void
+     */
+    public function removeSpeaker(IPresentationSpeaker $speaker);
+
 }

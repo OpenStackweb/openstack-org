@@ -366,8 +366,6 @@ class Presentation extends SummitEvent implements IPresentation
         return true;
     }
 
-
-
     /**
      * Determines if the presentation is "new." Since presentations are
      * optimistically written to the database, a simple isInDB() check
@@ -517,7 +515,6 @@ class Presentation extends SummitEvent implements IPresentation
         return PresentationSpeaker::get();
     }
 
-
     /**
      * @param $type
      * @return mixed
@@ -531,8 +528,6 @@ class Presentation extends SummitEvent implements IPresentation
 
         return false;
     }
-
-
 
     /**
      * @return ValidationResult
@@ -586,8 +581,6 @@ EXISTS
 	PresentationID = P.ID
 );
 SQL;
-
-
         $qty = intval(DB::query($query)->value());
 
         if ($qty > 0) {
@@ -667,7 +660,7 @@ SQL;
 
         return
             (Member::currentUser() && Member::currentUser()->IsSpeaker($this)) ||
-            Member::currentUserID() == $this->CreatorID;
+            Member::currentUserID() == $this->CreatorID ||  $this->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID ;
     }
 
     /**
@@ -707,5 +700,27 @@ SQL;
         $this->setComplete();
 
         return $this;
+    }
+
+    public function unsetModerator(){
+        $this->ModeratorID = null;
+    }
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return bool
+     */
+    public function isModerator(IPresentationSpeaker $speaker)
+    {
+       return intval($this->ModeratorID) === $speaker->getIdentifier();
+    }
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return void
+     */
+    public function removeSpeaker(IPresentationSpeaker $speaker)
+    {
+        $this->getSpeakers()->remove($speaker);
     }
 }

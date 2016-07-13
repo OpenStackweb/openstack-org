@@ -99,6 +99,35 @@
                             <% end_if %>
                         </tbody>
                     </table>
+                    <h3>Presentations <strong>Others</strong> Submitted With You As A Moderator</h3>
+                    <table class="table">
+                        <tbody>
+                            <% if $CurrentMember.SpeakerProfile.ModeratorPresentations($Top.Summit.ID) %>
+                                <% loop $CurrentMember.SpeakerProfile.ModeratorPresentations($Top.Summit.ID) %>
+                                <tr>
+                                    <td class="item-name">
+                                        <i class="fa fa-file-text-o"></i>
+                                        <% if $Top.canEditPresentation($ID) %>
+                                        <a href="$EditLink">
+                                        <% end_if %>
+                                        <% if $Title %>$Title<% else %>$ID<% end_if %>
+                                        <% if $Top.canEditPresentation($ID) %>
+                                        </a>
+                                        <% end_if %>
+                                    </td>
+                                    <td class="status"><i class="fa fa-tag"></i> $Status</td>
+                                    <td class="action">
+                                        <% if $CanDelete && $Top.canEditPresentation($ID) %><a href="$DeleteLink">Delete</a><% end_if %>
+                                    </td>
+                                </tr>
+                                <% end_loop %>
+                            <% else %>
+                            <tr>
+                                <td><i>There are no presentations submitted by others with you as a moderator.</i></td>
+                            </tr>
+                            <% end_if %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

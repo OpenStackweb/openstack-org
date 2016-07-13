@@ -737,7 +737,8 @@ class PresentationPage_ManageRequest extends RequestHandler
             (
                 $this->presentation,
                 new PresentationSpeakerNotificationEmailMessageSender,
-                new PresentationCreatorNotificationEmailMessageSender
+                new PresentationCreatorNotificationEmailMessageSender,
+                new PresentationModeratorNotificationEmailMessageSender
             );
             return $this->renderWith(array('PresentationPage_success', 'PresentationPage'), $this->parent);
         }
@@ -1187,19 +1188,24 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             return $this->httpError(403, "Security token doesn't match.");
         }
 
-        $p = $this->parent->getPresentation();
-        if ($p->canRemoveSpeakers()) {
-            if ($this->speaker->ID == $p->ModeratorID) {
-                $p->ModeratorID = 0;
-                $p->write();
-            } else {
-                $p->Speakers()->remove($this->speaker);
-            }
+        try {
 
+            $this->parent->parent->getPresentationManager()->removeSpeakerFrom
+            (
+                $this->parent->getPresentation(),
+                $this->speaker
+            );
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
         }
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            $this->httpError(403, 'You cannot remove speakers from this presentation');
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            $this->httpError(403, 'You cannot remove speakers from this presentation');
+        }
 
-        return $this->httpError(403, 'You cannot remove speakers from this presentation');
     }
 
 
