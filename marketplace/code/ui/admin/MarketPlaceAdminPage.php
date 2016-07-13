@@ -623,7 +623,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
             }
                 break;
             case 'updatedby': {
-                $query->addAlias(QueryAlias::create('Member'));
+                $query->addAlias(QueryAlias::create('EditedBy'));
                 if ($dir == 'asc')
                     $query->addOrder(QueryOrder::asc('Member.Email'));
                 else

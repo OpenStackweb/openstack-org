@@ -86,6 +86,7 @@ abstract class Cloud_Controller extends AbstractController
             return $this->httpError(500, 'Content Type not allowed');
         }
         try {
+
             $search_params = json_decode($this->request->getBody(), true);
             $query = new QueryObject($this->getCloudTypeClass());
             $query->addAlias(QueryAlias::create('Company'));
@@ -108,7 +109,9 @@ abstract class Cloud_Controller extends AbstractController
 
             if (!empty($service)) {
                 $service = explode('-', $service);
-                $query->addAlias(QueryAlias::create('CloudServiceOffered')->addAlias(QueryAlias::create('OpenStackReleaseSupportedApiVersion')->addAlias(QueryAlias::create('OpenStackComponent'))));
+                $query->addAlias(QueryAlias::create('Capabilities')
+                      ->addAlias(QueryAlias::create('ReleaseSupportedApiVersion')
+                       ->addAlias(QueryAlias::create('OpenStackComponent'))));
                 $query->addAndCondition(
                     QueryCompoundCriteria::compoundOr(array(
                             QueryCriteria::like('OpenStackComponent.Name', trim($service[0])),
@@ -117,7 +120,7 @@ abstract class Cloud_Controller extends AbstractController
                     )
                 );
             }
-            $query->addAlias(QueryAlias::create('DataCenterLocation', null, QueryAlias::LEFT ));
+            $query->addAlias(QueryAlias::create('DataCenters', QueryAlias::LEFT ));
             if (is_array($location) && !empty($location[0]))
                 $query->addAndCondition(QueryCriteria::like("DataCenterLocation.City", trim($location[0])));
 

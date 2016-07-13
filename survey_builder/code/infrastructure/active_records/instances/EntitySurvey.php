@@ -149,4 +149,5 @@ class EntitySurvey extends Survey implements IEntitySurvey
 
         return !is_null($member);
     }
+
 }

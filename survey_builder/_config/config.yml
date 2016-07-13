@@ -4,6 +4,9 @@ Name: surveybuilderextensions
 Member:
   extensions:
     - EntitySurveyTeamMember
+SangriaPage_Controller:
+  extensions:
+    - SangriaSurveyBuilderExtension
 ---
 Name: surveybuilderapi
 ---

@@ -118,14 +118,36 @@ class Implementation_Controller extends AbstractController
 
             if (!empty($service)) {
                 $service = explode('-', $service);
-                $query1->addAlias(QueryAlias::create('OpenStackImplementationApiCoverage')->addAlias(QueryAlias::create('OpenStackReleaseSupportedApiVersion')->addAlias(QueryAlias::create('OpenStackComponent'))));
+                $query1->addAlias
+                (
+                    QueryAlias::create('Capabilities')
+                    ->addAlias
+                    (
+                        QueryAlias::create('ReleaseSupportedApiVersion')
+                       ->addAlias
+                       (
+                           QueryAlias::create('OpenStackComponent')
+                       )
+                    )
+                );
                 $query1->addAndCondition(QueryCompoundCriteria::compoundOr( array (
                     QueryCriteria::like('OpenStackComponent.Name', trim($service[0])),
                     QueryCriteria::like('OpenStackComponent.CodeName', trim($service[1])
                     )
                 )));
 
-                $query2->addAlias(QueryAlias::create('OpenStackImplementationApiCoverage')->addAlias(QueryAlias::create('OpenStackReleaseSupportedApiVersion')->addAlias(QueryAlias::create('OpenStackComponent'))));
+                $query2->addAlias
+                (
+                    QueryAlias::create('Capabilities')
+                        ->addAlias
+                        (
+                            QueryAlias::create('ReleaseSupportedApiVersion')
+                            ->addAlias
+                            (
+                                QueryAlias::create('OpenStackComponent')
+                            )
+                        )
+                );
                 $query2->addAndCondition(QueryCompoundCriteria::compoundOr( array (
                     QueryCriteria::like('OpenStackComponent.Name', trim($service[0])),
                     QueryCriteria::like('OpenStackComponent.CodeName', trim($service[1])))));
@@ -136,6 +158,7 @@ class Implementation_Controller extends AbstractController
 
             list($list1, $size1) = $this->distribution_repository->getAll($query1, 0, 1000);
             list($list2, $size2) = $this->appliance_repository->getAll($query2, 0, 1000);
+
             $implementations = array_merge($list1, $list2);
             foreach ($implementations as $implementation) {
                 $type    = $implementation->getMarketPlace()->getName() == IDistribution::MarketPlaceType ? 'distribution' : 'appliance';

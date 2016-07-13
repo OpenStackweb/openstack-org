@@ -1,5 +1,6 @@
+<?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,5 +12,18 @@
  * limitations under the License.
  **/
 
-jQuery(document).ready(function($) {
-});
+/**
+ * Interface IJoinStrategy
+ */
+interface IJoinStrategy
+{
+    /**
+     * @return JoinSpecification[]
+     */
+    public function build();
+
+    /**
+     * @return string
+     */
+    public function getBaseTable();
+}

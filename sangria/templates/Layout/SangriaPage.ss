@@ -109,6 +109,12 @@
 
     <h2>Deployments / Deployment Survey</h2>
     <ul>
+        <li>Surveys Data</li>
+        <ul>
+            <li><a href="$Link(SurveyBuilderListSurveys)">View Deployment Survey</a></li>
+            <li><a href="$Link(SurveyBuilderListDeployments)">View Deployments</a></li>
+        </ul>
+
         <li>Statistics</li>
             <ul>
                 <li><a href="/sangria/ViewSurveysStatisticsSurveyBuilder">Deployment Survey Stats</a></li>

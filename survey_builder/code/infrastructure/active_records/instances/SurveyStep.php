@@ -89,9 +89,21 @@ class SurveyStep
         parent::onBeforeDelete();
     }
 
+    /**
+     * @return bool
+     */
     public function hasAnswers()
     {
         $template = $this->Template();
         return ($template instanceof ISurveyRegularStepTemplate);
+    }
+
+    /**
+     * @return bool
+     */
+    public function containsEntities()
+    {
+        $template = $this->Template();
+        return ($template instanceof ISurveyDynamicEntityStepTemplate);
     }
 }

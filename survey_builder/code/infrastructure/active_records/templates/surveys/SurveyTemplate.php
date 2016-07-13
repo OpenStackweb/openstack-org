@@ -335,6 +335,45 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     }
 
     /**
+     * @return ISurveyQuestionTemplate[]
+     */
+    public function getAllQuestions(){
+        $questions = [];
+        foreach($this->getSteps() as $step){
+            if(!$step instanceof ISurveyRegularStepTemplate) continue;
+            foreach($step->getQuestions() as $q) {
+                if ($q->ClassName == 'SurveyLiteralContentQuestionTemplate') continue;
+                $questions[] = $q;
+            }
+        }
+        return $questions;
+    }
+
+    /**
+     * @return ISurveyQuestionTemplate[]
+     */
+    public function getAllFreeTextQuestions(){
+        $questions = [];
+        $to_add  = [
+            'SurveyMemberEmailQuestionTemplate',
+            'SurveyMemberFirstNameQuestionTemplate',
+            'SurveyMemberLastNameQuestionTemplate',
+            'SurveyOrganizationQuestionTemplate',
+            'SurveyTextAreaQuestionTemplate',
+            'SurveyTextBoxQuestionTemplate',
+        ];
+
+        foreach($this->getSteps() as $step){
+            if(!$step instanceof ISurveyRegularStepTemplate) continue;
+            foreach($step->getQuestions() as $q) {
+                if (!in_array($q->ClassName, $to_add)) continue;
+                $questions[] = $q;
+            }
+        }
+        return $questions;
+    }
+
+    /**
      * @return string
      */
     public function QualifiedName()

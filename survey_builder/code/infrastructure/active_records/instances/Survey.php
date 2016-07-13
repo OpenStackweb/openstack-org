@@ -21,7 +21,7 @@ class Survey extends DataObject implements ISurvey
     static $db = array
     (
         'BeenEmailed' => 'Boolean',
-        'IsTest' => 'Boolean',
+        'IsTest'      => 'Boolean',
     );
 
     static $indexes = array();
@@ -88,6 +88,31 @@ class Survey extends DataObject implements ISurvey
         }
         return $res;
     }
+
+    /**
+     * @return int
+     */
+    public function EntitySurveysCount(){
+        return count($this->EntitiesSurveys());
+    }
+
+    /**
+     * @param $question_name
+     * @return null|string
+     */
+    public function getAnswerFor($question_name){
+        foreach($this->Steps() as $step)
+        {
+            if(!$step instanceof SurveyRegularStep) continue;
+
+            $answer = $step->getAnswerByName($question_name);
+
+            if(is_null($answer)) continue;
+
+            return $answer->value();
+        }
+        return null;
+    }
     /**
      * @return int
      */
@@ -121,8 +146,12 @@ class Survey extends DataObject implements ISurvey
         $query->addAlias(QueryAlias::create('Template'));
         $query->addOrder(QueryOrder::asc('Template.Order'));
 
-        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps',
-            $query)->toArray());
+        $list =  new ArrayList
+        (
+            AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps',$query)->toArray()
+        );
+
+        return $list;
     }
 
     /**
@@ -466,6 +495,12 @@ class Survey extends DataObject implements ISurvey
         return $first_step->getIdentifier() === $this->currentStep()->getIdentifier();
     }
 
+    /**
+     * @return bool
+     */
+    public function isCompleted(){
+        return $this->MaxAllowedStep()->Template()->ID === $this->Template()->getLastStep()->ID;
+    }
 
     /**
      * @return ISurveyStep[]

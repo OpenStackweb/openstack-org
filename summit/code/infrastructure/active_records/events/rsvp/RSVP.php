@@ -66,8 +66,6 @@ class RSVP extends DataObject implements IRSVP
     public function getAnswers()
     {
         $query = new QueryObject(new RSVPAnswer);
-        $query->addAlias(QueryAlias::create('Answer'));
-
         return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Answers',
             $query)->toArray());
     }

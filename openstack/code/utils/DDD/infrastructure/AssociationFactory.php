@@ -68,10 +68,15 @@ final class AssociationFactory
         if ($old) {
             return $old;
         }
-        $alias = $query->getAlias();
+
         $component = $entity->getComponents($association_name, (string)$query, $query->getOrder(true));
-        foreach ($alias as $table => $on) {
-            $component = $component->innerJoin($table, $on);
+        foreach ($query->getAlias(QueryAlias::INNER) as $specification)
+        {
+            $component = $component->innerJoin($specification->getTable(), $specification->getCondition());
+        }
+        foreach ($query->getAlias(QueryAlias::LEFT) as $specification)
+        {
+            $component = $component->innerJoin($specification->getTable(), $specification->getCondition());
         }
 
         return new PersistentCollection($entity, $component, $query, '1-to-many', $association_name);
@@ -98,10 +103,16 @@ final class AssociationFactory
         if ($old) {
             return $old;
         }
-        $alias = $query->getAlias();
+
         $component = $entity->getManyManyComponents($association_name, (string)$query, $query->getOrder());
-        foreach ($alias as $table => $on) {
-            $component = $component->innerJoin($table, $on);
+
+        foreach ($query->getAlias(QueryAlias::INNER) as $specification)
+        {
+            $component = $component->innerJoin($specification->getTable(), $specification->getCondition());
+        }
+        foreach ($query->getAlias(QueryAlias::LEFT) as $specification)
+        {
+            $component = $component->innerJoin($specification->getTable(), $specification->getCondition());
         }
 
         return new PersistentCollection($entity, $component, $query, 'many-to-many', $association_name);
