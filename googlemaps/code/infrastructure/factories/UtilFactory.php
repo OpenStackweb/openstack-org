@@ -14,7 +14,7 @@
 /**
  * Class UtilFactory
  */
-final class UtilFactory implements IUtilFactory{
+final class UtilFactory implements IUtilFactory {
 
 	/**
 	 * @param string $query

@@ -26,7 +26,7 @@ ss.loadedGoogleMapsApi = false;
 
                     script.type = "text/javascript";
 
-                    script.src = "//maps.googleapis.com/maps/api/js?key=" + opts.key + "&sensor=false&callback=initAdminGoogleMaps";
+                    script.src = "//maps.googleapis.com/maps/api/js?key=" + opts.key + "&callback=initAdminGoogleMaps";
 
                     document.body.appendChild(script);
 

@@ -26,18 +26,6 @@ final class PrivateCloudCrudApi extends CompanyServiceCrudApi {
         $this->private_cloud_draft_repository = new SapphirePrivateCloudRepository(true);
 		$this->marketplace_type_repository    = new SapphireMarketPlaceTypeRepository;
 
-		//google geo coding settings
-		$google_geo_coding_api_key     = null;
-		$google_geo_coding_client_id   = null;
-		$google_geo_coding_private_key = null;
-		if(defined('GOOGLE_GEO_CODING_API_KEY')){
-			$google_geo_coding_api_key = GOOGLE_GEO_CODING_API_KEY;
-		}
-		else if (defined('GOOGLE_GEO_CODING_CLIENT_ID') && defined('GOOGLE_GEO_CODING_PRIVATE_KEY')){
-			$google_geo_coding_client_id   = GOOGLE_GEO_CODING_CLIENT_ID;
-			$google_geo_coding_private_key = GOOGLE_GEO_CODING_PRIVATE_KEY;
-		}
-
 		$manager = new PrivateCloudManager (
 			$this->private_cloud_repository,
 			new SapphireMarketPlaceVideoTypeRepository,
@@ -60,10 +48,8 @@ final class PrivateCloudCrudApi extends CompanyServiceCrudApi {
 			new GoogleGeoCodingService(
 				new SapphireGeoCodingQueryRepository,
 				new UtilFactory,
-				SapphireTransactionManager::getInstance(),
-				$google_geo_coding_api_key,
-				$google_geo_coding_client_id,
-				$google_geo_coding_private_key),
+				SapphireTransactionManager::getInstance()
+			),
 			null,
 			new SessionCacheService,
 			SapphireTransactionManager::getInstance()
@@ -91,10 +77,8 @@ final class PrivateCloudCrudApi extends CompanyServiceCrudApi {
             new GoogleGeoCodingService(
                 new SapphireGeoCodingQueryRepository,
                 new UtilFactory,
-                SapphireTransactionManager::getInstance(),
-                $google_geo_coding_api_key,
-                $google_geo_coding_client_id,
-                $google_geo_coding_private_key),
+                SapphireTransactionManager::getInstance()
+            ),
             null,
             new SessionCacheService,
             SapphireTransactionManager::getInstance()
