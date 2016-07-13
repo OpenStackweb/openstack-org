@@ -18,7 +18,8 @@ module.exports = {
     "summit/javascript/schedule/admin/attendees-admin-view":"./summit/javascript/schedule/admin/attendees-admin-view.js",
     "summit/javascript/schedule/admin/reports-admin-view":"./summit/javascript/schedule/admin/reports-admin-view.js",
     "survey_builder/js/report/survey-report-view":"./survey_builder/js/report/survey-report-view.js",
-    "summit/javascript/schedule/admin/speakers-admin-view":"./summit/javascript/schedule/admin/speakers-admin-view.js"
+    "summit/javascript/schedule/admin/speakers-admin-view":"./summit/javascript/schedule/admin/speakers-admin-view.js",
+    "summit/javascript/schedule/admin/promocode-admin-view":"./summit/javascript/schedule/admin/promocode-admin-view.js"
   },
   output: {
     path: __dirname ,

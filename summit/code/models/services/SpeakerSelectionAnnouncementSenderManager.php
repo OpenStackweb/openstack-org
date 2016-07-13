@@ -152,6 +152,7 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
 
                     if (!is_null($code)) {
                         $speaker->registerSummitPromoCode($code);
+                        $code->setEmailSent(true);
                         $code->write();
                         $params['PromoCode'] = $code;
                     }

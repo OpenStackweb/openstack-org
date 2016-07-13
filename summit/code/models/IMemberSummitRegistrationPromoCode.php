@@ -12,25 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISpeakerSummitRegistrationPromoCode extends ISummitRegistrationPromoCode
+interface IMemberSummitRegistrationPromoCode extends ISummitRegistrationPromoCode
 {
-    const TypeAccepted  = 'ACCEPTED';
-    const TypeAlternate = 'ALTERNATE';
     /**
      * @return string
      */
     public function getType();
 
     /**
-     * @return IPresentationSpeaker
+     * @return ICommunityMember
      */
-    public function getSpeaker();
+    public function getOwner();
 
     /**
-     * @param IPresentationSpeaker $speaker
+     * @param ICommunityMember $member
      * @return $this
      */
-    public function assignSpeaker(IPresentationSpeaker $speaker);
+    public function assignOwner(ICommunityMember $member);
+
+    public function setFirstName($first_name);
+
+    public function setLastName($last_name);
+
+    public function setEmail($email);
 
     public function setType($type);
 }

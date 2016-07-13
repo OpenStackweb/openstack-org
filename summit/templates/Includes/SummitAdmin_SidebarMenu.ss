@@ -21,16 +21,7 @@
     <li <% if $Active == 5 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/reports"><span class="fa-stack fa-lg pull-left"><i class="fa fa-list fa-stack-1x "></i></span>Reports</a>
     </li>
-    <!--
-    <li>
-        <a href="$AdminLink/$SummitID/tickets"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-ticket fa-stack-1x "></i></span>Tickets</a>
+    <li <% if $Active == 7 %> class="active" <% end_if %>>
+        <a href="$AdminLink/$SummitID/promocodes"><span class="fa-stack fa-lg pull-left"><i class="fa fa-ticket fa-stack-1x "></i></span>Promo Codes</a>
     </li>
-
-    <li>
-        <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Settings</a>
-        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-            <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-list-alt fa-stack-1x "></i></span>Company Banners</a></li>
-        </ul>
-    </li>
-    -->
 </ul>

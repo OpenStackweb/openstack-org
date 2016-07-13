@@ -19,13 +19,27 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
      */
     private $summit_repository;
 
+    /**
+     * @var ISummitRegistrationPromoCodeRepository
+     */
+    private $code_repository;
+
+    /**
+     * @var ISummitService
+     */
+    private $summit_service;
+
     public function __construct
     (
-        ISummitRepository $summit_repository
+        ISummitRepository $summit_repository,
+        ISummitRegistrationPromoCodeRepository $code_repository,
+        ISummitService $summit_service
     )
     {
         parent::__construct();
-        $this->summit_repository = $summit_repository;
+        $this->summit_repository        = $summit_repository;
+        $this->code_repository          = $code_repository;
+        $this->summit_service           = $summit_service;
     }
 
     protected function isApiCall(){
@@ -47,11 +61,19 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
     }
 
     static $url_handlers = array(
-        'GET $REG_CODE!' => 'getRegistrationCodeByTerm',
+        'GET all'               => 'getRegistrationCodes',
+        'GET $REG_CODE!'        => 'getRegistrationCodeByTerm',
+        'POST '                 => 'addRegistrationCode',
+        'PUT $REG_CODE!'        => 'updateRegistrationCode',
+        'DELETE $REG_CODE!'     => 'deleteRegistrationCode',
     );
 
     static $allowed_actions = array(
         'getRegistrationCodeByTerm',
+        'getRegistrationCodes',
+        'addRegistrationCode',
+        'updateRegistrationCode',
+        'deleteRegistrationCode',
     );
 
     public function getRegistrationCodeByTerm(SS_HTTPRequest $request) {
@@ -82,6 +104,147 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
                 );
             }
             return $this->ok($data, false);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getRegistrationCodes(SS_HTTPRequest $request) {
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? intval(Convert::raw2sql($query_string['page'])) : '';
+            $page_size    = (isset($query_string['items'])) ? intval(Convert::raw2sql($query_string['items'])) : '';
+            $term         = (isset($query_string['term'])) ? trim(Convert::raw2sql($query_string['term'])) : '';
+            $type         = (isset($query_string['type'])) ? trim(Convert::raw2sql($query_string['type'])) : '';
+            $sort_by      = (isset($query_string['sort_by'])) ? trim(Convert::raw2sql($query_string['sort_by'])) : '';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? trim(Convert::raw2sql($query_string['sort_dir'])) : '';
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            list($page, $page_size, $count, $codes) = $this->code_repository->searchByTermAndSummitPaginated
+                (
+                    $summit_id,
+                    $type,
+                    $page,
+                    $page_size,
+                    $term,
+                    $sort_by,
+                    $sort_dir
+                );
+
+            return $this->ok(array('page' => $page, 'page_size' => $page_size, 'count' => $count, 'codes' => $codes));
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function addRegistrationCode(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data         = $this->getJsonRequest();
+            $promocode = $this->summit_service->createPromoCode($summit, $data);
+            return $this->ok($promocode->getCode());
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(EntityAlreadyExistsException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->validationError(array(
+                array('message' => $ex3->getMessage())
+            ));
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function updateRegistrationCode(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $code_id   = intval($request->param('REG_CODE'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data         = $this->getJsonRequest();
+            $data['code_id'] = $code_id;
+            $promocode = $this->summit_service->updatePromoCode
+                (
+                    $summit,
+                    $data
+                );
+            return $this->ok($promocode);
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function deleteRegistrationCode(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $code_id   = intval($request->param('REG_CODE'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $promocode  = $this->code_repository->getById($code_id);
+            if(is_null($promocode)) throw new NotFoundEntityException('PromoCode');
+
+            if ($promocode->EmailSent)
+                throw new EntityValidationException("Cannot delete a code that has been already sent.");
+
+            $promocode->delete();
+
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
         }
         catch(NotFoundEntityException $ex2)
         {

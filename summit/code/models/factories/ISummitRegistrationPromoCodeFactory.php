@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,25 +11,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISpeakerSummitRegistrationPromoCode extends ISummitRegistrationPromoCode
-{
-    const TypeAccepted  = 'ACCEPTED';
-    const TypeAlternate = 'ALTERNATE';
-    /**
-     * @return string
-     */
-    public function getType();
+
+interface ISummitRegistrationPromoCodeFactory {
+	/**
+     * @param int $summit_id
+	 * @param array $data
+	 * @return ISummitRegistrationPromoCode
+	 */
+	public function buildPromoCode(array $data, $summit_id);
 
     /**
-     * @return IPresentationSpeaker
+     * @param int $summit_id
+     * @param array $data
+     * @param ISummitRegistrationPromoCode $promocode
+     * @return ISummitRegistrationPromoCode
      */
-    public function getSpeaker();
+    public function populatePromoCode($summit_id, array $data, $promocode);
 
-    /**
-     * @param IPresentationSpeaker $speaker
-     * @return $this
-     */
-    public function assignSpeaker(IPresentationSpeaker $speaker);
-
-    public function setType($type);
-}
+} 

@@ -30,22 +30,22 @@ final class SummitService implements ISummitService
      * @var ISummitAssistanceRepository
      */
     private $assistance_repository;
-
     /**
      * @var ISpeakerRepository
      */
     private $speaker_repository;
-
     /**
      * @var IMemberRepository
      */
     private $member_repository;
-
     /**
      * @var IReportRepository
      */
     private $report_repository;
-
+    /**
+     * @var ISummitRegistrationPromoCodeRepository
+     */
+    private $promocode_repository;
     /**
      * @var ISpeakerRegistrationRequestManager
      */
@@ -64,6 +64,7 @@ final class SummitService implements ISummitService
         ISpeakerRepository $speaker_repository,
         IMemberRepository $member_repository,
         IReportRepository $report_repository,
+        ISummitRegistrationPromoCodeRepository $promocode_repository,
         ISpeakerRegistrationRequestManager $speaker_registration_request_manager,
         ITransactionManager $tx_service
     )
@@ -75,6 +76,7 @@ final class SummitService implements ISummitService
         $this->speaker_repository                   = $speaker_repository;
         $this->member_repository                    = $member_repository;
         $this->report_repository                    = $report_repository;
+        $this->promocode_repository                 = $promocode_repository;
         $this->speaker_registration_request_manager = $speaker_registration_request_manager;
         $this->tx_service                           = $tx_service;
     }
@@ -933,6 +935,62 @@ final class SummitService implements ISummitService
             $image->write();
 
             return $image;
+
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $promocode_data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function createPromoCode(ISummit $summit, array $promocode_data)
+    {
+        $promocode_repository                 = $this->promocode_repository;
+        $promocode_factory                    = new SummitRegistrationPromoCodeFactory();
+
+        return $this->tx_service->transaction(function () use
+        (
+            $summit, $promocode_data , $promocode_repository, $promocode_factory
+        ) {
+
+            $codes = explode(',',$promocode_data['code']);
+            foreach ($codes as $code) {
+                // check if code already exists
+                $code_obj = $promocode_repository->getByCode($summit->getIdentifier(),$code);
+                if ($code_obj) {
+                    throw new EntityValidationException("Code ".$code." already exists.");
+                }
+
+                $promocode_data['code'] = $code;
+                $promocode = $promocode_factory->buildPromoCode($promocode_data,$summit->getIdentifier());
+
+                $promocode->write();
+            }
+
+            return $promocode;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $promocode_data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function updatePromoCode(ISummit $summit, array $promocode_data)
+    {
+        $promocode_repository   = $this->promocode_repository;
+        $promocode_factory      = new SummitRegistrationPromoCodeFactory();
+
+        return $this->tx_service->transaction(function () use ($summit, $promocode_data, $promocode_factory, $promocode_repository) {
+            $code_id    = trim($promocode_data['code_id']);
+            $promocode  = $promocode_repository->getById($code_id);
+            if(is_null($promocode)) throw new NotFoundEntityException('PromoCode');
+
+            $promocode = $promocode_factory->populatePromoCode($summit->getIdentifier(),$promocode_data,$promocode);
+            $promocode->write();
+
+            return $promocode;
 
         });
     }
