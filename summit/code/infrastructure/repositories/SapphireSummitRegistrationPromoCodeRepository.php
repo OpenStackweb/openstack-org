@@ -143,7 +143,7 @@ SQL;
      */
     public function getByOwner($summit_id, $owner_id)
     {
-        $promo_codes = MemberSummitRegistrationPromoCode::get()->where("SummitID = $summit_id AND OwnerID = $owner_id");
+        $promo_codes = MemberSummitRegistrationPromoCode::get()->where("SummitID = $summit_id AND MemberSummitRegistrationPromoCode.OwnerID = $owner_id");
 
         return $promo_codes;
     }
