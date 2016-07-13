@@ -52,7 +52,8 @@
       "geoip/code",
       "html2pdf_v4.03",
       "summit/code/infrastructure/traits",
-      "openstack/code/utils/apis/traits"
+      "openstack/code/utils/apis/traits",
+      "googlemaps/code/traits"
     ]
   },
   "config": {

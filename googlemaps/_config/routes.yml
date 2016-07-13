@@ -1,0 +1,7 @@
+---
+Name: googlemapsroutes
+After: 'framework/routes#coreroutes'
+---
+Director:
+  rules:
+    'maps_images': 'GoogleImagesService'

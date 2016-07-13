@@ -16,6 +16,8 @@
  */
 abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller {
 
+	use GoogleMapLibs;
+
 	private static $allowed_actions = array('handleIndex');
 
 	/**
@@ -148,13 +150,9 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 
 		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
 
-		Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+		$this->InitGoogleMapLibs();
 
         Requirements::combine_files('marketplace_clouds_directory_page.js', array(
-            "marketplace/code/ui/frontend/js/markerclusterer.js",
-            "marketplace/code/ui/frontend/js/oms.min.js",
-            "marketplace/code/ui/frontend/js/infobubble-compiled.js",
-            "marketplace/code/ui/frontend/js/google.maps.jquery.js",
             "themes/openstack/javascript/chosen.jquery.min.js",
             "marketplace/code/ui/frontend/js/clouds.directory.page.js",
         ));

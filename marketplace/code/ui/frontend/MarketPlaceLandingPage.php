@@ -27,21 +27,18 @@ final class MarketPlaceLandingPage_Controller extends MarketPlacePage_Controller
 	 */
 	private $public_cloud_repository;
 
+	use GoogleMapLibs;
+
 	function init(){
 		parent::init();
 
         Requirements::css("marketplace/code/ui/frontend/css/marketplace.landing.css");
 
-        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+		$this->InitGoogleMapLibs();
 
         Requirements::combine_files('marketplace_landing.js',
             array(
-                "marketplace/code/ui/frontend/js/markerclusterer.js",
-                "marketplace/code/ui/frontend/js/oms.min.js",
-                "marketplace/code/ui/frontend/js/infobubble-compiled.js",
-                "marketplace/code/ui/frontend/js/google.maps.jquery.js",
                 "marketplace/code/ui/frontend/js/landing.page.js"
-
          ));
 
 		$this->public_cloud_repository   = new SapphirePublicCloudRepository;

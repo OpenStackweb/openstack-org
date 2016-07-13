@@ -17,6 +17,7 @@
  */
 final class SangriaPageDeploymentExtension extends Extension
 {
+    use GoogleMapLibs;
 
     public function onBeforeInit()
     {
@@ -733,12 +734,9 @@ final class SangriaPageDeploymentExtension extends Extension
 
         $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
-        Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
+
+        $this->InitGoogleMapLibs();
 
         if (!empty($continent)) {
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();
@@ -1081,13 +1079,8 @@ SQL;
 
         $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
-        Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
-
+        $this->InitGoogleMapLibs();
         $template_id = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
 
         if (!empty($continent)) {
@@ -1325,14 +1318,9 @@ SQL;
         $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
 
-        Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
+        $this->InitGoogleMapLibs();
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-
 
         if (!empty($continent)) {
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();

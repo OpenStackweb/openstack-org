@@ -23,6 +23,7 @@ class ConsultantsDirectoryPage extends MarketPlaceDirectoryPage
  */
 class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller {
 
+	use GoogleMapLibs;
 
 	static $allowed_actions = array(
         'getCurrentOfficesLocationsJson','handleIndex',
@@ -64,15 +65,12 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 		Requirements::customScript("jQuery(document).ready(function($) {
             $('#consulting','.marketplace-nav').addClass('current');
         });");
+
 		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
 
-		Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        $this->InitGoogleMapLibs();
 
         Requirements::combine_files('marketplace_consultants_directory_page.js', array(
-            "marketplace/code/ui/frontend/js/markerclusterer.js",
-            "marketplace/code/ui/frontend/js/oms.min.js",
-            "marketplace/code/ui/frontend/js/infobubble-compiled.js",
-            "marketplace/code/ui/frontend/js/google.maps.jquery.js",
             "themes/openstack/javascript/chosen.jquery.min.js",
             "marketplace/code/ui/frontend/js/consultants.directory.page.js"
         ));

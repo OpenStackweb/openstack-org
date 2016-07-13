@@ -69,17 +69,15 @@
 
                 var shadow = new google.maps.MarkerImage(
                     'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
-                    new google.maps.Size(37, 34), // size - for sprite clipping
+                    new google.maps.Size(40, 40), // size - for sprite clipping
                     new google.maps.Point(0, 0), // origin - ditto
-                    new google.maps.Point(10, 34) // anchor - where to meet map location
+                    new google.maps.Point(15, 34) // anchor - where to meet map location
                 );
 
                 oms.addListener('spiderfy', function(markers) {
-                    console.log('spiderfy');
                 });
 
                 oms.addListener('unspiderfy', function(markers) {
-                    console.log('unspiderfy');
                 });
 
                 oms.addListener('click', function(marker) {
@@ -116,11 +114,8 @@
                         var place = places[i];
                         var color = place.color;
                         if(!(color in markers_images)){
-                            var primaryColor = color;
-                            var strokeColor  = '000000';
-                            var cornerColor  = 'FFFFFF';
-                            var image_url = 'http://chart.apis.google.com/chart?cht=mm&chs='+width+'x'+height+'&chco='+cornerColor+','+primaryColor+','+strokeColor+'&ext=.png';
-                            var icon      = new google.maps.MarkerImage(image_url,new google.maps.Size(width, height));
+                            var image_url = 'maps_images/pins/'+color;
+                            var icon      = new google.maps.MarkerImage(image_url, new google.maps.Size(width, height));
                             icon.anchor   = new google.maps.Point(width / 2, height);
                             markers_images[color] = icon;
                         }
@@ -142,10 +137,11 @@
                         marker.desc = info;
                     }
                 }
-                //http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/docs/reference.html#MarkerClustererOptions
+                // https://github.com/googlemaps/js-marker-clusterer
                 var mc_options = {
                     gridSize: settings.gridSize,
-                    minimumClusterSize: settings.minimumClusterSize
+                    minimumClusterSize: settings.minimumClusterSize,
+                    imagePath: 'https://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images//m'
                 };
                 marker_clusterer  = new MarkerClusterer(map, markers, mc_options);
                 // Limit the cluster zoom level
