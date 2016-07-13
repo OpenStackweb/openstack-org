@@ -659,8 +659,9 @@ SQL;
         }
 
         return
-            (Member::currentUser() && Member::currentUser()->IsSpeaker($this)) ||
-            Member::currentUserID() == $this->CreatorID ||  $this->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID ;
+            ( Member::currentUser() && Member::currentUser()->IsSpeaker($this) ) ||
+            Member::currentUserID() == $this->CreatorID ||
+            ( Member::currentUser()->getSpeakerProfile() && $this->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID );
     }
 
     /**
