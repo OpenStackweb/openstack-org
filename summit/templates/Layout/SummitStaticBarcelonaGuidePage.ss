@@ -161,7 +161,7 @@
 						Moments has won seven Michelin Stars and is managed by chef Carme Ruscalleda, one of the most famous chefs in the country.
 					</p>
 					<p>
-						<a class="featured-site" href="http://www.mandarinoriental.com/barcelona/" target="_blank">Website</a>
+						<a class="featured-site" href="http://www.mandarinoriental.com/barcelona/fine-dining/moments/" target="_blank">Website</a>
 						<a class="featured-site" href="https://goo.gl/maps/L4tYp5Vbpeq" target="_blank">Map</a>
 					</p>
 				</div>
@@ -196,7 +196,7 @@
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.puddingbarcelona.com/" target="_blank">Website</a>
-						<a class="featured-site" href="#" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/71EFwHniPAT2" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -210,7 +210,7 @@
 			Carretera de Miramar, 38
 		</div>
 		<div class="col-sm-4">
-			<a href="http://www.martinezbarcelona.com/index.html" target="_blank">Website</a> |
+			<a href="http://www.yelp.com/biz/martinez-barcelona" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/RjGwz7VDZpv" target="_blank">Map</a>
 		</div>
 	</div>
@@ -342,7 +342,7 @@
 			Paseo Mare Nostrum, 19-21
 		</div>
 		<div class="col-sm-4">
-			<a href="http://grupotragaluz.com/en/" target="_blank">Website</a> |
+			<a href="http://grupotragaluz.com/en/restaurante/pez-vela/" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/mwCP5H3U8ox" target="_blank">Map</a>
 		</div>
 	</div>
@@ -431,6 +431,7 @@
 			Carrer del Baluart, 56, 08003 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
+			<a href="http://www.yelp.com/biz/la-cova-fumada-barcelona" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/gfhBd4wtTj72" target="_blank">Map</a>
 		</div>
 	</div>
@@ -442,6 +443,7 @@
 			Carrer de Mallorca, 236, 08008 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
+			<a href="http://www.yelp.com/biz/cervecer%C3%ADa-catalana-barcelona-2" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/A8YehYzc7ES2" target="_blank">Map</a>
 		</div>
 	</div>
@@ -453,7 +455,7 @@
 			Villarroel, 190-192, 08036, Barcelona
 		</div>
 		<div class="col-sm-4">
-			<a href="www.restaurantbarcelonamilano.com" target="_blank">Website</a> |
+			<a href="http://www.restaurantbarcelonamilano.com/" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/w4J2HseDDVA2" target="_blank">Map</a>
 		</div>
 	</div>
@@ -465,7 +467,7 @@
 			Pl. Poeta Boscà, 1. Mercat de la Barceloneta, 08003, Barcelona
 		</div>
 		<div class="col-sm-4">
-			<a href="www.caballacanalla.com" target="_blank">Website</a> |
+			<a href="http:// www.caballacanalla.com" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/Gg7VPCzw1jK2" target="_blank">Map</a>
 		</div>
 	</div>
@@ -554,7 +556,7 @@
 			Passeig de Joan de Borbó, 65, 08003 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
-			<a href="suquetdelalmirall.com" target="_blank">Website</a> |
+			<a href="http://www.suquetdelalmirall.com/" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/Wr2LUEdr8u62" target="_blank">Map</a>
 		</div>
 	</div>
@@ -623,7 +625,7 @@
 						Check out The Zinc Bar on the rooftop, and enjoy live piano music Thursday through Sunday after 7:30pm.
 					</p>
 					<p>
-						<a class="featured-site" href="http://www.pecheaustin.com/" target="_blank">Website</a>
+						<a class="featured-site" href="http://www.hotelvillaemilia.com/en/zinc-bar/" target="_blank">Website</a>
 						<a class="featured-site" href="https://goo.gl/maps/K8UV351ay7N2" target="_blank">Map</a>
 					</p>
 				</div>
@@ -771,16 +773,16 @@
 				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/barcelona/guide/supercomputing.jpg')">
 				</div>
 				<div class="featured-content">
-					<h5>Barcelona Supercomputing Center</h5>
+					<h5>Park Güell</h5>
 					<div class="address">
 						08024 Barcelona, Spain
 					</div>
 					<p>
-						See the fastest supercomputer in Europe at the BSC just a few miles away from the OpenStack Summit.
+						isit this beautiful architectural park designed by Antoni Gaud that has appeared in many movies and is characterized by colorful mosaic tiles and whimsical structures. Tickets can be purchased at <a href="http://www.parkguell.cat/compra-dentrades/">www.parkguell.cat/compra-dentrades</a>
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.parkguell.cat/" target="_blank">Website</a>
-						<a class="featured-site" href="https://goo.gl/maps/wNkcF23pnRy" target="_blank">Map</a>
+						<a class="featured-site" href="https://goo.gl/maps/rX6HEUk9Thr" target="_blank">Map</a>
 					</p>
 				</div>
 			</div>
@@ -847,14 +849,13 @@
 	</div>
 	<div class="row guide-listing">
 		<div class="col-sm-4 guide-name">
-			Park Güell
+			Barcelona Supercomputing Center
 		</div>
 		<div class="col-sm-4">
-			08024 Barcelona, Spain
+			Carrer de Jordi Girona, 29-31, 08034 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
-			<a href="http://www.parkguell.cat/" target="_blank">Website</a> |
-			<a href="https://goo.gl/maps/rX6HEUk9Thr" target="_blank">Map</a>
+			<a href=" https://goo.gl/maps/wNkcF23pnRy" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
@@ -1111,6 +1112,7 @@
 			plaça del Tibidabo, 3-4.
 		</div>
 		<div class="col-sm-4">
+			<a href="http://www.tibidabo.cat/en" target="_blank">Website</a> |
 			<a href="https://goo.gl/maps/vcoMNeg6hWQ2" target="_blank">Map</a>
 		</div>
 	</div>
