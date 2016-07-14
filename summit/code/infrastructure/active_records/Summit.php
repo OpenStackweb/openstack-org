@@ -1008,6 +1008,12 @@ final class Summit extends DataObject implements ISummit
 
         $_REQUEST['SummitID'] = $this->ID;
 
+        $summit_time_zone = null;
+        if($this->TimeZone) {
+        	$time_zone_list = timezone_identifiers_list();
+        	$summit_time_zone = $time_zone_list[$this->TimeZone];
+    	}
+
         $f = new FieldList(
             $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
         );
@@ -1027,47 +1033,57 @@ final class Summit extends DataObject implements ISummit
         $f->addFieldToTab('Root.Main', $registration_link = new TextField('RegistrationLink', 'Registration Link'));
         $registration_link->setDescription('Link to the site where tickets can be purchased.');
 
-        $f->addFieldsToTab('Root.Main',
+        $f->addFieldsToTab('Root.Dates',
             $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
+        
+    	if($summit_time_zone) {
+    		$f->addFieldToTab('Root.Dates', new HeaderField("All dates below are in <span style='color:red;'>$summit_time_zone</span> time."));	
+    	}
+    	else {
+    		$f->addFieldToTab('Root.Dates', new HeaderField("All dates below in the timezone of the summit's venue."));		
+    	}
+    	
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SummitBeginDate', "When does the summit begin?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SummitEndDate', "When does the summit end?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('StartShowingVenuesDate', "When do you begin showing venues?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
 
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SummitBeginDate', 'Summit Begin Date'));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SubmissionBeginDate', "When do submissions begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SummitEndDate', 'Summit End Date'));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('StartShowingVenuesDate', 'Start Showing Venues'));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SubmissionEndDate', "When do submissions end?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SubmissionBeginDate', 'Submission Begin Date'));
+        $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingBeginDate', "When does voting begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SubmissionEndDate', 'Submission End Date'));
+        $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingEndDate', "When does voting end?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionBeginDate', "When do selections begin?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionEndDate', "When do selections end?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Main', $date = new DatetimeField('RegistrationBeginDate', "When does registration begin?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Main', $date = new DatetimeField('RegistrationEndDate', "When does registration end?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->setConfig('dateformat', 'dd/MM/yyyy');
+
+
         $f->addFieldsToTab('Root.Main',
             new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
 
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingBeginDate', 'Voting Begin Date'));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingEndDate', 'Voting End Date'));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionBeginDate', 'Selection Begin Date'));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionEndDate', 'Selection End Date'));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('RegistrationBeginDate', 'Registration Begin Date'));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('RegistrationEndDate', 'Registration End Date'));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
         $logo_field = new UploadField('Logo', 'Logo');
         $logo_field->setAllowedMaxFileNumber(1);
         $logo_field->setAllowedFileCategories('image');
