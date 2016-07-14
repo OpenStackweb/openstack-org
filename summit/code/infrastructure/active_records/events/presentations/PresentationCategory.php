@@ -83,6 +83,7 @@ class PresentationCategory extends DataObject
             $config = new GridFieldConfig_RelationEditor(100);
             $config->removeComponentsByType(new GridFieldDataColumns());
             $config->removeComponentsByType(new GridFieldDetailForm());
+            $config->addComponent(new GridFieldAddDefaultCategoryTags);
 
             $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
             $completer->setResultsFormat('$Tag');
@@ -220,4 +221,47 @@ class PresentationCategory extends DataObject
     {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
+
+    /**
+     * @param int $category_id
+     * @throws ValidationException
+     * @throws null
+     */
+    public static function seedTags($category_id)
+    {
+        $category = PresentationCategory::get()->byID($category_id);
+        $default_tags = array(
+            'topics' => array(
+                '101','App Developer','Architect','CxO','Community','Containers','Enterprise','HPC','ISV',
+                'Ops','Public Clouds','Security','Startup','Telecom','Upstream','User Experience'
+            ), 'speaker' => array(
+                'Ambassador','CxO','Diversity','Operator','Project Technical Lead (PTL)','Scientific','User','Women Of OpenStack'
+            ), 'openstack projects mentioned' => array(
+                'Astara','Barbican','Cinder','Cloudkitty','Congress','Cue','Designate','Docs','Freezer','Fuel','Glance',
+                'Heat','Horizon','Infra','Ironic','Keystone','Kolla','Magnum','Manila','Mistral','Monasca','Murano','Neutron',
+                'Nova','Oslo','Rally','Sahara','Searchlight','Security','Senlin','Solum','Swift','Telemetry','Tripleo',
+                'Trove','Zacar'
+            )
+        );
+
+        foreach ($default_tags as $tag_group => $tags) {
+            foreach ($tags as $tag) {
+                $category_tag = $category->AllowedTags()->filter(array('Tag:case' => $tag,'Group' => $tag_group))->first();
+                if ($category_tag) continue;
+
+                $existing_tag = Tag::get()->filter('Tag:case',$tag)->first();
+                if ($existing_tag) {
+                    $category->AllowedTags()->add($existing_tag, ['Group' => $tag_group]);
+                } else {
+                    $new_tag = new Tag();
+                    $new_tag->Tag = $tag;
+                    $new_tag->write();
+                    $category->AllowedTags()->add($new_tag, ['Group' => $tag_group]);
+                }
+            }
+        }
+
+        $category->write();
+    }
+
 }
