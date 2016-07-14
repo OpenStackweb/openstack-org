@@ -235,14 +235,14 @@ class SpeakerForm extends BootstrapForm
 
         $speaker = $dataObject;
 
-        $expertise_csv = $this->fields->fieldByName("Expertise")->Value();
+        $expertise_csv   = $this->fields->fieldByName("Expertise")->Value();
         $expertise_array = explode(',',$expertise_csv);
         $exp_ids = array();
         if ($expertise_array) {
             foreach ($expertise_array as $expertise) {
                 if(empty($expertise)) continue;
-                $expertise = trim($expertise);
-                if (!$anexp = $speaker->AreasOfExpertise()->find('Expertise',$expertise)) {
+                $expertise  = Convert::raw2sql(trim($expertise));
+                if (!$anexp = $speaker->AreasOfExpertise()->find('Expertise', $expertise)) {
                     $anexp = SpeakerExpertise::create(array('Expertise' => $expertise));
                 }
 
@@ -252,14 +252,13 @@ class SpeakerForm extends BootstrapForm
         }
         $speaker->AreasOfExpertise()->setByIdList($exp_ids);
 
-
         $language_csv = $this->fields->fieldByName("Language")->Value();
         $language_array = explode(',',$language_csv);
         $lang_ids = array();
         if ($language_array) {
             foreach ($language_array as $language) {
                 if(empty($language)) continue;
-                $language = trim($language);
+                $language = Convert::raw2sql(trim($language));
                 if (!$alang = $speaker->Languages()->find('Language',$language)) {
                     $alang = SpeakerLanguage::create(array('Language' => $language));
                 }
@@ -275,9 +274,10 @@ class SpeakerForm extends BootstrapForm
             $link = $this->fields->fieldByName("PresentationLink[{$i}]");
             $title = $this->fields->fieldByName("PresentationTitle[{$i}]");
             if(is_null($link)) continue;
-            $link_val  = trim($link->Value());
+            $link_val  = Convert::raw2sql(trim($link->Value()));
+
             if(empty($link_val)) continue;
-            $title_val = (is_null($title)) ? '' : trim($title->Value());
+            $title_val = (is_null($title)) ? '' : Convert::raw2sql(trim($title->Value()));
 
             if (!$alink = $speaker->OtherPresentationLinks()->find('LinkUrl',$link_val)) {
                 $alink = SpeakerPresentationLink::create(array('LinkUrl' => $link_val, 'Title' => $title_val));
@@ -294,7 +294,8 @@ class SpeakerForm extends BootstrapForm
         $roles = $this->fields->fieldByName("OrganizationalRole")->Value();
         if ($roles && in_array(0,$roles)) { // 0 is the id for Other
             $other_role = $this->fields->fieldByName("OtherOrganizationalRole")->Value();
-            $new_role = SpeakerOrganizationalRole::get()->where("Role = '$other_role'")->first();
+            $other_role = Convert::raw2sql(trim($other_role));
+            $new_role   = SpeakerOrganizationalRole::get()->where("Role = '$other_role' ")->first();
             if (!$new_role) {
                 $new_role = new SpeakerOrganizationalRole(array('Role' => $other_role, 'IsDefault' => 0));
                 $new_role->write();
@@ -311,6 +312,7 @@ class SpeakerForm extends BootstrapForm
             if ($country_array) {
                 foreach($country_array as $country_name)
                 {
+                    $country_name = Convert::raw2sql(trim($country_name));
                     if (!$acountry = $speaker->TravelPreferences()->find('Country',$country_name)) {
                         $acountry = SpeakerTravelPreference::create(array('Country' => $country_name));
                     }
