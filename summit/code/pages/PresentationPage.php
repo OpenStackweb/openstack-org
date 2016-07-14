@@ -271,7 +271,10 @@ class PresentationPage_Controller extends SummitPage_Controller
             !$summit->exists()||
             !$this->presentation_manager->isPresentationEditionAllowed(Member::currentUser(), $summit)
         )
-        return $this->httpError(403, 'Call for speaker closed!');
+        {
+            $r->setUrl($this->Link());//clean up dir parts so we could redirect without 404
+            return $this->redirect($this->Link(), 301);
+        }
 
         $presentation_id = Convert::raw2sql($r->param('PresentationID'));
 
