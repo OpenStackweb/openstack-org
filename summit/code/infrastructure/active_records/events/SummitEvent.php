@@ -254,10 +254,10 @@ class SummitEvent extends DataObject implements ISummitEvent
         return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'AllowedSummitTypes')->toArray();
     }
 
-    public function isAllowedSummitType($summit_type_name) {
+    public function isAllowedSummitType($summit_type_id) {
         $allowed_summits = $this->getAllowedSummitTypes();
         foreach ($allowed_summits as $summit_type) {
-            if ($summit_type->Title == $summit_type_name) return 1;
+            if ($summit_type->ID == $summit_type_id) return 1;
         }
 
         return 0;

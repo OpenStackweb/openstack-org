@@ -108,7 +108,7 @@
                         <label for="summit_type">Summit Type</label>
                         <select class="form-control" id="summit_type" name="summit_type" multiple>
                             <% loop Summit.Types() %>
-                                <option value="$ID" <% if $Top.Event.isAllowedSummitType($Title) %> selected <% end_if %>>$Title</option>
+                                <option value="$ID" <% if $Top.Event.isAllowedSummitType($ID) %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
                         </select>
                     </div>
