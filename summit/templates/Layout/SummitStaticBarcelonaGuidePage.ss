@@ -778,7 +778,7 @@
 						08024 Barcelona, Spain
 					</div>
 					<p>
-						isit this beautiful architectural park designed by Antoni Gaud that has appeared in many movies and is characterized by colorful mosaic tiles and whimsical structures. Tickets can be purchased at <a href="http://www.parkguell.cat/compra-dentrades/">www.parkguell.cat/compra-dentrades</a>
+						Visit this beautiful architectural park designed by Antoni Gaudi that has appeared in many movies and is characterized by colorful mosaic tiles and whimsical structures. <a href="http://www.parkguell.cat/compra-dentrades/" target="_blank">Tickets can be purchased online in advance.</a>
 					</p>
 					<p>
 						<a class="featured-site" href="http://www.parkguell.cat/" target="_blank">Website</a>
