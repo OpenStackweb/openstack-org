@@ -360,6 +360,15 @@ class SummitEvent extends DataObject implements ISummitEvent
     public function getCMSFields()
     {
 
+        Requirements::customScript("
+        jQuery( document ).ready(function() {
+            jQuery('body').on('change','#Form_ItemEditForm_RSVPTemplateID',
+                function(){
+                    jQuery('#Form_ItemEditForm_action_save').click();
+                }
+            );
+        });");
+
         $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
 
         $f = new FieldList
@@ -453,7 +462,7 @@ class SummitEvent extends DataObject implements ISummitEvent
 
             // rsvp
             $rsvp_template = new DropdownField('RSVPTemplateID','Select a Template',RSVPTemplate::get()->map());
-            $rsvp_template->setEmptyString('-- Select a RSVP Template --');
+            $rsvp_template->setEmptyString('-- View All Templates --');
             $f->addFieldToTab('Root.RSVP', $rsvp_template);
 
             if ($this->RSVPTemplate()->exists()) {
