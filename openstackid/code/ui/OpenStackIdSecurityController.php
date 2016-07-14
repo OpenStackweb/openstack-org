@@ -1,7 +1,7 @@
 <?php
 
 define('__ROOT__', dirname(dirname(dirname(dirname(__FILE__)))));
-if(defined('OPENSTACKID_ENABLED')) {
+if(defined('OPENSTACKID_ENABLED') && OPENSTACKID_ENABLED == true ) {
     require_once __ROOT__ . '/vendor/openid/php-openid/Auth/OpenID/SReg.php';
 }
 
