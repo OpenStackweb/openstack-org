@@ -1061,22 +1061,22 @@ final class Summit extends DataObject implements ISummit
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingBeginDate', "When does voting begin?"));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('VotingBeginDate', "When does voting begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('VotingEndDate', "When does voting end?"));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('VotingEndDate', "When does voting end?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionBeginDate', "When do selections begin?"));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SelectionBeginDate', "When do selections begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionEndDate', "When do selections end?"));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SelectionEndDate', "When do selections end?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('RegistrationBeginDate', "When does registration begin?"));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('RegistrationBeginDate', "When does registration begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Main', $date = new DatetimeField('RegistrationEndDate', "When does registration end?"));
+        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('RegistrationEndDate', "When does registration end?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
