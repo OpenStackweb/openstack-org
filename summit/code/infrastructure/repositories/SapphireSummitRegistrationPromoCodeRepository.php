@@ -112,6 +112,55 @@ SQL;
 
     /**
      * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchSponsorByTermAndSummitPaginated($summit_id, $page= 1, $page_size = 10, $term = '', $sort_by = 'sponsor', $sort_dir = 'asc')
+    {
+        $offset = ($page - 1 ) * $page_size;
+        $sort = '';
+        switch(strtolower($sort_by))
+        {
+            case 'sponsor':
+                $sort = ' ORDER BY `Org.Name` '.strtoupper($sort_dir);
+                break;
+        }
+
+        $query = <<<SQL
+SELECT Org.ID,Org.Name,GROUP_CONCAT(PC.Code SEPARATOR ', ') AS Codes
+FROM SponsorSummitRegistrationPromoCode AS SPC
+LEFT JOIN SummitRegistrationPromoCode AS PC ON PC.ID = SPC.ID
+LEFT JOIN Org ON Org.ID = SPC.SponsorID
+WHERE SummitID = {$summit_id}
+GROUP BY SPC.SponsorID
+HAVING (Org.Name LIKE '%{$term}%' OR Codes LIKE '%{$term}%' )
+{$sort}
+SQL;
+
+        $res       = DB::query($query);
+        $count     = $res->numRecords();
+        $res       = DB::query($query." LIMIT {$offset}, {$page_size}");
+        $data = array();
+
+        foreach ($res as $code) {
+            $code_array = array(
+                'id' => $code['ID'],
+                'sponsor' => $code['Name'],
+                'codes' => $code['Codes'],
+            );
+
+            $data[] = $code_array;
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
+    /**
+     * @param int $summit_id
      * @param string $code
      * @return ISummitRegistrationPromoCode
      */
@@ -127,13 +176,36 @@ SQL;
     /**
      * @param int $summit_id
      * @param int $org_id
-     * @return ISummitRegistrationPromoCode
+     * @return ISummitRegistrationPromoCode[]
      */
     public function getByOrg($summit_id, $org_id)
     {
         $promo_codes = SponsorSummitRegistrationPromoCode::get()->where("SummitID = $summit_id AND SponsorID = $org_id");
 
         return $promo_codes;
+    }
+
+    /**
+     * @param int $summit_id
+     * @param int $org_id
+     * @return ArrayList
+     */
+    public function getGroupedByOrg($summit_id)
+    {
+        $query = <<<SQL
+        SELECT Org.ID,Org.Name,GROUP_CONCAT(PC.Code SEPARATOR ', ') AS Codes
+        FROM SponsorSummitRegistrationPromoCode AS SPC
+        LEFT JOIN SummitRegistrationPromoCode AS PC ON PC.ID = SPC.ID
+        LEFT JOIN Org ON Org.ID = SPC.SponsorID
+        WHERE PC.SummitID = {$summit_id} GROUP BY SPC.SponsorID ORDER BY Org.Name LIMIT 20
+SQL;
+        $db_result = DB::query($query);
+        $result = new ArrayList();
+        foreach ($db_result as $sponsor) {
+            $result->push(new ArrayData($sponsor));
+        }
+
+        return $result;
     }
 
     /**

@@ -27,6 +27,17 @@ interface ISummitRegistrationPromoCodeRepository extends IEntityRepository
 
     /**
      * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchSponsorByTermAndSummitPaginated($summit_id, $page= 1, $page_size = 10, $term = '', $sort_by = 'sponsor', $sort_dir = 'asc');
+
+    /**
+     * @param int $summit_id
      * @param string $code
      * @return ISummitRegistrationPromoCode
      */
@@ -35,9 +46,15 @@ interface ISummitRegistrationPromoCodeRepository extends IEntityRepository
     /**
      * @param int $summit_id
      * @param int $org_id
-     * @return ISummitRegistrationPromoCode
+     * @return ISummitRegistrationPromoCode[]
      */
     public function getByOrg($summit_id, $org_id);
+
+    /**
+     * @param int $summit_id
+     * @return ArrayList
+     */
+    public function getGroupedByOrg($summit_id);
 
     /**
      * @param int $summit_id

@@ -70,9 +70,12 @@ final class SummitRegistrationPromoCodeFactory
                     if ($owner->Exists())
                         $promocode->assignOwner($owner);
                 }
-                $promocode->setFirstName(trim($data['first_name']));
-                $promocode->setLastName(trim($data['last_name']));
-                $promocode->setEmail(trim($data['email']));
+                if (isset($data['first_name']))
+                    $promocode->setFirstName(trim($data['first_name']));
+                if (isset($data['last_name']))
+                    $promocode->setLastName(trim($data['last_name']));
+                if (isset($data['email']))
+                    $promocode->setEmail(trim($data['email']));
                 break;
             case 'SPONSOR':
                 if (isset($data['member_id']) && $data['member_id']) {
@@ -85,10 +88,12 @@ final class SummitRegistrationPromoCodeFactory
                     if ($sponsor->Exists())
                         $promocode->assignSponsor($sponsor);
                 }
-
-                $promocode->setFirstName(trim($data['first_name']));
-                $promocode->setLastName(trim($data['last_name']));
-                $promocode->setEmail(trim($data['email']));
+                if (isset($data['first_name']))
+                    $promocode->setFirstName(trim($data['first_name']));
+                if (isset($data['last_name']))
+                    $promocode->setLastName(trim($data['last_name']));
+                if (isset($data['email']))
+                    $promocode->setEmail(trim($data['email']));
                 break;
         }
 

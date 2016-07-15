@@ -23,5 +23,12 @@
     </li>
     <li <% if $Active == 7 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/promocodes"><span class="fa-stack fa-lg pull-left"><i class="fa fa-ticket fa-stack-1x "></i></span>Promo Codes</a>
+        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+            <li <% if $Active == 8 %> class="active" <% end_if %>>
+                <a href="$AdminLink/$SummitID/promocodes/sponsors">
+                    <span class="fa-stack fa-lg pull-left"><i class="fa fa-list-alt fa-stack-1x "></i></span>Sponsors
+                </a>
+            </li>
+        </ul>
     </li>
 </ul>

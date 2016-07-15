@@ -36,3 +36,4 @@ migrations:
   - TrackChairMigration
   - UninstallTranslatableMigration
   - FixSummitEventTypesMigration
+  - SetEmailedFlagForSpeakerPromoCodesMigration
