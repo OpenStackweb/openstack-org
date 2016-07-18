@@ -71,7 +71,7 @@ export const updateEmailCheck = createAction('UPDATE_EMAIL_CHECK');
 export const toggleAddChairLoading = createAction('TOGGLE_ADD_CHAIR_LOADING');
 export const updateAddChairMessage = createAction('UPDATE_ADD_CHAIR_MESSAGE');
 export const addNewChair = createAction('ADD_NEW_CHAIR');
-
+export const toggleMobileMenu = createAction('TOGGLE_MOBILE_MENU');
 /* Async Actions */
 
 export const fetchSummit = (id) => {

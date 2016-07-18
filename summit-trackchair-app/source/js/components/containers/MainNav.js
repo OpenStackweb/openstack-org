@@ -4,7 +4,7 @@ import URL from '../../utils/url';
 import LinkBar from '../ui/LinkBar';
 import LinkButton from '../ui/LinkButton';
 import {browserHistory} from 'react-router';
-
+import {toggleMobileMenu} from '../../actions';
 const MainNav = ({
 	activeLink,
 	onLinkClicked,
@@ -47,7 +47,8 @@ export default connect (
 		}
 	},
 	dispatch => ({
-		onLinkClicked (link) {		
+		onLinkClicked (link) {
+			dispatch(toggleMobileMenu(false));	
 			browserHistory.push(URL.create(link || '/'));
 		}
 	})

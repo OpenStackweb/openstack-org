@@ -2,7 +2,8 @@
 export const main = function (
 	state = {
 		errorMsg: null,
-		notification: null
+		notification: null,
+		mobileMenu: false
 	}, 
 	action = {}) {
 		switch(action.type) {
@@ -30,7 +31,11 @@ export const main = function (
 					...state,
 					notification: null
 				}
-				
+			case 'TOGGLE_MOBILE_MENU':
+				return {
+					...state,
+					mobileMenu: action.payload === undefined ? !state.mobileMenu : action.payload
+				};
 			default:
 				return state;
 
