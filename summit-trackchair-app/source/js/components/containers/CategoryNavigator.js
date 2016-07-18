@@ -21,6 +21,13 @@ const CategoryNavigator = ({
 export default connect(
 	state => {
 		const {categories} = state.summit.data;
+		categories.sort((a,b) => {
+			const aName = a.title.toUpperCase();
+			const bName = b.title.toUpperCase();
+
+			return aName > bName ? 1 : (aName < bName ? -1 : 0)
+		});
+		
 		let selectedText = categories.filter(c => (
 			c.id == state.routing.locationBeforeTransitions.query.category
 		));		
