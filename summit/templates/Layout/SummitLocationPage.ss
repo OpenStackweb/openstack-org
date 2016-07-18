@@ -24,12 +24,6 @@
                     Hotels &amp; Airport
                 </a>
             </li>
-            <!--<li>
-                <a href="#getting-around">
-                    <i class="fa fa-road"></i>
-                    Getting Around
-                </a>
-            </li>-->
             <% if TravelSupport  %>
                 <li>
                     <a href="#travel-support">
@@ -38,6 +32,12 @@
                     </a>
                 </li>
             <% end_if %>
+            <li>
+                <a href="/summit/barcelona-2016/travel/travel-tips">
+                    <i class="fa fa-road"></i>
+                    Travel Tips
+                </a>
+            </li>
             <% if VisaInformation  %>
             <li>
                 <a href="#visa">
