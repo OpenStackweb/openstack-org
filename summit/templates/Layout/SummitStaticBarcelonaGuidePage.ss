@@ -1,10 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-push-2 guide-header">
-			<h1>Local's Guide To Barcelona</h1>			
-			<p>
-				To discover what’s fueling Barcelona right now, look to new contemporary art museums and small galleries. Look to the bold tapas bars and buzzing night life rejuvenating outlying neighborhoods. Look to the new, but make time for old favorites too. <em>- New York Times</em>
-			</p>
+			<h1>Local's Guide To Barcelona</h1>	
 		</div>
 	</div>
 </div>
