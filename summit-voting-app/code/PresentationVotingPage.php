@@ -408,7 +408,7 @@ class PresentationVotingPage_API extends RequestHandler
     public function handleCategories(SS_HTTPRequest $r)
     {
         $result = [];
-        foreach ($this->summit->Categories()->filter('VotingVisible', true) as $c) {
+        foreach ($this->summit->getCategories()->filter('VotingVisible', true) as $c) {
             $result[] = [
                 'id' => $c->ID,
                 'title' => $c->Title

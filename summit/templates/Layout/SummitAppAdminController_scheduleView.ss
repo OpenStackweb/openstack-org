@@ -37,7 +37,7 @@
                  <% loop $PresentationSelectionStatusOptions %>
                     summit.selection_status_options.push("{$Status}");
                  <% end_loop %>
-                 <% loop $Summit.Categories.Sort(Title, ASC) %>
+                 <% loop $Summit.getCategories() %>
                  summit.tracks.push(
                  {
                     id: {$ID},

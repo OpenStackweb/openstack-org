@@ -116,7 +116,7 @@
                         <label for="track">Track</label>
                         <select class="form-control" id="track" name="track">
                             <option value="">-- Select a Track --</option>
-                            <% loop Summit.Categories() %>
+                            <% loop Summit.getCategories %>
                                 <option value="$ID" <% if $Top.Event.isPresentation() && $Top.Event.CategoryID == $ID %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
                         </select>

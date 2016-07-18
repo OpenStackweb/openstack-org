@@ -48,7 +48,7 @@
         };
         <% end_loop %>
 
-        <% loop $Summit.Categories %>
+        <% loop $Summit.getCategories() %>
         summit.tracks[{$ID}] =
         {
             id: {$ID},

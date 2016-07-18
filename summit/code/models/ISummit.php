@@ -279,6 +279,10 @@ interface ISummit extends IEntity
      */
     public function convertDateFromTimeZone2UTC($value, $format);
 
+    /**
+     * @return PresentationCategory[]
+     */
+    public function getCategories();
 
     /**
      * @return PrivatePresentationCategoryGroup[]

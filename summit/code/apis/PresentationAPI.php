@@ -44,7 +44,7 @@ class PresentationAPI extends Controller implements PermissionProvider {
 		$data['status'] = $summit->getStatus();
 		$data['categories'] = array ();
 
-		foreach($summit->Categories() as $c) {
+		foreach($summit->getCategories() as $c) {
 			$data['categories'][] = $c->toJSON();
 		}
 		

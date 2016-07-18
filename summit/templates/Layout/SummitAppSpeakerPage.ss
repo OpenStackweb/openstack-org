@@ -117,7 +117,7 @@
                             };
                             <% end_loop %>
 
-                            <% loop $Top.Summit.Categories %>
+                            <% loop $Top.Summit.getCategories %>
                             summit.tracks[{$ID}] =
                             {
                                 id: {$ID},

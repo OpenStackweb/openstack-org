@@ -36,7 +36,7 @@
             <% end_loop %>
 
         var tracks = [];
-            <% loop $Summit.Categories() %>
+            <% loop $Summit.getCategories() %>
                 tracks.push({
                     id: $ID,
                     title: "{$Title.JS}",

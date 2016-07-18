@@ -52,7 +52,7 @@
 
             <p><a href="summit/austin-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
 
-            <% loop ActiveSummit.Categories %>
+            <% loop ActiveSummit.getCategories %>
             <p>
                 <strong>$Title</strong><br/>
                 $Description
