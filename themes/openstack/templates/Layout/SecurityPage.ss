@@ -37,7 +37,7 @@
             <div class="container">
                 <div class="row">
                    <div class="col-xs-7 link-back">
-                        <a href="/enterprise/">< Enterprise Homepage</a>
+                        <a href="/software/">< Software Homepage</a>
                    </div>
                     <div class="col-xs-5">
                         <ul class="list-inline filters">
