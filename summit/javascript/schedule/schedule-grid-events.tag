@@ -10,7 +10,7 @@
 
         this.summit                   = opts.summit;
         this.events                   = [];
-        this.dic_events               = {};
+        this.dic_events               = [];
         this.schedule_filters         = opts.schedule_filters;
         this.search_url               = opts.search_url;
         this.schedule_api             = opts.schedule_api;
@@ -87,6 +87,9 @@
             });
 
             $(document).off("click",".gcal-synch").on("click",".gcal-synch", function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
                 var event_id = $(e.currentTarget).parents('.main-event-content').attr('data-event-id');
                 var event    = self.dic_events[event_id];
                 event.location = self.getSummitLocation(event);
@@ -105,15 +108,12 @@
                     $('.gcal-icon',$(this)).removeClass('icon-own-event').addClass('icon-foreign-event');
                     return false;
                 }
-
-                e.preventDefault();
-                e.stopPropagation();
             });
 
             $('.rsvp_form').validate({
-            errorPlacement: function(error, element) {
-            error.insertAfter($(element).closest('div'));
-            }
+                errorPlacement: function(error, element) {
+                    error.insertAfter($(element).closest('div'));
+                }
             });
 
             $(document).off("click", ".rsvp_submit").on( "click", ".rsvp_submit", function(e) {
@@ -163,7 +163,7 @@
             '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;calendar</span>'+
             '</div>' : '';
 
-            var cal_synch_container = '<div class="col-md-2 gcal-synch-container">'+
+            var cal_synch_container = self.summit.current_user !== null ? '<div class="col-md-2 gcal-synch-container">'+
             '<div class="btn-group">'+
             '<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
             'Synch to Cal'+
@@ -173,7 +173,7 @@
             '<a class="dropdown-item export_event search-link" href="">Export&nbsp;ICS</a>'+
             '</div>'+
             '</div>'+
-            '</div>';
+            '</div>' : '';
 
             var event_template = $(
             '<div class="col-md-12">'+
@@ -251,10 +251,6 @@
                 },
                 'span.start-time': 'event.start_time',
                 'span.end-time': 'event.end_time',
-                'a.export_event@href': function(arg){
-                    var event_id = +arg.item.id;
-                    return self.parent.base_url+'events/'+event_id+'/export_ics';
-                },
             };
 
             if(self.summit.current_user !== null ){
@@ -267,12 +263,16 @@
                     return item.id;
                 };
                 // GOOGLE CALENDAR SYNCH
-                event_directives['i.gcal-icon@class+']                   = function(arg){ return arg.item.gcal_id ? ' icon-own-event':' icon-foreign-event'; };
-                event_directives['a.gcal-synch@title']                = function(arg){ return arg.item.gcal_id ? 'unsynch from google calendar':'synch with google calendar'; };
-                event_directives['a.gcal-synch@data-event-id']        = function(arg){ return arg.item.id; };
+                event_directives['i.gcal-icon@class+']              = function(arg){ return arg.item.gcal_id ? ' icon-own-event':' icon-foreign-event'; };
+                event_directives['a.gcal-synch@title']              = function(arg){ return arg.item.gcal_id ? 'unsynch from google calendar':'synch with google calendar'; };
+                event_directives['a.gcal-synch@data-event-id']      = function(arg){ return arg.item.id; };
 
-                event_directives['a.gcal-synch@class+']               = function(arg){ return arg.item.gcal_id ? ' own':' foreign'; };
-                event_directives['span.icon-event-action@class+']        = function(arg){ return arg.item.own ? ' own':' foreign'; };
+                event_directives['a.gcal-synch@class+']             = function(arg){ return arg.item.gcal_id ? ' own':' foreign'; };
+                event_directives['span.icon-event-action@class+']   = function(arg){ return arg.item.own ? ' own':' foreign'; };
+                event_directives['a.export_event@href']             = function(arg){
+                                                                        var event_id = +arg.item.id;
+                                                                        return self.parent.base_url+'events/'+event_id+'/export_ics';
+                                                                      };
             }
 
             var directives = {
