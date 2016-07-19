@@ -209,7 +209,7 @@
                     <a href="http://superuser.openstack.org/articles/an-openstack-security-primer" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/read.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/security/featured1.jpg" alt="User success stories">
                     </div> 
@@ -222,7 +222,7 @@
                     <a href="http://superuser.openstack.org/articles/get-to-know-the-openstack-security-project" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/play-button.png">
+                            <img src="/themes/openstack/images/play-button.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/security/featured2.jpg" alt="Superuser TV interview with Travis McPeak, OpenStack Security Architect: Getting to Know the OpenStack Security Project">
                     </div>
@@ -235,7 +235,7 @@
                     <a href="http://www.openstack.org/analysts" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/read.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
                         <img class="video-image" src="/themes/openstack/images/security/featured3.jpg" alt="Analysts report OpenStack is Ready for Business">
                     </div>
@@ -260,7 +260,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="nfv-summit-right">
-                            <img class="nfv-summit-logo" src="/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/images/summit-logo-small.png" alt="OpenStack Summit">
+                            <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/summit-logo-small.png" alt="OpenStack Summit">
                             <div class="nfv-summit-dates">
                                 October 25-28 in Barcelona
                             </div>
