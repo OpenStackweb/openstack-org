@@ -52,7 +52,6 @@ class SummitTrackChair extends DataObject
         if (!$priorChair) {
             $chair = new self();
             $chair->MemberID = $member->ID;
-            $chair->SummitID = Summit::get_active()->ID;
             $chair->write();
             $chair->Categories()->add($category);
 
@@ -113,10 +112,11 @@ class SummitTrackChair extends DataObject
             return $valid;
         }
         
-        $old_one = SummitTrackChair::get()->filter([
-            'MemberID' => $this->MemberID,
-            'SummitID' => $summit_id
-        ])->first();
+        $old_one = Summit::get_active()
+        	->Categories()
+        	->relation('TrackChairs')
+        	->filter('MemberID', $this->MemberID)
+        	->first();
 
         if (!$old_one) {
             return $valid->error('Already exists a track chair for this member!');

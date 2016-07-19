@@ -289,11 +289,11 @@ class PresentationVotingPage_API extends RequestHandler
             ->filter('MemberID', Member::currentUserID())
             ->exists();
 
-        $userIsTrackChair = SummitTrackChair::get()->filter([
-            'MemberID' => Member::currentUserID(),
-            'SummitID' => $presentation->SummitID
-        ])->exists();
-
+        $userIsTrackChair = Summit::get_active()
+        	->Categories()
+        	->relation('TrackChairs')
+        	->filter('MemberID', Member::currentUserID())
+        	->exists();
 
         if ($userIsSpeaker || $userIsTrackChair || Permission::check('ADMIN')) {
             $json['all_comments'] = [];
