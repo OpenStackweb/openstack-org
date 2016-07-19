@@ -5,7 +5,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/project-navigator/">Project Navigator</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/sample-configs/">Sample Configs</a></li>
         <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>security/">Security</a></li>
+        <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/security/">Security</a></li>-->
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/start/">Get Started</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/roadmap/">Roadmap</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}<% if $CurrentLocale != 'en_US' %>$CurrentLocale/<% end_if %>software/latest-release/">Latest Release</a></li>
