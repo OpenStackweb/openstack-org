@@ -79,6 +79,7 @@ class Browse extends React.Component {
 
 	requestMore() {
 		this.props.fetchPresentations({
+			category: this.props.category,
 			page: this.props.currentPage+1
 		});
 	}

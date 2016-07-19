@@ -417,15 +417,17 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
         $page = $r->getVar('page') ?: 1;
 
-        $categories = SummitTrackChair::get()->filter([
-        		'MemberID' => Member::currentUserID()
-        	])
-	        ->first()
-	        ->Categories()
-	        ->filterByCallback(function($category) use ($summit) {
-        		return $summit->isPublicCategory($category);
-        	})
-        	->column('ID');
+        $track_chair = SummitTrackChair::get()->filter([
+            'MemberID' => Member::currentUserID()
+        ])->first();
+        $categories = [];
+
+        if($track_chair)
+            $categories = $track_chair->Categories()
+                ->filterByCallback(function($category) use ($summit) {
+                    return $summit->isPublicCategory($category);
+                })
+                ->column('ID');
 
         $changeRequests = SummitCategoryChange::get()
             ->innerJoin('Presentation', 'Presentation.ID = PresentationID')

@@ -1,7 +1,7 @@
 import 'babel/polyfill';
 import 'array.prototype.move';
 import 'array.prototype.find';
-import 'array.prototype.findIndex';
+import 'array.prototype.findindex';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 import './less/theme.less';
