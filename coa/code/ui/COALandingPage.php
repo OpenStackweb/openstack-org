@@ -19,14 +19,16 @@
 class COALandingPage extends Page
 {
     static $db = array(
-        'BannerText'   => 'HTMLText',
-        'ExamDetails'  => 'HTMLText',
-        'HandBookLink' => 'Text',
+        'BannerText'           => 'HTMLText',
+        'ExamDetails'          => 'HTMLText',
+        'HandBookLink'         => 'Text',
+        'GetStartedURL'        => 'Text',
+        'AlreadyRegisteredURL' => 'Text',
     );
 
     static $has_one = array
     (
-
+        'HeroImage' => 'BetterImage',
     );
 
     static $many_many = array
@@ -51,7 +53,6 @@ HTML;
         return $html;
     }
 
-
     public function getExamDetails(){
         $html = $this->getField('ExamDetails');
         if(empty($html)){
@@ -72,6 +73,30 @@ HTML;
         return $html;
     }
 
+    public function getGetStartedURL(){
+        $html = $this->getField('GetStartedURL');
+        if(empty($html)){
+            $html = "https://identity.linuxfoundation.org/openstack/pid/317";
+        }
+        return $html;
+    }
+
+    public function getAlreadyRegisteredURL(){
+        $html = $this->getField('AlreadyRegisteredURL');
+        if(empty($html)){
+            $html = 'https://identity.linuxfoundation.org/portal/openstack';
+        }
+        return $html;
+    }
+
+    public function getHeroImageUrl(){
+        $default_url = '/themes/openstack/images/coa/coa-bkgd2.jpg';
+        if($this->HeroImage()->exists()){
+            return $this->HeroImage()->Link();
+        }
+        return $default_url;
+    }
+
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -80,8 +105,17 @@ HTML;
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('BannerText', 'Banner Text'));
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('ExamDetails', 'Exam Details'));
         $fields->addFieldToTab('Root.Main', new TextField('HandBookLink', 'HandBook Link'));
+        $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL', 'Get Started URL'));
+        $fields->addFieldToTab('Root.Main', new TextField('AlreadyRegisteredURL', 'Already Registered URL'));
 
         if ($this->ID > 0) {
+
+            $logo_field = new UploadField('HeroImage', 'Hero Image');
+            $logo_field->setAllowedMaxFileNumber(1);
+            $logo_field->setAllowedFileCategories('image');
+            $logo_field->setFolderName('coa/hero_images/');
+            $logo_field->getValidator()->setAllowedMaxFileSize(1048576);
+            $fields->addFieldToTab('Root.Main', $logo_field);
 
             $config = GridFieldConfig_RelationEditor::create();
 
@@ -135,14 +169,14 @@ class COALandingPage_Controller extends Page_Controller
 
     public function getStarted(){
         if(Member::currentUser()){
-            $this->redirect(GET_STARTED_URL);
+            $this->redirect($this->GetStartedURL);
         }
         OpenStackIdCommon::doLogin($this->Link('get-started'));
     }
 
     public function alreadyRegistered(){
         if(Member::currentUser()){
-            $this->redirect(ALREADY_REGISTERED_URL);
+            $this->redirect($this->AlreadyRegisteredURL);
         }
         OpenStackIdCommon::doLogin($this->Link('already-registered'));
     }

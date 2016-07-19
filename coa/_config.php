@@ -11,6 +11,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-define('GET_STARTED_URL', 'https://identity.linuxfoundation.org/openstack/pid/317');
-define('ALREADY_REGISTERED_URL', 'https://identity.linuxfoundation.org/portal/openstack');
