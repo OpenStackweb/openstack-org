@@ -197,16 +197,16 @@
                     </p>
                 </div>
                 <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/openstack-magnum-containers-as-a-service" target="_blank">
+                    <a href="//www.openstack.org/assets/containers/LivePerson.pdf" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-3.jpg" alt="OpenStack Magnum - Containers-as-a-Service">
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-3.jpg" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
                     </div>
                     </a> 
                     <p class="video-title">
-                        OpenStack Magnum - Containers-as-a-Service
+                        Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson
                     </p>
                 </div>
                 <div class="col-sm-5ths">
@@ -223,7 +223,7 @@
                     </p>
                 </div>
                <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/blog/2015/07/google-bringing-container-expertise-to-openstack/" target="_blank">
+                    <a href="//www.openstack.org/blog/2015/07/google-bringing-container-expertise-to-openstack/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/read.png">
@@ -256,7 +256,7 @@
                             October 25-28 in Barcelona
                         </div> -->
                         <div class="containers-summit-register-btn">
-                            <a href="https://www.openstack.org/videos" class="nfv-summit-btn" target="_blank">Stream the sessions now <i class="fa fa-chevron-right"></i></a>
+                            <a href="//www.openstack.org/videos" class="nfv-summit-btn" target="_blank">Stream the sessions now <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
