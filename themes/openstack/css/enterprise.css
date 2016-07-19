@@ -1575,12 +1575,21 @@ img.global-figures-chart {
 
 .summit-promo {
   width: 100%; }
+.summit-promo {
+  background-size: cover;
+  padding: 60px 0 80px; }
+  .summit-promo h3 {
+    color: white; }
+  .summit-promo p {
+    color: white; }
   .summit-promo.containers {
     background: url('/themes/openstack/images/nfv/nfv-summit-bkgd.jpg') no-repeat center center;
     background-size: cover;
     padding: 60px 0 80px; 
     margin-bottom: -50px;
   }
+  .summit-promo.barcelona {
+  background: url('/themes/openstack/images/barcelona-bkgd-lrg.jpg') no-repeat center center; }
   .summit-promo.containers h3 {
     color: white; }
   .summit-promo.containers p {
