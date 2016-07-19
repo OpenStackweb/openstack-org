@@ -44,10 +44,13 @@ class TrackChairsPage_Controller extends Page_Controller
         $chair = new SummitTrackChair();
 
         if ($member) {
-            $chair = SummitTrackChair::get()->filter(array(
-                'MemberID' => $member->ID,
-                'SummitID' => Summit::get_active()->ID
-            ));
+        	$chair = Summit::get_active()
+        		->Categories()
+        		->relation('TrackChairs')
+        		->filter([
+        			'MemberID' => $member->ID
+        		])
+        		->first();
         }
 
         if ($chair->exists() || Permission::check('ADMIN')) {
