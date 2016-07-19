@@ -104,6 +104,7 @@ $(document).ready(function(){
 
     $('body').on('change','input[name=CategoryID][type=radio]',function () {
         $('#PresentationForm_PresentationForm_CategoryIDbis').val($(this).val());
+        getExtraQuestions();
     });
 
     if ($('#PresentationForm_PresentationForm_CategoryIDbis').val()) {
@@ -155,8 +156,12 @@ function getCategories() {
                 $('#category_options').html(html);
 
                 if (category_id_bis) {
-                    $('#PresentationForm_PresentationForm_CategoryID_'+category_id_bis).prop('checked',true);
+                    if ($('#PresentationForm_PresentationForm_CategoryID_'+category_id_bis).length) {
+                        $('#PresentationForm_PresentationForm_CategoryID_'+category_id_bis).prop('checked',true);
+                        getExtraQuestions();
+                    }
                 }
+
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert('there was an error, please contact your administrator');
@@ -177,6 +182,34 @@ function toggleFields() {
             $('#'+value).hide();
         }
     });
+}
+
+function getExtraQuestions() {
+    var summit_id = $('#PresentationForm_PresentationForm_SummitID').val();
+    var category_id_bis = $('#PresentationForm_PresentationForm_CategoryIDbis').val();
+    var presentation_id = $('#PresentationForm_PresentationForm_ID').val();
+    var url = 'api/v1/summits/'+summit_id+'/categories/'+category_id_bis+'/extra_questions/'+presentation_id;
+
+    if (category_id_bis) {
+        $.ajax({
+            type: 'GET',
+            url:  url,
+            timeout:120000,
+            dataType:'json',
+            success: function (data, textStatus, jqXHR) {
+                $.each(data,function(idx,val){
+                    if (val.InsertAfter == 'Last') {
+                        $('#PresentationForm_PresentationForm_ID').before(val.Html);
+                    } else {
+                        $('#'+val.InsertAfter).after(val.Html);
+                    }
+                });
+
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert('there was an error, please contact your administrator');
+        });
+    }
 }
 
 

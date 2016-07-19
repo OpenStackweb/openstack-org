@@ -147,6 +147,7 @@ class Presentation extends SummitEvent implements IPresentation
         'Comments' => 'SummitPresentationComment',
         'ChangeRequests' => 'SummitCategoryChange',
         'Materials' => 'PresentationMaterial',
+        'ExtraAnswers' => 'TrackAnswer',
     );
 
     /**
@@ -723,5 +724,22 @@ SQL;
     public function removeSpeaker(IPresentationSpeaker $speaker)
     {
         $this->getSpeakers()->remove($speaker);
+    }
+
+    /**
+     * @param ITrackQuestionTemplate $question
+     * @return ITrackAnswer
+     */
+    public function findAnswerByQuestion(ITrackQuestionTemplate $question)
+    {
+        foreach ($this->ExtraAnswers() as $answer) {
+            if($answer->question()->getIdentifier() === $question->getIdentifier()) {
+                if (!is_null($answer)) {
+                    return $answer;
+                }
+            }
+        }
+
+        return null;
     }
 }

@@ -38,6 +38,8 @@ final class PresentationForm extends BootstrapForm
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript('summit/javascript/presentation-form.js');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+
 
          parent::__construct(
             $controller, 
@@ -160,6 +162,30 @@ final class PresentationForm extends BootstrapForm
             $val = $field->Value();
             if(empty($val)) continue;
             $presentation->Materials()->add( PresentationLink::create(array('Link' => trim($val))));
+        }
+
+        $extra_questions = ($presentation->Category()->Exists()) ? $presentation->Category()->ExtraQuestions() : array();
+        foreach ($extra_questions as $question) {
+            $field = $this->fields->fieldByName($question->Name);
+            if(is_null($field)) continue;
+            $answer_value = $field->Value();
+            if(empty($answer_value)) continue;
+
+            if (!$answer = $presentation->findAnswerByQuestion($question)) {
+                $answer = new TrackAnswer();
+            }
+
+            if(is_array($answer_value) ){
+                $answer_value = str_replace('{comma}', ',', $answer_value);
+                $answer->Value = implode(',', $answer_value);
+            }
+            else{
+                $answer->Value = $answer_value;
+            }
+            $answer->QuestionID = $question->getIdentifier();
+            $answer->write();
+
+            $presentation->ExtraAnswers()->add($answer);
         }
     }
 

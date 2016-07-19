@@ -100,4 +100,10 @@ interface IPresentation extends ISummitEvent
      */
     public function removeSpeaker(IPresentationSpeaker $speaker);
 
+    /**
+     * @param ITrackQuestionTemplate $question
+     * @return ITrackAnswer
+     */
+    public function findAnswerByQuestion(ITrackQuestionTemplate $question);
+
 }

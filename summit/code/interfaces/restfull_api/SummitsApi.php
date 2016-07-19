@@ -132,22 +132,23 @@ final class SummitsApi extends AbstractRestfulJsonApi
     }
 
     static $url_handlers = array(
-        'GET $SUMMIT_ID/add-ons'                                  => 'getAllSponsorshipAddOnsBySummit',
-        'GET $SUMMIT_ID/packages'                                 => 'getAllSponsorshipPackagesBySummit',
-        'GET $SUMMIT_ID/tags'                                     => 'getTags',
-        'GET $SUMMIT_ID/companies'                                => 'getCompanies',
-        'GET $SUMMIT_ID/sponsors'                                 => 'getSponsors',
-        'GET $SUMMIT_ID/category_groups/$GROUP_ID/categories'     => 'getCategoriesByGroup',
-        '$SUMMIT_ID/speakers'                                     => 'handleSpeakers',
-        '$SUMMIT_ID/schedule'                                     => 'handleSchedule',
-        '$SUMMIT_ID/events'                                       => 'handleEvents',
-        '$SUMMIT_ID/attendees'                                    => 'handleAttendees',
-        '$SUMMIT_ID/members'                                      => 'handleMembers',
-        '$SUMMIT_ID/reports'                                      => 'handleReports',
-        '$SUMMIT_ID/locations'                                    => 'handleLocations',
-        '$SUMMIT_ID/registration-codes'                           => 'handleRegistrationCodes',
-        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/approve' => 'approvePurchaseOrder',
-        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject'  => 'rejectPurchaseOrder',
+        'GET $SUMMIT_ID/add-ons'                                     => 'getAllSponsorshipAddOnsBySummit',
+        'GET $SUMMIT_ID/packages'                                    => 'getAllSponsorshipPackagesBySummit',
+        'GET $SUMMIT_ID/tags'                                        => 'getTags',
+        'GET $SUMMIT_ID/companies'                                   => 'getCompanies',
+        'GET $SUMMIT_ID/sponsors'                                    => 'getSponsors',
+        'GET $SUMMIT_ID/categories/$CAT_ID/extra_questions/$PRES_ID' => 'getExtraQuestionsForPresentation',
+        'GET $SUMMIT_ID/category_groups/$GROUP_ID/categories'        => 'getCategoriesByGroup',
+        '$SUMMIT_ID/speakers'                                        => 'handleSpeakers',
+        '$SUMMIT_ID/schedule'                                        => 'handleSchedule',
+        '$SUMMIT_ID/events'                                          => 'handleEvents',
+        '$SUMMIT_ID/attendees'                                       => 'handleAttendees',
+        '$SUMMIT_ID/members'                                         => 'handleMembers',
+        '$SUMMIT_ID/reports'                                         => 'handleReports',
+        '$SUMMIT_ID/locations'                                       => 'handleLocations',
+        '$SUMMIT_ID/registration-codes'                              => 'handleRegistrationCodes',
+        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/approve'    => 'approvePurchaseOrder',
+        'PUT packages/purchase-orders/$PURCHASE_ORDER_ID/reject'     => 'rejectPurchaseOrder',
     );
 
     static $allowed_actions = array(
@@ -167,6 +168,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
         'handleLocations',
         'handleRegistrationCodes',
         'getCategoriesByGroup',
+        'getExtraQuestionsForPresentation',
     );
 
     // this is called when typing a tag name to add as a tag on edit event
@@ -435,6 +437,46 @@ final class SummitsApi extends AbstractRestfulJsonApi
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->serverError();
+        }
+    }
+
+    public function getExtraQuestionsForPresentation(SS_HTTPRequest $request){
+        try
+        {
+            $category_id      = intval($request->param('CAT_ID'));
+            $presentation_id  = intval($request->param('PRES_ID'));
+            $presentation     = null;
+            $summit_id        = intval($request->param('SUMMIT_ID'));
+            $summit           = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            if ($presentation_id) {
+                $presentation = Presentation::get_by_id('Presentation',$presentation_id);
+            }
+
+            $category = PresentationCategory::get_by_id('PresentationCategory',$category_id);
+            $extra_questions = $category->ExtraQuestions();
+            $question_map = array();
+            foreach ($extra_questions as $q) {
+                //builder
+                $type = $q->Type();
+                $builder_class = $type.'QuestionTemplateUIBuilder';
+                $builder = Injector::inst()->create($builder_class);
+                $answer = ($presentation) ? $presentation->findAnswerByQuestion($q) : null;
+                $field   = $builder->build($q, $answer);
+                $question_map[] = array('Name' => $q->Name,'InsertAfter' => $q->AfterQuestion, 'Html' => strval($field->FieldHolder()));
+            }
+
+            return $this->ok($question_map);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $ex->getMessage();
         }
     }
 

@@ -44,6 +44,7 @@ class PresentationCategory extends DataObject
 
     private static $many_many = array(
         'AllowedTags' => 'Tag',
+        'ExtraQuestions' => 'TrackQuestionTemplate',
     );
 
     private static $many_many_extraFields = array(
@@ -107,6 +108,26 @@ class PresentationCategory extends DataObject
 
             $tags = new GridField('AllowedTags', 'Tags', $this->AllowedTags(), $config);
             $fields->addFieldToTab('Root.Main', $tags);
+
+            // extra questions for call-for-presentations
+            $config = new GridFieldConfig_RelationEditor();
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+
+            $multi_class_selector->setClasses(
+                array
+                (
+                    'TrackTextBoxQuestionTemplate'           => 'TextBox' ,
+                    'TrackCheckBoxQuestionTemplate'          => 'CheckBox',
+                    'TrackCheckBoxListQuestionTemplate'      => 'CheckBoxList',
+                    'TrackRadioButtonListQuestionTemplate'   => 'RadioButtonList',
+                    'TrackDropDownQuestionTemplate'          => 'ComboBox',
+                    'TrackLiteralContentQuestionTemplate'    => 'Literal',
+                )
+            );
+            $config->addComponent($multi_class_selector);
+            $questions = new GridField('ExtraQuestions', 'Track Specific Questions', $this->ExtraQuestions(), $config);
+            $fields->addFieldToTab('Root.Main', $questions);
         }
 
         return $fields;
