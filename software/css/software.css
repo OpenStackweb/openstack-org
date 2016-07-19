@@ -1098,3 +1098,45 @@ img.openstack-diagram {
 .tooltip {
     background: none;
     white-space: nowrap; }
+
+img.security-badge {
+    width: 165px;
+    max-width: 100%;
+    height: auto;
+    margin: 5px auto;
+}
+.lf-security-promo {
+    background: #E6B900;
+    padding: 20px;
+    color: white;
+    border-radius: 4px;
+    margin-top: 30px;
+}
+.lf-security-promo h2 { 
+    color: white;
+    margin: 10px 0 15px;
+    font-size: 25px;
+    font-weight: 400;
+}
+@media (max-width: 767px) {
+  .lf-security-promo {
+    text-align: center;
+  }
+  .lf-security-promo h2 {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+a.security-promo-btn {
+  background: #2C84DC;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 7px 20px;
+  display: inline-block;
+  margin-top: 10px;
+}
+a.security-promo-btn:hover, a.security-promo-btn:focus {
+  background: #1753AA;
+  text-decoration: none;
+}

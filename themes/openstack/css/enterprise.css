@@ -1770,3 +1770,50 @@ a.path-options-btn {
     text-decoration: underline; }
     .tip a:hover {
       color: #30739C; }
+
+img.security-badge {
+  width: 190px;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto; 
+}
+.lf-security-promo {
+    background: #E6B900;
+    padding: 15px 0;
+    color: white;
+}
+.lf-security-promo h2 { 
+  color: white;
+  margin-top: 20px;
+}
+@media (min-width: 1200px) {
+  .lf-security-promo h2 {
+    margin-top: 35px;
+  }
+}
+@media (max-width: 767px) {
+  .lf-security-promo {
+    text-align: center;
+  }
+  .lf-security-promo h2 {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+a.security-promo-btn {
+  background: #2C84DC;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 7px 20px;
+  display: inline-block;
+  margin-top: 10px;
+}
+a.security-promo-btn:hover, a.security-promo-btn:focus {
+  background: #1753AA;
+  text-decoration: none;
+}
+a.security-promo-btn i {
+  color: white;
+  margin-left: 3px;
+}

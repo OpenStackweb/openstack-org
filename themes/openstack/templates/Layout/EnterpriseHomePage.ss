@@ -107,6 +107,24 @@
             </div>
         </div>
     </div>
+    <div class="lf-security-promo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 center">
+                    <img class="security-badge" src="//openstack.org/themes/openstack/images/security/badge.png" alt="">
+                </div>
+                <div class="col-sm-9">
+                    <h2>OpenStack security experts answer your questions</h2>
+                    <p>
+                        The Security Project team lives and breathes cloud security and answers the most frequently asked questions from enterprises and technologists. The Linux Foundation's Core Infrastructure Initiative has validated OpenStack passes 100% of the best practices for open source security, quality and stability and has issued its Best Practices badge.
+                    </p>
+                    <p>
+                        <a href="/software/security/" class="security-promo-btn">Learn More <i class="fa fa-chevron-circle-right"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="featured-use-case-wrapper light-blue">
        <div class="container">
             <div class="row section-title-center">
