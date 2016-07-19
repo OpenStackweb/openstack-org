@@ -1,0 +1,137 @@
+===========================
+#openstack-meeting: telcowg
+===========================
+
+
+Meeting started by sgordon_ at 22:00:21 UTC.  The full logs are
+available at
+http://eavesdrop.openstack.org/meetings/telcowg/2014/telcowg.2014-11-26-22.00.log.html
+.
+
+
+
+Meeting summary
+---------------
+
+* roll call  (sgordon_, 22:00:32)
+
+* use cases  (sgordon_, 22:01:33)
+  * LINK: http://eavesdrop.openstack.org/meetings/telcowg/2014/
+    (sgordon_, 22:02:03)
+  * LINK: https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases
+    (sgordon_, 22:04:33)
+  * LINK:
+    http://www.etsi.org/deliver/etsi_gs/NFV/001_099/001/01.01.01_60/gs_NFV001v010101p.pdf
+    (sgordon_, 22:11:41)
+  * "ijw> Look - when it comes down to it a use case really needs to be
+    described by either (a) a vendor with a widget who for whatever
+    reason has some difficulty running it on stock openstack or (b) a
+    telco who has a widget from somewhere and wants to describe what
+    they would *like* to do with it rather than what's possible today"
+    (sgordon_, 22:15:25)
+  * Start with "I want" use cases on the wiki and let people argue the
+    implementation at the bottom or at least pass comment in an etherpad
+    (sgordon_, 22:18:31)
+  * ACTION: sgordon to add a section to top of
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases with
+    guidance from this discussion on how to frame use cases  (sgordon_,
+    22:24:04)
+  * ACTION: jrakerevelant to document desire to integrate physical
+    interfaces 'like eNode Bs' and current approaches as a use case
+    (sgordon_, 22:25:28)
+  * LINK:
+    https://blueprints.launchpad.net/neutron/+spec/cloud-edge-networking
+    (ijw, 22:26:48)
+  * LINK:
+    https://blueprints.launchpad.net/neutron/+spec/cloud-edge-networking
+    (sgordon_, 22:26:59)
+  * LINK: https://review.openstack.org/#/c/136555/  (ijw, 22:27:21)
+  * ACTION: sgordon to issue call for use cases via M/L once UseCases
+    page updated  (sgordon_, 22:28:02)
+
+* vlan trunking redux  (sgordon_, 22:29:37)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/nfv-vlan-trunks
+    (ijw, 22:29:39)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/nfv-vlan-trunks
+    (sgordon_, 22:29:45)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/vlan-aware-vms
+    (ijw, 22:30:06)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/vlan-aware-vms
+    (sgordon_, 22:30:13)
+  * LINK: https://review.openstack.org/#/c/136554/  (sgordon_, 22:32:31)
+  * LINK: https://review.openstack.org/#/c/94612/  (sgordon_, 22:33:47)
+  * specs are up for review and need concerted review bandwidth and
+    turnarounds  (sgordon_, 22:35:08)
+  * ACTION: sgordon to ask maru about -2 on
+    https://review.openstack.org/#/c/94612/  (sgordon_, 22:35:16)
+  * ijw working on spec for MTU specification and discovery  (sgordon_,
+    22:36:28)
+  * use cases caveats need to be added around ability of OpenStack CI to
+    measure certain performance rate requirements etc.  (sgordon_,
+    22:39:19)
+  * LINK: http://osdir.com/ml/openstack-dev/2014-11/msg00602.html is the
+    thread for testing  (ijw, 22:41:17)
+  * LINK:
+    http://lists.openstack.org/pipermail/openstack-dev/2014-November/050469.html
+    (sgordon_, 22:41:41)
+  * LINK: https://review.openstack.org/#/c/128825/  (sgordon_, 22:43:09)
+  * LINK:
+    http://lists.openstack.org/pipermail/openstack-dev/2014-November/051561.html
+    (sgordon_, 22:49:33)
+  * PXE, much confusion, need documented use case  (sgordon_, 22:54:00)
+  * LINK:
+    https://wiki.openstack.org/w/index.php?title=TelcoWorkingGroup/Glossary&action=edit&redlink=1
+    (sgordon_, 22:54:56)
+
+* orchestration  (sgordon_, 22:55:14)
+  * LINK:
+    http://lists.openstack.org/pipermail/openstack-dev/2014-November/051473.html
+    (sgordon_, 22:55:28)
+  * defining what NFV orchestration really means in an
+    openstack-specific way continues to be a challenge :)  (sgordon_,
+    23:01:11)
+  * "ijw>  split the definition into 'internal' and 'external'
+    orchestration, for want of a better word.  One provides a cloud API
+    to something that is not itself cloudy (a widget, a server) and one
+    looks after applications"  (sgordon_, 23:02:33)
+
+
+
+Meeting ended at 23:03:04 UTC.
+
+
+
+Action items, by person
+-----------------------
+
+* jrakerevelant
+  * jrakerevelant to document desire to integrate physical interfaces
+    'like eNode Bs' and current approaches as a use case
+* openstack
+  * sgordon to add a section to top of
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases with
+    guidance from this discussion on how to frame use cases
+  * sgordon to ask maru about -2 on
+    https://review.openstack.org/#/c/94612/
+
+
+
+People present (lines said)
+---------------------------
+
+* sgordon_ (178)
+* ijw (81)
+* aveiga (67)
+* jrakerevelant (41)
+* adrian-hoban__ (12)
+* ian_ott (5)
+* openstack (4)
+* amitry (3)
+* gokrokve (1)
+* clarkb (1)
+* smazziotta (1)
+* dgollub1 (1)
+
+
+
+Generated by `MeetBot`_ 0.1.4

@@ -1,0 +1,163 @@
+===============================
+#openstack-meeting-alt: telcowg
+===============================
+
+
+Meeting started by sgordon at 14:01:23 UTC.  The full logs are available
+at
+http://eavesdrop.openstack.org/meetings/telcowg/2014/telcowg.2014-12-17-14.01.log.html
+.
+
+
+
+Meeting summary
+---------------
+
+* roll call  (sgordon, 14:01:31)
+  * LINK: https://etherpad.openstack.org/p/nfv-meeting-agenda  (sgordon,
+    14:01:53)
+
+* Meeting Times for holiday period  (sgordon, 14:02:58)
+  * No meeting December 24th and 31st, next meeting will be January 7th
+    2014.  (sgordon, 14:04:38)
+
+* Actions from last week  (sgordon, 14:04:48)
+  * sgordon_ was to attempt to frame an email to OPNFV tech lists
+    highlighting the concern jaypipes raised wrt to alignment w/
+    openstack  (sgordon, 14:05:19)
+  * LINK:
+    http://lists.opnfv.org/pipermail/opnfv-tsc/2014-December/000387.html
+    (sgordon, 14:05:41)
+  * Russell and Jay have been invited to present to the OPNFV TSC on
+    interacting with the OpenStack community successfully  (sgordon,
+    14:07:49)
+  * mkoderer and DaSchab were to work on security segregation (dmz/mz
+    concept), VNF instantiation and seperation of Infra/App
+    Orchestration use case  (sgordon, 14:10:06)
+  * DaSchab notes some progress on writing up these use cases but
+    delayed due to holiday season  (sgordon, 14:11:25)
+  * ACTION: DaSchab aiming to get initial draft on wiki by end of next
+    week  (sgordon, 14:12:54)
+  * ACTION: rprakash adding Mobile Network use case for GTP tunneling
+    and will bring it next week  (sgordon, 14:13:29)
+
+* Use Cases  (sgordon, 14:13:43)
+  * LINK: https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases
+    (sgordon, 14:14:07)
+  * current use cases listed are VPN Instantiation, Session Border
+    Controller, Virtual IMS Core, Access to physical network resources
+    (sgordon, 14:15:36)
+  * do we want to address biggest pain or quick wins for analysis?
+    (sgordon, 14:19:28)
+  * current use cases do not present a challenge on data plane side
+    (perhaps need to solicit vCPE use case?)  (sgordon, 14:20:02)
+  * ACTION: ybabenko to draft a service chaining use case for future
+    discussion  (sgordon, 14:21:42)
+  * LINK: https://review.openstack.org/#/c/93524  (sgordon, 14:22:43)
+  * LINK:
+    https://blueprints.launchpad.net/group-based-policy/+spec/group-based-policy-service-chaining
+    (sgordon, 14:25:36)
+  * ACTION: sgordon to send email to kick off discussion about which use
+    case to pick for next meeting  (sgordon, 14:27:12)
+
+* Design and Implementation  (sgordon, 14:28:35)
+
+* Design and Implementation - VLAN trunking  (sgordon, 14:29:01)
+  * LINK: https://review.openstack.org/#/c/136554/  (sgordon, 14:29:07)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/nfv-vlan-trunks
+    (sgordon, 14:29:11)
+  * LINK:
+    http://docs-draft.openstack.org/54/136554/3/check//gate-neutron-specs-docs/f4bea33//doc/build/html/specs/kilo/nfv-vlan-trunks.html
+    (sgordon, 14:29:19)
+  * LINK: https://review.openstack.org/#/c/105989/  (sgordon, 14:30:16)
+  * need reviews on VLAN trunking spec (
+    https://review.openstack.org/#/c/136554/ ) and MTU selection and
+    advertisement spec ( https://review.openstack.org/#/c/105989/ )
+    (sgordon, 14:30:58)
+  * MTU selection and advertisement spec covers telling you if your app
+    is going to run, and where the networking is capable of adapting you
+    can tell it which driver you want. It does not explain how to set
+    jumbo frames up - a cloud has them or it doesn't and there is
+    limited ability to do anything about this at the API level.
+    (sgordon, 14:35:18)
+  * LINK:
+    https://review.openstack.org/#/c/105989/6/specs/kilo/mtu-selection-and-advertisement.rst
+    (sgordon, 14:35:54)
+  * LINK:
+    http://docs-draft.openstack.org/89/105989/6/check//gate-neutron-specs-docs/9169e72//doc/build/html/specs/kilo/mtu-selection-and-advertisement.html
+    (sgordon, 14:36:26)
+
+* Design and Implementation - ML2 port security extension  (sgordon,
+  14:37:39)
+  * LINK: https://review.openstack.org/#/c/99873/  (sgordon, 14:37:47)
+  * LINK:
+    https://blueprints.launchpad.net/neutron/+spec/ml2-ovs-portsecurity
+    (sgordon, 14:37:52)
+  * LINK:
+    http://docs-draft.openstack.org/73/99873/14/check/gate-neutron-specs-docs/42051c8/doc/build/html/specs/kilo/ml2-ovs-portsecurity.html
+    (sgordon, 14:38:00)
+  * needs neutron driver input  (sgordon, 14:40:22)
+
+* Design and Implementation - I/O based scheduling  (sgordon, 14:42:48)
+  * LINK:
+    https://review.openstack.org/#/q/topic:bp/input-output-based-numa-scheduling,n,z
+    (sgordon, 14:42:54)
+  * pczesno working on updates, will re-propose by end of week
+    (sgordon, 14:45:46)
+
+* Design and Implementation - Pluggable VIF driver  (sgordon, 14:46:08)
+  * LINK:
+    http://lists.openstack.org/pipermail/openstack-dev/2014-December/052509.html
+    (sgordon, 14:46:47)
+  * LINK:
+    http://lists.openstack.org/pipermail/openstack-dev/2014-December/052838.html
+    (sgordon, 14:47:18)
+  * How does VIF proposal work with regards to Ironic?  (sgordon,
+    14:54:03)
+  * LINK: https://review.openstack.org/#/c/141791/  (sgordon, 14:56:16)
+
+* other business  (sgordon, 14:56:47)
+
+
+
+Meeting ended at 15:01:42 UTC.
+
+
+
+Action items, by person
+-----------------------
+
+* DaSchab
+  * DaSchab aiming to get initial draft on wiki by end of next week
+* sgordon
+  * sgordon to send email to kick off discussion about which use case to
+    pick for next meeting
+* ybabenko
+  * ybabenko to draft a service chaining use case for future discussion
+
+
+
+People present (lines said)
+---------------------------
+
+* sgordon (160)
+* ybabenko (28)
+* ijw (24)
+* aveiga (15)
+* DaSchab (10)
+* smazziot (8)
+* jaypipes (7)
+* openstack (5)
+* irenab (3)
+* pczesno (2)
+* amitry (2)
+* adrian-hoban_ (2)
+* cloudon (2)
+* smazziotta (2)
+* gcossu (2)
+* adrian-hoban (1)
+* beagles (1)
+
+
+
+Generated by `MeetBot`_ 0.1.4

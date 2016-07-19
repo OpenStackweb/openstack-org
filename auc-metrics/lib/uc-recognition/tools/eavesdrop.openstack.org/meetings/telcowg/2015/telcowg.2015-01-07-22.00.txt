@@ -1,0 +1,148 @@
+===========================
+#openstack-meeting: telcowg
+===========================
+
+
+Meeting started by steveg at 22:00:21 UTC.  The full logs are available
+at
+http://eavesdrop.openstack.org/meetings/telcowg/2015/telcowg.2015-01-07-22.00.log.html
+.
+
+
+
+Meeting summary
+---------------
+
+* LINK: https://wiki.openstack.org/wiki/TelcoWorkingGroup  (steveg,
+  22:00:29)
+* LINK: https://etherpad.openstack.org/p/nfv-meeting-agenda  (steveg,
+  22:00:34)
+* roll call  (steveg, 22:00:39)
+
+* action items from last meeting  (steveg, 22:02:07)
+  * DaSchab was aiming to get an initial use case draft on wiki by end
+    of next week  (steveg, 22:02:24)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#Security_Segregation_.28Placement_Zones.29
+    (steveg, 22:02:31)
+  * rprakash was adding Mobile Network use case for GTP tunneling and
+    will bring it next week  (steveg, 22:03:56)
+  * (a) zones of differing workload security: yes, it's not
+    telco-specific, but worth tracking and recording telco use cases
+    thereof  (steveg, 22:11:50)
+  * (b) zones in different security domains on the network - probably
+    something we should consider making recommendations about - best
+    practices --> ops guide?  (steveg, 22:12:07)
+
+* use cases  (steveg, 22:12:49)
+
+* use cases - service chaining  (steveg, 22:13:00)
+  * LINK: https://etherpad.openstack.org/p/kKIqu2ipN6  (steveg,
+    22:13:24)
+
+* design and implementation  (steveg, 22:14:56)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/nfv-vlan-trunks
+    (steveg, 22:15:18)
+  * LINK:
+    https://blueprints.launchpad.net/neutron/+spec/mtu-selection-and-advertisement
+    (steveg, 22:15:24)
+  * VLAN trunking and MTU advertisement/selection specs approved -
+    implementation starting up atm  (steveg, 22:16:48)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/port-mirroring
+    (steveg, 22:17:41)
+  * LINK: https://review.openstack.org/#/c/96149/  (steveg, 22:17:46)
+  * port mirroring/tap-as-a-service spec not approved for kilo,
+    questions about implementation outstanding and whether functionality
+    belongs in neutron core or as an external advanced service project
+    (steveg, 22:20:08)
+  * MPLS and edge networking proposals both stalled, so if they happen
+    they'll be in stackforge and there's no sign of that for either
+    right now  (steveg, 22:26:52)
+  * recently formed L2Gateway team - definition of L2 gateway is a
+    programmable virtual-network-to-outside gateway, probably initially
+    for VLANs only - and that's meeting on Mondays, there's another one
+    next week  (steveg, 22:27:14)
+  * LINK: https://wiki.openstack.org/wiki/Meetings/L2Gateway  (steveg,
+    22:27:27)
+  * need to consolidate use cases for L2 gateways of all types so that
+    at least which are/aren't being addressed can be stated  (steveg,
+    22:30:16)
+  * mpls-vpn stackforge project in the process of being created
+    (steveg, 22:30:39)
+
+* use cases  (steveg, 22:31:04)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#VPN_Instantiation
+    (steveg, 22:32:16)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#Session_Border_Controller
+    (steveg, 22:32:25)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#Session_Border_Controller
+    (steveg, 22:32:36)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#Virtual_IMS_Core
+    (steveg, 22:32:43)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#Access_to_physical_network_resources
+    (steveg, 22:32:49)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#Security_Segregation_.28Placement_Zones.29
+    (steveg, 22:32:55)
+  * ACTION: steveg to send out a brief survey monkey to the list and we
+    select one to review at next week's meeting in detail  (steveg,
+    22:35:04)
+
+* ops midcycle meetup  (steveg, 22:35:39)
+  * LINK: https://etherpad.openstack.org/p/PHL-ops-meetup  (steveg,
+    22:35:42)
+  * LINK:
+    http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators
+    (steveg, 22:39:08)
+  * Opportunity for F2F at operators mid-cycle meetup - potential topics
+    are use cases, how the group is/isn't working, outreach  (steveg,
+    22:44:01)
+  * Need to determine how many Telco WG participants are attending
+    (steveg, 22:44:11)
+  * ACTION: amitry to cross reference ops mid-cycle signups with telco
+    wg participants to determine crossover  (steveg, 22:51:03)
+
+* other discussion  (steveg, 22:51:14)
+  * Ecosystem and Collateral Meeting 12 PM US EST / 9 AM US PST January
+    8th - Access: (888) 875-9370, Bridge: 3; PC: 7053780  (steveg,
+    22:53:21)
+
+
+
+Meeting ended at 22:54:26 UTC.
+
+
+
+Action items, by person
+-----------------------
+
+* amitry
+  * amitry to cross reference ops mid-cycle signups with telco wg
+    participants to determine crossover
+* steveg
+  * steveg to send out a brief survey monkey to the list and we select
+    one to review at next week's meeting in detail
+
+
+
+People present (lines said)
+---------------------------
+
+* steveg (123)
+* ijw (37)
+* amitry (16)
+* margaret__ (7)
+* SridharRamaswamy (7)
+* cloudon (5)
+* openstack (5)
+* barrett1 (2)
+* dneary (1)
+
+
+
+Generated by `MeetBot`_ 0.1.4

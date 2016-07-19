@@ -1,0 +1,146 @@
+===========================
+#openstack-meeting: telcowg
+===========================
+
+
+Meeting started by sgordon_ at 22:00:26 UTC.  The full logs are
+available at
+http://eavesdrop.openstack.org/meetings/telcowg/2014/telcowg.2014-12-10-22.00.log.html
+.
+
+
+
+Meeting summary
+---------------
+
+* roll call  (sgordon_, 22:00:34)
+  * LINK: https://etherpad.openstack.org/p/nfv-meeting-agenda
+    (sgordon_, 22:00:49)
+
+* use cases  (sgordon_, 22:02:27)
+  * LINK:
+    https://wiki.openstack.org/wiki/TelcoWorkingGroup/UseCases#VPN_Instantiation
+    (sgordon_, 22:03:03)
+  * cloudon comments "would be good to understand the locality criteria
+    a bit more" w.r.t. vpn instantiation use case  (sgordon_, 22:05:24)
+  * potentially wider applicability for concepts such as "network
+    nearness"  (sgordon_, 22:05:55)
+  * ACTION: mkoderer and DaSchab to work on security segregation (dmz/mz
+    concept), VNF instantiation and seperation of Infra/App
+    Orchestration  (sgordon_, 22:08:42)
+  * ACTION: rprakash adding Mobile Network use case for GTP tunneling
+    and will bring it next week  (sgordon_, 22:09:08)
+
+* orchestration  (sgordon_, 22:11:54)
+
+* Requirement Definition  (sgordon_, 22:14:27)
+  * aveiga suggests picking one use case per week for review, add an
+    etherpad link for it in the wiki and use the week to go over gaps,
+    what's planned, what's not, define success criteria  (sgordon_,
+    22:19:17)
+  * need a way to make sure original use case submitter is involved in
+    future discussion, need an irc nick or email along with the name on
+    the wiki  (sgordon_, 22:24:01)
+
+* Design and Implementation  (sgordon_, 22:25:50)
+  * LINK:
+    http://docs-draft.openstack.org/54/136554/1/check/gate-neutron-specs-docs/53623cb/doc/build/html/specs/kilo/nfv-vlan-trunks.html
+    (sgordon_, 22:26:56)
+  * LINK: https://blueprints.launchpad.net/neutron/+spec/nfv-vlan-trunks
+    (sgordon_, 22:28:01)
+  * LINK: https://review.openstack.org/#/c/136554/  (sgordon_, 22:28:05)
+
+* Design and Implementation - ML2 port sec extension  (sgordon_,
+  22:28:46)
+  * LINK:
+    http://docs-draft.openstack.org/73/99873/14/check/gate-neutron-specs-docs/42051c8/doc/build/html/specs/kilo/ml2-ovs-portsecurity.html
+    (sgordon_, 22:28:53)
+  * LINK:
+    https://blueprints.launchpad.net/neutron/+spec/ml2-ovs-portsecurity
+    (sgordon_, 22:28:59)
+  * LINK: https://review.openstack.org/#/c/99873/  (sgordon_, 22:29:04)
+
+* Design and Implementation - cpu pinning and large pages  (sgordon_,
+  22:30:33)
+  * LINK:
+    https://review.openstack.org/#/q/status:open+project:openstack%2Fnova+topic:bp%2Fvirt-driver-large-pages,n,z
+    (sgordon_, 22:31:07)
+  * LINK:
+    https://review.openstack.org/#/q/status:open+project:openstack%2Fnova+topic:bp%2Fvirt-driver-cpu-pinning,n,z
+    (sgordon_, 22:31:12)
+  * some concerns about suggestion of removing the linux bridge from the
+    network path in ML2 port security spec proposal comments  (sgordon_,
+    22:34:19)
+  * cloudon notes: 1) "if pps through the network stack is the concern,
+    agree removing the linux bridge helps, but still won't get you to
+    anything ike the perf of a DPDK-accel vswitch" 2) "also statement
+    that service VMs won't need security support is... debatable"
+    (sgordon_, 22:34:38)
+  * concern about balance of optimization versus effectively removing a
+    feature  (sgordon_, 22:35:02)
+  * may be better suited to an additional bug or feature request against
+    final implementation  (sgordon_, 22:37:24)
+
+* other discussion  (sgordon_, 22:37:28)
+
+* OPNFV and OpenStack overlap/divergence?  (sgordon_, 22:38:34)
+  * "From jaypipes: Why does there seem to be completely parallel and
+    duplicative efforts and conversations going on in the OPNFV mailing
+    lists and sites? What is going to be done to bring alignment between
+    folks from OpenStack and folks from OPNFV working towards common
+    goals?"  (sgordon_, 22:38:44)
+  * LINK:
+    https://wiki.opnfv.org/requirements_projects/doctor_fault_mangement_and_maintenance
+    (sgordon_, 22:49:10)
+  * ACTION: sgordon_ to attempt to frame an email to OPNFV tech lists
+    highlighting the concern jaypipes raised wrt to alignment w/
+    openstack  (sgordon_, 22:55:32)
+
+* other business  (sgordon_, 22:57:02)
+
+
+
+Meeting ended at 22:59:12 UTC.
+
+
+
+Action items, by person
+-----------------------
+
+* jaypipes
+  * sgordon_ to attempt to frame an email to OPNFV tech lists
+    highlighting the concern jaypipes raised wrt to alignment w/
+    openstack
+* openstack
+  * sgordon_ to attempt to frame an email to OPNFV tech lists
+    highlighting the concern jaypipes raised wrt to alignment w/
+    openstack
+* sgordon_
+  * sgordon_ to attempt to frame an email to OPNFV tech lists
+    highlighting the concern jaypipes raised wrt to alignment w/
+    openstack
+* **UNASSIGNED**
+  * mkoderer and DaSchab to work on security segregation (dmz/mz
+    concept), VNF instantiation and seperation of Infra/App
+    Orchestration
+  * rprakash adding Mobile Network use case for GTP tunneling and will
+    bring it next week
+
+
+
+People present (lines said)
+---------------------------
+
+* sgordon_ (147)
+* aveiga (28)
+* cloudon (16)
+* zhipeng (11)
+* openstack (5)
+* jaypipes (2)
+* r-mibu (1)
+* amitry (1)
+* amitry1 (1)
+
+
+
+Generated by `MeetBot`_ 0.1.4
