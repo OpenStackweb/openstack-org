@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class GridFieldAddDefaultCategoryTags implements GridField_HTMLProvider, GridField_URLHandler, GridField_ActionProvider {
+class GridFieldUpdateDefaultCategoryTags implements GridField_HTMLProvider, GridField_URLHandler, GridField_ActionProvider {
 
     protected $targetFragment;
 
     private static $allowed_actions = array(
-        'handleAddDefaultCategoryTags'
+        'handleUpdateDefaultCategoryTags'
     );
 
     public function __construct($targetFragment = 'before') {
@@ -28,9 +28,9 @@ class GridFieldAddDefaultCategoryTags implements GridField_HTMLProvider, GridFie
     public function getHTMLFragments($gridField) {
         $button = new GridField_FormAction(
             $gridField,
-            'defaultCategoryTags',
-            'Add Default Category Tags',
-            'addDefaultCategoryTags',
+            'updateDefaultCategoryTags',
+            'Update All Categories',
+            'updateDefaultCategoryTags',
             null
         );
         $button->setAttribute('data-icon', 'chain--plus');
@@ -47,29 +47,42 @@ class GridFieldAddDefaultCategoryTags implements GridField_HTMLProvider, GridFie
     public function getURLHandlers($gridField)
     {
         return array(
-            'addDefaultCategoryTags' => 'handleAddDefaultCategoryTags'
+            'updateDefaultCategoryTags' => 'handleUpdateDefaultCategoryTags'
         );
     }
 
-    public function handleAddDefaultCategoryTags($grid, $request, $data = null) {
+    public function handleUpdateDefaultCategoryTags($grid, $request, $data = null) {
 
-        $category_id = intval($request->param('ID'));
-        if($category_id > 0 && $category = PresentationCategory::get()->byID($category_id))
-        {
-            PresentationCategory::seedTags($category_id);
+        $summit_id = intval($request->param('ID'));
+        if($summit_id > 0 && $summit = Summit::get()->byID($summit_id)) {
+            $default_tags = $summit->CategoryDefaultTags();
+            foreach($summit->Categories() as $category) {
+                $category_tags = $category->AllowedTags();
+                foreach ($default_tags as $dtag) {
+                    $found_tag = $category_tags->find('TagID',$dtag->TagID);
+                    if ($found_tag && $found_tag->Group == $dtag->Group ) continue;
+
+                    if (!$found_tag) {
+                        $found_tag = $dtag;
+                    }
+                    $category->AllowedTags()->remove($found_tag);
+                    $category->AllowedTags()->add($found_tag,array('Group' => $dtag->Group));
+                }
+
+            }
         }
     }
 
 
     public function getActions($gridField) {
-        return array('addDefaultCategoryTags');
+        return array('updateDefaultCategoryTags');
     }
 
 
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
-        if($actionName == 'adddefaultcategorytags') {
-            return $this->handleAddDefaultCategoryTags($gridField,Controller::curr()->getRequest(), $data);
+        if($actionName == 'updatedefaultcategorytags') {
+            return $this->handleUpdateDefaultCategoryTags($gridField,Controller::curr()->getRequest(), $data);
         }
     }
 }

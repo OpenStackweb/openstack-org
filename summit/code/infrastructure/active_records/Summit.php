@@ -96,6 +96,20 @@ final class Summit extends DataObject implements ISummit
     /**
      * @var array
      */
+    private static $many_many = array
+    (
+        'CategoryDefaultTags' => 'Tag',
+    );
+
+    private static $many_many_extraFields = array(
+        'CategoryDefaultTags' => array(
+            'Group' => "Enum('topics, speaker, openstack projects mentioned', 'topics')", // if change see also getcms
+        ),
+    );
+
+    /**
+     * @var array
+     */
     private static $summary_fields = array
     (
         'Title' => 'Title',
@@ -1101,6 +1115,31 @@ final class Summit extends DataObject implements ISummit
             $config = GridFieldConfig_RecordEditor::create(25);
             $categories = new GridField('Categories', 'Presentation Categories', $this->getCategories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
+
+            $config = GridFieldConfig_RelationEditor::create(25);
+            $config->removeComponentsByType(new GridFieldDataColumns());
+            $config->removeComponentsByType(new GridFieldDetailForm());
+            $config->addComponent(new GridFieldUpdateDefaultCategoryTags);
+            $default_tags = new GridField('CategoryDefaultTags', 'Category Default Tags', $this->CategoryDefaultTags(), $config);
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setResultsFormat('$Tag');
+            $completer->setSearchFields(array('Tag'));
+            $completer->setSearchList(Tag::get());
+            $editconf = new GridFieldDetailForm();
+            $editconf->setFields(FieldList::create(
+                TextField::create('Tag','Tag'),
+                DropdownField::create('ManyMany[Group]', 'Group', array(
+                    'topics' => 'Topics',
+                    'speaker' => 'Speaker',
+                    'openstack projects mentioned' => 'OpenStack Projects Mentioned'))
+            ));
+
+            $summaryfieldsconf = new GridFieldDataColumns();
+            $summaryfieldsconf->setDisplayFields(array( 'Tag' => 'Tag', 'Group' => 'Group'));
+
+            $config->addComponent($editconf);
+            $config->addComponent($summaryfieldsconf, new GridFieldFilterHeader());
+            $f->addFieldToTab('Root.Presentation Categories', $default_tags);
 
             // track groups
             $config = GridFieldConfig_RecordEditor::create(25);
