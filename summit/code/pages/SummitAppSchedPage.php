@@ -121,9 +121,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript('themes/openstack/bower_assets/pure-templates/libs/pure.min.js');
         // GOOGLE CALENDAR
-
-        Requirements::javascript('summit/javascript/schedule/google-calendar.js');
         Requirements::customScript(" var CLIENT_ID = '".GAPI_CLIENT."';");
+        Requirements::javascript('summit/javascript/schedule/google-calendar.js');
         Requirements::javascript('https://apis.google.com/js/client.js?onload=checkAuth');
 
     }
