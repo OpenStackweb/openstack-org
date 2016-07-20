@@ -52,6 +52,7 @@ class SapphireAnswerSurveyRepository
 
             foreach($filters as $key => $filter) {
                 $filter_q = SurveyQuestionTemplate::get_by_id('SurveyQuestionTemplate',$filter->id);
+                $filter_val = (is_string($filter->value)) ? "'".$filter->value."'" : $filter->value;
 
                 $filter_query .= ($key > 0) ? " INNER JOIN " : "";
                 $filter_query .= "(SELECT s.ID FROM Survey AS s ";
@@ -67,7 +68,7 @@ class SapphireAnswerSurveyRepository
                                    LEFT JOIN SurveyQuestionValueTemplate AS qval ON a.`Value` = qval.ID
                                    LEFT JOIN SurveyTemplate AS st ON s.TemplateID = st.ID
                                    WHERE s.IsTest = 0 AND (s.Created BETWEEN st.StartDate AND st.EndDate )
-                                   AND a.QuestionID = {$filter->id} AND FIND_IN_SET({$filter->value},a.`Value`) > 0 ) AS q".$key;
+                                   AND a.QuestionID = {$filter->id} AND FIND_IN_SET({$filter_val},a.`Value`) > 0 ) AS q".$key;
 
                 $filter_query .= ($key > 0) ? " ON q".($key-1).".ID = q{$key}.ID" : "";
             }
