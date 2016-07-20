@@ -672,7 +672,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         header("Cache-control: private");
         header("Content-type: application/force-download");
         header("Content-transfer-encoding: binary\n");
-        header("Content-disposition: attachment; filename=\"speaker-worksheet.csv\"");
+        header("Content-disposition: attachment; filename=\"track-chairs.csv\"");
         header("Content-Length: " . filesize($filepath));
         readfile($filepath);
     }
