@@ -215,7 +215,8 @@ DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
 DTSTART:".date('Ymd',strtotime($event->getField('StartDate')))."T".date('His',strtotime($event->getField('StartDate')))."Z
 DTEND:".date('Ymd',strtotime($event->getField('EndDate')))."T".date('His',strtotime($event->getField('EndDate')))."Z
 SUMMARY:".$event->Title."
-DESCRIPTION:".$event->ShortDescription."
+DESCRIPTION:".strip_tags($event->ShortDescription)."
+X-ALT-DESC:".$event->ShortDescription."
 END:VEVENT
 END:VCALENDAR";
 
