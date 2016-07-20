@@ -15,6 +15,7 @@ class Browse extends React.Component {
 	constructor (props) {
 		super(props);
 		this.requestMore = this.requestMore.bind(this);
+		this.keyListener = this.keyListener.bind(this);
 	}
 
 	componentDidMount() {
@@ -29,8 +30,13 @@ class Browse extends React.Component {
 				category: defaultCategory.id,
 				search: search
 			}));
-		}	
+		}
 
+		document.addEventListener('keyup', this.keyListener);	
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('keyup', this.keyListener);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -75,6 +81,33 @@ class Browse extends React.Component {
 				}));
 			}
 		}
+	}
+
+	keyListener(e) {		
+		if(tagName === 'TEXTAREA' && tagName === 'INPUT') return;
+
+		const adder = e.keyCode === 37 ? -1 : (e.keyCode === 39 ? 1 : 0);
+
+		if(!adder) return;
+
+		const {tagName} = e.target;
+		const {presentations} = this.props;
+		const {detailPresentation} = this.props;
+
+		let index = presentations.findIndex(p => p.id == detailPresentation.id);
+		index += adder;
+		const newPresentation = presentations[index];
+
+		if(newPresentation) {
+			browserHistory.push(URL.create(
+				`browse/${newPresentation.id}`,
+				{
+					category: this.props.category,
+					search: this.props.search
+				}
+			));
+		}
+
 	}
 
 	requestMore() {

@@ -49,8 +49,7 @@ class TrackChairsPage_Controller extends Page_Controller
         		->relation('TrackChairs')
         		->filter([
         			'MemberID' => $member->ID
-        		])
-        		->first();
+        		]);
         }
 
         if ($chair->exists() || Permission::check('ADMIN')) {
