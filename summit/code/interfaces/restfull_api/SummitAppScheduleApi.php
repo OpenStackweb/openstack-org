@@ -200,6 +200,9 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $member              = Member::currentUser();
         $update_schedule     = !is_null($member) && $member->isAttendee($summit_id);
 
+        // SANTI: if we cache the result then we don't get the events recently added to my schedule
+        $cache = false;
+
         if($cache && $data = $this->loadRAWResponseFromCache($request)) {
             if($update_schedule)
             {
