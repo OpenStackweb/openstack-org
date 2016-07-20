@@ -19,11 +19,20 @@
 class COALandingPage extends Page
 {
     static $db = array(
-        'BannerText'           => 'HTMLText',
-        'ExamDetails'          => 'HTMLText',
-        'HandBookLink'         => 'Text',
-        'GetStartedURL'        => 'Text',
-        'AlreadyRegisteredURL' => 'Text',
+        'BannerText'             => 'HTMLText',
+        'ExamDetails'            => 'HTMLText',
+        'HandBookLink'           => 'Text',
+        'GetStartedURL'          => 'Text',
+        'AlreadyRegisteredURL'   => 'Text',
+        'ExamCost'               => 'Text',
+        'ExamFormat'             => 'HTMLText',
+        'ExamIDRequirements'     => 'HTMLText',
+        'ExamRetake'             => 'HTMLText',
+        'ExamDuration'           => 'Text',
+        'ExamSystemRequirements' => 'HTMLText',
+        'ExamScoring'            => 'HTMLText',
+        'ExamLanguage'           => 'HTMLText',
+        'ExamHowLongSchedule'    => 'HTMLText',
     );
 
     static $has_one = array
@@ -58,6 +67,92 @@ HTML;
         if(empty($html)){
             $html = <<<HTML
     <p>The Certified OpenStack Administrator is a professional typically with at least six months OpenStack experience, and has the skills required to provide day-to-day operation and management of an OpenStack cloud. To learn more about the knowledge requirements and domains covered in the exam, go to <a href="www.openstack.org/coa/requirements">www.openstack.org/coa/requirements</a>.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamCost(){
+        $html = $this->getField('ExamCost');
+        if(empty($html)){
+            $html = "$300";
+        }
+        return $html;
+    }
+
+    public function getExamDuration(){
+        $html = $this->getField('ExamDuration');
+        if(empty($html)){
+            $html = "2.5 hours";
+        }
+        return $html;
+    }
+
+    public function getExamFormat(){
+        $html = $this->getField('ExamFormat');
+        if(empty($html)){
+            $html = <<<HTML
+     <p>The COA is a performance-based exam and Candidates will need to perform tasks or solve problems using the command line interface and Horizon dashboard. For exam security, Candidates are monitored virtually by a proctor during the exam session via streaming audio, video, and screensharing feeds. The screensharing feed allows proctors to view candidates' desktops (including all monitors). The audio, video and screensharing feeds will be stored for a limited period of time in the event that there is a subsequent need for review.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamIDRequirements(){
+        $html = $this->getField('ExamIDRequirements');
+        if(empty($html)){
+            $html = <<<HTML
+    <p>Candidates are required to provide a means of photo identification before the Exam can be launched. Acceptable forms of photo ID include current, non-expired: passport, government-issued driver's license/permit, national ID card, state or province-issued ID card, or other form of government issued identification. If acceptable proof of identification is not provided to the exam proctor prior to the exam, entry to the exam will be refused. Candidates who are refused entry due to lack of sufficient ID will not be eligible for a refund or rescheduling.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamRetake(){
+        $html = $this->getField('ExamRetake');
+        if(empty($html)){
+            $html = <<<HTML
+    <p>One (1) free retake per Exam purchase will be granted in the event that a passing score is not achieved and Candidate has not otherwise been deemed ineligible for Certification or retake. The free retake must be taken within 12 months of the date of the original Exam purchase.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamSystemRequirements(){
+        $html = $this->getField('ExamSystemRequirements');
+        if(empty($html)){
+            $html = <<<HTML
+    <p>Candidates are required to provide their own front-end hardware (laptop or workstation) with Chrome or Chromium browser, reliable internet access, and a webcam and microphone in order to take exams. Candidates do not need to provide their own Linux installation or VM; they will be presented with a VM in their browser window using a terminal emulator. Candidates should use the <a href="https://www.examslocal.com/ScheduleExam/Home/CompatibilityCheck" target="_blank">compatibility check tool</a> to verify that their system and testing environment meet the minimum requirements.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamScoring(){
+        $html = $this->getField('ExamScoring');
+        if(empty($html)){
+            $html = <<<HTML
+   <p>Upon completion, exams are scored automatically and a score report will be made available within three (3) business days. If a passing score of 76 or higher is achieved and other applicable requirements for Certification have been fulfilled, a notification indicating the Candidate has been successfully Certified will follow the score report. Candidate will receive a certificate and logo for personal use.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamLanguage(){
+        $html = $this->getField('ExamLanguage');
+        if(empty($html)){
+            $html = <<<HTML
+     <p>The COA exam is currently offered in English.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamHowLongSchedule(){
+        $html = $this->getField('ExamHowLongSchedule');
+        if(empty($html)){
+            $html = <<<HTML
+       <p>Exam may be scheduled anytime within <strong>12 months</strong> of purchase.</p>
 HTML;
         }
         return $html;
@@ -103,10 +198,19 @@ HTML;
 
         $fields->removeByName('Content');
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('BannerText', 'Banner Text'));
-        $fields->addFieldToTab('Root.Main', new HtmlEditorField('ExamDetails', 'Exam Details'));
         $fields->addFieldToTab('Root.Main', new TextField('HandBookLink', 'HandBook Link'));
         $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL', 'Get Started URL'));
         $fields->addFieldToTab('Root.Main', new TextField('AlreadyRegisteredURL', 'Already Registered URL'));
+        // exam details
+        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamDetails', 'Details Title'));
+        $fields->addFieldToTab('Root.ExamDetails', new TextField('ExamCost', 'Cost (include currency sign)'));
+        $fields->addFieldToTab('Root.ExamDetails', new TextField('ExamDuration', 'Duration ( include time unit)'));
+        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamFormat', 'Format'));
+        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamIDRequirements', 'ID Requirements'));
+        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamSystemRequirements', 'System Requirements'));
+        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamScoring', 'Scoring'));
+        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamLanguage', 'Language'));
+        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamHowLongSchedule', 'How long do I have to schedule my exam?'));
 
         if ($this->ID > 0) {
 
