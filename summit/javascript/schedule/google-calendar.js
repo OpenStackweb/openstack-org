@@ -13,7 +13,6 @@
 
 // Your Client ID can be retrieved from your project in the Google
 // Developer Console, https://console.developers.google.com
-//var CLIENT_ID = '1016652186952-3605imc7gqo85queugjf4i41vidfscje.apps.googleusercontent.com';
 
 var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
@@ -35,12 +34,37 @@ function checkAuth() {
  * @param {Object} authResult Authorization result.
  */
 function handleAuthResult(authResult) {
-    var authorizeDiv = document.getElementById('authorize-div');
     if (authResult && !authResult.error) {
         loadCalendarApi();
     } else {
         console.log('Google API error on Auth.');
     }
+}
+
+/**
+ * Handle response from authorization server after client accepts terms
+ *
+ * @param {Object} authResult Authorization result.
+ */
+function handleAuthResultClient(authResult) {
+    if (authResult && !authResult.error) {
+        loadCalendarApi();
+        alert('Now we have your authorization. Please try synching the event one more time.')
+    } else {
+        console.log('Google API error on Auth.');
+    }
+}
+
+/**
+ * Initiate auth flow in response to user clicking authorize button.
+ *
+ * @param {Event} event Button click event.
+ */
+function handleAuthClick(event) {
+    gapi.auth.authorize(
+        {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+        handleAuthResultClient);
+    return false;
 }
 
 /**

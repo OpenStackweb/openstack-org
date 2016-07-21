@@ -97,15 +97,11 @@
                 if($(this).hasClass('foreign')){
                     // synch with google cal
                     self.schedule_api.googleCalSynch(self.summit.id, event);
-                    $(this).removeClass('foreign').addClass('own');
-                    $('.gcal-icon',$(this)).removeClass('icon-foreign-event').addClass('icon-own-event');
                     return false;
                 }
                 if($(this).hasClass('own')){
                     // unsynch with google
                     self.schedule_api.googleCalUnSynch(self.summit.id, event);
-                    $(this).removeClass('own').addClass('foreign');
-                    $('.gcal-icon',$(this)).removeClass('icon-own-event').addClass('icon-foreign-event');
                     return false;
                 }
             });
@@ -294,6 +290,14 @@
 
         this.schedule_api.on('googleEventSynchSaved', function(event_id, cal_event_id){
             self.dic_events[event_id].gcal_id = cal_event_id;
+            var synch_button = $('.gcal-synch[data-event-id="'+event_id+'"]');
+            if (synch_button.hasClass('foreign')) {
+                synch_button.removeClass('foreign').addClass('own');
+                $('.gcal-icon',synch_button).removeClass('icon-foreign-event').addClass('icon-own-event');
+            } else {
+                synch_button.removeClass('own').addClass('foreign');
+                $('.gcal-icon',synch_button).removeClass('icon-own-event').addClass('icon-foreign-event');
+            }
         });
 
         isFilterEmpty() {
