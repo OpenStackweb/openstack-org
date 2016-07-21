@@ -64,14 +64,14 @@
                     <h3>Open source</h3>
                     <i class="fa fa-group fa-4x"></i>
                     <p>
-                        More eyes on open code translates to faster bug identification and fixes
+                        More eyes on open code translates to faster bug identification and fixes. Anyone with a Launchpad.net/OpenStackID can <a href="https://security.openstack.org/#how-to-report-security-issues-to-openstack" target="_blank">securely report suspected vulnerabilities</a>.
                     </p>
                 </div>
                 <div class="col-sm-4 single">
                     <h3>Dedicated team and tools</h3>
                     <i class="fa fa-wrench fa-4x"></i>
                     <p>
-                        OpenStack Security Team provides oversight and tools to ensure secure code and notify users of vulnerabilities and resolutions
+                        OpenStack Security Team provides oversight and tools to ensure secure code and notify users of vulnerabilities and resolutions.
                     </p>
                 </div>
                 <div class="col-sm-4 single">
