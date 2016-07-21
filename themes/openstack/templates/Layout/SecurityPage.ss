@@ -64,7 +64,7 @@
                     <h3>Open source</h3>
                     <i class="fa fa-group fa-4x"></i>
                     <p>
-                        More eyes on open code translates to faster bug identification and fixes. Anyone with a <a href="https://login.launchpad.net/+login" target="_blank">Launchpad ID</a> can <a href="https://security.openstack.org/#how-to-report-security-issues-to-openstack" target="_blank">securely report suspected vulnerabilities</a>.
+                        More eyes on open code translates to faster bug identification and fixes. Anyone with a <a href="https://launchpad.net/openstack" target="_blank">launchpad.net/openstack</a> id can <a href="https://security.openstack.org/#how-to-report-security-issues-to-openstack" target="_blank">securely report suspected vulnerabilities</a>.
                     </p>
                 </div>
                 <div class="col-sm-4 single">
