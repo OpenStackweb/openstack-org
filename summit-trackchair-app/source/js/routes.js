@@ -17,6 +17,10 @@ import store from './store';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+browserHistory.listenBefore(location => {
+	window.scrollTo(0, 0);
+});
+
 const Routes = (baseURL) => (
     <Router history={history}>
       <Route path={baseURL} component={App}>
