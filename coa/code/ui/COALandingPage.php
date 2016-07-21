@@ -19,6 +19,7 @@
 class COALandingPage extends Page
 {
     static $db = array(
+        'BannerTitle'           => 'Text',
         'BannerText'             => 'HTMLText',
         'ExamDetails'            => 'HTMLText',
         'HandBookLink'           => 'Text',
@@ -33,6 +34,7 @@ class COALandingPage extends Page
         'ExamScoring'            => 'HTMLText',
         'ExamLanguage'           => 'HTMLText',
         'ExamHowLongSchedule'    => 'HTMLText',
+        'GetStartedText'         => 'HTMLText',
     );
 
     static $has_one = array
@@ -50,6 +52,14 @@ class COALandingPage extends Page
             'Order' => "Int",
         ),
     );
+
+    public function getBannerTitle(){
+        $html = $this->getField('BannerTitle');
+        if(empty($html)){
+            $html = "Certified OpenStack Administrator";
+        }
+        return $html;
+    }
 
     public function getBannerText(){
         $html = $this->getField('BannerText');
@@ -192,12 +202,25 @@ HTML;
         return $default_url;
     }
 
+    public function getGetStartedText(){
+        $html = $this->getField('GetStartedText');
+        if(empty($html)){
+            $html = <<<HTML
+       <p>The Certified OpenStack Administrator exam is the only professional certification offered by the OpenStack Foundation. It was written for OpenStack professionals with at least six months of experience managing an OpenStack cloud environment. You can learn more details about the exam below, or visit our Training Marketplace to find companies that can help you prepare and often bundle the exam with their training courses. To get started with a new exam purchase or to redeem a code, you'll be prompted to log into the COA portal with an OpenStackID or equivalent.</p>
+HTML;
+        }
+        return $html;
+    }
+
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
 
         $fields->removeByName('Content');
+
+        $fields->addFieldToTab('Root.Main', new TextField('BannerTitle', 'Banner Title'));
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('BannerText', 'Banner Text'));
+        $fields->addFieldToTab('Root.Main', new HtmlEditorField('GetStartedText', 'How to Get Started'));
         $fields->addFieldToTab('Root.Main', new TextField('HandBookLink', 'HandBook Link'));
         $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL', 'Get Started URL'));
         $fields->addFieldToTab('Root.Main', new TextField('AlreadyRegisteredURL', 'Already Registered URL'));
