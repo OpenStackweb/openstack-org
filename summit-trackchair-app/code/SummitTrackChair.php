@@ -69,6 +69,7 @@ class SummitTrackChair extends DataObject
             return $chair->ID;
         } else {
             $priorChair->Categories()->add($category);
+            $priorChair->Member()->addToGroupByCode('track-chairs');
 
             return $priorChair->ID;
         }
