@@ -72,6 +72,9 @@ export const toggleAddChairLoading = createAction('TOGGLE_ADD_CHAIR_LOADING');
 export const updateAddChairMessage = createAction('UPDATE_ADD_CHAIR_MESSAGE');
 export const addNewChair = createAction('ADD_NEW_CHAIR');
 export const toggleMobileMenu = createAction('TOGGLE_MOBILE_MENU');
+export const deleteChair = createAction('DELETE_CHAIR');
+export const receiveMemberSearch = createAction('RECEIVE_MEMBER_SEARCH');
+export const chooseMemberSearchItem = createAction('CHOOSE_MEMBER_SEARCH_ITEM');
 /* Async Actions */
 
 export const fetchSummit = (id) => {
@@ -81,7 +84,6 @@ export const fetchSummit = (id) => {
     	`summit/${id}`
 	)(id);
 }
-
 
 export const fetchPresentations = createRequestReceiveAction(
     requestPresentations,
@@ -102,7 +104,6 @@ export const fetchLists = (category) => {
 		`selections/${category}`
 	)(category);
 };
-
 
 export const fetchPresentationDetail = (id) => {
 	return createRequestReceiveAction(
@@ -289,34 +290,26 @@ export const postMarkAsRead = (presentationID) => {
 };
 
 var checkChairTimeout;
-export const checkChair = (email) => {
+export const checkChair = (search) => {
 	return (dispatch) => {
-		dispatch(updateAddChairEmail(email));
+		dispatch(updateAddChairEmail(search));
 		checkChairTimeout && window.clearTimeout(checkChairTimeout);
 		checkChairTimeout = window.setTimeout(() => {
 			const key = 'CHECK_CHAIR_EMAIL'
 			cancel(key);
 
 			const url = URL.addQueryParams(
-				'/trackchairs/api/v1/checkemail',
-				{email, ajax: 1}
+				'/trackchairs/api/v1/findmember',
+				{search, ajax: 1}
 			);
 
 			const req = http.get(url)
-				.end((err, res) => {
-					if(err && err.status === 404) {
-						dispatch(updateEmailCheck(false));
-					}
-					else if(res.status === 204) {
-						dispatch(updateEmailCheck(null));
-					}
-					else if(res.status === 200) {
-						dispatch(updateEmailCheck(true));
-					}
-					else if(!res.ok) {
-						dispatch(throwError(res.text));
-					}
-				})
+				.end(responseHandler(dispatch, json => {
+					dispatch(receiveMemberSearch({
+						response: json
+					}));
+				}))
+
 			schedule(key, req);
 		}, 300);
 	}
@@ -358,6 +351,27 @@ export const submitAddChair = (params = {}) => {
 		schedule(key, req);
 
 	}
+}
+
+export const postDeleteChair = (params) => {
+	return (dispatch) => {
+		const key = `DELETE_CHAIR_${JSON.stringify(params)}`;
+		dispatch(deleteChair(params));
+		cancel(key);
+
+		const url = URL.create(
+			`chair/destroy`,
+			{},
+			'/trackchairs/api/v1'			
+		);
+
+		const req = http.del(url)
+			.send({ajax: 1, ...params})
+			.type('form')
+			.end(responseHandler(dispatch));
+
+		schedule(key, req);
+	};
 }
 
 

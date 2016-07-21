@@ -17,11 +17,12 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'PUT reorder' => 'handleReorderList',
         'GET changerequests' => 'handleChangeRequests',
         'POST chair/add' => 'handleAddChair',
+        'DELETE chair/destroy' => 'handleDeleteChair',
         'PUT categorychange/resolve/$ID' => 'handleResolveCategoryChange',
         'GET export/chairs' => 'handleChairExport',
         'GET restoreorders' => 'handleRestoreOrders',
         'GET presentationcomments' => 'handlePresentationsWithComments',
-        'GET checkemail' => 'handleCheckEmail'
+        'GET findmember' => 'handleFindMember'
     ];
 
     /**
@@ -35,11 +36,12 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'handleReorderList',
         'handleChangeRequests',
         'handleAddChair' => 'ADMIN',
+        'handleDeleteChair' => 'ADMIN',
         'handleResolveCategoryChange' => 'ADMIN',
         'handleRestoreOrders' => 'ADMIN',
         'handleChairExport' => 'ADMIN',
         'handlePresentationsWithComments' => 'ADMIN',
-        'handleCheckEmail' => 'ADMIN'
+        'handleFindMember' => 'ADMIN'
     ];
 
     /**
@@ -172,11 +174,13 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
             $chairs = $c->TrackChairs();
             foreach ($chairs as $chair) {
-                $chairdata = array();
+                $chairdata = [];
+                $chairdata['chair_id'] = $chair->ID;
                 $chairdata['first_name'] = $chair->Member()->FirstName;
                 $chairdata['last_name'] = $chair->Member()->Surname;
                 $chairdata['email'] = $chair->Member()->Email;
                 $chairdata['category'] = $c->Title;
+                $chairdata['category_id'] = $c->ID;
                 $chairlist[] = $chairdata;
             }
         }
@@ -536,18 +540,44 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         if (!$member) {
             return $this->httpError(404, 'Member not found');
         }
-        SummitTrackChair::addChair($member, $catid);
+        $id = SummitTrackChair::addChair($member, $catid);
         $category->MemberList($member->ID);
         $category->GroupList();
 
         return (new SS_HTTPResponse(Convert::array2json([
+        		'chair_id' => $id,
         		'first_name' => $member->FirstName,
         		'last_name' => $member->Surname,
         		'email' => $member->Email,
-        		'category' => $category->Title
+        		'category' => $category->Title,
+        		'category_id' => $category->ID
         	]), 200))
         	->addHeader('Content-type', 'application/json');
     }
+
+    public function handleDeleteChair(SS_HTTPRequest $r)
+    {
+    	parse_str($r->getBody(), $vars);
+    	
+    	if(!isset($vars['chairID']) || !isset($vars['categoryID'])) {
+    		return $this->httpError(400, 'You must provide a chairID and categoryID param');
+    	}
+
+    	$category = PresentationCategory::get()->byID($vars['categoryID']);
+    	$chair = SummitTrackChair::get()->byID($vars['chairID']);
+
+    	if(!$category) {
+    		return $this->httpError(404, 'Category not found');
+    	}
+
+    	if(!$chair) {
+    		return $this->httpError(404, 'Chair not found');
+    	}
+
+    	$category->TrackChairs()->remove($chair);
+
+    	return new SS_HTTPResponse("Chair {$chair->Member()->getName()} removed from {$category->Title}", 200);
+    }	
 
     /**
      * @param SS_HTTPResponse $r
@@ -678,26 +708,27 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     }
 
 
-    public function handleCheckEmail(SS_HTTPRequest $r)
+    public function handleFindMember(SS_HTTPRequest $r)
     {
-    	$email = $r->getVar('email');
-    	$fuzzy = Member::get()
-    				->filter([
-    					'Email:StartsWith' => $email
-    				])
-    				->exists();
+    	$search = Convert::raw2sql($r->getVar('search'));
+    	$results = Member::get()
+    				->where(
+    					"Email LIKE '%{$search}%' " .
+    					"OR (CONCAT_WS(' ', FirstName, Surname)) LIKE '%{$search}%'"
+    				)
+    				->limit(10);    			
 
-    	if(!$fuzzy) {
-    		return new SS_HTTPResponse('That email was not found', 404);
+    	$json = [];
+    	foreach($results as $member) {
+    		$json[] = [
+    			'id' => $member->ID,
+    			'name' => $member->getName(),
+    			'email' => $member->Email
+    		];
     	}
 
-    	$exact = Member::get()->filter('Email', $email)->exists();
-    	
-    	if($exact) {
-    		return new SS_HTTPResponse('OK', 200);
-    	}
-
-    	return new SS_HTTPResponse('Partial match', 204);
+        return (new SS_HTTPResponse(Convert::array2json($json), 200))
+    		->addHeader('Content-type', 'application/json');
     }
 }
 
@@ -771,8 +802,8 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
     public function index(SS_HTTPRequest $r)
     {
         $p = $this->presentation;
-        $speakers = array();
-        $current_summit = $p->Summit();;
+        $speakers = [];
+        $current_summit = $p->Summit();
 
         foreach ($p->Speakers() as $s) {
             // if($s->Bio == NULL) $s->Bio = "&nbsp;";
@@ -790,7 +821,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             }
             $speakerData['expertise_areas'] = $expertise_areas;
 
-            $former_presentations = array();
+            $former_presentations = [];
             $formerList = $s->Presentations()
                             ->exclude('SummitID', $current_summit->ID)
                             ->limit(5)

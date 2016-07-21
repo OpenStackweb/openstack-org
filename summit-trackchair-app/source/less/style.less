@@ -417,6 +417,7 @@ ul.navbar-nav {
 			position:absolute;
 			right:20px;
 			top:10px;
+			z-index:50;
 			&.fa-check {
 				color:@green;
 			}
@@ -464,6 +465,48 @@ ul.navbar-nav {
 		}
 	}
 
+}
+
+.autocomplete-input {
+	position:relative;
+	.autocomplete-results {
+		position:absolute;
+		z-index:100;
+		background:white;
+		width:100%;
+		border:1px solid #ccc;
+		padding:0;
+		margin:0;
+		max-height:150px;
+		overflow-y: auto;
+		li {
+			list-style:none;
+			a {
+				padding:5px;
+				display:block;
+				&:hover {
+					background: #eee;
+				}
+			}
+		}
+	}
+}
+
+.keyboard-help {
+	ul {
+		margin:0;
+		padding:0;
+
+		li {
+			display:inline-block;
+			list-style:none;
+			margin-right:15px;
+		}
+	}
+}
+.keyboard-key {
+	color:#333;
+	font-weight:bold;
 }
 
 .ribbon {

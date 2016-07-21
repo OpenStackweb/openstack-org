@@ -1,12 +1,4 @@
 /*eslint-disable */
-const sortedData = (data, sortCol, sortDir) => {
-	return data.sort((aObj,bObj) => {
-		let a = aObj[sortCol].toUpperCase();
-		let b = bObj[sortCol].toUpperCase();
-		let result = (a < b ? -1 : (a > b ? 1 : 0));
-		return result*sortDir;
-    })	
-};
 
 export const directory = function (
     state = {
@@ -15,13 +7,13 @@ export const directory = function (
         sortDir: 1,
         loading: false,
         searchTerm: '',
-        searchResults: [],
         showAddForm: false,
         chairEmail: '',
         chairCategory: null,
         formMessage: null,
         emailCheck: null,
-        formLoading: false
+        formLoading: false,
+        memberSearchResults: []
     },
     action = {}) {
     switch(action.type) {
@@ -34,11 +26,13 @@ export const directory = function (
             return {
                 ...state,
                 data: action.payload.response.chair_list.map(chairData => (
-					[
-						chairData.category, 
-						`${chairData.first_name} ${chairData.last_name}`,
-						chairData.email
-					]
+					{
+						chair_id: chairData.chair_id,
+						category: chairData.category,
+						name: `${chairData.first_name} ${chairData.last_name}`,
+						email: chairData.email,
+						category_id: chairData.category_id
+					}
 				)),
                 loading: false
             };
@@ -48,24 +42,14 @@ export const directory = function (
 
         	return {
         		...state,
-        		data: sortedData(state.data, sortCol, sortDir),
         		sortCol,
         		sortDir
         	}
 
         case 'SEARCH_DIRECTORY':
         	const term = action.payload;
-        	const rxp = new RegExp(term,'i');
         	return {
         		...state,
-        		searchResults: sortedData(state.data.filter(chairData => (
-        				chairData[0].match(rxp) ||
-        				chairData[1].match(rxp) ||
-        				chairData[2].match(rxp)
-        			)), 
-        			state.sortCol, 
-        			state.sortDir
-        		),
         		searchTerm: term
         	}
         case 'TOGGLE_ADD_CHAIR':
@@ -81,7 +65,8 @@ export const directory = function (
         case 'UPDATE_ADD_CHAIR_EMAIL':
         	return {
         		...state,
-        		chairEmail: action.payload
+        		chairEmail: action.payload,
+        		emailCheck: null
         	};
         case 'UPDATE_ADD_CHAIR_CATEGORY':
         	return {
@@ -107,18 +92,46 @@ export const directory = function (
         		formLoading:false
         	};
         case 'ADD_NEW_CHAIR':
-        	const {category, first_name, last_name, email} = action.payload;
+        	const {category, chair_id, category_id, first_name, last_name, email} = action.payload;
         	return {
         		...state,
         		data: [
-					[
+					{
+						chair_id,
 						category,
-						`${first_name} ${last_name}`,
+						category_id,
+						name: `${first_name} ${last_name}`,
 						email
-					],
+					},
 					...state.data
         		],
         		formLoading: false
+        	}
+
+        case 'DELETE_CHAIR':
+        	const {chairID, categoryID} = action.payload;
+        	return {
+        		...state,
+        		data: state.data.filter(row => (
+        			row.chair_id !== chairID || row.category_id !== categoryID
+        		))
+        	}
+
+        case 'RECEIVE_MEMBER_SEARCH':
+        	return {
+        		...state,
+        		memberSearchResults: [
+        			...action.payload.response
+        		]
+        	}
+
+        case 'CHOOSE_MEMBER_SEARCH_ITEM':
+        	const chair = state.memberSearchResults.find(item => item.id === action.payload);
+        	return {
+        		...state,
+        		chairEmail: chair ? chair.email : state.chairEmail,
+        		emailCheck: !!chair,
+        		memberSearchResults: []
         	}
 
         default:

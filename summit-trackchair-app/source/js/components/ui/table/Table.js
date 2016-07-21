@@ -7,11 +7,13 @@ import './datatables.css';
 const createRow = (row, columns) => {
 	const isArray = Array.isArray(row);
 
-	return columns.map((col,i) => (
+	return columns.map((col,i) => {
+		return (
 		<TableCell key={i}>
 			{col.props.cell((isArray ? row[i] : row), (isArray ? row : undefined))}
 		</TableCell> 
-	));
+		);
+	});
 };
 
 const validChildren = (children) => {
@@ -54,7 +56,7 @@ const Table = (props) => {
 		</thead>
 		<tbody>
 		{children.length > 0 && props.data.map((row,i) => {
-			if(row.length !== children.length) {
+			if(Array.isArray(row) && row.length !== children.length) {
 				console.warn(`Data at row ${i} is ${row.length}. It should be ${children.length}.`);
 				return <tr />
 			}

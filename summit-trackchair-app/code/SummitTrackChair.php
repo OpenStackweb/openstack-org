@@ -66,8 +66,11 @@ class SummitTrackChair extends DataObject
             //Add member to the group
             $member->Groups()->add($Group);
 
+            return $chair->ID;
         } else {
             $priorChair->Categories()->add($category);
+
+            return $priorChair->ID;
         }
     }
 

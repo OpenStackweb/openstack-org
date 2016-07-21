@@ -1,7 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import CategorySelector from './CategorySelector';
-import {checkChair, updateAddChairCategory, submitAddChair, toggleAddChair} from '../../actions';
+import AutoCompleteInput from '../ui/AutoCompleteInput';
+import AutoCompleteResult from '../ui/AutoCompleteResult';
+import {
+	checkChair, 
+	updateAddChairCategory, 
+	submitAddChair, 
+	toggleAddChair, 
+	chooseMemberSearchItem
+} from '../../actions';
 
 class AddChairForm extends React.Component {
 
@@ -33,9 +41,11 @@ class AddChairForm extends React.Component {
 			chairEmail,
 			toggleAddChair, 
 			loading, 
-			message
+			message,
+			searchResults
 		} = this.props;
 		const valid = this.isValid();
+		console.log(emailCheck);
 		return (
     	<div className="directory-add-chair">
     		<h3>Add a new chair</h3>
@@ -49,8 +59,14 @@ class AddChairForm extends React.Component {
     		}
 				<div className="add-chair-field add-chair-email">
 					{emailCheck === true && <i className="fa fa-check" />}
-					{emailCheck === false && <i className="fa fa-exclamation-circle" />}
-					<input type="text" disabled={loading} placeholder="Email address" onChange={checkChair} value={chairEmail} />
+					{emailCheck === false && <i className="fa fa-exclamation-circle" />}					
+					<AutoCompleteInput type="text" disabled={loading} placeholder="Search for members..." onChange={checkChair} value={chairEmail}>
+						{searchResults.map(result => (
+							<AutoCompleteResult key={result.id} eventKey={result.id} onSelect={this.props.chooseMember}>
+								{`${result.name} (${result.email})`}
+							</AutoCompleteResult>
+						))}
+					</AutoCompleteInput>
 				</div>
 				<div className="add-chair-field add-chair-category">
 					<CategorySelector activeCategory={chairCategory} onSelect={updateAddChairCategory} />
@@ -70,7 +86,8 @@ export default connect(
 		chairCategory: state.directory.chairCategory,
 		emailCheck: state.directory.emailCheck,
 		message: state.directory.formMessage,
-		loading: state.directory.formLoading
+		loading: state.directory.formLoading,
+		searchResults: state.directory.memberSearchResults
 
 	}),
 
@@ -87,6 +104,9 @@ export default connect(
 		toggleAddChair(e) {
 			e.preventDefault();
 			dispatch(toggleAddChair());
+		},
+		chooseMember(key) {
+			dispatch(chooseMemberSearchItem(key));
 		}
 	})
 )(AddChairForm);

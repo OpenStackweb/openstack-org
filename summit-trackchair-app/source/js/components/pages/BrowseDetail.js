@@ -81,8 +81,21 @@ class BrowseDetail extends React.Component {
 			{p.group_selected &&
 			  <Ribbon type='primary'>TEAM SELECTION</Ribbon>
 			}
+
+			<small className="keyboard-help">
+				<strong>Keyboard commands</strong>:
+				<ul>
+					<li><i className="keyboard-key fa fa-caret-square-o-left" /> Prev presentation</li>
+					<li><i className="keyboard-key fa fa-caret-square-o-right" /> Next presentation</li>
+					<li><span className="keyboard-key">[Y]</span>es</li>
+					<li><span className="keyboard-key">[I]</span>nterested</li>
+					<li><span className="keyboard-key">[N]</span>o thanks</li>
+				</ul>
+			</small>
+
 			   <div className="ibox">
 			      <div className="ibox-content">
+
 			         <div className="row">
 			            <div className="col-lg-12">
 			            {p.change_requests_count > 0 && isAdmin &&
