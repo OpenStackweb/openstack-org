@@ -88,7 +88,7 @@ define('CCLA_TEAM_INVITATION_EMAIL_FROM','');
 define('CCLA_DEBUG_EMAIL','');
 
 
-define('GOOGLE_GEO_CODING_API_KEY','');
+
 //get a key from https://github.com/settings/applications#personal-access-tokens
 define('GITHUB_API_OAUTH2TOKEN','');
 
@@ -125,7 +125,14 @@ define('COA_FILE_API_BASE_URL','');
 define('COA_FILE_API_BASE_USER','');
 define('COA_FILE_API_BASE_PASS','');
 
-//GOOGLE CALENDAR
+// GOOGLE API KEYS
+// get from https://console.cloud.google.com/home/dashboard
+// browser key to use Google Maps JavaScript API
+define('GOOGLE_MAP_KEY', '');
+// server key to use Google Maps Geocoding API
+define('GOOGLE_GEO_CODING_API_KEY','');
+
+// OAUTH 2.0 Client ID to use Google Calendar API
 define('GAPI_CLIENT','');
 
 
