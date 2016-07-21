@@ -57,7 +57,8 @@ class GridFieldUpdateDefaultCategoryTags implements GridField_HTMLProvider, Grid
         if($summit_id > 0 && $summit = Summit::get()->byID($summit_id)) {
             $default_tags = $summit->CategoryDefaultTags();
             foreach($summit->Categories() as $category) {
-                $category_tags = $category->AllowedTags();
+                $category_tags = $category->AllowedTags()->filter('IsDefault',0);
+                $category->AllowedTags()->filter('IsDefault',1)->removeAll();
                 foreach ($default_tags as $dtag) {
                     $found_tag = $category_tags->find('TagID',$dtag->TagID);
                     if ($found_tag && $found_tag->Group == $dtag->Group ) continue;
@@ -66,7 +67,7 @@ class GridFieldUpdateDefaultCategoryTags implements GridField_HTMLProvider, Grid
                         $found_tag = $dtag;
                     }
                     $category->AllowedTags()->remove($found_tag);
-                    $category->AllowedTags()->add($found_tag,array('Group' => $dtag->Group));
+                    $category->AllowedTags()->add($dtag,array('Group' => $dtag->Group, 'IsDefault' => 1));
                 }
 
             }
