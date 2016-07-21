@@ -5,7 +5,7 @@
         <div class="logo-area">
             <span style="background-color: #{$Company.CompanyColor}" class="color-bar"></span>
             <a href="{$Top.TrainingURL}">
-                <img alt='{$Company.Name}_small_logo' src='{$Company.Logo().getURL()}' class='small-logo-company sponsor-logo'/>
+                <img alt='{$Company.Name}_small_logo' src='{$Company.Logo().getURL()}' class='small-logo-company company-logo'/>
             </a>
         </div>
     </div>
