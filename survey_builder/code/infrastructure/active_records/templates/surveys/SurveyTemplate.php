@@ -352,7 +352,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     /**
      * @return ISurveyQuestionTemplate[]
      */
-    public function getAllFreeTextQuestions(){
+    public function getAllFilterableQuestions(){
         $questions = [];
         $to_add  = [
             'SurveyMemberEmailQuestionTemplate',
@@ -361,6 +361,11 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
             'SurveyOrganizationQuestionTemplate',
             'SurveyTextAreaQuestionTemplate',
             'SurveyTextBoxQuestionTemplate',
+            'SurveyRadioButtonListQuestionTemplate',
+            'SurveyDropDownQuestionTemplate',
+            'SurveyDropDownQuestionTemplate',
+            'SurveyCheckBoxListQuestionTemplate',
+            'SurveyCheckBoxQuestionTemplate',
         ];
 
         foreach($this->getSteps() as $step){

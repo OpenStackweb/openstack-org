@@ -80,8 +80,20 @@ final class SangriaSurveyBuilderExtension extends Extension
         return http_build_query($vars);
     }
 
-
-    private function buildList(SS_HTTPRequest $request, $template_class = 'SurveyTemplate', $ss_tpl_name = 'SurveyBuilderListSurveys'){
+    /**
+     * @param SS_HTTPRequest $request
+     * @param string $template_class
+     * @param string $ss_tpl_name
+     * @return array
+     */
+    private function buildList
+    (
+        SS_HTTPRequest $request,
+        $template_class = 'SurveyTemplate',
+        $ss_tpl_name = 'SurveyBuilderListSurveys'
+    )
+    {
+        Requirements::javascript('themes/openstack/javascript/querystring.jquery.js');
         Requirements::javascript('survey_builder/js/survey.sangria.surveys.list.filter.js');
 
         $query_templates = new QueryObject(new SurveyTemplate);
@@ -93,6 +105,9 @@ final class SangriaSurveyBuilderExtension extends Extension
         $survey_template_id = intval($request->getVar('survey_template_id'));
         $question_id        = intval($request->getVar('question_id'));
         $question_value     = Convert::raw2sql($request->getVar('question_value'));
+        $question_value2    = Convert::raw2sql($request->getVar('question_value2'));
+        $question_value     = !empty($question_value) ? $question_value: $question_value2;
+
         $order              = Convert::raw2sql($request->getVar('order'));
         $order_dir          = Convert::raw2sql($request->getVar('dir'));
 
@@ -109,10 +124,20 @@ final class SangriaSurveyBuilderExtension extends Extension
 
         $selected_template = ($survey_template_id > 0) ? $this->survey_template_repository->getById($survey_template_id):$templates[0];
 
-        $query_surveys->addAndCondition
+        if($survey_template_id === 0){
+            Controller::curr()->redirect($request->getURL(true).'?survey_template_id='.$selected_template->ID);
+        }
+
+        $query_surveys
+        ->addAndCondition
         (
             QueryCriteria::id('Survey.TemplateID', $selected_template->getIdentifier())
+        )
+        ->addAndCondition
+        (
+            QueryCriteria::id('Survey.IsTest', 0)
         );
+
 
         if($question_id > 0 && !empty($question_value)) {
             // filter by question ...
@@ -175,7 +200,7 @@ HTML;
         $result = [
             'Templates' => new ArrayList($templates),
             'Surveys'   => new ArrayList($surveys),
-            'Questions' => new ArrayList($selected_template->getAllFreeTextQuestions()),
+            'Questions' => new ArrayList($selected_template->getAllFilterableQuestions()),
             'Pager'     => $pager
         ];
 

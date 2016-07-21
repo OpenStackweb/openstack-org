@@ -76,6 +76,17 @@ class SurveyMultiValueQuestionTemplate
         return $fields;
     }
 
+    public function JSONValues(){
+        $values = [];
+        foreach($this->getValues() as $value){
+            $values[] = [
+                'id'    => $value->ID,
+                'label' => $value->Value,
+            ];
+        }
+        return json_encode($values);
+    }
+
     public function DDLValues(){
         $selected_values = array();
 

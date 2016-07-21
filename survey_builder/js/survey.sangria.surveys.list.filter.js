@@ -19,7 +19,12 @@ $(document).ready(function() {
             rules: {
                 survey_template_id  : { required: true},
                 question_value: { required: function(){
-                    return question_id > 0;
+                    return question_id > 0 &&
+                        $('#question_value').val() == '';
+                }},
+                question_value2: { required: function(){
+                    return question_id > 0 &&
+                        ( $('#question_value2').val() == 0 || $('#question_value2').val() == null );
                 }}
             },
             onfocusout: false,
@@ -34,24 +39,97 @@ $(document).ready(function() {
         $('#survey_template_id').change(function(){
             $('#question_value').hide();
             $('#question_value').val('');
+            $('#question_value2').hide();
+            $('#question_value2').val('');
             $('#question_id').val('');
             form_validator.resetForm();
+            form.submit();
         });
 
-        $('#question_id').change(function(){
-            question_id = $(this).val();
+        //search params
+        var question_id = $.QueryString["question_id"];
+
+        if(question_id != undefined) {
+            var option = $('#question_id option[value="'+question_id+'"]');
+
+            var questions_values   = option.data('values');
             var question_value_txt = $('#question_value');
-            question_value_txt.val('');
+            var question_value_ddl = $('#question_value2');
 
-            if(question_id === '') {
-                question_id = 0;
-                form_validator.resetForm();
-            }
-
-            if(question_id > 0 ) {
+            if(questions_values == undefined) {
+                question_value_ddl.hide();
                 question_value_txt.show();
+
+                var question_value = $.QueryString["question_value"];
+                if(question_value != undefined){
+                    $('#question_value').val(question_value);
+                }
             }
             else{
+                question_value_ddl.show();
+                question_value_txt.hide();
+                // populate combo box
+                var items = '<option value="">-- set a question value --</option>';
+
+                $.each(questions_values,function(key, obj)
+                {
+                    items+= '<option value="' + obj.id + '">' + obj.label + '</option>';
+                });
+
+                question_value_ddl.find('option').remove();
+                question_value_ddl.append(items);
+
+                var question_value2 = $.QueryString["question_value2"];
+                if(question_value2 != undefined){
+                    $('option[value="'+question_value2+'"]', question_value_ddl).prop('selected', true)
+                }
+            }
+        }
+
+        $('#question_id').change(function(){
+
+            question_id            = $(this).val();
+            var option             = $('option:selected', $(this));
+            var questions_values   = option.data('values');
+            var question_value_txt = $('#question_value');
+            var question_value_ddl = $('#question_value2');
+            form_validator.resetForm();
+            question_value_txt.val('');
+            question_value_ddl.find('option').remove();
+
+            if(questions_values == undefined) {
+
+                if (question_id === '') {
+                    question_id = 0;
+                }
+
+                if (question_id > 0) {
+                    question_value_txt.show();
+                }
+                else {
+                    question_value_txt.hide();
+
+                }
+
+                question_value_ddl.hide();
+            }
+            else{
+                // populate combo box
+                var items = '<option value="">-- set a question value --</option>';
+
+                $.each(questions_values,function(key, obj)
+                {
+                    items+= '<option value="' + obj.id + '">' + obj.label + '</option>';
+                });
+
+                question_value_ddl.append(items);
+
+                if (question_id > 0) {
+                    question_value_ddl.show();
+                }
+                else {
+                    question_value_ddl.hide();
+                }
                 question_value_txt.hide();
             }
         });
@@ -62,3 +140,4 @@ $(document).ready(function() {
             form.submit();
         });
 });
+

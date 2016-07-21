@@ -11,10 +11,11 @@
         <select id="question_id" name="question_id"  class="form-control">
             <option value="">--select a question to filter by --</option>
             <% loop $Questions %>
-                <option value="$ID" <% if $Top.getRequestVar(question_id) == $ID %>selected<% end_if %>>$Name</option>
+                <option title="{$Label.XML}" <% if $JSONValues %>data-values='{$JSONValues}'<% end_if %> data-type="{$Type}" value="$ID" <% if $Top.getRequestVar(question_id) == $ID %>selected<% end_if %>>$Name</option>
             <% end_loop %>
         </select>
-        <input <% if $Top.hasRequestVar(question_id) == 0 %>style="display: none"<% end_if %> class="form-control"  placeholder="set a question value" type="text" id="question_value" name="question_value" value="{$Top.getRequestVar(question_value)}">
+        <input style="display: none" class="form-control"  placeholder="set a question value" type="text" id="question_value"  name="question_value" value="">
+        <select style="display: none" class="form-control"  placeholder="select a question value" type="text" id="question_value2" name="question_value2" value=""></select>
     </div>
     <button type="button" id="btn_apply_survey_list_filter" class="btn btn-primary" title="Apply filtering">Apply</button>
 </form>
