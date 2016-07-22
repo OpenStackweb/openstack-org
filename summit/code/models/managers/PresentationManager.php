@@ -421,9 +421,10 @@ final class PresentationManager implements IPresentationManager
 
             $extra_questions = ($presentation->Category()->Exists()) ? $presentation->Category()->ExtraQuestions() : array();
             foreach ($extra_questions as $question) {
-                $field = $this->fields->fieldByName($question->Name);
-                if(is_null($field)) continue;
-                $answer_value = $field->Value();
+                if (!isset($data[$question->Name])) continue;
+                if (!$data[$question->Name]) continue;
+
+                $answer_value = $data[$question->Name];
                 if(empty($answer_value)) continue;
 
                 if (!$answer = $presentation->findAnswerByQuestion($question)) {
@@ -433,8 +434,7 @@ final class PresentationManager implements IPresentationManager
                 if(is_array($answer_value) ){
                     $answer_value = str_replace('{comma}', ',', $answer_value);
                     $answer->Value = implode(',', $answer_value);
-                }
-                else{
+                } else {
                     $answer->Value = $answer_value;
                 }
                 $answer->QuestionID = $question->getIdentifier();
