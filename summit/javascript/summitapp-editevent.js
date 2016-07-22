@@ -256,11 +256,11 @@ $(document).ready(function(){
             }},
             speakers: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes';
+                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
             }},
             moderator :{ required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Keynotes';
+                return (event_type === 'Keynotes' || event_type === 'Panel') ;
             }},
             location: { required: function(){
                 var published = $('#published').val();

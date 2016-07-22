@@ -1443,6 +1443,10 @@ h3.user-name {
   margin-top: 0px;
   margin-bottom: 20px; }
 
+#category_options .category-label {
+    margin-top : 0px;
+}
+
 /* review presentation */
 .review-presentation h3 {
   background-color: #F8F9FD;

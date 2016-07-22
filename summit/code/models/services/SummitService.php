@@ -290,7 +290,7 @@ final class SummitService implements ISummitService
 
             $event->Speakers()->setByIDList($speaker_ids);
 
-            if($event->Type()->Type == 'Keynotes')
+            if($event->Type()->Type == 'Keynotes' || $event->Type()->Type == 'Panel')
             {
                 if(!isset($event_data['moderator']))
                     throw new EntityValidationException('moderator is required!');
@@ -346,7 +346,7 @@ final class SummitService implements ISummitService
      * @return bool
      */
     public static function IsPresentationEventType($type){
-        return ($type === 'Presentation' || $type === 'Keynotes');
+        return ($type === 'Presentation' || $type === 'Keynotes' || $type === 'Panel');
     }
 
     /**

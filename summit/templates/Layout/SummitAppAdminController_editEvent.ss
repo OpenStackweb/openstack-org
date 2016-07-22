@@ -99,7 +99,7 @@
                                         <% end_if %>
                                     <% end_if %>
                                 <% else %>
-                                    <option value="$ID" <% if $Top.Event.Type.ID == $ID %>selected<% end_if %> >$Type</option>
+                                    <option value="$ID" >$Type</option>
                                 <% end_if %>
                             <% end_loop %>
                         </select>
@@ -247,13 +247,13 @@
             $("#location").chosen();
             $("#event_type").chosen();
             <% if $Top.Event %>
-                <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' %>
+                <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' || $Top.Event.Type.Type == 'Panel' %>
                     $('.speakers_container').show();
                     $('.track_container').show();
                     $('.level_container').show();
                     $('#expect_learn_container').show();
                 <% end_if %>
-                <% if $Top.Event.Type.Type == 'Keynotes' %>
+                <% if $Top.Event.Type.Type == 'Keynotes' || $Top.Event.Type.Type == 'Panel' %>
                     $('.moderator_container').show();
                 <% end_if %>
             <% end_if %>

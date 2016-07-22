@@ -143,10 +143,10 @@ function getCategories() {
                 if (!$.isEmptyObject(data)) {
                     for(var key in data) {
                         var category = data[key];
-                        html += '<div class="radio"><label>';
+                        html += '<div class="radio">';
                         html += '<input id="PresentationForm_PresentationForm_CategoryID_'+category.ID+'" class="radio" name="CategoryID" type="radio" value="'+category.ID+'">';
-                        html += category.Html;
-                        html += '</label></div>';
+                        html += '<label>'+category.Html+'</label>';
+                        html += '</div>';
                     }
                 } else {
                     html += '<br><i>This group has no categories.</i>';
