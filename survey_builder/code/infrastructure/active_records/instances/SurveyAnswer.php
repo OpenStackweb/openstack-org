@@ -76,12 +76,14 @@ class SurveyAnswer extends DataObject implements ISurveyAnswer
      */
     public function getFormattedAnswer()
     {
-        $res = $this->Value;
+        $res      = $this->Value;
         $question = $this->Question();
+
         if($question instanceof SurveyMultiValueQuestionTemplate)
         {
             $res = explode(',', $res);
             $aux = '';
+
             foreach($res as $v){
                 if($question instanceof SurveyDoubleEntryTableQuestionTemplate)
                 {
@@ -91,16 +93,18 @@ class SurveyAnswer extends DataObject implements ISurveyAnswer
                     if(!is_null($value1) && !is_null($value2))
                         $aux .= sprintf("%s (%s),", $value1->label(), $value2->label());
                 }
-                else {
-                    $value = $question->getValueById(intval($v));
-                    if (is_null($value)) {
+                else
+                {
+                    $value = $question->getValueById($v);
+                    if (is_null($value))
                         continue;
-                    }
+
                     $aux .= $value->label() . ',';
                 }
             }
             $res = trim($aux, ',');
         }
+
         return $res;
     }
 }

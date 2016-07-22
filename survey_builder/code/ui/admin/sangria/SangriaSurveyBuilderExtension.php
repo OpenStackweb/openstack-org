@@ -30,25 +30,39 @@ final class SangriaSurveyBuilderExtension extends Extension
 
     public function __construct()
     {
-        $this->survey_repository          = new SapphireSurveyRepository();
+        $this->survey_repository = new SapphireSurveyRepository();
         $this->survey_template_repository = new SapphireSurveyTemplateRepository();
     }
 
-    public function onBeforeInit(){
-        Config::inst()->update(get_class($this), 'allowed_actions', array('SurveyBuilderListSurveys','SurveyBuilderListDeployments'));
-        Config::inst()->update(get_class($this->owner), 'allowed_actions', array('SurveyBuilderListSurveys','SurveyBuilderListDeployments'));
+    public function onBeforeInit()
+    {
+        Config::inst()->update(get_class($this), 'allowed_actions', [
+            'SurveyBuilderListSurveys',
+            'SurveyBuilderListDeployments',
+            'SurveyDetails',
+            'DeploymentDetails',
+        ]);
+        Config::inst()->update(get_class($this->owner), 'allowed_actions', [
+            'SurveyBuilderListSurveys',
+            'SurveyBuilderListDeployments',
+            'SurveyDetails',
+            'DeploymentDetails',
+        ]);
     }
 
-    public function onAfterInit(){
+    public function onAfterInit()
+    {
 
     }
 
-    public function getRequestVar($var){
+    public function getRequestVar($var)
+    {
         $request = Controller::curr()->getRequest();
         return $request->getVar($var);
     }
 
-    public function hasRequestVar($var){
+    public function hasRequestVar($var)
+    {
         $request = Controller::curr()->getRequest();
         return !empty($request->getVar($var));
     }
@@ -56,27 +70,30 @@ final class SangriaSurveyBuilderExtension extends Extension
     /**
      * @return string
      */
-    public function getSurveyListSortDir(){
+    public function getSurveyListSortDir()
+    {
         $request = Controller::curr()->getRequest();
         $dir = $request->getVar('dir');
-        if(empty($dir)) return 'ASC';
-        return $dir === 'ASC' ? 'DESC':'ASC';
+        if (empty($dir)) return 'ASC';
+        return $dir === 'ASC' ? 'DESC' : 'ASC';
     }
 
-    public function getPagerLink($page_nbr){
+    public function getPagerLink($page_nbr)
+    {
         $request = Controller::curr()->getRequest();
-        $vars   = $request->getVars();
-        if(isset($vars['url'])) unset($vars['url']);
+        $vars = $request->getVars();
+        if (isset($vars['url'])) unset($vars['url']);
         $vars['page'] = $page_nbr;
         return http_build_query($vars);
     }
 
-    public function getOrderLink($field){
+    public function getOrderLink($field)
+    {
         $request = Controller::curr()->getRequest();
-        $vars   = $request->getVars();
-        if(isset($vars['url'])) unset($vars['url']);
+        $vars = $request->getVars();
+        if (isset($vars['url'])) unset($vars['url']);
         $vars['order'] = $field;
-        $vars['dir']   = $this->getSurveyListSortDir();
+        $vars['dir'] = $this->getSurveyListSortDir();
         return http_build_query($vars);
     }
 
@@ -99,47 +116,47 @@ final class SangriaSurveyBuilderExtension extends Extension
         $query_templates = new QueryObject(new SurveyTemplate);
         $query_templates->addAndCondition(QueryCriteria::equal('ClassName', $template_class));
 
-        list($templates, $count) = $this->survey_template_repository->getAll($query_templates, 0 , PHP_INT_MAX);
+        list($templates, $count) = $this->survey_template_repository->getAll($query_templates, 0, PHP_INT_MAX);
 
-        $page               = intval($request->getVar('page'));
+        $page = intval($request->getVar('page'));
         $survey_template_id = intval($request->getVar('survey_template_id'));
-        $question_id        = intval($request->getVar('question_id'));
-        $question_value     = Convert::raw2sql($request->getVar('question_value'));
-        $question_value2    = Convert::raw2sql($request->getVar('question_value2'));
-        $question_value     = !empty($question_value) ? $question_value: $question_value2;
+        $question_id = intval($request->getVar('question_id'));
+        $question_value = Convert::raw2sql($request->getVar('question_value'));
+        $question_value2 = Convert::raw2sql($request->getVar('question_value2'));
+        $question_value = !empty($question_value) ? $question_value : $question_value2;
 
-        $order              = Convert::raw2sql($request->getVar('order'));
-        $order_dir          = Convert::raw2sql($request->getVar('dir'));
+        $order = Convert::raw2sql($request->getVar('order'));
+        $order_dir = Convert::raw2sql($request->getVar('dir'));
 
-        if($page === 0) $page = 1;
-        $offset  = ($page - 1 ) * self::SurveysPageSize;
+        if ($page === 0) $page = 1;
+        $offset = ($page - 1) * self::SurveysPageSize;
 
         $sort_fields =
             [
-                'id'      => 'ID',
+                'id' => 'ID',
                 'created' => 'Created'
             ];
 
         $query_surveys = new QueryObject(new Survey);
 
-        $selected_template = ($survey_template_id > 0) ? $this->survey_template_repository->getById($survey_template_id):$templates[0];
+        $selected_template = ($survey_template_id > 0) ? $this->survey_template_repository->getById($survey_template_id) : $templates[0];
 
-        if($survey_template_id === 0){
-            Controller::curr()->redirect($request->getURL(true).'?survey_template_id='.$selected_template->ID);
+        if ($survey_template_id === 0) {
+            Controller::curr()->redirect($request->getURL(true) . '?survey_template_id=' . $selected_template->ID);
         }
 
         $query_surveys
-        ->addAndCondition
-        (
-            QueryCriteria::id('Survey.TemplateID', $selected_template->getIdentifier())
-        )
-        ->addAndCondition
-        (
-            QueryCriteria::id('Survey.IsTest', 0)
-        );
+            ->addAndCondition
+            (
+                QueryCriteria::id('Survey.TemplateID', $selected_template->getIdentifier())
+            )
+            ->addAndCondition
+            (
+                QueryCriteria::id('Survey.IsTest', 0)
+            );
 
 
-        if($question_id > 0 && !empty($question_value)) {
+        if ($question_id > 0 && !empty($question_value)) {
             // filter by question ...
             $query_surveys->addAlias
             (
@@ -162,28 +179,26 @@ final class SangriaSurveyBuilderExtension extends Extension
             );
         }
 
-        if(empty($order)){
+        if (empty($order)) {
             $query_surveys->addOrder(QueryOrder::asc('ID'));
-        }
-        else
-        {
-            if($order_dir === 'ASC')
+        } else {
+            if ($order_dir === 'ASC')
                 $query_surveys->addOrder(QueryOrder::asc($sort_fields[$order]));
             else
                 $query_surveys->addOrder(QueryOrder::desc($sort_fields[$order]));
         }
 
 
-        list($surveys, $count_surveys) = $this->survey_repository->getAll($query_surveys,  $offset , self::SurveysPageSize);
+        list($surveys, $count_surveys) = $this->survey_repository->getAll($query_surveys, $offset, self::SurveysPageSize);
         // build pager
-        $pages    = '';
-        $max_page = intval(ceil($count_surveys/self::SurveysPageSize));
+        $pages = '';
+        $max_page = intval(ceil($count_surveys / self::SurveysPageSize));
 
-        for($i = 1; $i < $max_page; $i++){
-            $pages.= sprintf
+        for ($i = 1; $i < $max_page; $i++) {
+            $pages .= sprintf
             (
                 "<li %s ><a href=\"%s?%s\">%s</a></li>",
-                ($page === $i)?"class=\"active\"":"",
+                ($page === $i) ? "class=\"active\"" : "",
                 $this->owner->Link($ss_tpl_name),
                 $this->getPagerLink($i),
                 $i
@@ -199,22 +214,84 @@ HTML;
 
         $result = [
             'Templates' => new ArrayList($templates),
-            'Surveys'   => new ArrayList($surveys),
+            'Surveys' => new ArrayList($surveys),
             'Questions' => new ArrayList($selected_template->getAllFilterableQuestions()),
-            'Pager'     => $pager
+            'Pager' => $pager
         ];
 
         return $result;
     }
 
-    public function SurveyBuilderListSurveys(SS_HTTPRequest $request){
+    public function SurveyBuilderListSurveys(SS_HTTPRequest $request)
+    {
         $result = $this->buildList($request);
         return $this->owner->getViewer('SurveyBuilderListSurveys')->process($this->owner->customise($result));
     }
 
-    public function SurveyBuilderListDeployments(SS_HTTPRequest $request){
-        $result = $this->buildList($request,'EntitySurveyTemplate', 'SurveyBuilderListDeployments');
+    public function SurveyBuilderListDeployments(SS_HTTPRequest $request)
+    {
+        $result = $this->buildList($request, 'EntitySurveyTemplate', 'SurveyBuilderListDeployments');
         return $this->owner->getViewer('SurveyBuilderListDeployments')->process($this->owner->customise($result));
+    }
+
+    public function SurveyDetails(SS_HTTPRequest $request)
+    {
+        $params = $request->allParams();
+        $survey_id = intval(Convert::raw2sql($params["ID"]));;
+        $survey = Survey::get()->byID($survey_id);
+        if ($survey->ClassName === 'EntitySurvey') {
+            $survey = EntitySurvey::get()->byID($survey_id);
+        }
+
+        if (!$survey) {
+            return $this->owner->httpError(404, 'Sorry that Survey could not be found!.');
+        }
+
+        $back_url = $request->getVar('BackUrl');
+        $data = [
+
+            "Name" => 'Survey',
+            "Survey" => $survey,
+            "BackUrl" => $back_url
+        ];
+
+        return $this->owner->Customise
+        (
+            $data
+        )->renderWith(array('SangriaPage_SurveyBuilderSurveyDetails', 'SangriaPage', 'SangriaPage'));
+
+    }
+
+    public function DeploymentDetails(SS_HTTPRequest $request)
+    {
+        $params = $request->allParams();
+        $deployment_id = intval(Convert::raw2sql($params["ID"]));
+        //get survey version
+        $deployment = Survey::get()->byID($deployment_id);
+        if ($deployment->ClassName === 'EntitySurvey') {
+            $deployment = EntitySurvey::get()->byID($deployment_id);
+        }
+
+        if (!$deployment) {
+            return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
+        }
+
+        $back_url = $request->getVar('BackUrl');
+        if (empty($back_url)) {
+            $back_url = $this->owner->Link("ViewDeploymentDetails");
+        }
+
+        $data = [
+            "Name" => 'Deployment',
+            "Survey" => $deployment,
+            "BackUrl" => $back_url
+        ];
+
+        return $this->owner->Customise
+        (
+            $data
+        )->renderWith(array('SangriaPage_SurveyBuilderSurveyDetails', 'SangriaPage', 'SangriaPage'));
+
     }
 
 }

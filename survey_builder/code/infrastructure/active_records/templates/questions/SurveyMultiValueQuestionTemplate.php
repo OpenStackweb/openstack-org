@@ -268,7 +268,7 @@ class SurveyMultiValueQuestionTemplate
     public function getValueById($id)
     {
         foreach($this->values() as $v){
-            if( $v->getIdentifier() === $id)
+            if( $v->getIdentifier() === intval($id))
                 return $v;
         }
         return null;

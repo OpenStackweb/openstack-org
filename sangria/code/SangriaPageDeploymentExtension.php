@@ -25,8 +25,6 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentStatistics',
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
-            'DeploymentDetails',
-            'SurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -39,8 +37,6 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentStatistics',
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
-            'DeploymentDetails',
-            'SurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -57,74 +53,6 @@ final class SangriaPageDeploymentExtension extends Extension
         Session::clear("ViewDeploymentStatistics_survey_range");
         Session::clear("ViewDeploymentsPerRegion_survey_range");
         Session::clear("global_survey_range");
-    }
-
-    function DeploymentDetails()
-    {
-        $params = $this->owner->request->allParams();
-        $deployment_id = intval(Convert::raw2sql($params["ID"]));
-
-        $range = Session::get("global_survey_range");
-        //get survey version
-        $deployment = Survey::get()->byID($deployment_id);
-        if ($deployment->ClassName === 'EntitySurvey') {
-            $deployment = EntitySurvey::get()->byID($deployment_id);
-        }
-
-
-        if ($deployment) {
-            $back_url = $this->owner->request->getVar('BackUrl');
-            if (empty($back_url)) {
-                $back_url = $this->owner->Link("ViewDeploymentDetails");
-            }
-                $details_template = 'SangriaPage_SurveyBuilderSurveyDetails';
-                $data = array
-                (
-                    "Name"    => 'Deployment',
-                    "Survey"  => $deployment,
-                    "BackUrl" => $back_url
-            );
-
-
-            return $this->owner->Customise
-            (
-                $data
-            )->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
-        }
-
-        return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
-    }
-
-    function SurveyDetails()
-    {
-        $params = $this->owner->request->allParams();
-        $deployment_id = intval(Convert::raw2sql($params["ID"]));;
-        $range = Session::get("global_survey_range");
-        //get survey version
-        $survey = Survey::get()->byID($deployment_id);
-        if ($survey->ClassName === 'EntitySurvey') {
-            $survey = EntitySurvey::get()->byID($deployment_id);
-        }
-
-        if ($survey) {
-            $back_url = $this->owner->request->getVar('BackUrl');
-            if ($survey instanceof Survey) {
-                $details_template = 'SangriaPage_SurveyBuilderSurveyDetails';
-                $data = array
-                (
-                    "Name"    => 'Survey',
-                    "Survey" => $survey,
-                    "BackUrl" => $back_url
-                );
-            }
-
-            return $this->owner->Customise
-            (
-                $data
-            )->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
-        }
-
-        return $this->owner->httpError(404, 'Sorry that Survey could not be found!.');
     }
 
     // Deployment Survey data
