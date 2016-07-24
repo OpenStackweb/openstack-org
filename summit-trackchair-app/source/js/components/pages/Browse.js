@@ -83,14 +83,14 @@ class Browse extends React.Component {
 		}
 	}
 
-	keyListener(e) {		
-		if(tagName === 'TEXTAREA' && tagName === 'INPUT') return;
+	keyListener(e) {
+		const {tagName} = e.target;		
+		if(tagName === 'TEXTAREA' || tagName === 'INPUT') return;
 
 		const adder = e.keyCode === 37 ? -1 : (e.keyCode === 39 ? 1 : 0);
 
 		if(!adder) return;
 
-		const {tagName} = e.target;
 		const {presentations} = this.props;
 		const {detailPresentation} = this.props;
 
