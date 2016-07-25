@@ -154,7 +154,7 @@ class TrackQuestionTemplate
         $fields->add(new TextareaField('Label','Label'));
         $fields->add(new CheckboxField('Mandatory','Is Mandatory?'));
         $fields->add(new CheckboxField('ReadOnly','Is Read Only?'));
-        $fields->add(new DropdownField('AfterQuestion','Insert After Question',$this->dbObject('AfterQuestion')->enumValues()));
+        //$fields->add(new DropdownField('AfterQuestion','Insert After Question',$this->dbObject('AfterQuestion')->enumValues()));
 
         return $fields;
     }

@@ -198,11 +198,7 @@ function getExtraQuestions() {
             dataType:'json',
             success: function (data, textStatus, jqXHR) {
                 $.each(data,function(idx,val){
-                    if (val.InsertAfter == 'Last') {
-                        $('#PresentationForm_PresentationForm_ID').before(val.Html);
-                    } else {
-                        $('#'+val.InsertAfter).after(val.Html);
-                    }
+                    $('#category_options').after(val.Html);
                 });
 
             }
