@@ -45,12 +45,12 @@ $(document).ready(function(){
 
     $('#event_type').change(function(){
        var val = $(this).find("option:selected").text();
-        if (val == 'Presentation' || val == 'Keynotes' ) {
+        if (val == 'Presentation' || val == 'Keynotes' || val == 'Panel' ) {
            $('.speakers_container').show();
            $('.track_container').show();
            $('.level_container').show();
            $('#allow_feedback').attr("checked","checked");
-           if(val == 'Keynotes')
+           if(val == 'Keynotes' || val == 'Panel')
                $('.moderator_container').show();
            else
                $('.moderator_container').hide();
@@ -248,11 +248,11 @@ $(document).ready(function(){
             summit_type: { required: true },
             level: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes';
+                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
             }},
             track: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes';
+                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
             }},
             speakers: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();

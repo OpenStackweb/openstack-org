@@ -19,7 +19,7 @@
                         <option value=''>-- Select An Event Source --</option>
                         <option value='tracks'>Tracks</option>
                         <option value='track_list'>Track Chair Sel.</option>
-                        <option value='presentations' selected>Presentations</option>
+                        <option value='presentations' selected>Presentations + Panels</option>
                         <option value='events'>Summit Events</option>
                     </select>
                 </div>

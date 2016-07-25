@@ -112,7 +112,7 @@ SQL;
     {
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
-        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND SummitEventType.Type != 'Presentation'";
+        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type NOT IN ('Presentation','Panel')) ";
         if (!empty($search_term)) {
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.ID = '{$search_term}' OR SummitEvent.Description LIKE '%{$search_term}%')";
         }

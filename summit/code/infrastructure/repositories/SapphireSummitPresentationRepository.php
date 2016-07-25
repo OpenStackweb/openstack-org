@@ -35,7 +35,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         $filter = array('SummitID' => $summit_id, 'Published' => 0);
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
-        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND SummitEventType.Type = 'Presentation'";
+        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type IN ('Presentation','Panel')) ";
         if ($search_term) {
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
             $where_clause .= " OR PresentationSpeaker.FirstName LIKE '%{$search_term}%' OR PresentationSpeaker.LastName LIKE '%{$search_term}%'";
