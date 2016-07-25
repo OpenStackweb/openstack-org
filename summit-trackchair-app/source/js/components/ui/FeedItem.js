@@ -6,6 +6,7 @@ export default ({
     notes,
     active,
     muted,
+    rank,
     className
 }) => (
    <div className={`feed-element ${active ? 'active' : ''} ${muted ? 'muted' : ''} ${className}`}>
@@ -13,6 +14,9 @@ export default ({
          <strong>{title}</strong>
          <div>{description}</div>
          <small className="text-navy">{notes}</small>
+         {rank !== undefined &&
+         	<span className="rank">{rank}</span>
+         }
       </div>
    </div>
 );

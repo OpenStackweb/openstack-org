@@ -492,27 +492,49 @@ ul.navbar-nav {
 	}
 }
 
-.keyboard-help {
-	ul {
-		margin:0;
-		padding:0;
+.presentation-utils {
+	margin-top:-15px;
+	margin-bottom:15px;
+	.keyboard-help {
+		display:block;
+		padding:8px;
+		border-radius:4px;
+		border:1px solid #ccc;
+		background:white;
 
-		li {
-			display:inline-block;
-			list-style:none;
-			margin-right:15px;
+		ul {
+			margin:0;
+			padding:0;
+
+			li {
+				display:inline-block;
+				list-style:none;
+				margin-right:15px;
+			}
 		}
 	}
-}
-.keyboard-key {
-	color:#333;
-	font-weight:bold;
+
+	.presentation-index {
+		text-align:right;
+		display:block;
+		font-size:14px;
+		line-height: 50px;
+		margin-right:20px;
+		strong {
+			font-size:18px;
+		}
+	}
+	.keyboard-key {
+		color:#333;
+		font-weight:bold;
+	}
+
 }
 
 .ribbon {
   position: absolute;
   left: 35px; 
-  top:68px;
+  top:84px;
   z-index: 1;
   overflow: hidden;
   width: 75px; height: 75px;

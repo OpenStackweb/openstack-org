@@ -55,7 +55,7 @@ class BrowseDetail extends React.Component {
 
     render () {
     	const p = this.props.presentation;    	
-    	const {selectionsRemaining, myList, isAdmin} = this.props;
+    	const {selectionsRemaining, myList, isAdmin, index, total} = this.props;
 
     	if(!p.id) {
     		return <Wave />
@@ -75,23 +75,37 @@ class BrowseDetail extends React.Component {
         
         return (
 			<div className="wrapper wrapper-content">
-			{p.selected && !p.group_selected &&
-			  <Ribbon type={ribbonTypes[p.selected]}>{voteLookup[p.selected]}</Ribbon>
-			}
-			{p.group_selected &&
-			  <Ribbon type='primary'>TEAM SELECTION</Ribbon>
-			}
+				{p.selected && !p.group_selected &&
+				  <Ribbon type={ribbonTypes[p.selected]}>{voteLookup[p.selected]}</Ribbon>
+				}
+				{p.group_selected &&
+				  <Ribbon type='primary'>TEAM SELECTION</Ribbon>
+				}
 
-			<small className="keyboard-help">
-				<strong>Keyboard commands</strong>:
-				<ul>
-					<li><i className="keyboard-key fa fa-caret-square-o-left" /> Prev presentation</li>
-					<li><i className="keyboard-key fa fa-caret-square-o-right" /> Next presentation</li>
-					<li><span className="keyboard-key">[Y]</span>es</li>
-					<li><span className="keyboard-key">[I]</span>nterested</li>
-					<li><span className="keyboard-key">[N]</span>o thanks</li>
-				</ul>
-			</small>
+				<div className="presentation-utils">
+					<div className="row">
+						<div className="col-xs-12 col-md-8">
+							<small className="keyboard-help">
+								<strong>Keyboard commands</strong>:
+								<ul>
+									<li><i className="keyboard-key fa fa-caret-square-o-left" /> Prev presentation</li>
+									<li><i className="keyboard-key fa fa-caret-square-o-right" /> Next presentation</li>
+									<li><span className="keyboard-key">[Y]</span>es</li>
+									<li><span className="keyboard-key">[I]</span>nterested</li>
+									<li><span className="keyboard-key">[N]</span>o thanks</li>
+								</ul>
+							</small>
+						</div>
+						{p.can_assign && !!index && !!total &&
+							<div className="col-xs-12 col-md-4 pull-right">
+								<span className="presentation-index">
+									Viewing:&nbsp;
+									<strong>{this.props.index} / {this.props.total}</strong>
+								</span>
+							</div>
+						}
+					</div>					
+				</div>
 
 			   <div className="ibox">
 			      <div className="ibox-content">
@@ -142,13 +156,18 @@ class BrowseDetail extends React.Component {
 
 export default connect(
 	state => {
+
 		const myList = state.lists.results ? state.lists.results.find(l => l.mine) : null;
 		const selectionsRemaining = myList ? (myList.slots - myList.selections.length) : null;
-
-		return {
+		const index = state.presentations.results ? 
+					  state.presentations.results.findIndex(p => p.id === state.detailPresentation.id)+1 :
+					  null;
+		return {	
 			presentation: state.detailPresentation,
 			myList,
 			selectionsRemaining,
+			index,			
+			total: state.presentations.total,
 			isAdmin: window.TrackChairAppConfig.userinfo.isAdmin
 		}
 	},

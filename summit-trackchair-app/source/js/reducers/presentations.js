@@ -5,6 +5,7 @@ export const presentations = function (
         has_more: false,
         loading: false,
         page: 0,
+        total: 0,
         filter: 'all'
     },
     action = {}) {	
@@ -24,6 +25,7 @@ export const presentations = function (
                 	[...state.results, ...action.payload.response.results],
                 has_more: action.payload.response.has_more,
                 page: action.payload.response.page,
+                total: action.payload.response.total,
                 loading: false
             };
 
@@ -33,6 +35,7 @@ export const presentations = function (
     			has_more: false,
     			loading:true,
     			page: 0,
+    			total: 0,
     			filter: 'all'
     		};        	
         case 'ACTIVATE_PRESENTATION_FILTER':

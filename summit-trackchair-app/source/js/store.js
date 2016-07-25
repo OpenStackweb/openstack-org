@@ -5,8 +5,8 @@ import {reducers} from './reducers';
 import createLogger from 'redux-logger';
 
 const createStoreWithMiddleware = applyMiddleware(
-	thunk
-	//createLogger()
+	thunk,
+	createLogger()
 )(createStore);
 const store = createStoreWithMiddleware(reducers);
 
