@@ -3,7 +3,8 @@ export const main = function (
 	state = {
 		errorMsg: null,
 		notification: null,
-		mobileMenu: false
+		mobileMenu: false,
+		params: {}
 	}, 
 	action = {}) {
 		switch(action.type) {
@@ -35,6 +36,11 @@ export const main = function (
 				return {
 					...state,
 					mobileMenu: action.payload === undefined ? !state.mobileMenu : action.payload
+				};
+			case 'ROUTER_PARAMS_CHANGE':
+				return {
+					...state,
+					params: {...action.payload.params}
 				};
 			default:
 				return state;

@@ -45,7 +45,6 @@ class AddChairForm extends React.Component {
 			searchResults
 		} = this.props;
 		const valid = this.isValid();
-		console.log(emailCheck);
 		return (
     	<div className="directory-add-chair">
     		<h3>Add a new chair</h3>

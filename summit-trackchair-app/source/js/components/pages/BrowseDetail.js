@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Initials from '../ui/Initials';
 import {
-	fetchPresentationDetail, 
 	postMySelection, 
 	postGroupSelection,
 	postMarkAsRead,
-	toggleEmailSpeakers
+	toggleEmailSpeakers,
+	updateDetailPresentationID
 } from '../../actions';
 import PresentationCommentForm from '../containers/PresentationCommentForm';
 import PresentationEmailForm from '../containers/PresentationEmailForm';
@@ -26,15 +26,8 @@ class BrowseDetail extends React.Component {
 		this.toggleMySelection = this.toggleMySelection.bind(this);
 		this.toggleGroupSelection = this.toggleGroupSelection.bind(this);
 	}
-	componentDidMount() {
-		this.props.fetch(this.props.params.id);
-	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.params.id !== this.props.params.id) {
-			this.props.fetch(nextProps.params.id);
-		}
-
 		if(nextProps.presentation.id && !nextProps.presentation.viewed) {
 			this.props.markAsRead(nextProps.params.id);
 		}
@@ -172,11 +165,11 @@ export default connect(
 		}
 	},
 	dispatch => ({
-		fetch(id) {
-			dispatch(fetchPresentationDetail(id));
+		update(id) {
+			dispatch(updateDetailPresentationID(id))
 		},
-		markAsRead(presentationID) {
-			dispatch(postMarkAsRead(presentationID));
+		markAsRead(id) {
+			dispatch(postMarkAsRead(id));
 		},
 		toggleEmailSpeakers(e) {
 			e.preventDefault();

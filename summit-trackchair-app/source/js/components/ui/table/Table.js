@@ -25,10 +25,10 @@ const Table = (props) => {
 	const children = validChildren(props.children);
 
 	return (
-	<table {...props}>
+	<table className={props.className}>
 		<thead>
 			<tr>
-			{children.map((col,i) => {								
+			{children.map((col,i) => {						
 				return (
 				<TableHeading 
 					onSort={props.onSort}

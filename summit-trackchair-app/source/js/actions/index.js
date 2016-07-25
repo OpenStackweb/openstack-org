@@ -75,6 +75,7 @@ export const toggleMobileMenu = createAction('TOGGLE_MOBILE_MENU');
 export const deleteChair = createAction('DELETE_CHAIR');
 export const receiveMemberSearch = createAction('RECEIVE_MEMBER_SEARCH');
 export const chooseMemberSearchItem = createAction('CHOOSE_MEMBER_SEARCH_ITEM');
+
 /* Async Actions */
 
 export const fetchSummit = (id) => {

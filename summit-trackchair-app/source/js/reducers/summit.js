@@ -2,6 +2,7 @@
 export const summit = function (
     state = {
         data: null,
+        defaultCategory: null,
         loading: false
     },
     action = {}) {
@@ -12,11 +13,15 @@ export const summit = function (
                 loading: true
             };
         case 'RECEIVE_SUMMIT':
+        	const {response} = action.payload;
             return {
                 ...state,
                 data: {
-                	...action.payload.response
+                	...response
                 },
+                defaultCategory: response.categories.find(c => (
+					c.user_is_chair
+					)) || response.categories[0],
                 loading: false
             };
 

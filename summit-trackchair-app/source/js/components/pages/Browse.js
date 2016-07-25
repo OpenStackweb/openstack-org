@@ -20,68 +20,11 @@ class Browse extends React.Component {
 	}
 
 	componentDidMount() {
-		const {category, detailPresentation, params, defaultCategory, search} = this.props;
-		if(category) {
-			this.props.fetchPresentations({category});
-			this.props.fetchLists(category);
-		}
-		// /browse ---> /browse?category=1
-		else if(defaultCategory && !params.id) {
-			browserHistory.push(URL.create(`browse`, {
-				category: defaultCategory.id,
-				search: search
-			}));
-		}
-
 		document.addEventListener('keyup', this.keyListener);	
 	}
 
 	componentWillUnmount() {
 		document.removeEventListener('keyup', this.keyListener);
-	}
-
-	componentWillReceiveProps(nextProps) {
-		const {category, search, params, presentations, detailPresentation} = nextProps;
-
-		// /browse/123?category=20  ----> /browse/123?category=30
-		if(category !== this.props.category) {
-			this.props.clearPresentations();
-			this.props.fetchPresentations({
-				category: category,
-				keyword: search,
-				page: 1
-			});
-			if(category) {
-				this.props.clearPresentations();		
-				this.props.fetchLists(category);
-				// /browse/123?category=20 -> /browse/123?category=30 -> /browse/?category=30
-				if(params.id) {
-					browserHistory.push(URL.create('browse/', {
-						category: category,
-						search: search
-					}));				
-				}
-			}
-		}
-		// /browse/123?search=foo  ----> /browse/123?search=bar
-		else if(search !== this.props.search) {
-			this.props.clearPresentations();	
-			this.props.fetchPresentations({
-				keyword: search,
-				category: category,
-				page: 1
-			});
-		}
-		
-		else if(presentations && detailPresentation) {			
-			// /browse/123 ----> /browse/123?category=20
-			if(params.id && !category && detailPresentation.category_id) {
-				browserHistory.push(URL.create(undefined, {
-					category: detailPresentation.category_id,
-					search: search
-				}));
-			}
-		}
 	}
 
 	keyListener(e) {
@@ -141,7 +84,7 @@ class Browse extends React.Component {
 	                	search={this.props.search}
 	                	/>
 	                }
-	                {!this.props.presentations &&
+	                {this.props.loading &&
 	                	<Bounce />
 	                }
 	               </div>
@@ -160,25 +103,18 @@ export default connect(
 	state => {
 		return {
 			presentations: getFilteredPresentations(state),
-			detailPresentation: state.detailPresentation.id ? state.detailPresentation : null,
-			defaultCategory: state.summit.data.categories.find(c => (
-				c.user_is_chair
-			)) || state.summit.data.categories[0],
+			detailPresentation: state.detailPresentation.id ? state.detailPresentation : null,			
 			category: state.routing.locationBeforeTransitions.query.category,
 			search: state.routing.locationBeforeTransitions.query.search,
 			hasMore: state.presentations.has_more,
-			currentPage: state.presentations.page
+			currentPage: state.presentations.page,
+			loading: state.presentations.loading
 		}
 	},
 	dispatch => ({
-		fetchPresentations(params) {			
+		fetchPresentations(params) {
 			dispatch(fetchPresentations(params));
 		},
-
-		fetchLists(category) {
-			dispatch(fetchLists(category));
-		},
-
 		clearPresentations() {
 			dispatch(clearPresentations());
 		}

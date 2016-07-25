@@ -85,7 +85,7 @@ class ChangeRequests extends React.Component {
 			               		className="table table-striped table-bordered table-hover dataTable" 
 			               		role="grid"
 			               	>
-				               		<TableColumn width='45%' columnKey='presentation'
+				               		<TableColumn width='40%' columnKey='presentation'
 				               			cell={(data) => {
 				               				return <RouterLink link={`browse/${data.id}`}>{data.title}</RouterLink>
 				               			}}
@@ -106,11 +106,11 @@ class ChangeRequests extends React.Component {
 				               			>
 				               			Status
 				               		</TableColumn>
-				               		<TableColumn width='15%'columnKey='oldcat'>Old Category</TableColumn>
-				               		<TableColumn width='15%' columnKey='newcat'>New Category</TableColumn>
-				               		<TableColumn width='15%' columnKey='requester'>Requester</TableColumn>
+				               		<TableColumn width='12%'columnKey='oldcat'>Old Category</TableColumn>
+				               		<TableColumn width='12%' columnKey='newcat'>New Category</TableColumn>
+				               		<TableColumn width='12%' columnKey='requester'>Requester</TableColumn>
 				               		{this.props.isAdmin &&
-				               			<TableColumn width='10%' columnKey='admin'
+				               			<TableColumn width='15%' columnKey='admin'
 				               				cell={(data, row) => {
 				               					if(data === false) {
 				               						return <small>Presentation already has selections.</small>
