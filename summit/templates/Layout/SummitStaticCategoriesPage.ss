@@ -103,7 +103,7 @@
                             <li class="tracks-tooltip" title="Big Data collection and analysis is a common use case for OpenStack infrastructure. In this track, you'll learn about specific reference architectures and use cases, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.">Big Data</li>
                             <li class="tracks-tooltip" title="A large community of application developers and ecosystem of development tools is growing around OpenStack. This track will be for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, application software configuration, SDKs, tools, PaaS and big data.">Cloud App Development</li>
                             <li class="tracks-tooltip" title="OpenStack provides a single platform and set of APIs for virtual machines, bare metal and containers. Many organizations looking to adopt containers to increase speed for their developers have found OpenStack to be their path to production. In this track, learn how containers fit with OpenStack, including reference architectures, use cases and updates from popular containers projects like Magnum and Kuryr.">Containers</li>
-                            <li class="tracks-tooltip" title="">Developer Tools*</li>
+                            <li class="tracks-tooltip" title="This track covers the large ecosystem of developer tools for building applications on OpenStack clouds.">Developer Tools</li>
                             <li class="tracks-tooltip" title="The How to Contribute track is for new community members and companies interested in contributing to the open source code, with a focus on OpenStack community processes, tools, culture and best practices.">How to Contribute</li>
                             <li class="tracks-tooltip" title="Presentations in this track are targeted toward prospective and existing contributors, to discover new processes, learn about common cross-project features or libraries you should adopt in your project, or share best development practices.">Upstream Development</li>
                         </ul>
@@ -239,7 +239,7 @@
                 </p>
                 <p>
                     <strong>Developer Tools</strong><br>
-                    
+                    This track covers the large ecosystem of developer tools for building applications on OpenStack clouds.
                 </p>
                 <p>
                     <strong>Evaluating OpenStack</strong><br>
