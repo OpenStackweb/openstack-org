@@ -410,7 +410,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     foreach ($days as $day) {
                         $active_sheet = $objPHPExcel->createSheet();
                         $active_sheet->setTitle(date('n-d',strtotime($day->Date)));
-                        $active_sheet->fromArray(array('Date','Time','Code','Event','Room','Venue','Capacity','Speakers','Headcount','Total'), NULL, 'A1');
+                        $active_sheet->fromArray(array('Date','Time','Code','Event','Room','Venue','Capacity','Speakers','Headcount','Total','Speaker Names'), NULL, 'A1');
                         $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venues);
                         foreach ($day_report as $key2 => $val) {
                             $row = $key2 + 2;

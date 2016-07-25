@@ -175,7 +175,8 @@ L2.Name AS venue,
 R.Capacity AS capacity,
 COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL) AS speakers,
 E.HeadCount AS headcount,
-COUNT(A.ID) AS total
+COUNT(A.ID) AS total,
+GROUP_CONCAT(DISTINCT CONCAT(S.FirstName,' ',S.LastName) SEPARATOR ', ') AS speaker_list
 FROM SummitEvent AS E
 LEFT JOIN Presentation AS P ON P.ID = E.ID
 LEFT JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
@@ -185,6 +186,7 @@ LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
 LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
 LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
 LEFT JOIN SummitAttendee_Schedule AS A ON A.SummitEventID = E.ID
+LEFT JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
 WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
 SQL;
         if ($event_type == 'presentation') {
