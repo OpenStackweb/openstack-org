@@ -10,7 +10,7 @@ calendar_synch.addEventToGoogleCalendar = function(summit_id, event)
         var cal_event = {
             'summary': event.title,
             'location': event.location,
-            'description': event.abstract,
+            'description': $(event.abstract).text(),
             'start': {
                 'dateTime': event.start_datetime.replace(' ','T'),
                 'timeZone': 'America/Chicago'
