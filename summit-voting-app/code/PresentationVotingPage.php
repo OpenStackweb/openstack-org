@@ -278,9 +278,7 @@ class PresentationVotingPage_API extends RequestHandler
                 'first_name' => $s->FirstName,
                 'last_name' => $s->LastName,
                 'bio' => $s->Bio,
-                'photoUrl' => ($s->Photo()->exists() && Director::fileExists($s->Photo()->URL)) ?
-                    $s->Photo()->SetRatioSize(80, 80)->URL :
-                    $this->ThemeDir() . '/images/generic-profile-photo.png'
+                'photoUrl' => $s->ProfilePhoto()
             ];
 
         }
