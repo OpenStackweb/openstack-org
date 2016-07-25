@@ -624,18 +624,25 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         if (!$category->exists()) {
             return $this->httpError(500, "Category not found in current summit");
         }
-		
+		$oldCat = $request->Presentation()->Category();
         if($approved) {
 	        $request->OldCategoryID = $request->Presentation()->CategoryID;
 	        $request->Presentation()->CategoryID = $request->NewCategoryID;
 	        $request->Presentation()->write();    
 	        $request->Presentation()->addNotification(
-	        	'{member} approved ' . $request->Reqester()->getName() .'\'s request to move this presentation to ' . $category->Title
+	        	'{member} approved ' . 
+	        	$request->Reqester()->getName() .'\'s request to move this presentation from ' . 
+	        	$oldCat->Title . ' to ' .
+	        	$category->Title
 	        );
     	}
     	else {	   
     		$request->Presentation()->addNotification(
-    			'{member} rejected ' . $request->Reqester()->getName() .'\'s request to move this presentation to ' . $category->Title
+	        	'{member} rejected ' . 
+	        	$request->Reqester()->getName() .'\'s request to move this presentation from ' . 
+	        	$oldCat->Title . ' to ' .
+	        	$category->Title
+
     		);     
     	}
         
@@ -1104,7 +1111,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $request->write();
 
             $this->presentation->addNotification('
-            	{member} submitted a request to change the category to '.$c->Title
+            	{member} submitted a request to change the category from '. 
+            	$request->Presentation()->Category()->Title . ' to ' .
+            	$c->Title
             );           
             
             return new SS_HTTPResponse("change request made.", 200);
