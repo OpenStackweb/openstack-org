@@ -812,7 +812,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $speakers = [];
         $current_summit = $p->Summit();
 
-        foreach ($p->Speakers() as $s) {
+        foreach ($p->getSpeakersAndModerators() as $s) {
             // if($s->Bio == NULL) $s->Bio = "&nbsp;";
             $s->Bio = str_replace(array("\r", "\n"), "", $s->Bio);
             $speakerData = $s->toJSON();
@@ -965,9 +965,17 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         if ($email != null) {
             $current_user = Member::currentUser();
             $addresses = [];
-            foreach($this->presentation->Speakers() as $s) {
+            foreach($this->presentation->getSpeakersAndModerators() as $s) {
             	$addresses[] = $s->getEmail();
             }
+            
+            $chairs = $this->presentation->Category()->TrackChairs()
+            			->exclude('MemberID', $current_user->ID);
+
+            foreach($chairs as $chair) {
+            	$addresses[] = $chair->Member()->Email;
+            }
+
             $subject = "Track chair {$current_user->getName()} has a question about your presentation";
             $body = $email;
             $email = EmailFactory::getInstance()->buildEmail(
