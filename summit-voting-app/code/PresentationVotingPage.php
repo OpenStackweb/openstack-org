@@ -273,7 +273,7 @@ class PresentationVotingPage_API extends RequestHandler
             'abstract' => $presentation->Description,
         ];
 
-        foreach ($presentation->Speakers() as $s) {
+        foreach ($presentation->getSpeakersAndModerators() as $s) {
             $json['speakers'][] = [
                 'first_name' => $s->FirstName,
                 'last_name' => $s->LastName,
@@ -285,7 +285,7 @@ class PresentationVotingPage_API extends RequestHandler
 
         }
 
-        $userIsSpeaker = $presentation->Speakers()
+        $userIsSpeaker = $presentation->getSpeakersAndModerators()
             ->filter('MemberID', Member::currentUserID())
             ->exists();
 
