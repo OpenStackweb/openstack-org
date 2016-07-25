@@ -17,6 +17,7 @@ import SelectionButtonBar from '../containers/SelectionButtonBar';
 import Ribbon from '../ui/Ribbon';
 import Wave from '../ui/loaders/Wave';
 import RouterLink from '../containers/RouterLink';
+import {getFilteredPresentations} from '../../selectors';
 
 class BrowseDetail extends React.Component {
 
@@ -96,7 +97,7 @@ class BrowseDetail extends React.Component {
 								</ul>
 							</small>
 						</div>
-						{p.can_assign && !!index && !!total &&
+						{(p.can_assign || isAdmin) && !!index && !!total &&
 							<div className="col-xs-12 col-md-4 pull-right">
 								<span className="presentation-index">
 									Viewing:&nbsp;
@@ -156,12 +157,11 @@ class BrowseDetail extends React.Component {
 
 export default connect(
 	state => {
-
+		const filteredPresentations = getFilteredPresentations(state);
 		const myList = state.lists.results ? state.lists.results.find(l => l.mine) : null;
 		const selectionsRemaining = myList ? (myList.slots - myList.selections.length) : null;
-		const index = state.presentations.results ? 
-					  state.presentations.results.findIndex(p => p.id === state.detailPresentation.id)+1 :
-					  null;
+		const index = filteredPresentations.findIndex(p => p.id === state.detailPresentation.id)+1;
+		
 		return {	
 			presentation: state.detailPresentation,
 			myList,

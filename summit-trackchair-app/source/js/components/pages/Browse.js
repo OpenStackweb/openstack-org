@@ -9,6 +9,7 @@ import FeedItem from '../ui/FeedItem';
 import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
 import Bounce from '../ui/loaders/Bounce';
+import {getFilteredPresentations} from '../../selectors';
 
 class Browse extends React.Component {
 
@@ -157,36 +158,8 @@ class Browse extends React.Component {
 }
 export default connect(
 	state => {
-		let {results, filter} = state.presentations;
-		if(results) {
-			results = results.filter(p => {
-				switch(filter) {
-					case 'all':
-						return p.selected !== 'pass';
-					case 'unseen':
-						return !p.viewed;
-					case 'seen':
-						return !!p.viewed;
-					case 'selected':
-						return p.selected === 'selected';
-					case 'maybe':
-						return p.selected === 'maybe';
-					case 'pass':
-						return p.selected === 'pass';
-					case 'moved':		
-						return !!p.moved_to_category && !p.viewed;
-					case 'team':
-						return p.group_selected;
-					case 'untouched':
-						return !p.selected;
-
-					default:
-						return p
-				}				
-			})
-		}
 		return {
-			presentations: results,
+			presentations: getFilteredPresentations(state),
 			detailPresentation: state.detailPresentation.id ? state.detailPresentation : null,
 			defaultCategory: state.summit.data.categories.find(c => (
 				c.user_is_chair
