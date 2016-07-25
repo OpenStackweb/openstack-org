@@ -11,16 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class YouTubeVideo extends DataObject {
+class VideoLink extends DataObject {
 
     private static $db = array(
-        'Url' => 'Text',
+        'YoutubeID' => 'Text',
         'Caption' => 'Text',
         'SortOrder' => 'Int'
     );
 
     private static $has_one = array(
-        'MarketingPage' => 'MarketingPage',
         'Thumbnail' => 'Image',
     );
 
@@ -31,23 +30,22 @@ class YouTubeVideo extends DataObject {
 	    $fields = new FieldList;
 
         $image = new CustomUploadField('Thumbnail','Thumbnail');
-	    $image->setFolderName('marketing/youtube_vids_thumbs');
+	    $image->setFolderName('assets/vid_thumbs');
 	    $image->setAllowedFileCategories('image');
 
         $image_validator = new Upload_Validator();
         $image_validator->setAllowedExtensions(array('jpg','png','jpeg'));
         $image->setValidator($image_validator);
 
-	    $fields->push(new TextField('Url'));
+	    $fields->push(new TextField('YoutubeID','YouTube ID'));
+	    $fields->push(new TextField('Caption'));
 	    $fields->push($image);
 
         return $fields;
-
     }
 
     function getValidator()	{
         $validator= new FileRequiredFields(array('Url'));
-        $validator->setRequiredFileFields(array("Thumbnail"));
         return $validator;
     }
 
@@ -74,4 +72,5 @@ class YouTubeVideo extends DataObject {
         }
         return 'n/a';
     }
+
 }

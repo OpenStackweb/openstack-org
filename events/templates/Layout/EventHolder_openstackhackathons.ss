@@ -138,10 +138,3 @@
         </div>
     </div>
 </div>
-
-<%--
-<% with FeaturedEvent %>
-    $Title
-    $Picture
-<% end_with %>
---%>
