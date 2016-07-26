@@ -57,8 +57,9 @@ isDefaultView$
 		path(state).match(/track-chairs\/$/) ||
 		path(state).match(/track-chairs\/browse\/$/)
 	))
+	.filter(state => !state.routing.locationBeforeTransitions.query)
 	.map(state => state.summit.defaultCategory.id)
-	.subscribe((category) => {
+	.subscribe((category) => {		
 		browserHistory.push(URL.create('browse', {
 			category
 		}));
@@ -120,11 +121,11 @@ selectionsQueryParamsDidChangeCategoryExists$
 state$
 	.filter(isPath('/browse'))
 	.filter(state => !!state.main.params.id)
-	.filter(state => !q(state, 'category'))
+	.filter(state => !q(state, 'category') && !q(state, 'search'))
 	.filter(state => !!state.detailPresentation.id)
 	.filter(state => state.detailPresentation.id == state.main.params.id)
 	.map(state => state.detailPresentation)
-	.subscribe(presentation => {
+	.subscribe(presentation => {		
 		browserHistory.push(URL.create(`browse/${presentation.id}`, {
 			category: presentation.category_id
 		}));

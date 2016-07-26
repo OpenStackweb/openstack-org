@@ -24,7 +24,7 @@ class PresentationSearchForm extends React.Component {
 	doSearch(e) {
 		e.preventDefault();
 		browserHistory.push(
-			URL.create(undefined, {search: this.state.value})
+			URL.create('/browse', {search: this.state.value})
 		);
 	}
 
