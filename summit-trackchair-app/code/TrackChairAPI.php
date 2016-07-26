@@ -818,6 +818,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $speakerData = $s->toJSON();
             $speakerData['photo_url'] = $s->ProfilePhoto();
             $speakerData['available_for_bureau'] = intval($speakerData['available_for_bureau']);
+            $speakerData['is_moderator'] = (boolean) $s->ModeratorPresentations()->byID($p->ID);
 
             $expertise_areas = [];
             foreach ($s->AreasOfExpertise() as $a) {

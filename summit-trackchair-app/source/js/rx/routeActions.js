@@ -57,9 +57,9 @@ isDefaultView$
 		path(state).match(/track-chairs\/$/) ||
 		path(state).match(/track-chairs\/browse\/$/)
 	))
-	.filter(state => !state.routing.locationBeforeTransitions.query)
+	.filter(state => !q(state, 'category') && !q(state, 'search'))
 	.map(state => state.summit.defaultCategory.id)
-	.subscribe((category) => {		
+	.subscribe((category) => {	
 		browserHistory.push(URL.create('browse', {
 			category
 		}));

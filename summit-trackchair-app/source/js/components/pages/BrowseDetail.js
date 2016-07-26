@@ -66,6 +66,9 @@ class BrowseDetail extends React.Component {
     		'selected': 'Selected',
     		'pass': 'No thanks'
     	};
+
+    	const speakers = p.speakers.filter(s => !s.is_moderator);
+    	const moderators = p.speakers.filter(s => !!s.is_moderator);
         
         return (
 			<div className="wrapper wrapper-content">
@@ -131,7 +134,14 @@ class BrowseDetail extends React.Component {
 			         </div>
 					<PresentationMeta presentation={p} />
 					<h3>Speakers</h3>
-					<PresentationSpeakers speakers={p.speakers} />
+					<PresentationSpeakers speakers={speakers} />
+					{moderators.length > 0 &&
+					<div>
+						<h3>Moderators</h3>
+						<PresentationSpeakers speakers={moderators} />
+					</div>
+					}
+
 					<div className="row">
 						<div className="col-sm-12">
 							<a onClick={this.props.toggleEmailSpeakers}><i className="fa fa-envelope" /> Email the speakers</a>							
