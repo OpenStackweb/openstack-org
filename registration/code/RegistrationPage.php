@@ -26,6 +26,7 @@ class RegistrationPage_Controller extends Page_Controller
         'MobileRegistrationForm',
         'MobileRegistrationPage',
         'results',
+        'CheckEmail'
     );
 
     private static $url_handlers = array (
@@ -51,6 +52,17 @@ class RegistrationPage_Controller extends Page_Controller
     public function setMemberManager(IMemberManager $manager)
     {
         $this->member_manager = $manager;
+    }
+
+    public function CheckEmail()
+    {
+        $email = $this->request->getVar('Email');
+        //Check for existing member email address
+        $res = true;
+        if ($member = Member::get()->filter('Email', Convert::raw2sql($email))->first()) {
+            $res = false;
+        }
+        echo json_encode($res);
     }
 
     function init()

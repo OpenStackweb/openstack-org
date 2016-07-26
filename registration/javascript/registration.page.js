@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
             rules: {
                 FirstName:{required: true,regex:'[\"()=<>]+'},
                 Surname:{required: true,regex:'[\"()=<>]+'},
-                Email: {required: true,email: true, remote: '/DeploymentSurveyPage_Controller/CheckEmail'},
+                Email: {required: true,email: true, remote: '/RegistrationPage_Controller/CheckEmail'},
                 StatementOfInterest:{required: true},
                 Address:{required: true},
                 City:{required: true},
