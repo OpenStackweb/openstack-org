@@ -96,9 +96,13 @@ class SapphireRepository extends AbstractEntityRepository
         $filter = (string)$query;
 
         $do = $class::get()->where($filter);
-        $joins = $query->getAlias();
-        foreach ($joins as $table => $clause) {
-            $do = $do->innerJoin($table, $clause);
+
+        foreach ($query->getAlias(QueryAlias::INNER) as $spec) {
+            $do = $do->innerJoin($spec->getTable(), $spec->getCondition(), $spec->getAlias());
+        }
+
+        foreach ($query->getAlias(QueryAlias::LEFT) as $spec) {
+            $do = $do->leftJoin($spec->getTable(), $spec->getCondition(), $spec->getAlias());
         }
 
         if (count($query->getOrder())) {
