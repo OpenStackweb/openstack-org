@@ -116,6 +116,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'editPromoCode',
         'promocodes_sponsors',
         'editPromoCodeSponsor',
+        'promocodes_bulk',
     );
 
     private static $url_handlers = array
@@ -137,6 +138,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/speakers'                                        => 'speakers',
         '$SummitID!/promocodes/sponsors/$OrgID!'                     => 'editPromoCodeSponsor',
         '$SummitID!/promocodes/sponsors'                             => 'promocodes_sponsors',
+        '$SummitID!/promocodes/bulk'                                 => 'promocodes_bulk',
         '$SummitID!/promocodes/$Code!'                               => 'editPromoCode',
         '$SummitID!/promocodes'                                      => 'promocodes',
     );
@@ -805,6 +807,39 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                             'Sponsor'        => $sponsor,
                         )
                     )
+            );
+    }
+
+    public function promocodes_bulk(SS_HTTPRequest $request)
+    {
+        $summit_id  = intval($request->param('SummitID'));
+        $summit     = Summit::get()->byID($summit_id);
+        $promocode_types = SummitRegistrationPromoCode::getTypes();
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-promocodes-bulk.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        // tag input
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('summit/javascript/summitapp-promocodes-bulk.js');
+
+        return $this->getViewer('promocodes_bulk')->process
+            (
+                $this->customise(array(
+                    'Summit' => $summit,
+                    'CodeTypes' => $promocode_types
+                ))
             );
     }
 

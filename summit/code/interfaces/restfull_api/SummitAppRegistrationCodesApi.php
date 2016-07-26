@@ -65,6 +65,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         'POST sponsors'           => 'addRegistrationSponsor',
         'PUT sponsors/$ORG_ID!'   => 'updateRegistrationSponsor',
         'GET all'                 => 'getRegistrationCodes',
+        'GET free'                => 'getFreeRegistrationCodes',
         'GET $REG_CODE!'          => 'getRegistrationCodeByTerm',
         'POST '                   => 'addRegistrationCode',
         'PUT $REG_CODE!'          => 'updateRegistrationCode',
@@ -80,6 +81,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         'getRegistrationSponsors',
         'addRegistrationSponsor',
         'updateRegistrationSponsor',
+        'getFreeRegistrationCodes',
     );
 
     public function getRegistrationCodeByTerm(SS_HTTPRequest $request) {
@@ -144,6 +146,45 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
                     $page,
                     $page_size,
                     $term,
+                    $sort_by,
+                    $sort_dir
+                );
+
+            return $this->ok(array('page' => $page, 'page_size' => $page_size, 'count' => $count, 'codes' => $codes));
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getFreeRegistrationCodes(SS_HTTPRequest $request) {
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? intval(Convert::raw2sql($query_string['page'])) : '';
+            $page_size    = (isset($query_string['items'])) ? intval(Convert::raw2sql($query_string['items'])) : '';
+            $prefix       = (isset($query_string['prefix'])) ? trim(Convert::raw2sql($query_string['prefix'])) : '';
+            $type         = (isset($query_string['type'])) ? trim(Convert::raw2sql($query_string['type'])) : '';
+            $sort_by      = (isset($query_string['sort_by'])) ? trim(Convert::raw2sql($query_string['sort_by'])) : '';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? trim(Convert::raw2sql($query_string['sort_dir'])) : '';
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            list($page, $page_size, $count, $codes) = $this->code_repository->getFreeByTypeAndSummitPaginated
+                (
+                    $summit_id,
+                    $type,
+                    $page,
+                    $page_size,
+                    $prefix,
                     $sort_by,
                     $sort_dir
                 );

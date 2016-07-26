@@ -45,15 +45,19 @@ class SapphireSummitRegistrationPromoCodeRepository
                 break;
         }
 
-        $having = "(`Code` LIKE '%{$term}%' OR CodeFirstName LIKE '%{$term}%' OR CodeLastName LIKE '%{$term}%'
-                    OR CodeEmail LIKE '%{$term}%' OR SpeakerFirstName LIKE '%{$term}%' OR SpeakerLastName LIKE '%{$term}%'
-                    OR SpeakerEmail LIKE '%{$term}%' OR OwnerFirstName LIKE '%{$term}%'
-                    OR OwnerLastName LIKE '%{$term}%' OR OwnerEmail LIKE '%{$term}%' OR SponsorName LIKE '%{$term}%'";
+        $having = '1=1';
 
-        if (is_int($term)) {
-            $having .= " OR SpeakerID = '{$term}' OR OwnerID = '{$term}')";
-        } else {
-            $having .= ")";
+        if (!empty($term)) {
+            $having = " AND (`Code` LIKE '%{$term}%' OR CodeFirstName LIKE '%{$term}%' OR CodeLastName LIKE '%{$term}%'
+                        OR CodeEmail LIKE '%{$term}%' OR SpeakerFirstName LIKE '%{$term}%' OR SpeakerLastName LIKE '%{$term}%'
+                        OR SpeakerEmail LIKE '%{$term}%' OR OwnerFirstName LIKE '%{$term}%'
+                        OR OwnerLastName LIKE '%{$term}%' OR OwnerEmail LIKE '%{$term}%' OR SponsorName LIKE '%{$term}%'";
+
+            if (is_int($term)) {
+                $having .= " OR SpeakerID = '{$term}' OR OwnerID = '{$term}')";
+            } else {
+                $having .= ")";
+            }
         }
 
         if ($type) {
@@ -109,6 +113,73 @@ SQL;
 
         return array($page, $page_size, $count, $data);
     }
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $prefix
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function getFreeByTypeAndSummitPaginated($summit_id, $type, $page= 1, $page_size = 10, $prefix = '', $sort_by = 'code', $sort_dir = 'asc')
+    {
+        $offset = ($page - 1 ) * $page_size;
+        $sort = '';
+        switch(strtolower($sort_by))
+        {
+            case 'code':
+                $sort = ' ORDER BY `Code` '.strtoupper($sort_dir);
+                break;
+            case 'type':
+                $sort = ' ORDER BY Type '.strtoupper($sort_dir);
+                break;
+        }
+
+        $where = "SummitID = {$summit_id} AND IFNULL(MC.OwnerID, 0) = 0 AND IFNULL(SPC.SponsorID, 0) = 0 AND IFNULL(SC.SpeakerID, 0) = 0 ";
+        $where .= " AND IFNULL(MC.FirstName, '') = '' AND IFNULL(MC.LastName, '') = '' AND IFNULL(MC.Email, '') = ''";
+
+        if (!empty($prefix)) {
+            $where .= " AND PCode.`Code` LIKE '{$prefix}%'";
+        }
+
+        $having = "";
+        if ($type) {
+            $having = "HAVING Type = '{$type}'";
+        }
+
+        $query = <<<SQL
+SELECT PCode.ID AS CodeID, PCode.`Code`,PCode.ClassName,PCode.EmailSent,PCode.Redeemed,PCode.Source,
+IF(SC.Type,SC.Type,MC.Type) AS Type
+FROM SummitRegistrationPromoCode AS PCode
+LEFT JOIN SpeakerSummitRegistrationPromoCode AS SC ON SC.ID = PCode.ID
+LEFT JOIN MemberSummitRegistrationPromoCode AS MC ON MC.ID = PCode.ID
+LEFT JOIN SponsorSummitRegistrationPromoCode AS SPC ON SPC.ID = PCode.ID
+WHERE {$where} {$having} {$sort}
+SQL;
+
+        $res       = DB::query($query);
+        $count     = $res->numRecords();
+        $res       = DB::query($query." LIMIT {$offset}, {$page_size}");
+        $data = array();
+
+        foreach ($res as $code) {
+            $code_array = array(
+                'id' => $code['CodeID'],
+                'code' => $code['Code'],
+                'email_sent' => intval($code['EmailSent']),
+                'redeemed' => intval($code['Redeemed']),
+                'source' => $code['Source'],
+                'type' => $code['Type'],
+            );
+
+            $data[] = $code_array;
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
 
     /**
      * @param int $summit_id

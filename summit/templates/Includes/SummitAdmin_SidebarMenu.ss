@@ -10,7 +10,7 @@
         <ul class="nav-pills nav-stacked" style="list-style-type:none;">
             <li <% if $Active == 4 %> class="active" <% end_if %>>
                 <a href="$AdminLink/$SummitID/events">
-                    <span class="fa-stack fa-lg pull-left"><i class="fa fa-list-alt fa-stack-1x "></i></span>New Event
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>New Event
                 </a>
             </li>
         </ul>
@@ -26,7 +26,12 @@
         <ul class="nav-pills nav-stacked" style="list-style-type:none;">
             <li <% if $Active == 8 %> class="active" <% end_if %>>
                 <a href="$AdminLink/$SummitID/promocodes/sponsors">
-                    <span class="fa-stack fa-lg pull-left"><i class="fa fa-list-alt fa-stack-1x "></i></span>Sponsors
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Sponsors
+                </a>
+            </li>
+            <li <% if $Active == 9 %> class="active" <% end_if %>>
+                <a href="$AdminLink/$SummitID/promocodes/bulk">
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Bulk Actions
                 </a>
             </li>
         </ul>
