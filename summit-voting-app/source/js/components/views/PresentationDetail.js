@@ -64,6 +64,15 @@ class PresentationDetail extends React.Component {
 			   			{!presentation.error &&
 			   			<div>
 			   				<PresentationNotices loggedIn={loggedIn} votingOpen={Config.get('votingOpen')} />
+							{loggedIn &&
+								<div>
+									<h5>Cast Your Vote</h5>
+									<VotingBar presentation={presentation} />
+									<div className="voting-tip">
+										<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
+									</div>
+								</div>
+							}
 						  	<div>
 						      	<div className="voting-presentation-body">
 						      		<PresentationMeta presentation={presentation} />
@@ -74,7 +83,7 @@ class PresentationDetail extends React.Component {
 							         	<MainSpeakerRow speakers={presentation.speakers}/>
 							     	 }
 						      	</div>
-						      	{loggedIn && 
+						      	{loggedIn &&
 							      	<div>
 						      			<h5>Cast Your Vote</h5>						      	
 							      		<VotingBar presentation={presentation} />
