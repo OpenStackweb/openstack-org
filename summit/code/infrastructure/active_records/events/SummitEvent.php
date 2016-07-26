@@ -111,6 +111,14 @@ class SummitEvent extends DataObject implements ISummitEvent
         return $val;
     }
 
+    public function getDescription(){
+        $val = $this->getField('Description');
+        if(empty($val)){
+            $val = $this->getField('ShortDescription');
+        }
+        return $val;
+    }
+
     private static $searchable_fields = array
     (
         'Title',
@@ -207,14 +215,6 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         $date_nice = date('l, F j, g:ia',strtotime($start_date)).'-'.date('g:ia',strtotime($end_date));
         return $date_nice;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->getField('Description');
     }
 
     /**
