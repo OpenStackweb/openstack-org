@@ -463,6 +463,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
                 $builder = Injector::inst()->create($builder_class);
                 $answer = ($presentation) ? $presentation->findAnswerByQuestion($q) : null;
                 $field   = $builder->build($q, $answer);
+                $field->addHolderClass('track-question');
                 $question_map[] = array('Name' => $q->Name,'InsertAfter' => $q->AfterQuestion, 'Html' => strval($field->FieldHolder()));
             }
 

@@ -197,6 +197,7 @@ function getExtraQuestions() {
             timeout:120000,
             dataType:'json',
             success: function (data, textStatus, jqXHR) {
+                $('.track-question').remove();
                 $.each(data,function(idx,val){
                     $('#category_options').after(val.Html);
                 });
