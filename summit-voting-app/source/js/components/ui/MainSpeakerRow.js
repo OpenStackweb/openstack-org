@@ -11,7 +11,7 @@ export default ({
 		              {speaker.first_name + ' ' + speaker.last_name}
 		              <span>{speaker.title}</span>
 		           </div>
-		           <img className="voting-speaker-pic" src="" />
+		           <img className="voting-speaker-pic" src={speaker.photoUrl} />
 		        </div>
 		        <div 
 		        	className="main-speaker-description"
