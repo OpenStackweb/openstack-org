@@ -11,11 +11,18 @@ export default ({
 		              {speaker.first_name + ' ' + speaker.last_name}
 		              <span>{speaker.title}</span>
 		           </div>
-		           <img className="voting-speaker-pic" src={speaker.photoUrl} />
+		           
 		        </div>
-		        <div 
-		        	className="main-speaker-description"
-		        	dangerouslySetInnerHTML={{__html: speaker.bio}} />
+		        <div className="row">
+		        	<div className="col-xs-12 col-lg-3">
+		        		<img className="voting-speaker-pic" src={speaker.photoUrl} />
+		        	</div>
+		        	<div className="col-xs-12 col-lg-9">
+				        <div 
+				        	className="main-speaker-description"
+				        	dangerouslySetInnerHTML={{__html: speaker.bio}} />
+		        	</div>
+		        </div>
 	        </div>
      	))}
      </div>
