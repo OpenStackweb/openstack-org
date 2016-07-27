@@ -65,17 +65,20 @@ class Presentation extends SummitEvent implements IPresentation
             )
             ->leftJoin(
                 "PresentationSpeaker",
-                "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID"
+                "Speaker.ID = Presentation_Speakers.PresentationSpeakerID",
+                "Speaker"
             )
             ->leftJoin(
-            	"PresentationSpeaker",
-            	"PresentationSpeaker.ID = Presentation.ModeratorID"
+                "PresentationSpeaker",
+                "Moderator.ID = Presentation.ModeratorID",
+                "Moderator"
             )
             ->where("
                   	SummitEvent.Title LIKE '%{$k}%'
                   	OR SummitEvent.Description LIKE '%{$k}%'
                   	OR SummitEvent.ShortDescription LIKE '%{$k}%'
-                    OR (CONCAT_WS(' ', PresentationSpeaker.FirstName, PresentationSpeaker.LastName)) LIKE '%{$k}%'                         	
+                    OR (CONCAT_WS(' ', Speaker.FirstName, Speaker.LastName)) LIKE '%{$k}%'
+                    OR (CONCAT_WS(' ', Moderator.FirstName, Moderator.LastName)) LIKE '%{$k}%'
                 ");
     }
 
