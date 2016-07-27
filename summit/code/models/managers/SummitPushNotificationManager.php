@@ -97,7 +97,18 @@ class SummitPushNotificationManager
                             $message['channels'] = ['su_'.$notification->SummitID];
                         }
                         break;
-                        case 'ALL':
+                        case 'EVENT':
+                        {
+                            $message['data']     = [
+                                'event_id' => $notification->EventID,
+                                'title'    => sprintf("%s - %s", $notification->Event()->getTitleAndTime(), $notification->Event()->Location()->getFullName()),
+                                'alert'    => $notification->Message
+                            ];
+
+                            $message['channels'] = ['evt_'.$notification->EventID];
+                        }
+                        break;
+                        case 'EVERYONE':
                         {
                             $message['where'] = ParseInstallation::query();
                         }

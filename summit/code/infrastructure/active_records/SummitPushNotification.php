@@ -17,7 +17,7 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
     private static $db = array
     (
         'Message'  => 'Text',
-        'Channel'  => "Enum('ALL, SPEAKERS, ATTENDEES, MEMBERS, SUMMIT', 'ALL')",
+        'Channel'  => "Enum('EVERYONE, SPEAKERS, ATTENDEES, MEMBERS, SUMMIT, EVENT', 'EVERYONE')",
         'IsSent'   => 'Boolean',
         'SentDate' => 'SS_Datetime',
     );
@@ -26,9 +26,11 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
     (
     );
 
-    private static $has_one = array(
+    private static $has_one = array
+    (
         'Summit'    => 'Summit',
         'Owner'     => 'Member',
+        'Event'     => 'SummitEvent',
     );
 
     private static $many_many = array
@@ -42,7 +44,7 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
 
     public function getCMSFields()
     {
-
+        $summit_id = isset($_REQUEST['SummitID'])?$_REQUEST['SummitID'] : Summit::ActiveSummitID();
         Requirements::javascript('summit/javascript/SummitPushNotification.js');
 
         $f = new FieldList
@@ -50,10 +52,29 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
             $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
         );
 
-        $f->addFieldToTab('Root.Main', new TextareaField('Message','Message'));
-        $f->addFieldToTab('Root.Main', $ddl_channel = new DropdownField('Channel','Channel',singleton('SummitPushNotification')->dbObject('Channel')->enumValues()));
+        $f->addFieldToTab('Root.Main', $txt = new TextareaField('Message','Message'));
+        $txt->setAttribute('required','true');
+        $f->addFieldToTab('Root.Main', $ddl_channel = new DropdownField('Channel','Channel', singleton('SummitPushNotification')->dbObject('Channel')->enumValues()));
+        $f->addFieldToTab('Root.Main',
+            $ddl_events  = new DropdownField
+            (
+                'EventID',
+                'Event',
+                SummitEvent::get()->filter
+                (
+                    [
+                        'Published' => 1,
+                        'SummitID'  => $summit_id
+                    ]
+                )->sort('Title', 'ASC')->Map('ID','FormattedTitle'))
+        );
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
+
         $ddl_channel->setEmptyString('--SELECT A CHANNEL--');
+        $ddl_channel->setAttribute('required','true');
+
+        $ddl_events->setEmptyString('--SELECT A EVENT--');
+        $ddl_events->addExtraClass('hidden');
         $config = GridFieldConfig_RelationEditor::create(50);
         $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
         $config->removeComponentsByType('GridFieldAddNewButton');
@@ -101,6 +122,9 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
 
         if($this->Channel === 'MEMBERS' && $this->Recipients()->count() === 0)
             return $valid->error('You must set at least one recipient for MEMBERS channel.');
+
+        if($this->Channel === 'EVENT' && $this->EventID == 0)
+            return $valid->error('You must set at least one Published for EVENT channel.');
 
         return $valid;
     }

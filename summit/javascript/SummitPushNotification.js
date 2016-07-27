@@ -2,8 +2,8 @@
     $.entwine("ss", function($) {
 
         $("#Form_ItemEditForm_Channel").entwine({
-            onmatch: showMembers,
-            onchange: showMembers
+            onmatch: showUI,
+            onchange: showUI
         });
 
         $('#Form_ItemEditForm_action_save').entwine({
@@ -20,9 +20,23 @@
             }
         });
 
+        function showUI(){
+            showEvents();
+            showMembers();
+        }
+
+        function showEvents(){
+            if($('#Form_ItemEditForm_Channel').val() == 'EVENT') {
+                $('#EventID').show();
+                return;
+            }
+            $('#EventID').hide();
+        }
+
         function showMembers () {
             if($('#Form_ItemEditForm_Channel').val() == 'MEMBERS') {
                 $('#Form_ItemEditForm_Recipients').show();
+
                 return;
             }
             $('#Form_ItemEditForm_Recipients').hide();
