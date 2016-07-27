@@ -67,6 +67,10 @@ class Presentation extends SummitEvent implements IPresentation
                 "PresentationSpeaker",
                 "PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID"
             )
+            ->leftJoin(
+            	"PresentationSpeaker",
+            	"PresentationSpeaker.ID = Presentation.ModeratorID"
+            )
             ->where("
                   	SummitEvent.Title LIKE '%{$k}%'
                   	OR SummitEvent.Description LIKE '%{$k}%'
