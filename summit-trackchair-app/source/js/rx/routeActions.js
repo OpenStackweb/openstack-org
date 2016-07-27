@@ -1,4 +1,3 @@
-import {observableFromStore} from 'redux-rx';
 import store from '../store';
 import {
 	fetchPresentations,
@@ -10,9 +9,9 @@ import {browserHistory} from 'react-router';
 import {shallowEqual} from 'react-pure-render';
 import URL from '../utils/url';
 import {q, path, isPath} from './utils';
+import state$ from './observableStore';
 
 const {dispatch} = store;
-const state$ = observableFromStore(store);
 
 // Default views
 const isDefaultView$ = state$

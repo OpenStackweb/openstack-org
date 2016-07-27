@@ -21,13 +21,13 @@ class Directory extends React.Component {
     	} = this.props;
 
    		const columns =[
-   			<TableColumn columnKey='category' width='33%' cell={data => data.category}>
+   			<TableColumn key='category' columnKey='category' width='33%' cell={data => data.category}>
    				Category
    			</TableColumn>,
-   			<TableColumn columnKey='name' width='40%' cell={data => data.name}>
+   			<TableColumn key='name' columnKey='name' width='40%' cell={data => data.name}>
    				Name
    			</TableColumn>,
-   			<TableColumn columnKey='email' cell={data => <a href={`mailto:${data.email}`}>{data.email}</a>}>
+   			<TableColumn key='email' columnKey='email' cell={data => <a href={`mailto:${data.email}`}>{data.email}</a>}>
    				Email
    			</TableColumn>
    		];
@@ -37,6 +37,7 @@ class Directory extends React.Component {
    				<TableColumn
    					sortable={false}
    					columnKey='actions'
+   					key='actions'
    					width='8%'
    					cell={data => (
    						<a onClick={(e) => deleteRow(data.chair_id, data.category_id)}>(remove)</a>

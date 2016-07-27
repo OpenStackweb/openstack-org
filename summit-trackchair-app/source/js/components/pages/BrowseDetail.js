@@ -170,7 +170,7 @@ export default connect(
 			myList,
 			selectionsRemaining,
 			index,			
-			total: state.presentations.total,
+			total: filteredPresentations.length,
 			isAdmin: window.TrackChairAppConfig.userinfo.isAdmin
 		}
 	},

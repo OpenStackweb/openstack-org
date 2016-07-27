@@ -10,12 +10,12 @@ import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
 import Bounce from '../ui/loaders/Bounce';
 import {getFilteredPresentations} from '../../selectors';
+import '../../rx/presentationActions';
 
 class Browse extends React.Component {
 
 	constructor (props) {
 		super(props);
-		this.requestMore = this.requestMore.bind(this);
 		this.keyListener = this.keyListener.bind(this);
 	}
 
@@ -54,13 +54,6 @@ class Browse extends React.Component {
 
 	}
 
-	requestMore() {
-		this.props.fetchPresentations({
-			category: this.props.category,
-			page: +this.props.currentPage+1
-		});
-	}
-
     render () {
         return (
             <div>
@@ -79,12 +72,11 @@ class Browse extends React.Component {
 	                <PresentationList 
 	                	presentations={this.props.presentations} 
 	                	hasMore={this.props.hasMore}
-	                	onRequestMore={this.requestMore}
 	                	category={this.props.category}
 	                	search={this.props.search}
 	                	/>
 	                }
-	                {this.props.loading &&
+	                {this.props.loading && this.props.currentPage === 0 &&
 	                	<Bounce />
 	                }
 	               </div>
@@ -107,7 +99,7 @@ export default connect(
 			category: state.routing.locationBeforeTransitions.query.category,
 			search: state.routing.locationBeforeTransitions.query.search,
 			hasMore: state.presentations.has_more,
-			currentPage: state.presentations.page,
+			currentPage: +state.presentations.page,
 			loading: state.presentations.loading
 		}
 	},
