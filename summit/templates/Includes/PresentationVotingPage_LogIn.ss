@@ -4,7 +4,7 @@
     <h3>Help this presentation get to the OpenStack Summit!</h3>
 
     <p>OpenStack community members are voting on presentations to be presented at the
-        OpenStack Summit in $SummitName. We received hundreds of high-quality
+        OpenStack Summit in Barcelona, Spain. We received hundreds of high-quality
         submissions, and your votes can help us determine which ones to include in the
         schedule.</p>
     <a className="btn" href="/Security/login?BackURL={$BackUrl}presentation/{$PresentationID}">I
