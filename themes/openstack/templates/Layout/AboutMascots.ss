@@ -111,6 +111,25 @@
 			<p>
 				Watch this space—we’ll be updating it frequently as project teams select their mascots.
 			</p>
+			<ul>
+				<li><strong>Cloudkitty:</strong> Cat (maneki-neko)</li>
+				<li><strong>Glance:</strong> Chipmunk</li>
+				<li><strong>Heat:</strong> Flame/fire</li>
+				<li><strong>Ironic:</strong> Bear</li>
+				<li><strong>Keystone:</strong> Turtle</li>
+				<li><strong>Manila:</strong> Gorillav
+				<li><strong>Oslo:</strong> Moose</li>
+				<li><strong>Packaging-rpm:</strong> Donkey</li>
+				<li><strong>Sahara:</strong> Elephant</li>
+				<li><strong>Security:</strong> Pangolin (scaly anteater)</li>
+				<li><strong>Swift:</strong> Swift (bird)</li>
+				<li><strong>Rally:</strong> White ermine</li>
+				<li><strong>Release Management:</strong> Border collie</li>
+				<li><strong>Tacker:</strong> Squid</li>
+				<li><strong>Trove:</strong> Stingray</li>
+				<li><strong>TripleO:</strong> Owl</li>
+				<li><strong>UX:</strong> Octopus</li>
+			</ul>
 			<h5 class="section-title">FAQs</h5>
 			<p class="question">
 				Who can get a mascot?
