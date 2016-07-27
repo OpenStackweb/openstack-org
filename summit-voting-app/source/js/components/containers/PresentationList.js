@@ -28,12 +28,15 @@ class PresentationList extends React.Component {
 
 
 	onPresentationClicked (id) {
+		// Hack!
+		document.body.classList.remove('openVotingNav');
+		
 		this.props.dispatch(goToPresentation(id));
 	}
 
 
 	componentDidMount (prevProps) {
-		if(this.props.presentations.length && !this.props.selectedPresentation) {
+		if(this.props.presentations.length && !this.props.selectedPresentation.id) {
 			this.props.dispatch(goToPresentation(this.props.presentations[0].id));
 		}
 	}
@@ -98,7 +101,7 @@ export default connect (
 		return {
 			...state.presentations,
 			category: state.categories.selectedCategory,
-			searchQuery: state.router.location.query.q,
+			searchQuery: state.presentations.search,
 			loading: state.ui.loading
 		};
 	}

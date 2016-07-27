@@ -1501,7 +1501,7 @@ i.collapse-voting-nav {
   top: 0;
   bottom: 0;
   transition: all 0.5s ease-in-out;
-  z-index: 1;
+  z-index: 100;
   padding: 40px; }
 
 .openVotingNav .voting-sidebar {

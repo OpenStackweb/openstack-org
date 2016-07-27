@@ -12,6 +12,8 @@ import {
 } from '../../action-creators';
 
 import { connect } from 'react-redux';
+import PresentationDetail from './PresentationDetail';
+
 
 class VotingApp extends React.Component {
 
@@ -33,6 +35,10 @@ class VotingApp extends React.Component {
 
 
 	_keyListener (e) {
+		const {tagName} = e.target;
+
+		if(tagName === 'TEXTAREA' || tagName === 'INPUT') return;
+
 	    if(e.keyCode === 37) return this.props.navigatePresentations(-1);
 	    if(e.keyCode === 39) return this.props.navigatePresentations(1);
 	}
@@ -66,7 +72,6 @@ class VotingApp extends React.Component {
 			errorMsg,
 			clearError,
 			xhrLoading,
-			children,
 			ready,
 			preview
 		} = this.props;
@@ -75,7 +80,7 @@ class VotingApp extends React.Component {
 			return (
 				<div className="row">
 					<div className="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
-						{children}
+						<PresentationDetail />
 					</div>
 				</div>
 			);
@@ -96,7 +101,7 @@ class VotingApp extends React.Component {
 						<Loader active={xhrLoading} type='spin' className='main-loader' />
 						<Sidebar />
 						<div className={`col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper`}>
-							{children}
+							<PresentationDetail />
 						</div>
 					</div>
 				}
@@ -115,9 +120,9 @@ export default connect(
 			xhrLoading: state.ui.loading,
 			errorMsg: state.ui.errorMsg,
 			ready: (state.categories.initialised && state.presentations.initialised),
-			category: state.router.location.query.category,
-			search: state.router.location.query.q,
-			preview: state.router.location.query.preview
+			category: state.presentations.category,
+			search: state.presentations.search,
+			preview: window.location.search.match(/^\?preview/)
 		}
 	},
 	{ 

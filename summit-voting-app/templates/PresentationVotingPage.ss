@@ -47,7 +47,6 @@
          <div class="main-body">
             <div id="wrap">
                <!-- Begin Page Content -->
-               <a href="#" class="voting-open-panel"><i class="fa fa-bars fa-2x collapse-voting-nav"></i></a>
                <div class="container">
                   <div class="row">
                      <div class="voting-header">

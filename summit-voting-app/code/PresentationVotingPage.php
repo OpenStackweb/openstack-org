@@ -278,7 +278,8 @@ class PresentationVotingPage_API extends RequestHandler
                 'first_name' => $s->FirstName,
                 'last_name' => $s->LastName,
                 'bio' => $s->Bio,
-                'photoUrl' => $s->ProfilePhoto()
+                'photoUrl' => $s->ProfilePhoto(),
+                'isModerator' => (boolean) $s->ModeratorPresentations()->byID($presentation->ID)
             ];
 
         }

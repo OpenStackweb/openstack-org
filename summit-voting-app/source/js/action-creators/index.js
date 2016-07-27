@@ -267,26 +267,18 @@ export function destroyUserComment (id) {
 	}
 }
 
-export function goToPresentation (id, adder) {
-	return (dispatch, getState) => {
-//		dispatch(clearPresentation())
-		dispatch(
-			pushState(
-				null, 
-				url(
-					`presentation/${id}`,
-					getState().router.location.query
-				)
-			)
-		)
-	}
+export function goToPresentation (id) {
+	return {
+		type: 'SELECT_PRESENTATION',
+		payload: id
+	};
 };
 
 export function navigatePresentations (adder) {	
 	return (dispatch, getState) => {		
 		const state = getState();
 		const {presentations} = state;
-		if(!presentations.selectedPresentation) return;
+		if(!presentations.selectedPresentation.id) return;
 		
 		let index = presentations.presentations.findIndex(p => p.id === presentations.selectedPresentation.id);
 		if(index > -1) {
@@ -297,8 +289,7 @@ export function navigatePresentations (adder) {
 			dispatch(adjacentPresentation(adder));
 			dispatch(
 				goToPresentation(
-					presentations.presentations[index].id,
-					adder
+					presentations.presentations[index].id
 				)
 			);
 		}
@@ -313,18 +304,18 @@ export function adjacentPresentation(adder) {
 };
 
 export function goToCategory (category) {
-	return pushState(null,	url(
-		null,
-		{category}
-	));
+	return {
+		type: 'UPDATE_CATEGORY',
+		payload: category
+	};
 };			
 
 
 export function setSearchTerm (term) {
-	return pushState(null,	url(
-		null,
-		{q: term}
-	));
+	return {
+		type: 'UPDATE_SEARCH',
+		payload: term
+	};
 };
 
 export function clearPresentation () {

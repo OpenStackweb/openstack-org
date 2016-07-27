@@ -10,8 +10,7 @@ import ui from '../reducers/ui';
 const reducer = combineReducers({
 	categories,
 	presentations,
-	ui,
-	router: routerStateReducer
+	ui
 });
 
 const composedCreateStore = compose(

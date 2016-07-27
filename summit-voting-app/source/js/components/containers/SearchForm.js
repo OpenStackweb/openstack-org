@@ -49,7 +49,7 @@ class SearchForm extends React.Component {
 
 export default connect (
 	state => ({		
-		initialQuery: state.router.location.query.q || ''
+		initialQuery: state.presentations.search || ''
 	}),
 	{
 		setSearchTerm

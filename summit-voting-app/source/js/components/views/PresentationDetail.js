@@ -20,11 +20,10 @@ class PresentationDetail extends React.Component {
 		props = props || this.props;
 
 		if(
-			(props.requestedPresentationID !== this.props.requestedPresentationID) ||
-			!props.presentation
+			(!props.presentation || (props.presentation.id !== this.props.presentation.id))
 		) {
 			this.props.requestPresentation(
-				props.requestedPresentationID
+				props.presentation.id
 			);
 		}
 
@@ -39,10 +38,10 @@ class PresentationDetail extends React.Component {
 
 
 	render () {
-		const {presentation, requestedPresentationID} = this.props;
+		const {presentation} = this.props;
 		const loggedIn = Config.get('loggedIn');
 
-		if(!presentation) return <div />;
+		if(!presentation.speakers) return <div />;
 		let showForm = false;
 		if(presentation) {
 			showForm = (
@@ -51,10 +50,16 @@ class PresentationDetail extends React.Component {
 			) || presentation.showForm;
 		}
 
+		const speakers = presentation.speakers.filter(s => !s.isModerator);
+		const moderators = presentation.speakers.filter(s => s.isModerator);
+
 		return (
 			<div>
-			   <a href="#" className="voting-open-panel text">
-			   	<i className="fa fa-chevron-left"></i>All Submissions
+			   <a onClick={(e) => {
+			   		e.preventDefault();
+			   		document.body.classList.toggle('openVotingNav');
+			   	}} className="voting-open-panel text">
+			   		<i className="fa fa-chevron-left" /> All Submissions
 			   </a>
 			   {presentation &&
 			   <div className="voting-content-body">
@@ -77,11 +82,20 @@ class PresentationDetail extends React.Component {
 						      	<div className="voting-presentation-body">
 						      		<PresentationMeta presentation={presentation} />
 							         <h5>Abstract</h5>			         
-							         <div dangerouslySetInnerHTML={{__html: presentation.abstract}} />
-							         <h5>Speakers</h5>
-							         {presentation.speakers &&
-							         	<MainSpeakerRow speakers={presentation.speakers}/>
+							         <div className="voting-presentation-track" dangerouslySetInnerHTML={{__html: presentation.abstract}} />						         
+							         {speakers.length > 0 &&
+							         	<div>
+								         	<h5>Speakers</h5>
+								         	<MainSpeakerRow speakers={speakers}/>
+							         	</div>
 							     	 }
+							         {moderators.length > 0 &&
+							         	<div>
+								         	<h5>Moderators</h5>
+								         	<MainSpeakerRow speakers={moderators}/>
+							         	</div>
+							     	 }
+
 						      	</div>
 						      	{loggedIn &&
 							      	<div>
@@ -139,7 +153,6 @@ class PresentationDetail extends React.Component {
 
 export default connect (
 	state => ({
-		requestedPresentationID: state.router.params.id,
 		presentation: state.presentations.selectedPresentation
 	}),
 	dispatch => ({

@@ -4,11 +4,13 @@ import nl2br from '../utils/nl2br';
 
 export default (state = {
 	presentations: [],
-	selectedPresentation: null,
+	selectedPresentation: {},
 	total: null,
-	initialised: false
+	initialised: false,
+	search: null,
+	category: null
 }, action) => {	
-	switch(action.type) {		
+	switch(action.type) {	
 		case 'RECEIVE_PRESENTATIONS':
 			return {
 				...state,
@@ -31,6 +33,17 @@ export default (state = {
 				selectedPresentation: null
 			};
 		
+		case 'SELECT_PRESENTATION':
+			if(action.payload === state.selectedPresentation.id) {
+				return state;
+			}
+			return {
+				...state,
+				selectedPresentation: {
+					id: action.payload
+				}
+			};
+
 		case 'RECEIVE_PRESENTATION':
 			const newState = {
 				...state,
@@ -92,7 +105,17 @@ export default (state = {
 					navigationDirection: action.payload
 				}
 			};
+		case 'UPDATE_CATEGORY':
+			return {
+				...state,
+				category: action.payload
+			};
 
+		case 'UPDATE_SEARCH':
+			return {
+				...state,
+				search: action.payload
+			};
 		default:
 			return state;
 	}

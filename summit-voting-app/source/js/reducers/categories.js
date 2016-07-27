@@ -13,14 +13,14 @@ export default (state = {
 				categories: action.payload
 			};
 
-		case '@@reduxReactRouter/routerDidChange':
-			const {query} = action.payload.location;
+		case 'UPDATE_CATEGORY':			
 			const {selectedCategory} = state;
+			const id = +action.payload;
 
-			if(!selectedCategory || selectedCategory.id !== query.category) {
+			if(!selectedCategory || selectedCategory.id !== id) {
 				return {
 					...state,
-					selectedCategory: state.categories.find(c => c.id == query.category)
+					selectedCategory: state.categories.find(c => c.id === id)
 				}
 			}
 			
