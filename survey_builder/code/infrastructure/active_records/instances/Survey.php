@@ -385,6 +385,19 @@ class Survey extends DataObject implements ISurvey
             }
         }
 
+        // also we check that has visible questions
+        if($step->template()->ClassName == 'SurveyRegularStepTemplate') {
+            $has_visible_question = false;
+            foreach($step->template()->Questions() as $question) {
+                if (!$question->isHidden()) {
+                    $has_visible_question = true;
+                    break;
+                }
+            }
+
+            $should_show = ($has_visible_question) ? $should_show : false;
+        }
+
         return $should_show;
     }
 
