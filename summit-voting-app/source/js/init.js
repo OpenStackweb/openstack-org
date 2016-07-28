@@ -6,6 +6,7 @@ import Config from './utils/Config';
 import VotingApp from './components/views/VotingApp';
 
 Config.load(window.VotingAppConfig);
+Config.set('isMobile', window.innerWidth < 768);
 
 render(
 	<Provider store={Store}>

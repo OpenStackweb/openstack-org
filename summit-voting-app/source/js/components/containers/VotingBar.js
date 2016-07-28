@@ -1,8 +1,9 @@
 import React from 'react';
 import HotKeyBar from '../ui/HotKeyBar';
 import HotKeyOption from '../ui/HotKeyOption';
-import { requestVote } from '../../action-creators';
+import { requestVote, navigatePresentations } from '../../action-creators';
 import { connect } from 'react-redux';
+import Config from '../../utils/Config';
 
 const VotingBar = ({
 	presentation,
@@ -23,6 +24,9 @@ export default connect (
 		return {
 			votePresentation: (vote) => {
 				dispatch(requestVote(ownProps.presentation.id, vote))
+				if(Config.get('isMobile')) {
+					dispatch(navigatePresentations(1));
+				}
 			}
 		}
 	}
