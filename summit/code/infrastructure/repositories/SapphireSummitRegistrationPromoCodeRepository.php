@@ -84,7 +84,8 @@ SQL;
 
         $res       = DB::query($query);
         $count     = $res->numRecords();
-        $res       = DB::query($query." LIMIT {$offset}, {$page_size}");
+        $query     .= ($page_size) ? " LIMIT {$offset}, {$page_size}" : "";
+        $res       = DB::query($query);
         $data = array();
 
         foreach ($res as $code) {
@@ -95,6 +96,7 @@ SQL;
                 'redeemed' => intval($code['Redeemed']),
                 'source' => $code['Source'],
                 'type' => $code['Type'],
+                'org'  => $code['SponsorName']
             );
 
             if ($code['SpeakerID']) {
@@ -116,68 +118,38 @@ SQL;
 
     /**
      * @param int $summit_id
-     * @param int $page
-     * @param int $page_size
+     * @param string $type
      * @param string $prefix
-     * @param string $sort_by
-     * @param string $sort_dir
-     * @return array
+     * @param int $org_id
+     * @param int $limit
+     * @return ISummitRegistrationPromoCode[]
      */
-    public function getFreeByTypeAndSummitPaginated($summit_id, $type, $page= 1, $page_size = 10, $prefix = '', $sort_by = 'code', $sort_dir = 'asc')
+    public function getFreeByTypeAndSummit($summit_id, $type, $prefix = '', $org_id = null, $limit)
     {
-        $offset = ($page - 1 ) * $page_size;
-        $sort = '';
-        switch(strtolower($sort_by))
-        {
-            case 'code':
-                $sort = ' ORDER BY `Code` '.strtoupper($sort_dir);
+        $where = "SummitID = {$summit_id} AND Type = '{$type}'";
+        $where .= (!empty($prefix)) ? " AND `Code` LIKE '{$prefix}%'" : "";
+
+        switch ($type) {
+            case 'ACCEPTED':
+            case 'ALTERNATE':
+                $where .= " AND IFNULL(SpeakerID, 0) = 0";
+                $promocodes = SpeakerSummitRegistrationPromoCode::get()->where($where);
                 break;
-            case 'type':
-                $sort = ' ORDER BY Type '.strtoupper($sort_dir);
+            case 'VIP':
+            case 'ATC':
+            case 'MEDIA ANALYST':
+                $where .= " AND IFNULL(OwnerID, 0) = 0 AND IFNULL(FirstName, '') = ''";
+                $where .= " AND IFNULL(LastName, '') = '' AND IFNULL(Email, '') = ''";
+                $promocodes = MemberSummitRegistrationPromoCode::get()->where($where);
+                break;
+            case 'SPONSOR':
+                $where .= " AND SponsorID = {$org_id} AND IFNULL(OwnerID, 0) = 0 AND IFNULL(FirstName, '') = ''";
+                $where .= " AND IFNULL(LastName, '') = '' AND IFNULL(Email, '') = ''";
+                $promocodes = SponsorSummitRegistrationPromoCode::get()->where($where);
                 break;
         }
 
-        $where = "SummitID = {$summit_id} AND IFNULL(MC.OwnerID, 0) = 0 AND IFNULL(SPC.SponsorID, 0) = 0 AND IFNULL(SC.SpeakerID, 0) = 0 ";
-        $where .= " AND IFNULL(MC.FirstName, '') = '' AND IFNULL(MC.LastName, '') = '' AND IFNULL(MC.Email, '') = ''";
-
-        if (!empty($prefix)) {
-            $where .= " AND PCode.`Code` LIKE '{$prefix}%'";
-        }
-
-        $having = "";
-        if ($type) {
-            $having = "HAVING Type = '{$type}'";
-        }
-
-        $query = <<<SQL
-SELECT PCode.ID AS CodeID, PCode.`Code`,PCode.ClassName,PCode.EmailSent,PCode.Redeemed,PCode.Source,
-IF(SC.Type,SC.Type,MC.Type) AS Type
-FROM SummitRegistrationPromoCode AS PCode
-LEFT JOIN SpeakerSummitRegistrationPromoCode AS SC ON SC.ID = PCode.ID
-LEFT JOIN MemberSummitRegistrationPromoCode AS MC ON MC.ID = PCode.ID
-LEFT JOIN SponsorSummitRegistrationPromoCode AS SPC ON SPC.ID = PCode.ID
-WHERE {$where} {$having} {$sort}
-SQL;
-
-        $res       = DB::query($query);
-        $count     = $res->numRecords();
-        $res       = DB::query($query." LIMIT {$offset}, {$page_size}");
-        $data = array();
-
-        foreach ($res as $code) {
-            $code_array = array(
-                'id' => $code['CodeID'],
-                'code' => $code['Code'],
-                'email_sent' => intval($code['EmailSent']),
-                'redeemed' => intval($code['Redeemed']),
-                'source' => $code['Source'],
-                'type' => $code['Type'],
-            );
-
-            $data[] = $code_array;
-        }
-
-        return array($page, $page_size, $count, $data);
+        return $promocodes->sort("Code")->limit($limit);
     }
 
 

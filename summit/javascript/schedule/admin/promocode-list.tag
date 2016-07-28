@@ -16,12 +16,15 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-6" style="margin:0  0 20px 0;">
+        <div class="col-md-3" style="margin:0  0 20px 0;">
             <label>Type</label>
             <select id="code_type">
                 <option value="">ALL</option>
                 <option value="{ code_type }" each={ code_type, i in promocode_types }>{ code_type }</option>
             </select>
+        </div>
+        <div class="col-md-3" style="margin:0  0 20px 0;">
+            <button onclick="{ exportCodes }" class="btn btn-primary">Export</button>
         </div>
     </div>
 
@@ -188,6 +191,13 @@
                 });
 
             return false;
+        }
+
+        exportCodes() {
+            var search_term = $('#promocode_search_term').val().trim();
+            var type = $('#code_type').val();
+
+            window.open('api/v1/summits/'+self.summit_id+'/registration-codes/export?term='+search_term+'&type='+type, '_blank');
         }
 
         </script>

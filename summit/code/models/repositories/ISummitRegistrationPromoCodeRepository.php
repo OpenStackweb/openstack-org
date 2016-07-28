@@ -27,15 +27,13 @@ interface ISummitRegistrationPromoCodeRepository extends IEntityRepository
 
     /**
      * @param int $summit_id
-     * @param int $page
-     * @param int $page_size
+     * @param string $type
      * @param string $prefix
-     * @param string $sort_by
-     * @param string $sort_dir
-     * @return array
+     * @param int $org_id
+     * @param int $limit
+     * @return ISummitRegistrationPromoCode[]
      */
-    public function getFreeByTypeAndSummitPaginated($summit_id, $type, $page= 1, $page_size = 10, $prefix = '', $sort_by = 'code', $sort_dir = 'asc');
-
+    public function getFreeByTypeAndSummit($summit_id, $type, $prefix = '', $org_id = null, $limit);
 
     /**
      * @param int $summit_id

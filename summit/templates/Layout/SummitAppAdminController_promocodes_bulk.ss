@@ -34,6 +34,12 @@
                         <input id="code_prefix" name="code_prefix" class="form-control" />
                     </div>
                 </div>
+                <div class="row" id="company_input" style="margin-top:10px;display:none">
+                    <div class="col-md-3">
+                        <label for="company_id">Sponsor</label><br>
+                        <input name="company_id" id="company_id" class="form-control" />
+                    </div>
+                </div>
             </div>
             <hr>
             <label>Matching Codes:</label><br>
@@ -46,20 +52,24 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="radio">
-                            <input type="radio" name="bulk_action" id="bulk_action_1" class="form-control"></input>
-                            <label for="bulk_action_1">Use matching codes</label>
+                            <input type="radio" name="use_codes" id="use_codes_1" class="form-control" value="1" ></input>
+                            <label for="use_codes_1">Use matching codes</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="radio">
-                            <input type="radio" name="bulk_action" id="bulk_action_2" class="form-control"></input>
-                            <label for="bulk_action_2">Create new codes</label>
+                            <input type="radio" name="use_codes" id="use_codes_2" class="form-control" value="0" ></input>
+                            <label for="use_codes_2">Create new codes</label>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-9" id="speakers_input">
+                        <label for="speakers">Speakers</label><br>
+                        <input id="speakers" name="speakers" class="form-control"></input>
+                    </div>
+                    <div class="col-md-9" id="members_input" style="display:none">
                         <label for="members">Members</label><br>
                         <input id="members" name="members" class="form-control"></input>
                     </div>

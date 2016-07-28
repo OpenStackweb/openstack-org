@@ -137,5 +137,12 @@ interface ISummitService
      */
     public function updatePromoCode(ISummit $summit, array $promocode_data);
 
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function setMultiPromoCodes(ISummit $summit, array $data);
+
 
 }

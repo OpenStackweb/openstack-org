@@ -995,4 +995,73 @@ final class SummitService implements ISummitService
         });
     }
 
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function setMultiPromoCodes(ISummit $summit, array $data)
+    {
+        $promocode_repository                 = $this->promocode_repository;
+        $promocode_factory                    = new SummitRegistrationPromoCodeFactory();
+
+        return $this->tx_service->transaction(function() use($summit, $data , $promocode_repository, $promocode_factory) {
+            $codes = array();
+
+            // first we get the matching codes
+            if ($data['use_codes']) {
+                $codes = $promocode_repository->getFreeByTypeAndSummit
+                    (
+                        $summit->getIdentifier(),
+                        $data['code_type'],
+                        $data['code_prefix'],
+                        $data['company_id'],
+                        $data['code_qty']
+                    )->toArray();
+            }
+
+            // complete number of codes requested with new ones
+            $diff = $data['code_qty'] - count($codes);
+            if ($diff > 0) {
+                for ($i=1;$i <= $diff; $i++) {
+                    $prefix = (!empty($data['code_prefix'])) ? trim($data['code_prefix']) : substr($data['code_type'],0,3);
+                    $code_string = $prefix.'_'.random_string(6);
+
+                    if ($promocode_repository->getByCode($summit->getIdentifier(),$code_string)) {
+                        $i--; //redo
+                    } else {
+                        $data['code'] = $code_string;
+                        $promocode = $promocode_factory->buildPromoCode($data,$summit->getIdentifier());
+                        $promocode->write();
+                        $codes[] = $promocode;
+                    }
+                }
+            }
+
+            // Now assign members to these codes
+            if ($data['code_type'] == 'ALTERNATE' || $data['code_type'] == 'ACCEPTED') {
+                $owners = (isset($data['speakers'])) ? explode(',',$data['speakers']) : array();
+            } else {
+                $owners = (isset($data['members'])) ? explode(',',$data['members']) : array();
+            }
+
+            if(count($owners) > 0) {
+                foreach ($codes as $code) {
+                    $owner_id = array_pop($owners);
+                    if ($owner_id) {
+                        if ($code->ClassName == 'SpeakerSummitRegistrationPromoCode') {
+                            $code->SpeakerID = $owner_id;
+                        } else {
+                            $code->OwnerID = $owner_id;
+                        }
+
+                        $code->write();
+                    }
+                }
+            }
+
+            return $codes;
+        });
+    }
+
 }

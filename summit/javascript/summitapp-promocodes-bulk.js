@@ -16,8 +16,129 @@ $(document).ready(function(){
     var summit_id = $('#summit_id').val();
     var form = $('#bulk-promocode-form');
 
-    $('#code_type,#code_qty,#code_prefix').change(function(){
+    $('#code_qty,#code_prefix,#company_id').change(function(){
        getCodes();
+    });
+
+    $('#speakers').on('itemAdded', function(event) {
+        $(this).siblings('label').html('Speakers ('+$(this).tagsinput('items').length+')');
+    });
+
+    $('#speakers').on('itemRemoved', function(event) {
+        $(this).siblings('label').html('Speakers ('+$(this).tagsinput('items').length+')');
+    });
+
+    $('#members').on('itemAdded', function(event) {
+        $(this).siblings('label').html('Members ('+$(this).tagsinput('items').length+')');
+    });
+
+    $('#members').on('itemRemoved', function(event) {
+        $(this).siblings('label').html('Members ('+$(this).tagsinput('items').length+')');
+    });
+
+    $('#code_type').change(function(){
+        getCodes();
+        if ($(this).val() == 'ALTERNATE' || $(this).val() == 'ACCEPTED' ) {
+            $('#members_input').hide();
+            $('#speakers_input').show();
+        } else {
+            $('#members_input').show();
+            $('#speakers_input').hide();
+        }
+
+        if ($(this).val() == 'SPONSOR') {
+            $('#company_input').show();
+        } else {
+            $('#company_input').hide();
+        }
+    });
+
+    // Members Tags Input
+    var members_source = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: 'api/v1/summits/'+summit_id+'/members?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('#members').tagsinput({
+        itemValue: 'id',
+        itemText: 'name',
+        freeInput: false,
+        trimValue: true,
+        typeaheadjs: [
+            {
+                hint: true,
+                highlight: true,
+                minLength: 3
+            },
+            {
+                name: 'members_source',
+                displayKey: 'name',
+                source: members_source
+            }
+        ]
+    });
+
+    //Speakers Tags Input
+    var speakers_source = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: 'api/v1/summits/'+summit_id+'/speakers/%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('#speakers').tagsinput({
+        itemValue: 'speaker_id',
+        itemText: 'name',
+        freeInput: false,
+        trimValue: true,
+        typeaheadjs: [
+            {
+                hint: true,
+                highlight: true,
+                minLength: 3
+            },
+            {
+                name: 'speakers_source',
+                displayKey: 'name',
+                source: speakers_source
+            }
+        ]
+    });
+
+    //SPONSOR AUTOCOMPLETE  --------------------------------------------//
+    var company_source = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: 'api/v1/summits/'+summit_id+'/companies?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('#company_id').tagsinput({
+        itemValue: 'id',
+        itemText: 'name',
+        freeInput: false,
+        maxTags: 1,
+        trimValue: true,
+        typeaheadjs: [
+            {
+                hint: true,
+                highlight: true,
+                minLength: 3
+            },
+            {
+                name: 'company_source',
+                displayKey: 'name',
+                source: company_source
+            }
+        ]
     });
 
     // FORM SUBMIT
@@ -26,10 +147,11 @@ $(document).ready(function(){
         focusCleanup: true,
         ignore: [],
         rules: {
-            code_qty:    { required: true},
-            code_prefix: { required: true},
-            bulk_action: { required: true},
-            members:     { required: true},
+            code_qty: { required: true },
+            company_id :{ required: function(){
+                var code_type = $('#code_type').find("option:selected").text();
+                return code_type === 'SPONSOR';
+            }},
         },
     });
 
@@ -39,35 +161,38 @@ $(document).ready(function(){
         if (!form.valid()) return false;
 
         form.find(':submit').attr('disabled','disabled');
-        var disabled = form.find(':input:disabled').removeAttr('disabled');
         var request   = form.serializeForm();
-        disabled.prop('disabled',true);
         var summit_id = $('#summit_id').val();
-        var method    = (sponsor_id) ? 'PUT' : 'POST';
-        var url       = (sponsor_id) ? 'api/v1/summits/'+summit_id+'/registration-codes/sponsors/'+sponsor_id : 'api/v1/summits/'+summit_id+'/registration-codes/sponsors';
 
         $.ajax({
-            type: method,
-            url: url,
+            type: 'POST',
+            url: 'api/v1/summits/'+summit_id+'/registration-codes/bulk',
             data: JSON.stringify(request),
             contentType: "application/json; charset=utf-8",
             dataType: "json"
-        }).done(function(sponsor_id) {
+        }).done(function(promocodes) {
+            var codes_string = '';
+            $.each(promocodes,function(idx,code){
+                codes_string += code+', ';
+            });
+            codes_string = codes_string.slice(0,-2);
+
             swal({
-                    title: "Updated!",
-                    text: "Sponsor was updated successfully.",
-                    type: "success"
-                },
-                function() {
-                    window.location.href = this_url + sponsor_id;
-                });
+                title: "Success!",
+                text: "Promocodes were created/assigned successfully. Promocodes: "+codes_string,
+                confirmButtonText: "Done!",
+                type: "success"
+            },
+            function() {
+                location.reload();
+            });
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
                 var response = $.parseJSON(jqXHR.responseText);
                 swal('Validation error', response.messages[0].message, 'warning');
             } else {
-                swal('Error', 'There was a problem updating the sponsor, please contact admin.', 'warning');
+                swal('Error', 'There was a problem creating/assigning the promo codes, please contact admin.', 'warning');
             }
             form.find(':submit').removeAttr('disabled');
         });
@@ -82,32 +207,34 @@ function getCodes() {
     var code_type = $('#code_type').val();
     var code_qty = $('#code_qty').val();
     var code_prefix = $('#code_prefix').val();
+    var company_id = $('#company_id').val();
     var summit_id = $('#summit_id').val();
     var request   = {
-        page: 1,
-        items: code_qty,
+        limit: code_qty,
         prefix: code_prefix,
-        type: code_type
+        type: code_type,
+        company_id: company_id,
     };
 
     if (!code_qty) return false;
+    if(code_type == 'SPONSOR' && !company_id) return false;
 
-    $.getJSON('api/v1/summits/'+summit_id+'/registration-codes/free', request, function(data){
+    $.getJSON('api/v1/summits/'+summit_id+'/registration-codes/free', request, function(codes){
         var code_html = '';
         $('#set_qty').hide();
 
-        if (data.codes.length) {
-            $.each(data.codes,function(idx,code) {
-                code_html += '<div class="col-md-2">'+code.code+'</div>';
+        if (codes.length) {
+            $.each(codes,function(idx,code) {
+                code_html += '<div class="col-md-2">'+code.Code+'</div>';
             });
 
             $('#matching_codes').html(code_html).show();
-            $('#bulk_action_1').prop('disabled',false);
-            $('#bulk_action_2').prop('checked',false);
+            $('#use_codes_1').prop('disabled',false);
+            $('#use_codes_2').prop('checked',false);
         } else {
             $('#matching_codes').html('<div class="col-md-12">No matches found.</div>').show();
-            $('#bulk_action_1').prop('disabled',true);
-            $('#bulk_action_2').prop('checked',true);
+            $('#use_codes_1').prop('disabled',true);
+            $('#use_codes_2').prop('checked',true);
         }
     });
 

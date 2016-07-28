@@ -53,7 +53,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
      */
     protected function authorize(){
         if(!Permission::check('ADMIN_SUMMIT_APP_FRONTEND_ADMIN')) return false;
-        return $this->checkOwnAjaxRequest();
+        return true;
     }
 
     protected function authenticate() {
@@ -66,7 +66,9 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         'PUT sponsors/$ORG_ID!'   => 'updateRegistrationSponsor',
         'GET all'                 => 'getRegistrationCodes',
         'GET free'                => 'getFreeRegistrationCodes',
+        'GET export'              => 'exportRegistrationCodes',
         'GET $REG_CODE!'          => 'getRegistrationCodeByTerm',
+        'POST bulk'               => 'setBulkRegistrationCodes',
         'POST '                   => 'addRegistrationCode',
         'PUT $REG_CODE!'          => 'updateRegistrationCode',
         'DELETE $REG_CODE!'       => 'deleteRegistrationCode',
@@ -82,6 +84,8 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         'addRegistrationSponsor',
         'updateRegistrationSponsor',
         'getFreeRegistrationCodes',
+        'setBulkRegistrationCodes',
+        'exportRegistrationCodes',
     );
 
     public function getRegistrationCodeByTerm(SS_HTTPRequest $request) {
@@ -168,28 +172,17 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         try
         {
             $query_string = $request->getVars();
-            $page         = (isset($query_string['page'])) ? intval(Convert::raw2sql($query_string['page'])) : '';
-            $page_size    = (isset($query_string['items'])) ? intval(Convert::raw2sql($query_string['items'])) : '';
+            $limit        = (isset($query_string['limit'])) ? intval(Convert::raw2sql($query_string['limit'])) : '';
             $prefix       = (isset($query_string['prefix'])) ? trim(Convert::raw2sql($query_string['prefix'])) : '';
             $type         = (isset($query_string['type'])) ? trim(Convert::raw2sql($query_string['type'])) : '';
-            $sort_by      = (isset($query_string['sort_by'])) ? trim(Convert::raw2sql($query_string['sort_by'])) : '';
-            $sort_dir     = (isset($query_string['sort_dir'])) ? trim(Convert::raw2sql($query_string['sort_dir'])) : '';
+            $company_id   = (isset($query_string['company_id'])) ? trim(Convert::raw2sql($query_string['company_id'])) : '';
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            list($page, $page_size, $count, $codes) = $this->code_repository->getFreeByTypeAndSummitPaginated
-                (
-                    $summit_id,
-                    $type,
-                    $page,
-                    $page_size,
-                    $prefix,
-                    $sort_by,
-                    $sort_dir
-                );
+            $codes = $this->code_repository->getFreeByTypeAndSummit($summit_id,$type,$prefix,$company_id,$limit);
 
-            return $this->ok(array('page' => $page, 'page_size' => $page_size, 'count' => $count, 'codes' => $codes));
+            return $this->ok($codes->toNestedArray());
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -390,6 +383,136 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function setBulkRegistrationCodes(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data         = $this->getJsonRequest();
+
+            $promocodes = $this->summit_service->setMultiPromoCodes($summit, $data);
+            $code_array = array();
+            foreach ($promocodes as $code) {
+                $code_array[] = $code->Code;
+            }
+
+            return $this->ok($code_array);
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(EntityAlreadyExistsException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->validationError(array(
+                array('message' => $ex3->getMessage())
+            ));
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function exportRegistrationCodes(SS_HTTPRequest $request) {
+        try {
+
+            $query_string = $request->getVars();
+            $code_type = (isset($query_string['type'])) ? $query_string['type'] : '';
+            $term = (isset($query_string['term'])) ? $query_string['term'] : '';
+            $summit_id = intval($request->param('SUMMIT_ID'));
+            $summit = $this->summit_repository->getById($summit_id);
+            if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $ext = 'csv';
+
+            list($page, $page_size, $count, $codes) = $this->code_repository->searchByTermAndSummitPaginated
+                (
+                    $summit_id,
+                    $code_type,
+                    1,
+                    0,
+                    $term
+                );
+
+            $results = array();
+            foreach ($codes as $row) {
+                $code_array = array(
+                    'Code' => $row['code'],
+                    'Type' => $row['type'],
+                    'Owner' => $row['owner'],
+                    'Email' => $row['owner_email'],
+                    'Sponsor' => $row['org'],
+                    'Emailed' => $row['email_sent'],
+                    'Redeemed' => $row['redeemed']
+                );
+
+                if (!$code_type) {
+                    $this_type = $row['type'];
+                    if (!isset($results[$this_type])) $results[$this_type] = array();
+                    $results[$this_type][] = $code_array;
+                } else {
+                    array_push($results, $code_array);
+                }
+            }
+
+            $filename = "promocodes_report-" . date('Ymd') . "." . $ext;
+            $delimiter = ($ext == 'xls') ? "\t" : ",";
+
+            if (!$code_type) { // if we export all codes we put each type on a different sheet
+                $objPHPExcel = new PHPExcel();
+                $objPHPExcel->getProperties()->setCreator("OpenStack");
+                $objPHPExcel->getProperties()->setTitle("PromoCodes");
+                $sheet_no = 0;
+                foreach ($results as $type => $codes) {
+                    if($sheet_no > 0){
+                        $active_sheet = $objPHPExcel->createSheet();
+                    } else {
+                        $objPHPExcel->setActiveSheetIndex(0);
+                        $active_sheet = $objPHPExcel->getActiveSheet();
+                    }
+                    $sheet_title = ($type) ? $type : 'No Type';
+                    $active_sheet->setTitle($sheet_title);
+                    $active_sheet->fromArray(array('Code','Type','Owner','Email','Sponsor','Emailed','Redeemed'), NULL, 'A1');
+                    foreach ($codes as $key => $code) {
+                        $row = $key + 2;
+                        $active_sheet->fromArray($code, NULL, 'A'.$row);
+                    }
+
+                    $sheet_no++;
+                }
+                $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+
+                header('Content-type: application/vnd.ms-excel');
+                header('Content-Disposition: attachment; filename="'.$filename.'"');
+
+                $objWriter->save('php://output');
+
+                return;
+            } else {
+                return CSVExporter::getInstance()->export($filename, $results, $delimiter);
+            }
         }
         catch(NotFoundEntityException $ex2)
         {
