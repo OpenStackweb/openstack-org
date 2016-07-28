@@ -54,8 +54,13 @@ final class PresentationForm extends BootstrapForm
     protected function getPresentationFields() {
 
         $private_groups = $this->presentation_manager->getPrivateCategoryGroupsFor(Member::currentUser(), $this->summit);
-        $public_groups = $this->summit->CategoryGroups()->filter('ClassName', 'PresentationCategoryGroup')->toArray();
-        $category_groups = array_merge($public_groups,$private_groups);
+        if ($this->summit->isCallForSpeakersOpen()) {
+            $public_groups = $this->summit->CategoryGroups()->filter('ClassName', 'PresentationCategoryGroup')->toArray();
+            $category_groups = array_merge($public_groups,$private_groups);
+        } else {
+            $category_groups = $private_groups;
+        }
+
         $category_groups_map = array();
         foreach ($category_groups as $group) {
             $group_type = ($group->ClassName == 'PrivatePresentationCategoryGroup') ? 'private' : 'public';
