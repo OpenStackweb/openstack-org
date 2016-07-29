@@ -22,6 +22,14 @@ $(document).ready(function(){
        updateForm();
     });
 
+    $('#send_email').click(function(){
+        if($('#member_id').tagsinput('items').length || $('#speaker_id').tagsinput('items').length) {
+            sendEmail();
+        } else {
+            swal('Oops!','Please assign the code to a member first.','warning');
+        }
+    });
+
     if (promocode_id) {
         $('#code_type').prop('disabled',true);
         $('#code').prop('disabled',true);
@@ -221,3 +229,37 @@ $(document).ready(function(){
     }
 
 });
+
+function sendEmail() {
+    var promocode_id = $('#promocode_id').val();
+    var summit_id = $('#summit_id').val();
+
+    $('#send_email').prop('disabled',true);
+
+    $.ajax({
+        type: 'POST',
+        url: 'api/v1/summits/'+summit_id+'/registration-codes/email/'+promocode_id,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function(promocode) {
+        swal({
+                title: "Done!",
+                text: "Promo code ("+promocode+") was sent successfully.",
+                type: "success"
+            },
+            function() {
+                window.location.href = this_url + promocode;
+            });
+    }).fail(function(jqXHR) {
+        var responseCode = jqXHR.status;
+        if(responseCode == 412) {
+            var response = $.parseJSON(jqXHR.responseText);
+            swal('Validation error', response.messages[0].message, 'warning');
+        } else {
+            swal('Error', 'There was a problem while sending the email, please contact admin.', 'warning');
+        }
+
+        $('#send_email').prop('disabled',false);
+    });
+    return false;
+}

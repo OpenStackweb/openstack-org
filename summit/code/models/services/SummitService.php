@@ -1064,4 +1064,51 @@ final class SummitService implements ISummitService
         });
     }
 
+    /**
+     * @param ISummit $summit
+     * @param int $code_id
+     * @return ISummitRegistrationPromoCode
+     */
+    public function sendEmailPromoCode(ISummit $summit, $code_id)
+    {
+        $promocode_repository   = $this->promocode_repository;
+
+        return $this->tx_service->transaction(function () use ($summit, $code_id, $promocode_repository) {
+            $promocode  = $promocode_repository->getById($code_id);
+            if(is_null($promocode)) throw new NotFoundEntityException('PromoCode');
+
+            if($promocode->ClassName == 'SpeakerSummitRegistrationPromoCode')
+                if(!$promocode->Speaker()->Exists())
+                    throw new NotFoundEntityException('Speaker');
+                else
+                    $member = $promocode->Speaker()->Member();
+
+            if($promocode->ClassName == 'MemberSummitRegistrationPromoCode')
+                if(!$promocode->Owner()->Exists())
+                    throw new NotFoundEntityException('Member');
+                else
+                    $member = $promocode->Owner();
+
+            if (!$promocode->EmailSent) {
+                $promocode->setEmailSent(1);
+                $promocode->write();
+
+                $params = array
+                (
+                    'Member' => $member,
+                    'Summit' => $summit,
+                    'PromoCode' => $promocode
+                );
+
+                $sender = new MemberPromoCodeEmailSender();
+                $sender->send($params);
+            }
+
+
+
+            return $promocode;
+
+        });
+    }
+
 }

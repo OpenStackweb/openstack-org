@@ -69,9 +69,10 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         'GET export'              => 'exportRegistrationCodes',
         'GET $REG_CODE!'          => 'getRegistrationCodeByTerm',
         'POST bulk'               => 'setBulkRegistrationCodes',
+        'POST email/$CODE_ID!'    => 'emailRegistrationCode',
         'POST '                   => 'addRegistrationCode',
-        'PUT $REG_CODE!'          => 'updateRegistrationCode',
-        'DELETE $REG_CODE!'       => 'deleteRegistrationCode',
+        'PUT $CODE_ID!'           => 'updateRegistrationCode',
+        'DELETE $CODE_ID!'        => 'deleteRegistrationCode',
     );
 
     static $allowed_actions = array(
@@ -86,6 +87,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         'getFreeRegistrationCodes',
         'setBulkRegistrationCodes',
         'exportRegistrationCodes',
+        'emailRegistrationCode',
     );
 
     public function getRegistrationCodeByTerm(SS_HTTPRequest $request) {
@@ -234,7 +236,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         try
         {
             $summit_id    = intval($request->param('SUMMIT_ID'));
-            $code_id   = intval($request->param('REG_CODE'));
+            $code_id   = intval($request->param('CODE_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data         = $this->getJsonRequest();
@@ -244,7 +246,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
                     $summit,
                     $data
                 );
-            return $this->ok($promocode);
+            return $this->ok($promocode->getCode());
         }
         catch(EntityValidationException $ex1)
         {
@@ -267,7 +269,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         try
         {
             $summit_id    = intval($request->param('SUMMIT_ID'));
-            $code_id   = intval($request->param('REG_CODE'));
+            $code_id   = intval($request->param('CODE_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
@@ -513,6 +515,35 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
             } else {
                 return CSVExporter::getInstance()->export($filename, $results, $delimiter);
             }
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function emailRegistrationCode(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $code_id   = intval($request->param('CODE_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $promocode = $this->summit_service->sendEmailPromoCode($summit, $code_id);
+
+            return $this->ok($promocode->getCode());
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
         }
         catch(NotFoundEntityException $ex2)
         {

@@ -106,6 +106,7 @@ final class SummitRegistrationPromoCodeFactory
         $promocode->setSummit(trim($summit_id));
         $promocode->setSource('ADMIN');
         $promocode->setType($code_type);
+        $promocode->setCreator(Member::currentUser());
 
         return $promocode;
     }

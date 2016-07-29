@@ -48,7 +48,7 @@ class SapphireSummitRegistrationPromoCodeRepository
         $having = '1=1';
 
         if (!empty($term)) {
-            $having = " AND (`Code` LIKE '%{$term}%' OR CodeFirstName LIKE '%{$term}%' OR CodeLastName LIKE '%{$term}%'
+            $having .= " AND (`Code` LIKE '%{$term}%' OR CodeFirstName LIKE '%{$term}%' OR CodeLastName LIKE '%{$term}%'
                         OR CodeEmail LIKE '%{$term}%' OR SpeakerFirstName LIKE '%{$term}%' OR SpeakerLastName LIKE '%{$term}%'
                         OR SpeakerEmail LIKE '%{$term}%' OR OwnerFirstName LIKE '%{$term}%'
                         OR OwnerLastName LIKE '%{$term}%' OR OwnerEmail LIKE '%{$term}%' OR SponsorName LIKE '%{$term}%'";
@@ -68,7 +68,8 @@ class SapphireSummitRegistrationPromoCodeRepository
 SELECT PCode.ID AS CodeID, PCode.`Code`,PCode.ClassName,PCode.EmailSent,PCode.Redeemed,PCode.Source,
 IF(SC.Type,SC.Type,MC.Type) AS Type, SC.SpeakerID, MC.OwnerID, SPC.SponsorID, MC.FirstName AS CodeFirstName,
 MC.LastName AS CodeLastName, MC.Email AS CodeEmail, S.FirstName AS SpeakerFirstName, S.LastName AS SpeakerLastName,
-M2.Email AS SpeakerEmail, M.FirstName AS OwnerFirstName, M.Surname AS OwnerLastName, M.Email AS OwnerEmail, Org.`Name` AS SponsorName
+M2.Email AS SpeakerEmail, M.FirstName AS OwnerFirstName, M.Surname AS OwnerLastName, M.Email AS OwnerEmail,
+Org.`Name` AS SponsorName, CONCAT(M3.FirstName,' ',M3.Surname) AS Creator
 FROM SummitRegistrationPromoCode AS PCode
 LEFT JOIN SpeakerSummitRegistrationPromoCode AS SC ON SC.ID = PCode.ID
 LEFT JOIN MemberSummitRegistrationPromoCode AS MC ON MC.ID = PCode.ID
@@ -77,6 +78,7 @@ LEFT JOIN PresentationSpeaker AS S ON SC.SpeakerID = S.ID
 LEFT JOIN Member AS M ON MC.OwnerID = M.ID
 LEFT JOIN Org ON SPC.SponsorID = Org.ID
 LEFT JOIN Member AS M2 ON S.ID = M2.ID
+LEFT JOIN Member AS M3 ON PCode.CreatorID = M3.ID
 WHERE SummitID = {$summit_id}
 HAVING {$having}
 {$sort}
@@ -89,12 +91,13 @@ SQL;
         $data = array();
 
         foreach ($res as $code) {
+            $source = ($code['Creator'] != '') ? $code['Creator'] : $code['Source'];
             $code_array = array(
                 'id' => $code['CodeID'],
                 'code' => $code['Code'],
                 'email_sent' => intval($code['EmailSent']),
                 'redeemed' => intval($code['Redeemed']),
-                'source' => $code['Source'],
+                'source' => $source,
                 'type' => $code['Type'],
                 'org'  => $code['SponsorName']
             );

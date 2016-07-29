@@ -32,7 +32,7 @@
                         <% end_if %>
                         email_sent: {$EmailSent},
                         redeemed : {$Redeemed},
-                        source : "{$Source}",
+                        source : <% if $Creator().Exists %> "{$Creator().FullName.JS}" <% else %> "{$Source}" <% end_if %>,
                         type: "{$Type}",
                     });
             <% end_loop %>

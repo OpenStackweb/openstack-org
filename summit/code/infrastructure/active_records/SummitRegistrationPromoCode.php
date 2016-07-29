@@ -28,6 +28,7 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
 
     private static $has_one = array(
         'Summit' => 'Summit',
+        'Creator' => 'Member',
     );
 
     private static $indexes = array(
@@ -98,5 +99,10 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
     public function setSource($source)
     {
         $this->setField('Source',$source);
+    }
+
+    public function setCreator($member)
+    {
+        $this->CreatorID = $member->ID;
     }
 }

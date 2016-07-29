@@ -84,9 +84,9 @@
                             <label for="redeemed">Redeemed</label>
                         </div>
                     </div>
-                    <% if $PromoCode.EmailSent == 0 %>
+                    <% if $PromoCode.EmailSent == 0 && $PromoCode.Exists %>
                     <div class="col-md-3">
-                        <button id="send_email" class="btn btn-default">Send Email</button>
+                        <button type="button" id="send_email" class="btn btn-default">Send Email</button>
                     </div>
                     <% end_if %>
                 </div>

@@ -144,5 +144,12 @@ interface ISummitService
      */
     public function setMultiPromoCodes(ISummit $summit, array $data);
 
+    /**
+     * @param ISummit $summit
+     * @param int $code_id
+     * @return ISummitRegistrationPromoCode
+     */
+    public function sendEmailPromoCode(ISummit $summit, $code_id);
+
 
 }
