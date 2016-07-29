@@ -83,6 +83,7 @@ class OpenStackDaysPage extends Page {
         );
         $guidelines->setFolderName('openstackdays');
         $guidelines->setField('Category','OfficialGuidelines');
+        $guidelines->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
         $fields->addFieldToTab(
             'Root.Host',
@@ -91,6 +92,7 @@ class OpenStackDaysPage extends Page {
         $tools->setFolderName('openstackdays');
         $tools->setField('Category','PlanningTools');
         $tools->setAttribute('relationAutoSetting',false);
+        $tools->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
         $fields->addFieldToTab(
             'Root.Host',
@@ -98,6 +100,7 @@ class OpenStackDaysPage extends Page {
         );
         $artwork->setFolderName('openstackdays');
         $artwork->setField('Category','Artwork');
+        $artwork->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
         /*$fields->addFieldToTab(
             'Root.Host',
@@ -122,6 +125,7 @@ class OpenStackDaysPage extends Page {
         );
         $media->setFolderName('openstackdays');
         $media->setField('Category','Media');
+        $media->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
         return $fields;
 	}
