@@ -78,6 +78,7 @@ final class COAManager implements ICOAManager
                         $cert_exam_expiration_date = $row['certificate_expiration_date'];
                         $cert_status               = $row['certification_status'];
 
+                        if(empty($email)) comtinue;
                         $member = $member_repository->findByEmail($email);
                         if (is_null($member)) continue;
                         $exam = $member->getExamByExternalId($exam_ext_id);
