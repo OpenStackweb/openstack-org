@@ -228,11 +228,11 @@
 			Dos Cielos
 		</div>
 		<div class="col-sm-4">
-			Hotel Meliá: Av. de Sarrià, 50 08029 Barcelona, Spain
+			Hotel Meliá: Carrer de Pere IV, 286, 08005 Barcelona, Spain
 		</div>
 		<div class="col-sm-4">
 			<a href="http://www.melia.com/es/hoteles/espana/barcelona/melia-barcelona-sky/dos-cielos.html" target="_blank">Website</a> |
-			<a href="https://goo.gl/maps/HWqjksoFTrS2" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/Q8pXWCNHSrF2" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
