@@ -32,17 +32,10 @@
     	<div class="container">
     		<div class="col-sm-12">
     			<h2>
-    				Join us
+    				Watch the Video
     			</h2>
-    			<p>
-    				<a href="https://openstack.webex.com/mw3100/mywebex/default.do?service=1&siteurl=openstack&nomenu=true&main_url=%2Fmc3100%2Fe.do%3Fsiteurl%3Dopenstack%26AT%3DMI%26EventID%3D465253947%26UID%3D520120647%26Host%3DQUhTSwAAAAJBP1JDRRjivAteljmB_u-i8ARQ-ercJfq21ruAtpozhLQlv2wqibbSVyCxv2-obCPmUNo_OInpMsq-cSzJU7820%26FrameSet%3D2%26MTID%3Dmd6811ee06a38fb133202f3ba81afac2b"><strong>Tuesday, July 12</strong><br>at 2300 UTC / 4 p.m. Pacific</a> or <a href="https://openstack.webex.com/mw3100/mywebex/default.do?service=1&siteurl=openstack&nomenu=true&main_url=%2Fmc3100%2Fe.do%3Fsiteurl%3Dopenstack%26AT%3DMI%26EventID%3D467071687%26UID%3D520120647%26Host%3DQUhTSwAAAALYWtoSja6PYTpMDuCBH_qm1gCQbhd-GdbJfBZND-dY6gRssKo-knY-eJ--MObV0aQNFgOjGTF9B-ctZ5OheGB_0%26FrameSet%3D2%26MTID%3Dm8c948a4622ac0870f5220eeb53897837"><strong>Monday, July 18</strong><br>at 1500 UTC / 8 a.m. Pacific</a>
-    			</p>
-    			<p>
-    				 for a 10-minute info session followed by an open Q&A.
-    			</p>
-				<hr style="width:50%;margin:20px auto;">
-				<p>Watch the presentation here: <em>(8 minutes)</em></p>
-				<iframe width="350" height="197" src="https://www.youtube.com/embed/LOdsuNr2T-o?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+			<p>Find out more about the OpenStack mascot project (8 minutes): <em>(8 minutes)</em></p>
+			<iframe width="350" height="197" src="https://www.youtube.com/embed/LOdsuNr2T-o?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
     	</div>
     </div>
@@ -112,23 +105,51 @@
 				Watch this space—we’ll be updating it frequently as project teams select their mascots.
 			</p>
 			<ul>
+				<li><strong>Ansible:</strong> Cape buffalo</li>
+				<li><strong>Astara:</strong> Starfish (sea star)</li>
+				<li><strong>Chef:</strong> Kangaroo</li>
+				<li><strong>Cinder:</strong> Horse</li>
 				<li><strong>Cloudkitty:</strong> Cat (maneki-neko)</li>
+				<li><strong>Community App Catalog:</strong> Quokka</li>
+				<li><strong>Congress:</strong> Raven</li>
+				<li><strong>DefCore:</strong> Oak tree</li>
+				<li><strong>Designate:</strong> Crocodile</li>
+				<li><strong>Dragonflow:</strong> Seahorse</li>
+				<li><strong>EC2-API:</strong> Toucan</li>
 				<li><strong>Glance:</strong> Chipmunk</li>
 				<li><strong>Heat:</strong> Flame/fire</li>
+				<li><strong>Horizon:</strong> Shiba inu (dog)</li>
+				<li><strong>I18n:</strong> Parrot</li>
 				<li><strong>Ironic:</strong> Bear</li>
+				<li><strong>Kuryr:</strong> Platypus</li>
 				<li><strong>Keystone:</strong> Turtle</li>
-				<li><strong>Manila:</strong> Gorillav
+				<li><strong>Kolla:</strong> Koala</li>
+				<li><strong>Magnum:</strong> Waves</li>
+				<li><strong>Manila:</strong> Gorilla</li>
+				<li><strong>Mistral:</strong> Dandelion</li>
+				<li><strong>Monasca:</strong> Monitor lizard</li>
+				<li><strong>Murano:</strong> Muraena eel (moray)</li>
+				<li><strong>Neutron:</strong> Spiderweb+spider</li>
 				<li><strong>Oslo:</strong> Moose</li>
+				<li><strong>Packaging-deb:</strong> Lemur</li>
 				<li><strong>Packaging-rpm:</strong> Donkey</li>
-				<li><strong>Sahara:</strong> Elephant</li>
-				<li><strong>Security:</strong> Pangolin (scaly anteater)</li>
-				<li><strong>Swift:</strong> Swift (bird)</li>
+				<li><strong>Puppet:</strong> Wolf</li>
+				<li><strong>Quality Assurance:</strong> Little brown bat</li>
 				<li><strong>Rally:</strong> White ermine</li>
+				<li><strong>RefStack:</strong> Honeycomb+bee</li>
 				<li><strong>Release Management:</strong> Border collie</li>
-				<li><strong>Tacker:</strong> Squid</li>
-				<li><strong>Trove:</strong> Stingray</li>
+				<li><strong>Sahara:</strong> Elephant</li>
+				<li><strong>Searchlight:</strong> Firefly</li>
+				<li><strong>Security:</strong> Pangolin (scaly anteater)</li>
+				<li><strong>Stable Branch Management:</strong> Scarab beetle</li>
+				<li><strong>Swift:</strong> Swift (bird)</li>
+				<li><strong>Tacker:</strong> Giant squid</li>
+				<li><strong>Telemetry:</strong> Meerkat</li>
 				<li><strong>TripleO:</strong> Owl</li>
+				<li><strong>Trove:</strong> Stingray</li>
 				<li><strong>UX:</strong> Octopus</li>
+				<li><strong>Watcher:</strong> Jellyfish</li>
+				<li><strong>Winstackers:</strong> Hawk</li>
 			</ul>
 			<h5 class="section-title">FAQs</h5>
 			<p class="question">
