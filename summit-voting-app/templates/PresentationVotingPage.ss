@@ -60,7 +60,7 @@
                               <h1>
                                  Vote For Presentations
                                  <span>
-                                 Help us pick the presentations for The $Parent.Title Summit
+                                 Deadline: Monday, August 8 at 11:59pm PT / Tuesday, August 9 at 6:59am UTC
                                  </span>
                               </h1>
                            </div>
