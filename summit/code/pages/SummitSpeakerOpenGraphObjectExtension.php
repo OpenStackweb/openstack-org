@@ -22,4 +22,14 @@ class SummitSpeakerOpenGraphObjectExtension extends SummitEntityOpenGraphObjectE
     {
         return $this->owner->ProfilePhoto();
     }
+
+    public function getOGDescription()
+    {
+        return $this->owner->Bio;
+    }
+
+    public function getOGTitle()
+    {
+        return $this->owner->getName().' - '.$this->owner->getTitleNice();
+    }
 }
