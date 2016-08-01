@@ -13,6 +13,7 @@ colorpicker/
 colorpicker
 cms/
 cms
+dump.sql
 vendor/
 .htaccess
 debug.log
