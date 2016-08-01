@@ -663,8 +663,14 @@ class Company extends DataObject implements PermissionProvider,IEntity
      * @return bool
      */
     public function isCOAPartner(){
-        $coa_page = COALandingPage::get()->first();
-        if(is_null($coa_page)) return false;
-        return intval($coa_page->TrainingPartners()->filter('CompanyID', $this->ID)->count()) > 0;
+        foreach (COALandingPage::get() as $coa_page) { // we check all coa pages as there are duplicates (Students)
+            if (is_null($coa_page)) continue;
+            if ($coa_page->TrainingPartners()->count() == 0) continue;
+
+            if (intval($coa_page->TrainingPartners()->filter('CompanyID', $this->ID)->count()) > 0)
+                return true;
+        }
+
+        return false;
     }
 }
