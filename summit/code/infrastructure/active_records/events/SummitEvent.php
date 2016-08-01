@@ -14,6 +14,8 @@
  **/
 class SummitEvent extends DataObject implements ISummitEvent
 {
+    use SummitEntityMetaTagGenerator;
+
     private static $db = array
     (
         'Title'            => 'Text',

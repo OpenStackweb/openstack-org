@@ -127,11 +127,9 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
     }
 
-    public function ViewEvent()
+    public function ViewEvent(SS_HTTPRequest $request)
     {
-        $event_id = intval($this->request->param('EVENT_ID'));
-        $this->event_id = $event_id;
-        $event = $this->event_repository->getById($event_id);
+        $event  = $this->getSummitEntity($request);
         $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
 
         if (is_null($event) || !$event->isPublished()) {
@@ -152,10 +150,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         return $this->renderWith(
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
-                'Event' => $event,
+                'Event'     => $event,
                 'FB_APP_ID' => FB_APP_ID,
-                'goback' => $goback,
-                'Token' => $token
+                'goback'    => $goback,
+                'Token'     => $token
             ));
     }
 
@@ -401,10 +399,28 @@ END:VCALENDAR";
         }
     }
 
-    public function ViewSpeakerProfile()
+    /**
+     * @param SS_HTTPRequest $request
+     * @return IEntity|null
+     */
+    private function getSummitEntity(SS_HTTPRequest $request){
+        $speaker_id = intval($request->param('SPEAKER_ID'));
+        $event_id   = intval($request->param('EVENT_ID'));
+
+        if($event_id > 0) {
+            $this->event_id = $event_id;
+            return $this->event_repository->getById($event_id);
+        }
+        if($speaker_id > 0){
+            return $this->speaker_repository->getById($speaker_id);
+        }
+
+        return null;
+    }
+
+    public function ViewSpeakerProfile(SS_HTTPRequest $request)
     {
-        $speaker_id = intval($this->request->param('SPEAKER_ID'));
-        $speaker = $this->speaker_repository->getById($speaker_id);
+        $speaker  = $this->getSummitEntity($request);
 
         if (!isset($speaker)) {
             return $this->httpError(404, 'Sorry that speaker could not be found');
@@ -417,7 +433,7 @@ END:VCALENDAR";
             array
             (
                 'Speaker' => $speaker,
-                'Summit' => $this->Summit(),
+                'Summit'  => $this->Summit(),
             )
         );
     }
@@ -475,5 +491,14 @@ END:VCALENDAR";
     public function getPresentationLevels()
     {
         return Presentation::getLevels();
+    }
+
+    public function MetaTags()
+    {
+        $entity = $this->getSummitEntity(Controller::curr()->getRequest());
+        if(!is_null($entity)){
+            return $entity->MetaTags();
+        }
+        return parent::MetaTags(false);
     }
 }

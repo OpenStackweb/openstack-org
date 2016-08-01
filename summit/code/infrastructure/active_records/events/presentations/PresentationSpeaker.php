@@ -7,6 +7,8 @@ class PresentationSpeaker extends DataObject
     implements IPresentationSpeaker
 {
 
+    use SummitEntityMetaTagGenerator;
+
     private static $db = [
         'FirstName'             => 'Varchar(100)',
         'LastName'              => 'Varchar(100)',

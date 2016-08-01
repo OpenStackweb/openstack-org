@@ -135,6 +135,14 @@ define('GOOGLE_GEO_CODING_API_KEY','');
 // OAUTH 2.0 Client ID to use Google Calendar API
 define('GAPI_CLIENT','');
 
+// APP LINKS
+// http://applinks.org/documentation/
+define('APP_LINKS_IOS_APP_STORE_ID','');
+define('APP_LINKS_IOS_APP_NAME','');
+define('APP_LINKS_IOS_APP_CUSTOM_SCHEMA','');
+define('APP_LINKS_ANDROID_PACKAGE','');
+define('APP_LINKS_ANDROID_APP_NAME','');
+define('APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA','');
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

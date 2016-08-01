@@ -36,7 +36,8 @@
     "symfony/yaml": "~2.1|~3.0",
     "phpoffice/phpexcel": "dev-master",
     "tractorcow/silverstripe-fluent": "dev-patch/default-route",
-    "google/apiclient": "1.*"
+    "google/apiclient": "1.*",
+    "tractorcow/silverstripe-opengraph": "3.1.*@dev"
 
   },
   "require-dev": {
@@ -53,7 +54,8 @@
       "html2pdf_v4.03",
       "summit/code/infrastructure/traits",
       "openstack/code/utils/apis/traits",
-      "googlemaps/code/traits"
+      "googlemaps/code/traits",
+      "summit/code/pages/summit_entities/traits"
     ]
   },
   "config": {

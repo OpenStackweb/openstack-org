@@ -269,4 +269,11 @@ class SummitPage_Controller extends Page_Controller
             return 'link';
         }
     }
+
+    public function MetaTags()
+    {
+        $tags = parent::MetaTags(false);
+        return $tags;
+    }
+
 }
