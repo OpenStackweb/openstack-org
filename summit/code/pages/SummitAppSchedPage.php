@@ -139,7 +139,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         // only send meta tags
         if($request->getHeader("Prefer-Html-Meta-Tags")){
-            return $this->buildOnlyMetaTagsResponse($event);
+            return $this->buildOnlyMetaTagsResponse($event->MetaTags());
         }
 
         Requirements::block("summit/css/schedule-grid.css");
@@ -434,7 +434,7 @@ END:VCALENDAR";
 
         // only send meta tags
         if($request->getHeader("Prefer-Html-Meta-Tags")){
-            return $this->buildOnlyMetaTagsResponse($speaker);
+            return $this->buildOnlyMetaTagsResponse($speaker->MetaTags());
         }
 
         //Requirements::block("summit/css/schedule-grid.css");
@@ -450,16 +450,16 @@ END:VCALENDAR";
     }
 
     /**
-     * @param $entity
+     * @param string $meta_tags
      * @return SS_HTTPResponse
      */
-    private function buildOnlyMetaTagsResponse($entity){
+    private function buildOnlyMetaTagsResponse($meta_tags){
         $response = new SS_HTTPResponse();
         $response->setStatusCode(200);
         $html = <<< APP_LINKS
                <html>
                 <head>
-                    {$entity->MetaTags()}
+                    {$meta_tags}
                 </head>
                 <body>
                 </body>
@@ -536,5 +536,14 @@ APP_LINKS;
         // Android
         $tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, "schedule");
         return $tags;
+    }
+
+    public function index(SS_HTTPRequest $request){
+        // only send meta tags
+        if($request->getHeader("Prefer-Html-Meta-Tags")){
+            return $this->buildOnlyMetaTagsResponse($this->MetaTags());
+        }
+
+        return $this->getViewer('index')->process($this);
     }
 }
