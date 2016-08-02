@@ -50,7 +50,7 @@
                         $Image.getTag()
                         <div class="br-block">
                             <h3 class="blue-title">$Title</h3>
-                            <span class="small-descr">$Description</span>
+                            <div class="small-descr">$Description</div>
                             <span class="hr"></span>
                             <a href="$ContactLink" class="red-button">CONTACT US</a>
                         </div>
@@ -73,7 +73,7 @@
                                 <i class="fa fa-globe" aria-hidden="true"></i>
                                 <% end_if %>
                             </h3>
-                            <span class="small-descr">$Description</span>
+                            <div class="small-descr">$Description</div>
                             <span class="hr"></span>
                             <% loop $CollateralFiles %>
                             <p>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col-md-10 col-xs-8">
                                     <h3 class="blue-title">$Name</h3>
-                                    <span class="small-descr">$Description</span>
+                                    <div class="small-descr">$Description</div>
                                     <a href="" class="view-more">View Release Details ></a>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                         $Image.getTag()
                         <div class="br-block">
                             <h3 class="blue-title">$Title</h3>
-                            <span class="small-descr">$Description</span>
+                            <div class="small-descr">$Description</div>
                             <a href="$ButtonLink" class="red-button">$ButtonLabel</a>
                         </div>
                     </div>
