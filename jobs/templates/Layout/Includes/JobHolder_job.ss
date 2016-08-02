@@ -37,7 +37,7 @@
 
     <a href="" class="jobExpand btn btn-default btn-xs">more</a>
 
-    <div class="row jobDescription" style="display:none">
+    <div class="row jobDescription" >
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
