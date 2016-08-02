@@ -11,31 +11,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class Announcement extends DataObject{
+class MarketingVideo extends VideoLink {
 
-	private static $db = array(
-			'Content' => 'HTMLText',
-			'SortOrder' => 'Int'
-	);
+    private static $db = array(
+        'Active'    => 'Boolean',
+    );
 
-	private static $default_sort = 'SortOrder';
+    private static $has_one = array(
+        'Videos'      => 'MarketingPage',
+        'ParentPage'  => 'MarketingPage', //dummy
+    );
 
-	private static $singular_name = 'Announcement';
-	private static $plural_name = 'Announcements';
-	
-	
-	static $has_one = array(
-			'MarketingPage' => 'MarketingPage'
-	);
-	
-	function getCMSFields(){
-		return new FieldList(array(
-				new HtmlEditorField('Content')
-		));
-	}
-	
-	function getValidator()
-	{
-		return new RequiredFields(array('Content'));
-	}
+    function getCMSFields(){
+        $fields = parent::getCMSFields();
+        $fields->insertAfter(new CheckboxField('Active'),'Caption');
+        return $fields;
+    }
 }
