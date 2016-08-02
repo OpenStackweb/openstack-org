@@ -13,6 +13,26 @@
  **/
 
 
+final class AppLinkIOSMetadataBuilder
+{
+    public static function buildAppLinksMetaTags(&$tags, $url_path){
+        // IOS
+        $tags .= sprintf('<meta property="al:ios:app_store_id" content="%s" />', APP_LINKS_IOS_APP_STORE_ID).PHP_EOL;
+        $tags .= sprintf('<meta property="al:ios:app_name" content="%s" />', APP_LINKS_IOS_APP_NAME).PHP_EOL;
+        $tags .= sprintf('<meta property="al:ios:url" content="%s://%s" />', APP_LINKS_IOS_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
+    }
+}
+
+final class AppLinkIAndroidMetadataBuilder
+{
+    public static function buildAppLinksMetaTags(&$tags, $url_path){
+        // Android
+        $tags .= sprintf('<meta property="al:android:package" content="%s" />', APP_LINKS_ANDROID_PACKAGE).PHP_EOL;
+        $tags .= sprintf('<meta property="al:android:app_name" content="%s" />', APP_LINKS_ANDROID_APP_NAME).PHP_EOL;
+        $tags .= sprintf('<meta property="al:android:url" content="%s://%s" />', APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
+    }
+}
+
 class SummitEntityOpenGraphObjectExtension extends SummitPageOpenGraphObjectExtension
 {
     public function MetaTags(&$tags)
@@ -23,13 +43,9 @@ class SummitEntityOpenGraphObjectExtension extends SummitPageOpenGraphObjectExte
 
     private function buildAppLinksMetaTags(&$tags){
         // IOS
-        $tags .= sprintf('<meta property="al:ios:app_store_id" content="%s" />', APP_LINKS_IOS_APP_STORE_ID);
-        $tags .= sprintf('<meta property="al:ios:app_name" content="%s" />', APP_LINKS_IOS_APP_NAME);
-        $tags .= sprintf('<meta property="al:ios:url" content="%s://%s/%s" />', APP_LINKS_IOS_APP_CUSTOM_SCHEMA, $this->getEntityPath(), $this->owner->ID);
+        $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, sprintf("%s/%s",$this->getEntityPath(), $this->owner->ID));
         // Android
-        $tags .= sprintf('<meta property="al:android:package" content="%s" />', APP_LINKS_ANDROID_PACKAGE);
-        $tags .= sprintf('<meta property="al:android:app_name" content="%s" />', APP_LINKS_ANDROID_APP_NAME);
-        $tags .= sprintf('<meta property="al:android:url" content="%s://%s/%s" />', APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA, $this->getEntityPath(), $this->owner->ID);
+        $tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, sprintf("%s/%s",$this->getEntityPath(), $this->owner->ID));
     }
 
     protected function getEntityPath(){

@@ -130,10 +130,16 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     public function ViewEvent(SS_HTTPRequest $request)
     {
         $event  = $this->getSummitEntity($request);
+
         $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
 
         if (is_null($event) || !$event->isPublished()) {
             return $this->httpError(404, 'Sorry that event could not be found');
+        }
+
+        // only send meta tags
+        if($request->getHeader("Prefer-Html-Meta-Tags")){
+            return $this->buildOnlyMetaTagsResponse($event);
         }
 
         Requirements::block("summit/css/schedule-grid.css");
@@ -426,6 +432,11 @@ END:VCALENDAR";
             return $this->httpError(404, 'Sorry that speaker could not be found');
         }
 
+        // only send meta tags
+        if($request->getHeader("Prefer-Html-Meta-Tags")){
+            return $this->buildOnlyMetaTagsResponse($speaker);
+        }
+
         //Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-speaker.css");
 
@@ -436,6 +447,26 @@ END:VCALENDAR";
                 'Summit'  => $this->Summit(),
             )
         );
+    }
+
+    /**
+     * @param $entity
+     * @return SS_HTTPResponse
+     */
+    private function buildOnlyMetaTagsResponse($entity){
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(200);
+        $html = <<< APP_LINKS
+               <html>
+                <head>
+                    {$entity->MetaTags()}
+                </head>
+                <body>
+                </body>
+                </html>
+APP_LINKS;
+        $response->setBody($html);
+        return $response;
     }
 
     public function ViewAttendeeProfile()
@@ -499,6 +530,11 @@ END:VCALENDAR";
         if(!is_null($entity)){
             return $entity->MetaTags();
         }
-        return parent::MetaTags(false);
+        $tags = parent::MetaTags(false);
+        // IOS
+        $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, "schedule");
+        // Android
+        $tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, "schedule");
+        return $tags;
     }
 }
