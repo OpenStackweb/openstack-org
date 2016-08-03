@@ -34,7 +34,7 @@
     			<h2>
     				Watch the Video
     			</h2>
-			<p>Find out more about the OpenStack mascot project (8 minutes): <em>(8 minutes)</em></p>
+			<p>Find out more about the OpenStack mascot project: <em>(8 minutes)</em></p>
 			<iframe width="350" height="197" src="https://www.youtube.com/embed/LOdsuNr2T-o?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
     	</div>
@@ -124,7 +124,7 @@
 				<li><strong>Kuryr:</strong> Platypus</li>
 				<li><strong>Keystone:</strong> Turtle</li>
 				<li><strong>Kolla:</strong> Koala</li>
-				<li><strong>Magnum:</strong> Waves</li>
+				<li><strong>Magnum:</strong> Shark</li>
 				<li><strong>Manila:</strong> Gorilla</li>
 				<li><strong>Mistral:</strong> Dandelion</li>
 				<li><strong>Monasca:</strong> Monitor lizard</li>
@@ -141,6 +141,7 @@
 				<li><strong>Sahara:</strong> Elephant</li>
 				<li><strong>Searchlight:</strong> Firefly</li>
 				<li><strong>Security:</strong> Pangolin (scaly anteater)</li>
+				<li><strong>Senlin:</strong> Forest</li>
 				<li><strong>Stable Branch Management:</strong> Scarab beetle</li>
 				<li><strong>Swift:</strong> Swift (bird)</li>
 				<li><strong>Tacker:</strong> Giant squid</li>
