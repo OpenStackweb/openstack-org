@@ -3,7 +3,7 @@
 /**
  * Class AUCMetricTask
  */
-class AUCMetricTask extends BuildTask
+class AUCMetricTask extends CronTask
 {
 
     /**
@@ -28,73 +28,74 @@ class AUCMetricTask extends BuildTask
 
 
     /**
-     * @param $request
      * @throws ValidationException
      * @throws null
      */
-    public function run($request)
+    public function run()
     {
-    	SS_Log::log('Running AUCMetricTask', SS_Log::INFO);
-        $expiredMetrics = AUCMetric::get()
-        	->where("Expires < DATE(NOW())");
+        SapphireTransactionManager::getInstance()->transaction(function(){
+            SS_Log::log('Running AUCMetricTask', SS_Log::INFO);
+            $expiredMetrics = AUCMetric::get()
+                ->where("Expires < DATE(NOW())");
 
-        if($expiredMetrics->exists()) {
-        	$msg = "Deleting {$expiredMetrics->count()} metrics.";
-        	$this->writeln($msg);
-        	SS_Log::log($msg, SS_Log::INFO);
-        	$expiredMetrics->removeAll();
-        }
-        
-        $expiryDate = date('Y-m-d', strtotime(AUCMetric::config()->expiry));
-        $newMetricCount = 0;
-
-        foreach ($this->services as $service) {
-            $identifier = $service->getMetricIdentifier();
-            $this->writeHeader("Running service $identifier");
-            try {
-                $results = $service->getResults();
-            } catch (Exception $e) {
-                $this->writeln($e->getMessage());
-                SS_Log::log($e->getMessage(), SS_Log::ERR);
-                continue;
+            if($expiredMetrics->exists()) {
+                $msg = "Deleting {$expiredMetrics->count()} metrics.";
+                $this->writeln($msg);
+                SS_Log::log($msg, SS_Log::INFO);
+                $expiredMetrics->removeAll();
             }
 
-            $members = $results->getMemberList();
+            $expiryDate = date('Y-m-d', strtotime(AUCMetric::config()->expiry));
+            $newMetricCount = 0;
 
-            if (!$members) {
-                $this->writeln("--- no members found ---");
-                continue;
-            }
-
-            foreach ($members as $m) {
-                if ($m->hasAUCMetric($identifier)) {
-                    $this->writeln("Member {$m->Email} already has $identifier. Skipping.");
+            foreach ($this->services as $service) {
+                $identifier = $service->getMetricIdentifier();
+                $this->writeHeader("Running service $identifier");
+                try {
+                    $results = $service->getResults();
+                } catch (Exception $e) {
+                    $this->writeln($e->getMessage());
+                    SS_Log::log($e->getMessage(), SS_Log::ERR);
                     continue;
                 }
 
-                $m->AUCMetrics()->add(AUCMetric::create([
-                    'Identifier' => $identifier,
-                    'ValueDescription' => $service->getMetricValueDescription(),
-                    'Value' => $results->getValueForMember($m),
-                    'Expires' => $expiryDate
-                ])->write());
+                $members = $results->getMemberList();
 
-                $this->writeln(sprintf(
-                	"Added metric to %s %s %s",
-                	$m->Email,
-                	$service->getMetricValueDescription(),
-                	$results->getValueForMember($m)
-                ));
+                if (!$members) {
+                    $this->writeln("--- no members found ---");
+                    continue;
+                }
 
-                $newMetricCount++;
+                foreach ($members as $m) {
+                    if ($m->hasAUCMetric($identifier)) {
+                        $this->writeln("Member {$m->Email} already has $identifier. Skipping.");
+                        continue;
+                    }
+
+                    $m->AUCMetrics()->add(AUCMetric::create([
+                        'Identifier' => $identifier,
+                        'ValueDescription' => $service->getMetricValueDescription(),
+                        'Value' => $results->getValueForMember($m),
+                        'Expires' => $expiryDate
+                    ])->write());
+
+                    $this->writeln(sprintf(
+                        "Added metric to %s %s %s",
+                        $m->Email,
+                        $service->getMetricValueDescription(),
+                        $results->getValueForMember($m)
+                    ));
+
+                    $newMetricCount++;
+                }
+
             }
 
-        }
+            $msg = "Done. Created $newMetricCount new metric assignments";
+            SS_Log::log($msg, SS_Log::INFO);
 
-        $msg = "Done. Created $newMetricCount new metric assignments";
-        SS_Log::log($msg, SS_Log::INFO);
-
-        $this->writeln($msg);
+            $this->writeln($msg);
+        });
     }
 
     /**
