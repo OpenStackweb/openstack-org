@@ -37,4 +37,3 @@ migrations:
   - UninstallTranslatableMigration
   - FixSummitEventTypesMigration
   - SetEmailedFlagForSpeakerPromoCodesMigration
-  - MarketingPageTableCompressionMigration
