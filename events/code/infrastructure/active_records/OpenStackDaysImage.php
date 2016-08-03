@@ -18,7 +18,9 @@ class OpenStackDaysImage extends BetterImage {
     );
 
     private static $has_one = array(
-        'ParentPage' => 'OpenStackDaysPage',
+        'HeaderPics' => 'OpenStackDaysPage',
+        'Artwork'    => 'OpenStackDaysPage',
+        'ParentPage' => 'OpenStackDaysPage', //dummy
     );
 
     public function getCMSFields() {

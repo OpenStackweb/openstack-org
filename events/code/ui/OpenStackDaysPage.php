@@ -17,7 +17,8 @@
 class OpenStackDaysPage extends Page {
     private static $db = array(
         'AboutDescription' => 'HTMLText',
-        'HostIntroAndFAQs' => 'HTMLText',
+        'HostIntro'        => 'HTMLText',
+        'HostFAQs'         => 'HTMLText',
         'ToolkitDesc'      => 'HTMLText',
     );
 
@@ -25,10 +26,10 @@ class OpenStackDaysPage extends Page {
 
     private static $has_many = array(
         'AboutVideos'        => 'OpenStackDaysVideo.About',
-        'HeaderPics'         => 'OpenStackDaysImage',
+        'HeaderPics'         => 'OpenStackDaysImage.HeaderPics',
         'OfficialGuidelines' => 'OpenStackDaysDoc.OfficialGuidelines',
         'PlanningTools'      => 'OpenStackDaysDoc.PlanningTools',
-        'Artwork'            => 'OpenStackDaysDoc.Artwork',
+        'Artwork'            => 'OpenStackDaysImage.Artwork',
         'Collaterals'        => 'OpenStackDaysVideo.Collaterals',
         'Media'              => 'OpenStackDaysDoc.Media',
         'Videos'             => 'OpenStackDaysVideo', //dummy
@@ -69,7 +70,12 @@ class OpenStackDaysPage extends Page {
         // Host
         $fields->addFieldToTab(
             'Root.Host',
-            $about_desc = new HtmlEditorField('HostIntroAndFAQs','Intro Text',$this->HostIntroAndFAQs)
+            $about_desc = new HtmlEditorField('HostIntro','Intro Text',$this->HostIntro)
+        );
+
+        $fields->addFieldToTab(
+            'Root.Host',
+            $about_desc = new HtmlEditorField('HostFAQs','FAQs',$this->HostFAQs)
         );
 
         $fields->addFieldToTab(
@@ -143,6 +149,10 @@ class OpenStackDaysPage_Controller extends Page_Controller {
 
 	function init() {
 	    parent::init();
+        Requirements::javascript('themes/openstack/bower_assets/slick-carousel/slick/slick.min.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('events/js/openstackdays.js');
+        Requirements::css('themes/openstack/bower_assets/slick-carousel/slick/slick.css');
         Requirements::css('events/css/openstackdays.css');
         $this->buildEventManager();
 	}
@@ -175,8 +185,26 @@ class OpenStackDaysPage_Controller extends Page_Controller {
         return "There are more than <strong>".$event_count." OpenStack Days</strong> scheduled for ".$this_year;
     }
 
-    public function getFeaturedEvents(){
-        return FeaturedEvent::get('FeaturedEvent');
+    public function getFeaturedEvents() {
+        return FeaturedEvent::get('FeaturedEvent')
+            ->leftJoin('EventPage','EventPage.ID = FeaturedEvent.EventID')
+            ->sort('EventPage.EventStartDate');
+    }
+
+    public function getGroupedPlanningTools() {
+        $grouped_array = array();
+        foreach ($this->PlanningTools()->sort('SortOrder') as $key => $tool) {
+            if ($tool->Group) {
+                if (!isset($grouped_array[$tool->Group]))
+                    $grouped_array[$tool->Group] = new ArrayData(array('Group' => $tool->Group,'First' => intval($key == 0),'Tools' => new ArrayList()));
+                $grouped_array[$tool->Group]->Tools->push($tool);
+            } else {
+                $tool->First = intval($key == 0);
+                $grouped_array[] = $tool;
+            }
+        }
+
+        return new ArrayList($grouped_array);
     }
 
 }

@@ -3,145 +3,198 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+                <img class="osdays-logo" src="./themes/openstack/images/osdays/days-logo.png" alt="">
                 <h1>OpenStack Days</h1>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12"> $EventsYearlyCountText() </div>
-        <div class="col-md-12">
-            <% loop $HeaderPics.Sort(SortOrder) %>
-                $CroppedImage(200,100).getTag()
-            <% end_loop %>
-        </div>
-    </div>
-</div>
 
-<div id="osdays-tab-stop"></div>
+<div class="days-pretext">$EventsYearlyCountText() - <a href="">find an upcoming OpenStack Day in your region!</a></div>
+
+<div class="container slider-container">
+    <section class="regular slider">
+        <% loop $HeaderPics.Sort(SortOrder) %>
+            <div> $CroppedImage(200,100).getTag() </div>
+        <% end_loop %>
+    </section>
+</div>
 
 <div class="software-tab-wrapper">
     <div class="container">
         <ul class="nav nav-tabs project-tabs" id="osdays-tabs" role="tablist">
-            <li class="active"><a href="#about_tab" role="tab" data-toggle="tab">About OpenStack Days</a></li>
-            <li><a href="#host_tab" role="tab" data-toggle="tab">Host An OpenStack Day</a></li>
-            <li><a href="#events_tab" role="tab" data-toggle="tab">Upcoming Events</a></li>
+            <li class="active tab-about_tab nav-item">
+                <a href="#about_tab" class="nav-link" role="tab" data-toggle="tab">About OpenStack Days</a>
+             </li>
+            <li class="tab-host_tab nav-item">
+                <a href="#host_tab" class="nav-link" role="tab" data-toggle="tab">Host An OpenStack Day</a>
+            </li>
+            <li class="tab-events_tab nav-item">
+                <a href="#events_tab" class="nav-link" role="tab" data-toggle="tab">Upcoming Events</a>
+            </li>
         </ul>
     </div>
 </div>
 
-<div class="software-main-wrapper">
-    <div class="container inner-osdays">
+<div class="tab-page osdays-page">
+    <div class="container">
         <!-- Begin Page Content -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="about_tab">
                 <div class="row">
                     <div class="col-sm-12"> $AboutDescription </div>
-                    <div class="col-sm-12"> $EventsYearlyCountText() </div>
+                    <div class="col-sm-12">
+                        <p class="mr5-30">$EventsYearlyCountText() - <a href="">find an upcoming OpenStack Day in your region!</a> </p>
+                    </div>
                 </div>
+                <h2 class="tab-title">Highlights From Recent OpenStack Days</h2>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3>Highlights</h3>
                         <div class="row">
                         <% loop $AboutVideos().Sort(SortOrder) %>
-                            <div class="col-md-3">
-                                <iframe src="//www.youtube.com/embed/{$YoutubeID}?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;controls=2" frameborder="0" height="120" width="250">
-                                </iframe><br>
-                                $Caption
+                            <div class="col-md-4 text-center">
+                                <a href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank">
+                                    $Thumbnail.getTag()
+                                </a>
+                                <p>$Caption</p>
                             </div>
                         <% end_loop %>
                         </div>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <h3>Check out more of the Past...</h3>
-                    <% loop $FeaturedEvents().Limit(8) %>
-                    <div class="col-md-3">
+
+                <span class="hr"></span>
+
+                <h2 class="tab-title">Check Out More of the Past OpenStack Days!</h2>
+                <div class="row featured_events">
+                    <% loop $FeaturedEvents().Limit(4) %>
+                    <div class="col-md-3 featured_event">
                         $Picture.CroppedImage(200,100).getTag()
-                        $Event.Title
+                        <p>
+                            $Event.Title
+                            <span class="font-13">$Event.getLocation()</span>
+                            <span class="font-12">$Event.formatDateRange()</span>
+                        </p>
                     </div>
                     <% end_loop %>
                 </div>
-                <div class="row">
-                    <button class="btn btn-default">See More</button>
+                <div class="text-center more-events">
+                    <a href="" id="more_events">See More Past Events [+]</a>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="host_tab">
+            <div role="tabpanel" class="tab-pane fade in hostan-page" id="host_tab">
                 <div class="row">
                     <div class="col-sm-12">
-                        $HostIntroAndFAQs
+                        $HostIntro
+                        <a href="" class="dark-blue">Contact Us For More Details</a>
+                        <span class="hr"></span>
+                        $HostFAQs
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                    <h3>Openstack Days Toolkit</h3>
                     <div class="col-sm-12">
                         $ToolkitDesc
                     </div>
                 </div>
-                <div class="row">
-                    <h4> Official Guidelines </h4>
+                <h3 class="blue-title">Official Guidelines</h3>
+                <div class="row host-an">
                     <% loop OfficialGuidelines() %>
-                        $Title
-                    <% end_loop %>
-                </div>
-                <div class="row">
-                    <h4> Planning Tools </h4>
-                    <% loop PlanningTools() %>
-                        $Title
-                    <% end_loop %>
-                </div>
-                <div class="row">
-                    <h4> Artwork For Print </h4>
-                    <% loop Artwork() %>
-                        $Title
-                    <% end_loop %>
-                </div>
-                <div class="row">
-                    <h4> Video / Presentations / Collateral </h4>
-                    <% if Collaterals().Exists() %>
-                    <% loop Collaterals().Sort(SortOrder) %>
-                        <div class="col-md-3">
-                            <iframe src="//www.youtube.com/embed/{$YoutubeID}?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;controls=2" frameborder="0" height="120" width="250">
-                            </iframe><br>
-                            $Caption
+                    <div class="col-md-4 <% if $Pos > 1 %>brl1<% end_if %>">
+                        <div class="row">
+                            <div class="col-md-7 col-xs-6">
+                                $Title
+                            </div>
+                            <div class="col-md-5 col-xs-6"><a href="" class="download">DOWNLOAD</a></div>
                         </div>
+                    </div>
                     <% end_loop %>
-                    <% end_if %>
+                    <div class="col-md-4 brl1"></div>
                 </div>
-                <div class="row">
-                    <h4> PR / Media </h4>
-                    <% loop Media() %>
-                        $Title
+
+                <span class="hr margin24-0"></span>
+
+                <h3 class="blue-title">Planning Tools</h3>
+                <div class="row host-an">
+                    <% loop getGroupedPlanningTools() %>
+                        <div class="col-md-4 <% if $Pos > 1 %>brl1<% end_if %>">
+                            <div class="row">
+                                <% if $Group %>
+                                    <div class="col-md-7 col-xs-6"> $Group </div>
+                                    <div class="col-md-5 col-xs-6">
+                                    <% loop $Tools %>
+                                        <a href="" class="download">$Title</a>
+                                    <% end_loop %>
+                                    </div>
+                                <% else %>
+                                    <div class="col-md-7 col-xs-6"> $Title </div>
+                                    <div class="col-md-5 col-xs-6"><a href="" class="download">DOWNLOAD</a></div>
+                                <% end_if %>
+                            </div>
+                        </div>
                     <% end_loop %>
                 </div>
 
+                <span class="hr margin24-0"></span>
+
+                <h3 class="blue-title">Artwork for Print</h3>
+                <p class="mrtop20">
+                    For more printable artwork, please visit the <a class="light-blue" href="">OpenStack shop here.</a>
+                </p>
+                <ul class="content-list">
+                    <% loop Artwork() %>
+                    <li>
+                        $getTag()
+                        <p>$Title</p>
+                        <a class="download" href="">Download</a>
+                    </li>
+                    <% end_loop %>
+                </ul>
+
+                <span class="hr margin0-0-24"></span>
+
+                <h3 class="blue-title">Video / Presentations / Collateral</h3>
+                <p class="mrtop20">For more a full ist of collateral, please visit <a class="light-blue" href="">the OpenStack marketing portal here.</a></p>
+                <ul class="content-list">
+                    <% if Collaterals().Exists() %>
+                    <% loop Collaterals().Sort(SortOrder) %>
+                        <li>
+                            <a href="">$Thumbnail.getTag()</a>
+                            <p>$Caption</p>
+                            <a class="download" href="https://www.youtube.com/watch?v={$YoutubeID}">WATCH</a>
+                        </li>
+                    <% end_loop %>
+                    <% end_if %>
+                </ul>
+
+                <span class="hr margin0-0-24"></span>
+
+                <h3 class="blue-title">PR / Media</h3>
+                <div class="row host-an">
+                    <% loop Media() %>
+                    <div class="col-md-4 <% if $Pos > 1 %>brl1<% end_if %>">
+                        $Title
+                        <a href="$Link" class="download">DOWNLOAD</a>
+                    </div>
+                    <% end_loop %>
+                </div>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="events_tab">
-                <div class="row">
-                    <div class="col-sm-12 osdays-events">
+
+            <div role="tabpanel" class="tab-pane fade in" id="events_tab">
+                <div class="inner-osdays">
+                    <h2 class="tab-title">Highlights From Recent OpenStack Days</h2>
+                    <div class="osdays-events">
                         <% if $FutureOpenstackDaysEvents(22) %>
                             <% loop $FutureOpenstackDaysEvents(22) %>
-                                <div class="row osdays-event">
-                                    <div class="col-sm-2 col-xs-3">
-                                        <div class="osd-date"> $formatDateRange </div>
-                                    </div>
-                                    <div class="col-sm-4 col-xs-4">
-                                        <div class="osd-name"> $Title </div>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-3">
-                                        <div class="osd-location"> $Location, $Continent </div>
-                                    </div>
-                                    <% if $EventLink %>
-                                    <div class="col-sm-3 col-xs-2">
-                                        <a rel="nofollow" href="$EventLink" target="_blank" data-type="$EventCategory">
-                                            <div class="osd-link"></div>
-                                        </a>
-                                    </div>
-                                    <% end_if %>
+                            <div class="row osdays-event">
+                                <div class="col-sm-2 col-xs-3"><div class="osd-date">$formatDateRange</div></div>
+                                <div class="col-sm-4 col-xs-4">$Title</div>
+                                <div class="col-sm-3 col-xs-3">$Location</div>
+                                <div class="col-sm-3 col-xs-2 text-right to-top">
+                                    <a href="$EventLink">More Details</a>
+                                    <a class="more-img" href="$EventLink"></a>
                                 </div>
+                            </div>
                             <% end_loop %>
                         <% else %>
                             <h3>Sorry, there are no upcoming events listed at the moment.</h3>
