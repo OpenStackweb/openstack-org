@@ -1009,7 +1009,7 @@ final class SummitService implements ISummitService
             $codes = array();
 
             // first we get the matching codes
-            if ($data['use_codes']) {
+            if (isset($data['use_codes']) && $data['use_codes']) {
                 $codes = $promocode_repository->getFreeByTypeAndSummit
                     (
                         $summit->getIdentifier(),

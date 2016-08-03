@@ -149,7 +149,7 @@ $(document).ready(function(){
         rules: {
             code_qty: { required: true },
             company_id :{ required: function(){
-                var code_type = $('#code_type').find("option:selected").text();
+                var code_type = $('#code_type').find("option:selected").val();
                 return code_type === 'SPONSOR';
             }},
         },
