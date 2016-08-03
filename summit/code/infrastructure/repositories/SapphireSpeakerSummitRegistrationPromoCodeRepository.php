@@ -41,7 +41,6 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
                 {
                     $query = new QueryObject(new SpeakerSummitRegistrationPromoCode);
                     $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
-                    $query->addAndCondition(QueryCriteria::equal('OwnerID',0));
                     $query->addAndCondition(QueryCriteria::equal('SpeakerID',0));
                     $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
                     $query->addOrder(QueryOrder::asc('ID'));
@@ -56,7 +55,6 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
                 {
                     $query = new QueryObject(new SpeakerSummitRegistrationPromoCode);
                     $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
-                    $query->addAndCondition(QueryCriteria::equal('OwnerID',0));
                     $query->addAndCondition(QueryCriteria::equal('SpeakerID',0));
                     $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
                     $query->addOrder(QueryOrder::asc('ID'));

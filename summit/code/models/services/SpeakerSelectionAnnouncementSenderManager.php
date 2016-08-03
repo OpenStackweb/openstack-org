@@ -147,7 +147,7 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
                     $params = array
                     (
                         'Speaker' => $speaker,
-                        'Summit' => $current_summit
+                        'Summit'  => $current_summit
                     );
 
                     if (!is_null($code)) {
