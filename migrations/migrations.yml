@@ -37,3 +37,4 @@ migrations:
   - UninstallTranslatableMigration
   - FixSummitEventTypesMigration
   - SetEmailedFlagForSpeakerPromoCodesMigration
+  - RemoveOwnerIDColumnPromoCodesMigration
