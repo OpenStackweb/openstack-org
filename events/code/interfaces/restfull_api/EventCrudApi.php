@@ -69,12 +69,13 @@ final class EventCrudApi
      * @var array
      */
     static $url_handlers = array(
-        'PUT $EVENT_ID/toggle_summit' => 'toggleSummit',
-        'PUT $EVENT_ID/delete' => 'deleteEvent',
+        'PUT $EVENT_ID/toggle_summit'   => 'toggleSummit',
+        'PUT $EVENT_ID/delete'          => 'deleteEvent',
         'PUT $EVENT_ID/delete_featured' => 'deleteFeaturedEvent',
-        'GET $EVENT_ID' => 'getEvent',
-        'PUT ' => 'updateEvent',
-        'POST ' => 'addEvent',
+        'GET featured'                  => 'getFeaturedEvents',
+        'GET $EVENT_ID'                 => 'getEvent',
+        'PUT '                          => 'updateEvent',
+        'POST '                         => 'addEvent',
     );
 
     /**
@@ -87,6 +88,7 @@ final class EventCrudApi
         'getEvent',
         'updateEvent',
         'addEvent',
+        'getFeaturedEvents',
     );
 
     /**
@@ -194,6 +196,31 @@ final class EventCrudApi
         } catch (EntityValidationException $ex2) {
             SS_Log::log($ex2, SS_Log::WARN);
             return $this->validationError($ex2->getMessages());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getFeaturedEvents()
+    {
+        $offset = $this->request->getVar('offset');
+        try {
+            $featured_events = FeaturedEvent::get('FeaturedEvent')
+                ->leftJoin('EventPage','EventPage.ID = FeaturedEvent.EventID')
+                ->sort('EventPage.EventStartDate');
+
+            $featured_result = array();
+            foreach ($featured_events->limit(8,$offset) as $featured) {
+                $featured_result[] = array(
+                    'title' => $featured->Event()->Title,
+                    'location' => $featured->Event()->Location,
+                    'date' => $featured->Event()->formatDateRange(),
+                    'image' => $featured->Picture()->CroppedImage(200,100)->getTag(),
+                );
+            }
+
+            return $this->ok($featured_result);
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();

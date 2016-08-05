@@ -16,13 +16,13 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-8 col-sm-8">
+                <div class="col-sm-8">
                     <div class="intro-message">
                         <h1>OpenStack addresses cloud security</h1>
                         <h3>OpenStack security leaders detail capabilities and best practices for security, compliance and privacy</h3>
                     </div>
                 </div> 
-                <div class="col-lg-4 col-sm-4">
+                <div class="col-sm-4">
                     <div class="download-container">
                         <div class="download-text">Read <em>Securing OpenStack Clouds</em> now</div>
                         <a href="#" class="download-btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download</a>
@@ -99,6 +99,9 @@
                     </p>
                     <p>
                         <img class="security-badge" src="/themes/openstack/images/security/badge.png" alt="">
+                    </p>
+                    <p>
+                        <a href="http://www.openstack.org/news/view/243/openstack-earns-core-infrastructure-initiative-best-practices-badge-for-security,-quality-and-stability">Read the press release for more information.</a>
                     </p>
                 </div>
             </div>
@@ -178,7 +181,7 @@
     <!-- Action Section -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-sm-push-2">
+                <div class="col-sm-8 col-sm-push-2">
                     <div class="security-action-wrapper">
                         <p>
                             In this paper, we’ll address some of the questions about security, compliance and privacy we’ve received from users and technologists. We’ll demonstrate OpenStack readiness for your workloads, and facilitate trust and relationships between your team and the OpenStack community. 

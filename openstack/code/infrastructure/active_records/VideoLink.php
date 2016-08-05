@@ -25,6 +25,12 @@ class VideoLink extends DataObject {
 
 	private static $default_sort = 'SortOrder';
 
+    private static $summary_fields = array
+    (
+        'YoutubeID'  => 'YoutubeID',
+        'Caption'    => 'Caption',
+    );
+
     function getCMSFields(){
 
 	    $fields = new FieldList;
