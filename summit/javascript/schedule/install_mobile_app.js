@@ -14,6 +14,7 @@
 (function($) {
 
     $(document).ready(function() {
+
         var is_mobile  = bowser.mobile ||  bowser.tablet;
         var is_ios     = bowser.ios;
         var is_android = bowser.android;
@@ -22,58 +23,88 @@
             (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined")){
             var os = is_android ? 'Android' : 'IOS';
 
-            swal({
+            $('<div></div>')
+                .attr('id','install-app-overlay')
+                .css('opacity',.9)
+                .hover(function(){
+                    $(this).addClass('active');
+                }, function(){
+                    $(this).removeClass('active');
+                    setTimeout(function(){
+                        $('#install-app-overlay:not(.active)').slideUp();
+                    },800);
+                }).appendTo('body');
 
-                title: '<p>Hey there!</p>',
-                type: "question",
-                html: '<p>Download Mobile Summit App?</p><p><button type="button" class="btn btn-success btn-margin-top-15 btn-continue">Continue to website</button></p>',
-                showCancelButton: true,
-                confirmButtonText: 'Download for '+os,
-                cancelButtonText: "Already Installed? Launch It",
-                confirmButtonClass: 'btn btn-primary btn-margin-10',
-                cancelButtonClass: 'btn btn-info',
-                buttonsStyling: false
-            }).then(function() {
-                // install
-                open(false);
-            }, function(dismiss) {
-                // dismiss can be 'cancel', 'overlay', 'close', 'timer'
-                if (dismiss === 'cancel') {
+            var install_mobile_app_action = $.cookie('install_mobile_app_action');
 
-                    open(true);
-                }
-            })
+            var install_dialog_html =
+                '<div class="row">'+
+                '<div class="header-col">'+
+                '<a href="/summit">'+
+                '<img class="summit-hero-logo" src="/summit/images/logo.png" alt="OpenStack Summit">'+
+                '</a>'+
+                '</div>'+
+                '<div class="header-col">'+
+                '<h3>Hey Stacker!</h3>' +
+                '</div>'+
+                '<div class="header-col right">'+
+                '<i title="continue navigating the website" class="fa fa-times btn-continue" aria-hidden="true"></i>' +
+                '</div>'+
+                '</div>'+
+                '<div class="row">'+
+                '<p>Would you prefer to view this in the OpenStack Summit App?</p>' +
+                '</div>'+
+                '<div class="row">';
+
+            if (typeof install_mobile_app_action == 'undefined') {
+                install_dialog_html +=
+                    '<button type="button" id="btn-download" title="Download it" class="btn btn-action btn-success btn-xs">Download for ' + os + '</button>' +
+                    '<button type="button" id="btn-launch" title="Launch it" class="btn btn-action btn-success btn-xs">Already Installed? Launch It</button>';
+            }
+            else {
+                install_dialog_html += '<button type="button" id="btn-launch" title="Launch it" class="btn btn-action btn-success btn-xs">Launch It on ' + os + '</button>';
+            }
+
+            install_dialog_html +=  '</div>';
+
+            $('#install-app-overlay:not(:animated)')
+                .addClass('active')
+                .html(install_dialog_html)
+                .slideDown(1000);
         }
 
         $(document).on('click', '.btn-continue', function() {
-            swal.closeModal();
+            $('#install-app-overlay').slideUp(1000);
         });
 
-        function open(has_appli) {
+        $(document).on('click', '#btn-download', function() {
+            $.cookie('install_mobile_app_action', 'download', { expires: 7 });
+            if (is_ios){
+                window.location = $("meta[property='al:ios:url']").attr("content") || $("meta[property='al:android:url']").attr("content");
 
-            if (is_ios) {
-                if(has_appli) {
-                    window.location = $("meta[property='al:ios:url']").attr("content") || $("meta[property='al:android:url']").attr("content");
-
-                    setTimeout(function() {
-                        // If the user is still here, open the App Store
-                        if (!document.webkitHidden) {
-                            window.location = 'http://itunes.apple.com/app/id' + $("meta[property='al:ios:app_store_id']").attr("content");
-                        }
-                    }, 25);
-                } else {
-                    window.location = 'http://itunes.apple.com/app/id'+$("meta[property='al:ios:app_store_id']").attr("content");
-                }
-
-            } else if (is_android) {
-                if(has_appli) {
-                    window.location = 'intent:/' + $("meta[property='al:android:url']").attr("content").split(':/')[1] + '#Intent;package=' + $("meta[property='al:android:package']").attr("content") + ';scheme=' + $("meta[property='al:android:url']").attr("content").split(':/')[0] + ';launchFlags=268435456;end;';
-                }
-                else {
-                    window.location= 'https://play.google.com/store/apps/details?id='+$("meta[property='al:android:package']").attr("content")+'&hl=en';
-                }
+                setTimeout(function() {
+                    // If the user is still here, open the App Store
+                    if (!document.webkitHidden) {
+                        window.location = 'http://itunes.apple.com/app/id' + $("meta[property='al:ios:app_store_id']").attr("content");
+                    }
+                }, 25);
             }
-        }
+            else
+            {
+                window.location= 'https://play.google.com/store/apps/details?id='+$("meta[property='al:android:package']").attr("content")+'&hl=en';
+            }
+        });
+
+        $(document).on('click', '#btn-launch', function() {
+            $.cookie('install_mobile_app_action', 'launch', { expires: 7 });
+            if (is_ios){
+                window.location = 'http://itunes.apple.com/app/id'+$("meta[property='al:ios:app_store_id']").attr("content");
+            }
+            else
+            {
+                window.location = 'intent:/' + $("meta[property='al:android:url']").attr("content").split(':/')[1] + '#Intent;package=' + $("meta[property='al:android:package']").attr("content") + ';scheme=' + $("meta[property='al:android:url']").attr("content").split(':/')[0] + ';launchFlags=268435456;end;';
+            }
+        });
 
     });
 
