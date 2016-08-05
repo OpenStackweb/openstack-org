@@ -21,6 +21,7 @@ Member:
   extensions:
     - AUCMetricMember
 AUCActiveCommitterService:
-  user: unclecheese
+  user: openstackdev
+  keyfile: '/home/unclecheese/.ssh/id_rsa'
 AUCMetric:
   expiry: '+6 months'

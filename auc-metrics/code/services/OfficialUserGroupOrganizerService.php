@@ -50,7 +50,7 @@ class OfficialUserGroupOrganizerService implements MetricService
         );
         $csvPath = $csvDir.'/group-contacts.csv';
 
-        mkdir($csvDir);
+        @mkdir($csvDir);
 
         $body = $response->getBody();
 
