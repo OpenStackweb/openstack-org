@@ -145,13 +145,11 @@ def main():
         '-k', '--keyfile', default='~/.ssh/id_rsa',
         help='SSH key (default is ~/.ssh/id_rsa)')
     optparser.add_option(
-        '-u', '--user', default=os.environ['USER'],
-        help='SSH username (default is $USER)')
-    optparser.add_option(
    	    '-p', '--path', default='.',
    	    help='Output path, e.g. /path/to/output')
 
     options, args = optparser.parse_args()
+    user = args[0]
 
     projects = ['openstack/ops-tags-team',
                 'openstack/osops-tools-monitoring',
@@ -163,7 +161,7 @@ def main():
     for repo in projects:
         output = '%s/%s.csv' % (options.path, repo.split('/')[-1])
         repo_stats(repo, output, options.begin, options.end,
-                   options.keyfile, options.user)
+                   options.keyfile, user)
 
 
 if __name__ == "__main__":

@@ -53,10 +53,10 @@ class ActiveCommitterService implements MetricService
             BASE_PATH,
             AUC_METRICS_DIR,
             sprintf(
-                "lib/uc-recognition/tools/get_active_commiters.py -b %s -p %s -u %s -k %s",
-                $sixMonthsAgo,
-                $outputDir,
+                "lib/uc-recognition/tools/get_active_commiters.py %s -b %s -p %s -k %s",
                 $user,
+                $sixMonthsAgo,
+                $outputDir,                
                 $keyFile
             )
         );
