@@ -33,7 +33,7 @@ class ActiveCommitterService implements MetricService
     }
 
     /**
-     * @return static
+     * @return OpenStack\AUC\ResultList
      */
     public function getResults()
     {
@@ -42,6 +42,8 @@ class ActiveCommitterService implements MetricService
             'auc-metrics',
             'active-committers'
         );
+
+        mkdir($outputDir, 0755, true);
 
         $sixMonthsAgo = date('YmdHis', strtotime('-6 months'));
         $user = Config::inst()->get('AUCActiveCommitterService', 'user');

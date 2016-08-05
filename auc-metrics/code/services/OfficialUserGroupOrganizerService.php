@@ -44,11 +44,13 @@ class OfficialUserGroupOrganizerService implements MetricService
             );
         }
 
-        $csvPath = Controller::join_links(
+        $csvDir = Controller::join_links(
             TEMP_FOLDER,
-            'auc-metrics',
-            'group-contacts.csv'
+            'auc-metrics'
         );
+        $csvPath = $csvDir.'/group-contacts.csv';
+
+        mkdir($csvDir);
 
         $body = $response->getBody();
 

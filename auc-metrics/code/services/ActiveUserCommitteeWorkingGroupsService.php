@@ -35,10 +35,14 @@ class ActiveUserCommitteeWorkingGroupsService implements MetricService
             'meeting-data'
         );
 
+        mkdir($outputDir, 0755, true);
+
         $collectionDir = Controller::join_links(
             $outputDir,
             'eavesdrop.openstack.org/meetings'
         );
+
+        mkdir($collectionDir, 0755, true);
 
         $execPath = Controller::join_links(
         	BASE_PATH,
