@@ -17,6 +17,7 @@ class MarketingSoftware extends DataObject {
 		'Name'        => 'Varchar(255)',
 		'Description' => 'HTMLText',
         'YoutubeID'   => 'Varchar(255)',
+        'ReleaseLink' => 'Varchar(255)',
         'SortOrder'   => 'Int',
 	);
 
@@ -36,6 +37,7 @@ class MarketingSoftware extends DataObject {
         $fields->push(new TextField('Name','Name'));
         $fields->push($description = new HtmlEditorField('Description'));
         $description->setRows(5);
+        $fields->push(new TextField('ReleaseLink','Release Link'));
         $fields->push(new TextField('SortOrder','Sort Order'));
 
         $fields->push(new TextField('YoutubeID','YouTube ID for video Link'));

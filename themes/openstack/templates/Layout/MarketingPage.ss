@@ -78,13 +78,13 @@
                             <% loop $CollateralFiles %>
                             <p>
                                 <span class="left-info">$Title</span>
-                                <a href="$Link()" class="download">DOWNLOAD</a>
+                                <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
                             </p>
                             <% end_loop %>
                             <% loop $CollateralLinks %>
                             <p>
                                 <span class="left-info">$Title</span>
-                                <a href="$Link" class="download">DOWNLOAD</a>
+                                <a href="$Link" target="_blank" class="download">DOWNLOAD</a>
                             </p>
                             <% end_loop %>
                         </div>
@@ -107,7 +107,7 @@
                                 <div class="col-md-10 col-xs-8">
                                     <h3 class="blue-title">$Name</h3>
                                     <div class="small-descr">$Description</div>
-                                    <a href="" class="view-more">View Release Details ></a>
+                                    <a href="$ReleaseLink" class="view-more">View Release Details ></a>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                             <p>
                                 <span class="left-info">Logo</span>
                                 <% if $Logo.Exists %>
-                                <a href="" class="download">DOWNLOAD</a>
+                                <a href="$Logo.Link()" target="_blank" class="download">DOWNLOAD</a>
                                 <% else %>
                                 <span class="soon">COMING SOON</span>
                                 <% end_if %>
@@ -131,7 +131,7 @@
                             <p>
                                 <span class="left-info">Presentation</span>
                                 <% if $Presentation.Exists %>
-                                <a href="" class="download">DOWNLOAD</a>
+                                <a href="$Presentation.Link()" class="download" target="_blank">DOWNLOAD</a>
                                 <% else %>
                                 <span class="soon">COMING SOON</span>
                                 <% end_if %>
@@ -151,7 +151,7 @@
                     <li>
                         $getTag();
                         <p>$Name</p>
-                        <a class="download" href="">Download</a>
+                        <a class="download" href="$Link()" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -163,7 +163,7 @@
                     <li>
                         $getTag()
                         <p>$Name</p>
-                        <a class="download" href="">Download</a>
+                        <a class="download" href="$Link()" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -175,7 +175,7 @@
                     <li>
                         $getTag()
                         <p>$Name</p>
-                        <a class="download" href="">Download</a>
+                        <a class="download" href="$Link()" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -187,7 +187,7 @@
                     <li>
                         $Thumbnail.getTag()
                         <p>$Caption</p>
-                        <a class="download" href="">Watch</a>
+                        <a class="download" href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank" >Watch</a>
                     </li>
                     <% end_loop %>
                 </ul>
