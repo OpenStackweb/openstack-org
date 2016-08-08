@@ -31,7 +31,6 @@ class PresentationMemberExtension extends DataExtension
     public function getRandomisedPresentations($category_id = null, $summit = null) {
         $mid = Member::currentUserID();
         if(!$summit) $summit = Summit::get_active();        
-        $this->owner->VotingList()->flushCache();
         $priority = $this->owner->VotingList();
 
         if(!$priority->exists() || $priority->SummitID != $summit->ID) {        	
