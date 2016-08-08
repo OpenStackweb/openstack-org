@@ -7,7 +7,7 @@ class SummitRandomVotingTest extends SapphireTest {
 	public function setUp () {
 		Config::inst()->update('DataObject','validation_enabled', false);
 		Config::inst()->update('Summit', 'random_voting_list_count', 100);
-
+		Summit::get_active()->RandomVotingLists()->removeAll();
 		parent::setUp();
 	}
 
@@ -79,22 +79,82 @@ class SummitRandomVotingTest extends SapphireTest {
 	}
 
 
-//	public function testVotingControllerInitialisesPresentationPriorityWhenNeeded () {
-//		$count = Summit::config()->random_voting_list_count;
-//		$controller = ModelAsController::controller_for(
-//			$this->objFromFixture('PresentationVotingPage','voting')
-//		);
-//
-//		$this->assertEquals(0, Summit::get_active()->RandomVotingLists()->count());
-//		$controller->init();
-//
-//		$this->assertEquals(
-//			$count,
-//			Summit::get_active()->RandomVotingLists()->count()
-//		);
-//	}
+	public function testVotingControllerInitialisesPresentationPriorityWhenNoLists () {
+		$s = Summit::get_active();
+		$controller = ModelAsController::controller_for(
+			$this->objFromFixture('PresentationVotingPage','voting')
+		);
+		$controller->init();
 
-	public function testVotingControllerWillNotInitialisesPresentationPriorityWhenNotNeeded () {
+		$this->assertCount(
+			(int) $s->VoteablePresentations()->count(),
+			$s->RandomVotingLists()->sort('RAND()')->first()->getPriorityList()
+		);
+	}
+
+	public function testVotingControllerInitialisesPresentationPriorityWhenCountMismatch () {
+		$s = Summit::get_active();
+		$s->generateVotingLists();
+		foreach($s->RandomVotingLists() as $list) {
+			$priorities = $list->getPriorityList();
+			array_pop($priorities);
+			$list->setSequence($priorities);
+			$list->write();
+		}
+
+		$randomList = $s->RandomVotingLists()->sort('RAND()')->first();
+		
+		$this->assertNotEquals(
+			(int) $s->VoteablePresentations()->count(),
+			sizeof($randomList->getPriorityList())
+		);
+
+		$controller = ModelAsController::controller_for(
+			$this->objFromFixture('PresentationVotingPage','voting')
+		);
+		$controller->init();
+
+		$this->assertCount(
+			(int) $s->VoteablePresentations()->count(),
+			$s->RandomVotingLists()->sort('RAND()')->first()->getPriorityList()
+		);
+	}
+
+	public function testVotingControllerInitialisesPresentationPriorityWhenIDMismatch () {
+		$s = Summit::get_active();
+		$s->generateVotingLists();
+		foreach($s->RandomVotingLists() as $list) {
+			$priorities = $list->getPriorityList();
+			$priorities[0] = 'test';
+			$list->setSequence($priorities);
+			$list->write();
+		}
+		$randomList = $s->RandomVotingLists()->sort('RAND()')->first();
+		
+		$this->assertCount(
+			1,
+			array_diff(
+				$s->VoteablePresentations()->column('ID'),
+				$randomList->getPriorityList()
+			)			
+		);
+
+		$controller = ModelAsController::controller_for(
+			$this->objFromFixture('PresentationVotingPage','voting')
+		);
+		$controller->init();
+		$randomList = $s->RandomVotingLists()->sort('RAND()')->first();		
+
+		$this->assertCount(
+			0,
+			array_diff(
+				$s->VoteablePresentations()->column('ID'),
+				$randomList->getPriorityList()
+			)			
+		);
+	}
+
+	public function testVotingControllerWillNotInitialisePresentationPriorityWhenNotNeeded () {
 		$s = Summit::get_active();
 		$s->generateVotingLists();
 		$old_ids = $s->RandomVotingLists()->column('ID');
@@ -138,12 +198,15 @@ class SummitRandomVotingTest extends SapphireTest {
 			PresentationRandomVotingList::get()->count()
 		);
 		$member = $this->objFromFixture('Member','unclecheese');
+		$member->flushCache();
 		$member->getRandomisedPresentations(null, $s);
 		$this->assertTrue($member->VotingList()->exists());
 		
-		$oldID = $member->VotingListID;
+		$oldID = $member->VotingListID;		
 		$s->generateVotingLists();
+		$member->flushCache();
 		$member->getRandomisedPresentations(null, $s);
+		
 		$this->assertNotEquals($oldID, $member->VotingListID);
 	}	
 }

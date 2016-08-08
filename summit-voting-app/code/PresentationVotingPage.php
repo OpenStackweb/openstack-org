@@ -59,6 +59,27 @@ class PresentationVotingPage_Controller extends Page_Controller
         parent::init();
 
         Requirements::clear();
+
+        $summit = Summit::get_active();
+        $randomList = $summit
+        	->RandomVotingLists()
+        	->sort('RAND()')
+        	->first();
+        if(!$randomList) {
+        	return $summit->generateVotingLists();
+        }
+        else {
+        	$presentations = $summit->VoteablePresentations();
+        	$randomListPriority = $randomList->getPriorityList();
+
+        	if(sizeof($randomListPriority) != $presentations->count()) {
+        		return $summit->generateVotingLists();
+        	}
+        	$diff = array_diff($randomListPriority, $presentations->column('ID'));
+        	if(sizeof($diff)) {
+        		return $summit->generateVotingLists();
+        	}
+        }
     }
 
 
