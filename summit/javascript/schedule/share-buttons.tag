@@ -2,13 +2,6 @@
 <share-buttons>
 
     <div class="facebook share_icon" onclick={shareFacebook}>
-        <meta property="og:title" content="{this.share_info.title}" />
-        <meta property="og:site_name" content="Openstack"/>
-        <meta property="og:description" content="{this.share_info.description}" />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content="{this.share_info.image}" />
-        <meta property="og:url" content="{this.share_info.url}" />
-        <meta property="fb:app_id" content="{this.share_info.fb_app_id}" />
         <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>

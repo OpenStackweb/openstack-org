@@ -163,6 +163,10 @@ class SummitEvent extends DataObject implements ISummitEvent
         
     }
 
+    public function Link() {
+        return $this->getLink();
+    }
+
     public function getAvgRate() {
         return $this->AvgFeedbackRate;
     }

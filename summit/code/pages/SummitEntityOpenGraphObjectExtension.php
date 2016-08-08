@@ -33,7 +33,7 @@ final class AppLinkIAndroidMetadataBuilder
     }
 }
 
-class SummitEntityOpenGraphObjectExtension extends SummitPageOpenGraphObjectExtension
+class SummitEntityOpenGraphObjectExtension extends PageOpenGraphObjectExtension
 {
     public function MetaTags(&$tags)
     {

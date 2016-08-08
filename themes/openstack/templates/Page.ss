@@ -10,6 +10,8 @@
     <meta name="globalsign-domain-verification" content="tWFOHNAA_WMHmHfBMq38uTgupHFugV_dZ2rqyRxNMx" />
     <title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
 
+    $MetaTags(false)
+
     <% base_tag %>
 
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.openstack.org/blog/feed/" />

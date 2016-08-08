@@ -7,6 +7,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description" content="">
       <meta name="author" content="">
+      $MetaTags(false)
+
       <title>Vote For $Parent.Title Summit Presentations | OpenStack Open Source Cloud Computing Software</title>
       <!-- Bootstrap Core CSS -->
       <% require css("themes/openstack/css/bootstrap3.css") %>

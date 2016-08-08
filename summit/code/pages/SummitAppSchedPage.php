@@ -165,7 +165,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
                 'Event'     => $event,
-                'FB_APP_ID' => FB_APP_ID,
                 'goback'    => $goback,
                 'Token'     => $token
             ));
@@ -538,7 +537,7 @@ APP_LINKS;
         if(!is_null($entity)){
             return $entity->MetaTags();
         }
-        $tags = parent::MetaTags(false);
+        $tags = parent::MetaTags();
         // IOS
         $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, "schedule");
         // Android

@@ -272,7 +272,7 @@ class SummitPage_Controller extends Page_Controller
 
     public function MetaTags()
     {
-        $tags = parent::MetaTags(false);
+        $tags = parent::MetaTags();
         return $tags;
     }
 

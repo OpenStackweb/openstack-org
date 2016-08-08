@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="globalsign-domain-verification" content="tWFOHNAA_WMHmHfBMq38uTgupHFugV_dZ2rqyRxNMx" />
+    $MetaTags(false)
+
     <title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
 
     <% base_tag %>

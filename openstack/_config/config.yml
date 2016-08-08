@@ -24,3 +24,7 @@ File:
 Injector:
   TransactionManager:
     factory: SapphireTransactionManagerFactory
+
+Page:
+ extensions:
+   - 'PageOpenGraphObjectExtension'

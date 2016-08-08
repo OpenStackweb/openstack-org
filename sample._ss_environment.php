@@ -118,8 +118,6 @@ define('PARSE_APP_ID','');
 define('PARSE_REST_KEY','');
 define('PARSE_MASTER_KEY','');
 
-//SOCIAL MEDIA
-define('FB_APP_ID','');
 // COA
 define('COA_FILE_API_BASE_URL','');
 define('COA_FILE_API_BASE_USER','');

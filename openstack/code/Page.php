@@ -18,10 +18,13 @@ class Page extends SiteTree
     private static $db = array(
         'IncludeJquery' => 'Boolean',
         'PageJavaScript' => 'Text',
-        'IncludeShadowBox' => 'Boolean'
+        'IncludeShadowBox' => 'Boolean',
+        'MetaTitle' => 'Varchar(255)',
     );
 
-    private static $has_one = array();
+    private static $has_one = array(
+        'MetaImage' => 'BetterImage'
+    );
 
     public function InPast($fieldname)
     {
@@ -41,6 +44,11 @@ class Page extends SiteTree
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
+
+
+        // metadata
+        $fields->fieldByName('Root.Main.Metadata')->push(new UploadField("MetaImage",$this->fieldLabel('MetaImage')));
+        $fields->fieldByName('Root.Main.Metadata')->push(new TextField("MetaTitle",$this->fieldLabel('MetaTitle')));
 
 
         $fields->addFieldToTab('Root.Settings', new TextField ('PageCSS', 'Custom CSS File For This Page (must be in CSS directory)'));
@@ -514,5 +522,11 @@ class Page_Controller extends ContentController
         $response->addHeader('Content-Type', 'application/javascript');
         $response->setBody($jsonp);
         return $response;
+    }
+
+    public function MetaTags()
+    {
+        $tags = parent::MetaTags(false);
+        return $tags;
     }
 }

@@ -4,7 +4,6 @@
 <head>
     <% include Head %>
     <% include Analytics %>
-    $MetaTags
     $FBTrackingCode
     $TwitterTrackingCode
     <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
