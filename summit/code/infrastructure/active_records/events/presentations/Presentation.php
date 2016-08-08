@@ -252,13 +252,20 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
     /**
-     * Gets a link to the presentation
-     *
-     * @return  string
+     * @param string $type
+     * @return null|string
      */
-    public function Link()
+    public function getLink($type ='voting')
     {
-        return PresentationPage::get()->filter('SummitID', $this->SummitID)->first()->Link('show/' . $this->ID);
+        if($type=='voting')
+            return PresentationPage::get()->filter('SummitID', $this->SummitID)->first()->Link('show/' . $this->ID);
+        if($type=='show') {
+            $page = SummitAppSchedPage::get()->filter('SummitID', $this->SummitID)->first();
+            if ($page) {
+                return $page->getAbsoluteLiveLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+            }
+        }
+        return null;
     }
 
     /**

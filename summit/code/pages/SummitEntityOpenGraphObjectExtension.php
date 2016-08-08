@@ -20,6 +20,7 @@ final class AppLinkIOSMetadataBuilder
         $tags .= sprintf('<meta property="al:ios:app_store_id" content="%s" />', APP_LINKS_IOS_APP_STORE_ID).PHP_EOL;
         $tags .= sprintf('<meta property="al:ios:app_name" content="%s" />', APP_LINKS_IOS_APP_NAME).PHP_EOL;
         $tags .= sprintf('<meta property="al:ios:url" content="%s://%s" />', APP_LINKS_IOS_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
+        $tags .= sprintf('<link rel="alternate" href="ios-app://%s/%s/%s" />', APP_LINKS_IOS_APP_STORE_ID, APP_LINKS_IOS_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
     }
 }
 
@@ -30,10 +31,11 @@ final class AppLinkIAndroidMetadataBuilder
         $tags .= sprintf('<meta property="al:android:package" content="%s" />', APP_LINKS_ANDROID_PACKAGE).PHP_EOL;
         $tags .= sprintf('<meta property="al:android:app_name" content="%s" />', APP_LINKS_ANDROID_APP_NAME).PHP_EOL;
         $tags .= sprintf('<meta property="al:android:url" content="%s://%s" />', APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
-    }
+        $tags .= sprintf('<link rel="alternate" href="android-app://%s/%s/%s" />', APP_LINKS_ANDROID_PACKAGE, APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
+      }
 }
 
-class SummitEntityOpenGraphObjectExtension extends PageOpenGraphObjectExtension
+class SummitEntityOpenGraphObjectExtension extends SummitPageOpenGraphObjectExtension
 {
     public function MetaTags(&$tags)
     {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,19 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitEventOpenGraphObjectExtension extends SummitEntityOpenGraphObjectExtension
+
+class SummitPageOpenGraphObjectExtension extends OpenGraphObjectExtension
 {
-    public function AbsoluteLink()
+    public function getOGImage()
     {
-        return Director::absoluteURL($this->owner->getLink($type='show'));
-    }
-
-    public function getOGDescription()
-    {
-        return $this->owner->getDescription();
-    }
-
-    protected function getEntityPath(){
-        return "events";
+        return Director::absoluteURL('/summit/images/summit-logo.png');
     }
 }

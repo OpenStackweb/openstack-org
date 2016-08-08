@@ -211,6 +211,11 @@ class Page extends SiteTree
         }
     }
 
+    public function removeExtension($extension){
+        if($this->hasExtension($extension))
+             unset($this->extension_instances[$extension]);
+    }
+
 }
 
 class Page_Controller extends ContentController

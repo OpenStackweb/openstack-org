@@ -121,6 +121,8 @@ class SummitPage_Controller extends Page_Controller
         // Summit pages are so different visually we don't pull in the main css file
         Requirements::block("themes/openstack/css/combined.css");
         Requirements::css("summit/css/combined.css");
+        $this->removeExtension('OpenGraphObjectExtension');
+        $this->removeExtension('PageOpenGraphObjectExtension');
     }
 
     public function CurrentSummit()
