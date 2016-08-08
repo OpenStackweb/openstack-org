@@ -52,7 +52,7 @@
                             <h3 class="blue-title">$Title</h3>
                             <div class="small-descr">$Description</div>
                             <span class="hr"></span>
-                            <a href="$ContactLink" class="red-button">CONTACT US</a>
+                            <a href="$ButtonLink" class="red-button">$ButtonLabel</a>
                         </div>
                     </div>
                     <% end_loop %>
