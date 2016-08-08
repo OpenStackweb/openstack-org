@@ -18,13 +18,9 @@ class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
 
     public function getOGImage()
     {
-        if ($this->owner->hasField('MetaImage') && $this->owner->MetaImage()->Exists()) {
+        if ($this->owner->hasField('MetaImage') && $this->owner->MetaImage()->Exists())
             return $this->owner->MetaImage()->getURL();
-        } elseif ($this->owner->is_a('SummitPage') || $this->owner->is_a('IEntity')) {
-            return Director::absoluteURL('/summit/images/summit-logo.png');
-        } else {
-            return Director::absoluteURL(self::$default_image);
-        }
+        return Director::absoluteURL(self::$default_image);
     }
 
     public function getOGTitle()
