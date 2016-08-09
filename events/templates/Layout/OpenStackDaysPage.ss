@@ -15,7 +15,7 @@
 <div class="container slider-container">
     <section class="regular slider">
         <% loop $HeaderPics.Sort(SortOrder) %>
-            <div> $CroppedImage(200,100).getTag() </div>
+            <div> <img src="$getUrl()" width="260" /> </div>
         <% end_loop %>
     </section>
 </div>
@@ -54,7 +54,7 @@
                         <% loop $AboutVideos().Sort(SortOrder) %>
                             <div class="col-md-4 text-center">
                                 <a href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank">
-                                    $Thumbnail.getTag()
+                                    <img src="$getThumbnailUrl()" width="350" height="180" />
                                 </a>
                                 <p>$Caption</p>
                             </div>
@@ -69,7 +69,7 @@
                 <div class="row featured_events">
                     <% loop $FeaturedEvents().Limit(4) %>
                     <div class="col-md-3 featured_event">
-                        $Picture.CroppedImage(200,100).getTag()
+                        <img src="$Picture.getUrl()" width="200" />
                         <p>
                             $Event.Title
                             <span class="font-13">$Event.getLocation()</span>
@@ -105,7 +105,7 @@
                             <div class="col-md-7 col-xs-6">
                                 $Title
                             </div>
-                            <div class="col-md-5 col-xs-6"><a href="" class="download">DOWNLOAD</a></div>
+                            <div class="col-md-5 col-xs-6"><a href="$Link" target="_blank" class="download">DOWNLOAD</a></div>
                         </div>
                     </div>
                     <% end_loop %>
@@ -123,12 +123,12 @@
                                     <div class="col-md-7 col-xs-6"> $Group </div>
                                     <div class="col-md-5 col-xs-6">
                                     <% loop $Tools %>
-                                        <a href="" class="download">$Title</a>
+                                        <a href="$Link" target="_blank" class="download">$Title</a>
                                     <% end_loop %>
                                     </div>
                                 <% else %>
                                     <div class="col-md-7 col-xs-6"> $Title </div>
-                                    <div class="col-md-5 col-xs-6"><a href="" class="download">DOWNLOAD</a></div>
+                                    <div class="col-md-5 col-xs-6"><a href="$Link" target="_blank" class="download">DOWNLOAD</a></div>
                                 <% end_if %>
                             </div>
                         </div>
@@ -138,15 +138,15 @@
                 <span class="hr margin24-0"></span>
 
                 <h3 class="blue-title">Artwork for Print</h3>
-                <p class="mrtop20">
-                    For more printable artwork, please visit the <a class="light-blue" href="">OpenStack shop here.</a>
-                </p>
+                <div class="mrtop20">
+                    $ArtworkIntro
+                </div>
                 <ul class="content-list">
                     <% loop Artwork() %>
                     <li>
-                        $getTag()
+                        $SetRatioSize(200,150).getTag()
                         <p>$Title</p>
-                        <a class="download" href="">Download</a>
+                        <a class="download" href="$getUrl()" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -154,14 +154,18 @@
                 <span class="hr margin0-0-24"></span>
 
                 <h3 class="blue-title">Video / Presentations / Collateral</h3>
-                <p class="mrtop20">For more a full ist of collateral, please visit <a class="light-blue" href="">the OpenStack marketing portal here.</a></p>
+                <div class="mrtop20">
+                    $CollateralIntro
+                </div>
                 <ul class="content-list">
                     <% if Collaterals().Exists() %>
                     <% loop Collaterals().Sort(SortOrder) %>
                         <li>
-                            <a href="">$Thumbnail.getTag()</a>
+                            <a href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank">
+                                <img src="$getThumbnailUrl" width="240" height="140" />
+                            </a>
                             <p>$Caption</p>
-                            <a class="download" href="https://www.youtube.com/watch?v={$YoutubeID}">WATCH</a>
+                            <a class="download" target="_blank" href="https://www.youtube.com/watch?v={$YoutubeID}">WATCH</a>
                         </li>
                     <% end_loop %>
                     <% end_if %>
@@ -174,7 +178,7 @@
                     <% loop Media() %>
                     <div class="col-md-4 <% if $Pos > 1 %>brl1<% end_if %>">
                         $Title
-                        <a href="$Link" class="download">DOWNLOAD</a>
+                        <a href="$Link" target="_blank" class="download">DOWNLOAD</a>
                     </div>
                     <% end_loop %>
                 </div>

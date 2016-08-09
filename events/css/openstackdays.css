@@ -30,6 +30,24 @@
     color: #4a90e2;
     text-decoration: underline;
 }
+.slick-prev, .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+}
 .slick-prev{
     background: url('/themes/openstack/images/osdays/arrow-right.png') no-repeat center;
     opacity: 0.5;
@@ -69,6 +87,7 @@
 .slick-slider{
     margin-bottom: 65px
 }
+
 .more-img{
     background: url('/themes/openstack/images/osdays/arrow-left.png') #EDF2F7 no-repeat left 13px center;
     padding: 8px 17px;

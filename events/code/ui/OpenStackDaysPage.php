@@ -20,6 +20,9 @@ class OpenStackDaysPage extends Page {
         'HostIntro'        => 'HTMLText',
         'HostFAQs'         => 'HTMLText',
         'ToolkitDesc'      => 'HTMLText',
+        'ArtworkIntro'     => 'HTMLText',
+        'CollateralIntro'  => 'HTMLText',
+
     );
 
     private static $has_one = array();
@@ -70,17 +73,17 @@ class OpenStackDaysPage extends Page {
         // Host
         $fields->addFieldToTab(
             'Root.Host',
-            $about_desc = new HtmlEditorField('HostIntro','Intro Text',$this->HostIntro)
+            $host_intro = new HtmlEditorField('HostIntro','Intro Text',$this->HostIntro)
         );
 
         $fields->addFieldToTab(
             'Root.Host',
-            $about_desc = new HtmlEditorField('HostFAQs','FAQs',$this->HostFAQs)
+            $host_faq = new HtmlEditorField('HostFAQs','FAQs',$this->HostFAQs)
         );
 
         $fields->addFieldToTab(
             'Root.Host',
-            $about_desc = new HtmlEditorField('ToolkitDesc','Toolkit Text',$this->ToolkitDesc)
+            $toolkit_text = new HtmlEditorField('ToolkitDesc','Toolkit Text',$this->ToolkitDesc)
         );
 
         $fields->addFieldToTab(
@@ -102,6 +105,11 @@ class OpenStackDaysPage extends Page {
 
         $fields->addFieldToTab(
             'Root.Host',
+            $artwork_intro = new HtmlEditorField('ArtworkIntro','Artwork intro text',$this->ArtworkIntro)
+        );
+        $artwork_intro->setRows(4);
+        $fields->addFieldToTab(
+            'Root.Host',
             $artwork = new UploadField('Artwork', 'Artwork For Print')
         );
         $artwork->setFolderName('openstackdays');
@@ -114,6 +122,12 @@ class OpenStackDaysPage extends Page {
         );
         $collaterals->setFolderName('openstackdays');
         $collaterals->setField('Category','Collaterals');*/
+
+        $fields->addFieldToTab(
+            'Root.Host',
+            $collateral_intro = new HtmlEditorField('CollateralIntro','Collateral intro text',$this->CollateralIntro)
+        );
+        $collateral_intro->setRows(4);
 
         $config = new GridFieldConfig_RecordEditor(10);
         $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(

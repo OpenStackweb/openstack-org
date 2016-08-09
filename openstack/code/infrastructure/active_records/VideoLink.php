@@ -79,4 +79,12 @@ class VideoLink extends DataObject {
         return 'n/a';
     }
 
+    public function getThumbnailUrl() {
+        if ($this->Thumbnail()->Exists()) {
+            return $this->Thumbnail()->getUrl();
+        }
+
+        return 'http://img.youtube.com/vi/'.$this->YoutubeID.'/0.jpg';
+    }
+
 }
