@@ -34,7 +34,7 @@
             <div class="container">
                 <div class="inline-images">
                     <% loop InvolvedImages() %>
-                        $getTag()
+                        <img src="$getUrl()" />
                     <% end_loop %>
                 </div>
 

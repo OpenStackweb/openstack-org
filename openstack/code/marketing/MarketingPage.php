@@ -110,16 +110,19 @@ class MarketingPage extends Page{
             $stickers = new UploadField('Stickers', 'Stickers')
         );
         $stickers->setFolderName('marketing');
+        $stickers->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->addFieldToTab(
             'Root.Graphics ',
             $tshirts = new UploadField('TShirts', 'TShirts')
         );
         $tshirts->setFolderName('marketing');
+        $tshirts->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->addFieldToTab(
             'Root.Graphics ',
             $banners = new UploadField('Banners', 'Banners')
         );
         $banners->setFolderName('marketing');
+        $banners->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $config = new GridFieldConfig_RecordEditor(3);
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
