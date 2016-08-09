@@ -22,6 +22,6 @@ Member:
     - AUCMetricMember
 AUCActiveCommitterService:
   user: openstackdev
-  keyfile: '/var/www/.ssh/id_rsa'
+  keyfile: '/root/.ssh/id_rsa'
 AUCMetric:
   expiry: '+6 months'
