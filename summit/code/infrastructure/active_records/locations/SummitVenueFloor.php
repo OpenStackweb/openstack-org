@@ -17,9 +17,9 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
 
     private static $db = array
     (
-        'Name' => 'Varchar',
+        'Name'        => 'Varchar',
         'Description' => 'Text',
-        'Number' => 'Int',
+        'Number'      => 'Int',
     );
 
     private static $has_many = array
@@ -41,6 +41,9 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
         'Venue.Name',
     );
 
+    public function getFullName(){
+        return sprintf("%s (%s)", $this->Name, $this->Number);
+    }
     /**
      * @return int
      */
@@ -55,7 +58,7 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
         $f->add(new TextField('Name','Name'));
         $f->add(new TextareaField('Description','Description'));
         $f->add(new NumericField('Number','Number'));
-        $f->add(new UploadField('Image','Image'));
+        $f->add(new UploadField('Image','Map'));
         $f->add(new HiddenField('VenueID','VenueID'));
 
         if ($this->ID) {
@@ -67,6 +70,30 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
         }
 
         return $f;
+    }
+
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
+
+        $name = trim($this->Name);
+        if (empty($name)) {
+            return $valid->error('Name is mandatory!');
+        }
+
+        $number = intval($this->Number);
+        if ($number < 0) {
+            return $valid->error('Number should be greather or equal than zero!');
+        }
+
+        return $valid;
     }
 
     public function getTypeName()

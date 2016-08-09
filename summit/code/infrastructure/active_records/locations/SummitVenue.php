@@ -99,7 +99,7 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
         $config = GridFieldConfig_RecordEditor::create();
         $gridField = new GridField('Floors', 'Floors', $this->Floors(), $config);
         $f->addFieldToTab('Root.Floors', $gridField);
-
+        $_REQUEST['VenueID'] = $this->ID;
         return $f;
     }
 

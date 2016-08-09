@@ -17,7 +17,7 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
 
     private static $db = array
     (
-        'Capacity' => 'Int',
+        'Capacity'          => 'Int',
         'OverrideBlackouts' => 'Boolean',
     );
 
@@ -28,7 +28,8 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
     private static $has_one = array
     (
         'Venue' => 'SummitVenue',
-        'Floor' => 'SummitVenueFloor'
+        'Floor' => 'SummitVenueFloor',
+        'Image' => 'BetterImage',
     );
 
     public function getFullName()
@@ -43,6 +44,7 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
     (
         'Name',
         'Capacity',
+        'FloorName',
         'OverrideBlackouts',
     );
 
@@ -69,14 +71,22 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
         return $this->OverrideBlackouts;
     }
 
+    public function getFloorName(){
+        return $this->Floor()->exists()?$this->Floor()->getFullName() : 'NOT SET';
+    }
+
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
+        // hack
+        $this->SummitID = $_REQUEST['SummitID'];
+        $this->VenueID  = $_REQUEST['VenueID'];
         $f->addFieldToTab('Root.Main', new NumericField('Capacity','Capacity'));
         $f->addFieldToTab('Root.Main', new CheckboxField('OverrideBlackouts','Overrides Blackouts'));
         $f->addFieldToTab('Root.Main', new HiddenField('VenueID','VenueID'));
-        // hack
-        $this->SummitID = $_REQUEST['SummitID'];
+        $f->addFieldToTab('Root.Main', $ddl_floor = new DropdownField('FloorID','Floor', SummitVenueFloor::get()->filter('VenueID', $this->VenueID )->map("ID", "FullName")));
+        $ddl_floor->setEmptyString("-- SELECT A FLOOR ");
+        $f->addFieldToTab('Root.Main', new UploadField('Image','Map'));
         return $f;
     }
 

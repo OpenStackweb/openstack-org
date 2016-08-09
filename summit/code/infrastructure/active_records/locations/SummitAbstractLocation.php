@@ -98,6 +98,24 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         return $f;
     }
 
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
+        $name = trim($this->Name);
+        if (empty($name)) {
+            return $valid->error('Name is required!');
+        }
+
+        return $valid;
+    }
+
     public function inferLocationType()
     {
         return 'None';
