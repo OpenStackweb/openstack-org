@@ -28,4 +28,24 @@ class PresentationLink extends PresentationMaterial
         $f->addFieldToTab('Root.Main', new TextField('Link','Link'));
         return $f;
     }
+
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+        $valid = parent::validate();
+
+        if (!$valid->valid()) {
+            return $valid;
+        }
+
+        $link = trim($this->Link);
+
+        if (empty($link)) {
+            return $valid->error('you must set a link!');
+        }
+
+        return $valid;
+    }
 }

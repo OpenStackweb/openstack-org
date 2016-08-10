@@ -85,9 +85,11 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
         $f->addFieldToTab('Root.Main', new CheckboxField('OverrideBlackouts','Overrides Blackouts'));
         $f->addFieldToTab('Root.Main', new HiddenField('VenueID','VenueID'));
         $f->addFieldToTab('Root.Main', $ddl_floor = new DropdownField('FloorID','Floor', SummitVenueFloor::get()->filter('VenueID', $this->VenueID )->map("ID", "FullName")));
-        $ddl_floor->setEmptyString("-- SELECT A FLOOR ");
+        $ddl_floor->setEmptyString("-- SELECT A FLOOR --");
         $f->addFieldToTab('Root.Main', $upload_field = new UploadField('Image','Map'));
-        $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 500 * 1024));
+        $upload_field->setAllowedMaxFileNumber(1);
+        $upload_field->setFolderName(sprintf('summits/%s/locations/%s/rooms/%s', $_REQUEST['SummitID'], $_REQUEST['LocationID'], $_REQUEST['RoomID']));
+        $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 512 * 1024));
         return $f;
     }
 

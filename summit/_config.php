@@ -48,6 +48,10 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
         $metadata = json_encode(array('venue_id' => intval($entity->VenueID)));
     }
 
+    if($entity instanceof PresentationMaterial){
+        $metadata = json_encode(array('presentation_id' => intval($entity->PresentationID)));
+    }
+
     if($entity instanceof SummitVenueRoom){
         $fields = $entity->getChangedFields(true);
         if(isset($fields['FloorID']))
@@ -95,6 +99,10 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Inserte
         $metadata = json_encode(array('location_id' => intval($entity->Location)));
     }
 
+    if($entity instanceof PresentationMaterial){
+        $metadata = json_encode(array('presentation_id' => intval($entity->PresentationID)));
+    }
+
     $event                  = new SummitEntityEvent();
     $event->EntityClassName = $entity->ClassName;
     $event->EntityID        = $entity->ID;
@@ -126,6 +134,10 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Deleted
 
     if($entity instanceof SummitLocationImage || $entity instanceof SummitLocationMap){
         $metadata = json_encode(array('location_id' => intval($entity->Location)));
+    }
+
+    if($entity instanceof PresentationMaterial){
+        $metadata = json_encode(array('presentation_id' => intval($entity->PresentationID)));
     }
 
     $event                  = new SummitEntityEvent();

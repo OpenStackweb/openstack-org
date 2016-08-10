@@ -37,8 +37,10 @@ class PresentationSlide extends PresentationMaterial
     {
         $f = parent::getCMSFields();
         $f->addFieldToTab('Root.Main', new TextField('Link', 'Slide Link'));
-        $f->addFieldToTab('Root.Main', $upload = new UploadField('Slide', 'Slide File'));
-        $upload->setAllowedMaxFileNumber(1);
+        $f->addFieldToTab('Root.Main', $upload_field = new UploadField('Slide', 'Slide File'));
+        $upload_field->setAllowedMaxFileNumber(1);
+        $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 5 * 1024 * 1024));
+        $upload_field->setFolderName(sprintf('summits/%s/presentations/%s/slides/', $_REQUEST['SummitID'], $_REQUEST['SummitEventID']));
         return $f;
     }
 
@@ -47,11 +49,11 @@ class PresentationSlide extends PresentationMaterial
      */
     public function getSlideUrl()
     {
-        if ($this->Link) {
+        if ($this->Link)
             return $this->Link;
-        } else {
+        if($this->Slide()->exists())
             return $this->Slide()->URL;
-        }
+        return null;
     }
 
     /**
@@ -68,5 +70,25 @@ class PresentationSlide extends PresentationMaterial
     public function IsUpload()
     {
         return $this->Slide()->exists();
+    }
+
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+        $valid = parent::validate();
+
+        if (!$valid->valid()) {
+            return $valid;
+        }
+
+        $link = trim($this->getSlideUrl());
+
+        if (empty($link)) {
+            return $valid->error('you must set a link or upload a file!');
+        }
+
+        return $valid;
     }
 }

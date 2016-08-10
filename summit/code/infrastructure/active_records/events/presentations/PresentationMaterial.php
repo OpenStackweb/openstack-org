@@ -86,4 +86,25 @@ class PresentationMaterial extends DataObject
     public function canEdit($member = null) {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
+
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+        $valid = parent::validate();
+
+        if (!$valid->valid()) {
+            return $valid;
+        }
+
+        $name = trim($this->Name);
+
+        if (empty($name)) {
+            return $valid->error('Name is mandatory!');
+        }
+
+        return $valid;
+    }
+
 }

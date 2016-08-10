@@ -1102,7 +1102,7 @@ final class Summit extends DataObject implements ISummit
         $logo_field->setAllowedMaxFileNumber(1);
         $logo_field->setAllowedFileCategories('image');
         $logo_field->setFolderName('summits/logos/');
-        $logo_field->getValidator()->setAllowedMaxFileSize(1048576);
+        $logo_field->getValidator()->setAllowedMaxFileSize(1024*1024*1);
         $f->addFieldToTab('Root.Main', $logo_field);
 
         $f->addFieldToTab('Root.Main', new TextField('ComingSoonBtnText', 'Coming Soon Btn Text'));

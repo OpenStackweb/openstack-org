@@ -95,6 +95,12 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
 
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
+        if($this->ID > 0){
+            if($this instanceof SummitVenueRoom)
+                $_REQUEST['RoomID'] = $this->ID;
+            else
+                $_REQUEST['LocationID'] = $this->ID;
+        }
         return $f;
     }
 
