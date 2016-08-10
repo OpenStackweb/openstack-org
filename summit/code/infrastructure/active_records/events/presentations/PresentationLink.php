@@ -22,7 +22,6 @@ class PresentationLink extends PresentationMaterial
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
-        $f->removeByName('Name');
         $f->removeByName('Description');
         $f->removeByName('Featured');
         $f->addFieldToTab('Root.Main', new TextField('Link','Link'));
