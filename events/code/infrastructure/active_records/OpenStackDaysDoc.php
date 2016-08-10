@@ -11,11 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class OpenStackDaysDoc extends File {
+class OpenStackDaysDoc extends DataObject {
 
     private static $db = array(
-        'SortOrder' => 'Int',
+        'Label'     => 'Varchar(255)',
         'Group'     => 'Varchar(255)',
+        'SortOrder' => 'Int',
     );
 
     private static $has_one = array(
@@ -23,16 +24,33 @@ class OpenStackDaysDoc extends File {
         'PlanningTools'      => 'OpenStackDaysPage',
         'Artwork'            => 'OpenStackDaysPage',
         'Media'              => 'OpenStackDaysPage',
+        'Doc'                => 'File',
+        'Thumbnail'          => 'BetterImage',
         'ParentPage'         => 'OpenStackDaysPage', //dummy
     );
 
+    private static $summary_fields = array
+    (
+        'Label'     => 'Label',
+        'Doc.Name'  => 'File',
+    );
+
     public function getCMSFields() {
-        $fields = parent::getCMSFields();
-        $fields->removeByName('Name');
-        $fields->removeByName('OwnerID');
-        $fields->removeByName('ParentID');
-        $fields->addFieldToTab('Root.Main', new TextField('SortOrder'));
-        $fields->addFieldToTab('Root.Main', new TextField('Group'));
+        $fields = new FieldList;
+
+        $image = new UploadField('Thumbnail','Thumbnail');
+        $image->setFolderName('openstackdays');
+        $image->setAllowedFileCategories('image');
+
+        $doc = new UploadField('Doc','Doc');
+        $doc->setFolderName('openstackdays');
+        $doc->getValidator()->setAllowedMaxFileSize(40*1024*1024);
+
+        $fields->push(new TextField('Label'));
+        $fields->push(new TextField('SortOrder'));
+        $fields->push(new TextField('Group'));
+        $fields->push($doc);
+        $fields->push($image);
 
         return $fields;
     }

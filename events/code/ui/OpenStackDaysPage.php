@@ -32,11 +32,9 @@ class OpenStackDaysPage extends Page {
         'HeaderPics'         => 'OpenStackDaysImage.HeaderPics',
         'OfficialGuidelines' => 'OpenStackDaysDoc.OfficialGuidelines',
         'PlanningTools'      => 'OpenStackDaysDoc.PlanningTools',
-        'Artwork'            => 'OpenStackDaysImage.Artwork',
+        'Artwork'            => 'OpenStackDaysDoc.Artwork',
         'Collaterals'        => 'OpenStackDaysVideo.Collaterals',
         'Media'              => 'OpenStackDaysDoc.Media',
-        'Videos'             => 'OpenStackDaysVideo', //dummy
-        'Docs'               => 'OpenStackDaysDoc', //dummy
     );
 
     private static $many_many_extraFields = array();
@@ -66,7 +64,7 @@ class OpenStackDaysPage extends Page {
         );
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
-            'Root.About ',
+            'Root.About',
             new GridField('AboutVideos', 'Videos', $this->AboutVideos(), $config)
         );
 
@@ -86,42 +84,31 @@ class OpenStackDaysPage extends Page {
             $toolkit_text = new HtmlEditorField('ToolkitDesc','Toolkit Text',$this->ToolkitDesc)
         );
 
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
             'Root.Host',
-            $guidelines = new UploadField('OfficialGuidelines', 'Official Guidelines')
+            new GridField('OfficialGuidelines', 'Official Guidelines', $this->OfficialGuidelines(), $config)
         );
-        $guidelines->setFolderName('openstackdays');
-        $guidelines->setField('Category','OfficialGuidelines');
-        $guidelines->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
             'Root.Host',
-            $tools = new UploadField('PlanningTools', 'Planning Tools')
+            new GridField('PlanningTools', 'Planning Tools', $this->PlanningTools(), $config)
         );
-        $tools->setFolderName('openstackdays');
-        $tools->setField('Category','PlanningTools');
-        $tools->setAttribute('relationAutoSetting',false);
-        $tools->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
         $fields->addFieldToTab(
             'Root.Host',
             $artwork_intro = new HtmlEditorField('ArtworkIntro','Artwork intro text',$this->ArtworkIntro)
         );
         $artwork_intro->setRows(4);
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
             'Root.Host',
-            $artwork = new UploadField('Artwork', 'Artwork For Print')
+            new GridField('Artwork', 'Artwork', $this->Artwork(), $config)
         );
-        $artwork->setFolderName('openstackdays');
-        $artwork->setField('Category','Artwork');
-        $artwork->getValidator()->setAllowedMaxFileSize(40*1024*1024);
-
-        /*$fields->addFieldToTab(
-            'Root.Host',
-            $collaterals = new UploadField('Collaterals', 'Video / Presentations / Collateral')
-        );
-        $collaterals->setFolderName('openstackdays');
-        $collaterals->setField('Category','Collaterals');*/
 
         $fields->addFieldToTab(
             'Root.Host',
@@ -135,17 +122,16 @@ class OpenStackDaysPage extends Page {
         );
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
-            'Root.Host ',
+            'Root.Host',
             new GridField('Collaterals', 'Video / Presentations / Collateral', $this->Collaterals(), $config)
         );
 
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
             'Root.Host',
-            $media = new UploadField('Media', 'PR / Media')
+            new GridField('Media', 'PR / Media', $this->Media(), $config)
         );
-        $media->setFolderName('openstackdays');
-        $media->setField('Category','Media');
-        $media->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
         return $fields;
 	}
@@ -167,6 +153,7 @@ class OpenStackDaysPage_Controller extends Page_Controller {
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript('events/js/openstackdays.js');
         Requirements::css('themes/openstack/bower_assets/slick-carousel/slick/slick.css');
+        Requirements::css('software/css/software.css');
         Requirements::css('events/css/openstackdays.css');
         $this->buildEventManager();
 	}

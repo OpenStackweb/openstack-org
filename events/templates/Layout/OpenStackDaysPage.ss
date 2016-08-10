@@ -53,10 +53,19 @@
                         <div class="row">
                         <% loop $AboutVideos().Sort(SortOrder) %>
                             <div class="col-md-4 text-center">
-                                <a href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank">
+                                <a href="#highlights_modal_{$YoutubeID}" data-toggle="modal" >
                                     <img src="$getThumbnailUrl()" width="350" height="180" />
                                 </a>
                                 <p>$Caption</p>
+                                <div id="highlights_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="highlights" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <iframe id="highlights_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         <% end_loop %>
                         </div>
@@ -103,9 +112,9 @@
                     <div class="col-md-4 <% if $Pos > 1 %>brl1<% end_if %>">
                         <div class="row">
                             <div class="col-md-7 col-xs-6">
-                                $Title
+                                $Label
                             </div>
-                            <div class="col-md-5 col-xs-6"><a href="$Link" target="_blank" class="download">DOWNLOAD</a></div>
+                            <div class="col-md-5 col-xs-6"><a href="$Doc.Link" target="_blank" class="download">DOWNLOAD</a></div>
                         </div>
                     </div>
                     <% end_loop %>
@@ -123,12 +132,12 @@
                                     <div class="col-md-7 col-xs-6"> $Group </div>
                                     <div class="col-md-5 col-xs-6">
                                     <% loop $Tools %>
-                                        <a href="$Link" target="_blank" class="download">$Title</a>
+                                        <a href="$Doc.Link" target="_blank" class="download">$Label</a>
                                     <% end_loop %>
                                     </div>
                                 <% else %>
-                                    <div class="col-md-7 col-xs-6"> $Title </div>
-                                    <div class="col-md-5 col-xs-6"><a href="$Link" target="_blank" class="download">DOWNLOAD</a></div>
+                                    <div class="col-md-7 col-xs-6"> $Label </div>
+                                    <div class="col-md-5 col-xs-6"><a href="$Doc.Link" target="_blank" class="download">DOWNLOAD</a></div>
                                 <% end_if %>
                             </div>
                         </div>
@@ -144,9 +153,9 @@
                 <ul class="content-list">
                     <% loop Artwork() %>
                     <li>
-                        $SetRatioSize(200,150).getTag()
-                        <p>$Title</p>
-                        <a class="download" href="$getUrl()" target="_blank">Download</a>
+                        $Thumbnail.SetRatioSize(200,150).getTag()
+                        <p>$Label</p>
+                        <a class="download" href="$Doc.Link" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -161,11 +170,21 @@
                     <% if Collaterals().Exists() %>
                     <% loop Collaterals().Sort(SortOrder) %>
                         <li>
-                            <a href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank">
-                                <img src="$getThumbnailUrl" width="240" height="140" />
+                            <a href="#collateral_modal_{$YoutubeID}" data-toggle="modal" >
+                                <img src="$getThumbnailUrl()" width="240" height="140" />
                             </a>
                             <p>$Caption</p>
-                            <a class="download" target="_blank" href="https://www.youtube.com/watch?v={$YoutubeID}">WATCH</a>
+                            <a class="download" href="#collateral_modal_{$YoutubeID}" data-toggle="modal">WATCH</a>
+
+                            <div id="collateral_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="collateral" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <iframe id="collateral_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     <% end_loop %>
                     <% end_if %>
@@ -177,8 +196,8 @@
                 <div class="row host-an">
                     <% loop Media() %>
                     <div class="col-md-4 <% if $Pos > 1 %>brl1<% end_if %>">
-                        $Title
-                        <a href="$Link" target="_blank" class="download">DOWNLOAD</a>
+                        $Label
+                        <a href="$Doc.Link" target="_blank" class="download">DOWNLOAD</a>
                     </div>
                     <% end_loop %>
                 </div>

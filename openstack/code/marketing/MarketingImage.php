@@ -20,10 +20,7 @@ class MarketingImage extends BetterImage {
 
     private static $has_one = array(
         'InvolvedImages' => 'MarketingPage',
-        'Stickers'       => 'MarketingImage',
-        'TShirts'        => 'MarketingImage',
-        'Banners'        => 'MarketingImage',
-        'PromoteImages'  => 'MarketingImage',
+        'PromoteImages'  => 'MarketingPage',
         'ParentPage'     => 'MarketingPage',
     );
 

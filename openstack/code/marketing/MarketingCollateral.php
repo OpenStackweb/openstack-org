@@ -26,7 +26,7 @@ class MarketingCollateral extends DataObject {
     );
 
     private static $has_many = array(
-        'CollateralFiles'    => 'MarketingDoc.CollateralFiles',
+        'CollateralFiles'    => 'MarketingFile.CollateralFiles',
         'CollateralLinks'    => 'MarketingLink',
     );
 

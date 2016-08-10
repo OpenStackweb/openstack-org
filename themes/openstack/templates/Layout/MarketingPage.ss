@@ -115,11 +115,22 @@
                             <p>
                                 <span class="left-info">Video</span>
                                 <% if $YoutubeID %>
-                                <a href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank" class="download">WATCH</a>
+                                    <a class="download" href="#software_modal_{$YoutubeID}" data-toggle="modal" >WATCH</a>
                                 <% else %>
                                 <span class="soon">COMING SOON</span>
                                 <% end_if %>
                             </p>
+                            <% if $YoutubeID %>
+                                <div id="software_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="software" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <iframe id="software_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end_if %>
                             <p>
                                 <span class="left-info">Logo</span>
                                 <% if $Logo.Exists %>
@@ -149,9 +160,9 @@
                 <ul class="content-list">
                     <% loop $Stickers() %>
                     <li>
-                        $getTag();
-                        <p>$Name</p>
-                        <a class="download" href="$Link()" target="_blank">Download</a>
+                        $Thumbnail.getTag();
+                        <p>$Label</p>
+                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -161,9 +172,9 @@
                 <ul class="content-list">
                     <% loop $TShirts() %>
                     <li>
-                        $getTag()
-                        <p>$Name</p>
-                        <a class="download" href="$Link()" target="_blank">Download</a>
+                        $Thumbnail.getTag();
+                        <p>$Label</p>
+                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -173,9 +184,9 @@
                 <ul class="content-list">
                     <% loop $Banners() %>
                     <li>
-                        $getTag()
-                        <p>$Name</p>
-                        <a class="download" href="$Link()" target="_blank">Download</a>
+                        $Thumbnail.getTag();
+                        <p>$Label</p>
+                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
                     </li>
                     <% end_loop %>
                 </ul>
@@ -185,9 +196,18 @@
                 <ul class="content-list">
                     <% loop $Videos() %>
                     <li>
-                        $Thumbnail.getTag()
+                        <img src="$getThumbnailUrl()" width="245" height="135"/>
                         <p>$Caption</p>
-                        <a class="download" href="https://www.youtube.com/watch?v={$YoutubeID}" target="_blank" >Watch</a>
+                        <a class="download" href="#graphics_modal_{$YoutubeID}" data-toggle="modal" >Watch</a>
+                        <div id="graphics_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="graphics" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <iframe id="graphics_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <% end_loop %>
                 </ul>

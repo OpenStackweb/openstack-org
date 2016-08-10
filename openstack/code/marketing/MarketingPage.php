@@ -29,9 +29,9 @@ class MarketingPage extends Page{
         'SponsorEvents'  => 'MarketingEvent.SponsorEvents',
         'Collaterals'    => 'MarketingCollateral',
         'Software'       => 'MarketingSoftware',
-        'Stickers'       => 'MarketingImage.Stickers',
-        'TShirts'        => 'MarketingImage.TShirts',
-        'Banners'        => 'MarketingImage.Banners',
+        'Stickers'       => 'MarketingDoc.Stickers',
+        'TShirts'        => 'MarketingDoc.TShirts',
+        'Banners'        => 'MarketingDoc.Banners',
         'Videos'         => 'MarketingVideo.Videos',
         'PromoteEvents'  => 'MarketingEvent.PromoteEvents',
 	);
@@ -53,7 +53,7 @@ class MarketingPage extends Page{
 
         // Get Involved
         $fields->addFieldToTab(
-            'Root.GetInvolved ',
+            'Root.GetInvolved',
             $involved_images = new UploadField('InvolvedImages', 'Involved Images')
         );
         $involved_images->setFolderName('marketing');
@@ -71,7 +71,7 @@ class MarketingPage extends Page{
         $config = new GridFieldConfig_RecordEditor(3);
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
-            'Root.Events ',
+            'Root.Events',
             new GridField('SponsorEvents', 'SponsorEvents', $this->SponsorEvents(), $config)
         );
 
@@ -84,7 +84,7 @@ class MarketingPage extends Page{
         $config = new GridFieldConfig_RecordEditor(3);
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
-            'Root.Collateral ',
+            'Root.Collateral',
             new GridField('Collaterals', 'Collaterals', $this->Collaterals(), $config)
         );
 
@@ -96,7 +96,7 @@ class MarketingPage extends Page{
         $config = new GridFieldConfig_RecordEditor(3);
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
-            'Root.Software ',
+            'Root.Software',
             new GridField('Software', 'Software', $this->Software(), $config)
         );
 
@@ -105,28 +105,28 @@ class MarketingPage extends Page{
             'Root.Graphics',
             new HtmlEditorField('GraphicsIntroText','Graphics Intro Text',$this->GraphicsIntroText)
         );
-        $fields->addFieldToTab(
-            'Root.Graphics ',
-            $stickers = new UploadField('Stickers', 'Stickers')
-        );
-        $stickers->setFolderName('marketing');
-        $stickers->getValidator()->setAllowedMaxFileSize(40*1024*1024);
-        $fields->addFieldToTab(
-            'Root.Graphics ',
-            $tshirts = new UploadField('TShirts', 'TShirts')
-        );
-        $tshirts->setFolderName('marketing');
-        $tshirts->getValidator()->setAllowedMaxFileSize(40*1024*1024);
-        $fields->addFieldToTab(
-            'Root.Graphics ',
-            $banners = new UploadField('Banners', 'Banners')
-        );
-        $banners->setFolderName('marketing');
-        $banners->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $config = new GridFieldConfig_RecordEditor(3);
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
-            'Root.Graphics ',
+            'Root.Graphics',
+            new GridField('Stickers', 'Stickers', $this->Stickers(), $config)
+        );
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
+        $fields->addFieldToTab(
+            'Root.Graphics',
+            new GridField('TShirts', 'TShirts', $this->TShirts(), $config)
+        );
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
+        $fields->addFieldToTab(
+            'Root.Graphics',
+            new GridField('Banners', 'Banners', $this->Banners(), $config)
+        );
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
+        $fields->addFieldToTab(
+            'Root.Graphics',
             new GridField('Videos', 'Videos', $this->Videos(), $config)
         );
 
@@ -138,7 +138,7 @@ class MarketingPage extends Page{
         $config = new GridFieldConfig_RecordEditor(3);
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
-            'Root.Promote ',
+            'Root.Promote',
             new GridField('PromoteEvents', 'PromoteEvents', $this->PromoteEvents(), $config)
         );
 
@@ -150,6 +150,7 @@ class MarketingPage_Controller extends Page_Controller{
 
     function init() {
         parent::init();
+        Requirements::css('software/css/software.css');
         Requirements::css('themes/openstack/css/marketing-page.css');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
 

@@ -11,24 +11,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class MarketingDoc extends File {
+class MarketingDoc extends DataObject {
 
     private static $db = array(
+        'Label'     => 'Varchar(255)',
         'SortOrder' => 'Int',
-        'Group'     => 'Varchar(255)',
     );
 
     private static $has_one = array(
-        'CollateralFiles'    => 'MarketingCollateral',
+        'Stickers'         => 'MarketingPage',
+        'TShirts'          => 'MarketingPage',
+        'Banners'          => 'MarketingPage',
+        'Thumbnail'        => 'BetterImage',
+        'Doc'              => 'File',
+        'ParentPage'       => 'MarketingPage',
+    );
+
+    private static $summary_fields = array
+    (
+        'Label'     => 'Label',
+        'Doc.Name'  => 'File',
     );
 
     public function getCMSFields() {
-        $fields = parent::getCMSFields();
-        $fields->removeByName('Name');
-        $fields->removeByName('OwnerID');
-        $fields->removeByName('ParentID');
-        $fields->addFieldToTab('Root.Main', new TextField('SortOrder'));
-        $fields->addFieldToTab('Root.Main', new TextField('Group'));
+        $fields = new FieldList;
+
+        $image = new UploadField('Thumbnail','Thumbnail');
+        $image->setFolderName('marketing');
+        $image->setAllowedFileCategories('image');
+
+        $doc = new UploadField('Doc','Doc');
+        $doc->setFolderName('marketing');
+        $doc->getValidator()->setAllowedMaxFileSize(40*1024*1024);
+
+        $fields->push(new TextField('Label'));
+        $fields->push(new TextField('SortOrder'));
+        $fields->push($doc);
+        $fields->push($image);
 
         return $fields;
     }

@@ -11,15 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class OpenStackDaysImage extends BetterImage {
+class MarketingFile extends File {
 
     private static $db = array(
         'SortOrder' => 'Int',
+        'Group'     => 'Varchar(255)',
     );
 
     private static $has_one = array(
-        'HeaderPics' => 'OpenStackDaysPage',
-        'ParentPage' => 'OpenStackDaysPage', //dummy
+        'CollateralFiles'  => 'MarketingCollateral',
     );
 
     public function getCMSFields() {
@@ -28,6 +28,7 @@ class OpenStackDaysImage extends BetterImage {
         $fields->removeByName('OwnerID');
         $fields->removeByName('ParentID');
         $fields->addFieldToTab('Root.Main', new TextField('SortOrder'));
+        $fields->addFieldToTab('Root.Main', new TextField('Group'));
 
         return $fields;
     }
