@@ -53,7 +53,7 @@ class PresentationVideo extends PresentationMaterial
 		$f->addFieldToTab('Root.Main', new CheckboxField('Highlighted'),'Description');
 		$f->addFieldToTab('Root.Main', new ReadonlyField('Views'),'Description');
 		$f->addFieldToTab('Root.Main', new TextField('YouTubeID','YouTube ID'),'Description');
-		$f->addFieldToTab('Root.Main', new DateField('DateUploaded'));
+		$f->addFieldToTab('Root.Main', new ReadonlyField('DateUploaded'));
 		$f->addFieldToTab('Root.Main', new ReadonlyField('PresentationTitle', 'Presentation title', $this->Presentation()->Title));
 		return $f;
 	}
@@ -118,4 +118,10 @@ class PresentationVideo extends PresentationMaterial
 		return $this->Presentation()->getSpeakersCSV();
 	}
 
+    protected function onBeforeWrite() {
+        parent::onBeforeWrite();
+        if(empty($this->DateUploaded) || $this->ID == 0 ){
+            $this->DateUploaded = gmdate("Y-m-d H:i:s");
+        }
+    }
 }
