@@ -58,9 +58,10 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
         $f->add(new TextField('Name','Name'));
         $f->add(new TextareaField('Description','Description'));
         $f->add(new NumericField('Number','Number'));
-        $f->add(new UploadField('Image','Map'));
+        $f->add($upload_field = new UploadField('Image','Map'));
         $f->add(new HiddenField('VenueID','VenueID'));
-
+        $upload_field->setAllowedMaxFileNumber(1);
+        $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 500 * 1024));
         if ($this->ID) {
             $f->add(new LiteralField('br','<br>'));
             $config = GridFieldConfig_RelationEditor::create();
