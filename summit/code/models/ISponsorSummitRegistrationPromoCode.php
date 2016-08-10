@@ -15,13 +15,13 @@
 interface ISponsorSummitRegistrationPromoCode extends IMemberSummitRegistrationPromoCode
 {
     /**
-     * @return IOrganization
+     * @return ICompany
      */
     public function getSponsor();
 
     /**
-     * @param IOrganization $company
+     * @param ICompany $company
      * @return $this
      */
-    public function assignSponsor(IOrganization $company);
+    public function assignSponsor(ICompany $company);
 }

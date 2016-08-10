@@ -112,11 +112,11 @@ $(document).ready(function(){
     });
 
     //SPONSOR AUTOCOMPLETE  --------------------------------------------//
-    var company_source = new Bloodhound({
+    var sponsor_source = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'api/v1/summits/'+summit_id+'/companies?query=%QUERY',
+            url: 'api/v1/summits/'+summit_id+'/sponsors?query=%QUERY',
             wildcard: '%QUERY'
         }
     });
@@ -134,9 +134,9 @@ $(document).ready(function(){
                 minLength: 3
             },
             {
-                name: 'company_source',
+                name: 'sponsor_source',
                 displayKey: 'name',
-                source: company_source
+                source: sponsor_source
             }
         ]
     });

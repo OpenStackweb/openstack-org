@@ -84,7 +84,7 @@ final class SummitRegistrationPromoCodeFactory
                         $promocode->assignOwner($owner);
                 }
                 if (isset($data['company_id']) && $data['company_id']) {
-                    $sponsor = Org::get_by_id('Org',trim($data['company_id']));
+                    $sponsor = Company::get_by_id('Company',trim($data['company_id']));
                     if ($sponsor->Exists())
                         $promocode->assignSponsor($sponsor);
                 }

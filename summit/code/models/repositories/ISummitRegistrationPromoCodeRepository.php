@@ -29,11 +29,11 @@ interface ISummitRegistrationPromoCodeRepository extends IEntityRepository
      * @param int $summit_id
      * @param string $type
      * @param string $prefix
-     * @param int $org_id
+     * @param int $company_id
      * @param int $limit
      * @return ISummitRegistrationPromoCode[]
      */
-    public function getFreeByTypeAndSummit($summit_id, $type, $prefix = '', $org_id = null, $limit);
+    public function getFreeByTypeAndSummit($summit_id, $type, $prefix = '', $company_id = null, $limit);
 
     /**
      * @param int $summit_id
@@ -55,16 +55,16 @@ interface ISummitRegistrationPromoCodeRepository extends IEntityRepository
 
     /**
      * @param int $summit_id
-     * @param int $org_id
+     * @param int $company_id
      * @return ISummitRegistrationPromoCode[]
      */
-    public function getByOrg($summit_id, $org_id);
+    public function getBySponsor($summit_id, $company_id);
 
     /**
      * @param int $summit_id
      * @return ArrayList
      */
-    public function getGroupedByOrg($summit_id);
+    public function getGroupedBySponsor($summit_id);
 
     /**
      * @param int $summit_id

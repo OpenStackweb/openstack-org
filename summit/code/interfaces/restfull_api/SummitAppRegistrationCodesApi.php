@@ -465,7 +465,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
                     'Type' => $row['type'],
                     'Owner' => $row['owner'],
                     'Email' => $row['owner_email'],
-                    'Sponsor' => $row['org'],
+                    'Sponsor' => $row['sponsor'],
                     'Emailed' => $row['email_sent'],
                     'Redeemed' => $row['redeemed']
                 );

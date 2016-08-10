@@ -136,7 +136,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/edit'                                            => 'editSummit',
         '$SummitID!/speakers/$SpeakerID!'                            => 'editSpeaker',
         '$SummitID!/speakers'                                        => 'speakers',
-        '$SummitID!/promocodes/sponsors/$OrgID!'                     => 'editPromoCodeSponsor',
+        '$SummitID!/promocodes/sponsors/$SponsorID!'                 => 'editPromoCodeSponsor',
         '$SummitID!/promocodes/sponsors'                             => 'promocodes_sponsors',
         '$SummitID!/promocodes/bulk'                                 => 'promocodes_bulk',
         '$SummitID!/promocodes/$Code!'                               => 'editPromoCode',
@@ -734,9 +734,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     public function promocodes_sponsors(SS_HTTPRequest $request)
     {
         $summit_id = intval($request->param('SummitID'));
-
         $summit = Summit::get()->byID($summit_id);
-        $promocodes = $this->promocode_repository->getGroupedByOrg($summit_id);
+        $promocodes = $this->promocode_repository->getGroupedBySponsor($summit_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
         // tag inputes
@@ -774,9 +773,9 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     {
         $summit_id  = intval($request->param('SummitID'));
         $summit     = Summit::get()->byID($summit_id);
-        $org_id     = $request->param('OrgID');
-        $sponsor    = (is_numeric($org_id)) ? Org::get_by_id('Org',$org_id) : null;
-        $promocodes = (is_numeric($org_id)) ? $this->promocode_repository->getByOrg($summit_id, $org_id) : array();
+        $sponsor_id = $request->param('SponsorID');
+        $sponsor    = (is_numeric($sponsor_id)) ? Company::get_by_id('Company',$sponsor_id) : null;
+        $promocodes = (is_numeric($sponsor_id)) ? $this->promocode_repository->getBySponsor($summit_id, $sponsor_id) : array();
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('summit/css/summit-admin-edit-promocode.css');

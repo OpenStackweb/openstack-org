@@ -69,14 +69,14 @@ SELECT PCode.ID AS CodeID, PCode.`Code`,PCode.ClassName,PCode.EmailSent,PCode.Re
 IF(SC.Type,SC.Type,MC.Type) AS Type, SC.SpeakerID, MC.OwnerID, SPC.SponsorID, MC.FirstName AS CodeFirstName,
 MC.LastName AS CodeLastName, MC.Email AS CodeEmail, S.FirstName AS SpeakerFirstName, S.LastName AS SpeakerLastName,
 M2.Email AS SpeakerEmail, M.FirstName AS OwnerFirstName, M.Surname AS OwnerLastName, M.Email AS OwnerEmail,
-Org.`Name` AS SponsorName, CONCAT(M3.FirstName,' ',M3.Surname) AS Creator
+C.`Name` AS SponsorName, CONCAT(M3.FirstName,' ',M3.Surname) AS Creator
 FROM SummitRegistrationPromoCode AS PCode
 LEFT JOIN SpeakerSummitRegistrationPromoCode AS SC ON SC.ID = PCode.ID
 LEFT JOIN MemberSummitRegistrationPromoCode AS MC ON MC.ID = PCode.ID
 LEFT JOIN SponsorSummitRegistrationPromoCode AS SPC ON SPC.ID = PCode.ID
 LEFT JOIN PresentationSpeaker AS S ON SC.SpeakerID = S.ID
 LEFT JOIN Member AS M ON MC.OwnerID = M.ID
-LEFT JOIN Org ON SPC.SponsorID = Org.ID
+LEFT JOIN Company AS C ON SPC.SponsorID = C.ID
 LEFT JOIN Member AS M2 ON S.ID = M2.ID
 LEFT JOIN Member AS M3 ON PCode.CreatorID = M3.ID
 WHERE SummitID = {$summit_id}
@@ -99,7 +99,7 @@ SQL;
                 'redeemed' => intval($code['Redeemed']),
                 'source' => $source,
                 'type' => $code['Type'],
-                'org'  => $code['SponsorName']
+                'sponsor'  => $code['SponsorName']
             );
 
             if ($code['SpeakerID']) {
@@ -123,11 +123,11 @@ SQL;
      * @param int $summit_id
      * @param string $type
      * @param string $prefix
-     * @param int $org_id
+     * @param int $company_id
      * @param int $limit
      * @return ISummitRegistrationPromoCode[]
      */
-    public function getFreeByTypeAndSummit($summit_id, $type, $prefix = '', $org_id = null, $limit)
+    public function getFreeByTypeAndSummit($summit_id, $type, $prefix = '', $company_id = null, $limit)
     {
         $where = "SummitID = {$summit_id} AND Type = '{$type}'";
         $where .= (!empty($prefix)) ? " AND `Code` LIKE '{$prefix}%'" : "";
@@ -146,7 +146,7 @@ SQL;
                 $promocodes = MemberSummitRegistrationPromoCode::get()->where($where);
                 break;
             case 'SPONSOR':
-                $where .= " AND SponsorID = {$org_id} AND IFNULL(OwnerID, 0) = 0 AND IFNULL(FirstName, '') = ''";
+                $where .= " AND SponsorID = {$company_id} AND IFNULL(OwnerID, 0) = 0 AND IFNULL(FirstName, '') = ''";
                 $where .= " AND IFNULL(LastName, '') = '' AND IFNULL(Email, '') = ''";
                 $promocodes = SponsorSummitRegistrationPromoCode::get()->where($where);
                 break;
@@ -172,18 +172,18 @@ SQL;
         switch(strtolower($sort_by))
         {
             case 'sponsor':
-                $sort = ' ORDER BY `Org.Name` '.strtoupper($sort_dir);
+                $sort = ' ORDER BY C.`Name` '.strtoupper($sort_dir);
                 break;
         }
 
         $query = <<<SQL
-SELECT Org.ID,Org.Name,GROUP_CONCAT(PC.Code SEPARATOR ', ') AS Codes
+SELECT C.ID,C.Name,GROUP_CONCAT(PC.Code SEPARATOR ', ') AS Codes
 FROM SponsorSummitRegistrationPromoCode AS SPC
 LEFT JOIN SummitRegistrationPromoCode AS PC ON PC.ID = SPC.ID
-LEFT JOIN Org ON Org.ID = SPC.SponsorID
+LEFT JOIN Company AS C ON C.ID = SPC.SponsorID
 WHERE SummitID = {$summit_id}
 GROUP BY SPC.SponsorID
-HAVING (Org.Name LIKE '%{$term}%' OR Codes LIKE '%{$term}%' )
+HAVING (C.Name LIKE '%{$term}%' OR Codes LIKE '%{$term}%' )
 {$sort}
 SQL;
 
@@ -221,29 +221,28 @@ SQL;
 
     /**
      * @param int $summit_id
-     * @param int $org_id
+     * @param int $company_id
      * @return ISummitRegistrationPromoCode[]
      */
-    public function getByOrg($summit_id, $org_id)
+    public function getBySponsor($summit_id, $company_id)
     {
-        $promo_codes = SponsorSummitRegistrationPromoCode::get()->where("SummitID = $summit_id AND SponsorID = $org_id");
+        $promo_codes = SponsorSummitRegistrationPromoCode::get()->where("SummitID = $summit_id AND SponsorID = $company_id");
 
         return $promo_codes;
     }
 
     /**
      * @param int $summit_id
-     * @param int $org_id
      * @return ArrayList
      */
-    public function getGroupedByOrg($summit_id)
+    public function getGroupedBySponsor($summit_id)
     {
         $query = <<<SQL
-        SELECT Org.ID,Org.Name,GROUP_CONCAT(PC.Code SEPARATOR ', ') AS Codes
+        SELECT C.ID AS ID,C.Name,GROUP_CONCAT(PC.Code SEPARATOR ', ') AS Codes
         FROM SponsorSummitRegistrationPromoCode AS SPC
         LEFT JOIN SummitRegistrationPromoCode AS PC ON PC.ID = SPC.ID
-        LEFT JOIN Org ON Org.ID = SPC.SponsorID
-        WHERE PC.SummitID = {$summit_id} GROUP BY SPC.SponsorID ORDER BY Org.Name LIMIT 20
+        LEFT JOIN Company AS C ON C.ID = SPC.SponsorID
+        WHERE PC.SummitID = {$summit_id} GROUP BY SPC.SponsorID ORDER BY C.Name LIMIT 20
 SQL;
         $db_result = DB::query($query);
         $result = new ArrayList();

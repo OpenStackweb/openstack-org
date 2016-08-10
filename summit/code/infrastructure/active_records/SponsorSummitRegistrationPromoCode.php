@@ -20,7 +20,7 @@ class SponsorSummitRegistrationPromoCode extends MemberSummitRegistrationPromoCo
 
     private static $has_one = array
     (
-        'Sponsor' => 'Org',
+        'Sponsor' => 'Company',
     );
 
     /**
@@ -32,7 +32,7 @@ class SponsorSummitRegistrationPromoCode extends MemberSummitRegistrationPromoCo
     }
 
     /**
-     * @return IOrganization
+     * @return ICompany
      */
     public function getSponsor()
     {
@@ -40,10 +40,10 @@ class SponsorSummitRegistrationPromoCode extends MemberSummitRegistrationPromoCo
     }
 
     /**
-     * @param IOrganization $company
+     * @param ICompany $company
      * @return $this
      */
-    public function assignSponsor(IOrganization $company)
+    public function assignSponsor(ICompany $company)
     {
         $this->SponsorID = $company->getIdentifier();
         AssociationFactory::getInstance()->getMany2OneAssociation($this,'Sponsor')->setTarget($company);
