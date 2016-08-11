@@ -18,22 +18,26 @@ class PresentationVideo extends PresentationMaterial
 	 * @var array
      */
 	private static $db = array (
-        'YouTubeID' => 'Text',
+        'YouTubeID'    => 'Text',
         'DateUploaded' => 'SS_DateTime',
-        'Highlighted' => 'Boolean',
-        'Views' => 'Int'
+        'Highlighted'  => 'Boolean',
+        'Views'        => 'Int'
+    );
+
+    private static $defaults = array(
+        "Views" => 0,
     );
 
 	/**
 	 * @var array
      */
 	private static $summary_fields = array (
-    	'Name' => 'Title',
+    	'Name'                      => 'Title',
     	'Presentation.Summit.Title' => 'Summit',
-    	'PresentationID' => 'Presentation ID',
-    	'SpeakersCSV' => 'Speakers',
-    	'Featured.Nice' => 'Featured?',
-    	'Highlighted.Nice' => 'Highlighted?'
+    	'PresentationID'            => 'Presentation ID',
+    	'SpeakersCSV'               => 'Speakers',
+    	'Featured.Nice'             => 'Featured?',
+    	'Highlighted.Nice'          => 'Highlighted?'
     );
 
 	/**
@@ -54,6 +58,7 @@ class PresentationVideo extends PresentationMaterial
 		$f->addFieldToTab('Root.Main', new ReadonlyField('Views'),'Description');
 		$f->addFieldToTab('Root.Main', new TextField('YouTubeID','YouTube ID'),'Description');
 		$f->addFieldToTab('Root.Main', new ReadonlyField('DateUploaded'));
+        $f->addFieldToTab('Root.Main', new ReadonlyField('Views'));
 		$f->addFieldToTab('Root.Main', new ReadonlyField('PresentationTitle', 'Presentation title', $this->Presentation()->Title));
 		return $f;
 	}
