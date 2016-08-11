@@ -88,7 +88,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
     public function getOrganization(){
         // search first on entity
         foreach ($this->getSteps() as $step) {
-            if ($step instanceof ISurveyRegularStep && $step->template()->getQuestionByClassName(SurveyOrganizationQuestionTemplate::class)) {
+            if ($step instanceof ISurveyRegularStep && $step->template()->getQuestionByClassName('SurveyOrganizationQuestionTemplate')) {
                 foreach ($step->getAnswers() as $a) {
                     if ($a->question()->Type() === SurveyOrganizationQuestionTemplate::FieldName && !empty($a->value())) {
                         return $a->value();
@@ -98,7 +98,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
         }
         // check parent survey...
         foreach ($this->Parent()->getSteps() as $step) {
-            if ($step instanceof ISurveyRegularStep && $step->template()->getQuestionByClassName(SurveyOrganizationQuestionTemplate::class)) {
+            if ($step instanceof ISurveyRegularStep && $step->template()->getQuestionByClassName('SurveyOrganizationQuestionTemplate')) {
                 foreach ($step->getAnswers() as $a) {
                     if ($a->question()->Type() === SurveyOrganizationQuestionTemplate::FieldName && !empty($a->value())) {
                         return $a->value();
