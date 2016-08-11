@@ -87,12 +87,11 @@ final class MemberManager implements IMemberManager
 
     /**
      * @param array $data
-     * @param EditProfilePage $profile_page
      * @param IMessageSenderService $sender_service
      * @return null
      * @throws Exception
      */
-    public function register(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service)
+    public function register(array $data, IMessageSenderService $sender_service)
     {
         $repository          = $this->repository;
         $group_repository    = $this->group_repository;
@@ -105,7 +104,6 @@ final class MemberManager implements IMemberManager
         try {
             return $this->tx_manager->transaction(function () use (
                 $data,
-                $profile_page,
                 $repository,
                 $group_repository,
                 $org_repository,
@@ -172,10 +170,9 @@ final class MemberManager implements IMemberManager
                     $affiliation = $affiliation_factory->build($d, $member, $org);
                     $affiliation->write();
                 }
-                if (!is_null($profile_page)) {
+                if(!is_null($sender_service))
                     $sender_service->send($member);
-                }
-                //force write,
+                                //force write,
                 $member->write();
                 PublisherSubscriberManager::getInstance()->publish('new_user_registered', array($member->ID));
                 return $member;
@@ -195,12 +192,11 @@ final class MemberManager implements IMemberManager
 
     /**
      * @param array $data
-     * @param EditProfilePage $profile_page
      * @param IMessageSenderService $sender_service
      * @return Member
      * @throws Exception
      */
-    public function registerMobile(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service)
+    public function registerMobile(array $data, IMessageSenderService $sender_service)
     {
         $repository          = $this->repository;
         $group_repository    = $this->group_repository;
@@ -213,7 +209,6 @@ final class MemberManager implements IMemberManager
         try {
             return $this->tx_manager->transaction(function () use (
                 $data,
-                $profile_page,
                 $repository,
                 $group_repository,
                 $org_repository,
@@ -249,10 +244,13 @@ final class MemberManager implements IMemberManager
 
                 $member = $factory->buildReduced($data);
                 $member->write();
+
                 if($data['MembershipType'] !== 'community') {
                     throw new EntityValidationException('You can only register as a community member.');
                 }
+
                 $member->convert2SiteUser();
+                // add to users group
                 $users_group = $group_repository->getByCode(ISecurityGroupFactory::UsersGroupCode);
                 if (is_null($users_group)) {
                     // create group
@@ -261,7 +259,7 @@ final class MemberManager implements IMemberManager
                 }
                 $member->addToGroupByCode(ISecurityGroupFactory::UsersGroupCode);
 
-                if (!is_null($profile_page)) {
+                if (!is_null($sender_service)) {
                     $sender_service->send($member);
                 }
                 //force write,
@@ -343,13 +341,12 @@ final class MemberManager implements IMemberManager
     /**
      * Register an speaker and confirm the registration request if exists
      * @param array $data
-     * @param EditProfilePage $profile_page
      * @param IMessageSenderService $sender_service
      * @return Member
      * @throws EntityValidationException
      * @throws Exception
      */
-    public function registerSpeaker(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service)
+    public function registerSpeaker(array $data, IMessageSenderService $sender_service)
     {
         $repository                           = $this->repository;
         $group_repository                     = $this->group_repository;
@@ -360,7 +357,6 @@ final class MemberManager implements IMemberManager
         try {
             return $this->tx_manager->transaction(function () use (
                 $data,
-                $profile_page,
                 $repository,
                 $group_repository,
                 $factory,
@@ -411,7 +407,7 @@ final class MemberManager implements IMemberManager
                     $speaker_registration_request_manager->confirm($speaker_registration_token, $member);
                 }
 
-                if (!is_null($profile_page)) {
+                if (!is_null($sender_service)) {
                     $sender_service->send($member);
                 }
                 //force write,

@@ -1,0 +1,9 @@
+---
+Name: 'survey-builder-injection'
+After:
+  - 'openstack/*'
+  - 'security/*'
+---
+SurveyPage_Controller:
+  dependencies:
+    MemberManager: '%$MemberManager'

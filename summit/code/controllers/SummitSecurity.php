@@ -237,7 +237,9 @@ class SummitSecurity extends SummitPage_Controller {
      *
      * @return  BootstrapForm
      */
+
     public function RegistrationForm() {
+
         $speaker_registration_token = Session::get(SpeakerRegistrationRequest::ConfirmationTokenParamName);
 
         $fields =   FieldList::create(
@@ -298,7 +300,7 @@ class SummitSecurity extends SummitPage_Controller {
                 $data[SpeakerRegistrationRequest::ConfirmationTokenParamName] = $speaker_registration_token;
             }
 
-            $member = $this->member_manager->registerSpeaker($data, $profile_page, new MemberRegistrationSenderService);
+            $member = $this->member_manager->registerSpeaker($data, new MemberRegistrationSenderService);
 
             //Get profile page
             if (!is_null($profile_page)) {

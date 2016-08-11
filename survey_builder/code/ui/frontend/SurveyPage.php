@@ -45,6 +45,27 @@ class SurveyPage_Controller extends Page_Controller
         'StartSurvey'
     );
 
+    /**
+     * @var IMemberManager
+     */
+    private $member_manager;
+
+    /**
+     * @return IMemberManager
+     */
+    public function getMemberManager()
+    {
+        return $this->member_manager;
+    }
+
+    /**
+     * @param IMemberManager $manager
+     */
+    public function setMemberManager(IMemberManager $manager)
+    {
+        $this->member_manager = $manager;
+    }
+
     static $allowed_actions = array
     (
         'LandingPage',
@@ -72,7 +93,8 @@ class SurveyPage_Controller extends Page_Controller
         'GET  SurveyStepForm'                               => 'SurveyStepForm',
         'POST SurveyDynamicEntityStepForm'                  => 'SurveyDynamicEntityStepForm',
         'GET  SurveyDynamicEntityStepForm'                  => 'SurveyDynamicEntityStepForm',
-        '//$STEP_SLUG'                                      => 'RenderSurvey',
+        'GET  $STEP_SLUG'                                   => 'RenderSurvey',
+        'POST $Action//$ID/$OtherID'                        => 'handleAction',
     );
 
     /**
@@ -178,11 +200,12 @@ class SurveyPage_Controller extends Page_Controller
      * @param $request
      * @return HTMLText|SS_HTTPResponse|void
      */
-    public function RenderSurvey($request)
+    public function RenderSurvey(SS_HTTPRequest $request)
     {
         //check if user is logged in
 
         try {
+
             $step = $request->param('STEP_SLUG');
 
             $current_survey = $this->getCurrentSurveyInstance();
@@ -723,6 +746,8 @@ class SurveyPage_Controller extends Page_Controller
 
     public function RegisterForm()
     {
-        return new SurveyRegistrationForm($this, 'RegisterForm');
+        $form =  new SurveyRegistrationForm($this, 'RegisterForm', $this->member_manager);
+        $data = Session::get("FormInfo.{$form->getName()}.data");
+        return $form->loadDataFrom($data ?: array ());
     }
 }

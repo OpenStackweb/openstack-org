@@ -220,7 +220,7 @@ class RegistrationPage_Controller extends Page_Controller
 
             Session::set("FormInfo.{$form->FormName()}.data", $data);
             $profile_page = EditProfilePage::get()->first();
-            $member = $this->member_manager->register($data, $profile_page, new MemberRegistrationSenderService);
+            $member = $this->member_manager->register($data, new MemberRegistrationSenderService);
             //Get profile page
             if (!is_null($profile_page)) {
                 //Redirect to profile page with success message
@@ -316,7 +316,7 @@ class RegistrationPage_Controller extends Page_Controller
 
             Session::set("FormInfo.{$form->FormName()}.data", $data);
             $profile_page = EditProfilePage::get()->first();
-            $member = $this->member_manager->registerMobile($data, $profile_page, new MemberRegistrationSenderService);
+            $member = $this->member_manager->registerMobile($data, new MemberRegistrationSenderService);
             //Get profile page
             if (!is_null($profile_page)) {
                 //Redirect to profile page with success message

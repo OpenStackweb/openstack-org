@@ -16,11 +16,11 @@ interface IMemberManager
 {
     /**
      * @param array $data
-     * @param EditProfilePage $profile_page
      * @param IMessageSenderService $sender_service
      * @return Member
+     * @throws EntityValidationException
      */
-    public function register(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service);
+    public function register(array $data, IMessageSenderService $sender_service);
 
     /**
      * @param string $token
@@ -32,22 +32,21 @@ interface IMemberManager
 
     /**
      * @param array $data
-     * @param EditProfilePage $profile_page
      * @param IMessageSenderService $sender_service
      * @return Member
-     * @throws Exception
+     * @throws EntityValidationException
      */
-    public function registerMobile(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service);
+    public function registerMobile(array $data, IMessageSenderService $sender_service);
 
 
     /**
      * Register an speaker and confirm the registration request if exists
      * @param array $data
-     * @param EditProfilePage $profile_page
      * @param IMessageSenderService $sender_service
      * @return Member
+     * @throws EntityValidationException
      */
-    public function registerSpeaker(array $data, EditProfilePage $profile_page, IMessageSenderService $sender_service);
+    public function registerSpeaker(array $data, IMessageSenderService $sender_service);
 
     /**
      * @param $email
