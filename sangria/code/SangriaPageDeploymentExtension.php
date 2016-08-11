@@ -834,15 +834,12 @@ SQL;
             $entity = new $row['ClassName']($row);
             $list->push(
                 new ArrayData
-                (
-                    array
-                    (
-                        'ID' => $entity->ID,
-                        'Country' => $entity->ClassName === 'Deployment' ? $entity->Country : $row['Country'],
-                        'Label' => $entity->ClassName === 'Deployment' ? sprintf("%s - %s", $entity->Label,
-                            $entity->DeploymentType) : $entity->getFriendlyName(),
-                    )
-                )
+                ([
+                    'ID'      => $entity->ID,
+                    'Country' => $entity->Country,
+                    'Label'   => sprintf("%s - %s", $entity->getOrganization() ,$entity->getFriendlyName())
+
+                ])
             );
         }
 

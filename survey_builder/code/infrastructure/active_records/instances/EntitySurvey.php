@@ -79,8 +79,34 @@ class EntitySurvey extends Survey implements IEntitySurvey
                 }
             }
         }
-
         return $this->ID;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOrganization(){
+        // search first on entity
+        foreach ($this->getSteps() as $step) {
+            if ($step instanceof ISurveyRegularStep && $step->template()->getQuestionByClassName(SurveyOrganizationQuestionTemplate::class)) {
+                foreach ($step->getAnswers() as $a) {
+                    if ($a->question()->Type() === SurveyOrganizationQuestionTemplate::FieldName && !empty($a->value())) {
+                        return $a->value();
+                    }
+                }
+            }
+        }
+        // check parent survey...
+        foreach ($this->Parent()->getSteps() as $step) {
+            if ($step instanceof ISurveyRegularStep && $step->template()->getQuestionByClassName(SurveyOrganizationQuestionTemplate::class)) {
+                foreach ($step->getAnswers() as $a) {
+                    if ($a->question()->Type() === SurveyOrganizationQuestionTemplate::FieldName && !empty($a->value())) {
+                        return $a->value();
+                    }
+                }
+            }
+        }
+        return null;
     }
 
      /**
