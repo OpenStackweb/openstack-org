@@ -365,7 +365,7 @@ SQL;
     private function ViewStatisticsSurveyBuilder(SS_HTTPRequest $request, $action, $class_name)
     {
         Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.view.statistics.surveybuilder.js');
-
+        Requirements::css('themes/openstack/css/sangria/sangria.page.view.statistics.surveybuilder.css');
         $qid           = $request->requestVar('qid');
         $vid           = $request->requestVar('vid');
         $clear_filters = $request->requestVar('clear_filters');
@@ -525,9 +525,10 @@ SQL;
         $count              = $this->SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id);
         $total_count        = $this->SurveyBuilderSurveyCount();
         $count_dont_answers = $this->getDontAnsweredCount($question_id);
+        $div                = $total_count - $count_dont_answers;
+        $percent            = ($div == 0) ? 0 : ($count/ ($div )) * 100;
+        $percent            = sprintf ("%.2f", $percent);
 
-        $percent = ($count/ ($total_count - $count_dont_answers )) * 100;
-        $percent = sprintf ("%.2f", $percent);
         return '( '.$percent.' % )';
     }
 
