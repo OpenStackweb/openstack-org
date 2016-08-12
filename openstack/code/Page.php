@@ -216,6 +216,24 @@ class Page extends SiteTree
              unset($this->extension_instances[$extension]);
     }
 
+    public static $default_image = '/themes/openstack/images/openstack-logo-full.png';
+
+    public function getOGImage()
+    {
+        if ($this->hasField('MetaImage') && $this->MetaImage()->Exists())
+            return $this->MetaImage()->getURL();
+        return Director::absoluteURL(self::$default_image);
+    }
+
+    public function getOGTitle()
+    {
+        if($this->hasField('MetaTitle')) {
+            $title = trim($this->MetaTitle);
+            if(!empty($title)) return $title;
+        }
+
+        return $this->Title." &raquo; OpenStack Open Source Cloud Computing Software";
+    }
 }
 
 class Page_Controller extends ContentController
@@ -348,7 +366,6 @@ class Page_Controller extends ContentController
     public function init()
     {
         parent::init();
-
         // Summit Landing Page Redirects
         // Looks to see if ?source is set and redirects to either English or Chinese landing page
         // based on the source
