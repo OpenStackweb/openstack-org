@@ -53,19 +53,8 @@
                         <div class="row">
                         <% loop $AboutVideos().Sort(SortOrder) %>
                             <div class="col-md-4 text-center">
-                                <a href="#highlights_modal_{$YoutubeID}" data-toggle="modal" >
-                                    <img src="$getThumbnailUrl()" width="350" height="180" />
-                                </a>
+                                <iframe width="350" height="180" src="//www.youtube.com/embed/{$YoutubeID}" frameborder="0" allowfullscreen></iframe>
                                 <p>$Caption</p>
-                                <div id="highlights_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="highlights" class="modal fade">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <iframe id="highlights_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         <% end_loop %>
                         </div>
@@ -170,21 +159,8 @@
                     <% if Collaterals().Exists() %>
                     <% loop Collaterals().Sort(SortOrder) %>
                         <li>
-                            <a href="#collateral_modal_{$YoutubeID}" data-toggle="modal" >
-                                <img src="$getThumbnailUrl()" width="240" height="140" />
-                            </a>
+                            <iframe width="240" height="140" src="//www.youtube.com/embed/{$YoutubeID}" frameborder="0" allowfullscreen></iframe>
                             <p>$Caption</p>
-                            <a class="download" href="#collateral_modal_{$YoutubeID}" data-toggle="modal">WATCH</a>
-
-                            <div id="collateral_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="collateral" class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <iframe id="collateral_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
                     <% end_loop %>
                     <% end_if %>
