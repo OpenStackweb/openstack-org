@@ -60,10 +60,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="event-btn">
-            <form action="{$Top.Link(events)}/{$Event.ID}" method="POST">
-                <input type="hidden" name="goback" value="1" />
-                <button type="submit" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</button>
-            </form>
+            <a href="{$EventLink}" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
         </div>
         <% if Event.RSVPTemplate.Exists() %>
         <div class="info_item">

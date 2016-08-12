@@ -139,7 +139,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     {
         $event  = $this->getSummitEntity($request);
 
-        $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
+        $goback   = $request->getHeader('Referer') && trim($request->getHeader('Referer'),'/') == trim(Director::absoluteURL($this->Link()),'/')? '1':'';
 
         if (is_null($event) || !$event->isPublished()) {
             return $this->httpError(404, 'Sorry that event could not be found');
@@ -240,10 +240,10 @@ END:VCALENDAR";
         exit();
     }
 
-    public function ViewMySchedule()
+    public function ViewMySchedule(SS_HTTPRequest $request)
     {
         $member    = Member::currentUser();
-        $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
+        $goback    = $request->getHeader('Referer') && trim($request->getHeader('Referer'),'/') == trim(Director::absoluteURL($this->Link()),'/')? '1':'';
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 
@@ -259,9 +259,9 @@ END:VCALENDAR";
                 'goback'   => $goback));
     }
 
-    public function ViewFullSchedule()
+    public function ViewFullSchedule(SS_HTTPRequest $request)
     {
-        $goback = $this->getRequest()->postVar('goback') ? $this->getRequest()->postVar('goback') : '';
+        $goback   = $request->getHeader('Referer') && trim($request->getHeader('Referer'),'/') == trim(Director::absoluteURL($this->Link()),'/')? '1':'';
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 

@@ -94,9 +94,6 @@ SummitLocationImage:
 SummitVenueFloor:
   extensions:
     - SummitEntity
-SummitPage:
-  extensions:
-    - SummitPageOpenGraphObjectExtension
 Injector:
     RSVPTextBoxUIBuilder:
       class: RSVPTextBoxQuestionTemplateUIBuilder

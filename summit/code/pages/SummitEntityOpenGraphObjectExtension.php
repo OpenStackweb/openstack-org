@@ -35,7 +35,7 @@ final class AppLinkIAndroidMetadataBuilder
       }
 }
 
-class SummitEntityOpenGraphObjectExtension extends SummitPageOpenGraphObjectExtension
+class SummitEntityOpenGraphObjectExtension extends OpenGraphObjectExtension
 {
     public function MetaTags(&$tags)
     {
@@ -55,4 +55,8 @@ class SummitEntityOpenGraphObjectExtension extends SummitPageOpenGraphObjectExte
         return "";
     }
 
+    public function getOGImage()
+    {
+        return Director::absoluteURL('/summit/images/summit-logo.png');
+    }
 }
