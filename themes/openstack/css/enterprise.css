@@ -688,6 +688,10 @@ img.event-logo.lrg {
   margin: 50px 0 0 -1px;
   float: left; }
 
+.events-col {
+    width: 48% !important;
+}
+
 .more-events {
   margin-top: 20px;
   text-align: left;

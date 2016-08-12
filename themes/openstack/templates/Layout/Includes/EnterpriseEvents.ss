@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="row events">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 events-col">
                                 <% with EnterpriseEvents(1).First %>
                                 <a href="$EventLink" class="featured-event-link lrg">
                                     <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="$Title">
@@ -37,7 +37,7 @@
                                 <% end_with %>
                             </div>
                             <div class="vert-line"></div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 events-col">
                                 <% with SummitEvent %>
                                 <a href="$EventLink" class="featured-event-link">
                                     <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="OpenStack Summit in $EventLocation">
