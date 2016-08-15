@@ -257,8 +257,12 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function getLink($type ='voting')
     {
-        if($type=='voting')
-            return PresentationPage::get()->filter('SummitID', $this->SummitID)->first()->Link('show/' . $this->ID);
+        if($type=='voting'){
+            $page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first();
+            if(!is_null($page)) {
+                return $page->Link('show/' . $this->ID);
+            }
+        }
         if($type=='show') {
             $page = SummitAppSchedPage::get()->filter('SummitID', $this->SummitID)->first();
             if ($page) {

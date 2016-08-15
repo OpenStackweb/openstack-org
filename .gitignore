@@ -82,3 +82,4 @@ gridfieldextensions/
 fluent/
 *.bundle.js
 opengraph/
+translatable/
