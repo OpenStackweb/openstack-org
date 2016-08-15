@@ -51,8 +51,16 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
 
     public function getTypeName()
     {
-        return 'SummitLocation';
+        return self::TypeName;
     }
+
+    public function inferLocationType()
+    {
+        return self::LocationType;
+    }
+
+    const TypeName     = 'SummitLocation';
+    const LocationType = 'None';
 
     public function overridesBlackouts()
     {
@@ -120,11 +128,6 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         }
 
         return $valid;
-    }
-
-    public function inferLocationType()
-    {
-        return 'None';
     }
 
     public function onBeforeWrite()

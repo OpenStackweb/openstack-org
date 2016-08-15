@@ -23,6 +23,7 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
 
     private static $has_many = array
     (
+        'Metrics' => 'RoomMetricType'
     );
 
     private static $has_one = array
@@ -90,13 +91,27 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
         $upload_field->setAllowedMaxFileNumber(1);
         $upload_field->setFolderName(sprintf('summits/%s/locations/%s/rooms/%s', $_REQUEST['SummitID'], $_REQUEST['LocationID'], $_REQUEST['RoomID']));
         $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 512 * 1024));
+
+        if($this->ID > 0){
+            $config    = GridFieldConfig_RecordEditor::create();
+            $gridField = new GridField('Metrics', 'Metrics', $this->Metrics(), $config);
+            $f->addFieldToTab('Root.Main', $gridField);
+        }
         return $f;
     }
 
     public function getTypeName()
     {
-        return 'VenueRoom';
+        return self::TypeName;
     }
+
+    public function inferLocationType()
+    {
+        return self::LocationType;
+    }
+
+    const TypeName     = 'VenueRoom';
+    const LocationType = 'Internal';
 
     public function getVenue() {
         return $this->Venue();
@@ -104,5 +119,14 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
 
     public function getLink() {
         return parent::getLink().'/#room='.$this->ID;
+    }
+
+
+    /**
+     * @return IRoomMetricType[]
+     */
+    public function getMetricTypes()
+    {
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Metrics')->toArray();
     }
 }

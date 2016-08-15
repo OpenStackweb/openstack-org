@@ -66,7 +66,15 @@ class SummitHotel extends SummitExternalLocation implements ISummitHotel
 
     public function getTypeName()
     {
-        return 'Hotel';
+        return self::TypeName;
     }
+
+    public function inferLocationType()
+    {
+        return self::LocationType;
+    }
+
+    const TypeName     = 'Hotel';
+    const LocationType = 'None';
 
 }

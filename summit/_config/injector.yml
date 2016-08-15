@@ -187,7 +187,15 @@ Injector:
   SpeakerManager:
     constructor:
       0: '%$SummitRepository'
-      3: '%$SpeakerRepository'
-      4: '%$MemberRepository'
-      5: '%$TransactionManager'
+      1: '%$SpeakerRepository'
+      2: '%$MemberRepository'
+      3: '%$TransactionManager'
+  TCPCloudRestApi:
+    class: TCPCloudRestApi
+  SummitVenueRoomMetricsManager:
+    constructor:
+      0: '%$SummitRepository'
+      1: '%$TCPCloudRestApi'
+      2: '%$TransactionManager'
+
 

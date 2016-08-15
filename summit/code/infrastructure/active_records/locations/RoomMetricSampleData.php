@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,30 +11,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SummitExternalLocation extends SummitGeoLocatedLocation
+
+/**
+ * Class RoomMetricSampleData
+ */
+final class RoomMetricSampleData extends DataObject implements IEntity
 {
-    public function getTypeName()
-    {
-        return self::TypeName;
-    }
-
-    public function inferLocationType()
-    {
-        return self::LocationType;
-    }
-
-    const TypeName     = 'SummitExternalLocation';
-    const LocationType = 'External';
-
     private static $db = array
     (
-        'Capacity' => 'Int',
+        'Value'     => 'Text',
+        'TimeStamp' => 'Int',
     );
 
-    public function getCMSFields()
+    private static $has_one = array
+    (
+        'Type' => 'RoomMetricType',
+    );
+
+    /**
+     * @return int
+     */
+    public function getIdentifier()
     {
-        $f = parent::getCMSFields();
-        $f->addFieldToTab('Root.Main', new TextField('Capacity', 'Capacity'));
-        return $f;
+       return (int)$this->getField('ID');
     }
 }

@@ -105,13 +105,16 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
 
     public function getTypeName()
     {
-        return 'Venue';
+        return self::TypeName;
     }
 
     public function inferLocationType()
     {
-        return 'Internal';
+        return self::LocationType;
     }
+
+    const TypeName     = 'Venue';
+    const LocationType = 'Internal';
 
     public function getLink() {
         return parent::getLink().'/#venue='.$this->ID;
