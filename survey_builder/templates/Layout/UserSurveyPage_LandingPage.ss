@@ -34,6 +34,36 @@
             </div>
         </div>
     </div>
+    <h1>Get Started</h1>
+    <% if not $Top.SurveyTemplate.isVoid && not $CurrentMember %>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Already have an OpenStack Foundation login?</h3>
+                <div class="survey-login-wrapper">
+                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Link}" method="post"
+                          enctype="application/x-www-form-urlencoded">
+                        <div class="Actions">
+                            <input class="action" id="MemberLoginForm_LoginForm_action_dologin" type="submit"
+                                   name="action_dologin" value="Log in" title="Log in"/>
+                            <p id="ForgotPassword"><a href="Security/lostpassword">I've lost my password</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3>Don't have a login? Start here.</h3>
+                <div class="survey-login-wrapper">
+                    $RegisterForm
+                </div>
+            </div>
+        </div>
+    <% else %>
+     <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <a href="$Top.Link" title="Start Survey!" class="roundedButton">Start Survey!</a>
+            </div>
+        </div>
+    <% end_if %>
     <div class="row">
         <div class="col-lg-12">
             <h3>See the OpenStack community’s opinions, adoption and technology choices</h3>
@@ -107,31 +137,7 @@
      $LoginPageContent
         <hr/>
     <% end_if %>
-    <% if not $Top.SurveyTemplate.isVoid && not $CurrentMember %>
-    <h1>Get Started</h1>
-    <div class="row">
-        <div class="col-lg-6">
-            <h3>Already have an OpenStack Foundation login?</h3>
-            <div class="survey-login-wrapper">
-                <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Link}" method="post"
-                      enctype="application/x-www-form-urlencoded">
-                    <div class="Actions">
-                        <input class="action " id="MemberLoginForm_LoginForm_action_dologin" type="submit"
-                               name="action_dologin" value="Log in" title="Log in"/>
-                        <p id="ForgotPassword"><a href="Security/lostpassword">I've lost my password</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <h3>Don't have a login? Start here.</h3>
 
-            <div class="survey-login-wrapper">
-                $RegisterForm
-            </div>
-        </div>
-    </div>
-    <% end_if %>
     <script>
         $(function () {
             var param = $('#fragment');
