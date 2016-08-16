@@ -179,9 +179,10 @@ $(document).ready(function(){
 
             swal({
                 title: "Success!",
-                text: "Promocodes were created/assigned successfully. Promocodes: "+codes_string,
+                text: 'Promocodes were created/assigned successfully. </p><br><div style="max-height:200px;overflow-y:auto;">'+codes_string+'</div>',
                 confirmButtonText: "Done!",
-                type: "success"
+                type: "success",
+                html: true
             },
             function() {
                 location.reload();
