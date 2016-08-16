@@ -28,7 +28,7 @@
                     <h5>NEW</h5>
                 </div>
                 <div class="publishedDate">
-                    <h5>Published on $JobPostedDate.format(F) $JobPostedDate.format(d)</h5>
+                    <h5>Published on $PostedDate.format(F) $PostedDate.format(d)</h5>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="jobBasics">
             <p>
                 <span class="glyphicon glyphicon-briefcase"></span>
-                $JobCompany
+                $CompanyName
             </p>
 
             <p>
@@ -64,14 +64,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div style="max-width: 80%">
-                            $Content
+                            $Description
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div style="max-width: 80%">
-                            $JobInstructions2Apply
+                            $Instructions2Apply
                         </div>
                     </div>
                 </div>

@@ -15,6 +15,29 @@
  * Class JobMainInfo
  */
 final class JobMainInfo {
+    /**
+     * @return string
+     */
+    public function getInstructions2Apply()
+    {
+        return $this->instructions_2_apply;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCoaNeeded()
+    {
+        return $this->is_coa_needed;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
 	/**
 	 * @var string
@@ -45,17 +68,33 @@ final class JobMainInfo {
 	 * @var string
 	 */
 	private $location_type;
-	/**
-	 * @param string $title
-	 * @param Company $company
-	 * @param string $url
-	 * @param string $description
-	 * @param string $instructions_2_apply
-	 * @param string $location_type
-	 * @param DateTime $expiration_date
-	 */
-	public function __construct($title, $company, $url, $description, $instructions_2_apply, $location_type, $expiration_date = null){
+
+    /**
+     * @var boolean
+     */
+    private $is_coa_needed;
+
+    /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * JobMainInfo constructor.
+     * @param $title
+     * @param $is_coa_needed
+     * @param $type
+     * @param $company
+     * @param $url
+     * @param $description
+     * @param $instructions_2_apply
+     * @param $location_type
+     * @param null $expiration_date
+     */
+	public function __construct($title, $is_coa_needed, $type, $company, $url, $description, $instructions_2_apply, $location_type, $expiration_date = null){
 		$this->title                = $title;
+        $this->is_coa_needed        = $is_coa_needed;
+        $this->type                 = $type;
 		$this->company              = $company;
 		$this->url                  = $url;
 		$this->description          = $description;

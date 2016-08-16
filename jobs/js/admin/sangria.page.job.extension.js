@@ -85,11 +85,14 @@ jQuery(document).ready(function($) {
                             id : id,
                             point_of_contact_name  :  $('#'+form_id+'_point_of_contact_name',form).val(),
                             point_of_contact_email :  $('#'+form_id+'_point_of_contact_email',form).val(),
-                            title        : $('#'+form_id+'_title',form).val(),
+                            title         : $('#'+form_id+'_title',form).val(),
+                            job_type      : $('#'+form_id+'_job_type',form).val(),
+                            is_coa_needed : $('#'+form_id+'_is_coa_needed',form).prop('checked'),
                             url           : $('#'+form_id+'_url',form).val(),
                             description   : $('#'+form_id+'_description',form).val(),
                             instructions  : $('#'+form_id+'_instructions',form).val(),
-                            company_name  : $('#'+form_id+'_company_name',form).val(),
+                            company_id     : $('.company-composite', form).company_field('getCompany').id,
+                            company        : $('.company-composite', form).company_field('getCompany').name,
                             location_type : $('#'+form_id+'_location_type',form).val(),
                             locations     : locations
                         };
@@ -171,7 +174,6 @@ jQuery(document).ready(function($) {
                             country : $('input.location_country',row).val()
                         });
                     }
-
                 }
 
                 $(this).geocoding({
@@ -192,18 +194,22 @@ jQuery(document).ready(function($) {
                         location.lng = lng;
                     },
                     processFinished:function(){
-                        var row     = edit_live_dialog.data('row');
-                        var id      = parseInt(edit_live_dialog.data('id'));
-                        var url     = 'api/v1/jobs';
-                        var ajax_type = 'POST';
+
+                        var row        = edit_live_dialog.data('row');
+                        var id         = parseInt(edit_live_dialog.data('id'));
+                        var url        = 'api/v1/jobs';
+                        var ajax_type  = 'POST';
                         var is_new_job = (id) ? false : true ;
 
                         var job = {
                             title         : $('#'+form_id+'_title',form).val(),
                             url           : $('#'+form_id+'_url',form).val(),
+                            job_type      : $('#'+form_id+'_job_type',form).val(),
+                            is_coa_needed : $('#'+form_id+'_is_coa_needed',form).prop('checked'),
                             description   : $('#'+form_id+'_description',form).val(),
                             instructions  : $('#'+form_id+'_instructions',form).val(),
-                            company_name  : $('#'+form_id+'_company_name',form).val(),
+                            company_id    : $('.company-composite', form).company_field('getCompany').id,
+                            company       : $('.company-composite', form).company_field('getCompany').name,
                             location_type : $('#'+form_id+'_location_type',form).val(),
                             locations     : locations
                         };
@@ -225,24 +231,24 @@ jQuery(document).ready(function($) {
                                 edit_live_dialog.dialog( "close" );
                                 form.cleanForm();
                                 //update row values...
+                                ajaxIndicatorStop();
                                 if (is_new_job) {
                                     var new_id = data;
-                                    var new_row = '<tr><td class="title"><a id="job'+new_id+'" href="#"></a>'+job.title+'</td>';
-                                    new_row += '<td class="post-date">'+job.posted_date+'</td>';
-                                    new_row += '<td class="url"><a href="'+job.url+'">Link</a></td><td class="company-name">'+job.company_name+'</td>';
-                                    new_row += '<td class="location_type">'+job.location_type+'</td><td class="is_foundation"><input class="foundation_check" job_id="'+new_id+'" type="checkbox" /></td>';
-                                    new_row += '<td class="buttons"><a href="#" data-job-id="'+new_id+'" class="edit-live-job roundedButton addDeploymentBtn">Edit</a>';
-                                    new_row += '&nbsp;<a href="#" data-job-id="'+new_id+'" class="delete-live-job roundedButton addDeploymentBtn">Delete</a></td>';
+                                    console.log('new id '+new_id);
+                                    var new_row = '<tr><td class="title"><a id="job' + new_id + '" href="#"></a>' + job.title + '</td>';
+                                    new_row += '<td class="post-date">' + job.posted_date + '</td>';
+                                    new_row += '<td class="url"><a href="' + job.url + '">Link</a></td><td class="company-name">' + job.company + '</td>';
+                                    new_row += '<td class="location_type">' + job.location_type + '</td><td class="is_foundation"><input class="foundation_check" job_id="' + new_id + '" type="checkbox" /></td>';
+                                    new_row += '<td class="buttons"><a href="#" data-job-id="' + new_id + '" class="edit-live-job roundedButton addDeploymentBtn">Edit</a>';
+                                    new_row += '&nbsp;<a href="#" data-job-id="' + new_id + '" class="delete-live-job roundedButton addDeploymentBtn">Delete</a></td>';
                                     new_row += '</tr>';
-
-                                    $('tbody','#posted-jobs-table').prepend(new_row);
-                                } else {
-                                    $('.title',row).text(job.title);
-                                    $('.url',row).find('a').attr('href',job.url);
-                                    $('.location_type',row).text(job.location_type);
-                                    $('.company-name',row).text(job.company_name);
+                                    $('tbody', '#posted-jobs-table').prepend(new_row);
+                                    return;
                                 }
-                                ajaxIndicatorStop();
+                                $('.title',row).text(job.title);
+                                $('.url',row).find('a').attr('href',job.url);
+                                $('.location_type',row).text(job.location_type);
+                                $('.company-name',row).text(job.company);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 ajaxIndicatorStop();
@@ -267,14 +273,20 @@ jQuery(document).ready(function($) {
     var confirm_reject_dialog = $('#dialog-reject-post').dialog({
         resizable: false,
         autoOpen: false,
-        height:380,
-        width: 450,
+        height:500,
+        width: '45.5%',
         modal: true,
         buttons: {
             "Reject": function() {
-                var form     = $('form',confirm_reject_dialog);
+                var form     = $('form', confirm_reject_dialog);
                 //var is_valid = form.valid();
                 //if(!is_valid) return false;
+                form.find('textarea').each(function() {
+                    var text_area = $(this);
+                    var text_editor = tinyMCE.get(text_area.attr('id'));
+                    if (text_editor)
+                        text_area.val(text_editor.getContent());
+                });
                 var id  = parseInt(confirm_reject_dialog.data('id'));
                 var row = confirm_reject_dialog.data('row');
                 var reject_data = {
@@ -308,7 +320,7 @@ jQuery(document).ready(function($) {
     var confirm_post_dialog = $('#dialog-confirm-post').dialog({
         resizable: false,
         autoOpen: false,
-        height:160,
+        height:200,
         modal: true,
         buttons: {
             "Post": function() {
@@ -372,7 +384,6 @@ jQuery(document).ready(function($) {
         }
     });
 
-
     $('.edit-job').click(function(event){
         event.preventDefault();
         event.stopPropagation();
@@ -393,7 +404,9 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_point_of_contact_email',form).val(data.point_of_contact_email);
                 $('#'+form_id+'_title',form).val(data.title);
                 $('#'+form_id+'_url',form).val(data.url);
-                $('#'+form_id+'_company_name',form).val(data.company_name);
+                $('#'+form_id+'_is_coa_needed',form).prop('checked', data.is_coa_needed);
+                $('#'+form_id+'_job_type',form).val(data.job_type);
+                $('.company-composite', form).company_field('setCompany', data.company);
                 $('#'+form_id+'_description',form).val(data.description);
                 $('#'+form_id+'_instructions',form).val(data.instructions);
                 $('#'+form_id+'_expiration_date',form).val(data.expiration_date);
@@ -434,6 +447,7 @@ jQuery(document).ready(function($) {
         var id  = $(this).attr('data-request-id');
         var row = $(this).parent().parent();
         confirm_reject_dialog.data('id',id).data('row',row).dialog( "open");
+        tinymce.get(form_id+'_custom_reject_message').setContent('');
         return false;
     });
 
@@ -462,7 +476,7 @@ jQuery(document).ready(function($) {
         });
     });
 
-    $('.edit-live-job').click(function(event){
+    $(document).on('click', '.edit-live-job', function() {
         event.preventDefault();
         event.stopPropagation();
         var id  = $(this).attr('data-job-id');
@@ -481,7 +495,9 @@ jQuery(document).ready(function($) {
                 //populate edit form
                 $('#'+form_id+'_title',form).val(data.title);
                 $('#'+form_id+'_url',form).val(data.url);
-                $('#'+form_id+'_company_name',form).val(data.company_name);
+                $('#'+form_id+'_is_coa_needed',form).prop('checked', data.is_coa_needed);
+                $('#'+form_id+'_job_type',form).val(data.job_type);
+                $('.company-composite', form).company_field('setCompany', data.company);
                 $('#'+form_id+'_description',form).val(data.description);
                 $('#'+form_id+'_instructions',form).val(data.instructions);
                 $('#'+form_id+'_expiration_date',form).val(data.expiration_date);
@@ -516,11 +532,13 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+
     $('.add-live-job').click(function(event){
+
         event.preventDefault();
         event.stopPropagation();
 
-        var form    = $('form',edit_live_dialog);
+        var form    = $('form', edit_live_dialog);
         form.cleanForm();
         var form_id = form.attr('id');
         edit_live_dialog.dialog( "open");
@@ -531,7 +549,7 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    $('.delete-live-job').click(function(event){
+    $(document).on('click', '.delete-live-job', function() {
         event.preventDefault();
         event.stopPropagation();
         var id  = $(this).attr('data-job-id');

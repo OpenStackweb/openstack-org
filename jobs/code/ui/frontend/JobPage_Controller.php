@@ -22,9 +22,17 @@ class JobPage_Controller extends Page_Controller {
     );
 
     /**
-     * @var JobManager
+     * @var IJobManager
      */
     private $manager;
+
+    public function getJobManager(){
+        return $this->manager;
+    }
+
+    public function setJobManager(IJobManager $manager){
+        $this->manager = $manager;
+    }
 
     function init()	{
         parent::init();
@@ -45,14 +53,6 @@ class JobPage_Controller extends Page_Controller {
         Requirements::javascript('themes/openstack/javascript/pure.min.js');
         Requirements::javascript("jobs/js/job.registration.request.page.js");
 
-        $this->manager = new JobManager(
-            new SapphireJobRepository,
-            new SapphireJobAlertEmailRepository,
-            new JobFactory,
-            new JobsValidationFactory,
-            new SapphireJobPublishingService,
-            SapphireTransactionManager::getInstance()
-        );
     }
 
     function JobForm(){

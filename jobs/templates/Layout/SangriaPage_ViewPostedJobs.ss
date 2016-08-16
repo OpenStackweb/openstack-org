@@ -19,11 +19,11 @@
             <% loop PostedJobs %>
             <tr>
                 <td class="title"><a id="job{$ID}" href="#"></a>$Title</td>
-                <td class="post-date">$JobPostedDate</td>
-                <td class="url"><a href="{$BaseHref}community/jobs/view/{$ID}/{$TitleForUrl}">Link</a></td>
-                <td class="company-name">$JobCompany</td>
-                <td class="location_type">$JobLocation</td>
-                <td class="is_foundation"><input class="foundation_check" job_id="{$ID}" type="checkbox" <% if FoundationJob == 1 %> checked <% end_if %> /></td>
+                <td class="post-date">$PostedDate</td>
+                <td class="url"><a href="{$BaseHref}community/jobs/view/{$ID}/{$Slug}">Link</a></td>
+                <td class="company-name">$CompanyName</td>
+                <td class="location_type">$FormattedLocation</td>
+                <td class="is_foundation"><input class="foundation_check" job_id="{$ID}" type="checkbox" <% if IsFoundationJob == 1 %> checked <% end_if %> /></td>
                 <td class="buttons">
                     <a href="#" data-job-id="{$ID}" class="edit-live-job roundedButton addDeploymentBtn">Edit</a>
                     &nbsp;

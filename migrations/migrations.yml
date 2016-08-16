@@ -38,3 +38,5 @@ migrations:
   - FixSummitEventTypesMigration
   - SetEmailedFlagForSpeakerPromoCodesMigration
   - RemoveOwnerIDColumnPromoCodesMigration
+  - MoveJobPage2JonMigration
+  - DefaultJobTypesSeeding

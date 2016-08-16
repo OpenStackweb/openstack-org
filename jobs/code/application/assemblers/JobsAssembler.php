@@ -26,7 +26,15 @@ final class JobsAssembler {
 		$res['url']                    = $main_info->getUrl();
 		$res['description']            = $main_info->getDescription();
 		$res['instructions']           = $main_info->getInstructions();
-		$res['company_name']           = $main_info->getCompany()->Name;
+        $res['job_type']               = (int)$main_info->getType();
+        $res['is_coa_needed']          = (int)$main_info->isCoaNeeded();
+
+        $res['company']                =
+        [
+            'id'   => $main_info->getCompany()->ID,
+            'name' => $main_info->getCompany()->Name,
+        ];
+
 		$res['location_type']          = $main_info->getLocationType();
 		$expiration_date               = $main_info->getExpirationDate();
 		if(!is_null($expiration_date))
@@ -57,7 +65,14 @@ final class JobsAssembler {
         $res['url']                    = $main_info->getUrl();
         $res['description']            = $main_info->getDescription();
         $res['instructions']           = $main_info->getInstructions();
-        $res['company_name']           = $main_info->getCompany();
+        $res['job_type']               = (int)$main_info->getType();
+        $res['is_coa_needed']          = (int)$main_info->isCoaNeeded();
+
+        $res['company']                =
+            [
+                'id'   => $main_info->getCompany()->ID,
+                'name' => $main_info->getCompany()->Name,
+            ];
         $res['location_type']          = $main_info->getLocationType();
         $expiration_date               = $main_info->getExpirationDate();
         if(!is_null($expiration_date))

@@ -275,6 +275,7 @@ p.type {
 
 .jobPosting .type {
     width: 60px;
+    height: 25px;
 }
 
 .jobPosting .postDate {
@@ -319,5 +320,14 @@ div.jobDescription{
     font-weight: normal !important ;
 }
 
+.glyphicon-remove  {
+    left: auto;
+    right: 20px;
+}
+
+.empty-job-list{
+    padding-top: 8%;
+    text-align: center;
+}
 
 /* @end */

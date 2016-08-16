@@ -77,11 +77,11 @@ jQuery(document).ready(function($) {
             rules: {
                 point_of_contact_name    : { required: true , ValidPlainText:true, maxlength: 100 },
                 point_of_contact_email   : { required: true , email:true, maxlength: 100 },
-                title        : { required: true , ValidPlainText:true, maxlength: 100 },
-                description  : { required: true },
-                instructions : { required: true },
-                company_name : { required: true, ValidPlainText:true },
-                url          : {required: true, email_or_url: true, maxlength: 255},
+                title          : { required: true , ValidPlainText:true, maxlength: 100 },
+                description    : { required: true },
+                instructions   : { required: true },
+                url            : {required: true, email_or_url: true, maxlength: 255},
+                job_type       : {required: true},
                 location_type  : {required: true,locations_min_count:[1,  $('#locations_table',form)]},
                 city:{required:true}
             },
@@ -104,12 +104,6 @@ jQuery(document).ready(function($) {
                 }
                 error.insertAfter(element);
             }
-        });
-        // initialize widgets
-
-        $('#'+form_id+'_company_name').autocomplete({
-            source: 'api/v1/job-registration-requests/companies',
-            minLength: 2
         });
 
         var d = new Date();
@@ -141,7 +135,7 @@ jQuery(document).ready(function($) {
             return false;
         });
 
-        $('#add_location',form).click(function(event){
+        $('#add_location', form).click(function(event){
             event.preventDefault();
             event.stopPropagation();
 
@@ -212,6 +206,7 @@ jQuery(document).ready(function($) {
                     }
 
                 }
+
                 $(this).geocoding({
                     requests:locations,
                     buildGeoRequest:function(location){

@@ -28,14 +28,14 @@ final class CompaniesNamesQueryHandler
 		$topics = array();
 
 		$sql    = <<< SQL
-        SELECT DISTINCT (Company.Name) AS Value FROM Company WHERE
+        SELECT DISTINCT (Company.Name) AS Value, ID FROM Company WHERE
         Company.Name LIKE '%{$term}%'
         LIMIT 20;
 SQL;
 		$results = DB::query($sql);
 		for ($i = 0; $i < $results->numRecords(); $i++) {
 			$record = $results->nextRecord();
-			array_push($topics, new SearchDTO($record['Value'],$record['Value']));
+			array_push($topics, new SearchDTO($record['Value'], $record['Value'], $record['ID']));
 		}
 
 		return new OpenStackImplementationNamesQueryResult($topics);

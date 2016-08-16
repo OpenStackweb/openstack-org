@@ -21,11 +21,28 @@ class JobHolder extends Page {
 /**
  * Class JobHolder_Controller
  */
-class JobHolder_Controller extends Page_Controller {
+final class JobHolder_Controller extends Page_Controller {
 	/**
-	 * @var IEntityRepository
+	 * @var IJobRepository
 	 */
 	private $repository;
+
+    /**
+     * @return IJobRepository
+     */
+    public function getJobRepository()
+    {
+        return $this->repository;
+    }
+
+    /**
+     * @param IJobRepository $repository
+     * @return void
+     */
+    public function setJobRepository(IJobRepository $repository)
+    {
+        $this->repository = $repository;
+    }
 
 	static $allowed_actions = array(
         'JobDetailsPage',
@@ -41,12 +58,10 @@ class JobHolder_Controller extends Page_Controller {
 
 		Requirements::css('jobs/css/jobs.css');
   		Requirements::javascript('jobs/js/jobs.js');
-
-		$this->repository = new SapphireJobRepository;
 	}
 
 	function rss() {
-        $request = Controller::curr()->getRequest();
+        $request    = Controller::curr()->getRequest();
         $foundation = ($request->requestVar('foundation'));
         $jobs = $this->repository->getDateSortedJobs($foundation);
 		$rss = new RSSFeed($jobs, $this->Link(), "OpenStack Jobs Feed");
@@ -54,13 +69,17 @@ class JobHolder_Controller extends Page_Controller {
 	}
 
     public function getDateSortedJobs() {
-        $output = '';
-        $request = Controller::curr()->getRequest();
+        $output     = '';
+        $request    = Controller::curr()->getRequest();
         $foundation = ($request->requestVar('foundation'));
         $jobs = $this->repository->getDateSortedJobs($foundation);
 
         foreach ($jobs as $job) {
-            $output .= $job->renderWith('JobHolder_job');
+                $output .= $job->renderWith('JobHolder_job',
+                    [
+                        'FormattedMoreInfoLink' => $this->getViewInfoLink($job->MoreInfoLink)
+                    ]
+            );
         }
 
         return $output;
@@ -74,11 +93,25 @@ class JobHolder_Controller extends Page_Controller {
 		return '#';
 	}
 
+	function getJobTypes(){
+	    return JobType::get()->sort('Type');
+    }
+
     function JobDetailsPage() {
         $job_id = intval($this->request->param('JOB_ID'));
-        $job = JobPage::get()->byID($job_id);
+        $job = Job::get()->byID($job_id);
         if($job)
             return $this->renderWith(array('JobDetail','Page'),$job);
         return $this->httpError(404, 'Sorry that Job could not be found!.');
+    }
+
+    function getViewInfoLink($info_link){
+        if(filter_var($info_link, FILTER_VALIDATE_EMAIL)) {
+            return '<a rel="nofollow" href="mailto:'.$info_link.'" >More About This Job</a>';
+        }
+        if(filter_var($info_link, FILTER_VALIDATE_URL)) {
+            return '<a rel="nofollow" href="' . $info_link . '" target="_blank" >More About This Job</a>';
+        }
+        return '';
     }
 }

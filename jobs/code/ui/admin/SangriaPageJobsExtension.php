@@ -16,12 +16,18 @@
  */
 final class SangriaPageJobsExtension extends Extension {
 
+    /**
+     * @var IJobRegistrationRequestRepository
+     */
 	private $repository;
+    /**
+     * @var IJobRepository
+     */
     private $live_repository;
 
-	public function __construct(){
-		$this->repository = new SapphireJobRegistrationRequestRepository;
-        $this->live_repository = new SapphireJobRepository;
+	public function __construct(IJobRegistrationRequestRepository $repository, IJobRepository $live_repository){
+		$this->repository      = $repository;
+        $this->live_repository = $live_repository;
 		parent::__construct();
 	}
 
@@ -68,12 +74,12 @@ final class SangriaPageJobsExtension extends Extension {
     }
 
     public function getPostedJobs(){
-        list($list,$size) = $this->live_repository->getAllPosted(0,1000);
+        list($list, $size) = $this->live_repository->getAllPosted(0, PHP_INT_MAX);
         return new ArrayList($list);
     }
 
     public function getPostedJobsCount(){
-        list($list,$size) = $this->live_repository->getAllPosted(0,1000);
+        list($list, $size) = $this->live_repository->getAllPosted(0, PHP_INT_MAX);
         return count($list);
     }
 

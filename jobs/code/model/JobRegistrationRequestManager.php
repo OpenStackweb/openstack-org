@@ -14,7 +14,7 @@
 /**
  * Class JobRegistrationRequestManager
  */
-final class JobRegistrationRequestManager {
+final class JobRegistrationRequestManager implements IJobRegistrationRequestManager {
 	/**
 	 * @var IEntityRepository
 	 */
@@ -72,6 +72,7 @@ final class JobRegistrationRequestManager {
 		$this->jobs_publishing_service = $jobs_publishing_service;
 		$this->tx_manager              = $tx_manager;
 	}
+
 	/**
 	 * @param array $data
 	 * @return IJob
@@ -106,21 +107,28 @@ final class JobRegistrationRequestManager {
 		$validator_factory = $this->validator_factory;
 		$repository        = $this->repository ;
 		$factory           = $this->factory;
+
 		return $this->tx_manager->transaction(function() use($data, $repository, $validator_factory, $factory){
+
 			$validator = $validator_factory->buildValidatorForJobRegistration($data);
+
 			if ($validator->fails()) {
 				throw new EntityValidationException($validator->messages());
 			}
 
 			$request = $repository->getById(intval($data['id']));
+
 			if(!$request)
 				throw new NotFoundEntityException('JobRegistrationRequest',sprintf('id %s',$data['id'] ));
 
 			$request->registerMainInfo($factory->buildJobMainInfo($data));
+
 			$locations = $factory->buildJobLocations($data);
+
 			$request->clearLocations();
 			foreach($locations as $location)
 				$request->registerLocation($location);
+
 			$request->registerPointOfContact($factory->buildJobPointOfContact($data));
 
 			return $request;
@@ -139,8 +147,10 @@ final class JobRegistrationRequestManager {
 		$jobs_publishing_service  = $this->jobs_publishing_service ;
 
 		$job =  $this->tx_manager->transaction(function() use ($id, $repository, $jobs_repository, $factory, $jobs_link, $jobs_publishing_service){
+
 			$request = $repository->getById($id);
 			if(!$request) throw new NotFoundEntityException('JobRegistrationRequest',sprintf('id %s',$id ));
+
 			$job = $factory->buildJob($request);
             // force write we need the id
             $job->write();
@@ -149,14 +159,15 @@ final class JobRegistrationRequestManager {
 
 			//send Accepted message
 			$point_of_contact = $request->getPointOfContact();
-			$name_to  = $point_of_contact->getName();
-			$email_to = $point_of_contact->getEmail();
+			$name_to          = $point_of_contact->getName();
+			$email_to         = $point_of_contact->getEmail();
+
 			if(empty($name_to)  || empty($email_to ))
 				throw new EntityValidationException(array(array('message'=>'invalid point of contact')));
 			$email = EmailFactory::getInstance()->buildEmail(JOB_REGISTRATION_REQUEST_EMAIL_FROM, $email_to, "Your OpenStack Job is Now Live");
 			$email->setTemplate('JobRegistrationRequestAcceptedEmail');
 			$email->populateTemplate(array(
-				'JobLink' => $jobs_link.'view/'.$job->getIdentifier().'/'.$job->getTitleForUrl(),
+				'JobLink' => $jobs_link.'view/'.$job->getIdentifier().'/'.$job->getSlug(),
 			));
 			$email->send();
 			return $job;
@@ -171,7 +182,7 @@ final class JobRegistrationRequestManager {
 	 * @param string $email_alert_to
 	 * @param string $details_url
 	 */
-	public function makeDigest($batch_size=15, $email_alert_to, $details_url){
+	public function makeDigest($batch_size = 15, $email_alert_to, $details_url){
 		$email_repository = $this->email_repository;
 		$repository       = $this->repository;
 		$factory          = $this->factory;
@@ -181,7 +192,7 @@ final class JobRegistrationRequestManager {
 			$query->addAndCondition(QueryCriteria::equal('isPosted', 0));
 			$query->addAndCondition(QueryCriteria::equal('isRejected', 0));
 			if($last_email){
-				$query->addAndCondition(QueryCriteria::greater('ID',$last_email->getLastJobRegistrationRequest()->getIdentifier() ));
+				$query->addAndCondition(QueryCriteria::greater('ID', $last_email->getLastJobRegistrationRequest()->getIdentifier() ));
 			}
 			$query->addOrder(QueryOrder::asc('PostDate'));
 			list($list,$size) = $repository->getAll($query,0,$batch_size);
@@ -210,7 +221,7 @@ final class JobRegistrationRequestManager {
 			$query = new QueryObject;
 			$now   = new DateTime();
 			$now   = $now->sub(new DateInterval($period));
-			$query->addAndCondition(QueryCriteria::lower('JobPostedDate',$now->format('Y-m-d')));
+			$query->addAndCondition(QueryCriteria::lower('PostedDate',$now->format('Y-m-d H:i:s')));
 			list($res,$count) = $repository->getAll($query,0,50);
 			foreach($res as $job){
 				$repository->delete($job);
@@ -218,6 +229,12 @@ final class JobRegistrationRequestManager {
 		});
 	}
 
+    /**
+     * @param $id
+     * @param array $data
+     * @param $jobs_link
+     * @return mixed
+     */
     public function rejectJobRegistration($id, array $data, $jobs_link){
         $this_var           = $this;
         $validator_factory  = $this->validator_factory;
@@ -247,8 +264,8 @@ final class JobRegistrationRequestManager {
                 $email = EmailFactory::getInstance()->buildEmail(JOB_REGISTRATION_REQUEST_EMAIL_FROM, $email_to, "Your Recent OpenStack Job Submission");
                 $email->setTemplate('JobRegistrationRequestRejectedEmail');
                 $email->populateTemplate(array(
-                    'JobLink'         => $jobs_link,
-                    'JobEmailFrom'   => JOB_REGISTRATION_REQUEST_EMAIL_FROM,
+                    'JobLink'           => $jobs_link,
+                    'JobEmailFrom'      => JOB_REGISTRATION_REQUEST_EMAIL_FROM,
                     'AdditionalComment' => @$data['custom_reject_message']
                 ));
                 $email->send();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,38 +11,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
- * Interface IJob
+ * Interface IJobRepository
  */
-interface IJob extends IEntity {
-	/**
-	 * @return void
-	 */
-	public function deactivate();
-
-	/**
-	 * @return IJobLocation[]
-	 */
-	public function locations();
+interface IJobRepository extends IEntityRepository
+{
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return array
+     */
+    public function getAllPosted($offset = 0, $limit = 10);
 
     /**
-     * @param IJobLocation $location
-     * @return mixed
+     * @param int $foundation
+     * @return ArrayList
      */
-	public function addLocation(IJobLocation $location);
-
-	/**
-	 * @return string
-	 */
-	public function getFormattedLocation();
-
-	/**
-	 * @return void
-	 */
-	public function clearLocations();
+    public function getDateSortedJobs($foundation = 0);
 
     /**
-     * @return boolean
+     * @param $keywords
+     * @param $type_id
+     * @param $sort_by
+     * @return ArrayList
      */
-    public function isCOANeeded();
+    public function getJobsByKeywordTypeAndSortedBy($keywords, $type_id, $sort_by);
+
 }

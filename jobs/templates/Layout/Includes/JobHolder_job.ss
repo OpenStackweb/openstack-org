@@ -11,15 +11,15 @@
             <ul class="details">
                 <li class="title">
                     <span class="label">Job Title: </span>
-                    <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl" class="jobTitle">$Title</a>
+                    <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$Slug" class="jobTitle">$Title</a>
                 </li>
                 <li class="employer">
-                    <span class="label">Employer: </span>at <strong>$JobCompany</strong>
+                    <span class="label">Employer: </span>at <strong>$CompanyName</strong>
                 </li>
             </ul>
         </div>
         <div class="col-md-3 postDate">
-            <p><span class="label">Date Posted: </span>$JobPostedDate.format(F) $JobPostedDate.format(d)</p>
+            <p><span class="label">Date Posted: </span>$PostedDate.format(F) $PostedDate.format(d)</p>
         </div>
     </div>
     <% if FormattedLocation %>
@@ -42,14 +42,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div style="max-width:1000px">
-                        $Content
+                        $Description
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div style="max-width: 1000px">
-                        $JobInstructions2Apply
+                        $Instructions2Apply
                     </div>
                 </div>
             </div>
@@ -57,13 +57,13 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="moreInfo">
-                        <span class="label">More information: </span>$MoreInfoLink
+                        <span class="label">More information: </span>$FormattedMoreInfoLink.RAW
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="moreInfo">
                         <span class="label">Job page: </span>
-                        <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl">Permalink to this job</a>
+                        <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$Slug">Permalink to this job</a>
                     </div>
                 </div>
             </div>

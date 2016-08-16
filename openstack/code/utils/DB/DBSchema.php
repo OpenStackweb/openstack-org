@@ -77,4 +77,12 @@ SQL;
 SQL;
         return intval(DB::query($sql)->value()) > 0;
     }
+
+    public static function dropTable($db_name, $table_name)
+    {
+        $sql = <<<SQL
+      DROP TABLE {$table_name};
+SQL;
+        return intval(DB::query($sql)->value()) > 0;
+    }
 }

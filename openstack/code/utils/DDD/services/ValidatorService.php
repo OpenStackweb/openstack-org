@@ -202,10 +202,9 @@ final class ValidatorService implements IValidator {
 	protected function addError($attribute, $rule, $parameters)
 	{
 		$message = $this->getMessage($attribute, $rule);
-
 		$message = $this->doReplacements($message, $attribute, $rule, $parameters);
 
-		array_push($this->messages,array('attribute'=>$attribute,'message'=>$message));
+        $this->messages[] = ['attribute' => $attribute, 'message' => $message];
 	}
 
 	protected function getMessage($attribute, $rule)

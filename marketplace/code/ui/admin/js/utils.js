@@ -12,15 +12,15 @@
  **/
 function ajaxError(jqXHR, textStatus, errorThrown){
     var HTTP_status = jqXHR.status;
-    if(HTTP_status==412){
+    if(HTTP_status == 412){
         response = jQuery.parseJSON(jqXHR.responseText);
         if(response.error==='validation'){
             var msg = '';
-            for(var i=0;i < response.messages.length ; i++) {
+            for(var i=0; i < response.messages.length ; i++) {
                 var error = response.messages[i];
                 msg +='* '+error.message+'\n';
             }
-            displayErrorMessage('validation error',msg);
+            displayErrorMessage('validation error', msg);
         }
         else
             displayErrorMessage('server error',response.error);

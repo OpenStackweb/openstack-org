@@ -77,19 +77,11 @@ extends AbstractRestfulJsonApi {
 			return $this->permissionFailure();
 	}
 
-	public function __construct(){
+	public function __construct(IJobRegistrationRequestManager $manager, IJobRegistrationRequestRepository $repository, IQueryHandler $query){
 		parent::__construct();
-		$this->companies_names_query = new CompaniesNamesQueryHandler;
-		$this->repository            = new SapphireJobRegistrationRequestRepository;
-		$this->manager               = new JobRegistrationRequestManager(
-			$this->repository,
-			new SapphireJobRepository,
-			new SapphireJobAlertEmailRepository,
-			new JobFactory,
-			new JobsValidationFactory,
-			new SapphireJobPublishingService,
-			SapphireTransactionManager::getInstance()
-		);
+		$this->companies_names_query = $query;
+		$this->repository            = $repository;
+		$this->manager               = $manager;
 
 		//filters
 		$this_var = $this;
@@ -254,7 +246,7 @@ extends AbstractRestfulJsonApi {
 		$result = $this->companies_names_query->handle(new OpenStackImplementationNamesQuerySpecification($params["term"]));
 		$res    = array();
 		foreach($result->getResult() as $dto){
-			array_push($res,array('label' => $dto->getLabel(),'value' => $dto->getValue()));
+			array_push($res, [ 'id' => $dto->getId() , 'label' => $dto->getLabel(), 'value' => $dto->getValue()]);
 		}
 		return json_encode($res);
 	}

@@ -18,14 +18,15 @@ final class JobLocation
 	extends DataObject
 	implements IJobLocation {
 
-	static $db = array(
+	static $db = array
+    (
 		'City'          => 'Text',
 		'State'         => 'Text',
 		'Country'       => 'Text',
 	);
 
 	static $has_one = array(
-		'Job'     => 'JobPage',
+		'Job'     => 'Job',
 		'Request' => 'JobRegistrationRequest',
 	);
 

@@ -26,9 +26,17 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
 	);
 
 	/**
-	 * @var JobRegistrationRequestManager
+	 * @var IJobRegistrationRequestManager
 	 */
 	private $manager;
+
+    public function getJobRegistrationRequestManager(){
+        return $this->manager;
+    }
+
+    public function setJobRegistrationRequestManager(IJobRegistrationRequestManager $manager){
+        $this->manager = $manager;
+    }
 
 	function init()	{
 		parent::init();
@@ -39,8 +47,17 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
   		Requirements::css("themes/openstack/css/chosen.css");
 		Requirements::css('jobs/css/job.registration.form.css');
 
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        if (Director::isLive())
+        {
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
+        }
+        else
+        {
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.js");
+            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.js");
+        }
+
         Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
 
 		$js_files = array(
@@ -56,16 +73,6 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
 
 		foreach($js_files as $js_file)
 			Requirements::javascript($js_file);
-
-		$this->manager = new JobRegistrationRequestManager(
-			new SapphireJobRegistrationRequestRepository,
-			new SapphireJobRepository,
-			new SapphireJobAlertEmailRepository,
-			new JobFactory,
-			new JobsValidationFactory,
-			new SapphireJobPublishingService,
-			SapphireTransactionManager::getInstance()
-		);
 	}
 
 	function JobRegistrationRequestForm(){

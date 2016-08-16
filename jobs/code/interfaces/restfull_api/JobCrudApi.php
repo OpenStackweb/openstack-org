@@ -14,8 +14,7 @@
 /**
  * Class JobCrudApi
  */
-final class JobCrudApi
-extends AbstractRestfulJsonApi {
+final class JobCrudApi extends AbstractRestfulJsonApi {
 
 	const ApiPrefix = 'api/v1/jobs';
 
@@ -47,26 +46,6 @@ extends AbstractRestfulJsonApi {
 	 */
 	private $repository;
 
-	/**
-	 * @var IQueryHandler
-	 */
-	private $companies_names_query;
-
-	/// FILTERS
-	/**
-	 * @param $request
-	 * @return SS_HTTPResponse
-	 */
-	public function checkJobTasksAuthentication($request){
-		$auth_response = $this->isHttpBasicAuthPresent();
-		if(!$auth_response)
-			return $this->unauthorizedHttpBasicAuth('Restricted area');
-
-		list($user,$password) = $auth_response;
-		if($user != JOB_TASKS_USER || $password != JOB_TASKS_PASS){
-			return $this->unauthorizedHttpBasicAuth('Restricted area');
-		}
-	}
 
 	/**
 	 * @param $request
@@ -77,18 +56,10 @@ extends AbstractRestfulJsonApi {
 			return $this->permissionFailure();
 	}
 
-	public function __construct(){
+	public function __construct(IJobRepository $repository, IJobManager $manager){
 		parent::__construct();
-		$this->companies_names_query = new CompaniesNamesQueryHandler;
-		$this->repository            = new SapphireJobRepository;
-		$this->manager               = new JobManager(
-			$this->repository,
-			new SapphireJobAlertEmailRepository,
-			new JobFactory,
-			new JobsValidationFactory,
-			new SapphireJobPublishingService,
-			SapphireTransactionManager::getInstance()
-		);
+		$this->repository            = $repository;
+		$this->manager               = $manager;
 
 		//filters
 		$this_var = $this;
@@ -110,7 +81,6 @@ extends AbstractRestfulJsonApi {
 	 * @var array
 	 */
 	static $url_handlers = array(
-		'GET companies'                 => 'companies',
         'GET list'                      => 'getJobList',
         'PUT $JOB_ID/toggle_foundation' => 'toggleFoundationJob',
 		'PUT $JOB_ID/delete'            => 'deleteJob',
@@ -126,8 +96,7 @@ extends AbstractRestfulJsonApi {
 		'deleteJob',
 		'getJob',
 		'updateJob',
-		'companies',
-        'toggleFoundationJob',
+		'toggleFoundationJob',
         'addJob',
         'getJobList'
 	);
@@ -227,8 +196,8 @@ extends AbstractRestfulJsonApi {
         try{
             $data = $this->getJsonRequest();
             if (!$data) return $this->serverError();
-            $job_id = $this->manager->addJob($data);
-            return $job_id;
+            $job = $this->manager->addJob($data);
+            return $this->ok($job->getIdentifier());
         }
         catch(NotFoundEntityException $ex1){
             SS_Log::log($ex1,SS_Log::WARN);
@@ -250,16 +219,20 @@ extends AbstractRestfulJsonApi {
      */
     public function getJobList(SS_HTTPRequest $request){
         try{
-            $output = $this->loadRAWResponseFromCache($request);
-            if(!is_null($output)) return $output;
+            /*$output = $this->loadRAWResponseFromCache($request);
+
+            if(!is_null($output)) return $output;*/
+
             $output = '';
-            $foundation = $request->getVar('foundation');
-            $jobs = $this->repository->getDateSortedJobs($foundation);
+            $kw      = $request->getVar('kw');
+            $type_id = $request->getVar('type_id');
+            $sort_by = $request->getVar('sort_by');
+            $jobs    = $this->repository->getJobsByKeywordTypeAndSortedBy($kw, $type_id, $sort_by);
 
             foreach ($jobs as $job) {
                 $output .= $job->renderWith('JobHolder_job');
             }
-            $this->saveRAWResponseToCache($request, $output);
+            //$this->saveRAWResponseToCache($request, $output);
             return $output;
         }
         catch(NotFoundEntityException $ex1){
