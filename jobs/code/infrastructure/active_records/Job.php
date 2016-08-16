@@ -31,7 +31,7 @@ final class Job	extends DataObject implements IJob {
 		'IsFoundationJob'       => 'Boolean',
 		'IsActive'              => 'Boolean',
 		'Instructions2Apply'    => 'HTMLText',
-		'LocationType'          =>  'Enum(array("'.self::LocationTypeNA.'","'.self::LocationTypeRemote.'", "'.self::LocationTypeVarious.'"), "'.self::LocationTypeNA.'")',
+		'LocationType'          => 'Enum(array("N/A","Remote", "Various"), "Various")',
         'IsCOANeeded'           => 'Boolean',
 	);
 
