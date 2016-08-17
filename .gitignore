@@ -83,3 +83,4 @@ fluent/
 *.bundle.js
 opengraph/
 translatable/
+.DS_Store

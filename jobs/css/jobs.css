@@ -150,7 +150,8 @@ div.button1:hover {
   background-color: #30739C;
   color: white;
   border-radius: 3px;
-  display: inline-block;  
+  display: inline-block; 
+  height: 40px; 
 }
 
 .button2 + .glyphicon {
@@ -159,7 +160,13 @@ div.button1:hover {
   margin: 15px;  
 }
 
-.glyphicon-share-alt {
+.button3 + .glyphicon {
+  position: absolute;
+  display: inline-block;
+  margin: 15px;  
+}
+
+.glyphicon-share-alt,  .glyphicon-plus {
     margin-left: 10px;
     display: inline-block;
     font-size: 12px;
@@ -175,12 +182,51 @@ div.button1:hover {
     font-size: 8px;
 }
 
+.jobBasics-2 .glyphicon-map-marker {
+    padding-left: 10px;
+}
+
 div.button2:hover {
     background-color: #2A4E68;
 }
 
 input:hover {
     background-color: #E6E6E6;
+}
+
+.button3 {
+  background-color: white;
+  color: #30739C;
+  border: 2px solid #30739C;
+  border-radius: 3px;
+  display: inline-block; 
+  vertical-align: bottom;
+  height: 40px;
+}
+
+.button3 h5 {
+    margin: 10px 20px 15px 5px;
+    display: inline-block;
+    color: #30739C;
+}
+
+div.button3:hover {
+    background-color: #2A4E68;
+    color: white;
+}
+
+div.button3:hover h5 {
+    color: white;
+}
+
+
+.descriptionButtons {
+    display: inline-block;
+    position: relative;
+}
+
+#apply {
+    padding-bottom: 0;
 }
 
 .detail_title {
@@ -230,10 +276,29 @@ div.publishedDate h5 {
 .jobBasics {
     float: right;
 }
+.jobBasics-2 {
+    float: left;
+}
 
 #coa { /* OpenStack certified admnistrator logo properties */
     width:5em;
     height:5em;
+}
+
+.job_title_hold { /* Job list page job title but has hover issue*/
+    font-size: 25px;
+    pointer-events: none;
+}
+
+#moreInfoButton h5 {
+    color: #30739C;
+    text-decoration: none;
+}
+
+#moreInfoButton h5:hover {
+    color: #2A4E68;
+    text-decoration: none;
+    pointer-events: none;
 }
 
 /* Original Jobs page CSS rulesets below here */
@@ -275,7 +340,6 @@ p.type {
 
 .jobPosting .type {
     width: 60px;
-    height: 25px;
 }
 
 .jobPosting .postDate {
@@ -321,13 +385,14 @@ div.jobDescription{
 }
 
 .glyphicon-remove  {
-    left: auto;
-    right: 20px;
+   left: auto;
+   right: 20px;
 }
 
 .empty-job-list{
-    padding-top: 8%;
-    text-align: center;
+   padding-top: 8%;
+   text-align: center;
 }
+
 
 /* @end */
