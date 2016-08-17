@@ -26,7 +26,8 @@ final class SapphireCOAExamRepository extends SapphireRepository {
             ->where("CertifiedOpenStackAdministratorExam.CertificationNumber = '{$cert}'
                     AND Member.Surname = '{$last_name}'
                     AND CertifiedOpenStackAdministratorExam.CertificationExpirationDate > UTC_DATE()
-                    AND CertifiedOpenStackAdministratorExam.CertificationStatus = 'Achieved' "
+                    AND CertifiedOpenStackAdministratorExam.CertificationStatus = 'Achieved' 
+                    AND CertifiedOpenStackAdministratorExam.Status = 'Pass' "
                     );
     }
 

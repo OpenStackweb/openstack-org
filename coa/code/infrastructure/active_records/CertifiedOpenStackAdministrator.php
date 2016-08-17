@@ -65,7 +65,7 @@ final class CertifiedOpenStackAdministrator extends DataExtension implements ICe
     public function hasAvailableCertifications()
     {
         return intval($this->owner->Exams()
-            ->where(" (CertificationStatus = 'Achieved' OR CertificationStatus = 'Renewed') AND CertificationExpirationDate > UTC_DATE() ")
+            ->where("Status = 'Pass' AND (CertificationStatus = 'Achieved' OR CertificationStatus = 'Renewed') AND CertificationExpirationDate > UTC_DATE() ")
             ->count()) > 0;
     }
 
@@ -75,7 +75,7 @@ final class CertifiedOpenStackAdministrator extends DataExtension implements ICe
     public function getLatestCertification()
     {
         $exam = $this->owner->Exams()
-            ->where(" (CertificationStatus = 'Achieved' OR CertificationStatus = 'Renewed') AND CertificationExpirationDate > UTC_DATE() ")
+            ->where("Status = 'Pass' AND (CertificationStatus = 'Achieved' OR CertificationStatus = 'Renewed') AND CertificationExpirationDate > UTC_DATE() ")
             ->first();
         return is_null($exam) ? null : $exam->getCertification();
     }
