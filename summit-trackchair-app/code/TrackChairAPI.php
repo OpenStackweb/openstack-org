@@ -746,6 +746,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 class TrackChairAPI_PresentationRequest extends RequestHandler
 {
 
+    use RestfulJsonApiResponses;
+
     /**
      * @var array
      */

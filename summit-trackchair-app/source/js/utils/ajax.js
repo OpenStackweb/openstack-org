@@ -22,8 +22,14 @@ export const responseHandler = (dispatch, success, errorHandler) => {
 				errorHandler(err, res);
         	}
         	else {
-        		console.log(err, res);
-				dispatch(throwError(GENERIC_ERROR));
+        		let errorMessage = GENERIC_ERROR;
+        		if(res.type === 'application/json' && res.text) {        			
+        			const errorResponse = JSON.parse(res.text);        			
+        			if(Array.isArray(errorResponse.messages)) {
+        				errorMessage = errorResponse.messages[0].message;        				
+        			}
+        		}
+				dispatch(throwError(errorMessage));
         	}
         }
         else if(typeof success === 'function') {
@@ -31,30 +37,3 @@ export const responseHandler = (dispatch, success, errorHandler) => {
         }
     };	
 };
-
-
-
-
-// function ajax(method, url, data = null) {
-//   return new Promise(function (resolve, reject) {
-//     var req = request;
-//     method = method.toUpperCase();
-
-//     if (method !== 'GET') {
-//       req = req[method.toLowerCase()].send(data);      
-//     } 
-//     else {
-//       req = req.get(url);
-//     }
-
-//     req.end(function (err, res) {
-//       if (res.ok) {      	
-//         resolve(res.text);
-//       } else {
-//         reject(res.text);
-//       }
-//     });
-//   });
-// }
-
-// export default ajax;
