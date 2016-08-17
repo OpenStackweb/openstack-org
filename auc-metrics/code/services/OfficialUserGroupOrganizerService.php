@@ -79,7 +79,7 @@ class OfficialUserGroupOrganizerService implements MetricService
             if ($member) {
                 $members->push(Result::create($member));
             } else {
-                echo "Member with email " . $row['Email'] . " not found\n";
+                echo "[WARN] Member with email " . $row['Email'] . " not found\n";
             }
         }
 

@@ -98,7 +98,7 @@ class ActiveUserCommitteeWorkingGroupsService implements MetricService
                     "$attendanceCount / $linesSaid"
                 ));
             } else {
-                echo "No member with nickname {$nickname}\n";
+                echo "[WARN] No member with nickname {$nickname}\n";
             }
 
         }

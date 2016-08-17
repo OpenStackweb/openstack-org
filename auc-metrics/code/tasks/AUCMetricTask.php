@@ -67,8 +67,7 @@ class AUCMetricTask extends CronTask
                 }
 
                 foreach ($members as $m) {
-                    if ($m->hasAUCMetric($identifier)) {
-                        $this->writeln("Member {$m->Email} already has $identifier. Skipping.");
+                    if ($m->hasAUCMetric($identifier)) {                        
                         continue;
                     }
 

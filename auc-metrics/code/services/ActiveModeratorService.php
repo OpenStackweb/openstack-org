@@ -75,6 +75,9 @@ class ActiveModeratorService implements MetricService
                     Result::create($member, $value)
                 );
             }
+            else {
+            	echo "[WARN] Member $username not found.\n";
+            }
         }
 
         return $results;

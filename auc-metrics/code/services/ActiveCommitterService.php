@@ -101,6 +101,7 @@ class ActiveCommitterService implements MetricService
         foreach ($memberMap as $email => $repos) {
             $member = Member::get()->filter('Email', $email)->first();
             if (!$member) {
+            	echo "[WARN] Member $email not found.\n";
                 continue;
             }
 
