@@ -70,7 +70,7 @@ class PresentationTrackChairFeatures extends DataExtension
     	$pass = $collection === SummitSelectedPresentation::COLLECTION_PASS;
     	$selected = $collection === SummitSelectedPresentation::COLLECTION_SELECTED;
 
-    	if(!$maybe && !$pass && !$selected && !$alternate) {
+    	if(!$maybe && !$pass && !$selected) {
     		throw new InvalidArgumentException("assignToIndividualList() must take a collection argument of COLLECTION_MAYBE, COLLECTION_PASS, or COLLECTION_SELECTED per the SummitSelectedPresentation class definition");
     	}
 
