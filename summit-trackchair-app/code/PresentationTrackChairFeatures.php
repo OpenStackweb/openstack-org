@@ -90,7 +90,7 @@ class PresentationTrackChairFeatures extends DataExtension
             ->max('Order');
         
         if($selected && $highestOrderInList >= $highestSelection) {
-        	throw new Exception("Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.");
+        	throw new EntityValidationException("Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.");
         }
 
         if (!$selectedPresentation) {

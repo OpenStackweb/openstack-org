@@ -5,7 +5,7 @@
  */
 class TrackChairAPI extends AbstractRestfulJsonApi
 {
-
+    use RestfulJsonApiResponses;
     /**
      * @var array
      */
@@ -1013,23 +1013,33 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             return $this->httpError(403);
         }
 
-        $maybe = SummitSelectedPresentation::COLLECTION_MAYBE;
-        $pass = SummitSelectedPresentation::COLLECTION_PASS;
-        $selected = SummitSelectedPresentation::COLLECTION_SELECTED;
-        
-        switch($r->getVar('type')) {
-        	case $maybe:
-        		$this->presentation->assignToIndividualList($maybe);
-        		break;
-        	case $pass:
-        		$this->presentation->assignToIndividualList($pass);
-        		break;
-        	default:
-        		$this->presentation->assignToIndividualList($selected);
-        		break;
+        try {
+            $maybe    = SummitSelectedPresentation::COLLECTION_MAYBE;
+            $pass     = SummitSelectedPresentation::COLLECTION_PASS;
+            $selected = SummitSelectedPresentation::COLLECTION_SELECTED;
+
+            switch ($r->getVar('type')) {
+                case $maybe:
+                    $this->presentation->assignToIndividualList($maybe);
+                    break;
+                case $pass:
+                    $this->presentation->assignToIndividualList($pass);
+                    break;
+                default:
+                    $this->presentation->assignToIndividualList($selected);
+                    break;
+            }
+
+            return new SS_HTTPResponse('OK');
         }
-        
-        return new SS_HTTPResponse('OK');
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
     }
 
     /**
