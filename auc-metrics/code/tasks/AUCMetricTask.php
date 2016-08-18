@@ -47,18 +47,24 @@ class AUCMetricTask extends CronTask
 
             $expiryDate = date('Y-m-d', strtotime(AUCMetric::config()->expiry));
             $newMetricCount = 0;
-
+            $errorData = ArrayList::create();
             foreach ($this->services as $service) {
                 $identifier = $service->getMetricIdentifier();
                 $this->writeHeader("Running service $identifier");
                 try {
-                    $results = $service->getResults();
+                    $service->run();
                 } catch (Exception $e) {
                     $this->writeln($e->getMessage());
                     SS_Log::log($e->getMessage(), SS_Log::ERR);
                     continue;
                 }
 
+                $results = $service->getResults();
+                if(!$results) {
+                	$this->writeln('No results!');
+                	continue;
+                }
+                
                 $members = $results->getMemberList();
 
                 if (!$members) {
@@ -88,12 +94,41 @@ class AUCMetricTask extends CronTask
                     $newMetricCount++;
                 }
 
+                $errors = $service->getErrors();
+                if(!empty($errors)) {
+                	$errorList = ArrayList::create();
+                	foreach($errors as $e) {
+                		$errorList->push(ArrayData::create(['Title' => $e]));
+                	}
+                	$serviceData = ArrayData::create([
+                		'Title' => $identifier,
+                		'Errors' => $errorList
+                	]);
+
+                	$errorData->push($serviceData);
+                }
+
+
             }
 
             $msg = "Done. Created $newMetricCount new metric assignments";
             SS_Log::log($msg, SS_Log::INFO);
 
             $this->writeln($msg);
+
+            if($errorData->exists()) {
+	            $email = EmailFactory::getInstance()->buildEmail(
+	            	null,
+	            	$this->config()->email_to,
+	            	'AUC Metric task: A few things need your attention'
+	            );
+	            $email->setTemplate('AUCMetricTaskEmail');
+	            $email->populateTemplate([
+	            	'Services' => $errorData
+	            ]);
+	            $email->send();
+
+            }
         });
     }
 

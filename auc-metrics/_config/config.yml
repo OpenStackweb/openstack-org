@@ -25,3 +25,5 @@ AUCActiveCommitterService:
   keyfile: '/root/.ssh/id_rsa'
 AUCMetric:
   expiry: '+6 months'
+AUCMetricTask:
+  email_to: 'tom@openstack.org'

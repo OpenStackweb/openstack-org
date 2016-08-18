@@ -11,7 +11,7 @@ use \Injector;
  * Class OfficialUserGroupOrganizerService
  * @package OpenStack\AUC
  */
-class OfficialUserGroupOrganizerService implements MetricService
+class OfficialUserGroupOrganizerService extends BaseService implements MetricService
 {
 
     use ParserCreator;
@@ -26,7 +26,7 @@ class OfficialUserGroupOrganizerService implements MetricService
         return null;
     }
 
-    public function getResults()
+    public function run()
     {
         if (!defined('GROUP_CONTACT_REPORT_TOKEN')) {
             throw new Exception(
@@ -67,7 +67,7 @@ class OfficialUserGroupOrganizerService implements MetricService
             'Type' => 'Type'
         ]);
 
-        $members = ResultList::create();
+        $this->results = ResultList::create();
         foreach ($parser as $row) {
             $email = $row['Email'];
             $member = Member::get()->filterAny([
@@ -77,15 +77,13 @@ class OfficialUserGroupOrganizerService implements MetricService
             ])->first();
 
             if ($member) {
-                $members->push(Result::create($member));
+                $this->results->push(Result::create($member));
             } else {
-                echo "[WARN] Member with email " . $row['Email'] . " not found\n";
+                $this->logError("Member with email " . $row['Email'] . " not found");
             }
         }
 
         unlink($csvPath);
-
-        return $members;
     }
 
     protected function getHTTPClient()

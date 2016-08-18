@@ -6,7 +6,7 @@ namespace OpenStack\AUC;
  * Class SuperUserService
  * @package OpenStack\AUC
  */
-class SuperUserService implements MetricService
+class SuperUserService extends BaseService implements MetricService
 {
 
     /**
@@ -28,9 +28,9 @@ class SuperUserService implements MetricService
     /**
      * @return static
      */
-    public function getResults()
+    public function run()
     {
-        return ResultList::create();
+        $this->results = ResultList::create();
     }
 
 }

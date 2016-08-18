@@ -11,7 +11,7 @@ use \Member;
  * Class ActiveCommitterService
  * @package OpenStack\AUC
  */
-class ActiveCommitterService implements MetricService
+class ActiveCommitterService extends BaseService implements MetricService
 {
     use ProcessCreator;
     use ParserCreator;
@@ -33,9 +33,9 @@ class ActiveCommitterService implements MetricService
     }
 
     /**
-     * @return OpenStack\AUC\ResultList
+     * @return void
      */
-    public function getResults()
+    public function run()
     {
         $outputDir = Controller::join_links(
             TEMP_FOLDER,
@@ -73,7 +73,7 @@ class ActiveCommitterService implements MetricService
         }
 
         $memberMap = [];
-        $members = ResultList::create();
+        $this->results = ResultList::create();
 
         foreach (glob($outputDir . '/*.csv') as $filename) {
             $parser = $this->createCommitterParser($filename);
@@ -91,7 +91,7 @@ class ActiveCommitterService implements MetricService
                     }
                     $memberMap[$member->Email][] = basename($filename, '.csv');
                 } else {
-                    echo "Member with email " . $row['Email'] . " not found\n";
+                    $this->logError("Member with email " . $row['Email'] . " not found");
                 }
             }
 
@@ -101,19 +101,16 @@ class ActiveCommitterService implements MetricService
         foreach ($memberMap as $email => $repos) {
             $member = Member::get()->filter('Email', $email)->first();
             if (!$member) {
-            	echo "[WARN] Member $email not found.\n";
+            	$this->logError("Member $email not found.");
                 continue;
             }
 
-            $members->push(Result::create(
+            $this->results->push(Result::create(
                 $member,
                 implode(', ', $repos)
             ));
         }
-
-        return $members;
     }
-
 
     /**
      * @param $filename

@@ -9,7 +9,7 @@ use \Summit;
  * Class TrackChairService
  * @package OpenStack\AUC
  */
-class TrackChairService implements MetricService
+class TrackChairService extends BaseService implements MetricService
 {
 
     /**
@@ -31,15 +31,15 @@ class TrackChairService implements MetricService
     /**
      * @return static
      */
-    public function getResults()
+    public function run()
     {
-        $results = ResultList::create();
+        $this->results = ResultList::create();
         $chairs = SummitTrackChair::get()->filter([
             'SummitID' => Summit::get_active()->ID
         ]);
 
         foreach ($chairs as $chair) {
-            $results->push(
+            $this->results->push(
                 Result::create(
                     $chair->Member(),
                     implode(', ', $chair->Categories()->column('Title'))
@@ -47,6 +47,5 @@ class TrackChairService implements MetricService
             );
         }
 
-        return $results;
     }
 }

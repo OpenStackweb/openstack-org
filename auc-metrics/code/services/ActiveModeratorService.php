@@ -10,7 +10,7 @@ use \Member;
  * Class ActiveModeratorService
  * @package OpenStack\AUC
  */
-class ActiveModeratorService implements MetricService
+class ActiveModeratorService extends BaseService implements MetricService
 {
     use ProcessCreator;
 
@@ -24,7 +24,7 @@ class ActiveModeratorService implements MetricService
         return "User ID";
     }
 
-    public function getResults()
+    public function run()
     {
         $execPath = Controller::join_links(
             BASE_PATH,
@@ -45,7 +45,7 @@ class ActiveModeratorService implements MetricService
 
         $output = $process->getOutput();
         $parts = preg_split("/((\r?\n)|(\r\n?))/", $output);
-        $results = ResultList::create();
+        $this->results = ResultList::create();
 
         foreach ($parts as $line) {
             if (preg_match('/^Getting page: [0-9]+/', $line)) {
@@ -71,15 +71,13 @@ class ActiveModeratorService implements MetricService
             ])->first();
 
             if ($member) {
-                $results->push(
+                $this->results->push(
                     Result::create($member, $value)
                 );
             }
             else {
-            	echo "[WARN] Member $username not found.\n";
+            	$this->logError("Member $username not found.");
             }
         }
-
-        return $results;
     }
 }

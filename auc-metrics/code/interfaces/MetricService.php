@@ -15,9 +15,19 @@ interface MetricService
     public function getMetricIdentifier();
 
     /**
+     * @return void;
+     */
+    public function run();
+
+    /**
      * @return OpenStack\AUC\ResultList
      */
     public function getResults();
+
+    /**
+     * @return array
+     */
+    public function getErrors();
 
     /**
      * @return string

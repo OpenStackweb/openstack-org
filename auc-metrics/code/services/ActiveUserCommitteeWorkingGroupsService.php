@@ -10,7 +10,7 @@ use \Member;
  * Class ActiveUserCommitteeWorkingGroupsService
  * @package OpenStack\AUC
  */
-class ActiveUserCommitteeWorkingGroupsService implements MetricService
+class ActiveUserCommitteeWorkingGroupsService extends BaseService implements MetricService
 {
 
     use ProcessCreator;
@@ -27,7 +27,7 @@ class ActiveUserCommitteeWorkingGroupsService implements MetricService
     }
 
 
-    public function getResults()
+    public function run()
     {
         $outputDir = Controller::join_links(
             TEMP_FOLDER,
@@ -80,7 +80,7 @@ class ActiveUserCommitteeWorkingGroupsService implements MetricService
         $output = $process->getOutput();
         $parts = explode('OVERALL STATS', $output);
         $parts = preg_split("/((\r?\n)|(\r\n?))/", $parts[1]);
-        $results = ResultList::create();
+        $this->results = ResultList::create();
 
         foreach ($parts as $line) {
             preg_match('/^([^=\s]+)\s+([0-9]+)\s+([0-9]+)\s*$/', $parts[1], $matches);
@@ -93,16 +93,14 @@ class ActiveUserCommitteeWorkingGroupsService implements MetricService
 
             $member = Member::get()->filter('IRCHandle', $nickname)->first();
             if ($member) {
-                $results->push(Result::create(
+                $this->results->push(Result::create(
                     $member,
                     "$attendanceCount / $linesSaid"
                 ));
             } else {
-                echo "[WARN] No member with nickname {$nickname}\n";
+                $this->logError("No member with nickname {$nickname}");
             }
 
         }
-
-        return $results;
     }
 }
