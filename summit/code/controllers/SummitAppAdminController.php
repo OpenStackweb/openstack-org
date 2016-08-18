@@ -117,6 +117,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'promocodes_sponsors',
         'editPromoCodeSponsor',
         'promocodes_bulk',
+        'speakers_merge',
+        'events_bulk',
     );
 
     private static $url_handlers = array
@@ -129,11 +131,13 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/events/unpublished'                              => 'pendingEvents',
         '$SummitID!/events/presentation-lists/$PresentationListId!'  => 'editPresentationList',
         '$SummitID!/events/presentation-lists'                       => 'presentationLists',
+        '$SummitID!/events/bulk'                                     => 'events_bulk',
         '$SummitID!/events/$EventID'                                 => 'editEvent',
         '$SummitID!/tickets'                                         => 'ticketTypes',
         '$SummitID!/attendees/$AttendeeID!'                          => 'editAttendee',
         '$SummitID!/attendees'                                       => 'attendees',
         '$SummitID!/edit'                                            => 'editSummit',
+        '$SummitID!/speakers/merge'                                  => 'speakers_merge',
         '$SummitID!/speakers/$SpeakerID!'                            => 'editSpeaker',
         '$SummitID!/speakers'                                        => 'speakers',
         '$SummitID!/promocodes/sponsors/$SponsorID!'                 => 'editPromoCodeSponsor',
@@ -593,6 +597,43 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                 )
             )
         );
+    }
+
+    public function speakers_merge(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+
+        $summit = Summit::get()->byID($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('summit/css/summit-admin-speaker-merge.css');
+
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        Requirements::javascript('summit/javascript/summit-admin-speaker-merge.js');
+
+        return $this->getViewer('speakers_merge')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                        )
+                    )
+            );
     }
 
     public function editSpeaker(SS_HTTPRequest $request)

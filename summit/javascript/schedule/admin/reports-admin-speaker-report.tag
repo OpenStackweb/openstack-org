@@ -70,9 +70,10 @@
             $('body').ajax_loader();
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
+            var filter = $('#status-filter').val();
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/speaker_report',
-                {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir},
+                {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir, filter:filter},
                 function(data){
                     self.speakers = data.data;
                     self.page_data.page = page;
@@ -134,6 +135,10 @@
             var sort     = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
             window.open('api/v1/summits/'+self.summit_id+'/reports/export/speaker_report?sort='+sort+'&sort_dir='+sort_dir, '_blank');
+        });
+
+        self.dispatcher.on(self.dispatcher.GET_SPEAKER_REPORT,function() {
+            self.getReport(1);
         });
 
 

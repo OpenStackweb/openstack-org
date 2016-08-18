@@ -79,9 +79,10 @@
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
             var term = $('#search-term').val();
+            var filter = $('#status-filter').val();
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/presentation_report',
-                {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term},
+                {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term, filter: filter},
                 function(data){
                     self.presentations = data.data;
                     self.page_data.page = page;

@@ -66,9 +66,12 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
     }
 
     static $url_handlers = array(
+        'GET byID/$SPEAKER_ID!'        => 'getSpeakerByID',
+        'GET only/$TERM!'              => 'getSpeakersOnlyByTerm',
         'GET $TERM!'                   => 'getSpeakersByTerm',
         'GET '                         => 'getSpeakers',
         'POST '                        => 'addSpeaker',
+        'POST merge/$ID_ONE!/$ID_TWO!' => 'mergeSpeakers',
         'PUT $SPEAKER_ID!'             => 'updateSpeaker',
         'POST $SPEAKER_ID!/pic'        => 'uploadSpeakerPic',
     );
@@ -79,6 +82,9 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
         'updateSpeaker',
         'addSpeaker',
         'uploadSpeakerPic',
+        'getSpeakerByID',
+        'mergeSpeakers',
+        'getSpeakersOnlyByTerm',
     );
 
     // this is called when typing a Speakers name to add as a tag on edit event
@@ -90,6 +96,28 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $summit       = Summit::get_by_id('Summit',$summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             return $this->ok($this->speaker_repository->searchByTerm($term), false);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    // this is called when typing a Speakers name to add as a tag on edit event
+    public function getSpeakersOnlyByTerm(SS_HTTPRequest $request){
+        try
+        {
+            $term         = Convert::raw2sql($request->param('TERM'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = Summit::get_by_id('Summit',$summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            return $this->ok($this->speaker_repository->searchSpeakersOnlyByTerm($term), false);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -140,6 +168,49 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             }
 
             return $this->ok(array('page' => $page, 'page_size' => $page_size, 'count' => $count, 'speakers' => $data));
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getSpeakerByID(SS_HTTPRequest $request){
+        try
+        {
+            $speaker_id   = intval($request->param('SPEAKER_ID'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = Summit::get_by_id('Summit',$summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $speaker = PresentationSpeaker::get_by_id('PresentationSpeaker',$speaker_id);
+            $speaker_array = array(
+                'Title' => $speaker->Title,
+                'FirstName' => $speaker->FirstName,
+                'LastName' => $speaker->LastName,
+                'Email' => $speaker->Member()->Email,
+                'Twitter' => $speaker->TwitterName,
+                'IRC' => $speaker->IRCHandle,
+                'Bio' => $speaker->Bio,
+                'Pic' => ($speaker->Photo()->Exists()) ? $speaker->Photo()->getTag() : '',
+                'Expertise' => $speaker->AreasOfExpertise()->toNestedArray(),
+                'Presentations' => $speaker->Presentations()->toNestedArray(),
+                'OtherPresentations' => $speaker->OtherPresentationLinks()->toNestedArray(),
+                'TravelPreferences' => $speaker->TravelPreferences()->toNestedArray(),
+                'Languages' => $speaker->Languages()->toNestedArray(),
+                'Promocodes' => $speaker->PromoCodes()->toNestedArray(),
+                'Assistances' => $speaker->SummitAssistances()->toNestedArray(),
+                'OrganizationalRoles' => $speaker->OrganizationalRoles()->toNestedArray(),
+                'ActiveInvolvements' => $speaker->ActiveInvolvements()->toNestedArray(),
+            );
+
+            return $this->ok($speaker_array, false);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -249,6 +320,35 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->serverError();
+        }
+    }
+
+    public function mergeSpeakers(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $speaker_1    = intval($request->param('ID_ONE'));
+            $speaker_2    = intval($request->param('ID_TWO'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data         = $this->getJsonRequest();
+            $this->summit_service->mergeSpeakers($summit, $speaker_1, $speaker_2, $data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $ex->getMessage();
         }
     }
 }

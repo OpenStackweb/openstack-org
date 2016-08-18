@@ -13,10 +13,22 @@
                     <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>New Event
                 </a>
             </li>
+            <li <% if $Active == 11 %> class="active" <% end_if %>>
+                <a href="$AdminLink/$SummitID/events/bulk">
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Bulk Actions
+                </a>
+            </li>
         </ul>
     </li>
     <li <% if $Active == 6 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/speakers"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Speakers</a>
+        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+            <li <% if $Active == 10 %> class="active" <% end_if %>>
+                <a href="$AdminLink/$SummitID/speakers/merge">
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Merge
+                </a>
+            </li>
+        </ul>
     </li>
     <li <% if $Active == 5 %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/reports"><span class="fa-stack fa-lg pull-left"><i class="fa fa-list fa-stack-1x "></i></span>Reports</a>

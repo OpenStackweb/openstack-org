@@ -24,7 +24,7 @@ final class SapphireSummitAssistanceRepository extends SapphireRepository implem
      * @param int $summit_id
      * @return array
      */
-    public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir)
+    public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $filter)
     {
 
         $from = <<<SQL
@@ -49,9 +49,16 @@ LEFT JOIN Org AS O ON O.ID = A.OrganizationID
 WHERE
 E.SummitID = {$summit_id}
 AND E.Published = 1
-
 SQL;
 
+        if ($filter != 'all') {
+            if ($filter == 'hide_confirmed')
+                $from .= " AND ACR.IsConfirmed = 0";
+            else if ($filter == 'hide_registered')
+                $from .= " AND ACR.RegisteredForSummit = 0";
+            else if ($filter == 'hide_both')
+                $from .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0";
+        }
 
         $query = <<<SQL
 SELECT
@@ -91,7 +98,7 @@ SQL;
         return $result;
     }
 
-    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term)
+    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term, $filter)
     {
 
 $query_body = <<<SQL
@@ -120,6 +127,15 @@ SQL;
         if ($search_term) {
             $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
                             OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%')";
+        }
+
+        if ($filter != 'all') {
+            if ($filter == 'hide_confirmed')
+                $query_body .= " AND ACR.IsConfirmed = 0";
+            else if ($filter == 'hide_registered')
+                $query_body .= " AND ACR.RegisteredForSummit = 0";
+            else if ($filter == 'hide_both')
+                $query_body .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0";
         }
 
         $query_count = "SELECT COUNT(*) ";

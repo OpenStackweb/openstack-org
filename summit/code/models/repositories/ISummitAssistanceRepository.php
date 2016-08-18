@@ -18,13 +18,13 @@ interface ISummitAssistanceRepository extends IEntityRepository
      * @param int $summit_id
      * @return ArrayList
      */
-    public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir);
+    public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $filter);
 
     //TODO : this does not belongs here, move to another repository !!!
     public function getRoomsBySummitAndDay($summit_id, $date, $event_type, $venue);
 
     //TODO : this does not belongs here, move to another repository !!!
-    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term);
+    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term, $filter);
 
     //TODO : this does not belongs here, move to another repository !!!
     public function getPresentationMaterialBySummitAndDay($summit_id, $date, $tracks = 'all', $venues = 'all', $start_date, $end_date, $search_term);

@@ -96,11 +96,12 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
             $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'ID';
             $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
+            $filter       = (isset($query_string['filter'])) ? $query_string['filter'] : 'all';
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $assistances = $this->assistance_repository->getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir);
+            $assistances = $this->assistance_repository->getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $filter);
 
             $assistance_array = array();
 
@@ -310,11 +311,12 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'presentation';
             $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
             $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $filter       = (isset($query_string['filter'])) ? $query_string['filter'] : 'all';
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $presentations = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id,$page,$page_size,$sort,$sort_dir,$search_term);
+            $presentations = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$filter);
 
             $presentation_array = array();
 
@@ -375,7 +377,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
             switch ($report) {
                 case 'speaker_report' :
-                    $report_data = $this->assistance_repository->getAssistanceBySummit($summit_id, null, null, $sort, $sort_dir);
+                    $filter = (isset($query_string['filter'])) ? $query_string['filter'] : 'all';
+                    $report_data = $this->assistance_repository->getAssistanceBySummit($summit_id, null, null, $sort, $sort_dir, $filter);
                     $data = $report_data['Data'];
                     $results = array();
                     foreach ($data as $row) {
@@ -438,7 +441,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     break;
                 case 'presentation_report' :
                     $search_term = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
-                    $report_data = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id, null, null, $sort, $sort_dir, $search_term);
+                    $filter = (isset($query_string['filter'])) ? $query_string['filter'] : 'all';
+                    $report_data = $this->assistance_repository->getPresentationsAndSpeakersBySummit($summit_id, null, null, $sort, $sort_dir, $search_term,$filter);
                     $data = $report_data['Data'];
                     $results = array();
                     foreach ($data as $row) {

@@ -13,9 +13,17 @@
                 <option value="video_report"> Video Output List </option>
             </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <button class="btn btn-primary" id="export-report" onclick={ exportReport } >Export</button>
             <button class="btn btn-success" id="save-report" onclick={ saveReport } >Save</button>
+        </div>
+        <div class="col-md-2" if={report == 'presentation_report' || report == 'speaker_report'}>
+            <select id="status-filter" class="form-control" onchange={ searchReport }>
+                <option value="all">All</option>
+                <option value="hide_confirmed">Hide Confirmed</option>
+                <option value="hide_registered">Hide Registered</option>
+                <option value="hide_both">Hide Both</option>
+            </select>
         </div>
         <div class="col-md-4" if={report == 'presentation_report'}>
             <div class="input-group" style="width: 100%;">

@@ -1,0 +1,54 @@
+.selectable, label {
+    margin-top: 10px;
+}
+
+.selected {
+    border-color: lightgreen !important;
+    background-color: rgba(187, 250, 185, 0.53);
+}
+
+.not_selected {
+    border-color: red !important;
+    background-color: rgba(255, 0, 0, 0.19);
+}
+
+.selectable label {
+    width: 20%;
+}
+
+.selectable input {
+    width: 80%;
+    float: right;
+    cursor: pointer !important;
+}
+
+.selectable textarea {
+    width: 80%;
+    float: right;
+    cursor: pointer !important;
+}
+
+.selectable div {
+    width: 80%;
+    min-height: 30px;
+    float: right;
+    cursor: pointer !important;
+    border: 1px solid #d3d3d3;
+}
+
+.search_box label{
+    width: 20%;
+}
+
+.search_box input {
+    width: 80%;
+}
+
+.bootstrap-tagsinput {
+    width: 80%;
+}
+
+.merge_div {
+    margin: 30px 0 50px 0;
+    text-align: center;
+}

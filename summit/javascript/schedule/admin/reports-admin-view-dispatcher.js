@@ -4,6 +4,7 @@ function ReportsAdminViewDispatcher() {
 
     this.SAVE_PRESENTATION_REPORT              = 'SAVE_PRESENTATION_REPORT';
     this.GET_PRESENTATION_REPORT               = 'GET_PRESENTATION_REPORT';
+    this.GET_SPEAKER_REPORT                    = 'GET_SPEAKER_REPORT';
     this.SAVE_SPEAKER_REPORT                   = 'SAVE_SPEAKER_REPORT';
     this.SAVE_ROOM_REPORT                      = 'SAVE_ROOM_REPORT';
     this.SAVE_VIDEO_REPORT                     = 'SAVE_VIDEO_REPORT';
@@ -36,6 +37,9 @@ function ReportsAdminViewDispatcher() {
         switch (report) {
             case 'presentation_report' :
                 this.trigger(this.GET_PRESENTATION_REPORT);
+                break;
+            case 'speaker_report' :
+                this.trigger(this.GET_SPEAKER_REPORT);
                 break;
         }
     }

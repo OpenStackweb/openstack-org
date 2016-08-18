@@ -140,6 +140,80 @@ SQL;
      * @param int $limit
      * @return array;
      */
+    public function searchSpeakersOnlyByTerm($term, $limit = 10)
+    {
+
+        $term       = trim($term);
+        $term_split = explode(' ',$term);
+        $first_name = $term;
+        $last_name1 = $term;
+        $last_name2 = '';
+
+        if(count($term_split) == 2)
+        {
+            $first_name  = trim($term_split[0]);
+            $last_name2  = trim($term_split[1]);
+        }
+
+        $speakers_sql = <<<SQL
+SELECT
+CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+PS.MemberID AS member_id ,
+PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
+PS.FirstName AS firstname,
+PS.LastName  AS surname,
+PS.ID  AS speaker_id,
+PSR.Email AS email
+FROM PresentationSpeaker AS PS
+INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.ID = PS.RegistrationRequestID
+SQL;
+
+
+        $speakers_conditions = array(
+            "combined" => "PS.FirstName LIKE '{$first_name}%' AND PS.LastName LIKE '{$last_name2}%' ",
+            "single"   => array(
+                "PS.FirstName LIKE '{$first_name}%'",
+                "PS.LastName   LIKE '{$last_name1}%'",
+                "PSR.Email LIKE '{$first_name}%'",
+            ),
+        );
+
+        $query = '';
+
+
+        foreach($speakers_conditions as $type => $condition){
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $speakers_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
+                foreach($condition as $c) {
+                    $query .= $speakers_sql . ' WHERE ' . $c;
+                    $query .= ' UNION ';
+                }
+            }
+        }
+        $query = substr($query,0, strlen($query) - strlen(' UNION '));
+        $query .= " ORDER BY `name` LIMIT 0, {$limit};";
+        $res = DB::query($query);
+        $data = array();
+        foreach ($res as $row) {
+
+            $data[] = array
+            (
+                'speaker_id' => intval($row['speaker_id']),
+                'name'       => $row['name'],
+            );
+        }
+        return $data;
+    }
+
+    /**
+     * @param string $term
+     * @param int $limit
+     * @return array;
+     */
     public function searchByTermActive($term, $limit = 10)
     {
 
