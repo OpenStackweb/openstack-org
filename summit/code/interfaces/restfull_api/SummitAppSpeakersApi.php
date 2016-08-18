@@ -194,11 +194,11 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
                 'Title' => $speaker->Title,
                 'FirstName' => $speaker->FirstName,
                 'LastName' => $speaker->LastName,
-                'Email' => $speaker->Member()->Email,
+                'Email' => $speaker->RegistrationRequest()->Email,
                 'Twitter' => $speaker->TwitterName,
                 'IRC' => $speaker->IRCHandle,
                 'Bio' => $speaker->Bio,
-                'Pic' => ($speaker->Photo()->Exists()) ? $speaker->Photo()->getTag() : '',
+                'PicUrl' => $speaker->ProfilePhoto(50),
                 'Expertise' => $speaker->AreasOfExpertise()->toNestedArray(),
                 'Presentations' => $speaker->Presentations()->toNestedArray(),
                 'OtherPresentations' => $speaker->OtherPresentationLinks()->toNestedArray(),
@@ -332,8 +332,8 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data         = $this->getJsonRequest();
-            $this->summit_service->mergeSpeakers($summit, $speaker_1, $speaker_2, $data);
-            return $this->ok();
+            $changes = $this->summit_service->mergeSpeakers($summit, $speaker_1, $speaker_2, $data);
+            return $this->ok($changes);
         }
         catch(EntityValidationException $ex1)
         {

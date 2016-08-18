@@ -144,7 +144,7 @@ function populateSpeaker(speaker_id, col) {
         $('#twitter-'+col).val(speaker.Twitter);
         $('#irc-'+col).val(speaker.IRC);
         $('#bio-'+col).val(speaker.Bio);
-        $('#picture-'+col).html(speaker.Pic);
+        $('#picture-'+col).html('<img class="profile_pic" src="'+speaker.PicUrl+'" />');
         var exp_html = '';
         $.each(speaker.Expertise,function(idx,val){
             exp_html += val.Expertise+' - ';
@@ -219,12 +219,24 @@ function mergeSpeakers() {
         data: JSON.stringify(request),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
-    }).done(function(speaker) {
+    }).done(function(changes) {
+        var changes_html = '';
+        $.each(changes,function(idx,val){
+            changes_html += '<strong>'+val+':</strong> ';
+            if ($('*[data-field="'+val+'"][data-speaker="2"]').is('div')) {
+                changes_html += $('*[data-field="'+val+'"][data-speaker="2"]').text()+' <br>';
+            } else {
+                changes_html += $('*[data-field="'+val+'"][data-speaker="2"]').val()+' <br>';
+            }
+        });
+
+
         swal({
-                title: "Success!",
-                text: 'Speakers Merged.',
+                title: "Success! Speakers merged.",
+                text: "Changes made on "+$('#first_name-1').val()+" "+$('#last_name-1').val()+":<br><br>"+changes_html,
                 confirmButtonText: "Done!",
-                type: "success"
+                type: "success",
+                html: true
             },
             function() {
                 location.reload();

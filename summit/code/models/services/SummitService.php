@@ -1116,7 +1116,7 @@ final class SummitService implements ISummitService
      * @param ISummit $speaker_1
      * @param ISummit $speaker_2
      * @param array $data
-     * @return IPresentationSpeaker
+     * @return array $changes
      */
     public function mergeSpeakers(ISummit $summit, $speaker_id_1, $speaker_id_2, array $data)
     {
@@ -1129,26 +1129,27 @@ final class SummitService implements ISummitService
             $speaker_2 = $speaker_repository->getById($speaker_id_2);
             if(is_null($speaker_1) || is_null($speaker_2)) throw new NotFoundEntityException('PresentationSpeaker');
 
-            $speakers = array($speaker_id_1 => $speaker_1, $speaker_id_2 => $speaker_2);
+            $changes = array();
 
             foreach ($data as $field => $speaker_id) {
 
                 if ($speaker_1->ID != $speaker_id) {
-                    if(is_callable(array($speaker_1, $field)) && $speaker_1->hasMethod($field)){
+                    if ($field == 'Email') {
+                        $speaker_1->RegistrationRequest()->Email = $speaker_2->RegistrationRequest()->Email;
+                    } elseif (is_callable(array($speaker_1, $field)) && $speaker_1->hasMethod($field)){
                         $speaker_1->$field()->setByIDList($speaker_2->$field()->getIDList());
-                    }else{
-                        $speaker_1->$field = $speakers[$speaker_id]->$field;
+                    } else {
+                        $speaker_1->$field = $speaker_2->$field;
                     }
+
+                    $changes[] = $field;
                 }
-
-                $speaker_1->AnnouncementSummitEmails()->setByIDList($speaker_2->AnnouncementSummitEmails()->getIDList());
-
             }
 
             $speaker_1->write();
             $speaker_2->delete();
 
-            return $speaker_1;
+            return $changes;
 
         });
     }

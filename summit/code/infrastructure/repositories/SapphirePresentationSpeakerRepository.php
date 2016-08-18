@@ -157,8 +157,6 @@ SQL;
 
         $speakers_sql = <<<SQL
 SELECT
-CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
-PS.MemberID AS member_id ,
 PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
 PS.FirstName AS firstname,
 PS.LastName  AS surname,

@@ -52,3 +52,11 @@
     margin: 30px 0 50px 0;
     text-align: center;
 }
+
+.profile_pic {
+    width: 50px;
+}
+
+#picture-1, #picture-2 {
+    text-align: center;
+}

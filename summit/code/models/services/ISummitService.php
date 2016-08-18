@@ -156,7 +156,7 @@ interface ISummitService
      * @param ISummit $speaker_1
      * @param ISummit $speaker_2
      * @param array $data
-     * @return IPresentationSpeaker
+     * @return array $changes
      */
     public function mergeSpeakers(ISummit $summit, $speaker_1, $speaker_2,array $data);
 
