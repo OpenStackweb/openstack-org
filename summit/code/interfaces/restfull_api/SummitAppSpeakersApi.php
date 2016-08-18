@@ -348,7 +348,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
         catch(Exception $ex)
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $ex->getMessage();
+            return $this->serverError();
         }
     }
 }

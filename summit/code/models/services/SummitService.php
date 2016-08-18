@@ -1153,4 +1153,25 @@ final class SummitService implements ISummitService
         });
     }
 
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateBulkPresentations(ISummit $summit, array $data)
+    {
+        $event_repository = $this->event_repository;
+
+        $this->tx_service->transaction(function() use($summit, $data, $event_repository){
+
+            foreach($data as $presentation) {
+                $event = $event_repository->getById($presentation['id']);
+                if(is_null($event)) throw new NotFoundEntityException('SummitEvent');
+                if(intval($event->SummitID) !== $summit->getIdentifier()) throw new EntityValidationException('SummitEvent does not belong to Summit!');
+
+                $event->Title = $presentation['title'];
+                $event->write();
+            }
+        });
+    }
+
 }

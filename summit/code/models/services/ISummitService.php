@@ -160,5 +160,11 @@ interface ISummitService
      */
     public function mergeSpeakers(ISummit $summit, $speaker_1, $speaker_2,array $data);
 
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateBulkPresentations(ISummit $summit, array $data);
+
 
 }

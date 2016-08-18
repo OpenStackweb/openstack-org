@@ -33,7 +33,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
     public function getUnpublishedBySummit($summit_id, $event_type = null, $status = null, $search_term = null, $page = 1, $page_size = 10, $order = null)
     {
         $filter = array('SummitID' => $summit_id, 'Published' => 0);
-        if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
+        if(is_null($order)) $order = 'SummitEvent.Created';
 
         $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type IN ('Presentation','Panel')) ";
         if ($search_term) {
