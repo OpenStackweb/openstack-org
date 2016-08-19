@@ -24,9 +24,10 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
         // Fields
         $FirstNameField = new TextField('FirstName', "First Name");
-        $LastNameField = new TextField('LastName', "Last Name");
-        $TitleField = new TextField('Title',"Title");
-        $BioField = new TinyMCEEditorField('Bio',"Bio");
+        $LastNameField  = new TextField('LastName', "Last Name");
+        $TitleField     = new TextField('Title',"Title");
+        $BioField       = new TinyMCEEditorField('Bio',"Bio");
+
         $BioField->addExtraClass('bio');
 
         // Country Field
@@ -305,11 +306,13 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
             // Travel Preferences
             $speaker->TravelPreferences()->removeAll();
-            foreach ($data['CountriesToTravel'] as $travel_country) {
-                $travel_pref = SpeakerTravelPreference::create(array(
-                    'Country' => $travel_country
-                ));
-                $speaker->TravelPreferences()->add( $travel_pref );
+            if(isset($data['CountriesToTravel'])) {
+                foreach ($data['CountriesToTravel'] as $travel_country) {
+                    $travel_pref = SpeakerTravelPreference::create(array(
+                        'Country' => $travel_country
+                    ));
+                    $speaker->TravelPreferences()->add($travel_pref);
+                }
             }
 
 
