@@ -22,6 +22,14 @@
     text-align: center;
 }
 
+.btn-default {
+    color: #333 !important;
+}
+
+.btn-success {
+    color: white !important;
+}
+
 /* DIRECTORY */
 
 #create_summit .form-group {

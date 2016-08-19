@@ -40,10 +40,29 @@
                     <td>{ attendee.email }</td>
                     <td>{ attendee.ticket_bought }</td>
                     <td>{ attendee.checked_in }</td>
-                    <td><a href="{ attendee.link }" class="btn btn-default btn-sm active" role="button">Edit</a></td>
+                    <td>
+                        <a href="{ attendee.link }" class="btn btn-default btn-sm" role="button">Edit</a>
+                        <button class="btn btn-success btn-sm" onclick={ openSchedule }>Schedule</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <div class="modal fade" id="schedule_modal">
+            <div class="modal-dialog  modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><span id="modal_atte_name"></span> Schedule</h4>
+                    </div>
+                    <div class="modal-body" id="modal_body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <nav>
     <ul id="attendees-pager" class="pagination"></ul>
@@ -96,6 +115,25 @@
         clearClicked(e){
             $('#attendees_search_term').val('');
             self.getAttendees(1,'');
+        }
+
+        openSchedule(e){
+            var attendee_id = e.item.attendee.id;
+            $.getJSON('api/v1/summits/'+self.summit_id+'/attendees/'+attendee_id+'/schedule',{},function(data){
+                var schedule_html = '<table class="table"><thead><tr><th>Event</th><th>Place</th><th>Time</th></thead><tbody>';
+                $.each(data,function(idx,val){
+                    schedule_html += '<tr><td>'+val.title+'</td>';
+                    schedule_html += '<td>'+val.location+'</td>';
+                    schedule_html += '<td>'+val.time+'</td></tr>';
+                })
+                schedule_html += '</tbody></table>';
+
+                $('#modal_body').html(schedule_html);
+                $('#modal_atte_name').html(e.item.attendee.name);
+
+                $('#schedule_modal').modal("show");
+
+            });
         }
 
     </script>

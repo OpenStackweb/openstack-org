@@ -458,6 +458,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('summit/javascript/summit-admin-schedule.js');
+
         $summit_id = intval($request->param('SummitID'));
         $summit    = Summit::get()->byID($summit_id);
         if(is_null($summit) || $summit->ID <= 0) return $this->httpError(404);

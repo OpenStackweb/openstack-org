@@ -9,6 +9,7 @@
             <li><a href="$Top.Link">Home</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
             <li class="active">Schedule</li>
+            <li><input id="event_shortcut" place_holder="Event ID"/><button id="event_shortcut_go">Go</button></li>
         </ol>
         <script type="application/javascript">
                 var summit =
@@ -172,4 +173,7 @@
         </div>
     </div>
    <script src="summit/javascript/schedule/admin/schedule-admin-view.bundle.js?t={$Top.Time}"  type="application/javascript"></script>
+   <script type="application/javascript">
+       var admin_url = "{$Top.Link}/{$Summit.ID}";
+   </script>
 </div>
