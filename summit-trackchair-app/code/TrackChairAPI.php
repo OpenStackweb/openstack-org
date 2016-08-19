@@ -967,27 +967,32 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         if ($email != null) {
             $current_user = Member::currentUser();
-            $addresses = [];
+            
+            $toAdresses = [];
+            $ccAddresses = ['speakersupport@openstack.org'];
+
             foreach($this->presentation->getSpeakersAndModerators() as $s) {
-            	$addresses[] = $s->getEmail();
+            	$toAddresses[] = $s->getEmail();
             }
             
             $chairs = $this->presentation->Category()->TrackChairs()
             			->exclude('MemberID', $current_user->ID);
 
             foreach($chairs as $chair) {
-            	$addresses[] = $chair->Member()->Email;
+            	$ccAddresses[] = $chair->Member()->Email;
             }
 
             $subject = "Track chair {$current_user->getName()} has a question about your presentation";
             $body = $email;
             $email = EmailFactory::getInstance()->buildEmail(
             	null,
-            	implode(',',$addresses),
+            	implode(',',$toAddresses),
             	$subject,
             	$body
             );
-            $email->setCc('speakersupport@openstack.org');
+
+            $email->setCC(implode(',', $ccAddresses));
+            $email->replyTo($current_user->Email);
             
             try {
             	$email->send();
