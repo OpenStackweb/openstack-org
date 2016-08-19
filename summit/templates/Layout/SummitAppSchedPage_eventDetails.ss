@@ -60,7 +60,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="event-btn">
-            <a href="{$EventLink}" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
+            <a href="{$Event.getLink(show)}" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
         </div>
         <% if Event.RSVPTemplate.Exists() %>
         <div class="info_item">
