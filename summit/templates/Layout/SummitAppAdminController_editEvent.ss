@@ -221,7 +221,7 @@
             <% if $Event.isPublished() %>
                 <button id="btn_unpublish" class="btn btn-primary btn-danger">UnPublish</button>
                 <a href="{$Top.Link()}/{$Summit.ID}/events/schedule/#day={$Event.StartDate.Format('Y-m-d')}&venue={$Event.LocationID}&event={$Event.ID}" class="btn btn-default">Go to Calendar</a>
-                <a href="{$Event.getLink()}" class="btn btn-default" target="_blank">View Event</a>
+                <a href="{$Event.getLink(show)}" class="btn btn-default" target="_blank">View Event</a>
             <% end_if %>
         </form>
     </div>
