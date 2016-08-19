@@ -42,7 +42,7 @@ $(document).ready(function(){
                 name: 'speakers_source',
                 displayKey: 'name',
                 source: speakers_source,
-                limit: 20
+                limit: 100
             }
         ]
     });
@@ -64,7 +64,7 @@ $(document).ready(function(){
                 name: 'speakers_source',
                 displayKey: 'name',
                 source: speakers_source,
-                limit: 20
+                limit: 100
             }
         ]
     });
@@ -78,18 +78,19 @@ $(document).ready(function(){
     });
 
     $('.selectable').click(function(){
-        if (!$('#speaker-search-1').val() || !$('#speaker-search-2').val()) return false;
+        if (event.target.nodeName != 'A') {
+            if (!$('#speaker-search-1').val() || !$('#speaker-search-2').val()) return false;
 
-        var id = $(this).children().not('label').first().attr('id');
-        var col = id.slice(-1);
-        var other_id = (col == '1') ? id.slice(0, -1)+'2' : id.slice(0, -1)+'1';
+            var id = $(this).children().not('label').first().attr('id');
+            var col = id.slice(-1);
+            var other_id = (col == '1') ? id.slice(0, -1)+'2' : id.slice(0, -1)+'1';
 
-        $('#'+id).toggleClass('selected');
-        $('#'+id).removeClass('not_selected');
+            $('#'+id).toggleClass('selected');
+            $('#'+id).removeClass('not_selected');
 
-        $('#'+other_id).toggleClass('not_selected');
-        $('#'+other_id).removeClass('selected');
-
+            $('#'+other_id).toggleClass('not_selected');
+            $('#'+other_id).removeClass('selected');
+        }
     });
 
     $('#merge_button').click(function(){
@@ -131,13 +132,20 @@ function populateSpeaker(speaker_id, col) {
         $('#first_name-'+col).val(speaker.FirstName);
         $('#last_name-'+col).val(speaker.LastName);
         $('#email-'+col).val(speaker.Email);
+        if (speaker.Member) {
+            var member_html = '';
+            member_html += 'ID: '+speaker.Member.ID+'<br>';
+            member_html += 'Name: '+speaker.Member.FirstName+' '+speaker.Member.Surname+'<br>';
+            member_html += 'Email: '+speaker.Member.Email;
+            $('#member-'+col).html(member_html);
+        }
         var pres_html = '';
         var last_summit = '';
         $.each(speaker.Presentations,function(idx,val){
             if (last_summit != val.SummitID) {
                 pres_html += '<strong>Summit '+val.SummitID+':</strong><br>';
             }
-            pres_html += '<a href="" target="_blank">'+val.Title+'</a><br>';
+            pres_html += '<a href="'+admin_link+'/'+val.SummitID+'/events/'+val.ID+'" target="_blank">'+val.Title+'</a><br>';
             last_summit = val.SummitID;
         });
         $('#presentations-'+col).html(pres_html);

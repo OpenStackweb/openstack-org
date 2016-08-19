@@ -157,13 +157,14 @@ SQL;
 
         $speakers_sql = <<<SQL
 SELECT
-PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
+PS.ID  AS speaker_id,
+CONCAT(COALESCE(PS.FirstName,'*null*'),' ',COALESCE(PS.LastName,'*null*'),' (', COALESCE(IF(PSR.Email IS NOT NULL, PSR.Email, M.Email),'*no-email*'), ')') AS name,
 PS.FirstName AS firstname,
 PS.LastName  AS surname,
-PS.ID  AS speaker_id,
-PSR.Email AS email
+IF(PSR.Email IS NOT NULL, PSR.Email, M.Email) AS email
 FROM PresentationSpeaker AS PS
-INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.ID = PS.RegistrationRequestID
+LEFT JOIN SpeakerRegistrationRequest AS PSR ON PSR.ID = PS.RegistrationRequestID
+LEFT JOIN Member AS M ON M.ID = PS.MemberID
 SQL;
 
 

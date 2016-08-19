@@ -1121,9 +1121,8 @@ final class SummitService implements ISummitService
     public function mergeSpeakers(ISummit $summit, $speaker_id_1, $speaker_id_2, array $data)
     {
         $speaker_repository = $this->speaker_repository;
-        $member_repository  = $this->member_repository;
 
-        return $this->tx_service->transaction(function () use ($summit, $data, $speaker_id_1, $speaker_id_2, $speaker_repository) {
+        $changes = $this->tx_service->transaction(function () use ($summit, $data, $speaker_id_1, $speaker_id_2, $speaker_repository) {
 
             $speaker_1 = $speaker_repository->getById($speaker_id_1);
             $speaker_2 = $speaker_repository->getById($speaker_id_2);
@@ -1135,7 +1134,11 @@ final class SummitService implements ISummitService
 
                 if ($speaker_1->ID != $speaker_id) {
                     if ($field == 'Email') {
-                        $speaker_1->RegistrationRequest()->Email = $speaker_2->RegistrationRequest()->Email;
+                        if ($speaker_1->RegistrationRequest()->Exists()) {
+                            $speaker_1->RegistrationRequest()->Email = $speaker_2->RegistrationRequest()->Email;
+                        } else {
+                            $speaker_1->RegistrationRequestID = $speaker_2->RegistrationRequestID;
+                        }
                     } elseif (is_callable(array($speaker_1, $field)) && $speaker_1->hasMethod($field)){
                         $speaker_1->$field()->setByIDList($speaker_2->$field()->getIDList());
                     } else {
@@ -1147,11 +1150,17 @@ final class SummitService implements ISummitService
             }
 
             $speaker_1->write();
-            $speaker_2->delete();
 
             return $changes;
 
         });
+
+        // DELETE SPEAKER 2 (had to take it out the transaction to work)
+        $speaker_2 = $speaker_repository->getById($speaker_id_2);
+        $speaker_2->delete();
+
+        return $changes;
+
     }
 
     /**

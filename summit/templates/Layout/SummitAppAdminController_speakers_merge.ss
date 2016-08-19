@@ -72,13 +72,24 @@
                 </div>
                 <div class="row">
                     <div class="col-md-1">
-                        <label for="email-1">Email</label>
+                        <label for="email-1">Reg. Email</label>
                     </div>
                     <div class="col-md-5 selectable">
                         <input id="email-1" data-field="Email" data-speaker="1" disabled />
                     </div>
                     <div class="col-md-6 selectable">
                         <input id="email-2" data-field="Email" data-speaker="2" disabled />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <label for="member-1">Member</label>
+                    </div>
+                    <div class="col-md-5 selectable">
+                        <div id="member-1" data-field="MemberID" data-speaker="1"></div>
+                    </div>
+                    <div class="col-md-6 selectable">
+                        <div id="member-2" data-field="MemberID" data-speaker="2" ></div>
                     </div>
                 </div>
                 <div class="row">
@@ -235,6 +246,9 @@
 </div>
 <br>
 <br>
+<script type="application/javascript">
+    var admin_link = "$Top.Link";
+</script>
 
 
 

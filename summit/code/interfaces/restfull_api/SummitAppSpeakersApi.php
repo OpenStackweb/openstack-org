@@ -195,6 +195,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
                 'FirstName' => $speaker->FirstName,
                 'LastName' => $speaker->LastName,
                 'Email' => $speaker->RegistrationRequest()->Email,
+                'Member' => ($speaker->Member()->Exists()) ? $speaker->Member()->toMap() : null,
                 'Twitter' => $speaker->TwitterName,
                 'IRC' => $speaker->IRCHandle,
                 'Bio' => $speaker->Bio,
@@ -220,7 +221,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
         catch(Exception $ex)
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->serverError();
+            return $ex->getMessage();
         }
     }
 
