@@ -6,13 +6,15 @@
 #install-app-overlay {
     position:absolute;
     width:100%;
-    height:150px;
+    height:auto;
     top:0;
     left:0;
     color:#fff;
     background:darkslategray;
     display:none;
     text-align:center;
+    position: fixed;
+    padding-bottom: 5%;
 }
 
 #install-app-overlay h3{
