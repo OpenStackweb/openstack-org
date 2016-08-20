@@ -95,6 +95,12 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
             return $valid->error('Number should be greather or equal than zero!');
         }
 
+        if(SummitVenueFloor::get()->filter(["VenueID" => $this->VenueID, "ID:ExactMatch:not" => $this->ID, "Number" => $this->Number ])->count() > 0)
+            return $valid->error(sprintf("There is already a floor with that number on venue %s", $this->VenueID));
+
+        if(SummitVenueFloor::get()->filter(["VenueID" => $this->VenueID, "ID:ExactMatch:not" => $this->ID, "Name" => $this->Name ])->count() > 0)
+            return $valid->error(sprintf("There is already a floor with that name on venue %s", $this->VenueID));
+
         return $valid;
     }
 

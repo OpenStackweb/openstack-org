@@ -30,6 +30,7 @@ SummitPresentationComment:
     - JSONable
 Summit:
   extensions:
+    - SummitAdminUI
     - JSONable
     - SummitEntity
   random_voting_list_count: 100
