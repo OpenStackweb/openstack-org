@@ -19,7 +19,7 @@
     "nnnick/chartjs": "dev-master",
     "openid/php-openid": "dev-master",
     "silverstripe/geoip": "dev-master",
-    "sendgrid/sendgrid": "2.2.1",
+    "sendgrid/sendgrid": "3.0.0",
     "silverstripe-australia/gridfieldextensions": "1.0.3",
     "unclecheese/display-logic": "1.2.1",
     "unclecheese/zen-fields": "1.0.*",
