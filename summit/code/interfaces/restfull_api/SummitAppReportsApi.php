@@ -31,6 +31,16 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     private $report_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $rsvp_repository;
+
+    /**
+     * @var IEntityRepository
+     */
+    private $event_repository;
+
+    /**
      * @var ISummitService
      */
     private $summit_service;
@@ -40,6 +50,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         ISummitRepository $summit_repository,
         ISummitAssistanceRepository $assistance_repository,
         ISummitReportRepository $report_repository,
+        IRSVPRepository $rsvp_repository,
+        ISummitEventRepository $event_repository,
         ISummitService $summit_service
     )
     {
@@ -47,6 +59,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         $this->assistance_repository         = $assistance_repository;
         $this->summit_repository             = $summit_repository;
         $this->report_repository             = $report_repository;
+        $this->rsvp_repository               = $rsvp_repository;
+        $this->event_repository              = $event_repository;
         $this->summit_service                = $summit_service;
     }
 
@@ -76,6 +90,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET room_report'           => 'getRoomReport',
         'GET presentation_report'   => 'getPresentationReport',
         'GET video_report'          => 'getVideoReport',
+        'GET rsvp_report'           => 'getRsvpReport',
         'GET export/$REPORT!'       => 'exportReport',
     );
 
@@ -86,6 +101,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'getVideoReport',
         'exportReport',
         'updateReport',
+        'getRsvpReport',
     );
 
     public function getSpeakerReport(SS_HTTPRequest $request){
@@ -354,6 +370,75 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->serverError();
+        }
+    }
+
+    public function getRsvpReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $events = array();
+            if ($search_term != '') {
+                $events = $this->event_repository->searchBySummitAndTerm($summit,$search_term);
+            }
+
+            $results = array('event_count' => 0, 'data' => array());
+            if (count($events)) {
+                if (count($events) == 1) {
+                    $results['event_count'] = 1;
+                    $event = array_pop($events);
+                    list($rsvps,$total) = $this->rsvp_repository->getByEventPaged($event->ID,$page,$page_size);
+
+                    if (count($rsvps)) {
+                        foreach($rsvps as $rsvp) {
+                            $other = '';
+                            foreach ($rsvp->Answers() as $answer) {
+                                $other .= $answer->Question()->Label.': '.$answer->getFormattedAnswer().'<br>';
+                            }
+                            $results['data'][] = array(
+                                'rsvp_id'   => intval($rsvp->ID),
+                                'name'      => $rsvp->SubmittedBy()->getFullName(),
+                                'email'     => $rsvp->SubmittedBy()->getEmail(),
+                                'other'     => $other,
+                            );
+                        }
+                    }
+                    $results['event'] = array(
+                        'event_id' => intval($event->ID),
+                        'title'    => $event->getTitle(),
+                        'date'     => $event->getDateNice(),
+                    );
+                    $results['total'] = $total;
+                } else {
+                    $results['event_count'] = count($events);
+                    foreach($events as $event) {
+                        $results['data'][] = array(
+                            'event_id' => intval($event->ID),
+                            'title'    => $event->getTitle(),
+                            'date'     => $event->getDateNice(),
+                        );
+                    }
+                }
+            }
+
+            return $this->ok($results);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $ex->getMessage();
         }
     }
 

@@ -35,4 +35,18 @@ class SapphireRSVPRepository
         $query->addAndCondition(QueryCriteria::equal('SubmittedByID', $submitter_id));
         return $this->getBy($query);
     }
+
+    /**
+     * @param int $event_id
+     * @param int $page
+     * @param int $page_size
+     * @return IRSVP|null
+     */
+    public function getByEventPaged($event_id, $page, $page_size)
+    {
+        $query = new QueryObject();
+        $query->addAndCondition(QueryCriteria::equal('EventID', $event_id));
+        $offset = ($page-1) * $page_size;
+        return $this->getAll($query, $offset, $page_size);
+    }
 }
