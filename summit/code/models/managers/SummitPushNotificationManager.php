@@ -104,8 +104,7 @@ class SummitPushNotificationManager
                             $data           = $message['data'];
                             $extra_data     = [
                                 'event_id' => $notification->EventID,
-                                'title'    => $notification->Event()->Title(),
-                                'alert'    => $notification->Message
+                                'title'    => $notification->Event()->getTitle(),
                             ];
 
                             $message['data']     = array_merge($data, $extra_data);
