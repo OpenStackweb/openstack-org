@@ -125,6 +125,7 @@
                         <label for="level">Level</label>
                         <select class="form-control" id="level" name="level">
                             <option value="">-- Select a Level --</option>
+                            <option value="N/A" <% if $Top.Event.isPresentation() && $Top.Event.Level == N/A %> selected <% end_if %>>N/A</option>
                             <option value="Beginner" <% if $Top.Event.isPresentation() && $Top.Event.Level == Beginner %> selected <% end_if %>>Beginner</option>
                             <option value="Intermediate" <% if $Top.Event.isPresentation() && $Top.Event.Level == Intermediate %> selected <% end_if %>>Intermediate</option>
                             <option value="Advanced" <% if $Top.Event.isPresentation() && $Top.Event.Level == Advanced %> selected <% end_if %>>Advanced</option>
