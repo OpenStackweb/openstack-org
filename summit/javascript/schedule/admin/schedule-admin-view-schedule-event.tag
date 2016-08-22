@@ -12,7 +12,7 @@
         <div class="event-inner-body">
             <div>
                  <input type="checkbox" name="bulk_action_{ data.id }" id="bulk_action_{ data.id }" class="bulk-action-published-selector" data-event-id={ data.id }/>
-                 <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ data.title.substring(0, 70) }{ data.title.length > 70 ? '...':''}{ data.class_name === 'Presentation'?' - '+parent.summit.tracks_dictionary[data.track_id].name:'' }</a>
+                 <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ trimText(data.title, 68 ) }{ data.class_name === 'Presentation'?' - '+ trimText(parent.summit.tracks_dictionary[data.track_id].name, 20 ):'' }</a>
             </div>
             <div class="presentation-status">
                 <div if={ data.status }  class="event-status-component" title="status"><i class="fa fa-check-circle">&nbsp;{data.status}</i></div>
@@ -30,7 +30,7 @@
         <div class="event-inner-body">
             Blackout Event on { parent.summit.locations_dictionary[data.location_id].name }:
             <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">
-                { data.title.substring(0, 75) }{ data.title.length > 75 ? '...':''}
+                { trimText(data.title, 75) }
             </a>
         </div>
 
@@ -48,6 +48,12 @@
     this.on('mount', function() {
 
     });
+
+    trimText(text, maxSize){
+        var trimmedText = text.substring(0, maxSize);
+        if(text.length > maxSize) trimmedText += '...';
+        return trimmedText;
+    }
 
     getEventTop() {
         var start_time    = self.data.start_datetime;
