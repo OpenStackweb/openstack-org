@@ -14,8 +14,9 @@
                 </h1>
                 <div class="summit-location">Boston, Massachusetts</div>
                     <div class="summit-date">
-                       More Details Coming Soon
+                       May 8-12, 2017
                        <br>
+                       More details coming soon...
                     </div>
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text=The May 2017 OpenStack Summit will be in Boston&url=http://openstack.org/summit/boston-2017/"></a>
