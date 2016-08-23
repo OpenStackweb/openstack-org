@@ -101,12 +101,11 @@
 				Please refer back to this web page for the core requirements and if you have questions (we’ll keep updating it with more FAQs). 
 			</p>
 			<h5 class="section-title">Mascots already selected</h5>
-			<p>
-				Watch this space—we’ll be updating it frequently as project teams select their mascots.
-			</p>
 			<ul>
 				<li><strong>Ansible:</strong> Cape buffalo</li>
 				<li><strong>Astara:</strong> Starfish (sea star)</li>
+				<li><strong>Barbican:</strong> Sea urchin</li>
+				<li><strong>Charms:</strong> Orangutan</li>
 				<li><strong>Chef:</strong> Kangaroo</li>
 				<li><strong>Cinder:</strong> Horse</li>
 				<li><strong>Cloudkitty:</strong> Cat (maneki-neko)</li>
@@ -116,11 +115,14 @@
 				<li><strong>Designate:</strong> Crocodile</li>
 				<li><strong>Dragonflow:</strong> Seahorse</li>
 				<li><strong>EC2-API:</strong> Toucan</li>
+				<li><strong>Freezer:</strong> Polar Bear</li>
 				<li><strong>Glance:</strong> Chipmunk</li>
 				<li><strong>Heat:</strong> Flame/fire</li>
 				<li><strong>Horizon:</strong> Shiba inu (dog)</li>
 				<li><strong>I18n:</strong> Parrot</li>
+				<li><strong>Infrastructure:</strong> Ant</li>
 				<li><strong>Ironic:</strong> Bear</li>
+				<li><strong>Karbor:</strong> Beaver</li>
 				<li><strong>Kuryr:</strong> Platypus</li>
 				<li><strong>Keystone:</strong> Turtle</li>
 				<li><strong>Kolla:</strong> Koala</li>
@@ -130,6 +132,7 @@
 				<li><strong>Monasca:</strong> Monitor lizard</li>
 				<li><strong>Murano:</strong> Muraena eel (moray)</li>
 				<li><strong>Neutron:</strong> Spiderweb+spider</li>
+				<li><strong>Nova:</strong> Supernovea</li>
 				<li><strong>Oslo:</strong> Moose</li>
 				<li><strong>Packaging-deb:</strong> Lemur</li>
 				<li><strong>Packaging-rpm:</strong> Donkey</li>
@@ -149,8 +152,10 @@
 				<li><strong>TripleO:</strong> Owl</li>
 				<li><strong>Trove:</strong> Stingray</li>
 				<li><strong>UX:</strong> Octopus</li>
+				<li><strong>Vitrage:</strong> Giraffe</li>
 				<li><strong>Watcher:</strong> Jellyfish</li>
 				<li><strong>Winstackers:</strong> Hawk</li>
+				<li><strong>Zaqar:</strong> Carrier pigeon</li>
 			</ul>
 			<h5 class="section-title">FAQs</h5>
 			<p class="question">
