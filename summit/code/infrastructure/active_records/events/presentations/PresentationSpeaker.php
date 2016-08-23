@@ -859,7 +859,7 @@ class PresentationSpeaker extends DataObject
      */
     public function hasAssistanceFor($summit_id)
     {
-        return $this->SummitAssistances()->filter('SummitID ', intval($summit_id))->count() > 0;
+        return $this->SummitAssistances()->filter('SummitID', intval($summit_id))->count() > 0;
     }
 
     /**
