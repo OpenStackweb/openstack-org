@@ -16,5 +16,3 @@ SummitVideoApp:
   video_poll_interval: 999999
   # How long a user has to wait before adding a view to the same video
   video_view_throttle: 10
-  # How long, in milliseconds, a user has to watch a video before it's considered a view
-  video_view_delay: 10000

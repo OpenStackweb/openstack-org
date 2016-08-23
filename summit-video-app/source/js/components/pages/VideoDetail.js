@@ -16,10 +16,6 @@ class VideoDetail extends React.Component {
 	componentDidMount () {
 		if(!this.props.video || this.props.video.slug != this.props.params.slug) {
 			this.props.fetchVideoDetail();
-			this.setTimeout();
-		}
-		else if (this.props.video) {
-			this.setTimeout();
 		}
 	}
 
@@ -27,27 +23,7 @@ class VideoDetail extends React.Component {
 		if(!this.props.loading) {
 			if(!this.props.video || (nextProps.video && nextProps.video.slug !== nextProps.params.slug)) {				
 				this.props.fetchVideoDetail(nextProps.params.slug);
-				this.setTimeout();
 			}
-		}
-	}
-
-	componentWillUnmount () {
-		if(this._timeout) {
-			window.clearTimeout(this._timeout);
-		}
-	}
-
-	setTimeout () {
-		const config = window.VideoAppConfig;		
-		if(config.videoViewDelay) {
-			if(this._timeout) {
-				window.clearTimeout(this._timeout);
-			}
-			this._timeout = window.setTimeout(
-				this.props.setVideoViewed,
-				config.videoViewDelay
-			);
 		}
 	}
 
@@ -93,10 +69,6 @@ class VideoDetail extends React.Component {
                                     </RouterLink>
                                 </div>
                                 }
-								<div className="detail-panel-section">
-									<h5 className="section-title">Views</h5>									
-									{video.views}
-								</div>
                                 {video.slides &&
                                     <div className="detail-panel-section">
                                         <h5 className="section-title">Slides</h5>
@@ -132,13 +104,6 @@ export default connect (
 		fetchVideoDetail (id) {
 			const videoID = id || ownProps.params.slug;
 			dispatch(fetchVideoDetail(videoID));
-		},
-
-		setVideoViewed (id) {
-			dispatch(viewVideo(
-				ownProps.params.slug,
-				window.VideoAppConfig.securityToken
-			))
 		}
 
 	})

@@ -98,8 +98,7 @@ class SummitVideoApp_Controller extends Page_Controller {
 			'baseURL' => rtrim($this->Link(),'/'),
 			'initialState' => $this->getInitialState(),
 			'pollInterval' => SummitVideoApp::config()->video_poll_interval,
-            'securityToken' => SecurityToken::inst()->getValue(),
-            'videoViewDelay' => SummitVideoApp::config()->video_view_delay			
+            'securityToken' => SecurityToken::inst()->getValue()
 		];
 
 		return Convert::array2json($config);

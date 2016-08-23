@@ -33,7 +33,6 @@ In `summit-video-app/_config/config.yml`:
 <tr><td>popular_video_limit</td><td>Number of popular videos</td><td>10</td></tr>
 <tr><td>video_poll_interval</td><td>Frequency, in milliseconds, that the app passively refreshes state</td><td>15000</td></tr>
 <tr><td>video_view_throttle</td><td>How long, in seconds, a user has to wait before adding a view the same video</td><td>10</td></tr>
-<tr><td>video_view_delay</td><td>How long, in milliseconds, a user has to watch a video before it's considered a view</td><td>10000</td></tr>
 </tbody>
 </table>
 
