@@ -182,8 +182,7 @@
                 '<i class="fa fa-clock-o icon-clock"></i>&nbsp;<span class="start-time"></span>-<span class="end-time"></span></div>'+
                 '<div class="col-sm-6 col-location">'+
                 '<div>'+
-                '<i class="fa fa-map-marker icon-map"></i>&nbsp;'+
-                '<a class="search-link venue-search-link"></a>'+
+                ( (self.summit.should_show_venues)? '<i class="fa fa-map-marker icon-map"></i>&nbsp;<a class="search-link venue-search-link"></a>' : '')+
                 '</div>'+
                 '</div>'+
                 myschedule_container+
@@ -207,6 +206,7 @@
                 '</div>'+
                 '</div>'+
             '</div>');
+
             console.log(self.events.length +' events retrieved ...');
 
             var event_directives  = {
@@ -239,15 +239,16 @@
                 },
                 'a.event-type-search-link': function(arg){ return self.summit.event_types[arg.item.type_id].type; },
                 'a.event-type-search-link@href': function(arg){ return self.search_url+'?t='+self.summit.event_types[arg.item.type_id].type.replace(/ /g,'+')  },
-                'a.venue-search-link': function(arg){
-                    return self.getSummitLocation(arg.item);
-                },
-                'a.venue-search-link@href':function(arg){
-                    return self.summit.locations[arg.item.location_id].link;
-                },
+
+
                 'span.start-time': 'event.start_time',
                 'span.end-time': 'event.end_time',
             };
+
+            if(self.summit.should_show_venues){
+                 event_directives['a.venue-search-link'] = function(arg){ return self.getSummitLocation(arg.item);};
+                 event_directives['a.venue-search-link@href'] = function(arg){ return self.summit.locations[arg.item.location_id].link;};
+            }
 
             if(self.summit.current_user !== null ){
                 // MY SCHEDULE

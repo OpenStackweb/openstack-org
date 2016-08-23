@@ -27,7 +27,7 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
     );
 
     private static $has_one = array(
-        'Summit' => 'Summit',
+        'Summit'  => 'Summit',
         'Creator' => 'Member',
     );
 

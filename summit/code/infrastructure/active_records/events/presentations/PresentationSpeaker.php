@@ -298,14 +298,15 @@ class PresentationSpeaker extends DataObject
         ]);
     }
 
+
     public function PublishedPresentations($summit_id = null)
     {
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
 
         return $this->Presentations()->filter([
-            'SummitID' => $summit->ID,
-            'Published' => true
+            'SummitID'  => $summit->ID,
+            'Published' => 1
         ]);
     }
 
@@ -519,8 +520,10 @@ class PresentationSpeaker extends DataObject
      */
     public function getSpeakerConfirmationLink($summit_id)
     {
-        $confirmation_page = SummitConfirmSpeakerPage::get()->filter('SummitID', intval($summit_id))->first();
-        if (!$confirmation_page) throw new NotFoundEntityException('Confirmation Speaker Page not set on current summit!');
+        $confirmation_page  = SummitConfirmSpeakerPage::getBy(intval($summit_id));
+        if (!$confirmation_page)
+            throw new NotFoundEntityException('Confirmation Speaker Page not set on current summit!');
+
         $url = $confirmation_page->getAbsoluteLiveLink(false);
 
         if ($this->hasAssistanceFor($summit_id)) {
@@ -535,9 +538,9 @@ class PresentationSpeaker extends DataObject
             $token = $request->generateConfirmationToken();
             $already_exists = intval(PresentationSpeakerSummitAssistanceConfirmationRequest::get()
                     ->filter([
-                        'SummitID' => intval($summit_id),
+                        'SummitID'                 => intval($summit_id),
                         'SpeakerID:ExactMatch:not' => $this->ID,
-                        'ConfirmationHash' => PresentationSpeakerSummitAssistanceConfirmationRequest::HashConfirmationToken($token)
+                        'ConfirmationHash'         => PresentationSpeakerSummitAssistanceConfirmationRequest::HashConfirmationToken($token)
                     ])
                     ->count()) > 1;
         } while ($already_exists);
@@ -976,4 +979,12 @@ class PresentationSpeaker extends DataObject
         return substr(base64_decode($hash), 3);
     }
 
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasPublishedPresentations($summit_id = null)
+    {
+        return $this->PublishedPresentations($summit_id)->count() > 0;
+    }
 }

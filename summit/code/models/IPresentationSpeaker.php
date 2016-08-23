@@ -147,6 +147,12 @@ interface IPresentationSpeaker extends IEntity
      * @param int $summit_id
      * @return bool
      */
+    public function hasPublishedPresentations($summit_id = null);
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
     public function hasAlternatePresentations($summit_id = null);
 
     /**

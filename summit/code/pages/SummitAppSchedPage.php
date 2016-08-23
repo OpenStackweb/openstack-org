@@ -5,6 +5,16 @@
  */
 class SummitAppSchedPage extends SummitPage
 {
+    /**
+     * @param ISummit $summit
+     * @return SummitAppSchedPage
+     */
+    static public function getBy(ISummit $summit){
+        $page = Versioned::get_by_stage('SummitAppSchedPage', 'Live')->filter('SummitID', $summit->getIdentifier())->first();
+        if(is_null($page))
+            $page = Versioned::get_by_stage('SummitAppSchedPage', 'Stage')->filter('SummitID', $summit->getIdentifier())->first();
+        return $page;
+    }
 }
 
 /**

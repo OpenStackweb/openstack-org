@@ -86,13 +86,14 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
         )
         {
             try {
-                $page = 1;
+
+                $page      = 1;
                 $page_size = $batch_size;
-                $task = $batch_repository->findByName(self::TaskName);
+                $task      = $batch_repository->findByName(self::TaskName.'_'.$current_summit->getIdentifier());
 
                 if (is_null($task)) {
                     //create task
-                    $task = $batch_task_factory->buildBatchTask(self::TaskName, 0, $page);
+                    $task = $batch_task_factory->buildBatchTask(self::TaskName.'_'.$current_summit->getIdentifier(), 0, $page);
                     $batch_repository->add($task);
                 }
 
@@ -124,7 +125,7 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
 
                     $code = null;
 
-                    if ($speaker->hasApprovedPresentations($current_summit->getIdentifier())) //get approved code
+                    if ($speaker->hasPublishedPresentations($current_summit->getIdentifier())) //get approved code
                     {
                         $code = $promo_code_repository->getNextAvailableByType
                         (
@@ -133,7 +134,8 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
                             $batch_size
                         );
                         if (is_null($code)) throw new Exception('not available promo code!!!');
-                    } else if ($speaker->hasAlternatePresentations($current_summit->getIdentifier())) // get alternate code
+                    }
+                    else if ($speaker->hasAlternatePresentations($current_summit->getIdentifier())) // get alternate code
                     {
                         $code = $promo_code_repository->getNextAvailableByType
                         (

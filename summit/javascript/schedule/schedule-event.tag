@@ -67,7 +67,7 @@
     var self                      = this;
 
     this.on('mount', function(){
-
+    console.log("this.summit.should_show_venues "+this.summit.should_show_venues.should_show_venues);
     // show event details handler (jquery)
     $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
 

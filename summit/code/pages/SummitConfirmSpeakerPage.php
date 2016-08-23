@@ -18,6 +18,17 @@ class SummitConfirmSpeakerPage extends SummitPage
     static $defaults = array(
         'ShowInMenus' => false
     );
+
+    /**
+     * @param int $summit_id
+     * @return SummitConfirmSpeakerPage
+     */
+    static public function getBy($summit_id){
+        $page = Versioned::get_by_stage('SummitConfirmSpeakerPage', 'Live')->filter('SummitID', $summit_id)->first();
+        if(is_null($page))
+            $page = Versioned::get_by_stage('SummitConfirmSpeakerPage', 'Stage')->filter('SummitID', $summit_id)->first();
+        return $page;
+    }
 }
 
 /**
