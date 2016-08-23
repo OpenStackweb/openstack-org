@@ -58,11 +58,10 @@ class SapphireRepository extends AbstractEntityRepository
 
     public function getAll(QueryObject $query, $offset = 0, $limit = 10)
     {
-        $class = $this->entity_class;
+        $class  = $this->entity_class;
         $query->setBaseEntity(new $class);
         $filter = (string)$query;
-        $do = $class::get()->where($filter);
-
+        $do     = $class::get()->where($filter);
 
         foreach ($query->getAlias(QueryAlias::INNER) as $spec) {
             $do = $do->innerJoin($spec->getTable(), $spec->getCondition(), $spec->getAlias());
@@ -82,6 +81,7 @@ class SapphireRepository extends AbstractEntityRepository
             return array(array(), 0);
         }
         $res = $do_limit->toArray();
+
         foreach ($res as $entity) {
             $this->markEntity($entity);
         }
