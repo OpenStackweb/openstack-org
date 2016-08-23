@@ -5,7 +5,7 @@
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
             <div class="col-filter-title">
-                <span>Calendar&nbsp;Search&nbsp;Filters</span>
+                <span>Schedule&nbsp;Search&nbsp;Filters</span>
                 <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="rsvp-note" if={ summit.current_user !== null }>
-        Please note that adding an item to "My Calendar" does not guarantee a seat in the presentation.
+        Please note that adding an item to "My Schedule" does not guarantee a seat in the presentation.
         Rooms fill up fast, so get there early. Some events require an RSVP and, in those cases, you will see a link to RSVP to the event.
     </div>
    <div id="all-events-filter-wrapper" class="row">

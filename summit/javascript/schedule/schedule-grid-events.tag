@@ -156,7 +156,7 @@
 
             var myschedule_container = self.summit.current_user !== null ? '<div class="col-sm-3 my-schedule-container">'+
             '<span class="icon-event-action">'+
-            '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;calendar</span>'+
+            '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;schedule</span>'+
             '</div>' : '';
 
             var cal_synch_container = self.summit.current_user !== null ? '<div class="col-md-2 gcal-synch-container">'+

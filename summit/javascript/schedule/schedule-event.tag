@@ -22,11 +22,11 @@
                         <div class="col-sm-3 my-schedule-container" if={ parent.summit.current_user !== null } >
                             <span if={ !own } onclick={ addToMySchedule } title="add to my schedule" class="icon-event-action">
                                 <i class="fa fa-plus-circle icon-foreign-event myschedule-icon" ></i>
-                                My&nbsp;calendar
+                                My&nbsp;schedule
                             </span>
                             <span if={ own } onclick={ removeFromMySchedule } title="remove from my schedule" class="icon-event-action">
                                 <i class="fa fa-check-circle icon-own-event myschedule-icon"></i>
-                                My&nbsp;calendar
+                                My&nbsp;schedule
                             </span>
                         </div>
                     </div>
