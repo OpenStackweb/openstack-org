@@ -83,6 +83,9 @@ class PresentationDetail extends React.Component {
 						      		<PresentationMeta presentation={presentation} />
 							         <h5>Abstract</h5>			         
 							         <div className="voting-presentation-track" dangerouslySetInnerHTML={{__html: presentation.abstract}} />						         
+							         <h5>What Should Attendees Expect to Learn?</h5>			         
+							         <div className="voting-presentation-track" dangerouslySetInnerHTML={{__html: presentation.attendees_expected_learnt}} />						         
+
 							         {speakers.length > 0 &&
 							         	<div>
 								         	<h5>Speakers</h5>
@@ -95,6 +98,7 @@ class PresentationDetail extends React.Component {
 								         	<MainSpeakerRow speakers={moderators}/>
 							         	</div>
 							     	 }
+
 
 						      	</div>
 						      	{loggedIn &&

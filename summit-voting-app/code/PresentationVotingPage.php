@@ -292,6 +292,7 @@ class PresentationVotingPage_API extends RequestHandler
                 'ago' => $vote->obj('Created')->Ago()
             ] : null,
             'abstract' => $presentation->Description,
+            'attendees_expected_learnt' => $presentation->AttendeesExpectedLearnt
         ];
 
         foreach ($presentation->getSpeakersAndModerators() as $s) {
