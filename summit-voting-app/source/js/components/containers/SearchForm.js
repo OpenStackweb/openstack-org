@@ -23,7 +23,7 @@ class SearchForm extends React.Component {
 	}
 
 
-	handleSubmit (e) {
+	handleSubmit (e) {		
 		e.preventDefault();
 		this.props.setSearchTerm(this.state.searchQuery);
 	}
@@ -39,6 +39,7 @@ class SearchForm extends React.Component {
 					value={searchQuery}
 					placeholder="Search"
 					type="text"
+					onBlur={this.handleSubmit}
 					name="Search" />
 			</form>
 		);
