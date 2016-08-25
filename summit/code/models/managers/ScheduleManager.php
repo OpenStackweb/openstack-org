@@ -302,8 +302,7 @@ final class ScheduleManager
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $event_id = intval($data['event_id']);
-
+            $event_id  = intval($data['event_id']);
             $event     = $summitevent_repository->getById($event_id);
 
             if (!$event) {
@@ -311,13 +310,14 @@ final class ScheduleManager
             }
 
             if (!$event->RSVPTemplate()) {
-                throw new NotFoundEntityException('RSVPTemplate', '');
+                throw new EntityValidationException('RSVPTemplate not set');
             }
 
-            $rsvp = $rsvp_repository->getByEventAndSubmitter($event_id,$member_id);
+            $rsvp = $rsvp_repository->getByEventAndSubmitter($event_id, $member_id);
+
             if (!$rsvp) {
                 $rsvp = new RSVP();
-                $rsvp->EventID = $event_id;
+                $rsvp->EventID       = $event_id;
                 $rsvp->SubmittedByID = $member_id;
             }
 

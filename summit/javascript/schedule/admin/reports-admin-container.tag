@@ -58,6 +58,7 @@
         this.on('mount', function() {
             $("#report_select").change(function(){
                 self.report = $(this).val();
+                console.log('selected report '+self.report);
                 self.update();
             });
 

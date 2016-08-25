@@ -20,13 +20,12 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
     /**
      * @param IRSVPTemplate $template
      * @param IRSVP $rsvp
-     * @param ISummitEvent $event_id
+     * @param ISummitEvent $event
      * @param string $form_name
-     * @return Form
+     * @return BootstrapForm|PresentationSpeaker
      */
     public function build(IRSVPTemplate $template, IRSVP $rsvp, ISummitEvent $event, $form_name ='RSVPForm')
     {
-        Requirements::javascript('summit/javascript/summitapp-rsvpform.js');
 
         $fields = new FieldList();
 
@@ -56,7 +55,7 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
             FormAction::create('submit_rsvp')->setTitle('Send RSVP')->addExtraClass('rsvp_submit')
         );
 
-        $form =  new BootstrapForm(Controller::curr(), $form_name, $fields, $actions, $validator);
+        $form =  new BootstrapForm(Controller::curr(), $form_name.'_'.$event->getIdentifier() , $fields, $actions, $validator);
         $form->setAttribute('class','rsvp_form');
         return $form;
     }

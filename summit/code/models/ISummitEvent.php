@@ -143,4 +143,9 @@ interface ISummitEvent extends IEntity
      * @return string
      */
     public function getDayLabel();
+
+    /**
+     * @return bool
+     */
+    public function hasRSVPTemplate();
 }

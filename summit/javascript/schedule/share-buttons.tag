@@ -99,7 +99,7 @@
             FB.init({
                 appId      : self.share_info.fb_app_id,
                 xfbml      : true,
-                version    : 'v2.5'
+                version    : 'v2.7'
             });
         };
 

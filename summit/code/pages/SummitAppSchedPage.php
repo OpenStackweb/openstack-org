@@ -98,21 +98,23 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'index',
         'ViewFullSchedule',
         'ExportFullSchedule',
-        'eventDetails'
+        'eventDetails',
+        'ViewEventRSVP',
     );
 
     static $url_handlers = array
     (
-        'events/$EVENT_ID/html'         => 'eventDetails',
-        'events/$EVENT_ID/export_ics'   => 'ExportEventToICS',
-        'events/$EVENT_ID/$EVENT_TITLE' => 'ViewEvent',
-        'speakers/$SPEAKER_ID'          => 'ViewSpeakerProfile',
-        'attendees/$ATTENDEE_ID'        => 'ViewAttendeeProfile',
-        'mine/pdf'                      => 'ExportMySchedule',
-        'mine'                          => 'ViewMySchedule',
-        'full/pdf'                      => 'ExportFullSchedule',
-        'full'                          => 'ViewFullSchedule',
-        'global-search'                 => 'DoGlobalSearch',
+        'events/$EVENT_ID/html'              => 'eventDetails',
+        'events/$EVENT_ID/export_ics'        => 'ExportEventToICS',
+        'events/$EVENT_ID/$EVENT_TITLE/rsvp' => 'ViewEventRSVP',
+        'events/$EVENT_ID/$EVENT_TITLE'      => 'ViewEvent',
+        'speakers/$SPEAKER_ID'               => 'ViewSpeakerProfile',
+        'attendees/$ATTENDEE_ID'             => 'ViewAttendeeProfile',
+        'mine/pdf'                           => 'ExportMySchedule',
+        'mine'                               => 'ViewMySchedule',
+        'full/pdf'                           => 'ExportFullSchedule',
+        'full'                               => 'ViewFullSchedule',
+        'global-search'                      => 'DoGlobalSearch',
     );
 
     public function init()
@@ -142,7 +144,14 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/bower_assets/bowser/src/bowser.js');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
         Requirements::javascript('summit/javascript/schedule/install_mobile_app.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.serialize.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        Requirements::javascript('summit/javascript/forms/rsvp.form.js');
 
+    }
+
+    public function getFacebookAppID(){
+        return FB_APP_ID;
     }
 
     public function ViewEvent(SS_HTTPRequest $request)
@@ -176,6 +185,32 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             array(
                 'Event'     => $event,
                 'goback'    => $goback,
+                'Token'     => $token
+            ));
+    }
+
+    public function ViewEventRSVP(SS_HTTPRequest $request){
+
+        Requirements::block("summit/css/schedule-grid.css");
+        Requirements::css("summit/css/summitapp-event.css");
+        Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
+
+        $event  = $this->getSummitEntity($request);
+        if (is_null($event) || !$event->isPublished() || !$event->hasRSVPTemplate()) {
+            return $this->httpError(404, 'Sorry that event could not be found');
+        }
+        $token = Session::get("SummitAppEventPage.ShareEmail");
+        if (!$token) {
+            $token = md5(uniqid(rand(), TRUE));
+            Session::set("SummitAppEventPage.ShareEmail",$token);
+            Session::set("SummitAppEventPage.ShareEmailCount",0);
+        }
+
+
+        return $this->renderWith(
+            array('SummitAppEventPage_RSVP', 'SummitPage', 'Page'),
+            array(
+                'Event'     => $event,
                 'Token'     => $token
             ));
     }
@@ -216,11 +251,11 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
      */
     public function RSVPForm($event_id)
     {
-        $event = $this->event_repository->getById($event_id);
+        $event          = $this->event_repository->getById($event_id);
         $rsvp_template  = $event->RSVPTemplate();
-        $rsvp = $this->rsvp_repository->getByEventAndSubmitter($event_id,Member::currentUserID());
-        $builder = new RSVPTemplateUIBuilder();
-        $form = $builder->build($rsvp_template,$rsvp,$event);
+        $rsvp           = $this->rsvp_repository->getByEventAndSubmitter($event_id,Member::currentUserID());
+        $builder        = new RSVPTemplateUIBuilder();
+        $form           = $builder->build($rsvp_template, $rsvp, $event);
         return $form;
     }
 

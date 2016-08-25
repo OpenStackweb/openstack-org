@@ -384,10 +384,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $events = array();
-            if ($search_term != '') {
-                $events = $this->event_repository->searchBySummitAndTerm($summit,$search_term);
-            }
+            $events  = $this->event_repository->searchBySummitTermAndHasRSVP($summit,$search_term);
 
             $results = array('event_count' => 0, 'data' => array());
             if (count($events)) {

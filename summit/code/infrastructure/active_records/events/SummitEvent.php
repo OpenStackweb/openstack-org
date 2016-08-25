@@ -761,4 +761,11 @@ SQL;
         $res = DB::query("SELECT COUNT(ID) AS QTY FROM SummitAttendee_Schedule WHERE SummitEventID = {$this->ID};")->first();
         return intval($res['QTY']);
     }
+
+    /**
+     * @return bool
+     */
+    public function hasRSVPTemplate(){
+        return $this->RSVPTemplateID > 0 ;
+    }
 }

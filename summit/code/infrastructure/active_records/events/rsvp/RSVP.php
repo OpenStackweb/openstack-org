@@ -41,7 +41,6 @@ class RSVP extends DataObject implements IRSVP
         'BeenEmailed' => false,
     );
 
-
     private static $searchable_fields = array();
 
     private static $summary_fields = array

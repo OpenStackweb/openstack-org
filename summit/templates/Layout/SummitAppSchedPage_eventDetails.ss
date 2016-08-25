@@ -49,7 +49,6 @@
                 <% loop $Event.Tags %>
                 <span title="Search Tag" class="tag">
                     <a class="search-link" href="{$Top.Link(global-search)}?t={$TagURL}">{$Tag}<% if not Last %>,&nbsp;<% end_if %></a>
-                &nbsp;
                 </span>
                 <% end_loop %>
             </div>
@@ -64,9 +63,9 @@
         </div>
         <% if Event.RSVPTemplate.Exists() %>
         <div class="info_item">
-            <button type="button" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" data-toggle="modal" data-target="#rsvpModal">RSVP to this Event</button>
+            <button type="button" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" data-toggle="modal" data-target="#rsvpModal_{$Event.ID}">RSVP to this Event</button>
         </div>
-        <div id="rsvpModal" class="modal fade" role="dialog">
+        <div id="rsvpModal_{$Event.ID}" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">

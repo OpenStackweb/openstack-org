@@ -98,9 +98,9 @@
 
             <% if Event.RSVPTemplate.Exists() %>
             <div class="info_item">
-                <button type="button" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" data-toggle="modal" data-target="#rsvpModal">RSVP to this Event</button>
+                <button type="button" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" data-toggle="modal" data-target="#rsvpModal_{$Event.ID}">RSVP to this Event</button>
             </div>
-            <div id="rsvpModal" class="modal fade" role="dialog">
+            <div id="rsvpModal_{$Event.ID}" class="modal fade" role="dialog">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -136,7 +136,7 @@
                     {
                         event_id: {$Event.ID},
                         url: "{$AbsoluteLink}events/{$Event.ID}",
-                        fb_app_id : {$SiteConfig.OGApplicationID},
+                        fb_app_id : "{$Top.FacebookAppID}",
                         token: "{$Token}"
                     };
                 </script>
