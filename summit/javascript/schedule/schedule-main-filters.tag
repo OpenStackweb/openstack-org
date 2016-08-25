@@ -5,7 +5,7 @@
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
             <div class="col-filter-title">
-                <span>Schedule&nbsp;Search&nbsp;Filters</span>
+                <span>Schedule&nbsp;Filters</span>
                 <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
@@ -36,17 +36,17 @@
             <a href="{ summit.track_list_link }" target="_blank">Learn more about the { summit.title } Summit Categories and Tracks.</a>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
-            <select id="ddl_track_groups" name="ddl_track_groups" data-placeholder="Summit Categories"  multiple="multiple">
-                <option each={ track_group_id, idx in summit.category_group_ids } data-color="{ summit.category_groups[track_group_id].color }" value="{ track_group_id }">{ summit.category_groups[track_group_id].name }</option>
+            <select id="ddl_track_groups" name="ddl_track_groups" data-placeholder="Summit Categories" size="5"  multiple="multiple">
+                <option each={ track_group_id, idx in summit.category_group_ids } value="{ track_group_id }">{ summit.category_groups[track_group_id].name }</option>
              </select>
         </div>
          <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_tracks" data-placeholder="Tracks"  multiple="multiple">
+            <select id="ddl_tracks" data-placeholder="Tracks"  multiple="multiple" style="overflow-y: scroll;">
                 <option each={ track_id, idx in summit.track_ids } value="{ track_id }">{ summit.tracks[track_id].name }</option>
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Types"  multiple="multiple">
+            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Types" size="7" multiple="multiple">
                 <option each={ event_type_id, idx in summit.event_type_ids } value="{ event_type_id }">{ summit.event_types[event_type_id].type }</option>
             </select>
         </div>
@@ -56,7 +56,7 @@
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple">
+            <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple" style="overflow-y: scroll;">
                 <option each={ tag_id, idx in summit.tag_ids } value="{ tag_id }">{ summit.tags[tag_id].name }</option>
             </select>
         </div>
