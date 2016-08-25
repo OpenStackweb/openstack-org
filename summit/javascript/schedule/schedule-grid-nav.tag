@@ -33,7 +33,7 @@
             </nav>
             <div class="track-nav-container" if={ view == 'tracks' }>
                 <select id="track-select" onchange={ selectTrack }>
-                    <option each={  key, cat in summit.tracks } value="{ key }" selected={ cat.selected }>{ cat.name }</option>
+                    <option each={  track_id, idx in summit.track_ids } value="{ track_id }" selected={ summit.tracks[track_id].selected }>{ summit.tracks[track_id].name }</option>
                 </select>
             </div>
             <nav class="navbar navbar-default navbar-days" if={ view == 'levels' }>

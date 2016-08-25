@@ -55,6 +55,7 @@
                             id:   $Summit.ID,
                             link: "{$Summit.Link.JS}",
                             schedule_link: "{$Summit.getScheduleLink.JS}",
+                            track_list_link: "{$Summit.getTrackListLink.JS}",
                             title: "{$Summit.Title.JS}",
                             year: "{$Summit.getSummitYear().JS}",
                             dates : [],

@@ -133,6 +133,10 @@ class PresentationCategory extends DataObject
         return $fields;
     }
 
+    public function hasEventsPublished(){
+        return Presentation::get()->filter(["SummitID" => $this->SummitID, "Published" => 1 , "CategoryID" => $this->ID])->count() > 0;
+    }
+
     protected function onAfterWrite() {
         parent::onAfterWrite();
         $this->Summit()->LastEdited = SS_Datetime::now()->Rfc2822();

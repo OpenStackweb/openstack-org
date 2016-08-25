@@ -302,15 +302,15 @@
         });
 
         isFilterEmpty() {
-            return self.isSummitTypesFilterEmpty() && self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty();
+            return self.isTrackGroupsFilterEmpty() && self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty();
         }
 
         isEventTypesFilterEmpty() {
             return (self.current_filter.event_types === null || self.current_filter.event_types.length === 0);
         }
 
-        isSummitTypesFilterEmpty() {
-            return (self.current_filter.summit_types === null || self.current_filter.summit_types.length === 0);
+        isTrackGroupsFilterEmpty() {
+            return (self.current_filter.track_groups === null || self.current_filter.track_groups.length === 0);
         }
 
         isTracksFilterEmpty() {
@@ -340,9 +340,9 @@
             if(!self.isFilterEmpty()){
                     for(var e of self.events){
                         var show = true;
-                        //summit types
-                        if(!self.isSummitTypesFilterEmpty())
-                            show &= e.summit_types_id.some(function(v) { return self.current_filter.summit_types.indexOf(v.toString()) != -1; });
+                        //track groups
+                        if(!self.isTrackGroupsFilterEmpty())
+                            show &= e.hasOwnProperty('track_id') ? self.current_filter.track_groups.some(function(v) { return self.summit.category_groups[parseInt(v)].tracks.indexOf(parseInt(e.track_id)) != -1; }) : false;
                         if(!show){ $('#event_'+e.id).hide(); continue;}
                         //eventypes
                         if(!self.isEventTypesFilterEmpty())

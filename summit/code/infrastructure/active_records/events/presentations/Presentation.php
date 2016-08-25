@@ -124,15 +124,15 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $db = array
     (
-        'Level' => "Enum('Beginner,Intermediate,Advanced,N/A')",
-        'Status' => 'Varchar',
-        'OtherTopic' => 'Varchar',
-        'Progress' => 'Int',
-        'Views' => 'Int',
-        'BeenEmailed' => 'Boolean',
-        'ProblemAddressed' => 'HTMLText',
+        'Level'                   => "Enum('Beginner,Intermediate,Advanced,N/A')",
+        'Status'                  => 'Varchar',
+        'OtherTopic'              => 'Varchar',
+        'Progress'                => 'Int',
+        'Views'                   => 'Int',
+        'BeenEmailed'             => 'Boolean',
+        'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
-        'Legacy' => 'Boolean'
+        'Legacy'                  => 'Boolean'
     );
 
     /**
@@ -434,7 +434,7 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public static function getLevels()
     {
-        $res = singleton('Presentation')->dbObject('Level')->enumValues();
+        $res  = singleton('Presentation')->dbObject('Level')->enumValues();
         $list = new ArrayList();
         foreach ($res as $k => $v) {
             $list->add(new ArrayData(array('Level' => $v)));

@@ -33,21 +33,21 @@
     </div>
    <div id="all-events-filter-wrapper" class="row">
         <div class="col-sm-12">
-            <a href="{ summit.schedule_link }track-list" target="_blank">Learn more about the { summit.title } Summit { summit.year } Tracks</a>
+            <a href="{ summit.track_list_link }" target="_blank">Learn more about the { summit.title } Summit { summit.year } Tracks</a>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
-            <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Summit Type"  multiple="multiple">
-                <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
+            <select id="ddl_track_groups" name="ddl_track_groups" data-placeholder="Presentation Track Groups"  multiple="multiple">
+                <option each={ track_group_id, idx in summit.category_group_ids } data-color="{ summit.category_groups[track_group_id].color }" value="{ track_group_id }">{ summit.category_groups[track_group_id].name }</option>
              </select>
         </div>
-        <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Type"  multiple="multiple">
-                <option each={ id, obj in summit.event_types } value="{ id }">{ obj.type }</option>
+         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
+            <select id="ddl_tracks" data-placeholder="Presentation Tracks"  multiple="multiple">
+                <option each={ track_id, idx in summit.track_ids } value="{ track_id }">{ summit.tracks[track_id].name }</option>
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_tracks" data-placeholder="Presentation Tracks"  multiple="multiple">
-                <option each={ id, obj in summit.tracks } value="{ id }">{ obj.name }</option>
+            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Type"  multiple="multiple">
+                <option each={ event_type_id, idx in summit.event_type_ids } value="{ event_type_id }">{ summit.event_types[event_type_id].type }</option>
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
@@ -57,7 +57,7 @@
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
             <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple">
-                <option each={ id, obj in summit.tags } value="{ id }">{ obj.name }</option>
+                <option each={ tag_id, idx in summit.tag_ids } value="{ tag_id }">{ summit.tags[tag_id].name }</option>
             </select>
         </div>
     </div>
@@ -90,26 +90,52 @@
                 event.preventDefault();
             });
 
-            $('#ddl_summit_types').chosen({  width: '100%'});
+            $('#ddl_track_groups').chosen({  width: '100%'});
             $('#ddl_event_types').chosen({  width: '100%'});
             $('#ddl_tracks').chosen({  width: '100%'});
             $('#ddl_tags').chosen({ width: '100%'});
             $('#ddl_levels').chosen({ width: '100%'});
 
-            $('#ddl_summit_types').change(function(e, params){
-                if(!self.atomic_filtering)
-                    self.doFilter();
-                var choices = $('.search-choice','#ddl_summit_types_chosen');
+            $('#ddl_track_groups').change(function(e, params){
+
+                var choices          = $('.search-choice','#ddl_track_groups_chosen');
+                var filtered_tracks  = [];
+                var selected_groups  = $('#ddl_track_groups').val();
+                //clear current track filter
+                $('#ddl_tracks').val('').trigger('chosen:updated');
+                $(window).url_fragment('setParam','tracks', '');
+                window.location.hash = $(window).url_fragment('serialize');
+                $("#ddl_tracks option").show();
+
                 if(choices.length > 0){
                     choices.each(function(index, e){
-                        var a      = $('.search-choice-close', $(this));
-                        var idx    = $(a).attr('data-option-array-index');
-                        var option = $("#ddl_summit_types option")[parseInt(idx)];
-                        var color  = $(option).attr('data-color');
+                        var a            = $('.search-choice-close', $(this));
+                        var idx          = $(a).attr('data-option-array-index');
+                        var option       = $("#ddl_track_groups option")[parseInt(idx)];
+                        var color        = $(option).attr('data-color');
                         $(this).css('background-color', color);
                         $(this).css('background-image','none');
                     });
                 }
+
+                // get the groups
+                if(selected_groups != null)
+                    $.each(selected_groups, function(index, group_id){
+                           var group        = self.summit.category_groups[group_id];
+                           filtered_tracks  = filtered_tracks.concat(group.tracks);
+                    });
+
+                if(filtered_tracks.length > 0){
+                    $.each(self.summit.tracks, function(index, track){
+                        if(filtered_tracks.indexOf(track.id) < 0)
+                            $('#ddl_tracks').children("option[value="+track.id+"]").hide();
+                     });
+                }
+
+                $('#ddl_tracks').trigger('chosen:updated');
+
+                 if(!self.atomic_filtering)
+                    self.doFilter();
             });
 
             $('#ddl_event_types').change(function(e, params){
@@ -162,9 +188,9 @@
                     var ddl    = null;
 
                     switch(key) {
-                        case 'summit_types':
+                        case 'track_groups':
                         {
-                            ddl = $('#ddl_summit_types');
+                            ddl = $('#ddl_track_groups');
                         }
                         break;
                         case 'event_types':
@@ -204,7 +230,7 @@
             var own    = this.summit.current_user !== null && $('.switch_schedule').hasClass('full') === false;
             var filters =
             {
-                summit_types : $('#ddl_summit_types').val(),
+                track_groups : $('#ddl_track_groups').val(),
                 event_types  : $('#ddl_event_types').val(),
                 tracks       : $('#ddl_tracks').val(),
                 tags         : $('#ddl_tags').val(),
@@ -212,7 +238,7 @@
                 own          : own
             };
 
-            $(window).url_fragment('setParam','summit_types', filters.summit_types);
+            $(window).url_fragment('setParam','track_groups', filters.track_groups);
             $(window).url_fragment('setParam','event_types', filters.event_types);
             $(window).url_fragment('setParam','tracks', filters.tracks);
             $(window).url_fragment('setParam','tags', filters.tags);
@@ -223,7 +249,7 @@
         }
 
         clearFilters() {
-            $('#ddl_summit_types').val('').trigger("chosen:updated");
+            $('#ddl_track_groups').val('').trigger("chosen:updated");
             $('#ddl_event_types').val('').trigger("chosen:updated");
             $('#ddl_tracks').val('').trigger("chosen:updated");
             $('#ddl_tags').val('').trigger("chosen:updated");

@@ -54,8 +54,8 @@
             <% else %>
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <p>Hello {$CurrentMember.FullName} ! registration process for <strong>$Top.Summit.Title</strong> Summit is opened from <strong>$Top.Summit.getBeginDateDMY</strong> to <strong>$Top.Summit.getEndDateDMY</strong>.</p>
-                    <p>Are you a Summit Attendee? Add your Order # to unlock features only available for Registered Summit Attendees <a href="profile/attendeeInfoRegistration" class="alert-link">here</a></p>
+                    <p><%t Summit.RegistrationLine1 member_name=$CurrentMember.FullName summit_name=$Top.Summit.Title summit_registration_link=$Top.Summit.RegistrationLink %></p>
+                    <p><%t Summit.RegistrationLine2 confirm_order_link=$Top.ProfileAttendeeRegistrationLink %></p>
                 </div>
             <% end_if %>
             <% end_if %>

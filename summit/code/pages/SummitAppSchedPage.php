@@ -180,6 +180,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             ));
     }
 
+    public function getProfileAttendeeRegistrationLink(){
+        $page = EditProfilePage::get()->first();
+        if(!$page) return '#';
+        return $page->Link("attendeeInfoRegistration");
+    }
+
     public function eventDetails(SS_HTTPRequest $request)
     {
         if(!Director::is_ajax())

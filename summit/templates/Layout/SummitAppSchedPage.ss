@@ -7,6 +7,7 @@
             id:   $Summit.ID,
             link: "{$Summit.Link.JS}",
             schedule_link: "{$Summit.getScheduleLink.JS}",
+            track_list_link: "{$Summit.getTrackListLink.JS}",
             title: "{$Summit.Title.JS}",
             year: "{$Summit.getSummitYear().JS}",
             dates : {},
@@ -15,11 +16,16 @@
             speakers : {},
             sponsors : {},
             event_types:{},
+            event_type_ids: [],
             locations : {},
             tags: {},
+            tag_ids:[],
             tracks : {},
+            track_ids : [],
             category_groups: {},
+            category_group_ids: [],
             presentation_levels: {},
+            presentation_level_ids: [],
             current_user: null,
             should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
         };
@@ -40,20 +46,24 @@
            };
        <% end_loop %>
 
-        <% loop $Summit.Tags %>
+        <% loop $Summit.Tags.Sort("Tag", "ASC") %>
         summit.tags[{$ID}] =
         {
             id: {$ID},
             name : "{$Tag.JS}",
         };
+        summit.tag_ids.push($ID);
         <% end_loop %>
 
-        <% loop $Summit.getCategories() %>
-        summit.tracks[{$ID}] =
-        {
-            id: {$ID},
-            name : "{$Title.JS}",
-        };
+        <% loop $Summit.getCategories().Sort("Title", "ASC") %>
+            <% if hasEventsPublished %>
+                summit.tracks[{$ID}] =
+                {
+                    id: {$ID},
+                    name : "{$Title.JS}",
+                };
+                summit.track_ids.push($ID);
+            <% end_if %>
         <% end_loop %>
 
         <% loop $Top.getPresentationLevels %>
@@ -63,12 +73,13 @@
         };
         <% end_loop %>
 
-        <% loop $Summit.EventTypes %>
+        <% loop $Summit.EventTypes.Sort("Type", "ASC")  %>
         summit.event_types[{$ID}] =
         {
             type : "{$Type.JS}",
             color : "{$FormattedColor}",
         };
+        summit.event_type_ids.push($ID);
         <% end_loop %>
 
         <% loop $Summit.Types %>
@@ -81,13 +92,21 @@
         };
         <% end_loop %>
 
-        <% loop $Summit.CategoryGroups %>
+        <% loop $Summit.CategoryGroups.Filter("ClassName", "PresentationCategoryGroup").Sort(Name, ASC)  %>
         summit.category_groups[{$ID}] =
         {
            name : "{$Name.JS}",
            description : "{$Description.JS}",
-           color : "{$FormattedColor}"
+           color : "{$FormattedColor}",
+           tracks: [
+                   <% loop Categories %>
+                       <% if hasEventsPublished %>
+                            $ID,
+                       <% end_if %>
+                   <% end_loop %>
+           ],
         };
+        summit.category_group_ids.push($ID);
         <% end_loop %>
 
         <% loop $Summit.Locations %>
@@ -156,8 +175,8 @@
         <% if not CurrentMember.isAttendee($Summit.ID)  %>
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p>Hello {$CurrentMember.FullName} ! registration process for <strong>$Top.Summit.Title</strong> Summit is opened from <strong>$Top.Summit.getBeginDateDMY</strong> to <strong>$Top.Summit.getEndDateDMY</strong>.</p>
-                <p>Are you a Summit Attendee? Add your Order # to unlock features only available for Registered Summit Attendees <a href="profile/attendeeInfoRegistration" class="alert-link">here</a></p>
+                <p><%t Summit.RegistrationLine1 member_name=$CurrentMember.FullName summit_name=$Top.Summit.Title summit_registration_link=$Top.Summit.RegistrationLink %></p>
+                <p><%t Summit.RegistrationLine2 confirm_order_link=$Top.ProfileAttendeeRegistrationLink %></p>
             </div>
         <% else %>
             <div class="row">
