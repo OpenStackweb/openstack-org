@@ -806,9 +806,11 @@ class PresentationSpeaker extends DataObject
     {
         $bio = strip_tags($this->getField('Bio'));
 
-        if (strlen($bio) < $length) return $bio;
+        if (strlen($bio) <= $length) return $bio;
 
-        $pos = strpos($bio, ' ', $length);
+        $length -= 3; // account for '...'
+        $pos = strrpos(substr($bio, 0, $length + 1), ' ');
+        if ($pos === false) $pos = $length;
         $short_bio = substr($bio, 0, $pos) . '...';
         return $short_bio;
     }
