@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-10 col-sm-push-1">
                 <h1>Summit Categories</h1>
-                <p>The OpenStack Summit is a four-day event comprised of presentations, panels, workshops, and educational opportunities through OpenStack Academy. Topics span cloud strategy and business case development to operational best practices and technical deep dives. Start planning your week by looking at the high level themes below. The full schedule will be available early September 2016.</p>
+                <p>The OpenStack Summit is a four-day event comprised of presentations, panels, workshops, and educational opportunities through OpenStack Academy. Topics span cloud strategy and business case development to operational best practices and technical deep dives. Start planning your week by looking at the high level themes below. <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/">The OpenStack Summit Barcelona Schedule is available here</a>.</p>
                <!-- <a href="/summit/austin-2016/categories/track-list" target="_blank">Learn more about the {$Summit.Title} Summit {$Summit.getSummitYear()} Sessions</a> -->
             </div>
         </div>
@@ -128,7 +128,6 @@
                             <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=12">View on Summit Schedule</a>
                         </div>
                         <ul>
-                            <li class="tracks-tooltip" title="Looking to prove your OpenStack skills in the job market or industry? The OpenStack Foundation will offer the official Certified OpenStack Administrator exam on-site at the Summit. The exam takes approximately 2.5 hours to complete and will cost $300 USD. Learn more at http://www.openstack.org/coa.">COA Exams*</li>
                             <li class="tracks-tooltip" title="Intensive training courses will be run and offered free of charge to registered Summit attendees by leading training companies in the OpenStack ecosystem. RSVP is required and we’ll just be requesting a small deposit to reserve your spot, which is refundable upon completion of the course. Bring your laptop.">Full Day Intensive Trainings*</li>
                             <li class="tracks-tooltip" title="Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.">Hands-On Workshops</li>
                         </ul>
@@ -138,7 +137,7 @@
                         <div class="session-list-description">
                             <div class="session-list-text">
                                 <p>
-                                    With a focus on education and training for cloud operators and application developers, the OpenStack Academy brings together hands-on workshops and day-long intensive training sessions under one roof. We'll also offer the Certified OpenStack Administrator exam on-site. Workshops and trainings will require an RSVP and certain pre-requisites. Bring your laptop and walk away with OpenStack skills.
+                                    With a focus on education and training for cloud operators and application developers, the OpenStack Academy brings together hands-on workshops and day-long intensive training sessions under one roof. Workshops and trainings will require an RSVP and certain pre-requisites. Bring your laptop and walk away with OpenStack skills.
                                 </p>
                             </div>
                         </div>
