@@ -18,8 +18,7 @@
                     <h3>Architecture & Operations</h3>
                     <div class="session-list-tracks">
                         <div class="session-tracks-title">
-                            Tracks
-                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
+                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=15">View on Summit Schedule</a>
                         </div>
                         <ul>
                             <li class="tracks-tooltip" title="If you are a cloud architect or involved in planning your cloud strategy, this track will discuss popular reference architectures, configuration options, workload optimization, and architecture show and tell, where experienced users will share their architectures and experiences.">Architectural Decisions</li>
@@ -55,8 +54,7 @@
                     <h3>Business & Strategy</h3>
                     <div class="session-list-tracks">
                         <div class="session-tracks-title">
-                            Tracks
-                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
+                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=14">View on Summit Schedule</a>
                         </div>
                         <ul>
                             
@@ -96,8 +94,7 @@
                     <h3>Developers</h3>
                     <div class="session-list-tracks">
                         <div class="session-tracks-title">
-                            Tracks
-                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
+                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=16">View on Summit Schedule</a>
                         </div>
                         <ul>
                             <li class="tracks-tooltip" title="Big Data collection and analysis is a common use case for OpenStack infrastructure. In this track, you'll learn about specific reference architectures and use cases, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.">Big Data</li>
@@ -128,8 +125,7 @@
                     <h3>OpenStack Academy</h3>
                     <div class="session-list-tracks">
                         <div class="session-tracks-title">
-                            Tracks
-                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
+                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=12">View on Summit Schedule</a>
                         </div>
                         <ul>
                             <li class="tracks-tooltip" title="Looking to prove your OpenStack skills in the job market or industry? The OpenStack Foundation will offer the official Certified OpenStack Administrator exam on-site at the Summit. The exam takes approximately 2.5 hours to complete and will cost $300 USD. Learn more at http://www.openstack.org/coa.">COA Exams*</li>
@@ -161,8 +157,7 @@
                     <h3>Community Collaboration</h3>
                     <div class="session-list-tracks">
                         <div class="session-tracks-title">
-                            Tracks
-                            <a href="#all-tracks" class="view-all-tracks-link">View All Tracks</a>
+                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=13">View on Summit Schedule</a>
                         </div>
                         <ul>
                             <li class="tracks-tooltip" title="BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather*</li>
