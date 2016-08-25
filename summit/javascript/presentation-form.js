@@ -38,19 +38,7 @@ $(document).ready(function(){
             GroupID:{required: true},
             CategoryID:{required: true},
             Level:{required: true},
-            ShortDescription:{required: true, text_length: true},
-            ProblemAddressed:{
-                required: function(){
-                    return $('select[name=GroupID] option:selected').hasClass('public');
-                },
-                text_length: true
-            },
-            AttendeesExpectedLearnt:{
-                required: function(){
-                    return $('select[name=GroupID] option:selected').hasClass('public');
-                },
-                text_length: true
-            }
+            ShortDescription:{required: true, text_length: true}
         },
         messages: {
             Title:{
@@ -64,14 +52,6 @@ $(document).ready(function(){
             ShortDescription:{
                 required: 'Presentation abstract is required.',
                 maxlength: 'Abstract must be less than 1000 characters long.'
-            },
-            ProblemAddressed:{
-                required: 'This field is required.',
-                maxlength: 'This must be less than 1000 characters long.'
-            },
-            AttendeesExpectedLearnt:{
-                required: 'This field is required.',
-                maxlength: 'This must be less than 1000 characters long.'
             }
         },
         errorElement: 'span',
