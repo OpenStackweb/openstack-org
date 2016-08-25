@@ -389,7 +389,7 @@ final class DupesMembersManager {
         return $this->tx_manager->transaction(function() use( $member_id, $show, $member_repository) {
 
             $current_member = $member_repository->getById($member_id);
-            $current_member->showDupesOnProfile($show);
+            $current_member->updateShowDupesOnProfile($show);
         });
     }
 

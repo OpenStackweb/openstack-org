@@ -341,7 +341,7 @@ final class FoundationMember
      * @param bool $show
      * @return void
      */
-    public function showDupesOnProfile($show)
+    public function updateShowDupesOnProfile($show)
     {
         $this->owner->setField('ShowDupesOnProfile', $show);
     }

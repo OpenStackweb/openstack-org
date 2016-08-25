@@ -109,7 +109,7 @@ interface ICommunityMember extends IEntity
      * @param bool $show
      * @return void
      */
-    public function showDupesOnProfile($show);
+    public function updateShowDupesOnProfile($show);
 
     /**
      * @return bool
