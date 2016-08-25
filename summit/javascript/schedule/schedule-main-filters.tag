@@ -36,12 +36,12 @@
             <a href="{ summit.track_list_link }" target="_blank">Learn more about the { summit.title } Summit { summit.year } Tracks</a>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
-            <select id="ddl_track_groups" name="ddl_track_groups" data-placeholder="Presentation Track Groups"  multiple="multiple">
+            <select id="ddl_track_groups" name="ddl_track_groups" data-placeholder="Track Groups"  multiple="multiple">
                 <option each={ track_group_id, idx in summit.category_group_ids } data-color="{ summit.category_groups[track_group_id].color }" value="{ track_group_id }">{ summit.category_groups[track_group_id].name }</option>
              </select>
         </div>
          <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_tracks" data-placeholder="Presentation Tracks"  multiple="multiple">
+            <select id="ddl_tracks" data-placeholder="Track"  multiple="multiple">
                 <option each={ track_id, idx in summit.track_ids } value="{ track_id }">{ summit.tracks[track_id].name }</option>
             </select>
         </div>
@@ -51,7 +51,7 @@
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_levels" data-placeholder="Presentation Levels"  multiple="multiple">
+            <select id="ddl_levels" data-placeholder="Presentation Level"  multiple="multiple">
                 <option each={ id, obj in summit.presentation_levels } value="{ id }">{ obj.level }</option>
             </select>
         </div>
