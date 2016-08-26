@@ -55,7 +55,7 @@
         shareFacebook(e) {
             FB.ui({
                 method: 'share',
-                href: self.share_info.url,
+                href: self.share_info.event_url,
             }, function(response){});
         }
 
@@ -108,6 +108,7 @@
             FB.init({
                 appId      : self.share_info.fb_app_id,
                 xfbml      : true,
+                status     : true,
                 version    : 'v2.7'
             });
         };

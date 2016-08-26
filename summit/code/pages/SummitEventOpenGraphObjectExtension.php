@@ -21,7 +21,7 @@ class SummitEventOpenGraphObjectExtension extends SummitEntityOpenGraphObjectExt
 
     public function getOGDescription()
     {
-        return $this->owner->getDescription();
+        return strip_tags($this->owner->getDescription());
     }
 
     protected function getEntityPath(){

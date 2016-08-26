@@ -134,10 +134,14 @@
                 <script type="application/javascript">
                     var share_info =
                     {
-                        event_id: {$Event.ID},
-                        url: "{$AbsoluteLink}events/{$Event.ID}",
+                        fb_app_name: "OpenStack",
                         fb_app_id : "{$Top.FacebookAppID}",
-                        token: "{$Token}"
+                        token: "{$Token}",
+                        event_id: {$Event.ID},
+                        event_title: "{$Event.Title}",
+                        event_url: "{$AbsoluteLink}events/{$Event.ID}",
+                        event_description: "{$Event.Description.JS}",
+                        event_pic_url: "{$Event.getOGImage}",
                     };
                 </script>
                 <share-buttons share_info="{ share_info }"></share-buttons>
