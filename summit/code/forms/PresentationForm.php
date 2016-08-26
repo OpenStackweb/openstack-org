@@ -166,7 +166,8 @@ final class PresentationForm extends BootstrapForm
             if(is_null($field)) continue;
             $val = $field->Value();
             if(empty($val)) continue;
-            $presentation->Materials()->add( PresentationLink::create(array('Link' => trim($val))));
+            $presentation = PresentationLink::create(['Name' => trim($val), 'Link' => trim($val)]);
+            $presentation->Materials()->add($presentation);
         }
 
         $extra_questions = ($presentation->Category()->Exists()) ? $presentation->Category()->ExtraQuestions() : array();

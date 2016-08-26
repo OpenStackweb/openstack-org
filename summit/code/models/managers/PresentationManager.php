@@ -415,7 +415,7 @@ final class PresentationManager implements IPresentationManager
                 foreach($data["PresentationLink"] as $id => $val)
                 {
                     if(empty($val)) continue;
-                    $presentation->Materials()->add(PresentationLink::create(array('Link' => trim($val))));
+                    $presentation->Materials()->add(PresentationLink::create(array('Name' => trim($val), 'Link' => trim($val))));
                 }
             }
 

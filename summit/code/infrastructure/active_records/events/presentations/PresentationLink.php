@@ -35,9 +35,15 @@ class PresentationLink extends PresentationMaterial
     {
         $result = ValidationResult::create();
 
+
+        $link = trim($this->Link);
+
         if (empty($link)) {
-            return $result->error('you must set a link!');
+            return $result->error('you must set an url for Presentation Link!');
         }
+
+        if(filter_var($link, FILTER_VALIDATE_URL) === false)
+            return $result->error('you must set a valid url for Presentation Link!');
 
         return $result;
     }
