@@ -84,3 +84,5 @@ fluent/
 opengraph/
 translatable/
 .DS_Store
+silverstripe-green/
+silverstripe-serialised-dbfields/
