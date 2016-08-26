@@ -38,7 +38,12 @@ $(document).ready(function(){
             GroupID:{required: true},
             CategoryID:{required: true},
             Level:{required: true},
-            ShortDescription:{required: true, text_length: true}
+            ShortDescription:{required: true, text_length: true},
+            "PresentationLink[1]": {url:true},
+            "PresentationLink[2]": {url:true},
+            "PresentationLink[3]": {url:true},
+            "PresentationLink[4]": {url:true},
+            "PresentationLink[5]": {url:true}
         },
         messages: {
             Title:{
