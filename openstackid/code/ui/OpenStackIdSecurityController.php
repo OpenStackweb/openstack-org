@@ -55,7 +55,6 @@ class OpenStackIdSecurityController extends CustomPasswordController
     public function login()
     {
         try {
-
             if (!defined('OPENSTACKID_ENABLED') || OPENSTACKID_ENABLED == false)
                 return parent::login();
 
@@ -120,31 +119,27 @@ class OpenStackIdSecurityController extends CustomPasswordController
                 // message.
                 if (Auth_OpenID::isFailure($redirect_url)) {
                     echo("Could not redirect to server: " . $redirect_url->message);
-                } else {
-                    // Send redirect.
-                    header("Location: " . $redirect_url);
+                    exit();
                 }
-            } else {
-                // Generate form markup and render it.
-                $form_id = 'openid_message';
-                $form_html = $auth_request->htmlMarkup(OpenStackIdCommon::getTrustRoot(), OpenStackIdCommon::getReturnTo(), false, array('id' => $form_id));
-
-                // Display an error if the form markup couldn't be generated;
-                // otherwise, render the HTML.
-                if (Auth_OpenID::isFailure($form_html)) {
-                    echo("Could not redirect to server: " . $form_html->message);
-                } else {
-                    print $form_html;
-                }
+                // Send redirect.
+                header("Location: " . $redirect_url);
+                exit();
             }
-
-            exit();
-
+            // Generate form markup and render it.
+            $form_id = 'openid_message';
+            $form_html = $auth_request->htmlMarkup(OpenStackIdCommon::getTrustRoot(), OpenStackIdCommon::getReturnTo(), false, array('id' => $form_id));
+            // Display an error if the form markup couldn't be generated;
+            // otherwise, render the HTML.
+            if (Auth_OpenID::isFailure($form_html)) {
+                echo("Could not redirect to server: " . $form_html->message);
+                exit();
+            }
+            return $form_html;
         } catch (Exception $ex) {
             SS_Log ::log($ex, SS_Log::WARN);
             Session::set("Security.Message.message", $ex->getMessage());
             Session::set("Security.Message.type", "bad");
-            return $this->redirect("Security/badlogin");
+            return $this->redirect("Security/badlogin?BackURL=".OpenStackIdCommon::getRedirectBackUrl());
         }
     }
 
@@ -204,7 +199,8 @@ SCRIPT;
             array
             (
                 "LoginErrorMessage" => Session::get("Security.Message.message"),
-                "OpenStackIdUrl"    => IDP_OPENSTACKID_URL
+                "OpenStackIdUrl"    => IDP_OPENSTACKID_URL,
+                "ReloginUrl"        => OpenStackIdCommon::getRedirectBackUrl()
             )
         )
         ->renderWith
