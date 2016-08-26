@@ -33,85 +33,133 @@ class SapphireSummitRegistrationPromoCodeRepository
      */
     public function searchByTermAndSummitPaginated($summit_id, $type, $page= 1, $page_size = 10, $term = '', $sort_by = 'code', $sort_dir = 'asc')
     {
+        $base_query = <<<SQL
+(
+SELECT 
+SPC.ID,
+PC.ClassName,
+SP.FirstName AS FirstName,
+SP.LastName AS LastName,
+IFNULL(SPRR.Email, SM.Email) AS Email,
+SPC.SpeakerID AS OwnerID,
+SPC.Type,
+PC.Code,
+PC.EmailSent,
+PC.Redeemed,
+PC.Source,
+C.ID AS CreatorID,
+C.Email AS CreatorEmail,
+NULL AS Sponsor 
+FROM SummitRegistrationPromoCode PC 
+INNER JOIN Member AS C ON C.ID = PC.CreatorID
+INNER JOIN SpeakerSummitRegistrationPromoCode SPC ON SPC.ID = PC.ID
+LEFT  JOIN PresentationSpeaker SP ON SP.ID = SPC.SpeakerID
+LEFT  JOIN SpeakerRegistrationRequest SPRR ON SPRR.SpeakerID = SP.ID
+LEFT  JOIN Member SM ON SM.ID = SP.MemberID 
+WHERE SummitID = {$summit_id} AND PC.ClassName = 'SpeakerSummitRegistrationPromoCode'
+UNION
+SELECT MC.ID,
+PC.ClassName,
+IFNULL(O.FirstName,MC.FirstName) AS FirstName,
+IFNULL(O.Surname,MC.LastName) AS LastName,
+IFNULL(O.Email,MC.Email) AS Email, 
+MC.OwnerID,
+MC.Type,
+PC.Code,
+PC.EmailSent,
+PC.Redeemed,
+PC.Source,
+C.ID AS CreatorID,
+C.Email AS CreatorEmail,
+NULL AS Sponsor 
+FROM SummitRegistrationPromoCode PC 
+INNER JOIN Member AS C ON C.ID = PC.CreatorID
+INNER JOIN MemberSummitRegistrationPromoCode MC ON MC.ID = PC.ID
+LEFT JOIN Member O ON O.ID = MC.OwnerID
+WHERE SummitID = {$summit_id} AND PC.ClassName = 'MemberSummitRegistrationPromoCode'
+UNION
+SELECT MC.ID,
+PC.ClassName,
+IFNULL(O.FirstName,MC.FirstName) AS FirstName,
+IFNULL(O.Surname,MC.LastName) AS LastName,
+IFNULL(O.Email,MC.Email) AS Email, 
+MC.OwnerID,
+MC.Type,
+PC.Code,
+PC.EmailSent,
+PC.Redeemed,
+PC.Source,
+C.ID AS CreatorID,
+C.Email AS CreatorEmail,
+CNY.Name AS Sponsor 
+FROM SummitRegistrationPromoCode PC 
+INNER JOIN Member AS C ON C.ID = PC.CreatorID
+INNER JOIN MemberSummitRegistrationPromoCode MC ON MC.ID = PC.ID
+INNER JOIN SponsorSummitRegistrationPromoCode SSRC ON SSRC.ID = MC.ID
+INNER JOIN Company CNY ON CNY.ID = SSRC.SponsorID
+LEFT JOIN Member O ON O.ID = MC.OwnerID
+WHERE SummitID = {$summit_id} AND PC.ClassName = 'SponsorSummitRegistrationPromoCode' 
+) 
+AS PROMO_CODES
+SQL;
+
         $offset = ($page - 1 ) * $page_size;
+
         $sort = '';
         switch(strtolower($sort_by))
         {
             case 'code':
-                $sort = ' ORDER BY `Code` '.strtoupper($sort_dir);
+                $sort = ' ORDER BY PROMO_CODES.`Code` '.strtoupper($sort_dir);
                 break;
             case 'type':
-                $sort = ' ORDER BY Type '.strtoupper($sort_dir);
+                $sort = ' ORDER BY PROMO_CODES.Type '.strtoupper($sort_dir);
                 break;
         }
 
-        $having = '1=1';
-
-        if (!empty($term)) {
-            $having .= " AND (`Code` LIKE '%{$term}%' OR CodeFirstName LIKE '%{$term}%' OR CodeLastName LIKE '%{$term}%'
-                        OR CodeEmail LIKE '%{$term}%' OR SpeakerFirstName LIKE '%{$term}%' OR SpeakerLastName LIKE '%{$term}%'
-                        OR SpeakerEmail LIKE '%{$term}%' OR OwnerFirstName LIKE '%{$term}%'
-                        OR OwnerLastName LIKE '%{$term}%' OR OwnerEmail LIKE '%{$term}%' OR SponsorName LIKE '%{$term}%'";
-
-            if (is_int($term)) {
-                $having .= " OR SpeakerID = '{$term}' OR OwnerID = '{$term}')";
-            } else {
-                $having .= ")";
-            }
-        }
+        $where = '';
 
         if ($type) {
-            $having .= " AND Type = '{$type}'";
+            $where = "  PROMO_CODES.Type = '{$type}'";
         }
 
-        $query = <<<SQL
-SELECT PCode.ID AS CodeID, PCode.`Code`,PCode.ClassName,PCode.EmailSent,PCode.Redeemed,PCode.Source,
-IF(SC.Type,SC.Type,MC.Type) AS Type, SC.SpeakerID, MC.OwnerID, SPC.SponsorID, MC.FirstName AS CodeFirstName,
-MC.LastName AS CodeLastName, MC.Email AS CodeEmail, S.FirstName AS SpeakerFirstName, S.LastName AS SpeakerLastName,
-M2.Email AS SpeakerEmail, M.FirstName AS OwnerFirstName, M.Surname AS OwnerLastName, M.Email AS OwnerEmail,
-C.`Name` AS SponsorName, CONCAT(M3.FirstName,' ',M3.Surname) AS Creator
-FROM SummitRegistrationPromoCode AS PCode
-LEFT JOIN SpeakerSummitRegistrationPromoCode AS SC ON SC.ID = PCode.ID
-LEFT JOIN MemberSummitRegistrationPromoCode AS MC ON MC.ID = PCode.ID
-LEFT JOIN SponsorSummitRegistrationPromoCode AS SPC ON SPC.ID = PCode.ID
-LEFT JOIN PresentationSpeaker AS S ON SC.SpeakerID = S.ID
-LEFT JOIN Member AS M ON MC.OwnerID = M.ID
-LEFT JOIN Company AS C ON SPC.SponsorID = C.ID
-LEFT JOIN Member AS M2 ON S.ID = M2.ID
-LEFT JOIN Member AS M3 ON PCode.CreatorID = M3.ID
-WHERE SummitID = {$summit_id}
-HAVING {$having}
-{$sort}
-SQL;
+        if (!empty($term)) {
 
-        $res       = DB::query($query);
-        $count     = $res->numRecords();
-        $query     .= ($page_size) ? " LIMIT {$offset}, {$page_size}" : "";
-        $res       = DB::query($query);
-        $data = array();
+            if(!empty($where)) $where .= ' AND ';
+            $where .= " (`Code` LIKE '%{$term}%' OR FirstName LIKE '%{$term}%' OR LastName LIKE '%{$term}%'
+                        OR Email LIKE '%{$term}%'
+                        OR CreatorEmail LIKE '%{$term}%'";
+
+            if (is_int($term))
+                $where .= " OR OwnerID = '{$term}'";
+
+            $where .= " )";
+        }
+
+        if(!empty($where)) $base_query .= ' WHERE '.$where;
+
+        $query_select = "SELECT * FROM ".$base_query;
+        $query_select .= (!empty($sort)) ? $sort : "";
+        $query_select .= ($page_size) ? " LIMIT {$offset}, {$page_size}" : "";
+
+        $query_count  = "SELECT COUNT(ID) AS QTY FROM ".$base_query;
+
+        $count     = intval(DB::query($query_count)->first()['QTY']);
+        $res       = DB::query($query_select);
+        $data      = array();
 
         foreach ($res as $code) {
-            $source = ($code['Creator'] != '') ? $code['Creator'] : $code['Source'];
-            $code_array = array(
-                'id' => $code['CodeID'],
-                'code' => $code['Code'],
-                'email_sent' => intval($code['EmailSent']),
-                'redeemed' => intval($code['Redeemed']),
-                'source' => $source,
-                'type' => $code['Type'],
-                'sponsor'  => $code['SponsorName']
-            );
 
-            if ($code['SpeakerID']) {
-                $code_array['owner'] = $code['SpeakerFirstName'].' '.$code['SpeakerLastName'];
-                $code_array['owner_email'] = $code['SpeakerEmail'];
-            } elseif ($code['OwnerID']) {
-                $code_array['owner'] = $code['OwnerFirstName'].' '.$code['OwnerLastName'];
-                $code_array['owner_email'] = $code['OwnerEmail'];
-            } else {
-                $code_array['owner'] = $code['CodeFirstName'].' '.$code['CodeLastName'];
-                $code_array['owner_email'] = $code['CodeEmail'];
-            }
+            $code_array = [
+                'id'          =>  intval($code['ID']),
+                'code'        => $code['Code'],
+                'email_sent'  => intval($code['EmailSent']),
+                'redeemed'    => intval($code['Redeemed']),
+                'source'      => $code['CreatorEmail'],
+                'type'        => $code['Type'],
+                'sponsor'     => $code['Sponsor'],
+                'owner'       => sprintf("%s %s", $code['FirstName'], $code['LastName']),
+                'owner_email' => $code['Email'],
+            ];
 
             $data[] = $code_array;
         }
