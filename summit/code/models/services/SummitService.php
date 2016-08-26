@@ -1076,35 +1076,34 @@ final class SummitService implements ISummitService
         return $this->tx_service->transaction(function () use ($summit, $code_id, $promocode_repository) {
             $promocode  = $promocode_repository->getById($code_id);
             if(is_null($promocode)) throw new NotFoundEntityException('PromoCode');
+            $member = null;
 
-            if($promocode->ClassName == 'SpeakerSummitRegistrationPromoCode')
-                if(!$promocode->Speaker()->Exists())
-                    throw new NotFoundEntityException('Speaker');
-                else
-                    $member = $promocode->Speaker()->Member();
+            if($promocode->ClassName == 'SpeakerSummitRegistrationPromoCode' && $promocode->Speaker()->exists() && $promocode->Speaker()->Member()->exists()) {
+                $member = $promocode->Speaker()->Member();
+            }
 
-            if($promocode->ClassName == 'MemberSummitRegistrationPromoCode')
-                if(!$promocode->Owner()->Exists())
-                    throw new NotFoundEntityException('Member');
-                else
-                    $member = $promocode->Owner();
+            if($promocode->ClassName == 'MemberSummitRegistrationPromoCode' && $promocode->Owner()->exists()) {
+                $member = $promocode->Owner();
+            }
+
+            if(is_null($member))
+                throw new EntityValidationException('owner is null for this promo code!');
 
             if (!$promocode->EmailSent) {
+
                 $promocode->setEmailSent(1);
                 $promocode->write();
 
                 $params = array
                 (
-                    'Member' => $member,
-                    'Summit' => $summit,
+                    'Member'    => $member,
+                    'Summit'    => $summit,
                     'PromoCode' => $promocode
                 );
 
                 $sender = new MemberPromoCodeEmailSender();
                 $sender->send($params);
             }
-
-
 
             return $promocode;
 
