@@ -151,30 +151,19 @@
 </div>
 
 
-<% if Event.getSpeakers().toArray() %>
+<% if Event.allowSpeakers %>
     <div class="speaker_box">
         <div class="container">
-            <% if $Event.Moderator %>
-                <% with $Event.Moderator %>
-                    <div class="row speaker_profile">
-                        <div class="speaker-photo-left">
-                            <a class="profile-pic-wrapper" href="{$Top.AbsoluteLink}speakers/{$ID}" target="_blank" style="background-image: url('$ProfilePhoto(100)')"></a>
-                        </div>
-                        <div class="speaker_info">
-                            <div class="speaker_name"><a href="{$Top.AbsoluteLink}speakers/{$ID}" title="$FirstName $LastName" target="_blank">$FirstName $LastName</a></div>
-                            <div class="speaker_job_title"> $getTitleNice() </div>
-                            <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
-                        </div>
-                    </div>
-                <% end_with %>
-            <% end_if %>
-            <% loop Event.getSpeakers() %>
+            <% loop Event.getSpeakersAndModerators() %>
             <div class="row speaker_profile">
                 <div class="speaker-photo-left">
                     <a class="profile-pic-wrapper" href="{$Top.AbsoluteLink}speakers/{$ID}" target="_blank" style="background-image: url('$ProfilePhoto(100)')"></a>
                 </div>
                 <div class="speaker_info">
-                    <div class="speaker_name"><a href="{$Top.AbsoluteLink}speakers/{$ID}" title="$FirstName $LastName" target="_blank">$FirstName $LastName</a></div>
+                    <div class="speaker_name">
+                        <a href="{$Top.AbsoluteLink}speakers/{$ID}" title="$FirstName $LastName" target="_blank">$FirstName $LastName</a>
+                        <% if $Top.Event.isModeratorByID($ID) %>&nbsp;<span class="label label-info">Moderator</span><% end_if %>
+                    </div>
                     <div class="speaker_job_title"> $getTitleNice() </div>
                     <div class="speaker_bio"> $getShortBio(400) <a href="{$Top.AbsoluteLink}speakers/{$ID}"> FULL PROFILE</a></div>
                 </div>

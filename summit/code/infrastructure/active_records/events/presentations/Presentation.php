@@ -149,12 +149,12 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $has_many = array
     (
-        'Votes' => 'PresentationVote',
+        'Votes'          => 'PresentationVote',
         // this is related to track chairs app
-        'Comments' => 'SummitPresentationComment',
+        'Comments'       => 'SummitPresentationComment',
         'ChangeRequests' => 'SummitCategoryChange',
-        'Materials' => 'PresentationMaterial',
-        'ExtraAnswers' => 'TrackAnswer',
+        'Materials'      => 'PresentationMaterial',
+        'ExtraAnswers'   => 'TrackAnswer',
     );
 
     /**
@@ -163,7 +163,7 @@ class Presentation extends SummitEvent implements IPresentation
     private static $many_many = array
     (
         'Speakers' => 'PresentationSpeaker',
-        'Topics' => 'PresentationTopic',
+        'Topics'   => 'PresentationTopic',
     );
 
     /**
@@ -536,12 +536,24 @@ class Presentation extends SummitEvent implements IPresentation
 
     public function getSpeakersAndModerators()
     {
-    	$result = ArrayList::create($this->Speakers()->toArray());
-    	if($this->Moderator()->exists()) {
-    		$result->push($this->Moderator());
-    	}
+        $result       = [];
+        $moderator_id = 0;
+        if($this->Moderator()->exists()) {
+            $result[]     = $this->Moderator();
+            $moderator_id = $this->Moderator()->ID;
+        }
 
-    	return $result;
+    	$result =  array_merge($result, $this->Speakers()->filter('ID:ExactMatch:not', $moderator_id)->toArray() ) ;
+
+    	return new ArrayList($result);
+    }
+
+    /**
+     * @return bool
+     */
+    public function allowSpeakers()
+    {
+        return true;
     }
 
     /**
@@ -734,7 +746,16 @@ SQL;
      */
     public function isModerator(IPresentationSpeaker $speaker)
     {
-       return intval($this->ModeratorID) === $speaker->getIdentifier();
+       return $this->isModeratorByID($speaker->getIdentifier());
+    }
+
+    /**
+     * @param int $speaker_id
+     * @return bool
+     */
+    public function isModeratorByID($speaker_id)
+    {
+        return intval($this->ModeratorID) === intval($speaker_id);
     }
 
     /**

@@ -5,8 +5,8 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <% if $Event.Moderator %>
-            <% with $Event.Moderator %>
+        <% if $Event.allowSpeakers %>
+            <% loop $Event.getSpeakersAndModerators() %>
             <div data-speaker-id="{$ID}" class="row speaker-row">
                 <div class="speaker-name-row">
                     <div class="col-sm-12">
@@ -15,31 +15,7 @@
                             </a>
                         </div>
                         <div class="speaker-name-right">
-                            <a href="{$Top.Link(speakers)}/{$ID}">
-                                $Name
-                            </a>
-                            <div class="speaker-company">
-                                $TitleNice
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <% end_with %>
-        <% end_if %>
-        <% if $Event.Speakers %>
-            <% loop $Event.Speakers %>
-            <div data-speaker-id="{$ID}" class="row speaker-row">
-                <div class="speaker-name-row">
-                    <div class="col-sm-12">
-                        <div class="speaker-photo-left">
-                            <a href="{$Top.Link(speakers)}/{$ID}" class="profile-pic-wrapper" style="background-image: url('{$ProfilePhoto(60)}')">
-                            </a>
-                        </div>
-                        <div class="speaker-name-right">
-                            <a href="{$Top.Link(speakers)}/{$ID}">
-                            $Name
-                            </a>
+                            <a href="{$Top.Link(speakers)}/{$ID}">$Name</a><% if $Top.Event.isModeratorByID($ID) %>&nbsp;<span class="label label-info">Moderator</span><% end_if %>
                             <div class="speaker-company">
                                 $TitleNice
                             </div>

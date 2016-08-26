@@ -148,4 +148,9 @@ interface ISummitEvent extends IEntity
      * @return bool
      */
     public function hasRSVPTemplate();
+
+    /**
+     * @return bool
+     */
+    public function allowSpeakers();
 }
