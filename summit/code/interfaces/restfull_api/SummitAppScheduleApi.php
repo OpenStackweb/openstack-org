@@ -641,14 +641,17 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         }
     }
 
+    const MaxEventShareByEmailPerSession = 5;
     /**
      * @return SS_HTTPResponse
      */
     public function shareEmail(SS_HTTPRequest $request){
+
         try {
             $event_id     = intval($request->param('EventID'));
             $event        = $this->summitevent_repository->getById($event_id) ;
-            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+            if(is_null($event))
+                throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
 
             $data = $this->getJsonRequest();
             if (!$data) return $this->serverError();
@@ -657,28 +660,44 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 throw new EntityValidationException('Please enter From and To email addresses.');
             }
 
+            if(filter_var($data['from'], FILTER_VALIDATE_EMAIL) === false)
+                throw new EntityValidationException('from is invalid email address');
+
+            if(filter_var($data['to'], FILTER_VALIDATE_EMAIL) === false)
+                throw new EntityValidationException('to is invalid email address');
+
             if (!$data['token'])
-                throw new EntityValidationException('Validation Error');
-            else {
-                $token = Session::get("SummitAppEventPage.ShareEmail");
-                $token_count = Session::get("SummitAppEventPage.ShareEmailCount");
+                throw new EntityValidationException('session lost');
+
+            $token       = Session::get(SummitAppSchedPage_Controller::EventShareByEmailTokenKey);
+            $token_count = Session::get(SummitAppSchedPage_Controller::EventShareByEmailCountKey);
+
+
+            if ($data['token'] != $token ) {
+                throw new EntityValidationException('session lost');
             }
 
-            if ($data['token'] != $token || $token_count > 5) {
-                throw new EntityValidationException('Validation Error');
+            if($token_count > self::MaxEventShareByEmailPerSession){
+                throw new EntityValidationException('you reach your limit of emails per event per session');
             }
 
             $subject = 'Fwd: '.$event->Title;
             $body = $event->Title.'<br>'.$event->ShortDescription.'<br><br>Check it out: '.$event->getLink();
 
             $email = EmailFactory::getInstance()->buildEmail($data['from'], $data['to'], $subject, $body);
-
-            return $this->ok($email->send());
+            $email->send();
+            ++$token_count;
+            Session::set(SummitAppSchedPage_Controller::EventShareByEmailCountKey, $token_count);
+            return $this->ok();
 
         }
         catch(EntityValidationException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2){
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->notFound($ex2->getMessages());
         }
         catch(Exception $ex){
             SS_Log::log($ex,SS_Log::ERR);

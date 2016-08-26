@@ -91,6 +91,15 @@
                 success: function () {
                     $('#email-modal').modal('hide');
                     swal('Email Sent', 'Email sent successfully', 'success');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                       var error = 'there was an issue with your request';
+                       if( xhr.status == 412 ){
+                             var response = $.parseJSON(xhr.responseText);
+                             error        = response.messages[0].message;
+                       }
+                       $('#email-modal').modal('hide');
+                       swal('Error', error, 'error');
                 }
             });
         }

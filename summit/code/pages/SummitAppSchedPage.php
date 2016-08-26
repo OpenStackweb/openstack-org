@@ -154,6 +154,9 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         return FB_APP_ID;
     }
 
+    const EventShareByEmailTokenKey = 'SummitAppEventPageShareEmail.Token';
+    const EventShareByEmailCountKey = 'SummitAppEventPageShareEmail.Count';
+
     public function ViewEvent(SS_HTTPRequest $request)
     {
         $event  = $this->getSummitEntity($request);
@@ -173,11 +176,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
-        $token = Session::get("SummitAppEventPage.ShareEmail");
+        $token = Session::get(self::EventShareByEmailTokenKey);
+
         if (!$token) {
             $token = md5(uniqid(rand(), TRUE));
-            Session::set("SummitAppEventPage.ShareEmail",$token);
-            Session::set("SummitAppEventPage.ShareEmailCount",0);
+            Session::set(self::EventShareByEmailTokenKey, $token);
+            Session::set(self::EventShareByEmailCountKey, 0);
         }
 
         return $this->renderWith(
@@ -199,13 +203,14 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         if (is_null($event) || !$event->isPublished() || !$event->hasRSVPTemplate()) {
             return $this->httpError(404, 'Sorry that event could not be found');
         }
-        $token = Session::get("SummitAppEventPage.ShareEmail");
+
+        $token = Session::get(self::EventShareByEmailTokenKey);
+
         if (!$token) {
             $token = md5(uniqid(rand(), TRUE));
-            Session::set("SummitAppEventPage.ShareEmail",$token);
-            Session::set("SummitAppEventPage.ShareEmailCount",0);
+            Session::set(self::EventShareByEmailTokenKey, $token);
+            Session::set(self::EventShareByEmailCountKey, 0);
         }
-
 
         return $this->renderWith(
             array('SummitAppEventPage_RSVP', 'SummitPage', 'Page'),
