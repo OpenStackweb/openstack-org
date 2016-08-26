@@ -33,18 +33,12 @@ class PresentationLink extends PresentationMaterial
      */
     protected function validate()
     {
-        $valid = parent::validate();
-
-        if (!$valid->valid()) {
-            return $valid;
-        }
-
-        $link = trim($this->Link);
+        $result = ValidationResult::create();
 
         if (empty($link)) {
-            return $valid->error('you must set a link!');
+            return $result->error('you must set a link!');
         }
 
-        return $valid;
+        return $result;
     }
 }
